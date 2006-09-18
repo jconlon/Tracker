@@ -8,7 +8,7 @@
   <groupId>com.verticon.osgi.support</groupId>
   <artifactId>collectionSupport</artifactId>
   <packaging>osgi-bundle</packaging>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0</version>
   <name>Common Collections Support</name>
   <url>http://www.verticon.com/projects/collectionSupport</url>
   <description>An OSGi bundle offering set of Apache libraries for collection manipulations. Bundle includes
