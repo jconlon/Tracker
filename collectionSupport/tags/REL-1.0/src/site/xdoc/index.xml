@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<document>
+  <properties>
+    <title>Common Collections Support Introduction</title>
+    <author email="jconlon@verticon.com">John Conlon</author>
+  </properties>
+  <!-- Optional HEAD element, which is copied as is into the XHTML <head> element  -->
+  <head>
+    <meta name="notice" content="Copyright Verticon, Inc. 2006"/>
+    <meta name="abstract" content="Welcome, introduction, and details of the Common Collections Support Project."/>
+  </head>
+
+  <body>
+    <section name="Welcome to the Common Collections Support Project">
+      <p>Common Collections Support is a <a href="http://java.sun.com/">Java<sup>tm</sup></a>
+         <a href="http://www.osgi.org/">OSGi<sup>tm</sup></a> bundle offering commonly used set 
+         of Apache libraries for collection manipulations.</p>
+      <p>Bundle includes:</p>
+      <ul>
+      <li><a href="http://jakarta.apache.org/commons/jxpath/">commons-jxpath</a></li>
+      <li><a href="http://jakarta.apache.org/commons/collections/">commons-collections</a></li>
+      <li><a href="http://jakarta.apache.org/commons/beanutils/">commons-beanutils</a></li>
+      </ul>
+    </section>
+    
+    <section name="Project Requirements">
+      <p>Generalized approach needed for:</p> 
+      <ol>
+        <li>Sharing commons-jxpath, commons-collections, commons-beansutils libraries
+            with other OSGi bundles.</li>
+       </ol>
+       
+     </section>
+    <section name="Technical Requirements">
+      <ol>
+        <li>Utilize 100 percent Java<sup>tm</sup>
+            component libraries to maximize multi-platform deployment.</li>
+        <li>Export libraries from an OSGi<sup>tm</sup> bundle.</li>
+       </ol>
+     </section>
+  </body>
+ 
+</document>

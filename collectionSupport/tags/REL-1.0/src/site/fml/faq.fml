@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<faqs title="Frequently Asked Questions">
+
+  <part id="whatsit">
+    <title>What is the Common Collections Support</title>
+   <faq id="whatsitsimple">
+      <question>
+       What is Common Collections Support?
+      </question>
+      <answer>
+       <p>Common Collections Support is an OSGi<sup>tm</sup> bundle offering a set of common libraries for collection manipulations.</p>
+      </answer>
+    </faq>
+  </part>
+
+  <part id="why">
+    <title>Why</title>
+   <faq id="whybundle">
+      <question>
+       Why wrap these packages in an OSGi<sup>tm</sup> bundle?
+      </question>
+      <answer>
+       <p>To make these libraries available to other OSGi<sup>tm</sup> bundles.</p>
+      </answer>
+    </faq>
+  </part>
+  <!-- More faqs or parts here -->
+</faqs>
