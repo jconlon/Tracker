@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="React2">
+  <bannerLeft>
+    <name>Verticon</name>
+    <src>/images/VerticonLogo.png</src>
+    <href>http://www.verticon.com/</href>
+  </bannerLeft>
+  
+ <bannerRight>
+    <src>images/collectionSupport.jpg</src>
+ </bannerRight>
+  
+  <body>
+    <links>
+      <item name="Verticon" href="http://www.verticon.com/" />
+      <item name="Common Collections Support" href="index.html"/>
+    </links>
+
+    <menu name="Common Collections Support">
+      <item name="Introduction" href="index.html"/>
+      <item name="FAQ" href="faq.html" description="Frequently Asked Questions" />
+      <!--item name="MindMap" href="mindmaps/collectionSupport.mm" /-->
+      <!--item name="Download" href="download.html"/-->
+      <!--item name="Configuration" href="configuration.html" /-->
+      <!--item name="Road Map" href="roadmap.html" /--> 
+    </menu>
+
+    ${reports}
+
+    ...
+  </body>
+</project>
