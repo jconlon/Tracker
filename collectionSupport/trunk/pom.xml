@@ -1,14 +1,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <!--
+    ***********************************************************
+    *               CollectionSupport                         *
+    ***********************************************************
+  -->
+  <parent>
+		<groupId>com.verticon</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0.1-SNAPSHOT</version>
+	</parent>
   <modelVersion>4.0.0</modelVersion>
-  <organization> 
-    <name>Verticon, Inc.</name>
-    <url>http://www.verticon.com</url>
-  </organization>
   <groupId>com.verticon.osgi.support</groupId>
   <artifactId>collectionSupport</artifactId>
   <packaging>osgi-bundle</packaging>
-  <version>1.0.1-SNAPSHOT</version>
   <name>Common Collections Support</name>
   <url>http://www.verticon.com/projects/collectionSupport</url>
   <description>An OSGi bundle offering set of Apache libraries for collection manipulations. Bundle includes
@@ -123,12 +128,6 @@
 			<version>1.0-rc5</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <version>3.8.1</version>
-          <scope>test</scope>
-        </dependency>
 	</dependencies>
 	
 <reporting>
@@ -137,28 +136,6 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>changes-maven-plugin</artifactId>
 			</plugin>
-		<!--
-			<plugin>
-				<artifactId>maven-javadoc-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jxr-maven-plugin</artifactId>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>taglist-maven-plugin</artifactId>
-				<configuration>
-					<tags>TODO, @todo, FIXME, @deprecated, @note</tags>
-				</configuration>
-			</plugin>
-			
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-			</plugin>
-			-->
 		</plugins>
 	</reporting>
 	
