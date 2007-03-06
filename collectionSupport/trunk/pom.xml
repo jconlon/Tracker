@@ -1,84 +1,31 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <!--
-    ***********************************************************
-    *               CollectionSupport                         *
-    ***********************************************************
-  -->
-  <parent>
-		<groupId>com.verticon</groupId>
-		<artifactId>parent</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
-	</parent>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.verticon.osgi.support</groupId>
-  <artifactId>collectionSupport</artifactId>
-  <packaging>osgi-bundle</packaging>
-  <name>Common Collections Support</name>
-  <url>http://www.verticon.com/projects/collectionSupport</url>
-  <description>An OSGi bundle offering set of Apache libraries for collection manipulations. Bundle includes
-   commons-jxpath, commons-collections, commons-beansutils and all their dependencies. </description>
-	<developers>
-		<developer>
-			<id>JC</id>
-			<name>John Conlon</name>
-			<email>jconlon@verticon.com</email>
-			<roles>
-				<role>Project Manager</role>
-				<role>Architect</role>
-			</roles>
-			<organization>Verticon.com</organization>
-		</developer>
-	</developers>
-  <build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.felix.plugins</groupId>
-				<artifactId>maven-osgi-plugin</artifactId>
-				<extensions>true</extensions>
-				<version>0.8.0-SNAPSHOT</version>
-				<configuration>
-					<osgiManifest>
-						<bundleName>Common Collections Support</bundleName>
-						<bundleSymbolicName>com.verticon.common.collections</bundleSymbolicName>
-						<bundleDescription>Wrapper for commons-jxpath,commons-collections,and commons-beanutils.</bundleDescription>
-						<!--Add exports -->
-						<importPackage>org.w3c.dom,org.apache.commons.logging</importPackage>
-                        <exportPackage>org.apache.commons.collections;version=3.1.0,
-                        org.apache.commons.collections.bag;version=3.1.0,
-                        org.apache.commons.collections.bidimap;version=3.1.0,
-                        org.apache.commons.collections.buffer;version=3.1.0,
-                        org.apache.commons.collections.collection;version=3.1.0,
-                        org.apache.commons.collections.comparators;version=3.1.0,
-                        org.apache.commons.collections.functors;version=3.1.0,
-                        org.apache.commons.collections.iterators;version=3.1.0,
-                        org.apache.commons.collections.keyvalue;version=3.1.0,
-                        org.apache.commons.collections.list;version=3.1.0,
-                        org.apache.commons.collections.map;version=3.1.0,
-                        org.apache.commons.collections.set;version=3.1.0,
-                        org.apache.commons.jxpath;version=1.2.0</exportPackage>
-						<bundleVendor>Verticon</bundleVendor>
-					</osgiManifest>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
-		</plugins>
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ftp</artifactId>
-				<version>1.0-alpha-3</version>
-			</extension>
-		</extensions>
-	</build>
-	<dependencies>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.apache.felix.commons</groupId>
+        <artifactId>build</artifactId>
+        <version>0.9.0-incubator-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.apache.felix.commons</groupId>
+    <artifactId>commons-jxpath-osgi</artifactId>
+    <version>1.2</version>
+    <packaging>bundle</packaging>
+
+    <name>${pom.artifactId} bundle</name>
+    <description>
+        This bundle simply wraps commons-jxpath-${pom.version}.jar.
+    </description>
+
+    <organization> 
+        <name>Apache Felix Project</name> 
+        <url>http://incubator.apache.org/felix/</url> 
+    </organization>
+
+   <dependencies>
 	    <dependency>
 			<groupId>commons-jxpath</groupId>
 			<artifactId>commons-jxpath</artifactId>
@@ -115,13 +62,13 @@
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 			<version>3.1</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.7.0</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
 				<groupId>commons-logging</groupId>
@@ -142,20 +89,24 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-	
-<reporting>
+   
+  <build>
 		<plugins>
-		    <plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>changes-maven-plugin</artifactId>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>0.9.0-incubator-SNAPSHOT</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+					    <Import-Package>org.w3c.dom,org.apache.commons.logging,javax.xml.transform,javax.xml.transform.dom, javax.xml.parsers, org.apache.commons.beanutils</Import-Package>
+						 <DynamicImport-Package>org.jdom, org.jdom.input</DynamicImport-Package>
+						 <Export-Package>
+						org.apache.commons.jxpath;version=1.2.0,org.apache.commons.jxpath.functions,org.apache.commons.jxpath.util, org.apache.commons.jxpath.xml
+						</Export-Package>
+					</instructions>
+				</configuration>
 			</plugin>
 		</plugins>
-	</reporting>
-	
-	<distributionManagement>
-		<repository>
-			<id>ftp-repository</id>
-			<url>ftp://verticon1.netfirms.com/www/repository</url>
-		</repository>
-	</distributionManagement>
+	</build>
 </project>
