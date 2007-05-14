@@ -5,8 +5,10 @@ package com.verticon.tracker.editor.actions;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -54,13 +56,9 @@ public class AddTemplatedEventsToAnimals implements IObjectActionDelegate {
 	private ISelection selection;
 	
 	protected IResource resource;
+	
+	private static final GregorianCalendar DATE_REFERENCE = new GregorianCalendar(1000, Calendar.JANUARY, 1);  
 
-	/**
-	 * 
-	 */
-	public AddTemplatedEventsToAnimals() {
-		// TODO Auto-generated constructor stub
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -86,7 +84,6 @@ public class AddTemplatedEventsToAnimals implements IObjectActionDelegate {
 		IProject project = AbstractAddToParentActionDelegate.extractResource(editor).getProject();
 		EditingDomain editingDomain = editor.getEditingDomain();
 
-//		Date date =  askForDate();
 		EventHistory template = askForTemplate("Choose an Event template to add to these "
 				+ selectedAnimals.size() + " selected animals.",project);
 		
@@ -97,24 +94,7 @@ public class AddTemplatedEventsToAnimals implements IObjectActionDelegate {
 		processSelected(editingDomain, selectedAnimals,  template, null);
 	}
 	
-	/**
-	 * "MM/dd/yy HH:mm:ss"
-	 * "yyMMddHHmmss"
-	 * "yyyy.MM.dd.HH.mm.ss"
-	 * 
-	 * @return
-	 */
-//	private Date askForDate(){
-//		String s;
-//		SimpleDateFormat dateFormater = new SimpleDateFormat("yyMMddHHmmss");
-//		Date date = null;
-//		try {
-//			 date = dateFormater.parse(s);
-//		} catch (ParseException e) {
-//			return new Date();
-//		}
-//		return new Date();
-//	}
+	
 	
 	private EventHistory askForTemplate(String message, IResource rootElement){
 
@@ -195,8 +175,11 @@ public class AddTemplatedEventsToAnimals implements IObjectActionDelegate {
 			Event templateEvent =(Event)o;
 			if(canAddEventToAnimal(animal, templateEvent, premises) ){
 				outputEvent= (Event) copier.copy(templateEvent);
+				
+				if(outputEvent.getDateTime().before(DATE_REFERENCE.getTime())){
+					outputEvent.setDateTime(new Date());
+				}
 				outputEvent.setAin(animal.getAin());
-//				outputEvent.setDateTime(date);
 				outputResults.add(outputEvent);
 			}
 		}

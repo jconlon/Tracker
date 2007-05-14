@@ -73,7 +73,7 @@ import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
  */
 public class TrackerTemplateWizard extends Wizard implements INewWizard {
 	public static final String TRACKER_FILE_TYPE_TEMPLATE = "template";
-	public static final QualifiedName TRACKER_FILE_TYPE = new QualifiedName("com.vertion.tracker.","fileType");
+	public static final QualifiedName TRACKER_FILE_TYPE = new QualifiedName("com.vertion.tracker","fileType");
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -181,10 +181,7 @@ public class TrackerTemplateWizard extends Wizard implements INewWizard {
 	 * @copiedFromGenerated NOT
 	 */
 	protected EObject createInitialModel() {
-//		EClass eClass = (EClass)trackerPackage.getEClassifier(initialObjectCreationPage.getInitialObjectName());
-//		EObject rootObject = trackerFactory.create(eClass);
-		EventHistory rootObject = trackerFactory.createEventHistory();
-		return rootObject;
+		return trackerFactory.createPremises();
 	}
 
 	/**
