@@ -165,5 +165,27 @@
               value="7,220,441,20"/>
      </product>
   </extension>
+  <extension
+        point="org.eclipse.ui.decorators">
+     <decorator
+           adaptable="true"
+           class="com.verticon.tracker.editor.decorators.TrackerTemplateDecorator"
+           id="com.verticon.tracker.editor.decorator"
+           label="Template"
+           lightweight="true"
+           state="true">
+        <enablement>
+           <and>
+              <objectClass name="org.eclipse.core.resources.IResource"/>
+              <objectState
+                    name="name"
+                    value="*.tracker"/>
+              <objectState
+                    name="persistentProperty"
+                    value="com.vertion.tracker.fileType=template"/>
+           </and>
+        </enablement>
+     </decorator>
+  </extension>
   
 </plugin>

@@ -21,9 +21,11 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 
+import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.EventHistory;
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
 import com.verticon.tracker.editor.dialogs.WSFileDialog;
@@ -35,7 +37,8 @@ import com.verticon.tracker.editor.presentation.TrackerEditor;
  */
 public class AddAsTemplatedEvents extends AbstractAddAsEvent {
 
-	EventHistory template = null;
+	EventHistory eventHistory = null;
+	Animal defaultAnimal = null;
 
 	/**
 	 * Find the template file, and get the EventHistory from it.
@@ -82,9 +85,10 @@ public class AddAsTemplatedEvents extends AbstractAddAsEvent {
 						e.getLocalizedMessage());
 				return;
 		}
-		template = getEventHistory(templateResource);
+		eventHistory = getEventHistory(templateResource);
+		defaultAnimal = getDefaultAnimal(templateResource);
 		
-		if(template==null){
+		if(eventHistory==null && defaultAnimal ==null){
 			return;
 		}
 
@@ -92,10 +96,23 @@ public class AddAsTemplatedEvents extends AbstractAddAsEvent {
 
 	}
 	
+	private Animal getDefaultAnimal(Resource resource){
+		Object o = resource.getContents().get(0);
+		Animal animal = null;
+		if(o instanceof Premises){
+			Premises premises = (Premises)o;
+			animal= (Animal)premises.getAnimals().getAnimal().get(0);
+		}
+		return animal;
+	}
+	
 	public static EventHistory getEventHistory(Resource resource){
 		Object o = resource.getContents().get(0);
-		if(o instanceof EventHistory){
+		if(o instanceof EventHistory){//old templates had EventHistory as root
 			return (EventHistory)o;
+		}else if(o instanceof Premises){
+			Premises premises = (Premises)o;
+			return premises.getEventHistory();
 		}
 		return null;
 	}
@@ -121,7 +138,7 @@ public class AddAsTemplatedEvents extends AbstractAddAsEvent {
 		Copier copier = new Copier();	  
 		ArrayList<Event> outputResults = new ArrayList<Event>();
 		Event outputEvent;
-		for (Object o : template.getEvents()) {
+		for (Object o : eventHistory.getEvents()) {
 			Event templateEvent =(Event)o;
 			if(!containsEvent(tag, templateEvent.getEventCode()) ){
 				outputEvent= (Event) copier.copy(templateEvent);
@@ -132,20 +149,21 @@ public class AddAsTemplatedEvents extends AbstractAddAsEvent {
 		}
 		return outputResults;
 	}
+
+	@Override
+	protected AnimalId findAnimalId(Long tag) {
+		AnimalId animalID= super.findAnimalId(tag);
+		if(animalID==null && defaultAnimal!=null){
+			Copier copier = new Copier();
+			animalID=TrackerFactory.eINSTANCE.createAnimalId();
+			animalID.setIdNumber(tag.toString());
+			Animal animal = (Animal)copier.copy(defaultAnimal);
+			animal.setAin(animalID);
+			addAnimal(animal);
+		}
+		return animalID;
+	}
 	
-//	IResource extractSelection(ISelection sel) {
-//	      if (!(sel instanceof IStructuredSelection))
-//	         return null;
-//	      IStructuredSelection ss = (IStructuredSelection) sel;
-//	      Object element = ss.getFirstElement();
-//	      if (element instanceof IResource)
-//	         return (IResource) element;
-//	      if (!(element instanceof IAdaptable))
-//	         return null;
-//	      IAdaptable adaptable = (IAdaptable)element;
-//	      Object adapter = adaptable.getAdapter(IResource.class);
-//	      return (IResource) adapter;
-//	   }
 
 
 }

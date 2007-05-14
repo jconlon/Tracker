@@ -13,6 +13,7 @@ import java.util.Set;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.action.IAction;
@@ -29,6 +30,7 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
 import com.verticon.tracker.util.TrackerLog;
 
@@ -41,6 +43,8 @@ public abstract class AbstractAddToParentActionDelegate {
 	protected IResource resource;
 
 	protected Premises premises;
+	
+	protected List<Animal> animalsToAdd = new ArrayList<Animal>();
 
 	public AbstractAddToParentActionDelegate() {
 		super();
@@ -160,26 +164,40 @@ public abstract class AbstractAddToParentActionDelegate {
 			}
 		}
 
-		if (childrenFromAllTags.isEmpty()) {
+		if (childrenFromAllTags.isEmpty() && animalsToAdd.isEmpty()) {
+		
 			MessageDialog.openWarning(targetPart.getSite().getShell(),
 					"No unique tags in file",
 					"Found no unique tags to import from file "
 							+ resource.getFullPath());
 			return;
 		}
-		Command command = AddCommand.create(
-				editingDomain, 
-				parent,
-				getFeature(), 
-				childrenFromAllTags);
-		editingDomain.getCommandStack().execute(command);
+		if(!animalsToAdd.isEmpty()){
+			Command command = AddCommand.create(
+					editingDomain, 
+					premises.getAnimals(),
+					TrackerPackage.eINSTANCE.getAnimals_Animal(), 
+					animalsToAdd);
+			editingDomain.getCommandStack().execute(command);
+
+		}
+		if(!childrenFromAllTags.isEmpty()){
+			Command command = AddCommand.create(
+					editingDomain, 
+					parent,
+					getFeature(), 
+					childrenFromAllTags);
+			editingDomain.getCommandStack().execute(command);
+		}
 
 		String nameOfParent = parent.getClass().getSimpleName().substring(0,
 				parent.getClass().getSimpleName().indexOf("Impl"));
 
 		MessageDialog.openInformation(targetPart.getSite().getShell(),
 				"Add to " + nameOfParent, 
-				"Added " + 
+				"Added " +
+				animalsToAdd.size()+
+				" animals and "+
 				childrenFromAllTags.size() + 
 				" children  to " + nameOfParent);
 	}
@@ -207,6 +225,10 @@ public abstract class AbstractAddToParentActionDelegate {
 			}
 		}
 		return null;
+	}
+	
+	protected void addAnimal(Animal animal){
+		animalsToAdd.add(animal);
 	}
 
 	/**
