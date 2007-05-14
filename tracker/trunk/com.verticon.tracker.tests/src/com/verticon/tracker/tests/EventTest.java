@@ -6,6 +6,10 @@
  */
 package com.verticon.tracker.tests;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
+
 import junit.framework.TestCase;
 
 import com.verticon.tracker.AnimalMissing;
@@ -104,6 +108,22 @@ public abstract class EventTest extends TestCase {
 		assertFalse(getFixture().isCorrection());
 		getFixture().setCorrection(true);
 		assertTrue(getFixture().isCorrection());
+	}
+	
+	public void testDateTime(){
+		assertNotNull(getFixture().getDateTime());
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		Date date = null;
+		try {
+			 date = df.parse("5/14/07");
+			
+		} catch (ParseException e) {
+			fail(e.toString());
+		}
+		
+		getFixture().setDateTime(date);
+		assertEquals(date, getFixture().getDateTime());
+		
 	}
 
 } //EventTest
