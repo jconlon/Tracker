@@ -252,8 +252,8 @@ public class EventItemProvider
 		String resourceName = simpleName.substring(0,simpleName.indexOf("Impl"));
 		//TODO Give user a persistence var to control output format of date in Event Label
 		if(date!=null){
-			DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
-//			SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
+//			DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
+			SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss z");
 			return df.format(date)+" "+getString("_UI_"+resourceName+"_type");
 		}
 		return getString("_UI_"+resourceName+"_type") ;
