@@ -13,7 +13,7 @@
   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
     <factory 
        uri = "http://www.verticon.com/ns/tracker/1.0" 
-       class = "com.verticon.tracker.provider.TrackerItemProviderAdapterFactory" 
+       class = "com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory" 
        supportedTypes = 
          "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
           org.eclipse.emf.edit.provider.IStructuredItemContentProvider
