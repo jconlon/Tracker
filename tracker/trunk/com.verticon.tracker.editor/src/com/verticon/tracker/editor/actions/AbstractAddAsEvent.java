@@ -3,10 +3,7 @@
  */
 package com.verticon.tracker.editor.actions;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
 
 import org.eclipse.ui.IObjectActionDelegate;
 
@@ -36,7 +33,7 @@ public abstract class AbstractAddAsEvent extends AbstractAddToParentActionDelega
 	protected Collection createChildren(Long tag) throws NoAnimalFoundException {
 		TrackerFactory trackerFactory = TrackerFactory.eINSTANCE;
 		
-		AnimalId animalId = findAnimalId( tag);
+		AnimalId animalId = findAnimalId( tag, null);
 		if(animalId==null){
 			throw new NoAnimalFoundException("Could not find an animal with an animail ID tag="+tag);
 		}
@@ -54,19 +51,6 @@ public abstract class AbstractAddAsEvent extends AbstractAddToParentActionDelega
 	protected abstract Collection<Event> createEvents(TrackerFactory trackerFactory,AnimalId animalId, Long tag) ;
 	
 	
-	protected Date findDate(){	
-		String fileName = resource.getName().substring(0, resource.getName().indexOf('.'));
-		SimpleDateFormat dateFormater = new SimpleDateFormat("yyMMddHHmmss");
-		Date date = null;
-		try {
-			 date = dateFormater.parse(fileName);
-		} catch (ParseException e) {
-			return new Date();
-		}
-		
-		return date;
-	}
-
 	/* (non-Javadoc)
 	 * @see com.verticon.tracker.editor.actions.AbstractAddToParentActionDelegate#createParent(com.verticon.tracker.Premises)
 	 */

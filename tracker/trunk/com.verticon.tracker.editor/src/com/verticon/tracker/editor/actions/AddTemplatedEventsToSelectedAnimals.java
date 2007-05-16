@@ -5,10 +5,8 @@ package com.verticon.tracker.editor.actions;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,7 +15,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.action.IAction;
@@ -37,10 +34,11 @@ import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
 import com.verticon.tracker.editor.dialogs.WSFileDialog;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
+import com.verticon.tracker.util.CommonUtilities;
 
 /**
- * ActionDelegate associated with animal objects in order to add Events from 
- * a template to the Animal selections. 
+ * ActionDelegate associated with a selection of animal objects.  Adds Events from 
+ * a template to these selected Animal. 
  * 
  * Prompts the user for a template selection.
  * Uses dates associated with the template events.
@@ -49,7 +47,7 @@ import com.verticon.tracker.editor.presentation.TrackerEditor;
  * @author jconlon
  * 
  */
-public class AddTemplatedEventsToAnimals implements IObjectActionDelegate {
+public class AddTemplatedEventsToSelectedAnimals implements IObjectActionDelegate {
 
 	private IWorkbenchPart targetPart;
 
@@ -57,8 +55,7 @@ public class AddTemplatedEventsToAnimals implements IObjectActionDelegate {
 	
 	protected IResource resource;
 	
-	private static final GregorianCalendar DATE_REFERENCE = new GregorianCalendar(1000, Calendar.JANUARY, 1);  
-
+	
 
 	/*
 	 * (non-Javadoc)
@@ -121,7 +118,7 @@ public class AddTemplatedEventsToAnimals implements IObjectActionDelegate {
 		
 		Resource templateResource;
 		try {
-			templateResource = AddAsTemplatedEvents.getResource(f);
+			templateResource = AddTemplateEventsToCaptureAins.getResource(f);
 		} catch (IOException e) {
 			MessageDialog.openError(
 			          targetPart.getSite().getShell(),
@@ -129,7 +126,7 @@ public class AddTemplatedEventsToAnimals implements IObjectActionDelegate {
 						e.getLocalizedMessage());
 				return null;
 		}
-		return AddAsTemplatedEvents.getEventHistory(templateResource);
+		return CommonUtilities.getEventHistoryFromTemplate(templateResource);
 	}
 	
 	private void processSelected(EditingDomain editingDomain,Collection<Animal> selectedAnimals, EventHistory template, Date date){
@@ -139,7 +136,7 @@ public class AddTemplatedEventsToAnimals implements IObjectActionDelegate {
 		List<Event> eventsForAllAnimals = new ArrayList<Event>();
 		Collection<Event> eventsPerAnimal;
 		for (Animal animal : selectedAnimals) {
-			 eventsPerAnimal = createEvents( template,  animal,  premises);
+			 eventsPerAnimal = CommonUtilities.createEvents( template,  animal.getAin(),  premises);
 			 eventsForAllAnimals.addAll(eventsPerAnimal);
 		}
 		
@@ -167,42 +164,7 @@ public class AddTemplatedEventsToAnimals implements IObjectActionDelegate {
 				" children  to EventHistory");
 	}
 	
-	protected Collection<Event> createEvents(EventHistory template, Animal animal, Premises premises) {
-		Copier copier = new Copier();	  
-		ArrayList<Event> outputResults = new ArrayList<Event>();
-		Event outputEvent;
-		for (Object o : template.getEvents()) {
-			Event templateEvent =(Event)o;
-			if(canAddEventToAnimal(animal, templateEvent, premises) ){
-				outputEvent= (Event) copier.copy(templateEvent);
-				
-				if(outputEvent.getDateTime().before(DATE_REFERENCE.getTime())){
-					outputEvent.setDateTime(new Date());
-				}
-				outputEvent.setAin(animal.getAin());
-				outputResults.add(outputEvent);
-			}
-		}
-		return outputResults;
-	}
-	
-	/**
-	 * TODO create a preference policy for adding duplicates.
-	 * @param animal
-	 * @param event
-	 * @param premises
-	 * @return true if no similar event is associated with the animal
-	 */
-	public static boolean canAddEventToAnimal(Animal animal, Event event, Premises premises){
-		List elist = premises.getEventHistory().getEvents();
-		for (Object object : elist) {
-			Event ev = (Event) object;
-			if (ev.getEventCode() == event.getEventCode() && ev.getAin() == animal.getAin()) {
-				return false;
-			}
-		}
-		return true;
-	}
+
 
 	/*
 	 * (non-Javadoc)

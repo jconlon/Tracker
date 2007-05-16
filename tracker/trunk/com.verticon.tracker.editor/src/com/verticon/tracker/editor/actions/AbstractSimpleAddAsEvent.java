@@ -25,7 +25,7 @@ public abstract class AbstractSimpleAddAsEvent extends AbstractAddAsEvent {
 		Event event = createEvent( trackerFactory,  tag);
 		if(event != null){
 			event.setAin(animalId);
-			event.setDateTime(findDate());
+			event.setDateTime(createDateFromResourceName());
 			event.setElectronicallyRead(true);
 			results.add(event);
 			return results;

@@ -71,7 +71,7 @@ public class AddToAnimalsActionDelegate extends AbstractAddToParentActionDelegat
 	 */
 	@Override
 	protected Collection createChildren(Long tag){
-		if(findAnimalId(tag)!=null){
+		if(findAnimalId(tag, null)!=null){
 			return null;
 		}
 		

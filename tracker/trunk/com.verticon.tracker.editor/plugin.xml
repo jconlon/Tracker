@@ -110,7 +110,7 @@
               tooltip="Add the tag ids in the selected resource(s) as Premises FairRegistration Events."/>  
               
              <action
-              class="com.verticon.tracker.editor.actions.AddAsTemplatedEvents"
+              class="com.verticon.tracker.editor.actions.AddTemplateEventsToCaptureAins"
               enablesFor="+"
               id="com.verticon.tracker.editor.actions.addTemplate"
               label="Add as Templated Events"
@@ -129,7 +129,7 @@
   			<separator name="additions" />
   		</menu>
   		<action
-  			class="com.verticon.tracker.editor.actions.AddTemplatedEventsToAnimals"
+  			class="com.verticon.tracker.editor.actions.AddTemplatedEventsToSelectedAnimals"
   			enablesFor="+"
   			id="com.verticon.tracker.editor.actions.addTemplateEventsToAnimals"
   			label="Add Templated Events"
