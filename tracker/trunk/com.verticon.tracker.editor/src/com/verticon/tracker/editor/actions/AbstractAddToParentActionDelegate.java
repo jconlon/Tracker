@@ -2,8 +2,11 @@ package com.verticon.tracker.editor.actions;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -13,7 +16,6 @@ import java.util.Set;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.action.IAction;
@@ -32,6 +34,7 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
+import com.verticon.tracker.util.CommonUtilities;
 import com.verticon.tracker.util.TrackerLog;
 
 public abstract class AbstractAddToParentActionDelegate {
@@ -211,21 +214,15 @@ public abstract class AbstractAddToParentActionDelegate {
 
 	/**
 	 * Find an animalID associated with an Animal in the Animals 
-	 * TODO Consolidate to an utility class.
 	 * 
 	 * @param tag
 	 * @return animalID or null
 	 */
-	protected AnimalId findAnimalId(Long tag) {
-		List elist = premises.getAnimals().getAnimal();
-		for (Object object : elist) {
-			Animal animal = (Animal) object;
-			if (animal.getIdNumber().longValue() == tag) {
-				return animal.getAin();
-			}
-		}
-		return null;
+	protected AnimalId findAnimalId(Long tag, Animal defaultAnimal) {
+		return CommonUtilities.findAnimalId( tag,  premises, defaultAnimal);
 	}
+	
+	
 	
 	protected void addAnimal(Animal animal){
 		animalsToAdd.add(animal);
@@ -247,6 +244,19 @@ public abstract class AbstractAddToParentActionDelegate {
 			}
 		}
 		return false;
+	}
+
+	protected Date createDateFromResourceName() {	
+		String fileName = resource.getName().substring(0, resource.getName().indexOf('.'));
+		SimpleDateFormat dateFormater = new SimpleDateFormat("yyMMddHHmmss");
+		Date date = null;
+		try {
+			 date = dateFormater.parse(fileName);
+		} catch (ParseException e) {
+			return new Date();
+		}
+		
+		return date;
 	}
 	
 	

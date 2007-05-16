@@ -7,6 +7,7 @@ package com.verticon.tracker.editor.actions;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -30,14 +31,25 @@ import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
 import com.verticon.tracker.editor.dialogs.WSFileDialog;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
+import com.verticon.tracker.util.CommonUtilities;
 
 /**
+ * Action associated with a selection on a Capture *.tags file.  Prompts the user to select a PremisesTemplate
+ * of Events to add to the set of animals associated with the AINs in the capture *.tags file.
+ * 
+ * For AINs that are not already assigned to animals an animal will be created if there is an animal in the 
+ * PremisesTemplate.  Only the first animal is used all others are ignored.
+ * 
+ * Capture *.tags files can also contain a timestamp in their name.  This will be the default date for all events
+ * overriding any event dates in the PremisesTemplates.
+ * 
+ * TODO change class name to AddTemplateEventsToCaptureAins
  * @author jconlon
- *
+ * 
  */
-public class AddAsTemplatedEvents extends AbstractAddAsEvent {
+public class AddTemplateEventsToCaptureAins extends AbstractAddAsEvent {
 
-	EventHistory eventHistory = null;
+	EventHistory eventHistoryTemplate = null;
 	Animal defaultAnimal = null;
 
 	/**
@@ -85,38 +97,31 @@ public class AddAsTemplatedEvents extends AbstractAddAsEvent {
 						e.getLocalizedMessage());
 				return;
 		}
-		eventHistory = getEventHistory(templateResource);
-		defaultAnimal = getDefaultAnimal(templateResource);
+		eventHistoryTemplate = CommonUtilities.getEventHistoryFromTemplate(templateResource);
 		
-		if(eventHistory==null && defaultAnimal ==null){
+		defaultAnimal = CommonUtilities.getDefaultAnimalFromTemplate(templateResource);
+		
+		if(eventHistoryTemplate==null && defaultAnimal ==null){
+			System.out.println("eventHistory="+eventHistoryTemplate+" defaultAnimal="+defaultAnimal);
 			return;
 		}
 
 		processSelection(editor);
 
 	}
-	
-	private Animal getDefaultAnimal(Resource resource){
-		Object o = resource.getContents().get(0);
-		Animal animal = null;
-		if(o instanceof Premises){
-			Premises premises = (Premises)o;
-			animal= (Animal)premises.getAnimals().getAnimal().get(0);
-		}
-		return animal;
-	}
-	
-	public static EventHistory getEventHistory(Resource resource){
-		Object o = resource.getContents().get(0);
-		if(o instanceof EventHistory){//old templates had EventHistory as root
-			return (EventHistory)o;
-		}else if(o instanceof Premises){
-			Premises premises = (Premises)o;
-			return premises.getEventHistory();
-		}
-		return null;
-	}
 
+	/**
+	 * If there is a datestamp encoded in the capture file update the eventHistory to override them.
+	 */
+	private void overrideEventHistoryTemplateDatesIfNecessary() {
+		Date date = createDateFromResourceName();
+		if(date!=null){
+			for (Object object : eventHistoryTemplate.getEvents()) {
+				((Event )object).setDateTime(date);
+			}
+		}
+	}
+	
     public static Resource getResource(IFile file) throws IOException {
 		      
 		           ResourceSet resourceSet = new ResourceSetImpl();
@@ -131,39 +136,13 @@ public class AddAsTemplatedEvents extends AbstractAddAsEvent {
     }
 
 	/**
+	 * 
 	 * return a copy the events in the template
 	 */
 	@Override
 	protected Collection<Event> createEvents(TrackerFactory trackerFactory, AnimalId animalId, Long tag) {
-		Copier copier = new Copier();	  
-		ArrayList<Event> outputResults = new ArrayList<Event>();
-		Event outputEvent;
-		for (Object o : eventHistory.getEvents()) {
-			Event templateEvent =(Event)o;
-			if(!containsEvent(tag, templateEvent.getEventCode()) ){
-				outputEvent= (Event) copier.copy(templateEvent);
-				outputEvent.setAin(animalId);
-				outputEvent.setDateTime(findDate());
-				outputResults.add(outputEvent);
-			}
-		}
-		return outputResults;
+		overrideEventHistoryTemplateDatesIfNecessary();
+		return CommonUtilities.createEvents(eventHistoryTemplate,  animalId,  premises);
 	}
-
-	@Override
-	protected AnimalId findAnimalId(Long tag) {
-		AnimalId animalID= super.findAnimalId(tag);
-		if(animalID==null && defaultAnimal!=null){
-			Copier copier = new Copier();
-			animalID=TrackerFactory.eINSTANCE.createAnimalId();
-			animalID.setIdNumber(tag.toString());
-			Animal animal = (Animal)copier.copy(defaultAnimal);
-			animal.setAin(animalID);
-			addAnimal(animal);
-		}
-		return animalID;
-	}
-	
-
 
 }
