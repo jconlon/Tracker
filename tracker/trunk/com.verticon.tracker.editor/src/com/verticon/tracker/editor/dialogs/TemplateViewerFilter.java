@@ -22,10 +22,13 @@ public class TemplateViewerFilter extends ViewerFilter {
             resource = (IResource) adaptable.getAdapter(IResource.class);
         }
         if (resource != null && !resource.isDerived()) {
-        	   if (resource.getType() != IResource.FILE) return true;
+        	   if (resource.getType() != IResource.FILE) {
+        		   return true;
+        	   }
             String extension = resource.getFileExtension();
-            if (!extension.equalsIgnoreCase(extensionTarget)) return false;
-//            return true;
+            if (!extension.equalsIgnoreCase(extensionTarget)) {
+            	return false;
+            }
             
             try {
 				String prop = resource.getPersistentProperty(
