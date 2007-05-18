@@ -5,7 +5,6 @@ package com.verticon.tracker.editor.actions;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -16,7 +15,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
@@ -26,7 +24,6 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.EventHistory;
-import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
 import com.verticon.tracker.editor.dialogs.WSFileDialog;
@@ -43,7 +40,7 @@ import com.verticon.tracker.util.CommonUtilities;
  * Capture *.tags files can also contain a timestamp in their name.  This will be the default date for all events
  * overriding any event dates in the PremisesTemplates.
  * 
- * TODO change class name to AddTemplateEventsToCaptureAins
+ * 
  * @author jconlon
  * 
  */
