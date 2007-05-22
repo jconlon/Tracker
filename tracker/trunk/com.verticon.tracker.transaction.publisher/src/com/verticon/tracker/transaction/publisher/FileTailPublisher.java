@@ -28,6 +28,10 @@ import com.verticon.transaction.editor.console.ConsoleUtil;
 public class FileTailPublisher extends PreferenceConstants implements
 		IPropertyChangeListener, Publisher {
 
+	public FileTailPublisher() {
+		super();
+	}
+
 	private static final String DESCRIPTION = "File Tailing Event Publisher";
 
 	@Override

@@ -32,7 +32,6 @@ public class TrackerFileTailPublisherPlugin extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		fileTailPublisher = new FileTailPublisher();
-		fileTailPublisher.start();
 		getPluginPreferences().addPropertyChangeListener(fileTailPublisher);
 	}
 

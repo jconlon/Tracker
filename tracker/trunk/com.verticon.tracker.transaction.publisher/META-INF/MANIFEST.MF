@@ -17,3 +17,7 @@ Import-Package: com.verticon.tracker,
  com.verticon.tracker.editor.presentation,
  com.verticon.tracker.util,
  com.verticon.transaction.editor.console
+Export-Package: com.verticon.tracker.transaction.publisher,
+ com.verticon.tracker.transaction.publisher.actions,
+ com.verticon.tracker.transaction.publisher.preferences,
+ com.verticon.tracker.transaction.publisher.views
