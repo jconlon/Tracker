@@ -89,7 +89,12 @@ that can be installed and used with other Eclipse (3.2)-based offerings.
       <feature id="com.verticon.tracker.editor" version="1.0.0"/>
       <feature id="com.verticon.tracker.export.wlic" version="1.0.0"/>
       <feature id="com.verticon.tracker.export.xls" version="1.0.0"/>
+      <feature id="com.verticon.tracker.transaction.editor" version="1.0.0"/>
+      <feature id="com.verticon.tracker.transaction.publisher" version="1.0.0"/>
       <feature id="org.eclipse.emf" version="2.2.2.v200702131851"/>
+      <feature id="org.eclipse.emf.transaction" version="1.0.2.v200611161636"/>
+      <feature id="org.eclipse.emf.validation" version="1.0.1.v200611161604"/>
+      <feature id="org.eclipse.emf.workspace" version="1.0.1.v200611161636"/>
       <feature id="org.eclipse.platform" version="3.2.2.r322_v20070119-RQghndJN8IM0MsK"/>
       <feature id="org.eclipse.platform.launchers" version="3.2.1.v3236"/>
    </features>
