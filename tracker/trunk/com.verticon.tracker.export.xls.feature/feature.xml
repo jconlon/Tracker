@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.tracker.export.xls"
-      label="XLS Export Feature"
+      label="Tracker Excel Export"
       version="1.0.0"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.export.xls">
 
    <description>
-      The Tracker Tracker XLS Export feature, exports FairRegistration
-and Weigh-In Animal Events from Tracker model documents.
+      Tracker Excel Export, exports FairRegistration
+and Weigh-In Animal Events from Tracker model documents as
+MS Excel Spreadsheets.
    </description>
 
    <copyright>
-      Tracker Premises Event Manager Copyright (C) 2007
+      Tracker Excel Export Copyright (C) 2007
 Verticon, Inc. All Rights Reserved.
    </copyright>
 
