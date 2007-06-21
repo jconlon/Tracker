@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.tracker.editor"
-      label="Tracker Feature"
+      label="Tracker Core"
       version="1.0.0"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.editor">
 
    <description>
-      The Tracker, models Animal Event Histories for Producer and/or Non Producer Premises.  
+      Tracker Core, models Animal Event Histories for Producer and/or Non Producer Premises.  
       Premises model documents are displayed and manipulated with Tracker Editors, Wizards, and various Importing and Exporting utilities.
    </description>
 
