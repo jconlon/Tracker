@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.tracker.export.wlic"
-      label="Tracker WLIC Export Feature"
+      label="Tracker WLIC Export"
       version="1.0.0"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.export.wlic">
 
    <description>
-      The Tracker Tracker WLIC Export feature, exports Animal Events associated with
+      Tracker WLIC Export, exports Animal Events associated with
 Non Producer Premises from Tracker model documents.
    </description>
 
    <copyright>
-      Tracker Premises Event Manager Copyright (C) 2007
+      Tracker WLIC Export Copyright (C) 2007
 Verticon, Inc. All Rights Reserved.
    </copyright>
 
