@@ -11,7 +11,7 @@
          <package namespaceUri="http://www.verticon.com/ns/tracker/1.0"/>
          
          <constraints categories="tracker-emf-validation/ocl">
-            <!-- An animal can not be slaughtered more than once. -->
+            <!-- Genric WLIC: An animal can not be slaughtered more than once. -->
             <!-- This constraint applies to Animal -->
             <constraint
                   lang="OCL"
@@ -44,7 +44,7 @@
                </constraint>
             
             
-            <!-- An animal must have only one tagApplied Event -->
+            <!-- Genric WLIC: An animal must have only one tagApplied Event -->
             <!-- This constraint applies to Animal -->
             <constraint
                   id="tagAppliedAnimal"
@@ -76,7 +76,7 @@
                ]]>
             </constraint>   
             
-            <!-- An animal must have one and only one FairRegistration Event -->
+            <!-- Specific VCF: An animal must have one and only one FairRegistration Event -->
             <!-- This constraint applies to Animal -->
             <constraint
                   lang="OCL"
@@ -108,7 +108,7 @@
                ]]>
             </constraint>
             
-            <!-- An animal must have at least one moveIn event -->
+            <!-- Specific VCF: An animal must have at least one moveIn event -->
             <!-- This constraint applies to Animal -->
             <constraint
                   lang="OCL"
@@ -125,7 +125,7 @@
                ]]>
             </constraint>
             
-            <!-- An animal must have at least one weighIn event -->
+            <!-- Specific VCF: An animal must have at least one weighIn event -->
             <!-- This constraint applies to Animal -->
             <constraint
                   lang="OCL"
@@ -143,7 +143,7 @@
             </constraint>
             
             
-            <!-- An animal should have at least one moveOut event
+            <!-- Specific VCF: An animal should have at least one moveOut event
             TODO Change to: An animal should have a moveOut for every moveIn event -->
             <!-- This constraint applies to Animal -->
             <constraint
