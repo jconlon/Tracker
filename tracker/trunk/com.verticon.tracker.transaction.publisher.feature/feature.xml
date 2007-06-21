@@ -7,7 +7,7 @@
       plugin="com.verticon.tracker.transaction.publisher">
 
    <description>
-      Transaction Event Publisher, provides multi-threaded and transactionally
+      Tracker Transaction Event Publisher, provides multi-threaded and transactionally
 aware Event Publishers for publishing Animal Events to Tracker
 Model documents running within a Tracker Transaction Infrastructure.
    </description>
