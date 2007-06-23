@@ -7,11 +7,8 @@
       plugin="com.verticon.tracker.transaction.editor">
 
    <description>
-      Tracker Transaction Infrastructure, provides a multi-threaded multi-user frontend
-to Tracker Premises models.  
-Premises model documents are displayed and manipulated within Transactionally
-aware Tracker Editors that provide read and write transactional access and
-roll back when updating model data.
+Tracker Transaction Infrastructure, provides a multi-threaded multi-user frontend to Tracker Premises models.  
+Premises model documents are displayed and manipulated within Transactionally aware Tracker Editors that provide read and write transactional access and roll back when updating model data.
    </description>
 
    <copyright>
