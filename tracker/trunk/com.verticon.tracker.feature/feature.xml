@@ -7,8 +7,8 @@
       plugin="com.verticon.tracker.editor">
 
    <description>
-      Tracker Core, models Animal Event Histories for Producer and/or Non Producer Premises.  
-      Premises model documents are displayed and manipulated with Tracker Editors, Wizards, and various Importing and Exporting utilities.
+Tracker Core, models Animal Event Histories for Producer and/or Non Producer Premises.  
+Premises model documents are displayed and manipulated with Tracker Editors, Wizards, and various Importing and Exporting utilities.
    </description>
 
    <copyright>
