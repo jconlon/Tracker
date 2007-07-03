@@ -163,6 +163,14 @@
         <property
               name="startupMessageRect"
               value="7,220,441,20"/>
+        <property
+              name="appName"
+              value="Tracker">
+        </property>
+        <property
+              name="preferenceCustomization"
+              value="plugin_customization.ini">
+        </property>
      </product>
   </extension>
   <extension
