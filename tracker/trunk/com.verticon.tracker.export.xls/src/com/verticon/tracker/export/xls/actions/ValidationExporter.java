@@ -71,7 +71,7 @@ public class ValidationExporter implements PremisesProcessor{
 	      for (Iterator i=diagnostic.getChildren().iterator(); i.hasNext();)
 	      {
 	        Diagnostic childDiagnostic = (Diagnostic)i.next();
-	        List<Object> data;
+	        List<?> data;
 	        switch (childDiagnostic.getSeverity())
 	        {
 	          case Diagnostic.ERROR:
