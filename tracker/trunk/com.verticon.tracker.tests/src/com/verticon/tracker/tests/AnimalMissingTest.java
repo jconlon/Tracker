@@ -6,8 +6,6 @@
  */
 package com.verticon.tracker.tests;
 
-import org.apache.commons.jxpath.JXPathContext;
-
 import junit.textui.TestRunner;
 
 import com.verticon.tracker.AnimalId;

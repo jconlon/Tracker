@@ -6,8 +6,6 @@
  */
 package com.verticon.tracker.tests;
 
-import org.apache.commons.jxpath.JXPathContext;
-
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
@@ -119,13 +117,6 @@ public class AnimalIdTest extends TestCase {
 		
 	}
 	
-	public void testJXPath(){
-		AnimalId animalId = getFixture();
-		animalId.setIdNumber("123456789012345");
-		 JXPathContext context = JXPathContext.newContext(animalId);
-		 String sNumber = (String)context.getValue("idNumber");
-		 assertTrue(sNumber=="123456789012345");
-		 
-	}
+
 
 } //AnimalIdTest

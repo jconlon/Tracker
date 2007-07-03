@@ -10,8 +10,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 
-import org.apache.commons.jxpath.JXPathContext;
-
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
@@ -113,34 +111,6 @@ public class AnimalsTest extends TestCase {
 		assertEquals(1, getFixture().getAnimal().size());
 	}
 	
-	public void testJXPath(){
-		 Animals animals = getAnimalsForTesting();
-		 
-		 JXPathContext context = JXPathContext.newContext(animals);
-		 assertEquals(new Double(2),(Double)context.getValue("count(animal)"));
-		 
-		 Object o = context.getValue("animal[1]");
-		 assertTrue(o instanceof Animal);
-		 Animal animal =(Animal)o;
-		 assertEquals("BOV",animal.getSpeciesCode());
-		 
-
-		 o = context.getValue("animal[1]/sex");
-		 assertTrue(o instanceof Sex);
-		 assertEquals(Sex.F_LITERAL, (Sex)o);
-		 
-		 o = context.getValue("animal[1]/birthDate");
-		 assertTrue(o instanceof Date);
-		 Date date = null;
-		 try {
-			 DateFormat df = DateFormat.getDateInstance();
-		    date = df.parse("Sep 11, 2001");
-		} catch (ParseException e) {
-			fail(e.getLocalizedMessage());
-		}
-		 assertEquals(date, (Date)o);
-		 
-	}
 
 	/**
 	 * @return
