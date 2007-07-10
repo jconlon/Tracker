@@ -520,7 +520,7 @@ public final class SwineBreed extends AbstractEnumerator {
 			case YO: return YO_LITERAL;
 			case UNSPECIFIED: return UNSPECIFIED_LITERAL;
 		}
-		return null;	
+		return null;
 	}
 
 	/**

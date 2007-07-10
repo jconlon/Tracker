@@ -387,7 +387,7 @@ public final class DairyBreed extends AbstractEnumerator {
 			case MS: return MS_LITERAL;
 			case UNSPECIFIED: return UNSPECIFIED_LITERAL;
 		}
-		return null;	
+		return null;
 	}
 
 	/**

@@ -1548,7 +1548,7 @@ public final class SheepBreed extends AbstractEnumerator {
 			case ZS: return ZS_LITERAL;
 			case UNSPECIFIED: return UNSPECIFIED_LITERAL;
 		}
-		return null;	
+		return null;
 	}
 
 	/**

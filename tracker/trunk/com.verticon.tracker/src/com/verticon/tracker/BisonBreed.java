@@ -169,7 +169,7 @@ public final class BisonBreed extends AbstractEnumerator {
 			case PB: return PB_LITERAL;
 			case UNSPECIFIED: return UNSPECIFIED_LITERAL;
 		}
-		return null;	
+		return null;
 	}
 
 	/**

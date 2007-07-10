@@ -325,13 +325,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Animal</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Animal</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Animal</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Animal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -340,13 +340,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Animal Id</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Animal Id</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Animal Id</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Animal Id</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -355,13 +355,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Bovine</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Bovine</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Bovine</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Bovine</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -370,13 +370,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Event</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Event</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Event</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Event</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -385,13 +385,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Tag Allocated</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tag Allocated</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Tag Allocated</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tag Allocated</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -400,13 +400,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Died</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Died</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Died</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Died</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -415,13 +415,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Tag Retired</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tag Retired</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Tag Retired</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tag Retired</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -430,13 +430,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Animal Missing</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Animal Missing</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Animal Missing</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Animal Missing</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -445,13 +445,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>ICVI</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>ICVI</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>ICVI</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>ICVI</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -460,13 +460,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Fair Registration</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Fair Registration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Fair Registration</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Fair Registration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -475,13 +475,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Weigh In</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Weigh In</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Weigh In</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Weigh In</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -490,13 +490,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Swine</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Swine</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Swine</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Swine</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -505,13 +505,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Un Applied Tags</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Un Applied Tags</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Un Applied Tags</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Un Applied Tags</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -520,13 +520,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Premises</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Premises</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Premises</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Premises</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -535,13 +535,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Event History</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Event History</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Event History</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Event History</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -550,13 +550,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Animals</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Animals</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Animals</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Animals</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -565,13 +565,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Bovine Beef</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Bovine Beef</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Bovine Beef</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Bovine Beef</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -580,13 +580,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Ovine</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Ovine</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Ovine</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Ovine</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -595,13 +595,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Bovine Bison</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Bovine Bison</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Bovine Bison</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Bovine Bison</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -610,13 +610,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Bovine Dairy</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Bovine Dairy</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Bovine Dairy</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Bovine Dairy</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -625,13 +625,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Tag Applied</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tag Applied</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Tag Applied</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tag Applied</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -640,13 +640,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Moved In</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Moved In</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Moved In</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Moved In</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -655,13 +655,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Moved Out</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Moved Out</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Moved Out</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Moved Out</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -670,13 +670,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Lost Tag</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Lost Tag</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Lost Tag</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Lost Tag</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -685,13 +685,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Replaced Tag</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Replaced Tag</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Replaced Tag</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Replaced Tag</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -700,13 +700,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Imported</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Imported</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Imported</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Imported</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -715,13 +715,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Exported</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Exported</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Exported</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Exported</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -730,13 +730,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Sighting</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Sighting</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Sighting</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Sighting</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -745,13 +745,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Slaughtered</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Slaughtered</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Slaughtered</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Slaughtered</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -760,13 +760,13 @@ public class TrackerSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch, but this is the last case anyway.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */

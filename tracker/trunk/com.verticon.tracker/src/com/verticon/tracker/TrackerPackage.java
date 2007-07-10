@@ -3415,7 +3415,7 @@ public interface TrackerPackage extends EPackage {
 	 * @return the meta object for data type '<em>Animial Id Number</em>'.
 	 * @see java.lang.String
 	 * @model instanceClass="java.lang.String"
-	 *        extendedMetaData="minLength='15' maxLength='15'" 
+	 *        extendedMetaData="minLength='15' maxLength='15'"
 	 * @generated
 	 */
 	EDataType getAnimialIdNumber();
@@ -3427,7 +3427,7 @@ public interface TrackerPackage extends EPackage {
 	 * @return the meta object for data type '<em>Premises Id Number</em>'.
 	 * @see java.lang.String
 	 * @model instanceClass="java.lang.String"
-	 *        extendedMetaData="minLength='7' maxLength='7' length='7' maxExclusive='adcdefg'" 
+	 *        extendedMetaData="minLength='7' maxLength='7' length='7' maxExclusive='adcdefg'"
 	 * @generated
 	 */
 	EDataType getPremisesIdNumber();

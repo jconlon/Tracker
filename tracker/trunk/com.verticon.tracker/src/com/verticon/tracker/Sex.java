@@ -223,7 +223,7 @@ public final class Sex extends AbstractEnumerator {
 			case S: return S_LITERAL;
 			case UNSPECIFIED: return UNSPECIFIED_LITERAL;
 		}
-		return null;	
+		return null;
 	}
 
 	/**

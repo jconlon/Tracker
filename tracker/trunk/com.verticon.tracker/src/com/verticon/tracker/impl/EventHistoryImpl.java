@@ -49,7 +49,7 @@ public class EventHistoryImpl extends EObjectImpl implements EventHistory {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList events = null;
+	protected EList events;
 
 	/**
 	 * <!-- begin-user-doc -->
