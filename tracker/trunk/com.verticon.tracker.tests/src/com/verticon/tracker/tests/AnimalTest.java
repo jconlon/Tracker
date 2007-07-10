@@ -6,9 +6,20 @@
  */
 package com.verticon.tracker.tests;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import javax.swing.text.DateFormatter;
+
 import junit.framework.TestCase;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.AnimalId;
+import com.verticon.tracker.Sex;
+import com.verticon.tracker.TrackerFactory;
+import com.verticon.tracker.util.Age;
+import com.verticon.tracker.util.Species;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,6 +39,10 @@ import com.verticon.tracker.Animal;
  * @generated
  */
 public abstract class AnimalTest extends TestCase {
+	private static final String AIN = "123456789012345";
+	private static final Date ANIMAL_BIRTHDAY = 
+		(new GregorianCalendar(2000, Calendar.JANUARY, 1,1,5)).getTime();
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -57,10 +72,18 @@ public abstract class AnimalTest extends TestCase {
 	 * Sets the fixture for this Animal test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected void setFixture(Animal fixture) {
 		this.fixture = fixture;
+		if(fixture !=null){
+			fixture.setSex(Sex.M_LITERAL);
+			AnimalId ain = TrackerFactory.eINSTANCE.createAnimalId();
+			ain.setIdNumber(AIN);
+			fixture.setAin(ain);
+			fixture.setBirthDate(ANIMAL_BIRTHDAY);
+			
+		}
 	}
 
 	/**
@@ -76,6 +99,7 @@ public abstract class AnimalTest extends TestCase {
 	/**
 	 * Tests the '{@link com.verticon.tracker.Animal#getSpecies() <em>Species</em>}' feature getter.
 	 * <!-- begin-user-doc -->
+	 * Overridden in subclasses
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#getSpecies()
 	 * @generated
@@ -91,12 +115,12 @@ public abstract class AnimalTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#getIdNumber()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testGetIdNumber() {
-		// TODO: implement this feature getter test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		assertNotNull(getFixture());
+		assertNotNull(getFixture().getAin());
+		assertEquals(AIN, getFixture().getAin().getIdNumber());
 	}
 
 	/**
@@ -117,12 +141,12 @@ public abstract class AnimalTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#getAge()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testGetAge() {
-		// TODO: implement this feature getter test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		assertNotNull(getFixture());
+		assertNotNull(getFixture().getAge());
+		assertEquals(new Age(ANIMAL_BIRTHDAY), getFixture().getAge());
 	}
 
 	/**
@@ -130,12 +154,12 @@ public abstract class AnimalTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#getSexCode()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testGetSexCode() {
-		// TODO: implement this feature getter test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		assertNotNull(getFixture());
+		assertNotNull(getFixture().getSexCode());
+		assertEquals("M", getFixture().getSexCode());
 	}
 
 	/**
@@ -143,17 +167,17 @@ public abstract class AnimalTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#isSetSexCode()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testIsSetSexCode() {
-		// TODO: implement this test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		assertNotNull(getFixture());
+		assertTrue(getFixture().isSetSexCode());
 	}
 
 	/**
 	 * Tests the '{@link com.verticon.tracker.Animal#getSpeciesCode() <em>Species Code</em>}' feature getter.
 	 * <!-- begin-user-doc -->
+	 * Overridden by subclasses
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#getSpeciesCode()
 	 * @generated

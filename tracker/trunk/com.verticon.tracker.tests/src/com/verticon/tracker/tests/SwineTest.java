@@ -6,8 +6,12 @@
  */
 package com.verticon.tracker.tests;
 
+import com.verticon.tracker.BisonBreed;
+import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.Swine;
+import com.verticon.tracker.SwineBreed;
 import com.verticon.tracker.TrackerFactory;
+import com.verticon.tracker.util.Species;
 
 import junit.textui.TestRunner;
 
@@ -58,10 +62,12 @@ public class SwineTest extends AnimalTest {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see junit.framework.TestCase#setUp()
-	 * @generated
+	 * @generated NOT
 	 */
 	protected void setUp() throws Exception {
-		setFixture(TrackerFactory.eINSTANCE.createSwine());
+		Swine animal = TrackerFactory.eINSTANCE.createSwine();
+		animal.setSwineBreed(SwineBreed.BK_LITERAL);
+		setFixture(animal);
 	}
 
 	/**
@@ -72,6 +78,24 @@ public class SwineTest extends AnimalTest {
 	 */
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+	
+	@Override
+	public void testGetBreed() {
+		assertNotNull(getFixture().getBreed());
+		assertEquals(SwineBreed.get(SwineBreed.BK).getName(), getFixture().getBreed());
+	}
+
+	@Override
+	public void testGetSpecies() {
+		assertNotNull(getFixture().getSpecies());
+		assertEquals(Species.POR.literal(), getFixture().getSpecies());
+	}
+
+	@Override
+	public void testGetSpeciesCode() {
+		assertNotNull(getFixture().getSpeciesCode());
+		assertEquals(Species.POR.name(), getFixture().getSpeciesCode());
 	}
 
 } //SwineTest
