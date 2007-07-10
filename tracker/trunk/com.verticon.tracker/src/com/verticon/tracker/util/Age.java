@@ -15,6 +15,19 @@ import java.util.Locale;
 
 public class Age {
 
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Age){
+			return this.startDate.equals(((Age)obj).startDate);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return startDate.hashCode();
+	}
+
 	public static final String OLD = "Old";
 
 	public static final String NOT_BORN_YET = "Not Born Yet";
