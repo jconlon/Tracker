@@ -6,6 +6,8 @@
  */
 package com.verticon.tracker.tests;
 
+import com.verticon.tracker.Animal;
+import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.UnAppliedTags;
 
@@ -94,4 +96,12 @@ public class UnAppliedTagsTest extends TestCase {
 		setFixture(null);
 	}
 
+	public void testGetUnAppliedTags() {
+		assertNotNull(getFixture());
+		assertTrue( getFixture().getAin().isEmpty());
+		AnimalId ain = TrackerFactory.eINSTANCE.createAnimalId();
+		getFixture().getAin().add(ain);
+		
+		assertEquals(1, getFixture().getAin().size());
+	}
 } //UnAppliedTagsTest

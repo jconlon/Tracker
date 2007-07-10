@@ -49,7 +49,7 @@ public class TrackerExample {
 		//
 		ResourceSet resourceSet = new ResourceSetImpl();
 		
-		// Register the appropriate resource factory to handle all file extentions.
+		// Register the appropriate resource factory to handle all file extensions.
 		//
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put
 			(Resource.Factory.Registry.DEFAULT_EXTENSION, 
@@ -83,7 +83,7 @@ public class TrackerExample {
 				// The argument is treated as a file path only if it denotes an existing file.
 				// Otherwise, it's directly treated as a URL.
 				//
-				File file = new File(args[0]);
+				File file = new File(args[i]);
 				URI uri = file.isFile() ? URI.createFileURI(file.getAbsolutePath()): URI.createURI(args[0]);
 
 				try {
