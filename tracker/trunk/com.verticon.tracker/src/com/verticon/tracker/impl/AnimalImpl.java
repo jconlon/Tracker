@@ -100,7 +100,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean sexESet = false;
+	protected boolean sexESet;
 
 	/**
 	 * The cached value of the '{@link #getAin() <em>Ain</em>}' containment reference.
@@ -110,7 +110,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @generated
 	 * @ordered
 	 */
-	protected AnimalId ain = null;
+	protected AnimalId ain;
 
 	/**
 	 * The default value of the '{@link #getSpecies() <em>Species</em>}' attribute.

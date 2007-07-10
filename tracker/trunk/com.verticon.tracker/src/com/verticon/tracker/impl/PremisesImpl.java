@@ -93,7 +93,7 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * @generated
 	 * @ordered
 	 */
-	protected Animals animals = null;
+	protected Animals animals;
 
 	/**
 	 * The cached value of the '{@link #getEventHistory() <em>Event History</em>}' containment reference.
@@ -103,7 +103,7 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * @generated
 	 * @ordered
 	 */
-	protected EventHistory eventHistory = null;
+	protected EventHistory eventHistory;
 
 	/**
 	 * The cached value of the '{@link #getUnAppliedTags() <em>Un Applied Tags</em>}' containment reference.
@@ -113,7 +113,7 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * @generated
 	 * @ordered
 	 */
-	protected UnAppliedTags unAppliedTags = null;
+	protected UnAppliedTags unAppliedTags;
 
 	/**
 	 * <!-- begin-user-doc -->

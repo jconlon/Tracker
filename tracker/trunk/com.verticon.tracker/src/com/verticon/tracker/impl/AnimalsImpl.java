@@ -49,7 +49,7 @@ public class AnimalsImpl extends EObjectImpl implements Animals {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList animal = null;
+	protected EList animal;
 
 	/**
 	 * <!-- begin-user-doc -->

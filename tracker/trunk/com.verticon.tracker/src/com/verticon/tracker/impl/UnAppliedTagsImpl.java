@@ -55,7 +55,7 @@ public class UnAppliedTagsImpl extends EObjectImpl implements UnAppliedTags {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList ain = null;
+	protected EList ain;
 
 	/**
 	 * <!-- begin-user-doc -->

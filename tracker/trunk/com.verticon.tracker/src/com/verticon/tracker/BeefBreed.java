@@ -3411,7 +3411,7 @@ public final class BeefBreed extends AbstractEnumerator {
 			case YA: return YA_LITERAL;
 			case UNSPECIFIED: return UNSPECIFIED_LITERAL;
 		}
-		return null;	
+		return null;
 	}
 
 	/**

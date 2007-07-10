@@ -73,7 +73,7 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 	 * @generated
 	 * @ordered
 	 */
-	protected AnimalId ain = null;
+	protected AnimalId ain;
 
 	/**
 	 * The default value of the '{@link #getEventCode() <em>Event Code</em>}' attribute.
