@@ -19,7 +19,10 @@ package com.verticon.tracker.ocl.query.wizards;
 
 import org.eclipse.jface.wizard.IWizardPage;
 
-import org.eclipse.emf.query.ocl.conditions.OCLConstraintCondition;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.query.ocl.conditions.BooleanOCLCondition;
 
 
 /**
@@ -34,5 +37,5 @@ public interface IOCLQueryWizardPage
 	 * @return the condition, or <code>null</code> if the page is not complete
 	 *     or the user canceled the wizard
 	 */
-	OCLConstraintCondition getCondition();
+	BooleanOCLCondition<EClassifier, EClass, EObject> getCondition();
 }

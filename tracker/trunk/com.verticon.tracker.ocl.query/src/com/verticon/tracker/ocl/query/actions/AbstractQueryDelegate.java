@@ -17,6 +17,7 @@
 
 package com.verticon.tracker.ocl.query.actions;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -56,7 +57,7 @@ abstract class AbstractQueryDelegate
 	/**
 	 * Selected {@link EObject}s.
 	 */
-	private Collection selectedEObjects = Collections.EMPTY_SET;
+	private Collection<EObject> selectedEObjects = Collections.emptyList();
 
 	/**
 	 * Initializes me.
@@ -72,16 +73,13 @@ abstract class AbstractQueryDelegate
 	 * 
 	 * @return a collection of selected {@link EObject}s
 	 */
-	protected Collection getSelectedObjects() {
-		Collection result = selectedEObjects;
+	protected Collection<EObject> getSelectedObjects() {
+		Collection<EObject> result = selectedEObjects;
 		
 		if (editor != null && (result == null || result.isEmpty())) {
-			result = new java.util.ArrayList();
+			result = new ArrayList<EObject>();
 			ResourceSet rset = editor.getEditingDomain().getResourceSet();
-			
-			for (Iterator outer = rset.getResources().iterator(); outer.hasNext();) {
-				Resource res = (Resource) outer.next();
-				
+			for (Resource res : rset.getResources()) {
 				if (res.isLoaded()) {
 					result.addAll(res.getContents());
 				}
@@ -105,7 +103,7 @@ abstract class AbstractQueryDelegate
 	 * 
 	 * @param objects the objects to select (may be empty)
 	 */
-	protected void selectInEditor(Collection objects) {
+	protected void selectInEditor(Collection<?> objects) {
 		editor.setSelectionToViewer(objects);
 	}
 
@@ -113,17 +111,16 @@ abstract class AbstractQueryDelegate
 	 * Gets all of the {@link EObject}s in the current selection, if any.
 	 */
 	public void selectionChanged(IAction action, final ISelection selection) {
-		selectedEObjects = Collections.EMPTY_SET;
+		selectedEObjects = Collections.emptyList();
 		
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
-			selectedEObjects = new java.util.ArrayList();
-			
-			for (Iterator iter = structuredSelection.iterator(); iter.hasNext();) {
+			selectedEObjects = new ArrayList<EObject>();
+			for (Iterator<?> iter = structuredSelection.iterator(); iter.hasNext();) {
 				Object next = iter.next();
 				
 				if (next instanceof EObject) {
-					selectedEObjects.add(next);
+					selectedEObjects.add((EObject)next);
 				}
 			}
 		}

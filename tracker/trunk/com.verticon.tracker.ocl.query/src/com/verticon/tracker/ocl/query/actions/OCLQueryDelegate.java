@@ -21,7 +21,10 @@ import java.util.Collection;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.query.ocl.conditions.OCLConstraintCondition;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.query.ocl.conditions.BooleanOCLCondition;
 import org.eclipse.emf.query.statements.FROM;
 import org.eclipse.emf.query.statements.IQueryResult;
 import org.eclipse.emf.query.statements.SELECT;
@@ -44,7 +47,7 @@ public class OCLQueryDelegate
 	private static String TITLE = QueryOCLMessages.oclQuery_title;
 	private static String NOT_FOUND = QueryOCLMessages.oclQuery_message_notFound;
 	
-	private OCLConstraintCondition condition;
+	private BooleanOCLCondition<EClassifier, EClass, EObject> condition;
 	
 	/**
 	 * Initializes me.
@@ -54,7 +57,7 @@ public class OCLQueryDelegate
 	}
 
 	public void run(IAction action) {
-		Collection selection = getSelectedObjects();
+		Collection<EObject> selection = getSelectedObjects();
 		
 		if (selection == null || selection.isEmpty()) {
 			action.setEnabled(false);
@@ -89,7 +92,7 @@ public class OCLQueryDelegate
 	/**
 	 * Implements the inherited method using an OCL query condition.
 	 */
-	protected IQueryResult performQuery(Collection context, String value,
+	protected IQueryResult performQuery(Collection<EObject> context, String value,
 			IProgressMonitor monitor)
 		throws Exception {
 		if (null == context) {
