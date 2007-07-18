@@ -66,7 +66,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection supportedTypes = new ArrayList();
+	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
 	/**
 	 * This constructs an instance.
@@ -97,6 +97,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createAnimalIdAdapter() {
 		if (animalIdItemProvider == null) {
 			animalIdItemProvider = new AnimalIdItemProvider(this);
@@ -119,6 +120,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createTagAllocatedAdapter() {
 		if (tagAllocatedItemProvider == null) {
 			tagAllocatedItemProvider = new TagAllocatedItemProvider(this);
@@ -141,6 +143,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createDiedAdapter() {
 		if (diedItemProvider == null) {
 			diedItemProvider = new DiedItemProvider(this);
@@ -163,6 +166,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createTagRetiredAdapter() {
 		if (tagRetiredItemProvider == null) {
 			tagRetiredItemProvider = new TagRetiredItemProvider(this);
@@ -185,6 +189,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createAnimalMissingAdapter() {
 		if (animalMissingItemProvider == null) {
 			animalMissingItemProvider = new AnimalMissingItemProvider(this);
@@ -207,6 +212,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createICVIAdapter() {
 		if (icviItemProvider == null) {
 			icviItemProvider = new ICVIItemProvider(this);
@@ -229,6 +235,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createFairRegistrationAdapter() {
 		if (fairRegistrationItemProvider == null) {
 			fairRegistrationItemProvider = new FairRegistrationItemProvider(this);
@@ -251,6 +258,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createWeighInAdapter() {
 		if (weighInItemProvider == null) {
 			weighInItemProvider = new WeighInItemProvider(this);
@@ -273,6 +281,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createSwineAdapter() {
 		if (swineItemProvider == null) {
 			swineItemProvider = new SwineItemProvider(this);
@@ -295,6 +304,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createUnAppliedTagsAdapter() {
 		if (unAppliedTagsItemProvider == null) {
 			unAppliedTagsItemProvider = new UnAppliedTagsItemProvider(this);
@@ -317,6 +327,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createPremisesAdapter() {
 		if (premisesItemProvider == null) {
 			premisesItemProvider = new PremisesItemProvider(this);
@@ -339,6 +350,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createEventHistoryAdapter() {
 		if (eventHistoryItemProvider == null) {
 			eventHistoryItemProvider = new EventHistoryItemProvider(this);
@@ -361,6 +373,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createAnimalsAdapter() {
 		if (animalsItemProvider == null) {
 			animalsItemProvider = new AnimalsItemProvider(this);
@@ -383,6 +396,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createBovineBeefAdapter() {
 		if (bovineBeefItemProvider == null) {
 			bovineBeefItemProvider = new BovineBeefItemProvider(this);
@@ -405,6 +419,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createOvineAdapter() {
 		if (ovineItemProvider == null) {
 			ovineItemProvider = new OvineItemProvider(this);
@@ -427,6 +442,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createBovineBisonAdapter() {
 		if (bovineBisonItemProvider == null) {
 			bovineBisonItemProvider = new BovineBisonItemProvider(this);
@@ -449,6 +465,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createTagAppliedAdapter() {
 		if (tagAppliedItemProvider == null) {
 			tagAppliedItemProvider = new TagAppliedItemProvider(this);
@@ -471,6 +488,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createMovedInAdapter() {
 		if (movedInItemProvider == null) {
 			movedInItemProvider = new MovedInItemProvider(this);
@@ -493,6 +511,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createMovedOutAdapter() {
 		if (movedOutItemProvider == null) {
 			movedOutItemProvider = new MovedOutItemProvider(this);
@@ -515,6 +534,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createLostTagAdapter() {
 		if (lostTagItemProvider == null) {
 			lostTagItemProvider = new LostTagItemProvider(this);
@@ -537,6 +557,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createReplacedTagAdapter() {
 		if (replacedTagItemProvider == null) {
 			replacedTagItemProvider = new ReplacedTagItemProvider(this);
@@ -559,6 +580,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createImportedAdapter() {
 		if (importedItemProvider == null) {
 			importedItemProvider = new ImportedItemProvider(this);
@@ -581,6 +603,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createExportedAdapter() {
 		if (exportedItemProvider == null) {
 			exportedItemProvider = new ExportedItemProvider(this);
@@ -603,6 +626,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createSightingAdapter() {
 		if (sightingItemProvider == null) {
 			sightingItemProvider = new SightingItemProvider(this);
@@ -625,6 +649,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createSlaughteredAdapter() {
 		if (slaughteredItemProvider == null) {
 			slaughteredItemProvider = new SlaughteredItemProvider(this);
@@ -658,6 +683,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object type) {
 		return supportedTypes.contains(type) || super.isFactoryForType(type);
 	}
@@ -668,6 +694,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
 		return super.adapt(notifier, this);
 	}
@@ -677,10 +704,11 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class)type).isInstance(adapter))) {
+			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
