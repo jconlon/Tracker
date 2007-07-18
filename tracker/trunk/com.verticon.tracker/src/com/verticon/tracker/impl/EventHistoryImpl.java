@@ -49,7 +49,7 @@ public class EventHistoryImpl extends EObjectImpl implements EventHistory {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList events;
+	protected EList<Event> events;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -65,6 +65,7 @@ public class EventHistoryImpl extends EObjectImpl implements EventHistory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.EVENT_HISTORY;
 	}
@@ -74,9 +75,9 @@ public class EventHistoryImpl extends EObjectImpl implements EventHistory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getEvents() {
+	public EList<Event> getEvents() {
 		if (events == null) {
-			events = new EObjectContainmentEList(Event.class, this, TrackerPackage.EVENT_HISTORY__EVENTS);
+			events = new EObjectContainmentEList<Event>(Event.class, this, TrackerPackage.EVENT_HISTORY__EVENTS);
 		}
 		return events;
 	}
@@ -86,10 +87,11 @@ public class EventHistoryImpl extends EObjectImpl implements EventHistory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case TrackerPackage.EVENT_HISTORY__EVENTS:
-				return ((InternalEList)getEvents()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getEvents()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -99,6 +101,7 @@ public class EventHistoryImpl extends EObjectImpl implements EventHistory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.EVENT_HISTORY__EVENTS:
@@ -112,11 +115,13 @@ public class EventHistoryImpl extends EObjectImpl implements EventHistory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackerPackage.EVENT_HISTORY__EVENTS:
 				getEvents().clear();
-				getEvents().addAll((Collection)newValue);
+				getEvents().addAll((Collection<? extends Event>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -127,6 +132,7 @@ public class EventHistoryImpl extends EObjectImpl implements EventHistory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.EVENT_HISTORY__EVENTS:
@@ -141,6 +147,7 @@ public class EventHistoryImpl extends EObjectImpl implements EventHistory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.EVENT_HISTORY__EVENTS:

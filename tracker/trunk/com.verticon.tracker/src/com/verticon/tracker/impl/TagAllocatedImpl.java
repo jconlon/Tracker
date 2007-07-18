@@ -44,6 +44,7 @@ public class TagAllocatedImpl extends EventImpl implements TagAllocated {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.TAG_ALLOCATED;
 	}

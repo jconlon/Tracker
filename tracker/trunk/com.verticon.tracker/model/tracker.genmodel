@@ -5,7 +5,8 @@
     modelDirectory="/com.verticon.tracker/src" editDirectory="/com.verticon.tracker.edit/src"
     editorDirectory="/com.verticon.tracker.editor/src" modelPluginID="com.verticon.tracker"
     modelName="TrackerReport" editorPluginClass="com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin"
-    testsDirectory="/com.verticon.tracker.tests/src" importerID="org.eclipse.emf.importer.ecore">
+    testsDirectory="/com.verticon.tracker.tests/src" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0">
   <foreignModel>tracker.ecore</foreignModel>
   <genPackages prefix="Tracker" basePackage="com.verticon" resource="XML" disposableProviderFactory="true"
       providerPackageSuffix="edit.provider" presentationPackageSuffix="editor.presentation"

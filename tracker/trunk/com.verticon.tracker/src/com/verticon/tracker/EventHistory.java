@@ -44,9 +44,9 @@ public interface EventHistory extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Events</em>' containment reference list.
 	 * @see com.verticon.tracker.TrackerPackage#getEventHistory_Events()
-	 * @model type="com.verticon.tracker.Event" containment="true" required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList getEvents();
+	EList<Event> getEvents();
 
 } // EventHistory

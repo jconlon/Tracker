@@ -44,6 +44,7 @@ public class AnimalMissingImpl extends EventImpl implements AnimalMissing {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.ANIMAL_MISSING;
 	}

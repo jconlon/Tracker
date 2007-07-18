@@ -44,6 +44,7 @@ public class ExportedImpl extends EventImpl implements Exported {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.EXPORTED;
 	}

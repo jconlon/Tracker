@@ -1347,6 +1347,10 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Create type parameters
+
+		// Set bounds for type parameters
+
 		// Add supertypes to classes
 		bovineEClass.getESuperTypes().add(this.getAnimal());
 		tagAllocatedEClass.getESuperTypes().add(this.getEvent());

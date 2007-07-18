@@ -44,6 +44,7 @@ public class ICVIImpl extends EventImpl implements ICVI {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.ICVI;
 	}

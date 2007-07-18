@@ -44,6 +44,7 @@ public class ImportedImpl extends EventImpl implements Imported {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.IMPORTED;
 	}

@@ -45,9 +45,9 @@ public interface UnAppliedTags extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ain</em>' containment reference list.
 	 * @see com.verticon.tracker.TrackerPackage#getUnAppliedTags_Ain()
-	 * @model type="com.verticon.tracker.AnimalId" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getAin();
+	EList<AnimalId> getAin();
 
 } // UnAppliedTags

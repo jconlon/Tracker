@@ -44,9 +44,9 @@ public interface Animals extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Animal</em>' containment reference list.
 	 * @see com.verticon.tracker.TrackerPackage#getAnimals_Animal()
-	 * @model type="com.verticon.tracker.Animal" containment="true" required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList getAnimal();
+	EList<Animal> getAnimal();
 
 } // Animals

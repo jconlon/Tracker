@@ -44,6 +44,7 @@ public class TagRetiredImpl extends EventImpl implements TagRetired {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.TAG_RETIRED;
 	}

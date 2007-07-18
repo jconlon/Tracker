@@ -44,6 +44,7 @@ public class LostTagImpl extends EventImpl implements LostTag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.LOST_TAG;
 	}

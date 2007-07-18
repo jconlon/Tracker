@@ -84,6 +84,7 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object object) {
 		if (object == modelPackage) {
 			return true;
@@ -100,96 +101,126 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TrackerSwitch modelSwitch =
-		new TrackerSwitch() {
-			public Object caseAnimal(Animal object) {
+	protected TrackerSwitch<Adapter> modelSwitch =
+		new TrackerSwitch<Adapter>() {
+			@Override
+			public Adapter caseAnimal(Animal object) {
 				return createAnimalAdapter();
 			}
-			public Object caseAnimalId(AnimalId object) {
+			@Override
+			public Adapter caseAnimalId(AnimalId object) {
 				return createAnimalIdAdapter();
 			}
-			public Object caseBovine(Bovine object) {
+			@Override
+			public Adapter caseBovine(Bovine object) {
 				return createBovineAdapter();
 			}
-			public Object caseEvent(Event object) {
+			@Override
+			public Adapter caseEvent(Event object) {
 				return createEventAdapter();
 			}
-			public Object caseTagAllocated(TagAllocated object) {
+			@Override
+			public Adapter caseTagAllocated(TagAllocated object) {
 				return createTagAllocatedAdapter();
 			}
-			public Object casePremises(Premises object) {
+			@Override
+			public Adapter casePremises(Premises object) {
 				return createPremisesAdapter();
 			}
-			public Object caseEventHistory(EventHistory object) {
+			@Override
+			public Adapter caseEventHistory(EventHistory object) {
 				return createEventHistoryAdapter();
 			}
-			public Object caseAnimals(Animals object) {
+			@Override
+			public Adapter caseAnimals(Animals object) {
 				return createAnimalsAdapter();
 			}
-			public Object caseBovineBeef(BovineBeef object) {
+			@Override
+			public Adapter caseBovineBeef(BovineBeef object) {
 				return createBovineBeefAdapter();
 			}
-			public Object caseOvine(Ovine object) {
+			@Override
+			public Adapter caseOvine(Ovine object) {
 				return createOvineAdapter();
 			}
-			public Object caseBovineBison(BovineBison object) {
+			@Override
+			public Adapter caseBovineBison(BovineBison object) {
 				return createBovineBisonAdapter();
 			}
-			public Object caseBovineDairy(BovineDairy object) {
+			@Override
+			public Adapter caseBovineDairy(BovineDairy object) {
 				return createBovineDairyAdapter();
 			}
-			public Object caseTagApplied(TagApplied object) {
+			@Override
+			public Adapter caseTagApplied(TagApplied object) {
 				return createTagAppliedAdapter();
 			}
-			public Object caseMovedIn(MovedIn object) {
+			@Override
+			public Adapter caseMovedIn(MovedIn object) {
 				return createMovedInAdapter();
 			}
-			public Object caseMovedOut(MovedOut object) {
+			@Override
+			public Adapter caseMovedOut(MovedOut object) {
 				return createMovedOutAdapter();
 			}
-			public Object caseLostTag(LostTag object) {
+			@Override
+			public Adapter caseLostTag(LostTag object) {
 				return createLostTagAdapter();
 			}
-			public Object caseReplacedTag(ReplacedTag object) {
+			@Override
+			public Adapter caseReplacedTag(ReplacedTag object) {
 				return createReplacedTagAdapter();
 			}
-			public Object caseImported(Imported object) {
+			@Override
+			public Adapter caseImported(Imported object) {
 				return createImportedAdapter();
 			}
-			public Object caseExported(Exported object) {
+			@Override
+			public Adapter caseExported(Exported object) {
 				return createExportedAdapter();
 			}
-			public Object caseSighting(Sighting object) {
+			@Override
+			public Adapter caseSighting(Sighting object) {
 				return createSightingAdapter();
 			}
-			public Object caseSlaughtered(Slaughtered object) {
+			@Override
+			public Adapter caseSlaughtered(Slaughtered object) {
 				return createSlaughteredAdapter();
 			}
-			public Object caseDied(Died object) {
+			@Override
+			public Adapter caseDied(Died object) {
 				return createDiedAdapter();
 			}
-			public Object caseTagRetired(TagRetired object) {
+			@Override
+			public Adapter caseTagRetired(TagRetired object) {
 				return createTagRetiredAdapter();
 			}
-			public Object caseAnimalMissing(AnimalMissing object) {
+			@Override
+			public Adapter caseAnimalMissing(AnimalMissing object) {
 				return createAnimalMissingAdapter();
 			}
-			public Object caseICVI(ICVI object) {
+			@Override
+			public Adapter caseICVI(ICVI object) {
 				return createICVIAdapter();
 			}
-			public Object caseFairRegistration(FairRegistration object) {
+			@Override
+			public Adapter caseFairRegistration(FairRegistration object) {
 				return createFairRegistrationAdapter();
 			}
-			public Object caseWeighIn(WeighIn object) {
+			@Override
+			public Adapter caseWeighIn(WeighIn object) {
 				return createWeighInAdapter();
 			}
-			public Object caseSwine(Swine object) {
+			@Override
+			public Adapter caseSwine(Swine object) {
 				return createSwineAdapter();
 			}
-			public Object caseUnAppliedTags(UnAppliedTags object) {
+			@Override
+			public Adapter caseUnAppliedTags(UnAppliedTags object) {
 				return createUnAppliedTagsAdapter();
 			}
-			public Object defaultCase(EObject object) {
+			@Override
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -202,8 +233,9 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
+	@Override
 	public Adapter createAdapter(Notifier target) {
-		return (Adapter)modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 
