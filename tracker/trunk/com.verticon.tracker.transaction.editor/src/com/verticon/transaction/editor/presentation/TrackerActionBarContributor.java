@@ -8,7 +8,6 @@ package com.verticon.transaction.editor.presentation;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -128,7 +127,7 @@ public class TrackerActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection createChildActions;
+	protected Collection<IAction> createChildActions;
 
 	/**
 	 * This is the menu manager into which menu contribution items should be added for CreateChild actions.
@@ -145,7 +144,7 @@ public class TrackerActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection createSiblingActions;
+	protected Collection<IAction> createSiblingActions;
 
 	/**
 	 * This is the menu manager into which menu contribution items should be added for CreateSibling actions.
@@ -292,8 +291,8 @@ public class TrackerActionBarContributor
 
 		// Query the new selection for appropriate new child/sibling descriptors
 		//
-		Collection newChildDescriptors = null;
-		Collection newSiblingDescriptors = null;
+		Collection<?> newChildDescriptors = null;
+		Collection<?> newSiblingDescriptors = null;
 
 		ISelection selection = event.getSelection();
 		if (selection instanceof IStructuredSelection && ((IStructuredSelection)selection).size() == 1) {
@@ -327,11 +326,11 @@ public class TrackerActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection generateCreateChildActions(Collection descriptors, ISelection selection) {
-		Collection actions = new ArrayList();
+	protected Collection<IAction> generateCreateChildActions(Collection<?> descriptors, ISelection selection) {
+		Collection<IAction> actions = new ArrayList<IAction>();
 		if (descriptors != null) {
-			for (Iterator i = descriptors.iterator(); i.hasNext(); ) {
-				actions.add(new CreateChildAction(activeEditorPart, selection, i.next()));
+			for (Object descriptor : descriptors) {
+				actions.add(new CreateChildAction(activeEditorPart, selection, descriptor));
 			}
 		}
 		return actions;
@@ -344,11 +343,11 @@ public class TrackerActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection generateCreateSiblingActions(Collection descriptors, ISelection selection) {
-		Collection actions = new ArrayList();
+	protected Collection<IAction> generateCreateSiblingActions(Collection<?> descriptors, ISelection selection) {
+		Collection<IAction> actions = new ArrayList<IAction>();
 		if (descriptors != null) {
-			for (Iterator i = descriptors.iterator(); i.hasNext(); ) {
-				actions.add(new CreateSiblingAction(activeEditorPart, selection, i.next()));
+			for (Object descriptor : descriptors) {
+				actions.add(new CreateSiblingAction(activeEditorPart, selection, descriptor));
 			}
 		}
 		return actions;
@@ -363,10 +362,9 @@ public class TrackerActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void populateManager(IContributionManager manager, Collection actions, String contributionID) {
+	protected void populateManager(IContributionManager manager, Collection<? extends IAction> actions, String contributionID) {
 		if (actions != null) {
-			for (Iterator i = actions.iterator(); i.hasNext(); ) {
-				IAction action = (IAction)i.next();
+			for (IAction action : actions) {
 				if (contributionID != null) {
 					manager.insertBefore(contributionID, action);
 				}
@@ -384,7 +382,7 @@ public class TrackerActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void depopulateManager(IContributionManager manager, Collection actions) {
+	protected void depopulateManager(IContributionManager manager, Collection<? extends IAction> actions) {
 		if (actions != null) {
 			IContributionItem[] items = manager.getItems();
 			for (int i = 0; i < items.length; i++) {
