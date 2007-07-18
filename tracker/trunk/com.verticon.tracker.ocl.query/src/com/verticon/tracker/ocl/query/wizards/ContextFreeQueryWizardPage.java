@@ -17,9 +17,13 @@
 
 package com.verticon.tracker.ocl.query.wizards;
 
-import org.eclipse.emf.query.conditions.eobjects.structuralfeatures.EStructuralFeatureValueGetter;
-import org.eclipse.emf.query.ocl.conditions.OCLConstraintCondition;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
+import com.verticon.tracker.ocl.query.internal.l10n.QueryOCLMessages;
+import org.eclipse.emf.query.ocl.conditions.BooleanOCLCondition;
 import org.eclipse.jface.wizard.WizardPage;
+import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -28,8 +32,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-
-import com.verticon.tracker.ocl.query.internal.l10n.QueryOCLMessages;
 
 
 /**
@@ -45,7 +47,7 @@ class ContextFreeQueryWizardPage
 	private static String CONDITION_DEFAULT = QueryOCLMessages.cfQuery_default_condition;
 	
 	private Text conditionText;
-	private OCLConstraintCondition condition;
+	private BooleanOCLCondition<EClassifier, EClass, EObject> condition;
 	
 	/**
 	 * Initializes me.
@@ -91,10 +93,11 @@ class ContextFreeQueryWizardPage
 		try {
 			String text = conditionText.getText();
 			
-			condition = new OCLConstraintCondition(
+            OCL ocl = OCL.newInstance();
+			condition = new BooleanOCLCondition<EClassifier, EClass, EObject>(
+                ocl.getEnvironment(),
 				text,
-				null,
-				EStructuralFeatureValueGetter.getInstance());
+				null);
 			
 			setErrorMessage(null);
 		} catch (Exception e) {
@@ -105,7 +108,7 @@ class ContextFreeQueryWizardPage
 		return result;
 	}
 	
-	public OCLConstraintCondition getCondition() {
+	public BooleanOCLCondition<EClassifier, EClass, EObject> getCondition() {
 		return condition;
 	}
 	
