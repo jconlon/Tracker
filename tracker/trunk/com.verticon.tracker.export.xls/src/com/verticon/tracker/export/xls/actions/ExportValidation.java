@@ -56,7 +56,6 @@ public class ExportValidation extends AbstractTrackerActionDelegate {
 			IStructuredSelection s = (IStructuredSelection)selection;
 			final Object o = s.getFirstElement();
 			if(o instanceof IFile){
-				InvocationTargetException ite = null;
 				IWorkbenchWindow window = targetPart.getSite().getWorkbenchWindow();
 				
 				try {
@@ -92,7 +91,6 @@ public class ExportValidation extends AbstractTrackerActionDelegate {
 						}
 					});
 				} catch (InvocationTargetException e) {
-					ite=e;
 				
 				} catch (InterruptedException e) {
 					

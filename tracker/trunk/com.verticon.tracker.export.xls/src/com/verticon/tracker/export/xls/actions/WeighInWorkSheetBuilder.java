@@ -66,9 +66,8 @@ public class WeighInWorkSheetBuilder extends AbstractWorkSheetBuilder implements
 	 */
 	@Override
 	public void loadList(Premises premises ){
-		EList events = premises.getEventHistory().getEvents();
-		for (Object object : events) {
-			Event event = (Event)object;
+		EList<Event> events = premises.getEventHistory().getEvents();
+		for (Event event : events) {
 			if(WeighIn.EVENT_CODE ==event.getEventCode()){
 				weighInEvents.add((WeighIn)event);
 			}
