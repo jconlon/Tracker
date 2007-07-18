@@ -6,11 +6,10 @@
  */
 package com.verticon.tracker.tests;
 
-import com.verticon.tracker.AnimalMissing;
+import junit.textui.TestRunner;
+
 import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.TrackerFactory;
-
-import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
@@ -51,7 +50,8 @@ public class FairRegistrationTest extends EventTest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private FairRegistration getFixture() {
+	@Override
+	protected FairRegistration getFixture() {
 		return (FairRegistration)fixture;
 	}
 
@@ -61,6 +61,7 @@ public class FairRegistrationTest extends EventTest {
 	 * @see junit.framework.TestCase#setUp()
 	 * @generated
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		setFixture(TrackerFactory.eINSTANCE.createFairRegistration());
 	}
@@ -71,6 +72,7 @@ public class FairRegistrationTest extends EventTest {
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}

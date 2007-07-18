@@ -8,7 +8,6 @@ package com.verticon.tracker.tests;
 
 import junit.textui.TestRunner;
 
-import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.TrackerFactory;
 
@@ -51,7 +50,8 @@ public class MovedOutTest extends EventTest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private MovedOut getFixture() {
+	@Override
+	protected MovedOut getFixture() {
 		return (MovedOut)fixture;
 	}
 
@@ -61,6 +61,7 @@ public class MovedOutTest extends EventTest {
 	 * @see junit.framework.TestCase#setUp()
 	 * @generated
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		setFixture(TrackerFactory.eINSTANCE.createMovedOut());
 	}
@@ -71,6 +72,7 @@ public class MovedOutTest extends EventTest {
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}

@@ -6,14 +6,12 @@
  */
 package com.verticon.tracker.tests;
 
-import com.verticon.tracker.BisonBreed;
-import com.verticon.tracker.BovineBison;
+import junit.textui.TestRunner;
+
 import com.verticon.tracker.Swine;
 import com.verticon.tracker.SwineBreed;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.util.Species;
-
-import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
@@ -54,7 +52,8 @@ public class SwineTest extends AnimalTest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private Swine getFixture() {
+	@Override
+	protected Swine getFixture() {
 		return (Swine)fixture;
 	}
 
@@ -76,6 +75,7 @@ public class SwineTest extends AnimalTest {
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}

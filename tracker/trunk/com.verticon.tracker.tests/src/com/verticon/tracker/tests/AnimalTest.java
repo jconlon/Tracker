@@ -10,8 +10,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import javax.swing.text.DateFormatter;
-
 import junit.framework.TestCase;
 
 import com.verticon.tracker.Animal;
@@ -19,7 +17,6 @@ import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.util.Age;
-import com.verticon.tracker.util.Species;
 
 /**
  * <!-- begin-user-doc -->
@@ -92,7 +89,7 @@ public abstract class AnimalTest extends TestCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private Animal getFixture() {
+	protected Animal getFixture() {
 		return fixture;
 	}
 

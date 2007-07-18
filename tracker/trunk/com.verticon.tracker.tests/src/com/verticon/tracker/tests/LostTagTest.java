@@ -8,7 +8,6 @@ package com.verticon.tracker.tests;
 
 import junit.textui.TestRunner;
 
-import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.LostTag;
 import com.verticon.tracker.TrackerFactory;
 
@@ -51,7 +50,8 @@ public class LostTagTest extends EventTest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private LostTag getFixture() {
+	@Override
+	protected LostTag getFixture() {
 		return (LostTag)fixture;
 	}
 
@@ -61,6 +61,7 @@ public class LostTagTest extends EventTest {
 	 * @see junit.framework.TestCase#setUp()
 	 * @generated
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		setFixture(TrackerFactory.eINSTANCE.createLostTag());
 	}
@@ -71,6 +72,7 @@ public class LostTagTest extends EventTest {
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}

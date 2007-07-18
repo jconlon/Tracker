@@ -8,8 +8,6 @@ package com.verticon.tracker.tests;
 
 import junit.textui.TestRunner;
 
-import com.verticon.tracker.BeefBreed;
-import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.SheepBreed;
 import com.verticon.tracker.TrackerFactory;
@@ -54,7 +52,8 @@ public class OvineTest extends AnimalTest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private Ovine getFixture() {
+	@Override
+	protected Ovine getFixture() {
 		return (Ovine)fixture;
 	}
 
@@ -76,6 +75,7 @@ public class OvineTest extends AnimalTest {
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}

@@ -10,7 +10,6 @@ import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
 import com.verticon.tracker.EventHistory;
-import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.TrackerFactory;
 
 /**
@@ -70,7 +69,7 @@ public class EventHistoryTest extends TestCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EventHistory getFixture() {
+	protected EventHistory getFixture() {
 		return fixture;
 	}
 
@@ -80,6 +79,7 @@ public class EventHistoryTest extends TestCase {
 	 * @see junit.framework.TestCase#setUp()
 	 * @generated
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		setFixture(TrackerFactory.eINSTANCE.createEventHistory());
 	}
@@ -90,6 +90,7 @@ public class EventHistoryTest extends TestCase {
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}

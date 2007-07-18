@@ -8,7 +8,6 @@ package com.verticon.tracker.tests;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
@@ -94,8 +93,7 @@ public class TrackerExample {
 
 					// Validate the contents of the loaded resource.
 					//
-					for (Iterator j = resource.getContents().iterator(); j.hasNext(); ) {
-						EObject eObject = (EObject)j.next();
+					for (EObject eObject : resource.getContents()) {
 						Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject);
 						if (diagnostic.getSeverity() != Diagnostic.OK) {
 							printDiagnostic(diagnostic, "");
@@ -121,8 +119,8 @@ public class TrackerExample {
 	protected static void printDiagnostic(Diagnostic diagnostic, String indent) {
 		System.out.print(indent);
 		System.out.println(diagnostic.getMessage());
-		for (Iterator i = diagnostic.getChildren().iterator(); i.hasNext(); ) {
-			printDiagnostic((Diagnostic)i.next(), indent + "  ");
+		for (Diagnostic child : diagnostic.getChildren()) {
+			printDiagnostic(child, indent + "  ");
 		}
 	}
 

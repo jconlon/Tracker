@@ -8,7 +8,6 @@ package com.verticon.tracker.tests;
 
 import junit.textui.TestRunner;
 
-import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.Sighting;
 import com.verticon.tracker.TrackerFactory;
 
@@ -51,7 +50,8 @@ public class SightingTest extends EventTest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private Sighting getFixture() {
+	@Override
+	protected Sighting getFixture() {
 		return (Sighting)fixture;
 	}
 
@@ -61,6 +61,7 @@ public class SightingTest extends EventTest {
 	 * @see junit.framework.TestCase#setUp()
 	 * @generated
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		setFixture(TrackerFactory.eINSTANCE.createSighting());
 	}
@@ -71,6 +72,7 @@ public class SightingTest extends EventTest {
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
