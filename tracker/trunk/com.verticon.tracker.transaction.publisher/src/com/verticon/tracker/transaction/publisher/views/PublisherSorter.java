@@ -7,7 +7,7 @@
 
 package com.verticon.tracker.transaction.publisher.views;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.jface.viewers.ViewerComparator;
 
 import com.verticon.tracker.transaction.publisher.Publisher;
 
@@ -25,7 +25,7 @@ import com.verticon.tracker.transaction.publisher.Publisher;
  * <code>AIN</code>: Task percent completed (int).
  * </p>
  */
-public class PublisherSorter extends ViewerSorter {
+public class PublisherSorter extends ViewerComparator {
 
 	/**
 	 * Constructor argument values that indicate to sort items by 
@@ -87,8 +87,9 @@ public class PublisherSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
+	@SuppressWarnings("unchecked")
 	private int compareTemplate(Publisher publisher1, Publisher publisher2) {
-		return collator.compare(publisher1.getTemplate(), publisher2.getTemplate());
+		return getComparator().compare(publisher1.getTemplate(), publisher2.getTemplate());
 		
 	}
 	
@@ -103,8 +104,9 @@ public class PublisherSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
+	@SuppressWarnings("unchecked")
 	private int compareTarget(Publisher publisher1, Publisher publisher2) {
-		return collator.compare(publisher1.getTarget(), publisher2.getTarget());
+		return getComparator().compare(publisher1.getTarget(), publisher2.getTarget());
 		
 	}
 	
@@ -119,8 +121,9 @@ public class PublisherSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
+	@SuppressWarnings("unchecked")
 	private int compareStatus(Publisher publisher1, Publisher publisher2) {
-		return collator.compare(publisher1.getStatus(), publisher2.getStatus());
+		return getComparator().compare(publisher1.getStatus(), publisher2.getStatus());
 		
 	}
 
@@ -135,8 +138,9 @@ public class PublisherSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
+	@SuppressWarnings("unchecked")
 	protected int compareDescriptions(Publisher publisher1, Publisher publisher2) {
-		return collator.compare(publisher1.getDescription(), publisher2.getDescription());
+		return getComparator().compare(publisher1.getDescription(), publisher2.getDescription());
 	}
 
 	/**
@@ -150,8 +154,9 @@ public class PublisherSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
+	@SuppressWarnings("unchecked")
 	protected int compareNames(Publisher publisher1, Publisher publisher2) {
-		return collator.compare(publisher1.getName(), publisher2.getName());
+		return getComparator().compare(publisher1.getName(), publisher2.getName());
 	}
 
 	/**
