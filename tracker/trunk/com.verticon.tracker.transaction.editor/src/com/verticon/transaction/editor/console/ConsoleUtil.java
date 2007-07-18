@@ -42,10 +42,10 @@ import org.eclipse.ui.console.MessageConsoleStream;
 public class ConsoleUtil {
 	
 	/** cache for console name to actual console object mapping*/
-	private static Map nameToConsole = new HashMap();
+	private static Map<String,MessageConsole> nameToConsole = new HashMap<String,MessageConsole>();
 	
 	/** cache for 'console name' to 'stream for that console' mapping */
-	private static Map nameToStream = new HashMap();
+	private static Map<String,MessageConsoleStream> nameToStream = new HashMap<String,MessageConsoleStream>();
 
 	/**
 	 * Registers the console with the Eclipse Console Manager.
@@ -64,7 +64,7 @@ public class ConsoleUtil {
 			nameToConsole.put(name, console );
 		}
 		
-		return (MessageConsole) nameToConsole.get( name);
+		return  nameToConsole.get( name);
 	}
 	
 	
@@ -92,12 +92,10 @@ public class ConsoleUtil {
 		if(nameToStream.get(name)== null){
 			MessageConsole console = registerConsole(name);			
 			MessageConsoleStream defaultStream = console.newMessageStream();
-			
 			nameToStream.put(name, defaultStream);
-			
 		}
 		
-		return (MessageConsoleStream) nameToStream.get(name);
+		return nameToStream.get(name);
 		
 	}
 

@@ -215,7 +215,7 @@ public class TrackerEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection selectionChangedListeners = new ArrayList();
+	protected Collection<ISelectionChangedListener> selectionChangedListeners = new ArrayList<ISelectionChangedListener>();
 
 	/**
 	 * This keeps track of the selection of the editor as a whole.
@@ -265,32 +265,32 @@ public class TrackerEditor
 	 * Resources that have been removed since last activation.
 	 * @generated
 	 */
-	Collection removedResources = new ArrayList();
+	Collection<Resource> removedResources = new ArrayList<Resource>();
 
 	/**
 	 * Resources that have been changed since last activation.
 	 * @generated
 	 */
-	Collection changedResources = new ArrayList();
+	Collection<Resource> changedResources = new ArrayList<Resource>();
 
 	/**
 	 * Resources that have been moved since last activation.
 	 * Maps {@link Resource resource} to {@link URI new URI}
 	 */
-	Map movedResources = new HashMap();
+	Map<Resource, URI> movedResources = new HashMap<Resource, URI>();
 
 	/**
 	 * Resources that have been saved.
 	 * @generated
 	 */
-	Collection savedResources = new ArrayList();
+	Collection<Resource> savedResources = new ArrayList<Resource>();
 	
 	private boolean dirty;
 
 	private IOperationHistoryListener historyListener = new IOperationHistoryListener() {
 		public void historyNotification(final OperationHistoryEvent event) {
 			if (event.getEventType() == OperationHistoryEvent.DONE) {
-				Set affectedResources = ResourceUndoContext.getAffectedResources(
+				Set<?> affectedResources = ResourceUndoContext.getAffectedResources(
 						event.getOperation());
 				
 				if (affectedResources.contains(getResource())) {
@@ -499,7 +499,7 @@ public class TrackerEditor
 
 		// Create an adapter factory that yields item providers.
 		//
-		List factories = new ArrayList();
+		List<AdapterFactory> factories = new ArrayList<AdapterFactory>();
 		factories.add(new ResourceItemProviderAdapterFactory());
 		factories.add(new TrackerItemProviderAdapterFactory());
 		factories.add(new ReflectiveItemProviderAdapterFactory());
@@ -532,8 +532,8 @@ public class TrackerEditor
 	 * 
 	 * @generated
 	 */
-	public void setSelectionToViewer(Collection collection) {
-		final Collection theSelection = collection;
+	public void setSelectionToViewer(Collection<?>  collection) {
+		final Collection<?>  theSelection = collection;
 		// Make sure it's okay.
 		//
 		if (theSelection != null && !theSelection.isEmpty()) {
@@ -688,7 +688,8 @@ public class TrackerEditor
 		try {
 			// Load the resource through the editing domain.
 			//
-			resource = editingDomain.loadResource(URI.createPlatformResourceURI(modelFile.getFile().getFullPath().toString()).toString());
+			resource = editingDomain.loadResource(URI.createPlatformResourceURI(
+					modelFile.getFile().getFullPath().toString(), true).toString());
 		}
 		catch (Exception exception) {
 			TrackerEditorPlugin.INSTANCE.log(exception);
@@ -734,6 +735,8 @@ public class TrackerEditor
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
 	public Object getAdapter(Class key) {
 		if (key.equals(IContentOutlinePage.class)) {
 			return getContentOutlinePage();
@@ -787,7 +790,7 @@ public class TrackerEditor
 					if (!editingDomain.getResourceSet().getResources().isEmpty()) {
 					  // Select the root object in the view.
 					  //
-					  ArrayList selection = new ArrayList();
+					  ArrayList<Resource> selection = new ArrayList<Resource>();
 					  selection.add(getResource());
 					  contentOutlineViewer.setSelection(new StructuredSelection(selection), true);
 					}
@@ -830,7 +833,7 @@ public class TrackerEditor
 		if (propertySheetPage == null) {
 			propertySheetPage =
 				new ExtendedPropertySheetPage(editingDomain) {
-					public void setSelectionToViewer(List selection) {
+					public void setSelectionToViewer(List<?> selection) {
 						TrackerEditor.this.setSelectionToViewer(selection);
 						TrackerEditor.this.setFocus();
 					}
@@ -853,13 +856,13 @@ public class TrackerEditor
 	 */
 	public void handleContentOutlineSelection(ISelection selection) {
 		if (!selection.isEmpty() && selection instanceof IStructuredSelection) {
-			Iterator selectedElements = ((IStructuredSelection)selection).iterator();
+			Iterator<?> selectedElements = ((IStructuredSelection)selection).iterator();
 			if (selectedElements.hasNext()) {
 				// Get the first selected element.
 				//
 				Object selectedElement = selectedElements.next();
 
-				ArrayList selectionList = new ArrayList();
+				ArrayList<Object> selectionList = new ArrayList<Object>();
 				selectionList.add(selectedElement);
 				while (selectedElements.hasNext()) {
 					selectionList.add(selectedElements.next());
@@ -957,7 +960,7 @@ public class TrackerEditor
 		if (path != null) {
 			IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 			if (file != null) {
-				doSaveAs(URI.createPlatformResourceURI(file.getFullPath().toString()), new FileEditorInput(file));
+				doSaveAs(URI.createPlatformResourceURI(file.getFullPath().toString(),true), new FileEditorInput(file));
 			}
 		}
 	}
@@ -1088,7 +1091,7 @@ public class TrackerEditor
 	public void setSelection(ISelection selection) {
 		editorSelection = selection;
 
-		for (Iterator listeners = selectionChangedListeners.iterator(); listeners.hasNext(); ) {
+		for (Iterator<?> listeners = selectionChangedListeners.iterator(); listeners.hasNext(); ) {
 			ISelectionChangedListener listener = (ISelectionChangedListener)listeners.next();
 			listener.selectionChanged(new SelectionChangedEvent(this, selection));
 		}
@@ -1106,7 +1109,7 @@ public class TrackerEditor
 	
 		if (statusLineManager != null) {
 			if (selection instanceof IStructuredSelection) {
-				Collection collection = ((IStructuredSelection)selection).toList();
+				Collection<?> collection = ((IStructuredSelection)selection).toList();
 				switch (collection.size()) {
 					case 0: {
 						statusLineManager.setMessage(getString("_UI_NoObjectSelected")); //$NON-NLS-1$

@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.jface.action.Action;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.ui.IWorkbenchPart;
@@ -112,11 +111,8 @@ public class LongRunningReadAction extends Action {
 		
 		private void readSomething(){
 			ResourceSet rs = domain.getResourceSet();
-			EList resources = rs.getResources();
-			Resource resource =null;
-			for (Object object : resources) {
-			   resource = (Resource)object;
-			 
+			EList<Resource> resources = rs.getResources();
+			for (Resource resource : resources) {
 			   ConsoleUtil.println(
 						CONSOLE,
 						resource.toString());
