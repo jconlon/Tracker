@@ -38,7 +38,8 @@ public abstract class BovineDairyTest extends BovineTest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private BovineDairy getFixture() {
+	@Override
+	protected BovineDairy getFixture() {
 		return (BovineDairy)fixture;
 	}
 

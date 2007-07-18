@@ -8,7 +8,6 @@ package com.verticon.tracker.tests;
 
 import junit.textui.TestRunner;
 
-import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.Exported;
 import com.verticon.tracker.TrackerFactory;
 
@@ -51,7 +50,8 @@ public class ExportedTest extends EventTest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private Exported getFixture() {
+	@Override
+	protected Exported getFixture() {
 		return (Exported)fixture;
 	}
 
@@ -61,6 +61,7 @@ public class ExportedTest extends EventTest {
 	 * @see junit.framework.TestCase#setUp()
 	 * @generated
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		setFixture(TrackerFactory.eINSTANCE.createExported());
 	}
@@ -71,6 +72,7 @@ public class ExportedTest extends EventTest {
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}

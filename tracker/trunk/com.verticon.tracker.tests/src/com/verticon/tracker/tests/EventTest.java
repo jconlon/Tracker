@@ -12,7 +12,6 @@ import java.util.Date;
 
 import junit.framework.TestCase;
 
-import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.Event;
 
 /**
@@ -70,7 +69,7 @@ public abstract class EventTest extends TestCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private Event getFixture() {
+	protected Event getFixture() {
 		return fixture;
 	}
 

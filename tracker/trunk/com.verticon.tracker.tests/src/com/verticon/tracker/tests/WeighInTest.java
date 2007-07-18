@@ -51,7 +51,8 @@ public class WeighInTest extends EventTest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private WeighIn getFixture() {
+	@Override
+	protected WeighIn getFixture() {
 		return (WeighIn)fixture;
 	}
 
@@ -61,6 +62,7 @@ public class WeighInTest extends EventTest {
 	 * @see junit.framework.TestCase#setUp()
 	 * @generated
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		setFixture(TrackerFactory.eINSTANCE.createWeighIn());
 	}
@@ -71,6 +73,7 @@ public class WeighInTest extends EventTest {
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}

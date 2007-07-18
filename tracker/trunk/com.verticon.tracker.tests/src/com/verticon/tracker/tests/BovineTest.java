@@ -38,7 +38,8 @@ public abstract class BovineTest extends AnimalTest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private Bovine getFixture() {
+	@Override
+	protected Bovine getFixture() {
 		return (Bovine)fixture;
 	}
 

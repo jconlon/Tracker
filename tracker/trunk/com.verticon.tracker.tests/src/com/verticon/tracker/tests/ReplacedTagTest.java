@@ -8,7 +8,6 @@ package com.verticon.tracker.tests;
 
 import junit.textui.TestRunner;
 
-import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.TrackerFactory;
 
@@ -51,7 +50,8 @@ public class ReplacedTagTest extends EventTest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private ReplacedTag getFixture() {
+	@Override
+	protected ReplacedTag getFixture() {
 		return (ReplacedTag)fixture;
 	}
 
@@ -61,6 +61,7 @@ public class ReplacedTagTest extends EventTest {
 	 * @see junit.framework.TestCase#setUp()
 	 * @generated
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		setFixture(TrackerFactory.eINSTANCE.createReplacedTag());
 	}
@@ -71,6 +72,7 @@ public class ReplacedTagTest extends EventTest {
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}

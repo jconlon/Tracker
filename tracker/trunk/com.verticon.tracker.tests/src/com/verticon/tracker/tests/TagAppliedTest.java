@@ -8,7 +8,6 @@ package com.verticon.tracker.tests;
 
 import junit.textui.TestRunner;
 
-import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.TagApplied;
 import com.verticon.tracker.TrackerFactory;
 
@@ -51,7 +50,8 @@ public class TagAppliedTest extends EventTest {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private TagApplied getFixture() {
+	@Override
+	protected TagApplied getFixture() {
 		return (TagApplied)fixture;
 	}
 
@@ -61,6 +61,7 @@ public class TagAppliedTest extends EventTest {
 	 * @see junit.framework.TestCase#setUp()
 	 * @generated
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		setFixture(TrackerFactory.eINSTANCE.createTagApplied());
 	}
@@ -71,6 +72,7 @@ public class TagAppliedTest extends EventTest {
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}

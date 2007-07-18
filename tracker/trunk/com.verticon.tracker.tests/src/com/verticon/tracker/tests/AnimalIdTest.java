@@ -75,7 +75,7 @@ public class AnimalIdTest extends TestCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private AnimalId getFixture() {
+	protected AnimalId getFixture() {
 		return fixture;
 	}
 
@@ -85,6 +85,7 @@ public class AnimalIdTest extends TestCase {
 	 * @see junit.framework.TestCase#setUp()
 	 * @generated
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		setFixture(TrackerFactory.eINSTANCE.createAnimalId());
 	}
@@ -95,6 +96,7 @@ public class AnimalIdTest extends TestCase {
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}

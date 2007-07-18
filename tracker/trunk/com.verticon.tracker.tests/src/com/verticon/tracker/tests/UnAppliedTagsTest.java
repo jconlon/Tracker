@@ -72,7 +72,7 @@ public class UnAppliedTagsTest extends TestCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private UnAppliedTags getFixture() {
+	protected UnAppliedTags getFixture() {
 		return fixture;
 	}
 
@@ -82,6 +82,7 @@ public class UnAppliedTagsTest extends TestCase {
 	 * @see junit.framework.TestCase#setUp()
 	 * @generated
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		setFixture(TrackerFactory.eINSTANCE.createUnAppliedTags());
 	}
@@ -92,6 +93,7 @@ public class UnAppliedTagsTest extends TestCase {
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}

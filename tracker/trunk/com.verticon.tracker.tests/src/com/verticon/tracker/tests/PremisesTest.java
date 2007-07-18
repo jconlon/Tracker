@@ -6,18 +6,10 @@
  */
 package com.verticon.tracker.tests;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.Date;
-
-
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
-import com.verticon.tracker.Animal;
-import com.verticon.tracker.Animals;
 import com.verticon.tracker.Premises;
-import com.verticon.tracker.Sex;
 import com.verticon.tracker.TrackerFactory;
 
 /**
@@ -77,7 +69,7 @@ public class PremisesTest extends TestCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private Premises getFixture() {
+	protected Premises getFixture() {
 		return fixture;
 	}
 
@@ -87,6 +79,7 @@ public class PremisesTest extends TestCase {
 	 * @see junit.framework.TestCase#setUp()
 	 * @generated
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		setFixture(TrackerFactory.eINSTANCE.createPremises());
 	}
@@ -97,6 +90,7 @@ public class PremisesTest extends TestCase {
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}

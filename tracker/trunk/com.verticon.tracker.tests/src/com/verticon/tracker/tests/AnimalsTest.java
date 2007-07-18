@@ -14,10 +14,7 @@ import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Animals;
-import com.verticon.tracker.BovineBeef;
-import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.TrackerFactory;
 
@@ -78,7 +75,7 @@ public class AnimalsTest extends TestCase {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private Animals getFixture() {
+	protected Animals getFixture() {
 		return fixture;
 	}
 
@@ -88,6 +85,7 @@ public class AnimalsTest extends TestCase {
 	 * @see junit.framework.TestCase#setUp()
 	 * @generated
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		setFixture(TrackerFactory.eINSTANCE.createAnimals());
 	}
@@ -98,6 +96,7 @@ public class AnimalsTest extends TestCase {
 	 * @see junit.framework.TestCase#tearDown()
 	 * @generated
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
