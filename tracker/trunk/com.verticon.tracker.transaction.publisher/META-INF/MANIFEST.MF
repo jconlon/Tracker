@@ -5,7 +5,6 @@ Bundle-SymbolicName: com.verticon.tracker.transaction.publisher;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: com.verticon.tracker.transaction.publisher.TrackerFileTailPublisherPlugin
 Bundle-Vendor: Verticon, Inc.
-Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.emf.transaction,

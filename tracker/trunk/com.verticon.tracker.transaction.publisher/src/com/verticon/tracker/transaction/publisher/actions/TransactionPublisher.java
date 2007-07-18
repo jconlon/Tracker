@@ -103,7 +103,7 @@ public class TransactionPublisher {
         ResourceSet resourceSet = new ResourceSetImpl();
 
          URI uri = URI.createPlatformResourceURI(file.getFullPath()
-                 .toString());
+                 .toString(),true);
          Resource resource = resourceSet.createResource(uri);
          if (!resource.isLoaded()) {
              resource.load(null);
@@ -119,10 +119,8 @@ public class TransactionPublisher {
 	 */
 	public void publish(Long tag){
 		ResourceSet rs = domain.getResourceSet();
-		EList resources = rs.getResources();
-		Resource resource =null;
-		for (Object object : resources) {
-		   resource = (Resource)object;
+		EList<Resource> resources = rs.getResources();
+		for (Resource resource : resources) {
 		   if(resources.size()>1){
 				log(new Date()+ "\tprocessing "+resource.toString());
 			}
