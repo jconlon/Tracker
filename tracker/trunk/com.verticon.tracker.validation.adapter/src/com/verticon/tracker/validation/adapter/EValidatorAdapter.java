@@ -62,7 +62,7 @@ public class EValidatorAdapter
 	}
 
 	public boolean validate(EObject eObject, DiagnosticChain diagnostics,
-			Map context) {
+			Map<Object, Object> context) {
 		return validate(eObject.eClass(), eObject, diagnostics, context);
 	}
 
@@ -70,7 +70,7 @@ public class EValidatorAdapter
 	 * Implements validation by delegation to the EMF validation framework.
 	 */
 	public boolean validate(EClass eClass, EObject eObject,
-			DiagnosticChain diagnostics, Map context) {
+			DiagnosticChain diagnostics, Map<Object, Object> context) {
 		// first, do whatever the basic EcoreValidator does
 		super.validate(eClass, eObject, diagnostics, context);
 		
@@ -103,7 +103,7 @@ public class EValidatorAdapter
 	 * {@link EObject}s that hold their values.
 	 */
 	public boolean validate(EDataType eDataType, Object value,
-			DiagnosticChain diagnostics, Map context) {
+			DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return super.validate(eDataType, value, diagnostics, context);
 	}
 	
@@ -115,7 +115,7 @@ public class EValidatorAdapter
 	 * @param context the context (may be <code>null</code>)
 	 * @param status the element's validation status
 	 */
-	private void processed(EObject eObject, Map context, IStatus status) {
+	private void processed(EObject eObject, Map<Object, Object> context, IStatus status) {
 		if (context != null) {
 			context.put(eObject, status);
 		}
@@ -132,7 +132,7 @@ public class EValidatorAdapter
 	 *     the <code>eObject</code> or one of its containers has already been
 	 *     validated;  <code>false</code>, otherwise
 	 */
-	private boolean hasProcessed(EObject eObject, Map context) {
+	private boolean hasProcessed(EObject eObject, Map<Object, Object> context) {
 		boolean result = false;
 		
 		if (context != null) {
