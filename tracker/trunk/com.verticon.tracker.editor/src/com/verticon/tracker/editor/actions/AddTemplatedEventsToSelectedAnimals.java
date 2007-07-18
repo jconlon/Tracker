@@ -180,9 +180,12 @@ public class AddTemplatedEventsToSelectedAnimals implements IObjectActionDelegat
 	public static final Collection<Animal> getAnimals(ISelection selection) {
 		ArrayList<Animal> selectedAnimals = new ArrayList<Animal>();
 		if (selection instanceof IStructuredSelection) {
-			for (Iterator iter = ((IStructuredSelection) selection).iterator(); iter
+			for (Iterator<?> iter = ((IStructuredSelection) selection).iterator(); iter
 					.hasNext();) {
-				selectedAnimals.add((Animal) iter.next());
+				Object o = iter.next();
+				if(o instanceof Animal){
+					selectedAnimals.add((Animal) iter.next());
+				}
 			}
 		}
 		return selectedAnimals;

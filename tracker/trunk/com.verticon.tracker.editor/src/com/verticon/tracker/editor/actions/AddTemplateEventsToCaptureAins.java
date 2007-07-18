@@ -124,7 +124,7 @@ public class AddTemplateEventsToCaptureAins extends AbstractAddAsEvent {
 		           ResourceSet resourceSet = new ResourceSetImpl();
 		
 		            URI uri = URI.createPlatformResourceURI(file.getFullPath()
-		                    .toString());
+		                    .toString(),true);
 		            Resource resource = resourceSet.createResource(uri);
 		            if (!resource.isLoaded()) {
 		                resource.load(null);

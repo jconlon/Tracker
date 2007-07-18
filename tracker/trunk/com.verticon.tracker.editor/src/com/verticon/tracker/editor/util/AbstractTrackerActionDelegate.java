@@ -3,7 +3,6 @@ package com.verticon.tracker.editor.util;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -42,7 +41,7 @@ public abstract class AbstractTrackerActionDelegate implements IObjectActionDele
 	    ResourceSet resourceSet = new ResourceSetImpl();
 	
 	     URI uri = URI.createPlatformResourceURI(file.getFullPath()
-	             .toString());
+	             .toString(),true);
 	     Resource resource = resourceSet.createResource(uri);
 	     if (!resource.isLoaded()) {
 	         resource.load(null);
@@ -143,9 +142,7 @@ public abstract class AbstractTrackerActionDelegate implements IObjectActionDele
 
 	protected boolean validate(Resource resource) {
 		 this.validationDiagnostics.clear();
-		
-		for (Iterator j = resource.getContents().iterator(); j.hasNext(); ) {
-			EObject eObject = (EObject)j.next();
+		for (EObject eObject : resource.getContents()) {
 			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject);
 			if (diagnostic.getSeverity() != Diagnostic.OK) {
 				validationDiagnostics.add(diagnostic);

@@ -11,7 +11,6 @@ import java.util.Date;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 
-import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.util.CommonUtilities;
 
@@ -88,10 +87,11 @@ public class EventSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
+	@SuppressWarnings("unchecked")
 	private int compareAins(Event event1, Event event2) {
 		String ain1 = event1.getAin()==null?"":event1.getAin().getIdNumber();
 		String ain2 = event2.getAin()==null?"":event2.getAin().getIdNumber();
-		return collator.compare(
+		return getComparator().compare(
 				ain1, 
 				ain2);
 		
@@ -126,8 +126,9 @@ public class EventSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
+	@SuppressWarnings("unchecked")
 	protected int compareNames(Event event1, Event event2) {
-		return collator.compare(event1.getClass().getSimpleName(), 
+		return getComparator().compare(event1.getClass().getSimpleName(), 
 				event2.getClass().getSimpleName());
 	}
 

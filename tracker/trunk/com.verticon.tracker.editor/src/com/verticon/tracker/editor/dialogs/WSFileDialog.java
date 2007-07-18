@@ -173,7 +173,7 @@ public class WSFileDialog extends Dialog {
 		if (!selection.isEmpty()) {
 			if (selection instanceof IStructuredSelection) {
 				IStructuredSelection sel = (IStructuredSelection)selection;
-				for (Iterator i = sel.iterator();i.hasNext();) {
+				for (Iterator<?> i = sel.iterator();i.hasNext();) {
 					Object next = i.next();
 					IResource resource= null;			
 					if (next instanceof IResource)
