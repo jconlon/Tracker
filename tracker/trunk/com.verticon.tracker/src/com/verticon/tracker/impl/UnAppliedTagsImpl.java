@@ -6,25 +6,19 @@
  */
 package com.verticon.tracker.impl;
 
-import com.verticon.tracker.AnimalId;
-import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.UnAppliedTags;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.verticon.tracker.AnimalId;
+import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.UnAppliedTags;
 
 /**
  * <!-- begin-user-doc -->
@@ -55,7 +49,7 @@ public class UnAppliedTagsImpl extends EObjectImpl implements UnAppliedTags {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList ain;
+	protected EList<AnimalId> ain;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -71,6 +65,7 @@ public class UnAppliedTagsImpl extends EObjectImpl implements UnAppliedTags {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.UN_APPLIED_TAGS;
 	}
@@ -80,9 +75,9 @@ public class UnAppliedTagsImpl extends EObjectImpl implements UnAppliedTags {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getAin() {
+	public EList<AnimalId> getAin() {
 		if (ain == null) {
-			ain = new EObjectContainmentEList(AnimalId.class, this, TrackerPackage.UN_APPLIED_TAGS__AIN);
+			ain = new EObjectContainmentEList<AnimalId>(AnimalId.class, this, TrackerPackage.UN_APPLIED_TAGS__AIN);
 		}
 		return ain;
 	}
@@ -92,10 +87,11 @@ public class UnAppliedTagsImpl extends EObjectImpl implements UnAppliedTags {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case TrackerPackage.UN_APPLIED_TAGS__AIN:
-				return ((InternalEList)getAin()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getAin()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -105,6 +101,7 @@ public class UnAppliedTagsImpl extends EObjectImpl implements UnAppliedTags {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.UN_APPLIED_TAGS__AIN:
@@ -118,11 +115,13 @@ public class UnAppliedTagsImpl extends EObjectImpl implements UnAppliedTags {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackerPackage.UN_APPLIED_TAGS__AIN:
 				getAin().clear();
-				getAin().addAll((Collection)newValue);
+				getAin().addAll((Collection<? extends AnimalId>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -133,6 +132,7 @@ public class UnAppliedTagsImpl extends EObjectImpl implements UnAppliedTags {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.UN_APPLIED_TAGS__AIN:
@@ -147,6 +147,7 @@ public class UnAppliedTagsImpl extends EObjectImpl implements UnAppliedTags {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.UN_APPLIED_TAGS__AIN:

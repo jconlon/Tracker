@@ -49,7 +49,7 @@ public class AnimalsImpl extends EObjectImpl implements Animals {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList animal;
+	protected EList<Animal> animal;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -65,6 +65,7 @@ public class AnimalsImpl extends EObjectImpl implements Animals {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.ANIMALS;
 	}
@@ -74,9 +75,9 @@ public class AnimalsImpl extends EObjectImpl implements Animals {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getAnimal() {
+	public EList<Animal> getAnimal() {
 		if (animal == null) {
-			animal = new EObjectContainmentEList(Animal.class, this, TrackerPackage.ANIMALS__ANIMAL);
+			animal = new EObjectContainmentEList<Animal>(Animal.class, this, TrackerPackage.ANIMALS__ANIMAL);
 		}
 		return animal;
 	}
@@ -86,10 +87,11 @@ public class AnimalsImpl extends EObjectImpl implements Animals {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case TrackerPackage.ANIMALS__ANIMAL:
-				return ((InternalEList)getAnimal()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getAnimal()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -99,6 +101,7 @@ public class AnimalsImpl extends EObjectImpl implements Animals {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.ANIMALS__ANIMAL:
@@ -112,11 +115,13 @@ public class AnimalsImpl extends EObjectImpl implements Animals {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackerPackage.ANIMALS__ANIMAL:
 				getAnimal().clear();
-				getAnimal().addAll((Collection)newValue);
+				getAnimal().addAll((Collection<? extends Animal>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -127,6 +132,7 @@ public class AnimalsImpl extends EObjectImpl implements Animals {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.ANIMALS__ANIMAL:
@@ -141,6 +147,7 @@ public class AnimalsImpl extends EObjectImpl implements Animals {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.ANIMALS__ANIMAL:

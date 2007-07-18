@@ -44,6 +44,7 @@ public class SlaughteredImpl extends EventImpl implements Slaughtered {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.SLAUGHTERED;
 	}

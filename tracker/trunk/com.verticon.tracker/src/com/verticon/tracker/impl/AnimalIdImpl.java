@@ -80,6 +80,7 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.ANIMAL_ID;
 	}
@@ -129,6 +130,7 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.ANIMAL_ID__ID_NUMBER:
@@ -144,6 +146,7 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackerPackage.ANIMAL_ID__ID_NUMBER:
@@ -158,6 +161,7 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.ANIMAL_ID__ID_NUMBER:
@@ -172,6 +176,7 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.ANIMAL_ID__ID_NUMBER:
@@ -187,6 +192,7 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

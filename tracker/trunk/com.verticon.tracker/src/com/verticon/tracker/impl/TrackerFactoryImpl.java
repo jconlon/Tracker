@@ -102,6 +102,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case TrackerPackage.ANIMAL_ID: return createAnimalId();
@@ -139,6 +140,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
 			case TrackerPackage.SEX:
@@ -177,6 +179,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
 			case TrackerPackage.SEX:
@@ -773,6 +776,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * @deprecated
 	 * @generated
 	 */
+	@Deprecated
 	public static TrackerPackage getPackage() {
 		return TrackerPackage.eINSTANCE;
 	}

@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.AbstractEnumerator;
+import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +21,35 @@ import org.eclipse.emf.common.util.AbstractEnumerator;
  * @model
  * @generated
  */
-public final class BisonBreed extends AbstractEnumerator {
+public enum BisonBreed implements Enumerator
+{
+	/**
+	 * The '<em><b>WO</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #WO
+	 * @generated
+	 * @ordered
+	 */
+	WO_LITERAL(0, "WO", "WOOD BISON"),
+	/**
+	 * The '<em><b>PB</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PB
+	 * @generated
+	 * @ordered
+	 */
+	PB_LITERAL(1, "PB", "PLAINS BISON"),
+	/**
+	 * The '<em><b>Unspecified</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #UNSPECIFIED
+	 * @generated
+	 * @ordered
+	 */
+	UNSPECIFIED_LITERAL(2, "Unspecified", "Unspecified");
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,36 +103,6 @@ public final class BisonBreed extends AbstractEnumerator {
 	public static final int UNSPECIFIED = 2;
 
 	/**
-	 * The '<em><b>WO</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #WO
-	 * @generated
-	 * @ordered
-	 */
-	public static final BisonBreed WO_LITERAL = new BisonBreed(WO, "WO", "WOOD BISON");
-
-	/**
-	 * The '<em><b>PB</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #PB
-	 * @generated
-	 * @ordered
-	 */
-	public static final BisonBreed PB_LITERAL = new BisonBreed(PB, "PB", "PLAINS BISON");
-
-	/**
-	 * The '<em><b>Unspecified</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #UNSPECIFIED
-	 * @generated
-	 * @ordered
-	 */
-	public static final BisonBreed UNSPECIFIED_LITERAL = new BisonBreed(UNSPECIFIED, "Unspecified", "Unspecified");
-
-	/**
 	 * An array of all the '<em><b>Bison Breed</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -123,7 +121,7 @@ public final class BisonBreed extends AbstractEnumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<BisonBreed> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Bison Breed</b></em>' literal with the specified literal value.
@@ -173,13 +171,73 @@ public final class BisonBreed extends AbstractEnumerator {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final int value;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String name;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String literal;
+
+	/**
 	 * Only this class can construct instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private BisonBreed(int value, String name, String literal) {
-		super(value, name, literal);
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
 	}
 
-} //BisonBreed
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getValue() {
+	  return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+	  return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLiteral() {
+	  return literal;
+	}
+
+	/**
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return literal;
+	}
+}

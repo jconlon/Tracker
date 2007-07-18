@@ -54,9 +54,8 @@ public class EventFactory {
 	}
     
     public static final AnimalId findAnimalId(Long tag, Premises premises){
-		List elist = premises.getAnimals().getAnimal();
-		for (Object object : elist) {
-			Animal animal = (Animal)object;
+		List<Animal> elist = premises.getAnimals().getAnimal();
+		for (Animal animal : elist) {
 			if(animal.getIdNumber().longValue()==tag){
 				return animal.getAin();
 			}

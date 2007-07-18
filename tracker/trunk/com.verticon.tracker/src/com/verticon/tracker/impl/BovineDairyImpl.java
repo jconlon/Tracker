@@ -69,6 +69,7 @@ public abstract class BovineDairyImpl extends BovineImpl implements BovineDairy 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.BOVINE_DAIRY;
 	}
@@ -99,6 +100,7 @@ public abstract class BovineDairyImpl extends BovineImpl implements BovineDairy 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.BOVINE_DAIRY__DAIRY_BREED:
@@ -112,6 +114,7 @@ public abstract class BovineDairyImpl extends BovineImpl implements BovineDairy 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackerPackage.BOVINE_DAIRY__DAIRY_BREED:
@@ -126,6 +129,7 @@ public abstract class BovineDairyImpl extends BovineImpl implements BovineDairy 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.BOVINE_DAIRY__DAIRY_BREED:
@@ -140,6 +144,7 @@ public abstract class BovineDairyImpl extends BovineImpl implements BovineDairy 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.BOVINE_DAIRY__DAIRY_BREED:
@@ -153,6 +158,7 @@ public abstract class BovineDairyImpl extends BovineImpl implements BovineDairy 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

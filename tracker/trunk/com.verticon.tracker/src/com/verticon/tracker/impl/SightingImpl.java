@@ -44,6 +44,7 @@ public class SightingImpl extends EventImpl implements Sighting {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.SIGHTING;
 	}

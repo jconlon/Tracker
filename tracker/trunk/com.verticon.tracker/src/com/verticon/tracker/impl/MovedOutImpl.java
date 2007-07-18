@@ -70,6 +70,7 @@ public class MovedOutImpl extends EventImpl implements MovedOut {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.MOVED_OUT;
 	}
@@ -109,6 +110,7 @@ public class MovedOutImpl extends EventImpl implements MovedOut {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.MOVED_OUT__DESTINATION_PIN:
@@ -122,6 +124,7 @@ public class MovedOutImpl extends EventImpl implements MovedOut {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackerPackage.MOVED_OUT__DESTINATION_PIN:
@@ -136,6 +139,7 @@ public class MovedOutImpl extends EventImpl implements MovedOut {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.MOVED_OUT__DESTINATION_PIN:
@@ -150,6 +154,7 @@ public class MovedOutImpl extends EventImpl implements MovedOut {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.MOVED_OUT__DESTINATION_PIN:
@@ -163,6 +168,7 @@ public class MovedOutImpl extends EventImpl implements MovedOut {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

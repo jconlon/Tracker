@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.AbstractEnumerator;
+import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +21,152 @@ import org.eclipse.emf.common.util.AbstractEnumerator;
  * @model
  * @generated
  */
-public final class SwineBreed extends AbstractEnumerator {
+public enum SwineBreed implements Enumerator
+{
+	/**
+	 * The '<em><b>BK</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BK
+	 * @generated
+	 * @ordered
+	 */
+	BK_LITERAL(0, "BK", "BERKSHIRE"),
+	/**
+	 * The '<em><b>CW</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CW
+	 * @generated
+	 * @ordered
+	 */
+	CW_LITERAL(1, "CW", "CHESTER WHITE"),
+	/**
+	 * The '<em><b>DU</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DU
+	 * @generated
+	 * @ordered
+	 */
+	DU_LITERAL(2, "DU", "DUROC"),
+	/**
+	 * The '<em><b>HA</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #HA
+	 * @generated
+	 * @ordered
+	 */
+	HA_LITERAL(3, "HA", "HAMPSHIRE"),
+	/**
+	 * The '<em><b>LC</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LC
+	 * @generated
+	 * @ordered
+	 */
+	LC_LITERAL(4, "LC", "LACOMBE"),
+	/**
+	 * The '<em><b>LA</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LA
+	 * @generated
+	 * @ordered
+	 */
+	LA_LITERAL(5, "LA", "LANDRACE"),
+	/**
+	 * The '<em><b>LB</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LB
+	 * @generated
+	 * @ordered
+	 */
+	LB_LITERAL(6, "LB", "LARGE BLACK (British)"),
+	/**
+	 * The '<em><b>LW</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LW
+	 * @generated
+	 * @ordered
+	 */
+	LW_LITERAL(7, "LW", "LARGE WHITE"),
+	/**
+	 * The '<em><b>PE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PE
+	 * @generated
+	 * @ordered
+	 */
+	PE_LITERAL(8, "PE", "PIETRAIN"),
+	/**
+	 * The '<em><b>PC</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PC
+	 * @generated
+	 * @ordered
+	 */
+	PC_LITERAL(9, "PC", "POLAND CHINA"),
+	/**
+	 * The '<em><b>RW</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RW
+	 * @generated
+	 * @ordered
+	 */
+	RW_LITERAL(10, "RW", "RED WATTLE"),
+	/**
+	 * The '<em><b>SO</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SO
+	 * @generated
+	 * @ordered
+	 */
+	SO_LITERAL(11, "SO", "SPOTTED"),
+	/**
+	 * The '<em><b>TM</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TM
+	 * @generated
+	 * @ordered
+	 */
+	TM_LITERAL(12, "TM", "TAMWORTH"),
+	/**
+	 * The '<em><b>WS</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #WS
+	 * @generated
+	 * @ordered
+	 */
+	WS_LITERAL(13, "WS", "WESSEX SADDLEBACK"),
+	/**
+	 * The '<em><b>YO</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #YO
+	 * @generated
+	 * @ordered
+	 */
+	YO_LITERAL(14, "YO", "YORKSHIRE"),
+	/**
+	 * The '<em><b>Unspecified</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #UNSPECIFIED
+	 * @generated
+	 * @ordered
+	 */
+	UNSPECIFIED_LITERAL(15, "Unspecified", "Unspecified");
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -270,166 +415,6 @@ public final class SwineBreed extends AbstractEnumerator {
 	public static final int UNSPECIFIED = 15;
 
 	/**
-	 * The '<em><b>BK</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BK
-	 * @generated
-	 * @ordered
-	 */
-	public static final SwineBreed BK_LITERAL = new SwineBreed(BK, "BK", "BERKSHIRE");
-
-	/**
-	 * The '<em><b>CW</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CW
-	 * @generated
-	 * @ordered
-	 */
-	public static final SwineBreed CW_LITERAL = new SwineBreed(CW, "CW", "CHESTER WHITE");
-
-	/**
-	 * The '<em><b>DU</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #DU
-	 * @generated
-	 * @ordered
-	 */
-	public static final SwineBreed DU_LITERAL = new SwineBreed(DU, "DU", "DUROC");
-
-	/**
-	 * The '<em><b>HA</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #HA
-	 * @generated
-	 * @ordered
-	 */
-	public static final SwineBreed HA_LITERAL = new SwineBreed(HA, "HA", "HAMPSHIRE");
-
-	/**
-	 * The '<em><b>LC</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LC
-	 * @generated
-	 * @ordered
-	 */
-	public static final SwineBreed LC_LITERAL = new SwineBreed(LC, "LC", "LACOMBE");
-
-	/**
-	 * The '<em><b>LA</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LA
-	 * @generated
-	 * @ordered
-	 */
-	public static final SwineBreed LA_LITERAL = new SwineBreed(LA, "LA", "LANDRACE");
-
-	/**
-	 * The '<em><b>LB</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LB
-	 * @generated
-	 * @ordered
-	 */
-	public static final SwineBreed LB_LITERAL = new SwineBreed(LB, "LB", "LARGE BLACK (British)");
-
-	/**
-	 * The '<em><b>LW</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LW
-	 * @generated
-	 * @ordered
-	 */
-	public static final SwineBreed LW_LITERAL = new SwineBreed(LW, "LW", "LARGE WHITE");
-
-	/**
-	 * The '<em><b>PE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #PE
-	 * @generated
-	 * @ordered
-	 */
-	public static final SwineBreed PE_LITERAL = new SwineBreed(PE, "PE", "PIETRAIN");
-
-	/**
-	 * The '<em><b>PC</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #PC
-	 * @generated
-	 * @ordered
-	 */
-	public static final SwineBreed PC_LITERAL = new SwineBreed(PC, "PC", "POLAND CHINA");
-
-	/**
-	 * The '<em><b>RW</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RW
-	 * @generated
-	 * @ordered
-	 */
-	public static final SwineBreed RW_LITERAL = new SwineBreed(RW, "RW", "RED WATTLE");
-
-	/**
-	 * The '<em><b>SO</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SO
-	 * @generated
-	 * @ordered
-	 */
-	public static final SwineBreed SO_LITERAL = new SwineBreed(SO, "SO", "SPOTTED");
-
-	/**
-	 * The '<em><b>TM</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #TM
-	 * @generated
-	 * @ordered
-	 */
-	public static final SwineBreed TM_LITERAL = new SwineBreed(TM, "TM", "TAMWORTH");
-
-	/**
-	 * The '<em><b>WS</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #WS
-	 * @generated
-	 * @ordered
-	 */
-	public static final SwineBreed WS_LITERAL = new SwineBreed(WS, "WS", "WESSEX SADDLEBACK");
-
-	/**
-	 * The '<em><b>YO</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #YO
-	 * @generated
-	 * @ordered
-	 */
-	public static final SwineBreed YO_LITERAL = new SwineBreed(YO, "YO", "YORKSHIRE");
-
-	/**
-	 * The '<em><b>Unspecified</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #UNSPECIFIED
-	 * @generated
-	 * @ordered
-	 */
-	public static final SwineBreed UNSPECIFIED_LITERAL = new SwineBreed(UNSPECIFIED, "Unspecified", "Unspecified");
-
-	/**
 	 * An array of all the '<em><b>Swine Breed</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -461,7 +446,7 @@ public final class SwineBreed extends AbstractEnumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<SwineBreed> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Swine Breed</b></em>' literal with the specified literal value.
@@ -524,13 +509,73 @@ public final class SwineBreed extends AbstractEnumerator {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final int value;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String name;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String literal;
+
+	/**
 	 * Only this class can construct instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private SwineBreed(int value, String name, String literal) {
-		super(value, name, literal);
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
 	}
 
-} //SwineBreed
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getValue() {
+	  return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+	  return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLiteral() {
+	  return literal;
+	}
+
+	/**
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return literal;
+	}
+}

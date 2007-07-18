@@ -70,6 +70,7 @@ public class ReplacedTagImpl extends EventImpl implements ReplacedTag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.REPLACED_TAG;
 	}
@@ -109,6 +110,7 @@ public class ReplacedTagImpl extends EventImpl implements ReplacedTag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.REPLACED_TAG__OLD_AIN:
@@ -122,6 +124,7 @@ public class ReplacedTagImpl extends EventImpl implements ReplacedTag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackerPackage.REPLACED_TAG__OLD_AIN:
@@ -136,6 +139,7 @@ public class ReplacedTagImpl extends EventImpl implements ReplacedTag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.REPLACED_TAG__OLD_AIN:
@@ -150,6 +154,7 @@ public class ReplacedTagImpl extends EventImpl implements ReplacedTag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.REPLACED_TAG__OLD_AIN:
@@ -163,6 +168,7 @@ public class ReplacedTagImpl extends EventImpl implements ReplacedTag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

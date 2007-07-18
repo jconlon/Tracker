@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.AbstractEnumerator;
+import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +21,1115 @@ import org.eclipse.emf.common.util.AbstractEnumerator;
  * @model
  * @generated
  */
-public final class BeefBreed extends AbstractEnumerator {
+public enum BeefBreed implements Enumerator
+{
+	/**
+	 * The '<em><b>AN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #AN
+	 * @generated
+	 * @ordered
+	 */
+	AN_LITERAL(0, "AN", "ABERDEEN ANGUS"),
+	/**
+	 * The '<em><b>AB</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #AB
+	 * @generated
+	 * @ordered
+	 */
+	AB_LITERAL(1, "AB", "ABONDANCE"),
+	/**
+	 * The '<em><b>AF</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #AF
+	 * @generated
+	 * @ordered
+	 */
+	AF_LITERAL(2, "AF", "AFRICANDER"),
+	/**
+	 * The '<em><b>AL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #AL
+	 * @generated
+	 * @ordered
+	 */
+	AL_LITERAL(3, "AL", "ALPINE"),
+	/**
+	 * The '<em><b>AE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #AE
+	 * @generated
+	 * @ordered
+	 */
+	AE_LITERAL(4, "AE", "AMERICAN BREED"),
+	/**
+	 * The '<em><b>AM</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #AM
+	 * @generated
+	 * @ordered
+	 */
+	AM_LITERAL(5, "AM", "AMERIFAX"),
+	/**
+	 * The '<em><b>AK</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #AK
+	 * @generated
+	 * @ordered
+	 */
+	AK_LITERAL(6, "AK", "ANKINA"),
+	/**
+	 * The '<em><b>AW</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #AW
+	 * @generated
+	 * @ordered
+	 */
+	AW_LITERAL(7, "AW", "ANKOLE-WATUSI"),
+	/**
+	 * The '<em><b>AU</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #AU
+	 * @generated
+	 * @ordered
+	 */
+	AU_LITERAL(8, "AU", "AUBRAC"),
+	/**
+	 * The '<em><b>BA</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BA
+	 * @generated
+	 * @ordered
+	 */
+	BA_LITERAL(9, "BA", "BARZONA"),
+	/**
+	 * The '<em><b>BF</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BF
+	 * @generated
+	 * @ordered
+	 */
+	BF_LITERAL(10, "BF", "BEEF FRIESIAN"),
+	/**
+	 * The '<em><b>BE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BE
+	 * @generated
+	 * @ordered
+	 */
+	BE_LITERAL(11, "BE", "BEEFALO"),
+	/**
+	 * The '<em><b>BM</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BM
+	 * @generated
+	 * @ordered
+	 */
+	BM_LITERAL(12, "BM", "BEEFMASTER"),
+	/**
+	 * The '<em><b>BB</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BB
+	 * @generated
+	 * @ordered
+	 */
+	BB_LITERAL(13, "BB", "BELIGIAN BLUE"),
+	/**
+	 * The '<em><b>BG</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BG
+	 * @generated
+	 * @ordered
+	 */
+	BG_LITERAL(14, "BG", "BELTED GALLOWAY"),
+	/**
+	 * The '<em><b>BD</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BD
+	 * @generated
+	 * @ordered
+	 */
+	BD_LITERAL(15, "BD", "BLONDE D=AQUITAINE"),
+	/**
+	 * The '<em><b>NS</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NS
+	 * @generated
+	 * @ordered
+	 */
+	NS_LITERAL(16, "NS", "BONSMARA"),
+	/**
+	 * The '<em><b>BO</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BO
+	 * @generated
+	 * @ordered
+	 */
+	BO_LITERAL(17, "BO", "BRAFORD"),
+	/**
+	 * The '<em><b>BR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BR
+	 * @generated
+	 * @ordered
+	 */
+	BR_LITERAL(18, "BR", "BRAHMAN"),
+	/**
+	 * The '<em><b>BH</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BH
+	 * @generated
+	 * @ordered
+	 */
+	BH_LITERAL(19, "BH", "BRAHMENTAL"),
+	/**
+	 * The '<em><b>BI</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BI
+	 * @generated
+	 * @ordered
+	 */
+	BI_LITERAL(20, "BI", "BRAHMOUSIN"),
+	/**
+	 * The '<em><b>BL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BL
+	 * @generated
+	 * @ordered
+	 */
+	BL_LITERAL(21, "BL", "BRALER"),
+	/**
+	 * The '<em><b>BN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BN
+	 * @generated
+	 * @ordered
+	 */
+	BN_LITERAL(22, "BN", "BRANGUS"),
+	/**
+	 * The '<em><b>BU</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BU
+	 * @generated
+	 * @ordered
+	 */
+	BU_LITERAL(23, "BU", "BRAUNVIEH"),
+	/**
+	 * The '<em><b>BW</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BW
+	 * @generated
+	 * @ordered
+	 */
+	BW_LITERAL(24, "BW", "BRITISH WHITE"),
+	/**
+	 * The '<em><b>SB</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SB
+	 * @generated
+	 * @ordered
+	 */
+	SB_LITERAL(25, "SB", "BROWN SWISS (beef/boeuf)"),
+	/**
+	 * The '<em><b>BQ</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BQ
+	 * @generated
+	 * @ordered
+	 */
+	BQ_LITERAL(26, "BQ", "BUELINGO"),
+	/**
+	 * The '<em><b>CP</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CP
+	 * @generated
+	 * @ordered
+	 */
+	CP_LITERAL(27, "CP", "CAMPINE RED PIED"),
+	/**
+	 * The '<em><b>CN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CN
+	 * @generated
+	 * @ordered
+	 */
+	CN_LITERAL(28, "CN", "CANADIENNE"),
+	/**
+	 * The '<em><b>CB</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CB
+	 * @generated
+	 * @ordered
+	 */
+	CB_LITERAL(29, "CB", "CHARBRAY"),
+	/**
+	 * The '<em><b>CH</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CH
+	 * @generated
+	 * @ordered
+	 */
+	CH_LITERAL(30, "CH", "CHAROLAIS"),
+	/**
+	 * The '<em><b>CG</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CG
+	 * @generated
+	 * @ordered
+	 */
+	CG_LITERAL(31, "CG", "CHI-ANGUS"),
+	/**
+	 * The '<em><b>CM</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CM
+	 * @generated
+	 * @ordered
+	 */
+	CM_LITERAL(32, "CM", "CHI-MAINE"),
+	/**
+	 * The '<em><b>CA</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CA
+	 * @generated
+	 * @ordered
+	 */
+	CA_LITERAL(33, "CA", "CHIANINA"),
+	/**
+	 * The '<em><b>XX</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #XX
+	 * @generated
+	 * @ordered
+	 */
+	XX_LITERAL(34, "XX", "CROSSBREDS"),
+	/**
+	 * The '<em><b>XT</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #XT
+	 * @generated
+	 * @ordered
+	 */
+	XT_LITERAL(35, "XT", "CROSSBRED TWINNER"),
+	/**
+	 * The '<em><b>CU</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CU
+	 * @generated
+	 * @ordered
+	 */
+	CU_LITERAL(36, "CU", "CUMBERLAND"),
+	/**
+	 * The '<em><b>DB</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DB
+	 * @generated
+	 * @ordered
+	 */
+	DB_LITERAL(37, "DB", "DANISH BLACK AND WHITE"),
+	/**
+	 * The '<em><b>DJ</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DJ
+	 * @generated
+	 * @ordered
+	 */
+	DJ_LITERAL(38, "DJ", "DANISH JERSEY"),
+	/**
+	 * The '<em><b>RW</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RW
+	 * @generated
+	 * @ordered
+	 */
+	RW_LITERAL(39, "RW", "DANISH RED AND WHITE"),
+	/**
+	 * The '<em><b>DE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DE
+	 * @generated
+	 * @ordered
+	 */
+	DE_LITERAL(40, "DE", "DEVON"),
+	/**
+	 * The '<em><b>DR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DR
+	 * @generated
+	 * @ordered
+	 */
+	DR_LITERAL(41, "DR", "DEXTER"),
+	/**
+	 * The '<em><b>DL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DL
+	 * @generated
+	 * @ordered
+	 */
+	DL_LITERAL(42, "DL", "DUTCH BELTED"),
+	/**
+	 * The '<em><b>FP</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FP
+	 * @generated
+	 * @ordered
+	 */
+	FP_LITERAL(43, "FP", "EAST FLEMISH RED PIED"),
+	/**
+	 * The '<em><b>ER</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ER
+	 * @generated
+	 * @ordered
+	 */
+	ER_LITERAL(44, "ER", "ERINGER"),
+	/**
+	 * The '<em><b>FA</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FA
+	 * @generated
+	 * @ordered
+	 */
+	FA_LITERAL(45, "FA", "FLAMANDE"),
+	/**
+	 * The '<em><b>FL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FL
+	 * @generated
+	 * @ordered
+	 */
+	FL_LITERAL(46, "FL", "FLECKVIEH"),
+	/**
+	 * The '<em><b>FC</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FC
+	 * @generated
+	 * @ordered
+	 */
+	FC_LITERAL(47, "FC", "FLORIDA CRACKER"),
+	/**
+	 * The '<em><b>FR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FR
+	 * @generated
+	 * @ordered
+	 */
+	FR_LITERAL(48, "FR", "FRIBOURG"),
+	/**
+	 * The '<em><b>FB</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FB
+	 * @generated
+	 * @ordered
+	 */
+	FB_LITERAL(49, "FB", "FRIESIAN (Belgium)"),
+	/**
+	 * The '<em><b>DF</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DF
+	 * @generated
+	 * @ordered
+	 */
+	DF_LITERAL(50, "DF", "FRIESIAN (Dutch)"),
+	/**
+	 * The '<em><b>GA</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GA
+	 * @generated
+	 * @ordered
+	 */
+	GA_LITERAL(51, "GA", "GALLOWAY (beef/boeuf)"),
+	/**
+	 * The '<em><b>GS</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GS
+	 * @generated
+	 * @ordered
+	 */
+	GS_LITERAL(52, "GS", "GASCONNE"),
+	/**
+	 * The '<em><b>GE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GE
+	 * @generated
+	 * @ordered
+	 */
+	GE_LITERAL(53, "GE", "GELBRAY"),
+	/**
+	 * The '<em><b>GV</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GV
+	 * @generated
+	 * @ordered
+	 */
+	GV_LITERAL(54, "GV", "GELBVIEH"),
+	/**
+	 * The '<em><b>GI</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GI
+	 * @generated
+	 * @ordered
+	 */
+	GI_LITERAL(55, "GI", "GRAUVIEH"),
+	/**
+	 * The '<em><b>GR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GR
+	 * @generated
+	 * @ordered
+	 */
+	GR_LITERAL(56, "GR", "GRONINGEN"),
+	/**
+	 * The '<em><b>GZ</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GZ
+	 * @generated
+	 * @ordered
+	 */
+	GZ_LITERAL(57, "GZ", "GUZERA"),
+	/**
+	 * The '<em><b>GY</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GY
+	 * @generated
+	 * @ordered
+	 */
+	GY_LITERAL(58, "GY", "GYR (or Gir)"),
+	/**
+	 * The '<em><b>HC</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #HC
+	 * @generated
+	 * @ordered
+	 */
+	HC_LITERAL(59, "HC", "HAYS CONVERTER"),
+	/**
+	 * The '<em><b>HB</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #HB
+	 * @generated
+	 * @ordered
+	 */
+	HB_LITERAL(60, "HB", "HEREFORD (black)"),
+	/**
+	 * The '<em><b>HH</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #HH
+	 * @generated
+	 * @ordered
+	 */
+	HH_LITERAL(61, "HH", "HEREFORD (horned)"),
+	/**
+	 * The '<em><b>HP</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #HP
+	 * @generated
+	 * @ordered
+	 */
+	HP_LITERAL(62, "HP", "HEREFORD (polled)"),
+	/**
+	 * The '<em><b>SH</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SH
+	 * @generated
+	 * @ordered
+	 */
+	SH_LITERAL(63, "SH", "HIGHLAND (Scotch Highland)"),
+	/**
+	 * The '<em><b>HY</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #HY
+	 * @generated
+	 * @ordered
+	 */
+	HY_LITERAL(64, "HY", "HYBRID (Alberta Synthtic)"),
+	/**
+	 * The '<em><b>IB</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #IB
+	 * @generated
+	 * @ordered
+	 */
+	IB_LITERAL(65, "IB", "INDU BRAZIL"),
+	/**
+	 * The '<em><b>KY</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #KY
+	 * @generated
+	 * @ordered
+	 */
+	KY_LITERAL(66, "KY", "KERRY"),
+	/**
+	 * The '<em><b>KB</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #KB
+	 * @generated
+	 * @ordered
+	 */
+	KB_LITERAL(67, "KB", "KOBE (Wagyu)"),
+	/**
+	 * The '<em><b>LM</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LM
+	 * @generated
+	 * @ordered
+	 */
+	LM_LITERAL(68, "LM", "LIMOUSIN"),
+	/**
+	 * The '<em><b>LR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LR
+	 * @generated
+	 * @ordered
+	 */
+	LR_LITERAL(69, "LR", "LINCOLN RED"),
+	/**
+	 * The '<em><b>LO</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LO
+	 * @generated
+	 * @ordered
+	 */
+	LO_LITERAL(70, "LO", "LOWLINE (Loala)"),
+	/**
+	 * The '<em><b>LU</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LU
+	 * @generated
+	 * @ordered
+	 */
+	LU_LITERAL(71, "LU", "LUING"),
+	/**
+	 * The '<em><b>MA</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MA
+	 * @generated
+	 * @ordered
+	 */
+	MA_LITERAL(72, "MA", "MAINE-ANJOU"),
+	/**
+	 * The '<em><b>MH</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MH
+	 * @generated
+	 * @ordered
+	 */
+	MH_LITERAL(73, "MH", "MASHONA"),
+	/**
+	 * The '<em><b>ML</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ML
+	 * @generated
+	 * @ordered
+	 */
+	ML_LITERAL(74, "ML", "MANDALONG SPECIAL"),
+	/**
+	 * The '<em><b>MR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MR
+	 * @generated
+	 * @ordered
+	 */
+	MR_LITERAL(75, "MR", "MARCHIGIANA"),
+	/**
+	 * The '<em><b>ME</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ME
+	 * @generated
+	 * @ordered
+	 */
+	ME_LITERAL(76, "ME", "MAREMMANA"),
+	/**
+	 * The '<em><b>MI</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MI
+	 * @generated
+	 * @ordered
+	 */
+	MI_LITERAL(77, "MI", "MEUSE-RHINE-ISSEL"),
+	/**
+	 * The '<em><b>MC</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MC
+	 * @generated
+	 * @ordered
+	 */
+	MC_LITERAL(78, "MC", "MEXICAN CORRIENTE"),
+	/**
+	 * The '<em><b>MO</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MO
+	 * @generated
+	 * @ordered
+	 */
+	MO_LITERAL(79, "MO", "MONTBELIARDE"),
+	/**
+	 * The '<em><b>MU</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MU
+	 * @generated
+	 * @ordered
+	 */
+	MU_LITERAL(80, "MU", "MURRAH"),
+	/**
+	 * The '<em><b>MG</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MG
+	 * @generated
+	 * @ordered
+	 */
+	MG_LITERAL(81, "MG", "MURRAY GREY"),
+	/**
+	 * The '<em><b>NE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NE
+	 * @generated
+	 * @ordered
+	 */
+	NE_LITERAL(82, "NE", "NELLORE"),
+	/**
+	 * The '<em><b>NM</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NM
+	 * @generated
+	 * @ordered
+	 */
+	NM_LITERAL(83, "NM", "NORMANDE"),
+	/**
+	 * The '<em><b>NR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NR
+	 * @generated
+	 * @ordered
+	 */
+	NR_LITERAL(84, "NR", "NORWEGIAN RED"),
+	/**
+	 * The '<em><b>PA</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PA
+	 * @generated
+	 * @ordered
+	 */
+	PA_LITERAL(85, "PA", "PARTHENAISE"),
+	/**
+	 * The '<em><b>PR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PR
+	 * @generated
+	 * @ordered
+	 */
+	PR_LITERAL(86, "PR", "PIE ROUGE"),
+	/**
+	 * The '<em><b>PI</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PI
+	 * @generated
+	 * @ordered
+	 */
+	PI_LITERAL(87, "PI", "PIEDMONTESE"),
+	/**
+	 * The '<em><b>PZ</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PZ
+	 * @generated
+	 * @ordered
+	 */
+	PZ_LITERAL(88, "PZ", "PINZGAUER"),
+	/**
+	 * The '<em><b>RA</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RA
+	 * @generated
+	 * @ordered
+	 */
+	RA_LITERAL(89, "RA", "RANGER"),
+	/**
+	 * The '<em><b>AR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #AR
+	 * @generated
+	 * @ordered
+	 */
+	AR_LITERAL(90, "AR", "RED ANGUS"),
+	/**
+	 * The '<em><b>RR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RR
+	 * @generated
+	 * @ordered
+	 */
+	RR_LITERAL(91, "RR", "RED BRAHMAN"),
+	/**
+	 * The '<em><b>RB</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RB
+	 * @generated
+	 * @ordered
+	 */
+	RB_LITERAL(92, "RB", "RED BRANGUS"),
+	/**
+	 * The '<em><b>RD</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RD
+	 * @generated
+	 * @ordered
+	 */
+	RD_LITERAL(93, "RD", "RED DANE (Danish Red)"),
+	/**
+	 * The '<em><b>RP</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RP
+	 * @generated
+	 * @ordered
+	 */
+	RP_LITERAL(94, "RP", "RED POLL"),
+	/**
+	 * The '<em><b>RN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RN
+	 * @generated
+	 * @ordered
+	 */
+	RN_LITERAL(95, "RN", "ROMAGNOLA"),
+	/**
+	 * The '<em><b>RS</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RS
+	 * @generated
+	 * @ordered
+	 */
+	RS_LITERAL(96, "RS", "ROMOSINUANO"),
+	/**
+	 * The '<em><b>RO</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RO
+	 * @generated
+	 * @ordered
+	 */
+	RO_LITERAL(97, "RO", "ROTBUNTE"),
+	/**
+	 * The '<em><b>DN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DN
+	 * @generated
+	 * @ordered
+	 */
+	DN_LITERAL(98, "DN", "ROUGE DU NORD"),
+	/**
+	 * The '<em><b>SW</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SW
+	 * @generated
+	 * @ordered
+	 */
+	SW_LITERAL(99, "SW", "SAHIWAL"),
+	/**
+	 * The '<em><b>SA</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SA
+	 * @generated
+	 * @ordered
+	 */
+	SA_LITERAL(100, "SA", "SALERS"),
+	/**
+	 * The '<em><b>SG</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SG
+	 * @generated
+	 * @ordered
+	 */
+	SG_LITERAL(101, "SG", "SANTA GERTRUDIS"),
+	/**
+	 * The '<em><b>SL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SL
+	 * @generated
+	 * @ordered
+	 */
+	SL_LITERAL(102, "SL", "SEMEPOL"),
+	/**
+	 * The '<em><b>SE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SE
+	 * @generated
+	 * @ordered
+	 */
+	SE_LITERAL(103, "SE", "SENAPOL"),
+	/**
+	 * The '<em><b>SV</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SV
+	 * @generated
+	 * @ordered
+	 */
+	SV_LITERAL(104, "SV", "SHAVER BEEF BLEND"),
+	/**
+	 * The '<em><b>SS</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SS
+	 * @generated
+	 * @ordered
+	 */
+	SS_LITERAL(105, "SS", "SHORTHORN (beef-scotch)"),
+	/**
+	 * The '<em><b>IS</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #IS
+	 * @generated
+	 * @ordered
+	 */
+	IS_LITERAL(106, "IS", "SHORTHORN (illawarra)"),
+	/**
+	 * The '<em><b>SP</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SP
+	 * @generated
+	 * @ordered
+	 */
+	SP_LITERAL(107, "SP", "SHORTHORN (polled)"),
+	/**
+	 * The '<em><b>SI</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SI
+	 * @generated
+	 * @ordered
+	 */
+	SI_LITERAL(108, "SI", "SIMBRAH"),
+	/**
+	 * The '<em><b>SM</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SM
+	 * @generated
+	 * @ordered
+	 */
+	SM_LITERAL(109, "SM", "SIMMENTAL"),
+	/**
+	 * The '<em><b>DS</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DS
+	 * @generated
+	 * @ordered
+	 */
+	DS_LITERAL(110, "DS", "SOUTH DEVON"),
+	/**
+	 * The '<em><b>SX</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SX
+	 * @generated
+	 * @ordered
+	 */
+	SX_LITERAL(111, "SX", "SUSSEX"),
+	/**
+	 * The '<em><b>TP</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TP
+	 * @generated
+	 * @ordered
+	 */
+	TP_LITERAL(112, "TP", "TABAPUA"),
+	/**
+	 * The '<em><b>TA</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TA
+	 * @generated
+	 * @ordered
+	 */
+	TA_LITERAL(113, "TA", "TARENTAISE"),
+	/**
+	 * The '<em><b>TG</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TG
+	 * @generated
+	 * @ordered
+	 */
+	TG_LITERAL(114, "TG", "TASMANIAN GREY"),
+	/**
+	 * The '<em><b>TN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TN
+	 * @generated
+	 * @ordered
+	 */
+	TN_LITERAL(115, "TN", "TAURINDICUS"),
+	/**
+	 * The '<em><b>TL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TL
+	 * @generated
+	 * @ordered
+	 */
+	TL_LITERAL(116, "TL", "TEXAS LONGHORN"),
+	/**
+	 * The '<em><b>TI</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TI
+	 * @generated
+	 * @ordered
+	 */
+	TI_LITERAL(117, "TI", "TULI"),
+	/**
+	 * The '<em><b>WB</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #WB
+	 * @generated
+	 * @ordered
+	 */
+	WB_LITERAL(118, "WB", "WELSH BLACK"),
+	/**
+	 * The '<em><b>WF</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #WF
+	 * @generated
+	 * @ordered
+	 */
+	WF_LITERAL(119, "WF", "WEST FLEMISH RED"),
+	/**
+	 * The '<em><b>WP</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #WP
+	 * @generated
+	 * @ordered
+	 */
+	WP_LITERAL(120, "WP", "WHITE PARK"),
+	/**
+	 * The '<em><b>YA</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #YA
+	 * @generated
+	 * @ordered
+	 */
+	YA_LITERAL(121, "YA", "YAK"),
+	/**
+	 * The '<em><b>Unspecified</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #UNSPECIFIED
+	 * @generated
+	 * @ordered
+	 */
+	UNSPECIFIED_LITERAL(122, "Unspecified", "Unspecified");
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1349,7 +2457,6 @@ public final class BeefBreed extends AbstractEnumerator {
 	 */
 	public static final int PI = 87;
 
-
 	/**
 	 * The '<em><b>PZ</b></em>' literal value.
 	 * <!-- begin-user-doc -->
@@ -1876,1237 +2983,6 @@ public final class BeefBreed extends AbstractEnumerator {
 	public static final int UNSPECIFIED = 122;
 
 	/**
-	 * The '<em><b>AN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #AN
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed AN_LITERAL = new BeefBreed(AN, "AN", "ABERDEEN ANGUS");
-
-	/**
-	 * The '<em><b>AB</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #AB
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed AB_LITERAL = new BeefBreed(AB, "AB", "ABONDANCE");
-
-	/**
-	 * The '<em><b>AF</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #AF
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed AF_LITERAL = new BeefBreed(AF, "AF", "AFRICANDER");
-
-	/**
-	 * The '<em><b>AL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #AL
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed AL_LITERAL = new BeefBreed(AL, "AL", "ALPINE");
-
-	/**
-	 * The '<em><b>AE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #AE
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed AE_LITERAL = new BeefBreed(AE, "AE", "AMERICAN BREED");
-
-	/**
-	 * The '<em><b>AM</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #AM
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed AM_LITERAL = new BeefBreed(AM, "AM", "AMERIFAX");
-
-	/**
-	 * The '<em><b>AK</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #AK
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed AK_LITERAL = new BeefBreed(AK, "AK", "ANKINA");
-
-	/**
-	 * The '<em><b>AW</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #AW
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed AW_LITERAL = new BeefBreed(AW, "AW", "ANKOLE-WATUSI");
-
-	/**
-	 * The '<em><b>AU</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #AU
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed AU_LITERAL = new BeefBreed(AU, "AU", "AUBRAC");
-
-	/**
-	 * The '<em><b>BA</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BA
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed BA_LITERAL = new BeefBreed(BA, "BA", "BARZONA");
-
-	/**
-	 * The '<em><b>BF</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BF
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed BF_LITERAL = new BeefBreed(BF, "BF", "BEEF FRIESIAN");
-
-	/**
-	 * The '<em><b>BE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BE
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed BE_LITERAL = new BeefBreed(BE, "BE", "BEEFALO");
-
-	/**
-	 * The '<em><b>BM</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BM
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed BM_LITERAL = new BeefBreed(BM, "BM", "BEEFMASTER");
-
-	/**
-	 * The '<em><b>BB</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BB
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed BB_LITERAL = new BeefBreed(BB, "BB", "BELIGIAN BLUE");
-
-	/**
-	 * The '<em><b>BG</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BG
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed BG_LITERAL = new BeefBreed(BG, "BG", "BELTED GALLOWAY");
-
-	/**
-	 * The '<em><b>BD</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BD
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed BD_LITERAL = new BeefBreed(BD, "BD", "BLONDE D=AQUITAINE");
-
-	/**
-	 * The '<em><b>NS</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #NS
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed NS_LITERAL = new BeefBreed(NS, "NS", "BONSMARA");
-
-	/**
-	 * The '<em><b>BO</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BO
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed BO_LITERAL = new BeefBreed(BO, "BO", "BRAFORD");
-
-	/**
-	 * The '<em><b>BR</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BR
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed BR_LITERAL = new BeefBreed(BR, "BR", "BRAHMAN");
-
-	/**
-	 * The '<em><b>BH</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BH
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed BH_LITERAL = new BeefBreed(BH, "BH", "BRAHMENTAL");
-
-	/**
-	 * The '<em><b>BI</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BI
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed BI_LITERAL = new BeefBreed(BI, "BI", "BRAHMOUSIN");
-
-	/**
-	 * The '<em><b>BL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BL
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed BL_LITERAL = new BeefBreed(BL, "BL", "BRALER");
-
-	/**
-	 * The '<em><b>BN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BN
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed BN_LITERAL = new BeefBreed(BN, "BN", "BRANGUS");
-
-	/**
-	 * The '<em><b>BU</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BU
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed BU_LITERAL = new BeefBreed(BU, "BU", "BRAUNVIEH");
-
-	/**
-	 * The '<em><b>BW</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BW
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed BW_LITERAL = new BeefBreed(BW, "BW", "BRITISH WHITE");
-
-	/**
-	 * The '<em><b>SB</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SB
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed SB_LITERAL = new BeefBreed(SB, "SB", "BROWN SWISS (beef/boeuf)");
-
-	/**
-	 * The '<em><b>BQ</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BQ
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed BQ_LITERAL = new BeefBreed(BQ, "BQ", "BUELINGO");
-
-	/**
-	 * The '<em><b>CP</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CP
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed CP_LITERAL = new BeefBreed(CP, "CP", "CAMPINE RED PIED");
-
-	/**
-	 * The '<em><b>CN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CN
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed CN_LITERAL = new BeefBreed(CN, "CN", "CANADIENNE");
-
-	/**
-	 * The '<em><b>CB</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CB
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed CB_LITERAL = new BeefBreed(CB, "CB", "CHARBRAY");
-
-	/**
-	 * The '<em><b>CH</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CH
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed CH_LITERAL = new BeefBreed(CH, "CH", "CHAROLAIS");
-
-	/**
-	 * The '<em><b>CG</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CG
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed CG_LITERAL = new BeefBreed(CG, "CG", "CHI-ANGUS");
-
-	/**
-	 * The '<em><b>CM</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CM
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed CM_LITERAL = new BeefBreed(CM, "CM", "CHI-MAINE");
-
-	/**
-	 * The '<em><b>CA</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CA
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed CA_LITERAL = new BeefBreed(CA, "CA", "CHIANINA");
-
-	/**
-	 * The '<em><b>XX</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #XX
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed XX_LITERAL = new BeefBreed(XX, "XX", "CROSSBREDS");
-
-	/**
-	 * The '<em><b>XT</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #XT
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed XT_LITERAL = new BeefBreed(XT, "XT", "CROSSBRED TWINNER");
-
-	/**
-	 * The '<em><b>CU</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CU
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed CU_LITERAL = new BeefBreed(CU, "CU", "CUMBERLAND");
-
-	/**
-	 * The '<em><b>DB</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #DB
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed DB_LITERAL = new BeefBreed(DB, "DB", "DANISH BLACK AND WHITE");
-
-	/**
-	 * The '<em><b>DJ</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #DJ
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed DJ_LITERAL = new BeefBreed(DJ, "DJ", "DANISH JERSEY");
-
-	/**
-	 * The '<em><b>RW</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RW
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed RW_LITERAL = new BeefBreed(RW, "RW", "DANISH RED AND WHITE");
-
-	/**
-	 * The '<em><b>DE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #DE
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed DE_LITERAL = new BeefBreed(DE, "DE", "DEVON");
-
-	/**
-	 * The '<em><b>DR</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #DR
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed DR_LITERAL = new BeefBreed(DR, "DR", "DEXTER");
-
-	/**
-	 * The '<em><b>DL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #DL
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed DL_LITERAL = new BeefBreed(DL, "DL", "DUTCH BELTED");
-
-	/**
-	 * The '<em><b>FP</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #FP
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed FP_LITERAL = new BeefBreed(FP, "FP", "EAST FLEMISH RED PIED");
-
-	/**
-	 * The '<em><b>ER</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ER
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed ER_LITERAL = new BeefBreed(ER, "ER", "ERINGER");
-
-	/**
-	 * The '<em><b>FA</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #FA
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed FA_LITERAL = new BeefBreed(FA, "FA", "FLAMANDE");
-
-	/**
-	 * The '<em><b>FL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #FL
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed FL_LITERAL = new BeefBreed(FL, "FL", "FLECKVIEH");
-
-	/**
-	 * The '<em><b>FC</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #FC
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed FC_LITERAL = new BeefBreed(FC, "FC", "FLORIDA CRACKER");
-
-	/**
-	 * The '<em><b>FR</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #FR
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed FR_LITERAL = new BeefBreed(FR, "FR", "FRIBOURG");
-
-	/**
-	 * The '<em><b>FB</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #FB
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed FB_LITERAL = new BeefBreed(FB, "FB", "FRIESIAN (Belgium)");
-
-	/**
-	 * The '<em><b>DF</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #DF
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed DF_LITERAL = new BeefBreed(DF, "DF", "FRIESIAN (Dutch)");
-
-	/**
-	 * The '<em><b>GA</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #GA
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed GA_LITERAL = new BeefBreed(GA, "GA", "GALLOWAY (beef/boeuf)");
-
-	/**
-	 * The '<em><b>GS</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #GS
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed GS_LITERAL = new BeefBreed(GS, "GS", "GASCONNE");
-
-	/**
-	 * The '<em><b>GE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #GE
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed GE_LITERAL = new BeefBreed(GE, "GE", "GELBRAY");
-
-	/**
-	 * The '<em><b>GV</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #GV
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed GV_LITERAL = new BeefBreed(GV, "GV", "GELBVIEH");
-
-	/**
-	 * The '<em><b>GI</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #GI
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed GI_LITERAL = new BeefBreed(GI, "GI", "GRAUVIEH");
-
-	/**
-	 * The '<em><b>GR</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #GR
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed GR_LITERAL = new BeefBreed(GR, "GR", "GRONINGEN");
-
-	/**
-	 * The '<em><b>GZ</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #GZ
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed GZ_LITERAL = new BeefBreed(GZ, "GZ", "GUZERA");
-
-	/**
-	 * The '<em><b>GY</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #GY
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed GY_LITERAL = new BeefBreed(GY, "GY", "GYR (or Gir)");
-
-	/**
-	 * The '<em><b>HC</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #HC
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed HC_LITERAL = new BeefBreed(HC, "HC", "HAYS CONVERTER");
-
-	/**
-	 * The '<em><b>HB</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #HB
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed HB_LITERAL = new BeefBreed(HB, "HB", "HEREFORD (black)");
-
-	/**
-	 * The '<em><b>HH</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #HH
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed HH_LITERAL = new BeefBreed(HH, "HH", "HEREFORD (horned)");
-
-	/**
-	 * The '<em><b>HP</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #HP
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed HP_LITERAL = new BeefBreed(HP, "HP", "HEREFORD (polled)");
-
-	/**
-	 * The '<em><b>SH</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SH
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed SH_LITERAL = new BeefBreed(SH, "SH", "HIGHLAND (Scotch Highland)");
-
-	/**
-	 * The '<em><b>HY</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #HY
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed HY_LITERAL = new BeefBreed(HY, "HY", "HYBRID (Alberta Synthtic)");
-
-	/**
-	 * The '<em><b>IB</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #IB
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed IB_LITERAL = new BeefBreed(IB, "IB", "INDU BRAZIL");
-
-	/**
-	 * The '<em><b>KY</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #KY
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed KY_LITERAL = new BeefBreed(KY, "KY", "KERRY");
-
-	/**
-	 * The '<em><b>KB</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #KB
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed KB_LITERAL = new BeefBreed(KB, "KB", "KOBE (Wagyu)");
-
-	/**
-	 * The '<em><b>LM</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LM
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed LM_LITERAL = new BeefBreed(LM, "LM", "LIMOUSIN");
-
-	/**
-	 * The '<em><b>LR</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LR
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed LR_LITERAL = new BeefBreed(LR, "LR", "LINCOLN RED");
-
-	/**
-	 * The '<em><b>LO</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LO
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed LO_LITERAL = new BeefBreed(LO, "LO", "LOWLINE (Loala)");
-
-	/**
-	 * The '<em><b>LU</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LU
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed LU_LITERAL = new BeefBreed(LU, "LU", "LUING");
-
-	/**
-	 * The '<em><b>MA</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MA
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed MA_LITERAL = new BeefBreed(MA, "MA", "MAINE-ANJOU");
-
-	/**
-	 * The '<em><b>MH</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MH
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed MH_LITERAL = new BeefBreed(MH, "MH", "MASHONA");
-
-	/**
-	 * The '<em><b>ML</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ML
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed ML_LITERAL = new BeefBreed(ML, "ML", "MANDALONG SPECIAL");
-
-	/**
-	 * The '<em><b>MR</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MR
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed MR_LITERAL = new BeefBreed(MR, "MR", "MARCHIGIANA");
-
-	/**
-	 * The '<em><b>ME</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ME
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed ME_LITERAL = new BeefBreed(ME, "ME", "MAREMMANA");
-
-	/**
-	 * The '<em><b>MI</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MI
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed MI_LITERAL = new BeefBreed(MI, "MI", "MEUSE-RHINE-ISSEL");
-
-	/**
-	 * The '<em><b>MC</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MC
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed MC_LITERAL = new BeefBreed(MC, "MC", "MEXICAN CORRIENTE");
-
-	/**
-	 * The '<em><b>MO</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MO
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed MO_LITERAL = new BeefBreed(MO, "MO", "MONTBELIARDE");
-
-	/**
-	 * The '<em><b>MU</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MU
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed MU_LITERAL = new BeefBreed(MU, "MU", "MURRAH");
-
-	/**
-	 * The '<em><b>MG</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MG
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed MG_LITERAL = new BeefBreed(MG, "MG", "MURRAY GREY");
-
-	/**
-	 * The '<em><b>NE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #NE
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed NE_LITERAL = new BeefBreed(NE, "NE", "NELLORE");
-
-	/**
-	 * The '<em><b>NM</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #NM
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed NM_LITERAL = new BeefBreed(NM, "NM", "NORMANDE");
-
-	/**
-	 * The '<em><b>NR</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #NR
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed NR_LITERAL = new BeefBreed(NR, "NR", "NORWEGIAN RED");
-
-	/**
-	 * The '<em><b>PA</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #PA
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed PA_LITERAL = new BeefBreed(PA, "PA", "PARTHENAISE");
-
-	/**
-	 * The '<em><b>PR</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #PR
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed PR_LITERAL = new BeefBreed(PR, "PR", "PIE ROUGE");
-
-	
-	/**
-	 * The '<em><b>PI</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #PI
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed PI_LITERAL = new BeefBreed(PI, "PI", "PIEDMONTESE");
-
-	/**
-	 * The '<em><b>PZ</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #PZ
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed PZ_LITERAL = new BeefBreed(PZ, "PZ", "PINZGAUER");
-
-	/**
-	 * The '<em><b>RA</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RA
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed RA_LITERAL = new BeefBreed(RA, "RA", "RANGER");
-
-	/**
-	 * The '<em><b>AR</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #AR
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed AR_LITERAL = new BeefBreed(AR, "AR", "RED ANGUS");
-
-	/**
-	 * The '<em><b>RR</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RR
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed RR_LITERAL = new BeefBreed(RR, "RR", "RED BRAHMAN");
-
-	/**
-	 * The '<em><b>RB</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RB
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed RB_LITERAL = new BeefBreed(RB, "RB", "RED BRANGUS");
-
-	/**
-	 * The '<em><b>RD</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RD
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed RD_LITERAL = new BeefBreed(RD, "RD", "RED DANE (Danish Red)");
-
-	/**
-	 * The '<em><b>RP</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RP
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed RP_LITERAL = new BeefBreed(RP, "RP", "RED POLL");
-
-	/**
-	 * The '<em><b>RN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RN
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed RN_LITERAL = new BeefBreed(RN, "RN", "ROMAGNOLA");
-
-	/**
-	 * The '<em><b>RS</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RS
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed RS_LITERAL = new BeefBreed(RS, "RS", "ROMOSINUANO");
-
-	/**
-	 * The '<em><b>RO</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RO
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed RO_LITERAL = new BeefBreed(RO, "RO", "ROTBUNTE");
-
-	/**
-	 * The '<em><b>DN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #DN
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed DN_LITERAL = new BeefBreed(DN, "DN", "ROUGE DU NORD");
-
-	/**
-	 * The '<em><b>SW</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SW
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed SW_LITERAL = new BeefBreed(SW, "SW", "SAHIWAL");
-
-	/**
-	 * The '<em><b>SA</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SA
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed SA_LITERAL = new BeefBreed(SA, "SA", "SALERS");
-
-	/**
-	 * The '<em><b>SG</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SG
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed SG_LITERAL = new BeefBreed(SG, "SG", "SANTA GERTRUDIS");
-
-	/**
-	 * The '<em><b>SL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SL
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed SL_LITERAL = new BeefBreed(SL, "SL", "SEMEPOL");
-
-	/**
-	 * The '<em><b>SE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SE
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed SE_LITERAL = new BeefBreed(SE, "SE", "SENAPOL");
-
-	/**
-	 * The '<em><b>SV</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SV
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed SV_LITERAL = new BeefBreed(SV, "SV", "SHAVER BEEF BLEND");
-
-	/**
-	 * The '<em><b>SS</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SS
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed SS_LITERAL = new BeefBreed(SS, "SS", "SHORTHORN (beef-scotch)");
-
-	/**
-	 * The '<em><b>IS</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #IS
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed IS_LITERAL = new BeefBreed(IS, "IS", "SHORTHORN (illawarra)");
-
-	/**
-	 * The '<em><b>SP</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SP
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed SP_LITERAL = new BeefBreed(SP, "SP", "SHORTHORN (polled)");
-
-	/**
-	 * The '<em><b>SI</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SI
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed SI_LITERAL = new BeefBreed(SI, "SI", "SIMBRAH");
-
-	/**
-	 * The '<em><b>SM</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SM
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed SM_LITERAL = new BeefBreed(SM, "SM", "SIMMENTAL");
-
-	/**
-	 * The '<em><b>DS</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #DS
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed DS_LITERAL = new BeefBreed(DS, "DS", "SOUTH DEVON");
-
-	/**
-	 * The '<em><b>SX</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SX
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed SX_LITERAL = new BeefBreed(SX, "SX", "SUSSEX");
-
-	/**
-	 * The '<em><b>TP</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #TP
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed TP_LITERAL = new BeefBreed(TP, "TP", "TABAPUA");
-
-	/**
-	 * The '<em><b>TA</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #TA
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed TA_LITERAL = new BeefBreed(TA, "TA", "TARENTAISE");
-
-	/**
-	 * The '<em><b>TG</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #TG
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed TG_LITERAL = new BeefBreed(TG, "TG", "TASMANIAN GREY");
-
-	/**
-	 * The '<em><b>TN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #TN
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed TN_LITERAL = new BeefBreed(TN, "TN", "TAURINDICUS");
-
-	/**
-	 * The '<em><b>TL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #TL
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed TL_LITERAL = new BeefBreed(TL, "TL", "TEXAS LONGHORN");
-
-	/**
-	 * The '<em><b>TI</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #TI
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed TI_LITERAL = new BeefBreed(TI, "TI", "TULI");
-
-	/**
-	 * The '<em><b>WB</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #WB
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed WB_LITERAL = new BeefBreed(WB, "WB", "WELSH BLACK");
-
-	/**
-	 * The '<em><b>WF</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #WF
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed WF_LITERAL = new BeefBreed(WF, "WF", "WEST FLEMISH RED");
-
-	/**
-	 * The '<em><b>WP</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #WP
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed WP_LITERAL = new BeefBreed(WP, "WP", "WHITE PARK");
-
-	/**
-	 * The '<em><b>YA</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #YA
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed YA_LITERAL = new BeefBreed(YA, "YA", "YAK");
-
-	/**
-	 * The '<em><b>Unspecified</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #UNSPECIFIED
-	 * @generated
-	 * @ordered
-	 */
-	public static final BeefBreed UNSPECIFIED_LITERAL = new BeefBreed(UNSPECIFIED, "Unspecified", "Unspecified");
-
-	/**
 	 * An array of all the '<em><b>Beef Breed</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3245,7 +3121,7 @@ public final class BeefBreed extends AbstractEnumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<BeefBreed> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Beef Breed</b></em>' literal with the specified literal value.
@@ -3415,13 +3291,73 @@ public final class BeefBreed extends AbstractEnumerator {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final int value;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String name;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String literal;
+
+	/**
 	 * Only this class can construct instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private BeefBreed(int value, String name, String literal) {
-		super(value, name, literal);
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
 	}
 
-} //BeefBreed
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getValue() {
+	  return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+	  return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLiteral() {
+	  return literal;
+	}
+
+	/**
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return literal;
+	}
+}

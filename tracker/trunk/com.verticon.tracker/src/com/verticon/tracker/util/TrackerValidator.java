@@ -112,6 +112,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EPackage getEPackage() {
 	  return TrackerPackage.eINSTANCE;
 	}
@@ -122,7 +123,8 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics, Map context) {
+	@Override
+	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		switch (classifierID) {
 			case TrackerPackage.ANIMAL:
 				return validateAnimal((Animal)value, diagnostics, context);
@@ -218,7 +220,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAnimal(Animal animal, DiagnosticChain diagnostics, Map context) {
+	public boolean validateAnimal(Animal animal, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(animal, diagnostics, context);
 	}
 
@@ -227,7 +229,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAnimalId(AnimalId animalId, DiagnosticChain diagnostics, Map context) {
+	public boolean validateAnimalId(AnimalId animalId, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(animalId, diagnostics, context);
 	}
 
@@ -236,7 +238,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateBovine(Bovine bovine, DiagnosticChain diagnostics, Map context) {
+	public boolean validateBovine(Bovine bovine, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(bovine, diagnostics, context);
 	}
 
@@ -245,7 +247,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateEvent(Event event, DiagnosticChain diagnostics, Map context) {
+	public boolean validateEvent(Event event, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(event, diagnostics, context);
 	}
 
@@ -254,7 +256,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateTagAllocated(TagAllocated tagAllocated, DiagnosticChain diagnostics, Map context) {
+	public boolean validateTagAllocated(TagAllocated tagAllocated, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(tagAllocated, diagnostics, context);
 	}
 
@@ -263,7 +265,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateDied(Died died, DiagnosticChain diagnostics, Map context) {
+	public boolean validateDied(Died died, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(died, diagnostics, context);
 	}
 
@@ -272,7 +274,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateTagRetired(TagRetired tagRetired, DiagnosticChain diagnostics, Map context) {
+	public boolean validateTagRetired(TagRetired tagRetired, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(tagRetired, diagnostics, context);
 	}
 
@@ -281,7 +283,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAnimalMissing(AnimalMissing animalMissing, DiagnosticChain diagnostics, Map context) {
+	public boolean validateAnimalMissing(AnimalMissing animalMissing, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(animalMissing, diagnostics, context);
 	}
 
@@ -290,7 +292,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateICVI(ICVI icvi, DiagnosticChain diagnostics, Map context) {
+	public boolean validateICVI(ICVI icvi, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(icvi, diagnostics, context);
 	}
 
@@ -299,7 +301,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateFairRegistration(FairRegistration fairRegistration, DiagnosticChain diagnostics, Map context) {
+	public boolean validateFairRegistration(FairRegistration fairRegistration, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(fairRegistration, diagnostics, context);
 	}
 
@@ -308,7 +310,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateWeighIn(WeighIn weighIn, DiagnosticChain diagnostics, Map context) {
+	public boolean validateWeighIn(WeighIn weighIn, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(weighIn, diagnostics, context);
 	}
 
@@ -317,7 +319,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSwine(Swine swine, DiagnosticChain diagnostics, Map context) {
+	public boolean validateSwine(Swine swine, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(swine, diagnostics, context);
 	}
 
@@ -326,7 +328,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateUnAppliedTags(UnAppliedTags unAppliedTags, DiagnosticChain diagnostics, Map context) {
+	public boolean validateUnAppliedTags(UnAppliedTags unAppliedTags, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(unAppliedTags, diagnostics, context);
 	}
 
@@ -335,7 +337,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validatePremises(Premises premises, DiagnosticChain diagnostics, Map context) {
+	public boolean validatePremises(Premises premises, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(premises, diagnostics, context);
 	}
 
@@ -344,7 +346,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateEventHistory(EventHistory eventHistory, DiagnosticChain diagnostics, Map context) {
+	public boolean validateEventHistory(EventHistory eventHistory, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(eventHistory, diagnostics, context);
 	}
 
@@ -353,7 +355,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAnimals(Animals animals, DiagnosticChain diagnostics, Map context) {
+	public boolean validateAnimals(Animals animals, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(animals, diagnostics, context);
 	}
 
@@ -362,7 +364,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateBovineBeef(BovineBeef bovineBeef, DiagnosticChain diagnostics, Map context) {
+	public boolean validateBovineBeef(BovineBeef bovineBeef, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(bovineBeef, diagnostics, context);
 	}
 
@@ -371,7 +373,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateOvine(Ovine ovine, DiagnosticChain diagnostics, Map context) {
+	public boolean validateOvine(Ovine ovine, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(ovine, diagnostics, context);
 	}
 
@@ -380,7 +382,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateBovineBison(BovineBison bovineBison, DiagnosticChain diagnostics, Map context) {
+	public boolean validateBovineBison(BovineBison bovineBison, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(bovineBison, diagnostics, context);
 	}
 
@@ -389,7 +391,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateBovineDairy(BovineDairy bovineDairy, DiagnosticChain diagnostics, Map context) {
+	public boolean validateBovineDairy(BovineDairy bovineDairy, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(bovineDairy, diagnostics, context);
 	}
 
@@ -398,7 +400,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateTagApplied(TagApplied tagApplied, DiagnosticChain diagnostics, Map context) {
+	public boolean validateTagApplied(TagApplied tagApplied, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(tagApplied, diagnostics, context);
 	}
 
@@ -407,7 +409,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateMovedIn(MovedIn movedIn, DiagnosticChain diagnostics, Map context) {
+	public boolean validateMovedIn(MovedIn movedIn, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(movedIn, diagnostics, context);
 	}
 
@@ -416,7 +418,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateMovedOut(MovedOut movedOut, DiagnosticChain diagnostics, Map context) {
+	public boolean validateMovedOut(MovedOut movedOut, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(movedOut, diagnostics, context);
 	}
 
@@ -425,7 +427,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateLostTag(LostTag lostTag, DiagnosticChain diagnostics, Map context) {
+	public boolean validateLostTag(LostTag lostTag, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(lostTag, diagnostics, context);
 	}
 
@@ -434,7 +436,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateReplacedTag(ReplacedTag replacedTag, DiagnosticChain diagnostics, Map context) {
+	public boolean validateReplacedTag(ReplacedTag replacedTag, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(replacedTag, diagnostics, context);
 	}
 
@@ -443,7 +445,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateImported(Imported imported, DiagnosticChain diagnostics, Map context) {
+	public boolean validateImported(Imported imported, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(imported, diagnostics, context);
 	}
 
@@ -452,7 +454,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateExported(Exported exported, DiagnosticChain diagnostics, Map context) {
+	public boolean validateExported(Exported exported, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(exported, diagnostics, context);
 	}
 
@@ -461,7 +463,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSighting(Sighting sighting, DiagnosticChain diagnostics, Map context) {
+	public boolean validateSighting(Sighting sighting, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(sighting, diagnostics, context);
 	}
 
@@ -470,7 +472,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSlaughtered(Slaughtered slaughtered, DiagnosticChain diagnostics, Map context) {
+	public boolean validateSlaughtered(Slaughtered slaughtered, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(slaughtered, diagnostics, context);
 	}
 
@@ -479,7 +481,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSex(Sex sex, DiagnosticChain diagnostics, Map context) {
+	public boolean validateSex(Sex sex, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
@@ -488,7 +490,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateBisonBreed(BisonBreed bisonBreed, DiagnosticChain diagnostics, Map context) {
+	public boolean validateBisonBreed(BisonBreed bisonBreed, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
@@ -497,7 +499,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSheepBreed(SheepBreed sheepBreed, DiagnosticChain diagnostics, Map context) {
+	public boolean validateSheepBreed(SheepBreed sheepBreed, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
@@ -506,7 +508,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateBeefBreed(BeefBreed beefBreed, DiagnosticChain diagnostics, Map context) {
+	public boolean validateBeefBreed(BeefBreed beefBreed, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
@@ -515,7 +517,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateDairyBreed(DairyBreed dairyBreed, DiagnosticChain diagnostics, Map context) {
+	public boolean validateDairyBreed(DairyBreed dairyBreed, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
@@ -524,7 +526,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateSwineBreed(SwineBreed swineBreed, DiagnosticChain diagnostics, Map context) {
+	public boolean validateSwineBreed(SwineBreed swineBreed, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
@@ -533,7 +535,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateDate(Date date, DiagnosticChain diagnostics, Map context) {
+	public boolean validateDate(Date date, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
@@ -542,7 +544,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAnimialIdNumber(String animialIdNumber, DiagnosticChain diagnostics, Map context) {
+	public boolean validateAnimialIdNumber(String animialIdNumber, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = validateAnimialIdNumber_MinLength(animialIdNumber, diagnostics, context);
 		if (result || diagnostics != null) result &= validateAnimialIdNumber_MaxLength(animialIdNumber, diagnostics, context);
 		return result;
@@ -554,7 +556,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAnimialIdNumber_MinLength(String animialIdNumber, DiagnosticChain diagnostics, Map context) {
+	public boolean validateAnimialIdNumber_MinLength(String animialIdNumber, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		int length = animialIdNumber.length();  
 		boolean result = length >= 15;
 		if (!result && diagnostics != null) 
@@ -568,7 +570,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAnimialIdNumber_MaxLength(String animialIdNumber, DiagnosticChain diagnostics, Map context) {
+	public boolean validateAnimialIdNumber_MaxLength(String animialIdNumber, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		int length = animialIdNumber.length();  
 		boolean result = length <= 15;
 		if (!result && diagnostics != null) 
@@ -581,7 +583,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validatePremisesIdNumber(String premisesIdNumber, DiagnosticChain diagnostics, Map context) {
+	public boolean validatePremisesIdNumber(String premisesIdNumber, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = validatePremisesIdNumber_MinLength(premisesIdNumber, diagnostics, context);
 		if (result || diagnostics != null) result &= validatePremisesIdNumber_MaxLength(premisesIdNumber, diagnostics, context);
 		if (result || diagnostics != null) result &= validatePremisesIdNumber_Max(premisesIdNumber, diagnostics, context);
@@ -594,7 +596,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validatePremisesIdNumber_MinLength(String premisesIdNumber, DiagnosticChain diagnostics, Map context) {
+	public boolean validatePremisesIdNumber_MinLength(String premisesIdNumber, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		int length = premisesIdNumber.length();  
 		boolean result = length >= 7;
 		if (!result && diagnostics != null) 
@@ -608,7 +610,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validatePremisesIdNumber_MaxLength(String premisesIdNumber, DiagnosticChain diagnostics, Map context) {
+	public boolean validatePremisesIdNumber_MaxLength(String premisesIdNumber, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		int length = premisesIdNumber.length();  
 		boolean result = length <= 7;
 		if (!result && diagnostics != null) 
@@ -630,7 +632,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validatePremisesIdNumber_Max(String premisesIdNumber, DiagnosticChain diagnostics, Map context) {
+	public boolean validatePremisesIdNumber_Max(String premisesIdNumber, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = premisesIdNumber.compareTo(PREMISES_ID_NUMBER__MAX__VALUE) < 0;
 		if (!result && diagnostics != null) 
 			reportMaxViolation(TrackerPackage.Literals.PREMISES_ID_NUMBER, premisesIdNumber, PREMISES_ID_NUMBER__MAX__VALUE, false, diagnostics, context);
@@ -642,7 +644,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateEmail(String email, DiagnosticChain diagnostics, Map context) {
+	public boolean validateEmail(String email, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
@@ -651,7 +653,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateDateTime(Date dateTime, DiagnosticChain diagnostics, Map context) {
+	public boolean validateDateTime(Date dateTime, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
@@ -660,7 +662,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAge(Age age, DiagnosticChain diagnostics, Map context) {
+	public boolean validateAge(Age age, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
@@ -669,7 +671,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateUSPhoneNumber(String usPhoneNumber, DiagnosticChain diagnostics, Map context) {
+	public boolean validateUSPhoneNumber(String usPhoneNumber, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

@@ -53,7 +53,7 @@ import com.verticon.tracker.TrackerPackage;
  * @see com.verticon.tracker.TrackerPackage
  * @generated
  */
-public class TrackerSwitch {
+public class TrackerSwitch<T> {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,7 +88,7 @@ public class TrackerSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	public Object doSwitch(EObject theEObject) {
+	public T doSwitch(EObject theEObject) {
 		return doSwitch(theEObject.eClass(), theEObject);
 	}
 
@@ -99,16 +99,16 @@ public class TrackerSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(EClass theEClass, EObject theEObject) {
+	protected T doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
 		else {
-			List eSuperTypes = theEClass.getESuperTypes();
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
 					defaultCase(theEObject) :
-					doSwitch((EClass)eSuperTypes.get(0), theEObject);
+					doSwitch(eSuperTypes.get(0), theEObject);
 		}
 	}
 
@@ -119,61 +119,61 @@ public class TrackerSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(int classifierID, EObject theEObject) {
+	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case TrackerPackage.ANIMAL: {
 				Animal animal = (Animal)theEObject;
-				Object result = caseAnimal(animal);
+				T result = caseAnimal(animal);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.ANIMAL_ID: {
 				AnimalId animalId = (AnimalId)theEObject;
-				Object result = caseAnimalId(animalId);
+				T result = caseAnimalId(animalId);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.BOVINE: {
 				Bovine bovine = (Bovine)theEObject;
-				Object result = caseBovine(bovine);
+				T result = caseBovine(bovine);
 				if (result == null) result = caseAnimal(bovine);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.EVENT: {
 				Event event = (Event)theEObject;
-				Object result = caseEvent(event);
+				T result = caseEvent(event);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.TAG_ALLOCATED: {
 				TagAllocated tagAllocated = (TagAllocated)theEObject;
-				Object result = caseTagAllocated(tagAllocated);
+				T result = caseTagAllocated(tagAllocated);
 				if (result == null) result = caseEvent(tagAllocated);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.PREMISES: {
 				Premises premises = (Premises)theEObject;
-				Object result = casePremises(premises);
+				T result = casePremises(premises);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.EVENT_HISTORY: {
 				EventHistory eventHistory = (EventHistory)theEObject;
-				Object result = caseEventHistory(eventHistory);
+				T result = caseEventHistory(eventHistory);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.ANIMALS: {
 				Animals animals = (Animals)theEObject;
-				Object result = caseAnimals(animals);
+				T result = caseAnimals(animals);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.BOVINE_BEEF: {
 				BovineBeef bovineBeef = (BovineBeef)theEObject;
-				Object result = caseBovineBeef(bovineBeef);
+				T result = caseBovineBeef(bovineBeef);
 				if (result == null) result = caseBovine(bovineBeef);
 				if (result == null) result = caseAnimal(bovineBeef);
 				if (result == null) result = defaultCase(theEObject);
@@ -181,14 +181,14 @@ public class TrackerSwitch {
 			}
 			case TrackerPackage.OVINE: {
 				Ovine ovine = (Ovine)theEObject;
-				Object result = caseOvine(ovine);
+				T result = caseOvine(ovine);
 				if (result == null) result = caseAnimal(ovine);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.BOVINE_BISON: {
 				BovineBison bovineBison = (BovineBison)theEObject;
-				Object result = caseBovineBison(bovineBison);
+				T result = caseBovineBison(bovineBison);
 				if (result == null) result = caseBovine(bovineBison);
 				if (result == null) result = caseAnimal(bovineBison);
 				if (result == null) result = defaultCase(theEObject);
@@ -196,7 +196,7 @@ public class TrackerSwitch {
 			}
 			case TrackerPackage.BOVINE_DAIRY: {
 				BovineDairy bovineDairy = (BovineDairy)theEObject;
-				Object result = caseBovineDairy(bovineDairy);
+				T result = caseBovineDairy(bovineDairy);
 				if (result == null) result = caseBovine(bovineDairy);
 				if (result == null) result = caseAnimal(bovineDairy);
 				if (result == null) result = defaultCase(theEObject);
@@ -204,119 +204,119 @@ public class TrackerSwitch {
 			}
 			case TrackerPackage.TAG_APPLIED: {
 				TagApplied tagApplied = (TagApplied)theEObject;
-				Object result = caseTagApplied(tagApplied);
+				T result = caseTagApplied(tagApplied);
 				if (result == null) result = caseEvent(tagApplied);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.MOVED_IN: {
 				MovedIn movedIn = (MovedIn)theEObject;
-				Object result = caseMovedIn(movedIn);
+				T result = caseMovedIn(movedIn);
 				if (result == null) result = caseEvent(movedIn);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.MOVED_OUT: {
 				MovedOut movedOut = (MovedOut)theEObject;
-				Object result = caseMovedOut(movedOut);
+				T result = caseMovedOut(movedOut);
 				if (result == null) result = caseEvent(movedOut);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.LOST_TAG: {
 				LostTag lostTag = (LostTag)theEObject;
-				Object result = caseLostTag(lostTag);
+				T result = caseLostTag(lostTag);
 				if (result == null) result = caseEvent(lostTag);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.REPLACED_TAG: {
 				ReplacedTag replacedTag = (ReplacedTag)theEObject;
-				Object result = caseReplacedTag(replacedTag);
+				T result = caseReplacedTag(replacedTag);
 				if (result == null) result = caseEvent(replacedTag);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.IMPORTED: {
 				Imported imported = (Imported)theEObject;
-				Object result = caseImported(imported);
+				T result = caseImported(imported);
 				if (result == null) result = caseEvent(imported);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.EXPORTED: {
 				Exported exported = (Exported)theEObject;
-				Object result = caseExported(exported);
+				T result = caseExported(exported);
 				if (result == null) result = caseEvent(exported);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.SIGHTING: {
 				Sighting sighting = (Sighting)theEObject;
-				Object result = caseSighting(sighting);
+				T result = caseSighting(sighting);
 				if (result == null) result = caseEvent(sighting);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.SLAUGHTERED: {
 				Slaughtered slaughtered = (Slaughtered)theEObject;
-				Object result = caseSlaughtered(slaughtered);
+				T result = caseSlaughtered(slaughtered);
 				if (result == null) result = caseEvent(slaughtered);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.DIED: {
 				Died died = (Died)theEObject;
-				Object result = caseDied(died);
+				T result = caseDied(died);
 				if (result == null) result = caseEvent(died);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.TAG_RETIRED: {
 				TagRetired tagRetired = (TagRetired)theEObject;
-				Object result = caseTagRetired(tagRetired);
+				T result = caseTagRetired(tagRetired);
 				if (result == null) result = caseEvent(tagRetired);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.ANIMAL_MISSING: {
 				AnimalMissing animalMissing = (AnimalMissing)theEObject;
-				Object result = caseAnimalMissing(animalMissing);
+				T result = caseAnimalMissing(animalMissing);
 				if (result == null) result = caseEvent(animalMissing);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.ICVI: {
 				ICVI icvi = (ICVI)theEObject;
-				Object result = caseICVI(icvi);
+				T result = caseICVI(icvi);
 				if (result == null) result = caseEvent(icvi);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.FAIR_REGISTRATION: {
 				FairRegistration fairRegistration = (FairRegistration)theEObject;
-				Object result = caseFairRegistration(fairRegistration);
+				T result = caseFairRegistration(fairRegistration);
 				if (result == null) result = caseEvent(fairRegistration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.WEIGH_IN: {
 				WeighIn weighIn = (WeighIn)theEObject;
-				Object result = caseWeighIn(weighIn);
+				T result = caseWeighIn(weighIn);
 				if (result == null) result = caseEvent(weighIn);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.SWINE: {
 				Swine swine = (Swine)theEObject;
-				Object result = caseSwine(swine);
+				T result = caseSwine(swine);
 				if (result == null) result = caseAnimal(swine);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TrackerPackage.UN_APPLIED_TAGS: {
 				UnAppliedTags unAppliedTags = (UnAppliedTags)theEObject;
-				Object result = caseUnAppliedTags(unAppliedTags);
+				T result = caseUnAppliedTags(unAppliedTags);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -335,7 +335,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseAnimal(Animal object) {
+	public T caseAnimal(Animal object) {
 		return null;
 	}
 
@@ -350,7 +350,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseAnimalId(AnimalId object) {
+	public T caseAnimalId(AnimalId object) {
 		return null;
 	}
 
@@ -365,7 +365,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseBovine(Bovine object) {
+	public T caseBovine(Bovine object) {
 		return null;
 	}
 
@@ -380,7 +380,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseEvent(Event object) {
+	public T caseEvent(Event object) {
 		return null;
 	}
 
@@ -395,7 +395,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseTagAllocated(TagAllocated object) {
+	public T caseTagAllocated(TagAllocated object) {
 		return null;
 	}
 
@@ -410,7 +410,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseDied(Died object) {
+	public T caseDied(Died object) {
 		return null;
 	}
 
@@ -425,7 +425,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseTagRetired(TagRetired object) {
+	public T caseTagRetired(TagRetired object) {
 		return null;
 	}
 
@@ -440,7 +440,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseAnimalMissing(AnimalMissing object) {
+	public T caseAnimalMissing(AnimalMissing object) {
 		return null;
 	}
 
@@ -455,7 +455,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseICVI(ICVI object) {
+	public T caseICVI(ICVI object) {
 		return null;
 	}
 
@@ -470,7 +470,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseFairRegistration(FairRegistration object) {
+	public T caseFairRegistration(FairRegistration object) {
 		return null;
 	}
 
@@ -485,7 +485,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseWeighIn(WeighIn object) {
+	public T caseWeighIn(WeighIn object) {
 		return null;
 	}
 
@@ -500,7 +500,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseSwine(Swine object) {
+	public T caseSwine(Swine object) {
 		return null;
 	}
 
@@ -515,7 +515,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseUnAppliedTags(UnAppliedTags object) {
+	public T caseUnAppliedTags(UnAppliedTags object) {
 		return null;
 	}
 
@@ -530,7 +530,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object casePremises(Premises object) {
+	public T casePremises(Premises object) {
 		return null;
 	}
 
@@ -545,7 +545,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseEventHistory(EventHistory object) {
+	public T caseEventHistory(EventHistory object) {
 		return null;
 	}
 
@@ -560,7 +560,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseAnimals(Animals object) {
+	public T caseAnimals(Animals object) {
 		return null;
 	}
 
@@ -575,7 +575,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseBovineBeef(BovineBeef object) {
+	public T caseBovineBeef(BovineBeef object) {
 		return null;
 	}
 
@@ -590,7 +590,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseOvine(Ovine object) {
+	public T caseOvine(Ovine object) {
 		return null;
 	}
 
@@ -605,7 +605,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseBovineBison(BovineBison object) {
+	public T caseBovineBison(BovineBison object) {
 		return null;
 	}
 
@@ -620,7 +620,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseBovineDairy(BovineDairy object) {
+	public T caseBovineDairy(BovineDairy object) {
 		return null;
 	}
 
@@ -635,7 +635,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseTagApplied(TagApplied object) {
+	public T caseTagApplied(TagApplied object) {
 		return null;
 	}
 
@@ -650,7 +650,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseMovedIn(MovedIn object) {
+	public T caseMovedIn(MovedIn object) {
 		return null;
 	}
 
@@ -665,7 +665,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseMovedOut(MovedOut object) {
+	public T caseMovedOut(MovedOut object) {
 		return null;
 	}
 
@@ -680,7 +680,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseLostTag(LostTag object) {
+	public T caseLostTag(LostTag object) {
 		return null;
 	}
 
@@ -695,7 +695,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseReplacedTag(ReplacedTag object) {
+	public T caseReplacedTag(ReplacedTag object) {
 		return null;
 	}
 
@@ -710,7 +710,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseImported(Imported object) {
+	public T caseImported(Imported object) {
 		return null;
 	}
 
@@ -725,7 +725,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseExported(Exported object) {
+	public T caseExported(Exported object) {
 		return null;
 	}
 
@@ -740,7 +740,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseSighting(Sighting object) {
+	public T caseSighting(Sighting object) {
 		return null;
 	}
 
@@ -755,7 +755,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseSlaughtered(Slaughtered object) {
+	public T caseSlaughtered(Slaughtered object) {
 		return null;
 	}
 
@@ -770,7 +770,7 @@ public class TrackerSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-	public Object defaultCase(EObject object) {
+	public T defaultCase(EObject object) {
 		return null;
 	}
 

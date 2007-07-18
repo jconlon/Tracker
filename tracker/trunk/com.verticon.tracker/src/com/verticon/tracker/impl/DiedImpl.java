@@ -44,6 +44,7 @@ public class DiedImpl extends EventImpl implements Died {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.DIED;
 	}

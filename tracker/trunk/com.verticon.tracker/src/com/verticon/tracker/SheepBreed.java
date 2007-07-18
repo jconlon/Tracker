@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.AbstractEnumerator;
+import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +21,494 @@ import org.eclipse.emf.common.util.AbstractEnumerator;
  * @model
  * @generated
  */
-public final class SheepBreed extends AbstractEnumerator {
+public enum SheepBreed implements Enumerator
+{
+	/**
+	 * The '<em><b>CD</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CD
+	 * @generated
+	 * @ordered
+	 */
+	CD_LITERAL(0, "CD", "ARCOTT - Canadian"),
+	/**
+	 * The '<em><b>OU</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #OU
+	 * @generated
+	 * @ordered
+	 */
+	OU_LITERAL(1, "OU", "ARCOTT - Outaouais"),
+	/**
+	 * The '<em><b>RI</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RI
+	 * @generated
+	 * @ordered
+	 */
+	RI_LITERAL(2, "RI", "ARCOTT - Rideau"),
+	/**
+	 * The '<em><b>LY</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LY
+	 * @generated
+	 * @ordered
+	 */
+	LY_LITERAL(3, "LY", "BARBADOS BLACK BELLY"),
+	/**
+	 * The '<em><b>FB</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FB
+	 * @generated
+	 * @ordered
+	 */
+	FB_LITERAL(4, "FB", "BLACK FACE"),
+	/**
+	 * The '<em><b>BW</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BW
+	 * @generated
+	 * @ordered
+	 */
+	BW_LITERAL(5, "BW", "BLACK WELSH MOUNTAIN"),
+	/**
+	 * The '<em><b>BF</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BF
+	 * @generated
+	 * @ordered
+	 */
+	BF_LITERAL(6, "BF", "BLUE FACED LEISTER"),
+	/**
+	 * The '<em><b>BO</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BO
+	 * @generated
+	 * @ordered
+	 */
+	BO_LITERAL(7, "BO", "BOOROULA"),
+	/**
+	 * The '<em><b>BC</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BC
+	 * @generated
+	 * @ordered
+	 */
+	BC_LITERAL(8, "BC", "BORDER CHEVIOT"),
+	/**
+	 * The '<em><b>CO</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CO
+	 * @generated
+	 * @ordered
+	 */
+	CO_LITERAL(9, "CO", "CHAROLLAIS"),
+	/**
+	 * The '<em><b>CF</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CF
+	 * @generated
+	 * @ordered
+	 */
+	CF_LITERAL(10, "CF", "CLUN FOREST"),
+	/**
+	 * The '<em><b>CL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CL
+	 * @generated
+	 * @ordered
+	 */
+	CL_LITERAL(11, "CL", "COLUMBIA"),
+	/**
+	 * The '<em><b>CP</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CP
+	 * @generated
+	 * @ordered
+	 */
+	CP_LITERAL(12, "CP", "COOPWORTH"),
+	/**
+	 * The '<em><b>CR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CR
+	 * @generated
+	 * @ordered
+	 */
+	CR_LITERAL(13, "CR", "CORRIEDALE"),
+	/**
+	 * The '<em><b>DH</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DH
+	 * @generated
+	 * @ordered
+	 */
+	DH_LITERAL(14, "DH", "DORSET - Horned"),
+	/**
+	 * The '<em><b>DP</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DP
+	 * @generated
+	 * @ordered
+	 */
+	DP_LITERAL(15, "DP", "DORSET - Polled"),
+	/**
+	 * The '<em><b>DL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DL
+	 * @generated
+	 * @ordered
+	 */
+	DL_LITERAL(16, "DL", "DLS"),
+	/**
+	 * The '<em><b>ER</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ER
+	 * @generated
+	 * @ordered
+	 */
+	ER_LITERAL(17, "ER", "EAST FRIESLAND"),
+	/**
+	 * The '<em><b>FN</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FN
+	 * @generated
+	 * @ordered
+	 */
+	FN_LITERAL(18, "FN", "FINNISH LANDRACE "),
+	/**
+	 * The '<em><b>HS</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #HS
+	 * @generated
+	 * @ordered
+	 */
+	HS_LITERAL(19, "HS", "HAMPSHIRE"),
+	/**
+	 * The '<em><b>HY</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #HY
+	 * @generated
+	 * @ordered
+	 */
+	HY_LITERAL(20, "HY", "HYBRID"),
+	/**
+	 * The '<em><b>IL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #IL
+	 * @generated
+	 * @ordered
+	 */
+	IL_LITERAL(21, "IL", "ICELANDIC"),
+	/**
+	 * The '<em><b>KK</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #KK
+	 * @generated
+	 * @ordered
+	 */
+	KK_LITERAL(22, "KK", "KARAKUL"),
+	/**
+	 * The '<em><b>KA</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #KA
+	 * @generated
+	 * @ordered
+	 */
+	KA_LITERAL(23, "KA", "KATAHDIN"),
+	/**
+	 * The '<em><b>KH</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #KH
+	 * @generated
+	 * @ordered
+	 */
+	KH_LITERAL(24, "KH", "KERRY HILL"),
+	/**
+	 * The '<em><b>BL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BL
+	 * @generated
+	 * @ordered
+	 */
+	BL_LITERAL(25, "BL", "LEICESTER - Border"),
+	/**
+	 * The '<em><b>LE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LE
+	 * @generated
+	 * @ordered
+	 */
+	LE_LITERAL(26, "LE", "LEICESTER - English"),
+	/**
+	 * The '<em><b>HL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #HL
+	 * @generated
+	 * @ordered
+	 */
+	HL_LITERAL(27, "HL", "LEISTER - Hexam"),
+	/**
+	 * The '<em><b>LI</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LI
+	 * @generated
+	 * @ordered
+	 */
+	LI_LITERAL(28, "LI", "LINCOLN"),
+	/**
+	 * The '<em><b>MM</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MM
+	 * @generated
+	 * @ordered
+	 */
+	MM_LITERAL(29, "MM", "MM"),
+	/**
+	 * The '<em><b>MP</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MP
+	 * @generated
+	 * @ordered
+	 */
+	MP_LITERAL(30, "MP", "MERINO POLLED"),
+	/**
+	 * The '<em><b>MT</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MT
+	 * @generated
+	 * @ordered
+	 */
+	MT_LITERAL(31, "MT", "MT"),
+	/**
+	 * The '<em><b>NL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NL
+	 * @generated
+	 * @ordered
+	 */
+	NL_LITERAL(32, "NL", "NEWFOUNDLAND LOCO"),
+	/**
+	 * The '<em><b>NC</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NC
+	 * @generated
+	 * @ordered
+	 */
+	NC_LITERAL(33, "NC", "NORTH COUNTRY CHEVIOT"),
+	/**
+	 * The '<em><b>OX</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #OX
+	 * @generated
+	 * @ordered
+	 */
+	OX_LITERAL(34, "OX", "OXFORD"),
+	/**
+	 * The '<em><b>PE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PE
+	 * @generated
+	 * @ordered
+	 */
+	PE_LITERAL(35, "PE", "PERENDALE"),
+	/**
+	 * The '<em><b>PO</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PO
+	 * @generated
+	 * @ordered
+	 */
+	PO_LITERAL(36, "PO", "POLYPAY"),
+	/**
+	 * The '<em><b>RG</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RG
+	 * @generated
+	 * @ordered
+	 */
+	RG_LITERAL(37, "RG", "RAMBOUILLET"),
+	/**
+	 * The '<em><b>RV</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RV
+	 * @generated
+	 * @ordered
+	 */
+	RV_LITERAL(38, "RV", "ROMANOV"),
+	/**
+	 * The '<em><b>RM</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RM
+	 * @generated
+	 * @ordered
+	 */
+	RM_LITERAL(39, "RM", "ROMNELET"),
+	/**
+	 * The '<em><b>RY</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RY
+	 * @generated
+	 * @ordered
+	 */
+	RY_LITERAL(40, "RY", "ROMNEY"),
+	/**
+	 * The '<em><b>SX</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SX
+	 * @generated
+	 * @ordered
+	 */
+	SX_LITERAL(41, "SX", "ST. CROIX"),
+	/**
+	 * The '<em><b>SC</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SC
+	 * @generated
+	 * @ordered
+	 */
+	SC_LITERAL(42, "SC", "SCOTTISH BLACKFACE"),
+	/**
+	 * The '<em><b>SL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SL
+	 * @generated
+	 * @ordered
+	 */
+	SL_LITERAL(43, "SL", "SHETLAND"),
+	/**
+	 * The '<em><b>SR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SR
+	 * @generated
+	 * @ordered
+	 */
+	SR_LITERAL(44, "SR", "SHROPSHIRE"),
+	/**
+	 * The '<em><b>ST</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ST
+	 * @generated
+	 * @ordered
+	 */
+	ST_LITERAL(45, "ST", "SOUTHDOWN"),
+	/**
+	 * The '<em><b>SU</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SU
+	 * @generated
+	 * @ordered
+	 */
+	SU_LITERAL(46, "SU", "SUFFOLK"),
+	/**
+	 * The '<em><b>TA</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TA
+	 * @generated
+	 * @ordered
+	 */
+	TA_LITERAL(47, "TA", "TARGHEE"),
+	/**
+	 * The '<em><b>TX</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TX
+	 * @generated
+	 * @ordered
+	 */
+	TX_LITERAL(48, "TX", "TEXEL"),
+	/**
+	 * The '<em><b>TU</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #TU
+	 * @generated
+	 * @ordered
+	 */
+	TU_LITERAL(49, "TU", "TUNIS"),
+	/**
+	 * The '<em><b>XL</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #XL
+	 * @generated
+	 * @ordered
+	 */
+	XL_LITERAL(50, "XL", "CROSSBRED - Large"),
+	/**
+	 * The '<em><b>XM</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #XM
+	 * @generated
+	 * @ordered
+	 */
+	XM_LITERAL(51, "XM", "CROSSBRED - Medium"),
+	/**
+	 * The '<em><b>ZS</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ZS
+	 * @generated
+	 * @ordered
+	 */
+	ZS_LITERAL(52, "ZS", "CROSSBRED - Small"),
+	/**
+	 * The '<em><b>Unspecified</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #UNSPECIFIED
+	 * @generated
+	 * @ordered
+	 */
+	UNSPECIFIED_LITERAL(53, "Unspecified", "Unspecified");
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -659,7 +1146,6 @@ public final class SheepBreed extends AbstractEnumerator {
 	 */
 	public static final int SX = 41;
 
-
 	/**
 	 * The '<em><b>SC</b></em>' literal value.
 	 * <!-- begin-user-doc -->
@@ -841,547 +1327,6 @@ public final class SheepBreed extends AbstractEnumerator {
 	public static final int UNSPECIFIED = 53;
 
 	/**
-	 * The '<em><b>CD</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CD
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed CD_LITERAL = new SheepBreed(CD, "CD", "ARCOTT - Canadian");
-
-	/**
-	 * The '<em><b>OU</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #OU
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed OU_LITERAL = new SheepBreed(OU, "OU", "ARCOTT - Outaouais");
-
-	/**
-	 * The '<em><b>RI</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RI
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed RI_LITERAL = new SheepBreed(RI, "RI", "ARCOTT - Rideau");
-
-	/**
-	 * The '<em><b>LY</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LY
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed LY_LITERAL = new SheepBreed(LY, "LY", "BARBADOS BLACK BELLY");
-
-	/**
-	 * The '<em><b>FB</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #FB
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed FB_LITERAL = new SheepBreed(FB, "FB", "BLACK FACE");
-
-	/**
-	 * The '<em><b>BW</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BW
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed BW_LITERAL = new SheepBreed(BW, "BW", "BLACK WELSH MOUNTAIN");
-
-	/**
-	 * The '<em><b>BF</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BF
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed BF_LITERAL = new SheepBreed(BF, "BF", "BLUE FACED LEISTER");
-
-	/**
-	 * The '<em><b>BO</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BO
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed BO_LITERAL = new SheepBreed(BO, "BO", "BOOROULA");
-
-	/**
-	 * The '<em><b>BC</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BC
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed BC_LITERAL = new SheepBreed(BC, "BC", "BORDER CHEVIOT");
-
-	/**
-	 * The '<em><b>CO</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CO
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed CO_LITERAL = new SheepBreed(CO, "CO", "CHAROLLAIS");
-
-	/**
-	 * The '<em><b>CF</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CF
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed CF_LITERAL = new SheepBreed(CF, "CF", "CLUN FOREST");
-
-	/**
-	 * The '<em><b>CL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CL
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed CL_LITERAL = new SheepBreed(CL, "CL", "COLUMBIA");
-
-	/**
-	 * The '<em><b>CP</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CP
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed CP_LITERAL = new SheepBreed(CP, "CP", "COOPWORTH");
-
-	/**
-	 * The '<em><b>CR</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CR
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed CR_LITERAL = new SheepBreed(CR, "CR", "CORRIEDALE");
-
-	/**
-	 * The '<em><b>DH</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #DH
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed DH_LITERAL = new SheepBreed(DH, "DH", "DORSET - Horned");
-
-	/**
-	 * The '<em><b>DP</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #DP
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed DP_LITERAL = new SheepBreed(DP, "DP", "DORSET - Polled");
-
-	/**
-	 * The '<em><b>DL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #DL
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed DL_LITERAL = new SheepBreed(DL, "DL", "DLS");
-
-	/**
-	 * The '<em><b>ER</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ER
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed ER_LITERAL = new SheepBreed(ER, "ER", "EAST FRIESLAND");
-
-	/**
-	 * The '<em><b>FN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #FN
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed FN_LITERAL = new SheepBreed(FN, "FN", "FINNISH LANDRACE ");
-
-	/**
-	 * The '<em><b>HS</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #HS
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed HS_LITERAL = new SheepBreed(HS, "HS", "HAMPSHIRE");
-
-	/**
-	 * The '<em><b>HY</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #HY
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed HY_LITERAL = new SheepBreed(HY, "HY", "HYBRID");
-
-	/**
-	 * The '<em><b>IL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #IL
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed IL_LITERAL = new SheepBreed(IL, "IL", "ICELANDIC");
-
-	/**
-	 * The '<em><b>KK</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #KK
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed KK_LITERAL = new SheepBreed(KK, "KK", "KARAKUL");
-
-	/**
-	 * The '<em><b>KA</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #KA
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed KA_LITERAL = new SheepBreed(KA, "KA", "KATAHDIN");
-
-	/**
-	 * The '<em><b>KH</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #KH
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed KH_LITERAL = new SheepBreed(KH, "KH", "KERRY HILL");
-
-	/**
-	 * The '<em><b>BL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BL
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed BL_LITERAL = new SheepBreed(BL, "BL", "LEICESTER - Border");
-
-	/**
-	 * The '<em><b>LE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LE
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed LE_LITERAL = new SheepBreed(LE, "LE", "LEICESTER - English");
-
-	/**
-	 * The '<em><b>HL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #HL
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed HL_LITERAL = new SheepBreed(HL, "HL", "LEISTER - Hexam");
-
-	/**
-	 * The '<em><b>LI</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LI
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed LI_LITERAL = new SheepBreed(LI, "LI", "LINCOLN");
-
-	/**
-	 * The '<em><b>MM</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MM
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed MM_LITERAL = new SheepBreed(MM, "MM", "MM");
-
-	/**
-	 * The '<em><b>MP</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MP
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed MP_LITERAL = new SheepBreed(MP, "MP", "MERINO POLLED");
-
-	/**
-	 * The '<em><b>MT</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MT
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed MT_LITERAL = new SheepBreed(MT, "MT", "MT");
-
-	/**
-	 * The '<em><b>NL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #NL
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed NL_LITERAL = new SheepBreed(NL, "NL", "NEWFOUNDLAND LOCO");
-
-	/**
-	 * The '<em><b>NC</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #NC
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed NC_LITERAL = new SheepBreed(NC, "NC", "NORTH COUNTRY CHEVIOT");
-
-	/**
-	 * The '<em><b>OX</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #OX
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed OX_LITERAL = new SheepBreed(OX, "OX", "OXFORD");
-
-	/**
-	 * The '<em><b>PE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #PE
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed PE_LITERAL = new SheepBreed(PE, "PE", "PERENDALE");
-
-	/**
-	 * The '<em><b>PO</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #PO
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed PO_LITERAL = new SheepBreed(PO, "PO", "POLYPAY");
-
-	/**
-	 * The '<em><b>RG</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RG
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed RG_LITERAL = new SheepBreed(RG, "RG", "RAMBOUILLET");
-
-	/**
-	 * The '<em><b>RV</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RV
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed RV_LITERAL = new SheepBreed(RV, "RV", "ROMANOV");
-
-	/**
-	 * The '<em><b>RM</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RM
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed RM_LITERAL = new SheepBreed(RM, "RM", "ROMNELET");
-
-	/**
-	 * The '<em><b>RY</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #RY
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed RY_LITERAL = new SheepBreed(RY, "RY", "ROMNEY");
-
-	/**
-	 * The '<em><b>SX</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SX
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed SX_LITERAL = new SheepBreed(SX, "SX", "ST. CROIX");
-
-
-	/**
-	 * The '<em><b>SC</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SC
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed SC_LITERAL = new SheepBreed(SC, "SC", "SCOTTISH BLACKFACE");
-
-	/**
-	 * The '<em><b>SL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SL
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed SL_LITERAL = new SheepBreed(SL, "SL", "SHETLAND");
-
-	/**
-	 * The '<em><b>SR</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SR
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed SR_LITERAL = new SheepBreed(SR, "SR", "SHROPSHIRE");
-
-	/**
-	 * The '<em><b>ST</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ST
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed ST_LITERAL = new SheepBreed(ST, "ST", "SOUTHDOWN");
-
-	/**
-	 * The '<em><b>SU</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SU
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed SU_LITERAL = new SheepBreed(SU, "SU", "SUFFOLK");
-
-	/**
-	 * The '<em><b>TA</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #TA
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed TA_LITERAL = new SheepBreed(TA, "TA", "TARGHEE");
-
-	/**
-	 * The '<em><b>TX</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #TX
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed TX_LITERAL = new SheepBreed(TX, "TX", "TEXEL");
-
-	/**
-	 * The '<em><b>TU</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #TU
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed TU_LITERAL = new SheepBreed(TU, "TU", "TUNIS");
-
-	/**
-	 * The '<em><b>XL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #XL
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed XL_LITERAL = new SheepBreed(XL, "XL", "CROSSBRED - Large");
-
-	/**
-	 * The '<em><b>XM</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #XM
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed XM_LITERAL = new SheepBreed(XM, "XM", "CROSSBRED - Medium");
-
-	/**
-	 * The '<em><b>ZS</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ZS
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed ZS_LITERAL = new SheepBreed(ZS, "ZS", "CROSSBRED - Small");
-
-	/**
-	 * The '<em><b>Unspecified</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #UNSPECIFIED
-	 * @generated
-	 * @ordered
-	 */
-	public static final SheepBreed UNSPECIFIED_LITERAL = new SheepBreed(UNSPECIFIED, "Unspecified", "Unspecified");
-
-	/**
 	 * An array of all the '<em><b>Sheep Breed</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1451,7 +1396,7 @@ public final class SheepBreed extends AbstractEnumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<SheepBreed> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Sheep Breed</b></em>' literal with the specified literal value.
@@ -1552,13 +1497,73 @@ public final class SheepBreed extends AbstractEnumerator {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final int value;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String name;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String literal;
+
+	/**
 	 * Only this class can construct instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private SheepBreed(int value, String name, String literal) {
-		super(value, name, literal);
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
 	}
 
-} //SheepBreed
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getValue() {
+	  return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+	  return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLiteral() {
+	  return literal;
+	}
+
+	/**
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return literal;
+	}
+}

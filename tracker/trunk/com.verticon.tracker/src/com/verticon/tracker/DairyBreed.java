@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.AbstractEnumerator;
+import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +21,107 @@ import org.eclipse.emf.common.util.AbstractEnumerator;
  * @model
  * @generated
  */
-public final class DairyBreed extends AbstractEnumerator {
+public enum DairyBreed implements Enumerator
+{
+	/**
+	 * The '<em><b>LD</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LD
+	 * @generated
+	 * @ordered
+	 */
+	LD_LITERAL(0, "LD", "AMERICAN LINEBACK"),
+	/**
+	 * The '<em><b>AY</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #AY
+	 * @generated
+	 * @ordered
+	 */
+	AY_LITERAL(1, "AY", "AYRSHIRE"),
+	/**
+	 * The '<em><b>BS</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BS
+	 * @generated
+	 * @ordered
+	 */
+	BS_LITERAL(2, "BS", "BROWN SWISS"),
+	/**
+	 * The '<em><b>GD</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GD
+	 * @generated
+	 * @ordered
+	 */
+	GD_LITERAL(3, "GD", "GALLOWAY"),
+	/**
+	 * The '<em><b>GU</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GU
+	 * @generated
+	 * @ordered
+	 */
+	GU_LITERAL(4, "GU", "GUERNSEY"),
+	/**
+	 * The '<em><b>HO</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #HO
+	 * @generated
+	 * @ordered
+	 */
+	HO_LITERAL(5, "HO", "HOLSTEIN"),
+	/**
+	 * The '<em><b>JE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #JE
+	 * @generated
+	 * @ordered
+	 */
+	JE_LITERAL(6, "JE", "JERSEY"),
+	/**
+	 * The '<em><b>WW</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #WW
+	 * @generated
+	 * @ordered
+	 */
+	WW_LITERAL(7, "WW", "RED HOLSTEIN"),
+	/**
+	 * The '<em><b>FM</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FM
+	 * @generated
+	 * @ordered
+	 */
+	FM_LITERAL(8, "FM", "ROUGE FLAMAND"),
+	/**
+	 * The '<em><b>MS</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MS
+	 * @generated
+	 * @ordered
+	 */
+	MS_LITERAL(9, "MS", "SHORTHORN"),
+	/**
+	 * The '<em><b>Unspecified</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #UNSPECIFIED
+	 * @generated
+	 * @ordered
+	 */
+	UNSPECIFIED_LITERAL(10, "Unspecified", "Unspecified");
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,7 +188,6 @@ public final class DairyBreed extends AbstractEnumerator {
 	 * @ordered
 	 */
 	public static final int GD = 3;
-
 
 	/**
 	 * The '<em><b>GU</b></em>' literal value.
@@ -196,117 +295,6 @@ public final class DairyBreed extends AbstractEnumerator {
 	public static final int UNSPECIFIED = 10;
 
 	/**
-	 * The '<em><b>LD</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LD
-	 * @generated
-	 * @ordered
-	 */
-	public static final DairyBreed LD_LITERAL = new DairyBreed(LD, "LD", "AMERICAN LINEBACK");
-
-	/**
-	 * The '<em><b>AY</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #AY
-	 * @generated
-	 * @ordered
-	 */
-	public static final DairyBreed AY_LITERAL = new DairyBreed(AY, "AY", "AYRSHIRE");
-
-	/**
-	 * The '<em><b>BS</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BS
-	 * @generated
-	 * @ordered
-	 */
-	public static final DairyBreed BS_LITERAL = new DairyBreed(BS, "BS", "BROWN SWISS");
-
-	/**
-	 * The '<em><b>GD</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #GD
-	 * @generated
-	 * @ordered
-	 */
-	public static final DairyBreed GD_LITERAL = new DairyBreed(GD, "GD", "GALLOWAY");
-
-
-	/**
-	 * The '<em><b>GU</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #GU
-	 * @generated
-	 * @ordered
-	 */
-	public static final DairyBreed GU_LITERAL = new DairyBreed(GU, "GU", "GUERNSEY");
-
-	/**
-	 * The '<em><b>HO</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #HO
-	 * @generated
-	 * @ordered
-	 */
-	public static final DairyBreed HO_LITERAL = new DairyBreed(HO, "HO", "HOLSTEIN");
-
-	/**
-	 * The '<em><b>JE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #JE
-	 * @generated
-	 * @ordered
-	 */
-	public static final DairyBreed JE_LITERAL = new DairyBreed(JE, "JE", "JERSEY");
-
-	/**
-	 * The '<em><b>WW</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #WW
-	 * @generated
-	 * @ordered
-	 */
-	public static final DairyBreed WW_LITERAL = new DairyBreed(WW, "WW", "RED HOLSTEIN");
-
-	/**
-	 * The '<em><b>FM</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #FM
-	 * @generated
-	 * @ordered
-	 */
-	public static final DairyBreed FM_LITERAL = new DairyBreed(FM, "FM", "ROUGE FLAMAND");
-
-	/**
-	 * The '<em><b>MS</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MS
-	 * @generated
-	 * @ordered
-	 */
-	public static final DairyBreed MS_LITERAL = new DairyBreed(MS, "MS", "SHORTHORN");
-
-	/**
-	 * The '<em><b>Unspecified</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #UNSPECIFIED
-	 * @generated
-	 * @ordered
-	 */
-	public static final DairyBreed UNSPECIFIED_LITERAL = new DairyBreed(UNSPECIFIED, "Unspecified", "Unspecified");
-
-	/**
 	 * An array of all the '<em><b>Dairy Breed</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -333,7 +321,7 @@ public final class DairyBreed extends AbstractEnumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<DairyBreed> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Dairy Breed</b></em>' literal with the specified literal value.
@@ -391,13 +379,73 @@ public final class DairyBreed extends AbstractEnumerator {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final int value;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String name;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String literal;
+
+	/**
 	 * Only this class can construct instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private DairyBreed(int value, String name, String literal) {
-		super(value, name, literal);
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
 	}
 
-} //DairyBreed
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getValue() {
+	  return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+	  return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLiteral() {
+	  return literal;
+	}
+
+	/**
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return literal;
+	}
+}

@@ -92,9 +92,7 @@ public class CommonUtilities {
 	 * @return true if no similar event is associated with the animal
 	 */
 	public static boolean canAddEventToAnimal(AnimalId animalId, Event event, EventHistory eventHistory){
-		List elist = eventHistory.getEvents();
-		for (Object object : elist) {
-			Event ev = (Event) object;
+		for (Event ev : eventHistory.getEvents()) {
 			if (ev.getEventCode() == event.getEventCode() && ev.getAin() == animalId) {
 				return false;
 			}

@@ -44,6 +44,7 @@ public abstract class BovineImpl extends AnimalImpl implements Bovine {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.BOVINE;
 	}

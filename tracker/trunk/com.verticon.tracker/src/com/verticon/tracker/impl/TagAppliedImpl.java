@@ -44,6 +44,7 @@ public class TagAppliedImpl extends EventImpl implements TagApplied {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return TrackerPackage.Literals.TAG_APPLIED;
 	}
