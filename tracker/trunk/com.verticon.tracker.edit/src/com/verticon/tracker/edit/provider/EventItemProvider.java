@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
+import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
@@ -44,7 +45,7 @@ import com.verticon.tracker.TrackerPackage;
 public class EventItemProvider
 	extends ItemProviderAdapter
 	implements	
-	ITableItemLabelProvider,IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+	ITableItemLabelProvider, IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -68,7 +69,8 @@ public class EventItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List getPropertyDescriptors(Object object) {
+	@Override
+	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -246,14 +248,14 @@ public class EventItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public String getText(Object object) {
 		Date date = ((Event)object).getDateTime();
 		String simpleName = object.getClass().getSimpleName();
 		String resourceName = simpleName.substring(0,simpleName.indexOf("Impl"));
 		//TODO Give user a persistence var to control output format of date in Event Label
 		if(date!=null){
-//			DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
-			SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss z");
+			DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss z");
 			return df.format(date)+" "+getString("_UI_"+resourceName+"_type");
 		}
 		return getString("_UI_"+resourceName+"_type") ;
@@ -285,13 +287,14 @@ public class EventItemProvider
 	}
 
 	/**
-	 * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-	 * describing all of the children that can be created under this object.
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
+	@Override
+	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -301,6 +304,7 @@ public class EventItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ResourceLocator getResourceLocator() {
 		return TrackerReportEditPlugin.INSTANCE;
 	}
@@ -315,13 +319,11 @@ public class EventItemProvider
 	    switch (columnIndex){
 	    	case 0: 
 	    		if(event.getDateTime()!=null){
-	    			DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
-//	    			DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
+	    			DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss z");
 	    			return df.format(event.getDateTime());
 	    		}
 	    		return null;
 	    	case 1: 
-//	    		return Long.toString(event.getId());
 	    		AnimalId animalId = ((Event)object).getAin();
 	    		if(animalId==null) return "";
 	    		IItemLabelProvider itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(
