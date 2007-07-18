@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.MissingResourceException;
@@ -25,12 +24,11 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.xmi.XMLResource;
-
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -134,7 +132,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected List initialObjectNames;
+	protected List<String> initialObjectNames;
 
 	/**
 	 * This just records the information.
@@ -155,11 +153,10 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection getInitialObjectNames() {
+	protected Collection<String> getInitialObjectNames() {
 		if (initialObjectNames == null) {
-			initialObjectNames = new ArrayList();
-			for (Iterator classifiers = trackerPackage.getEClassifiers().iterator(); classifiers.hasNext(); ) {
-				EClassifier eClassifier = (EClassifier)classifiers.next();
+			initialObjectNames = new ArrayList<String>();
+			for (EClassifier eClassifier : trackerPackage.getEClassifiers()) {
 				if (eClassifier instanceof EClass) {
 					EClass eClass = (EClass)eClassifier;
 					if (!eClass.isAbstract()) {
@@ -167,7 +164,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 					}
 				}
 			}
-			Collections.sort(initialObjectNames, java.text.Collator.getInstance());
+			Collections.sort(initialObjectNames, CommonPlugin.INSTANCE.getComparator());
 		}
 		return initialObjectNames;
 	}
@@ -211,7 +208,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 
 							// Get the URI of the model file.
 							//
-							URI fileURI = URI.createPlatformResourceURI(modelFile.getFullPath().toString());
+							URI fileURI = URI.createPlatformResourceURI(modelFile.getFullPath().toString(), true);
 
 							// Create a resource for this file.
 							//
@@ -226,7 +223,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 
 							// Save the contents of the resource to the file system.
 							//
-							Map options = new HashMap();
+							Map<Object, Object> options = new HashMap<Object, Object>();
 //							options.put(XMLResource.OPTION_ENCODING, initialObjectCreationPage.getEncoding());
 							resource.save(options);
 						}
@@ -299,6 +296,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@Override
 		protected boolean validatePage() {
 			if (super.validatePage()) {
 				// Make sure the file ends in ".tracker".
@@ -347,7 +345,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 */
-		protected List encodings;
+		protected List<String> encodings;
 
 		/**
 		 * <!-- begin-user-doc -->
@@ -402,8 +400,8 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 				initialObjectField.setLayoutData(data);
 			}
 
-			for (Iterator i = getInitialObjectNames().iterator(); i.hasNext(); ) {
-				initialObjectField.add(getLabel((String)i.next()));
+			for (String objectName : getInitialObjectNames()) {
+				initialObjectField.add(getLabel(objectName));
 			}
 
 			if (initialObjectField.getItemCount() == 1) {
@@ -427,8 +425,8 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 				encodingField.setLayoutData(data);
 			}
 
-			for (Iterator i = getEncodings().iterator(); i.hasNext(); ) {
-				encodingField.add((String)i.next());
+			for (String encoding : getEncodings()) {
+				encodingField.add(encoding);
 			}
 
 			encodingField.select(0);
@@ -464,6 +462,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@Override
 		public void setVisible(boolean visible) {
 			super.setVisible(visible);
 			if (visible) {
@@ -486,8 +485,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 		public String getInitialObjectName() {
 			String label = initialObjectField.getText();
 
-			for (Iterator i = getInitialObjectNames().iterator(); i.hasNext(); ) {
-				String name = (String)i.next();
+			for (String name : getInitialObjectNames()) {
 				if (getLabel(name).equals(label)) {
 					return name;
 				}
@@ -525,9 +523,9 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		protected Collection getEncodings() {
+		protected Collection<String> getEncodings() {
 			if (encodings == null) {
-				encodings = new ArrayList();
+				encodings = new ArrayList<String>();
 				for (StringTokenizer stringTokenizer = new StringTokenizer(TrackerReportEditorPlugin.INSTANCE.getString("_UI_XMLEncodingChoices")); stringTokenizer.hasMoreTokens(); ) {
 					encodings.add(stringTokenizer.nextToken());
 				}

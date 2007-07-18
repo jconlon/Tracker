@@ -4,10 +4,8 @@
 package com.verticon.tracker.editor.decorators;
 
 import org.eclipse.jface.viewers.IDecoration;
-import org.eclipse.jface.viewers.ILabelDecorator;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ILightweightLabelDecorator;
-import org.eclipse.swt.graphics.Image;
 
 /**
  * @author jconlon

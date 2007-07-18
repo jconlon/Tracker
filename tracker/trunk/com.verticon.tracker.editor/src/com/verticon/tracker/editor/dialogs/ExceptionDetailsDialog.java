@@ -154,7 +154,7 @@ public class ExceptionDetailsDialog extends AbstractDetailsDialog
       layout.marginWidth = convertHorizontalDLUsToPixels(IDialogConstants.HORIZONTAL_MARGIN);
       composite.setLayout(layout);
 
-      Dictionary bundleHeaders = plugin.getBundle().getHeaders();
+      Dictionary<?, ?> bundleHeaders = plugin.getBundle().getHeaders();
       String pluginId = plugin.getBundle().getSymbolicName();
       String pluginVendor = (String) bundleHeaders.get("Bundle-Vendor");
       String pluginName = (String) bundleHeaders.get("Bundle-Name");

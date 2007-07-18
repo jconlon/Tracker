@@ -30,7 +30,7 @@ public abstract class AbstractAddAsEvent extends AbstractAddToParentActionDelega
 	 * @see com.verticon.tracker.editor.actions.AbstractAddToParentActionDelegate#createChildren(java.lang.Long)
 	 */
 	@Override
-	protected Collection createChildren(Long tag) throws NoAnimalFoundException {
+	protected Collection<Event> createChildren(Long tag) throws NoAnimalFoundException {
 		TrackerFactory trackerFactory = TrackerFactory.eINSTANCE;
 		
 		AnimalId animalId = findAnimalId( tag, null);

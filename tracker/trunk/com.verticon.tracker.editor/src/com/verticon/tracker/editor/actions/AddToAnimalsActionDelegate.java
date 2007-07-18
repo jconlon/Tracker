@@ -70,7 +70,7 @@ public class AddToAnimalsActionDelegate extends AbstractAddToParentActionDelegat
 	 * Create an animal if there is not already one with this tag.
 	 */
 	@Override
-	protected Collection createChildren(Long tag){
+	protected Collection<Animal> createChildren(Long tag){
 		if(findAnimalId(tag, null)!=null){
 			return null;
 		}
@@ -79,7 +79,7 @@ public class AddToAnimalsActionDelegate extends AbstractAddToParentActionDelegat
 		AnimalId animalId = TrackerFactory.eINSTANCE.createAnimalId();
 		animalId.setIdNumber(tag.toString());
 		animal.setAin(animalId);
-		ArrayList results = new ArrayList();
+		ArrayList<Animal> results = new ArrayList<Animal>();
 		results.add(animal);
 		return results;
 	}

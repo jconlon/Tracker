@@ -105,8 +105,9 @@ public class AnimalSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
+	@SuppressWarnings("unchecked")
 	protected int compareSexes(Animal animal1, Animal animal2) {
-		return collator.compare(animal1.getSexCode(), animal2.getSexCode());
+		return getComparator().compare(animal1.getSexCode(), animal2.getSexCode());
 	}
 	
 	/**
@@ -120,9 +121,10 @@ public class AnimalSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
+	@SuppressWarnings("unchecked")
 	private int compareBreeds(Animal animal1, Animal animal2) {
 		
-		return collator.compare(animal1.getBreed(), animal2.getBreed());
+		return getComparator().compare(animal1.getBreed(), animal2.getBreed());
 		
 	}
 	
@@ -137,10 +139,11 @@ public class AnimalSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
+	@SuppressWarnings("unchecked")
 	private int compareAins(Animal animal1, Animal animal2) {
 		String ain1 = animal1.getAin()==null?"":animal1.getAin().getIdNumber();
 		String ain2 = animal2.getAin()==null?"":animal2.getAin().getIdNumber();
-		return collator.compare(
+		return getComparator().compare(
 				ain1, 
 				ain2);
 		
@@ -175,8 +178,9 @@ public class AnimalSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
+	@SuppressWarnings("unchecked")
 	protected int compareSpecies(Animal animal1, Animal animal2) {
-		return collator.compare(animal1.getSpecies(), 
+		return getComparator().compare(animal1.getSpecies(), 
 				animal2.getSpecies());
 	}
 

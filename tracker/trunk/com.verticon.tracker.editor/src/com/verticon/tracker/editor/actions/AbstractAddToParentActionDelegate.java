@@ -85,7 +85,7 @@ public abstract class AbstractAddToParentActionDelegate {
 	protected void processSelection(TrackerEditor editor) {
 		
 		if (selection instanceof IStructuredSelection) {
-			for (Iterator iter = ((IStructuredSelection) selection).iterator(); iter
+			for (Iterator<?> iter = ((IStructuredSelection) selection).iterator(); iter
 					.hasNext();) {
 				resource = (IResource) iter.next();
 				TrackerLog.logInfo("Adding tags from resource "
@@ -142,6 +142,7 @@ public abstract class AbstractAddToParentActionDelegate {
 		return ((IFileEditorInput) input).getFile();
 	}
 
+	
 	
 	@SuppressWarnings("unchecked")
 	private void processTags(Set<Long> tags, TrackerEditor editor)
@@ -209,7 +210,7 @@ public abstract class AbstractAddToParentActionDelegate {
 
 	protected abstract Object getFeature();
 
-	protected abstract Collection createChildren(Long tag)
+	protected abstract Collection<?> createChildren(Long tag)
 			throws NoAnimalFoundException;
 
 	/**
@@ -236,9 +237,8 @@ public abstract class AbstractAddToParentActionDelegate {
 	 * @return event or null
 	 */
 	protected boolean containsEvent(Long tag, int eventCode) {
-		List elist = premises.getEventHistory().getEvents();
-		for (Object object : elist) {
-			Event event = (Event) object;
+		List<Event> elist = premises.getEventHistory().getEvents();
+		for (Event event : elist) {
 			if (event.getEventCode() == eventCode && event.getId() == tag.longValue()) {
 				return true;
 			}

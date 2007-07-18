@@ -39,6 +39,9 @@ that can be installed and used with other Eclipse (3.2)-based offerings.
       </win>
    </launcher>
 
+   <vm>
+   </vm>
+
    <plugins>
       <plugin id="com.ibm.icu"/>
       <plugin id="com.verticon.tracker"/>
@@ -104,6 +107,8 @@ that can be installed and used with other Eclipse (3.2)-based offerings.
       <feature id="com.verticon.tracker.ocl.validation" version="1.0.0"/>
       <feature id="com.verticon.tracker.transaction.editor" version="1.0.0"/>
       <feature id="com.verticon.tracker.transaction.publisher" version="1.0.0"/>
+      <feature id="org.eclipse.ocl" version="1.1.0.v200706071450-32-9oA55P5M8C8KCK"/>
+      <feature id="com.verticon.tracker.help" version="1.0.0"/>
    </features>
 
 </product>
