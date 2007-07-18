@@ -66,9 +66,8 @@ public class MovedOutWorkSheetBuilder extends AbstractWorkSheetBuilder implement
 	 */
 	@Override
 	public void loadList(Premises premises ){
-		EList events = premises.getEventHistory().getEvents();
-		for (Object object : events) {
-			Event event = (Event)object;
+		EList<Event> events = premises.getEventHistory().getEvents();
+		for (Event event : events) {
 			if(MovedOut.EVENT_CODE ==event.getEventCode()){
 				movedOutEvents.add((MovedOut)event);
 			}

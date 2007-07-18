@@ -64,12 +64,6 @@ public class XLSExporter implements PremisesProcessor{
 	    return cellStyle;
 	}
 	
-	private HSSFCellStyle createTypicalStyle(HSSFWorkbook wb){
-		HSSFCellStyle cellStyle = wb.createCellStyle();
-	    cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-	    return cellStyle;
-	}
-
 	
 	private void createFile(HSSFWorkbook wb) throws IOException{
 		FileOutputStream fileOut = new FileOutputStream(fileName);
