@@ -134,6 +134,7 @@ import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
+import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelProvider;
 
 
 /**
@@ -998,7 +999,7 @@ public class TrackerEditor
 				selectionViewer = (TreeViewer)viewerPane.getViewer();
 				selectionViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
 
-				selectionViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+				selectionViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory));
 				//Changed to show the Premises as the root
 //				selectionViewer.setInput(editingDomain.getResourceSet());
 //				viewerPane.setTitle(editingDomain.getResourceSet());
