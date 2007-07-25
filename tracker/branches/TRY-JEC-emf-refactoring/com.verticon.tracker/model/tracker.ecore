@@ -4,6 +4,11 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tracker"
     nsURI="http://www.verticon.com/ns/tracker/1.0" nsPrefix="com.verticon.tracker">
   <eClassifiers xsi:type="ecore:EClass" name="Animal" abstract="true">
+    <eOperations name="allEvents" upperBound="-1" eType="#//Event">
+      <eAnnotations source="http://www.eclipse.org/ocl/examples/OCL">
+        <details key="body" value="ain.events"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthDate" eType="#//Date"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sex" eType="#//Sex" defaultValueLiteral="Unspecified"
         unsettable="true"/>
@@ -36,12 +41,13 @@
         eType="#//AnimialIdNumber" iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="usainNumberUsed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" lowerBound="1"
+        upperBound="-1" eType="#//Event" containment="true" eOpposite="#//Event/animalId"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Bovine" abstract="true" eSuperTypes="#//Animal"/>
   <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateTime" lowerBound="1"
         eType="#//DateTime"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ain" lowerBound="1" eType="#//AnimalId"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="eventCode" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" changeable="false"
         volatile="true" transient="true" defaultValueLiteral="0" derived="true"/>
@@ -52,19 +58,24 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
         changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="animalId" lowerBound="1"
+        eType="#//AnimalId" transient="true" eOpposite="#//AnimalId/events"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TagAllocated" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="Premises">
+    <eOperations name="eventHistory" upperBound="-1" eType="#//Event">
+      <eAnnotations source="http://www.eclipse.org/ocl/examples/OCL">
+        <details key="body" value="animals.ain.events"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="premisesId" lowerBound="1"
         eType="#//PremisesIdNumber"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="emailContact" lowerBound="1"
         eType="#//Email" defaultValueLiteral=""/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="animals" lowerBound="1"
-        eType="#//Animals" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eventHistory" lowerBound="1"
-        eType="#//EventHistory" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unAppliedTags" eType="#//UnAppliedTags"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="animals" upperBound="-1"
+        eType="#//Animal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unAppliedTags" upperBound="-1"
+        eType="#//AnimalId" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="AnimialIdNumber" instanceClassName="java.lang.String">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -81,14 +92,6 @@
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Email" instanceClassName="java.lang.String"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EventHistory">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="events" lowerBound="1"
-        upperBound="-1" eType="#//Event" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Animals">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="animal" lowerBound="1"
-        upperBound="-1" eType="#//Animal" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BisonBreed">
     <eLiterals name="WO" literal="WOOD BISON"/>
     <eLiterals name="PB" value="1" literal="PLAINS BISON"/>
@@ -363,9 +366,5 @@
   <eClassifiers xsi:type="ecore:EClass" name="Swine" eSuperTypes="#//Animal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="swineBreed" eType="#//SwineBreed"
         defaultValueLiteral="Unspecified"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UnAppliedTags">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ain" upperBound="-1" eType="#//AnimalId"
-        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

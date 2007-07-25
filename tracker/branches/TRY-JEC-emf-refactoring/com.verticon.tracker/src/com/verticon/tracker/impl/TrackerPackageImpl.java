@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.AnimalMissing;
-import com.verticon.tracker.Animals;
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BisonBreed;
 import com.verticon.tracker.Bovine;
@@ -30,7 +29,6 @@ import com.verticon.tracker.BovineDairy;
 import com.verticon.tracker.DairyBreed;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.Exported;
 import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.Imported;
@@ -51,9 +49,7 @@ import com.verticon.tracker.TagApplied;
 import com.verticon.tracker.TagRetired;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.UnAppliedTags;
 import com.verticon.tracker.WeighIn;
-
 import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.TrackerValidator;
 
@@ -160,28 +156,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass unAppliedTagsEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass premisesEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass eventHistoryEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass animalsEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -564,6 +539,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAnimalId_Events() {
+		return (EReference)animalIdEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBovine() {
 		return bovineEClass;
 	}
@@ -591,17 +575,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEvent_Ain() {
-		return (EReference)eventEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getEvent_EventCode() {
-		return (EAttribute)eventEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)eventEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -610,7 +585,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	public EAttribute getEvent_ElectronicallyRead() {
-		return (EAttribute)eventEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)eventEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -619,7 +594,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	public EAttribute getEvent_Correction() {
-		return (EAttribute)eventEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)eventEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -628,7 +603,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	public EAttribute getEvent_Comments() {
-		return (EAttribute)eventEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)eventEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -637,7 +612,16 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	public EAttribute getEvent_Id() {
-		return (EAttribute)eventEClass.getEStructuralFeatures().get(6);
+		return (EAttribute)eventEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEvent_AnimalId() {
+		return (EReference)eventEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -780,24 +764,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getUnAppliedTags() {
-		return unAppliedTagsEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getUnAppliedTags_Ain() {
-		return (EReference)unAppliedTagsEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getPremises() {
 		return premisesEClass;
 	}
@@ -834,53 +800,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPremises_EventHistory() {
-		return (EReference)premisesEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getPremises_UnAppliedTags() {
-		return (EReference)premisesEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEventHistory() {
-		return eventHistoryEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEventHistory_Events() {
-		return (EReference)eventHistoryEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getAnimals() {
-		return animalsEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAnimals_Animal() {
-		return (EReference)animalsEClass.getEStructuralFeatures().get(0);
+		return (EReference)premisesEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1222,17 +1143,18 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		animalIdEClass = createEClass(ANIMAL_ID);
 		createEAttribute(animalIdEClass, ANIMAL_ID__ID_NUMBER);
 		createEAttribute(animalIdEClass, ANIMAL_ID__USAIN_NUMBER_USED);
+		createEReference(animalIdEClass, ANIMAL_ID__EVENTS);
 
 		bovineEClass = createEClass(BOVINE);
 
 		eventEClass = createEClass(EVENT);
 		createEAttribute(eventEClass, EVENT__DATE_TIME);
-		createEReference(eventEClass, EVENT__AIN);
 		createEAttribute(eventEClass, EVENT__EVENT_CODE);
 		createEAttribute(eventEClass, EVENT__ELECTRONICALLY_READ);
 		createEAttribute(eventEClass, EVENT__CORRECTION);
 		createEAttribute(eventEClass, EVENT__COMMENTS);
 		createEAttribute(eventEClass, EVENT__ID);
+		createEReference(eventEClass, EVENT__ANIMAL_ID);
 
 		tagAllocatedEClass = createEClass(TAG_ALLOCATED);
 
@@ -1240,14 +1162,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(premisesEClass, PREMISES__PREMISES_ID);
 		createEAttribute(premisesEClass, PREMISES__EMAIL_CONTACT);
 		createEReference(premisesEClass, PREMISES__ANIMALS);
-		createEReference(premisesEClass, PREMISES__EVENT_HISTORY);
 		createEReference(premisesEClass, PREMISES__UN_APPLIED_TAGS);
-
-		eventHistoryEClass = createEClass(EVENT_HISTORY);
-		createEReference(eventHistoryEClass, EVENT_HISTORY__EVENTS);
-
-		animalsEClass = createEClass(ANIMALS);
-		createEReference(animalsEClass, ANIMALS__ANIMAL);
 
 		bovineBeefEClass = createEClass(BOVINE_BEEF);
 		createEAttribute(bovineBeefEClass, BOVINE_BEEF__BEEF_BREED);
@@ -1302,9 +1217,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		swineEClass = createEClass(SWINE);
 		createEAttribute(swineEClass, SWINE__SWINE_BREED);
-
-		unAppliedTagsEClass = createEClass(UN_APPLIED_TAGS);
-		createEReference(unAppliedTagsEClass, UN_APPLIED_TAGS__AIN);
 
 		// Create enums
 		sexEEnum = createEEnum(SEX);
@@ -1387,35 +1299,33 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getAnimal_SexCode(), ecorePackage.getEString(), "sexCode", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_SpeciesCode(), ecorePackage.getEString(), "speciesCode", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
+		addEOperation(animalEClass, this.getEvent(), "allEvents", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(animalIdEClass, AnimalId.class, "AnimalId", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAnimalId_IdNumber(), this.getAnimialIdNumber(), "idNumber", null, 1, 1, AnimalId.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimalId_UsainNumberUsed(), ecorePackage.getEBoolean(), "usainNumberUsed", null, 0, 1, AnimalId.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getAnimalId_Events(), this.getEvent(), this.getEvent_AnimalId(), "events", null, 1, -1, AnimalId.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bovineEClass, Bovine.class, "Bovine", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(eventEClass, Event.class, "Event", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEvent_DateTime(), this.getDateTime(), "dateTime", null, 1, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEvent_Ain(), this.getAnimalId(), null, "ain", null, 1, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_EventCode(), ecorePackage.getEInt(), "eventCode", "0", 1, 1, Event.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_ElectronicallyRead(), ecorePackage.getEBoolean(), "electronicallyRead", "false", 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_Correction(), ecorePackage.getEBoolean(), "correction", "false", 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_Comments(), ecorePackage.getEString(), "comments", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_Id(), ecorePackage.getELong(), "id", null, 0, 1, Event.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getEvent_AnimalId(), this.getAnimalId(), this.getAnimalId_Events(), "animalId", null, 1, 1, Event.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tagAllocatedEClass, TagAllocated.class, "TagAllocated", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(premisesEClass, Premises.class, "Premises", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPremises_PremisesId(), this.getPremisesIdNumber(), "premisesId", null, 1, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPremises_EmailContact(), this.getEmail(), "emailContact", "", 1, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPremises_Animals(), this.getAnimals(), null, "animals", null, 1, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPremises_EventHistory(), this.getEventHistory(), null, "eventHistory", null, 1, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPremises_UnAppliedTags(), this.getUnAppliedTags(), null, "unAppliedTags", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPremises_Animals(), this.getAnimal(), null, "animals", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPremises_UnAppliedTags(), this.getAnimalId(), null, "unAppliedTags", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(eventHistoryEClass, EventHistory.class, "EventHistory", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEventHistory_Events(), this.getEvent(), null, "events", null, 1, -1, EventHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(animalsEClass, Animals.class, "Animals", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAnimals_Animal(), this.getAnimal(), null, "animal", null, 1, -1, Animals.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		addEOperation(premisesEClass, this.getEvent(), "eventHistory", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(bovineBeefEClass, BovineBeef.class, "BovineBeef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBovineBeef_BeefBreed(), this.getBeefBreed(), "beefBreed", "Unspecified", 0, 1, BovineBeef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1470,9 +1380,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		initEClass(swineEClass, Swine.class, "Swine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSwine_SwineBreed(), this.getSwineBreed(), "swineBreed", "Unspecified", 0, 1, Swine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(unAppliedTagsEClass, UnAppliedTags.class, "UnAppliedTags", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getUnAppliedTags_Ain(), this.getAnimalId(), null, "ain", null, 0, -1, UnAppliedTags.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");
@@ -1712,8 +1619,32 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createResource(eNS_URI);
 
 		// Create annotations
+		// http://www.eclipse.org/ocl/examples/OCL
+		createOCLAnnotations();
 		// http:///org/eclipse/emf/ecore/util/ExtendedMetaData
 		createExtendedMetaDataAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/ocl/examples/OCL</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createOCLAnnotations() {
+		String source = "http://www.eclipse.org/ocl/examples/OCL";		
+		addAnnotation
+		  (animalEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "ain.events"
+		   });		
+		addAnnotation
+		  (premisesEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "animals.ain.events"
+		   });		
 	}
 
 	/**
@@ -1723,7 +1654,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";				
 		addAnnotation
 		  (animialIdNumberEDataType, 
 		   source, 

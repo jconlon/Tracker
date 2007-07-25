@@ -7,17 +7,28 @@
 package com.verticon.tracker.impl;
 
 import java.math.BigInteger;
+import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
+import org.eclipse.ocl.ecore.OCL;
+import org.eclipse.ocl.expressions.OCLExpression;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalId;
+import com.verticon.tracker.Event;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
@@ -171,6 +182,19 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @ordered
 	 */
 	protected static final String SPECIES_CODE_EDEFAULT = null;
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #allEvents <em>All Events</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #allEvents
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> allEventsBodyOCL;
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.eclipse.org/ocl/examples/OCL";
+
+	private static final OCL OCL_ENV = OCL.newInstance();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -368,6 +392,34 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 */
 	public String getSpeciesCode() {
 		return getSpeciesEnum().name();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Event> allEvents() {
+		if (allEventsBodyOCL == null) {
+			EOperation eOperation = TrackerPackage.Literals.ANIMAL.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(TrackerPackage.Literals.ANIMAL, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				allEventsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(allEventsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Event> result = (Collection<Event>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Event>(result.size(), result.toArray());
+	
 	}
 
 	/**

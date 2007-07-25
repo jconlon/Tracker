@@ -9,6 +9,7 @@ package com.verticon.tracker;
 import java.math.BigInteger;
 import java.util.Date;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import com.verticon.tracker.util.Age;
@@ -256,5 +257,13 @@ public interface Animal extends EObject {
 	 * @generated
 	 */
 	String getSpeciesCode();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/ocl/examples/OCL body='ain.events'"
+	 * @generated
+	 */
+	EList<Event> allEvents();
 
 } // Animal

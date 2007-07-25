@@ -7,7 +7,6 @@
 package com.verticon.tracker.impl;
 
 import com.verticon.tracker.*;
-
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,15 +22,14 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.AnimalMissing;
-import com.verticon.tracker.Animals;
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BisonBreed;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.DairyBreed;
 import com.verticon.tracker.Died;
-import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.Exported;
+import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
 import com.verticon.tracker.LostTag;
@@ -44,11 +42,14 @@ import com.verticon.tracker.Sex;
 import com.verticon.tracker.SheepBreed;
 import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Slaughtered;
+import com.verticon.tracker.Swine;
+import com.verticon.tracker.SwineBreed;
 import com.verticon.tracker.TagAllocated;
 import com.verticon.tracker.TagApplied;
 import com.verticon.tracker.TagRetired;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.CheckEmail;
 import com.verticon.tracker.util.CheckISO7064Mod37_36;
@@ -108,8 +109,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.ANIMAL_ID: return createAnimalId();
 			case TrackerPackage.TAG_ALLOCATED: return createTagAllocated();
 			case TrackerPackage.PREMISES: return createPremises();
-			case TrackerPackage.EVENT_HISTORY: return createEventHistory();
-			case TrackerPackage.ANIMALS: return createAnimals();
 			case TrackerPackage.BOVINE_BEEF: return createBovineBeef();
 			case TrackerPackage.OVINE: return createOvine();
 			case TrackerPackage.BOVINE_BISON: return createBovineBison();
@@ -129,7 +128,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.FAIR_REGISTRATION: return createFairRegistration();
 			case TrackerPackage.WEIGH_IN: return createWeighIn();
 			case TrackerPackage.SWINE: return createSwine();
-			case TrackerPackage.UN_APPLIED_TAGS: return createUnAppliedTags();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -308,39 +306,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public UnAppliedTags createUnAppliedTags() {
-		UnAppliedTagsImpl unAppliedTags = new UnAppliedTagsImpl();
-		return unAppliedTags;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Premises createPremises() {
 		PremisesImpl premises = new PremisesImpl();
 		return premises;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EventHistory createEventHistory() {
-		EventHistoryImpl eventHistory = new EventHistoryImpl();
-		return eventHistory;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Animals createAnimals() {
-		AnimalsImpl animals = new AnimalsImpl();
-		return animals;
 	}
 
 	/**

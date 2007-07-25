@@ -10,6 +10,7 @@ Export-Package: com.verticon.tracker,
  com.verticon.tracker.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.emf.ecore.xmi;visibility:=reexport
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.ocl.ecore
 Eclipse-LazyStart: true
 Bundle-Activator: com.verticon.tracker.TrackerPlugin

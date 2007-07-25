@@ -6,19 +6,31 @@
  */
 package com.verticon.tracker.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
-import com.verticon.tracker.Animals;
-import com.verticon.tracker.EventHistory;
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
+import org.eclipse.ocl.ecore.OCL;
+import org.eclipse.ocl.expressions.OCLExpression;
+import com.verticon.tracker.Animal;
+import com.verticon.tracker.AnimalId;
+import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
-
-import com.verticon.tracker.UnAppliedTags;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +42,6 @@ import com.verticon.tracker.UnAppliedTags;
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getPremisesId <em>Premises Id</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getEmailContact <em>Email Contact</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getAnimals <em>Animals</em>}</li>
- *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getEventHistory <em>Event History</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getUnAppliedTags <em>Un Applied Tags</em>}</li>
  * </ul>
  * </p>
@@ -86,34 +97,37 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	protected String emailContact = EMAIL_CONTACT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getAnimals() <em>Animals</em>}' containment reference.
+	 * The cached value of the '{@link #getAnimals() <em>Animals</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAnimals()
 	 * @generated
 	 * @ordered
 	 */
-	protected Animals animals;
+	protected EList<Animal> animals;
 
 	/**
-	 * The cached value of the '{@link #getEventHistory() <em>Event History</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEventHistory()
-	 * @generated
-	 * @ordered
-	 */
-	protected EventHistory eventHistory;
-
-	/**
-	 * The cached value of the '{@link #getUnAppliedTags() <em>Un Applied Tags</em>}' containment reference.
+	 * The cached value of the '{@link #getUnAppliedTags() <em>Un Applied Tags</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getUnAppliedTags()
 	 * @generated
 	 * @ordered
 	 */
-	protected UnAppliedTags unAppliedTags;
+	protected EList<AnimalId> unAppliedTags;
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #eventHistory <em>Event History</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #eventHistory
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> eventHistoryBodyOCL;
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.eclipse.org/ocl/examples/OCL";
+
+	private static final OCL OCL_ENV = OCL.newInstance();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -181,7 +195,10 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Animals getAnimals() {
+	public EList<Animal> getAnimals() {
+		if (animals == null) {
+			animals = new EObjectContainmentEList<Animal>(Animal.class, this, TrackerPackage.PREMISES__ANIMALS);
+		}
 		return animals;
 	}
 
@@ -190,84 +207,10 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetAnimals(Animals newAnimals, NotificationChain msgs) {
-		Animals oldAnimals = animals;
-		animals = newAnimals;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__ANIMALS, oldAnimals, newAnimals);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<AnimalId> getUnAppliedTags() {
+		if (unAppliedTags == null) {
+			unAppliedTags = new EObjectContainmentEList<AnimalId>(AnimalId.class, this, TrackerPackage.PREMISES__UN_APPLIED_TAGS);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAnimals(Animals newAnimals) {
-		if (newAnimals != animals) {
-			NotificationChain msgs = null;
-			if (animals != null)
-				msgs = ((InternalEObject)animals).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__ANIMALS, null, msgs);
-			if (newAnimals != null)
-				msgs = ((InternalEObject)newAnimals).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__ANIMALS, null, msgs);
-			msgs = basicSetAnimals(newAnimals, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__ANIMALS, newAnimals, newAnimals));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EventHistory getEventHistory() {
-		return eventHistory;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetEventHistory(EventHistory newEventHistory, NotificationChain msgs) {
-		EventHistory oldEventHistory = eventHistory;
-		eventHistory = newEventHistory;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__EVENT_HISTORY, oldEventHistory, newEventHistory);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEventHistory(EventHistory newEventHistory) {
-		if (newEventHistory != eventHistory) {
-			NotificationChain msgs = null;
-			if (eventHistory != null)
-				msgs = ((InternalEObject)eventHistory).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__EVENT_HISTORY, null, msgs);
-			if (newEventHistory != null)
-				msgs = ((InternalEObject)newEventHistory).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__EVENT_HISTORY, null, msgs);
-			msgs = basicSetEventHistory(newEventHistory, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__EVENT_HISTORY, newEventHistory, newEventHistory));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public UnAppliedTags getUnAppliedTags() {
 		return unAppliedTags;
 	}
 
@@ -276,33 +219,27 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetUnAppliedTags(UnAppliedTags newUnAppliedTags, NotificationChain msgs) {
-		UnAppliedTags oldUnAppliedTags = unAppliedTags;
-		unAppliedTags = newUnAppliedTags;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__UN_APPLIED_TAGS, oldUnAppliedTags, newUnAppliedTags);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<Event> eventHistory() {
+		if (eventHistoryBodyOCL == null) {
+			EOperation eOperation = TrackerPackage.Literals.PREMISES.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(TrackerPackage.Literals.PREMISES, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				eventHistoryBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setUnAppliedTags(UnAppliedTags newUnAppliedTags) {
-		if (newUnAppliedTags != unAppliedTags) {
-			NotificationChain msgs = null;
-			if (unAppliedTags != null)
-				msgs = ((InternalEObject)unAppliedTags).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__UN_APPLIED_TAGS, null, msgs);
-			if (newUnAppliedTags != null)
-				msgs = ((InternalEObject)newUnAppliedTags).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__UN_APPLIED_TAGS, null, msgs);
-			msgs = basicSetUnAppliedTags(newUnAppliedTags, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__UN_APPLIED_TAGS, newUnAppliedTags, newUnAppliedTags));
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(eventHistoryBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Event> result = (Collection<Event>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Event>(result.size(), result.toArray());
+	
 	}
 
 	/**
@@ -314,11 +251,9 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case TrackerPackage.PREMISES__ANIMALS:
-				return basicSetAnimals(null, msgs);
-			case TrackerPackage.PREMISES__EVENT_HISTORY:
-				return basicSetEventHistory(null, msgs);
+				return ((InternalEList<?>)getAnimals()).basicRemove(otherEnd, msgs);
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
-				return basicSetUnAppliedTags(null, msgs);
+				return ((InternalEList<?>)getUnAppliedTags()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -337,8 +272,6 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return getEmailContact();
 			case TrackerPackage.PREMISES__ANIMALS:
 				return getAnimals();
-			case TrackerPackage.PREMISES__EVENT_HISTORY:
-				return getEventHistory();
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
 				return getUnAppliedTags();
 		}
@@ -350,6 +283,7 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -360,13 +294,12 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				setEmailContact((String)newValue);
 				return;
 			case TrackerPackage.PREMISES__ANIMALS:
-				setAnimals((Animals)newValue);
-				return;
-			case TrackerPackage.PREMISES__EVENT_HISTORY:
-				setEventHistory((EventHistory)newValue);
+				getAnimals().clear();
+				getAnimals().addAll((Collection<? extends Animal>)newValue);
 				return;
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
-				setUnAppliedTags((UnAppliedTags)newValue);
+				getUnAppliedTags().clear();
+				getUnAppliedTags().addAll((Collection<? extends AnimalId>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -387,13 +320,10 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				setEmailContact(EMAIL_CONTACT_EDEFAULT);
 				return;
 			case TrackerPackage.PREMISES__ANIMALS:
-				setAnimals((Animals)null);
-				return;
-			case TrackerPackage.PREMISES__EVENT_HISTORY:
-				setEventHistory((EventHistory)null);
+				getAnimals().clear();
 				return;
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
-				setUnAppliedTags((UnAppliedTags)null);
+				getUnAppliedTags().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -412,11 +342,9 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 			case TrackerPackage.PREMISES__EMAIL_CONTACT:
 				return EMAIL_CONTACT_EDEFAULT == null ? emailContact != null : !EMAIL_CONTACT_EDEFAULT.equals(emailContact);
 			case TrackerPackage.PREMISES__ANIMALS:
-				return animals != null;
-			case TrackerPackage.PREMISES__EVENT_HISTORY:
-				return eventHistory != null;
+				return animals != null && !animals.isEmpty();
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
-				return unAppliedTags != null;
+				return unAppliedTags != null && !unAppliedTags.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

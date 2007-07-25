@@ -7,7 +7,6 @@
 package com.verticon.tracker.util;
 
 import com.verticon.tracker.*;
-
 import java.util.Date;
 import java.util.Map;
 
@@ -18,7 +17,6 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.AnimalMissing;
-import com.verticon.tracker.Animals;
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BisonBreed;
 import com.verticon.tracker.Bovine;
@@ -28,8 +26,8 @@ import com.verticon.tracker.BovineDairy;
 import com.verticon.tracker.DairyBreed;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.Exported;
+import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
 import com.verticon.tracker.LostTag;
@@ -42,10 +40,13 @@ import com.verticon.tracker.Sex;
 import com.verticon.tracker.SheepBreed;
 import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Slaughtered;
+import com.verticon.tracker.Swine;
+import com.verticon.tracker.SwineBreed;
 import com.verticon.tracker.TagAllocated;
 import com.verticon.tracker.TagApplied;
 import com.verticon.tracker.TagRetired;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.WeighIn;
 
 /**
  * <!-- begin-user-doc -->
@@ -118,7 +119,7 @@ public class TrackerValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Calls <code>validateXXX</code> for the corresponding classifier of the model.
+	 * Calls <code>validateXXX</code> for the corresonding classifier of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -138,10 +139,6 @@ public class TrackerValidator extends EObjectValidator {
 				return validateTagAllocated((TagAllocated)value, diagnostics, context);
 			case TrackerPackage.PREMISES:
 				return validatePremises((Premises)value, diagnostics, context);
-			case TrackerPackage.EVENT_HISTORY:
-				return validateEventHistory((EventHistory)value, diagnostics, context);
-			case TrackerPackage.ANIMALS:
-				return validateAnimals((Animals)value, diagnostics, context);
 			case TrackerPackage.BOVINE_BEEF:
 				return validateBovineBeef((BovineBeef)value, diagnostics, context);
 			case TrackerPackage.OVINE:
@@ -182,8 +179,6 @@ public class TrackerValidator extends EObjectValidator {
 				return validateWeighIn((WeighIn)value, diagnostics, context);
 			case TrackerPackage.SWINE:
 				return validateSwine((Swine)value, diagnostics, context);
-			case TrackerPackage.UN_APPLIED_TAGS:
-				return validateUnAppliedTags((UnAppliedTags)value, diagnostics, context);
 			case TrackerPackage.SEX:
 				return validateSex((Sex)value, diagnostics, context);
 			case TrackerPackage.BISON_BREED:
@@ -328,35 +323,8 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateUnAppliedTags(UnAppliedTags unAppliedTags, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(unAppliedTags, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean validatePremises(Premises premises, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(premises, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateEventHistory(EventHistory eventHistory, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(eventHistory, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateAnimals(Animals animals, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(animals, diagnostics, context);
 	}
 
 	/**
