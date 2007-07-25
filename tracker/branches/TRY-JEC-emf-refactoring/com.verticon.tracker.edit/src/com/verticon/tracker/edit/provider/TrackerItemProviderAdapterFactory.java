@@ -291,29 +291,6 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.UnAppliedTags} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected UnAppliedTagsItemProvider unAppliedTagsItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.verticon.tracker.UnAppliedTags}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createUnAppliedTagsAdapter() {
-		if (unAppliedTagsItemProvider == null) {
-			unAppliedTagsItemProvider = new UnAppliedTagsItemProvider(this);
-		}
-
-		return unAppliedTagsItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Premises} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -334,52 +311,6 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		}
 
 		return premisesItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.EventHistory} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected EventHistoryItemProvider eventHistoryItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.verticon.tracker.EventHistory}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createEventHistoryAdapter() {
-		if (eventHistoryItemProvider == null) {
-			eventHistoryItemProvider = new EventHistoryItemProvider(this);
-		}
-
-		return eventHistoryItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Animals} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AnimalsItemProvider animalsItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.verticon.tracker.Animals}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createAnimalsAdapter() {
-		if (animalsItemProvider == null) {
-			animalsItemProvider = new AnimalsItemProvider(this);
-		}
-
-		return animalsItemProvider;
 	}
 
 	/**
@@ -760,8 +691,6 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (animalIdItemProvider != null) animalIdItemProvider.dispose();
 		if (tagAllocatedItemProvider != null) tagAllocatedItemProvider.dispose();
 		if (premisesItemProvider != null) premisesItemProvider.dispose();
-		if (eventHistoryItemProvider != null) eventHistoryItemProvider.dispose();
-		if (animalsItemProvider != null) animalsItemProvider.dispose();
 		if (bovineBeefItemProvider != null) bovineBeefItemProvider.dispose();
 		if (ovineItemProvider != null) ovineItemProvider.dispose();
 		if (bovineBisonItemProvider != null) bovineBisonItemProvider.dispose();
@@ -781,7 +710,6 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (fairRegistrationItemProvider != null) fairRegistrationItemProvider.dispose();
 		if (weighInItemProvider != null) weighInItemProvider.dispose();
 		if (swineItemProvider != null) swineItemProvider.dispose();
-		if (unAppliedTagsItemProvider != null) unAppliedTagsItemProvider.dispose();
 	}
 
 }
