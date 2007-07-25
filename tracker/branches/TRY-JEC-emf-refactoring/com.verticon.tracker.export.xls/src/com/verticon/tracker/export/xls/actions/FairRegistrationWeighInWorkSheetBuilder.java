@@ -105,7 +105,7 @@ public class FairRegistrationWeighInWorkSheetBuilder implements WorkSheetBuilder
 		HSSFRow row = null;
 		Collection<WeighIn> weighInEvents;
 		for (FairRegistration fairRegistration : registrationEvents) {
-			 weighInEvents = findWeighIns(fairRegistration.getAin(), premises);
+			 weighInEvents = findWeighIns(fairRegistration.getAnimalId(), premises);
 			 for (WeighIn weighInEvent : weighInEvents) {
 				 row = createRow(sheet);
 				 fillRow( fairRegistration,  row,  weighInEvent);
@@ -122,9 +122,9 @@ public class FairRegistrationWeighInWorkSheetBuilder implements WorkSheetBuilder
 	 */
 	private Collection<WeighIn> findWeighIns(AnimalId ain, Premises premises){
 		ArrayList<WeighIn> weighInsForAin = new ArrayList<WeighIn>();
-		EList<Event> events = premises.getEventHistory().getEvents();
+		EList<Event> events = premises.eventHistory();
 		for (Event event : events) {
-			if(WeighIn.EVENT_CODE ==event.getEventCode() && ((WeighIn)event).getAin().equals(ain)){
+			if(WeighIn.EVENT_CODE ==event.getEventCode() && ((WeighIn)event).getAnimalId().equals(ain)){
 				weighInsForAin.add((WeighIn)event);
 			}
 		}
@@ -153,7 +153,7 @@ public class FairRegistrationWeighInWorkSheetBuilder implements WorkSheetBuilder
 		//Club
 		row.createCell((short)4).setCellValue(fairRegistration.getClub());
 		//Breed
-		row.createCell((short)5).setCellValue(((Animal)weighIn.getAin().eContainer()).getBreed());
+		row.createCell((short)5).setCellValue(((Animal)weighIn.getAnimalId().eContainer()).getBreed());
 		//Date of Weigh In
 	    cell = row.createCell((short)6);
 		cell.setCellValue(weighIn.getDateTime());
@@ -162,7 +162,7 @@ public class FairRegistrationWeighInWorkSheetBuilder implements WorkSheetBuilder
 		//Weight
 		row.createCell((short)7).setCellValue(weighIn.getWeight());
 		//EarTag
-		row.createCell((short)8).setCellValue(weighIn.getAin().getIdNumber());
+		row.createCell((short)8).setCellValue(weighIn.getAnimalId().getIdNumber());
 	}
     
     
@@ -182,7 +182,7 @@ public class FairRegistrationWeighInWorkSheetBuilder implements WorkSheetBuilder
 	 * @param premises
 	 */
 	private void loadRegistrationList(Premises premises ){
-		EList<Event> events = premises.getEventHistory().getEvents();
+		EList<Event> events = premises.eventHistory();
 		for (Event event : events) {
 			if(FairRegistration.EVENT_CODE ==event.getEventCode()){
 				registrationEvents.add((FairRegistration)event);

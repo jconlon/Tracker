@@ -48,7 +48,7 @@ public class MovedInWorkSheetBuilder extends AbstractWorkSheetBuilder implements
     void fillRow(MovedIn movedIn, HSSFRow row){
     	HSSFCell cell = null;
     	//EarTag
-		row.createCell((short)0).setCellValue(movedIn.getAin().getIdNumber());
+		row.createCell((short)0).setCellValue(movedIn.getAnimalId().getIdNumber());
     	//Date
     	cell = row.createCell((short)1);
 		cell.setCellValue(movedIn.getDateTime());
@@ -66,7 +66,7 @@ public class MovedInWorkSheetBuilder extends AbstractWorkSheetBuilder implements
 	 */
 	@Override
 	public void loadList(Premises premises ){
-		EList<Event> events = premises.getEventHistory().getEvents();
+		EList<Event> events = premises.eventHistory();
 		for (Event event : events) {
 			if(MovedIn.EVENT_CODE ==event.getEventCode()){
 				movedInEvents.add((MovedIn)event);
@@ -77,7 +77,7 @@ public class MovedInWorkSheetBuilder extends AbstractWorkSheetBuilder implements
 			public int compare(MovedIn event1, MovedIn event2) {
 				
 				
-				return event1.getAin().getIdNumber().compareTo(event2.getAin().getIdNumber());
+				return event1.getAnimalId().getIdNumber().compareTo(event2.getAnimalId().getIdNumber());
 			}});
 	}
 

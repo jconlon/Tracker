@@ -61,7 +61,7 @@ public class FairRegistrationWorkSheetBuilder extends AbstractWorkSheetBuilder i
     void fillRow(FairRegistration fairRegistration, HSSFRow row){
     	HSSFCell cell = null;
     	//EarTag
-		row.createCell((short)0).setCellValue(fairRegistration.getAin().getIdNumber());
+		row.createCell((short)0).setCellValue(fairRegistration.getAnimalId().getIdNumber());
 //		Date
     	cell = row.createCell((short)1);
 		cell.setCellValue(fairRegistration.getDateTime());
@@ -87,7 +87,7 @@ public class FairRegistrationWorkSheetBuilder extends AbstractWorkSheetBuilder i
 	 */
 	@Override
 	public void loadList(Premises premises ){
-		EList<Event> events = premises.getEventHistory().getEvents();
+		EList<Event> events = premises.eventHistory();
 		for (Event event : events) {
 			if(FairRegistration.EVENT_CODE ==event.getEventCode()){
 				registrationEvents.add((FairRegistration)event);
@@ -98,7 +98,7 @@ public class FairRegistrationWorkSheetBuilder extends AbstractWorkSheetBuilder i
 			public int compare(FairRegistration event1, FairRegistration event2) {
 				
 				
-				return event1.getAin().getIdNumber().compareTo(event2.getAin().getIdNumber());
+				return event1.getAnimalId().getIdNumber().compareTo(event2.getAnimalId().getIdNumber());
 			}});
 	}
 

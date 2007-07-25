@@ -48,7 +48,7 @@ public class WeighInWorkSheetBuilder extends AbstractWorkSheetBuilder implements
     void fillRow(WeighIn weighIn, HSSFRow row){
     	HSSFCell cell = null;
     	//EarTag
-		row.createCell((short)0).setCellValue(weighIn.getAin().getIdNumber());
+		row.createCell((short)0).setCellValue(weighIn.getAnimalId().getIdNumber());
 //		Date
     	cell = row.createCell((short)1);
 		cell.setCellValue(weighIn.getDateTime());
@@ -66,7 +66,7 @@ public class WeighInWorkSheetBuilder extends AbstractWorkSheetBuilder implements
 	 */
 	@Override
 	public void loadList(Premises premises ){
-		EList<Event> events = premises.getEventHistory().getEvents();
+		EList<Event> events = premises.eventHistory();
 		for (Event event : events) {
 			if(WeighIn.EVENT_CODE ==event.getEventCode()){
 				weighInEvents.add((WeighIn)event);
@@ -77,7 +77,7 @@ public class WeighInWorkSheetBuilder extends AbstractWorkSheetBuilder implements
 			public int compare(WeighIn event1, WeighIn event2) {
 				
 				
-				return event1.getAin().getIdNumber().compareTo(event2.getAin().getIdNumber());
+				return event1.getAnimalId().getIdNumber().compareTo(event2.getAnimalId().getIdNumber());
 			}});
 	}
 
