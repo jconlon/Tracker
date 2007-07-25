@@ -19,12 +19,12 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.verticon.tracker.Event#getDateTime <em>Date Time</em>}</li>
- *   <li>{@link com.verticon.tracker.Event#getAin <em>Ain</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getEventCode <em>Event Code</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#isElectronicallyRead <em>Electronically Read</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#isCorrection <em>Correction</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getComments <em>Comments</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getId <em>Id</em>}</li>
+ *   <li>{@link com.verticon.tracker.Event#getAnimalId <em>Animal Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -65,32 +65,6 @@ public interface Event extends EObject {
 	 * @generated
 	 */
 	void setDateTime(Date value);
-
-	/**
-	 * Returns the value of the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Ain</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Ain</em>' reference.
-	 * @see #setAin(AnimalId)
-	 * @see com.verticon.tracker.TrackerPackage#getEvent_Ain()
-	 * @model required="true"
-	 * @generated
-	 */
-	AnimalId getAin();
-
-	/**
-	 * Sets the value of the '{@link com.verticon.tracker.Event#getAin <em>Ain</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Ain</em>' reference.
-	 * @see #getAin()
-	 * @generated
-	 */
-	void setAin(AnimalId value);
 
 	/**
 	 * Returns the value of the '<em><b>Event Code</b></em>' attribute.
@@ -202,5 +176,33 @@ public interface Event extends EObject {
 	 * @generated
 	 */
 	long getId();
+
+	/**
+	 * Returns the value of the '<em><b>Animal Id</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link com.verticon.tracker.AnimalId#getEvents <em>Events</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Animal Id</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Animal Id</em>' container reference.
+	 * @see #setAnimalId(AnimalId)
+	 * @see com.verticon.tracker.TrackerPackage#getEvent_AnimalId()
+	 * @see com.verticon.tracker.AnimalId#getEvents
+	 * @model opposite="events" required="true"
+	 * @generated
+	 */
+	AnimalId getAnimalId();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.Event#getAnimalId <em>Animal Id</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Animal Id</em>' container reference.
+	 * @see #getAnimalId()
+	 * @generated
+	 */
+	void setAnimalId(AnimalId value);
 
 } // Event

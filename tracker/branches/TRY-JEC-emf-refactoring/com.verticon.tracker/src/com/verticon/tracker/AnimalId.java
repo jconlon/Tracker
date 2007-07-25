@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -18,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link com.verticon.tracker.AnimalId#getIdNumber <em>Id Number</em>}</li>
  *   <li>{@link com.verticon.tracker.AnimalId#isUsainNumberUsed <em>Usain Number Used</em>}</li>
+ *   <li>{@link com.verticon.tracker.AnimalId#getEvents <em>Events</em>}</li>
  * </ul>
  * </p>
  *
@@ -73,5 +75,23 @@ public interface AnimalId extends EObject {
 	 * @generated
 	 */
 	boolean isUsainNumberUsed();
+
+	/**
+	 * Returns the value of the '<em><b>Events</b></em>' containment reference list.
+	 * The list contents are of type {@link com.verticon.tracker.Event}.
+	 * It is bidirectional and its opposite is '{@link com.verticon.tracker.Event#getAnimalId <em>Animal Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Events</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Events</em>' containment reference list.
+	 * @see com.verticon.tracker.TrackerPackage#getAnimalId_Events()
+	 * @see com.verticon.tracker.Event#getAnimalId
+	 * @model opposite="animalId" containment="true" required="true"
+	 * @generated
+	 */
+	EList<Event> getEvents();
 
 } // AnimalId

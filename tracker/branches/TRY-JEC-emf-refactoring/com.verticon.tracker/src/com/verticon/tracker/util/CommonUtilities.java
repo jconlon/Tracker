@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerFactory;
 
@@ -39,13 +38,10 @@ public class CommonUtilities {
 		}
 	}
 	
-	public static EventHistory getEventHistoryFromTemplate(Resource resource){
+	public static Premises getPremisesFromTemplate(Resource resource){
 		Object o = resource.getContents().get(0);
-		if(o instanceof EventHistory){//old templates had EventHistory as root
-			return (EventHistory)o;
-		}else if(o instanceof Premises){
-			Premises premises = (Premises)o;
-			return premises.getEventHistory();
+		if(o instanceof Premises){
+			return (Premises)o;
 		}
 		return null;
 	}
@@ -56,7 +52,7 @@ public class CommonUtilities {
 		if(o instanceof Premises){
 			Premises premises = (Premises)o;
 			if(premises.getAnimals()!=null){
-				animal= (Animal)premises.getAnimals().getAnimal().get(0);
+				animal= (Animal)premises.getAnimals().get(0);
 			}
 		}
 		return animal;
@@ -69,36 +65,35 @@ public class CommonUtilities {
 	 * @param premises
 	 * @return
 	 */
-	public static Collection<Event> createEvents(EventHistory template, AnimalId animalId, Premises premises) {
-		Copier copier = new Copier();	  
-		ArrayList<Event> outputResults = new ArrayList<Event>();
-		Event outputEvent;
-		for (Object o : template.getEvents()) {
-			outputEvent= (Event) copier.copy((Event)o);
-			setEventDate(outputEvent);
-			outputEvent.setAin(animalId);
-			if(canAddEventToAnimal(animalId, outputEvent, premises.getEventHistory()) ){
-				outputResults.add(outputEvent);
-			}
-		}
-		return outputResults;
-	}
+//	public static Collection<Event> createEvents(Premises premisesTemplate, AnimalId animalId, Premises premises) {
+//		Copier copier = new Copier();	  
+//		ArrayList<Event> outputResults = new ArrayList<Event>();
+//		Event outputEvent;
+//		for (Object o : premisesTemplate.eventHistory()) {
+//			outputEvent= (Event) copier.copy((Event)o);
+//			setEventDate(outputEvent);
+//			if(canAddEventToAnimal(animalId, outputEvent, premises.getEventHistory()) ){
+//				outputResults.add(outputEvent);
+//			}
+//		}
+//		return outputResults;
+//	}
 	
 	/**
-	 * FIXME create a preference policy for adding duplicates.
+	 * Create a preference policy for adding duplicates.
 	 * @param animal
 	 * @param event
 	 * @param premises
 	 * @return true if no similar event is associated with the animal
 	 */
-	public static boolean canAddEventToAnimal(AnimalId animalId, Event event, EventHistory eventHistory){
-		for (Event ev : eventHistory.getEvents()) {
-			if (ev.getEventCode() == event.getEventCode() && ev.getAin() == animalId) {
-				return false;
-			}
-		}
-		return true;
-	}
+//	public static boolean canAddEventToAnimal(AnimalId animalId, Event event, EventHistory eventHistory){
+//		for (Event ev : eventHistory.getEvents()) {
+//			if (ev.getEventCode() == event.getEventCode() && ev.getAin() == animalId) {
+//				return false;
+//			}
+//		}
+//		return true;
+//	}
 	
 	
 	/**
@@ -110,7 +105,7 @@ public class CommonUtilities {
 	 */
 	@SuppressWarnings("unchecked")
 	public static AnimalId findAnimalId(Long tag, Premises premises, Animal defaultAnimal) {
-		List elist = premises.getAnimals().getAnimal();
+		List elist = premises.getAnimals();
 		AnimalId animalId = null;
 		for (Object object : elist) {
 			Animal animal = (Animal) object;
@@ -125,7 +120,7 @@ public class CommonUtilities {
 			animalId.setIdNumber(tag.toString());
 			Animal animal = (Animal)copier.copy(defaultAnimal);
 			animal.setAin(animalId);
-			premises.getAnimals().getAnimal().add(animal);
+			premises.getAnimals().add(animal);
 		}
 		return animalId;
 	}

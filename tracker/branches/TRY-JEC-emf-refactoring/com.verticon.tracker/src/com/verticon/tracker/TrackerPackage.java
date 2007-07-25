@@ -197,13 +197,22 @@ public interface TrackerPackage extends EPackage {
 	int ANIMAL_ID__USAIN_NUMBER_USED = 1;
 
 	/**
+	 * The feature id for the '<em><b>Events</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANIMAL_ID__EVENTS = 2;
+
+	/**
 	 * The number of structural features of the '<em>Animal Id</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL_ID_FEATURE_COUNT = 2;
+	int ANIMAL_ID_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.BovineImpl <em>Bovine</em>}' class.
@@ -325,22 +334,13 @@ public interface TrackerPackage extends EPackage {
 	int EVENT__DATE_TIME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT__AIN = 1;
-
-	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__EVENT_CODE = 2;
+	int EVENT__EVENT_CODE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Electronically Read</b></em>' attribute.
@@ -349,7 +349,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__ELECTRONICALLY_READ = 3;
+	int EVENT__ELECTRONICALLY_READ = 2;
 
 	/**
 	 * The feature id for the '<em><b>Correction</b></em>' attribute.
@@ -358,7 +358,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__CORRECTION = 4;
+	int EVENT__CORRECTION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute.
@@ -367,7 +367,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__COMMENTS = 5;
+	int EVENT__COMMENTS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -376,7 +376,16 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__ID = 6;
+	int EVENT__ID = 5;
+
+	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT__ANIMAL_ID = 6;
 
 	/**
 	 * The number of structural features of the '<em>Event</em>' class.
@@ -405,15 +414,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int TAG_ALLOCATED__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TAG_ALLOCATED__AIN = EVENT__AIN;
 
 	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
@@ -461,6 +461,15 @@ public interface TrackerPackage extends EPackage {
 	int TAG_ALLOCATED__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG_ALLOCATED__ANIMAL_ID = EVENT__ANIMAL_ID;
+
+	/**
 	 * The number of structural features of the '<em>Tag Allocated</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -477,7 +486,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDied()
 	 * @generated
 	 */
-	int DIED = 21;
+	int DIED = 19;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.TagRetiredImpl <em>Tag Retired</em>}' class.
@@ -487,7 +496,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTagRetired()
 	 * @generated
 	 */
-	int TAG_RETIRED = 22;
+	int TAG_RETIRED = 20;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.AnimalMissingImpl <em>Animal Missing</em>}' class.
@@ -497,7 +506,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAnimalMissing()
 	 * @generated
 	 */
-	int ANIMAL_MISSING = 23;
+	int ANIMAL_MISSING = 21;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.ICVIImpl <em>ICVI</em>}' class.
@@ -507,7 +516,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getICVI()
 	 * @generated
 	 */
-	int ICVI = 24;
+	int ICVI = 22;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.PremisesImpl <em>Premises</em>}' class.
@@ -538,7 +547,7 @@ public interface TrackerPackage extends EPackage {
 	int PREMISES__EMAIL_CONTACT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Animals</b></em>' containment reference.
+	 * The feature id for the '<em><b>Animals</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -547,22 +556,13 @@ public interface TrackerPackage extends EPackage {
 	int PREMISES__ANIMALS = 2;
 
 	/**
-	 * The feature id for the '<em><b>Event History</b></em>' containment reference.
+	 * The feature id for the '<em><b>Un Applied Tags</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREMISES__EVENT_HISTORY = 3;
-
-	/**
-	 * The feature id for the '<em><b>Un Applied Tags</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PREMISES__UN_APPLIED_TAGS = 4;
+	int PREMISES__UN_APPLIED_TAGS = 3;
 
 	/**
 	 * The number of structural features of the '<em>Premises</em>' class.
@@ -571,63 +571,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PREMISES_FEATURE_COUNT = 5;
-
-	/**
-	 * The meta object id for the '{@link com.verticon.tracker.impl.EventHistoryImpl <em>Event History</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.impl.EventHistoryImpl
-	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventHistory()
-	 * @generated
-	 */
-	int EVENT_HISTORY = 6;
-
-	/**
-	 * The feature id for the '<em><b>Events</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_HISTORY__EVENTS = 0;
-
-	/**
-	 * The number of structural features of the '<em>Event History</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_HISTORY_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link com.verticon.tracker.impl.AnimalsImpl <em>Animals</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.impl.AnimalsImpl
-	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAnimals()
-	 * @generated
-	 */
-	int ANIMALS = 7;
-
-	/**
-	 * The feature id for the '<em><b>Animal</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANIMALS__ANIMAL = 0;
-
-	/**
-	 * The number of structural features of the '<em>Animals</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANIMALS_FEATURE_COUNT = 1;
+	int PREMISES_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.BovineBeefImpl <em>Bovine Beef</em>}' class.
@@ -637,7 +581,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBovineBeef()
 	 * @generated
 	 */
-	int BOVINE_BEEF = 8;
+	int BOVINE_BEEF = 6;
 
 	/**
 	 * The feature id for the '<em><b>Birth Date</b></em>' attribute.
@@ -746,7 +690,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getOvine()
 	 * @generated
 	 */
-	int OVINE = 9;
+	int OVINE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Birth Date</b></em>' attribute.
@@ -855,7 +799,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBovineBison()
 	 * @generated
 	 */
-	int BOVINE_BISON = 10;
+	int BOVINE_BISON = 8;
 
 	/**
 	 * The feature id for the '<em><b>Birth Date</b></em>' attribute.
@@ -964,7 +908,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBovineDairy()
 	 * @generated
 	 */
-	int BOVINE_DAIRY = 11;
+	int BOVINE_DAIRY = 9;
 
 	/**
 	 * The feature id for the '<em><b>Birth Date</b></em>' attribute.
@@ -1073,7 +1017,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTagApplied()
 	 * @generated
 	 */
-	int TAG_APPLIED = 12;
+	int TAG_APPLIED = 10;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -1083,15 +1027,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int TAG_APPLIED__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TAG_APPLIED__AIN = EVENT__AIN;
 
 	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
@@ -1139,6 +1074,15 @@ public interface TrackerPackage extends EPackage {
 	int TAG_APPLIED__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG_APPLIED__ANIMAL_ID = EVENT__ANIMAL_ID;
+
+	/**
 	 * The number of structural features of the '<em>Tag Applied</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1155,7 +1099,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getMovedIn()
 	 * @generated
 	 */
-	int MOVED_IN = 13;
+	int MOVED_IN = 11;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -1165,15 +1109,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int MOVED_IN__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MOVED_IN__AIN = EVENT__AIN;
 
 	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
@@ -1221,6 +1156,15 @@ public interface TrackerPackage extends EPackage {
 	int MOVED_IN__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVED_IN__ANIMAL_ID = EVENT__ANIMAL_ID;
+
+	/**
 	 * The feature id for the '<em><b>Source Pin</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1246,7 +1190,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getMovedOut()
 	 * @generated
 	 */
-	int MOVED_OUT = 14;
+	int MOVED_OUT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -1256,15 +1200,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int MOVED_OUT__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MOVED_OUT__AIN = EVENT__AIN;
 
 	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
@@ -1312,6 +1247,15 @@ public interface TrackerPackage extends EPackage {
 	int MOVED_OUT__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVED_OUT__ANIMAL_ID = EVENT__ANIMAL_ID;
+
+	/**
 	 * The feature id for the '<em><b>Destination Pin</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1337,7 +1281,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getLostTag()
 	 * @generated
 	 */
-	int LOST_TAG = 15;
+	int LOST_TAG = 13;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -1347,15 +1291,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int LOST_TAG__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOST_TAG__AIN = EVENT__AIN;
 
 	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
@@ -1403,6 +1338,15 @@ public interface TrackerPackage extends EPackage {
 	int LOST_TAG__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOST_TAG__ANIMAL_ID = EVENT__ANIMAL_ID;
+
+	/**
 	 * The number of structural features of the '<em>Lost Tag</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1419,7 +1363,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getReplacedTag()
 	 * @generated
 	 */
-	int REPLACED_TAG = 16;
+	int REPLACED_TAG = 14;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -1429,15 +1373,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int REPLACED_TAG__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REPLACED_TAG__AIN = EVENT__AIN;
 
 	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
@@ -1485,6 +1420,15 @@ public interface TrackerPackage extends EPackage {
 	int REPLACED_TAG__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPLACED_TAG__ANIMAL_ID = EVENT__ANIMAL_ID;
+
+	/**
 	 * The feature id for the '<em><b>Old Ain</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1510,7 +1454,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getImported()
 	 * @generated
 	 */
-	int IMPORTED = 17;
+	int IMPORTED = 15;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -1520,15 +1464,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPORTED__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORTED__AIN = EVENT__AIN;
 
 	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
@@ -1576,6 +1511,15 @@ public interface TrackerPackage extends EPackage {
 	int IMPORTED__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORTED__ANIMAL_ID = EVENT__ANIMAL_ID;
+
+	/**
 	 * The number of structural features of the '<em>Imported</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1592,7 +1536,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getExported()
 	 * @generated
 	 */
-	int EXPORTED = 18;
+	int EXPORTED = 16;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -1602,15 +1546,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXPORTED__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPORTED__AIN = EVENT__AIN;
 
 	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
@@ -1658,6 +1593,15 @@ public interface TrackerPackage extends EPackage {
 	int EXPORTED__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPORTED__ANIMAL_ID = EVENT__ANIMAL_ID;
+
+	/**
 	 * The number of structural features of the '<em>Exported</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1674,7 +1618,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSighting()
 	 * @generated
 	 */
-	int SIGHTING = 19;
+	int SIGHTING = 17;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -1684,15 +1628,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int SIGHTING__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIGHTING__AIN = EVENT__AIN;
 
 	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
@@ -1740,6 +1675,15 @@ public interface TrackerPackage extends EPackage {
 	int SIGHTING__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIGHTING__ANIMAL_ID = EVENT__ANIMAL_ID;
+
+	/**
 	 * The number of structural features of the '<em>Sighting</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1756,7 +1700,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSlaughtered()
 	 * @generated
 	 */
-	int SLAUGHTERED = 20;
+	int SLAUGHTERED = 18;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -1766,15 +1710,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int SLAUGHTERED__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SLAUGHTERED__AIN = EVENT__AIN;
 
 	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
@@ -1822,6 +1757,15 @@ public interface TrackerPackage extends EPackage {
 	int SLAUGHTERED__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAUGHTERED__ANIMAL_ID = EVENT__ANIMAL_ID;
+
+	/**
 	 * The number of structural features of the '<em>Slaughtered</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1838,15 +1782,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int DIED__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIED__AIN = EVENT__AIN;
 
 	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
@@ -1894,6 +1829,15 @@ public interface TrackerPackage extends EPackage {
 	int DIED__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIED__ANIMAL_ID = EVENT__ANIMAL_ID;
+
+	/**
 	 * The number of structural features of the '<em>Died</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1910,15 +1854,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int TAG_RETIRED__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TAG_RETIRED__AIN = EVENT__AIN;
 
 	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
@@ -1966,6 +1901,15 @@ public interface TrackerPackage extends EPackage {
 	int TAG_RETIRED__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG_RETIRED__ANIMAL_ID = EVENT__ANIMAL_ID;
+
+	/**
 	 * The number of structural features of the '<em>Tag Retired</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1982,15 +1926,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int ANIMAL_MISSING__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANIMAL_MISSING__AIN = EVENT__AIN;
 
 	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
@@ -2038,6 +1973,15 @@ public interface TrackerPackage extends EPackage {
 	int ANIMAL_MISSING__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANIMAL_MISSING__ANIMAL_ID = EVENT__ANIMAL_ID;
+
+	/**
 	 * The number of structural features of the '<em>Animal Missing</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2054,15 +1998,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int ICVI__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ICVI__AIN = EVENT__AIN;
 
 	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
@@ -2110,6 +2045,15 @@ public interface TrackerPackage extends EPackage {
 	int ICVI__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ICVI__ANIMAL_ID = EVENT__ANIMAL_ID;
+
+	/**
 	 * The number of structural features of the '<em>ICVI</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2126,7 +2070,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getFairRegistration()
 	 * @generated
 	 */
-	int FAIR_REGISTRATION = 25;
+	int FAIR_REGISTRATION = 23;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -2136,15 +2080,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int FAIR_REGISTRATION__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR_REGISTRATION__AIN = EVENT__AIN;
 
 	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
@@ -2190,6 +2125,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int FAIR_REGISTRATION__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAIR_REGISTRATION__ANIMAL_ID = EVENT__ANIMAL_ID;
 
 	/**
 	 * The feature id for the '<em><b>Participant</b></em>' attribute.
@@ -2253,7 +2197,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getWeighIn()
 	 * @generated
 	 */
-	int WEIGH_IN = 26;
+	int WEIGH_IN = 24;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -2263,15 +2207,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int WEIGH_IN__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WEIGH_IN__AIN = EVENT__AIN;
 
 	/**
 	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
@@ -2319,6 +2254,15 @@ public interface TrackerPackage extends EPackage {
 	int WEIGH_IN__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Animal Id</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEIGH_IN__ANIMAL_ID = EVENT__ANIMAL_ID;
+
+	/**
 	 * The feature id for the '<em><b>Weight</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2344,7 +2288,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSwine()
 	 * @generated
 	 */
-	int SWINE = 27;
+	int SWINE = 25;
 
 	/**
 	 * The feature id for the '<em><b>Birth Date</b></em>' attribute.
@@ -2446,34 +2390,6 @@ public interface TrackerPackage extends EPackage {
 	int SWINE_FEATURE_COUNT = ANIMAL_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link com.verticon.tracker.impl.UnAppliedTagsImpl <em>Un Applied Tags</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.impl.UnAppliedTagsImpl
-	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUnAppliedTags()
-	 * @generated
-	 */
-	int UN_APPLIED_TAGS = 28;
-
-	/**
-	 * The feature id for the '<em><b>Ain</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UN_APPLIED_TAGS__AIN = 0;
-
-	/**
-	 * The number of structural features of the '<em>Un Applied Tags</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UN_APPLIED_TAGS_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Sex <em>Sex</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2481,7 +2397,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 29;
+	int SEX = 26;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BisonBreed <em>Bison Breed</em>}' enum.
@@ -2491,7 +2407,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBisonBreed()
 	 * @generated
 	 */
-	int BISON_BREED = 30;
+	int BISON_BREED = 27;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SheepBreed <em>Sheep Breed</em>}' enum.
@@ -2501,7 +2417,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSheepBreed()
 	 * @generated
 	 */
-	int SHEEP_BREED = 31;
+	int SHEEP_BREED = 28;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BeefBreed <em>Beef Breed</em>}' enum.
@@ -2511,7 +2427,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBeefBreed()
 	 * @generated
 	 */
-	int BEEF_BREED = 32;
+	int BEEF_BREED = 29;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.DairyBreed <em>Dairy Breed</em>}' enum.
@@ -2521,7 +2437,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDairyBreed()
 	 * @generated
 	 */
-	int DAIRY_BREED = 33;
+	int DAIRY_BREED = 30;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SwineBreed <em>Swine Breed</em>}' enum.
@@ -2531,7 +2447,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSwineBreed()
 	 * @generated
 	 */
-	int SWINE_BREED = 34;
+	int SWINE_BREED = 31;
 
 	/**
 	 * The meta object id for the '<em>Date</em>' data type.
@@ -2541,7 +2457,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDate()
 	 * @generated
 	 */
-	int DATE = 35;
+	int DATE = 32;
 
 	/**
 	 * The meta object id for the '<em>Animial Id Number</em>' data type.
@@ -2551,7 +2467,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAnimialIdNumber()
 	 * @generated
 	 */
-	int ANIMIAL_ID_NUMBER = 36;
+	int ANIMIAL_ID_NUMBER = 33;
 
 	/**
 	 * The meta object id for the '<em>Premises Id Number</em>' data type.
@@ -2561,7 +2477,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPremisesIdNumber()
 	 * @generated
 	 */
-	int PREMISES_ID_NUMBER = 37;
+	int PREMISES_ID_NUMBER = 34;
 
 	/**
 	 * The meta object id for the '<em>Email</em>' data type.
@@ -2571,7 +2487,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 38;
+	int EMAIL = 35;
 
 
 	/**
@@ -2582,7 +2498,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 39;
+	int DATE_TIME = 36;
 
 
 	/**
@@ -2593,7 +2509,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAge()
 	 * @generated
 	 */
-	int AGE = 40;
+	int AGE = 37;
 
 
 	/**
@@ -2604,7 +2520,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSPhoneNumber()
 	 * @generated
 	 */
-	int US_PHONE_NUMBER = 41;
+	int US_PHONE_NUMBER = 38;
 
 
 	/**
@@ -2749,6 +2665,17 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getAnimalId_UsainNumberUsed();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.AnimalId#getEvents <em>Events</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Events</em>'.
+	 * @see com.verticon.tracker.AnimalId#getEvents()
+	 * @see #getAnimalId()
+	 * @generated
+	 */
+	EReference getAnimalId_Events();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Bovine <em>Bovine</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2778,17 +2705,6 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEvent_DateTime();
-
-	/**
-	 * Returns the meta object for the reference '{@link com.verticon.tracker.Event#getAin <em>Ain</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Ain</em>'.
-	 * @see com.verticon.tracker.Event#getAin()
-	 * @see #getEvent()
-	 * @generated
-	 */
-	EReference getEvent_Ain();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Event#getEventCode <em>Event Code</em>}'.
@@ -2844,6 +2760,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEvent_Id();
+
+	/**
+	 * Returns the meta object for the container reference '{@link com.verticon.tracker.Event#getAnimalId <em>Animal Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Animal Id</em>'.
+	 * @see com.verticon.tracker.Event#getAnimalId()
+	 * @see #getEvent()
+	 * @generated
+	 */
+	EReference getEvent_AnimalId();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.TagAllocated <em>Tag Allocated</em>}'.
@@ -3003,27 +2930,6 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getSwine_SwineBreed();
 
 	/**
-	 * Returns the meta object for class '{@link com.verticon.tracker.UnAppliedTags <em>Un Applied Tags</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Un Applied Tags</em>'.
-	 * @see com.verticon.tracker.UnAppliedTags
-	 * @generated
-	 */
-	EClass getUnAppliedTags();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.UnAppliedTags#getAin <em>Ain</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Ain</em>'.
-	 * @see com.verticon.tracker.UnAppliedTags#getAin()
-	 * @see #getUnAppliedTags()
-	 * @generated
-	 */
-	EReference getUnAppliedTags_Ain();
-
-	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Premises <em>Premises</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3056,10 +2962,10 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getPremises_EmailContact();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.verticon.tracker.Premises#getAnimals <em>Animals</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.Premises#getAnimals <em>Animals</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Animals</em>'.
+	 * @return the meta object for the containment reference list '<em>Animals</em>'.
 	 * @see com.verticon.tracker.Premises#getAnimals()
 	 * @see #getPremises()
 	 * @generated
@@ -3067,68 +2973,15 @@ public interface TrackerPackage extends EPackage {
 	EReference getPremises_Animals();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.verticon.tracker.Premises#getEventHistory <em>Event History</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.Premises#getUnAppliedTags <em>Un Applied Tags</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Event History</em>'.
-	 * @see com.verticon.tracker.Premises#getEventHistory()
-	 * @see #getPremises()
-	 * @generated
-	 */
-	EReference getPremises_EventHistory();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link com.verticon.tracker.Premises#getUnAppliedTags <em>Un Applied Tags</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Un Applied Tags</em>'.
+	 * @return the meta object for the containment reference list '<em>Un Applied Tags</em>'.
 	 * @see com.verticon.tracker.Premises#getUnAppliedTags()
 	 * @see #getPremises()
 	 * @generated
 	 */
 	EReference getPremises_UnAppliedTags();
-
-	/**
-	 * Returns the meta object for class '{@link com.verticon.tracker.EventHistory <em>Event History</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Event History</em>'.
-	 * @see com.verticon.tracker.EventHistory
-	 * @generated
-	 */
-	EClass getEventHistory();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.EventHistory#getEvents <em>Events</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Events</em>'.
-	 * @see com.verticon.tracker.EventHistory#getEvents()
-	 * @see #getEventHistory()
-	 * @generated
-	 */
-	EReference getEventHistory_Events();
-
-	/**
-	 * Returns the meta object for class '{@link com.verticon.tracker.Animals <em>Animals</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Animals</em>'.
-	 * @see com.verticon.tracker.Animals
-	 * @generated
-	 */
-	EClass getAnimals();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.Animals#getAnimal <em>Animal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Animal</em>'.
-	 * @see com.verticon.tracker.Animals#getAnimal()
-	 * @see #getAnimals()
-	 * @generated
-	 */
-	EReference getAnimals_Animal();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.BovineBeef <em>Bovine Beef</em>}'.
@@ -3607,6 +3460,14 @@ public interface TrackerPackage extends EPackage {
 		EAttribute ANIMAL_ID__USAIN_NUMBER_USED = eINSTANCE.getAnimalId_UsainNumberUsed();
 
 		/**
+		 * The meta object literal for the '<em><b>Events</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ANIMAL_ID__EVENTS = eINSTANCE.getAnimalId_Events();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.BovineImpl <em>Bovine</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3633,14 +3494,6 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EVENT__DATE_TIME = eINSTANCE.getEvent_DateTime();
-
-		/**
-		 * The meta object literal for the '<em><b>Ain</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EVENT__AIN = eINSTANCE.getEvent_Ain();
 
 		/**
 		 * The meta object literal for the '<em><b>Event Code</b></em>' attribute feature.
@@ -3681,6 +3534,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EVENT__ID = eINSTANCE.getEvent_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Animal Id</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EVENT__ANIMAL_ID = eINSTANCE.getEvent_AnimalId();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.TagAllocatedImpl <em>Tag Allocated</em>}' class.
@@ -3819,24 +3680,6 @@ public interface TrackerPackage extends EPackage {
 		EAttribute SWINE__SWINE_BREED = eINSTANCE.getSwine_SwineBreed();
 
 		/**
-		 * The meta object literal for the '{@link com.verticon.tracker.impl.UnAppliedTagsImpl <em>Un Applied Tags</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.verticon.tracker.impl.UnAppliedTagsImpl
-		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUnAppliedTags()
-		 * @generated
-		 */
-		EClass UN_APPLIED_TAGS = eINSTANCE.getUnAppliedTags();
-
-		/**
-		 * The meta object literal for the '<em><b>Ain</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference UN_APPLIED_TAGS__AIN = eINSTANCE.getUnAppliedTags_Ain();
-
-		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.PremisesImpl <em>Premises</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3863,7 +3706,7 @@ public interface TrackerPackage extends EPackage {
 		EAttribute PREMISES__EMAIL_CONTACT = eINSTANCE.getPremises_EmailContact();
 
 		/**
-		 * The meta object literal for the '<em><b>Animals</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Animals</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -3871,56 +3714,12 @@ public interface TrackerPackage extends EPackage {
 		EReference PREMISES__ANIMALS = eINSTANCE.getPremises_Animals();
 
 		/**
-		 * The meta object literal for the '<em><b>Event History</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PREMISES__EVENT_HISTORY = eINSTANCE.getPremises_EventHistory();
-
-		/**
-		 * The meta object literal for the '<em><b>Un Applied Tags</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Un Applied Tags</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference PREMISES__UN_APPLIED_TAGS = eINSTANCE.getPremises_UnAppliedTags();
-
-		/**
-		 * The meta object literal for the '{@link com.verticon.tracker.impl.EventHistoryImpl <em>Event History</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.verticon.tracker.impl.EventHistoryImpl
-		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventHistory()
-		 * @generated
-		 */
-		EClass EVENT_HISTORY = eINSTANCE.getEventHistory();
-
-		/**
-		 * The meta object literal for the '<em><b>Events</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EVENT_HISTORY__EVENTS = eINSTANCE.getEventHistory_Events();
-
-		/**
-		 * The meta object literal for the '{@link com.verticon.tracker.impl.AnimalsImpl <em>Animals</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.verticon.tracker.impl.AnimalsImpl
-		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAnimals()
-		 * @generated
-		 */
-		EClass ANIMALS = eINSTANCE.getAnimals();
-
-		/**
-		 * The meta object literal for the '<em><b>Animal</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ANIMALS__ANIMAL = eINSTANCE.getAnimals_Animal();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.BovineBeefImpl <em>Bovine Beef</em>}' class.
