@@ -101,13 +101,13 @@ public class WlicTrackerExporter implements PremisesProcessor {
 			out = df.format(event.getDateTime())+',';
 			break;
 		case 5://USAIN Used
-			out = event.getAin().isUsainNumberUsed()?"1,":"0,";
+			out = event.getAnimalId().isUsainNumberUsed()?"1,":"0,";
 			break;
 		case 6://ID number
 			out = event.getId()+",";
 			break;
 		case 7://Species
-			out = ((Animal)event.getAin().eContainer()).getSpeciesCode()+',';
+			out = ((Animal)event.getAnimalId().eContainer()).getSpeciesCode()+',';
 			break;
 		case 8://IDElectronicallyRead
 			out = event.isElectronicallyRead()?"1,":"0,";
@@ -177,7 +177,7 @@ public class WlicTrackerExporter implements PremisesProcessor {
 			out = df.format(new Date())+',';
 			break;
 		case 3:
-			EList rawevents = premises.getEventHistory().getEvents();
+			EList rawevents = premises.eventHistory();
 			for (Object object : rawevents) {
 				Event event = (Event)object;
 				if(event.getEventCode()<15){
