@@ -75,7 +75,6 @@ public class EventItemProvider
 			super.getPropertyDescriptors(object);
 
 			addDateTimePropertyDescriptor(object);
-			addAinPropertyDescriptor(object);
 			addEventCodePropertyDescriptor(object);
 			addElectronicallyReadPropertyDescriptor(object);
 			addCorrectionPropertyDescriptor(object);
@@ -107,27 +106,27 @@ public class EventItemProvider
 				 null));
 	}
 
-	/**
-	 * This adds a property descriptor for the Ain feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAinPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Event_ain_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Event_ain_feature", "_UI_Event_type"),
-				 TrackerPackage.Literals.EVENT__AIN,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
+//	/**
+//	 * This adds a property descriptor for the Ain feature.
+//	 * <!-- begin-user-doc -->
+//	 * <!-- end-user-doc -->
+//	 * @generated
+//	 */
+//	protected void addAinPropertyDescriptor(Object object) {
+//		itemPropertyDescriptors.add
+//			(createItemPropertyDescriptor
+//				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+//				 getResourceLocator(),
+//				 getString("_UI_Event_ain_feature"),
+//				 getString("_UI_PropertyDescriptor_description", "_UI_Event_ain_feature", "_UI_Event_type"),
+//				 TrackerPackage.Literals.EVENT__AIN,
+//				 true,
+//				 false,
+//				 true,
+//				 null,
+//				 null,
+//				 null));
+//	}
 
 	/**
 	 * This adds a property descriptor for the Event Code feature.
@@ -261,14 +260,14 @@ public class EventItemProvider
 		return getString("_UI_"+resourceName+"_type") ;
 	}
 
-	/**
+/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
 	 * <!-- begin-user-doc -->
-	 * Modified by adding a EVENT_AIN notification to get the viewers to update on AIN changes.
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
+	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
@@ -279,12 +278,37 @@ public class EventItemProvider
 			case TrackerPackage.EVENT__CORRECTION:
 			case TrackerPackage.EVENT__COMMENTS:
 			case TrackerPackage.EVENT__ID:
-			case TrackerPackage.EVENT__AIN:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
 		super.notifyChanged(notification);
 	}
+
+//	/**
+//	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+//	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+//	 * <!-- begin-user-doc -->
+//	 * TODO Remove this commented block after functional test
+//   Modified by adding a EVENT_AIN notification to get the viewers to update on AIN changes.
+//	 * <!-- end-user-doc -->
+//	 * @generated NOT
+//	 */
+//	public void notifyChanged(Notification notification) {
+//		updateChildren(notification);
+//
+//		switch (notification.getFeatureID(Event.class)) {
+//			case TrackerPackage.EVENT__DATE_TIME:
+//			case TrackerPackage.EVENT__EVENT_CODE:
+//			case TrackerPackage.EVENT__ELECTRONICALLY_READ:
+//			case TrackerPackage.EVENT__CORRECTION:
+//			case TrackerPackage.EVENT__COMMENTS:
+//			case TrackerPackage.EVENT__ID:
+//			case TrackerPackage.EVENT__AIN:
+//				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+//				return;
+//		}
+//		super.notifyChanged(notification);
+//	}
 
 	/**
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
@@ -324,7 +348,7 @@ public class EventItemProvider
 	    		}
 	    		return null;
 	    	case 1: 
-	    		AnimalId animalId = ((Event)object).getAin();
+	    		AnimalId animalId = ((Event)object).getAnimalId();
 	    		if(animalId==null) return "";
 	    		IItemLabelProvider itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(
 	    				animalId, IItemLabelProvider.class);
