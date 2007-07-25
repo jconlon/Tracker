@@ -33,6 +33,12 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getSpeciesCode() <em>Species Code</em>}</li>
  * </ul>
  * </p>
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link com.verticon.tracker.Animal#allEvents() <em>All Events</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
 public abstract class AnimalTest extends TestCase {
@@ -181,6 +187,19 @@ public abstract class AnimalTest extends TestCase {
 	 */
 	public void testGetSpeciesCode() {
 		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Animal#allEvents() <em>All Events</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#allEvents()
+	 * @generated
+	 */
+	public void testAllEvents() {
+		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
 	}
