@@ -24,6 +24,8 @@ import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
 
 /**
+ * Add the tag ids in the selected resource(s) as Premises Animals.
+ * 
  * @author jconlon
  *
  */
@@ -87,7 +89,7 @@ public class AddToAnimalsActionDelegate extends AbstractAddToParentActionDelegat
 	
 	@Override
 	protected Object getFeature() {
-		return TrackerPackage.eINSTANCE.getAnimals_Animal();
+		return TrackerPackage.eINSTANCE.getAnimal();
 	}
 
 	class SimpleLabelProvider extends LabelProvider{

@@ -29,6 +29,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -176,11 +177,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 	 * @generated NOT
 	 */
 	protected EObject createInitialModel() {
-//		EClass eClass = (EClass)trackerPackage.getEClassifier(initialObjectCreationPage.getInitialObjectName());
-//		EObject rootObject = trackerFactory.create(eClass);
 		Premises rootObject = trackerFactory.createPremises();
-		rootObject.setAnimals(trackerFactory.createAnimals());
-		rootObject.setEventHistory(trackerFactory.createEventHistory());
 		return rootObject;
 	}
 

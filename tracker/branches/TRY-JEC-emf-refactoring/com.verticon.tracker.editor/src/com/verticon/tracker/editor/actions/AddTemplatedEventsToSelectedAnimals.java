@@ -28,7 +28,6 @@ import org.eclipse.ui.IWorkbenchPart;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
@@ -37,8 +36,8 @@ import com.verticon.tracker.editor.presentation.TrackerEditor;
 import com.verticon.tracker.util.CommonUtilities;
 
 /**
- * ActionDelegate associated with a selection of animal objects.  Adds Events from 
- * a template to these selected Animal. 
+ * ActionDelegate associated with a pop-up menu to Add Template Events on a selection of 
+ * animal objects.  Adds Events from a template to these selected Animal. 
  * 
  * Prompts the user for a template selection.
  * Uses dates associated with the template events.
@@ -81,19 +80,19 @@ public class AddTemplatedEventsToSelectedAnimals implements IObjectActionDelegat
 		IProject project = AbstractAddToParentActionDelegate.extractResource(editor).getProject();
 		EditingDomain editingDomain = editor.getEditingDomain();
 
-		EventHistory template = askForTemplate("Choose an Event template to add to these "
+		Premises premisesTemplate = askForPremisesTemplate("Choose an Event template to add to these "
 				+ selectedAnimals.size() + " selected animals.",project);
 		
-		if(template==null){
+		if(premisesTemplate==null){
 			return;
 		}
 		
-		processSelected(editingDomain, selectedAnimals,  template, null);
+		processSelected(editingDomain, selectedAnimals,  premisesTemplate, null);
 	}
 	
 	
 	
-	private EventHistory askForTemplate(String message, IResource rootElement){
+	private Premises askForPremisesTemplate(String message, IResource rootElement){
 
 		WSFileDialog dialog = new WSFileDialog(targetPart.getSite().getShell(),
 				SWT.SINGLE, 
@@ -126,42 +125,47 @@ public class AddTemplatedEventsToSelectedAnimals implements IObjectActionDelegat
 						e.getLocalizedMessage());
 				return null;
 		}
-		return CommonUtilities.getEventHistoryFromTemplate(templateResource);
+		return CommonUtilities.getPremisesFromTemplate(templateResource);
 	}
 	
-	private void processSelected(EditingDomain editingDomain,Collection<Animal> selectedAnimals, EventHistory template, Date date){
-		Premises premises = (Premises)selectedAnimals.iterator().next().eContainer().eContainer();
-		EventHistory eventHistory = premises.getEventHistory();
-		
-		List<Event> eventsForAllAnimals = new ArrayList<Event>();
-		Collection<Event> eventsPerAnimal;
-		for (Animal animal : selectedAnimals) {
-			 eventsPerAnimal = CommonUtilities.createEvents( template,  animal.getAin(),  premises);
-			 eventsForAllAnimals.addAll(eventsPerAnimal);
-		}
-		
-		
-		if (eventsForAllAnimals.isEmpty()) {
-			MessageDialog.openWarning(targetPart.getSite().getShell(),
-					"No unique tags in file",
-					"Found no unique events to import from template "+resource.getFullPath());
-			return;
-		}
-		
-		
-		Command command = AddCommand.create(
-				editingDomain, 
-				eventHistory,
-				TrackerPackage.eINSTANCE.getEventHistory_Events(), 
-				eventsForAllAnimals);
-		editingDomain.getCommandStack().execute(command);
-
-
-		MessageDialog.openInformation(targetPart.getSite().getShell(),
-				"Add to EventHistory", 
-				"Added " + 
-				eventsForAllAnimals.size() + 
-				" children  to EventHistory");
+	/**
+	 * Add the events from the premisesTemplate to the selectedAnimals.
+	 * FIXME implement
+	 * @param editingDomain
+	 * @param selectedAnimals
+	 * @param premisesTemplate
+	 * @param date
+	 */
+	private void processSelected(EditingDomain editingDomain,Collection<Animal> selectedAnimals, Premises premisesTemplate, Date date){		
+//		List<Event> eventsForAllAnimals = new ArrayList<Event>();
+//		Collection<Event> eventsPerAnimal;
+//		for (Animal animal : selectedAnimals) {
+//			 eventsPerAnimal = CommonUtilities.createEvents( premisesTemplate,  animal.getAin(),  premises);
+//			 eventsForAllAnimals.addAll(eventsPerAnimal);
+//		}
+//		
+//		
+//		if (eventsForAllAnimals.isEmpty()) {
+//			MessageDialog.openWarning(targetPart.getSite().getShell(),
+//					"No unique tags in file",
+//					"Found no unique events to import from template "+resource.getFullPath());
+//			return;
+//		}
+//		
+//		
+//		Command command = AddCommand.create(
+//				editingDomain, 
+//				eventHistory,
+//				TrackerPackage.eINSTANCE.getEventHistory_Events(), 
+//				eventsForAllAnimals);
+//		editingDomain.getCommandStack().execute(command);
+//
+//
+//		MessageDialog.openInformation(targetPart.getSite().getShell(),
+//				"Add to EventHistory", 
+//				"Added " + 
+//				eventsForAllAnimals.size() + 
+//				" children  to EventHistory");
 	}
 	
 

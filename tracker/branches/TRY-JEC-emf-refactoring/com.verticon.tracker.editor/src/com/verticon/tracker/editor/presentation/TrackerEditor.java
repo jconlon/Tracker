@@ -126,10 +126,7 @@ import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
-import com.verticon.tracker.Animals;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
@@ -1113,7 +1110,7 @@ public class TrackerEditor
 				table.setLinesVisible(true);
 				eventsTableViewer.setUseHashlookup(true);
 				
-				//FIXME Reduce side of Events BIRTHDATE column? - chaned from 3 50. Does it work
+				//FIXME Reduce size of Events BIRTHDATE column? - chaned from 3 50. Does it work
 				//TODO Make sure listeners are disposed of properly
 				//DateTime
 				TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
@@ -1156,7 +1153,7 @@ public class TrackerEditor
 				        {
 				          public Object [] getElements(Object object)
 				          {
-				            return ((EventHistory)object).getEvents().toArray();
+				            return ((Premises)object).eventHistory().toArray();
 				          }
 				          public void notifyChanged(Notification notification)
 				          {
@@ -1164,7 +1161,8 @@ public class TrackerEditor
 				            {
 				              case Notification.ADD:
 				              case Notification.ADD_MANY:
-				                if (notification.getFeature() != TrackerPackage.eINSTANCE.getEventHistory_Events()) {
+				            	  //TODO Test to see Event is the correct type for the eventsTable Notifications
+				                if (notification.getFeature() != TrackerPackage.eINSTANCE.getEvent()) {
 				                	return;
 				                }
 				            }
@@ -1177,9 +1175,9 @@ public class TrackerEditor
 			      Object rootObject = resource.getContents().get(0);
 			      if (rootObject instanceof Premises)
 			      {
-			    	EventHistory target = ((Premises)rootObject).getEventHistory();
-			    	eventsTableViewer.setInput(target);
-			        viewerPane.setTitle(target);
+			    	
+			    	eventsTableViewer.setInput((Premises)rootObject);
+			        viewerPane.setTitle((Premises)rootObject);
 			      }
 				createContextMenuFor(eventsTableViewer);
 				int pageIndex = addPage(viewerPane.getControl());
@@ -1278,7 +1276,7 @@ public class TrackerEditor
 				        {
 				          public Object [] getElements(Object object)
 				          {
-				            return ((Animals)object).getAnimal().toArray();
+				            return ((Premises)object).getAnimals().toArray();
 				          }
 				          public void notifyChanged(Notification notification)
 				          {
@@ -1286,7 +1284,8 @@ public class TrackerEditor
 				            {
 				              case Notification.ADD:
 				              case Notification.ADD_MANY:
-				                if (notification.getFeature() != TrackerPackage.eINSTANCE.getAnimals_Animal()) return;
+				            	//TODO Test to see Animal is the correct type for the animalsTable Notifications
+				                if (notification.getFeature() != TrackerPackage.eINSTANCE.getAnimal()) return;
 				            }
 				            super.notifyChanged(notification);
 				          }
@@ -1298,9 +1297,8 @@ public class TrackerEditor
 			      Object rootObject = resource.getContents().get(0);
 			      if (rootObject instanceof Premises)
 			      {
-			    	Animals target = ((Premises)rootObject).getAnimals();
-			    	animalsTableViewer.setInput(target);
-			        viewerPane.setTitle(target);
+			    	animalsTableViewer.setInput((Premises)rootObject);
+			        viewerPane.setTitle((Premises)rootObject);
 			      }
 			      
 				createContextMenuFor(animalsTableViewer);
@@ -1569,8 +1567,7 @@ public class TrackerEditor
 					Resource resource = (Resource)resourceSet.getResources().get(0);
 					Object rootObject = resource.getContents().get(0);
 					if (rootObject instanceof Premises){
-						Animals target = ((Premises)rootObject).getAnimals();
-						currentViewerPane.getViewer().setSelection(new StructuredSelection(target));
+						currentViewerPane.getViewer().setSelection(new StructuredSelection(((Premises)rootObject).getAnimals()));
 					}
 				// Handle eventsTableViewer
 				} else if (currentViewerPane.getViewer() == eventsTableViewer){
@@ -1578,8 +1575,7 @@ public class TrackerEditor
 					Resource resource = (Resource)resourceSet.getResources().get(0);
 					Object rootObject = resource.getContents().get(0);
 					if (rootObject instanceof Premises){
-						EventHistory target = ((Premises)rootObject).getEventHistory();
-						currentViewerPane.getViewer().setSelection(new StructuredSelection(target));
+						currentViewerPane.getViewer().setSelection(new StructuredSelection(((Premises)rootObject).eventHistory()));
 					}
 					
 				} else if (currentViewerPane.getViewer() == listViewer
@@ -1591,16 +1587,8 @@ public class TrackerEditor
 						animalEvents = Collections.emptyList();
 					} else {
 						animalEvents = new ArrayList<Event>();
-						AnimalId ain = selectedAnimal.getAin();
-						Animals animals =(Animals)editingDomain.getParent(selectedAnimal);
-						Premises premises = (Premises)editingDomain.getParent(animals);
-						EventHistory eventHistory = premises.getEventHistory();
-						for (Object object : eventHistory.getEvents()) {
-							Event event = (Event) object;
-							if (event.getAin() == ain) {
-								animalEvents.add(event);
-							}
-						}
+						animalEvents = selectedAnimal.allEvents();
+						
 					}
 					//TODO Create a more generic gif for Events
 					ItemProvider listRoot = new ItemProvider("Animal Events for AIN: "+selectedAnimal.getIdNumber(),

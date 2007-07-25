@@ -8,6 +8,8 @@ import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.TrackerFactory;
 
 /**
+ * Add the tag ids in the selected resource(s) as Premises MovedIn Events.
+ * 
  * @author jconlon
  *
  */
