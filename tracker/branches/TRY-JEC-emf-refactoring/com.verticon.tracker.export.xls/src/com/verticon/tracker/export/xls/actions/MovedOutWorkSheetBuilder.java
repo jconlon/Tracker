@@ -48,7 +48,7 @@ public class MovedOutWorkSheetBuilder extends AbstractWorkSheetBuilder implement
     void fillRow(MovedOut movedOut, HSSFRow row){
     	HSSFCell cell = null;
     	//EarTag
-		row.createCell((short)0).setCellValue(movedOut.getAin().getIdNumber());
+		row.createCell((short)0).setCellValue(movedOut.getAnimalId().getIdNumber());
     	//Date
     	cell = row.createCell((short)1);
 		cell.setCellValue(movedOut.getDateTime());
@@ -66,7 +66,7 @@ public class MovedOutWorkSheetBuilder extends AbstractWorkSheetBuilder implement
 	 */
 	@Override
 	public void loadList(Premises premises ){
-		EList<Event> events = premises.getEventHistory().getEvents();
+		EList<Event> events = premises.eventHistory();
 		for (Event event : events) {
 			if(MovedOut.EVENT_CODE ==event.getEventCode()){
 				movedOutEvents.add((MovedOut)event);
@@ -77,7 +77,7 @@ public class MovedOutWorkSheetBuilder extends AbstractWorkSheetBuilder implement
 			public int compare(MovedOut event1, MovedOut event2) {
 				
 				
-				return event1.getAin().getIdNumber().compareTo(event2.getAin().getIdNumber());
+				return event1.getAnimalId().getIdNumber().compareTo(event2.getAnimalId().getIdNumber());
 			}});
 	}
 
