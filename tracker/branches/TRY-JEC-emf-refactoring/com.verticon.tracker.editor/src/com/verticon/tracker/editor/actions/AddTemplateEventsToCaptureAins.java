@@ -6,6 +6,7 @@ package com.verticon.tracker.editor.actions;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 
 import org.eclipse.core.resources.IFile;
@@ -23,7 +24,7 @@ import org.eclipse.swt.SWT;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventHistory;
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
 import com.verticon.tracker.editor.dialogs.WSFileDialog;
@@ -46,7 +47,7 @@ import com.verticon.tracker.util.CommonUtilities;
  */
 public class AddTemplateEventsToCaptureAins extends AbstractAddAsEvent {
 
-	EventHistory eventHistoryTemplate = null;
+	Premises eventPremisesTemplate = null;
 	Animal defaultAnimal = null;
 
 	/**
@@ -94,12 +95,12 @@ public class AddTemplateEventsToCaptureAins extends AbstractAddAsEvent {
 						e.getLocalizedMessage());
 				return;
 		}
-		eventHistoryTemplate = CommonUtilities.getEventHistoryFromTemplate(templateResource);
+		eventPremisesTemplate = CommonUtilities.getPremisesFromTemplate(templateResource);
 		
 		defaultAnimal = CommonUtilities.getDefaultAnimalFromTemplate(templateResource);
 		
-		if(eventHistoryTemplate==null && defaultAnimal ==null){
-			System.out.println("eventHistory="+eventHistoryTemplate+" defaultAnimal="+defaultAnimal);
+		if(eventPremisesTemplate==null && defaultAnimal ==null){
+			System.out.println("eventHistory="+eventPremisesTemplate+" defaultAnimal="+defaultAnimal);
 			return;
 		}
 
@@ -113,7 +114,7 @@ public class AddTemplateEventsToCaptureAins extends AbstractAddAsEvent {
 	private void overrideEventHistoryTemplateDatesIfNecessary() {
 		Date date = createDateFromResourceName();
 		if(date!=null){
-			for (Object object : eventHistoryTemplate.getEvents()) {
+			for (Object object : eventPremisesTemplate.eventHistory()) {
 				((Event )object).setDateTime(date);
 			}
 		}
@@ -133,13 +134,14 @@ public class AddTemplateEventsToCaptureAins extends AbstractAddAsEvent {
     }
 
 	/**
-	 * 
+	 * FIXME
 	 * return a copy the events in the template
 	 */
 	@Override
 	protected Collection<Event> createEvents(TrackerFactory trackerFactory, AnimalId animalId, Long tag) {
-		overrideEventHistoryTemplateDatesIfNecessary();
-		return CommonUtilities.createEvents(eventHistoryTemplate,  animalId,  premises);
+//		overrideEventHistoryTemplateDatesIfNecessary();
+//		return CommonUtilities.createEvents(eventPremisesTemplate,  animalId,  premises);
+		return Collections.emptyList();
 	}
 
 }

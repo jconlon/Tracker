@@ -70,7 +70,6 @@ public abstract class AbstractAddToParentActionDelegate {
 		IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
 					.getActivePage().getActiveEditor();
 			
-
 		if (editor == null || (!(editor instanceof TrackerEditor))) {
 			TrackerLog
 					.logError("The active editor is not a TrackerEditor.", null);
@@ -83,7 +82,6 @@ public abstract class AbstractAddToParentActionDelegate {
 	}
 	
 	protected void processSelection(TrackerEditor editor) {
-		
 		if (selection instanceof IStructuredSelection) {
 			for (Iterator<?> iter = ((IStructuredSelection) selection).iterator(); iter
 					.hasNext();) {
@@ -116,7 +114,6 @@ public abstract class AbstractAddToParentActionDelegate {
 											+ e.getLocalizedMessage()
 											+ "  Add tags from the file as Animals first.");
 					return;
-
 				} finally {
 					if (sc != null) {
 						sc.close();
@@ -132,8 +129,6 @@ public abstract class AbstractAddToParentActionDelegate {
 		action.setEnabled(!selection.isEmpty());
 	}
 
-	
-	
 	
 	public static final IResource extractResource(IEditorPart editor) {
 		IEditorInput input = editor.getEditorInput();
@@ -179,8 +174,8 @@ public abstract class AbstractAddToParentActionDelegate {
 		if(!animalsToAdd.isEmpty()){
 			Command command = AddCommand.create(
 					editingDomain, 
-					premises.getAnimals(),
-					TrackerPackage.eINSTANCE.getAnimals_Animal(), 
+					premises,
+					TrackerPackage.eINSTANCE.getAnimal(), 
 					animalsToAdd);
 			editingDomain.getCommandStack().execute(command);
 
@@ -237,7 +232,7 @@ public abstract class AbstractAddToParentActionDelegate {
 	 * @return event or null
 	 */
 	protected boolean containsEvent(Long tag, int eventCode) {
-		List<Event> elist = premises.getEventHistory().getEvents();
+		List<Event> elist = premises.eventHistory();
 		for (Event event : elist) {
 			if (event.getEventCode() == eventCode && event.getId() == tag.longValue()) {
 				return true;

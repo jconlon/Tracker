@@ -14,6 +14,8 @@ import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 
 /**
+ * 
+ * 
  * @author jconlon
  *
  */
@@ -56,15 +58,16 @@ public abstract class AbstractAddAsEvent extends AbstractAddToParentActionDelega
 	 */
 	@Override
 	protected Object createParent(Premises premises) {
-		return premises.getEventHistory();
+		return premises;
 	}
 
 	/* (non-Javadoc)
+	 * FIXME
 	 * @see com.verticon.tracker.editor.actions.AbstractAddToParentActionDelegate#getFeature()
 	 */
 	@Override
 	protected Object getFeature() {
-		return TrackerPackage.eINSTANCE.getEventHistory_Events();//getAnimals_Animal();
+		return TrackerPackage.eINSTANCE.getAnimalId();//getAnimals_Animal();
 	}
 
 }
