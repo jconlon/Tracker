@@ -19,9 +19,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalId;
-import com.verticon.tracker.Animals;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.transaction.publisher.views.EventPublisherView;
 import com.verticon.tracker.util.CommonUtilities;
@@ -32,7 +30,7 @@ public class TransactionPublisher {
 	private final TransactionalEditingDomain domain = 
 		TransactionalEditingDomain.Registry.INSTANCE.getEditingDomain("com.verticon.transaction.editor.TrackerEditingDomain");
 	
-	private  EventHistory eventHistoryTemplate;
+	private  Premises premisesTemplate;
 	
 	private  Animal defaultAnimal;
 	
@@ -85,11 +83,10 @@ public class TransactionPublisher {
 		Animal animal = null;
 		
 		if(premisesTemplate.getAnimals()!=null){
-			Animals animals = premisesTemplate.getAnimals();
-			animal = (Animal)animals.getAnimal().get(0);
+			animal = (Animal)premisesTemplate.getAnimals().get(0);
 		}
 		this.defaultAnimal=animal;
-		this.eventHistoryTemplate=premisesTemplate.getEventHistory();
+		this.premisesTemplate=premisesTemplate;
 	}
 	
 	
@@ -155,16 +152,20 @@ public class TransactionPublisher {
 		
 	}
 	
-	
+	/**
+	 * FIXME implement
+	 * @param tag
+	 * @param premises
+	 */
 	@SuppressWarnings("unchecked")
 	private void addTemplateEventsToPremises( Long tag, Premises premises){
-//		log("Processing a premises");
-		AnimalId animalId = CommonUtilities.findAnimalId(tag, premises, defaultAnimal);
-		Collection<Event> events = CommonUtilities.createEvents(eventHistoryTemplate,  animalId,  premises);
-		for (Event event : events) {
-			log(event.getDateTime()+"\t"+event.getAin().getIdNumber()+'\t'+simpleName( event));
-			premises.getEventHistory().getEvents().add(event);
-		}
+		log("Processing a premises");
+//		AnimalId animalId = CommonUtilities.findAnimalId(tag, premises, defaultAnimal);
+//		Collection<Event> events = CommonUtilities.createEvents(eventHistoryTemplate,  animalId,  premises);
+//		for (Event event : events) {
+//			log(event.getDateTime()+"\t"+event.getAnimalId().getIdNumber()+'\t'+simpleName( event));
+//			premises.getEventHistory().getEvents().add(event);
+//		}
 	}
 	
 	
