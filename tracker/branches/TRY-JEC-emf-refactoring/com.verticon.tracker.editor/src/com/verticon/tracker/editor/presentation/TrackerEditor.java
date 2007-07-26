@@ -1165,21 +1165,20 @@ public class TrackerEditor
 				        {
 				          public Object [] getElements(Object object)
 				          {
-				        	  System.out.println("----> getElements called");
 				            return ((Premises)object).eventHistory().toArray();
 				          }
 				          public void notifyChanged(Notification notification)
 				          {
-				            switch (notification.getEventType())
-				            {
-				              case Notification.ADD:
-				              case Notification.ADD_MANY:
-				            	   if (notification.getFeature() != TrackerPackage.eINSTANCE.getAnimalId_Events()) {
-				                	return;
-				                }
-				            }
-				            super.notifyChanged(notification);
-				            this.viewer.refresh();
+				        	  switch (notification.getEventType())
+				        	  {
+				        	  case Notification.ADD:
+				        	  case Notification.ADD_MANY:
+				        		  if (notification.getFeature() != TrackerPackage.eINSTANCE.getAnimalId_Events()) {
+				        			  return;
+				        		  }
+				        	  }
+				        	  super.notifyChanged(notification);
+				        	  this.viewer.refresh();
 				          }
 				        });
 				eventsTableViewer.setLabelProvider(
@@ -1310,10 +1309,11 @@ public class TrackerEditor
 				              case Notification.ADD:
 				              case Notification.ADD_MANY:
 				            	if (notification.getFeature() != TrackerPackage.eINSTANCE.getPremises_Animals()){
-				                	return;
+				            		return;
 				                }
 				            }
 				            super.notifyChanged(notification);
+				            this.viewer.refresh();
 				          }
 				        });
 				animalsTableViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
