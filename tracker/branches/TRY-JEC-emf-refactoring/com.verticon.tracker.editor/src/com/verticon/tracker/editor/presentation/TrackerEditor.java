@@ -90,6 +90,7 @@ import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.dnd.DND;
@@ -1110,8 +1111,19 @@ public class TrackerEditor
 				table.setLinesVisible(true);
 				eventsTableViewer.setUseHashlookup(true);
 				
-				//FIXME Reduce size of Events BIRTHDATE column? - chaned from 3 50. Does it work
+				//FIXME Reduce size of Events BIRTHDATE column? - changed from 3 50. Does it work
 				//TODO Make sure listeners are disposed of properly
+				//Event
+				TableColumn eventColumn = new TableColumn(table, SWT.NONE);
+				layout.addColumnData(new ColumnWeightData(2, 90, true));
+				eventColumn.setText(getString("_UI_EventColumn_label"));
+				eventColumn.setResizable(true);
+				eventColumn.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e) {
+						eventsTableViewer.setSorter(new ViewerSorter());
+					}
+				});
+				
 				//DateTime
 				TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
 				layout.addColumnData(new ColumnWeightData(2, 70, true));
@@ -1146,7 +1158,7 @@ public class TrackerEditor
 				 });
 				
 
-				eventsTableViewer.setColumnProperties(new String [] {"a", "b", "c"});
+				eventsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d"});
 //				eventsTableViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
 				eventsTableViewer.setContentProvider(
 				        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
@@ -1208,6 +1220,17 @@ public class TrackerEditor
 				
 				//TODO Make sure listeners are disposed of properly
 				//ENHANCE add ANIMALS FILTERING 
+				//Event
+				TableColumn animalColumn = new TableColumn(table, SWT.NONE);
+				layout.addColumnData(new ColumnWeightData(2, 70, true));
+				animalColumn.setText(getString("_UI_AnimalColumn_label"));
+				animalColumn.setResizable(true);
+				animalColumn.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e) {
+						eventsTableViewer.setSorter(new ViewerSorter());
+					}
+				});
+				
                 //Ain 
 				TableColumn ainColumn = new TableColumn(table, SWT.NONE);
 				layout.addColumnData(new ColumnWeightData(3, 100, true));
