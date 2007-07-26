@@ -124,7 +124,7 @@ public interface Premises extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/ocl/examples/OCL body='animals.ain.events'"
+	 * @model annotation="http://www.eclipse.org/ocl/examples/OCL body='animals -> select(not ain.oclIsUndefined()) ->collect(ain.events)'"
 	 * @generated
 	 */
 	EList<Event> eventHistory();
