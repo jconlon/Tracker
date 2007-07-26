@@ -1643,7 +1643,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		  (premisesEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
-			 "body", "animals.ain.events"
+			 "body", "animals -> select(not ain.oclIsUndefined()) ->collect(ain.events)"
 		   });		
 	}
 
