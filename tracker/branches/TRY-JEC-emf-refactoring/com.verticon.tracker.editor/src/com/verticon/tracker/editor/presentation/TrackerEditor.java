@@ -1165,6 +1165,7 @@ public class TrackerEditor
 				        {
 				          public Object [] getElements(Object object)
 				          {
+				        	  System.out.println("----> getElements called");
 				            return ((Premises)object).eventHistory().toArray();
 				          }
 				          public void notifyChanged(Notification notification)
@@ -1173,15 +1174,16 @@ public class TrackerEditor
 				            {
 				              case Notification.ADD:
 				              case Notification.ADD_MANY:
-				            	  //TODO Test to see Event is the correct type for the eventsTable Notifications
-				                if (notification.getFeature() != TrackerPackage.eINSTANCE.getEvent()) {
+				            	   if (notification.getFeature() != TrackerPackage.eINSTANCE.getAnimalId_Events()) {
 				                	return;
 				                }
 				            }
 				            super.notifyChanged(notification);
+				            this.viewer.refresh();
 				          }
 				        });
-				eventsTableViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+				eventsTableViewer.setLabelProvider(
+						new AdapterFactoryLabelProvider(adapterFactory));
 //				14.2.2
 			      Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
 			      Object rootObject = resource.getContents().get(0);
