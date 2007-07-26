@@ -403,18 +403,19 @@ public class AnimalItemProvider
 	  {
 	    Animal animal = (Animal)object;
 	    switch (columnIndex){
-	    	case 0: return animal.getIdNumber().toString();
-	    	case 1: return animal.getSpecies();
-	    	case 2: return animal.getSex()==null?"unspecified":animal.getSex().toString();
-	    	case 3: return animal.getBreed()==null?"unspecified":animal.getBreed();
-	    	case 4: 
+	    	case 0: return getText(object);
+	    	case 1: return animal.getIdNumber().toString();
+	    	case 2: return animal.getSpecies();
+	    	case 3: return animal.getSex()==null?"unspecified":animal.getSex().toString();
+	    	case 4: return animal.getBreed()==null?"unspecified":animal.getBreed();
+	    	case 5: 
 	    		if(animal.getBirthDate()!=null){
 	    			DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
 //	    			SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
 	    			return df.format(animal.getBirthDate());
 	    		}
 	    		return null;
-	    	case 5: 
+	    	case 6: 
 	    		if(animal.getAge()!=null){
 	    			return animal.getAge().getYears() + " years, "
 					+ animal.getAge().getMonths() + " month, " + animal.getAge().getDays()
@@ -432,9 +433,9 @@ public class AnimalItemProvider
 	public Object getColumnImage(Object object, int columnIndex) // 14.2.2
 	  {
 		switch (columnIndex){
-    	case 0: return null;
+    	case 0: return getImage(object);
     	default :
-    		return getImage(object);
+    		return null ;
 		}
 	    
 	  }

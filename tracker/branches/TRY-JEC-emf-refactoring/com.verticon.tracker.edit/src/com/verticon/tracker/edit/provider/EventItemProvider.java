@@ -341,20 +341,21 @@ public class EventItemProvider
 	  {
 	    Event event = (Event)object;
 	    switch (columnIndex){
-	    	case 0: 
+	    	case 0: return getText(object);
+	    	case 1: 
 	    		if(event.getDateTime()!=null){
 	    			DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss z");
 	    			return df.format(event.getDateTime());
 	    		}
 	    		return null;
-	    	case 1: 
+	    	case 2: 
 	    		AnimalId animalId = ((Event)object).getAnimalId();
 	    		if(animalId==null) return "";
 	    		IItemLabelProvider itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(
 	    				animalId, IItemLabelProvider.class);
 	    		
 	    		return itemLabelProvider.getText(animalId);
-	    	case 2: 
+	    	case 3: 
 	    		String simpleName = object.getClass().getSimpleName();
 	    		return simpleName.substring(0,simpleName.indexOf("Impl"));
 	    	
@@ -370,9 +371,9 @@ public class EventItemProvider
 	public Object getColumnImage(Object object, int columnIndex) // 14.2.2
 	  {
 		switch (columnIndex){
-    	case 0: return null;
+    	case 0: return getImage(object);
     	default :
-    		return getImage(object);
+    		return null;
 		}
 	    
 	  }
