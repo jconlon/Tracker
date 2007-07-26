@@ -1307,8 +1307,9 @@ public class TrackerEditor
 				            {
 				              case Notification.ADD:
 				              case Notification.ADD_MANY:
-				            	//TODO Test to see Animal is the correct type for the animalsTable Notifications
-				                if (notification.getFeature() != TrackerPackage.eINSTANCE.getAnimal()) return;
+				            	if (notification.getFeature() != TrackerPackage.eINSTANCE.getPremises_Animals()){
+				                	return;
+				                }
 				            }
 				            super.notifyChanged(notification);
 				          }
