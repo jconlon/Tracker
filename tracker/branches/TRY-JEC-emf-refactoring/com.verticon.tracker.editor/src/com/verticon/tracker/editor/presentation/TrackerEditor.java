@@ -996,8 +996,8 @@ public class TrackerEditor
 
 				selectionViewer = (TreeViewer)viewerPane.getViewer();
 				selectionViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-
-				selectionViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory));
+              
+				selectionViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, selectionViewer));
 				//Changed to show the Premises as the root
 //				selectionViewer.setInput(editingDomain.getResourceSet());
 //				viewerPane.setTitle(editingDomain.getResourceSet());
@@ -1033,7 +1033,7 @@ public class TrackerEditor
 				parentViewer = (TreeViewer)viewerPane.getViewer();
 				parentViewer.setAutoExpandLevel(30);
 				parentViewer.setContentProvider(new ReverseAdapterFactoryContentProvider(adapterFactory));
-				parentViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+				parentViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, parentViewer));
 
 				createContextMenuFor(parentViewer);
 				int pageIndex = addPage(viewerPane.getControl());
@@ -1056,7 +1056,7 @@ public class TrackerEditor
 				viewerPane.createControl(getContainer());
 				listViewer = (ListViewer)viewerPane.getViewer();
 				listViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-				listViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+				listViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, listViewer));
 
 				createContextMenuFor(listViewer);
 				int pageIndex = addPage(viewerPane.getControl());
@@ -1079,7 +1079,7 @@ public class TrackerEditor
 				viewerPane.createControl(getContainer());
 				treeViewer = (TreeViewer)viewerPane.getViewer();
 				treeViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-				treeViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+				treeViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, treeViewer));
 
 				new AdapterFactoryTreeEditor(treeViewer.getTree(), adapterFactory);
 
@@ -1366,7 +1366,7 @@ public class TrackerEditor
 
 				treeViewerWithColumns.setColumnProperties(new String [] {"a", "b"});
 				treeViewerWithColumns.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-				treeViewerWithColumns.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+				treeViewerWithColumns.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, treeViewerWithColumns));
 
 				createContextMenuFor(treeViewerWithColumns);
 				int pageIndex = addPage(viewerPane.getControl());
@@ -1488,7 +1488,7 @@ public class TrackerEditor
 					// Set up the tree viewer.
 					//
 					contentOutlineViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-					contentOutlineViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+					contentOutlineViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, contentOutlineViewer));
 					contentOutlineViewer.setInput(editingDomain.getResourceSet());
 
 					// Make sure our popups work.
