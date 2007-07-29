@@ -12,7 +12,9 @@ import java.util.Date;
 
 import junit.framework.TestCase;
 
+import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.TrackerFactory;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,6 +30,8 @@ import com.verticon.tracker.Event;
  * @generated
  */
 public abstract class EventTest extends TestCase {
+	private static final String _123456789012345 = "123456789012345";
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -93,7 +97,14 @@ public abstract class EventTest extends TestCase {
 	 */
 	public void testGetId() {
 		assertNotNull(getFixture());
-		assertEquals(0, getFixture().getId());
+		assertEquals(0,getFixture().getId());
+		
+		AnimalId ain = TrackerFactory.eINSTANCE.createAnimalId();
+		ain.setIdNumber(_123456789012345);
+		ain.getEvents().add(getFixture());
+		
+		assertEquals(Long.parseLong(_123456789012345), getFixture().getId());
+		
 	}
 	
 	

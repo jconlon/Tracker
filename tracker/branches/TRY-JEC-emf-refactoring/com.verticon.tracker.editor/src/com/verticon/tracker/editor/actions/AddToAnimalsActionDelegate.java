@@ -80,7 +80,7 @@ public class AddToAnimalsActionDelegate extends AbstractAddToParentActionDelegat
 		Animal animal =  (Animal) copier.copy(animalToClone);
 		AnimalId animalId = TrackerFactory.eINSTANCE.createAnimalId();
 		animalId.setIdNumber(tag.toString());
-		animal.setAin(animalId);
+		animal.getAins().add(animalId);
 		ArrayList<Animal> results = new ArrayList<Animal>();
 		results.add(animal);
 		return results;

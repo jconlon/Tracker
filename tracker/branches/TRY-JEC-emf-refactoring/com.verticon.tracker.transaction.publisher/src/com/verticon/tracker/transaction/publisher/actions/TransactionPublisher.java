@@ -50,7 +50,7 @@ public class TransactionPublisher {
 		syncTemplate();
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		   IResourceChangeListener listener = new IResourceChangeListener() {
-			  //FIXME Listen or react to changes only on the template file.
+			  //REWORK  Listen or react to changes only on the template file.
 		      public void resourceChanged(IResourceChangeEvent event) {
 		    	  log(new Date()+"\tWorkspace changed event detected.");
 		    	  try {
@@ -153,7 +153,7 @@ public class TransactionPublisher {
 	}
 	
 	/**
-	 * FIXME implement
+	 * REWORK implement
 	 * @param tag
 	 * @param premises
 	 */

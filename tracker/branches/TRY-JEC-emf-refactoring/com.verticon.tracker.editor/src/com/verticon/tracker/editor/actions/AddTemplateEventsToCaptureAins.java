@@ -134,7 +134,7 @@ public class AddTemplateEventsToCaptureAins extends AbstractAddAsEvent {
     }
 
 	/**
-	 * FIXME
+	 * REWORK implement method
 	 * return a copy the events in the template
 	 */
 	@Override

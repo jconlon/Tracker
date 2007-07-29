@@ -141,11 +141,7 @@ public class AnimalSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	private int compareAins(Animal animal1, Animal animal2) {
-		String ain1 = animal1.getAin()==null?"":animal1.getAin().getIdNumber();
-		String ain2 = animal2.getAin()==null?"":animal2.getAin().getIdNumber();
-		return getComparator().compare(
-				ain1, 
-				ain2);
+		return animal1.getIdNumber().compareTo(animal2.getIdNumber());
 		
 	}
 

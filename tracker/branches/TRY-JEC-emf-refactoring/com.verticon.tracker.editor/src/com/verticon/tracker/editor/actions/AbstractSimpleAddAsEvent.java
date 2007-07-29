@@ -23,7 +23,7 @@ import com.verticon.tracker.TrackerFactory;
 public abstract class AbstractSimpleAddAsEvent extends AbstractAddAsEvent {
 
 	/* (non-Javadoc)
-	 * FIXME 
+	 * REWORK 
 	 * @see com.verticon.tracker.editor.actions.AbstractAddAsEvent#createEvents(com.verticon.tracker.TrackerFactory, com.verticon.tracker.AnimalId, java.lang.Long)
 	 */
 	@Override

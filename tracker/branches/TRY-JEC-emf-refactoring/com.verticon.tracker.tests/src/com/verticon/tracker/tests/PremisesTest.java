@@ -104,19 +104,21 @@ public class PremisesTest extends TestCase {
 	/**
 	 * Tests the '{@link com.verticon.tracker.Premises#eventHistory() <em>Event History</em>}' operation.
 	 * <!-- begin-user-doc -->
+	 * FIXME Add more tests
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Premises#eventHistory()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testEventHistory() {
-		// TODO: implement this operation test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		assertNotNull(getFixture().eventHistory());
+		assertNotNull(getFixture().eventHistory().isEmpty());
+//		fail("Add more tests");
+		
 	}
 
 	public void testGetPremises() {
 		assertNotNull(getFixture());
-		assertNull( getFixture().getAnimals());
+		assertTrue( getFixture().getAnimals().isEmpty());
 		
 	}
 	
