@@ -6,7 +6,6 @@
  */
 package com.verticon.tracker;
 
-import java.math.BigInteger;
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
@@ -24,7 +23,7 @@ import com.verticon.tracker.util.Age;
  * <ul>
  *   <li>{@link com.verticon.tracker.Animal#getBirthDate <em>Birth Date</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getSex <em>Sex</em>}</li>
- *   <li>{@link com.verticon.tracker.Animal#getAins <em>Ains</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getTags <em>Tags</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getSpecies <em>Species</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getIdNumber <em>Id Number</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getBreed <em>Breed</em>}</li>
@@ -130,20 +129,20 @@ public interface Animal extends EObject {
 	boolean isSetSex();
 
 	/**
-	 * Returns the value of the '<em><b>Ains</b></em>' containment reference list.
-	 * The list contents are of type {@link com.verticon.tracker.AnimalId}.
+	 * Returns the value of the '<em><b>Tags</b></em>' containment reference list.
+	 * The list contents are of type {@link com.verticon.tracker.Tag}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Ains</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Tags</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Ains</em>' containment reference list.
-	 * @see com.verticon.tracker.TrackerPackage#getAnimal_Ains()
-	 * @model containment="true" required="true"
+	 * @return the value of the '<em>Tags</em>' containment reference list.
+	 * @see com.verticon.tracker.TrackerPackage#getAnimal_Tags()
+	 * @model containment="true" keys="idNumber" required="true"
 	 * @generated
 	 */
-	EList<AnimalId> getAins();
+	EList<Tag> getTags();
 
 	/**
 	 * Returns the value of the '<em><b>Species</b></em>' attribute.
@@ -173,7 +172,7 @@ public interface Animal extends EObject {
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	BigInteger getIdNumber();
+	long getIdNumber();
 
 	/**
 	 * Returns the value of the '<em><b>Breed</b></em>' attribute.
@@ -251,7 +250,7 @@ public interface Animal extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/ocl/examples/OCL body='if (ains -> notEmpty()) and ( ains.events -> notEmpty())\n\tthen ains.events\n\telse Set{}\nendif'"
+	 * @model
 	 * @generated
 	 */
 	EList<Event> allEvents();

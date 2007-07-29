@@ -29,9 +29,9 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
 import com.verticon.tracker.util.CommonUtilities;
@@ -214,7 +214,7 @@ public abstract class AbstractAddToParentActionDelegate {
 	 * @param tag
 	 * @return animalID or null
 	 */
-	protected AnimalId findAnimalId(Long tag, Animal defaultAnimal) {
+	protected Tag findAnimalId(Long tag, Animal defaultAnimal) {
 		return CommonUtilities.findAnimalId( tag,  premises, defaultAnimal);
 	}
 	
@@ -234,7 +234,7 @@ public abstract class AbstractAddToParentActionDelegate {
 	protected boolean containsEvent(Long tag, int eventCode) {
 		List<Event> elist = premises.eventHistory();
 		for (Event event : elist) {
-			if (event.getEventCode() == eventCode && event.getId() == tag.longValue()) {
+			if (event.getEventCode() == eventCode && event.getIdNumber() == tag.longValue()) {
 				return true;
 			}
 		}

@@ -89,12 +89,7 @@ public class EventSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	private int compareAins(Event event1, Event event2) {
-		if(event1.getId()<event2.getId()){
-			return -1;
-		} if (event1.getId()==event2.getId()){
-			return 0;
-		}
-		return 1;
+		return new Long(event1.getIdNumber()).compareTo(event2.getIdNumber());
 	}
 
 	/**

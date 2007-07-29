@@ -1,33 +1,33 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright 2007 Verticon, Inc. All Rights Reserved.
  *
  * $Id$
  */
 package com.verticon.tracker;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Animal Id</b></em>'.
+ * A representation of the model object '<em><b>Tag</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.verticon.tracker.AnimalId#getIdNumber <em>Id Number</em>}</li>
- *   <li>{@link com.verticon.tracker.AnimalId#isUsainNumberUsed <em>Usain Number Used</em>}</li>
- *   <li>{@link com.verticon.tracker.AnimalId#getEvents <em>Events</em>}</li>
+ *   <li>{@link com.verticon.tracker.Tag#getIdNumber <em>Id Number</em>}</li>
+ *   <li>{@link com.verticon.tracker.Tag#isUsainNumberUsed <em>Usain Number Used</em>}</li>
+ *   <li>{@link com.verticon.tracker.Tag#getEvents <em>Events</em>}</li>
  * </ul>
  * </p>
  *
- * @see com.verticon.tracker.TrackerPackage#getAnimalId()
+ * @see com.verticon.tracker.TrackerPackage#getTag()
  * @model
  * @generated
  */
-public interface AnimalId extends EObject {
+public interface Tag extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -44,22 +44,22 @@ public interface AnimalId extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id Number</em>' attribute.
-	 * @see #setIdNumber(String)
-	 * @see com.verticon.tracker.TrackerPackage#getAnimalId_IdNumber()
-	 * @model id="true" dataType="com.verticon.tracker.AnimialIdNumber" required="true"
+	 * @see #setIdNumber(long)
+	 * @see com.verticon.tracker.TrackerPackage#getTag_IdNumber()
+	 * @model id="true" required="true"
 	 * @generated
 	 */
-	String getIdNumber();
+	long getIdNumber();
 
 	/**
-	 * Sets the value of the '{@link com.verticon.tracker.AnimalId#getIdNumber <em>Id Number</em>}' attribute.
+	 * Sets the value of the '{@link com.verticon.tracker.Tag#getIdNumber <em>Id Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Id Number</em>' attribute.
 	 * @see #getIdNumber()
 	 * @generated
 	 */
-	void setIdNumber(String value);
+	void setIdNumber(long value);
 
 	/**
 	 * Returns the value of the '<em><b>Usain Number Used</b></em>' attribute.
@@ -70,7 +70,7 @@ public interface AnimalId extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Usain Number Used</em>' attribute.
-	 * @see com.verticon.tracker.TrackerPackage#getAnimalId_UsainNumberUsed()
+	 * @see com.verticon.tracker.TrackerPackage#getTag_UsainNumberUsed()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
@@ -79,7 +79,7 @@ public interface AnimalId extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Events</b></em>' containment reference list.
 	 * The list contents are of type {@link com.verticon.tracker.Event}.
-	 * It is bidirectional and its opposite is '{@link com.verticon.tracker.Event#getAnimalId <em>Animal Id</em>}'.
+	 * It is bidirectional and its opposite is '{@link com.verticon.tracker.Event#getTag <em>Tag</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Events</em>' containment reference list isn't clear,
@@ -87,11 +87,11 @@ public interface AnimalId extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Events</em>' containment reference list.
-	 * @see com.verticon.tracker.TrackerPackage#getAnimalId_Events()
-	 * @see com.verticon.tracker.Event#getAnimalId
-	 * @model opposite="animalId" containment="true" required="true"
+	 * @see com.verticon.tracker.TrackerPackage#getTag_Events()
+	 * @see com.verticon.tracker.Event#getTag
+	 * @model opposite="tag" containment="true" required="true"
 	 * @generated
 	 */
 	EList<Event> getEvents();
 
-} // AnimalId
+} // Tag

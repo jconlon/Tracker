@@ -1,7 +1,6 @@
 package com.verticon.tracker.transaction.publisher.actions;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.core.resources.IFile;
@@ -18,11 +17,9 @@ import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.transaction.publisher.views.EventPublisherView;
-import com.verticon.tracker.util.CommonUtilities;
 import com.verticon.transaction.editor.console.ConsoleUtil;
 
 public class TransactionPublisher {

@@ -235,7 +235,7 @@ public class PremisesItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.PREMISES__UN_APPLIED_TAGS,
-				 TrackerFactory.eINSTANCE.createAnimalId()));
+				 TrackerFactory.eINSTANCE.createTag()));
 	}
 
 	/**

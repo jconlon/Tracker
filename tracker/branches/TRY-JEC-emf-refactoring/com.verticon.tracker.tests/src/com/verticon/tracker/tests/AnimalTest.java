@@ -6,7 +6,6 @@
  */
 package com.verticon.tracker.tests;
 
-import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -14,7 +13,8 @@ import java.util.GregorianCalendar;
 import junit.framework.TestCase;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
+import com.verticon.tracker.Event;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.util.Age;
@@ -43,7 +43,8 @@ import com.verticon.tracker.util.Age;
  * @generated
  */
 public abstract class AnimalTest extends TestCase {
-	private static final String AIN = "123456789012345";
+	private static final long AIN = 123456789012345L;
+	private static final long AIN2 = 123456789012343L;
 	private static final Date ANIMAL_BIRTHDAY = 
 		(new GregorianCalendar(2000, Calendar.JANUARY, 1,1,5)).getTime();
 
@@ -82,9 +83,9 @@ public abstract class AnimalTest extends TestCase {
 		this.fixture = fixture;
 		if(fixture !=null){
 			fixture.setSex(Sex.M_LITERAL);
-			AnimalId ain = TrackerFactory.eINSTANCE.createAnimalId();
-			ain.setIdNumber(AIN);
-			fixture.getAins().add(ain);
+			Tag tag = TrackerFactory.eINSTANCE.createTag();
+			tag.setIdNumber(AIN);
+			fixture.getTags().add(tag);
 			fixture.setBirthDate(ANIMAL_BIRTHDAY);
 			
 		}
@@ -114,17 +115,67 @@ public abstract class AnimalTest extends TestCase {
 		fail();
 	}
 
+//	public void testFindTagWithLatestEventDate(){
+//		Tag tag1 = TrackerFactory.eINSTANCE.createTag();
+//		tag1.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
+//		try {
+//	        long numMillisecondsToSleep = 1000; // 5 seconds
+//	        Thread.sleep(numMillisecondsToSleep);
+//	    } catch (InterruptedException e) {
+//	    }
+//		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
+//		tag2.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
+//				
+//		assertTrue(tag1.getEvents().get(0).getDateTime().before(tag2.getEvents().get(0).getDateTime()));
+//		assertEquals(-1, tag1.getEvents().get(0).getDateTime().compareTo(tag2.getEvents().get(0).getDateTime()));
+//		
+//	}
 	/**
 	 * Tests the '{@link com.verticon.tracker.Animal#getIdNumber() <em>Id Number</em>}' feature getter.
 	 * <!-- begin-user-doc -->
-	 * FIXME Add more tests
+	 * 
+	 * AnimalIdNumber is derived from the IdNumber of the current Tag
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#getIdNumber()
 	 * @generated NOT
 	 */
 	public void testGetIdNumber() {
-		assertNotNull(getFixture());
-		assertEquals(AIN, getFixture().getIdNumber().toString());
+		//Test animal with one tag that has a number
+		assertNotNull("Test with one tag that has a number", getFixture());
+		assertEquals(0, getFixture().getIdNumber());
+		
+		//Test animal with no tag
+		Animal animal2 = TrackerFactory.eINSTANCE.createBovineBeef();
+		assertEquals("Test with no tag", 0, animal2.getIdNumber());
+		
+		//Test animal with one tag that has no idNumber
+		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
+		animal2.getTags().add(tag2);
+		assertEquals("Test with no tag", 0, animal2.getIdNumber());
+		
+		//Test animal with two tags that have no numbers
+		Tag tag3 = TrackerFactory.eINSTANCE.createTag();
+		animal2.getTags().add(tag3);
+		assertEquals("Test with no tag", 0, animal2.getIdNumber());
+		
+		//Test animal with two tags one with an IdNumber the other without
+		tag2.setIdNumber(AIN);
+		assertEquals("Test with no tag", 0, animal2.getIdNumber());
+		
+		//Test animal with two tags one with an event
+		tag2.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
+		assertEquals("Test with no tag", AIN, animal2.getIdNumber());
+		
+		//Find the tag with the most current event timestamp.
+		tag3.setIdNumber(AIN2);
+		try {
+	        long numMillisecondsToSleep = 500; // 5 seconds
+	        Thread.sleep(numMillisecondsToSleep);
+	    } catch (InterruptedException e) {
+	    }
+		tag3.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
+		assertEquals( AIN2, animal2.getIdNumber());
+
 	}
 
 	/**
@@ -195,14 +246,35 @@ public abstract class AnimalTest extends TestCase {
 	/**
 	 * Tests the '{@link com.verticon.tracker.Animal#allEvents() <em>All Events</em>}' operation.
 	 * <!-- begin-user-doc -->
-	 * FIXME Add more tests
+	 * 
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#allEvents()
 	 * @generated NOT
 	 */
 	public void testAllEvents() {
 		assertNotNull(getFixture().allEvents());
-//		fail("Add more tests");
+		
+		assertTrue(getFixture().allEvents().isEmpty());
+
+		//Test animal with no tag
+		Animal animal2 = TrackerFactory.eINSTANCE.createBovineBeef();
+		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
+		tag2.setIdNumber(AIN);
+		animal2.getTags().add(tag2);
+		Event event1 = TrackerFactory.eINSTANCE.createTagApplied();
+		tag2.getEvents().add(event1);
+		assertEquals(1, animal2.allEvents().size());
+		assertTrue(animal2.allEvents().contains(event1));
+		
+		Tag tag3 = TrackerFactory.eINSTANCE.createTag();
+		animal2.getTags().add(tag3);
+		tag3.setIdNumber(AIN2);
+		
+		Event event2 = TrackerFactory.eINSTANCE.createReplacedTag();
+		tag3.getEvents().add(event2);
+		
+		assertEquals(2, animal2.allEvents().size());
+		assertTrue(animal2.allEvents().contains(event2));
 	}
 
 } //AnimalTest

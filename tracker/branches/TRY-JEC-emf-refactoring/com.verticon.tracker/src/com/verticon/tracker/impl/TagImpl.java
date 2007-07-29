@@ -1,43 +1,46 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright 2007 Verticon, Inc. All Rights Reserved.
  *
  * $Id$
  */
 package com.verticon.tracker.impl;
 
+import com.verticon.tracker.Event;
+import com.verticon.tracker.Tag;
+import com.verticon.tracker.TrackerPackage;
+
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import com.verticon.tracker.AnimalId;
-import com.verticon.tracker.Event;
-import com.verticon.tracker.TrackerPackage;
-import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Animal Id</b></em>'.
+ * An implementation of the model object '<em><b>Tag</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.verticon.tracker.impl.AnimalIdImpl#getIdNumber <em>Id Number</em>}</li>
- *   <li>{@link com.verticon.tracker.impl.AnimalIdImpl#isUsainNumberUsed <em>Usain Number Used</em>}</li>
- *   <li>{@link com.verticon.tracker.impl.AnimalIdImpl#getEvents <em>Events</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.TagImpl#getIdNumber <em>Id Number</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.TagImpl#isUsainNumberUsed <em>Usain Number Used</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.TagImpl#getEvents <em>Events</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class AnimalIdImpl extends EObjectImpl implements AnimalId {
+public class TagImpl extends EObjectImpl implements Tag {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -53,7 +56,7 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ID_NUMBER_EDEFAULT = null;
+	protected static final long ID_NUMBER_EDEFAULT = 0L;
 
 	/**
 	 * The cached value of the '{@link #getIdNumber() <em>Id Number</em>}' attribute.
@@ -63,7 +66,7 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	 * @generated
 	 * @ordered
 	 */
-	protected String idNumber = ID_NUMBER_EDEFAULT;
+	protected long idNumber = ID_NUMBER_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isUsainNumberUsed() <em>Usain Number Used</em>}' attribute.
@@ -90,7 +93,7 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AnimalIdImpl() {
+	protected TagImpl() {
 		super();
 	}
 
@@ -101,7 +104,7 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TrackerPackage.Literals.ANIMAL_ID;
+		return TrackerPackage.Literals.TAG;
 	}
 
 	/**
@@ -109,7 +112,7 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getIdNumber() {
+	public long getIdNumber() {
 		return idNumber;
 	}
 
@@ -118,31 +121,20 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIdNumber(String newIdNumber) {
-		String oldIdNumber = idNumber;
+	public void setIdNumber(long newIdNumber) {
+		long oldIdNumber = idNumber;
 		idNumber = newIdNumber;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL_ID__ID_NUMBER, oldIdNumber, idNumber));
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.TAG__ID_NUMBER, oldIdNumber, idNumber));
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * 3 Numeric 840
-	 * 12 Numeric 123, 456,789,012 Start number > 2,000,000,000
-	 * 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public boolean isUsainNumberUsed() {
-		if(idNumber==null){
-			return false;
-		}
-		if(!idNumber.startsWith("840")){
-			return false;
-		}
-		long lastPart = Long.parseLong(idNumber.substring(3));
-		
-		return lastPart > 2000000000;
+		return idNumber>840200000000000L && idNumber<843000000000000L;
 	}
 
 	/**
@@ -152,7 +144,7 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	 */
 	public EList<Event> getEvents() {
 		if (events == null) {
-			events = new EObjectContainmentWithInverseEList<Event>(Event.class, this, TrackerPackage.ANIMAL_ID__EVENTS, TrackerPackage.EVENT__ANIMAL_ID);
+			events = new EObjectContainmentWithInverseEList<Event>(Event.class, this, TrackerPackage.TAG__EVENTS, TrackerPackage.EVENT__TAG);
 		}
 		return events;
 	}
@@ -166,7 +158,7 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TrackerPackage.ANIMAL_ID__EVENTS:
+			case TrackerPackage.TAG__EVENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEvents()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -180,7 +172,7 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TrackerPackage.ANIMAL_ID__EVENTS:
+			case TrackerPackage.TAG__EVENTS:
 				return ((InternalEList<?>)getEvents()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -194,11 +186,11 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TrackerPackage.ANIMAL_ID__ID_NUMBER:
-				return getIdNumber();
-			case TrackerPackage.ANIMAL_ID__USAIN_NUMBER_USED:
+			case TrackerPackage.TAG__ID_NUMBER:
+				return new Long(getIdNumber());
+			case TrackerPackage.TAG__USAIN_NUMBER_USED:
 				return isUsainNumberUsed() ? Boolean.TRUE : Boolean.FALSE;
-			case TrackerPackage.ANIMAL_ID__EVENTS:
+			case TrackerPackage.TAG__EVENTS:
 				return getEvents();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -213,10 +205,10 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TrackerPackage.ANIMAL_ID__ID_NUMBER:
-				setIdNumber((String)newValue);
+			case TrackerPackage.TAG__ID_NUMBER:
+				setIdNumber(((Long)newValue).longValue());
 				return;
-			case TrackerPackage.ANIMAL_ID__EVENTS:
+			case TrackerPackage.TAG__EVENTS:
 				getEvents().clear();
 				getEvents().addAll((Collection<? extends Event>)newValue);
 				return;
@@ -232,10 +224,10 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TrackerPackage.ANIMAL_ID__ID_NUMBER:
+			case TrackerPackage.TAG__ID_NUMBER:
 				setIdNumber(ID_NUMBER_EDEFAULT);
 				return;
-			case TrackerPackage.ANIMAL_ID__EVENTS:
+			case TrackerPackage.TAG__EVENTS:
 				getEvents().clear();
 				return;
 		}
@@ -250,11 +242,11 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TrackerPackage.ANIMAL_ID__ID_NUMBER:
-				return ID_NUMBER_EDEFAULT == null ? idNumber != null : !ID_NUMBER_EDEFAULT.equals(idNumber);
-			case TrackerPackage.ANIMAL_ID__USAIN_NUMBER_USED:
+			case TrackerPackage.TAG__ID_NUMBER:
+				return idNumber != ID_NUMBER_EDEFAULT;
+			case TrackerPackage.TAG__USAIN_NUMBER_USED:
 				return isUsainNumberUsed() != USAIN_NUMBER_USED_EDEFAULT;
-			case TrackerPackage.ANIMAL_ID__EVENTS:
+			case TrackerPackage.TAG__EVENTS:
 				return events != null && !events.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -276,4 +268,4 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 		return result.toString();
 	}
 
-} //AnimalIdImpl
+} //TagImpl

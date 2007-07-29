@@ -7,9 +7,9 @@ import java.util.Collection;
 
 import org.eclipse.ui.IObjectActionDelegate;
 
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 
@@ -35,7 +35,7 @@ public abstract class AbstractAddAsEvent extends AbstractAddToParentActionDelega
 	protected Collection<Event> createChildren(Long tag) throws NoAnimalFoundException {
 		TrackerFactory trackerFactory = TrackerFactory.eINSTANCE;
 		
-		AnimalId animalId = findAnimalId( tag, null);
+		Tag animalId = findAnimalId( tag, null);
 		if(animalId==null){
 			throw new NoAnimalFoundException("Could not find an animal with an animail ID tag="+tag);
 		}
@@ -45,12 +45,13 @@ public abstract class AbstractAddAsEvent extends AbstractAddToParentActionDelega
 
 	/**
 	 * Create an event if there is not already one of the same name.
+	 * FIXME refactor to make it more comprehensible
 	 * @param trackerFactory
-	 * @param animalId assocated with the tag.
-	 * @param tag
+	 * @param tag associated with the tagIdNumber
+	 * @param tagIdNumber
 	 * @return event or null if there was an existing event
 	 */
-	protected abstract Collection<Event> createEvents(TrackerFactory trackerFactory,AnimalId animalId, Long tag) ;
+	protected abstract Collection<Event> createEvents(TrackerFactory trackerFactory,Tag tag, Long tagIdNumber) ;
 	
 	
 	/* (non-Javadoc)
@@ -67,7 +68,7 @@ public abstract class AbstractAddAsEvent extends AbstractAddToParentActionDelega
 	 */
 	@Override
 	protected Object getFeature() {
-		return TrackerPackage.eINSTANCE.getAnimalId();//getAnimals_Animal();
+		return TrackerPackage.eINSTANCE.getTag();//getAnimals_Animal();
 	}
 
 }

@@ -39,12 +39,12 @@ import com.verticon.tracker.TrackerPackage;
  * functionality.
  * TODO always un NOT this class if animal changes are made, but be sure to add the ITableItemLabelProvider and NOT it back.
  * <!-- end-user-doc -->
- * @generated NOT
+ * @generated
  */
 public class AnimalItemProvider
 	extends ItemProviderAdapter
 	implements	
-	ITableItemLabelProvider, IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -173,7 +173,7 @@ public class AnimalItemProvider
 				 false,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -278,7 +278,7 @@ public class AnimalItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TrackerPackage.Literals.ANIMAL__AINS);
+			childrenFeatures.add(TrackerPackage.Literals.ANIMAL__TAGS);
 		}
 		return childrenFeatures;
 	}
@@ -329,7 +329,7 @@ public class AnimalItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Animal)object).getIdNumber().toString();
+		String label = Long.toString(((Animal)object).getIdNumber());
 		String simpleName = object.getClass().getSimpleName();
 		String resourceName = simpleName.substring(0,simpleName.indexOf("Impl"));
 		return label == null || label.length() == 0 ?
@@ -359,7 +359,7 @@ public class AnimalItemProvider
 			case TrackerPackage.ANIMAL__SPECIES_CODE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case TrackerPackage.ANIMAL__AINS:
+			case TrackerPackage.ANIMAL__TAGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -379,8 +379,8 @@ public class AnimalItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TrackerPackage.Literals.ANIMAL__AINS,
-				 TrackerFactory.eINSTANCE.createAnimalId()));
+				(TrackerPackage.Literals.ANIMAL__TAGS,
+				 TrackerFactory.eINSTANCE.createTag()));
 	}
 
 	/**
@@ -403,7 +403,7 @@ public class AnimalItemProvider
 	    Animal animal = (Animal)object;
 	    switch (columnIndex){
 	    	case 0: return getText(object);
-	    	case 1: return animal.getIdNumber().toString();
+	    	case 1: return Long.toString(((Animal)object).getIdNumber());
 	    	case 2: return animal.getSpecies();
 	    	case 3: return animal.getSex()==null?"unspecified":animal.getSex().toString();
 	    	case 4: return animal.getBreed()==null?"unspecified":animal.getBreed();

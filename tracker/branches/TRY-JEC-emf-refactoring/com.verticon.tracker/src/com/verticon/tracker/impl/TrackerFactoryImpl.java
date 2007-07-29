@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BisonBreed;
@@ -44,6 +43,7 @@ import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Slaughtered;
 import com.verticon.tracker.Swine;
 import com.verticon.tracker.SwineBreed;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TagAllocated;
 import com.verticon.tracker.TagApplied;
 import com.verticon.tracker.TagRetired;
@@ -106,7 +106,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case TrackerPackage.ANIMAL_ID: return createAnimalId();
+			case TrackerPackage.TAG: return createTag();
 			case TrackerPackage.TAG_ALLOCATED: return createTagAllocated();
 			case TrackerPackage.PREMISES: return createPremises();
 			case TrackerPackage.BOVINE_BEEF: return createBovineBeef();
@@ -216,9 +216,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AnimalId createAnimalId() {
-		AnimalIdImpl animalId = new AnimalIdImpl();
-		return animalId;
+	public Tag createTag() {
+		TagImpl tag = new TagImpl();
+		return tag;
 	}
 
 	/**

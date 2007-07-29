@@ -6,7 +6,6 @@
  */
 package com.verticon.tracker.impl;
 
-import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,25 +16,19 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.ParserException;
-import org.eclipse.ocl.Query;
-import org.eclipse.ocl.ecore.OCL;
-import org.eclipse.ocl.expressions.OCLExpression;
+
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Sex;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.util.Age;
@@ -50,7 +43,7 @@ import com.verticon.tracker.util.Species;
  * <ul>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getBirthDate <em>Birth Date</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSex <em>Sex</em>}</li>
- *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getAins <em>Ains</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSpecies <em>Species</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getIdNumber <em>Id Number</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getBreed <em>Breed</em>}</li>
@@ -120,14 +113,14 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	protected boolean sexESet;
 
 	/**
-	 * The cached value of the '{@link #getAins() <em>Ains</em>}' containment reference list.
+	 * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAins()
+	 * @see #getTags()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AnimalId> ains;
+	protected EList<Tag> tags;
 
 	/**
 	 * The default value of the '{@link #getSpecies() <em>Species</em>}' attribute.
@@ -147,7 +140,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigInteger ID_NUMBER_EDEFAULT = null;
+	protected static final long ID_NUMBER_EDEFAULT = 0L;
 
 	/**
 	 * The default value of the '{@link #getBreed() <em>Breed</em>}' attribute.
@@ -188,19 +181,6 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @ordered
 	 */
 	protected static final String SPECIES_CODE_EDEFAULT = null;
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #allEvents <em>All Events</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #allEvents
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> allEventsBodyOCL;
-
-	private static final String OCL_ANNOTATION_SOURCE = "http://www.eclipse.org/ocl/examples/OCL";
-
-	private static final OCL OCL_ENV = OCL.newInstance();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -293,11 +273,11 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AnimalId> getAins() {
-		if (ains == null) {
-			ains = new EObjectContainmentEList<AnimalId>(AnimalId.class, this, TrackerPackage.ANIMAL__AINS);
+	public EList<Tag> getTags() {
+		if (tags == null) {
+			tags = new EObjectContainmentEList<Tag>(Tag.class, this, TrackerPackage.ANIMAL__TAGS);
 		}
-		return ains;
+		return tags;
 	}
 
 	/**
@@ -310,6 +290,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 		return getSpeciesEnum().literal();
 	}
 	
+
 	/**
 	 * @NOT
 	 * @return
@@ -318,36 +299,41 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * FIXME Replace with OCL!
-	 * return ain==null||ain.getIdNumber()==null?new BigInteger("0"):new BigInteger(ain.getIdNumber());
+	 * The idNumber of an Animal is derived from the most recent Tag event contained in animal.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public BigInteger getIdNumber() {
-		BigInteger result = null;
-		if (ains ==null || ains.isEmpty()){
-			result= new BigInteger("0");
-		} else if (ains.size()==1){
-			result = ains.get(0).getIdNumber()==null? new BigInteger("0"): new BigInteger(ains.get(0).getIdNumber());
-		} else if(ains.size()>1){
-			result = new BigInteger(findAnimalIdWithLatestEventDate(ains).getIdNumber());
-		} else {
-			result= new BigInteger("0");
+	public long getIdNumber() {
+		long result = 0L;
+		if (tags==null || allEvents().isEmpty()){
+			//no events no IdNumber
+		} else if (tags.size()==1){
+			result = tags.get(0).getIdNumber();
+		} else if(tags.size()>1){
+			Tag tag =findTagWithLatestEventDate(tags);
+			result = tag!=null? tag.getIdNumber():0;
 		}
 		return result;
 	}
 	
-	private AnimalId findAnimalIdWithLatestEventDate(Collection<AnimalId> list){
-		List<Event> winners = new LinkedList<Event>();
-		for (AnimalId animalId : list) {
-			winners.addAll(animalId.getEvents());
+	/**
+	 * Find the tag with the most current event timestamp.
+	 * @param list
+	 * @return
+	 */
+	 Tag findTagWithLatestEventDate(Collection<Tag> list){
+		if(allEvents().isEmpty()){
+			return null;
 		}
+		List<Event> winners = new LinkedList<Event>();
+		winners.addAll(allEvents());
+		
 		// Sort events according to date
 		Collections.sort(winners, new Comparator<Event>() {
-		    public int compare(Event o1, Event o2) {
-		        return o1.getDateTime().compareTo(o2.getDateTime());
+		    public int compare(Event event1, Event event2) {
+		        return event2.getDateTime().compareTo(event1.getDateTime());
 		    }});
-		return winners.get(0).getAnimalId();
+		return winners.get(0).getTag();
 	}
 
 	/**
@@ -371,7 +357,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * FIXME Replace with OCL
+	 * Get the sexcode from the sex enumeration name.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -381,7 +367,6 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * FIXME Replace with OCL
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -391,7 +376,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * FIXME Replace with OCL
+	 * Get the speciescode from the species enumeration name.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -399,34 +384,32 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 		return getSpeciesEnum().name();
 	}
 
-	/**
+/**
 	 * <!-- begin-user-doc -->
+	 * Hand implemented for speed (versus OCL??) because this method is used to generate the
+	 * key attribute for Animal.
+	 * Originally generated with the following OCL:
+	 * if (tags -> notEmpty()) and ( tags.events -> notEmpty())
+	 * 		then tags.events
+	 * 		else Set{}
+	 * endif
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EList<Event> allEvents() {
-		if (allEventsBodyOCL == null) {
-			EOperation eOperation = TrackerPackage.Literals.ANIMAL.getEOperations().get(0);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(TrackerPackage.Literals.ANIMAL, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				allEventsBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
-		}
 		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(allEventsBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<Event> result = (Collection<Event>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Event>(result.size(), result.toArray());
-	
+		if(tags==null || tags.isEmpty()){
+			return  ECollections.emptyEList();
+		}
+		EList<Event> events = new BasicEList<Event>();
+		for (Tag tag : tags) {
+			events.addAll(tag.getEvents());
+		}
+		return ECollections.unmodifiableEList(events);
 	}
 
+
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -435,8 +418,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TrackerPackage.ANIMAL__AINS:
-				return ((InternalEList<?>)getAins()).basicRemove(otherEnd, msgs);
+			case TrackerPackage.ANIMAL__TAGS:
+				return ((InternalEList<?>)getTags()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -453,12 +436,12 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return getBirthDate();
 			case TrackerPackage.ANIMAL__SEX:
 				return getSex();
-			case TrackerPackage.ANIMAL__AINS:
-				return getAins();
+			case TrackerPackage.ANIMAL__TAGS:
+				return getTags();
 			case TrackerPackage.ANIMAL__SPECIES:
 				return getSpecies();
 			case TrackerPackage.ANIMAL__ID_NUMBER:
-				return getIdNumber();
+				return new Long(getIdNumber());
 			case TrackerPackage.ANIMAL__BREED:
 				return getBreed();
 			case TrackerPackage.ANIMAL__AGE:
@@ -486,9 +469,9 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 			case TrackerPackage.ANIMAL__SEX:
 				setSex((Sex)newValue);
 				return;
-			case TrackerPackage.ANIMAL__AINS:
-				getAins().clear();
-				getAins().addAll((Collection<? extends AnimalId>)newValue);
+			case TrackerPackage.ANIMAL__TAGS:
+				getTags().clear();
+				getTags().addAll((Collection<? extends Tag>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -508,8 +491,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 			case TrackerPackage.ANIMAL__SEX:
 				unsetSex();
 				return;
-			case TrackerPackage.ANIMAL__AINS:
-				getAins().clear();
+			case TrackerPackage.ANIMAL__TAGS:
+				getTags().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -527,12 +510,12 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return BIRTH_DATE_EDEFAULT == null ? birthDate != null : !BIRTH_DATE_EDEFAULT.equals(birthDate);
 			case TrackerPackage.ANIMAL__SEX:
 				return isSetSex();
-			case TrackerPackage.ANIMAL__AINS:
-				return ains != null && !ains.isEmpty();
+			case TrackerPackage.ANIMAL__TAGS:
+				return tags != null && !tags.isEmpty();
 			case TrackerPackage.ANIMAL__SPECIES:
 				return SPECIES_EDEFAULT == null ? getSpecies() != null : !SPECIES_EDEFAULT.equals(getSpecies());
 			case TrackerPackage.ANIMAL__ID_NUMBER:
-				return ID_NUMBER_EDEFAULT == null ? getIdNumber() != null : !ID_NUMBER_EDEFAULT.equals(getIdNumber());
+				return getIdNumber() != ID_NUMBER_EDEFAULT;
 			case TrackerPackage.ANIMAL__BREED:
 				return BREED_EDEFAULT == null ? getBreed() != null : !BREED_EDEFAULT.equals(getBreed());
 			case TrackerPackage.ANIMAL__AGE:

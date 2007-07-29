@@ -100,14 +100,14 @@ public interface Premises extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Animals</em>' containment reference list.
 	 * @see com.verticon.tracker.TrackerPackage#getPremises_Animals()
-	 * @model containment="true"
+	 * @model containment="true" keys="idNumber"
 	 * @generated
 	 */
 	EList<Animal> getAnimals();
 
 	/**
 	 * Returns the value of the '<em><b>Un Applied Tags</b></em>' containment reference list.
-	 * The list contents are of type {@link com.verticon.tracker.AnimalId}.
+	 * The list contents are of type {@link com.verticon.tracker.Tag}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Un Applied Tags</em>' containment reference isn't clear,
@@ -116,15 +116,15 @@ public interface Premises extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Un Applied Tags</em>' containment reference list.
 	 * @see com.verticon.tracker.TrackerPackage#getPremises_UnAppliedTags()
-	 * @model containment="true"
+	 * @model containment="true" keys="idNumber"
 	 * @generated
 	 */
-	EList<AnimalId> getUnAppliedTags();
+	EList<Tag> getUnAppliedTags();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/ocl/examples/OCL body='if (animals -> notEmpty()) and (animals.ains->notEmpty())\n\tthen  animals.ains.events\n\telse Set{}\nendif'"
+	 * @model annotation="http://www.eclipse.org/ocl/examples/OCL body='if (animals -> notEmpty()) and (animals.tags->notEmpty())\n\tthen  animals.tags.events\n\telse Set{}\nendif'"
 	 * @generated
 	 */
 	EList<Event> eventHistory();
