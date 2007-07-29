@@ -28,7 +28,6 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 
@@ -267,7 +266,7 @@ public class AnimalItemProvider
 				 null));
 	}
 
-	/**
+/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -279,10 +278,11 @@ public class AnimalItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TrackerPackage.Literals.ANIMAL__AIN);
+			childrenFeatures.add(TrackerPackage.Literals.ANIMAL__AINS);
 		}
 		return childrenFeatures;
 	}
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -329,8 +329,7 @@ public class AnimalItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		AnimalId labelValue = ((Animal)object).getAin();
-		String label = labelValue == null ? null : labelValue.getIdNumber();
+		String label = ((Animal)object).getIdNumber().toString();
 		String simpleName = object.getClass().getSimpleName();
 		String resourceName = simpleName.substring(0,simpleName.indexOf("Impl"));
 		return label == null || label.length() == 0 ?
@@ -360,7 +359,7 @@ public class AnimalItemProvider
 			case TrackerPackage.ANIMAL__SPECIES_CODE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case TrackerPackage.ANIMAL__AIN:
+			case TrackerPackage.ANIMAL__AINS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -380,7 +379,7 @@ public class AnimalItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TrackerPackage.Literals.ANIMAL__AIN,
+				(TrackerPackage.Literals.ANIMAL__AINS,
 				 TrackerFactory.eINSTANCE.createAnimalId()));
 	}
 
