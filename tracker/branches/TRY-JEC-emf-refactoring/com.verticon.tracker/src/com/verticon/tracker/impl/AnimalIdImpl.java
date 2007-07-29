@@ -129,6 +129,7 @@ public class AnimalIdImpl extends EObjectImpl implements AnimalId {
 	 * <!-- begin-user-doc -->
 	 * 3 Numeric 840
 	 * 12 Numeric 123, 456,789,012 Start number > 2,000,000,000
+	 * 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */

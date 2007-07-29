@@ -247,8 +247,7 @@
     <genClasses provider="Stateful" ecoreClass="tracker.ecore#//Animal" labelFeature="#//tracker/Animal/species">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/birthDate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/sex"/>
-      <genFeatures property="None" children="true" createChild="true" propertyCategory=""
-          propertyDescription="" ecoreFeature="ecore:EReference tracker.ecore#//Animal/ain"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Animal/ains"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/species"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/idNumber"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/breed"/>

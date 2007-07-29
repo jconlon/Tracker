@@ -6,14 +6,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="Animal" abstract="true">
     <eOperations name="allEvents" upperBound="-1" eType="#//Event">
       <eAnnotations source="http://www.eclipse.org/ocl/examples/OCL">
-        <details key="body" value="ain.events"/>
+        <details key="body" value="if (ains -> notEmpty()) and ( ains.events -> notEmpty())&#xA;&#x9;then ains.events&#xA;&#x9;else Set{}&#xA;endif"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthDate" eType="#//Date"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sex" eType="#//Sex" defaultValueLiteral="Unspecified"
         unsettable="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ain" lowerBound="1" eType="#//AnimalId"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ains" lowerBound="1" upperBound="-1"
+        eType="#//AnimalId" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="species" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="idNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"
@@ -65,7 +65,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Premises">
     <eOperations name="eventHistory" upperBound="-1" eType="#//Event">
       <eAnnotations source="http://www.eclipse.org/ocl/examples/OCL">
-        <details key="body" value="animals -> select(not ain.oclIsUndefined()) ->collect(ain.events)"/>
+        <details key="body" value="if (animals -> notEmpty()) and (animals.ains->notEmpty())&#xA;&#x9;then  animals.ains.events&#xA;&#x9;else Set{}&#xA;endif"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="premisesId" lowerBound="1"

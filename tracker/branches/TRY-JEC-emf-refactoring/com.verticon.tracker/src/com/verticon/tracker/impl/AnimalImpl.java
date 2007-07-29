@@ -8,7 +8,11 @@ package com.verticon.tracker.impl;
 
 import java.math.BigInteger;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -22,6 +26,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
@@ -44,7 +50,7 @@ import com.verticon.tracker.util.Species;
  * <ul>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getBirthDate <em>Birth Date</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSex <em>Sex</em>}</li>
- *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getAin <em>Ain</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getAins <em>Ains</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSpecies <em>Species</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getIdNumber <em>Id Number</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getBreed <em>Breed</em>}</li>
@@ -114,14 +120,14 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	protected boolean sexESet;
 
 	/**
-	 * The cached value of the '{@link #getAin() <em>Ain</em>}' containment reference.
+	 * The cached value of the '{@link #getAins() <em>Ains</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAin()
+	 * @see #getAins()
 	 * @generated
 	 * @ordered
 	 */
-	protected AnimalId ain;
+	protected EList<AnimalId> ains;
 
 	/**
 	 * The default value of the '{@link #getSpecies() <em>Species</em>}' attribute.
@@ -287,46 +293,16 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AnimalId getAin() {
-		return ain;
+	public EList<AnimalId> getAins() {
+		if (ains == null) {
+			ains = new EObjectContainmentEList<AnimalId>(AnimalId.class, this, TrackerPackage.ANIMAL__AINS);
+		}
+		return ains;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetAin(AnimalId newAin, NotificationChain msgs) {
-		AnimalId oldAin = ain;
-		ain = newAin;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__AIN, oldAin, newAin);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAin(AnimalId newAin) {
-		if (newAin != ain) {
-			NotificationChain msgs = null;
-			if (ain != null)
-				msgs = ((InternalEObject)ain).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.ANIMAL__AIN, null, msgs);
-			if (newAin != null)
-				msgs = ((InternalEObject)newAin).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.ANIMAL__AIN, null, msgs);
-			msgs = basicSetAin(newAin, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__AIN, newAin, newAin));
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
+	 * 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -342,15 +318,41 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * FIXME Replace with OCL!
+	 * return ain==null||ain.getIdNumber()==null?new BigInteger("0"):new BigInteger(ain.getIdNumber());
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public BigInteger getIdNumber() {
-		return ain==null||ain.getIdNumber()==null?new BigInteger("0"):new BigInteger(ain.getIdNumber());
+		BigInteger result = null;
+		if (ains ==null || ains.isEmpty()){
+			result= new BigInteger("0");
+		} else if (ains.size()==1){
+			result = ains.get(0).getIdNumber()==null? new BigInteger("0"): new BigInteger(ains.get(0).getIdNumber());
+		} else if(ains.size()>1){
+			result = new BigInteger(findAnimalIdWithLatestEventDate(ains).getIdNumber());
+		} else {
+			result= new BigInteger("0");
+		}
+		return result;
+	}
+	
+	private AnimalId findAnimalIdWithLatestEventDate(Collection<AnimalId> list){
+		List<Event> winners = new LinkedList<Event>();
+		for (AnimalId animalId : list) {
+			winners.addAll(animalId.getEvents());
+		}
+		// Sort events according to date
+		Collections.sort(winners, new Comparator<Event>() {
+		    public int compare(Event o1, Event o2) {
+		        return o1.getDateTime().compareTo(o2.getDateTime());
+		    }});
+		return winners.get(0).getAnimalId();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -369,6 +371,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * FIXME Replace with OCL
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -378,6 +381,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * FIXME Replace with OCL
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -387,6 +391,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * FIXME Replace with OCL
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -430,8 +435,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TrackerPackage.ANIMAL__AIN:
-				return basicSetAin(null, msgs);
+			case TrackerPackage.ANIMAL__AINS:
+				return ((InternalEList<?>)getAins()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -448,8 +453,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return getBirthDate();
 			case TrackerPackage.ANIMAL__SEX:
 				return getSex();
-			case TrackerPackage.ANIMAL__AIN:
-				return getAin();
+			case TrackerPackage.ANIMAL__AINS:
+				return getAins();
 			case TrackerPackage.ANIMAL__SPECIES:
 				return getSpecies();
 			case TrackerPackage.ANIMAL__ID_NUMBER:
@@ -471,6 +476,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -480,8 +486,9 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 			case TrackerPackage.ANIMAL__SEX:
 				setSex((Sex)newValue);
 				return;
-			case TrackerPackage.ANIMAL__AIN:
-				setAin((AnimalId)newValue);
+			case TrackerPackage.ANIMAL__AINS:
+				getAins().clear();
+				getAins().addAll((Collection<? extends AnimalId>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -501,8 +508,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 			case TrackerPackage.ANIMAL__SEX:
 				unsetSex();
 				return;
-			case TrackerPackage.ANIMAL__AIN:
-				setAin((AnimalId)null);
+			case TrackerPackage.ANIMAL__AINS:
+				getAins().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -520,8 +527,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return BIRTH_DATE_EDEFAULT == null ? birthDate != null : !BIRTH_DATE_EDEFAULT.equals(birthDate);
 			case TrackerPackage.ANIMAL__SEX:
 				return isSetSex();
-			case TrackerPackage.ANIMAL__AIN:
-				return ain != null;
+			case TrackerPackage.ANIMAL__AINS:
+				return ains != null && !ains.isEmpty();
 			case TrackerPackage.ANIMAL__SPECIES:
 				return SPECIES_EDEFAULT == null ? getSpecies() != null : !SPECIES_EDEFAULT.equals(getSpecies());
 			case TrackerPackage.ANIMAL__ID_NUMBER:

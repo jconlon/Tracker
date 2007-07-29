@@ -97,13 +97,13 @@ public interface TrackerPackage extends EPackage {
 	int ANIMAL__SEX = 1;
 
 	/**
-	 * The feature id for the '<em><b>Ain</b></em>' containment reference.
+	 * The feature id for the '<em><b>Ains</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL__AIN = 2;
+	int ANIMAL__AINS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Species</b></em>' attribute.
@@ -243,13 +243,13 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE__SEX = ANIMAL__SEX;
 
 	/**
-	 * The feature id for the '<em><b>Ain</b></em>' containment reference.
+	 * The feature id for the '<em><b>Ains</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOVINE__AIN = ANIMAL__AIN;
+	int BOVINE__AINS = ANIMAL__AINS;
 
 	/**
 	 * The feature id for the '<em><b>Species</b></em>' attribute.
@@ -602,13 +602,13 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE_BEEF__SEX = BOVINE__SEX;
 
 	/**
-	 * The feature id for the '<em><b>Ain</b></em>' containment reference.
+	 * The feature id for the '<em><b>Ains</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOVINE_BEEF__AIN = BOVINE__AIN;
+	int BOVINE_BEEF__AINS = BOVINE__AINS;
 
 	/**
 	 * The feature id for the '<em><b>Species</b></em>' attribute.
@@ -711,13 +711,13 @@ public interface TrackerPackage extends EPackage {
 	int OVINE__SEX = ANIMAL__SEX;
 
 	/**
-	 * The feature id for the '<em><b>Ain</b></em>' containment reference.
+	 * The feature id for the '<em><b>Ains</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OVINE__AIN = ANIMAL__AIN;
+	int OVINE__AINS = ANIMAL__AINS;
 
 	/**
 	 * The feature id for the '<em><b>Species</b></em>' attribute.
@@ -820,13 +820,13 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE_BISON__SEX = BOVINE__SEX;
 
 	/**
-	 * The feature id for the '<em><b>Ain</b></em>' containment reference.
+	 * The feature id for the '<em><b>Ains</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOVINE_BISON__AIN = BOVINE__AIN;
+	int BOVINE_BISON__AINS = BOVINE__AINS;
 
 	/**
 	 * The feature id for the '<em><b>Species</b></em>' attribute.
@@ -929,13 +929,13 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE_DAIRY__SEX = BOVINE__SEX;
 
 	/**
-	 * The feature id for the '<em><b>Ain</b></em>' containment reference.
+	 * The feature id for the '<em><b>Ains</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOVINE_DAIRY__AIN = BOVINE__AIN;
+	int BOVINE_DAIRY__AINS = BOVINE__AINS;
 
 	/**
 	 * The feature id for the '<em><b>Species</b></em>' attribute.
@@ -2309,13 +2309,13 @@ public interface TrackerPackage extends EPackage {
 	int SWINE__SEX = ANIMAL__SEX;
 
 	/**
-	 * The feature id for the '<em><b>Ain</b></em>' containment reference.
+	 * The feature id for the '<em><b>Ains</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SWINE__AIN = ANIMAL__AIN;
+	int SWINE__AINS = ANIMAL__AINS;
 
 	/**
 	 * The feature id for the '<em><b>Species</b></em>' attribute.
@@ -2556,15 +2556,15 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getAnimal_Sex();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.verticon.tracker.Animal#getAin <em>Ain</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.Animal#getAins <em>Ains</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Ain</em>'.
-	 * @see com.verticon.tracker.Animal#getAin()
+	 * @return the meta object for the containment reference list '<em>Ains</em>'.
+	 * @see com.verticon.tracker.Animal#getAins()
 	 * @see #getAnimal()
 	 * @generated
 	 */
-	EReference getAnimal_Ain();
+	EReference getAnimal_Ains();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Animal#getSpecies <em>Species</em>}'.
@@ -3378,12 +3378,12 @@ public interface TrackerPackage extends EPackage {
 		EAttribute ANIMAL__SEX = eINSTANCE.getAnimal_Sex();
 
 		/**
-		 * The meta object literal for the '<em><b>Ain</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Ains</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ANIMAL__AIN = eINSTANCE.getAnimal_Ain();
+		EReference ANIMAL__AINS = eINSTANCE.getAnimal_Ains();
 
 		/**
 		 * The meta object literal for the '<em><b>Species</b></em>' attribute feature.

@@ -103,26 +103,36 @@ public class CommonUtilities {
 	 * @param defaultAnimal
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public static AnimalId findAnimalId(Long tag, Premises premises, Animal defaultAnimal) {
-		List elist = premises.getAnimals();
 		AnimalId animalId = null;
-		for (Object object : elist) {
-			Animal animal = (Animal) object;
-			if (animal.getIdNumber().longValue() == tag) {
-				animalId= animal.getAin();
+		for (Animal animal : premises.getAnimals()) {
+			for (AnimalId ain : animal.getAins()) {
+				ain.getIdNumber().equals(tag.toString());
+				animalId=ain;
 				break;
 			}
+			
 		}
 		if(animalId==null && defaultAnimal!=null){
-			Copier copier = new Copier();
 			animalId=TrackerFactory.eINSTANCE.createAnimalId();
 			animalId.setIdNumber(tag.toString());
-			Animal animal = (Animal)copier.copy(defaultAnimal);
-			animal.setAin(animalId);
+			Animal animal = createAnimalFromTemplate(defaultAnimal, animalId);
 			premises.getAnimals().add(animal);
 		}
 		return animalId;
+	}
+
+	/**
+	 * 
+	 * @param premises to add animal
+	 * @param defaultAnimal template to use
+	 * @param animalId of animal
+	 */
+	private static Animal createAnimalFromTemplate(Animal defaultAnimal, AnimalId animalId) {
+		Copier copier = new Copier();
+		Animal animal = (Animal)copier.copy(defaultAnimal);
+		animal.getAins().add(animalId);
+		return animal;
 	}
 	
 	
