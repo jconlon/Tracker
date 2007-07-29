@@ -2,6 +2,7 @@ package com.verticon.tracker.util;
 
 
 
+import java.util.Iterator;
 import java.util.List;
 
 import com.verticon.tracker.Animal;
@@ -54,10 +55,9 @@ public class EventFactory {
 	}
     
     public static final AnimalId findAnimalId(Long tag, Premises premises){
-		List<Animal> elist = premises.getAnimals();
-		for (Animal animal : elist) {
-			if(animal.getIdNumber().longValue()==tag){
-				return animal.getAin();
+    	for (Event event : premises.eventHistory()) {
+    		if(event.getId()==tag){
+				return event.getAnimalId();
 			}
 		}
 		return null;

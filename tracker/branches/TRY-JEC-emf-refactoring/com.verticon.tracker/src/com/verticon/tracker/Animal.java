@@ -24,7 +24,7 @@ import com.verticon.tracker.util.Age;
  * <ul>
  *   <li>{@link com.verticon.tracker.Animal#getBirthDate <em>Birth Date</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getSex <em>Sex</em>}</li>
- *   <li>{@link com.verticon.tracker.Animal#getAin <em>Ain</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getAins <em>Ains</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getSpecies <em>Species</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getIdNumber <em>Id Number</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getBreed <em>Breed</em>}</li>
@@ -130,30 +130,20 @@ public interface Animal extends EObject {
 	boolean isSetSex();
 
 	/**
-	 * Returns the value of the '<em><b>Ain</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Ains</b></em>' containment reference list.
+	 * The list contents are of type {@link com.verticon.tracker.AnimalId}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Ain</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Ains</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Ain</em>' containment reference.
-	 * @see #setAin(AnimalId)
-	 * @see com.verticon.tracker.TrackerPackage#getAnimal_Ain()
+	 * @return the value of the '<em>Ains</em>' containment reference list.
+	 * @see com.verticon.tracker.TrackerPackage#getAnimal_Ains()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	AnimalId getAin();
-
-	/**
-	 * Sets the value of the '{@link com.verticon.tracker.Animal#getAin <em>Ain</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Ain</em>' containment reference.
-	 * @see #getAin()
-	 * @generated
-	 */
-	void setAin(AnimalId value);
+	EList<AnimalId> getAins();
 
 	/**
 	 * Returns the value of the '<em><b>Species</b></em>' attribute.
@@ -261,7 +251,7 @@ public interface Animal extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/ocl/examples/OCL body='ain.events'"
+	 * @model annotation="http://www.eclipse.org/ocl/examples/OCL body='if (ains -> notEmpty()) and ( ains.events -> notEmpty())\n\tthen ains.events\n\telse Set{}\nendif'"
 	 * @generated
 	 */
 	EList<Event> allEvents();

@@ -265,7 +265,8 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 	 * @generated NOT
 	 */
 	public long getId() {
-		return getAnimalId().getIdNumber()!=null?Long.parseLong(getAnimalId().getIdNumber()):0;
+		
+		return getAnimalId()!=null?Long.parseLong(getAnimalId().getIdNumber()):0;
 	}
 
 	/**

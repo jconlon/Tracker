@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_smKWUDo3Edyw6--mXqZ7vg" activeDiagram="_smKWUTo3Edyw6--mXqZ7vg">
   <model href="tracker.ecore#/"/>
-  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="774,80">
+  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="647,66">
     <property xmi:id="_smKWUjo3Edyw6--mXqZ7vg" key="pageFormatName" value="A2"/>
     <property xmi:id="_smKWUzo3Edyw6--mXqZ7vg" key="diagramWidth" value="1680"/>
     <property xmi:id="_smKWVDo3Edyw6--mXqZ7vg" key="diagramHeight" value="2376"/>
@@ -1376,7 +1376,7 @@
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_smftgzo3Edyw6--mXqZ7vg" anchor="_smK9YTo3Edyw6--mXqZ7vg _smMLhjo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smfthDo3Edyw6--mXqZ7vg" presentation="default">
-        <element href="tracker.ecore#//Animal/ain"/>
+        <element href="tracker.ecore#//Animal/ains"/>
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_smfthTo3Edyw6--mXqZ7vg" id="nameLabel" uDistance="20" vDistance="20"/>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_smfthjo3Edyw6--mXqZ7vg" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
