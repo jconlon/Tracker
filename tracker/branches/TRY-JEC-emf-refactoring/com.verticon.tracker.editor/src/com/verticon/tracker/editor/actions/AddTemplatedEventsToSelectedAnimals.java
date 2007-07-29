@@ -130,7 +130,7 @@ public class AddTemplatedEventsToSelectedAnimals implements IObjectActionDelegat
 	
 	/**
 	 * Add the events from the premisesTemplate to the selectedAnimals.
-	 * FIXME implement
+	 * REWORK implement
 	 * @param editingDomain
 	 * @param selectedAnimals
 	 * @param premisesTemplate

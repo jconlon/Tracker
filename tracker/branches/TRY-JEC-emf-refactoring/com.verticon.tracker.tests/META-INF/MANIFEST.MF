@@ -10,5 +10,7 @@ Export-Package: com.verticon.tracker.tests
 Require-Bundle: org.eclipse.core.runtime,
  com.verticon.tracker,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
- org.junit;visibility:=reexport
+ org.junit;visibility:=reexport,
+ org.eclipse.ocl,
+ org.eclipse.ocl.ecore
 Eclipse-LazyStart: true

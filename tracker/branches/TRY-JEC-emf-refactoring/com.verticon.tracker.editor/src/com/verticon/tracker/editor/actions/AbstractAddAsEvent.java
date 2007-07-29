@@ -62,7 +62,7 @@ public abstract class AbstractAddAsEvent extends AbstractAddToParentActionDelega
 	}
 
 	/* (non-Javadoc)
-	 * FIXME
+	 * REWORK
 	 * @see com.verticon.tracker.editor.actions.AbstractAddToParentActionDelegate#getFeature()
 	 */
 	@Override

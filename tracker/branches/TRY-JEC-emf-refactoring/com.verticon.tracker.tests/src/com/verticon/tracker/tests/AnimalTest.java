@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker.tests;
 
+import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -83,7 +84,7 @@ public abstract class AnimalTest extends TestCase {
 			fixture.setSex(Sex.M_LITERAL);
 			AnimalId ain = TrackerFactory.eINSTANCE.createAnimalId();
 			ain.setIdNumber(AIN);
-			fixture.setAin(ain);
+			fixture.getAins().add(ain);
 			fixture.setBirthDate(ANIMAL_BIRTHDAY);
 			
 		}
@@ -116,14 +117,14 @@ public abstract class AnimalTest extends TestCase {
 	/**
 	 * Tests the '{@link com.verticon.tracker.Animal#getIdNumber() <em>Id Number</em>}' feature getter.
 	 * <!-- begin-user-doc -->
+	 * FIXME Add more tests
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#getIdNumber()
 	 * @generated NOT
 	 */
 	public void testGetIdNumber() {
 		assertNotNull(getFixture());
-		assertNotNull(getFixture().getAin());
-		assertEquals(AIN, getFixture().getAin().getIdNumber());
+		assertEquals(AIN, getFixture().getIdNumber().toString());
 	}
 
 	/**
@@ -194,14 +195,14 @@ public abstract class AnimalTest extends TestCase {
 	/**
 	 * Tests the '{@link com.verticon.tracker.Animal#allEvents() <em>All Events</em>}' operation.
 	 * <!-- begin-user-doc -->
+	 * FIXME Add more tests
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#allEvents()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testAllEvents() {
-		// TODO: implement this operation test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		assertNotNull(getFixture().allEvents());
+//		fail("Add more tests");
 	}
 
 } //AnimalTest

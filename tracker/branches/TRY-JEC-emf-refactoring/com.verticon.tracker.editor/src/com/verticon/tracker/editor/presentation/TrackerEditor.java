@@ -1111,7 +1111,7 @@ public class TrackerEditor
 				table.setLinesVisible(true);
 				eventsTableViewer.setUseHashlookup(true);
 				
-				//FIXME Reduce size of Events BIRTHDATE column? - changed from 3 50. Does it work
+				//TODO Reduce size of Events BIRTHDATE column? - changed from 3 50. Does it work
 				//TODO Make sure listeners are disposed of properly
 				//Event
 				TableColumn eventColumn = new TableColumn(table, SWT.NONE);
@@ -1488,7 +1488,7 @@ public class TrackerEditor
 					// Set up the tree viewer.
 					//
 					contentOutlineViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-					contentOutlineViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, contentOutlineViewer));
+					contentOutlineViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
 					contentOutlineViewer.setInput(editingDomain.getResourceSet());
 
 					// Make sure our popups work.
@@ -1608,14 +1608,8 @@ public class TrackerEditor
 						&& selectedElement instanceof Animal) // 14.2.2
 				{
 					Animal selectedAnimal = (Animal) selectedElement;
-					Collection<Event> animalEvents = null;
-					if (selectedAnimal.getAin() == null) {
-						animalEvents = Collections.emptyList();
-					} else {
-						animalEvents = new ArrayList<Event>();
-						animalEvents = selectedAnimal.allEvents();
+					Collection<Event> animalEvents = selectedAnimal.allEvents();
 						
-					}
 					//TODO Create a more generic gif for Events
 					ItemProvider listRoot = new ItemProvider("Animal Events for AIN: "+selectedAnimal.getIdNumber(),
 							TrackerReportEditPlugin.INSTANCE
