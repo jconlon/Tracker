@@ -1,30 +1,31 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright 2007 Verticon, Inc. All Rights Reserved.
  *
  * $Id$
  */
 package com.verticon.tracker.tests;
 
-import junit.framework.TestCase;
-import junit.textui.TestRunner;
-
-import com.verticon.tracker.AnimalId;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
+
+import junit.framework.TestCase;
+
+import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Animal Id</b></em>'.
+ * A test case for the model object '<em><b>Tag</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are tested:
  * <ul>
- *   <li>{@link com.verticon.tracker.AnimalId#isUsainNumberUsed() <em>Usain Number Used</em>}</li>
+ *   <li>{@link com.verticon.tracker.Tag#isUsainNumberUsed() <em>Usain Number Used</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
-public class AnimalIdTest extends TestCase {
+public class TagTest extends TestCase {
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -33,12 +34,12 @@ public class AnimalIdTest extends TestCase {
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
 	/**
-	 * The fixture for this Animal Id test case.
+	 * The fixture for this Tag test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AnimalId fixture = null;
+	protected Tag fixture = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -46,36 +47,36 @@ public class AnimalIdTest extends TestCase {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-		TestRunner.run(AnimalIdTest.class);
+		TestRunner.run(TagTest.class);
 	}
 
 	/**
-	 * Constructs a new Animal Id test case with the given name.
+	 * Constructs a new Tag test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AnimalIdTest(String name) {
+	public TagTest(String name) {
 		super(name);
 	}
 
 	/**
-	 * Sets the fixture for this Animal Id test case.
+	 * Sets the fixture for this Tag test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void setFixture(AnimalId fixture) {
+	protected void setFixture(Tag fixture) {
 		this.fixture = fixture;
 	}
 
 	/**
-	 * Returns the fixture for this Animal Id test case.
+	 * Returns the fixture for this Tag test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AnimalId getFixture() {
+	protected Tag getFixture() {
 		return fixture;
 	}
 
@@ -87,7 +88,7 @@ public class AnimalIdTest extends TestCase {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(TrackerFactory.eINSTANCE.createAnimalId());
+		setFixture(TrackerFactory.eINSTANCE.createTag());
 	}
 
 	/**
@@ -102,23 +103,20 @@ public class AnimalIdTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link com.verticon.tracker.AnimalId#isUsainNumberUsed() <em>Usain Number Used</em>}' feature getter.
+	 * Tests the '{@link com.verticon.tracker.Tag#isUsainNumberUsed() <em>Usain Number Used</em>}' feature getter.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.AnimalId#isUsainNumberUsed()
+	 * @see com.verticon.tracker.Tag#isUsainNumberUsed()
 	 * @generated NOT
 	 */
 	public void testIsUsainNumberUsed() {
-		AnimalId animalId = getFixture();
-		assertNotNull(animalId);
-		assertNull(animalId.getIdNumber());
-		animalId.setIdNumber("123456789012345");
-		assertFalse(animalId.isUsainNumberUsed());
-		animalId.setIdNumber("840456789012345");
-		assertTrue(animalId.isUsainNumberUsed());
-		
+		Tag tag = getFixture();
+		assertNotNull(tag);
+		assertEquals(0, tag.getIdNumber());
+		tag.setIdNumber(123456789012345L);
+		assertFalse(tag.isUsainNumberUsed());
+		tag.setIdNumber(840456789012345L);
+		assertTrue(tag.isUsainNumberUsed());
 	}
-	
 
-
-} //AnimalIdTest
+} //TagTest

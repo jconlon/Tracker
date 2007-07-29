@@ -1173,7 +1173,7 @@ public class TrackerEditor
 				        	  {
 				        	  case Notification.ADD:
 				        	  case Notification.ADD_MANY:
-				        		  if (notification.getFeature() != TrackerPackage.eINSTANCE.getAnimalId_Events()) {
+				        		  if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
 				        			  return;
 				        		  }
 				        	  }

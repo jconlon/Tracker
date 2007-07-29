@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BisonBreed;
@@ -42,6 +41,7 @@ import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Slaughtered;
 import com.verticon.tracker.Swine;
 import com.verticon.tracker.SwineBreed;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TagAllocated;
 import com.verticon.tracker.TagApplied;
 import com.verticon.tracker.TagRetired;
@@ -129,8 +129,8 @@ public class TrackerValidator extends EObjectValidator {
 		switch (classifierID) {
 			case TrackerPackage.ANIMAL:
 				return validateAnimal((Animal)value, diagnostics, context);
-			case TrackerPackage.ANIMAL_ID:
-				return validateAnimalId((AnimalId)value, diagnostics, context);
+			case TrackerPackage.TAG:
+				return validateTag((Tag)value, diagnostics, context);
 			case TrackerPackage.BOVINE:
 				return validateBovine((Bovine)value, diagnostics, context);
 			case TrackerPackage.EVENT:
@@ -224,8 +224,8 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAnimalId(AnimalId animalId, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(animalId, diagnostics, context);
+	public boolean validateTag(Tag tag, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(tag, diagnostics, context);
 	}
 
 	/**

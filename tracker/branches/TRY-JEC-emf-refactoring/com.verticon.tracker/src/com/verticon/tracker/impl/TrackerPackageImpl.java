@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BisonBreed;
@@ -44,6 +43,7 @@ import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Slaughtered;
 import com.verticon.tracker.Swine;
 import com.verticon.tracker.SwineBreed;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TagAllocated;
 import com.verticon.tracker.TagApplied;
 import com.verticon.tracker.TagRetired;
@@ -79,7 +79,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass animalIdEClass = null;
+	private EClass tagEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -449,7 +449,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAnimal_Ains() {
+	public EReference getAnimal_Tags() {
 		return (EReference)animalEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -512,8 +512,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAnimalId() {
-		return animalIdEClass;
+	public EClass getTag() {
+		return tagEClass;
 	}
 
 	/**
@@ -521,8 +521,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAnimalId_IdNumber() {
-		return (EAttribute)animalIdEClass.getEStructuralFeatures().get(0);
+	public EAttribute getTag_IdNumber() {
+		return (EAttribute)tagEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -530,8 +530,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAnimalId_UsainNumberUsed() {
-		return (EAttribute)animalIdEClass.getEStructuralFeatures().get(1);
+	public EAttribute getTag_UsainNumberUsed() {
+		return (EAttribute)tagEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -539,8 +539,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAnimalId_Events() {
-		return (EReference)animalIdEClass.getEStructuralFeatures().get(2);
+	public EReference getTag_Events() {
+		return (EReference)tagEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -611,7 +611,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEvent_Id() {
+	public EAttribute getEvent_IdNumber() {
 		return (EAttribute)eventEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -620,7 +620,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEvent_AnimalId() {
+	public EReference getEvent_Tag() {
 		return (EReference)eventEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -1132,7 +1132,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		animalEClass = createEClass(ANIMAL);
 		createEAttribute(animalEClass, ANIMAL__BIRTH_DATE);
 		createEAttribute(animalEClass, ANIMAL__SEX);
-		createEReference(animalEClass, ANIMAL__AINS);
+		createEReference(animalEClass, ANIMAL__TAGS);
 		createEAttribute(animalEClass, ANIMAL__SPECIES);
 		createEAttribute(animalEClass, ANIMAL__ID_NUMBER);
 		createEAttribute(animalEClass, ANIMAL__BREED);
@@ -1140,10 +1140,10 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(animalEClass, ANIMAL__SEX_CODE);
 		createEAttribute(animalEClass, ANIMAL__SPECIES_CODE);
 
-		animalIdEClass = createEClass(ANIMAL_ID);
-		createEAttribute(animalIdEClass, ANIMAL_ID__ID_NUMBER);
-		createEAttribute(animalIdEClass, ANIMAL_ID__USAIN_NUMBER_USED);
-		createEReference(animalIdEClass, ANIMAL_ID__EVENTS);
+		tagEClass = createEClass(TAG);
+		createEAttribute(tagEClass, TAG__ID_NUMBER);
+		createEAttribute(tagEClass, TAG__USAIN_NUMBER_USED);
+		createEReference(tagEClass, TAG__EVENTS);
 
 		bovineEClass = createEClass(BOVINE);
 
@@ -1153,8 +1153,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(eventEClass, EVENT__ELECTRONICALLY_READ);
 		createEAttribute(eventEClass, EVENT__CORRECTION);
 		createEAttribute(eventEClass, EVENT__COMMENTS);
-		createEAttribute(eventEClass, EVENT__ID);
-		createEReference(eventEClass, EVENT__ANIMAL_ID);
+		createEAttribute(eventEClass, EVENT__ID_NUMBER);
+		createEReference(eventEClass, EVENT__TAG);
 
 		tagAllocatedEClass = createEClass(TAG_ALLOCATED);
 
@@ -1291,9 +1291,10 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAnimal_BirthDate(), this.getDate(), "birthDate", null, 0, 1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_Sex(), this.getSex(), "sex", "Unspecified", 0, 1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAnimal_Ains(), this.getAnimalId(), null, "ains", null, 1, -1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnimal_Tags(), this.getTag(), null, "tags", null, 1, -1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		getAnimal_Tags().getEKeys().add(this.getTag_IdNumber());
 		initEAttribute(getAnimal_Species(), ecorePackage.getEString(), "species", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAnimal_IdNumber(), ecorePackage.getEBigInteger(), "idNumber", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAnimal_IdNumber(), ecorePackage.getELong(), "idNumber", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_Breed(), ecorePackage.getEString(), "breed", "", 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_Age(), this.getAge(), "age", "", 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_SexCode(), ecorePackage.getEString(), "sexCode", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -1301,10 +1302,10 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		addEOperation(animalEClass, this.getEvent(), "allEvents", 0, -1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(animalIdEClass, AnimalId.class, "AnimalId", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAnimalId_IdNumber(), this.getAnimialIdNumber(), "idNumber", null, 1, 1, AnimalId.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAnimalId_UsainNumberUsed(), ecorePackage.getEBoolean(), "usainNumberUsed", null, 0, 1, AnimalId.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getAnimalId_Events(), this.getEvent(), this.getEvent_AnimalId(), "events", null, 1, -1, AnimalId.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(tagEClass, Tag.class, "Tag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTag_IdNumber(), ecorePackage.getELong(), "idNumber", null, 1, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTag_UsainNumberUsed(), ecorePackage.getEBoolean(), "usainNumberUsed", null, 0, 1, Tag.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getTag_Events(), this.getEvent(), this.getEvent_Tag(), "events", null, 1, -1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bovineEClass, Bovine.class, "Bovine", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1314,8 +1315,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getEvent_ElectronicallyRead(), ecorePackage.getEBoolean(), "electronicallyRead", "false", 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_Correction(), ecorePackage.getEBoolean(), "correction", "false", 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_Comments(), ecorePackage.getEString(), "comments", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEvent_Id(), ecorePackage.getELong(), "id", null, 0, 1, Event.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getEvent_AnimalId(), this.getAnimalId(), this.getAnimalId_Events(), "animalId", null, 1, 1, Event.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEvent_IdNumber(), ecorePackage.getELong(), "idNumber", null, 0, 1, Event.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getEvent_Tag(), this.getTag(), this.getTag_Events(), "tag", null, 1, 1, Event.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tagAllocatedEClass, TagAllocated.class, "TagAllocated", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1323,7 +1324,9 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getPremises_PremisesId(), this.getPremisesIdNumber(), "premisesId", null, 1, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPremises_EmailContact(), this.getEmail(), "emailContact", "", 1, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPremises_Animals(), this.getAnimal(), null, "animals", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPremises_UnAppliedTags(), this.getAnimalId(), null, "unAppliedTags", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		getPremises_Animals().getEKeys().add(this.getAnimal_IdNumber());
+		initEReference(getPremises_UnAppliedTags(), this.getTag(), null, "unAppliedTags", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		getPremises_UnAppliedTags().getEKeys().add(this.getTag_IdNumber());
 
 		addEOperation(premisesEClass, this.getEvent(), "eventHistory", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -1634,16 +1637,10 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	protected void createOCLAnnotations() {
 		String source = "http://www.eclipse.org/ocl/examples/OCL";		
 		addAnnotation
-		  (animalEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "body", "if (ains -> notEmpty()) and ( ains.events -> notEmpty())\n\tthen ains.events\n\telse Set{}\nendif"
-		   });		
-		addAnnotation
 		  (premisesEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
-			 "body", "if (animals -> notEmpty()) and (animals.ains->notEmpty())\n\tthen  animals.ains.events\n\telse Set{}\nendif"
+			 "body", "if (animals -> notEmpty()) and (animals.tags->notEmpty())\n\tthen  animals.tags.events\n\telse Set{}\nendif"
 		   });		
 	}
 
@@ -1654,7 +1651,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";				
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";			
 		addAnnotation
 		  (animialIdNumberEDataType, 
 		   source, 

@@ -40,7 +40,7 @@ public class TrackerTests extends TestSuite {
 	 */
 	public static Test suite() {
 		TestSuite suite = new TrackerTests("tracker Tests");
-		suite.addTestSuite(AnimalIdTest.class);
+		suite.addTestSuite(TagTest.class);
 		suite.addTestSuite(TagAllocatedTest.class);
 		suite.addTestSuite(PremisesTest.class);
 		suite.addTestSuite(BovineBeefTest.class);

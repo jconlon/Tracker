@@ -23,8 +23,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.Event#isElectronicallyRead <em>Electronically Read</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#isCorrection <em>Correction</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getComments <em>Comments</em>}</li>
- *   <li>{@link com.verticon.tracker.Event#getId <em>Id</em>}</li>
- *   <li>{@link com.verticon.tracker.Event#getAnimalId <em>Animal Id</em>}</li>
+ *   <li>{@link com.verticon.tracker.Event#getIdNumber <em>Id Number</em>}</li>
+ *   <li>{@link com.verticon.tracker.Event#getTag <em>Tag</em>}</li>
  * </ul>
  * </p>
  *
@@ -163,46 +163,46 @@ public interface Event extends EObject {
 	void setComments(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * Returns the value of the '<em><b>Id Number</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Id Number</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see com.verticon.tracker.TrackerPackage#getEvent_Id()
+	 * @return the value of the '<em>Id Number</em>' attribute.
+	 * @see com.verticon.tracker.TrackerPackage#getEvent_IdNumber()
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	long getId();
+	long getIdNumber();
 
 	/**
-	 * Returns the value of the '<em><b>Animal Id</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link com.verticon.tracker.AnimalId#getEvents <em>Events</em>}'.
+	 * Returns the value of the '<em><b>Tag</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link com.verticon.tracker.Tag#getEvents <em>Events</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Animal Id</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Tag</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Animal Id</em>' container reference.
-	 * @see #setAnimalId(AnimalId)
-	 * @see com.verticon.tracker.TrackerPackage#getEvent_AnimalId()
-	 * @see com.verticon.tracker.AnimalId#getEvents
+	 * @return the value of the '<em>Tag</em>' container reference.
+	 * @see #setTag(Tag)
+	 * @see com.verticon.tracker.TrackerPackage#getEvent_Tag()
+	 * @see com.verticon.tracker.Tag#getEvents
 	 * @model opposite="events" required="true"
 	 * @generated
 	 */
-	AnimalId getAnimalId();
+	Tag getTag();
 
 	/**
-	 * Sets the value of the '{@link com.verticon.tracker.Event#getAnimalId <em>Animal Id</em>}' container reference.
+	 * Sets the value of the '{@link com.verticon.tracker.Event#getTag <em>Tag</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Animal Id</em>' container reference.
-	 * @see #getAnimalId()
+	 * @param value the new value of the '<em>Tag</em>' container reference.
+	 * @see #getTag()
 	 * @generated
 	 */
-	void setAnimalId(AnimalId value);
+	void setTag(Tag value);
 
 } // Event

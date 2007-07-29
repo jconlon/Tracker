@@ -141,10 +141,10 @@ public class AnimalSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	private int compareAins(Animal animal1, Animal animal2) {
-		return animal1.getIdNumber().compareTo(animal2.getIdNumber());
-		
+		 return new Long(animal1.getIdNumber()).compareTo(animal2.getIdNumber());
 	}
 
+	
 	
 	/**
 	 * Returns a number reflecting the collation order of the given animals

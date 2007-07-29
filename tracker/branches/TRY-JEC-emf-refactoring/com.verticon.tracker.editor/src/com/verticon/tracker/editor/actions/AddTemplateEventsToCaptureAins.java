@@ -22,9 +22,9 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
 import com.verticon.tracker.editor.dialogs.WSFileDialog;
@@ -138,7 +138,7 @@ public class AddTemplateEventsToCaptureAins extends AbstractAddAsEvent {
 	 * return a copy the events in the template
 	 */
 	@Override
-	protected Collection<Event> createEvents(TrackerFactory trackerFactory, AnimalId animalId, Long tag) {
+	protected Collection<Event> createEvents(TrackerFactory trackerFactory, Tag animalId, Long tag) {
 //		overrideEventHistoryTemplateDatesIfNecessary();
 //		return CommonUtilities.createEvents(eventPremisesTemplate,  animalId,  premises);
 		return Collections.emptyList();

@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.Bovine;
 import com.verticon.tracker.BovineBeef;
@@ -34,6 +33,7 @@ import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Slaughtered;
 import com.verticon.tracker.Swine;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TagAllocated;
 import com.verticon.tracker.TagApplied;
 import com.verticon.tracker.TagRetired;
@@ -127,9 +127,9 @@ public class TrackerSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TrackerPackage.ANIMAL_ID: {
-				AnimalId animalId = (AnimalId)theEObject;
-				T result = caseAnimalId(animalId);
+			case TrackerPackage.TAG: {
+				Tag tag = (Tag)theEObject;
+				T result = caseTag(tag);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -322,17 +322,17 @@ public class TrackerSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Animal Id</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tag</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Animal Id</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tag</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAnimalId(AnimalId object) {
+	public T caseTag(Tag object) {
 		return null;
 	}
 

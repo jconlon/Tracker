@@ -13,7 +13,6 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.Bovine;
 import com.verticon.tracker.BovineBeef;
@@ -34,6 +33,7 @@ import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Slaughtered;
 import com.verticon.tracker.Swine;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TagAllocated;
 import com.verticon.tracker.TagApplied;
 import com.verticon.tracker.TagRetired;
@@ -108,8 +108,8 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 				return createAnimalAdapter();
 			}
 			@Override
-			public Adapter caseAnimalId(AnimalId object) {
-				return createAnimalIdAdapter();
+			public Adapter caseTag(Tag object) {
+				return createTagAdapter();
 			}
 			@Override
 			public Adapter caseBovine(Bovine object) {
@@ -242,16 +242,16 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.AnimalId <em>Animal Id</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.Tag <em>Tag</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.verticon.tracker.AnimalId
+	 * @see com.verticon.tracker.Tag
 	 * @generated
 	 */
-	public Adapter createAnimalIdAdapter() {
+	public Adapter createTagAdapter() {
 		return null;
 	}
 

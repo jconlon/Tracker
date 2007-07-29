@@ -17,8 +17,8 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.dialogs.ListDialog;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
@@ -78,9 +78,9 @@ public class AddToAnimalsActionDelegate extends AbstractAddToParentActionDelegat
 		}
 		
 		Animal animal =  (Animal) copier.copy(animalToClone);
-		AnimalId animalId = TrackerFactory.eINSTANCE.createAnimalId();
-		animalId.setIdNumber(tag.toString());
-		animal.getAins().add(animalId);
+		Tag animalId = TrackerFactory.eINSTANCE.createTag();
+		animalId.setIdNumber(tag);
+		animal.getTags().add(animalId);
 		ArrayList<Animal> results = new ArrayList<Animal>();
 		results.add(animal);
 		return results;

@@ -84,26 +84,26 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.AnimalId} instances.
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Tag} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AnimalIdItemProvider animalIdItemProvider;
+	protected TagItemProvider tagItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link com.verticon.tracker.AnimalId}.
+	 * This creates an adapter for a {@link com.verticon.tracker.Tag}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createAnimalIdAdapter() {
-		if (animalIdItemProvider == null) {
-			animalIdItemProvider = new AnimalIdItemProvider(this);
+	public Adapter createTagAdapter() {
+		if (tagItemProvider == null) {
+			tagItemProvider = new TagItemProvider(this);
 		}
 
-		return animalIdItemProvider;
+		return tagItemProvider;
 	}
 
 	/**
@@ -688,7 +688,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * @generated
 	 */
 	public void dispose() {
-		if (animalIdItemProvider != null) animalIdItemProvider.dispose();
+		if (tagItemProvider != null) tagItemProvider.dispose();
 		if (tagAllocatedItemProvider != null) tagAllocatedItemProvider.dispose();
 		if (premisesItemProvider != null) premisesItemProvider.dispose();
 		if (bovineBeefItemProvider != null) bovineBeefItemProvider.dispose();

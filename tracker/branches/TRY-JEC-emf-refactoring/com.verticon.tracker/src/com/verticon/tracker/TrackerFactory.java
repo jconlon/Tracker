@@ -33,13 +33,13 @@ public interface TrackerFactory extends EFactory {
 	TrackerFactory eINSTANCE = com.verticon.tracker.impl.TrackerFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Animal Id</em>'.
+	 * Returns a new object of class '<em>Tag</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Animal Id</em>'.
+	 * @return a new object of class '<em>Tag</em>'.
 	 * @generated
 	 */
-	AnimalId createAnimalId();
+	Tag createTag();
 
 	/**
 	 * Returns a new object of class '<em>Tag Allocated</em>'.

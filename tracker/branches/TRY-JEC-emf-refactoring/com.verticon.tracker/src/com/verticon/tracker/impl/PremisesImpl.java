@@ -21,15 +21,15 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.expressions.OCLExpression;
+
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 
 /**
@@ -114,7 +114,7 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AnimalId> unAppliedTags;
+	protected EList<Tag> unAppliedTags;
 
 	/**
 	 * The parsed OCL expression for the body of the '{@link #eventHistory <em>Event History</em>}' operation.
@@ -207,9 +207,9 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AnimalId> getUnAppliedTags() {
+	public EList<Tag> getUnAppliedTags() {
 		if (unAppliedTags == null) {
-			unAppliedTags = new EObjectContainmentEList<AnimalId>(AnimalId.class, this, TrackerPackage.PREMISES__UN_APPLIED_TAGS);
+			unAppliedTags = new EObjectContainmentEList<Tag>(Tag.class, this, TrackerPackage.PREMISES__UN_APPLIED_TAGS);
 		}
 		return unAppliedTags;
 	}
@@ -299,7 +299,7 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return;
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
 				getUnAppliedTags().clear();
-				getUnAppliedTags().addAll((Collection<? extends AnimalId>)newValue);
+				getUnAppliedTags().addAll((Collection<? extends Tag>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
