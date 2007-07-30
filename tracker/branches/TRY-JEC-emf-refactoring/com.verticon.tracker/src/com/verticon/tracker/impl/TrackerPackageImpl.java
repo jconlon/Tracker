@@ -1622,10 +1622,42 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createResource(eNS_URI);
 
 		// Create annotations
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
 		// http://www.eclipse.org/ocl/examples/OCL
 		createOCLAnnotations();
 		// http:///org/eclipse/emf/ecore/util/ExtendedMetaData
 		createExtendedMetaDataAnnotations();
+		// http://www.topcased.org/documentation
+		createDocumentationAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcoreAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore";		
+		addAnnotation
+		  (animalEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "Can_be_Slaughtered_only_once Must_have_TagApplied_or_MovedIn"
+		   });						
+		addAnnotation
+		  (movedInEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "SourcePin_can_not_be_same_as_the_local_premisesId "
+		   });			
+		addAnnotation
+		  (movedOutEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "DestinationPin_can_not_be_same_as_the_local_premisesId"
+		   });			
 	}
 
 	/**
@@ -1635,12 +1667,31 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	protected void createOCLAnnotations() {
-		String source = "http://www.eclipse.org/ocl/examples/OCL";		
+		String source = "http://www.eclipse.org/ocl/examples/OCL";			
+		addAnnotation
+		  (animalEClass, 
+		   source, 
+		   new String[] {
+			 "Can_be_Slaughtered_only_once", "-- An animal can only be slaughter once -- \nself.allEvents() -> select(e : Event | e.oclIsTypeOf(Slaughtered) ) ->size()<2",
+			 "Must_have_TagApplied_or_MovedIn", "-- An animal must have a TagApplied or a MovedIn event -- \nself.allEvents() -> select(e : Event | e.oclIsTypeOf(TagApplied) or e.oclIsTypeOf(MovedIn)  ) ->notEmpty()"
+		   });		
 		addAnnotation
 		  (premisesEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "body", "if (animals -> notEmpty()) and (animals.tags->notEmpty())\n\tthen  animals.tags.events\n\telse Set{}\nendif"
+		   });					
+		addAnnotation
+		  (movedInEClass, 
+		   source, 
+		   new String[] {
+			 "SourcePin_can_not_be_same_as_the_local_premisesId", "-- The MovedIn sourcePin can not be the same as the local premisesId. --\nPremises.allInstances() -> select(premisesId=self.sourcePin) -> isEmpty()"
+		   });			
+		addAnnotation
+		  (movedOutEClass, 
+		   source, 
+		   new String[] {
+			 "DestinationPin_can_not_be_same_as_the_local_premisesId", "-- The MovedOut destinationPin can not be the same as the local premisesId. --\nPremises.allInstances() -> select(premisesId=self.destinationPin) -> isEmpty()"
 		   });		
 	}
 
@@ -1651,7 +1702,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";			
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";					
 		addAnnotation
 		  (animialIdNumberEDataType, 
 		   source, 
@@ -1667,7 +1718,23 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 			 "maxLength", "7",
 			 "length", "7",
 			 "maxExclusive", "adcdefg"
-		   });
+		   });						
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.topcased.org/documentation</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createDocumentationAnnotations() {
+		String source = "http://www.topcased.org/documentation";											
+		addAnnotation
+		  (getReplacedTag_OldAin(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Tracker.ecore is the metaModel for Tracker, a NAIS base animal event management framework."
+		   });	
 	}
 
 } //TrackerPackageImpl

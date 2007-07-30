@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_smKWUDo3Edyw6--mXqZ7vg" activeDiagram="_smKWUTo3Edyw6--mXqZ7vg">
   <model href="tracker.ecore#/"/>
-  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="244,224">
+  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="1117,403">
     <property xmi:id="_smKWUjo3Edyw6--mXqZ7vg" key="pageFormatName" value="A2"/>
     <property xmi:id="_smKWUzo3Edyw6--mXqZ7vg" key="diagramWidth" value="1680"/>
     <property xmi:id="_smKWVDo3Edyw6--mXqZ7vg" key="diagramHeight" value="2376"/>
@@ -1502,7 +1502,7 @@
     <contained xsi:type="di:GraphEdge" xmi:id="_smiw1Do3Edyw6--mXqZ7vg" anchor="_smiJzjo3Edyw6--mXqZ7vg _smMynTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_smiw1To3Edyw6--mXqZ7vg" presentation="default" typeInfo="Inheritance"/>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_smiw1jo3Edyw6--mXqZ7vg" position="1793,732" size="105,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_smiw1jo3Edyw6--mXqZ7vg" position="1777,732" size="180,-1">
       <anchorage xmi:id="_smiw1zo3Edyw6--mXqZ7vg" graphEdge="_smiw4To3Edyw6--mXqZ7vg"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smiw2Do3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//ReplacedTag"/>

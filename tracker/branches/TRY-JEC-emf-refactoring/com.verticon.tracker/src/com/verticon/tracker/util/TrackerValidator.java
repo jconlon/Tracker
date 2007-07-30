@@ -10,10 +10,19 @@ import com.verticon.tracker.*;
 import java.util.Date;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
+import org.eclipse.ocl.ecore.Constraint;
+import org.eclipse.ocl.ecore.OCL;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.BeefBreed;
@@ -96,6 +105,42 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>Can_be_Slaughtered_only_once</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint animal_Can_be_Slaughtered_only_onceInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>Must_have_TagApplied_or_MovedIn</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint animal_Must_have_TagApplied_or_MovedInInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>SourcePin_can_not_be_same_as_the_local_premisesId</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint movedIn_SourcePin_can_not_be_same_as_the_local_premisesIdInvOCL;
+
+	/**
+	 * The parsed OCL expression for the definition of the '<em>DestinationPin_can_not_be_same_as_the_local_premisesId</em>' invariant constraint.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static Constraint movedOut_DestinationPin_can_not_be_same_as_the_local_premisesIdInvOCL;
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.eclipse.org/ocl/examples/OCL";
+
+	private static final OCL OCL_ENV = OCL.newInstance();
 
 	/**
 	 * Creates an instance of the switch.
@@ -216,7 +261,94 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAnimal(Animal animal, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(animal, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(animal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(animal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(animal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(animal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(animal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(animal, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(animal, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAnimal_Can_be_Slaughtered_only_once(animal, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAnimal_Must_have_TagApplied_or_MovedIn(animal, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the Can_be_Slaughtered_only_once constraint of '<em>Animal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAnimal_Can_be_Slaughtered_only_once(Animal animal, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (animal_Can_be_Slaughtered_only_onceInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(TrackerPackage.Literals.ANIMAL);
+			
+			EAnnotation ocl = TrackerPackage.Literals.ANIMAL.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("Can_be_Slaughtered_only_once");
+			
+			try {
+				animal_Can_be_Slaughtered_only_onceInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(animal_Can_be_Slaughtered_only_onceInvOCL);
+		
+		if (!query.check(animal)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "Can_be_Slaughtered_only_once", getObjectLabel(animal, context) }),
+						 new Object[] { animal }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the Must_have_TagApplied_or_MovedIn constraint of '<em>Animal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAnimal_Must_have_TagApplied_or_MovedIn(Animal animal, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (animal_Must_have_TagApplied_or_MovedInInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(TrackerPackage.Literals.ANIMAL);
+			
+			EAnnotation ocl = TrackerPackage.Literals.ANIMAL.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("Must_have_TagApplied_or_MovedIn");
+			
+			try {
+				animal_Must_have_TagApplied_or_MovedInInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(animal_Must_have_TagApplied_or_MovedInInvOCL);
+		
+		if (!query.check(animal)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "Must_have_TagApplied_or_MovedIn", getObjectLabel(animal, context) }),
+						 new Object[] { animal }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -234,7 +366,16 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateBovine(Bovine bovine, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(bovine, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(bovine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(bovine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(bovine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(bovine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(bovine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(bovine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(bovine, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAnimal_Can_be_Slaughtered_only_once(bovine, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAnimal_Must_have_TagApplied_or_MovedIn(bovine, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -315,7 +456,16 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateSwine(Swine swine, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(swine, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(swine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(swine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(swine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(swine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(swine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(swine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(swine, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAnimal_Can_be_Slaughtered_only_once(swine, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAnimal_Must_have_TagApplied_or_MovedIn(swine, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -333,7 +483,16 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateBovineBeef(BovineBeef bovineBeef, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(bovineBeef, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(bovineBeef, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(bovineBeef, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(bovineBeef, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(bovineBeef, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(bovineBeef, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(bovineBeef, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(bovineBeef, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAnimal_Can_be_Slaughtered_only_once(bovineBeef, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAnimal_Must_have_TagApplied_or_MovedIn(bovineBeef, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -342,7 +501,16 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateOvine(Ovine ovine, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(ovine, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(ovine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(ovine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(ovine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(ovine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(ovine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(ovine, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(ovine, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAnimal_Can_be_Slaughtered_only_once(ovine, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAnimal_Must_have_TagApplied_or_MovedIn(ovine, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -351,7 +519,16 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateBovineBison(BovineBison bovineBison, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(bovineBison, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(bovineBison, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(bovineBison, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(bovineBison, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(bovineBison, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(bovineBison, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(bovineBison, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(bovineBison, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAnimal_Can_be_Slaughtered_only_once(bovineBison, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAnimal_Must_have_TagApplied_or_MovedIn(bovineBison, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -360,7 +537,16 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateBovineDairy(BovineDairy bovineDairy, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(bovineDairy, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(bovineDairy, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(bovineDairy, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(bovineDairy, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(bovineDairy, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(bovineDairy, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(bovineDairy, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(bovineDairy, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAnimal_Can_be_Slaughtered_only_once(bovineDairy, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAnimal_Must_have_TagApplied_or_MovedIn(bovineDairy, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -378,7 +564,54 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateMovedIn(MovedIn movedIn, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(movedIn, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(movedIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(movedIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(movedIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(movedIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(movedIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(movedIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(movedIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validateMovedIn_SourcePin_can_not_be_same_as_the_local_premisesId(movedIn, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the SourcePin_can_not_be_same_as_the_local_premisesId constraint of '<em>Moved In</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateMovedIn_SourcePin_can_not_be_same_as_the_local_premisesId(MovedIn movedIn, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (movedIn_SourcePin_can_not_be_same_as_the_local_premisesIdInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(TrackerPackage.Literals.MOVED_IN);
+			
+			EAnnotation ocl = TrackerPackage.Literals.MOVED_IN.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("SourcePin_can_not_be_same_as_the_local_premisesId");
+			
+			try {
+				movedIn_SourcePin_can_not_be_same_as_the_local_premisesIdInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(movedIn_SourcePin_can_not_be_same_as_the_local_premisesIdInvOCL);
+		
+		if (!query.check(movedIn)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "SourcePin_can_not_be_same_as_the_local_premisesId", getObjectLabel(movedIn, context) }),
+						 new Object[] { movedIn }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -387,7 +620,54 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateMovedOut(MovedOut movedOut, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(movedOut, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(movedOut, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(movedOut, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(movedOut, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(movedOut, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(movedOut, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(movedOut, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(movedOut, diagnostics, context);
+		if (result || diagnostics != null) result &= validateMovedOut_DestinationPin_can_not_be_same_as_the_local_premisesId(movedOut, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the DestinationPin_can_not_be_same_as_the_local_premisesId constraint of '<em>Moved Out</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateMovedOut_DestinationPin_can_not_be_same_as_the_local_premisesId(MovedOut movedOut, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (movedOut_DestinationPin_can_not_be_same_as_the_local_premisesIdInvOCL == null) {
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setContext(TrackerPackage.Literals.MOVED_OUT);
+			
+			EAnnotation ocl = TrackerPackage.Literals.MOVED_OUT.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String expr = ocl.getDetails().get("DestinationPin_can_not_be_same_as_the_local_premisesId");
+			
+			try {
+				movedOut_DestinationPin_can_not_be_same_as_the_local_premisesIdInvOCL = helper.createInvariant(expr);
+			}
+			catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(movedOut_DestinationPin_can_not_be_same_as_the_local_premisesIdInvOCL);
+		
+		if (!query.check(movedOut)) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericConstraint_diagnostic", new Object[] { "DestinationPin_can_not_be_same_as_the_local_premisesId", getObjectLabel(movedOut, context) }),
+						 new Object[] { movedOut }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
