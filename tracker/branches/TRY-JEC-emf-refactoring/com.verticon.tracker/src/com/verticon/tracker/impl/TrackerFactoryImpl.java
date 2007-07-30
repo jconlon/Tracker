@@ -613,8 +613,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public String createPremisesIdNumberFromString(EDataType eDataType, String initialValue) {
 		if(initialValue == null) return null;
 		if(initialValue.length()!=7){
-			TrackerLog.logError(
-		            "Illegal Premise ID number: " + initialValue, new IllegalArgumentException("Premise ID number must be an alphanumeric string of 7 characthers in length"));
 			return null;
 		}
 		try {
@@ -622,8 +620,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return (String)initialValue;
 			}
 		} catch (NumberFormatException e) {
-			TrackerLog.logError(
-		            "Illegal Premise ID number: " + initialValue, e);
 			return null;
 		}
 		TrackerLog.logError(
