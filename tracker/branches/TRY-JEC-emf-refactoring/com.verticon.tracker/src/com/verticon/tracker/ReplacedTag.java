@@ -39,10 +39,15 @@ public interface ReplacedTag extends Event {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Tracker.ecore is the metaModel for Tracker, a NAIS base animal event management framework.
+	 * 
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Old Ain</em>' attribute.
 	 * @see #setOldAin(String)
 	 * @see com.verticon.tracker.TrackerPackage#getReplacedTag_OldAin()
 	 * @model dataType="com.verticon.tracker.AnimialIdNumber" required="true"
+	 *        annotation="http://www.topcased.org/documentation documentation='Tracker.ecore is the metaModel for Tracker, a NAIS base animal event management framework.'"
 	 * @generated
 	 */
 	String getOldAin();

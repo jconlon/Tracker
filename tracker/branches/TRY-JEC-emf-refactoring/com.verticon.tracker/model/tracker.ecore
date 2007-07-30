@@ -4,6 +4,13 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tracker"
     nsURI="http://www.verticon.com/ns/tracker/1.0" nsPrefix="com.verticon.tracker">
   <eClassifiers xsi:type="ecore:EClass" name="Animal" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="Can_be_Slaughtered_only_once Must_have_TagApplied_or_MovedIn"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/ocl/examples/OCL">
+      <details key="Can_be_Slaughtered_only_once" value="-- An animal can only be slaughter once -- &#xA;self.allEvents() -> select(e : Event | e.oclIsTypeOf(Slaughtered) ) ->size()&lt;2"/>
+      <details key="Must_have_TagApplied_or_MovedIn" value="-- An animal must have a TagApplied or a MovedIn event -- &#xA;self.allEvents() -> select(e : Event | e.oclIsTypeOf(TagApplied) or e.oclIsTypeOf(MovedIn)  ) ->notEmpty()"/>
+    </eAnnotations>
     <eOperations name="allEvents" upperBound="-1" eType="#//Event"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthDate" eType="#//Date"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sex" eType="#//Sex" defaultValueLiteral="Unspecified"
@@ -306,17 +313,36 @@
   <eClassifiers xsi:type="ecore:EDataType" name="DateTime" instanceClassName="java.util.Date"/>
   <eClassifiers xsi:type="ecore:EClass" name="TagApplied" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="MovedIn" eSuperTypes="#//Event">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="SourcePin_can_not_be_same_as_the_local_premisesId "/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/ocl/examples/OCL">
+      <details key="SourcePin_can_not_be_same_as_the_local_premisesId" value="-- The MovedIn sourcePin can not be the same as the local premisesId. --&#xA;Premises.allInstances() -> select(premisesId=self.sourcePin) -> isEmpty()"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourcePin" lowerBound="1"
         eType="#//PremisesIdNumber"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MovedOut" eSuperTypes="#//Event">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="DestinationPin_can_not_be_same_as_the_local_premisesId"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/ocl/examples/OCL">
+      <details key="DestinationPin_can_not_be_same_as_the_local_premisesId" value="-- The MovedOut destinationPin can not be the same as the local premisesId. --&#xA;Premises.allInstances() -> select(premisesId=self.destinationPin) -> isEmpty()"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="destinationPin" lowerBound="1"
         eType="#//PremisesIdNumber"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LostTag" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReplacedTag" eSuperTypes="#//Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="oldAin" lowerBound="1"
-        eType="#//AnimialIdNumber"/>
+        eType="#//AnimialIdNumber">
+      <eAnnotations source="http://www.topcased.org/documentation">
+        <details key="documentation" value="Tracker.ecore is the metaModel for Tracker, a NAIS base animal event management framework."/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Tracker.ecore is the metaModel for Tracker, a NAIS base animal event management framework.&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Imported" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="Exported" eSuperTypes="#//Event"/>
