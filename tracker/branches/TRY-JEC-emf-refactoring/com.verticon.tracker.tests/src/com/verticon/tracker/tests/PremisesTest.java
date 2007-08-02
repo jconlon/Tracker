@@ -6,6 +6,12 @@
  */
 package com.verticon.tracker.tests;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
@@ -23,14 +29,18 @@ import com.verticon.tracker.TrackerFactory;
  * The following operations are tested:
  * <ul>
  *   <li>{@link com.verticon.tracker.Premises#eventHistory() <em>Event History</em>}</li>
+ *   <li>{@link com.verticon.tracker.Premises#findAnimal(long) <em>Find Animal</em>}</li>
+ *   <li>{@link com.verticon.tracker.Premises#addTemplate(org.eclipse.emf.common.util.EList, com.verticon.tracker.Animal) <em>Add Template</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
 public class PremisesTest extends TestCase {
 	
-	private static final long AIN = 123456789012345L;
-	private static final long AIN2 = 123456789012343L;
+	private static final long AIN_4 = 123456789012344L;
+	private static final long AIN_3 = 123456789012343L;
+	private static final long AIN_2 = 123456789012342L;
+	private static final long AIN_1 = 123456789012341L;
 	
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,7 +132,7 @@ public class PremisesTest extends TestCase {
 		//Add one animal with two tags
 		Animal animal1 = TrackerFactory.eINSTANCE.createBovineBeef();
 		Tag tag1 = TrackerFactory.eINSTANCE.createTag();
-		tag1.setIdNumber(AIN);
+		tag1.setIdNumber(AIN_1);
 		animal1.getTags().add(tag1);
 		Event event1 = TrackerFactory.eINSTANCE.createTagApplied();
 		tag1.getEvents().add(event1);
@@ -132,7 +142,7 @@ public class PremisesTest extends TestCase {
 		
 		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
 		animal1.getTags().add(tag2);
-		tag2.setIdNumber(AIN2);
+		tag2.setIdNumber(AIN_2);
 		
 		Event event2 = TrackerFactory.eINSTANCE.createReplacedTag();
 		tag2.getEvents().add(event2);
@@ -144,7 +154,7 @@ public class PremisesTest extends TestCase {
 		//Add second animal with two tags
 		Animal animal2 = TrackerFactory.eINSTANCE.createBovineBeef();
 		Tag tag3 = TrackerFactory.eINSTANCE.createTag();
-		tag3.setIdNumber(AIN);
+		tag3.setIdNumber(AIN_1);
 		animal2.getTags().add(tag3);
 		Event event3 = TrackerFactory.eINSTANCE.createTagApplied();
 		tag3.getEvents().add(event3);
@@ -153,6 +163,75 @@ public class PremisesTest extends TestCase {
 		assertTrue(getFixture().eventHistory().contains(event3));
 		
 		
+		
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Premises#findAnimal(long) <em>Find Animal</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Premises#findAnimal(long)
+	 * @generated NOT
+	 */
+	public void testFindAnimal__long() {
+		Animal animal1 = TrackerFactory.eINSTANCE.createBovineBeef();
+		Tag tag1 = TrackerFactory.eINSTANCE.createTag();
+		tag1.setIdNumber(AIN_1);
+		Event event1 = TrackerFactory.eINSTANCE.createTagApplied();
+		tag1.getEvents().add(event1);
+		animal1.getTags().add(tag1);
+		getFixture().getAnimals().add(animal1);
+		assertEquals(AIN_1, animal1.getIdNumber());
+		
+		Animal animal2 = TrackerFactory.eINSTANCE.createBovineBeef();
+		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
+		tag2.setIdNumber(AIN_2);
+		Event event2 = TrackerFactory.eINSTANCE.createTagApplied();
+		tag2.getEvents().add(event2);
+		animal2.getTags().add(tag2);
+		getFixture().getAnimals().add(animal2);
+		
+		Animal animal3 = TrackerFactory.eINSTANCE.createBovineBeef();
+		Tag tag3 = TrackerFactory.eINSTANCE.createTag();
+		tag3.setIdNumber(AIN_3);
+		Event event3 = TrackerFactory.eINSTANCE.createTagApplied();
+		tag3.getEvents().add(event3);
+		animal3.getTags().add(tag3);
+		getFixture().getAnimals().add(animal3);
+		
+		assertEquals(animal1, getFixture().findAnimal(AIN_1));
+		assertEquals(animal2, getFixture().findAnimal(AIN_2));
+		assertEquals(animal3, getFixture().findAnimal(AIN_3));
+		
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Premises#addTemplate(org.eclipse.emf.common.util.EList, com.verticon.tracker.Animal) <em>Add Template</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Premises#addTemplate(org.eclipse.emf.common.util.EList, com.verticon.tracker.Animal)
+	 * @generated NOT
+	 */
+	public void testAddTemplate__EList_Animal() {
+		Animal animal1 = TrackerFactory.eINSTANCE.createBovineBeef();
+		Tag tag1 = TrackerFactory.eINSTANCE.createTag();
+		tag1.setIdNumber(AIN_1);
+		Event event1 = TrackerFactory.eINSTANCE.createTagApplied();
+		tag1.getEvents().add(event1);
+		animal1.getTags().add(tag1);
+		
+		
+		EList<Long> ains = new BasicEList<Long>();
+		ains.add(AIN_1);
+		ains.add(AIN_2);
+		ains.add(AIN_3);
+		ains.add(AIN_4);
+		
+		assertEquals(0, getFixture().eventHistory().size());
+		
+		getFixture().addTemplate(ains, animal1);
+		assertEquals(4, getFixture().getAnimals().size());
+		assertEquals(4, getFixture().eventHistory().size());
 		
 	}
 

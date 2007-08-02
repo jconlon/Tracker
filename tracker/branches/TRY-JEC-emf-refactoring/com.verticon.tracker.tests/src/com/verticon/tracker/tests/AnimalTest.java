@@ -6,7 +6,9 @@
  */
 package com.verticon.tracker.tests;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -38,13 +40,17 @@ import com.verticon.tracker.util.Age;
  * The following operations are tested:
  * <ul>
  *   <li>{@link com.verticon.tracker.Animal#allEvents() <em>All Events</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#addTemplate(org.eclipse.emf.common.util.EList) <em>Add Template</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#activeTag() <em>Active Tag</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
 public abstract class AnimalTest extends TestCase {
-	private static final long AIN = 123456789012345L;
-	private static final long AIN2 = 123456789012343L;
+	private static final long AIN_3 = 123456789012343L;
+	private static final long AIN_2 = 123456789012342L;
+	private static final long AIN_1 = 123456789012341L;
+	
 	private static final Date ANIMAL_BIRTHDAY = 
 		(new GregorianCalendar(2000, Calendar.JANUARY, 1,1,5)).getTime();
 
@@ -84,7 +90,7 @@ public abstract class AnimalTest extends TestCase {
 		if(fixture !=null){
 			fixture.setSex(Sex.M_LITERAL);
 			Tag tag = TrackerFactory.eINSTANCE.createTag();
-			tag.setIdNumber(AIN);
+			tag.setIdNumber(AIN_1);
 			fixture.getTags().add(tag);
 			fixture.setBirthDate(ANIMAL_BIRTHDAY);
 			
@@ -107,29 +113,12 @@ public abstract class AnimalTest extends TestCase {
 	 * Overridden in subclasses
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#getSpecies()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testGetSpecies() {
-		// TODO: implement this feature getter test method
-		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
 	}
 
-//	public void testFindTagWithLatestEventDate(){
-//		Tag tag1 = TrackerFactory.eINSTANCE.createTag();
-//		tag1.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
-//		try {
-//	        long numMillisecondsToSleep = 1000; // 5 seconds
-//	        Thread.sleep(numMillisecondsToSleep);
-//	    } catch (InterruptedException e) {
-//	    }
-//		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
-//		tag2.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
-//				
-//		assertTrue(tag1.getEvents().get(0).getDateTime().before(tag2.getEvents().get(0).getDateTime()));
-//		assertEquals(-1, tag1.getEvents().get(0).getDateTime().compareTo(tag2.getEvents().get(0).getDateTime()));
-//		
-//	}
 	/**
 	 * Tests the '{@link com.verticon.tracker.Animal#getIdNumber() <em>Id Number</em>}' feature getter.
 	 * <!-- begin-user-doc -->
@@ -159,35 +148,34 @@ public abstract class AnimalTest extends TestCase {
 		assertEquals("Test with no tag", 0, animal2.getIdNumber());
 		
 		//Test animal with two tags one with an IdNumber the other without
-		tag2.setIdNumber(AIN);
+		tag2.setIdNumber(AIN_1);
 		assertEquals("Test with no tag", 0, animal2.getIdNumber());
 		
 		//Test animal with two tags one with an event
 		tag2.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
-		assertEquals("Test with no tag", AIN, animal2.getIdNumber());
+		assertEquals("Test with no tag", AIN_1, animal2.getIdNumber());
 		
 		//Find the tag with the most current event timestamp.
-		tag3.setIdNumber(AIN2);
+		tag3.setIdNumber(AIN_2);
 		try {
 	        long numMillisecondsToSleep = 500; // 5 seconds
 	        Thread.sleep(numMillisecondsToSleep);
 	    } catch (InterruptedException e) {
 	    }
 		tag3.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
-		assertEquals( AIN2, animal2.getIdNumber());
+		assertEquals( AIN_2, animal2.getIdNumber());
 
 	}
 
 	/**
 	 * Tests the '{@link com.verticon.tracker.Animal#getBreed() <em>Breed</em>}' feature getter.
 	 * <!-- begin-user-doc -->
+	 * Overriden in subclasses.
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#getBreed()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testGetBreed() {
-		// TODO: implement this feature getter test method
-		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
 	}
 
@@ -235,11 +223,9 @@ public abstract class AnimalTest extends TestCase {
 	 * Overridden by subclasses
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#getSpeciesCode()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testGetSpeciesCode() {
-		// TODO: implement this feature getter test method
-		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
 	}
 
@@ -259,7 +245,7 @@ public abstract class AnimalTest extends TestCase {
 		//Test animal with no tag
 		Animal animal2 = TrackerFactory.eINSTANCE.createBovineBeef();
 		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
-		tag2.setIdNumber(AIN);
+		tag2.setIdNumber(AIN_1);
 		animal2.getTags().add(tag2);
 		Event event1 = TrackerFactory.eINSTANCE.createTagApplied();
 		tag2.getEvents().add(event1);
@@ -268,13 +254,72 @@ public abstract class AnimalTest extends TestCase {
 		
 		Tag tag3 = TrackerFactory.eINSTANCE.createTag();
 		animal2.getTags().add(tag3);
-		tag3.setIdNumber(AIN2);
+		tag3.setIdNumber(AIN_2);
 		
 		Event event2 = TrackerFactory.eINSTANCE.createReplacedTag();
 		tag3.getEvents().add(event2);
 		
 		assertEquals(2, animal2.allEvents().size());
 		assertTrue(animal2.allEvents().contains(event2));
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Animal#addTemplate(org.eclipse.emf.common.util.EList) <em>Add Template</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#addTemplate(org.eclipse.emf.common.util.EList)
+	 * @generated NOT
+	 */
+	public void testAddTemplate__EList() {
+		Animal animal1 = TrackerFactory.eINSTANCE.createSwine();
+		Tag tag1 = TrackerFactory.eINSTANCE.createTag();
+		tag1.setIdNumber(AIN_1);
+		tag1.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
+		tag1.getEvents().add(TrackerFactory.eINSTANCE.createSighting());
+		tag1.getEvents().add(TrackerFactory.eINSTANCE.createSlaughtered());
+		animal1.getTags().add(tag1);
+		
+		//There is no activeTag so don't accept the events
+		getFixture().addTemplate(animal1.activeTag().getEvents());
+		assertEquals(0, getFixture().allEvents().size());
+		
+		//Add an activeTag 
+		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
+		tag2.setIdNumber(AIN_2);
+		tag2.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
+		getFixture().getTags().add(tag2);
+		assertEquals(1, getFixture().allEvents().size());
+		
+		//There is now an activeTag so accept the events
+		getFixture().addTemplate(animal1.activeTag().getEvents());
+		assertEquals(4, getFixture().allEvents().size());
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Animal#activeTag() <em>Active Tag</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#activeTag()
+	 * @generated NOT
+	 */
+	public void testActiveTag() {
+		Tag tag1 = TrackerFactory.eINSTANCE.createTag();
+		tag1.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
+		try {
+	        long numMillisecondsToSleep = 1000; // 5 seconds
+	        Thread.sleep(numMillisecondsToSleep);
+	    } catch (InterruptedException e) {
+	    }
+		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
+		tag2.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
+				
+		assertTrue(tag1.getEvents().get(0).getDateTime().before(tag2.getEvents().get(0).getDateTime()));
+		assertEquals(-1, tag1.getEvents().get(0).getDateTime().compareTo(tag2.getEvents().get(0).getDateTime()));
+		
+		getFixture().getTags().add(tag1);
+		getFixture().getTags().add(tag2);
+		assertEquals(tag2, getFixture().activeTag());
+		
 	}
 
 } //AnimalTest

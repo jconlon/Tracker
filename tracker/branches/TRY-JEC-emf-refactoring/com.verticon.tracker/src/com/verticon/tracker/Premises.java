@@ -129,4 +129,20 @@ public interface Premises extends EObject {
 	 */
 	EList<Event> eventHistory();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Animal findAnimal(long ains);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model ainsMany="false"
+	 * @generated
+	 */
+	void addTemplate(EList<Long> ains, Animal animalTemplate);
+
 } // Premises

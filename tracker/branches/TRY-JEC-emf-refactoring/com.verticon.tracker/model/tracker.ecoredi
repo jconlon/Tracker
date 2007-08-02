@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_smKWUDo3Edyw6--mXqZ7vg" activeDiagram="_smKWUTo3Edyw6--mXqZ7vg">
   <model href="tracker.ecore#/"/>
-  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="1117,403">
+  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="684,21">
     <property xmi:id="_smKWUjo3Edyw6--mXqZ7vg" key="pageFormatName" value="A2"/>
     <property xmi:id="_smKWUzo3Edyw6--mXqZ7vg" key="diagramWidth" value="1680"/>
     <property xmi:id="_smKWVDo3Edyw6--mXqZ7vg" key="diagramHeight" value="2376"/>
@@ -73,6 +73,16 @@
         <contained xsi:type="di:GraphNode" xmi:id="_vyf5wDrXEdy5uoul0lPdkQ" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_vyf5wTrXEdy5uoul0lPdkQ" presentation="default">
             <element href="tracker.ecore#//Animal/allEvents"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_ePVjgEECEdyaqbnptJYd5w" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_ePVjgUECEdyaqbnptJYd5w" presentation="default">
+            <element href="tracker.ecore#//Animal/addTemplate"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_NiZ2sEEDEdyaqbnptJYd5w" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_NiZ2sUEDEdyaqbnptJYd5w" presentation="default">
+            <element href="tracker.ecore#//Animal/activeTag"/>
           </semanticModel>
         </contained>
       </contained>
@@ -259,6 +269,16 @@
         <contained xsi:type="di:GraphNode" xmi:id="_DfX_8DrLEdy3IbHg2on1Cg" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_DfX_8TrLEdy3IbHg2on1Cg" presentation="default">
             <element href="tracker.ecore#//Premises/eventHistory"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="__zTGkED7EdyaqbnptJYd5w" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="__zTGkUD7EdyaqbnptJYd5w" presentation="default">
+            <element href="tracker.ecore#//Premises/findAnimal"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_tMG6QkEBEdyaqbnptJYd5w" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_tMG6Q0EBEdyaqbnptJYd5w" presentation="default">
+            <element href="tracker.ecore#//Premises/addTemplate"/>
           </semanticModel>
         </contained>
       </contained>
