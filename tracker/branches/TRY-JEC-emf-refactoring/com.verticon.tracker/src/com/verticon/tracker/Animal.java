@@ -257,4 +257,20 @@ public interface Animal extends EObject {
 	 */
 	EList<Event> allEvents();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model eventTemplateMany="false"
+	 * @generated
+	 */
+	void addTemplate(EList<Event> eventTemplate);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Tag activeTag();
+
 } // Animal

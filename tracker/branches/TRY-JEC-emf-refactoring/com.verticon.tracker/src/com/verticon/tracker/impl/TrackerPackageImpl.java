@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
@@ -1302,6 +1304,14 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		addEOperation(animalEClass, this.getEvent(), "allEvents", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		EOperation op = addEOperation(animalEClass, null, "addTemplate", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(ecorePackage.getEEList());
+		EGenericType g2 = createEGenericType(this.getEvent());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "eventTemplate", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(animalEClass, this.getTag(), "activeTag", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(tagEClass, Tag.class, "Tag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTag_IdNumber(), ecorePackage.getELong(), "idNumber", null, 1, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTag_UsainNumberUsed(), ecorePackage.getEBoolean(), "usainNumberUsed", null, 0, 1, Tag.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -1329,6 +1339,16 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		getPremises_UnAppliedTags().getEKeys().add(this.getTag_IdNumber());
 
 		addEOperation(premisesEClass, this.getEvent(), "eventHistory", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(premisesEClass, this.getAnimal(), "findAnimal", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getELong(), "ains", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(premisesEClass, null, "addTemplate", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEEList());
+		g2 = createEGenericType(ecorePackage.getELongObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "ains", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getAnimal(), "animalTemplate", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(bovineBeefEClass, BovineBeef.class, "BovineBeef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBovineBeef_BeefBreed(), this.getBeefBreed(), "beefBreed", "Unspecified", 0, 1, BovineBeef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

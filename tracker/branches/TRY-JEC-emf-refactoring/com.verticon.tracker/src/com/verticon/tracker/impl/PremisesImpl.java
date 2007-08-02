@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
@@ -30,6 +31,7 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
+import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 
 /**
@@ -56,6 +58,12 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 */
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
+	/**
+	 * Used for copying animalTemplates.
+	 */
+	private static final Copier copier = new Copier();
+	
+	
 	/**
 	 * The default value of the '{@link #getPremisesId() <em>Premises Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -240,6 +248,47 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 		Collection<Event> result = (Collection<Event>) query.evaluate(this);
 		return new BasicEList.UnmodifiableEList<Event>(result.size(), result.toArray());
 	
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Finds the animal with the ain idNumber.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Animal findAnimal(long ain) {
+		for (Animal animal : animals) {
+			if(animal.getIdNumber() == ain){
+				return animal;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Creates new Animals with events or adds templateEvents to old Animals.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void addTemplate(EList<Long> ains, Animal animalTemplate) {
+		Animal targetAnimal = null;
+		for (Long long1 : ains) {
+			targetAnimal = findAnimal(long1.longValue());
+			if(targetAnimal ==null){
+				targetAnimal  =  (Animal) copier.copy(animalTemplate);
+				targetAnimal.activeTag().setIdNumber(long1);
+				animals.add(targetAnimal);
+			}else if (!animalTemplate.allEvents().isEmpty()){
+				EList<Event> eventsContainer = targetAnimal.activeTag().getEvents();
+				eventsContainer.addAll(copier.copyAll(animalTemplate.allEvents()));
+			}
+		}
+//		Tag currentTag = activeTag();
+//		for (Event event : eventTemplate) {
+//			Event eventToAdd =  (Event) copier.copy(event);
+//			currentTag.getEvents().add(eventToAdd);
+//		}
 	}
 
 	/**

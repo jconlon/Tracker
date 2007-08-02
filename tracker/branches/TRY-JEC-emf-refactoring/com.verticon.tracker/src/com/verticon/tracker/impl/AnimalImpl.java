@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -63,6 +64,11 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 */
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
+	/**
+	 * Used for copying eventTemplate events.
+	 */
+	private static final Copier copier = new Copier();
+	
 	/**
 	 * The default value of the '{@link #getBirthDate() <em>Birth Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -310,31 +316,12 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 		} else if (tags.size()==1){
 			result = tags.get(0).getIdNumber();
 		} else if(tags.size()>1){
-			Tag tag =findTagWithLatestEventDate(tags);
+			Tag tag = activeTag();
 			result = tag!=null? tag.getIdNumber():0;
 		}
 		return result;
 	}
-	
-	/**
-	 * Find the tag with the most current event timestamp.
-	 * @param list
-	 * @return
-	 */
-	 Tag findTagWithLatestEventDate(Collection<Tag> list){
-		if(allEvents().isEmpty()){
-			return null;
-		}
-		List<Event> winners = new LinkedList<Event>();
-		winners.addAll(allEvents());
-		
-		// Sort events according to date
-		Collections.sort(winners, new Comparator<Event>() {
-		    public int compare(Event event1, Event event2) {
-		        return event2.getDateTime().compareTo(event1.getDateTime());
-		    }});
-		return winners.get(0).getTag();
-	}
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -410,6 +397,43 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * Add copies of the events in the eventTemplate to the current Tag.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void addTemplate(EList<Event> eventTemplate) {
+		Tag currentTag = activeTag();
+		if (currentTag!=null){
+			for (Event event : eventTemplate) {
+				Event eventToAdd =  (Event) copier.copy(event);
+				currentTag.getEvents().add(eventToAdd);
+			}
+		}
+	}
+
+/**
+	 * <!-- begin-user-doc -->
+	 * Tag currently identifying the Animal is the tag with the most current event timestamp.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Tag activeTag() {
+		if(allEvents().isEmpty()){
+			return null;
+		}
+		List<Event> winners = new LinkedList<Event>();
+		winners.addAll(allEvents());
+		
+		// Sort events according to date
+		Collections.sort(winners, new Comparator<Event>() {
+		    public int compare(Event event1, Event event2) {
+		        return event2.getDateTime().compareTo(event1.getDateTime());
+		    }});
+		return winners.get(0).getTag();
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

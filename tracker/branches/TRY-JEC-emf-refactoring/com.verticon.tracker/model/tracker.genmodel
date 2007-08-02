@@ -255,6 +255,10 @@
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/sexCode"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/speciesCode"/>
       <genOperations ecoreOperation="tracker.ecore#//Animal/allEvents"/>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/addTemplate">
+        <genParameters ecoreParameter="tracker.ecore#//Animal/addTemplate/eventTemplate"/>
+      </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/activeTag"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Tag">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/idNumber"/>
@@ -278,6 +282,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/animals"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/unAppliedTags"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/eventHistory"/>
+      <genOperations ecoreOperation="tracker.ecore#//Premises/findAnimal">
+        <genParameters ecoreParameter="tracker.ecore#//Premises/findAnimal/ains"/>
+      </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//Premises/addTemplate">
+        <genParameters ecoreParameter="tracker.ecore#//Premises/addTemplate/ains"/>
+        <genParameters ecoreParameter="tracker.ecore#//Premises/addTemplate/animalTemplate"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//BovineBeef" labelFeature="#//tracker/Animal/idNumber">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//BovineBeef/beefBreed"/>
