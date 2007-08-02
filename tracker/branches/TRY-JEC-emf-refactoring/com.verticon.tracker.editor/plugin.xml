@@ -19,7 +19,7 @@
     <wizard
       id = "com.verticon.tracker.editor.presentation.TrackerModelWizardID"
       name = "%_UI_TrackerModelWizard_label"
-      class = "com.verticon.tracker.editor.presentation.TrackerModelWizard"
+      class = "com.verticon.tracker.editor.presentation.TrackerMainModelWizard"
       category = "com.verticon.tracker.editor.Wizard.category.ID"
       icon = "icons/full/obj16/TrackerModelFile.gif">
       <description>%_UI_TrackerModelWizard_description</description>
@@ -28,7 +28,7 @@
     <wizard
       id = "com.verticon.tracker.editor.presentation.TrackerTemplateWizardID"
       name = "%_UI_TrackerTemplateWizard_label"
-      class = "com.verticon.tracker.editor.presentation.TrackerTemplateWizard"
+      class = "com.verticon.tracker.editor.presentation.TrackerAnimalModelWizard"
       category = "com.verticon.tracker.editor.Wizard.category.ID"
       icon = "icons/full/obj16/TrackerModelFile.gif">
       <description>%_UI_TrackerTemplateWizard_description</description>
@@ -42,7 +42,7 @@
         id = "com.verticon.tracker.editor.presentation.TrackerEditorID"
         name = "%_UI_TrackerEditor_label"
         icon = "icons/full/obj16/TrackerModelFile.gif"
-        extensions = "tracker"
+        extensions = "tracker, animal"
         class = "com.verticon.tracker.editor.presentation.TrackerEditor" 
         contributorClass="com.verticon.tracker.editor.presentation.TrackerActionBarContributor" >
     </editor>
