@@ -1,7 +1,5 @@
 package com.verticon.tracker.editor.presentation;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -10,11 +8,10 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.CommonPlugin;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
+
+import com.verticon.tracker.editor.util.ActionUtils;
 
 
 /**
@@ -37,20 +34,7 @@ public class TrackerAnimalModelWizard extends TrackerModelWizard {
 	@Override
 	protected Collection<String> getInitialObjectNames() {
 		if (initialObjectNames == null) {
-			initialObjectNames = new ArrayList<String>();
-			
-			for (EClassifier eClassifier : trackerPackage.getEClassifiers()) {
-				if (eClassifier instanceof EClass) {
-					EClass eClass = (EClass)eClassifier;
-					if (!eClass.isAbstract()) {
-						if(trackerPackage.getAnimal().isSuperTypeOf(eClass)){
-								initialObjectNames.add(eClass.getName());
-						}
-						
-					}
-				}
-			}
-			Collections.sort(initialObjectNames, CommonPlugin.INSTANCE.getComparator());
+			initialObjectNames = ActionUtils.getModelInstances(trackerPackage.getAnimal());
 		}
 		return initialObjectNames;
 	}

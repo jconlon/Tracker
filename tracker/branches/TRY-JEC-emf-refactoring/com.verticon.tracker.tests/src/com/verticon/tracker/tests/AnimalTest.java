@@ -6,9 +6,7 @@
  */
 package com.verticon.tracker.tests;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -16,8 +14,8 @@ import junit.framework.TestCase;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.Tag;
 import com.verticon.tracker.Sex;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.util.Age;
 
@@ -47,7 +45,6 @@ import com.verticon.tracker.util.Age;
  * @generated
  */
 public abstract class AnimalTest extends TestCase {
-	private static final long AIN_3 = 123456789012343L;
 	private static final long AIN_2 = 123456789012342L;
 	private static final long AIN_1 = 123456789012341L;
 	
