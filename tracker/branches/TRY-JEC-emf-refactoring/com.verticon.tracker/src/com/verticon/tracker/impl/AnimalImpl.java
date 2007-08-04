@@ -311,13 +311,13 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 */
 	public long getIdNumber() {
 		long result = 0L;
-		if (tags==null || allEvents().isEmpty()){
+		if (tags==null || tags.isEmpty()){
 			//no events no IdNumber
 		} else if (tags.size()==1){
 			result = tags.get(0).getIdNumber();
 		} else if(tags.size()>1){
 			Tag tag = activeTag();
-			result = tag!=null? tag.getIdNumber():0;
+			result = tag!=null? tag.getIdNumber():tags.get(0).getIdNumber();
 		}
 		return result;
 	}
