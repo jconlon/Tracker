@@ -35,6 +35,11 @@ public class CommonUtilities {
 		}
 	}
 	
+	/**
+	 * @deprecated use getAnimalFromTemplate
+	 * @param resource
+	 * @return
+	 */
 	public static Premises getPremisesFromTemplate(Resource resource){
 		Object o = resource.getContents().get(0);
 		if(o instanceof Premises){
@@ -43,6 +48,20 @@ public class CommonUtilities {
 		return null;
 	}
 	
+	public static Animal getAnimalFromTemplate(Resource resource){
+		Object o = resource.getContents().get(0);
+		Animal animal = null;
+		if(o instanceof Animal){
+			animal= (Animal)o;
+		}
+		return animal;
+	}
+	
+	/**
+	 * @deprecated use getAnimal
+	 * @param resource
+	 * @return
+	 */
 	public static Animal getDefaultAnimalFromTemplate(Resource resource){
 		Object o = resource.getContents().get(0);
 		Animal animal = null;
