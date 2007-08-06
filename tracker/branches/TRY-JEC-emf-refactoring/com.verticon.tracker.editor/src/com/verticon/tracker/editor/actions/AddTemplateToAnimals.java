@@ -68,6 +68,8 @@ public class AddTemplateToAnimals implements IObjectActionDelegate {
 		
 		ActionUtils.addTemplate( animals,
 				 templateBean,  editor);
+		//Refresh the current viewer
+		editor.getViewer().refresh();
 		
 	}
 

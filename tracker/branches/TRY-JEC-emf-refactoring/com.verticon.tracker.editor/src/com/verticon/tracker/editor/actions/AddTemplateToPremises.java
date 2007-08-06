@@ -75,6 +75,8 @@ public class AddTemplateToPremises implements IObjectActionDelegate {
 				return;
 			}
 			ActionUtils.addTemplate(premises, tagsBean, templateBean, editor);
+			//Refresh the current viewer
+			editor.getViewer().refresh();
 		} catch (FileNotFoundException e) {
 			TrackerLog.logError("Could not find the tags file.", e);
 			MessageDialog
