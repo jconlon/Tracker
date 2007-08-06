@@ -1099,6 +1099,7 @@ public class TrackerEditor
 						public void requestActivation() {
 							super.requestActivation();
 							setCurrentViewerPane(this);
+							this.getViewer().refresh();
 						}
 					};
 				viewerPane.createControl(getContainer());
