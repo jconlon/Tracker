@@ -199,20 +199,6 @@ public class ActionUtils {
 				existingAnimals+" existing animals.");
 	}
 
-	/**
-	 * Adds all events in the eventTemplate to the animal's active tag.
-	 * 
-	 * @param animal
-	 * @param templateBean
-	 * @param editor
-	 */
-	public static final void addTemplate(Animal animal,
-			TemplateBean templateBean, TrackerEditor editor) {
-		Command command = createAddEventsToTagCommand(animal.activeTag(), templateBean.getEvents(),
-				editor.getEditingDomain());
-		editor.getEditingDomain().getCommandStack().execute(command);
-
-	}
 	
 	public static final void addTemplate(Collection<Animal> animals,
 			TemplateBean templateBean, TrackerEditor editor) {
@@ -220,7 +206,18 @@ public class ActionUtils {
 		Command command = null;
 		int numberOfEventsInTemplate = templateBean.numberOfEvents();
 		for (Animal animal : animals) {
-			 command = createAddEventsToTagCommand(animal.activeTag(), templateBean.getEvents(),
+			if(animal.getTags()==null || animal.getTags().isEmpty()){
+				// show dialog
+				MessageDialog.openError(editor.getSite().getShell(),
+						"Failed to add template",
+						"Could not find an active Tag for animal "+animal);
+				continue;
+			}
+			Tag tag = animal.activeTag();
+			if(tag==null){
+				tag = animal.getTags().get(0);
+			}
+			 command = createAddEventsToTagCommand(tag, templateBean.getEvents(),
 					editor.getEditingDomain());
 			 compoundCommand.append(command);
 		}
