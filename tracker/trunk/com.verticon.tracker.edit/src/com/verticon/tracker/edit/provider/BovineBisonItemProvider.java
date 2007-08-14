@@ -25,7 +25,6 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.TrackerPackage;
-import java.math.BigInteger;
 
 
 /**

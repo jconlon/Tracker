@@ -9,13 +9,15 @@ package com.verticon.tracker.impl;
 import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 
 /**
@@ -26,12 +28,12 @@ import com.verticon.tracker.TrackerPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getDateTime <em>Date Time</em>}</li>
- *   <li>{@link com.verticon.tracker.impl.EventImpl#getAin <em>Ain</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getEventCode <em>Event Code</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#isElectronicallyRead <em>Electronically Read</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#isCorrection <em>Correction</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getComments <em>Comments</em>}</li>
- *   <li>{@link com.verticon.tracker.impl.EventImpl#getId <em>Id</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.EventImpl#getIdNumber <em>Id Number</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.EventImpl#getTag <em>Tag</em>}</li>
  * </ul>
  * </p>
  *
@@ -64,16 +66,6 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 	 * @ordered
 	 */
 	protected Date dateTime = DATE_TIME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getAin() <em>Ain</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAin()
-	 * @generated
-	 * @ordered
-	 */
-	protected AnimalId ain;
 
 	/**
 	 * The default value of the '{@link #getEventCode() <em>Event Code</em>}' attribute.
@@ -146,14 +138,14 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 	protected String comments = COMMENTS_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * The default value of the '{@link #getIdNumber() <em>Id Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
+	 * @see #getIdNumber()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final long ID_EDEFAULT = 0L;
+	protected static final long ID_NUMBER_EDEFAULT = 0L;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -194,44 +186,6 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 		dateTime = newDateTime;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.EVENT__DATE_TIME, oldDateTime, dateTime));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AnimalId getAin() {
-		if (ain != null && ain.eIsProxy()) {
-			InternalEObject oldAin = (InternalEObject)ain;
-			ain = (AnimalId)eResolveProxy(oldAin);
-			if (ain != oldAin) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackerPackage.EVENT__AIN, oldAin, ain));
-			}
-		}
-		return ain;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AnimalId basicGetAin() {
-		return ain;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAin(AnimalId newAin) {
-		AnimalId oldAin = ain;
-		ain = newAin;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.EVENT__AIN, oldAin, ain));
 	}
 
 	/**
@@ -309,8 +263,94 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public long getId() {
-		return getAin()!=null?Long.parseLong(getAin().getIdNumber()):0;
+	public long getIdNumber() {
+		return getTag()!=null?getTag().getIdNumber():0L;
+	}
+
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Tag getTag() {
+		if (eContainerFeatureID != TrackerPackage.EVENT__TAG) return null;
+		return (Tag)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTag(Tag newTag, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newTag, TrackerPackage.EVENT__TAG, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTag(Tag newTag) {
+		if (newTag != eInternalContainer() || (eContainerFeatureID != TrackerPackage.EVENT__TAG && newTag != null)) {
+			if (EcoreUtil.isAncestor(this, newTag))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newTag != null)
+				msgs = ((InternalEObject)newTag).eInverseAdd(this, TrackerPackage.TAG__EVENTS, Tag.class, msgs);
+			msgs = basicSetTag(newTag, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.EVENT__TAG, newTag, newTag));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TrackerPackage.EVENT__TAG:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetTag((Tag)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TrackerPackage.EVENT__TAG:
+				return basicSetTag(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case TrackerPackage.EVENT__TAG:
+				return eInternalContainer().eInverseRemove(this, TrackerPackage.TAG__EVENTS, Tag.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -323,9 +363,6 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 		switch (featureID) {
 			case TrackerPackage.EVENT__DATE_TIME:
 				return getDateTime();
-			case TrackerPackage.EVENT__AIN:
-				if (resolve) return getAin();
-				return basicGetAin();
 			case TrackerPackage.EVENT__EVENT_CODE:
 				return new Integer(getEventCode());
 			case TrackerPackage.EVENT__ELECTRONICALLY_READ:
@@ -334,8 +371,10 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 				return isCorrection() ? Boolean.TRUE : Boolean.FALSE;
 			case TrackerPackage.EVENT__COMMENTS:
 				return getComments();
-			case TrackerPackage.EVENT__ID:
-				return new Long(getId());
+			case TrackerPackage.EVENT__ID_NUMBER:
+				return new Long(getIdNumber());
+			case TrackerPackage.EVENT__TAG:
+				return getTag();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -351,9 +390,6 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 			case TrackerPackage.EVENT__DATE_TIME:
 				setDateTime((Date)newValue);
 				return;
-			case TrackerPackage.EVENT__AIN:
-				setAin((AnimalId)newValue);
-				return;
 			case TrackerPackage.EVENT__ELECTRONICALLY_READ:
 				setElectronicallyRead(((Boolean)newValue).booleanValue());
 				return;
@@ -362,6 +398,9 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 				return;
 			case TrackerPackage.EVENT__COMMENTS:
 				setComments((String)newValue);
+				return;
+			case TrackerPackage.EVENT__TAG:
+				setTag((Tag)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -378,9 +417,6 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 			case TrackerPackage.EVENT__DATE_TIME:
 				setDateTime(DATE_TIME_EDEFAULT);
 				return;
-			case TrackerPackage.EVENT__AIN:
-				setAin((AnimalId)null);
-				return;
 			case TrackerPackage.EVENT__ELECTRONICALLY_READ:
 				setElectronicallyRead(ELECTRONICALLY_READ_EDEFAULT);
 				return;
@@ -389,6 +425,9 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 				return;
 			case TrackerPackage.EVENT__COMMENTS:
 				setComments(COMMENTS_EDEFAULT);
+				return;
+			case TrackerPackage.EVENT__TAG:
+				setTag((Tag)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -404,8 +443,6 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 		switch (featureID) {
 			case TrackerPackage.EVENT__DATE_TIME:
 				return DATE_TIME_EDEFAULT == null ? dateTime != null : !DATE_TIME_EDEFAULT.equals(dateTime);
-			case TrackerPackage.EVENT__AIN:
-				return ain != null;
 			case TrackerPackage.EVENT__EVENT_CODE:
 				return getEventCode() != EVENT_CODE_EDEFAULT;
 			case TrackerPackage.EVENT__ELECTRONICALLY_READ:
@@ -414,8 +451,10 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 				return correction != CORRECTION_EDEFAULT;
 			case TrackerPackage.EVENT__COMMENTS:
 				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
-			case TrackerPackage.EVENT__ID:
-				return getId() != ID_EDEFAULT;
+			case TrackerPackage.EVENT__ID_NUMBER:
+				return getIdNumber() != ID_NUMBER_EDEFAULT;
+			case TrackerPackage.EVENT__TAG:
+				return getTag() != null;
 		}
 		return super.eIsSet(featureID);
 	}

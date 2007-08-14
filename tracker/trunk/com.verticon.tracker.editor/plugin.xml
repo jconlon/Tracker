@@ -19,7 +19,7 @@
     <wizard
       id = "com.verticon.tracker.editor.presentation.TrackerModelWizardID"
       name = "%_UI_TrackerModelWizard_label"
-      class = "com.verticon.tracker.editor.presentation.TrackerModelWizard"
+      class = "com.verticon.tracker.editor.presentation.TrackerMainModelWizard"
       category = "com.verticon.tracker.editor.Wizard.category.ID"
       icon = "icons/full/obj16/TrackerModelFile.gif">
       <description>%_UI_TrackerModelWizard_description</description>
@@ -28,7 +28,7 @@
     <wizard
       id = "com.verticon.tracker.editor.presentation.TrackerTemplateWizardID"
       name = "%_UI_TrackerTemplateWizard_label"
-      class = "com.verticon.tracker.editor.presentation.TrackerTemplateWizard"
+      class = "com.verticon.tracker.editor.presentation.TrackerAnimalModelWizard"
       category = "com.verticon.tracker.editor.Wizard.category.ID"
       icon = "icons/full/obj16/TrackerModelFile.gif">
       <description>%_UI_TrackerTemplateWizard_description</description>
@@ -42,7 +42,7 @@
         id = "com.verticon.tracker.editor.presentation.TrackerEditorID"
         name = "%_UI_TrackerEditor_label"
         icon = "icons/full/obj16/TrackerModelFile.gif"
-        extensions = "tracker"
+        extensions = "tracker, animal"
         class = "com.verticon.tracker.editor.presentation.TrackerEditor" 
         contributorClass="com.verticon.tracker.editor.presentation.TrackerActionBarContributor" >
     </editor>
@@ -56,66 +56,28 @@
            objectClass="org.eclipse.core.resources.IResource">
         <menu
               id="com.verticon.tracker.editor.popupSubMenu"
-              label="Tracker"
+              label="%_UI_TrackerPopup_label"
               path="additions">
            <groupMarker name="content"/>
            <separator name="additions"/>
         </menu>
         <action
-              class="com.verticon.tracker.editor.actions.AddToAnimalsActionDelegate"
-              enablesFor="+"
-              id="com.verticon.tracker.editor.actions.addToAnimals"
-              label="Add to Animals"
-              menubarPath="com.verticon.tracker.editor.popupSubMenu/content"
-              tooltip="Add the tag ids in the selected resource(s) as Premises Animals"/>
-        
-        <action
-              class="com.verticon.tracker.editor.actions.AddAsTagApplied"
-              enablesFor="+"
-              id="com.verticon.tracker.editor.actions.addAsTagApplied"
-              label="Add as TagApplied Events"
-              menubarPath="com.verticon.tracker.editor.popupSubMenu/content"
-              tooltip="Add the tag ids in the selected resource(s) as Premises TagApplied Events."/>
-         
-         <action
-              class="com.verticon.tracker.editor.actions.AddAsMovedIn"
-              enablesFor="+"
-              id="com.verticon.tracker.editor.actions.addAsMovedIn"
-              label="Add as MovedIn Events"
-              menubarPath="com.verticon.tracker.editor.popupSubMenu/content"
-              tooltip="Add the tag ids in the selected resource(s) as Premises MovedIn Events."/> 
-              
-          <action
-              class="com.verticon.tracker.editor.actions.AddAsMovedOut"
-              enablesFor="+"
-              id="com.verticon.tracker.editor.actions.addAsMovedOut"
-              label="Add as MovedOut Events"
-              menubarPath="com.verticon.tracker.editor.popupSubMenu/content"
-              tooltip="Add the tag ids in the selected resource(s) as Premises MovedOut Events."/>   
-           
-           <action
-              class="com.verticon.tracker.editor.actions.AddAsWeighIn"
-              enablesFor="+"
-              id="com.verticon.tracker.editor.actions.addAsWeighIn"
-              label="Add as WeighIn Events"
-              menubarPath="com.verticon.tracker.editor.popupSubMenu/content"
-              tooltip="Add the tag ids in the selected resource(s) as Premises WeighIn Events."/>   
-            
-            <action
-              class="com.verticon.tracker.editor.actions.AddAsFairRegistration"
-              enablesFor="+"
-              id="com.verticon.tracker.editor.actions.addFairRegistration"
-              label="Add as FairRegistration Events"
-              menubarPath="com.verticon.tracker.editor.popupSubMenu/content"
-              tooltip="Add the tag ids in the selected resource(s) as Premises FairRegistration Events."/>  
-              
-             <action
-              class="com.verticon.tracker.editor.actions.AddTemplateEventsToCaptureAins"
+              class="com.verticon.tracker.editor.actions.AddTemplateToPremises"
               enablesFor="+"
               id="com.verticon.tracker.editor.actions.addTemplate"
-              label="Add as Templated Events"
+              label="%_UI_TrackerTagsPopupPremisesTemplateEvents_label"
               menubarPath="com.verticon.tracker.editor.popupSubMenu/content"
-              tooltip="Add the tag ids in the selected resource(s) as the type of Events described in a Template file."/>    
+              tooltip="%_UI_TrackerTagsPopupPremisesTemplateEvents_description"/>    
+              
+        <action
+              class="com.verticon.tracker.editor.actions.AddAnimalsToPremises"
+              enablesFor="+"
+              id="com.verticon.tracker.editor.actions.addToAnimals"
+              label="%_UI_TrackerTagsPopupPremisesAnimalEvents_label"
+              menubarPath="com.verticon.tracker.editor.popupSubMenu/content"
+              tooltip="%_UI_TrackerTagsPopupPremisesAnimalEvents_description"/>
+        
+             
                
      </objectContribution>
   </extension>    
@@ -124,17 +86,17 @@
   		id="com.verticon.tracker.editor.animal.popupMenu"
   		objectClass="com.verticon.tracker.Animal">
   		<menu id="com.verticon.tracker.editor.animal.popupSubMenu"
-  			label="Tracker" path="additions">
+  			label="%_UI_TrackerPopup_label" path="additions">
   			<groupMarker name="content" />
   			<separator name="additions" />
   		</menu>
   		<action
-  			class="com.verticon.tracker.editor.actions.AddTemplatedEventsToSelectedAnimals"
+  			class="com.verticon.tracker.editor.actions.AddTemplateToAnimals"
   			enablesFor="+"
   			id="com.verticon.tracker.editor.actions.addTemplateEventsToAnimals"
-  			label="Add Templated Events"
+  			label="%_UI_TrackerTagsPopupAnimalsTemplateEvents_label"
   			menubarPath="com.verticon.tracker.editor.animal.popupSubMenu/content"
-  			tooltip="Add Events described in a Template file to the selected Animal(s)." />
+  			tooltip="%_UI_TrackerTagsPopupAnimalsTemplateEvents_description" />
 
   	</objectContribution>
   </extension>

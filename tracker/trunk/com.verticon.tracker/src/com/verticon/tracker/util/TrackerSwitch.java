@@ -7,24 +7,21 @@
 package com.verticon.tracker.util;
 
 import com.verticon.tracker.*;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.AnimalMissing;
-import com.verticon.tracker.Animals;
 import com.verticon.tracker.Bovine;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.BovineDairy;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.Exported;
+import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
 import com.verticon.tracker.LostTag;
@@ -35,10 +32,13 @@ import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Slaughtered;
+import com.verticon.tracker.Swine;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TagAllocated;
 import com.verticon.tracker.TagApplied;
 import com.verticon.tracker.TagRetired;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.WeighIn;
 
 /**
  * <!-- begin-user-doc -->
@@ -127,9 +127,9 @@ public class TrackerSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TrackerPackage.ANIMAL_ID: {
-				AnimalId animalId = (AnimalId)theEObject;
-				T result = caseAnimalId(animalId);
+			case TrackerPackage.TAG: {
+				Tag tag = (Tag)theEObject;
+				T result = caseTag(tag);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -156,18 +156,6 @@ public class TrackerSwitch<T> {
 			case TrackerPackage.PREMISES: {
 				Premises premises = (Premises)theEObject;
 				T result = casePremises(premises);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TrackerPackage.EVENT_HISTORY: {
-				EventHistory eventHistory = (EventHistory)theEObject;
-				T result = caseEventHistory(eventHistory);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TrackerPackage.ANIMALS: {
-				Animals animals = (Animals)theEObject;
-				T result = caseAnimals(animals);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -314,12 +302,6 @@ public class TrackerSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TrackerPackage.UN_APPLIED_TAGS: {
-				UnAppliedTags unAppliedTags = (UnAppliedTags)theEObject;
-				T result = caseUnAppliedTags(unAppliedTags);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -340,17 +322,17 @@ public class TrackerSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Animal Id</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tag</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Animal Id</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tag</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAnimalId(AnimalId object) {
+	public T caseTag(Tag object) {
 		return null;
 	}
 
@@ -505,21 +487,6 @@ public class TrackerSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Un Applied Tags</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Un Applied Tags</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUnAppliedTags(UnAppliedTags object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Premises</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -531,36 +498,6 @@ public class TrackerSwitch<T> {
 	 * @generated
 	 */
 	public T casePremises(Premises object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Event History</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Event History</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEventHistory(EventHistory object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Animals</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Animals</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAnimals(Animals object) {
 		return null;
 	}
 

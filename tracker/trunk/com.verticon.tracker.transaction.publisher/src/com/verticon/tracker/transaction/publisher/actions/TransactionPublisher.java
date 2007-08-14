@@ -1,7 +1,6 @@
 package com.verticon.tracker.transaction.publisher.actions;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.core.resources.IFile;
@@ -18,13 +17,9 @@ import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
-import com.verticon.tracker.Animals;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.transaction.publisher.views.EventPublisherView;
-import com.verticon.tracker.util.CommonUtilities;
 import com.verticon.transaction.editor.console.ConsoleUtil;
 
 public class TransactionPublisher {
@@ -32,7 +27,7 @@ public class TransactionPublisher {
 	private final TransactionalEditingDomain domain = 
 		TransactionalEditingDomain.Registry.INSTANCE.getEditingDomain("com.verticon.transaction.editor.TrackerEditingDomain");
 	
-	private  EventHistory eventHistoryTemplate;
+	private  Premises premisesTemplate;
 	
 	private  Animal defaultAnimal;
 	
@@ -52,7 +47,7 @@ public class TransactionPublisher {
 		syncTemplate();
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		   IResourceChangeListener listener = new IResourceChangeListener() {
-			  //FIXME Listen or react to changes only on the template file.
+			  //REWORK  Listen or react to changes only on the template file.
 		      public void resourceChanged(IResourceChangeEvent event) {
 		    	  log(new Date()+"\tWorkspace changed event detected.");
 		    	  try {
@@ -85,11 +80,10 @@ public class TransactionPublisher {
 		Animal animal = null;
 		
 		if(premisesTemplate.getAnimals()!=null){
-			Animals animals = premisesTemplate.getAnimals();
-			animal = (Animal)animals.getAnimal().get(0);
+			animal = (Animal)premisesTemplate.getAnimals().get(0);
 		}
 		this.defaultAnimal=animal;
-		this.eventHistoryTemplate=premisesTemplate.getEventHistory();
+		this.premisesTemplate=premisesTemplate;
 	}
 	
 	
@@ -155,16 +149,20 @@ public class TransactionPublisher {
 		
 	}
 	
-	
+	/**
+	 * REWORK implement
+	 * @param tag
+	 * @param premises
+	 */
 	@SuppressWarnings("unchecked")
 	private void addTemplateEventsToPremises( Long tag, Premises premises){
-//		log("Processing a premises");
-		AnimalId animalId = CommonUtilities.findAnimalId(tag, premises, defaultAnimal);
-		Collection<Event> events = CommonUtilities.createEvents(eventHistoryTemplate,  animalId,  premises);
-		for (Event event : events) {
-			log(event.getDateTime()+"\t"+event.getAin().getIdNumber()+'\t'+simpleName( event));
-			premises.getEventHistory().getEvents().add(event);
-		}
+		log("Processing a premises");
+//		AnimalId animalId = CommonUtilities.findAnimalId(tag, premises, defaultAnimal);
+//		Collection<Event> events = CommonUtilities.createEvents(eventHistoryTemplate,  animalId,  premises);
+//		for (Event event : events) {
+//			log(event.getDateTime()+"\t"+event.getAnimalId().getIdNumber()+'\t'+simpleName( event));
+//			premises.getEventHistory().getEvents().add(event);
+//		}
 	}
 	
 	

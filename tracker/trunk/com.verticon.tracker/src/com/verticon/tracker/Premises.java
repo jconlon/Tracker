@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -19,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.Premises#getPremisesId <em>Premises Id</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getEmailContact <em>Email Contact</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getAnimals <em>Animals</em>}</li>
- *   <li>{@link com.verticon.tracker.Premises#getEventHistory <em>Event History</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getUnAppliedTags <em>Un Applied Tags</em>}</li>
  * </ul>
  * </p>
@@ -90,81 +90,59 @@ public interface Premises extends EObject {
 	void setEmailContact(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Animals</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Animals</b></em>' containment reference list.
+	 * The list contents are of type {@link com.verticon.tracker.Animal}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Animals</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Animals</em>' containment reference.
-	 * @see #setAnimals(Animals)
+	 * @return the value of the '<em>Animals</em>' containment reference list.
 	 * @see com.verticon.tracker.TrackerPackage#getPremises_Animals()
-	 * @model containment="true" required="true"
+	 * @model containment="true" keys="idNumber"
 	 * @generated
 	 */
-	Animals getAnimals();
+	EList<Animal> getAnimals();
 
 	/**
-	 * Sets the value of the '{@link com.verticon.tracker.Premises#getAnimals <em>Animals</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Animals</em>' containment reference.
-	 * @see #getAnimals()
-	 * @generated
-	 */
-	void setAnimals(Animals value);
-
-	/**
-	 * Returns the value of the '<em><b>Event History</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Event History</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Event History</em>' containment reference.
-	 * @see #setEventHistory(EventHistory)
-	 * @see com.verticon.tracker.TrackerPackage#getPremises_EventHistory()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
-	EventHistory getEventHistory();
-
-	/**
-	 * Sets the value of the '{@link com.verticon.tracker.Premises#getEventHistory <em>Event History</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Event History</em>' containment reference.
-	 * @see #getEventHistory()
-	 * @generated
-	 */
-	void setEventHistory(EventHistory value);
-
-	/**
-	 * Returns the value of the '<em><b>Un Applied Tags</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Un Applied Tags</b></em>' containment reference list.
+	 * The list contents are of type {@link com.verticon.tracker.Tag}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Un Applied Tags</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Un Applied Tags</em>' containment reference.
-	 * @see #setUnAppliedTags(UnAppliedTags)
+	 * @return the value of the '<em>Un Applied Tags</em>' containment reference list.
 	 * @see com.verticon.tracker.TrackerPackage#getPremises_UnAppliedTags()
-	 * @model containment="true"
+	 * @model containment="true" keys="idNumber"
 	 * @generated
 	 */
-	UnAppliedTags getUnAppliedTags();
+	EList<Tag> getUnAppliedTags();
 
 	/**
-	 * Sets the value of the '{@link com.verticon.tracker.Premises#getUnAppliedTags <em>Un Applied Tags</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Un Applied Tags</em>' containment reference.
-	 * @see #getUnAppliedTags()
+	 * @model annotation="http://www.eclipse.org/ocl/examples/OCL body='if (animals -> notEmpty()) and (animals.tags->notEmpty())\n\tthen  animals.tags.events\n\telse Set{}\nendif'"
 	 * @generated
 	 */
-	void setUnAppliedTags(UnAppliedTags value);
+	EList<Event> eventHistory();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Animal findAnimal(long ains);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model ainsMany="false"
+	 * @generated
+	 */
+	void addTemplate(EList<Long> ains, Animal animalTemplate);
 
 } // Premises

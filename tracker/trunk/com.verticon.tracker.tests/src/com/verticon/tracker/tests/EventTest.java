@@ -13,6 +13,8 @@ import java.util.Date;
 import junit.framework.TestCase;
 
 import com.verticon.tracker.Event;
+import com.verticon.tracker.Tag;
+import com.verticon.tracker.TrackerFactory;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,12 +24,14 @@ import com.verticon.tracker.Event;
  * The following features are tested:
  * <ul>
  *   <li>{@link com.verticon.tracker.Event#getEventCode() <em>Event Code</em>}</li>
- *   <li>{@link com.verticon.tracker.Event#getId() <em>Id</em>}</li>
+ *   <li>{@link com.verticon.tracker.Event#getIdNumber() <em>Id Number</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
 public abstract class EventTest extends TestCase {
+	private static final long _123456789012345 = 123456789012345L;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -91,9 +95,16 @@ public abstract class EventTest extends TestCase {
 	 * @see com.verticon.tracker.Event#getId()
 	 * @generated NOT
 	 */
-	public void testGetId() {
+	public void testGetIdNumber() {
 		assertNotNull(getFixture());
-		assertEquals(0, getFixture().getId());
+		assertEquals(0,getFixture().getIdNumber());
+		
+		Tag ain = TrackerFactory.eINSTANCE.createTag();
+		ain.setIdNumber(_123456789012345);
+		ain.getEvents().add(getFixture());
+		
+		assertEquals(_123456789012345, getFixture().getIdNumber());
+		
 	}
 	
 	

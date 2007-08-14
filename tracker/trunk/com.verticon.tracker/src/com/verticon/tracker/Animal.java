@@ -6,9 +6,9 @@
  */
 package com.verticon.tracker;
 
-import java.math.BigInteger;
 import java.util.Date;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import com.verticon.tracker.util.Age;
@@ -23,7 +23,7 @@ import com.verticon.tracker.util.Age;
  * <ul>
  *   <li>{@link com.verticon.tracker.Animal#getBirthDate <em>Birth Date</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getSex <em>Sex</em>}</li>
- *   <li>{@link com.verticon.tracker.Animal#getAin <em>Ain</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getTags <em>Tags</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getSpecies <em>Species</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getIdNumber <em>Id Number</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getBreed <em>Breed</em>}</li>
@@ -35,6 +35,8 @@ import com.verticon.tracker.util.Age;
  *
  * @see com.verticon.tracker.TrackerPackage#getAnimal()
  * @model abstract="true"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='Can_be_Slaughtered_only_once Must_have_TagApplied_or_MovedIn'"
+ *        annotation="http://www.eclipse.org/ocl/examples/OCL Can_be_Slaughtered_only_once='-- An animal can only be slaughter once -- \nself.allEvents() -> select(e : Event | e.oclIsTypeOf(Slaughtered) ) ->size()<2' Must_have_TagApplied_or_MovedIn='-- An animal must have a TagApplied or a MovedIn event -- \nself.allEvents() -> select(e : Event | e.oclIsTypeOf(TagApplied) or e.oclIsTypeOf(MovedIn)  ) ->notEmpty()'"
  * @generated
  */
 public interface Animal extends EObject {
@@ -129,30 +131,20 @@ public interface Animal extends EObject {
 	boolean isSetSex();
 
 	/**
-	 * Returns the value of the '<em><b>Ain</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Tags</b></em>' containment reference list.
+	 * The list contents are of type {@link com.verticon.tracker.Tag}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Ain</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Tags</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Ain</em>' containment reference.
-	 * @see #setAin(AnimalId)
-	 * @see com.verticon.tracker.TrackerPackage#getAnimal_Ain()
-	 * @model containment="true" required="true"
+	 * @return the value of the '<em>Tags</em>' containment reference list.
+	 * @see com.verticon.tracker.TrackerPackage#getAnimal_Tags()
+	 * @model containment="true" keys="idNumber" required="true"
 	 * @generated
 	 */
-	AnimalId getAin();
-
-	/**
-	 * Sets the value of the '{@link com.verticon.tracker.Animal#getAin <em>Ain</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Ain</em>' containment reference.
-	 * @see #getAin()
-	 * @generated
-	 */
-	void setAin(AnimalId value);
+	EList<Tag> getTags();
 
 	/**
 	 * Returns the value of the '<em><b>Species</b></em>' attribute.
@@ -182,7 +174,7 @@ public interface Animal extends EObject {
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	BigInteger getIdNumber();
+	long getIdNumber();
 
 	/**
 	 * Returns the value of the '<em><b>Breed</b></em>' attribute.
@@ -256,5 +248,29 @@ public interface Animal extends EObject {
 	 * @generated
 	 */
 	String getSpeciesCode();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EList<Event> allEvents();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model eventTemplateMany="false"
+	 * @generated
+	 */
+	void addTemplate(EList<Event> eventTemplate);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Tag activeTag();
 
 } // Animal
