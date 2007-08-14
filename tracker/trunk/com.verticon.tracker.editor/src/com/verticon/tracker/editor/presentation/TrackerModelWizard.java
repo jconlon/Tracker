@@ -1,9 +1,3 @@
-/**
- * <copyright>
- * </copyright>
- *
- * $Id$
- */
 package com.verticon.tracker.editor.presentation;
 
 
@@ -15,7 +9,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.StringTokenizer;
-
+import org.eclipse.emf.common.CommonPlugin;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -23,25 +26,13 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.CommonPlugin;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
@@ -49,20 +40,20 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ISetSelectionTarget;
-
-import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
-
+import org.eclipse.core.runtime.Path;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
 
 /**
  * This is a simple wizard for creating a new model file.
@@ -173,14 +164,11 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 	 * Create a new model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	protected EObject createInitialModel() {
-//		EClass eClass = (EClass)trackerPackage.getEClassifier(initialObjectCreationPage.getInitialObjectName());
-//		EObject rootObject = trackerFactory.create(eClass);
-		Premises rootObject = trackerFactory.createPremises();
-		rootObject.setAnimals(trackerFactory.createAnimals());
-		rootObject.setEventHistory(trackerFactory.createEventHistory());
+		EClass eClass = (EClass)trackerPackage.getEClassifier(initialObjectCreationPage.getInitialObjectName());
+		EObject rootObject = trackerFactory.create(eClass);
 		return rootObject;
 	}
 
@@ -188,8 +176,9 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 	 * Do the work after everything is specified.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
+	@Override
 	public boolean performFinish() {
 		try {
 			// Remember the file.
@@ -200,6 +189,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 			//
 			WorkspaceModifyOperation operation =
 				new WorkspaceModifyOperation() {
+					@Override
 					protected void execute(IProgressMonitor progressMonitor) {
 						try {
 							// Create a resource set
@@ -224,7 +214,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 							// Save the contents of the resource to the file system.
 							//
 							Map<Object, Object> options = new HashMap<Object, Object>();
-//							options.put(XMLResource.OPTION_ENCODING, initialObjectCreationPage.getEncoding());
+							options.put(XMLResource.OPTION_ENCODING, initialObjectCreationPage.getEncoding());
 							resource.save(options);
 						}
 						catch (Exception exception) {
@@ -296,7 +286,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		@Override
+	@Override
 		protected boolean validatePage() {
 			if (super.validatePage()) {
 				// Make sure the file ends in ".tracker".
@@ -538,8 +528,9 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 	 * The framework calls this to create the contents of the wizard.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
+		@Override
 	public void addPages() {
 		// Create a page, set the title, and the initial model file name.
 		//
@@ -585,7 +576,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 		initialObjectCreationPage = new TrackerModelWizardInitialObjectCreationPage("Whatever2");
 		initialObjectCreationPage.setTitle(TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerModelWizard_label"));
 		initialObjectCreationPage.setDescription(TrackerReportEditorPlugin.INSTANCE.getString("_UI_Wizard_initial_object_description"));
-		//addPage(initialObjectCreationPage);
+		addPage(initialObjectCreationPage);
 	}
 
 	/**

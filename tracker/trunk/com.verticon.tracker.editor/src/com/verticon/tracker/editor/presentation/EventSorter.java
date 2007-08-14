@@ -89,12 +89,7 @@ public class EventSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	private int compareAins(Event event1, Event event2) {
-		String ain1 = event1.getAin()==null?"":event1.getAin().getIdNumber();
-		String ain2 = event2.getAin()==null?"":event2.getAin().getIdNumber();
-		return getComparator().compare(
-				ain1, 
-				ain2);
-		
+		return new Long(event1.getIdNumber()).compareTo(event2.getIdNumber());
 	}
 
 	/**

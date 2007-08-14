@@ -7,24 +7,21 @@
 package com.verticon.tracker.util;
 
 import com.verticon.tracker.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.AnimalMissing;
-import com.verticon.tracker.Animals;
 import com.verticon.tracker.Bovine;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.BovineDairy;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.Exported;
+import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
 import com.verticon.tracker.LostTag;
@@ -35,10 +32,13 @@ import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Slaughtered;
+import com.verticon.tracker.Swine;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TagAllocated;
 import com.verticon.tracker.TagApplied;
 import com.verticon.tracker.TagRetired;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.WeighIn;
 
 /**
  * <!-- begin-user-doc -->
@@ -108,8 +108,8 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 				return createAnimalAdapter();
 			}
 			@Override
-			public Adapter caseAnimalId(AnimalId object) {
-				return createAnimalIdAdapter();
+			public Adapter caseTag(Tag object) {
+				return createTagAdapter();
 			}
 			@Override
 			public Adapter caseBovine(Bovine object) {
@@ -126,14 +126,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePremises(Premises object) {
 				return createPremisesAdapter();
-			}
-			@Override
-			public Adapter caseEventHistory(EventHistory object) {
-				return createEventHistoryAdapter();
-			}
-			@Override
-			public Adapter caseAnimals(Animals object) {
-				return createAnimalsAdapter();
 			}
 			@Override
 			public Adapter caseBovineBeef(BovineBeef object) {
@@ -216,10 +208,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 				return createSwineAdapter();
 			}
 			@Override
-			public Adapter caseUnAppliedTags(UnAppliedTags object) {
-				return createUnAppliedTagsAdapter();
-			}
-			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -254,16 +242,16 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.AnimalId <em>Animal Id</em>}'.
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.Tag <em>Tag</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see com.verticon.tracker.AnimalId
+	 * @see com.verticon.tracker.Tag
 	 * @generated
 	 */
-	public Adapter createAnimalIdAdapter() {
+	public Adapter createTagAdapter() {
 		return null;
 	}
 
@@ -408,20 +396,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.UnAppliedTags <em>Un Applied Tags</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.verticon.tracker.UnAppliedTags
-	 * @generated
-	 */
-	public Adapter createUnAppliedTagsAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.Premises <em>Premises</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -432,34 +406,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPremisesAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.EventHistory <em>Event History</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.verticon.tracker.EventHistory
-	 * @generated
-	 */
-	public Adapter createEventHistoryAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.Animals <em>Animals</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.verticon.tracker.Animals
-	 * @generated
-	 */
-	public Adapter createAnimalsAdapter() {
 		return null;
 	}
 

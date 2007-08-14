@@ -8,7 +8,6 @@ package com.verticon.tracker.edit.provider;
 
 
 import com.verticon.tracker.Bovine;
-
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;

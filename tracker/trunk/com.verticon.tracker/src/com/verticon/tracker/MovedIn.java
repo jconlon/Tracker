@@ -20,7 +20,8 @@ package com.verticon.tracker;
  * </p>
  *
  * @see com.verticon.tracker.TrackerPackage#getMovedIn()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='SourcePin_can_not_be_same_as_the_local_premisesId '"
+ *        annotation="http://www.eclipse.org/ocl/examples/OCL SourcePin_can_not_be_same_as_the_local_premisesId='-- The MovedIn sourcePin can not be the same as the local premisesId. --\nPremises.allInstances() -> select(premisesId=self.sourcePin) -> isEmpty()'"
  * @generated
  */
 public interface MovedIn extends Event {

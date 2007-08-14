@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
 
-import com.verticon.tracker.AnimalId;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.util.TrackerResourceFactoryImpl;
@@ -66,7 +66,7 @@ public class TrackerExample {
 			System.out.println("Enter a list of file paths or URIs that have content like this:");
 			try {
 				Resource resource = resourceSet.createResource(URI.createURI("http:///My.tracker"));
-				AnimalId root = TrackerFactory.eINSTANCE.createAnimalId();
+				Tag root = TrackerFactory.eINSTANCE.createTag();
 				resource.getContents().add(root);
 				resource.save(System.out, null);
 			}

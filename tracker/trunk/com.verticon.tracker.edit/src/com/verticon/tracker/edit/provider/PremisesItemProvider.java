@@ -134,7 +134,6 @@ public class PremisesItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TrackerPackage.Literals.PREMISES__ANIMALS);
-			childrenFeatures.add(TrackerPackage.Literals.PREMISES__EVENT_HISTORY);
 			childrenFeatures.add(TrackerPackage.Literals.PREMISES__UN_APPLIED_TAGS);
 		}
 		return childrenFeatures;
@@ -195,7 +194,6 @@ public class PremisesItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TrackerPackage.PREMISES__ANIMALS:
-			case TrackerPackage.PREMISES__EVENT_HISTORY:
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -217,17 +215,27 @@ public class PremisesItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.PREMISES__ANIMALS,
-				 TrackerFactory.eINSTANCE.createAnimals()));
+				 TrackerFactory.eINSTANCE.createBovineBeef()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TrackerPackage.Literals.PREMISES__EVENT_HISTORY,
-				 TrackerFactory.eINSTANCE.createEventHistory()));
+				(TrackerPackage.Literals.PREMISES__ANIMALS,
+				 TrackerFactory.eINSTANCE.createOvine()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TrackerPackage.Literals.PREMISES__ANIMALS,
+				 TrackerFactory.eINSTANCE.createBovineBison()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TrackerPackage.Literals.PREMISES__ANIMALS,
+				 TrackerFactory.eINSTANCE.createSwine()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.PREMISES__UN_APPLIED_TAGS,
-				 TrackerFactory.eINSTANCE.createUnAppliedTags()));
+				 TrackerFactory.eINSTANCE.createTag()));
 	}
 
 	/**

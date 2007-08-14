@@ -90,6 +90,7 @@ import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.dnd.DND;
@@ -126,10 +127,7 @@ import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
-import com.verticon.tracker.Animals;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
@@ -998,8 +996,8 @@ public class TrackerEditor
 
 				selectionViewer = (TreeViewer)viewerPane.getViewer();
 				selectionViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-
-				selectionViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory));
+              
+				selectionViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, selectionViewer));
 				//Changed to show the Premises as the root
 //				selectionViewer.setInput(editingDomain.getResourceSet());
 //				viewerPane.setTitle(editingDomain.getResourceSet());
@@ -1035,7 +1033,7 @@ public class TrackerEditor
 				parentViewer = (TreeViewer)viewerPane.getViewer();
 				parentViewer.setAutoExpandLevel(30);
 				parentViewer.setContentProvider(new ReverseAdapterFactoryContentProvider(adapterFactory));
-				parentViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+				parentViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, parentViewer));
 
 				createContextMenuFor(parentViewer);
 				int pageIndex = addPage(viewerPane.getControl());
@@ -1058,7 +1056,7 @@ public class TrackerEditor
 				viewerPane.createControl(getContainer());
 				listViewer = (ListViewer)viewerPane.getViewer();
 				listViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-				listViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+				listViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, listViewer));
 
 				createContextMenuFor(listViewer);
 				int pageIndex = addPage(viewerPane.getControl());
@@ -1081,7 +1079,7 @@ public class TrackerEditor
 				viewerPane.createControl(getContainer());
 				treeViewer = (TreeViewer)viewerPane.getViewer();
 				treeViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-				treeViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+				treeViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, treeViewer));
 
 				new AdapterFactoryTreeEditor(treeViewer.getTree(), adapterFactory);
 
@@ -1101,6 +1099,7 @@ public class TrackerEditor
 						public void requestActivation() {
 							super.requestActivation();
 							setCurrentViewerPane(this);
+							this.getViewer().refresh();
 						}
 					};
 				viewerPane.createControl(getContainer());
@@ -1113,8 +1112,19 @@ public class TrackerEditor
 				table.setLinesVisible(true);
 				eventsTableViewer.setUseHashlookup(true);
 				
-				//FIXME Reduce side of Events BIRTHDATE column? - chaned from 3 50. Does it work
+				//TODO Reduce size of Events BIRTHDATE column? - changed from 3 50. Does it work
 				//TODO Make sure listeners are disposed of properly
+				//Event
+				TableColumn eventColumn = new TableColumn(table, SWT.NONE);
+				layout.addColumnData(new ColumnWeightData(2, 90, true));
+				eventColumn.setText(getString("_UI_EventColumn_label"));
+				eventColumn.setResizable(true);
+				eventColumn.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e) {
+						eventsTableViewer.setSorter(new ViewerSorter());
+					}
+				});
+				
 				//DateTime
 				TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
 				layout.addColumnData(new ColumnWeightData(2, 70, true));
@@ -1149,37 +1159,39 @@ public class TrackerEditor
 				 });
 				
 
-				eventsTableViewer.setColumnProperties(new String [] {"a", "b", "c"});
+				eventsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d"});
 //				eventsTableViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
 				eventsTableViewer.setContentProvider(
 				        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
 				        {
 				          public Object [] getElements(Object object)
 				          {
-				            return ((EventHistory)object).getEvents().toArray();
+				            return ((Premises)object).eventHistory().toArray();
 				          }
 				          public void notifyChanged(Notification notification)
 				          {
-				            switch (notification.getEventType())
-				            {
-				              case Notification.ADD:
-				              case Notification.ADD_MANY:
-				                if (notification.getFeature() != TrackerPackage.eINSTANCE.getEventHistory_Events()) {
-				                	return;
-				                }
-				            }
-				            super.notifyChanged(notification);
+				        	  switch (notification.getEventType())
+				        	  {
+				        	  case Notification.ADD:
+				        	  case Notification.ADD_MANY:
+				        		  if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
+				        			  return;
+				        		  }
+				        	  }
+				        	  super.notifyChanged(notification);
+				        	  this.viewer.refresh();
 				          }
 				        });
-				eventsTableViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+				eventsTableViewer.setLabelProvider(
+						new AdapterFactoryLabelProvider(adapterFactory));
 //				14.2.2
 			      Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
 			      Object rootObject = resource.getContents().get(0);
 			      if (rootObject instanceof Premises)
 			      {
-			    	EventHistory target = ((Premises)rootObject).getEventHistory();
-			    	eventsTableViewer.setInput(target);
-			        viewerPane.setTitle(target);
+			    	
+			    	eventsTableViewer.setInput((Premises)rootObject);
+			        viewerPane.setTitle((Premises)rootObject);
 			      }
 				createContextMenuFor(eventsTableViewer);
 				int pageIndex = addPage(viewerPane.getControl());
@@ -1210,6 +1222,17 @@ public class TrackerEditor
 				
 				//TODO Make sure listeners are disposed of properly
 				//ENHANCE add ANIMALS FILTERING 
+				//Event
+				TableColumn animalColumn = new TableColumn(table, SWT.NONE);
+				layout.addColumnData(new ColumnWeightData(2, 70, true));
+				animalColumn.setText(getString("_UI_AnimalColumn_label"));
+				animalColumn.setResizable(true);
+				animalColumn.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e) {
+						eventsTableViewer.setSorter(new ViewerSorter());
+					}
+				});
+				
                 //Ain 
 				TableColumn ainColumn = new TableColumn(table, SWT.NONE);
 				layout.addColumnData(new ColumnWeightData(3, 100, true));
@@ -1278,7 +1301,7 @@ public class TrackerEditor
 				        {
 				          public Object [] getElements(Object object)
 				          {
-				            return ((Animals)object).getAnimal().toArray();
+				            return ((Premises)object).getAnimals().toArray();
 				          }
 				          public void notifyChanged(Notification notification)
 				          {
@@ -1286,9 +1309,12 @@ public class TrackerEditor
 				            {
 				              case Notification.ADD:
 				              case Notification.ADD_MANY:
-				                if (notification.getFeature() != TrackerPackage.eINSTANCE.getAnimals_Animal()) return;
+				            	if (notification.getFeature() != TrackerPackage.eINSTANCE.getPremises_Animals()){
+				            		return;
+				                }
 				            }
 				            super.notifyChanged(notification);
+				            this.viewer.refresh();
 				          }
 				        });
 				animalsTableViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
@@ -1298,9 +1324,8 @@ public class TrackerEditor
 			      Object rootObject = resource.getContents().get(0);
 			      if (rootObject instanceof Premises)
 			      {
-			    	Animals target = ((Premises)rootObject).getAnimals();
-			    	animalsTableViewer.setInput(target);
-			        viewerPane.setTitle(target);
+			    	animalsTableViewer.setInput((Premises)rootObject);
+			        viewerPane.setTitle((Premises)rootObject);
 			      }
 			      
 				createContextMenuFor(animalsTableViewer);
@@ -1342,7 +1367,7 @@ public class TrackerEditor
 
 				treeViewerWithColumns.setColumnProperties(new String [] {"a", "b"});
 				treeViewerWithColumns.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-				treeViewerWithColumns.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+				treeViewerWithColumns.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, treeViewerWithColumns));
 
 				createContextMenuFor(treeViewerWithColumns);
 				int pageIndex = addPage(viewerPane.getControl());
@@ -1569,8 +1594,7 @@ public class TrackerEditor
 					Resource resource = (Resource)resourceSet.getResources().get(0);
 					Object rootObject = resource.getContents().get(0);
 					if (rootObject instanceof Premises){
-						Animals target = ((Premises)rootObject).getAnimals();
-						currentViewerPane.getViewer().setSelection(new StructuredSelection(target));
+						currentViewerPane.getViewer().setSelection(new StructuredSelection(((Premises)rootObject).getAnimals()));
 					}
 				// Handle eventsTableViewer
 				} else if (currentViewerPane.getViewer() == eventsTableViewer){
@@ -1578,30 +1602,15 @@ public class TrackerEditor
 					Resource resource = (Resource)resourceSet.getResources().get(0);
 					Object rootObject = resource.getContents().get(0);
 					if (rootObject instanceof Premises){
-						EventHistory target = ((Premises)rootObject).getEventHistory();
-						currentViewerPane.getViewer().setSelection(new StructuredSelection(target));
+						currentViewerPane.getViewer().setSelection(new StructuredSelection(((Premises)rootObject).eventHistory()));
 					}
 					
 				} else if (currentViewerPane.getViewer() == listViewer
 						&& selectedElement instanceof Animal) // 14.2.2
 				{
 					Animal selectedAnimal = (Animal) selectedElement;
-					Collection<Event> animalEvents = null;
-					if (selectedAnimal.getAin() == null) {
-						animalEvents = Collections.emptyList();
-					} else {
-						animalEvents = new ArrayList<Event>();
-						AnimalId ain = selectedAnimal.getAin();
-						Animals animals =(Animals)editingDomain.getParent(selectedAnimal);
-						Premises premises = (Premises)editingDomain.getParent(animals);
-						EventHistory eventHistory = premises.getEventHistory();
-						for (Object object : eventHistory.getEvents()) {
-							Event event = (Event) object;
-							if (event.getAin() == ain) {
-								animalEvents.add(event);
-							}
-						}
-					}
+					Collection<Event> animalEvents = selectedAnimal.allEvents();
+						
 					//TODO Create a more generic gif for Events
 					ItemProvider listRoot = new ItemProvider("Animal Events for AIN: "+selectedAnimal.getIdNumber(),
 							TrackerReportEditPlugin.INSTANCE

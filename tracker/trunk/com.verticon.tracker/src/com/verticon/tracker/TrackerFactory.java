@@ -33,13 +33,13 @@ public interface TrackerFactory extends EFactory {
 	TrackerFactory eINSTANCE = com.verticon.tracker.impl.TrackerFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Animal Id</em>'.
+	 * Returns a new object of class '<em>Tag</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Animal Id</em>'.
+	 * @return a new object of class '<em>Tag</em>'.
 	 * @generated
 	 */
-	AnimalId createAnimalId();
+	Tag createTag();
 
 	/**
 	 * Returns a new object of class '<em>Tag Allocated</em>'.
@@ -114,15 +114,6 @@ public interface TrackerFactory extends EFactory {
 	Swine createSwine();
 
 	/**
-	 * Returns a new object of class '<em>Un Applied Tags</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Un Applied Tags</em>'.
-	 * @generated
-	 */
-	UnAppliedTags createUnAppliedTags();
-
-	/**
 	 * Returns a new object of class '<em>Premises</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -130,24 +121,6 @@ public interface TrackerFactory extends EFactory {
 	 * @generated
 	 */
 	Premises createPremises();
-
-	/**
-	 * Returns a new object of class '<em>Event History</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Event History</em>'.
-	 * @generated
-	 */
-	EventHistory createEventHistory();
-
-	/**
-	 * Returns a new object of class '<em>Animals</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Animals</em>'.
-	 * @generated
-	 */
-	Animals createAnimals();
 
 	/**
 	 * Returns a new object of class '<em>Bovine Beef</em>'.

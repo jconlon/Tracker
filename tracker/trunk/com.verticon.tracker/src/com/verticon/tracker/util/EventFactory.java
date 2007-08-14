@@ -2,14 +2,9 @@ package com.verticon.tracker.util;
 
 
 
-import java.util.List;
-
-import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
-import com.verticon.tracker.Premises;
 import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Slaughtered;
 import com.verticon.tracker.TagAllocated;
@@ -53,14 +48,5 @@ public class EventFactory {
 		return event;
 	}
     
-    public static final AnimalId findAnimalId(Long tag, Premises premises){
-		List<Animal> elist = premises.getAnimals().getAnimal();
-		for (Animal animal : elist) {
-			if(animal.getIdNumber().longValue()==tag){
-				return animal.getAin();
-			}
-		}
-		return null;
-	}
 
 }

@@ -28,8 +28,8 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 
 /**
@@ -75,12 +75,11 @@ public class EventItemProvider
 			super.getPropertyDescriptors(object);
 
 			addDateTimePropertyDescriptor(object);
-			addAinPropertyDescriptor(object);
 			addEventCodePropertyDescriptor(object);
 			addElectronicallyReadPropertyDescriptor(object);
 			addCorrectionPropertyDescriptor(object);
 			addCommentsPropertyDescriptor(object);
-			addIdPropertyDescriptor(object);
+			addIdNumberPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -107,27 +106,27 @@ public class EventItemProvider
 				 null));
 	}
 
-	/**
-	 * This adds a property descriptor for the Ain feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAinPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Event_ain_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Event_ain_feature", "_UI_Event_type"),
-				 TrackerPackage.Literals.EVENT__AIN,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
+//	/**
+//	 * This adds a property descriptor for the Ain feature.
+//	 * <!-- begin-user-doc -->
+//	 * <!-- end-user-doc -->
+//	 * @generated
+//	 */
+//	protected void addAinPropertyDescriptor(Object object) {
+//		itemPropertyDescriptors.add
+//			(createItemPropertyDescriptor
+//				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+//				 getResourceLocator(),
+//				 getString("_UI_Event_ain_feature"),
+//				 getString("_UI_PropertyDescriptor_description", "_UI_Event_ain_feature", "_UI_Event_type"),
+//				 TrackerPackage.Literals.EVENT__AIN,
+//				 true,
+//				 false,
+//				 true,
+//				 null,
+//				 null,
+//				 null));
+//	}
 
 	/**
 	 * This adds a property descriptor for the Event Code feature.
@@ -218,19 +217,19 @@ public class EventItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Id feature.
+	 * This adds a property descriptor for the Id Number feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIdPropertyDescriptor(Object object) {
+	protected void addIdNumberPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Event_id_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Event_id_feature", "_UI_Event_type"),
-				 TrackerPackage.Literals.EVENT__ID,
+				 getString("_UI_Event_idNumber_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Event_idNumber_feature", "_UI_Event_type"),
+				 TrackerPackage.Literals.EVENT__ID_NUMBER,
 				 false,
 				 false,
 				 false,
@@ -261,14 +260,14 @@ public class EventItemProvider
 		return getString("_UI_"+resourceName+"_type") ;
 	}
 
-	/**
+/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
 	 * <!-- begin-user-doc -->
-	 * Modified by adding a EVENT_AIN notification to get the viewers to update on AIN changes.
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
+	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
@@ -278,13 +277,13 @@ public class EventItemProvider
 			case TrackerPackage.EVENT__ELECTRONICALLY_READ:
 			case TrackerPackage.EVENT__CORRECTION:
 			case TrackerPackage.EVENT__COMMENTS:
-			case TrackerPackage.EVENT__ID:
-			case TrackerPackage.EVENT__AIN:
+			case TrackerPackage.EVENT__ID_NUMBER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
 		super.notifyChanged(notification);
 	}
+
 
 	/**
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
@@ -317,20 +316,21 @@ public class EventItemProvider
 	  {
 	    Event event = (Event)object;
 	    switch (columnIndex){
-	    	case 0: 
+	    	case 0: return getText(object);
+	    	case 1: 
 	    		if(event.getDateTime()!=null){
 	    			DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss z");
 	    			return df.format(event.getDateTime());
 	    		}
 	    		return null;
-	    	case 1: 
-	    		AnimalId animalId = ((Event)object).getAin();
+	    	case 2: 
+	    		Tag animalId = ((Event)object).getTag();
 	    		if(animalId==null) return "";
 	    		IItemLabelProvider itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(
 	    				animalId, IItemLabelProvider.class);
 	    		
 	    		return itemLabelProvider.getText(animalId);
-	    	case 2: 
+	    	case 3: 
 	    		String simpleName = object.getClass().getSimpleName();
 	    		return simpleName.substring(0,simpleName.indexOf("Impl"));
 	    	
@@ -346,9 +346,9 @@ public class EventItemProvider
 	public Object getColumnImage(Object object, int columnIndex) // 14.2.2
 	  {
 		switch (columnIndex){
-    	case 0: return null;
+    	case 0: return getImage(object);
     	default :
-    		return getImage(object);
+    		return null;
 		}
 	    
 	  }

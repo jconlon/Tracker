@@ -4,10 +4,12 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright 2007 Verticon, Inc. All Rights Reserved."
     modelDirectory="/com.verticon.tracker/src" editDirectory="/com.verticon.tracker.edit/src"
     editorDirectory="/com.verticon.tracker.editor/src" modelPluginID="com.verticon.tracker"
-    modelName="TrackerReport" editorPluginClass="com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin"
+    templateDirectory="com.verticon.tracker/templates" dynamicTemplates="true" modelName="TrackerReport"
+    editorPluginClass="com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin"
     testsDirectory="/com.verticon.tracker.tests/src" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="5.0">
   <foreignModel>tracker.ecore</foreignModel>
+  <modelPluginVariables>OCL_ECORE=org.eclipse.ocl.ecore</modelPluginVariables>
   <genPackages prefix="Tracker" basePackage="com.verticon" resource="XML" disposableProviderFactory="true"
       providerPackageSuffix="edit.provider" presentationPackageSuffix="editor.presentation"
       ecorePackage="tracker.ecore#/">
@@ -245,42 +247,48 @@
     <genClasses provider="Stateful" ecoreClass="tracker.ecore#//Animal" labelFeature="#//tracker/Animal/species">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/birthDate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/sex"/>
-      <genFeatures property="None" children="true" createChild="true" propertyCategory=""
-          propertyDescription="" ecoreFeature="ecore:EReference tracker.ecore#//Animal/ain"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Animal/tags"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/species"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/idNumber"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/breed"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/age"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/sexCode"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/speciesCode"/>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/allEvents"/>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/addTemplate">
+        <genParameters ecoreParameter="tracker.ecore#//Animal/addTemplate/eventTemplate"/>
+      </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/activeTag"/>
     </genClasses>
-    <genClasses ecoreClass="tracker.ecore#//AnimalId">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//AnimalId/idNumber"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//AnimalId/usainNumberUsed"/>
+    <genClasses ecoreClass="tracker.ecore#//Tag">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/idNumber"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/usainNumberUsed"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Tag/events"/>
     </genClasses>
     <genClasses image="false" ecoreClass="tracker.ecore#//Bovine"/>
     <genClasses image="false" ecoreClass="tracker.ecore#//Event">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/dateTime"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//Event/ain"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/eventCode"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/electronicallyRead"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/correction"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/comments"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/id"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/idNumber"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tracker.ecore#//Event/tag"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//TagAllocated"/>
     <genClasses ecoreClass="tracker.ecore#//Premises">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/premisesId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/emailContact"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/animals"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/eventHistory"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/unAppliedTags"/>
-    </genClasses>
-    <genClasses ecoreClass="tracker.ecore#//EventHistory">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//EventHistory/events"/>
-    </genClasses>
-    <genClasses ecoreClass="tracker.ecore#//Animals">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Animals/animal"/>
+      <genOperations ecoreOperation="tracker.ecore#//Premises/eventHistory"/>
+      <genOperations ecoreOperation="tracker.ecore#//Premises/findAnimal">
+        <genParameters ecoreParameter="tracker.ecore#//Premises/findAnimal/ains"/>
+      </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//Premises/addTemplate">
+        <genParameters ecoreParameter="tracker.ecore#//Premises/addTemplate/ains"/>
+        <genParameters ecoreParameter="tracker.ecore#//Premises/addTemplate/animalTemplate"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//BovineBeef" labelFeature="#//tracker/Animal/idNumber">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//BovineBeef/beefBreed"/>
@@ -325,9 +333,6 @@
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Swine">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Swine/swineBreed"/>
-    </genClasses>
-    <genClasses ecoreClass="tracker.ecore#//UnAppliedTags">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//UnAppliedTags/ain"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

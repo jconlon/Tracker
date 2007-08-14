@@ -28,7 +28,6 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalId;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 
@@ -174,7 +173,7 @@ public class AnimalItemProvider
 				 false,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -267,7 +266,7 @@ public class AnimalItemProvider
 				 null));
 	}
 
-	/**
+/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -279,10 +278,11 @@ public class AnimalItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TrackerPackage.Literals.ANIMAL__AIN);
+			childrenFeatures.add(TrackerPackage.Literals.ANIMAL__TAGS);
 		}
 		return childrenFeatures;
 	}
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -329,8 +329,7 @@ public class AnimalItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		AnimalId labelValue = ((Animal)object).getAin();
-		String label = labelValue == null ? null : labelValue.getIdNumber();
+		String label = Long.toString(((Animal)object).getIdNumber());
 		String simpleName = object.getClass().getSimpleName();
 		String resourceName = simpleName.substring(0,simpleName.indexOf("Impl"));
 		return label == null || label.length() == 0 ?
@@ -360,7 +359,7 @@ public class AnimalItemProvider
 			case TrackerPackage.ANIMAL__SPECIES_CODE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case TrackerPackage.ANIMAL__AIN:
+			case TrackerPackage.ANIMAL__TAGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -380,8 +379,8 @@ public class AnimalItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TrackerPackage.Literals.ANIMAL__AIN,
-				 TrackerFactory.eINSTANCE.createAnimalId()));
+				(TrackerPackage.Literals.ANIMAL__TAGS,
+				 TrackerFactory.eINSTANCE.createTag()));
 	}
 
 	/**
@@ -403,18 +402,19 @@ public class AnimalItemProvider
 	  {
 	    Animal animal = (Animal)object;
 	    switch (columnIndex){
-	    	case 0: return animal.getIdNumber().toString();
-	    	case 1: return animal.getSpecies();
-	    	case 2: return animal.getSex()==null?"unspecified":animal.getSex().toString();
-	    	case 3: return animal.getBreed()==null?"unspecified":animal.getBreed();
-	    	case 4: 
+	    	case 0: return getText(object);
+	    	case 1: return Long.toString(((Animal)object).getIdNumber());
+	    	case 2: return animal.getSpecies();
+	    	case 3: return animal.getSex()==null?"unspecified":animal.getSex().toString();
+	    	case 4: return animal.getBreed()==null?"unspecified":animal.getBreed();
+	    	case 5: 
 	    		if(animal.getBirthDate()!=null){
 	    			DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
 //	    			SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
 	    			return df.format(animal.getBirthDate());
 	    		}
 	    		return null;
-	    	case 5: 
+	    	case 6: 
 	    		if(animal.getAge()!=null){
 	    			return animal.getAge().getYears() + " years, "
 					+ animal.getAge().getMonths() + " month, " + animal.getAge().getDays()
@@ -432,9 +432,9 @@ public class AnimalItemProvider
 	public Object getColumnImage(Object object, int columnIndex) // 14.2.2
 	  {
 		switch (columnIndex){
-    	case 0: return null;
+    	case 0: return getImage(object);
     	default :
-    		return getImage(object);
+    		return null ;
 		}
 	    
 	  }
