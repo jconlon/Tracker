@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %Plugin.name
+Bundle-SymbolicName: com.verticon.tracker.ocl.validation;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: com.verticon.tracker.ocl.validation.Activator
+Bundle-Vendor: %Plugin.providerName
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.validation
+Eclipse-LazyStart: true
