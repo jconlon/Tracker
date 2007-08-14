@@ -4,3 +4,5 @@ the Verticon repository.  If in the future space becomes an issue, the svnadmin 
 dumpfilter can be used to eliminate these externals.  See:
 http://svnbook.red-bean.com/en/1.0/ch05s03.html#svn-ch-5-sect-3.1.3
 for details.
+
+See also the book Pragmatic Version Control page 143 on use of externals.
