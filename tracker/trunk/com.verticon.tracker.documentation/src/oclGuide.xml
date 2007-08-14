@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
+<chapter label="Tracker OCL">
+	<title>Query and select Tracker objects with the Object Constraint Language</title>
+	<section >
+		<title>OCL Introduction</title>
+	<para>
+		The Object Constraint Language,
+		<acronym>OCL</acronym>
+		is a declarative text language for describing rules that apply
+		to document models. Within Tracker, documents model an
+		Agricultural Premises that contain Animals and an EventHistory
+		of significant Events that happen to these Animals.
+	</para>
+	<para>
+		Within Tracker Editors <acronym>OCL</acronym>
+		rules can be used to both query and select specific information about the
+		Animals and the Events that have taken place on the Premises.
+	</para>
+	</section>
+	<section >
+		<title>OCL Interpreter Examples</title>
+		<para>
+			The following are example
+			<acronym>OCL</acronym>
+			Interpreter rules that can be used for the querying Tracker
+			documents.  All examples use the Context Premises.
+			
+			<example>
+				<title>
+					Listing of animals and the number of events associated with each.
+				</title>
+				<programlisting>
+animals.animal -> collect(
+	a: Animal | Tuple {
+		animal: Animal = a,
+		numEvents: Integer = Event.allInstances()->select(ain=a.ain) ->size()
+	}
+)
+  				</programlisting>
+  			</example>
+  			<example>
+				<title>
+					Listing of animals and the set of events associated with each.
+				</title>
+				<programlisting>
+animals.animal -> collect(
+	a: Animal | Tuple {
+		ain: AnimalId = a.ain,
+		events: Set(Event) = Event.allInstances()->select(ain=a.ain)
+	}
+)
+  				</programlisting>
+  			</example>
+  			<example>
+				<title>
+					Listing of animalIds and the WeighIn events
+					associated with each.  
+				</title>
+				<programlisting>
+animals.animal -> collect(
+	a: Animal | Tuple {
+		ain: AnimalId = a.ain,
+		weighIns: Set(WeighIn) = WeighIn.allInstances()->select(ain=a.ain)
+	}
+)
+  				</programlisting>
+  			</example>
+  			<example>
+				<title>
+					Listing of animalIds and the Weights
+					associated with each. 
+				</title>
+				<programlisting>
+animals.animal -> collect(
+	a: Animal | Tuple {
+		ain: AnimalId = a.ain,
+		weighIns: Set(Integer) = WeighIn.allInstances()->select(ain=a.ain)->collect(wi:WeighIn | wi.weight) ->asSet()
+	}
+)
+  				</programlisting>
+  			</example>
+  			
+  	
+  	</para>
+  </section>
+
+</chapter>
