@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<project name="MyHelpPlugin" default="prepare">
+    <description>
+        Prepares the Help plug-in project by copying the HTML help files
+        from the DocBook XML project into this one.
+    </description>
+    
+    <property name="docbook.project.dir" value="../com.verticon.tracker.documentation" />
+    <property name="html.dir" value="html" />
+    <property name="html.src.dir" value="${docbook.project.dir}/doc" />
+    
+    <fileset id="html-files" dir="${html.src.dir}">
+        <include name="**/*.html" />
+        <include name="**/*.css" />
+    </fileset>
+    
+    <target name="prepare">
+        <copy todir="${html.dir}">
+            <fileset refid="html-files" />
+        </copy>
+    </target>
+</project>
