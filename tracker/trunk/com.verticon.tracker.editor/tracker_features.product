@@ -89,17 +89,21 @@ that can be installed and used with other Eclipse (3.2)-based offerings.
 
    <features>
       <feature id="org.eclipse.platform" version="3.3.0.v20070612-_19UEkLEzwsdF9jSqQ-G"/>
+      <feature id="org.eclipse.equinox.executable" version="3.3.0.v20070606-7C--E9IgKLWLDUE"/>
       <feature id="org.eclipse.emf" version="2.3.0.v200706262000"/>
-      <feature id="org.eclipse.emf.ocl" version="1.1.0.v200706071450-10-7w311817312619"/>
+      <feature id="org.eclipse.emf.common" version="2.3.0.v200707312030"/>
+      <feature id="org.eclipse.emf.common.ui" version="2.3.0.v200707312030"/>
+      <feature id="org.eclipse.emf.ecore" version="2.3.1.v200707312030"/>
+      <feature id="org.eclipse.emf.ecore.edit" version="2.3.0.v200707312030"/>
+      <feature id="org.eclipse.emf.ecore.editor" version="2.3.0.v200707312030"/>
+      <feature id="org.eclipse.emf.edit" version="2.3.1.v200707312030"/>
+      <feature id="org.eclipse.emf.edit.ui" version="2.3.0.v200707312030"/>
       <feature id="org.eclipse.emf.query" version="1.1.0.v200706071712-10-7w311817182823"/>
       <feature id="org.eclipse.emf.query.ocl" version="1.1.0.v200706071712-10-7w311817182823"/>
       <feature id="org.eclipse.emf.query.doc" version="1.1.0.v200706071712-21-8s733G3E4C5B76"/>
       <feature id="org.eclipse.emf.transaction" version="1.1.0.v200706071723-208Y8s733G3E4C5B96"/>
       <feature id="org.eclipse.emf.validation" version="1.1.0.v200706071520-318Y9oA55P5M5P8JA5"/>
       <feature id="org.eclipse.emf.validation.doc" version="1.1.0.v200706071520-21-8s733G3E4C5_88"/>
-      <feature id="org.eclipse.emf.workspace.doc" version="1.1.0.v200706071723-10-7w311817182834"/>
-      <feature id="org.eclipse.emf.workspace" version="1.1.0.v200706071723-208Y8s733G3E4C5B96"/>
-      <feature id="org.eclipse.equinox.executable" version="3.3.0.v20070606-7C--E9IgKLWLDUE"/>
       <feature id="com.verticon.tracker.editor" version="1.0.0"/>
       <feature id="com.verticon.tracker.export.wlic" version="1.0.0"/>
       <feature id="com.verticon.tracker.export.xls" version="1.0.0"/>
@@ -107,8 +111,13 @@ that can be installed and used with other Eclipse (3.2)-based offerings.
       <feature id="com.verticon.tracker.ocl.validation" version="1.0.0"/>
       <feature id="com.verticon.tracker.transaction.editor" version="1.0.0"/>
       <feature id="com.verticon.tracker.transaction.publisher" version="1.0.0"/>
-      <feature id="org.eclipse.ocl" version="1.1.0.v200706071450-32-9oA55P5M8C8KCK"/>
       <feature id="com.verticon.tracker.help" version="1.0.0"/>
+      <feature id="org.eclipse.ocl" version="1.1.1.v200707131415-3209oA55P5N7F8JDH"/>
+      <feature id="org.eclipse.ocl.doc" version="1.1.0.v200706071450-21-8s733G3E3G5AC3"/>
+      <feature id="org.eclipse.emf.ocl" version="1.1.0.v200706071450-10-7w311817312619"/>
+      <feature id="org.eclipse.emf.ocl.doc" version="1.1.0.v200706071450-10-7w311817182561"/>
+      <feature id="org.eclipse.emf.workspace" version="1.1.1.v200707252036-208Z8s733G3F5E6_8B"/>
+      <feature id="org.eclipse.emf.workspace.doc" version="1.1.0.v200706071723-10-7w311817182834"/>
    </features>
 
 </product>
