@@ -7,7 +7,7 @@
       plugin="com.verticon.tracker.transaction.editor">
 
    <description>
-Tracker Transaction Infrastructure, provides a multi-threaded multi-user frontend to Tracker Premises models.  
+      Tracker Transaction Infrastructure, provides a multi-threaded multi-user frontend to Tracker Premises models.  
 Premises model documents are displayed and manipulated within Transactionally aware Tracker Editors that provide read and write transactional access and roll back when updating model data.
    </description>
 
@@ -300,25 +300,25 @@ POSSIBILITY OF SUCH DAMAGES.
    </license>
 
    <requires>
-      <import feature="org.eclipse.emf.validation" version="1.0.1.v200611161604"/>
-      <import plugin="org.eclipse.core.runtime" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.core.resources" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecore.xmi" version="2.2.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.edit.ui" version="2.2.0" match="compatible"/>
-      <import plugin="org.eclipse.ui.ide" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.workspace" version="1.0.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.transaction.ui" version="1.0.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.workspace.ui" version="1.0.0" match="compatible"/>
-      <import plugin="org.eclipse.ui.console" version="3.1.100" match="compatible"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.emf.workspace"/>
+      <import plugin="org.eclipse.emf.transaction.ui"/>
+      <import plugin="org.eclipse.emf.workspace.ui"/>
+      <import plugin="org.eclipse.ui.console"/>
       <import plugin="com.verticon.tracker.edit"/>
       <import plugin="com.verticon.tracker"/>
+      <import plugin="org.eclipse.emf.validation"/>
    </requires>
 
    <plugin
          id="com.verticon.tracker.transaction.editor"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>
