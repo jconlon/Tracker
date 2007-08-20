@@ -1,22 +1,43 @@
 <?xml version="1.0"?>
 <project name="MyHelpPlugin" default="prepare">
-    <description>
+	<description>
         Prepares the Help plug-in project by copying the HTML help files
         from the DocBook XML project into this one.
     </description>
-    
-    <property name="docbook.project.dir" value="../com.verticon.tracker.documentation" />
-    <property name="html.dir" value="html" />
-    <property name="html.src.dir" value="${docbook.project.dir}/doc" />
-    
-    <fileset id="html-files" dir="${html.src.dir}">
-        <include name="**/*.html" />
-        <include name="**/*.css" />
-    </fileset>
-    
-    <target name="prepare">
-        <copy todir="${html.dir}">
-            <fileset refid="html-files" />
-        </copy>
-    </target>
+
+	<property name="docbook.project.dir" value="../com.verticon.tracker.documentation" />
+	<property name="root.dir" value="root" />
+	<property name="doc.src.dir" value="${docbook.project.dir}/doc" />
+
+	<!--
+	      - target:  clean
+	-->
+	<target name="clean" description="Cleans up copied files.">
+		<delete dir="${root.dir}" />
+	</target>
+
+	<!--
+	      - target:  depends
+	 -->
+	<target name="depends" depends="clean">
+		<mkdir dir="${root.dir}" />
+	</target>
+
+	<fileset id="doc-files" dir="${doc.src.dir}"> 
+		<exclude name="**/plugin.xml" />
+		<exclude name="**/mergedDoc.html" />
+	</fileset>
+	
+	<!-- FIXME create a xsl style that ads the ${root.dir}" to the
+	  topic attribute of the root toc element
+	  		toc topic="root/index.html" 
+	  and all href attributes of topic elements
+	  		<topic href="root/pr01.html"
+	-->
+
+	<target name="prepare" depends="depends">
+		<copy todir="${root.dir}">
+			<fileset refid="doc-files" />
+		</copy>
+	</target>
 </project>
