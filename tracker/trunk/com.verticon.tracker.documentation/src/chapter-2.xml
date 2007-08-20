@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
-<chapter>
+<chapter id="ch02">
 	<title>Premises Model</title>
 	<section>
 		<title>Modeling the Animal Premises</title>
@@ -33,7 +33,7 @@
 			from other file. 
 		</para>
 	</section>
-	<section>
+	<section id="ch02dataModel">
 		<title>Tracker Data Model</title>
 		<para>
 			All tracker model documents conform to the Tracker Data Model. In the 
