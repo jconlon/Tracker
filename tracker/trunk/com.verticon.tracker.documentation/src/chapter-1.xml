@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
+<chapter label="1">
+	<title>Introduction to Tracker</title>
+	<section id="idvalue0">
+		<title>Description</title>
+		<para>
+			Tracker models animal event histories for farm animal producers and/or livestock
+			infrastructure providers. Model documents are displayed and manipulated with 
+			Tracker Editors, Wizards, and various Importing and Exporting utilities.
+		</para>
+	</section>
+</chapter>

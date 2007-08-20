@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
+<book vendor="Verticon, Inc." label="Tracker User Guide" status="Draft">
+<bookinfo>
+  <title>Tracker User Guide</title>
+  <author><firstname>John</firstname><surname>Conlon</surname></author>
+  <copyright><year>2007</year><holder>Verticon, Inc.</holder></copyright>
+</bookinfo>
+	<preface>
+		<title>The Good Shepherd</title>
+		<para>
+			The tracking and shepherding of animals are fundamental
+			activities of all modern and prehistoric human
+			civilizations. Either for hunting or husbandry human beings
+			have always observed and remembered animal movements. Today
+			with larger herds and more movements computer based tools to
+			track animal movements can ease the burden and reduce the
+			cost for farm animal producers and livestock infrastructure
+			providers.
+		</para>
+
+	</preface>
+
+</book>
