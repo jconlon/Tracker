@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
+<chapter label="4">
+	<title>Event Management</title>
+	<section>
+		<title>Modeling the Premises</title>
+		<para>
+			Computers can be thought of as mechanisms or containers for
+			modeling an aspect of the real world. The Tracker software
+			application models the events associated with animals on the
+			premises of a farm or a livestock infrastructure provider.
+		</para>
+	</section>
+</chapter>
