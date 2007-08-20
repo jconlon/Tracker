@@ -14,7 +14,9 @@
       -->
 	<property name="docbook.xsl.dir" value="docbook-xsl-1.72.0" />
 	<property name="doc.dir" value="doc" />
+	<property name="doc.figures.dir" value="${doc.dir}/figures" />
 	<property name="src.dir" value="src" />
+	<property name="src.figures.dir" value="${src.dir}/figures" />
 	<property name="gen.dir" value="generated-xml" />
 	<property name="merge.docs" value="${src.dir}/mergeDocs.xml" />
 	<property name="merged.doc" value="${gen.dir}/mergedDoc.xml" />
@@ -54,6 +56,7 @@
       -->
 	<target name="depends">
 		<mkdir dir="${doc.dir}" />
+		<mkdir dir="${doc.figures.dir}" />
 		<mkdir dir="${gen.dir}" />
 	</target>
 
@@ -71,6 +74,9 @@
 			<param name="eclipse.plugin.id" expression="com.verticon.tracker.help"/>
 			<param name="eclipse.plugin.provider" expression="Verticon, Inc."/>
 		</xslt>
+		<copy todir="${doc.figures.dir}">
+		    <fileset dir="${src.figures.dir}"/>
+		</copy>
 	</target>
 
 	<!--
