@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
-<chapter label="3">
-	<title>Querying and Selecting Tracker Model Objects</title>
+<chapter>
+	<title>Querying for Information and Selecting Elements in Documents</title>
 	<section>
-		<title>OCL Introduction</title>
+		<title><acronym>OCL</acronym> Introduction</title>
 		<para>
-			The Object Constraint Language,
+			The <firstterm>Object Constraint Language</firstterm>,
 			<acronym>OCL</acronym>
-			is a simple declarative language for specifying rules that
-			apply to document models. Within Tracker, documents model an
-			Agricultural Premises that contain Animals and an
-			EventHistory of significant Events that happen to these
-			Animals.
+			is a simple declarative language used within Tracker editors
+			to interpret model documents for information or to query model 
+			documents in order to select specific elements for further manipulation. 
 		</para>
+		
 		<para>
-			Within Tracker Editors
-			<acronym>OCL</acronym>
-			rules can be used to both query and select specific
-			information about the Animals and the Events that have taken
-			place on the Premises.
+			When using the <acronym>OCL</acronym> Interpreter or Query tools to interrogate
+		    Tracker documents refer to: <xref linkend="ch02dataModel"/>.
 		</para>
+		
 	</section>
 	<section>
 		<title>OCL Interpreter Examples</title>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
-<chapter label="4">
-	<title>Event Management</title>
+<chapter>
+	<title>Manipulating Tracker Documents</title>
 	<section>
-		<title>Modeling the Premises</title>
+		<title>Adding Events to the Premises</title>
 		<para>
 			Computers can be thought of as mechanisms or containers for
 			modeling an aspect of the real world. The Tracker software
