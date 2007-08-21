@@ -1,14 +1,234 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
 <chapter>
-	<title>Manipulating Tracker Documents</title>
+	<title>
+		Events Manipulation with Templates and Tag IdNumber
+		Files
+	</title>
 	<section>
-		<title>Adding Events to the Premises</title>
+		<title>Adding Events and Animals to Documents</title>
 		<para>
-			Computers can be thought of as mechanisms or containers for
-			modeling an aspect of the real world. The Tracker software
-			application models the events associated with animals on the
-			premises of a farm or a livestock infrastructure provider.
+			Although Tracker Editors make it easy to add individual Animals and Events to tracker Documents, adding
+			dozens of animals, or hundreds of events to a Premises individually is not practical. For bulk loading 
+			of animals and events to a premises model documents Tracker uses Templates, Tag IdNumber files and event 
+			manipulation features that simplify the process.
 		</para>
+		<para>
+			Templates represent an event or set of events that can be
+			applied to one or more specified animals. To specify which
+			animals to apply the template events to, two methods
+			are offered:
+			<orderedlist numeration="arabic">
+				<listitem>
+					<para>
+						Directly selecting the animal or a set of
+						animals with mouse selections.
+						<tip>
+							<para>
+								Animals call also be selected with <acronym>OCL</acronym> Query operations. 
+								See <xref linkend="ch03" />
+							</para>
+						</tip>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Indirectly selecting an animal or set of animals
+						from lists of Tag/@idNumbers contained in Tag
+						IdNumber files. See
+						<xref linkend="ch04idNumberFiles" />
+					</para>
+				</listitem>
+			</orderedlist>
+		</para>
+	</section>
+	<section>
+		<title>Templates</title>
+		<para>
+			Templates are model documents similar to *.tracker model documents accept they use
+			the *.animal extension.  Template documents are used to contain a default animal, an attached tag,
+			and a set of representative events.  Tracker utilities accessible through popup menus allow Templates 
+			to be used to add various combinations of animals and/or events to specified sets of animals. 
+		</para>
+		<para>
+			Templates have the following characteristics:
+			<orderedlist numeration="loweralpha">
+				<listitem>
+					<para>
+						Templates may have an default Animal, a Tag and a set of
+						representative events.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Only the Animal element is required in the
+						template.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						If an Animal and a Tag is included the
+						Tag/@idNumber is not considered significant and
+						is ignored. 
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Templates are persisted in files with a *.animal extension.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						All events in a Template are significant and will be copied to 
+					 	the specified Animal or a set Animals.
+					 </para>
+				</listitem>
+				<listitem>
+					<para>
+						Timestamps of the template events are considered significant and are
+						copied in the events added to specified Animal or set of Animal, unless
+						<orderedlist numeration="arabic">
+							<listitem>
+								<para>
+									The tag file name uses the format
+									yyMMddHHmmss.tags. For example the
+									tags file 060409131111.Tags will set
+									the date of all events to 04/09/06
+									13:11:11
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									The timestamp year on the event is
+									set earlier than 1000 AD, then
+									Timestamps of events in the template
+									are replaced with the current time.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Transaction processing of tags
+									always use the current timestamp.
+								</para>
+							</listitem>
+						</orderedlist>
+					</para>
+				</listitem>
+			</orderedlist>
+		</para>
+	</section>
+
+	<section id="ch04idNumberFiles">
+		<title>Tag IdNumber Files</title>
+		<para>
+			Most tag readers typically output a Tag read as an <acronym>ASCII</acronym> encoded string
+			(For more information on ASCII, see the Wikipedia entry for
+			<ulink url="http://en.wikipedia.org/wiki/ASCII"><citetitle>ASCII</citetitle></ulink>) that
+			represents the value of a <code>Tag/@idNumber</code>.  The conventional way to deal with multiple tag reads
+			is to simply save these lists of <acronym>ASCII</acronym> <code>Tag/@idNumber</code> strings as text files.  
+			Tracker calls <code>Tag/@idNumber</code> text files that have been saved with the *.tags extension a 
+			<emphasis>Tag IdNumber File</emphasis>.
+		</para>
+		<para>
+			To indicate to Tracker that the read time of the tags in a
+			Tag IdNumber file is significant, the name of the tag file
+			may be formated to reflect that time. To timestamp a Tag
+			IdNumber file use the formating of
+			<code>yyMMddHHmmss</code>
+			, where
+			<simplelist type='horiz' columns='1'>
+				<member>yy is the last two digits of the year,</member>
+				<member>MM is the month,</member>
+				<member>dd is the day of the month,</member>
+				<member>
+					HH is the hour of the day in 24 hour clock,
+				</member>
+				<member>mm is the minute of the hour,</member>
+				<member>ss is the second</member>
+			</simplelist>
+			<example>
+				<title>A Timestamped Tag IdNumber File Name</title>
+				<formalpara>
+					<title>060409131111.tags</title>
+					<para>
+						Specifies the date of all
+						<code>Tag/@idNumber</code>
+						reads to have occurred at 04/09/06 at 13:11:11.
+					</para>
+				</formalpara>
+			</example>
+
+		</para>
+		<tip>
+			<para>
+				Tag IdNumber Files can also be utilized by the
+				transaction infrastructure. See ...
+			</para>
+		</tip>
+	</section>
+	<section>
+		<title>Usage and operations</title>
+		<section>
+			<title>
+				Directly Selecting Animals to Add Events
+			</title>
+			<para>
+				To add a series of events to an animal or set of animals
+				you will need to select the animal or animals and invoke
+				a popup menu item on one of the selected Animal
+				Elements. 
+				<orderedlist numeration="loweralpha">
+					<listitem>
+						<para>
+							Right click on the Animal to get the Tracker
+							popup menu
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Select 'Add Template Events to Selected
+							Animals' to bring up a selection window to
+							select a Template
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Choose a Template containing the set of
+							template events you wish to add the animal.
+						</para>
+					</listitem>
+				</orderedlist>
+			</para>
+		</section>
+		<section>
+			<title>Indirectly Selecting Animals to Add Events and/or Animals</title>
+			<para>
+				To add a series of events and/or animals to the Premises
+				you will need to select a Tag IdNumber file and invoke a
+				popup menu item it.
+				<orderedlist numeration="loweralpha">
+					<listitem>
+						<para>
+							Right click on the Tag IdNumber File to get
+							the Tracker popup menu.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Select 'Add Template Events to Premises' to
+							bring up a selection window to select a
+							Template.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Choose a Template containing the set of
+							template events and the default animal type
+							you wish to add the premises.
+						</para>
+					</listitem>
+				</orderedlist>
+			</para>
+		</section>
 	</section>
 </chapter>
