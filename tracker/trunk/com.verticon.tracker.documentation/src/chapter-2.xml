@@ -8,57 +8,103 @@
 			Computers can be thought of as mechanisms or containers for
 			modeling an aspect of the real world. The Tracker software
 			application models the animals and events associated with or
-		    contained within the premises of a farm or a livestock 
-		    infrastructure provider. The Tracker application uses a 
-		    document paradigm to model an animal premises. 
+			contained within the premises of a farm or a livestock
+			infrastructure provider. The Tracker application uses a
+			document paradigm to model an animal premises.
 		</para>
 	</section>
 	<section>
 		<title>Tracker Model Documents</title>
 		<para>
-		     Whether it is word processing, 
-		     spreadsheets, or presentation, today's computer 
-		     users are most familiar with applications that utilize a 
-		     document paradigm that create documents that represent (model)
-		     information.
+			Whether it is word processing, spreadsheets, or
+			presentation, today's computer users are most familiar with
+			applications that utilize a document paradigm that create
+			documents that represent (model) information.
 		</para>
 		<para>
-			The Tracker enables users to create, transform and edit 
-			tracker model documents that represent (model) specific Animal Premises.
-			Model documents are displayed and manipulated with the various Tracker 
-			Editors, Wizards, and Importing and Exporting utilities. 
-			The attributes of the premises, the animals in the premises and the events associated 
-			with animals are specified within these model documents. 
-			Model document files utilize a .tracker file extension to distinguish them
-			from other file. 
+			The Tracker enables users to create, transform and edit
+			tracker model documents that represent (model) specific
+			Animal Premises. Model documents are displayed and
+			manipulated with the various Tracker Editors, Wizards, and
+			Importing and Exporting utilities. The attributes of the
+			premises, the animals in the premises and the events
+			associated with animals are specified within these model
+			documents. Model document files utilize a .tracker file
+			extension to distinguish them from other file.
 		</para>
 	</section>
 	<section id="ch02dataModel">
 		<title>Tracker Data Model</title>
 		<para>
-			All tracker model documents conform to the Tracker Data Model. In the 
-			Tracker Data Model a single Premises contains 0 or more animals. Each Animal
-			must have at least one but may have more than one (identification) tags. Each Tag
-			must have at least one but may have more than one associated events.  
-		</para>	
-		<para>	
-			In the figure below you will find a graphic representation of the The Tracker
-			Data Model.  
+			All tracker model documents conform to the Tracker Data
+			Model. In the Tracker Data Model a single Premises contains
+			0 or more animals. Each Animal must have at least one but
+			may have more than one (identification) tags. Each Tag must
+			have at least one but may have more than one associated
+			events.
+		</para>
+		<para>
+			In the figure below you will find a graphic representation
+			of the The Tracker Data Model.
 		</para>
 		<figure>
-			<title>Tracker Data Model</title>
+			<title>Tracker Data Model Core Elements</title>
 			<graphic srccredit="Verticon, Inc., 2007"
-				fileref="figures/tracker.png" />
+				fileref="figures/coreDataModel.png" scale="60" align="left" />
 		</figure>
 		<para>
-			The elements of the Data Model are depicted as blue rectangles in the figure. The
-			<simplelist type='horiz' columns='1'>
-				<member>Premises</member>
-				<member>Animal</member>
-				<member>Event</member>
-			</simplelist>
-			are the three primary elements of the Tracker Data Model.  The different kinds of 
-			Animals and Events are shown underneath the Animal and Event elements.
+			The core elements of the Data Model are depicted as blue
+			rectangles in the figure.
+			<table frame='all'>
+				<title>Core Elements of the Data Model</title>
+				<tgroup cols='2' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<thead>
+						<row>
+							<entry>Element Name</entry>
+							<entry>
+								Relationship to other Elements
+							</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>Premises</entry>
+							<entry>
+								There is one premises in a document
+							</entry>
+
+						</row>
+						<row>
+							<entry>Animal</entry>
+							<entry>
+								A premises can have zero or many animals
+							</entry>
+						</row>
+						<row>
+							<entry>Tag</entry>
+							<entry>
+								An Animal can have one or many tags
+							</entry>
+						</row>
+						<row>
+							<entry></entry>
+							<entry>
+								A Premises can have zero or many tags
+								that are unassigned
+							</entry>
+						</row>
+						<row>
+							<entry>Event</entry>
+							<entry>
+								A Tag can have one or many events
+							</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table>
+
 		</para>
 	</section>
 </chapter>
