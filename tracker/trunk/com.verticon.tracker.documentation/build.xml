@@ -14,13 +14,19 @@
       -->
 	<property name="docbook.xsl.dir" value="docbook-xsl-1.72.0" />
 	<property name="doc.dir" value="doc" />
+
 	<property name="doc.figures.dir" value="${doc.dir}/figures" />
 	<property name="src.dir" value="src" />
+	<property name="dist.dir" value="dist" />
 	<property name="src.figures.dir" value="${src.dir}/figures" />
 	<property name="gen.dir" value="generated-xml" />
+	<property name="fo.dir" value="fo" /> 
+	<property name="fo.figures.dir" value="figures" />
 	<property name="merge.docs" value="${src.dir}/mergeDocs.xml" />
-	<property name="merged.doc" value="${gen.dir}/mergedDoc.xml" />
+	<property name="merged.doc.name" value="mergedDoc.xml" />
+	<property name="merged.doc" value="${gen.dir}/${merged.doc.name}" />
 	<property name="xml.stylesheet" value="${src.dir}/merge-using-merge-doc.xslt" />
+	<property name="fo.stylesheet" value="${docbook.xsl.dir}/fo/docbook.xsl" />
 	<property name="html.stylesheet" value="${docbook.xsl.dir}/eclipse/eclipse.xsl" />
 	<property name="xalan.lib.dir" value="lib/xalan-j_2_7_0" />
 
@@ -49,15 +55,21 @@
 	<target name="clean" description="Cleans up generated files.">
 		<delete dir="${doc.dir}" />
 		<delete dir="${gen.dir}" />
+		<delete dir="${dist.dir}" />
+		<delete dir="${fo.dir}" />
+		<delete dir="${fo.figures.dir}" />
 	</target>
 
 	<!--
       - target:  depends
       -->
-	<target name="depends">
+	<target name="depends" depends="clean">
 		<mkdir dir="${doc.dir}" />
 		<mkdir dir="${doc.figures.dir}" />
 		<mkdir dir="${gen.dir}" />
+		<mkdir dir="${dist.dir}"/>
+		<mkdir dir="${fo.dir}"/>
+		<mkdir dir="${fo.figures.dir}"/>
 	</target>
 
 	<!--
@@ -84,7 +96,7 @@
       - description:  Iterates through a directory and transforms
       -     chapter-x.xml files into one xml DocBook instance.
       -->
-	<target name="build-xml" depends="clean, depends" 
+	<target name="build-xml" depends="depends" 
 	        description="Generates one XML DocBook XML">
 		<xslt style="${xml.stylesheet}"  
 	            in="${merge.docs}" out="${merged.doc}">
@@ -92,5 +104,40 @@
 			
 		</xslt>
 	</target>
+	
+	<!--
+	    - target:  build-pdf
+	    - description:  Iterates through a directory and transforms
+	    -     .xml files into .fo files which can then be turned into DocBook XML
+	    -     files.
+	    -->
+	<target name="build-pdf" depends="build-xml" 
+	   description="Generates PDF files from DocBook XML">
+	    <xslt style="${fo.stylesheet}" extension=".fo" 
+	        basedir="${gen.dir}" destdir="${fo.dir}">
+	        <classpath refid="xalan.classpath" />
+	        <include name="${merged.doc.name}" />
+	    </xslt>
+
+	    <property name="fop.home" value="lib/fop-0.93" />
+
+	    <taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop">
+	        <classpath>
+	            <fileset dir="${fop.home}/lib">
+	                <include name="*.jar" />
+	            </fileset>
+	            <fileset dir="${fop.home}/build">
+	                <include name="fop.jar" />
+	                <include name="fop-hyph.jar" />
+	            </fileset>
+	        </classpath>
+	     </taskdef>
+		<copy todir="${fo.figures.dir}">
+				    <fileset dir="${src.figures.dir}"/>
+		</copy>
+	    <fop format="application/pdf" fofile="${fo.dir}/mergedDoc.fo" 
+	        outfile="${dist.dir}/book.pdf" />
+    </target>
+
 
 </project>
