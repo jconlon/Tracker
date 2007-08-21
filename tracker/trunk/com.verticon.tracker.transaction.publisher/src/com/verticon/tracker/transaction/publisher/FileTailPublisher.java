@@ -22,6 +22,15 @@ import com.verticon.tracker.transaction.publisher.preferences.PreferenceConstant
 import com.verticon.transaction.editor.console.ConsoleUtil;
 
 /**
+ * Publisher that tails a file looking for new tags being added to the
+ * end of the file.
+ * Uses preferences to specify
+ * <ul>
+ * 	<li>the template file to use for building events,</li>
+ * 	<li>the capture file where tags are being added</li>
+ *  <li>an interval for rereading the capture file.</li>
+ *  </ul>
+ * 
  * @author jconlon
  * 
  */
@@ -51,6 +60,13 @@ public class FileTailPublisher extends PreferenceConstants implements
 
 	private TransactionPublisher tp = null;
 
+	/**
+	 * Start a background task using a FileTailRunner to process the file and 
+	 * feed new tags to a TransactionPublisher.
+	 * 
+	 * @see com.verticon.tracker.transaction.publisher.actions.FileTailRunner
+	 * @see com.verticon.tracker.transaction.publisher.actions.TransactionPublisher
+	 */
 	public void start() throws IOException {
 		if (tp != null ) {
 			log("Already Started ");
@@ -73,14 +89,17 @@ public class FileTailPublisher extends PreferenceConstants implements
 		}
 	};
 
+	/**
+	 * Stop the background task.
+	 */
 	public void stop() {
 		tp = null;
 		exec.shutdownNow();
 		exec = null;
 	};
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Watches for changes to the Preferences settings.
 	 * 
 	 * @see org.eclipse.core.runtime.Preferences.IPropertyChangeListener#propertyChange(org.eclipse.core.runtime.Preferences.PropertyChangeEvent)
 	 */
