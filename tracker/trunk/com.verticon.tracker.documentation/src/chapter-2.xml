@@ -51,8 +51,14 @@
 				fileref="figures/tracker.png" />
 		</figure>
 		<para>
-			The core elements of the Data Model are depicted in blue rectangles. The various
-			kinds of Animals and Events are depicted in underneath the Animal and Event elements.
+			The elements of the Data Model are depicted as blue rectangles in the figure. The
+			<simplelist type='horiz' columns='1'>
+				<member>Premises</member>
+				<member>Animal</member>
+				<member>Event</member>
+			</simplelist>
+			are the three primary elements of the Tracker Data Model.  The different kinds of 
+			Animals and Events are shown underneath the Animal and Event elements.
 		</para>
 	</section>
 </chapter>
