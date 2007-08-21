@@ -102,14 +102,16 @@ public class CommonUtilities {
 		return result;
 	}
 	/**
-	 * 
-	 * @param premises to add animal
-	 * @param defaultAnimal template to use
-	 * @param animalId of animal
+	 * Create a new Animal based on the defaultAnimal and assign it the animalId
+	 * @param defaultAnimal
+	 * @param animalId
+	 * @return createdAnimal
 	 */
 	private static Animal createAnimalFromTemplate(Animal defaultAnimal, Tag animalId) {
 		Copier copier = new Copier();
 		Animal animal = (Animal)copier.copy(defaultAnimal);
+		//Remove any tags
+		animal.getTags().clear();
 		animal.getTags().add(animalId);
 		return animal;
 	}

@@ -7,7 +7,7 @@ import java.io.IOException;
 
 
 /**
- * Publisher can be started, stoped and a logStatus can be output to the Console
+ * A Publisher can be started, stopped and a logStatus can be output to the Console
  * @author jconlon
  *
  */
