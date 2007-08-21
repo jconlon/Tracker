@@ -74,71 +74,33 @@ public class CommonUtilities {
 		return animal;
 	}
 	
+
 	/**
-	 * Create valid events for the animalId based on events in the template.
-	 * @param template
-	 * @param animalId
-	 * @param premises
-	 * @return
-	 */
-//	public static Collection<Event> createEvents(Premises premisesTemplate, AnimalId animalId, Premises premises) {
-//		Copier copier = new Copier();	  
-//		ArrayList<Event> outputResults = new ArrayList<Event>();
-//		Event outputEvent;
-//		for (Object o : premisesTemplate.eventHistory()) {
-//			outputEvent= (Event) copier.copy((Event)o);
-//			setEventDate(outputEvent);
-//			if(canAddEventToAnimal(animalId, outputEvent, premises.getEventHistory()) ){
-//				outputResults.add(outputEvent);
-//			}
-//		}
-//		return outputResults;
-//	}
-	
-	/**
-	 * Create a preference policy for adding duplicates.
-	 * @param animal
-	 * @param event
-	 * @param premises
-	 * @return true if no similar event is associated with the animal
-	 */
-//	public static boolean canAddEventToAnimal(AnimalId animalId, Event event, EventHistory eventHistory){
-//		for (Event ev : eventHistory.getEvents()) {
-//			if (ev.getEventCode() == event.getEventCode() && ev.getAin() == animalId) {
-//				return false;
-//			}
-//		}
-//		return true;
-//	}
-	
-	
-	/**
-	 * Finds an existing AnimalId or creates an animal in the Premises and returns its animalId.
+	 * Finds an existing Animal or creates it in the Premises.
 	 * @param tagNumber
 	 * @param premises
 	 * @param defaultAnimal
 	 * @return
 	 */
-	public static Tag findAnimalId(Long tagNumber, Premises premises, Animal defaultAnimal) {
-		Tag result = null;
+	public static Animal findAnimal(Long tagNumber, Premises premises, Animal defaultAnimal) {
+		Animal result = null;
 		for (Animal animal : premises.getAnimals()) {
 			for (Tag tag : animal.getTags()) {
 				if(tagNumber.equals(tag.getIdNumber())){
-					result=tag;
+					result=animal;
 					break;
 				}
 			}
 			
 		}
 		if(result==null && defaultAnimal!=null){
-			result=TrackerFactory.eINSTANCE.createTag();
-			result.setIdNumber(tagNumber.longValue());
-			Animal animal = createAnimalFromTemplate(defaultAnimal, result);
-			premises.getAnimals().add(animal);
+			Tag tag =TrackerFactory.eINSTANCE.createTag();
+			tag.setIdNumber(tagNumber.longValue());
+			result = createAnimalFromTemplate(defaultAnimal, tag);
+			premises.getAnimals().add(result);
 		}
 		return result;
 	}
-
 	/**
 	 * 
 	 * @param premises to add animal
