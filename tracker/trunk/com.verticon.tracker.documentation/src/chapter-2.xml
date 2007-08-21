@@ -46,12 +46,13 @@
 		<para>
 			In the figure below you will find a graphic representation
 			of the The Tracker Data Model.
-		</para>
+		
 		<figure>
 			<title>Tracker Data Model Core Elements</title>
 			<graphic srccredit="Verticon, Inc., 2007"
-				fileref="figures/coreDataModel.png" scale="60" align="left" />
+				fileref="figures/coreDataModel3.png" />
 		</figure>
+		</para>
 		<para>
 			The core elements of the Data Model are depicted as blue
 			rectangles in the figure.
