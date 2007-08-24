@@ -1,24 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
-<book vendor="Verticon, Inc." label="Tracker User Guide" status="Draft">
-<bookinfo>
-  <title>Tracker User Guide</title>
-  <author><firstname>John</firstname><surname>Conlon</surname></author>
-  <copyright><year>2007</year><holder>Verticon, Inc.</holder></copyright>
-</bookinfo>
+<book vendor="Verticon, Inc." label="Tracker User Guide"
+	status="Draft">
+	<bookinfo>
+		<title>Tracker User Guide</title>
+		<author>
+			<firstname>John</firstname>
+			<surname>Conlon</surname>
+		</author>
+		<copyright>
+			<year>2007</year>
+			<holder>Verticon, Inc.</holder>
+		</copyright>
+	</bookinfo>
 	<preface>
 		<title>The Need for Animal Tracking</title>
 		<para>
-			The tracking and shepherding of animals are fundamental
-			activities of all modern and prehistoric human
-			civilizations. Either for hunting or husbandry human beings
-			have always observed and remembered animal movements. Today
-			with larger herds and more movements computer based tools to
-			track animal movements can ease the burden and reduce the
+			Either for hunting or husbandry human beings have always
+			observed and remembered animal movements. Today with larger
+			herds and more interaction between producers and
+			infrastructure providers more animal movements translates
+			into more information to manage.
+		</para>
+		<para>
+			Computers, software applications and animal event sensors
+			that sense, record and manage animal movements and histories
+			can ease the information management burden and reduce the
 			cost for farm animal producers and livestock infrastructure
 			providers.
 		</para>
-
+		<para>
+			Tracker provides livestock producers and infrastructure
+			providers an effective, low cost solution for managing and
+			exchanging animal premises and event history information.
+		</para>
+	
 	</preface>
+	<colophon>
+		<para>
+			Production versions of this documentation were produced with
+			the DocBook DSSSL Stylesheets called by the build tool Ant
+			from within an Eclipse IDE.
+		</para>
+	</colophon>
 
 </book>
