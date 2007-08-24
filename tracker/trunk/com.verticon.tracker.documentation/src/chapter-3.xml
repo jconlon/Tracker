@@ -1,25 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
 <chapter id="ch03">
-	<title>Querying for Information and Selecting Elements in Documents</title>
+	<title>
+		Querying for Information and Selecting Elements in Documents
+	</title>
 	<section>
-		<title><acronym>OCL</acronym> Introduction</title>
+		<title>
+			<acronym>OCL</acronym>
+			Introduction
+		</title>
 		<para>
-			The <firstterm>Object Constraint Language</firstterm>,
+			Even though the structure of the Tracker Data Model is
+			simple, Tracker documents can hold large amounts of animal
+			and event history data. Obtaining information about or
+			selecting specific animals or events in large Tracker Model
+			documents requires the use of query and selection tools.
+		</para>
+		<para>
+			The
+			<firstterm>Object Constraint Language</firstterm>
+			,
 			<acronym>OCL</acronym>
 			is a simple declarative language used within Tracker editors
-			to interpret model documents for information or to query model 
-			documents in order to select specific elements for further manipulation. 
+			to interpret model documents for information or to query
+			model documents in order to select specific elements for
+			further manipulation.
 		</para>
-		
+
 		<para>
-			When using the <acronym>OCL</acronym> Interpreter or Query tools to interrogate
-		    Tracker documents refer to: <xref linkend="ch02dataModel"/>.
+			When using the
+			<acronym>OCL</acronym>
+			Interpreter or Query tools to interrogate Tracker documents
+			refer to:
+			<xref linkend="ch02dataModel" />
+			.
 		</para>
-		
+
 	</section>
 	<section>
 		<title>OCL Interpreter Examples</title>
+		<warning>
+			<para>
+				This examples section is not current and requires an
+				update.
+			</para>
+		</warning>
 		<para>
 			The following are example
 			<acronym>OCL</acronym>

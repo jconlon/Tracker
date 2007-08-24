@@ -2,15 +2,50 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
 <chapter>
 	<title>Introduction to Tracker</title>
+	<section>
+		<title>Service Proposition</title>
+		<para>
+			Tracker provides livestock producers and infrastructure
+			providers an effective, low cost solution for managing and
+			exchanging animal premises and event history information.
+		</para>
+	</section>
+	<section>
+		<title>Project Goals</title>
+		<para>
+			The Tracker project was undertaken to provide:
+			<orderedlist numeration="loweralpha">
+				<listitem>
+					<para>
+						A useful service for livestock producers and
+						infrastructure providers.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						A low cost solution to enable both large and
+						small scale deployment.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						An industry standard for livestock event history
+						inter-exchange.
+					</para>
+				</listitem>
+
+			</orderedlist>
+		</para>
+	</section>
 	<section id="chapter1desc">
-		<title>Summary</title>
+		<title>Functional Description</title>
 		<para>
 			Tracker models animal event histories for farm animal
-			producers and/or livestock infrastructure providers as model
-			documents. Model documents are displayed and manipulated
+			producers and/or livestock infrastructure providers. Animal premises,
+			animals and event histories are created, edited, manipulated, and
+			persisted as model documents. Model documents are displayed and manipulated
 			with Tracker Editors, Wizards, and various Importing and
 			Exporting utilities.
 		</para>
-
 	</section>
 </chapter>

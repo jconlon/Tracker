@@ -2,22 +2,33 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
 <chapter>
 	<title>
-		Events Manipulation with Templates and Tag IdNumber
-		Files
+		Events Manipulation with Templates and Tag IdNumber Files
 	</title>
 	<section>
 		<title>Adding Events and Animals to Documents</title>
 		<para>
-			Although Tracker Editors make it easy to add individual Animals and Events to tracker Documents, adding
-			dozens of animals, or hundreds of events to a Premises individually is not practical. For bulk loading 
-			of animals and events to a premises model documents Tracker uses Templates, Tag IdNumber files and event 
-			manipulation features that simplify the process.
+			Although Tracker Editors make it easy to add individual
+			animals and events to tracker Documents, individually adding
+			dozens of animals, or hundreds of events to a Premises is
+			not practical. For bulk loading of animals and events
+			Tracker uses Templates, Tag IdNumber files and event
+			manipulation features to simplify the process.
 		</para>
 		<para>
-			Templates represent an event or set of events that can be
-			applied to one or more specified animals. To specify which
-			animals to apply the template events to, two methods
-			are offered:
+			Like Tracker Model Documents, Templates are document files
+			created by Tracker Wizards. Think of Templates as containing
+			some but not all the information that is in a Tracker Model
+			Document. Specifically a Template is a Model Document that
+			only contains a single animal. Just an animal, no premises.
+			Like an animal in the Tracker Model Document, a Template
+			animal can contain a tag (or a set of tags) that then
+			further contains a set of events. Templates serve as a way
+			to represent an event or a set of events that can then be
+			applied to one or more specified animals.
+		</para>
+		<para>
+			You can specify which animals to apply the template events
+			to, by:
 			<orderedlist numeration="arabic">
 				<listitem>
 					<para>
@@ -25,8 +36,10 @@
 						animals with mouse selections.
 						<tip>
 							<para>
-								Animals call also be selected with <acronym>OCL</acronym> Query operations. 
-								See <xref linkend="ch03" />
+								Animals call also be selected with
+								<acronym>OCL</acronym>
+								Query operations. See
+								<xref linkend="ch03" />
 							</para>
 						</tip>
 					</para>
@@ -45,18 +58,21 @@
 	<section>
 		<title>Templates</title>
 		<para>
-			Templates are model documents similar to *.tracker model documents accept they use
-			the *.animal extension.  Template documents are used to contain a default animal, an attached tag,
-			and a set of representative events.  Tracker utilities accessible through popup menus allow Templates 
-			to be used to add various combinations of animals and/or events to specified sets of animals. 
+			Templates are model documents similar to *.tracker model
+			documents accept they use the *.animal extension. Template
+			documents contain a default animal, an attached tag, and a
+			set of representative events. Tracker utilities accessible
+			through popup menus allow Templates to be used to add
+			various combinations of animals and/or events to specified
+			sets of animals.
 		</para>
 		<para>
 			Templates have the following characteristics:
 			<orderedlist numeration="loweralpha">
 				<listitem>
 					<para>
-						Templates may have an default Animal, a Tag and a set of
-						representative events.
+						Templates have a default Animal, a Tag and a set
+						of representative events.
 					</para>
 				</listitem>
 				<listitem>
@@ -67,26 +83,29 @@
 				</listitem>
 				<listitem>
 					<para>
-						If an Animal and a Tag is included the
-						Tag/@idNumber is not considered significant and
-						is ignored. 
+						If a Tag is included the Tag/@idNumber is not
+						considered significant and is ignored.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						Templates are persisted in files with a *.animal extension.
+						Templates are persisted in files with a *.animal
+						extension.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						All events in a Template are significant and will be copied to 
-					 	the specified Animal or a set Animals.
-					 </para>
+						All events in a Template are significant and
+						will be copied to the specified Animal or set
+						Animals.
+					</para>
 				</listitem>
 				<listitem>
 					<para>
-						Timestamps of the template events are considered significant and are
-						copied in the events added to specified Animal or set of Animal, unless
+						Timestamps of the template events are considered
+						significant and are copied in the events added
+						to specified Animal or set of Animal, accept for
+						the following cases:
 						<orderedlist numeration="arabic">
 							<listitem>
 								<para>
@@ -105,13 +124,16 @@
 									are replaced with the current time.
 								</para>
 							</listitem>
-							<listitem>
-								<para>
-									Transaction processing of tags
-									always use the current timestamp.
-								</para>
-							</listitem>
+
 						</orderedlist>
+						<note>
+							<para>
+								When used within the Transaction
+								processing facility of tracker of copied
+								events are always timestamped with the
+								current time.
+							</para>
+						</note>
 					</para>
 				</listitem>
 			</orderedlist>
@@ -121,13 +143,31 @@
 	<section id="ch04idNumberFiles">
 		<title>Tag IdNumber Files</title>
 		<para>
-			Most tag readers typically output a Tag read as an <acronym>ASCII</acronym> encoded string
-			(For more information on ASCII, see the Wikipedia entry for
-			<ulink url="http://en.wikipedia.org/wiki/ASCII"><citetitle>ASCII</citetitle></ulink>) that
-			represents the value of a <code>Tag/@idNumber</code>.  The conventional way to deal with multiple tag reads
-			is to simply save these lists of <acronym>ASCII</acronym> <code>Tag/@idNumber</code> strings as text files.  
-			Tracker calls <code>Tag/@idNumber</code> text files that have been saved with the *.tags extension a 
-			<emphasis>Tag IdNumber File</emphasis>.
+			Most tag readers after reading a tag transmit information
+			representing the tag number as an
+			<acronym>ASCII</acronym>
+			encoded string (For more information on ASCII, see the
+			Wikipedia entry for
+			<ulink url="http://en.wikipedia.org/wiki/ASCII">
+				<citetitle>ASCII</citetitle>
+			</ulink>
+			).
+			<note>
+				<para>
+					In the Tracker Data Model tag numbers are
+					represented in the
+					<code>Tag/@idNumber</code>
+					attribute.
+				</para>
+			</note>
+			Memory based Tag Readers typically output multiple tag reads as lists of
+			<acronym>ASCII</acronym>
+			<code>Tag/@idNumber</code>
+			strings in text files. Tracker calls
+			<code>Tag/@idNumber</code>
+			text files that have been saved with the *.tags extension a
+			<emphasis>Tag IdNumber File</emphasis>
+			.
 		</para>
 		<para>
 			To indicate to Tracker that the read time of the tags in a
@@ -169,14 +209,12 @@
 	<section>
 		<title>Usage and operations</title>
 		<section>
-			<title>
-				Directly Selecting Animals to Add Events
-			</title>
+			<title>Directly Selecting Animals to Add Events</title>
 			<para>
 				To add a series of events to an animal or set of animals
 				you will need to select the animal or animals and invoke
 				a popup menu item on one of the selected Animal
-				Elements. 
+				Elements.
 				<orderedlist numeration="loweralpha">
 					<listitem>
 						<para>
@@ -201,7 +239,10 @@
 			</para>
 		</section>
 		<section>
-			<title>Indirectly Selecting Animals to Add Events and/or Animals</title>
+			<title>
+				Indirectly Selecting Animals to Add Events and/or
+				Animals
+			</title>
 			<para>
 				To add a series of events and/or animals to the Premises
 				you will need to select a Tag IdNumber file and invoke a
