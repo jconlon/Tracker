@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker.impl;
 
+import com.verticon.tracker.*;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -76,7 +77,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 */
 	public static TrackerFactory init() {
 		try {
-			TrackerFactory theTrackerFactory = (TrackerFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.verticon.com/ns/tracker/1.1"); 
+			TrackerFactory theTrackerFactory = (TrackerFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.verticon.com/ns/tracker/0.1.0"); 
 			if (theTrackerFactory != null) {
 				return theTrackerFactory;
 			}
