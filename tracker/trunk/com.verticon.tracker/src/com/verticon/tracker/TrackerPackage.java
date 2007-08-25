@@ -50,7 +50,7 @@ public interface TrackerPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.verticon.com/ns/tracker/1.0";
+	String eNS_URI = "http://www.verticon.com/ns/tracker/1.1";
 
 	/**
 	 * The package namespace name.
