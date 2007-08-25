@@ -17,8 +17,8 @@
 		<para>
 			Whether it is word processing documents, spreadsheet documents, or
 			presentation documents, today's computer users are most familiar with
-			a type of software application that create and manipulate a
-			document files to describe specific instances of information.  
+			software applications that create and manipulate 
+			documents to describe specific instances of information.  
 		</para>
 		<para>
 			The Tracker enables users to create, transform and edit
@@ -45,9 +45,9 @@
 			All tracker model documents structurally conform to the <emphasis>Tracker Data
 			Model</emphasis>. In the Tracker Data Model a single Premises contains
 			zero or more animals. Each Animal must have at least one but
-			may have more than one (identification) tags. Each Tag must
+			may have more than one (identification) tag. Each Tag must
 			have at least one but may have more than one associated
-			events.
+			event.
 		</para>
 		<para>
 			In the figure below you will find a graphic representation

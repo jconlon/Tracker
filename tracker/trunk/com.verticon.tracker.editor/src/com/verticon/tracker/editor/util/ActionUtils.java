@@ -24,12 +24,14 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -450,4 +452,28 @@ public class ActionUtils {
 		
 		return initialObjectNames;
 	}
+	
+	static boolean validate(Premises premises, List<Diagnostic> validationDiagnostics) {
+		validationDiagnostics.clear();
+			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(premises);
+			if (diagnostic.getSeverity() != Diagnostic.OK) {
+				validationDiagnostics.add(diagnostic);
+		}
+		return validationDiagnostics.isEmpty();
+	}
+	 
+	 static Premises getPremises(IFile file) throws IOException {
+		    ResourceSet resourceSet = new ResourceSetImpl();
+		
+		     URI uri = URI.createPlatformResourceURI(file.getFullPath()
+		             .toString(),true);
+		     Resource resource = resourceSet.createResource(uri);
+		     if (!resource.isLoaded()) {
+		         resource.load(null);
+		     }
+		     if(resource.getContents().get(0) instanceof Premises){
+		    	 return (Premises) resource.getContents().get(0);
+		     }
+		     throw new IOException("Cannot process the file "+file.getName()+", because it is not a Tracker Model Document!");
+		}
 }

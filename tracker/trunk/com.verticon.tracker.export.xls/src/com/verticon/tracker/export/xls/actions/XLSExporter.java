@@ -41,15 +41,12 @@ public class XLSExporter implements PremisesProcessor{
 	}
 
 	public void process(Premises premises, IFile trackerFile, IProgressMonitor monitor) throws IOException, CoreException{
-		HSSFWorkbook wb = new HSSFWorkbook();
+    	HSSFWorkbook wb = new HSSFWorkbook();
 		createStyles( wb);
 		for (int i = 0; i < builders.length; i++) {
 			builders[i].createWorkSheet(premises, wb.createSheet(workSheetNames[i]),styleMap);
 		}
-		
-		
 		createFile( wb);
-		
 	}
 	
 	private void createStyles(HSSFWorkbook wb){
@@ -104,5 +101,6 @@ public class XLSExporter implements PremisesProcessor{
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+	
 	
 }
