@@ -42,11 +42,17 @@ public class WlicTrackerExporter implements PremisesProcessor {
 	
 	
 	
-	/* (non-Javadoc)
-	 * @see com.verticon.tracker.export.wlic.actions.TrackerExporter#process(com.verticon.tracker.Premises, java.io.File)
+	/**
+	 * 
+	 * @param premises
+	 * @param trackerFile
+	 * @param monitor
+	 * @throws IOException
+	 * @throws CoreException
 	 */
-	public void process(Premises premises, IFile trackerFile, IProgressMonitor monitor) throws IOException, CoreException{
-		IProject project = trackerFile.getProject();
+	public void process(Premises premises, IFile trackerFile,
+			IProgressMonitor monitor) throws IOException, CoreException {
+				IProject project = trackerFile.getProject();
 		IFolder exportsFolder = project.getFolder(new Path("exports"));
 		if(!exportsFolder.exists()){
 			exportsFolder.create(true, true, monitor);	
@@ -217,4 +223,7 @@ public class WlicTrackerExporter implements PremisesProcessor {
 		return "Failed to export a tracker model to a WLIC file.";
 	}
 
+	
+
+	
 }

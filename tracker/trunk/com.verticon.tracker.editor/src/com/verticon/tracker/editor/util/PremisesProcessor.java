@@ -10,9 +10,13 @@ import com.verticon.tracker.Premises;
 
 public interface PremisesProcessor {
 
-	public abstract void process(Premises premises, IFile f, IProgressMonitor monitor) throws IOException, CoreException;
+	
+	public abstract void process(Premises premises, IFile projectFile, IProgressMonitor monitor) throws IOException, CoreException;
 
 	public abstract String getCompletionMessage();
 	
 	public abstract String getFailureTitle();
+	
+//	public abstract void setFileName(String fileName);
+	
 }

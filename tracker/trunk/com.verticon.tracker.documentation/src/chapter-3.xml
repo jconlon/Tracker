@@ -14,17 +14,18 @@
 			simple, Tracker documents can hold large amounts of animal
 			and event history data. Obtaining information about or
 			selecting specific animals or events in large Tracker Model
-			documents requires the use of query and selection tools.
+			documents requires the use of Tracker's query and selection
+			tools.
 		</para>
 		<para>
 			The
 			<firstterm>Object Constraint Language</firstterm>
 			,
 			<acronym>OCL</acronym>
-			is a simple declarative language used within Tracker editors
-			to interpret model documents for information or to query
-			model documents in order to select specific elements for
-			further manipulation.
+			is a simple declarative language used within Tracker's query
+			and selection to interpret model documents for information
+			or to query model documents in order to select specific
+			elements for further manipulation.
 		</para>
 
 		<para>
