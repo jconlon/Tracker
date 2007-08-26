@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.transaction.editor"
       label="Tracker Transaction Infrastructure"
-      version="1.0.0"
+      version="0.1.0"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.transaction.editor">
 
@@ -302,16 +302,15 @@ POSSIBILITY OF SUCH DAMAGES.
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
-      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.emf.ecore.xmi" />
+      <import plugin="org.eclipse.emf.edit.ui" />
+      <import plugin="org.eclipse.ui.ide" />
       <import plugin="org.eclipse.emf.workspace"/>
       <import plugin="org.eclipse.emf.transaction.ui"/>
-      <import plugin="org.eclipse.emf.workspace.ui"/>
-      <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.eclipse.emf.workspace.ui" />
+      <import plugin="org.eclipse.ui.console" />
       <import plugin="com.verticon.tracker.edit"/>
       <import plugin="com.verticon.tracker"/>
-      <import plugin="org.eclipse.emf.validation"/>
    </requires>
 
    <plugin

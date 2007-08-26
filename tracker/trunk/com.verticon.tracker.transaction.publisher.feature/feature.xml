@@ -2,12 +2,12 @@
 <feature
       id="com.verticon.tracker.transaction.publisher"
       label="Tracker Transaction Publisher"
-      version="1.0.0"
+      version="0.1.0"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.transaction.publisher">
 
    <description>
-Tracker Transaction Event Publisher, provides multi-threaded and transactionally aware Event Publishers for publishing Animal Events to Tracker Model documents running within a Tracker Transaction Infrastructure.
+      Tracker Transaction Event Publisher, provides multi-threaded and transactionally aware Event Publishers for publishing Animal Events to Tracker Model documents running within a Tracker Transaction Infrastructure.
    </description>
 
    <copyright>
@@ -306,14 +306,13 @@ POSSIBILITY OF SUCH DAMAGES.
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="com.verticon.tracker"/>
       <import plugin="com.verticon.tracker.editor"/>
-      <import plugin="com.verticon.tracker.transaction.editor"/>
    </requires>
 
    <plugin
          id="com.verticon.tracker.transaction.publisher"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

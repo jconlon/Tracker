@@ -6,4 +6,6 @@
   <doc path="chapter-3.xml"/>
   <doc path="chapter-4.xml"/>
   <doc path="chapter-5.xml"/>
+  <doc path="fdl.xml"/>
+  <doc path="gpl.xml"/>
 </mergeDocs>

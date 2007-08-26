@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.export.xls"
       label="Tracker Excel Export"
-      version="1.0.0"
+      version="0.1.0"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.export.xls">
 
@@ -313,21 +313,21 @@ POSSIBILITY OF SUCH DAMAGES.
          id="com.verticon.tracker.export.xls"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.apache.poi"
          download-size="0"
          install-size="0"
-         version="2.5.1"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="org.apache.commons.logging"
          download-size="0"
          install-size="0"
-         version="1.0.4.v200706111724"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

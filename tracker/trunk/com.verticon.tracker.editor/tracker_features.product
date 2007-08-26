@@ -7,7 +7,7 @@
       <image path="/com.verticon.tracker.editor/icons/tracker_lg.gif"/>
       <text>
          Tracker Animal Event Management Platform
-Version: 1.0.0 
+Version: 0.1.0 
 Build id: {0}
 
 (c) Copyright Verticon, Inc. 2007.  All rights reserved. 
@@ -15,7 +15,7 @@ Build id: {0}
 Visit http:/www.verticon.com
 
 Tracker is powered by Eclipse technology and includes Eclipse plugins 
-that can be installed and used with other Eclipse (3.2)-based offerings.
+that can be installed and used with other Eclipse (3.3)-based offerings.
       </text>
    </aboutInfo>
 
@@ -38,6 +38,7 @@ that can be installed and used with other Eclipse (3.2)-based offerings.
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
    </vm>
@@ -104,14 +105,14 @@ that can be installed and used with other Eclipse (3.2)-based offerings.
       <feature id="org.eclipse.emf.transaction" version="1.1.0.v200706071723-208Y8s733G3E4C5B96"/>
       <feature id="org.eclipse.emf.validation" version="1.1.0.v200706071520-318Y9oA55P5M5P8JA5"/>
       <feature id="org.eclipse.emf.validation.doc" version="1.1.0.v200706071520-21-8s733G3E4C5_88"/>
-      <feature id="com.verticon.tracker.editor" version="1.0.0"/>
-      <feature id="com.verticon.tracker.export.wlic" version="1.0.0"/>
-      <feature id="com.verticon.tracker.export.xls" version="1.0.0"/>
-      <feature id="com.verticon.tracker.ocl.query" version="1.0.0"/>
-      <feature id="com.verticon.tracker.ocl.validation" version="1.0.0"/>
-      <feature id="com.verticon.tracker.transaction.editor" version="1.0.0"/>
-      <feature id="com.verticon.tracker.transaction.publisher" version="1.0.0"/>
-      <feature id="com.verticon.tracker.help" version="1.0.0"/>
+      <feature id="com.verticon.tracker.editor" version="0.1.0"/>
+      <feature id="com.verticon.tracker.export.wlic" version="0.1.0"/>
+      <feature id="com.verticon.tracker.export.xls" version="0.1.0"/>
+      <feature id="com.verticon.tracker.ocl.query" version="0.1.0"/>
+      <feature id="com.verticon.tracker.ocl.validation" version="0.1.0"/>
+      <feature id="com.verticon.tracker.transaction.editor" version="0.1.0"/>
+      <feature id="com.verticon.tracker.transaction.publisher" version="0.1.0"/>
+      <feature id="com.verticon.tracker.help" version="0.1.0"/>
       <feature id="org.eclipse.ocl" version="1.1.1.v200707131415-3209oA55P5N7F8JDH"/>
       <feature id="org.eclipse.ocl.doc" version="1.1.0.v200706071450-21-8s733G3E3G5AC3"/>
       <feature id="org.eclipse.emf.ocl" version="1.1.0.v200706071450-10-7w311817312619"/>
