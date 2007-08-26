@@ -94,8 +94,10 @@ public class FileTailPublisher extends PreferenceConstants implements
 	 */
 	public void stop() {
 		tp = null;
-		exec.shutdownNow();
-		exec = null;
+		if(exec!=null){
+			exec.shutdownNow();
+			exec = null;
+		}
 	};
 
 	/**
