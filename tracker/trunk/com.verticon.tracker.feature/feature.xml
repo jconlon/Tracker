@@ -2,12 +2,12 @@
 <feature
       id="com.verticon.tracker.editor"
       label="Tracker Core"
-      version="1.0.0"
+      version="0.1.0"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.editor">
 
    <description>
-Tracker Core, models Animal Event Histories for Producer and/or Non Producer Premises.  
+      Tracker Core, models Animal Event Histories for Producer and/or Non Producer Premises.  
 Premises model documents are displayed and manipulated with Tracker Editors, Wizards, and various Importing and Exporting utilities.
    </description>
 
@@ -313,21 +313,21 @@ POSSIBILITY OF SUCH DAMAGES.
          id="com.verticon.tracker"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="com.verticon.tracker.edit"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="com.verticon.tracker.editor"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

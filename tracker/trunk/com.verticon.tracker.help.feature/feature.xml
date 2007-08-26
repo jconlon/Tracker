@@ -2,12 +2,12 @@
 <feature
       id="com.verticon.tracker.help"
       label="Tracker Help Documentation"
-      version="1.0.0"
+      version="0.1.0"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.help">
 
-      <description>
-Tracker Help Documentation.
+   <description>
+      Tracker Help Documentation.
    </description>
 
    <copyright>
@@ -302,6 +302,6 @@ POSSIBILITY OF SUCH DAMAGES.
          id="com.verticon.tracker.help"
          download-size="0"
          install-size="0"
-         version="1.0.0"/>
+         version="0.0.0"/>
 
 </feature>
