@@ -83,9 +83,21 @@
 			providers.
 		</para>
 		<para>
-			Tracker provides livestock producers and infrastructure
-			providers an effective, low cost solution for managing and
-			exchanging animal premises and event history information.
+			Tracker is used by livestock producers, infrastructure
+			providers and process control auditors as an effective, low
+			cost solution to.
+			<itemizedlist mark='bullet'>
+				<listitem>
+					<para>maintain production efficiencies;</para>
+				</listitem>
+				<listitem>
+					<para>improve product quality;</para>
+				</listitem>
+				<listitem>
+					<para>document process controls.</para>
+				</listitem>
+
+			</itemizedlist>
 		</para>
 
 	</preface>
