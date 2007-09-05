@@ -14,7 +14,6 @@
          </menu>
          <action
                class="com.verticon.tracker.export.wlic.actions.ExportWlicEditorActionDelegate"
-               enablesFor="!"
                icon="$nl$/icons/etool16/export_wiz.gif"
                id="com.verticon.tracker.export.wlic.ExportWlicAction"
                label="%_UI_ExportWlic_label"
