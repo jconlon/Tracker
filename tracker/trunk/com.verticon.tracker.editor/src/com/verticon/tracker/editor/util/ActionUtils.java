@@ -71,6 +71,9 @@ import com.verticon.tracker.util.TrackerLog;
  */
 public class ActionUtils {
 
+	private static final String ADD_TEMPLATE_TO_ANIMALS_OPERATION = "Add Template to Animals Operation";
+	private static final String ADD_TEMPLATE_TO_PREMISES_OPERATION = "Add Template to Premises Operation";
+
 	private ActionUtils() {
 	}
 
@@ -206,8 +209,7 @@ public class ActionUtils {
 		}
 		editor.getEditingDomain().getCommandStack().execute(compoundCommand);
 		MessageDialog.openInformation(editor.getSite().getShell(),
-				TrackerReportEditorPlugin.INSTANCE
-						.getString("_UI_TrackerTemplateWizard_label"), "The "
+				ADD_TEMPLATE_TO_PREMISES_OPERATION, "The "
 						+ templateBean.getName() + " and " + tagsBean.getName()
 						+ " processed " + templateBean.getEvents().size()
 						+ " events on " + newAnimalsCreated
@@ -248,8 +250,7 @@ public class ActionUtils {
 
 		editor.getEditingDomain().getCommandStack().execute(compoundCommand);
 		MessageDialog.openInformation(editor.getSite().getShell(),
-				TrackerReportEditorPlugin.INSTANCE
-						.getString("_UI_TrackerTemplateWizard_label"), "The "
+				ADD_TEMPLATE_TO_ANIMALS_OPERATION, "The "
 						+ templateBean.getName() + " processed "
 						+ numberOfEventsInTemplate + " events on "
 						+ animals.size() + " animals.");
