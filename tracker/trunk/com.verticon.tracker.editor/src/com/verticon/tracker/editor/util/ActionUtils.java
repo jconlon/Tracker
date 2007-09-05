@@ -548,7 +548,9 @@ public class ActionUtils {
 				cal.add(Calendar.SECOND, -timeoutWindow);
 				Date subtractedDate = cal.getTime();
 				if(historicalEventDate.after(subtractedDate)){
-//					System.out.println(historicalEventDate+ " is After "+subtractedDate);
+					TrackerLog.logInfo("Defered adding  "+eventToAdd+ 
+							" to "+animalToReceiveEvent+"  because the time of event does not exceed the duplicate event timeout "
+							);
 					return false;
 				}
 
