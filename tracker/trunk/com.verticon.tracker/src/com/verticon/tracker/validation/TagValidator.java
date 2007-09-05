@@ -22,4 +22,6 @@ public interface TagValidator {
 	boolean validateIdNumber(long value);
 	boolean validateUsainNumberUsed(boolean value);
 	boolean validateEvents(EList<Event> value);
+
+	boolean validateId(String value);
 }

@@ -26,4 +26,6 @@ public interface EventValidator {
 	boolean validateComments(String value);
 	boolean validateIdNumber(long value);
 	boolean validateTag(Tag value);
+
+	boolean validateId(String value);
 }

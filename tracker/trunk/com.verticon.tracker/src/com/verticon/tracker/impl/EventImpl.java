@@ -34,6 +34,7 @@ import com.verticon.tracker.TrackerPackage;
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getComments <em>Comments</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getIdNumber <em>Id Number</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getTag <em>Tag</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.EventImpl#getId <em>Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -146,6 +147,16 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 	 * @ordered
 	 */
 	protected static final long ID_NUMBER_EDEFAULT = 0L;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -312,6 +323,15 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getId() {
+		return Long.toString(getIdNumber());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -375,6 +395,8 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 				return new Long(getIdNumber());
 			case TrackerPackage.EVENT__TAG:
 				return getTag();
+			case TrackerPackage.EVENT__ID:
+				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -455,6 +477,8 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 				return getIdNumber() != ID_NUMBER_EDEFAULT;
 			case TrackerPackage.EVENT__TAG:
 				return getTag() != null;
+			case TrackerPackage.EVENT__ID:
+				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 		}
 		return super.eIsSet(featureID);
 	}

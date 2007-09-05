@@ -254,6 +254,7 @@
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/age"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/sexCode"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/speciesCode"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/id"/>
       <genOperations ecoreOperation="tracker.ecore#//Animal/allEvents"/>
       <genOperations ecoreOperation="tracker.ecore#//Animal/addTemplate">
         <genParameters ecoreParameter="tracker.ecore#//Animal/addTemplate/eventTemplate"/>
@@ -264,6 +265,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/idNumber"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/usainNumberUsed"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Tag/events"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/id"/>
     </genClasses>
     <genClasses image="false" ecoreClass="tracker.ecore#//Bovine"/>
     <genClasses image="false" ecoreClass="tracker.ecore#//Event">
@@ -274,6 +276,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/comments"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/idNumber"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tracker.ecore#//Event/tag"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/id"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//TagAllocated"/>
     <genClasses ecoreClass="tracker.ecore#//Premises">

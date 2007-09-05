@@ -32,6 +32,7 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getAge() <em>Age</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getSexCode() <em>Sex Code</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getSpeciesCode() <em>Species Code</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getId() <em>Id</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -223,6 +224,18 @@ public abstract class AnimalTest extends TestCase {
 	 * @generated NOT
 	 */
 	public void testGetSpeciesCode() {
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Animal#getId() <em>Id</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * Overridden by subclasses
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#getId()
+	 * @generated
+	 */
+	public void testGetId() {
 		fail();
 	}
 

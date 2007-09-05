@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.Tag#getIdNumber <em>Id Number</em>}</li>
  *   <li>{@link com.verticon.tracker.Tag#isUsainNumberUsed <em>Usain Number Used</em>}</li>
  *   <li>{@link com.verticon.tracker.Tag#getEvents <em>Events</em>}</li>
+ *   <li>{@link com.verticon.tracker.Tag#getId <em>Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -93,5 +94,20 @@ public interface Tag extends EObject {
 	 * @generated
 	 */
 	EList<Event> getEvents();
+
+	/**
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see com.verticon.tracker.TrackerPackage#getTag_Id()
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	String getId();
 
 } // Tag

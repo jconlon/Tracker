@@ -25,6 +25,7 @@ import com.verticon.tracker.TrackerFactory;
  * <ul>
  *   <li>{@link com.verticon.tracker.Event#getEventCode() <em>Event Code</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getIdNumber() <em>Id Number</em>}</li>
+ *   <li>{@link com.verticon.tracker.Event#getId() <em>Id</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -108,6 +109,18 @@ public abstract class EventTest extends TestCase {
 	}
 	
 	
+	/**
+	 * Tests the '{@link com.verticon.tracker.Event#getId() <em>Id</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * Overridden by subclasses
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Event#getId()
+	 * @generated
+	 */
+	public void testGetId() {
+		fail();
+	}
+
 	public void testGetComments(){
 		assertNotNull(getFixture());
 		getFixture().setComments("Hi World");

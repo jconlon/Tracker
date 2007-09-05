@@ -75,6 +75,7 @@ public class TagItemProvider
 
 			addIdNumberPropertyDescriptor(object);
 			addUsainNumberUsedPropertyDescriptor(object);
+			addIdPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -119,6 +120,28 @@ public class TagItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Tag_id_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Tag_id_feature", "_UI_Tag_type"),
+				 TrackerPackage.Literals.TAG__ID,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -172,8 +195,10 @@ public class TagItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Tag tag = (Tag)object;
-		return getString("_UI_Tag_type") + " " + tag.getIdNumber();
+		String label = ((Tag)object).getId();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Tag_type") :
+			getString("_UI_Tag_type") + " " + label;
 	}
 
 	/**
@@ -190,6 +215,7 @@ public class TagItemProvider
 		switch (notification.getFeatureID(Tag.class)) {
 			case TrackerPackage.TAG__ID_NUMBER:
 			case TrackerPackage.TAG__USAIN_NUMBER_USED:
+			case TrackerPackage.TAG__ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TrackerPackage.TAG__EVENTS:

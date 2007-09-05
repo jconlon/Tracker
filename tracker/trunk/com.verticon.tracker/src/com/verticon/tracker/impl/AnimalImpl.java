@@ -51,6 +51,7 @@ import com.verticon.tracker.util.Species;
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getAge <em>Age</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSexCode <em>Sex Code</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSpeciesCode <em>Species Code</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getId <em>Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -187,6 +188,16 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @ordered
 	 */
 	protected static final String SPECIES_CODE_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -373,6 +384,15 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 /**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getId() {
+		return Long.toString(getIdNumber());
+	}
+
+/**
+	 * <!-- begin-user-doc -->
 	 * Hand implemented for speed (versus OCL??) because this method is used to generate the
 	 * key attribute for Animal.
 	 * Originally generated with the following OCL:
@@ -474,6 +494,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return getSexCode();
 			case TrackerPackage.ANIMAL__SPECIES_CODE:
 				return getSpeciesCode();
+			case TrackerPackage.ANIMAL__ID:
+				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -548,6 +570,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return isSetSexCode();
 			case TrackerPackage.ANIMAL__SPECIES_CODE:
 				return SPECIES_CODE_EDEFAULT == null ? getSpeciesCode() != null : !SPECIES_CODE_EDEFAULT.equals(getSpeciesCode());
+			case TrackerPackage.ANIMAL__ID:
+				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 		}
 		return super.eIsSet(featureID);
 	}
