@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -21,6 +22,7 @@ import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.Preferences;
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
@@ -57,6 +59,7 @@ import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
 import com.verticon.tracker.editor.dialogs.WSFileDialog;
+import com.verticon.tracker.editor.preferences.PreferenceConstants;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.util.CommonUtilities;
@@ -72,7 +75,7 @@ public class ActionUtils {
 	}
 
 	/**
-	 * Processes the selection to creates a TagsBean. 
+	 * Processes the selection to creates a TagsBean.
 	 * 
 	 * @param editor
 	 * @param selection
@@ -165,6 +168,14 @@ public class ActionUtils {
 		return premises;
 	}
 
+	/**
+	 * Add an animal template to the premises.  Duplicate tags tags will be ignored.
+	 * 
+	 * @param premises
+	 * @param tagsBean
+	 * @param templateBean
+	 * @param editor
+	 */
 	public static final void addTemplate(Premises premises, TagsBean tagsBean,
 			TemplateBean templateBean, TrackerEditor editor) {
 		// The date in the templateBean takes precedence over the tagsBean
@@ -174,73 +185,85 @@ public class ActionUtils {
 
 		CompoundCommand compoundCommand = new CompoundCommand();
 		Command command = null;
-		int newAnimalsCreated =0;
-		
-		int existingAnimals =0;
+		int newAnimalsCreated = 0;
+
+		int existingAnimals = 0;
 		for (Long tag : tagsBean.getTags()) {
 			Animal animal = premises.findAnimal(tag);
 			if (animal != null) {
 				existingAnimals++;
-				command = createAddEventsToTagCommand(animal.activeTag(), templateBean.getEvents(),
-						editor.getEditingDomain());
-				compoundCommand.append(command);
+				command = createAddEventsToTagCommand(animal.activeTag(),
+						templateBean.getEvents(), editor.getEditingDomain());
 			} else {
 				newAnimalsCreated++;
 				command = createAddAnimalToPremiseCommand(premises,
 						templateBean.getAnimal(tag), editor.getEditingDomain());
+				
+			}
+			if(command !=null){
 				compoundCommand.append(command);
 			}
 		}
 		editor.getEditingDomain().getCommandStack().execute(compoundCommand);
-		MessageDialog.openInformation(
-				editor.getSite().getShell(),
-				TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerTemplateWizard_label"),
-				"The "+templateBean.getName() +" and "+ tagsBean.getName()+ 
-				" added "+templateBean.getEvents().size()+ " events to "+
-				newAnimalsCreated+ " new Animals and " +
-				existingAnimals+" existing animals.");
+		MessageDialog.openInformation(editor.getSite().getShell(),
+				TrackerReportEditorPlugin.INSTANCE
+						.getString("_UI_TrackerTemplateWizard_label"), "The "
+						+ templateBean.getName() + " and " + tagsBean.getName()
+						+ " processed " + templateBean.getEvents().size()
+						+ " events on " + newAnimalsCreated
+						+ " new Animals and " + existingAnimals
+						+ " existing animals.");
 	}
 
-	
+	/**
+	 * Add an animal template to the animals.  Duplicate tags tags will be ignored.
+	 * 
+	 * @param animals
+	 * @param templateBean
+	 * @param editor
+	 */
 	public static final void addTemplate(Collection<Animal> animals,
 			TemplateBean templateBean, TrackerEditor editor) {
 		CompoundCommand compoundCommand = new CompoundCommand();
 		Command command = null;
 		int numberOfEventsInTemplate = templateBean.numberOfEvents();
 		for (Animal animal : animals) {
-			if(animal.getTags()==null || animal.getTags().isEmpty()){
+			if (animal.getTags() == null || animal.getTags().isEmpty()) {
 				// show dialog
 				MessageDialog.openError(editor.getSite().getShell(),
 						"Failed to add template",
-						"Could not find an active Tag for animal "+animal);
+						"No tag is assigned to animal " + animal + ".");
 				continue;
 			}
 			Tag tag = animal.activeTag();
-			if(tag==null){
+			if (tag == null) {
 				tag = animal.getTags().get(0);
 			}
-			 command = createAddEventsToTagCommand(tag, templateBean.getEvents(),
-					editor.getEditingDomain());
-			 compoundCommand.append(command);
+			command = createAddEventsToTagCommand(tag,
+					templateBean.getEvents(), editor.getEditingDomain());
+			if(command !=null){
+				compoundCommand.append(command);
+			}
 		}
-		
+
 		editor.getEditingDomain().getCommandStack().execute(compoundCommand);
-		MessageDialog.openInformation(
-				editor.getSite().getShell(),
-				TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerTemplateWizard_label"),
-				"The "+templateBean.getName() +
-				" added "+numberOfEventsInTemplate+ " events to "+
-				animals.size()+ " animals.");
+		MessageDialog.openInformation(editor.getSite().getShell(),
+				TrackerReportEditorPlugin.INSTANCE
+						.getString("_UI_TrackerTemplateWizard_label"), "The "
+						+ templateBean.getName() + " processed "
+						+ numberOfEventsInTemplate + " events on "
+						+ animals.size() + " animals.");
 
 	}
-	
-	public static final Collection<Animal> getSelectedAnimals(ISelection selection) {
+
+	public static final Collection<Animal> getSelectedAnimals(
+			ISelection selection) {
 		ArrayList<Animal> selectedAnimals = new ArrayList<Animal>();
 		if (selection instanceof IStructuredSelection) {
-			for (Iterator<?> iter = ((IStructuredSelection) selection).iterator(); iter
-					.hasNext();) {
+			for (Iterator<?> iter = ((IStructuredSelection) selection)
+					.iterator(); iter.hasNext();) {
 				Object o = iter.next();
-				if(o instanceof Animal){
+				if (o instanceof Animal) {
 					selectedAnimals.add((Animal) o);
 				}
 			}
@@ -248,10 +271,28 @@ public class ActionUtils {
 		return selectedAnimals;
 	}
 
+	/**
+	 * Adds non duplicate events to the tag. 
+	 * @param tag
+	 * @param events
+	 * @param editingDomain
+	 * @return a command for adding the events or a null if no events can be created.
+	 */
 	private static Command createAddEventsToTagCommand(Tag tag,
 			Collection<Event> events, EditingDomain editingDomain) {
-		Command command = AddCommand.create(editingDomain, tag,
-				TrackerPackage.eINSTANCE.getTag(), events);
+		Collection<Event> eventsToAdd = new ArrayList<Event>();
+		for (Event event : events) {
+			if(ActionUtils.canAddEventToAnimal((Animal)tag.eContainer(), event) ){
+				eventsToAdd.add(event);
+			}
+		}
+		
+		Command command = null;
+		if(!eventsToAdd.isEmpty()){
+			command = AddCommand.create(editingDomain, tag,
+					TrackerPackage.eINSTANCE.getTag(), eventsToAdd);
+		}
+	    
 		return command;
 	}
 
@@ -309,7 +350,7 @@ public class ActionUtils {
 		dialog.setTitle("Event Selection");
 		dialog.setLabelProvider(new LabelProvider() {
 			public String getText(Object element) {
-				
+
 				return (String) element;
 			}
 
@@ -327,7 +368,8 @@ public class ActionUtils {
 
 			public Object[] getElements(Object parent) {
 				if (model.isEmpty()) {
-					model.addAll(getModelInstances(TrackerPackage.eINSTANCE.getEvent()));
+					model.addAll(getModelInstances(TrackerPackage.eINSTANCE
+							.getEvent()));
 				}
 				return model.toArray();
 			}
@@ -341,18 +383,19 @@ public class ActionUtils {
 			return null;
 		}
 
-		//This will be a string of event names
+		// This will be a string of event names
 		Object[] results = dialog.getResult();
 
-		if(results == null || results.length != 1){
+		if (results == null || results.length != 1) {
 			return null;
-		} 
-		String nameOfEvent = (String)results[0];
-		EClass eClass = (EClass)TrackerPackage.eINSTANCE.getEClassifier(nameOfEvent);
+		}
+		String nameOfEvent = (String) results[0];
+		EClass eClass = (EClass) TrackerPackage.eINSTANCE
+				.getEClassifier(nameOfEvent);
 		return (Event) TrackerFactory.eINSTANCE.create(eClass);
-		
+
 	}
-	
+
 	public static Animal promptUserForAnimal(IWorkbenchPart targetPart) {
 		ListDialog dialog = new ListDialog(targetPart.getSite().getShell());
 
@@ -360,7 +403,7 @@ public class ActionUtils {
 		dialog.setTitle("Animal Selection");
 		dialog.setLabelProvider(new LabelProvider() {
 			public String getText(Object element) {
-				
+
 				return (String) element;
 			}
 
@@ -378,8 +421,9 @@ public class ActionUtils {
 
 			public Object[] getElements(Object parent) {
 				if (model.isEmpty()) {
-					model.addAll(getModelInstances(TrackerPackage.eINSTANCE.getAnimal()));
-				
+					model.addAll(getModelInstances(TrackerPackage.eINSTANCE
+							.getAnimal()));
+
 				}
 				return model.toArray();
 			}
@@ -393,22 +437,25 @@ public class ActionUtils {
 			return null;
 		}
 
-		//This will be a string of animal names
+		// This will be a string of animal names
 		Object[] results = dialog.getResult();
 
-		if(results == null || results.length != 1){
+		if (results == null || results.length != 1) {
 			return null;
-		} 
-		String nameOfEvent = (String)results[0];
-		EClass eClass = (EClass)TrackerPackage.eINSTANCE.getEClassifier(nameOfEvent);
+		}
+		String nameOfEvent = (String) results[0];
+		EClass eClass = (EClass) TrackerPackage.eINSTANCE
+				.getEClassifier(nameOfEvent);
 		return (Animal) TrackerFactory.eINSTANCE.create(eClass);
 	}
-	
-	public static final TemplateBean createTemplateBean(Animal animal, Event event){
+
+	public static final TemplateBean createTemplateBean(Animal animal,
+			Event event) {
 		Tag tag = TrackerFactory.eINSTANCE.createTag();
 		tag.getEvents().add(event);
 		animal.getTags().add(tag);
-		TemplateBean templateBean = new TemplateBean(animal,"User prompted dialog");
+		TemplateBean templateBean = new TemplateBean(animal,
+				"User prompted dialog");
 		return templateBean;
 	}
 
@@ -434,46 +481,78 @@ public class ActionUtils {
 	}
 
 	public static List<String> getModelInstances(EClass superEClass) {
-		
-			List<String> initialObjectNames = new ArrayList<String>();
-			
-			for (EClassifier eClassifier : TrackerPackage.eINSTANCE.getEClassifiers()) {
-				if (eClassifier instanceof EClass) {
-					EClass eClass = (EClass)eClassifier;
-					if (!eClass.isAbstract()) {
-						if(superEClass.isSuperTypeOf(eClass)){
-								initialObjectNames.add(eClass.getName());
-						}
-						
+
+		List<String> initialObjectNames = new ArrayList<String>();
+
+		for (EClassifier eClassifier : TrackerPackage.eINSTANCE
+				.getEClassifiers()) {
+			if (eClassifier instanceof EClass) {
+				EClass eClass = (EClass) eClassifier;
+				if (!eClass.isAbstract()) {
+					if (superEClass.isSuperTypeOf(eClass)) {
+						initialObjectNames.add(eClass.getName());
 					}
+
 				}
 			}
-			Collections.sort(initialObjectNames, CommonPlugin.INSTANCE.getComparator());
-		
+		}
+		Collections.sort(initialObjectNames, CommonPlugin.INSTANCE
+				.getComparator());
+
 		return initialObjectNames;
 	}
-	
-	static boolean validate(Premises premises, List<Diagnostic> validationDiagnostics) {
+
+	static boolean validate(Premises premises,
+			List<Diagnostic> validationDiagnostics) {
 		validationDiagnostics.clear();
-			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(premises);
-			if (diagnostic.getSeverity() != Diagnostic.OK) {
-				validationDiagnostics.add(diagnostic);
+		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(premises);
+		if (diagnostic.getSeverity() != Diagnostic.OK) {
+			validationDiagnostics.add(diagnostic);
 		}
 		return validationDiagnostics.isEmpty();
 	}
-	 
-	 static Premises getPremises(IFile file) throws IOException {
-		    ResourceSet resourceSet = new ResourceSetImpl();
-		
-		     URI uri = URI.createPlatformResourceURI(file.getFullPath()
-		             .toString(),true);
-		     Resource resource = resourceSet.createResource(uri);
-		     if (!resource.isLoaded()) {
-		         resource.load(null);
-		     }
-		     if(resource.getContents().get(0) instanceof Premises){
-		    	 return (Premises) resource.getContents().get(0);
-		     }
-		     throw new IOException("Cannot process the file "+file.getName()+", because it is not a Tracker Model Document!");
+
+	static Premises getPremises(IFile file) throws IOException {
+		ResourceSet resourceSet = new ResourceSetImpl();
+
+		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(),
+				true);
+		Resource resource = resourceSet.createResource(uri);
+		if (!resource.isLoaded()) {
+			resource.load(null);
 		}
+		if (resource.getContents().get(0) instanceof Premises) {
+			return (Premises) resource.getContents().get(0);
+		}
+		throw new IOException("Cannot process the file " + file.getName()
+				+ ", because it is not a Tracker Model Document!");
+	}
+	
+	/**
+	 * Preference policy for adding duplicates.
+	 * @param animalToReceiveEvent
+	 * @param eventToAdd
+	 * @return true if the event can be added
+	 */
+	public static boolean canAddEventToAnimal(Animal animalToReceiveEvent, Event eventToAdd){
+		for (Event historicalEvent : animalToReceiveEvent.allEvents()) {
+			if (historicalEvent.getEventCode() == eventToAdd.getEventCode()) {
+				Date historicalEventDate = historicalEvent.getDateTime();
+				Date eventToAddDate = eventToAdd.getDateTime();
+				//Subtract the timeout interval seconds from the eventToAddDate
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(eventToAddDate);
+				Preferences store = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
+				int timeoutWindow = store.getInt(PreferenceConstants.P_IGNORE_WINDOW);
+				cal.add(Calendar.SECOND, -timeoutWindow);
+				Date subtractedDate = cal.getTime();
+				if(historicalEventDate.after(subtractedDate)){
+//					System.out.println(historicalEventDate+ " is After "+subtractedDate);
+					return false;
+				}
+
+			}
+		}
+		return true;
+	}
 }

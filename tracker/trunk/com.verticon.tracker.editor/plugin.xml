@@ -157,5 +157,21 @@
         </enablement>
      </decorator>
   </extension>
+  <extension
+        point="org.eclipse.ui.preferencePages">
+     <page
+           class="com.verticon.tracker.editor.preferences.TrackerEditorPreferencePage"
+           id="com.verticon.tracker.prefs.view"
+           name="Tracker">
+     </page>
+  </extension>
+  
+  <extension
+        point="org.eclipse.core.runtime.preferences">
+     <initializer
+           class="com.verticon.tracker.editor.preferences.PreferenceInitializer">
+     </initializer>
+  </extension>
+  
   
 </plugin>

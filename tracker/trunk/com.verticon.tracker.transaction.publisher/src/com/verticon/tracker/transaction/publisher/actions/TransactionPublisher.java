@@ -23,6 +23,7 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
+import com.verticon.tracker.editor.util.ActionUtils;
 import com.verticon.tracker.transaction.publisher.views.EventPublisherView;
 import com.verticon.tracker.util.CommonUtilities;
 import com.verticon.transaction.editor.console.ConsoleUtil;
@@ -169,22 +170,7 @@ public class TransactionPublisher {
 		}
 	}
 	
-	/**
-	 * Crude preference policy for adding duplicates.
-	 * FIXME Create a preference policy for adding duplicates.
-	 * @param animalToReceiveEvent
-	 * @param eventToAdd
-	 * @return true if the event can be added
-	 */
-	public static boolean canAddEventToAnimal(Animal animalToReceiveEvent, Event eventToAdd){
-		for (Event historicalEvent : animalToReceiveEvent.allEvents()) {
-			if (historicalEvent.getEventCode() == eventToAdd.getEventCode()) {
-				return false;
-
-			}
-		}
-		return true;
-	}
+	
 	
 	private static final String simpleName(Event event){
 		String name = event.getClass().getSimpleName();
@@ -204,7 +190,7 @@ public class TransactionPublisher {
 		for (Event o : templateEvents) {
 			outputEvent= (Event) copier.copy(o);
 			CommonUtilities.setEventDate(outputEvent);
-			if(canAddEventToAnimal(animal, outputEvent) ){
+			if(ActionUtils.canAddEventToAnimal(animal, outputEvent) ){
 				outputResults.add(outputEvent);
 			}
 		}

@@ -39,7 +39,7 @@ public class FileTailPublisherPreferencePage
 	public FileTailPublisherPreferencePage() {
 		super(GRID);
 		setPreferenceStore(TrackerFileTailPublisherPlugin.getDefault().getPreferenceStore());
-		setDescription("A demonstration of a preference page implementation");
+		setDescription("Tracker Event Publisher Preferences");
 	}
 	
 	/**
