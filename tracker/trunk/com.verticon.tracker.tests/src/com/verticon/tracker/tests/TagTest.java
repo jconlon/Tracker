@@ -20,6 +20,7 @@ import junit.textui.TestRunner;
  * The following features are tested:
  * <ul>
  *   <li>{@link com.verticon.tracker.Tag#isUsainNumberUsed() <em>Usain Number Used</em>}</li>
+ *   <li>{@link com.verticon.tracker.Tag#getId() <em>Id</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -117,6 +118,18 @@ public class TagTest extends TestCase {
 		assertFalse(tag.isUsainNumberUsed());
 		tag.setIdNumber(840456789012345L);
 		assertTrue(tag.isUsainNumberUsed());
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Tag#getId() <em>Id</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * Overridden by subclasses
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Tag#getId()
+	 * @generated
+	 */
+	public void testGetId() {
+		fail();
 	}
 
 } //TagTest

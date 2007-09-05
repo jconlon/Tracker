@@ -30,6 +30,7 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getAge <em>Age</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getSexCode <em>Sex Code</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getSpeciesCode <em>Species Code</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getId <em>Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -248,6 +249,21 @@ public interface Animal extends EObject {
 	 * @generated
 	 */
 	String getSpeciesCode();
+
+	/**
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see com.verticon.tracker.TrackerPackage#getAnimal_Id()
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	String getId();
 
 	/**
 	 * <!-- begin-user-doc -->

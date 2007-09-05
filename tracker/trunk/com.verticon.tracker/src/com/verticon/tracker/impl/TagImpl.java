@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.verticon.tracker.impl.TagImpl#getIdNumber <em>Id Number</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.TagImpl#isUsainNumberUsed <em>Usain Number Used</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.TagImpl#getEvents <em>Events</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.TagImpl#getId <em>Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -87,6 +88,16 @@ public class TagImpl extends EObjectImpl implements Tag {
 	 * @ordered
 	 */
 	protected EList<Event> events;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -152,6 +163,15 @@ public class TagImpl extends EObjectImpl implements Tag {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getId() {
+		return Long.toString(getIdNumber());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -192,6 +212,8 @@ public class TagImpl extends EObjectImpl implements Tag {
 				return isUsainNumberUsed() ? Boolean.TRUE : Boolean.FALSE;
 			case TrackerPackage.TAG__EVENTS:
 				return getEvents();
+			case TrackerPackage.TAG__ID:
+				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -248,6 +270,8 @@ public class TagImpl extends EObjectImpl implements Tag {
 				return isUsainNumberUsed() != USAIN_NUMBER_USED_EDEFAULT;
 			case TrackerPackage.TAG__EVENTS:
 				return events != null && !events.isEmpty();
+			case TrackerPackage.TAG__ID:
+				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 		}
 		return super.eIsSet(featureID);
 	}

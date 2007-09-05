@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_smKWUDo3Edyw6--mXqZ7vg" activeDiagram="_smKWUTo3Edyw6--mXqZ7vg">
   <model href="tracker.ecore#/"/>
-  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="0,0">
+  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="1060,366">
     <property xmi:id="_smKWUjo3Edyw6--mXqZ7vg" key="pageFormatName" value="A2"/>
     <property xmi:id="_smKWUzo3Edyw6--mXqZ7vg" key="diagramWidth" value="1680"/>
     <property xmi:id="_smKWVDo3Edyw6--mXqZ7vg" key="diagramHeight" value="2376"/>
@@ -62,6 +62,11 @@
         <contained xsi:type="di:GraphNode" xmi:id="_smLkdDo3Edyw6--mXqZ7vg" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smLkdTo3Edyw6--mXqZ7vg" presentation="default">
             <element href="tracker.ecore#//Animal/speciesCode"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_LpRlUFvzEdyztfGADYS4wA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LpRlUVvzEdyztfGADYS4wA" presentation="default">
+            <element href="tracker.ecore#//Animal/id"/>
           </semanticModel>
         </contained>
       </contained>
@@ -148,6 +153,11 @@
             <element href="tracker.ecore#//Tag/usainNumberUsed"/>
           </semanticModel>
         </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="__Z2bEFvyEdyztfGADYS4wA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="__Z2bEVvyEdyztfGADYS4wA" presentation="default">
+            <element href="tracker.ecore#//Tag/id"/>
+          </semanticModel>
+        </contained>
       </contained>
       <contained xsi:type="di:GraphNode" xmi:id="_smMykDo3Edyw6--mXqZ7vg">
         <property xmi:id="_smMykTo3Edyw6--mXqZ7vg" key="eStructuralFeatureID" value="9"/>
@@ -212,6 +222,11 @@
         <contained xsi:type="di:GraphNode" xmi:id="_smNZrDo3Edyw6--mXqZ7vg" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smNZrTo3Edyw6--mXqZ7vg" presentation="default">
             <element href="tracker.ecore#//Event/idNumber"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_ZOEAAFvzEdyztfGADYS4wA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_ZOEAAVvzEdyztfGADYS4wA" presentation="default">
+            <element href="tracker.ecore#//Event/id"/>
           </semanticModel>
         </contained>
       </contained>
