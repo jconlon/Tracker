@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
 <chapter id="ch03">
-	<title>
-		Querying for Information and Selecting Elements in Documents
-	</title>
+	<title>Querying for Information and Selecting Document Elements</title>
 	<section>
 		<title>
 			<acronym>OCL</acronym>
