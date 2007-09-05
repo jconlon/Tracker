@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
 <chapter>
-	<title>
-		Events Manipulation with Templates and Tag IdNumber Files
-	</title>
+	<title>Adding Events</title>
 	<section>
 		<title>Adding Events and Animals to Documents</title>
 		<para>
@@ -160,7 +158,8 @@
 					attribute.
 				</para>
 			</note>
-			Memory based Tag Readers typically output multiple tag reads as lists of
+			Memory based Tag Readers typically output multiple tag reads
+			as lists of
 			<acronym>ASCII</acronym>
 			<code>Tag/@idNumber</code>
 			strings in text files. Tracker calls
