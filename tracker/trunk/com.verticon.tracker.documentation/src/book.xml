@@ -17,7 +17,7 @@
 		<edition>
 			Tracker User's Guide version 0.1.0 for Tracker V0.1.0
 		</edition>
-		<pubdate>August 25, 2007</pubdate>
+		<pubdate>September 5, 2007</pubdate>
 		<copyright>
 			<year>2007</year>
 			<year>2006</year>
@@ -85,16 +85,19 @@
 		<para>
 			Tracker is used by livestock producers, infrastructure
 			providers and process control auditors as an effective, low
-			cost solution to.
+			cost solution for
 			<itemizedlist mark='bullet'>
-				<listitem>
-					<para>maintain production efficiencies;</para>
+			    <listitem>
+					<para>recording animal history;</para>
 				</listitem>
 				<listitem>
-					<para>improve product quality;</para>
+					<para>maintaining production efficiency;</para>
 				</listitem>
 				<listitem>
-					<para>document process controls.</para>
+					<para>improving product quality;</para>
+				</listitem>
+				<listitem>
+					<para>documenting process control.</para>
 				</listitem>
 
 			</itemizedlist>
