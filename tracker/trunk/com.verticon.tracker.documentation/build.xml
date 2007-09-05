@@ -82,6 +82,7 @@
 		<xslt style="${html.stylesheet}" extension=".html" 
             basedir="generated-xml" destdir="doc">
 			<classpath refid="xalan.classpath" />
+			<param name="draft.mode" expression="yes"/>
 			<param name="eclipse.plugin.name" expression="Tracker Documentation"/>
 			<param name="eclipse.plugin.id" expression="com.verticon.tracker.help"/>
 			<param name="eclipse.plugin.provider" expression="Verticon, Inc."/>
