@@ -14,7 +14,6 @@
          </menu>
          <action
                class="com.verticon.tracker.export.xls.actions.ExportFairRegistrationEditorActionDelegate"
-               enablesFor="!"
                icon="$nl$/icons/etool16/export_wiz.gif"
                id="com.verticon.tracker.export.xls.ExportFairAction"
                label="%_UI_ExportFairRegistration_label"
@@ -22,7 +21,6 @@
                tooltip="Export the selected tracker model FairRegistration events as a XLS file."/>
          <action
                class="com.verticon.tracker.export.xls.actions.ExportFairRawEventsEditorActionDelegate"
-               enablesFor="!"
                icon="$nl$/icons/etool16/export_wiz.gif"
                id="com.verticon.tracker.export.xls.ExportFairRawAction"
                label="%_UI_ExportFairRegistrationRaw_label"
