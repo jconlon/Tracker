@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
 <chapter id="ch03">
-	<title>Querying for Information and Selecting Document Elements</title>
+	<title>Querying for Information and Selecting Elements in a Premises Document</title>
 	<section>
 		<title>
 			<acronym>OCL</acronym>
 			Introduction
 		</title>
 		<para>
-			Even though the structure of the Tracker Data Model is
-			simple, Tracker documents can hold large amounts of animal
+			Even though the structure of the Tracker Premises Model is
+			simple, Premises documents can hold large amounts of animal
 			and event history data. Obtaining information about or
-			selecting specific animals or events in large Tracker Model
+			selecting specific animals or events in large Tracker Premises
 			documents requires the use of Tracker's query and selection
 			tools.
 		</para>
@@ -21,15 +21,15 @@
 			,
 			<acronym>OCL</acronym>
 			is a simple declarative language used within Tracker's query
-			and selection to interpret model documents for information
-			or to query model documents in order to select specific
+			and selection to interpret Premises documents for information
+			or to query Premises documents in order to select specific
 			elements for further manipulation.
 		</para>
 
 		<para>
 			When using the
 			<acronym>OCL</acronym>
-			Interpreter or Query tools to interrogate Tracker documents
+			Interpreter or Query tools to interrogate Premises documents
 			refer to:
 			<xref linkend="ch02dataModel" />
 			.
@@ -47,7 +47,7 @@
 		<para>
 			The following are example
 			<acronym>OCL</acronym>
-			Interpreter rules that can be used for the querying Tracker
+			Interpreter rules that can be used for the querying Premises
 			documents. All examples use the Context Premises.
 
 			<example>

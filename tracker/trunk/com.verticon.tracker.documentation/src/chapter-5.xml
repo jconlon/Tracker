@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
 <chapter>
-	<title>Exporting Information from Tracker Model Documents</title>
+	<title>Exporting Information from Tracker Premises Documents</title>
 	<section>
 		<title>Exporting Functionality</title>
 		<warning>
@@ -13,14 +13,13 @@
 			</para>
 		</warning>
 		<para>
-			Model Document Export Functionality is provided by utilities
-			that are called from Tracker Editor menu items. These menus
-			are accessible from the main Tracker Editor menu.
+			Premises Document Export Functionality is provided by utilities
+			that are called from the main Tracker Editor menu.
 		</para>
 	</section>
 
 	<section>
-		<title>Exporting Excel Information</title>
+		<title>Exporting Information as <trademark>Microsoft</trademark> Excel documents</title>
 
 		<para>
 			<orderedlist numeration="arabic">
@@ -157,7 +156,7 @@
 
 	<section>
 		<title>
-			Exporting WLIC Information from Tracker Model Documents
+			Exporting WLIC Information from Tracker Premises Documents
 		</title>
 
 		<para>
@@ -170,7 +169,7 @@
 		<para>
 			The menu item
 			<emphasis>WLIC file...</emphasis>
-			will export the Tracker Model Document in a WLIC file
+			will export the Tracker Premises Document in a WLIC file
 			format.
 
 		</para>

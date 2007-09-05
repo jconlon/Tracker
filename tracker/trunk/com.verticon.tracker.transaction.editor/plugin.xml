@@ -16,7 +16,7 @@
         id = "com.verticon.tracker.transaction.editor.TrackerEditorID"
         name = "%_UI_EXTLibraryEditor_label"
         icon = "$nl$/icons/full/obj16/wksexview_obj.gif"
-        extensions = "tracker"
+        extensions = "tracker, premises"
         class = "com.verticon.transaction.editor.presentation.TrackerEditor" 
         contributorClass="com.verticon.transaction.editor.presentation.TrackerActionBarContributor" >
     </editor>

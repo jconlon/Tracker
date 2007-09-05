@@ -3,18 +3,16 @@
 <chapter id="ch02">
 	<title>Premises Model</title>
 	<section>
-		<title>Modeling the Animal Premises</title>
+		<title>Documenting the Animal Premises</title>
 		<para>
 			Computers can be thought of as mechanisms or containers for
-			modeling aspects of the real world. The Tracker software
-			application models the animals and event histories
-			associated with a livestock animal premises. The Tracker
-			application uses a document paradigm to model an animal
-			premises.
+			modeling and documenting aspects of the real world. The Tracker software
+			application documents the animals and event histories
+			associated with a livestock animal premises. 
 		</para>
 	</section>
 	<section>
-		<title>Tracker Model Documents</title>
+		<title>Tracker Premises Documents</title>
 		<para>
 			Whether it is word processing documents, spreadsheet
 			documents, or presentation documents, today's computer users
@@ -24,12 +22,12 @@
 		</para>
 		<para>
 			The Tracker enables users to create, transform and edit
-			tracker model documents that represent specific Animal
-			Premises. Model documents are displayed and manipulated with
+			Livestock Premises documents that represent a specific Animal
+			Premises. Premises documents are displayed and manipulated with
 			the various Tracker Editors, Wizards, and utilities. The
 			attributes of the premises, the animals in the premises and
 			the events associated with animals are specified within
-			these model documents.
+			these Premises documents.
 		</para>
 		<para>
 			Tracker Model document files utilize a .tracker file
@@ -41,25 +39,25 @@
 		<para>
 			In the Tracker all activity centers around the manipulation
 			of
-			<emphasis>Tracker Model Documents</emphasis>
-			. Understanding the structure of Tracker Model documents is
+			<emphasis>Tracker Premises Documents</emphasis>
+			. Understanding the structure of Tracker Premises documents is
 			the easiest way to learn to use the information management
 			facilities of the Tracker.
 		</para>
 		<para>
-			All tracker model documents structurally conform to the
-			<emphasis>Tracker Data Model</emphasis>
-			. In the Tracker Data Model a single Premises contains zero
+			All Tracker Premises documents structurally conform to the
+			<emphasis>Tracker Premises Model</emphasis>
+			. In the Tracker Premises Model a single Premises contains zero
 			or more animals. Each Animal must have at least one but may
 			have more than one (identification) tag. Each Tag must have
 			at least one but may have more than one associated event.
 		</para>
 		<para>
 			In the figure below you will find a graphic representation
-			of the core elements of the Tracker Data Model.
+			of the core elements of the Tracker Premises Model.
 
 			<figure>
-				<title>Tracker Data Model Core Elements</title>
+				<title>Tracker Premises Model Core Elements</title>
 				<graphic srccredit="Verticon, Inc., 2007"
 					fileref="figures/coreDataModel3.png" />
 			</figure>
@@ -68,7 +66,7 @@
 			<orderedlist numeration="loweralpha">
 				<listitem>
 					<para>
-						The core elements of the Data Model are depicted
+						The core elements of the Premises Model are depicted
 						as the blue rectangles in the figure.
 					</para>
 				</listitem>
@@ -90,7 +88,7 @@
 			The following table offers a text explanation of the Element
 			Relationships.
 			<table frame='all'>
-				<title>Core Elements of the Data Model</title>
+				<title>Core Elements of the Premises Model</title>
 				<tgroup cols='2' align='left' colsep='1' rowsep='1'>
 					<colspec colname='c1' />
 					<colspec colname='c2' />
@@ -145,7 +143,7 @@
 		<title>Entering Date and DateTime</title>
 		<para>
 			When manually entering Dates and DateTime attribute values
-			in Model documents the following formating patterns must be
+			in Premises documents the following formating patterns must be
 			observed:
 			<table frame='all'>
 				<title>Format Patterns for Text Entry</title>
