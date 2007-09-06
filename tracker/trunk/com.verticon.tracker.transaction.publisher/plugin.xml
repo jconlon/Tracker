@@ -5,11 +5,11 @@
    <extension
          point="org.eclipse.ui.views">
       <category
-            name="Tracker Event Publishers"
+            name="Tracker"
             id="com.verticon.tracker.transaction.publisher">
       </category>
       <view
-            name="Tracker Event Publishers"
+            name="Event Publishers"
             icon="icons/sample.gif"
             category="com.verticon.tracker.transaction.publisher"
             class="com.verticon.tracker.transaction.publisher.views.EventPublisherView"
