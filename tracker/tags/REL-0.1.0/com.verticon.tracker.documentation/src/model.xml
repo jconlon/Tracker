@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
+<chapter id="ch02">
+	<title>Premises Model</title>
+	<section>
+		<title>Documenting the Animal Premises</title>
+		<para>
+			Computers can be thought of as mechanisms or containers for
+			modeling and documenting aspects of the real world. The Tracker software
+			application documents the animals and event histories
+			associated with a livestock animal premises. 
+		</para>
+	</section>
+	<section>
+		<title>Tracker Premises Documents</title>
+		<para>
+			Whether it is word processing documents, spreadsheet
+			documents, or presentation documents, today's computer users
+			are most familiar with software applications that create and
+			manipulate documents to describe specific instances of
+			information.
+		</para>
+		<para>
+			The Tracker enables users to create, transform and edit
+			Livestock Premises documents that represent a specific Animal
+			Premises. Premises documents are displayed and manipulated with
+			the various Tracker Editors, Wizards, and utilities. The
+			attributes of the premises, the animals in the premises and
+			the events associated with animals are specified within
+			these Premises documents.
+		</para>
+		<para>
+			Tracker Model document files utilize a .tracker file
+			extension to distinguish them from other types of files.
+		</para>
+	</section>
+	<section id="ch02dataModel">
+		<title>Tracker Data Model</title>
+		<para>
+			In the Tracker all activity centers around the manipulation
+			of
+			<emphasis>Tracker Premises Documents</emphasis>
+			. Understanding the structure of Tracker Premises documents is
+			the easiest way to learn to use the information management
+			facilities of the Tracker.
+		</para>
+		<para>
+			All Tracker Premises documents structurally conform to the
+			<emphasis>Tracker Premises Model</emphasis>
+			. In the Tracker Premises Model a single Premises contains zero
+			or more animals. Each Animal must have at least one but may
+			have more than one (identification) tag. Each Tag must have
+			at least one but may have more than one associated event.
+		</para>
+		<para>
+			In the figure below you will find a graphic representation
+			of the core elements of the Tracker Premises Model.
+
+			<figure>
+				<title>Tracker Premises Model Core Elements</title>
+				<graphic srccredit="Verticon, Inc., 2007"
+					fileref="figures/coreDataModel3.png" />
+			</figure>
+		</para>
+		<para>
+			<orderedlist numeration="loweralpha">
+				<listitem>
+					<para>
+						The core elements of the Premises Model are depicted
+						as the blue rectangles in the figure.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The notation within the elements are the
+						attributes of the element.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The notation between the elements are the
+						relationships of the elements.
+					</para>
+				</listitem>
+			</orderedlist>
+		</para>
+		<para>
+			The following table offers a text explanation of the Element
+			Relationships.
+			<table frame='all'>
+				<title>Core Elements of the Premises Model</title>
+				<tgroup cols='2' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<thead>
+						<row>
+							<entry>Element Name</entry>
+							<entry>
+								Relationship to other Elements
+							</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>Premises</entry>
+							<entry>
+								There is one premises in a document
+							</entry>
+
+						</row>
+						<row>
+							<entry>Animal</entry>
+							<entry>
+								A premises can have zero or many animals
+							</entry>
+						</row>
+						<row>
+							<entry>Tag</entry>
+							<entry>
+								An Animal can have one or many tags
+							</entry>
+						</row>
+						<row>
+							<entry></entry>
+							<entry>
+								A Premises can have zero or many tags
+								that are unassigned
+							</entry>
+						</row>
+						<row>
+							<entry>Event</entry>
+							<entry>
+								A Tag can have one or many events
+							</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table>
+
+		</para>
+	</section>
+	<section>
+		<title>Entering Date and DateTime</title>
+		<para>
+			When manually entering Dates and DateTime attribute values
+			in Premises documents the following formating patterns must be
+			observed:
+			<table frame='all'>
+				<title>Format Patterns for Text Entry</title>
+				<tgroup cols='2' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<thead>
+						<row>
+							<entry>Attribute Name</entry>
+							<entry>Data Type</entry>
+							<entry>Format Pattern</entry>
+							<entry>Example</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>Animal/@birthDate</entry>
+							<entry>Date</entry>
+							<entry>yyyy.MM.dd</entry>
+							<entry>2006.11.12</entry>
+
+						</row>
+						<row>
+							<entry>Event/@dateTime</entry>
+							<entry>DateTime</entry>
+							<entry>yyyy.MM.dd.HH.mm.ss</entry>
+							<entry>2007.08.26.00.20.17</entry>
+						</row>
+
+					</tbody>
+				</tgroup>
+			</table>
+		</para>
+	</section>
+</chapter>
