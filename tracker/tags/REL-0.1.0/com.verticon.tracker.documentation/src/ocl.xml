@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
+<chapter id="ch03">
+	<title>Querying for Information and Selecting Elements</title>
+	<section>
+		<title>
+			<acronym>OCL</acronym>
+			Introduction
+		</title>
+		<para>
+			Even though the structure of the Tracker Premises Model is
+			simple, Premises documents can hold large amounts of animal
+			and event history data. Obtaining information about or
+			selecting specific animals or events in large Tracker
+			Premises documents requires the use of Tracker's query and
+			selection tools.
+		</para>
+		<para>
+			The
+			<firstterm>Object Constraint Language</firstterm>
+			,
+			<acronym>OCL</acronym>
+			is a simple declarative language used within Tracker's query
+			and selection to interpret Premises documents for
+			information or to query Premises documents in order to
+			select specific elements for further manipulation.
+		</para>
+
+		<para>
+			When using the
+			<acronym>OCL</acronym>
+			Interpreter or Query tools to interrogate Premises documents
+			refer to:
+			<xref linkend="ch02dataModel" />
+			.
+		</para>
+
+	</section>
+	<section>
+		<title>OCL Interpreter Examples</title>
+		<warning>
+			<para>
+				The OCL interpreter and query functionality in Tracker
+				is limited by:
+				<ulink
+					url="https://bugs.eclipse.org/bugs/show_bug.cgi?id=164795">
+					<citetitle>Eclipse Bug 164754</citetitle>
+				</ulink>
+				which does not allow the current OCL implementation to
+				query the dataType ELong. This dataType is associated
+				with the
+				<code>idNumber</code>
+				attributes of the
+				<code>Event, Animal, and Tag</code>
+				elements.
+			</para>
+			<para>
+				As a temporary workaround the attribute
+				<code>id</code>
+				attribute with a dataType of String has been added to
+				the
+				<code>Event, Animal, and Tag</code>
+				elements. For OCL queries and selections use the
+				<code>id</code>
+				attribute instead of
+				<code>idNumber</code>
+				.
+			</para>
+			<para>
+				The following examples use this attribute instead of
+				<code>idNumber</code>
+				.
+			</para>
+		</warning>
+		<para>
+		To bring up the OCL Interpreter, from the Tracker Editor menu in the Workbench,
+		select the OCL Interpreter Menu and select 'Show Console'.
+	    menu. The OCL Interpreter console will show below the Tracker Editor.
+		</para>
+		<para>
+			The following are example
+			<acronym>OCL</acronym>
+			Interpreter rules that can be used for the querying Premises
+			documents. All examples use the <code>Premises</code> Element
+			as the <emphasis>Context</emphasis> for Interpreter.  Select the 
+			Premises Element in the Premises Document and cut and past the 
+			following examples into the lower pane of the OCL Interpreter
+			Console Window.
+			<example>
+				<title>
+					Listing of animals and the number of events
+					associated with each.
+				</title>
+				<programlisting>
+animals -> collect(
+	a: Animal | Tuple {
+		animal: Animal = a,
+		numEvents: Integer = a->size()
+		
+	}
+)
+  				</programlisting>
+  			</example>
+  			<example>
+				<title>
+					Listing of animals and the set of events associated with each.
+				</title>
+				<programlisting>
+animals -> collect(
+	a: Animal | Tuple {
+		ain: String = a.id,
+		events: Set(Event) = a.allEvents()
+	}
+)
+  				</programlisting>
+  			</example>
+  			<example>
+				<title>
+					Listing of animalIds and the WeighIn events
+					associated with each.  
+				</title>
+				<programlisting>
+animals -> collect(
+	a: Animal | Tuple {
+		ain: String = a.id,
+		weighIns: Set(WeighIn) = WeighIn.allInstances()->select(id=a.id)
+	}
+)
+
+  				</programlisting>
+  			</example>
+  			<example>
+				<title>
+					Listing of animalIds and the Weights
+					associated with each. 
+				</title>
+				<programlisting>
+animals -> collect(
+	a: Animal | Tuple {
+		ain: String = a.id,
+		weights: Set(Integer) = WeighIn.allInstances()->select(id=a.id)->collect(wi:WeighIn | wi.weight) ->asSet()
+	}
+)
+  				</programlisting>
+  			</example>
+  			
+  	
+  	</para>
+  </section>
+
+</chapter>
