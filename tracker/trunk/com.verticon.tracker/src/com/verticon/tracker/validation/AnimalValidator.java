@@ -35,4 +35,6 @@ public interface AnimalValidator {
 	boolean validateSpeciesCode(String value);
 
 	boolean validateId(String value);
+
+	boolean validateComments(String value);
 }

@@ -85,6 +85,7 @@ public class AnimalItemProvider
 			addSexCodePropertyDescriptor(object);
 			addSpeciesCodePropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
+			addCommentsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -290,6 +291,28 @@ public class AnimalItemProvider
 	}
 
 /**
+	 * This adds a property descriptor for the Comments feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCommentsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Animal_comments_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_comments_feature", "_UI_Animal_type"),
+				 TrackerPackage.Literals.ANIMAL__COMMENTS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -381,6 +404,7 @@ public class AnimalItemProvider
 			case TrackerPackage.ANIMAL__SEX_CODE:
 			case TrackerPackage.ANIMAL__SPECIES_CODE:
 			case TrackerPackage.ANIMAL__ID:
+			case TrackerPackage.ANIMAL__COMMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TrackerPackage.ANIMAL__TAGS:
