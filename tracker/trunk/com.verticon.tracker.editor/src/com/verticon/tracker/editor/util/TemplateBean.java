@@ -85,7 +85,7 @@ import com.verticon.tracker.TrackerFactory;
 		}
 		else {
 			 events = new ArrayList<Event>();
-			 events.addAll(animal.allEvents());//Just add all the events
+			 events.addAll(copiedAnimal.allEvents());//Just add all the events
 		}
 		return events;
 	}

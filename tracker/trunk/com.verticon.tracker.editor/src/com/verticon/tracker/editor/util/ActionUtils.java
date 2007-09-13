@@ -274,6 +274,7 @@ public class ActionUtils {
 
 	/**
 	 * Adds non duplicate events to the tag. 
+	 * FIXME This will only add events to one c
 	 * @param tag
 	 * @param events
 	 * @param editingDomain

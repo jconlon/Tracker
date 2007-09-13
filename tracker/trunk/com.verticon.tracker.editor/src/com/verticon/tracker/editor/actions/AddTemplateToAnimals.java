@@ -58,7 +58,7 @@ public class AddTemplateToAnimals implements IObjectActionDelegate {
 		if(templateBean == null){
 			return;
 		}
-		if(templateBean.getEvents()==null || templateBean.getEvents().isEmpty()){
+		if(templateBean.numberOfEvents()==0){
 			MessageDialog.openError(targetPart.getSite().getShell(),
 					"Failed to add template",
 					"Template has no events. ");
