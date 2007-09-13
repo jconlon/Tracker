@@ -387,6 +387,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="phone" lowerBound="1" eType="#//USPhoneNumber"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="parent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="club" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SaleOrder" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Exhibit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="USPhoneNumber" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EClass" name="WeighIn" eSuperTypes="#//Event">

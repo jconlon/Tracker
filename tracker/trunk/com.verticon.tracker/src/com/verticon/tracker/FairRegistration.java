@@ -20,6 +20,8 @@ package com.verticon.tracker;
  *   <li>{@link com.verticon.tracker.FairRegistration#getPhone <em>Phone</em>}</li>
  *   <li>{@link com.verticon.tracker.FairRegistration#getParent <em>Parent</em>}</li>
  *   <li>{@link com.verticon.tracker.FairRegistration#getClub <em>Club</em>}</li>
+ *   <li>{@link com.verticon.tracker.FairRegistration#getSaleOrder <em>Sale Order</em>}</li>
+ *   <li>{@link com.verticon.tracker.FairRegistration#getExhibit <em>Exhibit</em>}</li>
  * </ul>
  * </p>
  *
@@ -171,5 +173,57 @@ public interface FairRegistration extends Event {
 	 * @generated
 	 */
 	void setClub(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Sale Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sale Order</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sale Order</em>' attribute.
+	 * @see #setSaleOrder(int)
+	 * @see com.verticon.tracker.TrackerPackage#getFairRegistration_SaleOrder()
+	 * @model
+	 * @generated
+	 */
+	int getSaleOrder();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.FairRegistration#getSaleOrder <em>Sale Order</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Sale Order</em>' attribute.
+	 * @see #getSaleOrder()
+	 * @generated
+	 */
+	void setSaleOrder(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Exhibit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Exhibit</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Exhibit</em>' attribute.
+	 * @see #setExhibit(int)
+	 * @see com.verticon.tracker.TrackerPackage#getFairRegistration_Exhibit()
+	 * @model
+	 * @generated
+	 */
+	int getExhibit();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.FairRegistration#getExhibit <em>Exhibit</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Exhibit</em>' attribute.
+	 * @see #getExhibit()
+	 * @generated
+	 */
+	void setExhibit(int value);
 
 } // FairRegistration
