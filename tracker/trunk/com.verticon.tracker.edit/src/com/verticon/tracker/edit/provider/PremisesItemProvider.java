@@ -230,6 +230,11 @@ public class PremisesItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.PREMISES__ANIMALS,
+				 TrackerFactory.eINSTANCE.createBovineDairy()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TrackerPackage.Literals.PREMISES__ANIMALS,
 				 TrackerFactory.eINSTANCE.createSwine()));
 
 		newChildDescriptors.add

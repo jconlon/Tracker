@@ -112,13 +112,20 @@ public abstract class EventTest extends TestCase {
 	/**
 	 * Tests the '{@link com.verticon.tracker.Event#getId() <em>Id</em>}' feature getter.
 	 * <!-- begin-user-doc -->
-	 * Overridden by subclasses
+	 * 
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Event#getId()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testGetId() {
-		fail();
+		assertNotNull(getFixture());
+		assertEquals(0,getFixture().getIdNumber());
+		
+		Tag ain = TrackerFactory.eINSTANCE.createTag();
+		ain.setIdNumber(_123456789012345);
+		ain.getEvents().add(getFixture());
+		
+		assertEquals("123456789012345", getFixture().getId());
 	}
 
 	public void testGetComments(){

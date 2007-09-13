@@ -129,7 +129,7 @@ public abstract class AnimalTest extends TestCase {
 	public void testGetIdNumber() {
 		//Test animal with one tag that has a number
 		assertNotNull("Test with one tag that has a number", getFixture());
-		assertEquals(0, getFixture().getIdNumber());
+		assertEquals(AIN_1, getFixture().getIdNumber());
 		
 		//Test animal with no tag
 		Animal animal2 = TrackerFactory.eINSTANCE.createBovineBeef();
@@ -147,7 +147,7 @@ public abstract class AnimalTest extends TestCase {
 		
 		//Test animal with two tags one with an IdNumber the other without
 		tag2.setIdNumber(AIN_1);
-		assertEquals("Test with no tag", 0, animal2.getIdNumber());
+		assertEquals("Test with no tag", AIN_1, animal2.getIdNumber());
 		
 		//Test animal with two tags one with an event
 		tag2.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
@@ -233,10 +233,44 @@ public abstract class AnimalTest extends TestCase {
 	 * Overridden by subclasses
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#getId()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testGetId() {
-		fail();
+		//Test animal with one tag that has a number
+		assertNotNull("Test with one tag that has a number", getFixture());
+		assertEquals(Long.toString(AIN_1), getFixture().getId());
+		
+		//Test animal with no tag
+		Animal animal2 = TrackerFactory.eINSTANCE.createBovineBeef();
+		assertEquals("Test with no tag", "0", animal2.getId());
+		
+		//Test animal with one tag that has no idNumber
+		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
+		animal2.getTags().add(tag2);
+		assertEquals("Test with no tag", "0", animal2.getId());
+		
+		//Test animal with two tags that have no numbers
+		Tag tag3 = TrackerFactory.eINSTANCE.createTag();
+		animal2.getTags().add(tag3);
+		assertEquals("Test with no tag", "0", animal2.getId());
+		
+		//Test animal with two tags one with an IdNumber the other without
+		tag2.setIdNumber(AIN_1);
+		assertEquals("Test with no tag", Long.toString(AIN_1), animal2.getId());
+		
+		//Test animal with two tags one with an event
+		tag2.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
+		assertEquals("Test with no tag", Long.toString(AIN_1), animal2.getId());
+		
+		//Find the tag with the most current event timestamp.
+		tag3.setIdNumber(AIN_2);
+		try {
+	        long numMillisecondsToSleep = 500; // 5 seconds
+	        Thread.sleep(numMillisecondsToSleep);
+	    } catch (InterruptedException e) {
+	    }
+		tag3.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
+		assertEquals( Long.toString(AIN_2), animal2.getId());
 	}
 
 	/**

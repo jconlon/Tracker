@@ -20,7 +20,7 @@ package com.verticon.tracker;
  * </p>
  *
  * @see com.verticon.tracker.TrackerPackage#getBovineDairy()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface BovineDairy extends Bovine {

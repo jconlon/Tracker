@@ -126,10 +126,16 @@ public class TagTest extends TestCase {
 	 * Overridden by subclasses
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Tag#getId()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testGetId() {
-		fail();
+		Tag tag = getFixture();
+		assertNotNull(tag);
+		tag.setIdNumber(123456789012345L);
+		assertEquals("Test with no tag", Long.toString(123456789012345L), tag.getId());
+		
+		tag.setIdNumber(840456789012345L);
+		assertEquals("Test with no tag", Long.toString(840456789012345L), tag.getId());
 	}
 
 } //TagTest

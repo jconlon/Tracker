@@ -331,7 +331,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="buffaloBreed" eType="#//BisonBreed"
         defaultValueLiteral="Unspecified"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BovineDairy" abstract="true" eSuperTypes="#//Bovine">
+  <eClassifiers xsi:type="ecore:EClass" name="BovineDairy" eSuperTypes="#//Bovine">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dairyBreed" eType="#//DairyBreed"
         defaultValueLiteral="Unspecified"/>
   </eClassifiers>
