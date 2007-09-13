@@ -20,6 +20,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		Preferences store = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
 		
 		store.setDefault(PreferenceConstants.P_IGNORE_WINDOW,PreferenceConstants.DEFAULT_IGNORE_WINDOW);
+		store.setDefault(PreferenceConstants.P_VALIDATE_BEFORE_EXPORT,PreferenceConstants.DEFAULT_VALIDATE_BEFORE_EXPORT);
 	}
 
 }

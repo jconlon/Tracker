@@ -8,6 +8,7 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Preferences;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -17,6 +18,8 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
 
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.editor.preferences.PreferenceConstants;
+import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 
 /**
  * Base class for exporting Excel spreadsheets. Subclasses only need to set the
@@ -61,7 +64,9 @@ public class ExportPremisesBase {
 
 					try {
 						premises = ActionUtils.getPremises(iFile);
-						if (!ActionUtils.validate(premises,
+						Preferences store = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
+						boolean validateBeforeExport = store.getBoolean(PreferenceConstants.P_VALIDATE_BEFORE_EXPORT);
+						if (validateBeforeExport && !ActionUtils.validate(premises,
 								validationDiagnostics)) {
 							throw new InvocationTargetException(
 									new IOException(

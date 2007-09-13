@@ -32,6 +32,7 @@ public class ExportFairRegistrationEditorActionDelegate extends ExportPremisesBa
 		FileDialog dlg = new FileDialog(targetEditor.getSite().getShell(),
 				SWT.SAVE);
 		dlg.setFilterExtensions(new String[]{ "*.xls" });
+		dlg.setText("Name the Fair WeighIn and Registration Report");
 	     fileName = dlg.open();
 		
 	
