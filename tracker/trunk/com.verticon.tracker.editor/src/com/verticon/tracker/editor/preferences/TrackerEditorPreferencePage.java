@@ -40,6 +40,10 @@ public class TrackerEditorPreferencePage
 				PreferenceConstants.P_IGNORE_WINDOW,
 				"&Seconds Interval to Ignore Duplicate Bulk Events:",
 				getFieldEditorParent()));
+		addField(new BooleanFieldEditor(
+				PreferenceConstants.P_VALIDATE_BEFORE_EXPORT,
+				"&Validate Documents Before Exporting:",
+				getFieldEditorParent()));
 		
 	}
 

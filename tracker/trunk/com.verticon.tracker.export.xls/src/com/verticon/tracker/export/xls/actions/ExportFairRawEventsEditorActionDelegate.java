@@ -43,7 +43,8 @@ public class ExportFairRawEventsEditorActionDelegate extends ExportPremisesBase 
 		FileDialog dlg = new FileDialog(targetEditor.getSite().getShell(),
 				SWT.SAVE);
 		dlg.setFilterExtensions(new String[]{ "*.xls" });
-	     fileName = dlg.open();
+		dlg.setText("Name the Raw Fair Events Export Report");
+	    fileName = dlg.open();
 		
 	
 		if (fileName == null) {
