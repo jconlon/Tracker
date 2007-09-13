@@ -1392,7 +1392,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(bovineBisonEClass, BovineBison.class, "BovineBison", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBovineBison_BuffaloBreed(), this.getBisonBreed(), "buffaloBreed", "Unspecified", 0, 1, BovineBison.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(bovineDairyEClass, BovineDairy.class, "BovineDairy", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(bovineDairyEClass, BovineDairy.class, "BovineDairy", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBovineDairy_DairyBreed(), this.getDairyBreed(), "dairyBreed", "Unspecified", 0, 1, BovineDairy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tagAppliedEClass, TagApplied.class, "TagApplied", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

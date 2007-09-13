@@ -112,6 +112,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.BOVINE_BEEF: return createBovineBeef();
 			case TrackerPackage.OVINE: return createOvine();
 			case TrackerPackage.BOVINE_BISON: return createBovineBison();
+			case TrackerPackage.BOVINE_DAIRY: return createBovineDairy();
 			case TrackerPackage.TAG_APPLIED: return createTagApplied();
 			case TrackerPackage.MOVED_IN: return createMovedIn();
 			case TrackerPackage.MOVED_OUT: return createMovedOut();
@@ -339,6 +340,16 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public BovineBison createBovineBison() {
 		BovineBisonImpl bovineBison = new BovineBisonImpl();
 		return bovineBison;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BovineDairy createBovineDairy() {
+		BovineDairyImpl bovineDairy = new BovineDairyImpl();
+		return bovineDairy;
 	}
 
 	/**

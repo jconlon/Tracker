@@ -46,6 +46,7 @@ public class TrackerTests extends TestSuite {
 		suite.addTestSuite(BovineBeefTest.class);
 		suite.addTestSuite(OvineTest.class);
 		suite.addTestSuite(BovineBisonTest.class);
+		suite.addTestSuite(BovineDairyTest.class);
 		suite.addTestSuite(TagAppliedTest.class);
 		suite.addTestSuite(MovedInTest.class);
 		suite.addTestSuite(MovedOutTest.class);

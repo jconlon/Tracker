@@ -150,6 +150,15 @@ public interface TrackerFactory extends EFactory {
 	BovineBison createBovineBison();
 
 	/**
+	 * Returns a new object of class '<em>Bovine Dairy</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Bovine Dairy</em>'.
+	 * @generated
+	 */
+	BovineDairy createBovineDairy();
+
+	/**
 	 * Returns a new object of class '<em>Tag Applied</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

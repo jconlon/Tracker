@@ -27,7 +27,7 @@ import com.verticon.tracker.TrackerPackage;
  *
  * @generated
  */
-public abstract class BovineDairyImpl extends BovineImpl implements BovineDairy {
+public class BovineDairyImpl extends BovineImpl implements BovineDairy {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -167,6 +167,11 @@ public abstract class BovineDairyImpl extends BovineImpl implements BovineDairy 
 		result.append(dairyBreed);
 		result.append(')');
 		return result.toString();
+	}
+	
+	@Override
+	public String getBreed() {
+		return getDairyBreed().getName();
 	}
 
 } //BovineDairyImpl

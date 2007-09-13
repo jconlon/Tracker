@@ -383,6 +383,29 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.BovineDairy} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BovineDairyItemProvider bovineDairyItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.BovineDairy}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBovineDairyAdapter() {
+		if (bovineDairyItemProvider == null) {
+			bovineDairyItemProvider = new BovineDairyItemProvider(this);
+		}
+
+		return bovineDairyItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.TagApplied} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -694,6 +717,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (bovineBeefItemProvider != null) bovineBeefItemProvider.dispose();
 		if (ovineItemProvider != null) ovineItemProvider.dispose();
 		if (bovineBisonItemProvider != null) bovineBisonItemProvider.dispose();
+		if (bovineDairyItemProvider != null) bovineDairyItemProvider.dispose();
 		if (tagAppliedItemProvider != null) tagAppliedItemProvider.dispose();
 		if (movedInItemProvider != null) movedInItemProvider.dispose();
 		if (movedOutItemProvider != null) movedOutItemProvider.dispose();
