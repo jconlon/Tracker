@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.transaction.publisher"
       label="Tracker Transaction Publisher"
-      version="0.1.0"
+      version="0.1.1"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.transaction.publisher">
 
