@@ -52,6 +52,7 @@ import com.verticon.tracker.util.Species;
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSexCode <em>Sex Code</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSpeciesCode <em>Species Code</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getId <em>Id</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getComments <em>Comments</em>}</li>
  * </ul>
  * </p>
  *
@@ -198,6 +199,26 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @ordered
 	 */
 	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getComments() <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMMENTS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getComments() <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected String comments = COMMENTS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -393,6 +414,27 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 /**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getComments() {
+		return comments;
+	}
+
+/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setComments(String newComments) {
+		String oldComments = comments;
+		comments = newComments;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__COMMENTS, oldComments, comments));
+	}
+
+/**
+	 * <!-- begin-user-doc -->
 	 * Hand implemented for speed (versus OCL??) because this method is used to generate the
 	 * key attribute for Animal.
 	 * Originally generated with the following OCL:
@@ -496,6 +538,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return getSpeciesCode();
 			case TrackerPackage.ANIMAL__ID:
 				return getId();
+			case TrackerPackage.ANIMAL__COMMENTS:
+				return getComments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -519,6 +563,9 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				getTags().clear();
 				getTags().addAll((Collection<? extends Tag>)newValue);
 				return;
+			case TrackerPackage.ANIMAL__COMMENTS:
+				setComments((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -539,6 +586,9 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return;
 			case TrackerPackage.ANIMAL__TAGS:
 				getTags().clear();
+				return;
+			case TrackerPackage.ANIMAL__COMMENTS:
+				setComments(COMMENTS_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -572,6 +622,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return SPECIES_CODE_EDEFAULT == null ? getSpeciesCode() != null : !SPECIES_CODE_EDEFAULT.equals(getSpeciesCode());
 			case TrackerPackage.ANIMAL__ID:
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
+			case TrackerPackage.ANIMAL__COMMENTS:
+				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -590,6 +642,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 		result.append(birthDate);
 		result.append(", sex: ");
 		if (sexESet) result.append(sex); else result.append("<unset>");
+		result.append(", comments: ");
+		result.append(comments);
 		result.append(')');
 		return result.toString();
 	}
