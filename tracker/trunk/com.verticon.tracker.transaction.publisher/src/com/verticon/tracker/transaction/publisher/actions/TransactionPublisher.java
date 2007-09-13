@@ -157,7 +157,7 @@ public class TransactionPublisher {
 		Animal animal= CommonUtilities.findAnimal(tagNumberToAdd, activePremises, templateAnimal);
 		Collection<Event> events = copyValidEvents(templateEvents,  animal);
 		for (Event event : events) {
-			log(event.getDateTime()+"\t"+animal+'\t'+simpleName( event));
+			log(event.getDateTime()+"\t"+animal.getId()+'\t'+animal.getSpecies()+'\t'+simpleName( event));
 			Tag tag = animal.activeTag();
 			//If the animal was created from the template, because it did not exist in the premises
 			// then it has no activeTag, but it will have a tag that was added during the creation
