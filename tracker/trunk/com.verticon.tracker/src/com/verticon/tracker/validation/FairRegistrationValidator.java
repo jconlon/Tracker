@@ -21,4 +21,8 @@ public interface FairRegistrationValidator {
 	boolean validatePhone(String value);
 	boolean validateParent(String value);
 	boolean validateClub(String value);
+
+	boolean validateSaleOrder(int value);
+
+	boolean validateExhibit(int value);
 }

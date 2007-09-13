@@ -80,6 +80,7 @@ public class EventItemProvider
 			addCorrectionPropertyDescriptor(object);
 			addCommentsPropertyDescriptor(object);
 			addIdNumberPropertyDescriptor(object);
+			addIdPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -239,6 +240,28 @@ public class EventItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Event_id_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Event_id_feature", "_UI_Event_type"),
+				 TrackerPackage.Literals.EVENT__ID,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * This will use the name of the subclass to find a local specific label.
@@ -278,6 +301,7 @@ public class EventItemProvider
 			case TrackerPackage.EVENT__CORRECTION:
 			case TrackerPackage.EVENT__COMMENTS:
 			case TrackerPackage.EVENT__ID_NUMBER:
+			case TrackerPackage.EVENT__ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

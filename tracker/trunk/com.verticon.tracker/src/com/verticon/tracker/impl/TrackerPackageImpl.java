@@ -766,6 +766,24 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getFairRegistration_SaleOrder() {
+		return (EAttribute)fairRegistrationEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFairRegistration_Exhibit() {
+		return (EAttribute)fairRegistrationEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getWeighIn() {
 		return weighInEClass;
 	}
@@ -1253,6 +1271,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(fairRegistrationEClass, FAIR_REGISTRATION__PHONE);
 		createEAttribute(fairRegistrationEClass, FAIR_REGISTRATION__PARENT);
 		createEAttribute(fairRegistrationEClass, FAIR_REGISTRATION__CLUB);
+		createEAttribute(fairRegistrationEClass, FAIR_REGISTRATION__SALE_ORDER);
+		createEAttribute(fairRegistrationEClass, FAIR_REGISTRATION__EXHIBIT);
 
 		weighInEClass = createEClass(WEIGH_IN);
 		createEAttribute(weighInEClass, WEIGH_IN__WEIGHT);
@@ -1441,6 +1461,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getFairRegistration_Phone(), this.getUSPhoneNumber(), "phone", null, 1, 1, FairRegistration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFairRegistration_Parent(), ecorePackage.getEString(), "parent", null, 0, 1, FairRegistration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFairRegistration_Club(), ecorePackage.getEString(), "club", null, 0, 1, FairRegistration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFairRegistration_SaleOrder(), ecorePackage.getEInt(), "SaleOrder", null, 0, 1, FairRegistration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFairRegistration_Exhibit(), ecorePackage.getEInt(), "Exhibit", null, 0, 1, FairRegistration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(weighInEClass, WeighIn.class, "WeighIn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getWeighIn_Weight(), ecorePackage.getEInt(), "weight", null, 1, 1, WeighIn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

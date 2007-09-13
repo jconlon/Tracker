@@ -76,6 +76,8 @@ public class FairRegistrationItemProvider
 			addPhonePropertyDescriptor(object);
 			addParentPropertyDescriptor(object);
 			addClubPropertyDescriptor(object);
+			addSaleOrderPropertyDescriptor(object);
+			addExhibitPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -191,6 +193,50 @@ public class FairRegistrationItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Sale Order feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSaleOrderPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FairRegistration_SaleOrder_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FairRegistration_SaleOrder_feature", "_UI_FairRegistration_type"),
+				 TrackerPackage.Literals.FAIR_REGISTRATION__SALE_ORDER,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Exhibit feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addExhibitPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FairRegistration_Exhibit_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FairRegistration_Exhibit_feature", "_UI_FairRegistration_type"),
+				 TrackerPackage.Literals.FAIR_REGISTRATION__EXHIBIT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns FairRegistration.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -230,6 +276,8 @@ public class FairRegistrationItemProvider
 			case TrackerPackage.FAIR_REGISTRATION__PHONE:
 			case TrackerPackage.FAIR_REGISTRATION__PARENT:
 			case TrackerPackage.FAIR_REGISTRATION__CLUB:
+			case TrackerPackage.FAIR_REGISTRATION__SALE_ORDER:
+			case TrackerPackage.FAIR_REGISTRATION__EXHIBIT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

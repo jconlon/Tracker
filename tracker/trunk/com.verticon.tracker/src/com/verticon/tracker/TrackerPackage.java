@@ -2442,13 +2442,31 @@ public interface TrackerPackage extends EPackage {
 	int FAIR_REGISTRATION__CLUB = EVENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Sale Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAIR_REGISTRATION__SALE_ORDER = EVENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Exhibit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAIR_REGISTRATION__EXHIBIT = EVENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Fair Registration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FAIR_REGISTRATION_FEATURE_COUNT = EVENT_FEATURE_COUNT + 5;
+	int FAIR_REGISTRATION_FEATURE_COUNT = EVENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.WeighInImpl <em>Weigh In</em>}' class.
@@ -3218,6 +3236,28 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getFairRegistration_Club();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.FairRegistration#getSaleOrder <em>Sale Order</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sale Order</em>'.
+	 * @see com.verticon.tracker.FairRegistration#getSaleOrder()
+	 * @see #getFairRegistration()
+	 * @generated
+	 */
+	EAttribute getFairRegistration_SaleOrder();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.FairRegistration#getExhibit <em>Exhibit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Exhibit</em>'.
+	 * @see com.verticon.tracker.FairRegistration#getExhibit()
+	 * @see #getFairRegistration()
+	 * @generated
+	 */
+	EAttribute getFairRegistration_Exhibit();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.WeighIn <em>Weigh In</em>}'.
@@ -4006,6 +4046,22 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FAIR_REGISTRATION__CLUB = eINSTANCE.getFairRegistration_Club();
+
+		/**
+		 * The meta object literal for the '<em><b>Sale Order</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FAIR_REGISTRATION__SALE_ORDER = eINSTANCE.getFairRegistration_SaleOrder();
+
+		/**
+		 * The meta object literal for the '<em><b>Exhibit</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FAIR_REGISTRATION__EXHIBIT = eINSTANCE.getFairRegistration_Exhibit();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.WeighInImpl <em>Weigh In</em>}' class.

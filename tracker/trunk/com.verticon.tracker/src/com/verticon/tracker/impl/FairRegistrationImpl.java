@@ -27,6 +27,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link com.verticon.tracker.impl.FairRegistrationImpl#getPhone <em>Phone</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.FairRegistrationImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.FairRegistrationImpl#getClub <em>Club</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.FairRegistrationImpl#getSaleOrder <em>Sale Order</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.FairRegistrationImpl#getExhibit <em>Exhibit</em>}</li>
  * </ul>
  * </p>
  *
@@ -139,6 +141,46 @@ public class FairRegistrationImpl extends EventImpl implements FairRegistration 
 	 * @ordered
 	 */
 	protected String club = CLUB_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSaleOrder() <em>Sale Order</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSaleOrder()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int SALE_ORDER_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getSaleOrder() <em>Sale Order</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSaleOrder()
+	 * @generated
+	 * @ordered
+	 */
+	protected int saleOrder = SALE_ORDER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getExhibit() <em>Exhibit</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExhibit()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int EXHIBIT_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getExhibit() <em>Exhibit</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExhibit()
+	 * @generated
+	 * @ordered
+	 */
+	protected int exhibit = EXHIBIT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -278,6 +320,48 @@ public class FairRegistrationImpl extends EventImpl implements FairRegistration 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getSaleOrder() {
+		return saleOrder;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSaleOrder(int newSaleOrder) {
+		int oldSaleOrder = saleOrder;
+		saleOrder = newSaleOrder;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.FAIR_REGISTRATION__SALE_ORDER, oldSaleOrder, saleOrder));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getExhibit() {
+		return exhibit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExhibit(int newExhibit) {
+		int oldExhibit = exhibit;
+		exhibit = newExhibit;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.FAIR_REGISTRATION__EXHIBIT, oldExhibit, exhibit));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -291,6 +375,10 @@ public class FairRegistrationImpl extends EventImpl implements FairRegistration 
 				return getParent();
 			case TrackerPackage.FAIR_REGISTRATION__CLUB:
 				return getClub();
+			case TrackerPackage.FAIR_REGISTRATION__SALE_ORDER:
+				return new Integer(getSaleOrder());
+			case TrackerPackage.FAIR_REGISTRATION__EXHIBIT:
+				return new Integer(getExhibit());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -317,6 +405,12 @@ public class FairRegistrationImpl extends EventImpl implements FairRegistration 
 				return;
 			case TrackerPackage.FAIR_REGISTRATION__CLUB:
 				setClub((String)newValue);
+				return;
+			case TrackerPackage.FAIR_REGISTRATION__SALE_ORDER:
+				setSaleOrder(((Integer)newValue).intValue());
+				return;
+			case TrackerPackage.FAIR_REGISTRATION__EXHIBIT:
+				setExhibit(((Integer)newValue).intValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -345,6 +439,12 @@ public class FairRegistrationImpl extends EventImpl implements FairRegistration 
 			case TrackerPackage.FAIR_REGISTRATION__CLUB:
 				setClub(CLUB_EDEFAULT);
 				return;
+			case TrackerPackage.FAIR_REGISTRATION__SALE_ORDER:
+				setSaleOrder(SALE_ORDER_EDEFAULT);
+				return;
+			case TrackerPackage.FAIR_REGISTRATION__EXHIBIT:
+				setExhibit(EXHIBIT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -367,6 +467,10 @@ public class FairRegistrationImpl extends EventImpl implements FairRegistration 
 				return PARENT_EDEFAULT == null ? parent != null : !PARENT_EDEFAULT.equals(parent);
 			case TrackerPackage.FAIR_REGISTRATION__CLUB:
 				return CLUB_EDEFAULT == null ? club != null : !CLUB_EDEFAULT.equals(club);
+			case TrackerPackage.FAIR_REGISTRATION__SALE_ORDER:
+				return saleOrder != SALE_ORDER_EDEFAULT;
+			case TrackerPackage.FAIR_REGISTRATION__EXHIBIT:
+				return exhibit != EXHIBIT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -391,6 +495,10 @@ public class FairRegistrationImpl extends EventImpl implements FairRegistration 
 		result.append(parent);
 		result.append(", club: ");
 		result.append(club);
+		result.append(", SaleOrder: ");
+		result.append(saleOrder);
+		result.append(", Exhibit: ");
+		result.append(exhibit);
 		result.append(')');
 		return result.toString();
 	}
