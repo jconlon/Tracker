@@ -376,11 +376,19 @@ public class AnimalItemProvider
 	@Override
 	public String getText(Object object) {
 		String label = Long.toString(((Animal)object).getIdNumber());
+		return label == null || label.length() == 0 ?
+			getString("_UI_"+getResourceName(object)+"_type") :
+			label+" "+getString("_UI_"+getResourceName(object)+"_type");
+	}
+
+	/**
+	 * @param object
+	 * @return
+	 */
+	private String getResourceName(Object object) {
 		String simpleName = object.getClass().getSimpleName();
 		String resourceName = simpleName.substring(0,simpleName.indexOf("Impl"));
-		return label == null || label.length() == 0 ?
-			getString("_UI_"+resourceName+"_type") :
-			label+" "+getString("_UI_"+resourceName+"_type");
+		return resourceName;
 	}
 
 	/**
@@ -450,11 +458,11 @@ public class AnimalItemProvider
 	  {
 	    Animal animal = (Animal)object;
 	    switch (columnIndex){
-	    	case 0: return getText(object);
-	    	case 1: return Long.toString(((Animal)object).getIdNumber());
-	    	case 2: return animal.getSpecies();
-	    	case 3: return animal.getSex()==null?"unspecified":animal.getSex().toString();
-	    	case 4: return animal.getBreed()==null?"unspecified":animal.getBreed();
+	    	case 0: return Long.toString(((Animal)object).getIdNumber()); 
+	    	case 1: return getString("_UI_"+getResourceName(object)+"_type") ;//Animal 
+	    	case 2: return animal.getSpeciesCode();
+	    	case 3: return animal.getSexCode();
+	    	case 4: return animal.getBreed();
 	    	case 5: 
 	    		if(animal.getBirthDate()!=null){
 	    			DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
@@ -469,6 +477,8 @@ public class AnimalItemProvider
 					+ " days " + animal.getAge().getStatus();
 	    		}
 	    		return null;
+	    	case 7:
+	    		return animal.getComments();
 	    	default :
 	    		return "unknown " + columnIndex;
 	    }

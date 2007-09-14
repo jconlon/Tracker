@@ -1222,20 +1222,10 @@ public class TrackerEditor
 				
 				//TODO Make sure listeners are disposed of properly
 				//ENHANCE add ANIMALS FILTERING 
-				//Event
-				TableColumn animalColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 70, true));
-				animalColumn.setText(getString("_UI_AnimalColumn_label"));
-				animalColumn.setResizable(true);
-				animalColumn.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						eventsTableViewer.setSorter(new ViewerSorter());
-					}
-				});
 				
-                //Ain 
+				//Ain 
 				TableColumn ainColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(3, 100, true));
+				layout.addColumnData(new ColumnWeightData(3, 150, true));
 				ainColumn.setText(getString("_UI_AinColumn_label"));
 				ainColumn.setResizable(true);
 				ainColumn.addSelectionListener(new SelectionAdapter() {
@@ -1244,9 +1234,22 @@ public class TrackerEditor
 					}
 				});
 				
+				//Animal
+				TableColumn animalColumn = new TableColumn(table, SWT.NONE);
+				layout.addColumnData(new ColumnWeightData(2, 50, true));
+				animalColumn.setText(getString("_UI_AnimalColumn_label"));
+				animalColumn.setResizable(true);
+				animalColumn.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e) {
+						animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.ANIMAL));
+					}
+				});
+				
+                
+				
 				//Species
 				TableColumn speciesColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(3, 100, true));
+				layout.addColumnData(new ColumnWeightData(2, 40, true));
 				speciesColumn.setText(getString("_UI_SpeciesColumn_label"));
 				speciesColumn.setResizable(true);
 				speciesColumn.addSelectionListener(new SelectionAdapter() {
@@ -1257,7 +1260,7 @@ public class TrackerEditor
 				
 				//Sex
 				TableColumn sexColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(3, 100, true));
+				layout.addColumnData(new ColumnWeightData(2, 50, true));
 				sexColumn.setText(getString("_UI_SexColumn_label"));
 				sexColumn.setResizable(true);
 				sexColumn.addSelectionListener(new SelectionAdapter() {
@@ -1268,7 +1271,7 @@ public class TrackerEditor
 				
 				//Breed 
 				TableColumn breedColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(3, 100, true));
+				layout.addColumnData(new ColumnWeightData(2, 70, true));
 				breedColumn.setText(getString("_UI_BreedColumn_label"));
 				breedColumn.setResizable(true);
 				breedColumn.addSelectionListener(new SelectionAdapter() {
@@ -1290,11 +1293,17 @@ public class TrackerEditor
 				
 				//Age
 				TableColumn ageColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 100, true));
+				layout.addColumnData(new ColumnWeightData(2, 300, true));
 				ageColumn.setText(getString("_UI_AgeColumn_label"));
 				ageColumn.setResizable(true);
 
-				animalsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e","f"});
+				//Comments
+				TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
+				layout.addColumnData(new ColumnWeightData(2, 100, true));
+				ageColumn.setText(getString("_UI_CommentsColumn_label"));
+				ageColumn.setResizable(true);
+				
+				animalsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e","f", "g"});
 				
 				animalsTableViewer.setContentProvider(
 				        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2

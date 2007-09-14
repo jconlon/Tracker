@@ -47,6 +47,7 @@ public class AnimalSorter extends ViewerSorter {
 	public final static int AIN 	= 3;
 	public final static int	BREED	= 4;
 	public final static int SEX		= 5;
+	public final static int ANIMAL = 6;
 	
 
 	// Criteria that the instance uses 
@@ -89,6 +90,8 @@ public class AnimalSorter extends ViewerSorter {
 				return compareBreeds(animal1, animal2);
 			case SEX :
 				return compareSexes(animal1, animal2);
+			case ANIMAL :
+				return compareAnimals(animal1, animal2);
 			default:
 				return 0;
 		}
@@ -126,6 +129,22 @@ public class AnimalSorter extends ViewerSorter {
 		
 		return getComparator().compare(animal1.getBreed(), animal2.getBreed());
 		
+	}
+	
+	/**
+	 * Returns a number reflecting the collation order of the given animals
+	 * based on the name of the Class of Animal
+	 *
+	 * @param animal1
+	 * @param animal2
+	 * @return a negative number if the first element is less  than the 
+	 *  second element; the value <code>0</code> if the first element is
+	 *  equal to the second element; and a positive number if the first
+	 *  element is greater than the second element
+	 */
+	@SuppressWarnings("unchecked")
+	private int compareAnimals(Animal animal1, Animal animal2) {
+		return getComparator().compare(animal1.getClass().getSimpleName(), animal2.getClass().getSimpleName());
 	}
 	
 	/**
