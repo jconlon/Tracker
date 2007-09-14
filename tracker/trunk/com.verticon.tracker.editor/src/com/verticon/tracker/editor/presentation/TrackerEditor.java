@@ -1114,20 +1114,32 @@ public class TrackerEditor
 				
 				//TODO Reduce size of Events BIRTHDATE column? - changed from 3 50. Does it work
 				//TODO Make sure listeners are disposed of properly
-				//Event
-				TableColumn eventColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 90, true));
-				eventColumn.setText(getString("_UI_EventColumn_label"));
-				eventColumn.setResizable(true);
-				eventColumn.addSelectionListener(new SelectionAdapter() {
+				
+				//FIXME Events Table
+				//Animal ID Number
+				TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
+				layout.addColumnData(new ColumnWeightData(3, 100, true));
+				animalIDColumn.setText(getString("_UI_AnimalParentColumn_label"));
+				animalIDColumn.setResizable(true);
+				animalIDColumn.addSelectionListener(new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent e) {
-						eventsTableViewer.setSorter(new ViewerSorter());
+						eventsTableViewer.setSorter(new EventSorter(EventSorter.ANIMAL_IDNUMBER));
 					}
 				});
 				
-				//DateTime
+				//Tag ID Number
+				TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
+				layout.addColumnData(new ColumnWeightData(2, 150, true));
+				tagIDColumn.setText(getString("_UI_TagColumn_label"));
+				tagIDColumn.setResizable(true);
+				tagIDColumn.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e) {
+						eventsTableViewer.setSorter(new EventSorter(EventSorter.TAG_IDNUMBER));
+					}
+				});
+				//Date of Event
 				TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 70, true));
+				layout.addColumnData(new ColumnWeightData(2, 170, true));
 				dateTimeColumn.setText(getString("_UI_DateTimeColumn_label"));
 				dateTimeColumn.setResizable(true);
 				dateTimeColumn.addSelectionListener(new SelectionAdapter() {
@@ -1136,30 +1148,41 @@ public class TrackerEditor
 					}
 				});
 				
-				//AIN
-				TableColumn eventCodeColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 100, true));
-				eventCodeColumn.setText(getString("_UI_AinColumn_label"));
-				eventCodeColumn.setResizable(true);
-				eventCodeColumn.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						eventsTableViewer.setSorter(new EventSorter(EventSorter.AIN));
-					}
-				});
-				
-				//EventName
+				//Event Type
 				TableColumn eventNameColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 120, true));
+				layout.addColumnData(new ColumnWeightData(2, 60, true));
 				eventNameColumn.setText(getString("_UI_EventNameColumn_label"));
 				eventNameColumn.setResizable(true);
 				eventNameColumn.addSelectionListener(new SelectionAdapter() {
 						public void widgetSelected(SelectionEvent e) {
-							eventsTableViewer.setSorter(new EventSorter(EventSorter.NAME));
+							eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_TYPE));
 						}
 				 });
 				
+				
+				//Event Code
+				TableColumn eventCodeColumn = new TableColumn(table, SWT.NONE);
+				layout.addColumnData(new ColumnWeightData(2, 20, true));
+				eventCodeColumn.setText(getString("_UI_EventCodeColumn_label"));
+				eventCodeColumn.setResizable(true);
+				eventCodeColumn.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e) {
+						eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_CODE));
+					}
+				});
+				
+				//Comments
+				TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
+				layout.addColumnData(new ColumnWeightData(3, 180, true));
+				eventCommentsColumn.setText(getString("_UI_CommentsColumn_label"));
+				eventCommentsColumn.setResizable(true);
+				eventCommentsColumn.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e) {
+						eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_COMMENTS));
+					}
+				});
 
-				eventsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d"});
+				eventsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f"});
 //				eventsTableViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
 				eventsTableViewer.setContentProvider(
 				        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
@@ -1223,6 +1246,7 @@ public class TrackerEditor
 				//TODO Make sure listeners are disposed of properly
 				//ENHANCE add ANIMALS FILTERING 
 				
+				//FIXME Animals Table
 				//Ain 
 				TableColumn ainColumn = new TableColumn(table, SWT.NONE);
 				layout.addColumnData(new ColumnWeightData(3, 150, true));
@@ -1296,14 +1320,24 @@ public class TrackerEditor
 				layout.addColumnData(new ColumnWeightData(2, 300, true));
 				ageColumn.setText(getString("_UI_AgeColumn_label"));
 				ageColumn.setResizable(true);
+				ageColumn.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e) {
+						animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.AGE));
+					}
+				});
 
 				//Comments
 				TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
 				layout.addColumnData(new ColumnWeightData(2, 100, true));
-				ageColumn.setText(getString("_UI_CommentsColumn_label"));
-				ageColumn.setResizable(true);
+				commentsColumn.setText(getString("_UI_CommentsColumn_label"));
+				commentsColumn.setResizable(true);
+				commentsColumn.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent e) {
+						animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.COMMENTS));
+					}
+				});
 				
-				animalsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e","f", "g"});
+				animalsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e","f", "g", "h"});
 				
 				animalsTableViewer.setContentProvider(
 				        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2

@@ -12,6 +12,8 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.Event;
+import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.CommonUtilities;
 
 
@@ -48,6 +50,8 @@ public class AnimalSorter extends ViewerSorter {
 	public final static int	BREED	= 4;
 	public final static int SEX		= 5;
 	public final static int ANIMAL = 6;
+	public final static int AGE = 7;
+	public final static int COMMENTS = 8;
 	
 
 	// Criteria that the instance uses 
@@ -92,6 +96,10 @@ public class AnimalSorter extends ViewerSorter {
 				return compareSexes(animal1, animal2);
 			case ANIMAL :
 				return compareAnimals(animal1, animal2);
+			case AGE :
+				return compareAges(animal1, animal2);
+			case COMMENTS :
+				return compareComments(animal1, animal2);
 			default:
 				return 0;
 		}
@@ -199,6 +207,40 @@ public class AnimalSorter extends ViewerSorter {
 				animal2.getSpecies());
 	}
 
+	/**
+	 * Returns a number reflecting the collation order of the given animals
+	 * based on the name of the comments of event.
+	 *
+	 * @param resource1 the first resource element to be ordered
+	 * @param resource2 the second resource element to be ordered
+	 * @return a negative number if the first element is less  than the 
+	 *  second element; the value <code>0</code> if the first element is
+	 *  equal to the second element; and a positive number if the first
+	 *  element is greater than the second element
+	 */
+	protected int compareAges(Animal animal1, Animal animal2) {
+		Date date1 = animal1.getBirthDate()==null?CommonUtilities.DATE_REFERENCE.getTime():animal1.getBirthDate();
+		Date date2 = animal2.getBirthDate()==null?CommonUtilities.DATE_REFERENCE.getTime():animal2.getBirthDate();
+		return date2.compareTo(date1);
+	}
+	
+	/**
+	 * Returns a number reflecting the collation order of the given animals
+	 * based on the name of the comments of event.
+	 *
+	 * @param resource1 the first resource element to be ordered
+	 * @param resource2 the second resource element to be ordered
+	 * @return a negative number if the first element is less  than the 
+	 *  second element; the value <code>0</code> if the first element is
+	 *  equal to the second element; and a positive number if the first
+	 *  element is greater than the second element
+	 */
+	protected int compareComments(Animal animal1, Animal animal2) {
+		String comments1 = animal1.getComments()==null?"":animal1.getComments();
+		String comments2 = animal2.getComments()==null?"":animal2.getComments();
+		return comments1.compareTo(comments2);
+	}
+	
 	/**
 	 * Returns the sort criteria of this this sorter.
 	 *

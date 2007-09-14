@@ -28,6 +28,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
@@ -107,27 +108,7 @@ public class EventItemProvider
 				 null));
 	}
 
-//	/**
-//	 * This adds a property descriptor for the Ain feature.
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 * @generated
-//	 */
-//	protected void addAinPropertyDescriptor(Object object) {
-//		itemPropertyDescriptors.add
-//			(createItemPropertyDescriptor
-//				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-//				 getResourceLocator(),
-//				 getString("_UI_Event_ain_feature"),
-//				 getString("_UI_PropertyDescriptor_description", "_UI_Event_ain_feature", "_UI_Event_type"),
-//				 TrackerPackage.Literals.EVENT__AIN,
-//				 true,
-//				 false,
-//				 true,
-//				 null,
-//				 null,
-//				 null));
-//	}
+
 
 	/**
 	 * This adds a property descriptor for the Event Code feature.
@@ -337,32 +318,37 @@ public class EventItemProvider
 	 * 
 	 */
 	public String getColumnText(Object object, int columnIndex) // 14.2.2
-	  {
-	    Event event = (Event)object;
-	    switch (columnIndex){
-	    	case 0: return getText(object);
-	    	case 1: 
-	    		if(event.getDateTime()!=null){
-	    			DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss z");
-	    			return df.format(event.getDateTime());
-	    		}
-	    		return null;
-	    	case 2: 
-	    		Tag animalId = ((Event)object).getTag();
-	    		if(animalId==null) return "";
-	    		IItemLabelProvider itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(
-	    				animalId, IItemLabelProvider.class);
-	    		
-	    		return itemLabelProvider.getText(animalId);
-	    	case 3: 
-	    		String simpleName = object.getClass().getSimpleName();
-	    		return simpleName.substring(0,simpleName.indexOf("Impl"));
-	    	
-	    	
-	    	default :
-	    		return "unknown " + columnIndex;
-	    }
-	  }
+	{
+		Event event = (Event)object;
+		switch (columnIndex){
+
+		case 0: //Animal ID Number
+			if(event.getTag().eContainer()!=null){
+				Animal animal = (Animal)event.getTag().eContainer();
+				return animal.getId();
+			}
+			return null;
+
+		case 1: //Tag ID Number
+			return event.getTag().getId();
+
+		case 2: //Date of Event
+			if(event.getDateTime()!=null){
+				DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss z");
+				return df.format(event.getDateTime());
+			}
+			return null;
+		case 3: //Event Type
+			String simpleName = event.getClass().getSimpleName();
+			return simpleName.substring(0,simpleName.indexOf("Impl"));
+		case 4: //Event Code
+			return Integer.toString(event.getEventCode());
+		case 5: //Comments
+			return event.getComments();
+		default :
+			return "unknown " + columnIndex;
+		}
+	}
 
 	/**
 	 * Adds table support
