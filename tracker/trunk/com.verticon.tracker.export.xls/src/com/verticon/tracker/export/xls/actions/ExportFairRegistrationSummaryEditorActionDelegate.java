@@ -21,12 +21,12 @@ import com.verticon.tracker.editor.util.ExportPremisesBase;
  * @author jconlon
  * @since 0.1
  */
-public class ExportFairRegistrationEditorActionDelegate extends ExportPremisesBase implements IEditorActionDelegate {
+public class ExportFairRegistrationSummaryEditorActionDelegate extends ExportPremisesBase implements IEditorActionDelegate {
 
-	public ExportFairRegistrationEditorActionDelegate() {
+	public ExportFairRegistrationSummaryEditorActionDelegate() {
 		super( new XLSExporter(
-				new WorkSheetBuilder[] { new FairRegistrationWeighInWorkSheetBuilder() },
-				new String[] { "Fair WeighIn and Registration" }));
+				new WorkSheetBuilder[] { new FairRegistrationSummaryWorkSheetBuilder() },
+				new String[] { "Fair Registration" }));
 		
 	}
 	
@@ -37,7 +37,7 @@ public class ExportFairRegistrationEditorActionDelegate extends ExportPremisesBa
 		FileDialog dlg = new FileDialog(targetEditor.getSite().getShell(),
 				SWT.SAVE);
 		dlg.setFilterExtensions(new String[]{ "*.xls" });
-		dlg.setText("Name the Fair WeighIn and Registration Report");
+		dlg.setText("Name the Fair Registration Summary Report");
 	     fileName = dlg.open();
 		
 	

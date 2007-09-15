@@ -18,13 +18,20 @@
                id="com.verticon.tracker.export.xls.ExportFairAction"
                label="%_UI_ExportFairRegistration_label"
                menubarPath="com.verticon.trackerMenuID/com.verticon.tracker.exportMenuID/additions"
-               tooltip="Export the selected tracker model FairRegistration events as a XLS file."/>
+               tooltip="Export the selected tracker model FairRegistration Details as a XLS file."/>
          <action
                class="com.verticon.tracker.export.xls.actions.ExportFairRawEventsEditorActionDelegate"
                icon="$nl$/icons/etool16/export_wiz.gif"
                id="com.verticon.tracker.export.xls.ExportFairRawAction"
                label="%_UI_ExportFairRegistrationRaw_label"
                menubarPath="com.verticon.trackerMenuID/com.verticon.tracker.exportMenuID/additions"/>
+         <action
+               class="com.verticon.tracker.export.xls.actions.ExportFairRegistrationSummaryEditorActionDelegate"
+               icon="$nl$/icons/etool16/export_wiz.gif"
+               id="com.verticon.tracker.export.xls.ExportFairAction"
+               label="%_UI_ExportFairRegistrationSummary_label"
+               menubarPath="com.verticon.trackerMenuID/com.verticon.tracker.exportMenuID/additions"
+               tooltip="Export the selected premises FairRegistration Summary as a XLS file."/>
       </editorContribution> 
    </extension> 
  </plugin>
