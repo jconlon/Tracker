@@ -42,7 +42,9 @@ import org.eclipse.emf.common.ui.ViewerPane;
 import org.eclipse.emf.common.ui.editor.ProblemEditorPart;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
@@ -90,7 +92,6 @@ import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.dnd.DND;
@@ -128,10 +129,13 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.edit.provider.FairRegistrationItemProvider;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
+import com.verticon.tracker.emf.edit.ui.provider.FairRegistrationAdapterFactoryLableProvider;
 import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelProvider;
 
 
@@ -243,19 +247,16 @@ public class TrackerEditor
 	protected TableViewer tableViewer;
 
 	/**
-	 * This shows how a table view works.
-	 * A table can be used as a list with icons.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Events Table Viewer
 	 * @generated NOT
 	 */
 	protected TableViewer eventsTableViewer;
 	
+
+	protected TableViewer fairRegistrationTableViewer;
+	
 	/**
-	 * This shows how a table view works.
-	 * A table can be used as a list with icons.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Animals Table Viewer
 	 * @generated NOT
 	 */
 	protected TableViewer animalsTableViewer;
@@ -976,446 +977,24 @@ public class TrackerEditor
 		// Only creates the other pages if there is something that can be edited
 		//
 		if (!getEditingDomain().getResourceSet().getResources().isEmpty() &&
-		    !((Resource)getEditingDomain().getResourceSet().getResources().get(0)).getContents().isEmpty()) {
-			// Create a page for the selection tree view.
-			//
-			{
-				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-						public Viewer createViewer(Composite composite) {
-							Tree tree = new Tree(composite, SWT.MULTI);
-							TreeViewer newTreeViewer = new TreeViewer(tree);
-							return newTreeViewer;
-						}
-						public void requestActivation() {
-							super.requestActivation();
-							setCurrentViewerPane(this);
-						}
-					};
-				viewerPane.createControl(getContainer());
+				!((Resource)getEditingDomain().getResourceSet().getResources().get(0)).getContents().isEmpty()) {
 
-				selectionViewer = (TreeViewer)viewerPane.getViewer();
-				selectionViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-              
-				selectionViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, selectionViewer));
-				//Changed to show the Premises as the root
-//				selectionViewer.setInput(editingDomain.getResourceSet());
-//				viewerPane.setTitle(editingDomain.getResourceSet());
-				ResourceSet resourceSet = editingDomain.getResourceSet();
-				Resource resource = (Resource)resourceSet.getResources().get(0);
-				selectionViewer.setInput(resource);
-				viewerPane.setTitle(editingDomain.getResourceSet());
+			createSelectionTreeViewer(getString("_UI_SelectionPage_label"));
 
-				new AdapterFactoryTreeEditor(selectionViewer.getTree(), adapterFactory);
+			createParentTreeViewer(getString("_UI_ParentPage_label"));
 
-				createContextMenuFor(selectionViewer);
-				int pageIndex = addPage(viewerPane.getControl());
-				setPageText(pageIndex, getString("_UI_SelectionPage_label"));
-			}
+			createListViewer(getString("_UI_ListPage_label"));
 
-			// Create a page for the parent tree view.
-			//
-			{
-				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-						public Viewer createViewer(Composite composite) {
-							Tree tree = new Tree(composite, SWT.MULTI);
-							TreeViewer newTreeViewer = new TreeViewer(tree);
-							return newTreeViewer;
-						}
-						public void requestActivation() {
-							super.requestActivation();
-							setCurrentViewerPane(this);
-						}
-					};
-				viewerPane.createControl(getContainer());
+			createTreeViewer(getString("_UI_TreePage_label"));
 
-				parentViewer = (TreeViewer)viewerPane.getViewer();
-				parentViewer.setAutoExpandLevel(30);
-				parentViewer.setContentProvider(new ReverseAdapterFactoryContentProvider(adapterFactory));
-				parentViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, parentViewer));
+			createEventsTableViewer(getString("_UI_EventsTablePage_label"));
 
-				createContextMenuFor(parentViewer);
-				int pageIndex = addPage(viewerPane.getControl());
-				setPageText(pageIndex, getString("_UI_ParentPage_label"));
-			}
-
-			// This is the page for the list viewer
-			//
-			{
-				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-						public Viewer createViewer(Composite composite) {
-							return new ListViewer(composite);
-						}
-						public void requestActivation() {
-							super.requestActivation();
-							setCurrentViewerPane(this);
-						}
-					};
-				viewerPane.createControl(getContainer());
-				listViewer = (ListViewer)viewerPane.getViewer();
-				listViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-				listViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, listViewer));
-
-				createContextMenuFor(listViewer);
-				int pageIndex = addPage(viewerPane.getControl());
-				setPageText(pageIndex, getString("_UI_ListPage_label"));
-			}
-
-			// This is the page for the tree viewer
-			//
-			{
-				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-						public Viewer createViewer(Composite composite) {
-							return new TreeViewer(composite);
-						}
-						public void requestActivation() {
-							super.requestActivation();
-							setCurrentViewerPane(this);
-						}
-					};
-				viewerPane.createControl(getContainer());
-				treeViewer = (TreeViewer)viewerPane.getViewer();
-				treeViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-				treeViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, treeViewer));
-
-				new AdapterFactoryTreeEditor(treeViewer.getTree(), adapterFactory);
-
-				createContextMenuFor(treeViewer);
-				int pageIndex = addPage(viewerPane.getControl());
-				setPageText(pageIndex, getString("_UI_TreePage_label"));
-			}
-
-			// This is the page for the Events table viewer.
-			//
-			{
-				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-						public Viewer createViewer(Composite composite) {
-							return new TableViewer(composite);
-						}
-						public void requestActivation() {
-							super.requestActivation();
-							setCurrentViewerPane(this);
-							this.getViewer().refresh();
-						}
-					};
-				viewerPane.createControl(getContainer());
-				eventsTableViewer = (TableViewer)viewerPane.getViewer();
-               
-				Table table = eventsTableViewer.getTable();
-				TableLayout layout = new TableLayout();
-				table.setLayout(layout);
-				table.setHeaderVisible(true);
-				table.setLinesVisible(true);
-				eventsTableViewer.setUseHashlookup(true);
-				
-				//TODO Reduce size of Events BIRTHDATE column? - changed from 3 50. Does it work
-				//TODO Make sure listeners are disposed of properly
-				
-				//FIXME Events Table
-				//Animal ID Number
-				TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(3, 100, true));
-				animalIDColumn.setText(getString("_UI_AnimalParentColumn_label"));
-				animalIDColumn.setResizable(true);
-				animalIDColumn.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						eventsTableViewer.setSorter(new EventSorter(EventSorter.ANIMAL_IDNUMBER));
-					}
-				});
-				
-				//Tag ID Number
-				TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 150, true));
-				tagIDColumn.setText(getString("_UI_TagColumn_label"));
-				tagIDColumn.setResizable(true);
-				tagIDColumn.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						eventsTableViewer.setSorter(new EventSorter(EventSorter.TAG_IDNUMBER));
-					}
-				});
-				//Date of Event
-				TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 170, true));
-				dateTimeColumn.setText(getString("_UI_DateTimeColumn_label"));
-				dateTimeColumn.setResizable(true);
-				dateTimeColumn.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						eventsTableViewer.setSorter(new EventSorter(EventSorter.DATETIME));
-					}
-				});
-				
-				//Event Type
-				TableColumn eventNameColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 60, true));
-				eventNameColumn.setText(getString("_UI_EventNameColumn_label"));
-				eventNameColumn.setResizable(true);
-				eventNameColumn.addSelectionListener(new SelectionAdapter() {
-						public void widgetSelected(SelectionEvent e) {
-							eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_TYPE));
-						}
-				 });
-				
-				
-				//Event Code
-				TableColumn eventCodeColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 20, true));
-				eventCodeColumn.setText(getString("_UI_EventCodeColumn_label"));
-				eventCodeColumn.setResizable(true);
-				eventCodeColumn.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_CODE));
-					}
-				});
-				
-				//Comments
-				TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(3, 180, true));
-				eventCommentsColumn.setText(getString("_UI_CommentsColumn_label"));
-				eventCommentsColumn.setResizable(true);
-				eventCommentsColumn.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_COMMENTS));
-					}
-				});
-
-				eventsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f"});
-//				eventsTableViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-				eventsTableViewer.setContentProvider(
-				        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
-				        {
-				          public Object [] getElements(Object object)
-				          {
-				            return ((Premises)object).eventHistory().toArray();
-				          }
-				          public void notifyChanged(Notification notification)
-				          {
-				        	  switch (notification.getEventType())
-				        	  {
-				        	  case Notification.ADD:
-				        	  case Notification.ADD_MANY:
-				        		  if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
-				        			  return;
-				        		  }
-				        	  }
-				        	  super.notifyChanged(notification);
-				        	  this.viewer.refresh();
-				          }
-				        });
-				eventsTableViewer.setLabelProvider(
-						new AdapterFactoryLabelProvider(adapterFactory));
-//				14.2.2
-			      Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
-			      Object rootObject = resource.getContents().get(0);
-			      if (rootObject instanceof Premises)
-			      {
-			    	
-			    	eventsTableViewer.setInput((Premises)rootObject);
-			        viewerPane.setTitle((Premises)rootObject);
-			      }
-				createContextMenuFor(eventsTableViewer);
-				int pageIndex = addPage(viewerPane.getControl());
-				setPageText(pageIndex, getString("_UI_EventsTablePage_label"));
-			}
+			createAnimalsTableViewer(getString("_UI_TableAnimals_label"));
 			
-			// This is the page for the Animals table viewer.
-			
-			{
-				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-						public Viewer createViewer(Composite composite) {
-							return new TableViewer(composite);
-						}
-						public void requestActivation() {
-							super.requestActivation();
-							setCurrentViewerPane(this);
-						}
-					};
-				viewerPane.createControl(getContainer());
-				animalsTableViewer = (TableViewer)viewerPane.getViewer();
+			createFairRegistrationTableViewer("Fair Registrations");
 
-				Table table = animalsTableViewer.getTable();
-				TableLayout layout = new TableLayout();
-				table.setLayout(layout);
-				table.setHeaderVisible(true);
-				table.setLinesVisible(true);
-				
-				//TODO Make sure listeners are disposed of properly
-				//ENHANCE add ANIMALS FILTERING 
-				
-				//FIXME Animals Table
-				//Ain 
-				TableColumn ainColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(3, 150, true));
-				ainColumn.setText(getString("_UI_AinColumn_label"));
-				ainColumn.setResizable(true);
-				ainColumn.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.AIN));
-					}
-				});
-				
-				//Animal
-				TableColumn animalColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 50, true));
-				animalColumn.setText(getString("_UI_AnimalColumn_label"));
-				animalColumn.setResizable(true);
-				animalColumn.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.ANIMAL));
-					}
-				});
-				
-                
-				
-				//Species
-				TableColumn speciesColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 40, true));
-				speciesColumn.setText(getString("_UI_SpeciesColumn_label"));
-				speciesColumn.setResizable(true);
-				speciesColumn.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.SPECIES));
-					}
-				});
-				
-				//Sex
-				TableColumn sexColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 50, true));
-				sexColumn.setText(getString("_UI_SexColumn_label"));
-				sexColumn.setResizable(true);
-				sexColumn.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.SEX));
-					}
-				});
-				
-				//Breed 
-				TableColumn breedColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 70, true));
-				breedColumn.setText(getString("_UI_BreedColumn_label"));
-				breedColumn.setResizable(true);
-				breedColumn.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.BREED));
-					}
-				});
+//			createTableTreeViewer(getString("_UI_TreeWithColumnsPage_label"));
 
-				//BirthDate
-				TableColumn dDateColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 100, true));
-				dDateColumn.setText(getString("_UI_BirthDateColumn_label"));
-				dDateColumn.setResizable(true);
-				dDateColumn.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.BIRTHDATE));
-					}
-				});
-				
-				//Age
-				TableColumn ageColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 300, true));
-				ageColumn.setText(getString("_UI_AgeColumn_label"));
-				ageColumn.setResizable(true);
-				ageColumn.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.AGE));
-					}
-				});
-
-				//Comments
-				TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
-				layout.addColumnData(new ColumnWeightData(2, 100, true));
-				commentsColumn.setText(getString("_UI_CommentsColumn_label"));
-				commentsColumn.setResizable(true);
-				commentsColumn.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.COMMENTS));
-					}
-				});
-				
-				animalsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e","f", "g", "h"});
-				
-				animalsTableViewer.setContentProvider(
-				        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
-				        {
-				          public Object [] getElements(Object object)
-				          {
-				            return ((Premises)object).getAnimals().toArray();
-				          }
-				          public void notifyChanged(Notification notification)
-				          {
-				            switch (notification.getEventType())
-				            {
-				              case Notification.ADD:
-				              case Notification.ADD_MANY:
-				            	if (notification.getFeature() != TrackerPackage.eINSTANCE.getPremises_Animals()){
-				            		return;
-				                }
-				            }
-				            super.notifyChanged(notification);
-				            this.viewer.refresh();
-				          }
-				        });
-				animalsTableViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
-
-				//14.2.2
-			      Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
-			      Object rootObject = resource.getContents().get(0);
-			      if (rootObject instanceof Premises)
-			      {
-			    	animalsTableViewer.setInput((Premises)rootObject);
-			        viewerPane.setTitle((Premises)rootObject);
-			      }
-			      
-				createContextMenuFor(animalsTableViewer);
-				int pageIndex = addPage(viewerPane.getControl());
-				setPageText(pageIndex, getString("_UI_TableAnimals_label"));
-			}
-
-			// This is the page for the table tree viewer.
-			//
-			{
-				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-						public Viewer createViewer(Composite composite) {
-							return new TreeViewer(composite);
-						}
-						public void requestActivation() {
-							super.requestActivation();
-							setCurrentViewerPane(this);
-						}
-					};
-				viewerPane.createControl(getContainer());
-
-				treeViewerWithColumns = (TreeViewer)viewerPane.getViewer();
-
-				Tree tree = treeViewerWithColumns.getTree();
-				tree.setLayoutData(new FillLayout());
-				tree.setHeaderVisible(true);
-				tree.setLinesVisible(true);
-
-				TreeColumn objectColumn = new TreeColumn(tree, SWT.NONE);
-				objectColumn.setText(getString("_UI_ObjectColumn_label"));
-				objectColumn.setResizable(true);
-				objectColumn.setWidth(250);
-
-				TreeColumn selfColumn = new TreeColumn(tree, SWT.NONE);
-				selfColumn.setText(getString("_UI_SelfColumn_label"));
-				selfColumn.setResizable(true);
-				selfColumn.setWidth(200);
-
-				treeViewerWithColumns.setColumnProperties(new String [] {"a", "b"});
-				treeViewerWithColumns.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-				treeViewerWithColumns.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, treeViewerWithColumns));
-
-				createContextMenuFor(treeViewerWithColumns);
-				int pageIndex = addPage(viewerPane.getControl());
-				setPageText(pageIndex, getString("_UI_TreeWithColumnsPage_label"));
-			}
 
 			setActivePage(0);
 		}
@@ -1436,6 +1015,652 @@ public class TrackerEditor
 			 });
 
 		updateProblemIndication();
+	}
+
+	/**
+	 * 
+	 */
+	@SuppressWarnings("unused")
+	private void createTableTreeViewer(String pageName) {
+		ViewerPane viewerPane =
+			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+				public Viewer createViewer(Composite composite) {
+					return new TreeViewer(composite);
+				}
+				public void requestActivation() {
+					super.requestActivation();
+					setCurrentViewerPane(this);
+				}
+			};
+		viewerPane.createControl(getContainer());
+
+		treeViewerWithColumns = (TreeViewer)viewerPane.getViewer();
+
+		Tree tree = treeViewerWithColumns.getTree();
+		tree.setLayoutData(new FillLayout());
+		tree.setHeaderVisible(true);
+		tree.setLinesVisible(true);
+
+		TreeColumn objectColumn = new TreeColumn(tree, SWT.NONE);
+		objectColumn.setText(getString("_UI_ObjectColumn_label"));
+		objectColumn.setResizable(true);
+		objectColumn.setWidth(250);
+
+		TreeColumn selfColumn = new TreeColumn(tree, SWT.NONE);
+		selfColumn.setText(getString("_UI_SelfColumn_label"));
+		selfColumn.setResizable(true);
+		selfColumn.setWidth(200);
+
+		treeViewerWithColumns.setColumnProperties(new String [] {"a", "b"});
+		treeViewerWithColumns.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
+		treeViewerWithColumns.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, treeViewerWithColumns));
+
+		createContextMenuFor(treeViewerWithColumns);
+		int pageIndex = addPage(viewerPane.getControl());
+		setPageText(pageIndex, pageName);
+	}
+
+	/**
+	 * 
+	 */
+	private void createTreeViewer(String pageName) {
+		ViewerPane viewerPane =
+			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+				public Viewer createViewer(Composite composite) {
+					return new TreeViewer(composite);
+				}
+				public void requestActivation() {
+					super.requestActivation();
+					setCurrentViewerPane(this);
+				}
+			};
+		viewerPane.createControl(getContainer());
+		treeViewer = (TreeViewer)viewerPane.getViewer();
+		treeViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
+		treeViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, treeViewer));
+
+		new AdapterFactoryTreeEditor(treeViewer.getTree(), adapterFactory);
+
+		createContextMenuFor(treeViewer);
+		int pageIndex = addPage(viewerPane.getControl());
+		setPageText(pageIndex, pageName);
+	}
+
+	/**
+	 * 
+	 */
+	private void createListViewer(String pageName) {
+		ViewerPane viewerPane =
+			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+				public Viewer createViewer(Composite composite) {
+					return new ListViewer(composite);
+				}
+				public void requestActivation() {
+					super.requestActivation();
+					setCurrentViewerPane(this);
+				}
+			};
+		viewerPane.createControl(getContainer());
+		listViewer = (ListViewer)viewerPane.getViewer();
+		listViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
+		listViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, listViewer));
+
+		createContextMenuFor(listViewer);
+		int pageIndex = addPage(viewerPane.getControl());
+		setPageText(pageIndex, pageName);
+	}
+
+	/**
+	 * 
+	 */
+	private void createParentTreeViewer(String pageName) {
+		ViewerPane viewerPane =
+			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+				public Viewer createViewer(Composite composite) {
+					Tree tree = new Tree(composite, SWT.MULTI);
+					TreeViewer newTreeViewer = new TreeViewer(tree);
+					return newTreeViewer;
+				}
+				public void requestActivation() {
+					super.requestActivation();
+					setCurrentViewerPane(this);
+				}
+			};
+		viewerPane.createControl(getContainer());
+
+		parentViewer = (TreeViewer)viewerPane.getViewer();
+		parentViewer.setAutoExpandLevel(30);
+		parentViewer.setContentProvider(new ReverseAdapterFactoryContentProvider(adapterFactory));
+		parentViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, parentViewer));
+
+		createContextMenuFor(parentViewer);
+		int pageIndex = addPage(viewerPane.getControl());
+		setPageText(pageIndex, pageName);
+	}
+
+	/**
+	 * 
+	 */
+	private void createSelectionTreeViewer(String pageName ) {
+		ViewerPane viewerPane =
+			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+				public Viewer createViewer(Composite composite) {
+					Tree tree = new Tree(composite, SWT.MULTI);
+					TreeViewer newTreeViewer = new TreeViewer(tree);
+					return newTreeViewer;
+				}
+				public void requestActivation() {
+					super.requestActivation();
+					setCurrentViewerPane(this);
+				}
+			};
+		viewerPane.createControl(getContainer());
+
+		selectionViewer = (TreeViewer)viewerPane.getViewer();
+		selectionViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
+           
+		selectionViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, selectionViewer));
+		//Changed to show the Premises as the root
+//				selectionViewer.setInput(editingDomain.getResourceSet());
+//				viewerPane.setTitle(editingDomain.getResourceSet());
+		ResourceSet resourceSet = editingDomain.getResourceSet();
+		Resource resource = (Resource)resourceSet.getResources().get(0);
+		selectionViewer.setInput(resource);
+		viewerPane.setTitle(editingDomain.getResourceSet());
+
+		new AdapterFactoryTreeEditor(selectionViewer.getTree(), adapterFactory);
+
+		createContextMenuFor(selectionViewer);
+		int pageIndex = addPage(viewerPane.getControl());
+		setPageText(pageIndex,pageName );
+	}
+
+	/**
+	 * FairRegistration Table
+	 *  Columns in 
+	 *  10  //Animal Id
+	 *  11: //Tag Id
+	 *  12: //Date
+	 *  13: //Participant
+	 *  14: //Parents 
+	 *  15: //Club 
+	 *  16: //Phone 
+	 *  17: //Address 
+	 *  18: //Comments 
+	 *  
+	 *  @see FairRegistrationItemProvider
+	 *  @since 0.2.0
+	 */
+	private void createFairRegistrationTableViewer(String tableName) {
+		ViewerPane viewerPane =
+			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+			public Viewer createViewer(Composite composite) {
+				return new TableViewer(composite);
+			}
+			public void requestActivation() {
+				super.requestActivation();
+				setCurrentViewerPane(this);
+				this.getViewer().refresh();
+			}
+		};
+		viewerPane.createControl(getContainer());
+		fairRegistrationTableViewer = (TableViewer)viewerPane.getViewer();
+
+		Table table = fairRegistrationTableViewer.getTable();
+		TableLayout layout = new TableLayout();
+		table.setLayout(layout);
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		fairRegistrationTableViewer.setUseHashlookup(true);
+
+		//Animal ID Number
+		TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(3, 100, true));
+		animalIDColumn.setText(getString("_UI_AnimalParentColumn_label"));
+		animalIDColumn.setResizable(true);
+		animalIDColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.ANIMAL_IDNUMBER));
+			}
+		});
+
+		//Tag ID Number
+		TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 150, true));
+		tagIDColumn.setText(getString("_UI_TagColumn_label"));
+		tagIDColumn.setResizable(true);
+		tagIDColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.TAG_IDNUMBER));
+			}
+		});
+		//Date of Event
+		TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 170, true));
+		dateTimeColumn.setText(getString("_UI_DateTimeColumn_label"));
+		dateTimeColumn.setResizable(true);
+		dateTimeColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.DATETIME));
+			}
+		});
+
+		//Participant
+		TableColumn participantColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 160, true));
+		participantColumn.setText("Participant Name");
+		participantColumn.setResizable(true);
+		participantColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.PARTICIPANT));
+			}
+		});
+		//Parents 
+		TableColumn parentsColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 220, true));
+		parentsColumn.setText("Parents");
+		parentsColumn.setResizable(true);
+		parentsColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.PARENT));
+			}
+		});
+		//Club 
+		TableColumn clubColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 150, true));
+		clubColumn.setText("Club");
+		clubColumn.setResizable(true);
+		clubColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.CLUB));
+			}
+		});
+
+
+		//Phone 
+		TableColumn phoneColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 100, true));
+		phoneColumn.setText("Phone");
+		phoneColumn.setResizable(true);
+		phoneColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.PHONE));
+			}
+		});
+		//Address 
+		TableColumn addressColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 300, true));
+		addressColumn.setText("Address");
+		addressColumn.setResizable(true);
+		addressColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.ADDRESS));
+			}
+		});
+
+		//Comments
+		TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(3, 220, true));
+		eventCommentsColumn.setText(getString("_UI_CommentsColumn_label"));
+		eventCommentsColumn.setResizable(true);
+		eventCommentsColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.EVENT_COMMENTS));
+			}
+		});
+
+		fairRegistrationTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f", "g","h","i"});
+//		fairRegistrationTableViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
+		fairRegistrationTableViewer.setContentProvider(
+				new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
+				{
+					public Object [] getElements(Object object)
+					{
+						return getFairRegistrationEvents(object).toArray();
+					}
+					public void notifyChanged(Notification notification)
+					{
+						switch (notification.getEventType())
+						{
+						case Notification.ADD:
+						case Notification.ADD_MANY:
+							if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
+								return;
+							}
+						}
+						super.notifyChanged(notification);
+						this.viewer.refresh();
+					}
+				});
+		fairRegistrationTableViewer.setLabelProvider(new FairRegistrationAdapterFactoryLableProvider(adapterFactory, selectionViewer));
+		Object rootObject = getRoot();
+		if (rootObject instanceof Premises){
+			fairRegistrationTableViewer.setInput((Premises)rootObject);
+			viewerPane.setTitle((Premises)rootObject);
+		}
+		createContextMenuFor(fairRegistrationTableViewer);
+		int pageIndex = addPage(viewerPane.getControl());
+		setPageText(pageIndex, tableName);
+		// The following causes event loop errors as the contentOutlineViewer is also being
+		// listened to by this event
+//		fairRegistrationTableViewer.addSelectionChangedListener
+//				(new ISelectionChangedListener() {
+//					 // This ensures that we handle selections correctly.
+//					 //
+//					 public void selectionChanged(SelectionChangedEvent event) {
+//						 contentOutlineViewer.setSelection(event.getSelection());
+//					 }
+//				 });
+	}
+	/**
+	 * Events Table
+	 */
+	private void createEventsTableViewer(String tableName) {
+		ViewerPane viewerPane =
+			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+			public Viewer createViewer(Composite composite) {
+				return new TableViewer(composite);
+			}
+			public void requestActivation() {
+				super.requestActivation();
+				setCurrentViewerPane(this);
+				this.getViewer().refresh();
+			}
+		};
+		viewerPane.createControl(getContainer());
+		eventsTableViewer = (TableViewer)viewerPane.getViewer();
+
+		Table table = eventsTableViewer.getTable();
+		TableLayout layout = new TableLayout();
+		table.setLayout(layout);
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		eventsTableViewer.setUseHashlookup(true);
+
+		//Event 
+		TableColumn animalColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(3, 200, true));
+		animalColumn.setText(getString("_UI_EventColumn_label"));
+		animalColumn.setResizable(true);
+		animalColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_TEXT));
+			}
+		});
+		
+		//Animal ID Number
+		TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(3, 100, true));
+		animalIDColumn.setText(getString("_UI_AnimalParentColumn_label"));
+		animalIDColumn.setResizable(true);
+		animalIDColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				eventsTableViewer.setSorter(new EventSorter(EventSorter.ANIMAL_IDNUMBER));
+			}
+		});
+
+		//Tag ID Number
+		TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 150, true));
+		tagIDColumn.setText(getString("_UI_TagColumn_label"));
+		tagIDColumn.setResizable(true);
+		tagIDColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				eventsTableViewer.setSorter(new EventSorter(EventSorter.TAG_IDNUMBER));
+			}
+		});
+		//Date of Event
+		TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 170, true));
+		dateTimeColumn.setText(getString("_UI_DateTimeColumn_label"));
+		dateTimeColumn.setResizable(true);
+		dateTimeColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				eventsTableViewer.setSorter(new EventSorter(EventSorter.DATETIME));
+			}
+		});
+
+		//Event Type
+		TableColumn eventNameColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 60, true));
+		eventNameColumn.setText(getString("_UI_EventNameColumn_label"));
+		eventNameColumn.setResizable(true);
+		eventNameColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_TYPE));
+			}
+		});
+
+
+		//Event Code
+		TableColumn eventCodeColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 20, true));
+		eventCodeColumn.setText(getString("_UI_EventCodeColumn_label"));
+		eventCodeColumn.setResizable(true);
+		eventCodeColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_CODE));
+			}
+		});
+
+		//Comments
+		TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(3, 180, true));
+		eventCommentsColumn.setText(getString("_UI_CommentsColumn_label"));
+		eventCommentsColumn.setResizable(true);
+		eventCommentsColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_COMMENTS));
+			}
+		});
+
+		eventsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f","g"});
+//		eventsTableViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
+		eventsTableViewer.setContentProvider(
+				new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
+				{
+					public Object [] getElements(Object object)
+					{
+						return ((Premises)object).eventHistory().toArray();
+					}
+					public void notifyChanged(Notification notification)
+					{
+						switch (notification.getEventType())
+						{
+						case Notification.ADD:
+						case Notification.ADD_MANY:
+							if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
+								return;
+							}
+						}
+						super.notifyChanged(notification);
+						this.viewer.refresh();
+					}
+				});
+		eventsTableViewer.setLabelProvider(
+				new AdapterFactoryLabelProvider(adapterFactory));
+Object rootObject = getRoot();
+		if (rootObject instanceof Premises){
+			eventsTableViewer.setInput((Premises)rootObject);
+			viewerPane.setTitle((Premises)rootObject);
+		}
+		createContextMenuFor(eventsTableViewer);
+		int pageIndex = addPage(viewerPane.getControl());
+		setPageText(pageIndex, tableName);
+	}
+
+	/**
+	 * Animals Table
+	 * References fields animalsTableViewer, 
+	 * @param tableName 
+	 */
+	private void createAnimalsTableViewer(String tableName) {
+		ViewerPane viewerPane =
+			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+				public Viewer createViewer(Composite composite) {
+					return new TableViewer(composite);
+				}
+				public void requestActivation() {
+					super.requestActivation();
+					setCurrentViewerPane(this);
+				}
+			};
+		viewerPane.createControl(getContainer());
+		animalsTableViewer = (TableViewer)viewerPane.getViewer();
+
+		Table table = animalsTableViewer.getTable();
+		TableLayout layout = new TableLayout();
+		table.setLayout(layout);
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		
+		//Animal
+		TableColumn animalColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(3, 220, true));
+		animalColumn.setText(getString("_UI_AnimalColumn_label"));
+		animalColumn.setResizable(true);
+		animalColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.ANIMAL_TEXT));
+			}
+		});
+		
+		//Ain 
+		TableColumn ainColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(3, 150, true));
+		ainColumn.setText(getString("_UI_AinColumn_label"));
+		ainColumn.setResizable(true);
+		ainColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.AIN));
+			}
+		});
+		
+		//Animal
+		TableColumn animalTypeColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 50, true));
+		animalTypeColumn.setText(getString("_UI_AnimalColumn_label"));
+		animalTypeColumn.setResizable(true);
+		animalTypeColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.ANIMAL));
+			}
+		});
+		
+		
+		
+		//Species
+		TableColumn speciesColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 40, true));
+		speciesColumn.setText(getString("_UI_SpeciesColumn_label"));
+		speciesColumn.setResizable(true);
+		speciesColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.SPECIES));
+			}
+		});
+		
+		//Sex
+		TableColumn sexColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 50, true));
+		sexColumn.setText(getString("_UI_SexColumn_label"));
+		sexColumn.setResizable(true);
+		sexColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.SEX));
+			}
+		});
+		
+		//Breed 
+		TableColumn breedColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 70, true));
+		breedColumn.setText(getString("_UI_BreedColumn_label"));
+		breedColumn.setResizable(true);
+		breedColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.BREED));
+			}
+		});
+
+		//BirthDate
+		TableColumn dDateColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 100, true));
+		dDateColumn.setText(getString("_UI_BirthDateColumn_label"));
+		dDateColumn.setResizable(true);
+		dDateColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.BIRTHDATE));
+			}
+		});
+		
+		//Age
+		TableColumn ageColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 300, true));
+		ageColumn.setText(getString("_UI_AgeColumn_label"));
+		ageColumn.setResizable(true);
+		ageColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.AGE));
+			}
+		});
+
+		//Comments
+		TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 100, true));
+		commentsColumn.setText(getString("_UI_CommentsColumn_label"));
+		commentsColumn.setResizable(true);
+		commentsColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.COMMENTS));
+			}
+		});
+		
+		animalsTableViewer.setColumnProperties(
+				new String [] {"a", "b", "c", "d", "e","f", "g", "h","i"});
+		
+		animalsTableViewer.setContentProvider(
+		        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
+		        {
+		          public Object [] getElements(Object object)
+		          {
+		            return ((Premises)object).getAnimals().toArray();
+		          }
+		          public void notifyChanged(Notification notification)
+		          {
+		            switch (notification.getEventType())
+		            {
+		              case Notification.ADD:
+		              case Notification.ADD_MANY:
+		            	if (notification.getFeature() != TrackerPackage.eINSTANCE.getPremises_Animals()){
+		            		return;
+		                }
+		            }
+		            super.notifyChanged(notification);
+		            this.viewer.refresh();
+		          }
+		        });
+		animalsTableViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+
+		//14.2.2
+		  Object rootObject = getRoot();
+		  if (rootObject instanceof Premises)
+		  {
+			animalsTableViewer.setInput((Premises)rootObject);
+		    viewerPane.setTitle((Premises)rootObject);
+		  }
+		  
+		createContextMenuFor(animalsTableViewer);
+		int pageIndex = addPage(viewerPane.getControl());
+		setPageText(pageIndex, tableName);
+	}
+
+	/**
+	 * @return
+	 */
+	private Object getRoot() {
+		Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
+		  Object rootObject = resource.getContents().get(0);
+		return rootObject;
 	}
 
 	/**
@@ -1633,19 +1858,61 @@ public class TrackerEditor
 					selectionViewer.setSelection(new StructuredSelection(selectionList));
 				// Handle animalsTableViewer
 				} else if (currentViewerPane.getViewer() == animalsTableViewer){
-					ResourceSet resourceSet = editingDomain.getResourceSet();
-					Resource resource = (Resource)resourceSet.getResources().get(0);
-					Object rootObject = resource.getContents().get(0);
-					if (rootObject instanceof Premises){
-						currentViewerPane.getViewer().setSelection(new StructuredSelection(((Premises)rootObject).getAnimals()));
+					if (selectedElement instanceof Animal){
+				
+					ArrayList<Object> selectionList = new ArrayList<Object>();
+					selectionList.add(selectedElement);
+					while (selectedElements.hasNext()) {
+						Object o = selectedElements.next();
+						if(o instanceof Animal){
+							selectionList.add(o);
+						}
+						
 					}
+					
+					// Set the selection to the widget.
+					//
+					animalsTableViewer.setSelection(new StructuredSelection(selectionList));
+					
+					}
+					
 				// Handle eventsTableViewer
 				} else if (currentViewerPane.getViewer() == eventsTableViewer){
-					ResourceSet resourceSet = editingDomain.getResourceSet();
-					Resource resource = (Resource)resourceSet.getResources().get(0);
-					Object rootObject = resource.getContents().get(0);
-					if (rootObject instanceof Premises){
-						currentViewerPane.getViewer().setSelection(new StructuredSelection(((Premises)rootObject).eventHistory()));
+					if(selectedElement instanceof Event){
+
+						ArrayList<Object> selectionList = new ArrayList<Object>();
+						selectionList.add(selectedElement);
+						while (selectedElements.hasNext()) {
+							Object o = selectedElements.next();
+							if(o instanceof Event){
+								selectionList.add(o);
+							}
+
+						}
+
+						// Set the selection to the widget.
+						//
+						eventsTableViewer.setSelection(new StructuredSelection(selectionList));
+					}
+					
+				
+				} else if (currentViewerPane.getViewer() == fairRegistrationTableViewer){
+					if( selectedElement instanceof FairRegistration){
+
+						ArrayList<Object> selectionList = new ArrayList<Object>();
+						selectionList.add(selectedElement);
+						while (selectedElements.hasNext()) {
+							Object o = selectedElements.next();
+							if(o instanceof FairRegistration){
+								selectionList.add(o);
+							}
+
+						}
+
+						// Set the selection to the widget.
+						//
+						fairRegistrationTableViewer.setSelection(new StructuredSelection(selectionList));
+					
 					}
 					
 				} else if (currentViewerPane.getViewer() == listViewer
@@ -1673,6 +1940,21 @@ public class TrackerEditor
 				}
 			}
 		}
+	}
+
+	/**
+	 * @param rootObject
+	 * @return
+	 */
+	private EList<Event> getFairRegistrationEvents(Object rootObject) {
+		EList<Event> registrations = new BasicEList<Event>();
+		EList<Event> eventHistory =((Premises)rootObject).eventHistory();
+		for (Event event : eventHistory) {
+			if(event.getEventCode()==101){
+				registrations.add(event);
+			}
+		}
+		return registrations;
 	}
 
 	/**

@@ -12,8 +12,6 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.Event;
-import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.CommonUtilities;
 
 
@@ -52,10 +50,13 @@ public class AnimalSorter extends ViewerSorter {
 	public final static int ANIMAL = 6;
 	public final static int AGE = 7;
 	public final static int COMMENTS = 8;
+	public final static int ANIMAL_TEXT = 9;
 	
 
 	// Criteria that the instance uses 
 	private int criteria;
+	
+	
 
 	/**
 	 * Creates a resource sorter that will use the given sort criteria.
@@ -100,6 +101,8 @@ public class AnimalSorter extends ViewerSorter {
 				return compareAges(animal1, animal2);
 			case COMMENTS :
 				return compareComments(animal1, animal2);
+			case ANIMAL_TEXT :
+				return compareAnimalsText(animal1, animal2);
 			default:
 				return 0;
 		}
@@ -242,6 +245,21 @@ public class AnimalSorter extends ViewerSorter {
 	}
 	
 	/**
+	 * Returns a number reflecting the collation order of the given animals
+	 * based on the labels associated with the animals.
+	 *
+	 * @param resource1 the first resource element to be ordered
+	 * @param resource2 the second resource element to be ordered
+	 * @return a negative number if the first element is less  than the 
+	 *  second element; the value <code>0</code> if the first element is
+	 *  equal to the second element; and a positive number if the first
+	 *  element is greater than the second element
+	 */
+	protected int compareAnimalsText(Animal animal1, Animal animal2) {
+		return getText(animal1).compareTo(getText(animal2));
+	}
+	
+	/**
 	 * Returns the sort criteria of this this sorter.
 	 *
 	 * @return the sort criterion
@@ -249,4 +267,22 @@ public class AnimalSorter extends ViewerSorter {
 	public int getCriteria() {
 		return criteria;
 	}
+	
+	private static final String getText(Object object) {
+		String label = Long.toString(((Animal)object).getIdNumber());
+		return label == null || label.length() == 0 ?
+			getResourceName(object):
+			label+getResourceName(object);
+	}
+
+	/**
+	 * @param object
+	 * @return
+	 */
+	private static final String getResourceName(Object object) {
+		String simpleName = object.getClass().getSimpleName();
+		String resourceName = simpleName.substring(0,simpleName.indexOf("Impl"));
+		return resourceName;
+	}
+	
 }

@@ -7,18 +7,12 @@
 package com.verticon.tracker.edit.provider;
 
 
-import com.verticon.tracker.FairRegistration;
-import com.verticon.tracker.TrackerPackage;
-
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -28,6 +22,10 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import com.verticon.tracker.Animal;
+import com.verticon.tracker.FairRegistration;
+import com.verticon.tracker.TrackerPackage;
 
 /**
  * This is the item provider adapter for a {@link com.verticon.tracker.FairRegistration} object.
@@ -43,6 +41,58 @@ public class FairRegistrationItemProvider
 		ITreeItemContentProvider,	
 		IItemLabelProvider,	
 		IItemPropertySource {
+	
+	@Override
+	public String getColumnText(Object object, int columnIndex) // 14.2.2
+	{
+		FairRegistration fr = (FairRegistration)object;
+		switch (columnIndex){
+		
+		case 0: 
+			
+		case 1: 
+
+		case 2: 
+		case 3: 
+		case 4:
+		case 5: 
+		case 6: //Comments
+			return super.getColumnText(object, columnIndex);
+			
+		//These events are for the FairRegistration Table
+		case 10: //Animal Id
+			return ((Animal)fr.getTag().eContainer()).getId();
+			
+		case 11: //Tag Id
+			return fr.getTag().getId();
+			
+		case 12: //Date
+			if(fr.getDateTime()!=null){
+				return df.format(fr.getDateTime());
+			}
+			return null;
+		case 13: //Participant
+			return fr.getParticipant();
+			
+		case 14: //Parents
+			return fr.getParent();
+			
+		case 15: //Club
+			return fr.getClub();
+			
+		case 16: //Phone
+			return fr.getPhone();
+			
+		case 17: //Address
+			return fr.getAddress();
+
+		case 18: //Comments
+			return fr.getComments();
+		
+		default :
+			return "unknown " + columnIndex;
+		}
+	}
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -30,7 +30,6 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 
 /**
@@ -54,6 +53,8 @@ public class EventItemProvider
 	 */
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
+	 final static DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss z");
+	
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -258,7 +259,7 @@ public class EventItemProvider
 		String resourceName = simpleName.substring(0,simpleName.indexOf("Impl"));
 		//TODO Give user a persistence var to control output format of date in Event Label
 		if(date!=null){
-			DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss z");
+			
 			return df.format(date)+" "+getString("_UI_"+resourceName+"_type");
 		}
 		return getString("_UI_"+resourceName+"_type") ;
@@ -321,29 +322,31 @@ public class EventItemProvider
 	{
 		Event event = (Event)object;
 		switch (columnIndex){
-
-		case 0: //Animal ID Number
+		//FIXME 184712 Column 0 must present the first object as getText() for both table and tree
+		case 0: //Event
+			return getText(event);
+			
+		case 1: //Animal ID Number
 			if(event.getTag().eContainer()!=null){
 				Animal animal = (Animal)event.getTag().eContainer();
 				return animal.getId();
 			}
 			return null;
 
-		case 1: //Tag ID Number
+		case 2: //Tag ID Number
 			return event.getTag().getId();
 
-		case 2: //Date of Event
+		case 3: //Date of Event
 			if(event.getDateTime()!=null){
-				DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss z");
 				return df.format(event.getDateTime());
 			}
 			return null;
-		case 3: //Event Type
+		case 4: //Event Type
 			String simpleName = event.getClass().getSimpleName();
 			return simpleName.substring(0,simpleName.indexOf("Impl"));
-		case 4: //Event Code
+		case 5: //Event Code
 			return Integer.toString(event.getEventCode());
-		case 5: //Comments
+		case 6: //Comments
 			return event.getComments();
 		default :
 			return "unknown " + columnIndex;
