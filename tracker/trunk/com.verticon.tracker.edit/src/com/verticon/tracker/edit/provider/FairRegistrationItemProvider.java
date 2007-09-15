@@ -7,7 +7,11 @@
 package com.verticon.tracker.edit.provider;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -24,8 +28,11 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.Event;
 import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.WeighIn;
+import com.verticon.tracker.util.CommonUtilities;
 
 /**
  * This is the item provider adapter for a {@link com.verticon.tracker.FairRegistration} object.
@@ -42,6 +49,14 @@ public class FairRegistrationItemProvider
 		IItemLabelProvider,	
 		IItemPropertySource {
 	
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+
 	@Override
 	public String getColumnText(Object object, int columnIndex) // 14.2.2
 	{
@@ -71,35 +86,80 @@ public class FairRegistrationItemProvider
 				return df.format(fr.getDateTime());
 			}
 			return null;
+			
 		case 13: //Participant
 			return fr.getParticipant();
+		
+		case 14: //BeginWt
+			return Integer.toString(getBeginWeight( fr));
 			
-		case 14: //Parents
+		case 15: //EndWt
+			return Integer.toString(getEndWeight( fr));
+				
+		case 16: //Parents
 			return fr.getParent();
 			
-		case 15: //Club
+		case 17: //Club
 			return fr.getClub();
 			
-		case 16: //Phone
+		case 18: //Phone
 			return fr.getPhone();
 			
-		case 17: //Address
+		case 19: //Address
 			return fr.getAddress();
 
-		case 18: //Comments
+		case 20: //Comments
 			return fr.getComments();
 		
 		default :
 			return "unknown " + columnIndex;
 		}
 	}
+	
+	public static final int getBeginWeight(FairRegistration fr){
+		List<WeighIn> weights = getSortedWeighIns( fr);
+		return  weights.isEmpty()?0:weights.get(0).getWeight();
+	}
+	
+	public static final int getEndWeight(FairRegistration fr){
+		List<WeighIn> weights = getSortedWeighIns( fr);
+		if(weights.isEmpty() || weights.size()<2){
+			return 0;
+		}
+		return weights.get(weights.size()-1).getWeight();
+	}
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * 
+	 * @param fr
+	 * @return
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final List<WeighIn> getSortedWeighIns(FairRegistration fr){
+		List<WeighIn> weights = new ArrayList<WeighIn>();
+		Animal animal = (Animal)fr.getTag().eContainer();
+		for (Event event : animal.allEvents()){
+			if(event instanceof WeighIn ){
+				weights.add((WeighIn)event);
+			}
+		}
+		Collections.sort(weights, new Comparator<WeighIn>() {
+		    public int compare(WeighIn event1, WeighIn event2) {
+		        return compareDateTimes( event1,  event2);
+		    }});
+		return weights;
+	}
+	
 
+
+	public static final int compareDateTimes(Event event1, Event event2) {
+		Date date1 = event1.getDateTime()==null?CommonUtilities.DATE_REFERENCE.getTime():event1.getDateTime();
+		Date date2 = event2.getDateTime()==null?CommonUtilities.DATE_REFERENCE.getTime():event2.getDateTime();
+		return date1.compareTo(date2);
+	}
+
+	
+	
+	
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
