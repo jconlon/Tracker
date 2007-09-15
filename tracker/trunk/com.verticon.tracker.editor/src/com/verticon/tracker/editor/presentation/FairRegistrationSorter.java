@@ -13,6 +13,7 @@ import org.eclipse.jface.viewers.ViewerSorter;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.FairRegistration;
+import com.verticon.tracker.edit.provider.FairRegistrationItemProvider;
 import com.verticon.tracker.util.CommonUtilities;
 
 
@@ -45,6 +46,8 @@ public class FairRegistrationSorter extends ViewerSorter {
 	public final static int CLUB = 7; 
 	public final static int PARENT = 8; 
 	public final static int PHONE = 9;
+	public final static int BEGIN_WEIGHT = 10;
+	public final static int END_WEIGHT = 11;
 	
 
 	// Criteria that the instance uses 
@@ -87,6 +90,10 @@ public class FairRegistrationSorter extends ViewerSorter {
 				return compareParticipants(fairRegistration1, fairRegistration2);
 			case ADDRESS :
 				return compareAddresses(fairRegistration1, fairRegistration2);
+			case BEGIN_WEIGHT :
+				return compareBeginWeights(fairRegistration1, fairRegistration2);
+			case END_WEIGHT :
+				return compareEndWeights(fairRegistration1, fairRegistration2);
 			default:
 				return 0;
 		}
@@ -244,6 +251,38 @@ public class FairRegistrationSorter extends ViewerSorter {
 	@SuppressWarnings("unchecked")
 	protected int compareAddresses(FairRegistration fairRegistration1, FairRegistration fairRegistration2) {
 		return fairRegistration1.getAddress().compareTo(fairRegistration2.getAddress());
+	}
+	
+	/**
+	 * Returns a number reflecting the collation order of the given events
+	 * based on the begining WeighIn weights.
+	 *
+	 * @param fairRegistration1
+	 * @param fairRegistration2
+	 * @return a negative number if the first element is less  than the 
+	 *  second element; the value <code>0</code> if the first element is
+	 *  equal to the second element; and a positive number if the first
+	 *  element is greater than the second element
+	 */
+	@SuppressWarnings("unchecked")
+	private int compareBeginWeights(FairRegistration fairRegistration1, FairRegistration fairRegistration2) {
+		return FairRegistrationItemProvider.getBeginWeight(fairRegistration1) - FairRegistrationItemProvider.getBeginWeight(fairRegistration2);
+	}
+	
+	/**
+	 * Returns a number reflecting the collation order of the given events
+	 * based on the begining WeighIn weights.
+	 *
+	 * @param fairRegistration1
+	 * @param fairRegistration2
+	 * @return a negative number if the first element is less  than the 
+	 *  second element; the value <code>0</code> if the first element is
+	 *  equal to the second element; and a positive number if the first
+	 *  element is greater than the second element
+	 */
+	@SuppressWarnings("unchecked")
+	private int compareEndWeights(FairRegistration fairRegistration1, FairRegistration fairRegistration2) {
+		return FairRegistrationItemProvider.getEndWeight(fairRegistration1) - FairRegistrationItemProvider.getEndWeight(fairRegistration2);
 	}
 	
 	

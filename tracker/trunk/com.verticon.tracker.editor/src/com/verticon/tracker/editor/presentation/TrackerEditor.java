@@ -1255,6 +1255,31 @@ public class TrackerEditor
 				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.PARTICIPANT));
 			}
 		});
+		
+		//BEGINWEIGHT
+		TableColumn beginWtColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 30, true));
+		beginWtColumn.setText("Begin Wt");
+		beginWtColumn.setResizable(true);
+		beginWtColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.BEGIN_WEIGHT));
+			}
+		});
+		
+		//ENDWEIGHT
+		TableColumn endWtColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 30, true));
+		endWtColumn.setText("End Wt");
+		endWtColumn.setResizable(true);
+		endWtColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				fairRegistrationTableViewer.setSorter(
+						new FairRegistrationSorter(FairRegistrationSorter.END_WEIGHT));
+			}
+		});
+		
+		
 		//Parents 
 		TableColumn parentsColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 220, true));
@@ -1309,7 +1334,7 @@ public class TrackerEditor
 			}
 		});
 
-		fairRegistrationTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f", "g","h","i"});
+		fairRegistrationTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f", "g","h","i", "j","k"});
 //		fairRegistrationTableViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
 		fairRegistrationTableViewer.setContentProvider(
 				new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
