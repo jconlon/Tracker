@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.export.wlic"
       label="Tracker WLIC Export"
-      version="0.1.0"
+      version="0.2.0"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.export.wlic">
 
