@@ -45,6 +45,7 @@ public class EventSorter extends ViewerSorter {
 	public final static int EVENT_CODE 	= 5;
 	public final static int EVENT_COMMENTS 	= 6;
 	public final static int EVENT_TEXT 	= 7;
+	public final static int DATETIME_REVERSE = 8;
 	
 	private final static DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss z");
 
@@ -84,6 +85,8 @@ public class EventSorter extends ViewerSorter {
 				return compareComments(event1, event2);
 			case EVENT_TEXT :
 				return compareEventTexts(event1, event2);
+			case DATETIME_REVERSE :
+				return compareDateTimesReverse(event1, event2);
 			default:
 				return 0;
 		}
@@ -141,6 +144,23 @@ public class EventSorter extends ViewerSorter {
 		Date date1 = event1.getDateTime()==null?CommonUtilities.DATE_REFERENCE.getTime():event1.getDateTime();
 		Date date2 = event2.getDateTime()==null?CommonUtilities.DATE_REFERENCE.getTime():event2.getDateTime();
 		return date1.compareTo(date2);
+	}
+	
+	/**
+	 * Returns a number reflecting the collation order of the given events
+	 * based on the dateTimes.
+	 *
+	 * @param event1 the first task element to be ordered
+	 * @param resource2 the second task element to be ordered
+	 * @return a negative number if the first element is less  than the 
+	 *  second element; the value <code>0</code> if the first element is
+	 *  equal to the second element; and a positive number if the first
+	 *  element is greater than the second element
+	 */
+	protected int compareDateTimesReverse(Event event1, Event event2) {
+		Date date1 = event1.getDateTime()==null?CommonUtilities.DATE_REFERENCE.getTime():event1.getDateTime();
+		Date date2 = event2.getDateTime()==null?CommonUtilities.DATE_REFERENCE.getTime():event2.getDateTime();
+		return date2.compareTo(date1);
 	}
 
 
