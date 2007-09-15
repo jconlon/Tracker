@@ -13,8 +13,16 @@ import com.verticon.tracker.editor.util.ExportPremisesBase;
 
 
 /**
- * @author jconlon
  * 
+ * Builds four worksheets.
+ * Called by menu pick Raw FairRegistration.
+ * 
+ * @see FairRegistrationWorkSheetBuilder
+ * @see WeighInWorkSheetBuilder
+ * @see MovedInWorkSheetBuilder
+ * @see MovedOutWorkSheetBuilder
+ * @author jconlon
+ * @since 0.1
  */
 public class ExportFairRawEventsEditorActionDelegate extends ExportPremisesBase implements IEditorActionDelegate {
 

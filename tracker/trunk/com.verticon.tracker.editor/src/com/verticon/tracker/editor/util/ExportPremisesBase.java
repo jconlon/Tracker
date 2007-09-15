@@ -89,7 +89,8 @@ public class ExportPremisesBase {
 				}
 			});
 		} catch (InvocationTargetException e) {
-			ite = e;
+			e.printStackTrace();
+			ite = e;//FIXME
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -103,8 +104,8 @@ public class ExportPremisesBase {
 
 		} else {
 			MessageDialog.openError(targetEditor.getSite().getShell(),
-					premisesProcessor.getFailureTitle(), ite.getCause()
-							.getMessage());
+					premisesProcessor.getFailureTitle(), //
+						"Process Failed because: "+ite);
 		}
 
 	}
