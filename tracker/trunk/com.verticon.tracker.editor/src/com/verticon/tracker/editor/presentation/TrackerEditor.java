@@ -1479,7 +1479,7 @@ public class TrackerEditor
 				});
 		eventsTableViewer.setLabelProvider(
 				new AdapterFactoryLabelProvider(adapterFactory));
-Object rootObject = getRoot();
+		Object rootObject = getRoot();
 		if (rootObject instanceof Premises){
 			eventsTableViewer.setInput((Premises)rootObject);
 			viewerPane.setTitle((Premises)rootObject);

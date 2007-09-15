@@ -50,8 +50,6 @@ import org.eclipse.emf.edit.ui.celleditor.AdapterFactoryTreeEditor;
 import org.eclipse.emf.edit.ui.dnd.EditingDomainViewerDropAdapter;
 import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
 import org.eclipse.emf.edit.ui.dnd.ViewerDragAdapter;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.ui.provider.TransactionalAdapterFactoryContentProvider;
@@ -69,7 +67,6 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -77,23 +74,13 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
-import org.eclipse.jface.viewers.TableLayout;
-import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
-import org.eclipse.swt.events.ControlAdapter;
-import org.eclipse.swt.events.ControlEvent;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
@@ -114,9 +101,7 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
-import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
-import com.verticon.tracker.editor.presentation.EventSorter;
 
 
 /**
@@ -146,7 +131,7 @@ import com.verticon.tracker.editor.presentation.EventSorter;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TrackerEditor
+public class CopyOfTrackerEditor
 	extends MultiPageEditorPart
 	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
 	/**
@@ -157,12 +142,6 @@ public class TrackerEditor
 	 */
 	protected AdapterFactoryEditingDomain editingDomain;
 
-	/**
-	 * Events Table Viewer
-	 * @generated NOT
-	 */
-	protected TableViewer eventsTableViewer;
-	
 	protected IUndoContext undoContext;
 	protected Resource resource;  // the resource that we are editing
 	
@@ -266,18 +245,18 @@ public class TrackerEditor
 			public void partActivated(IWorkbenchPart p) {
 				if (p instanceof ContentOutline) {
 					if (((ContentOutline)p).getCurrentPage() == contentOutlinePage) {
-						getActionBarContributor().setActiveEditor(TrackerEditor.this);
+						getActionBarContributor().setActiveEditor(CopyOfTrackerEditor.this);
 
 						setCurrentViewer(contentOutlineViewer);
 					}
 				}
 				else if (p instanceof PropertySheet) {
 					if (((PropertySheet)p).getCurrentPage() == propertySheetPage) {
-						getActionBarContributor().setActiveEditor(TrackerEditor.this);
+						getActionBarContributor().setActiveEditor(CopyOfTrackerEditor.this);
 						handleActivate();
 					}
 				}
-				else if (p == TrackerEditor.this) {
+				else if (p == CopyOfTrackerEditor.this) {
 					handleActivate();
 				}
 			}
@@ -385,8 +364,8 @@ public class TrackerEditor
 			
 			if (removedResources.contains(res)) {
 				if (handleDirtyConflict()) {
-					getSite().getPage().closeEditor(TrackerEditor.this, false);
-					TrackerEditor.this.dispose();
+					getSite().getPage().closeEditor(CopyOfTrackerEditor.this, false);
+					CopyOfTrackerEditor.this.dispose();
 				}
 			} else if (movedResources.containsKey(res)) {
 				if (savedResources.contains(res)) {
@@ -423,8 +402,8 @@ public class TrackerEditor
 					getSite().getShell().getDisplay().asyncExec
 						(new Runnable() {
 							 public void run() {
-								 getSite().getPage().closeEditor(TrackerEditor.this, false);
-								 TrackerEditor.this.dispose();
+								 getSite().getPage().closeEditor(CopyOfTrackerEditor.this, false);
+								 CopyOfTrackerEditor.this.dispose();
 							 }
 						 });
 				} else {
@@ -524,7 +503,7 @@ public class TrackerEditor
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public TrackerEditor() {
+	public CopyOfTrackerEditor() {
 		super();
 
 		// Create an adapter factory that yields item providers.
@@ -734,35 +713,6 @@ public class TrackerEditor
 		return undoContext;
 	}
 
-	
-	@Override
-	protected void createPages() {
-		createModel();
-
-		createSelectionTreeViewer(getString("_UI_SelectionPage_label"));
-		createEventsTableViewer(getString("_UI_EventsTablePage_label"));
-		
-		setActivePage(0);
-		
-		// Ensures that this editor will only display the page's tab
-		// area if there are more than one page
-		//
-		getContainer().addControlListener
-			(new ControlAdapter() {
-				boolean guard = false;
-				public void controlResized(ControlEvent event) {
-					if (!guard) {
-						guard = true;
-						hideTabs();
-						guard = false;
-					}
-				}
-			 });
-
-//		updateProblemIndication();
-		
-	}
-	
 	/**
 	 * This is the method used by the framework to install your own controls.
 	 * <!-- begin-user-doc -->
@@ -773,7 +723,7 @@ public class TrackerEditor
 	protected void createSelectionTreeViewer(String pageName){
 
 		ViewerPane viewerPane =
-			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+			new ViewerPane(getSite().getPage(), CopyOfTrackerEditor.this) {
 				public Viewer createViewer(Composite composite) {
 					Tree tree = new Tree(composite, SWT.MULTI);
 					TreeViewer newTreeViewer = new TreeViewer(tree);
@@ -798,196 +748,17 @@ public class TrackerEditor
 		new AdapterFactoryTreeEditor(selectionViewer.getTree(), adapterFactory);
 
 		createContextMenuFor(selectionViewer);
+	}
+	
+	@Override
+	protected void createPages() {
+		createModel();
+
+		createSelectionTreeViewer(getString("_UI_SelectionPage_label"));
 		
-		int pageIndex = addPage(viewerPane.getControl());
-		setPageText(pageIndex,pageName );
-	}
-	
-	
-	/**
-	 * Events Table
-	 */
-	private void createEventsTableViewer(String tableName) {
-		ViewerPane viewerPane =
-			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-			public Viewer createViewer(Composite composite) {
-				return new TableViewer(composite);
-			}
-			public void requestActivation() {
-				super.requestActivation();
-				setCurrentViewerPane(this);
-				this.getViewer().refresh();
-			}
-		};
-		viewerPane.createControl(getContainer());
-		eventsTableViewer = (TableViewer)viewerPane.getViewer();
-
-		Table table = eventsTableViewer.getTable();
-		TableLayout layout = new TableLayout();
-		table.setLayout(layout);
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-		eventsTableViewer.setUseHashlookup(true);
-
-		//Event 
-		TableColumn animalColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 200, true));
-		animalColumn.setText(getString("_UI_EventColumn_label"));
-		animalColumn.setResizable(true);
-		animalColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_TEXT));
-			}
-		});
+		setActivePage(0);
 		
-		//Animal ID Number
-		TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 100, true));
-		animalIDColumn.setText(getString("_UI_AnimalParentColumn_label"));
-		animalIDColumn.setResizable(true);
-		animalIDColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.ANIMAL_IDNUMBER));
-			}
-		});
-
-		//Tag ID Number
-		TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 150, true));
-		tagIDColumn.setText(getString("_UI_TagColumn_label"));
-		tagIDColumn.setResizable(true);
-		tagIDColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.TAG_IDNUMBER));
-			}
-		});
-		//Date of Event
-		TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 170, true));
-		dateTimeColumn.setText(getString("_UI_DateTimeColumn_label"));
-		dateTimeColumn.setResizable(true);
-		dateTimeColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.DATETIME));
-			}
-		});
-
-		//Event Type
-		TableColumn eventNameColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 60, true));
-		eventNameColumn.setText(getString("_UI_EventNameColumn_label"));
-		eventNameColumn.setResizable(true);
-		eventNameColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_TYPE));
-			}
-		});
-
-
-		//Event Code
-		TableColumn eventCodeColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 20, true));
-		eventCodeColumn.setText(getString("_UI_EventCodeColumn_label"));
-		eventCodeColumn.setResizable(true);
-		eventCodeColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_CODE));
-			}
-		});
-
-		//Comments
-		TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 180, true));
-		eventCommentsColumn.setText(getString("_UI_CommentsColumn_label"));
-		eventCommentsColumn.setResizable(true);
-		eventCommentsColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_COMMENTS));
-			}
-		});
-
-		eventsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f","g"});
-
-		eventsTableViewer.setContentProvider(
-				new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
-				{
-					public Object [] getElements(Object object)
-					{
-						return ((Premises)object).eventHistory().toArray();
-					}
-//					public void notifyChanged(Notification notification)
-//					{
-//						
-//						switch (notification.getEventType())
-//						{
-//						case Notification.ADD:
-//						case Notification.ADD_MANY:
-//							System.out.println("Adding "+notification.getFeature());
-//							if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
-//								System.out.println("Not refreshing... ");
-//								return;
-//							}
-//						}
-//						super.notifyChanged(notification);
-//						eventsTableViewer.refresh();
-//					}
-				});
-		eventsTableViewer.setLabelProvider(
-				new AdapterFactoryLabelProvider(adapterFactory));
-		Object rootObject = getRoot();
-		if (rootObject instanceof Premises){
-			eventsTableViewer.setInput((Premises)rootObject);
-			viewerPane.setTitle((Premises)rootObject);
-		}
-		createContextMenuFor(eventsTableViewer);
-		int pageIndex = addPage(viewerPane.getControl());
-		setPageText(pageIndex, tableName);
 	}
-	
-	/**
-	 * @return
-	 */
-	private Object getRoot() {
-		Resource resource = getResource();
-		  Object rootObject = resource.getContents().get(0);
-		return rootObject;
-	}
-	/**
-	 * If there is just one page in the multi-page editor part,
-	 * this hides the single tab at the bottom.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void hideTabs() {
-		if (getPageCount() <= 1) {
-			setPageText(0, "");
-			if (getContainer() instanceof CTabFolder) {
-				((CTabFolder)getContainer()).setTabHeight(1);
-				Point point = getContainer().getSize();
-				getContainer().setSize(point.x, point.y + 6);
-			}
-		}
-	}
-
-	/**
-	 * If there is more than one page in the multi-page editor part,
-	 * this shows the tabs at the bottom.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void showTabs() {
-		if (getPageCount() > 1) {
-			setPageText(0, getString("_UI_SelectionPage_label"));
-			if (getContainer() instanceof CTabFolder) {
-				((CTabFolder)getContainer()).setTabHeight(SWT.DEFAULT);
-				Point point = getContainer().getSize();
-				getContainer().setSize(point.x, point.y - 6);
-			}
-		}
-	}
-
 	
 	/**
 	 * <!-- begin-user-doc -->
@@ -1109,8 +880,8 @@ public class TrackerEditor
 			propertySheetPage =
 				new ExtendedPropertySheetPage(editingDomain) {
 					public void setSelectionToViewer(List<?> selection) {
-						TrackerEditor.this.setSelectionToViewer(selection);
-						TrackerEditor.this.setFocus();
+						CopyOfTrackerEditor.this.setSelectionToViewer(selection);
+						CopyOfTrackerEditor.this.setFocus();
 					}
 
 					public void setActionBars(IActionBars actionBars) {
