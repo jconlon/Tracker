@@ -1215,7 +1215,7 @@ public class TrackerEditor
 
 		//Animal ID Number
 		TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 100, true));
+		layout.addColumnData(new ColumnWeightData(3, 150, true));
 		animalIDColumn.setText(getString("_UI_AnimalParentColumn_label"));
 		animalIDColumn.setResizable(true);
 		animalIDColumn.addSelectionListener(new SelectionAdapter() {
@@ -1234,6 +1234,18 @@ public class TrackerEditor
 				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.TAG_IDNUMBER));
 			}
 		});
+		
+		//Animal
+		TableColumn animalTypeColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 120, true));
+		animalTypeColumn.setText(getString("_UI_AnimalColumn_label"));
+		animalTypeColumn.setResizable(true);
+		animalTypeColumn.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.ANIMAL));
+			}
+		});
+		
 		//Date of Event
 		TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 170, true));
@@ -1334,8 +1346,7 @@ public class TrackerEditor
 			}
 		});
 
-		fairRegistrationTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f", "g","h","i", "j","k"});
-//		fairRegistrationTableViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
+		fairRegistrationTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f", "g","h","i", "j","k","l"});
 		fairRegistrationTableViewer.setContentProvider(
 				new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
 				{
@@ -1404,7 +1415,7 @@ public class TrackerEditor
 
 		//Event 
 		TableColumn animalColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 200, true));
+		layout.addColumnData(new ColumnWeightData(3, 230, true));
 		animalColumn.setText(getString("_UI_EventColumn_label"));
 		animalColumn.setResizable(true);
 		animalColumn.addSelectionListener(new SelectionAdapter() {

@@ -385,7 +385,7 @@ public class AnimalItemProvider
 	 * @param object
 	 * @return
 	 */
-	private String getResourceName(Object object) {
+	static final String getResourceName(Object object) {
 		String simpleName = object.getClass().getSimpleName();
 		String resourceName = simpleName.substring(0,simpleName.indexOf("Impl"));
 		return resourceName;

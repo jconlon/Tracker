@@ -8,11 +8,13 @@
 package com.verticon.tracker.editor.presentation;
 import java.util.Date;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.FairRegistration;
+import com.verticon.tracker.edit.provider.AnimalItemProvider;
 import com.verticon.tracker.edit.provider.FairRegistrationItemProvider;
 import com.verticon.tracker.util.CommonUtilities;
 
@@ -48,6 +50,7 @@ public class FairRegistrationSorter extends ViewerSorter {
 	public final static int PHONE = 9;
 	public final static int BEGIN_WEIGHT = 10;
 	public final static int END_WEIGHT = 11;
+	public final static int ANIMAL = 12;
 	
 
 	// Criteria that the instance uses 
@@ -94,6 +97,8 @@ public class FairRegistrationSorter extends ViewerSorter {
 				return compareBeginWeights(fairRegistration1, fairRegistration2);
 			case END_WEIGHT :
 				return compareEndWeights(fairRegistration1, fairRegistration2);
+			case ANIMAL :
+				return compareAnimals(fairRegistration1, fairRegistration2);
 			default:
 				return 0;
 		}
@@ -167,7 +172,10 @@ public class FairRegistrationSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int compareParents(FairRegistration fairRegistration1, FairRegistration fairRegistration2) {
-		return fairRegistration1.getParent().compareTo(fairRegistration2.getParent());
+		String s1 = fairRegistration1.getParent()==null?"":fairRegistration1.getParent();
+		String s2 = fairRegistration2.getParent()==null?"":fairRegistration2.getParent();
+		return s1.compareTo(s2);
+		
 	}
 	
 	/**
@@ -183,9 +191,9 @@ public class FairRegistrationSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int compareComments(FairRegistration fairRegistration1, FairRegistration fairRegistration2) {
-		String comments1 = fairRegistration1.getComments()==null?"":fairRegistration1.getComments();
-		String comments2 = fairRegistration2.getComments()==null?"":fairRegistration2.getComments();
-		return comments1.compareTo(comments2);
+		String s1 = fairRegistration1.getComments()==null?"":fairRegistration1.getComments();
+		String s2 = fairRegistration2.getComments()==null?"":fairRegistration2.getComments();
+		return s1.compareTo(s2);
 	}
 	
 	/**
@@ -217,7 +225,9 @@ public class FairRegistrationSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int compareClubs(FairRegistration fairRegistration1, FairRegistration fairRegistration2) {
-		return fairRegistration1.getClub().compareTo(fairRegistration2.getClub());
+		String s1 = fairRegistration1.getClub()==null?"":fairRegistration1.getClub();
+		String s2 = fairRegistration2.getClub()==null?"":fairRegistration2.getClub();
+		return s1.compareTo(s2);
 	}
 	
 	/**
@@ -233,7 +243,9 @@ public class FairRegistrationSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int compareParticipants(FairRegistration fairRegistration1, FairRegistration fairRegistration2) {
-		return fairRegistration1.getParticipant().compareTo(fairRegistration2.getParticipant());
+		String s1 = fairRegistration1.getParticipant()==null?"":fairRegistration1.getParticipant();
+		String s2 = fairRegistration2.getParticipant()==null?"":fairRegistration2.getParticipant();
+		return s1.compareTo(s2);
 	}
 	
 	
@@ -283,6 +295,26 @@ public class FairRegistrationSorter extends ViewerSorter {
 	@SuppressWarnings("unchecked")
 	private int compareEndWeights(FairRegistration fairRegistration1, FairRegistration fairRegistration2) {
 		return FairRegistrationItemProvider.getEndWeight(fairRegistration1) - FairRegistrationItemProvider.getEndWeight(fairRegistration2);
+	}
+	
+	/**
+	 * Returns a number reflecting the collation order of the given events
+	 * based on the name of the Class of Animal
+	 *
+	 * @param animal1
+	 * @param animal2
+	 * @return a negative number if the first element is less  than the 
+	 *  second element; the value <code>0</code> if the first element is
+	 *  equal to the second element; and a positive number if the first
+	 *  element is greater than the second element
+	 */
+	@SuppressWarnings("unchecked")
+	private int compareAnimals(FairRegistration fairRegistration1, FairRegistration fairRegistration2) {
+		EObject o1 = fairRegistration1.getTag();
+		EObject o2 = fairRegistration2.getTag();
+		String s1 = o1==null?"":o1.eContainer()==null?"":o1.eContainer().getClass().getName();
+		String s2 = o2==null?"":o2.eContainer()==null?"":o2.eContainer().getClass().getName();
+		return s1.compareTo(s2);
 	}
 	
 	

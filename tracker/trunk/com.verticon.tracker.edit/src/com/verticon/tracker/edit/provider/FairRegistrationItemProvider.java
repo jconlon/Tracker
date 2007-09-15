@@ -81,34 +81,38 @@ public class FairRegistrationItemProvider
 		case 11: //Tag Id
 			return fr.getTag().getId();
 			
-		case 12: //Date
+		case 12: //Animal 
+			Object o = fr.getTag().eContainer();
+			return o!=null?getString("_UI_"+AnimalItemProvider.getResourceName(o)+"_type"):null;
+			
+		case 13: //Date
 			if(fr.getDateTime()!=null){
 				return df.format(fr.getDateTime());
 			}
 			return null;
 			
-		case 13: //Participant
+		case 14: //Participant
 			return fr.getParticipant();
 		
-		case 14: //BeginWt
+		case 15: //BeginWt
 			return Integer.toString(getBeginWeight( fr));
 			
-		case 15: //EndWt
+		case 16: //EndWt
 			return Integer.toString(getEndWeight( fr));
 				
-		case 16: //Parents
+		case 17: //Parents
 			return fr.getParent();
 			
-		case 17: //Club
+		case 18: //Club
 			return fr.getClub();
 			
-		case 18: //Phone
+		case 19: //Phone
 			return fr.getPhone();
 			
-		case 19: //Address
+		case 20: //Address
 			return fr.getAddress();
 
-		case 20: //Comments
+		case 21: //Comments
 			return fr.getComments();
 		
 		default :
