@@ -458,26 +458,27 @@ public class AnimalItemProvider
 	  {
 	    Animal animal = (Animal)object;
 	    switch (columnIndex){
-	    	case 0: return Long.toString(((Animal)object).getIdNumber()); 
-	    	case 1: return getString("_UI_"+getResourceName(object)+"_type") ;//Animal 
-	    	case 2: return animal.getSpeciesCode();
-	    	case 3: return animal.getSexCode();
-	    	case 4: return animal.getBreed();
-	    	case 5: 
+	        //FIXME 184712 Column 0 must present the first object as getText() for both table and tree
+	    	case 0: return getText( object); 
+	    	case 1: return Long.toString(((Animal)object).getIdNumber()); 
+	    	case 2: return getString("_UI_"+getResourceName(object)+"_type") ;//Animal 
+	    	case 3: return animal.getSpeciesCode();
+	    	case 4: return animal.getSexCode();
+	    	case 5: return animal.getBreed();
+	    	case 6: 
 	    		if(animal.getBirthDate()!=null){
 	    			DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
-//	    			SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
 	    			return df.format(animal.getBirthDate());
 	    		}
 	    		return null;
-	    	case 6: 
+	    	case 7: 
 	    		if(animal.getAge()!=null){
 	    			return animal.getAge().getYears() + " years, "
 					+ animal.getAge().getMonths() + " month, " + animal.getAge().getDays()
 					+ " days " + animal.getAge().getStatus();
 	    		}
 	    		return null;
-	    	case 7:
+	    	case 8:
 	    		return animal.getComments();
 	    	default :
 	    		return "unknown " + columnIndex;
