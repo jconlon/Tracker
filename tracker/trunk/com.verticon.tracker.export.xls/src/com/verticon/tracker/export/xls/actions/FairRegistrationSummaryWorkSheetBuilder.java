@@ -20,6 +20,7 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.edit.provider.AnimalItemProvider;
 import com.verticon.tracker.edit.provider.FairRegistrationItemProvider;
 
 /**
@@ -29,6 +30,19 @@ import com.verticon.tracker.edit.provider.FairRegistrationItemProvider;
 public class FairRegistrationSummaryWorkSheetBuilder implements
 		WorkSheetBuilder {
 
+	private static final String TITLE = " Weigh-in 2007";
+	private static final String COMMENTS = "Comments";
+	private static final String EXHIBIT = "Exhibit";
+	private static final String SALES_ORDER = "Sales Order";
+	private static final String EAR_TAG = "Ear Tag";
+	private static final String END_WEIGHT = "End Weight";
+	private static final String BEGIN_WEIGHT = "Begin Weight";
+	private static final String TYPE_OF_ANIMAL = "TypeOfAnimal";
+	private static final String CLUB = "Club";
+	private static final String PARENT = "Parent";
+	private static final String PHONE = "Phone";
+	private static final String ADDRESS = "Address";
+	private static final String NAME = "Name";
 	private List<FairRegistration> registrationEvents = new ArrayList<FairRegistration>();
 	private int rowCount = 0;
 	public FairRegistrationSummaryWorkSheetBuilder() {
@@ -51,41 +65,41 @@ public class FairRegistrationSummaryWorkSheetBuilder implements
 
 	private void createColumnHeader(HSSFSheet sheet) {
 		HSSFRow row = createRow(sheet);
-		row.createCell((short) 0).setCellValue(" Weigh-in 2007");
+		row.createCell((short) 0).setCellValue(TITLE);
 		row = createRow(sheet);
 		// Name
-		row.createCell((short) 0).setCellValue("Name");
+		row.createCell((short) 0).setCellValue(NAME);
 		sheet.setColumnWidth((short) 0, (short) ((50 * 5) / ((double) 1 / 20)));
 		// Address
-		row.createCell((short) 1).setCellValue("Address");
+		row.createCell((short) 1).setCellValue(ADDRESS);
 		sheet.setColumnWidth((short) 1, (short) ((50 * 9) / ((double) 1 / 20)));
 		// Phone
-		row.createCell((short) 2).setCellValue("Phone");
+		row.createCell((short) 2).setCellValue(PHONE);
 		sheet.setColumnWidth((short) 2, (short) ((50 * 5) / ((double) 1 / 20)));
 		// Parent
-		row.createCell((short) 3).setCellValue("Parent");
+		row.createCell((short) 3).setCellValue(PARENT);
 		sheet.setColumnWidth((short) 3, (short) ((50 * 5) / ((double) 1 / 20)));
 		// Club
-		row.createCell((short) 4).setCellValue("Club");
+		row.createCell((short) 4).setCellValue(CLUB);
 		sheet.setColumnWidth((short) 4, (short) ((50 * 6) / ((double) 1 / 20)));
 		// Breed
-		row.createCell((short) 5).setCellValue("Breed");
+		row.createCell((short) 5).setCellValue(TYPE_OF_ANIMAL);
 		// Date of Weigh In
-		row.createCell((short) 6).setCellValue("Begin Weigh");
+		row.createCell((short) 6).setCellValue(BEGIN_WEIGHT);
 		sheet.setColumnWidth((short) 6, (short) ((50 * 5) / ((double) 1 / 20)));
 		// Weight
-		row.createCell((short) 7).setCellValue("End Weight");
+		row.createCell((short) 7).setCellValue(END_WEIGHT);
 		// EarTag
-		row.createCell((short) 8).setCellValue("Ear Tag");
+		row.createCell((short) 8).setCellValue(EAR_TAG);
 		sheet.setColumnWidth((short) 8, (short) ((50 * 4) / ((double) 1 / 20)));
 		//Sales O
-		row.createCell((short) 9).setCellValue("Sales Order");
+		row.createCell((short) 9).setCellValue(SALES_ORDER);
 		sheet.setColumnWidth((short) 9, (short) ((50 * 3) / ((double) 1 / 20)));
 		//Exhibit 
-		row.createCell((short) 10).setCellValue("Exhibit");
+		row.createCell((short) 10).setCellValue(EXHIBIT);
 		sheet.setColumnWidth((short) 10, (short) ((50 * 3) / ((double) 1 / 20)));
 		//Comments
-		row.createCell((short) 11).setCellValue("Comments");
+		row.createCell((short) 11).setCellValue(COMMENTS);
 		sheet.setColumnWidth((short) 11, (short) ((50 * 9) / ((double) 1 / 20)));
 
 		sheet.groupRow(0, 1);
@@ -138,9 +152,9 @@ public class FairRegistrationSummaryWorkSheetBuilder implements
 		row.createCell((short) 3).setCellValue(fairRegistration.getParent());
 		// Club
 		row.createCell((short) 4).setCellValue(fairRegistration.getClub());
-		// FIXME Breed 
+		// Breed 
 		row.createCell((short) 5).setCellValue(
-				((Animal) fairRegistration.getTag().eContainer()).getBreed());
+				getAnimalTypeName(fairRegistration));
 		// Begin Weight
 		row.createCell((short) 6).setCellValue(FairRegistrationItemProvider.getBeginWeight(fairRegistration));
 		// END Weight
@@ -153,6 +167,13 @@ public class FairRegistrationSummaryWorkSheetBuilder implements
 		row.createCell((short) 10).setCellValue(fairRegistration.getExhibit());
 		// Comments
 		row.createCell((short) 11).setCellValue(fairRegistration.getComments());
+	}
+	
+	// FIXME 
+	String getAnimalTypeName(FairRegistration fr){
+		Object o = fr.getTag().eContainer();
+//		getString("_UI_"+AnimalItemProvider.getResourceName(o)+"_type")
+		return o!=null?AnimalItemProvider.getResourceName(o):null;
 	}
 
 	private void createHeader(HSSFSheet sheet) {

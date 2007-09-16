@@ -51,6 +51,7 @@ public class ExportPremisesBase {
 	public void run(IAction action) {
 
 		InvocationTargetException ite = null;
+		
 		IWorkbenchWindow window = targetEditor.getSite().getWorkbenchWindow();
 
 		try {
@@ -68,9 +69,8 @@ public class ExportPremisesBase {
 						boolean validateBeforeExport = store.getBoolean(PreferenceConstants.P_VALIDATE_BEFORE_EXPORT);
 						if (validateBeforeExport && !ActionUtils.validate(premises,
 								validationDiagnostics)) {
-							throw new InvocationTargetException(
-									new IOException(
-											"Tracker Model is not valid.  Please create a validate model before exporting."));
+							throw new IOException(
+											"Tracker Model is not valid.  Please create a validate model before exporting.");
 						}
 
 						if (premises == null) {
@@ -89,12 +89,10 @@ public class ExportPremisesBase {
 				}
 			});
 		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-			ite = e;//FIXME
+			ite = e;
 
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 
 		if (ite == null) {
@@ -103,9 +101,12 @@ public class ExportPremisesBase {
 							.getCompletionMessage());
 
 		} else {
-			MessageDialog.openError(targetEditor.getSite().getShell(),
+			MessageDialog.openError(
+					targetEditor.getSite().getShell(),
 					premisesProcessor.getFailureTitle(), //
-						"Process Failed because: "+ite);
+				    "Process Failed because: "+
+				    ite.getTargetException()==null?ite.toString():
+				    	ite.getTargetException().getLocalizedMessage());
 		}
 
 	}
