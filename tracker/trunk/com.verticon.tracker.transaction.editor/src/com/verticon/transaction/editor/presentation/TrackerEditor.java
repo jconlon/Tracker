@@ -87,10 +87,9 @@ import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -822,7 +821,7 @@ public class TrackerEditor
 		viewerPane.createControl(getContainer());
 		eventsTableViewer = (TableViewer)viewerPane.getViewer();
 
-		Table table = eventsTableViewer.getTable();
+		final Table table = eventsTableViewer.getTable();
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
 		table.setHeaderVisible(true);
@@ -830,82 +829,101 @@ public class TrackerEditor
 		eventsTableViewer.setUseHashlookup(true);
 
 		//Event 
-		TableColumn animalColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn animalColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 200, true));
 		animalColumn.setText(getString("_UI_EventColumn_label"));
-		animalColumn.setResizable(true);
-		animalColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_TEXT));
-			}
-		});
 		
 		//Animal ID Number
-		TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 100, true));
 		animalIDColumn.setText(getString("_UI_AnimalParentColumn_label"));
-		animalIDColumn.setResizable(true);
-		animalIDColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.ANIMAL_IDNUMBER));
-			}
-		});
 
 		//Tag ID Number
-		TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		tagIDColumn.setText(getString("_UI_TagColumn_label"));
-		tagIDColumn.setResizable(true);
-		tagIDColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.TAG_IDNUMBER));
-			}
-		});
+
+		
 		//Date of Event
-		TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 170, true));
 		dateTimeColumn.setText(getString("_UI_DateTimeColumn_label"));
-		dateTimeColumn.setResizable(true);
-		dateTimeColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.DATETIME));
-			}
-		});
 
 		//Event Type
-		TableColumn eventNameColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn eventNameColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 60, true));
 		eventNameColumn.setText(getString("_UI_EventNameColumn_label"));
-		eventNameColumn.setResizable(true);
-		eventNameColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_TYPE));
-			}
-		});
 
 
 		//Event Code
-		TableColumn eventCodeColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn eventCodeColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 20, true));
 		eventCodeColumn.setText(getString("_UI_EventCodeColumn_label"));
-		eventCodeColumn.setResizable(true);
-		eventCodeColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_CODE));
-			}
-		});
 
 		//Comments
-		TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 180, true));
 		eventCommentsColumn.setText(getString("_UI_CommentsColumn_label"));
-		eventCommentsColumn.setResizable(true);
-		eventCommentsColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_COMMENTS));
-			}
-		});
 
+		Listener sortListener = new Listener() {
+
+			public void handleEvent(org.eclipse.swt.widgets.Event e) {
+				// determine new sort column and direction
+				TableColumn sortColumn = table.getSortColumn();
+				TableColumn currentColumn = (TableColumn) e.widget;
+				int dir = table.getSortDirection();
+				if (sortColumn == currentColumn) {
+					dir = dir == SWT.UP ? SWT.DOWN : SWT.UP;
+				} else {
+					table.setSortColumn(currentColumn);
+					dir = SWT.UP;
+				}
+
+				// sort the data based on column and direction
+
+				int sortIdentifier = 0;
+				
+				if (currentColumn == animalColumn) {
+					sortIdentifier = EventSorter.EVENT_TEXT;
+				}
+
+				if (currentColumn == animalIDColumn) {
+					sortIdentifier = EventSorter.ANIMAL_IDNUMBER;
+				}
+
+				if (currentColumn == tagIDColumn) {
+					sortIdentifier = EventSorter.TAG_IDNUMBER;
+				}
+
+
+				if (currentColumn == dateTimeColumn) {
+					sortIdentifier = EventSorter.DATETIME;
+				}
+
+				if (currentColumn == eventNameColumn) {
+					sortIdentifier = EventSorter.EVENT_TYPE;
+				}
+
+				if (currentColumn == eventCodeColumn) {
+					sortIdentifier = EventSorter.EVENT_CODE;
+				}
+
+				if (currentColumn == eventCommentsColumn) {
+					sortIdentifier = EventSorter.EVENT_COMMENTS;
+				}
+
+				table.setSortDirection(dir);
+				eventsTableViewer.setSorter(new EventSorter(sortIdentifier,dir));
+			}
+
+		};
+		animalIDColumn.addListener(SWT.Selection, sortListener);
+		tagIDColumn.addListener(SWT.Selection, sortListener);
+		animalColumn.addListener(SWT.Selection, sortListener);
+		dateTimeColumn.addListener(SWT.Selection, sortListener);
+		eventCodeColumn.addListener(SWT.Selection, sortListener);
+		eventNameColumn.addListener(SWT.Selection, sortListener);
+		eventCommentsColumn.addListener(SWT.Selection, sortListener);
 		eventsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f","g"});
 
 		eventsTableViewer.setContentProvider(

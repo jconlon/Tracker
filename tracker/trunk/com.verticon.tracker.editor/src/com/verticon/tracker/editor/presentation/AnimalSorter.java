@@ -10,6 +10,7 @@ import java.util.Date;
 
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.swt.SWT;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.util.CommonUtilities;
@@ -54,7 +55,8 @@ public class AnimalSorter extends ViewerSorter {
 	
 
 	// Criteria that the instance uses 
-	private int criteria;
+	private final int criteria;
+	private final int dir;
 	
 	
 
@@ -72,9 +74,10 @@ public class AnimalSorter extends ViewerSorter {
 	 *  or 
 	 *  <code>SEX</code>
 	 */
-	public AnimalSorter(int criteria) {
+	public AnimalSorter(int criteria, int dir) {
 		super();
 		this.criteria = criteria;
+		this.dir=dir;
 	}
 
 	/* (non-Javadoc)
@@ -84,28 +87,43 @@ public class AnimalSorter extends ViewerSorter {
 		Animal animal1 = (Animal) o1;
 		Animal animal2 = (Animal) o2;
 
+		int returnValue = 0;
+		
 		switch (criteria) {
 			case BIRTHDATE :
-				return compareBirthDates(animal1, animal2);
+				returnValue = compareBirthDates(animal1, animal2);
+				break;
 			case SPECIES :
-				return compareSpecies(animal1, animal2);
+				returnValue = compareSpecies(animal1, animal2);
+				break;
 			case AIN :
-				return compareAins(animal1, animal2);
+				returnValue = compareAins(animal1, animal2);
+				break;
 			case BREED :
-				return compareBreeds(animal1, animal2);
+				returnValue = compareBreeds(animal1, animal2);
+				break;
 			case SEX :
-				return compareSexes(animal1, animal2);
+				returnValue = compareSexes(animal1, animal2);
+				break;
 			case ANIMAL :
-				return compareAnimals(animal1, animal2);
+				returnValue = compareAnimals(animal1, animal2);
+				break;
 			case AGE :
-				return compareAges(animal1, animal2);
+				returnValue = compareAges(animal1, animal2);
+				break;
 			case COMMENTS :
-				return compareComments(animal1, animal2);
+				returnValue = compareComments(animal1, animal2);
+				break;
 			case ANIMAL_TEXT :
-				return compareAnimalsText(animal1, animal2);
+				returnValue = compareAnimalsText(animal1, animal2);
+				break;
 			default:
-				return 0;
+				returnValue = 0;
 		}
+		if (this.dir == SWT.DOWN) {
+			returnValue = returnValue * -1;
+		}
+		return returnValue;
 	}
 
 	/**

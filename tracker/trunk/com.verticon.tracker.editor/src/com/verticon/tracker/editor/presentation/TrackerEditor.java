@@ -98,11 +98,10 @@ import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -1177,18 +1176,8 @@ public class TrackerEditor
 
 	/**
 	 * FairRegistration Table
-	 *  Columns in 
-	 *  10  //Animal Id
-	 *  11: //Tag Id
-	 *  12: //Date
-	 *  13: //Participant
-	 *  14: //Parents 
-	 *  15: //Club 
-	 *  16: //Phone 
-	 *  17: //Address 
-	 *  18: //Comments 
-	 *  
-	 *  @see FairRegistrationItemProvider
+	 *  @see FairRegistrationItemProvider 
+	 *  @see FairRegistrationSorter
 	 *  @since 0.2.0
 	 */
 	private void createFairRegistrationTableViewer(String tableName) {
@@ -1206,7 +1195,7 @@ public class TrackerEditor
 		viewerPane.createControl(getContainer());
 		fairRegistrationTableViewer = (TableViewer)viewerPane.getViewer();
 
-		Table table = fairRegistrationTableViewer.getTable();
+		final Table table = fairRegistrationTableViewer.getTable();
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
 		table.setHeaderVisible(true);
@@ -1214,138 +1203,153 @@ public class TrackerEditor
 		fairRegistrationTableViewer.setUseHashlookup(true);
 
 		//Animal ID Number
-		TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 150, true));
 		animalIDColumn.setText(getString("_UI_AnimalParentColumn_label"));
-		animalIDColumn.setResizable(true);
-		animalIDColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.ANIMAL_IDNUMBER));
-			}
-		});
 
 		//Tag ID Number
-		TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		tagIDColumn.setText(getString("_UI_TagColumn_label"));
-		tagIDColumn.setResizable(true);
-		tagIDColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.TAG_IDNUMBER));
-			}
-		});
 		
 		//Animal
-		TableColumn animalTypeColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn animalTypeColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 120, true));
 		animalTypeColumn.setText(getString("_UI_AnimalColumn_label"));
-		animalTypeColumn.setResizable(true);
-		animalTypeColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.ANIMAL));
-			}
-		});
 		
 		//Date of Event
-		TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 170, true));
 		dateTimeColumn.setText(getString("_UI_DateTimeColumn_label"));
-		dateTimeColumn.setResizable(true);
-		dateTimeColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.DATETIME));
-			}
-		});
+
 
 		//Participant
-		TableColumn participantColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn participantColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 160, true));
 		participantColumn.setText("Participant Name");
-		participantColumn.setResizable(true);
-		participantColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.PARTICIPANT));
-			}
-		});
 		
 		//BEGINWEIGHT
-		TableColumn beginWtColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn beginWtColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 30, true));
 		beginWtColumn.setText("Begin Wt");
-		beginWtColumn.setResizable(true);
-		beginWtColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.BEGIN_WEIGHT));
-			}
-		});
 		
 		//ENDWEIGHT
-		TableColumn endWtColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn endWtColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 30, true));
 		endWtColumn.setText("End Wt");
-		endWtColumn.setResizable(true);
-		endWtColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				fairRegistrationTableViewer.setSorter(
-						new FairRegistrationSorter(FairRegistrationSorter.END_WEIGHT));
-			}
-		});
-		
 		
 		//Parents 
-		TableColumn parentsColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn parentsColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 220, true));
 		parentsColumn.setText("Parents");
-		parentsColumn.setResizable(true);
-		parentsColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.PARENT));
-			}
-		});
+
 		//Club 
-		TableColumn clubColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn clubColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		clubColumn.setText("Club");
-		clubColumn.setResizable(true);
-		clubColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.CLUB));
-			}
-		});
 
 
 		//Phone 
-		TableColumn phoneColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn phoneColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 100, true));
 		phoneColumn.setText("Phone");
-		phoneColumn.setResizable(true);
-		phoneColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.PHONE));
-			}
-		});
+
 		//Address 
-		TableColumn addressColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn addressColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 300, true));
 		addressColumn.setText("Address");
-		addressColumn.setResizable(true);
-		addressColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.ADDRESS));
-			}
-		});
-
+		
 		//Comments
-		TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 220, true));
 		eventCommentsColumn.setText(getString("_UI_CommentsColumn_label"));
-		eventCommentsColumn.setResizable(true);
-		eventCommentsColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(FairRegistrationSorter.EVENT_COMMENTS));
-			}
-		});
 
+		Listener sortListener = new Listener() {
+
+			public void handleEvent(org.eclipse.swt.widgets.Event e) {
+				// determine new sort column and direction
+				TableColumn sortColumn = table.getSortColumn();
+				TableColumn currentColumn = (TableColumn) e.widget;
+				int dir = table.getSortDirection();
+				if (sortColumn == currentColumn) {
+					dir = dir == SWT.UP ? SWT.DOWN : SWT.UP;
+				} else {
+					table.setSortColumn(currentColumn);
+					dir = SWT.UP;
+				}
+
+				// sort the data based on column and direction
+
+				int sortIdentifier = 0;
+
+				if (currentColumn == animalIDColumn) {
+					sortIdentifier = FairRegistrationSorter.ANIMAL_IDNUMBER;
+				}
+
+				if (currentColumn == tagIDColumn) {
+					sortIdentifier = FairRegistrationSorter.TAG_IDNUMBER;
+				}
+
+				if (currentColumn == animalTypeColumn) {
+					sortIdentifier = FairRegistrationSorter.ANIMAL;
+				}
+
+				if (currentColumn == dateTimeColumn) {
+					sortIdentifier = FairRegistrationSorter.DATETIME;
+				}
+
+				if (currentColumn == participantColumn) {
+					sortIdentifier = FairRegistrationSorter.PARTICIPANT;
+				}
+
+				if (currentColumn == beginWtColumn) {
+					sortIdentifier = FairRegistrationSorter.BEGIN_WEIGHT;
+				}
+
+				if (currentColumn == endWtColumn) {
+					sortIdentifier = FairRegistrationSorter.END_WEIGHT;
+				}
+
+				if (currentColumn == parentsColumn) {
+					sortIdentifier = FairRegistrationSorter.PARENT;
+				}
+
+				if (currentColumn == clubColumn) {
+					sortIdentifier = FairRegistrationSorter.CLUB;
+				}
+
+				if (currentColumn == phoneColumn) {
+					sortIdentifier = FairRegistrationSorter.PHONE;
+				}
+
+				if (currentColumn == addressColumn) {
+					sortIdentifier = FairRegistrationSorter.ADDRESS;
+				}
+
+				if (currentColumn == eventCommentsColumn) {
+					sortIdentifier = FairRegistrationSorter.EVENT_COMMENTS;
+				}
+
+				table.setSortDirection(dir);
+				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(sortIdentifier,dir));
+			}
+
+		};
+
+		animalIDColumn.addListener(SWT.Selection, sortListener);
+		tagIDColumn.addListener(SWT.Selection, sortListener);
+		animalTypeColumn.addListener(SWT.Selection, sortListener);
+		dateTimeColumn.addListener(SWT.Selection, sortListener);
+		participantColumn.addListener(SWT.Selection, sortListener);
+		beginWtColumn.addListener(SWT.Selection, sortListener);
+		endWtColumn.addListener(SWT.Selection, sortListener);
+		parentsColumn.addListener(SWT.Selection, sortListener);
+		clubColumn.addListener(SWT.Selection, sortListener);
+		phoneColumn.addListener(SWT.Selection, sortListener);
+		addressColumn.addListener(SWT.Selection, sortListener);
+		eventCommentsColumn.addListener(SWT.Selection, sortListener);
+
+		
 		fairRegistrationTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f", "g","h","i", "j","k","l"});
 		fairRegistrationTableViewer.setContentProvider(
 				new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
@@ -1368,6 +1372,7 @@ public class TrackerEditor
 						this.viewer.refresh();
 					}
 				});
+		
 		fairRegistrationTableViewer.setLabelProvider(new FairRegistrationAdapterFactoryLableProvider(adapterFactory, selectionViewer));
 		Object rootObject = getRoot();
 		if (rootObject instanceof Premises){
@@ -1377,6 +1382,7 @@ public class TrackerEditor
 		createContextMenuFor(fairRegistrationTableViewer);
 		int pageIndex = addPage(viewerPane.getControl());
 		setPageText(pageIndex, tableName);
+		//FIXME to select animals from events and events from animals??
 		// The following causes event loop errors as the contentOutlineViewer is also being
 		// listened to by this event
 //		fairRegistrationTableViewer.addSelectionChangedListener
@@ -1406,7 +1412,7 @@ public class TrackerEditor
 		viewerPane.createControl(getContainer());
 		eventsTableViewer = (TableViewer)viewerPane.getViewer();
 
-		Table table = eventsTableViewer.getTable();
+		final Table table = eventsTableViewer.getTable();
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
 		table.setHeaderVisible(true);
@@ -1414,84 +1420,106 @@ public class TrackerEditor
 		eventsTableViewer.setUseHashlookup(true);
 
 		//Event 
-		TableColumn animalColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn animalColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 230, true));
 		animalColumn.setText(getString("_UI_EventColumn_label"));
-		animalColumn.setResizable(true);
-		animalColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_TEXT));
-			}
-		});
+		
 		
 		//Animal ID Number
-		TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 100, true));
 		animalIDColumn.setText(getString("_UI_AnimalParentColumn_label"));
-		animalIDColumn.setResizable(true);
-		animalIDColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.ANIMAL_IDNUMBER));
-			}
-		});
-
+		
 		//Tag ID Number
-		TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		tagIDColumn.setText(getString("_UI_TagColumn_label"));
-		tagIDColumn.setResizable(true);
-		tagIDColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.TAG_IDNUMBER));
-			}
-		});
+		
 		//Date of Event
-		TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 170, true));
 		dateTimeColumn.setText(getString("_UI_DateTimeColumn_label"));
-		dateTimeColumn.setResizable(true);
-		dateTimeColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.DATETIME));
-			}
-		});
+		
 
 		//Event Type
-		TableColumn eventNameColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn eventNameColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 60, true));
 		eventNameColumn.setText(getString("_UI_EventNameColumn_label"));
-		eventNameColumn.setResizable(true);
-		eventNameColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_TYPE));
-			}
-		});
 
 
 		//Event Code
-		TableColumn eventCodeColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn eventCodeColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 20, true));
 		eventCodeColumn.setText(getString("_UI_EventCodeColumn_label"));
-		eventCodeColumn.setResizable(true);
-		eventCodeColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_CODE));
-			}
-		});
 
 		//Comments
-		TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 180, true));
 		eventCommentsColumn.setText(getString("_UI_CommentsColumn_label"));
-		eventCommentsColumn.setResizable(true);
-		eventCommentsColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				eventsTableViewer.setSorter(new EventSorter(EventSorter.EVENT_COMMENTS));
-			}
-		});
+		
 
+		Listener sortListener = new Listener() {
+
+			public void handleEvent(org.eclipse.swt.widgets.Event e) {
+				// determine new sort column and direction
+				TableColumn sortColumn = table.getSortColumn();
+				TableColumn currentColumn = (TableColumn) e.widget;
+				int dir = table.getSortDirection();
+				if (sortColumn == currentColumn) {
+					dir = dir == SWT.UP ? SWT.DOWN : SWT.UP;
+				} else {
+					table.setSortColumn(currentColumn);
+					dir = SWT.UP;
+				}
+
+				// sort the data based on column and direction
+
+				int sortIdentifier = 0;
+				
+				if (currentColumn == animalColumn) {
+					sortIdentifier = EventSorter.EVENT_TEXT;
+				}
+
+				if (currentColumn == animalIDColumn) {
+					sortIdentifier = EventSorter.ANIMAL_IDNUMBER;
+				}
+
+				if (currentColumn == tagIDColumn) {
+					sortIdentifier = EventSorter.TAG_IDNUMBER;
+				}
+
+
+				if (currentColumn == dateTimeColumn) {
+					sortIdentifier = EventSorter.DATETIME;
+				}
+
+				if (currentColumn == eventNameColumn) {
+					sortIdentifier = EventSorter.EVENT_TYPE;
+				}
+
+				if (currentColumn == eventCodeColumn) {
+					sortIdentifier = EventSorter.EVENT_CODE;
+				}
+
+				if (currentColumn == eventCommentsColumn) {
+					sortIdentifier = EventSorter.EVENT_COMMENTS;
+				}
+
+				table.setSortDirection(dir);
+				eventsTableViewer.setSorter(new EventSorter(sortIdentifier,dir));
+			}
+
+		};
+
+		animalIDColumn.addListener(SWT.Selection, sortListener);
+		tagIDColumn.addListener(SWT.Selection, sortListener);
+		animalColumn.addListener(SWT.Selection, sortListener);
+		dateTimeColumn.addListener(SWT.Selection, sortListener);
+		eventCodeColumn.addListener(SWT.Selection, sortListener);
+		eventNameColumn.addListener(SWT.Selection, sortListener);
+		eventCommentsColumn.addListener(SWT.Selection, sortListener);
 		eventsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f","g"});
-//		eventsTableViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
+
 		eventsTableViewer.setContentProvider(
 				new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
 				{
@@ -1544,112 +1572,131 @@ public class TrackerEditor
 		viewerPane.createControl(getContainer());
 		animalsTableViewer = (TableViewer)viewerPane.getViewer();
 
-		Table table = animalsTableViewer.getTable();
+		final Table table = animalsTableViewer.getTable();
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		
 		//Animal
-		TableColumn animalColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn animalColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 220, true));
 		animalColumn.setText(getString("_UI_AnimalColumn_label"));
-		animalColumn.setResizable(true);
-		animalColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.ANIMAL_TEXT));
-			}
-		});
 		
 		//Ain 
-		TableColumn ainColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn ainColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 150, true));
 		ainColumn.setText(getString("_UI_AinColumn_label"));
-		ainColumn.setResizable(true);
-		ainColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.AIN));
-			}
-		});
 		
 		//Animal
-		TableColumn animalTypeColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn animalTypeColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 50, true));
 		animalTypeColumn.setText(getString("_UI_AnimalColumn_label"));
-		animalTypeColumn.setResizable(true);
-		animalTypeColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.ANIMAL));
-			}
-		});
-		
-		
 		
 		//Species
-		TableColumn speciesColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn speciesColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 40, true));
 		speciesColumn.setText(getString("_UI_SpeciesColumn_label"));
-		speciesColumn.setResizable(true);
-		speciesColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.SPECIES));
-			}
-		});
 		
 		//Sex
-		TableColumn sexColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn sexColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 50, true));
 		sexColumn.setText(getString("_UI_SexColumn_label"));
-		sexColumn.setResizable(true);
-		sexColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.SEX));
-			}
-		});
 		
 		//Breed 
-		TableColumn breedColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn breedColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 70, true));
 		breedColumn.setText(getString("_UI_BreedColumn_label"));
-		breedColumn.setResizable(true);
-		breedColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.BREED));
-			}
-		});
 
 		//BirthDate
-		TableColumn dDateColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn dDateColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 100, true));
 		dDateColumn.setText(getString("_UI_BirthDateColumn_label"));
-		dDateColumn.setResizable(true);
-		dDateColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.BIRTHDATE));
-			}
-		});
-		
+
 		//Age
-		TableColumn ageColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn ageColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 300, true));
 		ageColumn.setText(getString("_UI_AgeColumn_label"));
-		ageColumn.setResizable(true);
-		ageColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.AGE));
-			}
-		});
+
 
 		//Comments
-		TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 100, true));
 		commentsColumn.setText(getString("_UI_CommentsColumn_label"));
-		commentsColumn.setResizable(true);
-		commentsColumn.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				animalsTableViewer.setSorter(new AnimalSorter(AnimalSorter.COMMENTS));
+
+		Listener sortListener = new Listener() {
+
+			public void handleEvent(org.eclipse.swt.widgets.Event e) {
+				// determine new sort column and direction
+				TableColumn sortColumn = table.getSortColumn();
+				TableColumn currentColumn = (TableColumn) e.widget;
+				int dir = table.getSortDirection();
+				if (sortColumn == currentColumn) {
+					dir = dir == SWT.UP ? SWT.DOWN : SWT.UP;
+				} else {
+					table.setSortColumn(currentColumn);
+					dir = SWT.UP;
+				}
+
+				// sort the data based on column and direction
+
+				int sortIdentifier = 0;
+				
+				if (currentColumn == animalColumn) {
+					sortIdentifier = AnimalSorter.ANIMAL_TEXT;
+				}
+
+				if (currentColumn == ainColumn) {
+					sortIdentifier = AnimalSorter.AIN;
+				}
+
+				if (currentColumn == animalTypeColumn) {
+					sortIdentifier = AnimalSorter.ANIMAL;
+				}
+
+				if (currentColumn == dDateColumn) {
+					sortIdentifier = AnimalSorter.BIRTHDATE;
+				}
+
+				if (currentColumn == speciesColumn) {
+					sortIdentifier = AnimalSorter.SPECIES;
+				}
+				
+
+				if (currentColumn == sexColumn) {
+					sortIdentifier = AnimalSorter.SEX;
+				}
+
+				if (currentColumn == breedColumn) {
+					sortIdentifier = AnimalSorter.BREED;
+				}
+
+				
+				if (currentColumn == ageColumn) {
+					sortIdentifier = AnimalSorter.AGE;
+				}
+				if (currentColumn == commentsColumn) {
+					sortIdentifier = AnimalSorter.COMMENTS;
+				}
+
+				table.setSortDirection(dir);
+				animalsTableViewer.setSorter(new AnimalSorter(sortIdentifier,dir));
 			}
-		});
+
+		};
+
+		breedColumn.addListener(SWT.Selection, sortListener);
+		animalColumn.addListener(SWT.Selection, sortListener);
+		ainColumn.addListener(SWT.Selection, sortListener);
+		
+		animalTypeColumn.addListener(SWT.Selection, sortListener);
+		speciesColumn.addListener(SWT.Selection, sortListener);
+		sexColumn.addListener(SWT.Selection, sortListener);
+		dDateColumn.addListener(SWT.Selection, sortListener);
+		
+		ageColumn.addListener(SWT.Selection, sortListener);
+		commentsColumn.addListener(SWT.Selection, sortListener);
+		
 		
 		animalsTableViewer.setColumnProperties(
 				new String [] {"a", "b", "c", "d", "e","f", "g", "h","i"});
