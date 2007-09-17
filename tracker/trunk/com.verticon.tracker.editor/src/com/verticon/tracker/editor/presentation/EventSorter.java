@@ -12,6 +12,7 @@ import java.util.Date;
 
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.swt.SWT;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -50,17 +51,19 @@ public class EventSorter extends ViewerSorter {
 	private final static DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss z");
 
 	// Criteria that the instance uses 
-	private int criteria;
-
+	private final int criteria;
+	private final int dir;
+	
 	/**
 	 * Creates a resource sorter that will use the given sort criteria.
 	 *
 	 * @param criteria the sort criterion to use: one of <code>SPECIES</code> or 
 	 *   <code>TYPE</code>
 	 */
-	public EventSorter(int criteria) {
+	public EventSorter(int criteria, int dir) {
 		super();
 		this.criteria = criteria;
+		this.dir=dir;
 	}
 
 	/* (non-Javadoc)
@@ -70,26 +73,40 @@ public class EventSorter extends ViewerSorter {
 		Event event1 = (Event) o1;
 		Event event2 = (Event) o2;
 
+		int returnValue = 0;
+		
 		switch (criteria) {
 			case DATETIME :
-				return compareDateTimes(event1, event2);
+				returnValue =  compareDateTimes(event1, event2);
+				break;
 			case EVENT_TYPE :
-				return compareEventTypes(event1, event2);
+				returnValue =  compareEventTypes(event1, event2);
+				break;
 			case TAG_IDNUMBER :
-				return compareTagIDNumber(event1, event2);
+				returnValue =  compareTagIDNumber(event1, event2);
+				break;
 			case ANIMAL_IDNUMBER :
-				return compareAnimalIDNumber(event1, event2);
+				returnValue =  compareAnimalIDNumber(event1, event2);
+				break;
 			case EVENT_CODE :
-				return compareEventCodes(event1, event2);
+				returnValue =  compareEventCodes(event1, event2);
+				break;
 			case EVENT_COMMENTS :
-				return compareComments(event1, event2);
+				returnValue =  compareComments(event1, event2);
+				break;
 			case EVENT_TEXT :
-				return compareEventTexts(event1, event2);
+				returnValue =  compareEventTexts(event1, event2);
+				break;
 			case DATETIME_REVERSE :
-				return compareDateTimesReverse(event1, event2);
+				returnValue =  compareDateTimesReverse(event1, event2);
+				break;
 			default:
-				return 0;
+				returnValue = 0;
 		}
+		if (this.dir == SWT.DOWN) {
+			returnValue = returnValue * -1;
+		}
+		return returnValue;
 	}
 
 	

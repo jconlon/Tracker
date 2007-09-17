@@ -11,10 +11,10 @@ import java.util.Date;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.swt.SWT;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.FairRegistration;
-import com.verticon.tracker.edit.provider.AnimalItemProvider;
 import com.verticon.tracker.edit.provider.FairRegistrationItemProvider;
 import com.verticon.tracker.util.CommonUtilities;
 
@@ -54,7 +54,8 @@ public class FairRegistrationSorter extends ViewerSorter {
 	
 
 	// Criteria that the instance uses 
-	private int criteria;
+	private final int criteria;
+	private final int dir;
 
 	/**
 	 * Creates a resource sorter that will use the given sort criteria.
@@ -62,9 +63,10 @@ public class FairRegistrationSorter extends ViewerSorter {
 	 * @param criteria the sort criterion to use: one of <code>SPECIES</code> or 
 	 *   <code>TYPE</code>
 	 */
-	public FairRegistrationSorter(int criteria) {
+	public FairRegistrationSorter(int criteria, int dir) {
 		super();
 		this.criteria = criteria;
+		this.dir = dir;
 	}
 
 	/* (non-Javadoc)
@@ -74,34 +76,51 @@ public class FairRegistrationSorter extends ViewerSorter {
 		FairRegistration fairRegistration1 = (FairRegistration) o1;
 		FairRegistration fairRegistration2 = (FairRegistration) o2;
 
+		int returnValue = 0;
 		switch (criteria) {
 			case DATETIME :
-				return compareDateTimes(fairRegistration1, fairRegistration2);
+				returnValue = compareDateTimes(fairRegistration1, fairRegistration2);
+				break;
 			case PHONE :
-				return comparePhones(fairRegistration1, fairRegistration2);
+				returnValue = comparePhones(fairRegistration1, fairRegistration2);
+				break;
 			case TAG_IDNUMBER :
-				return compareTagIDNumber(fairRegistration1, fairRegistration2);
+				returnValue = compareTagIDNumber(fairRegistration1, fairRegistration2);
+				break;
 			case ANIMAL_IDNUMBER :
-				return compareAnimalIDNumber(fairRegistration1, fairRegistration2);
+				returnValue = compareAnimalIDNumber(fairRegistration1, fairRegistration2);
+				break;
 			case PARENT :
-				return compareParents(fairRegistration1, fairRegistration2);
+				returnValue = compareParents(fairRegistration1, fairRegistration2);
+				break;
 			case EVENT_COMMENTS :
-				return compareComments(fairRegistration1, fairRegistration2);
+				returnValue = compareComments(fairRegistration1, fairRegistration2);
+				break;
 			case CLUB :
-				return compareClubs(fairRegistration1, fairRegistration2);
+				returnValue = compareClubs(fairRegistration1, fairRegistration2);
+				break;
 			case PARTICIPANT :
-				return compareParticipants(fairRegistration1, fairRegistration2);
+				returnValue = compareParticipants(fairRegistration1, fairRegistration2);
+				break;
 			case ADDRESS :
-				return compareAddresses(fairRegistration1, fairRegistration2);
+				returnValue = compareAddresses(fairRegistration1, fairRegistration2);
+				break;
 			case BEGIN_WEIGHT :
-				return compareBeginWeights(fairRegistration1, fairRegistration2);
+				returnValue = compareBeginWeights(fairRegistration1, fairRegistration2);
+				break;
 			case END_WEIGHT :
-				return compareEndWeights(fairRegistration1, fairRegistration2);
+				returnValue = compareEndWeights(fairRegistration1, fairRegistration2);
+				break;
 			case ANIMAL :
-				return compareAnimals(fairRegistration1, fairRegistration2);
+				returnValue = compareAnimals(fairRegistration1, fairRegistration2);
+				break;
 			default:
-				return 0;
+				returnValue = 0;
 		}
+		if (this.dir == SWT.DOWN) {
+			returnValue = returnValue * -1;
+		}
+		return returnValue;
 	}
 
 
@@ -209,7 +228,9 @@ public class FairRegistrationSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int comparePhones(FairRegistration fairRegistration1, FairRegistration fairRegistration2) {
-		return fairRegistration1.getPhone().compareTo(fairRegistration2.getPhone());
+		String s1 = fairRegistration1.getPhone()==null?"":fairRegistration1.getPhone();
+		String s2 = fairRegistration2.getPhone()==null?"":fairRegistration2.getPhone();
+		return s1.compareTo(s2);
 	}
 	
 	/**
@@ -262,7 +283,9 @@ public class FairRegistrationSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int compareAddresses(FairRegistration fairRegistration1, FairRegistration fairRegistration2) {
-		return fairRegistration1.getAddress().compareTo(fairRegistration2.getAddress());
+		String s1 = fairRegistration1.getAddress()==null?"":fairRegistration1.getAddress();
+		String s2 = fairRegistration2.getAddress()==null?"":fairRegistration2.getAddress();
+		return s1.compareTo(s2);
 	}
 	
 	/**
