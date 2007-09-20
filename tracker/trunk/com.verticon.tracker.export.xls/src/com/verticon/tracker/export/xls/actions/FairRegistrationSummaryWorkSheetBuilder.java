@@ -169,7 +169,7 @@ public class FairRegistrationSummaryWorkSheetBuilder implements
 		row.createCell((short) 11).setCellValue(fairRegistration.getComments());
 	}
 	
-	// FIXME 
+	//
 	String getAnimalTypeName(FairRegistration fr){
 		Object o = fr.getTag().eContainer();
 //		getString("_UI_"+AnimalItemProvider.getResourceName(o)+"_type")
