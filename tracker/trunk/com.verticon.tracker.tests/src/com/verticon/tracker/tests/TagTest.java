@@ -118,6 +118,14 @@ public class TagTest extends TestCase {
 		assertFalse(tag.isUsainNumberUsed());
 		tag.setIdNumber(840456789012345L);
 		assertTrue(tag.isUsainNumberUsed());
+		
+		//idNumber>840200000000000L && idNumber<843000000000000L
+		tag.setIdNumber(840003001374447L);
+		assertTrue(tag.isUsainNumberUsed());
+		
+		tag.setIdNumber(840003001374300L);
+		assertTrue(tag.isUsainNumberUsed());
+		
 	}
 
 	/**
