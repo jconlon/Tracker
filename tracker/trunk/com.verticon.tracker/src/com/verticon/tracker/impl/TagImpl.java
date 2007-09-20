@@ -145,7 +145,7 @@ public class TagImpl extends EObjectImpl implements Tag {
 	 * @generated NOT
 	 */
 	public boolean isUsainNumberUsed() {
-		return idNumber>840000000000000L && idNumber<843000000000000L;
+		return idNumber>840002000000000L && idNumber<843000000000000L;
 	}
 
 	/**
