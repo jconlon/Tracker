@@ -26,6 +26,7 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.editor.util.PremisesProcessor;
 
 /**
@@ -35,6 +36,7 @@ import com.verticon.tracker.editor.util.PremisesProcessor;
 public class WlicTrackerExporter implements PremisesProcessor {
 	
 	private SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmm");
+	private SimpleDateFormat df2 = new SimpleDateFormat("yyyyMMdd");
 	private String nonProducerPid;
 	private StringBuffer buffer = new StringBuffer();
 	private List<Event> validWlicEvents = new ArrayList<Event>();
@@ -82,21 +84,23 @@ public class WlicTrackerExporter implements PremisesProcessor {
 	}
 	
 	private String getRowField(int key, Event event){
+		
 		String out = null;
+		Animal animal = ((Animal)event.getTag().eContainer());
 		switch (key) {
 		case 1:
 			out=Integer.toString(event.getEventCode())+',';
 			break;
 		case 2:
-			out = nonProducerPid+',';
+			out = nonProducerPid==null?",":nonProducerPid+',';
 			break;
 		case 3: //Source/DestinationPin
 			switch (event.getEventCode()) {
 			case 3:
-				out = ((MovedIn)event).getSourcePin()+',';
+				out = ((MovedIn)event).getSourcePin()==null?"," :((MovedIn)event).getSourcePin()+',';
 				break;
 			case 4:
-				out = ((MovedOut)event).getDestinationPin()+',';
+				out = ((MovedOut)event).getDestinationPin()==null?",":((MovedOut)event).getDestinationPin()+',';
 				break;
 			default:
 				out = ",";
@@ -113,32 +117,33 @@ public class WlicTrackerExporter implements PremisesProcessor {
 			out = event.getIdNumber()+",";
 			break;
 		case 7://Species
-			out = ((Animal)event.getTag().eContainer()).getSpeciesCode()+',';
+			out = animal.getSpeciesCode()+',';
 			break;
 		case 8://IDElectronicallyRead
 			out = event.isElectronicallyRead()?"1,":"0,";
 			break;
-		case 9://TODO AnimalDateOfBirth
-			out = ",";
+		case 9://TODO TEST AnimalDateOfBirth
+			out = animal.getBirthDate()==null?",":df2.format(animal.getBirthDate())+',';
 			break;
 		case 10://TODO Age
+			
 			out = ",";
 			break;
-		case 11://TODO Sex
-			out = ",";
+		case 11://FIXME TEST Sex Wrong
+			out = stringIsNullOrUnspecified(animal.getSexCode())?",":animal.getSexCode()+',';
 			break;
-		case 12://TODO Breed
-			out = ",";
+		case 12://FIXME Breed Wrong
+			out = stringIsNullOrUnspecified(animal.getBreed())?",":animal.getBreed()+',';
 			break;
 		case 13://Remarks
 			String comments = event.getComments();
 			if(comments!=null){
-			if(comments.length()>50){
-				comments = comments.substring(0,50);
-			}
-			comments = comments.replace('"', ' ');
-			comments = comments.replace('\'', ' ');
-			out = comments.contains(",")?'"'+comments+'"'+',': comments+',';
+				if(comments.length()>50){
+					comments = comments.substring(0,50);
+				}
+				comments = comments.replace('"', ' ');
+				comments = comments.replace('\'', ' ');
+				out = comments.contains(",")?'"'+comments+'"'+',': comments+',';
 			}else{
 				out = ",";
 			}
@@ -147,10 +152,17 @@ public class WlicTrackerExporter implements PremisesProcessor {
 			out = event.isCorrection()?"C,":",";
 			break;
 		case 15://AnimalID 1
-			out = ",";
+			out = ",";//NOT USED
 			break;
-		case 16://AnimalID 1 type
-			out = ",";
+		case 16://TODO TEST AnimalID 1 type use this if replacement is used
+			switch (event.getEventCode()) {
+				case 6:
+					out = ((ReplacedTag)event).getOldAin()==null?"," :((ReplacedTag)event).getOldAin()+',';
+					break;
+				default:
+					out = ",";
+					break;
+			}
 			break;
 		case 17://AnimalID 2
 			out = ",";
@@ -161,6 +173,14 @@ public class WlicTrackerExporter implements PremisesProcessor {
 		}
 		
 		return out;
+	}
+
+	/**
+	 * @param s
+	 * @return
+	 */
+	private boolean stringIsNullOrUnspecified(String s) {
+		return s==null || s.equals("Unspecified");
 	}
 	private void createHeader(Premises premises){
 		for (int i = 1; i < 5; i++) {
