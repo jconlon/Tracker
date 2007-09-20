@@ -38,7 +38,7 @@ public class WlicTrackerExporter implements PremisesProcessor {
 	private SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmm");
 	private SimpleDateFormat df2 = new SimpleDateFormat("yyyyMMdd");
 	private String nonProducerPid;
-	private StringBuffer buffer = new StringBuffer();
+	private StringBuffer buffer;
 	private List<Event> validWlicEvents = new ArrayList<Event>();
 	private String fileName;
 	
@@ -59,7 +59,8 @@ public class WlicTrackerExporter implements PremisesProcessor {
 		if(!exportsFolder.exists()){
 			exportsFolder.create(true, true, monitor);	
 		}
-		
+		buffer = new StringBuffer(); 
+		validWlicEvents.clear();
 		
 		createHeader(premises);
 		fileName = createFileName(nonProducerPid);
