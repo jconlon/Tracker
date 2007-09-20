@@ -108,6 +108,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IEditorActionBarContributor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
@@ -252,7 +253,13 @@ public class TrackerEditor
 	protected TableViewer eventsTableViewer;
 	
 
+	/**
+	 * FairRegistration Table Viewer
+	 * @generated NOT
+	 */
 	protected TableViewer fairRegistrationTableViewer;
+	
+
 	
 	/**
 	 * Animals Table Viewer
@@ -993,7 +1000,16 @@ public class TrackerEditor
 			createFairRegistrationTableViewer("Fair Registrations");
 
 //			createTableTreeViewer(getString("_UI_TreeWithColumnsPage_label"));
-
+			
+			IEditorActionBarContributor abc = getActionBarContributor();
+			if(abc != null && abc instanceof TrackerActionBarContributor){
+				TrackerActionBarContributor trackerActionBarContributor =(TrackerActionBarContributor)abc;
+				trackerActionBarContributor.masterViewerFilterAction.setMainViewer(selectionViewer);
+				trackerActionBarContributor.masterViewerFilterAction.addViewer(eventsTableViewer);
+				trackerActionBarContributor.masterViewerFilterAction.addViewer(animalsTableViewer);
+				trackerActionBarContributor.masterViewerFilterAction.addViewer(fairRegistrationTableViewer);
+			}
+			
 
 			setActivePage(0);
 		}
@@ -1382,17 +1398,7 @@ public class TrackerEditor
 		createContextMenuFor(fairRegistrationTableViewer);
 		int pageIndex = addPage(viewerPane.getControl());
 		setPageText(pageIndex, tableName);
-		//FIXME to select animals from events and events from animals??
-		// The following causes event loop errors as the contentOutlineViewer is also being
-		// listened to by this event
-//		fairRegistrationTableViewer.addSelectionChangedListener
-//				(new ISelectionChangedListener() {
-//					 // This ensures that we handle selections correctly.
-//					 //
-//					 public void selectionChanged(SelectionChangedEvent event) {
-//						 contentOutlineViewer.setSelection(event.getSelection());
-//					 }
-//				 });
+		
 	}
 	/**
 	 * Events Table
@@ -1785,18 +1791,25 @@ public class TrackerEditor
 	/**
 	 * This is used to track the active viewer.
 	 * <!-- begin-user-doc -->
+	 * Also used to enable and disable buttons
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	protected void pageChange(int pageIndex) {
 		super.pageChange(pageIndex);
-
+		IEditorActionBarContributor abc = getActionBarContributor();
+		if(abc != null && abc instanceof TrackerActionBarContributor){
+			((TrackerActionBarContributor)abc).setActivePage(this, pageIndex);
+		}
+		
+		
 		if (contentOutlinePage != null) {
 			handleContentOutlineSelection(contentOutlinePage.getSelection());
 		}
 	}
 
+	
 	/**
 	 * This is how the framework determines which interfaces we implement.
 	 * <!-- begin-user-doc -->
@@ -2372,7 +2385,7 @@ public class TrackerEditor
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public void dispose() {
@@ -2395,6 +2408,7 @@ public class TrackerEditor
 		if (contentOutlinePage != null) {
 			contentOutlinePage.dispose();
 		}
+		
 
 		super.dispose();
 	}
