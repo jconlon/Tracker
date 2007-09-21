@@ -13,4 +13,5 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.ecore
 Eclipse-LazyStart: true
 Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)",
- com.verticon.tracker.editor.util;version="[0.1.0,1.0.0)"
+ com.verticon.tracker.editor.util;version="[0.1.0,1.0.0)",
+ com.verticon.tracker.util;version="[0.1.0,1.0.0)"
