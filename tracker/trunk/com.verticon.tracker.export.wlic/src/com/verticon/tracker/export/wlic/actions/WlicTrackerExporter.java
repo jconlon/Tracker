@@ -127,13 +127,12 @@ public class WlicTrackerExporter implements PremisesProcessor {
 			out = animal.getBirthDate()==null?",":df2.format(animal.getBirthDate())+',';
 			break;
 		case 10://TODO Age
-			
-			out = ",";
+			out = animal.getAge()==null?",":animal.getAge().toRoundedString()+',';
 			break;
-		case 11://FIXME TEST Sex Wrong
+		case 11://Sex
 			out = stringIsNullOrUnspecified(animal.getSexCode())?",":animal.getSexCode()+',';
 			break;
-		case 12://FIXME Breed Wrong
+		case 12://Breed
 			out = stringIsNullOrUnspecified(animal.getBreed())?",":animal.getBreed()+',';
 			break;
 		case 13://Remarks
