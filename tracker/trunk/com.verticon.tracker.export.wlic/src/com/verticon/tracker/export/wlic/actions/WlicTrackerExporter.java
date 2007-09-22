@@ -35,8 +35,9 @@ import com.verticon.tracker.editor.util.PremisesProcessor;
  */
 public class WlicTrackerExporter implements PremisesProcessor {
 	
-	private SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmm");
-	private SimpleDateFormat df2 = new SimpleDateFormat("yyyyMMdd");
+	private static final SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmm");
+	private static final SimpleDateFormat df2 = new SimpleDateFormat("yyyyMMdd");
+	
 	private String nonProducerPid;
 	private StringBuffer buffer;
 	private List<Event> validWlicEvents = new ArrayList<Event>();
