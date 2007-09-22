@@ -72,6 +72,9 @@ public class FileTailPublisherPreferencePage
 			        	   }
 			        	   
 			            String extension = resource.getFileExtension();
+			            if(extension==null){
+			            	return false;
+			            }
 			            if (!extension.equalsIgnoreCase("Tags")) {
 			            	return false;
 			            }
