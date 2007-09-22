@@ -23,6 +23,9 @@ public class TemplateViewerFilter extends ViewerFilter {
         		   return true;
         	   }
             String extension = resource.getFileExtension();
+            if(extension==null){
+            	return false;
+            }
             if (!extension.equalsIgnoreCase(extensionTarget)) {
             	return false;
             }
