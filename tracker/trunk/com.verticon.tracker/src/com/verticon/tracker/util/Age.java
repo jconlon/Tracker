@@ -74,7 +74,7 @@ public class Age {
 			String monthsString = Integer.toString(months);
 			buf.append(  monthsString.length()==1?"M0"+monthsString:'M'+monthsString);
 		}
-		String daysString = Integer.toString(months);
+		String daysString = Integer.toString(days);
 		buf.append(  daysString.length()==1?"D0"+daysString:'D'+daysString);
 		return buf.toString();
 	}

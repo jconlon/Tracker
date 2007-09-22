@@ -188,7 +188,24 @@ public abstract class AnimalTest extends TestCase {
 		assertNotNull(getFixture());
 		assertNotNull(getFixture().getAge());
 		assertEquals(new Age(ANIMAL_BIRTHDAY), getFixture().getAge());
+		
+		Calendar someBirthday = Calendar.getInstance();
+		someBirthday.add(Calendar.DAY_OF_MONTH, -5);
+		getFixture().setBirthDate(someBirthday.getTime());
+		assertEquals("D05", getFixture().getAge().toRoundedString());
+		assertEquals("+D05", getFixture().getAge().toString());
+		
+		someBirthday.add(Calendar.MONTH, -7);
+		getFixture().setBirthDate(someBirthday.getTime());
+		assertEquals("M07", getFixture().getAge().toRoundedString() );
+		assertEquals("+M07D05", getFixture().getAge().toString());
+		
+		someBirthday.add(Calendar.YEAR, -3);
+		getFixture().setBirthDate(someBirthday.getTime());
+		assertEquals("Y03",getFixture().getAge().toRoundedString());
+		assertEquals("+Y03M07D05", getFixture().getAge().toString());
 	}
+	
 
 	/**
 	 * Tests the '{@link com.verticon.tracker.Animal#getSexCode() <em>Sex Code</em>}' feature getter.
