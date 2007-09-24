@@ -24,9 +24,9 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.editor.util.ActionUtils;
+import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.tracker.transaction.publisher.views.EventPublisherView;
 import com.verticon.tracker.util.CommonUtilities;
-import com.verticon.transaction.editor.console.ConsoleUtil;
 
 public class TransactionPublisher {
 

@@ -7,7 +7,6 @@ Bundle-Activator: com.verticon.transaction.editor.presentation.TrackerEditorPlug
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: com.verticon.transaction.editor.actions;version="0.1.0",
- com.verticon.transaction.editor.console;version="0.1.0",
  com.verticon.transaction.editor.domain;version="0.1.0",
  com.verticon.transaction.editor.internal.l10n;version="0.1.0";x-internal:=true,
  com.verticon.transaction.editor.presentation;version="0.1.0"
@@ -24,4 +23,5 @@ Eclipse-LazyStart: true
 Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)",
  com.verticon.tracker.edit.provider;version="[0.1.0,1.0.0)",
  com.verticon.tracker.editor.presentation;version="[0.1.0,1.0.0)",
+ com.verticon.tracker.editor.util;version="[0.1.0,1.0.0)",
  com.verticon.tracker.util;version="[0.1.0,1.0.0)"

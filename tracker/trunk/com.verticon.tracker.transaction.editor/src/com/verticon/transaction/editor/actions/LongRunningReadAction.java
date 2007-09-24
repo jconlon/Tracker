@@ -30,7 +30,8 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.verticon.transaction.editor.console.ConsoleUtil;
+
+import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.transaction.editor.internal.l10n.Messages;
 
 /**

@@ -24,13 +24,13 @@ import com.verticon.tracker.TrackerFactory;
  * @author jconlon
  *
  */
- public class TemplateBean {
+ public class TemplateAnimalBean {
 	private final Animal animal;
 	private Date date = null;
 	private final String name;
 	private final static Copier copier = new Copier();
 	
-	public TemplateBean(Animal animal, String name) {
+	public TemplateAnimalBean(Animal animal, String name) {
 		super();
 		this.animal = animal;
 		this.name=name;

@@ -31,9 +31,9 @@ import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
+import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.tracker.transaction.publisher.Publisher;
 import com.verticon.tracker.transaction.publisher.TrackerFileTailPublisherPlugin;
-import com.verticon.transaction.editor.console.ConsoleUtil;
 
 
 /**

@@ -14,7 +14,7 @@
  *
  * $$Id: ConsoleUtil.java,v 1.1 2006/01/30 16:30:09 cdamus Exp $$
  */
-package com.verticon.transaction.editor.console;
+package com.verticon.tracker.editor.util;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -100,7 +100,7 @@ public class ConsoleUtil {
 	}
 
 	/** 
-	 * Convinient static method to print an string on the specified console.
+	 * Convenient static method to print an string on the specified console.
 	 * The color of the message printed is by black. 
 	 *  
 	 * The client of this method does not need to do any housekeeping work to use 

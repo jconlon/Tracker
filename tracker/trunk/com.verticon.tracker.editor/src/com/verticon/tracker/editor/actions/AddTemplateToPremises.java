@@ -15,7 +15,7 @@ import com.verticon.tracker.Premises;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
 import com.verticon.tracker.editor.util.ActionUtils;
 import com.verticon.tracker.editor.util.TagsBean;
-import com.verticon.tracker.editor.util.TemplateBean;
+import com.verticon.tracker.editor.util.TemplateAnimalBean;
 import com.verticon.tracker.util.TrackerLog;
 
 /**
@@ -60,7 +60,7 @@ public class AddTemplateToPremises implements IObjectActionDelegate {
 			return;
 		}
 		
-		TemplateBean templateBean = ActionUtils.getTemplateBean( editor,  targetPart);
+		TemplateAnimalBean templateBean = ActionUtils.getTemplateBean( editor,  targetPart);
 		if(templateBean == null){
 			return;
 		}
