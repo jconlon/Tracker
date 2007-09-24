@@ -76,9 +76,7 @@
               label="%_UI_TrackerTagsPopupPremisesAnimalEvents_label"
               menubarPath="com.verticon.tracker.editor.popupSubMenu/content"
               tooltip="%_UI_TrackerTagsPopupPremisesAnimalEvents_description"/>
-        
-             
-               
+       
      </objectContribution>
   </extension>    
   <extension point="org.eclipse.ui.popupMenus">
@@ -100,6 +98,27 @@
 
   	</objectContribution>
   </extension>
+  
+  <extension point="org.eclipse.ui.popupMenus">
+  	<objectContribution adaptable="true"
+  		id="com.verticon.tracker.editor.event.popupMenu"
+  		objectClass="com.verticon.tracker.Event">
+  		<menu id="com.verticon.tracker.editor.event.popupSubMenu"
+  			label="%_UI_TrackerPopup_label" path="additions">
+  			<groupMarker name="content" />
+  			<separator name="additions" />
+  		</menu>
+  		<action
+  			class="com.verticon.tracker.editor.actions.ModifyEventsActionDelegate"
+  			enablesFor="+"
+  			id="com.verticon.tracker.editor.actions.ModifyEvents"
+  			label="Modify Events"
+  			menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
+  			tooltip="Modify attributes on selected Events." />
+
+  	</objectContribution>
+  </extension>
+  
   <extension
         id="Tracker"
         point="org.eclipse.core.runtime.products">

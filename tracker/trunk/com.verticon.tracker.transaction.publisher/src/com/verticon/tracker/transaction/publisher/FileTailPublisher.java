@@ -16,10 +16,10 @@ import org.eclipse.core.runtime.Preferences;
 import org.eclipse.core.runtime.Preferences.IPropertyChangeListener;
 import org.eclipse.core.runtime.Preferences.PropertyChangeEvent;
 
+import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.tracker.transaction.publisher.actions.FileTailRunner;
 import com.verticon.tracker.transaction.publisher.actions.TransactionPublisher;
 import com.verticon.tracker.transaction.publisher.preferences.PreferenceConstants;
-import com.verticon.transaction.editor.console.ConsoleUtil;
 
 /**
  * Publisher that tails a file looking for new tags being added to the

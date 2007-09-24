@@ -17,7 +17,7 @@ import com.verticon.tracker.Premises;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
 import com.verticon.tracker.editor.util.ActionUtils;
 import com.verticon.tracker.editor.util.TagsBean;
-import com.verticon.tracker.editor.util.TemplateBean;
+import com.verticon.tracker.editor.util.TemplateAnimalBean;
 import com.verticon.tracker.util.TrackerLog;
 
 /**
@@ -71,7 +71,7 @@ public class AddAnimalsToPremises implements IObjectActionDelegate {
 						"You must specify an event. ");
 			return;
 		}
-		TemplateBean templateBean = ActionUtils.createTemplateBean(animal, event);
+		TemplateAnimalBean templateBean = ActionUtils.createTemplateBean(animal, event);
 		
 		TagsBean tagsBean = null;
 		try {

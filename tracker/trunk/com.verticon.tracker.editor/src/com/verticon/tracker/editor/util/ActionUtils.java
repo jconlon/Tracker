@@ -117,7 +117,7 @@ public class ActionUtils {
 		return tagsBean;
 	}
 
-	public static final TemplateBean getTemplateBean(TrackerEditor editor,
+	public static final TemplateAnimalBean getTemplateBean(TrackerEditor editor,
 			IWorkbenchPart targetPart) {
 		Animal animal = null;
 		IProject project = extractResource(editor).getProject();
@@ -157,7 +157,7 @@ public class ActionUtils {
 			return null;
 		}
 
-		TemplateBean templateBean = new TemplateBean(animal, f.getName());
+		TemplateAnimalBean templateBean = new TemplateAnimalBean(animal, f.getName());
 		return templateBean;
 	}
 
@@ -180,7 +180,7 @@ public class ActionUtils {
 	 * @param editor
 	 */
 	public static final void addTemplate(Premises premises, TagsBean tagsBean,
-			TemplateBean templateBean, TrackerEditor editor) {
+			TemplateAnimalBean templateBean, TrackerEditor editor) {
 		// The date in the templateBean takes precedence over the tagsBean
 		if (templateBean.getDate() == null) {
 			templateBean.setDate(tagsBean.getDate());
@@ -225,7 +225,7 @@ public class ActionUtils {
 	 * @param editor
 	 */
 	public static final void addTemplate(Collection<Animal> animals,
-			TemplateBean templateBean, TrackerEditor editor) {
+			TemplateAnimalBean templateBean, TrackerEditor editor) {
 		CompoundCommand compoundCommand = new CompoundCommand();
 		Command command = null;
 		int numberOfEventsInTemplate = templateBean.numberOfEvents();
@@ -450,12 +450,12 @@ public class ActionUtils {
 		return (Animal) TrackerFactory.eINSTANCE.create(eClass);
 	}
 
-	public static final TemplateBean createTemplateBean(Animal animal,
+	public static final TemplateAnimalBean createTemplateBean(Animal animal,
 			Event event) {
 		Tag tag = TrackerFactory.eINSTANCE.createTag();
 		tag.getEvents().add(event);
 		animal.getTags().add(tag);
-		TemplateBean templateBean = new TemplateBean(animal,
+		TemplateAnimalBean templateBean = new TemplateAnimalBean(animal,
 				"User prompted dialog");
 		return templateBean;
 	}
@@ -558,4 +558,24 @@ public class ActionUtils {
 		}
 		return true;
 	}
+	
+	public static final Collection<Event> getSelectedEvents(
+			ISelection selection) {
+		ArrayList<Event> selectedEvents = new ArrayList<Event>();
+		if (selection instanceof IStructuredSelection) {
+			for (Iterator<?> iter = ((IStructuredSelection) selection)
+					.iterator(); iter.hasNext();) {
+				Object o = iter.next();
+				if (o instanceof Event) {
+					selectedEvents.add((Event) o);
+				}
+			}
+		}
+		return selectedEvents;
+	}
+	
+	
+
+
+	
 }
