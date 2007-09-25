@@ -2,6 +2,7 @@
 <?eclipse version="3.2"?>
 <plugin>
 
+<!--
    <extension point="org.eclipse.ui.editorActions"> 
       <editorContribution 
          id="com.verticon.tracker.ocl.query.editorContribution" 
@@ -33,5 +34,44 @@
                menubarPath="com.verticon.trackerMenuID/com.verticon.tracker.exportMenuID/additions"
                tooltip="Export the selected premises FairRegistration Summary as a XLS file."/>
       </editorContribution> 
+   </extension>
+   -->
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <category
+            id="com.verticon.tracker.export.category" name="Tracker"/>
+      <wizard
+            category="com.verticon.tracker.export.category"
+            class="com.verticon.tracker.export.xls.presentation.ExportXlsWizard:DETAIL"
+            icon="$nl$/icons/etool16/export_wiz.gif"
+            id="com.verticon.tracker.export.xls.wizard1"
+            name="%_UI_ExportFairRegistration_Wizard_label">
+         <description>
+            Export fair registration details to Excel Spreadsheet
+         </description>
+         <selection class="org.eclipse.core.resources.IResource" name="*.premises"/>
+      </wizard>
+       <wizard
+            category="com.verticon.tracker.export.category"
+            class="com.verticon.tracker.export.xls.presentation.ExportXlsWizard:SUMMARY"
+            icon="$nl$/icons/etool16/export_wiz.gif"
+            id="com.verticon.tracker.export.xls.wizard1"
+            name="%_UI_ExportFairRegistrationSummary_Wizard_label">
+         <description>
+            Export fair registration summary to Excel Spreadsheet
+         </description>
+         <selection class="org.eclipse.core.resources.IResource" name="*.premises"/>
+      </wizard>
+       <wizard
+            category="com.verticon.tracker.export.category"
+            class="com.verticon.tracker.export.xls.presentation.ExportXlsWizard:RAW"
+            icon="$nl$/icons/etool16/export_wiz.gif"
+            id="com.verticon.tracker.export.xls.wizard1"
+            name="%_UI_ExportFairRegistrationRaw_Wizard_label">
+         <description>
+            Export fair registration raw data to Excel Spreadsheet
+         </description>
+         <selection class="org.eclipse.core.resources.IResource" name="*.premises"/>
+      </wizard>
    </extension> 
  </plugin>
