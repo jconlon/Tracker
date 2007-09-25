@@ -22,6 +22,7 @@ import com.verticon.tracker.editor.util.ExportPremisesBase;
  * @see MovedInWorkSheetBuilder
  * @see MovedOutWorkSheetBuilder
  * @author jconlon
+ * @deprecated Use ExportXlsWizard
  * @since 0.1
  */
 public class ExportFairRawEventsEditorActionDelegate extends ExportPremisesBase implements IEditorActionDelegate {

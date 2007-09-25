@@ -513,7 +513,7 @@ public class ActionUtils {
 		return validationDiagnostics.isEmpty();
 	}
 
-	static Premises getPremises(IFile file) throws IOException {
+	public static Premises getPremises(IFile file) throws IOException {
 		ResourceSet resourceSet = new ResourceSetImpl();
 
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(),

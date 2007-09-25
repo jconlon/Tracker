@@ -47,6 +47,32 @@ public class ExportPremisesBase {
 		this.targetEditor = targetEditor;
 
 	}
+	
+	/**
+	 * @param monitor
+	 * @param iFile
+	 * @throws IOException
+	 * @throws CoreException
+	 */
+	protected void export(IProgressMonitor monitor, IFile iFile)
+			throws IOException, CoreException {
+		Premises premises;
+		premises = ActionUtils.getPremises(iFile);
+		Preferences store = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
+		boolean validateBeforeExport = store.getBoolean(PreferenceConstants.P_VALIDATE_BEFORE_EXPORT);
+		if (validateBeforeExport && !ActionUtils.validate(premises,
+				validationDiagnostics)) {
+			throw new IOException(
+							"Tracker Model is not valid.  Please create a validate model before exporting.");
+		}
+
+		if (premises == null) {
+			throw new IOException("Could not find a premises");
+		}
+
+		premisesProcessor.process(premises, iFile, monitor);
+		monitor.done();
+	}
 
 	public void run(IAction action) {
 
@@ -61,24 +87,10 @@ public class ExportPremisesBase {
 
 					IFile iFile = (IFile) targetEditor.getEditorInput()
 							.getAdapter(IFile.class);
-					Premises premises;
+				
 
 					try {
-						premises = ActionUtils.getPremises(iFile);
-						Preferences store = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
-						boolean validateBeforeExport = store.getBoolean(PreferenceConstants.P_VALIDATE_BEFORE_EXPORT);
-						if (validateBeforeExport && !ActionUtils.validate(premises,
-								validationDiagnostics)) {
-							throw new IOException(
-											"Tracker Model is not valid.  Please create a validate model before exporting.");
-						}
-
-						if (premises == null) {
-							throw new IOException("Could not find a premises");
-						}
-
-						premisesProcessor.process(premises, iFile, monitor);
-						monitor.done();
+						export(monitor, iFile);
 
 					} catch (IOException e) {
 						throw new InvocationTargetException(e);
@@ -87,6 +99,8 @@ public class ExportPremisesBase {
 						throw new InvocationTargetException(e);
 					}
 				}
+
+				
 			});
 		} catch (InvocationTargetException e) {
 			ite = e;

@@ -19,6 +19,7 @@ import com.verticon.tracker.editor.util.ExportPremisesBase;
  * 
  * @see FairRegistrationWeighInWorkSheetBuilder
  * @author jconlon
+ * @deprecated Use ExportXlsWizard
  * @since 0.1
  */
 public class ExportFairRegistrationEditorActionDelegate extends ExportPremisesBase implements IEditorActionDelegate {
