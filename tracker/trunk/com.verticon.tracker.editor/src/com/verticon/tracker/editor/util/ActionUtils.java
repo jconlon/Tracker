@@ -316,7 +316,7 @@ public class ActionUtils {
 		return resource;
 	}
 
-	private static Resource getResource(IFile file) throws IOException {
+	public static Resource getResource(IFile file) throws IOException {
 
 		ResourceSet resourceSet = new ResourceSetImpl();
 
@@ -460,7 +460,7 @@ public class ActionUtils {
 		return templateBean;
 	}
 
-	private static final IResource extractResource(IEditorPart editor) {
+	public static final IResource extractResource(IEditorPart editor) {
 		IEditorInput input = editor.getEditorInput();
 		if (!(input instanceof IFileEditorInput))
 			return null;

@@ -14,16 +14,18 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
 
-import com.verticon.tracker.editor.presentation.ModifyEventsWizard;
+import com.verticon.tracker.editor.presentation.AddTemplateToAnimalsWizard;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
 
 /**
+ * ActionDelegate that invokes a Wizard to add Template Events to a Selection 
+ * of Animals
+ * 
  * @author jconlon
  *
  */
-public class ModifyEventsActionDelegate implements IObjectActionDelegate {
+public class AddTemplateToAnimalsActionDelegate implements IObjectActionDelegate {
 
-	private static final String FAILED_TO_MODIFY_EVENTS = "Failed to modify Events";
 	private IWorkbenchPart targetPart;
 	private IStructuredSelection selection;
 
@@ -45,6 +47,7 @@ public class ModifyEventsActionDelegate implements IObjectActionDelegate {
 
 	}
 
+
 	public void run(IAction action) {
 		IWorkbenchPartSite site = targetPart.getSite();
 		IWorkbenchWindow workbenchWindow = site.getWorkbenchWindow();
@@ -52,13 +55,13 @@ public class ModifyEventsActionDelegate implements IObjectActionDelegate {
 		IEditorPart editorPart = workbenchWindow.getActivePage().getActiveEditor();
 		if(editorPart==null|| (!(editorPart instanceof TrackerEditor))){
 			MessageDialog.openError(workbenchWindow.getShell(),
-					FAILED_TO_MODIFY_EVENTS,
+					"Failed to add template",
 					"The Active Editor is not a TrackerEditor ");
 			return;
 		}
 		TrackerEditor editor =(TrackerEditor)editorPart;
-		ModifyEventsWizard wizard = new ModifyEventsWizard();
-		wizard.init(workbenchWindow, editor.getEditingDomain(), selection);
+		AddTemplateToAnimalsWizard wizard = new AddTemplateToAnimalsWizard();
+		wizard.init(workbenchWindow, editor, selection);
 		WizardDialog dialog = new WizardDialog(workbenchWindow.getShell(), wizard);
 		dialog.open();
 		
