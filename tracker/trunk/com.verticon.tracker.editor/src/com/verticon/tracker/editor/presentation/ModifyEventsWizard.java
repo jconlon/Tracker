@@ -13,8 +13,10 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.dialogs.IDialogSettings;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.ui.IWorkbenchWindow;
 
 import com.verticon.tracker.Event;
 import com.verticon.tracker.editor.util.ActionUtils;
@@ -39,6 +41,7 @@ public class ModifyEventsWizard extends Wizard {
     private EditingDomain editingDomain;
     private SelectEventAttributesWizardPage selectEventAttributesWizardPage;
     private SelectModifyEventsValuesPage selectModifyEventsValuesPage;
+    IWorkbenchWindow workbenchWindow;
     
     
 	public ModifyEventsWizard() {
@@ -53,7 +56,8 @@ public class ModifyEventsWizard extends Wizard {
 		setDialogSettings(wizardSettings);		
 	}
 
-	public void init(EditingDomain editingDomain,IStructuredSelection selection){
+	public void init(IWorkbenchWindow workbenchWindow, EditingDomain editingDomain,IStructuredSelection selection){
+		this.workbenchWindow=workbenchWindow;
 		eventsToModify = ActionUtils.getSelectedEvents(selection);
 		this.editingDomain=editingDomain;
 	}
@@ -70,11 +74,11 @@ public class ModifyEventsWizard extends Wizard {
 	@Override
 	public boolean performFinish() {
 		Map<EAttribute, Object> changesToMake = selectModifyEventsValuesPage.getChangesToMakeOnSelectedEvents();
-		
+		String attWording = changesToMake.size()==1?" attribute ": " attributes ";
+		String eventWording = eventsToModify.size()==1?" event.": " events.";
 		try {
 			editingDomain.getCommandStack().execute(createCommand(changesToMake));
-			String attWording = changesToMake.size()==1?" attribute ": " attributes ";
-			String eventWording = eventsToModify.size()==1?" event.": " events.";
+			
 			log("Modified "+changesToMake.size()+
 					attWording+
 					"on "+
@@ -84,7 +88,11 @@ public class ModifyEventsWizard extends Wizard {
 			log("Failed to modify events because: " + e);
 			return false;
 		}
-		
+		MessageDialog.openInformation(workbenchWindow.getShell(), 
+				"Modified Events", "Modified "+changesToMake.size()+
+				attWording+
+				"on "+
+				eventsToModify.size()+eventWording);
 		return true;
 	}
 	
