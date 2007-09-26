@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExecutableExtension;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -45,6 +46,8 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 	private SelectExportTypeWizardPage selectExportTypePage;
 
 	private SelectExportFilePathWizardPage selectExportFilePathPage;
+	
+	private IWorkbench workbench;
 
 	/**
 	 * 
@@ -144,6 +147,10 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 			// User canceled, so stop but don�t close wizard.
 			return false;
 		}
+		MessageDialog.openInformation(workbench.getActiveWorkbenchWindow().getShell(), 
+				"Exported Premises Data", "Exported " +premisesFile.getProjectRelativePath().toString()+ 
+				" as "+ typeToExport + " data to "
+				+ destination );
 		return true;
 	}
 
@@ -158,6 +165,7 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 	 *            the current object selection
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
+		this.workbench=workbench;
 		Object item = selection.getFirstElement();
 		if (item instanceof IFile) {
 			premisesFile = (IFile) item;
