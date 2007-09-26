@@ -57,7 +57,7 @@ public class ModifyEventsActionDelegate implements IObjectActionDelegate {
 		IWorkbenchPartSite site = targetPart.getSite();
 		IWorkbenchWindow window = site.getWorkbenchWindow();
 		ModifyEventsWizard wizard = new ModifyEventsWizard();
-		wizard.init(editor.getEditingDomain(), selection);
+		wizard.init(window, editor.getEditingDomain(), selection);
 		WizardDialog dialog = new WizardDialog(window.getShell(), wizard);
 		dialog.open();
 		
