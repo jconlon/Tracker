@@ -89,7 +89,7 @@
   			<separator name="additions" />
   		</menu>
   		<action
-  			class="com.verticon.tracker.editor.actions.AddTemplateToAnimals"
+  			class="com.verticon.tracker.editor.actions.AddTemplateToAnimalsActionDelegate"
   			enablesFor="+"
   			id="com.verticon.tracker.editor.actions.addTemplateEventsToAnimals"
   			label="%_UI_TrackerTagsPopupAnimalsTemplateEvents_label"
