@@ -10,7 +10,7 @@ import com.verticon.tracker.editor.util.ExportPremisesBase;
 
 /**
  * @author jconlon
- *
+ * @deprecated Use ExportWlicWizard
  */
 public class ExportWlicEditorActionDelegate extends ExportPremisesBase implements IEditorActionDelegate  {
 
@@ -18,7 +18,7 @@ public class ExportWlicEditorActionDelegate extends ExportPremisesBase implement
 	 * 
 	 */
 	public ExportWlicEditorActionDelegate() {
-		super(new WlicTrackerExporter());
+		super(new WlicPremisesProcessor());
 	}
 
 	@Override

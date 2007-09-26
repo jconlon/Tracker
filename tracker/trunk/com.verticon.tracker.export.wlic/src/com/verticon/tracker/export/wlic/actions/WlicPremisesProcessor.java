@@ -33,7 +33,7 @@ import com.verticon.tracker.editor.util.PremisesProcessor;
  * @author jconlon
  *
  */
-public class WlicTrackerExporter implements PremisesProcessor {
+public class WlicPremisesProcessor implements PremisesProcessor {
 	
 	private static final SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmm");
 	private static final SimpleDateFormat df2 = new SimpleDateFormat("yyyyMMdd");
@@ -55,7 +55,8 @@ public class WlicTrackerExporter implements PremisesProcessor {
 	 */
 	public void process(Premises premises, IFile trackerFile,
 			IProgressMonitor monitor) throws IOException, CoreException {
-				IProject project = trackerFile.getProject();
+		
+		IProject project = trackerFile.getProject();
 		IFolder exportsFolder = project.getFolder(new Path("exports"));
 		if(!exportsFolder.exists()){
 			exportsFolder.create(true, true, monitor);	

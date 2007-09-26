@@ -29,7 +29,7 @@ public class ExportFairRawEventsEditorActionDelegate extends ExportPremisesBase 
 
 	
 	public ExportFairRawEventsEditorActionDelegate() {
-		super(new XLSExporter(
+		super(new XLSPremisesProcessor(
 				new WorkSheetBuilder[]{
 						new FairRegistrationWorkSheetBuilder(),
 						new WeighInWorkSheetBuilder(),
@@ -59,7 +59,7 @@ public class ExportFairRawEventsEditorActionDelegate extends ExportPremisesBase 
 		if (fileName == null) {
 			return;
 		} else {
-			((XLSExporter)premisesProcessor).setFileName(fileName);
+			((XLSPremisesProcessor)premisesProcessor).setFileName(fileName);
 		}
 		super.run(action);
 	}
