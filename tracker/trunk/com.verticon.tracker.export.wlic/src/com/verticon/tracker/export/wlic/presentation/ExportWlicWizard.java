@@ -7,6 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -32,6 +33,8 @@ public class ExportWlicWizard extends Wizard implements IExportWizard {
 	private SelectExportDateRangeWizardPage selectExportDateRangePage;
 	
 	private PremisesProcessor premisesProcessor;
+	
+	private IWorkbench workbench;
 	
 
 	/**
@@ -88,6 +91,8 @@ public class ExportWlicWizard extends Wizard implements IExportWizard {
 			// User canceled, so stop but don�t close wizard.
 			return false;
 		}
+		MessageDialog.openInformation(workbench.getActiveWorkbenchWindow().getShell(), 
+				"Exported Premises Data", getProcessor().getCompletionMessage());
 		return true;
 	}
 	/**
@@ -101,6 +106,7 @@ public class ExportWlicWizard extends Wizard implements IExportWizard {
 	 *            the current object selection
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
+		this.workbench = workbench;
 		Object item = selection.getFirstElement();
 		if (item instanceof IFile) {
 			premisesFile = (IFile) item;
