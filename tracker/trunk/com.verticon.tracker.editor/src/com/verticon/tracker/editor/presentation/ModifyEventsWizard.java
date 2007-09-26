@@ -22,6 +22,12 @@ import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.tracker.editor.util.Constants;
 
 /**
+ * Wizard for updating one or more events.
+ * 
+ * Pages:
+ * 1. Select the attribute types to update
+ * 2. Set the values of the attributes to update
+ * 
  * @author jconlon
  *
  */
