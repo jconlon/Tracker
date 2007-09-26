@@ -444,9 +444,9 @@ public class ActionUtils {
 		if (results == null || results.length != 1) {
 			return null;
 		}
-		String nameOfEvent = (String) results[0];
+		String nameOfAnimal = (String) results[0];
 		EClass eClass = (EClass) TrackerPackage.eINSTANCE
-				.getEClassifier(nameOfEvent);
+				.getEClassifier(nameOfAnimal);
 		return (Animal) TrackerFactory.eINSTANCE.create(eClass);
 	}
 
