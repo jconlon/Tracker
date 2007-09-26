@@ -2,6 +2,7 @@
 <?eclipse version="3.2"?>
 <plugin>
 
+   <!--
    <extension point="org.eclipse.ui.editorActions"> 
       <editorContribution 
          id="com.verticon.tracker.ocl.query.editorContribution" 
@@ -20,6 +21,28 @@
                menubarPath="com.verticon.trackerMenuID/com.verticon.tracker.exportMenuID/additions"/>
         
       </editorContribution> 
+   </extension>
+   -->
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <category
+            id="com.verticon.tracker.export.category"
+            name="Tracker">
+      </category>
+      <wizard
+            category="com.verticon.tracker.export.category"
+            class="com.verticon.tracker.export.wlic.presentation.ExportWlicWizard"
+            icon="$nl$/icons/etool16/export_wiz.gif"
+            id="com.verticon.tracker.export.wlic.wizard1"
+            name="%_UI_ExportWlic_Wizard_label">
+         <description>
+            Export Premises document as a WLIC report file
+         </description>
+         <selection
+               class="org.eclipse.core.resources.IResource"
+               name="*.premises">
+         </selection>
+      </wizard>
    </extension> 
  
 </plugin>

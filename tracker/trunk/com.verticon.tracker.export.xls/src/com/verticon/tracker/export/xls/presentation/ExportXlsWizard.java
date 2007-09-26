@@ -28,11 +28,11 @@ import com.verticon.tracker.export.xls.actions.MovedInWorkSheetBuilder;
 import com.verticon.tracker.export.xls.actions.MovedOutWorkSheetBuilder;
 import com.verticon.tracker.export.xls.actions.WeighInWorkSheetBuilder;
 import com.verticon.tracker.export.xls.actions.WorkSheetBuilder;
-import com.verticon.tracker.export.xls.actions.XLSExporter;
+import com.verticon.tracker.export.xls.actions.XLSPremisesProcessor;
 
 /**
  * 
- * Exports Premises documents FairRegistration events as spreadsheets.
+ * Exports Premises document FairRegistration events as spreadsheets.
  * 
  * @author jconlon
  * 
@@ -40,7 +40,7 @@ import com.verticon.tracker.export.xls.actions.XLSExporter;
 public class ExportXlsWizard extends Wizard implements IExportWizard,
 		IExecutableExtension {
 
-	private static final String EXPORT_XLS_FILE = "Export Spreadsheet Data";
+	private static final String WIZARD_TITLE = "Export Spreadsheet Data";
 
 	private SelectExportTypeWizardPage selectExportTypePage;
 
@@ -60,17 +60,17 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 		 * @return
 		 */
 		public PremisesProcessor getProcessor(IPath destination) {
-			XLSExporter result = null;
+			XLSPremisesProcessor result = null;
 
 			switch (this) {
 			case DETAIL:
-				result = new XLSExporter(
+				result = new XLSPremisesProcessor(
 						new WorkSheetBuilder[] { new FairRegistrationWeighInWorkSheetBuilder() },
 						new String[] { "Fair WeighIn and Registration" });
 				break;
 
 			case RAW:
-				result = new XLSExporter(
+				result = new XLSPremisesProcessor(
 						new WorkSheetBuilder[]{
 								new FairRegistrationWorkSheetBuilder(),
 								new WeighInWorkSheetBuilder(),
@@ -85,7 +85,7 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 				);
 				break;
 			case SUMMARY:
-				result = new XLSExporter(
+				result = new XLSPremisesProcessor(
 						new WorkSheetBuilder[] { new FairRegistrationSummaryWorkSheetBuilder() },
 						new String[] { "Fair Registration" });
 				break;
@@ -105,7 +105,7 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 
 	@Override
 	public void addPages() {
-		setWindowTitle(EXPORT_XLS_FILE);
+		setWindowTitle(WIZARD_TITLE);
 		selectExportTypePage = new SelectExportTypeWizardPage();
 		addPage(selectExportTypePage);
 		selectExportFilePathPage = new SelectExportFilePathWizardPage();
@@ -138,6 +138,7 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 			});
 		} catch (InvocationTargetException e) {
 			ExportXlsLog.logError("Failed to export "+premisesFile.getProjectRelativePath().toString(), e);
+			selectExportFilePathPage.setErrorMessage("Failed to export "+premisesFile.getProjectRelativePath().toString()+": "+e.getCause());
 			return false;
 		} catch (InterruptedException e) {
 			// User canceled, so stop but don�t close wizard.
@@ -189,7 +190,8 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 	private void performOperation(IProgressMonitor monitor) throws IOException,
 			CoreException {
 		new Exporter().export(monitor);
-		ExportXlsLog.logInfo("Exported " +premisesFile.getProjectRelativePath().toString()+ " as "+ typeToExport + " data to "
+		ExportXlsLog.logInfo("Exported " +premisesFile.getProjectRelativePath().toString()+ 
+				" as "+ typeToExport + " data to "
 				+ destination );
 	}
 

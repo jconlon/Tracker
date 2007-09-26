@@ -25,7 +25,7 @@ import com.verticon.tracker.editor.util.ExportPremisesBase;
 public class ExportFairRegistrationSummaryEditorActionDelegate extends ExportPremisesBase implements IEditorActionDelegate {
 
 	public ExportFairRegistrationSummaryEditorActionDelegate() {
-		super( new XLSExporter(
+		super( new XLSPremisesProcessor(
 				new WorkSheetBuilder[] { new FairRegistrationSummaryWorkSheetBuilder() },
 				new String[] { "Fair Registration" }));
 		
@@ -45,7 +45,7 @@ public class ExportFairRegistrationSummaryEditorActionDelegate extends ExportPre
 		if (fileName == null) {
 			return;
 		} else {
-			((XLSExporter)premisesProcessor).setFileName(fileName);
+			((XLSPremisesProcessor)premisesProcessor).setFileName(fileName);
 		}
 		super.run(action);
 	}

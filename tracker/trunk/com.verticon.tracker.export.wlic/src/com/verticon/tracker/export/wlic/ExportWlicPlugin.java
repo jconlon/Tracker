@@ -7,18 +7,18 @@ import org.osgi.framework.BundleContext;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Activator extends AbstractUIPlugin {
+public class ExportWlicPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.verticon.tracker.export.wlic";
+	public static final String ID = "com.verticon.tracker.export.wlic";
 
 	// The shared instance
-	private static Activator plugin;
+	private static ExportWlicPlugin plugin;
 	
 	/**
 	 * The constructor
 	 */
-	public Activator() {
+	public ExportWlicPlugin() {
 		plugin = this;
 	}
 
@@ -44,7 +44,7 @@ public class Activator extends AbstractUIPlugin {
 	 *
 	 * @return the shared instance
 	 */
-	public static Activator getDefault() {
+	public static ExportWlicPlugin getDefault() {
 		return plugin;
 	}
 
@@ -56,6 +56,6 @@ public class Activator extends AbstractUIPlugin {
 	 * @return the image descriptor
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
-		return imageDescriptorFromPlugin(PLUGIN_ID, path);
+		return imageDescriptorFromPlugin(ID, path);
 	}
 }

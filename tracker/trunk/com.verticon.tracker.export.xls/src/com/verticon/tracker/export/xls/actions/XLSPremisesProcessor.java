@@ -22,7 +22,7 @@ import com.verticon.tracker.editor.util.PremisesProcessor;
  * @author jconlon
  *
  */
-public class XLSExporter implements PremisesProcessor{
+public class XLSPremisesProcessor implements PremisesProcessor{
 
 	private String fileName = "FairRegistration.xls";
 	private Map<String, HSSFCellStyle> styleMap = new HashMap<String, HSSFCellStyle>();
@@ -31,7 +31,7 @@ public class XLSExporter implements PremisesProcessor{
 	private final String[] workSheetNames;
 	
 	
-	public XLSExporter(WorkSheetBuilder[] builders, String[] workSheetNames) {
+	public XLSPremisesProcessor(WorkSheetBuilder[] builders, String[] workSheetNames) {
 		super();
 		if(builders.length!=workSheetNames.length){
 			throw new IllegalArgumentException("Must have same number of builders as names.");
