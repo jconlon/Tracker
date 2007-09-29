@@ -32,33 +32,23 @@ public class ExportWlicWizard extends Wizard implements IExportWizard {
 
 	private SelectExportDateRangeWizardPage selectExportDateRangePage;
 	
-	private PremisesProcessor premisesProcessor;
+	private WlicPremisesProcessor premisesProcessor;
 	
 	private IWorkbench workbench;
 	
-
-	/**
-	 * Creates a PremisesProcessor for the ExportType
-	 * @param destination of the output
-	 * @return
-	 */
-	public PremisesProcessor getProcessor() {
-		if(premisesProcessor==null){
-			premisesProcessor = new WlicPremisesProcessor();
-		}
-		return premisesProcessor;
-	}
-	
-
-
 	private IFile premisesFile;
 
+	@Override
+	public boolean canFinish() {
+		return selectExportDateRangePage.getQueryFromDate()!=null;
+	}
 
 	@Override
 	public void addPages() {
 		setWindowTitle(WIZARD_TITLE);
 		selectExportDateRangePage = new SelectExportDateRangeWizardPage();
 		addPage(selectExportDateRangePage);
+		selectExportDateRangePage.init(premisesFile);
 	}
 	
 	/**
@@ -67,6 +57,7 @@ public class ExportWlicWizard extends Wizard implements IExportWizard {
 	 */
 	public boolean performFinish() {
 
+		premisesProcessor= new WlicPremisesProcessor(selectExportDateRangePage.getQueryFromDate());
 		// Perform the operation in a separate thread
 		// so that the operation can be canceled.
 		try {
@@ -92,7 +83,7 @@ public class ExportWlicWizard extends Wizard implements IExportWizard {
 			return false;
 		}
 		MessageDialog.openInformation(workbench.getActiveWorkbenchWindow().getShell(), 
-				"Exported Premises Data", getProcessor().getCompletionMessage());
+				"Exported Premises Data", premisesProcessor.getCompletionMessage());
 		return true;
 	}
 	/**
@@ -114,7 +105,6 @@ public class ExportWlicWizard extends Wizard implements IExportWizard {
 			throw new IllegalArgumentException(
 					"selection argument must be a premises document file.");
 		}
-
 	}
 	
 	/**
@@ -128,13 +118,13 @@ public class ExportWlicWizard extends Wizard implements IExportWizard {
 	 */
 	private void performOperation(IProgressMonitor monitor) throws IOException,
 			CoreException {
-		new Exporter().export(monitor);
-		ExportWlicLog.logInfo(getProcessor().getCompletionMessage());
+		new Exporter(premisesProcessor).export(monitor);
+		ExportWlicLog.logInfo(premisesProcessor.getCompletionMessage());
 	}
 
 	class Exporter extends ExportPremisesBase {
-		public Exporter() {
-			super(getProcessor());
+		public Exporter(PremisesProcessor premisesProcessor) {
+			super(premisesProcessor);
 		}
 
 		void export(IProgressMonitor monitor) throws IOException, CoreException {

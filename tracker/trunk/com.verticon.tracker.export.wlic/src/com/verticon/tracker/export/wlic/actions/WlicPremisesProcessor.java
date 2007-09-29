@@ -7,19 +7,13 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.EList;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -28,6 +22,8 @@ import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.editor.util.PremisesProcessor;
+import com.verticon.tracker.export.wlic.Utils;
+import com.verticon.tracker.export.wlic.presentation.FilterCriteria;
 
 /**
  * @author jconlon
@@ -35,16 +31,20 @@ import com.verticon.tracker.editor.util.PremisesProcessor;
  */
 public class WlicPremisesProcessor implements PremisesProcessor {
 	
-	private static final SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmm");
+    private static final SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmm");
 	private static final SimpleDateFormat df2 = new SimpleDateFormat("yyyyMMdd");
 	
 	private String nonProducerPid;
 	private StringBuffer buffer;
-	private List<Event> validWlicEvents = new ArrayList<Event>();
+	private Collection<Event> validWlicEvents ;
 	private String fileName;
 	
+	private final Date queryFromDate;
 	
-	
+	public WlicPremisesProcessor(Date queryFromDate) {
+		this.queryFromDate = queryFromDate;
+	}
+
 	/**
 	 * 
 	 * @param premises
@@ -56,16 +56,14 @@ public class WlicPremisesProcessor implements PremisesProcessor {
 	public void process(Premises premises, IFile trackerFile,
 			IProgressMonitor monitor) throws IOException, CoreException {
 		
-		IProject project = trackerFile.getProject();
-		IFolder exportsFolder = project.getFolder(new Path("exports"));
+		IFolder exportsFolder = Utils.getExportsFolder(trackerFile);
 		if(!exportsFolder.exists()){
 			exportsFolder.create(true, true, monitor);	
 		}
 		buffer = new StringBuffer(); 
-		validWlicEvents.clear();
-		
+		validWlicEvents= fillValidEvents(premises);
 		createHeader(premises);
-		fileName = createFileName(nonProducerPid);
+		fileName = createWlicFileName(nonProducerPid);
 		for (Event event : validWlicEvents) {
 			createRow(event);
 		}
@@ -74,10 +72,7 @@ public class WlicPremisesProcessor implements PremisesProcessor {
 		outputFile.create(is, true, monitor);
 		
 	}
-	
-	/*
-	 * 
-	 */
+
 	
 	private void createRow(Event event){
 		for (int i = 1; i < 19; i++) {
@@ -156,7 +151,7 @@ public class WlicPremisesProcessor implements PremisesProcessor {
 		case 15://AnimalID 1
 			out = ",";//NOT USED
 			break;
-		case 16://TODO TEST AnimalID 1 type use this if replacement is used
+		case 16://AnimalID 1 type use this if a replace Tag event is used
 			switch (event.getEventCode()) {
 				case 6:
 					out = ((ReplacedTag)event).getOldAin()==null?"," :((ReplacedTag)event).getOldAin()+',';
@@ -205,21 +200,7 @@ public class WlicPremisesProcessor implements PremisesProcessor {
 			out = df.format(new Date())+',';
 			break;
 		case 3:
-			EList rawevents = premises.eventHistory();
-			for (Object object : rawevents) {
-				Event event = (Event)object;
-				if(event.getEventCode()<15){
-					validWlicEvents.add(event);
-				}
-			}
-			Collections.sort(validWlicEvents, new Comparator(){
-
-				public int compare(Object o1, Object o2) {
-					Event event1 = (Event)o1;
-					Event event2 = (Event)o2;
-					
-					return event1.getDateTime().compareTo(event2.getDateTime());
-				}});
+			
 			out = Integer.toString(validWlicEvents.size())+',';
 			break;
 		case 4:
@@ -230,10 +211,30 @@ public class WlicPremisesProcessor implements PremisesProcessor {
 		return out;
 	}
 
-	
-	private String createFileName(String nonProducerPid){
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-		String date = df.format(new Date());
+	/**
+	 * @param premises
+	 */
+	private Collection <Event> fillValidEvents(Premises premises) {
+		//Create a filterCriteria based on the Date
+		FilterCriteria<Event> datedFilterCriteria = new FilterCriteria<Event>() {
+			public boolean passes(Event e) {
+				
+				return  e.getDateTime().after(queryFromDate);
+			}};
+		
+		Collection <Event> result = Utils.getFilteredAndSortedValidWlicEvents(
+				premises.eventHistory(), datedFilterCriteria);
+
+		return result;
+	}
+
+	/**
+	 * Create a fileName like 003ALKM20070925190543.IND
+	 * @param nonProducerPid
+	 * @return
+	 */
+	public static final String createWlicFileName(String nonProducerPid){
+		String date = Utils.FILE_NAME_DATE_FORMAT.format(new Date());
 		return nonProducerPid+date+".IND";
 	}
 	
@@ -244,6 +245,8 @@ public class WlicPremisesProcessor implements PremisesProcessor {
 	public String getFailureTitle() {
 		return "Failed to export a tracker model to a WLIC file.";
 	}
+
+	
 
 	
 
