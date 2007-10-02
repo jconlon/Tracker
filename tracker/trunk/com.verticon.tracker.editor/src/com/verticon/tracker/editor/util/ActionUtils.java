@@ -117,7 +117,7 @@ public class ActionUtils {
 		return tagsBean;
 	}
 
-	public static final TemplateAnimalBean getTemplateBean(TrackerEditor editor,
+	public static final AnimalTemplateBean getTemplateBean(TrackerEditor editor,
 			IWorkbenchPart targetPart) {
 		Animal animal = null;
 		IProject project = extractResource(editor).getProject();
@@ -157,7 +157,7 @@ public class ActionUtils {
 			return null;
 		}
 
-		TemplateAnimalBean templateBean = new TemplateAnimalBean(animal, f.getName());
+		AnimalTemplateBean templateBean = new AnimalTemplateBean(animal, f.getName());
 		return templateBean;
 	}
 
@@ -176,14 +176,16 @@ public class ActionUtils {
 	 * 
 	 * @param premises
 	 * @param tagsBean
-	 * @param templateBean
+	 * @param animalTemplateBean
 	 * @param editor
 	 */
-	public static final void addTemplate(Premises premises, TagsBean tagsBean,
-			TemplateAnimalBean templateBean, TrackerEditor editor) {
-		// The date in the templateBean takes precedence over the tagsBean
-		if (templateBean.getDate() == null) {
-			templateBean.setDate(tagsBean.getDate());
+	public static final void addTagsAndTemplate(Premises premises, TagsBean tagsBean,
+			AnimalTemplateBean animalTemplateBean, TrackerEditor editor) {
+		// The date in the templateBean takes precedence over the date in the tagsBean
+		// Setting a date in that is before the reference date will create a
+		// date that is the current time.
+		if (animalTemplateBean.getDate() == null) {
+			animalTemplateBean.setDate(tagsBean.getDate());
 		}
 
 		CompoundCommand compoundCommand = new CompoundCommand();
@@ -196,11 +198,11 @@ public class ActionUtils {
 			if (animal != null) {
 				existingAnimals++;
 				command = createAddEventsToTagCommand(animal.activeTag(),
-						templateBean.getEvents(), editor.getEditingDomain());
+						animalTemplateBean.getEvents(), editor.getEditingDomain());
 			} else {
 				newAnimalsCreated++;
 				command = createAddAnimalToPremiseCommand(premises,
-						templateBean.getAnimal(tag), editor.getEditingDomain());
+						animalTemplateBean.getAnimal(tag), editor.getEditingDomain());
 				
 			}
 			if(command !=null){
@@ -210,8 +212,8 @@ public class ActionUtils {
 		editor.getEditingDomain().getCommandStack().execute(compoundCommand);
 		MessageDialog.openInformation(editor.getSite().getShell(),
 				ADD_TEMPLATE_TO_PREMISES_OPERATION, "The "
-						+ templateBean.getName() + " and " + tagsBean.getName()
-						+ " processed " + templateBean.getEvents().size()
+						+ animalTemplateBean.getName() + " and " + tagsBean.getName()
+						+ " processed " + animalTemplateBean.getEvents().size()
 						+ " events on " + newAnimalsCreated
 						+ " new Animals and " + existingAnimals
 						+ " existing animals.");
@@ -224,8 +226,8 @@ public class ActionUtils {
 	 * @param templateBean
 	 * @param editor
 	 */
-	public static final void addTemplate(Collection<Animal> animals,
-			TemplateAnimalBean templateBean, TrackerEditor editor) {
+	public static final void addTemplateToAnimals(Collection<Animal> animals,
+			AnimalTemplateBean templateBean, TrackerEditor editor) {
 		CompoundCommand compoundCommand = new CompoundCommand();
 		Command command = null;
 		int numberOfEventsInTemplate = templateBean.numberOfEvents();
@@ -450,12 +452,12 @@ public class ActionUtils {
 		return (Animal) TrackerFactory.eINSTANCE.create(eClass);
 	}
 
-	public static final TemplateAnimalBean createTemplateBean(Animal animal,
+	public static final AnimalTemplateBean createTemplateBean(Animal animal,
 			Event event) {
 		Tag tag = TrackerFactory.eINSTANCE.createTag();
 		tag.getEvents().add(event);
 		animal.getTags().add(tag);
-		TemplateAnimalBean templateBean = new TemplateAnimalBean(animal,
+		AnimalTemplateBean templateBean = new AnimalTemplateBean(animal,
 				"User prompted dialog");
 		return templateBean;
 	}
