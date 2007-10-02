@@ -30,7 +30,7 @@ import org.eclipse.ui.model.WorkbenchLabelProvider;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
 import com.verticon.tracker.editor.util.ActionUtils;
-import com.verticon.tracker.editor.util.TemplateAnimalBean;
+import com.verticon.tracker.editor.util.AnimalTemplateBean;
 import com.verticon.tracker.util.CommonUtilities;
 
 /**
@@ -91,7 +91,7 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 		super.setVisible(visible);
 	}
 
-	public TemplateAnimalBean getTemplateBean() {
+	public AnimalTemplateBean getTemplateBean() {
 		if(selectedFile==null){
 			return null;
 		}
@@ -106,12 +106,12 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 	 * @param resource
 	 * @return
 	 */
-	private TemplateAnimalBean getTemplateAnimalBean(Resource resource) {
+	private AnimalTemplateBean getTemplateAnimalBean(Resource resource) {
 		Animal animal = CommonUtilities.getAnimalFromTemplate(resource);
 		if(animal==null){
 			return null;
 		}
-		TemplateAnimalBean templateBean = new TemplateAnimalBean(animal, selectedFile.getName());
+		AnimalTemplateBean templateBean = new AnimalTemplateBean(animal, selectedFile.getName());
 		return templateBean;
 	}
 
@@ -187,7 +187,7 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 	         return;
 	      }
 
-	      TemplateAnimalBean templateAnimalBean =  getTemplateAnimalBean(resource);
+	      AnimalTemplateBean templateAnimalBean =  getTemplateAnimalBean(resource);
 	      if (templateAnimalBean == null || templateAnimalBean.numberOfEvents()==0) {
 		         setMessage(null);
 		         setErrorMessage(
