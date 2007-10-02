@@ -29,7 +29,7 @@ import com.verticon.tracker.editor.util.ActionUtils;
  * WizardPage for selecting an Event type. 
  * 	
  * 
- * @see AddAnimalsToPremisesWizard
+ * @see AddTagIdsAnimalAndEventWizard
  * @see SelectAnimalWizardPage
  * @author jconlon
  * @since 0.2
