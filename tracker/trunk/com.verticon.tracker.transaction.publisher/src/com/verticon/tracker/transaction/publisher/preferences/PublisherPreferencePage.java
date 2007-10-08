@@ -21,11 +21,11 @@ import com.verticon.tracker.transaction.publisher.PublisherPlugin;
  * be accessed directly via the preference store.
  */
 
-public class FileTailPublisherPreferencePage
+public class PublisherPreferencePage
 	extends FieldEditorPreferencePage
 	implements IWorkbenchPreferencePage {
 
-	public FileTailPublisherPreferencePage() {
+	public PublisherPreferencePage() {
 		super(GRID);
 		setPreferenceStore(PublisherPlugin.getDefault().getPreferenceStore());
 		setDescription("Tracker Event Publisher Preferences");
@@ -41,12 +41,26 @@ public class FileTailPublisherPreferencePage
 		
 		IntegerFieldEditor readInterval = new IntegerFieldEditor(
 				PreferenceConstants.P_READ_INTERVAL,//name
-				"Capture File Read &Interval 1 to 360 seconds:",//lableText
+				"&FileTailer monitoring interval. "+
+				"\nSeconds paused between each "+
+				"\nread of the capture file:",//lableText
 		 		getFieldEditorParent(),//parent
 		 		3);
 		
 		readInterval.setValidRange(1, 360);
+		
 		addField(readInterval);
+		
+		IntegerFieldEditor spreadInterval = new IntegerFieldEditor(
+				PreferenceConstants.P_SPREAD_INTERVAL,//name
+				"&Concurrent Event interval.  "+
+				"\nSeconds added to seperate dateTimes"+
+				"\nwhen adding multiple events to an animal:",//lableText
+		 		getFieldEditorParent(),//parent
+		 		3);
+		
+		spreadInterval.setValidRange(1, 10);
+		addField(spreadInterval);
 		
 	}
 

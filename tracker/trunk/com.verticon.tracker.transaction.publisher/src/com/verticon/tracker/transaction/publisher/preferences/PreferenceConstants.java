@@ -7,4 +7,6 @@ public class PreferenceConstants {
 	
 	public static final String P_READ_INTERVAL = "readInterval";
 	
+	public static final String P_SPREAD_INTERVAL = "spreadInterval";
+	
 }

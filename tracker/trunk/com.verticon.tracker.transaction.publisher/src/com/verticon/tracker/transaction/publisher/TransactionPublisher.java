@@ -2,10 +2,12 @@ package com.verticon.tracker.transaction.publisher;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.Preferences;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -21,6 +23,7 @@ import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.editor.util.ActionUtils;
 import com.verticon.tracker.editor.util.ConsoleUtil;
+import com.verticon.tracker.transaction.publisher.preferences.PreferenceConstants;
 import com.verticon.tracker.util.CommonUtilities;
 
 public class TransactionPublisher {
@@ -33,6 +36,9 @@ public class TransactionPublisher {
 
 	private final IFile animalTemplateFile;
 
+	private static Preferences prefs = PublisherPlugin.getDefault()
+	.getPluginPreferences();
+	
 	/**
 	 * Constructs the TransactionPublisher 
 	 * @param animalTemplateFile
@@ -168,20 +174,27 @@ public class TransactionPublisher {
 
 	/**
 	 * Creates a Collection of valid events for the animal
-	 * Using the current date for each event
+	 * Using the current date for the first event and the Spread
+	 * Interval set in the preferences each subsequent event
 	 * @param templateEvents
 	 * @param animal
 	 * @return Copy of all valid templateEvents for the animal
 	 */
 	private static Collection<Event> copyValidEvents(
 			Collection<Event> templateEvents, Animal animal) {
-		Date currentDate = new Date();
+		Calendar currentDate =null;
+		
 		Copier copier = new Copier();
 		ArrayList<Event> outputResults = new ArrayList<Event>();
 		Event outputEvent;
 		for (Event o : templateEvents) {
+			if(currentDate==null){
+				currentDate= Calendar.getInstance();
+			}else{
+				currentDate.add(Calendar.SECOND, prefs.getInt(PreferenceConstants.P_SPREAD_INTERVAL));
+			}
 			outputEvent = (Event) copier.copy(o);
-			outputEvent.setDateTime(currentDate);
+			outputEvent.setDateTime(currentDate.getTime());
 			if (ActionUtils.canAddEventToAnimal(animal, outputEvent)) {
 				outputResults.add(outputEvent);
 			}
