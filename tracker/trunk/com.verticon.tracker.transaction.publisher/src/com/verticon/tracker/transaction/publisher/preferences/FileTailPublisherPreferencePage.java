@@ -1,19 +1,11 @@
 package com.verticon.tracker.transaction.publisher.preferences;
 
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
-import org.eclipse.jface.preference.ScaleFieldEditor;
-import org.eclipse.jface.util.PropertyChangeEvent;
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
-import com.verticon.tracker.editor.dialogs.WSFileFieldEditor;
-import com.verticon.tracker.transaction.publisher.TrackerFileTailPublisherPlugin;
+import com.verticon.tracker.transaction.publisher.PublisherPlugin;
 
 /**
  * This class represents a preference page that
@@ -33,12 +25,9 @@ public class FileTailPublisherPreferencePage
 	extends FieldEditorPreferencePage
 	implements IWorkbenchPreferencePage {
 
-	private WSFileFieldEditor captureFile;
-	private WSFileFieldEditor templateFile;
-
 	public FileTailPublisherPreferencePage() {
 		super(GRID);
-		setPreferenceStore(TrackerFileTailPublisherPlugin.getDefault().getPreferenceStore());
+		setPreferenceStore(PublisherPlugin.getDefault().getPreferenceStore());
 		setDescription("Tracker Event Publisher Preferences");
 	}
 	
@@ -50,53 +39,13 @@ public class FileTailPublisherPreferencePage
 	 */
 	public void createFieldEditors() {
 		
-		captureFile = new WSFileFieldEditor(
-						PreferenceConstants.P_CAPTURE_FILE,
-						"&Capture file preference:",
-						true,
-				 		getFieldEditorParent());
+		IntegerFieldEditor readInterval = new IntegerFieldEditor(
+				PreferenceConstants.P_READ_INTERVAL,//name
+				"Capture File Read &Interval 1 to 360 seconds:",//lableText
+		 		getFieldEditorParent(),//parent
+		 		3);
 		
-	    ViewerFilter viewerFilter = new ViewerFilter(){
-			@Override
-			public boolean select(Viewer viewer, Object parentElement, Object element) {
-				 IResource resource = null;
-			        if (element instanceof IResource) {
-			            resource = (IResource) element;
-			        } else if (element instanceof IAdaptable) {
-			            IAdaptable adaptable = (IAdaptable) element;
-			            resource = (IResource) adaptable.getAdapter(IResource.class);
-			        }
-			        if (resource != null && !resource.isDerived()) {
-			        	   if (resource.getType() != IResource.FILE) {
-			        		   return true;
-			        	   }
-			        	   
-			            String extension = resource.getFileExtension();
-			            if(extension==null){
-			            	return false;
-			            }
-			            if (!extension.equalsIgnoreCase("Tags")) {
-			            	return false;
-			            }
-			        }
-			        return true;
-			}};
-	    captureFile.setViewerFilter(viewerFilter);
-		addField(captureFile);	
-		
-		templateFile = new WSFileFieldEditor(
-						PreferenceConstants.P_TEMPLATE_FILE,
-						"&Template file preference:",
-						true,
-				 		getFieldEditorParent());
-		templateFile.setViewerFilter(new TemplateViewerFilter());
-		addField(templateFile);	
-		
-		ScaleFieldEditor readInterval = new ScaleFieldEditor(
-				PreferenceConstants.P_READ_INTERVAL,
-				"Capture File Read &Interval 1 to 60 seconds:",
-		 		getFieldEditorParent(),1,60,1, 5);
-		
+		readInterval.setValidRange(1, 360);
 		addField(readInterval);
 		
 	}
@@ -107,31 +56,6 @@ public class FileTailPublisherPreferencePage
 	public void init(IWorkbench workbench) {
 	}
 
-	@Override
-	protected void checkState() {
-		super.checkState();
-		if (!isValid()){
-			return;
-		}
-		if ((captureFile.getStringValue().length() <4 || templateFile.getStringValue().length() <4)){
-			setErrorMessage("Must select both a capture file and a template file.");
-			setValid(false);
-		}else{
-			setErrorMessage(null);
-			setValid(true);
-		}
-	}
-
-	@Override
-	public void propertyChange(PropertyChangeEvent event) {
-		super.propertyChange(event);
-		if(event.getProperty().equals(FieldEditor.VALUE)){
-			if (event.getSource() == captureFile
-					|| event.getSource() == templateFile){
-				checkState();
-			}
-		}
-	}
 	
 	
 	

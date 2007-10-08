@@ -12,7 +12,7 @@
             name="Event Publishers"
             icon="icons/sample.gif"
             category="com.verticon.tracker.transaction.publisher"
-            class="com.verticon.tracker.transaction.publisher.views.EventPublisherView"
+            class="com.verticon.tracker.transaction.publisher.views.PublisherViewPart"
             id="com.verticon.tracker.transaction.publisher.views.SampleView">
       </view>
    </extension>

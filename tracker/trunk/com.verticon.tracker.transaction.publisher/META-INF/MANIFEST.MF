@@ -3,13 +3,17 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Tracker Event Publisher
 Bundle-SymbolicName: com.verticon.tracker.transaction.publisher;singleton:=true
 Bundle-Version: 0.1.1
-Bundle-Activator: com.verticon.tracker.transaction.publisher.TrackerFileTailPublisherPlugin
+Bundle-Activator: com.verticon.tracker.transaction.publisher.PublisherPlugin
 Bundle-Vendor: Verticon, Inc.
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.emf.transaction,
  org.eclipse.core.resources,
- org.eclipse.ui.ide
+ org.eclipse.ui.ide,
+ org.eclipse.core.databinding,
+ org.eclipse.core.databinding.beans,
+ org.eclipse.jface.databinding,
+ com.ibm.icu
 Eclipse-LazyStart: true
 Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)",
  com.verticon.tracker.editor.dialogs;version="[0.1.0,1.0.0)",
@@ -17,6 +21,5 @@ Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)",
  com.verticon.tracker.editor.util;version="[0.1.0,1.0.0)",
  com.verticon.tracker.util;version="[0.1.0,1.0.0)"
 Export-Package: com.verticon.tracker.transaction.publisher;version="0.1.0",
- com.verticon.tracker.transaction.publisher.actions;version="0.1.0",
  com.verticon.tracker.transaction.publisher.preferences;version="0.1.0",
  com.verticon.tracker.transaction.publisher.views;version="0.1.0"

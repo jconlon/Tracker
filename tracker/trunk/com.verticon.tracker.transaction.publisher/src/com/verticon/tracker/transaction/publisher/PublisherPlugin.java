@@ -5,23 +5,23 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+
 /**
- * The activator class controls the plug-in life cycle
+ * Controls the plug-in life cycle
  */
-public class TrackerFileTailPublisherPlugin extends AbstractUIPlugin {
+public class PublisherPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.verticon.tracker.transaction.publisher.test";
+	public static final String PLUGIN_ID = "com.verticon.tracker.transaction.publisher";
 
 	// The shared instance
-	private static TrackerFileTailPublisherPlugin plugin;
+	private static PublisherPlugin plugin;
 	
-	private FileTailPublisher fileTailPublisher ;
 	
 	/**
 	 * The constructor
 	 */
-	public TrackerFileTailPublisherPlugin() {
+	public PublisherPlugin() {
 		plugin = this;
 	}
 
@@ -31,8 +31,6 @@ public class TrackerFileTailPublisherPlugin extends AbstractUIPlugin {
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		fileTailPublisher = new FileTailPublisher();
-		getPluginPreferences().addPropertyChangeListener(fileTailPublisher);
 	}
 
 	/*
@@ -40,9 +38,6 @@ public class TrackerFileTailPublisherPlugin extends AbstractUIPlugin {
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		getPluginPreferences().removePropertyChangeListener(fileTailPublisher);
-		fileTailPublisher.stop();
-		fileTailPublisher = null;
 		plugin = null;
 		super.stop(context);
 	}
@@ -52,7 +47,7 @@ public class TrackerFileTailPublisherPlugin extends AbstractUIPlugin {
 	 *
 	 * @return the shared instance
 	 */
-	public static TrackerFileTailPublisherPlugin getDefault() {
+	public static PublisherPlugin getDefault() {
 		return plugin;
 	}
 
@@ -67,7 +62,4 @@ public class TrackerFileTailPublisherPlugin extends AbstractUIPlugin {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
 
-	public FileTailPublisher getFileTailPublisher() {
-		return fileTailPublisher;
-	}
 }

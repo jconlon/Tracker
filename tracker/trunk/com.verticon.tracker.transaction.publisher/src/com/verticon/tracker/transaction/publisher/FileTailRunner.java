@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.verticon.tracker.transaction.publisher.actions;
+package com.verticon.tracker.transaction.publisher;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,30 +10,42 @@ import java.util.Scanner;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
+
 import com.verticon.tracker.util.TrackerLog;
 
 /**
+ * Runnable that scans a file for Long numbers and sends them
+ * to a TransactionPublisher.
+ * Used by the FileTailer Publisher.  
+ * 
+ * @see FileTailer
  * @author jconlon
  *
  */
 public class FileTailRunner implements Runnable {
 
-	private final TransactionPublisher tp ;
+	private final TransactionPublisher transactionPublisher ;
 	private final File file ;
 	private final Set<Long> tagNumbersToSend = new HashSet<Long>();
 	private final Set<Long> tagNumbersSent = new HashSet<Long>();
 	
+	
 	/**
 	 * 
+	 * Primary Constructor
+	 * 
+	 * @param transactionProcessor to send Long numbers to.
+	 * @param file to Scan
 	 */
-	public FileTailRunner(TransactionPublisher tp, IFile file) {
-		this.tp=tp;
+	public FileTailRunner(TransactionPublisher transactionProcessor, IFile file) {
+		this.transactionPublisher=transactionProcessor;
 		this.file=new File(file.getLocationURI());
 	}
 
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Runnable#run()
+	/**
+	 * Scans the file and adds new tags to the Set of 
+	 * tagNumbersToSend.
 	 */
 	public void run() {
 		tagNumbersToSend.clear();
@@ -47,10 +59,7 @@ public class FileTailRunner implements Runnable {
 				if(!tagNumbersSent.contains(tag)){
 					tagNumbersToSend.add(tag);
 				}
-				
 			}
-
-			
 
 		} catch (FileNotFoundException e) {
 			TrackerLog.logError("Could not find the tags file.", e);
@@ -61,13 +70,13 @@ public class FileTailRunner implements Runnable {
 				sc.close();
 			}
 		}
-		send();
+		sendTags();
 
 	}
 
-	private void send(){
+	private void sendTags(){
 		for (Long tag : tagNumbersToSend) {
-			tp.publish(tag);
+			transactionPublisher.publish(tag);
 			tagNumbersSent.add(tag);
 		}
 		
