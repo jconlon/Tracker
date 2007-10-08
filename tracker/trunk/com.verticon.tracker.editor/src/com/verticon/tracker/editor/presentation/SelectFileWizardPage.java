@@ -19,6 +19,7 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -38,16 +39,19 @@ import com.verticon.tracker.util.CommonUtilities;
  * @author jconlon
  *
  */
-public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelectionChangedListener {
+public class SelectFileWizardPage extends WizardPage implements ISelectionChangedListener {
 
 	private TreeViewer treeViewer;
 	private IProject project;
 	private IFile selectedFile;
 	
-	public SelectAnimalDocumentWizardPage() {
-		super("selectAnimalDocument");
-		setTitle("Select Animal Document");
-		setDescription("Select the Animal Document to use as an Event Template");
+	private final ViewerFilter viewerFilter;
+	
+	public SelectFileWizardPage(String pageName, String title, String description, ViewerFilter viewerFilter ) {
+		super(pageName);
+		this.viewerFilter=viewerFilter;
+		setTitle(title);
+		setDescription(description);
 	}
 
 	/* (non-Javadoc)
@@ -77,7 +81,7 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 		viewer.setUseHashlookup(true);
 		viewer.setContentProvider(new WorkbenchContentProvider());
 		viewer.setLabelProvider(new WorkbenchLabelProvider());
-		viewer.addFilter(new TemplateViewerFilter());
+		viewer.addFilter(viewerFilter);
 		return viewer;
 	}
 	
@@ -92,45 +96,6 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 		super.setVisible(visible);
 	}
 
-	public AnimalTemplateBean getTemplateBean() {
-		if(selectedFile==null){
-			return null;
-		}
-		Resource resource = getResource();
-		if(resource == null){
-			return null;
-		}
-		return getTemplateAnimalBean(resource);
-	}
-
-	/**
-	 * @param resource
-	 * @return
-	 */
-	private AnimalTemplateBean getTemplateAnimalBean(Resource resource) {
-		Animal animal = CommonUtilities.getAnimalFromTemplate(resource);
-		if(animal==null){
-			return null;
-		}
-		AnimalTemplateBean templateBean = new AnimalTemplateBean(animal, selectedFile.getName());
-		return templateBean;
-	}
-
-	/**
-	 * @return
-	 */
-	private Resource getResource() {
-		Resource resource;
-		try {
-			resource = ActionUtils.getResource(selectedFile);
-		} catch (IOException e) {
-			return null;
-		}
-		if(resource==null){
-			return null;
-		}
-		return resource;
-	}
 
 	
 	public void init(IEditorPart editor){
@@ -180,33 +145,13 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 
 	      if (selectedFile == null ) {
 	         setMessage(null);
-	         setErrorMessage("Please select an existing Animal Document file");
+	         setErrorMessage("Please select an existing file");
 	         return;
 	      }
-
-	      Resource resource = getResource();
-	      if (resource == null) {
-	         setMessage(null);
-	         setErrorMessage(
-	            "Please specify an Animal Document file");
-	         return;
-	      }
-
-	      AnimalTemplateBean templateAnimalBean =  getTemplateAnimalBean(resource);
-	      if (templateAnimalBean == null || templateAnimalBean.numberOfEvents()==0) {
-		         setMessage(null);
-		         setErrorMessage(
-		            "Animal document has no events. Please specify an Animal Document that has at least one event.");
-		         return;
-		      }
 	      
 	      setPageComplete(true);
-
-	      
 	      setErrorMessage(null);
-	      setMessage(
-	            "Animal Document contains "+templateAnimalBean.numberOfEvents()+" event(s).",
-	            IMessageProvider.INFORMATION);
+	      setMessage(null);
 	         return;
 	      
 	   }

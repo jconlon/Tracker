@@ -3,7 +3,7 @@ package com.verticon.tracker.transaction.publisher.preferences;
 import org.eclipse.core.runtime.Preferences;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 
-import com.verticon.tracker.transaction.publisher.TrackerFileTailPublisherPlugin;
+import com.verticon.tracker.transaction.publisher.PublisherPlugin;
 
 /**
  * Class used to initialize default preference values.
@@ -16,12 +16,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 * @see org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer#initializeDefaultPreferences()
 	 */
 	public void initializeDefaultPreferences() {
-		Preferences store = TrackerFileTailPublisherPlugin.getDefault().getPluginPreferences();
-		
-//		store.setDefault(PreferenceConstants.P_ON_BOOLEAN, false);
+		Preferences store = PublisherPlugin.getDefault().getPluginPreferences();
 		store.setDefault(PreferenceConstants.P_READ_INTERVAL, 1);
-		
-
 	}
 
 }
