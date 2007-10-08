@@ -37,6 +37,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 
+import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
+
 /**
  * Listens for the loading of resources, and creates editors on them when they
  * load.
@@ -120,7 +122,7 @@ public class ResourceLoadedListener extends DemultiplexingListener {
 								}
 							}
 						} catch (PartInitException e) {
-							TrackerEditorPlugin.getPlugin().log(e.getStatus());
+							TransactionEditorPlugin.getPlugin().log(e.getStatus());
 						}
 					}});
 			}

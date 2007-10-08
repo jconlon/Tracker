@@ -4,7 +4,6 @@
 package com.verticon.tracker.editor.presentation;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.Map;
 
 import org.eclipse.emf.common.command.Command;
@@ -20,8 +19,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 
 import com.verticon.tracker.Event;
 import com.verticon.tracker.editor.util.ActionUtils;
-import com.verticon.tracker.editor.util.ConsoleUtil;
-import com.verticon.tracker.editor.util.Constants;
 
 /**
  * Wizard for updating one or more events.
@@ -79,13 +76,11 @@ public class ModifyEventsWizard extends Wizard {
 		try {
 			editingDomain.getCommandStack().execute(createCommand(changesToMake));
 			
-			log("Modified "+changesToMake.size()+
-					attWording+
-					"on "+
-					eventsToModify.size()+eventWording);
+			
 			
 		} catch (RuntimeException e) {
-			log("Failed to modify events because: " + e);
+			MessageDialog.openError(workbenchWindow.getShell(), 
+					"Modified Events Failed", "Failed to modify events because: " + e);
 			return false;
 		}
 		MessageDialog.openInformation(workbenchWindow.getShell(), 
@@ -122,7 +117,4 @@ public class ModifyEventsWizard extends Wizard {
 		return selectEventAttributesWizardPage.getSelectedAttributes();
 	} 
 
-	public static void log(String msg) {
-		ConsoleUtil.println(Constants.CONSOLE, new Date()+"\t"+msg);
-	}
 }

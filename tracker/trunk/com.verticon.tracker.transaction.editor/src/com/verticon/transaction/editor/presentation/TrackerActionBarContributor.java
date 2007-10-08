@@ -43,6 +43,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
+import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
 import com.verticon.transaction.editor.actions.LongRunningReadAction;
 
 /**
@@ -82,14 +83,14 @@ public class TrackerActionBarContributor
 	 * @generated
 	 */
 	protected IAction showPropertiesViewAction =
-		new Action(TrackerEditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item")) //$NON-NLS-1$
+		new Action(TransactionEditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item")) //$NON-NLS-1$
 		{
 			public void run() {
 				try {
 					getPage().showView("org.eclipse.ui.views.PropertySheet"); //$NON-NLS-1$
 				}
 				catch (PartInitException exception) {
-					TrackerEditorPlugin.INSTANCE.log(exception);
+					TransactionEditorPlugin.INSTANCE.log(exception);
 				}
 			}
 		};
@@ -102,7 +103,7 @@ public class TrackerActionBarContributor
 	 * @generated
 	 */
 	protected IAction refreshViewerAction =
-		new Action(TrackerEditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) //$NON-NLS-1$
+		new Action(TransactionEditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) //$NON-NLS-1$
 		{
 			public boolean isEnabled() {
 				return activeEditorPart instanceof IViewerProvider;
@@ -200,7 +201,7 @@ public class TrackerActionBarContributor
 	public void contributeToMenu(IMenuManager menuManager) {
 		super.contributeToMenu(menuManager);
 
-		IMenuManager submenuManager = new MenuManager(TrackerEditorPlugin.INSTANCE.getString("_UI_EXTLibraryEditor_menu"), "com.verticon.tracker.transaction.TrackerMenuID"); //$NON-NLS-1$ //$NON-NLS-2$
+		IMenuManager submenuManager = new MenuManager(TransactionEditorPlugin.INSTANCE.getString("_UI_EXTLibraryEditor_menu"), "com.verticon.tracker.transaction.TrackerMenuID"); //$NON-NLS-1$ //$NON-NLS-2$
 		menuManager.insertAfter("additions", submenuManager); //$NON-NLS-1$
 		submenuManager.add(new Separator("settings")); //$NON-NLS-1$
 		submenuManager.add(new Separator("actions")); //$NON-NLS-1$
@@ -209,12 +210,12 @@ public class TrackerActionBarContributor
 
 		// Prepare for CreateChild item addition or removal.
 		//
-		createChildMenuManager = new MenuManager(TrackerEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item")); //$NON-NLS-1$
+		createChildMenuManager = new MenuManager(TransactionEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item")); //$NON-NLS-1$
 		submenuManager.insertBefore("additions", createChildMenuManager); //$NON-NLS-1$
 
 		// Prepare for CreateSibling item addition or removal.
 		//
-		createSiblingMenuManager = new MenuManager(TrackerEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item")); //$NON-NLS-1$
+		createSiblingMenuManager = new MenuManager(TransactionEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item")); //$NON-NLS-1$
 		submenuManager.insertBefore("additions", createSiblingMenuManager); //$NON-NLS-1$
 
 		// Force an update because Eclipse hides empty menus now.
@@ -415,11 +416,11 @@ public class TrackerActionBarContributor
 		super.menuAboutToShow(menuManager);
 		MenuManager submenuManager = null;
 
-		submenuManager = new MenuManager(TrackerEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item")); //$NON-NLS-1$
+		submenuManager = new MenuManager(TransactionEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item")); //$NON-NLS-1$
 		populateManager(submenuManager, createChildActions, null);
 		menuManager.insertBefore("additions", submenuManager); //$NON-NLS-1$
 
-		submenuManager = new MenuManager(TrackerEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item")); //$NON-NLS-1$
+		submenuManager = new MenuManager(TransactionEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item")); //$NON-NLS-1$
 		populateManager(submenuManager, createSiblingActions, null);
 		menuManager.insertBefore("additions", submenuManager); //$NON-NLS-1$
 	}

@@ -72,8 +72,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
+	 * Added tracker specific Logging versus ECorePlugIn
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public static TrackerFactory init() {
 		try {
@@ -83,7 +84,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			}
 		}
 		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
+			TrackerLog.logError(exception);
 		}
 		return new TrackerFactoryImpl();
 	}

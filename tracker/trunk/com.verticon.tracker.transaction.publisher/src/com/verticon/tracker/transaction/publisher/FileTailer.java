@@ -37,6 +37,7 @@ import com.verticon.tracker.transaction.publisher.preferences.PreferenceConstant
 public class FileTailer extends AbstractModelObject implements
 		IPublisher, IResourceChangeListener {
 
+	private static final String CONSOLE = FileTailer.class.getSimpleName();
 	private Preferences prefs = PublisherPlugin.getDefault()
 	.getPluginPreferences();
 	
@@ -71,7 +72,7 @@ public class FileTailer extends AbstractModelObject implements
 			try {
 				start();
 			} catch (IOException e) {
-				logWithName("Failed to start because: " + e);
+				printToConsoleWithName("Failed to start because: " + e);
 				return;
 			}
 		}else{
@@ -158,7 +159,7 @@ public class FileTailer extends AbstractModelObject implements
 	 */
 	private void start() throws IOException {
 		if (transactionPublisher != null) {
-			logWithName("Already Started ");
+			printToConsoleWithName("Already Started ");
 		} else if (transactionPublisher == null) {
 			IFile templateFile = getTemplateFile();
 			
@@ -172,7 +173,7 @@ public class FileTailer extends AbstractModelObject implements
 			exec.scheduleWithFixedDelay(command, 4, 
 					prefs.getInt(PreferenceConstants.P_READ_INTERVAL), 
 					TimeUnit.SECONDS);
-			logWithName(
+			printToConsoleWithName(
 					"Started monitoring "+target+" at "+
 					prefs.getInt(PreferenceConstants.P_READ_INTERVAL)+" second intervals.");
 		}
@@ -215,7 +216,7 @@ public class FileTailer extends AbstractModelObject implements
 		if (exec != null) {
 			exec.shutdownNow();
 			exec = null;
-			logWithName("Stopped ");
+			printToConsoleWithName("Stopped ");
 		}
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		workspace.removeResourceChangeListener(this);
@@ -223,7 +224,7 @@ public class FileTailer extends AbstractModelObject implements
 
 	private void reset() {
 		if (isRunning()) {
-			logWithName("ReStarting");
+			printToConsoleWithName("ReStarting");
 			setStarted(false);
 			setStarted(true);
 		} 
@@ -233,13 +234,13 @@ public class FileTailer extends AbstractModelObject implements
 		return transactionPublisher != null;
 	}
 
-	private static void log(String msg) {
-		ConsoleUtil.println(FileTailer.class.getSimpleName(), new Date()
+	private static void printToConsole(String msg) {
+		ConsoleUtil.println(CONSOLE, new Date()
 				+ "\t" + msg);
 	}
 	
-	private void logWithName(String msg) {
-		log(name+'\t'+msg);
+	private void printToConsoleWithName(String msg) {
+		printToConsole(name+'\t'+msg);
 	}
 
 	/**
@@ -264,7 +265,7 @@ public class FileTailer extends AbstractModelObject implements
 			try {
 				transactionPublisher.init();
 			} catch (IOException e) {
-				logWithName(e.getMessage());
+				printToConsoleWithName(e.getMessage());
 			}
 		}
 		

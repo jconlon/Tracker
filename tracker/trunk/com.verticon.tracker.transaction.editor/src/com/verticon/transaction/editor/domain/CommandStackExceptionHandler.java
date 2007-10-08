@@ -25,8 +25,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
+import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
 import com.verticon.transaction.editor.internal.l10n.Messages;
-import com.verticon.transaction.editor.presentation.TrackerEditorPlugin;
 
 /**
  * An exception handler for the shared editing domain's command stack, that
@@ -63,7 +63,7 @@ public class CommandStackExceptionHandler implements ExceptionHandler {
 							Messages.cmdException,
 							new Status(
 									IStatus.ERROR,
-									TrackerEditorPlugin.getPlugin().getSymbolicName(),
+									TransactionEditorPlugin.getPlugin().getSymbolicName(),
 									1,
 									e.getLocalizedMessage(),
 									e));
