@@ -40,6 +40,7 @@ public class FileTailRunner implements Runnable {
 	public FileTailRunner(TransactionPublisher transactionProcessor, IFile file) {
 		this.transactionPublisher=transactionProcessor;
 		this.file=new File(file.getLocationURI());
+		TrackerLog.logInfo("Created FileTailRunner");
 	}
 
 	

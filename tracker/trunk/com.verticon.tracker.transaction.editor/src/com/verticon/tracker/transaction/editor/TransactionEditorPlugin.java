@@ -4,7 +4,7 @@
  *
  * $Id: EXTLibraryEditorPlugin.java,v 1.1 2006/01/30 16:30:09 cdamus Exp $
  */
-package com.verticon.transaction.editor.presentation;
+package com.verticon.tracker.transaction.editor;
 
 import org.eclipse.emf.common.EMFPlugin;
 
@@ -18,14 +18,14 @@ import org.eclipse.emf.common.util.ResourceLocator;
  * <!-- end-user-doc -->
  * @generated
  */
-public final class TrackerEditorPlugin extends EMFPlugin {
+public final class TransactionEditorPlugin extends EMFPlugin {
 	/**
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final TrackerEditorPlugin INSTANCE = new TrackerEditorPlugin();
+	public static final TransactionEditorPlugin INSTANCE = new TransactionEditorPlugin();
 
 	/**
 	 * Keep track of the singleton.
@@ -41,7 +41,7 @@ public final class TrackerEditorPlugin extends EMFPlugin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TrackerEditorPlugin() {
+	public TransactionEditorPlugin() {
 		super
 		  (new ResourceLocator [] {
 		   });

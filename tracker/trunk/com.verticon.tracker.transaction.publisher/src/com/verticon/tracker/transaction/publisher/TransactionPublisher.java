@@ -28,6 +28,7 @@ import com.verticon.tracker.util.CommonUtilities;
 
 public class TransactionPublisher {
 
+	private static final String CONSOLE = TransactionPublisher.class.getSimpleName();
 	private final TransactionalEditingDomain domain = 
 		TransactionalEditingDomain.Registry.INSTANCE
 			.getEditingDomain("com.verticon.transaction.editor.TrackerEditingDomain");
@@ -63,7 +64,7 @@ public class TransactionPublisher {
 	 * @throws IOException
 	 */
 	  void init() throws IOException {
-		log(new Date() + "\tSynchronizing contents of Template file: "
+		printToConsole(new Date() + "\tSynchronizing contents of Template file: "
 				+ animalTemplateFile.getName());
 		Resource templateResource = getResource(animalTemplateFile);
 		if (templateResource.getContents().isEmpty()) {
@@ -103,15 +104,15 @@ public class TransactionPublisher {
 		EList<Resource> resources = rs.getResources();
 		for (Resource resource : resources) {
 			if (resources.size() > 1) {
-				log(new Date() + "\tprocessing " + resource.toString());
+				printToConsole(new Date() + "\tprocessing " + resource.toString());
 			}
 			process(resource, tag);
 
 		}
 	}
 
-	private void log(String msg) {
-		ConsoleUtil.println(TransactionPublisher.class.getSimpleName(), msg);
+	private void printToConsole(String msg) {
+		ConsoleUtil.println(CONSOLE, msg);
 	}
 
 	private void process(final Resource resource, final Long tag) {
@@ -127,7 +128,7 @@ public class TransactionPublisher {
 					addTemplateEventsToAnimalInPremises(templateAnimal
 							.allEvents(), tag, premises);
 				} else {
-					log(new Date()
+					printToConsole(new Date()
 							+ "\tResource contained no premises to process");
 				}
 			}
@@ -151,7 +152,7 @@ public class TransactionPublisher {
 				activePremises, templateAnimal);
 		Collection<Event> events = copyValidEvents(templateEvents, animal);
 		for (Event event : events) {
-			log(event.getDateTime() + "\t" + animal.getId() + '\t'
+			printToConsole(event.getDateTime() + "\t" + animal.getId() + '\t'
 					+ animal.getSpecies() + '\t' + simpleName(event));
 			Tag tag = animal.activeTag();
 			// If the animal was created from the template, because it did not

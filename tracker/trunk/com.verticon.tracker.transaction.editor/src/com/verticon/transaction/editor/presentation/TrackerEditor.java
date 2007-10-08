@@ -116,6 +116,7 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.presentation.EventSorter;
+import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
 
 
 /**
@@ -474,7 +475,7 @@ public class TrackerEditor
 					try {
 						res.load(Collections.EMPTY_MAP);
 					} catch (IOException exception) {
-						TrackerEditorPlugin.INSTANCE.log(exception);
+						TransactionEditorPlugin.INSTANCE.log(exception);
 					}
 				}
 	
@@ -541,7 +542,7 @@ public class TrackerEditor
 				"com.verticon.transaction.editor.TrackerEditingDomain"); //$NON-NLS-1$
 		undoContext = new ObjectUndoContext(
 				this,
-				TrackerEditorPlugin.getPlugin().getString("_UI_EXTLibraryEditor_label")); //$NON-NLS-1$
+				TransactionEditorPlugin.getPlugin().getString("_UI_EXTLibraryEditor_label")); //$NON-NLS-1$
 		getOperationHistory().addOperationHistoryListener(historyListener);
 	}
 
@@ -721,7 +722,7 @@ public class TrackerEditor
 					modelFile.getFile().getFullPath().toString(), true).toString());
 		}
 		catch (Exception exception) {
-			TrackerEditorPlugin.INSTANCE.log(exception);
+			TransactionEditorPlugin.INSTANCE.log(exception);
 		}
 	}
 	
@@ -1203,12 +1204,12 @@ public class TrackerEditor
 									savedResource.save(Collections.EMPTY_MAP);
 								}
 								catch (Exception exception) {
-									TrackerEditorPlugin.INSTANCE.log(exception);
+									TransactionEditorPlugin.INSTANCE.log(exception);
 								}
 							}});
 					}
 					catch (Exception exception) {
-						TrackerEditorPlugin.INSTANCE.log(exception);
+						TransactionEditorPlugin.INSTANCE.log(exception);
 					}
 				}
 			};
@@ -1225,8 +1226,7 @@ public class TrackerEditor
 		}
 		catch (Exception exception) {
 			// Something went wrong that shouldn't.
-			//
-			TrackerEditorPlugin.INSTANCE.log(exception);
+			TransactionEditorPlugin.INSTANCE.log(exception);
 		}
 	}
 
@@ -1274,8 +1274,7 @@ public class TrackerEditor
 					setPartName(editorInput.getName());
 				}});
 		} catch (InterruptedException e) {
-			// just log it
-			TrackerEditorPlugin.INSTANCE.log(e);
+			TransactionEditorPlugin.INSTANCE.log(e);
 			
 			// don't follow through with the save because we were interrupted while
 			//    trying to start the transaction, so our URI is not actually changed
@@ -1308,14 +1307,13 @@ public class TrackerEditor
 								}
 							}});
 					} catch (InterruptedException e) {
-						// just log it
-						TrackerEditorPlugin.INSTANCE.log(e);
+						TransactionEditorPlugin.INSTANCE.log(e);
 					}
 				}
 			}
 		}
 		catch (CoreException exception) {
-			TrackerEditorPlugin.INSTANCE.log(exception);
+			TransactionEditorPlugin.INSTANCE.log(exception);
 		}
 	}
 
@@ -1432,7 +1430,7 @@ public class TrackerEditor
 	 * @generated
 	 */
 	private static String getString(String key) {
-		return TrackerEditorPlugin.INSTANCE.getString(key);
+		return TransactionEditorPlugin.INSTANCE.getString(key);
 	}
 
 	/**
@@ -1442,7 +1440,7 @@ public class TrackerEditor
 	 * @generated
 	 */
 	private static String getString(String key, Object s1) {
-		return TrackerEditorPlugin.INSTANCE.getString(key, new Object [] { s1 });
+		return TransactionEditorPlugin.INSTANCE.getString(key, new Object [] { s1 });
 	}
 
 	/**
