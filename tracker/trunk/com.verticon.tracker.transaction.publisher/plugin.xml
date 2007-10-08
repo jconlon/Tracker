@@ -32,7 +32,7 @@
          point="org.eclipse.ui.preferencePages">
       <page
             category="com.verticon.tracker.prefs.view"
-            class="com.verticon.tracker.transaction.publisher.preferences.FileTailPublisherPreferencePage"
+            class="com.verticon.tracker.transaction.publisher.preferences.PublisherPreferencePage"
             id="com.verticon.tracker.transaction.publisher.preferences.SerialPortPublisherPreferencePage"
             name="Event Publisher"/>
    </extension>

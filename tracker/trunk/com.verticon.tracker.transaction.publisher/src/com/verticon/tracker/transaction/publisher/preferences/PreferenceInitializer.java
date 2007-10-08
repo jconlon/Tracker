@@ -18,6 +18,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	public void initializeDefaultPreferences() {
 		Preferences store = PublisherPlugin.getDefault().getPluginPreferences();
 		store.setDefault(PreferenceConstants.P_READ_INTERVAL, 1);
+		store.setDefault(PreferenceConstants.P_SPREAD_INTERVAL, 1);
 	}
 
 }
