@@ -2116,6 +2116,7 @@ public class TrackerEditor
 		}
 		catch (Exception exception) {
 			// Something went wrong that shouldn't.
+			//
 			TrackerReportEditorPlugin.INSTANCE.log(exception);
 		}
 		updateProblemIndication = true;
