@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="com.verticon.tracker.ocl.validation"
-      label="Tracker Vernon County Fair Model Validator"
+      id="com.verticon.tracker.validation.core"
+      label="Tracker Model Validation"
       version="1.0.0"
       provider-name="Verticon, Inc."
-      plugin="com.verticon.tracker.ocl.validation">
+      plugin="com.verticon.tracker.validation.core">
 
    <description>
-Tracker Vernon County Fair Model Validator, adds Business rules to Tracker data models that specify the data combinations that are required for valid Vernon County Fair Tracker Premises documents.
+      Tracker Model Validation, adds Business rules
+to Premises data models to insure the creation and interexchange of valid Premises documents.
    </description>
 
    <copyright>
@@ -300,8 +301,6 @@ POSSIBILITY OF SUCH DAMAGES.
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.validation"/>
-      <import plugin="org.eclipse.core.runtime" version="3.2.0" match="compatible"/>
       <import plugin="org.eclipse.core.expressions" version="3.2.0" match="compatible"/>
       <import plugin="org.eclipse.ui" version="3.2.0" match="compatible"/>
       <import plugin="com.verticon.tracker"/>
@@ -309,17 +308,24 @@ POSSIBILITY OF SUCH DAMAGES.
    </requires>
 
    <plugin
-         id="com.verticon.tracker.ocl.validation"
-         download-size="0"
-         install-size="0"
-         version="1.0.0"
-         unpack="false"/>
-
-   <plugin
          id="com.verticon.tracker.validation.adapter"
          download-size="0"
          install-size="0"
-         version="1.0.0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.validation.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.validation.vernoncounty"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>
