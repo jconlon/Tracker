@@ -540,6 +540,7 @@ public class TrackerEditor
 		//
 		editingDomain = (AdapterFactoryEditingDomain) TransactionalEditingDomain.Registry.INSTANCE.getEditingDomain(
 				"com.verticon.transaction.editor.TrackerEditingDomain"); //$NON-NLS-1$
+		editingDomain.getResourceSet().getAdapterFactories().add(adapterFactory);
 		undoContext = new ObjectUndoContext(
 				this,
 				TransactionEditorPlugin.getPlugin().getString("_UI_EXTLibraryEditor_label")); //$NON-NLS-1$

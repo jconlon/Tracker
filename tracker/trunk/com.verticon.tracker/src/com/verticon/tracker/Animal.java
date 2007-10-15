@@ -37,8 +37,6 @@ import com.verticon.tracker.util.Age;
  *
  * @see com.verticon.tracker.TrackerPackage#getAnimal()
  * @model abstract="true"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='Can_be_Slaughtered_only_once Must_have_TagApplied_or_MovedIn'"
- *        annotation="http://www.eclipse.org/ocl/examples/OCL Can_be_Slaughtered_only_once='-- An animal can only be slaughter once -- \nself.allEvents() -> select(e : Event | e.oclIsTypeOf(Slaughtered) ) ->size()<2' Must_have_TagApplied_or_MovedIn='-- An animal must have a TagApplied or a MovedIn event -- \nself.allEvents() -> select(e : Event | e.oclIsTypeOf(TagApplied) or e.oclIsTypeOf(MovedIn)  ) ->notEmpty()'"
  * @generated
  */
 public interface Animal extends EObject {
