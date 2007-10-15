@@ -6,6 +6,7 @@ package com.verticon.tracker.util;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BovineBeef;
@@ -92,9 +93,10 @@ public class AgeTest extends TestCase {
 	
 	/**
 	 * Test method for {@link com.verticon.tracker.util.Age#getMonths()}.
+	 * FIXME or FIX AGE
 	 */
 	public void testGetMonths() {
-		Calendar someBirthday = Calendar.getInstance();
+		Calendar someBirthday = Calendar.getInstance(Locale.getDefault());
 		someBirthday.add(Calendar.MONTH, -9);
 		instance=new Age(someBirthday.getTime());
 		assertEquals(getMessage(
