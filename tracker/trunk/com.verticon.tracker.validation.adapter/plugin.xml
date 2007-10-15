@@ -18,23 +18,6 @@
       </propertyTester>
    </extension>
    
-   <!-- Bind the contraints catagory using the PropertyTester above -->
-   <extension point="org.eclipse.emf.validation.constraintBindings">
-      <clientContext id="com.verticon.tracker.validation.adapter">
-         <enablement>
-            <and>
-               <instanceof value="org.eclipse.emf.ecore.EObject"/>
-               <test
-                  property="com.verticon.tracker.validation.adapter.ePackage"
-                  value="http://www.verticon.com/ns/tracker/1.0"/>
-            </and>
-         </enablement>
-      </clientContext>
-      
-      <binding
-         context="com.verticon.tracker.validation.adapter"
-         category="tracker-emf-validation"/>
-   </extension>
    
    
 </plugin>

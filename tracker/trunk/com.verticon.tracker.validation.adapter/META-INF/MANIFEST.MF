@@ -2,16 +2,14 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Plugin.name
 Bundle-SymbolicName: com.verticon.tracker.validation.adapter;singleton:=true
-Bundle-Version: 1.0.0
-Bundle-Activator: com.verticon.tracker.validation.adapter.ValidationExamplePlugin
+Bundle-Version: 0.1.0
+Bundle-Activator: com.verticon.tracker.validation.adapter.ValidationAdapterPlugin
 Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
-Export-Package: com.verticon.tracker.validation.adapter,
- com.verticon.tracker.validation.adapter.constraints,
- com.verticon.tracker.validation.adapter.expressions
+Export-Package: com.verticon.tracker.validation.adapter.expressions
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.core.expressions;bundle-version="[3.2.0,4.0.0)",
- org.eclipse.ui;bundle-version="[3.2.0,4.0.0)",
- com.verticon.tracker,
- org.eclipse.emf.validation;bundle-version="[1.0.0,2.0.0)"
+ org.eclipse.emf.validation;bundle-version="[1.0.0,2.0.0)",
+ org.eclipse.ui;bundle-version="[3.2.0,4.0.0)"
 Eclipse-LazyStart: true
+Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)"

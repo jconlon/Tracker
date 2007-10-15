@@ -17,21 +17,21 @@
 
 package com.verticon.tracker.validation.adapter;
 
-import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 /**
  * The main plugin class to be used in the desktop.
  */
-public class ValidationExamplePlugin extends AbstractUIPlugin {
+public class ValidationAdapterPlugin extends Plugin {
 
 	//The shared instance.
-	private static ValidationExamplePlugin plugin;
+	private static ValidationAdapterPlugin plugin;
 
 	/**
 	 * The constructor.
 	 */
-	public ValidationExamplePlugin() {
+	public ValidationAdapterPlugin() {
 		super();
 		plugin = this;
 	}
@@ -41,6 +41,7 @@ public class ValidationExamplePlugin extends AbstractUIPlugin {
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+		
 	}
 
 	/**
@@ -53,7 +54,7 @@ public class ValidationExamplePlugin extends AbstractUIPlugin {
 	/**
 	 * Returns the shared instance.
 	 */
-	public static ValidationExamplePlugin getDefault() {
+	public static ValidationAdapterPlugin getDefault() {
 		return plugin;
 	}
 }

@@ -20,8 +20,7 @@ package com.verticon.tracker;
  * </p>
  *
  * @see com.verticon.tracker.TrackerPackage#getMovedOut()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='DestinationPin_can_not_be_same_as_the_local_premisesId'"
- *        annotation="http://www.eclipse.org/ocl/examples/OCL DestinationPin_can_not_be_same_as_the_local_premisesId='-- The MovedOut destinationPin can not be the same as the local premisesId. --\nPremises.allInstances() -> select(premisesId=self.destinationPin) -> isEmpty()'"
+ * @model
  * @generated
  */
 public interface MovedOut extends Event {
