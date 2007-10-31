@@ -9,7 +9,7 @@ package com.verticon.tracker.validation;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.Tag;
 
-import com.verticon.tracker.util.Age;
+import com.verticon.tracker.util.CalendarDateDuration;
 
 import java.util.Date;
 
@@ -30,7 +30,7 @@ public interface AnimalValidator {
 	boolean validateSpecies(String value);
 	boolean validateIdNumber(long value);
 	boolean validateBreed(String value);
-	boolean validateAge(Age value);
+	boolean validateAge(CalendarDateDuration value);
 	boolean validateSexCode(String value);
 	boolean validateSpeciesCode(String value);
 

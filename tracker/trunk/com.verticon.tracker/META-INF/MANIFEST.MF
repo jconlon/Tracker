@@ -7,7 +7,8 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: com.verticon.tracker;version="0.1.0",
  com.verticon.tracker.impl;version="0.1.0",
- com.verticon.tracker.util;version="0.1.0"
+ com.verticon.tracker.util;version="0.1.0",
+ net.sourceforge.calendardate
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.ocl.ecore
