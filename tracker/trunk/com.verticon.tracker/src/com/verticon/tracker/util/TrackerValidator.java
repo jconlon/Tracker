@@ -215,7 +215,7 @@ public class TrackerValidator extends EObjectValidator {
 			case TrackerPackage.DATE_TIME:
 				return validateDateTime((Date)value, diagnostics, context);
 			case TrackerPackage.AGE:
-				return validateAge((Age)value, diagnostics, context);
+				return validateAge((CalendarDateDuration)value, diagnostics, context);
 			case TrackerPackage.US_PHONE_NUMBER:
 				return validateUSPhoneNumber((String)value, diagnostics, context);
 			default: 
@@ -643,7 +643,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAge(Age age, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateAge(CalendarDateDuration age, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

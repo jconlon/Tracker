@@ -1,0 +1,133 @@
+/**
+ * 
+ */
+package com.verticon.tracker.util;
+
+import net.sourceforge.calendardate.CalendarDate;
+
+/**
+ * Immutable Data Container that specifies the time between two
+ * CalendarDate objects.
+ * 
+ * @author jconlon
+ *
+ */
+public class CalendarDateDuration {
+	private final int totalDays;
+	private final int totalMonths;
+	private final int totalYears;
+	private final int monthsPart;
+	private final int daysPart;
+	private final Type type;
+	
+	
+	public enum Type{FUTURE,PAST}
+	
+	
+	public CalendarDateDuration(CalendarDate date1, CalendarDate date2){
+		CalendarDate startDate;
+		CalendarDate finishDate;
+		
+		if(date1.isBefore(date2)){
+			type=Type.FUTURE;
+			startDate=date1;
+			finishDate=date2;
+		}else{
+			type=Type.PAST;
+			startDate=date2;
+			finishDate=date1;
+		}
+		this.totalDays= startDate.daysUntil(finishDate);
+		this.totalMonths= startDate.monthsUntil(finishDate);
+		this.totalYears=initYears(startDate,  finishDate);
+		this.monthsPart=initMonths(startDate,  finishDate);
+		this.daysPart=initDays(startDate,  finishDate);
+	}
+	
+	private int initYears(CalendarDate startDate, CalendarDate finishDate){
+		return totalMonths<12 ?
+				0:
+					startDate.getMonth()>finishDate.getMonth()?
+						(finishDate.getYear() - startDate.getYear()) -1:
+						finishDate.getYear() - startDate.getYear();
+	}
+	
+	private int initMonths(CalendarDate startDate, CalendarDate finishDate){
+		return totalMonths % 12;
+	}
+	
+	private int initDays(CalendarDate startDate, CalendarDate finishDate){
+		int days = totalDays;
+		CalendarDate d = new CalendarDate(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth());
+		for (int i = 0; i < totalMonths; i++) {
+			days = days - CalendarDate.daysInMonth(d.getYear(), d.getMonth());
+			d=d.addMonths(1);
+		}
+        return days;
+	}
+
+	public int getTotalDays() {
+		return totalDays;
+	}
+
+	public int getTotalMonths() {
+		return totalMonths;
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public int getTotalYears() {
+		return totalYears;
+	}
+
+	public int getMonthsPart() {
+		return monthsPart;
+	}
+
+	public int getDaysPart() {
+		return daysPart;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuffer buf = new StringBuffer();
+		buf.append(type == Type.FUTURE ? '+' : '-');
+		if (totalYears != 0) {
+			String yearsString = Integer.toString(totalYears);
+			buf.append(yearsString.length() == 1 ? "Y0" + yearsString
+					: 'Y' + yearsString);
+		}
+		if (monthsPart != 0) {
+			String monthsString = Integer.toString(monthsPart);
+			buf.append(monthsString.length() == 1 ? "M0" + monthsString
+					: 'M' + monthsString);
+		}
+		String daysString = Integer.toString(daysPart);
+		buf.append(daysString.length() == 1 ? "D0" + daysString
+				: 'D' + daysString);
+		return buf.toString();
+	}
+
+	public String toRoundedString() {
+			if(getTotalYears()!=0){
+				String yearsString = Integer.toString(getTotalYears());
+				return yearsString.length()==1?"Y0"+yearsString:'Y'+yearsString;
+			}else if(totalMonths!=0){
+				String monthsString = Integer.toString(totalMonths);
+				return monthsString.length()==1?"M0"+monthsString:'M'+monthsString;
+			}
+			String daysString = Integer.toString(totalDays);
+			return daysString.length()==1?"D0"+daysString:'D'+daysString;
+		}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof CalendarDateDuration) {
+			return this.getTotalDays()==((CalendarDateDuration)obj).getTotalDays();
+		}
+		return false;
+	}
+}
+

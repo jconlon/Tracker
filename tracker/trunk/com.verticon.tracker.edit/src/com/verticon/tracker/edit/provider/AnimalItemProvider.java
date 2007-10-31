@@ -473,9 +473,7 @@ public class AnimalItemProvider
 	    		return null;
 	    	case 7: 
 	    		if(animal.getAge()!=null){
-	    			return animal.getAge().getYears() + " years, "
-					+ animal.getAge().getMonths() + " month, " + animal.getAge().getDays()
-					+ " days " + animal.getAge().getStatus();
+	    			return animal.getAge().toString();
 	    		}
 	    		return null;
 	    	case 8:
