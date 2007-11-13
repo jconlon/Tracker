@@ -114,6 +114,24 @@ public interface TrackerFactory extends EFactory {
 	Swine createSwine();
 
 	/**
+	 * Returns a new object of class '<em>Equine</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Equine</em>'.
+	 * @generated
+	 */
+	Equine createEquine();
+
+	/**
+	 * Returns a new object of class '<em>Caprine</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Caprine</em>'.
+	 * @generated
+	 */
+	Caprine createCaprine();
+
+	/**
 	 * Returns a new object of class '<em>Premises</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

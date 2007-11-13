@@ -208,6 +208,14 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 				return createSwineAdapter();
 			}
 			@Override
+			public Adapter caseEquine(Equine object) {
+				return createEquineAdapter();
+			}
+			@Override
+			public Adapter caseCaprine(Caprine object) {
+				return createCaprineAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -392,6 +400,34 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSwineAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.Equine <em>Equine</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.Equine
+	 * @generated
+	 */
+	public Adapter createEquineAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.Caprine <em>Caprine</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.Caprine
+	 * @generated
+	 */
+	public Adapter createCaprineAdapter() {
 		return null;
 	}
 

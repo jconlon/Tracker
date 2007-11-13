@@ -130,6 +130,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.FAIR_REGISTRATION: return createFairRegistration();
 			case TrackerPackage.WEIGH_IN: return createWeighIn();
 			case TrackerPackage.SWINE: return createSwine();
+			case TrackerPackage.EQUINE: return createEquine();
+			case TrackerPackage.CAPRINE: return createCaprine();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -155,6 +157,10 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createDairyBreedFromString(eDataType, initialValue);
 			case TrackerPackage.SWINE_BREED:
 				return createSwineBreedFromString(eDataType, initialValue);
+			case TrackerPackage.HORSE_BREED:
+				return createHorseBreedFromString(eDataType, initialValue);
+			case TrackerPackage.GOAT_BREED:
+				return createGoatBreedFromString(eDataType, initialValue);
 			case TrackerPackage.DATE:
 				return createDateFromString(eDataType, initialValue);
 			case TrackerPackage.ANIMIAL_ID_NUMBER:
@@ -194,6 +200,10 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return convertDairyBreedToString(eDataType, instanceValue);
 			case TrackerPackage.SWINE_BREED:
 				return convertSwineBreedToString(eDataType, instanceValue);
+			case TrackerPackage.HORSE_BREED:
+				return convertHorseBreedToString(eDataType, instanceValue);
+			case TrackerPackage.GOAT_BREED:
+				return convertGoatBreedToString(eDataType, instanceValue);
 			case TrackerPackage.DATE:
 				return convertDateToString(eDataType, instanceValue);
 			case TrackerPackage.ANIMIAL_ID_NUMBER:
@@ -301,6 +311,26 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public Swine createSwine() {
 		SwineImpl swine = new SwineImpl();
 		return swine;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Equine createEquine() {
+		EquineImpl equine = new EquineImpl();
+		return equine;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Caprine createCaprine() {
+		CaprineImpl caprine = new CaprineImpl();
+		return caprine;
 	}
 
 	/**
@@ -560,6 +590,46 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * @generated
 	 */
 	public String convertSwineBreedToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public HorseBreed createHorseBreedFromString(EDataType eDataType, String initialValue) {
+		HorseBreed result = HorseBreed.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertHorseBreedToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GoatBreed createGoatBreedFromString(EDataType eDataType, String initialValue) {
+		GoatBreed result = GoatBreed.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertGoatBreedToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
