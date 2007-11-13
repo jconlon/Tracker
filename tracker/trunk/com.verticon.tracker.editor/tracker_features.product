@@ -39,7 +39,6 @@ that can be installed and used with other Eclipse (3.3)-based offerings.
       </win>
    </launcher>
 
-
    <vm>
    </vm>
 
@@ -118,6 +117,7 @@ that can be installed and used with other Eclipse (3.3)-based offerings.
       <feature id="org.eclipse.emf.ocl.doc" version="1.1.0.v200706071450-10-7w311817182561"/>
       <feature id="org.eclipse.emf.workspace" version="1.1.1.v200707252036-208Z8s733G3F5E6_8B"/>
       <feature id="org.eclipse.emf.workspace.doc" version="1.1.0.v200706071723-10-7w311817182834"/>
+      <feature id="com.verticon.tracker.fair.feature" version="0.1.0"/>
    </features>
 
 </product>
