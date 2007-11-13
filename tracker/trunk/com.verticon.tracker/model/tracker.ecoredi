@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_smKWUDo3Edyw6--mXqZ7vg" activeDiagram="_smKWUTo3Edyw6--mXqZ7vg">
   <model href="tracker.ecore#/"/>
-  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="80,80">
+  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="378,595">
     <property xmi:id="_smKWUjo3Edyw6--mXqZ7vg" key="pageFormatName" value="A2"/>
     <property xmi:id="_smKWUzo3Edyw6--mXqZ7vg" key="diagramWidth" value="1680"/>
     <property xmi:id="_smKWVDo3Edyw6--mXqZ7vg" key="diagramHeight" value="2376"/>
@@ -15,7 +15,7 @@
       <element href="tracker.ecore#/"/>
     </semanticModel>
     <contained xsi:type="di:GraphNode" xmi:id="_smK9YDo3Edyw6--mXqZ7vg" position="802,305" size="216,-1">
-      <anchorage xmi:id="_smK9YTo3Edyw6--mXqZ7vg" graphEdge="_smftgzo3Edyw6--mXqZ7vg _smfthzo3Edyw6--mXqZ7vg _smftjTo3Edyw6--mXqZ7vg _smrTtDo3Edyw6--mXqZ7vg _WJ68UTpDEdyBGbgn02HOBA"/>
+      <anchorage xmi:id="_smK9YTo3Edyw6--mXqZ7vg" graphEdge="_smftgzo3Edyw6--mXqZ7vg _smfthzo3Edyw6--mXqZ7vg _smftjTo3Edyw6--mXqZ7vg _smrTtDo3Edyw6--mXqZ7vg _WJ68UTpDEdyBGbgn02HOBA _7ARVoJH-EdyNi8UsPKraBA _liZlMJIGEdyNi8UsPKraBA"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smK9Yjo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//Animal"/>
       </semanticModel>
@@ -171,7 +171,7 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_smMykzo3Edyw6--mXqZ7vg" position="239,590" size="73,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_smMykzo3Edyw6--mXqZ7vg" position="246,648" size="73,-1">
       <anchorage xmi:id="_smMylDo3Edyw6--mXqZ7vg" graphEdge="_smfthzo3Edyw6--mXqZ7vg _smgUlTo3Edyw6--mXqZ7vg _smgUlzo3Edyw6--mXqZ7vg _smgUmTo3Edyw6--mXqZ7vg"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smMylTo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//Bovine"/>
@@ -344,7 +344,7 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_smPO4Do3Edyw6--mXqZ7vg" position="1960,30" size="128,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_smPO4Do3Edyw6--mXqZ7vg" position="1960,30" size="109,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smPO4To3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//SheepBreed"/>
       </semanticModel>
@@ -625,7 +625,7 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_smUHUDo3Edyw6--mXqZ7vg" position="158,742" size="168,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_smUHUDo3Edyw6--mXqZ7vg" position="162,767" size="168,-1">
       <anchorage xmi:id="_smUHUTo3Edyw6--mXqZ7vg" graphEdge="_smgUlTo3Edyw6--mXqZ7vg"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smUHUjo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//BovineBeef"/>
@@ -1368,7 +1368,7 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_smfGcjo3Edyw6--mXqZ7vg" position="251,800" size="188,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_smfGcjo3Edyw6--mXqZ7vg" position="255,825" size="188,-1">
       <anchorage xmi:id="_smfGczo3Edyw6--mXqZ7vg" graphEdge="_smgUlzo3Edyw6--mXqZ7vg"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smfGdDo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//BovineBison"/>
@@ -1391,7 +1391,7 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_smfGfTo3Edyw6--mXqZ7vg" position="372,876" size="175,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_smfGfTo3Edyw6--mXqZ7vg" position="376,901" size="175,-1">
       <anchorage xmi:id="_smfGfjo3Edyw6--mXqZ7vg" graphEdge="_smgUmTo3Edyw6--mXqZ7vg"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smfGfzo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//BovineDairy"/>
@@ -1423,6 +1423,8 @@
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_smfthzo3Edyw6--mXqZ7vg" anchor="_smMylDo3Edyw6--mXqZ7vg _smK9YTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_smftiDo3Edyw6--mXqZ7vg" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, -59, -628, 168]</waypoints>
+      <waypoints>[628, -59, 0, 168]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_smftjTo3Edyw6--mXqZ7vg" anchor="_smUHXDo3Edyw6--mXqZ7vg _smK9YTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_smgUkDo3Edyw6--mXqZ7vg" presentation="default" typeInfo="Inheritance"/>
@@ -1919,7 +1921,7 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_smqsqjo3Edyw6--mXqZ7vg" position="560,673" size="174,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_smqsqjo3Edyw6--mXqZ7vg" position="495,677" size="199,-1">
       <anchorage xmi:id="_smqsqzo3Edyw6--mXqZ7vg" graphEdge="_smrTtDo3Edyw6--mXqZ7vg"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smqsrDo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//Swine"/>
@@ -1972,6 +1974,477 @@
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_zKFf4jpDEdyBGbgn02HOBA" id="nameLabel" uDistance="20" vDistance="20"/>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_zKFf4zpDEdyBGbgn02HOBA" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_lINjAI8mEdyY86_7FW6jTA" position="2092,30" size="111,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_lINjAY8mEdyY86_7FW6jTA" presentation="default">
+        <element href="tracker.ecore#//HorseBreed"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_lINjAo8mEdyY86_7FW6jTA">
+        <property xmi:id="_lINjA48mEdyY86_7FW6jTA" key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_lINjBI8mEdyY86_7FW6jTA" presentation="default">
+          <element href="tracker.ecore#//HorseBreed"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_xuef8I8mEdyY86_7FW6jTA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_xuef8Y8mEdyY86_7FW6jTA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/AC"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_6kSqEo8mEdyY86_7FW6jTA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_6kSqE48mEdyY86_7FW6jTA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/AS"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_K4xlMo8nEdyY86_7FW6jTA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_K4xlM48nEdyY86_7FW6jTA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/AA"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCqjUJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCqjUZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/AO"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCqjUpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCqjU5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/NO"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCqjVJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCqjVZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/AP"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCqjVpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCqjV5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/AD"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCqjWJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCqjWZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/BW"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCqjWpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCqjW5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/BY"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCqjXJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCqjXZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/BU"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCqjXpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCqjX5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/CI"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCqjYJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCqjYZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/FC"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCqjYpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCqjY5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/CV"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCqjZJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCqjZZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/CY"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCqjZpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCqjZ5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/CM"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCqjaJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCqjaZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/DT"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCqjapH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCqja5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/DW"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKYJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKYZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/EX"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKYpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKY5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/FE"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKZJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKZZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/FJ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKZpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKZ5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/FH"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKaJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKaZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/FR"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKapH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKa5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/GL"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKbJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKbZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/WG"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKbpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKb5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/HN"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKcJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKcZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/HK"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKcpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKc5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/HF"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKdJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKdZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/HV"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKdpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKd5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/HG"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKeJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKeZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/HT"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKepH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKe5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/HW"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKfJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKfZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/HU"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKfpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKf5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/IC"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKgJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKgZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/LZ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrKgpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrKg5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/MU"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxcJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxcZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/MF"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxcpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxc5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/MN"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxdJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxdZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/NF"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxdpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxd5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/NK"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxeJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxeZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/OB"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxepH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxe5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/PT"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxfJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxfZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/PL"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxfpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxf5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/PF"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxgJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxgZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/PH"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxgpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxg5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/PV"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxhJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxhZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/PN"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxhpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxh5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/PW"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxiJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxiZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/OL"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxipH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxi5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/QH"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxjJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxjZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/RH"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxjpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxj5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/RU"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCrxkJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCrxkZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/SE"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCsYgJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCsYgZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/SY"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCsYgpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCsYg5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/SN"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCsYhJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCsYhZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/SF"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCsYhpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCsYh5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/WW"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCsYiJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCsYiZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/WI"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCsYipH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCsYi5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/TP"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCsYjJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCsYjZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/TW"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCsYjpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCsYj5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/TH"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCsYkJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCsYkZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/TR"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCsYkpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCsYk5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/TF"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCsYlJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCsYlZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/VK"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCsYlpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCsYl5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/WE"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCsYmJH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCsYmZH9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/WF"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sCsYmpH9EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sCsYm5H9EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/WU"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_QU3UoJH_EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_QU3UoZH_EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//HorseBreed/Unspecified"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_3FsWcJH-EdyNi8UsPKraBA" position="619,774" size="173,-1">
+      <anchorage xmi:id="_7AQHgJH-EdyNi8UsPKraBA" graphEdge="_7ARVoJH-EdyNi8UsPKraBA"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_3FsWcZH-EdyNi8UsPKraBA" presentation="default">
+        <element href="tracker.ecore#//Equine"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_3FsWcpH-EdyNi8UsPKraBA">
+        <property xmi:id="_3FsWc5H-EdyNi8UsPKraBA" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_3FsWdJH-EdyNi8UsPKraBA" presentation="default">
+          <element href="tracker.ecore#//Equine"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="__AZjMJH-EdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="__AZjMZH-EdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//Equine/horseBreed"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_3FsWdZH-EdyNi8UsPKraBA">
+        <property xmi:id="_3FsWdpH-EdyNi8UsPKraBA" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_3FsWd5H-EdyNi8UsPKraBA" presentation="default">
+          <element href="tracker.ecore#//Equine"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_7ARVoJH-EdyNi8UsPKraBA" anchor="_7AQHgJH-EdyNi8UsPKraBA _smK9YTo3Edyw6--mXqZ7vg">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_7ARVoZH-EdyNi8UsPKraBA" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, -191, -205, 168]</waypoints>
+      <waypoints>[205, -191, 0, 168]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_39boAJIEEdyNi8UsPKraBA" position="190,1092" size="128,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_39boAZIEEdyNi8UsPKraBA" presentation="default">
+        <element href="tracker.ecore#//GoatBreed"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_39boApIEEdyNi8UsPKraBA">
+        <property xmi:id="_39boA5IEEdyNi8UsPKraBA" key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_39boBJIEEdyNi8UsPKraBA" presentation="default">
+          <element href="tracker.ecore#//GoatBreed"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_9vklwJIEEdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_9vklwZIEEdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//GoatBreed/AI"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_KnwZIpIFEdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_KnwZI5IFEdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//GoatBreed/AG"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_NwuVMJIFEdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_NwuVMZIFEdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//GoatBreed/BZ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_Od2g8pIFEdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Od2g85IFEdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//GoatBreed/CS"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_O8NQ4JIFEdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_O8NQ4ZIFEdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//GoatBreed/LN"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_PbU10pIFEdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_PbVc4JIFEdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//GoatBreed/ND"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_P5rlwJIFEdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_P5rlwZIFEdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//GoatBreed/NU"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_QQQSsJIFEdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_QQQSsZIFEdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//GoatBreed/OH"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_2JjaIJIFEdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_2JkBMJIFEdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//GoatBreed/PY"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_9WoE0JIFEdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_9WoE0ZIFEdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//GoatBreed/EN"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="__PcAkJIFEdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="__PcAkZIFEdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//GoatBreed/TO"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_AGfkYJIGEdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_AGfkYZIGEdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//GoatBreed/Unspecified"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_RhwhYJIGEdyNi8UsPKraBA" position="751,852" size="157,-1">
+      <anchorage xmi:id="_liYXEJIGEdyNi8UsPKraBA" graphEdge="_liZlMJIGEdyNi8UsPKraBA"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_RhwhYZIGEdyNi8UsPKraBA" presentation="default">
+        <element href="tracker.ecore#//Caprine"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_RhwhYpIGEdyNi8UsPKraBA">
+        <property xmi:id="_RhwhY5IGEdyNi8UsPKraBA" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_RhwhZJIGEdyNi8UsPKraBA" presentation="default">
+          <element href="tracker.ecore#//Caprine"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_ZgTsUpIGEdyNi8UsPKraBA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_ZgTsU5IGEdyNi8UsPKraBA" presentation="default">
+            <element href="tracker.ecore#//Caprine/goatBreed"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_RhwhZZIGEdyNi8UsPKraBA">
+        <property xmi:id="_RhwhZpIGEdyNi8UsPKraBA" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_RhwhZ5IGEdyNi8UsPKraBA" presentation="default">
+          <element href="tracker.ecore#//Caprine"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_liZlMJIGEdyNi8UsPKraBA" anchor="_liYXEJIGEdyNi8UsPKraBA _smK9YTo3Edyw6--mXqZ7vg">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_liZlMZIGEdyNi8UsPKraBA" presentation="default" typeInfo="Inheritance"/>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

@@ -192,6 +192,10 @@ public class TrackerValidator extends EObjectValidator {
 				return validateWeighIn((WeighIn)value, diagnostics, context);
 			case TrackerPackage.SWINE:
 				return validateSwine((Swine)value, diagnostics, context);
+			case TrackerPackage.EQUINE:
+				return validateEquine((Equine)value, diagnostics, context);
+			case TrackerPackage.CAPRINE:
+				return validateCaprine((Caprine)value, diagnostics, context);
 			case TrackerPackage.SEX:
 				return validateSex((Sex)value, diagnostics, context);
 			case TrackerPackage.BISON_BREED:
@@ -204,6 +208,10 @@ public class TrackerValidator extends EObjectValidator {
 				return validateDairyBreed((DairyBreed)value, diagnostics, context);
 			case TrackerPackage.SWINE_BREED:
 				return validateSwineBreed((SwineBreed)value, diagnostics, context);
+			case TrackerPackage.HORSE_BREED:
+				return validateHorseBreed((HorseBreed)value, diagnostics, context);
+			case TrackerPackage.GOAT_BREED:
+				return validateGoatBreed((GoatBreed)value, diagnostics, context);
 			case TrackerPackage.DATE:
 				return validateDate((Date)value, diagnostics, context);
 			case TrackerPackage.ANIMIAL_ID_NUMBER:
@@ -215,7 +223,7 @@ public class TrackerValidator extends EObjectValidator {
 			case TrackerPackage.DATE_TIME:
 				return validateDateTime((Date)value, diagnostics, context);
 			case TrackerPackage.AGE:
-				return validateAge((CalendarDateDuration)value, diagnostics, context);
+				return validateAge((Age)value, diagnostics, context);
 			case TrackerPackage.US_PHONE_NUMBER:
 				return validateUSPhoneNumber((String)value, diagnostics, context);
 			default: 
@@ -329,6 +337,24 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validateSwine(Swine swine, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(swine, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEquine(Equine equine, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(equine, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCaprine(Caprine caprine, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(caprine, diagnostics, context);
 	}
 
 	/**
@@ -516,6 +542,24 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validateHorseBreed(HorseBreed horseBreed, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateGoatBreed(GoatBreed goatBreed, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validateDate(Date date, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
@@ -643,7 +687,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateAge(CalendarDateDuration age, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateAge(Age age, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

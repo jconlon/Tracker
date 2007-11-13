@@ -39,12 +39,11 @@ import com.verticon.tracker.TrackerPackage;
  * functionality.
  * TODO always un NOT this class if animal changes are made, but be sure to add the ITableItemLabelProvider and NOT it back.
  * <!-- end-user-doc -->
- * @generated NOT
+ * @generated
  */
 public class AnimalItemProvider
 	extends ItemProviderAdapter
-	implements	
-	ITableItemLabelProvider, IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+	implements	ITableItemLabelProvider, IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

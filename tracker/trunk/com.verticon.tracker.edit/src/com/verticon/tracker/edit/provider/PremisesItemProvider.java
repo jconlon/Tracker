@@ -239,6 +239,16 @@ public class PremisesItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(TrackerPackage.Literals.PREMISES__ANIMALS,
+				 TrackerFactory.eINSTANCE.createEquine()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TrackerPackage.Literals.PREMISES__ANIMALS,
+				 TrackerFactory.eINSTANCE.createCaprine()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(TrackerPackage.Literals.PREMISES__UN_APPLIED_TAGS,
 				 TrackerFactory.eINSTANCE.createTag()));
 	}

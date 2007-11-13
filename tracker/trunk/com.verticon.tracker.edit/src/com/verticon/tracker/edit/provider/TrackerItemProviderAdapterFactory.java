@@ -291,6 +291,52 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Equine} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EquineItemProvider equineItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.Equine}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEquineAdapter() {
+		if (equineItemProvider == null) {
+			equineItemProvider = new EquineItemProvider(this);
+		}
+
+		return equineItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Caprine} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CaprineItemProvider caprineItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.Caprine}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCaprineAdapter() {
+		if (caprineItemProvider == null) {
+			caprineItemProvider = new CaprineItemProvider(this);
+		}
+
+		return caprineItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Premises} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -734,6 +780,8 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (fairRegistrationItemProvider != null) fairRegistrationItemProvider.dispose();
 		if (weighInItemProvider != null) weighInItemProvider.dispose();
 		if (swineItemProvider != null) swineItemProvider.dispose();
+		if (equineItemProvider != null) equineItemProvider.dispose();
+		if (caprineItemProvider != null) caprineItemProvider.dispose();
 	}
 
 }

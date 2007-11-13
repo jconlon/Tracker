@@ -27,11 +27,15 @@ import com.verticon.tracker.Bovine;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.BovineDairy;
+import com.verticon.tracker.Caprine;
 import com.verticon.tracker.DairyBreed;
 import com.verticon.tracker.Died;
+import com.verticon.tracker.Equine;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Exported;
 import com.verticon.tracker.FairRegistration;
+import com.verticon.tracker.GoatBreed;
+import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.Imported;
 import com.verticon.tracker.LostTag;
 import com.verticon.tracker.MovedIn;
@@ -152,6 +156,20 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EClass swineEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass equineEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass caprineEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -292,6 +310,20 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EEnum swineBreedEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum horseBreedEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum goatBreedEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -820,6 +852,42 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEquine() {
+		return equineEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEquine_HorseBreed() {
+		return (EAttribute)equineEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCaprine() {
+		return caprineEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCaprine_GoatBreed() {
+		return (EAttribute)caprineEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPremises() {
 		return premisesEClass;
 	}
@@ -1099,6 +1167,24 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getHorseBreed() {
+		return horseBreedEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getGoatBreed() {
+		return goatBreedEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getDate() {
 		return dateEDataType;
 	}
@@ -1280,6 +1366,12 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		swineEClass = createEClass(SWINE);
 		createEAttribute(swineEClass, SWINE__SWINE_BREED);
 
+		equineEClass = createEClass(EQUINE);
+		createEAttribute(equineEClass, EQUINE__HORSE_BREED);
+
+		caprineEClass = createEClass(CAPRINE);
+		createEAttribute(caprineEClass, CAPRINE__GOAT_BREED);
+
 		// Create enums
 		sexEEnum = createEEnum(SEX);
 		bisonBreedEEnum = createEEnum(BISON_BREED);
@@ -1287,6 +1379,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		beefBreedEEnum = createEEnum(BEEF_BREED);
 		dairyBreedEEnum = createEEnum(DAIRY_BREED);
 		swineBreedEEnum = createEEnum(SWINE_BREED);
+		horseBreedEEnum = createEEnum(HORSE_BREED);
+		goatBreedEEnum = createEEnum(GOAT_BREED);
 
 		// Create data types
 		dateEDataType = createEDataType(DATE);
@@ -1348,6 +1442,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		fairRegistrationEClass.getESuperTypes().add(this.getEvent());
 		weighInEClass.getESuperTypes().add(this.getEvent());
 		swineEClass.getESuperTypes().add(this.getAnimal());
+		equineEClass.getESuperTypes().add(this.getAnimal());
+		caprineEClass.getESuperTypes().add(this.getAnimal());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1469,6 +1565,12 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		initEClass(swineEClass, Swine.class, "Swine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSwine_SwineBreed(), this.getSwineBreed(), "swineBreed", "Unspecified", 0, 1, Swine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(equineEClass, Equine.class, "Equine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEquine_HorseBreed(), this.getHorseBreed(), "horseBreed", "Unspecified", 0, 1, Equine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(caprineEClass, Caprine.class, "Caprine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCaprine_GoatBreed(), this.getGoatBreed(), "goatBreed", "Unspecified", 0, 1, Caprine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");
@@ -1694,6 +1796,89 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEEnumLiteral(swineBreedEEnum, SwineBreed.WS_LITERAL);
 		addEEnumLiteral(swineBreedEEnum, SwineBreed.YO_LITERAL);
 		addEEnumLiteral(swineBreedEEnum, SwineBreed.UNSPECIFIED_LITERAL);
+
+		initEEnum(horseBreedEEnum, HorseBreed.class, "HorseBreed");
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.AC);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.AS);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.AA);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.AO);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.NO);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.AP);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.AD);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.BW);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.BY);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.BU);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.CI);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.FC);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.CV);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.CY);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.CM);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.DT);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.DW);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.EX);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.FE);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.FJ);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.FH);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.FR);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.GL);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.WG);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.HN);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.HK);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.HF);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.HV);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.HG);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.HT);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.HW);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.HU);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.IC);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.LZ);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.MU);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.MF);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.MN);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.NF);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.NK);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.OB);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.PT);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.PL);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.PF);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.PH);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.PV);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.PN);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.PW);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.OL);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.QH);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.RH);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.RU);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.SE);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.SY);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.SN);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.SF);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.WW);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.WI);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.TP);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.TW);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.TH);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.TR);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.TF);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.VK);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.WE);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.WF);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.WU);
+		addEEnumLiteral(horseBreedEEnum, HorseBreed.UNSPECIFIED);
+
+		initEEnum(goatBreedEEnum, GoatBreed.class, "GoatBreed");
+		addEEnumLiteral(goatBreedEEnum, GoatBreed.AI);
+		addEEnumLiteral(goatBreedEEnum, GoatBreed.AG);
+		addEEnumLiteral(goatBreedEEnum, GoatBreed.BZ);
+		addEEnumLiteral(goatBreedEEnum, GoatBreed.CS);
+		addEEnumLiteral(goatBreedEEnum, GoatBreed.LN);
+		addEEnumLiteral(goatBreedEEnum, GoatBreed.ND);
+		addEEnumLiteral(goatBreedEEnum, GoatBreed.NU);
+		addEEnumLiteral(goatBreedEEnum, GoatBreed.OH);
+		addEEnumLiteral(goatBreedEEnum, GoatBreed.PY);
+		addEEnumLiteral(goatBreedEEnum, GoatBreed.EN);
+		addEEnumLiteral(goatBreedEEnum, GoatBreed.TO);
+		addEEnumLiteral(goatBreedEEnum, GoatBreed.UNSPECIFIED);
 
 		// Initialize data types
 		initEDataType(dateEDataType, Date.class, "Date", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

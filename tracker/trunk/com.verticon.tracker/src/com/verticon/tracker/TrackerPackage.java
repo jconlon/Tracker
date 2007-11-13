@@ -2696,6 +2696,260 @@ public interface TrackerPackage extends EPackage {
 	int SWINE_FEATURE_COUNT = ANIMAL_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.EquineImpl <em>Equine</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.EquineImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEquine()
+	 * @generated
+	 */
+	int EQUINE = 26;
+
+	/**
+	 * The feature id for the '<em><b>Birth Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__BIRTH_DATE = ANIMAL__BIRTH_DATE;
+
+	/**
+	 * The feature id for the '<em><b>Sex</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__SEX = ANIMAL__SEX;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__TAGS = ANIMAL__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Species</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__SPECIES = ANIMAL__SPECIES;
+
+	/**
+	 * The feature id for the '<em><b>Id Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__ID_NUMBER = ANIMAL__ID_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Breed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__BREED = ANIMAL__BREED;
+
+	/**
+	 * The feature id for the '<em><b>Age</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__AGE = ANIMAL__AGE;
+
+	/**
+	 * The feature id for the '<em><b>Sex Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__SEX_CODE = ANIMAL__SEX_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Species Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__SPECIES_CODE = ANIMAL__SPECIES_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__ID = ANIMAL__ID;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__COMMENTS = ANIMAL__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Horse Breed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__HORSE_BREED = ANIMAL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Equine</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE_FEATURE_COUNT = ANIMAL_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.CaprineImpl <em>Caprine</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.CaprineImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getCaprine()
+	 * @generated
+	 */
+	int CAPRINE = 27;
+
+	/**
+	 * The feature id for the '<em><b>Birth Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__BIRTH_DATE = ANIMAL__BIRTH_DATE;
+
+	/**
+	 * The feature id for the '<em><b>Sex</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__SEX = ANIMAL__SEX;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__TAGS = ANIMAL__TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Species</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__SPECIES = ANIMAL__SPECIES;
+
+	/**
+	 * The feature id for the '<em><b>Id Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__ID_NUMBER = ANIMAL__ID_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Breed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__BREED = ANIMAL__BREED;
+
+	/**
+	 * The feature id for the '<em><b>Age</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__AGE = ANIMAL__AGE;
+
+	/**
+	 * The feature id for the '<em><b>Sex Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__SEX_CODE = ANIMAL__SEX_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Species Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__SPECIES_CODE = ANIMAL__SPECIES_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__ID = ANIMAL__ID;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__COMMENTS = ANIMAL__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Goat Breed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__GOAT_BREED = ANIMAL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Caprine</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE_FEATURE_COUNT = ANIMAL_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Sex <em>Sex</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2703,7 +2957,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 26;
+	int SEX = 28;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BisonBreed <em>Bison Breed</em>}' enum.
@@ -2713,7 +2967,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBisonBreed()
 	 * @generated
 	 */
-	int BISON_BREED = 27;
+	int BISON_BREED = 29;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SheepBreed <em>Sheep Breed</em>}' enum.
@@ -2723,7 +2977,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSheepBreed()
 	 * @generated
 	 */
-	int SHEEP_BREED = 28;
+	int SHEEP_BREED = 30;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BeefBreed <em>Beef Breed</em>}' enum.
@@ -2733,7 +2987,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBeefBreed()
 	 * @generated
 	 */
-	int BEEF_BREED = 29;
+	int BEEF_BREED = 31;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.DairyBreed <em>Dairy Breed</em>}' enum.
@@ -2743,7 +2997,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDairyBreed()
 	 * @generated
 	 */
-	int DAIRY_BREED = 30;
+	int DAIRY_BREED = 32;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SwineBreed <em>Swine Breed</em>}' enum.
@@ -2753,7 +3007,27 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSwineBreed()
 	 * @generated
 	 */
-	int SWINE_BREED = 31;
+	int SWINE_BREED = 33;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.HorseBreed <em>Horse Breed</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.HorseBreed
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getHorseBreed()
+	 * @generated
+	 */
+	int HORSE_BREED = 34;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.GoatBreed <em>Goat Breed</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.GoatBreed
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getGoatBreed()
+	 * @generated
+	 */
+	int GOAT_BREED = 35;
 
 	/**
 	 * The meta object id for the '<em>Date</em>' data type.
@@ -2763,7 +3037,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDate()
 	 * @generated
 	 */
-	int DATE = 32;
+	int DATE = 36;
 
 	/**
 	 * The meta object id for the '<em>Animial Id Number</em>' data type.
@@ -2773,7 +3047,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAnimialIdNumber()
 	 * @generated
 	 */
-	int ANIMIAL_ID_NUMBER = 33;
+	int ANIMIAL_ID_NUMBER = 37;
 
 	/**
 	 * The meta object id for the '<em>Premises Id Number</em>' data type.
@@ -2783,7 +3057,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPremisesIdNumber()
 	 * @generated
 	 */
-	int PREMISES_ID_NUMBER = 34;
+	int PREMISES_ID_NUMBER = 38;
 
 	/**
 	 * The meta object id for the '<em>Email</em>' data type.
@@ -2793,7 +3067,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 35;
+	int EMAIL = 39;
 
 
 	/**
@@ -2804,7 +3078,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 36;
+	int DATE_TIME = 40;
 
 
 	/**
@@ -2815,7 +3089,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAge()
 	 * @generated
 	 */
-	int AGE = 37;
+	int AGE = 41;
 
 
 	/**
@@ -2826,7 +3100,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSPhoneNumber()
 	 * @generated
 	 */
-	int US_PHONE_NUMBER = 38;
+	int US_PHONE_NUMBER = 42;
 
 
 	/**
@@ -3302,6 +3576,48 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getSwine_SwineBreed();
 
 	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.Equine <em>Equine</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Equine</em>'.
+	 * @see com.verticon.tracker.Equine
+	 * @generated
+	 */
+	EClass getEquine();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Equine#getHorseBreed <em>Horse Breed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Horse Breed</em>'.
+	 * @see com.verticon.tracker.Equine#getHorseBreed()
+	 * @see #getEquine()
+	 * @generated
+	 */
+	EAttribute getEquine_HorseBreed();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.Caprine <em>Caprine</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Caprine</em>'.
+	 * @see com.verticon.tracker.Caprine
+	 * @generated
+	 */
+	EClass getCaprine();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Caprine#getGoatBreed <em>Goat Breed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Goat Breed</em>'.
+	 * @see com.verticon.tracker.Caprine#getGoatBreed()
+	 * @see #getCaprine()
+	 * @generated
+	 */
+	EAttribute getCaprine_GoatBreed();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Premises <em>Premises</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3621,6 +3937,26 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getSwineBreed();
+
+	/**
+	 * Returns the meta object for enum '{@link com.verticon.tracker.HorseBreed <em>Horse Breed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Horse Breed</em>'.
+	 * @see com.verticon.tracker.HorseBreed
+	 * @generated
+	 */
+	EEnum getHorseBreed();
+
+	/**
+	 * Returns the meta object for enum '{@link com.verticon.tracker.GoatBreed <em>Goat Breed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Goat Breed</em>'.
+	 * @see com.verticon.tracker.GoatBreed
+	 * @generated
+	 */
+	EEnum getGoatBreed();
 
 	/**
 	 * Returns the meta object for data type '{@link java.util.Date <em>Date</em>}'.
@@ -4100,6 +4436,42 @@ public interface TrackerPackage extends EPackage {
 		EAttribute SWINE__SWINE_BREED = eINSTANCE.getSwine_SwineBreed();
 
 		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.EquineImpl <em>Equine</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.EquineImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEquine()
+		 * @generated
+		 */
+		EClass EQUINE = eINSTANCE.getEquine();
+
+		/**
+		 * The meta object literal for the '<em><b>Horse Breed</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EQUINE__HORSE_BREED = eINSTANCE.getEquine_HorseBreed();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.CaprineImpl <em>Caprine</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.CaprineImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getCaprine()
+		 * @generated
+		 */
+		EClass CAPRINE = eINSTANCE.getCaprine();
+
+		/**
+		 * The meta object literal for the '<em><b>Goat Breed</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CAPRINE__GOAT_BREED = eINSTANCE.getCaprine_GoatBreed();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.PremisesImpl <em>Premises</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4386,6 +4758,26 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum SWINE_BREED = eINSTANCE.getSwineBreed();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.HorseBreed <em>Horse Breed</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.HorseBreed
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getHorseBreed()
+		 * @generated
+		 */
+		EEnum HORSE_BREED = eINSTANCE.getHorseBreed();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.GoatBreed <em>Goat Breed</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.GoatBreed
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getGoatBreed()
+		 * @generated
+		 */
+		EEnum GOAT_BREED = eINSTANCE.getGoatBreed();
 
 		/**
 		 * The meta object literal for the '<em>Date</em>' data type.

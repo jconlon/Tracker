@@ -398,4 +398,95 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="swineBreed" eType="#//SwineBreed"
         defaultValueLiteral="Unspecified"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="HorseBreed">
+    <eLiterals name="AC" literal="AMERICAN BASHKIR CURLY"/>
+    <eLiterals name="AS" value="1" literal="AMERICAN SADDLEBRED"/>
+    <eLiterals name="AA" value="2" literal="ANDALUSIAN"/>
+    <eLiterals name="AO" value="3" literal="ANGLO-ARABIAN"/>
+    <eLiterals name="NO" value="4" literal="ANGLO-NORMAND"/>
+    <eLiterals name="AP" value="5" literal="APPALOSA"/>
+    <eLiterals name="AD" value="6" literal="ARABIAN"/>
+    <eLiterals name="BW" value="7" literal="BADEN-WURTTEMBERG"/>
+    <eLiterals name="BY" value="8" literal="BAYERISCHES WARMBLOOD"/>
+    <eLiterals name="BU" value="9" literal="BUCKSKIN"/>
+    <eLiterals name="CI" value="10" literal="CANADIAN HORSE"/>
+    <eLiterals name="FC" value="11" literal="CHEVAL DE SELLE FRANCAIS (FRENCH SADDLE HORSE)"/>
+    <eLiterals name="CV" value="12" literal="CLEVELAND BAY"/>
+    <eLiterals name="CY" value="13" literal="CLYDESDALE"/>
+    <eLiterals name="CM" value="14" literal="CONNEMARA"/>
+    <eLiterals name="DT" value="15" literal="DARTMOOR PONY"/>
+    <eLiterals name="DW" value="16" literal="DUTCH WARMBLOOD"/>
+    <eLiterals name="EX" value="17" literal="EXMOOR PONY"/>
+    <eLiterals name="FE" value="18" literal="FELL PONY"/>
+    <eLiterals name="FJ" value="19" literal="FJORD"/>
+    <eLiterals name="FH" value="20" literal="FRENCH HORSE"/>
+    <eLiterals name="FR" value="21" literal="FRIESIAN"/>
+    <eLiterals name="GL" value="22" literal="GELDERLANDER"/>
+    <eLiterals name="WG" value="23" literal="GERMAN WARMBLOOD"/>
+    <eLiterals name="HN" value="24" literal="HACKNEY (horse/cheval)"/>
+    <eLiterals name="HK" value="25" literal="HACKNEY (pony/poney)"/>
+    <eLiterals name="HF" value="26" literal="HAFLINGER"/>
+    <eLiterals name="HV" value="27" literal="HANOVERIAN"/>
+    <eLiterals name="HG" value="28" literal="HIGHLAND PONY"/>
+    <eLiterals name="HT" value="29" literal="HOLSTEINER"/>
+    <eLiterals name="HW" value="30" literal="HUNGARIAN WARMBLOOD"/>
+    <eLiterals name="HU" value="31" literal="HUNTER"/>
+    <eLiterals name="IC" value="32" literal="ICELANDIC"/>
+    <eLiterals name="LZ" value="33" literal="LIPIZZANER"/>
+    <eLiterals name="MU" value="34" literal="MINATURE HORSE"/>
+    <eLiterals name="MF" value="35" literal="MISSOURI FOXTROTTING"/>
+    <eLiterals name="MN" value="36" literal="MORGAN"/>
+    <eLiterals name="NF" value="37" literal="NEW FOREST"/>
+    <eLiterals name="NK" value="38" literal="NORIKER"/>
+    <eLiterals name="OB" value="39" literal="OLDENBURG"/>
+    <eLiterals name="PT" value="40" literal="PAINT"/>
+    <eLiterals name="PL" value="41" literal="PALOMINO"/>
+    <eLiterals name="PF" value="42" literal="PASO FINO"/>
+    <eLiterals name="PH" value="43" literal="PERCHERON"/>
+    <eLiterals name="PV" value="44" literal="PERUVIAN"/>
+    <eLiterals name="PN" value="45" literal="PINTO"/>
+    <eLiterals name="PW" value="46" literal="POLISH WARMBLOOD"/>
+    <eLiterals name="OL" value="47" literal="POLO PONY"/>
+    <eLiterals name="QH" value="48" literal="OUARTER HORSE"/>
+    <eLiterals name="RH" value="49" literal="RHEINLANDER"/>
+    <eLiterals name="RU" value="50" literal="RUSTIC PONY"/>
+    <eLiterals name="SE" value="51" literal="SHETLAND"/>
+    <eLiterals name="SY" value="52" literal="SHIRE"/>
+    <eLiterals name="SN" value="53" literal="STANDARDBRED"/>
+    <eLiterals name="SF" value="54" literal="SUFFOLK PUNCH"/>
+    <eLiterals name="WW" value="55" literal="SWEDISH WARMBLOOD"/>
+    <eLiterals name="WI" value="56" literal="SWISS HORSE"/>
+    <eLiterals name="TP" value="57" literal="TARPAN"/>
+    <eLiterals name="TW" value="58" literal="TENNESSEE WALKING"/>
+    <eLiterals name="TH" value="59" literal="THOROUGHBRED"/>
+    <eLiterals name="TR" value="60" literal="TRAKEHNER"/>
+    <eLiterals name="TF" value="61" literal="TROTTEUR FRANCAIS"/>
+    <eLiterals name="VK" value="62" literal="VIKING"/>
+    <eLiterals name="WE" value="63" literal="WELSH"/>
+    <eLiterals name="WF" value="64" literal="WESTFALEN"/>
+    <eLiterals name="WU" value="65" literal="WURTTEMBERG"/>
+    <eLiterals name="Unspecified" value="66"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Equine" eSuperTypes="#//Animal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="horseBreed" eType="#//HorseBreed"
+        defaultValueLiteral="Unspecified"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GoatBreed">
+    <eLiterals name="AI" literal="ALPINE"/>
+    <eLiterals name="AG" value="1" literal="ANGORA"/>
+    <eLiterals name="BZ" value="2" literal="BOER"/>
+    <eLiterals name="CS" value="3" literal="CASHMERE"/>
+    <eLiterals name="LN" value="4" literal="LA MANCHA"/>
+    <eLiterals name="ND" value="5" literal="NIGERIAN DWARF"/>
+    <eLiterals name="NU" value="6" literal="NUBIAN"/>
+    <eLiterals name="OH" value="7" literal="OBERHASLI"/>
+    <eLiterals name="PY" value="8" literal="PYGMY"/>
+    <eLiterals name="EN" value="9" literal="SAANEN"/>
+    <eLiterals name="TO" value="10" literal="TOGGENBURG"/>
+    <eLiterals name="Unspecified" value="11"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Caprine" eSuperTypes="#//Animal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="goatBreed" eType="#//GoatBreed"
+        defaultValueLiteral="Unspecified"/>
+  </eClassifiers>
 </ecore:EPackage>

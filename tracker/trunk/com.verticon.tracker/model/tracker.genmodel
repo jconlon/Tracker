@@ -237,6 +237,89 @@
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/YO"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/Unspecified"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//HorseBreed">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/AC"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/AS"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/AA"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/AO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/NO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/AP"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/AD"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/BW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/BY"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/BU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/CI"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/FC"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/CV"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/CY"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/CM"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/DT"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/DW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/EX"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/FE"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/FJ"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/FH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/FR"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/GL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/WG"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/HN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/HK"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/HF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/HV"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/HG"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/HT"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/HW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/HU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/IC"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/LZ"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/MU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/MF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/MN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/NF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/NK"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/OB"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/PT"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/PL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/PF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/PH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/PV"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/PN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/PW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/OL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/QH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/RH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/RU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/SE"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/SY"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/SN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/SF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/WW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/WI"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/TP"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/TW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/TH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/TR"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/TF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/VK"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/WE"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/WF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/WU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/Unspecified"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//GoatBreed">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/AI"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/AG"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/BZ"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/CS"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/LN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/ND"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/NU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/OH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/PY"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/EN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/TO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/Unspecified"/>
+    </genEnums>
     <genDataTypes ecoreDataType="tracker.ecore#//Date"/>
     <genDataTypes ecoreDataType="tracker.ecore#//AnimialIdNumber"/>
     <genDataTypes ecoreDataType="tracker.ecore#//PremisesIdNumber"/>
@@ -339,6 +422,12 @@
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Swine">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Swine/swineBreed"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Equine">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Equine/horseBreed"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Caprine">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Caprine/goatBreed"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
