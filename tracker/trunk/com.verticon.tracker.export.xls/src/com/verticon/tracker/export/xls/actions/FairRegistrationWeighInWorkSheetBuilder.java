@@ -168,7 +168,6 @@ public class FairRegistrationWeighInWorkSheetBuilder implements WorkSheetBuilder
     
 
 	private void createHeader(HSSFSheet sheet){
-		//TODO implement
 		HSSFHeader header = sheet.getHeader();
 	    header.setCenter("Center Header");
 	    header.setLeft("Left Header");
