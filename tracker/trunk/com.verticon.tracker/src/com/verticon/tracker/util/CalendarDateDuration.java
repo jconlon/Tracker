@@ -3,6 +3,8 @@
  */
 package com.verticon.tracker.util;
 
+import java.text.NumberFormat;
+
 import net.sourceforge.calendardate.CalendarDate;
 
 /**
@@ -40,8 +42,17 @@ public class CalendarDateDuration {
 		this.totalDays= startDate.daysUntil(finishDate);
 		this.totalMonths= startDate.monthsUntil(finishDate);
 		this.totalYears=initYears(startDate,  finishDate);
-		this.monthsPart=initMonths(startDate,  finishDate);
-		this.daysPart=initDays(startDate,  finishDate);
+		int monthsTmp =initMonths(startDate,  finishDate);
+		
+		int daysTmp = initDays(startDate,  finishDate);
+		if(daysTmp<0){
+			this.monthsPart=monthsTmp-1;
+			this.daysPart=daysTmp +finishDate.daysInMonth(startDate.getYear(), startDate.getMonth());
+		}else{
+			this.monthsPart=monthsTmp;
+			this.daysPart=daysTmp;
+		}
+		
 	}
 	
 	private int initYears(CalendarDate startDate, CalendarDate finishDate){
@@ -90,24 +101,30 @@ public class CalendarDateDuration {
 		return daysPart;
 	}
 	
+//	@Override
+//	public String toString() {
+//		StringBuffer buf = new StringBuffer();
+//		buf.append(type == Type.FUTURE ? '+' : '-');
+//		if (totalYears != 0) {
+//			String yearsString = Integer.toString(totalYears);
+//			buf.append(yearsString.length() == 1 ? "Y0" + yearsString
+//					: 'Y' + yearsString);
+//		}
+//		if (monthsPart != 0) {
+//			String monthsString = Integer.toString(monthsPart);
+//			buf.append(monthsString.length() == 1 ? "M0" + monthsString
+//					: 'M' + monthsString);
+//		}
+//		String daysString = Integer.toString(daysPart);
+//		buf.append(daysString.length() == 1 ? "D0" + daysString
+//				: 'D' + daysString);
+//		return buf.toString();
+//	}
+	
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
-		buf.append(type == Type.FUTURE ? '+' : '-');
-		if (totalYears != 0) {
-			String yearsString = Integer.toString(totalYears);
-			buf.append(yearsString.length() == 1 ? "Y0" + yearsString
-					: 'Y' + yearsString);
-		}
-		if (monthsPart != 0) {
-			String monthsString = Integer.toString(monthsPart);
-			buf.append(monthsString.length() == 1 ? "M0" + monthsString
-					: 'M' + monthsString);
-		}
-		String daysString = Integer.toString(daysPart);
-		buf.append(daysString.length() == 1 ? "D0" + daysString
-				: 'D' + daysString);
-		return buf.toString();
+		NumberFormat nf = NumberFormat.getInstance();
+		return type == Type.FUTURE ? nf.format(totalDays)+" days old" : nf.format(totalDays)+" until birth";
 	}
 
 	public String toRoundedString() {
