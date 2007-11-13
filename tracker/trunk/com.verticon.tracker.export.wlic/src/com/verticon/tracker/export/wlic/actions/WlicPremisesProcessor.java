@@ -120,10 +120,10 @@ public class WlicPremisesProcessor implements PremisesProcessor {
 		case 8://IDElectronicallyRead
 			out = event.isElectronicallyRead()?"1,":"0,";
 			break;
-		case 9://TODO TEST AnimalDateOfBirth
+		case 9://AnimalDateOfBirth
 			out = animal.getBirthDate()==null?",":df2.format(animal.getBirthDate())+',';
 			break;
-		case 10://TODO Age
+		case 10://Age
 			out = animal.getAge()==null?",":animal.getAge().toRoundedString()+',';
 			break;
 		case 11://Sex
