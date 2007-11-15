@@ -7,7 +7,7 @@
       <image path="/com.verticon.tracker.editor/icons/tracker_lg.gif"/>
       <text>
          Tracker Animal Event Management Platform
-Version: 0.2.0 
+Version: 0.2.1 
 Build id: {0}
 
 (c) Copyright Verticon, Inc. 2007.  All rights reserved. 
@@ -105,19 +105,20 @@ that can be installed and used with other Eclipse (3.3)-based offerings.
       <feature id="org.eclipse.emf.validation" version="1.1.0.v200706071520-318Y9oA55P5M5P8JA5"/>
       <feature id="org.eclipse.emf.validation.doc" version="1.1.0.v200706071520-21-8s733G3E4C5_88"/>
       <feature id="com.verticon.tracker.editor" version="0.3.0"/>
-      <feature id="com.verticon.tracker.export.wlic" version="0.1.0"/>
+      <feature id="com.verticon.tracker.export.wlic" version="0.2.0"/>
       <feature id="com.verticon.tracker.export.xls" version="0.2.0"/>
       <feature id="com.verticon.tracker.ocl.query" version="0.1.0"/>
       <feature id="com.verticon.tracker.transaction.editor" version="0.2.0"/>
-      <feature id="com.verticon.tracker.transaction.publisher" version="0.1.1"/>
+      <feature id="com.verticon.tracker.transaction.publisher" version="0.2.0"/>
       <feature id="com.verticon.tracker.help" version="0.1.0"/>
+      <feature id="com.verticon.tracker.fair" version="0.1.0"/>
+      <feature id="com.verticon.tracker.validation.core" version="0.1.0"/>
       <feature id="org.eclipse.ocl" version="1.1.1.v200707131415-3209oA55P5N7F8JDH"/>
       <feature id="org.eclipse.ocl.doc" version="1.1.0.v200706071450-21-8s733G3E3G5AC3"/>
       <feature id="org.eclipse.emf.ocl" version="1.1.0.v200706071450-10-7w311817312619"/>
       <feature id="org.eclipse.emf.ocl.doc" version="1.1.0.v200706071450-10-7w311817182561"/>
       <feature id="org.eclipse.emf.workspace" version="1.1.1.v200707252036-208Z8s733G3F5E6_8B"/>
       <feature id="org.eclipse.emf.workspace.doc" version="1.1.0.v200706071723-10-7w311817182834"/>
-      <feature id="com.verticon.tracker.fair.feature" version="0.1.0"/>
    </features>
 
 </product>
