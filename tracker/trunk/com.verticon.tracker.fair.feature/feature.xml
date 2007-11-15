@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="com.verticon.tracker.fair.feature"
+      id="com.verticon.tracker.fair"
       label="Tracker Fair Editor"
       version="0.1.0"
-      provider-name="Verticon, Inc.">
+      provider-name="Verticon, Inc."
+      plugin="com.verticon.tracker.fair.editor">
 
    <description>
-      Tracker Fair Editor, models Animal Event Histories for a Fair or Exposition Premises.  
-Fair and Premises model documents are displayed and manipulated with Tracker Fair
-Editors, Wizards, and various Importing and Exporting utilities.
+      Tracker Fair Editor, models Animal Event Histories for a Fair or Exposition Livestock Premises.  Fair and Premises model documents are displayed and manipulated with Tracker Fair Editors, Wizards, and various Importing and Exporting utilities.
    </description>
 
    <copyright>

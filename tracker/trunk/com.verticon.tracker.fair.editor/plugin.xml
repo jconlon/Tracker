@@ -13,14 +13,14 @@
   <extension
     point = "org.eclipse.ui.newWizards">
     <category
-      id = "org.eclipse.emf.ecore.Wizard.category.ID"
-      name="%_UI_Wizard_category">
-    </category>
+          id="com.verticon.tracker.editor.Wizard.category.ID"
+          name="Tracker Wizards"/>
+
     <wizard
       id = "com.verticon.tracker.fair.editor.presentation.FairModelWizardID"
       name = "%_UI_FairModelWizard_label"
       class = "com.verticon.tracker.fair.editor.presentation.FairModelWizard"
-      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      category = "com.verticon.tracker.editor.Wizard.category.ID"
       icon = "icons/full/obj16/FairModelFile.gif">
       <description>%_UI_FairModelWizard_description</description>
       <selection class = "org.eclipse.core.resources.IResource" />
