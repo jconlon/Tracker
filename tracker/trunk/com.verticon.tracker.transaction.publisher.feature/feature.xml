@@ -2,12 +2,12 @@
 <feature
       id="com.verticon.tracker.transaction.publisher"
       label="Tracker Transaction Publisher"
-      version="0.1.1"
+      version="0.2.0"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.transaction.publisher">
 
    <description>
-      Tracker Transaction Event Publisher, provides multi-threaded and transactionally aware Event Publishers for publishing Animal Events to Tracker Model documents running within a Tracker Transaction Infrastructure.
+      Tracker Transaction Publisher, provides multi-threaded and transactionally aware Event Publishers for publishing Animal Events to Tracker Model documents running within a Tracker Transaction Infrastructure.
    </description>
 
    <copyright>
