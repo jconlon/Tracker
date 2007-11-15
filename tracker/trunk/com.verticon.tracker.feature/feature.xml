@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.tracker.editor"
-      label="Tracker Core"
+      label="Tracker Editor"
       version="0.3.0"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.editor">
 
    <description>
-      Tracker Core, models Animal Event Histories for Producer and/or Non Producer Premises.  
+      Tracker Editor is the Core feature of the Tracker application.
+The Core feature models Animal Event Histories for Producer and/or Non Producer Premises.  
 Premises model documents are displayed and manipulated with Tracker Editors, Wizards, and various Importing and Exporting utilities.
    </description>
 
@@ -301,12 +302,14 @@ POSSIBILITY OF SUCH DAMAGES.
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.ocl.ecore"/>
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.ui.console"/>
    </requires>
 
    <plugin
