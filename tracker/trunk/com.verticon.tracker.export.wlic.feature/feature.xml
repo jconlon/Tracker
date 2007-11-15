@@ -7,8 +7,7 @@
       plugin="com.verticon.tracker.export.wlic">
 
    <description>
-      Tracker WLIC Export, exports Animal Events associated with
-Non Producer Premises from Tracker model documents.
+      Tracker WLIC Export, exports Animal Premises Events to files formated to the Wisconsin Livestock Identification Consortium specification.
    </description>
 
    <copyright>
