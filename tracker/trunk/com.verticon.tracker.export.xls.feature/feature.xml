@@ -7,7 +7,7 @@
       plugin="com.verticon.tracker.export.xls">
 
    <description>
-      Tracker Excel Export, exports Fair Registration and Weigh-In Animal Events from Tracker model documents as MS Excel Spreadsheets.
+      Tracker Excel Export, exports Vernon County Fair Registration and Weigh-In Animal Events to MS Excel Spreadsheet files.
    </description>
 
    <copyright>
