@@ -178,13 +178,22 @@ public interface TrackerPackage extends EPackage {
 	int ANIMAL__COMMENTS = 10;
 
 	/**
+	 * The feature id for the '<em><b>Last Event Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANIMAL__LAST_EVENT_DATE_TIME = 11;
+
+	/**
 	 * The number of structural features of the '<em>Animal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL_FEATURE_COUNT = 11;
+	int ANIMAL_FEATURE_COUNT = 12;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.TagImpl <em>Tag</em>}' class.
@@ -349,6 +358,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOVINE__COMMENTS = ANIMAL__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Last Event Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE__LAST_EVENT_DATE_TIME = ANIMAL__LAST_EVENT_DATE_TIME;
 
 	/**
 	 * The number of structural features of the '<em>Bovine</em>' class.
@@ -746,6 +764,15 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE_BEEF__COMMENTS = BOVINE__COMMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Last Event Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_BEEF__LAST_EVENT_DATE_TIME = BOVINE__LAST_EVENT_DATE_TIME;
+
+	/**
 	 * The feature id for the '<em><b>Beef Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -871,6 +898,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int OVINE__COMMENTS = ANIMAL__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Last Event Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OVINE__LAST_EVENT_DATE_TIME = ANIMAL__LAST_EVENT_DATE_TIME;
 
 	/**
 	 * The feature id for the '<em><b>Sheep Breed</b></em>' attribute.
@@ -1000,6 +1036,15 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE_BISON__COMMENTS = BOVINE__COMMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Last Event Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_BISON__LAST_EVENT_DATE_TIME = BOVINE__LAST_EVENT_DATE_TIME;
+
+	/**
 	 * The feature id for the '<em><b>Buffalo Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1125,6 +1170,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOVINE_DAIRY__COMMENTS = BOVINE__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Last Event Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_DAIRY__LAST_EVENT_DATE_TIME = BOVINE__LAST_EVENT_DATE_TIME;
 
 	/**
 	 * The feature id for the '<em><b>Dairy Breed</b></em>' attribute.
@@ -2678,6 +2732,15 @@ public interface TrackerPackage extends EPackage {
 	int SWINE__COMMENTS = ANIMAL__COMMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Last Event Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWINE__LAST_EVENT_DATE_TIME = ANIMAL__LAST_EVENT_DATE_TIME;
+
+	/**
 	 * The feature id for the '<em><b>Swine Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2805,6 +2868,15 @@ public interface TrackerPackage extends EPackage {
 	int EQUINE__COMMENTS = ANIMAL__COMMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Last Event Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__LAST_EVENT_DATE_TIME = ANIMAL__LAST_EVENT_DATE_TIME;
+
+	/**
 	 * The feature id for the '<em><b>Horse Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2930,6 +3002,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int CAPRINE__COMMENTS = ANIMAL__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Last Event Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__LAST_EVENT_DATE_TIME = ANIMAL__LAST_EVENT_DATE_TIME;
 
 	/**
 	 * The feature id for the '<em><b>Goat Breed</b></em>' attribute.
@@ -3079,7 +3160,6 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	int DATE_TIME = 40;
-
 
 	/**
 	 * The meta object id for the '<em>Age</em>' data type.
@@ -3233,6 +3313,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAnimal_Comments();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Animal#getLastEventDateTime <em>Last Event Date Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Last Event Date Time</em>'.
+	 * @see com.verticon.tracker.Animal#getLastEventDateTime()
+	 * @see #getAnimal()
+	 * @generated
+	 */
+	EAttribute getAnimal_LastEventDateTime();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Tag <em>Tag</em>}'.
@@ -4156,6 +4247,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ANIMAL__COMMENTS = eINSTANCE.getAnimal_Comments();
+
+		/**
+		 * The meta object literal for the '<em><b>Last Event Date Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ANIMAL__LAST_EVENT_DATE_TIME = eINSTANCE.getAnimal_LastEventDateTime();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.TagImpl <em>Tag</em>}' class.

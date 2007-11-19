@@ -40,4 +40,8 @@ public interface AnimalValidator {
 	boolean validateId(String value);
 
 	boolean validateComments(String value);
+
+	boolean validateLastEventDateTime(Date value);
+
+	boolean validateLastEventDate(Date value);
 }

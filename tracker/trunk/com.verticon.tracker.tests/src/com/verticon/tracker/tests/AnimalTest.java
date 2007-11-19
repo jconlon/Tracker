@@ -33,6 +33,7 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getSexCode() <em>Sex Code</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getSpeciesCode() <em>Species Code</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getId() <em>Id</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getLastEventDateTime() <em>Last Event Date Time</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -193,17 +194,15 @@ public abstract class AnimalTest extends TestCase {
 		someBirthday.add(Calendar.DAY_OF_MONTH, -5);
 		getFixture().setBirthDate(someBirthday.getTime());
 		assertEquals("D05", getFixture().getAge().toRoundedString());
-		assertEquals("+D05", getFixture().getAge().toString());
+		assertEquals("5 days old", getFixture().getAge().toString());
 		
 		someBirthday.add(Calendar.MONTH, -7);
 		getFixture().setBirthDate(someBirthday.getTime());
 		assertEquals("M07", getFixture().getAge().toRoundedString() );
-		assertEquals("+M07D05", getFixture().getAge().toString());
 
 		someBirthday.add(Calendar.YEAR, -3);
 		getFixture().setBirthDate(someBirthday.getTime());
 		assertEquals("Y03",getFixture().getAge().toRoundedString());
-		assertEquals("+Y03M07D05", getFixture().getAge().toString());
 	}
 	
 
@@ -288,6 +287,31 @@ public abstract class AnimalTest extends TestCase {
 	    }
 		tag3.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
 		assertEquals( Long.toString(AIN_2), animal2.getId());
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Animal#getLastEventDateTime() <em>Last Event Date Time</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#getLastEventDateTime()
+	 * @generated NOT
+	 */
+	public void testGetLastEventDateTime() {
+		assertNotNull(getFixture().allEvents());
+		assertTrue(getFixture().allEvents().isEmpty());
+
+		//Test animal with no tag
+		Animal animal2 = TrackerFactory.eINSTANCE.createBovineBeef();
+		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
+		tag2.setIdNumber(AIN_1);
+		animal2.getTags().add(tag2);
+		Event event1 = TrackerFactory.eINSTANCE.createTagApplied();
+		Date date = new Date();
+		event1.setDateTime(date);
+		tag2.getEvents().add(event1);
+		assertEquals(1, animal2.allEvents().size());
+		assertTrue(animal2.allEvents().contains(event1));
+		assertEquals(date, animal2.getLastEventDateTime());
 	}
 
 	/**
