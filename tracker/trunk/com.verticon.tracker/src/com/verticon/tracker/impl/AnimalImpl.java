@@ -53,6 +53,7 @@ import com.verticon.tracker.util.Species;
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSpeciesCode <em>Species Code</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getId <em>Id</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getComments <em>Comments</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getLastEventDateTime <em>Last Event Date Time</em>}</li>
  * </ul>
  * </p>
  *
@@ -219,6 +220,16 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @ordered
 	 */
 	protected String comments = COMMENTS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLastEventDateTime() <em>Last Event Date Time</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastEventDateTime()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Date LAST_EVENT_DATE_TIME_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -435,6 +446,25 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 /**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Date getLastEventDateTime() {
+		List<Event> winners = new LinkedList<Event>();
+		winners.addAll(allEvents());
+		if(winners.isEmpty()){
+			return null;
+		}
+		// Sort events according to date
+		Collections.sort(winners, new Comparator<Event>() {
+		    public int compare(Event event1, Event event2) {
+		        return event2.getDateTime().compareTo(event1.getDateTime());
+		    }});
+		return winners.get(0).getDateTime();
+	}
+
+/**
+	 * <!-- begin-user-doc -->
 	 * Hand implemented for speed (versus OCL??) because this method is used to generate the
 	 * key attribute for Animal.
 	 * Originally generated with the following OCL:
@@ -540,6 +570,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return getId();
 			case TrackerPackage.ANIMAL__COMMENTS:
 				return getComments();
+			case TrackerPackage.ANIMAL__LAST_EVENT_DATE_TIME:
+				return getLastEventDateTime();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -624,6 +656,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 			case TrackerPackage.ANIMAL__COMMENTS:
 				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
+			case TrackerPackage.ANIMAL__LAST_EVENT_DATE_TIME:
+				return LAST_EVENT_DATE_TIME_EDEFAULT == null ? getLastEventDateTime() != null : !LAST_EVENT_DATE_TIME_EDEFAULT.equals(getLastEventDateTime());
 		}
 		return super.eIsSet(featureID);
 	}

@@ -32,6 +32,7 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getSpeciesCode <em>Species Code</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getId <em>Id</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getComments <em>Comments</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getLastEventDateTime <em>Last Event Date Time</em>}</li>
  * </ul>
  * </p>
  *
@@ -289,6 +290,21 @@ public interface Animal extends EObject {
 	 * @generated
 	 */
 	void setComments(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Last Event Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Last Event Date Time</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Last Event Date Time</em>' attribute.
+	 * @see com.verticon.tracker.TrackerPackage#getAnimal_LastEventDateTime()
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	Date getLastEventDateTime();
 
 	/**
 	 * <!-- begin-user-doc -->
