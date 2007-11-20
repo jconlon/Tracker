@@ -330,13 +330,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EDataType dateEDataType = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EDataType animialIdNumberEDataType = null;
 
 	/**
@@ -1194,15 +1187,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDataType getDate() {
-		return dateEDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EDataType getAnimialIdNumber() {
 		return animialIdNumberEDataType;
 	}
@@ -1393,7 +1377,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		goatBreedEEnum = createEEnum(GOAT_BREED);
 
 		// Create data types
-		dateEDataType = createEDataType(DATE);
 		animialIdNumberEDataType = createEDataType(ANIMIAL_ID_NUMBER);
 		premisesIdNumberEDataType = createEDataType(PREMISES_ID_NUMBER);
 		emailEDataType = createEDataType(EMAIL);
@@ -1457,7 +1440,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAnimal_BirthDate(), this.getDate(), "birthDate", null, 0, 1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAnimal_BirthDate(), ecorePackage.getEDate(), "birthDate", null, 0, 1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_Sex(), this.getSex(), "sex", "Unspecified", 0, 1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnimal_Tags(), this.getTag(), null, "tags", null, 1, -1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		getAnimal_Tags().getEKeys().add(this.getTag_IdNumber());
@@ -1490,7 +1473,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(bovineEClass, Bovine.class, "Bovine", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(eventEClass, Event.class, "Event", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEvent_DateTime(), this.getDateTime(), "dateTime", null, 1, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEvent_DateTime(), ecorePackage.getEDate(), "dateTime", null, 1, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_EventCode(), ecorePackage.getEInt(), "eventCode", "0", 1, 1, Event.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_ElectronicallyRead(), ecorePackage.getEBoolean(), "electronicallyRead", "false", 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_Correction(), ecorePackage.getEBoolean(), "correction", "false", 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1892,7 +1875,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEEnumLiteral(goatBreedEEnum, GoatBreed.UNSPECIFIED);
 
 		// Initialize data types
-		initEDataType(dateEDataType, Date.class, "Date", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(animialIdNumberEDataType, String.class, "AnimialIdNumber", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(premisesIdNumberEDataType, String.class, "PremisesIdNumber", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(emailEDataType, String.class, "Email", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

@@ -6,9 +6,6 @@
  */
 package com.verticon.tracker.impl;
 
-import com.verticon.tracker.*;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,17 +15,21 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BisonBreed;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.BovineBison;
+import com.verticon.tracker.BovineDairy;
+import com.verticon.tracker.Caprine;
 import com.verticon.tracker.DairyBreed;
 import com.verticon.tracker.Died;
+import com.verticon.tracker.Equine;
 import com.verticon.tracker.Exported;
 import com.verticon.tracker.FairRegistration;
+import com.verticon.tracker.GoatBreed;
+import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
 import com.verticon.tracker.LostTag;
@@ -161,8 +162,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createHorseBreedFromString(eDataType, initialValue);
 			case TrackerPackage.GOAT_BREED:
 				return createGoatBreedFromString(eDataType, initialValue);
-			case TrackerPackage.DATE:
-				return createDateFromString(eDataType, initialValue);
 			case TrackerPackage.ANIMIAL_ID_NUMBER:
 				return createAnimialIdNumberFromString(eDataType, initialValue);
 			case TrackerPackage.PREMISES_ID_NUMBER:
@@ -204,8 +203,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return convertHorseBreedToString(eDataType, instanceValue);
 			case TrackerPackage.GOAT_BREED:
 				return convertGoatBreedToString(eDataType, instanceValue);
-			case TrackerPackage.DATE:
-				return convertDateToString(eDataType, instanceValue);
 			case TrackerPackage.ANIMIAL_ID_NUMBER:
 				return convertAnimialIdNumberToString(eDataType, instanceValue);
 			case TrackerPackage.PREMISES_ID_NUMBER:
@@ -633,29 +630,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * Use a Date class instead of a String.
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Date createDateFromString(EDataType eDataType, String initialValue) {
-		if (initialValue == null) return null;
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
-		return formatter.parse(initialValue, new ParsePosition(0));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * Use a Date class instead of a String.
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String convertDateToString(EDataType eDataType, Object instanceValue) {
-		if (instanceValue == null) return null;
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
-		return formatter.format((Date)instanceValue);
-	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -744,27 +718,24 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return (String) instanceValue;
 	}
 
-	/**
+/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public Date createDateTimeFromString(EDataType eDataType, String initialValue) {
-		if (initialValue == null) return null;
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
-		return formatter.parse(initialValue, new ParsePosition(0));
+		return (Date)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public String convertDateTimeToString(EDataType eDataType, Object instanceValue) {
-		if (instanceValue == null) return null;
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
-		return formatter.format((Date)instanceValue);
+		return super.convertToString(eDataType, instanceValue);
 	}
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -775,8 +746,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		if(initialValue==null || initialValue.length()<8){
 			return new Age(new Date());
 		}
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
-		Date date = formatter.parse(initialValue, new ParsePosition(0));
+		Date date = (Date)this.createFromString(eDataType,  initialValue);
 		return new Age(date);
 	}
 

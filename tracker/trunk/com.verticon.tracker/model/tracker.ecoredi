@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_smKWUDo3Edyw6--mXqZ7vg" activeDiagram="_smKWUTo3Edyw6--mXqZ7vg">
   <model href="tracker.ecore#/"/>
-  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="756,333">
+  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="1200,277">
     <property xmi:id="_smKWUjo3Edyw6--mXqZ7vg" key="pageFormatName" value="A2"/>
     <property xmi:id="_smKWUzo3Edyw6--mXqZ7vg" key="diagramWidth" value="1680"/>
     <property xmi:id="_smKWVDo3Edyw6--mXqZ7vg" key="diagramHeight" value="2376"/>
@@ -102,7 +102,7 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_smLkeTo3Edyw6--mXqZ7vg" position="1412,11" size="115,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_smLkeTo3Edyw6--mXqZ7vg" position="664,70" size="115,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smLkejo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//Sex"/>
       </semanticModel>
@@ -137,11 +137,6 @@
           </semanticModel>
         </contained>
       </contained>
-    </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_smMLgzo3Edyw6--mXqZ7vg" position="472,66" size="186,-1">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smMLhDo3Edyw6--mXqZ7vg" presentation="default">
-        <element href="tracker.ecore#//Date"/>
-      </semanticModel>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_smMLhTo3Edyw6--mXqZ7vg" position="1132,386" size="204,-1">
       <anchorage xmi:id="_smMLhjo3Edyw6--mXqZ7vg" graphEdge="_smftgzo3Edyw6--mXqZ7vg _yuZf4Do3Edyw6--mXqZ7vg _9F3ecTpBEdyoUcxPwkixgg _zKFf4DpDEdyBGbgn02HOBA"/>
@@ -1448,7 +1443,7 @@
     <contained xsi:type="di:GraphEdge" xmi:id="_smgUmzo3Edyw6--mXqZ7vg" anchor="_smOAsTo3Edyw6--mXqZ7vg _smMynTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_smgUnDo3Edyw6--mXqZ7vg" presentation="default" typeInfo="Inheritance"/>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_smg7qjo3Edyw6--mXqZ7vg" position="878,11" size="186,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_smg7qjo3Edyw6--mXqZ7vg" position="1361,14" size="186,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smg7qzo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//DateTime"/>
       </semanticModel>
@@ -1743,7 +1738,7 @@
     <contained xsi:type="di:GraphEdge" xmi:id="_smmbOzo3Edyw6--mXqZ7vg" anchor="_smmbMzo3Edyw6--mXqZ7vg _smMynTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_smmbPDo3Edyw6--mXqZ7vg" presentation="default" typeInfo="Inheritance"/>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_smmbPTo3Edyw6--mXqZ7vg" position="473,154" size="150,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_smmbPTo3Edyw6--mXqZ7vg" position="458,76" size="150,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smmbPjo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//Age"/>
       </semanticModel>
@@ -1804,7 +1799,7 @@
     <contained xsi:type="di:GraphEdge" xmi:id="_smnpUDo3Edyw6--mXqZ7vg" anchor="_smnCQTo3Edyw6--mXqZ7vg _smMynTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_smnpUTo3Edyw6--mXqZ7vg" presentation="default" typeInfo="Inheritance"/>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_smnpUjo3Edyw6--mXqZ7vg" position="664,66" size="150,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_smnpUjo3Edyw6--mXqZ7vg" position="1362,97" size="150,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smnpUzo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//USPhoneNumber"/>
       </semanticModel>

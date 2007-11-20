@@ -59,7 +59,7 @@ public interface Animal extends EObject {
 	 * @return the value of the '<em>Birth Date</em>' attribute.
 	 * @see #setBirthDate(Date)
 	 * @see com.verticon.tracker.TrackerPackage#getAnimal_BirthDate()
-	 * @model dataType="com.verticon.tracker.Date"
+	 * @model
 	 * @generated
 	 */
 	Date getBirthDate();
