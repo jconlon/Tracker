@@ -3111,16 +3111,6 @@ public interface TrackerPackage extends EPackage {
 	int GOAT_BREED = 35;
 
 	/**
-	 * The meta object id for the '<em>Date</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.util.Date
-	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDate()
-	 * @generated
-	 */
-	int DATE = 36;
-
-	/**
 	 * The meta object id for the '<em>Animial Id Number</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3128,7 +3118,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAnimialIdNumber()
 	 * @generated
 	 */
-	int ANIMIAL_ID_NUMBER = 37;
+	int ANIMIAL_ID_NUMBER = 36;
 
 	/**
 	 * The meta object id for the '<em>Premises Id Number</em>' data type.
@@ -3138,7 +3128,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPremisesIdNumber()
 	 * @generated
 	 */
-	int PREMISES_ID_NUMBER = 38;
+	int PREMISES_ID_NUMBER = 37;
 
 	/**
 	 * The meta object id for the '<em>Email</em>' data type.
@@ -3148,7 +3138,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 39;
+	int EMAIL = 38;
 
 
 	/**
@@ -3159,7 +3149,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDateTime()
 	 * @generated
 	 */
-	int DATE_TIME = 40;
+	int DATE_TIME = 39;
 
 	/**
 	 * The meta object id for the '<em>Age</em>' data type.
@@ -3169,7 +3159,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAge()
 	 * @generated
 	 */
-	int AGE = 41;
+	int AGE = 40;
 
 
 	/**
@@ -3180,7 +3170,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSPhoneNumber()
 	 * @generated
 	 */
-	int US_PHONE_NUMBER = 42;
+	int US_PHONE_NUMBER = 41;
 
 
 	/**
@@ -4050,17 +4040,6 @@ public interface TrackerPackage extends EPackage {
 	EEnum getGoatBreed();
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.Date <em>Date</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Date</em>'.
-	 * @see java.util.Date
-	 * @model instanceClass="java.util.Date"
-	 * @generated
-	 */
-	EDataType getDate();
-
-	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>Animial Id Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4877,16 +4856,6 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum GOAT_BREED = eINSTANCE.getGoatBreed();
-
-		/**
-		 * The meta object literal for the '<em>Date</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.util.Date
-		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDate()
-		 * @generated
-		 */
-		EDataType DATE = eINSTANCE.getDate();
 
 		/**
 		 * The meta object literal for the '<em>Animial Id Number</em>' data type.

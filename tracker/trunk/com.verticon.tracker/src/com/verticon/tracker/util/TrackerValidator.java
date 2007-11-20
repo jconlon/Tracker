@@ -212,8 +212,6 @@ public class TrackerValidator extends EObjectValidator {
 				return validateHorseBreed((HorseBreed)value, diagnostics, context);
 			case TrackerPackage.GOAT_BREED:
 				return validateGoatBreed((GoatBreed)value, diagnostics, context);
-			case TrackerPackage.DATE:
-				return validateDate((Date)value, diagnostics, context);
 			case TrackerPackage.ANIMIAL_ID_NUMBER:
 				return validateAnimialIdNumber((String)value, diagnostics, context);
 			case TrackerPackage.PREMISES_ID_NUMBER:
@@ -552,15 +550,6 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateGoatBreed(GoatBreed goatBreed, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return true;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateDate(Date date, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

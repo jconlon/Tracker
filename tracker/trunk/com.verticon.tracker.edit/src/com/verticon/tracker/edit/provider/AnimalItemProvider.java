@@ -43,7 +43,7 @@ import com.verticon.tracker.TrackerPackage;
  */
 public class AnimalItemProvider
 	extends ItemProviderAdapter
-	implements	ITableItemLabelProvider, IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+	implements	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

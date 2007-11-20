@@ -52,7 +52,7 @@ public interface Event extends EObject {
 	 * @return the value of the '<em>Date Time</em>' attribute.
 	 * @see #setDateTime(Date)
 	 * @see com.verticon.tracker.TrackerPackage#getEvent_DateTime()
-	 * @model dataType="com.verticon.tracker.DateTime" required="true"
+	 * @model required="true"
 	 * @generated
 	 */
 	Date getDateTime();

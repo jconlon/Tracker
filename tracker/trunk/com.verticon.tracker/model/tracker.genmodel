@@ -320,7 +320,6 @@
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/TO"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/Unspecified"/>
     </genEnums>
-    <genDataTypes ecoreDataType="tracker.ecore#//Date"/>
     <genDataTypes ecoreDataType="tracker.ecore#//AnimialIdNumber"/>
     <genDataTypes ecoreDataType="tracker.ecore#//PremisesIdNumber"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Email"/>

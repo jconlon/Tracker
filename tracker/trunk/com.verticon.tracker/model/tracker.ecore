@@ -13,7 +13,7 @@
       </eParameters>
     </eOperations>
     <eOperations name="activeTag" eType="#//Tag"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthDate" eType="#//Date"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sex" eType="#//Sex" defaultValueLiteral="Unspecified"
         unsettable="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tags" lowerBound="1" upperBound="-1"
@@ -45,7 +45,6 @@
     <eLiterals name="S" value="3" literal="Neutered/spayed female"/>
     <eLiterals name="Unspecified" value="4" literal="Unspecified"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="Date" instanceClassName="java.util.Date"/>
   <eClassifiers xsi:type="ecore:EClass" name="Tag">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="idNumber" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong" iD="true"/>
@@ -59,7 +58,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Bovine" abstract="true" eSuperTypes="#//Animal"/>
   <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateTime" lowerBound="1"
-        eType="#//DateTime"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="eventCode" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" changeable="false"
         volatile="true" transient="true" defaultValueLiteral="0" derived="true"/>
