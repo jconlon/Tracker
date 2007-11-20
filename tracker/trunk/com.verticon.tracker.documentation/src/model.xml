@@ -143,8 +143,7 @@
 		<title>Entering Date and DateTime</title>
 		<para>
 			When manually entering Dates and DateTime attribute values
-			in Premises documents the following formating patterns must be
-			observed:
+			in Premises documents the following formating patterns are determinative:
 			<table frame='all'>
 				<title>Format Patterns for Text Entry</title>
 				<tgroup cols='2' align='left' colsep='1' rowsep='1'>
@@ -152,25 +151,29 @@
 					<colspec colname='c2' />
 					<thead>
 						<row>
-							<entry>Attribute Name</entry>
-							<entry>Data Type</entry>
 							<entry>Format Pattern</entry>
 							<entry>Example</entry>
 						</row>
 					</thead>
 					<tbody>
 						<row>
-							<entry>Animal/@birthDate</entry>
-							<entry>Date</entry>
-							<entry>yyyy.MM.dd</entry>
-							<entry>2006.11.12</entry>
-
+							<entry>yyyy-MM-dd'T'HH:mm:ss'.'SSSZ</entry>
+							<entry>2007-11-12T00:00:00.000-0600</entry>
 						</row>
+						
 						<row>
-							<entry>Event/@dateTime</entry>
-							<entry>DateTime</entry>
-							<entry>yyyy.MM.dd.HH.mm.ss</entry>
-							<entry>2007.08.26.00.20.17</entry>
+							<entry>yyy-MM-dd'T'HH:mm:ss'.'SSS</entry>
+							<entry>2007-11-12T00:00:00.000</entry>
+						</row>
+						
+						<row>
+							<entry>yyyy-MM-dd'T'HH:mm:ss</entry>
+							<entry>2007-11-12T00:00:00</entry>
+						</row>
+						
+						<row>
+							<entry>yyyy-MM-dd'T'HH:mm</entry>
+							<entry>2007-11-12T00:00</entry>
 						</row>
 
 					</tbody>
