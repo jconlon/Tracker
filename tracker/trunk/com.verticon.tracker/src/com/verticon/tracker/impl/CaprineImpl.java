@@ -81,7 +81,7 @@ public class CaprineImpl extends AnimalImpl implements Caprine {
 	@Override
 	public String getBreed() {
 		if(getGoatBreed()==GoatBreed.UNSPECIFIED){
-			return null;
+			return "";
 		}
 
 		return getGoatBreed().getName();
