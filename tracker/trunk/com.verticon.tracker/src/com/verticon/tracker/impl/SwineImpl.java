@@ -186,6 +186,10 @@ public class SwineImpl extends AnimalImpl implements Swine {
 	 */
 	@Override
 	public String getBreed() {
+		if(getSwineBreed()==SwineBreed.UNSPECIFIED_LITERAL){
+			return null;
+		}
+
 		return getSwineBreed().getName();
 	}
 

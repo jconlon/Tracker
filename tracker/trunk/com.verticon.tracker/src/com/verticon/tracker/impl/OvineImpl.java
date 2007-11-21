@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.SheepBreed;
 import com.verticon.tracker.TrackerPackage;
@@ -185,6 +186,10 @@ public class OvineImpl extends AnimalImpl implements Ovine {
 	 */
 	@Override
 	public String getBreed() {
+		if(getSheepBreed()==SheepBreed.UNSPECIFIED_LITERAL){
+			return null;
+		}
+
 		return getSheepBreed().getName();
 	}
 
