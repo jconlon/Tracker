@@ -331,7 +331,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dairyBreed" eType="#//DairyBreed"
         defaultValueLiteral="Unspecified"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="DateTime" instanceClassName="java.util.Date"/>
   <eClassifiers xsi:type="ecore:EClass" name="TagApplied" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="MovedIn" eSuperTypes="#//Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourcePin" lowerBound="1"

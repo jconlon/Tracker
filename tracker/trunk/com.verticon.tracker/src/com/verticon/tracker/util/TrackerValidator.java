@@ -218,8 +218,6 @@ public class TrackerValidator extends EObjectValidator {
 				return validatePremisesIdNumber((String)value, diagnostics, context);
 			case TrackerPackage.EMAIL:
 				return validateEmail((String)value, diagnostics, context);
-			case TrackerPackage.DATE_TIME:
-				return validateDateTime((Date)value, diagnostics, context);
 			case TrackerPackage.AGE:
 				return validateAge((Age)value, diagnostics, context);
 			case TrackerPackage.US_PHONE_NUMBER:
@@ -659,15 +657,6 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateEmail(String email, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return true;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateDateTime(Date dateTime, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
