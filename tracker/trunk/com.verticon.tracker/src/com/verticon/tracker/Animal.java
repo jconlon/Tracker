@@ -33,6 +33,8 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getId <em>Id</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getComments <em>Comments</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getLastEventDateTime <em>Last Event Date Time</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getDam <em>Dam</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getSire <em>Sire</em>}</li>
  * </ul>
  * </p>
  *
@@ -305,6 +307,58 @@ public interface Animal extends EObject {
 	 * @generated
 	 */
 	Date getLastEventDateTime();
+
+	/**
+	 * Returns the value of the '<em><b>Dam</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dam</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dam</em>' reference.
+	 * @see #setDam(Animal)
+	 * @see com.verticon.tracker.TrackerPackage#getAnimal_Dam()
+	 * @model
+	 * @generated
+	 */
+	Animal getDam();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.Animal#getDam <em>Dam</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Dam</em>' reference.
+	 * @see #getDam()
+	 * @generated
+	 */
+	void setDam(Animal value);
+
+	/**
+	 * Returns the value of the '<em><b>Sire</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sire</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sire</em>' reference.
+	 * @see #setSire(Animal)
+	 * @see com.verticon.tracker.TrackerPackage#getAnimal_Sire()
+	 * @model
+	 * @generated
+	 */
+	Animal getSire();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.Animal#getSire <em>Sire</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Sire</em>' reference.
+	 * @see #getSire()
+	 * @generated
+	 */
+	void setSire(Animal value);
 
 	/**
 	 * <!-- begin-user-doc -->

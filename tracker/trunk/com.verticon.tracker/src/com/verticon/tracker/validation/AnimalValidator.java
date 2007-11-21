@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker.validation;
 
+import com.verticon.tracker.Animal;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.Tag;
 
@@ -42,6 +43,10 @@ public interface AnimalValidator {
 	boolean validateComments(String value);
 
 	boolean validateLastEventDateTime(Date value);
+
+	boolean validateDam(Animal value);
+
+	boolean validateSire(Animal value);
 
 	boolean validateLastEventDate(Date value);
 }

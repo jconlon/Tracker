@@ -9,6 +9,7 @@ package com.verticon.tracker.edit.provider;
 
 import java.text.DateFormat;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -28,6 +29,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.Sex;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 
@@ -43,7 +45,7 @@ import com.verticon.tracker.TrackerPackage;
  */
 public class AnimalItemProvider
 	extends ItemProviderAdapter
-	implements ITableItemLabelProvider,	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+	implements ITableItemLabelProvider, IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,6 +88,8 @@ public class AnimalItemProvider
 			addIdPropertyDescriptor(object);
 			addCommentsPropertyDescriptor(object);
 			addLastEventDateTimePropertyDescriptor(object);
+			addDamPropertyDescriptor(object);
+			addSirePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -334,6 +338,101 @@ public class AnimalItemProvider
 				 null));
 	}
 
+/**
+	 * This adds a property descriptor for the Dam feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	protected void addDamPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+	      (new ItemPropertyDescriptor
+	        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+	         getResourceLocator(),
+	         getString("_UI_Animal_dam_feature"),
+			 getString("_UI_PropertyDescriptor_description", "_UI_Animal_dam_feature", "_UI_Animal_type"),
+			 TrackerPackage.Literals.ANIMAL__DAM,
+	         true,
+	         false,
+	         true,
+	         null,
+	         null,
+	         null)
+	       {
+	         public Collection<?> getChoiceOfValues(Object object)
+	         {
+	        	 Animal animal = (Animal)object;
+	          
+	           // Filter out classes that aren't permitted.
+	           //
+	           Collection<?> result = super.getChoiceOfValues(object);
+	           for (Iterator<?> i = result.iterator(); i.hasNext(); )
+	           {
+	        	 Animal otherAnimal = (Animal)i.next();
+	             if (otherAnimal == animal){
+	               i.remove();//remove self
+	             }else if(otherAnimal==null){
+	            	 i.remove();//remove nulls
+	             }else if (otherAnimal.getSex()==null){
+	            	 i.remove();//remove unspecified
+	             }else if (!Sex.F_LITERAL.equals( otherAnimal.getSex())){
+	            	 i.remove();//remove non males
+	             }else if(!animal.getSpeciesCode().equals(otherAnimal.getSpeciesCode())){
+	            	 i.remove();//foreign species
+	             }
+	           }
+	           return result;
+	         }
+	       });
+	  }
+
+/**
+	 * This adds a property descriptor for the Sire feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	protected void addSirePropertyDescriptor(Object object){
+	    itemPropertyDescriptors.add
+	      (new ItemPropertyDescriptor
+	        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+	         getResourceLocator(),
+	         getString("_UI_Animal_sire_feature"),
+			 getString("_UI_PropertyDescriptor_description", "_UI_Animal_sire_feature", "_UI_Animal_type"),
+			 TrackerPackage.Literals.ANIMAL__SIRE,
+	         true,
+	         false,
+	         true,
+	         null,
+	         null,
+	         null)
+	       {
+	         public Collection<?> getChoiceOfValues(Object object)
+	         {
+	        	 Animal animal = (Animal)object;
+	          
+	           // Filter out classes that aren't permitted.
+	           //
+	           Collection<?> result = super.getChoiceOfValues(object);
+	           for (Iterator<?> i = result.iterator(); i.hasNext(); )
+	           {
+	        	 Animal otherAnimal = (Animal)i.next();
+	             if (otherAnimal == animal){
+	               i.remove();//remove self
+	             }else if(otherAnimal==null){
+	            	 i.remove();//remove nulls
+	             }else if (otherAnimal.getSex()==null){
+	            	 i.remove();//remove unspecified
+	             }else if (!Sex.M_LITERAL.equals( otherAnimal.getSex())){
+	            	 i.remove();//remove non males
+	             }else if(!animal.getSpeciesCode().equals(otherAnimal.getSpeciesCode())){
+	            	 i.remove();//foreign species
+	             }
+	           }
+	           return result;
+	         }
+	       });
+	  }
 /**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or

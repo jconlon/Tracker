@@ -338,6 +338,8 @@
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/comments"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/lastEventDateTime"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//Animal/dam"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//Animal/sire"/>
       <genOperations ecoreOperation="tracker.ecore#//Animal/allEvents"/>
       <genOperations ecoreOperation="tracker.ecore#//Animal/addTemplate">
         <genParameters ecoreParameter="tracker.ecore#//Animal/addTemplate/eventTemplate"/>
