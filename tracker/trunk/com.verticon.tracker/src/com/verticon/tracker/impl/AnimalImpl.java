@@ -415,10 +415,10 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 */
 	public String getSexCode() {
 		if(!isSetSexCode()){
-			return null;
+			return "";
 		}
 		if(sex==Sex.UNSPECIFIED_LITERAL){
-			return null;
+			return "";
 		}
 		return sex.getName();
 	}
