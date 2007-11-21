@@ -173,7 +173,7 @@ public class BovineDairyImpl extends BovineImpl implements BovineDairy {
 	@Override
 	public String getBreed() {
 		if(getDairyBreed()==DairyBreed.UNSPECIFIED_LITERAL){
-			return null;
+			return "";
 		}
 		return getDairyBreed().getName();
 	}

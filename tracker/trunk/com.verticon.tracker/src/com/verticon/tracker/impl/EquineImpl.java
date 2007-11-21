@@ -79,7 +79,7 @@ public class EquineImpl extends AnimalImpl implements Equine {
 	@Override
 	public String getBreed() {
 		if(getHorseBreed()==HorseBreed.UNSPECIFIED){
-			return null;
+			return "";
 		}
 
 		return getHorseBreed().getName();

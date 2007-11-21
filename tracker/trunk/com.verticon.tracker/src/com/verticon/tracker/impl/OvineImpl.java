@@ -187,7 +187,7 @@ public class OvineImpl extends AnimalImpl implements Ovine {
 	@Override
 	public String getBreed() {
 		if(getSheepBreed()==SheepBreed.UNSPECIFIED_LITERAL){
-			return null;
+			return "";
 		}
 
 		return getSheepBreed().getName();

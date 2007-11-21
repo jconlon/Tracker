@@ -173,7 +173,7 @@ public class BovineBisonImpl extends BovineImpl implements BovineBison {
 	@Override
 	public String getBreed() {
 		if(getBuffaloBreed()==BisonBreed.UNSPECIFIED_LITERAL){
-			return null;
+			return "";
 		}
 		return getBuffaloBreed().getName();
 	}
