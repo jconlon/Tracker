@@ -1621,13 +1621,17 @@ public class TrackerEditor
 
 		//Age
 		final TableColumn ageColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 300, true));
+		layout.addColumnData(new ColumnWeightData(2, 80, true));
 		ageColumn.setText(getString("_UI_AgeColumn_label"));
 
+		//LastEventDateTime
+		final TableColumn lastEventDateTimeColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 200, true));
+		lastEventDateTimeColumn.setText(getString("_UI_LastEventColumn_label"));
 
 		//Comments
 		final TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 100, true));
+		layout.addColumnData(new ColumnWeightData(2, 200, true));
 		commentsColumn.setText(getString("_UI_CommentsColumn_label"));
 
 		Listener sortListener = new Listener() {
@@ -1650,39 +1654,24 @@ public class TrackerEditor
 				
 				if (currentColumn == animalColumn) {
 					sortIdentifier = AnimalSorter.ANIMAL_TEXT;
-				}
-
-				if (currentColumn == ainColumn) {
+				}else if (currentColumn == ainColumn) {
 					sortIdentifier = AnimalSorter.AIN;
-				}
-
-				if (currentColumn == animalTypeColumn) {
+				}else if (currentColumn == animalTypeColumn) {
 					sortIdentifier = AnimalSorter.ANIMAL;
-				}
-
-				if (currentColumn == dDateColumn) {
+				}else if (currentColumn == dDateColumn) {
 					sortIdentifier = AnimalSorter.BIRTHDATE;
-				}
-
-				if (currentColumn == speciesColumn) {
+				}else if (currentColumn == speciesColumn) {
 					sortIdentifier = AnimalSorter.SPECIES;
-				}
-				
-
-				if (currentColumn == sexColumn) {
+				}else if (currentColumn == sexColumn) {
 					sortIdentifier = AnimalSorter.SEX;
-				}
-
-				if (currentColumn == breedColumn) {
+				}else if (currentColumn == breedColumn) {
 					sortIdentifier = AnimalSorter.BREED;
-				}
-
-				
-				if (currentColumn == ageColumn) {
+				}else if (currentColumn == ageColumn) {
 					sortIdentifier = AnimalSorter.AGE;
-				}
-				if (currentColumn == commentsColumn) {
+				}else if (currentColumn == commentsColumn) {
 					sortIdentifier = AnimalSorter.COMMENTS;
+				}else if (currentColumn == lastEventDateTimeColumn){
+					sortIdentifier = AnimalSorter.LAST_EVENT_DATE;
 				}
 
 				table.setSortDirection(dir);
@@ -1694,18 +1683,17 @@ public class TrackerEditor
 		breedColumn.addListener(SWT.Selection, sortListener);
 		animalColumn.addListener(SWT.Selection, sortListener);
 		ainColumn.addListener(SWT.Selection, sortListener);
-		
+		lastEventDateTimeColumn.addListener(SWT.Selection, sortListener);
 		animalTypeColumn.addListener(SWT.Selection, sortListener);
 		speciesColumn.addListener(SWT.Selection, sortListener);
 		sexColumn.addListener(SWT.Selection, sortListener);
 		dDateColumn.addListener(SWT.Selection, sortListener);
-		
 		ageColumn.addListener(SWT.Selection, sortListener);
 		commentsColumn.addListener(SWT.Selection, sortListener);
 		
 		
 		animalsTableViewer.setColumnProperties(
-				new String [] {"a", "b", "c", "d", "e","f", "g", "h","i"});
+				new String [] {"a", "b", "c", "d", "e","f", "g", "h","i","j"});
 		
 		animalsTableViewer.setContentProvider(
 		        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
@@ -1716,14 +1704,19 @@ public class TrackerEditor
 		          }
 		          public void notifyChanged(Notification notification)
 		          {
+		        	//Only listen to changes to Animals and Events
 		            switch (notification.getEventType())
 		            {
 		              case Notification.ADD:
 		              case Notification.ADD_MANY:
 		            	if (notification.getFeature() != TrackerPackage.eINSTANCE.getPremises_Animals()){
-		            		return;
+		            		if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()){
+//		            			System.out.println("Animals table Ignoring change: "+notification);
+		            			return;
+		            		}
 		                }
 		            }
+//		            System.out.println("Animals table acting on change: "+notification.getFeature());
 		            super.notifyChanged(notification);
 		            this.viewer.refresh();
 		          }

@@ -598,7 +598,12 @@ public class AnimalItemProvider
 	    			return animal.getAge().toString();
 	    		}
 	    		return null;
-	    	case 8:
+	    	case 8: 
+	    		if(animal.getLastEventDateTime()!=null){
+	    			return animal.getLastEventDateTime().toString();
+	    		}
+	    		return null;
+	    	case 9:
 	    		return animal.getComments();
 	    	default :
 	    		return "unknown " + columnIndex;

@@ -52,6 +52,7 @@ public class AnimalSorter extends ViewerSorter {
 	public final static int AGE = 7;
 	public final static int COMMENTS = 8;
 	public final static int ANIMAL_TEXT = 9;
+	public final static int LAST_EVENT_DATE = 10;
 	
 
 	// Criteria that the instance uses 
@@ -116,6 +117,9 @@ public class AnimalSorter extends ViewerSorter {
 				break;
 			case ANIMAL_TEXT :
 				returnValue = compareAnimalsText(animal1, animal2);
+				break;
+			case LAST_EVENT_DATE :
+				returnValue = compareLastEventDates(animal1, animal2);
 				break;
 			default:
 				returnValue = 0;
@@ -277,6 +281,22 @@ public class AnimalSorter extends ViewerSorter {
 		return getText(animal1).compareTo(getText(animal2));
 	}
 	
+	/**
+	 * Returns a number reflecting the collation order of the given animals
+	 * based on the Last Event Date.
+	 *
+	 * @param animal1 the first task element to be ordered
+	 * @param resource2 the second task element to be ordered
+	 * @return a negative number if the first element is less  than the 
+	 *  second element; the value <code>0</code> if the first element is
+	 *  equal to the second element; and a positive number if the first
+	 *  element is greater than the second element
+	 */
+	protected int compareLastEventDates(Animal animal1, Animal animal2) {
+		Date date1 = animal1.getLastEventDateTime()==null?CommonUtilities.DATE_REFERENCE.getTime():animal1.getLastEventDateTime();
+		Date date2 = animal2.getLastEventDateTime()==null?CommonUtilities.DATE_REFERENCE.getTime():animal2.getLastEventDateTime();
+		return date1.compareTo(date2);
+	}
 	/**
 	 * Returns the sort criteria of this this sorter.
 	 *
