@@ -54,6 +54,8 @@ import com.verticon.tracker.util.Species;
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getId <em>Id</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getComments <em>Comments</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getLastEventDateTime <em>Last Event Date Time</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getDam <em>Dam</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSire <em>Sire</em>}</li>
  * </ul>
  * </p>
  *
@@ -230,6 +232,26 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @ordered
 	 */
 	protected static final Date LAST_EVENT_DATE_TIME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDam() <em>Dam</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDam()
+	 * @generated
+	 * @ordered
+	 */
+	protected Animal dam;
+
+	/**
+	 * The cached value of the '{@link #getSire() <em>Sire</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSire()
+	 * @generated
+	 * @ordered
+	 */
+	protected Animal sire;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -471,6 +493,82 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 /**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Animal getDam() {
+		if (dam != null && dam.eIsProxy()) {
+			InternalEObject oldDam = (InternalEObject)dam;
+			dam = (Animal)eResolveProxy(oldDam);
+			if (dam != oldDam) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackerPackage.ANIMAL__DAM, oldDam, dam));
+			}
+		}
+		return dam;
+	}
+
+/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Animal basicGetDam() {
+		return dam;
+	}
+
+/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDam(Animal newDam) {
+		Animal oldDam = dam;
+		dam = newDam;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__DAM, oldDam, dam));
+	}
+
+/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Animal getSire() {
+		if (sire != null && sire.eIsProxy()) {
+			InternalEObject oldSire = (InternalEObject)sire;
+			sire = (Animal)eResolveProxy(oldSire);
+			if (sire != oldSire) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackerPackage.ANIMAL__SIRE, oldSire, sire));
+			}
+		}
+		return sire;
+	}
+
+/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Animal basicGetSire() {
+		return sire;
+	}
+
+/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSire(Animal newSire) {
+		Animal oldSire = sire;
+		sire = newSire;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__SIRE, oldSire, sire));
+	}
+
+/**
+	 * <!-- begin-user-doc -->
 	 * Hand implemented for speed (versus OCL??) because this method is used to generate the
 	 * key attribute for Animal.
 	 * Originally generated with the following OCL:
@@ -578,6 +676,12 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return getComments();
 			case TrackerPackage.ANIMAL__LAST_EVENT_DATE_TIME:
 				return getLastEventDateTime();
+			case TrackerPackage.ANIMAL__DAM:
+				if (resolve) return getDam();
+				return basicGetDam();
+			case TrackerPackage.ANIMAL__SIRE:
+				if (resolve) return getSire();
+				return basicGetSire();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -604,6 +708,12 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 			case TrackerPackage.ANIMAL__COMMENTS:
 				setComments((String)newValue);
 				return;
+			case TrackerPackage.ANIMAL__DAM:
+				setDam((Animal)newValue);
+				return;
+			case TrackerPackage.ANIMAL__SIRE:
+				setSire((Animal)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -627,6 +737,12 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return;
 			case TrackerPackage.ANIMAL__COMMENTS:
 				setComments(COMMENTS_EDEFAULT);
+				return;
+			case TrackerPackage.ANIMAL__DAM:
+				setDam((Animal)null);
+				return;
+			case TrackerPackage.ANIMAL__SIRE:
+				setSire((Animal)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -664,6 +780,10 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
 			case TrackerPackage.ANIMAL__LAST_EVENT_DATE_TIME:
 				return LAST_EVENT_DATE_TIME_EDEFAULT == null ? getLastEventDateTime() != null : !LAST_EVENT_DATE_TIME_EDEFAULT.equals(getLastEventDateTime());
+			case TrackerPackage.ANIMAL__DAM:
+				return dam != null;
+			case TrackerPackage.ANIMAL__SIRE:
+				return sire != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -37,6 +37,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastEventDateTime" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate" changeable="false"
         volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dam" eType="#//Animal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sire" eType="#//Animal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Sex">
     <eLiterals name="F" literal="Female"/>

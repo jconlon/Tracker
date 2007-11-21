@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_smKWUDo3Edyw6--mXqZ7vg" activeDiagram="_smKWUTo3Edyw6--mXqZ7vg">
   <model href="tracker.ecore#/"/>
-  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="1057,8">
+  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="555,223">
     <property xmi:id="_smKWUjo3Edyw6--mXqZ7vg" key="pageFormatName" value="A2"/>
     <property xmi:id="_smKWUzo3Edyw6--mXqZ7vg" key="diagramWidth" value="1680"/>
     <property xmi:id="_smKWVDo3Edyw6--mXqZ7vg" key="diagramHeight" value="2376"/>
@@ -15,7 +15,8 @@
       <element href="tracker.ecore#/"/>
     </semanticModel>
     <contained xsi:type="di:GraphNode" xmi:id="_smK9YDo3Edyw6--mXqZ7vg" position="802,305" size="216,-1">
-      <anchorage xmi:id="_smK9YTo3Edyw6--mXqZ7vg" graphEdge="_smftgzo3Edyw6--mXqZ7vg _smfthzo3Edyw6--mXqZ7vg _smftjTo3Edyw6--mXqZ7vg _smrTtDo3Edyw6--mXqZ7vg _WJ68UTpDEdyBGbgn02HOBA _7ARVoJH-EdyNi8UsPKraBA _liZlMJIGEdyNi8UsPKraBA"/>
+      <anchorage xmi:id="_smK9YTo3Edyw6--mXqZ7vg" graphEdge="_smftgzo3Edyw6--mXqZ7vg _smfthzo3Edyw6--mXqZ7vg _smftjTo3Edyw6--mXqZ7vg _smrTtDo3Edyw6--mXqZ7vg _WJ68UTpDEdyBGbgn02HOBA _7ARVoJH-EdyNi8UsPKraBA _liZlMJIGEdyNi8UsPKraBA _VPGNIJhZEdy1ALEjPI3ecg _c-zq0JhZEdy1ALEjPI3ecg"/>
+      <anchorage xmi:id="_VPBUoZhZEdy1ALEjPI3ecg" graphEdge="_VPGNIJhZEdy1ALEjPI3ecg _c-zq0JhZEdy1ALEjPI3ecg"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smK9Yjo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//Animal"/>
       </semanticModel>
@@ -1423,8 +1424,8 @@
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_smfthzo3Edyw6--mXqZ7vg" anchor="_smMylDo3Edyw6--mXqZ7vg _smK9YTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_smftiDo3Edyw6--mXqZ7vg" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -59, -628, 168]</waypoints>
-      <waypoints>[628, -59, 0, 168]</waypoints>
+      <waypoints>[0, -41, -628, 177]</waypoints>
+      <waypoints>[628, -41, 0, 177]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_smftjTo3Edyw6--mXqZ7vg" anchor="_smUHXDo3Edyw6--mXqZ7vg _smK9YTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_smgUkDo3Edyw6--mXqZ7vg" presentation="default" typeInfo="Inheritance"/>
@@ -2341,8 +2342,8 @@
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_7ARVoJH-EdyNi8UsPKraBA" anchor="_7AQHgJH-EdyNi8UsPKraBA _smK9YTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_7ARVoZH-EdyNi8UsPKraBA" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -191, -205, 168]</waypoints>
-      <waypoints>[205, -191, 0, 168]</waypoints>
+      <waypoints>[0, -172, -205, 178]</waypoints>
+      <waypoints>[205, -172, 0, 178]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_39boAJIEEdyNi8UsPKraBA" position="190,1092" size="128,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_39boAZIEEdyNi8UsPKraBA" presentation="default">
@@ -2440,6 +2441,24 @@
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_liZlMJIGEdyNi8UsPKraBA" anchor="_liYXEJIGEdyNi8UsPKraBA _smK9YTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_liZlMZIGEdyNi8UsPKraBA" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_VPGNIJhZEdy1ALEjPI3ecg" anchor="_smK9YTo3Edyw6--mXqZ7vg _VPBUoZhZEdy1ALEjPI3ecg">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_VPGNIZhZEdy1ALEjPI3ecg" presentation="default">
+        <element href="tracker.ecore#//Animal/dam"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_VPGNIphZEdy1ALEjPI3ecg" id="nameLabel" uDistance="15" vDistance="8"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_VPGNI5hZEdy1ALEjPI3ecg" id="cardinalityLabel" uDistance="18" vDistance="-13"/>
+      <waypoints>[-187, 79, -187, 79]</waypoints>
+      <waypoints>[-187, 7, -187, 7]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_c-zq0JhZEdy1ALEjPI3ecg" anchor="_smK9YTo3Edyw6--mXqZ7vg _VPBUoZhZEdy1ALEjPI3ecg">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_c-zq0ZhZEdy1ALEjPI3ecg" presentation="default">
+        <element href="tracker.ecore#//Animal/sire"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_c-zq0phZEdy1ALEjPI3ecg" id="nameLabel" uDistance="19" vDistance="9"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_c-zq05hZEdy1ALEjPI3ecg" id="cardinalityLabel" uDistance="20" vDistance="-12"/>
+      <waypoints>[-265, 115, -265, 115]</waypoints>
+      <waypoints>[-265, -113, -265, -113]</waypoints>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

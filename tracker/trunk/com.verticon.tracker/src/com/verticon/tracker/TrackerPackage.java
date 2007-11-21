@@ -187,13 +187,31 @@ public interface TrackerPackage extends EPackage {
 	int ANIMAL__LAST_EVENT_DATE_TIME = 11;
 
 	/**
+	 * The feature id for the '<em><b>Dam</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANIMAL__DAM = 12;
+
+	/**
+	 * The feature id for the '<em><b>Sire</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANIMAL__SIRE = 13;
+
+	/**
 	 * The number of structural features of the '<em>Animal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL_FEATURE_COUNT = 12;
+	int ANIMAL_FEATURE_COUNT = 14;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.TagImpl <em>Tag</em>}' class.
@@ -367,6 +385,24 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOVINE__LAST_EVENT_DATE_TIME = ANIMAL__LAST_EVENT_DATE_TIME;
+
+	/**
+	 * The feature id for the '<em><b>Dam</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE__DAM = ANIMAL__DAM;
+
+	/**
+	 * The feature id for the '<em><b>Sire</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE__SIRE = ANIMAL__SIRE;
 
 	/**
 	 * The number of structural features of the '<em>Bovine</em>' class.
@@ -773,6 +809,24 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE_BEEF__LAST_EVENT_DATE_TIME = BOVINE__LAST_EVENT_DATE_TIME;
 
 	/**
+	 * The feature id for the '<em><b>Dam</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_BEEF__DAM = BOVINE__DAM;
+
+	/**
+	 * The feature id for the '<em><b>Sire</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_BEEF__SIRE = BOVINE__SIRE;
+
+	/**
 	 * The feature id for the '<em><b>Beef Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -907,6 +961,24 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int OVINE__LAST_EVENT_DATE_TIME = ANIMAL__LAST_EVENT_DATE_TIME;
+
+	/**
+	 * The feature id for the '<em><b>Dam</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OVINE__DAM = ANIMAL__DAM;
+
+	/**
+	 * The feature id for the '<em><b>Sire</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OVINE__SIRE = ANIMAL__SIRE;
 
 	/**
 	 * The feature id for the '<em><b>Sheep Breed</b></em>' attribute.
@@ -1045,6 +1117,24 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE_BISON__LAST_EVENT_DATE_TIME = BOVINE__LAST_EVENT_DATE_TIME;
 
 	/**
+	 * The feature id for the '<em><b>Dam</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_BISON__DAM = BOVINE__DAM;
+
+	/**
+	 * The feature id for the '<em><b>Sire</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_BISON__SIRE = BOVINE__SIRE;
+
+	/**
 	 * The feature id for the '<em><b>Buffalo Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1179,6 +1269,24 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOVINE_DAIRY__LAST_EVENT_DATE_TIME = BOVINE__LAST_EVENT_DATE_TIME;
+
+	/**
+	 * The feature id for the '<em><b>Dam</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_DAIRY__DAM = BOVINE__DAM;
+
+	/**
+	 * The feature id for the '<em><b>Sire</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_DAIRY__SIRE = BOVINE__SIRE;
 
 	/**
 	 * The feature id for the '<em><b>Dairy Breed</b></em>' attribute.
@@ -2741,6 +2849,24 @@ public interface TrackerPackage extends EPackage {
 	int SWINE__LAST_EVENT_DATE_TIME = ANIMAL__LAST_EVENT_DATE_TIME;
 
 	/**
+	 * The feature id for the '<em><b>Dam</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWINE__DAM = ANIMAL__DAM;
+
+	/**
+	 * The feature id for the '<em><b>Sire</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWINE__SIRE = ANIMAL__SIRE;
+
+	/**
 	 * The feature id for the '<em><b>Swine Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2877,6 +3003,24 @@ public interface TrackerPackage extends EPackage {
 	int EQUINE__LAST_EVENT_DATE_TIME = ANIMAL__LAST_EVENT_DATE_TIME;
 
 	/**
+	 * The feature id for the '<em><b>Dam</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__DAM = ANIMAL__DAM;
+
+	/**
+	 * The feature id for the '<em><b>Sire</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__SIRE = ANIMAL__SIRE;
+
+	/**
 	 * The feature id for the '<em><b>Horse Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3011,6 +3155,24 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int CAPRINE__LAST_EVENT_DATE_TIME = ANIMAL__LAST_EVENT_DATE_TIME;
+
+	/**
+	 * The feature id for the '<em><b>Dam</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__DAM = ANIMAL__DAM;
+
+	/**
+	 * The feature id for the '<em><b>Sire</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__SIRE = ANIMAL__SIRE;
 
 	/**
 	 * The feature id for the '<em><b>Goat Breed</b></em>' attribute.
@@ -3304,6 +3466,28 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAnimal_LastEventDateTime();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.verticon.tracker.Animal#getDam <em>Dam</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Dam</em>'.
+	 * @see com.verticon.tracker.Animal#getDam()
+	 * @see #getAnimal()
+	 * @generated
+	 */
+	EReference getAnimal_Dam();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.verticon.tracker.Animal#getSire <em>Sire</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Sire</em>'.
+	 * @see com.verticon.tracker.Animal#getSire()
+	 * @see #getAnimal()
+	 * @generated
+	 */
+	EReference getAnimal_Sire();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Tag <em>Tag</em>}'.
@@ -4213,6 +4397,22 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ANIMAL__LAST_EVENT_DATE_TIME = eINSTANCE.getAnimal_LastEventDateTime();
+
+		/**
+		 * The meta object literal for the '<em><b>Dam</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ANIMAL__DAM = eINSTANCE.getAnimal_Dam();
+
+		/**
+		 * The meta object literal for the '<em><b>Sire</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ANIMAL__SIRE = eINSTANCE.getAnimal_Sire();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.TagImpl <em>Tag</em>}' class.
