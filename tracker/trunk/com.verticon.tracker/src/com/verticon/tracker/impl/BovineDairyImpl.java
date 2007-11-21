@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import com.verticon.tracker.BisonBreed;
 import com.verticon.tracker.BovineDairy;
 import com.verticon.tracker.DairyBreed;
 import com.verticon.tracker.TrackerPackage;
@@ -171,6 +172,9 @@ public class BovineDairyImpl extends BovineImpl implements BovineDairy {
 	
 	@Override
 	public String getBreed() {
+		if(getDairyBreed()==DairyBreed.UNSPECIFIED_LITERAL){
+			return null;
+		}
 		return getDairyBreed().getName();
 	}
 

@@ -5,16 +5,14 @@
  */
 package com.verticon.tracker.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import com.verticon.tracker.Equine;
 import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.util.Species;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -80,6 +78,10 @@ public class EquineImpl extends AnimalImpl implements Equine {
 	 */
 	@Override
 	public String getBreed() {
+		if(getHorseBreed()==HorseBreed.UNSPECIFIED){
+			return null;
+		}
+
 		return getHorseBreed().getName();
 	}
 
