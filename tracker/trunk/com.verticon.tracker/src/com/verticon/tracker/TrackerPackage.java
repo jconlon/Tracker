@@ -3142,16 +3142,6 @@ public interface TrackerPackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '<em>Date Time</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.util.Date
-	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDateTime()
-	 * @generated
-	 */
-	int DATE_TIME = 39;
-
-	/**
 	 * The meta object id for the '<em>Age</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3159,7 +3149,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAge()
 	 * @generated
 	 */
-	int AGE = 40;
+	int AGE = 39;
 
 
 	/**
@@ -3170,7 +3160,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSPhoneNumber()
 	 * @generated
 	 */
-	int US_PHONE_NUMBER = 41;
+	int US_PHONE_NUMBER = 40;
 
 
 	/**
@@ -4075,17 +4065,6 @@ public interface TrackerPackage extends EPackage {
 	EDataType getEmail();
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.Date <em>Date Time</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Date Time</em>'.
-	 * @see java.util.Date
-	 * @model instanceClass="java.util.Date"
-	 * @generated
-	 */
-	EDataType getDateTime();
-
-	/**
 	 * Returns the meta object for data type '{@link com.verticon.tracker.util.Age <em>Age</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4886,16 +4865,6 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType EMAIL = eINSTANCE.getEmail();
-
-		/**
-		 * The meta object literal for the '<em>Date Time</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.util.Date
-		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDateTime()
-		 * @generated
-		 */
-		EDataType DATE_TIME = eINSTANCE.getDateTime();
 
 		/**
 		 * The meta object literal for the '<em>Age</em>' data type.

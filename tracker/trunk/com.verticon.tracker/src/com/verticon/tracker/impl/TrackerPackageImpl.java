@@ -351,13 +351,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EDataType dateTimeEDataType = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EDataType ageEDataType = null;
 
 	/**
@@ -1214,15 +1207,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDataType getDateTime() {
-		return dateTimeEDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EDataType getAge() {
 		return ageEDataType;
 	}
@@ -1380,7 +1364,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		animialIdNumberEDataType = createEDataType(ANIMIAL_ID_NUMBER);
 		premisesIdNumberEDataType = createEDataType(PREMISES_ID_NUMBER);
 		emailEDataType = createEDataType(EMAIL);
-		dateTimeEDataType = createEDataType(DATE_TIME);
 		ageEDataType = createEDataType(AGE);
 		usPhoneNumberEDataType = createEDataType(US_PHONE_NUMBER);
 	}
@@ -1878,7 +1861,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEDataType(animialIdNumberEDataType, String.class, "AnimialIdNumber", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(premisesIdNumberEDataType, String.class, "PremisesIdNumber", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(emailEDataType, String.class, "Email", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(dateTimeEDataType, Date.class, "DateTime", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(ageEDataType, Age.class, "Age", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(usPhoneNumberEDataType, String.class, "USPhoneNumber", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 

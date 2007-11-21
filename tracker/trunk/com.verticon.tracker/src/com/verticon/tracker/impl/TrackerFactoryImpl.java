@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker.impl;
 
+import com.verticon.tracker.*;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BisonBreed;
@@ -168,8 +170,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createPremisesIdNumberFromString(eDataType, initialValue);
 			case TrackerPackage.EMAIL:
 				return createEmailFromString(eDataType, initialValue);
-			case TrackerPackage.DATE_TIME:
-				return createDateTimeFromString(eDataType, initialValue);
 			case TrackerPackage.AGE:
 				return createAgeFromString(eDataType, initialValue);
 			case TrackerPackage.US_PHONE_NUMBER:
@@ -209,8 +209,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return convertPremisesIdNumberToString(eDataType, instanceValue);
 			case TrackerPackage.EMAIL:
 				return convertEmailToString(eDataType, instanceValue);
-			case TrackerPackage.DATE_TIME:
-				return convertDateTimeToString(eDataType, instanceValue);
 			case TrackerPackage.AGE:
 				return convertAgeToString(eDataType, instanceValue);
 			case TrackerPackage.US_PHONE_NUMBER:
@@ -719,25 +717,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	}
 
 /**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Date createDateTimeFromString(EDataType eDataType, String initialValue) {
-		return (Date)super.createFromString(eDataType, initialValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertDateTimeToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
-	}
-
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT

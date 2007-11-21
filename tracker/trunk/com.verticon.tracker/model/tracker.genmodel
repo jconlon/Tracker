@@ -323,7 +323,6 @@
     <genDataTypes ecoreDataType="tracker.ecore#//AnimialIdNumber"/>
     <genDataTypes ecoreDataType="tracker.ecore#//PremisesIdNumber"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Email"/>
-    <genDataTypes ecoreDataType="tracker.ecore#//DateTime"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Age"/>
     <genDataTypes ecoreDataType="tracker.ecore#//USPhoneNumber"/>
     <genClasses provider="Stateful" ecoreClass="tracker.ecore#//Animal" labelFeature="#//tracker/Animal/species">
