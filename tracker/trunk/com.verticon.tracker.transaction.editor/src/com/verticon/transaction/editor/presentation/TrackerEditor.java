@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -32,17 +33,20 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.ui.ViewerPane;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.provider.IViewerNotification;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
@@ -50,9 +54,10 @@ import org.eclipse.emf.edit.ui.celleditor.AdapterFactoryTreeEditor;
 import org.eclipse.emf.edit.ui.dnd.EditingDomainViewerDropAdapter;
 import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
 import org.eclipse.emf.edit.ui.dnd.ViewerDragAdapter;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emf.edit.ui.provider.NotifyChangedToViewerRefresh;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider.ViewerRefresh;
 import org.eclipse.emf.transaction.ResourceSetListener;
+import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.ui.provider.TransactionalAdapterFactoryContentProvider;
 import org.eclipse.emf.transaction.ui.provider.TransactionalAdapterFactoryLabelProvider;
@@ -113,14 +118,18 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
+import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.Tag;
+import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.presentation.EventSorter;
+import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
 
 
 /**
- * This is an example of a EXTLibrary model editor.
+ * Tracker transaction aware model editor.
  * <!-- begin-user-doc -->
  * This particular implementation is customized from the default editor generated
  * by EMF.  This editor differs from the default EMF implementation in the following
@@ -149,6 +158,9 @@ import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
 public class TrackerEditor
 	extends MultiPageEditorPart
 	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
+	
+	private static final String CONSOLE = TrackerEditor.class.getSimpleName();
+	
 	/**
 	 * This keeps track of the editing domain that is used to track all changes to the model.
 	 * <!-- begin-user-doc -->
@@ -789,9 +801,16 @@ public class TrackerEditor
 
 		selectionViewer = (TreeViewer)viewerPane.getViewer();
 
-		selectionViewer.setContentProvider(new TransactionalAdapterFactoryContentProvider((TransactionalEditingDomain) getEditingDomain(), adapterFactory));
+		selectionViewer.setContentProvider(
+				new TransactionalAdapterFactoryContentProvider(
+						(TransactionalEditingDomain) getEditingDomain(), 
+						adapterFactory
+				)
+		);
 
-		selectionViewer.setLabelProvider(new TransactionalAdapterFactoryLabelProvider((TransactionalEditingDomain) getEditingDomain(), adapterFactory));
+		selectionViewer.setLabelProvider(
+				new TransactionalAdapterFactoryLabelProvider(
+						(TransactionalEditingDomain) getEditingDomain(), adapterFactory));
 		
 		// unlike other EMF editors, I edit only a single resource, not a resource set
 		selectionViewer.setInput(getResource());
@@ -928,41 +947,97 @@ public class TrackerEditor
 		eventCommentsColumn.addListener(SWT.Selection, sortListener);
 		eventsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f","g"});
 
+		//FIXME ContentProvider for eventsTable
 		eventsTableViewer.setContentProvider(
-				new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
+				new TransactionalAdapterFactoryContentProvider(
+						(TransactionalEditingDomain) getEditingDomain(),adapterFactory) // 14.2.2
 				{
-					public Object [] getElements(Object object)
-					{
-						return ((Premises)object).eventHistory().toArray();
+					
+					/**
+					 * Overrides the inherited implementation by running in a read-only transaction
+					 * and returning the eventHistorys.
+					 */
+					@Override
+					public Object[] getElements(final Object object) {
+						return (Object[]) run(new RunnableWithResult.Impl() {
+							public void run() {
+								setResult(((Premises)object).eventHistory().toArray());
+							}});
 					}
-//					public void notifyChanged(Notification notification)
-//					{
-//						
-//						switch (notification.getEventType())
-//						{
-//						case Notification.ADD:
-//						case Notification.ADD_MANY:
-//							System.out.println("Adding "+notification.getFeature());
-//							if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
-//								System.out.println("Not refreshing... ");
-//								return;
-//							}
-//						}
-//						super.notifyChanged(notification);
-//						eventsTableViewer.refresh();
-//					}
-				});
+
+					@Override
+					public void notifyChanged(Notification notification) {
+						// Do nothing
+					}
+				}
+		);
+		
 		eventsTableViewer.setLabelProvider(
-				new AdapterFactoryLabelProvider(adapterFactory));
+				new TransactionalAdapterFactoryLabelProvider(
+						(TransactionalEditingDomain) getEditingDomain(), adapterFactory));
+		
+		
 		Object rootObject = getRoot();
 		if (rootObject instanceof Premises){
-			eventsTableViewer.setInput((Premises)rootObject);
-			viewerPane.setTitle((Premises)rootObject);
+			Premises premises = (Premises)rootObject;
+			eventsTableViewer.setInput(premises);
+			viewerPane.setTitle(premises);
+			//Kludge to refresh the EventsTable. 
+			premises.eAdapters().add(new MyContentAdapter(eventsTableViewer));
 		}
 		createContextMenuFor(eventsTableViewer);
 		int pageIndex = addPage(viewerPane.getControl());
 		setPageText(pageIndex, tableName);
+		
+		
 	}
+	
+	/**
+	 * Kludge to refresh the EventsTable.  
+	 * @author jconlon
+	 *
+	 */
+	class MyContentAdapter extends EContentAdapter{
+		public MyContentAdapter(Viewer viewer) {
+			super();
+			this.viewer = viewer;
+		}
+		
+		/**
+		   * This keeps track of the one viewer using this content provider.
+		   */
+		  private final Viewer viewer;
+
+		  /**
+		   * This is used to queue viewer notifications and refresh viewers based on them. 
+		   * @since 2.2.0
+		   */
+		  protected ViewerRefresh viewerRefresh;
+		
+		@Override
+		public void notifyChanged(Notification notification){
+			super.notifyChanged(notification);//needed to walk the entire model
+
+			if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
+				printToConsole("Events table ignoring change: "+notification.getFeature());
+				return;
+			}
+			
+		    if (viewer != null && viewer.getControl() != null && !viewer.getControl().isDisposed())
+		    {
+		    	  printToConsole("Calling NotifiedChangedToViewerRefresh: "+notification.getFeature());
+		        NotifyChangedToViewerRefresh.handleNotifyChanged(
+		          viewer,
+		          notification.getNotifier(),
+		          notification.getEventType(),
+		          notification.getFeature(),
+		          notification.getOldValue(),
+		          notification.getNewValue(),
+		          notification.getPosition());
+		      }
+		    }
+	}
+	
 	
 	/**
 	 * @return
@@ -1147,25 +1222,58 @@ public class TrackerEditor
 	/**
 	 * This deals with how we want selection in the outliner to affect the other views.
 	 * <!-- begin-user-doc -->
+	 * Ties in the eventsTableViewer to the selection in the outliner.
 	 * <!-- end-user-doc -->
 	 */
 	public void handleContentOutlineSelection(ISelection selection) {
-		if (!selection.isEmpty() && selection instanceof IStructuredSelection) {
+		if (currentViewerPane != null && !selection.isEmpty() && selection instanceof IStructuredSelection) {
 			Iterator<?> selectedElements = ((IStructuredSelection)selection).iterator();
 			if (selectedElements.hasNext()) {
 				// Get the first selected element.
 				//
 				Object selectedElement = selectedElements.next();
 
-				ArrayList<Object> selectionList = new ArrayList<Object>();
-				selectionList.add(selectedElement);
-				while (selectedElements.hasNext()) {
-					selectionList.add(selectedElements.next());
-				}
-
-				// Set the selection to the widget.
+				// If it's the selection viewer, then we want it to select the same selection as this selection.
 				//
-				selectionViewer.setSelection(new StructuredSelection(selectionList));
+				if (currentViewerPane.getViewer() == selectionViewer ) {
+					ArrayList<Object> selectionList = new ArrayList<Object>();
+					selectionList.add(selectedElement);
+					while (selectedElements.hasNext()) {
+						selectionList.add(selectedElements.next());
+					}
+
+					// Set the selection to the widget.
+					//
+					selectionViewer.setSelection(new StructuredSelection(selectionList));
+				// Handle animalsTableViewer
+				} else if (currentViewerPane.getViewer() == eventsTableViewer){
+					if(selectedElement instanceof Event){
+
+						ArrayList<Object> selectionList = new ArrayList<Object>();
+						selectionList.add(selectedElement);
+						while (selectedElements.hasNext()) {
+							Object o = selectedElements.next();
+							if(o instanceof Event){
+								selectionList.add(o);
+							}
+
+						}
+
+						// Set the selection to the widget.
+						//
+						eventsTableViewer.setSelection(new StructuredSelection(selectionList));
+					}
+					
+				
+				}
+				else {
+					// Set the input to the widget.
+					//
+					if (currentViewerPane.getViewer().getInput() != selectedElement) {
+						currentViewerPane.getViewer().setInput(selectedElement);
+						currentViewerPane.setTitle(selectedElement);
+					}
+				}
 			}
 		}
 	}
@@ -1516,6 +1624,9 @@ public class TrackerEditor
 		super.dispose();
 	}
 
-	
+	private static void printToConsole(String msg) {
+		ConsoleUtil.println(CONSOLE, new Date()
+				+ "\t" + msg);
+	}
 
 }
