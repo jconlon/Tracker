@@ -18,8 +18,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.swt.widgets.DateTime;
 
 import com.verticon.tracker.Event;
-import com.verticon.tracker.export.wlic.presentation.CollectionFilter;
-import com.verticon.tracker.export.wlic.presentation.FilterCriteria;
+import com.verticon.tracker.util.CollectionFilter;
+import com.verticon.tracker.util.FilterCriteria;
 
 public class Utils {
 

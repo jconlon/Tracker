@@ -33,6 +33,7 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.editor.util.ActionUtils;
 import com.verticon.tracker.export.wlic.Utils;
+import com.verticon.tracker.util.FilterCriteria;
 
 /**
  * The only page of the ExportWlicWizard, displays message and a potential
