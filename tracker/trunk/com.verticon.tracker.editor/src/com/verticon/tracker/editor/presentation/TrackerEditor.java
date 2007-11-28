@@ -1544,7 +1544,9 @@ public class TrackerEditor
 							}
 						}
 						super.notifyChanged(notification);
-						this.viewer.refresh();
+						if(viewer!=null){
+							viewer.refresh();
+						}
 					}
 				});
 		eventsTableViewer.setLabelProvider(
