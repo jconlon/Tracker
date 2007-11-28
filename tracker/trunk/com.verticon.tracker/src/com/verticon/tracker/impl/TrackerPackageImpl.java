@@ -847,6 +847,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getWeighIn_WeightGainPerDay() {
+		return (EAttribute)weighInEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSwine() {
 		return swineEClass;
 	}
@@ -1360,6 +1369,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		weighInEClass = createEClass(WEIGH_IN);
 		createEAttribute(weighInEClass, WEIGH_IN__WEIGHT);
+		createEAttribute(weighInEClass, WEIGH_IN__WEIGHT_GAIN_PER_DAY);
 
 		swineEClass = createEClass(SWINE);
 		createEAttribute(swineEClass, SWINE__SWINE_BREED);
@@ -1561,6 +1571,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		initEClass(weighInEClass, WeighIn.class, "WeighIn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getWeighIn_Weight(), ecorePackage.getEInt(), "weight", null, 1, 1, WeighIn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getWeighIn_WeightGainPerDay(), ecorePackage.getEInt(), "weightGainPerDay", null, 0, 1, WeighIn.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(swineEClass, Swine.class, "Swine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSwine_SwineBreed(), this.getSwineBreed(), "swineBreed", "Unspecified", 0, 1, Swine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

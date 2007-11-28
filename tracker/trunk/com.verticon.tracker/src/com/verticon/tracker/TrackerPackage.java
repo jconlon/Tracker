@@ -2722,13 +2722,22 @@ public interface TrackerPackage extends EPackage {
 	int WEIGH_IN__WEIGHT = EVENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Weight Gain Per Day</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEIGH_IN__WEIGHT_GAIN_PER_DAY = EVENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Weigh In</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WEIGH_IN_FEATURE_COUNT = EVENT_FEATURE_COUNT + 1;
+	int WEIGH_IN_FEATURE_COUNT = EVENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.SwineImpl <em>Swine</em>}' class.
@@ -3810,6 +3819,17 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getWeighIn_Weight();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.WeighIn#getWeightGainPerDay <em>Weight Gain Per Day</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Weight Gain Per Day</em>'.
+	 * @see com.verticon.tracker.WeighIn#getWeightGainPerDay()
+	 * @see #getWeighIn()
+	 * @generated
+	 */
+	EAttribute getWeighIn_WeightGainPerDay();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Swine <em>Swine</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4673,6 +4693,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute WEIGH_IN__WEIGHT = eINSTANCE.getWeighIn_Weight();
+
+		/**
+		 * The meta object literal for the '<em><b>Weight Gain Per Day</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WEIGH_IN__WEIGHT_GAIN_PER_DAY = eINSTANCE.getWeighIn_WeightGainPerDay();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.SwineImpl <em>Swine</em>}' class.
