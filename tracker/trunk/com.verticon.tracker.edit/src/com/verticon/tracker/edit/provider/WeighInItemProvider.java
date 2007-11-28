@@ -72,6 +72,7 @@ public class WeighInItemProvider
 			super.getPropertyDescriptors(object);
 
 			addWeightPropertyDescriptor(object);
+			addWeightGainPerDayPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -91,6 +92,28 @@ public class WeighInItemProvider
 				 getString("_UI_PropertyDescriptor_description", "_UI_WeighIn_weight_feature", "_UI_WeighIn_type"),
 				 TrackerPackage.Literals.WEIGH_IN__WEIGHT,
 				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Weight Gain Per Day feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addWeightGainPerDayPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_WeighIn_weightGainPerDay_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_WeighIn_weightGainPerDay_feature", "_UI_WeighIn_type"),
+				 TrackerPackage.Literals.WEIGH_IN__WEIGHT_GAIN_PER_DAY,
+				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
@@ -134,6 +157,7 @@ public class WeighInItemProvider
 
 		switch (notification.getFeatureID(WeighIn.class)) {
 			case TrackerPackage.WEIGH_IN__WEIGHT:
+			case TrackerPackage.WEIGH_IN__WEIGHT_GAIN_PER_DAY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

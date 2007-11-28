@@ -420,6 +420,7 @@
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//WeighIn">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//WeighIn/weight"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//WeighIn/weightGainPerDay"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Swine">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Swine/swineBreed"/>

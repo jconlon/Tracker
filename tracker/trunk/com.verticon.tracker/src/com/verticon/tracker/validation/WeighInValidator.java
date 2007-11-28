@@ -17,4 +17,6 @@ public interface WeighInValidator {
 	boolean validate();
 
 	boolean validateWeight(int value);
+
+	boolean validateWeightGainPerDay(int value);
 }
