@@ -23,7 +23,7 @@ import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.editor.util.PremisesProcessor;
 import com.verticon.tracker.export.wlic.Utils;
-import com.verticon.tracker.export.wlic.presentation.FilterCriteria;
+import com.verticon.tracker.util.FilterCriteria;
 
 /**
  * @author jconlon
