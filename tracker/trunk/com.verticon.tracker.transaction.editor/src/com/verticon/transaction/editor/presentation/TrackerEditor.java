@@ -46,7 +46,6 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.provider.IViewerNotification;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
@@ -120,7 +119,6 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
 
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
-import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.presentation.EventSorter;
@@ -947,7 +945,6 @@ public class TrackerEditor
 		eventCommentsColumn.addListener(SWT.Selection, sortListener);
 		eventsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f","g"});
 
-		//FIXME ContentProvider for eventsTable
 		eventsTableViewer.setContentProvider(
 				new TransactionalAdapterFactoryContentProvider(
 						(TransactionalEditingDomain) getEditingDomain(),adapterFactory) // 14.2.2
