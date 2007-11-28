@@ -6,12 +6,12 @@
          point="org.eclipse.ui.views">
       <category
             name="Tracker"
-            id="com.verticon.tracker.transaction.publisher">
+            id="com.verticon.tracker.views">
       </category>
       <view
             name="Event Publishers"
             icon="icons/sample.gif"
-            category="com.verticon.tracker.transaction.publisher"
+            category="com.verticon.tracker.views"
             class="com.verticon.tracker.transaction.publisher.views.PublisherViewPart"
             id="com.verticon.tracker.transaction.publisher.views.SampleView">
       </view>
