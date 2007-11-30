@@ -37,10 +37,10 @@ import com.verticon.tracker.editor.presentation.TrackerEditor;
 
 
 /**
- * This action delegate queries the user for the name of a class. Then it uses
- * the OCL Query APIs to find the class and selects it in the editor.
+ * This action delegate provides a base class for building ocl queries.
+ * 
  */
-abstract class AbstractQueryDelegate
+public abstract class AbstractQueryDelegate
 	extends ActionDelegate
 	implements IEditorActionDelegate {
 
