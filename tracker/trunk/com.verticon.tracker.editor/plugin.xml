@@ -191,6 +191,31 @@
            class="com.verticon.tracker.editor.preferences.PreferenceInitializer">
      </initializer>
   </extension>
-  
-  
+  <extension
+        point="org.eclipse.ui.perspectives">
+     <perspective
+           class="com.verticon.tracker.editor.perspective.PerspectiveFactory"
+           id="com.verticon.tracker.perspective"
+           icon="icons/sample.gif"
+           name="Tracker">
+     </perspective>
+  </extension>
+  <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+         <perspectiveShortcut id="com.verticon.tracker.perspective"/>
+      </perspectiveExtension>
+   </extension>
+  <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension targetID="com.verticon.tracker.perspective">
+         <perspectiveShortcut id="org.eclipse.ui.resourcePerspective"/>
+         <newWizardShortcut
+               id="com.verticon.tracker.editor.presentation.TrackerModelWizardID">
+         </newWizardShortcut>
+         <newWizardShortcut
+               id="com.verticon.tracker.editor.presentation.TrackerTemplateWizardID">
+         </newWizardShortcut>
+      </perspectiveExtension>
+   </extension>
 </plugin>
