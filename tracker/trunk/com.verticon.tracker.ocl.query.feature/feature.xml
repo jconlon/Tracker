@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.ocl.query"
       label="Tracker OCL Query"
-      version="0.1.0"
+      version="0.2.0"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.ocl.query">
 
@@ -328,6 +328,13 @@ POSSIBILITY OF SUCH DAMAGES.
 
    <plugin
          id="org.eclipse.emf.ocl.examples.interpreter"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.ocl.query.viewer"
          download-size="0"
          install-size="0"
          version="0.0.0"
