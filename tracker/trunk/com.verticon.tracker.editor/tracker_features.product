@@ -38,6 +38,8 @@ that can be installed and used with other Eclipse (3.3)-based offerings.
       </win>
    </launcher>
 
+   <intro introId="com.verticon.tracker.editor.intro"/>
+
    <vm>
    </vm>
 

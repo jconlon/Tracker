@@ -152,6 +152,18 @@
               name="preferenceCustomization"
               value="plugin_customization.ini">
         </property>
+        <property
+              name="introTitle"
+              value="Welcome to the Tracker Animal Information Manager">
+        </property>
+        <property
+              name="introBrandingImageText"
+              value="Tracker by Verticon, Inc.">
+        </property>
+        <property
+              name="introDescription-overview"
+              value="Tracker overview description here....">
+        </property>
      </product>
   </extension>
   <extension
@@ -218,4 +230,20 @@
          </newWizardShortcut>
       </perspectiveExtension>
    </extension>
+   
+   <extension point="org.eclipse.ui.intro"> 
+    <introProductBinding
+        introId="org.eclipse.ui.intro.universal"
+        productId="com.verticon.tracker.editor.Tracker">
+    </introProductBinding>
+    <intro
+          class="org.eclipse.ui.intro.config.CustomizableIntroPart"
+          id="com.verticon.tracker.editor.intro">
+    </intro>
+    <introProductBinding
+          introId="com.verticon.tracker.editor.intro"
+          productId="com.verticon.tracker.editor.Tracker">
+    </introProductBinding>
+   </extension>
+   
 </plugin>
