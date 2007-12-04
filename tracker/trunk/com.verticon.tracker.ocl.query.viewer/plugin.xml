@@ -27,6 +27,7 @@
                relationship="right"
                id="com.verticon.tracker.ocl.query.view">
          </view>
+         <viewShortcut id="com.verticon.tracker.ocl.query.view"/>
       </perspectiveExtension>
    </extension>
 
