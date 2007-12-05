@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
-<chapter id="ch03">
+<chapter id="ch04">
 	<title>Querying for Information and Selecting Elements</title>
 	<section>
-		<title>
-			<acronym>OCL</acronym>
-			Introduction
+		<title><acronym>OCL</acronym>Introduction
 		</title>
 		<para>
 			Even though the structure of the Tracker Premises Model is
