@@ -125,7 +125,7 @@
      <product
            application="org.eclipse.ui.ide.workbench"
            description="Tracker models animal event history within a premises"
-           name="Tracker">
+           name="Tracker Animal Management Framework">
         <property
               name="windowImages"
               value="icons/verticon32.gif"/>
@@ -146,7 +146,7 @@
               value="7,225,441,20"/>
         <property
               name="appName"
-              value="Tracker">
+              value="Tracker Animal Management Framework">
         </property>
         <property
               name="preferenceCustomization"

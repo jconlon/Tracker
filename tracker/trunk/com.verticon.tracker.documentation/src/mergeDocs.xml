@@ -2,6 +2,7 @@
 <mergeDocs>
   <doc path="book.xml"/>
   <doc path="introduction.xml"/>
+  <doc path="overview.xml"/>
   <doc path="model.xml"/>
   <doc path="bulkEventProcessing.xml"/>
   <doc path="transactionEventProcessing.xml"/>
