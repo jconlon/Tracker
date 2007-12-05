@@ -70,14 +70,14 @@
 		<title>The Need for Animal Tracking</title>
 		<para>
 			Either for hunting or husbandry human beings have always
-			observed and remembered animal movements. Today with larger
+			observed and remembered animal movements. Today, with larger
 			herds and more interaction between producers and
-			infrastructure providers more animal movements translates
-			into more information to manage.
+			infrastructure providers, more animal movements mean
+		    more information for the producer or provider to manage.
 		</para>
 		<para>
 			Computers, software applications and animal event sensors
-			that sense, record and manage animal movements and histories
+			that record and manage animal movements and histories
 			can ease the information management burden and reduce the
 			cost for farm animal producers and livestock infrastructure
 			providers.
@@ -85,7 +85,7 @@
 		<para>
 			Tracker is used by livestock producers, infrastructure
 			providers and process control auditors as an effective, low
-			cost solution for
+			cost solution for;
 			<itemizedlist mark='bullet'>
 			    <listitem>
 					<para>recording animal history;</para>
@@ -107,7 +107,7 @@
 	<colophon>
 		<para>
 			Production versions of this documentation were produced with
-			the DocBook DSSSL Stylesheets called by the build tool Ant
+			the DocBook DSSSL Stylesheets, called by the Apache Ant build tool,
 			from within an Eclipse IDE.
 		</para>
 	</colophon>

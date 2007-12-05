@@ -4,39 +4,11 @@
 	<title>Bulk Event Processing</title>
 	<section>
 		<title>Bulk Loading Events and Animals to Documents</title>
-		<para>
-			Although Tracker Editors make it easy to add individual
-			animals and events to Premises Documents, individually
-			adding dozens of animals, or hundreds of events to a
-			Premises is not practical. For bulk loading of animals and
-			events Tracker uses Animal Document Templates, Tag IdNumber
-			files and event manipulation features to simplify the
-			process.
-		</para>
-		<para>
-			Like Tracker Premises Documents, Animal Document Templates
-			are document files created by Tracker Wizards. Think of
-			Animal Documents as containing some but not all the
-			information that is in a Premises Document. Specifically a
-			Animal Document is a Premises Document that only contains a
-			single animal. Like an animal in the Premises Document, an
-			Animal Document Template can contain a tag with an
-			associated set of events. Animal Document Templates serve as
-			a way to represent an event or a set of events that can then
-			be applied to one or more specified animals in a Premises
-			Document.
-		</para>
-		<para>
-			Within a Premises Document you can specify which animals to
-			apply the events contained in the Animal Document Template
-			to, by:
-			<orderedlist numeration="arabic">
+		<para>Although Tracker Editors make it easy to add individual animals and events to Premises Documents, individually adding dozens of animals, or hundreds of events to a Premises is not practical. For bulk loading of animals and events Tracker uses Animal Document Templates, Tag IdNumber files and event manipulation features to simplify the process.</para>
+		<para>Like Tracker Premises Documents, Animal Document Templates are document files created by Tracker Wizards. Think of Animal Documents as containing some but not all the information that is in a Premises Document. Specifically a Animal Document is a Premises Document that only contains a single animal. Like an animal in the Premises Document, an Animal Document Template can contain a tag with an associated set of events. Animal Document Templates serve as a way to represent an event or a set of events that can then be applied to one or more specified animals in a Premises Document.</para>
+		<para>Within a Premises Document you can specify which animals to apply the events contained in the Animal Document Template to, by:<orderedlist numeration="arabic">
 				<listitem>
-					<para>
-						Directly selecting the animal or a set of
-						animals in the Premises Document with mouse
-						selections.
-						<tip>
+					<para>Directly selecting the animal or a set of animals in the Premises Document with mouse	selections.<tip>
 							<para>
 								One or more animals in the Premises
 								Document can also be selected with
@@ -48,12 +20,7 @@
 					</para>
 				</listitem>
 				<listitem>
-					<para>
-						Indirectly selecting an animal or set of animals
-						in the Premises Document from lists of
-						Tag/@idNumbers contained in Tag IdNumber files.
-						See
-						<xref linkend="ch04idNumberFiles" />
+					<para>Indirectly selecting an animal or set of animals in the Premises Document from lists of Tag/@idNumbers contained in Tag IdNumber files. See<xref linkend="ch04idNumberFiles" />
 					</para>
 				</listitem>
 			</orderedlist>
@@ -62,82 +29,52 @@
 	<section>
 		<title>Animal Document Templates</title>
 		<para>
-			Animal Document Templates are similar to Premises documents
-			accept they use the *.animal extension, contain a default
-			animal, an attached tag, and a set of representative events.
-			Tracker Event manipulation utilities accessible through
-			popup menus allow Animal Document Templates to be used to
-			add various combinations of animals and/or events to
-			specified sets of animals in the Premises Document.
+			Animal Document Templates are similar to Premises documents accept they use the *.animal extension, contain a default animal, an attached tag, and a set of representative events.  Tracker Event manipulation utilities accessible through popup menus allow Animal Document Templates to be used to add various combinations of animals and/or events to specified sets of animals in the Premises Document.
 		</para>
 		<para>
-			Animal Document Templates have the following
-			characteristics:
+			Animal Document Templates have the following characteristics;
 			<orderedlist numeration="loweralpha">
 				<listitem>
 					<para>
-						Contain a default Animal, a Tag and a set of
-						representative events.
+						Animal Documents contain a default Animal, a Tag and a set of representative events;
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						If a Tag is included the Tag/@idNumber is not
-						considered significant and is ignored.
+						If a Tag is included as a child element of the Animal Element, the Tag/@idNumber is not considered significant and is ignored;
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						Are persisted in files with a *.animal
-						extension.
+						Animal Documents are persisted in files with a *.animal extension;
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						All events are significant and will be copied to
-						the specified Animal or set Animals in the
-						Premises Document.
+						All Animal Document Event Elements are significant and will be copied to the specified Animal or set Animals in the Premises Document;
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						Timestamps of the events are considered
-						significant and are copied to the events added
-						to specified Animal or set of Animal in the
-						Premises Document. The following are special
-						exceptions:
+						Date Time attributes of Animal Document Event Elements are considered significant and are copied to the Event Elements that are added to the specified Animal or set of Animal Elements in the Premises Document. The following are special exceptions;
 						<orderedlist numeration="arabic">
 							<listitem>
 								<para>
-									When a tags file name uses the
-									format yyMMddHHmmss.tags. The dates
-									of all events copied to the Premises
-									Document will be assume the time
-									stamp of
+									When a tags file name uses the format yyMMddHHmmss.tags. The Date Time attributes of all Event Elements copied to the Premises Document will assume the time stamp of of the date pattern
 									<emphasis>yyMMddHHss</emphasis>
-									. For example the tags file
-									060409131111.Tags will set the date
-									of all events to 04/09/06 13:11:11
+									. For example the tags file 060409131111.Tags will set the Date Time attribute of all Event Elements to 2006-04-09T13:11:11;
 								</para>
 							</listitem>
 							<listitem>
 								<para>
-									When the date of an event in an Animal Document
-									Template is set to a year 
-									earlier than 1000 AD, then the
-									date of the event copied to the Premises Document
-									is set to the current time.
+									When the date of an event in an Animal Document Template is set to a year earlier than 1000 AD, then the date of the event copied to the Premises Document is set to the current time the Event.
 								</para>
 							</listitem>
 
 						</orderedlist>
 						<note>
 							<para>
-								When Loading Events and Animals to Premises Documents
-								using the Tracker Transaction
-								processing facility, the events copied to the Premises
-								Document are always set to the
-								current time.
+								Bulk loading of events is only applicable to the the Tracker Editor, when transaction Events and Animals are added to Premises Documents using the Tracker Transaction processing facility, the Event Element added to the Premises Document will always have the Date Time attributes set to the current time.
 							</para>
 						</note>
 					</para>
@@ -149,37 +86,25 @@
 	<section id="ch04idNumberFiles">
 		<title>Tag IdNumber Files</title>
 		<para>
-			Most tag readers will transmit the numbers  
-			representing the animal id as an
+			Commercial tag readers typically transmit animal id numbers to computers as
 			<acronym>ASCII</acronym>
-			encoded string (For more information on ASCII, see the
-			Wikipedia entry for
+			encoded characters (For more information on ASCII, see the Wikipedia entry for
 			<ulink url="http://en.wikipedia.org/wiki/ASCII">
 				<citetitle>ASCII</citetitle>
 			</ulink>
-			).
+			). Tag Readers send this data to computers over serial communication ports or Bluetooth network connections. 
 			<note>
 				<para>
-					In the Tracker Premises Model the id Number of the tags 
-					are modeled as the Tag Element's idNumber attribute
-					<code>Tag/@idNumber</code>.
+					In the Tracker Premises Model, the Tag id Numbers are represented as Tracker  
+					<code>Tag/@idNumber</code> attributes.
 				</para>
 			</note>
-			Memory based Tag Readers typically output multiple tag reads
-			as lists of
-			<acronym>ASCII</acronym>
-			<code>Tag/@idNumber</code>
-			strings in text files. Tracker calls
-			<code>Tag/@idNumber</code>
-			text files that have been saved with the *.tags extension a
-			<emphasis>Tag IdNumber File</emphasis>
-			.
+			A convenient way to handle serial and/or Bluetooth tag id number transmissions is to setup the receiving computer's communication facility to capture this data as text files. 
+			Capture files containing <acronym>ASCII</acronym> numbers that are saved with a *.tags extension are identified by Tracker as
+			<emphasis>Tag IdNumber Files.</emphasis>
 		</para>
 		<para>
-			To indicate to Tracker that the read time of the tags in a
-			Tag IdNumber file is significant, the name of the tag file
-			may be formated to reflect that time. To timestamp a Tag
-			IdNumber file use the formating of
+			To indicate to Tracker that the read time of the tags in a Tag IdNumber file is significant, the name of the tag file may be formated to reflect that time. To timestamp a Tag IdNumber file use the formating of
 			<code>yyMMddHHmmss</code>
 			, where
 			<simplelist type='horiz' columns='1'>
@@ -193,13 +118,13 @@
 				<member>ss is the second</member>
 			</simplelist>
 			<example>
-				<title>A Timestamped Tag IdNumber File Name</title>
+				<title>A Time stamped Tag IdNumber File Name</title>
 				<formalpara>
 					<title>060409131111.tags</title>
 					<para>
 						Specifies the date of all
 						<code>Tag/@idNumber</code>
-						reads to have occurred at 04/09/06 at 13:11:11.
+						reads to have occurred at 2006-04-09T13:11:11.
 					</para>
 				</formalpara>
 			</example>
@@ -207,8 +132,7 @@
 		</para>
 		<tip>
 			<para>
-				Tag IdNumber Files can also be utilized by the
-				transaction infrastructure. See ...
+				Tag IdNumber Files can also be utilized by the transaction infrastructure. See ...
 			</para>
 		</tip>
 	</section>
@@ -217,33 +141,26 @@
 		<section>
 			<title>Adding Events to Manually Selecting Animals</title>
 			<para>
-				To add a series of events to an animal or set of animals
-				in a Premises Document select the animal or animals and invoke
-				a popup menu item.
+				To add a series of events to an animal or set of animals in a Premises Document select the animal or animals and invoke a popup menu item;
 				<orderedlist numeration="loweralpha">
 					<listitem>
 						<para>
-							Right click on the Animal to get the top level
-							popup menu
+							Right click on the Animal to get the top level popup menu;
 						</para>
 					</listitem>
 					<listitem>
 						<para>
-							Select the 'Tracker' menu item to get the Tracker
-							popup menu
+							Select the 'Tracker' menu item to get the Tracker popup menu;
 						</para>
 					</listitem>
 					<listitem>
 						<para>
-							Select 'Add Template Events to Selected
-							Animals' to bring up a selection window to
-							select a Template
+							Select 'Add Template Events to Selected Animals' to bring up a selection window to select a Template;
 						</para>
 					</listitem>
 					<listitem>
 						<para>
-							Choose an Animal Document Template containing the set of
-						    events you wish to add the animal.
+							Choose an Animal Document Template containing the set of events you wish to add the animal.
 						</para>
 					</listitem>
 				</orderedlist>
@@ -254,17 +171,11 @@
 				Add Events and/or Animals to a List of Animals Specified in a File
 			</title>
 			<para>
-				To add a series of events and/or animals to the Premises as a whole, you
-				will still need to specify which animals to add event to.  This can
-				be done indirectly with a Tag IdNumber file.
-				Select a Tag IdNumber file and invoke a
-				popup menu item it.
+				To add a series of events and/or animals to the Premises as a whole, you will still need to specify which animals to add event to.  This can be done indirectly with a Tag IdNumber file. Select a Tag IdNumber file and invoke a popup menu item it.
 				<orderedlist numeration="loweralpha">
 					<listitem>
 						<para>
-							Right click on the Animal Document Template
-							that contains the list of animal ids which specify the set of 
-							animals in the Premises Document that you wish to add events to.
+							Right click on the Animal Document Template that contains the list of animal ids which specify the set of animals in the Premises Document that you wish to add events to.
 						</para>
 					</listitem>
 					<listitem>
@@ -274,16 +185,12 @@
 					</listitem>
 					<listitem>
 						<para>
-							Select 'Add Template Events to Premises' to
-							bring up a selection window that will allow you to select a
-							Animal Document Template.
+							Select 'Add Template Events to Premises' to bring up a selection window that will allow you to select a Animal Document Template.
 						</para>
 					</listitem>
 					<listitem>
 						<para>
-							Choose an Animal Document Template containing the set of
-							template events and the default animal type
-							you wish to add the file specified animals in the premises.
+							Choose an Animal Document Template containing the set of template events and the default animal type you wish to add the file specified animals in the premises.
 						</para>
 					</listitem>
 				</orderedlist>
