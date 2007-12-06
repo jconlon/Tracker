@@ -131,7 +131,7 @@
               value="icons/verticon32.gif"/>
         <property
               name="aboutText"
-              value="Tracker Animal Event Management Platform&#x0A;Version: {0}&#x0A;&#x0A;(c) Copyright Verticon, Inc. 2007.  All rights reserved. &#x0A;&#x0A;Visit http:/www.verticon.com&#x0A;&#x0A;Tracker is powered by Eclipse technology and includes Eclipse plugins &#x0A;that can be installed and used with other Eclipse (3.3)-based offerings."/>
+              value="Tracker Animal Event Management Framework&#x0A;Version: {0}&#x0A;&#x0A;(c) Copyright Verticon, Inc. 2007.  All rights reserved. &#x0A;&#x0A;Visit http:/www.verticon.com&#x0A;&#x0A;Tracker is powered by Eclipse technology and includes Eclipse plugins &#x0A;that can be installed and used with other Eclipse (3.3)-based offerings."/>
         <property
               name="aboutImage"
               value="icons/tracker_lg.gif"/>
