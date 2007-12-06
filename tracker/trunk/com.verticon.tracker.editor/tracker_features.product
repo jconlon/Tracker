@@ -6,7 +6,7 @@
    <aboutInfo>
       <image path="/com.verticon.tracker.editor/icons/tracker_lg.gif"/>
       <text>
-         Tracker Animal Event Management Platform
+         Tracker Animal Event Management Framework
 Version: {0}
 
 (c) Copyright Verticon, Inc. 2007.  All rights reserved. 
