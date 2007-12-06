@@ -2,11 +2,12 @@
 <mergeDocs>
   <doc path="book.xml"/>
   <doc path="introduction.xml"/>
-  <doc path="overview.xml"/>
-  <doc path="model.xml"/>
-  <doc path="bulkEventProcessing.xml"/>
-  <doc path="transactionEventProcessing.xml"/>
-  <doc path="ocl.xml"/>
+  <doc path="overview.xml"/><!-- chapter 2 -->
+  <doc path="model.xml"/><!-- chapter 3 -->
+  <doc path="navigation.xml"/><!-- chapter 4 -->
+  <doc path="bulkEventProcessing.xml"/><!-- chapter 5 -->
+  <doc path="transactionEventProcessing.xml"/><!-- chapter 6 -->
+  <doc path="ocl.xml"/><!-- chapter 7 -->
   <doc path="exporting.xml"/>
   <doc path="fdl.xml"/>
   <doc path="gpl.xml"/>

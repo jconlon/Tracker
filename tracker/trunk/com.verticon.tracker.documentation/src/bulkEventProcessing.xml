@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
-<chapter>
+<chapter id="chBulkEventProcessing">
 	<title>Bulk Event Processing</title>
 	<section>
 		<title>Bulk Loading Events and Animals to Documents</title>
@@ -14,13 +14,13 @@
 								Document can also be selected with
 								<acronym>OCL</acronym>
 								Query operations. See
-								<xref linkend="ch03" />
+								<xref linkend="chOcl" />
 							</para>
 						</tip>
 					</para>
 				</listitem>
 				<listitem>
-					<para>Indirectly selecting an animal or set of animals in the Premises Document from lists of Tag/@idNumbers contained in Tag IdNumber files. See<xref linkend="ch04idNumberFiles" />
+					<para>Indirectly selecting an animal or set of animals in the Premises Document from lists of Tag/@idNumbers contained in Tag IdNumber files. See<xref linkend="chBulkEventProcessingIdNumberFiles" />
 					</para>
 				</listitem>
 			</orderedlist>
@@ -83,7 +83,7 @@
 		</para>
 	</section>
 
-	<section id="ch04idNumberFiles">
+	<section id="chBulkEventProcessingIdNumberFiles">
 		<title>Tag IdNumber Files</title>
 		<para>
 			Commercial tag readers typically transmit animal id numbers to computers as
