@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
-<chapter id="ch03">
+<chapter id="chModel">
 	<title>Premises Model</title>
 	<section>
 		<title>Documenting the Animal Premises</title>
@@ -12,7 +12,7 @@
 		<para>The Tracker enables users to create, transform and edit Livestock Premises documents that represent specific Animal Premises. Premises documents are displayed and manipulated with Tracker Editors, Wizards, and utilities. The attributes of the premises, the animals in the premises and the events associated with these animals are specified with Premises documents.</para>
 		<para>Tracker Model document files utilize a .premises file extension to distinguish them from other types of files.</para>
 	</section>
-	<section id="ch02dataModel">
+	<section id="chModelDataModel">
 		<title>Tracker Data Model</title>
 		<para>Because all user activity centers around the creation and manipulation of<emphasis>Tracker Premises Documents</emphasis>, understanding the structure of Tracker Premises documents is the easiest way to learn to use the information management facilities of the Tracker.</para>
 		<para>

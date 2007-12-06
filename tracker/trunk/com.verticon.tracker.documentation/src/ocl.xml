@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
-<chapter id="ch04">
+<chapter id="chOcl">
 	<title>Querying for Information and Selecting Elements</title>
 	<section>
 		<title><acronym>OCL</acronym>Introduction
@@ -29,7 +29,7 @@
 			<acronym>OCL</acronym>
 			Interpreter or Query tools to interrogate Premises documents
 			refer to:
-			<xref linkend="ch02dataModel" />
+			<xref linkend="chModelDataModel" />
 			.
 		</para>
 

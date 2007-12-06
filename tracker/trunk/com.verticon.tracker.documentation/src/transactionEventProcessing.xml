@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
-<chapter>
+<chapter id="chTransactionEventProcessing">
 	<title>Transaction Event Processing</title>
 	<section>
 		<title>Adding Event Transactions to Documents</title>
