@@ -162,7 +162,7 @@ public class FairRegistrationWeighInWorkSheetBuilder implements WorkSheetBuilder
 		//Weight
 		row.createCell((short)7).setCellValue(weighIn.getWeight());
 		//EarTag
-		row.createCell((short)8).setCellValue(weighIn.getTag().getIdNumber());
+		row.createCell((short)8).setCellValue(weighIn.getTag().getId());
 	}
     
     

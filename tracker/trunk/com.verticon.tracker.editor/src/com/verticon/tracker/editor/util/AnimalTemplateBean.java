@@ -37,13 +37,22 @@ import com.verticon.tracker.TrackerFactory;
 	}
 
 	/**
-	 * 
+	 * @deprecated use method with the string parm 
 	 * @return the animal and set all the event dates if useCurrentDate is set.
 	 */
 	public Animal getAnimal(Long tag) {
+		return getAnimal( tag.toString());
+	}
+	
+
+	/**
+	 * 
+	 * @return the animal and set all the event dates if useCurrentDate is set.
+	 */
+	public Animal getAnimal(String tag){
 		Animal copiedAnimal = (Animal)copier.copy(animal);
 		if(copiedAnimal.activeTag()!=null){
-			copiedAnimal.activeTag().setIdNumber(tag);
+			copiedAnimal.activeTag().setId(tag);
 			if(date !=null){
 				for (Event event : copiedAnimal.allEvents()) {
 					event.setDateTime(date);
@@ -56,7 +65,7 @@ import com.verticon.tracker.TrackerFactory;
 		}else{
 			//no active tag create one
 			Tag newTag = TrackerFactory.eINSTANCE.createTag();
-			newTag.setIdNumber(tag);
+			newTag.setId(tag);
 			copiedAnimal.getTags().add(newTag);
 		}
 		return copiedAnimal;

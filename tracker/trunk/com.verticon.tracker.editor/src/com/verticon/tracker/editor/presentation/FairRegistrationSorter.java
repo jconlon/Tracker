@@ -139,7 +139,7 @@ public class FairRegistrationSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	private int compareTagIDNumber(FairRegistration fairRegistration1, FairRegistration fairRegistration2) {
-		return new Long(fairRegistration1.getIdNumber()).compareTo(fairRegistration2.getIdNumber());
+		return getComparator().compare(fairRegistration1.getId(), fairRegistration2.getId());
 	}
 	
 	/**
@@ -157,7 +157,7 @@ public class FairRegistrationSorter extends ViewerSorter {
 	private int compareAnimalIDNumber(FairRegistration fairRegistration1, FairRegistration fairRegistration2) {
 		Animal animal1 = (Animal)fairRegistration1.getTag().eContainer();
 		Animal animal2 = (Animal)fairRegistration2.getTag().eContainer();
-		return new Long(animal1.getIdNumber()).compareTo(animal2.getIdNumber());
+		return getComparator().compare(animal1.getId(), animal2.getId());
 	}
 
 	/**

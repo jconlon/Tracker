@@ -47,7 +47,7 @@ public class CalendarDateDuration {
 		int daysTmp = initDays(startDate,  finishDate);
 		if(daysTmp<0){
 			this.monthsPart=monthsTmp-1;
-			this.daysPart=daysTmp +finishDate.daysInMonth(startDate.getYear(), startDate.getMonth());
+			this.daysPart=daysTmp +CalendarDate.daysInMonth(startDate.getYear(), startDate.getMonth());
 		}else{
 			this.monthsPart=monthsTmp;
 			this.daysPart=daysTmp;

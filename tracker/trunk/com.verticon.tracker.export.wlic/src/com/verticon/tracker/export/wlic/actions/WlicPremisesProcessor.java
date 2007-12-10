@@ -112,7 +112,7 @@ public class WlicPremisesProcessor implements PremisesProcessor {
 			out = event.getTag().isUsainNumberUsed()?"1,":"0,";
 			break;
 		case 6://ID number
-			out = event.getIdNumber()+",";
+			out = event.getId()+",";
 			break;
 		case 7://Species
 			out = animal.getSpeciesCode()+',';

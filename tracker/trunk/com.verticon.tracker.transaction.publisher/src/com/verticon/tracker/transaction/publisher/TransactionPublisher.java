@@ -148,8 +148,11 @@ public class TransactionPublisher {
 	private void addTemplateEventsToAnimalInPremises(
 			Collection<Event> templateEvents, Long tagNumberToAdd,
 			Premises activePremises) {
-		Animal animal = CommonUtilities.findAnimal(tagNumberToAdd,
+		Animal animal = CommonUtilities.findOrCreateAnimal(tagNumberToAdd.toString(),
 				activePremises, templateAnimal);
+		
+		
+		
 		Collection<Event> events = copyValidEvents(templateEvents, animal);
 		for (Event event : events) {
 			printToConsole(event.getDateTime() + "\t" + animal.getId() + '\t'

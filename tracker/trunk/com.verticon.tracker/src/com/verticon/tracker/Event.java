@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.Event#isElectronicallyRead <em>Electronically Read</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#isCorrection <em>Correction</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getComments <em>Comments</em>}</li>
- *   <li>{@link com.verticon.tracker.Event#getIdNumber <em>Id Number</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getTag <em>Tag</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getId <em>Id</em>}</li>
  * </ul>
@@ -162,21 +161,6 @@ public interface Event extends EObject {
 	 * @generated
 	 */
 	void setComments(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Id Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Id Number</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id Number</em>' attribute.
-	 * @see com.verticon.tracker.TrackerPackage#getEvent_IdNumber()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 * @generated
-	 */
-	long getIdNumber();
 
 	/**
 	 * Returns the value of the '<em><b>Tag</b></em>' container reference.

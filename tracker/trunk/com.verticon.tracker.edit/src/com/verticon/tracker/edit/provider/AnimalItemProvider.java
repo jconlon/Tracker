@@ -80,7 +80,6 @@ public class AnimalItemProvider
 			addBirthDatePropertyDescriptor(object);
 			addSexPropertyDescriptor(object);
 			addSpeciesPropertyDescriptor(object);
-			addIdNumberPropertyDescriptor(object);
 			addBreedPropertyDescriptor(object);
 			addAgePropertyDescriptor(object);
 			addSexCodePropertyDescriptor(object);
@@ -158,28 +157,6 @@ public class AnimalItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Id Number feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addIdNumberPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Animal_idNumber_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_idNumber_feature", "_UI_Animal_type"),
-				 TrackerPackage.Literals.ANIMAL__ID_NUMBER,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -496,7 +473,7 @@ public class AnimalItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = Long.toString(((Animal)object).getIdNumber());
+		String label = ((Animal)object).getId();
 		return label == null || label.length() == 0 ?
 			getString("_UI_"+getResourceName(object)+"_type") :
 			label+" "+getString("_UI_"+getResourceName(object)+"_type");
@@ -527,7 +504,6 @@ public class AnimalItemProvider
 			case TrackerPackage.ANIMAL__BIRTH_DATE:
 			case TrackerPackage.ANIMAL__SEX:
 			case TrackerPackage.ANIMAL__SPECIES:
-			case TrackerPackage.ANIMAL__ID_NUMBER:
 			case TrackerPackage.ANIMAL__BREED:
 			case TrackerPackage.ANIMAL__AGE:
 			case TrackerPackage.ANIMAL__SEX_CODE:
@@ -582,7 +558,7 @@ public class AnimalItemProvider
 	    switch (columnIndex){
 	        //FIXME 184712 Column 0 must present the first object as getText() for both table and tree
 	    	case 0: return getText( object); 
-	    	case 1: return Long.toString(((Animal)object).getIdNumber()); 
+	    	case 1: return ((Animal)object).getId(); 
 	    	case 2: return getString("_UI_"+getResourceName(object)+"_type") ;//Animal 
 	    	case 3: return animal.getSpeciesCode();
 	    	case 4: return animal.getSexCode();

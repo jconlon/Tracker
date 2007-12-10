@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.verticon.tracker.Tag#getIdNumber <em>Id Number</em>}</li>
  *   <li>{@link com.verticon.tracker.Tag#isUsainNumberUsed <em>Usain Number Used</em>}</li>
  *   <li>{@link com.verticon.tracker.Tag#getEvents <em>Events</em>}</li>
  *   <li>{@link com.verticon.tracker.Tag#getId <em>Id</em>}</li>
@@ -35,32 +34,6 @@ public interface Tag extends EObject {
 	 * @generated
 	 */
 	String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
-
-	/**
-	 * Returns the value of the '<em><b>Id Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Id Number</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id Number</em>' attribute.
-	 * @see #setIdNumber(long)
-	 * @see com.verticon.tracker.TrackerPackage#getTag_IdNumber()
-	 * @model id="true" required="true"
-	 * @generated
-	 */
-	long getIdNumber();
-
-	/**
-	 * Sets the value of the '{@link com.verticon.tracker.Tag#getIdNumber <em>Id Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Id Number</em>' attribute.
-	 * @see #getIdNumber()
-	 * @generated
-	 */
-	void setIdNumber(long value);
 
 	/**
 	 * Returns the value of the '<em><b>Usain Number Used</b></em>' attribute.
@@ -97,6 +70,7 @@ public interface Tag extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
@@ -104,10 +78,21 @@ public interface Tag extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see #setId(String)
 	 * @see com.verticon.tracker.TrackerPackage#getTag_Id()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @model default="" required="true"
 	 * @generated
 	 */
 	String getId();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.Tag#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
+	void setId(String value);
 
 } // Tag

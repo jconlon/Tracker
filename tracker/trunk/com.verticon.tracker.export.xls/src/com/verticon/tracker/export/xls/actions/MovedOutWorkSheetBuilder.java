@@ -48,7 +48,7 @@ public class MovedOutWorkSheetBuilder extends AbstractWorkSheetBuilder implement
     void fillRow(MovedOut movedOut, HSSFRow row){
     	HSSFCell cell = null;
     	//EarTag
-		row.createCell((short)0).setCellValue(movedOut.getTag().getIdNumber());
+		row.createCell((short)0).setCellValue(movedOut.getTag().getId());
     	//Date
     	cell = row.createCell((short)1);
 		cell.setCellValue(movedOut.getDateTime());
@@ -75,7 +75,7 @@ public class MovedOutWorkSheetBuilder extends AbstractWorkSheetBuilder implement
 		Collections.sort(movedOutEvents, new Comparator<MovedOut>(){
 
 			public int compare(MovedOut event1, MovedOut event2) {
-				return new Long(event1.getIdNumber()).compareTo(event2.getIdNumber());
+				return event1.getId().compareTo(event2.getId());
 		}});
 	}
 

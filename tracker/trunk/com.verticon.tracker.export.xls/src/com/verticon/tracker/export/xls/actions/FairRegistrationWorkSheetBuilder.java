@@ -61,7 +61,7 @@ public class FairRegistrationWorkSheetBuilder extends AbstractWorkSheetBuilder i
     void fillRow(FairRegistration fairRegistration, HSSFRow row){
     	HSSFCell cell = null;
     	//EarTag
-		row.createCell((short)0).setCellValue(fairRegistration.getTag().getIdNumber());
+		row.createCell((short)0).setCellValue(fairRegistration.getTag().getId());
 //		Date
     	cell = row.createCell((short)1);
 		cell.setCellValue(fairRegistration.getDateTime());
@@ -96,7 +96,7 @@ public class FairRegistrationWorkSheetBuilder extends AbstractWorkSheetBuilder i
 		Collections.sort(registrationEvents, new Comparator<FairRegistration>(){
 
 			public int compare(FairRegistration event1, FairRegistration event2) {
-				return new Long(event1.getIdNumber()).compareTo(event2.getIdNumber());
+				return event1.getId().compareTo(event2.getId());
 			}});
 	}
 

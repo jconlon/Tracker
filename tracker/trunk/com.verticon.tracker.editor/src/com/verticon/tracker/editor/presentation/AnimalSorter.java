@@ -193,7 +193,7 @@ public class AnimalSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	private int compareAins(Animal animal1, Animal animal2) {
-		 return new Long(animal1.getIdNumber()).compareTo(animal2.getIdNumber());
+		return getComparator().compare(animal1.getId(), animal2.getId());
 	}
 
 	
@@ -307,7 +307,7 @@ public class AnimalSorter extends ViewerSorter {
 	}
 	
 	private static final String getText(Object object) {
-		String label = Long.toString(((Animal)object).getIdNumber());
+		String label = ((Animal)object).getId();
 		return label == null || label.length() == 0 ?
 			getResourceName(object):
 			label+getResourceName(object);

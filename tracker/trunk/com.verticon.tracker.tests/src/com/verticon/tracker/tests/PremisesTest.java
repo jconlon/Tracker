@@ -29,7 +29,7 @@ import com.verticon.tracker.TrackerFactory;
  * The following operations are tested:
  * <ul>
  *   <li>{@link com.verticon.tracker.Premises#eventHistory() <em>Event History</em>}</li>
- *   <li>{@link com.verticon.tracker.Premises#findAnimal(long) <em>Find Animal</em>}</li>
+ *   <li>{@link com.verticon.tracker.Premises#findAnimal(java.lang.String) <em>Find Animal</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#addTemplate(org.eclipse.emf.common.util.EList, com.verticon.tracker.Animal) <em>Add Template</em>}</li>
  * </ul>
  * </p>
@@ -37,10 +37,10 @@ import com.verticon.tracker.TrackerFactory;
  */
 public class PremisesTest extends TestCase {
 	
-	private static final long AIN_4 = 123456789012344L;
-	private static final long AIN_3 = 123456789012343L;
-	private static final long AIN_2 = 123456789012342L;
-	private static final long AIN_1 = 123456789012341L;
+	private static final String AIN_4 = "123456789012344";
+	private static final String AIN_3 = "123456789012343";
+	private static final String AIN_2 = "123456789012342";
+	private static final String AIN_1 = "123456789012341";
 	
 	/**
 	 * <!-- begin-user-doc -->
@@ -132,7 +132,7 @@ public class PremisesTest extends TestCase {
 		//Add one animal with two tags
 		Animal animal1 = TrackerFactory.eINSTANCE.createBovineBeef();
 		Tag tag1 = TrackerFactory.eINSTANCE.createTag();
-		tag1.setIdNumber(AIN_1);
+		tag1.setId(AIN_1);
 		animal1.getTags().add(tag1);
 		Event event1 = TrackerFactory.eINSTANCE.createTagApplied();
 		tag1.getEvents().add(event1);
@@ -142,7 +142,7 @@ public class PremisesTest extends TestCase {
 		
 		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
 		animal1.getTags().add(tag2);
-		tag2.setIdNumber(AIN_2);
+		tag2.setId(AIN_2);
 		
 		Event event2 = TrackerFactory.eINSTANCE.createReplacedTag();
 		tag2.getEvents().add(event2);
@@ -154,7 +154,7 @@ public class PremisesTest extends TestCase {
 		//Add second animal with two tags
 		Animal animal2 = TrackerFactory.eINSTANCE.createBovineBeef();
 		Tag tag3 = TrackerFactory.eINSTANCE.createTag();
-		tag3.setIdNumber(AIN_1);
+		tag3.setId(AIN_1);
 		animal2.getTags().add(tag3);
 		Event event3 = TrackerFactory.eINSTANCE.createTagApplied();
 		tag3.getEvents().add(event3);
@@ -167,25 +167,25 @@ public class PremisesTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link com.verticon.tracker.Premises#findAnimal(long) <em>Find Animal</em>}' operation.
+	 * Tests the '{@link com.verticon.tracker.Premises#findAnimal(java.lang.String) <em>Find Animal</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Premises#findAnimal(long)
 	 * @generated NOT
 	 */
-	public void testFindAnimal__long() {
+	public void testFindAnimal__String() {
 		Animal animal1 = TrackerFactory.eINSTANCE.createBovineBeef();
 		Tag tag1 = TrackerFactory.eINSTANCE.createTag();
-		tag1.setIdNumber(AIN_1);
+		tag1.setId(AIN_1);
 		Event event1 = TrackerFactory.eINSTANCE.createTagApplied();
 		tag1.getEvents().add(event1);
 		animal1.getTags().add(tag1);
 		getFixture().getAnimals().add(animal1);
-		assertEquals(AIN_1, animal1.getIdNumber());
+		assertEquals(AIN_1, animal1.getId());
 		
 		Animal animal2 = TrackerFactory.eINSTANCE.createBovineBeef();
 		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
-		tag2.setIdNumber(AIN_2);
+		tag2.setId(AIN_2);
 		Event event2 = TrackerFactory.eINSTANCE.createTagApplied();
 		tag2.getEvents().add(event2);
 		animal2.getTags().add(tag2);
@@ -193,7 +193,7 @@ public class PremisesTest extends TestCase {
 		
 		Animal animal3 = TrackerFactory.eINSTANCE.createBovineBeef();
 		Tag tag3 = TrackerFactory.eINSTANCE.createTag();
-		tag3.setIdNumber(AIN_3);
+		tag3.setId(AIN_3);
 		Event event3 = TrackerFactory.eINSTANCE.createTagApplied();
 		tag3.getEvents().add(event3);
 		animal3.getTags().add(tag3);
@@ -215,13 +215,13 @@ public class PremisesTest extends TestCase {
 	public void testAddTemplate__EList_Animal() {
 		Animal animal1 = TrackerFactory.eINSTANCE.createBovineBeef();
 		Tag tag1 = TrackerFactory.eINSTANCE.createTag();
-		tag1.setIdNumber(AIN_1);
+		tag1.setId(AIN_1);
 		Event event1 = TrackerFactory.eINSTANCE.createTagApplied();
 		tag1.getEvents().add(event1);
 		animal1.getTags().add(tag1);
 		
 		
-		EList<Long> ains = new BasicEList<Long>();
+		EList<String> ains = new BasicEList<String>();
 		ains.add(AIN_1);
 		ains.add(AIN_2);
 		ains.add(AIN_3);

@@ -194,7 +194,7 @@ public class ActionUtils {
 
 		int existingAnimals = 0;
 		for (Long tag : tagsBean.getTags()) {
-			Animal animal = premises.findAnimal(tag);
+			Animal animal = premises.findAnimal(tag.toString());
 			if (animal != null) {
 				existingAnimals++;
 				command = createAddEventsToTagCommand(animal.activeTag(),
@@ -202,7 +202,7 @@ public class ActionUtils {
 			} else {
 				newAnimalsCreated++;
 				command = createAddAnimalToPremiseCommand(premises,
-						animalTemplateBean.getAnimal(tag), editor.getEditingDomain());
+						animalTemplateBean.getAnimal(tag.toString()), editor.getEditingDomain());
 				
 			}
 			if(command !=null){

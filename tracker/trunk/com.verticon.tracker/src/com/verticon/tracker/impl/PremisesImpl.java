@@ -249,16 +249,16 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 		return new BasicEList.UnmodifiableEList<Event>(result.size(), result.toArray());
 	
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * Finds the animal with the ain idNumber.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public Animal findAnimal(long ain) {
+	public Animal findAnimal(String id) {
 		for (Animal animal : animals) {
-			if(animal.getIdNumber() == ain){
+			if(animal.getId() == id){
 				return animal;
 			}
 		}
@@ -271,24 +271,20 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void addTemplate(EList<Long> ains, Animal animalTemplate) {
+	public void addTemplate(EList<String> ains, Animal animalTemplate) {
 		Animal targetAnimal = null;
-		for (Long long1 : ains) {
-			targetAnimal = findAnimal(long1.longValue());
+		for (String animalId : ains) {
+			targetAnimal = findAnimal(animalId);
 			if(targetAnimal ==null){
 				targetAnimal  =  (Animal) copier.copy(animalTemplate);
-				targetAnimal.activeTag().setIdNumber(long1);
+				targetAnimal.activeTag().setId(animalId);
 				animals.add(targetAnimal);
 			}else if (!animalTemplate.allEvents().isEmpty()){
 				EList<Event> eventsContainer = targetAnimal.activeTag().getEvents();
 				eventsContainer.addAll(copier.copyAll(animalTemplate.allEvents()));
 			}
 		}
-//		Tag currentTag = activeTag();
-//		for (Event event : eventTemplate) {
-//			Event eventToAdd =  (Event) copier.copy(event);
-//			currentTag.getEvents().add(eventToAdd);
-//		}
+
 	}
 
 	/**

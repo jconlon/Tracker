@@ -330,7 +330,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/sex"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Animal/tags"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/species"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/idNumber"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/breed"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/age"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/sexCode"/>
@@ -347,10 +346,9 @@
       <genOperations ecoreOperation="tracker.ecore#//Animal/activeTag"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Tag">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/idNumber"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/usainNumberUsed"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Tag/events"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/id"/>
     </genClasses>
     <genClasses image="false" ecoreClass="tracker.ecore#//Bovine"/>
     <genClasses image="false" ecoreClass="tracker.ecore#//Event">
@@ -359,7 +357,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/electronicallyRead"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/correction"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/comments"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/idNumber"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tracker.ecore#//Event/tag"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/id"/>
     </genClasses>
@@ -371,20 +368,20 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/unAppliedTags"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/eventHistory"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/findAnimal">
-        <genParameters ecoreParameter="tracker.ecore#//Premises/findAnimal/ains"/>
+        <genParameters ecoreParameter="tracker.ecore#//Premises/findAnimal/id"/>
       </genOperations>
       <genOperations ecoreOperation="tracker.ecore#//Premises/addTemplate">
         <genParameters ecoreParameter="tracker.ecore#//Premises/addTemplate/ains"/>
         <genParameters ecoreParameter="tracker.ecore#//Premises/addTemplate/animalTemplate"/>
       </genOperations>
     </genClasses>
-    <genClasses ecoreClass="tracker.ecore#//BovineBeef" labelFeature="#//tracker/Animal/idNumber">
+    <genClasses ecoreClass="tracker.ecore#//BovineBeef">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//BovineBeef/beefBreed"/>
     </genClasses>
-    <genClasses ecoreClass="tracker.ecore#//Ovine" labelFeature="#//tracker/Animal/idNumber">
+    <genClasses ecoreClass="tracker.ecore#//Ovine">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Ovine/sheepBreed"/>
     </genClasses>
-    <genClasses ecoreClass="tracker.ecore#//BovineBison" labelFeature="#//tracker/Animal/idNumber">
+    <genClasses ecoreClass="tracker.ecore#//BovineBison">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//BovineBison/buffaloBreed"/>
     </genClasses>
     <genClasses image="false" ecoreClass="tracker.ecore#//BovineDairy">
