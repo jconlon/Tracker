@@ -48,7 +48,7 @@ public class WeighInWorkSheetBuilder extends AbstractWorkSheetBuilder implements
     void fillRow(WeighIn weighIn, HSSFRow row){
     	HSSFCell cell = null;
     	//EarTag
-		row.createCell((short)0).setCellValue(weighIn.getTag().getIdNumber());
+		row.createCell((short)0).setCellValue(weighIn.getTag().getId());
 //		Date
     	cell = row.createCell((short)1);
 		cell.setCellValue(weighIn.getDateTime());
@@ -75,7 +75,7 @@ public class WeighInWorkSheetBuilder extends AbstractWorkSheetBuilder implements
 		Collections.sort(weighInEvents, new Comparator<WeighIn>(){
 
 			public int compare(WeighIn event1, WeighIn event2) {
-				return new Long(event1.getIdNumber()).compareTo(event2.getIdNumber());
+				return event1.getId().compareTo(event2.getId());
 			}});
 	}
 

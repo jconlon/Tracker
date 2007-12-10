@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.verticon.tracker.impl.TagImpl#getIdNumber <em>Id Number</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.TagImpl#isUsainNumberUsed <em>Usain Number Used</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.TagImpl#getEvents <em>Events</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.TagImpl#getId <em>Id</em>}</li>
@@ -48,26 +47,6 @@ public class TagImpl extends EObjectImpl implements Tag {
 	 * @generated
 	 */
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
-
-	/**
-	 * The default value of the '{@link #getIdNumber() <em>Id Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIdNumber()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final long ID_NUMBER_EDEFAULT = 0L;
-
-	/**
-	 * The cached value of the '{@link #getIdNumber() <em>Id Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIdNumber()
-	 * @generated
-	 * @ordered
-	 */
-	protected long idNumber = ID_NUMBER_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isUsainNumberUsed() <em>Usain Number Used</em>}' attribute.
@@ -97,7 +76,17 @@ public class TagImpl extends EObjectImpl implements Tag {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ID_EDEFAULT = null;
+	protected static final String ID_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String id = ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,30 +110,15 @@ public class TagImpl extends EObjectImpl implements Tag {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public long getIdNumber() {
-		return idNumber;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIdNumber(long newIdNumber) {
-		long oldIdNumber = idNumber;
-		idNumber = newIdNumber;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.TAG__ID_NUMBER, oldIdNumber, idNumber));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public boolean isUsainNumberUsed() {
+		Long idNumber;
+		try {
+			idNumber = new Long(id);
+		} catch (NumberFormatException e) {
+			return false;
+		}
 		return idNumber>840002000000000L && idNumber<843000000000000L;
 	}
 
@@ -163,10 +137,22 @@ public class TagImpl extends EObjectImpl implements Tag {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public String getId() {
-		return Long.toString(getIdNumber());
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.TAG__ID, oldId, id));
 	}
 
 	/**
@@ -206,8 +192,6 @@ public class TagImpl extends EObjectImpl implements Tag {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TrackerPackage.TAG__ID_NUMBER:
-				return new Long(getIdNumber());
 			case TrackerPackage.TAG__USAIN_NUMBER_USED:
 				return isUsainNumberUsed() ? Boolean.TRUE : Boolean.FALSE;
 			case TrackerPackage.TAG__EVENTS:
@@ -227,12 +211,12 @@ public class TagImpl extends EObjectImpl implements Tag {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TrackerPackage.TAG__ID_NUMBER:
-				setIdNumber(((Long)newValue).longValue());
-				return;
 			case TrackerPackage.TAG__EVENTS:
 				getEvents().clear();
 				getEvents().addAll((Collection<? extends Event>)newValue);
+				return;
+			case TrackerPackage.TAG__ID:
+				setId((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -246,11 +230,11 @@ public class TagImpl extends EObjectImpl implements Tag {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TrackerPackage.TAG__ID_NUMBER:
-				setIdNumber(ID_NUMBER_EDEFAULT);
-				return;
 			case TrackerPackage.TAG__EVENTS:
 				getEvents().clear();
+				return;
+			case TrackerPackage.TAG__ID:
+				setId(ID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -264,14 +248,12 @@ public class TagImpl extends EObjectImpl implements Tag {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TrackerPackage.TAG__ID_NUMBER:
-				return idNumber != ID_NUMBER_EDEFAULT;
 			case TrackerPackage.TAG__USAIN_NUMBER_USED:
 				return isUsainNumberUsed() != USAIN_NUMBER_USED_EDEFAULT;
 			case TrackerPackage.TAG__EVENTS:
 				return events != null && !events.isEmpty();
 			case TrackerPackage.TAG__ID:
-				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -286,8 +268,8 @@ public class TagImpl extends EObjectImpl implements Tag {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (idNumber: ");
-		result.append(idNumber);
+		result.append(" (id: ");
+		result.append(id);
 		result.append(')');
 		return result.toString();
 	}

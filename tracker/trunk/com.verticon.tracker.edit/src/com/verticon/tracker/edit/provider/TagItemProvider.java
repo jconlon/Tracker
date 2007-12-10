@@ -73,33 +73,10 @@ public class TagItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addIdNumberPropertyDescriptor(object);
 			addUsainNumberUsedPropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Id Number feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addIdNumberPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Tag_idNumber_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Tag_idNumber_feature", "_UI_Tag_type"),
-				 TrackerPackage.Literals.TAG__ID_NUMBER,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -138,7 +115,7 @@ public class TagItemProvider
 				 getString("_UI_Tag_id_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Tag_id_feature", "_UI_Tag_type"),
 				 TrackerPackage.Literals.TAG__ID,
-				 false,
+				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
@@ -213,7 +190,6 @@ public class TagItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Tag.class)) {
-			case TrackerPackage.TAG__ID_NUMBER:
 			case TrackerPackage.TAG__USAIN_NUMBER_USED:
 			case TrackerPackage.TAG__ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

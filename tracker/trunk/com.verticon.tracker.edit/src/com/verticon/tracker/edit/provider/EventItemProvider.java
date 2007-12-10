@@ -44,8 +44,8 @@ import com.verticon.tracker.TrackerPackage;
  */
 public class EventItemProvider
 	extends ItemProviderAdapter
-	implements	
-	ITableItemLabelProvider, IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+	implements	ITableItemLabelProvider,
+	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -81,7 +81,6 @@ public class EventItemProvider
 			addElectronicallyReadPropertyDescriptor(object);
 			addCorrectionPropertyDescriptor(object);
 			addCommentsPropertyDescriptor(object);
-			addIdNumberPropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -200,28 +199,6 @@ public class EventItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Id Number feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addIdNumberPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Event_idNumber_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Event_idNumber_feature", "_UI_Event_type"),
-				 TrackerPackage.Literals.EVENT__ID_NUMBER,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Id feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -282,7 +259,6 @@ public class EventItemProvider
 			case TrackerPackage.EVENT__ELECTRONICALLY_READ:
 			case TrackerPackage.EVENT__CORRECTION:
 			case TrackerPackage.EVENT__COMMENTS:
-			case TrackerPackage.EVENT__ID_NUMBER:
 			case TrackerPackage.EVENT__ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

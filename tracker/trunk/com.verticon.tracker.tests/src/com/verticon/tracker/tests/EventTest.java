@@ -24,14 +24,13 @@ import com.verticon.tracker.TrackerFactory;
  * The following features are tested:
  * <ul>
  *   <li>{@link com.verticon.tracker.Event#getEventCode() <em>Event Code</em>}</li>
- *   <li>{@link com.verticon.tracker.Event#getIdNumber() <em>Id Number</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getId() <em>Id</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
 public abstract class EventTest extends TestCase {
-	private static final long _123456789012345 = 123456789012345L;
+	private static final String TAG_ID = "123456789012345";
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -89,24 +88,7 @@ public abstract class EventTest extends TestCase {
 		fail("Must override in subclasses");
 	}
 
-	/**
-	 * Tests the '{@link com.verticon.tracker.Event#getId() <em>Id</em>}' feature getter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.Event#getId()
-	 * @generated NOT
-	 */
-	public void testGetIdNumber() {
-		assertNotNull(getFixture());
-		assertEquals(0,getFixture().getIdNumber());
-		
-		Tag ain = TrackerFactory.eINSTANCE.createTag();
-		ain.setIdNumber(_123456789012345);
-		ain.getEvents().add(getFixture());
-		
-		assertEquals(_123456789012345, getFixture().getIdNumber());
-		
-	}
+	
 	
 	
 	/**
@@ -119,10 +101,10 @@ public abstract class EventTest extends TestCase {
 	 */
 	public void testGetId() {
 		assertNotNull(getFixture());
-		assertEquals(0,getFixture().getIdNumber());
+		assertEquals("",getFixture().getId());
 		
 		Tag ain = TrackerFactory.eINSTANCE.createTag();
-		ain.setIdNumber(_123456789012345);
+		ain.setId(TAG_ID);
 		ain.getEvents().add(getFixture());
 		
 		assertEquals("123456789012345", getFixture().getId());

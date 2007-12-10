@@ -5,10 +5,12 @@
  */
 package com.verticon.tracker.tests;
 
-import com.verticon.tracker.Caprine;
-import com.verticon.tracker.TrackerFactory;
-
 import junit.textui.TestRunner;
+
+import com.verticon.tracker.Caprine;
+import com.verticon.tracker.GoatBreed;
+import com.verticon.tracker.TrackerFactory;
+import com.verticon.tracker.util.Species;
 
 /**
  * <!-- begin-user-doc -->
@@ -55,17 +57,18 @@ public class CaprineTest extends AnimalTest {
 		return (Caprine)fixture;
 	}
 
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see junit.framework.TestCase#setUp()
-	 * @generated
+	 * @generated NOT
 	 */
-	@Override
 	protected void setUp() throws Exception {
-		setFixture(TrackerFactory.eINSTANCE.createCaprine());
+		Caprine animal = TrackerFactory.eINSTANCE.createCaprine();
+		animal.setGoatBreed(GoatBreed.CS);
+		setFixture(animal);
 	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -76,5 +79,24 @@ public class CaprineTest extends AnimalTest {
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
+	
+	@Override
+	public void testGetSpecies() {
+		assertNotNull(getFixture().getSpecies());
+		assertEquals(Species.CAP.literal(), getFixture().getSpecies());
+	}
+	
+	@Override
+	public void testGetBreed() {
+		assertNotNull(getFixture().getBreed());
+		assertEquals(GoatBreed.get(GoatBreed.CS_VALUE).getName(), getFixture().getBreed());
+	}
+	
+	@Override
+	public void testGetSpeciesCode() {
+		assertNotNull(getFixture().getSpeciesCode());
+		assertEquals(Species.CAP.name(), getFixture().getSpeciesCode());
+	}
+
 
 } //CaprineTest

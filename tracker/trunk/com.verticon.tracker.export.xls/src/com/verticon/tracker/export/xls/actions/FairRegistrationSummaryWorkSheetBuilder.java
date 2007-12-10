@@ -160,7 +160,7 @@ public class FairRegistrationSummaryWorkSheetBuilder implements
 		// END Weight
 		row.createCell((short) 7).setCellValue(FairRegistrationItemProvider.getEndWeight(fairRegistration));
 		// EarTag
-		row.createCell((short) 8).setCellValue(((Animal) fairRegistration.getTag().eContainer()).getIdNumber());
+		row.createCell((short) 8).setCellValue(((Animal) fairRegistration.getTag().eContainer()).getId());
 		// Sales Order
 		row.createCell((short) 9).setCellValue(fairRegistration.getSaleOrder());
 		// Exhibit

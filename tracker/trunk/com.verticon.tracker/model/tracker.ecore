@@ -17,11 +17,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sex" eType="#//Sex" defaultValueLiteral="Unspecified"
         unsettable="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tags" lowerBound="1" upperBound="-1"
-        eType="#//Tag" containment="true" eKeys="#//Tag/idNumber"/>
+        eType="#//Tag" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="species" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
-        changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="breed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" defaultValueLiteral=""
         derived="true"/>
@@ -48,14 +46,12 @@
     <eLiterals name="Unspecified" value="4" literal="Unspecified"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Tag">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idNumber" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong" iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="usainNumberUsed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="events" lowerBound="1"
         upperBound="-1" eType="#//Event" containment="true" eOpposite="#//Event/tag"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+        defaultValueLiteral=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Bovine" abstract="true" eSuperTypes="#//Animal"/>
   <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true">
@@ -69,8 +65,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="correction" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
-        changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tag" lowerBound="1" eType="#//Tag"
         transient="true" eOpposite="#//Tag/events"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -84,12 +78,12 @@
       </eAnnotations>
     </eOperations>
     <eOperations name="findAnimal" eType="#//Animal">
-      <eParameters name="ains" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+      <eParameters name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="addTemplate">
       <eParameters name="ains">
         <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
-          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         </eGenericType>
       </eParameters>
       <eParameters name="animalTemplate" eType="#//Animal"/>
@@ -99,9 +93,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="emailContact" lowerBound="1"
         eType="#//Email" defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="animals" upperBound="-1"
-        eType="#//Animal" containment="true" eKeys="#//Animal/idNumber"/>
+        eType="#//Animal" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="unAppliedTags" upperBound="-1"
-        eType="#//Tag" containment="true" eKeys="#//Tag/idNumber"/>
+        eType="#//Tag" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="AnimialIdNumber" instanceClassName="java.lang.String">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">

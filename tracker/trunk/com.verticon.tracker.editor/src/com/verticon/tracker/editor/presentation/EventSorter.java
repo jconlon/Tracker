@@ -125,7 +125,7 @@ public class EventSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	private int compareTagIDNumber(Event event1, Event event2) {
-		return new Long(event1.getIdNumber()).compareTo(event2.getIdNumber());
+		return getComparator().compare(event1.getId(), event2.getId());
 	}
 	
 	/**
@@ -143,7 +143,7 @@ public class EventSorter extends ViewerSorter {
 	private int compareAnimalIDNumber(Event event1, Event event2) {
 		Animal animal1 = (Animal)event1.getTag().eContainer();
 		Animal animal2 = (Animal)event2.getTag().eContainer();
-		return new Long(animal1.getIdNumber()).compareTo(animal2.getIdNumber());
+		return getComparator().compare(animal1.getId(), animal2.getId());
 	}
 
 	/**

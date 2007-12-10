@@ -57,47 +57,26 @@ public class CommonUtilities {
 		return animal;
 	}
 	
-	/**
-	 * @deprecated use getAnimal
-	 * @param resource
-	 * @return
-	 */
-	public static Animal getDefaultAnimalFromTemplate(Resource resource){
-		Object o = resource.getContents().get(0);
-		Animal animal = null;
-		if(o instanceof Premises){
-			Premises premises = (Premises)o;
-			if(premises.getAnimals()!=null){
-				animal= (Animal)premises.getAnimals().get(0);
-			}
-		}
-		return animal;
-	}
 	
-
+	
 	/**
 	 * Finds an existing Animal or creates it in the Premises.
 	 * @param tagNumber
 	 * @param premises
 	 * @param defaultAnimal
+	 * 
 	 * @return
 	 */
-	public static Animal findAnimal(Long tagNumber, Premises premises, Animal defaultAnimal) {
-		Animal result = null;
-		for (Animal animal : premises.getAnimals()) {
-			for (Tag tag : animal.getTags()) {
-				if(tagNumber.equals(tag.getIdNumber())){
-					result=animal;
-					break;
-				}
-			}
-			
+	public static final Animal findOrCreateAnimal(String tagNumber, Premises activePremises, Animal defaultAnimal){
+		if(defaultAnimal==null){
+			return null;
 		}
-		if(result==null && defaultAnimal!=null){
+		Animal result = activePremises.findAnimal(tagNumber);
+		if(result==null ){
 			Tag tag =TrackerFactory.eINSTANCE.createTag();
-			tag.setIdNumber(tagNumber.longValue());
+			tag.setId(tagNumber);
 			result = createAnimalFromTemplate(defaultAnimal, tag);
-			premises.getAnimals().add(result);
+			activePremises.getAnimals().add(result);
 		}
 		return result;
 	}

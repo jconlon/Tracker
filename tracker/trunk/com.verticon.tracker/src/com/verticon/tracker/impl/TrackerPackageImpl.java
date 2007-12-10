@@ -487,7 +487,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAnimal_IdNumber() {
+	public EAttribute getAnimal_Breed() {
 		return (EAttribute)animalEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -496,7 +496,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAnimal_Breed() {
+	public EAttribute getAnimal_Age() {
 		return (EAttribute)animalEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -505,7 +505,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAnimal_Age() {
+	public EAttribute getAnimal_SexCode() {
 		return (EAttribute)animalEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -514,7 +514,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAnimal_SexCode() {
+	public EAttribute getAnimal_SpeciesCode() {
 		return (EAttribute)animalEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -523,7 +523,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAnimal_SpeciesCode() {
+	public EAttribute getAnimal_Id() {
 		return (EAttribute)animalEClass.getEStructuralFeatures().get(8);
 	}
 
@@ -532,7 +532,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAnimal_Id() {
+	public EAttribute getAnimal_Comments() {
 		return (EAttribute)animalEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -541,7 +541,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAnimal_Comments() {
+	public EAttribute getAnimal_LastEventDateTime() {
 		return (EAttribute)animalEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -550,17 +550,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAnimal_LastEventDateTime() {
-		return (EAttribute)animalEClass.getEStructuralFeatures().get(11);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getAnimal_Dam() {
-		return (EReference)animalEClass.getEStructuralFeatures().get(12);
+		return (EReference)animalEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -569,7 +560,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	public EReference getAnimal_Sire() {
-		return (EReference)animalEClass.getEStructuralFeatures().get(13);
+		return (EReference)animalEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -586,7 +577,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTag_IdNumber() {
+	public EAttribute getTag_UsainNumberUsed() {
 		return (EAttribute)tagEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -595,17 +586,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTag_UsainNumberUsed() {
-		return (EAttribute)tagEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getTag_Events() {
-		return (EReference)tagEClass.getEStructuralFeatures().get(2);
+		return (EReference)tagEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -614,7 +596,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	public EAttribute getTag_Id() {
-		return (EAttribute)tagEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)tagEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -685,17 +667,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEvent_IdNumber() {
-		return (EAttribute)eventEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getEvent_Tag() {
-		return (EReference)eventEClass.getEStructuralFeatures().get(6);
+		return (EReference)eventEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -704,7 +677,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	public EAttribute getEvent_Id() {
-		return (EAttribute)eventEClass.getEStructuralFeatures().get(7);
+		return (EAttribute)eventEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1280,7 +1253,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(animalEClass, ANIMAL__SEX);
 		createEReference(animalEClass, ANIMAL__TAGS);
 		createEAttribute(animalEClass, ANIMAL__SPECIES);
-		createEAttribute(animalEClass, ANIMAL__ID_NUMBER);
 		createEAttribute(animalEClass, ANIMAL__BREED);
 		createEAttribute(animalEClass, ANIMAL__AGE);
 		createEAttribute(animalEClass, ANIMAL__SEX_CODE);
@@ -1292,7 +1264,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEReference(animalEClass, ANIMAL__SIRE);
 
 		tagEClass = createEClass(TAG);
-		createEAttribute(tagEClass, TAG__ID_NUMBER);
 		createEAttribute(tagEClass, TAG__USAIN_NUMBER_USED);
 		createEReference(tagEClass, TAG__EVENTS);
 		createEAttribute(tagEClass, TAG__ID);
@@ -1305,7 +1276,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(eventEClass, EVENT__ELECTRONICALLY_READ);
 		createEAttribute(eventEClass, EVENT__CORRECTION);
 		createEAttribute(eventEClass, EVENT__COMMENTS);
-		createEAttribute(eventEClass, EVENT__ID_NUMBER);
 		createEReference(eventEClass, EVENT__TAG);
 		createEAttribute(eventEClass, EVENT__ID);
 
@@ -1456,9 +1426,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getAnimal_BirthDate(), ecorePackage.getEDate(), "birthDate", null, 0, 1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_Sex(), this.getSex(), "sex", "Unspecified", 0, 1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnimal_Tags(), this.getTag(), null, "tags", null, 1, -1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getAnimal_Tags().getEKeys().add(this.getTag_IdNumber());
 		initEAttribute(getAnimal_Species(), ecorePackage.getEString(), "species", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAnimal_IdNumber(), ecorePackage.getELong(), "idNumber", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_Breed(), ecorePackage.getEString(), "breed", "", 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_Age(), this.getAge(), "age", "", 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_SexCode(), ecorePackage.getEString(), "sexCode", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -1480,10 +1448,9 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEOperation(animalEClass, this.getTag(), "activeTag", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(tagEClass, Tag.class, "Tag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTag_IdNumber(), ecorePackage.getELong(), "idNumber", null, 1, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTag_UsainNumberUsed(), ecorePackage.getEBoolean(), "usainNumberUsed", null, 0, 1, Tag.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getTag_Events(), this.getEvent(), this.getEvent_Tag(), "events", null, 1, -1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTag_Id(), ecorePackage.getEString(), "id", null, 1, 1, Tag.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTag_Id(), ecorePackage.getEString(), "id", "", 1, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bovineEClass, Bovine.class, "Bovine", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1493,7 +1460,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getEvent_ElectronicallyRead(), ecorePackage.getEBoolean(), "electronicallyRead", "false", 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_Correction(), ecorePackage.getEBoolean(), "correction", "false", 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_Comments(), ecorePackage.getEString(), "comments", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEvent_IdNumber(), ecorePackage.getELong(), "idNumber", null, 0, 1, Event.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getEvent_Tag(), this.getTag(), this.getTag_Events(), "tag", null, 1, 1, Event.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_Id(), ecorePackage.getEString(), "id", null, 1, 1, Event.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
@@ -1503,18 +1469,16 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getPremises_PremisesId(), this.getPremisesIdNumber(), "premisesId", null, 1, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPremises_EmailContact(), this.getEmail(), "emailContact", "", 1, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPremises_Animals(), this.getAnimal(), null, "animals", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getPremises_Animals().getEKeys().add(this.getAnimal_IdNumber());
 		initEReference(getPremises_UnAppliedTags(), this.getTag(), null, "unAppliedTags", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		getPremises_UnAppliedTags().getEKeys().add(this.getTag_IdNumber());
 
 		addEOperation(premisesEClass, this.getEvent(), "eventHistory", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(premisesEClass, this.getAnimal(), "findAnimal", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getELong(), "ains", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "id", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(premisesEClass, null, "addTemplate", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEEList());
-		g2 = createEGenericType(ecorePackage.getELongObject());
+		g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "ains", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getAnimal(), "animalTemplate", 0, 1, IS_UNIQUE, IS_ORDERED);

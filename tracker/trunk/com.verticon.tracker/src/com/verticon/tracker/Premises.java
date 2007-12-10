@@ -100,7 +100,7 @@ public interface Premises extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Animals</em>' containment reference list.
 	 * @see com.verticon.tracker.TrackerPackage#getPremises_Animals()
-	 * @model containment="true" keys="idNumber"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<Animal> getAnimals();
@@ -116,7 +116,7 @@ public interface Premises extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Un Applied Tags</em>' containment reference list.
 	 * @see com.verticon.tracker.TrackerPackage#getPremises_UnAppliedTags()
-	 * @model containment="true" keys="idNumber"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<Tag> getUnAppliedTags();
@@ -135,7 +135,7 @@ public interface Premises extends EObject {
 	 * @model
 	 * @generated
 	 */
-	Animal findAnimal(long ains);
+	Animal findAnimal(String id);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -143,6 +143,6 @@ public interface Premises extends EObject {
 	 * @model ainsMany="false"
 	 * @generated
 	 */
-	void addTemplate(EList<Long> ains, Animal animalTemplate);
+	void addTemplate(EList<String> ains, Animal animalTemplate);
 
 } // Premises

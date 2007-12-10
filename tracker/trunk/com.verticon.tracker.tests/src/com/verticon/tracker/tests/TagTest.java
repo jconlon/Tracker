@@ -20,7 +20,6 @@ import junit.textui.TestRunner;
  * The following features are tested:
  * <ul>
  *   <li>{@link com.verticon.tracker.Tag#isUsainNumberUsed() <em>Usain Number Used</em>}</li>
- *   <li>{@link com.verticon.tracker.Tag#getId() <em>Id</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -113,17 +112,17 @@ public class TagTest extends TestCase {
 	public void testIsUsainNumberUsed() {
 		Tag tag = getFixture();
 		assertNotNull(tag);
-		assertEquals(0, tag.getIdNumber());
-		tag.setIdNumber(123456789012345L);
+		assertEquals("", tag.getId());
+		tag.setId("123456789012345");
 		assertFalse(tag.isUsainNumberUsed());
-		tag.setIdNumber(840456789012345L);
+		tag.setId("840456789012345");
 		assertTrue(tag.isUsainNumberUsed());
 		
 		//idNumber>840200000000000L && idNumber<843000000000000L
-		tag.setIdNumber(840003001374447L);
+		tag.setId("840003001374447");
 		assertTrue(tag.isUsainNumberUsed());
 		
-		tag.setIdNumber(840003001374300L);
+		tag.setId("840003001374300");
 		assertTrue(tag.isUsainNumberUsed());
 		
 	}
@@ -139,11 +138,11 @@ public class TagTest extends TestCase {
 	public void testGetId() {
 		Tag tag = getFixture();
 		assertNotNull(tag);
-		tag.setIdNumber(123456789012345L);
-		assertEquals("Test with no tag", Long.toString(123456789012345L), tag.getId());
+		tag.setId("123456789012345");
+		assertEquals("Test with no tag", "123456789012345", tag.getId());
 		
-		tag.setIdNumber(840456789012345L);
-		assertEquals("Test with no tag", Long.toString(840456789012345L), tag.getId());
+		tag.setId("840456789012345");
+		assertEquals("Test with no tag", "840456789012345", tag.getId());
 	}
 
 } //TagTest

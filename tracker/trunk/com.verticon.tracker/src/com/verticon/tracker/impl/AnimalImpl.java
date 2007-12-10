@@ -46,7 +46,6 @@ import com.verticon.tracker.util.Species;
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSex <em>Sex</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSpecies <em>Species</em>}</li>
- *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getIdNumber <em>Id Number</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getBreed <em>Breed</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getAge <em>Age</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSexCode <em>Sex Code</em>}</li>
@@ -142,16 +141,6 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @ordered
 	 */
 	protected static final String SPECIES_EDEFAULT = null;
-
-	/**
-	 * The default value of the '{@link #getIdNumber() <em>Id Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIdNumber()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final long ID_NUMBER_EDEFAULT = 0L;
 
 	/**
 	 * The default value of the '{@link #getBreed() <em>Breed</em>}' attribute.
@@ -368,24 +357,6 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 */
 	public abstract Species getSpeciesEnum();
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * The idNumber of an Animal is derived from the most recent Tag event contained in animal.
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public long getIdNumber() {
-		long result = 0L;
-		if (tags==null || tags.isEmpty()){
-			//no events no IdNumber
-		} else if (tags.size()==1){
-			result = tags.get(0).getIdNumber();
-		} else if(tags.size()>1){
-			Tag tag = activeTag();
-			result = tag!=null? tag.getIdNumber():tags.get(0).getIdNumber();
-		}
-		return result;
-	}
 
 
 	/**
@@ -448,7 +419,16 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @generated NOT
 	 */
 	public String getId() {
-		return Long.toString(getIdNumber());
+		String result = "";
+		if (tags==null || tags.isEmpty()){
+			//no events no IdNumber
+		} else if (tags.size()==1){
+			result = tags.get(0).getId();
+		} else if(tags.size()>1){
+			Tag tag = activeTag();
+			result = tag!=null? tag.getId():tags.get(0).getId();
+		}
+		return result==null?"":result;
 	}
 
 /**
@@ -660,8 +640,6 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return getTags();
 			case TrackerPackage.ANIMAL__SPECIES:
 				return getSpecies();
-			case TrackerPackage.ANIMAL__ID_NUMBER:
-				return new Long(getIdNumber());
 			case TrackerPackage.ANIMAL__BREED:
 				return getBreed();
 			case TrackerPackage.ANIMAL__AGE:
@@ -764,8 +742,6 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return tags != null && !tags.isEmpty();
 			case TrackerPackage.ANIMAL__SPECIES:
 				return SPECIES_EDEFAULT == null ? getSpecies() != null : !SPECIES_EDEFAULT.equals(getSpecies());
-			case TrackerPackage.ANIMAL__ID_NUMBER:
-				return getIdNumber() != ID_NUMBER_EDEFAULT;
 			case TrackerPackage.ANIMAL__BREED:
 				return BREED_EDEFAULT == null ? getBreed() != null : !BREED_EDEFAULT.equals(getBreed());
 			case TrackerPackage.ANIMAL__AGE:

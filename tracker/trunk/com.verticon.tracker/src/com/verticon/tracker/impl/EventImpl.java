@@ -32,7 +32,6 @@ import com.verticon.tracker.TrackerPackage;
  *   <li>{@link com.verticon.tracker.impl.EventImpl#isElectronicallyRead <em>Electronically Read</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#isCorrection <em>Correction</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getComments <em>Comments</em>}</li>
- *   <li>{@link com.verticon.tracker.impl.EventImpl#getIdNumber <em>Id Number</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getTag <em>Tag</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getId <em>Id</em>}</li>
  * </ul>
@@ -137,16 +136,6 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 	 * @ordered
 	 */
 	protected String comments = COMMENTS_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getIdNumber() <em>Id Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIdNumber()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final long ID_NUMBER_EDEFAULT = 0L;
 
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -269,15 +258,7 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.EVENT__COMMENTS, oldComments, comments));
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public long getIdNumber() {
-		return getTag()!=null?getTag().getIdNumber():0L;
-	}
-
+	
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -326,7 +307,7 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 	 * @generated NOT
 	 */
 	public String getId() {
-		return Long.toString(getIdNumber());
+		return getTag()!=null?getTag().getId():"";
 	}
 
 	/**
@@ -391,8 +372,6 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 				return isCorrection() ? Boolean.TRUE : Boolean.FALSE;
 			case TrackerPackage.EVENT__COMMENTS:
 				return getComments();
-			case TrackerPackage.EVENT__ID_NUMBER:
-				return new Long(getIdNumber());
 			case TrackerPackage.EVENT__TAG:
 				return getTag();
 			case TrackerPackage.EVENT__ID:
@@ -473,8 +452,6 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 				return correction != CORRECTION_EDEFAULT;
 			case TrackerPackage.EVENT__COMMENTS:
 				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
-			case TrackerPackage.EVENT__ID_NUMBER:
-				return getIdNumber() != ID_NUMBER_EDEFAULT;
 			case TrackerPackage.EVENT__TAG:
 				return getTag() != null;
 			case TrackerPackage.EVENT__ID:

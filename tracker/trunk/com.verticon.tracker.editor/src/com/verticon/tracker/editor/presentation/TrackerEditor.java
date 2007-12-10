@@ -2013,7 +2013,7 @@ public class TrackerEditor
 					Collection<Event> animalEvents = selectedAnimal.allEvents();
 						
 					//TODO Create a more generic gif for Events
-					ItemProvider listRoot = new ItemProvider("Animal Events for AIN: "+selectedAnimal.getIdNumber(),
+					ItemProvider listRoot = new ItemProvider("Animal Events for AIN: "+selectedAnimal.getId(),
 							TrackerReportEditPlugin.INSTANCE
 									.getImage("full/obj16/TagApplied"),
 							animalEvents);
