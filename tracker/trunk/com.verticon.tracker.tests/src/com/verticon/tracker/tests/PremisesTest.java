@@ -6,14 +6,11 @@
  */
 package com.verticon.tracker.tests;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import junit.framework.TestCase;
+import junit.textui.TestRunner;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-
-import junit.framework.TestCase;
-import junit.textui.TestRunner;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;

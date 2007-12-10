@@ -31,7 +31,6 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
-import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 
 /**
