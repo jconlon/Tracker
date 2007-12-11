@@ -1099,6 +1099,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getSighting_Location() {
+		return (EAttribute)sightingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSlaughtered() {
 		return slaughteredEClass;
 	}
@@ -1317,6 +1326,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		exportedEClass = createEClass(EXPORTED);
 
 		sightingEClass = createEClass(SIGHTING);
+		createEAttribute(sightingEClass, SIGHTING__LOCATION);
 
 		slaughteredEClass = createEClass(SLAUGHTERED);
 
@@ -1513,6 +1523,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(exportedEClass, Exported.class, "Exported", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(sightingEClass, Sighting.class, "Sighting", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSighting_Location(), ecorePackage.getEString(), "location", null, 0, 1, Sighting.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(slaughteredEClass, Slaughtered.class, "Slaughtered", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
