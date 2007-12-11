@@ -82,5 +82,13 @@ public class SightingTest extends EventTest {
 		assertNotNull(getFixture());
 		assertEquals(Sighting.EVENT_CODE, getFixture().getEventCode());
 	}
+	
+	
+	public void testGetLocation(){
+		assertNotNull(getFixture());
+		assertNull(getFixture().getLocation());
+		getFixture().setLocation("Fiona's room");
+		assertEquals("Fiona's room",getFixture().getLocation());
+	}
 
 } //SightingTest

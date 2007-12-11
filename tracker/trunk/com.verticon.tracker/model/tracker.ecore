@@ -350,7 +350,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Imported" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="Exported" eSuperTypes="#//Event"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Sighting" eSuperTypes="#//Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Sighting" eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Slaughtered" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="Died" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="TagRetired" eSuperTypes="#//Event"/>

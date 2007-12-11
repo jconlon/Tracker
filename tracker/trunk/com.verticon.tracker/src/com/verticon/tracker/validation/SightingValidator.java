@@ -16,4 +16,6 @@ package com.verticon.tracker.validation;
 public interface SightingValidator {
 	boolean validate();
 
+	boolean validateLocation(String value);
+
 }
