@@ -96,5 +96,18 @@ public class CommonUtilities {
 	}
 	
 	
-	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public final static boolean isUsainNumberUsed(String id) {
+		Long idNumber;
+		try {
+			idNumber = new Long(id);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return idNumber>840002000000000L && idNumber<843000000000000L;
+	}
 }

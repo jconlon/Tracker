@@ -45,7 +45,7 @@ public interface Tag extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Usain Number Used</em>' attribute.
 	 * @see com.verticon.tracker.TrackerPackage#getTag_UsainNumberUsed()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	boolean isUsainNumberUsed();

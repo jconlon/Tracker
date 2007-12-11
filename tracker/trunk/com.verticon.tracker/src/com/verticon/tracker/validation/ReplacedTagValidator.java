@@ -17,4 +17,12 @@ public interface ReplacedTagValidator {
 	boolean validate();
 
 	boolean validateOldAin(String value);
+
+	boolean validateOldId(String value);
+
+	boolean validateUsainNumberUsedForOldId(boolean value);
+
+	boolean validateOldIdAin(boolean value);
+
+	boolean validateOldIdWasAin(boolean value);
 }

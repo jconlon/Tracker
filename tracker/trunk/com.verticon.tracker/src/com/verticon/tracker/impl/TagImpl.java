@@ -8,6 +8,7 @@ package com.verticon.tracker.impl;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.util.CommonUtilities;
 
 import java.util.Collection;
 
@@ -113,13 +114,7 @@ public class TagImpl extends EObjectImpl implements Tag {
 	 * @generated NOT
 	 */
 	public boolean isUsainNumberUsed() {
-		Long idNumber;
-		try {
-			idNumber = new Long(id);
-		} catch (NumberFormatException e) {
-			return false;
-		}
-		return idNumber>840002000000000L && idNumber<843000000000000L;
+		return CommonUtilities.isUsainNumberUsed(id);
 	}
 
 	/**

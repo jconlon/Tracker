@@ -212,8 +212,6 @@ public class TrackerValidator extends EObjectValidator {
 				return validateHorseBreed((HorseBreed)value, diagnostics, context);
 			case TrackerPackage.GOAT_BREED:
 				return validateGoatBreed((GoatBreed)value, diagnostics, context);
-			case TrackerPackage.ANIMIAL_ID_NUMBER:
-				return validateAnimialIdNumber((String)value, diagnostics, context);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return validatePremisesIdNumber((String)value, diagnostics, context);
 			case TrackerPackage.EMAIL:
@@ -549,45 +547,6 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validateGoatBreed(GoatBreed goatBreed, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateAnimialIdNumber(String animialIdNumber, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validateAnimialIdNumber_MinLength(animialIdNumber, diagnostics, context);
-		if (result || diagnostics != null) result &= validateAnimialIdNumber_MaxLength(animialIdNumber, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * Validates the MinLength constraint of '<em>Animial Id Number</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateAnimialIdNumber_MinLength(String animialIdNumber, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		int length = animialIdNumber.length();  
-		boolean result = length >= 15;
-		if (!result && diagnostics != null) 
-			reportMinLengthViolation(TrackerPackage.Literals.ANIMIAL_ID_NUMBER, animialIdNumber, length, 15, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * Validates the MaxLength constraint of '<em>Animial Id Number</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateAnimialIdNumber_MaxLength(String animialIdNumber, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		int length = animialIdNumber.length();  
-		boolean result = length <= 15;
-		if (!result && diagnostics != null) 
-			reportMaxLengthViolation(TrackerPackage.Literals.ANIMIAL_ID_NUMBER, animialIdNumber, length, 15, diagnostics, context);
-		return result;
 	}
 
 	/**
