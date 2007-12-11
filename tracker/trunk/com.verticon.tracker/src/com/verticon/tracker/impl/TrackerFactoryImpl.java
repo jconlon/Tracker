@@ -164,8 +164,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createHorseBreedFromString(eDataType, initialValue);
 			case TrackerPackage.GOAT_BREED:
 				return createGoatBreedFromString(eDataType, initialValue);
-			case TrackerPackage.ANIMIAL_ID_NUMBER:
-				return createAnimialIdNumberFromString(eDataType, initialValue);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return createPremisesIdNumberFromString(eDataType, initialValue);
 			case TrackerPackage.EMAIL:
@@ -203,8 +201,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return convertHorseBreedToString(eDataType, instanceValue);
 			case TrackerPackage.GOAT_BREED:
 				return convertGoatBreedToString(eDataType, instanceValue);
-			case TrackerPackage.ANIMIAL_ID_NUMBER:
-				return convertAnimialIdNumberToString(eDataType, instanceValue);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return convertPremisesIdNumberToString(eDataType, instanceValue);
 			case TrackerPackage.EMAIL:
@@ -628,35 +624,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String createAnimialIdNumberFromString(EDataType eDataType, String initialValue) {
-		if(initialValue == null) return null;
-		Pattern p = Pattern.compile("(\\d{15})");
-		// Match the given string with the pattern
-		Matcher m = p.matcher(initialValue);
-		if(m.matches()){
-			return (String)initialValue;
-		}
-		
-		TrackerLog.logError(
-		            "Illegal Animal ID number: " + initialValue, new IllegalArgumentException("Animal ID number must be an numeric of 15 characthers in length"));
-		return null;
-		
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String convertAnimialIdNumberToString(EDataType eDataType, Object instanceValue) {
-		return (String) instanceValue;
-	}
 
 	/**
 	 * <!-- begin-user-doc -->

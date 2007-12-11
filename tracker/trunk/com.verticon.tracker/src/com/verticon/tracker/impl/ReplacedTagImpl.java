@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.util.CommonUtilities;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +21,8 @@ import com.verticon.tracker.TrackerPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.verticon.tracker.impl.ReplacedTagImpl#getOldAin <em>Old Ain</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.ReplacedTagImpl#getOldId <em>Old Id</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.ReplacedTagImpl#isUsainNumberUsedForOldId <em>Usain Number Used For Old Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -37,24 +39,34 @@ public class ReplacedTagImpl extends EventImpl implements ReplacedTag {
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
 	/**
-	 * The default value of the '{@link #getOldAin() <em>Old Ain</em>}' attribute.
+	 * The default value of the '{@link #getOldId() <em>Old Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOldAin()
+	 * @see #getOldId()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String OLD_AIN_EDEFAULT = null;
+	protected static final String OLD_ID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getOldAin() <em>Old Ain</em>}' attribute.
+	 * The cached value of the '{@link #getOldId() <em>Old Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOldAin()
+	 * @see #getOldId()
 	 * @generated
 	 * @ordered
 	 */
-	protected String oldAin = OLD_AIN_EDEFAULT;
+	protected String oldId = OLD_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isUsainNumberUsedForOldId() <em>Usain Number Used For Old Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUsainNumberUsedForOldId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean USAIN_NUMBER_USED_FOR_OLD_ID_EDEFAULT = false;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -89,8 +101,8 @@ public class ReplacedTagImpl extends EventImpl implements ReplacedTag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getOldAin() {
-		return oldAin;
+	public String getOldId() {
+		return oldId;
 	}
 
 	/**
@@ -98,11 +110,20 @@ public class ReplacedTagImpl extends EventImpl implements ReplacedTag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOldAin(String newOldAin) {
-		String oldOldAin = oldAin;
-		oldAin = newOldAin;
+	public void setOldId(String newOldId) {
+		String oldOldId = oldId;
+		oldId = newOldId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.REPLACED_TAG__OLD_AIN, oldOldAin, oldAin));
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.REPLACED_TAG__OLD_ID, oldOldId, oldId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean isUsainNumberUsedForOldId() {
+		return CommonUtilities.isUsainNumberUsed(oldId);
 	}
 
 	/**
@@ -113,8 +134,10 @@ public class ReplacedTagImpl extends EventImpl implements ReplacedTag {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TrackerPackage.REPLACED_TAG__OLD_AIN:
-				return getOldAin();
+			case TrackerPackage.REPLACED_TAG__OLD_ID:
+				return getOldId();
+			case TrackerPackage.REPLACED_TAG__USAIN_NUMBER_USED_FOR_OLD_ID:
+				return isUsainNumberUsedForOldId() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -127,8 +150,8 @@ public class ReplacedTagImpl extends EventImpl implements ReplacedTag {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TrackerPackage.REPLACED_TAG__OLD_AIN:
-				setOldAin((String)newValue);
+			case TrackerPackage.REPLACED_TAG__OLD_ID:
+				setOldId((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -142,8 +165,8 @@ public class ReplacedTagImpl extends EventImpl implements ReplacedTag {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TrackerPackage.REPLACED_TAG__OLD_AIN:
-				setOldAin(OLD_AIN_EDEFAULT);
+			case TrackerPackage.REPLACED_TAG__OLD_ID:
+				setOldId(OLD_ID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -157,8 +180,10 @@ public class ReplacedTagImpl extends EventImpl implements ReplacedTag {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TrackerPackage.REPLACED_TAG__OLD_AIN:
-				return OLD_AIN_EDEFAULT == null ? oldAin != null : !OLD_AIN_EDEFAULT.equals(oldAin);
+			case TrackerPackage.REPLACED_TAG__OLD_ID:
+				return OLD_ID_EDEFAULT == null ? oldId != null : !OLD_ID_EDEFAULT.equals(oldId);
+			case TrackerPackage.REPLACED_TAG__USAIN_NUMBER_USED_FOR_OLD_ID:
+				return isUsainNumberUsedForOldId() != USAIN_NUMBER_USED_FOR_OLD_ID_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -173,8 +198,8 @@ public class ReplacedTagImpl extends EventImpl implements ReplacedTag {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (oldAin: ");
-		result.append(oldAin);
+		result.append(" (oldId: ");
+		result.append(oldId);
 		result.append(')');
 		return result.toString();
 	}

@@ -69,29 +69,52 @@ public class ReplacedTagItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addOldAinPropertyDescriptor(object);
+			addOldIdPropertyDescriptor(object);
+			addUsainNumberUsedForOldIdPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Old Ain feature.
+	 * This adds a property descriptor for the Old Id feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addOldAinPropertyDescriptor(Object object) {
+	protected void addOldIdPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ReplacedTag_oldAin_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ReplacedTag_oldAin_feature", "_UI_ReplacedTag_type"),
-				 TrackerPackage.Literals.REPLACED_TAG__OLD_AIN,
+				 getString("_UI_ReplacedTag_oldId_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ReplacedTag_oldId_feature", "_UI_ReplacedTag_type"),
+				 TrackerPackage.Literals.REPLACED_TAG__OLD_ID,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Usain Number Used For Old Id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addUsainNumberUsedForOldIdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ReplacedTag_usainNumberUsedForOldId_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ReplacedTag_usainNumberUsedForOldId_feature", "_UI_ReplacedTag_type"),
+				 TrackerPackage.Literals.REPLACED_TAG__USAIN_NUMBER_USED_FOR_OLD_ID,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -131,7 +154,8 @@ public class ReplacedTagItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ReplacedTag.class)) {
-			case TrackerPackage.REPLACED_TAG__OLD_AIN:
+			case TrackerPackage.REPLACED_TAG__OLD_ID:
+			case TrackerPackage.REPLACED_TAG__USAIN_NUMBER_USED_FOR_OLD_ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

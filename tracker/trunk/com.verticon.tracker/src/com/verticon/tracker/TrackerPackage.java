@@ -1645,13 +1645,22 @@ public interface TrackerPackage extends EPackage {
 	int REPLACED_TAG__ID = EVENT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Old Ain</b></em>' attribute.
+	 * The feature id for the '<em><b>Old Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REPLACED_TAG__OLD_AIN = EVENT_FEATURE_COUNT + 0;
+	int REPLACED_TAG__OLD_ID = EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Usain Number Used For Old Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPLACED_TAG__USAIN_NUMBER_USED_FOR_OLD_ID = EVENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Replaced Tag</em>' class.
@@ -1660,7 +1669,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REPLACED_TAG_FEATURE_COUNT = EVENT_FEATURE_COUNT + 1;
+	int REPLACED_TAG_FEATURE_COUNT = EVENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.ImportedImpl <em>Imported</em>}' class.
@@ -3048,16 +3057,6 @@ public interface TrackerPackage extends EPackage {
 	int GOAT_BREED = 35;
 
 	/**
-	 * The meta object id for the '<em>Animial Id Number</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.lang.String
-	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAnimialIdNumber()
-	 * @generated
-	 */
-	int ANIMIAL_ID_NUMBER = 36;
-
-	/**
 	 * The meta object id for the '<em>Premises Id Number</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3065,7 +3064,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPremisesIdNumber()
 	 * @generated
 	 */
-	int PREMISES_ID_NUMBER = 37;
+	int PREMISES_ID_NUMBER = 36;
 
 	/**
 	 * The meta object id for the '<em>Email</em>' data type.
@@ -3075,7 +3074,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 38;
+	int EMAIL = 37;
 
 
 	/**
@@ -3086,7 +3085,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAge()
 	 * @generated
 	 */
-	int AGE = 39;
+	int AGE = 38;
 
 
 	/**
@@ -3097,7 +3096,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSPhoneNumber()
 	 * @generated
 	 */
-	int US_PHONE_NUMBER = 40;
+	int US_PHONE_NUMBER = 39;
 
 
 	/**
@@ -3836,15 +3835,26 @@ public interface TrackerPackage extends EPackage {
 	EClass getReplacedTag();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.ReplacedTag#getOldAin <em>Old Ain</em>}'.
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.ReplacedTag#getOldId <em>Old Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Old Ain</em>'.
-	 * @see com.verticon.tracker.ReplacedTag#getOldAin()
+	 * @return the meta object for the attribute '<em>Old Id</em>'.
+	 * @see com.verticon.tracker.ReplacedTag#getOldId()
 	 * @see #getReplacedTag()
 	 * @generated
 	 */
-	EAttribute getReplacedTag_OldAin();
+	EAttribute getReplacedTag_OldId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.ReplacedTag#isUsainNumberUsedForOldId <em>Usain Number Used For Old Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Usain Number Used For Old Id</em>'.
+	 * @see com.verticon.tracker.ReplacedTag#isUsainNumberUsedForOldId()
+	 * @see #getReplacedTag()
+	 * @generated
+	 */
+	EAttribute getReplacedTag_UsainNumberUsedForOldId();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Imported <em>Imported</em>}'.
@@ -3976,18 +3986,6 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getGoatBreed();
-
-	/**
-	 * Returns the meta object for data type '{@link java.lang.String <em>Animial Id Number</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Animial Id Number</em>'.
-	 * @see java.lang.String
-	 * @model instanceClass="java.lang.String"
-	 *        extendedMetaData="minLength='15' maxLength='15'"
-	 * @generated
-	 */
-	EDataType getAnimialIdNumber();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>Premises Id Number</em>}'.
@@ -4657,12 +4655,20 @@ public interface TrackerPackage extends EPackage {
 		EClass REPLACED_TAG = eINSTANCE.getReplacedTag();
 
 		/**
-		 * The meta object literal for the '<em><b>Old Ain</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Old Id</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute REPLACED_TAG__OLD_AIN = eINSTANCE.getReplacedTag_OldAin();
+		EAttribute REPLACED_TAG__OLD_ID = eINSTANCE.getReplacedTag_OldId();
+
+		/**
+		 * The meta object literal for the '<em><b>Usain Number Used For Old Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REPLACED_TAG__USAIN_NUMBER_USED_FOR_OLD_ID = eINSTANCE.getReplacedTag_UsainNumberUsedForOldId();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.ImportedImpl <em>Imported</em>}' class.
@@ -4791,16 +4797,6 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum GOAT_BREED = eINSTANCE.getGoatBreed();
-
-		/**
-		 * The meta object literal for the '<em>Animial Id Number</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.lang.String
-		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAnimialIdNumber()
-		 * @generated
-		 */
-		EDataType ANIMIAL_ID_NUMBER = eINSTANCE.getAnimialIdNumber();
 
 		/**
 		 * The meta object literal for the '<em>Premises Id Number</em>' data type.

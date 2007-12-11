@@ -154,7 +154,7 @@ public class WlicPremisesProcessor implements PremisesProcessor {
 		case 16://AnimalID 1 type use this if a replace Tag event is used
 			switch (event.getEventCode()) {
 				case 6:
-					out = ((ReplacedTag)event).getOldAin()==null?"," :((ReplacedTag)event).getOldAin()+',';
+					out = ((ReplacedTag)event).getOldId()==null?"," :((ReplacedTag)event).getOldId()+',';
 					break;
 				default:
 					out = ",";

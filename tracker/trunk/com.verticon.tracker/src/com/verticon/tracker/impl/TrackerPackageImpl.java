@@ -330,13 +330,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EDataType animialIdNumberEDataType = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EDataType premisesIdNumberEDataType = null;
 
 	/**
@@ -1063,8 +1056,17 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getReplacedTag_OldAin() {
+	public EAttribute getReplacedTag_OldId() {
 		return (EAttribute)replacedTagEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getReplacedTag_UsainNumberUsedForOldId() {
+		return (EAttribute)replacedTagEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1182,15 +1184,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 */
 	public EEnum getGoatBreed() {
 		return goatBreedEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EDataType getAnimialIdNumber() {
-		return animialIdNumberEDataType;
 	}
 
 	/**
@@ -1319,7 +1312,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		lostTagEClass = createEClass(LOST_TAG);
 
 		replacedTagEClass = createEClass(REPLACED_TAG);
-		createEAttribute(replacedTagEClass, REPLACED_TAG__OLD_AIN);
+		createEAttribute(replacedTagEClass, REPLACED_TAG__OLD_ID);
+		createEAttribute(replacedTagEClass, REPLACED_TAG__USAIN_NUMBER_USED_FOR_OLD_ID);
 
 		importedEClass = createEClass(IMPORTED);
 
@@ -1371,7 +1365,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		goatBreedEEnum = createEEnum(GOAT_BREED);
 
 		// Create data types
-		animialIdNumberEDataType = createEDataType(ANIMIAL_ID_NUMBER);
 		premisesIdNumberEDataType = createEDataType(PREMISES_ID_NUMBER);
 		emailEDataType = createEDataType(EMAIL);
 		ageEDataType = createEDataType(AGE);
@@ -1458,7 +1451,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEOperation(animalEClass, this.getTag(), "activeTag", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(tagEClass, Tag.class, "Tag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTag_UsainNumberUsed(), ecorePackage.getEBoolean(), "usainNumberUsed", null, 0, 1, Tag.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTag_UsainNumberUsed(), ecorePackage.getEBoolean(), "usainNumberUsed", null, 1, 1, Tag.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getTag_Events(), this.getEvent(), this.getEvent_Tag(), "events", null, 1, -1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTag_Id(), ecorePackage.getEString(), "id", "", 1, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1516,7 +1509,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(lostTagEClass, LostTag.class, "LostTag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(replacedTagEClass, ReplacedTag.class, "ReplacedTag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getReplacedTag_OldAin(), this.getAnimialIdNumber(), "oldAin", null, 1, 1, ReplacedTag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getReplacedTag_OldId(), ecorePackage.getEString(), "oldId", null, 1, 1, ReplacedTag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getReplacedTag_UsainNumberUsedForOldId(), ecorePackage.getEBoolean(), "usainNumberUsedForOldId", null, 1, 1, ReplacedTag.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(importedEClass, Imported.class, "Imported", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1866,7 +1860,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEEnumLiteral(goatBreedEEnum, GoatBreed.UNSPECIFIED);
 
 		// Initialize data types
-		initEDataType(animialIdNumberEDataType, String.class, "AnimialIdNumber", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(premisesIdNumberEDataType, String.class, "PremisesIdNumber", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(emailEDataType, String.class, "Email", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(ageEDataType, Age.class, "Age", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -1880,8 +1873,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createOCLAnnotations();
 		// http:///org/eclipse/emf/ecore/util/ExtendedMetaData
 		createExtendedMetaDataAnnotations();
-		// http://www.topcased.org/documentation
-		createDocumentationAnnotations();
 	}
 
 	/**
@@ -1897,7 +1888,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		   source, 
 		   new String[] {
 			 "body", "if (animals -> notEmpty()) and (animals.tags->notEmpty())\n\tthen  animals.tags.events\n\telse Set{}\nendif"
-		   });				
+		   });	
 	}
 
 	/**
@@ -1909,13 +1900,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	protected void createExtendedMetaDataAnnotations() {
 		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";			
 		addAnnotation
-		  (animialIdNumberEDataType, 
-		   source, 
-		   new String[] {
-			 "minLength", "15",
-			 "maxLength", "15"
-		   });		
-		addAnnotation
 		  (premisesIdNumberEDataType, 
 		   source, 
 		   new String[] {
@@ -1923,23 +1907,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 			 "maxLength", "7",
 			 "length", "7",
 			 "maxExclusive", "adcdefg"
-		   });		
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.topcased.org/documentation</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createDocumentationAnnotations() {
-		String source = "http://www.topcased.org/documentation";					
-		addAnnotation
-		  (getReplacedTag_OldAin(), 
-		   source, 
-		   new String[] {
-			 "documentation", "Tracker.ecore is the metaModel for Tracker, a NAIS base animal event management framework."
-		   });	
+		   });
 	}
 
 } //TrackerPackageImpl

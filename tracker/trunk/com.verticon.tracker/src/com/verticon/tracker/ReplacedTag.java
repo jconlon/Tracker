@@ -15,7 +15,8 @@ package com.verticon.tracker;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.verticon.tracker.ReplacedTag#getOldAin <em>Old Ain</em>}</li>
+ *   <li>{@link com.verticon.tracker.ReplacedTag#getOldId <em>Old Id</em>}</li>
+ *   <li>{@link com.verticon.tracker.ReplacedTag#isUsainNumberUsedForOldId <em>Usain Number Used For Old Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,34 +33,44 @@ public interface ReplacedTag extends Event {
 	String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
 	/**
-	 * Returns the value of the '<em><b>Old Ain</b></em>' attribute.
+	 * Returns the value of the '<em><b>Old Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Old Ain</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Old Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Tracker.ecore is the metaModel for Tracker, a NAIS base animal event management framework.
-	 * 
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Old Ain</em>' attribute.
-	 * @see #setOldAin(String)
-	 * @see com.verticon.tracker.TrackerPackage#getReplacedTag_OldAin()
-	 * @model dataType="com.verticon.tracker.AnimialIdNumber" required="true"
-	 *        annotation="http://www.topcased.org/documentation documentation='Tracker.ecore is the metaModel for Tracker, a NAIS base animal event management framework.'"
+	 * @return the value of the '<em>Old Id</em>' attribute.
+	 * @see #setOldId(String)
+	 * @see com.verticon.tracker.TrackerPackage#getReplacedTag_OldId()
+	 * @model required="true"
 	 * @generated
 	 */
-	String getOldAin();
+	String getOldId();
 
 	/**
-	 * Sets the value of the '{@link com.verticon.tracker.ReplacedTag#getOldAin <em>Old Ain</em>}' attribute.
+	 * Sets the value of the '{@link com.verticon.tracker.ReplacedTag#getOldId <em>Old Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Old Ain</em>' attribute.
-	 * @see #getOldAin()
+	 * @param value the new value of the '<em>Old Id</em>' attribute.
+	 * @see #getOldId()
 	 * @generated
 	 */
-	void setOldAin(String value);
+	void setOldId(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Usain Number Used For Old Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Usain Number Used For Old Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Usain Number Used For Old Id</em>' attribute.
+	 * @see com.verticon.tracker.TrackerPackage#getReplacedTag_UsainNumberUsedForOldId()
+	 * @model required="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	boolean isUsainNumberUsedForOldId();
 
 } // ReplacedTag

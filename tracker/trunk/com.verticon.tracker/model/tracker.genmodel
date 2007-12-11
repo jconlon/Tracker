@@ -320,7 +320,6 @@
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/TO"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/Unspecified"/>
     </genEnums>
-    <genDataTypes ecoreDataType="tracker.ecore#//AnimialIdNumber"/>
     <genDataTypes ecoreDataType="tracker.ecore#//PremisesIdNumber"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Email"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Age"/>
@@ -396,7 +395,8 @@
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//LostTag"/>
     <genClasses ecoreClass="tracker.ecore#//ReplacedTag">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//ReplacedTag/oldAin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//ReplacedTag/oldId"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//ReplacedTag/usainNumberUsedForOldId"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Imported"/>
     <genClasses ecoreClass="tracker.ecore#//Exported"/>
