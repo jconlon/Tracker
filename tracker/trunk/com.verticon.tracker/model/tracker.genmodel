@@ -324,6 +324,7 @@
     <genDataTypes ecoreDataType="tracker.ecore#//Email"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Age"/>
     <genDataTypes ecoreDataType="tracker.ecore#//USPhoneNumber"/>
+    <genDataTypes ecoreDataType="tracker.ecore#//URI"/>
     <genClasses provider="Stateful" ecoreClass="tracker.ecore#//Animal" labelFeature="#//tracker/Animal/species">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/birthDate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/sex"/>
@@ -366,6 +367,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/animals"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/unAppliedTags"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/locations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/uri"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/eventHistory"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/findAnimal">
         <genParameters ecoreParameter="tracker.ecore#//Premises/findAnimal/id"/>

@@ -46,6 +46,7 @@ import com.verticon.tracker.TrackerPackage;
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getAnimals <em>Animals</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getUnAppliedTags <em>Un Applied Tags</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getLocations <em>Locations</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getUri <em>Uri</em>}</li>
  * </ul>
  * </p>
  *
@@ -134,6 +135,26 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * @ordered
 	 */
 	protected EList<Location> locations;
+
+	/**
+	 * The default value of the '{@link #getUri() <em>Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String URI_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getUri() <em>Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected String uri = URI_EDEFAULT;
 
 	/**
 	 * The parsed OCL expression for the body of the '{@link #eventHistory <em>Event History</em>}' operation.
@@ -250,6 +271,27 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getUri() {
+		return uri;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUri(String newUri) {
+		String oldUri = uri;
+		uri = newUri;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__URI, oldUri, uri));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Event> eventHistory() {
 		if (eventHistoryBodyOCL == null) {
 			EOperation eOperation = TrackerPackage.Literals.PREMISES.getEOperations().get(0);
@@ -346,6 +388,8 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return getUnAppliedTags();
 			case TrackerPackage.PREMISES__LOCATIONS:
 				return getLocations();
+			case TrackerPackage.PREMISES__URI:
+				return getUri();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -377,6 +421,9 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				getLocations().clear();
 				getLocations().addAll((Collection<? extends Location>)newValue);
 				return;
+			case TrackerPackage.PREMISES__URI:
+				setUri((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -404,6 +451,9 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 			case TrackerPackage.PREMISES__LOCATIONS:
 				getLocations().clear();
 				return;
+			case TrackerPackage.PREMISES__URI:
+				setUri(URI_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -426,6 +476,8 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return unAppliedTags != null && !unAppliedTags.isEmpty();
 			case TrackerPackage.PREMISES__LOCATIONS:
 				return locations != null && !locations.isEmpty();
+			case TrackerPackage.PREMISES__URI:
+				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -444,6 +496,8 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 		result.append(premisesId);
 		result.append(", emailContact: ");
 		result.append(emailContact);
+		result.append(", uri: ");
+		result.append(uri);
 		result.append(')');
 		return result.toString();
 	}

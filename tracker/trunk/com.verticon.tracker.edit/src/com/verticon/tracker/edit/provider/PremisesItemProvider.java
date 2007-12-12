@@ -73,6 +73,7 @@ public class PremisesItemProvider
 
 			addPremisesIdPropertyDescriptor(object);
 			addEmailContactPropertyDescriptor(object);
+			addUriPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -113,6 +114,28 @@ public class PremisesItemProvider
 				 getString("_UI_Premises_emailContact_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Premises_emailContact_feature", "_UI_Premises_type"),
 				 TrackerPackage.Literals.PREMISES__EMAIL_CONTACT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Uri feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addUriPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Premises_uri_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Premises_uri_feature", "_UI_Premises_type"),
+				 TrackerPackage.Literals.PREMISES__URI,
 				 true,
 				 false,
 				 false,
@@ -192,6 +215,7 @@ public class PremisesItemProvider
 		switch (notification.getFeatureID(Premises.class)) {
 			case TrackerPackage.PREMISES__PREMISES_ID:
 			case TrackerPackage.PREMISES__EMAIL_CONTACT:
+			case TrackerPackage.PREMISES__URI:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TrackerPackage.PREMISES__ANIMALS:

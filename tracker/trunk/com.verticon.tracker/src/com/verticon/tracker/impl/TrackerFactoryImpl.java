@@ -6,10 +6,8 @@
  */
 package com.verticon.tracker.impl;
 
-import com.verticon.tracker.*;
+import java.net.URI;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -17,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BisonBreed;
@@ -34,6 +31,7 @@ import com.verticon.tracker.GoatBreed;
 import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
+import com.verticon.tracker.Location;
 import com.verticon.tracker.LostTag;
 import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
@@ -173,6 +171,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createAgeFromString(eDataType, initialValue);
 			case TrackerPackage.US_PHONE_NUMBER:
 				return createUSPhoneNumberFromString(eDataType, initialValue);
+			case TrackerPackage.URI:
+				return createURIFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -210,6 +210,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return convertAgeToString(eDataType, instanceValue);
 			case TrackerPackage.US_PHONE_NUMBER:
 				return convertUSPhoneNumberToString(eDataType, instanceValue);
+			case TrackerPackage.URI:
+				return convertURIToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -652,7 +654,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return (String)initialValue;
 			}
 		} catch (NumberFormatException e) {
-			return null;
+			throw e;
 		}
 		TrackerLog.logError(
 	            "Illegal Premise ID number: " + initialValue, new IllegalArgumentException("Failed CheckDigit"));
@@ -732,6 +734,31 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 */
 	public String convertUSPhoneNumberToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String createURIFromString(EDataType eDataType, String initialValue) {
+		if(initialValue == null) return null;
+		try {
+			URI.create(initialValue);
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(e.getCause());
+		}
+
+		return initialValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String convertURIToString(EDataType eDataType, Object instanceValue) {
+		return (String) instanceValue;
 	}
 
 	/**

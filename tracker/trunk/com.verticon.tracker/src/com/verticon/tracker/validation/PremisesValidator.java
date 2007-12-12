@@ -27,4 +27,6 @@ public interface PremisesValidator {
 	boolean validateUnAppliedTags(EList<Tag> value);
 
 	boolean validateLocations(EList<Location> value);
+
+	boolean validateUri(String value);
 }

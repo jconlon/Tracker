@@ -222,6 +222,8 @@ public class TrackerValidator extends EObjectValidator {
 				return validateAge((Age)value, diagnostics, context);
 			case TrackerPackage.US_PHONE_NUMBER:
 				return validateUSPhoneNumber((String)value, diagnostics, context);
+			case TrackerPackage.URI:
+				return validateURI((String)value, diagnostics, context);
 			default: 
 				return true;
 		}
@@ -645,6 +647,15 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateUSPhoneNumber(String usPhoneNumber, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateURI(String uri, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
