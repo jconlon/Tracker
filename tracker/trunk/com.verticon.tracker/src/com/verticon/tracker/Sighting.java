@@ -32,30 +32,30 @@ public interface Sighting extends Event {
 	String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
 	/**
-	 * Returns the value of the '<em><b>Location</b></em>' attribute.
+	 * Returns the value of the '<em><b>Location</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Location</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Location</em>' attribute.
-	 * @see #setLocation(String)
+	 * @return the value of the '<em>Location</em>' reference.
+	 * @see #setLocation(Location)
 	 * @see com.verticon.tracker.TrackerPackage#getSighting_Location()
 	 * @model
 	 * @generated
 	 */
-	String getLocation();
+	Location getLocation();
 
 	/**
-	 * Sets the value of the '{@link com.verticon.tracker.Sighting#getLocation <em>Location</em>}' attribute.
+	 * Sets the value of the '{@link com.verticon.tracker.Sighting#getLocation <em>Location</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Location</em>' attribute.
+	 * @param value the new value of the '<em>Location</em>' reference.
 	 * @see #getLocation()
 	 * @generated
 	 */
-	void setLocation(String value);
+	void setLocation(Location value);
 
 	/**
 	 * @NOT

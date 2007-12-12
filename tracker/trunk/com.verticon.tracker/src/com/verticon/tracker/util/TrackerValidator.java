@@ -196,6 +196,8 @@ public class TrackerValidator extends EObjectValidator {
 				return validateEquine((Equine)value, diagnostics, context);
 			case TrackerPackage.CAPRINE:
 				return validateCaprine((Caprine)value, diagnostics, context);
+			case TrackerPackage.LOCATION:
+				return validateLocation((Location)value, diagnostics, context);
 			case TrackerPackage.SEX:
 				return validateSex((Sex)value, diagnostics, context);
 			case TrackerPackage.BISON_BREED:
@@ -349,6 +351,15 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validateCaprine(Caprine caprine, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(caprine, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateLocation(Location location, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(location, diagnostics, context);
 	}
 
 	/**

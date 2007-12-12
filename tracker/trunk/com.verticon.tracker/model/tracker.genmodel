@@ -365,6 +365,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/emailContact"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/animals"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/unAppliedTags"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/locations"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/eventHistory"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/findAnimal">
         <genParameters ecoreParameter="tracker.ecore#//Premises/findAnimal/id"/>
@@ -401,7 +402,7 @@
     <genClasses ecoreClass="tracker.ecore#//Imported"/>
     <genClasses ecoreClass="tracker.ecore#//Exported"/>
     <genClasses ecoreClass="tracker.ecore#//Sighting">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Sighting/location"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference tracker.ecore#//Sighting/location"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Slaughtered"/>
     <genClasses ecoreClass="tracker.ecore#//Died"/>
@@ -429,6 +430,9 @@
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Caprine">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Caprine/goatBreed"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Location">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Location/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

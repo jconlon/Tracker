@@ -7,6 +7,7 @@
 package com.verticon.tracker.validation;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.Location;
 import com.verticon.tracker.Tag;
 
 import org.eclipse.emf.common.util.EList;
@@ -24,4 +25,6 @@ public interface PremisesValidator {
 	boolean validateEmailContact(String value);
 	boolean validateAnimals(EList<Animal> value);
 	boolean validateUnAppliedTags(EList<Tag> value);
+
+	boolean validateLocations(EList<Location> value);
 }

@@ -637,13 +637,22 @@ public interface TrackerPackage extends EPackage {
 	int PREMISES__UN_APPLIED_TAGS = 3;
 
 	/**
+	 * The feature id for the '<em><b>Locations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREMISES__LOCATIONS = 4;
+
+	/**
 	 * The number of structural features of the '<em>Premises</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREMISES_FEATURE_COUNT = 4;
+	int PREMISES_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.BovineBeefImpl <em>Bovine Beef</em>}' class.
@@ -1909,7 +1918,7 @@ public interface TrackerPackage extends EPackage {
 	int SIGHTING__ID = EVENT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * The feature id for the '<em><b>Location</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2977,6 +2986,34 @@ public interface TrackerPackage extends EPackage {
 	int CAPRINE_FEATURE_COUNT = ANIMAL_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.LocationImpl <em>Location</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.LocationImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getLocation()
+	 * @generated
+	 */
+	int LOCATION = 28;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION__NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Location</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Sex <em>Sex</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2984,7 +3021,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 28;
+	int SEX = 29;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BisonBreed <em>Bison Breed</em>}' enum.
@@ -2994,7 +3031,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBisonBreed()
 	 * @generated
 	 */
-	int BISON_BREED = 29;
+	int BISON_BREED = 30;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SheepBreed <em>Sheep Breed</em>}' enum.
@@ -3004,7 +3041,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSheepBreed()
 	 * @generated
 	 */
-	int SHEEP_BREED = 30;
+	int SHEEP_BREED = 31;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BeefBreed <em>Beef Breed</em>}' enum.
@@ -3014,7 +3051,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBeefBreed()
 	 * @generated
 	 */
-	int BEEF_BREED = 31;
+	int BEEF_BREED = 32;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.DairyBreed <em>Dairy Breed</em>}' enum.
@@ -3024,7 +3061,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDairyBreed()
 	 * @generated
 	 */
-	int DAIRY_BREED = 32;
+	int DAIRY_BREED = 33;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SwineBreed <em>Swine Breed</em>}' enum.
@@ -3034,7 +3071,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSwineBreed()
 	 * @generated
 	 */
-	int SWINE_BREED = 33;
+	int SWINE_BREED = 34;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.HorseBreed <em>Horse Breed</em>}' enum.
@@ -3044,7 +3081,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getHorseBreed()
 	 * @generated
 	 */
-	int HORSE_BREED = 34;
+	int HORSE_BREED = 35;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.GoatBreed <em>Goat Breed</em>}' enum.
@@ -3054,7 +3091,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getGoatBreed()
 	 * @generated
 	 */
-	int GOAT_BREED = 35;
+	int GOAT_BREED = 36;
 
 	/**
 	 * The meta object id for the '<em>Premises Id Number</em>' data type.
@@ -3064,7 +3101,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPremisesIdNumber()
 	 * @generated
 	 */
-	int PREMISES_ID_NUMBER = 36;
+	int PREMISES_ID_NUMBER = 37;
 
 	/**
 	 * The meta object id for the '<em>Email</em>' data type.
@@ -3074,7 +3111,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 37;
+	int EMAIL = 38;
 
 
 	/**
@@ -3085,7 +3122,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAge()
 	 * @generated
 	 */
-	int AGE = 38;
+	int AGE = 39;
 
 
 	/**
@@ -3096,7 +3133,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSPhoneNumber()
 	 * @generated
 	 */
-	int US_PHONE_NUMBER = 39;
+	int US_PHONE_NUMBER = 40;
 
 
 	/**
@@ -3625,6 +3662,27 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getCaprine_GoatBreed();
 
 	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.Location <em>Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Location</em>'.
+	 * @see com.verticon.tracker.Location
+	 * @generated
+	 */
+	EClass getLocation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Location#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see com.verticon.tracker.Location#getName()
+	 * @see #getLocation()
+	 * @generated
+	 */
+	EAttribute getLocation_Name();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Premises <em>Premises</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3677,6 +3735,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPremises_UnAppliedTags();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.Premises#getLocations <em>Locations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Locations</em>'.
+	 * @see com.verticon.tracker.Premises#getLocations()
+	 * @see #getPremises()
+	 * @generated
+	 */
+	EReference getPremises_Locations();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.BovineBeef <em>Bovine Beef</em>}'.
@@ -3887,15 +3956,15 @@ public interface TrackerPackage extends EPackage {
 	EClass getSighting();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Sighting#getLocation <em>Location</em>}'.
+	 * Returns the meta object for the reference '{@link com.verticon.tracker.Sighting#getLocation <em>Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Location</em>'.
+	 * @return the meta object for the reference '<em>Location</em>'.
 	 * @see com.verticon.tracker.Sighting#getLocation()
 	 * @see #getSighting()
 	 * @generated
 	 */
-	EAttribute getSighting_Location();
+	EReference getSighting_Location();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Slaughtered <em>Slaughtered</em>}'.
@@ -4475,6 +4544,24 @@ public interface TrackerPackage extends EPackage {
 		EAttribute CAPRINE__GOAT_BREED = eINSTANCE.getCaprine_GoatBreed();
 
 		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.LocationImpl <em>Location</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.LocationImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getLocation()
+		 * @generated
+		 */
+		EClass LOCATION = eINSTANCE.getLocation();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LOCATION__NAME = eINSTANCE.getLocation_Name();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.PremisesImpl <em>Premises</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4515,6 +4602,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PREMISES__UN_APPLIED_TAGS = eINSTANCE.getPremises_UnAppliedTags();
+
+		/**
+		 * The meta object literal for the '<em><b>Locations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PREMISES__LOCATIONS = eINSTANCE.getPremises_Locations();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.BovineBeefImpl <em>Bovine Beef</em>}' class.
@@ -4701,12 +4796,12 @@ public interface TrackerPackage extends EPackage {
 		EClass SIGHTING = eINSTANCE.getSighting();
 
 		/**
-		 * The meta object literal for the '<em><b>Location</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Location</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute SIGHTING__LOCATION = eINSTANCE.getSighting_Location();
+		EReference SIGHTING__LOCATION = eINSTANCE.getSighting_Location();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.SlaughteredImpl <em>Slaughtered</em>}' class.
