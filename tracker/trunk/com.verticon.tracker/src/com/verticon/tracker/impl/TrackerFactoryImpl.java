@@ -647,19 +647,15 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public String createPremisesIdNumberFromString(EDataType eDataType, String initialValue) {
 		if(initialValue == null) return null;
 		if(initialValue.length()!=7){
-			return null;
+			throw new IllegalArgumentException("Premises Id must contain 7 digits: " + initialValue);
 		}
-		try {
-			if(CheckISO7064Mod37_36.verify(initialValue)){
-				return (String)initialValue;
-			}
-		} catch (NumberFormatException e) {
-			throw e;
-		}
-		TrackerLog.logError(
-	            "Illegal Premise ID number: " + initialValue, new IllegalArgumentException("Failed CheckDigit"));
-		return null;
 		
+		if(CheckISO7064Mod37_36.verify(initialValue)){
+				return initialValue;
+		}
+			
+		
+		throw new IllegalArgumentException(initialValue+" is a legal Premises Id");
 	}
 
 	/**
@@ -682,9 +678,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		if(CheckEmail.validate(initialValue)){
 			return (String)initialValue;
 		}
-		TrackerLog.logError(
-	            "Illegal email format: " + initialValue, null);
-		return null;
+		throw new IllegalArgumentException(initialValue+" is not a legal Email Contact");
+		
 	}
 
 	/**
