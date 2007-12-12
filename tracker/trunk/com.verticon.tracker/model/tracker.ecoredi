@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_smKWUDo3Edyw6--mXqZ7vg" activeDiagram="_smKWUTo3Edyw6--mXqZ7vg">
   <model href="tracker.ecore#/"/>
-  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="1143,0">
+  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="1275,530">
     <property xmi:id="_smKWUjo3Edyw6--mXqZ7vg" key="pageFormatName" value="A2"/>
     <property xmi:id="_smKWUzo3Edyw6--mXqZ7vg" key="diagramWidth" value="1680"/>
     <property xmi:id="_smKWVDo3Edyw6--mXqZ7vg" key="diagramHeight" value="2376"/>
@@ -264,6 +264,11 @@
         <contained xsi:type="di:GraphNode" xmi:id="_smOAwTo3Edyw6--mXqZ7vg" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smOAwjo3Edyw6--mXqZ7vg" presentation="default">
             <element href="tracker.ecore#//Premises/emailContact"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bVy2IKjiEdyC4LDVBJtEEQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bVy2IajiEdyC4LDVBJtEEQ" presentation="default">
+            <element href="tracker.ecore#//Premises/uri"/>
           </semanticModel>
         </contained>
       </contained>
@@ -1584,7 +1589,7 @@
       <waypoints>[0, -172, -162, 162]</waypoints>
       <waypoints>[162, -172, 0, 162]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_smjX6zo3Edyw6--mXqZ7vg" position="1581,619" size="79,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_smjX6zo3Edyw6--mXqZ7vg" position="1571,623" size="79,-1">
       <anchorage xmi:id="_smjX7Do3Edyw6--mXqZ7vg" graphEdge="_smj-8Do3Edyw6--mXqZ7vg"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smjX7To3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//Exported"/>
@@ -1699,7 +1704,7 @@
       <waypoints>[0, -171, -117, 106]</waypoints>
       <waypoints>[117, -171, 0, 106]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_sml0Kzo3Edyw6--mXqZ7vg" position="1519,679" size="110,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_sml0Kzo3Edyw6--mXqZ7vg" position="1663,621" size="110,-1">
       <anchorage xmi:id="_sml0LDo3Edyw6--mXqZ7vg" graphEdge="_smmbMDo3Edyw6--mXqZ7vg"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sml0LTo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//AnimalMissing"/>
@@ -2520,6 +2525,11 @@
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_NOEfwajdEdyC4LDVBJtEEQ" id="nameLabel" uDistance="20" vDistance="20"/>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_NOEfwqjdEdyC4LDVBJtEEQ" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_p0RR4KjiEdyC4LDVBJtEEQ" position="865,69" size="171,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_p0RR4ajiEdyC4LDVBJtEEQ" presentation="default">
+        <element href="tracker.ecore#//URI"/>
+      </semanticModel>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

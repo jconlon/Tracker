@@ -646,13 +646,22 @@ public interface TrackerPackage extends EPackage {
 	int PREMISES__LOCATIONS = 4;
 
 	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREMISES__URI = 5;
+
+	/**
 	 * The number of structural features of the '<em>Premises</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREMISES_FEATURE_COUNT = 5;
+	int PREMISES_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.BovineBeefImpl <em>Bovine Beef</em>}' class.
@@ -3137,6 +3146,17 @@ public interface TrackerPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>URI</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.String
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getURI()
+	 * @generated
+	 */
+	int URI = 41;
+
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Animal <em>Animal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3748,6 +3768,17 @@ public interface TrackerPackage extends EPackage {
 	EReference getPremises_Locations();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Premises#getUri <em>Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uri</em>'.
+	 * @see com.verticon.tracker.Premises#getUri()
+	 * @see #getPremises()
+	 * @generated
+	 */
+	EAttribute getPremises_Uri();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.BovineBeef <em>Bovine Beef</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4100,6 +4131,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getUSPhoneNumber();
+
+	/**
+	 * Returns the meta object for data type '{@link java.lang.String <em>URI</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>URI</em>'.
+	 * @see java.lang.String
+	 * @model instanceClass="java.lang.String"
+	 * @generated
+	 */
+	EDataType getURI();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -4612,6 +4654,14 @@ public interface TrackerPackage extends EPackage {
 		EReference PREMISES__LOCATIONS = eINSTANCE.getPremises_Locations();
 
 		/**
+		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PREMISES__URI = eINSTANCE.getPremises_Uri();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.BovineBeefImpl <em>Bovine Beef</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4932,6 +4982,16 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType US_PHONE_NUMBER = eINSTANCE.getUSPhoneNumber();
+
+		/**
+		 * The meta object literal for the '<em>URI</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.String
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getURI()
+		 * @generated
+		 */
+		EDataType URI = eINSTANCE.getURI();
 
 	}
 

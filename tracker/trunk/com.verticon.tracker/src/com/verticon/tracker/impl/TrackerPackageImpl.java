@@ -362,6 +362,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	private EDataType usPhoneNumberEDataType = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType uriEDataType = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -956,6 +963,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPremises_Uri() {
+		return (EAttribute)premisesEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBovineBeef() {
 		return bovineBeefEClass;
 	}
@@ -1262,6 +1278,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getURI() {
+		return uriEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TrackerFactory getTrackerFactory() {
 		return (TrackerFactory)getEFactoryInstance();
 	}
@@ -1324,6 +1349,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEReference(premisesEClass, PREMISES__ANIMALS);
 		createEReference(premisesEClass, PREMISES__UN_APPLIED_TAGS);
 		createEReference(premisesEClass, PREMISES__LOCATIONS);
+		createEAttribute(premisesEClass, PREMISES__URI);
 
 		bovineBeefEClass = createEClass(BOVINE_BEEF);
 		createEAttribute(bovineBeefEClass, BOVINE_BEEF__BEEF_BREED);
@@ -1408,6 +1434,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		emailEDataType = createEDataType(EMAIL);
 		ageEDataType = createEDataType(AGE);
 		usPhoneNumberEDataType = createEDataType(US_PHONE_NUMBER);
+		uriEDataType = createEDataType(URI);
 	}
 
 	/**
@@ -1513,6 +1540,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEReference(getPremises_Animals(), this.getAnimal(), null, "animals", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPremises_UnAppliedTags(), this.getTag(), null, "unAppliedTags", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPremises_Locations(), this.getLocation(), null, "locations", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPremises_Uri(), this.getURI(), "uri", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(premisesEClass, this.getEvent(), "eventHistory", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -1907,6 +1935,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEDataType(emailEDataType, String.class, "Email", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(ageEDataType, Age.class, "Age", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(usPhoneNumberEDataType, String.class, "USPhoneNumber", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(uriEDataType, String.class, "URI", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
