@@ -135,6 +135,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.SWINE: return createSwine();
 			case TrackerPackage.EQUINE: return createEquine();
 			case TrackerPackage.CAPRINE: return createCaprine();
+			case TrackerPackage.LOCATION: return createLocation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -322,6 +323,16 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public Caprine createCaprine() {
 		CaprineImpl caprine = new CaprineImpl();
 		return caprine;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Location createLocation() {
+		LocationImpl location = new LocationImpl();
+		return location;
 	}
 
 	/**

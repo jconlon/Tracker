@@ -1,24 +1,25 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright 2007 Verticon, Inc. All Rights Reserved.
  *
  * $Id$
  */
 package com.verticon.tracker.tests;
 
-import junit.textui.TestRunner;
-
 import com.verticon.tracker.Location;
-import com.verticon.tracker.Sighting;
 import com.verticon.tracker.TrackerFactory;
+
+import junit.framework.TestCase;
+
+import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Sighting</b></em>'.
+ * A test case for the model object '<em><b>Location</b></em>'.
  * <!-- end-user-doc -->
  * @generated
  */
-public class SightingTest extends EventTest {
+public class LocationTest extends TestCase {
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -27,33 +28,50 @@ public class SightingTest extends EventTest {
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
 	/**
+	 * The fixture for this Location test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected Location fixture = null;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static void main(String[] args) {
-		TestRunner.run(SightingTest.class);
+		TestRunner.run(LocationTest.class);
 	}
 
 	/**
-	 * Constructs a new Sighting test case with the given name.
+	 * Constructs a new Location test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SightingTest(String name) {
+	public LocationTest(String name) {
 		super(name);
 	}
 
 	/**
-	 * Returns the fixture for this Sighting test case.
+	 * Sets the fixture for this Location test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	protected Sighting getFixture() {
-		return (Sighting)fixture;
+	protected void setFixture(Location fixture) {
+		this.fixture = fixture;
+	}
+
+	/**
+	 * Returns the fixture for this Location test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected Location getFixture() {
+		return fixture;
 	}
 
 	/**
@@ -64,7 +82,7 @@ public class SightingTest extends EventTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(TrackerFactory.eINSTANCE.createSighting());
+		setFixture(TrackerFactory.eINSTANCE.createLocation());
 	}
 
 	/**
@@ -77,21 +95,12 @@ public class SightingTest extends EventTest {
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
-
-	@Override
-	public void testGetEventCode() {
-		assertNotNull(getFixture());
-		assertEquals(Sighting.EVENT_CODE, getFixture().getEventCode());
-	}
 	
-	
-	public void testGetLocation(){
-		assertNotNull(getFixture());
-		assertNull(getFixture().getLocation());
-		Location location = TrackerFactory.eINSTANCE.createLocation();
-		location.setName("FishHouse");
-		getFixture().setLocation(location);
-		assertEquals("FishHouse",getFixture().getLocation().getName());
+	public void testGetName() {
+		assertNotNull(fixture);
+		assertNull(fixture.getName());
+		fixture.setName("SomeName");
+		assertEquals("SomeName", fixture.getName());
 	}
 
-} //SightingTest
+} //LocationTest

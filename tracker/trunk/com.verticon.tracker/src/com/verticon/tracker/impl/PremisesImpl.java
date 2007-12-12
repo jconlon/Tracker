@@ -29,6 +29,7 @@ import org.eclipse.ocl.expressions.OCLExpression;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.Location;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
@@ -44,6 +45,7 @@ import com.verticon.tracker.TrackerPackage;
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getEmailContact <em>Email Contact</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getAnimals <em>Animals</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getUnAppliedTags <em>Un Applied Tags</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getLocations <em>Locations</em>}</li>
  * </ul>
  * </p>
  *
@@ -122,6 +124,16 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * @ordered
 	 */
 	protected EList<Tag> unAppliedTags;
+
+	/**
+	 * The cached value of the '{@link #getLocations() <em>Locations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Location> locations;
 
 	/**
 	 * The parsed OCL expression for the body of the '{@link #eventHistory <em>Event History</em>}' operation.
@@ -226,6 +238,18 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Location> getLocations() {
+		if (locations == null) {
+			locations = new EObjectContainmentEList<Location>(Location.class, this, TrackerPackage.PREMISES__LOCATIONS);
+		}
+		return locations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Event> eventHistory() {
 		if (eventHistoryBodyOCL == null) {
 			EOperation eOperation = TrackerPackage.Literals.PREMISES.getEOperations().get(0);
@@ -298,6 +322,8 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return ((InternalEList<?>)getAnimals()).basicRemove(otherEnd, msgs);
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
 				return ((InternalEList<?>)getUnAppliedTags()).basicRemove(otherEnd, msgs);
+			case TrackerPackage.PREMISES__LOCATIONS:
+				return ((InternalEList<?>)getLocations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -318,6 +344,8 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return getAnimals();
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
 				return getUnAppliedTags();
+			case TrackerPackage.PREMISES__LOCATIONS:
+				return getLocations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -345,6 +373,10 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				getUnAppliedTags().clear();
 				getUnAppliedTags().addAll((Collection<? extends Tag>)newValue);
 				return;
+			case TrackerPackage.PREMISES__LOCATIONS:
+				getLocations().clear();
+				getLocations().addAll((Collection<? extends Location>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -369,6 +401,9 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
 				getUnAppliedTags().clear();
 				return;
+			case TrackerPackage.PREMISES__LOCATIONS:
+				getLocations().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -389,6 +424,8 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return animals != null && !animals.isEmpty();
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
 				return unAppliedTags != null && !unAppliedTags.isEmpty();
+			case TrackerPackage.PREMISES__LOCATIONS:
+				return locations != null && !locations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

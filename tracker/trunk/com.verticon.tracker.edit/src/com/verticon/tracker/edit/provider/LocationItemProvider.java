@@ -1,22 +1,22 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright 2007 Verticon, Inc. All Rights Reserved.
  *
  * $Id$
  */
 package com.verticon.tracker.edit.provider;
 
 
-import com.verticon.tracker.Sighting;
-
+import com.verticon.tracker.Location;
 import com.verticon.tracker.TrackerPackage;
+
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -25,16 +25,17 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link com.verticon.tracker.Sighting} object.
+ * This is the item provider adapter for a {@link com.verticon.tracker.Location} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class SightingItemProvider
-	extends EventItemProvider
+public class LocationItemProvider
+	extends ItemProviderAdapter
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -54,7 +55,7 @@ public class SightingItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SightingItemProvider(AdapterFactory adapterFactory) {
+	public LocationItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -69,54 +70,56 @@ public class SightingItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addLocationPropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Location feature.
+	 * This adds a property descriptor for the Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addLocationPropertyDescriptor(Object object) {
+	protected void addNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Sighting_location_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Sighting_location_feature", "_UI_Sighting_type"),
-				 TrackerPackage.Literals.SIGHTING__LOCATION,
+				 getString("_UI_Location_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Location_name_feature", "_UI_Location_type"),
+				 TrackerPackage.Literals.LOCATION__NAME,
 				 true,
 				 false,
 				 false,
-				 null,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This returns Sighting.gif.
+	 * This returns Location.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Sighting"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Location"));
 	}
 
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
-	 * Uses superclass implemenation to return a local specific label
-	 * appropriate to this subclass
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
+	@Override
 	public String getText(Object object) {
-		return super.getText(object);
+		String label = ((Location)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Location_type") :
+			getString("_UI_Location_type") + " " + label;
 	}
 
 	/**
@@ -130,8 +133,8 @@ public class SightingItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Sighting.class)) {
-			case TrackerPackage.SIGHTING__LOCATION:
+		switch (notification.getFeatureID(Location.class)) {
+			case TrackerPackage.LOCATION__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
