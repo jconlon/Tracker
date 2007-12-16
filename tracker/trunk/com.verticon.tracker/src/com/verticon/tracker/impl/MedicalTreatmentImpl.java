@@ -151,7 +151,7 @@ public class MedicalTreatmentImpl extends EventImpl implements MedicalTreatment 
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Treatment TREATMENT_EDEFAULT = Treatment.PREVENTION;
+	protected static final Treatment TREATMENT_EDEFAULT = Treatment.UNSPECIFIED;
 
 	/**
 	 * The cached value of the '{@link #getTreatment() <em>Treatment</em>}' attribute.
