@@ -429,6 +429,29 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Calving} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CalvingItemProvider calvingItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.Calving}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCalvingAdapter() {
+		if (calvingItemProvider == null) {
+			calvingItemProvider = new CalvingItemProvider(this);
+		}
+
+		return calvingItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Premises} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -878,6 +901,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (medicalConditionItemProvider != null) medicalConditionItemProvider.dispose();
 		if (medicalTreatmentItemProvider != null) medicalTreatmentItemProvider.dispose();
 		if (birthingItemProvider != null) birthingItemProvider.dispose();
+		if (calvingItemProvider != null) calvingItemProvider.dispose();
 	}
 
 }

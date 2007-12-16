@@ -528,4 +528,6 @@
     <eLiterals name="Nine" value="9"/>
     <eLiterals name="Ten" value="10"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Calving" eSuperTypes="#//Birthing #//BovineEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BovineEvent" abstract="true" interface="true"/>
 </ecore:EPackage>

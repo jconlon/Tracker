@@ -477,5 +477,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Birthing/assisted"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Birthing/difficulty"/>
     </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Calving"/>
+    <genClasses image="false" ecoreClass="tracker.ecore#//BovineEvent"/>
   </genPackages>
 </genmodel:GenModel>
