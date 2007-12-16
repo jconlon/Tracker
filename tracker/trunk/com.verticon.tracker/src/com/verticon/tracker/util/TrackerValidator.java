@@ -6,41 +6,43 @@
  */
 package com.verticon.tracker.util;
 
-import com.verticon.tracker.*;
-import java.util.Date;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 
-import org.eclipse.ocl.ParserException;
-import org.eclipse.ocl.Query;
-import org.eclipse.ocl.ecore.Constraint;
-import org.eclipse.ocl.ecore.OCL;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.BeefBreed;
+import com.verticon.tracker.BirthDefect;
+import com.verticon.tracker.Birthing;
 import com.verticon.tracker.BisonBreed;
 import com.verticon.tracker.Bovine;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.BovineDairy;
+import com.verticon.tracker.BovineEvent;
+import com.verticon.tracker.Calving;
+import com.verticon.tracker.Caprine;
 import com.verticon.tracker.DairyBreed;
 import com.verticon.tracker.Died;
+import com.verticon.tracker.Equine;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Exported;
 import com.verticon.tracker.FairRegistration;
+import com.verticon.tracker.GoatBreed;
+import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
+import com.verticon.tracker.Location;
 import com.verticon.tracker.LostTag;
+import com.verticon.tracker.Mastitis;
+import com.verticon.tracker.MedicalCondition;
+import com.verticon.tracker.MedicalTreatment;
 import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
+import com.verticon.tracker.OneToTen;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
@@ -55,6 +57,8 @@ import com.verticon.tracker.TagAllocated;
 import com.verticon.tracker.TagApplied;
 import com.verticon.tracker.TagRetired;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.Treatment;
+import com.verticon.tracker.TreatmentMethod;
 import com.verticon.tracker.WeighIn;
 
 /**
@@ -105,10 +109,6 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
-
-	private static final String OCL_ANNOTATION_SOURCE = "http://www.eclipse.org/ocl/examples/OCL";
-
-	private static final OCL OCL_ENV = OCL.newInstance();
 
 	/**
 	 * Creates an instance of the switch.
@@ -210,6 +210,8 @@ public class TrackerValidator extends EObjectValidator {
 				return validateBovineEvent((BovineEvent)value, diagnostics, context);
 			case TrackerPackage.BIRTH_DEFECT:
 				return validateBirthDefect((BirthDefect)value, diagnostics, context);
+			case TrackerPackage.MASTITIS:
+				return validateMastitis((Mastitis)value, diagnostics, context);
 			case TrackerPackage.SEX:
 				return validateSex((Sex)value, diagnostics, context);
 			case TrackerPackage.BISON_BREED:
@@ -434,6 +436,15 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validateBirthDefect(BirthDefect birthDefect, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(birthDefect, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateMastitis(Mastitis mastitis, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(mastitis, diagnostics, context);
 	}
 
 	/**

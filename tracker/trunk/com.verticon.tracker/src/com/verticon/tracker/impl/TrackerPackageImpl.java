@@ -41,6 +41,7 @@ import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.Imported;
 import com.verticon.tracker.Location;
 import com.verticon.tracker.LostTag;
+import com.verticon.tracker.Mastitis;
 import com.verticon.tracker.MedicalCondition;
 import com.verticon.tracker.MedicalTreatment;
 import com.verticon.tracker.MovedIn;
@@ -227,6 +228,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EClass birthDefectEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mastitisEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1132,6 +1140,33 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMastitis() {
+		return mastitisEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMastitis_Location() {
+		return (EAttribute)mastitisEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMastitis_Origin() {
+		return (EAttribute)mastitisEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPremises() {
 		return premisesEClass;
 	}
@@ -1692,6 +1727,10 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		birthDefectEClass = createEClass(BIRTH_DEFECT);
 		createEAttribute(birthDefectEClass, BIRTH_DEFECT__FREEMARTIN);
 
+		mastitisEClass = createEClass(MASTITIS);
+		createEAttribute(mastitisEClass, MASTITIS__LOCATION);
+		createEAttribute(mastitisEClass, MASTITIS__ORIGIN);
+
 		// Create enums
 		sexEEnum = createEEnum(SEX);
 		bisonBreedEEnum = createEEnum(BISON_BREED);
@@ -1771,6 +1810,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		calvingEClass.getESuperTypes().add(this.getBirthing());
 		calvingEClass.getESuperTypes().add(this.getBovineEvent());
 		birthDefectEClass.getESuperTypes().add(this.getEvent());
+		mastitisEClass.getESuperTypes().add(this.getMedicalCondition());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1926,6 +1966,10 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		initEClass(birthDefectEClass, BirthDefect.class, "BirthDefect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBirthDefect_Freemartin(), ecorePackage.getEBoolean(), "freemartin", null, 0, 1, BirthDefect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mastitisEClass, Mastitis.class, "Mastitis", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMastitis_Location(), ecorePackage.getEString(), "location", null, 0, 1, Mastitis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMastitis_Origin(), ecorePackage.getEString(), "origin", null, 0, 1, Mastitis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");

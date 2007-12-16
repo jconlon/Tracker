@@ -482,5 +482,9 @@
     <genClasses ecoreClass="tracker.ecore#//BirthDefect">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//BirthDefect/freemartin"/>
     </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Mastitis">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Mastitis/location"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Mastitis/origin"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

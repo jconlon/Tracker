@@ -533,4 +533,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="BirthDefect" eSuperTypes="#//Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="freemartin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mastitis" eSuperTypes="#//MedicalCondition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="origin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

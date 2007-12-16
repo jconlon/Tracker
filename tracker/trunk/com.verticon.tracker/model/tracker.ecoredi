@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_smKWUDo3Edyw6--mXqZ7vg" activeDiagram="_smKWUTo3Edyw6--mXqZ7vg">
   <model href="tracker.ecore#/"/>
-  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="330,500">
+  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="843,827">
     <property xmi:id="_smKWUjo3Edyw6--mXqZ7vg" key="pageFormatName" value="A2"/>
     <property xmi:id="_smKWUzo3Edyw6--mXqZ7vg" key="diagramWidth" value="1680"/>
     <property xmi:id="_smKWVDo3Edyw6--mXqZ7vg" key="diagramHeight" value="2376"/>
@@ -2532,7 +2532,7 @@
       </semanticModel>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_5QzBoKqgEdyLY6qfXcrYIw" position="1013,789" size="138,-1">
-      <anchorage xmi:id="_K9o20KqhEdyLY6qfXcrYIw" graphEdge="_K9r6IKqhEdyLY6qfXcrYIw"/>
+      <anchorage xmi:id="_K9o20KqhEdyLY6qfXcrYIw" graphEdge="_K9r6IKqhEdyLY6qfXcrYIw _tAqjEKwcEdy9vLm4eJujnQ"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_5QzBoaqgEdyLY6qfXcrYIw" presentation="default">
         <element href="tracker.ecore#//MedicalCondition"/>
       </semanticModel>
@@ -2829,7 +2829,7 @@
       <waypoints>[0, -36, -131, 47]</waypoints>
       <waypoints>[131, -36, 0, 47]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_U0jhMKwYEdy9vLm4eJujnQ" position="1085,983" size="157,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_U0jhMKwYEdy9vLm4eJujnQ" position="1093,983" size="157,-1">
       <anchorage xmi:id="_mE9SAKwYEdy9vLm4eJujnQ" graphEdge="_mE-gIKwYEdy9vLm4eJujnQ"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_U0jhMawYEdy9vLm4eJujnQ" presentation="default">
         <element href="tracker.ecore#//BirthDefect"/>
@@ -2854,8 +2854,39 @@
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_mE-gIKwYEdy9vLm4eJujnQ" anchor="_mE9SAKwYEdy9vLm4eJujnQ _smMynTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_mE-gIawYEdy9vLm4eJujnQ" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -268, -438, 428]</waypoints>
-      <waypoints>[438, -268, 0, 428]</waypoints>
+      <waypoints>[0, -274, -403, 429]</waypoints>
+      <waypoints>[403, -274, 0, 429]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_coxHkKwcEdy9vLm4eJujnQ" position="1009,1084" size="151,-1">
+      <anchorage xmi:id="_tAp8AKwcEdy9vLm4eJujnQ" graphEdge="_tAqjEKwcEdy9vLm4eJujnQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_coxHkawcEdy9vLm4eJujnQ" presentation="default">
+        <element href="tracker.ecore#//Mastitis"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_coxHkqwcEdy9vLm4eJujnQ">
+        <property xmi:id="_coxHk6wcEdy9vLm4eJujnQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_coxHlKwcEdy9vLm4eJujnQ" presentation="default">
+          <element href="tracker.ecore#//Mastitis"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_vfYBMqwcEdy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_vfYBM6wcEdy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//Mastitis/location"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_y84C0KwcEdy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_y84C0awcEdy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//Mastitis/origin"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_coxHlawcEdy9vLm4eJujnQ">
+        <property xmi:id="_coxHlqwcEdy9vLm4eJujnQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_coxHl6wcEdy9vLm4eJujnQ" presentation="default">
+          <element href="tracker.ecore#//Mastitis"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_tAqjEKwcEdy9vLm4eJujnQ" anchor="_tAp8AKwcEdy9vLm4eJujnQ _K9o20KqhEdyLY6qfXcrYIw">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_tAqjEawcEdy9vLm4eJujnQ" presentation="default" typeInfo="Inheritance"/>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

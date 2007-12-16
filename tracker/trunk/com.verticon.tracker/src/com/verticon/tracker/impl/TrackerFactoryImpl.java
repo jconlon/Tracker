@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BisonBreed;
@@ -141,6 +140,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.BIRTHING: return createBirthing();
 			case TrackerPackage.CALVING: return createCalving();
 			case TrackerPackage.BIRTH_DEFECT: return createBirthDefect();
+			case TrackerPackage.MASTITIS: return createMastitis();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -404,6 +404,16 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public BirthDefect createBirthDefect() {
 		BirthDefectImpl birthDefect = new BirthDefectImpl();
 		return birthDefect;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Mastitis createMastitis() {
+		MastitisImpl mastitis = new MastitisImpl();
+		return mastitis;
 	}
 
 	/**
