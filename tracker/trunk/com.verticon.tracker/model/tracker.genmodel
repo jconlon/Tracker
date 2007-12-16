@@ -486,5 +486,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Mastitis/location"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Mastitis/origin"/>
     </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//MilkTest">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/poundsProduced"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/percentButterFat"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/percentProtein"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/somaticCellCounts"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/otherSolids"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tracker.ecore#//DairyEvent"/>
   </genPackages>
 </genmodel:GenModel>

@@ -195,6 +195,15 @@ public interface TrackerFactory extends EFactory {
 	Mastitis createMastitis();
 
 	/**
+	 * Returns a new object of class '<em>Milk Test</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Milk Test</em>'.
+	 * @generated
+	 */
+	MilkTest createMilkTest();
+
+	/**
 	 * Returns a new object of class '<em>Premises</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker.util;
 
+import com.verticon.tracker.*;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -212,6 +213,10 @@ public class TrackerValidator extends EObjectValidator {
 				return validateBirthDefect((BirthDefect)value, diagnostics, context);
 			case TrackerPackage.MASTITIS:
 				return validateMastitis((Mastitis)value, diagnostics, context);
+			case TrackerPackage.MILK_TEST:
+				return validateMilkTest((MilkTest)value, diagnostics, context);
+			case TrackerPackage.DAIRY_EVENT:
+				return validateDairyEvent((DairyEvent)value, diagnostics, context);
 			case TrackerPackage.SEX:
 				return validateSex((Sex)value, diagnostics, context);
 			case TrackerPackage.BISON_BREED:
@@ -445,6 +450,24 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validateMastitis(Mastitis mastitis, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(mastitis, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateMilkTest(MilkTest milkTest, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(milkTest, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateDairyEvent(DairyEvent dairyEvent, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(dairyEvent, diagnostics, context);
 	}
 
 	/**

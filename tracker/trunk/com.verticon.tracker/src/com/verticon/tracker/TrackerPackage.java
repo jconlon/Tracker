@@ -3678,6 +3678,152 @@ public interface TrackerPackage extends EPackage {
 	int MASTITIS_FEATURE_COUNT = MEDICAL_CONDITION_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.MilkTestImpl <em>Milk Test</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.MilkTestImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getMilkTest()
+	 * @generated
+	 */
+	int MILK_TEST = 36;
+
+	/**
+	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_TEST__DATE_TIME = EVENT__DATE_TIME;
+
+	/**
+	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_TEST__EVENT_CODE = EVENT__EVENT_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Electronically Read</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_TEST__ELECTRONICALLY_READ = EVENT__ELECTRONICALLY_READ;
+
+	/**
+	 * The feature id for the '<em><b>Correction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_TEST__CORRECTION = EVENT__CORRECTION;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_TEST__COMMENTS = EVENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_TEST__TAG = EVENT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_TEST__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Pounds Produced</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_TEST__POUNDS_PRODUCED = EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Percent Butter Fat</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_TEST__PERCENT_BUTTER_FAT = EVENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Percent Protein</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_TEST__PERCENT_PROTEIN = EVENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Somatic Cell Counts</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_TEST__SOMATIC_CELL_COUNTS = EVENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Other Solids</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_TEST__OTHER_SOLIDS = EVENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>Milk Test</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_TEST_FEATURE_COUNT = EVENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.DairyEvent <em>Dairy Event</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.DairyEvent
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDairyEvent()
+	 * @generated
+	 */
+	int DAIRY_EVENT = 37;
+
+	/**
+	 * The number of structural features of the '<em>Dairy Event</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DAIRY_EVENT_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Sex <em>Sex</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3685,7 +3831,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 36;
+	int SEX = 38;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BisonBreed <em>Bison Breed</em>}' enum.
@@ -3695,7 +3841,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBisonBreed()
 	 * @generated
 	 */
-	int BISON_BREED = 37;
+	int BISON_BREED = 39;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SheepBreed <em>Sheep Breed</em>}' enum.
@@ -3705,7 +3851,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSheepBreed()
 	 * @generated
 	 */
-	int SHEEP_BREED = 38;
+	int SHEEP_BREED = 40;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BeefBreed <em>Beef Breed</em>}' enum.
@@ -3715,7 +3861,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBeefBreed()
 	 * @generated
 	 */
-	int BEEF_BREED = 39;
+	int BEEF_BREED = 41;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.DairyBreed <em>Dairy Breed</em>}' enum.
@@ -3725,7 +3871,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDairyBreed()
 	 * @generated
 	 */
-	int DAIRY_BREED = 40;
+	int DAIRY_BREED = 42;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SwineBreed <em>Swine Breed</em>}' enum.
@@ -3735,7 +3881,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSwineBreed()
 	 * @generated
 	 */
-	int SWINE_BREED = 41;
+	int SWINE_BREED = 43;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.HorseBreed <em>Horse Breed</em>}' enum.
@@ -3745,7 +3891,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getHorseBreed()
 	 * @generated
 	 */
-	int HORSE_BREED = 42;
+	int HORSE_BREED = 44;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.GoatBreed <em>Goat Breed</em>}' enum.
@@ -3755,7 +3901,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getGoatBreed()
 	 * @generated
 	 */
-	int GOAT_BREED = 43;
+	int GOAT_BREED = 45;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Treatment <em>Treatment</em>}' enum.
@@ -3765,7 +3911,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatment()
 	 * @generated
 	 */
-	int TREATMENT = 44;
+	int TREATMENT = 46;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.TreatmentMethod <em>Treatment Method</em>}' enum.
@@ -3775,7 +3921,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatmentMethod()
 	 * @generated
 	 */
-	int TREATMENT_METHOD = 45;
+	int TREATMENT_METHOD = 47;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.OneToTen <em>One To Ten</em>}' enum.
@@ -3785,7 +3931,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getOneToTen()
 	 * @generated
 	 */
-	int ONE_TO_TEN = 46;
+	int ONE_TO_TEN = 48;
 
 	/**
 	 * The meta object id for the '<em>Premises Id Number</em>' data type.
@@ -3795,7 +3941,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPremisesIdNumber()
 	 * @generated
 	 */
-	int PREMISES_ID_NUMBER = 47;
+	int PREMISES_ID_NUMBER = 49;
 
 	/**
 	 * The meta object id for the '<em>Email</em>' data type.
@@ -3805,7 +3951,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 48;
+	int EMAIL = 50;
 
 
 	/**
@@ -3816,7 +3962,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAge()
 	 * @generated
 	 */
-	int AGE = 49;
+	int AGE = 51;
 
 
 	/**
@@ -3827,7 +3973,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSPhoneNumber()
 	 * @generated
 	 */
-	int US_PHONE_NUMBER = 50;
+	int US_PHONE_NUMBER = 52;
 
 
 	/**
@@ -3838,7 +3984,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 51;
+	int URI = 53;
 
 
 	/**
@@ -4599,6 +4745,81 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getMastitis_Origin();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.MilkTest <em>Milk Test</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Milk Test</em>'.
+	 * @see com.verticon.tracker.MilkTest
+	 * @generated
+	 */
+	EClass getMilkTest();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.MilkTest#getPoundsProduced <em>Pounds Produced</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pounds Produced</em>'.
+	 * @see com.verticon.tracker.MilkTest#getPoundsProduced()
+	 * @see #getMilkTest()
+	 * @generated
+	 */
+	EAttribute getMilkTest_PoundsProduced();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.MilkTest#getPercentButterFat <em>Percent Butter Fat</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Percent Butter Fat</em>'.
+	 * @see com.verticon.tracker.MilkTest#getPercentButterFat()
+	 * @see #getMilkTest()
+	 * @generated
+	 */
+	EAttribute getMilkTest_PercentButterFat();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.MilkTest#getPercentProtein <em>Percent Protein</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Percent Protein</em>'.
+	 * @see com.verticon.tracker.MilkTest#getPercentProtein()
+	 * @see #getMilkTest()
+	 * @generated
+	 */
+	EAttribute getMilkTest_PercentProtein();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.MilkTest#getSomaticCellCounts <em>Somatic Cell Counts</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Somatic Cell Counts</em>'.
+	 * @see com.verticon.tracker.MilkTest#getSomaticCellCounts()
+	 * @see #getMilkTest()
+	 * @generated
+	 */
+	EAttribute getMilkTest_SomaticCellCounts();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.MilkTest#getOtherSolids <em>Other Solids</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Other Solids</em>'.
+	 * @see com.verticon.tracker.MilkTest#getOtherSolids()
+	 * @see #getMilkTest()
+	 * @generated
+	 */
+	EAttribute getMilkTest_OtherSolids();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.DairyEvent <em>Dairy Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Dairy Event</em>'.
+	 * @see com.verticon.tracker.DairyEvent
+	 * @generated
+	 */
+	EClass getDairyEvent();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Premises <em>Premises</em>}'.
@@ -5704,6 +5925,66 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MASTITIS__ORIGIN = eINSTANCE.getMastitis_Origin();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.MilkTestImpl <em>Milk Test</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.MilkTestImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getMilkTest()
+		 * @generated
+		 */
+		EClass MILK_TEST = eINSTANCE.getMilkTest();
+
+		/**
+		 * The meta object literal for the '<em><b>Pounds Produced</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_TEST__POUNDS_PRODUCED = eINSTANCE.getMilkTest_PoundsProduced();
+
+		/**
+		 * The meta object literal for the '<em><b>Percent Butter Fat</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_TEST__PERCENT_BUTTER_FAT = eINSTANCE.getMilkTest_PercentButterFat();
+
+		/**
+		 * The meta object literal for the '<em><b>Percent Protein</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_TEST__PERCENT_PROTEIN = eINSTANCE.getMilkTest_PercentProtein();
+
+		/**
+		 * The meta object literal for the '<em><b>Somatic Cell Counts</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_TEST__SOMATIC_CELL_COUNTS = eINSTANCE.getMilkTest_SomaticCellCounts();
+
+		/**
+		 * The meta object literal for the '<em><b>Other Solids</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MILK_TEST__OTHER_SOLIDS = eINSTANCE.getMilkTest_OtherSolids();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.DairyEvent <em>Dairy Event</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.DairyEvent
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDairyEvent()
+		 * @generated
+		 */
+		EClass DAIRY_EVENT = eINSTANCE.getDairyEvent();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.PremisesImpl <em>Premises</em>}' class.

@@ -498,6 +498,29 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.MilkTest} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MilkTestItemProvider milkTestItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.MilkTest}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMilkTestAdapter() {
+		if (milkTestItemProvider == null) {
+			milkTestItemProvider = new MilkTestItemProvider(this);
+		}
+
+		return milkTestItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Premises} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -950,6 +973,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (calvingItemProvider != null) calvingItemProvider.dispose();
 		if (birthDefectItemProvider != null) birthDefectItemProvider.dispose();
 		if (mastitisItemProvider != null) mastitisItemProvider.dispose();
+		if (milkTestItemProvider != null) milkTestItemProvider.dispose();
 	}
 
 }
