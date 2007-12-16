@@ -150,6 +150,15 @@ public interface TrackerFactory extends EFactory {
 	MedicalCondition createMedicalCondition();
 
 	/**
+	 * Returns a new object of class '<em>Medical Treatment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Medical Treatment</em>'.
+	 * @generated
+	 */
+	MedicalTreatment createMedicalTreatment();
+
+	/**
 	 * Returns a new object of class '<em>Premises</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

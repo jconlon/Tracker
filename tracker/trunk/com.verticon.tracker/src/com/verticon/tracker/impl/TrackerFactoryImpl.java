@@ -137,6 +137,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.CAPRINE: return createCaprine();
 			case TrackerPackage.LOCATION: return createLocation();
 			case TrackerPackage.MEDICAL_CONDITION: return createMedicalCondition();
+			case TrackerPackage.MEDICAL_TREATMENT: return createMedicalTreatment();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -166,6 +167,10 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createHorseBreedFromString(eDataType, initialValue);
 			case TrackerPackage.GOAT_BREED:
 				return createGoatBreedFromString(eDataType, initialValue);
+			case TrackerPackage.TREATMENT:
+				return createTreatmentFromString(eDataType, initialValue);
+			case TrackerPackage.TREATMENT_METHOD:
+				return createTreatmentMethodFromString(eDataType, initialValue);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return createPremisesIdNumberFromString(eDataType, initialValue);
 			case TrackerPackage.EMAIL:
@@ -205,6 +210,10 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return convertHorseBreedToString(eDataType, instanceValue);
 			case TrackerPackage.GOAT_BREED:
 				return convertGoatBreedToString(eDataType, instanceValue);
+			case TrackerPackage.TREATMENT:
+				return convertTreatmentToString(eDataType, instanceValue);
+			case TrackerPackage.TREATMENT_METHOD:
+				return convertTreatmentMethodToString(eDataType, instanceValue);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return convertPremisesIdNumberToString(eDataType, instanceValue);
 			case TrackerPackage.EMAIL:
@@ -348,6 +357,16 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public MedicalCondition createMedicalCondition() {
 		MedicalConditionImpl medicalCondition = new MedicalConditionImpl();
 		return medicalCondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MedicalTreatment createMedicalTreatment() {
+		MedicalTreatmentImpl medicalTreatment = new MedicalTreatmentImpl();
+		return medicalTreatment;
 	}
 
 	/**
@@ -650,6 +669,46 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Treatment createTreatmentFromString(EDataType eDataType, String initialValue) {
+		Treatment result = Treatment.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertTreatmentToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TreatmentMethod createTreatmentMethodFromString(EDataType eDataType, String initialValue) {
+		TreatmentMethod result = TreatmentMethod.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertTreatmentMethodToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

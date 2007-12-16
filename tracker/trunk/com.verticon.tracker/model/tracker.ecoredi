@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_smKWUDo3Edyw6--mXqZ7vg" activeDiagram="_smKWUTo3Edyw6--mXqZ7vg">
   <model href="tracker.ecore#/"/>
-  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="1010,403">
+  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="674,738">
     <property xmi:id="_smKWUjo3Edyw6--mXqZ7vg" key="pageFormatName" value="A2"/>
     <property xmi:id="_smKWUzo3Edyw6--mXqZ7vg" key="diagramWidth" value="1680"/>
     <property xmi:id="_smKWVDo3Edyw6--mXqZ7vg" key="diagramHeight" value="2376"/>
@@ -181,7 +181,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_smMynDo3Edyw6--mXqZ7vg" position="1464,233" size="205,-1">
-      <anchorage xmi:id="_smMynTo3Edyw6--mXqZ7vg" graphEdge="_smgUmzo3Edyw6--mXqZ7vg _smhivjo3Edyw6--mXqZ7vg _smhiwDo3Edyw6--mXqZ7vg _smiJyzo3Edyw6--mXqZ7vg _smiw1Do3Edyw6--mXqZ7vg _smiw4To3Edyw6--mXqZ7vg _smjX6To3Edyw6--mXqZ7vg _smj-8Do3Edyw6--mXqZ7vg _smkmADo3Edyw6--mXqZ7vg _smlNEDo3Edyw6--mXqZ7vg _smlNGzo3Edyw6--mXqZ7vg _sml0KTo3Edyw6--mXqZ7vg _smmbMDo3Edyw6--mXqZ7vg _smmbOzo3Edyw6--mXqZ7vg _smnpUDo3Edyw6--mXqZ7vg _smnpXzo3Edyw6--mXqZ7vg _yuZf4Do3Edyw6--mXqZ7vg _9F3ecTpBEdyoUcxPwkixgg _K9r6IKqhEdyLY6qfXcrYIw"/>
+      <anchorage xmi:id="_smMynTo3Edyw6--mXqZ7vg" graphEdge="_smgUmzo3Edyw6--mXqZ7vg _smhivjo3Edyw6--mXqZ7vg _smhiwDo3Edyw6--mXqZ7vg _smiJyzo3Edyw6--mXqZ7vg _smiw1Do3Edyw6--mXqZ7vg _smiw4To3Edyw6--mXqZ7vg _smjX6To3Edyw6--mXqZ7vg _smj-8Do3Edyw6--mXqZ7vg _smkmADo3Edyw6--mXqZ7vg _smlNEDo3Edyw6--mXqZ7vg _smlNGzo3Edyw6--mXqZ7vg _sml0KTo3Edyw6--mXqZ7vg _smmbMDo3Edyw6--mXqZ7vg _smmbOzo3Edyw6--mXqZ7vg _smnpUDo3Edyw6--mXqZ7vg _smnpXzo3Edyw6--mXqZ7vg _yuZf4Do3Edyw6--mXqZ7vg _9F3ecTpBEdyoUcxPwkixgg _K9r6IKqhEdyLY6qfXcrYIw _JaMkQKv4Edy9vLm4eJujnQ"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smMynjo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//Event"/>
       </semanticModel>
@@ -1507,8 +1507,8 @@
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_smiJyzo3Edyw6--mXqZ7vg" anchor="_smiJwTo3Edyw6--mXqZ7vg _smMynTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_smiJzDo3Edyw6--mXqZ7vg" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -62, -167, 276]</waypoints>
-      <waypoints>[167, -62, 0, 276]</waypoints>
+      <waypoints>[0, -60, -128, 277]</waypoints>
+      <waypoints>[128, -60, 0, 277]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_smiJzTo3Edyw6--mXqZ7vg" position="1376,525" size="76,-1">
       <anchorage xmi:id="_smiJzjo3Edyw6--mXqZ7vg" graphEdge="_smiw1Do3Edyw6--mXqZ7vg"/>
@@ -2553,6 +2553,131 @@
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_K9r6IaqhEdyLY6qfXcrYIw" presentation="default" typeInfo="Inheritance"/>
       <waypoints>[0, -124, -483, 428]</waypoints>
       <waypoints>[483, -124, 0, 428]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_GV1bYav4Edy9vLm4eJujnQ" position="1229,838" size="195,-1">
+      <anchorage xmi:id="_JaKvEKv4Edy9vLm4eJujnQ" graphEdge="_JaMkQKv4Edy9vLm4eJujnQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_GV1bYqv4Edy9vLm4eJujnQ" presentation="default">
+        <element href="tracker.ecore#//MedicalTreatment"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_GV1bY6v4Edy9vLm4eJujnQ">
+        <property xmi:id="_GV1bZKv4Edy9vLm4eJujnQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_GV1bZav4Edy9vLm4eJujnQ" presentation="default">
+          <element href="tracker.ecore#//MedicalTreatment"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_h1jf4Kv4Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_h1jf4av4Edy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//MedicalTreatment/name"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_lzIIsqv4Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_lzIIs6v4Edy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//MedicalTreatment/product"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sUoG0Kv4Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sUoG0av4Edy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//MedicalTreatment/manufacturer"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_ysSzgqv4Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_ysSzg6v4Edy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//MedicalTreatment/lot"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_-SSmQqv4Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_-SSmQ6v4Edy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//MedicalTreatment/quantity"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_vSvoUKv5Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_vSvoUav5Edy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//MedicalTreatment/treatment"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_ISSPEqv6Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_ISSPE6v6Edy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//MedicalTreatment/method"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_GV1bZqv4Edy9vLm4eJujnQ">
+        <property xmi:id="_GV1bZ6v4Edy9vLm4eJujnQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_GV1baKv4Edy9vLm4eJujnQ" presentation="default">
+          <element href="tracker.ecore#//MedicalTreatment"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_JaMkQKv4Edy9vLm4eJujnQ" anchor="_JaKvEKv4Edy9vLm4eJujnQ _smMynTo3Edyw6--mXqZ7vg">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_JaMkQav4Edy9vLm4eJujnQ" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, -124, -262, 428]</waypoints>
+      <waypoints>[262, -124, 0, 428]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_QMJjwKv5Edy9vLm4eJujnQ" position="834,749" size="150,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_QMJjwav5Edy9vLm4eJujnQ" presentation="default">
+        <element href="tracker.ecore#//Treatment"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_QMJjwqv5Edy9vLm4eJujnQ">
+        <property xmi:id="_QMKK0Kv5Edy9vLm4eJujnQ" key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_QMKK0av5Edy9vLm4eJujnQ" presentation="default">
+          <element href="tracker.ecore#//Treatment"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_ThxbwKv5Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Thxbwav5Edy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//Treatment/Unspecified"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_aoauUqv5Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_aoauU6v5Edy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//Treatment/Vaccination"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_gCtMwqv5Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_gCtMw6v5Edy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//Treatment/Vitamin"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_lIqZ8qv5Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_lIrBAKv5Edy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//Treatment/Hormone"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bXd98av_Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bXd98qv_Edy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//Treatment/Prevention"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_2hK94Kv5Edy9vLm4eJujnQ" position="838,891" size="150,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_2hK94av5Edy9vLm4eJujnQ" presentation="default">
+        <element href="tracker.ecore#//TreatmentMethod"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_2hK94qv5Edy9vLm4eJujnQ">
+        <property xmi:id="_2hK946v5Edy9vLm4eJujnQ" key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_2hK95Kv5Edy9vLm4eJujnQ" presentation="default">
+          <element href="tracker.ecore#//TreatmentMethod"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_4cOVUKv5Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_4cOVUav5Edy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//TreatmentMethod/Unspecified"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_86G14Kv5Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_86G14av5Edy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//TreatmentMethod/Intramuscular"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_BxrBwKv6Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_BxrBwav6Edy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//TreatmentMethod/Nasal"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_ePgiEKv_Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_ePgiEav_Edy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//TreatmentMethod/Salve"/>
+          </semanticModel>
+        </contained>
+      </contained>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

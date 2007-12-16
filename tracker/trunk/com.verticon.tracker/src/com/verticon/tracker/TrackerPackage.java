@@ -3105,6 +3105,151 @@ public interface TrackerPackage extends EPackage {
 	int MEDICAL_CONDITION_FEATURE_COUNT = EVENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.MedicalTreatmentImpl <em>Medical Treatment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.MedicalTreatmentImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getMedicalTreatment()
+	 * @generated
+	 */
+	int MEDICAL_TREATMENT = 30;
+
+	/**
+	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT__DATE_TIME = EVENT__DATE_TIME;
+
+	/**
+	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT__EVENT_CODE = EVENT__EVENT_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Electronically Read</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT__ELECTRONICALLY_READ = EVENT__ELECTRONICALLY_READ;
+
+	/**
+	 * The feature id for the '<em><b>Correction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT__CORRECTION = EVENT__CORRECTION;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT__COMMENTS = EVENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT__TAG = EVENT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT__NAME = EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Product</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT__PRODUCT = EVENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Manufacturer</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT__MANUFACTURER = EVENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Lot</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT__LOT = EVENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Quantity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT__QUANTITY = EVENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Treatment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT__TREATMENT = EVENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Method</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT__METHOD = EVENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of structural features of the '<em>Medical Treatment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT_FEATURE_COUNT = EVENT_FEATURE_COUNT + 7;
+
+	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Sex <em>Sex</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3112,7 +3257,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 30;
+	int SEX = 31;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BisonBreed <em>Bison Breed</em>}' enum.
@@ -3122,7 +3267,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBisonBreed()
 	 * @generated
 	 */
-	int BISON_BREED = 31;
+	int BISON_BREED = 32;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SheepBreed <em>Sheep Breed</em>}' enum.
@@ -3132,7 +3277,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSheepBreed()
 	 * @generated
 	 */
-	int SHEEP_BREED = 32;
+	int SHEEP_BREED = 33;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BeefBreed <em>Beef Breed</em>}' enum.
@@ -3142,7 +3287,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBeefBreed()
 	 * @generated
 	 */
-	int BEEF_BREED = 33;
+	int BEEF_BREED = 34;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.DairyBreed <em>Dairy Breed</em>}' enum.
@@ -3152,7 +3297,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDairyBreed()
 	 * @generated
 	 */
-	int DAIRY_BREED = 34;
+	int DAIRY_BREED = 35;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SwineBreed <em>Swine Breed</em>}' enum.
@@ -3162,7 +3307,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSwineBreed()
 	 * @generated
 	 */
-	int SWINE_BREED = 35;
+	int SWINE_BREED = 36;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.HorseBreed <em>Horse Breed</em>}' enum.
@@ -3172,7 +3317,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getHorseBreed()
 	 * @generated
 	 */
-	int HORSE_BREED = 36;
+	int HORSE_BREED = 37;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.GoatBreed <em>Goat Breed</em>}' enum.
@@ -3182,7 +3327,27 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getGoatBreed()
 	 * @generated
 	 */
-	int GOAT_BREED = 37;
+	int GOAT_BREED = 38;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.Treatment <em>Treatment</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Treatment
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatment()
+	 * @generated
+	 */
+	int TREATMENT = 39;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.TreatmentMethod <em>Treatment Method</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.TreatmentMethod
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatmentMethod()
+	 * @generated
+	 */
+	int TREATMENT_METHOD = 40;
 
 	/**
 	 * The meta object id for the '<em>Premises Id Number</em>' data type.
@@ -3192,7 +3357,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPremisesIdNumber()
 	 * @generated
 	 */
-	int PREMISES_ID_NUMBER = 38;
+	int PREMISES_ID_NUMBER = 41;
 
 	/**
 	 * The meta object id for the '<em>Email</em>' data type.
@@ -3202,7 +3367,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 39;
+	int EMAIL = 42;
 
 
 	/**
@@ -3213,7 +3378,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAge()
 	 * @generated
 	 */
-	int AGE = 40;
+	int AGE = 43;
 
 
 	/**
@@ -3224,7 +3389,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSPhoneNumber()
 	 * @generated
 	 */
-	int US_PHONE_NUMBER = 41;
+	int US_PHONE_NUMBER = 44;
 
 
 	/**
@@ -3235,7 +3400,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 42;
+	int URI = 45;
 
 
 	/**
@@ -3795,6 +3960,93 @@ public interface TrackerPackage extends EPackage {
 	EClass getMedicalCondition();
 
 	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.MedicalTreatment <em>Medical Treatment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Medical Treatment</em>'.
+	 * @see com.verticon.tracker.MedicalTreatment
+	 * @generated
+	 */
+	EClass getMedicalTreatment();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.MedicalTreatment#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see com.verticon.tracker.MedicalTreatment#getName()
+	 * @see #getMedicalTreatment()
+	 * @generated
+	 */
+	EAttribute getMedicalTreatment_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.MedicalTreatment#getProduct <em>Product</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Product</em>'.
+	 * @see com.verticon.tracker.MedicalTreatment#getProduct()
+	 * @see #getMedicalTreatment()
+	 * @generated
+	 */
+	EAttribute getMedicalTreatment_Product();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.MedicalTreatment#getManufacturer <em>Manufacturer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Manufacturer</em>'.
+	 * @see com.verticon.tracker.MedicalTreatment#getManufacturer()
+	 * @see #getMedicalTreatment()
+	 * @generated
+	 */
+	EAttribute getMedicalTreatment_Manufacturer();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.MedicalTreatment#getLot <em>Lot</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Lot</em>'.
+	 * @see com.verticon.tracker.MedicalTreatment#getLot()
+	 * @see #getMedicalTreatment()
+	 * @generated
+	 */
+	EAttribute getMedicalTreatment_Lot();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.MedicalTreatment#getQuantity <em>Quantity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Quantity</em>'.
+	 * @see com.verticon.tracker.MedicalTreatment#getQuantity()
+	 * @see #getMedicalTreatment()
+	 * @generated
+	 */
+	EAttribute getMedicalTreatment_Quantity();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.MedicalTreatment#getTreatment <em>Treatment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Treatment</em>'.
+	 * @see com.verticon.tracker.MedicalTreatment#getTreatment()
+	 * @see #getMedicalTreatment()
+	 * @generated
+	 */
+	EAttribute getMedicalTreatment_Treatment();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.MedicalTreatment#getMethod <em>Method</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Method</em>'.
+	 * @see com.verticon.tracker.MedicalTreatment#getMethod()
+	 * @see #getMedicalTreatment()
+	 * @generated
+	 */
+	EAttribute getMedicalTreatment_Method();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Premises <em>Premises</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4178,6 +4430,26 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getGoatBreed();
+
+	/**
+	 * Returns the meta object for enum '{@link com.verticon.tracker.Treatment <em>Treatment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Treatment</em>'.
+	 * @see com.verticon.tracker.Treatment
+	 * @generated
+	 */
+	EEnum getTreatment();
+
+	/**
+	 * Returns the meta object for enum '{@link com.verticon.tracker.TreatmentMethod <em>Treatment Method</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Treatment Method</em>'.
+	 * @see com.verticon.tracker.TreatmentMethod
+	 * @generated
+	 */
+	EEnum getTreatmentMethod();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>Premises Id Number</em>}'.
@@ -4706,6 +4978,72 @@ public interface TrackerPackage extends EPackage {
 		EClass MEDICAL_CONDITION = eINSTANCE.getMedicalCondition();
 
 		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.MedicalTreatmentImpl <em>Medical Treatment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.MedicalTreatmentImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getMedicalTreatment()
+		 * @generated
+		 */
+		EClass MEDICAL_TREATMENT = eINSTANCE.getMedicalTreatment();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDICAL_TREATMENT__NAME = eINSTANCE.getMedicalTreatment_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Product</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDICAL_TREATMENT__PRODUCT = eINSTANCE.getMedicalTreatment_Product();
+
+		/**
+		 * The meta object literal for the '<em><b>Manufacturer</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDICAL_TREATMENT__MANUFACTURER = eINSTANCE.getMedicalTreatment_Manufacturer();
+
+		/**
+		 * The meta object literal for the '<em><b>Lot</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDICAL_TREATMENT__LOT = eINSTANCE.getMedicalTreatment_Lot();
+
+		/**
+		 * The meta object literal for the '<em><b>Quantity</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDICAL_TREATMENT__QUANTITY = eINSTANCE.getMedicalTreatment_Quantity();
+
+		/**
+		 * The meta object literal for the '<em><b>Treatment</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDICAL_TREATMENT__TREATMENT = eINSTANCE.getMedicalTreatment_Treatment();
+
+		/**
+		 * The meta object literal for the '<em><b>Method</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEDICAL_TREATMENT__METHOD = eINSTANCE.getMedicalTreatment_Method();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.PremisesImpl <em>Premises</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5044,6 +5382,26 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum GOAT_BREED = eINSTANCE.getGoatBreed();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.Treatment <em>Treatment</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.Treatment
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatment()
+		 * @generated
+		 */
+		EEnum TREATMENT = eINSTANCE.getTreatment();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.TreatmentMethod <em>Treatment Method</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.TreatmentMethod
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatmentMethod()
+		 * @generated
+		 */
+		EEnum TREATMENT_METHOD = eINSTANCE.getTreatmentMethod();
 
 		/**
 		 * The meta object literal for the '<em>Premises Id Number</em>' data type.
