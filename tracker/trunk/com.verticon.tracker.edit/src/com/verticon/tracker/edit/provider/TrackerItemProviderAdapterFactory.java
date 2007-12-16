@@ -475,6 +475,29 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Mastitis} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MastitisItemProvider mastitisItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.Mastitis}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMastitisAdapter() {
+		if (mastitisItemProvider == null) {
+			mastitisItemProvider = new MastitisItemProvider(this);
+		}
+
+		return mastitisItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Premises} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -926,6 +949,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (birthingItemProvider != null) birthingItemProvider.dispose();
 		if (calvingItemProvider != null) calvingItemProvider.dispose();
 		if (birthDefectItemProvider != null) birthDefectItemProvider.dispose();
+		if (mastitisItemProvider != null) mastitisItemProvider.dispose();
 	}
 
 }

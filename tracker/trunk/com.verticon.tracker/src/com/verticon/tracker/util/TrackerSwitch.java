@@ -365,6 +365,14 @@ public class TrackerSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TrackerPackage.MASTITIS: {
+				Mastitis mastitis = (Mastitis)theEObject;
+				T result = caseMastitis(mastitis);
+				if (result == null) result = caseMedicalCondition(mastitis);
+				if (result == null) result = caseEvent(mastitis);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -681,6 +689,21 @@ public class TrackerSwitch<T> {
 	 * @generated
 	 */
 	public T caseBirthDefect(BirthDefect object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mastitis</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mastitis</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMastitis(Mastitis object) {
 		return null;
 	}
 

@@ -186,6 +186,15 @@ public interface TrackerFactory extends EFactory {
 	BirthDefect createBirthDefect();
 
 	/**
+	 * Returns a new object of class '<em>Mastitis</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mastitis</em>'.
+	 * @generated
+	 */
+	Mastitis createMastitis();
+
+	/**
 	 * Returns a new object of class '<em>Premises</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
