@@ -436,5 +436,6 @@
     <genClasses ecoreClass="tracker.ecore#//Location">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Location/name"/>
     </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//MedicalCondition"/>
   </genPackages>
 </genmodel:GenModel>
