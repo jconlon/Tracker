@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker.impl;
 
+import com.verticon.tracker.*;
 import java.net.URI;
 import java.util.Date;
 
@@ -15,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BisonBreed;
@@ -134,6 +136,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.EQUINE: return createEquine();
 			case TrackerPackage.CAPRINE: return createCaprine();
 			case TrackerPackage.LOCATION: return createLocation();
+			case TrackerPackage.MEDICAL_CONDITION: return createMedicalCondition();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -335,6 +338,16 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public Location createLocation() {
 		LocationImpl location = new LocationImpl();
 		return location;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MedicalCondition createMedicalCondition() {
+		MedicalConditionImpl medicalCondition = new MedicalConditionImpl();
+		return medicalCondition;
 	}
 
 	/**

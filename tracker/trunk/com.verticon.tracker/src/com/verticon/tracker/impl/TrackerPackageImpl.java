@@ -37,6 +37,7 @@ import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.Imported;
 import com.verticon.tracker.Location;
 import com.verticon.tracker.LostTag;
+import com.verticon.tracker.MedicalCondition;
 import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.Ovine;
@@ -176,6 +177,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EClass locationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass medicalConditionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -907,6 +915,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMedicalCondition() {
+		return medicalConditionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPremises() {
 		return premisesEClass;
 	}
@@ -1417,6 +1434,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		locationEClass = createEClass(LOCATION);
 		createEAttribute(locationEClass, LOCATION__NAME);
 
+		medicalConditionEClass = createEClass(MEDICAL_CONDITION);
+
 		// Create enums
 		sexEEnum = createEEnum(SEX);
 		bisonBreedEEnum = createEEnum(BISON_BREED);
@@ -1487,6 +1506,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		swineEClass.getESuperTypes().add(this.getAnimal());
 		equineEClass.getESuperTypes().add(this.getAnimal());
 		caprineEClass.getESuperTypes().add(this.getAnimal());
+		medicalConditionEClass.getESuperTypes().add(this.getEvent());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1619,6 +1639,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		initEClass(locationEClass, Location.class, "Location", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLocation_Name(), ecorePackage.getEString(), "name", null, 1, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(medicalConditionEClass, MedicalCondition.class, "MedicalCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");

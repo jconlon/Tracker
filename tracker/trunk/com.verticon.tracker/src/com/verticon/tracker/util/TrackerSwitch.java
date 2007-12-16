@@ -322,6 +322,13 @@ public class TrackerSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TrackerPackage.MEDICAL_CONDITION: {
+				MedicalCondition medicalCondition = (MedicalCondition)theEObject;
+				T result = caseMedicalCondition(medicalCondition);
+				if (result == null) result = caseEvent(medicalCondition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -548,6 +555,21 @@ public class TrackerSwitch<T> {
 	 * @generated
 	 */
 	public T caseLocation(Location object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Medical Condition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Medical Condition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMedicalCondition(MedicalCondition object) {
 		return null;
 	}
 
