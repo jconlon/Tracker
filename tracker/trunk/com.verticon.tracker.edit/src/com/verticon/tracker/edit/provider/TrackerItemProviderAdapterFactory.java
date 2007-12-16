@@ -452,6 +452,29 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.BirthDefect} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BirthDefectItemProvider birthDefectItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.BirthDefect}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBirthDefectAdapter() {
+		if (birthDefectItemProvider == null) {
+			birthDefectItemProvider = new BirthDefectItemProvider(this);
+		}
+
+		return birthDefectItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Premises} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -902,6 +925,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (medicalTreatmentItemProvider != null) medicalTreatmentItemProvider.dispose();
 		if (birthingItemProvider != null) birthingItemProvider.dispose();
 		if (calvingItemProvider != null) calvingItemProvider.dispose();
+		if (birthDefectItemProvider != null) birthDefectItemProvider.dispose();
 	}
 
 }
