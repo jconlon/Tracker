@@ -202,6 +202,8 @@ public class TrackerValidator extends EObjectValidator {
 				return validateMedicalCondition((MedicalCondition)value, diagnostics, context);
 			case TrackerPackage.MEDICAL_TREATMENT:
 				return validateMedicalTreatment((MedicalTreatment)value, diagnostics, context);
+			case TrackerPackage.BIRTHING:
+				return validateBirthing((Birthing)value, diagnostics, context);
 			case TrackerPackage.SEX:
 				return validateSex((Sex)value, diagnostics, context);
 			case TrackerPackage.BISON_BREED:
@@ -222,6 +224,8 @@ public class TrackerValidator extends EObjectValidator {
 				return validateTreatment((Treatment)value, diagnostics, context);
 			case TrackerPackage.TREATMENT_METHOD:
 				return validateTreatmentMethod((TreatmentMethod)value, diagnostics, context);
+			case TrackerPackage.ONE_TO_TEN:
+				return validateOneToTen((OneToTen)value, diagnostics, context);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return validatePremisesIdNumber((String)value, diagnostics, context);
 			case TrackerPackage.EMAIL:
@@ -388,6 +392,15 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validateMedicalTreatment(MedicalTreatment medicalTreatment, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(medicalTreatment, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateBirthing(Birthing birthing, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(birthing, diagnostics, context);
 	}
 
 	/**
@@ -603,6 +616,15 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTreatmentMethod(TreatmentMethod treatmentMethod, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOneToTen(OneToTen oneToTen, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

@@ -138,6 +138,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.LOCATION: return createLocation();
 			case TrackerPackage.MEDICAL_CONDITION: return createMedicalCondition();
 			case TrackerPackage.MEDICAL_TREATMENT: return createMedicalTreatment();
+			case TrackerPackage.BIRTHING: return createBirthing();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -171,6 +172,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createTreatmentFromString(eDataType, initialValue);
 			case TrackerPackage.TREATMENT_METHOD:
 				return createTreatmentMethodFromString(eDataType, initialValue);
+			case TrackerPackage.ONE_TO_TEN:
+				return createOneToTenFromString(eDataType, initialValue);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return createPremisesIdNumberFromString(eDataType, initialValue);
 			case TrackerPackage.EMAIL:
@@ -214,6 +217,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return convertTreatmentToString(eDataType, instanceValue);
 			case TrackerPackage.TREATMENT_METHOD:
 				return convertTreatmentMethodToString(eDataType, instanceValue);
+			case TrackerPackage.ONE_TO_TEN:
+				return convertOneToTenToString(eDataType, instanceValue);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return convertPremisesIdNumberToString(eDataType, instanceValue);
 			case TrackerPackage.EMAIL:
@@ -367,6 +372,16 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public MedicalTreatment createMedicalTreatment() {
 		MedicalTreatmentImpl medicalTreatment = new MedicalTreatmentImpl();
 		return medicalTreatment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Birthing createBirthing() {
+		BirthingImpl birthing = new BirthingImpl();
+		return birthing;
 	}
 
 	/**
@@ -707,6 +722,26 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * @generated
 	 */
 	public String convertTreatmentMethodToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OneToTen createOneToTenFromString(EDataType eDataType, String initialValue) {
+		OneToTen result = OneToTen.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertOneToTenToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

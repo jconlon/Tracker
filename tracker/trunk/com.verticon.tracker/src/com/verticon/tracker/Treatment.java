@@ -22,16 +22,14 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum Treatment implements Enumerator {
 	/**
-	 * The '<em><b>Prevention</b></em>' literal object.
+	 * The '<em><b>Unspecified</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #PREVENTION_VALUE
+	 * @see #UNSPECIFIED_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	PREVENTION(0, "Prevention", "Prevention"),
-
-	/**
+	UNSPECIFIED(0, "Unspecified", ""), /**
 	 * The '<em><b>Vaccination</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -39,9 +37,7 @@ public enum Treatment implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	VACCINATION(1, "Vaccination", "Vaccination"),
-
-	/**
+	VACCINATION(1, "Vaccination", "Vaccination"), /**
 	 * The '<em><b>Vitamin</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -49,9 +45,7 @@ public enum Treatment implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	VITAMIN(2, "Vitamin", "Vitamin"),
-
-	/**
+	VITAMIN(2, "Vitamin", "Vitamin"), /**
 	 * The '<em><b>Hormone</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -60,14 +54,14 @@ public enum Treatment implements Enumerator {
 	 * @ordered
 	 */
 	HORMONE(3, "Hormone", "Hormone"), /**
-	 * The '<em><b>Unspecified</b></em>' literal object.
+	 * The '<em><b>Prevention</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #UNSPECIFIED_VALUE
+	 * @see #PREVENTION_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	UNSPECIFIED(4, "Unspecified", "Unspecified");
+	PREVENTION(4, "Prevention", "Prevention");
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -77,19 +71,19 @@ public enum Treatment implements Enumerator {
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
 	/**
-	 * The '<em><b>Prevention</b></em>' literal value.
+	 * The '<em><b>Unspecified</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Prevention</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Unspecified</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #PREVENTION
-	 * @model name="Prevention"
+	 * @see #UNSPECIFIED
+	 * @model name="Unspecified" literal=""
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PREVENTION_VALUE = 0;
+	public static final int UNSPECIFIED_VALUE = 0;
 
 	/**
 	 * The '<em><b>Vaccination</b></em>' literal value.
@@ -137,19 +131,19 @@ public enum Treatment implements Enumerator {
 	public static final int HORMONE_VALUE = 3;
 
 	/**
-	 * The '<em><b>Unspecified</b></em>' literal value.
+	 * The '<em><b>Prevention</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Unspecified</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Prevention</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #UNSPECIFIED
-	 * @model name="Unspecified"
+	 * @see #PREVENTION
+	 * @model name="Prevention"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int UNSPECIFIED_VALUE = 4;
+	public static final int PREVENTION_VALUE = 4;
 
 	/**
 	 * An array of all the '<em><b>Treatment</b></em>' enumerators.
@@ -159,11 +153,11 @@ public enum Treatment implements Enumerator {
 	 */
 	private static final Treatment[] VALUES_ARRAY =
 		new Treatment[] {
-			PREVENTION,
+			UNSPECIFIED,
 			VACCINATION,
 			VITAMIN,
 			HORMONE,
-			UNSPECIFIED,
+			PREVENTION,
 		};
 
 	/**
@@ -214,11 +208,11 @@ public enum Treatment implements Enumerator {
 	 */
 	public static Treatment get(int value) {
 		switch (value) {
-			case PREVENTION_VALUE: return PREVENTION;
+			case UNSPECIFIED_VALUE: return UNSPECIFIED;
 			case VACCINATION_VALUE: return VACCINATION;
 			case VITAMIN_VALUE: return VITAMIN;
 			case HORMONE_VALUE: return HORMONE;
-			case UNSPECIFIED_VALUE: return UNSPECIFIED;
+			case PREVENTION_VALUE: return PREVENTION;
 		}
 		return null;
 	}
