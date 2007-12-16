@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.BeefBreed;
+import com.verticon.tracker.BirthDefect;
 import com.verticon.tracker.Birthing;
 import com.verticon.tracker.BisonBreed;
 import com.verticon.tracker.Bovine;
@@ -219,6 +220,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EClass bovineEventEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass birthDefectEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1106,6 +1114,24 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getBirthDefect() {
+		return birthDefectEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBirthDefect_Freemartin() {
+		return (EAttribute)birthDefectEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPremises() {
 		return premisesEClass;
 	}
@@ -1663,6 +1689,9 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		bovineEventEClass = createEClass(BOVINE_EVENT);
 
+		birthDefectEClass = createEClass(BIRTH_DEFECT);
+		createEAttribute(birthDefectEClass, BIRTH_DEFECT__FREEMARTIN);
+
 		// Create enums
 		sexEEnum = createEEnum(SEX);
 		bisonBreedEEnum = createEEnum(BISON_BREED);
@@ -1741,6 +1770,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		birthingEClass.getESuperTypes().add(this.getEvent());
 		calvingEClass.getESuperTypes().add(this.getBirthing());
 		calvingEClass.getESuperTypes().add(this.getBovineEvent());
+		birthDefectEClass.getESuperTypes().add(this.getEvent());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1893,6 +1923,9 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(calvingEClass, Calving.class, "Calving", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(bovineEventEClass, BovineEvent.class, "BovineEvent", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(birthDefectEClass, BirthDefect.class, "BirthDefect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBirthDefect_Freemartin(), ecorePackage.getEBoolean(), "freemartin", null, 0, 1, BirthDefect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");

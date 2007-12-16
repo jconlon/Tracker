@@ -311,6 +311,11 @@ public class TagItemProvider
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createCalving()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TrackerPackage.Literals.TAG__EVENTS,
+				 TrackerFactory.eINSTANCE.createBirthDefect()));
 	}
 
 	/**

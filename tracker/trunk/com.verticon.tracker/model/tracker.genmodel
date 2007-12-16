@@ -479,5 +479,8 @@
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Calving"/>
     <genClasses image="false" ecoreClass="tracker.ecore#//BovineEvent"/>
+    <genClasses ecoreClass="tracker.ecore#//BirthDefect">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//BirthDefect/freemartin"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

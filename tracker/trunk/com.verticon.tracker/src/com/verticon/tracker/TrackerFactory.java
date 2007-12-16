@@ -177,6 +177,15 @@ public interface TrackerFactory extends EFactory {
 	Calving createCalving();
 
 	/**
+	 * Returns a new object of class '<em>Birth Defect</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Birth Defect</em>'.
+	 * @generated
+	 */
+	BirthDefect createBirthDefect();
+
+	/**
 	 * Returns a new object of class '<em>Premises</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

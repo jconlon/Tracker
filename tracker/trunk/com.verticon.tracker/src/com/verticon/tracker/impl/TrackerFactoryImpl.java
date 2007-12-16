@@ -140,6 +140,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.MEDICAL_TREATMENT: return createMedicalTreatment();
 			case TrackerPackage.BIRTHING: return createBirthing();
 			case TrackerPackage.CALVING: return createCalving();
+			case TrackerPackage.BIRTH_DEFECT: return createBirthDefect();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -393,6 +394,16 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public Calving createCalving() {
 		CalvingImpl calving = new CalvingImpl();
 		return calving;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BirthDefect createBirthDefect() {
+		BirthDefectImpl birthDefect = new BirthDefectImpl();
+		return birthDefect;
 	}
 
 	/**
