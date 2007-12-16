@@ -510,4 +510,22 @@
     <eLiterals name="Nasal" value="2"/>
     <eLiterals name="Salve" value="3"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Birthing" eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viability" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="assisted" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="difficulty" eType="#//OneToTen"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OneToTen">
+    <eLiterals name="Unspecified" literal=""/>
+    <eLiterals name="One" value="1"/>
+    <eLiterals name="Two" value="2" literal="Two"/>
+    <eLiterals name="Three" value="3"/>
+    <eLiterals name="Four" value="4"/>
+    <eLiterals name="Five" value="5" literal="Five"/>
+    <eLiterals name="Six" value="6"/>
+    <eLiterals name="Seven" value="7"/>
+    <eLiterals name="Eight" value="8"/>
+    <eLiterals name="Nine" value="9"/>
+    <eLiterals name="Ten" value="10"/>
+  </eClassifiers>
 </ecore:EPackage>

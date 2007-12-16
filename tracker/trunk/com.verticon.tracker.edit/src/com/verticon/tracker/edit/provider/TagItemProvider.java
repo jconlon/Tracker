@@ -301,6 +301,11 @@ public class TagItemProvider
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createMedicalTreatment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TrackerPackage.Literals.TAG__EVENTS,
+				 TrackerFactory.eINSTANCE.createBirthing()));
 	}
 
 	/**

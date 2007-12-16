@@ -406,6 +406,29 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Birthing} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BirthingItemProvider birthingItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.Birthing}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBirthingAdapter() {
+		if (birthingItemProvider == null) {
+			birthingItemProvider = new BirthingItemProvider(this);
+		}
+
+		return birthingItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Premises} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -854,6 +877,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (locationItemProvider != null) locationItemProvider.dispose();
 		if (medicalConditionItemProvider != null) medicalConditionItemProvider.dispose();
 		if (medicalTreatmentItemProvider != null) medicalTreatmentItemProvider.dispose();
+		if (birthingItemProvider != null) birthingItemProvider.dispose();
 	}
 
 }

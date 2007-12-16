@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_smKWUDo3Edyw6--mXqZ7vg" activeDiagram="_smKWUTo3Edyw6--mXqZ7vg">
   <model href="tracker.ecore#/"/>
-  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="674,738">
+  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="1074,668">
     <property xmi:id="_smKWUjo3Edyw6--mXqZ7vg" key="pageFormatName" value="A2"/>
     <property xmi:id="_smKWUzo3Edyw6--mXqZ7vg" key="diagramWidth" value="1680"/>
     <property xmi:id="_smKWVDo3Edyw6--mXqZ7vg" key="diagramHeight" value="2376"/>
@@ -181,7 +181,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_smMynDo3Edyw6--mXqZ7vg" position="1464,233" size="205,-1">
-      <anchorage xmi:id="_smMynTo3Edyw6--mXqZ7vg" graphEdge="_smgUmzo3Edyw6--mXqZ7vg _smhivjo3Edyw6--mXqZ7vg _smhiwDo3Edyw6--mXqZ7vg _smiJyzo3Edyw6--mXqZ7vg _smiw1Do3Edyw6--mXqZ7vg _smiw4To3Edyw6--mXqZ7vg _smjX6To3Edyw6--mXqZ7vg _smj-8Do3Edyw6--mXqZ7vg _smkmADo3Edyw6--mXqZ7vg _smlNEDo3Edyw6--mXqZ7vg _smlNGzo3Edyw6--mXqZ7vg _sml0KTo3Edyw6--mXqZ7vg _smmbMDo3Edyw6--mXqZ7vg _smmbOzo3Edyw6--mXqZ7vg _smnpUDo3Edyw6--mXqZ7vg _smnpXzo3Edyw6--mXqZ7vg _yuZf4Do3Edyw6--mXqZ7vg _9F3ecTpBEdyoUcxPwkixgg _K9r6IKqhEdyLY6qfXcrYIw _JaMkQKv4Edy9vLm4eJujnQ"/>
+      <anchorage xmi:id="_smMynTo3Edyw6--mXqZ7vg" graphEdge="_smgUmzo3Edyw6--mXqZ7vg _smhivjo3Edyw6--mXqZ7vg _smhiwDo3Edyw6--mXqZ7vg _smiJyzo3Edyw6--mXqZ7vg _smiw1Do3Edyw6--mXqZ7vg _smiw4To3Edyw6--mXqZ7vg _smjX6To3Edyw6--mXqZ7vg _smj-8Do3Edyw6--mXqZ7vg _smkmADo3Edyw6--mXqZ7vg _smlNEDo3Edyw6--mXqZ7vg _smlNGzo3Edyw6--mXqZ7vg _sml0KTo3Edyw6--mXqZ7vg _smmbMDo3Edyw6--mXqZ7vg _smmbOzo3Edyw6--mXqZ7vg _smnpUDo3Edyw6--mXqZ7vg _smnpXzo3Edyw6--mXqZ7vg _yuZf4Do3Edyw6--mXqZ7vg _9F3ecTpBEdyoUcxPwkixgg _K9r6IKqhEdyLY6qfXcrYIw _JaMkQKv4Edy9vLm4eJujnQ _hZIzMKwEEdy9vLm4eJujnQ"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smMynjo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//Event"/>
       </semanticModel>
@@ -2531,7 +2531,7 @@
         <element href="tracker.ecore#//URI"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_5QzBoKqgEdyLY6qfXcrYIw" position="1014,838" size="138,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_5QzBoKqgEdyLY6qfXcrYIw" position="1013,789" size="138,-1">
       <anchorage xmi:id="_K9o20KqhEdyLY6qfXcrYIw" graphEdge="_K9r6IKqhEdyLY6qfXcrYIw"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_5QzBoaqgEdyLY6qfXcrYIw" presentation="default">
         <element href="tracker.ecore#//MedicalCondition"/>
@@ -2551,10 +2551,10 @@
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_K9r6IKqhEdyLY6qfXcrYIw" anchor="_K9o20KqhEdyLY6qfXcrYIw _smMynTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_K9r6IaqhEdyLY6qfXcrYIw" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -124, -483, 428]</waypoints>
-      <waypoints>[483, -124, 0, 428]</waypoints>
+      <waypoints>[0, -75, -484, 428]</waypoints>
+      <waypoints>[483, -75, -1, 428]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_GV1bYav4Edy9vLm4eJujnQ" position="1229,838" size="195,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_GV1bYav4Edy9vLm4eJujnQ" position="1158,790" size="195,-1">
       <anchorage xmi:id="_JaKvEKv4Edy9vLm4eJujnQ" graphEdge="_JaMkQKv4Edy9vLm4eJujnQ"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_GV1bYqv4Edy9vLm4eJujnQ" presentation="default">
         <element href="tracker.ecore#//MedicalTreatment"/>
@@ -2609,8 +2609,8 @@
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_JaMkQKv4Edy9vLm4eJujnQ" anchor="_JaKvEKv4Edy9vLm4eJujnQ _smMynTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_JaMkQav4Edy9vLm4eJujnQ" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -124, -262, 428]</waypoints>
-      <waypoints>[262, -124, 0, 428]</waypoints>
+      <waypoints>[0, -139, -311, 428]</waypoints>
+      <waypoints>[311, -139, 0, 428]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_QMJjwKv5Edy9vLm4eJujnQ" position="834,749" size="150,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_QMJjwav5Edy9vLm4eJujnQ" presentation="default">
@@ -2675,6 +2675,110 @@
         <contained xsi:type="di:GraphNode" xmi:id="_ePgiEKv_Edy9vLm4eJujnQ" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_ePgiEav_Edy9vLm4eJujnQ" presentation="default">
             <element href="tracker.ecore#//TreatmentMethod/Salve"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_W3dkMKwEEdy9vLm4eJujnQ" position="1376,790" size="161,-1">
+      <anchorage xmi:id="_hZHlEKwEEdy9vLm4eJujnQ" graphEdge="_hZIzMKwEEdy9vLm4eJujnQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_W3dkMawEEdy9vLm4eJujnQ" presentation="default">
+        <element href="tracker.ecore#//Birthing"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_W3dkMqwEEdy9vLm4eJujnQ">
+        <property xmi:id="_W3dkM6wEEdy9vLm4eJujnQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_W3dkNKwEEdy9vLm4eJujnQ" presentation="default">
+          <element href="tracker.ecore#//Birthing"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_rxmb0qwEEdy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_rxmb06wEEdy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//Birthing/viability"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_2xkJUqwEEdy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_2xkJU6wEEdy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//Birthing/assisted"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_MM07kqwGEdy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_MM07k6wGEdy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//Birthing/difficulty"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_W3dkNawEEdy9vLm4eJujnQ">
+        <property xmi:id="_W3dkNqwEEdy9vLm4eJujnQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_W3dkN6wEEdy9vLm4eJujnQ" presentation="default">
+          <element href="tracker.ecore#//Birthing"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_hZIzMKwEEdy9vLm4eJujnQ" anchor="_hZHlEKwEEdy9vLm4eJujnQ _smMynTo3Edyw6--mXqZ7vg">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_hZIzMawEEdy9vLm4eJujnQ" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, -101, -110, 428]</waypoints>
+      <waypoints>[110, -101, 0, 428]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_KyuKgKwFEdy9vLm4eJujnQ" position="844,1034" size="159,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_KyuKgawFEdy9vLm4eJujnQ" presentation="default">
+        <element href="tracker.ecore#//OneToTen"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_KyuKgqwFEdy9vLm4eJujnQ">
+        <property xmi:id="_KyuKg6wFEdy9vLm4eJujnQ" key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_KyuKhKwFEdy9vLm4eJujnQ" presentation="default">
+          <element href="tracker.ecore#//OneToTen"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_OeQoIKwFEdy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_OeQoIawFEdy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//OneToTen/Unspecified"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_Q_1NAKwFEdy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Q_1NAawFEdy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//OneToTen/One"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_Y8kaEKwFEdy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Y8kaEawFEdy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//OneToTen/Two"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_bH9TkqwFEdy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_bH96oKwFEdy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//OneToTen/Three"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_dtUzUKwFEdy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_dtUzUawFEdy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//OneToTen/Four"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_ffhwwKwFEdy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_ffhwwawFEdy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//OneToTen/Five"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_gANb8KwFEdy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_gANb8awFEdy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//OneToTen/Six"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_g8OYQqwFEdy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_g8O_UKwFEdy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//OneToTen/Seven"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_h39AsawFEdy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_h39AsqwFEdy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//OneToTen/Eight"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_irgkkKwFEdy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_irgkkawFEdy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//OneToTen/Nine"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_JNTPYKwGEdy9vLm4eJujnQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_JNTPYawGEdy9vLm4eJujnQ" presentation="default">
+            <element href="tracker.ecore#//OneToTen/Ten"/>
           </semanticModel>
         </contained>
       </contained>

@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.BeefBreed;
+import com.verticon.tracker.Birthing;
 import com.verticon.tracker.BisonBreed;
 import com.verticon.tracker.Bovine;
 import com.verticon.tracker.BovineBeef;
@@ -41,6 +42,7 @@ import com.verticon.tracker.MedicalCondition;
 import com.verticon.tracker.MedicalTreatment;
 import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
+import com.verticon.tracker.OneToTen;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
@@ -194,6 +196,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EClass medicalTreatmentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass birthingEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -362,6 +371,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EEnum treatmentMethodEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum oneToTenEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1020,6 +1036,42 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getBirthing() {
+		return birthingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBirthing_Viability() {
+		return (EAttribute)birthingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBirthing_Assisted() {
+		return (EAttribute)birthingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBirthing_Difficulty() {
+		return (EAttribute)birthingEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPremises() {
 		return premisesEClass;
 	}
@@ -1371,6 +1423,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getOneToTen() {
+		return oneToTenEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getPremisesIdNumber() {
 		return premisesIdNumberEDataType;
 	}
@@ -1559,6 +1620,11 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(medicalTreatmentEClass, MEDICAL_TREATMENT__TREATMENT);
 		createEAttribute(medicalTreatmentEClass, MEDICAL_TREATMENT__METHOD);
 
+		birthingEClass = createEClass(BIRTHING);
+		createEAttribute(birthingEClass, BIRTHING__VIABILITY);
+		createEAttribute(birthingEClass, BIRTHING__ASSISTED);
+		createEAttribute(birthingEClass, BIRTHING__DIFFICULTY);
+
 		// Create enums
 		sexEEnum = createEEnum(SEX);
 		bisonBreedEEnum = createEEnum(BISON_BREED);
@@ -1570,6 +1636,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		goatBreedEEnum = createEEnum(GOAT_BREED);
 		treatmentEEnum = createEEnum(TREATMENT);
 		treatmentMethodEEnum = createEEnum(TREATMENT_METHOD);
+		oneToTenEEnum = createEEnum(ONE_TO_TEN);
 
 		// Create data types
 		premisesIdNumberEDataType = createEDataType(PREMISES_ID_NUMBER);
@@ -1633,6 +1700,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		caprineEClass.getESuperTypes().add(this.getAnimal());
 		medicalConditionEClass.getESuperTypes().add(this.getEvent());
 		medicalTreatmentEClass.getESuperTypes().add(this.getEvent());
+		birthingEClass.getESuperTypes().add(this.getEvent());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1776,6 +1844,11 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getMedicalTreatment_Quantity(), ecorePackage.getEString(), "quantity", null, 0, 1, MedicalTreatment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMedicalTreatment_Treatment(), this.getTreatment(), "treatment", null, 0, 1, MedicalTreatment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMedicalTreatment_Method(), this.getTreatmentMethod(), "method", null, 0, 1, MedicalTreatment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(birthingEClass, Birthing.class, "Birthing", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBirthing_Viability(), ecorePackage.getEBoolean(), "viability", null, 0, 1, Birthing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBirthing_Assisted(), ecorePackage.getEBoolean(), "assisted", null, 0, 1, Birthing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBirthing_Difficulty(), this.getOneToTen(), "difficulty", null, 0, 1, Birthing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");
@@ -2086,17 +2159,30 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEEnumLiteral(goatBreedEEnum, GoatBreed.UNSPECIFIED);
 
 		initEEnum(treatmentEEnum, Treatment.class, "Treatment");
-		addEEnumLiteral(treatmentEEnum, Treatment.PREVENTION);
+		addEEnumLiteral(treatmentEEnum, Treatment.UNSPECIFIED);
 		addEEnumLiteral(treatmentEEnum, Treatment.VACCINATION);
 		addEEnumLiteral(treatmentEEnum, Treatment.VITAMIN);
 		addEEnumLiteral(treatmentEEnum, Treatment.HORMONE);
-		addEEnumLiteral(treatmentEEnum, Treatment.UNSPECIFIED);
+		addEEnumLiteral(treatmentEEnum, Treatment.PREVENTION);
 
 		initEEnum(treatmentMethodEEnum, TreatmentMethod.class, "TreatmentMethod");
 		addEEnumLiteral(treatmentMethodEEnum, TreatmentMethod.UNSPECIFIED);
 		addEEnumLiteral(treatmentMethodEEnum, TreatmentMethod.INTRAMUSCULAR);
 		addEEnumLiteral(treatmentMethodEEnum, TreatmentMethod.NASAL);
 		addEEnumLiteral(treatmentMethodEEnum, TreatmentMethod.SALVE);
+
+		initEEnum(oneToTenEEnum, OneToTen.class, "OneToTen");
+		addEEnumLiteral(oneToTenEEnum, OneToTen.UNSPECIFIED);
+		addEEnumLiteral(oneToTenEEnum, OneToTen.ONE);
+		addEEnumLiteral(oneToTenEEnum, OneToTen.TWO);
+		addEEnumLiteral(oneToTenEEnum, OneToTen.THREE);
+		addEEnumLiteral(oneToTenEEnum, OneToTen.FOUR);
+		addEEnumLiteral(oneToTenEEnum, OneToTen.FIVE);
+		addEEnumLiteral(oneToTenEEnum, OneToTen.SIX);
+		addEEnumLiteral(oneToTenEEnum, OneToTen.SEVEN);
+		addEEnumLiteral(oneToTenEEnum, OneToTen.EIGHT);
+		addEEnumLiteral(oneToTenEEnum, OneToTen.NINE);
+		addEEnumLiteral(oneToTenEEnum, OneToTen.TEN);
 
 		// Initialize data types
 		initEDataType(premisesIdNumberEDataType, String.class, "PremisesIdNumber", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
