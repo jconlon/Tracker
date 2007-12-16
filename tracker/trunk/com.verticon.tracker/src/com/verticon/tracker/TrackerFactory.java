@@ -168,6 +168,15 @@ public interface TrackerFactory extends EFactory {
 	Birthing createBirthing();
 
 	/**
+	 * Returns a new object of class '<em>Calving</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Calving</em>'.
+	 * @generated
+	 */
+	Calving createCalving();
+
+	/**
 	 * Returns a new object of class '<em>Premises</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

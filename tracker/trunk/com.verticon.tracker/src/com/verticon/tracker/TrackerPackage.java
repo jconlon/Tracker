@@ -3359,6 +3359,134 @@ public interface TrackerPackage extends EPackage {
 	int BIRTHING_FEATURE_COUNT = EVENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.CalvingImpl <em>Calving</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.CalvingImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getCalving()
+	 * @generated
+	 */
+	int CALVING = 32;
+
+	/**
+	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALVING__DATE_TIME = BIRTHING__DATE_TIME;
+
+	/**
+	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALVING__EVENT_CODE = BIRTHING__EVENT_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Electronically Read</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALVING__ELECTRONICALLY_READ = BIRTHING__ELECTRONICALLY_READ;
+
+	/**
+	 * The feature id for the '<em><b>Correction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALVING__CORRECTION = BIRTHING__CORRECTION;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALVING__COMMENTS = BIRTHING__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALVING__TAG = BIRTHING__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALVING__ID = BIRTHING__ID;
+
+	/**
+	 * The feature id for the '<em><b>Viability</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALVING__VIABILITY = BIRTHING__VIABILITY;
+
+	/**
+	 * The feature id for the '<em><b>Assisted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALVING__ASSISTED = BIRTHING__ASSISTED;
+
+	/**
+	 * The feature id for the '<em><b>Difficulty</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALVING__DIFFICULTY = BIRTHING__DIFFICULTY;
+
+	/**
+	 * The number of structural features of the '<em>Calving</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALVING_FEATURE_COUNT = BIRTHING_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.BovineEvent <em>Bovine Event</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.BovineEvent
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBovineEvent()
+	 * @generated
+	 */
+	int BOVINE_EVENT = 33;
+
+	/**
+	 * The number of structural features of the '<em>Bovine Event</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_EVENT_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Sex <em>Sex</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3366,7 +3494,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 32;
+	int SEX = 34;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BisonBreed <em>Bison Breed</em>}' enum.
@@ -3376,7 +3504,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBisonBreed()
 	 * @generated
 	 */
-	int BISON_BREED = 33;
+	int BISON_BREED = 35;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SheepBreed <em>Sheep Breed</em>}' enum.
@@ -3386,7 +3514,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSheepBreed()
 	 * @generated
 	 */
-	int SHEEP_BREED = 34;
+	int SHEEP_BREED = 36;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BeefBreed <em>Beef Breed</em>}' enum.
@@ -3396,7 +3524,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBeefBreed()
 	 * @generated
 	 */
-	int BEEF_BREED = 35;
+	int BEEF_BREED = 37;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.DairyBreed <em>Dairy Breed</em>}' enum.
@@ -3406,7 +3534,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDairyBreed()
 	 * @generated
 	 */
-	int DAIRY_BREED = 36;
+	int DAIRY_BREED = 38;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SwineBreed <em>Swine Breed</em>}' enum.
@@ -3416,7 +3544,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSwineBreed()
 	 * @generated
 	 */
-	int SWINE_BREED = 37;
+	int SWINE_BREED = 39;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.HorseBreed <em>Horse Breed</em>}' enum.
@@ -3426,7 +3554,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getHorseBreed()
 	 * @generated
 	 */
-	int HORSE_BREED = 38;
+	int HORSE_BREED = 40;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.GoatBreed <em>Goat Breed</em>}' enum.
@@ -3436,7 +3564,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getGoatBreed()
 	 * @generated
 	 */
-	int GOAT_BREED = 39;
+	int GOAT_BREED = 41;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Treatment <em>Treatment</em>}' enum.
@@ -3446,7 +3574,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatment()
 	 * @generated
 	 */
-	int TREATMENT = 40;
+	int TREATMENT = 42;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.TreatmentMethod <em>Treatment Method</em>}' enum.
@@ -3456,7 +3584,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatmentMethod()
 	 * @generated
 	 */
-	int TREATMENT_METHOD = 41;
+	int TREATMENT_METHOD = 43;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.OneToTen <em>One To Ten</em>}' enum.
@@ -3466,7 +3594,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getOneToTen()
 	 * @generated
 	 */
-	int ONE_TO_TEN = 42;
+	int ONE_TO_TEN = 44;
 
 	/**
 	 * The meta object id for the '<em>Premises Id Number</em>' data type.
@@ -3476,7 +3604,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPremisesIdNumber()
 	 * @generated
 	 */
-	int PREMISES_ID_NUMBER = 43;
+	int PREMISES_ID_NUMBER = 45;
 
 	/**
 	 * The meta object id for the '<em>Email</em>' data type.
@@ -3486,7 +3614,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 44;
+	int EMAIL = 46;
 
 
 	/**
@@ -3497,7 +3625,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAge()
 	 * @generated
 	 */
-	int AGE = 45;
+	int AGE = 47;
 
 
 	/**
@@ -3508,7 +3636,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSPhoneNumber()
 	 * @generated
 	 */
-	int US_PHONE_NUMBER = 46;
+	int US_PHONE_NUMBER = 48;
 
 
 	/**
@@ -3519,7 +3647,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 47;
+	int URI = 49;
 
 
 	/**
@@ -4207,6 +4335,26 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBirthing_Difficulty();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.Calving <em>Calving</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Calving</em>'.
+	 * @see com.verticon.tracker.Calving
+	 * @generated
+	 */
+	EClass getCalving();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.BovineEvent <em>Bovine Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Bovine Event</em>'.
+	 * @see com.verticon.tracker.BovineEvent
+	 * @generated
+	 */
+	EClass getBovineEvent();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Premises <em>Premises</em>}'.
@@ -5248,6 +5396,26 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BIRTHING__DIFFICULTY = eINSTANCE.getBirthing_Difficulty();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.CalvingImpl <em>Calving</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.CalvingImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getCalving()
+		 * @generated
+		 */
+		EClass CALVING = eINSTANCE.getCalving();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.BovineEvent <em>Bovine Event</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.BovineEvent
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBovineEvent()
+		 * @generated
+		 */
+		EClass BOVINE_EVENT = eINSTANCE.getBovineEvent();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.PremisesImpl <em>Premises</em>}' class.

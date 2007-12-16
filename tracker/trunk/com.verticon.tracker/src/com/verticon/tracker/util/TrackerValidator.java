@@ -204,6 +204,10 @@ public class TrackerValidator extends EObjectValidator {
 				return validateMedicalTreatment((MedicalTreatment)value, diagnostics, context);
 			case TrackerPackage.BIRTHING:
 				return validateBirthing((Birthing)value, diagnostics, context);
+			case TrackerPackage.CALVING:
+				return validateCalving((Calving)value, diagnostics, context);
+			case TrackerPackage.BOVINE_EVENT:
+				return validateBovineEvent((BovineEvent)value, diagnostics, context);
 			case TrackerPackage.SEX:
 				return validateSex((Sex)value, diagnostics, context);
 			case TrackerPackage.BISON_BREED:
@@ -401,6 +405,24 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validateBirthing(Birthing birthing, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(birthing, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateCalving(Calving calving, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(calving, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateBovineEvent(BovineEvent bovineEvent, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(bovineEvent, diagnostics, context);
 	}
 
 	/**

@@ -26,6 +26,8 @@ import com.verticon.tracker.Bovine;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.BovineDairy;
+import com.verticon.tracker.BovineEvent;
+import com.verticon.tracker.Calving;
 import com.verticon.tracker.Caprine;
 import com.verticon.tracker.DairyBreed;
 import com.verticon.tracker.Died;
@@ -203,6 +205,20 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EClass birthingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass calvingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bovineEventEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1072,6 +1088,24 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCalving() {
+		return calvingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBovineEvent() {
+		return bovineEventEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPremises() {
 		return premisesEClass;
 	}
@@ -1625,6 +1659,10 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(birthingEClass, BIRTHING__ASSISTED);
 		createEAttribute(birthingEClass, BIRTHING__DIFFICULTY);
 
+		calvingEClass = createEClass(CALVING);
+
+		bovineEventEClass = createEClass(BOVINE_EVENT);
+
 		// Create enums
 		sexEEnum = createEEnum(SEX);
 		bisonBreedEEnum = createEEnum(BISON_BREED);
@@ -1701,6 +1739,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		medicalConditionEClass.getESuperTypes().add(this.getEvent());
 		medicalTreatmentEClass.getESuperTypes().add(this.getEvent());
 		birthingEClass.getESuperTypes().add(this.getEvent());
+		calvingEClass.getESuperTypes().add(this.getBirthing());
+		calvingEClass.getESuperTypes().add(this.getBovineEvent());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1849,6 +1889,10 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getBirthing_Viability(), ecorePackage.getEBoolean(), "viability", null, 0, 1, Birthing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBirthing_Assisted(), ecorePackage.getEBoolean(), "assisted", null, 0, 1, Birthing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBirthing_Difficulty(), this.getOneToTen(), "difficulty", null, 0, 1, Birthing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(calvingEClass, Calving.class, "Calving", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(bovineEventEClass, BovineEvent.class, "BovineEvent", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");

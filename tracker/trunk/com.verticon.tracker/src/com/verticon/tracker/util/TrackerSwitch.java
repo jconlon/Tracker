@@ -343,6 +343,21 @@ public class TrackerSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TrackerPackage.CALVING: {
+				Calving calving = (Calving)theEObject;
+				T result = caseCalving(calving);
+				if (result == null) result = caseBirthing(calving);
+				if (result == null) result = caseBovineEvent(calving);
+				if (result == null) result = caseEvent(calving);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TrackerPackage.BOVINE_EVENT: {
+				BovineEvent bovineEvent = (BovineEvent)theEObject;
+				T result = caseBovineEvent(bovineEvent);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -614,6 +629,36 @@ public class TrackerSwitch<T> {
 	 * @generated
 	 */
 	public T caseBirthing(Birthing object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Calving</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Calving</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCalving(Calving object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Bovine Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Bovine Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBovineEvent(BovineEvent object) {
 		return null;
 	}
 
