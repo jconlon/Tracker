@@ -488,4 +488,26 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="URI" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EClass" name="MedicalCondition" eSuperTypes="#//Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MedicalTreatment" eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="product" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="manufacturer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lot" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="quantity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="treatment" eType="#//Treatment"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="method" eType="#//TreatmentMethod"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Treatment">
+    <eLiterals name="Unspecified" literal=""/>
+    <eLiterals name="Vaccination" value="1" literal="Vaccination"/>
+    <eLiterals name="Vitamin" value="2"/>
+    <eLiterals name="Hormone" value="3"/>
+    <eLiterals name="Prevention" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TreatmentMethod">
+    <eLiterals name="Unspecified" literal=""/>
+    <eLiterals name="Intramuscular" value="1"/>
+    <eLiterals name="Nasal" value="2"/>
+    <eLiterals name="Salve" value="3"/>
+  </eClassifiers>
 </ecore:EPackage>

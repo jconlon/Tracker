@@ -383,6 +383,29 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.MedicalTreatment} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MedicalTreatmentItemProvider medicalTreatmentItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.MedicalTreatment}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMedicalTreatmentAdapter() {
+		if (medicalTreatmentItemProvider == null) {
+			medicalTreatmentItemProvider = new MedicalTreatmentItemProvider(this);
+		}
+
+		return medicalTreatmentItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Premises} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -830,6 +853,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (caprineItemProvider != null) caprineItemProvider.dispose();
 		if (locationItemProvider != null) locationItemProvider.dispose();
 		if (medicalConditionItemProvider != null) medicalConditionItemProvider.dispose();
+		if (medicalTreatmentItemProvider != null) medicalTreatmentItemProvider.dispose();
 	}
 
 }

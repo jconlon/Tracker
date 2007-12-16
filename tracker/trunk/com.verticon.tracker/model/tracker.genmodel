@@ -320,6 +320,19 @@
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/TO"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/Unspecified"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//Treatment">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Treatment/Prevention"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Treatment/Vaccination"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Treatment/Vitamin"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Treatment/Hormone"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Treatment/Unspecified"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//TreatmentMethod">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//TreatmentMethod/Unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//TreatmentMethod/Intramuscular"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//TreatmentMethod/Nasal"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//TreatmentMethod/Salve"/>
+    </genEnums>
     <genDataTypes ecoreDataType="tracker.ecore#//PremisesIdNumber"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Email"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Age"/>
@@ -437,5 +450,14 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Location/name"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//MedicalCondition"/>
+    <genClasses ecoreClass="tracker.ecore#//MedicalTreatment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/product"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/manufacturer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/lot"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/quantity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/treatment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/method"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

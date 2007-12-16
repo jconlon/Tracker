@@ -200,6 +200,8 @@ public class TrackerValidator extends EObjectValidator {
 				return validateLocation((Location)value, diagnostics, context);
 			case TrackerPackage.MEDICAL_CONDITION:
 				return validateMedicalCondition((MedicalCondition)value, diagnostics, context);
+			case TrackerPackage.MEDICAL_TREATMENT:
+				return validateMedicalTreatment((MedicalTreatment)value, diagnostics, context);
 			case TrackerPackage.SEX:
 				return validateSex((Sex)value, diagnostics, context);
 			case TrackerPackage.BISON_BREED:
@@ -216,6 +218,10 @@ public class TrackerValidator extends EObjectValidator {
 				return validateHorseBreed((HorseBreed)value, diagnostics, context);
 			case TrackerPackage.GOAT_BREED:
 				return validateGoatBreed((GoatBreed)value, diagnostics, context);
+			case TrackerPackage.TREATMENT:
+				return validateTreatment((Treatment)value, diagnostics, context);
+			case TrackerPackage.TREATMENT_METHOD:
+				return validateTreatmentMethod((TreatmentMethod)value, diagnostics, context);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return validatePremisesIdNumber((String)value, diagnostics, context);
 			case TrackerPackage.EMAIL:
@@ -373,6 +379,15 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validateMedicalCondition(MedicalCondition medicalCondition, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(medicalCondition, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateMedicalTreatment(MedicalTreatment medicalTreatment, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(medicalTreatment, diagnostics, context);
 	}
 
 	/**
@@ -570,6 +585,24 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateGoatBreed(GoatBreed goatBreed, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTreatment(Treatment treatment, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTreatmentMethod(TreatmentMethod treatmentMethod, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
