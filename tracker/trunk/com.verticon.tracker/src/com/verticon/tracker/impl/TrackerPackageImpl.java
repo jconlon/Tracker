@@ -31,6 +31,7 @@ import com.verticon.tracker.BovineEvent;
 import com.verticon.tracker.Calving;
 import com.verticon.tracker.Caprine;
 import com.verticon.tracker.DairyBreed;
+import com.verticon.tracker.DairyEvent;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Equine;
 import com.verticon.tracker.Event;
@@ -44,6 +45,7 @@ import com.verticon.tracker.LostTag;
 import com.verticon.tracker.Mastitis;
 import com.verticon.tracker.MedicalCondition;
 import com.verticon.tracker.MedicalTreatment;
+import com.verticon.tracker.MilkTest;
 import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.OneToTen;
@@ -235,6 +237,20 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EClass mastitisEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass milkTestEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dairyEventEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1167,6 +1183,69 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMilkTest() {
+		return milkTestEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkTest_PoundsProduced() {
+		return (EAttribute)milkTestEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkTest_PercentButterFat() {
+		return (EAttribute)milkTestEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkTest_PercentProtein() {
+		return (EAttribute)milkTestEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkTest_SomaticCellCounts() {
+		return (EAttribute)milkTestEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMilkTest_OtherSolids() {
+		return (EAttribute)milkTestEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDairyEvent() {
+		return dairyEventEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPremises() {
 		return premisesEClass;
 	}
@@ -1731,6 +1810,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(mastitisEClass, MASTITIS__LOCATION);
 		createEAttribute(mastitisEClass, MASTITIS__ORIGIN);
 
+		milkTestEClass = createEClass(MILK_TEST);
+		createEAttribute(milkTestEClass, MILK_TEST__POUNDS_PRODUCED);
+		createEAttribute(milkTestEClass, MILK_TEST__PERCENT_BUTTER_FAT);
+		createEAttribute(milkTestEClass, MILK_TEST__PERCENT_PROTEIN);
+		createEAttribute(milkTestEClass, MILK_TEST__SOMATIC_CELL_COUNTS);
+		createEAttribute(milkTestEClass, MILK_TEST__OTHER_SOLIDS);
+
+		dairyEventEClass = createEClass(DAIRY_EVENT);
+
 		// Create enums
 		sexEEnum = createEEnum(SEX);
 		bisonBreedEEnum = createEEnum(BISON_BREED);
@@ -1811,6 +1899,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		calvingEClass.getESuperTypes().add(this.getBovineEvent());
 		birthDefectEClass.getESuperTypes().add(this.getEvent());
 		mastitisEClass.getESuperTypes().add(this.getMedicalCondition());
+		milkTestEClass.getESuperTypes().add(this.getEvent());
+		milkTestEClass.getESuperTypes().add(this.getDairyEvent());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1970,6 +2060,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(mastitisEClass, Mastitis.class, "Mastitis", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMastitis_Location(), ecorePackage.getEString(), "location", null, 0, 1, Mastitis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMastitis_Origin(), ecorePackage.getEString(), "origin", null, 0, 1, Mastitis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(milkTestEClass, MilkTest.class, "MilkTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMilkTest_PoundsProduced(), ecorePackage.getEDouble(), "poundsProduced", null, 0, 1, MilkTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkTest_PercentButterFat(), ecorePackage.getEDouble(), "percentButterFat", null, 0, 1, MilkTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkTest_PercentProtein(), ecorePackage.getEDouble(), "percentProtein", null, 0, 1, MilkTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkTest_SomaticCellCounts(), ecorePackage.getEInt(), "somaticCellCounts", null, 0, 1, MilkTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMilkTest_OtherSolids(), ecorePackage.getEDouble(), "otherSolids", null, 0, 1, MilkTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dairyEventEClass, DairyEvent.class, "DairyEvent", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");

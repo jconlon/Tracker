@@ -248,6 +248,14 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 				return createMastitisAdapter();
 			}
 			@Override
+			public Adapter caseMilkTest(MilkTest object) {
+				return createMilkTestAdapter();
+			}
+			@Override
+			public Adapter caseDairyEvent(DairyEvent object) {
+				return createDairyEventAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -572,6 +580,34 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMastitisAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.MilkTest <em>Milk Test</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.MilkTest
+	 * @generated
+	 */
+	public Adapter createMilkTestAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.DairyEvent <em>Dairy Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.DairyEvent
+	 * @generated
+	 */
+	public Adapter createDairyEventAdapter() {
 		return null;
 	}
 
