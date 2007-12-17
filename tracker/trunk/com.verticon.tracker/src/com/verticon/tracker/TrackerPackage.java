@@ -3824,6 +3824,115 @@ public interface TrackerPackage extends EPackage {
 	int DAIRY_EVENT_FEATURE_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.HerdTestImpl <em>Herd Test</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.HerdTestImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getHerdTest()
+	 * @generated
+	 */
+	int HERD_TEST = 38;
+
+	/**
+	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HERD_TEST__DATE_TIME = EVENT__DATE_TIME;
+
+	/**
+	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HERD_TEST__EVENT_CODE = EVENT__EVENT_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Electronically Read</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HERD_TEST__ELECTRONICALLY_READ = EVENT__ELECTRONICALLY_READ;
+
+	/**
+	 * The feature id for the '<em><b>Correction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HERD_TEST__CORRECTION = EVENT__CORRECTION;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HERD_TEST__COMMENTS = EVENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HERD_TEST__TAG = EVENT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HERD_TEST__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Pregnant</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HERD_TEST__PREGNANT = EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Days Since Bred Estimate</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HERD_TEST__DAYS_SINCE_BRED_ESTIMATE = EVENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Bred Date Estimate</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HERD_TEST__BRED_DATE_ESTIMATE = EVENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Herd Test</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HERD_TEST_FEATURE_COUNT = EVENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Sex <em>Sex</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3831,7 +3940,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 38;
+	int SEX = 39;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BisonBreed <em>Bison Breed</em>}' enum.
@@ -3841,7 +3950,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBisonBreed()
 	 * @generated
 	 */
-	int BISON_BREED = 39;
+	int BISON_BREED = 40;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SheepBreed <em>Sheep Breed</em>}' enum.
@@ -3851,7 +3960,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSheepBreed()
 	 * @generated
 	 */
-	int SHEEP_BREED = 40;
+	int SHEEP_BREED = 41;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BeefBreed <em>Beef Breed</em>}' enum.
@@ -3861,7 +3970,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBeefBreed()
 	 * @generated
 	 */
-	int BEEF_BREED = 41;
+	int BEEF_BREED = 42;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.DairyBreed <em>Dairy Breed</em>}' enum.
@@ -3871,7 +3980,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDairyBreed()
 	 * @generated
 	 */
-	int DAIRY_BREED = 42;
+	int DAIRY_BREED = 43;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SwineBreed <em>Swine Breed</em>}' enum.
@@ -3881,7 +3990,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSwineBreed()
 	 * @generated
 	 */
-	int SWINE_BREED = 43;
+	int SWINE_BREED = 44;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.HorseBreed <em>Horse Breed</em>}' enum.
@@ -3891,7 +4000,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getHorseBreed()
 	 * @generated
 	 */
-	int HORSE_BREED = 44;
+	int HORSE_BREED = 45;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.GoatBreed <em>Goat Breed</em>}' enum.
@@ -3901,7 +4010,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getGoatBreed()
 	 * @generated
 	 */
-	int GOAT_BREED = 45;
+	int GOAT_BREED = 46;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Treatment <em>Treatment</em>}' enum.
@@ -3911,7 +4020,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatment()
 	 * @generated
 	 */
-	int TREATMENT = 46;
+	int TREATMENT = 47;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.TreatmentMethod <em>Treatment Method</em>}' enum.
@@ -3921,7 +4030,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatmentMethod()
 	 * @generated
 	 */
-	int TREATMENT_METHOD = 47;
+	int TREATMENT_METHOD = 48;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.OneToTen <em>One To Ten</em>}' enum.
@@ -3931,7 +4040,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getOneToTen()
 	 * @generated
 	 */
-	int ONE_TO_TEN = 48;
+	int ONE_TO_TEN = 49;
 
 	/**
 	 * The meta object id for the '<em>Premises Id Number</em>' data type.
@@ -3941,7 +4050,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPremisesIdNumber()
 	 * @generated
 	 */
-	int PREMISES_ID_NUMBER = 49;
+	int PREMISES_ID_NUMBER = 50;
 
 	/**
 	 * The meta object id for the '<em>Email</em>' data type.
@@ -3951,7 +4060,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 50;
+	int EMAIL = 51;
 
 
 	/**
@@ -3962,7 +4071,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAge()
 	 * @generated
 	 */
-	int AGE = 51;
+	int AGE = 52;
 
 
 	/**
@@ -3973,7 +4082,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSPhoneNumber()
 	 * @generated
 	 */
-	int US_PHONE_NUMBER = 52;
+	int US_PHONE_NUMBER = 53;
 
 
 	/**
@@ -3984,7 +4093,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 53;
+	int URI = 54;
 
 
 	/**
@@ -4820,6 +4929,49 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDairyEvent();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.HerdTest <em>Herd Test</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Herd Test</em>'.
+	 * @see com.verticon.tracker.HerdTest
+	 * @generated
+	 */
+	EClass getHerdTest();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.HerdTest#isPregnant <em>Pregnant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pregnant</em>'.
+	 * @see com.verticon.tracker.HerdTest#isPregnant()
+	 * @see #getHerdTest()
+	 * @generated
+	 */
+	EAttribute getHerdTest_Pregnant();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.HerdTest#getDaysSinceBredEstimate <em>Days Since Bred Estimate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Days Since Bred Estimate</em>'.
+	 * @see com.verticon.tracker.HerdTest#getDaysSinceBredEstimate()
+	 * @see #getHerdTest()
+	 * @generated
+	 */
+	EAttribute getHerdTest_DaysSinceBredEstimate();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.HerdTest#getBredDateEstimate <em>Bred Date Estimate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Bred Date Estimate</em>'.
+	 * @see com.verticon.tracker.HerdTest#getBredDateEstimate()
+	 * @see #getHerdTest()
+	 * @generated
+	 */
+	EAttribute getHerdTest_BredDateEstimate();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Premises <em>Premises</em>}'.
@@ -5985,6 +6137,40 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DAIRY_EVENT = eINSTANCE.getDairyEvent();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.HerdTestImpl <em>Herd Test</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.HerdTestImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getHerdTest()
+		 * @generated
+		 */
+		EClass HERD_TEST = eINSTANCE.getHerdTest();
+
+		/**
+		 * The meta object literal for the '<em><b>Pregnant</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HERD_TEST__PREGNANT = eINSTANCE.getHerdTest_Pregnant();
+
+		/**
+		 * The meta object literal for the '<em><b>Days Since Bred Estimate</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HERD_TEST__DAYS_SINCE_BRED_ESTIMATE = eINSTANCE.getHerdTest_DaysSinceBredEstimate();
+
+		/**
+		 * The meta object literal for the '<em><b>Bred Date Estimate</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HERD_TEST__BRED_DATE_ESTIMATE = eINSTANCE.getHerdTest_BredDateEstimate();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.PremisesImpl <em>Premises</em>}' class.

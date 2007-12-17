@@ -326,6 +326,11 @@ public class TagItemProvider
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createMilkTest()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TrackerPackage.Literals.TAG__EVENTS,
+				 TrackerFactory.eINSTANCE.createHerdTest()));
 	}
 
 	/**

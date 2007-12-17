@@ -545,4 +545,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="otherSolids" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DairyEvent" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HerdTest" eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pregnant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="daysSinceBredEstimate"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bredDateEstimate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
 </ecore:EPackage>

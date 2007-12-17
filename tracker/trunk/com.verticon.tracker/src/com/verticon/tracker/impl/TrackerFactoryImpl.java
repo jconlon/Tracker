@@ -143,6 +143,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.BIRTH_DEFECT: return createBirthDefect();
 			case TrackerPackage.MASTITIS: return createMastitis();
 			case TrackerPackage.MILK_TEST: return createMilkTest();
+			case TrackerPackage.HERD_TEST: return createHerdTest();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -426,6 +427,16 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public MilkTest createMilkTest() {
 		MilkTestImpl milkTest = new MilkTestImpl();
 		return milkTest;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public HerdTest createHerdTest() {
+		HerdTestImpl herdTest = new HerdTestImpl();
+		return herdTest;
 	}
 
 	/**

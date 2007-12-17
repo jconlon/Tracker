@@ -494,5 +494,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/otherSolids"/>
     </genClasses>
     <genClasses image="false" ecoreClass="tracker.ecore#//DairyEvent"/>
+    <genClasses ecoreClass="tracker.ecore#//HerdTest">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/pregnant"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/daysSinceBredEstimate"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/bredDateEstimate"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

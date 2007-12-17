@@ -72,6 +72,7 @@ public class TrackerTests extends TestSuite {
 		suite.addTestSuite(BirthDefectTest.class);
 		suite.addTestSuite(MastitisTest.class);
 		suite.addTestSuite(MilkTestTest.class);
+		suite.addTestSuite(HerdTestTest.class);
 		return suite;
 	}
 

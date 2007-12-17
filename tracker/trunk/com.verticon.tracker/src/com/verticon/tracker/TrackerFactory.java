@@ -204,6 +204,15 @@ public interface TrackerFactory extends EFactory {
 	MilkTest createMilkTest();
 
 	/**
+	 * Returns a new object of class '<em>Herd Test</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Herd Test</em>'.
+	 * @generated
+	 */
+	HerdTest createHerdTest();
+
+	/**
 	 * Returns a new object of class '<em>Premises</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
