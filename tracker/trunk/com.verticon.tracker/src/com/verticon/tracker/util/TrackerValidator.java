@@ -217,6 +217,8 @@ public class TrackerValidator extends EObjectValidator {
 				return validateMilkTest((MilkTest)value, diagnostics, context);
 			case TrackerPackage.DAIRY_EVENT:
 				return validateDairyEvent((DairyEvent)value, diagnostics, context);
+			case TrackerPackage.HERD_TEST:
+				return validateHerdTest((HerdTest)value, diagnostics, context);
 			case TrackerPackage.SEX:
 				return validateSex((Sex)value, diagnostics, context);
 			case TrackerPackage.BISON_BREED:
@@ -468,6 +470,15 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validateDairyEvent(DairyEvent dairyEvent, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(dairyEvent, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateHerdTest(HerdTest herdTest, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(herdTest, diagnostics, context);
 	}
 
 	/**

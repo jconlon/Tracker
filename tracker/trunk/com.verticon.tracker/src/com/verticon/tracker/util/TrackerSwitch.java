@@ -387,6 +387,13 @@ public class TrackerSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TrackerPackage.HERD_TEST: {
+				HerdTest herdTest = (HerdTest)theEObject;
+				T result = caseHerdTest(herdTest);
+				if (result == null) result = caseEvent(herdTest);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -748,6 +755,21 @@ public class TrackerSwitch<T> {
 	 * @generated
 	 */
 	public T caseDairyEvent(DairyEvent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Herd Test</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Herd Test</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseHerdTest(HerdTest object) {
 		return null;
 	}
 

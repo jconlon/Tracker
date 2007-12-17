@@ -38,6 +38,7 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.Exported;
 import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.GoatBreed;
+import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.Imported;
 import com.verticon.tracker.Location;
@@ -251,6 +252,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EClass dairyEventEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass herdTestEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1246,6 +1254,42 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getHerdTest() {
+		return herdTestEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getHerdTest_Pregnant() {
+		return (EAttribute)herdTestEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getHerdTest_DaysSinceBredEstimate() {
+		return (EAttribute)herdTestEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getHerdTest_BredDateEstimate() {
+		return (EAttribute)herdTestEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPremises() {
 		return premisesEClass;
 	}
@@ -1819,6 +1863,11 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		dairyEventEClass = createEClass(DAIRY_EVENT);
 
+		herdTestEClass = createEClass(HERD_TEST);
+		createEAttribute(herdTestEClass, HERD_TEST__PREGNANT);
+		createEAttribute(herdTestEClass, HERD_TEST__DAYS_SINCE_BRED_ESTIMATE);
+		createEAttribute(herdTestEClass, HERD_TEST__BRED_DATE_ESTIMATE);
+
 		// Create enums
 		sexEEnum = createEEnum(SEX);
 		bisonBreedEEnum = createEEnum(BISON_BREED);
@@ -1901,6 +1950,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		mastitisEClass.getESuperTypes().add(this.getMedicalCondition());
 		milkTestEClass.getESuperTypes().add(this.getEvent());
 		milkTestEClass.getESuperTypes().add(this.getDairyEvent());
+		herdTestEClass.getESuperTypes().add(this.getEvent());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2069,6 +2119,11 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getMilkTest_OtherSolids(), ecorePackage.getEDouble(), "otherSolids", null, 0, 1, MilkTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dairyEventEClass, DairyEvent.class, "DairyEvent", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(herdTestEClass, HerdTest.class, "HerdTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getHerdTest_Pregnant(), ecorePackage.getEBoolean(), "pregnant", null, 0, 1, HerdTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getHerdTest_DaysSinceBredEstimate(), ecorePackage.getEInt(), "daysSinceBredEstimate", null, 0, 1, HerdTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getHerdTest_BredDateEstimate(), ecorePackage.getEDate(), "bredDateEstimate", null, 0, 1, HerdTest.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");

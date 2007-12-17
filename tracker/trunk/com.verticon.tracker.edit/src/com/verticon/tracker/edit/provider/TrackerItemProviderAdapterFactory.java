@@ -521,6 +521,29 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.HerdTest} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected HerdTestItemProvider herdTestItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.HerdTest}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createHerdTestAdapter() {
+		if (herdTestItemProvider == null) {
+			herdTestItemProvider = new HerdTestItemProvider(this);
+		}
+
+		return herdTestItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Premises} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -974,6 +997,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (birthDefectItemProvider != null) birthDefectItemProvider.dispose();
 		if (mastitisItemProvider != null) mastitisItemProvider.dispose();
 		if (milkTestItemProvider != null) milkTestItemProvider.dispose();
+		if (herdTestItemProvider != null) herdTestItemProvider.dispose();
 	}
 
 }
