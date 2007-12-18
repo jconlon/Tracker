@@ -800,6 +800,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * 7-digit code that includes both letters and numbers.
@@ -811,13 +812,15 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		if(initialValue.length()!=7){
 			throw new IllegalArgumentException("Premises Id must contain 7 digits: " + initialValue);
 		}
-		
-		if(CheckISO7064Mod37_36.verify(initialValue)){
-				return initialValue;
+		try {
+			if(CheckISO7064Mod37_36.verify(initialValue)){
+				return (String)initialValue;
+			}
+		} catch (NumberFormatException e) {
+			return null;
 		}
-			
+		throw new IllegalArgumentException(initialValue+" is a not legal Premises Id");
 		
-		throw new IllegalArgumentException(initialValue+" is a legal Premises Id");
 	}
 
 	/**
