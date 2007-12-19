@@ -1129,7 +1129,7 @@ public enum BeefBreed implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	UNSPECIFIED_LITERAL(122, "Unspecified", "Unspecified");
+	UNSPECIFIED_LITERAL(122, "Unspecified", "");
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2976,7 +2976,7 @@ public enum BeefBreed implements Enumerator
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #UNSPECIFIED_LITERAL
-	 * @model name="Unspecified"
+	 * @model name="Unspecified" literal=""
 	 * @generated
 	 * @ordered
 	 */

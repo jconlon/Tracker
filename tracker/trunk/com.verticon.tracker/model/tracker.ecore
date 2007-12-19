@@ -14,8 +14,7 @@
     </eOperations>
     <eOperations name="activeTag" eType="#//Tag"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sex" eType="#//Sex" defaultValueLiteral="Unspecified"
-        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sex" eType="#//Sex" defaultValueLiteral="Unspecified"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tags" lowerBound="1" upperBound="-1"
         eType="#//Tag" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="species" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -26,7 +25,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="age" eType="#//Age" changeable="false"
         volatile="true" transient="true" defaultValueLiteral="" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sexCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        changeable="false" volatile="true" transient="true" unsettable="true" derived="true"/>
+        changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="speciesCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -39,11 +38,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="sire" eType="#//Animal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Sex">
-    <eLiterals name="F" literal="Female"/>
-    <eLiterals name="M" value="1" literal="Male"/>
-    <eLiterals name="C" value="2" literal="Neutered/castrated male"/>
-    <eLiterals name="S" value="3" literal="Neutered/spayed female"/>
-    <eLiterals name="Unspecified" value="4" literal="Unspecified"/>
+    <eLiterals name="Unspecified" literal=""/>
+    <eLiterals name="F" value="1" literal="Female"/>
+    <eLiterals name="M" value="2" literal="Male"/>
+    <eLiterals name="C" value="3" literal="Neutered/castrated male"/>
+    <eLiterals name="S" value="4" literal="Neutered/spayed female"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Tag">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="usainNumberUsed" lowerBound="1"
@@ -113,7 +112,7 @@
   <eClassifiers xsi:type="ecore:EEnum" name="BisonBreed">
     <eLiterals name="WO" literal="WOOD BISON"/>
     <eLiterals name="PB" value="1" literal="PLAINS BISON"/>
-    <eLiterals name="Unspecified" value="2" literal="Unspecified"/>
+    <eLiterals name="Unspecified" value="2" literal=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="SheepBreed">
     <eLiterals name="CD" literal="ARCOTT - Canadian"/>
@@ -169,7 +168,7 @@
     <eLiterals name="XL" value="50" literal="CROSSBRED - Large"/>
     <eLiterals name="XM" value="51" literal="CROSSBRED - Medium"/>
     <eLiterals name="ZS" value="52" literal="CROSSBRED - Small"/>
-    <eLiterals name="Unspecified" value="53"/>
+    <eLiterals name="Unspecified" value="53" literal=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BovineBeef" eSuperTypes="#//Bovine">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="beefBreed" eType="#//BeefBreed"
@@ -302,7 +301,7 @@
     <eLiterals name="WF" value="119" literal="WEST FLEMISH RED"/>
     <eLiterals name="WP" value="120" literal="WHITE PARK"/>
     <eLiterals name="YA" value="121" literal="YAK"/>
-    <eLiterals name="Unspecified" value="122" literal="Unspecified"/>
+    <eLiterals name="Unspecified" value="122" literal=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DairyBreed">
     <eLiterals name="LD" literal="AMERICAN LINEBACK"/>
@@ -315,7 +314,7 @@
     <eLiterals name="WW" value="7" literal="RED HOLSTEIN"/>
     <eLiterals name="FM" value="8" literal="ROUGE FLAMAND"/>
     <eLiterals name="MS" value="9" literal="SHORTHORN"/>
-    <eLiterals name="Unspecified" value="10" literal="Unspecified"/>
+    <eLiterals name="Unspecified" value="10" literal=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BovineBison" eSuperTypes="#//Bovine">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="buffaloBreed" eType="#//BisonBreed"
@@ -386,7 +385,7 @@
     <eLiterals name="TM" value="12" literal="TAMWORTH"/>
     <eLiterals name="WS" value="13" literal="WESSEX SADDLEBACK"/>
     <eLiterals name="YO" value="14" literal="YORKSHIRE"/>
-    <eLiterals name="Unspecified" value="15"/>
+    <eLiterals name="Unspecified" value="15" literal=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Swine" eSuperTypes="#//Animal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="swineBreed" eType="#//SwineBreed"
@@ -459,7 +458,7 @@
     <eLiterals name="WE" value="63" literal="WELSH"/>
     <eLiterals name="WF" value="64" literal="WESTFALEN"/>
     <eLiterals name="WU" value="65" literal="WURTTEMBERG"/>
-    <eLiterals name="Unspecified" value="66"/>
+    <eLiterals name="Unspecified" value="66" literal=""/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Equine" eSuperTypes="#//Animal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="horseBreed" eType="#//HorseBreed"

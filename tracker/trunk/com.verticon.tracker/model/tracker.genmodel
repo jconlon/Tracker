@@ -14,11 +14,11 @@
       providerPackageSuffix="edit.provider" presentationPackageSuffix="editor.presentation"
       ecorePackage="tracker.ecore#/">
     <genEnums ecoreEnum="tracker.ecore#//Sex">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Sex/Unspecified"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Sex/F"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Sex/M"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Sex/C"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Sex/S"/>
-      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Sex/Unspecified"/>
     </genEnums>
     <genEnums ecoreEnum="tracker.ecore#//BisonBreed">
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BisonBreed/WO"/>

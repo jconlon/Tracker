@@ -508,7 +508,7 @@ public enum SheepBreed implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	UNSPECIFIED_LITERAL(53, "Unspecified", "Unspecified");
+	UNSPECIFIED_LITERAL(53, "Unspecified", "");
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1320,7 +1320,7 @@ public enum SheepBreed implements Enumerator
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #UNSPECIFIED_LITERAL
-	 * @model name="Unspecified"
+	 * @model name="Unspecified" literal=""
 	 * @generated
 	 * @ordered
 	 */

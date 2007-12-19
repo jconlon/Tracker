@@ -689,7 +689,7 @@ public enum HorseBreed implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	UNSPECIFIED(66, "Unspecified", "Unspecified");
+	UNSPECIFIED(66, "Unspecified", "");
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1697,7 +1697,7 @@ public enum HorseBreed implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #UNSPECIFIED
-	 * @model name="Unspecified"
+	 * @model name="Unspecified" literal=""
 	 * @generated
 	 * @ordered
 	 */
