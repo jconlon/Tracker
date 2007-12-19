@@ -6,7 +6,6 @@
  */
 package com.verticon.tracker.impl;
 
-import com.verticon.tracker.*;
 import java.net.URI;
 import java.util.Date;
 
@@ -16,13 +15,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.BeefBreed;
+import com.verticon.tracker.BirthDefect;
+import com.verticon.tracker.Birthing;
 import com.verticon.tracker.BisonBreed;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.BovineDairy;
+import com.verticon.tracker.Calving;
 import com.verticon.tracker.Caprine;
 import com.verticon.tracker.DairyBreed;
 import com.verticon.tracker.Died;
@@ -30,13 +31,19 @@ import com.verticon.tracker.Equine;
 import com.verticon.tracker.Exported;
 import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.GoatBreed;
+import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
 import com.verticon.tracker.Location;
 import com.verticon.tracker.LostTag;
+import com.verticon.tracker.Mastitis;
+import com.verticon.tracker.MedicalCondition;
+import com.verticon.tracker.MedicalTreatment;
+import com.verticon.tracker.MilkTest;
 import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
+import com.verticon.tracker.OneToTen;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
@@ -52,6 +59,8 @@ import com.verticon.tracker.TagApplied;
 import com.verticon.tracker.TagRetired;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.Treatment;
+import com.verticon.tracker.TreatmentMethod;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.CheckEmail;

@@ -26,8 +26,6 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.TrackerPackage;
 
-import java.math.BigInteger;
-
 /**
  * This is the item provider adapter for a {@link com.verticon.tracker.Ovine} object.
  * <!-- begin-user-doc -->

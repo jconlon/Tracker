@@ -9,7 +9,6 @@ package com.verticon.tracker.tests;
 import junit.textui.TestRunner;
 
 import com.verticon.tracker.ReplacedTag;
-import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 
 /**

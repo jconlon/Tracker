@@ -6,7 +6,6 @@
  */
 package com.verticon.tracker.util;
 
-import com.verticon.tracker.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
@@ -14,17 +13,30 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalMissing;
+import com.verticon.tracker.BirthDefect;
+import com.verticon.tracker.Birthing;
 import com.verticon.tracker.Bovine;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.BovineDairy;
+import com.verticon.tracker.BovineEvent;
+import com.verticon.tracker.Calving;
+import com.verticon.tracker.Caprine;
+import com.verticon.tracker.DairyEvent;
 import com.verticon.tracker.Died;
+import com.verticon.tracker.Equine;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Exported;
 import com.verticon.tracker.FairRegistration;
+import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
+import com.verticon.tracker.Location;
 import com.verticon.tracker.LostTag;
+import com.verticon.tracker.Mastitis;
+import com.verticon.tracker.MedicalCondition;
+import com.verticon.tracker.MedicalTreatment;
+import com.verticon.tracker.MilkTest;
 import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.Ovine;
