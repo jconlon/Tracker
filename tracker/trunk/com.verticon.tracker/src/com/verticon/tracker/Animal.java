@@ -87,11 +87,9 @@ public interface Animal extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Sex</em>' attribute.
 	 * @see com.verticon.tracker.Sex
-	 * @see #isSetSex()
-	 * @see #unsetSex()
 	 * @see #setSex(Sex)
 	 * @see com.verticon.tracker.TrackerPackage#getAnimal_Sex()
-	 * @model default="Unspecified" unsettable="true"
+	 * @model default="Unspecified"
 	 * @generated
 	 */
 	Sex getSex();
@@ -102,35 +100,10 @@ public interface Animal extends EObject {
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Sex</em>' attribute.
 	 * @see com.verticon.tracker.Sex
-	 * @see #isSetSex()
-	 * @see #unsetSex()
 	 * @see #getSex()
 	 * @generated
 	 */
 	void setSex(Sex value);
-
-	/**
-	 * Unsets the value of the '{@link com.verticon.tracker.Animal#getSex <em>Sex</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSetSex()
-	 * @see #getSex()
-	 * @see #setSex(Sex)
-	 * @generated
-	 */
-	void unsetSex();
-
-	/**
-	 * Returns whether the value of the '{@link com.verticon.tracker.Animal#getSex <em>Sex</em>}' attribute is set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return whether the value of the '<em>Sex</em>' attribute is set.
-	 * @see #unsetSex()
-	 * @see #getSex()
-	 * @see #setSex(Sex)
-	 * @generated
-	 */
-	boolean isSetSex();
 
 	/**
 	 * Returns the value of the '<em><b>Tags</b></em>' containment reference list.
@@ -204,22 +177,11 @@ public interface Animal extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Sex Code</em>' attribute.
-	 * @see #isSetSexCode()
 	 * @see com.verticon.tracker.TrackerPackage#getAnimal_SexCode()
-	 * @model unsettable="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	String getSexCode();
-
-	/**
-	 * Returns whether the value of the '{@link com.verticon.tracker.Animal#getSexCode <em>Sex Code</em>}' attribute is set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return whether the value of the '<em>Sex Code</em>' attribute is set.
-	 * @see #getSexCode()
-	 * @generated
-	 */
-	boolean isSetSexCode();
 
 	/**
 	 * Returns the value of the '<em><b>Species Code</b></em>' attribute.

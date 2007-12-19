@@ -114,15 +114,6 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	protected Sex sex = SEX_EDEFAULT;
 
 	/**
-	 * This is true if the Sex attribute has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean sexESet;
-
-	/**
 	 * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -299,33 +290,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	public void setSex(Sex newSex) {
 		Sex oldSex = sex;
 		sex = newSex == null ? SEX_EDEFAULT : newSex;
-		boolean oldSexESet = sexESet;
-		sexESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__SEX, oldSex, sex, !oldSexESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void unsetSex() {
-		Sex oldSex = sex;
-		boolean oldSexESet = sexESet;
-		sex = SEX_EDEFAULT;
-		sexESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, TrackerPackage.ANIMAL__SEX, oldSex, SEX_EDEFAULT, oldSexESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetSex() {
-		return sexESet;
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__SEX, oldSex, sex));
 	}
 
 	/**
@@ -385,23 +351,17 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @generated NOT
 	 */
 	public String getSexCode() {
-		if(!isSetSexCode()){
+		if(sex==null){
 			return "";
 		}
 		if(sex==Sex.UNSPECIFIED_LITERAL){
 			return "";
 		}
+	
 		return sex.getName();
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean isSetSexCode() {
-		return isSetSex();
-	}
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -708,7 +668,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				setBirthDate(BIRTH_DATE_EDEFAULT);
 				return;
 			case TrackerPackage.ANIMAL__SEX:
-				unsetSex();
+				setSex(SEX_EDEFAULT);
 				return;
 			case TrackerPackage.ANIMAL__TAGS:
 				getTags().clear();
@@ -737,7 +697,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 			case TrackerPackage.ANIMAL__BIRTH_DATE:
 				return BIRTH_DATE_EDEFAULT == null ? birthDate != null : !BIRTH_DATE_EDEFAULT.equals(birthDate);
 			case TrackerPackage.ANIMAL__SEX:
-				return isSetSex();
+				return sex != SEX_EDEFAULT;
 			case TrackerPackage.ANIMAL__TAGS:
 				return tags != null && !tags.isEmpty();
 			case TrackerPackage.ANIMAL__SPECIES:
@@ -747,7 +707,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 			case TrackerPackage.ANIMAL__AGE:
 				return AGE_EDEFAULT == null ? getAge() != null : !AGE_EDEFAULT.equals(getAge());
 			case TrackerPackage.ANIMAL__SEX_CODE:
-				return isSetSexCode();
+				return SEX_CODE_EDEFAULT == null ? getSexCode() != null : !SEX_CODE_EDEFAULT.equals(getSexCode());
 			case TrackerPackage.ANIMAL__SPECIES_CODE:
 				return SPECIES_CODE_EDEFAULT == null ? getSpeciesCode() != null : !SPECIES_CODE_EDEFAULT.equals(getSpeciesCode());
 			case TrackerPackage.ANIMAL__ID:
@@ -777,7 +737,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 		result.append(" (birthDate: ");
 		result.append(birthDate);
 		result.append(", sex: ");
-		if (sexESet) result.append(sex); else result.append("<unset>");
+		result.append(sex);
 		result.append(", comments: ");
 		result.append(comments);
 		result.append(')');

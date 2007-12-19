@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker.util;
 
+import com.verticon.tracker.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;

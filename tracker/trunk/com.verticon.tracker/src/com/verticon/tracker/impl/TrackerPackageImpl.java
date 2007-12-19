@@ -1955,12 +1955,12 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAnimal_BirthDate(), ecorePackage.getEDate(), "birthDate", null, 0, 1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAnimal_Sex(), this.getSex(), "sex", "Unspecified", 0, 1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAnimal_Sex(), this.getSex(), "sex", "Unspecified", 0, 1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnimal_Tags(), this.getTag(), null, "tags", null, 1, -1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_Species(), ecorePackage.getEString(), "species", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_Breed(), ecorePackage.getEString(), "breed", "", 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_Age(), this.getAge(), "age", "", 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAnimal_SexCode(), ecorePackage.getEString(), "sexCode", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAnimal_SexCode(), ecorePackage.getEString(), "sexCode", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_SpeciesCode(), ecorePackage.getEString(), "speciesCode", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_Id(), ecorePackage.getEString(), "id", null, 1, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_Comments(), ecorePackage.getEString(), "comments", null, 0, 1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2127,11 +2127,11 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");
+		addEEnumLiteral(sexEEnum, Sex.UNSPECIFIED_LITERAL);
 		addEEnumLiteral(sexEEnum, Sex.F_LITERAL);
 		addEEnumLiteral(sexEEnum, Sex.M_LITERAL);
 		addEEnumLiteral(sexEEnum, Sex.C_LITERAL);
 		addEEnumLiteral(sexEEnum, Sex.S_LITERAL);
-		addEEnumLiteral(sexEEnum, Sex.UNSPECIFIED_LITERAL);
 
 		initEEnum(bisonBreedEEnum, BisonBreed.class, "BisonBreed");
 		addEEnumLiteral(bisonBreedEEnum, BisonBreed.WO_LITERAL);

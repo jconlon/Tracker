@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker.util;
 
+import com.verticon.tracker.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;

@@ -172,17 +172,17 @@ public abstract class AnimalTest extends TestCase {
 		assertEquals("M", getFixture().getSexCode());
 	}
 
-	/**
-	 * Tests the '{@link com.verticon.tracker.Animal#isSetSexCode() <em>isSetSexCode()</em>}' method.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.Animal#isSetSexCode()
-	 * @generated NOT
-	 */
-	public void testIsSetSexCode() {
-		assertNotNull(getFixture());
-		assertTrue(getFixture().isSetSexCode());
-	}
+//	/**
+//	 * Tests the '{@link com.verticon.tracker.Animal#isSetSexCode() <em>isSetSexCode()</em>}' method.
+//	 * <!-- begin-user-doc -->
+//	 * <!-- end-user-doc -->
+//	 * @see com.verticon.tracker.Animal#isSetSexCode()
+//	 * @generated NOT
+//	 */
+//	public void testIsSetSexCode() {
+//		assertNotNull(getFixture());
+//		assertTrue(getFixture().isSetSexCode());
+//	}
 
 	/**
 	 * Tests the '{@link com.verticon.tracker.Animal#getSpeciesCode() <em>Species Code</em>}' feature getter.

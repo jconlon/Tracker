@@ -121,7 +121,7 @@ public enum DairyBreed implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	UNSPECIFIED_LITERAL(10, "Unspecified", "Unspecified");
+	UNSPECIFIED_LITERAL(10, "Unspecified", "");
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -288,7 +288,7 @@ public enum DairyBreed implements Enumerator
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #UNSPECIFIED_LITERAL
-	 * @model name="Unspecified"
+	 * @model name="Unspecified" literal=""
 	 * @generated
 	 * @ordered
 	 */

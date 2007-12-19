@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker.impl;
 
+import com.verticon.tracker.*;
 import java.net.URI;
 import java.util.Date;
 
@@ -15,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BirthDefect;

@@ -24,42 +24,6 @@ import org.eclipse.emf.common.util.Enumerator;
 public enum Sex implements Enumerator
 {
 	/**
-	 * The '<em><b>F</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #F
-	 * @generated
-	 * @ordered
-	 */
-	F_LITERAL(0, "F", "Female"),
-	/**
-	 * The '<em><b>M</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #M
-	 * @generated
-	 * @ordered
-	 */
-	M_LITERAL(1, "M", "Male"),
-	/**
-	 * The '<em><b>C</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #C
-	 * @generated
-	 * @ordered
-	 */
-	C_LITERAL(2, "C", "Neutered/castrated male"),
-	/**
-	 * The '<em><b>S</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #S
-	 * @generated
-	 * @ordered
-	 */
-	S_LITERAL(3, "S", "Neutered/spayed female"),
-	/**
 	 * The '<em><b>Unspecified</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,13 +31,60 @@ public enum Sex implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	UNSPECIFIED_LITERAL(4, "Unspecified", "Unspecified");
+	UNSPECIFIED_LITERAL(0, "Unspecified", ""), /**
+	 * The '<em><b>F</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #F
+	 * @generated
+	 * @ordered
+	 */
+	F_LITERAL(1, "F", "Female"), /**
+	 * The '<em><b>M</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #M
+	 * @generated
+	 * @ordered
+	 */
+	M_LITERAL(2, "M", "Male"), /**
+	 * The '<em><b>C</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #C
+	 * @generated
+	 * @ordered
+	 */
+	C_LITERAL(3, "C", "Neutered/castrated male"), /**
+	 * The '<em><b>S</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #S
+	 * @generated
+	 * @ordered
+	 */
+	S_LITERAL(4, "S", "Neutered/spayed female");
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+
+	/**
+	 * The '<em><b>Unspecified</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Unspecified</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #UNSPECIFIED_LITERAL
+	 * @model name="Unspecified" literal=""
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UNSPECIFIED = 0;
 
 	/**
 	 * The '<em><b>F</b></em>' literal value.
@@ -88,7 +99,7 @@ public enum Sex implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	public static final int F = 0;
+	public static final int F = 1;
 
 	/**
 	 * The '<em><b>M</b></em>' literal value.
@@ -103,7 +114,7 @@ public enum Sex implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	public static final int M = 1;
+	public static final int M = 2;
 
 	/**
 	 * The '<em><b>C</b></em>' literal value.
@@ -118,7 +129,7 @@ public enum Sex implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	public static final int C = 2;
+	public static final int C = 3;
 
 	/**
 	 * The '<em><b>S</b></em>' literal value.
@@ -133,22 +144,7 @@ public enum Sex implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	public static final int S = 3;
-
-	/**
-	 * The '<em><b>Unspecified</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Unspecified</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #UNSPECIFIED_LITERAL
-	 * @model name="Unspecified"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int UNSPECIFIED = 4;
+	public static final int S = 4;
 
 	/**
 	 * An array of all the '<em><b>Sex</b></em>' enumerators.
@@ -158,11 +154,11 @@ public enum Sex implements Enumerator
 	 */
 	private static final Sex[] VALUES_ARRAY =
 		new Sex[] {
+			UNSPECIFIED_LITERAL,
 			F_LITERAL,
 			M_LITERAL,
 			C_LITERAL,
 			S_LITERAL,
-			UNSPECIFIED_LITERAL,
 		};
 
 	/**
@@ -213,11 +209,11 @@ public enum Sex implements Enumerator
 	 */
 	public static Sex get(int value) {
 		switch (value) {
+			case UNSPECIFIED: return UNSPECIFIED_LITERAL;
 			case F: return F_LITERAL;
 			case M: return M_LITERAL;
 			case C: return C_LITERAL;
 			case S: return S_LITERAL;
-			case UNSPECIFIED: return UNSPECIFIED_LITERAL;
 		}
 		return null;
 	}
