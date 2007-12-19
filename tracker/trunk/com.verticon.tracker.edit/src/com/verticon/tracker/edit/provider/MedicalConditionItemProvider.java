@@ -6,7 +6,6 @@
 package com.verticon.tracker.edit.provider;
 
 
-import com.verticon.tracker.MedicalCondition;
 import java.util.Collection;
 import java.util.List;
 

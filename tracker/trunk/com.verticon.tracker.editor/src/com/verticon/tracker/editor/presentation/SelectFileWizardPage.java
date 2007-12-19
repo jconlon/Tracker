@@ -3,7 +3,6 @@
  */
 package com.verticon.tracker.editor.presentation;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,8 +11,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -29,11 +26,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
-import com.verticon.tracker.Animal;
-import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
 import com.verticon.tracker.editor.util.ActionUtils;
-import com.verticon.tracker.editor.util.AnimalTemplateBean;
-import com.verticon.tracker.util.CommonUtilities;
 
 /**
  * @author jconlon

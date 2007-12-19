@@ -8,7 +8,6 @@ package com.verticon.tracker.edit.provider;
 
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
