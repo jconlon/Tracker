@@ -6,9 +6,17 @@
 package com.verticon.tracker.edit.provider;
 
 
+import com.verticon.tracker.Animal;
+import com.verticon.tracker.Bovine;
+import com.verticon.tracker.BovineBeef;
+import com.verticon.tracker.BovineBison;
+import com.verticon.tracker.BovineDairy;
+import com.verticon.tracker.Caprine;
+import com.verticon.tracker.Ovine;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.util.TrackerSwitch;
 
 import java.util.Collection;
 import java.util.List;
@@ -18,6 +26,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
@@ -201,17 +210,20 @@ public class TagItemProvider
 		super.notifyChanged(notification);
 	}
 
+
 	/**
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
+	 * Modified to distinguish and filter species unique events.
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * TODO Add all new events from model to this method
+	 * @generated NOT
 	 */
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(final Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
+		
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
@@ -302,35 +314,107 @@ public class TagItemProvider
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createMedicalTreatment()));
 
+		
 		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.TAG__EVENTS,
-				 TrackerFactory.eINSTANCE.createBirthing()));
+		(createChildParameter
+			(TrackerPackage.Literals.TAG__EVENTS,
+			 TrackerFactory.eINSTANCE.createBirthDefect()));
 
 		newChildDescriptors.add
-			(createChildParameter
+		(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
-				 TrackerFactory.eINSTANCE.createCalving()));
+						TrackerFactory.eINSTANCE.createMastitis()));
 
 		newChildDescriptors.add
-			(createChildParameter
+		(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
-				 TrackerFactory.eINSTANCE.createBirthDefect()));
+						TrackerFactory.eINSTANCE.createHerdTest()));
+		
+		//This is what is modified
+		addSpeciesSpecificChildren(newChildDescriptors, object);
+		
+	}
 
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.TAG__EVENTS,
-				 TrackerFactory.eINSTANCE.createMastitis()));
+	/**
+	 * @param newChildDescriptors
+	 * @param object
+	 */
+	private void addSpeciesSpecificChildren(
+			final Collection<Object> newChildDescriptors, Object object) {
+		Tag tag = (Tag)object;
+		if(tag==null){
+			return;
+		}
+		
+		TrackerSwitch<Object> visitor = new TrackerSwitch<Object>(){
+			@Override
+			public Object caseOvine(Ovine object) {
+				addBirthingEventChild(newChildDescriptors);
+				addMilkTestEventChild(newChildDescriptors);
+				return object;
+			}
 
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.TAG__EVENTS,
-				 TrackerFactory.eINSTANCE.createMilkTest()));
+			@Override
+			public Object caseCaprine(Caprine object) {
+				addBirthingEventChild(newChildDescriptors);
+				addMilkTestEventChild(newChildDescriptors);
+				return object;
+			}
 
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.TAG__EVENTS,
-				 TrackerFactory.eINSTANCE.createHerdTest()));
+			@Override
+			public Object caseBovine(Bovine object) {
+				addCalvingEventChild(newChildDescriptors);
+				return object;
+			}
+			
+			@Override
+			public Object caseBovineDairy(BovineDairy object) {
+				addCalvingEventChild(newChildDescriptors);
+				addMilkTestEventChild(newChildDescriptors);
+				return object;
+			}
+			
+			@Override
+			public Object caseAnimal(Animal eObject){
+				addBirthingEventChild(newChildDescriptors);
+				return eObject;
+			}
+
+			/**
+			 * @param newChildDescriptors
+			 */
+			private void addBirthingEventChild(
+					final Collection<Object> newChildDescriptors) {
+				newChildDescriptors.add
+				(createChildParameter
+					(TrackerPackage.Literals.TAG__EVENTS,
+					 TrackerFactory.eINSTANCE.createBirthing()));
+			}
+			
+			/**
+			 * @param newChildDescriptors
+			 */
+			private void addCalvingEventChild(
+					final Collection<Object> newChildDescriptors) {
+				newChildDescriptors.add
+				(createChildParameter
+						(TrackerPackage.Literals.TAG__EVENTS,
+								TrackerFactory.eINSTANCE.createCalving()));
+			}
+
+			/**
+			 * @param newChildDescriptors
+			 */
+			private void addMilkTestEventChild(
+					final Collection<Object> newChildDescriptors) {
+				newChildDescriptors.add
+				(createChildParameter
+					(TrackerPackage.Literals.TAG__EVENTS,
+					 TrackerFactory.eINSTANCE.createMilkTest()));
+			}
+		};
+
+		visitor.doSwitch(tag.eContainer());
 	}
 
 	/**
