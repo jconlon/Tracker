@@ -40,6 +40,26 @@
       		   usainNumberUsed
    			</constraint>
          
+           <!-- This constraint applies to Tag Id value-->
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.validation.core.constraints.NonNumberIdConstraint"
+                  severity="ERROR"
+                  mode="Live"
+                  name="Tag ID Numbers Only Constraint (Live Mode)"
+                  id="org.eclipse.emf.validation.pde.example.general.ui.NameNotEmpty"
+                  statusCode="100">
+               <description>The Tag ID can only have a value that is a number.</description>
+      		   <message>"{0}" ID value must be a number. </message>
+      		   <target class="Tag">
+         			<event name="Set">
+            			<feature name="id"/>
+       				</event>
+       				<event name="Unset">
+            			<feature name="id"/>
+       				</event>
+      			</target>
+            </constraint>
          
          
          

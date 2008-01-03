@@ -6,3 +6,7 @@ Bundle-Version: 0.1.0
 Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
 Eclipse-LazyStart: false
+Require-Bundle: org.eclipse.emf.validation,
+ org.eclipse.ocl.ecore,
+ com.verticon.tracker,
+ org.eclipse.core.runtime
