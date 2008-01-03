@@ -135,6 +135,7 @@ import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.FairRegistrationItemProvider;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
+import com.verticon.tracker.editor.validation.LiveValidationContentAdapter;
 import com.verticon.tracker.emf.edit.ui.provider.FairRegistrationAdapterFactoryLableProvider;
 import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelProvider;
 
@@ -911,8 +912,9 @@ public class TrackerEditor
 	/**
 	 * This is the method called to load a resource into the editing domain's resource set based on the editor's input.
 	 * <!-- begin-user-doc -->
+	 * Added Live Validation Adapter in version 0.2.4
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void createModel() {
 		URI resourceURI = EditUIUtil.getURI(getEditorInput());
@@ -933,8 +935,27 @@ public class TrackerEditor
 			resourceToDiagnosticMap.put(resource,  analyzeResourceProblems(resource, exception));
 		}
 		editingDomain.getResourceSet().eAdapters().add(problemIndicationAdapter);
+		
+		
+		if (!resourceHasAdapter(resource)) {
+			EContentAdapter liveValidationContentAdapter = new LiveValidationContentAdapter(this);
+			resource.eAdapters().add(liveValidationContentAdapter);
+		}
 	}
 
+	@SuppressWarnings("unchecked")
+	private boolean resourceHasAdapter(Resource r) {
+		Collection adapters = r.eAdapters();
+		for (Iterator j = adapters.iterator(); j.hasNext();) {
+			Object o = j.next();
+			if (o instanceof LiveValidationContentAdapter) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	/**
 	 * Returns a diagnostic describing the errors and warnings listed in the resource
 	 * and the specified exception (if any).

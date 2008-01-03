@@ -12,8 +12,7 @@
          </category>
       </category>
       <constraintProvider
-            cache="true"
-            mode="Batch">
+            cache="true">
          <package namespaceUri="http://www.verticon.com/ns/tracker/0.1.0"/>
          <description>
             Core Tracker Constraints
@@ -99,14 +98,35 @@
                  Premises.allInstances() -> select(premisesId=self.sourcePin) -> isEmpty()
                ]]>
             </constraint> 
+            
+            <!-- This constraint applies to MilkTest otherSolids value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Live"
+         		name="MilkTest Event OtherSolids Constraint (Live Mode)"
+         		id="milkTestEventOtherSolids"
+         		statusCode="102">
+      		<description>Example of a live mode (automatic) validation constraint in OCL.</description>
+      		<message>"{0}" otherSolids value must be between 0 and 100. </message>
+      		<target class="MilkTest">
+         		<event name="Set">
+            		<feature name="otherSolids"/>
+       			</event>
+       			<event name="Unset">
+            		<feature name="otherSolids"/>
+       			</event>
+      		</target>
+      		   otherSolids &gt; -1 and otherSolids &lt; 100
+   			</constraint>
+   
          </constraints>
       </constraintProvider>
    </extension>
 
-
-   <extension point="org.eclipse.emf.validation.constraintBindings">
-      <!-- Specify the context using the PropertyTester registered by
+<!-- Specify the context using the PropertyTester registered by
        the com.verticon.tracker.validation.adapter plugin -->
+   <extension point="org.eclipse.emf.validation.constraintBindings">
       <clientContext id="com.verticon.tracker.validation.adapter">
          <enablement>
             <and>
@@ -121,6 +141,35 @@
       <binding
          context="com.verticon.tracker.validation.adapter"
          category="com.verticon.tracker.validation.catagory.ocl"/>
+   </extension>
+ <!--
+   <extension point="org.eclipse.ui.editorActions"> 
+      <editorContribution 
+         id="com.verticon.tracker.validation.core.editorContribution" 
+         targetID="com.verticon.tracker.editor.presentation.TrackerEditorID"> 
+        <menu
+               label="Validation Options"
+               path="com.verticon.trackerMenuID/additions"
+               id="com.verticon.tracker.validation.core.MenuID">
+            <separator name="additions"/>
+         </menu>
+        
+         <action
+               label="Enable Live Validation"
+               icon="$nl$/icons/elcl16/validate_co.gif"
+               class="com.verticon.tracker.validation.core.actions.EnableLiveValidationDelegate"
+               menubarPath="com.verticon.trackerMenuID/com.verticon.tracker.validation.core.MenuID/additions"
+               id="com.verticon.tracker.validation.core.enableLiveValidationAction"
+               tooltip="Enable live validation."/>
+       
+      
+      </editorContribution> 
+   </extension>
+  -->
+   <!-- Add the UI Validation Listener to the context-->
+   <extension
+         point="org.eclipse.emf.validation.ui.UIRegisteredClientContext">
+      <clientContext id="com.verticon.tracker.validation.adapter"/>
    </extension>
    
 </plugin>
