@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_smKWUDo3Edyw6--mXqZ7vg" activeDiagram="_smKWUTo3Edyw6--mXqZ7vg">
   <model href="tracker.ecore#/"/>
-  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="574,341">
+  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="848,356">
     <property xmi:id="_smKWUjo3Edyw6--mXqZ7vg" key="pageFormatName" value="A2"/>
     <property xmi:id="_smKWUzo3Edyw6--mXqZ7vg" key="diagramWidth" value="1680"/>
     <property xmi:id="_smKWVDo3Edyw6--mXqZ7vg" key="diagramHeight" value="2376"/>
@@ -1810,8 +1810,8 @@
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_smnpUDo3Edyw6--mXqZ7vg" anchor="_smnCQTo3Edyw6--mXqZ7vg _smMynTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_smnpUTo3Edyw6--mXqZ7vg" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -143, 294, 427]</waypoints>
-      <waypoints>[-296, -143, -2, 427]</waypoints>
+      <waypoints>[0, -144, 303, 426]</waypoints>
+      <waypoints>[-303, -144, 0, 426]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_smnpUjo3Edyw6--mXqZ7vg" position="863,1" size="150,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smnpUzo3Edyw6--mXqZ7vg" presentation="default">
@@ -2994,8 +2994,8 @@
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_GCFQwKwrEdy9vLm4eJujnQ" anchor="_GB8t4KwrEdy9vLm4eJujnQ _smMynTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_GCFQwawrEdy9vLm4eJujnQ" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -321, 237, 427]</waypoints>
-      <waypoints>[-237, -321, 0, 427]</waypoints>
+      <waypoints>[0, -317, 212, 427]</waypoints>
+      <waypoints>[-212, -317, 0, 427]</waypoints>
     </contained>
   </diagrams>
 </diagrams:Diagrams>
