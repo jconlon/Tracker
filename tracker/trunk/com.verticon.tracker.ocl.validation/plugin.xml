@@ -18,8 +18,7 @@
             Core Tracker Constraints
          </description>
          <constraints categories="com.verticon.tracker.validation.catagory.ocl/core">
-            <!-- An animal can not be slaughtered more than once. -->
-            <!-- This constraint applies to Animal -->
+            <!-- Animal can not be Slaughtered Twice Constraint (Batch Mode) -->
             <constraint
                   lang="OCL"
                   severity="ERROR"
@@ -34,8 +33,9 @@
                   Event.allInstances()->select(e : Event | e.oclIsTypeOf(Slaughtered) and e.id=self.id)->size()<2
                ]]>
             </constraint>
-            <!-- This constraint applies to Slaughtered -->
-            <constraint
+            
+            <!-- Slaughtered Duplicate Event Constraint (Batch Mode) -->
+               <constraint
                   lang="OCL"
                   severity="WARNING"
                   mode="Batch"
@@ -51,8 +51,8 @@
                </constraint>
             
             
-            <!-- An animal must have only one tagApplied Event -->
-            <!-- This constraint applies to Animal -->
+            <!-- An animal must have one and only one tagApplied Event -->
+            <!-- Animal Duplicate TagApplied Event Constraint (Batch Mode) -->
             <constraint
                   id="tagAppliedAnimal"
                   lang="OCL"
@@ -67,7 +67,7 @@
                  Event.allInstances()->select(e : Event | e.oclIsTypeOf(TagApplied) and e.id=self.id)->size()=1
                ]]>
             </constraint>
-            <!-- This constraint applies to TagApplied -->
+            <!-- TagApplied Duplicate Event Constraint (Batch Mode) -->
             <constraint
                   lang="OCL"
                   severity="WARNING"
@@ -83,12 +83,49 @@
                ]]>
             </constraint>   
             
+            <!-- Tag applied to an Animal must have at least one Event (Batch Mode)  -->
+            <constraint
+                  id="tagOnAnimalLeast"
+                  lang="OCL"
+                  mode="Batch"
+                  name="Tag Minimal Event Constraint (Batch Mode)"
+                  severity="ERROR"
+                  statusCode="101">
+               	<description>Tags applied to Animals must have at least one TagApplied, MovedIn, or ReplacedTag event.</description>
+               	<message>Core Constraint: "{0}" must have at least one TagApplied, MovedIn, or ReplacedTag event.</message>
+               	<target class="Tag"/>
+               <![CDATA[
+                 if Animal.allInstances().tags -> select(t : Tag | t.id=self.id) -> isEmpty() then
+					true
+				else 
+					events -> select(e: Event | e.oclIsTypeOf(TagApplied) or e.oclIsTypeOf(ReplacedTag) or e.oclIsTypeOf(MovedIn) ) ->size() >0
+				endif
+               ]]>
+            </constraint>
+            
+            <!-- Tags applied to Animals must NOT have both a TagApplied and a ReplacedTag event.  -->
+            <!-- This constraint applies to Tag -->
+            <constraint
+                  id="tagOnAnimalMost"
+                  lang="OCL"
+                  mode="Batch"
+                  name="Tag Exclusive Events Constraint (Batch Mode)"
+                  severity="ERROR"
+                  statusCode="101">
+               	<description>Tags must not have both a TagApplied and a ReplacedTag event.</description>
+               	<message>Core Constraint: "{0}" must not have both a TagApplied and a ReplacedTag event.</message>
+               	<target class="Tag"/>
+               <![CDATA[
+					events -> select(e: Event | e.oclIsTypeOf(TagApplied) or e.oclIsTypeOf(ReplacedTag) ) ->size() <2
+               ]]>
+            </constraint>
+            
             <!-- This constraint applies to MoveIn -->
             <constraint
                   lang="OCL"
                   severity="WARNING"
                   mode="Batch"
-                  name="MovedIn Event Constraint (Batch Mode)"
+                  name="MovedIn SourcePin Constraint (Batch Mode)"
                   id="movedInEvent"
                   statusCode="101">
                 <description>The MovedIn sourcePin can not be the same as the local premisesId.</description>
@@ -99,12 +136,12 @@
                ]]>
             </constraint> 
             
-            !-- This constraint applies to MilkTest -->
+            <!-- This constraint applies to MilkTest -->
             <constraint
                   lang="OCL"
                   severity="WARNING"
                   mode="Batch"
-                  name="MilkTest Event Constraint (Batch Mode)"
+                  name="MilkTest Dairy Animals Constraint (Batch Mode)"
                   id="milkTestEvent"
                   statusCode="101">
                 <description>Milk test is only valid for dairy animals - BovineDairy, Ovine, and Caprine.</description>
@@ -120,7 +157,7 @@
          		lang="OCL"
          		severity="ERROR"
          		mode="Live"
-         		name="MilkTest Event OtherSolids Constraint (Live Mode)"
+         		name="MilkTest OtherSolids Constraint (Live Mode)"
          		id="milkTestEventOtherSolids"
          		statusCode="102">
       		<description>The Other Solids attribute of a MilkTest Event can only have a value from 0 to 99.99.</description>
@@ -141,7 +178,7 @@
          		lang="OCL"
          		severity="ERROR"
          		mode="Live"
-         		name="MilkTest Event PoundsProduced Constraint (Live Mode)"
+         		name="MilkTest PoundsProduced Constraint (Live Mode)"
          		id="milkTestEventPoundsProduced"
          		statusCode="102">
       		<description>The Pounds Produced attribute of a MilkTest Event can only have a value from 0 to 99.99.</description>
@@ -162,7 +199,7 @@
          		lang="OCL"
          		severity="ERROR"
          		mode="Live"
-         		name="MilkTest Event PercentButterFat Constraint (Live Mode)"
+         		name="MilkTest PercentButterFat Constraint (Live Mode)"
          		id="milkTestEventPercentButterFat"
          		statusCode="102">
       		<description>The Percent Butter Fat attribute of a MilkTest Event can only have a value from 0 to 9.99.</description>
@@ -183,7 +220,7 @@
          		lang="OCL"
          		severity="ERROR"
          		mode="Live"
-         		name="MilkTest Event PercentProtein Constraint (Live Mode)"
+         		name="MilkTest PercentProtein Constraint (Live Mode)"
          		id="milkTestEventPercentProtein"
          		statusCode="102">
       		<description>The Percent Protein attribute of a MilkTest Event can only have a value from 0 to 9.99.</description>
@@ -205,7 +242,7 @@
          		lang="OCL"
          		severity="ERROR"
          		mode="Live"
-         		name="MilkTest Event SomaticCellCounts Constraint (Live Mode)"
+         		name="MilkTest SomaticCellCounts Constraint (Live Mode)"
          		id="milkTestEventSomaticCellCounts"
          		statusCode="102">
       		<description>The Somatic Cell Counts attribute of a MilkTest Event can only have a value from 0 to 9,999.99.</description>
@@ -243,30 +280,7 @@
          context="com.verticon.tracker.validation.adapter"
          category="com.verticon.tracker.validation.catagory.ocl"/>
    </extension>
- <!--
-   <extension point="org.eclipse.ui.editorActions"> 
-      <editorContribution 
-         id="com.verticon.tracker.validation.core.editorContribution" 
-         targetID="com.verticon.tracker.editor.presentation.TrackerEditorID"> 
-        <menu
-               label="Validation Options"
-               path="com.verticon.trackerMenuID/additions"
-               id="com.verticon.tracker.validation.core.MenuID">
-            <separator name="additions"/>
-         </menu>
-        
-         <action
-               label="Enable Live Validation"
-               icon="$nl$/icons/elcl16/validate_co.gif"
-               class="com.verticon.tracker.validation.core.actions.EnableLiveValidationDelegate"
-               menubarPath="com.verticon.trackerMenuID/com.verticon.tracker.validation.core.MenuID/additions"
-               id="com.verticon.tracker.validation.core.enableLiveValidationAction"
-               tooltip="Enable live validation."/>
-       
-      
-      </editorContribution> 
-   </extension>
-  -->
+
    <!-- Add the UI Validation Listener to the context-->
    <extension
          point="org.eclipse.emf.validation.ui.UIRegisteredClientContext">
