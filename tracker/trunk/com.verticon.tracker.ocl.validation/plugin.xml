@@ -302,6 +302,39 @@
       		</target>
       		   somaticCellCounts &gt; -1 and somaticCellCounts &lt; 10000
    			</constraint>
+   			
+   			<!-- ReplacedTag Old Tag Not Parent Constraint (Batch Mode) -->
+            <constraint
+                  lang="OCL"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="ReplacedTag Old Tag Not Parent Constraint (Batch Mode)"
+                  id="replacedTagOldTagNotParentEvent"
+                  statusCode="101">
+                <description>The ReplacedTag OldTag can not be the same as the parent Tag of this Event.</description>
+               	<message>Core Constraint: "{0}" OldTag reference can not be the same as the "{0}" parent Tag.</message>
+               	<target class="ReplacedTag"/>
+               <![CDATA[
+                 not (self.oldTag=self.tag)
+               ]]>
+            </constraint> 
+            
+            <!-- ReplacedTag Old Tag Not in Same Animal Constraint (Batch Mode) -->
+            
+            <constraint
+                  lang="OCL"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="ReplacedTag Old Tag Not in Same Animal Constraint (Batch Mode)"
+                  id="replacedTagOldTagNotInAnimal"
+                  statusCode="101">
+                <description>The ReplacedTag OldTag must be associated with the same animal as this ReplacedTag Event.</description>
+               	<message>Core Constraint: "{0}" OldTag reference must be contained with the same animal as "{0}".</message>
+               	<target class="ReplacedTag"/>
+               <![CDATA[
+                 Animal.allInstances() -> select(a : Animal | (a.tags ->includes(self.tag))).tags -> includes(self.oldTag)
+               ]]>
+            </constraint> 
    
          </constraints>
       </constraintProvider>
