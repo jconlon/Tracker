@@ -51,7 +51,7 @@
                </constraint>
             
             
-            <!-- An animal must have one and only one tagApplied Event -->
+            <!-- An animal must have no more than one tagApplied Event -->
             <!-- Animal Duplicate TagApplied Event Constraint (Batch Mode) -->
             <constraint
                   id="tagAppliedAnimal"
@@ -64,7 +64,7 @@
                	<message>%tagAppliedAnimal.msg</message>
                	<target class="Animal"/>
                <![CDATA[
-                 Event.allInstances()->select(e : Event | e.oclIsTypeOf(TagApplied) and e.id=self.id)->size()=1
+                 Event.allInstances()->select(e : Event | e.oclIsTypeOf(TagApplied) and e.id=self.id)->size()< 2
                ]]>
             </constraint>
             <!-- TagApplied Duplicate Event Constraint (Batch Mode) -->
