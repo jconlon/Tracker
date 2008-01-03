@@ -426,6 +426,7 @@
     <genClasses ecoreClass="tracker.ecore#//ReplacedTag">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//ReplacedTag/oldId"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//ReplacedTag/usainNumberUsedForOldId"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//ReplacedTag/oldTag"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Imported"/>
     <genClasses ecoreClass="tracker.ecore#//Exported"/>

@@ -1681,13 +1681,22 @@ public interface TrackerPackage extends EPackage {
 	int REPLACED_TAG__USAIN_NUMBER_USED_FOR_OLD_ID = EVENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Old Tag</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPLACED_TAG__OLD_TAG = EVENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Replaced Tag</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REPLACED_TAG_FEATURE_COUNT = EVENT_FEATURE_COUNT + 2;
+	int REPLACED_TAG_FEATURE_COUNT = EVENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.ImportedImpl <em>Imported</em>}' class.
@@ -5228,6 +5237,17 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getReplacedTag_UsainNumberUsedForOldId();
 
 	/**
+	 * Returns the meta object for the reference '{@link com.verticon.tracker.ReplacedTag#getOldTag <em>Old Tag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Old Tag</em>'.
+	 * @see com.verticon.tracker.ReplacedTag#getOldTag()
+	 * @see #getReplacedTag()
+	 * @generated
+	 */
+	EReference getReplacedTag_OldTag();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Imported <em>Imported</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6383,6 +6403,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute REPLACED_TAG__USAIN_NUMBER_USED_FOR_OLD_ID = eINSTANCE.getReplacedTag_UsainNumberUsedForOldId();
+
+		/**
+		 * The meta object literal for the '<em><b>Old Tag</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REPLACED_TAG__OLD_TAG = eINSTANCE.getReplacedTag_OldTag();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.ImportedImpl <em>Imported</em>}' class.

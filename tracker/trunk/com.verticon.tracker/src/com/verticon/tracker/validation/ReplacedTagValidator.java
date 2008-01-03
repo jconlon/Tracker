@@ -6,6 +6,8 @@
  */
 package com.verticon.tracker.validation;
 
+import com.verticon.tracker.Tag;
+
 
 /**
  * A sample validator interface for {@link com.verticon.tracker.ReplacedTag}.
@@ -21,6 +23,8 @@ public interface ReplacedTagValidator {
 	boolean validateOldId(String value);
 
 	boolean validateUsainNumberUsedForOldId(boolean value);
+
+	boolean validateOldTag(Tag value);
 
 	boolean validateOldIdAin(boolean value);
 

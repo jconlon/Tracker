@@ -17,6 +17,7 @@ package com.verticon.tracker;
  * <ul>
  *   <li>{@link com.verticon.tracker.ReplacedTag#getOldId <em>Old Id</em>}</li>
  *   <li>{@link com.verticon.tracker.ReplacedTag#isUsainNumberUsedForOldId <em>Usain Number Used For Old Id</em>}</li>
+ *   <li>{@link com.verticon.tracker.ReplacedTag#getOldTag <em>Old Tag</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,22 +42,11 @@ public interface ReplacedTag extends Event {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Old Id</em>' attribute.
-	 * @see #setOldId(String)
 	 * @see com.verticon.tracker.TrackerPackage#getReplacedTag_OldId()
-	 * @model required="true"
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	String getOldId();
-
-	/**
-	 * Sets the value of the '{@link com.verticon.tracker.ReplacedTag#getOldId <em>Old Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Old Id</em>' attribute.
-	 * @see #getOldId()
-	 * @generated
-	 */
-	void setOldId(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Usain Number Used For Old Id</b></em>' attribute.
@@ -68,9 +58,35 @@ public interface ReplacedTag extends Event {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Usain Number Used For Old Id</em>' attribute.
 	 * @see com.verticon.tracker.TrackerPackage#getReplacedTag_UsainNumberUsedForOldId()
-	 * @model required="true" changeable="false" volatile="true" derived="true"
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	boolean isUsainNumberUsedForOldId();
+
+	/**
+	 * Returns the value of the '<em><b>Old Tag</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Old Tag</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Old Tag</em>' reference.
+	 * @see #setOldTag(Tag)
+	 * @see com.verticon.tracker.TrackerPackage#getReplacedTag_OldTag()
+	 * @model required="true"
+	 * @generated
+	 */
+	Tag getOldTag();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.ReplacedTag#getOldTag <em>Old Tag</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Old Tag</em>' reference.
+	 * @see #getOldTag()
+	 * @generated
+	 */
+	void setOldTag(Tag value);
 
 } // ReplacedTag

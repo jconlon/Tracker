@@ -7,12 +7,14 @@
 package com.verticon.tracker.edit.provider;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -23,7 +25,10 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import com.verticon.tracker.Animal;
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 
 /**
@@ -70,6 +75,7 @@ public class ReplacedTagItemProvider
 
 			addOldIdPropertyDescriptor(object);
 			addUsainNumberUsedForOldIdPropertyDescriptor(object);
+			addOldTagPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -116,6 +122,76 @@ public class ReplacedTagItemProvider
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Old Tag feature.
+	 * <!-- begin-user-doc -->
+	 * Modified to filter out all Tags not associated with parent animal 
+	 * and the parent Tag of this event as well.
+	 * this event.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	protected void addOldTagPropertyDescriptor(Object object) {
+		
+		/*
+		 * createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ReplacedTag_oldTag_feature"),
+				 getString("_UI_PropertyDescriptor_description", 
+						 "_UI_ReplacedTag_oldTag_feature", 
+						 "_UI_ReplacedTag_type"),
+				 TrackerPackage.Literals.REPLACED_TAG__OLD_TAG,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+		 */
+		itemPropertyDescriptors.add(
+					new ItemPropertyDescriptor(
+						((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),// adapterFactory,
+				 getResourceLocator(),//resourceLocator
+				 getString("_UI_ReplacedTag_oldTag_feature"),//displayName
+				 getString("_UI_PropertyDescriptor_description", 
+						 "_UI_ReplacedTag_oldTag_feature", 
+						 "_UI_ReplacedTag_type"),//description
+				 TrackerPackage.Literals.REPLACED_TAG__OLD_TAG,//feature
+				 true,//isSettable
+				 false,//multiLine
+				 true,//sortChoices
+				 null,//staticImage
+				 null,//category
+				 null)//filterFlags
+					{
+						protected Collection<?> getComboBoxObjects(Object object)
+						  {
+							ArrayList<Tag> result = new ArrayList<Tag>();
+						    ReplacedTag replacedTagEvent = (ReplacedTag)object;
+						    EObject tagContainer = replacedTagEvent.eContainer();
+						    if(tagContainer==null ){
+						    	return result;
+						    }
+						    
+							Tag mytag = (Tag)tagContainer;
+							EObject animalContainer = mytag.eContainer();
+						    if(animalContainer==null || animalContainer instanceof Premises){
+						    	return result;
+						    }
+							
+						    Animal animal = (Animal)animalContainer;
+						    result.addAll(animal.getTags());
+						    result.remove(mytag);
+						    
+
+						    return result;
+						  }
+					}
+					
+		);
 	}
 
 	/**

@@ -335,10 +335,14 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LostTag" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReplacedTag" eSuperTypes="#//Event">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="oldId" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="oldId" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" defaultValueLiteral=""
+        derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="usainNumberUsedForOldId"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" volatile="true" derived="true"/>
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oldTag" lowerBound="1"
+        eType="#//Tag"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Imported" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="Exported" eSuperTypes="#//Event"/>
