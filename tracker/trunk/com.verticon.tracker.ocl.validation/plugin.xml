@@ -18,6 +18,31 @@
             Core Tracker Constraints
          </description>
          <constraints categories="com.verticon.tracker.validation.catagory.ocl/core">
+           
+           <!-- This constraint applies to Tag Id value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Live"
+         		name="Tag ID Strict AIN Constraint (Live Mode)"
+         		id="tagIDAIN"
+         		statusCode="102">
+      		<description>The Tag ID can only have a value that is a valid AIN number.</description>
+      		<message>"{0}" ID value must be a valid USAIN. </message>
+      		<target class="Tag">
+         		<event name="Set">
+            		<feature name="id"/>
+       			</event>
+       			<event name="Unset">
+            		<feature name="id"/>
+       			</event>
+      		</target>
+      		   usainNumberUsed
+   			</constraint>
+         
+         
+         
+         
             <!-- Animal can not be Slaughtered Twice Constraint (Batch Mode) -->
             <constraint
                   lang="OCL"
