@@ -1506,6 +1506,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getReplacedTag_OldTag() {
+		return (EReference)replacedTagEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getImported() {
 		return importedEClass;
 	}
@@ -1784,6 +1793,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		replacedTagEClass = createEClass(REPLACED_TAG);
 		createEAttribute(replacedTagEClass, REPLACED_TAG__OLD_ID);
 		createEAttribute(replacedTagEClass, REPLACED_TAG__USAIN_NUMBER_USED_FOR_OLD_ID);
+		createEReference(replacedTagEClass, REPLACED_TAG__OLD_TAG);
 
 		importedEClass = createEClass(IMPORTED);
 
@@ -2039,8 +2049,9 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(lostTagEClass, LostTag.class, "LostTag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(replacedTagEClass, ReplacedTag.class, "ReplacedTag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getReplacedTag_OldId(), ecorePackage.getEString(), "oldId", null, 1, 1, ReplacedTag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getReplacedTag_UsainNumberUsedForOldId(), ecorePackage.getEBoolean(), "usainNumberUsedForOldId", null, 1, 1, ReplacedTag.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getReplacedTag_OldId(), ecorePackage.getEString(), "oldId", null, 1, 1, ReplacedTag.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getReplacedTag_UsainNumberUsedForOldId(), ecorePackage.getEBoolean(), "usainNumberUsedForOldId", null, 1, 1, ReplacedTag.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getReplacedTag_OldTag(), this.getTag(), null, "oldTag", null, 1, 1, ReplacedTag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(importedEClass, Imported.class, "Imported", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

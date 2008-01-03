@@ -9,6 +9,7 @@ package com.verticon.tracker.tests;
 import junit.textui.TestRunner;
 
 import com.verticon.tracker.ReplacedTag;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 
 /**
@@ -18,12 +19,14 @@ import com.verticon.tracker.TrackerFactory;
  * <p>
  * The following features are tested:
  * <ul>
+ *   <li>{@link com.verticon.tracker.ReplacedTag#getOldId() <em>Old Id</em>}</li>
  *   <li>{@link com.verticon.tracker.ReplacedTag#isUsainNumberUsedForOldId() <em>Usain Number Used For Old Id</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
 public class ReplacedTagTest extends EventTest {
+	private static final String _123456789012345 = "123456789012345";
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -84,6 +87,29 @@ public class ReplacedTagTest extends EventTest {
 	}
 
 	/**
+	 * Tests the '{@link com.verticon.tracker.ReplacedTag#getOldId() <em>Old Id</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.ReplacedTag#getOldId()
+	 * @generated NOT
+	 */
+	public void testGetOldId() {
+		ReplacedTag replacedTagEvent = getFixture();
+		assertNotNull(replacedTagEvent);
+		assertEquals("", replacedTagEvent.getId());
+		
+		assertEquals("", replacedTagEvent.getOldId());
+		
+		//Create an old tag
+		Tag oldTagToReplace = TrackerFactory.eINSTANCE.createTag();
+		oldTagToReplace.setId(_123456789012345);
+		
+		replacedTagEvent.setOldTag(oldTagToReplace);
+		assertEquals(_123456789012345, replacedTagEvent.getOldId());
+		
+	}
+
+	/**
 	 * Tests the '{@link com.verticon.tracker.ReplacedTag#isUsainNumberUsedForOldId() <em>Usain Number Used For Old Id</em>}' feature getter.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -94,16 +120,21 @@ public class ReplacedTagTest extends EventTest {
 		ReplacedTag replacedTagEvent = getFixture();
 		assertNotNull(replacedTagEvent);
 		assertEquals("", replacedTagEvent.getId());
-		replacedTagEvent.setOldId("123456789012345");
+		
+		//Create an old tag
+		Tag oldTagToReplace = TrackerFactory.eINSTANCE.createTag();
+		oldTagToReplace.setId(_123456789012345);
+		
+		replacedTagEvent.setOldTag(oldTagToReplace);
 		assertFalse(replacedTagEvent.isUsainNumberUsedForOldId());
-		replacedTagEvent.setOldId("840456789012345");
+		oldTagToReplace.setId("840456789012345");
 		assertTrue(replacedTagEvent.isUsainNumberUsedForOldId());
 		
 		//idNumber>840200000000000L && idNumber<843000000000000L
-		replacedTagEvent.setOldId("840003001374447");
+		oldTagToReplace.setId("840003001374447");
 		assertTrue(replacedTagEvent.isUsainNumberUsedForOldId());
 		
-		replacedTagEvent.setOldId("840003001374300");
+		oldTagToReplace.setId("840003001374300");
 		assertTrue(replacedTagEvent.isUsainNumberUsedForOldId());
 	}
 
