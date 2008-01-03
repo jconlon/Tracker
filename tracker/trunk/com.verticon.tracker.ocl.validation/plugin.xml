@@ -99,6 +99,22 @@
                ]]>
             </constraint> 
             
+            !-- This constraint applies to MilkTest -->
+            <constraint
+                  lang="OCL"
+                  severity="WARNING"
+                  mode="Batch"
+                  name="MilkTest Event Constraint (Batch Mode)"
+                  id="milkTestEvent"
+                  statusCode="101">
+                <description>Milk test is only valid for dairy animals - BovineDairy, Ovine, and Caprine.</description>
+               	<message>Core Constraint: "{0}" Event is only valid for dairy animals - BovineDairy, Ovine, and Caprine.</message>
+               	<target class="MilkTest"/>
+               <![CDATA[
+               Animal.allInstances() -> select(a : Animal | (not a.oclIsTypeOf(BovineDairy) ) and a.speciesCode<>'OVI' and a.speciesCode<>'CAP' ).allEvents() ->select(e : Event | e = self ) ->isEmpty()
+               ]]>
+            </constraint> 
+            
             <!-- This constraint applies to MilkTest otherSolids value-->
             <constraint
          		lang="OCL"
@@ -107,8 +123,8 @@
          		name="MilkTest Event OtherSolids Constraint (Live Mode)"
          		id="milkTestEventOtherSolids"
          		statusCode="102">
-      		<description>Example of a live mode (automatic) validation constraint in OCL.</description>
-      		<message>"{0}" otherSolids value must be between 0 and 100. </message>
+      		<description>The Other Solids attribute of a MilkTest Event can only have a value from 0 to 99.99.</description>
+      		<message>"{0}" Other Solids value must be between 0 and 99.99. </message>
       		<target class="MilkTest">
          		<event name="Set">
             		<feature name="otherSolids"/>
@@ -118,6 +134,91 @@
        			</event>
       		</target>
       		   otherSolids &gt; -1 and otherSolids &lt; 100
+   			</constraint>
+   			
+   			<!-- This constraint applies to MilkTest PoundsProduced value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Live"
+         		name="MilkTest Event PoundsProduced Constraint (Live Mode)"
+         		id="milkTestEventPoundsProduced"
+         		statusCode="102">
+      		<description>The Pounds Produced attribute of a MilkTest Event can only have a value from 0 to 99.99.</description>
+      		<message>"{0}" Pounds Produced value must be between 0 and 99.99. </message>
+      		<target class="MilkTest">
+         		<event name="Set">
+            		<feature name="poundsProduced"/>
+       			</event>
+       			<event name="Unset">
+            		<feature name="poundsProduced"/>
+       			</event>
+      		</target>
+      		   poundsProduced &gt; -1 and poundsProduced &lt; 100
+   			</constraint>
+   			
+   			<!-- This constraint applies to MilkTest PercentButterFat value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Live"
+         		name="MilkTest Event PercentButterFat Constraint (Live Mode)"
+         		id="milkTestEventPercentButterFat"
+         		statusCode="102">
+      		<description>The Percent Butter Fat attribute of a MilkTest Event can only have a value from 0 to 9.99.</description>
+      		<message>"{0}" Percent Butter Fat value must be between 0 and 9.99. </message>
+      		<target class="MilkTest">
+         		<event name="Set">
+            		<feature name="percentButterFat"/>
+       			</event>
+       			<event name="Unset">
+            		<feature name="percentButterFat"/>
+       			</event>
+      		</target>
+      		   percentButterFat &gt; -1 and percentButterFat &lt; 10
+   			</constraint>
+   			
+   			<!-- This constraint applies to MilkTest PercentProtein value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Live"
+         		name="MilkTest Event PercentProtein Constraint (Live Mode)"
+         		id="milkTestEventPercentProtein"
+         		statusCode="102">
+      		<description>The Percent Protein attribute of a MilkTest Event can only have a value from 0 to 9.99.</description>
+      		<message>"{0}" Percent Protein value must be between 0 and 9.99. </message>
+      		<target class="MilkTest">
+         		<event name="Set">
+            		<feature name="percentProtein"/>
+       			</event>
+       			<event name="Unset">
+            		<feature name="percentProtein"/>
+       			</event>
+      		</target>
+      		   percentProtein &gt; -1 and percentProtein &lt; 10
+   			</constraint>
+   			
+   			
+   			<!-- This constraint applies to MilkTest SomaticCellCounts value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Live"
+         		name="MilkTest Event SomaticCellCounts Constraint (Live Mode)"
+         		id="milkTestEventSomaticCellCounts"
+         		statusCode="102">
+      		<description>The Somatic Cell Counts attribute of a MilkTest Event can only have a value from 0 to 9,999.99.</description>
+      		<message>"{0}" Somatic Cell Counts value must be between 0 and 9,999.99. </message>
+      		<target class="MilkTest">
+         		<event name="Set">
+            		<feature name="somaticCellCounts"/>
+       			</event>
+       			<event name="Unset">
+            		<feature name="somaticCellCounts"/>
+       			</event>
+      		</target>
+      		   somaticCellCounts &gt; -1 and somaticCellCounts &lt; 10000
    			</constraint>
    
          </constraints>
