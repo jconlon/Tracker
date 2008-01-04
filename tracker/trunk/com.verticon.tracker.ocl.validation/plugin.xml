@@ -205,7 +205,7 @@
          		id="milkTestEventOtherSolids"
          		statusCode="102">
       		<description>The Other Solids attribute of a MilkTest Event can only have a value from 0 to 99.99.</description>
-      		<message>"{0}" Other Solids value must be between 0 and 99.99. </message>
+      		<message>"Core Constraint: {0}" Other Solids value must be between 0 and 99.99. </message>
       		<target class="MilkTest">
          		<event name="Set">
             		<feature name="otherSolids"/>
@@ -226,7 +226,7 @@
          		id="milkTestEventPoundsProduced"
          		statusCode="102">
       		<description>The Pounds Produced attribute of a MilkTest Event can only have a value from 0 to 99.99.</description>
-      		<message>"{0}" Pounds Produced value must be between 0 and 99.99. </message>
+      		<message>"Core Constraint: {0}" Pounds Produced value must be between 0 and 99.99. </message>
       		<target class="MilkTest">
          		<event name="Set">
             		<feature name="poundsProduced"/>
@@ -247,7 +247,7 @@
          		id="milkTestEventPercentButterFat"
          		statusCode="102">
       		<description>The Percent Butter Fat attribute of a MilkTest Event can only have a value from 0 to 9.99.</description>
-      		<message>"{0}" Percent Butter Fat value must be between 0 and 9.99. </message>
+      		<message>"Core Constraint: {0}" Percent Butter Fat value must be between 0 and 9.99. </message>
       		<target class="MilkTest">
          		<event name="Set">
             		<feature name="percentButterFat"/>
@@ -268,7 +268,7 @@
          		id="milkTestEventPercentProtein"
          		statusCode="102">
       		<description>The Percent Protein attribute of a MilkTest Event can only have a value from 0 to 9.99.</description>
-      		<message>"{0}" Percent Protein value must be between 0 and 9.99. </message>
+      		<message>"Core Constraint: {0}" Percent Protein value must be between 0 and 9.99. </message>
       		<target class="MilkTest">
          		<event name="Set">
             		<feature name="percentProtein"/>
@@ -290,7 +290,7 @@
          		id="milkTestEventSomaticCellCounts"
          		statusCode="102">
       		<description>The Somatic Cell Counts attribute of a MilkTest Event can only have a value from 0 to 9,999.99.</description>
-      		<message>"{0}" Somatic Cell Counts value must be between 0 and 9,999.99. </message>
+      		<message>"Core Constraint: {0}" Somatic Cell Counts value must be between 0 and 9,999.99. </message>
       		<target class="MilkTest">
          		<event name="Set">
             		<feature name="somaticCellCounts"/>
