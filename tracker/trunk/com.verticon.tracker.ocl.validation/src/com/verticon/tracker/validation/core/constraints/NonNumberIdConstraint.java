@@ -29,7 +29,7 @@ public class NonNumberIdConstraint
 				return ctx.createFailureStatus(new Object[] {eObj.eClass().getName()});
 			}
 			try {
-				Integer.decode(id);
+				Long.decode(id);
 			} catch (NumberFormatException e) {
 				return ctx.createFailureStatus(new Object[] {eObj.eClass().getName()});
 			}
@@ -42,7 +42,7 @@ public class NonNumberIdConstraint
 				return ctx.createFailureStatus(new Object[] {eObj.eClass().getName()});
 			}
 			try {
-				Integer.decode((String)newValue);
+				Long.decode((String)newValue);
 			} catch (NumberFormatException e) {
 				return ctx.createFailureStatus(new Object[] {eObj.eClass().getName()});
 			}

@@ -28,7 +28,7 @@
          		id="tagIDAIN"
          		statusCode="102">
       		<description>The Tag ID can only have a value that is a valid AIN number.</description>
-      		<message>"{0}" ID value must be a valid USAIN. </message>
+      		<message>"Core Constraint: {0}" ID value must be a valid USAIN. </message>
       		<target class="Tag">
          		<event name="Set">
             		<feature name="id"/>
@@ -36,9 +36,8 @@
        			<event name="Unset">
             		<feature name="id"/>
        			</event>
-      		</target>
-      		   usainNumberUsed
-   			</constraint>
+      		</target>self.usainNumberUsed
+      		</constraint>
          
            <!-- This constraint applies to Tag Id value-->
             <constraint
@@ -50,7 +49,7 @@
                   id="org.eclipse.emf.validation.pde.example.general.ui.NameNotEmpty"
                   statusCode="100">
                <description>The Tag ID can only have a value that is a number.</description>
-      		   <message>"{0}" ID value must be a number. </message>
+      		   <message>"Core Constraint: {0}" ID value must be a number. </message>
       		   <target class="Tag">
          			<event name="Set">
             			<feature name="id"/>
