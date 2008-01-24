@@ -3,6 +3,7 @@
 	<name>com.verticon.tracker.help</name>
 	<comment></comment>
 	<projects>
+		<project>com.verticon.tracker.documentation</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
