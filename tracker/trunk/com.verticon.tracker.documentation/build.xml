@@ -77,7 +77,7 @@
       - description:  Iterates through a directory and transforms
       -     .xml files into .html files using the DocBook XSL.
       -->
-	<target name="build-html" depends="build-xml" 
+	<target name="build-html" depends="build-pdf" 
         description="Generates HTML files from DocBook XML">
 		<xslt style="${html.stylesheet}" extension=".html" 
             basedir="generated-xml" destdir="doc">
