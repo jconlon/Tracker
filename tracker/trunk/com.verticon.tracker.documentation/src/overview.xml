@@ -3,8 +3,27 @@
 <chapter id="chOverview">
 	<title>Overview</title>
 	<section>
-		<title>Tracker Workbench</title>
-		<para>The main focus of activity in the Tracker Application is the editing of Animal Premises Documents.  These documents are edited and manipulated with Tracker Editors and it's supporting Views.  The Tracker Perspective collects and positions these editors and views within the Eclipse Workbench.</para>
+	<title>Tracker Workbench Instances, Workspaces, and Projects</title>
+		<para>The main focus of activity in the Tracker Application is the editing of Animal Premises Documents.  In order to discuss the mechanics of editing Tracker Animal Premises Documents, some definitions are in order:
+		<itemizedlist mark='bullet'>
+			    <listitem>
+					<para>A Tracker <emphasis>installation</emphasis>  is a location on your disk that contains a distribution of the Tracker. When you unpack a Tracker distribution to a location on your disk, you effectively create a local platform installation at that location. The installation contains a set of tools that were packaged together by the organization that created the distribution. Each of the tools in the platform installation contributes some functionality to the Tracker. You may have several platform installations on your machine, each of which may contain a different set of tools.</para>
+				</listitem>
+				<listitem>
+					<para>A Tracker <emphasis>workbench instance</emphasis> is a runtime instance of the Tracker. Every time you launch the Tracker, a workbench instance is created, making the tools in the platform installation from which the instance was loaded available for use.</para>
+				</listitem>
+				<listitem>
+					<para>A Tracker <emphasis>workspace</emphasis> is a location on your disk that is associated with a running workbench instance. It contains the resources (Tracker Documents, files, folders, etc.) that comprise the <emphasis>projects</emphasis> you work on. The tools contained in the platform installation from which the workbench instance was launched can be used to work with the projects in the workspace. Each workbench instance has exclusive access to its associated workspace: concurrently running workbench instances can not share the same workspace. </para>
+				</listitem>
+				
+			</itemizedlist>
+		</para>
+		
+	</section>
+	<section>
+		<title>Tracker Perspective, Editors and Views</title>
+		
+		<para>Within the Tracker Workbench, Animal Premises Documents are edited, manipulated, and examined with Tracker specific tools called Document Editors and Views.  To assist you as you work with Animal Premises Documents, a Tracker <emphasis>Perspective</emphasis> visualizes and positions these Tracker specific tools within the Workbench.</para>
 		<figure>
 			<title>Tracker Perspective</title>
 			<literallayout></literallayout>
