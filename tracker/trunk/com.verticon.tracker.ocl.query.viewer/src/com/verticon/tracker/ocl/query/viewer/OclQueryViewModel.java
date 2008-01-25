@@ -23,6 +23,7 @@ import com.verticon.tracker.util.TrackerLog;
  * 
  */
 public class OclQueryViewModel {
+	private static final String NEW_QUERY = "New Query";
 	private static final String TAG_NAME = "name";
 	private static final String TAG_TYPE = "type";
 	private static final String TAG_QUERY = "query";
@@ -54,7 +55,7 @@ public class OclQueryViewModel {
 	 * 
 	 */
 	public void addQuery() {
-		IOclQuery query = new OclQuery("");
+		IOclQuery query = new OclQuery(NEW_QUERY);
 		addQuery(query);
 	}
 
