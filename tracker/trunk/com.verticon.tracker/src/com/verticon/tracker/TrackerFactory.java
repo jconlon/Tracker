@@ -213,6 +213,42 @@ public interface TrackerFactory extends EFactory {
 	HerdTest createHerdTest();
 
 	/**
+	 * Returns a new object of class '<em>Generic Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Generic Event</em>'.
+	 * @generated
+	 */
+	GenericEvent createGenericEvent();
+
+	/**
+	 * Returns a new object of class '<em>Event Schema</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Event Schema</em>'.
+	 * @generated
+	 */
+	EventSchema createEventSchema();
+
+	/**
+	 * Returns a new object of class '<em>Event Attribute Schema</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Event Attribute Schema</em>'.
+	 * @generated
+	 */
+	EventAttributeSchema createEventAttributeSchema();
+
+	/**
+	 * Returns a new object of class '<em>Schema</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Schema</em>'.
+	 * @generated
+	 */
+	Schema createSchema();
+
+	/**
 	 * Returns a new object of class '<em>Premises</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

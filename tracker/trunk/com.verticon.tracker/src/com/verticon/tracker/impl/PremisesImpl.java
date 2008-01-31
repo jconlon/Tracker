@@ -29,8 +29,10 @@ import org.eclipse.ocl.expressions.OCLExpression;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.EventSchema;
 import com.verticon.tracker.Location;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.Schema;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 
@@ -47,6 +49,7 @@ import com.verticon.tracker.TrackerPackage;
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getUnAppliedTags <em>Un Applied Tags</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getLocations <em>Locations</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getUri <em>Uri</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getSchema <em>Schema</em>}</li>
  * </ul>
  * </p>
  *
@@ -155,6 +158,16 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * @ordered
 	 */
 	protected String uri = URI_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSchema() <em>Schema</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSchema()
+	 * @generated
+	 * @ordered
+	 */
+	protected Schema schema;
 
 	/**
 	 * The parsed OCL expression for the body of the '{@link #eventHistory <em>Event History</em>}' operation.
@@ -292,6 +305,49 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Schema getSchema() {
+		return schema;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSchema(Schema newSchema, NotificationChain msgs) {
+		Schema oldSchema = schema;
+		schema = newSchema;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__SCHEMA, oldSchema, newSchema);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSchema(Schema newSchema) {
+		if (newSchema != schema) {
+			NotificationChain msgs = null;
+			if (schema != null)
+				msgs = ((InternalEObject)schema).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__SCHEMA, null, msgs);
+			if (newSchema != null)
+				msgs = ((InternalEObject)newSchema).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__SCHEMA, null, msgs);
+			msgs = basicSetSchema(newSchema, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__SCHEMA, newSchema, newSchema));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Event> eventHistory() {
 		if (eventHistoryBodyOCL == null) {
 			EOperation eOperation = TrackerPackage.Literals.PREMISES.getEOperations().get(0);
@@ -366,6 +422,8 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return ((InternalEList<?>)getUnAppliedTags()).basicRemove(otherEnd, msgs);
 			case TrackerPackage.PREMISES__LOCATIONS:
 				return ((InternalEList<?>)getLocations()).basicRemove(otherEnd, msgs);
+			case TrackerPackage.PREMISES__SCHEMA:
+				return basicSetSchema(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -390,6 +448,8 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return getLocations();
 			case TrackerPackage.PREMISES__URI:
 				return getUri();
+			case TrackerPackage.PREMISES__SCHEMA:
+				return getSchema();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -424,6 +484,9 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 			case TrackerPackage.PREMISES__URI:
 				setUri((String)newValue);
 				return;
+			case TrackerPackage.PREMISES__SCHEMA:
+				setSchema((Schema)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -454,6 +517,9 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 			case TrackerPackage.PREMISES__URI:
 				setUri(URI_EDEFAULT);
 				return;
+			case TrackerPackage.PREMISES__SCHEMA:
+				setSchema((Schema)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -478,6 +544,8 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return locations != null && !locations.isEmpty();
 			case TrackerPackage.PREMISES__URI:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
+			case TrackerPackage.PREMISES__SCHEMA:
+				return schema != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -44,8 +44,7 @@ import com.verticon.tracker.TrackerPackage;
  */
 public class EventItemProvider
 	extends ItemProviderAdapter
-	implements	ITableItemLabelProvider,
-	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+	implements ITableItemLabelProvider,	IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -234,13 +233,29 @@ public class EventItemProvider
 		Date date = ((Event)object).getDateTime();
 		String simpleName = object.getClass().getSimpleName();
 		String resourceName = simpleName.substring(0,simpleName.indexOf("Impl"));
-		//TODO Give user a persistence var to control output format of date in Event Label
+		return getText(date, resourceName);
+	}
+
+	/**
+	 * @param date
+	 * @param resourceName
+	 * @return
+	 */
+	protected String getText(Date date, String resourceName) {
+		String resourcedName;
+		try {
+			resourcedName = getString("_UI_"+resourceName+"_type");
+		} catch (RuntimeException e) {
+			resourcedName = resourceName;
+		}
 		if(date!=null){
 			
-			return df.format(date)+" "+getString("_UI_"+resourceName+"_type");
+			return df.format(date)+" "+resourcedName;
 		}
-		return getString("_UI_"+resourceName+"_type") ;
+		return resourcedName ;
 	}
+	
+	
 
 /**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

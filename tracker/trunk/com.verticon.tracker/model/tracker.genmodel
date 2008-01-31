@@ -346,6 +346,22 @@
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//OneToTen/Nine"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//OneToTen/Ten"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//AnimalType">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/Unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/Bovine"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/Swine"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/Equine"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/Caprine"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/Ovine"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/BovineBeef"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/BovineDairy"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/BovineBison"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//EventDataType">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventDataType/String"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventDataType/Integer"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventDataType/Boolean"/>
+    </genEnums>
     <genDataTypes ecoreDataType="tracker.ecore#//PremisesIdNumber"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Email"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Age"/>
@@ -394,6 +410,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/unAppliedTags"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/locations"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/uri"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/schema"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/eventHistory"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/findAnimal">
         <genParameters ecoreParameter="tracker.ecore#//Premises/findAnimal/id"/>
@@ -499,6 +516,30 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/pregnant"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/daysSinceBredEstimate"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/bredDateEstimate"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//GenericEvent">
+      <genFeatures property="Readonly" children="true" createChild="true" propertyMultiLine="true"
+          ecoreFeature="ecore:EReference tracker.ecore#//GenericEvent/eventAttributes"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//GenericEvent/eventSchema"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//EventAttribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//EventAttribute/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//EventAttribute/value"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//EventSchema">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//EventSchema/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//EventSchema/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//EventSchema/animalType"/>
+      <genFeatures property="Readonly" children="true" createChild="true" propertyMultiLine="true"
+          ecoreFeature="ecore:EReference tracker.ecore#//EventSchema/eventAttributes"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//EventAttributeSchema">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//EventAttributeSchema/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//EventAttributeSchema/dataType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//EventAttributeSchema/description"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Schema">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Schema/eventSchema"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

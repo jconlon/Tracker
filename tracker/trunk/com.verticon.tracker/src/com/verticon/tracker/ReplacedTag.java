@@ -35,6 +35,7 @@ public interface ReplacedTag extends Event {
 
 	/**
 	 * Returns the value of the '<em><b>Old Id</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Old Id</em>' attribute isn't clear,
@@ -43,7 +44,7 @@ public interface ReplacedTag extends Event {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Old Id</em>' attribute.
 	 * @see com.verticon.tracker.TrackerPackage#getReplacedTag_OldId()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @model default="" required="true" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	String getOldId();

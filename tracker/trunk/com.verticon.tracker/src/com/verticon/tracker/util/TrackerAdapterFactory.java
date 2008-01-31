@@ -7,6 +7,7 @@
 package com.verticon.tracker.util;
 
 import com.verticon.tracker.*;
+import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -271,6 +272,26 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseHerdTest(HerdTest object) {
 				return createHerdTestAdapter();
+			}
+			@Override
+			public Adapter caseGenericEvent(GenericEvent object) {
+				return createGenericEventAdapter();
+			}
+			@Override
+			public Adapter caseEventAttribute(Map.Entry<String, String> object) {
+				return createEventAttributeAdapter();
+			}
+			@Override
+			public Adapter caseEventSchema(EventSchema object) {
+				return createEventSchemaAdapter();
+			}
+			@Override
+			public Adapter caseEventAttributeSchema(EventAttributeSchema object) {
+				return createEventAttributeSchemaAdapter();
+			}
+			@Override
+			public Adapter caseSchema(Schema object) {
+				return createSchemaAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -639,6 +660,76 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createHerdTestAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.GenericEvent <em>Generic Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.GenericEvent
+	 * @generated
+	 */
+	public Adapter createGenericEventAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Event Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createEventAttributeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.EventSchema <em>Event Schema</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.EventSchema
+	 * @generated
+	 */
+	public Adapter createEventSchemaAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.EventAttributeSchema <em>Event Attribute Schema</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.EventAttributeSchema
+	 * @generated
+	 */
+	public Adapter createEventAttributeSchemaAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.Schema <em>Schema</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.Schema
+	 * @generated
+	 */
+	public Adapter createSchemaAdapter() {
 		return null;
 	}
 

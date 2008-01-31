@@ -330,6 +330,7 @@ public class TagItemProvider
 				(TrackerPackage.Literals.TAG__EVENTS,
 						TrackerFactory.eINSTANCE.createHerdTest()));
 		
+		
 		//This is what is modified
 		addSpeciesSpecificChildren(newChildDescriptors, object);
 		
@@ -341,6 +342,13 @@ public class TagItemProvider
 	 */
 	private void addSpeciesSpecificChildren(
 			final Collection<Object> newChildDescriptors, Object object) {
+		
+		//FIXME to handle filtering of generic events
+		newChildDescriptors.add
+		(createChildParameter
+				(TrackerPackage.Literals.TAG__EVENTS,
+						TrackerFactory.eINSTANCE.createGenericEvent()));
+		
 		Tag tag = (Tag)object;
 		if(tag==null){
 			return;
