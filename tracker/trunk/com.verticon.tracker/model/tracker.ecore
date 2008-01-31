@@ -99,6 +99,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="locations" upperBound="-1"
         eType="#//Location" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="#//URI"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="schema" eType="#//Schema"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="PremisesIdNumber" instanceClassName="java.lang.String">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -554,5 +556,52 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="bredDateEstimate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
         changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GenericEvent" eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eventAttributes" upperBound="-1"
+        eType="#//EventAttribute" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eventSchema" lowerBound="1"
+        eType="#//EventSchema"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventAttribute" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventSchema">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="animalType" upperBound="-1"
+        eType="#//AnimalType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eventAttributes" lowerBound="1"
+        upperBound="-1" eType="#//EventAttributeSchema" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AnimalType">
+    <eLiterals name="Unspecified" literal=""/>
+    <eLiterals name="Bovine" value="1"/>
+    <eLiterals name="Swine" value="2"/>
+    <eLiterals name="Equine" value="3"/>
+    <eLiterals name="Caprine" value="4"/>
+    <eLiterals name="Ovine"/>
+    <eLiterals name="BovineBeef" value="5"/>
+    <eLiterals name="BovineDairy" value="6"/>
+    <eLiterals name="BovineBison" value="7"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventAttributeSchema">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" lowerBound="1"
+        eType="#//EventDataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EventDataType">
+    <eLiterals name="String"/>
+    <eLiterals name="Integer" value="1"/>
+    <eLiterals name="Boolean" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Schema">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eventSchema" eType="#//EventSchema"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

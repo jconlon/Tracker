@@ -65,6 +65,7 @@ import com.verticon.tracker.Treatment;
 import com.verticon.tracker.TreatmentMethod;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
+import java.util.Map;
 import com.verticon.tracker.util.CheckEmail;
 import com.verticon.tracker.util.CheckISO7064Mod37_36;
 import com.verticon.tracker.util.TrackerLog;
@@ -155,6 +156,11 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.MASTITIS: return createMastitis();
 			case TrackerPackage.MILK_TEST: return createMilkTest();
 			case TrackerPackage.HERD_TEST: return createHerdTest();
+			case TrackerPackage.GENERIC_EVENT: return createGenericEvent();
+			case TrackerPackage.EVENT_ATTRIBUTE: return (EObject)createEventAttribute();
+			case TrackerPackage.EVENT_SCHEMA: return createEventSchema();
+			case TrackerPackage.EVENT_ATTRIBUTE_SCHEMA: return createEventAttributeSchema();
+			case TrackerPackage.SCHEMA: return createSchema();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -190,6 +196,10 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createTreatmentMethodFromString(eDataType, initialValue);
 			case TrackerPackage.ONE_TO_TEN:
 				return createOneToTenFromString(eDataType, initialValue);
+			case TrackerPackage.ANIMAL_TYPE:
+				return createAnimalTypeFromString(eDataType, initialValue);
+			case TrackerPackage.EVENT_DATA_TYPE:
+				return createEventDataTypeFromString(eDataType, initialValue);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return createPremisesIdNumberFromString(eDataType, initialValue);
 			case TrackerPackage.EMAIL:
@@ -235,6 +245,10 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return convertTreatmentMethodToString(eDataType, instanceValue);
 			case TrackerPackage.ONE_TO_TEN:
 				return convertOneToTenToString(eDataType, instanceValue);
+			case TrackerPackage.ANIMAL_TYPE:
+				return convertAnimalTypeToString(eDataType, instanceValue);
+			case TrackerPackage.EVENT_DATA_TYPE:
+				return convertEventDataTypeToString(eDataType, instanceValue);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return convertPremisesIdNumberToString(eDataType, instanceValue);
 			case TrackerPackage.EMAIL:
@@ -448,6 +462,56 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public HerdTest createHerdTest() {
 		HerdTestImpl herdTest = new HerdTestImpl();
 		return herdTest;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GenericEvent createGenericEvent() {
+		GenericEventImpl genericEvent = new GenericEventImpl();
+		return genericEvent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<String, String> createEventAttribute() {
+		EventAttributeImpl eventAttribute = new EventAttributeImpl();
+		return eventAttribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventSchema createEventSchema() {
+		EventSchemaImpl eventSchema = new EventSchemaImpl();
+		return eventSchema;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventAttributeSchema createEventAttributeSchema() {
+		EventAttributeSchemaImpl eventAttributeSchema = new EventAttributeSchemaImpl();
+		return eventAttributeSchema;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Schema createSchema() {
+		SchemaImpl schema = new SchemaImpl();
+		return schema;
 	}
 
 	/**
@@ -812,6 +876,46 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	}
 
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AnimalType createAnimalTypeFromString(EDataType eDataType, String initialValue) {
+		AnimalType result = AnimalType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertAnimalTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventDataType createEventDataTypeFromString(EDataType eDataType, String initialValue) {
+		EventDataType result = EventDataType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertEventDataTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * 7-digit code that includes both letters and numbers.

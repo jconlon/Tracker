@@ -10,6 +10,7 @@ import com.verticon.tracker.*;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 
@@ -222,6 +223,16 @@ public class TrackerValidator extends EObjectValidator {
 				return validateDairyEvent((DairyEvent)value, diagnostics, context);
 			case TrackerPackage.HERD_TEST:
 				return validateHerdTest((HerdTest)value, diagnostics, context);
+			case TrackerPackage.GENERIC_EVENT:
+				return validateGenericEvent((GenericEvent)value, diagnostics, context);
+			case TrackerPackage.EVENT_ATTRIBUTE:
+				return validateEventAttribute((Map.Entry<?, ?>)value, diagnostics, context);
+			case TrackerPackage.EVENT_SCHEMA:
+				return validateEventSchema((EventSchema)value, diagnostics, context);
+			case TrackerPackage.EVENT_ATTRIBUTE_SCHEMA:
+				return validateEventAttributeSchema((EventAttributeSchema)value, diagnostics, context);
+			case TrackerPackage.SCHEMA:
+				return validateSchema((Schema)value, diagnostics, context);
 			case TrackerPackage.SEX:
 				return validateSex((Sex)value, diagnostics, context);
 			case TrackerPackage.BISON_BREED:
@@ -244,6 +255,10 @@ public class TrackerValidator extends EObjectValidator {
 				return validateTreatmentMethod((TreatmentMethod)value, diagnostics, context);
 			case TrackerPackage.ONE_TO_TEN:
 				return validateOneToTen((OneToTen)value, diagnostics, context);
+			case TrackerPackage.ANIMAL_TYPE:
+				return validateAnimalType((AnimalType)value, diagnostics, context);
+			case TrackerPackage.EVENT_DATA_TYPE:
+				return validateEventDataType((EventDataType)value, diagnostics, context);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return validatePremisesIdNumber((String)value, diagnostics, context);
 			case TrackerPackage.EMAIL:
@@ -489,6 +504,51 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validateGenericEvent(GenericEvent genericEvent, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(genericEvent, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEventAttribute(Map.Entry<?, ?> eventAttribute, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint((EObject)eventAttribute, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEventSchema(EventSchema eventSchema, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(eventSchema, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEventAttributeSchema(EventAttributeSchema eventAttributeSchema, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(eventAttributeSchema, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSchema(Schema schema, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(schema, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validatePremises(Premises premises, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(premises, diagnostics, context);
 	}
@@ -706,6 +766,24 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateOneToTen(OneToTen oneToTen, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAnimalType(AnimalType animalType, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEventDataType(EventDataType eventDataType, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

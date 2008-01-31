@@ -1,19 +1,25 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright 2007 Verticon, Inc. All Rights Reserved.
  *
  * $Id$
  */
 package com.verticon.tracker.edit.provider;
 
 
+import com.verticon.tracker.GenericEvent;
+import com.verticon.tracker.TrackerFactory;
+import com.verticon.tracker.TrackerPackage;
+
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -21,22 +27,16 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import com.verticon.tracker.Premises;
-import com.verticon.tracker.TrackerFactory;
-import com.verticon.tracker.TrackerPackage;
-
 /**
- * This is the item provider adapter for a {@link com.verticon.tracker.Premises} object.
+ * This is the item provider adapter for a {@link com.verticon.tracker.GenericEvent} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class PremisesItemProvider
-	extends ItemProviderAdapter
+public class GenericEventItemProvider
+	extends EventItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -56,7 +56,7 @@ public class PremisesItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PremisesItemProvider(AdapterFactory adapterFactory) {
+	public GenericEventItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -71,75 +71,52 @@ public class PremisesItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addPremisesIdPropertyDescriptor(object);
-			addEmailContactPropertyDescriptor(object);
-			addUriPropertyDescriptor(object);
+			addEventAttributesPropertyDescriptor(object);
+			addEventSchemaPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Premises Id feature.
+	 * This adds a property descriptor for the Event Attributes feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addPremisesIdPropertyDescriptor(Object object) {
+	protected void addEventAttributesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Premises_premisesId_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Premises_premisesId_feature", "_UI_Premises_type"),
-				 TrackerPackage.Literals.PREMISES__PREMISES_ID,
+				 getString("_UI_GenericEvent_eventAttributes_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_GenericEvent_eventAttributes_feature", "_UI_GenericEvent_type"),
+				 TrackerPackage.Literals.GENERIC_EVENT__EVENT_ATTRIBUTES,
+				 false,
 				 true,
 				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Email Contact feature.
+	 * This adds a property descriptor for the Event Schema feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addEmailContactPropertyDescriptor(Object object) {
+	protected void addEventSchemaPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Premises_emailContact_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Premises_emailContact_feature", "_UI_Premises_type"),
-				 TrackerPackage.Literals.PREMISES__EMAIL_CONTACT,
+				 getString("_UI_GenericEvent_eventSchema_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_GenericEvent_eventSchema_feature", "_UI_GenericEvent_type"),
+				 TrackerPackage.Literals.GENERIC_EVENT__EVENT_SCHEMA,
 				 true,
 				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 true,
 				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Uri feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addUriPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Premises_uri_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Premises_uri_feature", "_UI_Premises_type"),
-				 TrackerPackage.Literals.PREMISES__URI,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -156,10 +133,7 @@ public class PremisesItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TrackerPackage.Literals.PREMISES__ANIMALS);
-			childrenFeatures.add(TrackerPackage.Literals.PREMISES__UN_APPLIED_TAGS);
-			childrenFeatures.add(TrackerPackage.Literals.PREMISES__LOCATIONS);
-			childrenFeatures.add(TrackerPackage.Literals.PREMISES__SCHEMA);
+			childrenFeatures.add(TrackerPackage.Literals.GENERIC_EVENT__EVENT_ATTRIBUTES);
 		}
 		return childrenFeatures;
 	}
@@ -178,28 +152,31 @@ public class PremisesItemProvider
 	}
 
 	/**
-	 * This returns Premises.gif.
+	 * This returns GenericEvent.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Premises"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/GenericEvent"));
 	}
 
+	
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
+	 * Uses superclass implemenation to return a local specific label
+	 * appropriate to this subclass
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	@Override
 	public String getText(Object object) {
-		String label = ((Premises)object).getPremisesId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Premises_type") :
-			getString("_UI_Premises_type") + " " + label;
+		GenericEvent ge = (GenericEvent)object;
+		if(ge.getEventSchema()!=null){
+			return super.getText(ge.getDateTime(), ge.getEventSchema().getName())   ;
+		}
+		return super.getText(object);
 	}
 
 	/**
@@ -213,16 +190,11 @@ public class PremisesItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Premises.class)) {
-			case TrackerPackage.PREMISES__PREMISES_ID:
-			case TrackerPackage.PREMISES__EMAIL_CONTACT:
-			case TrackerPackage.PREMISES__URI:
+		switch (notification.getFeatureID(GenericEvent.class)) {
+			case TrackerPackage.GENERIC_EVENT__EVENT_SCHEMA:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case TrackerPackage.PREMISES__ANIMALS:
-			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
-			case TrackerPackage.PREMISES__LOCATIONS:
-			case TrackerPackage.PREMISES__SCHEMA:
+			case TrackerPackage.GENERIC_EVENT__EVENT_ATTRIBUTES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -242,53 +214,8 @@ public class PremisesItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TrackerPackage.Literals.PREMISES__ANIMALS,
-				 TrackerFactory.eINSTANCE.createBovineBeef()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.PREMISES__ANIMALS,
-				 TrackerFactory.eINSTANCE.createOvine()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.PREMISES__ANIMALS,
-				 TrackerFactory.eINSTANCE.createBovineBison()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.PREMISES__ANIMALS,
-				 TrackerFactory.eINSTANCE.createBovineDairy()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.PREMISES__ANIMALS,
-				 TrackerFactory.eINSTANCE.createSwine()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.PREMISES__ANIMALS,
-				 TrackerFactory.eINSTANCE.createEquine()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.PREMISES__ANIMALS,
-				 TrackerFactory.eINSTANCE.createCaprine()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.PREMISES__UN_APPLIED_TAGS,
-				 TrackerFactory.eINSTANCE.createTag()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.PREMISES__LOCATIONS,
-				 TrackerFactory.eINSTANCE.createLocation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.PREMISES__SCHEMA,
-				 TrackerFactory.eINSTANCE.createSchema()));
+				(TrackerPackage.Literals.GENERIC_EVENT__EVENT_ATTRIBUTES,
+				 TrackerFactory.eINSTANCE.create(TrackerPackage.Literals.EVENT_ATTRIBUTE)));
 	}
 
 	/**
