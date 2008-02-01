@@ -9,45 +9,56 @@ Package fair <http://www.verticon.com/ns/tracker/fair/0.1.0>
 
   Class Fair
     Attribute name : EString<<1..1>>
-    Reference exhibitors : Exhibitor<<1..*>>
-    Reference clubs : YouthClub<<0..*>>
-    Reference divisions : Division<<1..*>>
+    Reference youthClub : YouthClub<<0..*>>
+    Reference division : Division<<1..*>>
     Reference premises : Premises<<1..1>>
-
-  Class Exhibitor
-    Attribute firstName : EString
-    Attribute lastName : EString
-    Reference exhibits : Exhibit<<1..*>>
-    Attribute phone : EString<<1..1>>
-    Attribute parent : EString<<1..1>>
-    Attribute comments : EString
-    Attribute street : EString
-    Attribute city : EString
-    Attribute state : EString
-    Attribute zip : EString
+    Reference people : People
 
   Class Exhibit
     Attribute name : EString<<1..1>>
     Attribute number : EInt
-    Reference club : YouthClub
     Attribute comments : EString
     Reference animal : Animal<<1..1>>
+    Reference exhibitor : Person<<1..1>>
 
   Class YouthClub
     Attribute name : EString<<1..1>>
 
   Class Division
     Attribute name : EString<<1..1>>
-    Reference departments : Department<<1..*>>
+    Reference department : Department<<1..*>>
 
   Class Department
     Attribute name : EString<<1..1>>
-    Reference classes : Class<<1..*>>
+    Reference class : Class<<1..*>>
+    Reference superintendent : Person<<0..*>>
 
   Class Class
     Attribute name : EString<<1..1>>
-    Reference lots : Lot<<1..*>>
+    Reference lot : Lot<<1..*>>
+    Reference judge : Person<<1..*>>
 
   Class Lot
     Attribute name : EString<<1..1>>
-    Reference exhibits : Exhibit<<1..*>>
+    Reference exhibit : Exhibit<<1..*>>
+
+  Class People
+    Reference person : Person<<1..*>>
+
+  Class Person
+    Attribute firstName : EString<<1..1>>
+    Attribute lastName : EString<<1..1>>
+    Attribute phone : USTelephoneNumber
+    Attribute street : EString
+    Attribute city : EString<<1..1>>
+    Attribute state : EString<<1..1>>
+    Attribute zipCode : ZipCode
+    Attribute /name : EString<<1..1>>
+
+  Class YoungPerson -> Person
+    Reference parent : Person<<1..2>>
+    Reference club : YouthClub<<1..1>>
+
+  DataType ZipCode <java.lang.String>
+
+  DataType USTelephoneNumber <java.lang.String>

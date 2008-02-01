@@ -29,7 +29,7 @@ public interface YouthClub extends EObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

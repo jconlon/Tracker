@@ -5,21 +5,21 @@
  */
 package com.verticon.tracker.fair.util;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+import org.eclipse.emf.ecore.EObject;
+
 import com.verticon.tracker.fair.Department;
 import com.verticon.tracker.fair.Division;
 import com.verticon.tracker.fair.Exhibit;
-import com.verticon.tracker.fair.Exhibitor;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.Lot;
+import com.verticon.tracker.fair.People;
+import com.verticon.tracker.fair.Person;
+import com.verticon.tracker.fair.YoungPerson;
 import com.verticon.tracker.fair.YouthClub;
-
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notifier;
-
-import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +35,7 @@ public class FairAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * The cached model package.
@@ -89,10 +89,6 @@ public class FairAdapterFactory extends AdapterFactoryImpl {
 				return createFairAdapter();
 			}
 			@Override
-			public Adapter caseExhibitor(Exhibitor object) {
-				return createExhibitorAdapter();
-			}
-			@Override
 			public Adapter caseExhibit(Exhibit object) {
 				return createExhibitAdapter();
 			}
@@ -115,6 +111,18 @@ public class FairAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseLot(Lot object) {
 				return createLotAdapter();
+			}
+			@Override
+			public Adapter casePeople(People object) {
+				return createPeopleAdapter();
+			}
+			@Override
+			public Adapter casePerson(Person object) {
+				return createPersonAdapter();
+			}
+			@Override
+			public Adapter caseYoungPerson(YoungPerson object) {
+				return createYoungPersonAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -147,20 +155,6 @@ public class FairAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFairAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.fair.Exhibitor <em>Exhibitor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.verticon.tracker.fair.Exhibitor
-	 * @generated
-	 */
-	public Adapter createExhibitorAdapter() {
 		return null;
 	}
 
@@ -245,6 +239,48 @@ public class FairAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLotAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.fair.People <em>People</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.fair.People
+	 * @generated
+	 */
+	public Adapter createPeopleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.fair.Person <em>Person</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.fair.Person
+	 * @generated
+	 */
+	public Adapter createPersonAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.fair.YoungPerson <em>Young Person</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.fair.YoungPerson
+	 * @generated
+	 */
+	public Adapter createYoungPersonAdapter() {
 		return null;
 	}
 

@@ -1,0 +1,77 @@
+/**
+ * Copyright 2007 Verticon, Inc. All Rights Reserved.
+ *
+ * $Id$
+ */
+package com.verticon.tracker.fair;
+
+import org.eclipse.emf.common.util.EList;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Young Person</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link com.verticon.tracker.fair.YoungPerson#getParent <em>Parent</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.YoungPerson#getClub <em>Club</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @see com.verticon.tracker.fair.FairPackage#getYoungPerson()
+ * @model
+ * @generated
+ */
+public interface YoungPerson extends Person {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
+
+	/**
+	 * Returns the value of the '<em><b>Parent</b></em>' reference list.
+	 * The list contents are of type {@link com.verticon.tracker.fair.Person}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parent</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parent</em>' reference list.
+	 * @see com.verticon.tracker.fair.FairPackage#getYoungPerson_Parent()
+	 * @model required="true" upper="2"
+	 * @generated
+	 */
+	EList<Person> getParent();
+
+	/**
+	 * Returns the value of the '<em><b>Club</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Club</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Club</em>' reference.
+	 * @see #setClub(YouthClub)
+	 * @see com.verticon.tracker.fair.FairPackage#getYoungPerson_Club()
+	 * @model required="true"
+	 * @generated
+	 */
+	YouthClub getClub();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.fair.YoungPerson#getClub <em>Club</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Club</em>' reference.
+	 * @see #getClub()
+	 * @generated
+	 */
+	void setClub(YouthClub value);
+
+} // YoungPerson

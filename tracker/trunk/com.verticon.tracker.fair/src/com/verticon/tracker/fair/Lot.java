@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.Lot#getName <em>Name</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.Lot#getExhibits <em>Exhibits</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Lot#getExhibit <em>Exhibit</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,7 +32,7 @@ public interface Lot extends EObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -61,19 +61,19 @@ public interface Lot extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Exhibits</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Exhibit</b></em>' containment reference list.
 	 * The list contents are of type {@link com.verticon.tracker.fair.Exhibit}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Exhibits</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Exhibit</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Exhibits</em>' containment reference list.
-	 * @see com.verticon.tracker.fair.FairPackage#getLot_Exhibits()
+	 * @return the value of the '<em>Exhibit</em>' containment reference list.
+	 * @see com.verticon.tracker.fair.FairPackage#getLot_Exhibit()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<Exhibit> getExhibits();
+	EList<Exhibit> getExhibit();
 
 } // Lot

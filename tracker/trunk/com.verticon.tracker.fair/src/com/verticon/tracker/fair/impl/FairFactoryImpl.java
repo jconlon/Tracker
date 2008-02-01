@@ -8,14 +8,17 @@ package com.verticon.tracker.fair.impl;
 import com.verticon.tracker.fair.Department;
 import com.verticon.tracker.fair.Division;
 import com.verticon.tracker.fair.Exhibit;
-import com.verticon.tracker.fair.Exhibitor;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.FairFactory;
 import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.Lot;
+import com.verticon.tracker.fair.People;
+import com.verticon.tracker.fair.Person;
+import com.verticon.tracker.fair.YoungPerson;
 import com.verticon.tracker.fair.YouthClub;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -35,7 +38,7 @@ public class FairFactoryImpl extends EFactoryImpl implements FairFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * Creates the default factory implementation.
@@ -75,15 +78,51 @@ public class FairFactoryImpl extends EFactoryImpl implements FairFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case FairPackage.FAIR: return createFair();
-			case FairPackage.EXHIBITOR: return createExhibitor();
 			case FairPackage.EXHIBIT: return createExhibit();
 			case FairPackage.YOUTH_CLUB: return createYouthClub();
 			case FairPackage.DIVISION: return createDivision();
 			case FairPackage.DEPARTMENT: return createDepartment();
 			case FairPackage.CLASS: return createClass();
 			case FairPackage.LOT: return createLot();
+			case FairPackage.PEOPLE: return createPeople();
+			case FairPackage.PERSON: return createPerson();
+			case FairPackage.YOUNG_PERSON: return createYoungPerson();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case FairPackage.ZIP_CODE:
+				return createZipCodeFromString(eDataType, initialValue);
+			case FairPackage.US_TELEPHONE_NUMBER:
+				return createUSTelephoneNumberFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case FairPackage.ZIP_CODE:
+				return convertZipCodeToString(eDataType, instanceValue);
+			case FairPackage.US_TELEPHONE_NUMBER:
+				return convertUSTelephoneNumberToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -95,16 +134,6 @@ public class FairFactoryImpl extends EFactoryImpl implements FairFactory {
 	public Fair createFair() {
 		FairImpl fair = new FairImpl();
 		return fair;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Exhibitor createExhibitor() {
-		ExhibitorImpl exhibitor = new ExhibitorImpl();
-		return exhibitor;
 	}
 
 	/**
@@ -165,6 +194,72 @@ public class FairFactoryImpl extends EFactoryImpl implements FairFactory {
 	public Lot createLot() {
 		LotImpl lot = new LotImpl();
 		return lot;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public People createPeople() {
+		PeopleImpl people = new PeopleImpl();
+		return people;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Person createPerson() {
+		PersonImpl person = new PersonImpl();
+		return person;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public YoungPerson createYoungPerson() {
+		YoungPersonImpl youngPerson = new YoungPersonImpl();
+		return youngPerson;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String createZipCodeFromString(EDataType eDataType, String initialValue) {
+		return (String)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertZipCodeToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String createUSTelephoneNumberFromString(EDataType eDataType, String initialValue) {
+		return (String)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertUSTelephoneNumberToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

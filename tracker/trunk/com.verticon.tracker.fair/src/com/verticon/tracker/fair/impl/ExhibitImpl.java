@@ -9,6 +9,7 @@ import com.verticon.tracker.Animal;
 
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.FairPackage;
+import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YouthClub;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -28,9 +29,9 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.impl.ExhibitImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ExhibitImpl#getNumber <em>Number</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.ExhibitImpl#getClub <em>Club</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ExhibitImpl#getComments <em>Comments</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ExhibitImpl#getAnimal <em>Animal</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.ExhibitImpl#getExhibitor <em>Exhibitor</em>}</li>
  * </ul>
  * </p>
  *
@@ -42,7 +43,7 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -85,16 +86,6 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	protected int number = NUMBER_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getClub() <em>Club</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getClub()
-	 * @generated
-	 * @ordered
-	 */
-	protected YouthClub club;
-
-	/**
 	 * The default value of the '{@link #getComments() <em>Comments</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -123,6 +114,16 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	 * @ordered
 	 */
 	protected Animal animal;
+
+	/**
+	 * The cached value of the '{@link #getExhibitor() <em>Exhibitor</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExhibitor()
+	 * @generated
+	 * @ordered
+	 */
+	protected Person exhibitor;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -190,44 +191,6 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public YouthClub getClub() {
-		if (club != null && club.eIsProxy()) {
-			InternalEObject oldClub = (InternalEObject)club;
-			club = (YouthClub)eResolveProxy(oldClub);
-			if (club != oldClub) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FairPackage.EXHIBIT__CLUB, oldClub, club));
-			}
-		}
-		return club;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public YouthClub basicGetClub() {
-		return club;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setClub(YouthClub newClub) {
-		YouthClub oldClub = club;
-		club = newClub;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.EXHIBIT__CLUB, oldClub, club));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getComments() {
 		return comments;
 	}
@@ -287,6 +250,44 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Person getExhibitor() {
+		if (exhibitor != null && exhibitor.eIsProxy()) {
+			InternalEObject oldExhibitor = (InternalEObject)exhibitor;
+			exhibitor = (Person)eResolveProxy(oldExhibitor);
+			if (exhibitor != oldExhibitor) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FairPackage.EXHIBIT__EXHIBITOR, oldExhibitor, exhibitor));
+			}
+		}
+		return exhibitor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Person basicGetExhibitor() {
+		return exhibitor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExhibitor(Person newExhibitor) {
+		Person oldExhibitor = exhibitor;
+		exhibitor = newExhibitor;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.EXHIBIT__EXHIBITOR, oldExhibitor, exhibitor));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -294,14 +295,14 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 				return getName();
 			case FairPackage.EXHIBIT__NUMBER:
 				return new Integer(getNumber());
-			case FairPackage.EXHIBIT__CLUB:
-				if (resolve) return getClub();
-				return basicGetClub();
 			case FairPackage.EXHIBIT__COMMENTS:
 				return getComments();
 			case FairPackage.EXHIBIT__ANIMAL:
 				if (resolve) return getAnimal();
 				return basicGetAnimal();
+			case FairPackage.EXHIBIT__EXHIBITOR:
+				if (resolve) return getExhibitor();
+				return basicGetExhibitor();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -320,14 +321,14 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 			case FairPackage.EXHIBIT__NUMBER:
 				setNumber(((Integer)newValue).intValue());
 				return;
-			case FairPackage.EXHIBIT__CLUB:
-				setClub((YouthClub)newValue);
-				return;
 			case FairPackage.EXHIBIT__COMMENTS:
 				setComments((String)newValue);
 				return;
 			case FairPackage.EXHIBIT__ANIMAL:
 				setAnimal((Animal)newValue);
+				return;
+			case FairPackage.EXHIBIT__EXHIBITOR:
+				setExhibitor((Person)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -347,14 +348,14 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 			case FairPackage.EXHIBIT__NUMBER:
 				setNumber(NUMBER_EDEFAULT);
 				return;
-			case FairPackage.EXHIBIT__CLUB:
-				setClub((YouthClub)null);
-				return;
 			case FairPackage.EXHIBIT__COMMENTS:
 				setComments(COMMENTS_EDEFAULT);
 				return;
 			case FairPackage.EXHIBIT__ANIMAL:
 				setAnimal((Animal)null);
+				return;
+			case FairPackage.EXHIBIT__EXHIBITOR:
+				setExhibitor((Person)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -372,12 +373,12 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case FairPackage.EXHIBIT__NUMBER:
 				return number != NUMBER_EDEFAULT;
-			case FairPackage.EXHIBIT__CLUB:
-				return club != null;
 			case FairPackage.EXHIBIT__COMMENTS:
 				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
 			case FairPackage.EXHIBIT__ANIMAL:
 				return animal != null;
+			case FairPackage.EXHIBIT__EXHIBITOR:
+				return exhibitor != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -5,52 +5,43 @@
  */
 package com.verticon.tracker.fair.impl;
 
-import com.verticon.tracker.fair.Exhibit;
-import com.verticon.tracker.fair.Exhibitor;
 import com.verticon.tracker.fair.FairPackage;
-
-import java.util.Collection;
+import com.verticon.tracker.fair.Person;
 
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Exhibitor</b></em>'.
+ * An implementation of the model object '<em><b>Person</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.verticon.tracker.fair.impl.ExhibitorImpl#getFirstName <em>First Name</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.ExhibitorImpl#getLastName <em>Last Name</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.ExhibitorImpl#getExhibits <em>Exhibits</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.ExhibitorImpl#getPhone <em>Phone</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.ExhibitorImpl#getParent <em>Parent</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.ExhibitorImpl#getComments <em>Comments</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.ExhibitorImpl#getStreet <em>Street</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.ExhibitorImpl#getCity <em>City</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.ExhibitorImpl#getState <em>State</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.ExhibitorImpl#getZip <em>Zip</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getFirstName <em>First Name</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getLastName <em>Last Name</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getPhone <em>Phone</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getStreet <em>Street</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getCity <em>City</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getState <em>State</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getZipCode <em>Zip Code</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
+public class PersonImpl extends EObjectImpl implements Person {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * The default value of the '{@link #getFirstName() <em>First Name</em>}' attribute.
@@ -93,16 +84,6 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 	protected String lastName = LAST_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getExhibits() <em>Exhibits</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getExhibits()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Exhibit> exhibits;
-
-	/**
 	 * The default value of the '{@link #getPhone() <em>Phone</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -121,46 +102,6 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 	 * @ordered
 	 */
 	protected String phone = PHONE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getParent() <em>Parent</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getParent()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String PARENT_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getParent() <em>Parent</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getParent()
-	 * @generated
-	 * @ordered
-	 */
-	protected String parent = PARENT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getComments() <em>Comments</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getComments()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String COMMENTS_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getComments() <em>Comments</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getComments()
-	 * @generated
-	 * @ordered
-	 */
-	protected String comments = COMMENTS_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getStreet() <em>Street</em>}' attribute.
@@ -223,31 +164,51 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 	protected String state = STATE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getZip() <em>Zip</em>}' attribute.
+	 * The default value of the '{@link #getZipCode() <em>Zip Code</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getZip()
+	 * @see #getZipCode()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ZIP_EDEFAULT = null;
+	protected static final String ZIP_CODE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getZip() <em>Zip</em>}' attribute.
+	 * The cached value of the '{@link #getZipCode() <em>Zip Code</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getZip()
+	 * @see #getZipCode()
 	 * @generated
 	 * @ordered
 	 */
-	protected String zip = ZIP_EDEFAULT;
+	protected String zipCode = ZIP_CODE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ExhibitorImpl() {
+	protected PersonImpl() {
 		super();
 	}
 
@@ -258,7 +219,7 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return FairPackage.Literals.EXHIBITOR;
+		return FairPackage.Literals.PERSON;
 	}
 
 	/**
@@ -279,7 +240,7 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 		String oldFirstName = firstName;
 		firstName = newFirstName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.EXHIBITOR__FIRST_NAME, oldFirstName, firstName));
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.PERSON__FIRST_NAME, oldFirstName, firstName));
 	}
 
 	/**
@@ -300,19 +261,7 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 		String oldLastName = lastName;
 		lastName = newLastName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.EXHIBITOR__LAST_NAME, oldLastName, lastName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Exhibit> getExhibits() {
-		if (exhibits == null) {
-			exhibits = new EObjectResolvingEList<Exhibit>(Exhibit.class, this, FairPackage.EXHIBITOR__EXHIBITS);
-		}
-		return exhibits;
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.PERSON__LAST_NAME, oldLastName, lastName));
 	}
 
 	/**
@@ -333,49 +282,7 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 		String oldPhone = phone;
 		phone = newPhone;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.EXHIBITOR__PHONE, oldPhone, phone));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getParent() {
-		return parent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setParent(String newParent) {
-		String oldParent = parent;
-		parent = newParent;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.EXHIBITOR__PARENT, oldParent, parent));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getComments() {
-		return comments;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setComments(String newComments) {
-		String oldComments = comments;
-		comments = newComments;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.EXHIBITOR__COMMENTS, oldComments, comments));
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.PERSON__PHONE, oldPhone, phone));
 	}
 
 	/**
@@ -396,7 +303,7 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 		String oldStreet = street;
 		street = newStreet;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.EXHIBITOR__STREET, oldStreet, street));
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.PERSON__STREET, oldStreet, street));
 	}
 
 	/**
@@ -417,7 +324,7 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 		String oldCity = city;
 		city = newCity;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.EXHIBITOR__CITY, oldCity, city));
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.PERSON__CITY, oldCity, city));
 	}
 
 	/**
@@ -438,7 +345,7 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 		String oldState = state;
 		state = newState;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.EXHIBITOR__STATE, oldState, state));
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.PERSON__STATE, oldState, state));
 	}
 
 	/**
@@ -446,8 +353,8 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getZip() {
-		return zip;
+	public String getZipCode() {
+		return zipCode;
 	}
 
 	/**
@@ -455,11 +362,48 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setZip(String newZip) {
-		String oldZip = zip;
-		zip = newZip;
+	public void setZipCode(String newZipCode) {
+		String oldZipCode = zipCode;
+		zipCode = newZipCode;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.EXHIBITOR__ZIP, oldZip, zip));
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.PERSON__ZIP_CODE, oldZipCode, zipCode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Concatination of firstName and lastName
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getName() {
+		String name = "";
+		if(firstName == null && lastName == null){
+			name = "Unspecified";
+		}else{
+			if(firstName !=null){
+				name = firstName;
+				if(lastName !=null){
+					name = lastName+','+name;
+				}
+			}else{
+				name = lastName;
+			}
+			
+		}
+			
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.PERSON__NAME, oldName, name));
 	}
 
 	/**
@@ -470,26 +414,22 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FairPackage.EXHIBITOR__FIRST_NAME:
+			case FairPackage.PERSON__FIRST_NAME:
 				return getFirstName();
-			case FairPackage.EXHIBITOR__LAST_NAME:
+			case FairPackage.PERSON__LAST_NAME:
 				return getLastName();
-			case FairPackage.EXHIBITOR__EXHIBITS:
-				return getExhibits();
-			case FairPackage.EXHIBITOR__PHONE:
+			case FairPackage.PERSON__PHONE:
 				return getPhone();
-			case FairPackage.EXHIBITOR__PARENT:
-				return getParent();
-			case FairPackage.EXHIBITOR__COMMENTS:
-				return getComments();
-			case FairPackage.EXHIBITOR__STREET:
+			case FairPackage.PERSON__STREET:
 				return getStreet();
-			case FairPackage.EXHIBITOR__CITY:
+			case FairPackage.PERSON__CITY:
 				return getCity();
-			case FairPackage.EXHIBITOR__STATE:
+			case FairPackage.PERSON__STATE:
 				return getState();
-			case FairPackage.EXHIBITOR__ZIP:
-				return getZip();
+			case FairPackage.PERSON__ZIP_CODE:
+				return getZipCode();
+			case FairPackage.PERSON__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -499,40 +439,32 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FairPackage.EXHIBITOR__FIRST_NAME:
+			case FairPackage.PERSON__FIRST_NAME:
 				setFirstName((String)newValue);
 				return;
-			case FairPackage.EXHIBITOR__LAST_NAME:
+			case FairPackage.PERSON__LAST_NAME:
 				setLastName((String)newValue);
 				return;
-			case FairPackage.EXHIBITOR__EXHIBITS:
-				getExhibits().clear();
-				getExhibits().addAll((Collection<? extends Exhibit>)newValue);
-				return;
-			case FairPackage.EXHIBITOR__PHONE:
+			case FairPackage.PERSON__PHONE:
 				setPhone((String)newValue);
 				return;
-			case FairPackage.EXHIBITOR__PARENT:
-				setParent((String)newValue);
-				return;
-			case FairPackage.EXHIBITOR__COMMENTS:
-				setComments((String)newValue);
-				return;
-			case FairPackage.EXHIBITOR__STREET:
+			case FairPackage.PERSON__STREET:
 				setStreet((String)newValue);
 				return;
-			case FairPackage.EXHIBITOR__CITY:
+			case FairPackage.PERSON__CITY:
 				setCity((String)newValue);
 				return;
-			case FairPackage.EXHIBITOR__STATE:
+			case FairPackage.PERSON__STATE:
 				setState((String)newValue);
 				return;
-			case FairPackage.EXHIBITOR__ZIP:
-				setZip((String)newValue);
+			case FairPackage.PERSON__ZIP_CODE:
+				setZipCode((String)newValue);
+				return;
+			case FairPackage.PERSON__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -546,35 +478,29 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FairPackage.EXHIBITOR__FIRST_NAME:
+			case FairPackage.PERSON__FIRST_NAME:
 				setFirstName(FIRST_NAME_EDEFAULT);
 				return;
-			case FairPackage.EXHIBITOR__LAST_NAME:
+			case FairPackage.PERSON__LAST_NAME:
 				setLastName(LAST_NAME_EDEFAULT);
 				return;
-			case FairPackage.EXHIBITOR__EXHIBITS:
-				getExhibits().clear();
-				return;
-			case FairPackage.EXHIBITOR__PHONE:
+			case FairPackage.PERSON__PHONE:
 				setPhone(PHONE_EDEFAULT);
 				return;
-			case FairPackage.EXHIBITOR__PARENT:
-				setParent(PARENT_EDEFAULT);
-				return;
-			case FairPackage.EXHIBITOR__COMMENTS:
-				setComments(COMMENTS_EDEFAULT);
-				return;
-			case FairPackage.EXHIBITOR__STREET:
+			case FairPackage.PERSON__STREET:
 				setStreet(STREET_EDEFAULT);
 				return;
-			case FairPackage.EXHIBITOR__CITY:
+			case FairPackage.PERSON__CITY:
 				setCity(CITY_EDEFAULT);
 				return;
-			case FairPackage.EXHIBITOR__STATE:
+			case FairPackage.PERSON__STATE:
 				setState(STATE_EDEFAULT);
 				return;
-			case FairPackage.EXHIBITOR__ZIP:
-				setZip(ZIP_EDEFAULT);
+			case FairPackage.PERSON__ZIP_CODE:
+				setZipCode(ZIP_CODE_EDEFAULT);
+				return;
+			case FairPackage.PERSON__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -588,26 +514,22 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FairPackage.EXHIBITOR__FIRST_NAME:
+			case FairPackage.PERSON__FIRST_NAME:
 				return FIRST_NAME_EDEFAULT == null ? firstName != null : !FIRST_NAME_EDEFAULT.equals(firstName);
-			case FairPackage.EXHIBITOR__LAST_NAME:
+			case FairPackage.PERSON__LAST_NAME:
 				return LAST_NAME_EDEFAULT == null ? lastName != null : !LAST_NAME_EDEFAULT.equals(lastName);
-			case FairPackage.EXHIBITOR__EXHIBITS:
-				return exhibits != null && !exhibits.isEmpty();
-			case FairPackage.EXHIBITOR__PHONE:
+			case FairPackage.PERSON__PHONE:
 				return PHONE_EDEFAULT == null ? phone != null : !PHONE_EDEFAULT.equals(phone);
-			case FairPackage.EXHIBITOR__PARENT:
-				return PARENT_EDEFAULT == null ? parent != null : !PARENT_EDEFAULT.equals(parent);
-			case FairPackage.EXHIBITOR__COMMENTS:
-				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
-			case FairPackage.EXHIBITOR__STREET:
+			case FairPackage.PERSON__STREET:
 				return STREET_EDEFAULT == null ? street != null : !STREET_EDEFAULT.equals(street);
-			case FairPackage.EXHIBITOR__CITY:
+			case FairPackage.PERSON__CITY:
 				return CITY_EDEFAULT == null ? city != null : !CITY_EDEFAULT.equals(city);
-			case FairPackage.EXHIBITOR__STATE:
+			case FairPackage.PERSON__STATE:
 				return STATE_EDEFAULT == null ? state != null : !STATE_EDEFAULT.equals(state);
-			case FairPackage.EXHIBITOR__ZIP:
-				return ZIP_EDEFAULT == null ? zip != null : !ZIP_EDEFAULT.equals(zip);
+			case FairPackage.PERSON__ZIP_CODE:
+				return ZIP_CODE_EDEFAULT == null ? zipCode != null : !ZIP_CODE_EDEFAULT.equals(zipCode);
+			case FairPackage.PERSON__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -628,20 +550,18 @@ public class ExhibitorImpl extends EObjectImpl implements Exhibitor {
 		result.append(lastName);
 		result.append(", phone: ");
 		result.append(phone);
-		result.append(", parent: ");
-		result.append(parent);
-		result.append(", comments: ");
-		result.append(comments);
 		result.append(", street: ");
 		result.append(street);
 		result.append(", city: ");
 		result.append(city);
 		result.append(", state: ");
 		result.append(state);
-		result.append(", zip: ");
-		result.append(zip);
+		result.append(", zipCode: ");
+		result.append(zipCode);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}
 
-} //ExhibitorImpl
+} //PersonImpl

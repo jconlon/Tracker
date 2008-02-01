@@ -50,7 +50,7 @@ public class FairItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -135,9 +135,9 @@ public class FairItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(FairPackage.Literals.FAIR__EXHIBITORS);
-			childrenFeatures.add(FairPackage.Literals.FAIR__CLUBS);
-			childrenFeatures.add(FairPackage.Literals.FAIR__DIVISIONS);
+			childrenFeatures.add(FairPackage.Literals.FAIR__YOUTH_CLUB);
+			childrenFeatures.add(FairPackage.Literals.FAIR__DIVISION);
+			childrenFeatures.add(FairPackage.Literals.FAIR__PEOPLE);
 		}
 		return childrenFeatures;
 	}
@@ -195,9 +195,9 @@ public class FairItemProvider
 			case FairPackage.FAIR__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case FairPackage.FAIR__EXHIBITORS:
-			case FairPackage.FAIR__CLUBS:
-			case FairPackage.FAIR__DIVISIONS:
+			case FairPackage.FAIR__YOUTH_CLUB:
+			case FairPackage.FAIR__DIVISION:
+			case FairPackage.FAIR__PEOPLE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -217,18 +217,18 @@ public class FairItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(FairPackage.Literals.FAIR__EXHIBITORS,
-				 FairFactory.eINSTANCE.createExhibitor()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(FairPackage.Literals.FAIR__CLUBS,
+				(FairPackage.Literals.FAIR__YOUTH_CLUB,
 				 FairFactory.eINSTANCE.createYouthClub()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(FairPackage.Literals.FAIR__DIVISIONS,
+				(FairPackage.Literals.FAIR__DIVISION,
 				 FairFactory.eINSTANCE.createDivision()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(FairPackage.Literals.FAIR__PEOPLE,
+				 FairFactory.eINSTANCE.createPeople()));
 	}
 
 	/**

@@ -49,7 +49,7 @@ public class ClassItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -73,6 +73,7 @@ public class ClassItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addJudgePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -100,6 +101,28 @@ public class ClassItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Judge feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addJudgePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Class_judge_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Class_judge_feature", "_UI_Class_type"),
+				 FairPackage.Literals.CLASS__JUDGE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -111,7 +134,7 @@ public class ClassItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(FairPackage.Literals.CLASS__LOTS);
+			childrenFeatures.add(FairPackage.Literals.CLASS__LOT);
 		}
 		return childrenFeatures;
 	}
@@ -169,7 +192,7 @@ public class ClassItemProvider
 			case FairPackage.CLASS__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case FairPackage.CLASS__LOTS:
+			case FairPackage.CLASS__LOT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -189,7 +212,7 @@ public class ClassItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(FairPackage.Literals.CLASS__LOTS,
+				(FairPackage.Literals.CLASS__LOT,
 				 FairFactory.eINSTANCE.createLot()));
 	}
 

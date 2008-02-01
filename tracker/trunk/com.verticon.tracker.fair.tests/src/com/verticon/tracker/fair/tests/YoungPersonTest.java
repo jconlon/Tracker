@@ -5,35 +5,25 @@
  */
 package com.verticon.tracker.fair.tests;
 
-import com.verticon.tracker.fair.Exhibitor;
 import com.verticon.tracker.fair.FairFactory;
-
-import junit.framework.TestCase;
+import com.verticon.tracker.fair.YoungPerson;
 
 import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Exhibitor</b></em>'.
+ * A test case for the model object '<em><b>Young Person</b></em>'.
  * <!-- end-user-doc -->
  * @generated
  */
-public class ExhibitorTest extends TestCase {
+public class YoungPersonTest extends PersonTest {
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
-
-	/**
-	 * The fixture for this Exhibitor test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected Exhibitor fixture = null;
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -41,37 +31,28 @@ public class ExhibitorTest extends TestCase {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-		TestRunner.run(ExhibitorTest.class);
+		TestRunner.run(YoungPersonTest.class);
 	}
 
 	/**
-	 * Constructs a new Exhibitor test case with the given name.
+	 * Constructs a new Young Person test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExhibitorTest(String name) {
+	public YoungPersonTest(String name) {
 		super(name);
 	}
 
 	/**
-	 * Sets the fixture for this Exhibitor test case.
+	 * Returns the fixture for this Young Person test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void setFixture(Exhibitor fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
-	 * Returns the fixture for this Exhibitor test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected Exhibitor getFixture() {
-		return fixture;
+	@Override
+	protected YoungPerson getFixture() {
+		return (YoungPerson)fixture;
 	}
 
 	/**
@@ -82,7 +63,7 @@ public class ExhibitorTest extends TestCase {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(FairFactory.eINSTANCE.createExhibitor());
+		setFixture(FairFactory.eINSTANCE.createYoungPerson());
 	}
 
 	/**
@@ -96,4 +77,4 @@ public class ExhibitorTest extends TestCase {
 		setFixture(null);
 	}
 
-} //ExhibitorTest
+} //YoungPersonTest

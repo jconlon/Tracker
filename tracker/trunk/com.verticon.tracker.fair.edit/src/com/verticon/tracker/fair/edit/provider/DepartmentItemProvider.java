@@ -50,7 +50,7 @@ public class DepartmentItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -74,6 +74,7 @@ public class DepartmentItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addSuperintendentPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -101,6 +102,28 @@ public class DepartmentItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Superintendent feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSuperintendentPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Department_superintendent_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Department_superintendent_feature", "_UI_Department_type"),
+				 FairPackage.Literals.DEPARTMENT__SUPERINTENDENT,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -112,7 +135,7 @@ public class DepartmentItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(FairPackage.Literals.DEPARTMENT__CLASSES);
+			childrenFeatures.add(FairPackage.Literals.DEPARTMENT__CLASS);
 		}
 		return childrenFeatures;
 	}
@@ -170,7 +193,7 @@ public class DepartmentItemProvider
 			case FairPackage.DEPARTMENT__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case FairPackage.DEPARTMENT__CLASSES:
+			case FairPackage.DEPARTMENT__CLASS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -190,7 +213,7 @@ public class DepartmentItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(FairPackage.Literals.DEPARTMENT__CLASSES,
+				(FairPackage.Literals.DEPARTMENT__CLASS,
 				 FairFactory.eINSTANCE.createClass()));
 	}
 

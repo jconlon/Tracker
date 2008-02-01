@@ -20,5 +20,7 @@ public interface DivisionValidator {
 	boolean validate();
 
 	boolean validateName(String value);
+	boolean validateDepartment(EList<Department> value);
+
 	boolean validateDepartments(EList<Department> value);
 }

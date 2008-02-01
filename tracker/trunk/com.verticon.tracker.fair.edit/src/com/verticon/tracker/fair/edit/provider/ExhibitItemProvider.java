@@ -47,7 +47,7 @@ public class ExhibitItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -72,9 +72,9 @@ public class ExhibitItemProvider
 
 			addNamePropertyDescriptor(object);
 			addNumberPropertyDescriptor(object);
-			addClubPropertyDescriptor(object);
 			addCommentsPropertyDescriptor(object);
 			addAnimalPropertyDescriptor(object);
+			addExhibitorPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -124,28 +124,6 @@ public class ExhibitItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Club feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addClubPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Exhibit_club_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibit_club_feature", "_UI_Exhibit_type"),
-				 FairPackage.Literals.EXHIBIT__CLUB,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Comments feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -181,6 +159,28 @@ public class ExhibitItemProvider
 				 getString("_UI_Exhibit_animal_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibit_animal_feature", "_UI_Exhibit_type"),
 				 FairPackage.Literals.EXHIBIT__ANIMAL,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Exhibitor feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addExhibitorPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Exhibit_exhibitor_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibit_exhibitor_feature", "_UI_Exhibit_type"),
+				 FairPackage.Literals.EXHIBIT__EXHIBITOR,
 				 true,
 				 false,
 				 true,

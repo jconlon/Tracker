@@ -21,7 +21,7 @@ public interface FairFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * The singleton instance of the factory.
@@ -39,15 +39,6 @@ public interface FairFactory extends EFactory {
 	 * @generated
 	 */
 	Fair createFair();
-
-	/**
-	 * Returns a new object of class '<em>Exhibitor</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Exhibitor</em>'.
-	 * @generated
-	 */
-	Exhibitor createExhibitor();
 
 	/**
 	 * Returns a new object of class '<em>Exhibit</em>'.
@@ -102,6 +93,33 @@ public interface FairFactory extends EFactory {
 	 * @generated
 	 */
 	Lot createLot();
+
+	/**
+	 * Returns a new object of class '<em>People</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>People</em>'.
+	 * @generated
+	 */
+	People createPeople();
+
+	/**
+	 * Returns a new object of class '<em>Person</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Person</em>'.
+	 * @generated
+	 */
+	Person createPerson();
+
+	/**
+	 * Returns a new object of class '<em>Young Person</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Young Person</em>'.
+	 * @generated
+	 */
+	YoungPerson createYoungPerson();
 
 	/**
 	 * Returns the package supported by this factory.

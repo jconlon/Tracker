@@ -5,19 +5,21 @@
  */
 package com.verticon.tracker.fair.util;
 
-import com.verticon.tracker.fair.Department;
-import com.verticon.tracker.fair.Division;
-import com.verticon.tracker.fair.Exhibit;
-import com.verticon.tracker.fair.Exhibitor;
-import com.verticon.tracker.fair.Fair;
-import com.verticon.tracker.fair.FairPackage;
-import com.verticon.tracker.fair.Lot;
-import com.verticon.tracker.fair.YouthClub;
-
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import com.verticon.tracker.fair.Department;
+import com.verticon.tracker.fair.Division;
+import com.verticon.tracker.fair.Exhibit;
+import com.verticon.tracker.fair.Fair;
+import com.verticon.tracker.fair.FairPackage;
+import com.verticon.tracker.fair.Lot;
+import com.verticon.tracker.fair.People;
+import com.verticon.tracker.fair.Person;
+import com.verticon.tracker.fair.YoungPerson;
+import com.verticon.tracker.fair.YouthClub;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,7 +40,7 @@ public class FairSwitch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * The cached model package
@@ -106,12 +108,6 @@ public class FairSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FairPackage.EXHIBITOR: {
-				Exhibitor exhibitor = (Exhibitor)theEObject;
-				T result = caseExhibitor(exhibitor);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case FairPackage.EXHIBIT: {
 				Exhibit exhibit = (Exhibit)theEObject;
 				T result = caseExhibit(exhibit);
@@ -148,6 +144,25 @@ public class FairSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case FairPackage.PEOPLE: {
+				People people = (People)theEObject;
+				T result = casePeople(people);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FairPackage.PERSON: {
+				Person person = (Person)theEObject;
+				T result = casePerson(person);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FairPackage.YOUNG_PERSON: {
+				YoungPerson youngPerson = (YoungPerson)theEObject;
+				T result = caseYoungPerson(youngPerson);
+				if (result == null) result = casePerson(youngPerson);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -164,21 +179,6 @@ public class FairSwitch<T> {
 	 * @generated
 	 */
 	public T caseFair(Fair object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Exhibitor</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Exhibitor</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseExhibitor(Exhibitor object) {
 		return null;
 	}
 
@@ -269,6 +269,51 @@ public class FairSwitch<T> {
 	 * @generated
 	 */
 	public T caseLot(Lot object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>People</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>People</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePeople(People object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Person</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Person</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePerson(Person object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Young Person</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Young Person</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseYoungPerson(YoungPerson object) {
 		return null;
 	}
 

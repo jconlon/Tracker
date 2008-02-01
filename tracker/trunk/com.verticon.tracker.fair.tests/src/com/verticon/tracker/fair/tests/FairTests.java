@@ -23,7 +23,7 @@ public class FairTests extends TestSuite {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -41,6 +41,8 @@ public class FairTests extends TestSuite {
 	 */
 	public static Test suite() {
 		TestSuite suite = new FairTests("fair Tests");
+		suite.addTestSuite(PersonTest.class);
+		suite.addTestSuite(YoungPersonTest.class);
 		return suite;
 	}
 
