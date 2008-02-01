@@ -387,12 +387,12 @@ public class PersonImpl extends EObjectImpl implements Person {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setName(String newName) {
-		// TODO: implement this method to set the 'Name' attribute
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+//		// TODO: implement this method to set the 'Name' attribute
+//		// Ensure that you remove @generated or mark it @generated NOT
+//		throw new UnsupportedOperationException();
 	}
 
 	/**
