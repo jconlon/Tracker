@@ -8,6 +8,7 @@ package com.verticon.tracker.fair.validation;
 
 import com.verticon.tracker.Animal;
 
+import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YouthClub;
 
 /**
@@ -24,4 +25,6 @@ public interface ExhibitValidator {
 	boolean validateClub(YouthClub value);
 	boolean validateComments(String value);
 	boolean validateAnimal(Animal value);
+
+	boolean validateExhibitor(Person value);
 }

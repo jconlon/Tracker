@@ -50,7 +50,7 @@ public class DivisionItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -112,7 +112,7 @@ public class DivisionItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(FairPackage.Literals.DIVISION__DEPARTMENTS);
+			childrenFeatures.add(FairPackage.Literals.DIVISION__DEPARTMENT);
 		}
 		return childrenFeatures;
 	}
@@ -170,7 +170,7 @@ public class DivisionItemProvider
 			case FairPackage.DIVISION__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case FairPackage.DIVISION__DEPARTMENTS:
+			case FairPackage.DIVISION__DEPARTMENT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -190,7 +190,7 @@ public class DivisionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(FairPackage.Literals.DIVISION__DEPARTMENTS,
+				(FairPackage.Literals.DIVISION__DEPARTMENT,
 				 FairFactory.eINSTANCE.createDepartment()));
 	}
 

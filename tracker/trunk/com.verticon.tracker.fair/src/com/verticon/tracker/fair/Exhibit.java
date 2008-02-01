@@ -19,9 +19,9 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.Exhibit#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Exhibit#getNumber <em>Number</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.Exhibit#getClub <em>Club</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Exhibit#getComments <em>Comments</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Exhibit#getAnimal <em>Animal</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Exhibit#getExhibitor <em>Exhibitor</em>}</li>
  * </ul>
  * </p>
  *
@@ -35,7 +35,7 @@ public interface Exhibit extends EObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -90,32 +90,6 @@ public interface Exhibit extends EObject {
 	void setNumber(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Club</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Club</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Club</em>' reference.
-	 * @see #setClub(YouthClub)
-	 * @see com.verticon.tracker.fair.FairPackage#getExhibit_Club()
-	 * @model
-	 * @generated
-	 */
-	YouthClub getClub();
-
-	/**
-	 * Sets the value of the '{@link com.verticon.tracker.fair.Exhibit#getClub <em>Club</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Club</em>' reference.
-	 * @see #getClub()
-	 * @generated
-	 */
-	void setClub(YouthClub value);
-
-	/**
 	 * Returns the value of the '<em><b>Comments</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -166,5 +140,31 @@ public interface Exhibit extends EObject {
 	 * @generated
 	 */
 	void setAnimal(Animal value);
+
+	/**
+	 * Returns the value of the '<em><b>Exhibitor</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Exhibitor</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Exhibitor</em>' reference.
+	 * @see #setExhibitor(Person)
+	 * @see com.verticon.tracker.fair.FairPackage#getExhibit_Exhibitor()
+	 * @model required="true"
+	 * @generated
+	 */
+	Person getExhibitor();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.fair.Exhibit#getExhibitor <em>Exhibitor</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Exhibitor</em>' reference.
+	 * @see #getExhibitor()
+	 * @generated
+	 */
+	void setExhibitor(Person value);
 
 } // Exhibit

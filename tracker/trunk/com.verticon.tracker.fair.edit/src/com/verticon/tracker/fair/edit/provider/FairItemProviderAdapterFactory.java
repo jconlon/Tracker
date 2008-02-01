@@ -41,7 +41,7 @@ public class FairItemProviderAdapterFactory extends FairAdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
@@ -102,29 +102,6 @@ public class FairItemProviderAdapterFactory extends FairAdapterFactory implement
 		}
 
 		return fairItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.fair.Exhibitor} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ExhibitorItemProvider exhibitorItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.verticon.tracker.fair.Exhibitor}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createExhibitorAdapter() {
-		if (exhibitorItemProvider == null) {
-			exhibitorItemProvider = new ExhibitorItemProvider(this);
-		}
-
-		return exhibitorItemProvider;
 	}
 
 	/**
@@ -266,6 +243,75 @@ public class FairItemProviderAdapterFactory extends FairAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.fair.People} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PeopleItemProvider peopleItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.fair.People}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPeopleAdapter() {
+		if (peopleItemProvider == null) {
+			peopleItemProvider = new PeopleItemProvider(this);
+		}
+
+		return peopleItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.fair.Person} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PersonItemProvider personItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.fair.Person}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPersonAdapter() {
+		if (personItemProvider == null) {
+			personItemProvider = new PersonItemProvider(this);
+		}
+
+		return personItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.fair.YoungPerson} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected YoungPersonItemProvider youngPersonItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.fair.YoungPerson}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createYoungPersonAdapter() {
+		if (youngPersonItemProvider == null) {
+			youngPersonItemProvider = new YoungPersonItemProvider(this);
+		}
+
+		return youngPersonItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -365,13 +411,15 @@ public class FairItemProviderAdapterFactory extends FairAdapterFactory implement
 	 */
 	public void dispose() {
 		if (fairItemProvider != null) fairItemProvider.dispose();
-		if (exhibitorItemProvider != null) exhibitorItemProvider.dispose();
 		if (exhibitItemProvider != null) exhibitItemProvider.dispose();
 		if (youthClubItemProvider != null) youthClubItemProvider.dispose();
 		if (divisionItemProvider != null) divisionItemProvider.dispose();
 		if (departmentItemProvider != null) departmentItemProvider.dispose();
 		if (classItemProvider != null) classItemProvider.dispose();
 		if (lotItemProvider != null) lotItemProvider.dispose();
+		if (peopleItemProvider != null) peopleItemProvider.dispose();
+		if (personItemProvider != null) personItemProvider.dispose();
+		if (youngPersonItemProvider != null) youngPersonItemProvider.dispose();
 	}
 
 }

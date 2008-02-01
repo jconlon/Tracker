@@ -6,8 +6,8 @@
 package com.verticon.tracker.fair.edit.provider;
 
 
-import com.verticon.tracker.fair.Exhibitor;
 import com.verticon.tracker.fair.FairPackage;
+import com.verticon.tracker.fair.Person;
 
 import java.util.Collection;
 import java.util.List;
@@ -29,12 +29,12 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link com.verticon.tracker.fair.Exhibitor} object.
+ * This is the item provider adapter for a {@link com.verticon.tracker.fair.Person} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ExhibitorItemProvider
+public class PersonItemProvider
 	extends ItemProviderAdapter
 	implements	
 		IEditingDomainItemProvider,	
@@ -47,7 +47,7 @@ public class ExhibitorItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -55,7 +55,7 @@ public class ExhibitorItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExhibitorItemProvider(AdapterFactory adapterFactory) {
+	public PersonItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -72,14 +72,12 @@ public class ExhibitorItemProvider
 
 			addFirstNamePropertyDescriptor(object);
 			addLastNamePropertyDescriptor(object);
-			addExhibitsPropertyDescriptor(object);
 			addPhonePropertyDescriptor(object);
-			addParentPropertyDescriptor(object);
-			addCommentsPropertyDescriptor(object);
 			addStreetPropertyDescriptor(object);
 			addCityPropertyDescriptor(object);
 			addStatePropertyDescriptor(object);
-			addZipPropertyDescriptor(object);
+			addZipCodePropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -95,9 +93,9 @@ public class ExhibitorItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Exhibitor_firstName_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibitor_firstName_feature", "_UI_Exhibitor_type"),
-				 FairPackage.Literals.EXHIBITOR__FIRST_NAME,
+				 getString("_UI_Person_firstName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_firstName_feature", "_UI_Person_type"),
+				 FairPackage.Literals.PERSON__FIRST_NAME,
 				 true,
 				 false,
 				 false,
@@ -117,35 +115,13 @@ public class ExhibitorItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Exhibitor_lastName_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibitor_lastName_feature", "_UI_Exhibitor_type"),
-				 FairPackage.Literals.EXHIBITOR__LAST_NAME,
+				 getString("_UI_Person_lastName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_lastName_feature", "_UI_Person_type"),
+				 FairPackage.Literals.PERSON__LAST_NAME,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Exhibits feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addExhibitsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Exhibitor_exhibits_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibitor_exhibits_feature", "_UI_Exhibitor_type"),
-				 FairPackage.Literals.EXHIBITOR__EXHIBITS,
-				 true,
-				 false,
-				 true,
-				 null,
 				 null,
 				 null));
 	}
@@ -161,53 +137,9 @@ public class ExhibitorItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Exhibitor_phone_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibitor_phone_feature", "_UI_Exhibitor_type"),
-				 FairPackage.Literals.EXHIBITOR__PHONE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Parent feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addParentPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Exhibitor_parent_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibitor_parent_feature", "_UI_Exhibitor_type"),
-				 FairPackage.Literals.EXHIBITOR__PARENT,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Comments feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addCommentsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Exhibitor_comments_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibitor_comments_feature", "_UI_Exhibitor_type"),
-				 FairPackage.Literals.EXHIBITOR__COMMENTS,
+				 getString("_UI_Person_phone_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_phone_feature", "_UI_Person_type"),
+				 FairPackage.Literals.PERSON__PHONE,
 				 true,
 				 false,
 				 false,
@@ -227,9 +159,9 @@ public class ExhibitorItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Exhibitor_street_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibitor_street_feature", "_UI_Exhibitor_type"),
-				 FairPackage.Literals.EXHIBITOR__STREET,
+				 getString("_UI_Person_street_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_street_feature", "_UI_Person_type"),
+				 FairPackage.Literals.PERSON__STREET,
 				 true,
 				 false,
 				 false,
@@ -249,9 +181,9 @@ public class ExhibitorItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Exhibitor_city_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibitor_city_feature", "_UI_Exhibitor_type"),
-				 FairPackage.Literals.EXHIBITOR__CITY,
+				 getString("_UI_Person_city_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_city_feature", "_UI_Person_type"),
+				 FairPackage.Literals.PERSON__CITY,
 				 true,
 				 false,
 				 false,
@@ -271,9 +203,9 @@ public class ExhibitorItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Exhibitor_state_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibitor_state_feature", "_UI_Exhibitor_type"),
-				 FairPackage.Literals.EXHIBITOR__STATE,
+				 getString("_UI_Person_state_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_state_feature", "_UI_Person_type"),
+				 FairPackage.Literals.PERSON__STATE,
 				 true,
 				 false,
 				 false,
@@ -283,19 +215,19 @@ public class ExhibitorItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Zip feature.
+	 * This adds a property descriptor for the Zip Code feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addZipPropertyDescriptor(Object object) {
+	protected void addZipCodePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Exhibitor_zip_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibitor_zip_feature", "_UI_Exhibitor_type"),
-				 FairPackage.Literals.EXHIBITOR__ZIP,
+				 getString("_UI_Person_zipCode_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_zipCode_feature", "_UI_Person_type"),
+				 FairPackage.Literals.PERSON__ZIP_CODE,
 				 true,
 				 false,
 				 false,
@@ -305,14 +237,36 @@ public class ExhibitorItemProvider
 	}
 
 	/**
-	 * This returns Exhibitor.gif.
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Person_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_name_feature", "_UI_Person_type"),
+				 FairPackage.Literals.PERSON__NAME,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This returns Person.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Exhibitor"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Person"));
 	}
 
 	/**
@@ -323,10 +277,10 @@ public class ExhibitorItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Exhibitor)object).getFirstName();
+		String label = ((Person)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Exhibitor_type") :
-			getString("_UI_Exhibitor_type") + " " + label;
+			getString("_UI_Person_type") :
+			getString("_UI_Person_type") + " " + label;
 	}
 
 	/**
@@ -340,16 +294,15 @@ public class ExhibitorItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Exhibitor.class)) {
-			case FairPackage.EXHIBITOR__FIRST_NAME:
-			case FairPackage.EXHIBITOR__LAST_NAME:
-			case FairPackage.EXHIBITOR__PHONE:
-			case FairPackage.EXHIBITOR__PARENT:
-			case FairPackage.EXHIBITOR__COMMENTS:
-			case FairPackage.EXHIBITOR__STREET:
-			case FairPackage.EXHIBITOR__CITY:
-			case FairPackage.EXHIBITOR__STATE:
-			case FairPackage.EXHIBITOR__ZIP:
+		switch (notification.getFeatureID(Person.class)) {
+			case FairPackage.PERSON__FIRST_NAME:
+			case FairPackage.PERSON__LAST_NAME:
+			case FairPackage.PERSON__PHONE:
+			case FairPackage.PERSON__STREET:
+			case FairPackage.PERSON__CITY:
+			case FairPackage.PERSON__STATE:
+			case FairPackage.PERSON__ZIP_CODE:
+			case FairPackage.PERSON__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

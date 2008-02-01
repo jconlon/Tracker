@@ -7,6 +7,7 @@ package com.verticon.tracker.fair;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -31,7 +32,7 @@ public interface FairPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * The package name.
@@ -85,31 +86,22 @@ public interface FairPackage extends EPackage {
 	int FAIR__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Exhibitors</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Youth Club</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FAIR__EXHIBITORS = 1;
+	int FAIR__YOUTH_CLUB = 1;
 
 	/**
-	 * The feature id for the '<em><b>Clubs</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Division</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FAIR__CLUBS = 2;
-
-	/**
-	 * The feature id for the '<em><b>Divisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR__DIVISIONS = 3;
+	int FAIR__DIVISION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Premises</b></em>' reference.
@@ -118,7 +110,16 @@ public interface FairPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FAIR__PREMISES = 4;
+	int FAIR__PREMISES = 3;
+
+	/**
+	 * The feature id for the '<em><b>People</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAIR__PEOPLE = 4;
 
 	/**
 	 * The number of structural features of the '<em>Fair</em>' class.
@@ -130,115 +131,6 @@ public interface FairPackage extends EPackage {
 	int FAIR_FEATURE_COUNT = 5;
 
 	/**
-	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.ExhibitorImpl <em>Exhibitor</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.fair.impl.ExhibitorImpl
-	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getExhibitor()
-	 * @generated
-	 */
-	int EXHIBITOR = 1;
-
-	/**
-	 * The feature id for the '<em><b>First Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXHIBITOR__FIRST_NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Last Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXHIBITOR__LAST_NAME = 1;
-
-	/**
-	 * The feature id for the '<em><b>Exhibits</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXHIBITOR__EXHIBITS = 2;
-
-	/**
-	 * The feature id for the '<em><b>Phone</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXHIBITOR__PHONE = 3;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXHIBITOR__PARENT = 4;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXHIBITOR__COMMENTS = 5;
-
-	/**
-	 * The feature id for the '<em><b>Street</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXHIBITOR__STREET = 6;
-
-	/**
-	 * The feature id for the '<em><b>City</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXHIBITOR__CITY = 7;
-
-	/**
-	 * The feature id for the '<em><b>State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXHIBITOR__STATE = 8;
-
-	/**
-	 * The feature id for the '<em><b>Zip</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXHIBITOR__ZIP = 9;
-
-	/**
-	 * The number of structural features of the '<em>Exhibitor</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXHIBITOR_FEATURE_COUNT = 10;
-
-	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.ExhibitImpl <em>Exhibit</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -246,7 +138,7 @@ public interface FairPackage extends EPackage {
 	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getExhibit()
 	 * @generated
 	 */
-	int EXHIBIT = 2;
+	int EXHIBIT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -267,22 +159,13 @@ public interface FairPackage extends EPackage {
 	int EXHIBIT__NUMBER = 1;
 
 	/**
-	 * The feature id for the '<em><b>Club</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXHIBIT__CLUB = 2;
-
-	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXHIBIT__COMMENTS = 3;
+	int EXHIBIT__COMMENTS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Animal</b></em>' reference.
@@ -291,7 +174,16 @@ public interface FairPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXHIBIT__ANIMAL = 4;
+	int EXHIBIT__ANIMAL = 3;
+
+	/**
+	 * The feature id for the '<em><b>Exhibitor</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXHIBIT__EXHIBITOR = 4;
 
 	/**
 	 * The number of structural features of the '<em>Exhibit</em>' class.
@@ -310,7 +202,7 @@ public interface FairPackage extends EPackage {
 	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getYouthClub()
 	 * @generated
 	 */
-	int YOUTH_CLUB = 3;
+	int YOUTH_CLUB = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -338,7 +230,7 @@ public interface FairPackage extends EPackage {
 	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getDivision()
 	 * @generated
 	 */
-	int DIVISION = 4;
+	int DIVISION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -350,13 +242,13 @@ public interface FairPackage extends EPackage {
 	int DIVISION__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Departments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Department</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIVISION__DEPARTMENTS = 1;
+	int DIVISION__DEPARTMENT = 1;
 
 	/**
 	 * The number of structural features of the '<em>Division</em>' class.
@@ -375,7 +267,7 @@ public interface FairPackage extends EPackage {
 	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getDepartment()
 	 * @generated
 	 */
-	int DEPARTMENT = 5;
+	int DEPARTMENT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -387,13 +279,22 @@ public interface FairPackage extends EPackage {
 	int DEPARTMENT__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Classes</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Class</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPARTMENT__CLASSES = 1;
+	int DEPARTMENT__CLASS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Superintendent</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPARTMENT__SUPERINTENDENT = 2;
 
 	/**
 	 * The number of structural features of the '<em>Department</em>' class.
@@ -402,7 +303,7 @@ public interface FairPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEPARTMENT_FEATURE_COUNT = 2;
+	int DEPARTMENT_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.ClassImpl <em>Class</em>}' class.
@@ -412,7 +313,7 @@ public interface FairPackage extends EPackage {
 	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getClass_()
 	 * @generated
 	 */
-	int CLASS = 6;
+	int CLASS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -424,13 +325,22 @@ public interface FairPackage extends EPackage {
 	int CLASS__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Lots</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Lot</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__LOTS = 1;
+	int CLASS__LOT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Judge</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__JUDGE = 2;
 
 	/**
 	 * The number of structural features of the '<em>Class</em>' class.
@@ -439,7 +349,7 @@ public interface FairPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_FEATURE_COUNT = 2;
+	int CLASS_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.LotImpl <em>Lot</em>}' class.
@@ -449,7 +359,7 @@ public interface FairPackage extends EPackage {
 	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getLot()
 	 * @generated
 	 */
-	int LOT = 7;
+	int LOT = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -461,13 +371,13 @@ public interface FairPackage extends EPackage {
 	int LOT__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Exhibits</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Exhibit</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOT__EXHIBITS = 1;
+	int LOT__EXHIBIT = 1;
 
 	/**
 	 * The number of structural features of the '<em>Lot</em>' class.
@@ -477,6 +387,255 @@ public interface FairPackage extends EPackage {
 	 * @ordered
 	 */
 	int LOT_FEATURE_COUNT = 2;
+
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.PeopleImpl <em>People</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.fair.impl.PeopleImpl
+	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getPeople()
+	 * @generated
+	 */
+	int PEOPLE = 7;
+
+	/**
+	 * The feature id for the '<em><b>Person</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PEOPLE__PERSON = 0;
+
+	/**
+	 * The number of structural features of the '<em>People</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PEOPLE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.PersonImpl <em>Person</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.fair.impl.PersonImpl
+	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getPerson()
+	 * @generated
+	 */
+	int PERSON = 8;
+
+	/**
+	 * The feature id for the '<em><b>First Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__FIRST_NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Last Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__LAST_NAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Phone</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__PHONE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Street</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__STREET = 3;
+
+	/**
+	 * The feature id for the '<em><b>City</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__CITY = 4;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__STATE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Zip Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__ZIP_CODE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__NAME = 7;
+
+	/**
+	 * The number of structural features of the '<em>Person</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON_FEATURE_COUNT = 8;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.YoungPersonImpl <em>Young Person</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.fair.impl.YoungPersonImpl
+	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getYoungPerson()
+	 * @generated
+	 */
+	int YOUNG_PERSON = 9;
+
+	/**
+	 * The feature id for the '<em><b>First Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOUNG_PERSON__FIRST_NAME = PERSON__FIRST_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Last Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOUNG_PERSON__LAST_NAME = PERSON__LAST_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Phone</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOUNG_PERSON__PHONE = PERSON__PHONE;
+
+	/**
+	 * The feature id for the '<em><b>Street</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOUNG_PERSON__STREET = PERSON__STREET;
+
+	/**
+	 * The feature id for the '<em><b>City</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOUNG_PERSON__CITY = PERSON__CITY;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOUNG_PERSON__STATE = PERSON__STATE;
+
+	/**
+	 * The feature id for the '<em><b>Zip Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOUNG_PERSON__ZIP_CODE = PERSON__ZIP_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOUNG_PERSON__NAME = PERSON__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOUNG_PERSON__PARENT = PERSON_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Club</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOUNG_PERSON__CLUB = PERSON_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Young Person</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOUNG_PERSON_FEATURE_COUNT = PERSON_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '<em>Zip Code</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.String
+	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getZipCode()
+	 * @generated
+	 */
+	int ZIP_CODE = 10;
+
+	/**
+	 * The meta object id for the '<em>US Telephone Number</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.String
+	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getUSTelephoneNumber()
+	 * @generated
+	 */
+	int US_TELEPHONE_NUMBER = 11;
 
 
 	/**
@@ -501,37 +660,26 @@ public interface FairPackage extends EPackage {
 	EAttribute getFair_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Fair#getExhibitors <em>Exhibitors</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Fair#getYouthClub <em>Youth Club</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Exhibitors</em>'.
-	 * @see com.verticon.tracker.fair.Fair#getExhibitors()
+	 * @return the meta object for the containment reference list '<em>Youth Club</em>'.
+	 * @see com.verticon.tracker.fair.Fair#getYouthClub()
 	 * @see #getFair()
 	 * @generated
 	 */
-	EReference getFair_Exhibitors();
+	EReference getFair_YouthClub();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Fair#getClubs <em>Clubs</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Fair#getDivision <em>Division</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Clubs</em>'.
-	 * @see com.verticon.tracker.fair.Fair#getClubs()
+	 * @return the meta object for the containment reference list '<em>Division</em>'.
+	 * @see com.verticon.tracker.fair.Fair#getDivision()
 	 * @see #getFair()
 	 * @generated
 	 */
-	EReference getFair_Clubs();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Fair#getDivisions <em>Divisions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Divisions</em>'.
-	 * @see com.verticon.tracker.fair.Fair#getDivisions()
-	 * @see #getFair()
-	 * @generated
-	 */
-	EReference getFair_Divisions();
+	EReference getFair_Division();
 
 	/**
 	 * Returns the meta object for the reference '{@link com.verticon.tracker.fair.Fair#getPremises <em>Premises</em>}'.
@@ -545,124 +693,15 @@ public interface FairPackage extends EPackage {
 	EReference getFair_Premises();
 
 	/**
-	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Exhibitor <em>Exhibitor</em>}'.
+	 * Returns the meta object for the containment reference '{@link com.verticon.tracker.fair.Fair#getPeople <em>People</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Exhibitor</em>'.
-	 * @see com.verticon.tracker.fair.Exhibitor
+	 * @return the meta object for the containment reference '<em>People</em>'.
+	 * @see com.verticon.tracker.fair.Fair#getPeople()
+	 * @see #getFair()
 	 * @generated
 	 */
-	EClass getExhibitor();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Exhibitor#getFirstName <em>First Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>First Name</em>'.
-	 * @see com.verticon.tracker.fair.Exhibitor#getFirstName()
-	 * @see #getExhibitor()
-	 * @generated
-	 */
-	EAttribute getExhibitor_FirstName();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Exhibitor#getLastName <em>Last Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Last Name</em>'.
-	 * @see com.verticon.tracker.fair.Exhibitor#getLastName()
-	 * @see #getExhibitor()
-	 * @generated
-	 */
-	EAttribute getExhibitor_LastName();
-
-	/**
-	 * Returns the meta object for the reference list '{@link com.verticon.tracker.fair.Exhibitor#getExhibits <em>Exhibits</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Exhibits</em>'.
-	 * @see com.verticon.tracker.fair.Exhibitor#getExhibits()
-	 * @see #getExhibitor()
-	 * @generated
-	 */
-	EReference getExhibitor_Exhibits();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Exhibitor#getPhone <em>Phone</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Phone</em>'.
-	 * @see com.verticon.tracker.fair.Exhibitor#getPhone()
-	 * @see #getExhibitor()
-	 * @generated
-	 */
-	EAttribute getExhibitor_Phone();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Exhibitor#getParent <em>Parent</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Parent</em>'.
-	 * @see com.verticon.tracker.fair.Exhibitor#getParent()
-	 * @see #getExhibitor()
-	 * @generated
-	 */
-	EAttribute getExhibitor_Parent();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Exhibitor#getComments <em>Comments</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Comments</em>'.
-	 * @see com.verticon.tracker.fair.Exhibitor#getComments()
-	 * @see #getExhibitor()
-	 * @generated
-	 */
-	EAttribute getExhibitor_Comments();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Exhibitor#getStreet <em>Street</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Street</em>'.
-	 * @see com.verticon.tracker.fair.Exhibitor#getStreet()
-	 * @see #getExhibitor()
-	 * @generated
-	 */
-	EAttribute getExhibitor_Street();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Exhibitor#getCity <em>City</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>City</em>'.
-	 * @see com.verticon.tracker.fair.Exhibitor#getCity()
-	 * @see #getExhibitor()
-	 * @generated
-	 */
-	EAttribute getExhibitor_City();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Exhibitor#getState <em>State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>State</em>'.
-	 * @see com.verticon.tracker.fair.Exhibitor#getState()
-	 * @see #getExhibitor()
-	 * @generated
-	 */
-	EAttribute getExhibitor_State();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Exhibitor#getZip <em>Zip</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Zip</em>'.
-	 * @see com.verticon.tracker.fair.Exhibitor#getZip()
-	 * @see #getExhibitor()
-	 * @generated
-	 */
-	EAttribute getExhibitor_Zip();
+	EReference getFair_People();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Exhibit <em>Exhibit</em>}'.
@@ -697,17 +736,6 @@ public interface FairPackage extends EPackage {
 	EAttribute getExhibit_Number();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.verticon.tracker.fair.Exhibit#getClub <em>Club</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Club</em>'.
-	 * @see com.verticon.tracker.fair.Exhibit#getClub()
-	 * @see #getExhibit()
-	 * @generated
-	 */
-	EReference getExhibit_Club();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Exhibit#getComments <em>Comments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -728,6 +756,17 @@ public interface FairPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExhibit_Animal();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.verticon.tracker.fair.Exhibit#getExhibitor <em>Exhibitor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Exhibitor</em>'.
+	 * @see com.verticon.tracker.fair.Exhibit#getExhibitor()
+	 * @see #getExhibit()
+	 * @generated
+	 */
+	EReference getExhibit_Exhibitor();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.YouthClub <em>Youth Club</em>}'.
@@ -772,15 +811,15 @@ public interface FairPackage extends EPackage {
 	EAttribute getDivision_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Division#getDepartments <em>Departments</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Division#getDepartment <em>Department</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Departments</em>'.
-	 * @see com.verticon.tracker.fair.Division#getDepartments()
+	 * @return the meta object for the containment reference list '<em>Department</em>'.
+	 * @see com.verticon.tracker.fair.Division#getDepartment()
 	 * @see #getDivision()
 	 * @generated
 	 */
-	EReference getDivision_Departments();
+	EReference getDivision_Department();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Department <em>Department</em>}'.
@@ -804,15 +843,26 @@ public interface FairPackage extends EPackage {
 	EAttribute getDepartment_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Department#getClasses <em>Classes</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Department#getClass_ <em>Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Classes</em>'.
-	 * @see com.verticon.tracker.fair.Department#getClasses()
+	 * @return the meta object for the containment reference list '<em>Class</em>'.
+	 * @see com.verticon.tracker.fair.Department#getClass_()
 	 * @see #getDepartment()
 	 * @generated
 	 */
-	EReference getDepartment_Classes();
+	EReference getDepartment_Class();
+
+	/**
+	 * Returns the meta object for the reference list '{@link com.verticon.tracker.fair.Department#getSuperintendent <em>Superintendent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Superintendent</em>'.
+	 * @see com.verticon.tracker.fair.Department#getSuperintendent()
+	 * @see #getDepartment()
+	 * @generated
+	 */
+	EReference getDepartment_Superintendent();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Class <em>Class</em>}'.
@@ -836,15 +886,26 @@ public interface FairPackage extends EPackage {
 	EAttribute getClass_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Class#getLots <em>Lots</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Class#getLot <em>Lot</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Lots</em>'.
-	 * @see com.verticon.tracker.fair.Class#getLots()
+	 * @return the meta object for the containment reference list '<em>Lot</em>'.
+	 * @see com.verticon.tracker.fair.Class#getLot()
 	 * @see #getClass_()
 	 * @generated
 	 */
-	EReference getClass_Lots();
+	EReference getClass_Lot();
+
+	/**
+	 * Returns the meta object for the reference list '{@link com.verticon.tracker.fair.Class#getJudge <em>Judge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Judge</em>'.
+	 * @see com.verticon.tracker.fair.Class#getJudge()
+	 * @see #getClass_()
+	 * @generated
+	 */
+	EReference getClass_Judge();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Lot <em>Lot</em>}'.
@@ -868,15 +929,188 @@ public interface FairPackage extends EPackage {
 	EAttribute getLot_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Lot#getExhibits <em>Exhibits</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Lot#getExhibit <em>Exhibit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Exhibits</em>'.
-	 * @see com.verticon.tracker.fair.Lot#getExhibits()
+	 * @return the meta object for the containment reference list '<em>Exhibit</em>'.
+	 * @see com.verticon.tracker.fair.Lot#getExhibit()
 	 * @see #getLot()
 	 * @generated
 	 */
-	EReference getLot_Exhibits();
+	EReference getLot_Exhibit();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.fair.People <em>People</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>People</em>'.
+	 * @see com.verticon.tracker.fair.People
+	 * @generated
+	 */
+	EClass getPeople();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.People#getPerson <em>Person</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Person</em>'.
+	 * @see com.verticon.tracker.fair.People#getPerson()
+	 * @see #getPeople()
+	 * @generated
+	 */
+	EReference getPeople_Person();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Person <em>Person</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Person</em>'.
+	 * @see com.verticon.tracker.fair.Person
+	 * @generated
+	 */
+	EClass getPerson();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Person#getFirstName <em>First Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>First Name</em>'.
+	 * @see com.verticon.tracker.fair.Person#getFirstName()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_FirstName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Person#getLastName <em>Last Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Last Name</em>'.
+	 * @see com.verticon.tracker.fair.Person#getLastName()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_LastName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Person#getPhone <em>Phone</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Phone</em>'.
+	 * @see com.verticon.tracker.fair.Person#getPhone()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_Phone();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Person#getStreet <em>Street</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Street</em>'.
+	 * @see com.verticon.tracker.fair.Person#getStreet()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_Street();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Person#getCity <em>City</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>City</em>'.
+	 * @see com.verticon.tracker.fair.Person#getCity()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_City();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Person#getState <em>State</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>State</em>'.
+	 * @see com.verticon.tracker.fair.Person#getState()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_State();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Person#getZipCode <em>Zip Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Zip Code</em>'.
+	 * @see com.verticon.tracker.fair.Person#getZipCode()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_ZipCode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Person#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see com.verticon.tracker.fair.Person#getName()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_Name();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.fair.YoungPerson <em>Young Person</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Young Person</em>'.
+	 * @see com.verticon.tracker.fair.YoungPerson
+	 * @generated
+	 */
+	EClass getYoungPerson();
+
+	/**
+	 * Returns the meta object for the reference list '{@link com.verticon.tracker.fair.YoungPerson#getParent <em>Parent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Parent</em>'.
+	 * @see com.verticon.tracker.fair.YoungPerson#getParent()
+	 * @see #getYoungPerson()
+	 * @generated
+	 */
+	EReference getYoungPerson_Parent();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.verticon.tracker.fair.YoungPerson#getClub <em>Club</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Club</em>'.
+	 * @see com.verticon.tracker.fair.YoungPerson#getClub()
+	 * @see #getYoungPerson()
+	 * @generated
+	 */
+	EReference getYoungPerson_Club();
+
+	/**
+	 * Returns the meta object for data type '{@link java.lang.String <em>Zip Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Zip Code</em>'.
+	 * @see java.lang.String
+	 * @model instanceClass="java.lang.String"
+	 * @generated
+	 */
+	EDataType getZipCode();
+
+	/**
+	 * Returns the meta object for data type '{@link java.lang.String <em>US Telephone Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>US Telephone Number</em>'.
+	 * @see java.lang.String
+	 * @model instanceClass="java.lang.String"
+	 * @generated
+	 */
+	EDataType getUSTelephoneNumber();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -919,28 +1153,20 @@ public interface FairPackage extends EPackage {
 		EAttribute FAIR__NAME = eINSTANCE.getFair_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Exhibitors</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Youth Club</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FAIR__EXHIBITORS = eINSTANCE.getFair_Exhibitors();
+		EReference FAIR__YOUTH_CLUB = eINSTANCE.getFair_YouthClub();
 
 		/**
-		 * The meta object literal for the '<em><b>Clubs</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Division</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FAIR__CLUBS = eINSTANCE.getFair_Clubs();
-
-		/**
-		 * The meta object literal for the '<em><b>Divisions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FAIR__DIVISIONS = eINSTANCE.getFair_Divisions();
+		EReference FAIR__DIVISION = eINSTANCE.getFair_Division();
 
 		/**
 		 * The meta object literal for the '<em><b>Premises</b></em>' reference feature.
@@ -951,94 +1177,12 @@ public interface FairPackage extends EPackage {
 		EReference FAIR__PREMISES = eINSTANCE.getFair_Premises();
 
 		/**
-		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.ExhibitorImpl <em>Exhibitor</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.verticon.tracker.fair.impl.ExhibitorImpl
-		 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getExhibitor()
-		 * @generated
-		 */
-		EClass EXHIBITOR = eINSTANCE.getExhibitor();
-
-		/**
-		 * The meta object literal for the '<em><b>First Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>People</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute EXHIBITOR__FIRST_NAME = eINSTANCE.getExhibitor_FirstName();
-
-		/**
-		 * The meta object literal for the '<em><b>Last Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXHIBITOR__LAST_NAME = eINSTANCE.getExhibitor_LastName();
-
-		/**
-		 * The meta object literal for the '<em><b>Exhibits</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXHIBITOR__EXHIBITS = eINSTANCE.getExhibitor_Exhibits();
-
-		/**
-		 * The meta object literal for the '<em><b>Phone</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXHIBITOR__PHONE = eINSTANCE.getExhibitor_Phone();
-
-		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXHIBITOR__PARENT = eINSTANCE.getExhibitor_Parent();
-
-		/**
-		 * The meta object literal for the '<em><b>Comments</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXHIBITOR__COMMENTS = eINSTANCE.getExhibitor_Comments();
-
-		/**
-		 * The meta object literal for the '<em><b>Street</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXHIBITOR__STREET = eINSTANCE.getExhibitor_Street();
-
-		/**
-		 * The meta object literal for the '<em><b>City</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXHIBITOR__CITY = eINSTANCE.getExhibitor_City();
-
-		/**
-		 * The meta object literal for the '<em><b>State</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXHIBITOR__STATE = eINSTANCE.getExhibitor_State();
-
-		/**
-		 * The meta object literal for the '<em><b>Zip</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXHIBITOR__ZIP = eINSTANCE.getExhibitor_Zip();
+		EReference FAIR__PEOPLE = eINSTANCE.getFair_People();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.ExhibitImpl <em>Exhibit</em>}' class.
@@ -1067,14 +1211,6 @@ public interface FairPackage extends EPackage {
 		EAttribute EXHIBIT__NUMBER = eINSTANCE.getExhibit_Number();
 
 		/**
-		 * The meta object literal for the '<em><b>Club</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXHIBIT__CLUB = eINSTANCE.getExhibit_Club();
-
-		/**
 		 * The meta object literal for the '<em><b>Comments</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1089,6 +1225,14 @@ public interface FairPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXHIBIT__ANIMAL = eINSTANCE.getExhibit_Animal();
+
+		/**
+		 * The meta object literal for the '<em><b>Exhibitor</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXHIBIT__EXHIBITOR = eINSTANCE.getExhibit_Exhibitor();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.YouthClubImpl <em>Youth Club</em>}' class.
@@ -1127,12 +1271,12 @@ public interface FairPackage extends EPackage {
 		EAttribute DIVISION__NAME = eINSTANCE.getDivision_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Departments</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Department</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DIVISION__DEPARTMENTS = eINSTANCE.getDivision_Departments();
+		EReference DIVISION__DEPARTMENT = eINSTANCE.getDivision_Department();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.DepartmentImpl <em>Department</em>}' class.
@@ -1153,12 +1297,20 @@ public interface FairPackage extends EPackage {
 		EAttribute DEPARTMENT__NAME = eINSTANCE.getDepartment_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Classes</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Class</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DEPARTMENT__CLASSES = eINSTANCE.getDepartment_Classes();
+		EReference DEPARTMENT__CLASS = eINSTANCE.getDepartment_Class();
+
+		/**
+		 * The meta object literal for the '<em><b>Superintendent</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEPARTMENT__SUPERINTENDENT = eINSTANCE.getDepartment_Superintendent();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.ClassImpl <em>Class</em>}' class.
@@ -1179,12 +1331,20 @@ public interface FairPackage extends EPackage {
 		EAttribute CLASS__NAME = eINSTANCE.getClass_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Lots</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Lot</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS__LOTS = eINSTANCE.getClass_Lots();
+		EReference CLASS__LOT = eINSTANCE.getClass_Lot();
+
+		/**
+		 * The meta object literal for the '<em><b>Judge</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS__JUDGE = eINSTANCE.getClass_Judge();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.LotImpl <em>Lot</em>}' class.
@@ -1205,12 +1365,150 @@ public interface FairPackage extends EPackage {
 		EAttribute LOT__NAME = eINSTANCE.getLot_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Exhibits</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Exhibit</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LOT__EXHIBITS = eINSTANCE.getLot_Exhibits();
+		EReference LOT__EXHIBIT = eINSTANCE.getLot_Exhibit();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.PeopleImpl <em>People</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.fair.impl.PeopleImpl
+		 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getPeople()
+		 * @generated
+		 */
+		EClass PEOPLE = eINSTANCE.getPeople();
+
+		/**
+		 * The meta object literal for the '<em><b>Person</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PEOPLE__PERSON = eINSTANCE.getPeople_Person();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.PersonImpl <em>Person</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.fair.impl.PersonImpl
+		 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getPerson()
+		 * @generated
+		 */
+		EClass PERSON = eINSTANCE.getPerson();
+
+		/**
+		 * The meta object literal for the '<em><b>First Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__FIRST_NAME = eINSTANCE.getPerson_FirstName();
+
+		/**
+		 * The meta object literal for the '<em><b>Last Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__LAST_NAME = eINSTANCE.getPerson_LastName();
+
+		/**
+		 * The meta object literal for the '<em><b>Phone</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__PHONE = eINSTANCE.getPerson_Phone();
+
+		/**
+		 * The meta object literal for the '<em><b>Street</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__STREET = eINSTANCE.getPerson_Street();
+
+		/**
+		 * The meta object literal for the '<em><b>City</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__CITY = eINSTANCE.getPerson_City();
+
+		/**
+		 * The meta object literal for the '<em><b>State</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__STATE = eINSTANCE.getPerson_State();
+
+		/**
+		 * The meta object literal for the '<em><b>Zip Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__ZIP_CODE = eINSTANCE.getPerson_ZipCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__NAME = eINSTANCE.getPerson_Name();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.YoungPersonImpl <em>Young Person</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.fair.impl.YoungPersonImpl
+		 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getYoungPerson()
+		 * @generated
+		 */
+		EClass YOUNG_PERSON = eINSTANCE.getYoungPerson();
+
+		/**
+		 * The meta object literal for the '<em><b>Parent</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference YOUNG_PERSON__PARENT = eINSTANCE.getYoungPerson_Parent();
+
+		/**
+		 * The meta object literal for the '<em><b>Club</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference YOUNG_PERSON__CLUB = eINSTANCE.getYoungPerson_Club();
+
+		/**
+		 * The meta object literal for the '<em>Zip Code</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.String
+		 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getZipCode()
+		 * @generated
+		 */
+		EDataType ZIP_CODE = eINSTANCE.getZipCode();
+
+		/**
+		 * The meta object literal for the '<em>US Telephone Number</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.String
+		 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getUSTelephoneNumber()
+		 * @generated
+		 */
+		EDataType US_TELEPHONE_NUMBER = eINSTANCE.getUSTelephoneNumber();
 
 	}
 

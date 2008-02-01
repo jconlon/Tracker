@@ -34,7 +34,7 @@ public class YouthClubImpl extends EObjectImpl implements YouthClub {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.

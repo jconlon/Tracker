@@ -20,5 +20,7 @@ public interface LotValidator {
 	boolean validate();
 
 	boolean validateName(String value);
+	boolean validateExhibit(EList<Exhibit> value);
+
 	boolean validateExhibits(EList<Exhibit> value);
 }

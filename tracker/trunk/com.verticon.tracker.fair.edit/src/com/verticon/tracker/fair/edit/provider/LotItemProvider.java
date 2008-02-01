@@ -49,7 +49,7 @@ public class LotItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -111,7 +111,7 @@ public class LotItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(FairPackage.Literals.LOT__EXHIBITS);
+			childrenFeatures.add(FairPackage.Literals.LOT__EXHIBIT);
 		}
 		return childrenFeatures;
 	}
@@ -169,7 +169,7 @@ public class LotItemProvider
 			case FairPackage.LOT__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case FairPackage.LOT__EXHIBITS:
+			case FairPackage.LOT__EXHIBIT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -189,7 +189,7 @@ public class LotItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(FairPackage.Literals.LOT__EXHIBITS,
+				(FairPackage.Literals.LOT__EXHIBIT,
 				 FairFactory.eINSTANCE.createExhibit()));
 	}
 

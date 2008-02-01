@@ -6,13 +6,12 @@
  */
 package com.verticon.tracker.fair.validation;
 
-import com.verticon.tracker.Premises;
-
-import com.verticon.tracker.fair.Division;
-import com.verticon.tracker.fair.Exhibitor;
-import com.verticon.tracker.fair.YouthClub;
-
 import org.eclipse.emf.common.util.EList;
+
+import com.verticon.tracker.Premises;
+import com.verticon.tracker.fair.Division;
+import com.verticon.tracker.fair.People;
+import com.verticon.tracker.fair.YouthClub;
 
 /**
  * A sample validator interface for {@link com.verticon.tracker.fair.Fair}.
@@ -24,8 +23,13 @@ public interface FairValidator {
 	boolean validate();
 
 	boolean validateName(String value);
-	boolean validateExhibitors(EList<Exhibitor> value);
+	boolean validateYouthClub(EList<YouthClub> value);
+
+	boolean validateDivision(EList<Division> value);
+
 	boolean validateClubs(EList<YouthClub> value);
 	boolean validateDivisions(EList<Division> value);
 	boolean validatePremises(Premises value);
+
+	boolean validatePeople(People value);
 }

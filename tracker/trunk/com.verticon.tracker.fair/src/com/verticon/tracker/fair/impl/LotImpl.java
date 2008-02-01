@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.impl.LotImpl#getName <em>Name</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.LotImpl#getExhibits <em>Exhibits</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.LotImpl#getExhibit <em>Exhibit</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,7 +45,7 @@ public class LotImpl extends EObjectImpl implements Lot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -68,14 +68,14 @@ public class LotImpl extends EObjectImpl implements Lot {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getExhibits() <em>Exhibits</em>}' containment reference list.
+	 * The cached value of the '{@link #getExhibit() <em>Exhibit</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExhibits()
+	 * @see #getExhibit()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Exhibit> exhibits;
+	protected EList<Exhibit> exhibit;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,11 +122,11 @@ public class LotImpl extends EObjectImpl implements Lot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Exhibit> getExhibits() {
-		if (exhibits == null) {
-			exhibits = new EObjectContainmentEList<Exhibit>(Exhibit.class, this, FairPackage.LOT__EXHIBITS);
+	public EList<Exhibit> getExhibit() {
+		if (exhibit == null) {
+			exhibit = new EObjectContainmentEList<Exhibit>(Exhibit.class, this, FairPackage.LOT__EXHIBIT);
 		}
-		return exhibits;
+		return exhibit;
 	}
 
 	/**
@@ -137,8 +137,8 @@ public class LotImpl extends EObjectImpl implements Lot {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FairPackage.LOT__EXHIBITS:
-				return ((InternalEList<?>)getExhibits()).basicRemove(otherEnd, msgs);
+			case FairPackage.LOT__EXHIBIT:
+				return ((InternalEList<?>)getExhibit()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -153,8 +153,8 @@ public class LotImpl extends EObjectImpl implements Lot {
 		switch (featureID) {
 			case FairPackage.LOT__NAME:
 				return getName();
-			case FairPackage.LOT__EXHIBITS:
-				return getExhibits();
+			case FairPackage.LOT__EXHIBIT:
+				return getExhibit();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -171,9 +171,9 @@ public class LotImpl extends EObjectImpl implements Lot {
 			case FairPackage.LOT__NAME:
 				setName((String)newValue);
 				return;
-			case FairPackage.LOT__EXHIBITS:
-				getExhibits().clear();
-				getExhibits().addAll((Collection<? extends Exhibit>)newValue);
+			case FairPackage.LOT__EXHIBIT:
+				getExhibit().clear();
+				getExhibit().addAll((Collection<? extends Exhibit>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -190,8 +190,8 @@ public class LotImpl extends EObjectImpl implements Lot {
 			case FairPackage.LOT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case FairPackage.LOT__EXHIBITS:
-				getExhibits().clear();
+			case FairPackage.LOT__EXHIBIT:
+				getExhibit().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -207,8 +207,8 @@ public class LotImpl extends EObjectImpl implements Lot {
 		switch (featureID) {
 			case FairPackage.LOT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case FairPackage.LOT__EXHIBITS:
-				return exhibits != null && !exhibits.isEmpty();
+			case FairPackage.LOT__EXHIBIT:
+				return exhibit != null && !exhibit.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

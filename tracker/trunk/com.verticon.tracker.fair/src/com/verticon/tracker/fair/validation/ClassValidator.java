@@ -8,6 +8,7 @@ package com.verticon.tracker.fair.validation;
 
 import com.verticon.tracker.fair.Lot;
 
+import com.verticon.tracker.fair.Person;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -20,5 +21,9 @@ public interface ClassValidator {
 	boolean validate();
 
 	boolean validateName(String value);
+	boolean validateLot(EList<Lot> value);
+
 	boolean validateLots(EList<Lot> value);
+
+	boolean validateJudge(EList<Person> value);
 }
