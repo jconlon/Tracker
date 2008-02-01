@@ -231,7 +231,7 @@ public interface Person extends EObject {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see com.verticon.tracker.fair.FairPackage#getPerson_Name()
-	 * @model id="true" required="true" derived="true"
+	 * @model id="true" required="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	String getName();
