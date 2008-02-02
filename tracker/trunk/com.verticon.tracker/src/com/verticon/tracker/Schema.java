@@ -5,6 +5,7 @@
  */
 package com.verticon.tracker;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -15,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.verticon.tracker.Schema#getEventSchema <em>Event Schema</em>}</li>
+ *   <li>{@link com.verticon.tracker.Schema#getEventSchemas <em>Event Schemas</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,29 +33,19 @@ public interface Schema extends EObject {
 	String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
 	/**
-	 * Returns the value of the '<em><b>Event Schema</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Event Schemas</b></em>' containment reference list.
+	 * The list contents are of type {@link com.verticon.tracker.EventSchema}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Event Schema</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Event Schemas</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Event Schema</em>' containment reference.
-	 * @see #setEventSchema(EventSchema)
-	 * @see com.verticon.tracker.TrackerPackage#getSchema_EventSchema()
+	 * @return the value of the '<em>Event Schemas</em>' containment reference list.
+	 * @see com.verticon.tracker.TrackerPackage#getSchema_EventSchemas()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EventSchema getEventSchema();
-
-	/**
-	 * Sets the value of the '{@link com.verticon.tracker.Schema#getEventSchema <em>Event Schema</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Event Schema</em>' containment reference.
-	 * @see #getEventSchema()
-	 * @generated
-	 */
-	void setEventSchema(EventSchema value);
+	EList<EventSchema> getEventSchemas();
 
 } // Schema

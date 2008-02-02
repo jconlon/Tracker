@@ -9,14 +9,18 @@ import com.verticon.tracker.EventSchema;
 import com.verticon.tracker.Schema;
 import com.verticon.tracker.TrackerPackage;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +29,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.verticon.tracker.impl.SchemaImpl#getEventSchema <em>Event Schema</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.SchemaImpl#getEventSchemas <em>Event Schemas</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,14 +44,14 @@ public class SchemaImpl extends EObjectImpl implements Schema {
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
 	/**
-	 * The cached value of the '{@link #getEventSchema() <em>Event Schema</em>}' containment reference.
+	 * The cached value of the '{@link #getEventSchemas() <em>Event Schemas</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEventSchema()
+	 * @see #getEventSchemas()
 	 * @generated
 	 * @ordered
 	 */
-	protected EventSchema eventSchema;
+	protected EList<EventSchema> eventSchemas;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -73,42 +77,11 @@ public class SchemaImpl extends EObjectImpl implements Schema {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EventSchema getEventSchema() {
-		return eventSchema;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetEventSchema(EventSchema newEventSchema, NotificationChain msgs) {
-		EventSchema oldEventSchema = eventSchema;
-		eventSchema = newEventSchema;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackerPackage.SCHEMA__EVENT_SCHEMA, oldEventSchema, newEventSchema);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<EventSchema> getEventSchemas() {
+		if (eventSchemas == null) {
+			eventSchemas = new EObjectContainmentEList<EventSchema>(EventSchema.class, this, TrackerPackage.SCHEMA__EVENT_SCHEMAS);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEventSchema(EventSchema newEventSchema) {
-		if (newEventSchema != eventSchema) {
-			NotificationChain msgs = null;
-			if (eventSchema != null)
-				msgs = ((InternalEObject)eventSchema).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.SCHEMA__EVENT_SCHEMA, null, msgs);
-			if (newEventSchema != null)
-				msgs = ((InternalEObject)newEventSchema).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.SCHEMA__EVENT_SCHEMA, null, msgs);
-			msgs = basicSetEventSchema(newEventSchema, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.SCHEMA__EVENT_SCHEMA, newEventSchema, newEventSchema));
+		return eventSchemas;
 	}
 
 	/**
@@ -119,8 +92,8 @@ public class SchemaImpl extends EObjectImpl implements Schema {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TrackerPackage.SCHEMA__EVENT_SCHEMA:
-				return basicSetEventSchema(null, msgs);
+			case TrackerPackage.SCHEMA__EVENT_SCHEMAS:
+				return ((InternalEList<?>)getEventSchemas()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -133,8 +106,8 @@ public class SchemaImpl extends EObjectImpl implements Schema {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TrackerPackage.SCHEMA__EVENT_SCHEMA:
-				return getEventSchema();
+			case TrackerPackage.SCHEMA__EVENT_SCHEMAS:
+				return getEventSchemas();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -144,11 +117,13 @@ public class SchemaImpl extends EObjectImpl implements Schema {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TrackerPackage.SCHEMA__EVENT_SCHEMA:
-				setEventSchema((EventSchema)newValue);
+			case TrackerPackage.SCHEMA__EVENT_SCHEMAS:
+				getEventSchemas().clear();
+				getEventSchemas().addAll((Collection<? extends EventSchema>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -162,8 +137,8 @@ public class SchemaImpl extends EObjectImpl implements Schema {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TrackerPackage.SCHEMA__EVENT_SCHEMA:
-				setEventSchema((EventSchema)null);
+			case TrackerPackage.SCHEMA__EVENT_SCHEMAS:
+				getEventSchemas().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -177,8 +152,8 @@ public class SchemaImpl extends EObjectImpl implements Schema {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TrackerPackage.SCHEMA__EVENT_SCHEMA:
-				return eventSchema != null;
+			case TrackerPackage.SCHEMA__EVENT_SCHEMAS:
+				return eventSchemas != null && !eventSchemas.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

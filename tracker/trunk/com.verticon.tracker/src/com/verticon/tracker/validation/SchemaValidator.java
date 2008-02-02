@@ -7,6 +7,7 @@
 package com.verticon.tracker.validation;
 
 import com.verticon.tracker.EventSchema;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * A sample validator interface for {@link com.verticon.tracker.Schema}.
@@ -16,6 +17,8 @@ import com.verticon.tracker.EventSchema;
  */
 public interface SchemaValidator {
 	boolean validate();
+
+	boolean validateEventSchemas(EList<EventSchema> value);
 
 	boolean validateEventSchema(EventSchema value);
 }

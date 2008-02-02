@@ -393,6 +393,16 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 /**
 	 * <!-- begin-user-doc -->
+	 * Id is an ID, it is volatile=true, transient=false, settable=true 
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void setId(String newId) {
+		//NOOP
+	}
+
+/**
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -643,6 +653,9 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				getTags().clear();
 				getTags().addAll((Collection<? extends Tag>)newValue);
 				return;
+			case TrackerPackage.ANIMAL__ID:
+				setId((String)newValue);
+				return;
 			case TrackerPackage.ANIMAL__COMMENTS:
 				setComments((String)newValue);
 				return;
@@ -672,6 +685,9 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return;
 			case TrackerPackage.ANIMAL__TAGS:
 				getTags().clear();
+				return;
+			case TrackerPackage.ANIMAL__ID:
+				setId(ID_EDEFAULT);
 				return;
 			case TrackerPackage.ANIMAL__COMMENTS:
 				setComments(COMMENTS_EDEFAULT);

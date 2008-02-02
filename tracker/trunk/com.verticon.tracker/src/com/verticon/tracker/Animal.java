@@ -207,11 +207,22 @@ public interface Animal extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see #setId(String)
 	 * @see com.verticon.tracker.TrackerPackage#getAnimal_Id()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @model id="true" required="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	String getId();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.Animal#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
+	void setId(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Comments</b></em>' attribute.

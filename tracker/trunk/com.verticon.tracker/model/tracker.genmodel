@@ -539,7 +539,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//EventAttributeSchema/description"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Schema">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Schema/eventSchema"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Schema/eventSchemas"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
