@@ -4199,13 +4199,13 @@ public interface TrackerPackage extends EPackage {
 	int SCHEMA = 43;
 
 	/**
-	 * The feature id for the '<em><b>Event Schema</b></em>' containment reference.
+	 * The feature id for the '<em><b>Event Schemas</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEMA__EVENT_SCHEMA = 0;
+	int SCHEMA__EVENT_SCHEMAS = 0;
 
 	/**
 	 * The number of structural features of the '<em>Schema</em>' class.
@@ -5451,15 +5451,15 @@ public interface TrackerPackage extends EPackage {
 	EClass getSchema();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.verticon.tracker.Schema#getEventSchema <em>Event Schema</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.Schema#getEventSchemas <em>Event Schemas</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Event Schema</em>'.
-	 * @see com.verticon.tracker.Schema#getEventSchema()
+	 * @return the meta object for the containment reference list '<em>Event Schemas</em>'.
+	 * @see com.verticon.tracker.Schema#getEventSchemas()
 	 * @see #getSchema()
 	 * @generated
 	 */
-	EReference getSchema_EventSchema();
+	EReference getSchema_EventSchemas();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Premises <em>Premises</em>}'.
@@ -6841,12 +6841,12 @@ public interface TrackerPackage extends EPackage {
 		EClass SCHEMA = eINSTANCE.getSchema();
 
 		/**
-		 * The meta object literal for the '<em><b>Event Schema</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Event Schemas</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SCHEMA__EVENT_SCHEMA = eINSTANCE.getSchema_EventSchema();
+		EReference SCHEMA__EVENT_SCHEMAS = eINSTANCE.getSchema_EventSchemas();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.PremisesImpl <em>Premises</em>}' class.

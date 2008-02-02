@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_smKWUDo3Edyw6--mXqZ7vg" activeDiagram="_smKWUTo3Edyw6--mXqZ7vg">
   <model href="tracker.ecore#/"/>
-  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="1135,0">
+  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="770,275">
     <property xmi:id="_smKWUjo3Edyw6--mXqZ7vg" key="pageFormatName" value="A2"/>
     <property xmi:id="_smKWUzo3Edyw6--mXqZ7vg" key="diagramWidth" value="1680"/>
     <property xmi:id="_smKWVDo3Edyw6--mXqZ7vg" key="diagramHeight" value="2376"/>
@@ -1612,7 +1612,7 @@
       <waypoints>[0, -76, 151, 165]</waypoints>
       <waypoints>[-151, -76, 0, 165]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_smj-8jo3Edyw6--mXqZ7vg" position="1671,395" size="79,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_smj-8jo3Edyw6--mXqZ7vg" position="1718,334" size="79,-1">
       <anchorage xmi:id="_smj-8zo3Edyw6--mXqZ7vg" graphEdge="_smkmADo3Edyw6--mXqZ7vg _LxLD8KjdEdyC4LDVBJtEEQ"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smj-9Do3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//Sighting"/>
@@ -3251,7 +3251,7 @@
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_n_BIANAUEdyytJJF15-OEw" anchor="_PkWv8NAUEdyytJJF15-OEw _mGyaUM-AEdyJvPuWVF-V7w">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_n_BIAdAUEdyytJJF15-OEw" presentation="default">
-        <element href="tracker.ecore#//Schema/eventSchema"/>
+        <element href="tracker.ecore#//Schema/eventSchemas"/>
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_n_BIAtAUEdyytJJF15-OEw" id="nameLabel" uDistance="20" vDistance="20"/>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_n_BIA9AUEdyytJJF15-OEw" id="cardinalityLabel" uDistance="20" vDistance="-20"/>

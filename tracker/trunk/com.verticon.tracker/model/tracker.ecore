@@ -29,7 +29,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="speciesCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+        volatile="true" derived="true" iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastEventDateTime" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate" changeable="false"
@@ -601,7 +601,7 @@
     <eLiterals name="Boolean" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Schema">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eventSchema" eType="#//EventSchema"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eventSchemas" upperBound="-1"
+        eType="#//EventSchema" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

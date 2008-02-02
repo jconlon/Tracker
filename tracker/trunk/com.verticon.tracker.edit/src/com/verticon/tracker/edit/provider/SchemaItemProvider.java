@@ -87,7 +87,7 @@ public class SchemaItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TrackerPackage.Literals.SCHEMA__EVENT_SCHEMA);
+			childrenFeatures.add(TrackerPackage.Literals.SCHEMA__EVENT_SCHEMAS);
 		}
 		return childrenFeatures;
 	}
@@ -139,7 +139,7 @@ public class SchemaItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Schema.class)) {
-			case TrackerPackage.SCHEMA__EVENT_SCHEMA:
+			case TrackerPackage.SCHEMA__EVENT_SCHEMAS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -159,7 +159,7 @@ public class SchemaItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TrackerPackage.Literals.SCHEMA__EVENT_SCHEMA,
+				(TrackerPackage.Literals.SCHEMA__EVENT_SCHEMAS,
 				 TrackerFactory.eINSTANCE.createEventSchema()));
 	}
 
