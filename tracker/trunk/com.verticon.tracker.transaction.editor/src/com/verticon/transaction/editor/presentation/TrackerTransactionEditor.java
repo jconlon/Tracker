@@ -153,11 +153,11 @@ import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TrackerEditor
+public class TrackerTransactionEditor
 	extends MultiPageEditorPart
 	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
 	
-	private static final String CONSOLE = TrackerEditor.class.getSimpleName();
+	private static final String CONSOLE = TrackerTransactionEditor.class.getSimpleName();
 	
 	/**
 	 * This keeps track of the editing domain that is used to track all changes to the model.
@@ -276,18 +276,18 @@ public class TrackerEditor
 			public void partActivated(IWorkbenchPart p) {
 				if (p instanceof ContentOutline) {
 					if (((ContentOutline)p).getCurrentPage() == contentOutlinePage) {
-						getActionBarContributor().setActiveEditor(TrackerEditor.this);
+						getActionBarContributor().setActiveEditor(TrackerTransactionEditor.this);
 
 						setCurrentViewer(contentOutlineViewer);
 					}
 				}
 				else if (p instanceof PropertySheet) {
 					if (((PropertySheet)p).getCurrentPage() == propertySheetPage) {
-						getActionBarContributor().setActiveEditor(TrackerEditor.this);
+						getActionBarContributor().setActiveEditor(TrackerTransactionEditor.this);
 						handleActivate();
 					}
 				}
-				else if (p == TrackerEditor.this) {
+				else if (p == TrackerTransactionEditor.this) {
 					handleActivate();
 				}
 			}
@@ -378,7 +378,6 @@ public class TrackerEditor
 	 * Handles activation of the editor or it's associated views.
 	 */
 	protected void handleActivate() {
-		setCurrentViewer(selectionViewer);
 		
 		// Recompute the read only state.
 		//
@@ -395,8 +394,8 @@ public class TrackerEditor
 			
 			if (removedResources.contains(res)) {
 				if (handleDirtyConflict()) {
-					getSite().getPage().closeEditor(TrackerEditor.this, false);
-					TrackerEditor.this.dispose();
+					getSite().getPage().closeEditor(TrackerTransactionEditor.this, false);
+					TrackerTransactionEditor.this.dispose();
 				}
 			} else if (movedResources.containsKey(res)) {
 				if (savedResources.contains(res)) {
@@ -433,8 +432,8 @@ public class TrackerEditor
 					getSite().getShell().getDisplay().asyncExec
 						(new Runnable() {
 							 public void run() {
-								 getSite().getPage().closeEditor(TrackerEditor.this, false);
-								 TrackerEditor.this.dispose();
+								 getSite().getPage().closeEditor(TrackerTransactionEditor.this, false);
+								 TrackerTransactionEditor.this.dispose();
 							 }
 						 });
 				} else {
@@ -534,7 +533,7 @@ public class TrackerEditor
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public TrackerEditor() {
+	public TrackerTransactionEditor() {
 		super();
 
 		// Create an adapter factory that yields item providers.
@@ -784,7 +783,7 @@ public class TrackerEditor
 	protected void createSelectionTreeViewer(String pageName){
 
 		ViewerPane viewerPane =
-			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+			new ViewerPane(getSite().getPage(), TrackerTransactionEditor.this) {
 				public Viewer createViewer(Composite composite) {
 					Tree tree = new Tree(composite, SWT.MULTI);
 					TreeViewer newTreeViewer = new TreeViewer(tree);
@@ -827,7 +826,7 @@ public class TrackerEditor
 	 */
 	private void createEventsTableViewer(String tableName) {
 		ViewerPane viewerPane =
-			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+			new ViewerPane(getSite().getPage(), TrackerTransactionEditor.this) {
 			public Viewer createViewer(Composite composite) {
 				return new TableViewer(composite);
 			}
@@ -963,8 +962,17 @@ public class TrackerEditor
 					}
 
 					@Override
-					public void notifyChanged(Notification notification) {
-						// Do nothing
+					public void notifyChanged(Notification notification)
+					{
+						switch (notification.getEventType())
+						{
+						case Notification.ADD:
+						case Notification.ADD_MANY:
+							if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
+								return;
+							}
+						}
+						super.notifyChanged(notification);
 					}
 				}
 		);
@@ -1201,8 +1209,8 @@ public class TrackerEditor
 			propertySheetPage =
 				new ExtendedPropertySheetPage(editingDomain) {
 					public void setSelectionToViewer(List<?> selection) {
-						TrackerEditor.this.setSelectionToViewer(selection);
-						TrackerEditor.this.setFocus();
+						TrackerTransactionEditor.this.setSelectionToViewer(selection);
+						TrackerTransactionEditor.this.setFocus();
 					}
 
 					public void setActionBars(IActionBars actionBars) {
