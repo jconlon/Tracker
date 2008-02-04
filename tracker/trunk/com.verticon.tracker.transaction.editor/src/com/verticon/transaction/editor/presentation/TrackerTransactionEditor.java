@@ -54,9 +54,7 @@ import org.eclipse.emf.edit.ui.dnd.EditingDomainViewerDropAdapter;
 import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
 import org.eclipse.emf.edit.ui.dnd.ViewerDragAdapter;
 import org.eclipse.emf.edit.ui.provider.NotifyChangedToViewerRefresh;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider.ViewerRefresh;
 import org.eclipse.emf.transaction.ResourceSetListener;
-import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.ui.provider.TransactionalAdapterFactoryContentProvider;
 import org.eclipse.emf.transaction.ui.provider.TransactionalAdapterFactoryLabelProvider;
@@ -73,7 +71,6 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -81,7 +78,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
-import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -93,10 +89,7 @@ import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
@@ -117,11 +110,12 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
+import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
-import com.verticon.tracker.editor.presentation.EventSorter;
+import com.verticon.tracker.editor.presentation.TrackerTableEditorUtils;
 import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
 
@@ -167,6 +161,12 @@ public class TrackerTransactionEditor
 	 */
 	protected AdapterFactoryEditingDomain editingDomain;
 
+	/**
+	 * Animals Table Viewer
+	 * @generated NOT
+	 */
+	protected TableViewer animalsTableViewer;
+	
 	/**
 	 * Events Table Viewer
 	 * @generated NOT
@@ -751,6 +751,7 @@ public class TrackerTransactionEditor
 
 		createSelectionTreeViewer(getString("_UI_SelectionPage_label"));
 		createEventsTableViewer(getString("_UI_EventsTablePage_label"));
+		createAnimalsTableViewer("Animals");
 		
 		setActivePage(0);
 		
@@ -838,207 +839,109 @@ public class TrackerTransactionEditor
 		};
 		viewerPane.createControl(getContainer());
 		eventsTableViewer = (TableViewer)viewerPane.getViewer();
-
-		final Table table = eventsTableViewer.getTable();
-		TableLayout layout = new TableLayout();
-		table.setLayout(layout);
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-		eventsTableViewer.setUseHashlookup(true);
-
-		//Event 
-		final TableColumn animalColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 200, true));
-		animalColumn.setText(getString("_UI_EventColumn_label"));
 		
-		//Animal ID Number
-		final TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 100, true));
-		animalIDColumn.setText(getString("_UI_AnimalParentColumn_label"));
+		TrackerTableEditorUtils.createEventsTableViewer(
+				viewerPane, 
+				eventsTableViewer, 
+				adapterFactory);
 
-		//Tag ID Number
-		final TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 150, true));
-		tagIDColumn.setText(getString("_UI_TagColumn_label"));
-
-		
-		//Date of Event
-		final TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 170, true));
-		dateTimeColumn.setText(getString("_UI_DateTimeColumn_label"));
-
-		//Event Type
-		final TableColumn eventNameColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 60, true));
-		eventNameColumn.setText(getString("_UI_EventNameColumn_label"));
-
-
-		//Event Code
-		final TableColumn eventCodeColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 20, true));
-		eventCodeColumn.setText(getString("_UI_EventCodeColumn_label"));
-
-		//Comments
-		final TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 180, true));
-		eventCommentsColumn.setText(getString("_UI_CommentsColumn_label"));
-
-		Listener sortListener = new Listener() {
-
-			public void handleEvent(org.eclipse.swt.widgets.Event e) {
-				// determine new sort column and direction
-				TableColumn sortColumn = table.getSortColumn();
-				TableColumn currentColumn = (TableColumn) e.widget;
-				int dir = table.getSortDirection();
-				if (sortColumn == currentColumn) {
-					dir = dir == SWT.UP ? SWT.DOWN : SWT.UP;
-				} else {
-					table.setSortColumn(currentColumn);
-					dir = SWT.UP;
-				}
-
-				// sort the data based on column and direction
-
-				int sortIdentifier = 0;
-				
-				if (currentColumn == animalColumn) {
-					sortIdentifier = EventSorter.EVENT_TEXT;
-				}
-
-				if (currentColumn == animalIDColumn) {
-					sortIdentifier = EventSorter.ANIMAL_IDNUMBER;
-				}
-
-				if (currentColumn == tagIDColumn) {
-					sortIdentifier = EventSorter.TAG_IDNUMBER;
-				}
-
-
-				if (currentColumn == dateTimeColumn) {
-					sortIdentifier = EventSorter.DATETIME;
-				}
-
-				if (currentColumn == eventNameColumn) {
-					sortIdentifier = EventSorter.EVENT_TYPE;
-				}
-
-				if (currentColumn == eventCodeColumn) {
-					sortIdentifier = EventSorter.EVENT_CODE;
-				}
-
-				if (currentColumn == eventCommentsColumn) {
-					sortIdentifier = EventSorter.EVENT_COMMENTS;
-				}
-
-				table.setSortDirection(dir);
-				eventsTableViewer.setSorter(new EventSorter(sortIdentifier,dir));
-			}
-
-		};
-		animalIDColumn.addListener(SWT.Selection, sortListener);
-		tagIDColumn.addListener(SWT.Selection, sortListener);
-		animalColumn.addListener(SWT.Selection, sortListener);
-		dateTimeColumn.addListener(SWT.Selection, sortListener);
-		eventCodeColumn.addListener(SWT.Selection, sortListener);
-		eventNameColumn.addListener(SWT.Selection, sortListener);
-		eventCommentsColumn.addListener(SWT.Selection, sortListener);
-		eventsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f","g"});
-
-		eventsTableViewer.setContentProvider(
-				new TransactionalAdapterFactoryContentProvider(
-						(TransactionalEditingDomain) getEditingDomain(),adapterFactory) // 14.2.2
-				{
-					
-					/**
-					 * Overrides the inherited implementation by running in a read-only transaction
-					 * and returning the eventHistorys.
-					 */
-					@Override
-					public Object[] getElements(final Object object) {
-						return (Object[]) run(new RunnableWithResult.Impl() {
-							public void run() {
-								setResult(((Premises)object).eventHistory().toArray());
-							}});
-					}
-
-					@Override
-					public void notifyChanged(Notification notification)
-					{
-						switch (notification.getEventType())
-						{
-						case Notification.ADD:
-						case Notification.ADD_MANY:
-							if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
-								return;
-							}
-						}
-						super.notifyChanged(notification);
-					}
-				}
-		);
-		
-		eventsTableViewer.setLabelProvider(
-				new TransactionalAdapterFactoryLabelProvider(
-						(TransactionalEditingDomain) getEditingDomain(), adapterFactory));
-		
 		
 		Object rootObject = getRoot();
 		if (rootObject instanceof Premises){
 			Premises premises = (Premises)rootObject;
 			eventsTableViewer.setInput(premises);
 			viewerPane.setTitle(premises);
-			//Kludge to refresh the EventsTable. 
-			premises.eAdapters().add(new MyContentAdapter(eventsTableViewer));
+			//FIXME Kludge to refresh the EventsTable and animals table. 
+			premises.eAdapters().add(new MyContentAdapter());
 		}
 		createContextMenuFor(eventsTableViewer);
 		int pageIndex = addPage(viewerPane.getControl());
 		setPageText(pageIndex, tableName);
 		
+	}
+	
+	
+	/**
+	 * Animals Table
+	 * References fields animalsTableViewer, 
+	 * @param tableName 
+	 */
+	private void createAnimalsTableViewer(String tableName) {
+		ViewerPane viewerPane =
+			new ViewerPane(getSite().getPage(), TrackerTransactionEditor.this) {
+			public Viewer createViewer(Composite composite) {
+				return new TableViewer(composite);
+			}
+			public void requestActivation() {
+				super.requestActivation();
+				setCurrentViewerPane(this);
+				this.getViewer().refresh();
+			}
+		};
+		viewerPane.createControl(getContainer());
+		animalsTableViewer = (TableViewer)viewerPane.getViewer();
 		
+		TrackerTableEditorUtils.createAnimalsTableViewer(
+				viewerPane, 
+				animalsTableViewer, 
+				adapterFactory);
+		
+		
+		Object rootObject = getRoot();
+		if (rootObject instanceof Premises){
+			Premises premises = (Premises)rootObject;
+			animalsTableViewer.setInput(premises);
+			viewerPane.setTitle(premises);
+		}
+		createContextMenuFor(animalsTableViewer);
+		int pageIndex = addPage(viewerPane.getControl());
+		setPageText(pageIndex, tableName);
+		  
 	}
 	
 	/**
-	 * Kludge to refresh the EventsTable.  
+	 * Kludge to refresh the EventsTable and AnimalsTable.  
 	 * @author jconlon
 	 *
 	 */
 	class MyContentAdapter extends EContentAdapter{
-		public MyContentAdapter(Viewer viewer) {
+		public MyContentAdapter() {
 			super();
-			this.viewer = viewer;
 		}
-		
-		/**
-		   * This keeps track of the one viewer using this content provider.
-		   */
-		  private final Viewer viewer;
-
-		  /**
-		   * This is used to queue viewer notifications and refresh viewers based on them. 
-		   * @since 2.2.0
-		   */
-		  protected ViewerRefresh viewerRefresh;
 		
 		@Override
 		public void notifyChanged(Notification notification){
 			super.notifyChanged(notification);//needed to walk the entire model
 
-			if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
-				printToConsole("Events table ignoring change: "+notification.getFeature());
-				return;
-			}
-			
-		    if (viewer != null && viewer.getControl() != null && !viewer.getControl().isDisposed())
+			if (notification.getFeature() == TrackerPackage.eINSTANCE.getTag_Events() && 
+					TrackerTransactionEditor.this.eventsTableViewer != null && 
+					TrackerTransactionEditor.this.eventsTableViewer.getControl() != null && 
+					!TrackerTransactionEditor.this.eventsTableViewer.getControl().isDisposed())
 		    {
 		    	  printToConsole("Calling NotifiedChangedToViewerRefresh: "+notification.getFeature());
 		        NotifyChangedToViewerRefresh.handleNotifyChanged(
-		          viewer,
+		          TrackerTransactionEditor.this.eventsTableViewer,
 		          notification.getNotifier(),
 		          notification.getEventType(),
 		          notification.getFeature(),
 		          notification.getOldValue(),
 		          notification.getNewValue(),
 		          notification.getPosition());
+		      }else if (notification.getFeature() == TrackerPackage.eINSTANCE.getPremises_Animals() && 
+						TrackerTransactionEditor.this.animalsTableViewer != null && 
+						TrackerTransactionEditor.this.animalsTableViewer.getControl() != null && 
+						!TrackerTransactionEditor.this.animalsTableViewer.getControl().isDisposed())
+			    {
+			    	  printToConsole("Calling NotifiedChangedToViewerRefresh: "+notification.getFeature());
+			        NotifyChangedToViewerRefresh.handleNotifyChanged(
+			          TrackerTransactionEditor.this.animalsTableViewer,
+			          notification.getNotifier(),
+			          notification.getEventType(),
+			          notification.getFeature(),
+			          notification.getOldValue(),
+			          notification.getNewValue(),
+			          notification.getPosition());
+		    	  
 		      }
 		    }
 	}
@@ -1267,6 +1170,26 @@ public class TrackerTransactionEditor
 						// Set the selection to the widget.
 						//
 						eventsTableViewer.setSelection(new StructuredSelection(selectionList));
+					}
+					
+				
+				}
+				else if (currentViewerPane.getViewer() == animalsTableViewer){
+					if(selectedElement instanceof Animal){
+
+						ArrayList<Object> selectionList = new ArrayList<Object>();
+						selectionList.add(selectedElement);
+						while (selectedElements.hasNext()) {
+							Object o = selectedElements.next();
+							if(o instanceof Animal){
+								selectionList.add(o);
+							}
+
+						}
+
+						// Set the selection to the widget.
+						//
+						animalsTableViewer.setSelection(new StructuredSelection(selectionList));
 					}
 					
 				
