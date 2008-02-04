@@ -864,6 +864,7 @@ public class TrackerTransactionEditor
 	/**
 	 * Animals Table
 	 * References fields animalsTableViewer, 
+	 * Note: Implemented and committed task for Ticket 139 under Ticket 134 by mistake.
 	 * @param tableName 
 	 */
 	private void createAnimalsTableViewer(String tableName) {
