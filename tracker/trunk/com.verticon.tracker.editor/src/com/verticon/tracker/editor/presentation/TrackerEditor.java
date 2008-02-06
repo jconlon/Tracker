@@ -143,12 +143,15 @@ import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelPr
 /**
  * This is an example of a Tracker model editor.
  * <!-- begin-user-doc -->
+ * Customized generated Editor by implementing 
+ * IEventSelectionProvider, IAnimalSelectionProvider, ISelectionViewerProvider
+ * TODO always un NOT this class if Editor changes are made, but be sure to add the above interfaces and NOT it back.
  * <!-- end-user-doc -->
- * @generated
+ * @generated NOT
  */
 public class TrackerEditor
 	extends MultiPageEditorPart
-	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
+	implements ISelectionViewerProvider, IEventSelectionProvider, IAnimalSelectionProvider, IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1025,10 +1028,11 @@ public class TrackerEditor
 			IEditorActionBarContributor abc = getActionBarContributor();
 			if(abc != null && abc instanceof TrackerActionBarContributor){
 				TrackerActionBarContributor trackerActionBarContributor =(TrackerActionBarContributor)abc;
-				trackerActionBarContributor.masterViewerFilterAction.setMainViewer(selectionViewer);
-				trackerActionBarContributor.masterViewerFilterAction.addViewer(eventsTableViewer);
-				trackerActionBarContributor.masterViewerFilterAction.addViewer(animalsTableViewer);
-				trackerActionBarContributor.masterViewerFilterAction.addViewer(fairRegistrationTableViewer);
+				SelectionViewerFilter svf = trackerActionBarContributor.customActionBarContributor.getSelectionViewerFilter();
+				trackerActionBarContributor.customActionBarContributor.getSelectionViewerFilter().setMainViewer(selectionViewer);
+				svf.addViewer(eventsTableViewer);
+				svf.addViewer(animalsTableViewer);
+				svf.addViewer(fairRegistrationTableViewer);
 			}
 			
 
@@ -1545,15 +1549,33 @@ public class TrackerEditor
 		super.pageChange(pageIndex);
 		IEditorActionBarContributor abc = getActionBarContributor();
 		if(abc != null && abc instanceof TrackerActionBarContributor){
-			((TrackerActionBarContributor)abc).setActivePage(this, pageIndex);
+			TrackerActionBarContributor tabc = (TrackerActionBarContributor)abc;
+			resetActionBarContributor(tabc.customActionBarContributor);
 		}
-		
 		
 		if (contentOutlinePage != null) {
 			handleContentOutlineSelection(contentOutlinePage.getSelection());
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.editor.presentation.CustomActionBarContributor#setActivePage(com.verticon.tracker.editor.presentation.TrackerEditor, int)
+	 */
+	private void resetActionBarContributor(ICustomActionBarContributor icabc){
+		if (currentViewerPane != null){
+			
+			if (currentViewerPane.getViewer() instanceof TreeViewer ) {
+				icabc.enableTreeViewerActions();
+			} else {
+				icabc.disableTreeViewerActions();
+			}
+			if (currentViewerPane.getViewer() == selectionViewer ){
+				icabc.enableSelectionViewerActions();
+			}else{
+				icabc.disableSelectionViewerActions();
+			}
+		}
+	}
 	
 	/**
 	 * This is how the framework determines which interfaces we implement.
@@ -2166,5 +2188,30 @@ public class TrackerEditor
 	 */
 	protected boolean showOutlineView() {
 		return true;
+	}
+
+	public ISelection getEventSelection() {
+		return eventsTableViewer.getSelection();
+	}
+
+	public void setEventSelection(ISelection selection) {
+		eventsTableViewer.setSelection(selection);
+		
+	}
+
+	public ISelection getAnimalSelection() {
+		return animalsTableViewer.getSelection();
+	}
+
+	public void setAnimalSelection(ISelection selection) {
+		animalsTableViewer.setSelection(selection);
+	}
+
+	public ISelection getSelectionViewerSelection() {
+		return selectionViewer.getSelection();
+	}
+
+	public void setSelectionViewerSelection(ISelection selection) {
+		selectionViewer.setSelection(selection);
 	}
 }
