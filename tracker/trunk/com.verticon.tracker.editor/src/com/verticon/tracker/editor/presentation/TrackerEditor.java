@@ -19,6 +19,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.commands.operations.IOperationHistory;
+import org.eclipse.core.commands.operations.IUndoContext;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -143,9 +145,19 @@ import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelPr
 /**
  * This is an example of a Tracker model editor.
  * <!-- begin-user-doc -->
- * Customized generated Editor by implementing 
- * IEventSelectionProvider, IAnimalSelectionProvider, ISelectionViewerProvider
- * TODO always un NOT this class if Editor changes are made, but be sure to add the above interfaces and NOT it back.
+ * This editor differs from the generated EMF implementation in the following ways:
+ * <ul>
+ *   <li>offers import and export facilities</li>
+ *   <li>offers OCL Selection facilities</li>
+ *   <li>adds a FairRegistration, Animals and an Events table</li>
+ *   <li>adds SelectionTree expansion and  contraction actions to the 
+ *   	 ActionBarContributor</li>
+ *   <li>adds Selection linking between Animals and Events Tables</li>
+ *   <li>implements previous two items with interfaces IEventSelectionProvider, 
+ *   	 IAnimalSelectionProvider, ISelectionViewerProvider </li>
+ * </ul>
+ * TODO always un NOT this class if Editor changes are made, but be sure to add the 
+ * above interfaces and NOT it back.
  * <!-- end-user-doc -->
  * @generated NOT
  */
