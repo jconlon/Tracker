@@ -92,6 +92,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IEditorActionBarContributor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
@@ -115,6 +116,11 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
+import com.verticon.tracker.editor.presentation.IAnimalSelectionProvider;
+import com.verticon.tracker.editor.presentation.ICustomActionBarContributor;
+import com.verticon.tracker.editor.presentation.IEventSelectionProvider;
+import com.verticon.tracker.editor.presentation.ISelectionViewerProvider;
+import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
 import com.verticon.tracker.editor.presentation.TrackerTableEditorUtils;
 import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
@@ -144,12 +150,16 @@ import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
  *   <li>synchronization of the workspace resource with the loaded EMF resource
  *       uses the {@link WorkspaceSynchronizer} utility API</li>
  * </ul>
+ * 
+ * Customized similarly generated Tracker Editor by implementing these interfaces
+ * IEventSelectionProvider, IAnimalSelectionProvider, ISelectionViewerProvider 
+ * TODO always un NOT this class if Editor changes are made, but be sure to add the above interfaces and NOT it back.
  * <!-- end-user-doc -->
- * @generated
+ * @generated NOT
  */
 public class TrackerTransactionEditor
 	extends MultiPageEditorPart
-	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
+	implements IEventSelectionProvider, IAnimalSelectionProvider, ISelectionViewerProvider, IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
 	
 	private static final String CONSOLE = TrackerTransactionEditor.class.getSimpleName();
 	
@@ -753,6 +763,14 @@ public class TrackerTransactionEditor
 		createEventsTableViewer(getString("_UI_EventsTablePage_label"));
 		createAnimalsTableViewer("Animals");
 		
+		IEditorActionBarContributor abc = getActionBarContributor();
+		if(abc != null && abc instanceof TrackerActionBarContributor){
+			TrackerActionBarContributor trackerActionBarContributor =(TrackerActionBarContributor)abc;
+			SelectionViewerFilter svf = trackerActionBarContributor.customActionBarContributor.getSelectionViewerFilter();
+			trackerActionBarContributor.customActionBarContributor.getSelectionViewerFilter().setMainViewer(selectionViewer);
+			svf.addViewer(eventsTableViewer);
+			svf.addViewer(animalsTableViewer);
+		}
 		setActivePage(0);
 		
 		// Ensures that this editor will only display the page's tab
@@ -1558,4 +1576,68 @@ public class TrackerTransactionEditor
 				+ "\t" + msg);
 	}
 
+	/**
+	 * This is used to track the active viewer.
+	 * <!-- begin-user-doc -->
+	 * Also used to enable and disable buttons
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	protected void pageChange(int pageIndex) {
+		super.pageChange(pageIndex);
+		IEditorActionBarContributor abc = getActionBarContributor();
+		if(abc != null && abc instanceof TrackerActionBarContributor){
+			TrackerActionBarContributor tabc = (TrackerActionBarContributor)abc;
+			resetActionBarContributor(tabc.customActionBarContributor);
+		}
+		
+		if (contentOutlinePage != null) {
+			handleContentOutlineSelection(contentOutlinePage.getSelection());
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.editor.presentation.CustomActionBarContributor#setActivePage(com.verticon.tracker.editor.presentation.TrackerEditor, int)
+	 */
+	private void resetActionBarContributor(ICustomActionBarContributor icabc){
+		if (currentViewerPane != null){
+			
+			if (currentViewerPane.getViewer() instanceof TreeViewer ) {
+				icabc.enableTreeViewerActions();
+			} else {
+				icabc.disableTreeViewerActions();
+			}
+			if (currentViewerPane.getViewer() == selectionViewer ){
+				icabc.enableSelectionViewerActions();
+			}else{
+				icabc.disableSelectionViewerActions();
+			}
+		}
+	}
+	
+	public ISelection getEventSelection() {
+		return eventsTableViewer.getSelection();
+	}
+
+	public void setEventSelection(ISelection selection) {
+		eventsTableViewer.setSelection(selection);
+		
+	}
+
+	public ISelection getAnimalSelection() {
+		return animalsTableViewer.getSelection();
+	}
+
+	public void setAnimalSelection(ISelection selection) {
+		animalsTableViewer.setSelection(selection);
+	}
+
+	public ISelection getSelectionViewerSelection() {
+		return selectionViewer.getSelection();
+	}
+
+	public void setSelectionViewerSelection(ISelection selection) {
+		selectionViewer.setSelection(selection);
+	}
 }

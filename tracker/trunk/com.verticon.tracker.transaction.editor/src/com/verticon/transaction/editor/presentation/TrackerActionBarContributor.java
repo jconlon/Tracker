@@ -43,6 +43,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
+import com.verticon.tracker.editor.presentation.CustomActionBarContributor;
+import com.verticon.tracker.editor.presentation.ICustomActionBarContributor;
 import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
 import com.verticon.transaction.editor.actions.LongRunningReadAction;
 
@@ -59,6 +61,21 @@ import com.verticon.transaction.editor.actions.LongRunningReadAction;
 public class TrackerActionBarContributor
 	extends EditingDomainActionBarContributor
 	implements ISelectionChangedListener {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "Copyright 2008 Verticon, Inc. All Rights Reserved.";
+
+	/**
+	 * Customization of the EditingDomainActionBarContributor happens in this class.
+	 * 
+	 * @generated NOT
+	 */
+	ICustomActionBarContributor customActionBarContributor = new CustomActionBarContributor();
+	
+	
 	
 	/**
 	 * This keeps track of the active editor.
@@ -181,16 +198,29 @@ public class TrackerActionBarContributor
 	    actionBars.setGlobalActionHandler(ActionFactory.REDO.getId(), redoAction);
 	}
 	
+	
 	/**
 	 * This adds Separators for editor additions to the tool bar.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void contributeToToolBar(IToolBarManager toolBarManager) {
+	public void contributeToToolBarGen(IToolBarManager toolBarManager) {
 		toolBarManager.add(new Separator("extlibrary-settings")); //$NON-NLS-1$
 		toolBarManager.add(new Separator("extlibrary-additions")); //$NON-NLS-1$
 	}
+	
+	/**
+	 * This adds custom Separators for editor additions to the tool bar.
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public void contributeToToolBar(IToolBarManager toolBarManager) {
+		contributeToToolBarGen( toolBarManager);
+		customActionBarContributor.contributeToToolBar(toolBarManager);
+	}
+
 
 	/**
 	 * This adds to the menu bar a menu and some separators for editor additions,
@@ -236,7 +266,7 @@ public class TrackerActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setActiveEditor(IEditorPart part) {
+	public void setActiveEditorGen(IEditorPart part) {
 		super.setActiveEditor(part);
 		activeEditorPart = part;
 
@@ -258,6 +288,17 @@ public class TrackerActionBarContributor
 				selectionChanged(new SelectionChangedEvent(selectionProvider, selectionProvider.getSelection()));
 			}
 		}
+	}
+	
+	/**
+	 * When the active editor changes, this sets up the customActionBarContributor before
+	 * calling the generated method.
+	 * @generated NOT
+	 */
+	@Override
+	public void setActiveEditor(IEditorPart part) {
+		customActionBarContributor.setActiveEditor(part);
+		setActiveEditorGen( part);
 	}
 	
 	public void activate() {

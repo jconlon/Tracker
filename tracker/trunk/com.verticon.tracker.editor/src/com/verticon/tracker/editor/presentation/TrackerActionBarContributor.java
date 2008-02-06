@@ -1,14 +1,8 @@
-/**
- * <copyright>
- * </copyright>
- *
- * $Id$
- */
 package com.verticon.tracker.editor.presentation;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
-
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -29,18 +23,14 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.action.SubContributionItem;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
-
 
 /**
  * This is the action bar contributor for the Tracker model editor.
@@ -59,6 +49,13 @@ public class TrackerActionBarContributor
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
 	/**
+	 * Customization of the EditingDomainActionBarContributor happens in this class.
+	 * 
+	 * @generated NOT
+	 */
+	ICustomActionBarContributor customActionBarContributor = new FairCustomActionBarContributor();
+	
+	/**
 	 * This keeps track of the active editor.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -73,12 +70,6 @@ public class TrackerActionBarContributor
 	 * @generated
 	 */
 	protected ISelectionProvider selectionProvider;
-	
-	
-	/**
-	 * Master ViewerFilter for views 
-	 */
-	SelectionViewerFilter masterViewerFilterAction;
 
 	/**
 	 * This action opens the Properties view.
@@ -123,173 +114,6 @@ public class TrackerActionBarContributor
 				}
 			}
 		};
-		
-	/**
-	 * Image for collapse toolbar button
-	 * 
-	 * @generated NOT
-	 */
-	private static ImageDescriptor collapseImage = AbstractUIPlugin.imageDescriptorFromPlugin(
-	    		"com.verticon.tracker.editor", "icons/full/elcl16/collapseall.gif");
-	
-	/**
-	 * Image for expand toolbar button
-	 * 
-	 * @generated NOT
-	 */
-	private static ImageDescriptor expandImage = AbstractUIPlugin.imageDescriptorFromPlugin(
-    		"com.verticon.tracker.editor", "icons/full/elcl16/expandall.gif");
-	
-	
-	/**
-	 * Image for selectFromAnimals toolbar button
-	 * 
-	 * @generated NOT
-	 */
-	private static ImageDescriptor selectFromAnimalsImage = AbstractUIPlugin.imageDescriptorFromPlugin(
-    		"com.verticon.tracker.editor", "icons/full/elcl16/selectFromAnimals.gif");
-	
-	
-	/**
-	 * Image for selectFromEvents toolbar button
-	 * 
-	 * @generated NOT
-	 */
-	private static ImageDescriptor selectFromEventsImage = AbstractUIPlugin.imageDescriptorFromPlugin(
-    		"com.verticon.tracker.editor", "icons/full/elcl16/selectFromEvents.gif");
-	  
-	
-	/**
-	 * Image for selectFromEvents toolbar button
-	 * 
-	 * @generated NOT
-	 */
-	private static ImageDescriptor selectFromFairImage = AbstractUIPlugin.imageDescriptorFromPlugin(
-    		"com.verticon.tracker.editor", "icons/full/elcl16/selectFromFair.gif");
-	  
-	
-	/**
-	 * Collapse Action
-	 * 
-	 * @generated NOT
-	 */
-	protected IAction collapseTreeAction = 
-		
-		new Action("Collapse All",collapseImage) {
-
-		@Override
-		public void run() {
-			if (activeEditorPart instanceof TrackerEditor) {
-				TrackerEditor trackerEditor = ((TrackerEditor)activeEditorPart);
-				if (trackerEditor.currentViewerPane != null){
-					if (trackerEditor.currentViewerPane.getViewer() instanceof TreeViewer ) {
-						((TreeViewer)trackerEditor.currentViewerPane.getViewer()).collapseAll();
-					} 
-				}
-			}
-			
-		}
-	};
-	
-	/**
-	 * Exapand Action
-	 * 
-	 * @generated NOT
-	 */
-	protected IAction expandTreeAction = 
-		
-		new Action("Expand All",expandImage) {
-
-		@Override
-		public void run() {
-			if (activeEditorPart instanceof TrackerEditor) {
-				TrackerEditor trackerEditor = ((TrackerEditor)activeEditorPart);
-				if (trackerEditor.currentViewerPane != null){
-					if (trackerEditor.currentViewerPane.getViewer() instanceof TreeViewer) {
-						((TreeViewer)trackerEditor.currentViewerPane.getViewer()).expandAll();
-					} 
-				}
-			}
-			
-		}
-	};
-	
-	
-	/**
-	 * Action to Select the Animals in the SelectionTable from the rows 
-	 * selected in the AnimalsTable.
-	 * 
-	 * @generated NOT
-	 */
-	protected IAction selectAnimalsAction = 
-		
-		new Action("Link Selection with Animals Table",selectFromAnimalsImage) {
-
-		@Override
-		public void run() {
-			if (activeEditorPart instanceof TrackerEditor) {
-				TrackerEditor trackerEditor = ((TrackerEditor)activeEditorPart);
-				if (trackerEditor.currentViewerPane != null){
-					if (trackerEditor.currentViewerPane.getViewer() == trackerEditor.selectionViewer) {
-						trackerEditor.selectionViewer.setSelection(trackerEditor.animalsTableViewer.getSelection(),true);
-					} 
-				}
-			}
-			
-		}
-	};
-	
-	
-	/**
-	 * Action to Select the Animals in the SelectionTable from the rows 
-	 * selected in the AnimalsTable.
-	 * 
-	 * @generated NOT
-	 */
-	protected IAction selectEventsAction = 
-		
-		new Action("Link Selection with Events Table",selectFromEventsImage) {
-
-		@Override
-		public void run() {
-			if (activeEditorPart instanceof TrackerEditor) {
-				TrackerEditor trackerEditor = ((TrackerEditor)activeEditorPart);
-				if (trackerEditor.currentViewerPane != null){
-					if (trackerEditor.currentViewerPane.getViewer() == trackerEditor.selectionViewer) {
-						trackerEditor.selectionViewer.setSelection(trackerEditor.eventsTableViewer.getSelection(),true);
-					} 
-				}
-			}
-			
-		}
-	};
-	
-	
-	/**
-	 * Action to Select the Animals in the SelectionTable from the rows 
-	 * selected in the AnimalsTable.
-	 * 
-	 * @generated NOT
-	 */
-	protected IAction selectFairRegistrationAction = 
-		
-		new Action("Link Selection with FairRegistration Table",selectFromFairImage) {
-
-		@Override
-		public void run() {
-			if (activeEditorPart instanceof TrackerEditor) {
-				TrackerEditor trackerEditor = ((TrackerEditor)activeEditorPart);
-				if (trackerEditor.currentViewerPane != null){
-					if (trackerEditor.currentViewerPane.getViewer() == trackerEditor.selectionViewer) {
-						trackerEditor.selectionViewer.setSelection(trackerEditor.fairRegistrationTableViewer.getSelection(),true);
-					} 
-				}
-			}
-			
-		}
-	};
-	
-	
 
 	/**
 	 * This will contain one {@link org.eclipse.emf.edit.ui.action.CreateChildAction} corresponding to each descriptor
@@ -342,23 +166,22 @@ public class TrackerActionBarContributor
 	 * This adds Separators for editor additions to the tool bar.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void contributeToToolBarGen(IToolBarManager toolBarManager) {
+		toolBarManager.add(new Separator("tracker-settings"));
+		toolBarManager.add(new Separator("tracker-additions"));
+	}
+	
+	/**
+	 * This adds custom Separators for editor additions to the tool bar.
+	 * 
 	 * @generated NOT
 	 */
 	@Override
 	public void contributeToToolBar(IToolBarManager toolBarManager) {
-		toolBarManager.add(new Separator("tracker-settings"));
-		toolBarManager.add(new Separator("tracker-additions"));
-		toolBarManager.add(new Separator());
-		toolBarManager.add(collapseTreeAction);
-		toolBarManager.add(expandTreeAction);
-		toolBarManager.add(selectAnimalsAction);
-		toolBarManager.add(selectEventsAction);
-		toolBarManager.add(selectFairRegistrationAction);
-		if(masterViewerFilterAction == null){
-			masterViewerFilterAction = new SelectionViewerFilter();
-		}
-		toolBarManager.add(masterViewerFilterAction);
-
+		contributeToToolBarGen( toolBarManager);
+		customActionBarContributor.contributeToToolBar(toolBarManager);
 	}
 
 	/**
@@ -407,8 +230,7 @@ public class TrackerActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setActiveEditor(IEditorPart part) {
+	public void setActiveEditorGen(IEditorPart part) {
 		super.setActiveEditor(part);
 		activeEditorPart = part;
 
@@ -430,6 +252,17 @@ public class TrackerActionBarContributor
 				selectionChanged(new SelectionChangedEvent(selectionProvider, selectionProvider.getSelection()));
 			}
 		}
+	}
+	
+	/**
+	 * When the active editor changes, this sets up the customActionBarContributor before
+	 * calling the generated method.
+	 * @generated NOT
+	 */
+	@Override
+	public void setActiveEditor(IEditorPart part) {
+		customActionBarContributor.setActiveEditor(part);
+		setActiveEditorGen( part);
 	}
 
 	/**
@@ -613,64 +446,5 @@ public class TrackerActionBarContributor
 	protected boolean removeAllReferencesOnDelete() {
 		return true;
 	}
-	
-	/**
-	 * Called when a page is changed on the TrackerEditor.
-	 * @param trackerEditor
-	 * @param pageIndex
-	 */
-	public void setActivePage(TrackerEditor trackerEditor, int pageIndex){
-		if (trackerEditor.currentViewerPane != null){
-//			toolBarManager.add(trackerEditor.selectionViewerFilter);
-			
-			if (trackerEditor.currentViewerPane.getViewer() instanceof TreeViewer ) {
-				enableTreeViewerActions();
-			} else {
-				disableTreeViewerActions();
-			}
-			if (trackerEditor.currentViewerPane.getViewer() == trackerEditor.selectionViewer ){
-				enableSelectionViewerActions();
-			}else{
-				disableSelectionViewerActions();
-			}
-		}
-	}
-
-	/**
-	 * 
-	 */
-	private void disableSelectionViewerActions() {
-		selectFairRegistrationAction.setEnabled(false);
-		selectEventsAction.setEnabled(false);
-		selectAnimalsAction.setEnabled(false);
-		masterViewerFilterAction.setEnabled(false);
-	}
-
-	/**
-	 * 
-	 */
-	private void enableSelectionViewerActions() {
-		selectFairRegistrationAction.setEnabled(true);
-		selectEventsAction.setEnabled(true);
-		selectAnimalsAction.setEnabled(true);
-		masterViewerFilterAction.setEnabled(true);
-	}
-	
-	/**
-	 * 
-	 */
-	private void disableTreeViewerActions() {
-		collapseTreeAction.setEnabled(false);
-		expandTreeAction.setEnabled(false);
-	}
-
-	/**
-	 * 
-	 */
-	private void enableTreeViewerActions() {
-		collapseTreeAction.setEnabled(true);
-		expandTreeAction.setEnabled(true);
-	}
-
 
 }
