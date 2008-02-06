@@ -130,8 +130,9 @@ import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
  * Tracker transaction aware model editor.
  * <!-- begin-user-doc -->
  * This particular implementation is customized from the default editor generated
- * by EMF.  This editor differs from the default EMF implementation in the following
- * ways:
+ * by EMF.  
+ * 
+ * This editor differs from the generated EMF implementation in the following ways:
  * <ul>
  *   <li>all instances operate in a single, shared
  *       {@link TransactionalEditingDomain transactional editing domain}</li>
@@ -149,11 +150,15 @@ import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
  *   <li>only the 'selection' tree view is provided (it is not a multi-page editor)</li>
  *   <li>synchronization of the workspace resource with the loaded EMF resource
  *       uses the {@link WorkspaceSynchronizer} utility API</li>
+ *   <li>adds an Animals and an Events table</li>
+ *   <li>adds SelectionTree expansion and  contraction actions to the 
+ *   	 ActionBarContributor</li>
+ *   <li>adds Selection linking between Animals and Events Tables</li>
+ *   <li>implements previous two items with interfaces IEventSelectionProvider, 
+ *   	 IAnimalSelectionProvider, ISelectionViewerProvider </li>
  * </ul>
- * 
- * Customized similarly generated Tracker Editor by implementing these interfaces
- * IEventSelectionProvider, IAnimalSelectionProvider, ISelectionViewerProvider 
- * TODO always un NOT this class if Editor changes are made, but be sure to add the above interfaces and NOT it back.
+ * TODO always un NOT this class if Editor changes are made, but be sure to add the 
+ * above interfaces and NOT it back.
  * <!-- end-user-doc -->
  * @generated NOT
  */
