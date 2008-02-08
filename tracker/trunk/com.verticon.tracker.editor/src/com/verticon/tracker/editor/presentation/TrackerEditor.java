@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -19,8 +20,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.commands.operations.IOperationHistory;
-import org.eclipse.core.commands.operations.IUndoContext;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -137,6 +136,7 @@ import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.FairRegistrationItemProvider;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
+import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.tracker.editor.validation.LiveValidationContentAdapter;
 import com.verticon.tracker.emf.edit.ui.provider.FairRegistrationAdapterFactoryLableProvider;
 import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelProvider;
@@ -171,6 +171,15 @@ public class TrackerEditor
 	 */
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
+	
+	private static final String CONSOLE = TrackerEditor.class.getSimpleName();
+	
+	/**
+	 * Monitors Event changes to update the eventsTableViewer
+	 */
+	private EventsTableViewerNotifier eventsTableViewerNotifier;
+	
+	
 	/**
 	 * This keeps track of the editing domain that is used to track all changes to the model.
 	 * <!-- begin-user-doc -->
@@ -554,6 +563,8 @@ public class TrackerEditor
 			}
 		};
 
+	
+
 	/**
 	 * Handles activation of the editor or it's associated views.
 	 * <!-- begin-user-doc -->
@@ -596,7 +607,7 @@ public class TrackerEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void handleChangedResources() {
+	protected void handleChangedResourcesGen() {
 		if (!changedResources.isEmpty() && (!isDirty() || handleDirtyConflict())) {
 			editingDomain.getCommandStack().flush();
 
@@ -606,6 +617,7 @@ public class TrackerEditor
 					resource.unload();
 					try {
 						resource.load(Collections.EMPTY_MAP);
+						printToConsole("Loaded changed Resource "+resource);
 					}
 					catch (IOException exception) {
 						if (!resourceToDiagnosticMap.containsKey(resource)) {
@@ -616,6 +628,27 @@ public class TrackerEditor
 			}
 			updateProblemIndication = true;
 			updateProblemIndication();
+		}
+	}
+	
+	/**
+	 * Handles what to do with changed resources on activation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	protected void handleChangedResources() {
+		boolean reload = !changedResources.isEmpty() && (!isDirty() || handleDirtyConflict());
+		handleChangedResourcesGen();
+		if (reload) {
+			  Object rootObject = getRoot();
+			  if (rootObject instanceof Premises)
+			  {
+				animalsTableViewer.setInput((Premises)rootObject);
+				eventsTableViewer.setInput((Premises)rootObject);
+			  }
+			  Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
+			  eventsTableViewerNotifier.setResource(resource);
 		}
 	}
   
@@ -1209,7 +1242,17 @@ public class TrackerEditor
 		viewerPane.createControl(getContainer());
 
 		selectionViewer = (TreeViewer)viewerPane.getViewer();
-		selectionViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
+		selectionViewer.setContentProvider(
+				new AdapterFactoryContentProvider(adapterFactory){
+
+					@Override
+					public void inputChanged(Viewer viewer, Object oldInput,
+							Object newInput) {
+						
+						super.inputChanged(viewer, oldInput, newInput);
+					}}
+				
+		);
            
 		selectionViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, selectionViewer));
 		//Changed to show the Premises as the root
@@ -1468,6 +1511,9 @@ public class TrackerEditor
 		createContextMenuFor(eventsTableViewer);
 		int pageIndex = addPage(viewerPane.getControl());
 		setPageText(pageIndex, tableName);
+		eventsTableViewerNotifier = new EventsTableViewerNotifier( eventsTableViewer);
+		Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
+		eventsTableViewerNotifier.setResource(resource);
 	}
 
 	/**
@@ -2006,7 +2052,9 @@ public class TrackerEditor
 		setPartName(editorInput.getName());
 		site.setSelectionProvider(this);
 		site.getPage().addPartListener(partListener);
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener, IResourceChangeEvent.POST_CHANGE);
+		//FIXME remove this resourceChangeListener 
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(
+				resourceChangeListener, IResourceChangeEvent.POST_CHANGE);
 	}
 
 	/**
@@ -2164,10 +2212,9 @@ public class TrackerEditor
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	@Override
-	public void dispose() {
+	public void disposeGen() {
 		updateProblemIndication = false;
 
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceChangeListener);
@@ -2191,6 +2238,20 @@ public class TrackerEditor
 
 		super.dispose();
 	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public void dispose() {
+		eventsTableViewerNotifier.unset();
+		disposeGen();
+		
+	}
+	
+	
 
 	/**
 	 * Returns whether the outline view should be presented to the user.
@@ -2200,6 +2261,11 @@ public class TrackerEditor
 	 */
 	protected boolean showOutlineView() {
 		return true;
+	}
+	
+	private static void printToConsole(String msg) {
+		ConsoleUtil.println(CONSOLE, new Date()
+				+ "\t" + msg);
 	}
 
 	public ISelection getEventSelection() {

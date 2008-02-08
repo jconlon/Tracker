@@ -92,7 +92,7 @@ public class ResourceLoadedListener extends DemultiplexingListener {
 	protected void handleNotification(TransactionalEditingDomain domain, Notification notification) {
 		if (ignoredResources.contains(notification.getNotifier())) {
 			// skip any resource that we are supposed to ignore
-			System.out.println("Skipping.");
+//			System.out.println("Skipping.");
 			return;
 		}
 	

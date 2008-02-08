@@ -148,34 +148,22 @@ public class TrackerTableEditorUtils {
 		tableViewer.setColumnProperties(
 				new String [] {"a", "b", "c", "d", "e","f", "g", "h","i","j"});
 		
-		
+		/**
+		 * The default ItemProvider returned via the adapterFactory
+		 * for Premises should be able to handle all notifications 
+		 * of animals being added or removed.
+		 * 
+		 * To get Animal Elements override the getElements method 
+		 */
 		tableViewer.setContentProvider(
 		        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
 		        {
+		          @Override
 		          public Object [] getElements(Object object)
 		          {
 		            return ((Premises)object).getAnimals().toArray();
 		          }
-		          public void notifyChanged(Notification notification)
-		          {
-		        	//Only listen to changes to Animals and Events
-		            switch (notification.getEventType())
-		            {
-		              case Notification.ADD:
-		              case Notification.ADD_MANY:
-		            	if (notification.getFeature() != TrackerPackage.eINSTANCE.getPremises_Animals()){
-		            		if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()){
-		            			System.out.println("Animals table Ignoring change: "+notification);
-		            			return;
-		            		}
-		                }
-		            }
-		            System.out.println("Animals table acting on change: "+notification.getFeature());
-		            super.notifyChanged(notification);
-//		            if(viewer!=null){
-//						viewer.refresh();
-//					}
-		          }
+
 		        });
 		tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
 		
@@ -294,7 +282,15 @@ public class TrackerTableEditorUtils {
 		eventCommentsColumn.addListener(SWT.Selection, sortListener);
 		tableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f","g"});
 		
-		
+		/**
+		 * The default ItemProvider returned via the adapterFactory
+		 * for Premises does not really handle any notifications 
+		 * of events being added or removed, so just NOOP it.
+		 * 
+		 * 
+		 * To get Event Elements override the getElements method 
+		 * and use getEventHistory
+		 */
 		tableViewer.setContentProvider(
 				new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
 				{
@@ -304,18 +300,16 @@ public class TrackerTableEditorUtils {
 					}
 					public void notifyChanged(Notification notification)
 					{
-						switch (notification.getEventType())
-						{
-						case Notification.ADD:
-						case Notification.ADD_MANY:
-							if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
-								return;
-							}
+						
+						switch (notification.getEventType()){
+							case Notification.ADD:
+							case Notification.ADD_MANY:
+								if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
+									return;
+								}
 						}
 						super.notifyChanged(notification);
-//						if(viewer!=null){
-//							viewer.refresh();
-//						}
+						
 					}
 				});
 		tableViewer.setLabelProvider(
@@ -331,4 +325,6 @@ public class TrackerTableEditorUtils {
 		public static String getString(String key) {
 			return TrackerReportEditorPlugin.INSTANCE.getString(key);
 		}
+		
+		
 }
