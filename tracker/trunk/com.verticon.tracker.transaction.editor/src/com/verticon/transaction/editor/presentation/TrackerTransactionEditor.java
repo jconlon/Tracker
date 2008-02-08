@@ -33,14 +33,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.ui.ViewerPane;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -53,7 +51,6 @@ import org.eclipse.emf.edit.ui.celleditor.AdapterFactoryTreeEditor;
 import org.eclipse.emf.edit.ui.dnd.EditingDomainViewerDropAdapter;
 import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
 import org.eclipse.emf.edit.ui.dnd.ViewerDragAdapter;
-import org.eclipse.emf.edit.ui.provider.NotifyChangedToViewerRefresh;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.ui.provider.TransactionalAdapterFactoryContentProvider;
@@ -114,8 +111,8 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
-import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
+import com.verticon.tracker.editor.presentation.EventsTableViewerNotifier;
 import com.verticon.tracker.editor.presentation.IAnimalSelectionProvider;
 import com.verticon.tracker.editor.presentation.ICustomActionBarContributor;
 import com.verticon.tracker.editor.presentation.IEventSelectionProvider;
@@ -165,6 +162,13 @@ import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
 public class TrackerTransactionEditor
 	extends MultiPageEditorPart
 	implements IEventSelectionProvider, IAnimalSelectionProvider, ISelectionViewerProvider, IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
+	
+	
+	/**
+	 * Monitors Event changes to update the eventsTableViewer
+	 */
+	private EventsTableViewerNotifier eventsTableViewerNotifier;
+	
 	
 	private static final String CONSOLE = TrackerTransactionEditor.class.getSimpleName();
 	
@@ -429,7 +433,7 @@ public class TrackerTransactionEditor
 				}
 			} else if (changedResources.contains(res)) {
 				changedResources.removeAll(savedResources);
-				handleChangedResource();
+				handleChangedResources();
 			}
 		} finally {
 			removedResources.clear();
@@ -439,6 +443,13 @@ public class TrackerTransactionEditor
 		}
 	}
 
+	/**
+	 * Customized behavior for the WorkspaceSynchronizer that records resource
+	 * changes to a set of collections to defer processing to Activation of 
+	 * this Editor in handleActivate().
+	 * 
+	 * @return
+	 */
 	private WorkspaceSynchronizer.Delegate createSynchronizationDelegate() {
 		return new WorkspaceSynchronizer.Delegate() {
 			public boolean handleResourceDeleted(Resource resource) {
@@ -460,13 +471,12 @@ public class TrackerTransactionEditor
 			
 			public boolean handleResourceChanged(Resource resource) {
 				changedResources.add(resource);
-				
+//				System.out.println("Transaction WorkspaceSync delegate added "+resource +" to changed Resources. ChangedResources Size "+ changedResources.size()	);
 				return true;
 			}
 			
 			public boolean handleResourceMoved(Resource resource, URI newURI) {
 				movedResources.put(resource, newURI);
-				
 				return true;
 			}
 			
@@ -480,12 +490,10 @@ public class TrackerTransactionEditor
 	/**
 	 * Handles what to do with changed resource on activation.
 	 */
-	protected void handleChangedResource() {
+	protected void handleChangedResourcesGen() {
 		Resource res = getResource();
-		
 		if (changedResources.contains(res) && (!isDirty() || handleDirtyConflict())) {
 			changedResources.remove(res);
-			
 			getOperationHistory().dispose(undoContext, true, true, true);
 			dirty = false;
 			firePropertyChange(IEditorPart.PROP_DIRTY);
@@ -498,6 +506,7 @@ public class TrackerTransactionEditor
 					res.unload();
 					try {
 						res.load(Collections.EMPTY_MAP);
+						printToConsole("Loaded changed Resource "+res);
 					} catch (IOException exception) {
 						TransactionEditorPlugin.INSTANCE.log(exception);
 					}
@@ -507,6 +516,27 @@ public class TrackerTransactionEditor
 			} finally {
 				listener.watch(res);
 			}
+		}
+	}
+	
+	/**
+	 * Handles what to do with changed resources on activation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	protected void handleChangedResources() {
+		boolean reload = !changedResources.isEmpty() && (!isDirty() || handleDirtyConflict());
+		handleChangedResourcesGen();
+		if (reload) {
+			  Object rootObject = getRoot();
+			  if (rootObject instanceof Premises)
+			  {
+				animalsTableViewer.setInput((Premises)rootObject);
+				eventsTableViewer.setInput((Premises)rootObject);
+			  }
+			 
+			  eventsTableViewerNotifier.setResource(getResource());
 		}
 	}
 	
@@ -797,13 +827,7 @@ public class TrackerTransactionEditor
 		
 	}
 	
-	/**
-	 * This is the method used by the framework to install your own controls.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-//	public void createPartControl(Composite parent) {
+	
 	protected void createSelectionTreeViewer(String pageName){
 
 		ViewerPane viewerPane =
@@ -874,13 +898,14 @@ public class TrackerTransactionEditor
 			Premises premises = (Premises)rootObject;
 			eventsTableViewer.setInput(premises);
 			viewerPane.setTitle(premises);
-			//FIXME Kludge to refresh the EventsTable and animals table. 
-			premises.eAdapters().add(new MyContentAdapter());
 		}
 		createContextMenuFor(eventsTableViewer);
 		int pageIndex = addPage(viewerPane.getControl());
 		setPageText(pageIndex, tableName);
 		
+		eventsTableViewerNotifier = new EventsTableViewerNotifier( eventsTableViewer);
+		Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
+		eventsTableViewerNotifier.setResource(resource);
 	}
 	
 	
@@ -923,52 +948,7 @@ public class TrackerTransactionEditor
 		  
 	}
 	
-	/**
-	 * Kludge to refresh the EventsTable and AnimalsTable.  
-	 * @author jconlon
-	 *
-	 */
-	class MyContentAdapter extends EContentAdapter{
-		public MyContentAdapter() {
-			super();
-		}
-		
-		@Override
-		public void notifyChanged(Notification notification){
-			super.notifyChanged(notification);//needed to walk the entire model
-
-			if (notification.getFeature() == TrackerPackage.eINSTANCE.getTag_Events() && 
-					TrackerTransactionEditor.this.eventsTableViewer != null && 
-					TrackerTransactionEditor.this.eventsTableViewer.getControl() != null && 
-					!TrackerTransactionEditor.this.eventsTableViewer.getControl().isDisposed())
-		    {
-		    	  printToConsole("Calling NotifiedChangedToViewerRefresh: "+notification.getFeature());
-		        NotifyChangedToViewerRefresh.handleNotifyChanged(
-		          TrackerTransactionEditor.this.eventsTableViewer,
-		          notification.getNotifier(),
-		          notification.getEventType(),
-		          notification.getFeature(),
-		          notification.getOldValue(),
-		          notification.getNewValue(),
-		          notification.getPosition());
-		      }else if (notification.getFeature() == TrackerPackage.eINSTANCE.getPremises_Animals() && 
-						TrackerTransactionEditor.this.animalsTableViewer != null && 
-						TrackerTransactionEditor.this.animalsTableViewer.getControl() != null && 
-						!TrackerTransactionEditor.this.animalsTableViewer.getControl().isDisposed())
-			    {
-			    	  printToConsole("Calling NotifiedChangedToViewerRefresh: "+notification.getFeature());
-			        NotifyChangedToViewerRefresh.handleNotifyChanged(
-			          TrackerTransactionEditor.this.animalsTableViewer,
-			          notification.getNotifier(),
-			          notification.getEventType(),
-			          notification.getFeature(),
-			          notification.getOldValue(),
-			          notification.getNewValue(),
-			          notification.getPosition());
-		    	  
-		      }
-		    }
-	}
+	
 	
 	
 	/**
@@ -976,7 +956,7 @@ public class TrackerTransactionEditor
 	 */
 	private Object getRoot() {
 		Resource resource = getResource();
-		  Object rootObject = resource.getContents().get(0);
+		Object rootObject = resource.getContents().get(0);
 		return rootObject;
 	}
 	/**
@@ -1262,6 +1242,7 @@ public class TrackerTransactionEditor
 									//
 									Resource savedResource = getResource();
 									savedResources.add(savedResource);
+									
 									savedResource.save(Collections.EMPTY_MAP);
 								}
 								catch (Exception exception) {
@@ -1547,9 +1528,11 @@ public class TrackerTransactionEditor
 	
 	/**
 	 * <!-- begin-user-doc -->
+	 * Added a unset of myContentAdapter
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	public void dispose() {
+	public void disposeGen() {
 		workspaceSynchronizer.dispose();
 		getOperationHistory().removeOperationHistoryListener(historyListener);
 		getOperationHistory().dispose(getUndoContext(), true, true, true);
@@ -1573,7 +1556,20 @@ public class TrackerTransactionEditor
 			contentOutlinePage.dispose();
 		}
 
+		
 		super.dispose();
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public void dispose() {
+		eventsTableViewerNotifier.unset();
+		disposeGen();
+		
 	}
 
 	private static void printToConsole(String msg) {
