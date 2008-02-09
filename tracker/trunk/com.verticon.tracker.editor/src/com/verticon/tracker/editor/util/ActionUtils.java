@@ -60,6 +60,7 @@ import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
 import com.verticon.tracker.editor.dialogs.WSFileDialog;
 import com.verticon.tracker.editor.preferences.PreferenceConstants;
+import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.util.CommonUtilities;
@@ -85,7 +86,7 @@ public class ActionUtils {
 	 * @return
 	 * @throws FileNotFoundException
 	 */
-	public static final TagsBean getTagsBean(TrackerEditor editor,
+	public static final TagsBean getTagsBean(IQueryDataSetProvider editor,
 			ISelection selection) throws FileNotFoundException {
 		IResource resource = getSelectedResource(editor, selection);
 
@@ -306,7 +307,7 @@ public class ActionUtils {
 		return command;
 	}
 
-	private static IResource getSelectedResource(TrackerEditor editor,
+	private static IResource getSelectedResource(IQueryDataSetProvider editor,
 			ISelection selection) {
 		IResource resource = null;
 		if (selection instanceof IStructuredSelection) {
@@ -331,7 +332,7 @@ public class ActionUtils {
 		return resource;
 	}
 
-	public static TrackerEditor getTrackerEditor(IWorkbenchPart targetPart) {
+	public static IQueryDataSetProvider getTrackerEditor(IWorkbenchPart targetPart) {
 		IEditorPart editor = PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 
@@ -343,7 +344,7 @@ public class ActionUtils {
 					"Could not find an active TrackerEditor ");
 			return null;
 		}
-		return (TrackerEditor) editor;
+		return (IQueryDataSetProvider) editor;
 	}
 
 	public static Event promptUserForEvent(IWorkbenchPart targetPart) {
