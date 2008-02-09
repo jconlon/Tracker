@@ -153,8 +153,9 @@ import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelPr
  *   <li>adds SelectionTree expansion and  contraction actions to the 
  *   	 ActionBarContributor</li>
  *   <li>adds Selection linking between Animals and Events Tables</li>
- *   <li>implements previous two items with interfaces IEventSelectionProvider, 
- *   	 IAnimalSelectionProvider, ISelectionViewerProvider </li>
+ *   <li>adds support for OCL Query View</li>
+ *   <li>implements previous three items with interfaces IEventSelectionProvider, 
+ *   	 IAnimalSelectionProvider, ISelectionViewerProvider, IQueryDataSetProvider </li>
  * </ul>
  * TODO always un NOT this class if Editor changes are made, but be sure to add the 
  * above interfaces and NOT it back.
@@ -163,7 +164,7 @@ import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelPr
  */
 public class TrackerEditor
 	extends MultiPageEditorPart
-	implements ISelectionViewerProvider, IEventSelectionProvider, IAnimalSelectionProvider, IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
+	implements ISelectionViewerProvider, IEventSelectionProvider, IAnimalSelectionProvider, IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker, IQueryDataSetProvider {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -793,11 +794,8 @@ public class TrackerEditor
 		super.firePropertyChange(action);
 	}
 
-	/**
-	 * This sets the selection into whichever viewer is active.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.editor.presentation.IQueryDataSetProvider#setSelectionToViewer(java.util.Collection)
 	 */
 	public void setSelectionToViewer(Collection<?> collection) {
 		final Collection<?> theSelection = collection;
@@ -823,13 +821,8 @@ public class TrackerEditor
 		}
 	}
 
-	/**
-	 * This returns the editing domain as required by the {@link IEditingDomainProvider} interface.
-	 * This is important for implementing the static methods of {@link AdapterFactoryEditingDomain}
-	 * and for supporting {@link org.eclipse.emf.edit.ui.action.CommandAction}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.editor.presentation.IQueryDataSetProvider#getEditingDomain()
 	 */
 	public EditingDomain getEditingDomain() {
 		return editingDomain;

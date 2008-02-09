@@ -33,7 +33,7 @@ import org.eclipse.ui.IEditorActionDelegate;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.actions.ActionDelegate;
 
-import com.verticon.tracker.editor.presentation.TrackerEditor;
+import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 
 
 /**
@@ -52,7 +52,7 @@ public abstract class AbstractQueryDelegate
 	/**
 	 * The active editor
 	 */
-	private TrackerEditor editor = null;
+	private IQueryDataSetProvider editor = null;
 
 	/**
 	 * Selected {@link EObject}s.
@@ -132,7 +132,7 @@ public abstract class AbstractQueryDelegate
 	 * Get the active library editor and its host shell.
 	 */
 	public void setActiveEditor(IAction action, IEditorPart targetEditor) {
-		this.editor = (TrackerEditor) targetEditor;
+		this.editor = (IQueryDataSetProvider) targetEditor;
 		
 		if (targetEditor != null) {
 			this.shell = targetEditor.getSite().getShell();

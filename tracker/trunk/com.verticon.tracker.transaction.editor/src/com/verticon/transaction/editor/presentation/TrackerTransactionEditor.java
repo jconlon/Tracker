@@ -116,6 +116,7 @@ import com.verticon.tracker.editor.presentation.EventsTableViewerNotifier;
 import com.verticon.tracker.editor.presentation.IAnimalSelectionProvider;
 import com.verticon.tracker.editor.presentation.ICustomActionBarContributor;
 import com.verticon.tracker.editor.presentation.IEventSelectionProvider;
+import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.editor.presentation.ISelectionViewerProvider;
 import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
 import com.verticon.tracker.editor.presentation.TrackerTableEditorUtils;
@@ -151,8 +152,10 @@ import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
  *   <li>adds SelectionTree expansion and  contraction actions to the 
  *   	 ActionBarContributor</li>
  *   <li>adds Selection linking between Animals and Events Tables</li>
- *   <li>implements previous two items with interfaces IEventSelectionProvider, 
- *   	 IAnimalSelectionProvider, ISelectionViewerProvider </li>
+ *   <li>adds support for OCL Query View</li>
+ *   <li>implements previous three items with interfaces IEventSelectionProvider, 
+ *   	 IAnimalSelectionProvider, ISelectionViewerProvider, IQueryDataSetProvider </li>
+ *   
  * </ul>
  * TODO always un NOT this class if Editor changes are made, but be sure to add the 
  * above interfaces and NOT it back.
@@ -161,7 +164,7 @@ import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
  */
 public class TrackerTransactionEditor
 	extends MultiPageEditorPart
-	implements IEventSelectionProvider, IAnimalSelectionProvider, ISelectionViewerProvider, IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
+	implements IEventSelectionProvider, IAnimalSelectionProvider, ISelectionViewerProvider, IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker, IQueryDataSetProvider {
 	
 	
 	/**
