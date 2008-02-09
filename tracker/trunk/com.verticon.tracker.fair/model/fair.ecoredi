@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_3dynoYfdEdyXiYPOKyhf1A" activeDiagram="_3d5VUIfdEdyXiYPOKyhf1A">
   <model href="fair.ecore#/"/>
-  <diagrams xmi:id="_3d5VUIfdEdyXiYPOKyhf1A" position="0,0" size="100,100" name="fair" viewport="0,219">
+  <diagrams xmi:id="_3d5VUIfdEdyXiYPOKyhf1A" position="0,0" size="100,100" name="fair" viewport="0,80">
     <property xmi:id="_3kAkYIfdEdyXiYPOKyhf1A" key="pageFormatName" value="A4"/>
     <property xmi:id="_3kAkYYfdEdyXiYPOKyhf1A" key="diagramWidth" value="840"/>
     <property xmi:id="_3kAkYofdEdyXiYPOKyhf1A" key="diagramHeight" value="1188"/>
@@ -154,7 +154,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_0AfVIIfvEdyXiYPOKyhf1A" position="15,154" size="118,-1">
-      <anchorage xmi:id="_N31toIfwEdyXiYPOKyhf1A" graphEdge="_N327wIfwEdyXiYPOKyhf1A _ebSJINAuEdyytJJF15-OEw"/>
+      <anchorage xmi:id="_N31toIfwEdyXiYPOKyhf1A" graphEdge="_N327wIfwEdyXiYPOKyhf1A _ebSJINAuEdyytJJF15-OEw _lLjMYNcbEdyKxqGIyeOR8w"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_0AfVIYfvEdyXiYPOKyhf1A" presentation="default">
         <element href="fair.ecore#//YouthClub"/>
       </semanticModel>
@@ -405,7 +405,7 @@
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_FNzts9AmEdyytJJF15-OEw" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_VAe8QNAmEdyytJJF15-OEw" position="173,261" size="188,-1">
-      <anchorage xmi:id="_rWp3kNAnEdyytJJF15-OEw" graphEdge="_rWqeoNAnEdyytJJF15-OEw _2CIJgNAsEdyytJJF15-OEw _wtoUkNAtEdyytJJF15-OEw _3zMpENAtEdyytJJF15-OEw _5mkOsNAuEdyytJJF15-OEw _UI5d4NAvEdyytJJF15-OEw"/>
+      <anchorage xmi:id="_rWp3kNAnEdyytJJF15-OEw" graphEdge="_rWqeoNAnEdyytJJF15-OEw _2CIJgNAsEdyytJJF15-OEw _wtoUkNAtEdyytJJF15-OEw _3zMpENAtEdyytJJF15-OEw _5mkOsNAuEdyytJJF15-OEw _UI5d4NAvEdyytJJF15-OEw _lLjMYNcbEdyKxqGIyeOR8w"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_VAe8QdAmEdyytJJF15-OEw" presentation="default">
         <element href="fair.ecore#//Person"/>
       </semanticModel>
@@ -534,6 +534,13 @@
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_UI5d4tAvEdyytJJF15-OEw" id="nameLabel" uDistance="20" vDistance="20"/>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_UI5d49AvEdyytJJF15-OEw" id="cardinalityLabel" uDistance="30" vDistance="-5"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_lLjMYNcbEdyKxqGIyeOR8w" anchor="_N31toIfwEdyXiYPOKyhf1A _rWp3kNAnEdyytJJF15-OEw">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_lLjMYdcbEdyKxqGIyeOR8w" presentation="default">
+        <element href="fair.ecore#//YouthClub/contact"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_lLjMYtcbEdyKxqGIyeOR8w" id="nameLabel" uDistance="12" vDistance="6"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_lLjMY9cbEdyKxqGIyeOR8w" id="cardinalityLabel" uDistance="-4" vDistance="-27"/>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

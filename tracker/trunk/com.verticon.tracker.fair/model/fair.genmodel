@@ -29,6 +29,7 @@
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//YouthClub">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//YouthClub/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//YouthClub/contact"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//Division">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Division/name"/>

@@ -23,6 +23,7 @@ Package fair <http://www.verticon.com/ns/tracker/fair/0.1.0>
 
   Class YouthClub
     Attribute name : EString<<1..1>>
+    Reference contact : Person<<1..*>>
 
   Class Division
     Attribute name : EString<<1..1>>

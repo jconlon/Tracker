@@ -6,6 +6,9 @@
  */
 package com.verticon.tracker.fair.validation;
 
+import com.verticon.tracker.fair.Person;
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * A sample validator interface for {@link com.verticon.tracker.fair.YouthClub}.
@@ -17,4 +20,6 @@ public interface YouthClubValidator {
 	boolean validate();
 
 	boolean validateName(String value);
+
+	boolean validateContact(EList<Person> value);
 }

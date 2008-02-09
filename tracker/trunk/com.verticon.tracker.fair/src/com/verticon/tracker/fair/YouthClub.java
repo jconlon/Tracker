@@ -5,6 +5,7 @@
  */
 package com.verticon.tracker.fair;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -16,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.YouthClub#getName <em>Name</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.YouthClub#getContact <em>Contact</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,5 +58,21 @@ public interface YouthClub extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Contact</b></em>' reference list.
+	 * The list contents are of type {@link com.verticon.tracker.fair.Person}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Contact</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Contact</em>' reference list.
+	 * @see com.verticon.tracker.fair.FairPackage#getYouthClub_Contact()
+	 * @model required="true"
+	 * @generated
+	 */
+	EList<Person> getContact();
 
 } // YouthClub
