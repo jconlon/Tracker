@@ -325,6 +325,15 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getYouthClub_Contact() {
+		return (EReference)youthClubEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDivision() {
 		return divisionEClass;
 	}
@@ -634,6 +643,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 
 		youthClubEClass = createEClass(YOUTH_CLUB);
 		createEAttribute(youthClubEClass, YOUTH_CLUB__NAME);
+		createEReference(youthClubEClass, YOUTH_CLUB__CONTACT);
 
 		divisionEClass = createEClass(DIVISION);
 		createEAttribute(divisionEClass, DIVISION__NAME);
@@ -725,6 +735,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 
 		initEClass(youthClubEClass, YouthClub.class, "YouthClub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getYouthClub_Name(), ecorePackage.getEString(), "name", null, 1, 1, YouthClub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getYouthClub_Contact(), this.getPerson(), null, "contact", null, 1, -1, YouthClub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(divisionEClass, Division.class, "Division", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDivision_Name(), ecorePackage.getEString(), "name", null, 1, 1, Division.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

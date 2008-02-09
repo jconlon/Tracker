@@ -214,13 +214,22 @@ public interface FairPackage extends EPackage {
 	int YOUTH_CLUB__NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Contact</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOUTH_CLUB__CONTACT = 1;
+
+	/**
 	 * The number of structural features of the '<em>Youth Club</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int YOUTH_CLUB_FEATURE_COUNT = 1;
+	int YOUTH_CLUB_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.DivisionImpl <em>Division</em>}' class.
@@ -790,6 +799,17 @@ public interface FairPackage extends EPackage {
 	EAttribute getYouthClub_Name();
 
 	/**
+	 * Returns the meta object for the reference list '{@link com.verticon.tracker.fair.YouthClub#getContact <em>Contact</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Contact</em>'.
+	 * @see com.verticon.tracker.fair.YouthClub#getContact()
+	 * @see #getYouthClub()
+	 * @generated
+	 */
+	EReference getYouthClub_Contact();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Division <em>Division</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1251,6 +1271,14 @@ public interface FairPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute YOUTH_CLUB__NAME = eINSTANCE.getYouthClub_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Contact</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference YOUTH_CLUB__CONTACT = eINSTANCE.getYouthClub_Contact();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.DivisionImpl <em>Division</em>}' class.
