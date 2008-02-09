@@ -379,7 +379,7 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 */
 	public Animal findAnimal(String id) {
 		for (Animal animal : animals) {
-			if(animal.getId() == id){
+			if(animal.getId().equals(id)){
 				return animal;
 			}
 		}
