@@ -95,5 +95,10 @@ public class EventSchemaTest extends TestCase {
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
+	
+	
+	public void testInstance() {
+		assertNotNull(getFixture());
+	}
 
 } //EventSchemaTest

@@ -76,5 +76,12 @@ public class GenericEventTest extends EventTest {
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
+	
+	@Override
+	public void testGetEventCode() {
+		assertNotNull(getFixture());
+		assertEquals(GenericEvent.EVENT_CODE, getFixture().getEventCode());
+	}
+
 
 } //GenericEventTest

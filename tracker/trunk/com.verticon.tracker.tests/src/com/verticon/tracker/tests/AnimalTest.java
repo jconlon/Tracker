@@ -246,14 +246,14 @@ public abstract class AnimalTest extends TestCase {
 	/**
 	 * Tests the '{@link com.verticon.tracker.Animal#setId(java.lang.String) <em>Id</em>}' feature setter.
 	 * <!-- begin-user-doc -->
+	 * setId is a derived value but it is the ID attribute for an Animal,
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#setId(java.lang.String)
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testSetId() {
-		// TODO: implement this feature setter test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		//NOOP 
+		
 	}
 
 	/**

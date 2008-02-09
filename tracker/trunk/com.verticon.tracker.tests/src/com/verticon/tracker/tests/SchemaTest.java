@@ -95,5 +95,9 @@ public class SchemaTest extends TestCase {
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
+	
+	public void testInstance() {
+		assertNotNull(getFixture());
+	}
 
 } //SchemaTest
