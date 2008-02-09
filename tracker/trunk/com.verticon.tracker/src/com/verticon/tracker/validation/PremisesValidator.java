@@ -34,5 +34,7 @@ public interface PremisesValidator {
 
 	boolean validateSchema(Schema value);
 
+	boolean validateName(String value);
+
 	boolean validateEventSchemas(EList<EventSchema> value);
 }

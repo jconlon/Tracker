@@ -74,6 +74,7 @@ public class PremisesItemProvider
 			addPremisesIdPropertyDescriptor(object);
 			addEmailContactPropertyDescriptor(object);
 			addUriPropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -145,6 +146,28 @@ public class PremisesItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Premises_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Premises_name_feature", "_UI_Premises_type"),
+				 TrackerPackage.Literals.PREMISES__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -196,7 +219,7 @@ public class PremisesItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Premises)object).getPremisesId();
+		String label = ((Premises)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Premises_type") :
 			getString("_UI_Premises_type") + " " + label;
@@ -217,6 +240,7 @@ public class PremisesItemProvider
 			case TrackerPackage.PREMISES__PREMISES_ID:
 			case TrackerPackage.PREMISES__EMAIL_CONTACT:
 			case TrackerPackage.PREMISES__URI:
+			case TrackerPackage.PREMISES__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TrackerPackage.PREMISES__ANIMALS:

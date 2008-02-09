@@ -411,6 +411,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/locations"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/uri"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/schema"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/name"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/eventHistory"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/findAnimal">
         <genParameters ecoreParameter="tracker.ecore#//Premises/findAnimal/id"/>
