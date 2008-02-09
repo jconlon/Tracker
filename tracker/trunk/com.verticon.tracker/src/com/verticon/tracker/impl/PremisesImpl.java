@@ -50,6 +50,7 @@ import com.verticon.tracker.TrackerPackage;
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getLocations <em>Locations</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getUri <em>Uri</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getSchema <em>Schema</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -168,6 +169,26 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * @ordered
 	 */
 	protected Schema schema;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The parsed OCL expression for the body of the '{@link #eventHistory <em>Event History</em>}' operation.
@@ -348,6 +369,27 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Event> eventHistory() {
 		if (eventHistoryBodyOCL == null) {
 			EOperation eOperation = TrackerPackage.Literals.PREMISES.getEOperations().get(0);
@@ -450,6 +492,8 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return getUri();
 			case TrackerPackage.PREMISES__SCHEMA:
 				return getSchema();
+			case TrackerPackage.PREMISES__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -487,6 +531,9 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 			case TrackerPackage.PREMISES__SCHEMA:
 				setSchema((Schema)newValue);
 				return;
+			case TrackerPackage.PREMISES__NAME:
+				setName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -520,6 +567,9 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 			case TrackerPackage.PREMISES__SCHEMA:
 				setSchema((Schema)null);
 				return;
+			case TrackerPackage.PREMISES__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -546,6 +596,8 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
 			case TrackerPackage.PREMISES__SCHEMA:
 				return schema != null;
+			case TrackerPackage.PREMISES__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -566,6 +618,8 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 		result.append(emailContact);
 		result.append(", uri: ");
 		result.append(uri);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}

@@ -664,13 +664,22 @@ public interface TrackerPackage extends EPackage {
 	int PREMISES__SCHEMA = 6;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREMISES__NAME = 7;
+
+	/**
 	 * The number of structural features of the '<em>Premises</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREMISES_FEATURE_COUNT = 7;
+	int PREMISES_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.BovineBeefImpl <em>Bovine Beef</em>}' class.
@@ -5549,6 +5558,17 @@ public interface TrackerPackage extends EPackage {
 	EReference getPremises_Schema();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Premises#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see com.verticon.tracker.Premises#getName()
+	 * @see #getPremises()
+	 * @generated
+	 */
+	EAttribute getPremises_Name();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.BovineBeef <em>Bovine Beef</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6913,6 +6933,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PREMISES__SCHEMA = eINSTANCE.getPremises_Schema();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PREMISES__NAME = eINSTANCE.getPremises_Name();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.BovineBeefImpl <em>Bovine Beef</em>}' class.

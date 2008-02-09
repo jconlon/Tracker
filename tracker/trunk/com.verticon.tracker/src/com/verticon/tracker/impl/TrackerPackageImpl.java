@@ -1571,6 +1571,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPremises_Name() {
+		return (EAttribute)premisesEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBovineBeef() {
 		return bovineBeefEClass;
 	}
@@ -2004,6 +2013,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEReference(premisesEClass, PREMISES__LOCATIONS);
 		createEAttribute(premisesEClass, PREMISES__URI);
 		createEReference(premisesEClass, PREMISES__SCHEMA);
+		createEAttribute(premisesEClass, PREMISES__NAME);
 
 		bovineBeefEClass = createEClass(BOVINE_BEEF);
 		createEAttribute(bovineBeefEClass, BOVINE_BEEF__BEEF_BREED);
@@ -2276,6 +2286,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEReference(getPremises_Locations(), this.getLocation(), null, "locations", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPremises_Uri(), this.getURI(), "uri", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPremises_Schema(), this.getSchema(), null, "schema", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPremises_Name(), ecorePackage.getEString(), "name", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(premisesEClass, this.getEvent(), "eventHistory", 0, -1, IS_UNIQUE, IS_ORDERED);
 
