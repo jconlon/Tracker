@@ -1254,7 +1254,7 @@ public class TrackerEditor
 		ResourceSet resourceSet = editingDomain.getResourceSet();
 		Resource resource = (Resource)resourceSet.getResources().get(0);
 		selectionViewer.setInput(resource);
-		viewerPane.setTitle(editingDomain.getResourceSet());
+		viewerPane.setTitle(resource);
 
 		new AdapterFactoryTreeEditor(selectionViewer.getTree(), adapterFactory);
 
