@@ -861,8 +861,9 @@ public class TrackerTransactionEditor
 						(TransactionalEditingDomain) getEditingDomain(), adapterFactory));
 		
 		// unlike other EMF editors, I edit only a single resource, not a resource set
-		selectionViewer.setInput(getResource());
-
+		Resource resource = getResource();
+		selectionViewer.setInput(resource);
+		viewerPane.setTitle(resource);
 		new AdapterFactoryTreeEditor(selectionViewer.getTree(), adapterFactory);
 
 		createContextMenuFor(selectionViewer);
