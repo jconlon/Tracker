@@ -152,7 +152,7 @@ import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
  *   <li>adds SelectionTree expansion and  contraction actions to the 
  *   	 ActionBarContributor</li>
  *   <li>adds Selection linking between Animals and Events Tables</li>
- *   <li>adds support for OCL Query View</li>
+ *   <li>adds support for OCL Query View using an IQueryDataSetProvider adapter</li>
  *   <li>implements previous three items with interfaces IEventSelectionProvider, 
  *   	 IAnimalSelectionProvider, ISelectionViewerProvider, IQueryDataSetProvider </li>
  *   
@@ -164,7 +164,7 @@ import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
  */
 public class TrackerTransactionEditor
 	extends MultiPageEditorPart
-	implements IEventSelectionProvider, IAnimalSelectionProvider, ISelectionViewerProvider, IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker, IQueryDataSetProvider {
+	implements IEventSelectionProvider, IAnimalSelectionProvider, ISelectionViewerProvider, IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
 	
 	
 	/**
@@ -172,6 +172,10 @@ public class TrackerTransactionEditor
 	 */
 	private EventsTableViewerNotifier eventsTableViewerNotifier;
 	
+	/**
+	 * Offers a query on a dataSet. 
+	 */
+	private IQueryDataSetProvider queryDataSetProvider;
 	
 	private static final String CONSOLE = TrackerTransactionEditor.class.getSimpleName();
 	
@@ -1019,7 +1023,10 @@ public class TrackerTransactionEditor
 	/**
 	 * This is how the framework determines which interfaces we implement.
 	 * <!-- begin-user-doc -->
+	 * Modified to offer IAnimalSelectionProvider, ISelectionViewerProvider, 
+	 * IQueryDataSetProvider
 	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -1036,6 +1043,23 @@ public class TrackerTransactionEditor
 		else if (key.equals(IUndoContext.class)) {
 			// used by undo/redo actions to get their undo context
 			return undoContext;
+		}
+		//Adds adaptive support for IQueryDataSetProvider 	
+		else if (key.equals(IQueryDataSetProvider.class)){
+			if (queryDataSetProvider==null){
+				queryDataSetProvider = new IQueryDataSetProvider(){
+
+					public EditingDomain getEditingDomain() {
+						return TrackerTransactionEditor.this.getEditingDomain();
+					}
+
+					public void setSelectionToViewer(Collection<?> collection) {
+						TrackerTransactionEditor.this.setSelectionToViewer(collection);
+					}
+					
+				};
+			}
+			return queryDataSetProvider;
 		}
 		else {
 			return super.getAdapter(key);

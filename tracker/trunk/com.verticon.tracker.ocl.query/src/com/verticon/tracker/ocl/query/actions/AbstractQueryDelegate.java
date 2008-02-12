@@ -132,7 +132,14 @@ public abstract class AbstractQueryDelegate
 	 * Get the active library editor and its host shell.
 	 */
 	public void setActiveEditor(IAction action, IEditorPart targetEditor) {
-		this.editor = (IQueryDataSetProvider) targetEditor;
+		IQueryDataSetProvider queryDataSetProvider = 
+			(IQueryDataSetProvider)targetEditor.getAdapter(IQueryDataSetProvider.class);
+		
+		if(queryDataSetProvider==null){
+			throw new UnsupportedOperationException("Please choose an Editor that implements an IQueryDataSetProvider.");
+		}
+		
+		this.editor = queryDataSetProvider;
 		
 		if (targetEditor != null) {
 			this.shell = targetEditor.getSite().getShell();

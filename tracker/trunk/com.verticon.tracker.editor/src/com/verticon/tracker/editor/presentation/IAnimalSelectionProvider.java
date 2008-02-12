@@ -2,6 +2,11 @@ package com.verticon.tracker.editor.presentation;
 
 import org.eclipse.jface.viewers.ISelection;
 
+/**
+ * Offers a selection on a set of Animals.
+ * @author jconlon
+ *
+ */
 public interface IAnimalSelectionProvider {
 
 
