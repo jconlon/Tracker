@@ -26,7 +26,7 @@ package com.verticon.tracker;
  * @model
  * @generated
  */
-public interface MilkTest extends Event, DairyEvent {
+public interface MilkTest extends Event {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

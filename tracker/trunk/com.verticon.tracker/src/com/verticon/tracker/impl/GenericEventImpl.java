@@ -5,23 +5,20 @@
  */
 package com.verticon.tracker.impl;
 
-import com.verticon.tracker.EventSchema;
-import com.verticon.tracker.GenericEvent;
-import com.verticon.tracker.TrackerPackage;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EMap;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import com.verticon.tracker.EventAttributeSchema;
+import com.verticon.tracker.EventSchema;
+import com.verticon.tracker.GenericEvent;
+import com.verticon.tracker.TrackerPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -127,11 +124,31 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setEventSchema(EventSchema newEventSchema) {
+	public void setEventSchemaGen(EventSchema newEventSchema) {
 		EventSchema oldEventSchema = eventSchema;
 		eventSchema = newEventSchema;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.GENERIC_EVENT__EVENT_SCHEMA, oldEventSchema, eventSchema));
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void setEventSchema(EventSchema newEventSchema) {
+		setEventSchemaGen( newEventSchema);
+		if(newEventSchema == null || newEventSchema.getEventAttributes().isEmpty()){
+			getEventAttributes().clear();
+			return;
+		}else if (getEventAttributes().isEmpty()) {
+			for (EventAttributeSchema eventAttributeSchema : newEventSchema.getEventAttributes()) {
+				EventAttributeImpl eventAttribute =new EventAttributeImpl();
+				eventAttribute.setKey(eventAttributeSchema.getName());
+				getEventAttributes().add(eventAttribute);
+			}
+			return;
+		}
 	}
 
 	/**

@@ -6,6 +6,8 @@
  */
 package com.verticon.tracker.impl;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -28,11 +30,9 @@ import com.verticon.tracker.Bovine;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.BovineDairy;
-import com.verticon.tracker.BovineEvent;
 import com.verticon.tracker.Calving;
 import com.verticon.tracker.Caprine;
 import com.verticon.tracker.DairyBreed;
-import com.verticon.tracker.DairyEvent;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Equine;
 import com.verticon.tracker.Event;
@@ -76,7 +76,6 @@ import com.verticon.tracker.TreatmentMethod;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.TrackerValidator;
-import java.util.Map;
 
 /**
  * <!-- begin-user-doc -->
@@ -230,13 +229,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass bovineEventEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass birthDefectEClass = null;
 
 	/**
@@ -252,13 +244,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EClass milkTestEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass dairyEventEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1193,15 +1178,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getBovineEvent() {
-		return bovineEventEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getBirthDefect() {
 		return birthDefectEClass;
 	}
@@ -1294,15 +1270,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 */
 	public EAttribute getMilkTest_OtherSolids() {
 		return (EAttribute)milkTestEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getDairyEvent() {
-		return dairyEventEClass;
 	}
 
 	/**
@@ -2102,8 +2069,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		calvingEClass = createEClass(CALVING);
 
-		bovineEventEClass = createEClass(BOVINE_EVENT);
-
 		birthDefectEClass = createEClass(BIRTH_DEFECT);
 		createEAttribute(birthDefectEClass, BIRTH_DEFECT__FREEMARTIN);
 
@@ -2117,8 +2082,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(milkTestEClass, MILK_TEST__PERCENT_PROTEIN);
 		createEAttribute(milkTestEClass, MILK_TEST__SOMATIC_CELL_COUNTS);
 		createEAttribute(milkTestEClass, MILK_TEST__OTHER_SOLIDS);
-
-		dairyEventEClass = createEClass(DAIRY_EVENT);
 
 		herdTestEClass = createEClass(HERD_TEST);
 		createEAttribute(herdTestEClass, HERD_TEST__PREGNANT);
@@ -2226,11 +2189,9 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		medicalTreatmentEClass.getESuperTypes().add(this.getEvent());
 		birthingEClass.getESuperTypes().add(this.getEvent());
 		calvingEClass.getESuperTypes().add(this.getBirthing());
-		calvingEClass.getESuperTypes().add(this.getBovineEvent());
 		birthDefectEClass.getESuperTypes().add(this.getEvent());
 		mastitisEClass.getESuperTypes().add(this.getMedicalCondition());
 		milkTestEClass.getESuperTypes().add(this.getEvent());
-		milkTestEClass.getESuperTypes().add(this.getDairyEvent());
 		herdTestEClass.getESuperTypes().add(this.getEvent());
 		genericEventEClass.getESuperTypes().add(this.getEvent());
 
@@ -2387,8 +2348,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		initEClass(calvingEClass, Calving.class, "Calving", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(bovineEventEClass, BovineEvent.class, "BovineEvent", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(birthDefectEClass, BirthDefect.class, "BirthDefect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBirthDefect_Freemartin(), ecorePackage.getEBoolean(), "freemartin", null, 0, 1, BirthDefect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2402,8 +2361,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getMilkTest_PercentProtein(), ecorePackage.getEDouble(), "percentProtein", null, 0, 1, MilkTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMilkTest_SomaticCellCounts(), ecorePackage.getEInt(), "somaticCellCounts", null, 0, 1, MilkTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMilkTest_OtherSolids(), ecorePackage.getEDouble(), "otherSolids", null, 0, 1, MilkTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(dairyEventEClass, DairyEvent.class, "DairyEvent", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(herdTestEClass, HerdTest.class, "HerdTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getHerdTest_Pregnant(), ecorePackage.getEBoolean(), "pregnant", null, 0, 1, HerdTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2768,7 +2725,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		initEEnum(animalTypeEEnum, AnimalType.class, "AnimalType");
 		addEEnumLiteral(animalTypeEEnum, AnimalType.UNSPECIFIED);
-		addEEnumLiteral(animalTypeEEnum, AnimalType.BOVINE);
 		addEEnumLiteral(animalTypeEEnum, AnimalType.SWINE);
 		addEEnumLiteral(animalTypeEEnum, AnimalType.EQUINE);
 		addEEnumLiteral(animalTypeEEnum, AnimalType.CAPRINE);

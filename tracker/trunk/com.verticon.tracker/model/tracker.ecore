@@ -534,8 +534,7 @@
     <eLiterals name="Nine" value="9"/>
     <eLiterals name="Ten" value="10"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Calving" eSuperTypes="#//Birthing #//BovineEvent"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BovineEvent" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Calving" eSuperTypes="#//Birthing"/>
   <eClassifiers xsi:type="ecore:EClass" name="BirthDefect" eSuperTypes="#//Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="freemartin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
@@ -543,14 +542,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="origin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MilkTest" eSuperTypes="#//Event #//DairyEvent">
+  <eClassifiers xsi:type="ecore:EClass" name="MilkTest" eSuperTypes="#//Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="poundsProduced" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="percentButterFat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="percentProtein" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="somaticCellCounts" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="otherSolids" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DairyEvent" abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="HerdTest" eSuperTypes="#//Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pregnant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="daysSinceBredEstimate"
@@ -580,7 +578,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="AnimalType">
     <eLiterals name="Unspecified" literal=""/>
-    <eLiterals name="Bovine" value="1"/>
     <eLiterals name="Swine" value="2"/>
     <eLiterals name="Equine" value="3"/>
     <eLiterals name="Caprine" value="4"/>

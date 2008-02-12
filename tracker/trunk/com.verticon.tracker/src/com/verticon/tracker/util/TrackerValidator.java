@@ -24,11 +24,9 @@ import com.verticon.tracker.Bovine;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.BovineDairy;
-import com.verticon.tracker.BovineEvent;
 import com.verticon.tracker.Calving;
 import com.verticon.tracker.Caprine;
 import com.verticon.tracker.DairyBreed;
-import com.verticon.tracker.DairyEvent;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Equine;
 import com.verticon.tracker.Event;
@@ -211,16 +209,12 @@ public class TrackerValidator extends EObjectValidator {
 				return validateBirthing((Birthing)value, diagnostics, context);
 			case TrackerPackage.CALVING:
 				return validateCalving((Calving)value, diagnostics, context);
-			case TrackerPackage.BOVINE_EVENT:
-				return validateBovineEvent((BovineEvent)value, diagnostics, context);
 			case TrackerPackage.BIRTH_DEFECT:
 				return validateBirthDefect((BirthDefect)value, diagnostics, context);
 			case TrackerPackage.MASTITIS:
 				return validateMastitis((Mastitis)value, diagnostics, context);
 			case TrackerPackage.MILK_TEST:
 				return validateMilkTest((MilkTest)value, diagnostics, context);
-			case TrackerPackage.DAIRY_EVENT:
-				return validateDairyEvent((DairyEvent)value, diagnostics, context);
 			case TrackerPackage.HERD_TEST:
 				return validateHerdTest((HerdTest)value, diagnostics, context);
 			case TrackerPackage.GENERIC_EVENT:
@@ -450,15 +444,6 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateBovineEvent(BovineEvent bovineEvent, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(bovineEvent, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean validateBirthDefect(BirthDefect birthDefect, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(birthDefect, diagnostics, context);
 	}
@@ -479,15 +464,6 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validateMilkTest(MilkTest milkTest, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(milkTest, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateDairyEvent(DairyEvent dairyEvent, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(dairyEvent, diagnostics, context);
 	}
 
 	/**

@@ -348,7 +348,6 @@
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//AnimalType">
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/Unspecified"/>
-      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/Bovine"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/Swine"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/Equine"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/Caprine"/>
@@ -497,7 +496,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Birthing/difficulty"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Calving"/>
-    <genClasses image="false" ecoreClass="tracker.ecore#//BovineEvent"/>
     <genClasses ecoreClass="tracker.ecore#//BirthDefect">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//BirthDefect/freemartin"/>
     </genClasses>
@@ -512,19 +510,19 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/somaticCellCounts"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/otherSolids"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="tracker.ecore#//DairyEvent"/>
     <genClasses ecoreClass="tracker.ecore#//HerdTest">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/pregnant"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/daysSinceBredEstimate"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/bredDateEstimate"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//GenericEvent">
-      <genFeatures property="Readonly" children="true" createChild="true" propertyMultiLine="true"
-          ecoreFeature="ecore:EReference tracker.ecore#//GenericEvent/eventAttributes"/>
-      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//GenericEvent/eventSchema"/>
+      <genFeatures property="Readonly" children="true" createChild="false" propertyDescription="Custom Attributes"
+          propertyMultiLine="true" ecoreFeature="ecore:EReference tracker.ecore#//GenericEvent/eventAttributes"/>
+      <genFeatures property="None" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference tracker.ecore#//GenericEvent/eventSchema"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//EventAttribute">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//EventAttribute/key"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//EventAttribute/key"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//EventAttribute/value"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//EventSchema">

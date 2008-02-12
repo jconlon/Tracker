@@ -32,16 +32,6 @@ public enum AnimalType implements Enumerator {
 	UNSPECIFIED(0, "Unspecified", ""),
 
 	/**
-	 * The '<em><b>Bovine</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #BOVINE_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	BOVINE(1, "Bovine", "Bovine"),
-
-	/**
 	 * The '<em><b>Swine</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -132,21 +122,6 @@ public enum AnimalType implements Enumerator {
 	 * @ordered
 	 */
 	public static final int UNSPECIFIED_VALUE = 0;
-
-	/**
-	 * The '<em><b>Bovine</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Bovine</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #BOVINE
-	 * @model name="Bovine"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int BOVINE_VALUE = 1;
 
 	/**
 	 * The '<em><b>Swine</b></em>' literal value.
@@ -262,7 +237,6 @@ public enum AnimalType implements Enumerator {
 	private static final AnimalType[] VALUES_ARRAY =
 		new AnimalType[] {
 			UNSPECIFIED,
-			BOVINE,
 			SWINE,
 			EQUINE,
 			CAPRINE,
@@ -321,7 +295,6 @@ public enum AnimalType implements Enumerator {
 	public static AnimalType get(int value) {
 		switch (value) {
 			case UNSPECIFIED_VALUE: return UNSPECIFIED;
-			case BOVINE_VALUE: return BOVINE;
 			case SWINE_VALUE: return SWINE;
 			case EQUINE_VALUE: return EQUINE;
 			case CAPRINE_VALUE: return CAPRINE;
