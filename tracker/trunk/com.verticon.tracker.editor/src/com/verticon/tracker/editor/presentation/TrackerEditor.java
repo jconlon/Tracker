@@ -153,9 +153,10 @@ import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelPr
  *   <li>adds SelectionTree expansion and  contraction actions to the 
  *   	 ActionBarContributor</li>
  *   <li>adds Selection linking between Animals and Events Tables</li>
- *   <li>adds support for OCL Query View</li>
- *   <li>implements previous three items with interfaces IEventSelectionProvider, 
- *   	 IAnimalSelectionProvider, ISelectionViewerProvider, IQueryDataSetProvider </li>
+ *   <li>implements previous two items with interfaces IEventSelectionProvider, 
+ *   	 IAnimalSelectionProvider, ISelectionViewerProvider,  </li>
+ *   <li>adds support for OCL Query View using an IQueryDataSetProvider adapter</li>
+ *   
  * </ul>
  * TODO always un NOT this class if Editor changes are made, but be sure to add the 
  * above interfaces and NOT it back.
@@ -164,7 +165,7 @@ import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelPr
  */
 public class TrackerEditor
 	extends MultiPageEditorPart
-	implements ISelectionViewerProvider, IEventSelectionProvider, IAnimalSelectionProvider, IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker, IQueryDataSetProvider {
+	implements IEventSelectionProvider, IAnimalSelectionProvider, ISelectionViewerProvider, IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -173,6 +174,14 @@ public class TrackerEditor
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
 	
+	/**
+	 * Offers a query on a dataSet. 
+	 */
+	private IQueryDataSetProvider queryDataSetProvider;
+	
+	/**
+	 * Support for logging. 
+	 */
 	private static final String CONSOLE = TrackerEditor.class.getSimpleName();
 	
 	/**
@@ -1631,8 +1640,10 @@ public class TrackerEditor
 	/**
 	 * This is how the framework determines which interfaces we implement.
 	 * <!-- begin-user-doc -->
+	 * Modified to offer IAnimalSelectionProvider, ISelectionViewerProvider, 
+	 * IQueryDataSetProvider
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@SuppressWarnings("unchecked")
 		@Override
@@ -1645,6 +1656,23 @@ public class TrackerEditor
 		}
 		else if (key.equals(IGotoMarker.class)) {
 			return this;
+		}
+		//Adds adaptive support for IQueryDataSetProvider 	
+		else if (key.equals(IQueryDataSetProvider.class)){
+			if (queryDataSetProvider==null){
+				queryDataSetProvider = new IQueryDataSetProvider(){
+
+					public EditingDomain getEditingDomain() {
+						return TrackerEditor.this.getEditingDomain();
+					}
+
+					public void setSelectionToViewer(Collection<?> collection) {
+						TrackerEditor.this.setSelectionToViewer(collection);
+					}
+					
+				};
+			}
+			return queryDataSetProvider;
 		}
 		else {
 			return super.getAdapter(key);

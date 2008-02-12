@@ -22,6 +22,7 @@ import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.Preferences;
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.command.Command;
@@ -116,6 +117,23 @@ public class ActionUtils {
 		TagsBean tagsBean = new TagsBean(dateOfTags, tagNumbers, resource
 				.getFullPath().toOSString());
 		return tagsBean;
+	}
+	
+	/**
+	 * 
+	 * @param adaptable
+	 * @param selection
+	 * @return
+	 * @throws FileNotFoundException
+	 */
+	public static final TagsBean getTagsBean(IAdaptable adaptable,
+			ISelection selection) throws FileNotFoundException {
+		IQueryDataSetProvider queryDataSetProvider = (IQueryDataSetProvider)adaptable.getAdapter(IQueryDataSetProvider.class);
+		if(queryDataSetProvider==null){
+			throw new IllegalArgumentException("adaptable parameter does not support a IQueryDataSetProvider");
+		}
+		return getTagsBean(queryDataSetProvider,
+				 selection);
 	}
 
 	public static final AnimalTemplateBean getTemplateBean(TrackerEditor editor,
