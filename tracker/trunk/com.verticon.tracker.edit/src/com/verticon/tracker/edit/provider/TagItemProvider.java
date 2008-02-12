@@ -17,8 +17,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
-import org.eclipse.emf.edit.command.CommandParameter;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -32,7 +30,6 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalType;
-import com.verticon.tracker.Bovine;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.BovineDairy;
@@ -51,6 +48,14 @@ import com.verticon.tracker.util.TrackerSwitch;
 /**
  * This is the item provider adapter for a {@link com.verticon.tracker.Tag} object.
  * <!-- begin-user-doc -->
+ * TagItemProvider needs to dynamically determine and present to the user
+ * the children Events that can be created for a Tag.  
+ * AnimalSpecific Events are a few EMF Generated Events and various Schema variants of
+ * GenericEvent.
+ * The collectNewChildDescriptors method is modified to dynamically create the children 
+ * based on animal.
+ * The getCreateChildText method is overridden to change the test of the GenericEvent in 
+ * the create child dropdown.
  * <!-- end-user-doc -->
  * @generated
  */
@@ -341,7 +346,7 @@ public class TagItemProvider
 		
 		
 		//This is what is modified
-		addSpeciesSpecificChildren(newChildDescriptors, object);
+		addChildrenBasedOnTagAnimal(newChildDescriptors, object);
 		
 	}
 
@@ -349,7 +354,7 @@ public class TagItemProvider
 	 * @param newChildDescriptors
 	 * @param object
 	 */
-	private void addSpeciesSpecificChildren(
+	private void addChildrenBasedOnTagAnimal(
 			final Collection<Object> newChildDescriptors, Object object) {
 		
 		Tag tag = (Tag)object;
@@ -475,8 +480,6 @@ public class TagItemProvider
 	 * @param eventSchema
 	 */
 	private void createGenericEvent(final Collection<Object> newChildDescriptors, EventSchema eventSchema){
-		//FIXME to handle filtering of generic events
-		String name = eventSchema.getName();
 		GenericEvent ge = TrackerFactory.eINSTANCE.createGenericEvent();
 		ge.setEventSchema(eventSchema);
 
@@ -488,14 +491,6 @@ public class TagItemProvider
 				);
 	}
 	
-//	/**
-//	   * This is a convenience method that creates a <code>CommandParameter</code>
-//	   * for a given parent feature and child object.
-//	   */
-//	  protected CommandParameter createGenericEventChildParameter(String name, Object feature, Object child)
-//	  {
-//	    return new CommandParameter(null, feature, child);
-//	  }
 	
 	/**
 	 * 
