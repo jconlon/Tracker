@@ -16,7 +16,7 @@ package com.verticon.tracker;
  * @model
  * @generated
  */
-public interface Calving extends Birthing, BovineEvent {
+public interface Calving extends Birthing {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

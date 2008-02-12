@@ -6,29 +6,19 @@
 package com.verticon.tracker.edit.provider;
 
 
-import com.verticon.tracker.Animal;
-import com.verticon.tracker.Bovine;
-import com.verticon.tracker.BovineBeef;
-import com.verticon.tracker.BovineBison;
-import com.verticon.tracker.BovineDairy;
-import com.verticon.tracker.Caprine;
-import com.verticon.tracker.Ovine;
-import com.verticon.tracker.Tag;
-import com.verticon.tracker.TrackerFactory;
-import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.util.TrackerSwitch;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-
+import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
+import org.eclipse.emf.edit.command.CommandParameter;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -39,6 +29,24 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import com.verticon.tracker.Animal;
+import com.verticon.tracker.AnimalType;
+import com.verticon.tracker.Bovine;
+import com.verticon.tracker.BovineBeef;
+import com.verticon.tracker.BovineBison;
+import com.verticon.tracker.BovineDairy;
+import com.verticon.tracker.Caprine;
+import com.verticon.tracker.Equine;
+import com.verticon.tracker.EventSchema;
+import com.verticon.tracker.GenericEvent;
+import com.verticon.tracker.Ovine;
+import com.verticon.tracker.Premises;
+import com.verticon.tracker.Swine;
+import com.verticon.tracker.Tag;
+import com.verticon.tracker.TrackerFactory;
+import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.util.TrackerSwitch;
 
 /**
  * This is the item provider adapter for a {@link com.verticon.tracker.Tag} object.
@@ -210,6 +218,7 @@ public class TagItemProvider
 		super.notifyChanged(notification);
 	}
 
+	
 
 	/**
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
@@ -343,12 +352,6 @@ public class TagItemProvider
 	private void addSpeciesSpecificChildren(
 			final Collection<Object> newChildDescriptors, Object object) {
 		
-		//FIXME to handle filtering of generic events
-		newChildDescriptors.add
-		(createChildParameter
-				(TrackerPackage.Literals.TAG__EVENTS,
-						TrackerFactory.eINSTANCE.createGenericEvent()));
-		
 		Tag tag = (Tag)object;
 		if(tag==null){
 			return;
@@ -359,6 +362,7 @@ public class TagItemProvider
 			public Object caseOvine(Ovine object) {
 				addBirthingEventChild(newChildDescriptors);
 				addMilkTestEventChild(newChildDescriptors);
+				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.OVINE, object.eContainer());
 				return object;
 			}
 
@@ -366,12 +370,14 @@ public class TagItemProvider
 			public Object caseCaprine(Caprine object) {
 				addBirthingEventChild(newChildDescriptors);
 				addMilkTestEventChild(newChildDescriptors);
+				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.CAPRINE, object.eContainer());
 				return object;
 			}
 
 			@Override
-			public Object caseBovine(Bovine object) {
+			public Object caseBovineBeef(BovineBeef object) {
 				addCalvingEventChild(newChildDescriptors);
+				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.BOVINE_BEEF, object.eContainer());
 				return object;
 			}
 			
@@ -379,6 +385,29 @@ public class TagItemProvider
 			public Object caseBovineDairy(BovineDairy object) {
 				addCalvingEventChild(newChildDescriptors);
 				addMilkTestEventChild(newChildDescriptors);
+				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.BOVINE_DAIRY, object.eContainer());
+				return object;
+			}
+			
+			@Override
+			public Object caseBovineBison(BovineBison object) {
+				addCalvingEventChild(newChildDescriptors);
+				addMilkTestEventChild(newChildDescriptors);
+				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.BOVINE_BISON, object.eContainer());
+				return object;
+			}
+			
+			@Override
+			public Object caseSwine(Swine object) {
+				addBirthingEventChild(newChildDescriptors);
+				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.SWINE, object.eContainer());
+				return object;
+			}
+			
+			@Override
+			public Object caseEquine(Equine object) {
+				addBirthingEventChild(newChildDescriptors);
+				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.EQUINE, object.eContainer());
 				return object;
 			}
 			
@@ -426,6 +455,68 @@ public class TagItemProvider
 	}
 
 	/**
+	 * @param newChildDescriptors
+	 */
+	private void createAnimalSpecificGenericEvents(
+			final Collection<Object> newChildDescriptors, AnimalType animalType, EObject animalContainer) {
+		if(animalContainer != null &&  animalContainer instanceof Premises){
+			EList<EventSchema> eventSchemas = findEventSchemas(animalType,  (Premises)animalContainer);
+			for (EventSchema eventSchema : eventSchemas) {
+				createGenericEvent(newChildDescriptors,  eventSchema);
+			}
+			
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * @param newChildDescriptors
+	 * @param eventSchema
+	 */
+	private void createGenericEvent(final Collection<Object> newChildDescriptors, EventSchema eventSchema){
+		//FIXME to handle filtering of generic events
+		String name = eventSchema.getName();
+		GenericEvent ge = TrackerFactory.eINSTANCE.createGenericEvent();
+		ge.setEventSchema(eventSchema);
+
+		
+		newChildDescriptors.add(
+				createChildParameter(
+						TrackerPackage.Literals.TAG__EVENTS, //feature
+						ge)//child
+				);
+	}
+	
+//	/**
+//	   * This is a convenience method that creates a <code>CommandParameter</code>
+//	   * for a given parent feature and child object.
+//	   */
+//	  protected CommandParameter createGenericEventChildParameter(String name, Object feature, Object child)
+//	  {
+//	    return new CommandParameter(null, feature, child);
+//	  }
+	
+	/**
+	 * 
+	 * @param animalType
+	 * @param premises
+	 * @return all EventSchema Elements for a specified animalType
+	 */
+	private EList<EventSchema> findEventSchemas(AnimalType animalType, Premises premises){
+		if(premises.getSchema()==null){
+			return ECollections.emptyEList();
+		}
+		EList<EventSchema> results = new BasicEList<EventSchema>();
+	    for (EventSchema eventSchema : premises.getSchema().getEventSchemas()) {
+			if(eventSchema.getAnimalType().contains(animalType)){
+				results.add(eventSchema);
+			}
+		}
+		return results;
+	}
+
+	/**
 	 * Return the resource locator for this item provider's resources.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -434,6 +525,21 @@ public class TagItemProvider
 	@Override
 	public ResourceLocator getResourceLocator() {
 		return TrackerReportEditPlugin.INSTANCE;
+	}
+
+	/**
+	 * Change the child menu text for GenericEvent to be the EventSchema name
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature,
+			Object child, Collection<?> selection) {
+		if(child instanceof GenericEvent){
+			GenericEvent ge = (GenericEvent)child;
+			if(ge.getEventSchema()!=null && ge.getEventSchema().getName()!=null){
+				return ge.getEventSchema().getName();
+			}
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

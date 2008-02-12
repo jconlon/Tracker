@@ -6,20 +6,15 @@
 package com.verticon.tracker.edit.provider;
 
 
-import com.verticon.tracker.GenericEvent;
-import com.verticon.tracker.TrackerFactory;
-import com.verticon.tracker.TrackerPackage;
-
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -27,7 +22,14 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptorDecorator;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import com.verticon.tracker.EventAttributeSchema;
+import com.verticon.tracker.EventSchema;
+import com.verticon.tracker.GenericEvent;
+import com.verticon.tracker.TrackerPackage;
 
 /**
  * This is the item provider adapter for a {@link com.verticon.tracker.GenericEvent} object.
@@ -72,7 +74,6 @@ public class GenericEventItemProvider
 			super.getPropertyDescriptors(object);
 
 			addEventAttributesPropertyDescriptor(object);
-			addEventSchemaPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -89,7 +90,7 @@ public class GenericEventItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_GenericEvent_eventAttributes_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_GenericEvent_eventAttributes_feature", "_UI_GenericEvent_type"),
+				 getString("_UI_GenericEvent_eventAttributes_description"),
 				 TrackerPackage.Literals.GENERIC_EVENT__EVENT_ATTRIBUTES,
 				 false,
 				 true,
@@ -98,28 +99,8 @@ public class GenericEventItemProvider
 				 null,
 				 null));
 	}
+	
 
-	/**
-	 * This adds a property descriptor for the Event Schema feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addEventSchemaPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_GenericEvent_eventSchema_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_GenericEvent_eventSchema_feature", "_UI_GenericEvent_type"),
-				 TrackerPackage.Literals.GENERIC_EVENT__EVENT_SCHEMA,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
@@ -211,11 +192,6 @@ public class GenericEventItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.GENERIC_EVENT__EVENT_ATTRIBUTES,
-				 TrackerFactory.eINSTANCE.create(TrackerPackage.Literals.EVENT_ATTRIBUTE)));
 	}
 
 	/**

@@ -90,7 +90,7 @@ public class EventAttributeItemProvider
 				 getString("_UI_EventAttribute_key_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_EventAttribute_key_feature", "_UI_EventAttribute_type"),
 				 TrackerPackage.Literals.EVENT_ATTRIBUTE__KEY,
-				 true,
+				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,

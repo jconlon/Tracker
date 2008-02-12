@@ -21,10 +21,8 @@ import com.verticon.tracker.Bovine;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.BovineDairy;
-import com.verticon.tracker.BovineEvent;
 import com.verticon.tracker.Calving;
 import com.verticon.tracker.Caprine;
-import com.verticon.tracker.DairyEvent;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Equine;
 import com.verticon.tracker.Event;
@@ -250,10 +248,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 				return createCalvingAdapter();
 			}
 			@Override
-			public Adapter caseBovineEvent(BovineEvent object) {
-				return createBovineEventAdapter();
-			}
-			@Override
 			public Adapter caseBirthDefect(BirthDefect object) {
 				return createBirthDefectAdapter();
 			}
@@ -264,10 +258,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseMilkTest(MilkTest object) {
 				return createMilkTestAdapter();
-			}
-			@Override
-			public Adapter caseDairyEvent(DairyEvent object) {
-				return createDairyEventAdapter();
 			}
 			@Override
 			public Adapter caseHerdTest(HerdTest object) {
@@ -580,20 +570,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.BovineEvent <em>Bovine Event</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.verticon.tracker.BovineEvent
-	 * @generated
-	 */
-	public Adapter createBovineEventAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.BirthDefect <em>Birth Defect</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -632,20 +608,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMilkTestAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.DairyEvent <em>Dairy Event</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.verticon.tracker.DairyEvent
-	 * @generated
-	 */
-	public Adapter createDairyEventAdapter() {
 		return null;
 	}
 
