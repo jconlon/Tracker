@@ -3,6 +3,8 @@ package com.verticon.tracker.editor.presentation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
+
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -398,15 +400,15 @@ public class TrackerActionBarContributor
 			}
 		}
 	}
-
+	
 	/**
 	 * This populates the pop-up menu before it appears.
 	 * <!-- begin-user-doc -->
+	 * NOT used for reference only.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void menuAboutToShow(IMenuManager menuManager) {
+	public void menuAboutToShowGen(IMenuManager menuManager) {
 		super.menuAboutToShow(menuManager);
 		MenuManager submenuManager = null;
 
@@ -418,7 +420,35 @@ public class TrackerActionBarContributor
 		populateManager(submenuManager, createSiblingActions, null);
 		menuManager.insertBefore("edit", submenuManager);
 	}
+	
+	/**
+	 * This populates the pop-up menu before it appears.
+	 * <!-- begin-user-doc -->
+	 * Populates the main menu directly - does not use Child and Sibling menus.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public void menuAboutToShow(IMenuManager menuManager) {
+		super.menuAboutToShow(menuManager);
+		populateManager(menuManager, createChildActions);
+	}
 
+	/**
+	 * add actions to the menu manager.
+	 */
+	protected void populateManager(IContributionManager manager,
+			Collection<?> actions) {
+		if (actions != null) {
+			for (Iterator<?> i = actions.iterator(); i.hasNext();) {
+				IAction action = (IAction) i.next();
+				if (!action.getText().startsWith("Add")) {//$NON-NLS-1$
+					action.setText("Add " + action.getText() + "...");//$NON-NLS-2$//$NON-NLS-1$
+				}
+				manager.insertBefore("edit", action); //$NON-NLS-1$
+			}
+		}
+	}
 	/**
 	 * This inserts global actions before the "additions-end" separator.
 	 * <!-- begin-user-doc -->
