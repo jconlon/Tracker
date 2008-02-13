@@ -126,6 +126,10 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery {
 		
 		try {
 			this.setActiveEditor(null, editor);
+		}catch (UnsupportedOperationException ex){
+			MessageDialog.openInformation(getShell(), TITLE,
+					ex.getMessage());
+			return;
 		} catch (RuntimeException e1) {
 			MessageDialog.openInformation(getShell(), TITLE,
 					SELECT_TRACKER_EDITOR_ACTIVE_EDITOR);

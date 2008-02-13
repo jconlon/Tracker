@@ -160,11 +160,11 @@ import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
  * TODO always un NOT this class if Editor changes are made, but be sure to add the 
  * above interfaces and NOT it back.
  * <!-- end-user-doc -->
- * @generated NOT
+ * @generated 
  */
 public class TrackerTransactionEditor
 	extends MultiPageEditorPart
-	implements IEventSelectionProvider, IAnimalSelectionProvider, ISelectionViewerProvider, IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
+	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
 	
 	
 	/**
@@ -172,6 +172,19 @@ public class TrackerTransactionEditor
 	 */
 	private EventsTableViewerNotifier eventsTableViewerNotifier;
 	
+	/**
+	 * Offers a selection on a set of Animals. 
+	 */
+	private IAnimalSelectionProvider animalSelectionProvider;
+	
+	/**
+	 * Offers a generic selection. 
+	 */
+	private ISelectionViewerProvider selectionViewerProvider;
+	/**
+	 * Offers a selection on a set of Events. 
+	 */
+	private IEventSelectionProvider eventSelectionProvider;
 	/**
 	 * Offers a query on a dataSet. 
 	 */
@@ -1043,6 +1056,58 @@ public class TrackerTransactionEditor
 		else if (key.equals(IUndoContext.class)) {
 			// used by undo/redo actions to get their undo context
 			return undoContext;
+		}
+		//Added to support AnimalSelections
+		else if (key.equals(IAnimalSelectionProvider.class)){
+			if (animalSelectionProvider==null){
+				animalSelectionProvider = new IAnimalSelectionProvider(){
+
+					public ISelection getAnimalSelection() {
+						return TrackerTransactionEditor.this.getAnimalSelection();
+					}
+
+					public void setAnimalSelection(ISelection selection) {
+						TrackerTransactionEditor.this.setAnimalSelection(selection);
+					}
+					
+				};
+			}
+			return animalSelectionProvider;
+		}
+		//Added to support the main Viewer Selections
+		else if (key.equals(ISelectionViewerProvider.class)){
+			if (selectionViewerProvider==null){
+				selectionViewerProvider = new ISelectionViewerProvider(){
+
+					public ISelection getSelectionViewerSelection() {
+						return TrackerTransactionEditor.this.getSelectionViewerSelection();
+					}
+
+					public void setSelectionViewerSelection(ISelection selection) {
+						TrackerTransactionEditor.this.setSelectionViewerSelection(selection);
+						
+					}
+					
+				};
+			}
+			return selectionViewerProvider;
+		}
+		else if (key.equals(IEventSelectionProvider.class)){
+			if (eventSelectionProvider==null){
+				eventSelectionProvider = new IEventSelectionProvider(){
+
+					public ISelection getEventSelection() {
+						return TrackerTransactionEditor.this.getEventSelection();
+					}
+
+					public void setEventSelection(ISelection selection) {
+						TrackerTransactionEditor.this.setEventSelection(selection);
+					}
+
+					
+				};
+			}
+			return eventSelectionProvider;
 		}
 		//Adds adaptive support for IQueryDataSetProvider 	
 		else if (key.equals(IQueryDataSetProvider.class)){

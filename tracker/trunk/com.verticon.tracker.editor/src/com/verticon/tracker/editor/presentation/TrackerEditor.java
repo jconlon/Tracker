@@ -153,7 +153,7 @@ import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelPr
  *   <li>adds SelectionTree expansion and  contraction actions to the 
  *   	 ActionBarContributor</li>
  *   <li>adds Selection linking between Animals and Events Tables</li>
- *   <li>implements previous two items with interfaces IEventSelectionProvider, 
+ *   <li>implements previous two items with adapters for IEventSelectionProvider, 
  *   	 IAnimalSelectionProvider, ISelectionViewerProvider,  </li>
  *   <li>adds support for OCL Query View using an IQueryDataSetProvider adapter</li>
  *   
@@ -165,7 +165,7 @@ import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelPr
  */
 public class TrackerEditor
 	extends MultiPageEditorPart
-	implements IEventSelectionProvider, IAnimalSelectionProvider, ISelectionViewerProvider, IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
+	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -174,6 +174,19 @@ public class TrackerEditor
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
 	
+	/**
+	 * Offers a selection on a set of Animals. 
+	 */
+	private IAnimalSelectionProvider animalSelectionProvider;
+	
+	/**
+	 * Offers a generic selection. 
+	 */
+	private ISelectionViewerProvider selectionViewerProvider;
+	/**
+	 * Offers a selection on a set of Events. 
+	 */
+	private IEventSelectionProvider eventSelectionProvider;
 	/**
 	 * Offers a query on a dataSet. 
 	 */
@@ -1657,6 +1670,58 @@ public class TrackerEditor
 		else if (key.equals(IGotoMarker.class)) {
 			return this;
 		}
+		//Added to support AnimalSelections
+		else if (key.equals(IAnimalSelectionProvider.class)){
+			if (animalSelectionProvider==null){
+				animalSelectionProvider = new IAnimalSelectionProvider(){
+
+					public ISelection getAnimalSelection() {
+						return TrackerEditor.this.getAnimalSelection();
+					}
+
+					public void setAnimalSelection(ISelection selection) {
+						TrackerEditor.this.setAnimalSelection(selection);
+					}
+					
+				};
+			}
+			return animalSelectionProvider;
+		}
+		//Added to support the main Viewer Selections
+		else if (key.equals(ISelectionViewerProvider.class)){
+			if (selectionViewerProvider==null){
+				selectionViewerProvider = new ISelectionViewerProvider(){
+
+					public ISelection getSelectionViewerSelection() {
+						return TrackerEditor.this.getSelectionViewerSelection();
+					}
+
+					public void setSelectionViewerSelection(ISelection selection) {
+						TrackerEditor.this.setSelectionViewerSelection(selection);
+						
+					}
+					
+				};
+			}
+			return selectionViewerProvider;
+		}
+		else if (key.equals(IEventSelectionProvider.class)){
+			if (eventSelectionProvider==null){
+				eventSelectionProvider = new IEventSelectionProvider(){
+
+					public ISelection getEventSelection() {
+						return TrackerEditor.this.getEventSelection();
+					}
+
+					public void setEventSelection(ISelection selection) {
+						TrackerEditor.this.setEventSelection(selection);
+					}
+
+					
+				};
+			}
+			return eventSelectionProvider;
+		}
 		//Adds adaptive support for IQueryDataSetProvider 	
 		else if (key.equals(IQueryDataSetProvider.class)){
 			if (queryDataSetProvider==null){
@@ -2073,7 +2138,7 @@ public class TrackerEditor
 		setPartName(editorInput.getName());
 		site.setSelectionProvider(this);
 		site.getPage().addPartListener(partListener);
-		//FIXME remove this resourceChangeListener 
+		//FIXME remove this resourceChangeListener and test
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(
 				resourceChangeListener, IResourceChangeEvent.POST_CHANGE);
 	}

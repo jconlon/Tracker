@@ -17,6 +17,12 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Customization for adding tools to Tracker Editors.
+ * <ul>
+ *   <li>Collapse Selection Tree,</li>
+ *   <li>Expand Selection Tree, </li>
+ *   <li>Select from Animals,</li>
+ *   <li> Select from Events</li>
+ * </ul>
  * 
  * @author jconlon
  *
@@ -80,8 +86,9 @@ public class CustomActionBarContributor implements ICustomActionBarContributor {
 
 		@Override
 		public void run() {
-			if (activeEditorPart instanceof IViewerProvider) {
-				IViewerProvider viewerProvider = ((IViewerProvider)activeEditorPart);
+			IViewerProvider viewerProvider = 
+				(IViewerProvider)activeEditorPart.getAdapter(IViewerProvider.class);
+			if (viewerProvider !=null) {
 				if (viewerProvider.getViewer() != null){
 					if (viewerProvider.getViewer() instanceof TreeViewer ) {
 						((TreeViewer)viewerProvider.getViewer()).collapseAll();
@@ -103,8 +110,9 @@ public class CustomActionBarContributor implements ICustomActionBarContributor {
 
 		@Override
 		public void run() {
-			if (activeEditorPart instanceof IViewerProvider) {
-				IViewerProvider viewerProvider = ((IViewerProvider)activeEditorPart);
+			IViewerProvider viewerProvider = 
+				(IViewerProvider)activeEditorPart.getAdapter(IViewerProvider.class);
+			if (viewerProvider !=null) {
 				if (viewerProvider.getViewer() != null){
 					if (viewerProvider.getViewer() instanceof TreeViewer ) {
 						((TreeViewer)viewerProvider.getViewer()).expandAll();
@@ -127,10 +135,15 @@ public class CustomActionBarContributor implements ICustomActionBarContributor {
 
 		@Override
 		public void run() {
-			if (activeEditorPart instanceof ISelectionViewerProvider && activeEditorPart instanceof IAnimalSelectionProvider) {
-				ISelectionViewerProvider selectionProvider = ((ISelectionViewerProvider)activeEditorPart);
-					selectionProvider.setSelectionViewerSelection(
-							((IAnimalSelectionProvider)activeEditorPart).getAnimalSelection());
+			ISelectionViewerProvider selectionViewerProvider = 
+				(ISelectionViewerProvider)activeEditorPart.getAdapter(ISelectionViewerProvider.class);
+			
+			IAnimalSelectionProvider animalSelectionProvider = 
+				(IAnimalSelectionProvider)activeEditorPart.getAdapter(IAnimalSelectionProvider.class);
+				
+			if (selectionViewerProvider !=null && animalSelectionProvider !=null) {
+				selectionViewerProvider.setSelectionViewerSelection(
+						animalSelectionProvider.getAnimalSelection());
 					
 				
 			}
@@ -151,11 +164,15 @@ public class CustomActionBarContributor implements ICustomActionBarContributor {
 
 		@Override
 		public void run() {
+			ISelectionViewerProvider selectionViewerProvider = 
+				(ISelectionViewerProvider)activeEditorPart.getAdapter(ISelectionViewerProvider.class);
 			
-			if (activeEditorPart instanceof ISelectionViewerProvider && activeEditorPart instanceof IEventSelectionProvider) {
-				ISelectionViewerProvider selectionProvider = ((ISelectionViewerProvider)activeEditorPart);
-					selectionProvider.setSelectionViewerSelection(
-							((IEventSelectionProvider)activeEditorPart).getEventSelection());
+			IEventSelectionProvider eventSelectionProvider = 
+				(IEventSelectionProvider)activeEditorPart.getAdapter(IEventSelectionProvider.class);
+				
+			if (selectionViewerProvider !=null && eventSelectionProvider !=null) {
+				selectionViewerProvider.setSelectionViewerSelection(
+						eventSelectionProvider.getEventSelection());
 					
 				
 			}
