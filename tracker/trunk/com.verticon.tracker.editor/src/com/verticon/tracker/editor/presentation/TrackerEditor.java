@@ -156,12 +156,9 @@ import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelPr
  *   <li>implements previous two items with adapters for IEventSelectionProvider, 
  *   	 IAnimalSelectionProvider, ISelectionViewerProvider,  </li>
  *   <li>adds support for OCL Query View using an IQueryDataSetProvider adapter</li>
- *   
  * </ul>
- * TODO always un NOT this class if Editor changes are made, but be sure to add the 
- * above interfaces and NOT it back.
  * <!-- end-user-doc -->
- * @generated NOT
+ * @generated
  */
 public class TrackerEditor
 	extends MultiPageEditorPart
@@ -640,7 +637,6 @@ public class TrackerEditor
 					resource.unload();
 					try {
 						resource.load(Collections.EMPTY_MAP);
-						printToConsole("Loaded changed Resource "+resource);
 					}
 					catch (IOException exception) {
 						if (!resourceToDiagnosticMap.containsKey(resource)) {
@@ -672,6 +668,7 @@ public class TrackerEditor
 			  }
 			  Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
 			  eventsTableViewerNotifier.setResource(resource);
+			  printToConsole("Loaded changed Resource "+resource);
 		}
 	}
   
@@ -2138,9 +2135,7 @@ public class TrackerEditor
 		setPartName(editorInput.getName());
 		site.setSelectionProvider(this);
 		site.getPage().addPartListener(partListener);
-		//FIXME remove this resourceChangeListener and test
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(
-				resourceChangeListener, IResourceChangeEvent.POST_CHANGE);
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener, IResourceChangeEvent.POST_CHANGE);
 	}
 
 	/**
@@ -2320,7 +2315,6 @@ public class TrackerEditor
 		if (contentOutlinePage != null) {
 			contentOutlinePage.dispose();
 		}
-		
 
 		super.dispose();
 	}
