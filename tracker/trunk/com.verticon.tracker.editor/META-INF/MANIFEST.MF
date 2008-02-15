@@ -8,6 +8,7 @@ Bundle-Activator: com.verticon.tracker.editor.presentation.TrackerReportEditorPl
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: com.verticon.tracker.editor.dialogs;version="0.1.0",
+ com.verticon.tracker.editor.preferences;version="0.1.0",
  com.verticon.tracker.editor.presentation;version="0.1.0",
  com.verticon.tracker.editor.util;version="0.1.0"
 Require-Bundle: org.eclipse.core.runtime,

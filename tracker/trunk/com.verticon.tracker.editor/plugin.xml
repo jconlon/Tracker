@@ -191,7 +191,7 @@
   <extension
         point="org.eclipse.ui.preferencePages">
      <page
-           class="com.verticon.tracker.editor.preferences.TrackerEditorPreferencePage"
+           class="com.verticon.tracker.editor.preferences.internal.TrackerEditorPreferencePage"
            id="com.verticon.tracker.prefs.view"
            name="Tracker">
      </page>
@@ -200,7 +200,7 @@
   <extension
         point="org.eclipse.core.runtime.preferences">
      <initializer
-           class="com.verticon.tracker.editor.preferences.PreferenceInitializer">
+           class="com.verticon.tracker.editor.preferences.internal.PreferenceInitializer">
      </initializer>
   </extension>
   <extension
