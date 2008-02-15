@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.eclipse.core.runtime.Preferences;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -33,6 +34,8 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
+
+import com.verticon.tracker.editor.preferences.PreferenceConstants;
 
 /**
  * This is the action bar contributor for the Tracker model editor.
@@ -404,7 +407,7 @@ public class TrackerActionBarContributor
 	/**
 	 * This populates the pop-up menu before it appears.
 	 * <!-- begin-user-doc -->
-	 * NOT used for reference only.
+	 * Shows submenus. This is the default.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -424,14 +427,26 @@ public class TrackerActionBarContributor
 	/**
 	 * This populates the pop-up menu before it appears.
 	 * <!-- begin-user-doc -->
-	 * Populates the main menu directly - does not use Child and Sibling menus.
+	 * Based on userPreference either 
+	 * Populates the main menu directly with menu items for adding elements.
+	 * or 
+	 * Uses the default Child and Sibling menus.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@Override
 	public void menuAboutToShow(IMenuManager menuManager) {
-		super.menuAboutToShow(menuManager);
-		populateManager(menuManager, createChildActions);
+		if(useSubMenus()){
+			menuAboutToShowGen(menuManager);
+		}else{
+			super.menuAboutToShow(menuManager);
+			populateManager(menuManager, createChildActions);
+		}
+	}
+		
+	private boolean useSubMenus(){
+		Preferences store = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
+		return  store.getBoolean(PreferenceConstants.P_USE_SUBMENUS);
 	}
 
 	/**

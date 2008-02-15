@@ -1,8 +1,10 @@
-package com.verticon.tracker.editor.preferences;
+package com.verticon.tracker.editor.preferences.internal;
 
 import org.eclipse.jface.preference.*;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbench;
+
+import com.verticon.tracker.editor.preferences.PreferenceConstants;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 
 /**
@@ -43,6 +45,10 @@ public class TrackerEditorPreferencePage
 		addField(new BooleanFieldEditor(
 				PreferenceConstants.P_VALIDATE_BEFORE_EXPORT,
 				"&Validate Documents Before Exporting:",
+				getFieldEditorParent()));
+		addField(new BooleanFieldEditor(
+				PreferenceConstants.P_USE_SUBMENUS,
+				"&Use Submenus in Model Element Popup Menus:",
 				getFieldEditorParent()));
 		
 	}

@@ -8,7 +8,9 @@ package com.verticon.transaction.editor.presentation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
+import org.eclipse.core.runtime.Preferences;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -43,8 +45,10 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
+import com.verticon.tracker.editor.preferences.PreferenceConstants;
 import com.verticon.tracker.editor.presentation.CustomActionBarContributor;
 import com.verticon.tracker.editor.presentation.ICustomActionBarContributor;
+import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
 import com.verticon.transaction.editor.actions.LongRunningReadAction;
 
@@ -179,6 +183,7 @@ public class TrackerActionBarContributor
 	 * @generated
 	 */
 	public TrackerActionBarContributor() {
+		super(ADDITIONS_LAST_STYLE);//Added in 0.2.5
 		loadResourceAction = new LoadResourceAction();
 		validateAction = new ValidateAction();
 	}
@@ -446,24 +451,70 @@ public class TrackerActionBarContributor
 			}
 		}
 	}
-
+	
 	/**
 	 * This populates the pop-up menu before it appears.
 	 * <!-- begin-user-doc -->
+	 * Shows submenus. This is the default.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void menuAboutToShow(IMenuManager menuManager) {
+	public void menuAboutToShowGen(IMenuManager menuManager) {
 		super.menuAboutToShow(menuManager);
 		MenuManager submenuManager = null;
 
-		submenuManager = new MenuManager(TransactionEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item")); //$NON-NLS-1$
+		submenuManager = new MenuManager(TrackerReportEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item"));
 		populateManager(submenuManager, createChildActions, null);
-		menuManager.insertBefore("additions", submenuManager); //$NON-NLS-1$
+		menuManager.insertBefore("edit", submenuManager);
 
-		submenuManager = new MenuManager(TransactionEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item")); //$NON-NLS-1$
+		submenuManager = new MenuManager(TrackerReportEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
 		populateManager(submenuManager, createSiblingActions, null);
-		menuManager.insertBefore("additions", submenuManager); //$NON-NLS-1$
+		menuManager.insertBefore("edit", submenuManager);
+	}
+	
+	/**
+	 * This populates the pop-up menu before it appears.
+	 * <!-- begin-user-doc -->
+	 * Based on userPreference either 
+	 * Populates the main menu directly with menu items for adding elements.
+	 * or 
+	 * Uses the default Child and Sibling menus.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public void menuAboutToShow(IMenuManager menuManager) {
+		if(useSubMenus()){
+			menuAboutToShowGen(menuManager);
+		}else{
+			super.menuAboutToShow(menuManager);
+			populateManager(menuManager, createChildActions);
+		}
+	}
+	
+	/**
+	 *
+	 * @return
+	 */
+	private boolean useSubMenus(){
+		Preferences store = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
+		return  store.getBoolean(PreferenceConstants.P_USE_SUBMENUS);
+	}
+	
+	/**
+	 * add actions to the menu manager.
+	 */
+	protected void populateManager(IContributionManager manager,
+			Collection<?> actions) {
+		if (actions != null) {
+			for (Iterator<?> i = actions.iterator(); i.hasNext();) {
+				IAction action = (IAction) i.next();
+				if (!action.getText().startsWith("Add")) {//$NON-NLS-1$
+					action.setText("Add " + action.getText() + "...");//$NON-NLS-2$//$NON-NLS-1$
+				}
+				manager.insertBefore("edit", action); //$NON-NLS-1$
+			}
+		}
 	}
 
 	/**

@@ -22,6 +22,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.2.0,4.0.0)",
 Eclipse-LazyStart: true
 Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)",
  com.verticon.tracker.edit.provider;version="[0.1.0,1.0.0)",
+ com.verticon.tracker.editor.preferences;version="[0.1.0,1.0.0)",
  com.verticon.tracker.editor.presentation;version="[0.1.0,1.0.0)",
  com.verticon.tracker.editor.util;version="[0.1.0,1.0.0)",
  com.verticon.tracker.util;version="[0.1.0,1.0.0)"
