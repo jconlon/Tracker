@@ -13,9 +13,17 @@
 
   <extension
     point = "org.eclipse.ui.newWizards">
+    
+    <category
+          id="com.verticon.tracker.editor.Wizard.category.examples"
+          name="Tracker Examples"/> 
+    
     <category
           id="com.verticon.tracker.editor.Wizard.category.ID"
           name="Tracker Wizards"/>
+          
+    
+     
     <wizard
       id = "com.verticon.tracker.editor.presentation.TrackerModelWizardID"
       name = "%_UI_TrackerModelWizard_label"
@@ -25,6 +33,7 @@
       <description>%_UI_TrackerModelWizard_description</description>
       <selection class = "org.eclipse.core.resources.IResource" />
     </wizard>
+    
     <wizard
       id = "com.verticon.tracker.editor.presentation.TrackerTemplateWizardID"
       name = "%_UI_TrackerTemplateWizard_label"
@@ -35,7 +44,19 @@
       <selection class = "org.eclipse.core.resources.IResource" />
     </wizard>
     
+    <wizard
+            name="Tracker Example Project"
+            icon="icons/full/obj16/TrackerModelFile.gif"
+            category="com.verticon.tracker.editor.Wizard.category.examples"
+            class="com.verticon.tracker.editor.presentation.NewTrackerProjectWizard"
+            project="true"
+            id="com.verticon.tracker.editor.wizards.NewTrackerProjectWizard">
+         <description>
+            Create a new Tabbed Properties View Hockey League Example Project
+         </description>
+      </wizard>
   </extension>
+
 
   <extension point = "org.eclipse.ui.editors">
     <editor
