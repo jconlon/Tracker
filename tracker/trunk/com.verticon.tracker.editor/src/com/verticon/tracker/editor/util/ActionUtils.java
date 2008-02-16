@@ -216,12 +216,16 @@ public class ActionUtils {
 			Animal animal = premises.findAnimal(tag.toString());
 			if (animal != null) {
 				existingAnimals++;
-				command = createAddEventsToTagCommand(animal.activeTag(),
-						animalTemplateBean.getEvents(), editor.getEditingDomain());
+				command = createAddEventsToTagCommand(
+						animal.activeTag(),
+						animalTemplateBean.getEvents(premises), 
+						editor.getEditingDomain());
 			} else {
 				newAnimalsCreated++;
-				command = createAddAnimalToPremiseCommand(premises,
-						animalTemplateBean.getAnimal(tag.toString()), editor.getEditingDomain());
+				command = createAddAnimalToPremiseCommand(
+						premises,
+						animalTemplateBean.getAnimal(tag.toString(),premises), 
+						editor.getEditingDomain());
 				
 			}
 			if(command !=null){
@@ -232,7 +236,7 @@ public class ActionUtils {
 		MessageDialog.openInformation(editor.getSite().getShell(),
 				ADD_TEMPLATE_TO_PREMISES_OPERATION, "The "
 						+ animalTemplateBean.getName() + " and " + tagsBean.getName()
-						+ " processed " + animalTemplateBean.getEvents().size()
+						+ " processed " + animalTemplateBean.getEvents(null).size()
 						+ " events on " + newAnimalsCreated
 						+ " new Animals and " + existingAnimals
 						+ " existing animals.");
@@ -263,7 +267,7 @@ public class ActionUtils {
 				tag = animal.getTags().get(0);
 			}
 			command = createAddEventsToTagCommand(tag,
-					templateBean.getEvents(), editor.getEditingDomain());
+					templateBean.getEvents((Premises)animal.eContainer()), editor.getEditingDomain());
 			if(command !=null){
 				compoundCommand.append(command);
 			}
