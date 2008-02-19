@@ -19,6 +19,7 @@ import com.verticon.tracker.EventAttributeSchema;
 import com.verticon.tracker.EventSchema;
 import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.TrackerPackage;
+import java.util.Map.Entry;
 
 /**
  * <!-- begin-user-doc -->
@@ -149,6 +150,25 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 			}
 			return;
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Implemented operation
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@SuppressWarnings("unchecked")
+	public EventAttributeSchema findSchema(Entry eventAttribute) {
+		if(getEventSchema() ==null ){
+			return null;
+		}
+		for (EventAttributeSchema eventAttributeSchema : this.getEventSchema().getEventAttributes()) {
+			if(eventAttribute.getKey().equals(eventAttributeSchema.getName())){
+				return eventAttributeSchema;
+			}
+		}
+		return null;
 	}
 
 	/**

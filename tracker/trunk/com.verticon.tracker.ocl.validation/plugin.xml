@@ -19,6 +19,27 @@
          </description>
          <constraints categories="com.verticon.tracker.validation.catagory.ocl/core">
            
+           <!-- This constraint applies to GenericEvent value-->
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.validation.core.constraints.EventAttributeConstraint"
+                  severity="ERROR"
+                  mode="Live"
+                  name="EventAttribute Type Constraint (Live Mode)"
+                  id="org.eclipse.emf.validation.pde.example.general.ui.NameNotEmpty"
+                  statusCode="100">
+               <description>The Generic Event attribute values must conform to the types described in the referenced EventSchema.</description>
+      		   <message>Core Constraint: {0} for GenericEvent {1}; attribute {2}. {3}" </message>
+      		   <target class="EventAttribute">
+         			<event name="Set">
+            			<feature name="value"/>
+       				</event>
+       				<event name="Unset">
+            			<feature name="value"/>
+       				</event>
+      			</target>
+            </constraint>
+            
            <!-- This constraint applies to Tag Id value-->
             <constraint
          		lang="OCL"
@@ -60,7 +81,7 @@
       			</target>
             </constraint>
          
-         
+           
          
             <!-- Animal can not be Slaughtered Twice Constraint (Batch Mode) -->
             <constraint
