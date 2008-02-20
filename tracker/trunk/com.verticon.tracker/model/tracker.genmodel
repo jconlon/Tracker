@@ -520,7 +520,9 @@
           propertyMultiLine="true" ecoreFeature="ecore:EReference tracker.ecore#//GenericEvent/eventAttributes"/>
       <genFeatures property="None" createChild="false" propertySortChoices="true"
           ecoreFeature="ecore:EReference tracker.ecore#//GenericEvent/eventSchema"/>
-      <genOperations ecoreOperation="tracker.ecore#//GenericEvent/findSchema"/>
+      <genOperations ecoreOperation="tracker.ecore#//GenericEvent/findSchema">
+        <genParameters ecoreParameter="tracker.ecore#//GenericEvent/findSchema/eventAttribute"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//EventAttribute">
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//EventAttribute/key"/>
