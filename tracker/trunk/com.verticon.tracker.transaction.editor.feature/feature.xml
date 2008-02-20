@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.transaction.editor"
       label="Tracker Transaction Infrastructure"
-      version="0.2.0"
+      version="0.2.1"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.transaction.editor">
 
