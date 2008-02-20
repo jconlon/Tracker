@@ -238,6 +238,11 @@ public class TagItemProvider
 	protected void collectNewChildDescriptors(final Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 		
+		Tag tag = (Tag)object;
+		if(tag.eContainer() instanceof Premises){
+			return;//an unAppliedTag gets no children
+		}
+		
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
