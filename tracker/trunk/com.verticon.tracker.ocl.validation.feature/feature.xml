@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.validation.core"
       label="Tracker Model Validation Constraints"
-      version="0.1.1"
+      version="0.1.2"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.validation.core">
 
