@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_smKWUDo3Edyw6--mXqZ7vg" activeDiagram="_smKWUTo3Edyw6--mXqZ7vg">
   <model href="tracker.ecore#/"/>
-  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="1382,209">
+  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="0,80">
     <property xmi:id="_smKWUjo3Edyw6--mXqZ7vg" key="pageFormatName" value="A2"/>
     <property xmi:id="_smKWUzo3Edyw6--mXqZ7vg" key="diagramWidth" value="1680"/>
     <property xmi:id="_smKWVDo3Edyw6--mXqZ7vg" key="diagramHeight" value="2376"/>
@@ -3025,8 +3025,8 @@
     </contained>
     <contained xsi:type="di:GraphEdge" xmi:id="_Uw7XMM9_EdyJvPuWVF-V7w" anchor="_BcqRMM9_EdyJvPuWVF-V7w _smMynTo3Edyw6--mXqZ7vg">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_Uw7XMc9_EdyJvPuWVF-V7w" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, 188, 366, 163]</waypoints>
-      <waypoints>[-366, 188, 0, 163]</waypoints>
+      <waypoints>[0, 199, 366, 165]</waypoints>
+      <waypoints>[-366, 199, 0, 165]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_x1f5oM9_EdyJvPuWVF-V7w" position="1796,44" size="186,-1">
       <anchorage xmi:id="_mGyaUM-AEdyJvPuWVF-V7w" graphEdge="_mGzocM-AEdyJvPuWVF-V7w _x_jGIM-CEdyJvPuWVF-V7w _n_BIANAUEdyytJJF15-OEw"/>
