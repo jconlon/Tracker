@@ -240,13 +240,16 @@ public class TagItemProvider
 		
 		Tag tag = (Tag)object;
 		if(tag.eContainer() instanceof Premises){
-			return;//an unAppliedTag gets no children
+			if(tag.getEvents().isEmpty()){
+				newChildDescriptors.add
+				(createChildParameter
+					(TrackerPackage.Literals.TAG__EVENTS,
+					 TrackerFactory.eINSTANCE.createTagAllocated()));
+			}
+			return;//an unAppliedTag only gets a single TagAllocated Event
 		}
 		
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.TAG__EVENTS,
-				 TrackerFactory.eINSTANCE.createTagAllocated()));
+		
 
 		newChildDescriptors.add
 			(createChildParameter

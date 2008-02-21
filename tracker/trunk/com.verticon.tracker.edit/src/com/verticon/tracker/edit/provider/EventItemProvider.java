@@ -319,8 +319,11 @@ public class EventItemProvider
 			
 		case 1: //Animal ID Number
 			if(event.getTag().eContainer()!=null){
-				Animal animal = (Animal)event.getTag().eContainer();
-				return animal.getId();
+				if(event.getTag().eContainer() instanceof Animal){
+					Animal animal = (Animal)event.getTag().eContainer();
+					return animal.getId();
+				}
+				
 			}
 			return null;
 
