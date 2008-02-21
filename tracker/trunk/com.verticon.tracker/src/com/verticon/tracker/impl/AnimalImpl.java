@@ -74,6 +74,11 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	private static final Copier copier = new Copier();
 	
 	/**
+	 * Holds a copy of the old id, so it can be sent in notifications.
+	 */
+	private String idCache;
+	
+	/**
 	 * The default value of the '{@link #getBirthDate() <em>Birth Date</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -398,7 +403,16 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @generated NOT
 	 */
 	public void setId(String newId) {
-		//NOOP
+		if (eNotificationRequired()){
+			eNotify(
+					new ENotificationImpl(
+							this, Notification.SET, 
+							TrackerPackage.ANIMAL__ID, 
+							idCache, 
+							newId));
+		}
+		idCache =newId;
+		
 	}
 
 /**

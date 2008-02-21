@@ -5,6 +5,7 @@
  */
 package com.verticon.tracker.impl;
 
+import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
@@ -141,13 +142,17 @@ public class TagImpl extends EObjectImpl implements Tag {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setId(String newId) {
 		String oldId = id;
 		id = newId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.TAG__ID, oldId, id));
+		if(this.eContainer() instanceof Animal){
+			//Set the id on the animal so it knows the new one
+			((Animal)this.eContainer()).setId(newId);
+		}
 	}
 
 	/**
