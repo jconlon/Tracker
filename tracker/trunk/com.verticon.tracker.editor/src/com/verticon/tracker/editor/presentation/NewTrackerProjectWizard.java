@@ -64,6 +64,10 @@ import com.verticon.tracker.WeighIn;
 
 public class NewTrackerProjectWizard extends BasicNewResourceWizard {
 
+	private static final String FAKE_FOREIGN_PIN = "HA92348";
+
+	private static final String FAKE_PIN_FOR_PREMISE = "H89234X";
+
 	private static final String EXAMPLE_CAPTURE_TAGS_FILE_NAME = "capture.tags";
 
 	private static final String EXAMPLE_PREMISES_DOCUMENT_NAME = "example.premises";
@@ -291,7 +295,7 @@ public class NewTrackerProjectWizard extends BasicNewResourceWizard {
 		Premises premises = trackerFactory.createPremises();
 		premises.setName("Simple Valley Ranch");//$NON-NLS-1$
 		premises.setEmailContact("jack_condor@bogus.net");//$NON-NLS-1$
-		premises.setPremisesId("H89234X");
+		premises.setPremisesId(FAKE_PIN_FOR_PREMISE);
 		premises.setUri("http://www.simplevalleyranch.net");
 		
 		Calendar someBirthday = Calendar.getInstance();
@@ -373,10 +377,12 @@ public class NewTrackerProjectWizard extends BasicNewResourceWizard {
 		//Add a couple of unassigned tags
 		Tag tag6 = trackerFactory.createTag();
 		tag6.setId("840456789012346");
+		tag6.getEvents().add(trackerFactory.createTagAllocated());
 		premises.getUnAppliedTags().add(tag6);
 		
 		Tag tag7 = trackerFactory.createTag();
 		tag7.setId("840456789012347");
+		tag7.getEvents().add(trackerFactory.createTagAllocated());
 		premises.getUnAppliedTags().add(tag7);
 		
 		resource.getContents().add(premises);
@@ -413,6 +419,7 @@ public class NewTrackerProjectWizard extends BasicNewResourceWizard {
 			events.add(event1);
 			
 			MovedIn event2 = trackerFactory.createMovedIn();
+			event2.setSourcePin(FAKE_FOREIGN_PIN);
 			events.add(event2);
 			
 			Sighting event3 = trackerFactory.createSighting();
