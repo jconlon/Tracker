@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.verticon.tracker.transaction.publisher;
+package com.verticon.tracker.transaction.publisher.filetailer;
 
 import java.io.IOException;
 import java.util.Date;
@@ -20,6 +20,9 @@ import org.eclipse.core.runtime.Preferences;
 
 import com.verticon.tracker.editor.presentation.AbstractModelObject;
 import com.verticon.tracker.editor.util.ConsoleUtil;
+import com.verticon.tracker.transaction.publisher.IPublisher;
+import com.verticon.tracker.transaction.publisher.PublisherPlugin;
+import com.verticon.tracker.transaction.publisher.TransactionPublisher;
 import com.verticon.tracker.transaction.publisher.preferences.PreferenceConstants;
 
 /**
@@ -154,7 +157,7 @@ public class FileTailer extends AbstractModelObject implements
 	 * Start a background task using a FileTailRunner to process the file and
 	 * feed new tags to a TransactionPublisher.
 	 * 
-	 * @see com.verticon.tracker.transaction.publisher.FileTailRunner
+	 * @see com.verticon.tracker.transaction.publisher.filetailer.FileTailRunner
 	 * @see com.verticon.tracker.transaction.publisher.TransactionPublisher
 	 */
 	private void start() throws IOException {

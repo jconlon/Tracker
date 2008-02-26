@@ -1,9 +1,10 @@
 /**
  * 
  */
-package com.verticon.tracker.transaction.publisher;
+package com.verticon.tracker.transaction.publisher.utilities;
 
 import com.verticon.tracker.editor.presentation.AbstractModelObject;
+import com.verticon.tracker.transaction.publisher.IPublisher;
 
 /**
  * Publisher Used for testing.

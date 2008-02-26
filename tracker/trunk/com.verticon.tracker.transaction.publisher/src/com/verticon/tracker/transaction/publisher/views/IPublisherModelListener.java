@@ -1,4 +1,6 @@
-package com.verticon.tracker.transaction.publisher;
+package com.verticon.tracker.transaction.publisher.views;
+
+import com.verticon.tracker.transaction.publisher.IPublisher;
 
 
 

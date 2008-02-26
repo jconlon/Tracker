@@ -63,7 +63,7 @@ public class TransactionPublisher {
 	 * 
 	 * @throws IOException
 	 */
-	  void init() throws IOException {
+	  public void init() throws IOException {
 		printToConsole(new Date() + "\tSynchronizing contents of Template file: "
 				+ animalTemplateFile.getName());
 		Resource templateResource = getResource(animalTemplateFile);

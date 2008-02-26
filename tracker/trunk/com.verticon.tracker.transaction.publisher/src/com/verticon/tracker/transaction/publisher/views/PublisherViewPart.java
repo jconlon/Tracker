@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.part.ViewPart;
 
-import com.verticon.tracker.transaction.publisher.presentation.AddPublisherWizard;
+import com.verticon.tracker.transaction.publisher.wizards.AddPublisherWizard;
 
 
 

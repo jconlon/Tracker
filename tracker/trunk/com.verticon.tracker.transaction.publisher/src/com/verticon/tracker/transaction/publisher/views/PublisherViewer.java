@@ -28,8 +28,6 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import com.verticon.tracker.transaction.publisher.IPublisher;
-import com.verticon.tracker.transaction.publisher.IPublisherModelListener;
-import com.verticon.tracker.transaction.publisher.PublisherViewModel;
 
 /**
  * The PublisherViewer class is meant to be a fairly complete 
