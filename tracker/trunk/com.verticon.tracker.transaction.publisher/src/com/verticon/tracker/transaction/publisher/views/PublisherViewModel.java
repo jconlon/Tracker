@@ -6,7 +6,7 @@
  * 
  */
 
-package com.verticon.tracker.transaction.publisher;
+package com.verticon.tracker.transaction.publisher.views;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -21,6 +21,10 @@ import java.util.Set;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.XMLMemento;
 
+import com.verticon.tracker.transaction.publisher.IPublisher;
+import com.verticon.tracker.transaction.publisher.PublisherPlugin;
+import com.verticon.tracker.transaction.publisher.filetailer.FileTailer;
+import com.verticon.tracker.transaction.publisher.utilities.MockPublisher;
 import com.verticon.tracker.util.TrackerLog;
 
 /**

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.verticon.tracker.transaction.publisher;
+package com.verticon.tracker.transaction.publisher.filetailer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,6 +11,7 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 
+import com.verticon.tracker.transaction.publisher.TransactionPublisher;
 import com.verticon.tracker.util.TrackerLog;
 
 /**
