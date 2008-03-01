@@ -31,4 +31,13 @@ public class PreferenceConstants {
 	
 	public static final String P_USE_SUBMENUS = "useSubMenusInPopupMenus";
 	
+	/**
+	 * Events added to an animal must not have the same time.  This value specifies
+	 * how many seconds to use to separate events when adding to the same animal if 
+	 * the events are submitted with the same time.
+	 */
+	public static final int DEFAULT_SPREAD_INTERVAL = 1;
+	
+	public static final String P_SPREAD_INTERVAL = "spreadInterval";
+	
 }

@@ -21,8 +21,9 @@ import org.eclipse.core.runtime.Preferences;
 import com.verticon.tracker.editor.presentation.AbstractModelObject;
 import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.tracker.transaction.publisher.IPublisher;
+import com.verticon.tracker.transaction.publisher.ITransactionPublisher;
 import com.verticon.tracker.transaction.publisher.PublisherPlugin;
-import com.verticon.tracker.transaction.publisher.TransactionPublisher;
+import com.verticon.tracker.transaction.publisher.eventadmin.TransactionEventPublisher;
 import com.verticon.tracker.transaction.publisher.preferences.PreferenceConstants;
 
 /**
@@ -37,10 +38,10 @@ import com.verticon.tracker.transaction.publisher.preferences.PreferenceConstant
  * @author jconlon
  * 
  */
-public class FileTailer extends AbstractModelObject implements
+public class FileTailerEventPublisher extends AbstractModelObject implements
 		IPublisher, IResourceChangeListener {
 
-	private static final String CONSOLE = FileTailer.class.getSimpleName();
+	private static final String CONSOLE = FileTailerEventPublisher.class.getSimpleName();
 	private Preferences prefs = PublisherPlugin.getDefault()
 	.getPluginPreferences();
 	
@@ -53,14 +54,14 @@ public class FileTailer extends AbstractModelObject implements
 
 
 	private ScheduledExecutorService exec;
-	private TransactionPublisher transactionPublisher = null;
+	private ITransactionPublisher transactionPublisher = null;
 
-	public FileTailer(String name) {
+	public FileTailerEventPublisher(String name) {
 		super();
 		this.name=name;
 	}
 	
-	public FileTailer() {
+	public FileTailerEventPublisher() {
 		super();
 		name=getType()+count++;
 	}
@@ -158,7 +159,6 @@ public class FileTailer extends AbstractModelObject implements
 	 * feed new tags to a TransactionPublisher.
 	 * 
 	 * @see com.verticon.tracker.transaction.publisher.filetailer.FileTailRunner
-	 * @see com.verticon.tracker.transaction.publisher.TransactionPublisher
 	 */
 	private void start() throws IOException {
 		if (transactionPublisher != null) {
@@ -166,7 +166,8 @@ public class FileTailer extends AbstractModelObject implements
 		} else if (transactionPublisher == null) {
 			IFile templateFile = getTemplateFile();
 			
-			transactionPublisher = new TransactionPublisher( templateFile);
+			transactionPublisher = new TransactionEventPublisher( templateFile);
+			transactionPublisher.init();
 
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			workspace.addResourceChangeListener(this);
