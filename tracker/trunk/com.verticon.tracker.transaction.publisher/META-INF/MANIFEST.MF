@@ -12,7 +12,8 @@ Eclipse-LazyStart: true
 Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)",
  com.verticon.tracker.editor.presentation;version="[0.1.0,1.0.0)",
  com.verticon.tracker.editor.util;version="[0.1.0,1.0.0)",
- com.verticon.tracker.util;version="[0.1.0,1.0.0)"
+ com.verticon.tracker.util;version="[0.1.0,1.0.0)",
+ org.osgi.service.event;version="1.1.0"
 Export-Package: com.verticon.tracker.transaction.publisher;version="0.1.0",
  com.verticon.tracker.transaction.publisher.preferences;version="0.1.0",
  com.verticon.tracker.transaction.publisher.views;version="0.1.0"

@@ -51,16 +51,7 @@ public class PublisherPreferencePage
 		
 		addField(readInterval);
 		
-		IntegerFieldEditor spreadInterval = new IntegerFieldEditor(
-				PreferenceConstants.P_SPREAD_INTERVAL,//name
-				"&Concurrent Event interval.  "+
-				"\nSeconds added to seperate dateTimes"+
-				"\nwhen adding multiple events to an animal:",//lableText
-		 		getFieldEditorParent(),//parent
-		 		3);
 		
-		spreadInterval.setValidRange(1, 10);
-		addField(spreadInterval);
 		
 	}
 

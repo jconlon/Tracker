@@ -11,7 +11,7 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 
-import com.verticon.tracker.transaction.publisher.TransactionPublisher;
+import com.verticon.tracker.transaction.publisher.ITransactionPublisher;
 import com.verticon.tracker.util.TrackerLog;
 
 /**
@@ -25,7 +25,7 @@ import com.verticon.tracker.util.TrackerLog;
  */
 public class FileTailRunner implements Runnable {
 
-	private final TransactionPublisher transactionPublisher ;
+	private final ITransactionPublisher transactionPublisher ;
 	private final File file ;
 	private final Set<Long> tagNumbersToSend = new HashSet<Long>();
 	private final Set<Long> tagNumbersSent = new HashSet<Long>();
@@ -38,7 +38,7 @@ public class FileTailRunner implements Runnable {
 	 * @param transactionProcessor to send Long numbers to.
 	 * @param file to Scan
 	 */
-	public FileTailRunner(TransactionPublisher transactionProcessor, IFile file) {
+	public FileTailRunner(ITransactionPublisher transactionProcessor, IFile file) {
 		this.transactionPublisher=transactionProcessor;
 		this.file=new File(file.getLocationURI());
 		TrackerLog.logInfo("Created FileTailRunner");

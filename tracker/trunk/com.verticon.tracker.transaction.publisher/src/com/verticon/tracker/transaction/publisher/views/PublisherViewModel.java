@@ -23,7 +23,7 @@ import org.eclipse.ui.XMLMemento;
 
 import com.verticon.tracker.transaction.publisher.IPublisher;
 import com.verticon.tracker.transaction.publisher.PublisherPlugin;
-import com.verticon.tracker.transaction.publisher.filetailer.FileTailer;
+import com.verticon.tracker.transaction.publisher.filetailer.FileTailerEventPublisher;
 import com.verticon.tracker.transaction.publisher.utilities.MockPublisher;
 import com.verticon.tracker.util.TrackerLog;
 
@@ -180,8 +180,8 @@ public class PublisherViewModel {
 			publisher = new MockPublisher(name);
 			publisher.setTarget(target);
 			publisher.setTemplate(template);
-		} else if (FileTailer.class.getSimpleName().equals(type)){
-			publisher = new FileTailer(name);
+		} else if (FileTailerEventPublisher.class.getSimpleName().equals(type)){
+			publisher = new FileTailerEventPublisher(name);
 			publisher.setTarget(target);
 			publisher.setTemplate(template);
 		}

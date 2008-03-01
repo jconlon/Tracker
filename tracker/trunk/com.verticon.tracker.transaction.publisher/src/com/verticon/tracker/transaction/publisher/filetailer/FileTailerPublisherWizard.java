@@ -5,7 +5,6 @@ package com.verticon.tracker.transaction.publisher.filetailer;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
@@ -16,7 +15,6 @@ import org.eclipse.ui.IWorkbench;
 import com.verticon.tracker.editor.presentation.SelectFileWizardPage;
 import com.verticon.tracker.transaction.publisher.IPublisher;
 import com.verticon.tracker.transaction.publisher.IPublisherWizard;
-import com.verticon.tracker.transaction.publisher.PublisherPlugin;
 
 /**
  * Wizard for creating a FileTailerPublisher.
@@ -26,52 +24,37 @@ import com.verticon.tracker.transaction.publisher.PublisherPlugin;
  * @author jconlon
  * 
  */
-public class FileTailerPublisherWizard extends Wizard implements IPublisherWizard {
+public class FileTailerPublisherWizard extends Wizard implements
+		IPublisherWizard {
 
 	private static final String WIZARD_TITLE = "Add a FileTailer Publisher";
-	public static final String WIZARD_DIALOG_TAG = "AddPublisherWizard";
 
-	private IWorkbench workbench;
-
-	private SelectFileWizardPage selectCaptureFileWizardPage;
+	/**
+	 * Finished product of this Wizard
+	 */
 	private IPublisher publisher;
 
-	public FileTailerPublisherWizard() {
-		super();
-		IDialogSettings trackerSettings = PublisherPlugin.getDefault()
-				.getDialogSettings();
+	/**
+	 * Workbench where activity takes place
+	 */
+	private IWorkbench workbench;
 
-		IDialogSettings wizardSettings = trackerSettings
-				.getSection(WIZARD_DIALOG_TAG);
-		if (wizardSettings == null) {
-			wizardSettings = trackerSettings.addNewSection(WIZARD_DIALOG_TAG);
-		}
-		setDialogSettings(wizardSettings);
-	}
+	/**
+	 * Page to prompt for the selection of the capture file to monitor.
+	 */
+	private SelectFileWizardPage selectCaptureFileWizardPage;
+	
 
-	@Override
-	public boolean canFinish() {
-		return selectCaptureFileWizardPage.getSelectedFile() != null;
-	}
-
+	/**
+	 * Sets up the workbench.
+	 */
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.workbench = workbench;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
+	
+	/**
+	 * Adds a single page to query the user for the name of a capture file.
 	 */
-	@Override
-	public boolean performFinish() {
-		publisher = new FileTailer();
-		publisher.setTarget(selectCaptureFileWizardPage.getSelectedFile()
-				.getFullPath().toPortableString());
-
-		return true;
-	}
-
 	@Override
 	public void addPages() {
 		setWindowTitle(WIZARD_TITLE);
@@ -84,6 +67,34 @@ public class FileTailerPublisherWizard extends Wizard implements IPublisherWizar
 				new CaptureViewerFilter());
 		addPage(selectCaptureFileWizardPage);
 		selectCaptureFileWizardPage.init(editor);
+	}
+	
+	/**
+	 * Determines if the wizard can enable the Finish Button
+	 */
+	@Override
+	public boolean canFinish() {
+		return selectCaptureFileWizardPage.getSelectedFile() != null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
+	 */
+	@Override
+	public boolean performFinish() {
+		publisher = new FileTailerEventPublisher();
+		publisher.setTarget(selectCaptureFileWizardPage.getSelectedFile()
+				.getFullPath().toPortableString());
+		return true;
+	}
+	
+	/**
+	 * Return the finished publisher
+	 */
+	public IPublisher getPublisher() {
+		return publisher;
 	}
 
 	/**
@@ -120,8 +131,6 @@ public class FileTailerPublisherWizard extends Wizard implements IPublisherWizar
 		}
 	}
 
-	public IPublisher getPublisher() {
-		return publisher;
-	}
+	
 
 }
