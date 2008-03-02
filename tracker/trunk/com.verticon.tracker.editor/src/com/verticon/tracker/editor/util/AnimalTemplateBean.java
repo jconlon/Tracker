@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.eclipse.core.runtime.Preferences;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 
@@ -20,6 +21,8 @@ import com.verticon.tracker.Premises;
 import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
+import com.verticon.tracker.editor.preferences.PreferenceConstants;
+import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 
 /**
  * Data container for an Animal template and a flag indicating how to use event
@@ -30,7 +33,7 @@ import com.verticon.tracker.TrackerFactory;
  */
  public class AnimalTemplateBean {
 	private final Animal animal;
-	private Date date = null;
+	private Date defaultEventDate = null;
 	private final String name;
 	private final static Copier copier = new Copier(false, false);
 	
@@ -61,21 +64,14 @@ import com.verticon.tracker.TrackerFactory;
 	 * @return copied animal.
 	 */
 	public Animal getAnimal(String tag, Premises premises){
+		
 		Animal copiedAnimal = (Animal)copier.copy(animal);
 		if(premises!=null){
 			setLocationOnCopiedSightingEvents(copiedAnimal.allEvents(),  premises);
 		}
 		if(copiedAnimal.activeTag()!=null){
 			copiedAnimal.activeTag().setId(tag);
-			if(date !=null){
-				for (Event event : copiedAnimal.allEvents()) {
-					event.setDateTime(date);
-				}
-			}else{
-				for (Event event : copiedAnimal.allEvents()) {
-					setEventDate( event);
-				}
-			}
+			setAppropriateDateOnEvents(copiedAnimal, defaultEventDate);
 		}else{
 			//no active tag create one
 			Tag newTag = TrackerFactory.eINSTANCE.createTag();
@@ -83,6 +79,38 @@ import com.verticon.tracker.TrackerFactory;
 			copiedAnimal.getTags().add(newTag);
 		}
 		return copiedAnimal;
+	}
+
+	/**
+	 * Sets appropriate dates on all animal events.
+	 * @param copiedAnimal
+	 * @param presetDate
+	 */
+	 private static void setAppropriateDateOnEvents(Animal copiedAnimal, Date presetDate) {
+		Preferences prefs = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
+		Calendar cal = null;
+		for (Event event : copiedAnimal.allEvents()) {
+			if(isFirstEvent(cal) ){
+				if(presetDate !=null){
+					cal = Calendar.getInstance();
+					cal.setTime(presetDate);
+				}else{
+					cal = Calendar.getInstance();
+				}
+			}else{//All subsequent events add the Spread Interval to space out the events.
+				cal.add(Calendar.SECOND, prefs.getInt(PreferenceConstants.P_SPREAD_INTERVAL));
+			}
+			setEventDateIfTemplateDateBeforeReference( event, cal.getTime());
+			
+		}
+	}
+
+	/**
+	 * @param cal
+	 * @return
+	 */
+	private static boolean isFirstEvent(Calendar cal) {
+		return cal == null;
 	}
 	
 	/**
@@ -156,26 +184,21 @@ import com.verticon.tracker.TrackerFactory;
 		Collection<Event> events = null;
 		if(copiedAnimal.allEvents().isEmpty()){
 			events= Collections.emptyList();
-		}else if(date!=null){
-			 events = new ArrayList<Event>();
-			 for (Event event : copiedAnimal.allEvents()) {
-				event.setDateTime(date);
-				events.add(event);
-			 }
+		}else{
+			setAppropriateDateOnEvents(copiedAnimal, defaultEventDate);
+			events = new ArrayList<Event>();
+			events.addAll(copiedAnimal.allEvents());//Just add all the events
 		}
-		else {
-			 events = new ArrayList<Event>();
-			 events.addAll(copiedAnimal.allEvents());//Just add all the events
-		}
+		
 		return events;
 	}
 
 	public Date getDate() {
-		return date;
+		return defaultEventDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDateForAllEvents(Date date) {
+		this.defaultEventDate = date;
 	}
 
 	public String getName() {
@@ -189,9 +212,9 @@ import com.verticon.tracker.TrackerFactory;
 	
 	public static final GregorianCalendar DATE_REFERENCE = new GregorianCalendar(1000, Calendar.JANUARY, 1);  
 
-	public static final void setEventDate(Event event){
+    private static final void setEventDateIfTemplateDateBeforeReference(Event event, Date defaultDate){
 		if(event.getDateTime().before(DATE_REFERENCE.getTime())){
-			event.setDateTime(new Date());
+			event.setDateTime(defaultDate);
 		}
 	}
 }

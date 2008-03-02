@@ -220,7 +220,7 @@ public class ActionUtils {
 		// Setting a date in that is before the reference date will create a
 		// date that is the current time.
 		if (animalTemplateBean.getDate() == null) {
-			animalTemplateBean.setDate(tagsBean.getDate());
+			animalTemplateBean.setDateForAllEvents(tagsBean.getDate());
 		}
 
 		CompoundCommand compoundCommand = new CompoundCommand();
@@ -330,8 +330,11 @@ public class ActionUtils {
 			Collection<Event> events, EditingDomain editingDomain) {
 		Collection<Event> eventsToAdd = new ArrayList<Event>();
 		for (Event event : events) {
+			
 			if(ActionUtils.canAddEventToAnimal((Animal)tag.eContainer(), event) ){
+				//FIXME to not add concurrent times
 				eventsToAdd.add(event);
+				
 			}
 		}
 		
@@ -522,7 +525,7 @@ public class ActionUtils {
 		try {
 			date = dateFormater.parse(fileName);
 		} catch (ParseException e) {
-			return new Date();
+			return null;
 		}
 
 		return date;
