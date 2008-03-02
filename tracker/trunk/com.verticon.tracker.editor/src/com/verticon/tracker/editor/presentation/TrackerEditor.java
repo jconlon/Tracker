@@ -1477,7 +1477,9 @@ public class TrackerEditor
 							}
 						}
 						super.notifyChanged(notification);
-						this.viewer.refresh();
+						if(viewer!=null){
+							this.viewer.refresh();
+						}
 					}
 				});
 		
