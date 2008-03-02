@@ -4,7 +4,6 @@
 package com.verticon.tracker.editor.actions;
 
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -15,7 +14,6 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
 
 import com.verticon.tracker.editor.presentation.AddTagIdsAndTemplateWizard;
-import com.verticon.tracker.editor.presentation.TrackerEditor;
 
 /**
  * Action associated with a selection on a Capture *.tags file.
@@ -50,15 +48,9 @@ public class AddTagIdsAndTemplateActionDelegate implements IObjectActionDelegate
 		IWorkbenchWindow workbenchWindow = site.getWorkbenchWindow();
 		
 		IEditorPart editorPart = workbenchWindow.getActivePage().getActiveEditor();
-		if(editorPart==null|| (!(editorPart instanceof TrackerEditor))){
-			MessageDialog.openError(workbenchWindow.getShell(),
-					"Failed to add template",
-					"The Active Editor is not a TrackerEditor ");
-			return;
-		}
-		TrackerEditor editor =(TrackerEditor)editorPart;
+
 		AddTagIdsAndTemplateWizard wizard = new AddTagIdsAndTemplateWizard();
-		wizard.init(workbenchWindow, editor, selectionOfTagIdResources);
+		wizard.init( editorPart, selectionOfTagIdResources);
 		WizardDialog dialog = new WizardDialog(workbenchWindow.getShell(), wizard);
 		dialog.open();
 		

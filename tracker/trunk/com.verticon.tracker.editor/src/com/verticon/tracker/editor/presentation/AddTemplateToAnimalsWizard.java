@@ -5,10 +5,11 @@ package com.verticon.tracker.editor.presentation;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.IEditorPart;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.editor.util.ActionUtils;
@@ -27,9 +28,7 @@ public class AddTemplateToAnimalsWizard extends Wizard {
 	private static final String MODIFY_WIZARD_TITLE = "Add Template To Animals";
 	public static final String MODIFY_EVENTS_WIZARD = "ModifyEventsWizard";
 	private Collection<Animal> selectedAnimals;
-	private TrackerEditor editor;
-	@SuppressWarnings("unused")
-	private IWorkbenchWindow workbenchWindow;
+	private IEditorPart editor;
 	private SelectAnimalDocumentWizardPage selectAnimalDocumentWizardPage;
 
 	public AddTemplateToAnimalsWizard() {
@@ -44,9 +43,8 @@ public class AddTemplateToAnimalsWizard extends Wizard {
 		setDialogSettings(wizardSettings);
 	}
 
-	public void init(IWorkbenchWindow workbenchWindow, TrackerEditor editor,
+	public void init(IEditorPart editor,
 			IStructuredSelection selection) {
-		this.workbenchWindow = workbenchWindow;
 		selectedAnimals = ActionUtils.getSelectedAnimals(selection);
 		this.editor = editor;
 	}
@@ -71,7 +69,10 @@ public class AddTemplateToAnimalsWizard extends Wizard {
 		ActionUtils.addTemplateToAnimals(selectedAnimals, selectAnimalDocumentWizardPage
 				.getTemplateBean(), editor);
 		// Refresh the current viewer
-		editor.getViewer().refresh();
+		IViewerProvider viewerProvider = (IViewerProvider)editor.getAdapter(IViewerProvider.class);
+		if(viewerProvider !=null){
+			viewerProvider.getViewer().refresh();
+		}
 
 		return true;
 	}

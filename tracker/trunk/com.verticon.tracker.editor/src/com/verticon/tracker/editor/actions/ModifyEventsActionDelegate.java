@@ -14,8 +14,8 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
 
+import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.editor.presentation.ModifyEventsWizard;
-import com.verticon.tracker.editor.presentation.TrackerEditor;
 
 /**
  * @author jconlon
@@ -50,15 +50,18 @@ public class ModifyEventsActionDelegate implements IObjectActionDelegate {
 		IWorkbenchWindow workbenchWindow = site.getWorkbenchWindow();
 		
 		IEditorPart editorPart = workbenchWindow.getActivePage().getActiveEditor();
-		if(editorPart==null|| (!(editorPart instanceof TrackerEditor))){
-			MessageDialog.openError(workbenchWindow.getShell(),
-					FAILED_TO_MODIFY_EVENTS,
-					"The Active Editor is not a TrackerEditor ");
+
+		
+		IQueryDataSetProvider queryDataSetProvider = (IQueryDataSetProvider)editorPart.getAdapter(IQueryDataSetProvider.class);
+		if(queryDataSetProvider==null){
+			MessageDialog.openError(targetPart.getSite().getShell(),
+					FAILED_TO_MODIFY_EVENTS, "The Active Editor does not support a IQueryDataSetProvider");
 			return;
 		}
-		TrackerEditor editor =(TrackerEditor)editorPart;
+		
+		
 		ModifyEventsWizard wizard = new ModifyEventsWizard();
-		wizard.init(workbenchWindow, editor.getEditingDomain(), selection);
+		wizard.init(workbenchWindow, queryDataSetProvider.getEditingDomain(), selection);
 		WizardDialog dialog = new WizardDialog(workbenchWindow.getShell(), wizard);
 		dialog.open();
 		

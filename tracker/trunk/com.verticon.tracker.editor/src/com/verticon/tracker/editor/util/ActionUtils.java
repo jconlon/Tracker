@@ -180,7 +180,7 @@ public class ActionUtils {
 		return templateBean;
 	}
 
-	public static final Premises getPremises(TrackerEditor editor) {
+	public static final Premises getPremises(IQueryDataSetProvider editor) {
 		Premises premises = null;
 		EditingDomain editingDomain = editor.getEditingDomain();
 		Resource modelResource = (Resource) editingDomain.getResourceSet()
@@ -189,7 +189,15 @@ public class ActionUtils {
 		premises = (Premises) rootObject;
 		return premises;
 	}
+	
 
+	public static final Premises getPremises(IAdaptable adaptable) throws FileNotFoundException {
+		IQueryDataSetProvider queryDataSetProvider = (IQueryDataSetProvider)adaptable.getAdapter(IQueryDataSetProvider.class);
+		if(queryDataSetProvider==null){
+			throw new IllegalArgumentException("adaptable parameter does not support a IQueryDataSetProvider");
+		}
+		return getPremises(queryDataSetProvider);
+	}
 	/**
 	 * Add an animal template to the premises.  Duplicate tags tags will be ignored.
 	 * 
@@ -199,7 +207,15 @@ public class ActionUtils {
 	 * @param editor
 	 */
 	public static final void addTagsAndTemplate(Premises premises, TagsBean tagsBean,
-			AnimalTemplateBean animalTemplateBean, TrackerEditor editor) {
+			AnimalTemplateBean animalTemplateBean, IEditorPart editor) {
+		
+		IQueryDataSetProvider queryDataSetProvider = (IQueryDataSetProvider)editor.getAdapter(IQueryDataSetProvider.class);
+		if(queryDataSetProvider==null){
+			MessageDialog.openError(editor.getSite().getShell(),
+					ADD_TEMPLATE_TO_PREMISES_OPERATION, "The Active Editor does not support a IQueryDataSetProvider");
+			return;
+		}
+		
 		// The date in the templateBean takes precedence over the date in the tagsBean
 		// Setting a date in that is before the reference date will create a
 		// date that is the current time.
@@ -219,20 +235,20 @@ public class ActionUtils {
 				command = createAddEventsToTagCommand(
 						animal.activeTag(),
 						animalTemplateBean.getEvents(premises), 
-						editor.getEditingDomain());
+						queryDataSetProvider.getEditingDomain());
 			} else {
 				newAnimalsCreated++;
 				command = createAddAnimalToPremiseCommand(
 						premises,
 						animalTemplateBean.getAnimal(tag.toString(),premises), 
-						editor.getEditingDomain());
+						queryDataSetProvider.getEditingDomain());
 				
 			}
 			if(command !=null){
 				compoundCommand.append(command);
 			}
 		}
-		editor.getEditingDomain().getCommandStack().execute(compoundCommand);
+		queryDataSetProvider.getEditingDomain().getCommandStack().execute(compoundCommand);
 		MessageDialog.openInformation(editor.getSite().getShell(),
 				ADD_TEMPLATE_TO_PREMISES_OPERATION, "The "
 						+ animalTemplateBean.getName() + " and " + tagsBean.getName()
@@ -250,7 +266,13 @@ public class ActionUtils {
 	 * @param editor
 	 */
 	public static final void addTemplateToAnimals(Collection<Animal> animals,
-			AnimalTemplateBean templateBean, TrackerEditor editor) {
+			AnimalTemplateBean templateBean, IEditorPart editor) {
+		IQueryDataSetProvider queryDataSetProvider = (IQueryDataSetProvider)editor.getAdapter(IQueryDataSetProvider.class);
+		if(queryDataSetProvider==null){
+			MessageDialog.openError(editor.getSite().getShell(),
+					ADD_TEMPLATE_TO_ANIMALS_OPERATION, "The Active Editor does not support a IQueryDataSetProvider");
+			return;
+		}
 		CompoundCommand compoundCommand = new CompoundCommand();
 		Command command = null;
 		int numberOfEventsInTemplate = templateBean.numberOfEvents();
@@ -267,13 +289,13 @@ public class ActionUtils {
 				tag = animal.getTags().get(0);
 			}
 			command = createAddEventsToTagCommand(tag,
-					templateBean.getEvents((Premises)animal.eContainer()), editor.getEditingDomain());
+					templateBean.getEvents((Premises)animal.eContainer()), queryDataSetProvider.getEditingDomain());
 			if(command !=null){
 				compoundCommand.append(command);
 			}
 		}
 
-		editor.getEditingDomain().getCommandStack().execute(compoundCommand);
+		queryDataSetProvider.getEditingDomain().getCommandStack().execute(compoundCommand);
 		MessageDialog.openInformation(editor.getSite().getShell(),
 				ADD_TEMPLATE_TO_ANIMALS_OPERATION, "The "
 						+ templateBean.getName() + " processed "

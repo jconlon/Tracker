@@ -5,16 +5,17 @@ package com.verticon.tracker.editor.presentation;
 
 import java.io.FileNotFoundException;
 
+import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.IEditorPart;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.editor.util.ActionUtils;
-import com.verticon.tracker.editor.util.TagsBean;
 import com.verticon.tracker.editor.util.AnimalTemplateBean;
+import com.verticon.tracker.editor.util.TagsBean;
 
 /**
  * Wizard for adding an animal and event to a Premises
@@ -35,16 +36,13 @@ public class AddTagIdsAnimalAndEventWizard extends Wizard {
 
 	private static final String MODIFY_WIZARD_TITLE = "Add Animal To Premises";
 	private IStructuredSelection selectionOfTagIdResources;
-	private TrackerEditor editor;
-	@SuppressWarnings("unused")
-	private IWorkbenchWindow workbenchWindow;
+	private IEditorPart editor;
 	private SelectAnimalWizardPage selectAnimalWizardPage;
 	private SelectEventWizardPage selectEventWizardPage;
 
 
-	public void init(IWorkbenchWindow workbenchWindow, TrackerEditor editor,
+	public void init(IEditorPart editor,
 			IStructuredSelection selection) {
-		this.workbenchWindow = workbenchWindow;
 		this.selectionOfTagIdResources = selection;
 		this.editor = editor;
 	}
@@ -73,7 +71,13 @@ public class AddTagIdsAnimalAndEventWizard extends Wizard {
 	@Override
 	public boolean performFinish() {
 
-		Premises premises = ActionUtils.getPremises( editor);
+		Premises premises;
+		try {
+			premises = ActionUtils.getPremises( editor);
+		} catch (FileNotFoundException e1) {
+			selectEventWizardPage.setErrorMessage(e1.getMessage());
+			return false;
+		}
 		TagsBean tagsBean = null;
 
 		try {
@@ -89,8 +93,10 @@ public class AddTagIdsAnimalAndEventWizard extends Wizard {
 		}
 		ActionUtils.addTagsAndTemplate(premises, tagsBean, getTemplateAnimalBean(), editor);
 		// Refresh the current viewer
-		editor.getViewer().refresh();
-
+		IViewerProvider viewerProvider = (IViewerProvider)editor.getAdapter(IViewerProvider.class);
+		if(viewerProvider !=null){
+			viewerProvider.getViewer().refresh();
+		}
 		return true;
 	}
 	
