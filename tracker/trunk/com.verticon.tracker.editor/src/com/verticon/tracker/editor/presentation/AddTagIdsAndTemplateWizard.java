@@ -5,14 +5,15 @@ package com.verticon.tracker.editor.presentation;
 
 import java.io.FileNotFoundException;
 
+import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.IEditorPart;
 
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.editor.util.ActionUtils;
-import com.verticon.tracker.editor.util.TagsBean;
 import com.verticon.tracker.editor.util.AnimalTemplateBean;
+import com.verticon.tracker.editor.util.TagsBean;
 
 /**
  * Wizard for adding a template animal document to a Premises
@@ -27,15 +28,12 @@ public class AddTagIdsAndTemplateWizard extends Wizard {
 
 	private static final String MODIFY_WIZARD_TITLE = "Add Template To Premises";
 	private IStructuredSelection selectionOfTagIdResources;
-	private TrackerEditor editor;
-	@SuppressWarnings("unused")
-	private IWorkbenchWindow workbenchWindow;
+	private IEditorPart editor;
+
 	private SelectAnimalDocumentWizardPage selectAnimalDocumentWizardPage;
 
-
-	public void init(IWorkbenchWindow workbenchWindow, TrackerEditor editor,
+	public void init(IEditorPart editor,
 			IStructuredSelection selection) {
-		this.workbenchWindow = workbenchWindow;
 		this.selectionOfTagIdResources = selection;
 		this.editor = editor;
 	}
@@ -58,11 +56,11 @@ public class AddTagIdsAndTemplateWizard extends Wizard {
 
 	@Override
 	public boolean performFinish() {
-
-		Premises premises = ActionUtils.getPremises( editor);
+		Premises premises = null;
 		TagsBean tagsBean = null;
 
 		try {
+		    premises = ActionUtils.getPremises( editor);
 			tagsBean = ActionUtils.getTagsBean(editor, selectionOfTagIdResources);
 		} catch (FileNotFoundException e) {
 			selectAnimalDocumentWizardPage.setErrorMessage(e.getMessage());
@@ -76,7 +74,10 @@ public class AddTagIdsAndTemplateWizard extends Wizard {
 		ActionUtils.addTagsAndTemplate(premises, tagsBean, selectAnimalDocumentWizardPage
 				.getTemplateBean(), editor);
 		// Refresh the current viewer
-		editor.getViewer().refresh();
+		IViewerProvider viewerProvider = (IViewerProvider)editor.getAdapter(IViewerProvider.class);
+		if(viewerProvider !=null){
+			viewerProvider.getViewer().refresh();
+		}
 
 		return true;
 	}
