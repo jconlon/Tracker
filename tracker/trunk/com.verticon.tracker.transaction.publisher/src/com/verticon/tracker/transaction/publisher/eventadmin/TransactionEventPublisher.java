@@ -64,7 +64,7 @@ public class TransactionEventPublisher implements ITransactionPublisher {
 			tag.setId(Long.toString(tagId));
 		}
 		Hashtable<String, Object> table = new Hashtable<String, Object>();
-		table.put(PublisherPlugin.EVENT_PROPERYT_ANIMAL, templateAnimal);
+		table.put(PublisherPlugin.EVENT_PROPERTY_ANIMAL, templateAnimal);
 		table.put(Constants.BUNDLE_SYMBOLICNAME, PublisherPlugin.getDefault().getSymbolicName());
 		
 		EventAdmin ea = PublisherPlugin.getDefault().getService();
