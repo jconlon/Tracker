@@ -28,7 +28,7 @@ public class PublisherPlugin extends AbstractUIPlugin {
 		TOPIC_ANIMAL
 	};
 	
-	public static final String EVENT_PROPERYT_ANIMAL = 
+	public static final String EVENT_PROPERTY_ANIMAL = 
 		"com.verticon.tracker.animal";
 	
 	private ServiceTracker tracker;
