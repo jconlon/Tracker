@@ -1,11 +1,11 @@
-package com.verticon.tracker.transaction.publisher.preferences;
+package com.verticon.tracker.reader.preferences;
 
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import com.verticon.tracker.transaction.publisher.PublisherPlugin;
+import com.verticon.tracker.reader.ReaderPlugin;
 
 /**
  * This class represents a preference page that
@@ -21,13 +21,13 @@ import com.verticon.tracker.transaction.publisher.PublisherPlugin;
  * be accessed directly via the preference store.
  */
 
-public class PublisherPreferencePage
+public class PreferencePage
 	extends FieldEditorPreferencePage
 	implements IWorkbenchPreferencePage {
 
-	public PublisherPreferencePage() {
+	public PreferencePage() {
 		super(GRID);
-		setPreferenceStore(PublisherPlugin.getDefault().getPreferenceStore());
+		setPreferenceStore(ReaderPlugin.getDefault().getPreferenceStore());
 		setDescription("Tracker Event Publisher Preferences");
 	}
 	

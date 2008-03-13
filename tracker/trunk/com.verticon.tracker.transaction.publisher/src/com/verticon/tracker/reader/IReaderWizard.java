@@ -1,19 +1,19 @@
 /**
  * 
  */
-package com.verticon.tracker.transaction.publisher;
+package com.verticon.tracker.reader;
 
 import org.eclipse.ui.IWorkbenchWizard;
 
 /**
- * Interface for IPublisher wizards.
+ * Interface for IReader wizards.
  * <p>
  * Clients should implement this interface and include the name of their class
  * in a wizard contributed to the tracker's transaction publisher wizard extension point 
- * (named <code>"com.verticon.tracker.transaction.publisher.publisherWizards"</code>).
+ * (named <code>"com.verticon.tracker.reader.publisherWizards"</code>).
  * For example, the plug-in's XML markup might contain:
  * <pre>
- * &LT;extension point="com.verticon.tracker.transaction.publisher.publisherWizards"&GT;
+ * &LT;extension point="com.verticon.tracker.reader.publisherWizards"&GT;
  *   &LT;wizard
  *       id="com.example.myplugin.blob"
  *       name="Blob File"
@@ -28,7 +28,7 @@ import org.eclipse.ui.IWorkbenchWizard;
  * @see org.eclipse.jface.wizard.IWizard
  * @author jconlon
  */
-public interface IPublisherWizard extends IWorkbenchWizard {
+public interface IReaderWizard extends IWorkbenchWizard {
 
-	IPublisher getPublisher();
+	IReader getReader();
 }

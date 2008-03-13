@@ -72,10 +72,10 @@
          <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
-                  a fully qualified name of the class that implements &lt;samp&gt;com.verticon.tracker.transaction.publisher.IPublisherWizard&lt;/samp&gt; interface
+                  a fully qualified name of the class that implements &lt;samp&gt;com.verticon.tracker.reader.IPublisherWizard&lt;/samp&gt; interface
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":com.verticon.tracker.transaction.publisher.IPublisherWizard"/>
+                  <meta.attribute kind="java" basedOn=":com.verticon.tracker.reader.IPublisherWizard"/>
                </appInfo>
             </annotation>
          </attribute>
@@ -112,7 +112,7 @@
          The following is an example of the EventPublisher extension point usage:
 &lt;p&gt;
  &lt;pre&gt;
-	&lt;extension point=&quot;com.verticon.tracker.transaction.publisher.eventPublisherWizards&quot;&gt;
+	&lt;extension point=&quot;com.verticon.tracker.reader.readerWizards&quot;&gt;
 		&lt;wizard id=	&quot;com.xyz.eventPublisherWizard1&quot;
 			name=&quot;XYZ Web Scraper&quot;
 			class=	&quot;com.xyz.event.publisher.EventPublisherWizard1&quot;

@@ -1,4 +1,4 @@
-package com.verticon.tracker.transaction.publisher.preferences;
+package com.verticon.tracker.reader.preferences;
 
 /**
  * Constant definitions for plug-in preferences

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.verticon.tracker.transaction.publisher.wizards;
+package com.verticon.tracker.reader.wizards;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -14,15 +14,15 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
 
-import com.verticon.tracker.transaction.publisher.IPublisher;
-import com.verticon.tracker.transaction.publisher.IPublisherWizard;
+import com.verticon.tracker.reader.IReader;
+import com.verticon.tracker.reader.IReaderWizard;
 import com.verticon.tracker.util.TrackerLog;
 
 /**
  * @author jconlon
  *
  */
-public class PublisherWizardProxy implements IPublisherWizard {
+public class PublisherWizardProxy implements IReaderWizard {
 
 	private static final String ATT_CLASS = "class";
 	private static final String ELM_DESCRIPTION = "description";
@@ -34,7 +34,7 @@ public class PublisherWizardProxy implements IPublisherWizard {
 	private String name;
 	private String id;
 	
-	private IPublisherWizard delegate = null;
+	private IReaderWizard delegate = null;
 	
 	
 	public PublisherWizardProxy(IConfigurationElement configElm) {
@@ -47,25 +47,23 @@ public class PublisherWizardProxy implements IPublisherWizard {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.verticon.tracker.transaction.publisher.IPublisherWizard#getDescription()
+	 * @see com.verticon.tracker.reader.IReaderWizard#getDescription()
 	 */
 	public String getDescription() {
 		return description;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.verticon.tracker.transaction.publisher.IPublisherWizard#getNameOfCreatedPublisher()
-	 */
-	public String getNameOfCreatedPublisher() {
+	
+	public String getNameOfCreatedReader() {
 		return name;
 	}
 
 	/* (non-Javadoc)
-	 * @see com.verticon.tracker.transaction.publisher.IPublisherWizard#getPublisher()
+	 * @see com.verticon.tracker.reader.IReaderWizard#getReader()
 	 */
-	public IPublisher getPublisher() {
+	public IReader getReader() {
 		if(delegate!=null){
-			return delegate.getPublisher();
+			return delegate.getReader();
 		}
 		return null;
 	}
@@ -76,7 +74,7 @@ public class PublisherWizardProxy implements IPublisherWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		if(delegate==null){
 			try {
-				delegate = (IPublisherWizard)configElement.createExecutableExtension(ATT_CLASS);
+				delegate = (IReaderWizard)configElement.createExecutableExtension(ATT_CLASS);
 //				System.out.println("Created "+delegate);
 			} catch (CoreException e) {
 				 

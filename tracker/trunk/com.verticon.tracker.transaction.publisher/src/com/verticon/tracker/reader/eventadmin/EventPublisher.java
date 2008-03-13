@@ -1,4 +1,4 @@
-package com.verticon.tracker.transaction.publisher.eventadmin;
+package com.verticon.tracker.reader.eventadmin;
 
 import java.io.IOException;
 import java.util.Date;
@@ -16,10 +16,9 @@ import org.osgi.service.event.EventAdmin;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.editor.util.ConsoleUtil;
-import com.verticon.tracker.transaction.publisher.ITransactionPublisher;
-import com.verticon.tracker.transaction.publisher.PublisherPlugin;
+import com.verticon.tracker.reader.ReaderPlugin;
 
-public class TransactionEventPublisher implements ITransactionPublisher {
+public class EventPublisher implements ITagIdPublisher {
 
 	private Animal templateAnimal;
 
@@ -27,7 +26,7 @@ public class TransactionEventPublisher implements ITransactionPublisher {
 	
 	
 	
-	public TransactionEventPublisher(IFile animalTemplateFile) throws IOException {
+	public EventPublisher(IFile animalTemplateFile) throws IOException {
 		super();
 		this.animalTemplateFile = animalTemplateFile;
 		Resource templateResource = getResource(animalTemplateFile);
@@ -42,7 +41,7 @@ public class TransactionEventPublisher implements ITransactionPublisher {
 
 	
 	/* (non-Javadoc)
-	 * @see com.verticon.tracker.transaction.publisher.ITransactionPublisher#init()
+	 * @see com.verticon.tracker.reader.ITransactionPublisher#init()
 	 */
 	  public void init() throws IOException {
 		printToConsole(new Date() + "\tSynchronizing contents of Template file: "
@@ -64,17 +63,17 @@ public class TransactionEventPublisher implements ITransactionPublisher {
 			tag.setId(Long.toString(tagId));
 		}
 		Hashtable<String, Object> table = new Hashtable<String, Object>();
-		table.put(PublisherPlugin.EVENT_PROPERTY_ANIMAL, templateAnimal);
-		table.put(Constants.BUNDLE_SYMBOLICNAME, PublisherPlugin.getDefault().getSymbolicName());
+		table.put(ReaderPlugin.EVENT_PROPERTY_ANIMAL, templateAnimal);
+		table.put(Constants.BUNDLE_SYMBOLICNAME, ReaderPlugin.getDefault().getSymbolicName());
 		
-		EventAdmin ea = PublisherPlugin.getDefault().getService();
+		EventAdmin ea = ReaderPlugin.getDefault().getService();
 		
 		if(ea != null) {
 			ea.sendEvent(
 					new Event(
-							PublisherPlugin.TOPIC_ANIMAL, table));
+							ReaderPlugin.TOPIC_ANIMAL, table));
 		}else{
-			ConsoleUtil.println(TransactionEventPublisher.class.getSimpleName(), "Could not find EventAdmin service");
+			ConsoleUtil.println(EventPublisher.class.getSimpleName(), "Could not find EventAdmin service");
 		}
 		
 
@@ -95,6 +94,6 @@ public class TransactionEventPublisher implements ITransactionPublisher {
 	}
 	
 	private void printToConsole(String msg) {
-		ConsoleUtil.println(TransactionEventPublisher.class.getSimpleName(), msg);
+		ConsoleUtil.println(EventPublisher.class.getSimpleName(), msg);
 	}
 }

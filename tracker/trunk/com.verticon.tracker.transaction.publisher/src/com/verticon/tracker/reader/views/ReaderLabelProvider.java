@@ -1,5 +1,5 @@
 
-package com.verticon.tracker.transaction.publisher.views;
+package com.verticon.tracker.reader.views;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
@@ -8,16 +8,16 @@ import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
-import com.verticon.tracker.transaction.publisher.IPublisher;
+import com.verticon.tracker.reader.IReader;
 
 
 
 /**
- * Label provider for the PublisherViewer
+ * Label provider for the ReaderViewer
  * 
  * @see org.eclipse.jface.viewers.LabelProvider 
  */
-public class PublisherLabelProvider 
+public class ReaderLabelProvider 
 	extends LabelProvider
 	implements ITableLabelProvider {
 
@@ -35,12 +35,12 @@ public class PublisherLabelProvider
 	static {
 		String iconPath = "icons/"; 
 		imageRegistry.put(CHECKED_IMAGE, ImageDescriptor.createFromFile(
-				PublisherViewer.class, 
+				ReaderViewer.class, 
 				iconPath + CHECKED_IMAGE + ".gif"
 				)
 			);
 		imageRegistry.put(UNCHECKED_IMAGE, ImageDescriptor.createFromFile(
-				PublisherViewer.class, 
+				ReaderViewer.class, 
 				iconPath + UNCHECKED_IMAGE + ".gif"
 				)
 			);	
@@ -59,21 +59,21 @@ public class PublisherLabelProvider
 	 */
 	public String getColumnText(Object element, int columnIndex) {
 		String result = "";
-		IPublisher publisher = (IPublisher) element;
+		IReader reader = (IReader) element;
 		switch (columnIndex) {
 			case 0:  // COMPLETED_COLUMN
 				break;
 			case 1 :
-				result = publisher.getName();
+				result = reader.getName();
 				break;
 			case 2 :
-				result = publisher.getType();
+				result = reader.getType();
 				break;
 			case 3 :
-				result = publisher.getTemplate() ;
+				result = reader.getTemplate() ;
 				break;
 			case 4 :
-				result = publisher.getTarget() ;
+				result = reader.getTarget() ;
 				break;
 			default :
 				break; 	
@@ -86,7 +86,7 @@ public class PublisherLabelProvider
 	 */
 	public Image getColumnImage(Object element, int columnIndex) {
 		return (columnIndex == 0) ?   // COMPLETED_COLUMN?
-			getImage(((IPublisher) element).isStarted()) :
+			getImage(((IReader) element).isStarted()) :
 			null;
 	}
 

@@ -1,4 +1,4 @@
-package com.verticon.tracker.transaction.publisher.wizards;
+package com.verticon.tracker.reader.wizards;
 
 
 
@@ -29,16 +29,16 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
 
-import com.verticon.tracker.transaction.publisher.IPublisherWizard;
-import com.verticon.tracker.transaction.publisher.PublisherPlugin;
+import com.verticon.tracker.reader.IReaderWizard;
+import com.verticon.tracker.reader.ReaderPlugin;
 import com.verticon.tracker.util.TrackerLog;
 
 /**
  * A WizardPage that nests a set of IWizardPublisher that are created from the extension point 
- * (named <code>"com.verticon.tracker.transaction.publisher.publisherWizards"</code>).
+ * (named <code>"com.verticon.tracker.reader.publisherWizards"</code>).
  * For example, the plug-in's XML markup might contain:
  * <pre>
- * &LT;extension point="com.verticon.tracker.transaction.publisher.eventPublisherWizards"&GT;
+ * &LT;extension point="com.verticon.tracker.reader.readerWizards"&GT;
  *   &LT;wizard
  *       id="com.example.myplugin.blob"
  *       name="Blob Event Publisher"
@@ -54,13 +54,13 @@ import com.verticon.tracker.util.TrackerLog;
  * @author jconlon
  *
  */
-public class PublisherWizardSelectionPage extends WizardSelectionPage {
+public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 	
 	private ListViewer listViewer;
 	private IWorkbench workbench;
-	private static IPublisherWizard[] cachedWizards;
+	private static IReaderWizard[] cachedWizards;
 	
-	protected PublisherWizardSelectionPage(String pageName, IWorkbench workbench) {
+	protected EventReaderWizardSelectionPage(String pageName, IWorkbench workbench) {
 		super(pageName);
 		this.workbench=workbench;
 		setTitle(pageName);
@@ -88,43 +88,39 @@ public class PublisherWizardSelectionPage extends WizardSelectionPage {
 	}
 	
 	protected ListViewer createViewer(Composite parent) {
-		ListViewer listViewer =
-			new ListViewer(parent, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
-		listViewer.setLabelProvider(
-		         new IPublisherWizardListLabelProvider());
-		      listViewer.setContentProvider(
-		          new ArrayContentProvider());
-		      listViewer.setInput(getPublisherList());
-		      listViewer.setSorter(new ViewerSorter() {
-		         public int compare(
-		            Viewer viewer, Object p1, Object p2) {
-		            return ((PublisherWizardProxy) p1).getNameOfCreatedPublisher()
-		               .compareToIgnoreCase(((PublisherWizardProxy) p2).getNameOfCreatedPublisher());
-		         }
-		      });
-		      listViewer.addSelectionChangedListener(
-		         new ISelectionChangedListener() {
-		        	 public void selectionChanged(
-		        			 SelectionChangedEvent event) {
-		        		 IStructuredSelection selection = 
-		        			 (IStructuredSelection) event.getSelection();
+		ListViewer listViewer = new ListViewer(parent, SWT.SINGLE
+				| SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
+		listViewer.setLabelProvider(new IPublisherWizardListLabelProvider());
+		listViewer.setContentProvider(new ArrayContentProvider());
+		listViewer.setInput(getReaderWizardsFromContributors());
+		listViewer.setSorter(new ViewerSorter() {
+			public int compare(Viewer viewer, Object p1, Object p2) {
+				return ((PublisherWizardProxy) p1).getNameOfCreatedReader()
+						.compareToIgnoreCase(
+								((PublisherWizardProxy) p2)
+										.getNameOfCreatedReader());
+			}
+		});
+		listViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			public void selectionChanged(SelectionChangedEvent event) {
+				IStructuredSelection selection = (IStructuredSelection) event
+						.getSelection();
 
-		        	
-		        		 PublisherWizardProxy w = (PublisherWizardProxy) selection.getFirstElement();
-		        		 
-		        		 setSelectedNode(createIWizardNode( w, workbench));
-		        		 setErrorMessage(null);
-		        		 setMessage(
-		        				 w.getNameOfCreatedPublisher()+" "+w.getDescription(),
-		        				 IMessageProvider.INFORMATION);
+				PublisherWizardProxy w = (PublisherWizardProxy) selection
+						.getFirstElement();
 
-		         }
-		      });
-		
+				setSelectedNode(createIWizardNode(w, workbench));
+				setErrorMessage(null);
+				setMessage(w.getNameOfCreatedReader() + " "
+						+ w.getDescription(), IMessageProvider.INFORMATION);
+
+			}
+		});
+
 		return listViewer;
 	}
 	
-	static final IWizardNode createIWizardNode(final IPublisherWizard iWizard, final IWorkbench workbench  ){
+	static final IWizardNode createIWizardNode(final IReaderWizard iWizard, final IWorkbench workbench  ){
 		
 		return new IWizardNode(){
 			public void dispose() {
@@ -164,34 +160,34 @@ public class PublisherWizardSelectionPage extends WizardSelectionPage {
 	  * 
 	  * @return
 	  */
-	 IPublisherWizard[] getPublisherList(){
+	 IReaderWizard[] getReaderWizardsFromContributors(){
 		 
 		 if (cachedWizards !=null){
 			 return cachedWizards;
 		 }
 		 IExtension[] extensions = Platform.getExtensionRegistry().getExtensionPoint(
-				 PublisherPlugin.PLUGIN_ID, "eventPublisherWizards")
+				 ReaderPlugin.PLUGIN_ID, "readerWizards")
 				 .getExtensions();
-		 List<IPublisherWizard> found = new ArrayList<IPublisherWizard>();
+		 List<IReaderWizard> found = new ArrayList<IReaderWizard>();
 		 for (int i = 0; i < extensions.length; i++) {
 			IConfigurationElement[] configElements =
 					extensions[i].getConfigurationElements();
 			for (int j = 0; j < configElements.length; j++) {
-				IPublisherWizard proxy =
+				IReaderWizard proxy =
 					parseType(configElements[j],found.size());
 				if(proxy != null){
 					found.add(proxy);
 				}
 			}
 		 }
-		 cachedWizards=(IPublisherWizard[]) found.toArray(
-				 new IPublisherWizard[found.size()]
+		 cachedWizards=(IReaderWizard[]) found.toArray(
+				 new IReaderWizard[found.size()]
 		 );
 
 		 return cachedWizards;
 	 }
 
-	private static IPublisherWizard parseType(IConfigurationElement configElement, int ordinal){
+	private static IReaderWizard parseType(IConfigurationElement configElement, int ordinal){
 		 if (!configElement.getName().equals("wizard"))
 		      return null;
 		   try {
@@ -220,7 +216,7 @@ public class PublisherWizardSelectionPage extends WizardSelectionPage {
 		   }	
 		   public String getText(Object element) {
 			   PublisherWizardProxy publisher = (PublisherWizardProxy) element;
-		      return publisher.getNameOfCreatedPublisher();
+		      return publisher.getNameOfCreatedReader();
 		   }
 		}
 

@@ -1,5 +1,5 @@
 
-package com.verticon.tracker.transaction.publisher.views;
+package com.verticon.tracker.reader.views;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,15 +27,15 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.verticon.tracker.transaction.publisher.IPublisher;
+import com.verticon.tracker.reader.IReader;
 
 /**
- * The PublisherViewer class is meant to be a fairly complete 
+ * The ReaderViewer class is meant to be a fairly complete 
  * use of the org.eclipse.jface.viewers.TableViewer class to 
  * implement an editable table with text, combobox and image 
  * editors. 
  * 
- * PublisherViewer draws from sample code writen by Laurent Gauthier
+ * ReaderViewer draws from sample code writen by Laurent Gauthier
  * http://www.eclipse.org/articles/Article-Table-viewer/table_viewer.html
  * and the sample code in the Eclipse
  * org.eclipse.ui.views.tasklist.TaskList class and some sample code 
@@ -49,11 +49,11 @@ import com.verticon.tracker.transaction.publisher.IPublisher;
  * @created Apr 2, 2003  
  */
 
-public class PublisherViewer {
+public class ReaderViewer {
 /**
 	 * @param parent
 	 */
-	public PublisherViewer(Composite parent) {
+	public ReaderViewer(Composite parent) {
 		
 		this.addChildControls(parent);
 	}
@@ -63,7 +63,7 @@ public class PublisherViewer {
 	private TableViewer tableViewer;
 	private Button closeButton;
 	
-	private PublisherViewModel publisherViewModel = new PublisherViewModel();
+	private ReaderViewModel readerViewModel = new ReaderViewModel();
 	private Button addButton;
 
 	public enum Column {
@@ -106,7 +106,7 @@ public class PublisherViewer {
 		
 		// Create a composite to hold the children
 		Composite composite = new Composite(shell, SWT.NONE);
-		final PublisherViewer tableViewerExample = new PublisherViewer(composite);
+		final ReaderViewer tableViewerExample = new ReaderViewer(composite);
 		
 		tableViewerExample.getControl().addDisposeListener(new DisposeListener() {
 
@@ -173,9 +173,9 @@ public class PublisherViewer {
 		// Create and setup the TableViewer
 		createTableViewer();
 		tableViewer.setContentProvider(new ExampleContentProvider());
-		tableViewer.setLabelProvider(new PublisherLabelProvider());
+		tableViewer.setLabelProvider(new ReaderLabelProvider());
 		// The input for the table viewer is the viewModel
-		tableViewer.setInput(publisherViewModel);
+		tableViewer.setInput(readerViewModel);
 
 		// Add the buttons
 		createButtons(composite);
@@ -212,7 +212,7 @@ public class PublisherViewer {
 		column.addSelectionListener(new SelectionAdapter() {
        	
 			public void widgetSelected(SelectionEvent e) {
-				tableViewer.setSorter(new PublisherSorter(Column.NAME));
+				tableViewer.setSorter(new ReaderSorter(Column.NAME));
 			}
 		});
 
@@ -224,7 +224,7 @@ public class PublisherViewer {
 		// Add listener to column so tasks are sorted by type when clicked
 		column.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				tableViewer.setSorter(new PublisherSorter(Column.TYPE));
+				tableViewer.setSorter(new ReaderSorter(Column.TYPE));
 			}
 		});
 
@@ -236,7 +236,7 @@ public class PublisherViewer {
 		column.addSelectionListener(new SelectionAdapter() {
        	
 			public void widgetSelected(SelectionEvent e) {
-				tableViewer.setSorter(new PublisherSorter(Column.TEMPLATE));
+				tableViewer.setSorter(new ReaderSorter(Column.TEMPLATE));
 			}
 		});
 		
@@ -248,7 +248,7 @@ public class PublisherViewer {
 		column.addSelectionListener(new SelectionAdapter() {
        	
 			public void widgetSelected(SelectionEvent e) {
-				tableViewer.setSorter(new PublisherSorter(Column.TARGET));
+				tableViewer.setSorter(new ReaderSorter(Column.TARGET));
 			}
 		});
 	}
@@ -278,9 +278,9 @@ public class PublisherViewer {
 		// Assign the cell editors to the viewer 
 		tableViewer.setCellEditors(editors);
 		// Set the cell modifier for the viewer
-		tableViewer.setCellModifier(new PublisherCellModifier(this));
+		tableViewer.setCellModifier(new ReaderCellModifier(this));
 		// Set the default sorter for the viewer 
-		tableViewer.setSorter(new PublisherSorter(Column.NAME));
+		tableViewer.setSorter(new ReaderSorter(Column.NAME));
 	}
 
 	/*
@@ -300,41 +300,41 @@ public class PublisherViewer {
 	 * interface since it must register changeListeners with the 
 	 * ExampleTaskList 
 	 */
-	class ExampleContentProvider implements IStructuredContentProvider, IPublisherModelListener {
+	class ExampleContentProvider implements IStructuredContentProvider, IReaderModelListener {
 		public void inputChanged(Viewer v, Object oldInput, Object newInput) {
 			if (newInput != null)
-				((PublisherViewModel) newInput).addChangeListener(this);
+				((ReaderViewModel) newInput).addChangeListener(this);
 			if (oldInput != null)
-				((PublisherViewModel) oldInput).removeChangeListener(this);
+				((ReaderViewModel) oldInput).removeChangeListener(this);
 		}
 
 		public void dispose() {
-			publisherViewModel.removeChangeListener(this);
+			readerViewModel.removeChangeListener(this);
 		}
 
 		// Return the tasks as an array of Objects
 		public Object[] getElements(Object parent) {
-			return publisherViewModel.getTasks().toArray();
+			return readerViewModel.getTasks().toArray();
 		}
 
 		/* (non-Javadoc)
 		 * @see ITaskListViewer#addTask(ExampleTask)
 		 */
-		public void addPublisher(IPublisher task) {
+		public void addReader(IReader task) {
 			tableViewer.add(task);
 		}
 
 		/* (non-Javadoc)
 		 * @see ITaskListViewer#removeTask(ExampleTask)
 		 */
-		public void removePublisher(IPublisher task) {
+		public void removeReader(IReader task) {
 			tableViewer.remove(task);			
 		}
 
 		/* (non-Javadoc)
 		 * @see ITaskListViewer#updateTask(ExampleTask)
 		 */
-		public void updatePublisher(IPublisher task) {
+		public void updateReader(IReader task) {
 			tableViewer.update(task, null);	
 		}
 	}
@@ -364,10 +364,10 @@ public class PublisherViewer {
        	
 			//	Remove the selection and refresh the view
 			public void widgetSelected(SelectionEvent e) {
-				IPublisher task = (IPublisher) ((IStructuredSelection) 
+				IReader task = (IReader) ((IStructuredSelection) 
 						tableViewer.getSelection()).getFirstElement();
 				if (task != null) {
-					publisherViewModel.removePublisher(task);
+					readerViewModel.removeReader(task);
 				} 				
 			}
 		});
@@ -399,8 +399,8 @@ public class PublisherViewer {
 	/**
 	 * Return the ExampleTaskList
 	 */
-	public PublisherViewModel getPublisherViewModel(){
-		return publisherViewModel;	
+	public ReaderViewModel getReaderViewModel(){
+		return readerViewModel;	
 	}
 
 	/**
