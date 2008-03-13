@@ -1,5 +1,5 @@
 
-package com.verticon.tracker.transaction.publisher.views;
+package com.verticon.tracker.reader.views;
 
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -8,21 +8,21 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.part.ViewPart;
 
-import com.verticon.tracker.transaction.publisher.wizards.AddPublisherWizard;
+import com.verticon.tracker.reader.wizards.AddEventReaderWizard;
 
 
 
 /**
- * Uses the PublisherViewer inside a workbench view. 
+ * Uses the ReaderViewer inside a workbench view. 
  */
 
-public class PublisherViewPart extends ViewPart {
-	private PublisherViewer viewer;
+public class ReaderViewPart extends ViewPart {
+	private ReaderViewer viewer;
 
 	/**
 	 * The constructor.
 	 */
-	public PublisherViewPart() {
+	public ReaderViewPart() {
 	}
 
 	/**
@@ -30,7 +30,7 @@ public class PublisherViewPart extends ViewPart {
 	 * to create the viewer and initialize it.
 	 */
 	public void createPartControl(Composite parent) {
-		viewer = new PublisherViewer(parent);
+		viewer = new ReaderViewer(parent);
 		viewer.getCloseButton().addSelectionListener(new SelectionAdapter() {
        	
 			// Close the view i.e. dispose of the composite's parent
@@ -66,7 +66,7 @@ public class PublisherViewPart extends ViewPart {
 
 	public void handleAdd() {
 		IWorkbenchWindow window = this.getSite().getWorkbenchWindow();
-		AddPublisherWizard addWizard = new AddPublisherWizard(viewer.getPublisherViewModel());
+		AddEventReaderWizard addWizard = new AddEventReaderWizard(viewer.getReaderViewModel());
 		addWizard.init(window.getWorkbench());
 		WizardDialog dialog = new WizardDialog(window.getShell(),addWizard);
 		dialog.open();

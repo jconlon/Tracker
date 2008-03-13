@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.verticon.tracker.transaction.publisher.wizards;
+package com.verticon.tracker.reader.wizards;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.dialogs.IDialogSettings;
@@ -12,13 +12,13 @@ import org.eclipse.ui.IWorkbench;
 
 import com.verticon.tracker.editor.presentation.SelectAnimalDocumentWizardPage;
 import com.verticon.tracker.editor.util.AnimalTemplateBean;
-import com.verticon.tracker.transaction.publisher.IPublisher;
-import com.verticon.tracker.transaction.publisher.IPublisherWizard;
-import com.verticon.tracker.transaction.publisher.PublisherPlugin;
-import com.verticon.tracker.transaction.publisher.views.PublisherViewModel;
+import com.verticon.tracker.reader.IReader;
+import com.verticon.tracker.reader.IReaderWizard;
+import com.verticon.tracker.reader.ReaderPlugin;
+import com.verticon.tracker.reader.views.ReaderViewModel;
 
 /**
- * Wizard for adding a publisher to the Publisher Views.
+ * Wizard for adding an EventReader to the Reader Views.
  * 
  * Pages: 1. Select the Animal document to use as a template 2. Select the file
  * to Tail new TagIds
@@ -28,22 +28,22 @@ import com.verticon.tracker.transaction.publisher.views.PublisherViewModel;
  * @author jconlon
  * 
  */
-public class AddPublisherWizard extends Wizard {
+public class AddEventReaderWizard extends Wizard {
 
-	private static final String WIZARD_TITLE = "Add an Event Publisher";
-	public static final String WIZARD_DIALOG_TAG = "AddPublisherWizard";
+	private static final String WIZARD_TITLE = "Add an Event Reader";
+	public static final String WIZARD_DIALOG_TAG = "AddReaderWizard";
 
-	private final PublisherViewModel publisherViewModel;
+	private final ReaderViewModel readerViewModel;
 	private IWorkbench workbench;
 
 	private SelectAnimalDocumentWizardPage selectAnimalDocumentWizardPage;
 
-	private PublisherWizardSelectionPage publisherWizardSelection;
+	private EventReaderWizardSelectionPage publisherWizardSelection;
 
-	public AddPublisherWizard(PublisherViewModel publisherViewModel) {
+	public AddEventReaderWizard(ReaderViewModel readerViewModel) {
 		super();
-		this.publisherViewModel = publisherViewModel;
-		IDialogSettings trackerSettings = PublisherPlugin.getDefault()
+		this.readerViewModel = readerViewModel;
+		IDialogSettings trackerSettings = ReaderPlugin.getDefault()
 				.getDialogSettings();
 
 		IDialogSettings wizardSettings = trackerSettings
@@ -78,16 +78,16 @@ public class AddPublisherWizard extends Wizard {
 	public boolean performFinish() {
 		IFile templateFile = selectAnimalDocumentWizardPage.getSelectedFile();
 		IWizardNode wizardNode = publisherWizardSelection.getSelectedNode();
-		IPublisherWizard publisherWizard = (IPublisherWizard) wizardNode
+		IReaderWizard publisherWizard = (IReaderWizard) wizardNode
 				.getWizard();
-		if (publisherWizard == null || publisherWizard.getPublisher() == null) {
+		if (publisherWizard == null || publisherWizard.getReader() == null) {
 			return false;
 		}
 
-		IPublisher publisher = publisherWizard.getPublisher();
+		IReader publisher = publisherWizard.getReader();
 		publisher.setTemplate(templateFile.getFullPath().toPortableString());
 
-		publisherViewModel.addPublisher(publisher);
+		readerViewModel.addReader(publisher);
 		return true;
 	}
 
@@ -102,7 +102,7 @@ public class AddPublisherWizard extends Wizard {
 				.getActivePage().getActiveEditor();
 		selectAnimalDocumentWizardPage.init(editor);
 
-		publisherWizardSelection = new PublisherWizardSelectionPage(
+		publisherWizardSelection = new EventReaderWizardSelectionPage(
 				"Select the Type of Event Publisher to Create", workbench);
 		addPage(publisherWizardSelection);
 	}

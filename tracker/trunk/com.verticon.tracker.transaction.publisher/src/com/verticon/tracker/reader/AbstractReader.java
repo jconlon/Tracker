@@ -1,10 +1,8 @@
 /**
  * 
  */
-package com.verticon.tracker.transaction.publisher.utilities;
+package com.verticon.tracker.reader;
 
-import com.verticon.tracker.editor.presentation.AbstractModelObject;
-import com.verticon.tracker.transaction.publisher.IPublisher;
 
 /**
  * Publisher Used for testing.
@@ -12,14 +10,14 @@ import com.verticon.tracker.transaction.publisher.IPublisher;
  * @author jconlon
  * 
  */
-public class MockPublisher extends AbstractModelObject implements IPublisher {
+public class AbstractReader extends AbstractModelObject implements IReader {
 
 	String name = "dummy";
 	String target = "a target";
 	String template = "Some template";
 	boolean started = true;
 
-	public MockPublisher(String name) {
+	public AbstractReader(String name) {
 		super();
 		this.name = name;
 	}
@@ -37,7 +35,7 @@ public class MockPublisher extends AbstractModelObject implements IPublisher {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.verticon.tracker.transaction.publisher.IPublisher#getName()
+	 * @see com.verticon.tracker.reader.IPublisher#getName()
 	 */
 	public String getName() {
 		return name;
@@ -53,10 +51,10 @@ public class MockPublisher extends AbstractModelObject implements IPublisher {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.verticon.tracker.transaction.publisher.IPublisher#getDescription()
+	 * @see com.verticon.tracker.reader.IPublisher#getDescription()
 	 */
 	public String getType() {
-		return MockPublisher.class.getSimpleName();
+		return AbstractReader.class.getSimpleName();
 	}
 
 	public void setType(String type) {
@@ -68,7 +66,7 @@ public class MockPublisher extends AbstractModelObject implements IPublisher {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.verticon.tracker.transaction.publisher.IPublisher#getTemplate()
+	 * @see com.verticon.tracker.reader.IPublisher#getTemplate()
 	 */
 	public String getTemplate() {
 		return template;
@@ -84,7 +82,7 @@ public class MockPublisher extends AbstractModelObject implements IPublisher {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.verticon.tracker.transaction.publisher.IPublisher#getTarget()
+	 * @see com.verticon.tracker.reader.IPublisher#getTarget()
 	 */
 	public String getTarget() {
 		return target;

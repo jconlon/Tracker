@@ -1,9 +1,9 @@
-package com.verticon.tracker.transaction.publisher.preferences;
+package com.verticon.tracker.reader.preferences;
 
 import org.eclipse.core.runtime.Preferences;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 
-import com.verticon.tracker.transaction.publisher.PublisherPlugin;
+import com.verticon.tracker.reader.ReaderPlugin;
 
 /**
  * Class used to initialize default preference values.
@@ -16,7 +16,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 * @see org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer#initializeDefaultPreferences()
 	 */
 	public void initializeDefaultPreferences() {
-		Preferences store = PublisherPlugin.getDefault().getPluginPreferences();
+		Preferences store = ReaderPlugin.getDefault().getPluginPreferences();
 		store.setDefault(PreferenceConstants.P_READ_INTERVAL, 1);
 		
 	}

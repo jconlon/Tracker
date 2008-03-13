@@ -1,27 +1,27 @@
 
 
-package com.verticon.tracker.transaction.publisher.views;
+package com.verticon.tracker.reader.views;
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.swt.widgets.TableItem;
 
-import com.verticon.tracker.transaction.publisher.IPublisher;
+import com.verticon.tracker.reader.IReader;
 
 
 /**
- * ICellModifier for the PublisherViewer
+ * ICellModifier for the ReaderViewer
  * ICellModifier is called when the user modifes a cell in the 
- * PublisherViewer
+ * ReaderViewer
  */
 
-public class PublisherCellModifier implements ICellModifier {
-	private PublisherViewer publisherViewer;
+public class ReaderCellModifier implements ICellModifier {
+	private ReaderViewer readerViewer;
 	/**
 	 * Constructor 
-	 * @param publisherViewer
+	 * @param readerViewer
 	 */
-	public PublisherCellModifier(PublisherViewer publisherViewer) {
+	public ReaderCellModifier(ReaderViewer readerViewer) {
 		super();
-		this.publisherViewer = publisherViewer;
+		this.readerViewer = readerViewer;
 	}
 
 	/**
@@ -39,10 +39,10 @@ public class PublisherCellModifier implements ICellModifier {
 	public Object getValue(Object element, String property) {
 
 		// Find the index of the column
-		int columnIndex = publisherViewer.getColumnNames().indexOf(property);
+		int columnIndex = readerViewer.getColumnNames().indexOf(property);
 
 		Object result = null;
-		IPublisher task = (IPublisher) element;
+		IReader task = (IReader) element;
 
 		switch (columnIndex) {
 			case 0 : // Started 
@@ -74,33 +74,33 @@ public class PublisherCellModifier implements ICellModifier {
 	public void modify(Object element, String property, Object value) {	
 
 		// Find the index of the column 
-		int columnIndex	= publisherViewer.getColumnNames().indexOf(property);
+		int columnIndex	= readerViewer.getColumnNames().indexOf(property);
 			
 		TableItem item = (TableItem) element;
-		IPublisher publisher = (IPublisher) item.getData();
+		IReader reader = (IReader) item.getData();
 		String valueString;
 
 		switch (columnIndex) {
 			case 0 : // Started 
-			    publisher.setStarted(((Boolean) value).booleanValue());
+			    reader.setStarted(((Boolean) value).booleanValue());
 				break;
 			case 1 : // Name 
 				valueString = ((String) value).trim();
-				publisher.setName(valueString);
+				reader.setName(valueString);
 				break;
 			case 2 : // Type 
 				valueString = ((String) value).trim();
 				break;
 			case 3 : // Template
 				valueString = ((String) value).trim();
-				publisher.setTemplate(valueString);
+				reader.setTemplate(valueString);
 				break;
 			case 4 : // Target
 				valueString = ((String) value).trim();
-				publisher.setTarget(valueString);
+				reader.setTarget(valueString);
 				break;
 			default :
 			}
-		publisherViewer.getPublisherViewModel().publisherChanged(publisher);
+		readerViewer.getReaderViewModel().readererChanged(reader);
 	}
 }

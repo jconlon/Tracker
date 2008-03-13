@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.verticon.tracker.transaction.publisher.filetailer;
+package com.verticon.tracker.reader.event.filetailer;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
@@ -13,8 +13,8 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 
 import com.verticon.tracker.editor.presentation.SelectFileWizardPage;
-import com.verticon.tracker.transaction.publisher.IPublisher;
-import com.verticon.tracker.transaction.publisher.IPublisherWizard;
+import com.verticon.tracker.reader.IReader;
+import com.verticon.tracker.reader.IReaderWizard;
 
 /**
  * Wizard for creating a FileTailerPublisher.
@@ -24,15 +24,15 @@ import com.verticon.tracker.transaction.publisher.IPublisherWizard;
  * @author jconlon
  * 
  */
-public class FileTailerPublisherWizard extends Wizard implements
-		IPublisherWizard {
+public class FileTailerReaderWizard extends Wizard implements
+		IReaderWizard {
 
 	private static final String WIZARD_TITLE = "Add a FileTailer Publisher";
 
 	/**
 	 * Finished product of this Wizard
 	 */
-	private IPublisher publisher;
+	private IReader publisher;
 
 	/**
 	 * Workbench where activity takes place
@@ -84,7 +84,7 @@ public class FileTailerPublisherWizard extends Wizard implements
 	 */
 	@Override
 	public boolean performFinish() {
-		publisher = new FileTailerEventPublisher();
+		publisher = new FileTailerEventReader();
 		publisher.setTarget(selectCaptureFileWizardPage.getSelectedFile()
 				.getFullPath().toPortableString());
 		return true;
@@ -93,7 +93,7 @@ public class FileTailerPublisherWizard extends Wizard implements
 	/**
 	 * Return the finished publisher
 	 */
-	public IPublisher getPublisher() {
+	public IReader getReader() {
 		return publisher;
 	}
 

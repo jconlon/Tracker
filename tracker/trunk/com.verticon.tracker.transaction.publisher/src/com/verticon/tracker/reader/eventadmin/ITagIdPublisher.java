@@ -1,8 +1,8 @@
-package com.verticon.tracker.transaction.publisher;
+package com.verticon.tracker.reader.eventadmin;
 
 import java.io.IOException;
 
-public interface ITransactionPublisher {
+public interface ITagIdPublisher {
 
 	/**
 	 * Loads the animalTeplate from the file

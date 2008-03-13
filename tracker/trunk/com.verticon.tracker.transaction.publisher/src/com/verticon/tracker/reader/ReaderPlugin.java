@@ -1,4 +1,4 @@
-package com.verticon.tracker.transaction.publisher;
+package com.verticon.tracker.reader;
 
 
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -12,14 +12,14 @@ import org.osgi.util.tracker.ServiceTracker;
 /**
  * Controls the plug-in life cycle
  */
-public class PublisherPlugin extends AbstractUIPlugin {
+public class ReaderPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = 
-		"com.verticon.tracker.transaction.publisher";
+		"com.verticon.tracker.reader";
 
 	// The shared instance
-	private static PublisherPlugin plugin;
+	private static ReaderPlugin plugin;
 	
 	final public static String TOPIC_ANIMAL = 
 		"com/verticon/tracker/Animal";
@@ -46,7 +46,7 @@ public class PublisherPlugin extends AbstractUIPlugin {
 	/**
 	 * The constructor
 	 */
-	public PublisherPlugin() {
+	public ReaderPlugin() {
 		plugin = this;
 	}
 
@@ -82,7 +82,7 @@ public class PublisherPlugin extends AbstractUIPlugin {
 	 *
 	 * @return the shared instance
 	 */
-	public static PublisherPlugin getDefault() {
+	public static ReaderPlugin getDefault() {
 		return plugin;
 	}
 
