@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="com.verticon.tracker.transaction.publisher"
-      label="Tracker Transaction Publisher"
-      version="0.2.0"
+      id="com.verticon.tracker.reader"
+      label="Tracker Reader"
+      version="0.2.1"
       provider-name="Verticon, Inc."
-      plugin="com.verticon.tracker.transaction.publisher">
+      plugin="com.verticon.tracker.reader">
 
    <description>
-      Tracker Transaction Publisher, provides multi-threaded and transactionally aware Event Publishers for publishing Animal Events to Tracker Model documents running within a Tracker Transaction Infrastructure.
+      Tracker Transaction Reader, provides multi-threaded and transactionally
+aware TagId and Event Readers for reading Animal Events into Tracker
+Model documents running within a Tracker Transaction Infrastructure.
    </description>
 
    <copyright>
@@ -306,10 +308,25 @@ POSSIBILITY OF SUCH DAMAGES.
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="com.verticon.tracker"/>
       <import plugin="com.verticon.tracker.editor"/>
+      <import plugin="org.eclipse.equinox.event"/>
    </requires>
 
    <plugin
-         id="com.verticon.tracker.transaction.publisher"
+         id="com.verticon.tracker.reader"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.reader.event.bluetooth"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.reader.tagid.bluetooth"
          download-size="0"
          install-size="0"
          version="0.0.0"
