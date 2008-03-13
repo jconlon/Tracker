@@ -49,6 +49,9 @@ import com.verticon.tracker.ocl.query.viewer.OclQueryViewModel;
  */
 public class OclQueryViewer {
 
+	 static final String EXECUTE_QUERY_TEXT = "Execute";
+	 static final String EXECUTE_SELECTED_QUERY_TOOLTIP = "Execute the Selected Query";
+
 	public OclQueryViewer(Composite parent) {
 
 		this.addChildControls(parent);
@@ -59,7 +62,7 @@ public class OclQueryViewer {
 	private Button executeButton;
 
 	private OclQueryViewModel oclQueryViewModel = new OclQueryViewModel();
-	private Button addButton;
+	
 
 	/**
 	 * 
@@ -128,23 +131,27 @@ public class OclQueryViewer {
 	 */
 	private void run(Shell shell) {
 
-		// Add a listener for the execute button
-		executeButton.addSelectionListener(new SelectionAdapter() {
-
-			// Close the view i.e. dispose of the composite's parent
-			public void widgetSelected(SelectionEvent e) {
-
-				IOclQuery task = (IOclQuery) ((IStructuredSelection) tableViewer
-						.getSelection()).getFirstElement();
-				task.run();
-			}
-		});
+		setupExecuteQueryButton();
 
 		Display display = shell.getDisplay();
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch())
 				display.sleep();
 		}
+	}
+
+	/**
+	 * 
+	 */
+	private void setupExecuteQueryButton() {
+		// Add a listener for the execute button
+		executeButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				IOclQuery task = (IOclQuery) ((IStructuredSelection) tableViewer
+						.getSelection()).getFirstElement();
+				task.run();
+			}
+		});
 	}
 
 	/**
@@ -191,7 +198,7 @@ public class OclQueryViewer {
 	 * Create the Table
 	 */
 	private void createTable(Composite parent) {
-		int style = SWT.SINGLE | SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL
+		int style = SWT.MULTI | SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL
 				| SWT.FULL_SELECTION | SWT.HIDE_SELECTION;
 
 		table = new Table(parent, style);
@@ -287,13 +294,8 @@ public class OclQueryViewer {
 		tableViewer.setSorter(new OclQuerySorter(Column.NAME));
 		tableViewer
 				.addSelectionChangedListener(new ISelectionChangedListener() {
-
 					public void selectionChanged(SelectionChangedEvent event) {
-						IOclQuery query = (IOclQuery) ((IStructuredSelection) event
-								.getSelection()).getFirstElement();
-						executeButton.setEnabled(query != null ? query
-								.validateQuery() : false);
-
+						executeButton.setEnabled(OclQueryViewPart.canExecuteQuery(event));
 					}
 				});
 	}
@@ -372,39 +374,15 @@ public class OclQueryViewer {
 	 *            the parent composite
 	 */
 	private void createButtons(Composite parent) {
-
-		addButton = new Button(parent, SWT.PUSH | SWT.CENTER);
-		addButton.setText("Add");
+		executeButton = new Button(parent, SWT.PUSH | SWT.CENTER);
+		executeButton.setText(EXECUTE_QUERY_TEXT);
+		executeButton.setToolTipText(EXECUTE_SELECTED_QUERY_TOOLTIP);
 
 		GridData gridData = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
 		gridData.widthHint = 80;
-		addButton.setLayoutData(gridData);
-
-		// Create and configure the "Delete" button
-		Button delete = new Button(parent, SWT.PUSH | SWT.CENTER);
-		delete.setText("Delete");
-		gridData = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
-		gridData.widthHint = 80;
-		delete.setLayoutData(gridData);
-
-		delete.addSelectionListener(new SelectionAdapter() {
-
-			// Remove the selection and refresh the view
-			public void widgetSelected(SelectionEvent e) {
-				IOclQuery task = (IOclQuery) ((IStructuredSelection) tableViewer
-						.getSelection()).getFirstElement();
-				if (task != null) {
-					oclQueryViewModel.removeQuery(task);
-				}
-			}
-		});
-
-		// Create and configure the "Close" button
-		executeButton = new Button(parent, SWT.PUSH | SWT.CENTER);
-		executeButton.setText("Execute");
-		gridData = new GridData(GridData.HORIZONTAL_ALIGN_END);
-		gridData.widthHint = 80;
 		executeButton.setLayoutData(gridData);
+		setupExecuteQueryButton();
+		executeButton.setEnabled(false);
 	}
 
 	/**
@@ -437,15 +415,28 @@ public class OclQueryViewer {
 		return table.getParent();
 	}
 
+	
+
 	/**
-	 * Return the 'close' Button
+	 * 
 	 */
-	public Button getCloseButton() {
-		return executeButton;
+	@SuppressWarnings("unchecked")
+	void removeSelectedQueries() {
+		IStructuredSelection selection = (IStructuredSelection) tableViewer
+				.getSelection();
+
+		List<IOclQuery> selectedQueries = selection.toList();
+		for (IOclQuery query : selectedQueries) {
+			oclQueryViewModel.removeQuery(query);
+		}
+
+	}
+	
+	void addSelectionChangedListener(ISelectionChangedListener listener) {
+		tableViewer.addSelectionChangedListener(listener);
 	}
 
-	public Button getAddButton() {
-		return addButton;
+	void removeSelectionChangedListener(ISelectionChangedListener listener) {
+		tableViewer.removeSelectionChangedListener(listener);
 	}
-
 }
