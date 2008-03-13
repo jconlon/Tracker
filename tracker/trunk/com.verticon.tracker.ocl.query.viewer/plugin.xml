@@ -9,7 +9,7 @@
             id="com.verticon.tracker.views">
       </category>
       <view
-            name="OCL Queries"
+            name="Queries"
             icon="icons/sample.gif"
             category="com.verticon.tracker.views"
             class="com.verticon.tracker.ocl.query.viewer.views.OclQueryViewPart"
