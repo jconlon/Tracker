@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.verticon.tracker.reader.event.filetailer;
+package com.verticon.tracker.reader.event.file;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,7 +23,7 @@ import com.verticon.tracker.util.TrackerLog;
  * @author jconlon
  *
  */
-public class FileTailerRunner implements Runnable {
+public class FileReaderRunner implements Runnable {
 
 	private final ITagIdPublisher transactionPublisher ;
 	private final File file ;
@@ -38,7 +38,7 @@ public class FileTailerRunner implements Runnable {
 	 * @param transactionProcessor to send Long numbers to.
 	 * @param file to Scan
 	 */
-	public FileTailerRunner(ITagIdPublisher transactionProcessor, IFile file) {
+	public FileReaderRunner(ITagIdPublisher transactionProcessor, IFile file) {
 		this.transactionPublisher=transactionProcessor;
 		this.file=new File(file.getLocationURI());
 		TrackerLog.logInfo("Created FileTailRunner");

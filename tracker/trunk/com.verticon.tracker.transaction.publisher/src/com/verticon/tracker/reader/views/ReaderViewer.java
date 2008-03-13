@@ -61,7 +61,6 @@ public class ReaderViewer {
 	//	private Shell shell;
 	private Table table;
 	private TableViewer tableViewer;
-	private Button closeButton;
 	
 	private ReaderViewModel readerViewModel = new ReaderViewModel();
 	private Button addButton;
@@ -126,15 +125,6 @@ public class ReaderViewer {
 	 * @param shell Instance of Shell
 	 */
 	private void run(Shell shell) {
-		
-		// Add a listener for the close button
-		closeButton.addSelectionListener(new SelectionAdapter() {
-       	
-			// Close the view i.e. dispose of the composite's parent
-			public void widgetSelected(SelectionEvent e) {
-				table.getParent().getParent().dispose();
-			}
-		});
 		
 		Display display = shell.getDisplay();
 		while (!shell.isDisposed()) {
@@ -283,15 +273,6 @@ public class ReaderViewer {
 		tableViewer.setSorter(new ReaderSorter(Column.NAME));
 	}
 
-	/*
-	 * Close the window and dispose of resources
-	 */
-	public void close() {
-		Shell shell = table.getShell();
-
-		if (shell != null && !shell.isDisposed())
-			shell.dispose();
-	}
 
 
 	/**
@@ -371,13 +352,7 @@ public class ReaderViewer {
 				} 				
 			}
 		});
-		
-		//	Create and configure the "Close" button
-		closeButton = new Button(parent, SWT.PUSH | SWT.CENTER);
-		closeButton.setText("Close");
-		gridData = new GridData (GridData.HORIZONTAL_ALIGN_END);
-		gridData.widthHint = 80; 
-		closeButton.setLayoutData(gridData); 		
+			
 	}
 
 	/**
@@ -408,13 +383,6 @@ public class ReaderViewer {
 	 */
 	public Control getControl() {
 		return table.getParent();
-	}
-
-	/**
-	 * Return the 'close' Button
-	 */
-	public Button getCloseButton() {
-		return closeButton;
 	}
 
 	public Button getAddButton() {

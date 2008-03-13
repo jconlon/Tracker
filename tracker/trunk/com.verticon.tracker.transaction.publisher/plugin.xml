@@ -59,11 +59,11 @@
    <extension
          point="com.verticon.tracker.reader.readerWizards">
       <wizard
-            class="com.verticon.tracker.reader.event.filetailer.FileTailerReaderWizard"
+            class="com.verticon.tracker.reader.event.file.FileReaderWizard"
             id="com.verticon.tracker.reader.fileTailer"
-            name="File Tailer">
+            name="FileReader">
          <description>
-            publishes TagIDs as events as they are appended to a file. 
+            reads TagIDs as they are appended to a file. 
          </description>
       </wizard>
    </extension>

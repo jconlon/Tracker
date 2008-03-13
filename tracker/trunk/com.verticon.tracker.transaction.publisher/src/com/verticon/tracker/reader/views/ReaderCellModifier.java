@@ -1,6 +1,8 @@
 
 
 package com.verticon.tracker.reader.views;
+import java.net.URI;
+
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.swt.widgets.TableItem;
 
@@ -97,7 +99,7 @@ public class ReaderCellModifier implements ICellModifier {
 				break;
 			case 4 : // Target
 				valueString = ((String) value).trim();
-				reader.setTarget(valueString);
+				reader.setTarget(URI.create(valueString));
 				break;
 			default :
 			}

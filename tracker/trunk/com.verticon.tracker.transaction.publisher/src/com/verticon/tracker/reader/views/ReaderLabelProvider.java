@@ -73,7 +73,7 @@ public class ReaderLabelProvider
 				result = reader.getTemplate() ;
 				break;
 			case 4 :
-				result = reader.getTarget() ;
+				result = reader.getTarget().toString() ;
 				break;
 			default :
 				break; 	
