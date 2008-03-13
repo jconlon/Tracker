@@ -31,13 +31,7 @@ public class ReaderViewPart extends ViewPart {
 	 */
 	public void createPartControl(Composite parent) {
 		viewer = new ReaderViewer(parent);
-		viewer.getCloseButton().addSelectionListener(new SelectionAdapter() {
-       	
-			// Close the view i.e. dispose of the composite's parent
-			public void widgetSelected(SelectionEvent e) {
-				handleDispose();
-			}
-		});
+
 		viewer.getAddButton().addSelectionListener(new SelectionAdapter() {
 			// Call a wizard 
 			public void widgetSelected(SelectionEvent e) {

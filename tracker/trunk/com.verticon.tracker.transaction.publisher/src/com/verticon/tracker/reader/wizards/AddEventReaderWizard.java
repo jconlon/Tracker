@@ -103,7 +103,7 @@ public class AddEventReaderWizard extends Wizard {
 		selectAnimalDocumentWizardPage.init(editor);
 
 		publisherWizardSelection = new EventReaderWizardSelectionPage(
-				"Select the Type of Event Publisher to Create", workbench);
+				"Select Event Reader", workbench);
 		addPage(publisherWizardSelection);
 	}
 

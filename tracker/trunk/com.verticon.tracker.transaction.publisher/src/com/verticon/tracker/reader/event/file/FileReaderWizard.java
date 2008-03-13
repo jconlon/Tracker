@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.verticon.tracker.reader.event.filetailer;
+package com.verticon.tracker.reader.event.file;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
@@ -24,15 +24,15 @@ import com.verticon.tracker.reader.IReaderWizard;
  * @author jconlon
  * 
  */
-public class FileTailerReaderWizard extends Wizard implements
+public class FileReaderWizard extends Wizard implements
 		IReaderWizard {
 
-	private static final String WIZARD_TITLE = "Add a FileTailer Publisher";
+	private static final String WIZARD_TITLE = "Add a File Reader";
 
 	/**
 	 * Finished product of this Wizard
 	 */
-	private IReader publisher;
+	private IReader reader;
 
 	/**
 	 * Workbench where activity takes place
@@ -62,8 +62,8 @@ public class FileTailerReaderWizard extends Wizard implements
 				.getActivePage().getActiveEditor();
 		selectCaptureFileWizardPage = new SelectFileWizardPage(
 				"selectACaptureFile",
-				"Select a Capture File to be monitored by the FileTailer Publisher",
-				"FileTailer will monitor the Capture File for newly appended Tag Ids.",
+				"Select a Capture File to be monitored by the File Reader",
+				"File Reader will read the Capture File for newly appended Tag Ids.",
 				new CaptureViewerFilter());
 		addPage(selectCaptureFileWizardPage);
 		selectCaptureFileWizardPage.init(editor);
@@ -84,17 +84,17 @@ public class FileTailerReaderWizard extends Wizard implements
 	 */
 	@Override
 	public boolean performFinish() {
-		publisher = new FileTailerEventReader();
-		publisher.setTarget(selectCaptureFileWizardPage.getSelectedFile()
-				.getFullPath().toPortableString());
+		reader = new FileReader();
+		reader.setTarget(selectCaptureFileWizardPage.getSelectedFile()
+				.getFullPath().toFile().toURI());
 		return true;
 	}
 	
 	/**
-	 * Return the finished publisher
+	 * Return the finished reader
 	 */
 	public IReader getReader() {
-		return publisher;
+		return reader;
 	}
 
 	/**

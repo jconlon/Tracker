@@ -3,6 +3,8 @@
  */
 package com.verticon.tracker.reader;
 
+import java.net.URI;
+
 
 /**
  * Publisher Used for testing.
@@ -13,7 +15,7 @@ package com.verticon.tracker.reader;
 public class AbstractReader extends AbstractModelObject implements IReader {
 
 	String name = "dummy";
-	String target = "a target";
+	URI target = URI.create("abstract://something");
 	String template = "Some template";
 	boolean started = true;
 
@@ -84,12 +86,12 @@ public class AbstractReader extends AbstractModelObject implements IReader {
 	 * 
 	 * @see com.verticon.tracker.reader.IPublisher#getTarget()
 	 */
-	public String getTarget() {
+	public URI getTarget() {
 		return target;
 	}
 
-	public void setTarget(String target) {
-		String oldValue = this.target;
+	public void setTarget(URI target) {
+		URI oldValue = this.target;
 		this.target = target;
 		firePropertyChange("target", oldValue, target);
 

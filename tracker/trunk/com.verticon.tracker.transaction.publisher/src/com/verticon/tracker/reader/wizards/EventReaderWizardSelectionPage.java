@@ -12,9 +12,10 @@ import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.jface.wizard.IWizard;
@@ -27,6 +28,8 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.IWorkbench;
 
 import com.verticon.tracker.reader.IReaderWizard;
@@ -56,7 +59,7 @@ import com.verticon.tracker.util.TrackerLog;
  */
 public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 	
-	private ListViewer listViewer;
+	private TableViewer tableViewer;
 	private IWorkbench workbench;
 	private static IReaderWizard[] cachedWizards;
 	
@@ -64,7 +67,7 @@ public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 		super(pageName);
 		this.workbench=workbench;
 		setTitle(pageName);
-		setDescription("Select the type of Event Publisher you would like to create.");
+		setDescription("Select the type of Event Reader you would like to create.");
 	}
 
 	/* (non-Javadoc)
@@ -77,23 +80,38 @@ public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 		container.setLayout(gridLayout);
 		
 		
-		listViewer=createViewer( container);
+		tableViewer=createViewer( container);
 		GridData data = new GridData(GridData.FILL_BOTH);
 		data.grabExcessHorizontalSpace=true;
 		data.grabExcessVerticalSpace=true;
 		data.heightHint = 400;
 		data.widthHint = 300;
-		listViewer.getControl().setLayoutData(data);
+		tableViewer.getControl().setLayoutData(data);
 		setControl(container);
 	}
 	
-	protected ListViewer createViewer(Composite parent) {
-		ListViewer listViewer = new ListViewer(parent, SWT.SINGLE
+	
+	protected TableViewer createViewer(Composite parent) {
+		TableViewer tableViewer = new TableViewer(parent, SWT.SINGLE
 				| SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
-		listViewer.setLabelProvider(new IPublisherWizardListLabelProvider());
-		listViewer.setContentProvider(new ArrayContentProvider());
-		listViewer.setInput(getReaderWizardsFromContributors());
-		listViewer.setSorter(new ViewerSorter() {
+		final Table table = tableViewer.getTable();
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		
+		String[] columnNames = new String[] {"Reader", "Description"};
+		int[] columnWidths = new int[] {150, 400};
+		
+		for (int i = 0; i < columnNames.length; i++) {
+			TableColumn tableColumn = 
+				new TableColumn(table, SWT.LEFT);
+			tableColumn.setText(columnNames[i]);
+			tableColumn.setWidth(columnWidths[i]);
+		}
+		
+		tableViewer.setLabelProvider(new IPublisherWizardListLabelProvider());
+		tableViewer.setContentProvider(new ArrayContentProvider());
+		tableViewer.setInput(getReaderWizardsFromContributors());
+		tableViewer.setSorter(new ViewerSorter() {
 			public int compare(Viewer viewer, Object p1, Object p2) {
 				return ((PublisherWizardProxy) p1).getNameOfCreatedReader()
 						.compareToIgnoreCase(
@@ -101,7 +119,7 @@ public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 										.getNameOfCreatedReader());
 			}
 		});
-		listViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+		tableViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
 				IStructuredSelection selection = (IStructuredSelection) event
 						.getSelection();
@@ -117,7 +135,7 @@ public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 			}
 		});
 
-		return listViewer;
+		return tableViewer;
 	}
 	
 	static final IWizardNode createIWizardNode(final IReaderWizard iWizard, final IWorkbench workbench  ){
@@ -148,7 +166,7 @@ public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 	 */
 	public void setVisible(boolean visible) {
 		if (visible) {
-			listViewer.refresh();
+			tableViewer.refresh();
 		}
 		super.setVisible(visible);
 	}
@@ -210,15 +228,33 @@ public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 	
 	
 	
-	class IPublisherWizardListLabelProvider extends LabelProvider {
-		   public Image getImage(Object element) {
-		      return null;
-		   }	
-		   public String getText(Object element) {
-			   PublisherWizardProxy publisher = (PublisherWizardProxy) element;
-		      return publisher.getNameOfCreatedReader();
-		   }
+	class IPublisherWizardListLabelProvider extends LabelProvider implements
+			ITableLabelProvider {
+		public Image getImage(Object element) {
+			return null;
 		}
+
+		public String getText(Object element) {
+			PublisherWizardProxy publisher = (PublisherWizardProxy) element;
+			return publisher.getNameOfCreatedReader();
+		}
+
+		public Image getColumnImage(Object element, int columnIndex) {
+			return null;
+		}
+
+		public String getColumnText(Object element, int columnIndex) {
+			PublisherWizardProxy publisher = (PublisherWizardProxy) element;
+			switch (columnIndex) {
+			case 0:
+				return publisher.getNameOfCreatedReader();
+
+			case 1:
+				return publisher.getDescription();
+			}
+			return null;
+		}
+	}
 
 	@Override
 	public IWizardPage getNextPage() {

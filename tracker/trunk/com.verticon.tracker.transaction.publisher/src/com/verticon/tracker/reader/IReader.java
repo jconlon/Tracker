@@ -3,6 +3,8 @@
  */
 package com.verticon.tracker.reader;
 
+import java.net.URI;
+
 /**
  * A publisher of TagId numbers.
  * 
@@ -34,9 +36,9 @@ public interface IReader {
 	 * @param target
 	 *            an implementation specific focal point of activity.
 	 */
-	void setTarget(String target);
+	void setTarget(URI target);
 
-	String getTarget();
+	URI getTarget();
 
 	/**
 	 * 

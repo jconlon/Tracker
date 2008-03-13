@@ -1,9 +1,10 @@
 /**
  * 
  */
-package com.verticon.tracker.reader.event.filetailer;
+package com.verticon.tracker.reader.event.file;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -38,17 +39,17 @@ import com.verticon.tracker.reader.preferences.PreferenceConstants;
  * @author jconlon
  * 
  */
-public class FileTailerEventReader extends AbstractModelObject implements
+public class FileReader extends AbstractModelObject implements
 		IReader, IResourceChangeListener {
 
-	private static final String CONSOLE = FileTailerEventReader.class.getSimpleName();
+	private static final String CONSOLE = FileReader.class.getSimpleName();
 	private Preferences prefs = ReaderPlugin.getDefault()
 	.getPluginPreferences();
 	
 	private static int count;
 	
 	private String name = "";
-	String target = "";
+	URI target = null;
 	String template = "";
 	boolean started = false;
 
@@ -56,12 +57,12 @@ public class FileTailerEventReader extends AbstractModelObject implements
 	private ScheduledExecutorService exec;
 	private ITagIdPublisher transactionPublisher = null;
 
-	public FileTailerEventReader(String name) {
+	public FileReader(String name) {
 		super();
 		this.name=name;
 	}
 	
-	public FileTailerEventReader() {
+	public FileReader() {
 		super();
 		name=getType()+count++;
 	}
@@ -138,12 +139,12 @@ public class FileTailerEventReader extends AbstractModelObject implements
 	 * 
 	 * @see com.verticon.tracker.reader.IPublisher#getTarget()
 	 */
-	public String getTarget() {
+	public URI getTarget() {
 		return target;
 	}
 
-	public void setTarget(String target) {
-		String oldValue = this.target;
+	public void setTarget(URI target) {
+		URI oldValue = this.target;
 		this.target = target;
 		firePropertyChange("target", oldValue, target);
 		reset();
@@ -158,7 +159,7 @@ public class FileTailerEventReader extends AbstractModelObject implements
 	 * Start a background task using a FileTailRunner to process the file and
 	 * feed new tags to a TransactionPublisher.
 	 * 
-	 * @see com.verticon.tracker.reader.event.filetailer.FileTailerRunner
+	 * @see com.verticon.tracker.reader.event.file.FileReaderRunner
 	 */
 	private void start() throws IOException {
 		if (transactionPublisher != null) {
@@ -172,7 +173,7 @@ public class FileTailerEventReader extends AbstractModelObject implements
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			workspace.addResourceChangeListener(this);
 
-			Runnable command = new FileTailerRunner(transactionPublisher, getTargetFile());
+			Runnable command = new FileReaderRunner(transactionPublisher, getTargetFile());
 			exec = Executors.newScheduledThreadPool(1);
 			exec.scheduleWithFixedDelay(command, 4, 
 					prefs.getInt(PreferenceConstants.P_READ_INTERVAL), 
@@ -189,7 +190,7 @@ public class FileTailerEventReader extends AbstractModelObject implements
 	private IFile getTargetFile() {
 		Path ipath;
 		IFile ifile;
-		ipath = new Path(getTarget());
+		ipath = new Path(getTarget().getPath());
 		ifile = ResourcesPlugin.getWorkspace().getRoot().getFile(ipath);
 		return ifile;
 	}

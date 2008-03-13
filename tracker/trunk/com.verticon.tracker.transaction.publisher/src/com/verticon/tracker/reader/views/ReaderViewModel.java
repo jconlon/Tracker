@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -25,7 +26,6 @@ import org.eclipse.ui.XMLMemento;
 import com.verticon.tracker.reader.AbstractReader;
 import com.verticon.tracker.reader.IReader;
 import com.verticon.tracker.reader.ReaderPlugin;
-import com.verticon.tracker.reader.event.filetailer.FileTailerEventReader;
 import com.verticon.tracker.util.TrackerLog;
 
 /**
@@ -172,17 +172,17 @@ public class ReaderViewModel {
 
 	private IReader newReaderFor(String name, String type, String template,
 			String target) {
-		IReader publisher = null;
+		IReader reader = null;
 		if (AbstractReader.class.getSimpleName().equals(type)) {
-			publisher = new AbstractReader(name);
-			publisher.setTarget(target);
-			publisher.setTemplate(template);
-		} else if (FileTailerEventReader.class.getSimpleName().equals(type)) {
-			publisher = new FileTailerEventReader(name);
-			publisher.setTarget(target);
-			publisher.setTemplate(template);
+			reader = new AbstractReader(name);
+			reader.setTarget(URI.create(target));
+			reader.setTemplate(template);
+		} else if (FileReader.class.getSimpleName().equals(type)) {
+			reader = new com.verticon.tracker.reader.event.file.FileReader(name);
+			reader.setTarget(URI.create(target));
+			reader.setTemplate(template);
 		}
-		return publisher;
+		return reader;
 	}
 
 	public void saveReaders() {
@@ -214,7 +214,7 @@ public class ReaderViewModel {
 			child.putString(TAG_NAME, item.getName());
 			child.putString(TAG_TYPE, item.getType());
 			child.putString(TAG_TEMPLATE, item.getTemplate());
-			child.putString(TAG_TARGET, item.getTarget());
+			child.putString(TAG_TARGET, item.getTarget().toString());
 		}
 	}
 
