@@ -21,6 +21,7 @@ public class ReaderViewPart extends ViewPart {
 	private ReaderViewer viewer;
 	private RemoveReaderAction removeReaderAction;
 	private AddReaderAction addReaderAction;
+	private ISelectionChangedListener listener = null;
 
 	/**
 	 * The constructor.
@@ -58,12 +59,7 @@ public class ReaderViewPart extends ViewPart {
 	
 	
 	
-	private ISelectionChangedListener listener = new ISelectionChangedListener() {
-        public void selectionChanged(SelectionChangedEvent event) {
-           boolean isEmpty = !event.getSelection().isEmpty();
-           removeReaderAction.setEnabled(isEmpty);
-        }
-	};
+	
         
 	private void createToolbarButtons() {
 		  
@@ -74,6 +70,14 @@ public class ReaderViewPart extends ViewPart {
 	      toolBarMgr.add(addReaderAction);
 	      addReaderAction.setEnabled(true);
 	      
+	      if(listener==null){
+	    	  listener = new ISelectionChangedListener() {
+	    	        public void selectionChanged(SelectionChangedEvent event) {
+	    	           boolean isEmpty = !event.getSelection().isEmpty();
+	    	           removeReaderAction.setEnabled(isEmpty);
+	    	        }
+	    		};
+	      }
 	      viewer.addSelectionChangedListener( listener);
 	   }
 	
