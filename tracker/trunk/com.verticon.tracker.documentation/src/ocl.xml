@@ -117,12 +117,12 @@ animals -> collect(
   
   
   <section>
-		<title>OCL Queries Viewer</title>
+		<title>Queries Viewer</title>
 		
 		<para>
-		The OCL Queries Viewer is a convenient way to invoke frequently used OCL queries 
+		The Queries Viewer is a convenient way to invoke frequently used OCL queries 
 		to select specific elements within Tracker premises documents.  In order to use 
-		the OCL Queries Viewer you will have to configure the viewer by adding 
+		the Queries Viewer you will have to configure the viewer by adding 
 		individual queries.  The viewer will persist all queries between
 		boots of the Tracker application, so you can over time create a suite of personalized
 	    custom queries associated with how you wish to select elements. Once the queries are
@@ -130,9 +130,9 @@ animals -> collect(
 	    Execute button.
 	    </para>
 	    <para>
-		To add a custom query to the OCL Queries Viewer, select the OCL Queries Viewer tab 
+		To add a custom query to the Queries Viewer, select the Queries Viewer tab 
 		and press the Add button.  A new row representing a OCL query will be added to the 
-		OCL Queries Viewer Table.  Each OCL Query row contains four columns.
+		Queries Viewer Table.  Each OCL Query row contains four columns.
 		</para>
 		<para>
 			<orderedlist numeration="loweralpha">
@@ -157,7 +157,7 @@ animals -> collect(
 		<para>
 			The following are a few example
 			<code>Query</code> strings that can be used for adding custom
-			OCL Queries to the OCL Queries Viewer. 
+			OCL Queries to the Queries Viewer. 
 			<example>
 				<title> 
 					Find the animal with active tag 985152002153189.
