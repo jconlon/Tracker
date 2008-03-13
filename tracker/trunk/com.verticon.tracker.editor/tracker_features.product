@@ -110,7 +110,7 @@ that can be installed and used with other Eclipse (3.3)-based offerings.
       <feature id="com.verticon.tracker.export.xls" version="0.2.0"/>
       <feature id="com.verticon.tracker.ocl.query" version="0.1.1"/>
       <feature id="com.verticon.tracker.transaction.editor" version="0.2.1"/>
-      <feature id="com.verticon.tracker.transaction.publisher" version="0.2.0"/>
+      <feature id="com.verticon.tracker.reader" version="0.2.1"/>
       <feature id="com.verticon.tracker.help" version="0.2.2"/>
       <feature id="com.verticon.tracker.fair" version="0.1.1"/>
       <feature id="com.verticon.tracker.validation.core" version="0.1.2"/>
