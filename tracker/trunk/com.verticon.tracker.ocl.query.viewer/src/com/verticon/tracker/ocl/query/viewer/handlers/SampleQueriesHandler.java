@@ -41,7 +41,7 @@ public class SampleQueriesHandler extends AbstractHandler {
 		"Event.allInstances()->select(e : Event | e.id=self.id and e.oclIsTypeOf(MovedIn) and e.oclAsType(MovedIn).sourcePin.oclIsUndefined() )->size()>0",
 		"self.somaticCellCounts>200",
 		"self.weightGainPerDay.oclIsUndefined() = false and self.weightGainPerDay<3",
-		"Event.allInstances()->select(e : Event | e.id=self.id and e.oclIsTypeOf(WeighIn) and e.oclAsType(WeighIn).weightGainPerDay<3 )->size()>0"
+		"Event.allInstances()->select(e : Event | e.id=self.id and e.oclIsTypeOf(WeighIn) and e.oclAsType(WeighIn).weightGainPerDay<3 )->size()>1"
 		};
 	private static final String[] types = new String[] {
 		"Animal", 
