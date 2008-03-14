@@ -24,13 +24,19 @@ import com.verticon.tracker.ocl.query.viewer.IOclQuery;
  */
 public class OclQueryViewPart extends ViewPart {
 
-	
 	private OclQueryViewer viewer;
 	private RemoveQueryAction removeReaderAction;
 	private AddQueryAction addQueryAction;
 	private ExecuteQueryAction executeQueryAction;
 	
 	private ISelectionChangedListener listener = null;
+	
+	
+
+	public OclQueryViewPart() {
+		super();
+		System.out.println("Creating "+this);
+	}
 
 	public void createPartControl(Composite parent) {
 		viewer = new OclQueryViewer(parent);
@@ -48,9 +54,6 @@ public class OclQueryViewPart extends ViewPart {
 	public void setFocus() {
 		viewer.getControl().setFocus();
 	}
-
-
-	
 	
 	private void createToolbarButtons() {
 		  
@@ -133,4 +136,8 @@ public class OclQueryViewPart extends ViewPart {
 			super.dispose();
 			viewer.removeSelectionChangedListener(listener);
 		}
+
+	public OclQueryViewer getViewer() {
+		return viewer;
+	}
 }
