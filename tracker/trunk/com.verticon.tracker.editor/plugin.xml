@@ -48,7 +48,7 @@
             name="Tracker Example Project"
             icon="icons/full/obj16/TrackerModelFile.gif"
             category="com.verticon.tracker.editor.Wizard.category.examples"
-            class="com.verticon.tracker.editor.presentation.NewTrackerProjectWizard"
+            class="com.verticon.tracker.editor.presentation.SampleTrackerProjectWizard"
             project="true"
             id="com.verticon.tracker.editor.wizards.NewTrackerProjectWizard">
          <description>
