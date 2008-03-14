@@ -62,7 +62,7 @@ import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPlugin;
 import com.verticon.tracker.WeighIn;
 
-public class NewTrackerProjectWizard extends BasicNewResourceWizard {
+public class SampleTrackerProjectWizard extends BasicNewResourceWizard {
 
 	private static final String FAKE_FOREIGN_PIN = "HA92348";
 
@@ -86,7 +86,7 @@ public class NewTrackerProjectWizard extends BasicNewResourceWizard {
 			IStructuredSelection currentSelection) {
 		super.init(workbench, currentSelection);
 		this.workbench = aWorkbench;
-		setWindowTitle("New Hockey League Project"); //$NON-NLS-1$
+		setWindowTitle("New Tracker Project"); //$NON-NLS-1$
 		setNeedsProgressMonitor(true);
 	}
 
@@ -96,8 +96,8 @@ public class NewTrackerProjectWizard extends BasicNewResourceWizard {
 	public void addPages() {
 		super.addPages();
 		mainPage = new WizardNewProjectCreationPage("basicNewProjectPage");//$NON-NLS-1$
-		mainPage.setTitle("Hockey League Example Project"); //$NON-NLS-1$
-		mainPage.setDescription("Create a new Tabbed Properties View Hockey League Example Project"); //$NON-NLS-1$
+		mainPage.setTitle("Tracker Example Project"); //$NON-NLS-1$
+		mainPage.setDescription("Create a new Tracker Example Project"); //$NON-NLS-1$
 		this.addPage(mainPage);
 	}
 
@@ -409,6 +409,10 @@ public class NewTrackerProjectWizard extends BasicNewResourceWizard {
 		return swine;
 	}
 
+	static int getWeigh(int mean){
+		return (int) (Math.random() * 100) + mean; 
+	}
+	
 	private final static void createTestEvents(Premises premises, TrackerFactory trackerFactory){
 		Calendar sometime = Calendar.getInstance();
 		sometime.add(Calendar.MONTH, -7);
@@ -426,13 +430,30 @@ public class NewTrackerProjectWizard extends BasicNewResourceWizard {
 			event3.setLocation(premises.getLocations().get(1));
 			events.add(event3);
 			
+			WeighIn event4 = trackerFactory.createWeighIn();
+			event4.setWeight(getWeigh(200));
+			events.add(event4);
+			
 			
 			for (Event event : events) {
 				sometime.add(Calendar.MINUTE, 2);
 				event.setDateTime(sometime.getTime());
 			}
+			
+			
 		}
+		sometime.add(Calendar.MONTH, 3);
 		
+		for (Animal animal : premises.getAnimals()) {
+			sometime.add(Calendar.MINUTE, 2);
+			EList<Event> events = animal.getTags().get(0).getEvents();
+			
+			WeighIn event4 = trackerFactory.createWeighIn();
+			event4.setWeight(getWeigh(500));
+			events.add(event4);
+			event4.setDateTime(sometime.getTime());
+		
+		}
 		
 	}
 
