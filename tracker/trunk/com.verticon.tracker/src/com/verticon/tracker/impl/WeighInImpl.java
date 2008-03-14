@@ -139,12 +139,11 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 		if(weight==0){
 			return 0;
 		}
-		Collection<Event> weighIns = getLastWeighInEvents();
+		WeighIn lastWeighIn = getPreviousWeighIn();
 		
-		if(weighIns.isEmpty()){
+		if(lastWeighIn==null){
 			return 0;
 		}
-		WeighIn lastWeighIn = (WeighIn)weighIns.iterator().next();
 		CalendarDate myCalendarDate = new CalendarDate(TimeZone.getDefault(), dateTime);
 		CalendarDate lastWeighInCalendarDate = 
 			new CalendarDate(TimeZone.getDefault(), lastWeighIn.getDateTime());
@@ -154,12 +153,36 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 		return weightGain / daysSinceLastWeighIn;
 			
 	}
+
+	/**
+	 * @return
+	 */
+	public WeighIn getPreviousWeighIn() {
+		Collection<Event> weighIns = getPreviousWeighInEvents();			
+		WeighIn lastWeighIn = getPreviousWeighInEvent(weighIns);
+		return lastWeighIn;
+	}
+
+	/**
+	 * @param weighIns
+	 * @return
+	 */
+	private WeighIn getPreviousWeighInEvent(Collection<Event> weighIns) {
+		int count = weighIns.size() - 1;
+		for (Event event : weighIns) {
+			if(count==0){
+				return (WeighIn)event;
+			}
+			count--;
+		}
+		return null;
+	}
 	
 	/**
 	 * 
 	 * @return Collection of previous weighIns
 	 */
-	private Collection<Event> getLastWeighInEvents() {
+	 public Collection<Event> getPreviousWeighInEvents() {
 		Tag parent = this.getTag();
 		if(parent==null){
 			return Collections.emptyList();
@@ -188,11 +211,39 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 		public boolean passes(Event o) {
 			if(o instanceof WeighIn){
 				WeighIn e =(WeighIn)o;
-				if(WeighInImpl.this!=e && e.getWeight()!=0){
+				if(notThisEvent(e) && 
+						containsAValue(e) && 
+						isEarlier(e)){
 					return true;
 				}
 			}
 			return false;
+		}
+
+
+		/**
+		 * @param e
+		 * @return
+		 */
+		private boolean isEarlier(WeighIn e) {
+			return (DATE_COMPARATOR.compare(e, WeighInImpl.this) < 0);
+		}
+
+		
+		/**
+		 * @param e
+		 * @return
+		 */
+		private boolean containsAValue(WeighIn e) {
+			return e.getWeight()!=0;
+		}
+
+		/**
+		 * @param e
+		 * @return
+		 */
+		private boolean notThisEvent(WeighIn e) {
+			return WeighInImpl.this!=e;
 		}};
 	
 	private static final Comparator<Event> DATE_COMPARATOR = new Comparator<Event>() {
