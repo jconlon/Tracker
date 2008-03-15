@@ -89,6 +89,16 @@
                </appInfo>
             </annotation>
          </attribute>
+         <attribute name="factory" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn=":com.verticon.tracker.reader.IReaderFactory"/>
+               </appInfo>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 
@@ -112,19 +122,18 @@
          The following is an example of the EventPublisher extension point usage:
 &lt;p&gt;
  &lt;pre&gt;
-	&lt;extension point=&quot;com.verticon.tracker.reader.readerWizards&quot;&gt;
-		&lt;wizard id=	&quot;com.xyz.eventPublisherWizard1&quot;
-			name=&quot;XYZ Web Scraper&quot;
-			class=	&quot;com.xyz.event.publisher.EventPublisherWizard1&quot;
-			icon=&quot;./icons/import1.gif&quot;&gt;
-		 	&lt;description&gt;
-            	A simple event publisher that publishes events from a ticker tape. 
-         	&lt;/description&gt;
-		&lt;/wizard&gt;
-	&lt;/extension&gt;
+ &lt;extension point=&quot;com.verticon.tracker.reader.readerWizards&quot;&gt;
+  &lt;wizard id= &quot;com.xyz.eventPublisherWizard1&quot;
+   name=&quot;XYZ Web Scraper&quot;
+   class= &quot;com.xyz.event.publisher.EventPublisherWizard1&quot;
+   icon=&quot;./icons/import1.gif&quot;&gt;
+    &lt;description&gt;
+             A simple event publisher that publishes events from a ticker tape. 
+          &lt;/description&gt;
+  &lt;/wizard&gt;
+ &lt;/extension&gt;
  &lt;/pre&gt;
 &lt;/p&gt;
- 
       </documentation>
    </annotation>
 

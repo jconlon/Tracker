@@ -60,10 +60,21 @@
          point="com.verticon.tracker.reader.readerWizards">
       <wizard
             class="com.verticon.tracker.reader.event.file.FileReaderWizard"
+            factory="com.verticon.tracker.reader.event.file.FileReaderFactory"
             id="com.verticon.tracker.reader.fileTailer"
             name="FileReader">
          <description>
             reads TagIDs as they are appended to a file. 
+         </description>
+      </wizard>
+      
+      <wizard
+            class="com.verticon.tracker.reader.event.generator.GeneratingReaderWizard"
+            factory="com.verticon.tracker.reader.event.generator.GeneratingReaderFactory"
+            id="com.verticon.tracker.reader.generatingReader"
+            name="GeneratingReader">
+         <description>
+            randomly generates TagIDs from the set of TagIDs present in a file. 
          </description>
       </wizard>
    </extension>

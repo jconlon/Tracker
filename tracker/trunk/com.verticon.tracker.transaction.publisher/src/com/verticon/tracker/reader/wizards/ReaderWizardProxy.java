@@ -22,7 +22,7 @@ import com.verticon.tracker.util.TrackerLog;
  * @author jconlon
  *
  */
-public class PublisherWizardProxy implements IReaderWizard {
+public class ReaderWizardProxy implements IReaderWizard {
 
 	private static final String ATT_CLASS = "class";
 	private static final String ELM_DESCRIPTION = "description";
@@ -37,13 +37,13 @@ public class PublisherWizardProxy implements IReaderWizard {
 	private IReaderWizard delegate = null;
 	
 	
-	public PublisherWizardProxy(IConfigurationElement configElm) {
+	public ReaderWizardProxy(IConfigurationElement configElm) {
 		super();
 		this.configElement = configElm;
 		this.id = getAttribute(configElm, ATT_ID, null);
 		this.name = getAttribute(configElm, ATT_NAME, id);
 		this.description = getDescription( configElm);
-		getAttribute(configElm, ATT_CLASS, null);
+//		getAttribute(configElm, ATT_CLASS, null);//REMOVE
 	}
 
 	/* (non-Javadoc)
@@ -305,7 +305,7 @@ public class PublisherWizardProxy implements IReaderWizard {
 		IConfigurationElement configElmDescription = elm[0];
 		return configElmDescription.getValue();
 	}
-	private static String getAttribute(IConfigurationElement configElm, String name, String defaultValue){
+	 static String getAttribute(IConfigurationElement configElm, String name, String defaultValue){
 		String value = configElm.getAttribute(name);
 		if(value !=null){
 			return value;

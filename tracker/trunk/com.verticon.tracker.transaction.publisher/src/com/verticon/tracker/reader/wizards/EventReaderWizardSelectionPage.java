@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.InvalidRegistryObjectException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -113,9 +114,9 @@ public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 		tableViewer.setInput(getReaderWizardsFromContributors());
 		tableViewer.setSorter(new ViewerSorter() {
 			public int compare(Viewer viewer, Object p1, Object p2) {
-				return ((PublisherWizardProxy) p1).getNameOfCreatedReader()
+				return ((ReaderWizardProxy) p1).getNameOfCreatedReader()
 						.compareToIgnoreCase(
-								((PublisherWizardProxy) p2)
+								((ReaderWizardProxy) p2)
 										.getNameOfCreatedReader());
 			}
 		});
@@ -124,7 +125,7 @@ public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 				IStructuredSelection selection = (IStructuredSelection) event
 						.getSelection();
 
-				PublisherWizardProxy w = (PublisherWizardProxy) selection
+				ReaderWizardProxy w = (ReaderWizardProxy) selection
 						.getFirstElement();
 
 				setSelectedNode(createIWizardNode(w, workbench));
@@ -183,7 +184,21 @@ public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 		 if (cachedWizards !=null){
 			 return cachedWizards;
 		 }
-		 IExtension[] extensions = Platform.getExtensionRegistry().getExtensionPoint(
+		 List<IReaderWizard> found = getIReaderWizards();
+		 cachedWizards=(IReaderWizard[]) found.toArray(
+				 new IReaderWizard[found.size()]
+		 );
+
+		 return cachedWizards;
+	 }
+
+	/**
+	 * @return
+	 * @throws InvalidRegistryObjectException
+	 */
+	private static List<IReaderWizard> getIReaderWizards()
+			throws InvalidRegistryObjectException {
+		IExtension[] extensions = Platform.getExtensionRegistry().getExtensionPoint(
 				 ReaderPlugin.PLUGIN_ID, "readerWizards")
 				 .getExtensions();
 		 List<IReaderWizard> found = new ArrayList<IReaderWizard>();
@@ -198,18 +213,14 @@ public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 				}
 			}
 		 }
-		 cachedWizards=(IReaderWizard[]) found.toArray(
-				 new IReaderWizard[found.size()]
-		 );
-
-		 return cachedWizards;
-	 }
+		return found;
+	}
 
 	private static IReaderWizard parseType(IConfigurationElement configElement, int ordinal){
 		 if (!configElement.getName().equals("wizard"))
 		      return null;
 		   try {
-		      return new PublisherWizardProxy(configElement);
+		      return new ReaderWizardProxy(configElement);
 		   }
 		   catch (Exception e) {
 		      String name = configElement.getAttribute("name");
@@ -235,7 +246,7 @@ public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 		}
 
 		public String getText(Object element) {
-			PublisherWizardProxy publisher = (PublisherWizardProxy) element;
+			ReaderWizardProxy publisher = (ReaderWizardProxy) element;
 			return publisher.getNameOfCreatedReader();
 		}
 
@@ -244,7 +255,7 @@ public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 		}
 
 		public String getColumnText(Object element, int columnIndex) {
-			PublisherWizardProxy publisher = (PublisherWizardProxy) element;
+			ReaderWizardProxy publisher = (ReaderWizardProxy) element;
 			switch (columnIndex) {
 			case 0:
 				return publisher.getNameOfCreatedReader();

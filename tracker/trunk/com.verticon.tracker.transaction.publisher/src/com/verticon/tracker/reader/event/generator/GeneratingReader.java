@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.verticon.tracker.reader.event.file;
+package com.verticon.tracker.reader.event.generator;
 
 import java.io.IOException;
 import java.net.URI;
@@ -17,15 +17,12 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Preferences;
 
 import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.tracker.reader.AbstractModelObject;
 import com.verticon.tracker.reader.IReader;
-import com.verticon.tracker.reader.ReaderPlugin;
-import com.verticon.tracker.reader.eventadmin.ITagIdPublisher;
 import com.verticon.tracker.reader.eventadmin.EventPublisher;
-import com.verticon.tracker.reader.preferences.PreferenceConstants;
+import com.verticon.tracker.reader.eventadmin.ITagIdPublisher;
 
 /**
  * Publisher that tails a file looking for new tags being added to the end of
@@ -39,15 +36,14 @@ import com.verticon.tracker.reader.preferences.PreferenceConstants;
  * @author jconlon
  * 
  */
-public class FileReader extends AbstractModelObject implements
+public class GeneratingReader extends AbstractModelObject implements
 		IReader, IResourceChangeListener {
 
-	private static final String CONSOLE = FileReader.class.getSimpleName();
-	private Preferences prefs = ReaderPlugin.getDefault()
-	.getPluginPreferences();
+	private static final String CONSOLE = GeneratingReader.class.getSimpleName();
+	
 	
 	/**
-	 * Keeps track of the count of FileReaders so a simple name appended 
+	 * Keeps track of the count of Readers so a simple name appended 
 	 * with a number is created as the default.
 	 */
 	private static int count;
@@ -61,12 +57,12 @@ public class FileReader extends AbstractModelObject implements
 	private ScheduledExecutorService exec;
 	private ITagIdPublisher transactionPublisher = null;
 
-	public FileReader(String name) {
+	public GeneratingReader(String name) {
 		super();
 		this.name=name;
 	}
 	
-	public FileReader() {
+	public GeneratingReader() {
 		super();
 		name=getType()+count++;
 	}
@@ -177,16 +173,22 @@ public class FileReader extends AbstractModelObject implements
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			workspace.addResourceChangeListener(this);
 
-			Runnable command = new FileReaderRunner(transactionPublisher, getTargetFile());
+			GeneratingReaderRunner command = new GeneratingReaderRunner(transactionPublisher,
+					getTargetFile());
 			exec = Executors.newScheduledThreadPool(1);
-			exec.scheduleWithFixedDelay(command, 4, 
-					prefs.getInt(PreferenceConstants.P_READ_INTERVAL), 
-					TimeUnit.SECONDS);
+			exec.scheduleWithFixedDelay(
+					command, 
+					4,//delay in seconds before first event
+					getSecondsBetweenGeneratedEvents(), 
+					TimeUnit.SECONDS
+			);
 			printToConsoleWithName(
-					"Started monitoring "+target+" at "+
-					prefs.getInt(PreferenceConstants.P_READ_INTERVAL)+" second intervals.");
+					"Started generating events based on "+target+" at "+
+					getSecondsBetweenGeneratedEvents()+" second intervals.");
 		}
 	}
+	
+	
 
 	/**
 	 * @return
@@ -279,5 +281,15 @@ public class FileReader extends AbstractModelObject implements
 		}
 		
 	}
+
+	/**
+	 * The port stores the secondsBetweenGeneratedEvents
+	 * @return
+	 */
+	public int getSecondsBetweenGeneratedEvents() {
+		return target.getPort();
+	}
+
+
 
 }
