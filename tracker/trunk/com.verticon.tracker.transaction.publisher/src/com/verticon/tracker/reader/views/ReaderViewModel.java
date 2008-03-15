@@ -20,12 +20,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.InvalidRegistryObjectException;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.XMLMemento;
 
 import com.verticon.tracker.reader.AbstractReader;
 import com.verticon.tracker.reader.IReader;
+import com.verticon.tracker.reader.IReaderFactory;
 import com.verticon.tracker.reader.ReaderPlugin;
+import com.verticon.tracker.reader.wizards.ReaderFactoryProxy;
 import com.verticon.tracker.util.TrackerLog;
 
 /**
@@ -46,6 +52,8 @@ public class ReaderViewModel {
 	private List<IReader> readers;
 
 	private Set<IReaderModelListener> changeListeners = new HashSet<IReaderModelListener>();
+	
+	private List<IReaderFactory> factories = new ArrayList<IReaderFactory>();
 
 	/**
 	 * Constructor
@@ -170,21 +178,32 @@ public class ReaderViewModel {
 		}
 	}
 
+	/**
+	 * 
+	 * @param name
+	 * @param type
+	 * @param template
+	 * @param target
+	 * @return
+	 */
 	private IReader newReaderFor(String name, String type, String template,
 			String target) {
 		IReader reader = null;
-		if (AbstractReader.class.getSimpleName().equals(type)) {
-			reader = new AbstractReader(name);
-			reader.setTarget(URI.create(target));
-			reader.setTemplate(template);
-		} else if (FileReader.class.getSimpleName().equals(type)) {
-			reader = new com.verticon.tracker.reader.event.file.FileReader(name);
-			reader.setTarget(URI.create(target));
-			reader.setTemplate(template);
+		if(factories.isEmpty()){
+			loadFactories();
 		}
+		
+		for (IReaderFactory readerFactory : factories) {
+			if(readerFactory.isSupportedType(type)){
+				reader = readerFactory.instance(name, type, template, URI.create(target));
+				break;
+			}
+		}
+
 		return reader;
 	}
-
+	
+	
 	public void saveReaders() {
 		if (readers == null)
 			return;
@@ -223,4 +242,47 @@ public class ReaderViewModel {
 				"readers.xml").toFile();
 	}
 
+	/**
+	 * @return
+	 * @throws InvalidRegistryObjectException
+	 */
+	 private void loadFactories()
+			throws InvalidRegistryObjectException {
+		IExtension[] extensions = Platform.getExtensionRegistry().getExtensionPoint(
+				 ReaderPlugin.PLUGIN_ID, "readerWizards")
+				 .getExtensions();
+		 
+		 for (int i = 0; i < extensions.length; i++) {
+			IConfigurationElement[] configElements =
+					extensions[i].getConfigurationElements();
+			for (int j = 0; j < configElements.length; j++) {
+				IReaderFactory proxy =
+					parseType(configElements[j],factories.size());
+				if(proxy != null){
+					factories.add(proxy);
+				}
+			}
+		 }
+	}
+
+	private static IReaderFactory parseType(IConfigurationElement configElement, int ordinal){
+		 if (!configElement.getName().equals("wizard"))
+		      return null;
+		   try {
+		      return new ReaderFactoryProxy(configElement);
+		   }
+		   catch (Exception e) {
+		      String factory = configElement.getAttribute("factory");
+		      if (factory == null)
+		    	  factory = "[missing factory attribute]";
+		      String msg =
+		         "Failed to load factory named "
+		            + factory
+		            + " in "
+		            + configElement.getDeclaringExtension().getContributor().getName();
+		           
+		      TrackerLog.logError(msg, e);
+		      return null;
+		   }
+	}
 }
