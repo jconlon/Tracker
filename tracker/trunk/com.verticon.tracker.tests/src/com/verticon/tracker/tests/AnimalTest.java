@@ -17,6 +17,7 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
+import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
 
 /**
@@ -33,6 +34,8 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getSpeciesCode() <em>Species Code</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getId() <em>Id</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getLastEventDateTime() <em>Last Event Date Time</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getWeight() <em>Weight</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getWeightGainPerDay() <em>Weight Gain Per Day</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -279,6 +282,103 @@ public abstract class AnimalTest extends TestCase {
 		assertEquals(1, animal2.allEvents().size());
 		assertTrue(animal2.allEvents().contains(event1));
 		assertEquals(date, animal2.getLastEventDateTime());
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Animal#getWeight() <em>Weight</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#getWeight()
+	 * @generated NOT
+	 */
+	public void testGetWeight() {
+		Animal animal = getFixture();
+		assertNull("No weight on animal", animal.getWeight());
+		
+		Tag tag = TrackerFactory.eINSTANCE.createTag();
+		animal.getTags().add(tag);
+		//First weighIn 10 days ago and 100 lbs
+		WeighIn we = TrackerFactory.eINSTANCE.createWeighIn();
+		we.setComments("First");
+		Calendar firstWeighInDate = Calendar.getInstance();
+		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
+		we.setDateTime(
+				firstWeighInDate.getTime());
+		we.setWeight(100);
+		tag.getEvents().add(we);
+		
+		assertEquals(new Integer(100), animal.getWeight());
+		
+		//Second weighIn today 250 lbs
+		WeighIn we2 = TrackerFactory.eINSTANCE.createWeighIn();
+		we2.setComments("Second");
+		Calendar secondWeighInDate = Calendar.getInstance();
+		we2.setDateTime(
+				secondWeighInDate.getTime());
+		we2.setWeight(250);
+		tag.getEvents().add(we2);
+		assertEquals(new Integer(250), animal.getWeight());
+		
+		//Third weighIn today 350 lbs
+		WeighIn we3 = TrackerFactory.eINSTANCE.createWeighIn();
+		we3.setComments("Third");
+		we3.setWeight(350);
+		Calendar thirdWeighInDate = Calendar.getInstance();
+		thirdWeighInDate.add(Calendar.DAY_OF_MONTH, 10);
+		we3.setDateTime(
+				thirdWeighInDate.getTime());
+		tag.getEvents().add(we3);
+		assertEquals(new Integer(350), animal.getWeight());
+		
+		
+	}
+
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Animal#getWeightGainPerDay() <em>Weight Gain Per Day</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#getWeightGainPerDay()
+	 * @generated NOT
+	 */
+	public void testGetWeightGainPerDay() {
+		Animal animal = getFixture();
+		assertNull("No weight on animal", animal.getWeight());
+		
+		Tag tag = TrackerFactory.eINSTANCE.createTag();
+		animal.getTags().add(tag);
+		//First weighIn 10 days ago and 100 lbs
+		WeighIn we = TrackerFactory.eINSTANCE.createWeighIn();
+		we.setComments("First");
+		Calendar firstWeighInDate = Calendar.getInstance();
+		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
+		we.setDateTime(
+				firstWeighInDate.getTime());
+		we.setWeight(100);
+		tag.getEvents().add(we);
+		
+		assertNull( animal.getWeightGainPerDay());
+		
+		//Second weighIn today 250 lbs
+		WeighIn we2 = TrackerFactory.eINSTANCE.createWeighIn();
+		we2.setComments("Second");
+		Calendar secondWeighInDate = Calendar.getInstance();
+		we2.setDateTime(
+				secondWeighInDate.getTime());
+		we2.setWeight(250);
+		tag.getEvents().add(we2);
+		assertEquals(new Integer(15), animal.getWeightGainPerDay());
+		
+		//Third weighIn today 350 lbs
+		WeighIn we3 = TrackerFactory.eINSTANCE.createWeighIn();
+		we3.setComments("Third");
+		we3.setWeight(350);
+		Calendar thirdWeighInDate = Calendar.getInstance();
+		thirdWeighInDate.add(Calendar.DAY_OF_MONTH, 10);
+		we3.setDateTime(
+				thirdWeighInDate.getTime());
+		tag.getEvents().add(we3);
+		assertEquals(new Integer(10), animal.getWeightGainPerDay());
 	}
 
 	/**

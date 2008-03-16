@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,7 +33,10 @@ import com.verticon.tracker.Sex;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
+import com.verticon.tracker.util.CollectionFilter;
+import com.verticon.tracker.util.CommonUtilities;
 import com.verticon.tracker.util.Species;
 
 /**
@@ -55,6 +59,8 @@ import com.verticon.tracker.util.Species;
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getLastEventDateTime <em>Last Event Date Time</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getDam <em>Dam</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSire <em>Sire</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getWeight <em>Weight</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getWeightGainPerDay <em>Weight Gain Per Day</em>}</li>
  * </ul>
  * </p>
  *
@@ -237,6 +243,26 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @ordered
 	 */
 	protected Animal sire;
+
+	/**
+	 * The default value of the '{@link #getWeight() <em>Weight</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWeight()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer WEIGHT_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getWeightGainPerDay() <em>Weight Gain Per Day</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWeightGainPerDay()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer WEIGHT_GAIN_PER_DAY_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -533,6 +559,40 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 /**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Integer getWeight() {
+		WeighIn lastWeighIn = getLastWeighIn();
+		return lastWeighIn==null ? null: lastWeighIn.getWeight();
+	}
+	
+	 /**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Integer getWeightGainPerDay() {
+		WeighIn lastWeighIn = getLastWeighIn();
+		return lastWeighIn==null?null: lastWeighIn.getWeightGainPerDay();
+	}
+
+	private WeighIn getLastWeighIn(){
+		WeighIn lastWeighIn = null;
+		if(!allEvents().isEmpty()){
+			CollectionFilter<Event> weighInsProducer = new CollectionFilter<Event>();
+			weighInsProducer.addFilter(CommonUtilities.weighInFilterCriteria);
+			List<Event> weighIns = new ArrayList<Event>(weighInsProducer.filterCopy(allEvents()));
+			Collections.sort(weighIns, CommonUtilities.DATE_COMPARATOR);
+			lastWeighIn = (WeighIn) weighIns.get(weighIns.size()-1);
+		}
+		return lastWeighIn;
+	}
+	
+	
+
+/**
+	 * <!-- begin-user-doc -->
 	 * Hand implemented for speed (versus OCL??) because this method is used to generate the
 	 * key attribute for Animal.
 	 * Originally generated with the following OCL:
@@ -644,6 +704,10 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 			case TrackerPackage.ANIMAL__SIRE:
 				if (resolve) return getSire();
 				return basicGetSire();
+			case TrackerPackage.ANIMAL__WEIGHT:
+				return getWeight();
+			case TrackerPackage.ANIMAL__WEIGHT_GAIN_PER_DAY:
+				return getWeightGainPerDay();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -750,6 +814,10 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return dam != null;
 			case TrackerPackage.ANIMAL__SIRE:
 				return sire != null;
+			case TrackerPackage.ANIMAL__WEIGHT:
+				return WEIGHT_EDEFAULT == null ? getWeight() != null : !WEIGHT_EDEFAULT.equals(getWeight());
+			case TrackerPackage.ANIMAL__WEIGHT_GAIN_PER_DAY:
+				return WEIGHT_GAIN_PER_DAY_EDEFAULT == null ? getWeightGainPerDay() != null : !WEIGHT_GAIN_PER_DAY_EDEFAULT.equals(getWeightGainPerDay());
 		}
 		return super.eIsSet(featureID);
 	}

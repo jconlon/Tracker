@@ -81,6 +81,16 @@ public class TrackerTableEditorUtils {
 		final TableColumn lastEventDateTimeColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 200, true));
 		lastEventDateTimeColumn.setText(getString("_UI_LastEventColumn_label"));
+		
+		//Weight
+		final TableColumn weightColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 80, true));
+		weightColumn.setText("Weight");
+		
+		//WeightGainPerDay
+		final TableColumn weightGainColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 80, true));
+		weightGainColumn.setText("WeightGainPerDay");
 
 		//Comments
 		final TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
@@ -121,6 +131,12 @@ public class TrackerTableEditorUtils {
 					sortIdentifier = AnimalSorter.BREED;
 				}else if (currentColumn == ageColumn) {
 					sortIdentifier = AnimalSorter.AGE;
+					
+				}else if (currentColumn == weightColumn) {
+					sortIdentifier = AnimalSorter.WEIGHT;
+				}else if (currentColumn == weightGainColumn) {
+					sortIdentifier = AnimalSorter.WEIGHT_GAIN;
+					
 				}else if (currentColumn == commentsColumn) {
 					sortIdentifier = AnimalSorter.COMMENTS;
 				}else if (currentColumn == lastEventDateTimeColumn){
@@ -142,11 +158,15 @@ public class TrackerTableEditorUtils {
 		sexColumn.addListener(SWT.Selection, sortListener);
 		dDateColumn.addListener(SWT.Selection, sortListener);
 		ageColumn.addListener(SWT.Selection, sortListener);
+		
+		weightColumn.addListener(SWT.Selection, sortListener);
+		weightGainColumn.addListener(SWT.Selection, sortListener);
+		
 		commentsColumn.addListener(SWT.Selection, sortListener);
 		
 		
 		tableViewer.setColumnProperties(
-				new String [] {"a", "b", "c", "d", "e","f", "g", "h","i","j"});
+				new String [] {"a", "b", "c", "d", "e","f", "g", "h","i","j","k","l"});
 		
 		/**
 		 * The default ItemProvider returned via the adapterFactory

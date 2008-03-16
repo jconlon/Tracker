@@ -16,6 +16,10 @@ package com.verticon.tracker.validation;
 public interface WeighInValidator {
 	boolean validate();
 
+	boolean validateWeight(Integer value);
+
+	boolean validateWeightGainPerDay(Integer value);
+
 	boolean validateWeight(int value);
 
 	boolean validateWeightGainPerDay(int value);

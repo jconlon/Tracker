@@ -48,5 +48,11 @@ public interface AnimalValidator {
 
 	boolean validateSire(Animal value);
 
+	boolean validateWeight(Integer value);
+
+	boolean validateWeightGainPerDay(Integer value);
+
+	boolean validateWeight(int value);
+
 	boolean validateLastEventDate(Date value);
 }
