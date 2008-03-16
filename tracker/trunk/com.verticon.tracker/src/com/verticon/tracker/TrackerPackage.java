@@ -196,13 +196,31 @@ public interface TrackerPackage extends EPackage {
 	int ANIMAL__SIRE = 12;
 
 	/**
+	 * The feature id for the '<em><b>Weight</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANIMAL__WEIGHT = 13;
+
+	/**
+	 * The feature id for the '<em><b>Weight Gain Per Day</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANIMAL__WEIGHT_GAIN_PER_DAY = 14;
+
+	/**
 	 * The number of structural features of the '<em>Animal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL_FEATURE_COUNT = 13;
+	int ANIMAL_FEATURE_COUNT = 15;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.TagImpl <em>Tag</em>}' class.
@@ -376,6 +394,24 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOVINE__SIRE = ANIMAL__SIRE;
+
+	/**
+	 * The feature id for the '<em><b>Weight</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE__WEIGHT = ANIMAL__WEIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Weight Gain Per Day</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE__WEIGHT_GAIN_PER_DAY = ANIMAL__WEIGHT_GAIN_PER_DAY;
 
 	/**
 	 * The number of structural features of the '<em>Bovine</em>' class.
@@ -809,6 +845,24 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE_BEEF__SIRE = BOVINE__SIRE;
 
 	/**
+	 * The feature id for the '<em><b>Weight</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_BEEF__WEIGHT = BOVINE__WEIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Weight Gain Per Day</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_BEEF__WEIGHT_GAIN_PER_DAY = BOVINE__WEIGHT_GAIN_PER_DAY;
+
+	/**
 	 * The feature id for the '<em><b>Beef Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -952,6 +1006,24 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int OVINE__SIRE = ANIMAL__SIRE;
+
+	/**
+	 * The feature id for the '<em><b>Weight</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OVINE__WEIGHT = ANIMAL__WEIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Weight Gain Per Day</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OVINE__WEIGHT_GAIN_PER_DAY = ANIMAL__WEIGHT_GAIN_PER_DAY;
 
 	/**
 	 * The feature id for the '<em><b>Sheep Breed</b></em>' attribute.
@@ -1099,6 +1171,24 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE_BISON__SIRE = BOVINE__SIRE;
 
 	/**
+	 * The feature id for the '<em><b>Weight</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_BISON__WEIGHT = BOVINE__WEIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Weight Gain Per Day</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_BISON__WEIGHT_GAIN_PER_DAY = BOVINE__WEIGHT_GAIN_PER_DAY;
+
+	/**
 	 * The feature id for the '<em><b>Buffalo Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1242,6 +1332,24 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOVINE_DAIRY__SIRE = BOVINE__SIRE;
+
+	/**
+	 * The feature id for the '<em><b>Weight</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_DAIRY__WEIGHT = BOVINE__WEIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Weight Gain Per Day</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_DAIRY__WEIGHT_GAIN_PER_DAY = BOVINE__WEIGHT_GAIN_PER_DAY;
 
 	/**
 	 * The feature id for the '<em><b>Dairy Breed</b></em>' attribute.
@@ -2714,6 +2822,24 @@ public interface TrackerPackage extends EPackage {
 	int SWINE__SIRE = ANIMAL__SIRE;
 
 	/**
+	 * The feature id for the '<em><b>Weight</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWINE__WEIGHT = ANIMAL__WEIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Weight Gain Per Day</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWINE__WEIGHT_GAIN_PER_DAY = ANIMAL__WEIGHT_GAIN_PER_DAY;
+
+	/**
 	 * The feature id for the '<em><b>Swine Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2859,6 +2985,24 @@ public interface TrackerPackage extends EPackage {
 	int EQUINE__SIRE = ANIMAL__SIRE;
 
 	/**
+	 * The feature id for the '<em><b>Weight</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__WEIGHT = ANIMAL__WEIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Weight Gain Per Day</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__WEIGHT_GAIN_PER_DAY = ANIMAL__WEIGHT_GAIN_PER_DAY;
+
+	/**
 	 * The feature id for the '<em><b>Horse Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3002,6 +3146,24 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int CAPRINE__SIRE = ANIMAL__SIRE;
+
+	/**
+	 * The feature id for the '<em><b>Weight</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__WEIGHT = ANIMAL__WEIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Weight Gain Per Day</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__WEIGHT_GAIN_PER_DAY = ANIMAL__WEIGHT_GAIN_PER_DAY;
 
 	/**
 	 * The feature id for the '<em><b>Goat Breed</b></em>' attribute.
@@ -4523,6 +4685,28 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAnimal_Sire();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Animal#getWeight <em>Weight</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Weight</em>'.
+	 * @see com.verticon.tracker.Animal#getWeight()
+	 * @see #getAnimal()
+	 * @generated
+	 */
+	EAttribute getAnimal_Weight();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Animal#getWeightGainPerDay <em>Weight Gain Per Day</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Weight Gain Per Day</em>'.
+	 * @see com.verticon.tracker.Animal#getWeightGainPerDay()
+	 * @see #getAnimal()
+	 * @generated
+	 */
+	EAttribute getAnimal_WeightGainPerDay();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Tag <em>Tag</em>}'.
@@ -6071,6 +6255,22 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ANIMAL__SIRE = eINSTANCE.getAnimal_Sire();
+
+		/**
+		 * The meta object literal for the '<em><b>Weight</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ANIMAL__WEIGHT = eINSTANCE.getAnimal_Weight();
+
+		/**
+		 * The meta object literal for the '<em><b>Weight Gain Per Day</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ANIMAL__WEIGHT_GAIN_PER_DAY = eINSTANCE.getAnimal_WeightGainPerDay();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.TagImpl <em>Tag</em>}' class.

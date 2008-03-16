@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_smKWUDo3Edyw6--mXqZ7vg" activeDiagram="_smKWUTo3Edyw6--mXqZ7vg">
   <model href="tracker.ecore#/"/>
-  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="1083,32">
+  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="357,474">
     <property xmi:id="_smKWUjo3Edyw6--mXqZ7vg" key="pageFormatName" value="A2"/>
     <property xmi:id="_smKWUzo3Edyw6--mXqZ7vg" key="diagramWidth" value="1680"/>
     <property xmi:id="_smKWVDo3Edyw6--mXqZ7vg" key="diagramHeight" value="2376"/>
@@ -73,6 +73,16 @@
         <contained xsi:type="di:GraphNode" xmi:id="_S45HsJbNEdyl4sAXoAEvAQ" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_S45HsZbNEdyl4sAXoAEvAQ" presentation="default">
             <element href="tracker.ecore#//Animal/lastEventDateTime"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_Up9wsPK3Edyxyrt9qiNBlw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Up9wsfK3Edyxyrt9qiNBlw" presentation="default">
+            <element href="tracker.ecore#//Animal/weight"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_ZD3XEPLhEdyqLpR_MyF-lA" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_ZD3XEfLhEdyqLpR_MyF-lA" presentation="default">
+            <element href="tracker.ecore#//Animal/weightGainPerDay"/>
           </semanticModel>
         </contained>
       </contained>
@@ -1823,7 +1833,7 @@
         <element href="tracker.ecore#//USPhoneNumber"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_smnpVDo3Edyw6--mXqZ7vg" position="1589,795" size="178,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_smnpVDo3Edyw6--mXqZ7vg" position="1582,795" size="191,-1">
       <anchorage xmi:id="_smnpVTo3Edyw6--mXqZ7vg" graphEdge="_smnpXzo3Edyw6--mXqZ7vg"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smnpVjo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//WeighIn"/>

@@ -4,6 +4,7 @@
 package com.verticon.tracker.util;
 
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -15,6 +16,7 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
+import com.verticon.tracker.WeighIn;
 
 /**
  * @author jconlon
@@ -110,4 +112,27 @@ public class CommonUtilities {
 		}
 		return idNumber>840002000000000L && idNumber<843000000000000L;
 	}
+	
+	public static final Comparator<Event> DATE_COMPARATOR = new Comparator<Event>() {
+		public int compare(Event a, Event b) {
+			Date d1 = a.getDateTime();
+			Date d2 = b.getDateTime();
+			return d1.compareTo(d2);
+		}
+
+	};
+	
+	/**
+	 * Passes all different weighIn events that have a non zero weight.
+	 */
+	public static final FilterCriteria<Event> weighInFilterCriteria = new FilterCriteria<Event>(){
+
+		public boolean passes(Event o) {
+			if(o instanceof WeighIn){
+				return true;
+			}
+			return false;
+		}
+		
+	};
 }

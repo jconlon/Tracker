@@ -34,6 +34,8 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getLastEventDateTime <em>Last Event Date Time</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getDam <em>Dam</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getSire <em>Sire</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getWeight <em>Weight</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getWeightGainPerDay <em>Weight Gain Per Day</em>}</li>
  * </ul>
  * </p>
  *
@@ -316,6 +318,36 @@ public interface Animal extends EObject {
 	 * @generated
 	 */
 	void setSire(Animal value);
+
+	/**
+	 * Returns the value of the '<em><b>Weight</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Weight</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Weight</em>' attribute.
+	 * @see com.verticon.tracker.TrackerPackage#getAnimal_Weight()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	Integer getWeight();
+
+	/**
+	 * Returns the value of the '<em><b>Weight Gain Per Day</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Weight Gain Per Day</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Weight Gain Per Day</em>' attribute.
+	 * @see com.verticon.tracker.TrackerPackage#getAnimal_WeightGainPerDay()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	Integer getWeightGainPerDay();
 
 	/**
 	 * <!-- begin-user-doc -->

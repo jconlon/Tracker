@@ -89,6 +89,8 @@ public class AnimalItemProvider
 			addLastEventDateTimePropertyDescriptor(object);
 			addDamPropertyDescriptor(object);
 			addSirePropertyDescriptor(object);
+			addWeightPropertyDescriptor(object);
+			addWeightGainPerDayPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -411,6 +413,50 @@ public class AnimalItemProvider
 	       });
 	  }
 /**
+	 * This adds a property descriptor for the Weight feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addWeightPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Animal_weight_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_weight_feature", "_UI_Animal_type"),
+				 TrackerPackage.Literals.ANIMAL__WEIGHT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+/**
+	 * This adds a property descriptor for the Weight Gain Per Day feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addWeightGainPerDayPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Animal_weightGainPerDay_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_weightGainPerDay_feature", "_UI_Animal_type"),
+				 TrackerPackage.Literals.ANIMAL__WEIGHT_GAIN_PER_DAY,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -511,6 +557,8 @@ public class AnimalItemProvider
 			case TrackerPackage.ANIMAL__ID:
 			case TrackerPackage.ANIMAL__COMMENTS:
 			case TrackerPackage.ANIMAL__LAST_EVENT_DATE_TIME:
+			case TrackerPackage.ANIMAL__WEIGHT:
+			case TrackerPackage.ANIMAL__WEIGHT_GAIN_PER_DAY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TrackerPackage.ANIMAL__TAGS:
@@ -579,12 +627,23 @@ public class AnimalItemProvider
 	    			return animal.getLastEventDateTime().toString();
 	    		}
 	    		return null;
+	    
 	    	case 9:
+	    		return animal.getWeight()==null?null:animal.getWeight().toString();
+
+	    	case 10:
+	    		return animal.getWeightGainPerDay()==null?null:animal.getWeightGainPerDay().toString();
+	    		
+	    	case 11:
 	    		return animal.getComments();
 	    	default :
 	    		return "unknown " + columnIndex;
 	    }
 	  }
+
+
+	
+	
 
 	/**
 	 * Adds table support

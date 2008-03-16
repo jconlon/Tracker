@@ -9,8 +9,6 @@ package com.verticon.tracker.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -27,6 +25,7 @@ import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.CollectionFilter;
+import com.verticon.tracker.util.CommonUtilities;
 import com.verticon.tracker.util.FilterCriteria;
 
 /**
@@ -59,7 +58,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int WEIGHT_EDEFAULT = 0;
+	protected static final Integer WEIGHT_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getWeight() <em>Weight</em>}' attribute.
@@ -69,7 +68,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	 * @generated
 	 * @ordered
 	 */
-	protected int weight = WEIGHT_EDEFAULT;
+	protected Integer weight = WEIGHT_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getWeightGainPerDay() <em>Weight Gain Per Day</em>}' attribute.
@@ -79,7 +78,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int WEIGHT_GAIN_PER_DAY_EDEFAULT = 0;
+	protected static final Integer WEIGHT_GAIN_PER_DAY_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -114,7 +113,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getWeight() {
+	public Integer getWeight() {
 		return weight;
 	}
 
@@ -123,8 +122,8 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setWeight(int newWeight) {
-		int oldWeight = weight;
+	public void setWeight(Integer newWeight) {
+		Integer oldWeight = weight;
 		weight = newWeight;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.WEIGH_IN__WEIGHT, oldWeight, weight));
@@ -135,14 +134,14 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public int getWeightGainPerDay() {
-		if(weight==0){
-			return 0;
+	public Integer getWeightGainPerDay() {
+		if(weight==null || weight==0){
+			return null;
 		}
 		WeighIn lastWeighIn = getPreviousWeighIn();
 		
 		if(lastWeighIn==null){
-			return 0;
+			return null;
 		}
 		CalendarDate myCalendarDate = new CalendarDate(TimeZone.getDefault(), dateTime);
 		CalendarDate lastWeighInCalendarDate = 
@@ -196,7 +195,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 			return Collections.emptyList();
 		}
 		List<Event> copy = new ArrayList<Event>(events);
-		Collections.sort(copy, DATE_COMPARATOR);
+		Collections.sort(copy, CommonUtilities.DATE_COMPARATOR);
 		
 		CollectionFilter<Event> lastWeighInEvents = new CollectionFilter<Event>();
 		lastWeighInEvents.addFilter(weighInFilterCriteria);
@@ -226,7 +225,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 		 * @return
 		 */
 		private boolean isEarlier(WeighIn e) {
-			return (DATE_COMPARATOR.compare(e, WeighInImpl.this) < 0);
+			return (CommonUtilities.DATE_COMPARATOR.compare(e, WeighInImpl.this) < 0);
 		}
 
 		
@@ -246,14 +245,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 			return WeighInImpl.this!=e;
 		}};
 	
-	private static final Comparator<Event> DATE_COMPARATOR = new Comparator<Event>() {
-		public int compare(Event a, Event b) {
-			Date d1 = a.getDateTime();
-			Date d2 = b.getDateTime();
-			return d1.compareTo(d2);
-		}
-
-	};
+	
 	
 
 	/**
@@ -265,9 +257,9 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.WEIGH_IN__WEIGHT:
-				return new Integer(getWeight());
+				return getWeight();
 			case TrackerPackage.WEIGH_IN__WEIGHT_GAIN_PER_DAY:
-				return new Integer(getWeightGainPerDay());
+				return getWeightGainPerDay();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -281,7 +273,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackerPackage.WEIGH_IN__WEIGHT:
-				setWeight(((Integer)newValue).intValue());
+				setWeight((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -311,9 +303,9 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TrackerPackage.WEIGH_IN__WEIGHT:
-				return weight != WEIGHT_EDEFAULT;
+				return WEIGHT_EDEFAULT == null ? weight != null : !WEIGHT_EDEFAULT.equals(weight);
 			case TrackerPackage.WEIGH_IN__WEIGHT_GAIN_PER_DAY:
-				return getWeightGainPerDay() != WEIGHT_GAIN_PER_DAY_EDEFAULT;
+				return WEIGHT_GAIN_PER_DAY_EDEFAULT == null ? getWeightGainPerDay() != null : !WEIGHT_GAIN_PER_DAY_EDEFAULT.equals(getWeightGainPerDay());
 		}
 		return super.eIsSet(featureID);
 	}
