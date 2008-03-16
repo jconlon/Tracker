@@ -53,6 +53,8 @@ public class AnimalSorter extends ViewerSorter {
 	public final static int COMMENTS = 8;
 	public final static int ANIMAL_TEXT = 9;
 	public final static int LAST_EVENT_DATE = 10;
+	public final static int WEIGHT = 11;
+	public final static int WEIGHT_GAIN = 12;
 	
 
 	// Criteria that the instance uses 
@@ -121,6 +123,13 @@ public class AnimalSorter extends ViewerSorter {
 			case LAST_EVENT_DATE :
 				returnValue = compareLastEventDates(animal1, animal2);
 				break;
+			case WEIGHT :
+				returnValue = compareWeight(animal1, animal2);
+				break;
+			case WEIGHT_GAIN :
+				returnValue = compareWeightGain(animal1, animal2);
+				break;	
+				
 			default:
 				returnValue = 0;
 		}
@@ -297,6 +306,55 @@ public class AnimalSorter extends ViewerSorter {
 		Date date2 = animal2.getLastEventDateTime()==null?CommonUtilities.DATE_REFERENCE.getTime():animal2.getLastEventDateTime();
 		return date1.compareTo(date2);
 	}
+	
+	/**
+	 * Returns a number reflecting the collation order of the given animals
+	 * based on the weights associated with the animals.
+	 *
+	 * @param resource1 the first resource element to be ordered
+	 * @param resource2 the second resource element to be ordered
+	 * @return a negative number if the first element is less  than the 
+	 *  second element; the value <code>0</code> if the first element is
+	 *  equal to the second element; and a positive number if the first
+	 *  element is greater than the second element
+	 */
+	protected int compareWeight(Animal animal1, Animal animal2) {
+		if(animal1.getWeight()==null && animal2.getWeight()==null){
+			return 0;
+		}
+		if(animal1.getWeight()==null){
+			return -1;
+		}
+		if(animal2.getWeight()==null){
+			return 1;
+		}
+		return animal1.getWeight().compareTo(animal2.getWeight());
+	}
+	
+	/**
+	 * Returns a number reflecting the collation order of the given animals
+	 * based on the weight gains associated with the animals.
+	 *
+	 * @param resource1 the first resource element to be ordered
+	 * @param resource2 the second resource element to be ordered
+	 * @return a negative number if the first element is less  than the 
+	 *  second element; the value <code>0</code> if the first element is
+	 *  equal to the second element; and a positive number if the first
+	 *  element is greater than the second element
+	 */
+	protected int compareWeightGain(Animal animal1, Animal animal2) {
+		if(animal1.getWeightGainPerDay()==null && animal2.getWeightGainPerDay()==null){
+			return 0;
+		}
+		if(animal1.getWeightGainPerDay()==null){
+			return -1;
+		}
+		if(animal2.getWeightGainPerDay()==null){
+			return 1;
+		}
+		return animal1.getWeightGainPerDay().compareTo(animal2.getWeightGainPerDay());
+	}
+	
 	/**
 	 * Returns the sort criteria of this this sorter.
 	 *
