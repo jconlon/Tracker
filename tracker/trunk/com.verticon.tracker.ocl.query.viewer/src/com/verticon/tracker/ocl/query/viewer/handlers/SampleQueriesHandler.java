@@ -41,7 +41,7 @@ public class SampleQueriesHandler extends AbstractHandler {
 		"Event.allInstances()->select(e : Event | e.id=self.id and e.oclIsTypeOf(MovedIn) and e.oclAsType(MovedIn).sourcePin.oclIsUndefined() )->size()>0",
 		"self.somaticCellCounts>200",
 		"self.weightGainPerDay.oclIsUndefined() = false and self.weightGainPerDay<3",
-		"Event.allInstances()->select(e : Event | e.id=self.id and e.oclIsTypeOf(WeighIn) and e.oclAsType(WeighIn).weightGainPerDay<3 )->size()>1"
+		"self.weightGainPerDay.oclIsUndefined() = false and self.weightGainPerDay<3"
 		};
 	private static final String[] types = new String[] {
 		"Animal", 
@@ -78,7 +78,7 @@ public class SampleQueriesHandler extends AbstractHandler {
 				 OclQueryViewPart queryViewPart = (OclQueryViewPart)
 			 page.findView("com.verticon.tracker.ocl.query.view");
 			     if (queryViewPart != null) {
-			    	 addSamples(window, queryViewPart);
+			    	 addSamples(window, queryViewPart, true);
 			     }else{
 			    	 MessageDialog.openError(
 								window.getShell(),
@@ -89,16 +89,18 @@ public class SampleQueriesHandler extends AbstractHandler {
 		return null;
 	}
 	
-	private void addSamples(IWorkbenchWindow window, OclQueryViewPart queryViewPart){
+	public static void addSamples(IWorkbenchWindow window, OclQueryViewPart queryViewPart, boolean withMessage){
 			OclQueryViewer queryViewer = queryViewPart.getViewer();
 			OclQueryViewModel model = queryViewer.getViewModel();
 			for (IOclQuery query : sampleQueries) {
 				model.addQuery(query);
 			}
+			if(withMessage){
 			MessageDialog.openInformation(
 					window.getShell(),
 					"Add Sample Queries",
 					"Added  "+sampleQueries.size()+ " sample queries to the Queries View");
+			}
 		
 		
 	}
