@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.1"?>
 
-<product name="Tracker Animal Management Framework" id="com.verticon.tracker.editor.Tracker" application="org.eclipse.ui.ide.workbench" useFeatures="true">
+<product name="Tracker Animal Information System" id="com.verticon.tracker.editor.Tracker" application="org.eclipse.ui.ide.workbench" useFeatures="true">
 
    <aboutInfo>
       <image path="/com.verticon.tracker.editor/icons/tracker_lg.gif"/>
       <text>
-         Tracker Animal Event Management Framework
+         Tracker Animal Information System
 Version: {0}
 
 (c) Copyright Verticon, Inc. 2008.  All rights reserved. 
@@ -108,12 +108,12 @@ that can be installed and used with other Eclipse (3.3)-based offerings.
       <feature id="com.verticon.tracker.editor" version="0.2.5"/>
       <feature id="com.verticon.tracker.export.wlic" version="0.2.0"/>
       <feature id="com.verticon.tracker.export.xls" version="0.2.0"/>
-      <feature id="com.verticon.tracker.ocl.query" version="0.1.1"/>
-      <feature id="com.verticon.tracker.transaction.editor" version="0.2.1"/>
-      <feature id="com.verticon.tracker.reader" version="0.2.1"/>
-      <feature id="com.verticon.tracker.help" version="0.2.2"/>
       <feature id="com.verticon.tracker.fair" version="0.1.1"/>
       <feature id="com.verticon.tracker.validation.core" version="0.1.2"/>
+      <feature id="com.verticon.tracker.ocl.query" version="0.1.2"/>
+      <feature id="com.verticon.tracker.reader" version="0.2.1"/>
+      <feature id="com.verticon.tracker.transaction.editor" version="0.2.2"/>
+      <feature id="com.verticon.tracker.help" version="0.2.3"/>
       <feature id="org.eclipse.ocl" version="1.1.1.v200707131415-3209oA55P5N7F8JDH"/>
       <feature id="org.eclipse.ocl.doc" version="1.1.0.v200706071450-21-8s733G3E3G5AC3"/>
       <feature id="org.eclipse.emf.ocl" version="1.1.1.v200709121956-1007w31181_232_67"/>

@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tracker OCL Query Viewer
+Bundle-Name: Tracker Query Viewer
 Bundle-SymbolicName: com.verticon.tracker.ocl.query.viewer;singleton:=true
-Bundle-Version: 0.1.1
+Bundle-Version: 0.1.2
 Bundle-Activator: com.verticon.tracker.ocl.query.viewer.OclQueryViewerPlugin
 Bundle-Vendor: Verticon, Inc.
 Require-Bundle: org.eclipse.ui,
