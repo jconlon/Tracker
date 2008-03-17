@@ -35,7 +35,6 @@ public class OclQueryViewPart extends ViewPart {
 
 	public OclQueryViewPart() {
 		super();
-		System.out.println("Creating "+this);
 	}
 
 	public void createPartControl(Composite parent) {
