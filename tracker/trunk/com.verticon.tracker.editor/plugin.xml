@@ -146,13 +146,13 @@
      <product
            application="org.eclipse.ui.ide.workbench"
            description="Tracker models animal event history within a premises"
-           name="Tracker Animal Management Framework">
+           name="Tracker Animal Information System">
         <property
               name="windowImages"
               value="icons/verticon32.gif"/>
         <property
               name="aboutText"
-              value="Tracker Animal Event Management Framework&#x0A;Version: {0}&#x0A;&#x0A;(c) Copyright Verticon, Inc. 2008.  All rights reserved. &#x0A;&#x0A;Visit http:/www.verticon.com&#x0A;&#x0A;Tracker is powered by Eclipse technology and includes Eclipse plugins &#x0A;that can be installed and used with other Eclipse (3.3)-based offerings."/>
+              value="Tracker Animal Information System&#x0A;Version: {0}&#x0A;&#x0A;(c) Copyright Verticon, Inc. 2008.  All rights reserved. &#x0A;&#x0A;Visit http:/www.verticon.com&#x0A;&#x0A;Tracker is powered by Eclipse technology and includes Eclipse plugins &#x0A;that can be installed and used with other Eclipse (3.3)-based offerings."/>
         <property
               name="aboutImage"
               value="icons/tracker_lg.gif"/>
@@ -167,7 +167,7 @@
               value="7,225,441,20"/>
         <property
               name="appName"
-              value="Tracker Animal Management Framework">
+              value="Tracker Animal Information System">
         </property>
         <property
               name="preferenceCustomization"

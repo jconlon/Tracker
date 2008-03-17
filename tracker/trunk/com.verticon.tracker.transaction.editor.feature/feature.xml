@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.tracker.transaction.editor"
-      label="Tracker Transaction Infrastructure"
-      version="0.2.1"
+      label="Tracker Transaction Editor"
+      version="0.2.2"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.transaction.editor">
 
