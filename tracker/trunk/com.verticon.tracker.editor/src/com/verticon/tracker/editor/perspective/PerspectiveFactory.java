@@ -14,6 +14,8 @@ import org.eclipse.ui.IPerspectiveFactory;
 public class PerspectiveFactory implements IPerspectiveFactory {
 
 	private static final String ORG_ECLIPSE_UI_CONSOLE_CONSOLE_VIEW = "org.eclipse.ui.console.ConsoleView";
+	private static final String QUERIES_VIEW = "com.verticon.tracker.ocl.query.view";
+	private static final String READERS_VIEW = "com.verticon.tracker.reader.view";
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IPerspectiveFactory#createInitialLayout(org.eclipse.ui.IPageLayout)
@@ -47,13 +49,11 @@ String editorArea = layout.getEditorArea();
 					0.66f, 
 					editorArea);
 		bottom.addView(IPageLayout.ID_PROP_SHEET);
-//		bottom.addView(PUBLISHER_VIEW);
-//		bottom.addView(OCL_VIEW);
 		bottom.addView(ORG_ECLIPSE_UI_CONSOLE_CONSOLE_VIEW);
 		bottom.addView(IPageLayout.ID_PROBLEM_VIEW);
 		bottom.addView(IPageLayout.ID_TASK_LIST);
-		
-
+		bottom.addView(READERS_VIEW);
+		bottom.addView(QUERIES_VIEW);
 	}
 
 }
