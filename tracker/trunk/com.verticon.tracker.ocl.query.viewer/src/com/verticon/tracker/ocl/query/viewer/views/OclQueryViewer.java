@@ -214,7 +214,7 @@ public class OclQueryViewer {
 		// FIXME 1st column NAME
 		TableColumn column = new TableColumn(table, SWT.LEFT, 0);
 		column.setText(Column.NAME.property);
-		column.setWidth(150);
+		column.setWidth(210);
 		// Add listener to column so tasks are sorted by description when
 		// clicked
 		column.addSelectionListener(new SelectionAdapter() {
@@ -227,7 +227,7 @@ public class OclQueryViewer {
 		// 3rd column with Context
 		column = new TableColumn(table, SWT.LEFT, 1);
 		column.setText(Column.TYPE.property);
-		column.setWidth(60);
+		column.setWidth(80);
 		// Add listener to column so tasks are sorted by type when clicked
 		column.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
