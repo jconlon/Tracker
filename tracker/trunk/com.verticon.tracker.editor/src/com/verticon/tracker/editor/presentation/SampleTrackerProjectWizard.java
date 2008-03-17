@@ -33,6 +33,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
@@ -40,6 +41,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
+import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ISetSelectionTarget;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
@@ -177,15 +179,57 @@ public class SampleTrackerProjectWizard extends BasicNewResourceWizard {
 		// Open an editor on the new file.
 		//
 		try {
-			IDE.openEditor(page, newFile[0], true);
+			IDE.openEditor(page, newFile[0], "com.verticon.tracker.transaction.editor.TrackerEditorID", true);
 		} catch (PartInitException exception) {
 			MessageDialog.openError(workbenchWindow.getShell(), "Open Editor",//$NON-NLS-1$
-				exception.getMessage());
-			return false;
+				exception.getMessage()+
+				"  Will try the basic editor instead.");
+			
+			try {
+				IDE.openEditor(page, newFile[0], true);
+			} catch (PartInitException exception2) {
+				MessageDialog.openError(workbenchWindow.getShell(), "Open Editor",//$NON-NLS-1$
+					exception.getMessage());
+				return false;
+			}
+			
 		}
-
+		
+		 addSampleQueries(activePart);
+			
 		return true;
 	}
+
+	/**
+	 * @param activePart
+	 */
+	private void addSampleQueries(final IWorkbenchPart activePart) {
+		String commandId = 
+			"com.verticon.tracker.ocl.query.viewer.commands.addSampleQueryCommand";
+		 IHandlerService handlerService = (IHandlerService) activePart.getSite()
+	    .getService(IHandlerService.class);
+			
+		executeCommand(commandId, handlerService);
+	}
+	
+
+	/**
+	 * @param commandId
+	 * @param handlerService
+	 */
+	private void executeCommand(final String commandId,
+			final IHandlerService handlerService) {
+		Display.getDefault().asyncExec(new Runnable() {
+		    public void run() {
+		    	try {
+					handlerService.executeCommand(commandId,null);
+				} catch (Exception e) {
+					e.printStackTrace();
+				} 
+		    }
+		});
+	}
+	
 	
 	private boolean runOp(IRunnableWithProgress op){
 		// run the new project creation operation
