@@ -50,7 +50,6 @@ import com.verticon.tracker.editor.presentation.CustomActionBarContributor;
 import com.verticon.tracker.editor.presentation.ICustomActionBarContributor;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
-import com.verticon.transaction.editor.actions.LongRunningReadAction;
 
 /**
  * This is the action bar contributor for the EXTLibrary model editor.
@@ -140,7 +139,6 @@ public class TrackerActionBarContributor
 			}
 		};
 		
-	protected LongRunningReadAction longRunningReadAction = new LongRunningReadAction();
 
 	/**
 	 * This will contain one {@link org.eclipse.emf.edit.ui.action.CreateChildAction} corresponding to each descriptor
@@ -307,13 +305,11 @@ public class TrackerActionBarContributor
 	}
 	
 	public void activate() {
-		longRunningReadAction.setActiveWorkbenchPart(activeEditor);
 		
 		super.activate();
 	}
 	
 	public void deactivate() {
-		longRunningReadAction.setActiveWorkbenchPart(null);
 		
 		super.deactivate();
 	}
@@ -529,10 +525,7 @@ public class TrackerActionBarContributor
 		refreshViewerAction.setEnabled(refreshViewerAction.isEnabled());		
 		menuManager.insertAfter("ui-actions", refreshViewerAction); //$NON-NLS-1$
 		
-		// add the long-running read action to the menu
-	    menuManager.insertBefore("additions-end", new ActionContributionItem( //$NON-NLS-1$
-	    		longRunningReadAction));
-
+		
 		super.addGlobalActions(menuManager);
 	}
 

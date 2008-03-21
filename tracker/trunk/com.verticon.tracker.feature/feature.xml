@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.editor"
       label="Tracker Editor"
-      version="0.2.5"
+      version="0.2.6"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.editor">
 
@@ -404,6 +404,10 @@ END OF TERMS AND CONDITIONS
       <import plugin="org.eclipse.ui.console"/>
       <import plugin="org.eclipse.ui.intro"/>
       <import plugin="org.eclipse.emf.validation"/>
+      <import plugin="org.eclipse.osgi.services"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.swt"/>
    </requires>
 
    <plugin
@@ -422,6 +426,35 @@ END OF TERMS AND CONDITIONS
 
    <plugin
          id="com.verticon.tracker.editor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.logging"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="slf4j.api"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="slf4j.log4j12"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.log4j"
          download-size="0"
          install-size="0"
          version="0.0.0"
