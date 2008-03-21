@@ -5,7 +5,6 @@ package com.verticon.tracker.reader.event.generator;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -17,8 +16,9 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.tracker.reader.AbstractModelObject;
 import com.verticon.tracker.reader.IReader;
 import com.verticon.tracker.reader.eventadmin.EventPublisher;
@@ -39,7 +39,11 @@ import com.verticon.tracker.reader.eventadmin.ITagIdPublisher;
 public class GeneratingReader extends AbstractModelObject implements
 		IReader, IResourceChangeListener {
 
-	private static final String CONSOLE = GeneratingReader.class.getSimpleName();
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(GeneratingReader.class);
 	
 	
 	/**
@@ -77,7 +81,7 @@ public class GeneratingReader extends AbstractModelObject implements
 			try {
 				start();
 			} catch (IOException e) {
-				printToConsoleWithName("Failed to start because: " + e);
+				logger.error("Failed to start the reader", e);
 				return;
 			}
 		}else{
@@ -163,7 +167,7 @@ public class GeneratingReader extends AbstractModelObject implements
 	 */
 	private void start() throws IOException {
 		if (transactionPublisher != null) {
-			printToConsoleWithName("Already Started ");
+			logger.debug("Already Started ");
 		} else if (transactionPublisher == null) {
 			IFile templateFile = getTemplateFile();
 			
@@ -182,9 +186,8 @@ public class GeneratingReader extends AbstractModelObject implements
 					getSecondsBetweenGeneratedEvents(), 
 					TimeUnit.SECONDS
 			);
-			printToConsoleWithName(
-					"Started generating events based on "+target+" at "+
-					getSecondsBetweenGeneratedEvents()+" second intervals.");
+			logger.info("Generating events with target {} at {} second intervals.",
+					target, getSecondsBetweenGeneratedEvents());
 		}
 	}
 	
@@ -227,7 +230,7 @@ public class GeneratingReader extends AbstractModelObject implements
 		if (exec != null) {
 			exec.shutdownNow();
 			exec = null;
-			printToConsoleWithName("Stopped ");
+			logger.info("Stopped ");
 		}
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		workspace.removeResourceChangeListener(this);
@@ -235,7 +238,7 @@ public class GeneratingReader extends AbstractModelObject implements
 
 	private void reset() {
 		if (isRunning()) {
-			printToConsoleWithName("ReStarting");
+			logger.info("ReStarting {}", name);
 			setStarted(false);
 			setStarted(true);
 		} 
@@ -245,14 +248,6 @@ public class GeneratingReader extends AbstractModelObject implements
 		return transactionPublisher != null;
 	}
 
-	private static void printToConsole(String msg) {
-		ConsoleUtil.println(CONSOLE, new Date()
-				+ "\t" + msg);
-	}
-	
-	private void printToConsoleWithName(String msg) {
-		printToConsole(name+'\t'+msg);
-	}
 
 	/**
 	 * Listen for resource changes to the template File
@@ -276,7 +271,7 @@ public class GeneratingReader extends AbstractModelObject implements
 			try {
 				transactionPublisher.init();
 			} catch (IOException e) {
-				printToConsoleWithName(e.getMessage());
+				logger.error("Failed to initialize "+name,e);
 			}
 		}
 		

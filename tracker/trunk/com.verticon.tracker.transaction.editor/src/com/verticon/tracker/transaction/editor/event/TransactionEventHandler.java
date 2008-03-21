@@ -3,7 +3,6 @@ package com.verticon.tracker.transaction.editor.event;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 
 import org.eclipse.core.runtime.Preferences;
 import org.eclipse.emf.common.util.EList;
@@ -12,23 +11,27 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-
 import org.osgi.service.event.EventHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
-import com.verticon.tracker.editor.util.ActionUtils;
-import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.tracker.editor.preferences.PreferenceConstants;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
+import com.verticon.tracker.editor.util.ActionUtils;
 import com.verticon.tracker.util.CommonUtilities;
 
 
 public class TransactionEventHandler implements EventHandler {
 
-	private static final String CONSOLE = TransactionEventHandler.class.getSimpleName();
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(TransactionEventHandler.class);
 	
 	
 	/**
@@ -40,7 +43,7 @@ public class TransactionEventHandler implements EventHandler {
 			TransactionalEditingDomain.Registry.INSTANCE
 				.getEditingDomain("com.verticon.transaction.editor.TrackerEditingDomain");
 		if(domain==null){
-			printToConsole(new Date() + "\t " + "Can't find the EditingDomain");
+			logger.error("Can't find the EditingDomain");
 			return;
 		}
 		Animal templateAnimal = (Animal)event.getProperty(
@@ -61,7 +64,7 @@ public class TransactionEventHandler implements EventHandler {
 		EList<Resource> resources = rs.getResources();
 		for (Resource resource : resources) {
 			if (resources.size() > 1) {
-				printToConsole(new Date() + "\tprocessing " + resource.toString());
+				logger.debug("Processing {}",resource.toString());
 			}
 			process(domain, resource, templateAnimal);
 
@@ -76,8 +79,7 @@ public class TransactionEventHandler implements EventHandler {
 							.get(0);
 					addTemplateEventsToAnimalInPremises(templateAnimal, premises);
 				} else {
-					printToConsole(new Date()
-							+ "\tResource contained no premises to process");
+					logger.warn("Resource {} contained no premises to process",resource.toString());
 				}
 			}
 		});
@@ -100,8 +102,12 @@ public class TransactionEventHandler implements EventHandler {
 		Collection<com.verticon.tracker.Event> events = 
 			copyValidEvents(templateAnimal.allEvents(), animal);
 		for (com.verticon.tracker.Event event : events) {
-			printToConsole(event.getDateTime() + "\t" + animal.getId() + '\t'
-					+ animal.getSpecies() + '\t' + simpleName(event));
+			logger.debug("Added {}, at time {}, to animal {}, ", 
+					new Object[]{
+						simpleName( event), 
+						event.getDateTime(), 
+						animal.getId()});
+			
 			Tag tag = animal.activeTag();
 			// If the animal was created from the template, because it did not
 			// exist in the premises
@@ -153,7 +159,5 @@ public class TransactionEventHandler implements EventHandler {
 		return outputResults;
 	}
 	
-	private void printToConsole(String msg) {
-		ConsoleUtil.println(CONSOLE, msg);
-	}
+	
 }

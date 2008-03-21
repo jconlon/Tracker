@@ -10,9 +10,11 @@ import java.util.Scanner;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.reader.eventadmin.ITagIdPublisher;
-import com.verticon.tracker.util.TrackerLog;
+
 
 /**
  * Runnable that scans a file for Long numbers and sends them
@@ -23,7 +25,7 @@ import com.verticon.tracker.util.TrackerLog;
  *
  */
 public class FileReaderRunner implements Runnable {
-
+	final Logger logger = LoggerFactory.getLogger(FileReaderRunner.class);
 	private final ITagIdPublisher tagIdPublisher ;
 	private final File file ;
 	private final Set<Long> tagNumbersToSend = new HashSet<Long>();
@@ -40,7 +42,7 @@ public class FileReaderRunner implements Runnable {
 	public FileReaderRunner(ITagIdPublisher transactionProcessor, IFile file) {
 		this.tagIdPublisher=transactionProcessor;
 		this.file=new File(file.getLocationURI());
-		TrackerLog.logInfo("Created "+this.getClass().getSimpleName());
+		logger.debug("Created {}", this.getClass().getSimpleName());
 	}
 
 	
@@ -63,7 +65,7 @@ public class FileReaderRunner implements Runnable {
 			}
 
 		} catch (FileNotFoundException e) {
-			TrackerLog.logError("Could not find the tags file.", e);
+			logger.error("Could not find the tags file.", e);
 
 
 		} finally {

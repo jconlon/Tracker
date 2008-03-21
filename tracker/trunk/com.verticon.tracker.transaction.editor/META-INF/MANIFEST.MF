@@ -2,12 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.verticon.tracker.transaction.editor;singleton:=true
-Bundle-Version: 0.2.2
+Bundle-Version: 0.2.3
 Bundle-Activator: com.verticon.tracker.transaction.editor.TransactionEditorPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: com.verticon.transaction.editor.actions;version="0.1.0",
- com.verticon.transaction.editor.domain;version="0.1.0",
+Export-Package: com.verticon.transaction.editor.domain;version="0.1.0",
  com.verticon.transaction.editor.internal.l10n;version="0.1.0";x-internal:=true,
  com.verticon.transaction.editor.presentation;version="0.1.0"
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.2.0,4.0.0)",
@@ -26,4 +25,5 @@ Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)",
  com.verticon.tracker.editor.presentation;version="[0.1.0,1.0.0)",
  com.verticon.tracker.editor.util;version="[0.1.0,1.0.0)",
  com.verticon.tracker.util;version="[0.1.0,1.0.0)",
- org.osgi.service.event;version="1.1.0"
+ org.osgi.service.event;version="1.1.0",
+ org.slf4j;version="1.5.0"

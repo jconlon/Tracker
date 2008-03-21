@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -107,6 +106,8 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -120,7 +121,6 @@ import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.editor.presentation.ISelectionViewerProvider;
 import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
 import com.verticon.tracker.editor.presentation.TrackerTableEditorUtils;
-import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
 
 
@@ -157,15 +157,19 @@ import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
  *   	 IAnimalSelectionProvider, ISelectionViewerProvider, IQueryDataSetProvider </li>
  *   
  * </ul>
- * TODO always un NOT this class if Editor changes are made, but be sure to add the 
- * above interfaces and NOT it back.
+ * 
  * <!-- end-user-doc -->
- * @generated 
+ * @generated  
  */
 public class TrackerTransactionEditor
 	extends MultiPageEditorPart
 	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
 	
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(TrackerTransactionEditor.class);
 	
 	/**
 	 * Monitors Event changes to update the eventsTableViewer
@@ -190,7 +194,6 @@ public class TrackerTransactionEditor
 	 */
 	private IQueryDataSetProvider queryDataSetProvider;
 	
-	private static final String CONSOLE = TrackerTransactionEditor.class.getSimpleName();
 	
 	/**
 	 * This keeps track of the editing domain that is used to track all changes to the model.
@@ -526,7 +529,7 @@ public class TrackerTransactionEditor
 					res.unload();
 					try {
 						res.load(Collections.EMPTY_MAP);
-						printToConsole("Loaded changed Resource "+res);
+						logger.debug("Loaded changed Resource {}",res);
 					} catch (IOException exception) {
 						TransactionEditorPlugin.INSTANCE.log(exception);
 					}
@@ -1665,10 +1668,7 @@ public class TrackerTransactionEditor
 		
 	}
 
-	private static void printToConsole(String msg) {
-		ConsoleUtil.println(CONSOLE, new Date()
-				+ "\t" + msg);
-	}
+	
 
 	/**
 	 * This is used to track the active viewer.

@@ -1,7 +1,6 @@
 package com.verticon.tracker.reader.eventadmin;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.Hashtable;
 
 import org.eclipse.core.resources.IFile;
@@ -12,10 +11,11 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.osgi.framework.Constants;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventAdmin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Tag;
-import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.tracker.reader.ReaderPlugin;
 
 public class EventPublisher implements ITagIdPublisher {
@@ -24,7 +24,10 @@ public class EventPublisher implements ITagIdPublisher {
 
 	private final IFile animalTemplateFile;
 	
-	
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory.getLogger(EventPublisher.class);
 	
 	public EventPublisher(IFile animalTemplateFile) throws IOException {
 		super();
@@ -44,8 +47,8 @@ public class EventPublisher implements ITagIdPublisher {
 	 * @see com.verticon.tracker.reader.ITransactionPublisher#init()
 	 */
 	  public void init() throws IOException {
-		printToConsole(new Date() + "\tSynchronizing contents of Template file: "
-				+ animalTemplateFile.getName());
+		logger.debug("Synchronizing contents of Template file: {}"
+				,animalTemplateFile.getName());
 		Resource templateResource = getResource(animalTemplateFile);
 		if (templateResource.getContents().isEmpty()) {
 			throw new IOException("File Resource is empty.");
@@ -73,10 +76,8 @@ public class EventPublisher implements ITagIdPublisher {
 					new Event(
 							ReaderPlugin.TOPIC_ANIMAL, table));
 		}else{
-			ConsoleUtil.println(EventPublisher.class.getSimpleName(), "Could not find EventAdmin service");
+			logger.warn("Failed to find EventAdmin service");
 		}
-		
-
 	}
 
 	
@@ -93,7 +94,4 @@ public class EventPublisher implements ITagIdPublisher {
 		return resource;
 	}
 	
-	private void printToConsole(String msg) {
-		ConsoleUtil.println(EventPublisher.class.getSimpleName(), msg);
-	}
 }

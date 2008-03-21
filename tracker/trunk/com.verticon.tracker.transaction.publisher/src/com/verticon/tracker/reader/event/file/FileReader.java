@@ -5,7 +5,6 @@ package com.verticon.tracker.reader.event.file;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -18,13 +17,14 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Preferences;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.tracker.reader.AbstractModelObject;
 import com.verticon.tracker.reader.IReader;
 import com.verticon.tracker.reader.ReaderPlugin;
-import com.verticon.tracker.reader.eventadmin.ITagIdPublisher;
 import com.verticon.tracker.reader.eventadmin.EventPublisher;
+import com.verticon.tracker.reader.eventadmin.ITagIdPublisher;
 import com.verticon.tracker.reader.preferences.PreferenceConstants;
 
 /**
@@ -41,8 +41,12 @@ import com.verticon.tracker.reader.preferences.PreferenceConstants;
  */
 public class FileReader extends AbstractModelObject implements
 		IReader, IResourceChangeListener {
-
-	private static final String CONSOLE = FileReader.class.getSimpleName();
+	
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory.getLogger(FileReader.class);
+	
 	private Preferences prefs = ReaderPlugin.getDefault()
 	.getPluginPreferences();
 	
@@ -81,7 +85,7 @@ public class FileReader extends AbstractModelObject implements
 			try {
 				start();
 			} catch (IOException e) {
-				printToConsoleWithName("Failed to start because: " + e);
+				logger.error("Failed to start "+name, e);
 				return;
 			}
 		}else{
@@ -167,7 +171,7 @@ public class FileReader extends AbstractModelObject implements
 	 */
 	private void start() throws IOException {
 		if (transactionPublisher != null) {
-			printToConsoleWithName("Already Started ");
+			logger.info("{} is already Started ", name);
 		} else if (transactionPublisher == null) {
 			IFile templateFile = getTemplateFile();
 			
@@ -182,9 +186,8 @@ public class FileReader extends AbstractModelObject implements
 			exec.scheduleWithFixedDelay(command, 4, 
 					prefs.getInt(PreferenceConstants.P_READ_INTERVAL), 
 					TimeUnit.SECONDS);
-			printToConsoleWithName(
-					"Started monitoring "+target+" at "+
-					prefs.getInt(PreferenceConstants.P_READ_INTERVAL)+" second intervals.");
+			logger.info("{} monitoring {} at {} second intervals.", new Object[] {name, target, prefs.getInt(PreferenceConstants.P_READ_INTERVAL)});
+
 		}
 	}
 
@@ -225,7 +228,7 @@ public class FileReader extends AbstractModelObject implements
 		if (exec != null) {
 			exec.shutdownNow();
 			exec = null;
-			printToConsoleWithName("Stopped ");
+			logger.info("{} stopped ",name);
 		}
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		workspace.removeResourceChangeListener(this);
@@ -233,7 +236,7 @@ public class FileReader extends AbstractModelObject implements
 
 	private void reset() {
 		if (isRunning()) {
-			printToConsoleWithName("ReStarting");
+			logger.info("{} reStarting",name);
 			setStarted(false);
 			setStarted(true);
 		} 
@@ -241,15 +244,6 @@ public class FileReader extends AbstractModelObject implements
 
 	private boolean isRunning() {
 		return transactionPublisher != null;
-	}
-
-	private static void printToConsole(String msg) {
-		ConsoleUtil.println(CONSOLE, new Date()
-				+ "\t" + msg);
-	}
-	
-	private void printToConsoleWithName(String msg) {
-		printToConsole(name+'\t'+msg);
 	}
 
 	/**
@@ -274,7 +268,7 @@ public class FileReader extends AbstractModelObject implements
 			try {
 				transactionPublisher.init();
 			} catch (IOException e) {
-				printToConsoleWithName(e.getMessage());
+				logger.error("Could not initialize the transactionPublisher for "+name,e);
 			}
 		}
 		
