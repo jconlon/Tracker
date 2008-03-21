@@ -4,7 +4,6 @@
 package com.verticon.tracker.editor.presentation;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.ui.action.ViewerFilterAction;
@@ -15,19 +14,26 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
-import com.verticon.tracker.editor.util.ConsoleUtil;
 
 /**
  * @author jconlon
  *
  */
 public class SelectionViewerFilter extends ViewerFilterAction {
-	private static final String CONSOLE = SelectionViewerFilter.class.getSimpleName();
+	
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(SelectionViewerFilter.class);
+	
 	private static final String TARGETING_OFF = "Target Selections";
 	private static final String TARGETING_ON = "Target Selections";
 
@@ -81,7 +87,7 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 				return true;
 			}
 			Animal animal = (Animal)element;
-			printToConsole("Filtering "+animal.toString()+" Targeted animals = "+targetedAnimals.size());
+			logger.debug("Filtering {} with targeted animals ={} ",animal, targetedAnimals.size());
 			
 			return false;
 		}
@@ -93,7 +99,7 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 					return true;
 				}
 				Event event = (Event)element;
-				printToConsole("Filtering "+event.toString()+" Targeted events = "+targetedEvents.size());
+				logger.debug("Filtering {} with targeted events ={} ",event, targetedEvents.size());
 				return false;
 			}
 			
@@ -104,9 +110,6 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 	@Override
 	public synchronized void run() {
 		toggleTargeting();
-		printToConsole("run() --");
-		printToConsole("Targeting is "+targetingEnabled+" Targeted animals = "+targetedAnimals.size());
-		printToConsole("Targeted events = "+targetedEvents.size());
 		if(targetingEnabled){
 			this.setText(TARGETING_ON);
 			computeTargets();
@@ -153,7 +156,7 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 	 * parents of selected Events, and selected Events.
 	 */
 	private final void computeTargets() {
-		printToConsole("computeTargets() --");
+		logger.debug("computing targets ");
 		ISelection selection = mainViewer.getSelection();
 		clearTargets();
 		if (selection instanceof IStructuredSelection) {
@@ -174,8 +177,8 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 				}
 			}
 		}
-		printToConsole("Targeted animals = "+targetedAnimals.size());
-		printToConsole("Targeted events = "+targetedEvents.size());
+		logger.debug("Targeted animals = {}",targetedAnimals.size());
+		logger.debug("Targeted events = {}",targetedEvents.size());
 	}
 
 	/**
@@ -186,10 +189,6 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 		targetedEvents.clear();
 	}
 	
-	private static void printToConsole(String msg) {
-		ConsoleUtil.println(CONSOLE, new Date()
-				+ "\t" + msg);
-	}
 	
 	
 }

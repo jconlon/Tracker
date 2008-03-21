@@ -12,7 +12,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -127,6 +126,8 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -136,7 +137,6 @@ import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.FairRegistrationItemProvider;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
-import com.verticon.tracker.editor.util.ConsoleUtil;
 import com.verticon.tracker.editor.validation.LiveValidationContentAdapter;
 import com.verticon.tracker.emf.edit.ui.provider.FairRegistrationAdapterFactoryLableProvider;
 import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelProvider;
@@ -170,6 +170,10 @@ public class TrackerEditor
 	 */
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory.getLogger(TrackerEditor.class);
 	
 	/**
 	 * Offers a selection on a set of Animals. 
@@ -189,10 +193,6 @@ public class TrackerEditor
 	 */
 	private IQueryDataSetProvider queryDataSetProvider;
 	
-	/**
-	 * Support for logging. 
-	 */
-	private static final String CONSOLE = TrackerEditor.class.getSimpleName();
 	
 	/**
 	 * Monitors Event changes to update the eventsTableViewer
@@ -668,7 +668,7 @@ public class TrackerEditor
 			  }
 			  Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
 			  eventsTableViewerNotifier.setResource(resource);
-			  printToConsole("Loaded changed Resource "+resource);
+			  logger.debug("Loaded changed Resource "+resource);
 		}
 	}
   
@@ -2345,10 +2345,6 @@ public class TrackerEditor
 		return true;
 	}
 	
-	private static void printToConsole(String msg) {
-		ConsoleUtil.println(CONSOLE, new Date()
-				+ "\t" + msg);
-	}
 
 	public ISelection getEventSelection() {
 		return eventsTableViewer.getSelection();
