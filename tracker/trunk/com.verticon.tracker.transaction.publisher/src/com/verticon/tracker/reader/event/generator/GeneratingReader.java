@@ -253,7 +253,7 @@ public class GeneratingReader extends AbstractModelObject implements
 	 * Listen for resource changes to the template File
 	 */
 	public void resourceChanged(IResourceChangeEvent event) {
-		//we are only interested if there is a transactionPublisher
+		//we are only interested if there is a tagIdPublisher
 		if(transactionPublisher==null){
 			return;
 		}

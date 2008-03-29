@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.Hashtable;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -18,7 +21,7 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.reader.ReaderPlugin;
 
-public class EventPublisher implements ITagIdPublisher {
+public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
 
 	private Animal templateAnimal;
 
@@ -27,7 +30,7 @@ public class EventPublisher implements ITagIdPublisher {
 	/**
 	 * slf4j Logger
 	 */
-	private final Logger logger = LoggerFactory.getLogger(EventPublisher.class);
+	private static final Logger logger = LoggerFactory.getLogger(EventPublisher.class);
 	
 	public EventPublisher(IFile animalTemplateFile) throws IOException {
 		super();
@@ -46,7 +49,7 @@ public class EventPublisher implements ITagIdPublisher {
 	/* (non-Javadoc)
 	 * @see com.verticon.tracker.reader.ITransactionPublisher#init()
 	 */
-	  public void init() throws IOException {
+	  public synchronized void init() throws IOException {
 		logger.debug("Synchronizing contents of Template file: {}"
 				,animalTemplateFile.getName());
 		Resource templateResource = getResource(animalTemplateFile);
@@ -61,7 +64,7 @@ public class EventPublisher implements ITagIdPublisher {
 		templateAnimal = (Animal) templateResource.getContents().get(0);
 	}
 
-	public void publish(Long tagId) {
+	public synchronized void publish(Long tagId) {
 		for (Tag tag : templateAnimal.getTags()) {
 			tag.setId(Long.toString(tagId));
 		}
@@ -87,11 +90,37 @@ public class EventPublisher implements ITagIdPublisher {
 
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(),
 				true);
+		
+		logger.debug("Create Resource for file {} using uri {}",file,uri);
 		Resource resource = resourceSet.createResource(uri);
 		if (!resource.isLoaded()) {
 			resource.load(null);
 		}
 		return resource;
+	}
+
+
+	/**
+	 * Listen for resource changes to the template File
+	 */
+	public void resourceChanged(IResourceChangeEvent event) {
+
+		//we are only interested in POST_CHANGE events
+		if (event.getType() != IResourceChangeEvent.POST_CHANGE)
+			return;
+
+		IResourceDelta rootDelta = event.getDelta();
+		IResourceDelta templateDelta = rootDelta.findMember(animalTemplateFile.getFullPath());
+		if (templateDelta == null)
+			return;
+
+		try {
+			init();
+		} catch (IOException e) {
+			logger.error("Could not initialize the tagIdPublisher for "+animalTemplateFile,e);
+		}
+
+
 	}
 	
 }

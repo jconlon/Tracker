@@ -6,7 +6,7 @@
          <meta.schema plugin="com.verticon.tracker.transaction.publisher" id="eventPublisherWizards" name="EventPublisherWizards"/>
       </appInfo>
       <documentation>
-         This extension point is used to register Tracker Event Publisher Wizard extensions. Event publisher wizards appear as choices within the &quot;Event Publisher View Add Action&quot; and are used to create Event Publishers that will show up as rows in the Event Publisher Table View.
+         This extension point is used to register Tracker Event Reader Wizard extensions. Event reader wizards appear as choices within the &quot;Readers View Add Action&quot; and are used to create Event Readers that will show up as rows in the Readers Table View.
       </documentation>
    </annotation>
 
@@ -123,12 +123,12 @@
 &lt;p&gt;
  &lt;pre&gt;
  &lt;extension point=&quot;com.verticon.tracker.reader.readerWizards&quot;&gt;
-  &lt;wizard id= &quot;com.xyz.eventPublisherWizard1&quot;
+  &lt;wizard id= &quot;com.xyz.eventReaderWizard1&quot;
    name=&quot;XYZ Web Scraper&quot;
-   class= &quot;com.xyz.event.publisher.EventPublisherWizard1&quot;
+   class= &quot;com.xyz.event.reader.EventReaderWizard1&quot;
    icon=&quot;./icons/import1.gif&quot;&gt;
     &lt;description&gt;
-             A simple event publisher that publishes events from a ticker tape. 
+             A simple event reader that publishes events from a ticker tape. 
           &lt;/description&gt;
   &lt;/wizard&gt;
  &lt;/extension&gt;
@@ -142,7 +142,7 @@
          <meta.section type="apiInfo"/>
       </appInfo>
       <documentation>
-         Plug-ins that want to extend this extension point must implement the &lt;samp&gt;com.verticon.transaction.publisher.IPublisherWizard&lt;/samp&gt; and generate objects that implement the &lt;samp&gt;com.verticon.transaction.publisher.IPublisher&lt;/samp&gt; interface.
+         Plug-ins that want to extend this extension point must implement the &lt;samp&gt;com.verticon.tracker.reader.IReaderWizard&lt;/samp&gt; and generate objects that implement the &lt;samp&gt;com.verticon.tracker.reader.IReader&lt;/samp&gt; interface.
       </documentation>
    </annotation>
 

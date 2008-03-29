@@ -1,4 +1,4 @@
-package com.verticon.tracker.reader.preferences;
+package com.verticon.tracker.reader.event.file;
 
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IntegerFieldEditor;
@@ -28,7 +28,7 @@ public class PreferencePage
 	public PreferencePage() {
 		super(GRID);
 		setPreferenceStore(ReaderPlugin.getDefault().getPreferenceStore());
-		setDescription("Tracker Event Publisher Preferences");
+		setDescription("Tracker FileReader Preferences");
 	}
 	
 	/**
@@ -41,7 +41,7 @@ public class PreferencePage
 		
 		IntegerFieldEditor readInterval = new IntegerFieldEditor(
 				PreferenceConstants.P_READ_INTERVAL,//name
-				"&FileTailer monitoring interval. "+
+				"&FileReader monitoring interval. "+
 				"\nSeconds paused between each "+
 				"\nread of the capture file:",//lableText
 		 		getFieldEditorParent(),//parent

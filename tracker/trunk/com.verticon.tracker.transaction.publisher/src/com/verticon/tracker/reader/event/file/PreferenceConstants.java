@@ -1,4 +1,4 @@
-package com.verticon.tracker.reader.preferences;
+package com.verticon.tracker.reader.event.file;
 
 /**
  * Constant definitions for plug-in preferences

@@ -3,7 +3,6 @@
  */
 package com.verticon.tracker.reader.event.generator;
 
-import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -21,9 +20,12 @@ import com.verticon.tracker.reader.IReader;
 import com.verticon.tracker.reader.IReaderWizard;
 
 /**
- * Wizard for creating a FileTailerPublisher.
+ * Two page Wizard for creating a GeneratingReader.
  * 
- * Pages: 1. Select the file to Tail for new TagIds
+ * <nl>
+ * <li>Page to specify the time between generated events.</li>
+ * <li>Second Page to specify the file to us for generating random TagIds</li>
+ * </nl>
  * 
  * @author jconlon
  * 
@@ -43,13 +45,18 @@ public class GeneratingReaderWizard extends Wizard implements
 	 */
 	private IWorkbench workbench;
 
+		
 	/**
-	 * Page to prompt for the selection of the capture file to monitor.
+	 * First Page to specify the time between generated events.
+	 */
+	private SelectSecondsBetweenGeneration selectSecondsBetweenGenerationPage;
+	
+	/**
+	 * Second Page to prompt for the selection of the file that contains a list of 
+	 * tagIDs that will be selected and generated as tagID reads at random.
 	 */
 	private SelectFileWizardPage selectCaptureFileWizardPage;
-	
-	private SelectSecondsBetweenGeneration selectSecondsBetweenGeneration;
-	
+
 
 	/**
 	 * Sets up the workbench.
@@ -68,11 +75,12 @@ public class GeneratingReaderWizard extends Wizard implements
 		setWindowTitle(WIZARD_TITLE);
 		IEditorPart editor = workbench.getActiveWorkbenchWindow()
 				.getActivePage().getActiveEditor();
-		
-		selectSecondsBetweenGeneration = new SelectSecondsBetweenGeneration(
+		//First page
+		selectSecondsBetweenGenerationPage = new SelectSecondsBetweenGeneration(
 				"Specify the seconds between event generations");
-		addPage(selectSecondsBetweenGeneration);
+		addPage(selectSecondsBetweenGenerationPage);
 		
+		//Second page
 		selectCaptureFileWizardPage = new SelectFileWizardPage(
 				"selectACaptureFile",
 				"Select a Capture File to be monitored by the File Reader",
@@ -103,7 +111,7 @@ public class GeneratingReaderWizard extends Wizard implements
 		URI composite = null;
 		try {
 			composite = new URI("generator",
-			        u.getUserInfo(), "seconds", selectSecondsBetweenGeneration.getSecondsBetweenGenerations(),
+			        u.getUserInfo(), "seconds", selectSecondsBetweenGenerationPage.getSecondsBetweenGenerations(),
 			        u.getPath(), u.getQuery(),
 			        u.getFragment());
 		} catch (URISyntaxException e) {
