@@ -118,4 +118,10 @@ public class ReaderViewPart extends ViewPart {
 		super.dispose();
 		viewer.removeSelectionChangedListener(listener);
 	}
+	
+	public void refresh(){
+		if(viewer!=null){
+			viewer.refreshTableViewer();
+		}
+	}
 }

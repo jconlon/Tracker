@@ -373,4 +373,10 @@ public class ReaderViewer {
 		return table.getParent();
 	}
 
+	/**
+	 * Refresh the table of Readers
+	 */
+	void refreshTableViewer(){
+		tableViewer.refresh();
+	}
 }

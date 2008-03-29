@@ -1,11 +1,17 @@
 package com.verticon.tracker.reader;
 
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
+
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.event.EventAdmin;
 import org.osgi.util.tracker.ServiceTracker;
+
+import com.verticon.tracker.reader.event.connection.PublisherCompletionService;
+import com.verticon.tracker.reader.event.connection.RefreshablePublisher;
 
 
 
@@ -18,6 +24,7 @@ public class ReaderPlugin extends AbstractUIPlugin {
 	public static final String PLUGIN_ID = 
 		"com.verticon.tracker.reader";
 
+	
 	// The shared instance
 	private static ReaderPlugin plugin;
 	
@@ -33,15 +40,14 @@ public class ReaderPlugin extends AbstractUIPlugin {
 	
 	private ServiceTracker tracker;
 	
-	private String symbolicName;
 	
-	public String getSymbolicName() {
-		return symbolicName;
-	}
+	private PublisherCompletionService publisherCompletionService = null;
+	
+	private BundleContext bundleContext;
+	
+	
+	
 
-	public void setSymbolicName(String symbolicName) {
-		this.symbolicName = symbolicName;
-	}
 
 	/**
 	 * The constructor
@@ -50,6 +56,8 @@ public class ReaderPlugin extends AbstractUIPlugin {
 		plugin = this;
 	}
 
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
@@ -57,23 +65,26 @@ public class ReaderPlugin extends AbstractUIPlugin {
 	@SuppressWarnings("unchecked")
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		symbolicName = context.getBundle().getSymbolicName();
+		bundleContext = context;
 		tracker = new ServiceTracker(context, EventAdmin.class.getName(), null);
 		tracker.open();
+		publisherCompletionService = new PublisherCompletionService();
+		publisherCompletionService.start();
 		
 	}
 	
-	public EventAdmin getService(){
-		return (EventAdmin) tracker.getService();
-	}
+	
 
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
+		publisherCompletionService.stop();
+		publisherCompletionService = null;
 		tracker.close();
 		plugin = null;
+		bundleContext=null;
 		super.stop(context);
 	}
 
@@ -84,6 +95,18 @@ public class ReaderPlugin extends AbstractUIPlugin {
 	 */
 	public static ReaderPlugin getDefault() {
 		return plugin;
+	}
+	
+	public EventAdmin getService(){
+		return (EventAdmin) tracker.getService();
+	}
+	
+	public String getSymbolicName() {
+		return bundleContext.getBundle().getSymbolicName();
+	}
+	
+	public BundleContext getBundleContext() {
+		return bundleContext;
 	}
 
 	/**
@@ -97,4 +120,7 @@ public class ReaderPlugin extends AbstractUIPlugin {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
 
+	public final Future<RefreshablePublisher> submit(Callable<RefreshablePublisher> task){
+		return publisherCompletionService.submit(task);
+	}
 }

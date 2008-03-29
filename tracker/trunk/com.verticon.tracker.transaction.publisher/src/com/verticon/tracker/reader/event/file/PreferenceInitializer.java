@@ -1,4 +1,4 @@
-package com.verticon.tracker.reader.preferences;
+package com.verticon.tracker.reader.event.file;
 
 import org.eclipse.core.runtime.Preferences;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;

@@ -48,13 +48,13 @@
          point="org.eclipse.ui.preferencePages">
       <page
             category="com.verticon.tracker.prefs.view"
-            class="com.verticon.tracker.reader.preferences.PreferencePage"
-            id="com.verticon.tracker.reader.preferences.SerialPortPublisherPreferencePage"
-            name="Event Publisher"/>
+            class="com.verticon.tracker.reader.event.file.PreferencePage"
+            id="com.verticon.tracker.reader.preferences.FileReaderPreferencePage"
+            name="FileReader"/>
    </extension>
    <extension
          point="org.eclipse.core.runtime.preferences">
-      <initializer class="com.verticon.tracker.reader.preferences.PreferenceInitializer"/>
+      <initializer class="com.verticon.tracker.reader.event.file.PreferenceInitializer"/>
    </extension>
    <extension
          point="com.verticon.tracker.reader.readerWizards">

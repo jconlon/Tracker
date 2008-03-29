@@ -25,7 +25,6 @@ import com.verticon.tracker.reader.IReader;
 import com.verticon.tracker.reader.ReaderPlugin;
 import com.verticon.tracker.reader.eventadmin.EventPublisher;
 import com.verticon.tracker.reader.eventadmin.ITagIdPublisher;
-import com.verticon.tracker.reader.preferences.PreferenceConstants;
 
 /**
  * Publisher that tails a file looking for new tags being added to the end of
@@ -250,7 +249,7 @@ public class FileReader extends AbstractModelObject implements
 	 * Listen for resource changes to the template File
 	 */
 	public void resourceChanged(IResourceChangeEvent event) {
-		//we are only interested if there is a transactionPublisher
+		//we are only interested if there is a tagIdPublisher
 		if(transactionPublisher==null){
 			return;
 		}
@@ -268,7 +267,7 @@ public class FileReader extends AbstractModelObject implements
 			try {
 				transactionPublisher.init();
 			} catch (IOException e) {
-				logger.error("Could not initialize the transactionPublisher for "+name,e);
+				logger.error("Could not initialize the tagIdPublisher for "+name,e);
 			}
 		}
 		
