@@ -12,5 +12,13 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.junit;visibility:=reexport,
  org.eclipse.ocl,
- org.eclipse.ocl.ecore
+ org.eclipse.ocl.ecore,
+ com.verticon.tracker.reader.comm,
+ org.eclipse.equinox.io,
+ com.verticon.tracker.reader
 Eclipse-LazyStart: true
+Import-Package: gnu.io,
+ javax.microedition.io,
+ org.osgi.service.io;version="1.0.0",
+ org.slf4j;version="1.5.0"
+Bundle-Activator: com.verticon.tracker.tests.Activator
