@@ -4,13 +4,20 @@ import java.net.URI;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.reader.IReader;
 import com.verticon.tracker.reader.IReaderFactory;
-import com.verticon.tracker.util.TrackerLog;
 
 public class ReaderFactoryProxy implements IReaderFactory {
 
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(ReaderFactoryProxy.class);
+	
 	private static final String FACTORY_CLASS= "factory";
 	private static final String ATT_NAME = "name";
 	
@@ -39,7 +46,7 @@ public class ReaderFactoryProxy implements IReaderFactory {
 			            + factory
 			            + " in "
 			            + configElement.getDeclaringExtension().getContributor().getName();
-			      TrackerLog.logError(msg, e);
+			      logger.error(msg, e);
 			      return null;
 			}
 		}

@@ -300,15 +300,21 @@ POSSIBILITY OF SUCH DAMAGES.
        END OF TERMS AND CONDITIONS
    </license>
 
+   <includes
+         id="gnu.io.rxtx"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.transaction"/>
       <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.ui.ide"/>
       <import plugin="com.verticon.tracker"/>
       <import plugin="com.verticon.tracker.editor"/>
-      <import plugin="org.eclipse.equinox.event"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.eclipse.osgi.services"/>
+      <import plugin="slf4j.api"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="gnu.io.rxtx"/>
    </requires>
 
    <plugin
@@ -333,7 +339,14 @@ POSSIBILITY OF SUCH DAMAGES.
          unpack="false"/>
 
    <plugin
-         id="org.knopflerfish.bundle.comm-linux"
+         id="org.eclipse.equinox.io"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.equinox.util"
          download-size="0"
          install-size="0"
          version="0.0.0"
