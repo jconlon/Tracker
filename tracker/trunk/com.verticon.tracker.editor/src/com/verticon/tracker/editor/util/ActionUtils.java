@@ -51,6 +51,8 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ListDialog;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -65,7 +67,6 @@ import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.util.CommonUtilities;
-import com.verticon.tracker.util.TrackerLog;
 
 /**
  * @author jconlon
@@ -73,6 +74,11 @@ import com.verticon.tracker.util.TrackerLog;
  */
 public class ActionUtils {
 
+	/**
+	 * slf4j Logger
+	 */
+	private static final Logger logger = LoggerFactory.getLogger(ActionUtils.class);
+	
 	private static final String ADD_TEMPLATE_TO_ANIMALS_OPERATION = "Add Template to Animals Operation";
 	private static final String ADD_TEMPLATE_TO_PREMISES_OPERATION = "Add Template to Premises Operation";
 
@@ -90,9 +96,8 @@ public class ActionUtils {
 	public static final TagsBean getTagsBean(IQueryDataSetProvider editor,
 			ISelection selection) throws FileNotFoundException {
 		IResource resource = getSelectedResource(editor, selection);
-
-		TrackerLog.logInfo("Adding tags from resource "
-				+ resource.getFullPath());
+		
+		logger.info("Adding tags from resource {}", resource.getFullPath());
 		Scanner sc = null;
 		Set<Long> tagNumbers = null;
 		FileNotFoundException ex = null;
@@ -384,8 +389,7 @@ public class ActionUtils {
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 
 		if (editor == null || (!(editor instanceof TrackerEditor))) {
-			TrackerLog.logError("The active editor is not a TrackerEditor.",
-					null);
+			logger.error("The active editor is not a TrackerEditor.");
 			MessageDialog.openError(targetPart.getSite().getShell(),
 					"Failed to add tags",
 					"Could not find an active TrackerEditor ");
@@ -598,8 +602,8 @@ public class ActionUtils {
 				cal.add(Calendar.SECOND, -timeoutWindow);
 				Date subtractedDate = cal.getTime();
 				if(historicalEventDate.after(subtractedDate)){
-					TrackerLog.logInfo("Defered adding  "+eventToAdd+ 
-							" to "+animalToReceiveEvent+"  because the time of event does not exceed the duplicate event timeout "
+					logger.info("Defered adding {} to {} because the time of event does not exceed the duplicate event timeout",
+							eventToAdd, animalToReceiveEvent
 							);
 					return false;
 				}
