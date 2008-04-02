@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.reader.event.connection.ConnectionReaderTask;
-import com.verticon.tracker.reader.event.connection.RefreshablePublisher;
+import com.verticon.tracker.reader.event.connection.RefreshableReader;
 import com.verticon.tracker.reader.eventadmin.EventPublisher;
 
 /**
@@ -35,7 +35,7 @@ import com.verticon.tracker.reader.eventadmin.EventPublisher;
  * 
  */
 public abstract class AbstractConnectionReader extends AbstractModelObject
-		implements IReader, RefreshablePublisher {
+		implements IReader, RefreshableReader {
 
 	/**
 	 * Keeps track of the count of Readers so the simple class name appended
@@ -49,7 +49,7 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 	protected String template = "";
 
 	private EventPublisher tagIdPublisher = null;
-	private Future<RefreshablePublisher> futureTask = null;
+	private Future<RefreshableReader> futureTask = null;
 	
 	/**
 	 * slf4j Logger
@@ -131,7 +131,7 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 	 * 
 	 * @see com.verticon.tracker.reader.IPublisher#getDescription()
 	 */
-	public String getType() {
+	public synchronized String getType() {
 		return this.getClass().getSimpleName();
 	}
 
@@ -198,7 +198,7 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 	 * 
 	 * @throws IOException
 	 */
-	protected void start() throws IOException {
+	private void start() throws IOException {
 		if (tagIdPublisher == null) {
 			tagIdPublisher = new EventPublisher(this,getTemplateFile());
 		}
@@ -213,12 +213,12 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 	 * 
 	 * @see com.verticon.tracker.reader.event.file.FileReaderRunner
 	 */
-	protected Future<RefreshablePublisher> submitTask() {
-		Callable<RefreshablePublisher> command = new ConnectionReaderTask(this,
+	private Future<RefreshableReader> submitTask() {
+		Callable<RefreshableReader> command = new ConnectionReaderTask(this,
 				ReaderPlugin.getDefault().getBundleContext());
 
 		logger.info("{} submitting futureTask, to read TagIds from {}.", this, target);
-		Future<RefreshablePublisher> task = ReaderPlugin.getDefault().submit(
+		Future<RefreshableReader> task = ReaderPlugin.getDefault().submit(
 				command);
 
 		

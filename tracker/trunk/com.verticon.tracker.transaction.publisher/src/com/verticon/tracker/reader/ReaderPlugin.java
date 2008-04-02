@@ -3,6 +3,8 @@ package com.verticon.tracker.reader;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -11,7 +13,7 @@ import org.osgi.service.event.EventAdmin;
 import org.osgi.util.tracker.ServiceTracker;
 
 import com.verticon.tracker.reader.event.connection.ReaderCompletionService;
-import com.verticon.tracker.reader.event.connection.RefreshablePublisher;
+import com.verticon.tracker.reader.event.connection.RefreshableReader;
 
 
 
@@ -71,6 +73,7 @@ public class ReaderPlugin extends AbstractUIPlugin {
 		tracker = new ServiceTracker(context, EventAdmin.class.getName(), null);
 		tracker.open();
 		readerCompletionService = new ReaderCompletionService();
+	    
 		readerCompletionService.start();
 		
 	}
@@ -122,7 +125,12 @@ public class ReaderPlugin extends AbstractUIPlugin {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
 
-	public final Future<RefreshablePublisher> submit(Callable<RefreshablePublisher> task){
+	public final Future<RefreshableReader> submit(Callable<RefreshableReader> task){
 		return readerCompletionService.submit(task);
 	}
+	
+	public final ScheduledFuture<?> scheduleWithFixedDelay(Runnable command, int initialDelay, int delay, TimeUnit unit){
+    	return readerCompletionService.scheduleWithFixedDelay(command, initialDelay, delay, unit);
+    }
+
 }

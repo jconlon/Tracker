@@ -5,8 +5,7 @@ package com.verticon.tracker.reader.event.file;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.core.resources.IFile;
@@ -61,7 +60,7 @@ public class FileReader extends AbstractModelObject implements
 	boolean started = false;
 
 
-	private ScheduledExecutorService exec;
+	private ScheduledFuture<?> scheduledFuture = null;
 	private ITagIdPublisher transactionPublisher = null;
 
 	public FileReader(String name) {
@@ -74,11 +73,11 @@ public class FileReader extends AbstractModelObject implements
 		name=getType()+count++;
 	}
 
-	public boolean isStarted() {
+	public synchronized boolean isStarted() {
 		return started;
 	}
 
-	public void setStarted(boolean start) {
+	public synchronized void setStarted(boolean start) {
 		boolean oldValue = this.started;
 		if(start){
 			try {
@@ -99,11 +98,11 @@ public class FileReader extends AbstractModelObject implements
 	 * 
 	 * @see com.verticon.tracker.reader.IPublisher#getName()
 	 */
-	public String getName() {
+	public synchronized String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public synchronized void setName(String name) {
 		String oldValue = this.name;
 		logger.info("{} name set to {}",this, name);
 		this.name = name;
@@ -116,14 +115,8 @@ public class FileReader extends AbstractModelObject implements
 	 * 
 	 * @see com.verticon.tracker.reader.IPublisher#getDescription()
 	 */
-	public String getType() {
+	public synchronized String getType() {
 		return this.getClass().getSimpleName();
-	}
-
-	public void setType(String type) {
-		throw new UnsupportedOperationException(
-				"Setting the type is unsupported");
-
 	}
 
 	/*
@@ -131,11 +124,11 @@ public class FileReader extends AbstractModelObject implements
 	 * 
 	 * @see com.verticon.tracker.reader.IPublisher#getTemplate()
 	 */
-	public String getTemplate() {
+	public synchronized String getTemplate() {
 		return template;
 	}
 
-	public void setTemplate(String template) {
+	public synchronized void setTemplate(String template) {
 		String oldValue = this.template;
 		this.template = template;
 		firePropertyChange("template", oldValue, template);
@@ -147,11 +140,11 @@ public class FileReader extends AbstractModelObject implements
 	 * 
 	 * @see com.verticon.tracker.reader.IPublisher#getTarget()
 	 */
-	public URI getTarget() {
+	public synchronized URI getTarget() {
 		return target;
 	}
 
-	public void setTarget(URI target) {
+	public synchronized void setTarget(URI target) {
 		URI oldValue = this.target;
 		this.target = target;
 		firePropertyChange("target", oldValue, target);
@@ -181,9 +174,9 @@ public class FileReader extends AbstractModelObject implements
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			workspace.addResourceChangeListener(this);
 
-			Runnable command = new FileReaderRunner(transactionPublisher, getTargetFile());
-			exec = Executors.newScheduledThreadPool(1);
-			exec.scheduleWithFixedDelay(command, 4, 
+			Runnable command = new FileReaderRunner(this, transactionPublisher, getTargetFile());
+			
+			scheduledFuture = ReaderPlugin.getDefault().scheduleWithFixedDelay(command, 4, 
 					prefs.getInt(PreferenceConstants.P_READ_INTERVAL), 
 					TimeUnit.SECONDS);
 			logger.info("{} monitoring {} at {} second intervals.", new Object[] {this, target, prefs.getInt(PreferenceConstants.P_READ_INTERVAL)});
@@ -225,9 +218,9 @@ public class FileReader extends AbstractModelObject implements
 	 */
 	private void stop() {
 		transactionPublisher = null;
-		if (exec != null) {
-			exec.shutdownNow();
-			exec = null;
+		if (scheduledFuture != null) {
+			scheduledFuture.cancel(false);
+			scheduledFuture = null;
 			logger.info("{} stopped ",this);
 		}
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();

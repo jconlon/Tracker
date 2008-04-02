@@ -13,6 +13,7 @@ import org.eclipse.core.resources.IFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.verticon.tracker.reader.IReader;
 import com.verticon.tracker.reader.eventadmin.ITagIdPublisher;
 
 
@@ -25,11 +26,12 @@ import com.verticon.tracker.reader.eventadmin.ITagIdPublisher;
  *
  */
 public class FileReaderRunner implements Runnable {
-	final Logger logger = LoggerFactory.getLogger(FileReaderRunner.class);
+	private final Logger logger = LoggerFactory.getLogger(FileReaderRunner.class);
 	private final ITagIdPublisher tagIdPublisher ;
 	private final File file ;
 	private final Set<Long> tagNumbersToSend = new HashSet<Long>();
 	private final Set<Long> tagNumbersSent = new HashSet<Long>();
+	private final IReader reader;
 	
 	
 	/**
@@ -39,10 +41,10 @@ public class FileReaderRunner implements Runnable {
 	 * @param transactionProcessor to send Long numbers to.
 	 * @param file to Scan
 	 */
-	public FileReaderRunner(ITagIdPublisher transactionProcessor, IFile file) {
+	public FileReaderRunner(IReader reader,ITagIdPublisher transactionProcessor, IFile file) {
 		this.tagIdPublisher=transactionProcessor;
 		this.file=new File(file.getLocationURI());
-		logger.debug("{} created", this);
+		this.reader=reader;
 	}
 
 	
@@ -51,6 +53,7 @@ public class FileReaderRunner implements Runnable {
 	 * tagNumbersToSend.
 	 */
 	public void run() {
+		logger.debug("{} scanning for new TagIds in {}",reader,file.getAbsolutePath());
 		tagNumbersToSend.clear();
 		Scanner sc = null;
 		Long tag = null;
@@ -65,7 +68,7 @@ public class FileReaderRunner implements Runnable {
 			}
 
 		} catch (FileNotFoundException e) {
-			logger.error(this+" could not find the "+file.getAbsolutePath()+" tags file.", e);
+			logger.error(reader+" could not find "+file.getAbsolutePath()+" tags file.", e);
 
 
 		} finally {

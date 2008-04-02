@@ -11,6 +11,8 @@ import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import org.eclipse.core.runtime.IStatus;
@@ -39,27 +41,34 @@ final public class ReaderCompletionService {
 			.getLogger(ReaderCompletionService.class);
 	
 	private  ExecutorService executorService = null;
-	private  CompletionService<RefreshablePublisher> completionService = null;
+	private  CompletionService<RefreshableReader> completionService = null;
+	private  ScheduledExecutorService scheduler = null;
 
 	
-    public synchronized final Future<RefreshablePublisher> submit(Callable<RefreshablePublisher> task){
+    public synchronized final Future<RefreshableReader> submit(Callable<RefreshableReader> task){
 		return completionService.submit(task);
 	}
+    
+    public synchronized final ScheduledFuture<?> scheduleWithFixedDelay(Runnable command, int initialDelay, int delay, TimeUnit unit){
+    	return scheduler.scheduleWithFixedDelay(command, initialDelay, delay, unit);
+    }
 
 	public synchronized final void start() {
 		logger.debug("Background task completion service starting.");
 		
 		if(executorService==null || executorService.isShutdown()){
 			executorService = Executors.newCachedThreadPool();
-			completionService = new ExecutorCompletionService<RefreshablePublisher>(
+			completionService = new ExecutorCompletionService<RefreshableReader>(
 					executorService);
 		}
 		executorService.execute(runner);
+	    scheduler =  Executors.newScheduledThreadPool(1);
 	}
 
 	public final synchronized boolean stop() throws InterruptedException {
 		logger.info("Background task completion service shutingdown all background tasks and the service.");
 		executorService.shutdownNow();
+		scheduler.shutdown();
 		return executorService.awaitTermination(3, TimeUnit.SECONDS);
 		
 	}
@@ -79,9 +88,9 @@ final public class ReaderCompletionService {
 		}
 	};
 
-	private final void processFutures(Future<RefreshablePublisher> futurePub)
+	private final void processFutures(Future<RefreshableReader> futurePub)
 			throws InterruptedException {
-		RefreshablePublisher pub = null;
+		RefreshableReader pub = null;
 
 		try {
 		    pub = futurePub.get();
@@ -115,7 +124,7 @@ final public class ReaderCompletionService {
 		});
 	}
 
-	private final void refresh(final RefreshablePublisher pub) {
+	private final void refresh(final RefreshableReader pub) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				pub.refresh();

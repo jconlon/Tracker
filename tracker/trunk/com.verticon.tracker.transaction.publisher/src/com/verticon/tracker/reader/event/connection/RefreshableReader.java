@@ -11,7 +11,7 @@ package com.verticon.tracker.reader.event.connection;
  * @author jconlon
  *
  */
-public interface RefreshablePublisher {
+public interface RefreshableReader {
 	void refresh();
 	void publish(Long tag);
 }
