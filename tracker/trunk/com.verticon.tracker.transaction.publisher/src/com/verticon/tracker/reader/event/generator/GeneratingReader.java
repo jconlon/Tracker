@@ -175,6 +175,7 @@ public class GeneratingReader extends AbstractModelObject implements
 			workspace.addResourceChangeListener(this);
 
 			GeneratingReaderRunner command = new GeneratingReaderRunner(
+					this,
 					transactionPublisher,
 					getTargetFile());
 			scheduledFuture = ReaderPlugin.getDefault().scheduleWithFixedDelay(
