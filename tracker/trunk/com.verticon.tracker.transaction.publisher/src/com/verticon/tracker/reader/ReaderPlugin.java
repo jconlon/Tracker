@@ -10,7 +10,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.service.event.EventAdmin;
 import org.osgi.util.tracker.ServiceTracker;
 
-import com.verticon.tracker.reader.event.connection.PublisherCompletionService;
+import com.verticon.tracker.reader.event.connection.ReaderCompletionService;
 import com.verticon.tracker.reader.event.connection.RefreshablePublisher;
 
 
@@ -38,10 +38,12 @@ public class ReaderPlugin extends AbstractUIPlugin {
 	public static final String EVENT_PROPERTY_ANIMAL = 
 		"com.verticon.tracker.animal";
 	
+	public static final String EVENT_PROPERTY_READER_NAME = "com.verticon.tracker.reader.name";
+	
 	private ServiceTracker tracker;
 	
 	
-	private PublisherCompletionService publisherCompletionService = null;
+	private ReaderCompletionService readerCompletionService = null;
 	
 	private BundleContext bundleContext;
 	
@@ -68,8 +70,8 @@ public class ReaderPlugin extends AbstractUIPlugin {
 		bundleContext = context;
 		tracker = new ServiceTracker(context, EventAdmin.class.getName(), null);
 		tracker.open();
-		publisherCompletionService = new PublisherCompletionService();
-		publisherCompletionService.start();
+		readerCompletionService = new ReaderCompletionService();
+		readerCompletionService.start();
 		
 	}
 	
@@ -80,8 +82,8 @@ public class ReaderPlugin extends AbstractUIPlugin {
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
-		publisherCompletionService.stop();
-		publisherCompletionService = null;
+		readerCompletionService.stop();
+		readerCompletionService = null;
 		tracker.close();
 		plugin = null;
 		bundleContext=null;
@@ -121,6 +123,6 @@ public class ReaderPlugin extends AbstractUIPlugin {
 	}
 
 	public final Future<RefreshablePublisher> submit(Callable<RefreshablePublisher> task){
-		return publisherCompletionService.submit(task);
+		return readerCompletionService.submit(task);
 	}
 }

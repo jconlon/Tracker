@@ -3,6 +3,7 @@
  */
 package com.verticon.tracker.reader;
 
+import java.beans.PropertyChangeListener;
 import java.net.URI;
 
 /**
@@ -54,5 +55,15 @@ public interface IReader {
 	 * @return the simplified class name of the IPublisher
 	 */
 	String getType();
+	
+	public void addPropertyChangeListener(PropertyChangeListener listener) ;
+
+	public void addPropertyChangeListener(String propertyName,
+			PropertyChangeListener listener) ;
+
+	public void removePropertyChangeListener(PropertyChangeListener listener) ;
+
+	public void removePropertyChangeListener(String propertyName,
+			PropertyChangeListener listener) ;
 
 }

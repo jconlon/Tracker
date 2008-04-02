@@ -57,11 +57,15 @@ public class ConsoleAppender extends AppenderSkeleton {
 	@Override
 	protected void append(final LoggingEvent event){
 		
-		PlatformUI.getWorkbench().getDisplay().asyncExec (new Runnable () {
-	      public void run () {
-	    	  appendInternal(event);
-	      }
-	   });
+		try {
+			PlatformUI.getWorkbench().getDisplay().asyncExec (new Runnable () {
+			  public void run () {
+				  appendInternal(event);
+			  }
+			});
+		} catch (RuntimeException e) {
+			//ignore
+		}
 	
 	}
 

@@ -49,9 +49,8 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 	protected String template = "";
 
 	private EventPublisher tagIdPublisher = null;
-	private Future<RefreshablePublisher> task = null;
-
-	boolean started = false;
+	private Future<RefreshablePublisher> futureTask = null;
+	
 	/**
 	 * slf4j Logger
 	 */
@@ -64,21 +63,29 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 		super();
 		name = getType() + count.incrementAndGet();
 	}
-
+	
 	/**
-	 * The reader is considered to be started if there is a task, and that task
-	 * is not done or canceled.
+	 * Construct and create a default name.
 	 */
-	public synchronized boolean isStarted() {
-		return started;
-//		if (task == null || task.isDone() || task.isCancelled()) {
-//			return false;
-//		}
-//		return true;
+	public AbstractConnectionReader(String name) {
+		super();
+		this.name=name;
 	}
 
 	/**
-	 * Change the state of the Reader.
+	 * The reader is considered to be started if there is a futureTask, and that futureTask
+	 * is not done or canceled.
+	 */
+	public synchronized boolean isStarted() {
+		if (futureTask == null || futureTask.isDone() || futureTask.isCancelled()) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * SetStart will start or stop the reader,
+	 * effectively changing the state of the Reader.
 	 * 
 	 * @param start
 	 *            true starts the Reader, false stops it.
@@ -90,20 +97,17 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 		boolean oldValue = isStarted();
 		if (start) {
 			try {
-				logger.debug("Starting {}",name);
+				logger.debug("{} starting",this);
 				start();
 			} catch (IOException e) {
-				logger.error("Failed to start " + name, e);
+				logger.error(toString()+" failed to start", e);
 				return;
 			}
 		} else {
+			logger.debug("{} user requested cancellation of connection to {}",this,target);
 			stop();
 		}
-//		if (isStarted() != oldValue) {
-//			firePropertyChange("started", oldValue, isStarted());
-//		}
-		this.started = start;
-		firePropertyChange("started", oldValue, started);
+		firePropertyChange("started", oldValue, !oldValue);
 	}
 
 	/*
@@ -117,6 +121,7 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 
 	public synchronized void setName(String name) {
 		String oldValue = this.name;
+		logger.info("{} name set to {}",this, name);
 		this.name = name;
 		firePropertyChange("name", oldValue, name);
 	}
@@ -165,44 +170,42 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 
 	@Override
 	public String toString() {
-		return getType() + ' ' + getName();
+		return getType() + ':' + getName();
 	}
 
 	/**
-	 * Called by the task thread to publish a tag.
+	 * Called by the futureTask thread to publish a tag.
 	 * 
 	 * @param tag
 	 */
 	public synchronized void publish(Long tag) {
+		if(tag < 100000000000000L){
+			logger.warn("{} received a partial tag {}",this,tag );
+			return;
+		}
 		tagIdPublisher.publish(tag);
 	}
 
 	public synchronized void refresh() {
-		boolean oldValue = isStarted();
-		if (task == null || task.isDone() || task.isCancelled()) {
-			started= false;
-		}else{
-			started=true;
-		}
-		if (isStarted() != oldValue) {
-			firePropertyChange("started", oldValue, isStarted());
-		}
+		firePropertyChange("started", null, isStarted());
+		logger.debug("{} refreshed state, isStarted={}",
+				this,isStarted());
 	}
 
 	/**
-	 * Initialize and submit the background task to the
+	 * Initialize and submit the background futureTask to the
 	 * completion service.
 	 * 
 	 * @throws IOException
 	 */
 	protected void start() throws IOException {
 		if (tagIdPublisher == null) {
-			tagIdPublisher = new EventPublisher(getTemplateFile());
+			tagIdPublisher = new EventPublisher(this,getTemplateFile());
 		}
 		tagIdPublisher.init();
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		workspace.addResourceChangeListener(tagIdPublisher);
-		submitTask();
+		this.futureTask=submitTask();
 	}
 
 	/**
@@ -214,21 +217,23 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 		Callable<RefreshablePublisher> command = new ConnectionReaderTask(this,
 				ReaderPlugin.getDefault().getBundleContext());
 
+		logger.info("{} submitting futureTask, to read TagIds from {}.", this, target);
 		Future<RefreshablePublisher> task = ReaderPlugin.getDefault().submit(
 				command);
 
-		logger.info("Submitted {} task, to read TagIds from {}.", name, target);
+		
+		logger.debug("{} submitted futureTask, to read TagIds from {}.", this, target);
 		return task;
 
 	}
 
 	/**
-	 * Stop the background task.
+	 * Stop the background futureTask.
 	 */
 	private void stop() {
-		if (task != null) {
-			task.cancel(true);
-			logger.info("{} stopped ", name);
+		if (futureTask != null) {
+			futureTask.cancel(true);
+			logger.info("{} canceled connnection to {}", this,target);
 		}
 
 		if (tagIdPublisher != null) {
@@ -240,7 +245,7 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 
 	private void reset() {
 		if (isRunning()) {
-			logger.info("{} reStarting", name);
+			logger.info("{} reStarting", this);
 			setStarted(false);
 			setStarted(true);
 		}

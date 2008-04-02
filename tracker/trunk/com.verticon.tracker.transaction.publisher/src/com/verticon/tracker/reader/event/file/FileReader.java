@@ -105,6 +105,7 @@ public class FileReader extends AbstractModelObject implements
 
 	public void setName(String name) {
 		String oldValue = this.name;
+		logger.info("{} name set to {}",this, name);
 		this.name = name;
 		firePropertyChange("name", oldValue, name);
 
@@ -159,7 +160,7 @@ public class FileReader extends AbstractModelObject implements
 
 	@Override
 	public String toString() {
-		return getType() + ' ' + getName();
+		return getType() + ':' + getName();
 	}
 
 	/**
@@ -170,11 +171,11 @@ public class FileReader extends AbstractModelObject implements
 	 */
 	private void start() throws IOException {
 		if (transactionPublisher != null) {
-			logger.info("{} is already Started ", name);
+			logger.info("{} is already Started ", this);
 		} else if (transactionPublisher == null) {
 			IFile templateFile = getTemplateFile();
 			
-			transactionPublisher = new EventPublisher( templateFile);
+			transactionPublisher = new EventPublisher(this, templateFile);
 			transactionPublisher.init();
 
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
@@ -185,7 +186,7 @@ public class FileReader extends AbstractModelObject implements
 			exec.scheduleWithFixedDelay(command, 4, 
 					prefs.getInt(PreferenceConstants.P_READ_INTERVAL), 
 					TimeUnit.SECONDS);
-			logger.info("{} monitoring {} at {} second intervals.", new Object[] {name, target, prefs.getInt(PreferenceConstants.P_READ_INTERVAL)});
+			logger.info("{} monitoring {} at {} second intervals.", new Object[] {this, target, prefs.getInt(PreferenceConstants.P_READ_INTERVAL)});
 
 		}
 	}
@@ -227,7 +228,7 @@ public class FileReader extends AbstractModelObject implements
 		if (exec != null) {
 			exec.shutdownNow();
 			exec = null;
-			logger.info("{} stopped ",name);
+			logger.info("{} stopped ",this);
 		}
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		workspace.removeResourceChangeListener(this);
@@ -235,7 +236,7 @@ public class FileReader extends AbstractModelObject implements
 
 	private void reset() {
 		if (isRunning()) {
-			logger.info("{} reStarting",name);
+			logger.info("{} reStarting",this);
 			setStarted(false);
 			setStarted(true);
 		} 
@@ -267,7 +268,7 @@ public class FileReader extends AbstractModelObject implements
 			try {
 				transactionPublisher.init();
 			} catch (IOException e) {
-				logger.error("Could not initialize the tagIdPublisher for "+name,e);
+				logger.error(this+" could not initialize the tagIdPublisher",e);
 			}
 		}
 		

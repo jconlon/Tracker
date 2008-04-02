@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Tag;
+import com.verticon.tracker.reader.IReader;
 import com.verticon.tracker.reader.ReaderPlugin;
 
 public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
@@ -27,13 +28,16 @@ public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
 
 	private final IFile animalTemplateFile;
 	
+	private final IReader reader;
+	
 	/**
 	 * slf4j Logger
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(EventPublisher.class);
 	
-	public EventPublisher(IFile animalTemplateFile) throws IOException {
+	public EventPublisher(IReader name, IFile animalTemplateFile) throws IOException {
 		super();
+		this.reader=name;
 		this.animalTemplateFile = animalTemplateFile;
 		Resource templateResource = getResource(animalTemplateFile);
 		if (templateResource.getContents().isEmpty()) {
@@ -50,8 +54,8 @@ public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
 	 * @see com.verticon.tracker.reader.ITransactionPublisher#init()
 	 */
 	  public synchronized void init() throws IOException {
-		logger.debug("Synchronizing contents of Template file: {}"
-				,animalTemplateFile.getName());
+		logger.debug("{} synchronizing contents of template file: {}"
+				,reader, animalTemplateFile.getName());
 		Resource templateResource = getResource(animalTemplateFile);
 		if (templateResource.getContents().isEmpty()) {
 			throw new IOException("File Resource is empty.");
@@ -71,6 +75,7 @@ public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
 		Hashtable<String, Object> table = new Hashtable<String, Object>();
 		table.put(ReaderPlugin.EVENT_PROPERTY_ANIMAL, templateAnimal);
 		table.put(Constants.BUNDLE_SYMBOLICNAME, ReaderPlugin.getDefault().getSymbolicName());
+		table.put(ReaderPlugin.EVENT_PROPERTY_READER_NAME, reader.toString());
 		
 		EventAdmin ea = ReaderPlugin.getDefault().getService();
 		
@@ -79,7 +84,7 @@ public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
 					new Event(
 							ReaderPlugin.TOPIC_ANIMAL, table));
 		}else{
-			logger.warn("Failed to find EventAdmin service");
+			logger.warn("{} failed to find EventAdmin service",reader);
 		}
 	}
 
@@ -91,7 +96,6 @@ public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(),
 				true);
 		
-		logger.debug("Create Resource for file {} using uri {}",file,uri);
 		Resource resource = resourceSet.createResource(uri);
 		if (!resource.isLoaded()) {
 			resource.load(null);
@@ -117,7 +121,7 @@ public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
 		try {
 			init();
 		} catch (IOException e) {
-			logger.error("Could not initialize the tagIdPublisher for "+animalTemplateFile,e);
+			logger.error(reader+" could not initialize the tagIdPublisher for "+animalTemplateFile,e);
 		}
 
 

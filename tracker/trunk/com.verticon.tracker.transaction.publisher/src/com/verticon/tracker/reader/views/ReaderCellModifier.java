@@ -103,6 +103,6 @@ public class ReaderCellModifier implements ICellModifier {
 				break;
 			default :
 			}
-		readerViewer.getReaderViewModel().readererChanged(reader);
+//		readerViewer.getReaderViewModel().readererChanged(reader);
 	}
 }

@@ -15,10 +15,10 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl.ecore,
  com.verticon.tracker.reader.comm,
  org.eclipse.equinox.io,
- com.verticon.tracker.reader
+ com.verticon.tracker.reader,
+ slf4j.api
 Eclipse-LazyStart: true
 Import-Package: gnu.io,
  javax.microedition.io,
- org.osgi.service.io;version="1.0.0",
- org.slf4j;version="1.5.0"
+ org.osgi.service.io;version="1.0.0"
 Bundle-Activator: com.verticon.tracker.tests.Activator

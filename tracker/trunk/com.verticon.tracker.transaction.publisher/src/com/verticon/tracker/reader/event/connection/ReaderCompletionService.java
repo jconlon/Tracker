@@ -4,6 +4,7 @@
 package com.verticon.tracker.reader.event.connection;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletionService;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorCompletionService;
@@ -20,6 +21,8 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.reader.views.ReaderViewPart;
 
@@ -27,8 +30,14 @@ import com.verticon.tracker.reader.views.ReaderViewPart;
  * @author jconlon
  * 
  */
-final public class PublisherCompletionService {
+final public class ReaderCompletionService {
 
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(ReaderCompletionService.class);
+	
 	private  ExecutorService executorService = null;
 	private  CompletionService<RefreshablePublisher> completionService = null;
 
@@ -38,6 +47,8 @@ final public class PublisherCompletionService {
 	}
 
 	public synchronized final void start() {
+		logger.debug("Background task completion service starting.");
+		
 		if(executorService==null || executorService.isShutdown()){
 			executorService = Executors.newCachedThreadPool();
 			completionService = new ExecutorCompletionService<RefreshablePublisher>(
@@ -47,13 +58,16 @@ final public class PublisherCompletionService {
 	}
 
 	public final synchronized boolean stop() throws InterruptedException {
+		logger.info("Background task completion service shutingdown all background tasks and the service.");
 		executorService.shutdownNow();
 		return executorService.awaitTermination(3, TimeUnit.SECONDS);
 		
 	}
+	
 
 	private Runnable runner = new Runnable() {
 		public void run() {
+			logger.info("Background task completion service started.");
 			try {
 				while (true) {
 					processFutures(completionService.take());
@@ -61,30 +75,39 @@ final public class PublisherCompletionService {
 			} catch (InterruptedException ex) {
 				Thread.currentThread().interrupt();// reset inturuption
 			}
+			logger.info("Background task completion service finished.");
 		}
 	};
 
 	private final void processFutures(Future<RefreshablePublisher> futurePub)
 			throws InterruptedException {
+		RefreshablePublisher pub = null;
+
 		try {
-			RefreshablePublisher pub = futurePub.get();
+		    pub = futurePub.get();
 			refresh(pub);
 		} catch (ExecutionException e) {
 			Throwable cause = e.getCause();
+			logger.error(
+				"Background reader task failed. "+
+				cause.getClass().getSimpleName()+' '+cause.getMessage());
 			showErrorDialog(cause);
+		} catch (CancellationException e){
+			logger.debug(
+				"Background task completion service removed a canceled reader task.");
 		}
 
 	}
 
 	private final void showErrorDialog(Throwable cause) {
 		final IStatus status = new Status(Status.ERROR,
-				"com.verticon.tracker.reader", "Task failed.", cause);
+				"com.verticon.tracker.reader", cause.getClass().getSimpleName(), cause);
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				// Display the dialog
 				ErrorDialog.openError(Display.getCurrent().getActiveShell(),
-						"Task Processing Failure",
-						"Background task failed to execute.", status);
+						"Reader Processing Failure",
+						"Background reader task failed to execute.", status);
 
 				refreshView();
 
