@@ -10,9 +10,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.eclipse.core.resources.IFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.verticon.tracker.reader.IReader;
 import com.verticon.tracker.reader.eventadmin.ITagIdPublisher;
-import com.verticon.tracker.util.TrackerLog;
 
 /**
  * Runnable that scans a file for Long numbers and randomly 
@@ -25,10 +27,17 @@ import com.verticon.tracker.util.TrackerLog;
  */
 public class GeneratingReaderRunner implements Runnable {
 
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(GeneratingReaderRunner.class);
 	private final ITagIdPublisher tagIDPublisher ;
 	private final File file ;
 	
 	private final List<Long> cache = new ArrayList<Long>();
+	
+	private final IReader reader;
 	
 	
 	/**
@@ -38,10 +47,10 @@ public class GeneratingReaderRunner implements Runnable {
 	 * @param transactionProcessor to send Long numbers to.
 	 * @param file to Scan
 	 */
-	public GeneratingReaderRunner(ITagIdPublisher transactionProcessor, IFile file) {
+	public GeneratingReaderRunner(IReader reader, ITagIdPublisher transactionProcessor, IFile file) {
 		this.tagIDPublisher=transactionProcessor;
+		this.reader = reader;
 		this.file=new File(file.getLocationURI());
-		TrackerLog.logInfo("Created "+this.getClass().getSimpleName());
 	}
 
 	
@@ -74,7 +83,7 @@ public class GeneratingReaderRunner implements Runnable {
 			}
 
 		} catch (FileNotFoundException e) {
-			TrackerLog.logError("Could not find the tags file.", e);
+			logger.error(reader+" could not find the tags file.", e);
 
 
 		} finally {
@@ -88,8 +97,8 @@ public class GeneratingReaderRunner implements Runnable {
 	private void sendARandomTag(){
 		int index = (int) (Math.random() * cache.size());
 		Long tag = cache.get(index);
-		TrackerLog.logInfo("Sending "+ tag +" index "+index+
-				" out of "+ cache.size() +" cached tags.");
+		logger.info("{} sending {} which is #{} out of {} cached tags.",
+				new Object[]{tag, index, cache.size()});
 		tagIDPublisher.publish(tag);
 	}
 }

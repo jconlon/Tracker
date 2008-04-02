@@ -28,13 +28,14 @@ import org.eclipse.core.runtime.InvalidRegistryObjectException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.XMLMemento;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.reader.AbstractReader;
 import com.verticon.tracker.reader.IReader;
 import com.verticon.tracker.reader.IReaderFactory;
 import com.verticon.tracker.reader.ReaderPlugin;
 import com.verticon.tracker.reader.wizards.ReaderFactoryProxy;
-import com.verticon.tracker.util.TrackerLog;
 
 /**
  * The domain model for IReaders. Data is persisted in the
@@ -43,6 +44,12 @@ import com.verticon.tracker.util.TrackerLog;
  */
 
 public class ReaderViewModel implements PropertyChangeListener{
+	
+	/**
+	 * slf4j Logger
+	 */
+	private static final Logger logger = LoggerFactory
+			.getLogger(ReaderViewModel.class);
 	
 	private static final String TAG_NAME = "Name";
 	private static final String TAG_TARGET = "Target";
@@ -147,16 +154,16 @@ public class ReaderViewModel implements PropertyChangeListener{
 			fileReader = new FileReader(getReadersFile());
 			loadReaders(XMLMemento.createReadRoot(fileReader));
 		} catch (FileNotFoundException e) {
-			// Ignored... no Favorites items exist yet.
+			// Ignored... no items exist yet.
 		} catch (Exception e) {
 			// Log the exception and move on.
-			TrackerLog.logError(e);
+			logger.error("Failed to load readers", e);
 		} finally {
 			try {
 				if (fileReader != null)
 					fileReader.close();
 			} catch (IOException e) {
-				TrackerLog.logError(e);
+				logger.error("Failed to close the fileReader",e);
 			}
 		}
 	}
@@ -211,13 +218,13 @@ public class ReaderViewModel implements PropertyChangeListener{
 			writer = new FileWriter(getReadersFile());
 			memento.save(writer);
 		} catch (IOException e) {
-			TrackerLog.logError(e);
+			logger.error("Failed to save readers",e);
 		} finally {
 			try {
 				if (writer != null)
 					writer.close();
 			} catch (IOException e) {
-				TrackerLog.logError(e);
+				logger.error("Failed to close the fileWriter",e);
 			}
 		}
 	}
@@ -278,7 +285,7 @@ public class ReaderViewModel implements PropertyChangeListener{
 		            + " in "
 		            + configElement.getDeclaringExtension().getContributor().getName();
 		           
-		      TrackerLog.logError(msg, e);
+		      logger.error(msg, e);
 		      return null;
 		   }
 	}
