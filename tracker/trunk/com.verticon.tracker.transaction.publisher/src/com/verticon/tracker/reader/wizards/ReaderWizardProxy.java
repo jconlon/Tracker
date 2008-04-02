@@ -13,10 +13,11 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.reader.IReader;
 import com.verticon.tracker.reader.IReaderWizard;
-import com.verticon.tracker.util.TrackerLog;
 
 /**
  * @author jconlon
@@ -83,7 +84,12 @@ public class ReaderWizardProxy implements IReaderWizard {
 			            + name
 			            + " in "
 			            + configElement.getDeclaringExtension().getContributor().getName();
-			      TrackerLog.logError(msg, e);
+			      /**
+				 * slf4j Logger
+				 */
+				Logger logger = LoggerFactory
+						.getLogger(ReaderWizardProxy.class);
+			      logger.error(msg, e);
 			      return;
 			}
 		}

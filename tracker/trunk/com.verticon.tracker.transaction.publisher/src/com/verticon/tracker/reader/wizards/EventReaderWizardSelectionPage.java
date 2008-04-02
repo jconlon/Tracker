@@ -1,7 +1,5 @@
 package com.verticon.tracker.reader.wizards;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,10 +30,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.IWorkbench;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.reader.IReaderWizard;
 import com.verticon.tracker.reader.ReaderPlugin;
-import com.verticon.tracker.util.TrackerLog;
 
 /**
  * A WizardPage that nests a set of IWizardPublisher that are created from the extension point 
@@ -59,6 +58,8 @@ import com.verticon.tracker.util.TrackerLog;
  *
  */
 public class EventReaderWizardSelectionPage extends WizardSelectionPage {
+	
+	
 	
 	private TableViewer tableViewer;
 	private IWorkbench workbench;
@@ -232,7 +233,9 @@ public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 		            + " in "
 		            + configElement.getDeclaringExtension().getContributor().getName();
 		           
-		      TrackerLog.logError(msg, e);
+		      Logger logger = LoggerFactory
+				.getLogger(EventReaderWizardSelectionPage.class);
+		      logger.error(msg, e);
 		      return null;
 		   }
 	}
