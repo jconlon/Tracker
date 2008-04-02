@@ -22,13 +22,13 @@ import com.verticon.tracker.reader.AbstractConnectionReader;
  * @author jconlon
  * 
  */
-public class ConnectionReaderTask implements Callable<RefreshablePublisher> {
+public class ConnectionReaderTask implements Callable<RefreshableReader> {
 
 	private static final int SLEEP_MILS = 100;
 	final Logger logger = LoggerFactory.getLogger(ConnectionReaderTask.class);
 	private final String target;
 	private final BundleContext bundleContext;
-	private final RefreshablePublisher reader;
+	private final RefreshableReader reader;
 	private final StringBuilder builder = new StringBuilder();
 
 	/**
@@ -51,7 +51,7 @@ public class ConnectionReaderTask implements Callable<RefreshablePublisher> {
 	 * Call that reads tagIds from the target connection. Can be canceled
 	 * with a thread interruption.
 	 */
-	public RefreshablePublisher call() throws Exception {
+	public RefreshableReader call() throws Exception {
 		logger.debug("{} opening background connection to {}",reader,target);
 		ConnectorService cs = getConnectorService();
 		InputConnection connection = (InputConnection)cs.open(target, ConnectorService.READ);
