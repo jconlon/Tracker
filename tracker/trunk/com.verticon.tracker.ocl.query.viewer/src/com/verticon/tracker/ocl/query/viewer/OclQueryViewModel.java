@@ -13,8 +13,10 @@ import java.util.Set;
 
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.XMLMemento;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.verticon.tracker.util.TrackerLog;
+
 
 /**
  * Model for IOclQuery Objects.
@@ -23,6 +25,11 @@ import com.verticon.tracker.util.TrackerLog;
  * 
  */
 public class OclQueryViewModel {
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(OclQueryViewModel.class);
 	private static final String NEW_QUERY = "New Query";
 	private static final String TAG_NAME = "name";
 	private static final String TAG_TYPE = "type";
@@ -125,13 +132,13 @@ public class OclQueryViewModel {
 			// Ignored... no items exist yet.
 		} catch (Exception e) {
 			// Log the exception and move on.
-			TrackerLog.logError(e);
+			logger.error("Failed to load the queries",e);
 		} finally {
 			try {
 				if (reader != null)
 					reader.close();
 			} catch (IOException e) {
-				TrackerLog.logError(e);
+				logger.error("Failed to close the FileReader",e);
 			}
 		}
 	}
@@ -166,14 +173,14 @@ public class OclQueryViewModel {
 			writer = new FileWriter(getQueriesFile());
 			memento.save(writer);
 		} catch (IOException e) {
-			TrackerLog.logError(e);// Comment this out if a test app is
+			logger.error("Failed to save the queries",e);
 									// launched
 		} finally {
 			try {
 				if (writer != null)
 					writer.close();
 			} catch (IOException e) {
-				TrackerLog.logError(e);
+				logger.error("Failed to close the fileWriter",e);
 			}
 		}
 	}
