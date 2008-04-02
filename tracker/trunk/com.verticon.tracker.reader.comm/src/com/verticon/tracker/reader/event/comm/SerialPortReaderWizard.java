@@ -6,10 +6,7 @@ import java.net.URISyntaxException;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IWorkbench;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.verticon.tracker.connector.comm.CommReaderPlugin;
 import com.verticon.tracker.reader.IReader;
 import com.verticon.tracker.reader.IReaderWizard;
 
@@ -26,12 +23,6 @@ import com.verticon.tracker.reader.IReaderWizard;
  */
 public class SerialPortReaderWizard extends Wizard implements IReaderWizard {
 
-	/**
-	 * slf4j Logger
-	 */
-	private final Logger logger = LoggerFactory
-			.getLogger(SerialPortReaderWizard.class);
-	
 	private static final String WIZARD_TITLE = "Add a SerialPortReader";
 	
 	

@@ -8,7 +8,6 @@ import java.io.IOException;
 
 import javax.microedition.io.Connection;
 
-import org.osgi.framework.BundleContext;
 import org.osgi.service.io.ConnectionFactory;
 import org.osgi.service.io.ConnectorService;
 
@@ -23,24 +22,7 @@ public class ConnectionFactoryImpl implements ConnectionFactory {
 	public ConnectionFactoryImpl() {
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
-	 */
-	public void start(BundleContext context) throws Exception {
-		
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
-	 */
-	public void stop(BundleContext context) throws Exception {
-		
-	}
-
+	
 
 	/**
 	 * Create a new <code>Connection</code> object for a comm specified URI.

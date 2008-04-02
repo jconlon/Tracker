@@ -9,8 +9,7 @@ public class SerialPortReaderFactory implements IReaderFactory {
 
 	public IReader instance(String name, String type, String template,
 			URI target) {
-		SerialPortReader reader = new SerialPortReader();
-		reader.setName(name);
+		SerialPortReader reader = new SerialPortReader(name);
 		reader.setTarget(target);
 		reader.setTemplate(template);
 		return reader;

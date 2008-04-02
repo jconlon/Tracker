@@ -6,16 +6,25 @@ import gnu.io.PortInUseException;
 import gnu.io.SerialPort;
 import gnu.io.UnsupportedCommOperationException;
 
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
-import javax.microedition.io.InputConnection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+/**
+ * Base class for 
+ * @author jconlon
+ *
+ */
 public abstract class AbstractSerialPortConnection {
 
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(AbstractSerialPortConnection.class);
 	protected String uri;
 	protected boolean timeouts;
 	protected  SerialPortParmsBean parms;
@@ -39,7 +48,18 @@ public abstract class AbstractSerialPortConnection {
 	}
 	
 	public void close() throws IOException {
-		serialPort.close();
+		logger.debug("{} closing serialPort",uri);
+//				
+//		if(Thread.currentThread().isInterrupted()){
+//			Thread.interrupted();
+//			serialPort.close();
+//			Thread.currentThread().interrupt();
+//		}else{
+			serialPort.close();//This prints a stacktrace due to RxTx but it can't be helped in this release
+//		}
+//			
+
+		logger.debug("{} closed serialPort",uri);
 	}
 
 }
