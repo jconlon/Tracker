@@ -8,6 +8,8 @@
 
 package com.verticon.tracker.reader.views;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -40,8 +42,8 @@ import com.verticon.tracker.util.TrackerLog;
  * 
  */
 
-public class ReaderViewModel {
-
+public class ReaderViewModel implements PropertyChangeListener{
+	
 	private static final String TAG_NAME = "Name";
 	private static final String TAG_TARGET = "Target";
 	private static final String TAG_READERS = "Readers";
@@ -51,7 +53,7 @@ public class ReaderViewModel {
 
 	private List<IReader> readers;
 
-	private Set<IReaderModelListener> changeListeners = new HashSet<IReaderModelListener>();
+	private Set<IReaderModelListener> readerModelListeners = new HashSet<IReaderModelListener>();
 	
 	private List<IReaderFactory> factories = new ArrayList<IReaderFactory>();
 
@@ -85,20 +87,21 @@ public class ReaderViewModel {
 	public void addReader() {
 		IReader task = new AbstractReader("New dummy");
 		readers.add(readers.size(), task);
-		Iterator<IReaderModelListener> iterator = changeListeners.iterator();
+		Iterator<IReaderModelListener> iterator = readerModelListeners.iterator();
 		while (iterator.hasNext())
 			iterator.next().addReader(task);
 	}
 
 	/**
-	 * Add a new task to the collection of tasks
+	 * Add a new reader to the collection of readers
 	 */
-	public void addReader(IReader publisher) {
-		readers.add(readers.size(), publisher);
-		Iterator<IReaderModelListener> iterator = changeListeners.iterator();
+	public void addReader(IReader reader) {
+		readers.add(readers.size(), reader);
+		Iterator<IReaderModelListener> iterator = readerModelListeners.iterator();
 		while (iterator.hasNext()) {
-			iterator.next().addReader(publisher);
+			iterator.next().addReader(reader);
 		}
+		reader.addPropertyChangeListener(this);
 		saveReaders();
 	}
 
@@ -107,36 +110,28 @@ public class ReaderViewModel {
 	 */
 	public void removeReader(IReader reader) {
 		readers.remove(reader);
-		Iterator<IReaderModelListener> iterator = changeListeners.iterator();
+		Iterator<IReaderModelListener> iterator = readerModelListeners.iterator();
 		while (iterator.hasNext()) {
 			iterator.next().removeReader(reader);
 		}
+		reader.removePropertyChangeListener(this);
 		saveReaders();
 	}
 
-	/**
-	 * @param reader
-	 */
-	public void readererChanged(IReader reader) {
-		Iterator<IReaderModelListener> iterator = changeListeners.iterator();
-		while (iterator.hasNext()) {
-			iterator.next().updateReader(reader);
-		}
-		saveReaders();
-	}
+	
 
 	/**
 	 * @param viewer
 	 */
 	public void removeChangeListener(IReaderModelListener viewer) {
-		changeListeners.remove(viewer);
+		readerModelListeners.remove(viewer);
 	}
 
 	/**
 	 * @param viewer
 	 */
 	public void addChangeListener(IReaderModelListener viewer) {
-		changeListeners.add(viewer);
+		readerModelListeners.add(viewer);
 	}
 
 	// /////////////////////////////////////////////////////////////////////////
@@ -147,10 +142,10 @@ public class ReaderViewModel {
 
 	private void loadReaders() {
 		readers = new ArrayList<IReader>();
-		FileReader reader = null;
+		FileReader fileReader = null;
 		try {
-			reader = new FileReader(getReadersFile());
-			loadReaders(XMLMemento.createReadRoot(reader));
+			fileReader = new FileReader(getReadersFile());
+			loadReaders(XMLMemento.createReadRoot(fileReader));
 		} catch (FileNotFoundException e) {
 			// Ignored... no Favorites items exist yet.
 		} catch (Exception e) {
@@ -158,8 +153,8 @@ public class ReaderViewModel {
 			TrackerLog.logError(e);
 		} finally {
 			try {
-				if (reader != null)
-					reader.close();
+				if (fileReader != null)
+					fileReader.close();
 			} catch (IOException e) {
 				TrackerLog.logError(e);
 			}
@@ -169,12 +164,14 @@ public class ReaderViewModel {
 	private void loadReaders(XMLMemento memento) {
 		IMemento[] children = memento.getChildren(TAG_READER);
 		for (int i = 0; i < children.length; i++) {
-			IReader item = newReaderFor(children[i].getString(TAG_NAME),
+			IReader reader = newReaderFor(children[i].getString(TAG_NAME),
 					children[i].getString(TAG_TYPE), children[i]
 							.getString(TAG_TEMPLATE), children[i]
 							.getString(TAG_TARGET));
-			if (item != null)
-				readers.add(item);
+			if (reader != null){
+//				readers.add(item);
+				addReader( reader);
+			}
 		}
 	}
 
@@ -285,4 +282,21 @@ public class ReaderViewModel {
 		      return null;
 		   }
 	}
+
+	/**
+	 * Implements PropertyChangeListener to listen to changes on the Readers and
+	 * communicate to the list of readerModelListeners about the changed Reader.
+	 */
+	public void propertyChange(PropertyChangeEvent evt) {
+		
+		IReader reader = (IReader)evt.getSource();
+//		logger.debug("Property {} changed on Reader {}",evt.getPropertyName(), reader);
+		Iterator<IReaderModelListener> iterator = readerModelListeners.iterator();
+		while (iterator.hasNext()) {
+			iterator.next().updateReader(reader);
+		}
+		saveReaders();
+	}
+	
+	
 }

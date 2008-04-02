@@ -42,7 +42,7 @@ public class FileReaderRunner implements Runnable {
 	public FileReaderRunner(ITagIdPublisher transactionProcessor, IFile file) {
 		this.tagIdPublisher=transactionProcessor;
 		this.file=new File(file.getLocationURI());
-		logger.debug("Created {}", this.getClass().getSimpleName());
+		logger.debug("{} created", this);
 	}
 
 	
@@ -65,7 +65,7 @@ public class FileReaderRunner implements Runnable {
 			}
 
 		} catch (FileNotFoundException e) {
-			logger.error("Could not find the tags file.", e);
+			logger.error(this+" could not find the "+file.getAbsolutePath()+" tags file.", e);
 
 
 		} finally {

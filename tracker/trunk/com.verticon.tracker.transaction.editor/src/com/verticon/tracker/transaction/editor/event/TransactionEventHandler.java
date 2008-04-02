@@ -48,10 +48,14 @@ public class TransactionEventHandler implements EventHandler {
 		}
 		Animal templateAnimal = (Animal)event.getProperty(
 				"com.verticon.tracker.animal");
+		
+		String readerName = (String)event.getProperty("com.verticon.tracker.reader.name");
+		
 		if(templateAnimal ==null){
+			
 			return;
 		}
-		publish( domain,  templateAnimal);
+		publish(readerName, domain,  templateAnimal);
 	}
 	
 	/**
@@ -59,27 +63,27 @@ public class TransactionEventHandler implements EventHandler {
 	 * @param domain
 	 * @param templateAnimal
 	 */
-	private void publish(TransactionalEditingDomain domain, Animal templateAnimal) {
+	private void publish(String readerName, TransactionalEditingDomain domain, Animal templateAnimal) {
 		ResourceSet rs = domain.getResourceSet();
 		EList<Resource> resources = rs.getResources();
 		for (Resource resource : resources) {
 			if (resources.size() > 1) {
 				logger.debug("Processing {}",resource.toString());
 			}
-			process(domain, resource, templateAnimal);
+			process(readerName, domain, resource, templateAnimal);
 
 		}
 	}
 	
-	private void process(final TransactionalEditingDomain domain, final Resource resource, final Animal templateAnimal) {
+	private void process(final String readerName, final TransactionalEditingDomain domain, final Resource resource, final Animal templateAnimal) {
 		domain.getCommandStack().execute(new RecordingCommand(domain) {
 			protected void doExecute() {
 				if (resource.getContents().get(0) instanceof Premises) {
 					Premises premises = (Premises) resource.getContents()
 							.get(0);
-					addTemplateEventsToAnimalInPremises(templateAnimal, premises);
+					addTemplateEventsToAnimalInPremises(readerName, templateAnimal, premises);
 				} else {
-					logger.warn("Resource {} contained no premises to process",resource.toString());
+					logger.warn("{} resource {} contained no premises to process",readerName, resource.toString());
 				}
 			}
 		});
@@ -95,6 +99,7 @@ public class TransactionEventHandler implements EventHandler {
 	 */
 	@SuppressWarnings("unchecked")
 	private void addTemplateEventsToAnimalInPremises(
+			 String readerName,
 			 Animal templateAnimal,
 			Premises activePremises) {
 		Animal animal = CommonUtilities.findOrCreateAnimal(templateAnimal.getId().toString(),
@@ -102,10 +107,10 @@ public class TransactionEventHandler implements EventHandler {
 		Collection<com.verticon.tracker.Event> events = 
 			copyValidEvents(templateAnimal.allEvents(), animal);
 		for (com.verticon.tracker.Event event : events) {
-			logger.debug("Added {}, at time {}, to animal {}, ", 
+			logger.debug("{} added {}, to animal {}, ", 
 					new Object[]{
-						simpleName( event), 
-						event.getDateTime(), 
+						readerName,
+						simpleName( event),  
 						animal.getId()});
 			
 			Tag tag = animal.activeTag();

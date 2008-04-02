@@ -26,6 +26,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.reader.IReader;
 
@@ -49,6 +51,11 @@ import com.verticon.tracker.reader.IReader;
 
 public class ReaderViewer {
 
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory.getLogger(ReaderViewer.class);
+	
 	private Table table;
 	private TableViewer tableViewer;
 
@@ -86,7 +93,7 @@ public class ReaderViewer {
 	}
 
 	/**
-	 * Main method to launch the window
+	 * Main method to test the window
 	 */
 	public static void main(String[] args) {
 
@@ -99,20 +106,20 @@ public class ReaderViewer {
 
 		// Create a composite to hold the children
 		Composite composite = new Composite(shell, SWT.NONE);
-		final ReaderViewer tableViewerExample = new ReaderViewer(composite);
+		final ReaderViewer readerViewer = new ReaderViewer(composite);
 
-		tableViewerExample.getControl().addDisposeListener(
+		readerViewer.getControl().addDisposeListener(
 				new DisposeListener() {
 
 					public void widgetDisposed(DisposeEvent e) {
-						tableViewerExample.dispose();
+						readerViewer.dispose();
 					}
 
 				});
 
 		// Ask the shell to display its content
 		shell.open();
-		tableViewerExample.run(shell);
+		readerViewer.run(shell);
 	}
 
 	/**
@@ -297,8 +304,9 @@ public class ReaderViewer {
 		 * 
 		 * @see ITaskListViewer#addTask(ExampleTask)
 		 */
-		public void addReader(IReader task) {
-			tableViewer.add(task);
+		public void addReader(IReader reader){
+			logger.debug("Adding reader {}",reader);
+			tableViewer.add(reader);
 		}
 
 		/*
@@ -306,8 +314,9 @@ public class ReaderViewer {
 		 * 
 		 * @see ITaskListViewer#removeTask(ExampleTask)
 		 */
-		public void removeReader(IReader task) {
-			tableViewer.remove(task);
+		public void removeReader(IReader reader) {
+			logger.debug("Removing reader {}",reader);
+			tableViewer.remove(reader);
 		}
 
 		/*
@@ -315,8 +324,9 @@ public class ReaderViewer {
 		 * 
 		 * @see ITaskListViewer#updateTask(ExampleTask)
 		 */
-		public void updateReader(IReader task) {
-			tableViewer.update(task, null);
+		public void updateReader(IReader reader) {
+//			logger.debug("Updating reader {}",reader);
+			tableViewer.update(reader, null);
 		}
 	}
 

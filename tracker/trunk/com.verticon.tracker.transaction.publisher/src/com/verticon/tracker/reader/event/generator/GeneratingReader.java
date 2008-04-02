@@ -77,11 +77,12 @@ public class GeneratingReader extends AbstractModelObject implements
 
 	public void setStarted(boolean start) {
 		boolean oldValue = this.started;
+		logger.info("{} name set to {}",this, name);
 		if(start){
 			try {
 				start();
 			} catch (IOException e) {
-				logger.error("Failed to start the reader", e);
+				logger.error(this+ " failed to start", e);
 				return;
 			}
 		}else{
@@ -156,7 +157,7 @@ public class GeneratingReader extends AbstractModelObject implements
 
 	@Override
 	public String toString() {
-		return getType() + ' ' + getName();
+		return getType() + ':' + getName();
 	}
 
 	/**
@@ -171,13 +172,14 @@ public class GeneratingReader extends AbstractModelObject implements
 		} else if (transactionPublisher == null) {
 			IFile templateFile = getTemplateFile();
 			
-			transactionPublisher = new EventPublisher( templateFile);
+			transactionPublisher = new EventPublisher(this, templateFile);
 			transactionPublisher.init();
 
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			workspace.addResourceChangeListener(this);
 
-			GeneratingReaderRunner command = new GeneratingReaderRunner(transactionPublisher,
+			GeneratingReaderRunner command = new GeneratingReaderRunner(
+					transactionPublisher,
 					getTargetFile());
 			exec = Executors.newScheduledThreadPool(1);
 			exec.scheduleWithFixedDelay(
@@ -186,8 +188,8 @@ public class GeneratingReader extends AbstractModelObject implements
 					getSecondsBetweenGeneratedEvents(), 
 					TimeUnit.SECONDS
 			);
-			logger.info("Generating events with target {} at {} second intervals.",
-					target, getSecondsBetweenGeneratedEvents());
+			logger.info("{} scheduled event generation {}.",this,
+					target);
 		}
 	}
 	
@@ -230,7 +232,7 @@ public class GeneratingReader extends AbstractModelObject implements
 		if (exec != null) {
 			exec.shutdownNow();
 			exec = null;
-			logger.info("Stopped ");
+			logger.info("{} stopped generating events {}", this, target);
 		}
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		workspace.removeResourceChangeListener(this);
@@ -238,7 +240,7 @@ public class GeneratingReader extends AbstractModelObject implements
 
 	private void reset() {
 		if (isRunning()) {
-			logger.info("ReStarting {}", name);
+			logger.info("{} reStarting", this);
 			setStarted(false);
 			setStarted(true);
 		} 
@@ -271,7 +273,7 @@ public class GeneratingReader extends AbstractModelObject implements
 			try {
 				transactionPublisher.init();
 			} catch (IOException e) {
-				logger.error("Failed to initialize "+name,e);
+				logger.error(this+" failed to initialize",e);
 			}
 		}
 		
