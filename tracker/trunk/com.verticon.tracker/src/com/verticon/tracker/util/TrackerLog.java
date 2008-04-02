@@ -8,6 +8,7 @@ import com.verticon.tracker.TrackerPlugin;
 
 /**
  * The logger of convenience for the Favorites plug-in.
+ * @deprecated
  */
 public class TrackerLog {
    /**
@@ -15,6 +16,7 @@ public class TrackerLog {
     * 
     * @param message, a human-readable message, localized to the
     *           current locale.
+    * @deprecated
     */
    public static void logInfo(String message) {
       log(IStatus.INFO, IStatus.OK, message, null);
@@ -24,6 +26,7 @@ public class TrackerLog {
     * Log the specified error.
     * 
     * @param exception, a low-level exception.
+    * @deprecated
     */
    public static void logError(Throwable exception) {
       logError("Unexpected Exception", exception);
@@ -36,6 +39,7 @@ public class TrackerLog {
     *           current locale.
     * @param exception, a low-level exception, or <code>null</code>
     *           if not applicable.
+    *           @deprecated
     */
    public static void logError(String message, Throwable exception) {
       log(IStatus.ERROR, IStatus.OK, message, exception);
@@ -57,6 +61,7 @@ public class TrackerLog {
     *           current locale.
     * @param exception, a low-level exception, or <code>null</code>
     *           if not applicable.
+    * @deprecated
     */
    public static void log(int severity, int code, String message,
          Throwable exception) {
@@ -81,6 +86,7 @@ public class TrackerLog {
     * @param exception, a low-level exception, or <code>null</code>
     *           if not applicable.
     * @return, the status object (not <code>null</code>).
+    * @deprecated
     */
    public static IStatus createStatus(int severity, int code,
          String message, Throwable exception) {
@@ -93,6 +99,7 @@ public class TrackerLog {
     * Log the given status.
     * 
     * @param status, the status to log.
+    * @deprecated
     */
    public static void log(IStatus status) {
 	   TrackerPlugin.getDefault().getLog().log(status);
