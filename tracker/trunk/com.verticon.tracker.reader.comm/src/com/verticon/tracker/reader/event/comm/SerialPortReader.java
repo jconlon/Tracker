@@ -11,6 +11,10 @@ import com.verticon.tracker.reader.AbstractConnectionReader;
  */
 public class SerialPortReader extends AbstractConnectionReader {
 
+	public SerialPortReader(String name) {
+		super(name);
+	}
+	
 	public SerialPortReader() {
 		super();
 	}
