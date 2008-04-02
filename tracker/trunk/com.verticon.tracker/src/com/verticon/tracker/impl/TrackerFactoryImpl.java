@@ -6,18 +6,20 @@
  */
 package com.verticon.tracker.impl;
 
-import com.verticon.tracker.*;
 import java.net.URI;
 import java.util.Date;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import com.verticon.tracker.AnimalMissing;
+import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BirthDefect;
 import com.verticon.tracker.Birthing;
@@ -30,8 +32,12 @@ import com.verticon.tracker.Caprine;
 import com.verticon.tracker.DairyBreed;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Equine;
+import com.verticon.tracker.EventAttributeSchema;
+import com.verticon.tracker.EventDataType;
+import com.verticon.tracker.EventSchema;
 import com.verticon.tracker.Exported;
 import com.verticon.tracker.FairRegistration;
+import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.GoatBreed;
 import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.HorseBreed;
@@ -49,6 +55,7 @@ import com.verticon.tracker.OneToTen;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
+import com.verticon.tracker.Schema;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.SheepBreed;
 import com.verticon.tracker.Sighting;
@@ -65,10 +72,8 @@ import com.verticon.tracker.Treatment;
 import com.verticon.tracker.TreatmentMethod;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
-import java.util.Map;
 import com.verticon.tracker.util.CheckEmail;
 import com.verticon.tracker.util.CheckISO7064Mod37_36;
-import com.verticon.tracker.util.TrackerLog;
 
 /**
  * <!-- begin-user-doc -->
@@ -99,7 +104,14 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			}
 		}
 		catch (Exception exception) {
-			TrackerLog.logError(exception);
+			
+			/**
+			 * slf4j Logger
+			 */
+			Logger logger = LoggerFactory
+					.getLogger(TrackerFactoryImpl.class);
+			
+			logger.error("Failed to initialize TrackerFactory",exception);
 		}
 		return new TrackerFactoryImpl();
 	}
