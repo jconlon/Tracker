@@ -87,6 +87,7 @@ public interface GenericEvent extends Event {
 	 * @model eventAttributeMapType="com.verticon.tracker.EventAttribute<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	EventAttributeSchema findSchema(Entry eventAttribute);
 
 } // GenericEvent
