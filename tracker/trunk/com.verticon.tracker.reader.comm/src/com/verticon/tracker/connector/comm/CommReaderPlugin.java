@@ -15,7 +15,8 @@ public class CommReaderPlugin extends AbstractUIPlugin {
 	
 	public static final String GNU_IO_RXTX_SERIAL_PORTS = "gnu.io.rxtx.SerialPorts";
 
-	private static final String COMM_SCHEMA = "comm";
+	//Schema provided for connections
+	private static final String SCHEMA = "comm";
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "com.verticon.tracker.connector.comm";
@@ -23,6 +24,7 @@ public class CommReaderPlugin extends AbstractUIPlugin {
 	// The shared instance
 	private static CommReaderPlugin plugin;
 	
+	// The ConnectionFactory Service implementation
 	private ConnectionFactoryImpl connectionFactory;
 
 	/**
@@ -43,7 +45,7 @@ public class CommReaderPlugin extends AbstractUIPlugin {
 		plugin = this;
 		configureValidSerialPorts();
 		Hashtable properties = new Hashtable();
-		properties.put(ConnectionFactory.IO_SCHEME, new String[] { COMM_SCHEMA });
+		properties.put(ConnectionFactory.IO_SCHEME, new String[] { SCHEMA });
 		connectionFactory = new ConnectionFactoryImpl();
 		context.registerService(ConnectionFactory.class.getName(), connectionFactory,
 				properties);
