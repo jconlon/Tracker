@@ -50,6 +50,9 @@ final public class ReaderCompletionService {
 	}
     
     public synchronized final ScheduledFuture<?> scheduleWithFixedDelay(Runnable command, int initialDelay, int delay, TimeUnit unit){
+    	if(delay==0){
+    		throw new IllegalArgumentException("The delay argument cannot be zero");
+    	}
     	return scheduler.scheduleWithFixedDelay(command, initialDelay, delay, unit);
     }
 
