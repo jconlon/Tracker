@@ -17,14 +17,6 @@ import org.osgi.service.io.ConnectorService;
 public class ConnectionFactoryImpl implements ConnectionFactory {
 
 	/**
-	 * The constructor
-	 */
-	public ConnectionFactoryImpl() {
-	}
-
-	
-
-	/**
 	 * Create a new <code>Connection</code> object for a comm specified URI.
 	 * uri will look like: comm://COM1;baudrate=9600;databits=9
 	 * 
