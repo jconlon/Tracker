@@ -36,16 +36,14 @@ import com.verticon.tracker.TrackerPackage;
 /**
  * This is the item provider adapter for a {@link com.verticon.tracker.Animal} object.
  * <!-- begin-user-doc -->
- * Note that this class will have to be UN-Not-ed inorder to generate additional properties, 
- * but then the interface ITableItemLabelProvider, will have to be put back in to pick up the 
- * functionality.
- * TODO always un NOT this class if animal changes are made, but be sure to add the ITableItemLabelProvider and NOT it back.
+ * Adds support for Tables
+ * @implements ITableItemLabelProvider
  * <!-- end-user-doc -->
- * @generated NOT
+ * @generated
  */
 public class AnimalItemProvider
 	extends ItemProviderAdapter
-	implements ITableItemLabelProvider, IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+	implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
