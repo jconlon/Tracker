@@ -176,8 +176,10 @@ public class ReaderViewModel implements PropertyChangeListener{
 							.getString(TAG_TEMPLATE), children[i]
 							.getString(TAG_TARGET));
 			if (reader != null){
-//				readers.add(item);
 				addReader( reader);
+			}else{
+				logger.error("Found no factory to create reader type {}", 
+						children[i].getString(TAG_NAME));
 			}
 		}
 	}
