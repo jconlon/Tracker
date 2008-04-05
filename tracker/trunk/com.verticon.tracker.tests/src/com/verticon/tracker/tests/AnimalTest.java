@@ -380,6 +380,57 @@ public abstract class AnimalTest extends TestCase {
 		tag.getEvents().add(we3);
 		assertEquals(new Integer(10), animal.getWeightGainPerDay());
 	}
+	
+	public void testGetWeightGainPerDayWithNulls() {
+		Animal animal = getFixture();
+		assertNull("No weight on animal", animal.getWeight());
+		
+		Tag tag = TrackerFactory.eINSTANCE.createTag();
+		animal.getTags().add(tag);
+		//First weighIn 10 days ago and 100 lbs
+		WeighIn we = TrackerFactory.eINSTANCE.createWeighIn();
+		we.setComments("First");
+		Calendar firstWeighInDate = Calendar.getInstance();
+		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
+		we.setDateTime(
+				firstWeighInDate.getTime());
+		we.setWeight(100);
+		tag.getEvents().add(we);
+		
+		assertNull( animal.getWeightGainPerDay());
+		
+		//Second weighIn today 250 lbs
+		WeighIn we1 = TrackerFactory.eINSTANCE.createWeighIn();
+		we1.setComments("Null added");
+		Calendar knullWeighInDate = Calendar.getInstance();
+		we1.setDateTime(
+				knullWeighInDate.getTime());
+		tag.getEvents().add(we1);
+		assertNull( animal.getWeightGainPerDay());
+		
+		
+		//Second weighIn today 250 lbs
+		WeighIn we2 = TrackerFactory.eINSTANCE.createWeighIn();
+		we2.setComments("Second");
+		Calendar secondWeighInDate = Calendar.getInstance();
+		we2.setDateTime(
+				secondWeighInDate.getTime());
+		we2.setWeight(250);
+		tag.getEvents().add(we2);
+		assertEquals(new Integer(15), animal.getWeightGainPerDay());
+		
+		//Third weighIn today 350 lbs
+		WeighIn we3 = TrackerFactory.eINSTANCE.createWeighIn();
+		we3.setComments("Third");
+		we3.setWeight(350);
+		Calendar thirdWeighInDate = Calendar.getInstance();
+		thirdWeighInDate.add(Calendar.DAY_OF_MONTH, 10);
+		we3.setDateTime(
+				thirdWeighInDate.getTime());
+		tag.getEvents().add(we3);
+		assertEquals(new Integer(10), animal.getWeightGainPerDay());
+	}
+
 
 	/**
 	 * Tests the '{@link com.verticon.tracker.Animal#allEvents() <em>All Events</em>}' operation.
