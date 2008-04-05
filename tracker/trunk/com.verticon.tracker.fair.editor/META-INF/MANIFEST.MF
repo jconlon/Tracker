@@ -15,5 +15,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.edit.ui;visibility:=reexport,
  org.eclipse.ui.ide;visibility:=reexport,
- com.verticon.tracker.edit;visibility:=reexport
+ com.verticon.tracker.edit;visibility:=reexport,
+ com.verticon.tracker.editor
 Eclipse-LazyStart: true

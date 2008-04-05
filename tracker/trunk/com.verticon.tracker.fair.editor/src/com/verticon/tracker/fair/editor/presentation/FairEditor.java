@@ -8,7 +8,6 @@ package com.verticon.tracker.fair.editor.presentation;
 
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -27,22 +26,56 @@ import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-
+import org.eclipse.emf.common.command.BasicCommandStack;
+import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CommandStack;
+import org.eclipse.emf.common.command.CommandStackListener;
+import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.ui.MarkerHelper;
+import org.eclipse.emf.common.ui.ViewerPane;
+import org.eclipse.emf.common.ui.editor.ProblemEditorPart;
+import org.eclipse.emf.common.ui.viewer.IViewerProvider;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EContentAdapter;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
+import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
+import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.provider.ItemProvider;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
+import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
+import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
+import org.eclipse.emf.edit.ui.celleditor.AdapterFactoryTreeEditor;
+import org.eclipse.emf.edit.ui.dnd.EditingDomainViewerDropAdapter;
+import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
+import org.eclipse.emf.edit.ui.dnd.ViewerDragAdapter;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emf.edit.ui.provider.UnwrappingSelectionProvider;
+import org.eclipse.emf.edit.ui.util.EditUIMarkerHelper;
+import org.eclipse.emf.edit.ui.util.EditUIUtil;
+import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
-
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -56,28 +89,20 @@ import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
-
 import org.eclipse.swt.SWT;
-
 import org.eclipse.swt.custom.CTabFolder;
-
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
-
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
-
 import org.eclipse.swt.graphics.Point;
-
 import org.eclipse.swt.layout.FillLayout;
-
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
-
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -85,87 +110,37 @@ import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
-
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.SaveAsDialog;
-
 import org.eclipse.ui.ide.IGotoMarker;
-
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.MultiPageEditorPart;
-
 import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
-import org.eclipse.emf.common.command.BasicCommandStack;
-import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.common.command.CommandStack;
-import org.eclipse.emf.common.command.CommandStackListener;
-
-import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.ui.MarkerHelper;
-import org.eclipse.emf.common.ui.ViewerPane;
-
-import org.eclipse.emf.common.ui.editor.ProblemEditorPart;
-
-import org.eclipse.emf.common.ui.viewer.IViewerProvider;
-
-import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.URI;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EValidator;
-
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-
-import org.eclipse.emf.ecore.util.EContentAdapter;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
-import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
-import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.edit.domain.IEditingDomainProvider;
-
-import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
-import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
-
-import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
-
-import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
-
-import org.eclipse.emf.edit.ui.celleditor.AdapterFactoryTreeEditor;
-
-import org.eclipse.emf.edit.ui.dnd.EditingDomainViewerDropAdapter;
-import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
-import org.eclipse.emf.edit.ui.dnd.ViewerDragAdapter;
-
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.edit.ui.provider.UnwrappingSelectionProvider;
-
-import org.eclipse.emf.edit.ui.util.EditUIMarkerHelper;
-import org.eclipse.emf.edit.ui.util.EditUIUtil;
-
-import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
-
-import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
-
+import com.verticon.tracker.Animal;
+import com.verticon.tracker.Event;
+import com.verticon.tracker.Premises;
+import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
-
-import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
+import com.verticon.tracker.editor.presentation.EventsTableViewerNotifier;
+import com.verticon.tracker.editor.presentation.TrackerTableEditorUtils;
+import com.verticon.tracker.fair.Fair;
+import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
 
 
 /**
  * This is an example of a Fair model editor.
  * <!-- begin-user-doc -->
+ * This editor differs from the generated EMF implementation in the following ways:
+ * <ul>
+ *   <li>adds Animals and an Events table</li>
+ * </ul>
  * <!-- end-user-doc -->
  * @generated
  */
@@ -218,6 +193,25 @@ public class FairEditor
 	 * @generated
 	 */
 	protected TreeViewer contentOutlineViewer;
+	
+	/**
+	 * Events Table Viewer
+	 * @generated NOT
+	 */
+	protected TableViewer eventsTableViewer;
+	
+	/**
+	 * Monitors Event changes to update the eventsTableViewer
+	 * @generated NOT
+	 */
+	private EventsTableViewerNotifier eventsTableViewerNotifier;
+	
+
+	/**
+	 * Animals Table Viewer
+	 * @generated NOT
+	 */
+	protected TableViewer animalsTableViewer;
 
 	/**
 	 * This is the property sheet page.
@@ -583,7 +577,7 @@ public class FairEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void handleChangedResources() {
+	protected void handleChangedResourcesGen() {
 		if (!changedResources.isEmpty() && (!isDirty() || handleDirtyConflict())) {
 			editingDomain.getCommandStack().flush();
 
@@ -603,6 +597,28 @@ public class FairEditor
 			}
 			updateProblemIndication = true;
 			updateProblemIndication();
+		}
+	}
+	
+	/**
+	 * Handles what to do with changed resources on activation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	protected void handleChangedResources() {
+		boolean reload = !changedResources.isEmpty() && (!isDirty() || handleDirtyConflict());
+		handleChangedResourcesGen();
+		if (reload) {
+			  Object rootObject = getRoot();
+			  if ((rootObject instanceof Fair) && (((Fair)rootObject).getPremises()!=null))
+			  {
+				animalsTableViewer.setInput(((Fair)rootObject).getPremises());
+				eventsTableViewer.setInput(((Fair)rootObject).getPremises());
+			  }
+			  Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
+			  eventsTableViewerNotifier.setResource(resource);
+//			  logger.debug("Loaded changed Resource "+resource);
 		}
 	}
   
@@ -1000,15 +1016,306 @@ public class FairEditor
 			return Diagnostic.OK_INSTANCE;
 		}
 	}
+	
+	/**
+	 * This is the method used by the framework to install your own controls.
+	 * <!-- begin-user-doc -->
+	 * Added Events, and Animals tables. Removed Tree Tables.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public void createPages() {
+		// Creates the model from the editor input
+		//
+		createModel();
 
+		// Only creates the other pages if there is something that can be edited
+		//
+		if (!getEditingDomain().getResourceSet().getResources().isEmpty() &&
+				!((Resource)getEditingDomain().getResourceSet().getResources().get(0)).getContents().isEmpty()) {
+
+			createSelectionTreeViewer(getString("_UI_SelectionPage_label"));
+
+			createListViewer(getString("_UI_ListPage_label"));
+
+			createEventsTableViewer(getString("_UI_EventsTablePage_label"));
+
+			createAnimalsTableViewer(getString("_UI_AnimalsTablePage_label"));
+	
+
+			setActivePage(0);
+		}
+
+		// Ensures that this editor will only display the page's tab
+		// area if there are more than one page
+		//
+		getContainer().addControlListener
+			(new ControlAdapter() {
+				boolean guard = false;
+				public void controlResized(ControlEvent event) {
+					if (!guard) {
+						guard = true;
+						hideTabs();
+						guard = false;
+					}
+				}
+			 });
+
+		updateProblemIndication();
+	}
+	
+	/**
+	 * 
+	 */
+	private void createListViewer(String pageName) {
+		ViewerPane viewerPane =
+			new ViewerPane(getSite().getPage(), FairEditor.this) {
+				public Viewer createViewer(Composite composite) {
+					return new ListViewer(composite);
+				}
+				public void requestActivation() {
+					super.requestActivation();
+					setCurrentViewerPane(this);
+				}
+			};
+		viewerPane.createControl(getContainer());
+		listViewer = (ListViewer)viewerPane.getViewer();
+		listViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
+//		listViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, listViewer));
+		listViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+
+		createContextMenuFor(listViewer);
+		int pageIndex = addPage(viewerPane.getControl());
+		setPageText(pageIndex, pageName);
+	}
+	
+	/**
+	 * 
+	 */
+	private void createSelectionTreeViewer(String pageName ) {
+		ViewerPane viewerPane =
+			new ViewerPane(getSite().getPage(), FairEditor.this) {
+				public Viewer createViewer(Composite composite) {
+					Tree tree = new Tree(composite, SWT.MULTI);
+					TreeViewer newTreeViewer = new TreeViewer(tree);
+					return newTreeViewer;
+				}
+				public void requestActivation() {
+					super.requestActivation();
+					setCurrentViewerPane(this);
+				}
+			};
+		viewerPane.createControl(getContainer());
+
+		selectionViewer = (TreeViewer)viewerPane.getViewer();
+		selectionViewer.setContentProvider(
+				new AdapterFactoryContentProvider(adapterFactory){
+
+					@Override
+					public void inputChanged(Viewer viewer, Object oldInput,
+							Object newInput) {
+						
+						super.inputChanged(viewer, oldInput, newInput);
+					}}
+				
+		);
+		selectionViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+		  
+//		selectionViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, selectionViewer));
+		//Changed to show the Premises as the root
+				selectionViewer.setInput(editingDomain.getResourceSet());
+				viewerPane.setTitle(editingDomain.getResourceSet());
+//		ResourceSet resourceSet = editingDomain.getResourceSet();
+//		Resource resource = (Resource)resourceSet.getResources().get(0);
+//		selectionViewer.setInput(resource);
+//		viewerPane.setTitle(resource);
+
+		new AdapterFactoryTreeEditor(selectionViewer.getTree(), adapterFactory);
+
+		createContextMenuFor(selectionViewer);
+		int pageIndex = addPage(viewerPane.getControl());
+		setPageText(pageIndex,pageName );
+	}
+	
+	/**
+	 * Events Table
+	 */
+	private void createEventsTableViewer(String tableName) {
+		ViewerPane viewerPane =
+			new ViewerPane(getSite().getPage(), FairEditor.this) {
+			public Viewer createViewer(Composite composite) {
+				return new TableViewer(composite);
+			}
+			public void requestActivation() {
+				super.requestActivation();
+				setCurrentViewerPane(this);
+				this.getViewer().refresh();
+			}
+		};
+		viewerPane.createControl(getContainer());
+		eventsTableViewer = (TableViewer)viewerPane.getViewer();
+		
+		TrackerTableEditorUtils.createEventsTableViewer(
+				viewerPane, 
+				eventsTableViewer, 
+				adapterFactory);
+		
+		//The utility does not set the contentAdapter to find the Premises do it again here
+		eventsTableViewer.setContentProvider(
+				new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
+				{
+					public Object [] getElements(Object object)
+					{
+						if(object instanceof Fair){
+							Premises premises = ((Fair)object).getPremises();
+							if (premises != null){
+								return premises.eventHistory().toArray();
+							}
+						}else
+						if(object instanceof Premises){
+								Premises premises = (Premises)object;
+								if (premises != null){
+									return premises.eventHistory().toArray();
+								}
+						}
+						return null;
+					}
+					public void notifyChanged(Notification notification)
+					{
+						
+						switch (notification.getEventType()){
+							case Notification.ADD:
+							case Notification.ADD_MANY:
+								if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
+									return;
+								}
+						}
+						super.notifyChanged(notification);
+						
+					}
+				});
+
+		Object rootObject = getRoot();
+		if (rootObject instanceof Fair){
+			eventsTableViewer.setInput(((Fair)rootObject).getPremises());
+			viewerPane.setTitle(((Fair)rootObject).getPremises());
+		}
+		createContextMenuFor(eventsTableViewer);
+		int pageIndex = addPage(viewerPane.getControl());
+		setPageText(pageIndex, tableName);
+		eventsTableViewerNotifier = new EventsTableViewerNotifier( eventsTableViewer);
+		Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
+		eventsTableViewerNotifier.setResource(resource);
+	}
+	
+	/**
+	 * Animals Table
+	 * References fields animalsTableViewer, 
+	 * @param tableName 
+	 */
+	private void createAnimalsTableViewer(String tableName) {
+		ViewerPane viewerPane =
+			new ViewerPane(getSite().getPage(), FairEditor.this) {
+				public Viewer createViewer(Composite composite) {
+					return new TableViewer(composite);
+				}
+				public void requestActivation() {
+					super.requestActivation();
+					setCurrentViewerPane(this);
+				}
+			};
+		viewerPane.createControl(getContainer());
+		animalsTableViewer = (TableViewer)viewerPane.getViewer();
+
+		TrackerTableEditorUtils.createAnimalsTableViewer( viewerPane,  animalsTableViewer,  adapterFactory);
+		//The utility does not set the contentAdapter to find the Premises do it again here
+		animalsTableViewer.setContentProvider(
+				new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
+				{
+					public Object [] getElements(Object object)
+					{
+						if(object instanceof Fair){
+							Premises premises = ((Fair)object).getPremises();
+							if (premises != null){
+								return premises.getAnimals().toArray();
+							}
+						}else
+						if(object instanceof Premises){
+								Premises premises = (Premises)object;
+								if (premises != null){
+									return premises.getAnimals().toArray();
+								}
+						}
+						return null;
+					}
+					
+				});
+
+		/**
+		 * The default ItemProvider returned via the adapterFactory
+		 * for Premises should be able to handle all notifications 
+		 * of animals being added or removed.
+		 * 
+		 * To get Animal Elements override the getElements method 
+		 */
+		animalsTableViewer.setContentProvider(
+		        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
+		        {
+		          @Override
+		          public Object [] getElements(Object object)
+		          {
+		        	  if(object instanceof Fair){
+							Premises premises = ((Fair)object).getPremises();
+							if (premises != null){
+								return premises.getAnimals().toArray();
+							}
+						}else
+						if(object instanceof Premises){
+								Premises premises = (Premises)object;
+								if (premises != null){
+									return premises.getAnimals().toArray();
+								}
+						}
+						return null;
+		          }
+		          
+		          
+
+		        });
+		//14.2.2
+		  Object rootObject = getRoot();
+		  if (rootObject instanceof Fair)
+		  {
+			animalsTableViewer.setInput(((Fair)rootObject).getPremises());
+		    viewerPane.setTitle(((Fair)rootObject).getPremises());
+		  }
+		  
+		createContextMenuFor(animalsTableViewer);
+		int pageIndex = addPage(viewerPane.getControl());
+		setPageText(pageIndex, tableName);
+	}
+
+	
+	/**
+	 * Convienence method to find the Root
+	 * @return
+	 */
+	private Object getRoot() {
+		Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
+		  Object rootObject = resource.getContents().get(0);
+		return rootObject;
+	}
+
+	
 	/**
 	 * This is the method used by the framework to install your own controls.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void createPages() {
+	
+	public void createPagesGen() {
 		// Creates the model from the editor input
 		//
 		createModel();
@@ -1420,9 +1727,83 @@ public class FairEditor
 	 * This deals with how we want selection in the outliner to affect the other views.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void handleContentOutlineSelection(ISelection selection) {
+		if (currentViewerPane != null && !selection.isEmpty() && selection instanceof IStructuredSelection) {
+			Iterator<?> selectedElements = ((IStructuredSelection)selection).iterator();
+			if (selectedElements.hasNext()) {
+				// Get the first selected element.
+				//
+				Object selectedElement = selectedElements.next();
+
+				// If it's the animalsTableViewer viewer, then we want it to select the same selection as this selection.
+				//
+				if (currentViewerPane.getViewer() == animalsTableViewer){
+					if (selectedElement instanceof Animal){
+				
+					ArrayList<Object> selectionList = new ArrayList<Object>();
+					selectionList.add(selectedElement);
+					while (selectedElements.hasNext()) {
+						Object o = selectedElements.next();
+						if(o instanceof Animal){
+							selectionList.add(o);
+						}
+						
+					}
+					
+					// Set the selection to the widget.
+					//
+					animalsTableViewer.setSelection(new StructuredSelection(selectionList));
+					
+					}
+					
+				// Handle eventsTableViewer
+				} else if (currentViewerPane.getViewer() == eventsTableViewer){
+					if(selectedElement instanceof Event){
+
+						ArrayList<Object> selectionList = new ArrayList<Object>();
+						selectionList.add(selectedElement);
+						while (selectedElements.hasNext()) {
+							Object o = selectedElements.next();
+							if(o instanceof Event){
+								selectionList.add(o);
+							}
+
+						}
+
+						// Set the selection to the widget.
+						//
+						eventsTableViewer.setSelection(new StructuredSelection(selectionList));
+					}
+				//Handle listViewer
+				} else if (currentViewerPane.getViewer() == listViewer
+						&& selectedElement instanceof Animal) // 14.2.2
+				{
+					Animal selectedAnimal = (Animal) selectedElement;
+					Collection<Event> animalEvents = selectedAnimal.allEvents();
+						
+					//TODO Create a more generic gif for Events
+					ItemProvider listRoot = new ItemProvider("Animal Events for AIN: "+selectedAnimal.getId(),
+							TrackerReportEditPlugin.INSTANCE
+									.getImage("full/obj16/TagApplied"),
+							animalEvents);
+
+					listViewer.setInput(listRoot);
+					currentViewerPane.setTitle(listRoot);	
+				} else {
+					handleContentOutlineSelectionGen( selection);
+				}
+			}
+		}
+	}
+	/**
+	 * This deals with how we want selection in the outliner to affect the other views.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void handleContentOutlineSelectionGen(ISelection selection) {
 		if (currentViewerPane != null && !selection.isEmpty() && selection instanceof IStructuredSelection) {
 			Iterator<?> selectedElements = ((IStructuredSelection)selection).iterator();
 			if (selectedElements.hasNext()) {
@@ -1785,12 +2166,19 @@ public class FairEditor
 	}
 
 	/**
+	 * @generated NOT
+	 */
+	@Override
+	public void dispose(){
+		eventsTableViewerNotifier.unset();
+		disposeGen();
+	}
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void dispose() {
+	public void disposeGen() {
 		updateProblemIndication = false;
 
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceChangeListener);
