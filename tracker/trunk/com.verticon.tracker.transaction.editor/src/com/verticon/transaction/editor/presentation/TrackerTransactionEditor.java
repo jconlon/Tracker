@@ -145,7 +145,7 @@ import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
  *   <li>refreshing of the tree content and property sheet is performed within
  *       read-only transactions on the editing domain, using the
  *       {@link TransactionalEditingDomain#runExclusive(Runnable)} API</li>
- *   <li>only the 'selection' tree view is provided (it is not a multi-page editor)</li>
+ *   <li>Animals and Events are shown in a multi-page editor</li>
  *   <li>synchronization of the workspace resource with the loaded EMF resource
  *       uses the {@link WorkspaceSynchronizer} utility API</li>
  *   <li>adds an Animals and an Events table</li>
