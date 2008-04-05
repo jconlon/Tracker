@@ -140,7 +140,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 		}
 		WeighIn lastWeighIn = getPreviousWeighIn();
 		
-		if(lastWeighIn==null){
+		if(lastWeighIn==null || lastWeighIn.getWeight()==null){
 			return null;
 		}
 		CalendarDate myCalendarDate = new CalendarDate(TimeZone.getDefault(), dateTime);
@@ -230,11 +230,15 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 
 		
 		/**
-		 * @param e
+		 * @param weighInEvent
 		 * @return
 		 */
-		private boolean containsAValue(WeighIn e) {
-			return e.getWeight()!=0;
+		private boolean containsAValue(WeighIn weighInEvent) {
+			if(weighInEvent==null){
+				return false;
+			}
+			
+			return weighInEvent.getWeight()!=null && weighInEvent.getWeight()!=0;
 		}
 
 		/**
