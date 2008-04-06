@@ -31,6 +31,8 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 /**
  * This is the item provider adapter for a {@link com.verticon.tracker.fair.Exhibit} object.
  * <!-- begin-user-doc -->
+ * Adds support for Tables
+ * @implements ITableItemLabelProvider
  * <!-- end-user-doc -->
  * @generated
  */

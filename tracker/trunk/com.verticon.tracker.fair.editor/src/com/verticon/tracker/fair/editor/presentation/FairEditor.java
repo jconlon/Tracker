@@ -124,12 +124,9 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.Premises;
-import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
 import com.verticon.tracker.editor.presentation.EventsTableViewerNotifier;
-import com.verticon.tracker.editor.presentation.TrackerTableEditorUtils;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
 
@@ -212,6 +209,18 @@ public class FairEditor
 	 * @generated NOT
 	 */
 	protected TableViewer animalsTableViewer;
+	
+	/**
+	 * People Table Viewer
+	 * @generated NOT
+	 */
+	protected TableViewer peopleTableViewer;
+	
+	/**
+	 * Exhibit Table Viewer
+	 * @generated NOT
+	 */
+	protected TableViewer exhibitsTableViewer;
 
 	/**
 	 * This is the property sheet page.
@@ -1042,7 +1051,11 @@ public class FairEditor
 			createEventsTableViewer(getString("_UI_EventsTablePage_label"));
 
 			createAnimalsTableViewer(getString("_UI_AnimalsTablePage_label"));
-	
+			
+//			createExhibitsTableViewer(getString("_UI_ExhibitsTablePage_label"));
+			
+//			createPeopleTableViewer(getString("_UI_PeopleTablePage_label"));
+			
 
 			setActivePage(0);
 		}
@@ -1123,13 +1136,8 @@ public class FairEditor
 		selectionViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
 		  
 //		selectionViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, selectionViewer));
-		//Changed to show the Premises as the root
-				selectionViewer.setInput(editingDomain.getResourceSet());
-				viewerPane.setTitle(editingDomain.getResourceSet());
-//		ResourceSet resourceSet = editingDomain.getResourceSet();
-//		Resource resource = (Resource)resourceSet.getResources().get(0);
-//		selectionViewer.setInput(resource);
-//		viewerPane.setTitle(resource);
+		selectionViewer.setInput(editingDomain.getResourceSet());
+		viewerPane.setTitle(editingDomain.getResourceSet());
 
 		new AdapterFactoryTreeEditor(selectionViewer.getTree(), adapterFactory);
 
@@ -1156,45 +1164,12 @@ public class FairEditor
 		viewerPane.createControl(getContainer());
 		eventsTableViewer = (TableViewer)viewerPane.getViewer();
 		
-		TrackerTableEditorUtils.createEventsTableViewer(
+		FairTableEditorUtils.createEventsTableViewer(
 				viewerPane, 
 				eventsTableViewer, 
 				adapterFactory);
 		
-		//The utility does not set the contentAdapter to find the Premises do it again here
-		eventsTableViewer.setContentProvider(
-				new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
-				{
-					public Object [] getElements(Object object)
-					{
-						if(object instanceof Fair){
-							Premises premises = ((Fair)object).getPremises();
-							if (premises != null){
-								return premises.eventHistory().toArray();
-							}
-						}else
-						if(object instanceof Premises){
-								Premises premises = (Premises)object;
-								if (premises != null){
-									return premises.eventHistory().toArray();
-								}
-						}
-						return null;
-					}
-					public void notifyChanged(Notification notification)
-					{
-						
-						switch (notification.getEventType()){
-							case Notification.ADD:
-							case Notification.ADD_MANY:
-								if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
-									return;
-								}
-						}
-						super.notifyChanged(notification);
-						
-					}
-				});
+		
 
 		Object rootObject = getRoot();
 		if (rootObject instanceof Fair){
@@ -1217,85 +1192,101 @@ public class FairEditor
 	private void createAnimalsTableViewer(String tableName) {
 		ViewerPane viewerPane =
 			new ViewerPane(getSite().getPage(), FairEditor.this) {
-				public Viewer createViewer(Composite composite) {
-					return new TableViewer(composite);
-				}
-				public void requestActivation() {
-					super.requestActivation();
-					setCurrentViewerPane(this);
-				}
-			};
+			public Viewer createViewer(Composite composite) {
+				return new TableViewer(composite);
+			}
+			public void requestActivation() {
+				super.requestActivation();
+				setCurrentViewerPane(this);
+			}
+		};
 		viewerPane.createControl(getContainer());
 		animalsTableViewer = (TableViewer)viewerPane.getViewer();
 
-		TrackerTableEditorUtils.createAnimalsTableViewer( viewerPane,  animalsTableViewer,  adapterFactory);
-		//The utility does not set the contentAdapter to find the Premises do it again here
-		animalsTableViewer.setContentProvider(
-				new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
-				{
-					public Object [] getElements(Object object)
-					{
-						if(object instanceof Fair){
-							Premises premises = ((Fair)object).getPremises();
-							if (premises != null){
-								return premises.getAnimals().toArray();
-							}
-						}else
-						if(object instanceof Premises){
-								Premises premises = (Premises)object;
-								if (premises != null){
-									return premises.getAnimals().toArray();
-								}
-						}
-						return null;
-					}
-					
-				});
+		FairTableEditorUtils.createAnimalsTableViewer( viewerPane,  
+				animalsTableViewer,  adapterFactory);
 
-		/**
-		 * The default ItemProvider returned via the adapterFactory
-		 * for Premises should be able to handle all notifications 
-		 * of animals being added or removed.
-		 * 
-		 * To get Animal Elements override the getElements method 
-		 */
-		animalsTableViewer.setContentProvider(
-		        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
-		        {
-		          @Override
-		          public Object [] getElements(Object object)
-		          {
-		        	  if(object instanceof Fair){
-							Premises premises = ((Fair)object).getPremises();
-							if (premises != null){
-								return premises.getAnimals().toArray();
-							}
-						}else
-						if(object instanceof Premises){
-								Premises premises = (Premises)object;
-								if (premises != null){
-									return premises.getAnimals().toArray();
-								}
-						}
-						return null;
-		          }
-		          
-		          
-
-		        });
-		//14.2.2
-		  Object rootObject = getRoot();
-		  if (rootObject instanceof Fair)
-		  {
+		Object rootObject = getRoot();
+		if (rootObject instanceof Fair)
+		{
 			animalsTableViewer.setInput(((Fair)rootObject).getPremises());
-		    viewerPane.setTitle(((Fair)rootObject).getPremises());
-		  }
-		  
+			viewerPane.setTitle(((Fair)rootObject).getPremises());
+		}
+
 		createContextMenuFor(animalsTableViewer);
 		int pageIndex = addPage(viewerPane.getControl());
 		setPageText(pageIndex, tableName);
 	}
+	
+	
+	/**
+	 * Exhibits Table
+	 * References fields exhibitsTableViewer, 
+	 * @param tableName 
+	 */
+	private void createExhibitsTableViewer(String tableName) {
+		ViewerPane viewerPane =
+			new ViewerPane(getSite().getPage(), FairEditor.this) {
+			public Viewer createViewer(Composite composite) {
+				return new TableViewer(composite);
+			}
+			public void requestActivation() {
+				super.requestActivation();
+				setCurrentViewerPane(this);
+			}
+		};
+		viewerPane.createControl(getContainer());
+		exhibitsTableViewer = (TableViewer)viewerPane.getViewer();
 
+		FairTableEditorUtils.createExhibitsTableViewer( viewerPane,  
+				exhibitsTableViewer,  adapterFactory);
+
+
+		Object rootObject = getRoot();
+		if (rootObject instanceof Fair)
+		{
+			exhibitsTableViewer.setInput(((Fair)rootObject).exhibits());
+			viewerPane.setTitle(((Fair)rootObject).exhibits());
+		}
+
+		createContextMenuFor(exhibitsTableViewer);
+		int pageIndex = addPage(viewerPane.getControl());
+		setPageText(pageIndex, tableName);
+	}
+
+	/**
+	 * People Table
+	 * References fields peopleTableViewer, 
+	 * @param tableName 
+	 */
+	private void createPeopleTableViewer(String tableName) {
+		ViewerPane viewerPane =
+			new ViewerPane(getSite().getPage(), FairEditor.this) {
+			public Viewer createViewer(Composite composite) {
+				return new TableViewer(composite);
+			}
+			public void requestActivation() {
+				super.requestActivation();
+				setCurrentViewerPane(this);
+			}
+		};
+		viewerPane.createControl(getContainer());
+		peopleTableViewer = (TableViewer)viewerPane.getViewer();
+
+		FairTableEditorUtils.createPeopleTableViewer( viewerPane,  
+				peopleTableViewer,  adapterFactory);
+
+		Object rootObject = getRoot();
+		if (rootObject instanceof Fair)
+		{
+			peopleTableViewer.setInput(((Fair)rootObject).getPeople());
+			viewerPane.setTitle(((Fair)rootObject).getPeople());
+		}
+
+		createContextMenuFor(peopleTableViewer);
+		int pageIndex = addPage(viewerPane.getControl());
+		setPageText(pageIndex, tableName);
+	}
 	
 	/**
 	 * Convienence method to find the Root

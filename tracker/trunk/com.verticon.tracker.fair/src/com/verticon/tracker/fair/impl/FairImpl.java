@@ -9,16 +9,25 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.Query;
+import org.eclipse.ocl.ecore.OCL;
+import org.eclipse.ocl.expressions.OCLExpression;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.fair.Division;
+import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.People;
@@ -108,6 +117,19 @@ public class FairImpl extends EObjectImpl implements Fair {
 	 * @ordered
 	 */
 	protected People people;
+
+	/**
+	 * The parsed OCL expression for the body of the '{@link #exhibits <em>Exhibits</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #exhibits
+	 * @generated
+	 */
+	private static OCLExpression<EClassifier> exhibitsBodyOCL;
+
+	private static final String OCL_ANNOTATION_SOURCE = "http://www.eclipse.org/ocl/examples/OCL";
+
+	private static final OCL OCL_ENV = OCL.newInstance();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -252,6 +274,34 @@ public class FairImpl extends EObjectImpl implements Fair {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.FAIR__PEOPLE, newPeople, newPeople));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Exhibit> exhibits() {
+		if (exhibitsBodyOCL == null) {
+			EOperation eOperation = FairPackage.Literals.FAIR.getEOperations().get(0);
+			OCL.Helper helper = OCL_ENV.createOCLHelper();
+			helper.setOperationContext(FairPackage.Literals.FAIR, eOperation);
+			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
+			String body = ocl.getDetails().get("body");
+			
+			try {
+				exhibitsBodyOCL = helper.createQuery(body);
+			} catch (ParserException e) {
+				throw new UnsupportedOperationException(e.getLocalizedMessage());
+			}
+		}
+		
+		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(exhibitsBodyOCL);
+	
+		@SuppressWarnings("unchecked")
+		Collection<Exhibit> result = (Collection<Exhibit>) query.evaluate(this);
+		return new BasicEList.UnmodifiableEList<Exhibit>(result.size(), result.toArray());
+	
 	}
 
 	/**

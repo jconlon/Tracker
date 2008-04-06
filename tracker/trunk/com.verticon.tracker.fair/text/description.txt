@@ -13,6 +13,7 @@ Package fair <http://www.verticon.com/ns/tracker/fair/0.1.0>
     Reference division : Division<<1..*>>
     Reference premises : Premises<<1..1>>
     Reference people : People
+    Operation exhibits() : Exhibit<<0..*>>
 
   Class Exhibit
     Attribute name : EString<<1..1>>

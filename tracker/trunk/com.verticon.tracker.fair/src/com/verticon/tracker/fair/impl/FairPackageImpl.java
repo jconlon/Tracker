@@ -726,6 +726,8 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		initEReference(getFair_Premises(), theTrackerPackage.getPremises(), null, "premises", null, 1, 1, Fair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFair_People(), this.getPeople(), null, "people", null, 0, 1, Fair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(fairEClass, this.getExhibit(), "exhibits", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(exhibitEClass, Exhibit.class, "Exhibit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExhibit_Name(), ecorePackage.getEString(), "name", null, 1, 1, Exhibit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExhibit_Number(), ecorePackage.getEInt(), "number", null, 0, 1, Exhibit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -778,6 +780,26 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http://www.eclipse.org/ocl/examples/OCL
+		createOCLAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/ocl/examples/OCL</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createOCLAnnotations() {
+		String source = "http://www.eclipse.org/ocl/examples/OCL";		
+		addAnnotation
+		  (fairEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "body", "if (division -> notEmpty())  and (division.department->notEmpty())  and  (division.department.class->notEmpty) and (division.department.class.lot->notEmpty) and (division.department.class.lot.exhibit->notEmpty) \n\tthen  division.department.class.lot.exhibit\n\telse Set{}\nendif\n"
+		   });
 	}
 
 } //FairPackageImpl
