@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_3dynoYfdEdyXiYPOKyhf1A" activeDiagram="_3d5VUIfdEdyXiYPOKyhf1A">
   <model href="fair.ecore#/"/>
-  <diagrams xmi:id="_3d5VUIfdEdyXiYPOKyhf1A" position="0,0" size="100,100" name="fair" viewport="0,80">
+  <diagrams xmi:id="_3d5VUIfdEdyXiYPOKyhf1A" position="0,0" size="100,100" name="fair" viewport="0,364">
     <property xmi:id="_3kAkYIfdEdyXiYPOKyhf1A" key="pageFormatName" value="A4"/>
     <property xmi:id="_3kAkYYfdEdyXiYPOKyhf1A" key="diagramWidth" value="840"/>
     <property xmi:id="_3kAkYofdEdyXiYPOKyhf1A" key="diagramHeight" value="1188"/>
@@ -74,6 +74,16 @@
             <element href="../../com.verticon.tracker/model/tracker.ecore#//Animal/lastEventDateTime"/>
           </semanticModel>
         </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_cCuAAQNXEd2CWIWHJ-hgvQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_cCuAAgNXEd2CWIWHJ-hgvQ" presentation="default">
+            <element href="../../com.verticon.tracker/model/tracker.ecore#//Animal/weight"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_cCuAAwNXEd2CWIWHJ-hgvQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_cCuABANXEd2CWIWHJ-hgvQ" presentation="default">
+            <element href="../../com.verticon.tracker/model/tracker.ecore#//Animal/weightGainPerDay"/>
+          </semanticModel>
+        </contained>
       </contained>
       <contained xsi:type="di:GraphNode" xmi:id="_i1fX1YfmEdyXiYPOKyhf1A">
         <property xmi:id="_i1fX1ofmEdyXiYPOKyhf1A" key="eStructuralFeatureID" value="11"/>
@@ -97,7 +107,7 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_ygBXAIfmEdyXiYPOKyhf1A" position="6,8" size="115,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_ygBXAIfmEdyXiYPOKyhf1A" position="6,8" size="152,-1">
       <anchorage xmi:id="_GWEe8IfoEdyXiYPOKyhf1A" graphEdge="_N327wIfwEdyXiYPOKyhf1A _IBzpMIgCEdyXiYPOKyhf1A _SGBOMIgEEdyXiYPOKyhf1A _FNztsNAmEdyytJJF15-OEw"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_ygBXAYfmEdyXiYPOKyhf1A" presentation="default">
         <element href="fair.ecore#//Fair"/>
@@ -118,6 +128,11 @@
         <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_ygB-E4fmEdyXiYPOKyhf1A" presentation="default">
           <element href="fair.ecore#//Fair"/>
         </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_hdauIANXEd2CWIWHJ-hgvQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_hdauIQNXEd2CWIWHJ-hgvQ" presentation="default">
+            <element href="fair.ecore#//Fair/exhibits"/>
+          </semanticModel>
+        </contained>
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_6p-10IfoEdyXiYPOKyhf1A" position="379,675" size="144,-1">
@@ -273,6 +288,11 @@
         <contained xsi:type="di:GraphNode" xmi:id="_zzNfENAlEdyytJJF15-OEw" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_zzNfEdAlEdyytJJF15-OEw" presentation="default">
             <element href="../../com.verticon.tracker/model/tracker.ecore#//Premises/uri"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_cDCJEANXEd2CWIWHJ-hgvQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_cDCJEQNXEd2CWIWHJ-hgvQ" presentation="default">
+            <element href="../../com.verticon.tracker/model/tracker.ecore#//Premises/name"/>
           </semanticModel>
         </contained>
       </contained>

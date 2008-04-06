@@ -149,4 +149,12 @@ public interface Fair extends EObject {
 	 */
 	void setPeople(People value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/ocl/examples/OCL body='if (division -> notEmpty())  and (division.department->notEmpty())  and  (division.department.class->notEmpty) and (division.department.class.lot->notEmpty) and (division.department.class.lot.exhibit->notEmpty) \n\tthen  division.department.class.lot.exhibit\n\telse Set{}\nendif\n'"
+	 * @generated
+	 */
+	EList<Exhibit> exhibits();
+
 } // Fair
