@@ -22,6 +22,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -34,6 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.impl.LotImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.LotImpl#getExhibits <em>Exhibits</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.LotImpl#getClass_ <em>Class</em>}</li>
  * </ul>
  * </p>
  *
@@ -124,9 +127,69 @@ public class LotImpl extends EObjectImpl implements Lot {
 	 */
 	public EList<Exhibit> getExhibits() {
 		if (exhibits == null) {
-			exhibits = new EObjectContainmentEList<Exhibit>(Exhibit.class, this, FairPackage.LOT__EXHIBITS);
+			exhibits = new EObjectContainmentWithInverseEList<Exhibit>(Exhibit.class, this, FairPackage.LOT__EXHIBITS, FairPackage.EXHIBIT__LOT);
 		}
 		return exhibits;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public com.verticon.tracker.fair.Class getClass_() {
+		if (eContainerFeatureID != FairPackage.LOT__CLASS) return null;
+		return (com.verticon.tracker.fair.Class)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetClass(com.verticon.tracker.fair.Class newClass, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newClass, FairPackage.LOT__CLASS, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setClass(com.verticon.tracker.fair.Class newClass) {
+		if (newClass != eInternalContainer() || (eContainerFeatureID != FairPackage.LOT__CLASS && newClass != null)) {
+			if (EcoreUtil.isAncestor(this, newClass))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newClass != null)
+				msgs = ((InternalEObject)newClass).eInverseAdd(this, FairPackage.CLASS__LOTS, com.verticon.tracker.fair.Class.class, msgs);
+			msgs = basicSetClass(newClass, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.LOT__CLASS, newClass, newClass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case FairPackage.LOT__EXHIBITS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExhibits()).basicAdd(otherEnd, msgs);
+			case FairPackage.LOT__CLASS:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetClass((com.verticon.tracker.fair.Class)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -139,8 +202,24 @@ public class LotImpl extends EObjectImpl implements Lot {
 		switch (featureID) {
 			case FairPackage.LOT__EXHIBITS:
 				return ((InternalEList<?>)getExhibits()).basicRemove(otherEnd, msgs);
+			case FairPackage.LOT__CLASS:
+				return basicSetClass(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case FairPackage.LOT__CLASS:
+				return eInternalContainer().eInverseRemove(this, FairPackage.CLASS__LOTS, com.verticon.tracker.fair.Class.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -155,6 +234,8 @@ public class LotImpl extends EObjectImpl implements Lot {
 				return getName();
 			case FairPackage.LOT__EXHIBITS:
 				return getExhibits();
+			case FairPackage.LOT__CLASS:
+				return getClass_();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -175,6 +256,9 @@ public class LotImpl extends EObjectImpl implements Lot {
 				getExhibits().clear();
 				getExhibits().addAll((Collection<? extends Exhibit>)newValue);
 				return;
+			case FairPackage.LOT__CLASS:
+				setClass((com.verticon.tracker.fair.Class)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -193,6 +277,9 @@ public class LotImpl extends EObjectImpl implements Lot {
 			case FairPackage.LOT__EXHIBITS:
 				getExhibits().clear();
 				return;
+			case FairPackage.LOT__CLASS:
+				setClass((com.verticon.tracker.fair.Class)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -209,6 +296,8 @@ public class LotImpl extends EObjectImpl implements Lot {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case FairPackage.LOT__EXHIBITS:
 				return exhibits != null && !exhibits.isEmpty();
+			case FairPackage.LOT__CLASS:
+				return getClass_() != null;
 		}
 		return super.eIsSet(featureID);
 	}

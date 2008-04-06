@@ -29,6 +29,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/comments"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//Exhibit/animal"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//Exhibit/exhibitor"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference fair.ecore#//Exhibit/lot"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//YouthClub">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//YouthClub/name"/>
@@ -42,15 +43,18 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Department/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fair.ecore#//Department/classes"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//Department/superintendents"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference fair.ecore#//Department/division"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//Class">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Class/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fair.ecore#//Class/lots"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//Class/judges"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference fair.ecore#//Class/department"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//Lot">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Lot/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fair.ecore#//Lot/exhibits"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference fair.ecore#//Lot/class"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//Person">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/firstName"/>

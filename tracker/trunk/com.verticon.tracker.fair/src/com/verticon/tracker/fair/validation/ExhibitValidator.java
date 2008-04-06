@@ -8,6 +8,7 @@ package com.verticon.tracker.fair.validation;
 
 import com.verticon.tracker.Animal;
 
+import com.verticon.tracker.fair.Lot;
 import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YouthClub;
 
@@ -27,4 +28,6 @@ public interface ExhibitValidator {
 	boolean validateAnimal(Animal value);
 
 	boolean validateExhibitor(Person value);
+
+	boolean validateLot(Lot value);
 }

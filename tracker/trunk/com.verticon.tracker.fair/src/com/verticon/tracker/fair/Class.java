@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.fair.Class#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Class#getLots <em>Lots</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Class#getJudges <em>Judges</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Class#getDepartment <em>Department</em>}</li>
  * </ul>
  * </p>
  *
@@ -64,6 +65,7 @@ public interface Class extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Lots</b></em>' containment reference list.
 	 * The list contents are of type {@link com.verticon.tracker.fair.Lot}.
+	 * It is bidirectional and its opposite is '{@link com.verticon.tracker.fair.Lot#getClass_ <em>Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Lots</em>' containment reference list isn't clear,
@@ -72,7 +74,8 @@ public interface Class extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Lots</em>' containment reference list.
 	 * @see com.verticon.tracker.fair.FairPackage#getClass_Lots()
-	 * @model containment="true" required="true"
+	 * @see com.verticon.tracker.fair.Lot#getClass_
+	 * @model opposite="class" containment="true" required="true"
 	 * @generated
 	 */
 	EList<Lot> getLots();
@@ -92,5 +95,33 @@ public interface Class extends EObject {
 	 * @generated
 	 */
 	EList<Person> getJudges();
+
+	/**
+	 * Returns the value of the '<em><b>Department</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link com.verticon.tracker.fair.Department#getClasses <em>Classes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Department</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Department</em>' container reference.
+	 * @see #setDepartment(Department)
+	 * @see com.verticon.tracker.fair.FairPackage#getClass_Department()
+	 * @see com.verticon.tracker.fair.Department#getClasses
+	 * @model opposite="classes" required="true" transient="false"
+	 * @generated
+	 */
+	Department getDepartment();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.fair.Class#getDepartment <em>Department</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Department</em>' container reference.
+	 * @see #getDepartment()
+	 * @generated
+	 */
+	void setDepartment(Department value);
 
 } // Class

@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -124,9 +125,24 @@ public class DivisionImpl extends EObjectImpl implements Division {
 	 */
 	public EList<Department> getDepartments() {
 		if (departments == null) {
-			departments = new EObjectContainmentEList<Department>(Department.class, this, FairPackage.DIVISION__DEPARTMENTS);
+			departments = new EObjectContainmentWithInverseEList<Department>(Department.class, this, FairPackage.DIVISION__DEPARTMENTS, FairPackage.DEPARTMENT__DIVISION);
 		}
 		return departments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case FairPackage.DIVISION__DEPARTMENTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getDepartments()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**

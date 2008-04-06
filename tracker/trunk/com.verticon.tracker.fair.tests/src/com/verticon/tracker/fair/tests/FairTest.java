@@ -5,12 +5,15 @@
  */
 package com.verticon.tracker.fair.tests;
 
+import junit.framework.TestCase;
+import junit.textui.TestRunner;
+
+import com.verticon.tracker.fair.Department;
+import com.verticon.tracker.fair.Division;
+import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.FairFactory;
-
-import junit.framework.TestCase;
-
-import junit.textui.TestRunner;
+import com.verticon.tracker.fair.Lot;
 
 /**
  * <!-- begin-user-doc -->
@@ -107,12 +110,37 @@ public class FairTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.fair.Fair#exhibits()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testExhibits() {
-		// TODO: implement this operation test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		assertNotNull(fixture.exhibits());
+		assertTrue(fixture.exhibits().isEmpty());
+		
+		Division division = FairFactory.eINSTANCE.createDivision();
+		fixture.getDivisions().add(division);
+		
+		Department department = FairFactory.eINSTANCE.createDepartment();
+		division.getDepartments().add(department);
+		
+		com.verticon.tracker.fair.Class clazz = FairFactory.eINSTANCE.createClass();
+		department.getClasses().add(clazz);
+		
+		Lot lot = FairFactory.eINSTANCE.createLot();
+		clazz.getLots().add(lot);
+		
+		assertTrue("Should be still empty",fixture.exhibits().isEmpty());
+		
+		//Add an exhibit
+		Exhibit exhibit1 = FairFactory.eINSTANCE.createExhibit();
+		lot.getExhibits().add(exhibit1);
+		
+		assertEquals("Should be one", 1, fixture.exhibits().size());
+		assertEquals("Should be equal", exhibit1, fixture.exhibits().get(0));
+		
+		//Add a second exhibit
+		Exhibit exhibit2 = FairFactory.eINSTANCE.createExhibit();
+		lot.getExhibits().add(exhibit2);
+		assertEquals("Should be two", 2, fixture.exhibits().size());
 	}
 
 } //FairTest

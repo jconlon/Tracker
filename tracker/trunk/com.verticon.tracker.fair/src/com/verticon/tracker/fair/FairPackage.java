@@ -186,13 +186,22 @@ public interface FairPackage extends EPackage {
 	int EXHIBIT__EXHIBITOR = 4;
 
 	/**
+	 * The feature id for the '<em><b>Lot</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXHIBIT__LOT = 5;
+
+	/**
 	 * The number of structural features of the '<em>Exhibit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXHIBIT_FEATURE_COUNT = 5;
+	int EXHIBIT_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.YouthClubImpl <em>Youth Club</em>}' class.
@@ -306,13 +315,22 @@ public interface FairPackage extends EPackage {
 	int DEPARTMENT__SUPERINTENDENTS = 2;
 
 	/**
+	 * The feature id for the '<em><b>Division</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPARTMENT__DIVISION = 3;
+
+	/**
 	 * The number of structural features of the '<em>Department</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPARTMENT_FEATURE_COUNT = 3;
+	int DEPARTMENT_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.ClassImpl <em>Class</em>}' class.
@@ -352,13 +370,22 @@ public interface FairPackage extends EPackage {
 	int CLASS__JUDGES = 2;
 
 	/**
+	 * The feature id for the '<em><b>Department</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__DEPARTMENT = 3;
+
+	/**
 	 * The number of structural features of the '<em>Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_FEATURE_COUNT = 3;
+	int CLASS_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.LotImpl <em>Lot</em>}' class.
@@ -389,13 +416,22 @@ public interface FairPackage extends EPackage {
 	int LOT__EXHIBITS = 1;
 
 	/**
+	 * The feature id for the '<em><b>Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOT__CLASS = 2;
+
+	/**
 	 * The number of structural features of the '<em>Lot</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOT_FEATURE_COUNT = 2;
+	int LOT_FEATURE_COUNT = 3;
 
 
 	/**
@@ -750,6 +786,17 @@ public interface FairPackage extends EPackage {
 	EReference getExhibit_Exhibitor();
 
 	/**
+	 * Returns the meta object for the container reference '{@link com.verticon.tracker.fair.Exhibit#getLot <em>Lot</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Lot</em>'.
+	 * @see com.verticon.tracker.fair.Exhibit#getLot()
+	 * @see #getExhibit()
+	 * @generated
+	 */
+	EReference getExhibit_Lot();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.YouthClub <em>Youth Club</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -857,6 +904,17 @@ public interface FairPackage extends EPackage {
 	EReference getDepartment_Superintendents();
 
 	/**
+	 * Returns the meta object for the container reference '{@link com.verticon.tracker.fair.Department#getDivision <em>Division</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Division</em>'.
+	 * @see com.verticon.tracker.fair.Department#getDivision()
+	 * @see #getDepartment()
+	 * @generated
+	 */
+	EReference getDepartment_Division();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Class <em>Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -900,6 +958,17 @@ public interface FairPackage extends EPackage {
 	EReference getClass_Judges();
 
 	/**
+	 * Returns the meta object for the container reference '{@link com.verticon.tracker.fair.Class#getDepartment <em>Department</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Department</em>'.
+	 * @see com.verticon.tracker.fair.Class#getDepartment()
+	 * @see #getClass_()
+	 * @generated
+	 */
+	EReference getClass_Department();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Lot <em>Lot</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -930,6 +999,17 @@ public interface FairPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getLot_Exhibits();
+
+	/**
+	 * Returns the meta object for the container reference '{@link com.verticon.tracker.fair.Lot#getClass_ <em>Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Class</em>'.
+	 * @see com.verticon.tracker.fair.Lot#getClass_()
+	 * @see #getLot()
+	 * @generated
+	 */
+	EReference getLot_Class();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Person <em>Person</em>}'.
@@ -1206,6 +1286,14 @@ public interface FairPackage extends EPackage {
 		EReference EXHIBIT__EXHIBITOR = eINSTANCE.getExhibit_Exhibitor();
 
 		/**
+		 * The meta object literal for the '<em><b>Lot</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXHIBIT__LOT = eINSTANCE.getExhibit_Lot();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.YouthClubImpl <em>Youth Club</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1292,6 +1380,14 @@ public interface FairPackage extends EPackage {
 		EReference DEPARTMENT__SUPERINTENDENTS = eINSTANCE.getDepartment_Superintendents();
 
 		/**
+		 * The meta object literal for the '<em><b>Division</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DEPARTMENT__DIVISION = eINSTANCE.getDepartment_Division();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.ClassImpl <em>Class</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1326,6 +1422,14 @@ public interface FairPackage extends EPackage {
 		EReference CLASS__JUDGES = eINSTANCE.getClass_Judges();
 
 		/**
+		 * The meta object literal for the '<em><b>Department</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS__DEPARTMENT = eINSTANCE.getClass_Department();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.LotImpl <em>Lot</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1350,6 +1454,14 @@ public interface FairPackage extends EPackage {
 		 * @generated
 		 */
 		EReference LOT__EXHIBITS = eINSTANCE.getLot_Exhibits();
+
+		/**
+		 * The meta object literal for the '<em><b>Class</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOT__CLASS = eINSTANCE.getLot_Class();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.PersonImpl <em>Person</em>}' class.

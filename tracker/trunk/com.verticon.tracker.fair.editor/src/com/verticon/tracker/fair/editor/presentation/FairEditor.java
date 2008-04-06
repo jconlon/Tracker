@@ -127,7 +127,9 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
 import com.verticon.tracker.editor.presentation.EventsTableViewerNotifier;
+import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
+import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
 
 
@@ -1052,9 +1054,9 @@ public class FairEditor
 
 			createAnimalsTableViewer(getString("_UI_AnimalsTablePage_label"));
 			
-//			createExhibitsTableViewer(getString("_UI_ExhibitsTablePage_label"));
+			createExhibitsTableViewer(getString("_UI_ExhibitsTablePage_label"));
 			
-//			createPeopleTableViewer(getString("_UI_PeopleTablePage_label"));
+			createPeopleTableViewer(getString("_UI_PeopleTablePage_label"));
 			
 
 			setActivePage(0);
@@ -1079,7 +1081,7 @@ public class FairEditor
 	}
 	
 	/**
-	 * 
+	 * ListViewer
 	 */
 	private void createListViewer(String pageName) {
 		ViewerPane viewerPane =
@@ -1104,7 +1106,8 @@ public class FairEditor
 	}
 	
 	/**
-	 * 
+	 * SelectionTreeViewer
+	 *
 	 */
 	private void createSelectionTreeViewer(String pageName ) {
 		ViewerPane viewerPane =
@@ -1245,8 +1248,8 @@ public class FairEditor
 		Object rootObject = getRoot();
 		if (rootObject instanceof Fair)
 		{
-			exhibitsTableViewer.setInput(((Fair)rootObject).exhibits());
-			viewerPane.setTitle(((Fair)rootObject).exhibits());
+			exhibitsTableViewer.setInput(rootObject);
+			viewerPane.setTitle(rootObject);
 		}
 
 		createContextMenuFor(exhibitsTableViewer);
@@ -1279,8 +1282,8 @@ public class FairEditor
 		Object rootObject = getRoot();
 		if (rootObject instanceof Fair)
 		{
-			peopleTableViewer.setInput(((Fair)rootObject).getPeople());
-			viewerPane.setTitle(((Fair)rootObject).getPeople());
+			peopleTableViewer.setInput(rootObject);
+			viewerPane.setTitle(rootObject);
 		}
 
 		createContextMenuFor(peopleTableViewer);
@@ -1302,6 +1305,7 @@ public class FairEditor
 	/**
 	 * This is the method used by the framework to install your own controls.
 	 * <!-- begin-user-doc -->
+	 * Not used but here, for documentation to show what is created by the generator.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -1767,6 +1771,41 @@ public class FairEditor
 						//
 						eventsTableViewer.setSelection(new StructuredSelection(selectionList));
 					}
+					// Handle peopleTableViewer
+				} else if (currentViewerPane.getViewer() == peopleTableViewer){
+					if(selectedElement instanceof Person){
+
+						ArrayList<Object> selectionList = new ArrayList<Object>();
+						selectionList.add(selectedElement);
+						while (selectedElements.hasNext()) {
+							Object o = selectedElements.next();
+							if(o instanceof Person){
+								selectionList.add(o);
+							}
+
+						}
+
+						// Set the selection to the widget.
+						//
+						peopleTableViewer.setSelection(new StructuredSelection(selectionList));
+					}
+				} else if (currentViewerPane.getViewer() == exhibitsTableViewer){
+					if(selectedElement instanceof Exhibit){
+
+						ArrayList<Object> selectionList = new ArrayList<Object>();
+						selectionList.add(selectedElement);
+						while (selectedElements.hasNext()) {
+							Object o = selectedElements.next();
+							if(o instanceof Exhibit){
+								selectionList.add(o);
+							}
+
+						}
+
+						// Set the selection to the widget.
+						//
+						exhibitsTableViewer.setSelection(new StructuredSelection(selectionList));
+					}
 				//Handle listViewer
 				} else if (currentViewerPane.getViewer() == listViewer
 						&& selectedElement instanceof Animal) // 14.2.2
@@ -1775,7 +1814,7 @@ public class FairEditor
 					Collection<Event> animalEvents = selectedAnimal.allEvents();
 						
 					//TODO Create a more generic gif for Events
-					ItemProvider listRoot = new ItemProvider("Animal Events for AIN: "+selectedAnimal.getId(),
+					ItemProvider listRoot = new ItemProvider("Animal Events for ANIMAL: "+selectedAnimal.getId(),
 							TrackerReportEditPlugin.INSTANCE
 									.getImage("full/obj16/TagApplied"),
 							animalEvents);

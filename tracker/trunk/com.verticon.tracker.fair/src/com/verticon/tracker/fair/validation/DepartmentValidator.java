@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker.fair.validation;
 
+import com.verticon.tracker.fair.Division;
 import com.verticon.tracker.fair.Person;
 import org.eclipse.emf.common.util.EList;
 
@@ -26,6 +27,8 @@ public interface DepartmentValidator {
 	boolean validateClasses(EList<com.verticon.tracker.fair.Class> value);
 
 	boolean validateSuperintendents(EList<Person> value);
+
+	boolean validateDivision(Division value);
 
 	boolean validateSuperIntendent(EList<Person> value);
 }

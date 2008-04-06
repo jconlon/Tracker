@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker.fair.validation;
 
+import com.verticon.tracker.fair.Department;
 import com.verticon.tracker.fair.Lot;
 
 import com.verticon.tracker.fair.Person;
@@ -26,6 +27,8 @@ public interface ClassValidator {
 	boolean validateLots(EList<Lot> value);
 
 	boolean validateJudges(EList<Person> value);
+
+	boolean validateDepartment(Department value);
 
 	boolean validateJudge(EList<Person> value);
 }
