@@ -21,6 +21,7 @@ Package fair <http://www.verticon.com/ns/tracker/fair/0.1.0>
     Attribute comments : EString
     Reference animal : Animal<<1..1>>
     Reference exhibitor : Person<<1..1>>
+    Reference lot : Lot<<1..1>>
 
   Class YouthClub
     Attribute name : EString<<1..1>>
@@ -34,15 +35,18 @@ Package fair <http://www.verticon.com/ns/tracker/fair/0.1.0>
     Attribute name : EString<<1..1>>
     Reference classes : Class<<1..*>>
     Reference superintendents : Person<<0..*>>
+    Reference division : Division<<1..1>>
 
   Class Class
     Attribute name : EString<<1..1>>
     Reference lots : Lot<<1..*>>
     Reference judges : Person<<1..*>>
+    Reference department : Department<<1..1>>
 
   Class Lot
     Attribute name : EString<<1..1>>
     Reference exhibits : Exhibit<<1..*>>
+    Reference class : Class<<1..1>>
 
   Class Person
     Attribute firstName : EString<<1..1>>

@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.fair.Department#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Department#getClasses <em>Classes</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Department#getSuperintendents <em>Superintendents</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Department#getDivision <em>Division</em>}</li>
  * </ul>
  * </p>
  *
@@ -64,6 +65,7 @@ public interface Department extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Classes</b></em>' containment reference list.
 	 * The list contents are of type {@link com.verticon.tracker.fair.Class}.
+	 * It is bidirectional and its opposite is '{@link com.verticon.tracker.fair.Class#getDepartment <em>Department</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Classes</em>' containment reference list isn't clear,
@@ -72,7 +74,8 @@ public interface Department extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Classes</em>' containment reference list.
 	 * @see com.verticon.tracker.fair.FairPackage#getDepartment_Classes()
-	 * @model containment="true" required="true"
+	 * @see com.verticon.tracker.fair.Class#getDepartment
+	 * @model opposite="department" containment="true" required="true"
 	 * @generated
 	 */
 	EList<com.verticon.tracker.fair.Class> getClasses();
@@ -92,5 +95,33 @@ public interface Department extends EObject {
 	 * @generated
 	 */
 	EList<Person> getSuperintendents();
+
+	/**
+	 * Returns the value of the '<em><b>Division</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link com.verticon.tracker.fair.Division#getDepartments <em>Departments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Division</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Division</em>' container reference.
+	 * @see #setDivision(Division)
+	 * @see com.verticon.tracker.fair.FairPackage#getDepartment_Division()
+	 * @see com.verticon.tracker.fair.Division#getDepartments
+	 * @model opposite="departments" required="true" transient="false"
+	 * @generated
+	 */
+	Division getDivision();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.fair.Department#getDivision <em>Division</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Division</em>' container reference.
+	 * @see #getDivision()
+	 * @generated
+	 */
+	void setDivision(Division value);
 
 } // Department

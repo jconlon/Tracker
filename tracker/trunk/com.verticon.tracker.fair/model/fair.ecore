@@ -6,7 +6,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Fair">
     <eOperations name="exhibits" upperBound="-1" eType="#//Exhibit">
       <eAnnotations source="http://www.eclipse.org/ocl/examples/OCL">
-        <details key="body" value="if (divisions -> notEmpty())  and (divisions.departments->notEmpty())  and  (divisions.departments.classes->notEmpty) and (divisions.departments.classes.lots->notEmpty) and (divisions.departments.classes.lots.exhibits->notEmpty) &#xA;&#x9;then  divisions.departments.classes.lots.exhibits&#xA;&#x9;else Set{}&#xA;endif&#xA;"/>
+        <details key="body" value="if (divisions -> notEmpty())  and (divisions.departments->notEmpty())  and  (divisions.departments.classes->notEmpty()) and (divisions.departments.classes.lots->notEmpty()) and (divisions.departments.classes.lots.exhibits -> notEmpty()) &#xA;&#x9;then  divisions.departments.classes.lots.exhibits&#xA;&#x9;else Set{}&#xA;endif&#xA;"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -27,6 +27,8 @@
         eType="ecore:EClass ../../com.verticon.tracker/model/tracker.ecore#//Animal"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exhibitor" lowerBound="1"
         eType="#//Person"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lot" lowerBound="1" eType="#//Lot"
+        eOpposite="#//Lot/exhibits"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="YouthClub">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -36,26 +38,32 @@
   <eClassifiers xsi:type="ecore:EClass" name="Division">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="departments" lowerBound="1"
-        upperBound="-1" eType="#//Department" containment="true"/>
+        upperBound="-1" eType="#//Department" containment="true" eOpposite="#//Department/division"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Department">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classes" lowerBound="1"
-        upperBound="-1" eType="#//Class" containment="true"/>
+        upperBound="-1" eType="#//Class" containment="true" eOpposite="#//Class/department"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superintendents" upperBound="-1"
         eType="#//Person"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="division" lowerBound="1"
+        eType="#//Division" eOpposite="#//Division/departments"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Class">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="lots" lowerBound="1" upperBound="-1"
-        eType="#//Lot" containment="true"/>
+        eType="#//Lot" containment="true" eOpposite="#//Lot/class"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="judges" lowerBound="1"
         upperBound="-1" eType="#//Person"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="department" lowerBound="1"
+        eType="#//Department" eOpposite="#//Department/classes"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Lot">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exhibits" lowerBound="1"
-        upperBound="-1" eType="#//Exhibit" containment="true"/>
+        upperBound="-1" eType="#//Exhibit" containment="true" eOpposite="#//Exhibit/lot"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="class" lowerBound="1" eType="#//Class"
+        eOpposite="#//Class/lots"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Person">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstName" lowerBound="1"

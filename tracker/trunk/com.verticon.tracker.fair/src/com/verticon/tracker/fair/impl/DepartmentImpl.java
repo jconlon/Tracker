@@ -6,6 +6,7 @@
 package com.verticon.tracker.fair.impl;
 
 import com.verticon.tracker.fair.Department;
+import com.verticon.tracker.fair.Division;
 import com.verticon.tracker.fair.FairPackage;
 
 import com.verticon.tracker.fair.Person;
@@ -22,8 +23,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -36,6 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getClasses <em>Classes</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getSuperintendents <em>Superintendents</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getDivision <em>Division</em>}</li>
  * </ul>
  * </p>
  *
@@ -136,7 +140,7 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 	 */
 	public EList<com.verticon.tracker.fair.Class> getClasses() {
 		if (classes == null) {
-			classes = new EObjectContainmentEList<com.verticon.tracker.fair.Class>(com.verticon.tracker.fair.Class.class, this, FairPackage.DEPARTMENT__CLASSES);
+			classes = new EObjectContainmentWithInverseEList<com.verticon.tracker.fair.Class>(com.verticon.tracker.fair.Class.class, this, FairPackage.DEPARTMENT__CLASSES, FairPackage.CLASS__DEPARTMENT);
 		}
 		return classes;
 	}
@@ -158,13 +162,89 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Division getDivision() {
+		if (eContainerFeatureID != FairPackage.DEPARTMENT__DIVISION) return null;
+		return (Division)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDivision(Division newDivision, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newDivision, FairPackage.DEPARTMENT__DIVISION, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDivision(Division newDivision) {
+		if (newDivision != eInternalContainer() || (eContainerFeatureID != FairPackage.DEPARTMENT__DIVISION && newDivision != null)) {
+			if (EcoreUtil.isAncestor(this, newDivision))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newDivision != null)
+				msgs = ((InternalEObject)newDivision).eInverseAdd(this, FairPackage.DIVISION__DEPARTMENTS, Division.class, msgs);
+			msgs = basicSetDivision(newDivision, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.DEPARTMENT__DIVISION, newDivision, newDivision));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case FairPackage.DEPARTMENT__CLASSES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getClasses()).basicAdd(otherEnd, msgs);
+			case FairPackage.DEPARTMENT__DIVISION:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetDivision((Division)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case FairPackage.DEPARTMENT__CLASSES:
 				return ((InternalEList<?>)getClasses()).basicRemove(otherEnd, msgs);
+			case FairPackage.DEPARTMENT__DIVISION:
+				return basicSetDivision(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case FairPackage.DEPARTMENT__DIVISION:
+				return eInternalContainer().eInverseRemove(this, FairPackage.DIVISION__DEPARTMENTS, Division.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -181,6 +261,8 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 				return getClasses();
 			case FairPackage.DEPARTMENT__SUPERINTENDENTS:
 				return getSuperintendents();
+			case FairPackage.DEPARTMENT__DIVISION:
+				return getDivision();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -205,6 +287,9 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 				getSuperintendents().clear();
 				getSuperintendents().addAll((Collection<? extends Person>)newValue);
 				return;
+			case FairPackage.DEPARTMENT__DIVISION:
+				setDivision((Division)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -226,6 +311,9 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 			case FairPackage.DEPARTMENT__SUPERINTENDENTS:
 				getSuperintendents().clear();
 				return;
+			case FairPackage.DEPARTMENT__DIVISION:
+				setDivision((Division)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -244,6 +332,8 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 				return classes != null && !classes.isEmpty();
 			case FairPackage.DEPARTMENT__SUPERINTENDENTS:
 				return superintendents != null && !superintendents.isEmpty();
+			case FairPackage.DEPARTMENT__DIVISION:
+				return getDivision() != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -18,8 +18,6 @@ import org.eclipse.swt.widgets.TableColumn;
 
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.editor.presentation.AnimalSorter;
-import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.editor.presentation.TrackerTableEditorUtils;
 import com.verticon.tracker.fair.Fair;
 
@@ -107,6 +105,7 @@ public class FairTableEditorUtils {
 
 	/**
 	 * People Table
+	 * Name, First Name, Last Name, Phone Number, Street, City, State, Zip Code
 	 */
 	public static void createPeopleTableViewer(ViewerPane viewerPane,
 			final TableViewer tableViewer, AdapterFactory adapterFactory) {
@@ -117,66 +116,46 @@ public class FairTableEditorUtils {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 
-		// Animal
-		final TableColumn animalColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 220, true));
-		animalColumn.setText(getString("_UI_AnimalColumn_label"));
+		// Name
+		final TableColumn nameColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(3, 200, true));
+		nameColumn.setText("Name");
 
-		// Ain
-		final TableColumn ainColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 150, true));
-		ainColumn.setText(getString("_UI_AinColumn_label"));
+		// First Name
+		final TableColumn firstNameColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(3, 100, true));
+		firstNameColumn.setText("First Name");
 
-		// Animal
-		final TableColumn animalTypeColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 50, true));
-		animalTypeColumn.setText(getString("_UI_AnimalColumn_label"));
-
-		// Species
-		final TableColumn speciesColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 40, true));
-		speciesColumn.setText(getString("_UI_SpeciesColumn_label"));
-
-		// Sex
-		final TableColumn sexColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 50, true));
-		sexColumn.setText(getString("_UI_SexColumn_label"));
-
-		// Breed
-		final TableColumn breedColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 70, true));
-		breedColumn.setText(getString("_UI_BreedColumn_label"));
-
-		// BirthDate
-		final TableColumn dDateColumn = new TableColumn(table, SWT.NONE);
+		// Last Name
+		final TableColumn lastNameTypeColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 100, true));
-		dDateColumn.setText(getString("_UI_BirthDateColumn_label"));
+		lastNameTypeColumn.setText("Last Name");
 
-		// Age
-		final TableColumn ageColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 80, true));
-		ageColumn.setText(getString("_UI_AgeColumn_label"));
+		// Phone Number
+		final TableColumn phoneColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 100, true));
+		phoneColumn.setText("Phone Number");
 
-		// LastEventDateTime
-		final TableColumn lastEventDateTimeColumn = new TableColumn(table,
-				SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 200, true));
-		lastEventDateTimeColumn.setText(getString("_UI_LastEventColumn_label"));
+		// Street
+		final TableColumn streetColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 250, true));
+		streetColumn.setText("Street");
 
-		// Weight
-		final TableColumn weightColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 80, true));
-		weightColumn.setText("Weight");
+		// City
+		final TableColumn cityColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 100, true));
+		cityColumn.setText("City");
 
-		// WeightGainPerDay
-		final TableColumn weightGainColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 80, true));
-		weightGainColumn.setText("WeightGainPerDay");
+		// State
+		final TableColumn stateColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 40, true));
+		stateColumn.setText("State");
 
-		// Comments
-		final TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 200, true));
-		commentsColumn.setText(getString("_UI_CommentsColumn_label"));
+		// Zip Code
+		final TableColumn zipColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 40, true));
+		zipColumn.setText("Zip Code");
+
 
 		Listener sortListener = new Listener() {
 
@@ -196,57 +175,42 @@ public class FairTableEditorUtils {
 
 				int sortIdentifier = 0;
 
-				if (currentColumn == animalColumn) {
-					sortIdentifier = AnimalSorter.ANIMAL_TEXT;
-				} else if (currentColumn == ainColumn) {
-					sortIdentifier = AnimalSorter.AIN;
-				} else if (currentColumn == animalTypeColumn) {
-					sortIdentifier = AnimalSorter.ANIMAL;
-				} else if (currentColumn == dDateColumn) {
-					sortIdentifier = AnimalSorter.BIRTHDATE;
-				} else if (currentColumn == speciesColumn) {
-					sortIdentifier = AnimalSorter.SPECIES;
-				} else if (currentColumn == sexColumn) {
-					sortIdentifier = AnimalSorter.SEX;
-				} else if (currentColumn == breedColumn) {
-					sortIdentifier = AnimalSorter.BREED;
-				} else if (currentColumn == ageColumn) {
-					sortIdentifier = AnimalSorter.AGE;
-
-				} else if (currentColumn == weightColumn) {
-					sortIdentifier = AnimalSorter.WEIGHT;
-				} else if (currentColumn == weightGainColumn) {
-					sortIdentifier = AnimalSorter.WEIGHT_GAIN;
-
-				} else if (currentColumn == commentsColumn) {
-					sortIdentifier = AnimalSorter.COMMENTS;
-				} else if (currentColumn == lastEventDateTimeColumn) {
-					sortIdentifier = AnimalSorter.LAST_EVENT_DATE;
+				if (currentColumn == nameColumn) {
+					sortIdentifier = PeopleSorter.NAME;
+				} else if (currentColumn == firstNameColumn) {
+					sortIdentifier = PeopleSorter.FIRST_NAME;
+				} else if (currentColumn == lastNameTypeColumn) {
+					sortIdentifier = PeopleSorter.LAST_NAME;
+				} else if (currentColumn == stateColumn) {
+					sortIdentifier = PeopleSorter.STATE;
+				} else if (currentColumn == phoneColumn) {
+					sortIdentifier = PeopleSorter.PHONE;
+				} else if (currentColumn == streetColumn) {
+					sortIdentifier = PeopleSorter.STREET;
+				} else if (currentColumn == cityColumn) {
+					sortIdentifier = PeopleSorter.CITY;
+				} else if (currentColumn == zipColumn) {
+					sortIdentifier = PeopleSorter.ZIP;
 				}
 
 				table.setSortDirection(dir);
-				tableViewer.setSorter(new AnimalSorter(sortIdentifier, dir));
+				tableViewer.setSorter(new PeopleSorter(sortIdentifier, dir));
 			}
 
 		};
 
-		breedColumn.addListener(SWT.Selection, sortListener);
-		animalColumn.addListener(SWT.Selection, sortListener);
-		ainColumn.addListener(SWT.Selection, sortListener);
-		lastEventDateTimeColumn.addListener(SWT.Selection, sortListener);
-		animalTypeColumn.addListener(SWT.Selection, sortListener);
-		speciesColumn.addListener(SWT.Selection, sortListener);
-		sexColumn.addListener(SWT.Selection, sortListener);
-		dDateColumn.addListener(SWT.Selection, sortListener);
-		ageColumn.addListener(SWT.Selection, sortListener);
+		cityColumn.addListener(SWT.Selection, sortListener);
+		nameColumn.addListener(SWT.Selection, sortListener);
+		firstNameColumn.addListener(SWT.Selection, sortListener);
+		lastNameTypeColumn.addListener(SWT.Selection, sortListener);
+		phoneColumn.addListener(SWT.Selection, sortListener);
+		streetColumn.addListener(SWT.Selection, sortListener);
+		stateColumn.addListener(SWT.Selection, sortListener);
+		zipColumn.addListener(SWT.Selection, sortListener);
 
-		weightColumn.addListener(SWT.Selection, sortListener);
-		weightGainColumn.addListener(SWT.Selection, sortListener);
-
-		commentsColumn.addListener(SWT.Selection, sortListener);
-
+		
 		tableViewer.setColumnProperties(new String[] { "a", "b", "c", "d", "e",
-				"f", "g", "h", "i", "j", "k", "l" });
+				"f", "g", "h" });
 
 		/**
 		 * The default ItemProvider returned via the adapterFactory for Premises
@@ -256,11 +220,13 @@ public class FairTableEditorUtils {
 		 * To get Animal Elements override the getElements method
 		 */
 		tableViewer.setContentProvider(new AdapterFactoryContentProvider(
-				adapterFactory) // 14.2.2
+				adapterFactory) 
 				{
 					@Override
 					public Object[] getElements(Object object) {
-						return ((Premises) object).getAnimals().toArray();
+						Fair fair = (Fair)object;
+						
+						return fair.getPeople().toArray();
 					}
 
 				});
@@ -270,7 +236,8 @@ public class FairTableEditorUtils {
 	}
 	
 	/**
-	 * People Table
+	 * Exhibits Table
+	 * Name, Number, Exhibitor, Animal, Lot, Class, Department, Division, Comments
 	 */
 	public static void createExhibitsTableViewer(ViewerPane viewerPane,
 			final TableViewer tableViewer, AdapterFactory adapterFactory) {
@@ -281,66 +248,51 @@ public class FairTableEditorUtils {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 
+		// Name
+		final TableColumn nameColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(3, 100, true));
+		nameColumn.setText("Exhibit Name");
+
+		// Number
+		final TableColumn numberColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(3, 100, true));
+		numberColumn.setText("Number");
+
+		// Exhibitor
+		final TableColumn exhibitorColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 140, true));
+		exhibitorColumn.setText("Exhibitor");
+
 		// Animal
 		final TableColumn animalColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 220, true));
-		animalColumn.setText(getString("_UI_AnimalColumn_label"));
+		layout.addColumnData(new ColumnWeightData(2, 140, true));
+		animalColumn.setText("Animal");
 
-		// Ain
-		final TableColumn ainColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 150, true));
-		ainColumn.setText(getString("_UI_AinColumn_label"));
-
-		// Animal
-		final TableColumn animalTypeColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 50, true));
-		animalTypeColumn.setText(getString("_UI_AnimalColumn_label"));
-
-		// Species
-		final TableColumn speciesColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 40, true));
-		speciesColumn.setText(getString("_UI_SpeciesColumn_label"));
-
-		// Sex
-		final TableColumn sexColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 50, true));
-		sexColumn.setText(getString("_UI_SexColumn_label"));
-
-		// Breed
-		final TableColumn breedColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 70, true));
-		breedColumn.setText(getString("_UI_BreedColumn_label"));
-
-		// BirthDate
-		final TableColumn dDateColumn = new TableColumn(table, SWT.NONE);
+		// Lot
+		final TableColumn lotColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 100, true));
-		dDateColumn.setText(getString("_UI_BirthDateColumn_label"));
+		lotColumn.setText("Lot");
+		
+		// Class
+		final TableColumn clazzColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 100, true));
+		clazzColumn.setText("Class");
 
-		// Age
-		final TableColumn ageColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 80, true));
-		ageColumn.setText(getString("_UI_AgeColumn_label"));
+		// Department 
+		final TableColumn departmentColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 100, true));
+		departmentColumn.setText("Department");
 
-		// LastEventDateTime
-		final TableColumn lastEventDateTimeColumn = new TableColumn(table,
-				SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 200, true));
-		lastEventDateTimeColumn.setText(getString("_UI_LastEventColumn_label"));
+		// Division
+		final TableColumn divisionColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 100, true));
+		divisionColumn.setText("Division");
 
-		// Weight
-		final TableColumn weightColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 80, true));
-		weightColumn.setText("Weight");
-
-		// WeightGainPerDay
-		final TableColumn weightGainColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 80, true));
-		weightGainColumn.setText("WeightGainPerDay");
-
+		
 		// Comments
 		final TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 200, true));
-		commentsColumn.setText(getString("_UI_CommentsColumn_label"));
+		layout.addColumnData(new ColumnWeightData(2, 300, true));
+		commentsColumn.setText("Comments");
 
 		Listener sortListener = new Listener() {
 
@@ -360,57 +312,53 @@ public class FairTableEditorUtils {
 
 				int sortIdentifier = 0;
 
-				if (currentColumn == animalColumn) {
-					sortIdentifier = AnimalSorter.ANIMAL_TEXT;
-				} else if (currentColumn == ainColumn) {
-					sortIdentifier = AnimalSorter.AIN;
-				} else if (currentColumn == animalTypeColumn) {
-					sortIdentifier = AnimalSorter.ANIMAL;
-				} else if (currentColumn == dDateColumn) {
-					sortIdentifier = AnimalSorter.BIRTHDATE;
-				} else if (currentColumn == speciesColumn) {
-					sortIdentifier = AnimalSorter.SPECIES;
-				} else if (currentColumn == sexColumn) {
-					sortIdentifier = AnimalSorter.SEX;
-				} else if (currentColumn == breedColumn) {
-					sortIdentifier = AnimalSorter.BREED;
-				} else if (currentColumn == ageColumn) {
-					sortIdentifier = AnimalSorter.AGE;
-
-				} else if (currentColumn == weightColumn) {
-					sortIdentifier = AnimalSorter.WEIGHT;
-				} else if (currentColumn == weightGainColumn) {
-					sortIdentifier = AnimalSorter.WEIGHT_GAIN;
-
+				if (currentColumn == nameColumn) {
+					sortIdentifier = ExhibitSorter.NAME;
+					
+				} else if (currentColumn == animalColumn) {
+					sortIdentifier = ExhibitSorter.ANIMAL;
+					
+				} else if (currentColumn == departmentColumn) {
+					sortIdentifier = ExhibitSorter.DEPARTMENT;
+					
+				} else if (currentColumn == numberColumn) {
+					sortIdentifier = ExhibitSorter.NUMBER;
+					
+				} else if (currentColumn == exhibitorColumn) {
+					sortIdentifier = ExhibitSorter.EXHIBITOR;
+					
+				} else if (currentColumn == clazzColumn) {
+					sortIdentifier = ExhibitSorter.CLASS;
+					
+				} else if (currentColumn == lotColumn) {
+					sortIdentifier = ExhibitSorter.LOT;
+					
+				} else if (currentColumn == divisionColumn) {
+					sortIdentifier = ExhibitSorter.DIVISION;
+				
 				} else if (currentColumn == commentsColumn) {
-					sortIdentifier = AnimalSorter.COMMENTS;
-				} else if (currentColumn == lastEventDateTimeColumn) {
-					sortIdentifier = AnimalSorter.LAST_EVENT_DATE;
+				sortIdentifier = ExhibitSorter.COMMENTS;
+			
 				}
 
 				table.setSortDirection(dir);
-				tableViewer.setSorter(new AnimalSorter(sortIdentifier, dir));
+				tableViewer.setSorter(new ExhibitSorter(sortIdentifier, dir));
 			}
 
 		};
-
-		breedColumn.addListener(SWT.Selection, sortListener);
-		animalColumn.addListener(SWT.Selection, sortListener);
-		ainColumn.addListener(SWT.Selection, sortListener);
-		lastEventDateTimeColumn.addListener(SWT.Selection, sortListener);
-		animalTypeColumn.addListener(SWT.Selection, sortListener);
-		speciesColumn.addListener(SWT.Selection, sortListener);
-		sexColumn.addListener(SWT.Selection, sortListener);
-		dDateColumn.addListener(SWT.Selection, sortListener);
-		ageColumn.addListener(SWT.Selection, sortListener);
-
-		weightColumn.addListener(SWT.Selection, sortListener);
-		weightGainColumn.addListener(SWT.Selection, sortListener);
-
+		//Name, Number, Exhibitor, Animal, Lot, Class, Department, Division, Comments
+		departmentColumn.addListener(SWT.Selection, sortListener);
+		nameColumn.addListener(SWT.Selection, sortListener);
+		numberColumn.addListener(SWT.Selection, sortListener);
 		commentsColumn.addListener(SWT.Selection, sortListener);
+		exhibitorColumn.addListener(SWT.Selection, sortListener);
+		animalColumn.addListener(SWT.Selection, sortListener);
+		lotColumn.addListener(SWT.Selection, sortListener);
+		divisionColumn.addListener(SWT.Selection, sortListener);
+		clazzColumn.addListener(SWT.Selection, sortListener);
 
 		tableViewer.setColumnProperties(new String[] { "a", "b", "c", "d", "e",
-				"f", "g", "h", "i", "j", "k", "l" });
+				"f", "g", "h", "i" });
 
 		/**
 		 * The default ItemProvider returned via the adapterFactory for Premises
@@ -420,11 +368,11 @@ public class FairTableEditorUtils {
 		 * To get Animal Elements override the getElements method
 		 */
 		tableViewer.setContentProvider(new AdapterFactoryContentProvider(
-				adapterFactory) // 14.2.2
+				adapterFactory) 
 				{
 					@Override
 					public Object[] getElements(Object object) {
-						return ((Premises) object).getAnimals().toArray();
+						return ((Fair) object).exhibits().toArray();
 					}
 
 				});
@@ -432,6 +380,8 @@ public class FairTableEditorUtils {
 				adapterFactory));
 
 	}
+	
+	
 
 	/**
 	 * This looks up a string in the plugin's plugin.properties file. <!--

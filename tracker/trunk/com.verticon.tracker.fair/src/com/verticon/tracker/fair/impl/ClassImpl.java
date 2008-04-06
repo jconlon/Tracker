@@ -5,6 +5,7 @@
  */
 package com.verticon.tracker.fair.impl;
 
+import com.verticon.tracker.fair.Department;
 import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.Lot;
 
@@ -22,8 +23,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -36,6 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getLots <em>Lots</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getJudges <em>Judges</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getDepartment <em>Department</em>}</li>
  * </ul>
  * </p>
  *
@@ -136,7 +140,7 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 	 */
 	public EList<Lot> getLots() {
 		if (lots == null) {
-			lots = new EObjectContainmentEList<Lot>(Lot.class, this, FairPackage.CLASS__LOTS);
+			lots = new EObjectContainmentWithInverseEList<Lot>(Lot.class, this, FairPackage.CLASS__LOTS, FairPackage.LOT__CLASS);
 		}
 		return lots;
 	}
@@ -158,13 +162,89 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Department getDepartment() {
+		if (eContainerFeatureID != FairPackage.CLASS__DEPARTMENT) return null;
+		return (Department)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDepartment(Department newDepartment, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newDepartment, FairPackage.CLASS__DEPARTMENT, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDepartment(Department newDepartment) {
+		if (newDepartment != eInternalContainer() || (eContainerFeatureID != FairPackage.CLASS__DEPARTMENT && newDepartment != null)) {
+			if (EcoreUtil.isAncestor(this, newDepartment))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newDepartment != null)
+				msgs = ((InternalEObject)newDepartment).eInverseAdd(this, FairPackage.DEPARTMENT__CLASSES, Department.class, msgs);
+			msgs = basicSetDepartment(newDepartment, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.CLASS__DEPARTMENT, newDepartment, newDepartment));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case FairPackage.CLASS__LOTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLots()).basicAdd(otherEnd, msgs);
+			case FairPackage.CLASS__DEPARTMENT:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetDepartment((Department)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case FairPackage.CLASS__LOTS:
 				return ((InternalEList<?>)getLots()).basicRemove(otherEnd, msgs);
+			case FairPackage.CLASS__DEPARTMENT:
+				return basicSetDepartment(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case FairPackage.CLASS__DEPARTMENT:
+				return eInternalContainer().eInverseRemove(this, FairPackage.DEPARTMENT__CLASSES, Department.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -181,6 +261,8 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 				return getLots();
 			case FairPackage.CLASS__JUDGES:
 				return getJudges();
+			case FairPackage.CLASS__DEPARTMENT:
+				return getDepartment();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -205,6 +287,9 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 				getJudges().clear();
 				getJudges().addAll((Collection<? extends Person>)newValue);
 				return;
+			case FairPackage.CLASS__DEPARTMENT:
+				setDepartment((Department)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -226,6 +311,9 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 			case FairPackage.CLASS__JUDGES:
 				getJudges().clear();
 				return;
+			case FairPackage.CLASS__DEPARTMENT:
+				setDepartment((Department)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -244,6 +332,8 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 				return lots != null && !lots.isEmpty();
 			case FairPackage.CLASS__JUDGES:
 				return judges != null && !judges.isEmpty();
+			case FairPackage.CLASS__DEPARTMENT:
+				return getDepartment() != null;
 		}
 		return super.eIsSet(featureID);
 	}

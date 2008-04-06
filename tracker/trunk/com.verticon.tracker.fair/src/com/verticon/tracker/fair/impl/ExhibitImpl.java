@@ -9,16 +9,19 @@ import com.verticon.tracker.Animal;
 
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.FairPackage;
+import com.verticon.tracker.fair.Lot;
 import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YouthClub;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,6 +35,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.verticon.tracker.fair.impl.ExhibitImpl#getComments <em>Comments</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ExhibitImpl#getAnimal <em>Animal</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ExhibitImpl#getExhibitor <em>Exhibitor</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.ExhibitImpl#getLot <em>Lot</em>}</li>
  * </ul>
  * </p>
  *
@@ -288,6 +292,91 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Lot getLot() {
+		if (eContainerFeatureID != FairPackage.EXHIBIT__LOT) return null;
+		return (Lot)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetLot(Lot newLot, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newLot, FairPackage.EXHIBIT__LOT, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLot(Lot newLot) {
+		if (newLot != eInternalContainer() || (eContainerFeatureID != FairPackage.EXHIBIT__LOT && newLot != null)) {
+			if (EcoreUtil.isAncestor(this, newLot))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newLot != null)
+				msgs = ((InternalEObject)newLot).eInverseAdd(this, FairPackage.LOT__EXHIBITS, Lot.class, msgs);
+			msgs = basicSetLot(newLot, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.EXHIBIT__LOT, newLot, newLot));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case FairPackage.EXHIBIT__LOT:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetLot((Lot)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case FairPackage.EXHIBIT__LOT:
+				return basicSetLot(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case FairPackage.EXHIBIT__LOT:
+				return eInternalContainer().eInverseRemove(this, FairPackage.LOT__EXHIBITS, Lot.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -303,6 +392,8 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 			case FairPackage.EXHIBIT__EXHIBITOR:
 				if (resolve) return getExhibitor();
 				return basicGetExhibitor();
+			case FairPackage.EXHIBIT__LOT:
+				return getLot();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -329,6 +420,9 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 				return;
 			case FairPackage.EXHIBIT__EXHIBITOR:
 				setExhibitor((Person)newValue);
+				return;
+			case FairPackage.EXHIBIT__LOT:
+				setLot((Lot)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -357,6 +451,9 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 			case FairPackage.EXHIBIT__EXHIBITOR:
 				setExhibitor((Person)null);
 				return;
+			case FairPackage.EXHIBIT__LOT:
+				setLot((Lot)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -379,6 +476,8 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 				return animal != null;
 			case FairPackage.EXHIBIT__EXHIBITOR:
 				return exhibitor != null;
+			case FairPackage.EXHIBIT__LOT:
+				return getLot() != null;
 		}
 		return super.eIsSet(featureID);
 	}

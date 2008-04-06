@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.fair.Exhibit#getComments <em>Comments</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Exhibit#getAnimal <em>Animal</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Exhibit#getExhibitor <em>Exhibitor</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Exhibit#getLot <em>Lot</em>}</li>
  * </ul>
  * </p>
  *
@@ -166,5 +167,33 @@ public interface Exhibit extends EObject {
 	 * @generated
 	 */
 	void setExhibitor(Person value);
+
+	/**
+	 * Returns the value of the '<em><b>Lot</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link com.verticon.tracker.fair.Lot#getExhibits <em>Exhibits</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Lot</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Lot</em>' container reference.
+	 * @see #setLot(Lot)
+	 * @see com.verticon.tracker.fair.FairPackage#getExhibit_Lot()
+	 * @see com.verticon.tracker.fair.Lot#getExhibits
+	 * @model opposite="exhibits" required="true" transient="false"
+	 * @generated
+	 */
+	Lot getLot();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.fair.Exhibit#getLot <em>Lot</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Lot</em>' container reference.
+	 * @see #getLot()
+	 * @generated
+	 */
+	void setLot(Lot value);
 
 } // Exhibit

@@ -63,6 +63,7 @@ public interface Division extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Departments</b></em>' containment reference list.
 	 * The list contents are of type {@link com.verticon.tracker.fair.Department}.
+	 * It is bidirectional and its opposite is '{@link com.verticon.tracker.fair.Department#getDivision <em>Division</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Departments</em>' containment reference list isn't clear,
@@ -71,7 +72,8 @@ public interface Division extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Departments</em>' containment reference list.
 	 * @see com.verticon.tracker.fair.FairPackage#getDivision_Departments()
-	 * @model containment="true" required="true"
+	 * @see com.verticon.tracker.fair.Department#getDivision
+	 * @model opposite="division" containment="true" required="true"
 	 * @generated
 	 */
 	EList<Department> getDepartments();
