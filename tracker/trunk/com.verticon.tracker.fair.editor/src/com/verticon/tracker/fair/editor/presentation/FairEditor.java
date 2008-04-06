@@ -127,6 +127,7 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
 import com.verticon.tracker.editor.presentation.EventsTableViewerNotifier;
+import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.Person;
@@ -138,7 +139,11 @@ import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
  * <!-- begin-user-doc -->
  * This editor differs from the generated EMF implementation in the following ways:
  * <ul>
- *   <li>adds Animals and an Events table</li>
+ *   <li>adds an Animals table</li>
+ *   <li>adds an Events table</li>
+ *   <li>adds an Exhibits table </li>
+ *   <li>adds an People table </li>
+ *   <li>adds support for OCL Query View using an IQueryDataSetProvider adapter</li>
  * </ul>
  * <!-- end-user-doc -->
  * @generated
@@ -223,6 +228,12 @@ public class FairEditor
 	 * @generated NOT
 	 */
 	protected TableViewer exhibitsTableViewer;
+	
+	/**
+	 * Offers a query on a dataSet. 
+	 * @generated NOT
+	 */
+	private IQueryDataSetProvider queryDataSetProvider;
 
 	/**
 	 * This is the property sheet page.
@@ -1606,8 +1617,9 @@ public class FairEditor
 	/**
 	 * This is how the framework determines which interfaces we implement.
 	 * <!-- begin-user-doc -->
+	 * Modified to offer a IQueryDataSetProvider to support OCL Queries
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -1620,6 +1632,23 @@ public class FairEditor
 		}
 		else if (key.equals(IGotoMarker.class)) {
 			return this;
+		}
+		//Adds adaptive support for IQueryDataSetProvider 	
+		else if (key.equals(IQueryDataSetProvider.class)){
+			if (queryDataSetProvider==null){
+				queryDataSetProvider = new IQueryDataSetProvider(){
+
+					public EditingDomain getEditingDomain() {
+						return FairEditor.this.getEditingDomain();
+					}
+
+					public void setSelectionToViewer(Collection<?> collection) {
+						FairEditor.this.setSelectionToViewer(collection);
+					}
+					
+				};
+			}
+			return queryDataSetProvider;
 		}
 		else {
 			return super.getAdapter(key);
