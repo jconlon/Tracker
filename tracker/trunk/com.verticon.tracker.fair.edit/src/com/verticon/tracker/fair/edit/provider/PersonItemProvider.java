@@ -330,13 +330,29 @@ public class PersonItemProvider
 	}
 
 	public Object getColumnImage(Object object, int columnIndex) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public String getColumnText(Object object, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	/**
+	 * Adds table support
+	 * Name, First Name, Last Name, Phone Number, Street, City, State, Zip Code
+	 * 
+	 */
+	public String getColumnText(Object object, int columnIndex) 
+	  {
+	    Person person = (Person)object;
+	    switch (columnIndex){
+	        case 0: return person.getName(); 
+	    	case 1: return person.getFirstName(); 
+	    	case 2: return person.getLastName();  
+	    	case 3: return person.getPhone();
+	    	case 4: return person.getStreet();
+	    	case 5: return person.getCity();
+	    	case 6: return person.getState();
+	    	case 7: return person.getZipCode();
+	    	default :
+	    		return "unknown " + columnIndex;
+	    }
+	  }
 
 }

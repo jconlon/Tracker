@@ -256,13 +256,27 @@ public class ExhibitItemProvider
 	}
 
 	public Object getColumnImage(Object object, int columnIndex) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Name, Number, Exhibitor, Animal, Lot, Class, Department, Division, Comments
+	 */
 	public String getColumnText(Object object, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		Exhibit exhibit= (Exhibit)object;
+	    switch (columnIndex){
+	        case 0: return exhibit.getName(); 
+	    	case 1: return Integer.toString(exhibit.getNumber()); 
+	    	case 2: return exhibit.getExhibitor().getName();  
+	    	case 3: return exhibit.getAnimal().getId();
+	    	case 4: return exhibit.getLot().getName();
+	    	case 5: return exhibit.getLot().getClass_().getName();
+	    	case 6: return exhibit.getLot().getClass_().getDepartment().getName();
+	    	case 7: return exhibit.getLot().getClass_().getDepartment().getDivision().getName();
+	    	case 8: return exhibit.getComments();
+	    	default :
+	    		return "unknown " + columnIndex;
+	    }
 	}
 
 }
