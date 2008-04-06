@@ -86,22 +86,22 @@ public interface FairPackage extends EPackage {
 	int FAIR__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Youth Club</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Youth Clubs</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FAIR__YOUTH_CLUB = 1;
+	int FAIR__YOUTH_CLUBS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Division</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Divisions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FAIR__DIVISION = 2;
+	int FAIR__DIVISIONS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Premises</b></em>' reference.
@@ -113,7 +113,7 @@ public interface FairPackage extends EPackage {
 	int FAIR__PREMISES = 3;
 
 	/**
-	 * The feature id for the '<em><b>People</b></em>' containment reference.
+	 * The feature id for the '<em><b>People</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -214,13 +214,13 @@ public interface FairPackage extends EPackage {
 	int YOUTH_CLUB__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Contact</b></em>' reference list.
+	 * The feature id for the '<em><b>Contacts</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int YOUTH_CLUB__CONTACT = 1;
+	int YOUTH_CLUB__CONTACTS = 1;
 
 	/**
 	 * The number of structural features of the '<em>Youth Club</em>' class.
@@ -251,13 +251,13 @@ public interface FairPackage extends EPackage {
 	int DIVISION__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Department</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Departments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIVISION__DEPARTMENT = 1;
+	int DIVISION__DEPARTMENTS = 1;
 
 	/**
 	 * The number of structural features of the '<em>Division</em>' class.
@@ -288,22 +288,22 @@ public interface FairPackage extends EPackage {
 	int DEPARTMENT__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Class</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Classes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPARTMENT__CLASS = 1;
+	int DEPARTMENT__CLASSES = 1;
 
 	/**
-	 * The feature id for the '<em><b>Superintendent</b></em>' reference list.
+	 * The feature id for the '<em><b>Superintendents</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPARTMENT__SUPERINTENDENT = 2;
+	int DEPARTMENT__SUPERINTENDENTS = 2;
 
 	/**
 	 * The number of structural features of the '<em>Department</em>' class.
@@ -334,22 +334,22 @@ public interface FairPackage extends EPackage {
 	int CLASS__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Lot</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Lots</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__LOT = 1;
+	int CLASS__LOTS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Judge</b></em>' reference list.
+	 * The feature id for the '<em><b>Judges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__JUDGE = 2;
+	int CLASS__JUDGES = 2;
 
 	/**
 	 * The number of structural features of the '<em>Class</em>' class.
@@ -380,13 +380,13 @@ public interface FairPackage extends EPackage {
 	int LOT__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Exhibit</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Exhibits</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOT__EXHIBIT = 1;
+	int LOT__EXHIBITS = 1;
 
 	/**
 	 * The number of structural features of the '<em>Lot</em>' class.
@@ -399,34 +399,6 @@ public interface FairPackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.PeopleImpl <em>People</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.fair.impl.PeopleImpl
-	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getPeople()
-	 * @generated
-	 */
-	int PEOPLE = 7;
-
-	/**
-	 * The feature id for the '<em><b>Person</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PEOPLE__PERSON = 0;
-
-	/**
-	 * The number of structural features of the '<em>People</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PEOPLE_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.PersonImpl <em>Person</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -434,7 +406,7 @@ public interface FairPackage extends EPackage {
 	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getPerson()
 	 * @generated
 	 */
-	int PERSON = 8;
+	int PERSON = 7;
 
 	/**
 	 * The feature id for the '<em><b>First Name</b></em>' attribute.
@@ -525,7 +497,7 @@ public interface FairPackage extends EPackage {
 	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getYoungPerson()
 	 * @generated
 	 */
-	int YOUNG_PERSON = 9;
+	int YOUNG_PERSON = 8;
 
 	/**
 	 * The feature id for the '<em><b>First Name</b></em>' attribute.
@@ -600,13 +572,13 @@ public interface FairPackage extends EPackage {
 	int YOUNG_PERSON__NAME = PERSON__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference list.
+	 * The feature id for the '<em><b>Parents</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int YOUNG_PERSON__PARENT = PERSON_FEATURE_COUNT + 0;
+	int YOUNG_PERSON__PARENTS = PERSON_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Club</b></em>' reference.
@@ -634,7 +606,7 @@ public interface FairPackage extends EPackage {
 	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getZipCode()
 	 * @generated
 	 */
-	int ZIP_CODE = 10;
+	int ZIP_CODE = 9;
 
 	/**
 	 * The meta object id for the '<em>US Telephone Number</em>' data type.
@@ -644,7 +616,7 @@ public interface FairPackage extends EPackage {
 	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getUSTelephoneNumber()
 	 * @generated
 	 */
-	int US_TELEPHONE_NUMBER = 11;
+	int US_TELEPHONE_NUMBER = 10;
 
 
 	/**
@@ -669,26 +641,26 @@ public interface FairPackage extends EPackage {
 	EAttribute getFair_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Fair#getYouthClub <em>Youth Club</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Fair#getYouthClubs <em>Youth Clubs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Youth Club</em>'.
-	 * @see com.verticon.tracker.fair.Fair#getYouthClub()
+	 * @return the meta object for the containment reference list '<em>Youth Clubs</em>'.
+	 * @see com.verticon.tracker.fair.Fair#getYouthClubs()
 	 * @see #getFair()
 	 * @generated
 	 */
-	EReference getFair_YouthClub();
+	EReference getFair_YouthClubs();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Fair#getDivision <em>Division</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Fair#getDivisions <em>Divisions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Division</em>'.
-	 * @see com.verticon.tracker.fair.Fair#getDivision()
+	 * @return the meta object for the containment reference list '<em>Divisions</em>'.
+	 * @see com.verticon.tracker.fair.Fair#getDivisions()
 	 * @see #getFair()
 	 * @generated
 	 */
-	EReference getFair_Division();
+	EReference getFair_Divisions();
 
 	/**
 	 * Returns the meta object for the reference '{@link com.verticon.tracker.fair.Fair#getPremises <em>Premises</em>}'.
@@ -702,10 +674,10 @@ public interface FairPackage extends EPackage {
 	EReference getFair_Premises();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.verticon.tracker.fair.Fair#getPeople <em>People</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Fair#getPeople <em>People</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>People</em>'.
+	 * @return the meta object for the containment reference list '<em>People</em>'.
 	 * @see com.verticon.tracker.fair.Fair#getPeople()
 	 * @see #getFair()
 	 * @generated
@@ -799,15 +771,15 @@ public interface FairPackage extends EPackage {
 	EAttribute getYouthClub_Name();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.verticon.tracker.fair.YouthClub#getContact <em>Contact</em>}'.
+	 * Returns the meta object for the reference list '{@link com.verticon.tracker.fair.YouthClub#getContacts <em>Contacts</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Contact</em>'.
-	 * @see com.verticon.tracker.fair.YouthClub#getContact()
+	 * @return the meta object for the reference list '<em>Contacts</em>'.
+	 * @see com.verticon.tracker.fair.YouthClub#getContacts()
 	 * @see #getYouthClub()
 	 * @generated
 	 */
-	EReference getYouthClub_Contact();
+	EReference getYouthClub_Contacts();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Division <em>Division</em>}'.
@@ -831,15 +803,15 @@ public interface FairPackage extends EPackage {
 	EAttribute getDivision_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Division#getDepartment <em>Department</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Division#getDepartments <em>Departments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Department</em>'.
-	 * @see com.verticon.tracker.fair.Division#getDepartment()
+	 * @return the meta object for the containment reference list '<em>Departments</em>'.
+	 * @see com.verticon.tracker.fair.Division#getDepartments()
 	 * @see #getDivision()
 	 * @generated
 	 */
-	EReference getDivision_Department();
+	EReference getDivision_Departments();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Department <em>Department</em>}'.
@@ -863,26 +835,26 @@ public interface FairPackage extends EPackage {
 	EAttribute getDepartment_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Department#getClass_ <em>Class</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Department#getClasses <em>Classes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Class</em>'.
-	 * @see com.verticon.tracker.fair.Department#getClass_()
+	 * @return the meta object for the containment reference list '<em>Classes</em>'.
+	 * @see com.verticon.tracker.fair.Department#getClasses()
 	 * @see #getDepartment()
 	 * @generated
 	 */
-	EReference getDepartment_Class();
+	EReference getDepartment_Classes();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.verticon.tracker.fair.Department#getSuperintendent <em>Superintendent</em>}'.
+	 * Returns the meta object for the reference list '{@link com.verticon.tracker.fair.Department#getSuperintendents <em>Superintendents</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Superintendent</em>'.
-	 * @see com.verticon.tracker.fair.Department#getSuperintendent()
+	 * @return the meta object for the reference list '<em>Superintendents</em>'.
+	 * @see com.verticon.tracker.fair.Department#getSuperintendents()
 	 * @see #getDepartment()
 	 * @generated
 	 */
-	EReference getDepartment_Superintendent();
+	EReference getDepartment_Superintendents();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Class <em>Class</em>}'.
@@ -906,26 +878,26 @@ public interface FairPackage extends EPackage {
 	EAttribute getClass_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Class#getLot <em>Lot</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Class#getLots <em>Lots</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Lot</em>'.
-	 * @see com.verticon.tracker.fair.Class#getLot()
+	 * @return the meta object for the containment reference list '<em>Lots</em>'.
+	 * @see com.verticon.tracker.fair.Class#getLots()
 	 * @see #getClass_()
 	 * @generated
 	 */
-	EReference getClass_Lot();
+	EReference getClass_Lots();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.verticon.tracker.fair.Class#getJudge <em>Judge</em>}'.
+	 * Returns the meta object for the reference list '{@link com.verticon.tracker.fair.Class#getJudges <em>Judges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Judge</em>'.
-	 * @see com.verticon.tracker.fair.Class#getJudge()
+	 * @return the meta object for the reference list '<em>Judges</em>'.
+	 * @see com.verticon.tracker.fair.Class#getJudges()
 	 * @see #getClass_()
 	 * @generated
 	 */
-	EReference getClass_Judge();
+	EReference getClass_Judges();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Lot <em>Lot</em>}'.
@@ -949,36 +921,15 @@ public interface FairPackage extends EPackage {
 	EAttribute getLot_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Lot#getExhibit <em>Exhibit</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.Lot#getExhibits <em>Exhibits</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Exhibit</em>'.
-	 * @see com.verticon.tracker.fair.Lot#getExhibit()
+	 * @return the meta object for the containment reference list '<em>Exhibits</em>'.
+	 * @see com.verticon.tracker.fair.Lot#getExhibits()
 	 * @see #getLot()
 	 * @generated
 	 */
-	EReference getLot_Exhibit();
-
-	/**
-	 * Returns the meta object for class '{@link com.verticon.tracker.fair.People <em>People</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>People</em>'.
-	 * @see com.verticon.tracker.fair.People
-	 * @generated
-	 */
-	EClass getPeople();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.fair.People#getPerson <em>Person</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Person</em>'.
-	 * @see com.verticon.tracker.fair.People#getPerson()
-	 * @see #getPeople()
-	 * @generated
-	 */
-	EReference getPeople_Person();
+	EReference getLot_Exhibits();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Person <em>Person</em>}'.
@@ -1089,15 +1040,15 @@ public interface FairPackage extends EPackage {
 	EClass getYoungPerson();
 
 	/**
-	 * Returns the meta object for the reference list '{@link com.verticon.tracker.fair.YoungPerson#getParent <em>Parent</em>}'.
+	 * Returns the meta object for the reference list '{@link com.verticon.tracker.fair.YoungPerson#getParents <em>Parents</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Parent</em>'.
-	 * @see com.verticon.tracker.fair.YoungPerson#getParent()
+	 * @return the meta object for the reference list '<em>Parents</em>'.
+	 * @see com.verticon.tracker.fair.YoungPerson#getParents()
 	 * @see #getYoungPerson()
 	 * @generated
 	 */
-	EReference getYoungPerson_Parent();
+	EReference getYoungPerson_Parents();
 
 	/**
 	 * Returns the meta object for the reference '{@link com.verticon.tracker.fair.YoungPerson#getClub <em>Club</em>}'.
@@ -1173,20 +1124,20 @@ public interface FairPackage extends EPackage {
 		EAttribute FAIR__NAME = eINSTANCE.getFair_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Youth Club</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Youth Clubs</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FAIR__YOUTH_CLUB = eINSTANCE.getFair_YouthClub();
+		EReference FAIR__YOUTH_CLUBS = eINSTANCE.getFair_YouthClubs();
 
 		/**
-		 * The meta object literal for the '<em><b>Division</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Divisions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FAIR__DIVISION = eINSTANCE.getFair_Division();
+		EReference FAIR__DIVISIONS = eINSTANCE.getFair_Divisions();
 
 		/**
 		 * The meta object literal for the '<em><b>Premises</b></em>' reference feature.
@@ -1197,7 +1148,7 @@ public interface FairPackage extends EPackage {
 		EReference FAIR__PREMISES = eINSTANCE.getFair_Premises();
 
 		/**
-		 * The meta object literal for the '<em><b>People</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>People</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1273,12 +1224,12 @@ public interface FairPackage extends EPackage {
 		EAttribute YOUTH_CLUB__NAME = eINSTANCE.getYouthClub_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Contact</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Contacts</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference YOUTH_CLUB__CONTACT = eINSTANCE.getYouthClub_Contact();
+		EReference YOUTH_CLUB__CONTACTS = eINSTANCE.getYouthClub_Contacts();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.DivisionImpl <em>Division</em>}' class.
@@ -1299,12 +1250,12 @@ public interface FairPackage extends EPackage {
 		EAttribute DIVISION__NAME = eINSTANCE.getDivision_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Department</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Departments</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DIVISION__DEPARTMENT = eINSTANCE.getDivision_Department();
+		EReference DIVISION__DEPARTMENTS = eINSTANCE.getDivision_Departments();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.DepartmentImpl <em>Department</em>}' class.
@@ -1325,20 +1276,20 @@ public interface FairPackage extends EPackage {
 		EAttribute DEPARTMENT__NAME = eINSTANCE.getDepartment_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Class</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Classes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DEPARTMENT__CLASS = eINSTANCE.getDepartment_Class();
+		EReference DEPARTMENT__CLASSES = eINSTANCE.getDepartment_Classes();
 
 		/**
-		 * The meta object literal for the '<em><b>Superintendent</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Superintendents</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DEPARTMENT__SUPERINTENDENT = eINSTANCE.getDepartment_Superintendent();
+		EReference DEPARTMENT__SUPERINTENDENTS = eINSTANCE.getDepartment_Superintendents();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.ClassImpl <em>Class</em>}' class.
@@ -1359,20 +1310,20 @@ public interface FairPackage extends EPackage {
 		EAttribute CLASS__NAME = eINSTANCE.getClass_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Lot</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Lots</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS__LOT = eINSTANCE.getClass_Lot();
+		EReference CLASS__LOTS = eINSTANCE.getClass_Lots();
 
 		/**
-		 * The meta object literal for the '<em><b>Judge</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Judges</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS__JUDGE = eINSTANCE.getClass_Judge();
+		EReference CLASS__JUDGES = eINSTANCE.getClass_Judges();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.LotImpl <em>Lot</em>}' class.
@@ -1393,30 +1344,12 @@ public interface FairPackage extends EPackage {
 		EAttribute LOT__NAME = eINSTANCE.getLot_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Exhibit</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Exhibits</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LOT__EXHIBIT = eINSTANCE.getLot_Exhibit();
-
-		/**
-		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.PeopleImpl <em>People</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.verticon.tracker.fair.impl.PeopleImpl
-		 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getPeople()
-		 * @generated
-		 */
-		EClass PEOPLE = eINSTANCE.getPeople();
-
-		/**
-		 * The meta object literal for the '<em><b>Person</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PEOPLE__PERSON = eINSTANCE.getPeople_Person();
+		EReference LOT__EXHIBITS = eINSTANCE.getLot_Exhibits();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.PersonImpl <em>Person</em>}' class.
@@ -1503,12 +1436,12 @@ public interface FairPackage extends EPackage {
 		EClass YOUNG_PERSON = eINSTANCE.getYoungPerson();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Parents</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference YOUNG_PERSON__PARENT = eINSTANCE.getYoungPerson_Parent();
+		EReference YOUNG_PERSON__PARENTS = eINSTANCE.getYoungPerson_Parents();
 
 		/**
 		 * The meta object literal for the '<em><b>Club</b></em>' reference feature.

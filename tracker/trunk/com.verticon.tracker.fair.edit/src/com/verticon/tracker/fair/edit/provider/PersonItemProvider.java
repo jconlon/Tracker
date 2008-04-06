@@ -6,27 +6,26 @@
 package com.verticon.tracker.fair.edit.provider;
 
 
-import com.verticon.tracker.fair.FairPackage;
-import com.verticon.tracker.fair.Person;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import com.verticon.tracker.fair.FairPackage;
+import com.verticon.tracker.fair.Person;
 
 /**
  * This is the item provider adapter for a {@link com.verticon.tracker.fair.Person} object.
@@ -39,11 +38,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 public class PersonItemProvider
 	extends ItemProviderAdapter
 	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -332,6 +327,16 @@ public class PersonItemProvider
 	@Override
 	public ResourceLocator getResourceLocator() {
 		return FairEditPlugin.INSTANCE;
+	}
+
+	public Object getColumnImage(Object object, int columnIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getColumnText(Object object, int columnIndex) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

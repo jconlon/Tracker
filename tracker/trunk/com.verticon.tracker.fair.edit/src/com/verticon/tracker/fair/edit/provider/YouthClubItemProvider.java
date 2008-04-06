@@ -71,7 +71,7 @@ public class YouthClubItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
-			addContactPropertyDescriptor(object);
+			addContactsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -99,19 +99,19 @@ public class YouthClubItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Contact feature.
+	 * This adds a property descriptor for the Contacts feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addContactPropertyDescriptor(Object object) {
+	protected void addContactsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_YouthClub_contact_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_YouthClub_contact_feature", "_UI_YouthClub_type"),
-				 FairPackage.Literals.YOUTH_CLUB__CONTACT,
+				 getString("_UI_YouthClub_contacts_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_YouthClub_contacts_feature", "_UI_YouthClub_type"),
+				 FairPackage.Literals.YOUTH_CLUB__CONTACTS,
 				 true,
 				 false,
 				 true,

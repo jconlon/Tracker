@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.Department#getName <em>Name</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.Department#getClass_ <em>Class</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.Department#getSuperintendent <em>Superintendent</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Department#getClasses <em>Classes</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Department#getSuperintendents <em>Superintendents</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,35 +62,35 @@ public interface Department extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Class</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Classes</b></em>' containment reference list.
 	 * The list contents are of type {@link com.verticon.tracker.fair.Class}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Class</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Classes</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Class</em>' containment reference list.
-	 * @see com.verticon.tracker.fair.FairPackage#getDepartment_Class()
+	 * @return the value of the '<em>Classes</em>' containment reference list.
+	 * @see com.verticon.tracker.fair.FairPackage#getDepartment_Classes()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<com.verticon.tracker.fair.Class> getClass_();
+	EList<com.verticon.tracker.fair.Class> getClasses();
 
 	/**
-	 * Returns the value of the '<em><b>Superintendent</b></em>' reference list.
+	 * Returns the value of the '<em><b>Superintendents</b></em>' reference list.
 	 * The list contents are of type {@link com.verticon.tracker.fair.Person}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Superintendent</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Superintendents</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Superintendent</em>' reference list.
-	 * @see com.verticon.tracker.fair.FairPackage#getDepartment_Superintendent()
+	 * @return the value of the '<em>Superintendents</em>' reference list.
+	 * @see com.verticon.tracker.fair.FairPackage#getDepartment_Superintendents()
 	 * @model
 	 * @generated
 	 */
-	EList<Person> getSuperintendent();
+	EList<Person> getSuperintendents();
 
 } // Department

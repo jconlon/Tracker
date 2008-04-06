@@ -112,7 +112,7 @@ public class DivisionItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(FairPackage.Literals.DIVISION__DEPARTMENT);
+			childrenFeatures.add(FairPackage.Literals.DIVISION__DEPARTMENTS);
 		}
 		return childrenFeatures;
 	}
@@ -170,7 +170,7 @@ public class DivisionItemProvider
 			case FairPackage.DIVISION__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case FairPackage.DIVISION__DEPARTMENT:
+			case FairPackage.DIVISION__DEPARTMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -190,7 +190,7 @@ public class DivisionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(FairPackage.Literals.DIVISION__DEPARTMENT,
+				(FairPackage.Literals.DIVISION__DEPARTMENTS,
 				 FairFactory.eINSTANCE.createDepartment()));
 	}
 

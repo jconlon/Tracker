@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.impl.YouthClubImpl#getName <em>Name</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.YouthClubImpl#getContact <em>Contact</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.YouthClubImpl#getContacts <em>Contacts</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,14 +62,14 @@ public class YouthClubImpl extends EObjectImpl implements YouthClub {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getContact() <em>Contact</em>}' reference list.
+	 * The cached value of the '{@link #getContacts() <em>Contacts</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getContact()
+	 * @see #getContacts()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Person> contact;
+	protected EList<Person> contacts;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -116,11 +116,11 @@ public class YouthClubImpl extends EObjectImpl implements YouthClub {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Person> getContact() {
-		if (contact == null) {
-			contact = new EObjectResolvingEList<Person>(Person.class, this, FairPackage.YOUTH_CLUB__CONTACT);
+	public EList<Person> getContacts() {
+		if (contacts == null) {
+			contacts = new EObjectResolvingEList<Person>(Person.class, this, FairPackage.YOUTH_CLUB__CONTACTS);
 		}
-		return contact;
+		return contacts;
 	}
 
 	/**
@@ -133,8 +133,8 @@ public class YouthClubImpl extends EObjectImpl implements YouthClub {
 		switch (featureID) {
 			case FairPackage.YOUTH_CLUB__NAME:
 				return getName();
-			case FairPackage.YOUTH_CLUB__CONTACT:
-				return getContact();
+			case FairPackage.YOUTH_CLUB__CONTACTS:
+				return getContacts();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -151,9 +151,9 @@ public class YouthClubImpl extends EObjectImpl implements YouthClub {
 			case FairPackage.YOUTH_CLUB__NAME:
 				setName((String)newValue);
 				return;
-			case FairPackage.YOUTH_CLUB__CONTACT:
-				getContact().clear();
-				getContact().addAll((Collection<? extends Person>)newValue);
+			case FairPackage.YOUTH_CLUB__CONTACTS:
+				getContacts().clear();
+				getContacts().addAll((Collection<? extends Person>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -170,8 +170,8 @@ public class YouthClubImpl extends EObjectImpl implements YouthClub {
 			case FairPackage.YOUTH_CLUB__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case FairPackage.YOUTH_CLUB__CONTACT:
-				getContact().clear();
+			case FairPackage.YOUTH_CLUB__CONTACTS:
+				getContacts().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -187,8 +187,8 @@ public class YouthClubImpl extends EObjectImpl implements YouthClub {
 		switch (featureID) {
 			case FairPackage.YOUTH_CLUB__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case FairPackage.YOUTH_CLUB__CONTACT:
-				return contact != null && !contact.isEmpty();
+			case FairPackage.YOUTH_CLUB__CONTACTS:
+				return contacts != null && !contacts.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -20,17 +20,17 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.expressions.OCLExpression;
+
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.fair.Division;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.FairPackage;
-import com.verticon.tracker.fair.People;
+import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YouthClub;
 
 /**
@@ -41,8 +41,8 @@ import com.verticon.tracker.fair.YouthClub;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.impl.FairImpl#getName <em>Name</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.FairImpl#getYouthClub <em>Youth Club</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.FairImpl#getDivision <em>Division</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.FairImpl#getYouthClubs <em>Youth Clubs</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.FairImpl#getDivisions <em>Divisions</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.FairImpl#getPremises <em>Premises</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.FairImpl#getPeople <em>People</em>}</li>
  * </ul>
@@ -79,24 +79,24 @@ public class FairImpl extends EObjectImpl implements Fair {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getYouthClub() <em>Youth Club</em>}' containment reference list.
+	 * The cached value of the '{@link #getYouthClubs() <em>Youth Clubs</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getYouthClub()
+	 * @see #getYouthClubs()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<YouthClub> youthClub;
+	protected EList<YouthClub> youthClubs;
 
 	/**
-	 * The cached value of the '{@link #getDivision() <em>Division</em>}' containment reference list.
+	 * The cached value of the '{@link #getDivisions() <em>Divisions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDivision()
+	 * @see #getDivisions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Division> division;
+	protected EList<Division> divisions;
 
 	/**
 	 * The cached value of the '{@link #getPremises() <em>Premises</em>}' reference.
@@ -109,14 +109,14 @@ public class FairImpl extends EObjectImpl implements Fair {
 	protected Premises premises;
 
 	/**
-	 * The cached value of the '{@link #getPeople() <em>People</em>}' containment reference.
+	 * The cached value of the '{@link #getPeople() <em>People</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getPeople()
 	 * @generated
 	 * @ordered
 	 */
-	protected People people;
+	protected EList<Person> people;
 
 	/**
 	 * The parsed OCL expression for the body of the '{@link #exhibits <em>Exhibits</em>}' operation.
@@ -176,11 +176,11 @@ public class FairImpl extends EObjectImpl implements Fair {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<YouthClub> getYouthClub() {
-		if (youthClub == null) {
-			youthClub = new EObjectContainmentEList<YouthClub>(YouthClub.class, this, FairPackage.FAIR__YOUTH_CLUB);
+	public EList<YouthClub> getYouthClubs() {
+		if (youthClubs == null) {
+			youthClubs = new EObjectContainmentEList<YouthClub>(YouthClub.class, this, FairPackage.FAIR__YOUTH_CLUBS);
 		}
-		return youthClub;
+		return youthClubs;
 	}
 
 	/**
@@ -188,11 +188,11 @@ public class FairImpl extends EObjectImpl implements Fair {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Division> getDivision() {
-		if (division == null) {
-			division = new EObjectContainmentEList<Division>(Division.class, this, FairPackage.FAIR__DIVISION);
+	public EList<Division> getDivisions() {
+		if (divisions == null) {
+			divisions = new EObjectContainmentEList<Division>(Division.class, this, FairPackage.FAIR__DIVISIONS);
 		}
-		return division;
+		return divisions;
 	}
 
 	/**
@@ -238,42 +238,11 @@ public class FairImpl extends EObjectImpl implements Fair {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public People getPeople() {
+	public EList<Person> getPeople() {
+		if (people == null) {
+			people = new EObjectContainmentEList<Person>(Person.class, this, FairPackage.FAIR__PEOPLE);
+		}
 		return people;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetPeople(People newPeople, NotificationChain msgs) {
-		People oldPeople = people;
-		people = newPeople;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FairPackage.FAIR__PEOPLE, oldPeople, newPeople);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setPeople(People newPeople) {
-		if (newPeople != people) {
-			NotificationChain msgs = null;
-			if (people != null)
-				msgs = ((InternalEObject)people).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FairPackage.FAIR__PEOPLE, null, msgs);
-			if (newPeople != null)
-				msgs = ((InternalEObject)newPeople).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FairPackage.FAIR__PEOPLE, null, msgs);
-			msgs = basicSetPeople(newPeople, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.FAIR__PEOPLE, newPeople, newPeople));
 	}
 
 	/**
@@ -312,12 +281,12 @@ public class FairImpl extends EObjectImpl implements Fair {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FairPackage.FAIR__YOUTH_CLUB:
-				return ((InternalEList<?>)getYouthClub()).basicRemove(otherEnd, msgs);
-			case FairPackage.FAIR__DIVISION:
-				return ((InternalEList<?>)getDivision()).basicRemove(otherEnd, msgs);
+			case FairPackage.FAIR__YOUTH_CLUBS:
+				return ((InternalEList<?>)getYouthClubs()).basicRemove(otherEnd, msgs);
+			case FairPackage.FAIR__DIVISIONS:
+				return ((InternalEList<?>)getDivisions()).basicRemove(otherEnd, msgs);
 			case FairPackage.FAIR__PEOPLE:
-				return basicSetPeople(null, msgs);
+				return ((InternalEList<?>)getPeople()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -332,10 +301,10 @@ public class FairImpl extends EObjectImpl implements Fair {
 		switch (featureID) {
 			case FairPackage.FAIR__NAME:
 				return getName();
-			case FairPackage.FAIR__YOUTH_CLUB:
-				return getYouthClub();
-			case FairPackage.FAIR__DIVISION:
-				return getDivision();
+			case FairPackage.FAIR__YOUTH_CLUBS:
+				return getYouthClubs();
+			case FairPackage.FAIR__DIVISIONS:
+				return getDivisions();
 			case FairPackage.FAIR__PREMISES:
 				if (resolve) return getPremises();
 				return basicGetPremises();
@@ -357,19 +326,20 @@ public class FairImpl extends EObjectImpl implements Fair {
 			case FairPackage.FAIR__NAME:
 				setName((String)newValue);
 				return;
-			case FairPackage.FAIR__YOUTH_CLUB:
-				getYouthClub().clear();
-				getYouthClub().addAll((Collection<? extends YouthClub>)newValue);
+			case FairPackage.FAIR__YOUTH_CLUBS:
+				getYouthClubs().clear();
+				getYouthClubs().addAll((Collection<? extends YouthClub>)newValue);
 				return;
-			case FairPackage.FAIR__DIVISION:
-				getDivision().clear();
-				getDivision().addAll((Collection<? extends Division>)newValue);
+			case FairPackage.FAIR__DIVISIONS:
+				getDivisions().clear();
+				getDivisions().addAll((Collection<? extends Division>)newValue);
 				return;
 			case FairPackage.FAIR__PREMISES:
 				setPremises((Premises)newValue);
 				return;
 			case FairPackage.FAIR__PEOPLE:
-				setPeople((People)newValue);
+				getPeople().clear();
+				getPeople().addAll((Collection<? extends Person>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -386,17 +356,17 @@ public class FairImpl extends EObjectImpl implements Fair {
 			case FairPackage.FAIR__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case FairPackage.FAIR__YOUTH_CLUB:
-				getYouthClub().clear();
+			case FairPackage.FAIR__YOUTH_CLUBS:
+				getYouthClubs().clear();
 				return;
-			case FairPackage.FAIR__DIVISION:
-				getDivision().clear();
+			case FairPackage.FAIR__DIVISIONS:
+				getDivisions().clear();
 				return;
 			case FairPackage.FAIR__PREMISES:
 				setPremises((Premises)null);
 				return;
 			case FairPackage.FAIR__PEOPLE:
-				setPeople((People)null);
+				getPeople().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -412,14 +382,14 @@ public class FairImpl extends EObjectImpl implements Fair {
 		switch (featureID) {
 			case FairPackage.FAIR__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case FairPackage.FAIR__YOUTH_CLUB:
-				return youthClub != null && !youthClub.isEmpty();
-			case FairPackage.FAIR__DIVISION:
-				return division != null && !division.isEmpty();
+			case FairPackage.FAIR__YOUTH_CLUBS:
+				return youthClubs != null && !youthClubs.isEmpty();
+			case FairPackage.FAIR__DIVISIONS:
+				return divisions != null && !divisions.isEmpty();
 			case FairPackage.FAIR__PREMISES:
 				return premises != null;
 			case FairPackage.FAIR__PEOPLE:
-				return people != null;
+				return people != null && !people.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -9,10 +9,10 @@ Package fair <http://www.verticon.com/ns/tracker/fair/0.1.0>
 
   Class Fair
     Attribute name : EString<<1..1>>
-    Reference youthClub : YouthClub<<0..*>>
-    Reference division : Division<<1..*>>
+    Reference youthClubs : YouthClub<<0..*>>
+    Reference divisions : Division<<1..*>>
     Reference premises : Premises<<1..1>>
-    Reference people : People
+    Reference people : Person<<0..*>>
     Operation exhibits() : Exhibit<<0..*>>
 
   Class Exhibit
@@ -24,28 +24,25 @@ Package fair <http://www.verticon.com/ns/tracker/fair/0.1.0>
 
   Class YouthClub
     Attribute name : EString<<1..1>>
-    Reference contact : Person<<1..*>>
+    Reference contacts : Person<<1..*>>
 
   Class Division
     Attribute name : EString<<1..1>>
-    Reference department : Department<<1..*>>
+    Reference departments : Department<<1..*>>
 
   Class Department
     Attribute name : EString<<1..1>>
-    Reference class : Class<<1..*>>
-    Reference superintendent : Person<<0..*>>
+    Reference classes : Class<<1..*>>
+    Reference superintendents : Person<<0..*>>
 
   Class Class
     Attribute name : EString<<1..1>>
-    Reference lot : Lot<<1..*>>
-    Reference judge : Person<<1..*>>
+    Reference lots : Lot<<1..*>>
+    Reference judges : Person<<1..*>>
 
   Class Lot
     Attribute name : EString<<1..1>>
-    Reference exhibit : Exhibit<<1..*>>
-
-  Class People
-    Reference person : Person<<1..*>>
+    Reference exhibits : Exhibit<<1..*>>
 
   Class Person
     Attribute firstName : EString<<1..1>>
@@ -58,7 +55,7 @@ Package fair <http://www.verticon.com/ns/tracker/fair/0.1.0>
     Attribute /name : EString<<1..1>>
 
   Class YoungPerson -> Person
-    Reference parent : Person<<1..2>>
+    Reference parents : Person<<1..*>>
     Reference club : YouthClub<<1..1>>
 
   DataType ZipCode <java.lang.String>

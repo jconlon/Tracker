@@ -34,8 +34,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getName <em>Name</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getLot <em>Lot</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getJudge <em>Judge</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getLots <em>Lots</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getJudges <em>Judges</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,24 +70,24 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getLot() <em>Lot</em>}' containment reference list.
+	 * The cached value of the '{@link #getLots() <em>Lots</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLot()
+	 * @see #getLots()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Lot> lot;
+	protected EList<Lot> lots;
 
 	/**
-	 * The cached value of the '{@link #getJudge() <em>Judge</em>}' reference list.
+	 * The cached value of the '{@link #getJudges() <em>Judges</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getJudge()
+	 * @see #getJudges()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Person> judge;
+	protected EList<Person> judges;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -134,11 +134,11 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Lot> getLot() {
-		if (lot == null) {
-			lot = new EObjectContainmentEList<Lot>(Lot.class, this, FairPackage.CLASS__LOT);
+	public EList<Lot> getLots() {
+		if (lots == null) {
+			lots = new EObjectContainmentEList<Lot>(Lot.class, this, FairPackage.CLASS__LOTS);
 		}
-		return lot;
+		return lots;
 	}
 
 	/**
@@ -146,11 +146,11 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Person> getJudge() {
-		if (judge == null) {
-			judge = new EObjectResolvingEList<Person>(Person.class, this, FairPackage.CLASS__JUDGE);
+	public EList<Person> getJudges() {
+		if (judges == null) {
+			judges = new EObjectResolvingEList<Person>(Person.class, this, FairPackage.CLASS__JUDGES);
 		}
-		return judge;
+		return judges;
 	}
 
 	/**
@@ -161,8 +161,8 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FairPackage.CLASS__LOT:
-				return ((InternalEList<?>)getLot()).basicRemove(otherEnd, msgs);
+			case FairPackage.CLASS__LOTS:
+				return ((InternalEList<?>)getLots()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -177,10 +177,10 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 		switch (featureID) {
 			case FairPackage.CLASS__NAME:
 				return getName();
-			case FairPackage.CLASS__LOT:
-				return getLot();
-			case FairPackage.CLASS__JUDGE:
-				return getJudge();
+			case FairPackage.CLASS__LOTS:
+				return getLots();
+			case FairPackage.CLASS__JUDGES:
+				return getJudges();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -197,13 +197,13 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 			case FairPackage.CLASS__NAME:
 				setName((String)newValue);
 				return;
-			case FairPackage.CLASS__LOT:
-				getLot().clear();
-				getLot().addAll((Collection<? extends Lot>)newValue);
+			case FairPackage.CLASS__LOTS:
+				getLots().clear();
+				getLots().addAll((Collection<? extends Lot>)newValue);
 				return;
-			case FairPackage.CLASS__JUDGE:
-				getJudge().clear();
-				getJudge().addAll((Collection<? extends Person>)newValue);
+			case FairPackage.CLASS__JUDGES:
+				getJudges().clear();
+				getJudges().addAll((Collection<? extends Person>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -220,11 +220,11 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 			case FairPackage.CLASS__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case FairPackage.CLASS__LOT:
-				getLot().clear();
+			case FairPackage.CLASS__LOTS:
+				getLots().clear();
 				return;
-			case FairPackage.CLASS__JUDGE:
-				getJudge().clear();
+			case FairPackage.CLASS__JUDGES:
+				getJudges().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -240,10 +240,10 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 		switch (featureID) {
 			case FairPackage.CLASS__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case FairPackage.CLASS__LOT:
-				return lot != null && !lot.isEmpty();
-			case FairPackage.CLASS__JUDGE:
-				return judge != null && !judge.isEmpty();
+			case FairPackage.CLASS__LOTS:
+				return lots != null && !lots.isEmpty();
+			case FairPackage.CLASS__JUDGES:
+				return judges != null && !judges.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

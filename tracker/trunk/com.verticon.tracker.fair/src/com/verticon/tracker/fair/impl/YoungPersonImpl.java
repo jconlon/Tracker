@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.verticon.tracker.fair.impl.YoungPersonImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.YoungPersonImpl#getParents <em>Parents</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.YoungPersonImpl#getClub <em>Club</em>}</li>
  * </ul>
  * </p>
@@ -46,14 +46,14 @@ public class YoungPersonImpl extends PersonImpl implements YoungPerson {
 	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
-	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference list.
+	 * The cached value of the '{@link #getParents() <em>Parents</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getParent()
+	 * @see #getParents()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Person> parent;
+	protected EList<Person> parents;
 
 	/**
 	 * The cached value of the '{@link #getClub() <em>Club</em>}' reference.
@@ -89,11 +89,11 @@ public class YoungPersonImpl extends PersonImpl implements YoungPerson {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Person> getParent() {
-		if (parent == null) {
-			parent = new EObjectResolvingEList<Person>(Person.class, this, FairPackage.YOUNG_PERSON__PARENT);
+	public EList<Person> getParents() {
+		if (parents == null) {
+			parents = new EObjectResolvingEList<Person>(Person.class, this, FairPackage.YOUNG_PERSON__PARENTS);
 		}
-		return parent;
+		return parents;
 	}
 
 	/**
@@ -142,8 +142,8 @@ public class YoungPersonImpl extends PersonImpl implements YoungPerson {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FairPackage.YOUNG_PERSON__PARENT:
-				return getParent();
+			case FairPackage.YOUNG_PERSON__PARENTS:
+				return getParents();
 			case FairPackage.YOUNG_PERSON__CLUB:
 				if (resolve) return getClub();
 				return basicGetClub();
@@ -160,9 +160,9 @@ public class YoungPersonImpl extends PersonImpl implements YoungPerson {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FairPackage.YOUNG_PERSON__PARENT:
-				getParent().clear();
-				getParent().addAll((Collection<? extends Person>)newValue);
+			case FairPackage.YOUNG_PERSON__PARENTS:
+				getParents().clear();
+				getParents().addAll((Collection<? extends Person>)newValue);
 				return;
 			case FairPackage.YOUNG_PERSON__CLUB:
 				setClub((YouthClub)newValue);
@@ -179,8 +179,8 @@ public class YoungPersonImpl extends PersonImpl implements YoungPerson {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FairPackage.YOUNG_PERSON__PARENT:
-				getParent().clear();
+			case FairPackage.YOUNG_PERSON__PARENTS:
+				getParents().clear();
 				return;
 			case FairPackage.YOUNG_PERSON__CLUB:
 				setClub((YouthClub)null);
@@ -197,8 +197,8 @@ public class YoungPersonImpl extends PersonImpl implements YoungPerson {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FairPackage.YOUNG_PERSON__PARENT:
-				return parent != null && !parent.isEmpty();
+			case FairPackage.YOUNG_PERSON__PARENTS:
+				return parents != null && !parents.isEmpty();
 			case FairPackage.YOUNG_PERSON__CLUB:
 				return club != null;
 		}

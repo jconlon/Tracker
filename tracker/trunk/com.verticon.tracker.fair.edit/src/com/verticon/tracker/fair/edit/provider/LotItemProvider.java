@@ -111,7 +111,7 @@ public class LotItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(FairPackage.Literals.LOT__EXHIBIT);
+			childrenFeatures.add(FairPackage.Literals.LOT__EXHIBITS);
 		}
 		return childrenFeatures;
 	}
@@ -169,7 +169,7 @@ public class LotItemProvider
 			case FairPackage.LOT__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case FairPackage.LOT__EXHIBIT:
+			case FairPackage.LOT__EXHIBITS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -189,7 +189,7 @@ public class LotItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(FairPackage.Literals.LOT__EXHIBIT,
+				(FairPackage.Literals.LOT__EXHIBITS,
 				 FairFactory.eINSTANCE.createExhibit()));
 	}
 

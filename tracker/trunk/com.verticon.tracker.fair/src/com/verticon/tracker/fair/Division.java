@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.Division#getName <em>Name</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.Division#getDepartment <em>Department</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Division#getDepartments <em>Departments</em>}</li>
  * </ul>
  * </p>
  *
@@ -61,19 +61,19 @@ public interface Division extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Department</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Departments</b></em>' containment reference list.
 	 * The list contents are of type {@link com.verticon.tracker.fair.Department}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Department</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Departments</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Department</em>' containment reference list.
-	 * @see com.verticon.tracker.fair.FairPackage#getDivision_Department()
+	 * @return the value of the '<em>Departments</em>' containment reference list.
+	 * @see com.verticon.tracker.fair.FairPackage#getDivision_Departments()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<Department> getDepartment();
+	EList<Department> getDepartments();
 
 } // Division

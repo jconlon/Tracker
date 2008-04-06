@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.Class#getName <em>Name</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.Class#getLot <em>Lot</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.Class#getJudge <em>Judge</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Class#getLots <em>Lots</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Class#getJudges <em>Judges</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,35 +62,35 @@ public interface Class extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Lot</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Lots</b></em>' containment reference list.
 	 * The list contents are of type {@link com.verticon.tracker.fair.Lot}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Lot</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Lots</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Lot</em>' containment reference list.
-	 * @see com.verticon.tracker.fair.FairPackage#getClass_Lot()
+	 * @return the value of the '<em>Lots</em>' containment reference list.
+	 * @see com.verticon.tracker.fair.FairPackage#getClass_Lots()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<Lot> getLot();
+	EList<Lot> getLots();
 
 	/**
-	 * Returns the value of the '<em><b>Judge</b></em>' reference list.
+	 * Returns the value of the '<em><b>Judges</b></em>' reference list.
 	 * The list contents are of type {@link com.verticon.tracker.fair.Person}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Judge</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Judges</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Judge</em>' reference list.
-	 * @see com.verticon.tracker.fair.FairPackage#getClass_Judge()
+	 * @return the value of the '<em>Judges</em>' reference list.
+	 * @see com.verticon.tracker.fair.FairPackage#getClass_Judges()
 	 * @model required="true"
 	 * @generated
 	 */
-	EList<Person> getJudge();
+	EList<Person> getJudges();
 
 } // Class

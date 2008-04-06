@@ -243,29 +243,6 @@ public class FairItemProviderAdapterFactory extends FairAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.fair.People} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected PeopleItemProvider peopleItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.verticon.tracker.fair.People}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createPeopleAdapter() {
-		if (peopleItemProvider == null) {
-			peopleItemProvider = new PeopleItemProvider(this);
-		}
-
-		return peopleItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.fair.Person} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -417,7 +394,6 @@ public class FairItemProviderAdapterFactory extends FairAdapterFactory implement
 		if (departmentItemProvider != null) departmentItemProvider.dispose();
 		if (classItemProvider != null) classItemProvider.dispose();
 		if (lotItemProvider != null) lotItemProvider.dispose();
-		if (peopleItemProvider != null) peopleItemProvider.dispose();
 		if (personItemProvider != null) personItemProvider.dispose();
 		if (youngPersonItemProvider != null) youngPersonItemProvider.dispose();
 	}

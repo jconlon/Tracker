@@ -5,6 +5,13 @@
  */
 package com.verticon.tracker.fair.impl;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
 import com.verticon.tracker.fair.Department;
 import com.verticon.tracker.fair.Division;
 import com.verticon.tracker.fair.Exhibit;
@@ -12,19 +19,9 @@ import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.FairFactory;
 import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.Lot;
-import com.verticon.tracker.fair.People;
 import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YoungPerson;
 import com.verticon.tracker.fair.YouthClub;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-
-import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
  * <!-- begin-user-doc -->
@@ -84,7 +81,6 @@ public class FairFactoryImpl extends EFactoryImpl implements FairFactory {
 			case FairPackage.DEPARTMENT: return createDepartment();
 			case FairPackage.CLASS: return createClass();
 			case FairPackage.LOT: return createLot();
-			case FairPackage.PEOPLE: return createPeople();
 			case FairPackage.PERSON: return createPerson();
 			case FairPackage.YOUNG_PERSON: return createYoungPerson();
 			default:
@@ -194,16 +190,6 @@ public class FairFactoryImpl extends EFactoryImpl implements FairFactory {
 	public Lot createLot() {
 		LotImpl lot = new LotImpl();
 		return lot;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public People createPeople() {
-		PeopleImpl people = new PeopleImpl();
-		return people;
 	}
 
 	/**

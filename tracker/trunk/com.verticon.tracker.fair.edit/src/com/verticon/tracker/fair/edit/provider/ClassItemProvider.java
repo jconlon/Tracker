@@ -73,7 +73,7 @@ public class ClassItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
-			addJudgePropertyDescriptor(object);
+			addJudgesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -101,19 +101,19 @@ public class ClassItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Judge feature.
+	 * This adds a property descriptor for the Judges feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addJudgePropertyDescriptor(Object object) {
+	protected void addJudgesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Class_judge_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Class_judge_feature", "_UI_Class_type"),
-				 FairPackage.Literals.CLASS__JUDGE,
+				 getString("_UI_Class_judges_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Class_judges_feature", "_UI_Class_type"),
+				 FairPackage.Literals.CLASS__JUDGES,
 				 true,
 				 false,
 				 true,
@@ -134,7 +134,7 @@ public class ClassItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(FairPackage.Literals.CLASS__LOT);
+			childrenFeatures.add(FairPackage.Literals.CLASS__LOTS);
 		}
 		return childrenFeatures;
 	}
@@ -192,7 +192,7 @@ public class ClassItemProvider
 			case FairPackage.CLASS__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case FairPackage.CLASS__LOT:
+			case FairPackage.CLASS__LOTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -212,7 +212,7 @@ public class ClassItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(FairPackage.Literals.CLASS__LOT,
+				(FairPackage.Literals.CLASS__LOTS,
 				 FairFactory.eINSTANCE.createLot()));
 	}
 

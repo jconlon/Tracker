@@ -20,7 +20,6 @@ import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.FairFactory;
 import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.Lot;
-import com.verticon.tracker.fair.People;
 import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YoungPerson;
 import com.verticon.tracker.fair.YouthClub;
@@ -87,13 +86,6 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * @generated
 	 */
 	private EClass lotEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass peopleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -217,7 +209,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFair_YouthClub() {
+	public EReference getFair_YouthClubs() {
 		return (EReference)fairEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -226,7 +218,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFair_Division() {
+	public EReference getFair_Divisions() {
 		return (EReference)fairEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -325,7 +317,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getYouthClub_Contact() {
+	public EReference getYouthClub_Contacts() {
 		return (EReference)youthClubEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -352,7 +344,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDivision_Department() {
+	public EReference getDivision_Departments() {
 		return (EReference)divisionEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -379,7 +371,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDepartment_Class() {
+	public EReference getDepartment_Classes() {
 		return (EReference)departmentEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -388,7 +380,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDepartment_Superintendent() {
+	public EReference getDepartment_Superintendents() {
 		return (EReference)departmentEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -415,7 +407,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClass_Lot() {
+	public EReference getClass_Lots() {
 		return (EReference)classEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -424,7 +416,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClass_Judge() {
+	public EReference getClass_Judges() {
 		return (EReference)classEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -451,26 +443,8 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLot_Exhibit() {
+	public EReference getLot_Exhibits() {
 		return (EReference)lotEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getPeople() {
-		return peopleEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPeople_Person() {
-		return (EReference)peopleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -568,7 +542,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getYoungPerson_Parent() {
+	public EReference getYoungPerson_Parents() {
 		return (EReference)youngPersonEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -629,8 +603,8 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		// Create classes and their features
 		fairEClass = createEClass(FAIR);
 		createEAttribute(fairEClass, FAIR__NAME);
-		createEReference(fairEClass, FAIR__YOUTH_CLUB);
-		createEReference(fairEClass, FAIR__DIVISION);
+		createEReference(fairEClass, FAIR__YOUTH_CLUBS);
+		createEReference(fairEClass, FAIR__DIVISIONS);
 		createEReference(fairEClass, FAIR__PREMISES);
 		createEReference(fairEClass, FAIR__PEOPLE);
 
@@ -643,28 +617,25 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 
 		youthClubEClass = createEClass(YOUTH_CLUB);
 		createEAttribute(youthClubEClass, YOUTH_CLUB__NAME);
-		createEReference(youthClubEClass, YOUTH_CLUB__CONTACT);
+		createEReference(youthClubEClass, YOUTH_CLUB__CONTACTS);
 
 		divisionEClass = createEClass(DIVISION);
 		createEAttribute(divisionEClass, DIVISION__NAME);
-		createEReference(divisionEClass, DIVISION__DEPARTMENT);
+		createEReference(divisionEClass, DIVISION__DEPARTMENTS);
 
 		departmentEClass = createEClass(DEPARTMENT);
 		createEAttribute(departmentEClass, DEPARTMENT__NAME);
-		createEReference(departmentEClass, DEPARTMENT__CLASS);
-		createEReference(departmentEClass, DEPARTMENT__SUPERINTENDENT);
+		createEReference(departmentEClass, DEPARTMENT__CLASSES);
+		createEReference(departmentEClass, DEPARTMENT__SUPERINTENDENTS);
 
 		classEClass = createEClass(CLASS);
 		createEAttribute(classEClass, CLASS__NAME);
-		createEReference(classEClass, CLASS__LOT);
-		createEReference(classEClass, CLASS__JUDGE);
+		createEReference(classEClass, CLASS__LOTS);
+		createEReference(classEClass, CLASS__JUDGES);
 
 		lotEClass = createEClass(LOT);
 		createEAttribute(lotEClass, LOT__NAME);
-		createEReference(lotEClass, LOT__EXHIBIT);
-
-		peopleEClass = createEClass(PEOPLE);
-		createEReference(peopleEClass, PEOPLE__PERSON);
+		createEReference(lotEClass, LOT__EXHIBITS);
 
 		personEClass = createEClass(PERSON);
 		createEAttribute(personEClass, PERSON__FIRST_NAME);
@@ -677,7 +648,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		createEAttribute(personEClass, PERSON__NAME);
 
 		youngPersonEClass = createEClass(YOUNG_PERSON);
-		createEReference(youngPersonEClass, YOUNG_PERSON__PARENT);
+		createEReference(youngPersonEClass, YOUNG_PERSON__PARENTS);
 		createEReference(youngPersonEClass, YOUNG_PERSON__CLUB);
 
 		// Create data types
@@ -721,10 +692,10 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(fairEClass, Fair.class, "Fair", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFair_Name(), ecorePackage.getEString(), "name", null, 1, 1, Fair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFair_YouthClub(), this.getYouthClub(), null, "youthClub", null, 0, -1, Fair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFair_Division(), this.getDivision(), null, "division", null, 1, -1, Fair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFair_YouthClubs(), this.getYouthClub(), null, "youthClubs", null, 0, -1, Fair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFair_Divisions(), this.getDivision(), null, "divisions", null, 1, -1, Fair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFair_Premises(), theTrackerPackage.getPremises(), null, "premises", null, 1, 1, Fair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFair_People(), this.getPeople(), null, "people", null, 0, 1, Fair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFair_People(), this.getPerson(), null, "people", null, 0, -1, Fair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(fairEClass, this.getExhibit(), "exhibits", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -737,28 +708,25 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 
 		initEClass(youthClubEClass, YouthClub.class, "YouthClub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getYouthClub_Name(), ecorePackage.getEString(), "name", null, 1, 1, YouthClub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getYouthClub_Contact(), this.getPerson(), null, "contact", null, 1, -1, YouthClub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getYouthClub_Contacts(), this.getPerson(), null, "contacts", null, 1, -1, YouthClub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(divisionEClass, Division.class, "Division", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDivision_Name(), ecorePackage.getEString(), "name", null, 1, 1, Division.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDivision_Department(), this.getDepartment(), null, "department", null, 1, -1, Division.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDivision_Departments(), this.getDepartment(), null, "departments", null, 1, -1, Division.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(departmentEClass, Department.class, "Department", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDepartment_Name(), ecorePackage.getEString(), "name", null, 1, 1, Department.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDepartment_Class(), this.getClass_(), null, "class", null, 1, -1, Department.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDepartment_Superintendent(), this.getPerson(), null, "superintendent", null, 0, -1, Department.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDepartment_Classes(), this.getClass_(), null, "classes", null, 1, -1, Department.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDepartment_Superintendents(), this.getPerson(), null, "superintendents", null, 0, -1, Department.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classEClass, com.verticon.tracker.fair.Class.class, "Class", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getClass_Name(), ecorePackage.getEString(), "name", null, 1, 1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClass_Lot(), this.getLot(), null, "lot", null, 1, -1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClass_Judge(), this.getPerson(), null, "judge", null, 1, -1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClass_Lots(), this.getLot(), null, "lots", null, 1, -1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClass_Judges(), this.getPerson(), null, "judges", null, 1, -1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(lotEClass, Lot.class, "Lot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLot_Name(), ecorePackage.getEString(), "name", null, 1, 1, Lot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLot_Exhibit(), this.getExhibit(), null, "exhibit", null, 1, -1, Lot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(peopleEClass, People.class, "People", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPeople_Person(), this.getPerson(), null, "person", null, 1, -1, People.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLot_Exhibits(), this.getExhibit(), null, "exhibits", null, 1, -1, Lot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(personEClass, Person.class, "Person", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPerson_FirstName(), ecorePackage.getEString(), "firstName", null, 1, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -771,7 +739,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		initEAttribute(getPerson_Name(), ecorePackage.getEString(), "name", null, 1, 1, Person.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(youngPersonEClass, YoungPerson.class, "YoungPerson", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getYoungPerson_Parent(), this.getPerson(), null, "parent", null, 1, 2, YoungPerson.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getYoungPerson_Parents(), this.getPerson(), null, "parents", null, 1, -1, YoungPerson.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getYoungPerson_Club(), this.getYouthClub(), null, "club", null, 1, 1, YoungPerson.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
@@ -798,7 +766,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		  (fairEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
-			 "body", "if (division -> notEmpty())  and (division.department->notEmpty())  and  (division.department.class->notEmpty) and (division.department.class.lot->notEmpty) and (division.department.class.lot.exhibit->notEmpty) \n\tthen  division.department.class.lot.exhibit\n\telse Set{}\nendif\n"
+			 "body", "if (divisions -> notEmpty())  and (divisions.departments->notEmpty())  and  (divisions.departments.classes->notEmpty) and (divisions.departments.classes.lots->notEmpty) and (divisions.departments.classes.lots.exhibits->notEmpty) \n\tthen  divisions.departments.classes.lots.exhibits\n\telse Set{}\nendif\n"
 		   });
 	}
 

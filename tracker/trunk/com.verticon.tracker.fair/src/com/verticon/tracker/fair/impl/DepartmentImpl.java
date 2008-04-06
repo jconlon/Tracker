@@ -34,8 +34,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getName <em>Name</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getClass_ <em>Class</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getSuperintendent <em>Superintendent</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getClasses <em>Classes</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getSuperintendents <em>Superintendents</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,24 +70,24 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getClass_() <em>Class</em>}' containment reference list.
+	 * The cached value of the '{@link #getClasses() <em>Classes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getClass_()
+	 * @see #getClasses()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<com.verticon.tracker.fair.Class> class_;
+	protected EList<com.verticon.tracker.fair.Class> classes;
 
 	/**
-	 * The cached value of the '{@link #getSuperintendent() <em>Superintendent</em>}' reference list.
+	 * The cached value of the '{@link #getSuperintendents() <em>Superintendents</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSuperintendent()
+	 * @see #getSuperintendents()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Person> superintendent;
+	protected EList<Person> superintendents;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -134,11 +134,11 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<com.verticon.tracker.fair.Class> getClass_() {
-		if (class_ == null) {
-			class_ = new EObjectContainmentEList<com.verticon.tracker.fair.Class>(com.verticon.tracker.fair.Class.class, this, FairPackage.DEPARTMENT__CLASS);
+	public EList<com.verticon.tracker.fair.Class> getClasses() {
+		if (classes == null) {
+			classes = new EObjectContainmentEList<com.verticon.tracker.fair.Class>(com.verticon.tracker.fair.Class.class, this, FairPackage.DEPARTMENT__CLASSES);
 		}
-		return class_;
+		return classes;
 	}
 
 	/**
@@ -146,11 +146,11 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Person> getSuperintendent() {
-		if (superintendent == null) {
-			superintendent = new EObjectResolvingEList<Person>(Person.class, this, FairPackage.DEPARTMENT__SUPERINTENDENT);
+	public EList<Person> getSuperintendents() {
+		if (superintendents == null) {
+			superintendents = new EObjectResolvingEList<Person>(Person.class, this, FairPackage.DEPARTMENT__SUPERINTENDENTS);
 		}
-		return superintendent;
+		return superintendents;
 	}
 
 	/**
@@ -161,8 +161,8 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FairPackage.DEPARTMENT__CLASS:
-				return ((InternalEList<?>)getClass_()).basicRemove(otherEnd, msgs);
+			case FairPackage.DEPARTMENT__CLASSES:
+				return ((InternalEList<?>)getClasses()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -177,10 +177,10 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 		switch (featureID) {
 			case FairPackage.DEPARTMENT__NAME:
 				return getName();
-			case FairPackage.DEPARTMENT__CLASS:
-				return getClass_();
-			case FairPackage.DEPARTMENT__SUPERINTENDENT:
-				return getSuperintendent();
+			case FairPackage.DEPARTMENT__CLASSES:
+				return getClasses();
+			case FairPackage.DEPARTMENT__SUPERINTENDENTS:
+				return getSuperintendents();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -197,13 +197,13 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 			case FairPackage.DEPARTMENT__NAME:
 				setName((String)newValue);
 				return;
-			case FairPackage.DEPARTMENT__CLASS:
-				getClass_().clear();
-				getClass_().addAll((Collection<? extends com.verticon.tracker.fair.Class>)newValue);
+			case FairPackage.DEPARTMENT__CLASSES:
+				getClasses().clear();
+				getClasses().addAll((Collection<? extends com.verticon.tracker.fair.Class>)newValue);
 				return;
-			case FairPackage.DEPARTMENT__SUPERINTENDENT:
-				getSuperintendent().clear();
-				getSuperintendent().addAll((Collection<? extends Person>)newValue);
+			case FairPackage.DEPARTMENT__SUPERINTENDENTS:
+				getSuperintendents().clear();
+				getSuperintendents().addAll((Collection<? extends Person>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -220,11 +220,11 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 			case FairPackage.DEPARTMENT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case FairPackage.DEPARTMENT__CLASS:
-				getClass_().clear();
+			case FairPackage.DEPARTMENT__CLASSES:
+				getClasses().clear();
 				return;
-			case FairPackage.DEPARTMENT__SUPERINTENDENT:
-				getSuperintendent().clear();
+			case FairPackage.DEPARTMENT__SUPERINTENDENTS:
+				getSuperintendents().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -240,10 +240,10 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 		switch (featureID) {
 			case FairPackage.DEPARTMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case FairPackage.DEPARTMENT__CLASS:
-				return class_ != null && !class_.isEmpty();
-			case FairPackage.DEPARTMENT__SUPERINTENDENT:
-				return superintendent != null && !superintendent.isEmpty();
+			case FairPackage.DEPARTMENT__CLASSES:
+				return classes != null && !classes.isEmpty();
+			case FairPackage.DEPARTMENT__SUPERINTENDENTS:
+				return superintendents != null && !superintendents.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
