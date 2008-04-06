@@ -10,7 +10,7 @@ import org.eclipse.emf.common.util.EList;
 
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.fair.Division;
-import com.verticon.tracker.fair.People;
+import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YouthClub;
 
 /**
@@ -23,6 +23,8 @@ public interface FairValidator {
 	boolean validate();
 
 	boolean validateName(String value);
+	boolean validateYouthClubs(EList<YouthClub> value);
+
 	boolean validateYouthClub(EList<YouthClub> value);
 
 	boolean validateDivision(EList<Division> value);
@@ -31,5 +33,6 @@ public interface FairValidator {
 	boolean validateDivisions(EList<Division> value);
 	boolean validatePremises(Premises value);
 
-	boolean validatePeople(People value);
+	boolean validatePeople(EList<Person> value);
+
 }

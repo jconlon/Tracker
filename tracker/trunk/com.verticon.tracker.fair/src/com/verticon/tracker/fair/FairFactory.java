@@ -95,15 +95,6 @@ public interface FairFactory extends EFactory {
 	Lot createLot();
 
 	/**
-	 * Returns a new object of class '<em>People</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>People</em>'.
-	 * @generated
-	 */
-	People createPeople();
-
-	/**
 	 * Returns a new object of class '<em>Person</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

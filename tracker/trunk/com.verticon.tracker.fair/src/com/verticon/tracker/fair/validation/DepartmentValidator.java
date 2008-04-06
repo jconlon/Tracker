@@ -25,5 +25,7 @@ public interface DepartmentValidator {
 
 	boolean validateClasses(EList<com.verticon.tracker.fair.Class> value);
 
+	boolean validateSuperintendents(EList<Person> value);
+
 	boolean validateSuperIntendent(EList<Person> value);
 }

@@ -16,7 +16,6 @@ import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.Lot;
-import com.verticon.tracker.fair.People;
 import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YoungPerson;
 import com.verticon.tracker.fair.YouthClub;
@@ -144,12 +143,6 @@ public class FairSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FairPackage.PEOPLE: {
-				People people = (People)theEObject;
-				T result = casePeople(people);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case FairPackage.PERSON: {
 				Person person = (Person)theEObject;
 				T result = casePerson(person);
@@ -269,21 +262,6 @@ public class FairSwitch<T> {
 	 * @generated
 	 */
 	public T caseLot(Lot object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>People</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>People</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePeople(People object) {
 		return null;
 	}
 

@@ -67,26 +67,26 @@ public class YoungPersonItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addParentPropertyDescriptor(object);
+			addParentsPropertyDescriptor(object);
 			addClubPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Parent feature.
+	 * This adds a property descriptor for the Parents feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addParentPropertyDescriptor(Object object) {
+	protected void addParentsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_YoungPerson_parent_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_YoungPerson_parent_feature", "_UI_YoungPerson_type"),
-				 FairPackage.Literals.YOUNG_PERSON__PARENT,
+				 getString("_UI_YoungPerson_parents_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_YoungPerson_parents_feature", "_UI_YoungPerson_type"),
+				 FairPackage.Literals.YOUNG_PERSON__PARENTS,
 				 true,
 				 false,
 				 true,

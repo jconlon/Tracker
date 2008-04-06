@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link com.verticon.tracker.fair.YoungPerson#getParent <em>Parent</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.YoungPerson#getParents <em>Parents</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.YoungPerson#getClub <em>Club</em>}</li>
  * </ul>
  * </p>
@@ -33,20 +33,20 @@ public interface YoungPerson extends Person {
 	String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
 	/**
-	 * Returns the value of the '<em><b>Parent</b></em>' reference list.
+	 * Returns the value of the '<em><b>Parents</b></em>' reference list.
 	 * The list contents are of type {@link com.verticon.tracker.fair.Person}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Parent</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Parents</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent</em>' reference list.
-	 * @see com.verticon.tracker.fair.FairPackage#getYoungPerson_Parent()
-	 * @model required="true" upper="2"
+	 * @return the value of the '<em>Parents</em>' reference list.
+	 * @see com.verticon.tracker.fair.FairPackage#getYoungPerson_Parents()
+	 * @model required="true"
 	 * @generated
 	 */
-	EList<Person> getParent();
+	EList<Person> getParents();
 
 	/**
 	 * Returns the value of the '<em><b>Club</b></em>' reference.

@@ -135,8 +135,8 @@ public class FairItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(FairPackage.Literals.FAIR__YOUTH_CLUB);
-			childrenFeatures.add(FairPackage.Literals.FAIR__DIVISION);
+			childrenFeatures.add(FairPackage.Literals.FAIR__YOUTH_CLUBS);
+			childrenFeatures.add(FairPackage.Literals.FAIR__DIVISIONS);
 			childrenFeatures.add(FairPackage.Literals.FAIR__PEOPLE);
 		}
 		return childrenFeatures;
@@ -195,8 +195,8 @@ public class FairItemProvider
 			case FairPackage.FAIR__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case FairPackage.FAIR__YOUTH_CLUB:
-			case FairPackage.FAIR__DIVISION:
+			case FairPackage.FAIR__YOUTH_CLUBS:
+			case FairPackage.FAIR__DIVISIONS:
 			case FairPackage.FAIR__PEOPLE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -217,18 +217,23 @@ public class FairItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(FairPackage.Literals.FAIR__YOUTH_CLUB,
+				(FairPackage.Literals.FAIR__YOUTH_CLUBS,
 				 FairFactory.eINSTANCE.createYouthClub()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(FairPackage.Literals.FAIR__DIVISION,
+				(FairPackage.Literals.FAIR__DIVISIONS,
 				 FairFactory.eINSTANCE.createDivision()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(FairPackage.Literals.FAIR__PEOPLE,
-				 FairFactory.eINSTANCE.createPeople()));
+				 FairFactory.eINSTANCE.createPerson()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(FairPackage.Literals.FAIR__PEOPLE,
+				 FairFactory.eINSTANCE.createYoungPerson()));
 	}
 
 	/**

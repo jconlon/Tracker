@@ -74,7 +74,7 @@ public class DepartmentItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
-			addSuperintendentPropertyDescriptor(object);
+			addSuperintendentsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -102,19 +102,19 @@ public class DepartmentItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Superintendent feature.
+	 * This adds a property descriptor for the Superintendents feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSuperintendentPropertyDescriptor(Object object) {
+	protected void addSuperintendentsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Department_superintendent_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Department_superintendent_feature", "_UI_Department_type"),
-				 FairPackage.Literals.DEPARTMENT__SUPERINTENDENT,
+				 getString("_UI_Department_superintendents_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Department_superintendents_feature", "_UI_Department_type"),
+				 FairPackage.Literals.DEPARTMENT__SUPERINTENDENTS,
 				 true,
 				 false,
 				 true,
@@ -135,7 +135,7 @@ public class DepartmentItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(FairPackage.Literals.DEPARTMENT__CLASS);
+			childrenFeatures.add(FairPackage.Literals.DEPARTMENT__CLASSES);
 		}
 		return childrenFeatures;
 	}
@@ -193,7 +193,7 @@ public class DepartmentItemProvider
 			case FairPackage.DEPARTMENT__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case FairPackage.DEPARTMENT__CLASS:
+			case FairPackage.DEPARTMENT__CLASSES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -213,7 +213,7 @@ public class DepartmentItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(FairPackage.Literals.DEPARTMENT__CLASS,
+				(FairPackage.Literals.DEPARTMENT__CLASSES,
 				 FairFactory.eINSTANCE.createClass()));
 	}
 

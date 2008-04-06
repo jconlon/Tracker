@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.impl.DivisionImpl#getName <em>Name</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.DivisionImpl#getDepartment <em>Department</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.DivisionImpl#getDepartments <em>Departments</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,14 +68,14 @@ public class DivisionImpl extends EObjectImpl implements Division {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDepartment() <em>Department</em>}' containment reference list.
+	 * The cached value of the '{@link #getDepartments() <em>Departments</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDepartment()
+	 * @see #getDepartments()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Department> department;
+	protected EList<Department> departments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,11 +122,11 @@ public class DivisionImpl extends EObjectImpl implements Division {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Department> getDepartment() {
-		if (department == null) {
-			department = new EObjectContainmentEList<Department>(Department.class, this, FairPackage.DIVISION__DEPARTMENT);
+	public EList<Department> getDepartments() {
+		if (departments == null) {
+			departments = new EObjectContainmentEList<Department>(Department.class, this, FairPackage.DIVISION__DEPARTMENTS);
 		}
-		return department;
+		return departments;
 	}
 
 	/**
@@ -137,8 +137,8 @@ public class DivisionImpl extends EObjectImpl implements Division {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FairPackage.DIVISION__DEPARTMENT:
-				return ((InternalEList<?>)getDepartment()).basicRemove(otherEnd, msgs);
+			case FairPackage.DIVISION__DEPARTMENTS:
+				return ((InternalEList<?>)getDepartments()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -153,8 +153,8 @@ public class DivisionImpl extends EObjectImpl implements Division {
 		switch (featureID) {
 			case FairPackage.DIVISION__NAME:
 				return getName();
-			case FairPackage.DIVISION__DEPARTMENT:
-				return getDepartment();
+			case FairPackage.DIVISION__DEPARTMENTS:
+				return getDepartments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -171,9 +171,9 @@ public class DivisionImpl extends EObjectImpl implements Division {
 			case FairPackage.DIVISION__NAME:
 				setName((String)newValue);
 				return;
-			case FairPackage.DIVISION__DEPARTMENT:
-				getDepartment().clear();
-				getDepartment().addAll((Collection<? extends Department>)newValue);
+			case FairPackage.DIVISION__DEPARTMENTS:
+				getDepartments().clear();
+				getDepartments().addAll((Collection<? extends Department>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -190,8 +190,8 @@ public class DivisionImpl extends EObjectImpl implements Division {
 			case FairPackage.DIVISION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case FairPackage.DIVISION__DEPARTMENT:
-				getDepartment().clear();
+			case FairPackage.DIVISION__DEPARTMENTS:
+				getDepartments().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -207,8 +207,8 @@ public class DivisionImpl extends EObjectImpl implements Division {
 		switch (featureID) {
 			case FairPackage.DIVISION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case FairPackage.DIVISION__DEPARTMENT:
-				return department != null && !department.isEmpty();
+			case FairPackage.DIVISION__DEPARTMENTS:
+				return departments != null && !departments.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -16,7 +16,6 @@ import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.Lot;
-import com.verticon.tracker.fair.People;
 import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YoungPerson;
 import com.verticon.tracker.fair.YouthClub;
@@ -111,10 +110,6 @@ public class FairAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseLot(Lot object) {
 				return createLotAdapter();
-			}
-			@Override
-			public Adapter casePeople(People object) {
-				return createPeopleAdapter();
 			}
 			@Override
 			public Adapter casePerson(Person object) {
@@ -239,20 +234,6 @@ public class FairAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLotAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.fair.People <em>People</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.verticon.tracker.fair.People
-	 * @generated
-	 */
-	public Adapter createPeopleAdapter() {
 		return null;
 	}
 

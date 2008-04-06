@@ -20,8 +20,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.Fair#getName <em>Name</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.Fair#getYouthClub <em>Youth Club</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.Fair#getDivision <em>Division</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Fair#getYouthClubs <em>Youth Clubs</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Fair#getDivisions <em>Divisions</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Fair#getPremises <em>Premises</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Fair#getPeople <em>People</em>}</li>
  * </ul>
@@ -66,36 +66,36 @@ public interface Fair extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Youth Club</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Youth Clubs</b></em>' containment reference list.
 	 * The list contents are of type {@link com.verticon.tracker.fair.YouthClub}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Youth Club</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Youth Clubs</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Youth Club</em>' containment reference list.
-	 * @see com.verticon.tracker.fair.FairPackage#getFair_YouthClub()
+	 * @return the value of the '<em>Youth Clubs</em>' containment reference list.
+	 * @see com.verticon.tracker.fair.FairPackage#getFair_YouthClubs()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<YouthClub> getYouthClub();
+	EList<YouthClub> getYouthClubs();
 
 	/**
-	 * Returns the value of the '<em><b>Division</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Divisions</b></em>' containment reference list.
 	 * The list contents are of type {@link com.verticon.tracker.fair.Division}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Division</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Divisions</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Division</em>' containment reference list.
-	 * @see com.verticon.tracker.fair.FairPackage#getFair_Division()
+	 * @return the value of the '<em>Divisions</em>' containment reference list.
+	 * @see com.verticon.tracker.fair.FairPackage#getFair_Divisions()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<Division> getDivision();
+	EList<Division> getDivisions();
 
 	/**
 	 * Returns the value of the '<em><b>Premises</b></em>' reference.
@@ -124,35 +124,25 @@ public interface Fair extends EObject {
 	void setPremises(Premises value);
 
 	/**
-	 * Returns the value of the '<em><b>People</b></em>' containment reference.
+	 * Returns the value of the '<em><b>People</b></em>' containment reference list.
+	 * The list contents are of type {@link com.verticon.tracker.fair.Person}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>People</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>People</em>' containment reference.
-	 * @see #setPeople(People)
+	 * @return the value of the '<em>People</em>' containment reference list.
 	 * @see com.verticon.tracker.fair.FairPackage#getFair_People()
 	 * @model containment="true"
 	 * @generated
 	 */
-	People getPeople();
-
-	/**
-	 * Sets the value of the '{@link com.verticon.tracker.fair.Fair#getPeople <em>People</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>People</em>' containment reference.
-	 * @see #getPeople()
-	 * @generated
-	 */
-	void setPeople(People value);
+	EList<Person> getPeople();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/ocl/examples/OCL body='if (division -> notEmpty())  and (division.department->notEmpty())  and  (division.department.class->notEmpty) and (division.department.class.lot->notEmpty) and (division.department.class.lot.exhibit->notEmpty) \n\tthen  division.department.class.lot.exhibit\n\telse Set{}\nendif\n'"
+	 * @model annotation="http://www.eclipse.org/ocl/examples/OCL body='if (divisions -> notEmpty())  and (divisions.departments->notEmpty())  and  (divisions.departments.classes->notEmpty) and (divisions.departments.classes.lots->notEmpty) and (divisions.departments.classes.lots.exhibits->notEmpty) \n\tthen  divisions.departments.classes.lots.exhibits\n\telse Set{}\nendif\n'"
 	 * @generated
 	 */
 	EList<Exhibit> exhibits();

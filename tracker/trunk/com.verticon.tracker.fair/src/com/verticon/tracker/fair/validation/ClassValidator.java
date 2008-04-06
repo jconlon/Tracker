@@ -25,5 +25,7 @@ public interface ClassValidator {
 
 	boolean validateLots(EList<Lot> value);
 
+	boolean validateJudges(EList<Person> value);
+
 	boolean validateJudge(EList<Person> value);
 }
