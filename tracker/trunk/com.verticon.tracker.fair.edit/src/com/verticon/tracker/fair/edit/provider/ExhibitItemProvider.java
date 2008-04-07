@@ -226,6 +226,9 @@ public class ExhibitItemProvider
 			case FairPackage.EXHIBIT__NAME:
 			case FairPackage.EXHIBIT__NUMBER:
 			case FairPackage.EXHIBIT__COMMENTS:
+			case FairPackage.EXHIBIT__ANIMAL:
+			case FairPackage.EXHIBIT__EXHIBITOR:
+			case FairPackage.EXHIBIT__LOT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -267,13 +270,27 @@ public class ExhibitItemProvider
 	    switch (columnIndex){
 	        case 0: return exhibit.getName(); 
 	    	case 1: return Integer.toString(exhibit.getNumber()); 
-	    	case 2: return exhibit.getExhibitor().getName();  
-	    	case 3: return exhibit.getAnimal().getId();
-	    	case 4: return exhibit.getLot().getName();
-	    	case 5: return exhibit.getLot().getClass_().getName();
-	    	case 6: return exhibit.getLot().getClass_().getDepartment().getName();
-	    	case 7: return exhibit.getLot().getClass_().getDepartment().getDivision().getName();
-	    	case 8: return exhibit.getComments();
+	    	
+	    	case 2: 
+	    		return (exhibit.getExhibitor()==null || exhibit.getExhibitor().getName()==null)?
+	    				null:exhibit.getExhibitor().getName();  
+	    		
+	    	case 3: 
+	    		return (exhibit.getAnimal()==null || exhibit.getAnimal().getId()==null)?
+	    				null:exhibit.getAnimal().getId();
+	    	
+	    	case 4: 
+	    		return (exhibit.getLot()==null || exhibit.getLot().getName()==null)?
+	    				null:exhibit.getLot().getName();
+	    		
+	    	case 5: 
+	    		return exhibit.getLot().getClass_().getName();
+	    	case 6: 
+	    		return exhibit.getLot().getClass_().getDepartment().getName();
+	    	case 7: 
+	    		return exhibit.getLot().getClass_().getDepartment().getDivision().getName();
+	    	case 8: 
+	    		return exhibit.getComments();
 	    	default :
 	    		return "unknown " + columnIndex;
 	    }
