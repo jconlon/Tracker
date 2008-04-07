@@ -154,7 +154,9 @@ public class PeopleSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	private int compareCities(Person person1, Person person2) {
-		return getComparator().compare(person1.getCity(), person2.getCity());
+		String value1 = person1.getCity()==null?"":person1.getCity();
+		String value2 = person2.getCity()==null?"":person2.getCity();
+		return value1.compareTo(value2);
 	}
 	
 	/**
@@ -170,7 +172,9 @@ public class PeopleSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	private int compareLastNames(Person person1, Person person2) {
-		return getComparator().compare(person1.getLastName(), person2.getLastName());	
+		String value1 = person1.getLastName()==null?"":person1.getLastName();
+		String value2 = person2.getLastName()==null?"":person2.getLastName();
+		return value1.compareTo(value2);	
 	}
 	
 	/**
@@ -186,7 +190,9 @@ public class PeopleSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	private int compareFirstNames(Person person1, Person person2) {
-		return getComparator().compare(person1.getFirstName(), person2.getFirstName());
+		String value1 = person1.getFirstName()==null?"":person1.getFirstName();
+		String value2 = person2.getFirstName()==null?"":person2.getFirstName();
+		return value1.compareTo(value2);
 	}
 
 	
@@ -204,7 +210,9 @@ public class PeopleSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int compareStates(Person person1, Person person2) {
-		return getComparator().compare(person1.getState(), person2.getState());
+		String value1 = person1.getState()==null?"":person1.getState();
+		String value2 = person2.getState()==null?"":person2.getState();
+		return value1.compareTo(value2);
 	}
 
 	/**
@@ -220,7 +228,9 @@ public class PeopleSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int comparePhones(Person person1, Person person2) {
-		return getComparator().compare(person1.getPhone(), person2.getPhone());
+		String value1 = person1.getPhone()==null?"":person1.getPhone();
+		String value2 = person2.getPhone()==null?"":person2.getPhone();
+		return value1.compareTo(value2);
 	}
 
 	/**
@@ -256,7 +266,9 @@ public class PeopleSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int compareNames(Person person1, Person person2) {
-		return getComparator().compare(person1.getName(), person2.getName());
+		String value1 = person1.getName()==null?"":person1.getName();
+		String value2 = person2.getName()==null?"":person2.getName();
+		return value1.compareTo(value2);
 	}
 	
 	

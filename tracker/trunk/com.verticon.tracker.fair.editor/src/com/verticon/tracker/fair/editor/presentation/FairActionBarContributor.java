@@ -185,7 +185,7 @@ public class FairActionBarContributor
 	 * This adds Separators for editor additions to the tool bar.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated 
+	 * @generated
 	 */
 	public void contributeToToolBarGen(IToolBarManager toolBarManager) {
 		toolBarManager.add(new Separator("fair-settings"));
