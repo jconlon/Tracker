@@ -20,6 +20,7 @@ import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.presentation.TrackerTableEditorUtils;
 import com.verticon.tracker.fair.Fair;
+import com.verticon.tracker.fair.FairPackage;
 
 /**
  * @author jconlon
@@ -217,7 +218,7 @@ public class FairTableEditorUtils {
 		 * should be able to handle all notifications of animals being added or
 		 * removed.
 		 * 
-		 * To get Animal Elements override the getElements method
+		 * To get People Elements override the getElements method
 		 */
 		tableViewer.setContentProvider(new AdapterFactoryContentProvider(
 				adapterFactory) 
@@ -227,6 +228,24 @@ public class FairTableEditorUtils {
 						Fair fair = (Fair)object;
 						
 						return fair.getPeople().toArray();
+					}
+					
+					@Override
+					public void notifyChanged(Notification notification) {
+
+						switch (notification.getEventType()) {
+						case Notification.ADD:
+						case Notification.ADD_MANY:
+							if (notification.getFeature() != FairPackage.eINSTANCE.getPerson() &&
+								notification.getFeature() != FairPackage.eINSTANCE.getFair_People()
+								) {
+//								System.out.println("People Ignoring "+notification.getFeature());
+								return;
+							}
+						}
+//						System.out.println("People handling "+notification.getFeature());
+						super.notifyChanged(notification);
+
 					}
 
 				});
@@ -373,6 +392,25 @@ public class FairTableEditorUtils {
 					@Override
 					public Object[] getElements(Object object) {
 						return ((Fair) object).exhibits().toArray();
+					}
+					@Override
+					public void notifyChanged(Notification notification) {
+
+//						switch (notification.getEventType()) {
+//						case Notification.ADD:
+//						case Notification.ADD_MANY:
+//							if (notification.getFeature() != FairPackage.eINSTANCE.getExhibit()&&
+//								notification.getFeature() != FairPackage.eINSTANCE.getLot_Exhibits()
+//								) {
+//								System.out.println("Exhibits Ignoring "+notification);
+//								return;
+//							}
+//								
+//							
+//						}
+//						System.out.println("Exhibits Handling "+notification);
+						super.notifyChanged(notification);
+
 					}
 
 				});

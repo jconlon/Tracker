@@ -139,8 +139,12 @@ public class ExhibitSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int compareClasses(Exhibit exhibit1, Exhibit exhibit2) {
-		return getComparator().compare(
-				exhibit1.getLot().getClass_().getName(), exhibit2.getLot().getClass_().getName());
+		String value1 = exhibit1.getLot().getClass_().getName()==null?
+				"":exhibit1.getLot().getClass_().getName();
+		String value2 = exhibit2.getLot().getClass_().getName()==null?
+				"":exhibit2.getLot().getClass_().getName();
+		return value1.compareTo(value2);
+		
 	}
 	
 	
@@ -158,8 +162,11 @@ public class ExhibitSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	private int compareLots(Exhibit exhibit1, Exhibit exhibit2) {
-		return getComparator().compare(
-				exhibit1.getLot().getName(), exhibit2.getLot().getName());
+		String value1 = exhibit1.getLot().getName()==null?
+				"":exhibit1.getLot().getName();
+		String value2 = exhibit2.getLot().getName()==null?
+				"":exhibit2.getLot().getName();
+		return value1.compareTo(value2);
 	}
 	
 	/**
@@ -175,9 +182,13 @@ public class ExhibitSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	private int compareDepartments(Exhibit exhibit1, Exhibit exhibit2) {
-		return getComparator().compare(
-				exhibit1.getLot().getClass_().getDepartment().getName(), 
-				exhibit2.getLot().getClass_().getDepartment().getName());
+		
+		String value1 = exhibit1.getLot().getClass_().getDepartment().getName()==null?
+				"":exhibit1.getLot().getClass_().getDepartment().getName();
+		String value2 = exhibit2.getLot().getClass_().getDepartment().getName()==null?
+				"":exhibit2.getLot().getClass_().getDepartment().getName();
+		return value1.compareTo(value2);
+		
 	}
 	
 	/**
@@ -193,7 +204,12 @@ public class ExhibitSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	private int compareAnimals(Exhibit exhibit1, Exhibit exhibit2) {
-		return getComparator().compare(exhibit1.getAnimal().getId(), exhibit2.getAnimal().getId());
+		String value1 = (exhibit1.getAnimal()==null || exhibit1.getAnimal().getId()==null)?
+				"":exhibit1.getAnimal().getId();
+		String value2 = (exhibit2.getAnimal()==null || exhibit2.getAnimal().getId()==null)?
+				"":exhibit2.getAnimal().getId();
+		return value1.compareTo(value2);
+		
 	}
 
 	
@@ -232,9 +248,12 @@ public class ExhibitSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int compareExhibitors(Exhibit exhibit1, Exhibit exhibit2) {
-		return getComparator().compare(
-				exhibit1.getExhibitor().getName(), 
-				exhibit2.getExhibitor().getName());
+		String value1 = (exhibit1.getExhibitor()==null || exhibit1.getExhibitor().getName()==null)?
+				"":exhibit1.getExhibitor().getName();
+		String value2 = (exhibit2.getExhibitor()==null|| exhibit2.getExhibitor().getName()==null)?
+				"":exhibit2.getExhibitor().getName();
+		return value1.compareTo(value2);
+		
 	}
 
 	/**
@@ -250,9 +269,11 @@ public class ExhibitSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int compareDivisions(Exhibit exhibit1, Exhibit exhibit2) {
-		return getComparator().compare(
-				exhibit1.getLot().getClass_().getDepartment().getDivision().getName(), 
-				exhibit2.getLot().getClass_().getDepartment().getDivision().getName());
+		String value1 = exhibit1.getLot().getClass_().getDepartment().getDivision().getName()==null?
+				"":exhibit1.getLot().getClass_().getDepartment().getDivision().getName();
+		String value2 = exhibit2.getLot().getClass_().getDepartment().getDivision().getName()==null?
+				"":exhibit2.getLot().getClass_().getDepartment().getDivision().getName();
+		return value1.compareTo(value2);
 	}
 	
 	
