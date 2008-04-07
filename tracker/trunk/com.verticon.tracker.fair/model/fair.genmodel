@@ -27,9 +27,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/number"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/comments"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//Exhibit/animal"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//Exhibit/exhibitor"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference fair.ecore#//Exhibit/lot"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//Exhibit/animal"/>
+      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//Exhibit/exhibitor"/>
+      <genFeatures property="None" createChild="false" ecoreFeature="ecore:EReference fair.ecore#//Exhibit/lot"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//YouthClub">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//YouthClub/name"/>
