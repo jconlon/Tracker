@@ -9,17 +9,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
-
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
-
 import org.eclipse.emf.edit.ui.action.ControlAction;
 import org.eclipse.emf.edit.ui.action.CreateChildAction;
 import org.eclipse.emf.edit.ui.action.CreateSiblingAction;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction;
 import org.eclipse.emf.edit.ui.action.ValidateAction;
-
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IAction;
@@ -31,16 +28,17 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.action.SubContributionItem;
-
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.Viewer;
-
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
+
+import com.verticon.tracker.editor.presentation.CustomActionBarContributor;
+import com.verticon.tracker.editor.presentation.ICustomActionBarContributor;
 
 /**
  * This is the action bar contributor for the Fair model editor.
@@ -58,6 +56,13 @@ public class FairActionBarContributor
 	 */
 	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
 
+	/**
+	 * Customization of the EditingDomainActionBarContributor happens in this class.
+	 * 
+	 * @generated NOT
+	 */
+	ICustomActionBarContributor customActionBarContributor = new CustomActionBarContributor();
+	
 	/**
 	 * This keeps track of the active editor.
 	 * <!-- begin-user-doc -->
@@ -166,13 +171,23 @@ public class FairActionBarContributor
 	}
 
 	/**
-	 * This adds Separators for editor additions to the tool bar.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * This adds custom Separators for editor additions to the tool bar.
+	 * 
+	 * @generated NOT
 	 */
 	@Override
 	public void contributeToToolBar(IToolBarManager toolBarManager) {
+		contributeToToolBarGen( toolBarManager);
+		customActionBarContributor.contributeToToolBar(toolBarManager);
+	}
+	
+	/**
+	 * This adds Separators for editor additions to the tool bar.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated 
+	 */
+	public void contributeToToolBarGen(IToolBarManager toolBarManager) {
 		toolBarManager.add(new Separator("fair-settings"));
 		toolBarManager.add(new Separator("fair-additions"));
 	}
@@ -218,13 +233,23 @@ public class FairActionBarContributor
 	}
 
 	/**
+	 * When the active editor changes, this sets up the customActionBarContributor before
+	 * calling the generated method.
+	 * @generated NOT
+	 */
+	@Override
+	public void setActiveEditor(IEditorPart part) {
+		customActionBarContributor.setActiveEditor(part);
+		setActiveEditorGen( part);
+	}
+	
+	/**
 	 * When the active editor changes, this remembers the change and registers with it as a selection provider.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setActiveEditor(IEditorPart part) {
+	public void setActiveEditorGen(IEditorPart part) {
 		super.setActiveEditor(part);
 		activeEditorPart = part;
 

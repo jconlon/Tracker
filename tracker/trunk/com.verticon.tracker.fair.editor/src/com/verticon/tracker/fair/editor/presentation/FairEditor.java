@@ -104,6 +104,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IEditorActionBarContributor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
@@ -127,7 +128,13 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
 import com.verticon.tracker.editor.presentation.EventsTableViewerNotifier;
+import com.verticon.tracker.editor.presentation.IAnimalSelectionProvider;
+import com.verticon.tracker.editor.presentation.IEventSelectionProvider;
 import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
+import com.verticon.tracker.editor.presentation.ISelectionViewerProvider;
+import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
+import com.verticon.tracker.editor.presentation.TrackerActionBarContributor;
+import com.verticon.tracker.editor.presentation.TrackerEditor;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.Person;
@@ -144,6 +151,11 @@ import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
  *   <li>adds an Exhibits table </li>
  *   <li>adds an People table </li>
  *   <li>adds support for OCL Query View using an IQueryDataSetProvider adapter</li>
+ *    <li>adds SelectionTree expansion and  contraction actions to the 
+ *   	 ActionBarContributor</li>
+ *   <li>adds Selection linking between Animals and Events Tables</li>
+ *   <li>implements previous two items with adapters for IEventSelectionProvider, 
+ *   	 IAnimalSelectionProvider, ISelectionViewerProvider,  </li>
  * </ul>
  * <!-- end-user-doc -->
  * @generated
@@ -228,6 +240,24 @@ public class FairEditor
 	 * @generated NOT
 	 */
 	protected TableViewer exhibitsTableViewer;
+	
+	/**
+	 * Offers a selection on a set of Animals. 
+	 * @generated NOT
+	 */
+	private IAnimalSelectionProvider animalSelectionProvider;
+	
+	/**
+	 * Offers a generic selection. 
+	 * @generated NOT
+	 */
+	private ISelectionViewerProvider selectionViewerProvider;
+	
+	/**
+	 * Offers a selection on a set of Events. 
+	 * @generated NOT
+	 */
+	private IEventSelectionProvider eventSelectionProvider;
 	
 	/**
 	 * Offers a query on a dataSet. 
@@ -1068,7 +1098,16 @@ public class FairEditor
 			createExhibitsTableViewer(getString("_UI_ExhibitsTablePage_label"));
 			
 			createPeopleTableViewer(getString("_UI_PeopleTablePage_label"));
-			
+
+			IEditorActionBarContributor abc = getActionBarContributor();
+			if(abc != null && abc instanceof FairActionBarContributor){
+				FairActionBarContributor trackerActionBarContributor =(FairActionBarContributor)abc;
+				SelectionViewerFilter svf = trackerActionBarContributor.customActionBarContributor.getSelectionViewerFilter();
+				trackerActionBarContributor.customActionBarContributor.getSelectionViewerFilter().setMainViewer(selectionViewer);
+				svf.addViewer(eventsTableViewer);
+				svf.addViewer(animalsTableViewer);
+//				svf.addViewer(fairRegistrationTableViewer);
+			}
 
 			setActivePage(0);
 		}
@@ -1618,6 +1657,8 @@ public class FairEditor
 	 * This is how the framework determines which interfaces we implement.
 	 * <!-- begin-user-doc -->
 	 * Modified to offer a IQueryDataSetProvider to support OCL Queries
+	 * Modified to offer IAnimalSelectionProvider, ISelectionViewerProvider to 
+	 * support navigation
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -1632,6 +1673,58 @@ public class FairEditor
 		}
 		else if (key.equals(IGotoMarker.class)) {
 			return this;
+		}
+		//Added to support AnimalSelections
+		else if (key.equals(IAnimalSelectionProvider.class)){
+			if (animalSelectionProvider==null){
+				animalSelectionProvider = new IAnimalSelectionProvider(){
+
+					public ISelection getAnimalSelection() {
+						return FairEditor.this.getAnimalSelection();
+					}
+
+					public void setAnimalSelection(ISelection selection) {
+						FairEditor.this.setAnimalSelection(selection);
+					}
+					
+				};
+			}
+			return animalSelectionProvider;
+		}
+		//Added to support the main Viewer Selections
+		else if (key.equals(ISelectionViewerProvider.class)){
+			if (selectionViewerProvider==null){
+				selectionViewerProvider = new ISelectionViewerProvider(){
+
+					public ISelection getSelectionViewerSelection() {
+						return FairEditor.this.getSelectionViewerSelection();
+					}
+
+					public void setSelectionViewerSelection(ISelection selection) {
+						FairEditor.this.setSelectionViewerSelection(selection);
+						
+					}
+					
+				};
+			}
+			return selectionViewerProvider;
+		}
+		else if (key.equals(IEventSelectionProvider.class)){
+			if (eventSelectionProvider==null){
+				eventSelectionProvider = new IEventSelectionProvider(){
+
+					public ISelection getEventSelection() {
+						return FairEditor.this.getEventSelection();
+					}
+
+					public void setEventSelection(ISelection selection) {
+						FairEditor.this.setEventSelection(selection);
+					}
+
+					
+				};
+			}
+			return eventSelectionProvider;
 		}
 		//Adds adaptive support for IQueryDataSetProvider 	
 		else if (key.equals(IQueryDataSetProvider.class)){
@@ -2269,5 +2362,30 @@ public class FairEditor
 	 */
 	protected boolean showOutlineView() {
 		return true;
+	}
+	
+	public ISelection getEventSelection() {
+		return eventsTableViewer.getSelection();
+	}
+
+	public void setEventSelection(ISelection selection) {
+		eventsTableViewer.setSelection(selection);
+		
+	}
+
+	public ISelection getAnimalSelection() {
+		return animalsTableViewer.getSelection();
+	}
+
+	public void setAnimalSelection(ISelection selection) {
+		animalsTableViewer.setSelection(selection);
+	}
+
+	public ISelection getSelectionViewerSelection() {
+		return selectionViewer.getSelection();
+	}
+
+	public void setSelectionViewerSelection(ISelection selection) {
+		selectionViewer.setSelection(selection);
 	}
 }
