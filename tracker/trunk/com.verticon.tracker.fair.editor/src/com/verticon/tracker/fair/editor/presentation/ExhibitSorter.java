@@ -140,7 +140,7 @@ public class ExhibitSorter extends ViewerSorter {
 	@SuppressWarnings("unchecked")
 	protected int compareClasses(Exhibit exhibit1, Exhibit exhibit2) {
 		return getComparator().compare(
-				exhibit1.getLot().getClass_(), exhibit2.getLot().getClass_());
+				exhibit1.getLot().getClass_().getName(), exhibit2.getLot().getClass_().getName());
 	}
 	
 	
@@ -159,7 +159,7 @@ public class ExhibitSorter extends ViewerSorter {
 	@SuppressWarnings("unchecked")
 	private int compareLots(Exhibit exhibit1, Exhibit exhibit2) {
 		return getComparator().compare(
-				exhibit1.getLot(), exhibit2.getLot());
+				exhibit1.getLot().getName(), exhibit2.getLot().getName());
 	}
 	
 	/**
@@ -176,8 +176,8 @@ public class ExhibitSorter extends ViewerSorter {
 	@SuppressWarnings("unchecked")
 	private int compareDepartments(Exhibit exhibit1, Exhibit exhibit2) {
 		return getComparator().compare(
-				exhibit1.getLot().getClass_().getDepartment(), 
-				exhibit2.getLot().getClass_().getDepartment());
+				exhibit1.getLot().getClass_().getDepartment().getName(), 
+				exhibit2.getLot().getClass_().getDepartment().getName());
 	}
 	
 	/**
@@ -193,7 +193,7 @@ public class ExhibitSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	private int compareAnimals(Exhibit exhibit1, Exhibit exhibit2) {
-		return getComparator().compare(exhibit1.getAnimal(), exhibit2.getAnimal());
+		return getComparator().compare(exhibit1.getAnimal().getId(), exhibit2.getAnimal().getId());
 	}
 
 	
@@ -211,7 +211,12 @@ public class ExhibitSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int compareNumbers(Exhibit exhibit1, Exhibit exhibit2) {
-		return getComparator().compare(exhibit1.getNumber(), exhibit2.getNumber());
+		 if( exhibit1.getNumber() < exhibit2.getNumber()){
+			 return -1;
+		 }else if(exhibit1.getNumber() == exhibit2.getNumber()){
+			return 0;
+		 }
+		 return 1;
 	}
 
 	/**
@@ -227,7 +232,9 @@ public class ExhibitSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int compareExhibitors(Exhibit exhibit1, Exhibit exhibit2) {
-		return getComparator().compare(exhibit1.getExhibitor(), exhibit2.getExhibitor());
+		return getComparator().compare(
+				exhibit1.getExhibitor().getName(), 
+				exhibit2.getExhibitor().getName());
 	}
 
 	/**
@@ -244,8 +251,8 @@ public class ExhibitSorter extends ViewerSorter {
 	@SuppressWarnings("unchecked")
 	protected int compareDivisions(Exhibit exhibit1, Exhibit exhibit2) {
 		return getComparator().compare(
-				exhibit1.getLot().getClass_().getDepartment().getDivision(), 
-				exhibit2.getLot().getClass_().getDepartment().getDivision());
+				exhibit1.getLot().getClass_().getDepartment().getDivision().getName(), 
+				exhibit2.getLot().getClass_().getDepartment().getDivision().getName());
 	}
 	
 	
@@ -263,7 +270,11 @@ public class ExhibitSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int compareNames(Exhibit exhibit1, Exhibit exhibit2) {
-		return getComparator().compare(exhibit1.getName(), exhibit2.getName());
+		String value1 = exhibit1.getName()==null?"":exhibit1.getName();
+		String value2 = exhibit2.getName()==null?"":exhibit2.getName();
+		return value1.compareTo(value2);
+		
+		
 	}
 	
 	/**
@@ -279,7 +290,9 @@ public class ExhibitSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int compareComments(Exhibit exhibit1, Exhibit exhibit2) {
-		return getComparator().compare(exhibit1.getComments(), exhibit2.getComments());
+		String comments1 = exhibit1.getComments()==null?"":exhibit1.getComments();
+		String comments2 = exhibit2.getComments()==null?"":exhibit2.getComments();
+		return comments1.compareTo(comments2);
 	}
 	
 	

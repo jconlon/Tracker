@@ -133,8 +133,12 @@ public class PeopleSorter extends ViewerSorter {
 	 *  element is greater than the second element
 	 */
 	@SuppressWarnings("unchecked")
-	protected int compareStreets(Person person1, Person animal2) {
-		return getComparator().compare(person1.getStreet(), animal2.getStreet());
+	protected int compareStreets(Person person1, Person person2) {
+		String value1 = person1.getStreet()==null?"":person1.getStreet();
+		String value2 = person2.getStreet()==null?"":person2.getStreet();
+		return value1.compareTo(value2);
+		
+		
 	}
 	
 	/**
@@ -232,7 +236,9 @@ public class PeopleSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int compareZips(Person person1, Person person2) {
-		return getComparator().compare(person1.getZipCode(), person2.getZipCode());
+		String value1 = person1.getZipCode()==null?"":person1.getZipCode();
+		String value2 = person2.getZipCode()==null?"":person2.getZipCode();
+		return value1.compareTo(value2);
 	}
 	
 	

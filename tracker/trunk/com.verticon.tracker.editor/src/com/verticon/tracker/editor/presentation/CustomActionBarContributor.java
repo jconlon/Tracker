@@ -38,7 +38,7 @@ public class CustomActionBarContributor implements ICustomActionBarContributor {
 	/**
 	 * Master ViewerFilter for views 
 	 */
-	SelectionViewerFilter masterViewerFilterAction;
+	protected SelectionViewerFilter masterViewerFilterAction;
 
 	/**
 	 * Image for collapse toolbar button

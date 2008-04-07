@@ -1101,12 +1101,13 @@ public class FairEditor
 
 			IEditorActionBarContributor abc = getActionBarContributor();
 			if(abc != null && abc instanceof FairActionBarContributor){
-				FairActionBarContributor trackerActionBarContributor =(FairActionBarContributor)abc;
-				SelectionViewerFilter svf = trackerActionBarContributor.customActionBarContributor.getSelectionViewerFilter();
-				trackerActionBarContributor.customActionBarContributor.getSelectionViewerFilter().setMainViewer(selectionViewer);
+				FairActionBarContributor fairActionBarContributor =(FairActionBarContributor)abc;
+				SelectionViewerFilter svf = fairActionBarContributor.customActionBarContributor.getSelectionViewerFilter();
+				fairActionBarContributor.customActionBarContributor.getSelectionViewerFilter().setMainViewer(selectionViewer);
 				svf.addViewer(eventsTableViewer);
 				svf.addViewer(animalsTableViewer);
-//				svf.addViewer(fairRegistrationTableViewer);
+				svf.addViewer(peopleTableViewer);
+				svf.addViewer(exhibitsTableViewer);
 			}
 
 			setActivePage(0);

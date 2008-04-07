@@ -58,9 +58,9 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 	
 	private boolean targetingEnabled = false;
 
-	private final ArrayList<Animal> targetedAnimals = new ArrayList<Animal>();
+	protected final ArrayList<Animal> targetedAnimals = new ArrayList<Animal>();
 	
-	private final ArrayList<Event> targetedEvents = new ArrayList<Event>();
+	protected final ArrayList<Event> targetedEvents = new ArrayList<Event>();
 	
 	
 	public SelectionViewerFilter() {
@@ -73,7 +73,7 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 	 */
 	@Override
 	public synchronized boolean select(Viewer viewer, Object parentElement, Object element) {
-		if(targetedEvents.isEmpty()&& targetedAnimals.isEmpty()){
+		if(noTargets()){
 			return true;//No targets enabled
 		}
 		if(element instanceof Premises){//Always return the Premises
@@ -107,12 +107,19 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 		return true;
 	}
 
+	/**
+	 * @return
+	 */
+	protected boolean noTargets() {
+		return targetedEvents.isEmpty()&& targetedAnimals.isEmpty();
+	}
+
 	@Override
 	public synchronized void run() {
 		toggleTargeting();
 		if(targetingEnabled){
 			this.setText(TARGETING_ON);
-			computeTargets();
+			computeTargets(mainViewer.getSelection());
 			this.setImageDescriptor(targetOnImage);
 		}else{
 			this.setText(TARGETING_OFF);
@@ -155,9 +162,9 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 	 * From the selection in the MainViewer target the Selected Animals, the Animal
 	 * parents of selected Events, and selected Events.
 	 */
-	private final void computeTargets() {
+	protected void computeTargets(ISelection selection) {
 		logger.debug("computing targets ");
-		ISelection selection = mainViewer.getSelection();
+		 
 		clearTargets();
 		if (selection instanceof IStructuredSelection) {
 			Event event = null;
@@ -184,9 +191,16 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 	/**
 	 * 
 	 */
-	private void clearTargets() {
+	protected void clearTargets() {
 		targetedAnimals.clear();
 		targetedEvents.clear();
+	}
+
+	@Override
+	public void dispose() {
+		clearTargets();
+		
+		super.dispose();
 	}
 	
 	
