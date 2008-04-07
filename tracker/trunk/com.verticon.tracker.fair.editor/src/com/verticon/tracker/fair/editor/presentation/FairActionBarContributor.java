@@ -37,12 +37,12 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 
-import com.verticon.tracker.editor.presentation.CustomActionBarContributor;
 import com.verticon.tracker.editor.presentation.ICustomActionBarContributor;
 
 /**
  * This is the action bar contributor for the Fair model editor.
  * <!-- begin-user-doc -->
+ * Added Navigation support to FairEditors.
  * <!-- end-user-doc -->
  * @generated
  */
@@ -61,7 +61,7 @@ public class FairActionBarContributor
 	 * 
 	 * @generated NOT
 	 */
-	ICustomActionBarContributor customActionBarContributor = new CustomActionBarContributor();
+	ICustomActionBarContributor customActionBarContributor = new FairCustomActionBarContributor();
 	
 	/**
 	 * This keeps track of the active editor.
