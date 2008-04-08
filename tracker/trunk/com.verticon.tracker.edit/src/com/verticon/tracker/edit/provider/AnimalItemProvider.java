@@ -614,23 +614,23 @@ public class AnimalItemProvider
 	    			DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
 	    			return df.format(animal.getBirthDate());
 	    		}
-	    		return null;
+	    		return "";
 	    	case 7: 
 	    		if(animal.getAge()!=null){
 	    			return animal.getAge().toString();
 	    		}
-	    		return null;
+	    		return "";
 	    	case 8: 
 	    		if(animal.getLastEventDateTime()!=null){
 	    			return animal.getLastEventDateTime().toString();
 	    		}
-	    		return null;
+	    		return "";
 	    
 	    	case 9:
-	    		return animal.getWeight()==null?null:animal.getWeight().toString();
+	    		return animal.getWeight()==null?"":animal.getWeight().toString();
 
 	    	case 10:
-	    		return animal.getWeightGainPerDay()==null?null:animal.getWeightGainPerDay().toString();
+	    		return animal.getWeightGainPerDay()==null?"":animal.getWeightGainPerDay().toString();
 	    		
 	    	case 11:
 	    		return animal.getComments();
