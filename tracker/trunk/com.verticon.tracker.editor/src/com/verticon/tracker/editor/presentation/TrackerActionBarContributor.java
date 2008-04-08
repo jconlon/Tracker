@@ -259,7 +259,16 @@ public class TrackerActionBarContributor
 		}
 	}
 	
-	
+	/**
+	 * When the active editor changes, this sets up the customActionBarContributor before
+	 * calling the generated method.
+	 * @generated NOT
+	 */
+	@Override
+	public void setActiveEditor(IEditorPart part) {
+		customActionBarContributor.setActiveEditor(part);
+		setActiveEditorGen( part);
+	}
 
 	/**
 	 * This implements {@link org.eclipse.jface.viewers.ISelectionChangedListener},
