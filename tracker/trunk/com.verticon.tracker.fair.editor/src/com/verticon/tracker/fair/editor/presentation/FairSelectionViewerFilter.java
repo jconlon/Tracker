@@ -5,7 +5,6 @@ package com.verticon.tracker.fair.editor.presentation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -13,8 +12,6 @@ import org.eclipse.jface.viewers.Viewer;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.Premises;
-import com.verticon.tracker.Tag;
 import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Person;
