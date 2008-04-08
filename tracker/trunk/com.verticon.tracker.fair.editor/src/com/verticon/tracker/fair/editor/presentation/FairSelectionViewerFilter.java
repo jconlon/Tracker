@@ -11,7 +11,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.Event;
 import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Person;
@@ -44,7 +43,7 @@ public class FairSelectionViewerFilter extends SelectionViewerFilter {
 	 */
 	private void computeExplicitTargets(ISelection selection) {
 		if (selection instanceof IStructuredSelection) {
-			Event event = null;
+			
 			for (Iterator<?> iter = ((IStructuredSelection) selection)
 					.iterator(); iter.hasNext();) {
 				Object o = iter.next();
