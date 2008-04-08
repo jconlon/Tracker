@@ -311,34 +311,35 @@ public class EventItemProvider
 	{
 		Event event = (Event)object;
 		switch (columnIndex){
-		//FIXME 184712 Column 0 must present the first object as getText() for both table and tree
-		case 0: //Event
-			return getText(event);
-			
-		case 1: //Animal ID Number
-			if(event.getTag().eContainer()!=null){
-				if(event.getTag().eContainer() instanceof Animal){
-					Animal animal = (Animal)event.getTag().eContainer();
-					return animal.getId();
-				}
-				
-			}
-			return null;
-
-		case 2: //Tag ID Number
-			return event.getTag().getId();
-
-		case 3: //Date of Event
+		case 0: //Date of Event
 			if(event.getDateTime()!=null){
 				return df.format(event.getDateTime());
 			}
-			return null;
-		case 4: //Event Type
+			return "";
+			
+		case 1: //Event Type
 			String simpleName = event.getClass().getSimpleName();
 			return simpleName.substring(0,simpleName.indexOf("Impl"));
-		case 5: //Event Code
-			return Integer.toString(event.getEventCode());
-		case 6: //Comments
+			
+		case 2: //Animal
+			
+			if(event.getTag()==null || event.getTag().eContainer()==null){
+    			return "";
+    		}
+    		Animal animal = (Animal)event.getTag().eContainer();
+    		
+    		IItemLabelProvider itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(animal, IItemLabelProvider.class);
+    		String numAnimal = itemLabelProvider.getText(animal);
+    		
+    		int space = numAnimal.indexOf(' ');
+    		String numPart = numAnimal.substring(0, space);
+    		
+    		return numAnimal.substring(space, numAnimal.length())+' '+numPart;
+    	
+		case 3: //Tag ID Number
+			return event.getTag().getId();
+
+		case 4: //Comments
 			return event.getComments();
 		default :
 			return "unknown " + columnIndex;
@@ -351,7 +352,18 @@ public class EventItemProvider
 	public Object getColumnImage(Object object, int columnIndex) // 14.2.2
 	  {
 		switch (columnIndex){
-    	case 0: return getImage(object);
+    	case 0: return null;//return getImage(object);
+    	case 1: return getImage(object);
+    	case 2:
+    		Event event = (Event)object;
+    		if(event.getTag()==null || event.getTag().eContainer()==null){
+    			return null;
+    		}
+    		Animal animal = (Animal)event.getTag().eContainer();
+    		
+    		IItemLabelProvider itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(animal, IItemLabelProvider.class);
+    		return itemLabelProvider.getImage(animal);
+    	
     	default :
     		return null;
 		}

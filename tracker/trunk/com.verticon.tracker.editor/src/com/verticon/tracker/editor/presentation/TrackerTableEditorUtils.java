@@ -201,15 +201,21 @@ public class TrackerTableEditorUtils {
 		table.setLinesVisible(true);
 		tableViewer.setUseHashlookup(true);
 
-		//Event 
-		final TableColumn animalColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 230, true));
-		animalColumn.setText(getString("_UI_EventColumn_label"));
+		
+		//Date of Event 
+		final TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 170, true));
+		dateTimeColumn.setText(getString("_UI_DateTimeColumn_label"));
+		
+		//Event Type
+		final TableColumn eventNameColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 60, true));
+		eventNameColumn.setText(getString("_UI_EventNameColumn_label"));
 		
 		
-		//Animal ID Number
+		//Animal
 		final TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 100, true));
+		layout.addColumnData(new ColumnWeightData(3, 230, true));
 		animalIDColumn.setText(getString("_UI_AnimalParentColumn_label"));
 		
 		//Tag ID Number
@@ -217,22 +223,15 @@ public class TrackerTableEditorUtils {
 		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		tagIDColumn.setText(getString("_UI_TagColumn_label"));
 		
-		//Date of Event
-		final TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 170, true));
-		dateTimeColumn.setText(getString("_UI_DateTimeColumn_label"));
-		
+//		//Event 
+//		final TableColumn animalColumn = new TableColumn(table, SWT.NONE);
+//		layout.addColumnData(new ColumnWeightData(3, 230, true));
+//		animalColumn.setText(getString("_UI_EventColumn_label"));
 
-		//Event Type
-		final TableColumn eventNameColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 60, true));
-		eventNameColumn.setText(getString("_UI_EventNameColumn_label"));
-
-
-		//Event Code
-		final TableColumn eventCodeColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 20, true));
-		eventCodeColumn.setText(getString("_UI_EventCodeColumn_label"));
+//		//Event Code
+//		final TableColumn eventCodeColumn = new TableColumn(table, SWT.NONE);
+//		layout.addColumnData(new ColumnWeightData(2, 20, true));
+//		eventCodeColumn.setText(getString("_UI_EventCodeColumn_label"));
 
 		//Comments
 		final TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
@@ -258,9 +257,9 @@ public class TrackerTableEditorUtils {
 
 				int sortIdentifier = 0;
 				
-				if (currentColumn == animalColumn) {
-					sortIdentifier = EventSorter.EVENT_TEXT;
-				}
+//				if (currentColumn == animalColumn) {
+//					sortIdentifier = EventSorter.EVENT_TEXT;
+//				}
 
 				if (currentColumn == animalIDColumn) {
 					sortIdentifier = EventSorter.ANIMAL_IDNUMBER;
@@ -279,9 +278,9 @@ public class TrackerTableEditorUtils {
 					sortIdentifier = EventSorter.EVENT_TYPE;
 				}
 
-				if (currentColumn == eventCodeColumn) {
-					sortIdentifier = EventSorter.EVENT_CODE;
-				}
+//				if (currentColumn == eventCodeColumn) {
+//					sortIdentifier = EventSorter.EVENT_CODE;
+//				}
 
 				if (currentColumn == eventCommentsColumn) {
 					sortIdentifier = EventSorter.EVENT_COMMENTS;
@@ -295,12 +294,12 @@ public class TrackerTableEditorUtils {
 		
 		animalIDColumn.addListener(SWT.Selection, sortListener);
 		tagIDColumn.addListener(SWT.Selection, sortListener);
-		animalColumn.addListener(SWT.Selection, sortListener);
+//		animalColumn.addListener(SWT.Selection, sortListener);
 		dateTimeColumn.addListener(SWT.Selection, sortListener);
-		eventCodeColumn.addListener(SWT.Selection, sortListener);
+//		eventCodeColumn.addListener(SWT.Selection, sortListener);
 		eventNameColumn.addListener(SWT.Selection, sortListener);
 		eventCommentsColumn.addListener(SWT.Selection, sortListener);
-		tableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f","g"});
+		tableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e"});
 		
 		/**
 		 * The default ItemProvider returned via the adapterFactory
