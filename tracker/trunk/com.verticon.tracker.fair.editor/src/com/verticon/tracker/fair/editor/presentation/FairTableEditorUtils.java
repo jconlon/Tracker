@@ -252,7 +252,7 @@ public class FairTableEditorUtils {
 		// Name
 		final TableColumn nameColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 100, true));
-		nameColumn.setText("Exhibit Name");
+		nameColumn.setText("Exhibit");
 
 		// Number
 		final TableColumn numberColumn = new TableColumn(table, SWT.NONE);
