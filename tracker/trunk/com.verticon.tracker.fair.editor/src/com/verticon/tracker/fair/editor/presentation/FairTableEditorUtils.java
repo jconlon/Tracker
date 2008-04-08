@@ -256,37 +256,37 @@ public class FairTableEditorUtils {
 
 		// Number
 		final TableColumn numberColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 100, true));
+		layout.addColumnData(new ColumnWeightData(3, 30, true));
 		numberColumn.setText("Number");
 
 		// Exhibitor
 		final TableColumn exhibitorColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 140, true));
+		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		exhibitorColumn.setText("Exhibitor");
 
 		// Animal
 		final TableColumn animalColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 140, true));
+		layout.addColumnData(new ColumnWeightData(2, 200, true));
 		animalColumn.setText("Animal");
 
 		// Lot
 		final TableColumn lotColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 100, true));
+		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		lotColumn.setText("Lot");
 
 		// Class
 		final TableColumn clazzColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 100, true));
+		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		clazzColumn.setText("Class");
 
 		// Department
 		final TableColumn departmentColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 100, true));
+		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		departmentColumn.setText("Department");
 
 		// Division
 		final TableColumn divisionColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 100, true));
+		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		divisionColumn.setText("Division");
 
 		// Comments
