@@ -8,6 +8,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.ui.ViewerPane;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emf.edit.ui.provider.NotifyChangedToViewerRefresh;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
@@ -19,8 +20,11 @@ import org.eclipse.swt.widgets.TableColumn;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.presentation.TrackerTableEditorUtils;
+import com.verticon.tracker.fair.Department;
+import com.verticon.tracker.fair.Division;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.FairPackage;
+import com.verticon.tracker.fair.Lot;
 
 /**
  * @author jconlon
@@ -39,25 +43,24 @@ public class FairTableEditorUtils {
 		// The utility does not set the contentAdapter to find the Premises do
 		// it again here
 		tableViewer.setContentProvider(new AdapterFactoryContentProvider(
-				adapterFactory) 
-				{
-					@Override
-					public Object[] getElements(Object object) {
-						if (object instanceof Fair) {
-							Premises premises = ((Fair) object).getPremises();
-							if (premises != null) {
-								return premises.getAnimals().toArray();
-							}
-						} else if (object instanceof Premises) {
-							Premises premises = (Premises) object;
-							if (premises != null) {
-								return premises.getAnimals().toArray();
-							}
-						}
-						return null;
+				adapterFactory) {
+			@Override
+			public Object[] getElements(Object object) {
+				if (object instanceof Fair) {
+					Premises premises = ((Fair) object).getPremises();
+					if (premises != null) {
+						return premises.getAnimals().toArray();
 					}
+				} else if (object instanceof Premises) {
+					Premises premises = (Premises) object;
+					if (premises != null) {
+						return premises.getAnimals().toArray();
+					}
+				}
+				return null;
+			}
 
-				});
+		});
 
 	}
 
@@ -71,42 +74,42 @@ public class FairTableEditorUtils {
 		// The utility does not set the contentAdapter to find the Premises do
 		// it again here
 		tableViewer.setContentProvider(new AdapterFactoryContentProvider(
-				adapterFactory) 
-				{
-					public Object[] getElements(Object object) {
-						if (object instanceof Fair) {
-							Premises premises = ((Fair) object).getPremises();
-							if (premises != null) {
-								return premises.eventHistory().toArray();
-							}
-						} else if (object instanceof Premises) {
-							Premises premises = (Premises) object;
-							if (premises != null) {
-								return premises.eventHistory().toArray();
-							}
-						}
-						return null;
+				adapterFactory) {
+			public Object[] getElements(Object object) {
+				if (object instanceof Fair) {
+					Premises premises = ((Fair) object).getPremises();
+					if (premises != null) {
+						return premises.eventHistory().toArray();
 					}
-
-					public void notifyChanged(Notification notification) {
-
-						switch (notification.getEventType()) {
-						case Notification.ADD:
-						case Notification.ADD_MANY:
-							if (notification.getFeature() != TrackerPackage.eINSTANCE
-									.getTag_Events()) {
-								return;
-							}
-						}
-						super.notifyChanged(notification);
-
+				} else if (object instanceof Premises) {
+					Premises premises = (Premises) object;
+					if (premises != null) {
+						return premises.eventHistory().toArray();
 					}
-				});
+				}
+				return null;
+			}
+
+			public void notifyChanged(Notification n) {
+
+				switch (n.getEventType()) {
+				case Notification.ADD:
+				case Notification.ADD_MANY:
+					if (n.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
+						return;
+					}
+					
+				}
+				super.notifyChanged(n);
+
+			}
+			
+		});
 	}
 
 	/**
-	 * People Table
-	 * Name, First Name, Last Name, Phone Number, Street, City, State, Zip Code
+	 * People Table Name, First Name, Last Name, Phone Number, Street, City,
+	 * State, Zip Code
 	 */
 	public static void createPeopleTableViewer(ViewerPane viewerPane,
 			final TableViewer tableViewer, AdapterFactory adapterFactory) {
@@ -156,7 +159,6 @@ public class FairTableEditorUtils {
 		final TableColumn zipColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 40, true));
 		zipColumn.setText("Zip Code");
-
 
 		Listener sortListener = new Listener() {
 
@@ -209,7 +211,6 @@ public class FairTableEditorUtils {
 		stateColumn.addListener(SWT.Selection, sortListener);
 		zipColumn.addListener(SWT.Selection, sortListener);
 
-		
 		tableViewer.setColumnProperties(new String[] { "a", "b", "c", "d", "e",
 				"f", "g", "h" });
 
@@ -221,42 +222,23 @@ public class FairTableEditorUtils {
 		 * To get People Elements override the getElements method
 		 */
 		tableViewer.setContentProvider(new AdapterFactoryContentProvider(
-				adapterFactory) 
-				{
-					@Override
-					public Object[] getElements(Object object) {
-						Fair fair = (Fair)object;
-						
-						return fair.getPeople().toArray();
-					}
-					
-					@Override
-					public void notifyChanged(Notification notification) {
+				adapterFactory) {
+			@Override
+			public Object[] getElements(Object object) {
+				Fair fair = (Fair) object;
 
-						switch (notification.getEventType()) {
-						case Notification.ADD:
-						case Notification.ADD_MANY:
-							if (notification.getFeature() != FairPackage.eINSTANCE.getPerson() &&
-								notification.getFeature() != FairPackage.eINSTANCE.getFair_People()
-								) {
-//								System.out.println("People Ignoring "+notification.getFeature());
-								return;
-							}
-						}
-//						System.out.println("People handling "+notification.getFeature());
-						super.notifyChanged(notification);
+				return fair.getPeople().toArray();
+			}
 
-					}
-
-				});
+		});
 		tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(
 				adapterFactory));
 
 	}
-	
+
 	/**
-	 * Exhibits Table
-	 * Name, Number, Exhibitor, Animal, Lot, Class, Department, Division, Comments
+	 * Exhibits Table Name, Number, Exhibitor, Animal, Lot, Class, Department,
+	 * Division, Comments
 	 */
 	public static void createExhibitsTableViewer(ViewerPane viewerPane,
 			final TableViewer tableViewer, AdapterFactory adapterFactory) {
@@ -291,13 +273,13 @@ public class FairTableEditorUtils {
 		final TableColumn lotColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 100, true));
 		lotColumn.setText("Lot");
-		
+
 		// Class
 		final TableColumn clazzColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 100, true));
 		clazzColumn.setText("Class");
 
-		// Department 
+		// Department
 		final TableColumn departmentColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 100, true));
 		departmentColumn.setText("Department");
@@ -307,7 +289,6 @@ public class FairTableEditorUtils {
 		layout.addColumnData(new ColumnWeightData(2, 100, true));
 		divisionColumn.setText("Division");
 
-		
 		// Comments
 		final TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 300, true));
@@ -333,31 +314,31 @@ public class FairTableEditorUtils {
 
 				if (currentColumn == nameColumn) {
 					sortIdentifier = ExhibitSorter.NAME;
-					
+
 				} else if (currentColumn == animalColumn) {
 					sortIdentifier = ExhibitSorter.ANIMAL;
-					
+
 				} else if (currentColumn == departmentColumn) {
 					sortIdentifier = ExhibitSorter.DEPARTMENT;
-					
+
 				} else if (currentColumn == numberColumn) {
 					sortIdentifier = ExhibitSorter.NUMBER;
-					
+
 				} else if (currentColumn == exhibitorColumn) {
 					sortIdentifier = ExhibitSorter.EXHIBITOR;
-					
+
 				} else if (currentColumn == clazzColumn) {
 					sortIdentifier = ExhibitSorter.CLASS;
-					
+
 				} else if (currentColumn == lotColumn) {
 					sortIdentifier = ExhibitSorter.LOT;
-					
+
 				} else if (currentColumn == divisionColumn) {
 					sortIdentifier = ExhibitSorter.DIVISION;
-				
+
 				} else if (currentColumn == commentsColumn) {
-				sortIdentifier = ExhibitSorter.COMMENTS;
-			
+					sortIdentifier = ExhibitSorter.COMMENTS;
+
 				}
 
 				table.setSortDirection(dir);
@@ -365,7 +346,8 @@ public class FairTableEditorUtils {
 			}
 
 		};
-		//Name, Number, Exhibitor, Animal, Lot, Class, Department, Division, Comments
+		// Name, Number, Exhibitor, Animal, Lot, Class, Department, Division,
+		// Comments
 		departmentColumn.addListener(SWT.Selection, sortListener);
 		nameColumn.addListener(SWT.Selection, sortListener);
 		numberColumn.addListener(SWT.Selection, sortListener);
@@ -387,39 +369,111 @@ public class FairTableEditorUtils {
 		 * To get Animal Elements override the getElements method
 		 */
 		tableViewer.setContentProvider(new AdapterFactoryContentProvider(
-				adapterFactory) 
-				{
-					@Override
-					public Object[] getElements(Object object) {
-						return ((Fair) object).exhibits().toArray();
+				adapterFactory) {
+			@Override
+			public Object[] getElements(Object object) {
+				return ((Fair) object).exhibits().toArray();
+			}
+
+			/**
+			 * Exhibits table shows the hierarchy elements of the Exhibit. These
+			 * elements are shown in the table columns through ItemProviders so
+			 * they by default adapt to a string based on the name of these elements.
+			 * 
+			 * Detecting changes to these hierarchy element names will be used to trigger 
+			 * viewer.refresh.
+			 * 
+			 * Additions and deletions are handled more discreetly 
+			 * with NotifyChangedToViewerRefresh.
+			 * 
+			 */
+			@Override
+			public void notifyChanged(Notification n) {
+				super.notifyChanged(n);
+				Object notifier = n.getNotifier();
+				// find out the type of the notifier which could be either 'Log'
+				// or 'Exhibit'
+
+				if (notifier instanceof Lot) {
+					handleLotNotification(n);
+				} else if (notifier instanceof com.verticon.tracker.fair.Class) {
+					handleClassNotification(n);
+				}else if (notifier instanceof Department) {
+					handleDepartmentNotification(n);
+				}else if (notifier instanceof Division) {
+					handleDivisionNotification(n);
+				}
+
+			}
+			
+			// output a message about changes to the Class Name
+			private void handleDepartmentNotification(Notification n) {
+				int featureID = n.getFeatureID(Lot.class);
+				if (featureID == FairPackage.DEPARTMENT__NAME) {
+//					System.out.println("The department " + n.getOldStringValue()
+//							+ " is now " + n.getNewStringValue());
+					viewer.refresh();
+				}
+			}
+			
+			// output a message about changes to the Class Name
+			private void handleDivisionNotification(Notification n) {
+				int featureID = n.getFeatureID(Lot.class);
+				if (featureID == FairPackage.DIVISION__NAME) {
+//					System.out.println("The division " + n.getOldStringValue()
+//							+ " is now " + n.getNewStringValue());
+					viewer.refresh();
+				}
+			}
+			
+
+			// output a message about changes to the Class Name
+			private void handleClassNotification(Notification n) {
+				int featureID = n.getFeatureID(Lot.class);
+				if (featureID == FairPackage.CLASS__NAME) {
+//					System.out.println("The className " + n.getOldStringValue()
+//							+ " is now " + n.getNewStringValue());
+					viewer.refresh();
+				}
+			}
+
+			// output a message about new exhibits
+			private void handleLotNotification(Notification n) {
+				int featureID = n.getFeatureID(Lot.class);
+				if (featureID == FairPackage.LOT__EXHIBITS) {
+//					Lot lot = (Lot) n.getNotifier();
+					if (n.getEventType() == Notification.ADD) {
+//						System.out.println("New Exhibit was added to the Lot: "
+//								+ lot.getName());
+						NotifyChangedToViewerRefresh.handleNotifyChanged(
+								viewer, n.getNotifier(), n.getEventType(), n
+										.getFeature(), n.getOldValue(), n
+										.getNewValue(), n.getPosition());
+
+					} else if (n.getEventType() == Notification.REMOVE) {
+//						System.out
+//								.println("New Exhibit was removed from the Lot: "
+//										+ lot.getName());
+						NotifyChangedToViewerRefresh.handleNotifyChanged(
+								viewer, n.getNotifier(), n.getEventType(), n
+										.getFeature(), n.getOldValue(), n
+										.getNewValue(), n.getPosition());
+
 					}
-					@Override
-					public void notifyChanged(Notification notification) {
 
-//						switch (notification.getEventType()) {
-//						case Notification.ADD:
-//						case Notification.ADD_MANY:
-//							if (notification.getFeature() != FairPackage.eINSTANCE.getExhibit()&&
-//								notification.getFeature() != FairPackage.eINSTANCE.getLot_Exhibits()
-//								) {
-//								System.out.println("Exhibits Ignoring "+notification);
-//								return;
-//							}
-//								
-//							
-//						}
-//						System.out.println("Exhibits Handling "+notification);
-						super.notifyChanged(notification);
+				} else if (featureID == FairPackage.LOT__NAME) {
+//					System.out.println("The Lot name " + n.getOldStringValue()
+//							+ " was changed to " + n.getNewStringValue());
+					viewer.refresh();
+				}
+			}
 
-					}
-
-				});
+			
+		});
 		tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(
 				adapterFactory));
 
 	}
-	
-	
 
 	/**
 	 * This looks up a string in the plugin's plugin.properties file. <!--

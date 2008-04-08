@@ -133,8 +133,6 @@ import com.verticon.tracker.editor.presentation.IEventSelectionProvider;
 import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.editor.presentation.ISelectionViewerProvider;
 import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
-import com.verticon.tracker.editor.presentation.TrackerActionBarContributor;
-import com.verticon.tracker.editor.presentation.TrackerEditor;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.Person;
@@ -1301,7 +1299,10 @@ public class FairEditor
 		{
 			exhibitsTableViewer.setInput(rootObject);
 			viewerPane.setTitle(rootObject);
+//			ExhibitContentAdapter cad = new ExhibitContentAdapter();
+//			cad.observeFair((Fair)rootObject);
 		}
+		
 
 		createContextMenuFor(exhibitsTableViewer);
 		int pageIndex = addPage(viewerPane.getControl());

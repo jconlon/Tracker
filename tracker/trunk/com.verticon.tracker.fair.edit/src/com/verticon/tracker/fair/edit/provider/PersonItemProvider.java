@@ -330,6 +330,9 @@ public class PersonItemProvider
 	}
 
 	public Object getColumnImage(Object object, int columnIndex) {
+		if(columnIndex==0){
+			getImage(object);
+		}
 		return null;
 	}
 
@@ -342,7 +345,7 @@ public class PersonItemProvider
 	  {
 	    Person person = (Person)object;
 	    switch (columnIndex){
-	        case 0: return person.getName(); 
+	        case 0: return getText(object); 
 	    	case 1: return person.getFirstName(); 
 	    	case 2: return person.getLastName();  
 	    	case 3: return person.getPhone();
