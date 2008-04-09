@@ -97,7 +97,7 @@ public class GeneratingReaderRunner implements Runnable {
 	private void sendARandomTag(){
 		int index = (int) (Math.random() * cache.size());
 		Long tag = cache.get(index);
-		logger.info("{} sending {} which is #{} out of {} cached tags.",
+		logger.info("Sending {} which is #{} out of {} cached tags.",
 				new Object[]{tag, index, cache.size()});
 		tagIDPublisher.publish(tag);
 	}
