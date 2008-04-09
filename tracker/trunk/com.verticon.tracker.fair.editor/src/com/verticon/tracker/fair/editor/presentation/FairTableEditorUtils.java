@@ -4,11 +4,9 @@
 package com.verticon.tracker.fair.editor.presentation;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.ui.ViewerPane;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.edit.ui.provider.NotifyChangedToViewerRefresh;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
@@ -17,14 +15,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
-import com.verticon.tracker.Premises;
-import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.editor.presentation.TrackerTableEditorUtils;
-import com.verticon.tracker.fair.Department;
-import com.verticon.tracker.fair.Division;
 import com.verticon.tracker.fair.Fair;
-import com.verticon.tracker.fair.FairPackage;
-import com.verticon.tracker.fair.Lot;
 
 /**
  * @author jconlon
@@ -73,7 +64,7 @@ public class FairTableEditorUtils {
 
 		// First Name
 		final TableColumn firstNameColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 100, true));
+		layout.addColumnData(new ColumnWeightData(2, 100, true));
 		firstNameColumn.setText("First Name");
 
 		// Last Name
@@ -88,23 +79,28 @@ public class FairTableEditorUtils {
 
 		// Street
 		final TableColumn streetColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 250, true));
+		layout.addColumnData(new ColumnWeightData(2, 200, true));
 		streetColumn.setText("Street");
 
 		// City
 		final TableColumn cityColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 100, true));
+		layout.addColumnData(new ColumnWeightData(2, 80, true));
 		cityColumn.setText("City");
 
 		// State
 		final TableColumn stateColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 40, true));
+		layout.addColumnData(new ColumnWeightData(2, 20, true));
 		stateColumn.setText("State");
 
 		// Zip Code
 		final TableColumn zipColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 40, true));
+		layout.addColumnData(new ColumnWeightData(2, 20, true));
 		zipColumn.setText("Zip Code");
+		
+		// Comments
+		final TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 120, true));
+		commentsColumn.setText("Comments");
 
 		Listener sortListener = new Listener() {
 
@@ -140,6 +136,8 @@ public class FairTableEditorUtils {
 					sortIdentifier = PeopleSorter.CITY;
 				} else if (currentColumn == zipColumn) {
 					sortIdentifier = PeopleSorter.ZIP;
+				} else if (currentColumn == commentsColumn){
+					sortIdentifier = PeopleSorter.COMMENTS;
 				}
 
 				table.setSortDirection(dir);
@@ -156,9 +154,10 @@ public class FairTableEditorUtils {
 		streetColumn.addListener(SWT.Selection, sortListener);
 		stateColumn.addListener(SWT.Selection, sortListener);
 		zipColumn.addListener(SWT.Selection, sortListener);
+		commentsColumn.addListener(SWT.Selection, sortListener);
 
 		tableViewer.setColumnProperties(new String[] { "a", "b", "c", "d", "e",
-				"f", "g", "h" });
+				"f", "g", "h", "i"});
 
 		/**
 		 * The default ItemProvider returned via the adapterFactory for Premises

@@ -57,6 +57,7 @@ Package fair <http://www.verticon.com/ns/tracker/fair/0.1.0>
     Attribute state : EString<<1..1>>
     Attribute zipCode : ZipCode
     Attribute /name : EString<<1..1>>
+    Attribute comments : EString
 
   Class YoungPerson -> Person
     Reference parents : Person<<1..*>>

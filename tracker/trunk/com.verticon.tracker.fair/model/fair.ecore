@@ -77,6 +77,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="zipCode" eType="#//ZipCode"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         volatile="true" derived="true" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="ZipCode" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EDataType" name="USTelephoneNumber" instanceClassName="java.lang.String"/>
