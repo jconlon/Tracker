@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getState <em>State</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getZipCode <em>Zip Code</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getName <em>Name</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getComments <em>Comments</em>}</li>
  * </ul>
  * </p>
  *
@@ -192,6 +193,26 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @ordered
 	 */
 	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getComments() <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMMENTS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getComments() <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected String comments = COMMENTS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -400,6 +421,27 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setComments(String newComments) {
+		String oldComments = comments;
+		comments = newComments;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.PERSON__COMMENTS, oldComments, comments));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -419,6 +461,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return getZipCode();
 			case FairPackage.PERSON__NAME:
 				return getName();
+			case FairPackage.PERSON__COMMENTS:
+				return getComments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -454,6 +498,9 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return;
 			case FairPackage.PERSON__NAME:
 				setName((String)newValue);
+				return;
+			case FairPackage.PERSON__COMMENTS:
+				setComments((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -491,6 +538,9 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case FairPackage.PERSON__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case FairPackage.PERSON__COMMENTS:
+				setComments(COMMENTS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -519,6 +569,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return ZIP_CODE_EDEFAULT == null ? zipCode != null : !ZIP_CODE_EDEFAULT.equals(zipCode);
 			case FairPackage.PERSON__NAME:
 				return NAME_EDEFAULT == null ? getName() != null : !NAME_EDEFAULT.equals(getName());
+			case FairPackage.PERSON__COMMENTS:
+				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -547,6 +599,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 		result.append(state);
 		result.append(", zipCode: ");
 		result.append(zipCode);
+		result.append(", comments: ");
+		result.append(comments);
 		result.append(')');
 		return result.toString();
 	}

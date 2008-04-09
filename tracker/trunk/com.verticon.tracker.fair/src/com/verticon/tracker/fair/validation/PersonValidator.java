@@ -24,4 +24,6 @@ public interface PersonValidator {
 	boolean validateState(String value);
 	boolean validateZipCode(String value);
 	boolean validateName(String value);
+
+	boolean validateComments(String value);
 }

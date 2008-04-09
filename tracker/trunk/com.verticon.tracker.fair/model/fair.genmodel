@@ -65,6 +65,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/state"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/zipCode"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/comments"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//YoungPerson">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//YoungPerson/parents"/>
