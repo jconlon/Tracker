@@ -5,6 +5,7 @@ package com.verticon.tracker.editor.presentation;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.edit.ui.provider.NotifyChangedToViewerRefresh;
 import org.eclipse.jface.viewers.TableViewer;
@@ -23,12 +24,12 @@ public class EventsTableViewerNotifier extends EContentAdapter{
 	/**
 	 * slf4j Logger
 	 */
-	private final Logger logger = LoggerFactory
-		.getLogger(EventsTableViewerNotifier.class);
+	protected final Logger logger = LoggerFactory
+		.getLogger(this.getClass());
 	/**
 	 * Cache of the targetResource
 	 */
-	private Resource activeResource;
+	private ResourceSet activeResource;
 	/**
 	 * EventsTable to notify
 	 */
@@ -43,7 +44,7 @@ public class EventsTableViewerNotifier extends EContentAdapter{
 	
 	public void setResource(Resource resource) {
 		logger.debug("Setting resource {}", resource.getURI());
-		this.activeResource=resource;
+		this.activeResource=resource.getResourceSet();
 		super.setTarget(activeResource);
 	}
 

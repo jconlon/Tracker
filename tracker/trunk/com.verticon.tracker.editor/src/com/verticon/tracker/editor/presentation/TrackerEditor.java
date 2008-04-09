@@ -624,10 +624,12 @@ public class TrackerEditor
 	/**
 	 * Handles what to do with changed resources on activation.
 	 * <!-- begin-user-doc -->
+	 * Added  resetInputOnTableViewers(); to update Exhibits and Events
+	 * TableViewers
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected void handleChangedResourcesGen() {
+	protected void handleChangedResources() {
 		if (!changedResources.isEmpty() && (!isDirty() || handleDirtyConflict())) {
 			editingDomain.getCommandStack().flush();
 
@@ -647,31 +649,45 @@ public class TrackerEditor
 			}
 			updateProblemIndication = true;
 			updateProblemIndication();
+			//Added
+			resetInputOnTableViewers();
 		}
 	}
 	
+//	/**
+//	 * Handles what to do with changed resources on activation.
+//	 * <!-- begin-user-doc -->
+//	 * <!-- end-user-doc -->
+//	 * @generated NOT
+//	 */
+//	protected void handleChangedResources() {
+//		logger.debug("handleChangedResources entered");
+//		boolean isChangeResources = !changedResources.isEmpty();
+//		boolean reload = !isChangeResources && (!isDirty() || handleDirtyConflict());
+//		handleChangedResourcesGen();
+//		
+//		if (reload) {
+//			  resetInputOnTableViewers();
+//		}else{
+//			logger.warn("Reload did not occur isChangeResource={}",
+//					isChangeResources);
+//		}
+//	}
+
 	/**
-	 * Handles what to do with changed resources on activation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * 
 	 */
-	protected void handleChangedResources() {
-		logger.debug("handleChangedResources entered");
-		boolean reload = !changedResources.isEmpty() && (!isDirty() || handleDirtyConflict());
-		handleChangedResourcesGen();
-		if (reload) {
-			  
-			  Object rootObject = getRoot();
-			  if (rootObject instanceof Premises)
-			  {
-				logger.debug("Setting input on tables");
-				animalsTableViewer.setInput((Premises)rootObject);
-				eventsTableViewer.setInput((Premises)rootObject);
-			  }
-			  Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
-			  eventsTableViewerNotifier.setResource(resource);
-		}
+	private void resetInputOnTableViewers() {
+		logger.debug("Reloading resources");
+		  Object rootObject = getRoot();
+		  if (rootObject instanceof Premises)
+		  {
+			logger.debug("Setting input on tables");
+			animalsTableViewer.setInput((Premises)rootObject);
+			eventsTableViewer.setInput((Premises)rootObject);
+		  }
+		  Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
+		  eventsTableViewerNotifier.setResource(resource);
 	}
   
 	/**
