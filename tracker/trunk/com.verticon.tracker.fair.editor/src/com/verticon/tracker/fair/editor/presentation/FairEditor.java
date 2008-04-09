@@ -135,6 +135,7 @@ import com.verticon.tracker.editor.presentation.IEventSelectionProvider;
 import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.editor.presentation.ISelectionViewerProvider;
 import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
+import com.verticon.tracker.editor.presentation.TrackerTableEditorUtils;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.Person;
@@ -578,11 +579,7 @@ public class FairEditor
 						}
 
 						if (!visitor.getChangedResources().isEmpty()) {
-							
 							changedResources.addAll(visitor.getChangedResources());
-							
-							
-//							
 							if (getSite().getPage().getActiveEditor() == FairEditor.this) {
 								getSite().getShell().getDisplay().asyncExec
 									(new Runnable() {
@@ -1168,7 +1165,6 @@ public class FairEditor
 		viewerPane.createControl(getContainer());
 		listViewer = (ListViewer)viewerPane.getViewer();
 		listViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-//		listViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, listViewer));
 		listViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
 
 		createContextMenuFor(listViewer);
@@ -1209,7 +1205,6 @@ public class FairEditor
 		);
 		selectionViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
 		  
-//		selectionViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, selectionViewer));
 		selectionViewer.setInput(editingDomain.getResourceSet());
 		viewerPane.setTitle(editingDomain.getResourceSet());
 
@@ -1238,12 +1233,10 @@ public class FairEditor
 		viewerPane.createControl(getContainer());
 		eventsTableViewer = (TableViewer)viewerPane.getViewer();
 		
-		FairTableEditorUtils.createEventsTableViewer(
+		TrackerTableEditorUtils.createEventsTableViewer(
 				viewerPane, 
 				eventsTableViewer, 
 				adapterFactory);
-		
-		
 
 		Object rootObject = getRoot();
 		if (rootObject instanceof Fair){
@@ -1274,8 +1267,8 @@ public class FairEditor
 		};
 		viewerPane.createControl(getContainer());
 		animalsTableViewer = (TableViewer)viewerPane.getViewer();
-
-		FairTableEditorUtils.createAnimalsTableViewer( viewerPane,  
+		
+		TrackerTableEditorUtils.createAnimalsTableViewer( viewerPane,  
 				animalsTableViewer,  adapterFactory);
 
 		Object rootObject = getRoot();
@@ -1319,8 +1312,6 @@ public class FairEditor
 		{
 			exhibitsTableViewer.setInput(rootObject);
 			viewerPane.setTitle(rootObject);
-//			ExhibitContentAdapter cad = new ExhibitContentAdapter();
-//			cad.observeFair((Fair)rootObject);
 		}
 		
 
