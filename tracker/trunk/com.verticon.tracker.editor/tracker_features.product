@@ -111,8 +111,8 @@ that can be installed and used with other Eclipse (3.3)-based offerings.
       <feature id="com.verticon.tracker.ocl.query" version="0.1.3"/>
       <feature id="com.verticon.tracker.export.wlic" version="0.2.0"/>
       <feature id="com.verticon.tracker.export.xls" version="0.2.0"/>
-      <feature id="com.verticon.tracker.fair" version="0.1.1"/>
       <feature id="com.verticon.tracker.validation.core" version="0.1.2"/>
+      <feature id="com.verticon.tracker.fair" version="0.1.2"/>
       <feature id="com.verticon.tracker.help" version="0.2.3"/>
       <feature id="gnu.io.rxtx" version="2.1.7.4_v20071016-7B57e7UAXMAAqGAGf"/>
       <feature id="org.eclipse.ocl" version="1.1.1.v200707131415-3209oA55P5N7F8JDH"/>
