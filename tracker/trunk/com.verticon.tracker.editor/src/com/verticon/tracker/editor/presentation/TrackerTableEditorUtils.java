@@ -8,15 +8,20 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.ui.ViewerPane;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emf.edit.ui.provider.NotifyChangedToViewerRefresh;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 
 /**
@@ -25,6 +30,11 @@ import com.verticon.tracker.TrackerPackage;
  */
 public class TrackerTableEditorUtils {
 	
+	/**
+	 * slf4j Logger
+	 */
+	private static final Logger logger = LoggerFactory
+			.getLogger(TrackerTableEditorUtils.class);
 	/**
 	 * Animals Table
 	 */
@@ -192,14 +202,14 @@ public class TrackerTableEditorUtils {
 	/**
 	 * Events Table
 	 */
-	public static void createEventsTableViewer(ViewerPane viewerPane, final TableViewer tableViewer,  AdapterFactory adapterFactory) {
+	public static void createEventsTableViewer(ViewerPane viewerPane, final TableViewer eventsTableViewer,  AdapterFactory adapterFactory) {
 	
-		final Table table = tableViewer.getTable();
+		final Table table = eventsTableViewer.getTable();
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
-		tableViewer.setUseHashlookup(true);
+		eventsTableViewer.setUseHashlookup(true);
 
 		
 		//Date of Event 
@@ -287,7 +297,7 @@ public class TrackerTableEditorUtils {
 				}
 
 				table.setSortDirection(dir);
-				tableViewer.setSorter(new EventSorter(sortIdentifier,dir));
+				eventsTableViewer.setSorter(new EventSorter(sortIdentifier,dir));
 			}
 			
 		};
@@ -299,7 +309,7 @@ public class TrackerTableEditorUtils {
 //		eventCodeColumn.addListener(SWT.Selection, sortListener);
 		eventNameColumn.addListener(SWT.Selection, sortListener);
 		eventCommentsColumn.addListener(SWT.Selection, sortListener);
-		tableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e"});
+		eventsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e"});
 		
 		/**
 		 * The default ItemProvider returned via the adapterFactory
@@ -310,28 +320,87 @@ public class TrackerTableEditorUtils {
 		 * To get Event Elements override the getElements method 
 		 * and use getEventHistory
 		 */
-		tableViewer.setContentProvider(
+		logger.debug("Setting up contentProvider for eventsTable = {}",eventsTableViewer);
+		eventsTableViewer.setContentProvider(
 				new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
 				{
-					public Object [] getElements(Object object)
-					{
+					public Object [] getElements(Object object){
 						return ((Premises)object).eventHistory().toArray();
 					}
-					public void notifyChanged(Notification notification)
-					{
-						
-						switch (notification.getEventType()){
-							case Notification.ADD:
-							case Notification.ADD_MANY:
-								if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
-									return;
-								}
+					
+					@Override
+					public void inputChanged(Viewer viewer, Object oldInput,
+							Object newInput) {
+						// TODO Auto-generated method stub
+						if(oldInput==null && newInput!=null){
+							Premises premisesInput = (Premises)newInput;
+							logger.debug("Started Input Changed viewer={} newInput={}",viewer, premisesInput.getName());
+						}else if(oldInput!=null && newInput==null){
+							Premises premisesOldInput = (Premises)oldInput;
+							logger.debug("Stopped Input Changed viewer={} oldInput={}",
+									viewer==null?"no viewer":viewer, premisesOldInput.getName());
+						}else if (oldInput!=null && newInput!=null){
+							Premises premisesInput = (Premises)newInput;
+							Premises premisesOldInput = (Premises)newInput;
+							logger.debug("Input Changed viewer={} newInput={} oldInput={}",
+									new Object[] {viewer,premisesInput.getName(),premisesOldInput.getName()});
+						}else if (oldInput!=null && newInput!=null){
+							logger.debug("Input Changed viewer={} but both old and new input are null",
+									viewer);
 						}
-						super.notifyChanged(notification);
-						
+						super.inputChanged(viewer, oldInput, newInput);	
 					}
+
+//					public void notifyChanged(Notification n){
+//						if (n.getFeature() == TrackerPackage.eINSTANCE.getTag_Events() ){
+//							logger.debug("Called for TagEvents, from a {}"
+//									,n.getNotifier().getClass());
+//					    }else if (n.getFeature() == TrackerPackage.eINSTANCE.getTag_Id()	){
+//					    	logger.debug("Called for TagID, from a {}",
+//					    			n.getNotifier().getClass());
+//						     
+//					    }
+//						
+//						super.notifyChanged(n);
+//						Object notifier = n.getNotifier();
+//						// find out the type of the notifier which could be either 'Tag'
+//						// or 'Animal'
+//
+//						if (notifier instanceof Tag) {
+//							handleTagNotification(n);
+//						} 
+//						
+//					}
+//					
+//					private void handleTagNotification(Notification n){
+//						int featureID = n.getFeatureID(Tag.class);
+//						if (featureID == TrackerPackage.TAG__EVENTS) {
+//							Tag tag = (Tag) n.getNotifier();
+//							if (n.getEventType() == Notification.ADD) {
+//								logger.debug("New Event was added to the Tag: {}",tag.getId());
+//								NotifyChangedToViewerRefresh.handleNotifyChanged(
+//										viewer, n.getNotifier(), n.getEventType(), n
+//												.getFeature(), n.getOldValue(), n
+//												.getNewValue(), n.getPosition());
+//
+//							} else if (n.getEventType() == Notification.REMOVE) {
+//								logger.debug("New event was removed from the tag: {}",tag.getId());
+//								NotifyChangedToViewerRefresh.handleNotifyChanged(
+//										viewer, n.getNotifier(), n.getEventType(), n
+//												.getFeature(), n.getOldValue(), n
+//												.getNewValue(), n.getPosition());
+//
+//							}
+//
+//						} else if (featureID == TrackerPackage.TAG__ID) {
+//							logger.debug("The Tag id {} was changed to {}",
+//									n.getOldStringValue(),
+//									n.getNewStringValue());
+//							viewer.refresh();
+//						}
+//					}
 				});
-		tableViewer.setLabelProvider(
+		eventsTableViewer.setLabelProvider(
 				new AdapterFactoryLabelProvider(adapterFactory));
 	}
 		
