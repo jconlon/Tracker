@@ -657,18 +657,20 @@ public class TrackerEditor
 	 * @generated NOT
 	 */
 	protected void handleChangedResources() {
+		logger.debug("handleChangedResources entered");
 		boolean reload = !changedResources.isEmpty() && (!isDirty() || handleDirtyConflict());
 		handleChangedResourcesGen();
 		if (reload) {
+			  
 			  Object rootObject = getRoot();
 			  if (rootObject instanceof Premises)
 			  {
+				logger.debug("Setting input on tables");
 				animalsTableViewer.setInput((Premises)rootObject);
 				eventsTableViewer.setInput((Premises)rootObject);
 			  }
 			  Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
 			  eventsTableViewerNotifier.setResource(resource);
-			  logger.debug("Loaded changed Resource "+resource);
 		}
 	}
   
