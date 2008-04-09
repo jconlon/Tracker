@@ -90,19 +90,19 @@ public class FairTableEditorUtils {
 				return null;
 			}
 
-			public void notifyChanged(Notification n) {
-
-				switch (n.getEventType()) {
-				case Notification.ADD:
-				case Notification.ADD_MANY:
-					if (n.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
-						return;
-					}
-					
-				}
-				super.notifyChanged(n);
-
-			}
+//			public void notifyChanged(Notification n) {
+//
+//				switch (n.getEventType()) {
+//				case Notification.ADD:
+//				case Notification.ADD_MANY:
+//					if (n.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
+//						return;
+//					}
+//					
+//				}
+//				super.notifyChanged(n);
+//
+//			}
 			
 		});
 	}
@@ -410,9 +410,9 @@ public class FairTableEditorUtils {
 			private void handleDepartmentNotification(Notification n) {
 				int featureID = n.getFeatureID(Lot.class);
 				if (featureID == FairPackage.DEPARTMENT__NAME) {
-//					System.out.println("The department " + n.getOldStringValue()
-//							+ " is now " + n.getNewStringValue());
-					viewer.refresh();
+										System.out.println("xThe department " + n.getOldStringValue()
+												+ " is now " + n.getNewStringValue());
+//					viewer.refresh();
 				}
 			}
 			
@@ -420,9 +420,9 @@ public class FairTableEditorUtils {
 			private void handleDivisionNotification(Notification n) {
 				int featureID = n.getFeatureID(Lot.class);
 				if (featureID == FairPackage.DIVISION__NAME) {
-//					System.out.println("The division " + n.getOldStringValue()
-//							+ " is now " + n.getNewStringValue());
-					viewer.refresh();
+					System.out.println("xThe division " + n.getOldStringValue()
+							+ " is now " + n.getNewStringValue());
+//					viewer.refresh();
 				}
 			}
 			
@@ -431,9 +431,9 @@ public class FairTableEditorUtils {
 			private void handleClassNotification(Notification n) {
 				int featureID = n.getFeatureID(Lot.class);
 				if (featureID == FairPackage.CLASS__NAME) {
-//					System.out.println("The className " + n.getOldStringValue()
-//							+ " is now " + n.getNewStringValue());
-					viewer.refresh();
+					System.out.println("xThe className " + n.getOldStringValue()
+							+ " is now " + n.getNewStringValue());
+//					viewer.refresh();
 				}
 			}
 
@@ -441,30 +441,30 @@ public class FairTableEditorUtils {
 			private void handleLotNotification(Notification n) {
 				int featureID = n.getFeatureID(Lot.class);
 				if (featureID == FairPackage.LOT__EXHIBITS) {
-//					Lot lot = (Lot) n.getNotifier();
+					Lot lot = (Lot) n.getNotifier();
 					if (n.getEventType() == Notification.ADD) {
-//						System.out.println("New Exhibit was added to the Lot: "
-//								+ lot.getName());
-						NotifyChangedToViewerRefresh.handleNotifyChanged(
-								viewer, n.getNotifier(), n.getEventType(), n
-										.getFeature(), n.getOldValue(), n
-										.getNewValue(), n.getPosition());
+						System.out.println("xNew Exhibit was added to the Lot: "
+								+ lot.getName());
+//						NotifyChangedToViewerRefresh.handleNotifyChanged(
+//								viewer, n.getNotifier(), n.getEventType(), n
+//										.getFeature(), n.getOldValue(), n
+//										.getNewValue(), n.getPosition());
 
 					} else if (n.getEventType() == Notification.REMOVE) {
-//						System.out
-//								.println("New Exhibit was removed from the Lot: "
-//										+ lot.getName());
-						NotifyChangedToViewerRefresh.handleNotifyChanged(
-								viewer, n.getNotifier(), n.getEventType(), n
-										.getFeature(), n.getOldValue(), n
-										.getNewValue(), n.getPosition());
+						System.out
+								.println("xNew Exhibit was removed from the Lot: "
+										+ lot.getName());
+//						NotifyChangedToViewerRefresh.handleNotifyChanged(
+//								viewer, n.getNotifier(), n.getEventType(), n
+//										.getFeature(), n.getOldValue(), n
+//										.getNewValue(), n.getPosition());
 
 					}
 
 				} else if (featureID == FairPackage.LOT__NAME) {
-//					System.out.println("The Lot name " + n.getOldStringValue()
-//							+ " was changed to " + n.getNewStringValue());
-					viewer.refresh();
+					System.out.println("xThe Lot name " + n.getOldStringValue()
+							+ " was changed to " + n.getNewStringValue());
+//					viewer.refresh();
 				}
 			}
 
