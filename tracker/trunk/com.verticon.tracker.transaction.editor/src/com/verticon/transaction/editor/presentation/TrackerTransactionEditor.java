@@ -513,7 +513,7 @@ public class TrackerTransactionEditor
 	/**
 	 * Handles what to do with changed resource on activation.
 	 */
-	protected void handleChangedResourcesGen() {
+	protected void handleChangedResources() {
 		Resource res = getResource();
 		if (changedResources.contains(res) && (!isDirty() || handleDirtyConflict())) {
 			changedResources.remove(res);
@@ -540,27 +540,38 @@ public class TrackerTransactionEditor
 				listener.watch(res);
 			}
 		}
+		//Added
+		resetInputOnTableViewers(res);
 	}
 	
+//	/**
+//	 * Handles what to do with changed resources on activation.
+//	 * <!-- begin-user-doc -->
+//	 * <!-- end-user-doc -->
+//	 * @generated NOT
+//	 */
+//	protected void handleChangedResourcesx() {
+//		logger.debug("handleChangedResources entered");
+////		boolean reload = !changedResources.isEmpty() && (!isDirty() || handleDirtyConflict());
+////		handleChangedResourcesGen();
+////		if (reload) {
+//			  resetInputOnTableViewers();
+//		}
+////	}
+
 	/**
-	 * Handles what to do with changed resources on activation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * 
 	 */
-	protected void handleChangedResources() {
-		boolean reload = !changedResources.isEmpty() && (!isDirty() || handleDirtyConflict());
-		handleChangedResourcesGen();
-		if (reload) {
-			  Object rootObject = getRoot();
-			  if (rootObject instanceof Premises)
-			  {
-				animalsTableViewer.setInput((Premises)rootObject);
-				eventsTableViewer.setInput((Premises)rootObject);
-			  }
-			 
-			  eventsTableViewerNotifier.setResource(getResource());
-		}
+	private void resetInputOnTableViewers(Resource res) {
+		Object rootObject = getRoot();
+		  if (rootObject instanceof Premises)
+		  {
+			logger.debug("Setting input on tables");
+			animalsTableViewer.setInput((Premises)rootObject);
+			eventsTableViewer.setInput((Premises)rootObject);
+		  }
+		 
+		  eventsTableViewerNotifier.setResource(res);
 	}
 	
 	/**
