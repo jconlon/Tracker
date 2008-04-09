@@ -32,80 +32,26 @@ import com.verticon.tracker.fair.Lot;
  */
 public class FairTableEditorUtils {
 
-	/**
-	 * Animals Table
-	 */
-	public static void createAnimalsTableViewer(ViewerPane viewerPane,
-			final TableViewer tableViewer, AdapterFactory adapterFactory) {
-
-		TrackerTableEditorUtils.createAnimalsTableViewer(viewerPane,
-				tableViewer, adapterFactory);
-		// The utility does not set the contentAdapter to find the Premises do
-		// it again here
-		tableViewer.setContentProvider(new AdapterFactoryContentProvider(
-				adapterFactory) {
-			@Override
-			public Object[] getElements(Object object) {
-				if (object instanceof Fair) {
-					Premises premises = ((Fair) object).getPremises();
-					if (premises != null) {
-						return premises.getAnimals().toArray();
-					}
-				} else if (object instanceof Premises) {
-					Premises premises = (Premises) object;
-					if (premises != null) {
-						return premises.getAnimals().toArray();
-					}
-				}
-				return null;
-			}
-
-		});
-
-	}
-
-	/**
-	 * Events Table
-	 */
-	public static void createEventsTableViewer(ViewerPane viewerPane,
-			final TableViewer tableViewer, AdapterFactory adapterFactory) {
-		TrackerTableEditorUtils.createEventsTableViewer(viewerPane,
-				tableViewer, adapterFactory);
-		// The utility does not set the contentAdapter to find the Premises do
-		// it again here
-		tableViewer.setContentProvider(new AdapterFactoryContentProvider(
-				adapterFactory) {
-			public Object[] getElements(Object object) {
-				if (object instanceof Fair) {
-					Premises premises = ((Fair) object).getPremises();
-					if (premises != null) {
-						return premises.eventHistory().toArray();
-					}
-				} else if (object instanceof Premises) {
-					Premises premises = (Premises) object;
-					if (premises != null) {
-						return premises.eventHistory().toArray();
-					}
-				}
-				return null;
-			}
-
-//			public void notifyChanged(Notification n) {
+//	/**
+//	 * Animals Table
+//	 */
+//	public static void createAnimalsTableViewer(ViewerPane viewerPane,
+//			final TableViewer tableViewer, AdapterFactory adapterFactory) {
 //
-//				switch (n.getEventType()) {
-//				case Notification.ADD:
-//				case Notification.ADD_MANY:
-//					if (n.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
-//						return;
-//					}
-//					
-//				}
-//				super.notifyChanged(n);
+//		TrackerTableEditorUtils.createAnimalsTableViewer(viewerPane,
+//				tableViewer, adapterFactory);
 //
-//			}
-			
-		});
-	}
+//	}
+
+//	/**
+//	 * Events Table
+//	 */
+//	public static void createEventsTableViewer(ViewerPane viewerPane,
+//			final TableViewer tableViewer, AdapterFactory adapterFactory) {
+//		TrackerTableEditorUtils.createEventsTableViewer(viewerPane,
+//				tableViewer, adapterFactory);
+//	
+//	}
 
 	/**
 	 * People Table Name, First Name, Last Name, Phone Number, Street, City,
@@ -375,98 +321,98 @@ public class FairTableEditorUtils {
 				return ((Fair) object).exhibits().toArray();
 			}
 
-			/**
-			 * Exhibits table shows the hierarchy elements of the Exhibit. These
-			 * elements are shown in the table columns through ItemProviders so
-			 * they by default adapt to a string based on the name of these elements.
-			 * 
-			 * Detecting changes to these hierarchy element names will be used to trigger 
-			 * viewer.refresh.
-			 * 
-			 * Additions and deletions are handled more discreetly 
-			 * with NotifyChangedToViewerRefresh.
-			 * 
-			 */
-			@Override
-			public void notifyChanged(Notification n) {
-				super.notifyChanged(n);
-				Object notifier = n.getNotifier();
-				// find out the type of the notifier which could be either 'Log'
-				// or 'Exhibit'
-
-				if (notifier instanceof Lot) {
-					handleLotNotification(n);
-				} else if (notifier instanceof com.verticon.tracker.fair.Class) {
-					handleClassNotification(n);
-				}else if (notifier instanceof Department) {
-					handleDepartmentNotification(n);
-				}else if (notifier instanceof Division) {
-					handleDivisionNotification(n);
-				}
-
-			}
-			
-			// output a message about changes to the Class Name
-			private void handleDepartmentNotification(Notification n) {
-				int featureID = n.getFeatureID(Lot.class);
-				if (featureID == FairPackage.DEPARTMENT__NAME) {
-										System.out.println("xThe department " + n.getOldStringValue()
-												+ " is now " + n.getNewStringValue());
-//					viewer.refresh();
-				}
-			}
-			
-			// output a message about changes to the Class Name
-			private void handleDivisionNotification(Notification n) {
-				int featureID = n.getFeatureID(Lot.class);
-				if (featureID == FairPackage.DIVISION__NAME) {
-					System.out.println("xThe division " + n.getOldStringValue()
-							+ " is now " + n.getNewStringValue());
-//					viewer.refresh();
-				}
-			}
-			
-
-			// output a message about changes to the Class Name
-			private void handleClassNotification(Notification n) {
-				int featureID = n.getFeatureID(Lot.class);
-				if (featureID == FairPackage.CLASS__NAME) {
-					System.out.println("xThe className " + n.getOldStringValue()
-							+ " is now " + n.getNewStringValue());
-//					viewer.refresh();
-				}
-			}
-
-			// output a message about new exhibits
-			private void handleLotNotification(Notification n) {
-				int featureID = n.getFeatureID(Lot.class);
-				if (featureID == FairPackage.LOT__EXHIBITS) {
-					Lot lot = (Lot) n.getNotifier();
-					if (n.getEventType() == Notification.ADD) {
-						System.out.println("xNew Exhibit was added to the Lot: "
-								+ lot.getName());
-//						NotifyChangedToViewerRefresh.handleNotifyChanged(
-//								viewer, n.getNotifier(), n.getEventType(), n
-//										.getFeature(), n.getOldValue(), n
-//										.getNewValue(), n.getPosition());
-
-					} else if (n.getEventType() == Notification.REMOVE) {
-						System.out
-								.println("xNew Exhibit was removed from the Lot: "
-										+ lot.getName());
-//						NotifyChangedToViewerRefresh.handleNotifyChanged(
-//								viewer, n.getNotifier(), n.getEventType(), n
-//										.getFeature(), n.getOldValue(), n
-//										.getNewValue(), n.getPosition());
-
-					}
-
-				} else if (featureID == FairPackage.LOT__NAME) {
-					System.out.println("xThe Lot name " + n.getOldStringValue()
-							+ " was changed to " + n.getNewStringValue());
-//					viewer.refresh();
-				}
-			}
+//			/**
+//			 * Exhibits table shows the hierarchy elements of the Exhibit. These
+//			 * elements are shown in the table columns through ItemProviders so
+//			 * they by default adapt to a string based on the name of these elements.
+//			 * 
+//			 * Detecting changes to these hierarchy element names will be used to trigger 
+//			 * viewer.refresh.
+//			 * 
+//			 * Additions and deletions are handled more discreetly 
+//			 * with NotifyChangedToViewerRefresh.
+//			 * 
+//			 */
+//			@Override
+//			public void notifyChanged(Notification n) {
+//				super.notifyChanged(n);
+//				Object notifier = n.getNotifier();
+//				// find out the type of the notifier which could be either 'Log'
+//				// or 'Exhibit'
+//
+//				if (notifier instanceof Lot) {
+//					handleLotNotification(n);
+//				} else if (notifier instanceof com.verticon.tracker.fair.Class) {
+//					handleClassNotification(n);
+//				}else if (notifier instanceof Department) {
+//					handleDepartmentNotification(n);
+//				}else if (notifier instanceof Division) {
+//					handleDivisionNotification(n);
+//				}
+//
+//			}
+//			
+//			// output a message about changes to the Class Name
+//			private void handleDepartmentNotification(Notification n) {
+//				int featureID = n.getFeatureID(Lot.class);
+//				if (featureID == FairPackage.DEPARTMENT__NAME) {
+//										System.out.println("xThe department " + n.getOldStringValue()
+//												+ " is now " + n.getNewStringValue());
+////					viewer.refresh();
+//				}
+//			}
+//			
+//			// output a message about changes to the Class Name
+//			private void handleDivisionNotification(Notification n) {
+//				int featureID = n.getFeatureID(Lot.class);
+//				if (featureID == FairPackage.DIVISION__NAME) {
+//					System.out.println("xThe division " + n.getOldStringValue()
+//							+ " is now " + n.getNewStringValue());
+////					viewer.refresh();
+//				}
+//			}
+//			
+//
+//			// output a message about changes to the Class Name
+//			private void handleClassNotification(Notification n) {
+//				int featureID = n.getFeatureID(Lot.class);
+//				if (featureID == FairPackage.CLASS__NAME) {
+//					System.out.println("xThe className " + n.getOldStringValue()
+//							+ " is now " + n.getNewStringValue());
+////					viewer.refresh();
+//				}
+//			}
+//
+//			// output a message about new exhibits
+//			private void handleLotNotification(Notification n) {
+//				int featureID = n.getFeatureID(Lot.class);
+//				if (featureID == FairPackage.LOT__EXHIBITS) {
+//					Lot lot = (Lot) n.getNotifier();
+//					if (n.getEventType() == Notification.ADD) {
+//						System.out.println("xNew Exhibit was added to the Lot: "
+//								+ lot.getName());
+////						NotifyChangedToViewerRefresh.handleNotifyChanged(
+////								viewer, n.getNotifier(), n.getEventType(), n
+////										.getFeature(), n.getOldValue(), n
+////										.getNewValue(), n.getPosition());
+//
+//					} else if (n.getEventType() == Notification.REMOVE) {
+//						System.out
+//								.println("xNew Exhibit was removed from the Lot: "
+//										+ lot.getName());
+////						NotifyChangedToViewerRefresh.handleNotifyChanged(
+////								viewer, n.getNotifier(), n.getEventType(), n
+////										.getFeature(), n.getOldValue(), n
+////										.getNewValue(), n.getPosition());
+//
+//					}
+//
+//				} else if (featureID == FairPackage.LOT__NAME) {
+//					System.out.println("xThe Lot name " + n.getOldStringValue()
+//							+ " was changed to " + n.getNewStringValue());
+////					viewer.refresh();
+//				}
+//			}
 
 			
 		});
