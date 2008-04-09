@@ -122,6 +122,8 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -167,6 +169,12 @@ public class FairEditor
 	 * @generated
 	 */
 	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
+	
+	/**
+	 * slf4j Logger
+	 * @generated NOT
+	 */
+	private final Logger logger = LoggerFactory.getLogger(FairEditor.class);
 
 	/**
 	 * This keeps track of the editing domain that is used to track all changes to the model.
@@ -506,6 +514,9 @@ public class FairEditor
 	/**
 	 * This listens for workspace changes.
 	 * <!-- begin-user-doc -->
+	 * If there are any changes to the underlying resources, refresh the
+	 * Events and Animals tables by calling 
+	 * updatePremisesTables();
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -567,7 +578,11 @@ public class FairEditor
 						}
 
 						if (!visitor.getChangedResources().isEmpty()) {
+							
 							changedResources.addAll(visitor.getChangedResources());
+							
+							
+//							
 							if (getSite().getPage().getActiveEditor() == FairEditor.this) {
 								getSite().getShell().getDisplay().asyncExec
 									(new Runnable() {
@@ -624,10 +639,12 @@ public class FairEditor
 	/**
 	 * Handles what to do with changed resources on activation.
 	 * <!-- begin-user-doc -->
+	 * Added  resetInputOnTableViewers(); to update Exhibits and Events
+	 * TableViewers
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	protected void handleChangedResourcesGen() {
+	protected void handleChangedResources() {
 		if (!changedResources.isEmpty() && (!isDirty() || handleDirtyConflict())) {
 			editingDomain.getCommandStack().flush();
 
@@ -647,30 +664,31 @@ public class FairEditor
 			}
 			updateProblemIndication = true;
 			updateProblemIndication();
+			//Added
+			resetInputOnTableViewers();
 		}
 	}
-	
+
 	/**
-	 * Handles what to do with changed resources on activation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Resets the Input on TableViewers
+	 * 
 	 * @generated NOT
 	 */
-	protected void handleChangedResources() {
-		boolean reload = !changedResources.isEmpty() && (!isDirty() || handleDirtyConflict());
-		handleChangedResourcesGen();
-		if (reload) {
-			  Object rootObject = getRoot();
-			  if ((rootObject instanceof Fair) && (((Fair)rootObject).getPremises()!=null))
-			  {
-				animalsTableViewer.setInput(((Fair)rootObject).getPremises());
-				eventsTableViewer.setInput(((Fair)rootObject).getPremises());
-			  }
-			  Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
-			  eventsTableViewerNotifier.setResource(resource);
-//			  logger.debug("Loaded changed Resource "+resource);
-		}
+	private void resetInputOnTableViewers() {
+		logger.debug("Reloading resources");
+		  Object rootObject = getRoot();
+		  if ((rootObject instanceof Fair) && (((Fair)rootObject).getPremises()!=null))
+		  {
+			logger.debug("Setting input on Premises tables");
+					 animalsTableViewer.setInput(((Fair)rootObject).getPremises());
+					 eventsTableViewer.setInput(((Fair)rootObject).getPremises());
+		  }else{
+			  logger.error("Root object was not a Premises, but a  {}", rootObject.getClass().toString());
+		  }
+		  Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
+		  eventsTableViewerNotifier.setResource(resource);
 	}
+
   
 	/**
 	 * Updates the problems indication with the information described in the specified diagnostic.
@@ -1107,6 +1125,10 @@ public class FairEditor
 				svf.addViewer(peopleTableViewer);
 				svf.addViewer(exhibitsTableViewer);
 			}
+			
+			eventsTableViewerNotifier = new FairTableViewerNotifier( eventsTableViewer, exhibitsTableViewer);
+			Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
+			eventsTableViewerNotifier.setResource(resource);
 
 			setActivePage(0);
 		}
@@ -1231,9 +1253,7 @@ public class FairEditor
 		createContextMenuFor(eventsTableViewer);
 		int pageIndex = addPage(viewerPane.getControl());
 		setPageText(pageIndex, tableName);
-		eventsTableViewerNotifier = new EventsTableViewerNotifier( eventsTableViewer);
-		Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
-		eventsTableViewerNotifier.setResource(resource);
+		
 	}
 	
 	/**
