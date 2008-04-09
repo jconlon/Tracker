@@ -8,6 +8,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.edit.ui.provider.NotifyChangedToViewerRefresh;
 import org.eclipse.jface.viewers.TableViewer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.TrackerPackage;
 
@@ -18,11 +20,15 @@ import com.verticon.tracker.TrackerPackage;
  */
 public class EventsTableViewerNotifier extends EContentAdapter{
 
-
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+		.getLogger(EventsTableViewerNotifier.class);
 	/**
 	 * Cache of the targetResource
 	 */
-	private Resource oldResource;
+	private Resource activeResource;
 	/**
 	 * EventsTable to notify
 	 */
@@ -36,13 +42,14 @@ public class EventsTableViewerNotifier extends EContentAdapter{
 	
 	
 	public void setResource(Resource resource) {
-		this.oldResource=resource;
-		super.setTarget(oldResource);
+		logger.debug("Setting resource {}", resource.getURI());
+		this.activeResource=resource;
+		super.setTarget(activeResource);
 	}
 
 	public void unset(){
-		if(oldResource !=null){
-			super.unsetTarget(oldResource);
+		if(activeResource !=null){
+			super.unsetTarget(activeResource);
 		}
 	}
 
@@ -58,7 +65,7 @@ public class EventsTableViewerNotifier extends EContentAdapter{
 
 		if (notification.getFeature() == TrackerPackage.eINSTANCE.getTag_Events() )
 	    {
-//	    	  System.out.println("Calling NotifiedChangedToViewerRefresh: "+notification.getFeature());
+			logger.debug("Calling NotifiedChangedToViewerRefresh for Tag_Events, from a {}",notification.getNotifier().getClass());
 	        NotifyChangedToViewerRefresh.handleNotifyChanged(
 	          eventsTableViewer,
 	          notification.getNotifier(),
@@ -71,10 +78,12 @@ public class EventsTableViewerNotifier extends EContentAdapter{
 	     }
 		 else if (notification.getFeature() == TrackerPackage.eINSTANCE.getTag_Id()	)
 	  	    {
-			    //Instead of figuring out the specifics just refresh
+			 logger.debug("Calling Refreshing eventsTable for Tag_ID, from a {}",notification.getNotifier().getClass());
+		        
+			   //Instead of figuring out the specifics just refresh
 			    eventsTableViewer.refresh();  	        
 	  	      }
 
-}
+	}
 }
 
