@@ -578,6 +578,15 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPerson_Pin() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getYoungPerson() {
 		return youngPersonEClass;
 	}
@@ -696,6 +705,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		createEAttribute(personEClass, PERSON__ZIP_CODE);
 		createEAttribute(personEClass, PERSON__NAME);
 		createEAttribute(personEClass, PERSON__COMMENTS);
+		createEAttribute(personEClass, PERSON__PIN);
 
 		youngPersonEClass = createEClass(YOUNG_PERSON);
 		createEReference(youngPersonEClass, YOUNG_PERSON__PARENTS);
@@ -792,6 +802,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		initEAttribute(getPerson_ZipCode(), this.getZipCode(), "zipCode", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_Name(), ecorePackage.getEString(), "name", null, 1, 1, Person.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_Comments(), ecorePackage.getEString(), "comments", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_Pin(), theTrackerPackage.getPremisesIdNumber(), "pin", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(youngPersonEClass, YoungPerson.class, "YoungPerson", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getYoungPerson_Parents(), this.getPerson(), null, "parents", null, 1, -1, YoungPerson.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

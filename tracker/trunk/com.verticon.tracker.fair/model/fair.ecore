@@ -78,6 +78,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         volatile="true" derived="true" iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pin" eType="ecore:EDataType ../../com.verticon.tracker/model/tracker.ecore#//PremisesIdNumber"
+        unsettable="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="ZipCode" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EDataType" name="USTelephoneNumber" instanceClassName="java.lang.String"/>

@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.fair.Person#getZipCode <em>Zip Code</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Person#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Person#getComments <em>Comments</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Person#getPin <em>Pin</em>}</li>
  * </ul>
  * </p>
  *
@@ -272,5 +273,58 @@ public interface Person extends EObject {
 	 * @generated
 	 */
 	void setComments(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Pin</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Pin</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Pin</em>' attribute.
+	 * @see #isSetPin()
+	 * @see #unsetPin()
+	 * @see #setPin(String)
+	 * @see com.verticon.tracker.fair.FairPackage#getPerson_Pin()
+	 * @model unsettable="true" dataType="com.verticon.tracker.PremisesIdNumber"
+	 * @generated
+	 */
+	String getPin();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.fair.Person#getPin <em>Pin</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Pin</em>' attribute.
+	 * @see #isSetPin()
+	 * @see #unsetPin()
+	 * @see #getPin()
+	 * @generated
+	 */
+	void setPin(String value);
+
+	/**
+	 * Unsets the value of the '{@link com.verticon.tracker.fair.Person#getPin <em>Pin</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSetPin()
+	 * @see #getPin()
+	 * @see #setPin(String)
+	 * @generated
+	 */
+	void unsetPin();
+
+	/**
+	 * Returns whether the value of the '{@link com.verticon.tracker.fair.Person#getPin <em>Pin</em>}' attribute is set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return whether the value of the '<em>Pin</em>' attribute is set.
+	 * @see #unsetPin()
+	 * @see #getPin()
+	 * @see #setPin(String)
+	 * @generated
+	 */
+	boolean isSetPin();
 
 } // Person

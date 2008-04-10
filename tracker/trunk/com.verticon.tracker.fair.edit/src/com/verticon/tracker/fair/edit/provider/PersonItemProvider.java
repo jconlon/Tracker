@@ -76,6 +76,7 @@ public class PersonItemProvider
 			addZipCodePropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addCommentsPropertyDescriptor(object);
+			addPinPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -279,6 +280,28 @@ public class PersonItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Pin feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPinPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Person_pin_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_pin_feature", "_UI_Person_type"),
+				 FairPackage.Literals.PERSON__PIN,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Person.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -324,6 +347,7 @@ public class PersonItemProvider
 			case FairPackage.PERSON__ZIP_CODE:
 			case FairPackage.PERSON__NAME:
 			case FairPackage.PERSON__COMMENTS:
+			case FairPackage.PERSON__PIN:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -378,7 +402,8 @@ public class PersonItemProvider
 	    	case 5: return person.getCity();
 	    	case 6: return person.getState();
 	    	case 7: return person.getZipCode();
-	    	case 8: return person.getComments();
+	    	case 8:	return person.getPin();
+	    	case 9: return person.getComments();
 	    	default :
 	    		return "unknown " + columnIndex;
 	    }

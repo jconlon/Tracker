@@ -526,13 +526,22 @@ public interface FairPackage extends EPackage {
 	int PERSON__COMMENTS = 8;
 
 	/**
+	 * The feature id for the '<em><b>Pin</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__PIN = 9;
+
+	/**
 	 * The number of structural features of the '<em>Person</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = 9;
+	int PERSON_FEATURE_COUNT = 10;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.YoungPersonImpl <em>Young Person</em>}' class.
@@ -624,6 +633,15 @@ public interface FairPackage extends EPackage {
 	 * @ordered
 	 */
 	int YOUNG_PERSON__COMMENTS = PERSON__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Pin</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOUNG_PERSON__PIN = PERSON__PIN;
 
 	/**
 	 * The feature id for the '<em><b>Parents</b></em>' reference list.
@@ -1139,6 +1157,17 @@ public interface FairPackage extends EPackage {
 	EAttribute getPerson_Comments();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Person#getPin <em>Pin</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pin</em>'.
+	 * @see com.verticon.tracker.fair.Person#getPin()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_Pin();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.YoungPerson <em>Young Person</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1573,6 +1602,14 @@ public interface FairPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PERSON__COMMENTS = eINSTANCE.getPerson_Comments();
+
+		/**
+		 * The meta object literal for the '<em><b>Pin</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__PIN = eINSTANCE.getPerson_Pin();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.YoungPersonImpl <em>Young Person</em>}' class.
