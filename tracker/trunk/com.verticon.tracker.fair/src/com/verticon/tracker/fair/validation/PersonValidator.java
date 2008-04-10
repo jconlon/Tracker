@@ -26,4 +26,6 @@ public interface PersonValidator {
 	boolean validateName(String value);
 
 	boolean validateComments(String value);
+
+	boolean validatePin(String value);
 }

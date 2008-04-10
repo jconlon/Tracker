@@ -49,6 +49,7 @@ public class PeopleSorter extends ViewerSorter {
 	public final static int ZIP = 7;
 	public final static int NAME = 8;
 	public final static int COMMENTS = 9;
+	public final static int PIN = 10;
 	
 
 	// Criteria that the instance uses 
@@ -113,6 +114,8 @@ public class PeopleSorter extends ViewerSorter {
 				break;
 			case COMMENTS :
 				returnValue = compareComments(person1, person2);
+			case PIN :
+				returnValue = comparePins(person1, person2);
 			
 				
 			default:
@@ -289,6 +292,24 @@ public class PeopleSorter extends ViewerSorter {
 	protected int compareComments(Person person1, Person person2) {
 		String value1 = person1.getComments()==null?"":person1.getComments();
 		String value2 = person2.getComments()==null?"":person2.getComments();
+		return value1.compareTo(value2);
+	}
+	
+	/**
+	 * Returns a number reflecting the collation order of the given people
+	 * based on the Pin associated with the people.
+	 *
+	 * @param resource1 the first resource element to be ordered
+	 * @param resource2 the second resource element to be ordered
+	 * @return a negative number if the first element is less  than the 
+	 *  second element; the value <code>0</code> if the first element is
+	 *  equal to the second element; and a positive number if the first
+	 *  element is greater than the second element
+	 */
+	@SuppressWarnings("unchecked")
+	protected int comparePins(Person person1, Person person2) {
+		String value1 = person1.getPin()==null?"":person1.getPin();
+		String value2 = person2.getPin()==null?"":person2.getPin();
 		return value1.compareTo(value2);
 	}
 	

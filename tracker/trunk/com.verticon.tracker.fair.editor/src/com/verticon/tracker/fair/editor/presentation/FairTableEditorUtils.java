@@ -23,27 +23,6 @@ import com.verticon.tracker.fair.Fair;
  */
 public class FairTableEditorUtils {
 
-//	/**
-//	 * Animals Table
-//	 */
-//	public static void createAnimalsTableViewer(ViewerPane viewerPane,
-//			final TableViewer tableViewer, AdapterFactory adapterFactory) {
-//
-//		TrackerTableEditorUtils.createAnimalsTableViewer(viewerPane,
-//				tableViewer, adapterFactory);
-//
-//	}
-
-//	/**
-//	 * Events Table
-//	 */
-//	public static void createEventsTableViewer(ViewerPane viewerPane,
-//			final TableViewer tableViewer, AdapterFactory adapterFactory) {
-//		TrackerTableEditorUtils.createEventsTableViewer(viewerPane,
-//				tableViewer, adapterFactory);
-//	
-//	}
-
 	/**
 	 * People Table Name, First Name, Last Name, Phone Number, Street, City,
 	 * State, Zip Code
@@ -97,6 +76,11 @@ public class FairTableEditorUtils {
 		layout.addColumnData(new ColumnWeightData(2, 20, true));
 		zipColumn.setText("Zip Code");
 		
+		// Zip Code
+		final TableColumn pinColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 20, true));
+		pinColumn.setText("Pin");
+		
 		// Comments
 		final TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 120, true));
@@ -136,7 +120,9 @@ public class FairTableEditorUtils {
 					sortIdentifier = PeopleSorter.CITY;
 				} else if (currentColumn == zipColumn) {
 					sortIdentifier = PeopleSorter.ZIP;
-				} else if (currentColumn == commentsColumn){
+				} else if (currentColumn == pinColumn){
+					sortIdentifier = PeopleSorter.PIN;
+				}else if (currentColumn == commentsColumn){
 					sortIdentifier = PeopleSorter.COMMENTS;
 				}
 
@@ -154,10 +140,11 @@ public class FairTableEditorUtils {
 		streetColumn.addListener(SWT.Selection, sortListener);
 		stateColumn.addListener(SWT.Selection, sortListener);
 		zipColumn.addListener(SWT.Selection, sortListener);
+		pinColumn.addListener(SWT.Selection, sortListener);
 		commentsColumn.addListener(SWT.Selection, sortListener);
 
 		tableViewer.setColumnProperties(new String[] { "a", "b", "c", "d", "e",
-				"f", "g", "h", "i"});
+				"f", "g", "h", "i", "j"});
 
 		/**
 		 * The default ItemProvider returned via the adapterFactory for Premises

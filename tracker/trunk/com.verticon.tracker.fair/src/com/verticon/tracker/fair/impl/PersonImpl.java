@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getZipCode <em>Zip Code</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getComments <em>Comments</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getPin <em>Pin</em>}</li>
  * </ul>
  * </p>
  *
@@ -213,6 +214,35 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @ordered
 	 */
 	protected String comments = COMMENTS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPin() <em>Pin</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPin()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PIN_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPin() <em>Pin</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPin()
+	 * @generated
+	 * @ordered
+	 */
+	protected String pin = PIN_EDEFAULT;
+
+	/**
+	 * This is true if the Pin attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean pinESet;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -442,6 +472,52 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getPin() {
+		return pin;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPin(String newPin) {
+		String oldPin = pin;
+		pin = newPin;
+		boolean oldPinESet = pinESet;
+		pinESet = true;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.PERSON__PIN, oldPin, pin, !oldPinESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void unsetPin() {
+		String oldPin = pin;
+		boolean oldPinESet = pinESet;
+		pin = PIN_EDEFAULT;
+		pinESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, FairPackage.PERSON__PIN, oldPin, PIN_EDEFAULT, oldPinESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSetPin() {
+		return pinESet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -463,6 +539,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return getName();
 			case FairPackage.PERSON__COMMENTS:
 				return getComments();
+			case FairPackage.PERSON__PIN:
+				return getPin();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -501,6 +579,9 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return;
 			case FairPackage.PERSON__COMMENTS:
 				setComments((String)newValue);
+				return;
+			case FairPackage.PERSON__PIN:
+				setPin((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -541,6 +622,9 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case FairPackage.PERSON__COMMENTS:
 				setComments(COMMENTS_EDEFAULT);
 				return;
+			case FairPackage.PERSON__PIN:
+				unsetPin();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -571,6 +655,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return NAME_EDEFAULT == null ? getName() != null : !NAME_EDEFAULT.equals(getName());
 			case FairPackage.PERSON__COMMENTS:
 				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
+			case FairPackage.PERSON__PIN:
+				return isSetPin();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -601,6 +687,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 		result.append(zipCode);
 		result.append(", comments: ");
 		result.append(comments);
+		result.append(", pin: ");
+		if (pinESet) result.append(pin); else result.append("<unset>");
 		result.append(')');
 		return result.toString();
 	}
