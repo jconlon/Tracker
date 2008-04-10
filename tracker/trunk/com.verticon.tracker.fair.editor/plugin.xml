@@ -37,4 +37,48 @@
         contributorClass="com.verticon.tracker.fair.editor.presentation.FairActionBarContributor" >
     </editor>
   </extension>    
+  
+   <extension
+        point="org.eclipse.ui.popupMenus">
+     <objectContribution
+           adaptable="true"
+           id="com.verticon.tracker.fair.editor.popupMenu"
+           nameFilter="*.xls"
+           objectClass="org.eclipse.core.resources.IResource">
+        <menu
+              id="com.verticon.tracker.fair.editor.popupSubMenu"
+              label="Add People to the Fair"
+              path="additions">
+           <groupMarker name="content"/>
+           <separator name="additions"/>
+        </menu>
+        <action
+              class="com.verticon.tracker.fair.editor.actions.AddPeopleActionDelegate"
+              enablesFor="+"
+              id="com.verticon.tracker.fair.editor.actions.addPeople"
+              label="Add People from an people.xls spreadsheet"
+              menubarPath="com.verticon.tracker.fair.editor.popupSubMenu/content"
+              tooltip="%_UI_TrackerTagsPopupPremisesTemplateEvents_description"/>    
+       
+     </objectContribution>
+  </extension> 
+  
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <category
+            id="com.verticon.tracker.fair.editor.importCategory"
+            name="Import Resources to Fair Projects">
+      </category>
+      <wizard
+            category="com.verticon.tracker.fair.editor.importCategory"
+            class="com.verticon.tracker.fair.editor.actions.ImportSpreadSheetWizard"
+            icon="icons/sample.gif"
+            id="com.verticon.tracker.fair.editor.ImportPeopleWizard"
+            name="Spread Sheet Import">
+         <description>
+            Import a spread sheet file from the local file system into the selected project.
+         </description>
+      </wizard>
+   </extension>
+  
 </plugin>
