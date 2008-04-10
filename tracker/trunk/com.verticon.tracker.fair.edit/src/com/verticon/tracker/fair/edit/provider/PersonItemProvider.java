@@ -354,10 +354,11 @@ public class PersonItemProvider
 	}
 
 	public Object getColumnImage(Object object, int columnIndex) {
-		if(columnIndex==0){
-			getImage(object);
+		switch (columnIndex){
+        	case 0: return getImage(object);
+    	default :
+    		return null;
 		}
-		return null;
 	}
 
 	/**
