@@ -583,6 +583,9 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 			CollectionFilter<Event> weighInsProducer = new CollectionFilter<Event>();
 			weighInsProducer.addFilter(CommonUtilities.weighInFilterCriteria);
 			List<Event> weighIns = new ArrayList<Event>(weighInsProducer.filterCopy(allEvents()));
+			if(weighIns.isEmpty()){
+				return null;
+			}
 			Collections.sort(weighIns, CommonUtilities.DATE_COMPARATOR);
 			lastWeighIn = (WeighIn) weighIns.get(weighIns.size()-1);
 		}
