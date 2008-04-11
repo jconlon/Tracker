@@ -10,17 +10,8 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: com.verticon.tracker.fair.editor.presentation
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.core.resources;visibility:=reexport,
  com.verticon.tracker.fair.edit;visibility:=reexport,
- org.eclipse.emf.ecore.xmi;visibility:=reexport,
- org.eclipse.emf.edit.ui;visibility:=reexport,
- org.eclipse.ui.ide;visibility:=reexport,
- com.verticon.tracker.edit;visibility:=reexport,
  com.verticon.tracker.editor
 Eclipse-LazyStart: true
-Import-Package: org.apache.poi.hssf.eventusermodel,
- org.apache.poi.hssf.record,
- org.apache.poi.hssf.usermodel,
- org.apache.poi.hssf.util,
- org.apache.poi.poifs.filesystem,
+Import-Package: org.apache.poi.hssf.usermodel,
  org.slf4j;version="1.5.0"
