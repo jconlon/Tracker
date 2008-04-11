@@ -272,8 +272,8 @@ public class PeopleSorter extends ViewerSorter {
 	 */
 	@SuppressWarnings("unchecked")
 	protected int compareNames(Person person1, Person person2) {
-		String value1 = person1.getName()==null?"":person1.getName();
-		String value2 = person2.getName()==null?"":person2.getName();
+		String value1 = person1.getName()==null?"":person1.getClass().getName()+person1.getName();
+		String value2 = person2.getName()==null?"":person2.getClass().getName()+person2.getName();
 		return value1.compareTo(value2);
 	}
 	
