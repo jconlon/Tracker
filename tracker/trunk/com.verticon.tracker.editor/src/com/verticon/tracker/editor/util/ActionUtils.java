@@ -584,7 +584,7 @@ public class ActionUtils {
 	}
 	
 	/**
-	 * Preference policy for adding duplicates.
+	 * Preference policy to avoid adding duplicates.
 	 * @param animalToReceiveEvent
 	 * @param eventToAdd
 	 * @return true if the event can be added
@@ -602,9 +602,14 @@ public class ActionUtils {
 				cal.add(Calendar.SECOND, -timeoutWindow);
 				Date subtractedDate = cal.getTime();
 				if(historicalEventDate.after(subtractedDate)){
-					logger.info("Defered adding {} to {} because the time of event does not exceed the duplicate event timeout",
-							eventToAdd, animalToReceiveEvent
-							);
+					logger.info(
+							"Defered adding the event {} to the animal {} because it's dateTime {} is within {} second(s) of an similar event on the animal. Check the duplicate event window in user preferences.",
+							new Object[] {
+										eventToAdd.getClass().getSimpleName(), 
+										animalToReceiveEvent.getId(),
+										eventToAddDate,
+										timeoutWindow}
+					);
 					return false;
 				}
 
