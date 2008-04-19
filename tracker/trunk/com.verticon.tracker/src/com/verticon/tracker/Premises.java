@@ -222,7 +222,7 @@ public interface Premises extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/ocl/examples/OCL body='if (animals -> notEmpty()) and (animals.tags->notEmpty())\n\tthen  animals.tags.events\n\telse Set{}\nendif'"
+	 * @model
 	 * @generated
 	 */
 	EList<Event> eventHistory();
