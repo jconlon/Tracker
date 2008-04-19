@@ -16,8 +16,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -29,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
@@ -37,6 +36,7 @@ import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.CollectionFilter;
 import com.verticon.tracker.util.CommonUtilities;
+import com.verticon.tracker.util.EventHistoryAdapterFactory;
 import com.verticon.tracker.util.Species;
 
 /**
@@ -73,7 +73,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @generated
 	 */
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
-
+	
+	
 	/**
 	 * Used for copying eventTemplate events.
 	 */
@@ -264,6 +265,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 */
 	protected static final Integer WEIGHT_GAIN_PER_DAY_EDEFAULT = null;
 
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -333,6 +335,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	public EList<Tag> getTags() {
 		if (tags == null) {
 			tags = new EObjectContainmentEList<Tag>(Tag.class, this, TrackerPackage.ANIMAL__TAGS);
+			
 		}
 		return tags;
 	}
@@ -594,28 +597,23 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	
 	
 
-/**
+	/**
 	 * <!-- begin-user-doc -->
-	 * Hand implemented for speed (versus OCL??) because this method is used to generate the
-	 * key attribute for Animal.
+	 * Implemented for speed (versus OCL??)
 	 * Originally generated with the following OCL:
 	 * if (tags -> notEmpty()) and ( tags.events -> notEmpty())
 	 * 		then tags.events
 	 * 		else Set{}
 	 * endif
+	 * 
+	 * @see AnimalEventHistoryAdapter
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public EList<Event> allEvents() {
-		
-		if(tags==null || tags.isEmpty()){
-			return  ECollections.emptyEList();
-		}
-		EList<Event> events = new BasicEList<Event>();
-		for (Tag tag : tags) {
-			events.addAll(tag.getEvents());
-		}
-		return ECollections.unmodifiableEList(events);
+		EventHistory eventHistory = (EventHistory) EventHistoryAdapterFactory.INSTANCE.adapt(
+				this, EventHistory.class);
+		return eventHistory.eventHistory();
 	}
 
 
@@ -844,5 +842,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 		result.append(')');
 		return result.toString();
 	}
+	
+	
+	
 
 } //AnimalImpl

@@ -195,12 +195,6 @@ public class TrackerEditor
 	
 	
 	/**
-	 * Monitors Event changes to update the eventsTableViewer
-	 */
-	private EventsTableViewerNotifier eventsTableViewerNotifier;
-	
-	
-	/**
 	 * This keeps track of the editing domain that is used to track all changes to the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -592,6 +586,7 @@ public class TrackerEditor
 	 * @generated
 	 */
 	protected void handleActivate() {
+		logger.debug("HandleActivate entered");
 		// Recompute the read only state.
 		//
 		if (editingDomain.getResourceToReadOnlyMap() != null) {
@@ -630,6 +625,7 @@ public class TrackerEditor
 	 * @generated NOT
 	 */
 	protected void handleChangedResources() {
+		logger.debug("HandleChangeResources entered");
 		if (!changedResources.isEmpty() && (!isDirty() || handleDirtyConflict())) {
 			editingDomain.getCommandStack().flush();
 
@@ -678,16 +674,15 @@ public class TrackerEditor
 	 * 
 	 */
 	private void resetInputOnTableViewers() {
-		logger.debug("Reloading resources");
 		  Object rootObject = getRoot();
 		  if (rootObject instanceof Premises)
 		  {
 			logger.debug("Setting input on tables");
 			animalsTableViewer.setInput((Premises)rootObject);
 			eventsTableViewer.setInput((Premises)rootObject);
+		  }else{
+			  logger.error("Root not a Premises. Did not reset input on viewers.");
 		  }
-		  Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
-		  eventsTableViewerNotifier.setResource(resource);
 	}
   
 	/**
@@ -1543,9 +1538,6 @@ public class TrackerEditor
 		createContextMenuFor(eventsTableViewer);
 		int pageIndex = addPage(viewerPane.getControl());
 		setPageText(pageIndex, tableName);
-		eventsTableViewerNotifier = new EventsTableViewerNotifier( eventsTableViewer);
-		Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
-		eventsTableViewerNotifier.setResource(resource);
 	}
 
 	/**
@@ -2315,7 +2307,7 @@ public class TrackerEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void disposeGen() {
+	public void dispose() {
 		updateProblemIndication = false;
 
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceChangeListener);
@@ -2337,18 +2329,6 @@ public class TrackerEditor
 		}
 
 		super.dispose();
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public void dispose() {
-		eventsTableViewerNotifier.unset();
-		disposeGen();
-		
 	}
 	
 	
