@@ -11,6 +11,8 @@ import junit.textui.TestRunner;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -33,6 +35,10 @@ import com.verticon.tracker.TrackerFactory;
  * @generated
  */
 public class PremisesTest extends TestCase {
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory.getLogger(PremisesTest.class);
 	
 	private static final String AIN_4 = "123456789012344";
 	private static final String AIN_3 = "123456789012343";
@@ -114,6 +120,19 @@ public class PremisesTest extends TestCase {
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
+	
+	/**
+	 * Tests the '{@link com.verticon.tracker.Premises#eventHistory() <em>Event History</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Premises#eventHistory()
+	 * @generated NOT
+	 */
+	public void testEventHistoryEmpty() {
+		assertNotNull(getFixture().eventHistory());
+		assertNotNull(getFixture().eventHistory().isEmpty());
+	}
+
 
 	/**
 	 * Tests the '{@link com.verticon.tracker.Premises#eventHistory() <em>Event History</em>}' operation.
@@ -123,9 +142,7 @@ public class PremisesTest extends TestCase {
 	 * @generated NOT
 	 */
 	public void testEventHistory() {
-		assertNotNull(getFixture().eventHistory());
-		assertNotNull(getFixture().eventHistory().isEmpty());
-
+		logger.info("Setting up an anima1l with tag1 and event1");
 		//Add one animal with two tags
 		Animal animal1 = TrackerFactory.eINSTANCE.createBovineBeef();
 		Tag tag1 = TrackerFactory.eINSTANCE.createTag();
@@ -133,31 +150,36 @@ public class PremisesTest extends TestCase {
 		animal1.getTags().add(tag1);
 		Event event1 = TrackerFactory.eINSTANCE.createTagApplied();
 		tag1.getEvents().add(event1);
+		logger.info("Adding the animal with one tag and one event");
 		getFixture().getAnimals().add(animal1);
-		assertEquals(1, getFixture().eventHistory().size());
-		assertTrue(getFixture().eventHistory().contains(event1));
+		assertEquals("EventHistory should have one event (animal1=tag1=1)", 1, getFixture().eventHistory().size());
+		assertTrue("EventHistory should contain event1", getFixture().eventHistory().contains(event1));
 		
+		logger.info("Adding a tag2 to animal1 with tag2 and event2");
 		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
 		animal1.getTags().add(tag2);
 		tag2.setId(AIN_2);
-		
 		Event event2 = TrackerFactory.eINSTANCE.createReplacedTag();
 		tag2.getEvents().add(event2);
 		
-		assertEquals(2, getFixture().eventHistory().size());
-		assertTrue(getFixture().eventHistory().contains(event2));
+		assertEquals("EventHistory should have two events (animal1=tag1=1)+(animal1=tag2=1)=2",2, getFixture().eventHistory().size());
+		assertTrue("EventHistory should contain event2", getFixture().eventHistory().contains(event2));
 		
 		
 		//Add second animal with two tags
+		logger.info("Setting up a animal2 with tag3 and event 3");
 		Animal animal2 = TrackerFactory.eINSTANCE.createBovineBeef();
 		Tag tag3 = TrackerFactory.eINSTANCE.createTag();
 		tag3.setId(AIN_1);
 		animal2.getTags().add(tag3);
 		Event event3 = TrackerFactory.eINSTANCE.createTagApplied();
 		tag3.getEvents().add(event3);
+		logger.info("Add animal2 with tag3 and event 3");
 		getFixture().getAnimals().add(animal2);
-		assertEquals(3, getFixture().eventHistory().size());
-		assertTrue(getFixture().eventHistory().contains(event3));
+		
+		assertEquals("EventHistory should have three events (animal1=tag1=1)+(animal1=tag2=1)=2",
+				3, getFixture().eventHistory().size());
+		assertTrue("EventHistory should contain event3", getFixture().eventHistory().contains(event3));
 		
 		
 		
