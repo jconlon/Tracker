@@ -332,12 +332,16 @@ public class EventItemProvider
     		String numAnimal = itemLabelProvider.getText(animal);
     		
     		int space = numAnimal.indexOf(' ');
+    		//Some animals may not have a name with a tag if so just use the numAnimal
+    		if(space == -1){
+    			return numAnimal;
+    		}
     		String numPart = numAnimal.substring(0, space);
     		
     		return numAnimal.substring(space, numAnimal.length())+' '+numPart;
     	
 		case 3: //Tag ID Number
-			return event.getTag().getId();
+			return event.getTag()!=null?event.getTag().getId():"";
 
 		case 4: //Comments
 			return event.getComments();
