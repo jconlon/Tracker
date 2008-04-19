@@ -335,7 +335,6 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	public EList<Tag> getTags() {
 		if (tags == null) {
 			tags = new EObjectContainmentEList<Tag>(Tag.class, this, TrackerPackage.ANIMAL__TAGS);
-			
 		}
 		return tags;
 	}
