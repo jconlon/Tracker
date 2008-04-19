@@ -10,31 +10,24 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
-import org.eclipse.ocl.ParserException;
-import org.eclipse.ocl.Query;
-import org.eclipse.ocl.ecore.OCL;
-import org.eclipse.ocl.expressions.OCLExpression;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventSchema;
+import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.Location;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Schema;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.util.EventHistoryAdapterFactory;
 
 /**
  * <!-- begin-user-doc -->
@@ -189,19 +182,6 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #eventHistory <em>Event History</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #eventHistory
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> eventHistoryBodyOCL;
-
-	private static final String OCL_ANNOTATION_SOURCE = "http://www.eclipse.org/ocl/examples/OCL";
-
-	private static final OCL OCL_ENV = OCL.newInstance();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -387,29 +367,23 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Hand implemented for speed (versus OCL??) because this method is used to generate 
+	 * all the events for the Premises.
+	 * Originally generated with the following OCL:
+	 * if (animals -> notEmpty()) and (animals.tags->notEmpty())
+	 * then  animals.tags.events
+	 * else Set{}
+	 * endif
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EList<Event> eventHistory() {
-		if (eventHistoryBodyOCL == null) {
-			EOperation eOperation = TrackerPackage.Literals.PREMISES.getEOperations().get(0);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(TrackerPackage.Literals.PREMISES, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				eventHistoryBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
+		EventHistory eventHistory = (EventHistory) EventHistoryAdapterFactory.INSTANCE.adapt(
+				this, EventHistory.class);
+		if(eventHistory ==null){
+			throw new IllegalStateException("No eventHistory for premises");
 		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(eventHistoryBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<Event> result = (Collection<Event>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Event>(result.size(), result.toArray());
+		return eventHistory.eventHistory();
 	
 	}
 	

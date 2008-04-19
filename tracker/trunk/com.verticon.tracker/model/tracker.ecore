@@ -76,11 +76,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TagAllocated" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="Premises">
-    <eOperations name="eventHistory" upperBound="-1" eType="#//Event">
-      <eAnnotations source="http://www.eclipse.org/ocl/examples/OCL">
-        <details key="body" value="if (animals -> notEmpty()) and (animals.tags->notEmpty())&#xA;&#x9;then  animals.tags.events&#xA;&#x9;else Set{}&#xA;endif"/>
-      </eAnnotations>
-    </eOperations>
+    <eOperations name="eventHistory" upperBound="-1" eType="#//Event"/>
     <eOperations name="findAnimal" eType="#//Animal">
       <eParameters name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>

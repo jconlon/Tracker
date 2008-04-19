@@ -3,24 +3,30 @@
  */
 package com.verticon.tracker.editor.presentation;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.widgets.Display;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.verticon.tracker.Event;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 
 /**
  * Sends Event notifications to a tableViewer.
- * 
+ * @deprecated use EventHistoryContentProvider.
  * @author jconlon
  * 
  */
 public class EventsTableViewerNotifier extends EContentAdapter {
+	
+	private volatile Event lastEvent;
 
 	/**
 	 * slf4j Logger
@@ -60,20 +66,90 @@ public class EventsTableViewerNotifier extends EContentAdapter {
 				|| eventsTableViewer.getControl().isDisposed()) {
 			return;
 		}
-
-		if (notification.getFeature() == TrackerPackage.eINSTANCE
+        
+        // find out the type of the notifier which could be either 'Book' or 'Library'
+        Object notifier = notification.getNotifier();
+        if (notifier instanceof Tag) {
+        	handleTagNotification(notification);
+        } else 
+        	
+        if (notifier instanceof Event) {
+            handleEventNotification(notification);
+        }else 
+        	
+        	
+        if (notification.getFeature() == TrackerPackage.eINSTANCE
 				.getTag_Events()) {
-			logger.debug("Refreshing Events table for Tag_Events");
+			logger.error("Refreshing Events table for Tag_Events");
 
 			refreshViewer(eventsTableViewer);
 
 		} else if (notification.getFeature() == TrackerPackage.eINSTANCE
 				.getTag_Id()) {
-			logger.debug( "Refreshing eventsTable for Tag_ID, from a {}");
+			logger.error( "Refreshing eventsTable for Tag_ID, from a {}");
 			refreshViewer(eventsTableViewer); 
 		}
 
 	}
+	
+    private void handleEventNotification(Notification n){
+    	boolean isViewer = false;
+    	if(n instanceof ViewerNotification){
+    		isViewer=true;
+    	}
+        int featureID = n.getFeatureID(Event.class);
+        if (featureID == TrackerPackage.EVENT__COMMENTS){
+                Event b = (Event) n.getNotifier();
+                logger.debug("The event comments are now {}",b.getComments() );
+                updateViewer(eventsTableViewer, b, null);
+        }else
+        if (featureID == TrackerPackage.EVENT__TAG){
+        	logger.debug("Ignored feature {}",n.getFeature());
+        }else
+        if(featureID == -1){
+        	logger.debug("Ignored notification {} isViewer={}", n,isViewer);
+        }
+        else{
+        	logger.error("Implement feature {} isViewer={}",n.getFeature(),isViewer);
+        }
+    }
+	
+	
+    private void handleTagNotification(Notification n){
+    	int featureID = n.getFeatureID(Tag.class);
+        if (featureID == TrackerPackage.TAG__EVENTS){
+            if (n.getEventType() == Notification.ADD){
+                Event event = (Event) n.getNewValue(); 
+                Assert.isLegal(!event.equals(lastEvent), "Sent this event before");
+                
+                lastEvent=event;
+                
+                logger.debug("{} added by tag {} to the tableViewer by {} using {}",
+                		new Object[] {
+                		event.getClass().getSimpleName(),
+                		((Tag)n.getNotifier()).getId(), 
+                		  
+                		this,
+                		n}
+                );
+                
+                addToViewer(eventsTableViewer, event);
+            } else
+            if (n.getEventType() == Notification.REMOVE){
+                    Event b = (Event) n.getOldValue(); 
+                    logger.debug("Old Event {} was removed from the Tag {} and the tableViewer", 
+                    		b, n.getNotifier());
+                    
+                    removeFromViewer(eventsTableViewer, b);
+               }
+            
+            
+            
+            else{
+            	logger.error("Implement feature {}",n.getFeature());
+            }
+        }
+    }
 
 	/**
 	 * @param tableViewer 
@@ -92,6 +168,73 @@ public class EventsTableViewerNotifier extends EContentAdapter {
 			});
 		} else {
 			tableViewer.refresh();
+		}
+	}
+	
+	/**
+	 * @param tableViewer 
+	 * @param element
+	 * @param properties
+	 * 
+	 */
+	protected void updateViewer(final TableViewer tableViewer, final Object element, final String[] properties) {
+		Display d = tableViewer.getControl().getDisplay();
+		if (d != Display.getCurrent()) {
+			d.asyncExec(new Runnable() {
+				public void run() {
+					if (tableViewer.getControl() != null
+							&& !tableViewer.getControl().isDisposed()) {
+						tableViewer.update(element, properties);
+					}
+				}
+			});
+		} else {
+			tableViewer.update(element, properties);
+		}
+	}
+	
+	
+	/**
+	 * @param tableViewer 
+	 * @param element
+	 * @param properties
+	 * 
+	 */
+	protected static void addToViewer(final TableViewer tableViewer, final Object element) {
+		Display d = tableViewer.getControl().getDisplay();
+		if (d != Display.getCurrent()) {
+			d.asyncExec(new Runnable() {
+				public void run() {
+					if (tableViewer.getControl() != null
+							&& !tableViewer.getControl().isDisposed()) {
+						tableViewer.add(element);
+					}
+				}
+			});
+		} else {
+			tableViewer.add(element);
+		}
+	}
+	
+	/**
+	 * @param tableViewer 
+	 * @param element
+	 * @param properties
+	 * 
+	 */
+	protected static void removeFromViewer(final TableViewer tableViewer, final Object element) {
+		Display d = tableViewer.getControl().getDisplay();
+		if (d != Display.getCurrent()) {
+			d.asyncExec(new Runnable() {
+				public void run() {
+					if (tableViewer.getControl() != null
+							&& !tableViewer.getControl().isDisposed()) {
+						tableViewer.remove(element);
+					}
+				}
+			});
+		} else {
+			tableViewer.remove(element);
 		}
 	}
 }
