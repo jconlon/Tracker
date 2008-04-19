@@ -113,7 +113,6 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
-import com.verticon.tracker.editor.presentation.EventsTableViewerNotifier;
 import com.verticon.tracker.editor.presentation.IAnimalSelectionProvider;
 import com.verticon.tracker.editor.presentation.ICustomActionBarContributor;
 import com.verticon.tracker.editor.presentation.IEventSelectionProvider;
@@ -170,11 +169,6 @@ public class TrackerTransactionEditor
 	 */
 	private final Logger logger = LoggerFactory
 			.getLogger(TrackerTransactionEditor.class);
-	
-	/**
-	 * Monitors Event changes to update the eventsTableViewer
-	 */
-	private EventsTableViewerNotifier eventsTableViewerNotifier;
 	
 	/**
 	 * Offers a selection on a set of Animals. 
@@ -420,7 +414,7 @@ public class TrackerTransactionEditor
 	 * Handles activation of the editor or it's associated views.
 	 */
 	protected void handleActivate() {
-		
+		logger.debug("HandleActivate entered");
 		// Recompute the read only state.
 		//
 		if (editingDomain.getResourceToReadOnlyMap() != null) {
@@ -494,7 +488,6 @@ public class TrackerTransactionEditor
 			
 			public boolean handleResourceChanged(Resource resource) {
 				changedResources.add(resource);
-//				System.out.println("Transaction WorkspaceSync delegate added "+resource +" to changed Resources. ChangedResources Size "+ changedResources.size()	);
 				return true;
 			}
 			
@@ -512,10 +505,20 @@ public class TrackerTransactionEditor
 	
 	/**
 	 * Handles what to do with changed resource on activation.
+	 * FIXME Issue 205
 	 */
 	protected void handleChangedResources() {
+		logger.debug("HandleChangeResources entered");
 		Resource res = getResource();
+		boolean myResourceChanged = changedResources.contains(res);
+//		boolean isNotDirty = !isDirty();
+//		boolean handleDirtyConflict = handleDirtyConflict();
+//		boolean myResourceChangedAndisNotDirtyOrHandleDirtyConflict = 
+//			myResourceChanged && (isNotDirty || handleDirtyConflict);
+
+		logger.debug("HandleChangeResources myResourceChanged={} somethingChanged={}, ", myResourceChanged, !changedResources.isEmpty());
 		if (changedResources.contains(res) && (!isDirty() || handleDirtyConflict())) {
+			logger.debug("Attempting to load resource");
 			changedResources.remove(res);
 			getOperationHistory().dispose(undoContext, true, true, true);
 			dirty = false;
@@ -569,9 +572,11 @@ public class TrackerTransactionEditor
 			logger.debug("Setting input on tables");
 			animalsTableViewer.setInput((Premises)rootObject);
 			eventsTableViewer.setInput((Premises)rootObject);
+		  }else{
+			  logger.error("Root not a Premises. Did not reset input on viewers.");
 		  }
 		 
-		  eventsTableViewerNotifier.setResource(res);
+//		  eventsTableViewerNotifier.setResource(res);
 	}
 	
 	/**
@@ -938,9 +943,6 @@ public class TrackerTransactionEditor
 		int pageIndex = addPage(viewerPane.getControl());
 		setPageText(pageIndex, tableName);
 		
-		eventsTableViewerNotifier = new EventsTableViewerNotifier( eventsTableViewer);
-		Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
-		eventsTableViewerNotifier.setResource(resource);
 	}
 	
 	
@@ -1639,7 +1641,7 @@ public class TrackerTransactionEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void disposeGen() {
+	public void dispose() {
 		workspaceSynchronizer.dispose();
 		getOperationHistory().removeOperationHistoryListener(historyListener);
 		getOperationHistory().dispose(getUndoContext(), true, true, true);
@@ -1665,18 +1667,6 @@ public class TrackerTransactionEditor
 
 		
 		super.dispose();
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public void dispose() {
-		eventsTableViewerNotifier.unset();
-		disposeGen();
-		
 	}
 
 	
