@@ -12,6 +12,9 @@ import java.util.GregorianCalendar;
 
 import junit.framework.TestCase;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Sex;
@@ -49,8 +52,14 @@ import com.verticon.tracker.util.Age;
  * @generated
  */
 public abstract class AnimalTest extends TestCase {
-	private static final String AIN_2 = "123456789012342";
+	
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory.getLogger(AnimalTest.class);
 	private static final String AIN_1 = "123456789012341";
+	private static final String AIN_2 = "123456789012342";
+	private static final String AIN_3 = "123456789012343";
 	
 	private static final Date ANIMAL_BIRTHDAY = 
 		(new GregorianCalendar(2000, Calendar.JANUARY, 1,1,5)).getTime();
@@ -431,6 +440,19 @@ public abstract class AnimalTest extends TestCase {
 		assertEquals(new Integer(10), animal.getWeightGainPerDay());
 	}
 
+	/**
+	 * Tests the '{@link com.verticon.tracker.Animal#allEvents() <em>All Events</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * 
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#allEvents()
+	 * @generated NOT
+	 */
+	public void testAllEventsEmpty() {
+		assertNotNull("Cant get a list",getFixture().allEvents());
+		
+		assertTrue("Events should be empty", getFixture().allEvents().isEmpty());
+	}
 
 	/**
 	 * Tests the '{@link com.verticon.tracker.Animal#allEvents() <em>All Events</em>}' operation.
@@ -441,30 +463,86 @@ public abstract class AnimalTest extends TestCase {
 	 * @generated NOT
 	 */
 	public void testAllEvents() {
-		assertNotNull(getFixture().allEvents());
 		
-		assertTrue(getFixture().allEvents().isEmpty());
-
-		//Test animal with no tag
+		//Animal2 add a tag1
+		logger.info("Animal2 add a tag1");
 		Animal animal2 = TrackerFactory.eINSTANCE.createBovineBeef();
-		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
-		tag2.setId(AIN_1);
-		animal2.getTags().add(tag2);
+		Tag tag1 = TrackerFactory.eINSTANCE.createTag();
+		tag1.setId(AIN_1);
+		animal2.getTags().add(tag1);
+		
+		//Add event1 to tag1 on animal2
+		logger.info("Add event1 to tag1 on animal2");
 		Event event1 = TrackerFactory.eINSTANCE.createTagApplied();
-		tag2.getEvents().add(event1);
-		assertEquals(1, animal2.allEvents().size());
-		assertTrue(animal2.allEvents().contains(event1));
+		tag1.getEvents().add(event1);
+		assertEquals("Animal2 should have one event",1, animal2.allEvents().size());
+		assertTrue("Animald2 should contain the event1", animal2.allEvents().contains(event1));
 		
-		Tag tag3 = TrackerFactory.eINSTANCE.createTag();
-		animal2.getTags().add(tag3);
-		tag3.setId(AIN_2);
-		
+		//Add a second event to tag1
+		logger.info("Add a second event to tag1");
 		Event event2 = TrackerFactory.eINSTANCE.createReplacedTag();
-		tag3.getEvents().add(event2);
+		tag1.getEvents().add(event2);
+		assertEquals("Animal2 should have two events",2, animal2.allEvents().size());
+		assertTrue("Animald2 should contain event2",animal2.allEvents().contains(event2));
 		
-		assertEquals(2, animal2.allEvents().size());
-		assertTrue(animal2.allEvents().contains(event2));
+		
+		//Create a second tag and add it to animal2
+		logger.info("Create a second tag and add it to animal2");
+		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
+		animal2.getTags().add(tag2);
+		tag2.setId(AIN_2);
+		
+		//Create an event and add it to tag2 
+		logger.info("Create an event and add it to tag2");
+		Event event3 = TrackerFactory.eINSTANCE.createReplacedTag();
+		tag2.getEvents().add(event3);
+		assertEquals("Animal2 should have three events (tag1==2, tag2==1)",3, animal2.allEvents().size());
+		assertTrue("Animald2 should contain event3",animal2.allEvents().contains(event3));
+		
+		//Create another event and add it to tag2
+		logger.info("Create another event and add it to tag2");
+		Event event4 = TrackerFactory.eINSTANCE.createReplacedTag();
+		tag2.getEvents().add(event4);
+		
+		assertEquals("Animal2 should have three events (tag1==2, tag2==2) ",4, animal2.allEvents().size());
+		assertTrue("Animald2 should contain event3",animal2.allEvents().contains(event4));
+		
+		//Delete an event
+		logger.info("Deleting an event");
+		tag2.getEvents().remove(event3);
+		assertEquals("Animal2 should have two events (tag1==2, tag2==1) ",3, animal2.allEvents().size());
+		assertFalse("Animald2 should NOT contain event3",animal2.allEvents().contains(event3));
+		assertTrue("Animald2 should Still contain event4",animal2.allEvents().contains(event4));
+		
+		//Delete a tag
+		logger.info("Deleting a tag");
+		animal2.getTags().remove(tag2);
+		assertFalse("Animald2 should NOT contain event4",animal2.allEvents().contains(event4));
+		assertEquals("Animal2 should have two events (tag1==2) ",2, animal2.allEvents().size());
+		
+		//Create a third tag add two events to it then add it to animal2
+		logger.info("Create a third tag add events to it then add it to animal2");
+		Tag tag3 = TrackerFactory.eINSTANCE.createTag();
+		tag3.setId(AIN_3);
+		Event event5 = TrackerFactory.eINSTANCE.createReplacedTag();
+		tag3.getEvents().add(event5);
+		Event event6 = TrackerFactory.eINSTANCE.createTagApplied();
+		tag3.getEvents().add(event6);
+		animal2.getTags().add(tag3);
+		assertEquals("Animal2 should have four events (tag1==2, tag3==4) ",4, animal2.allEvents().size());
+		assertTrue("Animald2 should contain event5",animal2.allEvents().contains(event5));
+		assertTrue("Animald2 should Still contain event6",animal2.allEvents().contains(event6));
+		
 	}
+	
+	
+//	public void testListener() {
+//		Animal animal = getFixture();
+//		
+//		EList<Tag> tags = animal.getTags();
+//		
+//		
+//	}
 
 	/**
 	 * Tests the '{@link com.verticon.tracker.Animal#addTemplate(org.eclipse.emf.common.util.EList) <em>Add Template</em>}' operation.
