@@ -107,7 +107,7 @@ public class TransactionEventHandler implements EventHandler {
 		Collection<com.verticon.tracker.Event> events = 
 			copyValidEvents(templateAnimal.allEvents(), animal);
 		for (com.verticon.tracker.Event event : events) {
-			logger.debug("{} added {}, to animal {}, ", 
+			logger.info("{} added {}, to animal {}, ", 
 					new Object[]{
 						readerName,
 						simpleName( event),  
