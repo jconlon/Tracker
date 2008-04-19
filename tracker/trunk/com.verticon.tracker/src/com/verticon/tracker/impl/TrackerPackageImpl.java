@@ -2774,26 +2774,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createResource(eNS_URI);
 
 		// Create annotations
-		// http://www.eclipse.org/ocl/examples/OCL
-		createOCLAnnotations();
 		// http:///org/eclipse/emf/ecore/util/ExtendedMetaData
 		createExtendedMetaDataAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.eclipse.org/ocl/examples/OCL</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createOCLAnnotations() {
-		String source = "http://www.eclipse.org/ocl/examples/OCL";		
-		addAnnotation
-		  (premisesEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "body", "if (animals -> notEmpty()) and (animals.tags->notEmpty())\n\tthen  animals.tags.events\n\telse Set{}\nendif"
-		   });	
 	}
 
 	/**
@@ -2803,7 +2785,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";			
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
 		addAnnotation
 		  (premisesIdNumberEDataType, 
 		   source, 
