@@ -586,7 +586,6 @@ public class TrackerEditor
 	 * @generated
 	 */
 	protected void handleActivate() {
-		logger.debug("HandleActivate entered");
 		// Recompute the read only state.
 		//
 		if (editingDomain.getResourceToReadOnlyMap() != null) {
@@ -2307,6 +2306,7 @@ public class TrackerEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void dispose() {
 		updateProblemIndication = false;
 
