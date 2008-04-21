@@ -11,7 +11,7 @@ import com.verticon.tracker.fair.FairPackage;
 
 /**
  * @author jconlon
- * 
+ * @deprecated use EventHistoryContentProvider. 
  */
 public class FairTableViewerNotifier extends EventsTableViewerNotifier {
 

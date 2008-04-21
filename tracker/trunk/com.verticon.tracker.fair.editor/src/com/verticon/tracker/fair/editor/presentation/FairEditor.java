@@ -129,7 +129,6 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
-import com.verticon.tracker.editor.presentation.EventsTableViewerNotifier;
 import com.verticon.tracker.editor.presentation.IAnimalSelectionProvider;
 import com.verticon.tracker.editor.presentation.IEventSelectionProvider;
 import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
@@ -222,12 +221,6 @@ public class FairEditor
 	 * @generated NOT
 	 */
 	protected TableViewer eventsTableViewer;
-	
-	/**
-	 * Monitors Event changes to update the eventsTableViewer
-	 * @generated NOT
-	 */
-	private EventsTableViewerNotifier eventsTableViewerNotifier;
 	
 
 	/**
@@ -682,8 +675,6 @@ public class FairEditor
 		  }else{
 			  logger.error("Root object was not a Premises, but a  {}", rootObject.getClass().toString());
 		  }
-		  Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
-		  eventsTableViewerNotifier.setResource(resource);
 	}
 
   
@@ -1123,10 +1114,6 @@ public class FairEditor
 				svf.addViewer(exhibitsTableViewer);
 			}
 			
-			eventsTableViewerNotifier = new FairTableViewerNotifier( eventsTableViewer, exhibitsTableViewer);
-			Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
-			eventsTableViewerNotifier.setResource(resource);
-
 			setActivePage(0);
 		}
 
@@ -2331,19 +2318,11 @@ public class FairEditor
 	}
 
 	/**
-	 * @generated NOT
-	 */
-	@Override
-	public void dispose(){
-		eventsTableViewerNotifier.unset();
-		disposeGen();
-	}
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void disposeGen() {
+	public void dispose() {
 		updateProblemIndication = false;
 
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceChangeListener);
