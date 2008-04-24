@@ -40,13 +40,11 @@ public class EventHistoryContentProvider extends AdapterFactoryContentProvider i
 
 	public EventHistoryContentProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
-//		this.eventsTableViewer = eventsTableViewer;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object[] getElements(Object object) {
-		// return ((EList<Event>) object).toArray();
 		return ((Premises) object).eventHistory().toArray();
 	}
 
@@ -58,7 +56,7 @@ public class EventHistoryContentProvider extends AdapterFactoryContentProvider i
 		if(eventsTableViewer==null){
 			eventsTableViewer=(TableViewer)viewer;
 		}
-		// TODO Auto-generated method stub
+		
 		if(oldInput==null && newInput!=null){
 			Premises premisesInput = (Premises)newInput;
 			logger.debug(
@@ -79,7 +77,7 @@ public class EventHistoryContentProvider extends AdapterFactoryContentProvider i
 
 		}else if (oldInput!=null && newInput!=null){
 			Premises premisesInput = (Premises)newInput;
-			Premises premisesOldInput = (Premises)newInput;
+			Premises premisesOldInput = (Premises)oldInput;
 			logger.debug("Changed, viewer={} newInput={} oldInput={}",
 					new Object[] {viewer,premisesInput.getName(),premisesOldInput.getName()});
 			//Teardown the old
@@ -187,18 +185,14 @@ public class EventHistoryContentProvider extends AdapterFactoryContentProvider i
 	}
 
 	public Notifier getTarget() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public boolean isAdapterForType(Object type) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	public void setTarget(Notifier newTarget) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
