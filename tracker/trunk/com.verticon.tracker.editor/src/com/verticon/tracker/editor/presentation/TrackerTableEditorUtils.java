@@ -46,62 +46,74 @@ public class TrackerTableEditorUtils {
 		final TableColumn animalColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 220, true));
 		animalColumn.setText(getString("_UI_AnimalColumn_label"));
+		animalColumn.setMoveable(true);
 		
 		//Ain 
 		final TableColumn ainColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 150, true));
 		ainColumn.setText(getString("_UI_AinColumn_label"));
+		ainColumn.setMoveable(true);
 		
 		//Animal
 		final TableColumn animalTypeColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 50, true));
 		animalTypeColumn.setText(getString("_UI_AnimalColumn_label"));
+		animalTypeColumn.setMoveable(true);
 		
 		//Species
 		final TableColumn speciesColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 40, true));
 		speciesColumn.setText(getString("_UI_SpeciesColumn_label"));
+		speciesColumn.setMoveable(true);
 		
 		//Sex
 		final TableColumn sexColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 50, true));
 		sexColumn.setText(getString("_UI_SexColumn_label"));
+		sexColumn.setMoveable(true);
 		
 		//Breed 
 		final TableColumn breedColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 70, true));
 		breedColumn.setText(getString("_UI_BreedColumn_label"));
+		breedColumn.setMoveable(true);
 
 		//BirthDate
 		final TableColumn dDateColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 100, true));
 		dDateColumn.setText(getString("_UI_BirthDateColumn_label"));
-
+		dDateColumn.setMoveable(true);
+		
 		//Age
 		final TableColumn ageColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 80, true));
 		ageColumn.setText(getString("_UI_AgeColumn_label"));
-
+		ageColumn.setMoveable(true);
+		
 		//LastEventDateTime
 		final TableColumn lastEventDateTimeColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 200, true));
 		lastEventDateTimeColumn.setText(getString("_UI_LastEventColumn_label"));
+		lastEventDateTimeColumn.setMoveable(true);
 		
 		//Weight
 		final TableColumn weightColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 80, true));
 		weightColumn.setText("Weight");
+		weightColumn.setMoveable(true);
 		
 		//WeightGainPerDay
 		final TableColumn weightGainColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 80, true));
 		weightGainColumn.setText("WeightGainPerDay");
-
+		weightGainColumn.setMoveable(true);
+		
 		//Comments
 		final TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 200, true));
 		commentsColumn.setText(getString("_UI_CommentsColumn_label"));
-
+		commentsColumn.setMoveable(true);
+		
 		Listener sortListener = new Listener() {
 
 			public void handleEvent(org.eclipse.swt.widgets.Event e) {
@@ -211,28 +223,31 @@ public class TrackerTableEditorUtils {
 		final TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 170, true));
 		dateTimeColumn.setText(getString("_UI_DateTimeColumn_label"));
+		dateTimeColumn.setMoveable(true);
 		
 		//Event Type
 		final TableColumn eventNameColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 60, true));
 		eventNameColumn.setText(getString("_UI_EventNameColumn_label"));
-		
+		eventNameColumn.setMoveable(true);
 		
 		//Animal
 		final TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 230, true));
 		animalIDColumn.setText(getString("_UI_AnimalParentColumn_label"));
+		animalIDColumn.setMoveable(true);
 		
 		//Tag ID Number
 		final TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		tagIDColumn.setText(getString("_UI_TagColumn_label"));
-
+		tagIDColumn.setMoveable(true);
+		
 		//Comments
 		final TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 180, true));
 		eventCommentsColumn.setText(getString("_UI_CommentsColumn_label"));
-		
+		eventCommentsColumn.setMoveable(true);
 
 		Listener sortListener = new Listener() {
 
