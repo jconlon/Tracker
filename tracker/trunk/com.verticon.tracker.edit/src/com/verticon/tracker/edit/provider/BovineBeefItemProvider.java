@@ -85,14 +85,16 @@ public class BovineBeefItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_BovineBeef_beefBreed_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BovineBeef_beefBreed_feature", "_UI_BovineBeef_type"),
+				 getString("_UI_BovineBeef_beefBreed_description"),
 				 TrackerPackage.Literals.BOVINE_BEEF__BEEF_BREED,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+				 getString("_UI_GenealogyPropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
 	}
 
 	/**

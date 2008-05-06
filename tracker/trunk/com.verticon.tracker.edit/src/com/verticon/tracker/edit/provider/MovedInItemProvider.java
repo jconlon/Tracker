@@ -85,13 +85,13 @@ public class MovedInItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_MovedIn_sourcePin_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_MovedIn_sourcePin_feature", "_UI_MovedIn_type"),
+				 getString("_UI_MovedIn_sourcePin_description"),
 				 TrackerPackage.Literals.MOVED_IN__SOURCE_PIN,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_TransportedFromPropertyCategory"),
 				 null));
 	}
 

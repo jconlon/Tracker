@@ -98,7 +98,7 @@ public class ReplacedTagItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_OldTagPropertyCategory"),
 				 null));
 	}
 
@@ -114,13 +114,13 @@ public class ReplacedTagItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_ReplacedTag_usainNumberUsedForOldId_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ReplacedTag_usainNumberUsedForOldId_feature", "_UI_ReplacedTag_type"),
+				 getString("_UI_ReplacedTag_usainNumberUsedForOldId_description"),
 				 TrackerPackage.Literals.REPLACED_TAG__USAIN_NUMBER_USED_FOR_OLD_ID,
 				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
+				 getString("_UI_OldTagPropertyCategory"),
 				 null));
 	}
 

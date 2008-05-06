@@ -94,7 +94,7 @@ public class HerdTestItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
+				 getString("_UI_PregnancyPropertyCategory"),
 				 null));
 	}
 
@@ -116,7 +116,7 @@ public class HerdTestItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
+				 getString("_UI_BredDatePropertyCategory"),
 				 null));
 	}
 
@@ -138,7 +138,7 @@ public class HerdTestItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_BredDatePropertyCategory"),
 				 null));
 	}
 

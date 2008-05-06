@@ -94,7 +94,7 @@ public class BirthingItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
+				 getString("_UI_DetailsPropertyCategory"),
 				 null));
 	}
 
@@ -116,7 +116,7 @@ public class BirthingItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
+				 getString("_UI_DetailsPropertyCategory"),
 				 null));
 	}
 
@@ -138,7 +138,7 @@ public class BirthingItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_DetailsPropertyCategory"),
 				 null));
 	}
 

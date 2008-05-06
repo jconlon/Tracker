@@ -93,7 +93,7 @@ public class MastitisItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_DetailsPropertyCategory"),
 				 null));
 	}
 
@@ -115,7 +115,7 @@ public class MastitisItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_DetailsPropertyCategory"),
 				 null));
 	}
 

@@ -97,7 +97,7 @@ public class PremisesItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_IdentificationPropertyCategory"),
 				 null));
 	}
 
@@ -119,7 +119,7 @@ public class PremisesItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_ContactsPropertyCategory"),
 				 null));
 	}
 
@@ -141,8 +141,10 @@ public class PremisesItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+				 getString("_UI_IdentificationPropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
 	}
 
 	/**
@@ -163,7 +165,7 @@ public class PremisesItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_IdentificationPropertyCategory"),
 				 null));
 	}
 

@@ -107,14 +107,16 @@ public class AnimalItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Animal_birthDate_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_birthDate_feature", "_UI_Animal_type"),
+				 getString("_UI_Animal_birthDate_description"),
 				 TrackerPackage.Literals.ANIMAL__BIRTH_DATE,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+				 getString("_UI_AgePropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
 	}
 
 	/**
@@ -135,7 +137,7 @@ public class AnimalItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_GenderPropertyCategory"),
 				 null));
 	}
 
@@ -151,14 +153,16 @@ public class AnimalItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Animal_species_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_species_feature", "_UI_Animal_type"),
+				 getString("_UI_Animal_species_description"),
 				 TrackerPackage.Literals.ANIMAL__SPECIES,
 				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+				 getString("_UI_GenealogyPropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
 	}
 
 	/**
@@ -173,14 +177,16 @@ public class AnimalItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Animal_breed_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_breed_feature", "_UI_Animal_type"),
+				 getString("_UI_Animal_breed_description"),
 				 TrackerPackage.Literals.ANIMAL__BREED,
 				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+				 getString("_UI_CodesPropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
 	}
 
 	/**
@@ -195,14 +201,16 @@ public class AnimalItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Animal_age_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_age_feature", "_UI_Animal_type"),
+				 getString("_UI_Animal_age_description"),
 				 TrackerPackage.Literals.ANIMAL__AGE,
 				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+				 getString("_UI_AgePropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
 	}
 
 	/**
@@ -217,14 +225,16 @@ public class AnimalItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Animal_sexCode_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_sexCode_feature", "_UI_Animal_type"),
+				 getString("_UI_Animal_sexCode_description"),
 				 TrackerPackage.Literals.ANIMAL__SEX_CODE,
 				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+				 getString("_UI_CodesPropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
 	}
 
 	/**
@@ -239,14 +249,16 @@ public class AnimalItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Animal_speciesCode_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_speciesCode_feature", "_UI_Animal_type"),
+				 getString("_UI_Animal_speciesCode_description"),
 				 TrackerPackage.Literals.ANIMAL__SPECIES_CODE,
 				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+				 getString("_UI_CodesPropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
 	}
 
 /**
@@ -261,13 +273,13 @@ public class AnimalItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Animal_id_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_id_feature", "_UI_Animal_type"),
+				 getString("_UI_Animal_id_description"),
 				 TrackerPackage.Literals.ANIMAL__ID,
 				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_IdentificationPropertyCategory"),
 				 null));
 	}
 
@@ -305,17 +317,20 @@ public class AnimalItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Animal_lastEventDateTime_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_lastEventDateTime_feature", "_UI_Animal_type"),
+				 getString("_UI_Animal_lastEventDateTime_description"),
 				 TrackerPackage.Literals.ANIMAL__LAST_EVENT_DATE_TIME,
 				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+				 getString("_UI_EventStatisticsPropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
 	}
 
 /**
+ * 
 	 * This adds a property descriptor for the Dam feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -333,8 +348,10 @@ public class AnimalItemProvider
 	         false,
 	         true,
 	         null,
-	         null,
-	         null)
+	         getString("_UI_GenealogyPropertyCategory"),
+	         new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 })
 	       {
 	         public Collection<?> getChoiceOfValues(Object object)
 	         {
@@ -381,8 +398,10 @@ public class AnimalItemProvider
 	         false,
 	         true,
 	         null,
-	         null,
-	         null)
+	         getString("_UI_GenealogyPropertyCategory"),
+	         new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 })
 	       {
 	         public Collection<?> getChoiceOfValues(Object object)
 	         {
@@ -422,13 +441,13 @@ public class AnimalItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Animal_weight_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_weight_feature", "_UI_Animal_type"),
+				 getString("_UI_Animal_weight_description"),
 				 TrackerPackage.Literals.ANIMAL__WEIGHT,
-				 true,
+				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_WeightPropertyCategory"),
 				 null));
 	}
 
@@ -444,13 +463,13 @@ public class AnimalItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Animal_weightGainPerDay_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_weightGainPerDay_feature", "_UI_Animal_type"),
+				 getString("_UI_Animal_weightGainPerDay_description"),
 				 TrackerPackage.Literals.ANIMAL__WEIGHT_GAIN_PER_DAY,
 				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_WeightPropertyCategory"),
 				 null));
 	}
 

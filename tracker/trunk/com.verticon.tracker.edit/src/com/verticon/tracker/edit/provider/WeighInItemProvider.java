@@ -86,13 +86,13 @@ public class WeighInItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_WeighIn_weight_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_WeighIn_weight_feature", "_UI_WeighIn_type"),
+				 getString("_UI_WeighIn_weight_description"),
 				 TrackerPackage.Literals.WEIGH_IN__WEIGHT,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_WeightPropertyCategory"),
 				 null));
 	}
 
@@ -108,13 +108,13 @@ public class WeighInItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_WeighIn_weightGainPerDay_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_WeighIn_weightGainPerDay_feature", "_UI_WeighIn_type"),
+				 getString("_UI_WeighIn_weightGainPerDay_description"),
 				 TrackerPackage.Literals.WEIGH_IN__WEIGHT_GAIN_PER_DAY,
 				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_WeightPropertyCategory"),
 				 null));
 	}
 

@@ -92,7 +92,7 @@ public class BirthDefectItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
+				 getString("_UI_DetailsPropertyCategory"),
 				 null));
 	}
 
