@@ -157,6 +157,7 @@ import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelPr
  *   	 IAnimalSelectionProvider, ISelectionViewerProvider,  </li>
  *   <li>adds support for OCL Query View using an IQueryDataSetProvider adapter</li>
  * </ul>
+ * ---- ITabbedPropertySheetPageContributor
  * <!-- end-user-doc -->
  * @generated
  */
@@ -241,6 +242,12 @@ public class TrackerEditor
 	 * @generated
 	 */
 	protected PropertySheetPage propertySheetPage;
+	
+	
+	/**
+	 * Alternative to PropertySheetPage
+	 */
+//	protected PropertySheetForm propertySheetPage;
 
 	/**
 	 * This is the viewer that shadows the selection in the content outline.
@@ -1673,7 +1680,9 @@ public class TrackerEditor
 			return showOutlineView() ? getContentOutlinePage() : null;
 		}
 		else if (key.equals(IPropertySheetPage.class)) {
+//			return new TrackerEditorPropertySheetPage(this);
 			return getPropertySheetPage();
+//			return new PropertySheetForm();
 		}
 		else if (key.equals(IGotoMarker.class)) {
 			return this;
@@ -1819,10 +1828,11 @@ public class TrackerEditor
 	/**
 	 * This accesses a cached version of the property sheet.
 	 * <!-- begin-user-doc -->
+	 * Uses the generated propertySheetPage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IPropertySheetPage getPropertySheetPage() {
+	public IPropertySheetPage getPropertySheetPageGen() {
 		if (propertySheetPage == null) {
 			propertySheetPage =
 				new ExtendedPropertySheetPage(editingDomain) {
@@ -1843,6 +1853,49 @@ public class TrackerEditor
 
 		return propertySheetPage;
 	}
+
+	
+	/**
+	 * This accesses a cached version of the property sheet.
+	 * <!-- begin-user-doc -->
+	 * This uses the old PropertySheet. Commented code is 
+	 * experimentation with the new PropertySheetForm.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public IPropertySheetPage getPropertySheetPage() {
+//		return getPropertySheetForm();
+		return getPropertySheetPageGen(); 
+	}
+	
+
+//	/**
+//	 * @return propertySheetPage implemented with the new PropertySheetForm
+//	 */
+//	private IPropertySheetPage getPropertySheetForm() {
+//		if (propertySheetPage == null) {
+//			
+//			propertySheetPage =
+//				new PropertySheetForm(editingDomain){
+//					@Override
+//					public void setSelectionToViewer(List<?> selection) {
+//						TrackerEditor.this.setSelectionToViewer(selection);
+//						TrackerEditor.this.setFocus();
+//					}
+//
+//					@Override
+//					public void setActionBars(IActionBars actionBars) {
+//						super.setActionBars(actionBars);
+//						getActionBarContributor().shareGlobalActions(this, actionBars);
+//					}
+//				};
+//			propertySheetPage.setPropertySourceProvider(
+//					new AdapterFactoryItemDelegator(adapterFactory));
+//			
+//		}
+//
+//		return propertySheetPage;
+//	}
 
 	/**
 	 * This deals with how we want selection in the outliner to affect the other views.
@@ -2368,4 +2421,13 @@ public class TrackerEditor
 	public void setSelectionViewerSelection(ISelection selection) {
 		selectionViewer.setSelection(selection);
 	}
+
+	
+//	/**
+//	 * Added to support TabbedPropertiesSheets
+//	 * @generated NOT
+//	 */
+//	public String getContributorId() {
+//		return getSite().getId();
+//	}
 }
