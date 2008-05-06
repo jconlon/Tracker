@@ -13,10 +13,11 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.editor.util.ExportPremisesBase;
 import com.verticon.tracker.editor.util.PremisesProcessor;
-import com.verticon.tracker.export.wlic.ExportWlicLog;
 import com.verticon.tracker.export.wlic.actions.WlicPremisesProcessor;
 
 
@@ -29,6 +30,12 @@ import com.verticon.tracker.export.wlic.actions.WlicPremisesProcessor;
 public class ExportWlicWizard extends Wizard implements IExportWizard {
 
 	private static final String WIZARD_TITLE = "Export WLIC Report";
+	
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(ExportWlicWizard.class);
 
 	private SelectExportDateRangeWizardPage selectExportDateRangePage;
 	
@@ -75,7 +82,9 @@ public class ExportWlicWizard extends Wizard implements IExportWizard {
 				}
 			});
 		} catch (InvocationTargetException e) {
-			ExportWlicLog.logError("Failed to export "+premisesFile.getProjectRelativePath().toString(), e);
+			logger.error(
+					"Failed to export "+premisesFile.getProjectRelativePath().toString(), 
+					e);
 			selectExportDateRangePage.setErrorMessage("Failed to export "+premisesFile.getProjectRelativePath().toString()+": "+e.getCause());
 			return false;
 		} catch (InterruptedException e) {
@@ -119,7 +128,7 @@ public class ExportWlicWizard extends Wizard implements IExportWizard {
 	private void performOperation(IProgressMonitor monitor) throws IOException,
 			CoreException {
 		new Exporter(premisesProcessor).export(monitor);
-		ExportWlicLog.logInfo(premisesProcessor.getCompletionMessage());
+		logger.info(premisesProcessor.getCompletionMessage());
 	}
 
 	class Exporter extends ExportPremisesBase {
