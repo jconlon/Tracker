@@ -96,7 +96,7 @@ public class MilkTestItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
-				 null,
+				 getString("_UI_QuantityPropertyCategory"),
 				 null));
 	}
 
@@ -118,7 +118,7 @@ public class MilkTestItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
-				 null,
+				 getString("_UI_QualityPropertyCategory"),
 				 null));
 	}
 
@@ -140,7 +140,7 @@ public class MilkTestItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
-				 null,
+				 getString("_UI_QualityPropertyCategory"),
 				 null));
 	}
 
@@ -162,7 +162,7 @@ public class MilkTestItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
+				 getString("_UI_QualityPropertyCategory"),
 				 null));
 	}
 
@@ -184,7 +184,7 @@ public class MilkTestItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
-				 null,
+				 getString("_UI_QualityPropertyCategory"),
 				 null));
 	}
 

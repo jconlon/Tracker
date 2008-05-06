@@ -90,7 +90,7 @@ public class SightingItemProvider
 				 false,
 				 false,
 				 null,
-				 null,
+				 getString("_UI_LocationofAnimalPropertyCategory"),
 				 null));
 	}
 

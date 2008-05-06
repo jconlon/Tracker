@@ -367,21 +367,51 @@
     <genDataTypes ecoreDataType="tracker.ecore#//USPhoneNumber"/>
     <genDataTypes ecoreDataType="tracker.ecore#//URI"/>
     <genClasses provider="Stateful" ecoreClass="tracker.ecore#//Animal" labelFeature="#//tracker/Animal/species">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/birthDate"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/sex"/>
+      <genFeatures createChild="false" propertyCategory="Age" propertyDescription="Birth date of the animal"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/birthDate">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" propertyCategory="Gender" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/sex"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Animal/tags"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/species"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/breed"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/age"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/sexCode"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/speciesCode"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/id"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Genealogy"
+          propertyDescription="The species of the animal" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/species">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Codes"
+          propertyDescription="Code assigned to the breed of the animal" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/breed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Age"
+          propertyDescription="Age in days" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/age">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Codes"
+          propertyDescription="Code assigned to the sex of the animal" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/sexCode">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Codes"
+          propertyDescription="Code assigned to the species of the animal" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/speciesCode">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Identification"
+          propertyDescription="Current tag applied to the animal" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/comments"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/lastEventDateTime"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//Animal/dam"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//Animal/sire"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/weight"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/weightGainPerDay"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Event Statistics"
+          propertyDescription="Date of last event" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/lastEventDateTime">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertyCategory="Genealogy"
+          propertyDescription="" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//Animal/dam">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertyCategory="Genealogy"
+          propertyDescription="" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//Animal/sire">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Weight"
+          propertyDescription="Weight of the animal in pounds" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/weight"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Weight"
+          propertyDescription="Weight gain per day in pounds" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/weightGainPerDay"/>
       <genOperations ecoreOperation="tracker.ecore#//Animal/allEvents"/>
       <genOperations ecoreOperation="tracker.ecore#//Animal/addTemplate">
         <genParameters ecoreParameter="tracker.ecore#//Animal/addTemplate/eventTemplate"/>
@@ -389,30 +419,44 @@
       <genOperations ecoreOperation="tracker.ecore#//Animal/activeTag"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Tag">
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/usainNumberUsed"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Details"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/usainNumberUsed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Tag/events"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/id"/>
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/id"/>
     </genClasses>
     <genClasses image="false" ecoreClass="tracker.ecore#//Bovine"/>
     <genClasses image="false" ecoreClass="tracker.ecore#//Event">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/dateTime"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/eventCode"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/electronicallyRead"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/correction"/>
+      <genFeatures createChild="false" propertyCategory="Time of Event" propertyDescription=""
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Event/dateTime"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Codes"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Event/eventCode">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/electronicallyRead">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/correction">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/comments"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tracker.ecore#//Event/tag"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/id"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Identification"
+          propertyDescription="" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/id"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//TagAllocated"/>
     <genClasses ecoreClass="tracker.ecore#//Premises">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/premisesId"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/emailContact"/>
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/premisesId"/>
+      <genFeatures createChild="false" propertyCategory="Contacts" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/emailContact"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/animals"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/unAppliedTags"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/locations"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/uri"/>
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/uri">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/schema"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/name"/>
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/name"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/eventHistory"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/findAnimal">
         <genParameters ecoreParameter="tracker.ecore#//Premises/findAnimal/id"/>
@@ -423,34 +467,48 @@
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//BovineBeef">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//BovineBeef/beefBreed"/>
+      <genFeatures createChild="false" propertyCategory="Genealogy" propertyDescription="Breed of beef"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//BovineBeef/beefBreed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Ovine">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Ovine/sheepBreed"/>
+      <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//Ovine/sheepBreed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//BovineBison">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//BovineBison/buffaloBreed"/>
+      <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//BovineBison/buffaloBreed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
     </genClasses>
     <genClasses image="false" ecoreClass="tracker.ecore#//BovineDairy">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//BovineDairy/dairyBreed"/>
+      <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//BovineDairy/dairyBreed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//TagApplied"/>
     <genClasses ecoreClass="tracker.ecore#//MovedIn">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MovedIn/sourcePin"/>
+      <genFeatures createChild="false" propertyCategory="Transported From" propertyDescription="Premises ID that the animal came from"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//MovedIn/sourcePin"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//MovedOut">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MovedOut/destinationPin"/>
+      <genFeatures createChild="false" propertyCategory="Transported To" propertyDescription="Destination Premises ID to transport animal"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//MovedOut/destinationPin"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//LostTag"/>
     <genClasses ecoreClass="tracker.ecore#//ReplacedTag">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//ReplacedTag/oldId"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//ReplacedTag/usainNumberUsedForOldId"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//ReplacedTag/oldTag"/>
+      <genFeatures createChild="false" propertyCategory="Old Tag" ecoreFeature="ecore:EAttribute tracker.ecore#//ReplacedTag/oldId"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Old Tag"
+          propertyDescription="A USAIN number was assigned to old tag" ecoreFeature="ecore:EAttribute tracker.ecore#//ReplacedTag/usainNumberUsedForOldId"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Old Tag" propertySortChoices="true"
+          ecoreFeature="ecore:EReference tracker.ecore#//ReplacedTag/oldTag"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Imported"/>
     <genClasses ecoreClass="tracker.ecore#//Exported"/>
     <genClasses ecoreClass="tracker.ecore#//Sighting">
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference tracker.ecore#//Sighting/location"/>
+      <genFeatures createChild="false" propertyCategory="Location of Animal" propertyDescription=""
+          ecoreFeature="ecore:EReference tracker.ecore#//Sighting/location"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Slaughtered"/>
     <genClasses ecoreClass="tracker.ecore#//Died"/>
@@ -467,55 +525,67 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//FairRegistration/Exhibit"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//WeighIn">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//WeighIn/weight"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//WeighIn/weightGainPerDay"/>
+      <genFeatures createChild="false" propertyCategory="Weight" propertyDescription="Weight of animal in pounds"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//WeighIn/weight"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Weight"
+          propertyDescription="Weight gain per day in pounds" ecoreFeature="ecore:EAttribute tracker.ecore#//WeighIn/weightGainPerDay"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Swine">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Swine/swineBreed"/>
+      <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//Swine/swineBreed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Equine">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Equine/horseBreed"/>
+      <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//Equine/horseBreed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Caprine">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Caprine/goatBreed"/>
+      <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//Caprine/goatBreed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Location">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Location/name"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//MedicalCondition"/>
     <genClasses ecoreClass="tracker.ecore#//MedicalTreatment">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/product"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/manufacturer"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/lot"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/quantity"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/treatment"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/method"/>
+      <genFeatures createChild="false" propertyCategory="Medicine" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/name"/>
+      <genFeatures createChild="false" propertyCategory="Medicine" propertyDescription=""
+          ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/product"/>
+      <genFeatures createChild="false" propertyCategory="Medicine" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/manufacturer"/>
+      <genFeatures createChild="false" propertyCategory="Medicine" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/lot"/>
+      <genFeatures createChild="false" propertyCategory="Medicine" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/quantity"/>
+      <genFeatures createChild="false" propertyCategory="Treatment" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/treatment"/>
+      <genFeatures createChild="false" propertyCategory="Medicine" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/method"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Birthing">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Birthing/viability"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Birthing/assisted"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Birthing/difficulty"/>
+      <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute tracker.ecore#//Birthing/viability"/>
+      <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute tracker.ecore#//Birthing/assisted"/>
+      <genFeatures createChild="false" propertyCategory="Details" propertyDescription=""
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Birthing/difficulty"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Calving"/>
     <genClasses ecoreClass="tracker.ecore#//BirthDefect">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//BirthDefect/freemartin"/>
+      <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute tracker.ecore#//BirthDefect/freemartin"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Mastitis">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Mastitis/location"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Mastitis/origin"/>
+      <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute tracker.ecore#//Mastitis/location"/>
+      <genFeatures createChild="false" propertyCategory="Details" propertyDescription=""
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Mastitis/origin"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//MilkTest">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/poundsProduced"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/percentButterFat"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/percentProtein"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/somaticCellCounts"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/otherSolids"/>
+      <genFeatures createChild="false" propertyCategory="Quantity" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/poundsProduced"/>
+      <genFeatures createChild="false" propertyCategory="Quality" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/percentButterFat"/>
+      <genFeatures createChild="false" propertyCategory="Quality" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/percentProtein"/>
+      <genFeatures createChild="false" propertyCategory="Quality" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/somaticCellCounts"/>
+      <genFeatures createChild="false" propertyCategory="Quality" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/otherSolids"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//HerdTest">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/pregnant"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/daysSinceBredEstimate"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/bredDateEstimate"/>
+      <genFeatures createChild="false" propertyCategory="Pregnancy" ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/pregnant"/>
+      <genFeatures createChild="false" propertyCategory="Bred Date" ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/daysSinceBredEstimate"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Bred Date"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/bredDateEstimate"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//GenericEvent">
       <genFeatures property="Readonly" children="true" createChild="false" propertyDescription="Custom Attributes"

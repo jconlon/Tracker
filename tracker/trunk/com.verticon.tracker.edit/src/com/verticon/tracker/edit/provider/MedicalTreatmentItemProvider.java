@@ -98,7 +98,7 @@ public class MedicalTreatmentItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_MedicinePropertyCategory"),
 				 null));
 	}
 
@@ -120,7 +120,7 @@ public class MedicalTreatmentItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_MedicinePropertyCategory"),
 				 null));
 	}
 
@@ -142,7 +142,7 @@ public class MedicalTreatmentItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_MedicinePropertyCategory"),
 				 null));
 	}
 
@@ -164,7 +164,7 @@ public class MedicalTreatmentItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_MedicinePropertyCategory"),
 				 null));
 	}
 
@@ -186,7 +186,7 @@ public class MedicalTreatmentItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_MedicinePropertyCategory"),
 				 null));
 	}
 
@@ -208,7 +208,7 @@ public class MedicalTreatmentItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_TreatmentPropertyCategory"),
 				 null));
 	}
 
@@ -230,7 +230,7 @@ public class MedicalTreatmentItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_MedicinePropertyCategory"),
 				 null));
 	}
 

@@ -85,13 +85,13 @@ public class MovedOutItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_MovedOut_destinationPin_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_MovedOut_destinationPin_feature", "_UI_MovedOut_type"),
+				 getString("_UI_MovedOut_destinationPin_description"),
 				 TrackerPackage.Literals.MOVED_OUT__DESTINATION_PIN,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_TransportedToPropertyCategory"),
 				 null));
 	}
 
