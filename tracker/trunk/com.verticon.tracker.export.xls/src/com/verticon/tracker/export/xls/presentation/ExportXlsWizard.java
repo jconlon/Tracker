@@ -18,10 +18,11 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.editor.util.ExportPremisesBase;
 import com.verticon.tracker.editor.util.PremisesProcessor;
-import com.verticon.tracker.export.xls.ExportXlsLog;
 import com.verticon.tracker.export.xls.actions.FairRegistrationSummaryWorkSheetBuilder;
 import com.verticon.tracker.export.xls.actions.FairRegistrationWeighInWorkSheetBuilder;
 import com.verticon.tracker.export.xls.actions.FairRegistrationWorkSheetBuilder;
@@ -41,6 +42,12 @@ import com.verticon.tracker.export.xls.actions.XLSPremisesProcessor;
 public class ExportXlsWizard extends Wizard implements IExportWizard,
 		IExecutableExtension {
 
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(ExportXlsWizard.class);
+	
 	private static final String WIZARD_TITLE = "Export Spreadsheet Data";
 
 	private SelectExportTypeWizardPage selectExportTypePage;
@@ -140,7 +147,8 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 				}
 			});
 		} catch (InvocationTargetException e) {
-			ExportXlsLog.logError("Failed to export "+premisesFile.getProjectRelativePath().toString(), e);
+			logger.error("Failed to export "+premisesFile.getProjectRelativePath().toString(), 
+					e);
 			selectExportFilePathPage.setErrorMessage("Failed to export "+premisesFile.getProjectRelativePath().toString()+": "+e.getCause());
 			return false;
 		} catch (InterruptedException e) {
@@ -198,9 +206,11 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 	private void performOperation(IProgressMonitor monitor) throws IOException,
 			CoreException {
 		new Exporter().export(monitor);
-		ExportXlsLog.logInfo("Exported " +premisesFile.getProjectRelativePath().toString()+ 
-				" as "+ typeToExport + " data to "
-				+ destination );
+		logger.info("Exported {} as {} data to {}", 
+				new Object[] {
+				premisesFile.getProjectRelativePath(), 
+				typeToExport,
+				destination});
 	}
 
 	public ExportType getTypeToExport() {
