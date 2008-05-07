@@ -39,7 +39,11 @@ import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YoungPerson;
 import com.verticon.tracker.fair.YouthClub;
 
-
+/**
+ * 
+ * @author jconlon
+ *
+ */
 public class AddPeopleActionDelegate implements IObjectActionDelegate {
 
 	/**
