@@ -14,7 +14,7 @@
  *
  * $Id: Messages.java,v 1.1 2006/01/30 16:30:09 cdamus Exp $
  */
-package com.verticon.transaction.editor.internal.l10n;
+package com.verticon.tracker.transaction.editor.internal.l10n;
 
 import org.eclipse.osgi.util.NLS;
 
@@ -27,7 +27,7 @@ import org.eclipse.osgi.util.NLS;
 public class Messages
 	extends NLS {
 
-	private static final String BUNDLE_NAME = "com.verticon.transaction.editor.internal.l10n.Messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "com.verticon.tracker.transaction.editor.internal.l10n.Messages"; //$NON-NLS-1$
 
 	public static String readConsole_title;
 	public static String readJob_title;

@@ -14,7 +14,7 @@
  *
  * $Id: CommandStackExceptionHandler.java,v 1.1 2006/01/30 16:30:09 cdamus Exp $
  */
-package com.verticon.transaction.editor.domain;
+package com.verticon.tracker.transaction.editor.domain;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -26,7 +26,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
-import com.verticon.transaction.editor.internal.l10n.Messages;
+import com.verticon.tracker.transaction.editor.internal.l10n.Messages;
 
 /**
  * An exception handler for the shared editing domain's command stack, that
