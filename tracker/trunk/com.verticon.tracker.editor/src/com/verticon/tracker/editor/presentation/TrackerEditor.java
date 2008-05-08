@@ -1529,12 +1529,13 @@ public class TrackerEditor
 			}
 		};
 		viewerPane.createControl(getContainer());
-		eventsTableViewer = (TableViewer)viewerPane.getViewer();
+		eventsTableViewer = TrackerTableEditorUtils.createEventsTableViewer(
+				viewerPane);
 		
-		TrackerTableEditorUtils.createEventsTableViewer(
-				viewerPane, 
-				eventsTableViewer, 
-				adapterFactory);
+		eventsTableViewer.setContentProvider(new EventHistoryContentProvider(adapterFactory));
+		eventsTableViewer.setLabelProvider(
+				new AdapterFactoryLabelProvider(adapterFactory));
+		
 
 		Object rootObject = getRoot();
 		if (rootObject instanceof Premises){
@@ -1563,10 +1564,26 @@ public class TrackerEditor
 				}
 			};
 		viewerPane.createControl(getContainer());
-		animalsTableViewer = (TableViewer)viewerPane.getViewer();
+		animalsTableViewer = TrackerTableEditorUtils.createAnimalsTableViewer(viewerPane);
 
-		TrackerTableEditorUtils.createAnimalsTableViewer( viewerPane,  animalsTableViewer,  adapterFactory);
+		/**
+		 * The default ItemProvider returned via the adapterFactory
+		 * for Premises should be able to handle all notifications 
+		 * of animals being added or removed.
+		 * 
+		 * To get Animal Elements override the getElements method 
+		 */
+		tableViewer.setContentProvider(
+		        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
+		        {
+		          @Override
+		          public Object [] getElements(Object object)
+		          {
+		            return ((Premises)object).getAnimals().toArray();
+		          }
 
+		        });
+		tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
 		//14.2.2
 		  Object rootObject = getRoot();
 		  if (rootObject instanceof Premises)
