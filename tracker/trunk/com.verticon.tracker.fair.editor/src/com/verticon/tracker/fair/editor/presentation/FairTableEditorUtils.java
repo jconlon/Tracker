@@ -27,9 +27,8 @@ public class FairTableEditorUtils {
 	 * People Table Name, First Name, Last Name, Phone Number, Street, City,
 	 * State, Zip Code
 	 */
-	public static void createPeopleTableViewer(ViewerPane viewerPane,
-			final TableViewer tableViewer, AdapterFactory adapterFactory) {
-
+	public static TableViewer createPeopleTableViewer(ViewerPane viewerPane) {
+		final TableViewer tableViewer = (TableViewer)viewerPane.getViewer();
 		final Table table = tableViewer.getTable();
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
@@ -146,25 +145,7 @@ public class FairTableEditorUtils {
 		tableViewer.setColumnProperties(new String[] { "a", "b", "c", "d", "e",
 				"f", "g", "h", "i", "j"});
 
-		/**
-		 * The default ItemProvider returned via the adapterFactory for Premises
-		 * should be able to handle all notifications of animals being added or
-		 * removed.
-		 * 
-		 * To get People Elements override the getElements method
-		 */
-		tableViewer.setContentProvider(new AdapterFactoryContentProvider(
-				adapterFactory) {
-			@Override
-			public Object[] getElements(Object object) {
-				Fair fair = (Fair) object;
-
-				return fair.getPeople().toArray();
-			}
-
-		});
-		tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(
-				adapterFactory));
+		return tableViewer;
 
 	}
 
@@ -172,9 +153,8 @@ public class FairTableEditorUtils {
 	 * Exhibits Table Name, Number, Exhibitor, Animal, Lot, Class, Department,
 	 * Division, Comments
 	 */
-	public static void createExhibitsTableViewer(ViewerPane viewerPane,
-			final TableViewer tableViewer, AdapterFactory adapterFactory) {
-
+	public static TableViewer createExhibitsTableViewer(ViewerPane viewerPane) {
+		final TableViewer tableViewer = (TableViewer)viewerPane.getViewer();
 		final Table table = tableViewer.getTable();
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
@@ -292,11 +272,7 @@ public class FairTableEditorUtils {
 
 		tableViewer.setColumnProperties(new String[] { "a", "b", "c", "d", "e",
 				"f", "g", "h", "i" });
-		tableViewer.setContentProvider(new ExhibitsContentAdapter(adapterFactory));
-
-		
-		tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(
-				adapterFactory));
+		return tableViewer;
 
 	}
 
