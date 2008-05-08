@@ -33,9 +33,8 @@ public class TrackerTableEditorUtils {
 	/**
 	 * Animals Table
 	 */
-	public static void createAnimalsTableViewer(ViewerPane viewerPane, final TableViewer tableViewer,  AdapterFactory adapterFactory) {
-	
-
+	public static TableViewer createAnimalsTableViewer(ViewerPane viewerPane) {
+		final TableViewer tableViewer = (TableViewer)viewerPane.getViewer();
 		final Table table = tableViewer.getTable();
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
@@ -185,33 +184,17 @@ public class TrackerTableEditorUtils {
 		tableViewer.setColumnProperties(
 				new String [] {"a", "b", "c", "d", "e","f", "g", "h","i","j","k","l"});
 		
-		/**
-		 * The default ItemProvider returned via the adapterFactory
-		 * for Premises should be able to handle all notifications 
-		 * of animals being added or removed.
-		 * 
-		 * To get Animal Elements override the getElements method 
-		 */
-		tableViewer.setContentProvider(
-		        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
-		        {
-		          @Override
-		          public Object [] getElements(Object object)
-		          {
-		            return ((Premises)object).getAnimals().toArray();
-		          }
-
-		        });
-		tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+		return tableViewer;
 		
 	}
 
 	/**
 	 * Events Table
 	 */
-	public static void createEventsTableViewer(ViewerPane viewerPane, final TableViewer eventsTableViewer,  
-			AdapterFactory adapterFactory) {
+	public static TableViewer createEventsTableViewer(ViewerPane viewerPane) {
 	
+		final TableViewer eventsTableViewer = (TableViewer)viewerPane.getViewer();
+		
 		final Table table = eventsTableViewer.getTable();
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
@@ -312,9 +295,8 @@ public class TrackerTableEditorUtils {
 		 */
 		logger.debug("Setting up contentProvider for eventsTable = {}",eventsTableViewer);
 		
-		eventsTableViewer.setContentProvider(new EventHistoryContentProvider(adapterFactory));
-		eventsTableViewer.setLabelProvider(
-				new AdapterFactoryLabelProvider(adapterFactory));
+		
+		return eventsTableViewer;
 		}
 		
 		/**
