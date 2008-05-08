@@ -15,7 +15,7 @@
  * $Id: ResourceLoadedListener.java,v 1.2 2006/01/30 19:47:47 cdamus Exp $
  */
 
-package com.verticon.transaction.editor.presentation;
+package com.verticon.tracker.transaction.editor.domain;
 
 import java.util.Set;
 
@@ -48,7 +48,7 @@ import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
 public class ResourceLoadedListener extends DemultiplexingListener {
 	private static ResourceLoadedListener instance;
 	
-	private final Set<Resource> ignoredResources = new java.util.HashSet<Resource>();
+	protected final Set<Resource> ignoredResources = new java.util.HashSet<Resource>();
 	
 	/**
 	 * Initializes me with my filter.
@@ -155,7 +155,7 @@ public class ResourceLoadedListener extends DemultiplexingListener {
 	 * 
 	 * @return the active page, or <code>null</code> if none is active
 	 */
-	private IWorkbenchPage getActivePage() {
+	protected IWorkbenchPage getActivePage() {
 		IWorkbenchPage result = null;
 		
 		IWorkbench bench = PlatformUI.getWorkbench();

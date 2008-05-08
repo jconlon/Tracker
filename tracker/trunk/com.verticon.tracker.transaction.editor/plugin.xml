@@ -17,19 +17,19 @@
         name = "%_UI_EXTLibraryEditor_label"
         icon = "$nl$/icons/full/obj16/wksexview_obj.gif"
         extensions = "tracker, premises"
-        class = "com.verticon.transaction.editor.presentation.TrackerTransactionEditor" 
-        contributorClass="com.verticon.transaction.editor.presentation.TrackerActionBarContributor" >
+        class = "com.verticon.tracker.transaction.editor.presentation.TrackerTransactionEditor" 
+        contributorClass="com.verticon.tracker.transaction.editor.presentation.TrackerActionBarContributor" >
     </editor>
   </extension>
   <extension
         point="org.eclipse.emf.transaction.editingDomains">
      <editingDomain
-           factory="com.verticon.transaction.editor.domain.TrackerEditingDomainFactory"
+           factory="com.verticon.tracker.transaction.editor.domain.TrackerEditingDomainFactory"
            id="com.verticon.transaction.editor.TrackerEditingDomain"/>
   </extension>
   <extension
         point="org.eclipse.emf.transaction.listeners">
-     <listener class="com.verticon.transaction.editor.presentation.ResourceLoadedListener">
+     <listener class="com.verticon.tracker.transaction.editor.domain.ResourceLoadedListener">
         <editingDomain id="com.verticon.transaction.editor.TrackerEditingDomain"/>
      </listener>
   </extension>    

@@ -14,7 +14,7 @@
  *
  * $Id: EXTLibraryEditingDomainFactory.java,v 1.2 2006/01/30 19:47:47 cdamus Exp $
  */
-package com.verticon.transaction.editor.domain;
+package com.verticon.tracker.transaction.editor.domain;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.transaction.TransactionalCommandStack;
