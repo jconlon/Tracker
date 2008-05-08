@@ -61,7 +61,7 @@ public class FairActionBarContributor
 	 * 
 	 * @generated NOT
 	 */
-	ICustomActionBarContributor customActionBarContributor = new FairCustomActionBarContributor();
+	private ICustomActionBarContributor customActionBarContributor = new FairCustomActionBarContributor();
 	
 	/**
 	 * This keeps track of the active editor.
@@ -453,6 +453,10 @@ public class FairActionBarContributor
 	@Override
 	protected boolean removeAllReferencesOnDelete() {
 		return true;
+	}
+
+	public ICustomActionBarContributor getCustomActionBarContributor() {
+		return customActionBarContributor;
 	}
 
 }
