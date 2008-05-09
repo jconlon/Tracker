@@ -1573,7 +1573,7 @@ public class TrackerEditor
 		 * 
 		 * To get Animal Elements override the getElements method 
 		 */
-		tableViewer.setContentProvider(
+		animalsTableViewer.setContentProvider(
 		        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
 		        {
 		          @Override
@@ -1583,7 +1583,7 @@ public class TrackerEditor
 		          }
 
 		        });
-		tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
+		animalsTableViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
 		//14.2.2
 		  Object rootObject = getRoot();
 		  if (rootObject instanceof Premises)
