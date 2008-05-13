@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ Copyright 2007 Verticon, Inc. All Rights Reserved.
+
+ $Id$
+-->
+
+<plugin>
+
+
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "com.verticon.tracker.fair.transaction.editor.presentation.FairEditorID"
+        name = "%_UI_FairEditor_label"
+        icon = "icons/full/obj16/FairModelFile.gif"
+        extensions = "fair"
+        class = "com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditor" 
+        contributorClass="com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionActionBarContributor" >
+    </editor>
+  </extension>    
+  <!--
+   <extension
+        point="org.eclipse.emf.transaction.editingDomains">
+     <editingDomain
+           factory="com.verticon.tracker.fair.transaction.editor.domain.FairEditingDomainFactory"
+           id="com.verticon.tracker.fair.transaction.editor.presentation.FairEditingDomain"/>
+  </extension>
+  <extension
+        point="org.eclipse.emf.transaction.listeners">
+     <listener class="com.verticon.tracker.fair.transaction.editor.domain.FairResourceLoadedListener">
+        <editingDomain id="com.verticon.tracker.fair.transaction.editor.presentation.FairEditingDomain"/>
+     </listener>
+  </extension>  
+-->
+  
+</plugin>
