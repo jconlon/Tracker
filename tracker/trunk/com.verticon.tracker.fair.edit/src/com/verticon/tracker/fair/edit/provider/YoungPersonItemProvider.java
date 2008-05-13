@@ -91,7 +91,7 @@ public class YoungPersonItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
+				 getString("_UI_SponsorsPropertyCategory"),
 				 null));
 	}
 
@@ -113,7 +113,7 @@ public class YoungPersonItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
+				 getString("_UI_SponsorsPropertyCategory"),
 				 null));
 	}
 

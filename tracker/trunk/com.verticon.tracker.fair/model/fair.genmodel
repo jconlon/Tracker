@@ -24,12 +24,19 @@
       <genOperations ecoreOperation="fair.ecore#//Fair/exhibits"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//Exhibit">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/number"/>
+      <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/name"/>
+      <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/number">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/comments"/>
-      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//Exhibit/animal"/>
-      <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//Exhibit/exhibitor"/>
-      <genFeatures property="None" createChild="false" ecoreFeature="ecore:EReference fair.ecore#//Exhibit/lot"/>
+      <genFeatures createChild="false" propertyCategory="Animal and Exhibitor" propertySortChoices="true"
+          ecoreFeature="ecore:EReference fair.ecore#//Exhibit/animal"/>
+      <genFeatures createChild="false" propertyCategory="Animal and Exhibitor" propertySortChoices="true"
+          ecoreFeature="ecore:EReference fair.ecore#//Exhibit/exhibitor"/>
+      <genFeatures property="None" createChild="false" propertyCategory="Details"
+          ecoreFeature="ecore:EReference fair.ecore#//Exhibit/lot">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//YouthClub">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//YouthClub/name"/>
@@ -57,20 +64,25 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference fair.ecore#//Lot/class"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//Person">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/firstName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/lastName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/phone"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/street"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/city"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/state"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/zipCode"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/name"/>
+      <genFeatures createChild="false" propertyCategory="Name" ecoreFeature="ecore:EAttribute fair.ecore#//Person/firstName"/>
+      <genFeatures createChild="false" propertyCategory="Name" ecoreFeature="ecore:EAttribute fair.ecore#//Person/lastName"/>
+      <genFeatures createChild="false" propertyCategory="Contact" ecoreFeature="ecore:EAttribute fair.ecore#//Person/phone"/>
+      <genFeatures createChild="false" propertyCategory="Address" propertyDescription="Street Address of Person"
+          ecoreFeature="ecore:EAttribute fair.ecore#//Person/street"/>
+      <genFeatures createChild="false" propertyCategory="Address" propertyDescription=""
+          ecoreFeature="ecore:EAttribute fair.ecore#//Person/city"/>
+      <genFeatures createChild="false" propertyCategory="Address" ecoreFeature="ecore:EAttribute fair.ecore#//Person/state"/>
+      <genFeatures createChild="false" propertyCategory="Address" ecoreFeature="ecore:EAttribute fair.ecore#//Person/zipCode"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Name"
+          ecoreFeature="ecore:EAttribute fair.ecore#//Person/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/comments"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/pin"/>
+      <genFeatures createChild="false" propertyCategory="Premises of Person" ecoreFeature="ecore:EAttribute fair.ecore#//Person/pin"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//YoungPerson">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//YoungPerson/parents"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//YoungPerson/club"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Sponsors"
+          propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//YoungPerson/parents"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Sponsors"
+          propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//YoungPerson/club"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

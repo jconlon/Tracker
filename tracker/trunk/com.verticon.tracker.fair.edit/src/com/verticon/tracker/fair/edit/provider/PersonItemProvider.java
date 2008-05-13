@@ -99,7 +99,7 @@ public class PersonItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_NamePropertyCategory"),
 				 null));
 	}
 
@@ -121,7 +121,7 @@ public class PersonItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_NamePropertyCategory"),
 				 null));
 	}
 
@@ -143,7 +143,7 @@ public class PersonItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_ContactPropertyCategory"),
 				 null));
 	}
 
@@ -159,13 +159,13 @@ public class PersonItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Person_street_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Person_street_feature", "_UI_Person_type"),
+				 getString("_UI_Person_street_description"),
 				 FairPackage.Literals.PERSON__STREET,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_AddressPropertyCategory"),
 				 null));
 	}
 
@@ -187,7 +187,7 @@ public class PersonItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_AddressPropertyCategory"),
 				 null));
 	}
 
@@ -209,7 +209,7 @@ public class PersonItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_AddressPropertyCategory"),
 				 null));
 	}
 
@@ -231,7 +231,7 @@ public class PersonItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_AddressPropertyCategory"),
 				 null));
 	}
 
@@ -253,7 +253,7 @@ public class PersonItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_NamePropertyCategory"),
 				 null));
 	}
 
@@ -297,7 +297,7 @@ public class PersonItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_PremisesofPersonPropertyCategory"),
 				 null));
 	}
 
