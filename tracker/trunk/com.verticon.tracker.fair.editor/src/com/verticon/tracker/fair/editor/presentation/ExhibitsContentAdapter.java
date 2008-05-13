@@ -1,17 +1,50 @@
 package com.verticon.tracker.fair.editor.presentation;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.Viewer;
 
-import com.verticon.tracker.fair.Department;
-import com.verticon.tracker.fair.Division;
+import com.verticon.tracker.fair.AllExhibits;
 import com.verticon.tracker.fair.Fair;
-import com.verticon.tracker.fair.FairPackage;
-import com.verticon.tracker.fair.Lot;
+import com.verticon.tracker.fair.impl.FairAllExhibitsAdapter;
+import com.verticon.tracker.fair.util.AllExhibitsAdapterFactory;
 
-public class ExhibitsContentAdapter extends AdapterFactoryContentProvider {
+/**
+ * ContentProvider for the Exhibits TableViewer.  Works with the AllExhibits adapter
+ * on the Fair to add or delete events to/from a TableViewer.
+ * 
+ * Composed with a ExhibitsContentAdapterDelegate to share its functionality
+ * with the Transaction version of this class.
+ * 
+ * @see ExhibitsContentAdapterDelegate
+ * @see FairAllExhibitsAdapter
+ * @see AllExhibitsAdapterFactory
+ * @see AllExhibits
+ * @author jconlon
+ *
+ */
+public class ExhibitsContentAdapter extends AdapterFactoryContentProvider 
+	implements Adapter{
+	
+	/**
+	 * ExhibitsTable to notify
+	 */
+	private TableViewer eventsTableViewer = null;
+	
+	
+	private ExhibitsContentAdapterDelegate delegate = 
+		new ExhibitsContentAdapterDelegate(){
+			@Override
+			protected void refresh() {
+				((TableViewer)viewer).refresh();
+			}
+	};
+
+	
 	
 	public ExhibitsContentAdapter(AdapterFactory adapterFactory) {
 		super(adapterFactory);
@@ -22,6 +55,19 @@ public class ExhibitsContentAdapter extends AdapterFactoryContentProvider {
 		return ((Fair) object).exhibits().toArray();
 	}
 
+	@Override
+	public void inputChanged(Viewer viewer, Object oldInput,
+			Object newInput) {
+		
+		if(eventsTableViewer==null){
+			eventsTableViewer=(TableViewer)viewer;
+		}
+		delegate.inputChanged(viewer, oldInput, newInput);
+		super.inputChanged(viewer, oldInput, newInput);	
+	}
+	
+	
+	
 	/**
 	 * Exhibits table shows the hierarchy elements of the Exhibit. These
 	 * elements are shown in the table columns through ItemProviders so
@@ -37,110 +83,20 @@ public class ExhibitsContentAdapter extends AdapterFactoryContentProvider {
 	@Override
 	public void notifyChanged(Notification n) {
 		super.notifyChanged(n);
-		Object notifier = n.getNotifier();
-		// find out the type of the notifier which could be either 'Log'
-		// or 'Exhibit'
-
-		if (notifier instanceof Lot) {
-			handleLotNotification(n);
-		} else if (notifier instanceof com.verticon.tracker.fair.Class) {
-			handleClassNotification(n);
-		}else if (notifier instanceof Department) {
-			handleDepartmentNotification(n);
-		}else if (notifier instanceof Division) {
-			handleDivisionNotification(n);
-		}
-
-	}
-	
-	// output a message about changes to the Class Name
-	private void handleDepartmentNotification(Notification n) {
-		int featureID = n.getFeatureID(Lot.class);
-		if (featureID == FairPackage.DEPARTMENT__NAME) {
-			((TableViewer)viewer).refresh();
-			//Updating the table does nothing since the modeled objects do not change
-			//The hierarchy changes
-//			Department department = 
-//				(Department)n.getNotifier();
-//			EList<Exhibit> changedExhibits = new BasicEList<Exhibit>();
-//			for (com.verticon.tracker.fair.Class clss : department.getClasses()) {
-//					for (Lot lot : clss.getLots()) {
-//						changedExhibits.addAll(lot.getExhibits());
-//					}
-//			}
-//			logger.debug("Department name {} changed to {}, {} exhibits updated", 
-//					 new Object[] {
-//						n.getOldStringValue(),
-//						n.getNewStringValue(),
-//						changedExhibits.size()
-//						});
-		}
-		
-	}
-	
-	// output a message about changes to the Class Name
-	private void handleDivisionNotification(Notification n) {
-		int featureID = n.getFeatureID(Lot.class);
-		if (featureID == FairPackage.DIVISION__NAME) {
-			((TableViewer)viewer).refresh();
-		
-//			Division div = 
-//				(Division)n.getNotifier();
-//			EList<Exhibit> changedExhibits = new BasicEList<Exhibit>();
-//			for (Department department : div.getDepartments()) {
-//				for (com.verticon.tracker.fair.Class clss : department.getClasses()) {
-//					for (Lot lot : clss.getLots()) {
-//						changedExhibits.addAll(lot.getExhibits());
-//					}
-//				}
-//				
-//			}
-//			logger.debug("Division name {} changed to {}, {} exhibits updated", 
-//					 new Object[] {
-//						n.getOldStringValue(),
-//						n.getNewStringValue(),
-//						changedExhibits.size()
-//						});
-		}
+		delegate.notifyChanged(n);
 	}
 	
 
-	// output a message about changes to the Class Name
-	private void handleClassNotification(Notification n) {
-		int featureID = n.getFeatureID(Lot.class);
-		if (featureID == FairPackage.CLASS__NAME) {
-			((TableViewer)viewer).refresh();
-//			com.verticon.tracker.fair.Class clss = 
-//				(com.verticon.tracker.fair.Class)n.getNotifier();
-//			EList<Exhibit> changedExhibits = new BasicEList<Exhibit>();
-//			for (Lot lot : clss.getLots()) {
-//				changedExhibits.addAll(lot.getExhibits());
-//			}
-//			tableViewer.update(changedExhibits, null);
-//			logger.debug("Class name {} changed to {}, {} exhibits updated", 
-//					 new Object[] {
-//						n.getOldStringValue(),
-//						n.getNewStringValue(),
-//						changedExhibits.size()
-//						});
-		}
+	public Notifier getTarget() {
+		return delegate.getTarget();
 	}
 
-	// output a message about new exhibits
-	private void handleLotNotification(Notification n) {
-		int featureID = n.getFeatureID(Lot.class);
-		if (featureID == FairPackage.LOT__NAME) {
-			((TableViewer)viewer).refresh();
-//			Lot lot = (Lot) n.getNotifier();
-//			EList<Exhibit> changedExhibits = lot.getExhibits();
-//			tableViewer.update(changedExhibits, null); does nothing
-//			logger.debug("Lot name {} changed to {}, {} exhibits updated", 
-//					 new Object[] {
-//						n.getOldStringValue(),
-//						n.getNewStringValue(),
-//						changedExhibits.size()
-//						});
-		}
+	public boolean isAdapterForType(Object type) {
+		return delegate.isAdapterForType(type);
+	}
+
+	public void setTarget(Notifier newTarget) {
+		delegate.setTarget(newTarget);
 	}
 
 

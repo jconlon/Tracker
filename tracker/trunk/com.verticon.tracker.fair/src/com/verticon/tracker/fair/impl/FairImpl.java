@@ -9,29 +9,24 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.ParserException;
-import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.OCL;
-import org.eclipse.ocl.expressions.OCLExpression;
 
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.fair.AllExhibits;
 import com.verticon.tracker.fair.Division;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YouthClub;
+import com.verticon.tracker.fair.util.AllExhibitsAdapterFactory;
 
 /**
  * <!-- begin-user-doc -->
@@ -117,15 +112,6 @@ public class FairImpl extends EObjectImpl implements Fair {
 	 * @ordered
 	 */
 	protected EList<Person> people;
-
-	/**
-	 * The parsed OCL expression for the body of the '{@link #exhibits <em>Exhibits</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #exhibits
-	 * @generated
-	 */
-	private static OCLExpression<EClassifier> exhibitsBodyOCL;
 
 	private static final String OCL_ANNOTATION_SOURCE = "http://www.eclipse.org/ocl/examples/OCL";
 
@@ -247,30 +233,25 @@ public class FairImpl extends EObjectImpl implements Fair {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Hand implemented for speed (versus OCL??) because this method is used to generate 
+	 * all the exhibits for the Fair. Similar pattern as Premises.eventHistory().
+	 * Originally generated with the following OCL:
+	 * if (divisions -> notEmpty())  and (divisions.departments->notEmpty())  
+	 * and  (divisions.departments.classes->notEmpty()) and (divisions.departments.classes.lots->notEmpty()) 
+	 * and (divisions.departments.classes.lots.exhibits -> notEmpty()) 
+	 * then  divisions.departments.classes.lots.exhibits
+	 * else Set{}
+	 * endif
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EList<Exhibit> exhibits() {
-		if (exhibitsBodyOCL == null) {
-			EOperation eOperation = FairPackage.Literals.FAIR.getEOperations().get(0);
-			OCL.Helper helper = OCL_ENV.createOCLHelper();
-			helper.setOperationContext(FairPackage.Literals.FAIR, eOperation);
-			EAnnotation ocl = eOperation.getEAnnotation(OCL_ANNOTATION_SOURCE);
-			String body = ocl.getDetails().get("body");
-			
-			try {
-				exhibitsBodyOCL = helper.createQuery(body);
-			} catch (ParserException e) {
-				throw new UnsupportedOperationException(e.getLocalizedMessage());
-			}
+		AllExhibits allExhibits = (AllExhibits) AllExhibitsAdapterFactory.INSTANCE.adapt(
+				this, AllExhibits.class);
+		if(allExhibits ==null){
+			throw new IllegalStateException("No exhibits for fair");
 		}
-		
-		Query<EClassifier, ?, ?> query = OCL_ENV.createQuery(exhibitsBodyOCL);
-	
-		@SuppressWarnings("unchecked")
-		Collection<Exhibit> result = (Collection<Exhibit>) query.evaluate(this);
-		return new BasicEList.UnmodifiableEList<Exhibit>(result.size(), result.toArray());
-	
+		return allExhibits.exhibits();
 	}
 
 	/**

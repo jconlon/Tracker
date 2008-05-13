@@ -4,11 +4,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fair"
     nsURI="http://www.verticon.com/ns/tracker/fair/0.1.0" nsPrefix="com.verticon.tracker.fair">
   <eClassifiers xsi:type="ecore:EClass" name="Fair">
-    <eOperations name="exhibits" upperBound="-1" eType="#//Exhibit">
-      <eAnnotations source="http://www.eclipse.org/ocl/examples/OCL">
-        <details key="body" value="if (divisions -> notEmpty())  and (divisions.departments->notEmpty())  and  (divisions.departments.classes->notEmpty()) and (divisions.departments.classes.lots->notEmpty()) and (divisions.departments.classes.lots.exhibits -> notEmpty()) &#xA;&#x9;then  divisions.departments.classes.lots.exhibits&#xA;&#x9;else Set{}&#xA;endif&#xA;"/>
-      </eAnnotations>
-    </eOperations>
+    <eOperations name="exhibits" upperBound="-1" eType="#//Exhibit"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="youthClubs" upperBound="-1"
         eType="#//YouthClub" containment="true"/>
