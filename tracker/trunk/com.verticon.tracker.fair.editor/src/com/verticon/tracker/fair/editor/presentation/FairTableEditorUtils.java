@@ -3,10 +3,7 @@
  */
 package com.verticon.tracker.fair.editor.presentation;
 
-import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.ui.ViewerPane;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
@@ -14,8 +11,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
-
-import com.verticon.tracker.fair.Fair;
 
 /**
  * @author jconlon
