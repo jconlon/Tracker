@@ -36,6 +36,8 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
 
@@ -46,6 +48,11 @@ import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
  * @author Christian W. Damus (cdamus)
  */
 public class ResourceLoadedListener extends DemultiplexingListener {
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(ResourceLoadedListener.class);
 	private static ResourceLoadedListener instance;
 	
 	protected final Set<Resource> ignoredResources = new java.util.HashSet<Resource>();
@@ -92,7 +99,7 @@ public class ResourceLoadedListener extends DemultiplexingListener {
 	protected void handleNotification(TransactionalEditingDomain domain, Notification notification) {
 		if (ignoredResources.contains(notification.getNotifier())) {
 			// skip any resource that we are supposed to ignore
-//			System.out.println("Skipping.");
+			logger.info("Skipping.");
 			return;
 		}
 	
@@ -109,6 +116,7 @@ public class ResourceLoadedListener extends DemultiplexingListener {
 							
 							if (page != null) {
 								IEditorPart activeEditor = page.getActiveEditor();
+								logger.info("Opening "+file+ " with "+this);
 								
 								page.openEditor(
 										new FileEditorInput(file),
@@ -136,6 +144,7 @@ public class ResourceLoadedListener extends DemultiplexingListener {
 				Display.getDefault().asyncExec(new Runnable() {
 					public void run() {
 						IWorkbenchPage page = getActivePage();
+						logger.info("Closing "+file+ " with "+this);
 						
 						if (page != null) {
 							IEditorReference[] editors = page.findEditors(
