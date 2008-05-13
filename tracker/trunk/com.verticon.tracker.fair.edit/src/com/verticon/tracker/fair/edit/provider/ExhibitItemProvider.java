@@ -99,7 +99,7 @@ public class ExhibitItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_DetailsPropertyCategory"),
 				 null));
 	}
 
@@ -121,8 +121,10 @@ public class ExhibitItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
+				 getString("_UI_DetailsPropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
 	}
 
 	/**
@@ -165,7 +167,7 @@ public class ExhibitItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
+				 getString("_UI_AnimalandExhibitorPropertyCategory"),
 				 null));
 	}
 
@@ -187,7 +189,7 @@ public class ExhibitItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
+				 getString("_UI_AnimalandExhibitorPropertyCategory"),
 				 null));
 	}
 
