@@ -20,7 +20,13 @@ import com.verticon.tracker.util.EventHistoryAdapterFactory;
 /**
  * ContentProvider for the Events TableViewer.  Works with the EventHistory adapter
  * on the Premises to add or delete events from a TableViewer.
- * s
+ * 
+ * Note: this class is a copy of the EventHistoryContentProvider. It is
+ * different than that class only because it extends TransactionalAdapterFactoryContentProvider
+ * instead of AdapterFactoryContentProvider.  This is the same issue faced with 
+ * TransactionalExhibitsContentAdapter.  That class solved code copying problem with a 
+ * delegate. 
+ * TODO Consolidate in a similar way as com.verticon.tracker.fair.transaction.editor.presentation.TransactionalExhibitsContentAdapter
  * @see AnimalEventHistoryAdapter
  * @see PremisesEventHistoryAdapter
  * @see EventHistoryAdapterFactory
