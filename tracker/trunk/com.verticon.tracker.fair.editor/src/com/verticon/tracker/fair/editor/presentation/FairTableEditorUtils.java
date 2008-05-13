@@ -34,51 +34,62 @@ public class FairTableEditorUtils {
 		final TableColumn nameColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 200, true));
 		nameColumn.setText("Name");
+		nameColumn.setMoveable(true);
 
 		// First Name
 		final TableColumn firstNameColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 100, true));
 		firstNameColumn.setText("First Name");
+		firstNameColumn.setMoveable(true);
 
 		// Last Name
 		final TableColumn lastNameTypeColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 100, true));
 		lastNameTypeColumn.setText("Last Name");
+		lastNameTypeColumn.setMoveable(true);
 
 		// Phone Number
 		final TableColumn phoneColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 100, true));
 		phoneColumn.setText("Phone Number");
+		phoneColumn.setMoveable(true);
 
 		// Street
 		final TableColumn streetColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 200, true));
 		streetColumn.setText("Street");
+		streetColumn.setMoveable(true);
 
 		// City
 		final TableColumn cityColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 80, true));
 		cityColumn.setText("City");
+		cityColumn.setMoveable(true);
+		
 
 		// State
 		final TableColumn stateColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 20, true));
 		stateColumn.setText("State");
+		stateColumn.setMoveable(true);
 
 		// Zip Code
 		final TableColumn zipColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 20, true));
 		zipColumn.setText("Zip Code");
+		zipColumn.setMoveable(true);
 		
 		// Zip Code
 		final TableColumn pinColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 20, true));
 		pinColumn.setText("Pin");
+		pinColumn.setMoveable(true);
 		
 		// Comments
 		final TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 120, true));
 		commentsColumn.setText("Comments");
+		commentsColumn.setMoveable(true);
 
 		Listener sortListener = new Listener() {
 
@@ -160,46 +171,55 @@ public class FairTableEditorUtils {
 		final TableColumn nameColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 100, true));
 		nameColumn.setText("Exhibit");
+		nameColumn.setMoveable(true);
 
 		// Number
 		final TableColumn numberColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 30, true));
 		numberColumn.setText("Number");
+		numberColumn.setMoveable(true);
 
 		// Exhibitor
 		final TableColumn exhibitorColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		exhibitorColumn.setText("Exhibitor");
+		exhibitorColumn.setMoveable(true);
 
 		// Animal
 		final TableColumn animalColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 200, true));
 		animalColumn.setText("Animal");
+		animalColumn.setMoveable(true);
 
 		// Lot
 		final TableColumn lotColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		lotColumn.setText("Lot");
+		lotColumn.setMoveable(true);
 
 		// Class
 		final TableColumn clazzColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		clazzColumn.setText("Class");
+		clazzColumn.setMoveable(true);
 
 		// Department
 		final TableColumn departmentColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		departmentColumn.setText("Department");
+		departmentColumn.setMoveable(true);
 
 		// Division
 		final TableColumn divisionColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		divisionColumn.setText("Division");
+		divisionColumn.setMoveable(true);
 
 		// Comments
 		final TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 300, true));
 		commentsColumn.setText("Comments");
+		commentsColumn.setMoveable(true);
 
 		Listener sortListener = new Listener() {
 
