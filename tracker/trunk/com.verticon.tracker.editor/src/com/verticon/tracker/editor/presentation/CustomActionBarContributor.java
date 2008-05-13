@@ -45,7 +45,7 @@ public class CustomActionBarContributor implements ICustomActionBarContributor {
 	 * 
 	 * @generated NOT
 	 */
-	private static ImageDescriptor collapseImage = AbstractUIPlugin.imageDescriptorFromPlugin(
+	protected static ImageDescriptor collapseImage = AbstractUIPlugin.imageDescriptorFromPlugin(
 	    		"com.verticon.tracker.editor", "icons/full/elcl16/collapseall.gif");
 	
 	/**
@@ -53,7 +53,7 @@ public class CustomActionBarContributor implements ICustomActionBarContributor {
 	 * 
 	 * @generated NOT
 	 */
-	private static ImageDescriptor expandImage = AbstractUIPlugin.imageDescriptorFromPlugin(
+	protected static ImageDescriptor expandImage = AbstractUIPlugin.imageDescriptorFromPlugin(
     		"com.verticon.tracker.editor", "icons/full/elcl16/expandall.gif");
 	
 	
@@ -62,7 +62,7 @@ public class CustomActionBarContributor implements ICustomActionBarContributor {
 	 * 
 	 * @generated NOT
 	 */
-	private static ImageDescriptor selectFromAnimalsImage = AbstractUIPlugin.imageDescriptorFromPlugin(
+	protected static ImageDescriptor selectFromAnimalsImage = AbstractUIPlugin.imageDescriptorFromPlugin(
     		"com.verticon.tracker.editor", "icons/full/elcl16/selectFromAnimals.gif");
 	
 	
@@ -71,7 +71,7 @@ public class CustomActionBarContributor implements ICustomActionBarContributor {
 	 * 
 	 * @generated NOT
 	 */
-	private static ImageDescriptor selectFromEventsImage = AbstractUIPlugin.imageDescriptorFromPlugin(
+	protected static ImageDescriptor selectFromEventsImage = AbstractUIPlugin.imageDescriptorFromPlugin(
     		"com.verticon.tracker.editor", "icons/full/elcl16/selectFromEvents.gif");
 	    
 	

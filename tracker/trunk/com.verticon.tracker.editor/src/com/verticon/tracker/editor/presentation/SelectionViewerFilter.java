@@ -54,7 +54,7 @@ public class SelectionViewerFilter extends ViewerFilterAction {
     		"com.verticon.tracker.editor", "icons/full/elcl16/targetOff.gif");
 	  
 	
-	private StructuredViewer mainViewer;
+	protected StructuredViewer mainViewer;
 	
 	private boolean targetingEnabled = false;
 
