@@ -1141,7 +1141,7 @@ public class FairEditor
 	/**
 	 * ListViewer
 	 */
-	private void createListViewer(String pageName) {
+	protected void createListViewer(String pageName) {
 		ViewerPane viewerPane =
 			new ViewerPane(getSite().getPage(), FairEditor.this) {
 				public Viewer createViewer(Composite composite) {
@@ -1173,7 +1173,7 @@ public class FairEditor
 	 * SelectionTreeViewer
 	 *
 	 */
-	private void createSelectionTreeViewer(String pageName ) {
+	protected void createSelectionTreeViewer(String pageName ) {
 		ViewerPane viewerPane =
 			new ViewerPane(getSite().getPage(), FairEditor.this) {
 				public Viewer createViewer(Composite composite) {
@@ -1222,7 +1222,7 @@ public class FairEditor
 	/**
 	 * Events Table
 	 */
-	private void createEventsTableViewer(String tableName) {
+	protected void createEventsTableViewer(String tableName) {
 		ViewerPane viewerPane =
 			new ViewerPane(getSite().getPage(), FairEditor.this) {
 			public Viewer createViewer(Composite composite) {
@@ -1266,7 +1266,7 @@ public class FairEditor
 	 * References fields animalsTableViewer, 
 	 * @param tableName 
 	 */
-	private void createAnimalsTableViewer(String tableName) {
+	protected void createAnimalsTableViewer(String tableName) {
 		ViewerPane viewerPane =
 			new ViewerPane(getSite().getPage(), FairEditor.this) {
 			public Viewer createViewer(Composite composite) {
@@ -1324,7 +1324,7 @@ public class FairEditor
 	 * References fields exhibitsTableViewer, 
 	 * @param tableName 
 	 */
-	private void createExhibitsTableViewer(String tableName) {
+	protected void createExhibitsTableViewer(String tableName) {
 		ViewerPane viewerPane =
 			new ViewerPane(getSite().getPage(), FairEditor.this) {
 			public Viewer createViewer(Composite composite) {
@@ -1366,7 +1366,7 @@ public class FairEditor
 	 * References fields peopleTableViewer, 
 	 * @param tableName 
 	 */
-	private void createPeopleTableViewer(String tableName) {
+	protected void createPeopleTableViewer(String tableName) {
 		ViewerPane viewerPane =
 			new ViewerPane(getSite().getPage(), FairEditor.this) {
 			public Viewer createViewer(Composite composite) {
