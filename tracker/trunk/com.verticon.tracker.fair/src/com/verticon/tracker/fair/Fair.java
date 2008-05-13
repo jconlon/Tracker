@@ -142,7 +142,7 @@ public interface Fair extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/ocl/examples/OCL body='if (divisions -> notEmpty())  and (divisions.departments->notEmpty())  and  (divisions.departments.classes->notEmpty()) and (divisions.departments.classes.lots->notEmpty()) and (divisions.departments.classes.lots.exhibits -> notEmpty()) \n\tthen  divisions.departments.classes.lots.exhibits\n\telse Set{}\nendif\n'"
+	 * @model
 	 * @generated
 	 */
 	EList<Exhibit> exhibits();

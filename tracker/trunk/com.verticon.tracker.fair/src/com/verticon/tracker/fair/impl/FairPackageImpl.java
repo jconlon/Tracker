@@ -814,26 +814,6 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 
 		// Create resource
 		createResource(eNS_URI);
-
-		// Create annotations
-		// http://www.eclipse.org/ocl/examples/OCL
-		createOCLAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.eclipse.org/ocl/examples/OCL</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createOCLAnnotations() {
-		String source = "http://www.eclipse.org/ocl/examples/OCL";		
-		addAnnotation
-		  (fairEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "body", "if (divisions -> notEmpty())  and (divisions.departments->notEmpty())  and  (divisions.departments.classes->notEmpty()) and (divisions.departments.classes.lots->notEmpty()) and (divisions.departments.classes.lots.exhibits -> notEmpty()) \n\tthen  divisions.departments.classes.lots.exhibits\n\telse Set{}\nendif\n"
-		   });
 	}
 
 } //FairPackageImpl

@@ -16,3 +16,4 @@ Eclipse-LazyStart: true
 Export-Package: com.verticon.tracker.fair,
  com.verticon.tracker.fair.impl,
  com.verticon.tracker.fair.util
+Import-Package: org.slf4j;version="1.5.0"
