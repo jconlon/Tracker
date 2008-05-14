@@ -218,7 +218,7 @@ public class FairTableEditorUtils {
 		// Set the cell modifier for the viewer
 		tableViewer.setCellModifier(new ICellModifier(){
 
-			//TODO Issue 217
+		   //TODO Issue 217
 			public boolean canModify(Object element, String property) {
 				// Find the index of the column
 //				if(PeopleColumn.COMMENTS.property.equals(property)){
