@@ -14,7 +14,7 @@ import com.verticon.tracker.GenericEvent;
 public class EventAttributeConstraint extends AbstractModelConstraint {
 
 	public EventAttributeConstraint() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**
