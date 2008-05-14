@@ -13,10 +13,6 @@ import com.verticon.tracker.GenericEvent;
 
 public class EventAttributeConstraint extends AbstractModelConstraint {
 
-	public EventAttributeConstraint() {
-		
-	}
-
 	/**
 	 * Messages must return 4 variables.
 	 * 
