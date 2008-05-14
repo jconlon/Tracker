@@ -3,14 +3,25 @@
  */
 package com.verticon.tracker.fair.editor.presentation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.ui.ViewerPane;
+import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ColumnWeightData;
+import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
+
+import com.verticon.tracker.fair.Person;
+
 
 /**
  * @author jconlon
@@ -19,11 +30,43 @@ import org.eclipse.swt.widgets.TableColumn;
 public class FairTableEditorUtils {
 
 	/**
+	 * Name, First Name, Last Name, Phone Number, Street, City,
+	 * State, Zip Code
+	 * @author jconlon
+	 *
+	 */
+	public enum PeopleColumn {
+		NAME("name"), FIRST_NAME("firstName"),LAST_NAME("lastName"), PHONE("phone"), 
+		STREET("street"), CITY("city"), STATE("state"), ZIP("zip"), 
+		PIN("pin"), COMMENTS("comments");
+
+		String property;
+		static List<String> columnNames;
+		static String[] colNames;
+
+		PeopleColumn(String property) {
+			this.property = property;
+		}
+
+		static {
+			columnNames = new ArrayList<String>();
+			for (PeopleColumn col : PeopleColumn.values()) {
+				columnNames.add(col.property);
+			}
+
+			colNames = new String[columnNames.size()];
+			columnNames.toArray(colNames);
+		}
+
+	}
+	
+	/**
 	 * People Table Name, First Name, Last Name, Phone Number, Street, City,
 	 * State, Zip Code
 	 */
 	public static TableViewer createPeopleTableViewer(ViewerPane viewerPane) {
 		final TableViewer tableViewer = (TableViewer)viewerPane.getViewer();
+		
 		final Table table = tableViewer.getTable();
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
@@ -79,17 +122,19 @@ public class FairTableEditorUtils {
 		zipColumn.setText("Zip Code");
 		zipColumn.setMoveable(true);
 		
-		// Zip Code
+		//Pin
 		final TableColumn pinColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 20, true));
 		pinColumn.setText("Pin");
 		pinColumn.setMoveable(true);
 		
 		// Comments
-		final TableColumn commentsColumn = new TableColumn(table, SWT.NONE);
+		final TableColumn commentsColumn = new TableColumn(table, SWT.LEFT,9);
 		layout.addColumnData(new ColumnWeightData(2, 120, true));
 		commentsColumn.setText("Comments");
 		commentsColumn.setMoveable(true);
+		
+		
 
 		Listener sortListener = new Listener() {
 
@@ -148,8 +193,73 @@ public class FairTableEditorUtils {
 		pinColumn.addListener(SWT.Selection, sortListener);
 		commentsColumn.addListener(SWT.Selection, sortListener);
 
-		tableViewer.setColumnProperties(new String[] { "a", "b", "c", "d", "e",
-				"f", "g", "h", "i", "j"});
+		tableViewer.setColumnProperties(PeopleColumn.colNames);
+		
+		// Create the cell editors
+	    CellEditor[] editors = new CellEditor[PeopleColumn.colNames.length];
+			
+	     // Column 1 : Name
+	    TextCellEditor textEditor = new TextCellEditor(table);
+		((Text) textEditor.getControl()).setTextLimit(60);
+		editors[0] = textEditor;
+		
+		// Column 2 : First Name
+	    textEditor = new TextCellEditor(table);
+		((Text) textEditor.getControl()).setTextLimit(60);
+		editors[1] = textEditor;
+		
+		// Column 10 : Name (Free text)
+	    textEditor = new TextCellEditor(table);
+		((Text) textEditor.getControl()).setTextLimit(60);
+		editors[9] = textEditor;
+
+		// Assign the cell editors to the viewer
+		tableViewer.setCellEditors(editors);
+		// Set the cell modifier for the viewer
+		tableViewer.setCellModifier(new ICellModifier(){
+
+			//TODO Issue 217
+			public boolean canModify(Object element, String property) {
+				// Find the index of the column
+//				if(PeopleColumn.COMMENTS.property.equals(property)){
+//					return true;
+//				}
+//				if(PeopleColumn.NAME.property.equals(property)){
+//					return false;
+//				}
+//				if(PeopleColumn.FIRST_NAME.property.equals(property)){
+//					return true;
+//				}
+
+				return false;
+			}
+
+			public Object getValue(Object element, String property) {
+				Person person = (Person) element;
+				
+				if(PeopleColumn.COMMENTS.property.equals(property)){
+					return person.getComments();
+				}
+				if(PeopleColumn.FIRST_NAME.property.equals(property)){
+					return person.getFirstName();
+				}
+				return null;
+			}
+
+			public void modify(Object element, String property, Object value) {
+				TableItem item = (TableItem) element;
+				Person person = (Person) item.getData();
+				if(PeopleColumn.COMMENTS.property.equals(property)){
+					 person.setComments((String)value);
+				}else if(PeopleColumn.FIRST_NAME.property.equals(property)){
+					 person.setFirstName((String)value);
+				
+					
+				}
+				
+			}
+			
+		});
 
 		return tableViewer;
 
