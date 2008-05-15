@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.verticon.tracker.fair.transaction.editor"
+      label="Tracker Fair Transaction Editor"
+      version="0.1.0"
+      provider-name="Verticon, Inc."
+      plugin="com.verticon.tracker.fair.transaction.editor">
+
+   <description>
+      Tracker Fair Transactional Editor, provides a multi-threaded multi-user
+frontend to Tracker Fair  models.  Fair model documents and associated Premises documents are displayed and manipulated within transactionally aware Tracker Fair Editors that provide read and write transactional access and roll back when updating model data.
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <plugin
+         id="com.verticon.tracker.fair.transaction.editor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
