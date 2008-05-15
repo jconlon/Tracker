@@ -26,7 +26,7 @@
                   severity="ERROR"
                   mode="Live"
                   name="EventAttribute Type Constraint (Live Mode)"
-                  id="org.eclipse.emf.validation.pde.example.general.ui.NameNotEmpty"
+                  id="eventAttributeType"
                   statusCode="100">
                <description>The Generic Event attribute values must conform to the types described in the referenced EventSchema.</description>
       		   <message>Core Constraint: {0} for GenericEvent {1}; attribute {2}. {3}" </message>
@@ -67,7 +67,7 @@
                   severity="ERROR"
                   mode="Live"
                   name="Tag ID Numbers Only Constraint (Live Mode)"
-                  id="org.eclipse.emf.validation.pde.example.general.ui.NameNotEmpty"
+                  id="tagIDNumbersOnly"
                   statusCode="100">
                <description>The Tag ID can only have a value that is a number.</description>
       		   <message>"Core Constraint: {0}" ID value must be a number. </message>
