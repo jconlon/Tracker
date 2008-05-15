@@ -19,7 +19,9 @@ package com.verticon.tracker.validation.adapter;
 
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.ui.IStartup;
+
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.fair.FairPackage;
 
 
 /**
@@ -45,5 +47,8 @@ public class Startup
 		EValidator.Registry.INSTANCE.put(
 			TrackerPackage.eINSTANCE,
 			new EValidatorAdapter());
+		EValidator.Registry.INSTANCE.put(
+				FairPackage.eINSTANCE,
+				new EValidatorAdapter());
 	}
 }
