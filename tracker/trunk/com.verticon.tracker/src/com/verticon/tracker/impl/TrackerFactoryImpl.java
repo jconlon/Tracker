@@ -6,8 +6,9 @@
  */
 package com.verticon.tracker.impl;
 
-import com.verticon.tracker.*;
 import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -16,7 +17,6 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -998,8 +998,29 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		if(initialValue==null || initialValue.length()<8){
 			return new Age(new Date());
 		}
-		Date date = (Date)this.createFromString(eDataType,  initialValue);
-		return new Age(date);
+		//Try to build based on string output of Age
+		//928 days old
+		int space = initialValue.indexOf(' ');
+		if(space!=-1){
+			
+			try {
+				String daz = initialValue.substring(0,space);
+				
+				int days = Integer.parseInt(daz);
+				
+				Calendar someBirthday = Calendar.getInstance();
+				someBirthday.add(Calendar.DATE, -days);
+				
+				Date date = someBirthday.getTime();
+				return new Age(date);
+
+			}
+
+			catch (Exception ex) {
+				//ignore
+			}
+		}
+		return new Age(new Date());
 	}
 
 	/**
