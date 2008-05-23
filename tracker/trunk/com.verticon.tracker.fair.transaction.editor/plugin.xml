@@ -20,7 +20,49 @@
         class = "com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditor" 
         contributorClass="com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionActionBarContributor" >
     </editor>
-  </extension>    
+  </extension>
+  <extension
+        point="org.eclipse.ui.popupMenus">
+     <objectContribution
+           adaptable="true"
+           id="com.verticon.tracker.fair.transaction.editor.popupMenu"
+           objectClass="com.verticon.tracker.MovedIn">
+        <menu
+              id="com.verticon.tracker.editor.event.popupSubMenu"
+              label="Tracker"
+              path="additions">
+           <separator
+                 name="group1">
+           </separator>
+        </menu>
+        <action
+              class="com.verticon.tracker.fair.transaction.editor.popup.actions.FairRegistrationAction"
+              definitionId="com.verticon.tracker.fair.transaction.editor.set.exhibit"
+              enablesFor="+"
+              id="com.verticon.tracker.fair.transaction.editor.newAction"
+              label="Fair Registration"
+              menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
+              tooltip="Register an animal in the Fair">
+        </action>
+     </objectContribution>
+  </extension>
+  <!-- Can't get the bindings to work
+  <extension point="org.eclipse.ui.bindings">
+      <key
+            commandId="com.verticon.tracker.fair.transaction.editor.set.exhibit"
+            contextId="org.eclipse.ui.textEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="Ctrl+Shift+9"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.commands">
+      <command
+            name="Tracker: Fair Registration"
+            id="com.verticon.tracker.fair.transaction.editor.set.exhibit">
+      </command>
+ </extension>
+-->
+     
   <!--
    <extension
         point="org.eclipse.emf.transaction.editingDomains">
