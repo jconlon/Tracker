@@ -46,6 +46,31 @@
         </action>
      </objectContribution>
   </extension>
+  
+  <extension
+        point="org.eclipse.ui.popupMenus">
+     <objectContribution
+           adaptable="true"
+           id="com.verticon.tracker.fair.transaction.editor.popupMenu.UpdatePin"
+           objectClass="com.verticon.tracker.fair.Person">
+        <menu
+              id="com.verticon.tracker.editor.event.popupSubMenu"
+              label="Tracker"
+              path="additions">
+           <separator
+                 name="group1">
+           </separator>
+        </menu>
+        <action
+              class="com.verticon.tracker.fair.transaction.editor.popup.actions.UpdatePinsAction"
+              enablesFor="+"
+              id="com.verticon.tracker.fair.transaction.editor.newAction"
+              label="Update Pins on Movedxxx Events"
+              menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
+              tooltip="Update MovedIn and/or MovedOut events with Pin assigned to Person">
+        </action>
+     </objectContribution>
+  </extension>
   <!-- Can't get the bindings to work
   <extension point="org.eclipse.ui.bindings">
       <key

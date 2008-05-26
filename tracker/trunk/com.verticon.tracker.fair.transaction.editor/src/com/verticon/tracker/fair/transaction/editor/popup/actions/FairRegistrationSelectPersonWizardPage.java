@@ -49,7 +49,7 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 		super("selectPerson");
 		this.adapterFactory = adapterFactory;
 		setTitle("Select Person");
-		setDescription("Select the person registering the animal or go to the next page to create a new person.");
+		setDescription("Select the person registering the animal.");
 	}
 
 	public void createControl(Composite parent) {
@@ -182,7 +182,7 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 
 	}
 
-	private Collection<Person> getPersons() {
+	protected Collection<Person> getPersons() {
 		Fair fair = ((FairRegistrationWizard) getWizard()).findFair();
 		if (fair != null) {
 			return fair.getPeople();
