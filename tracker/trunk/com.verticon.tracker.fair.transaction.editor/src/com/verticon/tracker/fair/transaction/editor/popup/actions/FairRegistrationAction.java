@@ -18,7 +18,6 @@ public class FairRegistrationAction implements IObjectActionDelegate {
 
 	private static final String FAILED_TO_ADD_EXHIBIT = "Failed to register an animal";
 	
-	private IWorkbenchWindow window;
 	private IStructuredSelection selection;
 	private IWorkbenchPart targetPart;
 	
@@ -30,7 +29,6 @@ public class FairRegistrationAction implements IObjectActionDelegate {
 	}
 	
 	public void init(IWorkbenchWindow window){
-		this.window=window;
 	}
 
 	/**
