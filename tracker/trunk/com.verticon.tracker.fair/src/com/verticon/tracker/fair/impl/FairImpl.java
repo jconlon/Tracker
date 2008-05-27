@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.ecore.OCL;
 
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.fair.AllExhibits;
@@ -112,10 +111,6 @@ public class FairImpl extends EObjectImpl implements Fair {
 	 * @ordered
 	 */
 	protected EList<Person> people;
-
-	private static final String OCL_ANNOTATION_SOURCE = "http://www.eclipse.org/ocl/examples/OCL";
-
-	private static final OCL OCL_ENV = OCL.newInstance();
 
 	/**
 	 * <!-- begin-user-doc -->
