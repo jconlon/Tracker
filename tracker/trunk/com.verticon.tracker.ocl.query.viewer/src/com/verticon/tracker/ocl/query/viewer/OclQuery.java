@@ -21,6 +21,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.ocl.query.actions.AbstractQueryDelegate;
 
 /**
@@ -228,7 +229,10 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery {
 	 * @return the EClass for the type
 	 */
 	private EClass getContextClass(){
-		return (EClass)TrackerPackage.eINSTANCE.getEClassifier(type);
-		
+		EClass eclass = (EClass)TrackerPackage.eINSTANCE.getEClassifier(type);
+		if(eclass==null){
+			eclass = (EClass)FairPackage.eINSTANCE.getEClassifier(type);
+		}
+		return eclass;
 	}
 }

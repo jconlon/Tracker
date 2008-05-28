@@ -28,28 +28,39 @@ public class SampleQueriesHandler extends AbstractHandler {
 	private static final List<IOclQuery> sampleQueries = new ArrayList<IOclQuery>();
 	
 	private static final String[] queryNames = new String[] {
+		"1. Animals with unidentified Pins",
 		"Animal 342", 
 		"LostTag Events", //TODO Add LostTag event in example model
 		"Animals movedIn without a Pin", //Add an animal with a moved out a pin
 		"Excessive Somatic Cell Counts",
-		"Low Weight Gain Events",
-		"Slow Weight Gaining Animals"
+		"2. Low Weight Gain Events",
+		"3. Slow Weight Gaining Animals",
+		"4. Exhibits with People who have Pins",
+		"5. People without exhibits",
+		
 		};
 	private static final String[] queries = new String[] {
+		"self.allEvents() -> select(e : Event | (e.oclIsTypeOf(MovedIn) and e.oclAsType(MovedIn).sourcePin.oclIsUndefined()) or (e.oclIsTypeOf(MovedOut) and e.oclAsType(MovedOut).destinationPin.oclIsUndefined())) ->size() > 0",
 		"self.id='840456789012342'", 
 		"self.eventCode=5",
 		"Event.allInstances()->select(e : Event | e.id=self.id and e.oclIsTypeOf(MovedIn) and e.oclAsType(MovedIn).sourcePin.oclIsUndefined() )->size()>0",
 		"self.somaticCellCounts>200",
 		"self.weightGainPerDay.oclIsUndefined() = false and self.weightGainPerDay<3",
-		"self.weightGainPerDay.oclIsUndefined() = false and self.weightGainPerDay<3"
+		"self.weightGainPerDay.oclIsUndefined() = false and self.weightGainPerDay<3",
+		"self.exhibitor.pin.oclIsUndefined() = false",
+		"Exhibit.allInstances()->select(e : Exhibit | e.exhibitor=self)-> size()<1"
 		};
 	private static final String[] types = new String[] {
+		"Animal",
 		"Animal", 
 		"LostTag",
 		"Animal",
 		"MilkTest",
 		"WeighIn",
-		"Animal"};
+		"Animal",
+		"Exhibit",
+		"Person"
+		};
 	
 	
 	static{

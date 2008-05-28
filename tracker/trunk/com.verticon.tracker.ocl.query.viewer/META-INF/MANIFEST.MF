@@ -11,6 +11,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ocl.ecore
 Eclipse-LazyStart: true
 Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)",
+ com.verticon.tracker.fair,
  com.verticon.tracker.ocl.query.actions;version="[0.1.0,1.0.0)",
  com.verticon.tracker.util;version="[0.1.0,1.0.0)",
  org.slf4j;version="1.5.0"
