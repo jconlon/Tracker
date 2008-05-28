@@ -101,4 +101,28 @@ animals.animal -> collect(
 				
 			}
 		)
+--Does an animal unidentified Pins
+context Animal
+self.allEvents() -> 
+	select(e : Event | 
+		(e.oclIsTypeOf(MovedIn) and e.oclAsType(MovedIn).sourcePin.oclIsUndefined()) 
+		or  
+		(e.oclIsTypeOf(MovedOut) and e.oclAsType(MovedOut).destinationPin.oclIsUndefined())
+	) ->
+		size() > 0
 	
+--People with animals that have unidentified Pins
+context Person
+Exhibit.allInstances() -> 
+	select(e : Exhibit | 
+		e.exhibitor = self 
+		and 
+		self.pin.oclIsUndefined() = false 
+		and e.animal.allEvents() -> 
+			select(e : Event | 
+				(e.oclIsTypeOf(MovedIn) and e.oclAsType(MovedIn).sourcePin.oclIsUndefined()) 
+				or  
+				(e.oclIsTypeOf(MovedOut) and e.oclAsType(MovedOut).destinationPin.oclIsUndefined())
+				) ->
+					size() > 0
+	) ->size() 

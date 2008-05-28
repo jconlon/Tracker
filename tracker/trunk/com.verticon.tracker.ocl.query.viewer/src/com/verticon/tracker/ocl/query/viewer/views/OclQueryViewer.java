@@ -37,6 +37,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.ocl.query.viewer.IOclQuery;
 import com.verticon.tracker.ocl.query.viewer.IOclQueryModelListener;
 import com.verticon.tracker.ocl.query.viewer.OclQueryViewModel;
@@ -305,6 +306,12 @@ public class OclQueryViewer {
 
 		List<EClassifier> classes = new LinkedList<EClassifier>(
 				TrackerPackage.eINSTANCE.getEClassifiers());
+		
+		List<EClassifier> fairClasses = new LinkedList<EClassifier>(
+				FairPackage.eINSTANCE.getEClassifiers());
+		
+		classes.addAll(fairClasses);
+		
 		for (Iterator<EClassifier> iter = classes.iterator(); iter.hasNext();) {
 			if (!(iter.next() instanceof EClass)) {
 				iter.remove();
@@ -315,6 +322,7 @@ public class OclQueryViewer {
 		for (EClassifier classifier : classes) {
 			classNames.add(classifier.getName());
 		}
+	
 
 		String[] out = {};
 		return classNames.toArray(out);
