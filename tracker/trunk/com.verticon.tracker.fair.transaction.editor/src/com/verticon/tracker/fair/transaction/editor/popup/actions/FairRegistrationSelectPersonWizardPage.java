@@ -6,13 +6,15 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.layout.TableColumnLayout;
+import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardPage;
@@ -27,6 +29,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.TableColumn;
 
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.Person;
@@ -36,7 +39,7 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 		implements ISelectionChangedListener {
 
 	private Person selectedPerson = null;
-	private ListViewer listViewer;
+	private TableViewer tableViewer;
 	private boolean viewingOnlyPersons;
 	private IPropertiesFormProvider defaultPropertiesFormProvider;
 	protected CTabFolder cTabFolder;
@@ -60,14 +63,15 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 		final GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 3;
 		container.setLayout(gridLayout);
-		listViewer = createViewer(container);
+		Composite tableComposite = new Composite(container, SWT.NONE);
+		tableViewer = createSingleColumnTableViewer(tableComposite);
 		GridData data = new GridData(GridData.FILL_BOTH);
 		data.grabExcessHorizontalSpace = true;
 		data.horizontalSpan = 3;
 		data.heightHint = 300;
 		data.widthHint = 300;
-		listViewer.getControl().setLayoutData(data);
-		listViewer.addSelectionChangedListener(this);
+		tableComposite.setLayoutData(data);
+		tableViewer.addSelectionChangedListener(this);
 
 		Label label = new Label(container, SWT.NULL);
 		label.setText("Filter on Person Type: ");
@@ -81,10 +85,10 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectedPerson=null;
-				listViewer.setSelection(null);
+				tableViewer.setSelection(null);
 				setPageComplete(false);
 				viewingOnlyPersons = true;
-				listViewer.refresh();
+				tableViewer.refresh();
 			}
 
 		});
@@ -97,10 +101,10 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				selectedPerson=null;
-				listViewer.setSelection(null);
+				tableViewer.setSelection(null);
 				setPageComplete(false);
 				viewingOnlyPersons = false;
-				listViewer.refresh();
+				tableViewer.refresh();
 				
 			}
 
@@ -140,20 +144,27 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 	public void setVisible(boolean visible) {
 		if (visible) {
 			selectedPerson = null;
-			listViewer.setInput("");
-			listViewer.refresh();
-			listViewer.setSelection(null);
+			tableViewer.setInput("");
+			tableViewer.refresh();
+			tableViewer.setSelection(null);
 			setPageComplete(false);
 		}
 		super.setVisible(visible);
 	}
 
-	protected ListViewer createViewer(Composite parent) {
-		ListViewer viewer = new ListViewer(parent, SWT.SINGLE | SWT.H_SCROLL
-				| SWT.V_SCROLL | SWT.BORDER);
-		viewer.setUseHashlookup(true);
+	protected TableViewer createSingleColumnTableViewer(Composite tableComposite) {
+		
+		final TableViewer v = new TableViewer(tableComposite);
+		 v.getTable().setLinesVisible(true);
 
-		viewer.setContentProvider(new IStructuredContentProvider() {
+		 TableColumn singleColumn = new TableColumn(v.getTable(), SWT.NONE);
+		 TableColumnLayout tableColumnLayout = new TableColumnLayout();
+		 tableColumnLayout.setColumnData(singleColumn, new ColumnWeightData(100));
+		 tableComposite.setLayout(tableColumnLayout);
+		
+		v.setUseHashlookup(true);
+
+		v.setContentProvider(new IStructuredContentProvider() {
 			List<Person> model = new ArrayList<Person>();
 
 			public void inputChanged(Viewer v, Object oldInput, Object newInput) {
@@ -171,14 +182,10 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 
 		});
 
-		viewer.setLabelProvider(new LabelProvider() {
-			public String getText(Object element) {
-				return ((Person) element).getName();
-			}
-
-		});
-		viewer.addFilter(new MyViewerFilter());
-		return viewer;
+		v.setLabelProvider(new AdapterFactoryLabelProvider(
+				adapterFactory));
+		v.addFilter(new MyViewerFilter());
+		return v;
 
 	}
 
@@ -197,7 +204,7 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 	private void updatePageComplete() {
 		setPageComplete(false);
 
-		if (listViewer.getSelection() == null) {
+		if (tableViewer.getSelection() == null) {
 			setMessage(null);
 			setErrorMessage("Please select a "
 					+(viewingOnlyPersons?"":"Young")+
@@ -205,7 +212,7 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 			return;
 		}
 
-		IStructuredSelection selection = (IStructuredSelection) listViewer
+		IStructuredSelection selection = (IStructuredSelection) tableViewer
 				.getSelection();
 		selectedPerson = (Person) selection.getFirstElement();
 
@@ -253,5 +260,6 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 		return;
 
 	}
+	
 
 }
