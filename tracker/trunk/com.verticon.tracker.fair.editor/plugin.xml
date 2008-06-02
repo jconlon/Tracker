@@ -42,10 +42,9 @@
   
    <extension
          point="org.eclipse.ui.importWizards">
-      <category
-            id="com.verticon.tracker.import.category" name="Tracker"/>
+      <!--Use the Basic category-->
       <wizard
-            category="com.verticon.tracker.import.category"
+            category="org.eclipse.ui.Basic"
             class="com.verticon.tracker.fair.editor.actions.ImportSpreadSheetWizard"
             icon="icons/sample.gif"
             id="com.verticon.tracker.fair.editor.ImportPeopleWizard"
