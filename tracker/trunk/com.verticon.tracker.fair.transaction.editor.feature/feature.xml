@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.fair.transaction.editor"
       label="Tracker Fair Transaction Editor"
-      version="0.1.0"
+      version="0.1.1"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.fair.transaction.editor">
 
@@ -25,5 +25,17 @@ frontend to Tracker Fair  models.  Fair model documents and associated Premises 
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
+   <plugin
+         id="org.eclipse.emf.databinding"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.emf.databinding.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
 
 </feature>

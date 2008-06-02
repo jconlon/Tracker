@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.editor"
       label="Tracker Editor"
-      version="0.2.7"
+      version="0.2.8"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.editor">
 
