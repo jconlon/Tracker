@@ -351,6 +351,8 @@ public interface Animal extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @deprecated use eventHistory() instead
+	 * 
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
@@ -372,5 +374,13 @@ public interface Animal extends EObject {
 	 * @generated
 	 */
 	Tag activeTag();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='return allEvents();'"
+	 * @generated
+	 */
+	EList<Event> eventHistory();
 
 } // Animal
