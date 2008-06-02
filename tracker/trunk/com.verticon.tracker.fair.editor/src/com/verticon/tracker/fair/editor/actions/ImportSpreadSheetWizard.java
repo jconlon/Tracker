@@ -42,7 +42,7 @@ public class ImportSpreadSheetWizard extends Wizard implements IImportWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		setWindowTitle("File Import Wizard"); //NON-NLS-1
 		setNeedsProgressMonitor(true);
-		mainPage = new ImportSpreadSheetWizardPage("People Data Import",selection); //NON-NLS-1
+		mainPage = new ImportSpreadSheetWizardPage("SpreadSheet Import",selection); //NON-NLS-1
 	}
 	
 	/* (non-Javadoc)

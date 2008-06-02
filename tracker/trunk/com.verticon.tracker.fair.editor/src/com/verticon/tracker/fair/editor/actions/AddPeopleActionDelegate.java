@@ -40,7 +40,7 @@ import com.verticon.tracker.fair.YoungPerson;
 import com.verticon.tracker.fair.YouthClub;
 
 /**
- * 
+ * @deprecated with Issue 196 see com.verticon.tracker.fair.transaction.editor.popup.action.ImportPeopleDataWizard
  * @author jconlon
  *
  */

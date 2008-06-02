@@ -38,39 +38,14 @@
     </editor>
   </extension>    
   
-   <extension
-        point="org.eclipse.ui.popupMenus">
-     <objectContribution
-           adaptable="true"
-           id="com.verticon.tracker.fair.editor.popupMenu"
-           nameFilter="*.xls"
-           objectClass="org.eclipse.core.resources.IResource">
-        <menu
-              id="com.verticon.tracker.fair.editor.popupSubMenu"
-              label="Add People to the Fair"
-              path="additions">
-           <groupMarker name="content"/>
-           <separator name="additions"/>
-        </menu>
-        <action
-              class="com.verticon.tracker.fair.editor.actions.AddPeopleActionDelegate"
-              enablesFor="+"
-              id="com.verticon.tracker.fair.editor.actions.addPeople"
-              label="Add People from an people.xls spreadsheet"
-              menubarPath="com.verticon.tracker.fair.editor.popupSubMenu/content"
-              tooltip="%_UI_TrackerTagsPopupPremisesTemplateEvents_description"/>    
-       
-     </objectContribution>
-  </extension> 
+  
   
    <extension
          point="org.eclipse.ui.importWizards">
       <category
-            id="com.verticon.tracker.fair.editor.importCategory"
-            name="Import Resources to Fair Projects">
-      </category>
+            id="com.verticon.tracker.import.category" name="Tracker"/>
       <wizard
-            category="com.verticon.tracker.fair.editor.importCategory"
+            category="com.verticon.tracker.import.category"
             class="com.verticon.tracker.fair.editor.actions.ImportSpreadSheetWizard"
             icon="icons/sample.gif"
             id="com.verticon.tracker.fair.editor.ImportPeopleWizard"

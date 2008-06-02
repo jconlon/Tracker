@@ -44,14 +44,14 @@ import com.verticon.tracker.fair.transaction.editor.presentation.FairTransaction
  * @author jconlon
  *
  */
-public class FairRegistrationWizard extends Wizard {
+public class FairRegistrationWizard extends Wizard  {
 
 	private EditingDomain editingDomain;
 	private MovedIn firstMovedInEvent;
 	private Collection<Animal> animalsToRegister = new ArrayList<Animal>();
     
 	private FairRegistrationSelectPersonWizardPage selectPersonPage = null;
-	private FairRegistrationConfigureExhibitWizardPage selectLotPage = null;
+	private BaseConfigureExhibitWizardPage selectLotPage = null;
 	private FairRegistrationConfirmationWizardPage createConfirmationPage = null;
     
 	private static final String ADD_EXHIBIT = "AddExhibit";
@@ -97,7 +97,7 @@ public class FairRegistrationWizard extends Wizard {
 		setWindowTitle(ADD_EXHIBIT);
 		selectPersonPage = new FairRegistrationSelectPersonWizardPage(new FairItemProviderAdapterFactory());
 		addPage(selectPersonPage);
-		selectLotPage = new FairRegistrationConfigureExhibitWizardPage();
+		selectLotPage = new FairRegistrationConfigureExhibitWizardPage(findFair());
      	addPage(selectLotPage);
      	createConfirmationPage= new FairRegistrationConfirmationWizardPage(new TrackerItemProviderAdapterFactory());
      	addPage(createConfirmationPage);
@@ -168,11 +168,10 @@ public class FairRegistrationWizard extends Wizard {
 		return getSelectedLot()!=null && getSelectedPerson() != null;
 	}
 	
-	/**
-	 * Utility method used by pages
-	 * @return fair associated with Event
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.fair.transaction.editor.popup.actions.FairFinder#findFair()
 	 */
-	Fair findFair(){
+	public Fair findFair(){
 		Premises premisesOfEvent = (Premises) getMovedInEvent().eContainer().eContainer().eContainer();
 		Fair fair = null;
 		for (Resource resource : editingDomain.getResourceSet().getResources()) {
