@@ -378,6 +378,9 @@ public interface Animal extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * All the events associated with this animal.
+	 * <!-- end-model-doc -->
 	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='return allEvents();'"
 	 * @generated
 	 */

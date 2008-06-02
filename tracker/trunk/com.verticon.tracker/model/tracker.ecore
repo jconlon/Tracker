@@ -16,6 +16,7 @@
     <eOperations name="eventHistory" upperBound="-1" eType="#//Event">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="return allEvents();"/>
+        <details key="documentation" value="All the events associated with this animal."/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
