@@ -417,6 +417,7 @@
         <genParameters ecoreParameter="tracker.ecore#//Animal/addTemplate/eventTemplate"/>
       </genOperations>
       <genOperations ecoreOperation="tracker.ecore#//Animal/activeTag"/>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/eventHistory"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Tag">
       <genFeatures property="Readonly" createChild="false" propertyCategory="Details"

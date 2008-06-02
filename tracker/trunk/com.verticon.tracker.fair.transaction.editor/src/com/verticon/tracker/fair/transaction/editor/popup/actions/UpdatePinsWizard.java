@@ -158,7 +158,7 @@ public class UpdatePinsWizard extends Wizard {
 		// Create setCommands for each animal's Movexx events
 		for (Exhibit exhibit : selectedPersonExhibits) {
 			//Get all the two movedxxx events for that animal
-			for (Event event : exhibit.getAnimal().allEvents()) {
+			for (Event event : exhibit.getAnimal().eventHistory()) {
 				if (event instanceof MovedIn) {
 					command = SetCommand.create(editingDomain, // Domain
 							event, // Owner
