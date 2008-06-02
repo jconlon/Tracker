@@ -416,9 +416,9 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				targetAnimal  =  (Animal) copier.copy(animalTemplate);
 				targetAnimal.activeTag().setId(animalId);
 				animals.add(targetAnimal);
-			}else if (!animalTemplate.allEvents().isEmpty()){
+			}else if (!animalTemplate.eventHistory().isEmpty()){
 				EList<Event> eventsContainer = targetAnimal.activeTag().getEvents();
-				eventsContainer.addAll(copier.copyAll(animalTemplate.allEvents()));
+				eventsContainer.addAll(copier.copyAll(animalTemplate.eventHistory()));
 			}
 		}
 

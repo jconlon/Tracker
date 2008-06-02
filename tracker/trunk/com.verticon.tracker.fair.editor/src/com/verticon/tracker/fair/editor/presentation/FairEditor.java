@@ -1755,7 +1755,7 @@ public class FairEditor
 						&& selectedElement instanceof Animal) // 14.2.2
 				{
 					Animal selectedAnimal = (Animal) selectedElement;
-					Collection<Event> animalEvents = selectedAnimal.allEvents();
+					Collection<Event> animalEvents = selectedAnimal.eventHistory();
 						
 					//TODO Create a more generic gif for Events
 					ItemProvider listRoot = new ItemProvider("Animal Events for ANIMAL: "+selectedAnimal.getId(),

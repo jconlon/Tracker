@@ -67,7 +67,7 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 		
 		Animal copiedAnimal = (Animal)copier.copy(animal);
 		if(premises!=null){
-			setLocationOnCopiedSightingEvents(copiedAnimal.allEvents(),  premises);
+			setLocationOnCopiedSightingEvents(copiedAnimal.eventHistory(),  premises);
 		}
 		if(copiedAnimal.activeTag()!=null){
 			copiedAnimal.activeTag().setId(tag);
@@ -89,7 +89,7 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 	 private static void setAppropriateDateOnEvents(Animal copiedAnimal, Date presetDate) {
 		Preferences prefs = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
 		Calendar cal = null;
-		for (Event event : copiedAnimal.allEvents()) {
+		for (Event event : copiedAnimal.eventHistory()) {
 			if(isFirstEvent(cal) ){
 				if(presetDate !=null){
 					cal = Calendar.getInstance();
@@ -137,7 +137,7 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 	 */
 	private Location getLocationFromPrimalAnimal(int position, Premises premises){
 		int myposition = 0;
-		for (Event event : animal.allEvents()) {
+		for (Event event : animal.eventHistory()) {
 			if(event instanceof Sighting){
 				myposition++;
 				if(myposition == position){
@@ -170,7 +170,7 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 	
 
 	public int numberOfEvents(){
-		return animal.allEvents().size();
+		return animal.eventHistory().size();
 	}
 	/**
 	 * 
@@ -179,15 +179,15 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 	public Collection<Event> getEvents(Premises premises){
 		Animal copiedAnimal = (Animal)copier.copy(animal);
 		if(premises!=null){
-			setLocationOnCopiedSightingEvents( copiedAnimal.allEvents(),  premises);
+			setLocationOnCopiedSightingEvents( copiedAnimal.eventHistory(),  premises);
 		}
 		Collection<Event> events = null;
-		if(copiedAnimal.allEvents().isEmpty()){
+		if(copiedAnimal.eventHistory().isEmpty()){
 			events= Collections.emptyList();
 		}else{
 			setAppropriateDateOnEvents(copiedAnimal, defaultEventDate);
 			events = new ArrayList<Event>();
-			events.addAll(copiedAnimal.allEvents());//Just add all the events
+			events.addAll(copiedAnimal.eventHistory());//Just add all the events
 		}
 		
 		return events;

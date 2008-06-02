@@ -590,7 +590,7 @@ public class ActionUtils {
 	 * @return true if the event can be added
 	 */
 	public static boolean canAddEventToAnimal(Animal animalToReceiveEvent, Event eventToAdd){
-		for (Event historicalEvent : animalToReceiveEvent.allEvents()) {
+		for (Event historicalEvent : animalToReceiveEvent.eventHistory()) {
 			if (historicalEvent.getEventCode() == eventToAdd.getEventCode()) {
 				Date historicalEventDate = historicalEvent.getDateTime();
 				Date eventToAddDate = eventToAdd.getDateTime();

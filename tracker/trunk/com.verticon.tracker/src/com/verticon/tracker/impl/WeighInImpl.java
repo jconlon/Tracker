@@ -190,7 +190,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 		if(animal==null){
 			return Collections.emptyList();
 		}
-		EList<Event> events = animal.allEvents();
+		EList<Event> events = animal.eventHistory();
 		if (events.isEmpty()) {
 			return Collections.emptyList();
 		}

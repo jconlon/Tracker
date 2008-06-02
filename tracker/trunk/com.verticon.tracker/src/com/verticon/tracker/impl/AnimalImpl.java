@@ -471,7 +471,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 */
 	public Date getLastEventDateTime() {
 		List<Event> winners = new LinkedList<Event>();
-		winners.addAll(allEvents());
+		winners.addAll(eventHistory());
 		if(winners.isEmpty()){
 			return null;
 		}
@@ -581,10 +581,10 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 	private WeighIn getLastWeighIn(){
 		WeighIn lastWeighIn = null;
-		if(!allEvents().isEmpty()){
+		if(!eventHistory().isEmpty()){
 			CollectionFilter<Event> weighInsProducer = new CollectionFilter<Event>();
 			weighInsProducer.addFilter(CommonUtilities.weighInFilterCriteria);
-			List<Event> weighIns = new ArrayList<Event>(weighInsProducer.filterCopy(allEvents()));
+			List<Event> weighIns = new ArrayList<Event>(weighInsProducer.filterCopy(eventHistory()));
 			if(weighIns.isEmpty()){
 				return null;
 			}
@@ -606,6 +606,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * endif
 	 * 
 	 * @see AnimalEventHistoryAdapter
+	 * @deprecated use eventHistory()
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -640,11 +641,11 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @generated NOT
 	 */
 	public Tag activeTag() {
-		if(allEvents().isEmpty()){
+		if(eventHistory().isEmpty()){
 			return null;
 		}
 		List<Event> winners = new LinkedList<Event>();
-		winners.addAll(allEvents());
+		winners.addAll(eventHistory());
 		
 		// Sort events according to date
 		Collections.sort(winners, new Comparator<Event>() {
@@ -652,6 +653,15 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 		        return event2.getDateTime().compareTo(event1.getDateTime());
 		    }});
 		return winners.get(0).getTag();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Event> eventHistory() {
+		return allEvents();
 	}
 
 	/**

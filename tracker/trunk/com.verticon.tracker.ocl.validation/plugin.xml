@@ -213,7 +213,7 @@
                	<message>Core Constraint: "{0}" Event is only valid for dairy animals - BovineDairy, Ovine, and Caprine.</message>
                	<target class="MilkTest"/>
                <![CDATA[
-               Animal.allInstances() -> select(a : Animal | (not a.oclIsTypeOf(BovineDairy) ) and a.speciesCode<>'OVI' and a.speciesCode<>'CAP' ).allEvents() ->select(e : Event | e = self ) ->isEmpty()
+               Animal.allInstances() -> select(a : Animal | (not a.oclIsTypeOf(BovineDairy) ) and a.speciesCode<>'OVI' and a.speciesCode<>'CAP' ).eventHistory() ->select(e : Event | e = self ) ->isEmpty()
                ]]>
             </constraint> 
             

@@ -52,7 +52,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 		} else if (events.isEmpty()) {
 			logger.debug("Building events from scratch");
 			for (Animal animal : premises.getAnimals()) {
-				events.addAll(animal.allEvents());
+				events.addAll(animal.eventHistory());
 			}
 		}
 		return ECollections.unmodifiableEList(events);
@@ -168,7 +168,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 			switch (n.getEventType()) {
 			case Notification.ADD:
 				Animal animal = (Animal) n.getNewValue();
-				eventsChanged = animal.allEvents();
+				eventsChanged = animal.eventHistory();
 				if (events.addAll(eventsChanged)) {
 					logger.debug("Animal {} added one or more events", animal
 							.getId());
@@ -179,7 +179,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 				EList<Animal> animalsToAdd = (EList<Animal>) n.getNewValue();
 				eventsChanged = new BasicEList<Event>();
 				for (Animal animalToAdd : animalsToAdd) {
-					eventsChanged.addAll(animalToAdd.allEvents());
+					eventsChanged.addAll(animalToAdd.eventHistory());
 
 				}
 				if (events.addAll(eventsChanged)) {
@@ -190,9 +190,9 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 				break;
 			case Notification.REMOVE:
 				animal = (Animal) n.getOldValue();
-				eventsChanged = animal.allEvents();
+				eventsChanged = animal.eventHistory();
 
-				if (events.removeAll(animal.allEvents())) {
+				if (events.removeAll(animal.eventHistory())) {
 					logger.debug("Animal {} removed {} events", animal.getId(),
 							eventsChanged.size());
 					forwardRemove(eventsChanged);
@@ -204,7 +204,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 				EList<Animal> tagsToRemove = (EList<Animal>) n.getOldValue();
 				eventsChanged = new BasicEList<Event>();
 				for (Animal animalToRemove : tagsToRemove) {
-					eventsChanged.addAll(animalToRemove.allEvents());
+					eventsChanged.addAll(animalToRemove.eventHistory());
 				}
 
 				if (events.removeAll(eventsChanged)) {

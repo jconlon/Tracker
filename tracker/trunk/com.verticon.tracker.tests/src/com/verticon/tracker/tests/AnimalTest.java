@@ -47,6 +47,7 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#allEvents() <em>All Events</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#addTemplate(org.eclipse.emf.common.util.EList) <em>Add Template</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#activeTag() <em>Active Tag</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#eventHistory() <em>Event History</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -276,8 +277,8 @@ public abstract class AnimalTest extends TestCase {
 	 * @generated NOT
 	 */
 	public void testGetLastEventDateTime() {
-		assertNotNull(getFixture().allEvents());
-		assertTrue(getFixture().allEvents().isEmpty());
+		assertNotNull(getFixture().eventHistory());
+		assertTrue(getFixture().eventHistory().isEmpty());
 
 		//Test animal with no tag
 		Animal animal2 = TrackerFactory.eINSTANCE.createBovineBeef();
@@ -288,8 +289,8 @@ public abstract class AnimalTest extends TestCase {
 		Date date = new Date();
 		event1.setDateTime(date);
 		tag2.getEvents().add(event1);
-		assertEquals(1, animal2.allEvents().size());
-		assertTrue(animal2.allEvents().contains(event1));
+		assertEquals(1, animal2.eventHistory().size());
+		assertTrue(animal2.eventHistory().contains(event1));
 		assertEquals(date, animal2.getLastEventDateTime());
 	}
 
@@ -449,9 +450,9 @@ public abstract class AnimalTest extends TestCase {
 	 * @generated NOT
 	 */
 	public void testAllEventsEmpty() {
-		assertNotNull("Cant get a list",getFixture().allEvents());
+		assertNotNull("Cant get a list",getFixture().eventHistory());
 		
-		assertTrue("Events should be empty", getFixture().allEvents().isEmpty());
+		assertTrue("Events should be empty", getFixture().eventHistory().isEmpty());
 	}
 
 	/**
@@ -459,7 +460,7 @@ public abstract class AnimalTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * 
 	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.Animal#allEvents()
+	 * @see com.verticon.tracker.Animal#eventHistory()
 	 * @generated NOT
 	 */
 	public void testAllEvents() {
@@ -475,15 +476,15 @@ public abstract class AnimalTest extends TestCase {
 		logger.info("Add event1 to tag1 on animal2");
 		Event event1 = TrackerFactory.eINSTANCE.createTagApplied();
 		tag1.getEvents().add(event1);
-		assertEquals("Animal2 should have one event",1, animal2.allEvents().size());
-		assertTrue("Animald2 should contain the event1", animal2.allEvents().contains(event1));
+		assertEquals("Animal2 should have one event",1, animal2.eventHistory().size());
+		assertTrue("Animald2 should contain the event1", animal2.eventHistory().contains(event1));
 		
 		//Add a second event to tag1
 		logger.info("Add a second event to tag1");
 		Event event2 = TrackerFactory.eINSTANCE.createReplacedTag();
 		tag1.getEvents().add(event2);
-		assertEquals("Animal2 should have two events",2, animal2.allEvents().size());
-		assertTrue("Animald2 should contain event2",animal2.allEvents().contains(event2));
+		assertEquals("Animal2 should have two events",2, animal2.eventHistory().size());
+		assertTrue("Animald2 should contain event2",animal2.eventHistory().contains(event2));
 		
 		
 		//Create a second tag and add it to animal2
@@ -496,29 +497,29 @@ public abstract class AnimalTest extends TestCase {
 		logger.info("Create an event and add it to tag2");
 		Event event3 = TrackerFactory.eINSTANCE.createReplacedTag();
 		tag2.getEvents().add(event3);
-		assertEquals("Animal2 should have three events (tag1==2, tag2==1)",3, animal2.allEvents().size());
-		assertTrue("Animald2 should contain event3",animal2.allEvents().contains(event3));
+		assertEquals("Animal2 should have three events (tag1==2, tag2==1)",3, animal2.eventHistory().size());
+		assertTrue("Animald2 should contain event3",animal2.eventHistory().contains(event3));
 		
 		//Create another event and add it to tag2
 		logger.info("Create another event and add it to tag2");
 		Event event4 = TrackerFactory.eINSTANCE.createReplacedTag();
 		tag2.getEvents().add(event4);
 		
-		assertEquals("Animal2 should have three events (tag1==2, tag2==2) ",4, animal2.allEvents().size());
-		assertTrue("Animald2 should contain event3",animal2.allEvents().contains(event4));
+		assertEquals("Animal2 should have three events (tag1==2, tag2==2) ",4, animal2.eventHistory().size());
+		assertTrue("Animald2 should contain event3",animal2.eventHistory().contains(event4));
 		
 		//Delete an event
 		logger.info("Deleting an event");
 		tag2.getEvents().remove(event3);
-		assertEquals("Animal2 should have two events (tag1==2, tag2==1) ",3, animal2.allEvents().size());
-		assertFalse("Animald2 should NOT contain event3",animal2.allEvents().contains(event3));
-		assertTrue("Animald2 should Still contain event4",animal2.allEvents().contains(event4));
+		assertEquals("Animal2 should have two events (tag1==2, tag2==1) ",3, animal2.eventHistory().size());
+		assertFalse("Animald2 should NOT contain event3",animal2.eventHistory().contains(event3));
+		assertTrue("Animald2 should Still contain event4",animal2.eventHistory().contains(event4));
 		
 		//Delete a tag
 		logger.info("Deleting a tag");
 		animal2.getTags().remove(tag2);
-		assertFalse("Animald2 should NOT contain event4",animal2.allEvents().contains(event4));
-		assertEquals("Animal2 should have two events (tag1==2) ",2, animal2.allEvents().size());
+		assertFalse("Animald2 should NOT contain event4",animal2.eventHistory().contains(event4));
+		assertEquals("Animal2 should have two events (tag1==2) ",2, animal2.eventHistory().size());
 		
 		//Create a third tag add two events to it then add it to animal2
 		logger.info("Create a third tag add events to it then add it to animal2");
@@ -529,9 +530,9 @@ public abstract class AnimalTest extends TestCase {
 		Event event6 = TrackerFactory.eINSTANCE.createTagApplied();
 		tag3.getEvents().add(event6);
 		animal2.getTags().add(tag3);
-		assertEquals("Animal2 should have four events (tag1==2, tag3==4) ",4, animal2.allEvents().size());
-		assertTrue("Animald2 should contain event5",animal2.allEvents().contains(event5));
-		assertTrue("Animald2 should Still contain event6",animal2.allEvents().contains(event6));
+		assertEquals("Animal2 should have four events (tag1==2, tag3==4) ",4, animal2.eventHistory().size());
+		assertTrue("Animald2 should contain event5",animal2.eventHistory().contains(event5));
+		assertTrue("Animald2 should Still contain event6",animal2.eventHistory().contains(event6));
 		
 	}
 	
@@ -562,18 +563,18 @@ public abstract class AnimalTest extends TestCase {
 		
 		//There is no activeTag so don't accept the events
 		getFixture().addTemplate(animal1.activeTag().getEvents());
-		assertEquals(0, getFixture().allEvents().size());
+		assertEquals(0, getFixture().eventHistory().size());
 		
 		//Add an activeTag 
 		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
 		tag2.setId(AIN_2);
 		tag2.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
 		getFixture().getTags().add(tag2);
-		assertEquals(1, getFixture().allEvents().size());
+		assertEquals(1, getFixture().eventHistory().size());
 		
 		//There is now an activeTag so accept the events
 		getFixture().addTemplate(animal1.activeTag().getEvents());
-		assertEquals(4, getFixture().allEvents().size());
+		assertEquals(4, getFixture().eventHistory().size());
 	}
 
 	/**
@@ -601,6 +602,17 @@ public abstract class AnimalTest extends TestCase {
 		getFixture().getTags().add(tag2);
 		assertEquals(tag2, getFixture().activeTag());
 		
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Animal#eventHistory() <em>Event History</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#eventHistory()
+	 * @generated NOT
+	 */
+	public void testEventHistory() {
+		testAllEvents();
 	}
 
 } //AnimalTest

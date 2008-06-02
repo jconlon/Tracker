@@ -141,7 +141,7 @@ public class FairRegistrationItemProvider
 	public static final List<WeighIn> getSortedWeighIns(FairRegistration fr){
 		List<WeighIn> weights = new ArrayList<WeighIn>();
 		Animal animal = (Animal)fr.getTag().eContainer();
-		for (Event event : animal.allEvents()){
+		for (Event event : animal.eventHistory()){
 			if(event instanceof WeighIn ){
 				weights.add((WeighIn)event);
 			}
