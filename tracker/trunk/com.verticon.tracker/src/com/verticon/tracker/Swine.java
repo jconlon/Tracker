@@ -16,6 +16,8 @@ package com.verticon.tracker;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.verticon.tracker.Swine#getSwineBreed <em>Swine Breed</em>}</li>
+ *   <li>{@link com.verticon.tracker.Swine#getRightEarNotching <em>Right Ear Notching</em>}</li>
+ *   <li>{@link com.verticon.tracker.Swine#getLeftEarNotching <em>Left Ear Notching</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,5 +62,57 @@ public interface Swine extends Animal {
 	 * @generated
 	 */
 	void setSwineBreed(SwineBreed value);
+
+	/**
+	 * Returns the value of the '<em><b>Right Ear Notching</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Right Ear Notching</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Right Ear Notching</em>' attribute.
+	 * @see #setRightEarNotching(int)
+	 * @see com.verticon.tracker.TrackerPackage#getSwine_RightEarNotching()
+	 * @model
+	 * @generated
+	 */
+	int getRightEarNotching();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.Swine#getRightEarNotching <em>Right Ear Notching</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Right Ear Notching</em>' attribute.
+	 * @see #getRightEarNotching()
+	 * @generated
+	 */
+	void setRightEarNotching(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Left Ear Notching</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Left Ear Notching</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Left Ear Notching</em>' attribute.
+	 * @see #setLeftEarNotching(int)
+	 * @see com.verticon.tracker.TrackerPackage#getSwine_LeftEarNotching()
+	 * @model
+	 * @generated
+	 */
+	int getLeftEarNotching();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.Swine#getLeftEarNotching <em>Left Ear Notching</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Left Ear Notching</em>' attribute.
+	 * @see #getLeftEarNotching()
+	 * @generated
+	 */
+	void setLeftEarNotching(int value);
 
 } // Swine
