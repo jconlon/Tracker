@@ -2849,13 +2849,31 @@ public interface TrackerPackage extends EPackage {
 	int SWINE__SWINE_BREED = ANIMAL_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Right Ear Notching</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWINE__RIGHT_EAR_NOTCHING = ANIMAL_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Left Ear Notching</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWINE__LEFT_EAR_NOTCHING = ANIMAL_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Swine</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SWINE_FEATURE_COUNT = ANIMAL_FEATURE_COUNT + 1;
+	int SWINE_FEATURE_COUNT = ANIMAL_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.EquineImpl <em>Equine</em>}' class.
@@ -5039,6 +5057,28 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getSwine_SwineBreed();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Swine#getRightEarNotching <em>Right Ear Notching</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Right Ear Notching</em>'.
+	 * @see com.verticon.tracker.Swine#getRightEarNotching()
+	 * @see #getSwine()
+	 * @generated
+	 */
+	EAttribute getSwine_RightEarNotching();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Swine#getLeftEarNotching <em>Left Ear Notching</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Left Ear Notching</em>'.
+	 * @see com.verticon.tracker.Swine#getLeftEarNotching()
+	 * @see #getSwine()
+	 * @generated
+	 */
+	EAttribute getSwine_LeftEarNotching();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Equine <em>Equine</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6541,6 +6581,22 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SWINE__SWINE_BREED = eINSTANCE.getSwine_SwineBreed();
+
+		/**
+		 * The meta object literal for the '<em><b>Right Ear Notching</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SWINE__RIGHT_EAR_NOTCHING = eINSTANCE.getSwine_RightEarNotching();
+
+		/**
+		 * The meta object literal for the '<em><b>Left Ear Notching</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SWINE__LEFT_EAR_NOTCHING = eINSTANCE.getSwine_LeftEarNotching();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.EquineImpl <em>Equine</em>}' class.

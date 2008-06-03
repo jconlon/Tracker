@@ -535,6 +535,10 @@
       <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//Swine/swineBreed">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
+      <genFeatures createChild="false" propertyCategory="EarNotching" propertyDescription="Permenant Identification of Swine"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Swine/rightEarNotching"/>
+      <genFeatures createChild="false" propertyCategory="EarNotching" propertyDescription="Permenant Identification of Swine"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Swine/leftEarNotching"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Equine">
       <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//Equine/horseBreed">

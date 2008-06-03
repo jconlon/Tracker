@@ -25,6 +25,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.verticon.tracker.impl.SwineImpl#getSwineBreed <em>Swine Breed</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.SwineImpl#getRightEarNotching <em>Right Ear Notching</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.SwineImpl#getLeftEarNotching <em>Left Ear Notching</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,6 +59,46 @@ public class SwineImpl extends AnimalImpl implements Swine {
 	 * @ordered
 	 */
 	protected SwineBreed swineBreed = SWINE_BREED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getRightEarNotching() <em>Right Ear Notching</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRightEarNotching()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int RIGHT_EAR_NOTCHING_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getRightEarNotching() <em>Right Ear Notching</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRightEarNotching()
+	 * @generated
+	 * @ordered
+	 */
+	protected int rightEarNotching = RIGHT_EAR_NOTCHING_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLeftEarNotching() <em>Left Ear Notching</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLeftEarNotching()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int LEFT_EAR_NOTCHING_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getLeftEarNotching() <em>Left Ear Notching</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLeftEarNotching()
+	 * @generated
+	 * @ordered
+	 */
+	protected int leftEarNotching = LEFT_EAR_NOTCHING_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -103,11 +145,57 @@ public class SwineImpl extends AnimalImpl implements Swine {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getRightEarNotching() {
+		return rightEarNotching;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRightEarNotching(int newRightEarNotching) {
+		int oldRightEarNotching = rightEarNotching;
+		rightEarNotching = newRightEarNotching;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.SWINE__RIGHT_EAR_NOTCHING, oldRightEarNotching, rightEarNotching));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getLeftEarNotching() {
+		return leftEarNotching;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLeftEarNotching(int newLeftEarNotching) {
+		int oldLeftEarNotching = leftEarNotching;
+		leftEarNotching = newLeftEarNotching;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.SWINE__LEFT_EAR_NOTCHING, oldLeftEarNotching, leftEarNotching));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.SWINE__SWINE_BREED:
 				return getSwineBreed();
+			case TrackerPackage.SWINE__RIGHT_EAR_NOTCHING:
+				return new Integer(getRightEarNotching());
+			case TrackerPackage.SWINE__LEFT_EAR_NOTCHING:
+				return new Integer(getLeftEarNotching());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -122,6 +210,12 @@ public class SwineImpl extends AnimalImpl implements Swine {
 		switch (featureID) {
 			case TrackerPackage.SWINE__SWINE_BREED:
 				setSwineBreed((SwineBreed)newValue);
+				return;
+			case TrackerPackage.SWINE__RIGHT_EAR_NOTCHING:
+				setRightEarNotching(((Integer)newValue).intValue());
+				return;
+			case TrackerPackage.SWINE__LEFT_EAR_NOTCHING:
+				setLeftEarNotching(((Integer)newValue).intValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -138,6 +232,12 @@ public class SwineImpl extends AnimalImpl implements Swine {
 			case TrackerPackage.SWINE__SWINE_BREED:
 				setSwineBreed(SWINE_BREED_EDEFAULT);
 				return;
+			case TrackerPackage.SWINE__RIGHT_EAR_NOTCHING:
+				setRightEarNotching(RIGHT_EAR_NOTCHING_EDEFAULT);
+				return;
+			case TrackerPackage.SWINE__LEFT_EAR_NOTCHING:
+				setLeftEarNotching(LEFT_EAR_NOTCHING_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -152,6 +252,10 @@ public class SwineImpl extends AnimalImpl implements Swine {
 		switch (featureID) {
 			case TrackerPackage.SWINE__SWINE_BREED:
 				return swineBreed != SWINE_BREED_EDEFAULT;
+			case TrackerPackage.SWINE__RIGHT_EAR_NOTCHING:
+				return rightEarNotching != RIGHT_EAR_NOTCHING_EDEFAULT;
+			case TrackerPackage.SWINE__LEFT_EAR_NOTCHING:
+				return leftEarNotching != LEFT_EAR_NOTCHING_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -168,6 +272,10 @@ public class SwineImpl extends AnimalImpl implements Swine {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (swineBreed: ");
 		result.append(swineBreed);
+		result.append(", rightEarNotching: ");
+		result.append(rightEarNotching);
+		result.append(", leftEarNotching: ");
+		result.append(leftEarNotching);
 		result.append(')');
 		return result.toString();
 	}

@@ -1016,6 +1016,24 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getSwine_RightEarNotching() {
+		return (EAttribute)swineEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSwine_LeftEarNotching() {
+		return (EAttribute)swineEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEquine() {
 		return equineEClass;
 	}
@@ -2061,6 +2079,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		swineEClass = createEClass(SWINE);
 		createEAttribute(swineEClass, SWINE__SWINE_BREED);
+		createEAttribute(swineEClass, SWINE__RIGHT_EAR_NOTCHING);
+		createEAttribute(swineEClass, SWINE__LEFT_EAR_NOTCHING);
 
 		equineEClass = createEClass(EQUINE);
 		createEAttribute(equineEClass, EQUINE__HORSE_BREED);
@@ -2344,6 +2364,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		initEClass(swineEClass, Swine.class, "Swine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSwine_SwineBreed(), this.getSwineBreed(), "swineBreed", "Unspecified", 0, 1, Swine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSwine_RightEarNotching(), ecorePackage.getEInt(), "rightEarNotching", null, 0, 1, Swine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSwine_LeftEarNotching(), ecorePackage.getEInt(), "leftEarNotching", null, 0, 1, Swine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(equineEClass, Equine.class, "Equine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEquine_HorseBreed(), this.getHorseBreed(), "horseBreed", "Unspecified", 0, 1, Equine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

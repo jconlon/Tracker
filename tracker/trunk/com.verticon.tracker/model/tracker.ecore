@@ -403,6 +403,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Swine" eSuperTypes="#//Animal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="swineBreed" eType="#//SwineBreed"
         defaultValueLiteral="Unspecified"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightEarNotching" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftEarNotching" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="HorseBreed">
     <eLiterals name="AC" literal="AMERICAN BASHKIR CURLY"/>
