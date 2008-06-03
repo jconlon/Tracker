@@ -116,7 +116,7 @@ public class SwineItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 getString("_UI_EarNotchingPropertyCategory"),
+				 getString("_UI_IdentificationPropertyCategory"),
 				 null));
 	}
 
@@ -138,7 +138,7 @@ public class SwineItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 getString("_UI_EarNotchingPropertyCategory"),
+				 getString("_UI_IdentificationPropertyCategory"),
 				 null));
 	}
 
