@@ -477,7 +477,7 @@
       <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//Ovine/sheepBreed">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
-      <genFeatures createChild="false" propertyCategory="ScrapieID" propertyDescription="Scrapie Program ID"
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Scrapie Program ID"
           ecoreFeature="ecore:EAttribute tracker.ecore#//Ovine/scrapieTag"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//BovineBison">
