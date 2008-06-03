@@ -41,6 +41,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.Ovine;
+import com.verticon.tracker.Swine;
+import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.FairFactory;
@@ -99,6 +102,9 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		featuresToMap.addAll(FairPackage.Literals.PERSON.getEAllStructuralFeatures());
 		featuresToMap.add(FairPackage.Literals.YOUNG_PERSON__PARENTS);
 		featuresToMap.add(FairPackage.Literals.YOUNG_PERSON__CLUB);
+		featuresToMap.add(TrackerPackage.Literals.SWINE__LEFT_EAR_NOTCHING);
+		featuresToMap.add(TrackerPackage.Literals.SWINE__RIGHT_EAR_NOTCHING);
+		featuresToMap.add(TrackerPackage.Literals.OVINE__SCRAPIE_TAG);
 		featuresToMap.addAll(FairPackage.Literals.EXHIBIT.getEAllStructuralFeatures());
 	}
 
@@ -334,6 +340,7 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 			logger.debug("Row={} found an existing person {}",row.getRowNum(), person.getName());
 		}
 		createExhibit(compoundCommand, row,  person,  fair, editingDomain);
+		setSupplementalAnimalTags(compoundCommand, row,  person,  fair, editingDomain);
 		
 	}
 
@@ -395,6 +402,14 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		return person;
 	}
 	
+	/**
+	 * Create an exibit if there is an animal mapped in the row.
+	 * @param compoundCommand
+	 * @param row
+	 * @param person
+	 * @param fair
+	 * @param editingDomain
+	 */
 	private void createExhibit(CompoundCommand compoundCommand, HSSFRow row, Person person, Fair fair, EditingDomain editingDomain){
 		//Need to have an animal map to create an Exhibit
 		String id = getColumnValue( row, FairPackage.Literals.EXHIBIT__ANIMAL);
@@ -411,8 +426,6 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 			return;
 		}
 		Exhibit exhibit = FairFactory.eINSTANCE.createExhibit();
-//		exhibit.setAnimal(animal);
-//		exhibit.setExhibitor(person);
 		exhibit.setComments(getColumnValue( row, FairPackage.Literals.EXHIBIT__COMMENTS));
 		exhibit.setName(getColumnValue( row, FairPackage.Literals.EXHIBIT__NAME));
 		String numAsString = getColumnValue( row, FairPackage.Literals.EXHIBIT__NUMBER);
@@ -665,5 +678,78 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 			}
 		}
 		return -1;
+	}
+	
+	/**
+	 * Create an exibit if there is an animal mapped in the row.
+	 * @param compoundCommand
+	 * @param row
+	 * @param person
+	 * @param fair
+	 * @param editingDomain
+	 */
+	private void setSupplementalAnimalTags(CompoundCommand compoundCommand, HSSFRow row, Person person, Fair fair, EditingDomain editingDomain){
+		//Need to have an animal map to create an Exhibit
+		String id = getColumnValue( row, FairPackage.Literals.EXHIBIT__ANIMAL);
+
+		if(id==null){
+			logger.warn("Row={} could not find animal mapper in row to set animal supplemental tags.",
+					row.getRowNum(),id);
+			return;
+		}
+		Animal animal = fair.getPremises().findAnimal(id);
+		if(animal==null){
+			logger.warn("Row={} could not find animal with id {} to set animal supplemental tags.",
+					row.getRowNum(),id);
+			return;
+		}
+		
+		if(animal instanceof Swine){
+			String swineLeftEarNotch = getColumnValue( row, TrackerPackage.Literals.SWINE__LEFT_EAR_NOTCHING);
+			String swineRightEarNotch = getColumnValue( row, TrackerPackage.Literals.SWINE__RIGHT_EAR_NOTCHING);
+            if(swineLeftEarNotch==null && swineLeftEarNotch==null){
+            	logger.warn("Row={} could not find supplemental tag information for animal with id {}.",
+            			row.getRowNum(),id);
+            	return;
+            }
+			
+			Command command = SetCommand.create(
+					editingDomain, //domain
+					animal,//owner
+					TrackerPackage.Literals.SWINE__LEFT_EAR_NOTCHING,//feature
+					Integer.parseInt(swineLeftEarNotch)//value
+			);
+			compoundCommand.append(command);
+
+			logger.info("Row={} Swine left ear notching for animal id {} is {}",
+        			new Object[] {row.getRowNum(),id, Integer.parseInt(swineLeftEarNotch)});
+			
+			command = SetCommand.create(
+					editingDomain, //domain
+					animal,//owner
+					TrackerPackage.Literals.SWINE__RIGHT_EAR_NOTCHING,//feature
+					Integer.parseInt(swineRightEarNotch)//value
+			);
+			compoundCommand.append(command);
+			logger.info("Row={} Swine right ear notching for animal id {} is {}",
+        			new Object[] {row.getRowNum(),id, Integer.parseInt(swineRightEarNotch)});
+		}
+		else if(animal instanceof Ovine){
+			String scrapieTag = getColumnValue( row, TrackerPackage.Literals.OVINE__SCRAPIE_TAG);
+			if(scrapieTag==null){
+            	return;
+            }
+			
+			Command command = SetCommand.create(
+					editingDomain, //domain
+					animal,//owner
+					TrackerPackage.Literals.OVINE__SCRAPIE_TAG,//feature
+					scrapieTag//value
+			);
+			compoundCommand.append(command);
+			logger.info("Row={} Ovine scrapie tag for animal id {} is {}",
+        			new Object[] {row.getRowNum(),id, scrapieTag});
+
+		}
 	}
 }
