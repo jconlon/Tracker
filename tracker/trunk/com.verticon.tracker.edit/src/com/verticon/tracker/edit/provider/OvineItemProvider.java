@@ -116,7 +116,7 @@ public class OvineItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 getString("_UI_ScrapieIDPropertyCategory"),
+				 getString("_UI_IdentificationPropertyCategory"),
 				 null));
 	}
 
