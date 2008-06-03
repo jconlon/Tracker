@@ -24,6 +24,7 @@ import com.verticon.tracker.util.Species;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.verticon.tracker.impl.OvineImpl#getSheepBreed <em>Sheep Breed</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.OvineImpl#getScrapieTag <em>Scrapie Tag</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,6 +58,27 @@ public class OvineImpl extends AnimalImpl implements Ovine {
 	 * @ordered
 	 */
 	protected SheepBreed sheepBreed = SHEEP_BREED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getScrapieTag() <em>Scrapie Tag</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getScrapieTag()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SCRAPIE_TAG_EDEFAULT = null;
+
+
+	/**
+	 * The cached value of the '{@link #getScrapieTag() <em>Scrapie Tag</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getScrapieTag()
+	 * @generated
+	 * @ordered
+	 */
+	protected String scrapieTag = SCRAPIE_TAG_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -112,11 +134,34 @@ public class OvineImpl extends AnimalImpl implements Ovine {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getScrapieTag() {
+		return scrapieTag;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setScrapieTag(String newScrapieTag) {
+		String oldScrapieTag = scrapieTag;
+		scrapieTag = newScrapieTag;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.OVINE__SCRAPIE_TAG, oldScrapieTag, scrapieTag));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.OVINE__SHEEP_BREED:
 				return getSheepBreed();
+			case TrackerPackage.OVINE__SCRAPIE_TAG:
+				return getScrapieTag();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -131,6 +176,9 @@ public class OvineImpl extends AnimalImpl implements Ovine {
 		switch (featureID) {
 			case TrackerPackage.OVINE__SHEEP_BREED:
 				setSheepBreed((SheepBreed)newValue);
+				return;
+			case TrackerPackage.OVINE__SCRAPIE_TAG:
+				setScrapieTag((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -147,6 +195,9 @@ public class OvineImpl extends AnimalImpl implements Ovine {
 			case TrackerPackage.OVINE__SHEEP_BREED:
 				setSheepBreed(SHEEP_BREED_EDEFAULT);
 				return;
+			case TrackerPackage.OVINE__SCRAPIE_TAG:
+				setScrapieTag(SCRAPIE_TAG_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -161,6 +212,8 @@ public class OvineImpl extends AnimalImpl implements Ovine {
 		switch (featureID) {
 			case TrackerPackage.OVINE__SHEEP_BREED:
 				return sheepBreed != SHEEP_BREED_EDEFAULT;
+			case TrackerPackage.OVINE__SCRAPIE_TAG:
+				return SCRAPIE_TAG_EDEFAULT == null ? scrapieTag != null : !SCRAPIE_TAG_EDEFAULT.equals(scrapieTag);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -177,6 +230,8 @@ public class OvineImpl extends AnimalImpl implements Ovine {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (sheepBreed: ");
 		result.append(sheepBreed);
+		result.append(", scrapieTag: ");
+		result.append(scrapieTag);
 		result.append(')');
 		return result.toString();
 	}

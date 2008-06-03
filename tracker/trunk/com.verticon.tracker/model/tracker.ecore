@@ -186,6 +186,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Ovine" eSuperTypes="#//Animal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sheepBreed" eType="#//SheepBreed"
         defaultValueLiteral="Unspecified"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scrapieTag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BeefBreed">
     <eLiterals name="AN" literal="ABERDEEN ANGUS"/>

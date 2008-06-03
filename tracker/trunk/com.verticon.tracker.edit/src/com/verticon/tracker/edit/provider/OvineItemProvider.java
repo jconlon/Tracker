@@ -69,6 +69,7 @@ public class OvineItemProvider
 			super.getPropertyDescriptors(object);
 
 			addSheepBreedPropertyDescriptor(object);
+			addScrapieTagPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -95,6 +96,28 @@ public class OvineItemProvider
 				 new String[] {
 					"org.eclipse.ui.views.properties.expert"
 				 }));
+	}
+
+	/**
+	 * This adds a property descriptor for the Scrapie Tag feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addScrapieTagPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Ovine_scrapieTag_feature"),
+				 getString("_UI_Ovine_scrapieTag_description"),
+				 TrackerPackage.Literals.OVINE__SCRAPIE_TAG,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 getString("_UI_ScrapieIDPropertyCategory"),
+				 null));
 	}
 
 	/**
@@ -135,6 +158,7 @@ public class OvineItemProvider
 
 		switch (notification.getFeatureID(Ovine.class)) {
 			case TrackerPackage.OVINE__SHEEP_BREED:
+			case TrackerPackage.OVINE__SCRAPIE_TAG:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
