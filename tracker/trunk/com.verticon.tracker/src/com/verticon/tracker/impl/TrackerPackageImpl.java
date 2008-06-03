@@ -1619,6 +1619,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getOvine_ScrapieTag() {
+		return (EAttribute)ovineEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBovineBison() {
 		return bovineBisonEClass;
 	}
@@ -2025,6 +2034,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		ovineEClass = createEClass(OVINE);
 		createEAttribute(ovineEClass, OVINE__SHEEP_BREED);
+		createEAttribute(ovineEClass, OVINE__SCRAPIE_TAG);
 
 		bovineBisonEClass = createEClass(BOVINE_BISON);
 		createEAttribute(bovineBisonEClass, BOVINE_BISON__BUFFALO_BREED);
@@ -2310,6 +2320,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		initEClass(ovineEClass, Ovine.class, "Ovine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOvine_SheepBreed(), this.getSheepBreed(), "sheepBreed", "Unspecified", 0, 1, Ovine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOvine_ScrapieTag(), ecorePackage.getEString(), "scrapieTag", null, 0, 1, Ovine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bovineBisonEClass, BovineBison.class, "BovineBison", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBovineBison_BuffaloBreed(), this.getBisonBreed(), "buffaloBreed", "Unspecified", 0, 1, BovineBison.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

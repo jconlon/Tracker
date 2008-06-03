@@ -1035,13 +1035,22 @@ public interface TrackerPackage extends EPackage {
 	int OVINE__SHEEP_BREED = ANIMAL_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Scrapie Tag</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OVINE__SCRAPIE_TAG = ANIMAL_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Ovine</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OVINE_FEATURE_COUNT = ANIMAL_FEATURE_COUNT + 1;
+	int OVINE_FEATURE_COUNT = ANIMAL_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.BovineBisonImpl <em>Bovine Bison</em>}' class.
@@ -5777,6 +5786,17 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getOvine_SheepBreed();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Ovine#getScrapieTag <em>Scrapie Tag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Scrapie Tag</em>'.
+	 * @see com.verticon.tracker.Ovine#getScrapieTag()
+	 * @see #getOvine()
+	 * @generated
+	 */
+	EAttribute getOvine_ScrapieTag();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.BovineBison <em>Bovine Bison</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7155,6 +7175,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OVINE__SHEEP_BREED = eINSTANCE.getOvine_SheepBreed();
+
+		/**
+		 * The meta object literal for the '<em><b>Scrapie Tag</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OVINE__SCRAPIE_TAG = eINSTANCE.getOvine_ScrapieTag();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.BovineBisonImpl <em>Bovine Bison</em>}' class.

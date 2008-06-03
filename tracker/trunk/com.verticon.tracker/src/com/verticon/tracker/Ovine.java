@@ -16,6 +16,7 @@ package com.verticon.tracker;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.verticon.tracker.Ovine#getSheepBreed <em>Sheep Breed</em>}</li>
+ *   <li>{@link com.verticon.tracker.Ovine#getScrapieTag <em>Scrapie Tag</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,5 +61,31 @@ public interface Ovine extends Animal {
 	 * @generated
 	 */
 	void setSheepBreed(SheepBreed value);
+
+	/**
+	 * Returns the value of the '<em><b>Scrapie Tag</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Scrapie Tag</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Scrapie Tag</em>' attribute.
+	 * @see #setScrapieTag(String)
+	 * @see com.verticon.tracker.TrackerPackage#getOvine_ScrapieTag()
+	 * @model
+	 * @generated
+	 */
+	String getScrapieTag();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.Ovine#getScrapieTag <em>Scrapie Tag</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Scrapie Tag</em>' attribute.
+	 * @see #getScrapieTag()
+	 * @generated
+	 */
+	void setScrapieTag(String value);
 
 } // Ovine
