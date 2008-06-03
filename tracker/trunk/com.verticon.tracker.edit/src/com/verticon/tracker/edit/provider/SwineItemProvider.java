@@ -6,7 +6,6 @@
  */
 package com.verticon.tracker.edit.provider;
 
-
 import java.util.Collection;
 import java.util.List;
 
@@ -69,6 +68,8 @@ public class SwineItemProvider
 			super.getPropertyDescriptors(object);
 
 			addSwineBreedPropertyDescriptor(object);
+			addRightEarNotchingPropertyDescriptor(object);
+			addLeftEarNotchingPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -95,6 +96,50 @@ public class SwineItemProvider
 				 new String[] {
 					"org.eclipse.ui.views.properties.expert"
 				 }));
+	}
+
+	/**
+	 * This adds a property descriptor for the Right Ear Notching feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRightEarNotchingPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Swine_rightEarNotching_feature"),
+				 getString("_UI_Swine_rightEarNotching_description"),
+				 TrackerPackage.Literals.SWINE__RIGHT_EAR_NOTCHING,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 getString("_UI_EarNotchingPropertyCategory"),
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Left Ear Notching feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLeftEarNotchingPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Swine_leftEarNotching_feature"),
+				 getString("_UI_Swine_leftEarNotching_description"),
+				 TrackerPackage.Literals.SWINE__LEFT_EAR_NOTCHING,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 getString("_UI_EarNotchingPropertyCategory"),
+				 null));
 	}
 
 	/**
@@ -133,6 +178,8 @@ public class SwineItemProvider
 
 		switch (notification.getFeatureID(Swine.class)) {
 			case TrackerPackage.SWINE__SWINE_BREED:
+			case TrackerPackage.SWINE__RIGHT_EAR_NOTCHING:
+			case TrackerPackage.SWINE__LEFT_EAR_NOTCHING:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
