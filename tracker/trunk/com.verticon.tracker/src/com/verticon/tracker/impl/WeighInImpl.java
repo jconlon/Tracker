@@ -148,6 +148,9 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 			new CalendarDate(TimeZone.getDefault(), lastWeighIn.getDateTime());
 		
 		int daysSinceLastWeighIn = lastWeighInCalendarDate.daysUntil(myCalendarDate);
+		if(daysSinceLastWeighIn==0){
+			return null;
+		}
 		int weightGain = weight - lastWeighIn.getWeight();
 		return weightGain / daysSinceLastWeighIn;
 			
