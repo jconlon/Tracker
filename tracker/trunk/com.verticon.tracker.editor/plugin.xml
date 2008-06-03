@@ -127,6 +127,14 @@
   			label="%_UI_TrackerTagsPopupAnimalsTemplateEvents_label"
   			menubarPath="com.verticon.tracker.editor.animal.popupSubMenu/content"
   			tooltip="%_UI_TrackerTagsPopupAnimalsTemplateEvents_description" />
+    <action
+          class="com.verticon.tracker.editor.actions.ChangeAnimalType"
+          enablesFor="+"
+          id="com.verticon.tracker.editor.actions.ChangeAnimalTypes"
+          label="Change Animal Type"
+          menubarPath="com.verticon.tracker.editor.animal.popupSubMenu/content"
+          tooltip="Changes the Types of the selected animals.">
+    </action>
 
   	</objectContribution>
   </extension>
