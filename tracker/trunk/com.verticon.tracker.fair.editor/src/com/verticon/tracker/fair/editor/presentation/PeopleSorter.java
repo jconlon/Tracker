@@ -114,9 +114,10 @@ public class PeopleSorter extends ViewerSorter {
 				break;
 			case COMMENTS :
 				returnValue = compareComments(person1, person2);
+				break;
 			case PIN :
 				returnValue = comparePins(person1, person2);
-			
+				break;
 				
 			default:
 				returnValue = 0;
