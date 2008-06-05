@@ -5,18 +5,11 @@ Bundle-SymbolicName: com.verticon.tracker.view.events; singleton:=true
 Bundle-Version: 0.1.0
 Bundle-Vendor: Verticon, Inc.
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.ui,
  com.verticon.tracker.edit,
  com.verticon.tracker,
- org.eclipse.ui.ide
+ org.eclipse.emf.databinding,
+ org.eclipse.emf.edit.ui
 Import-Package: com.verticon.tracker.editor.presentation;version="0.1.0",
- com.verticon.tracker.editor.util;version="0.1.0",
  com.verticon.tracker.fair,
  com.verticon.tracker.fair.transaction.editor.popup.actions,
- org.eclipse.core.databinding.observable.list,
- org.eclipse.core.databinding.observable.map,
- org.eclipse.core.databinding.observable.set,
- org.eclipse.emf.databinding,
- org.eclipse.emf.edit.ui.provider,
- org.eclipse.jface.databinding.viewers,
  org.slf4j;version="1.5.0"
