@@ -170,6 +170,7 @@ import com.verticon.tracker.transaction.editor.presentation.TransactionalEventHi
  *   <li>implements previous two items with adapters for IEventSelectionProvider, 
  *   	 IAnimalSelectionProvider, ISelectionViewerProvider,  </li>
  * </ul>
+ * @deprecated use as an example
  * <!-- end-user-doc -->
  * @generated
  */
@@ -403,6 +404,7 @@ public class FairTransactionEditor1
 	private Map<Resource, URI> movedResources = new HashMap<Resource, URI>();
 	
 	//.CUSTOM: We track dirty state by the last operation executed when saved
+	@SuppressWarnings("unused")
 	private IUndoableOperation savedOperation;
 	
 	//.CUSTOM: Applies this editor's undo context to operations that affect
@@ -1024,6 +1026,7 @@ public class FairTransactionEditor1
 	 * 
 	 * @generated NOT
 	 */
+	@SuppressWarnings("unused")
 	private void resetInputOnTableViewers() {
 		logger.debug("Reloading resources");
 		  Object rootObject = getRoot();
