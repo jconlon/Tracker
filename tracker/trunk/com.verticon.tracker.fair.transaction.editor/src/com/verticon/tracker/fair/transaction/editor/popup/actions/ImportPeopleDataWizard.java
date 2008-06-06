@@ -15,6 +15,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -110,7 +111,7 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 
 	@Override
 	public boolean canFinish() {
-		return exhibitPage.getSelectedLot()!=null ;
+		return exhibitPage!=null && exhibitPage.getSelectedLot()!=null ;
 	}
 	
 	@Override
@@ -412,11 +413,12 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 	 */
 	private void createExhibit(CompoundCommand compoundCommand, HSSFRow row, Person person, Fair fair, EditingDomain editingDomain){
 		//Need to have an animal map to create an Exhibit
+		Assert.isNotNull(fair, "Fair cannot be null");
 		String id = getColumnValue( row, FairPackage.Literals.EXHIBIT__ANIMAL);
 
 		if(id==null){
 			logger.warn("Row={} could not find animal mapper in row to create an exhibit.",
-					row.getRowNum(),id);
+					row.getRowNum());
 			return;
 		}
 		Animal animal = fair.getPremises().findAnimal(id);
