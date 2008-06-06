@@ -30,6 +30,7 @@ public class BaseConfigureExhibitWizardPage extends WizardPage implements ISelec
 	private Lot selectedLot;
 	private ListViewer listViewer;
 	protected final Fair fair;
+	protected boolean failedTofindAnyLots = false;
 
 	public BaseConfigureExhibitWizardPage(String pageName, Fair fair) {
 		super(pageName);
@@ -102,7 +103,12 @@ public class BaseConfigureExhibitWizardPage extends WizardPage implements ISelec
 	
 			public Object[] getElements(Object parent) {
 				if (model.isEmpty()) {
-					model.addAll(getLots());
+					List<Lot>lots = getLots();
+					if(lots.isEmpty()){
+						failedTofindAnyLots = true;
+					}else{
+						model.addAll(getLots());
+					}
 				}
 				return model.toArray();
 			}
@@ -142,6 +148,12 @@ public class BaseConfigureExhibitWizardPage extends WizardPage implements ISelec
 	private void updatePageComplete() {
 		setPageComplete(false);
 	
+		if(failedTofindAnyLots){
+			setMessage(null);
+			setErrorMessage(
+				"Found no lots in the fair.  You must create at least one Lot to use this filter. ");
+			return;
+		}
 		if (listViewer.getSelection() == null) {
 			setMessage(null);
 			setErrorMessage(

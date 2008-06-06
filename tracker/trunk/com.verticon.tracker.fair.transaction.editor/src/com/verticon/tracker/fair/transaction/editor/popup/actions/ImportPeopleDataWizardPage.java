@@ -14,7 +14,6 @@ import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -24,6 +23,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,29 +89,24 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 	}
 
 	protected TableViewer createViewer(Composite parent) {
-		Table table = new Table(parent, SWT.SINGLE | SWT.H_SCROLL
-				| SWT.V_SCROLL | SWT.BORDER);
-		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, true);
-		table.setLayoutData(gridData);
+		Table table = new Table(
+				parent, SWT.SINGLE | SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.HIDE_SELECTION);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
+		
+		TableColumn tc = new TableColumn(table, SWT.NONE);
+		tc.setText("Column Number");
+		tc.pack();
+		
+		TableColumn tc2 = new TableColumn(table, SWT.NONE);
+		tc2.setText("Column Name");
+		tc2.pack();
+		
+		TableColumn tc3 = new TableColumn(table, SWT.NONE);
+		tc3.setText("Fair Model Element Feature Name");
+		tc3.pack();
+				
 		final TableViewer viewer = new TableViewer(table);
-		TableViewerColumn col1 = new TableViewerColumn(viewer, SWT.NONE);
-		col1.getColumn().setText("Column Number");
-		col1.getColumn().setWidth(20);
-		col1.getColumn().pack();
-		
-		TableViewerColumn col2 = new TableViewerColumn(viewer, SWT.NONE);
-		col2.getColumn().setText("Column Name");
-		col2.getColumn().setWidth(100);
-		col2.getColumn().pack();
-		
-		TableViewerColumn col3 = new TableViewerColumn(viewer, SWT.NONE);
-		col3.getColumn().setText("Fair Model Element Feature Name");
-		col3.getColumn().setWidth(100);
-
-		col3.getColumn().pack();
-
 		viewer.setContentProvider(new IStructuredContentProvider() {
 
 			public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
