@@ -218,10 +218,18 @@ public class TrackerEventsView extends ViewPart implements ISelectionListener,
 	 */
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		IWorkbenchPartSite site = part.getSite();
+		if(site ==null){
+			return;
+		}
 		IWorkbenchWindow workbenchWindow = site.getWorkbenchWindow();
-
-		IEditorPart editorPart = workbenchWindow.getActivePage()
-				.getActiveEditor();
+		if(workbenchWindow==null){
+			return;
+		}
+		
+		IEditorPart editorPart = workbenchWindow.getActivePage().getActiveEditor();
+		if(editorPart ==null){
+			return;
+		}
 
 		IQueryDataSetProvider selectedQueryDataSetProvider = (IQueryDataSetProvider) editorPart
 				.getAdapter(IQueryDataSetProvider.class);
