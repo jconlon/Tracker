@@ -8,7 +8,7 @@
  * Contributors:
  *     Trevor S. Kaufman - initial API and implementation
  ******************************************************************************/
-package com.verticon.tracker.view.events.views;
+package com.verticon.tracker.editor.util;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -49,6 +49,7 @@ import org.eclipse.ui.IWorkbenchPreferenceConstants;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.progress.WorkbenchJob;
+
 
 /**
  * A simple control that provides a text widget and a tree viewer. The contents
@@ -637,7 +638,7 @@ public class FilteredTable extends Composite {
 	 * 
 	 * @param string
 	 */
-	protected void setFilterText(String string) {
+	public void setFilterText(String string) {
 		if (filterText != null) {
 			filterText.setText(string);
 			selectAll();

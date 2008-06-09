@@ -129,7 +129,7 @@ import com.verticon.tracker.editor.presentation.IEventSelectionProvider;
 import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.editor.presentation.ISelectionViewerProvider;
 import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
-import com.verticon.tracker.editor.presentation.TrackerTableEditorUtils;
+import com.verticon.tracker.editor.util.TrackerTableEditorUtils;
 import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
 import com.verticon.tracker.transaction.editor.domain.ResourceLoadedListener;
 
@@ -1212,8 +1212,9 @@ public class TrackerTransactionEditor
 			}
 		};
 		viewerPane.createControl(getContainer());
-		eventsTableViewer = TrackerTableEditorUtils.createEventsTableViewer(
-				viewerPane);
+		eventsTableViewer = (TableViewer) viewerPane.getViewer();
+			
+	    TrackerTableEditorUtils.setUpEventsTableViewer(eventsTableViewer);
 
 		eventsTableViewer.setContentProvider(
 				new TransactionalEventHistoryContentProvider(

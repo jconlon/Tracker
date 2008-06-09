@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.verticon.tracker.editor.presentation;
+package com.verticon.tracker.editor.util;
 
 import org.eclipse.emf.common.ui.ViewerPane;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -11,8 +11,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.verticon.tracker.editor.presentation.AnimalSorter;
+import com.verticon.tracker.editor.presentation.EventSorter;
+import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 
 /**
  * @author jconlon
@@ -20,11 +22,6 @@ import org.slf4j.LoggerFactory;
  */
 public class TrackerTableEditorUtils {
 	
-	/**
-	 * slf4j Logger
-	 */
-	private static final Logger logger = LoggerFactory
-			.getLogger(TrackerTableEditorUtils.class);
 	/**
 	 * Animals Table
 	 */
@@ -183,45 +180,48 @@ public class TrackerTableEditorUtils {
 		
 	}
 
+	
+	
 	/**
 	 * Events Table
 	 */
-	public static TableViewer createEventsTableViewer(ViewerPane viewerPane) {
-	
-		final TableViewer eventsTableViewer = (TableViewer)viewerPane.getViewer();
+	public static void setUpEventsTableViewer(
+			final TableViewer eventsTableViewer) {
 		
 		final Table table = eventsTableViewer.getTable();
+		
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		eventsTableViewer.setUseHashlookup(true);
-	
-		//Date of Event 
+		
+		
+		// Date of Event
 		final TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 170, true));
 		dateTimeColumn.setText(getString("_UI_DateTimeColumn_label"));
 		dateTimeColumn.setMoveable(true);
-		
-		//Event Type
+
+		// Event Type
 		final TableColumn eventNameColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 60, true));
 		eventNameColumn.setText(getString("_UI_EventNameColumn_label"));
 		eventNameColumn.setMoveable(true);
-		
-		//Animal
+
+		// Animal
 		final TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 230, true));
 		animalIDColumn.setText(getString("_UI_AnimalParentColumn_label"));
 		animalIDColumn.setMoveable(true);
-		
-		//Tag ID Number
+
+		// Tag ID Number
 		final TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 150, true));
 		tagIDColumn.setText(getString("_UI_TagColumn_label"));
 		tagIDColumn.setMoveable(true);
-		
-		//Comments
+
+		// Comments
 		final TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(3, 180, true));
 		eventCommentsColumn.setText(getString("_UI_CommentsColumn_label"));
@@ -244,7 +244,7 @@ public class TrackerTableEditorUtils {
 				// sort the data based on column and direction
 
 				int sortIdentifier = 0;
-			
+
 				if (currentColumn == animalIDColumn) {
 					sortIdentifier = EventSorter.ANIMAL_IDNUMBER;
 				}
@@ -252,7 +252,6 @@ public class TrackerTableEditorUtils {
 				if (currentColumn == tagIDColumn) {
 					sortIdentifier = EventSorter.TAG_IDNUMBER;
 				}
-
 
 				if (currentColumn == dateTimeColumn) {
 					sortIdentifier = EventSorter.DATETIME;
@@ -267,33 +266,21 @@ public class TrackerTableEditorUtils {
 				}
 
 				table.setSortDirection(dir);
-				eventsTableViewer.setSorter(new EventSorter(sortIdentifier,dir));
+				eventsTableViewer
+						.setSorter(new EventSorter(sortIdentifier, dir));
 			}
-			
+
 		};
-		
+
 		animalIDColumn.addListener(SWT.Selection, sortListener);
 		tagIDColumn.addListener(SWT.Selection, sortListener);
 		dateTimeColumn.addListener(SWT.Selection, sortListener);
 		eventNameColumn.addListener(SWT.Selection, sortListener);
 		eventCommentsColumn.addListener(SWT.Selection, sortListener);
-		eventsTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e"});
-		
-		/**
-		 * The default ItemProvider returned via the adapterFactory
-		 * for Premises does not really handle any notifications 
-		 * of events being added or removed, so just NOOP it.
-		 * 
-		 * 
-		 * To get Event Elements override the getElements method 
-		 * and use getEventHistory
-		 */
-		logger.debug("Setting up contentProvider for eventsTable = {}",eventsTableViewer);
-		
-		
-		return eventsTableViewer;
-		}
-		
+		eventsTableViewer.setColumnProperties(new String[] { "a", "b", "c",
+				"d", "e" });
+
+	}
 		/**
 		 * This looks up a string in the plugin's plugin.properties file.
 		 * <!-- begin-user-doc -->

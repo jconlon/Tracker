@@ -23,13 +23,11 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
@@ -39,10 +37,8 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISelectionListener;
@@ -61,9 +57,11 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.presentation.EventHistoryContentProvider;
-import com.verticon.tracker.editor.presentation.EventSorter;
 import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
+import com.verticon.tracker.editor.util.FilteredTable;
+import com.verticon.tracker.editor.util.TableColumnPatternFilter;
+import com.verticon.tracker.editor.util.TrackerTableEditorUtils;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.Person;
@@ -169,21 +167,15 @@ public class TrackerEventsView extends ViewPart implements ISelectionListener,
 				| SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER, patternFilter);
 		filteredTable.setFilterText("123");
 		viewer = filteredTable.getViewer();
-
 		viewer.addSelectionChangedListener(this);
 		Table table = viewer.getTable();
-		TableLayout layout = new TableLayout();
-		table.setLayout(layout);
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-
 		// set up table layout data
 		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, true);
 		gridData.widthHint = SWT.DEFAULT;
 		gridData.heightHint = SWT.DEFAULT;
 		table.setLayoutData(gridData);
 
-		setUpEventsTableViewer(table, layout, viewer);
+		TrackerTableEditorUtils.setUpEventsTableViewer(viewer);
 		filteredTable.setColumns(viewer.getTable().getColumns());
 
 		viewer.setContentProvider(new EventHistoryContentProvider(
@@ -333,96 +325,7 @@ public class TrackerEventsView extends ViewPart implements ISelectionListener,
 		filteredTable.getColumnCombo().select(3);
 	}
 
-	/**
-	 * Events Table
-	 */
-	public static void setUpEventsTableViewer(final Table table,
-			TableLayout layout, final TableViewer eventsTableViewer) {
-
-		// Date of Event
-		final TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 170, true));
-		dateTimeColumn.setText(getString("_UI_DateTimeColumn_label"));
-		dateTimeColumn.setMoveable(true);
-
-		// Event Type
-		final TableColumn eventNameColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 60, true));
-		eventNameColumn.setText(getString("_UI_EventNameColumn_label"));
-		eventNameColumn.setMoveable(true);
-
-		// Animal
-		final TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 230, true));
-		animalIDColumn.setText(getString("_UI_AnimalParentColumn_label"));
-		animalIDColumn.setMoveable(true);
-
-		// Tag ID Number
-		final TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 150, true));
-		tagIDColumn.setText(getString("_UI_TagColumn_label"));
-		tagIDColumn.setMoveable(true);
-
-		// Comments
-		final TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 180, true));
-		eventCommentsColumn.setText(getString("_UI_CommentsColumn_label"));
-		eventCommentsColumn.setMoveable(true);
-
-		Listener sortListener = new Listener() {
-
-			public void handleEvent(org.eclipse.swt.widgets.Event e) {
-				// determine new sort column and direction
-				TableColumn sortColumn = table.getSortColumn();
-				TableColumn currentColumn = (TableColumn) e.widget;
-				int dir = table.getSortDirection();
-				if (sortColumn == currentColumn) {
-					dir = dir == SWT.UP ? SWT.DOWN : SWT.UP;
-				} else {
-					table.setSortColumn(currentColumn);
-					dir = SWT.UP;
-				}
-
-				// sort the data based on column and direction
-
-				int sortIdentifier = 0;
-
-				if (currentColumn == animalIDColumn) {
-					sortIdentifier = EventSorter.ANIMAL_IDNUMBER;
-				}
-
-				if (currentColumn == tagIDColumn) {
-					sortIdentifier = EventSorter.TAG_IDNUMBER;
-				}
-
-				if (currentColumn == dateTimeColumn) {
-					sortIdentifier = EventSorter.DATETIME;
-				}
-
-				if (currentColumn == eventNameColumn) {
-					sortIdentifier = EventSorter.EVENT_TYPE;
-				}
-
-				if (currentColumn == eventCommentsColumn) {
-					sortIdentifier = EventSorter.EVENT_COMMENTS;
-				}
-
-				table.setSortDirection(dir);
-				eventsTableViewer
-						.setSorter(new EventSorter(sortIdentifier, dir));
-			}
-
-		};
-
-		animalIDColumn.addListener(SWT.Selection, sortListener);
-		tagIDColumn.addListener(SWT.Selection, sortListener);
-		dateTimeColumn.addListener(SWT.Selection, sortListener);
-		eventNameColumn.addListener(SWT.Selection, sortListener);
-		eventCommentsColumn.addListener(SWT.Selection, sortListener);
-		eventsTableViewer.setColumnProperties(new String[] { "a", "b", "c",
-				"d", "e" });
-
-	}
+	
 
 	/**
 	 * This looks up a string in the plugin's plugin.properties file. <!--
