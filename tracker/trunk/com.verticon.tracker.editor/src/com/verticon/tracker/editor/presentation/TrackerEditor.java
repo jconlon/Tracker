@@ -137,6 +137,7 @@ import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.FairRegistrationItemProvider;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
+import com.verticon.tracker.editor.util.TrackerTableEditorUtils;
 import com.verticon.tracker.editor.validation.LiveValidationContentAdapter;
 import com.verticon.tracker.emf.edit.ui.provider.FairRegistrationAdapterFactoryLableProvider;
 import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelProvider;
@@ -1529,8 +1530,10 @@ public class TrackerEditor
 			}
 		};
 		viewerPane.createControl(getContainer());
-		eventsTableViewer = TrackerTableEditorUtils.createEventsTableViewer(
-				viewerPane);
+		eventsTableViewer = (TableViewer) viewerPane.getViewer();
+		
+		TrackerTableEditorUtils.setUpEventsTableViewer(eventsTableViewer);
+		
 		
 		eventsTableViewer.setContentProvider(new EventHistoryContentProvider(adapterFactory));
 		eventsTableViewer.setLabelProvider(

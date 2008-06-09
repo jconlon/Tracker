@@ -8,7 +8,7 @@
  * Contributors:
  *     Trevor S. Kaufman - initial API and implementation
  ******************************************************************************/
-package com.verticon.tracker.view.events.views;
+package com.verticon.tracker.editor.util;
 
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
