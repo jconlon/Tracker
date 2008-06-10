@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.verticon.tracker.fair.editor.presentation;
+package com.verticon.tracker.fair.editor.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,8 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.verticon.tracker.fair.Person;
+import com.verticon.tracker.fair.editor.presentation.ExhibitSorter;
+import com.verticon.tracker.fair.editor.presentation.FairEditorPlugin;
 
 
 /**

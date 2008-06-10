@@ -31,6 +31,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TableColumn;
 
+import com.verticon.tracker.editor.util.DefaultPropertiesFormProvider;
+import com.verticon.tracker.editor.util.IPropertiesFormProvider;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YoungPerson;

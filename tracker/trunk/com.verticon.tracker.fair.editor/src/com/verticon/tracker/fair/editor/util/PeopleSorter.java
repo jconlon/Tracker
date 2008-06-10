@@ -5,7 +5,7 @@
  * 
  */
 
-package com.verticon.tracker.fair.editor.presentation;
+package com.verticon.tracker.fair.editor.util;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;

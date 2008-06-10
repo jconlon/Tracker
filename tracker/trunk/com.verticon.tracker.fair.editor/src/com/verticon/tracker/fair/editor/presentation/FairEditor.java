@@ -130,11 +130,12 @@ import com.verticon.tracker.editor.presentation.IEventSelectionProvider;
 import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.editor.presentation.ISelectionViewerProvider;
 import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
-import com.verticon.tracker.editor.presentation.TrackerTableEditorUtils;
+import com.verticon.tracker.editor.util.TrackerTableEditorUtils;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
+import com.verticon.tracker.fair.editor.util.FairTableEditorUtils;
 
 
 /**
@@ -1229,9 +1230,10 @@ public class FairEditor
 			}
 		};
 		viewerPane.createControl(getContainer());
-		eventsTableViewer = TrackerTableEditorUtils.createEventsTableViewer(
-				viewerPane);
 		
+		eventsTableViewer = (TableViewer)viewerPane.getViewer();
+		
+		TrackerTableEditorUtils.setUpEventsTableViewer(eventsTableViewer);
 		addEventsTableViewerProviders();
 		
 
@@ -1271,9 +1273,14 @@ public class FairEditor
 				setCurrentViewerPane(this);
 			}
 		};
-		viewerPane.createControl(getContainer());
-		animalsTableViewer = TrackerTableEditorUtils.createAnimalsTableViewer(viewerPane);
+//		viewerPane.createControl(getContainer());
+//		animalsTableViewer = TrackerTableEditorUtils.createAnimalsTableViewer(viewerPane);
 
+		viewerPane.createControl(getContainer());
+		animalsTableViewer = (TableViewer) viewerPane.getViewer();
+			
+		TrackerTableEditorUtils.setUpAnimalsTableViewer(animalsTableViewer);
+		
 		addAnimalsTableViewerProviders();
 		
 		Object rootObject = getRoot();

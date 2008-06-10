@@ -1,4 +1,4 @@
-package com.verticon.tracker.fair.transaction.editor.popup.actions;
+package com.verticon.tracker.editor.util;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.jface.viewers.ISelection;
