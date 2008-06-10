@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracker Animals View
+Bundle-SymbolicName: com.verticon.tracker.views;singleton:=true
+Bundle-Version: 0.1.0
+Bundle-Vendor: Verticon, Inc.
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ com.verticon.tracker,
+ com.verticon.tracker.edit,
+ org.eclipse.emf.edit.ui,
+ org.eclipse.emf.databinding
+Import-Package: com.verticon.tracker.editor.presentation;version="0.1.0",
+ com.verticon.tracker.editor.util;version="0.1.0",
+ com.verticon.tracker.fair,
+ org.slf4j;version="1.5.0"
