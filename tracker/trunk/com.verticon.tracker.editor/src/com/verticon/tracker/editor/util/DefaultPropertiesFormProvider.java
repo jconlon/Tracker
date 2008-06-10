@@ -1,4 +1,4 @@
-package com.verticon.tracker.fair.transaction.editor.popup.actions;
+package com.verticon.tracker.editor.util;
 
 import java.util.HashMap;
 import java.util.Map;

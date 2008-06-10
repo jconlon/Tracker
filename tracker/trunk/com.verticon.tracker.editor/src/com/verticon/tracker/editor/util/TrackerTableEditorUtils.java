@@ -3,7 +3,6 @@
  */
 package com.verticon.tracker.editor.util;
 
-import org.eclipse.emf.common.ui.ViewerPane;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
@@ -25,8 +24,7 @@ public class TrackerTableEditorUtils {
 	/**
 	 * Animals Table
 	 */
-	public static TableViewer createAnimalsTableViewer(ViewerPane viewerPane) {
-		final TableViewer tableViewer = (TableViewer)viewerPane.getViewer();
+	public static void setUpAnimalsTableViewer(final TableViewer tableViewer) {
 		final Table table = tableViewer.getTable();
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
@@ -176,11 +174,10 @@ public class TrackerTableEditorUtils {
 		tableViewer.setColumnProperties(
 				new String [] {"a", "b", "c", "d", "e","f", "g", "h","i","j","k","l"});
 		
-		return tableViewer;
+		
 		
 	}
 
-	
 	
 	/**
 	 * Events Table

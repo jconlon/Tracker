@@ -23,6 +23,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.editor.util.DefaultPropertiesFormProvider;
+import com.verticon.tracker.editor.util.IPropertiesFormProvider;
 
 /**
  * Shows a list of the selected animals with an option of editing their

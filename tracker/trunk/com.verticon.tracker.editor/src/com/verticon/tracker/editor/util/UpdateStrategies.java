@@ -1,4 +1,4 @@
-package com.verticon.tracker.fair.transaction.editor.popup.actions;
+package com.verticon.tracker.editor.util;
 
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.observable.IObserving;
@@ -6,9 +6,10 @@ import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import com.verticon.tracker.fair.FairPackage;
+import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.util.CheckISO7064Mod37_36;
 
 public class UpdateStrategies {
@@ -23,9 +24,19 @@ public class UpdateStrategies {
 
 	
 	protected UpdateValueStrategy getTargetToModelStrategy(EStructuralFeature eStructuralFeature){
-		if(FairPackage.eINSTANCE.getPerson_Pin().equals(eStructuralFeature)){
-			return new CustomUpdateValueStrategy();
+//		if(FairPackage.eINSTANCE.getPerson_Pin().equals(eStructuralFeature)){
+//			return new CustomUpdateValueStrategy();
+//		}
+//		if(eStructuralFeature.getEType().equals(TrackerPackage.eINSTANCE.getPremisesIdNumber()))
+		
+		if(eStructuralFeature instanceof EAttribute){
+			EAttribute e = (EAttribute)eStructuralFeature;
+			if(e.getEAttributeType().equals(TrackerPackage.eINSTANCE.getPremisesIdNumber())){
+				return new CustomUpdateValueStrategy();
+			}
 		}
+		
+		
 		return null;
 	}
 	

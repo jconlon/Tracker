@@ -1566,9 +1566,12 @@ public class TrackerEditor
 					setCurrentViewerPane(this);
 				}
 			};
+			
 		viewerPane.createControl(getContainer());
-		animalsTableViewer = TrackerTableEditorUtils.createAnimalsTableViewer(viewerPane);
-
+		animalsTableViewer = (TableViewer) viewerPane.getViewer();
+			
+		TrackerTableEditorUtils.setUpAnimalsTableViewer(animalsTableViewer);
+		
 		/**
 		 * The default ItemProvider returned via the adapterFactory
 		 * for Premises should be able to handle all notifications 
