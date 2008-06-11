@@ -25,6 +25,9 @@
         eType="#//Person"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="lot" lowerBound="1" eType="#//Lot"
         eOpposite="#//Lot/exhibits"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="salesOrder" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inAuction" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="YouthClub">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -76,6 +79,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pin" eType="ecore:EDataType ../../com.verticon.tracker/model/tracker.ecore#//PremisesIdNumber"
         unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="salesOrder" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="ZipCode" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EDataType" name="USTelephoneNumber" instanceClassName="java.lang.String"/>

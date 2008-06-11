@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.fair.Person#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Person#getComments <em>Comments</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Person#getPin <em>Pin</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Person#getSalesOrder <em>Sales Order</em>}</li>
  * </ul>
  * </p>
  *
@@ -326,5 +327,31 @@ public interface Person extends EObject {
 	 * @generated
 	 */
 	boolean isSetPin();
+
+	/**
+	 * Returns the value of the '<em><b>Sales Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sales Order</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sales Order</em>' attribute.
+	 * @see #setSalesOrder(int)
+	 * @see com.verticon.tracker.fair.FairPackage#getPerson_SalesOrder()
+	 * @model
+	 * @generated
+	 */
+	int getSalesOrder();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.fair.Person#getSalesOrder <em>Sales Order</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Sales Order</em>' attribute.
+	 * @see #getSalesOrder()
+	 * @generated
+	 */
+	void setSalesOrder(int value);
 
 } // Person

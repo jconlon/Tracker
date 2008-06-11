@@ -37,6 +37,8 @@
           ecoreFeature="ecore:EReference fair.ecore#//Exhibit/lot">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/salesOrder"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/inAuction"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//YouthClub">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//YouthClub/name"/>
@@ -77,6 +79,7 @@
           ecoreFeature="ecore:EAttribute fair.ecore#//Person/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/comments"/>
       <genFeatures createChild="false" propertyCategory="Premises of Person" ecoreFeature="ecore:EAttribute fair.ecore#//Person/pin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/salesOrder"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//YoungPerson">
       <genFeatures notify="false" createChild="false" propertyCategory="Sponsors"
