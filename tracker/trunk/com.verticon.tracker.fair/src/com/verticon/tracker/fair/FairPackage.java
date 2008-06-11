@@ -8,6 +8,7 @@ package com.verticon.tracker.fair;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -213,13 +214,22 @@ public interface FairPackage extends EPackage {
 	int EXHIBIT__IN_AUCTION = 7;
 
 	/**
+	 * The feature id for the '<em><b>Award</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXHIBIT__AWARD = 8;
+
+	/**
 	 * The number of structural features of the '<em>Exhibit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXHIBIT_FEATURE_COUNT = 8;
+	int EXHIBIT_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.YouthClubImpl <em>Youth Club</em>}' class.
@@ -707,6 +717,16 @@ public interface FairPackage extends EPackage {
 	int YOUNG_PERSON_FEATURE_COUNT = PERSON_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link com.verticon.tracker.fair.Award <em>Award</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.fair.Award
+	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getAward()
+	 * @generated
+	 */
+	int AWARD = 9;
+
+	/**
 	 * The meta object id for the '<em>Zip Code</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -714,7 +734,7 @@ public interface FairPackage extends EPackage {
 	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getZipCode()
 	 * @generated
 	 */
-	int ZIP_CODE = 9;
+	int ZIP_CODE = 10;
 
 	/**
 	 * The meta object id for the '<em>US Telephone Number</em>' data type.
@@ -724,7 +744,7 @@ public interface FairPackage extends EPackage {
 	 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getUSTelephoneNumber()
 	 * @generated
 	 */
-	int US_TELEPHONE_NUMBER = 10;
+	int US_TELEPHONE_NUMBER = 11;
 
 
 	/**
@@ -889,6 +909,17 @@ public interface FairPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getExhibit_InAuction();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Exhibit#getAward <em>Award</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Award</em>'.
+	 * @see com.verticon.tracker.fair.Exhibit#getAward()
+	 * @see #getExhibit()
+	 * @generated
+	 */
+	EAttribute getExhibit_Award();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.YouthClub <em>Youth Club</em>}'.
@@ -1269,6 +1300,16 @@ public interface FairPackage extends EPackage {
 	EReference getYoungPerson_Club();
 
 	/**
+	 * Returns the meta object for enum '{@link com.verticon.tracker.fair.Award <em>Award</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Award</em>'.
+	 * @see com.verticon.tracker.fair.Award
+	 * @generated
+	 */
+	EEnum getAward();
+
+	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>Zip Code</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1435,6 +1476,14 @@ public interface FairPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EXHIBIT__IN_AUCTION = eINSTANCE.getExhibit_InAuction();
+
+		/**
+		 * The meta object literal for the '<em><b>Award</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXHIBIT__AWARD = eINSTANCE.getExhibit_Award();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.YouthClubImpl <em>Youth Club</em>}' class.
@@ -1729,6 +1778,16 @@ public interface FairPackage extends EPackage {
 		 * @generated
 		 */
 		EReference YOUNG_PERSON__CLUB = eINSTANCE.getYoungPerson_Club();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.fair.Award <em>Award</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.fair.Award
+		 * @see com.verticon.tracker.fair.impl.FairPackageImpl#getAward()
+		 * @generated
+		 */
+		EEnum AWARD = eINSTANCE.getAward();
 
 		/**
 		 * The meta object literal for the '<em>Zip Code</em>' data type.
