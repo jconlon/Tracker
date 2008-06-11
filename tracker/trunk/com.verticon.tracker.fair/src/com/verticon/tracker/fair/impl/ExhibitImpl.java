@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.fair.Award;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.Lot;
@@ -34,6 +35,7 @@ import com.verticon.tracker.fair.Person;
  *   <li>{@link com.verticon.tracker.fair.impl.ExhibitImpl#getLot <em>Lot</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ExhibitImpl#getSalesOrder <em>Sales Order</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ExhibitImpl#isInAuction <em>In Auction</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.ExhibitImpl#getAward <em>Award</em>}</li>
  * </ul>
  * </p>
  *
@@ -156,6 +158,26 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	 * @ordered
 	 */
 	protected boolean inAuction = IN_AUCTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getAward() <em>Award</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAward()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Award AWARD_EDEFAULT = Award.UNSPECIFIED;
+
+	/**
+	 * The cached value of the '{@link #getAward() <em>Award</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAward()
+	 * @generated
+	 * @ordered
+	 */
+	protected Award award = AWARD_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -399,6 +421,27 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Award getAward() {
+		return award;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAward(Award newAward) {
+		Award oldAward = award;
+		award = newAward == null ? AWARD_EDEFAULT : newAward;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.EXHIBIT__AWARD, oldAward, award));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -464,6 +507,8 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 				return new Integer(getSalesOrder());
 			case FairPackage.EXHIBIT__IN_AUCTION:
 				return isInAuction() ? Boolean.TRUE : Boolean.FALSE;
+			case FairPackage.EXHIBIT__AWARD:
+				return getAward();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -496,6 +541,9 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 				return;
 			case FairPackage.EXHIBIT__IN_AUCTION:
 				setInAuction(((Boolean)newValue).booleanValue());
+				return;
+			case FairPackage.EXHIBIT__AWARD:
+				setAward((Award)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -530,6 +578,9 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 			case FairPackage.EXHIBIT__IN_AUCTION:
 				setInAuction(IN_AUCTION_EDEFAULT);
 				return;
+			case FairPackage.EXHIBIT__AWARD:
+				setAward(AWARD_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -558,6 +609,8 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 				return getSalesOrder() != SALES_ORDER_EDEFAULT;
 			case FairPackage.EXHIBIT__IN_AUCTION:
 				return inAuction != IN_AUCTION_EDEFAULT;
+			case FairPackage.EXHIBIT__AWARD:
+				return award != AWARD_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -580,6 +633,8 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 		result.append(comments);
 		result.append(", inAuction: ");
 		result.append(inAuction);
+		result.append(", award: ");
+		result.append(award);
 		result.append(')');
 		return result.toString();
 	}

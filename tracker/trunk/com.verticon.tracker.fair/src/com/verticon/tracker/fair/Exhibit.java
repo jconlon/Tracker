@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.fair.Exhibit#getLot <em>Lot</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Exhibit#getSalesOrder <em>Sales Order</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Exhibit#isInAuction <em>In Auction</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Exhibit#getAward <em>Award</em>}</li>
  * </ul>
  * </p>
  *
@@ -238,5 +239,34 @@ public interface Exhibit extends EObject {
 	 * @generated
 	 */
 	void setInAuction(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Award</b></em>' attribute.
+	 * The literals are from the enumeration {@link com.verticon.tracker.fair.Award}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Award</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Award</em>' attribute.
+	 * @see com.verticon.tracker.fair.Award
+	 * @see #setAward(Award)
+	 * @see com.verticon.tracker.fair.FairPackage#getExhibit_Award()
+	 * @model
+	 * @generated
+	 */
+	Award getAward();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.fair.Exhibit#getAward <em>Award</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Award</em>' attribute.
+	 * @see com.verticon.tracker.fair.Award
+	 * @see #getAward()
+	 * @generated
+	 */
+	void setAward(Award value);
 
 } // Exhibit

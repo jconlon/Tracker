@@ -13,6 +13,15 @@
   <genPackages prefix="Fair" basePackage="com.verticon.tracker" resource="XML" disposableProviderFactory="true"
       providerPackageSuffix="edit.provider" presentationPackageSuffix="editor.presentation"
       ecorePackage="fair.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="fair.ecore#//Award">
+      <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/Unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/GrandChampion"/>
+      <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/ReserveChampion"/>
+      <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/BlueRibbon"/>
+      <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/RedRibbon"/>
+      <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/WhiteRibbon"/>
+      <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/PinkRibbon"/>
+    </genEnums>
     <genDataTypes ecoreDataType="fair.ecore#//ZipCode"/>
     <genDataTypes ecoreDataType="fair.ecore#//USTelephoneNumber"/>
     <genClasses ecoreClass="fair.ecore#//Fair">
@@ -39,6 +48,7 @@
       </genFeatures>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/salesOrder"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/inAuction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/award"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//YouthClub">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//YouthClub/name"/>

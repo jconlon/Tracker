@@ -8,11 +8,13 @@ package com.verticon.tracker.fair.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.fair.Award;
 import com.verticon.tracker.fair.Department;
 import com.verticon.tracker.fair.Division;
 import com.verticon.tracker.fair.Exhibit;
@@ -100,6 +102,13 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * @generated
 	 */
 	private EClass youngPersonEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum awardEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -319,6 +328,15 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 */
 	public EAttribute getExhibit_InAuction() {
 		return (EAttribute)exhibitEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getExhibit_Award() {
+		return (EAttribute)exhibitEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -641,6 +659,15 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getAward() {
+		return awardEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getZipCode() {
 		return zipCodeEDataType;
 	}
@@ -698,6 +725,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		createEReference(exhibitEClass, EXHIBIT__LOT);
 		createEAttribute(exhibitEClass, EXHIBIT__SALES_ORDER);
 		createEAttribute(exhibitEClass, EXHIBIT__IN_AUCTION);
+		createEAttribute(exhibitEClass, EXHIBIT__AWARD);
 
 		youthClubEClass = createEClass(YOUTH_CLUB);
 		createEAttribute(youthClubEClass, YOUTH_CLUB__NAME);
@@ -740,6 +768,9 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		youngPersonEClass = createEClass(YOUNG_PERSON);
 		createEReference(youngPersonEClass, YOUNG_PERSON__PARENTS);
 		createEReference(youngPersonEClass, YOUNG_PERSON__CLUB);
+
+		// Create enums
+		awardEEnum = createEEnum(AWARD);
 
 		// Create data types
 		zipCodeEDataType = createEDataType(ZIP_CODE);
@@ -798,6 +829,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		initEReference(getExhibit_Lot(), this.getLot(), this.getLot_Exhibits(), "lot", null, 1, 1, Exhibit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExhibit_SalesOrder(), ecorePackage.getEInt(), "salesOrder", null, 0, 1, Exhibit.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExhibit_InAuction(), ecorePackage.getEBoolean(), "inAuction", null, 0, 1, Exhibit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExhibit_Award(), this.getAward(), "award", null, 0, 1, Exhibit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(youthClubEClass, YouthClub.class, "YouthClub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getYouthClub_Name(), ecorePackage.getEString(), "name", null, 1, 1, YouthClub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -840,6 +872,16 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		initEClass(youngPersonEClass, YoungPerson.class, "YoungPerson", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getYoungPerson_Parents(), this.getPerson(), null, "parents", null, 1, -1, YoungPerson.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getYoungPerson_Club(), this.getYouthClub(), null, "club", null, 1, 1, YoungPerson.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(awardEEnum, Award.class, "Award");
+		addEEnumLiteral(awardEEnum, Award.UNSPECIFIED);
+		addEEnumLiteral(awardEEnum, Award.GRAND_CHAMPION);
+		addEEnumLiteral(awardEEnum, Award.RESERVE_CHAMPION);
+		addEEnumLiteral(awardEEnum, Award.BLUE_RIBBON);
+		addEEnumLiteral(awardEEnum, Award.RED_RIBBON);
+		addEEnumLiteral(awardEEnum, Award.WHITE_RIBBON);
+		addEEnumLiteral(awardEEnum, Award.PINK_RIBBON);
 
 		// Initialize data types
 		initEDataType(zipCodeEDataType, String.class, "ZipCode", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

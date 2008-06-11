@@ -28,6 +28,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="salesOrder" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="inAuction" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="award" eType="#//Award"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="YouthClub">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -87,5 +88,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parents" lowerBound="1"
         upperBound="-1" eType="#//Person"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="club" lowerBound="1" eType="#//YouthClub"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Award">
+    <eLiterals name="Unspecified" literal=""/>
+    <eLiterals name="GrandChampion" value="1" literal="Grand Champion"/>
+    <eLiterals name="ReserveChampion" value="2" literal="Reserve Champion"/>
+    <eLiterals name="BlueRibbon" value="3" literal="Blue Ribbon"/>
+    <eLiterals name="RedRibbon" value="4" literal="Red Ribbon"/>
+    <eLiterals name="WhiteRibbon" value="5" literal="White Ribbon"/>
+    <eLiterals name="PinkRibbon" value="6" literal="Pink Ribbon"/>
   </eClassifiers>
 </ecore:EPackage>

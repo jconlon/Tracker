@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_3dynoYfdEdyXiYPOKyhf1A" activeDiagram="_3d5VUIfdEdyXiYPOKyhf1A">
   <model href="fair.ecore#/"/>
-  <diagrams xmi:id="_3d5VUIfdEdyXiYPOKyhf1A" position="0,0" size="100,100" name="fair" viewport="0,684">
+  <diagrams xmi:id="_3d5VUIfdEdyXiYPOKyhf1A" position="0,0" size="100,100" name="fair" viewport="0,577">
     <property xmi:id="_3kAkYIfdEdyXiYPOKyhf1A" key="pageFormatName" value="A4"/>
     <property xmi:id="_3kAkYYfdEdyXiYPOKyhf1A" key="diagramWidth" value="840"/>
     <property xmi:id="_3kAkYofdEdyXiYPOKyhf1A" key="diagramHeight" value="1188"/>
@@ -140,7 +140,7 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_6p-10IfoEdyXiYPOKyhf1A" position="332,739" size="144,-1">
+    <contained xsi:type="di:GraphNode" xmi:id="_6p-10IfoEdyXiYPOKyhf1A" position="332,739" size="163,-1">
       <anchorage xmi:id="_YG18cIfpEdyXiYPOKyhf1A" graphEdge="_d3jV0If0EdyXiYPOKyhf1A _6Q6jcIynEdyl6ZYewak4zQ _5mkOsNAuEdyytJJF15-OEw _AieRoAQIEd2fx5IefHPcAA"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_6p-10YfoEdyXiYPOKyhf1A" presentation="default">
         <element href="fair.ecore#//Exhibit"/>
@@ -173,6 +173,11 @@
         <contained xsi:type="di:GraphNode" xmi:id="_MUTZIDfKEd26C44H0JR3lw" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_MUTZITfKEd26C44H0JR3lw" presentation="default">
             <element href="fair.ecore#//Exhibit/inAuction"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_OvWqADfwEd26C44H0JR3lw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_OvWqATfwEd26C44H0JR3lw" presentation="default">
+            <element href="fair.ecore#//Exhibit/award"/>
           </semanticModel>
         </contained>
       </contained>
@@ -596,6 +601,52 @@
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlQe8gQIEd2fx5IefHPcAA" id="nameLabel" uDistance="9" vDistance="16"/>
       <contained xsi:type="di:EdgeObjectUV" xmi:id="_jlQe8wQIEd2fx5IefHPcAA" id="cardinalityLabel" uDistance="5" vDistance="-10"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_5nAMsDfuEd26C44H0JR3lw" position="51,775" size="150,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_5nAMsTfuEd26C44H0JR3lw" presentation="default">
+        <element href="fair.ecore#//Award"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_5nAMsjfuEd26C44H0JR3lw">
+        <property xmi:id="_5nAMszfuEd26C44H0JR3lw" key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_5nAMtDfuEd26C44H0JR3lw" presentation="default">
+          <element href="fair.ecore#//Award"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_AJ1AgjfvEd26C44H0JR3lw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_AJ1nkDfvEd26C44H0JR3lw" presentation="default">
+            <element href="fair.ecore#//Award/Unspecified"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_D8zi4jfvEd26C44H0JR3lw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_D8zi4zfvEd26C44H0JR3lw" presentation="default">
+            <element href="fair.ecore#//Award/GrandChampion"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_LR-ZoDfvEd26C44H0JR3lw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LR-ZoTfvEd26C44H0JR3lw" presentation="default">
+            <element href="fair.ecore#//Award/ReserveChampion"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_PqpqEDfvEd26C44H0JR3lw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_PqpqETfvEd26C44H0JR3lw" presentation="default">
+            <element href="fair.ecore#//Award/BlueRibbon"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_SkN4MjfvEd26C44H0JR3lw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_SkN4MzfvEd26C44H0JR3lw" presentation="default">
+            <element href="fair.ecore#//Award/RedRibbon"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_Yp3AwTfvEd26C44H0JR3lw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Yp3AwjfvEd26C44H0JR3lw" presentation="default">
+            <element href="fair.ecore#//Award/WhiteRibbon"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_pXSnYDfvEd26C44H0JR3lw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_pXSnYTfvEd26C44H0JR3lw" presentation="default">
+            <element href="fair.ecore#//Award/PinkRibbon"/>
+          </semanticModel>
+        </contained>
+      </contained>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

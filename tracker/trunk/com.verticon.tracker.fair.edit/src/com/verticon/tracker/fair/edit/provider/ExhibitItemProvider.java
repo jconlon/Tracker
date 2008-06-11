@@ -79,6 +79,7 @@ public class ExhibitItemProvider
 			addExhibitorPropertyDescriptor(object);
 			addSalesOrderPropertyDescriptor(object);
 			addInAuctionPropertyDescriptor(object);
+			addAwardPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -240,6 +241,28 @@ public class ExhibitItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Award feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAwardPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Exhibit_award_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibit_award_feature", "_UI_Exhibit_type"),
+				 FairPackage.Literals.EXHIBIT__AWARD,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Exhibit.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -284,6 +307,7 @@ public class ExhibitItemProvider
 			case FairPackage.EXHIBIT__LOT:
 			case FairPackage.EXHIBIT__SALES_ORDER:
 			case FairPackage.EXHIBIT__IN_AUCTION:
+			case FairPackage.EXHIBIT__AWARD:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

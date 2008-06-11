@@ -5,6 +5,7 @@
  */
 package com.verticon.tracker.fair.impl;
 
+import com.verticon.tracker.fair.Award;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -96,6 +97,8 @@ public class FairFactoryImpl extends EFactoryImpl implements FairFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+			case FairPackage.AWARD:
+				return createAwardFromString(eDataType, initialValue);
 			case FairPackage.ZIP_CODE:
 				return createZipCodeFromString(eDataType, initialValue);
 			case FairPackage.US_TELEPHONE_NUMBER:
@@ -113,6 +116,8 @@ public class FairFactoryImpl extends EFactoryImpl implements FairFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+			case FairPackage.AWARD:
+				return convertAwardToString(eDataType, instanceValue);
 			case FairPackage.ZIP_CODE:
 				return convertZipCodeToString(eDataType, instanceValue);
 			case FairPackage.US_TELEPHONE_NUMBER:
@@ -210,6 +215,26 @@ public class FairFactoryImpl extends EFactoryImpl implements FairFactory {
 	public YoungPerson createYoungPerson() {
 		YoungPersonImpl youngPerson = new YoungPersonImpl();
 		return youngPerson;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Award createAwardFromString(EDataType eDataType, String initialValue) {
+		Award result = Award.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertAwardToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
