@@ -195,13 +195,31 @@ public interface FairPackage extends EPackage {
 	int EXHIBIT__LOT = 5;
 
 	/**
+	 * The feature id for the '<em><b>Sales Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXHIBIT__SALES_ORDER = 6;
+
+	/**
+	 * The feature id for the '<em><b>In Auction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXHIBIT__IN_AUCTION = 7;
+
+	/**
 	 * The number of structural features of the '<em>Exhibit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXHIBIT_FEATURE_COUNT = 6;
+	int EXHIBIT_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.YouthClubImpl <em>Youth Club</em>}' class.
@@ -535,13 +553,22 @@ public interface FairPackage extends EPackage {
 	int PERSON__PIN = 9;
 
 	/**
+	 * The feature id for the '<em><b>Sales Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__SALES_ORDER = 10;
+
+	/**
 	 * The number of structural features of the '<em>Person</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = 10;
+	int PERSON_FEATURE_COUNT = 11;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.YoungPersonImpl <em>Young Person</em>}' class.
@@ -642,6 +669,15 @@ public interface FairPackage extends EPackage {
 	 * @ordered
 	 */
 	int YOUNG_PERSON__PIN = PERSON__PIN;
+
+	/**
+	 * The feature id for the '<em><b>Sales Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOUNG_PERSON__SALES_ORDER = PERSON__SALES_ORDER;
 
 	/**
 	 * The feature id for the '<em><b>Parents</b></em>' reference list.
@@ -831,6 +867,28 @@ public interface FairPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExhibit_Lot();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Exhibit#getSalesOrder <em>Sales Order</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sales Order</em>'.
+	 * @see com.verticon.tracker.fair.Exhibit#getSalesOrder()
+	 * @see #getExhibit()
+	 * @generated
+	 */
+	EAttribute getExhibit_SalesOrder();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Exhibit#isInAuction <em>In Auction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>In Auction</em>'.
+	 * @see com.verticon.tracker.fair.Exhibit#isInAuction()
+	 * @see #getExhibit()
+	 * @generated
+	 */
+	EAttribute getExhibit_InAuction();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.YouthClub <em>Youth Club</em>}'.
@@ -1168,6 +1226,17 @@ public interface FairPackage extends EPackage {
 	EAttribute getPerson_Pin();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Person#getSalesOrder <em>Sales Order</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sales Order</em>'.
+	 * @see com.verticon.tracker.fair.Person#getSalesOrder()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_SalesOrder();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.YoungPerson <em>Young Person</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1350,6 +1419,22 @@ public interface FairPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXHIBIT__LOT = eINSTANCE.getExhibit_Lot();
+
+		/**
+		 * The meta object literal for the '<em><b>Sales Order</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXHIBIT__SALES_ORDER = eINSTANCE.getExhibit_SalesOrder();
+
+		/**
+		 * The meta object literal for the '<em><b>In Auction</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXHIBIT__IN_AUCTION = eINSTANCE.getExhibit_InAuction();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.YouthClubImpl <em>Youth Club</em>}' class.
@@ -1610,6 +1695,14 @@ public interface FairPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PERSON__PIN = eINSTANCE.getPerson_Pin();
+
+		/**
+		 * The meta object literal for the '<em><b>Sales Order</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__SALES_ORDER = eINSTANCE.getPerson_SalesOrder();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.YoungPersonImpl <em>Young Person</em>}' class.

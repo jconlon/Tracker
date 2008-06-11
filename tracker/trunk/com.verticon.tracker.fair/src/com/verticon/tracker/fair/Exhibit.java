@@ -23,6 +23,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.fair.Exhibit#getAnimal <em>Animal</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Exhibit#getExhibitor <em>Exhibitor</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Exhibit#getLot <em>Lot</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Exhibit#getSalesOrder <em>Sales Order</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Exhibit#isInAuction <em>In Auction</em>}</li>
  * </ul>
  * </p>
  *
@@ -195,5 +197,46 @@ public interface Exhibit extends EObject {
 	 * @generated
 	 */
 	void setLot(Lot value);
+
+	/**
+	 * Returns the value of the '<em><b>Sales Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sales Order</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sales Order</em>' attribute.
+	 * @see com.verticon.tracker.fair.FairPackage#getExhibit_SalesOrder()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	int getSalesOrder();
+
+	/**
+	 * Returns the value of the '<em><b>In Auction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>In Auction</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>In Auction</em>' attribute.
+	 * @see #setInAuction(boolean)
+	 * @see com.verticon.tracker.fair.FairPackage#getExhibit_InAuction()
+	 * @model
+	 * @generated
+	 */
+	boolean isInAuction();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.fair.Exhibit#isInAuction <em>In Auction</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>In Auction</em>' attribute.
+	 * @see #isInAuction()
+	 * @generated
+	 */
+	void setInAuction(boolean value);
 
 } // Exhibit

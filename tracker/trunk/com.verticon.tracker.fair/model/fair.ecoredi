@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_3dynoYfdEdyXiYPOKyhf1A" activeDiagram="_3d5VUIfdEdyXiYPOKyhf1A">
   <model href="fair.ecore#/"/>
-  <diagrams xmi:id="_3d5VUIfdEdyXiYPOKyhf1A" position="0,0" size="100,100" name="fair" viewport="0,55">
+  <diagrams xmi:id="_3d5VUIfdEdyXiYPOKyhf1A" position="0,0" size="100,100" name="fair" viewport="0,684">
     <property xmi:id="_3kAkYIfdEdyXiYPOKyhf1A" key="pageFormatName" value="A4"/>
     <property xmi:id="_3kAkYYfdEdyXiYPOKyhf1A" key="diagramWidth" value="840"/>
     <property xmi:id="_3kAkYofdEdyXiYPOKyhf1A" key="diagramHeight" value="1188"/>
@@ -105,6 +105,11 @@
             <element href="../../com.verticon.tracker/model/tracker.ecore#//Animal/activeTag"/>
           </semanticModel>
         </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_4fO-ETfHEd26C44H0JR3lw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_4fO-EjfHEd26C44H0JR3lw" presentation="default">
+            <element href="../../com.verticon.tracker/model/tracker.ecore#//Animal/eventHistory"/>
+          </semanticModel>
+        </contained>
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_ygBXAIfmEdyXiYPOKyhf1A" position="6,8" size="152,-1">
@@ -158,6 +163,16 @@
         <contained xsi:type="di:GraphNode" xmi:id="_R0ho0If0EdyXiYPOKyhf1A" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_R0ho0Yf0EdyXiYPOKyhf1A" presentation="default">
             <element href="fair.ecore#//Exhibit/comments"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_fFW50DfJEd26C44H0JR3lw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_fFW50TfJEd26C44H0JR3lw" presentation="default">
+            <element href="fair.ecore#//Exhibit/salesOrder"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_MUTZIDfKEd26C44H0JR3lw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_MUTZITfKEd26C44H0JR3lw" presentation="default">
+            <element href="fair.ecore#//Exhibit/inAuction"/>
           </semanticModel>
         </contained>
       </contained>
@@ -457,6 +472,11 @@
         <contained xsi:type="di:GraphNode" xmi:id="_RTfBMAb8Ed21OaXVQIJwYA" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_RTfBMQb8Ed21OaXVQIJwYA" presentation="default">
             <element href="fair.ecore#//Person/pin"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_EWL98DfIEd26C44H0JR3lw" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_EWL98TfIEd26C44H0JR3lw" presentation="default">
+            <element href="fair.ecore#//Person/salesOrder"/>
           </semanticModel>
         </contained>
       </contained>

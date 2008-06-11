@@ -77,6 +77,7 @@ public class PersonItemProvider
 			addNamePropertyDescriptor(object);
 			addCommentsPropertyDescriptor(object);
 			addPinPropertyDescriptor(object);
+			addSalesOrderPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -302,6 +303,28 @@ public class PersonItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Sales Order feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSalesOrderPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Person_salesOrder_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Person_salesOrder_feature", "_UI_Person_type"),
+				 FairPackage.Literals.PERSON__SALES_ORDER,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Person.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -348,6 +371,7 @@ public class PersonItemProvider
 			case FairPackage.PERSON__NAME:
 			case FairPackage.PERSON__COMMENTS:
 			case FairPackage.PERSON__PIN:
+			case FairPackage.PERSON__SALES_ORDER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

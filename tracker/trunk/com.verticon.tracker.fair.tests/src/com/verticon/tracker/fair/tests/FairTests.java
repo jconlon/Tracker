@@ -42,6 +42,7 @@ public class FairTests extends TestSuite {
 	public static Test suite() {
 		TestSuite suite = new FairTests("fair Tests");
 		suite.addTestSuite(FairTest.class);
+		suite.addTestSuite(ExhibitTest.class);
 		suite.addTestSuite(PersonTest.class);
 		suite.addTestSuite(YoungPersonTest.class);
 		return suite;

@@ -77,6 +77,8 @@ public class ExhibitItemProvider
 			addCommentsPropertyDescriptor(object);
 			addAnimalPropertyDescriptor(object);
 			addExhibitorPropertyDescriptor(object);
+			addSalesOrderPropertyDescriptor(object);
+			addInAuctionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -194,6 +196,50 @@ public class ExhibitItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Sales Order feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSalesOrderPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Exhibit_salesOrder_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibit_salesOrder_feature", "_UI_Exhibit_type"),
+				 FairPackage.Literals.EXHIBIT__SALES_ORDER,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the In Auction feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addInAuctionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Exhibit_inAuction_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibit_inAuction_feature", "_UI_Exhibit_type"),
+				 FairPackage.Literals.EXHIBIT__IN_AUCTION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Exhibit.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -236,6 +282,8 @@ public class ExhibitItemProvider
 			case FairPackage.EXHIBIT__ANIMAL:
 			case FairPackage.EXHIBIT__EXHIBITOR:
 			case FairPackage.EXHIBIT__LOT:
+			case FairPackage.EXHIBIT__SALES_ORDER:
+			case FairPackage.EXHIBIT__IN_AUCTION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

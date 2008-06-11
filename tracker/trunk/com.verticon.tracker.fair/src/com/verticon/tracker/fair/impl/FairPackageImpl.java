@@ -308,6 +308,24 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getExhibit_SalesOrder() {
+		return (EAttribute)exhibitEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getExhibit_InAuction() {
+		return (EAttribute)exhibitEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getYouthClub() {
 		return youthClubEClass;
 	}
@@ -587,6 +605,15 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPerson_SalesOrder() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getYoungPerson() {
 		return youngPersonEClass;
 	}
@@ -669,6 +696,8 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		createEReference(exhibitEClass, EXHIBIT__ANIMAL);
 		createEReference(exhibitEClass, EXHIBIT__EXHIBITOR);
 		createEReference(exhibitEClass, EXHIBIT__LOT);
+		createEAttribute(exhibitEClass, EXHIBIT__SALES_ORDER);
+		createEAttribute(exhibitEClass, EXHIBIT__IN_AUCTION);
 
 		youthClubEClass = createEClass(YOUTH_CLUB);
 		createEAttribute(youthClubEClass, YOUTH_CLUB__NAME);
@@ -706,6 +735,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		createEAttribute(personEClass, PERSON__NAME);
 		createEAttribute(personEClass, PERSON__COMMENTS);
 		createEAttribute(personEClass, PERSON__PIN);
+		createEAttribute(personEClass, PERSON__SALES_ORDER);
 
 		youngPersonEClass = createEClass(YOUNG_PERSON);
 		createEReference(youngPersonEClass, YOUNG_PERSON__PARENTS);
@@ -766,6 +796,8 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		initEReference(getExhibit_Animal(), theTrackerPackage.getAnimal(), null, "animal", null, 1, 1, Exhibit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExhibit_Exhibitor(), this.getPerson(), null, "exhibitor", null, 1, 1, Exhibit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExhibit_Lot(), this.getLot(), this.getLot_Exhibits(), "lot", null, 1, 1, Exhibit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExhibit_SalesOrder(), ecorePackage.getEInt(), "salesOrder", null, 0, 1, Exhibit.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExhibit_InAuction(), ecorePackage.getEBoolean(), "inAuction", null, 0, 1, Exhibit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(youthClubEClass, YouthClub.class, "YouthClub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getYouthClub_Name(), ecorePackage.getEString(), "name", null, 1, 1, YouthClub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -803,6 +835,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		initEAttribute(getPerson_Name(), ecorePackage.getEString(), "name", null, 1, 1, Person.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_Comments(), ecorePackage.getEString(), "comments", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_Pin(), theTrackerPackage.getPremisesIdNumber(), "pin", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_SalesOrder(), ecorePackage.getEInt(), "salesOrder", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(youngPersonEClass, YoungPerson.class, "YoungPerson", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getYoungPerson_Parents(), this.getPerson(), null, "parents", null, 1, -1, YoungPerson.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

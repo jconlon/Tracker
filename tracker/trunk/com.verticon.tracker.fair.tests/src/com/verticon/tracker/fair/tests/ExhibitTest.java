@@ -5,17 +5,25 @@
  */
 package com.verticon.tracker.fair.tests;
 
+import junit.framework.TestCase;
+import junit.textui.TestRunner;
+
+import com.verticon.tracker.Animal;
+import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.FairFactory;
-
-import junit.framework.TestCase;
-
-import junit.textui.TestRunner;
+import com.verticon.tracker.fair.Person;
 
 /**
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>Exhibit</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are tested:
+ * <ul>
+ *   <li>{@link com.verticon.tracker.fair.Exhibit#getSalesOrder() <em>Sales Order</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
 public class ExhibitTest extends TestCase {
@@ -94,6 +102,38 @@ public class ExhibitTest extends TestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.fair.Exhibit#getSalesOrder() <em>Sales Order</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.fair.Exhibit#getSalesOrder()
+	 * @generated NOT
+	 */
+	public void testGetSalesOrder() {
+		Exhibit exhibit = getFixture();
+		assertNotNull(exhibit);
+		assertEquals(0, exhibit.getSalesOrder());
+		
+		Person person = FairFactory.eINSTANCE.createPerson();
+		person.setSalesOrder(5);
+		exhibit.setExhibitor(person);
+		assertEquals(0, exhibit.getSalesOrder());
+		
+		Animal animal = TrackerFactory.eINSTANCE.createBovineBeef();
+		exhibit.setAnimal(animal);
+		assertEquals(0, exhibit.getSalesOrder());
+		
+		exhibit.setInAuction(true);
+		assertEquals(5, exhibit.getSalesOrder());
+		exhibit.setInAuction(false);
+		assertEquals(0, exhibit.getSalesOrder());
+		
+		
+		
+		
+		
 	}
 
 } //ExhibitTest
