@@ -74,7 +74,7 @@ frontend to Tracker Fair  models.  Fair model documents and associated Premises 
          unpack="false"/>
 
    <plugin
-         id="com.verticon.tracker.view.events"
+         id="com.verticon.tracker.views"
          download-size="0"
          install-size="0"
          version="0.0.0"
