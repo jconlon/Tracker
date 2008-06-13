@@ -101,7 +101,6 @@ public class AnimalsView extends TrackerView {
 	 * 
 	 * @return
 	 */
-	@Override
 	protected Premises getPremises(EditingDomain editingDomain) {
 		Resource resource = (Resource) editingDomain.getResourceSet()
 				.getResources().get(0);
