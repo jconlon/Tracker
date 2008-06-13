@@ -565,7 +565,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @generated NOT
 	 */
 	public Integer getWeight() {
-		WeighIn lastWeighIn = getLastWeighIn();
+		WeighIn lastWeighIn = lastWeighIn();
 		return lastWeighIn==null ? null: lastWeighIn.getWeight();
 	}
 	
@@ -575,24 +575,24 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @generated NOT
 	 */
 	public Integer getWeightGainPerDay() {
-		WeighIn lastWeighIn = getLastWeighIn();
+		WeighIn lastWeighIn = lastWeighIn();
 		return lastWeighIn==null?null: lastWeighIn.getWeightGainPerDay();
 	}
 
-	private WeighIn getLastWeighIn(){
-		WeighIn lastWeighIn = null;
-		if(!eventHistory().isEmpty()){
-			CollectionFilter<Event> weighInsProducer = new CollectionFilter<Event>();
-			weighInsProducer.addFilter(CommonUtilities.weighInFilterCriteria);
-			List<Event> weighIns = new ArrayList<Event>(weighInsProducer.filterCopy(eventHistory()));
-			if(weighIns.isEmpty()){
-				return null;
-			}
-			Collections.sort(weighIns, CommonUtilities.DATE_COMPARATOR);
-			lastWeighIn = (WeighIn) weighIns.get(weighIns.size()-1);
-		}
-		return lastWeighIn;
-	}
+//	private WeighIn getLastWeighIn(){
+//		WeighIn lastWeighIn = null;
+//		if(!eventHistory().isEmpty()){
+//			CollectionFilter<Event> weighInsProducer = new CollectionFilter<Event>();
+//			weighInsProducer.addFilter(CommonUtilities.weighInFilterCriteria);
+//			List<Event> weighIns = new ArrayList<Event>(weighInsProducer.filterCopy(eventHistory()));
+//			if(weighIns.isEmpty()){
+//				return null;
+//			}
+//			Collections.sort(weighIns, CommonUtilities.DATE_COMPARATOR);
+//			lastWeighIn = (WeighIn) weighIns.get(weighIns.size()-1);
+//		}
+//		return lastWeighIn;
+//	}
 	
 	
 
@@ -662,6 +662,26 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 */
 	public EList<Event> eventHistory() {
 		return allEvents();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WeighIn lastWeighIn() {
+		WeighIn lastWeighIn = null;
+				if(!eventHistory().isEmpty()){
+					CollectionFilter<Event> weighInsProducer = new CollectionFilter<Event>();
+					weighInsProducer.addFilter(CommonUtilities.weighInFilterCriteria);
+					List<Event> weighIns = new ArrayList<Event>(weighInsProducer.filterCopy(eventHistory()));
+					if(weighIns.isEmpty()){
+						return null;
+					}
+					Collections.sort(weighIns, CommonUtilities.DATE_COMPARATOR);
+					lastWeighIn = (WeighIn) weighIns.get(weighIns.size()-1);
+				}
+				return lastWeighIn;
 	}
 
 	/**

@@ -19,6 +19,12 @@
         <details key="documentation" value="All the events associated with this animal."/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="lastWeighIn" eType="#//WeighIn">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="WeighIn lastWeighIn = null;&#xA;&#x9;&#x9;if(!eventHistory().isEmpty()){&#xA;&#x9;&#x9;&#x9;CollectionFilter&lt;Event> weighInsProducer = new CollectionFilter&lt;Event>();&#xA;&#x9;&#x9;&#x9;weighInsProducer.addFilter(CommonUtilities.weighInFilterCriteria);&#xA;&#x9;&#x9;&#x9;List&lt;Event> weighIns = new ArrayList&lt;Event>(weighInsProducer.filterCopy(eventHistory()));&#xA;&#x9;&#x9;&#x9;if(weighIns.isEmpty()){&#xA;&#x9;&#x9;&#x9;&#x9;return null;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;Collections.sort(weighIns, CommonUtilities.DATE_COMPARATOR);&#xA;&#x9;&#x9;&#x9;lastWeighIn = (WeighIn) weighIns.get(weighIns.size()-1);&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;return lastWeighIn;"/>
+        <details key="documentation" value="The most recent WeighIn event for this animal."/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sex" eType="#//Sex" defaultValueLiteral="Unspecified"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tags" lowerBound="1" upperBound="-1"
@@ -378,6 +384,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="USPhoneNumber" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EClass" name="WeighIn" eSuperTypes="#//Event">
+    <eOperations name="previousWeighIn" eType="#//WeighIn">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="Collection&lt;Event> weighIns = getPreviousWeighInEvents();&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;WeighIn lastWeighIn = getPreviousWeighInEvent(weighIns);&#xA;&#x9;&#x9;return lastWeighIn;"/>
+        <details key="documentation" value="The previous WeighIn event for the same animal."/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="weightGainPerDay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"

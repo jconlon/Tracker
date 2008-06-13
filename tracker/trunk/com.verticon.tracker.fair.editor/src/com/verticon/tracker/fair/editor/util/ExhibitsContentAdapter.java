@@ -1,4 +1,4 @@
-package com.verticon.tracker.fair.editor.presentation;
+package com.verticon.tracker.fair.editor.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -10,6 +10,7 @@ import org.eclipse.jface.viewers.Viewer;
 
 import com.verticon.tracker.fair.AllExhibits;
 import com.verticon.tracker.fair.Fair;
+import com.verticon.tracker.fair.editor.presentation.ExhibitsContentAdapterDelegate;
 import com.verticon.tracker.fair.impl.FairAllExhibitsAdapter;
 import com.verticon.tracker.fair.util.AllExhibitsAdapterFactory;
 

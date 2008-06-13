@@ -26,6 +26,12 @@ import com.verticon.tracker.impl.WeighInImpl;
  *   <li>{@link com.verticon.tracker.WeighIn#getWeightGainPerDay() <em>Weight Gain Per Day</em>}</li>
  * </ul>
  * </p>
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link com.verticon.tracker.WeighIn#previousWeighIn() <em>Previous Weigh In</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
 public class WeighInTest extends EventTest {
@@ -160,11 +166,24 @@ public class WeighInTest extends EventTest {
 		assertEquals("Third event should have one previous event",2, 
 				weImpl3.getPreviousWeighInEvents().size());
 		assertEquals("Third event should find only the second event",we2, 
-				weImpl3.getPreviousWeighIn());
+				weImpl3.previousWeighIn());
 		assertEquals("10 lbs per day", new Integer(10), we3.getWeightGainPerDay());
 		
 		
 		
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.WeighIn#previousWeighIn() <em>Previous Weigh In</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.WeighIn#previousWeighIn()
+	 * @generated
+	 */
+	public void testPreviousWeighIn() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
 	}
 
 	@Override

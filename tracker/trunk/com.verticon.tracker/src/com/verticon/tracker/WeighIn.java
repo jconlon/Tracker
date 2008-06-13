@@ -79,4 +79,15 @@ public interface WeighIn extends Event {
 	 */
 	Integer getWeightGainPerDay();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The previous WeighIn event for the same animal.
+	 * <!-- end-model-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='Collection<Event> weighIns = getPreviousWeighInEvents();\t\t\t\n\t\tWeighIn lastWeighIn = getPreviousWeighInEvent(weighIns);\n\t\treturn lastWeighIn;'"
+	 * @generated
+	 */
+	WeighIn previousWeighIn();
+
 } // WeighIn

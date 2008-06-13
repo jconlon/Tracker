@@ -13,6 +13,12 @@ Require-Bundle: org.eclipse.ui,
 Eclipse-LazyStart: true
 Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)",
  com.verticon.tracker.edit.provider;version="[0.1.0,1.0.0)",
+ com.verticon.tracker.editor.preferences;version="0.1.0",
+ com.verticon.tracker.editor.presentation;version="0.1.0",
  com.verticon.tracker.editor.util;version="[0.1.0,1.0.0)",
+ com.verticon.tracker.fair,
+ com.verticon.tracker.fair.editor.util,
  org.apache.poi.hssf.usermodel,
+ org.eclipse.emf.common.ui,
+ org.eclipse.emf.edit.provider,
  org.slf4j;version="1.5.0"

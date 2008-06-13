@@ -8,7 +8,8 @@ Bundle-Activator: com.verticon.tracker.fair.editor.presentation.FairEditorPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: com.verticon.tracker.fair.editor.presentation
+Export-Package: com.verticon.tracker.fair.editor.presentation,
+ com.verticon.tracker.fair.editor.util
 Require-Bundle: org.eclipse.core.runtime,
  com.verticon.tracker.fair.edit;visibility:=reexport,
  com.verticon.tracker.editor

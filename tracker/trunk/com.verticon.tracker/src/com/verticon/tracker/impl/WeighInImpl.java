@@ -138,7 +138,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 		if(weight==null || weight==0){
 			return null;
 		}
-		WeighIn lastWeighIn = getPreviousWeighIn();
+		WeighIn lastWeighIn = previousWeighIn();
 		
 		if(lastWeighIn==null || lastWeighIn.getWeight()==null){
 			return null;
@@ -157,14 +157,17 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	}
 
 	/**
-	 * @return
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	public WeighIn getPreviousWeighIn() {
+	public WeighIn previousWeighIn() {
 		Collection<Event> weighIns = getPreviousWeighInEvents();			
-		WeighIn lastWeighIn = getPreviousWeighInEvent(weighIns);
-		return lastWeighIn;
+				WeighIn lastWeighIn = getPreviousWeighInEvent(weighIns);
+				return lastWeighIn;
 	}
 
+	
 	/**
 	 * @param weighIns
 	 * @return
