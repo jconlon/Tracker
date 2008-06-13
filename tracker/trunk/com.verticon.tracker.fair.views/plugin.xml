@@ -9,7 +9,7 @@
       </category>
       <view
             name="People"
-            icon="icons/sample.gif"
+            icon="icons/Person.gif"
             category="com.verticon.tracker.views"
             class="com.verticon.tracker.fair.views.PeopleView"
             id="com.verticon.tracker.fair.views.PeopleView">
