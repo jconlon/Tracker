@@ -1,7 +1,6 @@
 package com.verticon.tracker.editor.util;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -36,7 +35,6 @@ import org.eclipse.ui.part.ViewPart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
@@ -46,7 +44,7 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	
 	protected TableViewer viewer;
 	protected CTabFolder cTabFolder;
-	private AdapterFactory adapterFactory = new TrackerItemProviderAdapterFactory();
+	private AdapterFactory adapterFactory = null;
 	private IPropertiesFormProvider defaultPropertiesFormProvider;
 	protected IQueryDataSetProvider queryDataSetProvider = null;
 	private TableColumnPatternFilter patternFilter;
@@ -82,12 +80,16 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	 */
 	protected abstract void handleSelection(Object first);
 	
+	protected AdapterFactory createAdapterFactory(){
+		return new TrackerItemProviderAdapterFactory();
+	}
+	
 	/**
 	 * Convienence method to find the Root
 	 * 
 	 * @return
 	 */
-	protected abstract Premises getPremises(EditingDomain editingDomain);
+//	protected abstract Premises getPremises(EditingDomain editingDomain);
 	
 	/**
 	 * This looks up a string in the plugin's plugin.properties file. <!--
@@ -174,6 +176,7 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 		gridData.heightHint = SWT.DEFAULT;
 		table.setLayoutData(gridData);
 	
+		adapterFactory = createAdapterFactory();
 		setUpTable(adapterFactory);
 		
 	}

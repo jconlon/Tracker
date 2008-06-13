@@ -557,7 +557,7 @@ public class ActionUtils {
 		return initialObjectNames;
 	}
 
-	static boolean validate(Premises premises,
+	public static boolean validate(Premises premises,
 			List<Diagnostic> validationDiagnostics) {
 		validationDiagnostics.clear();
 		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(premises);
