@@ -9,14 +9,14 @@
             id="com.verticon.tracker.views">
       </category>
       <view
-            name="Tracker Animals View"
+            name="Animals"
             icon="icons/BovineBeef.gif"
             category="com.verticon.tracker.views"
             class="com.verticon.tracker.views.AnimalsView"
             id="com.verticon.tracker.views.AnimalsView">
       </view>
       <view
-            name="Tracker Events View"
+            name="Events"
             icon="icons/sample.gif"
             category="com.verticon.tracker.views"
             class="com.verticon.tracker.views.EventsView"
