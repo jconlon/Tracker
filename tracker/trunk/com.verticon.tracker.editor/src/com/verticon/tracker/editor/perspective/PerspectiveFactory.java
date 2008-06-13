@@ -17,6 +17,9 @@ public class PerspectiveFactory implements IPerspectiveFactory {
 	private static final String QUERIES_VIEW = "com.verticon.tracker.ocl.query.view";
 	private static final String READERS_VIEW = "com.verticon.tracker.reader.view";
 	
+	private static final String ANIMALS_VIEW = "com.verticon.tracker.views.AnimalsView";
+	private static final String EVENTS_VIEW = "com.verticon.tracker.views.EventsView";
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IPerspectiveFactory#createInitialLayout(org.eclipse.ui.IPageLayout)
 	 */
@@ -54,6 +57,8 @@ String editorArea = layout.getEditorArea();
 		bottom.addView(IPageLayout.ID_TASK_LIST);
 		bottom.addView(READERS_VIEW);
 		bottom.addView(QUERIES_VIEW);
+		bottom.addView(ANIMALS_VIEW);
+		bottom.addView(EVENTS_VIEW);
 	}
 
 }
