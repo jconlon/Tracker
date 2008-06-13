@@ -21,8 +21,7 @@ import org.eclipse.ui.IWorkbench;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.verticon.tracker.editor.util.ExportPremisesBase;
-import com.verticon.tracker.editor.util.PremisesProcessor;
+import com.verticon.tracker.export.util.ExportFairBase;
 import com.verticon.tracker.export.xls.actions.FairRegistrationSummaryWorkSheetBuilder;
 import com.verticon.tracker.export.xls.actions.FairRegistrationWeighInWorkSheetBuilder;
 import com.verticon.tracker.export.xls.actions.FairRegistrationWorkSheetBuilder;
@@ -31,10 +30,12 @@ import com.verticon.tracker.export.xls.actions.MovedOutWorkSheetBuilder;
 import com.verticon.tracker.export.xls.actions.WeighInWorkSheetBuilder;
 import com.verticon.tracker.export.xls.actions.WorkSheetBuilder;
 import com.verticon.tracker.export.xls.actions.XLSPremisesProcessor;
+import com.verticon.tracker.fair.editor.util.FairProcessor;
 
 /**
  * 
- * Exports Premises document FairRegistration events as spreadsheets.
+ * Exports *.premises document Tracker model 
+ * FairRegistration events as spreadsheets.
  * 
  * @author jconlon
  * 
@@ -50,6 +51,16 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 	
 	private static final String WIZARD_TITLE = "Export Spreadsheet Data";
 
+	/**
+	 * Page to present the user with 3 radio buttons to 
+	 * select the kind of report specified as an ExportType. 
+	 * ExportType(s) of report are:
+	 *<ul>
+	 *<li>DETAIL</li>
+	 *<li>SUMMARY</li>
+	 *<li>RAW</li>
+	 *</ul>
+	 */
 	private SelectExportTypeWizardPage selectExportTypePage;
 
 	private SelectExportFilePathWizardPage selectExportFilePathPage;
@@ -58,7 +69,7 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 
 	/**
 	 * 
-	 * Defines the Export Type
+	 * Specifies the type of report to export.
 	 *
 	 */
 	public enum ExportType {
@@ -69,14 +80,16 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 		 * @param destination of the output
 		 * @return
 		 */
-		public PremisesProcessor getProcessor(IPath destination) {
+		public FairProcessor getProcessor(IPath destination) {
 			XLSPremisesProcessor result = null;
 
 			switch (this) {
 			case DETAIL:
 				result = new XLSPremisesProcessor(
-						new WorkSheetBuilder[] { new FairRegistrationWeighInWorkSheetBuilder() },
-						new String[] { "Fair WeighIn and Registration" });
+						new WorkSheetBuilder[] { 
+								new FairRegistrationWeighInWorkSheetBuilder() },
+						new String[] { 
+								"Fair WeighIn and Registration" });
 				break;
 
 			case RAW:
@@ -96,8 +109,10 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 				break;
 			case SUMMARY:
 				result = new XLSPremisesProcessor(
-						new WorkSheetBuilder[] { new FairRegistrationSummaryWorkSheetBuilder() },
-						new String[] { "Fair Registration" });
+						new WorkSheetBuilder[] { 
+								new FairRegistrationSummaryWorkSheetBuilder() },
+						new String[] { 
+								"Fair Registration" });
 				break;
 			}
 
@@ -221,7 +236,7 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 		this.typeToExport = typeToExport;
 	}
 
-	class Exporter extends ExportPremisesBase {
+	class Exporter extends ExportFairBase {
 		public Exporter() {
 			super(typeToExport.getProcessor(destination));
 		}

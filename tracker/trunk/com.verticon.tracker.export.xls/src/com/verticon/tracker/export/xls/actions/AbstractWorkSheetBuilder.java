@@ -6,7 +6,7 @@ import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 
-import com.verticon.tracker.Premises;
+import com.verticon.tracker.fair.Fair;
 
 public abstract class AbstractWorkSheetBuilder {
 
@@ -17,18 +17,18 @@ public abstract class AbstractWorkSheetBuilder {
 		super();
 	}
 
-	public void createWorkSheet(Premises premises, HSSFSheet sheet, Map<String, HSSFCellStyle> styleMap) {
-		loadList( premises );
+	public void createWorkSheet(Fair fair, HSSFSheet sheet, Map<String, HSSFCellStyle> styleMap) {
+		loadList( fair);
 		this.styleMap=styleMap;
 		createColumnHeader(sheet);
-		createRows(sheet, premises);
+		createRows(sheet, fair);
 	}
 	
-	public abstract void loadList( Premises premises );
+	public abstract void loadList( Fair fair );
 	
 	public abstract void createColumnHeader(HSSFSheet sheet);
 	
-	public abstract void createRows(HSSFSheet sheet,  Premises premises );
+	public abstract void createRows(HSSFSheet sheet,  Fair fair);
 
 	
 

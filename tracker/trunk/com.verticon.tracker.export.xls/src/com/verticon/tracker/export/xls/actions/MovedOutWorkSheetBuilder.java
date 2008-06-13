@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.EList;
 
 import com.verticon.tracker.Event;
 import com.verticon.tracker.MovedOut;
-import com.verticon.tracker.Premises;
+import com.verticon.tracker.fair.Fair;
 
 /**
  * @author jconlon
@@ -65,8 +65,8 @@ public class MovedOutWorkSheetBuilder extends AbstractWorkSheetBuilder implement
 	 * @param premises
 	 */
 	@Override
-	public void loadList(Premises premises ){
-		EList<Event> events = premises.eventHistory();
+	public void loadList(Fair fair ){
+		EList<Event> events = fair.getPremises().eventHistory();
 		for (Event event : events) {
 			if(MovedOut.EVENT_CODE ==event.getEventCode()){
 				movedOutEvents.add((MovedOut)event);
@@ -85,7 +85,7 @@ public class MovedOutWorkSheetBuilder extends AbstractWorkSheetBuilder implement
 	 * @param premises
 	 */
 	@Override
-	public void createRows(HSSFSheet sheet, Premises premises) {
+	public void createRows(HSSFSheet sheet, Fair fair) {
 			for (MovedOut movedIn : movedOutEvents) {
 					 fillRow( movedIn,  createRow( sheet));
 				 

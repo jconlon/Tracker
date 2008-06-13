@@ -418,6 +418,7 @@
       </genOperations>
       <genOperations ecoreOperation="tracker.ecore#//Animal/activeTag"/>
       <genOperations ecoreOperation="tracker.ecore#//Animal/eventHistory"/>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/lastWeighIn"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Tag">
       <genFeatures property="Readonly" createChild="false" propertyCategory="Details"

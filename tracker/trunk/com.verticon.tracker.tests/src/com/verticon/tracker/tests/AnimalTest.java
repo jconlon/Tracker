@@ -48,6 +48,7 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#addTemplate(org.eclipse.emf.common.util.EList) <em>Add Template</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#activeTag() <em>Active Tag</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#eventHistory() <em>Event History</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#lastWeighIn() <em>Last Weigh In</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -613,6 +614,19 @@ public abstract class AnimalTest extends TestCase {
 	 */
 	public void testEventHistory() {
 		testAllEvents();
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Animal#lastWeighIn() <em>Last Weigh In</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#lastWeighIn()
+	 * @generated
+	 */
+	public void testLastWeighIn() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
 	}
 
 } //AnimalTest

@@ -15,14 +15,14 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
-import com.verticon.tracker.Premises;
-import com.verticon.tracker.editor.util.PremisesProcessor;
+import com.verticon.tracker.fair.Fair;
+import com.verticon.tracker.fair.editor.util.FairProcessor;
 
 /**
  * @author jconlon
  *
  */
-public class XLSPremisesProcessor implements PremisesProcessor{
+public class XLSPremisesProcessor implements FairProcessor{
 
 	private String fileName = "FairRegistration.xls";
 	private Map<String, HSSFCellStyle> styleMap = new HashMap<String, HSSFCellStyle>();
@@ -40,11 +40,11 @@ public class XLSPremisesProcessor implements PremisesProcessor{
 		this.workSheetNames = workSheetNames;
 	}
 
-	public void process(Premises premises, IFile trackerFile, IProgressMonitor monitor) throws IOException, CoreException{
+	public void process(Fair fair, IFile trackerFile, IProgressMonitor monitor) throws IOException, CoreException{
     	HSSFWorkbook wb = new HSSFWorkbook();
 		createStyles( wb);
 		for (int i = 0; i < builders.length; i++) {
-			builders[i].createWorkSheet(premises, wb.createSheet(workSheetNames[i]),styleMap);
+			builders[i].createWorkSheet(fair, wb.createSheet(workSheetNames[i]),styleMap);
 		}
 		createFile( wb);
 	}

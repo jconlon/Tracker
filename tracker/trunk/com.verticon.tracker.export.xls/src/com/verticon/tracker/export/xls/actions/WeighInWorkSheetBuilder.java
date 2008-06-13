@@ -14,8 +14,8 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.eclipse.emf.common.util.EList;
 
 import com.verticon.tracker.Event;
-import com.verticon.tracker.Premises;
 import com.verticon.tracker.WeighIn;
+import com.verticon.tracker.fair.Fair;
 
 /**
  * @author jconlon
@@ -65,8 +65,8 @@ public class WeighInWorkSheetBuilder extends AbstractWorkSheetBuilder implements
 	 * @param premises
 	 */
 	@Override
-	public void loadList(Premises premises ){
-		EList<Event> events = premises.eventHistory();
+	public void loadList(Fair fair){
+		EList<Event> events = fair.getPremises().eventHistory();
 		for (Event event : events) {
 			if(WeighIn.EVENT_CODE ==event.getEventCode()){
 				weighInEvents.add((WeighIn)event);
@@ -82,16 +82,14 @@ public class WeighInWorkSheetBuilder extends AbstractWorkSheetBuilder implements
 	/**
 	 * Create a Row per each time an animal was weighed in 
 	 * @param sheet
-	 * @param premises
+	 * @param fair
 	 */
 	@Override
-	public void createRows(HSSFSheet sheet, Premises premises) {
+	public void createRows(HSSFSheet sheet, Fair fair) {
 			for (WeighIn fairRegistration : weighInEvents) {
 					 fillRow( fairRegistration,  createRow( sheet));
 				 
 			}
-		
 	}
-
 	
 }
