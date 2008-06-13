@@ -300,16 +300,19 @@ POSSIBILITY OF SUCH DAMAGES.
    </license>
 
    <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.ui.console"/>
-      <import plugin="org.eclipse.jface.text"/>
-      <import plugin="org.eclipse.emf.ocl"/>
-      <import plugin="org.eclipse.emf.ecore.edit"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.core.runtime" version="3.2.0" match="compatible"/>
+      <import plugin="org.eclipse.ui" version="3.2.0" match="compatible"/>
+      <import plugin="com.verticon.tracker.editor" version="0.1.0" match="compatible"/>
+      <import plugin="com.verticon.tracker" version="0.1.0" match="compatible"/>
       <import plugin="org.eclipse.emf.query.ocl"/>
-      <import plugin="com.verticon.tracker.editor"/>
-      <import plugin="com.verticon.tracker"/>
+      <import plugin="com.verticon.tracker.fair"/>
+      <import plugin="slf4j.api"/>
+      <import plugin="org.eclipse.ui.console" version="3.1.0" match="compatible"/>
+      <import plugin="org.eclipse.jface.text" version="3.2.0" match="compatible"/>
+      <import plugin="org.eclipse.ocl.ecore" version="1.1.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.ecore.edit" version="2.3.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.ecore.xmi" version="2.3.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.edit.ui" version="2.3.0" match="compatible"/>
    </requires>
 
    <plugin
@@ -327,14 +330,14 @@ POSSIBILITY OF SUCH DAMAGES.
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.emf.ocl.examples.interpreter"
+         id="com.verticon.tracker.ocl.query.viewer"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="com.verticon.tracker.ocl.query.viewer"
+         id="org.eclipse.emf.ocl.examples.interpreter"
          download-size="0"
          install-size="0"
          version="0.0.0"
