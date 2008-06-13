@@ -40,7 +40,6 @@ import com.verticon.tracker.EventAttributeSchema;
 import com.verticon.tracker.EventDataType;
 import com.verticon.tracker.EventSchema;
 import com.verticon.tracker.Exported;
-import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.GoatBreed;
 import com.verticon.tracker.HerdTest;
@@ -153,13 +152,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EClass icviEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass fairRegistrationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -892,78 +884,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 */
 	public EClass getICVI() {
 		return icviEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getFairRegistration() {
-		return fairRegistrationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFairRegistration_Participant() {
-		return (EAttribute)fairRegistrationEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFairRegistration_Address() {
-		return (EAttribute)fairRegistrationEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFairRegistration_Phone() {
-		return (EAttribute)fairRegistrationEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFairRegistration_Parent() {
-		return (EAttribute)fairRegistrationEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFairRegistration_Club() {
-		return (EAttribute)fairRegistrationEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFairRegistration_SaleOrder() {
-		return (EAttribute)fairRegistrationEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getFairRegistration_Exhibit() {
-		return (EAttribute)fairRegistrationEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -2074,15 +1994,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		icviEClass = createEClass(ICVI);
 
-		fairRegistrationEClass = createEClass(FAIR_REGISTRATION);
-		createEAttribute(fairRegistrationEClass, FAIR_REGISTRATION__PARTICIPANT);
-		createEAttribute(fairRegistrationEClass, FAIR_REGISTRATION__ADDRESS);
-		createEAttribute(fairRegistrationEClass, FAIR_REGISTRATION__PHONE);
-		createEAttribute(fairRegistrationEClass, FAIR_REGISTRATION__PARENT);
-		createEAttribute(fairRegistrationEClass, FAIR_REGISTRATION__CLUB);
-		createEAttribute(fairRegistrationEClass, FAIR_REGISTRATION__SALE_ORDER);
-		createEAttribute(fairRegistrationEClass, FAIR_REGISTRATION__EXHIBIT);
-
 		weighInEClass = createEClass(WEIGH_IN);
 		createEAttribute(weighInEClass, WEIGH_IN__WEIGHT);
 		createEAttribute(weighInEClass, WEIGH_IN__WEIGHT_GAIN_PER_DAY);
@@ -2230,7 +2141,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		tagRetiredEClass.getESuperTypes().add(this.getEvent());
 		animalMissingEClass.getESuperTypes().add(this.getEvent());
 		icviEClass.getESuperTypes().add(this.getEvent());
-		fairRegistrationEClass.getESuperTypes().add(this.getEvent());
 		weighInEClass.getESuperTypes().add(this.getEvent());
 		swineEClass.getESuperTypes().add(this.getAnimal());
 		equineEClass.getESuperTypes().add(this.getAnimal());
@@ -2361,15 +2271,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(animalMissingEClass, AnimalMissing.class, "AnimalMissing", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(icviEClass, com.verticon.tracker.ICVI.class, "ICVI", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(fairRegistrationEClass, FairRegistration.class, "FairRegistration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFairRegistration_Participant(), ecorePackage.getEString(), "participant", null, 1, 1, FairRegistration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFairRegistration_Address(), ecorePackage.getEString(), "address", null, 1, 1, FairRegistration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFairRegistration_Phone(), this.getUSPhoneNumber(), "phone", null, 1, 1, FairRegistration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFairRegistration_Parent(), ecorePackage.getEString(), "parent", null, 0, 1, FairRegistration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFairRegistration_Club(), ecorePackage.getEString(), "club", null, 0, 1, FairRegistration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFairRegistration_SaleOrder(), ecorePackage.getEInt(), "SaleOrder", null, 0, 1, FairRegistration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFairRegistration_Exhibit(), ecorePackage.getEInt(), "Exhibit", null, 0, 1, FairRegistration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(weighInEClass, WeighIn.class, "WeighIn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getWeighIn_Weight(), ecorePackage.getEIntegerObject(), "weight", null, 1, 1, WeighIn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

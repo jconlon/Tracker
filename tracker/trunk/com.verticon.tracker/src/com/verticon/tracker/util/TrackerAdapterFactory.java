@@ -8,6 +8,7 @@ package com.verticon.tracker.util;
 
 import com.verticon.tracker.*;
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -26,8 +27,10 @@ import com.verticon.tracker.Caprine;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Equine;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.EventAttributeSchema;
+import com.verticon.tracker.EventSchema;
 import com.verticon.tracker.Exported;
-import com.verticon.tracker.FairRegistration;
+import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
@@ -42,6 +45,7 @@ import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
+import com.verticon.tracker.Schema;
 import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Slaughtered;
 import com.verticon.tracker.Swine;
@@ -206,10 +210,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseICVI(ICVI object) {
 				return createICVIAdapter();
-			}
-			@Override
-			public Adapter caseFairRegistration(FairRegistration object) {
-				return createFairRegistrationAdapter();
 			}
 			@Override
 			public Adapter caseWeighIn(WeighIn object) {
@@ -426,20 +426,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createICVIAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.FairRegistration <em>Fair Registration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.verticon.tracker.FairRegistration
-	 * @generated
-	 */
-	public Adapter createFairRegistrationAdapter() {
 		return null;
 	}
 

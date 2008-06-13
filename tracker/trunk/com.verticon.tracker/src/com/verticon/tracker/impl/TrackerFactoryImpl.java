@@ -39,7 +39,6 @@ import com.verticon.tracker.EventAttributeSchema;
 import com.verticon.tracker.EventDataType;
 import com.verticon.tracker.EventSchema;
 import com.verticon.tracker.Exported;
-import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.GoatBreed;
 import com.verticon.tracker.HerdTest;
@@ -157,7 +156,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.TAG_RETIRED: return createTagRetired();
 			case TrackerPackage.ANIMAL_MISSING: return createAnimalMissing();
 			case TrackerPackage.ICVI: return createICVI();
-			case TrackerPackage.FAIR_REGISTRATION: return createFairRegistration();
 			case TrackerPackage.WEIGH_IN: return createWeighIn();
 			case TrackerPackage.SWINE: return createSwine();
 			case TrackerPackage.EQUINE: return createEquine();
@@ -337,16 +335,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public ICVI createICVI() {
 		ICVIImpl icvi = new ICVIImpl();
 		return icvi;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public FairRegistration createFairRegistration() {
-		FairRegistrationImpl fairRegistration = new FairRegistrationImpl();
-		return fairRegistration;
 	}
 
 	/**

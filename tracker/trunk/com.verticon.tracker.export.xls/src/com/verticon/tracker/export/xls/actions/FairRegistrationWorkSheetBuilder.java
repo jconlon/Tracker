@@ -3,14 +3,10 @@
  */
 package com.verticon.tracker.export.xls.actions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 
-import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.Person;
@@ -22,7 +18,6 @@ import com.verticon.tracker.fair.YoungPerson;
  */
 public class FairRegistrationWorkSheetBuilder extends AbstractWorkSheetBuilder implements WorkSheetBuilder {
 
-	List<FairRegistration> registrationEvents = new ArrayList<FairRegistration>();
 	
 	public void createColumnHeader(HSSFSheet sheet){
 		HSSFRow row = createRow(sheet);

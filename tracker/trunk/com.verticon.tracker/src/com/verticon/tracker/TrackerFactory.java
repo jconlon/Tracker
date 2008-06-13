@@ -87,15 +87,6 @@ public interface TrackerFactory extends EFactory {
 	ICVI createICVI();
 
 	/**
-	 * Returns a new object of class '<em>Fair Registration</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Fair Registration</em>'.
-	 * @generated
-	 */
-	FairRegistration createFairRegistration();
-
-	/**
 	 * Returns a new object of class '<em>Weigh In</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

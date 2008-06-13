@@ -222,29 +222,6 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.FairRegistration} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected FairRegistrationItemProvider fairRegistrationItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.verticon.tracker.FairRegistration}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createFairRegistrationAdapter() {
-		if (fairRegistrationItemProvider == null) {
-			fairRegistrationItemProvider = new FairRegistrationItemProvider(this);
-		}
-
-		return fairRegistrationItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.WeighIn} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1099,7 +1076,6 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (tagRetiredItemProvider != null) tagRetiredItemProvider.dispose();
 		if (animalMissingItemProvider != null) animalMissingItemProvider.dispose();
 		if (icviItemProvider != null) icviItemProvider.dispose();
-		if (fairRegistrationItemProvider != null) fairRegistrationItemProvider.dispose();
 		if (weighInItemProvider != null) weighInItemProvider.dispose();
 		if (swineItemProvider != null) swineItemProvider.dispose();
 		if (equineItemProvider != null) equineItemProvider.dispose();

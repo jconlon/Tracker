@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_smKWUDo3Edyw6--mXqZ7vg" activeDiagram="_smKWUTo3Edyw6--mXqZ7vg">
   <model href="tracker.ecore#/"/>
-  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="1249,630">
+  <diagrams xmi:id="_smKWUTo3Edyw6--mXqZ7vg" position="0,0" size="100,100" name="No name" viewport="1410,529">
     <property xmi:id="_smKWUjo3Edyw6--mXqZ7vg" key="pageFormatName" value="A2"/>
     <property xmi:id="_smKWUzo3Edyw6--mXqZ7vg" key="diagramWidth" value="1680"/>
     <property xmi:id="_smKWVDo3Edyw6--mXqZ7vg" key="diagramHeight" value="2376"/>
@@ -201,7 +201,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_smMynDo3Edyw6--mXqZ7vg" position="1464,233" size="205,-1">
-      <anchorage xmi:id="_smMynTo3Edyw6--mXqZ7vg" graphEdge="_smgUmzo3Edyw6--mXqZ7vg _smhivjo3Edyw6--mXqZ7vg _smhiwDo3Edyw6--mXqZ7vg _smiJyzo3Edyw6--mXqZ7vg _smiw1Do3Edyw6--mXqZ7vg _smiw4To3Edyw6--mXqZ7vg _smjX6To3Edyw6--mXqZ7vg _smj-8Do3Edyw6--mXqZ7vg _smkmADo3Edyw6--mXqZ7vg _smlNEDo3Edyw6--mXqZ7vg _smlNGzo3Edyw6--mXqZ7vg _sml0KTo3Edyw6--mXqZ7vg _smmbMDo3Edyw6--mXqZ7vg _smmbOzo3Edyw6--mXqZ7vg _smnpUDo3Edyw6--mXqZ7vg _smnpXzo3Edyw6--mXqZ7vg _yuZf4Do3Edyw6--mXqZ7vg _9F3ecTpBEdyoUcxPwkixgg _K9r6IKqhEdyLY6qfXcrYIw _JaMkQKv4Edy9vLm4eJujnQ _hZIzMKwEEdy9vLm4eJujnQ _mE-gIKwYEdy9vLm4eJujnQ _BpwmoKwgEdy9vLm4eJujnQ _GCFQwKwrEdy9vLm4eJujnQ _Uw7XMM9_EdyJvPuWVF-V7w"/>
+      <anchorage xmi:id="_smMynTo3Edyw6--mXqZ7vg" graphEdge="_smgUmzo3Edyw6--mXqZ7vg _smhivjo3Edyw6--mXqZ7vg _smhiwDo3Edyw6--mXqZ7vg _smiJyzo3Edyw6--mXqZ7vg _smiw1Do3Edyw6--mXqZ7vg _smiw4To3Edyw6--mXqZ7vg _smjX6To3Edyw6--mXqZ7vg _smj-8Do3Edyw6--mXqZ7vg _smkmADo3Edyw6--mXqZ7vg _smlNEDo3Edyw6--mXqZ7vg _smlNGzo3Edyw6--mXqZ7vg _sml0KTo3Edyw6--mXqZ7vg _smmbMDo3Edyw6--mXqZ7vg _smmbOzo3Edyw6--mXqZ7vg _smnpXzo3Edyw6--mXqZ7vg _yuZf4Do3Edyw6--mXqZ7vg _9F3ecTpBEdyoUcxPwkixgg _K9r6IKqhEdyLY6qfXcrYIw _JaMkQKv4Edy9vLm4eJujnQ _hZIzMKwEEdy9vLm4eJujnQ _mE-gIKwYEdy9vLm4eJujnQ _BpwmoKwgEdy9vLm4eJujnQ _GCFQwKwrEdy9vLm4eJujnQ _Uw7XMM9_EdyJvPuWVF-V7w"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smMynjo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//Event"/>
       </semanticModel>
@@ -1790,64 +1790,6 @@
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smmbPjo3Edyw6--mXqZ7vg" presentation="default">
         <element href="tracker.ecore#//Age"/>
       </semanticModel>
-    </contained>
-    <contained xsi:type="di:GraphNode" xmi:id="_smnCQDo3Edyw6--mXqZ7vg" position="1784,793" size="170,-1">
-      <anchorage xmi:id="_smnCQTo3Edyw6--mXqZ7vg" graphEdge="_smnpUDo3Edyw6--mXqZ7vg"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smnCQjo3Edyw6--mXqZ7vg" presentation="default">
-        <element href="tracker.ecore#//FairRegistration"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode" xmi:id="_smnCQzo3Edyw6--mXqZ7vg">
-        <property xmi:id="_smnCRDo3Edyw6--mXqZ7vg" key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smnCRTo3Edyw6--mXqZ7vg" presentation="default">
-          <element href="tracker.ecore#//FairRegistration"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" xmi:id="_smnCRjo3Edyw6--mXqZ7vg" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smnCRzo3Edyw6--mXqZ7vg" presentation="default">
-            <element href="tracker.ecore#//FairRegistration/participant"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_smnCSDo3Edyw6--mXqZ7vg" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smnCSTo3Edyw6--mXqZ7vg" presentation="default">
-            <element href="tracker.ecore#//FairRegistration/address"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_smnCSjo3Edyw6--mXqZ7vg" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smnCSzo3Edyw6--mXqZ7vg" presentation="default">
-            <element href="tracker.ecore#//FairRegistration/phone"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_smnCTDo3Edyw6--mXqZ7vg" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smnCTTo3Edyw6--mXqZ7vg" presentation="default">
-            <element href="tracker.ecore#//FairRegistration/parent"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_smnCTjo3Edyw6--mXqZ7vg" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smnCTzo3Edyw6--mXqZ7vg" presentation="default">
-            <element href="tracker.ecore#//FairRegistration/club"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_sknTwGIvEdy-l7wZNtAakg" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sknTwWIvEdy-l7wZNtAakg" presentation="default">
-            <element href="tracker.ecore#//FairRegistration/SaleOrder"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" xmi:id="_rSv74WIyEdy-l7wZNtAakg" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_rSv74mIyEdy-l7wZNtAakg" presentation="default">
-            <element href="tracker.ecore#//FairRegistration/Exhibit"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode" xmi:id="_smnCUDo3Edyw6--mXqZ7vg">
-        <property xmi:id="_smnCUTo3Edyw6--mXqZ7vg" key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smnCUjo3Edyw6--mXqZ7vg" presentation="default">
-          <element href="tracker.ecore#//FairRegistration"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" xmi:id="_smnpUDo3Edyw6--mXqZ7vg" anchor="_smnCQTo3Edyw6--mXqZ7vg _smMynTo3Edyw6--mXqZ7vg">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_smnpUTo3Edyw6--mXqZ7vg" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -144, 303, 426]</waypoints>
-      <waypoints>[-303, -144, 0, 426]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_smnpUjo3Edyw6--mXqZ7vg" position="863,1" size="150,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_smnpUzo3Edyw6--mXqZ7vg" presentation="default">

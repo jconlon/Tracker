@@ -8,8 +8,8 @@ package com.verticon.tracker.util;
 
 import com.verticon.tracker.*;
 import java.util.List;
-
 import java.util.Map;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
@@ -26,8 +26,10 @@ import com.verticon.tracker.Caprine;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Equine;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.EventAttributeSchema;
+import com.verticon.tracker.EventSchema;
 import com.verticon.tracker.Exported;
-import com.verticon.tracker.FairRegistration;
+import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
@@ -42,6 +44,7 @@ import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
+import com.verticon.tracker.Schema;
 import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Slaughtered;
 import com.verticon.tracker.Swine;
@@ -290,13 +293,6 @@ public class TrackerSwitch<T> {
 				ICVI icvi = (ICVI)theEObject;
 				T result = caseICVI(icvi);
 				if (result == null) result = caseEvent(icvi);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TrackerPackage.FAIR_REGISTRATION: {
-				FairRegistration fairRegistration = (FairRegistration)theEObject;
-				T result = caseFairRegistration(fairRegistration);
-				if (result == null) result = caseEvent(fairRegistration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -559,21 +555,6 @@ public class TrackerSwitch<T> {
 	 * @generated
 	 */
 	public T caseICVI(ICVI object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Fair Registration</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Fair Registration</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFairRegistration(FairRegistration object) {
 		return null;
 	}
 

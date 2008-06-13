@@ -371,17 +371,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="AnimalMissing" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="ICVI" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Age" instanceClassName="com.verticon.tracker.util.Age"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FairRegistration" eSuperTypes="#//Event">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="participant" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="phone" lowerBound="1" eType="#//USPhoneNumber"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="club" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SaleOrder" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Exhibit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="USPhoneNumber" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EClass" name="WeighIn" eSuperTypes="#//Event">
     <eOperations name="previousWeighIn" eType="#//WeighIn">

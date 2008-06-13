@@ -42,9 +42,7 @@ import org.eclipse.emf.common.ui.ViewerPane;
 import org.eclipse.emf.common.ui.editor.ProblemEditorPart;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
@@ -101,7 +99,6 @@ import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -131,15 +128,11 @@ import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.FairRegistration;
 import com.verticon.tracker.Premises;
-import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.edit.provider.FairRegistrationItemProvider;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
 import com.verticon.tracker.editor.util.TrackerTableEditorUtils;
 import com.verticon.tracker.editor.validation.LiveValidationContentAdapter;
-import com.verticon.tracker.emf.edit.ui.provider.FairRegistrationAdapterFactoryLableProvider;
 import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelProvider;
 
 
@@ -1098,7 +1091,6 @@ public class TrackerEditor
 
 			createAnimalsTableViewer(getString("_UI_TableAnimals_label"));
 			
-			createFairRegistrationTableViewer("Fair Registrations");
 
 //			createTableTreeViewer(getString("_UI_TreeWithColumnsPage_label"));
 			
@@ -1302,218 +1294,7 @@ public class TrackerEditor
 		setPageText(pageIndex,pageName );
 	}
 
-	/**
-	 * FairRegistration Table
-	 *  @see FairRegistrationItemProvider 
-	 *  @see FairRegistrationSorter
-	 *  @since 0.2.0
-	 */
-	private void createFairRegistrationTableViewer(String tableName) {
-		ViewerPane viewerPane =
-			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-			public Viewer createViewer(Composite composite) {
-				return new TableViewer(composite);
-			}
-			public void requestActivation() {
-				super.requestActivation();
-				setCurrentViewerPane(this);
-				this.getViewer().refresh();
-			}
-		};
-		viewerPane.createControl(getContainer());
-		fairRegistrationTableViewer = (TableViewer)viewerPane.getViewer();
-
-		final Table table = fairRegistrationTableViewer.getTable();
-		TableLayout layout = new TableLayout();
-		table.setLayout(layout);
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-		fairRegistrationTableViewer.setUseHashlookup(true);
-
-		//Animal ID Number
-		final TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 150, true));
-		animalIDColumn.setText(getString("_UI_AnimalParentColumn_label"));
-
-		//Tag ID Number
-		final TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 150, true));
-		tagIDColumn.setText(getString("_UI_TagColumn_label"));
-		
-		//Animal
-		final TableColumn animalTypeColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 120, true));
-		animalTypeColumn.setText(getString("_UI_AnimalColumn_label"));
-		
-		//Date of Event
-		final TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 170, true));
-		dateTimeColumn.setText(getString("_UI_DateTimeColumn_label"));
-
-
-		//Participant
-		final TableColumn participantColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 160, true));
-		participantColumn.setText("Participant Name");
-		
-		//BEGINWEIGHT
-		final TableColumn beginWtColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 30, true));
-		beginWtColumn.setText("Begin Wt");
-		
-		//ENDWEIGHT
-		final TableColumn endWtColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 30, true));
-		endWtColumn.setText("End Wt");
-		
-		//Parents 
-		final TableColumn parentsColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 220, true));
-		parentsColumn.setText("Parents");
-
-		//Club 
-		final TableColumn clubColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 150, true));
-		clubColumn.setText("Club");
-
-
-		//Phone 
-		final TableColumn phoneColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 100, true));
-		phoneColumn.setText("Phone");
-
-		//Address 
-		final TableColumn addressColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(2, 300, true));
-		addressColumn.setText("Address");
-		
-		//Comments
-		final TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
-		layout.addColumnData(new ColumnWeightData(3, 220, true));
-		eventCommentsColumn.setText(getString("_UI_CommentsColumn_label"));
-
-		Listener sortListener = new Listener() {
-
-			public void handleEvent(org.eclipse.swt.widgets.Event e) {
-				// determine new sort column and direction
-				TableColumn sortColumn = table.getSortColumn();
-				TableColumn currentColumn = (TableColumn) e.widget;
-				int dir = table.getSortDirection();
-				if (sortColumn == currentColumn) {
-					dir = dir == SWT.UP ? SWT.DOWN : SWT.UP;
-				} else {
-					table.setSortColumn(currentColumn);
-					dir = SWT.UP;
-				}
-
-				// sort the data based on column and direction
-
-				int sortIdentifier = 0;
-
-				if (currentColumn == animalIDColumn) {
-					sortIdentifier = FairRegistrationSorter.ANIMAL_IDNUMBER;
-				}
-
-				if (currentColumn == tagIDColumn) {
-					sortIdentifier = FairRegistrationSorter.TAG_IDNUMBER;
-				}
-
-				if (currentColumn == animalTypeColumn) {
-					sortIdentifier = FairRegistrationSorter.ANIMAL;
-				}
-
-				if (currentColumn == dateTimeColumn) {
-					sortIdentifier = FairRegistrationSorter.DATETIME;
-				}
-
-				if (currentColumn == participantColumn) {
-					sortIdentifier = FairRegistrationSorter.PARTICIPANT;
-				}
-
-				if (currentColumn == beginWtColumn) {
-					sortIdentifier = FairRegistrationSorter.BEGIN_WEIGHT;
-				}
-
-				if (currentColumn == endWtColumn) {
-					sortIdentifier = FairRegistrationSorter.END_WEIGHT;
-				}
-
-				if (currentColumn == parentsColumn) {
-					sortIdentifier = FairRegistrationSorter.PARENT;
-				}
-
-				if (currentColumn == clubColumn) {
-					sortIdentifier = FairRegistrationSorter.CLUB;
-				}
-
-				if (currentColumn == phoneColumn) {
-					sortIdentifier = FairRegistrationSorter.PHONE;
-				}
-
-				if (currentColumn == addressColumn) {
-					sortIdentifier = FairRegistrationSorter.ADDRESS;
-				}
-
-				if (currentColumn == eventCommentsColumn) {
-					sortIdentifier = FairRegistrationSorter.EVENT_COMMENTS;
-				}
-
-				table.setSortDirection(dir);
-				fairRegistrationTableViewer.setSorter(new FairRegistrationSorter(sortIdentifier,dir));
-			}
-
-		};
-
-		animalIDColumn.addListener(SWT.Selection, sortListener);
-		tagIDColumn.addListener(SWT.Selection, sortListener);
-		animalTypeColumn.addListener(SWT.Selection, sortListener);
-		dateTimeColumn.addListener(SWT.Selection, sortListener);
-		participantColumn.addListener(SWT.Selection, sortListener);
-		beginWtColumn.addListener(SWT.Selection, sortListener);
-		endWtColumn.addListener(SWT.Selection, sortListener);
-		parentsColumn.addListener(SWT.Selection, sortListener);
-		clubColumn.addListener(SWT.Selection, sortListener);
-		phoneColumn.addListener(SWT.Selection, sortListener);
-		addressColumn.addListener(SWT.Selection, sortListener);
-		eventCommentsColumn.addListener(SWT.Selection, sortListener);
-
-		
-		fairRegistrationTableViewer.setColumnProperties(new String [] {"a", "b", "c", "d", "e", "f", "g","h","i", "j","k","l"});
-		fairRegistrationTableViewer.setContentProvider(
-				new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
-				{
-					public Object [] getElements(Object object)
-					{
-						return getFairRegistrationEvents(object).toArray();
-					}
-					public void notifyChanged(Notification notification)
-					{
-						switch (notification.getEventType())
-						{
-						case Notification.ADD:
-						case Notification.ADD_MANY:
-							if (notification.getFeature() != TrackerPackage.eINSTANCE.getTag_Events()) {
-								return;
-							}
-						}
-						super.notifyChanged(notification);
-						if(viewer!=null){
-							this.viewer.refresh();
-						}
-					}
-				});
-		
-		fairRegistrationTableViewer.setLabelProvider(new FairRegistrationAdapterFactoryLableProvider(adapterFactory, selectionViewer));
-		Object rootObject = getRoot();
-		if (rootObject instanceof Premises){
-			fairRegistrationTableViewer.setInput((Premises)rootObject);
-			viewerPane.setTitle((Premises)rootObject);
-		}
-		createContextMenuFor(fairRegistrationTableViewer);
-		int pageIndex = addPage(viewerPane.getControl());
-		setPageText(pageIndex, tableName);
-		
-	}
+	
 	/**
 	 * Events Table
 	 */
@@ -1987,26 +1768,7 @@ public class TrackerEditor
 					}
 					
 				
-				} else if (currentViewerPane.getViewer() == fairRegistrationTableViewer){
-					if( selectedElement instanceof FairRegistration){
-
-						ArrayList<Object> selectionList = new ArrayList<Object>();
-						selectionList.add(selectedElement);
-						while (selectedElements.hasNext()) {
-							Object o = selectedElements.next();
-							if(o instanceof FairRegistration){
-								selectionList.add(o);
-							}
-
-						}
-
-						// Set the selection to the widget.
-						//
-						fairRegistrationTableViewer.setSelection(new StructuredSelection(selectionList));
-					
-					}
-					
-				} else if (currentViewerPane.getViewer() == listViewer
+				}else if (currentViewerPane.getViewer() == listViewer
 						&& selectedElement instanceof Animal) // 14.2.2
 				{
 					Animal selectedAnimal = (Animal) selectedElement;
@@ -2033,20 +1795,7 @@ public class TrackerEditor
 		}
 	}
 
-	/**
-	 * @param rootObject
-	 * @return
-	 */
-	private EList<Event> getFairRegistrationEvents(Object rootObject) {
-		EList<Event> registrations = new BasicEList<Event>();
-		EList<Event> eventHistory =((Premises)rootObject).eventHistory();
-		for (Event event : eventHistory) {
-			if(event.getEventCode()==101){
-				registrations.add(event);
-			}
-		}
-		return registrations;
-	}
+	
 
 	/**
 	 * This is for implementing {@link IEditorPart} and simply tests the command stack.
