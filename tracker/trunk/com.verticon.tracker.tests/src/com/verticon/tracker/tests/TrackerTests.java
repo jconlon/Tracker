@@ -60,7 +60,6 @@ public class TrackerTests extends TestSuite {
 		suite.addTestSuite(TagRetiredTest.class);
 		suite.addTestSuite(AnimalMissingTest.class);
 		suite.addTestSuite(ICVITest.class);
-		suite.addTestSuite(FairRegistrationTest.class);
 		suite.addTestSuite(WeighInTest.class);
 		suite.addTestSuite(SwineTest.class);
 		suite.addTestSuite(EquineTest.class);

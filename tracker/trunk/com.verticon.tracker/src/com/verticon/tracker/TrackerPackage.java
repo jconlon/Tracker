@@ -2459,151 +2459,6 @@ public interface TrackerPackage extends EPackage {
 	int ICVI_FEATURE_COUNT = EVENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link com.verticon.tracker.impl.FairRegistrationImpl <em>Fair Registration</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.impl.FairRegistrationImpl
-	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getFairRegistration()
-	 * @generated
-	 */
-	int FAIR_REGISTRATION = 23;
-
-	/**
-	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR_REGISTRATION__DATE_TIME = EVENT__DATE_TIME;
-
-	/**
-	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR_REGISTRATION__EVENT_CODE = EVENT__EVENT_CODE;
-
-	/**
-	 * The feature id for the '<em><b>Electronically Read</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR_REGISTRATION__ELECTRONICALLY_READ = EVENT__ELECTRONICALLY_READ;
-
-	/**
-	 * The feature id for the '<em><b>Correction</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR_REGISTRATION__CORRECTION = EVENT__CORRECTION;
-
-	/**
-	 * The feature id for the '<em><b>Comments</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR_REGISTRATION__COMMENTS = EVENT__COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR_REGISTRATION__TAG = EVENT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR_REGISTRATION__ID = EVENT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Participant</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR_REGISTRATION__PARTICIPANT = EVENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Address</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR_REGISTRATION__ADDRESS = EVENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Phone</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR_REGISTRATION__PHONE = EVENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR_REGISTRATION__PARENT = EVENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Club</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR_REGISTRATION__CLUB = EVENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Sale Order</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR_REGISTRATION__SALE_ORDER = EVENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Exhibit</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR_REGISTRATION__EXHIBIT = EVENT_FEATURE_COUNT + 6;
-
-	/**
-	 * The number of structural features of the '<em>Fair Registration</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAIR_REGISTRATION_FEATURE_COUNT = EVENT_FEATURE_COUNT + 7;
-
-	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.WeighInImpl <em>Weigh In</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2611,7 +2466,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getWeighIn()
 	 * @generated
 	 */
-	int WEIGH_IN = 24;
+	int WEIGH_IN = 23;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -2711,7 +2566,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSwine()
 	 * @generated
 	 */
-	int SWINE = 25;
+	int SWINE = 24;
 
 	/**
 	 * The feature id for the '<em><b>Birth Date</b></em>' attribute.
@@ -2892,7 +2747,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEquine()
 	 * @generated
 	 */
-	int EQUINE = 26;
+	int EQUINE = 25;
 
 	/**
 	 * The feature id for the '<em><b>Birth Date</b></em>' attribute.
@@ -3055,7 +2910,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getCaprine()
 	 * @generated
 	 */
-	int CAPRINE = 27;
+	int CAPRINE = 26;
 
 	/**
 	 * The feature id for the '<em><b>Birth Date</b></em>' attribute.
@@ -3218,7 +3073,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getLocation()
 	 * @generated
 	 */
-	int LOCATION = 28;
+	int LOCATION = 27;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3246,7 +3101,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getMedicalCondition()
 	 * @generated
 	 */
-	int MEDICAL_CONDITION = 29;
+	int MEDICAL_CONDITION = 28;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -3328,7 +3183,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getMedicalTreatment()
 	 * @generated
 	 */
-	int MEDICAL_TREATMENT = 30;
+	int MEDICAL_TREATMENT = 29;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -3473,7 +3328,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBirthing()
 	 * @generated
 	 */
-	int BIRTHING = 31;
+	int BIRTHING = 30;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -3582,7 +3437,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getCalving()
 	 * @generated
 	 */
-	int CALVING = 32;
+	int CALVING = 31;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -3691,7 +3546,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBirthDefect()
 	 * @generated
 	 */
-	int BIRTH_DEFECT = 33;
+	int BIRTH_DEFECT = 32;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -3782,7 +3637,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getMastitis()
 	 * @generated
 	 */
-	int MASTITIS = 34;
+	int MASTITIS = 33;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -3882,7 +3737,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getMilkTest()
 	 * @generated
 	 */
-	int MILK_TEST = 35;
+	int MILK_TEST = 34;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -4009,7 +3864,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getHerdTest()
 	 * @generated
 	 */
-	int HERD_TEST = 36;
+	int HERD_TEST = 35;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -4118,7 +3973,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getGenericEvent()
 	 * @generated
 	 */
-	int GENERIC_EVENT = 37;
+	int GENERIC_EVENT = 36;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -4218,7 +4073,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventAttribute()
 	 * @generated
 	 */
-	int EVENT_ATTRIBUTE = 38;
+	int EVENT_ATTRIBUTE = 37;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -4255,7 +4110,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventSchema()
 	 * @generated
 	 */
-	int EVENT_SCHEMA = 39;
+	int EVENT_SCHEMA = 38;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4310,7 +4165,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventAttributeSchema()
 	 * @generated
 	 */
-	int EVENT_ATTRIBUTE_SCHEMA = 40;
+	int EVENT_ATTRIBUTE_SCHEMA = 39;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4356,7 +4211,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSchema()
 	 * @generated
 	 */
-	int SCHEMA = 41;
+	int SCHEMA = 40;
 
 	/**
 	 * The feature id for the '<em><b>Event Schemas</b></em>' containment reference list.
@@ -4384,7 +4239,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 42;
+	int SEX = 41;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BisonBreed <em>Bison Breed</em>}' enum.
@@ -4394,7 +4249,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBisonBreed()
 	 * @generated
 	 */
-	int BISON_BREED = 43;
+	int BISON_BREED = 42;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SheepBreed <em>Sheep Breed</em>}' enum.
@@ -4404,7 +4259,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSheepBreed()
 	 * @generated
 	 */
-	int SHEEP_BREED = 44;
+	int SHEEP_BREED = 43;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BeefBreed <em>Beef Breed</em>}' enum.
@@ -4414,7 +4269,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBeefBreed()
 	 * @generated
 	 */
-	int BEEF_BREED = 45;
+	int BEEF_BREED = 44;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.DairyBreed <em>Dairy Breed</em>}' enum.
@@ -4424,7 +4279,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDairyBreed()
 	 * @generated
 	 */
-	int DAIRY_BREED = 46;
+	int DAIRY_BREED = 45;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SwineBreed <em>Swine Breed</em>}' enum.
@@ -4434,7 +4289,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSwineBreed()
 	 * @generated
 	 */
-	int SWINE_BREED = 47;
+	int SWINE_BREED = 46;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.HorseBreed <em>Horse Breed</em>}' enum.
@@ -4444,7 +4299,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getHorseBreed()
 	 * @generated
 	 */
-	int HORSE_BREED = 48;
+	int HORSE_BREED = 47;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.GoatBreed <em>Goat Breed</em>}' enum.
@@ -4454,7 +4309,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getGoatBreed()
 	 * @generated
 	 */
-	int GOAT_BREED = 49;
+	int GOAT_BREED = 48;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Treatment <em>Treatment</em>}' enum.
@@ -4464,7 +4319,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatment()
 	 * @generated
 	 */
-	int TREATMENT = 50;
+	int TREATMENT = 49;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.TreatmentMethod <em>Treatment Method</em>}' enum.
@@ -4474,7 +4329,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatmentMethod()
 	 * @generated
 	 */
-	int TREATMENT_METHOD = 51;
+	int TREATMENT_METHOD = 50;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.OneToTen <em>One To Ten</em>}' enum.
@@ -4484,7 +4339,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getOneToTen()
 	 * @generated
 	 */
-	int ONE_TO_TEN = 52;
+	int ONE_TO_TEN = 51;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.AnimalType <em>Animal Type</em>}' enum.
@@ -4494,7 +4349,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAnimalType()
 	 * @generated
 	 */
-	int ANIMAL_TYPE = 53;
+	int ANIMAL_TYPE = 52;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.EventDataType <em>Event Data Type</em>}' enum.
@@ -4504,7 +4359,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventDataType()
 	 * @generated
 	 */
-	int EVENT_DATA_TYPE = 54;
+	int EVENT_DATA_TYPE = 53;
 
 	/**
 	 * The meta object id for the '<em>Premises Id Number</em>' data type.
@@ -4514,7 +4369,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPremisesIdNumber()
 	 * @generated
 	 */
-	int PREMISES_ID_NUMBER = 55;
+	int PREMISES_ID_NUMBER = 54;
 
 	/**
 	 * The meta object id for the '<em>Email</em>' data type.
@@ -4524,7 +4379,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 56;
+	int EMAIL = 55;
 
 
 	/**
@@ -4535,7 +4390,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAge()
 	 * @generated
 	 */
-	int AGE = 57;
+	int AGE = 56;
 
 
 	/**
@@ -4546,7 +4401,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSPhoneNumber()
 	 * @generated
 	 */
-	int US_PHONE_NUMBER = 58;
+	int US_PHONE_NUMBER = 57;
 
 
 	/**
@@ -4557,7 +4412,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 59;
+	int URI = 58;
 
 
 	/**
@@ -4924,93 +4779,6 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getICVI();
-
-	/**
-	 * Returns the meta object for class '{@link com.verticon.tracker.FairRegistration <em>Fair Registration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Fair Registration</em>'.
-	 * @see com.verticon.tracker.FairRegistration
-	 * @generated
-	 */
-	EClass getFairRegistration();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.FairRegistration#getParticipant <em>Participant</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Participant</em>'.
-	 * @see com.verticon.tracker.FairRegistration#getParticipant()
-	 * @see #getFairRegistration()
-	 * @generated
-	 */
-	EAttribute getFairRegistration_Participant();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.FairRegistration#getAddress <em>Address</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Address</em>'.
-	 * @see com.verticon.tracker.FairRegistration#getAddress()
-	 * @see #getFairRegistration()
-	 * @generated
-	 */
-	EAttribute getFairRegistration_Address();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.FairRegistration#getPhone <em>Phone</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Phone</em>'.
-	 * @see com.verticon.tracker.FairRegistration#getPhone()
-	 * @see #getFairRegistration()
-	 * @generated
-	 */
-	EAttribute getFairRegistration_Phone();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.FairRegistration#getParent <em>Parent</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Parent</em>'.
-	 * @see com.verticon.tracker.FairRegistration#getParent()
-	 * @see #getFairRegistration()
-	 * @generated
-	 */
-	EAttribute getFairRegistration_Parent();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.FairRegistration#getClub <em>Club</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Club</em>'.
-	 * @see com.verticon.tracker.FairRegistration#getClub()
-	 * @see #getFairRegistration()
-	 * @generated
-	 */
-	EAttribute getFairRegistration_Club();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.FairRegistration#getSaleOrder <em>Sale Order</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Sale Order</em>'.
-	 * @see com.verticon.tracker.FairRegistration#getSaleOrder()
-	 * @see #getFairRegistration()
-	 * @generated
-	 */
-	EAttribute getFairRegistration_SaleOrder();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.FairRegistration#getExhibit <em>Exhibit</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Exhibit</em>'.
-	 * @see com.verticon.tracker.FairRegistration#getExhibit()
-	 * @see #getFairRegistration()
-	 * @generated
-	 */
-	EAttribute getFairRegistration_Exhibit();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.WeighIn <em>Weigh In</em>}'.
@@ -6491,72 +6259,6 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ICVI = eINSTANCE.getICVI();
-
-		/**
-		 * The meta object literal for the '{@link com.verticon.tracker.impl.FairRegistrationImpl <em>Fair Registration</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.verticon.tracker.impl.FairRegistrationImpl
-		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getFairRegistration()
-		 * @generated
-		 */
-		EClass FAIR_REGISTRATION = eINSTANCE.getFairRegistration();
-
-		/**
-		 * The meta object literal for the '<em><b>Participant</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FAIR_REGISTRATION__PARTICIPANT = eINSTANCE.getFairRegistration_Participant();
-
-		/**
-		 * The meta object literal for the '<em><b>Address</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FAIR_REGISTRATION__ADDRESS = eINSTANCE.getFairRegistration_Address();
-
-		/**
-		 * The meta object literal for the '<em><b>Phone</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FAIR_REGISTRATION__PHONE = eINSTANCE.getFairRegistration_Phone();
-
-		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FAIR_REGISTRATION__PARENT = eINSTANCE.getFairRegistration_Parent();
-
-		/**
-		 * The meta object literal for the '<em><b>Club</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FAIR_REGISTRATION__CLUB = eINSTANCE.getFairRegistration_Club();
-
-		/**
-		 * The meta object literal for the '<em><b>Sale Order</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FAIR_REGISTRATION__SALE_ORDER = eINSTANCE.getFairRegistration_SaleOrder();
-
-		/**
-		 * The meta object literal for the '<em><b>Exhibit</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FAIR_REGISTRATION__EXHIBIT = eINSTANCE.getFairRegistration_Exhibit();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.WeighInImpl <em>Weigh In</em>}' class.

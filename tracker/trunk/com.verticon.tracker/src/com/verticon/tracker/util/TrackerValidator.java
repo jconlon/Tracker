@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalMissing;
+import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BirthDefect;
 import com.verticon.tracker.Birthing;
@@ -30,8 +31,11 @@ import com.verticon.tracker.DairyBreed;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Equine;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.EventAttributeSchema;
+import com.verticon.tracker.EventDataType;
+import com.verticon.tracker.EventSchema;
 import com.verticon.tracker.Exported;
-import com.verticon.tracker.FairRegistration;
+import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.GoatBreed;
 import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.HorseBreed;
@@ -49,6 +53,7 @@ import com.verticon.tracker.OneToTen;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
+import com.verticon.tracker.Schema;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.SheepBreed;
 import com.verticon.tracker.Sighting;
@@ -189,8 +194,6 @@ public class TrackerValidator extends EObjectValidator {
 				return validateAnimalMissing((AnimalMissing)value, diagnostics, context);
 			case TrackerPackage.ICVI:
 				return validateICVI((ICVI)value, diagnostics, context);
-			case TrackerPackage.FAIR_REGISTRATION:
-				return validateFairRegistration((FairRegistration)value, diagnostics, context);
 			case TrackerPackage.WEIGH_IN:
 				return validateWeighIn((WeighIn)value, diagnostics, context);
 			case TrackerPackage.SWINE:
@@ -347,15 +350,6 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validateICVI(ICVI icvi, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(icvi, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateFairRegistration(FairRegistration fairRegistration, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(fairRegistration, diagnostics, context);
 	}
 
 	/**

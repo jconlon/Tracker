@@ -321,11 +321,6 @@ public class TagItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
-				 TrackerFactory.eINSTANCE.createFairRegistration()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createWeighIn()));
 
 		newChildDescriptors.add
