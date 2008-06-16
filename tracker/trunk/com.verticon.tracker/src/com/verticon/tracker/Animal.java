@@ -347,7 +347,7 @@ public interface Animal extends EObject {
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	Integer getWeightGainPerDay();
+	Double getWeightGainPerDay();
 
 	/**
 	 * <!-- begin-user-doc -->

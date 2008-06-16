@@ -78,7 +78,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Integer WEIGHT_GAIN_PER_DAY_EDEFAULT = null;
+	protected static final Double WEIGHT_GAIN_PER_DAY_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -134,7 +134,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public Integer getWeightGainPerDay() {
+	public Double getWeightGainPerDay() {
 		if(weight==null || weight==0){
 			return null;
 		}
@@ -147,11 +147,11 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 		CalendarDate lastWeighInCalendarDate = 
 			new CalendarDate(TimeZone.getDefault(), lastWeighIn.getDateTime());
 		
-		int daysSinceLastWeighIn = lastWeighInCalendarDate.daysUntil(myCalendarDate);
+		double daysSinceLastWeighIn = lastWeighInCalendarDate.daysUntil(myCalendarDate);
 		if(daysSinceLastWeighIn==0){
 			return null;
 		}
-		int weightGain = weight - lastWeighIn.getWeight();
+		double weightGain = (double) weight -  (double)lastWeighIn.getWeight();
 		return weightGain / daysSinceLastWeighIn;
 			
 	}
