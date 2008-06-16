@@ -17,11 +17,15 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -51,6 +55,9 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 	private final List<ColumnMapper> spreadSheetColumnsToFeatureMap = 
 		new LinkedList<ColumnMapper>();
 	private int headerRow = -1;
+	
+	private boolean usePersonNameForExhibitName = false;
+	private boolean useEarTagForExhibitNum = false;
 
 	protected ImportPeopleDataWizardPage() {
 		super("selectPerson");
@@ -76,6 +83,73 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 		data.heightHint = 300;
 		data.widthHint = 300;
 		tableViewer.getControl().setLayoutData(data);;
+		
+		Label label = new Label(container, SWT.NULL);
+		label.setText("How do you want to name an Exhibit? ");
+		label.setBackground(container.getDisplay().getSystemColor(
+				SWT.COLOR_YELLOW));
+		data= new GridData(GridData.FILL_BOTH);
+		data.grabExcessHorizontalSpace = true;
+		data.horizontalSpan = 2;
+		label.setLayoutData(data);
+
+		Button usePersonNameButton = new Button(container, SWT.RADIO);
+		usePersonNameButton.setText("Use Person's name");
+		usePersonNameButton.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				usePersonNameForExhibitName = true;
+			}
+
+		});
+		
+		Button dontUsePersonNameButton = new Button(container, SWT.RADIO);
+		dontUsePersonNameButton.setText("Use above mapping or leave blank");
+		dontUsePersonNameButton.setSelection(true);
+		dontUsePersonNameButton.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				usePersonNameForExhibitName = false;
+			}
+
+		});
+		dontUsePersonNameButton.setSelection(true);
+		
+		Label label2 = new Label(container, SWT.NULL);
+		label2.setText("How do you want to number an Exhibit? ");
+		label2.setBackground(container.getDisplay().getSystemColor(
+				SWT.COLOR_YELLOW));
+		data= new GridData(GridData.FILL_BOTH);
+		data.grabExcessHorizontalSpace = true;
+		data.horizontalSpan = 2;
+		label2.setLayoutData(data);
+
+		Button useEarTagButton = new Button(container, SWT.RADIO);
+		useEarTagButton.setText("Use Animal's eartag number");
+		useEarTagButton.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				useEarTagForExhibitNum = true;
+			}
+
+		});
+		
+		Button dontUseEarTagButton = new Button(container, SWT.RADIO);
+		dontUseEarTagButton.setText("Use above mapping or leave blank");
+		dontUseEarTagButton.setSelection(true);
+		dontUseEarTagButton.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				useEarTagForExhibitNum = false;
+			}
+
+		});
+		dontUseEarTagButton.setSelection(true);
+		
 		setControl(child);
 	}
 
@@ -315,6 +389,18 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 
 	public int getHeaderRow() {
 		return headerRow;
+	}
+
+
+
+	public boolean isUsePersonNameForExhibitName() {
+		return usePersonNameForExhibitName;
+	}
+
+
+
+	public boolean isUseEarTagForExhibitNum() {
+		return useEarTagForExhibitNum;
 	}
 	
 	

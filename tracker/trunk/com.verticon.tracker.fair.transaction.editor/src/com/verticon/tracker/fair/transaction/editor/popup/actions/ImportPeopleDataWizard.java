@@ -100,13 +100,22 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 	 */
 	private void initializeTheFeaturesToMap() {
 		featuresToMap.add(FairPackage.Literals.FAIR__NAME);
-		featuresToMap.addAll(FairPackage.Literals.PERSON.getEAllStructuralFeatures());
+		
+		for (EStructuralFeature feature : FairPackage.Literals.PERSON.getEAllStructuralFeatures()) {
+			if(!feature.isDerived()){
+				featuresToMap.add(feature);
+			}
+		}
 		featuresToMap.add(FairPackage.Literals.YOUNG_PERSON__PARENTS);
 		featuresToMap.add(FairPackage.Literals.YOUNG_PERSON__CLUB);
 		featuresToMap.add(TrackerPackage.Literals.SWINE__LEFT_EAR_NOTCHING);
 		featuresToMap.add(TrackerPackage.Literals.SWINE__RIGHT_EAR_NOTCHING);
 		featuresToMap.add(TrackerPackage.Literals.OVINE__SCRAPIE_TAG);
-		featuresToMap.addAll(FairPackage.Literals.EXHIBIT.getEAllStructuralFeatures());
+		for (EStructuralFeature feature : FairPackage.Literals.EXHIBIT.getEAllStructuralFeatures()) {
+			if(!feature.isDerived()){
+				featuresToMap.add(feature);
+			}
+		}
 	}
 
 	@Override
@@ -430,13 +439,26 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		Exhibit exhibit = FairFactory.eINSTANCE.createExhibit();
 		exhibit.setComments(getColumnValue( row, FairPackage.Literals.EXHIBIT__COMMENTS));
 		exhibit.setName(getColumnValue( row, FairPackage.Literals.EXHIBIT__NAME));
+		if(exhibit.getName()==null || exhibit.getName().length()==0){
+			if(importPeoplePage.isUsePersonNameForExhibitName()){
+				exhibit.setName(person.getName());
+			}
+		}
 		String numAsString = getColumnValue( row, FairPackage.Literals.EXHIBIT__NUMBER);
-		if(numAsString!=null){
+		if(numAsString!=null ){
 			try {
 				int exhibitNumber = Integer.parseInt(numAsString);
 				exhibit.setNumber(exhibitNumber);
 			} catch (NumberFormatException e) {
 				logger.error("Row="+row.getRowNum()+" could not parse "+numAsString+" to create an exhibit number.",e);
+			}
+		}
+		
+		if(exhibit.getNumber()==0 && importPeoplePage.isUseEarTagForExhibitNum()){
+			try {
+				int earTag = Integer.parseInt(animal.getId());
+				exhibit.setNumber(earTag);
+			} catch (NumberFormatException e) {
 			}
 		}
 		
