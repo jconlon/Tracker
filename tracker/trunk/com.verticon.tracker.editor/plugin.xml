@@ -135,6 +135,14 @@
           menubarPath="com.verticon.tracker.editor.animal.popupSubMenu/content"
           tooltip="Changes the Types of the selected animals.">
     </action>
+    <action
+          class="com.verticon.tracker.editor.util.SelectInOutline"
+          enablesFor="+"
+          id="com.verticon.tracker.editor.actions.SelectAnimalInOutline"
+          label="Select in Outline"
+          menubarPath="com.verticon.tracker.editor.animal.popupSubMenu/content"
+          tooltip="Selects one or more animals in the Outline view.">
+    </action>
 
   	</objectContribution>
   </extension>
@@ -156,6 +164,15 @@
   			menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
   			tooltip="Modify attributes on selected Events." />
 
+		<action
+          class="com.verticon.tracker.editor.util.SelectInOutline"
+          enablesFor="+"
+          id="com.verticon.tracker.editor.actions.SelectEventInOutline"
+          label="Select in Outline"
+          menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
+          tooltip="Selects one or more events in the Outline view.">
+    	</action>
+		
   	</objectContribution>
   </extension>
   

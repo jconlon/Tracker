@@ -51,7 +51,7 @@
         point="org.eclipse.ui.popupMenus">
      <objectContribution
            adaptable="true"
-           id="com.verticon.tracker.fair.transaction.editor.popupMenu.UpdatePin"
+           id="com.verticon.tracker.fair.transaction.editor.popupMenu.Person"
            objectClass="com.verticon.tracker.fair.Person">
         <menu
               id="com.verticon.tracker.editor.event.popupSubMenu"
@@ -69,6 +69,39 @@
               menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
               tooltip="Update MovedIn and/or MovedOut events with Pin assigned to Person">
         </action>
+        <action
+          class="com.verticon.tracker.editor.util.SelectInOutline"
+          enablesFor="+"
+          id="com.verticon.tracker.editor.actions.SelectPeopleInOutline"
+          label="Select in Outline"
+          menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
+          tooltip="Selects one or more people in the Outline view.">
+    	</action>
+     </objectContribution>
+  </extension>
+  
+    <extension
+        point="org.eclipse.ui.popupMenus">
+     <objectContribution
+           adaptable="true"
+           id="com.verticon.tracker.fair.transaction.editor.popupMenu.Exhibit"
+           objectClass="com.verticon.tracker.fair.Exhibit">
+        <menu
+              id="com.verticon.tracker.editor.event.popupSubMenu"
+              label="Tracker"
+              path="additions">
+           <separator
+                 name="group1">
+           </separator>
+        </menu>
+        <action
+          class="com.verticon.tracker.editor.util.SelectInOutline"
+          enablesFor="+"
+          id="com.verticon.tracker.editor.actions.SelectExhibitsInOutline"
+          label="Select in Outline"
+          menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
+          tooltip="Selects one or more exhibits in the Outline view.">
+    	</action>
      </objectContribution>
   </extension>
   <extension
