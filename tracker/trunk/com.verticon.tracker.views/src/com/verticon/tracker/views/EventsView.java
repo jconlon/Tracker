@@ -43,8 +43,7 @@ public class EventsView extends TrackerView {
 
 		viewer.setContentProvider(new EventHistoryContentProvider(
 				adapterFactory));
-		viewer
-				.setLabelProvider(new AdapterFactoryLabelProvider(
+		viewer.setLabelProvider(new AdapterFactoryLabelProvider(
 						adapterFactory));
 	}
 
