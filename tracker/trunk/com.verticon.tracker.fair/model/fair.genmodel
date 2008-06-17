@@ -46,9 +46,13 @@
           ecoreFeature="ecore:EReference fair.ecore#//Exhibit/lot">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/salesOrder"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/inAuction"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/award"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Auction"
+          propertyDescription="The sales order of the animal in the auction. (Zero if not in the auction.)"
+          ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/salesOrder"/>
+      <genFeatures createChild="false" propertyCategory="Auction" propertyDescription="Is the animal in the Auction?"
+          ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/inAuction"/>
+      <genFeatures createChild="false" propertyCategory="Award" propertyDescription="Award given to the exhibit by the judge."
+          ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/award"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//YouthClub">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//YouthClub/name"/>
