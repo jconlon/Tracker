@@ -25,25 +25,43 @@ import com.verticon.tracker.fair.YoungPerson;
  */
 public class FairRegistrationSummaryWorkSheetBuilder implements
 		WorkSheetBuilder {
+	
+	private static final String TITLE = "Fair Registration Summary";
+	 
+	private enum Column { 
+		FIRST_NAME("First Name"), 
+		LAST_NAME("LastName"), 
+		STREET("Street"), 
+		CITY("City"), 
+		STATE("State"),
+		ZIP("Zip Code"),
+		PHONE("Phone"),
+		PARENT("Parent"),
+		CLUB("Club"),
+		PIN("Pin"),
+		BREED("Breed"),
+		TYPE_OF_ANIMAL("Type of Animal"),
+		BEGIN_WEIGHT("Beginning Weight"),
+		END_WEIGHT("Ending Weight"),
+		WEIGHT_GAIN_PER_DAY("Weight Gain Per Day"),
+		EAR_TAG("Ear Tag"),
+		SALES_ORDER("Sales Order"),
+		EXHIBIT("Exhibit"),
+		COMMENTS("Comments");
+		
+		String colName;
+		
+		Column(String name) {
+			this.colName = name;
+		}
+		
+		short colNum(){
+			return (short)ordinal();
+		}
+	
+	}
+	
 
-	 static final String TITLE = " Weigh-in 2007";
-	 static final String COMMENTS = "Comments";
-	 static final String EXHIBIT = "Exhibit";
-	 static final String SALES_ORDER = "Sales Order";
-	 static final String EAR_TAG = "Ear Tag";
-	 static final String END_WEIGHT = "End Weight";
-	 static final String BEGIN_WEIGHT = "Begin Weight";
-	 static final String TYPE_OF_ANIMAL = "TypeOfAnimal";
-	 static final String CLUB = "Club";
-	 static final String PARENT = "Parent";
-	 static final String PHONE = "Phone";
-	 static final String STREET = "Street";
-	 static final String CITY = "City";
-	 static final String STATE = "State";
-	 static final String ZIP = "Zip";
-	 static final String NAME = "Name";
-	 static final String WEIGHT_GAIN_PER_DAY = "WeightGainPerDay";
-//	private List<FairRegistration> registrationEvents = new ArrayList<FairRegistration>();
 	private int rowCount = 0;
 	public FairRegistrationSummaryWorkSheetBuilder() {
 		super();
@@ -58,61 +76,22 @@ public class FairRegistrationSummaryWorkSheetBuilder implements
 	
 	public void createWorkSheet(Fair fair, HSSFSheet sheet,
 			Map<String, HSSFCellStyle> styleMap) {
-//		loadRegistrationList(premises);
 		createHeader(sheet);
 		createColumnHeader(sheet);
 		createRows(sheet, fair);
 	}
+	
+	
 
 	private void createColumnHeader(HSSFSheet sheet) {
 		HSSFRow row = createRow(sheet);
 		row.createCell((short) 0).setCellValue(TITLE);
 		row = createRow(sheet);
-		// Name
-		row.createCell((short) 0).setCellValue(NAME);
-		sheet.setColumnWidth((short) 0, (short) ((50 * 5) / ((double) 1 / 20)));
-		// Street
-		row.createCell((short) 1).setCellValue(STREET);
-		sheet.setColumnWidth((short) 1, (short) ((50 * 9) / ((double) 1 / 20)));
-		// City
-		row.createCell((short) 2).setCellValue(CITY);
-		sheet.setColumnWidth((short) 2, (short) ((50 * 9) / ((double) 1 / 20)));
-		// State
-		row.createCell((short) 3).setCellValue(STATE);
-		sheet.setColumnWidth((short) 3, (short) ((50 * 9) / ((double) 1 / 20)));
-		// Zip
-		row.createCell((short) 4).setCellValue(ZIP);
-		sheet.setColumnWidth((short) 4, (short) ((50 * 9) / ((double) 1 / 20)));
-		// Phone
-		row.createCell((short) 5).setCellValue(PHONE);
-		sheet.setColumnWidth((short) 5, (short) ((50 * 5) / ((double) 1 / 20)));
-		// Parent
-		row.createCell((short) 6).setCellValue(PARENT);
-		sheet.setColumnWidth((short) 6, (short) ((50 * 5) / ((double) 1 / 20)));
-		// Club
-		row.createCell((short) 7).setCellValue(CLUB);
-		sheet.setColumnWidth((short) 7, (short) ((50 * 6) / ((double) 1 / 20)));
-		// Breed
-		row.createCell((short) 8).setCellValue(TYPE_OF_ANIMAL);
-		// BEGIN Weight
-		row.createCell((short) 9).setCellValue(BEGIN_WEIGHT);
-		sheet.setColumnWidth((short) 9, (short) ((50 * 5) / ((double) 1 / 20)));
-		// Weight
-		row.createCell((short) 10).setCellValue(END_WEIGHT);
-		//WEIGHT_GAIN_PER_DAY
-		row.createCell((short) 11).setCellValue(WEIGHT_GAIN_PER_DAY);
-		// EarTag
-		row.createCell((short) 12).setCellValue(EAR_TAG);
-		sheet.setColumnWidth((short) 11, (short) ((50 * 4) / ((double) 1 / 20)));
-		//Sales O
-		row.createCell((short) 13).setCellValue(SALES_ORDER);
-		sheet.setColumnWidth((short) 12, (short) ((50 * 3) / ((double) 1 / 20)));
-		//Exhibit 
-		row.createCell((short) 14).setCellValue(EXHIBIT);
-		sheet.setColumnWidth((short) 13, (short) ((50 * 3) / ((double) 1 / 20)));
-		//Comments
-		row.createCell((short) 15).setCellValue(COMMENTS);
-		sheet.setColumnWidth((short) 14, (short) ((50 * 9) / ((double) 1 / 20)));
+		
+		for (Column column : Column.values()){
+			row.createCell(column.colNum()).setCellValue(column.colName);
+			sheet.setColumnWidth(column.colNum(), (short) ((50 * 5) / ((double) 1 / 20)));
+		}
 
 		sheet.groupRow(0, 1);
 	}
@@ -151,21 +130,22 @@ public class FairRegistrationSummaryWorkSheetBuilder implements
 	 */
 	private void fillRow(Exhibit exhibit, HSSFRow row) {
 		HSSFCell cell = null;
-		// Name
-		cell = row.createCell((short) 0);
-		cell.setCellValue(exhibit.getExhibitor().getName());
-		// cell.setCellStyle(typicalStyle);
-		// row.createCell((short)0).setCellValue(fairRegistration.getParticipant());
+		// First Name
+		cell = row.createCell(Column.FIRST_NAME.colNum());
+		cell.setCellValue(exhibit.getExhibitor().getFirstName());
+		// Last Name
+		cell = row.createCell(Column.LAST_NAME.colNum());
+		cell.setCellValue(exhibit.getExhibitor().getLastName());
 		// Street
-		row.createCell((short) 1).setCellValue(exhibit.getExhibitor().getStreet());
+		row.createCell(Column.STREET.colNum()).setCellValue(exhibit.getExhibitor().getStreet());
 		// City
-		row.createCell((short) 2).setCellValue(exhibit.getExhibitor().getCity());
+		row.createCell(Column.CITY.colNum()).setCellValue(exhibit.getExhibitor().getCity());
 		// State
-		row.createCell((short) 3).setCellValue(exhibit.getExhibitor().getState());
+		row.createCell(Column.STATE.colNum()).setCellValue(exhibit.getExhibitor().getState());
 		// Zip
-		row.createCell((short) 4).setCellValue(exhibit.getExhibitor().getZipCode());
+		row.createCell(Column.ZIP.colNum()).setCellValue(exhibit.getExhibitor().getZipCode());
 		// Phone
-		row.createCell((short) 5).setCellValue(exhibit.getExhibitor().getPhone());
+		row.createCell(Column.PHONE.colNum()).setCellValue(exhibit.getExhibitor().getPhone());
 		// Parent
 		if(exhibit.getExhibitor() instanceof YoungPerson && !((YoungPerson) exhibit.getExhibitor()).getParents().isEmpty()){
 			StringBuffer parents = new StringBuffer();
@@ -175,32 +155,40 @@ public class FairRegistrationSummaryWorkSheetBuilder implements
 				}
 				parents.append(parent.getName());
 			}
-			row.createCell((short)6).setCellValue(parents.toString());
+			row.createCell(Column.PARENT.colNum()).setCellValue(parents.toString());
 		}
 		//Club
 		if(exhibit.getExhibitor() instanceof YoungPerson && ((YoungPerson) exhibit.getExhibitor()).getClub()!=null){
-			row.createCell((short)7).setCellValue(((YoungPerson) exhibit.getExhibitor()).getClub().getName());
+			row.createCell(Column.CLUB.colNum()).setCellValue(((YoungPerson) exhibit.getExhibitor()).getClub().getName());
 		}
 		
-		// Breed 
-		row.createCell((short) 8).setCellValue(
+		// PIN 
+		row.createCell(Column.PIN.colNum()).setCellValue(
+			exhibit.getExhibitor().getPin());
+		
+		// TypeOfAnimal 
+		row.createCell(Column.TYPE_OF_ANIMAL.colNum()).setCellValue(
 				getAnimalTypeName(exhibit.getAnimal()));
+		
+		// Breed 
+		row.createCell(Column.BREED.colNum()).setCellValue(
+			exhibit.getAnimal().getBreed());
+		
 		// Begin Weight
 		WeighIn beginWeighInForAnimal = exhibit.getAnimal().lastWeighIn().previousWeighIn();
-		
-		row.createCell((short) 9).setCellValue(beginWeighInForAnimal.getWeight());
+		row.createCell(Column.BEGIN_WEIGHT.colNum()).setCellValue(beginWeighInForAnimal.getWeight());
 		// END Weight
-		row.createCell((short) 10).setCellValue(exhibit.getAnimal().getWeight());
+		row.createCell(Column.END_WEIGHT.colNum()).setCellValue(exhibit.getAnimal().getWeight());
 		// Weight Gain
-		row.createCell((short) 11).setCellValue(exhibit.getAnimal().getWeightGainPerDay());
+		row.createCell(Column.WEIGHT_GAIN_PER_DAY.colNum()).setCellValue(exhibit.getAnimal().getWeightGainPerDay());
 		// EarTag
-		row.createCell((short) 12).setCellValue(exhibit.getAnimal().getId());
+		row.createCell(Column.EAR_TAG.colNum()).setCellValue(exhibit.getAnimal().getId());
 		// Sales Order
-		row.createCell((short) 13).setCellValue(exhibit.getSalesOrder());
+		row.createCell(Column.SALES_ORDER.colNum()).setCellValue(exhibit.getSalesOrder());
 		// Exhibit
-		row.createCell((short) 14).setCellValue(exhibit.getNumber());
+		row.createCell(Column.EXHIBIT.colNum()).setCellValue(exhibit.getNumber());
 		// Comments
-		row.createCell((short) 15).setCellValue(exhibit.getComments());
+		row.createCell(Column.COMMENTS.colNum()).setCellValue(exhibit.getComments());
 	}
 	
 	//
@@ -215,37 +203,7 @@ public class FairRegistrationSummaryWorkSheetBuilder implements
 		header.setRight(HSSFHeader.font("Stencil-Normal", "Italic")
 				+ HSSFHeader.fontSize((short) 16)
 				+ "Right w/ Stencil-Normal Italic font and size 16");
-
 	}
 
-//	/**
-//	 * Load only FairRegistration Events sorting on particpant.
-//	 * 
-//	 * @param premises
-//	 */
-//	private void loadRegistrationList(Premises premises) {
-//		if(premises == null){
-//			throw new IllegalArgumentException("Premises parameter cannot be null.");
-//		}
-//		EList<Event> events = premises.eventHistory();
-//		for (Event event : events) {
-//			if (FairRegistration.EVENT_CODE == event.getEventCode()) {
-//				if(((FairRegistration) event).getParticipant()!=null){
-//					registrationEvents.add((FairRegistration) event);
-//				}
-//			}
-//		}
-//		Collections.sort(registrationEvents,
-//				new Comparator<FairRegistration>() {
-//
-//					public int compare(FairRegistration event1,
-//							FairRegistration event2) {
-//
-//						
-//						return event1.getParticipant().compareTo(
-//								event2.getParticipant());
-//					}
-//				});
-//	}
 
 }

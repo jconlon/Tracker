@@ -38,7 +38,7 @@ public class SelectExportTypeWizardPage extends WizardPage {
 	public SelectExportTypeWizardPage() {
 		super("Select Type");
 		setTitle("Select Type of Export");
-		setDescription("Select the type of Export Report - Raw, Details, or Summary");
+		setDescription("Select the type of Export Report");
 
 	}
 
@@ -69,36 +69,18 @@ public class SelectExportTypeWizardPage extends WizardPage {
 		setControl(container);
 		Listener radioGroup = new Listener () {
 		    public void handleEvent (Event event) {
-		      Button button = (Button) event.widget;
-//		      button.setSelection (true);
-		      for (ExportType type : ExportType.values()) {
-					if (type.name().equals(button.getText())){
-						wizard.setTypeToExport(type);
-					}
-				}
+		      wizard.setTypeToExport((ExportType)event.widget.getData());
 		    }
 		  };
-		
-
-		radios = new Button[3];
-		radios[0] = new Button(container, SWT.RADIO);
-	    radios[0].setSelection(true);
-	    radios[0].setText(ExportType.RAW.name());
-	    radios[0].setData(ExportType.RAW);
-	    radios[0].addListener(SWT.Selection, radioGroup);
-	    
-
-	    radios[1] = new Button(container, SWT.RADIO);
-	    radios[1].setText(ExportType.SUMMARY.name());
-	    radios[1].setData(ExportType.SUMMARY);
-	    radios[1].setSelection(true);
-	    radios[1].addListener(SWT.Selection, radioGroup);
-
-	    radios[2] = new Button(container, SWT.RADIO);
-	    radios[2].setText(ExportType.DETAIL.name());
-	    radios[2].setData(ExportType.DETAIL);
-	    radios[2].setSelection(false);
-	    radios[2].addListener(SWT.Selection, radioGroup);
+		radios = new Button[ExportType.values().length];
+		for (ExportType column : ExportType.values()){
+			radios[column.ordinal()] = new Button(container, SWT.RADIO);
+		    radios[column.ordinal()].setText(column.nameOfReport);
+		    radios[column.ordinal()].setToolTipText(column.description);
+		    radios[column.ordinal()].setData(column);
+		    radios[column.ordinal()].addListener(SWT.Selection, radioGroup);
+		}
+		radios[ExportType.FAIR_SUMMARY.ordinal()].setSelection(true);
 
 	}
 	

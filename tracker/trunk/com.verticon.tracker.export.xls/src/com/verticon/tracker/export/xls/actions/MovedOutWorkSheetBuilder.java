@@ -23,21 +23,34 @@ import com.verticon.tracker.fair.Fair;
  */
 public class MovedOutWorkSheetBuilder extends AbstractWorkSheetBuilder implements WorkSheetBuilder {
 
+	private static final String TITLE = "MovedOut Events";
+
+	private enum Column { 
+		EAR_TAG("Ear Tag"), 
+		DATE("Date"),
+		DESTINATIONPIN("Destination Pin");
+		
+		String colName;
+		
+		Column(String name) {
+			this.colName = name;
+		}
+		
+		short colNum(){
+			return (short)ordinal();
+		}
+	}
+	
 	List<MovedOut> movedOutEvents = new ArrayList<MovedOut>();
 	
 	public void createColumnHeader(HSSFSheet sheet){
 		HSSFRow row = createRow(sheet);
-		row.createCell((short)0).setCellValue("MovedIn Events");
+		row.createCell((short)0).setCellValue(TITLE);
 		row = createRow(sheet);
-		//EarTag
-		row.createCell((short)0).setCellValue("Ear Tag");
-		sheet.setColumnWidth( (short) 0, (short) ( ( 50 * 4 ) / ( (double) 1 / 20 ) ) );
-		//Date 
-		row.createCell((short)1).setCellValue("Date");
-		sheet.setColumnWidth( (short) 1, (short) ( ( 50 * 5 ) / ( (double) 1 / 20 ) ) );
-        //Source
-		row.createCell((short)2).setCellValue("DestinationPin");
-		sheet.setColumnWidth( (short) 2, (short) ( ( 50 * 3 ) / ( (double) 1 / 20 ) ) );
+		for (Column column : Column.values()){
+			row.createCell(column.colNum()).setCellValue(column.colName);
+			sheet.setColumnWidth(column.colNum(), (short) ((50 * 5) / ((double) 1 / 20)));
+		}
 	}
 	
 	/**
@@ -48,13 +61,13 @@ public class MovedOutWorkSheetBuilder extends AbstractWorkSheetBuilder implement
     void fillRow(MovedOut movedOut, HSSFRow row){
     	HSSFCell cell = null;
     	//EarTag
-		row.createCell((short)0).setCellValue(movedOut.getTag().getId());
+		row.createCell(Column.EAR_TAG.colNum()).setCellValue(movedOut.getTag().getId());
     	//Date
-    	cell = row.createCell((short)1);
+    	cell = row.createCell(Column.DATE.colNum());
 		cell.setCellValue(movedOut.getDateTime());
 		cell.setCellStyle(styleMap.get(DATE_STYLE));
-//		SourcePid
-    	cell = row.createCell((short)2);
+		//DestinationPid
+    	cell = row.createCell(Column.DESTINATIONPIN.colNum());
 		cell.setCellValue(movedOut.getDestinationPin());
 		
 	}
