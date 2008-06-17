@@ -41,8 +41,16 @@ public class AnimalsView extends TrackerView {
 		TrackerTableEditorUtils.setUpAnimalsTableViewer(viewer);
 		filteredTable.setColumns(viewer.getTable().getColumns());
 		
-		viewer.setContentProvider(new AdapterFactoryContentProvider(
-				adapterFactory));
+		viewer.setContentProvider(
+		        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
+		        {
+		          @Override
+		          public Object [] getElements(Object object)
+		          {
+		            return ((Premises)object).getAnimals().toArray();
+		          }
+
+		        });
 		viewer.setLabelProvider(new AdapterFactoryLabelProvider(
 						adapterFactory));
 	}
