@@ -208,13 +208,13 @@ public class ExhibitItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Exhibit_salesOrder_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibit_salesOrder_feature", "_UI_Exhibit_type"),
+				 getString("_UI_Exhibit_salesOrder_description"),
 				 FairPackage.Literals.EXHIBIT__SALES_ORDER,
 				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
+				 getString("_UI_AuctionPropertyCategory"),
 				 null));
 	}
 
@@ -230,13 +230,13 @@ public class ExhibitItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Exhibit_inAuction_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibit_inAuction_feature", "_UI_Exhibit_type"),
+				 getString("_UI_Exhibit_inAuction_description"),
 				 FairPackage.Literals.EXHIBIT__IN_AUCTION,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
+				 getString("_UI_AuctionPropertyCategory"),
 				 null));
 	}
 
@@ -252,13 +252,13 @@ public class ExhibitItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Exhibit_award_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibit_award_feature", "_UI_Exhibit_type"),
+				 getString("_UI_Exhibit_award_description"),
 				 FairPackage.Literals.EXHIBIT__AWARD,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_AwardPropertyCategory"),
 				 null));
 	}
 
