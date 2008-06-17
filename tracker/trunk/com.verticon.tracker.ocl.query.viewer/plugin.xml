@@ -10,7 +10,7 @@
       </category>
       <view
             name="Queries"
-            icon="icons/sample.gif"
+            icon="icons/search_src.gif"
             category="com.verticon.tracker.views"
             class="com.verticon.tracker.ocl.query.viewer.views.OclQueryViewPart"
             id="com.verticon.tracker.ocl.query.view">
