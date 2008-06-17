@@ -17,7 +17,7 @@
       </view>
       <view
             name="Events"
-            icon="icons/sample.gif"
+            icon="icons/waiting.gif"
             category="com.verticon.tracker.views"
             class="com.verticon.tracker.views.EventsView"
             id="com.verticon.tracker.views.EventsView">
