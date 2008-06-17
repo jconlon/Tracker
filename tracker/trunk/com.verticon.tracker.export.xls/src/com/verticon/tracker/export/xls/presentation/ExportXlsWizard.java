@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.verticon.tracker.export.xls.presentation;
 
 import java.io.IOException;
@@ -23,19 +20,16 @@ import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.export.util.ExportFairBase;
 import com.verticon.tracker.export.xls.actions.FairRegistrationSummaryWorkSheetBuilder;
-import com.verticon.tracker.export.xls.actions.FairRegistrationWeighInWorkSheetBuilder;
-import com.verticon.tracker.export.xls.actions.FairRegistrationWorkSheetBuilder;
+import com.verticon.tracker.export.xls.actions.FairRegistrationWeighEventsInWorkSheetBuilder;
 import com.verticon.tracker.export.xls.actions.MovedInWorkSheetBuilder;
 import com.verticon.tracker.export.xls.actions.MovedOutWorkSheetBuilder;
-import com.verticon.tracker.export.xls.actions.WeighInWorkSheetBuilder;
 import com.verticon.tracker.export.xls.actions.WorkSheetBuilder;
 import com.verticon.tracker.export.xls.actions.XLSPremisesProcessor;
 import com.verticon.tracker.fair.editor.util.FairProcessor;
 
 /**
  * 
- * Exports *.premises document Tracker model 
- * FairRegistration events as spreadsheets.
+ * Exports *.fair model details as spreadsheets.
  * 
  * @author jconlon
  * 
@@ -56,9 +50,9 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 	 * select the kind of report specified as an ExportType. 
 	 * ExportType(s) of report are:
 	 *<ul>
-	 *<li>DETAIL</li>
-	 *<li>SUMMARY</li>
-	 *<li>RAW</li>
+	 *<li>Fair Weigh In Events</li>
+	 *<li>Fair Exhibit Summary</li>
+	 *<li>Raw Events</li>
 	 *</ul>
 	 */
 	private SelectExportTypeWizardPage selectExportTypePage;
@@ -73,8 +67,20 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 	 *
 	 */
 	public enum ExportType {
-		DETAIL, SUMMARY, RAW;
+		FAIR_WEIGHIN_EVENTS(
+				"Fair Weigh In Events", "Raw WeighIn events, by Fair exhibitor."), 
+		FAIR_SUMMARY(
+				"Fair Exhibit Summary", "Fair exhibit summary that includes exhibitor, WieghIn event details, animals, and pins"),
+		RAW_EVENTS(
+				"Raw Events", "Raw MovedIn and MovedOut events by animal tag number.");
 		
+		String nameOfReport;
+		String description;
+		
+		ExportType(String nameOfReport, String description){
+			this.nameOfReport=nameOfReport;
+			this.description=description;
+		}
 		/**
 		 * Creates a PremisesProcessor for the ExportType
 		 * @param destination of the output
@@ -84,30 +90,26 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 			XLSPremisesProcessor result = null;
 
 			switch (this) {
-			case DETAIL:
+			case FAIR_WEIGHIN_EVENTS:
 				result = new XLSPremisesProcessor(
 						new WorkSheetBuilder[] { 
-								new FairRegistrationWeighInWorkSheetBuilder() },
+								new FairRegistrationWeighEventsInWorkSheetBuilder() },
 						new String[] { 
-								"Fair WeighIn and Registration" });
+								"Fair WeighIn Events" });
 				break;
 
-			case RAW:
+			case RAW_EVENTS:
 				result = new XLSPremisesProcessor(
 						new WorkSheetBuilder[]{
-								new FairRegistrationWorkSheetBuilder(),
-								new WeighInWorkSheetBuilder(),
 								new MovedInWorkSheetBuilder(),
 								new MovedOutWorkSheetBuilder()
 						},
 						new String[]{
-								"Fair Registration Events",
-								"Fair WeighIn Events",
 								"MovedIn Events",
 								"MovedOut Events"}
 				);
 				break;
-			case SUMMARY:
+			case FAIR_SUMMARY:
 				result = new XLSPremisesProcessor(
 						new WorkSheetBuilder[] { 
 								new FairRegistrationSummaryWorkSheetBuilder() },
@@ -121,7 +123,7 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 		}
 	}
 
-	private ExportType typeToExport = ExportType.SUMMARY;
+	private ExportType typeToExport = ExportType.FAIR_SUMMARY;
 
 	private IPath destination;
 

@@ -23,21 +23,36 @@ import com.verticon.tracker.fair.Fair;
  */
 public class MovedInWorkSheetBuilder extends AbstractWorkSheetBuilder implements WorkSheetBuilder {
 
+	private static final String TITLE = "MovedIn Events";
+
+	private enum Column { 
+		EAR_TAG("Ear Tag"), 
+		DATE("Date"),
+		SOURCEPIN("Source Pin");
+		
+		String colName;
+		
+		Column(String name) {
+			this.colName = name;
+		}
+		
+		short colNum(){
+			return (short)ordinal();
+		}
+	}
+	
 	List<MovedIn> movedInEvents = new ArrayList<MovedIn>();
+	
 	
 	public void createColumnHeader(HSSFSheet sheet){
 		HSSFRow row = createRow(sheet);
-		row.createCell((short)0).setCellValue("MovedIn Events");
+		row.createCell((short)0).setCellValue(TITLE);
 		row = createRow(sheet);
-		//EarTag
-		row.createCell((short)0).setCellValue("Ear Tag");
-		sheet.setColumnWidth( (short) 0, (short) ( ( 50 * 4 ) / ( (double) 1 / 20 ) ) );
-		//Date 
-		row.createCell((short)1).setCellValue("Date");
-		sheet.setColumnWidth( (short) 1, (short) ( ( 50 * 5 ) / ( (double) 1 / 20 ) ) );
-        //Source
-		row.createCell((short)2).setCellValue("SourcePin");
-		sheet.setColumnWidth( (short) 2, (short) ( ( 50 * 3 ) / ( (double) 1 / 20 ) ) );
+		for (Column column : Column.values()){
+			row.createCell(column.colNum()).setCellValue(column.colName);
+			sheet.setColumnWidth(column.colNum(), (short) ((50 * 5) / ((double) 1 / 20)));
+		}
+
 	}
 	
 	/**
@@ -48,13 +63,13 @@ public class MovedInWorkSheetBuilder extends AbstractWorkSheetBuilder implements
     void fillRow(MovedIn movedIn, HSSFRow row){
     	HSSFCell cell = null;
     	//EarTag
-		row.createCell((short)0).setCellValue(movedIn.getTag().getId());
+		row.createCell(Column.EAR_TAG.colNum()).setCellValue(movedIn.getTag().getId());
     	//Date
-    	cell = row.createCell((short)1);
+    	cell = row.createCell(Column.DATE.colNum());
 		cell.setCellValue(movedIn.getDateTime());
 		cell.setCellStyle(styleMap.get(DATE_STYLE));
-//		SourcePid
-    	cell = row.createCell((short)2);
+		//SourcePid
+    	cell = row.createCell(Column.SOURCEPIN.colNum());
 		cell.setCellValue(movedIn.getSourcePin());
 		
 	}
