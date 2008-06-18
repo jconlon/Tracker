@@ -23,9 +23,13 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -82,19 +86,51 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 		data.horizontalSpan = 4;
 		data.heightHint = 300;
 		data.widthHint = 300;
-		tableViewer.getControl().setLayoutData(data);;
+		tableViewer.getControl().setLayoutData(data);
 		
-		Label label = new Label(container, SWT.NULL);
+		Composite c1 = new Composite (container, SWT.BORDER );
+		c1.setLayout (new RowLayout ());
+		data= new GridData(GridData.FILL_BOTH);
+		data.grabExcessHorizontalSpace = true;
+		data.horizontalSpan = 4;
+		c1.setLayoutData(data);
+		
+		Composite c2 = new Composite (container, SWT.BORDER );
+		c2.setLayout (new RowLayout ());
+		data= new GridData(GridData.FILL_BOTH);
+		data.grabExcessHorizontalSpace = true;
+		data.horizontalSpan = 4;
+		c2.setLayoutData(data);
+		
+//		final Composite [] composites = new Composite [] {c1, c2};
+//		Listener radioGroup = new Listener () {
+//		    public void handleEvent (Event event) {
+//		      for (int i=0; i<composites.length; i++) {
+//		        Composite composite = composites [i];
+//		        Control [] children = composite.getChildren ();
+//		        for (int j=0; j<children.length; j++) {
+//		          Control child = children [j];
+//		          if (child instanceof Button) {
+//		            Button button = (Button) child;
+//		            if ((button.getStyle () & SWT.RADIO) != 0) button.setSelection (false);
+//		          }
+//		        }
+//		      }
+//		      Button button = (Button) event.widget;
+//		      button.setSelection (true);
+//		    }
+//		  };
+//		
+
+		Label label = new Label(c1, SWT.NULL);
 		label.setText("How do you want to name an Exhibit? ");
 		label.setBackground(container.getDisplay().getSystemColor(
 				SWT.COLOR_YELLOW));
-		data= new GridData(GridData.FILL_BOTH);
-		data.grabExcessHorizontalSpace = true;
-		data.horizontalSpan = 2;
-		label.setLayoutData(data);
+		
 
-		Button usePersonNameButton = new Button(container, SWT.RADIO);
+		Button usePersonNameButton = new Button(c1, SWT.RADIO);
 		usePersonNameButton.setText("Use Person's name");
+//		usePersonNameButton.addListener(SWT.Selection, radioGroup);
 		usePersonNameButton.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -104,9 +140,10 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 
 		});
 		
-		Button dontUsePersonNameButton = new Button(container, SWT.RADIO);
+		Button dontUsePersonNameButton = new Button(c1, SWT.RADIO);
 		dontUsePersonNameButton.setText("Use above mapping or leave blank");
 		dontUsePersonNameButton.setSelection(true);
+//		dontUsePersonNameButton.addListener(SWT.Selection, radioGroup);
 		dontUsePersonNameButton.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -117,17 +154,21 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 		});
 		dontUsePersonNameButton.setSelection(true);
 		
-		Label label2 = new Label(container, SWT.NULL);
+		
+		
+		
+		Label label2 = new Label(c2, SWT.NULL);
 		label2.setText("How do you want to number an Exhibit? ");
 		label2.setBackground(container.getDisplay().getSystemColor(
 				SWT.COLOR_YELLOW));
-		data= new GridData(GridData.FILL_BOTH);
-		data.grabExcessHorizontalSpace = true;
-		data.horizontalSpan = 2;
-		label2.setLayoutData(data);
+//		data= new GridData(GridData.FILL_BOTH);
+//		data.grabExcessHorizontalSpace = true;
+//		data.horizontalSpan = 2;
+//		label2.setLayoutData(data);
 
-		Button useEarTagButton = new Button(container, SWT.RADIO);
+		Button useEarTagButton = new Button(c2, SWT.RADIO);
 		useEarTagButton.setText("Use Animal's eartag number");
+//		useEarTagButton.addListener(SWT.Selection, radioGroup);
 		useEarTagButton.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -137,9 +178,10 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 
 		});
 		
-		Button dontUseEarTagButton = new Button(container, SWT.RADIO);
+		Button dontUseEarTagButton = new Button(c2, SWT.RADIO);
 		dontUseEarTagButton.setText("Use above mapping or leave blank");
 		dontUseEarTagButton.setSelection(true);
+//		dontUseEarTagButton.addListener(SWT.Selection, radioGroup);
 		dontUseEarTagButton.addSelectionListener(new SelectionAdapter() {
 
 			@Override

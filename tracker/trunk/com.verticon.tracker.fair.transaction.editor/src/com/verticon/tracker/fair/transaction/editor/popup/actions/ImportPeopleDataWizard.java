@@ -456,7 +456,14 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		
 		if(exhibit.getNumber()==0 && importPeoplePage.isUseEarTagForExhibitNum()){
 			try {
-				int earTag = Integer.parseInt(animal.getId());
+				Long earTagLong = Long.parseLong(animal.getId());
+				int earTag =0;
+				if(earTagLong>Integer.MAX_VALUE){
+					//Cut out the high order numbers from the animal.id
+					earTag = Integer.parseInt(animal.getId().substring(10));
+				}else{
+					earTag= earTagLong.intValue();
+				}
 				exhibit.setNumber(earTag);
 			} catch (NumberFormatException e) {
 			}
