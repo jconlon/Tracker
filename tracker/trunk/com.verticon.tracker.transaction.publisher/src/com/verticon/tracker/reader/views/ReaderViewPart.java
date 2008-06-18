@@ -2,6 +2,7 @@
 package com.verticon.tracker.reader.views;
 
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.widgets.Composite;
@@ -10,6 +11,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 
 
@@ -86,10 +88,10 @@ public class ReaderViewPart extends ViewPart {
 	      ISharedImages platformImages = workbench.getSharedImages();
 
 	      addReaderAction = new AddReaderAction(this, "Add", viewer);
-	      addReaderAction.setImageDescriptor(platformImages
-	         .getImageDescriptor(ISharedImages.IMG_TOOL_COPY));
-	      addReaderAction.setDisabledImageDescriptor(platformImages
-	         .getImageDescriptor(ISharedImages.IMG_TOOL_COPY_DISABLED));
+	      ImageDescriptor plusImage = AbstractUIPlugin.imageDescriptorFromPlugin(
+	    		  "org.eclipse.ui", "$nl$/icons/full/obj16/add_obj.gif");
+
+	      addReaderAction.setImageDescriptor(plusImage);
 	      addReaderAction.setToolTipText("Add a new Reader");
 	      
 	      removeReaderAction = new RemoveReaderAction(viewer, "Remove");

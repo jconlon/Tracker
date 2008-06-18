@@ -4,6 +4,7 @@
 package com.verticon.tracker.ocl.query.viewer.views;
 
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -13,6 +14,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import com.verticon.tracker.ocl.query.viewer.IOclQuery;
 
@@ -95,10 +97,10 @@ public class OclQueryViewPart extends ViewPart {
 	      ISharedImages platformImages = workbench.getSharedImages();
 
 	      addQueryAction = new AddQueryAction(viewer, "Add");
-	      addQueryAction.setImageDescriptor(platformImages
-	         .getImageDescriptor(ISharedImages.IMG_TOOL_COPY));
-	      addQueryAction.setDisabledImageDescriptor(platformImages
-	         .getImageDescriptor(ISharedImages.IMG_TOOL_COPY_DISABLED));
+	      ImageDescriptor plusImage = AbstractUIPlugin.imageDescriptorFromPlugin(
+	    		  "org.eclipse.ui", "$nl$/icons/full/obj16/add_obj.gif");
+
+	      addQueryAction.setImageDescriptor(plusImage);
 	      addQueryAction.setToolTipText("Add a new Query");
 	      
 	      removeReaderAction = new RemoveQueryAction(viewer, "Remove");

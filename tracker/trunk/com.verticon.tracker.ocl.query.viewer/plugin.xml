@@ -53,7 +53,7 @@
        </separator>
        <command
                commandId="com.verticon.tracker.ocl.query.viewer.commands.addSampleQueryCommand"
-               icon="icons/sample.gif"
+               icon="icons/search_src.gif"
                label="Add Example Queries"
                mnemonic="A"
                style="pulldown">
