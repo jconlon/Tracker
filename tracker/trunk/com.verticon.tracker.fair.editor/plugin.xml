@@ -46,7 +46,7 @@
       <wizard
             category="org.eclipse.ui.Basic"
             class="com.verticon.tracker.fair.editor.actions.ImportSpreadSheetWizard"
-            icon="icons/sample.gif"
+            icon="icons/Person.gif"
             id="com.verticon.tracker.fair.editor.ImportPeopleWizard"
             name="Spread Sheet Import">
          <description>

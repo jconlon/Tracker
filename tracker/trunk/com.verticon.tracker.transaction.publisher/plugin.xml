@@ -10,7 +10,7 @@
       </category>
       <view
             name="Readers"
-            icon="icons/sample.gif"
+            icon="icons/Readers.gif"
             category="com.verticon.tracker.views"
             class="com.verticon.tracker.reader.views.ReaderViewPart"
             id="com.verticon.tracker.reader.view">
