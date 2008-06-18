@@ -7,6 +7,7 @@ package com.verticon.tracker.connector.bluetooth;
 import java.io.IOException;
 
 import javax.microedition.io.Connection;
+import javax.microedition.io.InputConnection;
 
 import org.osgi.service.io.ConnectionFactory;
 
@@ -40,7 +41,7 @@ public class ConnectionFactoryImpl implements ConnectionFactory {
 	public Connection createConnection(String name, int mode, boolean timeouts)
 			throws IOException {
 		
-		return MicroeditionConnector.open(name, mode, timeouts);
+		return new WrappedConnection((InputConnection)MicroeditionConnector.open(name, mode, timeouts));
 
 	}
 
