@@ -44,11 +44,16 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 	private static final Logger logger = LoggerFactory
 			.getLogger(DefaultPropertiesFormProvider.class);
 	
+	public DefaultPropertiesFormProvider() {
+		super();
+		logger.debug("Constructed");
+	}
+
 	private WizardPage wizardPage=null;
 	
 	public void fillProperties(ISelection selection, 
 			AdapterFactory adapterFactory,CTabFolder cTabFolder, String nameOfTab){
-		
+		logger.debug("filling properties");
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
 		CTabItem item1;
