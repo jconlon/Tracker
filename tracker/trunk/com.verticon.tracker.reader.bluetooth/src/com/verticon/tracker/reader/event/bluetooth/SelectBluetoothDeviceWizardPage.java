@@ -3,16 +3,9 @@
  */
 package com.verticon.tracker.reader.event.bluetooth;
 
-import java.io.IOException;
 import java.util.Vector;
 
-import javax.bluetooth.BluetoothStateException;
-import javax.bluetooth.DeviceClass;
-import javax.bluetooth.DiscoveryAgent;
-import javax.bluetooth.DiscoveryListener;
-import javax.bluetooth.LocalDevice;
 import javax.bluetooth.RemoteDevice;
-import javax.bluetooth.ServiceRecord;
 
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -38,7 +31,6 @@ import org.eclipse.ui.IWorkbench;
 public class SelectBluetoothDeviceWizardPage extends WizardPage {
 
 	public final Vector<RemoteDevice> devicesDiscovered;
-	private IWorkbench workbench;
 
 	private ListViewer listViewer;
 
@@ -49,7 +41,6 @@ public class SelectBluetoothDeviceWizardPage extends WizardPage {
 	public SelectBluetoothDeviceWizardPage(String pageName, String title,
 			String description, IWorkbench workbench, Vector<RemoteDevice> devicesDiscovered) {
 		super(pageName);
-		this.workbench = workbench;
 		setTitle(title);
 		setDescription(description);
 		this.devicesDiscovered=devicesDiscovered;
