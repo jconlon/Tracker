@@ -289,11 +289,12 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	 */
 	protected void fillPropertiesFolder(ISelection selection, AdapterFactory adapterFactory, CTabFolder cTabFolder) {
 		if (defaultPropertiesFormProvider == null) {
+			logger.debug("Creating a defaultPropertiesFormProvider");
 			defaultPropertiesFormProvider = new DefaultPropertiesFormProvider();
 			// defaultPropertiesFormProvider.setWizardPage(this);
 			// TODO events viewer need to show validation information
 		}
-	
+		logger.debug("Filling properties with the selection");
 		defaultPropertiesFormProvider.fillProperties(selection, adapterFactory,
 				cTabFolder, getFolderTitle());
 		cTabFolder.pack(true);
