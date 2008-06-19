@@ -104,12 +104,8 @@ public class ExhibitsView extends TrackerView {
 	@Override
 	protected AdapterFactory createAdapterFactory(){
 		ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-//
-//		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new FairItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new TrackerItemProviderAdapterFactory());
-//		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
-
 		return adapterFactory;
 	}
 	

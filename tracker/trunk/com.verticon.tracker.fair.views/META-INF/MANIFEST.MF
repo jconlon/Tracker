@@ -4,15 +4,14 @@ Bundle-Name: Tracker Fair Views
 Bundle-SymbolicName: com.verticon.tracker.fair.views;singleton:=true
 Bundle-Version: 0.1.0
 Bundle-Vendor: Verticon, Inc.
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.ui,
- com.verticon.tracker,
- com.verticon.tracker.edit,
- org.eclipse.emf.edit.ui,
- org.eclipse.emf.databinding
-Import-Package: com.verticon.tracker.editor.presentation;version="0.1.0",
- com.verticon.tracker.editor.util;version="0.1.0",
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.emf.edit.ui
+Import-Package: com.verticon.tracker;version="0.1.0",
+ com.verticon.tracker.edit.provider;version="0.1.0",
+ com.verticon.tracker.editor.presentation;version="0.1.0",
+ com.verticon.tracker.editor.util;version="0.2.8",
  com.verticon.tracker.fair,
  com.verticon.tracker.fair.edit.provider,
  com.verticon.tracker.fair.editor.util,
+ org.eclipse.core.runtime,
  org.slf4j;version="1.5.0"
