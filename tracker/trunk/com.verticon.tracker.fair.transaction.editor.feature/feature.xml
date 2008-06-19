@@ -324,54 +324,54 @@ POSSIBILITY OF SUCH DAMAGES.
          id="com.verticon.tracker.fair.transaction.editor"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.1"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.emf.databinding"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="1.0.0"/>
 
    <plugin
          id="org.eclipse.emf.databinding.edit"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="1.0.0"/>
 
    <plugin
          id="org.eclipse.core.databinding"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.1.0.I20080325-0100"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.core.databinding.beans"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.1.M20070910-0800b"
          unpack="false"/>
 
    <plugin
          id="com.verticon.tracker.views"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.jface.databinding"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.1.1.M20080207-0800"
          unpack="false"/>
 
    <plugin
          id="com.verticon.tracker.fair.views"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0"
          unpack="false"/>
 
 </feature>
