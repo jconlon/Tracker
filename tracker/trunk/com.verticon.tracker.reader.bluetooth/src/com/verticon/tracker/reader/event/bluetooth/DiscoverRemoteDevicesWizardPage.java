@@ -105,22 +105,15 @@ public class DiscoverRemoteDevicesWizardPage extends WizardPage {
 	/**
 	 * This class represents a long running operation
 	 */
-	class LongRunningOperation implements IRunnableWithProgress {
-	  // The total sleep time
-	  private static final int TOTAL_TIME = 10000;
-
-	  // The increment sleep time
-	  private static final int INCREMENT = 500;
-
-	  private boolean indeterminate;
-
+	private class LongRunningOperation implements IRunnableWithProgress {
+	  
 	  /**
 	   * LongRunningOperation constructor
 	   * 
 	   * @param indeterminate whether the animation is unknown
 	   */
 	  public LongRunningOperation(boolean indeterminate) {
-	    this.indeterminate = indeterminate;
+	
 	  }
 
 	  /**
@@ -130,13 +123,6 @@ public class DiscoverRemoteDevicesWizardPage extends WizardPage {
 	   */
 	  public void run(IProgressMonitor monitor) throws InvocationTargetException,
 	      InterruptedException {
-//	    monitor.beginTask("Bluetooth Discovery Running...",
-//	        indeterminate ? IProgressMonitor.UNKNOWN : TOTAL_TIME);
-//	    for (int total = 0; total < TOTAL_TIME && !monitor.isCanceled(); total += INCREMENT) {
-//	      Thread.sleep(INCREMENT);
-//	      monitor.worked(INCREMENT);
-//	      if (total == TOTAL_TIME / 2) monitor.subTask("Doing second half");
-//	    }
 		try {
 			init( monitor);
 		} catch (BluetoothStateException e) {
