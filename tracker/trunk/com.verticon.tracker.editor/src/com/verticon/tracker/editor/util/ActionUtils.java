@@ -199,12 +199,12 @@ public class ActionUtils {
 	public static final Premises getPremises(IAdaptable adaptable) throws FileNotFoundException {
 		IQueryDataSetProvider queryDataSetProvider = (IQueryDataSetProvider)adaptable.getAdapter(IQueryDataSetProvider.class);
 		if(queryDataSetProvider==null){
-			throw new IllegalArgumentException("adaptable parameter does not support a IQueryDataSetProvider");
+			throw new FileNotFoundException("adaptable parameter does not support a IQueryDataSetProvider");
 		}
 		return getPremises(queryDataSetProvider);
 	}
 	/**
-	 * Add an animal template to the premises.  Duplicate tags tags will be ignored.
+	 * Add an animal template to the premises.  Duplicate tags will be ignored.
 	 * 
 	 * @param premises
 	 * @param tagsBean
@@ -233,19 +233,24 @@ public class ActionUtils {
 		int newAnimalsCreated = 0;
 
 		int existingAnimals = 0;
+		int deferedEvents = 0;
 		for (Long tag : tagsBean.getTags()) {
 			Animal animal = premises.findAnimal(tag.toString());
 			if (animal != null) {
 				existingAnimals++;
-				command = createAddEventsToTagCommand(
-						animal.activeTag(),
-						animalTemplateBean.getEvents(premises), 
-						queryDataSetProvider.getEditingDomain());
+				Collection<Event> potentialEventsToAdd = animalTemplateBean.getEvents(premises);
+
+				Collection<Event> eventsToAddTheWhereNotDeferred = filterOutDeferedEvents(animal.activeTag(), potentialEventsToAdd);
+				deferedEvents = deferedEvents + (potentialEventsToAdd.size() - eventsToAddTheWhereNotDeferred.size());
+				command = createAddCommand(animal.activeTag(), queryDataSetProvider.getEditingDomain(),
+						eventsToAddTheWhereNotDeferred);
+
+				
 			} else {
 				newAnimalsCreated++;
 				command = createAddAnimalToPremiseCommand(
 						premises,
-						animalTemplateBean.getAnimal(tag.toString(),premises), 
+						animalTemplateBean.getAnimal(tag.toString(),premises),//adds all events as well 
 						queryDataSetProvider.getEditingDomain());
 				
 			}
@@ -260,7 +265,7 @@ public class ActionUtils {
 						+ " processed " + animalTemplateBean.getEvents(null).size()
 						+ " events on " + newAnimalsCreated
 						+ " new Animals and " + existingAnimals
-						+ " existing animals.");
+						+ " existing animals. With "+deferedEvents+" events deferred.");
 	}
 
 	/**
@@ -281,6 +286,7 @@ public class ActionUtils {
 		CompoundCommand compoundCommand = new CompoundCommand();
 		Command command = null;
 		int numberOfEventsInTemplate = templateBean.numberOfEvents();
+		int deferedEvents = 0;
 		for (Animal animal : animals) {
 			if (animal.getTags() == null || animal.getTags().isEmpty()) {
 				// show dialog
@@ -293,8 +299,13 @@ public class ActionUtils {
 			if (tag == null) {
 				tag = animal.getTags().get(0);
 			}
-			command = createAddEventsToTagCommand(tag,
-					templateBean.getEvents((Premises)animal.eContainer()), queryDataSetProvider.getEditingDomain());
+			Collection<Event> potentialEventsToAdd = templateBean.getEvents((Premises)animal.eContainer());
+			Collection<Event> eventsToAddTheWhereNotDeferred = filterOutDeferedEvents(
+					animal.activeTag(), potentialEventsToAdd);
+			deferedEvents = deferedEvents + (potentialEventsToAdd.size() - eventsToAddTheWhereNotDeferred.size());
+			
+			command = createAddCommand(animal.activeTag(), queryDataSetProvider.getEditingDomain(),
+					eventsToAddTheWhereNotDeferred);
 			if(command !=null){
 				compoundCommand.append(command);
 			}
@@ -305,7 +316,7 @@ public class ActionUtils {
 				ADD_TEMPLATE_TO_ANIMALS_OPERATION, "The "
 						+ templateBean.getName() + " processed "
 						+ numberOfEventsInTemplate + " events on "
-						+ animals.size() + " animals.");
+						+ animals.size() + " animals.  With "+deferedEvents+" events deferred.");
 
 	}
 
@@ -324,15 +335,31 @@ public class ActionUtils {
 		return selectedAnimals;
 	}
 
+
 	/**
-	 * Adds non duplicate events to the tag. 
+	 * @param tag
+	 * @param editingDomain
+	 * @param eventsToAdd
+	 * @return
+	 */
+	public static Command createAddCommand(Tag tag,
+			EditingDomain editingDomain, Collection<Event> eventsToAdd) {
+		Command command = null;
+		if(!eventsToAdd.isEmpty()){
+			command = AddCommand.create(editingDomain, tag,
+					TrackerPackage.eINSTANCE.getTag(), eventsToAdd);
+		}
+	    
+		return command;
+	}
+
+	/**
 	 * @param tag
 	 * @param events
-	 * @param editingDomain
-	 * @return a command for adding the events or a null if no events can be created.
+	 * @return
 	 */
-	private static Command createAddEventsToTagCommand(Tag tag,
-			Collection<Event> events, EditingDomain editingDomain) {
+	public static Collection<Event> filterOutDeferedEvents(Tag tag,
+			Collection<Event> events) {
 		Collection<Event> eventsToAdd = new ArrayList<Event>();
 		for (Event event : events) {
 			
@@ -342,15 +369,10 @@ public class ActionUtils {
 				
 			}
 		}
-		
-		Command command = null;
-		if(!eventsToAdd.isEmpty()){
-			command = AddCommand.create(editingDomain, tag,
-					TrackerPackage.eINSTANCE.getTag(), eventsToAdd);
-		}
-	    
-		return command;
+		return eventsToAdd;
 	}
+	
+	
 
 	private static Command createAddAnimalToPremiseCommand(Premises premises,
 			Animal animal, EditingDomain editingDomain) {

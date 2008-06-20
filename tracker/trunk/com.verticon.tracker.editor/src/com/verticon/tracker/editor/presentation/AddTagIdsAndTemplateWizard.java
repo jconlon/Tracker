@@ -29,6 +29,7 @@ public class AddTagIdsAndTemplateWizard extends Wizard {
 	private static final String MODIFY_WIZARD_TITLE = "Add Template To Premises";
 	private IStructuredSelection selectionOfTagIdResources;
 	private IEditorPart editor;
+	private Premises premises;
 
 	private SelectAnimalDocumentWizardPage selectAnimalDocumentWizardPage;
 
@@ -36,10 +37,18 @@ public class AddTagIdsAndTemplateWizard extends Wizard {
 			IStructuredSelection selection) {
 		this.selectionOfTagIdResources = selection;
 		this.editor = editor;
+		try {
+			premises = ActionUtils.getPremises( editor);
+		} catch (FileNotFoundException e) {
+		
+		}
 	}
 
 	@Override
 	public boolean canFinish() {
+		if(premises == null){
+			return false;
+		}
 		AnimalTemplateBean templateBean = selectAnimalDocumentWizardPage
 				.getTemplateBean();
 		return templateBean != null && templateBean.numberOfEvents() > 0;
@@ -56,11 +65,10 @@ public class AddTagIdsAndTemplateWizard extends Wizard {
 
 	@Override
 	public boolean performFinish() {
-		Premises premises = null;
 		TagsBean tagsBean = null;
 
 		try {
-		    premises = ActionUtils.getPremises( editor);
+		    
 			tagsBean = ActionUtils.getTagsBean(editor, selectionOfTagIdResources);
 		} catch (FileNotFoundException e) {
 			selectAnimalDocumentWizardPage.setErrorMessage(e.getMessage());
@@ -76,10 +84,16 @@ public class AddTagIdsAndTemplateWizard extends Wizard {
 		// Refresh the current viewer
 		IViewerProvider viewerProvider = (IViewerProvider)editor.getAdapter(IViewerProvider.class);
 		if(viewerProvider !=null){
-			viewerProvider.getViewer().refresh();
+			if(viewerProvider.getViewer()!=null){
+				viewerProvider.getViewer().refresh();
+			}
 		}
 
 		return true;
+	}
+
+	public Premises getPremises() {
+		return premises;
 	}
 
 }

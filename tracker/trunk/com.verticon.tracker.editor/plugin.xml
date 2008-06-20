@@ -81,6 +81,7 @@
   </extension> 
   <extension
         point="org.eclipse.ui.popupMenus">
+        <!-- Popup extension associated with *.tags resources -->
      <objectContribution
            adaptable="true"
            id="com.verticon.tracker.editor.popupMenu"
