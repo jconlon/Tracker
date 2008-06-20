@@ -177,6 +177,12 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 	    */
 	   private void updatePageComplete() {
 	      setPageComplete(false);
+	      
+	      if (((AddTagIdsAndTemplateWizard) getWizard()).getPremises()==null){
+	    	  setMessage(null);
+		         setErrorMessage("Can't proceed with this action because, the active editor does not have an Animal Premises.");
+		         return;
+	      }
 
 	      if (selectedFile == null ) {
 	         setMessage(null);
@@ -214,4 +220,6 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 	public IFile getSelectedFile() {
 		return selectedFile;
 	}
+	
+	
 }
