@@ -6,17 +6,13 @@
 package com.verticon.tracker.fair.edit.provider;
 
 
-import com.verticon.tracker.fair.FairPackage;
-import com.verticon.tracker.fair.YoungPerson;
-
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -24,6 +20,11 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+
+import com.verticon.tracker.fair.FairPackage;
+import com.verticon.tracker.fair.Person;
+import com.verticon.tracker.fair.YoungPerson;
 
 /**
  * This is the item provider adapter for a {@link com.verticon.tracker.fair.YoungPerson} object.
@@ -80,19 +81,61 @@ public class YoungPersonItemProvider
 	 * @generated
 	 */
 	protected void addParentsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_YoungPerson_parents_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_YoungPerson_parents_feature", "_UI_YoungPerson_type"),
-				 FairPackage.Literals.YOUNG_PERSON__PARENTS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 getString("_UI_SponsorsPropertyCategory"),
-				 null));
+//		itemPropertyDescriptors.add(
+//			createItemPropertyDescriptor(
+//				((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+//				 getResourceLocator(),
+//				 getString("_UI_YoungPerson_parents_feature"),
+//				 getString("_UI_PropertyDescriptor_description", "_UI_YoungPerson_parents_feature", "_UI_YoungPerson_type"),
+//				 FairPackage.Literals.YOUNG_PERSON__PARENTS,
+//				 true,
+//				 false,
+//				 true,
+//				 null,
+//				 getString("_UI_SponsorsPropertyCategory"),
+//				 null)
+//		);
+		
+		
+		itemPropertyDescriptors.add(
+				new ItemPropertyDescriptor(
+						((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(),
+						 getString("_UI_YoungPerson_parents_feature"),// displayName,
+						 getString("_UI_PropertyDescriptor_description", "_UI_YoungPerson_parents_feature", "_UI_YoungPerson_type"),// description,
+						 FairPackage.Literals.YOUNG_PERSON__PARENTS,// feature,
+					     true,// isSettable,
+					     false,// multiLine,
+					     true,// sortChoices,
+					     null, //staticImage,
+					     getString("_UI_SponsorsPropertyCategory"),// category,
+					     null){//filters
+
+
+							@Override
+							protected Collection<?> getComboBoxObjects(
+									Object object) {
+								YoungPerson yp = (YoungPerson)object;
+								Collection<Object> results = new ArrayList<Object>();
+								for (Object o :super.getComboBoxObjects(object)){
+									if(o instanceof YoungPerson){
+										//filter out youngPeople
+									}else{
+										//Show a Person but not if it is already a parent
+										if(!yp.getParents().contains(o)){
+											results.add(o);
+										}
+									}
+								}
+								
+								return results;
+								
+							}
+
+							}//filterFlags
+		
+		
+		);
 	}
 
 	/**
