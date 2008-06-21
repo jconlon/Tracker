@@ -420,14 +420,15 @@ public class PersonItemProvider
 	    switch (columnIndex){
 	        case 0: return getText(object); 
 	    	case 1: return person.getFirstName(); 
-	    	case 2: return person.getLastName();  
-	    	case 3: return person.getPhone();
-	    	case 4: return person.getStreet();
-	    	case 5: return person.getCity();
-	    	case 6: return person.getState();
-	    	case 7: return person.getZipCode();
-	    	case 8:	return person.getPin();
-	    	case 9: return person.getComments();
+	    	case 2: return person.getLastName(); 
+	    	case 3: return Integer.toString(person.getSalesOrder()); 
+	    	case 4: return person.getPhone();
+	    	case 5: return person.getStreet();
+	    	case 6: return person.getCity();
+	    	case 7: return person.getState();
+	    	case 8: return person.getZipCode();
+	    	case 9:	return person.getPin();
+	    	case 10: return person.getComments();
 	    	default :
 	    		return "unknown " + columnIndex;
 	    }

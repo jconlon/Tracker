@@ -40,9 +40,16 @@ public class PeopleView extends TrackerView {
 		filteredTable.setColumns(viewer.getTable().getColumns());
 
 		viewer.setContentProvider(new AdapterFactoryContentProvider(
-				adapterFactory));
-		viewer
-				.setLabelProvider(new AdapterFactoryLabelProvider(
+				adapterFactory) {
+			@Override
+			public Object[] getElements(Object object) {
+				Fair fair = (Fair) object;
+
+				return fair.getPeople().toArray();
+			}
+
+		});
+		viewer.setLabelProvider(new AdapterFactoryLabelProvider(
 						adapterFactory));
 	}
 

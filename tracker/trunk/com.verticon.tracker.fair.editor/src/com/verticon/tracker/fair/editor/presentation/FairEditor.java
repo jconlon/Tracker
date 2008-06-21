@@ -264,7 +264,7 @@ public class FairEditor
 	private IQueryDataSetProvider queryDataSetProvider;
 
 	/**
-	 * This is the property sheet page.
+	 * This is the text sheet page.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1645,7 +1645,7 @@ public class FairEditor
 	}
 
 	/**
-	 * This accesses a cached version of the property sheet.
+	 * This accesses a cached version of the text sheet.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
