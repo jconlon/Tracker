@@ -36,24 +36,8 @@ import com.verticon.tracker.fair.Person;
  */
 public class PeopleSorter extends ViewerSorter {
 
-	/**
-	 * Constructor argument values that indicate to sort items by 
-	 * description, owner or percent complete.
-	 */
-	public final static int STATE = 1;
-	public final static int PHONE = 2;
-	public final static int FIRST_NAME 	= 3;
-	public final static int	CITY	= 4;
-	public final static int STREET		= 5;
-	public final static int LAST_NAME = 6;
-	public final static int ZIP = 7;
-	public final static int NAME = 8;
-	public final static int COMMENTS = 9;
-	public final static int PIN = 10;
-	
-
 	// Criteria that the instance uses 
-	private final int criteria;
+	private final FairTableEditorUtils.PeopleColumn criteria;
 	private final int dir;
 	
 	
@@ -72,7 +56,7 @@ public class PeopleSorter extends ViewerSorter {
 	 *  or 
 	 *  <code>CLASS</code>
 	 */
-	public PeopleSorter(int criteria, int dir) {
+	public PeopleSorter(FairTableEditorUtils.PeopleColumn criteria, int dir) {
 		super();
 		this.criteria = criteria;
 		this.dir=dir;
@@ -96,6 +80,11 @@ public class PeopleSorter extends ViewerSorter {
 				break;
 			case FIRST_NAME :
 				returnValue = compareFirstNames(person1, person2);
+				break;
+			case SALES_ORDER :
+				Integer value1 = person1.getSalesOrder();
+				Integer value2 = person2.getSalesOrder();
+				returnValue =  value1.compareTo(value2);
 				break;
 			case CITY :
 				returnValue = compareCities(person1, person2);

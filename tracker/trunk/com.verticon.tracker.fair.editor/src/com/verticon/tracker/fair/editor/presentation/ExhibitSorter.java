@@ -11,6 +11,7 @@ import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 
 import com.verticon.tracker.fair.Exhibit;
+import com.verticon.tracker.fair.editor.util.FairTableEditorUtils;
 
 
 /**
@@ -37,23 +38,10 @@ import com.verticon.tracker.fair.Exhibit;
  */
 public class ExhibitSorter extends ViewerSorter {
 
-	/**
-	 * Constructor argument values that indicate to sort items by 
-	 * description, owner or percent complete.
-	 */
-	public final static int NUMBER = 1;
-	public final static int EXHIBITOR = 2;
-	public final static int ANIMAL 	= 3;
-	public final static int	LOT	= 4;
-	public final static int CLASS		= 5;
-	public final static int DEPARTMENT = 6;
-	public final static int DIVISION = 7;
-	public final static int NAME = 8;
-	public final static int COMMENTS = 9;
 	
 
 	// Criteria that the instance uses 
-	private final int criteria;
+	private final FairTableEditorUtils.ExhibitColumn criteria;
 	private final int dir;
 	
 	
@@ -72,7 +60,7 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  or 
 	 *  <code>CLASS</code>
 	 */
-	public ExhibitSorter(int criteria, int dir) {
+	public ExhibitSorter(FairTableEditorUtils.ExhibitColumn criteria, int dir) {
 		super();
 		this.criteria = criteria;
 		this.dir=dir;

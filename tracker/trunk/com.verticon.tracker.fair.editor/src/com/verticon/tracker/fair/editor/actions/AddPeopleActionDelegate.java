@@ -186,7 +186,7 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 		
 		for (short i = row.getFirstCellNum(); i < row.getLastCellNum(); i++) {
 			String s = row.getCell(i).getStringCellValue();
-			logger.info("Processing cell number={} to columnName={}", i, s);
+			logger.info("Processing cell number={} to text={}", i, s);
 			String colName = s.toLowerCase().trim();
 			
 			if (colName.equals("firstname")|| colName.equals("first name")) {
@@ -216,11 +216,11 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 			}else if (colName.equals("comments")) {
 				featureMap.put(FairPackage.eINSTANCE.getPerson_Comments(),i);
 			}else if (colName.equals("parents")){
-				logger.warn("Mapping extra column cell number={} to columnName={}", i, 
+				logger.warn("Mapping extra column cell number={} to text={}", i, 
 						colName);
 				extraColMap.put(colName, i);
 			}else if (colName.equals("youth club")){
-				logger.warn("Mapping extra column cell number={} to columnName={}", i, 
+				logger.warn("Mapping extra column cell number={} to text={}", i, 
 						colName);
 				extraColMap.put(colName, i);
 			}
