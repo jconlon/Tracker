@@ -23,7 +23,6 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 
 import com.verticon.tracker.fair.FairPackage;
-import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YoungPerson;
 
 /**
