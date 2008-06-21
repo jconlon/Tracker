@@ -77,26 +77,13 @@ public class YoungPersonItemProvider
 	/**
 	 * This adds a property descriptor for the Parents feature.
 	 * <!-- begin-user-doc -->
+	 * Modified to display only Persons that are not already parents 
+	 * of the YoungPerson.
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected void addParentsPropertyDescriptor(Object object) {
-//		itemPropertyDescriptors.add(
-//			createItemPropertyDescriptor(
-//				((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-//				 getResourceLocator(),
-//				 getString("_UI_YoungPerson_parents_feature"),
-//				 getString("_UI_PropertyDescriptor_description", "_UI_YoungPerson_parents_feature", "_UI_YoungPerson_type"),
-//				 FairPackage.Literals.YOUNG_PERSON__PARENTS,
-//				 true,
-//				 false,
-//				 true,
-//				 null,
-//				 getString("_UI_SponsorsPropertyCategory"),
-//				 null)
-//		);
-		
-		
+
 		itemPropertyDescriptors.add(
 				new ItemPropertyDescriptor(
 						((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
