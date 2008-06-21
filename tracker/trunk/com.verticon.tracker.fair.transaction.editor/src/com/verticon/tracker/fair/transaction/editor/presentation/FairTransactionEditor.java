@@ -78,7 +78,7 @@ import com.verticon.tracker.transaction.editor.presentation.TransactionalEventHi
  * 
  * <ul>
  *   <li>Intializes a TransactionEditingDomain</li>
- *   <li>replacing the property sheet and its property sources with the
+ *   <li>replacing the text sheet and its text sources with the
  *   transactional variants from the org.eclipse.emf.transaction.ui
  *   plug-in</li>
  *   <li>replacing the tree content provider with its transactional variant
@@ -805,7 +805,7 @@ public class FairTransactionEditor extends FairEditor {
 	
 	
 	/**
-	 * This accesses a cached version of the property sheet.
+	 * This accesses a cached version of the text sheet.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
@@ -824,7 +824,7 @@ public class FairTransactionEditor extends FairEditor {
 						getActionBarContributor().shareGlobalActions(this, actionBars);
 					}
 				};
-			//.CUSTOM: Use a transactional property-source provider
+			//.CUSTOM: Use a transactional text-source provider
 			propertySheetPage.setPropertySourceProvider(
 					new TransactionalAdapterFactoryContentProvider((TransactionalEditingDomain) getEditingDomain(), adapterFactory));
 		}
