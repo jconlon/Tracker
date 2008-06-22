@@ -61,6 +61,19 @@ public class DivisionItemProvider
 	public DivisionItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
+	
+	/**
+	 * Created for Ticket 240 
+	 * See EMF Modeling book 14.2.3
+	 */
+	@Override
+	public Object getParent(Object object) {
+		Object fair =  super.getParent(object);
+		FairItemProvider fairItemProvider = 
+			(FairItemProvider)adapterFactory.adapt(fair, IEditingDomainItemProvider.class);
+		return fairItemProvider !=null ? 
+				fairItemProvider.getDivisions() : null;
+	}
 
 	/**
 	 * This returns the property descriptors for the adapted class.

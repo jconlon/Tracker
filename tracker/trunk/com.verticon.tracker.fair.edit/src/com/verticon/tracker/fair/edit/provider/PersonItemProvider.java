@@ -57,6 +57,19 @@ public class PersonItemProvider
 	}
 
 	/**
+	 * Created for Ticket 240 
+	 * See EMF Modeling book 14.2.3
+	 */
+	@Override
+	public Object getParent(Object object) {
+		Object fair =  super.getParent(object);
+		FairItemProvider fairItemProvider = 
+			(FairItemProvider)adapterFactory.adapt(fair, IEditingDomainItemProvider.class);
+		return fairItemProvider !=null ? 
+				fairItemProvider.getPeople() : null;
+	}
+	
+	/**
 	 * This returns the property descriptors for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
