@@ -75,17 +75,17 @@ public class AnimalsView extends TrackerView {
 	@Override
 	protected void handleSelection(Object first) {
 		if (first instanceof Animal) {
-			logger.debug("Animal selection");
+//			logger.debug("Animal selection");
 			viewer.setSelection(new StructuredSelection(first),true);
 		} else if (first instanceof Event) {
-			logger.debug("Event selection");
+//			logger.debug("Event selection");
 			Object animal = ((Event) first).eContainer().eContainer();
 			viewer.setSelection(new StructuredSelection(animal),true);
 		} else if (first instanceof Exhibit && ((Exhibit)first).getAnimal()!=null){
-			logger.debug("Exhibit selection");
+//			logger.debug("Exhibit selection");
 			viewer.setSelection(new StructuredSelection(((Exhibit)first).getAnimal()),true);
 		}else if (first instanceof Person){
-			logger.debug("Person selection");
+//			logger.debug("Person selection");
 			Person person = (Person)first;
 			List<Animal> animals = new ArrayList<Animal>();
 			Fair fair = (Fair)person.eContainer();
@@ -94,7 +94,7 @@ public class AnimalsView extends TrackerView {
 					animals.add(exhib.getAnimal());
 				}
 			}  
-			logger.debug("Person selection associated with {} animals.",animals.size());
+//			logger.debug("Person selection associated with {} animals.",animals.size());
 			viewer.setSelection(new StructuredSelection(animals),true);
 		}
 	}
