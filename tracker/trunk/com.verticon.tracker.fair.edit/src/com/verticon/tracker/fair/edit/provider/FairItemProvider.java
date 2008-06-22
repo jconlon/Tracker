@@ -278,10 +278,10 @@ public class FairItemProvider
 //				(FairPackage.Literals.FAIR__PEOPLE,
 //				 FairFactory.eINSTANCE.createPerson()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(FairPackage.Literals.FAIR__PEOPLE,
-				 FairFactory.eINSTANCE.createYoungPerson()));
+//		newChildDescriptors.add
+//			(createChildParameter
+//				(FairPackage.Literals.FAIR__PEOPLE,
+//				 FairFactory.eINSTANCE.createYoungPerson()));
 	}
 
 	/**
