@@ -88,24 +88,23 @@ public class PeopleView extends TrackerView {
 	@Override
 	protected void handleSelection(Object first) {
 		if (first instanceof Animal) {
-			logger.debug("Animal selection");
+//			logger.debug("Animal selection");
 			//One Person per animal
 			viewer.setSelection(
 					new StructuredSelection(
 							getPersonFromAnimal((Animal) first, getFair())));
 		} else if (first instanceof Event) {
-			logger.debug("Event selection");
+//			logger.debug("Event selection");
 			//One person per event
 			viewer.setSelection(
 					new StructuredSelection(
 							getPersonFromEvent( (Event)first, getFair())));
 		} else if (first instanceof Exhibit
 				&& ((Exhibit) first).getExhibitor() != null) {
-			logger.debug("Exhibit selection");
+//			logger.debug("Exhibit selection");
 			viewer.setSelection(new StructuredSelection(((Exhibit) first).getExhibitor()), true);
 		} else if (first instanceof Person) {
-			logger.debug("Person selection");
-//			Person person = (Person) first;
+//			logger.debug("Person selection");
 			viewer.setSelection(new StructuredSelection(first),true);
 		}
 	}
