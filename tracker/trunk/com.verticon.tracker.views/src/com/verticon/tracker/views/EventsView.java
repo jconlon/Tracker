@@ -64,23 +64,23 @@ public class EventsView extends TrackerView {
 	 */
 	protected void handleSelection(Object first) {
 		if (first instanceof Animal) {
-			logger.debug("Animal selection");
+//			logger.debug("Animal selection");
 			String id = ((Animal) first).getId();
 			setTagIdFilter(id);
 			viewer.setSelection(new StructuredSelection(), true);
 		} else if (first instanceof Event) {
-			logger.debug("Event selection");
+//			logger.debug("Event selection");
 			String id = ((Event) first).getId();
 			setTagIdFilter(id);
 			viewer.setSelection(new StructuredSelection(first), true);
 		} else if (first instanceof Exhibit
 				&& ((Exhibit) first).getAnimal() != null) {
-			logger.debug("Exhibit selection");
+//			logger.debug("Exhibit selection");
 			String id = ((Exhibit) first).getAnimal().getId();
 			setTagIdFilter(id);
 			viewer.setSelection(new StructuredSelection(), true);
 		} else if (first instanceof Person) {
-			logger.debug("Person selection");
+//			logger.debug("Person selection");
 			Person person = (Person) first;
 			List<Event> events = new ArrayList<Event>();
 			Fair fair = (Fair) person.eContainer();
@@ -90,8 +90,7 @@ public class EventsView extends TrackerView {
 				}
 			}
 			setTagIdFilter("");
-			logger.debug("Person selection associated with {} events.", events
-					.size());
+//			logger.debug("Person selection associated with {} events.", events.size());
 			viewer.setSelection(new StructuredSelection(events), true);
 		}
 	}
