@@ -193,7 +193,16 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 
 	@Override
 	public void dispose() {
+		// Remove all the tabs in the TabFolder
+		for (CTabItem item : cTabFolder.getItems()) {
+			item.dispose();
+		}
+		cTabFolder.dispose();
+		sash.dispose();
+		sashForm.dispose();
+		filteredTable.dispose();
 		super.dispose();
+		
 	}
 
 	public void selectionChanged(SelectionChangedEvent event) {
@@ -258,17 +267,17 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 			
 			switch (sselection.size()) {
 			case 0:
-				logger.debug("Empty selection");
+//				logger.debug("Empty selection");
 				filteredTable.setFilterText("");
 				viewer.setSelection(sselection);
 				break;
 			case 1:
-				logger.debug("Single selection");
+//				logger.debug("Single selection");
 				handleSelection(sselection.getFirstElement());
 				break;
 	
 			default:
-				logger.debug("Multiple selection");
+//				logger.debug("Multiple selection");
 				filteredTable.setFilterText(null);
 				viewer.setSelection(sselection);
 				break;
@@ -289,12 +298,12 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	 */
 	protected void fillPropertiesFolder(ISelection selection, AdapterFactory adapterFactory, CTabFolder cTabFolder) {
 		if (defaultPropertiesFormProvider == null) {
-			logger.debug("Creating a defaultPropertiesFormProvider");
+//			logger.debug("Creating a defaultPropertiesFormProvider");
 			defaultPropertiesFormProvider = new DefaultPropertiesFormProvider();
 			// defaultPropertiesFormProvider.setWizardPage(this);
 			// TODO events viewer need to show validation information
 		}
-		logger.debug("Filling properties with the selection");
+//		logger.debug("Filling properties with the selection");
 		defaultPropertiesFormProvider.fillProperties(selection, adapterFactory,
 				cTabFolder, getFolderTitle());
 		cTabFolder.pack(true);

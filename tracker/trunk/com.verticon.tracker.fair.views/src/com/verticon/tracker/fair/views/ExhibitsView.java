@@ -69,19 +69,19 @@ public class ExhibitsView extends TrackerView {
 	@Override
 	protected void handleSelection(Object first) {
 		if (first instanceof Animal) {
-			logger.debug("Animal selection");
+//			logger.debug("Animal selection");
 			viewer.setSelection(new StructuredSelection(
 					getExhibitFromAnimal( (Animal) first, getFair())
 					), true);
 		} else if (first instanceof Event) {
-			logger.debug("Event selection");
+//			logger.debug("Event selection");
 			viewer.setSelection(new StructuredSelection(
 					getExhibitFromEvent( (Event)first, getFair())), true);
 		} else if (first instanceof Exhibit) {
-			logger.debug("Exhibit selection");
+//			logger.debug("Exhibit selection");
 			viewer.setSelection(new StructuredSelection(first), true);
 		} else if (first instanceof Person) {
-			logger.debug("Person selection");
+//			logger.debug("Person selection");
 			//A person can have multiple exhibits
 			Person person = (Person) first;
 			List<Exhibit> exhibits = new ArrayList<Exhibit>();
@@ -143,26 +143,5 @@ public class ExhibitsView extends TrackerView {
 		return null;
 	}
 	
-
-
-	
-
-//	/**
-//	 * Convienence method to find the Root
-//	 * 
-//	 * @return
-//	 */
-//	protected Premises getPremises(EditingDomain editingDomain) {
-//		Resource resource = (Resource) editingDomain.getResourceSet()
-//				.getResources().get(0);
-//		Object rootObject = resource.getContents().get(0);
-//		if (rootObject instanceof Premises) {
-//			return (Premises) rootObject;
-//		} else if (rootObject instanceof Fair) {
-//			return ((Fair) rootObject).getPremises();
-//		}
-//
-//		return null;
-//	}
 
 }

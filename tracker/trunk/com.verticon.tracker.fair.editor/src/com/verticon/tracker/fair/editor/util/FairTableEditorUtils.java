@@ -34,13 +34,13 @@ public class FairTableEditorUtils {
 		NAME("Name",new ColumnWeightData(3, 200, true)), 
 		FIRST_NAME("First Name",new ColumnWeightData(2, 100, true)),
 		LAST_NAME("Last Name",new ColumnWeightData(2, 100, true)), 
-		SALES_ORDER("Sales Order in Auction",new ColumnWeightData(2, 100, true)),
+		SALES_ORDER("Sales Order in Auction",new ColumnWeightData(2, 150, true)),
 		PHONE("Phone",new ColumnWeightData(2, 100, true)), 
 		STREET("Street",new ColumnWeightData(2, 200, true)), 
 		CITY("City",new ColumnWeightData(2, 80, true)), 
 		STATE("State",new ColumnWeightData(2, 20, true)), 
 		ZIP("Zip",new ColumnWeightData(2, 20, true)), 
-		PIN("Premieses ID",new ColumnWeightData(2, 20, true)), 
+		PIN("Premieses ID",new ColumnWeightData(2, 40, true)), 
 		COMMENTS("Comments",new ColumnWeightData(2, 120, true));
 
 		ColumnLayoutData layoutData;
