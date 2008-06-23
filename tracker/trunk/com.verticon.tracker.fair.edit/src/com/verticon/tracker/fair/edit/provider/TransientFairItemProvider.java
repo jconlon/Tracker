@@ -38,9 +38,9 @@ public class TransientFairItemProvider // 14.2.3
 
 
 	public TransientFairItemProvider(AdapterFactory adapterFactory,
-			Fair supplier) {
+			Fair fair) {
 		super(adapterFactory);
-		supplier.eAdapters().add(this);
+		fair.eAdapters().add(this);
 	}
 
 	@Override
