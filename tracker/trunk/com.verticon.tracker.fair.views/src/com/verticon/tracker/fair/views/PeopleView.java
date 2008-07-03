@@ -87,25 +87,36 @@ public class PeopleView extends TrackerView {
 	 */
 	@Override
 	protected void handleSelection(Object first) {
+		Person person = null;
 		if (first instanceof Animal) {
 //			logger.debug("Animal selection");
 			//One Person per animal
-			viewer.setSelection(
-					new StructuredSelection(
-							getPersonFromAnimal((Animal) first, getFair())));
+			 person = getPersonFromAnimal((Animal) first, getFair());
 		} else if (first instanceof Event) {
 //			logger.debug("Event selection");
 			//One person per event
-			viewer.setSelection(
-					new StructuredSelection(
-							getPersonFromEvent( (Event)first, getFair())));
+			 person = getPersonFromEvent( (Event)first, getFair());
 		} else if (first instanceof Exhibit
 				&& ((Exhibit) first).getExhibitor() != null) {
 //			logger.debug("Exhibit selection");
-			viewer.setSelection(new StructuredSelection(((Exhibit) first).getExhibitor()), true);
+			person = ((Exhibit) first).getExhibitor();
 		} else if (first instanceof Person) {
 //			logger.debug("Person selection");
-			viewer.setSelection(new StructuredSelection(first),true);
+			person = (Person)first;
+		}
+		setSelection(person);
+	}
+
+	/**
+	 * @param person
+	 */
+	private void setSelection(Object person) {
+		if(person!=null){
+			viewer.setSelection(
+				new StructuredSelection(person), true);
+		}else{
+			viewer.setSelection(
+					new StructuredSelection());
 		}
 	}
 	
@@ -127,7 +138,7 @@ public class PeopleView extends TrackerView {
 	}
 
 	private static Person getPersonFromAnimal(Animal animal, Fair fair){
-		if(animal==null){
+		if(animal==null || fair == null){
 			return null;
 		}
 		for (Exhibit exhibit : fair.exhibits()) {
@@ -140,6 +151,9 @@ public class PeopleView extends TrackerView {
 	}
 	
 	private static Person getPersonFromEvent(Event event, Fair fair){
+		if(event==null || fair == null){
+			return null;
+		}
 		if(event.getTag()!=null && event.getTag().eContainer()!=null){
 			Animal animal = (Animal)event.getTag().eContainer();
 			return getPersonFromAnimal( animal,  fair);
