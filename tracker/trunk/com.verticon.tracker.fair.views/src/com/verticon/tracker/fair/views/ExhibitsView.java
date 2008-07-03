@@ -68,18 +68,16 @@ public class ExhibitsView extends TrackerView {
 	 */
 	@Override
 	protected void handleSelection(Object first) {
+		Object exhibit = null;
 		if (first instanceof Animal) {
 //			logger.debug("Animal selection");
-			viewer.setSelection(new StructuredSelection(
-					getExhibitFromAnimal( (Animal) first, getFair())
-					), true);
+			exhibit = getExhibitFromAnimal( (Animal) first, getFair());
 		} else if (first instanceof Event) {
 //			logger.debug("Event selection");
-			viewer.setSelection(new StructuredSelection(
-					getExhibitFromEvent( (Event)first, getFair())), true);
+			exhibit = getExhibitFromEvent( (Event)first, getFair());
 		} else if (first instanceof Exhibit) {
 //			logger.debug("Exhibit selection");
-			viewer.setSelection(new StructuredSelection(first), true);
+			exhibit = first;
 		} else if (first instanceof Person) {
 //			logger.debug("Person selection");
 			//A person can have multiple exhibits
@@ -92,7 +90,21 @@ public class ExhibitsView extends TrackerView {
 				}
 			}
 			
-			viewer.setSelection(new StructuredSelection(exhibits), true);
+			exhibit = exhibits;
+		}
+		setSelection(exhibit);
+	}
+	
+	/**
+	 * @param person
+	 */
+	private void setSelection(Object person) {
+		if(person!=null){
+			viewer.setSelection(
+				new StructuredSelection(person), true);
+		}else{
+			viewer.setSelection(
+					new StructuredSelection());
 		}
 	}
 	
@@ -123,7 +135,7 @@ public class ExhibitsView extends TrackerView {
 	
 
 	private static Exhibit getExhibitFromAnimal(Animal animal, Fair fair){
-		if(animal==null){
+		if(animal==null || fair == null){
 			return null;
 		}
 		for (Exhibit exhibit : fair.exhibits()) {
@@ -136,6 +148,9 @@ public class ExhibitsView extends TrackerView {
 	}
 	
 	private static Exhibit getExhibitFromEvent(Event event, Fair fair){
+		if(event==null || fair == null){
+			return null;
+		}
 		if(event.getTag()!=null && event.getTag().eContainer()!=null){
 			Animal animal = (Animal)event.getTag().eContainer();
 			return getExhibitFromAnimal( animal,  fair);
