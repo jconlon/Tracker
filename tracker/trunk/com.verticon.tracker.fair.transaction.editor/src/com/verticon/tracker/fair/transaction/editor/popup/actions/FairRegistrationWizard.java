@@ -11,6 +11,7 @@ import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -95,12 +96,24 @@ public class FairRegistrationWizard extends Wizard  {
 	@Override
 	public void addPages() {
 		setWindowTitle(ADD_EXHIBIT);
-		selectPersonPage = new FairRegistrationSelectPersonWizardPage(new FairItemProviderAdapterFactory());
+		ComposedAdapterFactory composedAdapterFactory = createAdapterFactory();
+		
+		selectPersonPage = new FairRegistrationSelectPersonWizardPage(composedAdapterFactory);
 		addPage(selectPersonPage);
 		selectLotPage = new FairRegistrationConfigureExhibitWizardPage(findFair());
      	addPage(selectLotPage);
-     	createConfirmationPage= new FairRegistrationConfirmationWizardPage(new TrackerItemProviderAdapterFactory());
+     	createConfirmationPage= new FairRegistrationConfirmationWizardPage(composedAdapterFactory);
      	addPage(createConfirmationPage);
+	}
+
+	/**
+	 * @return
+	 */
+    static ComposedAdapterFactory createAdapterFactory() {
+		ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		composedAdapterFactory.addAdapterFactory(new FairItemProviderAdapterFactory());
+		composedAdapterFactory.addAdapterFactory(new TrackerItemProviderAdapterFactory());
+		return composedAdapterFactory;
 	}
 
 	/**

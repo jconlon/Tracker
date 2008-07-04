@@ -94,7 +94,7 @@ public class UpdatePinsWizard extends Wizard {
 		updatePinsPage = new UpdatePinsWizardPage();
 		addPage(updatePinsPage);
 		FairRegistrationSelectPersonWizardPage selectedPeoplePage =
-			new FairRegistrationSelectPersonWizardPage(new FairItemProviderAdapterFactory()){
+			new FairRegistrationSelectPersonWizardPage(FairRegistrationWizard.createAdapterFactory()){
 
 				@Override
 				protected Collection<Person> getPersons() {
