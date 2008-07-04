@@ -222,7 +222,7 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 			return;
 		}
 		IWorkbenchWindow workbenchWindow = site.getWorkbenchWindow();
-		if(workbenchWindow==null){
+		if(workbenchWindow==null || workbenchWindow.getActivePage()==null){
 			return;
 		}
 		
