@@ -62,6 +62,14 @@ public class FairItemProviderAdapterFactory extends FairAdapterFactory implement
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
+	 * This keeps track of all the item providers created, so that they can be {@link #dispose disposed}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected Disposable disposable = new Disposable();
+
+	/**
 	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -85,14 +93,6 @@ public class FairItemProviderAdapterFactory extends FairAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.fair.Fair} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected FairItemProvider fairItemProvider;
-
-	/**
 	 * This creates an adapter for a {@link com.verticon.tracker.fair.Fair}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -100,11 +100,7 @@ public class FairItemProviderAdapterFactory extends FairAdapterFactory implement
 	 */
 	@Override
 	public Adapter createFairAdapter() {
-		if (fairItemProvider == null) {
-			fairItemProvider = new FairItemProvider(this);
-		}
-
-		return fairItemProvider;
+		return new FairItemProvider(this);
 	}
 
 	/**
@@ -350,6 +346,19 @@ public class FairItemProviderAdapterFactory extends FairAdapterFactory implement
 	}
 
 	/**
+	 * Associates an adapter with a notifier via the base implementation, then records it to ensure it will be disposed.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void associate(Adapter adapter, Notifier target) {
+		super.associate(adapter, target);
+		if (adapter != null) {
+			disposable.add(adapter);
+		}
+	}
+
+	/**
 	 * This adds a listener.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -390,15 +399,7 @@ public class FairItemProviderAdapterFactory extends FairAdapterFactory implement
 	 * @generated
 	 */
 	public void dispose() {
-		if (fairItemProvider != null) fairItemProvider.dispose();
-		if (exhibitItemProvider != null) exhibitItemProvider.dispose();
-		if (youthClubItemProvider != null) youthClubItemProvider.dispose();
-		if (divisionItemProvider != null) divisionItemProvider.dispose();
-		if (departmentItemProvider != null) departmentItemProvider.dispose();
-		if (classItemProvider != null) classItemProvider.dispose();
-		if (lotItemProvider != null) lotItemProvider.dispose();
-		if (personItemProvider != null) personItemProvider.dispose();
-		if (youngPersonItemProvider != null) youngPersonItemProvider.dispose();
+		disposable.dispose();
 	}
 
 }
