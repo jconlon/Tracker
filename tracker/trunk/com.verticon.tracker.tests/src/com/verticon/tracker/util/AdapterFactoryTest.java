@@ -6,8 +6,9 @@ package com.verticon.tracker.util;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 
-import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
+import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.fair.FairFactory;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
 
@@ -32,8 +33,9 @@ public class AdapterFactoryTest extends TestCase {
 	    fairItemProviderAdapterFactory = new FairItemProviderAdapterFactory();
 		instance =  new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 		instance.addAdapterFactory(fairItemProviderAdapterFactory);
-		instance.addAdapterFactory(new TrackerItemProviderAdapterFactory());
-		
+//		instance.addAdapterFactory(new TrackerItemProviderAdapterFactory());
+		instance.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+
 	}
 
 	/*
@@ -58,11 +60,26 @@ public class AdapterFactoryTest extends TestCase {
 	 * for experimentation with adapterFactory
 	 */
 	public void testGetFairItemProvider() {
+		assertTrue(instance.isFactoryForType(FairFactory.eINSTANCE.createFair()));
+		
 		Object o = instance.getFactoryForType(FairFactory.eINSTANCE.createFair());
 		assertNotNull(o);
 		assertEquals(o, fairItemProviderAdapterFactory);
 
 
+	}
+	
+	/**
+	 * Test method for
+	 * for experimentation with adapterFactory
+	 */
+	public void testSupportTrackerPremises() {
+		assertTrue(instance.isFactoryForType(TrackerFactory.eINSTANCE.createPremises()));
+		
+		Object o = instance.getFactoryForType(TrackerFactory.eINSTANCE.createEquine());
+		assertNotNull(o);
+		assertTrue(o.getClass().getSimpleName()+" instead", o instanceof FairItemProviderAdapterFactory);
+		
 	}
 
 }

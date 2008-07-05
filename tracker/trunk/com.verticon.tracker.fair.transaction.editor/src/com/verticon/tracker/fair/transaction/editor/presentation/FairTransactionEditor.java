@@ -58,7 +58,10 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorActionBarContributor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.part.FileEditorInput;
@@ -67,6 +70,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
 import com.verticon.tracker.fair.Fair;
@@ -387,30 +391,40 @@ public class FairTransactionEditor extends FairEditor {
 	//         operation-history listener.  We also create our undo context.
 	protected void initializeTransactionEditingDomain() {
 		logger.info("Initializing the transactionEditingDomain");
-		// Create an adapter factory that yields item providers.
-		ComposedAdapterFactory myadapterFactory = new ComposedAdapterFactory(
-				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-		myadapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-		myadapterFactory.addAdapterFactory(new FairItemProviderAdapterFactory());
-		myadapterFactory.addAdapterFactory(new TrackerItemProviderAdapterFactory());
-		myadapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 		
 		editingDomain = (AdapterFactoryEditingDomain) 
 			TransactionalEditingDomain.Registry.INSTANCE.getEditingDomain(
 		"com.verticon.transaction.editor.TrackerEditingDomain"); //$NON-NLS-1$
 		
-		editingDomain.getResourceSet().getAdapterFactories().add(
-				myadapterFactory
-		);
+		//There may already be a registered AdapterFactory
+		ResourceSet rs = editingDomain.getResourceSet();
+		for (AdapterFactory registeredAdapterFactory : rs.getAdapterFactories()) {
+			if(registeredAdapterFactory instanceof ComposedAdapterFactory){
+				ComposedAdapterFactory caf = (ComposedAdapterFactory)registeredAdapterFactory;
+				if(caf.getFactoryForType(FairFactory.eINSTANCE.createFair()) instanceof FairItemProviderAdapterFactory){
+					adapterFactory = caf;
+					break;
+				}
+			}
+		}
+		if(adapterFactory ==null ){
+			// Create a new adapter factory that yields item providers.
+			adapterFactory = new ComposedAdapterFactory(
+					ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+			adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+			adapterFactory.addAdapterFactory(new FairItemProviderAdapterFactory());
+			//To distinguish between the Fair and Tracker Registered AdapterFactories
+			//in order to remove them when they are not needed, this ComposedAdapterFactory
+			//cannot contain a TrackerItemProviderAdapterFactory
+			//			adapterFactory.addAdapterFactory(new TrackerItemProviderAdapterFactory());
+			adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+			
+			editingDomain.getResourceSet().getAdapterFactories().add(
+					adapterFactory
+			);
+		}
 		
-		//TODO Figure out why 
-		// setting the adapterFactory in the following line forces only one FairItemProviderAdapterFactory creation 
-		// but setting it to myadapterFactory creates a second FairItemProviderAdapterFactory
-		// which does not fully initialize the second FairItemProvicerAdapterFactory
-		// Currently the second FairItemProviderAdapterFactory is initialized on the target
-		// while the first FairItemProviderAdapterFactory is initialized on the passed in object
-//		adapterFactory = (ComposedAdapterFactory)editingDomain.getAdapterFactory();
-		adapterFactory = myadapterFactory;
+		
 		
 		undoContext = new ObjectUndoContext(
 				this,
@@ -1043,11 +1057,30 @@ public class FairTransactionEditor extends FairEditor {
 		editingDomain.getResourceSet().getResources().remove(getResource());
 		editingDomain.getResourceSet().eAdapters().remove(problemIndicationAdapter);
 		
-		ResourceSet rs = editingDomain.getResourceSet();
-		AdapterFactory factory = 
-			EcoreUtil.getAdapterFactory(rs.getAdapterFactories(), FairFactory.eINSTANCE.createFair());
-		if(factory !=null){
-			rs.getAdapterFactories().remove(factory);
+		//Remove the registered AdpaterFactory if there are no more FairTransactionEditor instances in workbench
+		IWorkbench workbench =getSite().getWorkbenchWindow().getWorkbench();
+		IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
+		boolean adapterFactoryNoLongerNeeded = true;
+		for (IEditorReference ref : activePage.getEditorReferences()) {
+			if("com.verticon.tracker.fair.transaction.editor.presentation.FairEditorID".equals(ref.getId())){
+				adapterFactoryNoLongerNeeded=false;
+				break;
+			}
+
+		}
+		if(adapterFactoryNoLongerNeeded){
+			ResourceSet rs = editingDomain.getResourceSet();
+			AdapterFactory adapterToRemove = null;
+			for (AdapterFactory registeredAdapterFactory : rs.getAdapterFactories()) {
+				if(registeredAdapterFactory instanceof ComposedAdapterFactory){
+					ComposedAdapterFactory caf = (ComposedAdapterFactory)registeredAdapterFactory;
+					if(caf.getFactoryForType(FairFactory.eINSTANCE.createFair()) instanceof FairItemProviderAdapterFactory){
+						adapterToRemove = caf;
+						break;
+					}
+				}
+			}
+			rs.getAdapterFactories().remove(adapterToRemove);
 		}
 		
 		

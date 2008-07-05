@@ -24,7 +24,7 @@
     </genEnums>
     <genDataTypes ecoreDataType="fair.ecore#//ZipCode"/>
     <genDataTypes ecoreDataType="fair.ecore#//USTelephoneNumber"/>
-    <genClasses ecoreClass="fair.ecore#//Fair">
+    <genClasses provider="Stateful" ecoreClass="fair.ecore#//Fair">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Fair/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fair.ecore#//Fair/youthClubs"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fair.ecore#//Fair/divisions"/>
