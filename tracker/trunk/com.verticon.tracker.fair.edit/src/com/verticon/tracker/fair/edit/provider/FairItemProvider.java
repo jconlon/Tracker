@@ -101,16 +101,25 @@ public class FairItemProvider
 	}
 	
 	public Object getYouthClubs() {
+		if(children==null){
+			initializeChildren(target);
+		}
 		Assert.isNotNull(children, "Children can't be null. "+this);
 		return children.get(0);
 	}
 	
 	public Object getDivisions() {
+		if(children==null){
+			initializeChildren(target);
+		}
 		Assert.isNotNull(children, "Children can't be null. "+this);
 		return children.get(1);
 	}
 	
 	public Object getPeople() {
+		if(children==null){
+			initializeChildren(target);
+		}
 		Assert.isNotNull(children, "Children can't be null. "+this);
 		return children.get(2);
 	}
