@@ -44,6 +44,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
@@ -101,8 +102,11 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorActionBarContributor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IPartListener;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
@@ -122,6 +126,7 @@ import org.slf4j.LoggerFactory;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.presentation.IAnimalSelectionProvider;
 import com.verticon.tracker.editor.presentation.ICustomActionBarContributor;
@@ -769,19 +774,34 @@ public class TrackerTransactionEditor
 	//.CUSTOM: Instead of the command-stack listener, we create an
 	//         operation-history listener.  We also create our undo context.
 	protected void initializeEditingDomain() {
-		// Create an adapter factory that yields item providers.
-		//
-		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-
-		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new TrackerItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
-
+		
 		// Get the registered workbench editing domain.
 		//
 		editingDomain = (AdapterFactoryEditingDomain) TransactionalEditingDomain.Registry.INSTANCE.getEditingDomain(
 		"com.verticon.transaction.editor.TrackerEditingDomain"); //$NON-NLS-1$
-		editingDomain.getResourceSet().getAdapterFactories().add(adapterFactory);
+		
+		//There may already be a registered AdapterFactory
+		ResourceSet rs = editingDomain.getResourceSet();
+		for (AdapterFactory registeredAdapterFactory : rs.getAdapterFactories()) {
+			if(registeredAdapterFactory instanceof ComposedAdapterFactory){
+				ComposedAdapterFactory caf = (ComposedAdapterFactory)registeredAdapterFactory;
+				if(caf.getFactoryForType(TrackerFactory.eINSTANCE.createPremises()) instanceof TrackerItemProviderAdapterFactory){
+					adapterFactory = caf;
+					break;
+				}
+			}
+		}
+		
+		if(adapterFactory==null){
+			// Create an adapter factory that yields item providers.
+			adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+
+			adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+			adapterFactory.addAdapterFactory(new TrackerItemProviderAdapterFactory());
+			adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+
+			editingDomain.getResourceSet().getAdapterFactories().add(adapterFactory);
+		}
 		
 		undoContext = new ObjectUndoContext(
 				this,
@@ -1999,6 +2019,34 @@ public class TrackerTransactionEditor
 		getResource().unload();
 		editingDomain.getResourceSet().getResources().remove(getResource());
 		editingDomain.getResourceSet().eAdapters().remove(problemIndicationAdapter);
+		
+		//Remove the registered AdpaterFactory if there are no more Transaction Editor instances in workbench
+		IWorkbench workbench =getSite().getWorkbenchWindow().getWorkbench();
+		IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
+		boolean adapterFactoryNoLongerNeeded = true;
+		for (IEditorReference ref : activePage.getEditorReferences()) {
+			if("com.verticon.tracker.transaction.editor.TrackerEditorID".equals(ref.getId())){
+				adapterFactoryNoLongerNeeded=false;
+				break;
+			}
+
+		}
+		if(adapterFactoryNoLongerNeeded){
+			ResourceSet rs = editingDomain.getResourceSet();
+			AdapterFactory adapterToRemove = null;
+			for (AdapterFactory registeredAdapterFactory : rs.getAdapterFactories()) {
+				if(registeredAdapterFactory instanceof ComposedAdapterFactory){
+					ComposedAdapterFactory caf = (ComposedAdapterFactory)registeredAdapterFactory;
+					if(caf.getFactoryForType(TrackerFactory.eINSTANCE.createPremises()) instanceof TrackerItemProviderAdapterFactory){
+						adapterToRemove = caf;
+						break;
+					}
+				}
+			}
+			rs.getAdapterFactories().remove(adapterToRemove);
+		}
+		
+		
 		
 		getSite().getPage().removePartListener(partListener);
 
