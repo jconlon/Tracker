@@ -664,12 +664,12 @@ public class FairEditor
 	 */
 	private void resetInputOnTableViewers() {
 		logger.debug("Reloading resources");
-		  Object rootObject = getRoot();
-		  if ((rootObject instanceof Fair) && (((Fair)rootObject).getPremises()!=null))
+		  Fair rootObject = getFair();
+		  if (rootObject !=null && rootObject.getPremises()!=null)
 		  {
 			logger.debug("Setting input on Premises tables");
-					 animalsTableViewer.setInput(((Fair)rootObject).getPremises());
-					 eventsTableViewer.setInput(((Fair)rootObject).getPremises());
+					 animalsTableViewer.setInput(rootObject.getPremises());
+					 eventsTableViewer.setInput(rootObject.getPremises());
 		  }else{
 			  logger.error("Root object was not a Premises, but a  {}", rootObject.getClass().toString());
 		  }
@@ -1238,10 +1238,10 @@ public class FairEditor
 		addEventsTableViewerProviders();
 		
 
-		Object rootObject = getRoot();
-		if (rootObject instanceof Fair){
-			eventsTableViewer.setInput(((Fair)rootObject).getPremises());
-			viewerPane.setTitle(((Fair)rootObject).getPremises());
+		Fair fair = getFair();
+		if (fair !=null){
+			eventsTableViewer.setInput(fair.getPremises());
+			viewerPane.setTitle(fair.getPremises());
 		}
 		createContextMenuFor(eventsTableViewer);
 		int pageIndex = addPage(viewerPane.getControl());
@@ -1284,11 +1284,11 @@ public class FairEditor
 		
 		addAnimalsTableViewerProviders();
 		
-		Object rootObject = getRoot();
-		if (rootObject instanceof Fair)
+		Fair rootObject = getFair();
+		if (rootObject !=null)
 		{
-			animalsTableViewer.setInput(((Fair)rootObject).getPremises());
-			viewerPane.setTitle(((Fair)rootObject).getPremises());
+			animalsTableViewer.setInput(rootObject.getPremises());
+			viewerPane.setTitle(rootObject.getPremises());
 		}
 
 		createContextMenuFor(animalsTableViewer);
@@ -1342,11 +1342,11 @@ public class FairEditor
 		FairTableEditorUtils.setUpExhibitsTableViewer( exhibitsTableViewer);
 		addExhibitsTableViewerProviders();
 
-		Object rootObject = getRoot();
-		if (rootObject instanceof Fair)
+		Fair fair = getFair();
+		if (fair !=null)
 		{
-			exhibitsTableViewer.setInput(rootObject);
-			viewerPane.setTitle(rootObject);
+			exhibitsTableViewer.setInput(fair);
+			viewerPane.setTitle(fair);
 		}
 		
 
@@ -1386,11 +1386,11 @@ public class FairEditor
 		
 		addPeopleTableViewerProviders();
 
-		Object rootObject = getRoot();
-		if (rootObject instanceof Fair)
+		Fair fair = getFair();
+		if (fair !=null)
 		{
-			peopleTableViewer.setInput(rootObject);
-			viewerPane.setTitle(rootObject);
+			peopleTableViewer.setInput(fair);
+			viewerPane.setTitle(fair);
 		}
 
 		createContextMenuFor(peopleTableViewer);
@@ -1424,13 +1424,19 @@ public class FairEditor
 	}
 	
 	/**
-	 * Convienence method to find the Root
-	 * @return
+	 * 
+	 * @return fair
 	 */
-	private Object getRoot() {
-		Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
-		  Object rootObject = resource.getContents().get(0);
-		return rootObject;
+	private Fair getFair(){
+		Fair fair = null;
+		for (Resource resource : editingDomain.getResourceSet().getResources()) {
+			Object o = resource.getContents().get(0);
+			if(o instanceof Fair){
+				fair = (Fair)o;
+				break;
+			}
+		}
+		return fair;
 	}
 
 
