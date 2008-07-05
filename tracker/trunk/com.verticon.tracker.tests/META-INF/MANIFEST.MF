@@ -17,7 +17,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.equinox.io,
  com.verticon.tracker.reader,
  slf4j.api,
- com.verticon.tracker.logging
+ com.verticon.tracker.logging,
+ com.verticon.tracker.fair.edit,
+ org.eclipse.emf.edit.ui
 Eclipse-LazyStart: true
 Import-Package: gnu.io,
  javax.microedition.io,
