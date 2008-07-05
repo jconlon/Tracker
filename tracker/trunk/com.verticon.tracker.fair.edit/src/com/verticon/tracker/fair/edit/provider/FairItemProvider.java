@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandWrapper;
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -77,30 +78,40 @@ public class FairItemProvider
 	@Override
 	public Collection<?> getChildren(Object object) {
 		if(children==null){
-			Fair fair = (Fair)object;
-			children = new ArrayList<TransientFairItemProvider>();
-			children.add(
-					new YouthClubsItemProvider(adapterFactory, fair)
-			);
-			children.add(
-					new DivisionsItemProvider(adapterFactory, fair)
-			);
-			children.add(
-					new PeopleItemProvider(adapterFactory, fair)
-			);
+			initializeChildren(object);
 		}
 		return children;
 	}
+
+	/**
+	 * @param object
+	 */
+	private void initializeChildren(Object object) {
+		Fair fair = (Fair)object;
+		children = new ArrayList<TransientFairItemProvider>();
+		children.add(
+				new YouthClubsItemProvider(adapterFactory, fair)
+		);
+		children.add(
+				new DivisionsItemProvider(adapterFactory, fair)
+		);
+		children.add(
+				new PeopleItemProvider(adapterFactory, fair)
+		);
+	}
 	
 	public Object getYouthClubs() {
+		Assert.isNotNull(children, "Children can't be null. "+this);
 		return children.get(0);
 	}
 	
 	public Object getDivisions() {
+		Assert.isNotNull(children, "Children can't be null. "+this);
 		return children.get(1);
 	}
 	
 	public Object getPeople() {
+		Assert.isNotNull(children, "Children can't be null. "+this);
 		return children.get(2);
 	}
 
