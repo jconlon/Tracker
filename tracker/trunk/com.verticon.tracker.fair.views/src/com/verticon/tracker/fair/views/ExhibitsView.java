@@ -122,17 +122,19 @@ public class ExhibitsView extends TrackerView {
 	}
 	
 	/**
-	 * @return
+	 * @return fair
 	 */
-	private Fair getFair() {
-		Resource resource = (Resource)queryDataSetProvider.getEditingDomain().getResourceSet().getResources().get(0);
-		Object rootObject = resource.getContents().get(0);
-		if(rootObject instanceof Fair){
-			return (Fair)rootObject;
+	private Fair getFair(){
+		Fair fair = null;
+		for (Resource resource : queryDataSetProvider.getEditingDomain().getResourceSet().getResources()) {
+			Object o = resource.getContents().get(0);
+			if(o instanceof Fair){
+				fair = (Fair)o;
+				break;
+			}
 		}
-		return null;
+		return fair;
 	}
-	
 
 	private static Exhibit getExhibitFromAnimal(Animal animal, Fair fair){
 		if(animal==null || fair == null){
