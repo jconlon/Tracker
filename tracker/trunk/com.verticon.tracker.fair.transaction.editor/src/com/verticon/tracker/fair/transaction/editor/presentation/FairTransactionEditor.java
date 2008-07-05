@@ -403,9 +403,14 @@ public class FairTransactionEditor extends FairEditor {
 				myadapterFactory
 		);
 		
-		//TODO Figure out why setting the adapterFactory the following works but the commented line does not
-		adapterFactory = (ComposedAdapterFactory)editingDomain.getAdapterFactory();
-//		adapterFactory = myadapterFactory;
+		//TODO Figure out why 
+		// setting the adapterFactory in the following line forces only one FairItemProviderAdapterFactory creation 
+		// but setting it to myadapterFactory creates a second FairItemProviderAdapterFactory
+		// which does not fully initialize the second FairItemProvicerAdapterFactory
+		// Currently the second FairItemProviderAdapterFactory is initialized on the target
+		// while the first FairItemProviderAdapterFactory is initialized on the passed in object
+//		adapterFactory = (ComposedAdapterFactory)editingDomain.getAdapterFactory();
+		adapterFactory = myadapterFactory;
 		
 		undoContext = new ObjectUndoContext(
 				this,
