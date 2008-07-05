@@ -27,6 +27,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
@@ -68,6 +70,7 @@ import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
 import com.verticon.tracker.fair.Fair;
+import com.verticon.tracker.fair.FairFactory;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
 import com.verticon.tracker.fair.editor.presentation.FairEditor;
 import com.verticon.tracker.fair.editor.presentation.FairEditorPlugin;
@@ -383,20 +386,27 @@ public class FairTransactionEditor extends FairEditor {
 	//.CUSTOM: Instead of the command-stack listener, we create an
 	//         operation-history listener.  We also create our undo context.
 	protected void initializeTransactionEditingDomain() {
-		// TODO Auto-generated method stub
 		logger.info("Initializing the transactionEditingDomain");
 		// Create an adapter factory that yields item providers.
-		//
-		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-
-		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new FairItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new TrackerItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+		ComposedAdapterFactory myadapterFactory = new ComposedAdapterFactory(
+				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		myadapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+		myadapterFactory.addAdapterFactory(new FairItemProviderAdapterFactory());
+		myadapterFactory.addAdapterFactory(new TrackerItemProviderAdapterFactory());
+		myadapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+		
 		editingDomain = (AdapterFactoryEditingDomain) 
 			TransactionalEditingDomain.Registry.INSTANCE.getEditingDomain(
 		"com.verticon.transaction.editor.TrackerEditingDomain"); //$NON-NLS-1$
-		editingDomain.getResourceSet().getAdapterFactories().add(adapterFactory);
+		
+		editingDomain.getResourceSet().getAdapterFactories().add(
+				myadapterFactory
+		);
+		
+		//TODO Figure out why setting the adapterFactory the following works but the commented line does not
+		adapterFactory = (ComposedAdapterFactory)editingDomain.getAdapterFactory();
+//		adapterFactory = myadapterFactory;
+		
 		undoContext = new ObjectUndoContext(
 				this,
 				FairTransactionEditorPlugin.getPlugin().getString("_UI_FairEditor_label")); //$NON-NLS-1$
@@ -1027,6 +1037,14 @@ public class FairTransactionEditor extends FairEditor {
 		getResource().unload();
 		editingDomain.getResourceSet().getResources().remove(getResource());
 		editingDomain.getResourceSet().eAdapters().remove(problemIndicationAdapter);
+		
+		ResourceSet rs = editingDomain.getResourceSet();
+		AdapterFactory factory = 
+			EcoreUtil.getAdapterFactory(rs.getAdapterFactories(), FairFactory.eINSTANCE.createFair());
+		if(factory !=null){
+			rs.getAdapterFactories().remove(factory);
+		}
+		
 		
 		getSite().getPage().removePartListener(partListener);
 
