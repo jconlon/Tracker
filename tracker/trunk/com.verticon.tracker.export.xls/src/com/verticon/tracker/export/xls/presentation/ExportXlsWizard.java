@@ -244,7 +244,12 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 		}
 
 		void export(IProgressMonitor monitor) throws IOException, CoreException {
-			super.export(monitor, premisesFile);
+			try {
+				super.export(monitor, premisesFile);
+			} catch (RuntimeException e) {
+				logger.error("Failed to export.",e);
+				throw e;
+			}
 		}
 	}
 

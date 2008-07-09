@@ -12,6 +12,8 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.Ovine;
+import com.verticon.tracker.Swine;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.edit.provider.AnimalItemProvider;
 import com.verticon.tracker.fair.Exhibit;
@@ -45,6 +47,9 @@ public class FairRegistrationSummaryWorkSheetBuilder implements
 		END_WEIGHT("Ending Weight"),
 		WEIGHT_GAIN_PER_DAY("Weight Gain Per Day"),
 		EAR_TAG("Ear Tag"),
+		SCRAPIES("Scrapie Tag"),
+		SWINEEARNOTCHL("Swine Left Ear Notching"),
+		SWINEEARNOTCHR("Swine Right Ear Notching"),
 		SALES_ORDER("Sales Order"),
 		EXHIBIT("Exhibit"),
 		COMMENTS("Comments");
@@ -130,59 +135,90 @@ public class FairRegistrationSummaryWorkSheetBuilder implements
 	 */
 	private void fillRow(Exhibit exhibit, HSSFRow row) {
 		HSSFCell cell = null;
-		// First Name
-		cell = row.createCell(Column.FIRST_NAME.colNum());
-		cell.setCellValue(exhibit.getExhibitor().getFirstName());
-		// Last Name
-		cell = row.createCell(Column.LAST_NAME.colNum());
-		cell.setCellValue(exhibit.getExhibitor().getLastName());
-		// Street
-		row.createCell(Column.STREET.colNum()).setCellValue(exhibit.getExhibitor().getStreet());
-		// City
-		row.createCell(Column.CITY.colNum()).setCellValue(exhibit.getExhibitor().getCity());
-		// State
-		row.createCell(Column.STATE.colNum()).setCellValue(exhibit.getExhibitor().getState());
-		// Zip
-		row.createCell(Column.ZIP.colNum()).setCellValue(exhibit.getExhibitor().getZipCode());
-		// Phone
-		row.createCell(Column.PHONE.colNum()).setCellValue(exhibit.getExhibitor().getPhone());
-		// Parent
-		if(exhibit.getExhibitor() instanceof YoungPerson && !((YoungPerson) exhibit.getExhibitor()).getParents().isEmpty()){
-			StringBuffer parents = new StringBuffer();
-			for (Person parent : ((YoungPerson) exhibit.getExhibitor()).getParents()) {
-				if(parents.length()>0){
-					parents.append("/");
+		if(exhibit.getExhibitor() !=null){
+			// First Name
+			cell = row.createCell(Column.FIRST_NAME.colNum());
+			cell.setCellValue(exhibit.getExhibitor().getFirstName());
+			// Last Name
+			cell = row.createCell(Column.LAST_NAME.colNum());
+			cell.setCellValue(exhibit.getExhibitor().getLastName());
+			// Street
+			row.createCell(Column.STREET.colNum()).setCellValue(exhibit.getExhibitor().getStreet());
+			// City
+			row.createCell(Column.CITY.colNum()).setCellValue(exhibit.getExhibitor().getCity());
+			// State
+			row.createCell(Column.STATE.colNum()).setCellValue(exhibit.getExhibitor().getState());
+			// Zip
+			row.createCell(Column.ZIP.colNum()).setCellValue(exhibit.getExhibitor().getZipCode());
+			// Phone
+			row.createCell(Column.PHONE.colNum()).setCellValue(exhibit.getExhibitor().getPhone());
+			// Parent
+			if(exhibit.getExhibitor() instanceof YoungPerson && !((YoungPerson) exhibit.getExhibitor()).getParents().isEmpty()){
+				StringBuffer parents = new StringBuffer();
+				for (Person parent : ((YoungPerson) exhibit.getExhibitor()).getParents()) {
+					if(parents.length()>0){
+						parents.append(" and ");
+					}
+					if(parent.getLastName().equals(exhibit.getExhibitor().getLastName())){
+						parents.append(parent.getFirstName());
+					}else{
+						parents.append(parent.getFirstName()+' '+parent.getLastName());
+					}
 				}
-				parents.append(parent.getName());
+				row.createCell(Column.PARENT.colNum()).setCellValue(parents.toString());
 			}
-			row.createCell(Column.PARENT.colNum()).setCellValue(parents.toString());
+			//Club
+			if(exhibit.getExhibitor() instanceof YoungPerson && ((YoungPerson) exhibit.getExhibitor()).getClub()!=null){
+				row.createCell(Column.CLUB.colNum()).setCellValue(((YoungPerson) exhibit.getExhibitor()).getClub().getName());
+			}
+
+			// PIN 
+			row.createCell(Column.PIN.colNum()).setCellValue(
+					exhibit.getExhibitor().getPin());
 		}
-		//Club
-		if(exhibit.getExhibitor() instanceof YoungPerson && ((YoungPerson) exhibit.getExhibitor()).getClub()!=null){
-			row.createCell(Column.CLUB.colNum()).setCellValue(((YoungPerson) exhibit.getExhibitor()).getClub().getName());
+		
+		if(exhibit.getAnimal() !=null){
+			// TypeOfAnimal 
+			row.createCell(Column.TYPE_OF_ANIMAL.colNum()).setCellValue(
+					getAnimalTypeName(exhibit.getAnimal()));
+
+			// Breed 
+			row.createCell(Column.BREED.colNum()).setCellValue(
+					exhibit.getAnimal().getBreed());
+
+			// Begin Weight
+			if( exhibit.getAnimal().lastWeighIn() !=null){
+				if(exhibit.getAnimal().lastWeighIn().previousWeighIn() != null){
+					WeighIn beginWeighInForAnimal = exhibit.getAnimal().lastWeighIn().previousWeighIn();
+					row.createCell(Column.BEGIN_WEIGHT.colNum()).setCellValue(beginWeighInForAnimal.getWeight());
+				}else{
+					row.createCell(Column.BEGIN_WEIGHT.colNum()).setCellValue(exhibit.getAnimal().getWeight());
+				}
+				
+			}
+			// END Weight
+			if( exhibit.getAnimal().getWeight() !=null && exhibit.getAnimal().lastWeighIn().previousWeighIn() != null){
+				row.createCell(Column.END_WEIGHT.colNum()).setCellValue(exhibit.getAnimal().getWeight());
+			}
+			// Weight Gain
+			if( exhibit.getAnimal().getWeightGainPerDay() !=null){
+				row.createCell(Column.WEIGHT_GAIN_PER_DAY.colNum()).setCellValue(exhibit.getAnimal().getWeightGainPerDay());
+			}
+			// EarTag
+			row.createCell(Column.EAR_TAG.colNum()).setCellValue(exhibit.getAnimal().getId());
+			//SCRAPIES
+			if(exhibit.getAnimal().getSpeciesCode()=="OVI"){
+				Ovine sheep = (Ovine)exhibit.getAnimal();
+				row.createCell(Column.SCRAPIES.colNum()).setCellValue(sheep.getScrapieTag());
+			}
+			//SWINE EARNOTCHING
+			if(exhibit.getAnimal().getSpeciesCode()=="POR"){
+				Swine swine = (Swine)exhibit.getAnimal();
+				row.createCell(Column.SWINEEARNOTCHL.colNum()).setCellValue(swine.getLeftEarNotching());
+				row.createCell(Column.SWINEEARNOTCHR.colNum()).setCellValue(swine.getRightEarNotching());
+			}
+			
 		}
-		
-		// PIN 
-		row.createCell(Column.PIN.colNum()).setCellValue(
-			exhibit.getExhibitor().getPin());
-		
-		// TypeOfAnimal 
-		row.createCell(Column.TYPE_OF_ANIMAL.colNum()).setCellValue(
-				getAnimalTypeName(exhibit.getAnimal()));
-		
-		// Breed 
-		row.createCell(Column.BREED.colNum()).setCellValue(
-			exhibit.getAnimal().getBreed());
-		
-		// Begin Weight
-		WeighIn beginWeighInForAnimal = exhibit.getAnimal().lastWeighIn().previousWeighIn();
-		row.createCell(Column.BEGIN_WEIGHT.colNum()).setCellValue(beginWeighInForAnimal.getWeight());
-		// END Weight
-		row.createCell(Column.END_WEIGHT.colNum()).setCellValue(exhibit.getAnimal().getWeight());
-		// Weight Gain
-		row.createCell(Column.WEIGHT_GAIN_PER_DAY.colNum()).setCellValue(exhibit.getAnimal().getWeightGainPerDay());
-		// EarTag
-		row.createCell(Column.EAR_TAG.colNum()).setCellValue(exhibit.getAnimal().getId());
 		// Sales Order
 		row.createCell(Column.SALES_ORDER.colNum()).setCellValue(exhibit.getSalesOrder());
 		// Exhibit
