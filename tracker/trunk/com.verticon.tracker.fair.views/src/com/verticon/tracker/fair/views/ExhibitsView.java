@@ -89,19 +89,19 @@ public class ExhibitsView extends TrackerView {
 					exhibits.add(exhib);
 				}
 			}
-			
-			exhibit = exhibits;
+			viewer.setSelection(new StructuredSelection(exhibits),true);
+			return;
 		}
 		setSelection(exhibit);
 	}
 	
 	/**
-	 * @param person
+	 * @param exhibitToSelect
 	 */
-	private void setSelection(Object person) {
-		if(person!=null){
+	private void setSelection(Object exhibitToSelect) {
+		if(exhibitToSelect!=null){
 			viewer.setSelection(
-				new StructuredSelection(person), true);
+				new StructuredSelection(exhibitToSelect), true);
 		}else{
 			viewer.setSelection(
 					new StructuredSelection());
