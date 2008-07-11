@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.impl.YouthClubImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.YouthClubImpl#getContacts <em>Contacts</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.YouthClubImpl#getComments <em>Comments</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,6 +71,26 @@ public class YouthClubImpl extends EObjectImpl implements YouthClub {
 	 * @ordered
 	 */
 	protected EList<Person> contacts;
+
+	/**
+	 * The default value of the '{@link #getComments() <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMMENTS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getComments() <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected String comments = COMMENTS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -128,6 +149,27 @@ public class YouthClubImpl extends EObjectImpl implements YouthClub {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setComments(String newComments) {
+		String oldComments = comments;
+		comments = newComments;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.YOUTH_CLUB__COMMENTS, oldComments, comments));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -135,6 +177,8 @@ public class YouthClubImpl extends EObjectImpl implements YouthClub {
 				return getName();
 			case FairPackage.YOUTH_CLUB__CONTACTS:
 				return getContacts();
+			case FairPackage.YOUTH_CLUB__COMMENTS:
+				return getComments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -155,6 +199,9 @@ public class YouthClubImpl extends EObjectImpl implements YouthClub {
 				getContacts().clear();
 				getContacts().addAll((Collection<? extends Person>)newValue);
 				return;
+			case FairPackage.YOUTH_CLUB__COMMENTS:
+				setComments((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -173,6 +220,9 @@ public class YouthClubImpl extends EObjectImpl implements YouthClub {
 			case FairPackage.YOUTH_CLUB__CONTACTS:
 				getContacts().clear();
 				return;
+			case FairPackage.YOUTH_CLUB__COMMENTS:
+				setComments(COMMENTS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -189,6 +239,8 @@ public class YouthClubImpl extends EObjectImpl implements YouthClub {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case FairPackage.YOUTH_CLUB__CONTACTS:
 				return contacts != null && !contacts.isEmpty();
+			case FairPackage.YOUTH_CLUB__COMMENTS:
+				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -205,6 +257,8 @@ public class YouthClubImpl extends EObjectImpl implements YouthClub {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", comments: ");
+		result.append(comments);
 		result.append(')');
 		return result.toString();
 	}

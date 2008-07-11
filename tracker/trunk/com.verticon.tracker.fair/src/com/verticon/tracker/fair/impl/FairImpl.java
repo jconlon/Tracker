@@ -39,6 +39,7 @@ import com.verticon.tracker.fair.util.AllExhibitsAdapterFactory;
  *   <li>{@link com.verticon.tracker.fair.impl.FairImpl#getDivisions <em>Divisions</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.FairImpl#getPremises <em>Premises</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.FairImpl#getPeople <em>People</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.FairImpl#getComments <em>Comments</em>}</li>
  * </ul>
  * </p>
  *
@@ -111,6 +112,26 @@ public class FairImpl extends EObjectImpl implements Fair {
 	 * @ordered
 	 */
 	protected EList<Person> people;
+
+	/**
+	 * The default value of the '{@link #getComments() <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMMENTS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getComments() <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected String comments = COMMENTS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -228,6 +249,27 @@ public class FairImpl extends EObjectImpl implements Fair {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setComments(String newComments) {
+		String oldComments = comments;
+		comments = newComments;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.FAIR__COMMENTS, oldComments, comments));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
 	 * Hand implemented for speed (versus OCL??) because this method is used to generate 
 	 * all the exhibits for the Fair. Similar pattern as Premises.eventHistory().
 	 * Originally generated with the following OCL:
@@ -286,6 +328,8 @@ public class FairImpl extends EObjectImpl implements Fair {
 				return basicGetPremises();
 			case FairPackage.FAIR__PEOPLE:
 				return getPeople();
+			case FairPackage.FAIR__COMMENTS:
+				return getComments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -317,6 +361,9 @@ public class FairImpl extends EObjectImpl implements Fair {
 				getPeople().clear();
 				getPeople().addAll((Collection<? extends Person>)newValue);
 				return;
+			case FairPackage.FAIR__COMMENTS:
+				setComments((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -344,6 +391,9 @@ public class FairImpl extends EObjectImpl implements Fair {
 			case FairPackage.FAIR__PEOPLE:
 				getPeople().clear();
 				return;
+			case FairPackage.FAIR__COMMENTS:
+				setComments(COMMENTS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -366,6 +416,8 @@ public class FairImpl extends EObjectImpl implements Fair {
 				return premises != null;
 			case FairPackage.FAIR__PEOPLE:
 				return people != null && !people.isEmpty();
+			case FairPackage.FAIR__COMMENTS:
+				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -382,6 +434,8 @@ public class FairImpl extends EObjectImpl implements Fair {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", comments: ");
+		result.append(comments);
 		result.append(')');
 		return result.toString();
 	}
