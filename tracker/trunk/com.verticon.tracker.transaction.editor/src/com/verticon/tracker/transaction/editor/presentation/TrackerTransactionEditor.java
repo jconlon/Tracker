@@ -53,6 +53,7 @@ import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.celleditor.AdapterFactoryTreeEditor;
@@ -126,7 +127,6 @@ import org.slf4j.LoggerFactory;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
-import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.presentation.IAnimalSelectionProvider;
 import com.verticon.tracker.editor.presentation.ICustomActionBarContributor;
@@ -783,18 +783,14 @@ public class TrackerTransactionEditor
 		//There may already be a registered AdapterFactory
 		ResourceSet rs = editingDomain.getResourceSet();
 		for (AdapterFactory registeredAdapterFactory : rs.getAdapterFactories()) {
-			if(registeredAdapterFactory instanceof ComposedAdapterFactory){
-				ComposedAdapterFactory caf = (ComposedAdapterFactory)registeredAdapterFactory;
-				if(caf.getFactoryForType(TrackerFactory.eINSTANCE.createPremises()) instanceof TrackerItemProviderAdapterFactory){
-					adapterFactory = caf;
-					break;
-				}
+			if(registeredAdapterFactory instanceof TrackerTransactionEditorAdapterFactory){
+				adapterFactory = (ComposedAdapterFactory)registeredAdapterFactory;
 			}
 		}
 		
 		if(adapterFactory==null){
 			// Create an adapter factory that yields item providers.
-			adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+			adapterFactory = new TrackerTransactionEditorAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 			adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 			adapterFactory.addAdapterFactory(new TrackerItemProviderAdapterFactory());
@@ -2020,6 +2016,7 @@ public class TrackerTransactionEditor
 		editingDomain.getResourceSet().getResources().remove(getResource());
 		editingDomain.getResourceSet().eAdapters().remove(problemIndicationAdapter);
 		
+		//Always leave the AdpaterFactory registered
 		//Remove the registered AdpaterFactory if there are no more Transaction Editor instances in workbench
 		IWorkbench workbench =getSite().getWorkbenchWindow().getWorkbench();
 		IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
@@ -2035,12 +2032,9 @@ public class TrackerTransactionEditor
 			ResourceSet rs = editingDomain.getResourceSet();
 			AdapterFactory adapterToRemove = null;
 			for (AdapterFactory registeredAdapterFactory : rs.getAdapterFactories()) {
-				if(registeredAdapterFactory instanceof ComposedAdapterFactory){
-					ComposedAdapterFactory caf = (ComposedAdapterFactory)registeredAdapterFactory;
-					if(caf.getFactoryForType(TrackerFactory.eINSTANCE.createPremises()) instanceof TrackerItemProviderAdapterFactory){
-						adapterToRemove = caf;
-						break;
-					}
+				if(registeredAdapterFactory instanceof TrackerTransactionEditorAdapterFactory){
+					adapterToRemove = registeredAdapterFactory;
+					break;
 				}
 			}
 			rs.getAdapterFactories().remove(adapterToRemove);
@@ -2133,5 +2127,21 @@ public class TrackerTransactionEditor
 
 	public void setSelectionViewerSelection(ISelection selection) {
 		selectionViewer.setSelection(selection);
+	}
+	
+	/**
+	 * A private ComposedAdapterFactory for this Editor that can be 
+	 * detected and removed at disposal time from the list of registered 
+	 * AdapterFactories.
+	 * @author jconlon
+	 *
+	 */
+	private class TrackerTransactionEditorAdapterFactory extends ComposedAdapterFactory{
+
+		public TrackerTransactionEditorAdapterFactory(
+				Registry adapterFactoryDescriptorRegistry) {
+			super(adapterFactoryDescriptorRegistry);
+		}
+		
 	}
 }
