@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
@@ -70,7 +69,6 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 
 import com.verticon.tracker.Premises;
-import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
 import com.verticon.tracker.fair.Fair;
@@ -413,10 +411,7 @@ public class FairTransactionEditor extends FairEditor {
 					ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 			adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 			adapterFactory.addAdapterFactory(new FairItemProviderAdapterFactory());
-			//To distinguish between the Fair and Tracker Registered AdapterFactories
-			//in order to remove them when they are not needed, this ComposedAdapterFactory
-			//cannot contain a TrackerItemProviderAdapterFactory
-			//			adapterFactory.addAdapterFactory(new TrackerItemProviderAdapterFactory());
+			adapterFactory.addAdapterFactory(new TrackerItemProviderAdapterFactory());
 			adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 			
 			editingDomain.getResourceSet().getAdapterFactories().add(
