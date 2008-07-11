@@ -160,7 +160,7 @@ public class FairItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_IdentificationPropertyCategory"),
 				 null));
 	}
 
@@ -182,7 +182,7 @@ public class FairItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
+				 getString("_UI_IdentificationPropertyCategory"),
 				 null));
 	}
 
