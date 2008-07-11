@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getLots <em>Lots</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getJudges <em>Judges</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getDepartment <em>Department</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getComments <em>Comments</em>}</li>
  * </ul>
  * </p>
  *
@@ -92,6 +93,26 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 	 * @ordered
 	 */
 	protected EList<Person> judges;
+
+	/**
+	 * The default value of the '{@link #getComments() <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMMENTS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getComments() <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected String comments = COMMENTS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -203,6 +224,27 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setComments(String newComments) {
+		String oldComments = comments;
+		comments = newComments;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.CLASS__COMMENTS, oldComments, comments));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -263,6 +305,8 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 				return getJudges();
 			case FairPackage.CLASS__DEPARTMENT:
 				return getDepartment();
+			case FairPackage.CLASS__COMMENTS:
+				return getComments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -290,6 +334,9 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 			case FairPackage.CLASS__DEPARTMENT:
 				setDepartment((Department)newValue);
 				return;
+			case FairPackage.CLASS__COMMENTS:
+				setComments((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -314,6 +361,9 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 			case FairPackage.CLASS__DEPARTMENT:
 				setDepartment((Department)null);
 				return;
+			case FairPackage.CLASS__COMMENTS:
+				setComments(COMMENTS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -334,6 +384,8 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 				return judges != null && !judges.isEmpty();
 			case FairPackage.CLASS__DEPARTMENT:
 				return getDepartment() != null;
+			case FairPackage.CLASS__COMMENTS:
+				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -350,6 +402,8 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", comments: ");
+		result.append(comments);
 		result.append(')');
 		return result.toString();
 	}

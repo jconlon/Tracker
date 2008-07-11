@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_3dynoYfdEdyXiYPOKyhf1A" activeDiagram="_3d5VUIfdEdyXiYPOKyhf1A">
   <model href="fair.ecore#/"/>
-  <diagrams xmi:id="_3d5VUIfdEdyXiYPOKyhf1A" position="0,0" size="100,100" name="fair" viewport="0,577">
+  <diagrams xmi:id="_3d5VUIfdEdyXiYPOKyhf1A" position="0,0" size="100,100" name="fair" viewport="0,44">
     <property xmi:id="_3kAkYIfdEdyXiYPOKyhf1A" key="pageFormatName" value="A4"/>
     <property xmi:id="_3kAkYYfdEdyXiYPOKyhf1A" key="diagramWidth" value="840"/>
     <property xmi:id="_3kAkYofdEdyXiYPOKyhf1A" key="diagramHeight" value="1188"/>
@@ -110,6 +110,11 @@
             <element href="../../com.verticon.tracker/model/tracker.ecore#//Animal/eventHistory"/>
           </semanticModel>
         </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_D398gE9kEd2he7h9fiexQQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_D398gU9kEd2he7h9fiexQQ" presentation="default">
+            <element href="../../com.verticon.tracker/model/tracker.ecore#//Animal/lastWeighIn"/>
+          </semanticModel>
+        </contained>
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" xmi:id="_ygBXAIfmEdyXiYPOKyhf1A" position="6,8" size="152,-1">
@@ -125,6 +130,11 @@
         <contained xsi:type="di:GraphNode" xmi:id="__kWI8IfmEdyXiYPOKyhf1A" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="__kWI8YfmEdyXiYPOKyhf1A" presentation="default">
             <element href="fair.ecore#//Fair/name"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_sBDVQE9kEd2he7h9fiexQQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sBDVQU9kEd2he7h9fiexQQ" presentation="default">
+            <element href="fair.ecore#//Fair/comments"/>
           </semanticModel>
         </contained>
       </contained>
@@ -203,6 +213,11 @@
             <element href="fair.ecore#//YouthClub/name"/>
           </semanticModel>
         </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_JdYF0E9kEd2he7h9fiexQQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_JdYF0U9kEd2he7h9fiexQQ" presentation="default">
+            <element href="fair.ecore#//YouthClub/comments"/>
+          </semanticModel>
+        </contained>
       </contained>
       <contained xsi:type="di:GraphNode" xmi:id="_0AfVJYfvEdyXiYPOKyhf1A">
         <property xmi:id="_0AfVJofvEdyXiYPOKyhf1A" key="eStructuralFeatureID" value="11"/>
@@ -233,6 +248,11 @@
             <element href="fair.ecore#//Division/name"/>
           </semanticModel>
         </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_NwSsgE9kEd2he7h9fiexQQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_NwSsgU9kEd2he7h9fiexQQ" presentation="default">
+            <element href="fair.ecore#//Division/comments"/>
+          </semanticModel>
+        </contained>
       </contained>
       <contained xsi:type="di:GraphNode" xmi:id="_YBkr1YfyEdyXiYPOKyhf1A">
         <property xmi:id="_YBkr1ofyEdyXiYPOKyhf1A" key="eStructuralFeatureID" value="11"/>
@@ -261,6 +281,11 @@
         <contained xsi:type="di:GraphNode" xmi:id="_4FfWcIgBEdyXiYPOKyhf1A" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_4FfWcYgBEdyXiYPOKyhf1A" presentation="default">
             <element href="fair.ecore#//Department/name"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_SC2G0E9kEd2he7h9fiexQQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_SC2G0U9kEd2he7h9fiexQQ" presentation="default">
+            <element href="fair.ecore#//Department/comments"/>
           </semanticModel>
         </contained>
       </contained>
@@ -367,6 +392,11 @@
             <element href="fair.ecore#//Class/name"/>
           </semanticModel>
         </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_X6R0Qk9kEd2he7h9fiexQQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_X6R0Q09kEd2he7h9fiexQQ" presentation="default">
+            <element href="fair.ecore#//Class/comments"/>
+          </semanticModel>
+        </contained>
       </contained>
       <contained xsi:type="di:GraphNode" xmi:id="_WtDCVYynEdyl6ZYewak4zQ">
         <property xmi:id="_WtDCVoynEdyl6ZYewak4zQ" key="eStructuralFeatureID" value="11"/>
@@ -388,6 +418,11 @@
         <contained xsi:type="di:GraphNode" xmi:id="_tE6cMIynEdyl6ZYewak4zQ" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_tE6cMYynEdyl6ZYewak4zQ" presentation="default">
             <element href="fair.ecore#//Lot/name"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_cWFRME9kEd2he7h9fiexQQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_cWFRMU9kEd2he7h9fiexQQ" presentation="default">
+            <element href="fair.ecore#//Lot/comments"/>
           </semanticModel>
         </contained>
       </contained>

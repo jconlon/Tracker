@@ -73,6 +73,7 @@ public class LotItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addCommentsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -91,6 +92,28 @@ public class LotItemProvider
 				 getString("_UI_Lot_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Lot_name_feature", "_UI_Lot_type"),
 				 FairPackage.Literals.LOT__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Comments feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCommentsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Lot_comments_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Lot_comments_feature", "_UI_Lot_type"),
+				 FairPackage.Literals.LOT__COMMENTS,
 				 true,
 				 false,
 				 false,
@@ -167,6 +190,7 @@ public class LotItemProvider
 
 		switch (notification.getFeatureID(Lot.class)) {
 			case FairPackage.LOT__NAME:
+			case FairPackage.LOT__COMMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case FairPackage.LOT__EXHIBITS:

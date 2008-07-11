@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.impl.DivisionImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.DivisionImpl#getDepartments <em>Departments</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.DivisionImpl#getComments <em>Comments</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,6 +78,26 @@ public class DivisionImpl extends EObjectImpl implements Division {
 	 * @ordered
 	 */
 	protected EList<Department> departments;
+
+	/**
+	 * The default value of the '{@link #getComments() <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMMENTS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getComments() <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected String comments = COMMENTS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -135,6 +156,27 @@ public class DivisionImpl extends EObjectImpl implements Division {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setComments(String newComments) {
+		String oldComments = comments;
+		comments = newComments;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.DIVISION__COMMENTS, oldComments, comments));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -171,6 +213,8 @@ public class DivisionImpl extends EObjectImpl implements Division {
 				return getName();
 			case FairPackage.DIVISION__DEPARTMENTS:
 				return getDepartments();
+			case FairPackage.DIVISION__COMMENTS:
+				return getComments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -191,6 +235,9 @@ public class DivisionImpl extends EObjectImpl implements Division {
 				getDepartments().clear();
 				getDepartments().addAll((Collection<? extends Department>)newValue);
 				return;
+			case FairPackage.DIVISION__COMMENTS:
+				setComments((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -209,6 +256,9 @@ public class DivisionImpl extends EObjectImpl implements Division {
 			case FairPackage.DIVISION__DEPARTMENTS:
 				getDepartments().clear();
 				return;
+			case FairPackage.DIVISION__COMMENTS:
+				setComments(COMMENTS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -225,6 +275,8 @@ public class DivisionImpl extends EObjectImpl implements Division {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case FairPackage.DIVISION__DEPARTMENTS:
 				return departments != null && !departments.isEmpty();
+			case FairPackage.DIVISION__COMMENTS:
+				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -241,6 +293,8 @@ public class DivisionImpl extends EObjectImpl implements Division {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", comments: ");
+		result.append(comments);
 		result.append(')');
 		return result.toString();
 	}

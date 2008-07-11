@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.verticon.tracker.fair.impl.LotImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.LotImpl#getExhibits <em>Exhibits</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.LotImpl#getClass_ <em>Class</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.LotImpl#getComments <em>Comments</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,6 +80,26 @@ public class LotImpl extends EObjectImpl implements Lot {
 	 * @ordered
 	 */
 	protected EList<Exhibit> exhibits;
+
+	/**
+	 * The default value of the '{@link #getComments() <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMMENTS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getComments() <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected String comments = COMMENTS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -178,6 +199,27 @@ public class LotImpl extends EObjectImpl implements Lot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setComments(String newComments) {
+		String oldComments = comments;
+		comments = newComments;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.LOT__COMMENTS, oldComments, comments));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -236,6 +278,8 @@ public class LotImpl extends EObjectImpl implements Lot {
 				return getExhibits();
 			case FairPackage.LOT__CLASS:
 				return getClass_();
+			case FairPackage.LOT__COMMENTS:
+				return getComments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -259,6 +303,9 @@ public class LotImpl extends EObjectImpl implements Lot {
 			case FairPackage.LOT__CLASS:
 				setClass((com.verticon.tracker.fair.Class)newValue);
 				return;
+			case FairPackage.LOT__COMMENTS:
+				setComments((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -280,6 +327,9 @@ public class LotImpl extends EObjectImpl implements Lot {
 			case FairPackage.LOT__CLASS:
 				setClass((com.verticon.tracker.fair.Class)null);
 				return;
+			case FairPackage.LOT__COMMENTS:
+				setComments(COMMENTS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -298,6 +348,8 @@ public class LotImpl extends EObjectImpl implements Lot {
 				return exhibits != null && !exhibits.isEmpty();
 			case FairPackage.LOT__CLASS:
 				return getClass_() != null;
+			case FairPackage.LOT__COMMENTS:
+				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -314,6 +366,8 @@ public class LotImpl extends EObjectImpl implements Lot {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", comments: ");
+		result.append(comments);
 		result.append(')');
 		return result.toString();
 	}

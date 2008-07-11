@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getClasses <em>Classes</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getSuperintendents <em>Superintendents</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getDivision <em>Division</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getComments <em>Comments</em>}</li>
  * </ul>
  * </p>
  *
@@ -92,6 +93,26 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 	 * @ordered
 	 */
 	protected EList<Person> superintendents;
+
+	/**
+	 * The default value of the '{@link #getComments() <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMMENTS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getComments() <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComments()
+	 * @generated
+	 * @ordered
+	 */
+	protected String comments = COMMENTS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -203,6 +224,27 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getComments() {
+		return comments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setComments(String newComments) {
+		String oldComments = comments;
+		comments = newComments;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.DEPARTMENT__COMMENTS, oldComments, comments));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -263,6 +305,8 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 				return getSuperintendents();
 			case FairPackage.DEPARTMENT__DIVISION:
 				return getDivision();
+			case FairPackage.DEPARTMENT__COMMENTS:
+				return getComments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -290,6 +334,9 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 			case FairPackage.DEPARTMENT__DIVISION:
 				setDivision((Division)newValue);
 				return;
+			case FairPackage.DEPARTMENT__COMMENTS:
+				setComments((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -314,6 +361,9 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 			case FairPackage.DEPARTMENT__DIVISION:
 				setDivision((Division)null);
 				return;
+			case FairPackage.DEPARTMENT__COMMENTS:
+				setComments(COMMENTS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -334,6 +384,8 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 				return superintendents != null && !superintendents.isEmpty();
 			case FairPackage.DEPARTMENT__DIVISION:
 				return getDivision() != null;
+			case FairPackage.DEPARTMENT__COMMENTS:
+				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -350,6 +402,8 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", comments: ");
+		result.append(comments);
 		result.append(')');
 		return result.toString();
 	}

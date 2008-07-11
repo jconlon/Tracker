@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.fair.Lot#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Lot#getExhibits <em>Exhibits</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Lot#getClass_ <em>Class</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Lot#getComments <em>Comments</em>}</li>
  * </ul>
  * </p>
  *
@@ -106,5 +107,31 @@ public interface Lot extends EObject {
 	 * @generated
 	 */
 	void setClass(com.verticon.tracker.fair.Class value);
+
+	/**
+	 * Returns the value of the '<em><b>Comments</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Comments</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Comments</em>' attribute.
+	 * @see #setComments(String)
+	 * @see com.verticon.tracker.fair.FairPackage#getLot_Comments()
+	 * @model
+	 * @generated
+	 */
+	String getComments();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.fair.Lot#getComments <em>Comments</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Comments</em>' attribute.
+	 * @see #getComments()
+	 * @generated
+	 */
+	void setComments(String value);
 
 } // Lot

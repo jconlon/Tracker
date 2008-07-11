@@ -74,6 +74,7 @@ public class ClassItemProvider
 
 			addNamePropertyDescriptor(object);
 			addJudgesPropertyDescriptor(object);
+			addCommentsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -118,6 +119,28 @@ public class ClassItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Comments feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCommentsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Class_comments_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Class_comments_feature", "_UI_Class_type"),
+				 FairPackage.Literals.CLASS__COMMENTS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -190,6 +213,7 @@ public class ClassItemProvider
 
 		switch (notification.getFeatureID(com.verticon.tracker.fair.Class.class)) {
 			case FairPackage.CLASS__NAME:
+			case FairPackage.CLASS__COMMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case FairPackage.CLASS__LOTS:

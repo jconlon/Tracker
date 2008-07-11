@@ -87,6 +87,7 @@ public class DivisionItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addCommentsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -105,6 +106,28 @@ public class DivisionItemProvider
 				 getString("_UI_Division_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Division_name_feature", "_UI_Division_type"),
 				 FairPackage.Literals.DIVISION__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Comments feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCommentsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Division_comments_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Division_comments_feature", "_UI_Division_type"),
+				 FairPackage.Literals.DIVISION__COMMENTS,
 				 true,
 				 false,
 				 false,
@@ -181,6 +204,7 @@ public class DivisionItemProvider
 
 		switch (notification.getFeatureID(Division.class)) {
 			case FairPackage.DIVISION__NAME:
+			case FairPackage.DIVISION__COMMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case FairPackage.DIVISION__DEPARTMENTS:
