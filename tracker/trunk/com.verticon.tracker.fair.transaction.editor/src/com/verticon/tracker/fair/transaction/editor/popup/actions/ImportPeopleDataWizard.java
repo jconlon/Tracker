@@ -296,8 +296,8 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 			    createPerson( compoundCommand, sheet.getRow(i), fair,editingDomain);
 			    count++;
 			} catch (RuntimeException e) {
-				e.printStackTrace();
-				logger.error("Failed to process row {}",i);
+//				e.printStackTrace();
+				logger.error("Failed to process row "+i,e);
 			}
 		}
 		editingDomain.getCommandStack().execute(compoundCommand);
@@ -345,7 +345,11 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 					person);
 			if(addedPerson){
 				joinYouthClub(compoundCommand, (YoungPerson)person, row, fair, editingDomain);
-				findParentsAtFair(compoundCommand, row, (YoungPerson)person, parents, fair, editingDomain);
+				if(parents.toLowerCase().equals("unknown") || parents.trim().length()< 1){
+					//do nothing parents was a placeholder
+				}else{
+					findParentsAtFair(compoundCommand, row, (YoungPerson)person, parents, fair, editingDomain);
+				}
 			}
 		}else{
 			logger.debug("Row={} found an existing person {}",row.getRowNum(), person.getName());
@@ -533,14 +537,19 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 				logger.debug("Row={} adding attribute={}, value={}", 
 						new Object[] {row.getRowNum(), feature.getName(),value});
 				if(feature==FairPackage.Literals.PERSON__NAME ){
-					//This is a composite name where lastName,firstName
-					String[] name = value.split(",");
-					if(name.length==2){
-						person.setLastName(name[0]);
-						person.setFirstName(name[1]);
-					}else{
-						logger.error("Could not parse the Person:name value <"+value+">. Make sure it conforms to a lastName,firstName format.");
+						person.setLastName(NormalizeName.parseLastName(value));
+						person.setFirstName(NormalizeName.parseFirstName(value));
+						logger.debug("Set person name {}", person.getName());	
+				}else if(feature==FairPackage.Literals.PERSON__SALES_ORDER){
+					try {
+						person.setSalesOrder(Integer.parseInt(value));
+					} catch (NumberFormatException e) {
+						logger.error("Could not set Person:salesOrder to "+value,e);
 					}
+				}else if(feature==FairPackage.Literals.PERSON__FIRST_NAME){
+					person.setFirstName(NormalizeName.capitalizeAndTrimEnglishNames(value.toLowerCase()));
+				}else if(feature==FairPackage.Literals.PERSON__LAST_NAME){
+					person.setLastName(NormalizeName.capitalizeAndTrimEnglishNames(value.toLowerCase()));
 				}else{
 					person.eSet(feature, value);
 				}
