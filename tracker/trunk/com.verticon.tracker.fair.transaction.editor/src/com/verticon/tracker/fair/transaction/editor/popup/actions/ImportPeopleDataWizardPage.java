@@ -26,10 +26,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -359,9 +356,16 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 		setPageComplete(false);
 
 		
-		if (!mapContainsPersonMapping()) {
+		try {
+			if (!mapContainsPersonMapping()) {
+				setMessage(null);
+				setErrorMessage("You must at a minimium select mapping for both Person:firstName and Person:lastName or just a Person:name"
+						);
+				return;
+			}
+		} catch (RuntimeException e) {
 			setMessage(null);
-			setErrorMessage("You must at a minimium select mapping for a Person:firstName and Person:lastName"
+			setErrorMessage(e.getMessage()
 					);
 			return;
 		}
@@ -376,26 +380,33 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 	private boolean mapContainsPersonMapping(){
 		boolean lastName = false;
 		boolean firstName = false;
+		boolean name = false;
+		
 		for (ColumnMapper columnMapper : spreadSheetColumnsToFeatureMap) {
 			if(columnMapper.getFeature()==FairPackage.Literals.PERSON__LAST_NAME){
-				lastName=true;;
+				lastName=true;
 			}else if(columnMapper.getFeature()==FairPackage.Literals.PERSON__FIRST_NAME){
-				firstName=true;;
+				firstName=true;
+			}else if(columnMapper.getFeature()==FairPackage.Literals.PERSON__NAME){
+				name=true;
 			}
 		}
-		return lastName && firstName;
+		if((lastName || firstName) && name){
+			throw new IllegalStateException("You can't combine mappings of Person:lastName or Person:firstName with a Person:name. Please reselect a different set of mappings.");
+		}
+		return (lastName && firstName) || name;
 	}
 
 	private void refreshColumnNames() {
 		HSSFSheet sheet = ((ImportPeopleDataWizard) getWizard())
 				.getWorkSheet();
 		HSSFRow row = null;
-		for (int i = sheet.getFirstRowNum()+1; i < sheet.getLastRowNum()+1; i++) {
+		for (int i = sheet.getFirstRowNum(); i < sheet.getLastRowNum()+1; i++) {
 			logger.debug("processing row {}",i);
 			 try {
 				row = sheet.getRow(i);
 				 if(row!=null){
-					 if(refreshColumnNames( row)){
+					 if(foundColumnNames( row)){
 						 headerRow=i;
 						 break;
 					 }
@@ -410,14 +421,16 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 
 	}
 
-	private boolean refreshColumnNames( HSSFRow row) {
+	private boolean foundColumnNames( HSSFRow row) {
 		for (short i = row.getFirstCellNum(); i < row.getLastCellNum(); i++) {
 			logger.debug("processing cell {}",i);
 			
 			String s = row.getCell(i).getStringCellValue();
-			spreadSheetColumnsToFeatureMap.add(new ColumnMapper(i, s));
+			if(s.trim().length()!=0){
+				spreadSheetColumnsToFeatureMap.add(new ColumnMapper(i, s));
+			}
 		}
-		return !spreadSheetColumnsToFeatureMap.isEmpty();
+		return spreadSheetColumnsToFeatureMap.size()>1;
 		
 	}
 
