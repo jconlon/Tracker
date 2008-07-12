@@ -100,7 +100,7 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 	 */
 	private void initializeTheFeaturesToMap() {
 		featuresToMap.add(FairPackage.Literals.FAIR__NAME);
-		
+		featuresToMap.add(FairPackage.Literals.PERSON__NAME);
 		for (EStructuralFeature feature : FairPackage.Literals.PERSON.getEAllStructuralFeatures()) {
 			if(!feature.isDerived()){
 				featuresToMap.add(feature);
@@ -111,6 +111,7 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		featuresToMap.add(TrackerPackage.Literals.SWINE__LEFT_EAR_NOTCHING);
 		featuresToMap.add(TrackerPackage.Literals.SWINE__RIGHT_EAR_NOTCHING);
 		featuresToMap.add(TrackerPackage.Literals.OVINE__SCRAPIE_TAG);
+		
 		for (EStructuralFeature feature : FairPackage.Literals.EXHIBIT.getEAllStructuralFeatures()) {
 			if(!feature.isDerived()){
 				featuresToMap.add(feature);
@@ -405,10 +406,8 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 	 * @return person based on row attributes
 	 */
 	private Person createPerson(HSSFRow row,Fair fair) {
-		Person person;
-		person = FairFactory.eINSTANCE.createPerson();
+		Person person = FairFactory.eINSTANCE.createPerson();
 		populatePersonAttributes(person, row);
-		
 		return person;
 	}
 	
@@ -533,7 +532,18 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 				}
 				logger.debug("Row={} adding attribute={}, value={}", 
 						new Object[] {row.getRowNum(), feature.getName(),value});
-				person.eSet(feature, value);
+				if(feature==FairPackage.Literals.PERSON__NAME ){
+					//This is a composite name where lastName,firstName
+					String[] name = value.split(",");
+					if(name.length==2){
+						person.setLastName(name[0]);
+						person.setFirstName(name[1]);
+					}else{
+						logger.error("Could not parse the Person:name value <"+value+">. Make sure it conforms to a lastName,firstName format.");
+					}
+				}else{
+					person.eSet(feature, value);
+				}
 			}else{
 				logger.debug("Row={} had no value for attribute={}",
 						row.getRowNum(), feature.getName());
