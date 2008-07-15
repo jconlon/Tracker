@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracker Help
+Bundle-SymbolicName: com.verticon.tracker.help;singleton:=true
+Bundle-Version: 0.1.0
+Bundle-Vendor: Verticon, Inc.
