@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %Plugin.name
+Bundle-SymbolicName: com.verticon.tracker.ocl.interpreter;singleton:=true
+Bundle-Version: 0.1.0
+Bundle-ClassPath: .
+Bundle-Activator: com.verticon.tracker.ocl.interpreter.OCLPlugin
+Bundle-Vendor: %Plugin.providerName
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.emf.ocl.examples.interpreter
+Eclipse-LazyStart: true
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
