@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" "../docbook-xml/docbookx.dtd" >
+<chapter>
+	<title>Introduction to Tracker</title>
+	<section>
+		<title>Service Proposition</title>
+		<para>
+			Tracker provides livestock producers, infrastructure
+			providers and process control auditors; an effective, low
+			cost solution for managing and exchanging animal premises
+			and event history information.
+		</para>
+	</section>
+	<section>
+		<title>Project Goals</title>
+		<para>
+			The Tracker project was undertaken to provide;
+			<orderedlist numeration="loweralpha">
+				<listitem>
+					<para>
+						A useful service for livestock producers and
+						infrastructure providers;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						A low cost solution to enable both large and
+						small scale deployment;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						An industry standard for livestock event history
+						inter-exchange.
+					</para>
+				</listitem>
+
+			</orderedlist>
+		</para>
+	</section>
+	<section id="chapter1desc">
+		<title>Functional Description</title>
+		<para>
+			Tracker documents animal event histories for farm animal
+			producers and/or livestock infrastructure providers. Animal
+			premises, animals and event histories are created, edited,
+			manipulated, and persisted as Premises documents. Premises
+			documents are displayed and manipulated with Tracker
+			editors, wizards, and various importing and exporting
+			utilities.
+		</para>
+		
+		<para>
+			Animals and Events are added to Tracker Premises Documents;
+			<orderedlist numeration="loweralpha">
+				<listitem>
+					<para>
+						Individually by the user via the Tracker Premise Document Editor and Properties Viewer;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						In bulk, by the user, through Tracker's Bulk Event Processing Utilities;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						In real time, from RFID readers, through the Tracker Transaction Processing Facility.
+					</para>
+				</listitem>
+
+			</orderedlist>
+		</para>
+	</section>
+</chapter>

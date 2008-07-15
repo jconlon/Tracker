@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    
+    <category
+          id="com.verticon.tracker.editor.Wizard.category.examples"
+          name="Tracker Examples"/> 
+    
+    <category
+          id="com.verticon.tracker.editor.Wizard.category.ID"
+          name="Tracker Wizards"/>
+          
+    
+     
+    <wizard
+      id = "com.verticon.tracker.editor.presentation.TrackerModelWizardID"
+      name = "%_UI_TrackerModelWizard_label"
+      class = "com.verticon.tracker.editor.presentation.TrackerMainModelWizard"
+      category = "com.verticon.tracker.editor.Wizard.category.ID"
+      icon = "icons/full/obj16/TrackerModelFile.gif">
+      <description>%_UI_TrackerModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+    
+    <wizard
+      id = "com.verticon.tracker.editor.presentation.TrackerTemplateWizardID"
+      name = "%_UI_TrackerTemplateWizard_label"
+      class = "com.verticon.tracker.editor.presentation.TrackerAnimalModelWizard"
+      category = "com.verticon.tracker.editor.Wizard.category.ID"
+      icon = "icons/full/obj16/AnimalModelFile.gif">
+      <description>%_UI_TrackerTemplateWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+    
+    <wizard
+            name="Tracker Example Project"
+            icon="icons/full/obj16/TrackerModelFile.gif"
+            category="com.verticon.tracker.editor.Wizard.category.examples"
+            class="com.verticon.tracker.editor.presentation.SampleTrackerProjectWizard"
+            project="true"
+            id="com.verticon.tracker.editor.wizards.NewTrackerProjectWizard">
+         <description>
+            Create a new Tabbed Properties View Hockey League Example Project
+         </description>
+      </wizard>
+  </extension>
+
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "com.verticon.tracker.editor.presentation.TrackerEditorID"
+        name = "%_UI_TrackerEditor_label"
+        icon = "icons/full/obj16/TrackerModelFile.gif"
+        extensions = "tracker, premises"
+        class = "com.verticon.tracker.editor.presentation.TrackerEditor" 
+        contributorClass="com.verticon.tracker.editor.presentation.TrackerActionBarContributor" >
+    </editor>
+  </extension>
+  
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "com.verticon.tracker.editor.presentation.AnimalEditorID"
+        name = "Animal Template Editor"
+        icon = "icons/full/obj16/AnimalModelFile.gif"
+        extensions = "animal"
+        class = "com.verticon.tracker.editor.presentation.TrackerEditor" 
+        contributorClass="com.verticon.tracker.editor.presentation.TrackerActionBarContributor" >
+    </editor>
+  </extension> 
+  <extension
+        point="org.eclipse.ui.popupMenus">
+        <!-- Popup extension associated with *.tags resources -->
+     <objectContribution
+           adaptable="true"
+           id="com.verticon.tracker.editor.popupMenu"
+           nameFilter="*.tags"
+           objectClass="org.eclipse.core.resources.IResource">
+        <menu
+              id="com.verticon.tracker.editor.popupSubMenu"
+              label="%_UI_TrackerPopup_label"
+              path="additions">
+           <groupMarker name="content"/>
+           <separator name="additions"/>
+        </menu>
+        <action
+              class="com.verticon.tracker.editor.actions.AddTagIdsAndTemplateActionDelegate"
+              enablesFor="+"
+              id="com.verticon.tracker.editor.actions.addTemplate"
+              label="%_UI_TrackerTagsPopupPremisesTemplateEvents_label"
+              menubarPath="com.verticon.tracker.editor.popupSubMenu/content"
+              tooltip="%_UI_TrackerTagsPopupPremisesTemplateEvents_description"/>    
+              
+        <action
+              class="com.verticon.tracker.editor.actions.AddTagIdsAnimalAndEventActionDelegate"
+              enablesFor="+"
+              id="com.verticon.tracker.editor.actions.addToAnimals"
+              label="%_UI_TrackerTagsPopupPremisesAnimalEvents_label"
+              menubarPath="com.verticon.tracker.editor.popupSubMenu/content"
+              tooltip="%_UI_TrackerTagsPopupPremisesAnimalEvents_description"/>
+       
+     </objectContribution>
+  </extension>    
+  <extension point="org.eclipse.ui.popupMenus">
+  	<objectContribution adaptable="true"
+  		id="com.verticon.tracker.editor.animal.popupMenu"
+  		objectClass="com.verticon.tracker.Animal">
+  		<menu id="com.verticon.tracker.editor.animal.popupSubMenu"
+  			label="%_UI_TrackerPopup_label" path="additions">
+  			<groupMarker name="content" />
+  			<separator name="additions" />
+  		</menu>
+  		<action
+  			class="com.verticon.tracker.editor.actions.AddTemplateToAnimalsActionDelegate"
+  			enablesFor="+"
+  			id="com.verticon.tracker.editor.actions.addTemplateEventsToAnimals"
+  			label="%_UI_TrackerTagsPopupAnimalsTemplateEvents_label"
+  			menubarPath="com.verticon.tracker.editor.animal.popupSubMenu/content"
+  			tooltip="%_UI_TrackerTagsPopupAnimalsTemplateEvents_description" />
+    <action
+          class="com.verticon.tracker.editor.actions.ChangeAnimalType"
+          enablesFor="+"
+          id="com.verticon.tracker.editor.actions.ChangeAnimalTypes"
+          label="Change Animal Type"
+          menubarPath="com.verticon.tracker.editor.animal.popupSubMenu/content"
+          tooltip="Changes the Types of the selected animals.">
+    </action>
+    <action
+          class="com.verticon.tracker.editor.util.SelectInOutline"
+          enablesFor="+"
+          id="com.verticon.tracker.editor.actions.SelectAnimalInOutline"
+          label="Select in Outline"
+          menubarPath="com.verticon.tracker.editor.animal.popupSubMenu/content"
+          tooltip="Selects one or more animals in the Outline view.">
+    </action>
+
+  	</objectContribution>
+  </extension>
+  
+  <extension point="org.eclipse.ui.popupMenus">
+  	<objectContribution adaptable="true"
+  		id="com.verticon.tracker.editor.event.popupMenu"
+  		objectClass="com.verticon.tracker.Event">
+  		<menu id="com.verticon.tracker.editor.event.popupSubMenu"
+  			label="%_UI_TrackerPopup_label" path="additions">
+  			<groupMarker name="content" />
+  			<separator name="additions" />
+  		</menu>
+  		<action
+  			class="com.verticon.tracker.editor.actions.ModifyEventsActionDelegate"
+  			enablesFor="+"
+  			id="com.verticon.tracker.editor.actions.ModifyEvents"
+  			label="Modify Events"
+  			menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
+  			tooltip="Modify attributes on selected Events." />
+
+		<action
+          class="com.verticon.tracker.editor.util.SelectInOutline"
+          enablesFor="+"
+          id="com.verticon.tracker.editor.actions.SelectEventInOutline"
+          label="Select in Outline"
+          menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
+          tooltip="Selects one or more events in the Outline view.">
+    	</action>
+		
+  	</objectContribution>
+  </extension>
+  
+  <extension
+        id="Tracker"
+        point="org.eclipse.core.runtime.products">
+     <product
+           application="org.eclipse.ui.ide.workbench"
+           description="Tracker models animal event history within a premises"
+           name="Tracker Animal Information System">
+        <property
+              name="windowImages"
+              value="icons/verticon32.gif"/>
+        <property
+              name="aboutText"
+              value="Tracker Animal Information System&#x0A;Version: {0}&#x0A;&#x0A;(c) Copyright Verticon, Inc. 2008.  All rights reserved. &#x0A;&#x0A;Visit http:/www.verticon.com&#x0A;&#x0A;Tracker is powered by Eclipse technology and includes Eclipse plugins &#x0A;that can be installed and used with other Eclipse (3.3)-based offerings."/>
+        <property
+              name="aboutImage"
+              value="icons/tracker_lg.gif"/>
+        <property
+              name="startupForegroundColor"
+              value="C8D5EA"/>
+        <property
+              name="startupProgressRect"
+              value="62,400,515,15"/>
+        <property
+              name="startupMessageRect"
+              value="7,225,441,20"/>
+        <property
+              name="appName"
+              value="Tracker Animal Information System">
+        </property>
+        <property
+              name="preferenceCustomization"
+              value="plugin_customization.ini">
+        </property>
+        <property
+              name="introTitle"
+              value="Welcome to the Tracker Animal Information Manager">
+        </property>
+        <property
+              name="introBrandingImageText"
+              value="Tracker by Verticon, Inc.">
+        </property>
+        <property
+              name="introDescription-overview"
+              value="Tracker overview description here....">
+        </property>
+     </product>
+  </extension>
+  <extension
+        point="org.eclipse.ui.decorators">
+     <decorator
+           adaptable="true"
+           class="com.verticon.tracker.editor.decorators.TrackerTemplateDecorator"
+           id="com.verticon.tracker.editor.decorator"
+           label="Template"
+           lightweight="true"
+           state="true">
+        <enablement>
+           <and>
+              <objectClass name="org.eclipse.core.resources.IResource"/>
+              <objectState
+                    name="name"
+                    value="*.tracker"/>
+              <objectState
+                    name="persistentProperty"
+                    value="com.vertion.tracker.fileType=template"/>
+           </and>
+        </enablement>
+     </decorator>
+  </extension>
+  <extension
+        point="org.eclipse.ui.preferencePages">
+     <page
+           class="com.verticon.tracker.editor.preferences.internal.TrackerEditorPreferencePage"
+           id="com.verticon.tracker.prefs.view"
+           name="Tracker">
+     </page>
+  </extension>
+  
+  <extension
+        point="org.eclipse.core.runtime.preferences">
+     <initializer
+           class="com.verticon.tracker.editor.preferences.internal.PreferenceInitializer">
+     </initializer>
+  </extension>
+  <extension
+        point="org.eclipse.ui.perspectives">
+     <perspective
+           class="com.verticon.tracker.editor.perspective.PerspectiveFactory"
+           id="com.verticon.tracker.perspective"
+           icon="icons/full/obj16/TrackerModelFile.gif"
+           name="Tracker">
+     </perspective>
+  </extension>
+  <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+         <perspectiveShortcut id="com.verticon.tracker.perspective"/>
+      </perspectiveExtension>
+   </extension>
+  <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension targetID="com.verticon.tracker.perspective">
+         <perspectiveShortcut id="org.eclipse.ui.resourcePerspective"/>
+         <newWizardShortcut
+               id="com.verticon.tracker.editor.presentation.TrackerModelWizardID">
+         </newWizardShortcut>
+         <newWizardShortcut
+               id="com.verticon.tracker.editor.presentation.TrackerTemplateWizardID">
+         </newWizardShortcut>
+      </perspectiveExtension>
+   </extension>
+   
+   <extension point="org.eclipse.ui.intro"> 
+    <introProductBinding
+        introId="org.eclipse.ui.intro.universal"
+        productId="com.verticon.tracker.editor.Tracker">
+    </introProductBinding>
+    <intro
+          class="org.eclipse.ui.intro.config.CustomizableIntroPart"
+          id="com.verticon.tracker.editor.intro">
+    </intro>
+    <introProductBinding
+          introId="com.verticon.tracker.editor.intro"
+          productId="com.verticon.tracker.editor.Tracker">
+    </introProductBinding>
+   </extension>
+   
+</plugin>

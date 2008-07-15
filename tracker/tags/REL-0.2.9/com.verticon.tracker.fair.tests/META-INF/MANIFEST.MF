@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: com.verticon.tracker.fair.tests; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: com.verticon.tracker.fair.tests
+Require-Bundle: org.junit;visibility:=reexport,
+ org.eclipse.core.runtime,
+ com.verticon.tracker.fair;visibility:=reexport,
+ com.verticon.tracker;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.ocl,
+ org.eclipse.ocl.ecore
+Eclipse-LazyStart: true

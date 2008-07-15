@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %Plugin.name
+Bundle-SymbolicName: com.verticon.tracker.validation.core;singleton:=true
+Bundle-Version: 0.1.3
+Bundle-Vendor: %Plugin.providerName
+Bundle-Localization: plugin
+Eclipse-LazyStart: false
+Require-Bundle: org.eclipse.emf.validation,
+ org.eclipse.ocl.ecore,
+ com.verticon.tracker,
+ org.eclipse.core.runtime
