@@ -1,0 +1,110 @@
+/**
+ * 
+ */
+package com.verticon.tracker.reader.wizards;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.jface.dialogs.IDialogSettings;
+import org.eclipse.jface.wizard.IWizardNode;
+import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbench;
+
+import com.verticon.tracker.editor.presentation.SelectAnimalDocumentWizardPage;
+import com.verticon.tracker.editor.util.AnimalTemplateBean;
+import com.verticon.tracker.reader.IReader;
+import com.verticon.tracker.reader.IReaderWizard;
+import com.verticon.tracker.reader.ReaderPlugin;
+import com.verticon.tracker.reader.views.ReaderViewModel;
+
+/**
+ * Wizard for adding an EventReader to the Reader Views.
+ * 
+ * Pages: 1. Select the Animal document to use as a template 2. Select the file
+ * to Tail new TagIds
+ * 
+ * 
+ * 
+ * @author jconlon
+ * 
+ */
+public class AddEventReaderWizard extends Wizard {
+
+	private static final String WIZARD_TITLE = "Add an Event Reader";
+	public static final String WIZARD_DIALOG_TAG = "AddReaderWizard";
+
+	private final ReaderViewModel readerViewModel;
+	private IWorkbench workbench;
+
+	private SelectAnimalDocumentWizardPage selectAnimalDocumentWizardPage;
+
+	private EventReaderWizardSelectionPage publisherWizardSelection;
+
+	public AddEventReaderWizard(ReaderViewModel readerViewModel) {
+		super();
+		this.readerViewModel = readerViewModel;
+		IDialogSettings trackerSettings = ReaderPlugin.getDefault()
+				.getDialogSettings();
+
+		IDialogSettings wizardSettings = trackerSettings
+				.getSection(WIZARD_DIALOG_TAG);
+		if (wizardSettings == null) {
+			wizardSettings = trackerSettings.addNewSection(WIZARD_DIALOG_TAG);
+		}
+		setDialogSettings(wizardSettings);
+	}
+
+	@Override
+	public boolean canFinish() {
+		AnimalTemplateBean templateBean = selectAnimalDocumentWizardPage
+				.getTemplateBean();
+		if (templateBean != null && templateBean.numberOfEvents() > 0) {
+			publisherWizardSelection.isPageComplete();
+		}
+
+		return false;
+	}
+
+	public void init(IWorkbench workbench) {
+		this.workbench = workbench;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
+	 */
+	@Override
+	public boolean performFinish() {
+		IFile templateFile = selectAnimalDocumentWizardPage.getSelectedFile();
+		IWizardNode wizardNode = publisherWizardSelection.getSelectedNode();
+		IReaderWizard publisherWizard = (IReaderWizard) wizardNode
+				.getWizard();
+		if (publisherWizard == null || publisherWizard.getReader() == null) {
+			return false;
+		}
+
+		IReader publisher = publisherWizard.getReader();
+		publisher.setTemplate(templateFile.getFullPath().toPortableString());
+
+		readerViewModel.addReader(publisher);
+		return true;
+	}
+
+	@Override
+	public void addPages() {
+		setWindowTitle(WIZARD_TITLE);
+		selectAnimalDocumentWizardPage = new SelectAnimalDocumentWizardPage();
+		selectAnimalDocumentWizardPage.setTitle("Select an Animal Document to use as a template for the Event Publisher");
+		addPage(selectAnimalDocumentWizardPage);
+
+		IEditorPart editor = workbench.getActiveWorkbenchWindow()
+				.getActivePage().getActiveEditor();
+		selectAnimalDocumentWizardPage.init(editor);
+
+		publisherWizardSelection = new EventReaderWizardSelectionPage(
+				"Select Event Reader", workbench);
+		addPage(publisherWizardSelection);
+	}
+
+}
