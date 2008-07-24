@@ -19,6 +19,7 @@ import com.verticon.tracker.EventAttributeSchema;
 import com.verticon.tracker.EventSchema;
 import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.TrackerPackage;
+import java.util.Map;
 import java.util.Map.Entry;
 
 /**
@@ -152,6 +153,7 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 		}
 	}
 
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * Implemented operation
@@ -159,7 +161,7 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unchecked")
-	public EventAttributeSchema findSchema(Entry eventAttribute) {
+	public EventAttributeSchema findSchema(Map.Entry<String, String> eventAttribute) {
 		if(getEventSchema() ==null ){
 			return null;
 		}

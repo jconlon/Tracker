@@ -5,6 +5,7 @@
  */
 package com.verticon.tracker.impl;
 
+import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Caprine;
 import com.verticon.tracker.GoatBreed;
 import com.verticon.tracker.TrackerPackage;
@@ -190,6 +191,16 @@ public class CaprineImpl extends AnimalImpl implements Caprine {
 		result.append(goatBreed);
 		result.append(')');
 		return result.toString();
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public AnimalType getType() {
+		return AnimalType.CAPRINE;
 	}
 
 } //CaprineImpl

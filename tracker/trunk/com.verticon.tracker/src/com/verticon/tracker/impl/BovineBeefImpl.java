@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.TrackerPackage;
@@ -178,6 +179,16 @@ public class BovineBeefImpl extends BovineImpl implements BovineBeef {
 			return "";
 		}
 		return getBeefBreed().getName();
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public AnimalType getType() {
+		return AnimalType.BOVINE_BEEF;
 	}
 
 } //BovineBeefImpl

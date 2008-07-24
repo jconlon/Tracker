@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 
+import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.SheepBreed;
 import com.verticon.tracker.TrackerPackage;
@@ -246,6 +247,16 @@ public class OvineImpl extends AnimalImpl implements Ovine {
 		}
 
 		return getSheepBreed().getName();
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public AnimalType getType() {
+		return AnimalType.OVINE;
 	}
 
 } //OvineImpl

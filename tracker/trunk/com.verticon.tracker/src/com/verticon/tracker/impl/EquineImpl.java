@@ -9,6 +9,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Equine;
 import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.TrackerPackage;
@@ -188,6 +189,16 @@ public class EquineImpl extends AnimalImpl implements Equine {
 		result.append(horseBreed);
 		result.append(')');
 		return result.toString();
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public AnimalType getType() {
+		return AnimalType.EQUINE;
 	}
 
 } //EquineImpl

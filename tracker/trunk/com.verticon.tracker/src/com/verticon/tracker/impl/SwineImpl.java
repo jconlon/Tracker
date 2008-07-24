@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker.impl;
 
+import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Swine;
 import com.verticon.tracker.SwineBreed;
 import com.verticon.tracker.TrackerPackage;
@@ -299,6 +300,16 @@ public class SwineImpl extends AnimalImpl implements Swine {
 		}
 
 		return getSwineBreed().getName();
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public AnimalType getType() {
+		return AnimalType.SWINE;
 	}
 
 } //SwineImpl
