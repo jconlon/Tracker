@@ -18,4 +18,8 @@ public interface SwineValidator {
 	boolean validate();
 
 	boolean validateSwineBreed(SwineBreed value);
+
+	boolean validateRightEarNotching(int value);
+
+	boolean validateLeftEarNotching(int value);
 }
