@@ -2,6 +2,7 @@ package com.verticon.tracker.editor.presentation;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -68,6 +69,24 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
+
+	/**
+	 * The supported extensions for created files.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final List<String> FILE_EXTENSIONS =
+		Collections.unmodifiableList(Arrays.asList(TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerEditorFilenameExtensions").split("\\s*,\\s*")));
+
+	/**
+	 * A formatted list of supported file extensions, suitable for display.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String FORMATTED_FILE_EXTENSIONS =
+		TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", ");
 
 	/**
 	 * This caches an instance of the model package.
@@ -289,21 +308,15 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 	@Override
 		protected boolean validatePage() {
 			if (super.validatePage()) {
-				// Make sure the file ends in ".tracker".
-				//
-				String requiredExt = TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerEditorFilenameExtension");
-				String enteredExt = new Path(getFileName()).getFileExtension();
-				if (enteredExt == null || !enteredExt.equals(requiredExt)) {
-					setErrorMessage(TrackerReportEditorPlugin.INSTANCE.getString("_WARN_FilenameExtension", new Object [] { requiredExt }));
+				String extension = new Path(getFileName()).getFileExtension();
+				if (extension == null || !FILE_EXTENSIONS.contains(extension)) {
+					String key = FILE_EXTENSIONS.size() > 1 ? "_WARN_FilenameExtensions" : "_WARN_FilenameExtension";
+					setErrorMessage(TrackerReportEditorPlugin.INSTANCE.getString(key, new Object [] { FORMATTED_FILE_EXTENSIONS }));
 					return false;
 				}
-				else {
-					return true;
-				}
+				return true;
 			}
-			else {
-				return false;
-			}
+			return false;
 		}
 
 		/**
@@ -537,7 +550,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 		newFileCreationPage = new TrackerModelWizardNewFileCreationPage("Whatever", selection);
 		newFileCreationPage.setTitle(TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerModelWizard_label"));
 		newFileCreationPage.setDescription(TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerModelWizard_description"));
-		newFileCreationPage.setFileName(TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerEditorFilenameDefaultBase") + "." + TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerEditorFilenameExtension"));
+		newFileCreationPage.setFileName(TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
 		addPage(newFileCreationPage);
 
 		// Try and get the resource selection to determine a current directory for the file dialog.
@@ -564,7 +577,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 					// Make up a unique new name here.
 					//
 					String defaultModelBaseFilename = TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerEditorFilenameDefaultBase");
-					String defaultModelFilenameExtension = TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerEditorFilenameExtension");
+					String defaultModelFilenameExtension = FILE_EXTENSIONS.get(0);
 					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
 						modelFilename = defaultModelBaseFilename + i + "." + defaultModelFilenameExtension;
