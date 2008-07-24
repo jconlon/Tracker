@@ -7,6 +7,7 @@
 package com.verticon.tracker.validation;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.Tag;
 
@@ -49,6 +50,10 @@ public interface AnimalValidator {
 	boolean validateSire(Animal value);
 
 	boolean validateWeight(Integer value);
+
+	boolean validateWeightGainPerDay(Double value);
+
+	boolean validateType(AnimalType value);
 
 	boolean validateWeightGainPerDay(Integer value);
 

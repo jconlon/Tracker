@@ -18,4 +18,6 @@ public interface OvineValidator {
 	boolean validate();
 
 	boolean validateSheepBreed(SheepBreed value);
+
+	boolean validateScrapieTag(String value);
 }
