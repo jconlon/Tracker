@@ -5,6 +5,7 @@
  */
 package com.verticon.tracker;
 
+import java.util.Map;
 import java.util.Map.Entry;
 import org.eclipse.emf.common.util.EMap;
 
@@ -87,7 +88,6 @@ public interface GenericEvent extends Event {
 	 * @model eventAttributeMapType="com.verticon.tracker.EventAttribute<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
-	EventAttributeSchema findSchema(Entry eventAttribute);
+	EventAttributeSchema findSchema(Map.Entry<String, String> eventAttribute);
 
 } // GenericEvent
