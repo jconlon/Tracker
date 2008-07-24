@@ -412,6 +412,7 @@
           propertyDescription="Weight of the animal in pounds" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/weight"/>
       <genFeatures property="Readonly" createChild="false" propertyCategory="Weight"
           propertyDescription="Weight gain per day in pounds" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/weightGainPerDay"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/type"/>
       <genOperations ecoreOperation="tracker.ecore#//Animal/allEvents"/>
       <genOperations ecoreOperation="tracker.ecore#//Animal/addTemplate">
         <genParameters ecoreParameter="tracker.ecore#//Animal/addTemplate/eventTemplate"/>
@@ -519,20 +520,12 @@
     <genClasses ecoreClass="tracker.ecore#//TagRetired"/>
     <genClasses ecoreClass="tracker.ecore#//AnimalMissing"/>
     <genClasses ecoreClass="tracker.ecore#//ICVI"/>
-    <genClasses ecoreClass="tracker.ecore#//FairRegistration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//FairRegistration/participant"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//FairRegistration/address"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//FairRegistration/phone"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//FairRegistration/parent"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//FairRegistration/club"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//FairRegistration/SaleOrder"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//FairRegistration/Exhibit"/>
-    </genClasses>
     <genClasses ecoreClass="tracker.ecore#//WeighIn">
       <genFeatures createChild="false" propertyCategory="Weight" propertyDescription="Weight of animal in pounds"
           ecoreFeature="ecore:EAttribute tracker.ecore#//WeighIn/weight"/>
       <genFeatures property="Readonly" createChild="false" propertyCategory="Weight"
           propertyDescription="Weight gain per day in pounds" ecoreFeature="ecore:EAttribute tracker.ecore#//WeighIn/weightGainPerDay"/>
+      <genOperations ecoreOperation="tracker.ecore#//WeighIn/previousWeighIn"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Swine">
       <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//Swine/swineBreed">
