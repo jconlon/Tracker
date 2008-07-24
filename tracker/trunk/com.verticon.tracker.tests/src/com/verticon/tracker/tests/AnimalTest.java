@@ -39,6 +39,7 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getLastEventDateTime() <em>Last Event Date Time</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getWeight() <em>Weight</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getWeightGainPerDay() <em>Weight Gain Per Day</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getType() <em>Type</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -378,7 +379,7 @@ public abstract class AnimalTest extends TestCase {
 				secondWeighInDate.getTime());
 		we2.setWeight(250);
 		tag.getEvents().add(we2);
-		assertEquals(new Integer(15), animal.getWeightGainPerDay());
+		assertEquals(new Double(15.0), animal.getWeightGainPerDay());
 		
 		//Third weighIn today 350 lbs
 		WeighIn we3 = TrackerFactory.eINSTANCE.createWeighIn();
@@ -389,12 +390,25 @@ public abstract class AnimalTest extends TestCase {
 		we3.setDateTime(
 				thirdWeighInDate.getTime());
 		tag.getEvents().add(we3);
-		assertEquals(new Integer(10), animal.getWeightGainPerDay());
+		assertEquals(new Double(10.0), animal.getWeightGainPerDay());
 	}
 	
+	/**
+	 * Tests the '{@link com.verticon.tracker.Animal#getType() <em>Type</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#getType()
+	 * @generated NOT
+	 */
+	public void testGetType() {
+		Animal animal = getFixture();
+		assertNotNull(animal.getType());
+		assertTrue(animal.getClass().getSimpleName()+" "+animal.getType().getLiteral(), animal.getClass().getSimpleName().startsWith(animal.getType().getLiteral()));
+	}
+
 	public void testGetWeightGainPerDayWithNulls() {
 		Animal animal = getFixture();
-		assertNull("No weight on animal", animal.getWeight());
+		assertNull("Should have no weight on animal", animal.getWeight());
 		
 		Tag tag = TrackerFactory.eINSTANCE.createTag();
 		animal.getTags().add(tag);
@@ -428,7 +442,7 @@ public abstract class AnimalTest extends TestCase {
 				secondWeighInDate.getTime());
 		we2.setWeight(250);
 		tag.getEvents().add(we2);
-		assertEquals(new Integer(15), animal.getWeightGainPerDay());
+		assertEquals(new Double(15.0), animal.getWeightGainPerDay());
 		
 		//Third weighIn today 350 lbs
 		WeighIn we3 = TrackerFactory.eINSTANCE.createWeighIn();
@@ -439,7 +453,7 @@ public abstract class AnimalTest extends TestCase {
 		we3.setDateTime(
 				thirdWeighInDate.getTime());
 		tag.getEvents().add(we3);
-		assertEquals(new Integer(10), animal.getWeightGainPerDay());
+		assertEquals(new Double(10.0), animal.getWeightGainPerDay());
 	}
 
 	/**
@@ -621,12 +635,27 @@ public abstract class AnimalTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#lastWeighIn()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testLastWeighIn() {
-		// TODO: implement this operation test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		Animal animal = getFixture();
+		assertNull("Should have no weight on animal", animal.getWeight());
+		
+		Tag tag = TrackerFactory.eINSTANCE.createTag();
+		animal.getTags().add(tag);
+		//First weighIn 10 days ago and 100 lbs
+		WeighIn we = TrackerFactory.eINSTANCE.createWeighIn();
+		we.setComments("First");
+		Calendar firstWeighInDate = Calendar.getInstance();
+		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
+		we.setDateTime(
+				firstWeighInDate.getTime());
+		we.setWeight(100);
+		tag.getEvents().add(we);
+		
+		assertNotNull( animal.lastWeighIn());
+		
+		assertEquals(we, animal.lastWeighIn());
 	}
 
 } //AnimalTest
