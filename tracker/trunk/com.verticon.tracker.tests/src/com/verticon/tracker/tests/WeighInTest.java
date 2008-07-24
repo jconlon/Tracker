@@ -138,7 +138,7 @@ public class WeighInTest extends EventTest {
 				weImpl2.getPreviousWeighInEvents().size());
 		assertEquals("Second event should find only the first event",we, 
 				weImpl2.getPreviousWeighInEvents().iterator().next());
-		assertEquals("15 lbs per day", new Integer(15), we2.getWeightGainPerDay());
+		assertEquals("15 lbs per day", new Double(15.0), we2.getWeightGainPerDay());
 		
 		
 		//Third weighIn today 250 lbs
@@ -159,7 +159,7 @@ public class WeighInTest extends EventTest {
 				weImpl2.getPreviousWeighInEvents().size());
 		assertEquals("Second event should find only the first event",we, 
 				weImpl2.getPreviousWeighInEvents().iterator().next());
-		assertEquals("15 lbs per day", new Integer(15), we2.getWeightGainPerDay());
+		assertEquals("15 lbs per day", new Double(15.0), we2.getWeightGainPerDay());
 		
 		
 		WeighInImpl weImpl3 = (WeighInImpl)we3;
@@ -167,7 +167,7 @@ public class WeighInTest extends EventTest {
 				weImpl3.getPreviousWeighInEvents().size());
 		assertEquals("Third event should find only the second event",we2, 
 				weImpl3.previousWeighIn());
-		assertEquals("10 lbs per day", new Integer(10), we3.getWeightGainPerDay());
+		assertEquals("10 lbs per day", new Double(10.0), we3.getWeightGainPerDay());
 		
 		
 		
@@ -178,12 +178,46 @@ public class WeighInTest extends EventTest {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.WeighIn#previousWeighIn()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testPreviousWeighIn() {
-		// TODO: implement this operation test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		//Create an animal, a tag and a couple of weighIn Events
+		Animal animal = TrackerFactory.eINSTANCE.createBovineBeef();
+		Tag tag = TrackerFactory.eINSTANCE.createTag();
+		animal.getTags().add(tag);
+		//First weighIn 10 days ago and 100 lbs
+		WeighIn we = TrackerFactory.eINSTANCE.createWeighIn();
+		we.setComments("First");
+		Calendar firstWeighInDate = Calendar.getInstance();
+		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
+		we.setDateTime(
+				firstWeighInDate.getTime());
+		we.setWeight(100);
+		tag.getEvents().add(we);
+		
+		//Second weighIn today 250 lbs
+		WeighIn we2 = TrackerFactory.eINSTANCE.createWeighIn();
+		we2.setComments("Second");
+		Calendar secondWeighInDate = Calendar.getInstance();
+		we2.setDateTime(
+				secondWeighInDate.getTime());
+		we2.setWeight(250);
+		tag.getEvents().add(we2);
+		
+		WeighInImpl weImpl = (WeighInImpl)we;
+		assertTrue("First event should not show any other events", 
+				weImpl.getPreviousWeighInEvents().isEmpty());
+		
+		
+//		assertEquals("First event should show nothing", 0, we.getWeightGainPerDay());
+		assertNull("First event should show nothing",  we.getWeightGainPerDay());
+		
+		WeighInImpl weImpl2 = (WeighInImpl)we2;
+		assertNotNull("Second event should have a previous event",
+				weImpl2.previousWeighIn());
+		assertEquals("Second event should equal a previous event",we, 
+				weImpl2.previousWeighIn());
+		
 	}
 
 	@Override
