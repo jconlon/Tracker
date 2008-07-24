@@ -36,6 +36,7 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getSire <em>Sire</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getWeight <em>Weight</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getWeightGainPerDay <em>Weight Gain Per Day</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -348,6 +349,23 @@ public interface Animal extends EObject {
 	 * @generated
 	 */
 	Double getWeightGainPerDay();
+
+	/**
+	 * Returns the value of the '<em><b>Type</b></em>' attribute.
+	 * The literals are from the enumeration {@link com.verticon.tracker.AnimalType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type</em>' attribute.
+	 * @see com.verticon.tracker.AnimalType
+	 * @see com.verticon.tracker.TrackerPackage#getAnimal_Type()
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	AnimalType getType();
 
 	/**
 	 * <!-- begin-user-doc -->
