@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.Sex;
@@ -61,6 +62,7 @@ import com.verticon.tracker.util.Species;
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSire <em>Sire</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getWeight <em>Weight</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getWeightGainPerDay <em>Weight Gain Per Day</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -266,6 +268,17 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	protected static final Double WEIGHT_GAIN_PER_DAY_EDEFAULT = null;
 
 	
+	/**
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final AnimalType TYPE_EDEFAULT = AnimalType.UNSPECIFIED;
+
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -579,7 +592,17 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 		return lastWeighIn==null?null: lastWeighIn.getWeightGainPerDay();
 	}
 
-//	private WeighIn getLastWeighIn(){
+   /**
+	 * <!-- begin-user-doc -->
+	 * Overrided by subclasses
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public AnimalType getType() {
+		throw new UnsupportedOperationException();
+	}
+
+	//	private WeighIn getLastWeighIn(){
 //		WeighIn lastWeighIn = null;
 //		if(!eventHistory().isEmpty()){
 //			CollectionFilter<Event> weighInsProducer = new CollectionFilter<Event>();
@@ -738,6 +761,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return getWeight();
 			case TrackerPackage.ANIMAL__WEIGHT_GAIN_PER_DAY:
 				return getWeightGainPerDay();
+			case TrackerPackage.ANIMAL__TYPE:
+				return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -848,6 +873,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return WEIGHT_EDEFAULT == null ? getWeight() != null : !WEIGHT_EDEFAULT.equals(getWeight());
 			case TrackerPackage.ANIMAL__WEIGHT_GAIN_PER_DAY:
 				return WEIGHT_GAIN_PER_DAY_EDEFAULT == null ? getWeightGainPerDay() != null : !WEIGHT_GAIN_PER_DAY_EDEFAULT.equals(getWeightGainPerDay());
+			case TrackerPackage.ANIMAL__TYPE:
+				return getType() != TYPE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
