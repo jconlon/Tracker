@@ -156,6 +156,9 @@ that can be installed and used with other Eclipse (3.3)-based offerings.
       <feature id="org.mozilla.rhino" version="1.6.7.v20071217-1567w31191325"/>
       <feature id="org.eclipse.pde" version="3.4.0.v20080603-7T7U-E_EkMNrNKb39WcMC"/>
       <feature id="org.eclipse.birt.example" version="2.3.0.v20071113-7D7J-CYQCD4CpDm"/>
+      <feature id="org.apache.derby.core" version="10.3.1.4"/>
+      <feature id="org.eclipse.equinox.p2.user.ui" version="1.0.0.v20080516-7d--ETu637E5se-QIGiA"/>
+      <feature id="org.eclipse.datatools.enablement.apache.derby.feature" version="1.6.0.v200804021-650AlJAKaLeL1NnfvBEKK"/>
    </features>
 
 </product>
