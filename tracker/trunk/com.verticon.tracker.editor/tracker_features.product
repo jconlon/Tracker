@@ -125,7 +125,7 @@ that can be installed and used with other Eclipse (3.3)-based offerings.
       <feature id="com.verticon.tracker.reader" version="0.2.3"/>
       <feature id="com.verticon.tracker.ocl.query" version="0.1.4"/>
       <feature id="com.verticon.tracker.fair.transaction.editor" version="0.1.1"/>
-      <feature id="com.verticon.tracker.editor" version="0.2.8"/>
+      <feature id="com.verticon.tracker.editor" version="0.3.0"/>
       <feature id="gnu.io.rxtx" version="2.1.7.4_v20071016-7B57e7UAXMAAqGAGf"/>
       <feature id="org.eclipse.datatools.enablement.oda.ecore" version="0.1.0"/>
       <feature id="org.eclipse.datatools.enablement.jdbc.feature" version="1.6.0.v200805301340-3-09oA55S5J8JADJJ"/>
@@ -155,6 +155,7 @@ that can be installed and used with other Eclipse (3.3)-based offerings.
       <feature id="org.w3c.sac" version="1.3.0.v20080102-46-_kE77b7U_N56BA"/>
       <feature id="org.mozilla.rhino" version="1.6.7.v20071217-1567w31191325"/>
       <feature id="org.eclipse.pde" version="3.4.0.v20080603-7T7U-E_EkMNrNKb39WcMC"/>
+      <feature id="org.eclipse.birt.example" version="2.3.0.v20071113-7D7J-CYQCD4CpDm"/>
    </features>
 
 </product>
