@@ -20,6 +20,7 @@ that can be installed and used with other Eclipse (3.3)-based offerings.
 
    <configIni use="default">
       <linux>/com.verticon.tracker.editor/config.ini</linux>
+      <win32>/com.verticon.tracker.editor/config.ini</win32>
    </configIni>
 
    <launcherArgs>
