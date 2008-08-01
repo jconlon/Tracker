@@ -584,7 +584,7 @@ public class TrackerTransactionEditor
 					getOperationHistory().dispose(undoContext, true, true, true);
 					
 					// change saved resource's URI and remove from map
-					res.setURI((URI) movedResources.remove(res));
+					res.setURI(movedResources.remove(res));
 						
 					// must change my editor input
 					IEditorInput newInput = new FileEditorInput(
@@ -713,8 +713,8 @@ public class TrackerTransactionEditor
 		  if (rootObject instanceof Premises)
 		  {
 			logger.debug("Setting input on tables");
-			animalsTableViewer.setInput((Premises)rootObject);
-			eventsTableViewer.setInput((Premises)rootObject);
+			animalsTableViewer.setInput(rootObject);
+			eventsTableViewer.setInput(rootObject);
 		  }else{
 			  logger.error("Root not a Premises. Did not reset input on viewers.");
 		  }
@@ -727,7 +727,7 @@ public class TrackerTransactionEditor
 	protected void handleMovedResource() {
 		if (!isDirty() || handleDirtyConflict()) {
 			Resource res = getResource();
-			URI newURI = (URI) movedResources.get(res);
+			URI newURI = movedResources.get(res);
 			
 			if (newURI != null) {
 				if (res.isLoaded()) {
@@ -811,6 +811,7 @@ public class TrackerTransactionEditor
 	 * 
 	 * @generated
 	 */
+	@Override
 	protected void firePropertyChange(int action) {
 		super.firePropertyChange(action);
 	}
@@ -1156,6 +1157,7 @@ public class TrackerTransactionEditor
 		getContainer().addControlListener
 			(new ControlAdapter() {
 				boolean guard = false;
+				@Override
 				public void controlResized(ControlEvent event) {
 					if (!guard) {
 						guard = true;
@@ -1174,11 +1176,13 @@ public class TrackerTransactionEditor
 
 		ViewerPane viewerPane =
 			new ViewerPane(getSite().getPage(), TrackerTransactionEditor.this) {
+				@Override
 				public Viewer createViewer(Composite composite) {
 					Tree tree = new Tree(composite, SWT.MULTI);
 					TreeViewer newTreeViewer = new TreeViewer(tree);
 					return newTreeViewer;
 				}
+				@Override
 				public void requestActivation() {
 					super.requestActivation();
 					setCurrentViewerPane(this);
@@ -1218,9 +1222,11 @@ public class TrackerTransactionEditor
 	private void createEventsTableViewer(String tableName) {
 		ViewerPane viewerPane =
 			new ViewerPane(getSite().getPage(), TrackerTransactionEditor.this) {
+			@Override
 			public Viewer createViewer(Composite composite) {
 				return new TableViewer(composite);
 			}
+			@Override
 			public void requestActivation() {
 				super.requestActivation();
 				setCurrentViewerPane(this);
@@ -1265,9 +1271,11 @@ public class TrackerTransactionEditor
 	private void createAnimalsTableViewer(String tableName) {
 		ViewerPane viewerPane =
 			new ViewerPane(getSite().getPage(), TrackerTransactionEditor.this) {
+			@Override
 			public Viewer createViewer(Composite composite) {
 				return new TableViewer(composite);
 			}
+			@Override
 			public void requestActivation() {
 				super.requestActivation();
 				setCurrentViewerPane(this);
@@ -1491,6 +1499,7 @@ public class TrackerTransactionEditor
 			// The content outline is just a tree.
 			//
 			class MyContentOutlinePage extends ContentOutlinePage {
+				@Override
 				public void createControl(Composite parent) {
 					super.createControl(parent);
 					contentOutlineViewer = getTreeViewer();
@@ -1525,11 +1534,13 @@ public class TrackerTransactionEditor
 					}
 				}
 
+				@Override
 				public void makeContributions(IMenuManager menuManager, IToolBarManager toolBarManager, IStatusLineManager statusLineManager) {
 					super.makeContributions(menuManager, toolBarManager, statusLineManager);
 					contentOutlineStatusLineManager = statusLineManager;
 				}
 
+				@Override
 				public void setActionBars(IActionBars actionBars) {
 					super.setActionBars(actionBars);
 					getActionBarContributor().shareGlobalActions(this, actionBars);
@@ -1562,11 +1573,13 @@ public class TrackerTransactionEditor
 		if (propertySheetPage == null) {
 			propertySheetPage =
 				new ExtendedPropertySheetPage(editingDomain) {
+					@Override
 					public void setSelectionToViewer(List<?> selection) {
 						TrackerTransactionEditor.this.setSelectionToViewer(selection);
 						TrackerTransactionEditor.this.setFocus();
 					}
 
+					@Override
 					public void setActionBars(IActionBars actionBars) {
 						super.setActionBars(actionBars);
 						getActionBarContributor().shareGlobalActions(this, actionBars);
@@ -1679,6 +1692,7 @@ public class TrackerTransactionEditor
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
 		// Save only resources that have actually changed.
 		//
@@ -1742,6 +1756,7 @@ public class TrackerTransactionEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isSaveAsAllowed() {
 		return true;
 	}
@@ -1752,6 +1767,7 @@ public class TrackerTransactionEditor
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public void doSaveAs() {
 		SaveAsDialog saveAsDialog= new SaveAsDialog(getSite().getShell());
 		saveAsDialog.open();
@@ -1832,6 +1848,7 @@ public class TrackerTransactionEditor
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
+	@Override
 	public void init(IEditorSite site, IEditorInput editorInput) {
 		setSite(site);
 		setInputWithNotify(editorInput);
@@ -1849,6 +1866,7 @@ public class TrackerTransactionEditor
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
+	@Override
 	public void setFocus() {
 		selectionViewer.getControl().setFocus();
 	}
@@ -2003,6 +2021,7 @@ public class TrackerTransactionEditor
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public void dispose() {
 		updateProblemIndication = false;
 
@@ -2016,18 +2035,8 @@ public class TrackerTransactionEditor
 		editingDomain.getResourceSet().getResources().remove(getResource());
 		editingDomain.getResourceSet().eAdapters().remove(problemIndicationAdapter);
 		
-		//Always leave the AdpaterFactory registered
-		//Remove the registered AdpaterFactory if there are no more Transaction Editor instances in workbench
-		IWorkbench workbench =getSite().getWorkbenchWindow().getWorkbench();
-		IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
-		boolean adapterFactoryNoLongerNeeded = true;
-		for (IEditorReference ref : activePage.getEditorReferences()) {
-			if("com.verticon.tracker.transaction.editor.TrackerEditorID".equals(ref.getId())){
-				adapterFactoryNoLongerNeeded=false;
-				break;
-			}
-
-		}
+		
+		boolean adapterFactoryNoLongerNeeded = isRegisteredAdapterFactoryStillNeeded();
 		if(adapterFactoryNoLongerNeeded){
 			ResourceSet rs = editingDomain.getResourceSet();
 			AdapterFactory adapterToRemove = null;
@@ -2060,6 +2069,32 @@ public class TrackerTransactionEditor
 
 		
 		super.dispose();
+	}
+
+	/**
+	 * Remove the registered AdpaterFactory if there are no more Transaction
+	 * Editor instances in workbench
+	 * 
+	 * @param adapterFactoryNoLongerNeeded
+	 * @return
+	 */
+	private boolean isRegisteredAdapterFactoryStillNeeded() {
+		boolean adapterFactoryNoLongerNeeded = true;
+		IWorkbench workbench = getSite().getWorkbenchWindow().getWorkbench();
+		IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow()
+				.getActivePage();
+		if (activePage == null) {
+			return false;
+		}
+		for (IEditorReference ref : activePage.getEditorReferences()) {
+			if ("com.verticon.tracker.transaction.editor.TrackerEditorID"
+					.equals(ref.getId())) {
+				adapterFactoryNoLongerNeeded = false;
+				break;
+			}
+
+		}
+		return adapterFactoryNoLongerNeeded;
 	}
 
 	
