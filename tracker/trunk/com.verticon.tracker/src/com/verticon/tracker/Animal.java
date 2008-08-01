@@ -375,6 +375,7 @@ public interface Animal extends EObject {
 	 * @model
 	 * @generated
 	 */
+	@Deprecated
 	EList<Event> allEvents();
 
 	/**
