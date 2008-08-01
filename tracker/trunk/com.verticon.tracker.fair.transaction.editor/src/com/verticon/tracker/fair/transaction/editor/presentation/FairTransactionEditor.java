@@ -113,7 +113,7 @@ public class FairTransactionEditor extends FairEditor {
 	 * Maps {@link Resource resource} to {@link URI new URI}
 	 */
 	//.CUSTOM: Demonstrates the WorkspaceSynchronizer's handling of moves
-	private Map<Resource, URI> movedResources = new HashMap<Resource, URI>();
+	private final Map<Resource, URI> movedResources = new HashMap<Resource, URI>();
 	
 	//.CUSTOM: We track dirty state by the last operation executed when saved
 	private IUndoableOperation savedOperation;
@@ -574,7 +574,7 @@ public class FairTransactionEditor extends FairEditor {
 		// Only creates the other pages if there is something that can be edited
 		//
 		if (!getEditingDomain().getResourceSet().getResources().isEmpty() &&
-				!((Resource)getEditingDomain().getResourceSet().getResources().get(0)).getContents().isEmpty()) {
+				!(getEditingDomain().getResourceSet().getResources().get(0)).getContents().isEmpty()) {
 
 			createSelectionTreeViewer(FairEditorPlugin.INSTANCE.getString("_UI_SelectionPage_label"));
 
@@ -609,6 +609,7 @@ public class FairTransactionEditor extends FairEditor {
 		getContainer().addControlListener
 			(new ControlAdapter() {
 				boolean guard = false;
+				@Override
 				public void controlResized(ControlEvent event) {
 					if (!guard) {
 						guard = true;
@@ -758,6 +759,7 @@ public class FairTransactionEditor extends FairEditor {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public IContentOutlinePage getContentOutlinePage() {
 		if (contentOutlinePage == null) {
 			// The content outline is just a tree.
@@ -838,11 +840,13 @@ public class FairTransactionEditor extends FairEditor {
 		if (propertySheetPage == null) {
 			propertySheetPage =
 				new ExtendedPropertySheetPage(editingDomain) {
+					@Override
 					public void setSelectionToViewer(List<?> selection) {
 						FairTransactionEditor.this.setSelectionToViewer(selection);
 						FairTransactionEditor.this.setFocus();
 					}
 
+					@Override
 					public void setActionBars(IActionBars actionBars) {
 						super.setActionBars(actionBars);
 						getActionBarContributor().shareGlobalActions(this, actionBars);
@@ -940,6 +944,7 @@ public class FairTransactionEditor extends FairEditor {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	protected void doSaveAs(final URI uri, final IEditorInput editorInput) {
 		// changing the URI is, conceptually, a write operation.  However, it does
 		//    not affect the abstract state of the model, so we only need exclusive
@@ -973,6 +978,7 @@ public class FairTransactionEditor extends FairEditor {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public void gotoMarker(IMarker marker) {
 		try {
 			if (marker.getType().equals(EValidator.MARKER)) {
@@ -1052,17 +1058,7 @@ public class FairTransactionEditor extends FairEditor {
 		editingDomain.getResourceSet().getResources().remove(getResource());
 		editingDomain.getResourceSet().eAdapters().remove(problemIndicationAdapter);
 		
-		//Remove the registered AdpaterFactory if there are no more FairTransactionEditor instances in workbench
-		IWorkbench workbench =getSite().getWorkbenchWindow().getWorkbench();
-		IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
-		boolean adapterFactoryNoLongerNeeded = true;
-		for (IEditorReference ref : activePage.getEditorReferences()) {
-			if("com.verticon.tracker.fair.transaction.editor.presentation.FairEditorID".equals(ref.getId())){
-				adapterFactoryNoLongerNeeded=false;
-				break;
-			}
-
-		}
+		boolean adapterFactoryNoLongerNeeded = isRegisteredAdapterFactoryStillNeeded();
 		if(adapterFactoryNoLongerNeeded){
 			ResourceSet rs = editingDomain.getResourceSet();
 			AdapterFactory adapterToRemove = null;
@@ -1096,5 +1092,29 @@ public class FairTransactionEditor extends FairEditor {
 		}
 
 		super.dispose();
+	}
+
+	/**
+	 * @return true if there are more FairTransactionEditor instances in
+	 *         workbench
+	 */
+	private boolean isRegisteredAdapterFactoryStillNeeded() {
+		boolean adapterFactoryNoLongerNeeded = true;
+
+		IWorkbench workbench = getSite().getWorkbenchWindow().getWorkbench();
+		IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow()
+				.getActivePage();
+		if (activePage == null) {
+			return false;
+		}
+		for (IEditorReference ref : activePage.getEditorReferences()) {
+			if ("com.verticon.tracker.fair.transaction.editor.presentation.FairEditorID"
+					.equals(ref.getId())) {
+				adapterFactoryNoLongerNeeded = false;
+				break;
+			}
+
+		}
+		return adapterFactoryNoLongerNeeded;
 	}
 }
