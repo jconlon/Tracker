@@ -21,6 +21,13 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
  */
 public class TrackerTableEditorUtils {
 	
+	
+	// Suppress default constructor for noninstantiability
+	private TrackerTableEditorUtils() {
+		throw new AssertionError();
+	}
+
+
 	/**
 	 * Animals Table
 	 */

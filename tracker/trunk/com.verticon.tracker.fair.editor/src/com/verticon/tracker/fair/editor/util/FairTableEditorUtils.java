@@ -25,6 +25,11 @@ import com.verticon.tracker.fair.editor.presentation.FairEditorPlugin;
  */
 public class FairTableEditorUtils {
 
+	// Suppress default constructor for noninstantiability
+	private FairTableEditorUtils() {
+		throw new AssertionError();
+	}
+
 	/**
 	 * Enum on Person Element
 	 * @author jconlon
