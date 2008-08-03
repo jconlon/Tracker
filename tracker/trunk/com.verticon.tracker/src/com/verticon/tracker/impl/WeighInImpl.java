@@ -25,7 +25,7 @@ import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.CollectionFilter;
-import com.verticon.tracker.util.CommonUtilities;
+import com.verticon.tracker.util.TrackerUtils;
 import com.verticon.tracker.util.FilterCriteria;
 
 /**
@@ -201,7 +201,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 			return Collections.emptyList();
 		}
 		List<Event> copy = new ArrayList<Event>(events);
-		Collections.sort(copy, CommonUtilities.DATE_COMPARATOR);
+		Collections.sort(copy, TrackerUtils.DATE_COMPARATOR);
 		
 		CollectionFilter<Event> lastWeighInEvents = new CollectionFilter<Event>();
 		lastWeighInEvents.addFilter(weighInFilterCriteria);
@@ -231,7 +231,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 		 * @return
 		 */
 		private boolean isEarlier(WeighIn e) {
-			return (CommonUtilities.DATE_COMPARATOR.compare(e, WeighInImpl.this) < 0);
+			return (TrackerUtils.DATE_COMPARATOR.compare(e, WeighInImpl.this) < 0);
 		}
 
 		

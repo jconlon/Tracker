@@ -66,7 +66,7 @@ import com.verticon.tracker.editor.preferences.PreferenceConstants;
 import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
-import com.verticon.tracker.util.CommonUtilities;
+import com.verticon.tracker.util.TrackerUtils;
 
 /**
  * @author jconlon
@@ -82,7 +82,9 @@ public class ActionUtils {
 	private static final String ADD_TEMPLATE_TO_ANIMALS_OPERATION = "Add Template to Animals Operation";
 	private static final String ADD_TEMPLATE_TO_PREMISES_OPERATION = "Add Template to Premises Operation";
 
+	// Suppress default constructor for noninstantiability
 	private ActionUtils() {
+		throw new AssertionError();
 	}
 
 	/**
@@ -170,7 +172,7 @@ public class ActionUtils {
 					"Failed to load a template", e.getLocalizedMessage());
 			return null;
 		}
-		animal = CommonUtilities.getAnimalFromTemplate(templateResource);
+		animal = TrackerUtils.getAnimalFromTemplate(templateResource);
 
 		if (animal == null) {
 			MessageDialog
@@ -188,7 +190,7 @@ public class ActionUtils {
 	public static final Premises getPremises(IQueryDataSetProvider editor) {
 		Premises premises = null;
 		EditingDomain editingDomain = editor.getEditingDomain();
-		Resource modelResource = (Resource) editingDomain.getResourceSet()
+		Resource modelResource = editingDomain.getResourceSet()
 				.getResources().get(0);
 		Object rootObject = modelResource.getContents().get(0);
 		premises = (Premises) rootObject;
@@ -426,6 +428,7 @@ public class ActionUtils {
 		dialog.setMessage("Select the Type of Event to add.");
 		dialog.setTitle("Event Selection");
 		dialog.setLabelProvider(new LabelProvider() {
+			@Override
 			public String getText(Object element) {
 
 				return (String) element;
@@ -479,6 +482,7 @@ public class ActionUtils {
 		dialog.setMessage("Select the Type of Animal to add.");
 		dialog.setTitle("Animal Selection");
 		dialog.setLabelProvider(new LabelProvider() {
+			@Override
 			public String getText(Object element) {
 
 				return (String) element;

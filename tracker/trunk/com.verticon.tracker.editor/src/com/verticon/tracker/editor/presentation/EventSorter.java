@@ -16,7 +16,7 @@ import org.eclipse.swt.SWT;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.util.CommonUtilities;
+import com.verticon.tracker.util.TrackerUtils;
 
 
 /**
@@ -158,8 +158,8 @@ public class EventSorter extends ViewerSorter {
 	 *  element is greater than the second element
 	 */
 	protected int compareDateTimes(Event event1, Event event2) {
-		Date date1 = event1.getDateTime()==null?CommonUtilities.DATE_REFERENCE.getTime():event1.getDateTime();
-		Date date2 = event2.getDateTime()==null?CommonUtilities.DATE_REFERENCE.getTime():event2.getDateTime();
+		Date date1 = event1.getDateTime()==null?TrackerUtils.DATE_REFERENCE.getTime():event1.getDateTime();
+		Date date2 = event2.getDateTime()==null?TrackerUtils.DATE_REFERENCE.getTime():event2.getDateTime();
 		return date1.compareTo(date2);
 	}
 	
@@ -175,8 +175,8 @@ public class EventSorter extends ViewerSorter {
 	 *  element is greater than the second element
 	 */
 	protected int compareDateTimesReverse(Event event1, Event event2) {
-		Date date1 = event1.getDateTime()==null?CommonUtilities.DATE_REFERENCE.getTime():event1.getDateTime();
-		Date date2 = event2.getDateTime()==null?CommonUtilities.DATE_REFERENCE.getTime():event2.getDateTime();
+		Date date1 = event1.getDateTime()==null?TrackerUtils.DATE_REFERENCE.getTime():event1.getDateTime();
+		Date date2 = event2.getDateTime()==null?TrackerUtils.DATE_REFERENCE.getTime():event2.getDateTime();
 		return date2.compareTo(date1);
 	}
 

@@ -411,7 +411,7 @@ public interface Animal extends EObject {
 	 * <!-- begin-model-doc -->
 	 * The most recent WeighIn event for this animal.
 	 * <!-- end-model-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='WeighIn lastWeighIn = null;\n\t\tif(!eventHistory().isEmpty()){\n\t\t\tCollectionFilter<Event> weighInsProducer = new CollectionFilter<Event>();\n\t\t\tweighInsProducer.addFilter(CommonUtilities.weighInFilterCriteria);\n\t\t\tList<Event> weighIns = new ArrayList<Event>(weighInsProducer.filterCopy(eventHistory()));\n\t\t\tif(weighIns.isEmpty()){\n\t\t\t\treturn null;\n\t\t\t}\n\t\t\tCollections.sort(weighIns, CommonUtilities.DATE_COMPARATOR);\n\t\t\tlastWeighIn = (WeighIn) weighIns.get(weighIns.size()-1);\n\t\t}\n\t\treturn lastWeighIn;'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='WeighIn lastWeighIn = null;\n\t\tif(!eventHistory().isEmpty()){\n\t\t\tCollectionFilter<Event> weighInsProducer = new CollectionFilter<Event>();\n\t\t\tweighInsProducer.addFilter(TrackerUtils.weighInFilterCriteria);\n\t\t\tList<Event> weighIns = new ArrayList<Event>(weighInsProducer.filterCopy(eventHistory()));\n\t\t\tif(weighIns.isEmpty()){\n\t\t\t\treturn null;\n\t\t\t}\n\t\t\tCollections.sort(weighIns, TrackerUtils.DATE_COMPARATOR);\n\t\t\tlastWeighIn = (WeighIn) weighIns.get(weighIns.size()-1);\n\t\t}\n\t\treturn lastWeighIn;'"
 	 * @generated
 	 */
 	WeighIn lastWeighIn();

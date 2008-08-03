@@ -13,7 +13,7 @@ import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.util.CommonUtilities;
+import com.verticon.tracker.util.TrackerUtils;
 
 
 /**
@@ -219,8 +219,8 @@ public class AnimalSorter extends ViewerSorter {
 	 *  element is greater than the second element
 	 */
 	protected int compareBirthDates(Animal animal1, Animal animal2) {
-		Date date1 = animal1.getBirthDate()==null?CommonUtilities.DATE_REFERENCE.getTime():animal1.getBirthDate();
-		Date date2 = animal2.getBirthDate()==null?CommonUtilities.DATE_REFERENCE.getTime():animal2.getBirthDate();
+		Date date1 = animal1.getBirthDate()==null?TrackerUtils.DATE_REFERENCE.getTime():animal1.getBirthDate();
+		Date date2 = animal2.getBirthDate()==null?TrackerUtils.DATE_REFERENCE.getTime():animal2.getBirthDate();
 		return date1.compareTo(date2);
 	}
 
@@ -253,8 +253,8 @@ public class AnimalSorter extends ViewerSorter {
 	 *  element is greater than the second element
 	 */
 	protected int compareAges(Animal animal1, Animal animal2) {
-		Date date1 = animal1.getBirthDate()==null?CommonUtilities.DATE_REFERENCE.getTime():animal1.getBirthDate();
-		Date date2 = animal2.getBirthDate()==null?CommonUtilities.DATE_REFERENCE.getTime():animal2.getBirthDate();
+		Date date1 = animal1.getBirthDate()==null?TrackerUtils.DATE_REFERENCE.getTime():animal1.getBirthDate();
+		Date date2 = animal2.getBirthDate()==null?TrackerUtils.DATE_REFERENCE.getTime():animal2.getBirthDate();
 		return date2.compareTo(date1);
 	}
 	
@@ -302,8 +302,8 @@ public class AnimalSorter extends ViewerSorter {
 	 *  element is greater than the second element
 	 */
 	protected int compareLastEventDates(Animal animal1, Animal animal2) {
-		Date date1 = animal1.getLastEventDateTime()==null?CommonUtilities.DATE_REFERENCE.getTime():animal1.getLastEventDateTime();
-		Date date2 = animal2.getLastEventDateTime()==null?CommonUtilities.DATE_REFERENCE.getTime():animal2.getLastEventDateTime();
+		Date date1 = animal1.getLastEventDateTime()==null?TrackerUtils.DATE_REFERENCE.getTime():animal1.getLastEventDateTime();
+		Date date2 = animal2.getLastEventDateTime()==null?TrackerUtils.DATE_REFERENCE.getTime():animal2.getLastEventDateTime();
 		return date1.compareTo(date2);
 	}
 	

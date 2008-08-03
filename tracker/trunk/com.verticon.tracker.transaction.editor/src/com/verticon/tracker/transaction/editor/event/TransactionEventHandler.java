@@ -22,7 +22,7 @@ import com.verticon.tracker.Tag;
 import com.verticon.tracker.editor.preferences.PreferenceConstants;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.editor.util.ActionUtils;
-import com.verticon.tracker.util.CommonUtilities;
+import com.verticon.tracker.util.TrackerUtils;
 
 
 public class TransactionEventHandler implements EventHandler {
@@ -102,7 +102,7 @@ public class TransactionEventHandler implements EventHandler {
 			 String readerName,
 			 Animal templateAnimal,
 			Premises activePremises) {
-		Animal animal = CommonUtilities.findOrCreateAnimal(templateAnimal.getId().toString(),
+		Animal animal = TrackerUtils.findOrCreateAnimal(templateAnimal.getId().toString(),
 				activePremises, templateAnimal);
 		Collection<com.verticon.tracker.Event> events = 
 			copyValidEvents(templateAnimal.eventHistory(), animal);
