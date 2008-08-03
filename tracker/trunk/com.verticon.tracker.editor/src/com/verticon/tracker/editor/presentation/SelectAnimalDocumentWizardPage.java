@@ -32,7 +32,7 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
 import com.verticon.tracker.editor.util.ActionUtils;
 import com.verticon.tracker.editor.util.AnimalTemplateBean;
-import com.verticon.tracker.util.CommonUtilities;
+import com.verticon.tracker.util.TrackerUtils;
 
 /**
  * @author jconlon
@@ -108,7 +108,7 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 	 * @return
 	 */
 	private AnimalTemplateBean getTemplateAnimalBean(Resource resource) {
-		Animal animal = CommonUtilities.getAnimalFromTemplate(resource);
+		Animal animal = TrackerUtils.getAnimalFromTemplate(resource);
 		if(animal==null){
 			return null;
 		}

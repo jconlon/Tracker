@@ -22,12 +22,12 @@ import com.verticon.tracker.WeighIn;
  * @author jconlon
  *
  */
-public class CommonUtilities {
+public class TrackerUtils {
 
-	/**
-	 * 
-	 */
-	private CommonUtilities() {}
+	// Suppress default constructor for noninstantiability
+	private TrackerUtils() {
+		throw new AssertionError();
+	}
 
 	public static final GregorianCalendar DATE_REFERENCE = new GregorianCalendar(1000, Calendar.JANUARY, 1);  
 
@@ -42,6 +42,7 @@ public class CommonUtilities {
 	 * @param resource
 	 * @return
 	 */
+	@Deprecated
 	public static Premises getPremisesFromTemplate(Resource resource){
 		Object o = resource.getContents().get(0);
 		if(o instanceof Premises){

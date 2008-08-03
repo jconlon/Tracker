@@ -9,7 +9,7 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.util.CommonUtilities;
+import com.verticon.tracker.util.TrackerUtils;
 
 import java.util.Collection;
 
@@ -115,7 +115,7 @@ public class TagImpl extends EObjectImpl implements Tag {
 	 * @generated NOT
 	 */
 	public boolean isUsainNumberUsed() {
-		return CommonUtilities.isUsainNumberUsed(id);
+		return TrackerUtils.isUsainNumberUsed(id);
 	}
 
 	/**

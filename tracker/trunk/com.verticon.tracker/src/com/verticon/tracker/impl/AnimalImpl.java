@@ -36,7 +36,7 @@ import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.CollectionFilter;
-import com.verticon.tracker.util.CommonUtilities;
+import com.verticon.tracker.util.TrackerUtils;
 import com.verticon.tracker.util.EventHistoryAdapterFactory;
 import com.verticon.tracker.util.Species;
 
@@ -606,12 +606,12 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 //		WeighIn lastWeighIn = null;
 //		if(!eventHistory().isEmpty()){
 //			CollectionFilter<Event> weighInsProducer = new CollectionFilter<Event>();
-//			weighInsProducer.addFilter(CommonUtilities.weighInFilterCriteria);
+//			weighInsProducer.addFilter(TrackerUtils.weighInFilterCriteria);
 //			List<Event> weighIns = new ArrayList<Event>(weighInsProducer.filterCopy(eventHistory()));
 //			if(weighIns.isEmpty()){
 //				return null;
 //			}
-//			Collections.sort(weighIns, CommonUtilities.DATE_COMPARATOR);
+//			Collections.sort(weighIns, TrackerUtils.DATE_COMPARATOR);
 //			lastWeighIn = (WeighIn) weighIns.get(weighIns.size()-1);
 //		}
 //		return lastWeighIn;
@@ -696,12 +696,12 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 		WeighIn lastWeighIn = null;
 				if(!eventHistory().isEmpty()){
 					CollectionFilter<Event> weighInsProducer = new CollectionFilter<Event>();
-					weighInsProducer.addFilter(CommonUtilities.weighInFilterCriteria);
+					weighInsProducer.addFilter(TrackerUtils.weighInFilterCriteria);
 					List<Event> weighIns = new ArrayList<Event>(weighInsProducer.filterCopy(eventHistory()));
 					if(weighIns.isEmpty()){
 						return null;
 					}
-					Collections.sort(weighIns, CommonUtilities.DATE_COMPARATOR);
+					Collections.sort(weighIns, TrackerUtils.DATE_COMPARATOR);
 					lastWeighIn = (WeighIn) weighIns.get(weighIns.size()-1);
 				}
 				return lastWeighIn;
