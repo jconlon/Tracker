@@ -2446,6 +2446,17 @@
     <element xmi:type="ecore:EClass" href="tracker.ecore#//Schema"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PEyAVlmCEd2tRZ2K3aMUww" x="2490" y="690"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_tIMSwGMIEd2cfb89hdQDkA" type="Text">
+    <children xmi:type="notation:Node" xmi:id="_tIPWEGMIEd2cfb89hdQDkA" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_tIPWEWMIEd2cfb89hdQDkA" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_tIMSwWMIEd2cfb89hdQDkA" fontName="Sans" fontHeight="36" bold="true" description="Tracker Core MetaModel"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_tIMSwmMIEd2cfb89hdQDkA" x="2216" y="92"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_O8ow8FmCEd2tRZ2K3aMUww"/>
   <element xmi:type="ecore:EPackage" href="tracker.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_PE8_cFmCEd2tRZ2K3aMUww" type="3002" source="_PA7bEFmCEd2tRZ2K3aMUww" target="_PB_LAFmCEd2tRZ2K3aMUww">
