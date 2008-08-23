@@ -48,9 +48,15 @@ public class TrackerAnimalModelWizard extends TrackerModelWizard {
 		// Create a page, set the title, and the initial model file name.
 		//
 		myNewFileCreationPage = new MyNewFileCreationPage("Whatever", selection);
-		myNewFileCreationPage.setTitle(TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerTemplateWizard_label"));
-		myNewFileCreationPage.setDescription(TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerTemplateWizard_description"));
-		myNewFileCreationPage.setFileName(TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerTemplateFilenameDefaultBase") + "." + TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerTemplateFilenameExtension"));
+		myNewFileCreationPage.setTitle(TrackerReportEditorPlugin.INSTANCE
+				.getString("_UI_AnimalTemplateWizard_label"));
+		myNewFileCreationPage.setDescription(TrackerReportEditorPlugin.INSTANCE
+				.getString("_UI_AnimalTemplateWizard_description"));
+		myNewFileCreationPage.setFileName(TrackerReportEditorPlugin.INSTANCE
+				.getString("_UI_AnimalTemplateFilenameDefaultBase")
+				+ "."
+				+ TrackerReportEditorPlugin.INSTANCE
+						.getString("_UI_AnimalTemplateFilenameExtension"));
 		addPage(myNewFileCreationPage);
 
 		// Try and get the resource selection to determine a current directory for the file dialog.
@@ -76,7 +82,8 @@ public class TrackerAnimalModelWizard extends TrackerModelWizard {
 
 					// Make up a unique new name here.
 					//
-					String defaultModelBaseFilename = TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerTemplateFilenameDefaultBase");
+					String defaultModelBaseFilename = TrackerReportEditorPlugin.INSTANCE
+							.getString("_UI_AnimalTemplateFilenameDefaultBase");
 					String defaultModelFilenameExtension = TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerTemplateFilenameExtension");
 					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
@@ -87,7 +94,8 @@ public class TrackerAnimalModelWizard extends TrackerModelWizard {
 			}
 		}
 		initialObjectCreationPage = new TrackerModelWizardInitialObjectCreationPage("Whatever2");
-		initialObjectCreationPage.setTitle(TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerTemplateWizard_label"));
+		initialObjectCreationPage.setTitle(TrackerReportEditorPlugin.INSTANCE
+				.getString("_UI_AnimalTemplateWizard_label"));
 		initialObjectCreationPage.setDescription(TrackerReportEditorPlugin.INSTANCE.getString("_UI_Wizard_initial_object_description"));
 		addPage(initialObjectCreationPage);
 	}
@@ -112,7 +120,8 @@ public class TrackerAnimalModelWizard extends TrackerModelWizard {
 			if (super.validatePage()) {
 				// Make sure the file ends in ".tracker".
 				//
-				String requiredExt = TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerTemplateFilenameExtension");
+				String requiredExt = TrackerReportEditorPlugin.INSTANCE
+						.getString("_UI_AnimalTemplateFilenameExtension");
 				String enteredExt = new Path(getFileName()).getFileExtension();
 				if (enteredExt == null || !enteredExt.equals(requiredExt)) {
 					setErrorMessage(TrackerReportEditorPlugin.INSTANCE.getString("_WARN_FilenameExtension", new Object [] { requiredExt }));
@@ -138,6 +147,7 @@ public class TrackerAnimalModelWizard extends TrackerModelWizard {
 	/**
 	 * 
 	 */
+	@Override
 	public IFile getModelFile() {
 		return myNewFileCreationPage.getModelFile();
 	}
