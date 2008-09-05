@@ -64,7 +64,7 @@ public class OCLQueryDelegate
 			return;
 		}
 
-		QueryWithContextWizard wizard = new QueryWithContextWizard();
+		QueryWithContextWizard wizard = getWizard();
 		WizardDialog dlg = new WizardDialog(getShell(), wizard);
 		dlg.setTitle(TITLE);
 		dlg.open();
@@ -87,6 +87,14 @@ public class OCLQueryDelegate
 				throw new RuntimeException(e);
 			}
 		}
+	}
+
+	/**
+	 * @return
+	 */
+	protected QueryWithContextWizard getWizard() {
+		QueryWithContextWizard wizard = new QueryWithContextWizard();
+		return wizard;
 	}
 	
 	/**

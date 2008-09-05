@@ -43,7 +43,7 @@
                icon="$nl$/icons/elcl16/oclqryedit_co.gif"
                id="com.verticon.tracker.ocl.query.OclQueryAction"/>
       </editorContribution>
-      <!--
+    
       <editorContribution
             id="com.verticon.tracker.ocl.query.fairEditorContribution"
             targetID="com.verticon.tracker.fair.editor.presentation.FairEditorID">
@@ -61,12 +61,12 @@
                id="com.verticon.tracker.fair.editor.ocl.query.ContextFreeQueryAction"/>
          <action
                label="%_UI_OclQuery_label"
-               class="com.verticon.tracker.ocl.query.actions.OCLQueryDelegate"
+               class="com.verticon.tracker.ocl.query.actions.OCLQueryFairDelegate"
                menubarPath="com.verticon.tracker.fairMenuID/org.eclipse.emf.oclQueryMenuIDFairEditor/additions"
                icon="$nl$/icons/elcl16/oclqryedit_co.gif"
                id="com.verticon.tracker.fair.editor.ocl.query.OclQueryAction"/>
       </editorContribution> 
-      -->
+      
       <editorContribution
             id="com.verticon.tracker.ocl.query.transactionEditorContribution"
             targetID="com.verticon.tracker.transaction.editor.TrackerEditorID">

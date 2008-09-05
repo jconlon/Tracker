@@ -111,7 +111,7 @@ class QueryWithContextWizardPage
 		data = new GridData(GridData.FILL_BOTH);
 		data.horizontalSpan = 2;
 		conditionText.setLayoutData(data);
-		conditionText.setText(CONDITION_DEFAULT);
+		setConditionText();
 		
 		conditionText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
@@ -123,6 +123,17 @@ class QueryWithContextWizardPage
 		// validate and compute the default settings
 		setPageComplete(validatePage());
 	}
+
+	/**
+	 * 
+	 */
+	protected void setConditionText() {
+		setConditionText(CONDITION_DEFAULT);
+	}
+
+	protected void setConditionText(String text) {
+		conditionText.setText(text);
+	}
 	
 	/**
 	 * Fills the combo box with the available context metaclasses.
@@ -130,19 +141,20 @@ class QueryWithContextWizardPage
 	private void fillContextCombo() {
 		contextCombo.setContentProvider(new ArrayContentProvider());
 		contextCombo.setLabelProvider(new LabelProvider() {
+			@Override
 			public String getText(Object element) {
 				return ((EClassifier) element).getName();
 			}});
 		contextCombo.setSorter(new ViewerSorter() {
+			@Override
 			public int compare(Viewer viewer, Object e1, Object e2) {
 				return ((EClassifier) e1).getName().compareTo(
 					((EClassifier) e2).getName());
 			}});
 		
-		
+		// Refactor to allow overriding
 		// show only EClasses (cannot query for EDataType values)
-		List<EClassifier> classes = new LinkedList<EClassifier>(
-				TrackerPackage.eINSTANCE.getEClassifiers());
+		List<EClassifier> classes = getPackageEClassifiers();
 		for (Iterator<EClassifier> iter = classes.iterator(); iter.hasNext();) {
 			if (!(iter.next() instanceof EClass)) {
 				iter.remove();
@@ -151,13 +163,30 @@ class QueryWithContextWizardPage
 		contextCombo.setInput(classes);
 		
 		// apply the default selection, if possible
-		EClassifier defaultSelection = TrackerPackage.eINSTANCE.getEClassifier(
-			METACLASS_DEFAULT);
+		EClassifier defaultSelection = getDefaultSelection();
 		if (defaultSelection != null) {
 			contextCombo.setSelection(
 				new StructuredSelection(defaultSelection),
 				true);
 		}
+	}
+
+	/**
+	 * @return EClassifier from Tracker Package
+	 */
+	protected EClassifier getDefaultSelection() {
+		EClassifier defaultSelection = TrackerPackage.eINSTANCE
+				.getEClassifier(METACLASS_DEFAULT);
+		return defaultSelection;
+	}
+
+	/**
+	 * @return EClassifiers from Tracker Package
+	 */
+	protected List<EClassifier> getPackageEClassifiers() {
+		List<EClassifier> classes = new LinkedList<EClassifier>(
+				TrackerPackage.eINSTANCE.getEClassifiers());
+		return classes;
 	}
 	
 	/**
@@ -203,6 +232,7 @@ class QueryWithContextWizardPage
 	/* (non-Javadoc)
 	 * Redefines/Implements/Extends the inherited method.
 	 */
+	@Override
 	public void dispose() {
 		super.dispose();
 	}
