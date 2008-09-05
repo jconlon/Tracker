@@ -42,6 +42,52 @@
                menubarPath="com.verticon.trackerMenuID/org.eclipse.emf.oclQueryMenuID/additions"
                icon="$nl$/icons/elcl16/oclqryedit_co.gif"
                id="com.verticon.tracker.ocl.query.OclQueryAction"/>
+      </editorContribution>
+      <!--
+      <editorContribution
+            id="com.verticon.tracker.ocl.query.fairEditorContribution"
+            targetID="com.verticon.tracker.fair.editor.presentation.FairEditorID">
+         <menu
+               label="%_UI_OclMenu_label"
+               path="com.verticon.tracker.fairMenuID/additions"
+			   id="org.eclipse.emf.oclQueryMenuIDFairEditor">
+              <separator name="additions"/>
+         </menu>
+         <action
+               label="%_UI_CtxFreeQuery_label"
+               class="com.verticon.tracker.ocl.query.actions.ContextFreeQueryDelegate"
+               menubarPath="com.verticon.tracker.fairMenuID/org.eclipse.emf.oclQueryMenuIDFairEditor/additions"
+               icon="$nl$/icons/elcl16/oclqryedit_co.gif"
+               id="com.verticon.tracker.fair.editor.ocl.query.ContextFreeQueryAction"/>
+         <action
+               label="%_UI_OclQuery_label"
+               class="com.verticon.tracker.ocl.query.actions.OCLQueryDelegate"
+               menubarPath="com.verticon.tracker.fairMenuID/org.eclipse.emf.oclQueryMenuIDFairEditor/additions"
+               icon="$nl$/icons/elcl16/oclqryedit_co.gif"
+               id="com.verticon.tracker.fair.editor.ocl.query.OclQueryAction"/>
+      </editorContribution> 
+      -->
+      <editorContribution
+            id="com.verticon.tracker.ocl.query.transactionEditorContribution"
+            targetID="com.verticon.tracker.transaction.editor.TrackerEditorID">
+         <menu
+               label="%_UI_OclMenu_label"
+               path="com.verticon.tracker.transaction.TrackerMenuID/additions"
+			   id="org.eclipse.emf.oclQueryMenuIDTransactionEditor">
+              <separator name="additions"/>
+         </menu>
+         <action
+               label="%_UI_CtxFreeQuery_label"
+               class="com.verticon.tracker.ocl.query.actions.ContextFreeQueryDelegate"
+               menubarPath="com.verticon.tracker.transaction.TrackerMenuID/org.eclipse.emf.oclQueryMenuIDTransactionEditor/additions"
+               icon="$nl$/icons/elcl16/oclqryedit_co.gif"
+               id="com.verticon.tracker.transaction.editor.ocl.query.ContextFreeQueryAction"/>
+         <action
+               label="%_UI_OclQuery_label"
+               class="com.verticon.tracker.ocl.query.actions.OCLQueryDelegate"
+               menubarPath="com.verticon.tracker.transaction.TrackerMenuID/org.eclipse.emf.oclQueryMenuIDTransactionEditor/additions"
+               icon="$nl$/icons/elcl16/oclqryedit_co.gif"
+               id="com.verticon.tracker.transaction.editor.ocl.query.OclQueryAction"/>
       </editorContribution> 
    </extension> 
 
