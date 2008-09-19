@@ -10,9 +10,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 /**
+ * First page of the UpdatePinsWizard that is called from People elements.
  * 
  * @author jconlon
- *
+ * 
  */
 public class UpdatePinsWizardPage extends WizardPage {
 	
@@ -24,9 +25,9 @@ public class UpdatePinsWizardPage extends WizardPage {
 	 * to create the Exhibit
 	 */
 	protected UpdatePinsWizardPage() {
-		super("createExhibit");
-		setTitle("Create Exhibit using the following values");
-		setDescription("Create the Exhibit");
+		super("updatePins");
+		setTitle("Update Premises ID");
+		setDescription("Update the PremisesId attribute on movedIn and/or movedOut events.");
 	}
 
 	public void createControl(Composite parent) {

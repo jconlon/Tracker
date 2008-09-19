@@ -24,18 +24,17 @@ import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.Person;
-import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
 import com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditorPlugin;
 import com.verticon.tracker.util.CollectionFilter;
 import com.verticon.tracker.util.FilterCriteria;
 
 /**
- * Wizard for updating Source/DestinationPins on one or more Movedxxx 
- * events. Which animals to target and Pins to use is based on an initial set
- * of selected Persons.  Exhibits are used to find the animals related to the
+ * Wizard for updating Source/DestinationPins on one or more Movedxxx events.
+ * Which animals to target and Pins to use is based on an initial set of
+ * selected Persons. Exhibits are used to find the animals related to the
  * people.
  * 
- * TODO Show a list of people for optional editing.
+ * Wizard that is called from People elements.
  * 
  * Pages:
  * <ul>
@@ -50,7 +49,7 @@ import com.verticon.tracker.util.FilterCriteria;
 public class UpdatePinsWizard extends Wizard {
 
 	private EditingDomain editingDomain;
-	private Collection<Person> selectedPeopleWithPins = new ArrayList<Person>();
+	private final Collection<Person> selectedPeopleWithPins = new ArrayList<Person>();
 
 	private UpdatePinsWizardPage updatePinsPage = null;
 
@@ -74,7 +73,7 @@ public class UpdatePinsWizard extends Wizard {
 			EditingDomain editingDomain, IStructuredSelection selection) {
 		this.workbenchWindow = workbenchWindow;
 		if (selection instanceof IStructuredSelection) {
-			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+			IStructuredSelection structuredSelection = selection;
 
 			List<?> people = structuredSelection.toList();
 			for (Object person : people) {
@@ -159,7 +158,7 @@ public class UpdatePinsWizard extends Wizard {
 		for (Exhibit exhibit : selectedPersonExhibits) {
 			//Get all the two movedxxx events for that animal
 			for (Event event : exhibit.getAnimal().eventHistory()) {
-				if (event instanceof MovedIn) {
+				if (event instanceof MovedIn && updatePinsPage.updateMovedIn()) {
 					command = SetCommand.create(editingDomain, // Domain
 							event, // Owner
 							TrackerPackage.Literals.MOVED_IN__SOURCE_PIN, // Feature
@@ -168,7 +167,8 @@ public class UpdatePinsWizard extends Wizard {
 					if (command != null) {
 						compoundCommand.append(command);
 					}
-				} else if (event instanceof MovedOut) {
+				} else if (event instanceof MovedOut
+						&& updatePinsPage.updateMovedOut()) {
 					if (event instanceof MovedOut) {
 						command = SetCommand.create(
 								editingDomain, // Domain
