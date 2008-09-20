@@ -16,6 +16,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -48,10 +49,10 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	private IPropertiesFormProvider defaultPropertiesFormProvider;
 	protected IQueryDataSetProvider queryDataSetProvider = null;
 	private TableColumnPatternFilter patternFilter;
-	Composite sash = null;
+	Composite sash = null; // disposed
 	private Action reorientSashFormAction;
-	private SashForm sashForm;
-	protected FilteredTable filteredTable;
+	private SashForm sashForm; // disposed
+	protected FilteredTable filteredTable; // disposed
 	/**
 	 * slf4j Logger
 	 */
@@ -105,6 +106,7 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	 * This is a callback that will allow us to create the viewer and initialize
 	 * it.
 	 */
+	@Override
 	public void createPartControl(Composite base) {
 		// Our layout will have a row of buttons, and
 		// then a SashForm below it.
@@ -116,9 +118,11 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 		sash.setLayoutData(new GridData(GridData.FILL_BOTH));
 		sashForm = new SashForm(sash, SWT.HORIZONTAL);
 		// Change the width of the sashes
-		// sashForm.SASH_WIDTH = 20;
+		sashForm.SASH_WIDTH = 7;
 		// Change the color used to paint the sashes
-		// sashForm.setBackground(base.getDisplay().getSystemColor(SWT.COLOR_GREEN));
+		sashForm.setBackground(base.getDisplay()
+				.getSystemColor(
+				SWT.COLOR_GRAY));
 	
 		createViewer();
 		makeActions();
@@ -134,10 +138,15 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	 * Second window will be the form
 	 */
 	private void createFormFolder() {
-		Composite formParent = new Composite(sashForm, SWT.NONE);
-		cTabFolder = new CTabFolder(formParent, SWT.LEFT);
+		// This may need to be disposed
+		ScrolledComposite formParent = new ScrolledComposite(sashForm,
+		 SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+	    
+		cTabFolder = new CTabFolder(formParent, SWT.LEFT | SWT.H_SCROLL
+				| SWT.V_SCROLL);
 		cTabFolder.setForeground(formParent.getDisplay().getSystemColor(
 				SWT.COLOR_BLACK));
+		formParent.setContent(cTabFolder);
 	}
 
 	/**
@@ -187,6 +196,7 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	/**
 	 * Passing the focus request to the viewer's control.
 	 */
+	@Override
 	public void setFocus() {
 		viewer.getControl().setFocus();
 	}
@@ -319,6 +329,7 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 
 	private void makeActions() {
 		reorientSashFormAction = new Action() {
+			@Override
 			public void run() {
 				switch (sashForm.getOrientation()) {
 				case SWT.HORIZONTAL:
