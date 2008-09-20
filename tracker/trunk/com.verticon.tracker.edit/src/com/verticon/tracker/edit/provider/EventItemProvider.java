@@ -313,6 +313,7 @@ public class EventItemProvider
 	 * Adds table support
 	 * 
 	 */
+	@Override
 	public String getColumnText(Object object, int columnIndex) // 14.2.2
 	{
 		Event event = (Event)object;
@@ -344,7 +345,10 @@ public class EventItemProvider
     		}
     		String numPart = numAnimal.substring(0, space);
     		
-    		return numAnimal.substring(space, numAnimal.length())+' '+numPart;
+    		return numAnimal.substring(space, numAnimal.length())
+					.trim()
+					+ ' '
+					+ numPart;
     	
 		case 3: //Tag ID Number
 			return event.getTag()!=null?event.getTag().getId():"";
@@ -359,6 +363,7 @@ public class EventItemProvider
 	/**
 	 * Adds table support
 	 */
+	@Override
 	public Object getColumnImage(Object object, int columnIndex) // 14.2.2
 	  {
 		switch (columnIndex){
