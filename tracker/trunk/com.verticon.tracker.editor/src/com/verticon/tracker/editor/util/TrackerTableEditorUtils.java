@@ -53,7 +53,7 @@ public class TrackerTableEditorUtils {
 		//Animal
 		final TableColumn animalTypeColumn = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(2, 50, true));
-		animalTypeColumn.setText(getString("_UI_AnimalColumn_label"));
+		animalTypeColumn.setText(getString("_UI_AnimalTypeColumn_label"));
 		animalTypeColumn.setMoveable(true);
 		
 		//Species
