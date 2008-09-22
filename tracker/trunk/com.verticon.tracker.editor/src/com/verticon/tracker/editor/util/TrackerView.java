@@ -108,6 +108,7 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	 */
 	@Override
 	public void createPartControl(Composite base) {
+		logger.debug("createPartControl Entered");
 		// Our layout will have a row of buttons, and
 		// then a SashForm below it.
 		base.setLayout(new GridLayout(1, false));
@@ -204,6 +205,7 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	@Override
 	public void dispose() {
 		// Remove all the tabs in the TabFolder
+		logger.debug("Disposing resources");
 		for (CTabItem item : cTabFolder.getItems()) {
 			item.dispose();
 		}
@@ -227,6 +229,7 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	 * @see ISelectionListener#selectionChanged(IWorkbenchPart, ISelection)
 	 */
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+		logger.debug("selectionChanged entered");
 		IWorkbenchPartSite site = part.getSite();
 		if(site ==null){
 			return;

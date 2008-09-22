@@ -8,10 +8,14 @@ import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.databinding.edit.EMFEditObservables;
-import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
@@ -25,7 +29,10 @@ import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -49,17 +56,23 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 		logger.debug("Constructed");
 	}
 
+	private CTabItem item1;
 	private WizardPage wizardPage=null;
 	
 	public void fillProperties(ISelection selection, 
 			AdapterFactory adapterFactory,CTabFolder cTabFolder, String nameOfTab){
 		logger.debug("filling properties");
+		if (item1 != null) {
+			logger.debug("Desposing of CTabItem");
+			item1.dispose();
+			item1 = null;
+		}
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
-		CTabItem item1;
-		item1 = new CTabItem(cTabFolder, SWT.NONE);
-		item1.setText(nameOfTab);
-		 //Create a composite with a two column layout
+			
+			item1 = new CTabItem(cTabFolder, SWT.NONE);
+			item1.setText(nameOfTab);
+			// Create a composite with a two column layout
 			Composite composite1 = new Composite(cTabFolder, SWT.NONE);
 			composite1.setForeground(cTabFolder.getDisplay().getSystemColor(
 					SWT.COLOR_BLUE));
@@ -89,7 +102,7 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 	 * @param nameOfTab TODO
 	 */
 	protected Composite createEmptyCTabItem(CTabFolder cTabFolder, String nameOfTab) {
-		CTabItem item1;
+		
 		item1 = new CTabItem(cTabFolder, SWT.NONE);
 		item1.setText(nameOfTab);
 		//Create a composite with a two column layout
@@ -193,74 +206,15 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 			Object feature = propertyDescriptor.getFeature(object);
 			
 			if (feature instanceof EStructuralFeature) {
-				EStructuralFeature eStructuralFeature = ((EStructuralFeature) feature);
-				EClassifier eClassifier = eStructuralFeature.getEType();
-				
-				if (eClassifier instanceof EDataType) {
-					if (!propertyDescriptor.isMany(object)) {
-						boolean canSetProperty = propertyDescriptor
-								.canSetProperty(object);
-						Text text = null;
-						if(canSetProperty && !eStructuralFeature.isDerived()){
-							text = new Text(
-									mp.get(categoryName), 
-									SWT.BORDER
-									| SWT.None);
-						}else{
-							 text = new Text(
-									 mp.get(categoryName),
-									 SWT.BORDER
-									|  SWT.READ_ONLY);
-							 text.setEnabled(false);
-						}
-						
-						{
-							GridData gridData = new GridData();
-							gridData.verticalAlignment = SWT.FILL;
-							gridData.horizontalAlignment = SWT.FILL;
-							gridData.grabExcessHorizontalSpace=true;
-							text.setLayoutData(gridData);
-						}
-
-						EObject eObject = (EObject)AdapterFactoryEditingDomain.unwrap(object);
-						
-
-						bind(dataBindingContext, eStructuralFeature, text,
-								eObject);
-						
-					} else {
-						//Not an EDataType
-						logger.debug("Setting up a text widget for {} because it is an isMany {}",
-								feature,eStructuralFeature.isMany());
-						
-						Text text = new Text(
-								mp.get(categoryName), 
-								SWT.NONE);
-						{
-							GridData gridData = new GridData();
-							gridData.verticalAlignment = SWT.FILL;
-							gridData.horizontalAlignment = SWT.FILL;
-							text.setLayoutData(gridData);
-						}
-					}
-				} else {
-					//Not an EDataType
-					logger.debug("Setting up a text widget for an EClass {}",feature);
-					
-					Text text = new Text(
-							mp.get(categoryName), 
-							SWT.NONE);
-					{
-						GridData gridData = new GridData();
-						gridData.verticalAlignment = SWT.FILL;
-						gridData.horizontalAlignment = SWT.FILL;
-						text.setLayoutData(gridData);
-					}
-
-				}
+				visualizeEStructuralFeature(object, mp, dataBindingContext,
+						propertyDescriptor, categoryName,
+						(EStructuralFeature) feature);
 			} else {
 				//Not a EStructuralFeature
-				logger.debug("Setting up a text widget for a non EStruturalFeature {}",feature);
+				logger
+						.error(
+								"Setting up a text widget for a non EStruturalFeature {}",
+								feature);
 				Text text = new Text(mp.get(propertyDescriptor.getCategory(object)), SWT.NONE);
 				{
 					GridData gridData = new GridData();
@@ -268,12 +222,180 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 					gridData.horizontalAlignment = SWT.FILL;
 					text.setLayoutData(gridData);
 				}
+				
+				text.setText("Can not visualize a Non EStructuralFeature");
+				text.setForeground(mp.get(categoryName).getDisplay()
+						.getSystemColor(SWT.COLOR_RED));
 			}
 
 		}
 	}
 
+
 	/**
+	 * @param object
+	 * @param mp
+	 * @param dataBindingContext
+	 * @param propertyDescriptor
+	 * @param categoryName
+	 * @param feature
+	 */
+	private void visualizeEStructuralFeature(Object object,
+			Map<String, Group> mp, DataBindingContext dataBindingContext,
+			IItemPropertyDescriptor propertyDescriptor, String categoryName,
+			EStructuralFeature eStructuralFeature) {
+		
+		if (eStructuralFeature instanceof EReference) {
+			visualizeEReference(object, mp, dataBindingContext,
+					propertyDescriptor, categoryName,
+					(EReference) eStructuralFeature);
+			
+		} else if (eStructuralFeature instanceof EAttribute) {
+			visualizeEAttribute(object, mp, dataBindingContext,
+					propertyDescriptor, categoryName,
+					(EAttribute) eStructuralFeature);
+		
+		} else {
+			// Not an EDataType
+			logger
+					.error("Could Not VISUALIZE EStructuralFeature {}",
+							eStructuralFeature);
+
+			Text text = new Text(mp.get(categoryName), SWT.NONE);
+			{
+				GridData gridData = new GridData();
+				gridData.verticalAlignment = SWT.FILL;
+				gridData.horizontalAlignment = SWT.FILL;
+				text.setLayoutData(gridData);
+			}
+			text.setText("Could Not VISUALIZE for a Non EDataType");
+			text.setForeground(mp.get(categoryName).getDisplay()
+					.getSystemColor(SWT.COLOR_RED));
+
+		}
+	}
+
+	/**
+	 * TODO Implement Binding for an EReference
+	 * 
+	 * @param mp
+	 * @param categoryName
+	 * @param feature
+	 */
+	private void visualizeEReference(Object object, Map<String, Group> mp,
+			DataBindingContext dataBindingContext,
+			IItemPropertyDescriptor propertyDescriptor, String categoryName,
+			EReference eReference) {
+		// Not an EDataType
+		logger.error("Visualizing EReference {}", eReference);
+
+		Combo combo = new Combo(mp.get(categoryName), SWT.DROP_DOWN);
+		// Text text = new Text(mp.get(categoryName), SWT.NONE);
+		// {
+		// GridData gridData = new GridData();
+		// gridData.verticalAlignment = SWT.FILL;
+		// gridData.horizontalAlignment = SWT.FILL;
+		// text.setLayoutData(gridData);
+		// }
+
+		combo.add("Test");
+		combo.setBackground(mp.get(categoryName).getDisplay().getSystemColor(
+				SWT.COLOR_RED));
+		
+		EObject eObject = (EObject) AdapterFactoryEditingDomain.unwrap(object);
+
+		bind(dataBindingContext, eReference, combo, eObject);
+	}
+
+	/**
+	 * @param object
+	 * @param mp
+	 * @param dataBindingContext
+	 * @param propertyDescriptor
+	 * @param categoryName
+	 * @param feature
+	 * @param eAttribute
+	 */
+	private void visualizeEAttribute(Object object, Map<String, Group> mp,
+			DataBindingContext dataBindingContext,
+			IItemPropertyDescriptor propertyDescriptor, String categoryName,
+			EAttribute eAttribute) {
+		if (!eAttribute.isMany()) {
+			logger
+					.debug(
+							"Using a text widget for unary attribute {} because it is NOT an isMany EDataType",
+							eAttribute);
+
+			boolean canSetProperty = propertyDescriptor.canSetProperty(object);
+			Text text = null;
+			EDataType type = eAttribute.getEAttributeType();
+			
+			if (canSetProperty && type == EcorePackage.Literals.EBOOLEAN) {
+				Button button = new Button(mp.get(categoryName), SWT.CHECK);
+				// Combo combo = new Combo(mp.get(categoryName), SWT.DROP_DOWN);
+				// combo.add("true");
+				// combo.add("false");
+				EObject eObject = (EObject) AdapterFactoryEditingDomain
+						.unwrap(object);
+
+				bind(dataBindingContext, eAttribute, button, eObject);
+				return;
+
+			} else if (canSetProperty && (type instanceof EEnum)) {
+				Combo combo = new Combo(mp.get(categoryName), SWT.DROP_DOWN);
+				
+				EEnum enummer = (EEnum) type;
+				for (EEnumLiteral lit : enummer.getELiterals()) {
+					combo.add(lit.getLiteral());
+				}
+				
+				EObject eObject = (EObject) AdapterFactoryEditingDomain
+						.unwrap(object);
+
+				bind(dataBindingContext, eAttribute, combo, eObject);
+				return;
+			} else if (canSetProperty && !eAttribute.isDerived()) {
+				text = new Text(mp.get(categoryName), SWT.BORDER | SWT.None);
+			} else {
+				text = new Text(mp.get(categoryName), SWT.BORDER
+						| SWT.READ_ONLY);
+				text.setEnabled(false);
+			}
+
+			{
+				GridData gridData = new GridData();
+				gridData.verticalAlignment = SWT.FILL;
+				gridData.horizontalAlignment = SWT.FILL;
+				gridData.grabExcessHorizontalSpace = true;
+				text.setLayoutData(gridData);
+			}
+
+			EObject eObject = (EObject) AdapterFactoryEditingDomain
+					.unwrap(object);
+
+			bind(dataBindingContext, eAttribute, text, eObject);
+
+		} else {
+			// EDataType
+			logger
+					.error(
+							"Setting up a blank text widget for {} because it is an isMany EDataType",
+							eAttribute);
+
+			Text text = new Text(mp.get(categoryName), SWT.NONE);
+			{
+				GridData gridData = new GridData();
+				gridData.verticalAlignment = SWT.FILL;
+				gridData.horizontalAlignment = SWT.FILL;
+				text.setLayoutData(gridData);
+			}
+			text.setText("Could Not VISUALIZE MULTIVALUE");
+			text.setForeground(mp.get(categoryName).getDisplay()
+					.getSystemColor(SWT.COLOR_RED));
+		}
+	}
+
+	 /**
 	 * @param dataBindingContext
 	 * @param eStructuralFeature
 	 * @param text
@@ -281,26 +403,70 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 	 */
 	protected void bind(DataBindingContext dataBindingContext,
 			EStructuralFeature eStructuralFeature, Text text, EObject eObject) {
-		logger.debug("Binding {} feature {} to a text widget",
-				eObject.getClass().getSimpleName(),
-				eStructuralFeature.getName()
-		);
-		UpdateValueStrategy tToMStrategy = 
-			UpdateStrategies.INSTANCE.getTargetToModelStrategy(eStructuralFeature);
-		UpdateValueStrategy mToTStrategy = 
-			UpdateStrategies.INSTANCE.getModelToTargetStrategy(eStructuralFeature);
-		//Certain features cannot be updated
-		dataBindingContext.bindValue(
-			SWTObservables.observeText(text, SWT.Modify),
-			EMFEditObservables.observeValue(
-					AdapterFactoryEditingDomain.getEditingDomainFor(eObject),
-					eObject,
-					eStructuralFeature),
-					tToMStrategy, //TargetToModel
-					mToTStrategy);//ModelToTarget
+		logger.debug("Binding {} feature {} to a text widget", eObject
+				.getClass().getSimpleName(), eStructuralFeature.getName());
+		UpdateValueStrategy tToMStrategy = UpdateStrategies.INSTANCE
+				.getTargetToModelStrategy(eStructuralFeature);
+		UpdateValueStrategy mToTStrategy = UpdateStrategies.INSTANCE
+				.getModelToTargetStrategy(eStructuralFeature);
+		// Certain features cannot be updated
+		dataBindingContext.bindValue(SWTObservables.observeText(text,
+				SWT.Modify), EMFEditObservables.observeValue(
+				AdapterFactoryEditingDomain.getEditingDomainFor(eObject),
+				eObject, eStructuralFeature), tToMStrategy, // TargetToModel
+				mToTStrategy);// ModelToTarget
 	}
-	
-	
+
+	// /**
+	// * @param dataBindingContext
+	// * @param eStructuralFeature
+	// * @param combo
+	// * @param eObject
+	// */
+	// protected void bind(DataBindingContext dataBindingContext,
+	// EStructuralFeature eStructuralFeature, Combo combo, EObject eObject) {
+	// logger.debug("Binding {} feature {} to a combo widget", eObject
+	// .getClass().getSimpleName(), eStructuralFeature.getName());
+	//		
+	// UpdateValueStrategy tToMStrategy = UpdateStrategies.INSTANCE
+	// .getTargetToModelStrategy(eStructuralFeature);
+	//		
+	// UpdateValueStrategy mToTStrategy = UpdateStrategies.INSTANCE
+	// .getModelToTargetStrategy(eStructuralFeature);
+	//
+	// // Certain features cannot be updated
+	// dataBindingContext.bindValue(SWTObservables.observeSelection(combo),
+	// EMFEditObservables.observeValue(
+	// AdapterFactoryEditingDomain.getEditingDomainFor(eObject),
+	// eObject, eStructuralFeature), tToMStrategy, // TargetToModel
+	// mToTStrategy);// ModelToTarget
+	// }
+
+	/**
+	 * @param dataBindingContext
+	 * @param eStructuralFeature
+	 * @param button
+	 * @param eObject
+	 */
+	protected void bind(DataBindingContext dataBindingContext,
+			EStructuralFeature eStructuralFeature, Control control,
+			EObject eObject) {
+		logger.debug("Binding {} feature {} to a combo widget", eObject
+				.getClass().getSimpleName(), eStructuralFeature.getName());
+		
+		UpdateValueStrategy tToMStrategy = UpdateStrategies.INSTANCE
+				.getTargetToModelStrategy(eStructuralFeature);
+		
+		UpdateValueStrategy mToTStrategy = UpdateStrategies.INSTANCE
+				.getModelToTargetStrategy(eStructuralFeature);
+
+		// Certain features cannot be updated
+		dataBindingContext.bindValue(SWTObservables.observeSelection(control),
+				EMFEditObservables.observeValue(
+				AdapterFactoryEditingDomain.getEditingDomainFor(eObject),
+				eObject, eStructuralFeature), tToMStrategy, // TargetToModel
+				mToTStrategy);// ModelToTarget
+	}
 	
 
 
