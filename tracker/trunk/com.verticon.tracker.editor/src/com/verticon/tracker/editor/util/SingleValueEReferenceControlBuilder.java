@@ -32,6 +32,8 @@ public class SingleValueEReferenceControlBuilder implements ControlBuilder {
 			IItemPropertyDescriptor itemPropertyDescriptor,
 			AdapterFactory adapterFactory, DataBindingContext dataBindingContext) {
 
+		logger.debug("Creating Control For {}", object);
+		
 		ComboViewer comboViewer = createControl(object, parent,
 				itemPropertyDescriptor, adapterFactory);
 
@@ -43,7 +45,6 @@ public class SingleValueEReferenceControlBuilder implements ControlBuilder {
 			IItemPropertyDescriptor propertyDescriptor,
 			AdapterFactory adapterFactory) {
 		 EObject eObject = (EObject) AdapterFactoryEditingDomain.unwrap(object);
-		logger.error("For EObject {}", eObject);
 		ComboViewer comboViewer = new ComboViewer(parent,
 				SWT.DROP_DOWN);
 
@@ -63,8 +64,7 @@ public class SingleValueEReferenceControlBuilder implements ControlBuilder {
 			return comboViewer;
 		}
 		
-		logger.error("Trying to Visualize PropertyDescription choices {}",
-				choices);
+		
 		comboViewer.setContentProvider(new ArrayContentProvider());
 		comboViewer.setLabelProvider(new AdapterFactoryLabelProvider(
 				adapterFactory));
