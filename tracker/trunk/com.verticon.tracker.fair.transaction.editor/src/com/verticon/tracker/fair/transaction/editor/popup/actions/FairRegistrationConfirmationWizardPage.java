@@ -169,6 +169,7 @@ public class FairRegistrationConfirmationWizardPage extends WizardPage
 		});
 
 		viewer.setLabelProvider(new LabelProvider() {
+			@Override
 			public String getText(Object element) {
 				return ((Animal) element).getId();
 			}
