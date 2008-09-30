@@ -1,5 +1,9 @@
 package com.verticon.tracker.editor.util;
 
+import org.eclipse.core.databinding.beans.BeansObservables;
+import org.eclipse.core.databinding.observable.ChangeEvent;
+import org.eclipse.core.databinding.observable.IChangeListener;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
@@ -39,6 +43,7 @@ import org.slf4j.LoggerFactory;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
+import com.verticon.tracker.util.AbstractModelObject;
 
 public abstract class TrackerView extends ViewPart implements ISelectionListener, ISelectionChangedListener{
 
@@ -53,6 +58,10 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	private Action reorientSashFormAction;
 	private SashForm sashForm; // disposed
 	protected FilteredTable filteredTable; // disposed
+
+	private final ViewModel viewModel = new ViewModel();
+	
+	IObservableValue statusMessageObservable;
 	/**
 	 * slf4j Logger
 	 */
@@ -309,19 +318,59 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	 * @param selection
 	 * @return
 	 */
-	protected void fillPropertiesFolder(ISelection selection, AdapterFactory adapterFactory, CTabFolder cTabFolder) {
+	private void fillPropertiesFolder(ISelection selection,
+			AdapterFactory adapterFactory, CTabFolder cTabFolder) {
 		if (defaultPropertiesFormProvider == null) {
 //			logger.debug("Creating a defaultPropertiesFormProvider");
 			defaultPropertiesFormProvider = new DefaultPropertiesFormProvider();
-			// defaultPropertiesFormProvider.setWizardPage(this);
-			// TODO events viewer need to show validation information
 		}
-//		logger.debug("Filling properties with the selection");
+		initialStatusObservable(viewModel.getStatus());
 		defaultPropertiesFormProvider.fillProperties(selection, adapterFactory,
 				cTabFolder, getFolderTitle());
 		cTabFolder.pack(true);
-		return;
+		
 	
+	}
+	/**
+	 * 
+	 */
+	private void initialStatusObservable(final Status status) {
+		// TODO events viewer need to show validation information
+		// final StatusMessage status = new StatusMessage();
+		if (statusMessageObservable != null) {
+			statusMessageObservable.dispose();
+			statusMessageObservable = null;
+		}
+		statusMessageObservable = BeansObservables
+				.observeValue(status, "status");
+
+		
+		try {
+			statusMessageObservable.addChangeListener(new IChangeListener() {
+
+				public void handleChange(ChangeEvent event) {
+					if (statusMessageObservable.getValue().equals("OK")) {
+						// firstName.setBackground(Display.getCurrent()
+						// .getSystemColor(SWT.COLOR_WHITE));
+
+						IActionBars bars = getViewSite().getActionBars();
+						bars.getStatusLineManager().setMessage("");
+					} else {
+						// firstName.setBackground(Display.getCurrent()
+						// .getSystemColor(SWT.COLOR_RED));
+						// System.out.println(statusMessageObservable.getValue());
+
+						IActionBars bars = getViewSite().getActionBars();
+						bars.getStatusLineManager().setMessage(status.getStatus());
+					}
+				}
+			});
+		} catch (Exception e) {
+			logger.error("Failed to attach listner to viewer", e);
+		}
+		
+		defaultPropertiesFormProvider
+				.setStatusMessageObservable(statusMessageObservable);
 	}
 
 	private void contributeToActionBars() {
@@ -381,4 +430,25 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 		manager.add(reorientSashFormAction);
 	}
 
+    class ViewModel {
+		// model
+		private final Status status = new Status();
+
+		public Status getStatus() {
+			return status;
+		}
+	}
+    class Status extends AbstractModelObject {
+		private String status = "";
+
+		public String getStatus() {
+			return status;
+		}
+
+		public void setStatus(String status) {
+			// String old = this.status;
+			this.status = status;
+			// changes.firePropertyChange("status", old, status);
+		}
+	}
 }
