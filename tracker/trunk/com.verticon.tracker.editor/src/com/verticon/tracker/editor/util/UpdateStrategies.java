@@ -7,45 +7,103 @@ import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.util.CheckISO7064Mod37_36;
 
+
+/**
+ * Utility class for finding UpdateValueStrategy for EMF features.
+ * 
+ * @author jconlon
+ * 
+ */
 public class UpdateStrategies {
 
+	private UpdateStrategies() {
+		super();
+	}
+
 	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * The singleton instance
 	 */
 	static UpdateStrategies INSTANCE = new UpdateStrategies();
 
+	private static UpdateValueStrategy eReferenceSingleValueStrategy = new EReferenceSingleValueUpdateValueStrategy();
+	private static UpdateValueStrategy pinUpdateStrategy = new PinUpdateValueStrategy();
+
 	
-	protected UpdateValueStrategy getTargetToModelStrategy(EStructuralFeature eStructuralFeature){
-//		if(FairPackage.eINSTANCE.getPerson_Pin().equals(eStructuralFeature)){
-//			return new CustomUpdateValueStrategy();
-//		}
-//		if(eStructuralFeature.getEType().equals(TrackerPackage.eINSTANCE.getPremisesIdNumber()))
-		
+	 /**
+	 * Main entry to class to find a target to model strategy for a given
+	 * Feature
+	 * 
+	 * @param eStructuralFeature
+	 * @return
+	 */
+    UpdateValueStrategy getTargetToModelStrategy(
+			EStructuralFeature eStructuralFeature) {
 		if(eStructuralFeature instanceof EAttribute){
 			EAttribute e = (EAttribute)eStructuralFeature;
 			if(e.getEAttributeType().equals(TrackerPackage.eINSTANCE.getPremisesIdNumber())){
-				return new CustomUpdateValueStrategy();
+				return pinUpdateStrategy;
 			}
+		} else if (eStructuralFeature instanceof EReference) {
+			if (eStructuralFeature.isMany()) {
+				return null;
+			} else {
+				return eReferenceSingleValueStrategy;
+			}
+			
 		}
 		
-		
+		return null;// defaultValueStrategy;
+	}
+	
+    /**
+	 * Main entry to class to find a model to target strategy for a given
+	 * Feature
+	 * 
+	 * @param eStructuralFeature
+	 * @return
+	 */
+    UpdateValueStrategy getModelToTargetStrategy(
+			EStructuralFeature eStructuralFeature) {
 		return null;
 	}
 	
-	protected UpdateValueStrategy getModelToTargetStrategy(EStructuralFeature eStructuralFeature){
-		
-		return null;
+    /**
+	 * Strategy for dealing with Single Valued EReferences.
+	 * 
+	 * @author jconlon
+	 * 
+	 */
+	private static final class EReferenceSingleValueUpdateValueStrategy extends
+			UpdateValueStrategy {
+
+		/**
+		 * Kludge to detect a space character in a choice list that denotes a
+		 * null for nulling an EMF EReference
+		 */
+		@Override
+		public Object convert(Object value) {
+			if (value instanceof String && ((String) value).equals(" ")) {
+				return null;
+			}
+			return super.convert(value);
+		}
+
 	}
 	
-	private static final class CustomUpdateValueStrategy extends UpdateValueStrategy {
+	/**
+	 * Strategy for dealing with Pins
+	 * 
+	 * @author jconlon
+	 * 
+	 */
+	private static final class PinUpdateValueStrategy extends
+			UpdateValueStrategy {
 
 		@Override
 		public IStatus validateBeforeSet(Object value) {
@@ -66,7 +124,7 @@ public class UpdateStrategies {
 		}
 	}
 	
-	private static class MyPinValidator implements IValidator{
+	private static final class MyPinValidator implements IValidator {
 		public IStatus validate(Object value) {
 			String initialValue = (String)value;
 			if(initialValue.length()!=7){
