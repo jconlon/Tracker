@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Tag;
+import com.verticon.tracker.editor.util.TrackerConstants;
 import com.verticon.tracker.reader.IReader;
 import com.verticon.tracker.reader.ReaderPlugin;
 
@@ -73,16 +74,18 @@ public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
 			tag.setId(Long.toString(tagId));
 		}
 		Hashtable<String, Object> table = new Hashtable<String, Object>();
-		table.put(ReaderPlugin.EVENT_PROPERTY_ANIMAL, templateAnimal);
+		table.put(TrackerConstants.EVENT_ADMIN_PROPERTY_ANIMAL_TEMPLATE,
+				templateAnimal);
 		table.put(Constants.BUNDLE_SYMBOLICNAME, ReaderPlugin.getDefault().getSymbolicName());
-		table.put(ReaderPlugin.EVENT_PROPERTY_READER_NAME, reader.toString());
+		table.put(TrackerConstants.EVENT_ADMIN_PROPERTY_READER_NAME, reader
+				.toString());
 		
 		EventAdmin ea = ReaderPlugin.getDefault().getService();
 		
 		if(ea != null) {
 			ea.sendEvent(
 					new Event(
-							ReaderPlugin.TOPIC_ANIMAL, table));
+							TrackerConstants.EVENT_ADMIN_TOPIC_READER, table));
 		}else{
 			logger.warn("{} failed to find EventAdmin service",reader);
 		}

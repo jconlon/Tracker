@@ -10,14 +10,13 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.event.EventConstants;
 import org.osgi.service.event.EventHandler;
 
+import com.verticon.tracker.editor.util.TrackerConstants;
 import com.verticon.tracker.transaction.editor.event.TransactionEventHandler;
 
 /**
@@ -62,6 +61,7 @@ public final class TransactionEditorPlugin extends EMFPlugin {
 	 * @return the singleton instance.
 	 * @generated
 	 */
+	@Override
 	public ResourceLocator getPluginResourceLocator() {
 		return plugin;
 	}
@@ -84,10 +84,10 @@ public final class TransactionEditorPlugin extends EMFPlugin {
 	 * @generated 
 	 */
 	public static class Implementation extends EclipseUIPlugin {
-		
-		final public static String [] ANIMAL_TOPICS = new String[] {
-			"com/verticon/tracker/Animal"
-		};
+
+		// final public static String [] ANIMAL_TOPICS = new String[] {
+		// "com/verticon/tracker/Animal"
+		// };
 		/**
 		 * Creates an instance.
 		 * <!-- begin-user-doc -->
@@ -105,8 +105,9 @@ public final class TransactionEditorPlugin extends EMFPlugin {
 		@Override
 		public void start(BundleContext context) throws Exception {
 			super.start(context);
-			Dictionary<String, String[]> d = new Hashtable<String, String[]>();
-			d.put(EventConstants.EVENT_TOPIC, ANIMAL_TOPICS);
+			Dictionary<String, String> d = new Hashtable<String, String>();
+			d.put(EventConstants.EVENT_TOPIC,
+					TrackerConstants.EVENT_ADMIN_TOPIC_READER);
 			context.registerService(EventHandler.class.getName(), 
 					new TransactionEventHandler(), d);
 		}
