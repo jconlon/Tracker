@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TableViewer;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -39,12 +40,13 @@ public class ExhibitsView extends TrackerView {
 	 */
 	@Override
 	protected void setUpTable(AdapterFactory adapterFactory) {
-		FairTableEditorUtils.setUpExhibitsTableViewer(viewer);
-		filteredTable.setColumns(viewer.getTable().getColumns());
+		TableViewer tableViewer = masterFilteredTable.getViewer();
+		FairTableEditorUtils.setUpExhibitsTableViewer(tableViewer);
+		masterFilteredTable.setColumns(tableViewer.getTable().getColumns());
 
-		viewer.setContentProvider(new ExhibitsContentAdapter(
+		tableViewer.setContentProvider(new ExhibitsContentAdapter(
 				adapterFactory));
-		viewer.setLabelProvider(new AdapterFactoryLabelProvider(
+		tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(
 						adapterFactory));
 	}
 
@@ -54,9 +56,10 @@ public class ExhibitsView extends TrackerView {
 	 */
 	@Override
 	protected void handleViewerInputChange() {
+		TableViewer tableViewer = masterFilteredTable.getViewer();
 		Fair rootObject = getFair();
 		if(rootObject !=null){
-			viewer.setInput(rootObject);
+			tableViewer.setInput(rootObject);
 		}
 		
 	}
@@ -67,7 +70,8 @@ public class ExhibitsView extends TrackerView {
 	 * @param sselection
 	 */
 	@Override
-	protected void handleSelection(Object first) {
+	protected void handleMasterSelection(Object first) {
+		TableViewer tableViewer = masterFilteredTable.getViewer();
 		Object exhibit = null;
 		if (first instanceof Animal) {
 //			logger.debug("Animal selection");
@@ -89,7 +93,7 @@ public class ExhibitsView extends TrackerView {
 					exhibits.add(exhib);
 				}
 			}
-			viewer.setSelection(new StructuredSelection(exhibits),true);
+			tableViewer.setSelection(new StructuredSelection(exhibits),true);
 			return;
 		}
 		setSelection(exhibit);
@@ -99,11 +103,12 @@ public class ExhibitsView extends TrackerView {
 	 * @param exhibitToSelect
 	 */
 	private void setSelection(Object exhibitToSelect) {
+		TableViewer tableViewer = masterFilteredTable.getViewer();
 		if(exhibitToSelect!=null){
-			viewer.setSelection(
+			tableViewer.setSelection(
 				new StructuredSelection(exhibitToSelect), true);
 		}else{
-			viewer.setSelection(
+			tableViewer.setSelection(
 					new StructuredSelection());
 		}
 	}
