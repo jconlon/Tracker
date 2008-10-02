@@ -1,5 +1,9 @@
 package com.verticon.tracker.editor.util;
 
+import java.util.Hashtable;
+import java.util.Properties;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.ChangeEvent;
 import org.eclipse.core.databinding.observable.IChangeListener;
@@ -37,6 +41,14 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
+import org.osgi.service.event.Event;
+import org.osgi.service.event.EventAdmin;
+import org.osgi.service.event.EventConstants;
+import org.osgi.service.event.EventHandler;
+import org.osgi.util.tracker.ServiceTracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,23 +57,88 @@ import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.util.AbstractModelObject;
 
-public abstract class TrackerView extends ViewPart implements ISelectionListener, ISelectionChangedListener{
+/**
+ * Base class for a Master-Detail Viewer. The Master is shown as rows in a
+ * FilteredTable and the Details of each selected row is shown in a Form.
+ * FilteredTable and Form are separated by a sash that can be oriented
+ * horizontally or vertically. The Form is created dynamically when a row is
+ * selected in the tableViewer.
+ * 
+ * The Master FilteredTable is populated by a when an
+ * {@link org.eclipse.jface.viewers.ISelectionProvider} and
+ * {@link com.verticon.tracker.editor.presentation.IQueryDataSetProvider} sends
+ * a {@link TrackerView#selectionChanged(IWorkbenchPart, ISelection)} event.
+ * 
+ * 
+ * @author jconlon
+ * 
+ */
+public abstract class TrackerView extends ViewPart implements
+		ISelectionListener, ISelectionChangedListener {
+	
 
 	
-	protected TableViewer viewer;
-	protected CTabFolder cTabFolder;
+	/**
+	 * Active IQueryDataSetProvider editor that supplies the input for the
+	 * Master {@link TrackerView#masterFilteredTable} .
+	 * 
+	 * This field is referenced by subclasses.
+	 * 
+	 * @see com.verticon.tracker.editor.presentation.IQueryDataSetProvider
+	 */
+	protected IQueryDataSetProvider queryDataSetProvider = null;
+
+	/**
+	 * This field is referenced by subclasses.
+	 */
+	protected FilteredTable masterFilteredTable; // disposed
+
+	/**
+	 * Master TableViewer. Used by and can be obtained from
+	 * {@link TrackerView#masterFilteredTable}
+	 */
+	private TableViewer tableViewer;
+	
+	
+	private CTabFolder detailFormTabFolder;
+	
+	/**
+	 * @see #dispose()
+	 */
+	private Composite sash = null;
+
+	/**
+	 * @see #dispose()
+	 */
+	private SashForm sashForm; 
+	
+	
+	private TableColumnPatternFilter patternFilter;
+	private Action reorientSashFormAction;
 	private AdapterFactory adapterFactory = null;
 	private IPropertiesFormProvider defaultPropertiesFormProvider;
-	protected IQueryDataSetProvider queryDataSetProvider = null;
-	private TableColumnPatternFilter patternFilter;
-	Composite sash = null; // disposed
-	private Action reorientSashFormAction;
-	private SashForm sashForm; // disposed
-	protected FilteredTable filteredTable; // disposed
-
 	private final ViewModel viewModel = new ViewModel();
+	private IObservableValue statusMessageObservable;
+	private final AtomicBoolean isHandlingWorkbenchPartSelect = new AtomicBoolean(
+			false);
 	
-	IObservableValue statusMessageObservable;
+	/**
+	 * OSGi ServiceTracker used to track EventAdmin serivce
+	 */
+	private ServiceTracker tracker;
+
+	/**
+	 * This field holds the {@link ServiceRegistration} object for the
+	 * {@link EventHandler} service that listens for selections to the
+	 * {@link ISelections}s tracked by subclasses. This object is used to keep
+	 * track of the service that we've registered and provide us with a
+	 * convenient mechanism for unregistering the service when we're done.
+	 * 
+	 * @see #selectionChangedHandlerService(BundleContext)
+	 * @see #dispose()
+	 */
+	ServiceRegistration selectionChangedHandlerService;
+
 	/**
 	 * slf4j Logger
 	 */
@@ -69,7 +146,14 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 				.getLogger(this.getClass());
 
 	
+	/**
+	 * Implemented by subclasses
+	 * 
+	 * @return title of the folder
+	 */
 	protected abstract String getFolderTitle();
+	
+	
 	/**
 	 * Override point for subclasses to create the tableViewer columns.
 	 */
@@ -88,22 +172,58 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	 * Setup for Exhibit, Person, Event, and Exhibit
 	 * @param sselection
 	 */
-	protected abstract void handleSelection(Object first);
+	protected abstract void handleMasterSelection(Object first);
 	
+	
+	/**
+	 * Sends out a Selection to the Event Admin Service to synchronize all
+	 * views.
+	 * 
+	 * @param selection
+	 */
+	private void notifyOtherViewersOfSelection(
+			ISelection selection) {
+
+		logger.debug("Firing selection event");
+		EventAdmin ea = (EventAdmin) tracker.getService();
+		if (ea != null) {
+			Hashtable<String, Object> table = new Hashtable<String, Object>();
+			table.put(TrackerConstants.EVENT_ADMIN_PROPERTY_SELECTION,
+					selection);
+			table.put(TrackerConstants.EVENT_ADMIN_PROPERTY_SELECTION_SOURCE,
+					getFolderTitle());
+
+			ea.sendEvent(new Event(TrackerConstants.EVENT_ADMIN_TOPIC_VIEW,
+					table));
+		} else {
+			logger.error("Could not find EventAdmin Serivce");
+		}
+
+		IEditorPart editorPart = getSite().getWorkbenchWindow().getActivePage()
+				.getActiveEditor();
+
+		
+		IContentOutlinePage contentOutlinePage = (IContentOutlinePage) editorPart
+				.getAdapter(IContentOutlinePage.class);
+		if (contentOutlinePage == null) {
+			// Can't find an outline try to get the QueryDataSetProvider
+			return;
+		}
+		contentOutlinePage.setSelection(selection);
+	}
+	
+	/**
+	 * Override point for subclasses to create their own AdapterFactory
+	 * 
+	 * @return AdapterFactory
+	 */
 	protected AdapterFactory createAdapterFactory(){
 		return new TrackerItemProviderAdapterFactory();
 	}
 	
+
 	/**
-	 * Convienence method to find the Root
-	 * 
-	 * @return
-	 */
-//	protected abstract Premises getPremises(EditingDomain editingDomain);
-	
-	/**
-	 * This looks up a string in the plugin's plugin.properties file. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This looks up a string in the Tracker plugin's plugin.properties file.
 	 * 
 	 * @generated
 	 */
@@ -112,8 +232,7 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	}
 
 	/**
-	 * This is a callback that will allow us to create the viewer and initialize
-	 * it.
+	 * Primary entry point for the view to create the UI components
 	 */
 	@Override
 	public void createPartControl(Composite base) {
@@ -134,14 +253,133 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 				.getSystemColor(
 				SWT.COLOR_GRAY));
 	
-		createViewer();
+		createTableViewer();
 		makeActions();
 		getViewSite().getPage().addSelectionListener(this);
 	
-		// getSite().setSelectionProvider(viewer);
+		// getSite().setSelectionProvider(tableViewer);
 		createFormFolder();
 		hookContextMenu();
 		contributeToActionBars();
+		BundleContext context = TrackerReportEditorPlugin.getPlugin()
+				.getBundle().getBundleContext();
+		
+		tracker = new ServiceTracker(context, EventAdmin.class.getName(), null);
+		tracker.open();
+		
+		startSelectionChangedHandlerService(context);
+		
+	}
+
+
+	/**
+	 * Passes the focus request to the tableViewer's control.
+	 */
+	@Override
+	public void setFocus() {
+		tableViewer.getControl().setFocus();
+	}
+
+	/**
+	 * Disposes all the tabs in the TabFolder and resources.
+	 */
+	@Override
+	public void dispose() {
+		logger.debug("Disposing resources");
+		tracker.close();
+		tracker = null;
+		selectionChangedHandlerService.unregister();
+		
+		for (CTabItem item : detailFormTabFolder.getItems()) {
+			item.dispose();
+		}
+		detailFormTabFolder.dispose();
+		sash.dispose();
+		sashForm.dispose();
+		masterFilteredTable.dispose();
+		statusMessageObservable.dispose();
+		super.dispose();
+
+	}
+
+	/**
+	 * Implements ISelectionListener to handle selection changes on Editors in
+	 * the workbench.
+	 * 
+	 * If the part is a
+	 * {@link com.verticon.tracker.editor.presentation.IQueryDataSetProvider}
+	 * 
+	 * First the {@link TrackerView#handleViewerInputChange()} method will be
+	 * called to load obtain rows for the
+	 * {@link TrackerView#masterFilteredTable} (if this method is called by a
+	 * previously known part, then new rows will not be loaded.)
+	 * 
+	 * Second the {@link TrackerView#routeWorkbenchPartSelection(ISelection)}
+	 * method will be called to determine to handle it directly or send it to be
+	 * handled by the subclass.
+	 * 
+	 * @see ISelectionListener#selectionChanged(IWorkbenchPart, ISelection)
+	 * @param part
+	 *            the workbench part containing the selection
+	 * @param selection
+	 *            the current selection.
+	 */
+	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+		IWorkbenchPartSite site = part.getSite();
+		if (site == null) {
+			return;
+		}
+		IWorkbenchWindow workbenchWindow = site.getWorkbenchWindow();
+		if (workbenchWindow == null || workbenchWindow.getActivePage() == null) {
+			return;
+		}
+
+		IEditorPart editorPart = workbenchWindow.getActivePage()
+				.getActiveEditor();
+		if (editorPart == null) {
+			return;
+		}
+
+		IQueryDataSetProvider selectedQueryDataSetProvider = (IQueryDataSetProvider) editorPart
+				.getAdapter(IQueryDataSetProvider.class);
+
+		if (selectedQueryDataSetProvider == null) {
+			return;
+		}
+
+		if (this.queryDataSetProvider == selectedQueryDataSetProvider) {
+			logger.debug(
+					"Workbench selectionChanged detected from old provider {}",
+					queryDataSetProvider);
+			routeWorkbenchPartSelection(selection);
+			return;
+		}
+		this.queryDataSetProvider = selectedQueryDataSetProvider;
+		logger.debug(
+				"Workbench selectionChanged detected from new provider {}",
+				queryDataSetProvider);
+		handleViewerInputChange();
+		routeWorkbenchPartSelection(selection);
+		return;
+	}
+
+	/**
+	 * Implements ISelectionChangedListener to listen for selections on the
+	 * MasterTableViewer.
+	 */
+	public synchronized void selectionChanged(SelectionChangedEvent event) {
+		if (isHandlingWorkbenchPartSelect.get()) {
+			// logger.debug("Global MasterTable selection changed. Source {}",
+			// event
+			// .getSource());
+		} else {
+			notifyOtherViewersOfSelection(event.getSelection());
+		}
+		for (CTabItem item : detailFormTabFolder.getItems()) {
+			item.dispose();
+		}
+		fillPropertiesFolder(event.getSelection(), adapterFactory,
+				detailFormTabFolder);
 	}
 
 	/**
@@ -152,17 +390,17 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 		ScrolledComposite formParent = new ScrolledComposite(sashForm,
 		 SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 	    
-		cTabFolder = new CTabFolder(formParent, SWT.LEFT | SWT.H_SCROLL
+		detailFormTabFolder = new CTabFolder(formParent, SWT.LEFT | SWT.H_SCROLL
 				| SWT.V_SCROLL);
-		cTabFolder.setForeground(formParent.getDisplay().getSystemColor(
+		detailFormTabFolder.setForeground(formParent.getDisplay().getSystemColor(
 				SWT.COLOR_BLACK));
-		formParent.setContent(cTabFolder);
+		formParent.setContent(detailFormTabFolder);
 	}
 
 	/**
 	 * First window will be the table
 	 */
-	private void createViewer() {
+	private void createTableViewer() {
 		Composite tableParent = new Composite(sashForm, SWT.NONE);
 	
 		{
@@ -175,20 +413,15 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 			tableParent.setLayout(gridLayout);
 		}
 	
-		/*
-		 * group = new Group(parent, SWT.NONE); { GridData gridData = new
-		 * GridData(SWT.FILL, SWT.FILL, true, false); gridData.widthHint =
-		 * SWT.DEFAULT; gridData.heightHint = SWT.DEFAULT;
-		 * group.setLayoutData(gridData); }
-		 */
-	
 		patternFilter = new TableColumnPatternFilter();
-		filteredTable = new FilteredTable(tableParent, SWT.MULTI | SWT.H_SCROLL
+		masterFilteredTable = new FilteredTable(tableParent,
+				SWT.MULTI | SWT.H_SCROLL
 				| SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER, patternFilter);
-		filteredTable.setFilterText("");
-		viewer = filteredTable.getViewer();
-		viewer.addSelectionChangedListener(this);
-		Table table = viewer.getTable();
+		masterFilteredTable.setFilterText("");
+		tableViewer = masterFilteredTable.getViewer();
+		tableViewer.addSelectionChangedListener(this);
+		
+		Table table = tableViewer.getTable();
 		// set up table layout data
 		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, true);
 		gridData.widthHint = SWT.DEFAULT;
@@ -201,76 +434,6 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	}
 
 	
-	
-	
-	/**
-	 * Passing the focus request to the viewer's control.
-	 */
-	@Override
-	public void setFocus() {
-		viewer.getControl().setFocus();
-	}
-
-	@Override
-	public void dispose() {
-		// Remove all the tabs in the TabFolder
-		logger.debug("Disposing resources");
-		for (CTabItem item : cTabFolder.getItems()) {
-			item.dispose();
-		}
-		cTabFolder.dispose();
-		sash.dispose();
-		sashForm.dispose();
-		filteredTable.dispose();
-		super.dispose();
-		
-	}
-
-	public void selectionChanged(SelectionChangedEvent event) {
-		// Remove all the tabs in the TabFolder
-		for (CTabItem item : cTabFolder.getItems()) {
-			item.dispose();
-		}
-		fillPropertiesFolder(event.getSelection(), adapterFactory, cTabFolder);
-	}
-
-	/**
-	 * @see ISelectionListener#selectionChanged(IWorkbenchPart, ISelection)
-	 */
-	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		logger.debug("selectionChanged entered");
-		IWorkbenchPartSite site = part.getSite();
-		if(site ==null){
-			return;
-		}
-		IWorkbenchWindow workbenchWindow = site.getWorkbenchWindow();
-		if(workbenchWindow==null || workbenchWindow.getActivePage()==null){
-			return;
-		}
-		
-		IEditorPart editorPart = workbenchWindow.getActivePage().getActiveEditor();
-		if(editorPart ==null){
-			return;
-		}
-	
-		IQueryDataSetProvider selectedQueryDataSetProvider = (IQueryDataSetProvider) editorPart
-				.getAdapter(IQueryDataSetProvider.class);
-	
-		if (selectedQueryDataSetProvider == null) {
-			return;
-		}
-	
-		if (this.queryDataSetProvider == selectedQueryDataSetProvider) {
-			handleSelection(selection);
-			return;
-		}
-		this.queryDataSetProvider = selectedQueryDataSetProvider;
-		logger.debug("Changed Providers to {}", queryDataSetProvider);
-		handleViewerInputChange();
-		handleSelection(selection);
-		return;
-	}
-
 	/**
 	 * Different types of editor selections are handled in the 
 	 * following manner:
@@ -282,30 +445,34 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	 * 
 	 * @param selection
 	 */
-	private void handleSelection(ISelection selection) {
-		
+	private synchronized void routeWorkbenchPartSelection(ISelection selection) {
+		isHandlingWorkbenchPartSelect.set(true);
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection sselection = (IStructuredSelection) selection;
 			
 			switch (sselection.size()) {
 			case 0:
-//				logger.debug("Empty selection");
-				filteredTable.setFilterText("");
-				viewer.setSelection(sselection);
+				// logger.debug(
+				// "Empty selection - deselect any selection in the tableViewer"
+				// );
+				masterFilteredTable.setFilterText("");
+				tableViewer.setSelection(sselection);
 				break;
 			case 1:
-//				logger.debug("Single selection");
-				handleSelection(sselection.getFirstElement());
+				// logger.debug(
+				// "Single selection - send it to the subclass for handling");
+				handleMasterSelection(sselection.getFirstElement());
 				break;
 	
 			default:
 //				logger.debug("Multiple selection");
-				filteredTable.setFilterText(null);
-				viewer.setSelection(sselection);
+				masterFilteredTable.setFilterText(null);
+				tableViewer.setSelection(sselection);
 				break;
 			}
 			
 		}
+		isHandlingWorkbenchPartSelect.set(false);
 	}
 
 	public TrackerView() {
@@ -335,7 +502,7 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 	 * 
 	 */
 	private void initialStatusObservable(final Status status) {
-		// TODO events viewer need to show validation information
+		// TODO events tableViewer need to show validation information
 		// final StatusMessage status = new StatusMessage();
 		if (statusMessageObservable != null) {
 			statusMessageObservable.dispose();
@@ -366,7 +533,7 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 				}
 			});
 		} catch (Exception e) {
-			logger.error("Failed to attach listner to viewer", e);
+			logger.error("Failed to attach listner to tableViewer", e);
 		}
 		
 		defaultPropertiesFormProvider
@@ -410,9 +577,9 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 				TrackerView.this.fillContextMenu(manager);
 			}
 		});
-		Menu menu = menuMgr.createContextMenu(viewer.getControl());
-		viewer.getControl().setMenu(menu);
-		getSite().registerContextMenu(menuMgr, viewer);
+		Menu menu = menuMgr.createContextMenu(tableViewer.getControl());
+		tableViewer.getControl().setMenu(menu);
+		getSite().registerContextMenu(menuMgr, tableViewer);
 	}
 
 	private void fillContextMenu(IMenuManager manager) {
@@ -438,7 +605,8 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 			return status;
 		}
 	}
-    class Status extends AbstractModelObject {
+
+	class Status extends AbstractModelObject {
 		private String status = "";
 
 		public String getStatus() {
@@ -450,5 +618,61 @@ public abstract class TrackerView extends ViewPart implements ISelectionListener
 			this.status = status;
 			// changes.firePropertyChange("status", old, status);
 		}
+	}
+	
+	/**
+	 * This method starts an {@link EventHandler} service that listens for
+	 * property changes to {@link LineItem} instances.
+	 * 
+	 * <p>
+	 * This service listens on the
+	 * {@link ObjectWithProperties#PROPERTY_CHANGE_TOPIC} topic, with an
+	 * inclusion filter (via the {@link EventConstants#EVENT_FILTER} property)
+	 * that only accepts events where the
+	 * {@link ObjectWithProperties#SOURCE_TYPE} is {@link LineItem}.
+	 * 
+	 * @see ObjectWithProperties#postEvent(String, Object, Object)
+	 * @param context
+	 *            an instance of BundleContext to use to register the
+	 *            EventListener.
+	 */
+	void startSelectionChangedHandlerService(BundleContext context) {
+		/*
+		 * Create the event handler. This is the object that will be notified
+		 * when a matching event is delivered to the event service.
+		 */
+		EventHandler handler = new EventHandler() {
+			public void handleEvent(Event event) {
+				logger.debug("Handling Event");
+				
+				final ISelection selection = (ISelection) event
+						.getProperty(TrackerConstants.EVENT_ADMIN_PROPERTY_SELECTION);
+
+				if (selection == null) {
+					return;
+				}
+
+				/*
+				 * The view must be updated from within the UI thread, so use an
+				 * asyncExec block to do the actual update.
+				 */
+				getSite().getShell().getDisplay().asyncExec(new Runnable() {
+					public void run() {
+						routeWorkbenchPartSelection(selection);
+					}
+				});
+			}
+		};
+
+		Properties properties = new Properties();
+		properties.put(EventConstants.EVENT_TOPIC,
+				TrackerConstants.EVENT_ADMIN_TOPIC_VIEW);
+		// Ignore events sent by this viewer
+		properties.put(EventConstants.EVENT_FILTER, "(!("
+				+ TrackerConstants.EVENT_ADMIN_PROPERTY_SELECTION_SOURCE + "="
+				+ getFolderTitle() + "))");
+
+		selectionChangedHandlerService = context.registerService(
+				EventHandler.class.getName(), handler, properties);
 	}
 }

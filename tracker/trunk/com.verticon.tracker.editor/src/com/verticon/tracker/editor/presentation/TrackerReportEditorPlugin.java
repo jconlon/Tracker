@@ -83,9 +83,7 @@ public final class TrackerReportEditorPlugin extends EMFPlugin {
 	 * @generated
 	 */
 	public static class Implementation extends EclipseUIPlugin {//implements EventHandler{
-//		final public static String [] ANIMAL_TOPICS = new String[] {
-//			"com/verticon/tracker/Animal"
-//		};
+
 		/**
 		 * Creates an instance.
 		 * <!-- begin-user-doc -->
@@ -99,24 +97,12 @@ public final class TrackerReportEditorPlugin extends EMFPlugin {
 			//
 			plugin = this;
 		}
-
 		
 		@Override
 		public void start(BundleContext context) throws Exception {
 			super.start(context);
-//			Dictionary<String, String[]> d = new Hashtable<String, String[]>();
-//			d.put(EventConstants.EVENT_TOPIC, ANIMAL_TOPICS);
-//			context.registerService(EventHandler.class.getName(), 
-//					this, d);
+
 		}
 
-//		public void handleEvent(Event event) {
-//			Animal animal = (Animal)event.getProperty("com.verticon.tracker.animal");
-//			if(animal ==null){
-//				return;
-//			}
-//			System.out.println(" animal event: "+animal.getId());
-//		}
 	}
-
 }
