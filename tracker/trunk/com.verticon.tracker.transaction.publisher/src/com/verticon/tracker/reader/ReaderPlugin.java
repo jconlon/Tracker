@@ -29,27 +29,9 @@ public class ReaderPlugin extends AbstractUIPlugin {
 	
 	// The shared instance
 	private static ReaderPlugin plugin;
-	
-	final public static String TOPIC_ANIMAL = 
-		"com/verticon/tracker/Animal";
-	
-	final public static String [] ANIMAL_TOPICS = new String[] {
-		TOPIC_ANIMAL
-	};
-	
-	public static final String EVENT_PROPERTY_ANIMAL = 
-		"com.verticon.tracker.animal";
-	
-	public static final String EVENT_PROPERTY_READER_NAME = "com.verticon.tracker.reader.name";
-	
 	private ServiceTracker tracker;
-	
-	
 	private ReaderCompletionService readerCompletionService = null;
-	
 	private BundleContext bundleContext;
-	
-	
 	
 
 
@@ -66,6 +48,7 @@ public class ReaderPlugin extends AbstractUIPlugin {
 	 * (non-Javadoc)
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
@@ -84,6 +67,7 @@ public class ReaderPlugin extends AbstractUIPlugin {
 	 * (non-Javadoc)
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
 	 */
+	@Override
 	public void stop(BundleContext context) throws Exception {
 		readerCompletionService.stop();
 		readerCompletionService = null;

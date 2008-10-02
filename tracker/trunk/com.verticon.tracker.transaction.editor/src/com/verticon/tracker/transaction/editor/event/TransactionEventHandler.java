@@ -22,6 +22,7 @@ import com.verticon.tracker.Tag;
 import com.verticon.tracker.editor.preferences.PreferenceConstants;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.editor.util.ActionUtils;
+import com.verticon.tracker.editor.util.TrackerConstants;
 import com.verticon.tracker.util.TrackerUtils;
 
 
@@ -47,9 +48,10 @@ public class TransactionEventHandler implements EventHandler {
 			return;
 		}
 		Animal templateAnimal = (Animal)event.getProperty(
-				"com.verticon.tracker.animal");
+				TrackerConstants.EVENT_ADMIN_PROPERTY_ANIMAL_TEMPLATE);
 		
-		String readerName = (String)event.getProperty("com.verticon.tracker.reader.name");
+		String readerName = (String) event
+				.getProperty(TrackerConstants.EVENT_ADMIN_PROPERTY_READER_NAME);
 		
 		if(templateAnimal ==null){
 			
@@ -77,6 +79,7 @@ public class TransactionEventHandler implements EventHandler {
 	
 	private void process(final String readerName, final TransactionalEditingDomain domain, final Resource resource, final Animal templateAnimal) {
 		domain.getCommandStack().execute(new RecordingCommand(domain) {
+			@Override
 			protected void doExecute() {
 				if (resource.getContents().get(0) instanceof Premises) {
 					Premises premises = (Premises) resource.getContents()
@@ -97,7 +100,6 @@ public class TransactionEventHandler implements EventHandler {
 	 * @param tagNumberToAdd
 	 * @param activePremises
 	 */
-	@SuppressWarnings("unchecked")
 	private void addTemplateEventsToAnimalInPremises(
 			 String readerName,
 			 Animal templateAnimal,
