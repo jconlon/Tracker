@@ -19,6 +19,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TableViewer;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -28,6 +29,7 @@ import com.verticon.tracker.editor.util.TrackerView;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.Person;
+import com.verticon.tracker.util.TrackerSwitch;
 
 public class AnimalsView extends TrackerView {
 
@@ -38,8 +40,9 @@ public class AnimalsView extends TrackerView {
 	 */
 	@Override
 	protected void setUpTable(AdapterFactory adapterFactory) {
+		TableViewer viewer = masterFilteredTable.getViewer();
 		TrackerTableEditorUtils.setUpAnimalsTableViewer(viewer);
-		filteredTable.setColumns(viewer.getTable().getColumns());
+		masterFilteredTable.setColumns(viewer.getTable().getColumns());
 		
 		viewer.setContentProvider(
 		        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
@@ -62,6 +65,7 @@ public class AnimalsView extends TrackerView {
 	@Override
 	protected void handleViewerInputChange() {
 		Premises premises = getPremises(queryDataSetProvider.getEditingDomain());
+		TableViewer viewer = masterFilteredTable.getViewer();
 		viewer.setInput(premises);
 	}
 
@@ -73,7 +77,8 @@ public class AnimalsView extends TrackerView {
 	 * @param sselection
 	 */
 	@Override
-	protected void handleSelection(Object first) {
+	protected void handleMasterSelection(Object first) {
+		TableViewer viewer = masterFilteredTable.getViewer();
 		if (first instanceof Animal) {
 //			logger.debug("Animal selection");
 			viewer.setSelection(new StructuredSelection(first),true);
@@ -98,6 +103,26 @@ public class AnimalsView extends TrackerView {
 			viewer.setSelection(new StructuredSelection(animals),true);
 		}
 	}
+	
+	// Refactor to switch
+	protected void handleMasterSelection2(Object first){
+		TrackerSwitch<Object> visitor = new TrackerSwitch<Object>(){
+
+			@Override
+			public Object caseAnimal(Animal object) {
+				// TODO Auto-generated method stub
+				return super.caseAnimal(object);
+			}
+
+			@Override
+			public Object caseEvent(Event object) {
+				// TODO Auto-generated method stub
+				return super.caseEvent(object);
+			}
+			
+		};
+		
+	}
 
 	@Override
 	protected String getFolderTitle() {
@@ -110,7 +135,7 @@ public class AnimalsView extends TrackerView {
 	 * @return
 	 */
 	protected Premises getPremises(EditingDomain editingDomain) {
-		Resource resource = (Resource) editingDomain.getResourceSet()
+		Resource resource = editingDomain.getResourceSet()
 				.getResources().get(0);
 		Object rootObject = resource.getContents().get(0);
 		if (rootObject instanceof Premises) {
@@ -121,5 +146,7 @@ public class AnimalsView extends TrackerView {
 	
 		return null;
 	}
+
+	
 
 }

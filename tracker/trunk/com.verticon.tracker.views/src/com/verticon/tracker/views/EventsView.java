@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TableViewer;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -38,8 +39,9 @@ public class EventsView extends TrackerView {
 	 */
 	@Override
 	protected void setUpTable(AdapterFactory adapterFactory) {
+		TableViewer viewer = masterFilteredTable.getViewer();
 		TrackerTableEditorUtils.setUpEventsTableViewer(viewer);
-		filteredTable.setColumns(viewer.getTable().getColumns());
+		masterFilteredTable.setColumns(viewer.getTable().getColumns());
 
 		viewer.setContentProvider(new EventHistoryContentProvider(
 				adapterFactory));
@@ -54,6 +56,7 @@ public class EventsView extends TrackerView {
 	@Override
 	protected void handleViewerInputChange() {
 		Premises premises = getPremises(queryDataSetProvider.getEditingDomain());
+		TableViewer viewer = masterFilteredTable.getViewer();
 		viewer.setInput(premises);
 	}
 
@@ -62,7 +65,9 @@ public class EventsView extends TrackerView {
 	 * 
 	 * @param sselection
 	 */
-	protected void handleSelection(Object first) {
+	@Override
+	protected void handleMasterSelection(Object first) {
+		TableViewer viewer = masterFilteredTable.getViewer();
 		if (first instanceof Animal) {
 //			logger.debug("Animal selection");
 			String id = ((Animal) first).getId();
@@ -101,8 +106,8 @@ public class EventsView extends TrackerView {
 	 * @param tagId
 	 */
 	private void setTagIdFilter(String tagId) {
-		filteredTable.setFilterText(tagId);
-		filteredTable.getColumnCombo().select(3);
+		masterFilteredTable.setFilterText(tagId);
+		masterFilteredTable.getColumnCombo().select(3);
 	}
 
 	@Override
@@ -116,7 +121,7 @@ public class EventsView extends TrackerView {
 	 * @return
 	 */
 	protected Premises getPremises(EditingDomain editingDomain) {
-		Resource resource = (Resource) editingDomain.getResourceSet()
+		Resource resource = editingDomain.getResourceSet()
 				.getResources().get(0);
 		Object rootObject = resource.getContents().get(0);
 		if (rootObject instanceof Premises) {

@@ -16,6 +16,7 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TableViewer;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -36,10 +37,11 @@ public class PeopleView extends TrackerView {
 	 */
 	@Override
 	protected void setUpTable(AdapterFactory adapterFactory) {
-		FairTableEditorUtils.setUpPeopleTableViewer(viewer);
-		filteredTable.setColumns(viewer.getTable().getColumns());
+		TableViewer tableViewer = masterFilteredTable.getViewer();
+		FairTableEditorUtils.setUpPeopleTableViewer(tableViewer);
+		masterFilteredTable.setColumns(tableViewer.getTable().getColumns());
 
-		viewer.setContentProvider(new AdapterFactoryContentProvider(
+		tableViewer.setContentProvider(new AdapterFactoryContentProvider(
 				adapterFactory) {
 			@Override
 			public Object[] getElements(Object object) {
@@ -49,7 +51,7 @@ public class PeopleView extends TrackerView {
 			}
 
 		});
-		viewer.setLabelProvider(new AdapterFactoryLabelProvider(
+		tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(
 						adapterFactory));
 	}
 
@@ -59,9 +61,10 @@ public class PeopleView extends TrackerView {
 	 */
 	@Override
 	protected void handleViewerInputChange() {
+		TableViewer tableViewer = masterFilteredTable.getViewer();
 		Fair rootObject = getFair();
 		if(rootObject !=null){
-			viewer.setInput(rootObject);
+			tableViewer.setInput(rootObject);
 		}
 		
 	}
@@ -86,7 +89,7 @@ public class PeopleView extends TrackerView {
 	 * @param sselection
 	 */
 	@Override
-	protected void handleSelection(Object first) {
+	protected void handleMasterSelection(Object first) {
 		Person person = null;
 		if (first instanceof Animal) {
 //			logger.debug("Animal selection");
@@ -111,11 +114,12 @@ public class PeopleView extends TrackerView {
 	 * @param person
 	 */
 	private void setSelection(Object person) {
+		TableViewer tableViewer = masterFilteredTable.getViewer();
 		if(person!=null){
-			viewer.setSelection(
+			tableViewer.setSelection(
 				new StructuredSelection(person), true);
 		}else{
-			viewer.setSelection(
+			tableViewer.setSelection(
 					new StructuredSelection());
 		}
 	}
