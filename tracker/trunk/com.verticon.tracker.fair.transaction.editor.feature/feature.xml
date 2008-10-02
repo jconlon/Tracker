@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.fair.transaction.editor"
       label="Tracker Fair Transaction Editor"
-      version="0.1.1"
+      version="0.1.2"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.fair.transaction.editor">
 
@@ -324,21 +324,21 @@ POSSIBILITY OF SUCH DAMAGES.
          id="com.verticon.tracker.fair.transaction.editor"
          download-size="0"
          install-size="0"
-         version="0.1.1"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="com.verticon.tracker.views"
          download-size="0"
          install-size="0"
-         version="0.1.0"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="com.verticon.tracker.fair.views"
          download-size="0"
          install-size="0"
-         version="0.1.0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>
