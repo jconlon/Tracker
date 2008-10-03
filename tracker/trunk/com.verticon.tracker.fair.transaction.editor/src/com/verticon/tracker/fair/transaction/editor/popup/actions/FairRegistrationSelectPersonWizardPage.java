@@ -257,7 +257,7 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 		}
 
 		defaultPropertiesFormProvider.fillProperties(selection, adapterFactory,
-				cTabFolder, "Person Details");
+				cTabFolder, "Person Details", true);
 		setControl(child);
 		return;
 
