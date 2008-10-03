@@ -34,12 +34,10 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISelectionListener;
-import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
@@ -117,6 +115,8 @@ public abstract class TrackerView extends ViewPart implements
 	private TableColumnPatternFilter patternFilter;
 	private Action reorientSashFormAction;
 	private Action filterAction;
+	private Action showMasterAction;
+	private Action showDetailAction;
 	private AdapterFactory adapterFactory = null;
 	private IPropertiesFormProvider defaultPropertiesFormProvider;
 	private final ViewModel viewModel = new ViewModel();
@@ -148,6 +148,10 @@ public abstract class TrackerView extends ViewPart implements
 	 */
 	protected Logger logger = LoggerFactory
 				.getLogger(this.getClass());
+
+	private ScrolledComposite formParent;
+
+	private Composite tableParent;
 
 	
 	/**
@@ -362,8 +366,7 @@ public abstract class TrackerView extends ViewPart implements
 	 * Second window will be the form
 	 */
 	private void createFormFolder() {
-		// This may need to be disposed
-		ScrolledComposite formParent = new ScrolledComposite(sashForm,
+		formParent = new ScrolledComposite(sashForm,
 		 SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 	    
 		detailFormTabFolder = new CTabFolder(formParent, SWT.LEFT | SWT.H_SCROLL
@@ -377,7 +380,7 @@ public abstract class TrackerView extends ViewPart implements
 	 * First window will be the table
 	 */
 	private void createTableViewer() {
-		Composite tableParent = new Composite(sashForm, SWT.NONE);
+		tableParent = new Composite(sashForm, SWT.NONE);
 	
 		{
 			// Set Layout on parent
@@ -388,7 +391,7 @@ public abstract class TrackerView extends ViewPart implements
 			gridLayout.horizontalSpacing = 0;
 			tableParent.setLayout(gridLayout);
 		}
-	
+		
 		patternFilter = new TableColumnPatternFilter();
 		masterFilteredTable = new FilteredTable(tableParent,
 				SWT.MULTI | SWT.H_SCROLL
@@ -572,6 +575,47 @@ public abstract class TrackerView extends ViewPart implements
 		refresh(tableViewer.getSelection());
 	}
 
+	
+// void showMaster() {
+	// masterFilteredTable.setVisible(true);
+	// sashForm.setMaximizedControl(formParent);
+	// }
+	//
+	// void hideMaster() {
+	//
+	// }
+	//
+	// void showDetail() {
+	//
+	// }
+	//
+	// void hideDetail() {
+	//
+	// }
+
+	private void refreshSashContents() {
+		if (showMasterAction.isChecked() && showDetailAction.isChecked()) {
+			masterFilteredTable.setVisible(true);
+			sashForm.setMaximizedControl(null);
+			showMasterAction.setEnabled(true);
+			showDetailAction.setEnabled(true);
+		} else if (showMasterAction.isChecked()
+				&& !showDetailAction.isChecked()) {
+			masterFilteredTable.setVisible(true);
+			showMasterAction.setEnabled(false);// Can't remove both
+			showDetailAction.setEnabled(true);
+			sashForm.setMaximizedControl(tableParent);
+
+		} else if (!showMasterAction.isChecked()
+				&& showDetailAction.isChecked()) {
+			masterFilteredTable.setVisible(false);
+			showMasterAction.setEnabled(true);
+			showDetailAction.setEnabled(false);// Can't remove both
+			sashForm.setMaximizedControl(formParent);
+		}
+	}
+	
+	
 	private void makeActions() {
 		
 		 // Show Advanced Properties
@@ -592,6 +636,35 @@ public abstract class TrackerView extends ViewPart implements
 						"icons/full/elcl16/filter_ps.gif"));
 		filterAction.setChecked(false);
 
+		// ShowMaster
+		showMasterAction = new Action() {
+			@Override
+			public void run() {
+				refreshSashContents();
+			}
+		};
+		showMasterAction.setText("Show &Master Table");
+		showMasterAction.setToolTipText("Show Master Table");
+		showMasterAction.setImageDescriptor(AbstractUIPlugin
+				.imageDescriptorFromPlugin("com.verticon.tracker.editor",
+						"icons/full/elcl16/prop_ps.gif"));
+		showMasterAction.setChecked(true);
+
+		// ShowDetails
+		showDetailAction = new Action() {
+			@Override
+			public void run() {
+				refreshSashContents();
+			}
+		};
+		showDetailAction.setText("Show &Detail Form");
+		showDetailAction.setToolTipText("Show Detail Form");
+		showDetailAction.setImageDescriptor(AbstractUIPlugin
+				.imageDescriptorFromPlugin("com.verticon.tracker.editor",
+						"icons/full/elcl16/settings.gif"));
+		showDetailAction.setChecked(true);
+		
+		
 		// Reorient Sash
 		reorientSashFormAction = new Action() {
 			@Override
@@ -599,19 +672,36 @@ public abstract class TrackerView extends ViewPart implements
 				switch (sashForm.getOrientation()) {
 				case SWT.HORIZONTAL:
 					sashForm.setOrientation(SWT.VERTICAL);
+					reorientSashFormAction.setImageDescriptor(AbstractUIPlugin
+							.imageDescriptorFromPlugin(
+									"com.verticon.tracker.editor",
+									"icons/full/elcl16/horizontal.gif"));
+					reorientSashFormAction
+							.setText("&Reorient layout horizontally");
+					reorientSashFormAction
+							.setToolTipText("Reorient layout horizontally");
 					break;
 				case SWT.VERTICAL:
 					sashForm.setOrientation(SWT.HORIZONTAL);
+					reorientSashFormAction.setImageDescriptor(AbstractUIPlugin
+							.imageDescriptorFromPlugin(
+									"com.verticon.tracker.editor",
+									"icons/full/elcl16/vertical.gif"));
+					reorientSashFormAction
+							.setText("&Reorient layout vertically");
+					reorientSashFormAction
+							.setToolTipText("Reorient layout vertically");
 					break;
 				}
 			}
 		};
-		reorientSashFormAction.setText("Change window orientation");
 		reorientSashFormAction
-				.setToolTipText("Change the orientation of the table and form");
-		reorientSashFormAction.setImageDescriptor(PlatformUI.getWorkbench()
-				.getSharedImages().getImageDescriptor(
-						ISharedImages.IMG_OBJS_INFO_TSK));
+				.setText("Change master/detail to a vertical orientation");
+		reorientSashFormAction
+				.setToolTipText("Change master/detail to a vertical orientation");
+		reorientSashFormAction.setImageDescriptor(AbstractUIPlugin
+				.imageDescriptorFromPlugin("com.verticon.tracker.editor",
+						"icons/full/elcl16/vertical.gif"));
 	
 	}
 
@@ -631,6 +721,8 @@ public abstract class TrackerView extends ViewPart implements
 	private void fillContextMenu(IMenuManager manager) {
 		manager.add(reorientSashFormAction);
 		manager.add(filterAction);
+		manager.add(showMasterAction);
+		manager.add(showDetailAction);
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
@@ -638,12 +730,16 @@ public abstract class TrackerView extends ViewPart implements
 	private void fillLocalPullDown(IMenuManager manager) {
 		manager.add(reorientSashFormAction);
 		manager.add(filterAction);
+		manager.add(showMasterAction);
+		manager.add(showDetailAction);
 		manager.add(new Separator());
 	}
 
 	private void fillLocalToolBar(IToolBarManager manager) {
 		manager.add(reorientSashFormAction);
 		manager.add(filterAction);
+		manager.add(showMasterAction);
+		manager.add(showDetailAction);
 	}
 
     private class ViewModel {
