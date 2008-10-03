@@ -194,7 +194,7 @@ public class FairRegistrationConfirmationWizardPage extends WizardPage
 		}
 
 		defaultPropertiesFormProvider.fillProperties(selection, adapterFactory,
-				cTabFolder, "Animal Details");
+				cTabFolder, "Animal Details", true);
 		setControl(child);
 		return;
 

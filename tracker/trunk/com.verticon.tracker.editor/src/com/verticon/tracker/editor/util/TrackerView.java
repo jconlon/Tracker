@@ -41,6 +41,7 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -115,12 +116,15 @@ public abstract class TrackerView extends ViewPart implements
 	
 	private TableColumnPatternFilter patternFilter;
 	private Action reorientSashFormAction;
+	private Action filterAction;
 	private AdapterFactory adapterFactory = null;
 	private IPropertiesFormProvider defaultPropertiesFormProvider;
 	private final ViewModel viewModel = new ViewModel();
 	private IObservableValue statusMessageObservable;
 	private final AtomicBoolean isHandlingWorkbenchPartSelect = new AtomicBoolean(
 			false);
+	
+	protected boolean isShowingExpertProperties = false;
 	
 	/**
 	 * OSGi ServiceTracker used to track EventAdmin serivce
@@ -174,43 +178,6 @@ public abstract class TrackerView extends ViewPart implements
 	 */
 	protected abstract void handleMasterSelection(Object first);
 	
-	
-	/**
-	 * Sends out a Selection to the Event Admin Service to synchronize all
-	 * views.
-	 * 
-	 * @param selection
-	 */
-	private void notifyOtherViewersOfSelection(
-			ISelection selection) {
-
-		logger.debug("Firing selection event");
-		EventAdmin ea = (EventAdmin) tracker.getService();
-		if (ea != null) {
-			Hashtable<String, Object> table = new Hashtable<String, Object>();
-			table.put(TrackerConstants.EVENT_ADMIN_PROPERTY_SELECTION,
-					selection);
-			table.put(TrackerConstants.EVENT_ADMIN_PROPERTY_SELECTION_SOURCE,
-					getFolderTitle());
-
-			ea.sendEvent(new Event(TrackerConstants.EVENT_ADMIN_TOPIC_VIEW,
-					table));
-		} else {
-			logger.error("Could not find EventAdmin Serivce");
-		}
-
-		IEditorPart editorPart = getSite().getWorkbenchWindow().getActivePage()
-				.getActiveEditor();
-
-		
-		IContentOutlinePage contentOutlinePage = (IContentOutlinePage) editorPart
-				.getAdapter(IContentOutlinePage.class);
-		if (contentOutlinePage == null) {
-			// Can't find an outline try to get the QueryDataSetProvider
-			return;
-		}
-		contentOutlinePage.setSelection(selection);
-	}
 	
 	/**
 	 * Override point for subclasses to create their own AdapterFactory
@@ -375,12 +342,21 @@ public abstract class TrackerView extends ViewPart implements
 		} else {
 			notifyOtherViewersOfSelection(event.getSelection());
 		}
+		refresh(event.getSelection());
+	}
+
+	/**
+	 * @param selection
+	 */
+	private void refresh(ISelection selection) {
 		for (CTabItem item : detailFormTabFolder.getItems()) {
 			item.dispose();
 		}
-		fillPropertiesFolder(event.getSelection(), adapterFactory,
+		fillPropertiesFolder(selection, adapterFactory,
 				detailFormTabFolder);
 	}
+	
+	
 
 	/**
 	 * Second window will be the form
@@ -475,9 +451,43 @@ public abstract class TrackerView extends ViewPart implements
 		isHandlingWorkbenchPartSelect.set(false);
 	}
 
-	public TrackerView() {
-		super();
+
+	/**
+	 * Sends out a Selection to the Event Admin Service to synchronize all
+	 * views.
+	 * 
+	 * @param selection
+	 */
+	private void notifyOtherViewersOfSelection(ISelection selection) {
+
+		logger.debug("Firing selection event");
+		EventAdmin ea = (EventAdmin) tracker.getService();
+		if (ea != null) {
+			Hashtable<String, Object> table = new Hashtable<String, Object>();
+			table.put(TrackerConstants.EVENT_ADMIN_PROPERTY_SELECTION,
+					selection);
+			table.put(TrackerConstants.EVENT_ADMIN_PROPERTY_SELECTION_SOURCE,
+					getFolderTitle());
+
+			ea.sendEvent(new Event(TrackerConstants.EVENT_ADMIN_TOPIC_VIEW,
+					table));
+		} else {
+			logger.error("Could not find EventAdmin Serivce");
+		}
+
+		IEditorPart editorPart = getSite().getWorkbenchWindow().getActivePage()
+				.getActiveEditor();
+
+		IContentOutlinePage contentOutlinePage = (IContentOutlinePage) editorPart
+				.getAdapter(IContentOutlinePage.class);
+		if (contentOutlinePage == null) {
+			// Can't find an outline try to get the QueryDataSetProvider
+			return;
+		}
+		contentOutlinePage.setSelection(selection);
 	}
+	
+	
 
 	
 
@@ -493,7 +503,7 @@ public abstract class TrackerView extends ViewPart implements
 		}
 		initialStatusObservable(viewModel.getStatus());
 		defaultPropertiesFormProvider.fillProperties(selection, adapterFactory,
-				cTabFolder, getFolderTitle());
+				cTabFolder, getFolderTitle(), isShowingExpertProperties);
 		cTabFolder.pack(true);
 		
 	
@@ -545,8 +555,44 @@ public abstract class TrackerView extends ViewPart implements
 		fillLocalPullDown(bars.getMenuManager());
 		fillLocalToolBar(bars.getToolBarManager());
 	}
+	
+	 /**
+	 * Shows the expert properties.
+	 */
+	void showExpert() {
+		isShowingExpertProperties = true;
+		refresh(tableViewer.getSelection());
+	}
+
+	/**
+	 * Hides the expert properties.
+	 */
+	void hideExpert() {
+		isShowingExpertProperties = false;
+		refresh(tableViewer.getSelection());
+	}
 
 	private void makeActions() {
+		
+		 // Show Advanced Properties
+		filterAction = new Action() {
+			@Override
+			public void run() {
+				if (isChecked()) {
+					showExpert();
+				} else {
+					hideExpert();
+				}
+			}
+		};
+		filterAction.setText("Show &Advanced Properties");
+		filterAction.setToolTipText("Show Advanced Properties");
+		filterAction.setImageDescriptor(AbstractUIPlugin
+				.imageDescriptorFromPlugin("com.verticon.tracker.editor",
+						"icons/full/elcl16/filter_ps.gif"));
+		filterAction.setChecked(false);
+
+		// Reorient Sash
 		reorientSashFormAction = new Action() {
 			@Override
 			public void run() {
@@ -584,20 +630,23 @@ public abstract class TrackerView extends ViewPart implements
 
 	private void fillContextMenu(IMenuManager manager) {
 		manager.add(reorientSashFormAction);
+		manager.add(filterAction);
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 
 	private void fillLocalPullDown(IMenuManager manager) {
 		manager.add(reorientSashFormAction);
+		manager.add(filterAction);
 		manager.add(new Separator());
 	}
 
 	private void fillLocalToolBar(IToolBarManager manager) {
 		manager.add(reorientSashFormAction);
+		manager.add(filterAction);
 	}
 
-    class ViewModel {
+    private class ViewModel {
 		// model
 		private final Status status = new Status();
 
@@ -606,7 +655,7 @@ public abstract class TrackerView extends ViewPart implements
 		}
 	}
 
-	class Status extends AbstractModelObject {
+	private class Status extends AbstractModelObject {
 		private String status = "";
 
 		public String getStatus() {

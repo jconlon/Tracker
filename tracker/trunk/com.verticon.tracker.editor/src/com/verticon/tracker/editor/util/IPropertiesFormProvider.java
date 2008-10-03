@@ -7,9 +7,19 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.custom.CTabFolder;
 
 public interface IPropertiesFormProvider {
+	
+	/**
+	 * Use the selection to create a Form in the cTabFolder.
+	 * 
+	 * @param selection
+	 * @param adapterFactory
+	 * @param cTabFolder
+	 * @param nameOfTab
+	 * @param showAdvanceProperties
+	 */
 	public void fillProperties(ISelection selection, 
 			AdapterFactory adapterFactory, CTabFolder cTabFolder,
-			String nameOfTab);
+			String nameOfTab, boolean showAdvanceProperties);
 	
 	public void setStatusMessageObservable(
 			IObservableValue statusMessageObservable);
