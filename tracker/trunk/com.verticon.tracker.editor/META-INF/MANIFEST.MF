@@ -7,7 +7,8 @@ Bundle-ClassPath: .
 Bundle-Activator: com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: com.verticon.tracker.editor.dialogs;version="0.1.0",
+Export-Package: com.verticon.tracker.editor.actions,
+ com.verticon.tracker.editor.dialogs;version="0.1.0",
  com.verticon.tracker.editor.preferences;version="0.1.0",
  com.verticon.tracker.editor.presentation;version="0.1.0",
  com.verticon.tracker.editor.util;version="0.2.8"

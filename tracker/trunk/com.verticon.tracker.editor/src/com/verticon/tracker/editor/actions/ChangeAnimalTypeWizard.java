@@ -29,18 +29,16 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
  * 
  * Pages:
  * <ul>
- * <li>Page to select a Person to associate with the Animal</li>
- * <li>Page to select the enclosing Lot in which to create the Exhibit</li>
- * <li>Page to create the Exhibit</li>
+ * <li>Page to select an animal type./li>
  * </ul>
  * 
  * @author jconlon
- *
+ * 
  */
 public class ChangeAnimalTypeWizard extends Wizard  {
 
 	private EditingDomain editingDomain;
-	private Collection<Animal> animalsToChange = new ArrayList<Animal>();
+	private final Collection<Animal> animalsToChange = new ArrayList<Animal>();
     
 	private ChangeAnimalTypeSelectTypeWizardPage selectTypePage = null;
 	private static final String ADD_SECTION = "ChangeAnimalType";
@@ -65,7 +63,7 @@ public class ChangeAnimalTypeWizard extends Wizard  {
 	public void init(IWorkbenchWindow workbenchWindow, EditingDomain editingDomain,IStructuredSelection selection){
 		this.workbenchWindow=workbenchWindow;
 		if (selection instanceof IStructuredSelection) {
-			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+			IStructuredSelection structuredSelection = selection;
 			
 			List<?> animals = structuredSelection.toList();
 			for (Object animal : animals) {
