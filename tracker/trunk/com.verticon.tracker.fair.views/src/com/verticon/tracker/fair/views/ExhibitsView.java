@@ -19,6 +19,7 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.wizard.WizardDialog;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -33,7 +34,7 @@ import com.verticon.tracker.fair.editor.util.FairTableEditorUtils;
 
 public class ExhibitsView extends TrackerView {
 
-	protected static final String FOLDER_TITLE = "Exhibits Details";
+	protected static final String NAME_OF_ITEM_IN_MASTER = "Exhibit";
 
 	/**
 	 * Override point for subclasses to create the tableViewer columns.
@@ -47,7 +48,7 @@ public class ExhibitsView extends TrackerView {
 		tableViewer.setContentProvider(new ExhibitsContentAdapter(
 				adapterFactory));
 		tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(
-						adapterFactory));
+				adapterFactory));
 	}
 
 	/**
@@ -58,12 +59,12 @@ public class ExhibitsView extends TrackerView {
 	protected void handleViewerInputChange() {
 		TableViewer tableViewer = masterFilteredTable.getViewer();
 		Fair rootObject = getFair();
-		if(rootObject !=null){
+		if (rootObject != null) {
 			tableViewer.setInput(rootObject);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Setup for Exhibit, Person, Event, and Exhibit
 	 * 
@@ -74,17 +75,17 @@ public class ExhibitsView extends TrackerView {
 		TableViewer tableViewer = masterFilteredTable.getViewer();
 		Object exhibit = null;
 		if (first instanceof Animal) {
-//			logger.debug("Animal selection");
-			exhibit = getExhibitFromAnimal( (Animal) first, getFair());
+			// logger.debug("Animal selection");
+			exhibit = getExhibitFromAnimal((Animal) first, getFair());
 		} else if (first instanceof Event) {
-//			logger.debug("Event selection");
-			exhibit = getExhibitFromEvent( (Event)first, getFair());
+			// logger.debug("Event selection");
+			exhibit = getExhibitFromEvent((Event) first, getFair());
 		} else if (first instanceof Exhibit) {
-//			logger.debug("Exhibit selection");
+			// logger.debug("Exhibit selection");
 			exhibit = first;
 		} else if (first instanceof Person) {
-//			logger.debug("Person selection");
-			//A person can have multiple exhibits
+			// logger.debug("Person selection");
+			// A person can have multiple exhibits
 			Person person = (Person) first;
 			List<Exhibit> exhibits = new ArrayList<Exhibit>();
 			Fair fair = (Fair) person.eContainer();
@@ -93,77 +94,105 @@ public class ExhibitsView extends TrackerView {
 					exhibits.add(exhib);
 				}
 			}
-			tableViewer.setSelection(new StructuredSelection(exhibits),true);
+			tableViewer.setSelection(new StructuredSelection(exhibits), true);
 			return;
 		}
 		setSelection(exhibit);
 	}
-	
+
+	@Override
+	protected String getNameOfItemInMaster() {
+		return NAME_OF_ITEM_IN_MASTER;
+	}
+
+	@Override
+	protected AdapterFactory createAdapterFactory() {
+		ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(
+				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		adapterFactory.addAdapterFactory(new FairItemProviderAdapterFactory());
+		adapterFactory
+				.addAdapterFactory(new TrackerItemProviderAdapterFactory());
+		return adapterFactory;
+	}
+
+	/**
+	 * Displays a several page wizard to add a Division, Department, Class, Lot,
+	 * or Exhibit to the fair model.
+	 */
+	@Override
+	protected Object addAnItem() {
+		// Instantiates and initializes the wizard
+		Fair fair = getFair();
+		AddExhibitWizard wizard = new AddExhibitWizard(fair, getSite()
+				.getWorkbenchWindow().getWorkbench().getActiveWorkbenchWindow());
+		// Instantiates the wizard container with the wizard and opens it
+		WizardDialog dialog = new WizardDialog(getSite().getShell(), wizard);
+		dialog.create();
+		dialog.open();
+
+		wizard.dispose();
+
+		for (Object object : wizard.getResults()) {
+			if (object instanceof Exhibit) {
+
+				return object;
+			}
+
+		}
+		return null;
+	}
+
 	/**
 	 * @param exhibitToSelect
 	 */
 	private void setSelection(Object exhibitToSelect) {
 		TableViewer tableViewer = masterFilteredTable.getViewer();
-		if(exhibitToSelect!=null){
-			tableViewer.setSelection(
-				new StructuredSelection(exhibitToSelect), true);
-		}else{
-			tableViewer.setSelection(
-					new StructuredSelection());
+		if (exhibitToSelect != null) {
+			tableViewer.setSelection(new StructuredSelection(exhibitToSelect),
+					true);
+		} else {
+			tableViewer.setSelection(new StructuredSelection());
 		}
 	}
-	
-	@Override
-	protected String getFolderTitle() {
-		return FOLDER_TITLE;
-	}
-	
-	@Override
-	protected AdapterFactory createAdapterFactory(){
-		ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-		adapterFactory.addAdapterFactory(new FairItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new TrackerItemProviderAdapterFactory());
-		return adapterFactory;
-	}
-	
+
 	/**
 	 * @return fair
 	 */
-	private Fair getFair(){
+	private Fair getFair() {
 		Fair fair = null;
-		for (Resource resource : queryDataSetProvider.getEditingDomain().getResourceSet().getResources()) {
+		for (Resource resource : queryDataSetProvider.getEditingDomain()
+				.getResourceSet().getResources()) {
 			Object o = resource.getContents().get(0);
-			if(o instanceof Fair){
-				fair = (Fair)o;
+			if (o instanceof Fair) {
+				fair = (Fair) o;
 				break;
 			}
 		}
 		return fair;
 	}
 
-	private static Exhibit getExhibitFromAnimal(Animal animal, Fair fair){
-		if(animal==null || fair == null){
+	private static Exhibit getExhibitFromAnimal(Animal animal, Fair fair) {
+		if (animal == null || fair == null) {
 			return null;
 		}
 		for (Exhibit exhibit : fair.exhibits()) {
-			if(animal.equals(exhibit.getAnimal())){
+			if (animal.equals(exhibit.getAnimal())) {
 				return exhibit;
 			}
 		}
-		
+
 		return null;
 	}
-	
-	private static Exhibit getExhibitFromEvent(Event event, Fair fair){
-		if(event==null || fair == null){
+
+	private static Exhibit getExhibitFromEvent(Event event, Fair fair) {
+		if (event == null || fair == null) {
 			return null;
 		}
-		if(event.getTag()!=null && event.getTag().eContainer()!=null){
-			Animal animal = (Animal)event.getTag().eContainer();
-			return getExhibitFromAnimal( animal,  fair);
+		if (event.getTag() != null && event.getTag().eContainer() != null) {
+			Animal animal = (Animal) event.getTag().eContainer();
+			return getExhibitFromAnimal(animal, fair);
 		}
 		return null;
 	}
-	
 
 }

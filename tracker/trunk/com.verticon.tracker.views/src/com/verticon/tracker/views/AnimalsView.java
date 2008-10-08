@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2008 Trevor S. Kaufman.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *     Trevor S. Kaufman - initial API and implementation
- ******************************************************************************/
 package com.verticon.tracker.views;
 
 import java.util.ArrayList;
@@ -20,6 +10,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.wizard.WizardDialog;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -29,11 +20,47 @@ import com.verticon.tracker.editor.util.TrackerView;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.Person;
-import com.verticon.tracker.util.TrackerSwitch;
 
 public class AnimalsView extends TrackerView {
 
-	protected static final String FOLDER_TITLE = "Animal Details";
+	private static final String NAME_OF_ITEM_IN_MASTER = "Animal";
+
+	/**
+	 * Subclasses can override this to provide a more useful name for
+	 * deleteAction dialog.
+	 * 
+	 * @return plural name of the items to delete
+	 */
+	@Override
+	protected String getNameOfItemInMaster() {
+		return NAME_OF_ITEM_IN_MASTER;
+	}
+
+	/**
+	 * Displays a two page wizard to add an Animal to the model. First page
+	 * prompts for animal type, the second prompts for a tag id.
+	 * 
+	 * This has the side effect of creating a tagApplied event for the animal
+	 * with the datetime of this action.
+	 */
+	@Override
+	protected Object addAnItem() {
+		// Instantiates and initializes the wizard
+		Premises premises = getPremises(queryDataSetProvider.getEditingDomain());
+		AddAnimalWizard wizard = new AddAnimalWizard();
+		wizard.init(getSite().getWorkbenchWindow().getWorkbench()
+				.getActiveWorkbenchWindow(), premises);
+		// Instantiates the wizard container with the wizard and opens it
+		WizardDialog dialog = new WizardDialog(getSite().getShell(), wizard);
+		dialog.create();
+		dialog.open();
+		wizard.dispose();
+		for (Object object : wizard.getResults()) {
+			return object;
+
+		}
+		return null;
+	}
 
 	/**
 	 * Override point for subclasses to create the tableViewer columns.
@@ -43,24 +70,24 @@ public class AnimalsView extends TrackerView {
 		TableViewer viewer = masterFilteredTable.getViewer();
 		TrackerTableEditorUtils.setUpAnimalsTableViewer(viewer);
 		masterFilteredTable.setColumns(viewer.getTable().getColumns());
-		
-		viewer.setContentProvider(
-		        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
-		        {
-		          @Override
-		          public Object [] getElements(Object object)
-		          {
-		            return ((Premises)object).getAnimals().toArray();
-		          }
 
-		        });
-		viewer.setLabelProvider(new AdapterFactoryLabelProvider(
+		viewer.setContentProvider(new AdapterFactoryContentProvider(
+				adapterFactory) // 14.2.2
+				{
+					@Override
+					public Object[] getElements(Object object) {
+						return ((Premises) object).getAnimals().toArray();
+					}
+
+				});
+		viewer
+				.setLabelProvider(new AdapterFactoryLabelProvider(
 						adapterFactory));
 	}
 
 	/**
-	 * Override point for subclasses to obtain the necessary input to feed
-	 * the tableViewer.
+	 * Override point for subclasses to obtain the necessary input to feed the
+	 * tableViewer.
 	 */
 	@Override
 	protected void handleViewerInputChange() {
@@ -70,83 +97,60 @@ public class AnimalsView extends TrackerView {
 	}
 
 	/**
-	 * Override point for subclasses to control how to deal with
-	 * selections on the main editors. 
+	 * Override point for subclasses to control how to deal with selections on
+	 * the main editors.
 	 * 
 	 * Setup for Exhibit, Person, Event, and Exhibit
+	 * 
 	 * @param sselection
 	 */
 	@Override
 	protected void handleMasterSelection(Object first) {
 		TableViewer viewer = masterFilteredTable.getViewer();
 		if (first instanceof Animal) {
-//			logger.debug("Animal selection");
-			viewer.setSelection(new StructuredSelection(first),true);
+			// logger.debug("Animal selection");
+			viewer.setSelection(new StructuredSelection(first), true);
 		} else if (first instanceof Event) {
-//			logger.debug("Event selection");
+			// logger.debug("Event selection");
 			Object animal = ((Event) first).eContainer().eContainer();
-			viewer.setSelection(new StructuredSelection(animal),true);
-		} else if (first instanceof Exhibit && ((Exhibit)first).getAnimal()!=null){
-//			logger.debug("Exhibit selection");
-			viewer.setSelection(new StructuredSelection(((Exhibit)first).getAnimal()),true);
-		}else if (first instanceof Person){
-//			logger.debug("Person selection");
-			Person person = (Person)first;
+			viewer.setSelection(new StructuredSelection(animal), true);
+		} else if (first instanceof Exhibit
+				&& ((Exhibit) first).getAnimal() != null) {
+			// logger.debug("Exhibit selection");
+			viewer.setSelection(new StructuredSelection(((Exhibit) first)
+					.getAnimal()), true);
+		} else if (first instanceof Person) {
+			// logger.debug("Person selection");
+			Person person = (Person) first;
 			List<Animal> animals = new ArrayList<Animal>();
-			Fair fair = (Fair)person.eContainer();
+			Fair fair = (Fair) person.eContainer();
 			for (Exhibit exhib : fair.exhibits()) {
-				if(person == exhib.getExhibitor()){
+				if (person == exhib.getExhibitor()) {
 					animals.add(exhib.getAnimal());
 				}
-			}  
-//			logger.debug("Person selection associated with {} animals.",animals.size());
-			viewer.setSelection(new StructuredSelection(animals),true);
+			}
+			//logger.debug("Person selection associated with {} animals.",animals
+			// .size());
+			viewer.setSelection(new StructuredSelection(animals), true);
 		}
 	}
-	
-	// Refactor to switch
-	protected void handleMasterSelection2(Object first){
-		TrackerSwitch<Object> visitor = new TrackerSwitch<Object>(){
 
-			@Override
-			public Object caseAnimal(Animal object) {
-				// TODO Auto-generated method stub
-				return super.caseAnimal(object);
-			}
-
-			@Override
-			public Object caseEvent(Event object) {
-				// TODO Auto-generated method stub
-				return super.caseEvent(object);
-			}
-			
-		};
-		
-	}
-
-	@Override
-	protected String getFolderTitle() {
-		return FOLDER_TITLE;
-	}
-	
 	/**
 	 * Convienence method to find the Root
 	 * 
 	 * @return
 	 */
-	protected Premises getPremises(EditingDomain editingDomain) {
-		Resource resource = editingDomain.getResourceSet()
-				.getResources().get(0);
+	private static Premises getPremises(EditingDomain editingDomain) {
+		Resource resource = editingDomain.getResourceSet().getResources()
+				.get(0);
 		Object rootObject = resource.getContents().get(0);
 		if (rootObject instanceof Premises) {
 			return (Premises) rootObject;
 		} else if (rootObject instanceof Fair) {
 			return ((Fair) rootObject).getPremises();
 		}
-	
+
 		return null;
 	}
-
-	
 
 }

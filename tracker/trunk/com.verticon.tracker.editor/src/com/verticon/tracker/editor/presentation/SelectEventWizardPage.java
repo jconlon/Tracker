@@ -39,7 +39,7 @@ public class SelectEventWizardPage extends WizardPage implements ISelectionChang
 
 	private ListViewer listViewer;
 	
-	protected SelectEventWizardPage() {
+	public SelectEventWizardPage() {
 		super("selectEvent");
 		setTitle("Select Event");
 		setDescription("Select the Event to add.");
@@ -92,6 +92,7 @@ public class SelectEventWizardPage extends WizardPage implements ISelectionChang
 
 		});
 		viewer.setLabelProvider(new LabelProvider() {
+			@Override
 			public String getText(Object element) {
 
 				return (String) element;

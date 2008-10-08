@@ -1,6 +1,7 @@
 package com.verticon.tracker.editor.util;
 
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -9,16 +10,22 @@ import org.eclipse.core.databinding.observable.ChangeEvent;
 import org.eclipse.core.databinding.observable.IChangeListener;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.command.RemoveCommand;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
@@ -30,14 +37,18 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISelectionListener;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
@@ -57,7 +68,7 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.util.AbstractModelObject;
 
 /**
- * Base class for a Master-Detail Viewer. The Master is shown as rows in a
+ * Base class for Master-Detail Viewers. The Master is shown as rows in a
  * FilteredTable and the Details of each selected row is shown in a Form.
  * FilteredTable and Form are separated by a sash that can be oriented
  * horizontally or vertically. The Form is created dynamically when a row is
@@ -96,7 +107,7 @@ public abstract class TrackerView extends ViewPart implements
 	 * Master TableViewer. Used by and can be obtained from
 	 * {@link TrackerView#masterFilteredTable}
 	 */
-	private TableViewer tableViewer;
+	protected TableViewer tableViewer;
 	
 	
 	private CTabFolder detailFormTabFolder;
@@ -117,6 +128,8 @@ public abstract class TrackerView extends ViewPart implements
 	private Action filterAction;
 	private Action showMasterAction;
 	private Action showDetailAction;
+	private Action addAction;
+	private Action deleteAction;
 	private AdapterFactory adapterFactory = null;
 	private IPropertiesFormProvider defaultPropertiesFormProvider;
 	private final ViewModel viewModel = new ViewModel();
@@ -141,7 +154,7 @@ public abstract class TrackerView extends ViewPart implements
 	 * @see #selectionChangedHandlerService(BundleContext)
 	 * @see #dispose()
 	 */
-	ServiceRegistration selectionChangedHandlerService;
+	private ServiceRegistration selectionChangedHandlerService;
 
 	/**
 	 * slf4j Logger
@@ -153,14 +166,20 @@ public abstract class TrackerView extends ViewPart implements
 
 	private Composite tableParent;
 
-	
 	/**
-	 * Implemented by subclasses
+	 * 
 	 * 
 	 * @return title of the folder
 	 */
-	protected abstract String getFolderTitle();
-	
+	private final String getFolderTitle() {
+		return getNameOfItemInMaster() + " Details";
+	}
+
+	/**
+	 * Override point for subclasses to add an item to the model. return
+	 * addedObject
+	 */
+	protected abstract Object addAnItem();
 	
 	/**
 	 * Override point for subclasses to create the tableViewer columns.
@@ -181,6 +200,14 @@ public abstract class TrackerView extends ViewPart implements
 	 * @param sselection
 	 */
 	protected abstract void handleMasterSelection(Object first);
+
+	/**
+	 * Subclasses must override this to identify the name of the item in the
+	 * master table.
+	 * 
+	 * @return plural name of the items to delete
+	 */
+	protected abstract String getNameOfItemInMaster();
 	
 	
 	/**
@@ -562,7 +589,7 @@ public abstract class TrackerView extends ViewPart implements
 	 /**
 	 * Shows the expert properties.
 	 */
-	void showExpert() {
+	private void showExpert() {
 		isShowingExpertProperties = true;
 		refresh(tableViewer.getSelection());
 	}
@@ -570,28 +597,35 @@ public abstract class TrackerView extends ViewPart implements
 	/**
 	 * Hides the expert properties.
 	 */
-	void hideExpert() {
+	private void hideExpert() {
 		isShowingExpertProperties = false;
 		refresh(tableViewer.getSelection());
 	}
 
 	
-// void showMaster() {
-	// masterFilteredTable.setVisible(true);
-	// sashForm.setMaximizedControl(formParent);
-	// }
-	//
-	// void hideMaster() {
-	//
-	// }
-	//
-	// void showDetail() {
-	//
-	// }
-	//
-	// void hideDetail() {
-	//
-	// }
+	@SuppressWarnings("unchecked")
+	private void removeSelectedItems() {
+		IStructuredSelection selection = (IStructuredSelection) tableViewer
+				.getSelection();
+
+		List<EObject> selectedItems = selection.toList();
+		deleteItemsDialog(getViewSite().getShell(), selectedItems.size());
+
+		EditingDomain ed = AdapterFactoryEditingDomain
+				.getEditingDomainFor(selectedItems.get(0));
+		ed.getCommandStack().execute(RemoveCommand.create(ed, selectedItems));
+
+	}
+	
+	private boolean deleteItemsDialog(Shell parent,
+			int numberOfItemsToDelete) {
+		return MessageDialog
+				.openConfirm(parent, "Confirmation Delete",
+				"You are about to delete " + numberOfItemsToDelete + ' '
+						+ getNameOfItemInMaster()
+						+ " item(s). Are you sure you want to continue?");
+	}
+	
 
 	private void refreshSashContents() {
 		if (showMasterAction.isChecked() && showDetailAction.isChecked()) {
@@ -616,7 +650,7 @@ public abstract class TrackerView extends ViewPart implements
 	}
 	
 	
-	private void makeActions() {
+	protected void makeActions() {
 		
 		 // Show Advanced Properties
 		filterAction = new Action() {
@@ -703,6 +737,40 @@ public abstract class TrackerView extends ViewPart implements
 				.imageDescriptorFromPlugin("com.verticon.tracker.editor",
 						"icons/full/elcl16/vertical.gif"));
 	
+		// Add an item
+		addAction = new Action() {
+			@Override
+			public void run() {
+				Object result = addAnItem();
+				if (result != null) {
+					masterFilteredTable.getViewer().setSelection(
+							new StructuredSelection(result));
+				}
+			}
+		};
+		addAction.setText("&Add a New " + getNameOfItemInMaster());
+		addAction.setToolTipText("Add a New " + getNameOfItemInMaster());
+		addAction.setImageDescriptor(AbstractUIPlugin
+				.imageDescriptorFromPlugin("org.eclipse.ui",
+						"$nl$/icons/full/obj16/add_obj.gif"));
+
+		// Delete an animal
+
+		IWorkbench workbench = PlatformUI.getWorkbench();
+		ISharedImages platformImages = workbench.getSharedImages();
+		deleteAction = new Action() {
+			@Override
+			public void run() {
+				removeSelectedItems();
+			}
+		};
+		deleteAction.setText("&Delete Animal");
+		deleteAction.setToolTipText("Delete Animal(s)");
+		deleteAction.setImageDescriptor(platformImages
+				.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE));
+		deleteAction.setDisabledImageDescriptor(platformImages
+				.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE_DISABLED));
+		
 	}
 
 	private void hookContextMenu() {
@@ -718,7 +786,9 @@ public abstract class TrackerView extends ViewPart implements
 		getSite().registerContextMenu(menuMgr, tableViewer);
 	}
 
-	private void fillContextMenu(IMenuManager manager) {
+	protected void fillContextMenu(IMenuManager manager) {
+		manager.add(addAction);
+		manager.add(deleteAction);
 		manager.add(reorientSashFormAction);
 		manager.add(filterAction);
 		manager.add(showMasterAction);
@@ -727,7 +797,9 @@ public abstract class TrackerView extends ViewPart implements
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 
-	private void fillLocalPullDown(IMenuManager manager) {
+	protected void fillLocalPullDown(IMenuManager manager) {
+		manager.add(addAction);
+		manager.add(deleteAction);
 		manager.add(reorientSashFormAction);
 		manager.add(filterAction);
 		manager.add(showMasterAction);
@@ -735,7 +807,9 @@ public abstract class TrackerView extends ViewPart implements
 		manager.add(new Separator());
 	}
 
-	private void fillLocalToolBar(IToolBarManager manager) {
+	protected void fillLocalToolBar(IToolBarManager manager) {
+		manager.add(addAction);
+		manager.add(deleteAction);
 		manager.add(reorientSashFormAction);
 		manager.add(filterAction);
 		manager.add(showMasterAction);
@@ -781,7 +855,7 @@ public abstract class TrackerView extends ViewPart implements
 	 *            an instance of BundleContext to use to register the
 	 *            EventListener.
 	 */
-	void startSelectionChangedHandlerService(BundleContext context) {
+	private void startSelectionChangedHandlerService(BundleContext context) {
 		/*
 		 * Create the event handler. This is the object that will be notified
 		 * when a matching event is delivered to the event service.

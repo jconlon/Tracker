@@ -34,12 +34,12 @@ public class ChangeAnimalTypeSelectTypeWizardPage extends WizardPage
 
 	private final AdapterFactory adapterFactory;
 
-	protected ChangeAnimalTypeSelectTypeWizardPage(
+	public ChangeAnimalTypeSelectTypeWizardPage(
 			AdapterFactory adapterFactory) {
 		super("selectAnimal");
 		this.adapterFactory = adapterFactory;
 		setTitle("Select Animal Type");
-		setDescription("Select the Animal Type you wish to change the selected animals to.");
+		setDescription("Select the new Animal Type you wish to change the selected animals to.");
 		
 		model.add(TrackerFactory.eINSTANCE.createBovineBeef());
 		model.add(TrackerFactory.eINSTANCE.createBovineBison());
