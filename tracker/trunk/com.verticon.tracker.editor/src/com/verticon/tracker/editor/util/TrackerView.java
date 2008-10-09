@@ -764,8 +764,9 @@ public abstract class TrackerView extends ViewPart implements
 				removeSelectedItems();
 			}
 		};
-		deleteAction.setText("&Delete Animal");
-		deleteAction.setToolTipText("Delete Animal(s)");
+		deleteAction.setText("&Delete " + getNameOfItemInMaster() + "(s)");
+		deleteAction
+				.setToolTipText("Delete " + getNameOfItemInMaster() + "(s)");
 		deleteAction.setImageDescriptor(platformImages
 				.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE));
 		deleteAction.setDisabledImageDescriptor(platformImages
