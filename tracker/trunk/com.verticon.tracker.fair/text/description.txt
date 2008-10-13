@@ -13,6 +13,7 @@ Package fair <http://www.verticon.com/ns/tracker/fair/0.1.0>
     Reference divisions : Division<<1..*>>
     Reference premises : Premises<<1..1>>
     Reference people : Person<<0..*>>
+    Attribute comments : EString
     Operation exhibits() : Exhibit<<0..*>>
 
   Class Exhibit
@@ -22,31 +23,39 @@ Package fair <http://www.verticon.com/ns/tracker/fair/0.1.0>
     Reference animal : Animal<<1..1>>
     Reference exhibitor : Person<<1..1>>
     Reference lot : Lot<<1..1>>
+    Attribute /salesOrder : EInt
+    Attribute inAuction : EBoolean
+    Attribute award : Award
 
   Class YouthClub
     Attribute name : EString<<1..1>>
     Reference contacts : Person<<1..*>>
+    Attribute comments : EString
 
   Class Division
     Attribute name : EString<<1..1>>
     Reference departments : Department<<1..*>>
+    Attribute comments : EString
 
   Class Department
     Attribute name : EString<<1..1>>
     Reference classes : Class<<1..*>>
     Reference superintendents : Person<<0..*>>
     Reference division : Division<<1..1>>
+    Attribute comments : EString
 
   Class Class
     Attribute name : EString<<1..1>>
     Reference lots : Lot<<1..*>>
     Reference judges : Person<<1..*>>
     Reference department : Department<<1..1>>
+    Attribute comments : EString
 
   Class Lot
     Attribute name : EString<<1..1>>
     Reference exhibits : Exhibit<<1..*>>
     Reference class : Class<<1..1>>
+    Attribute comments : EString
 
   Class Person
     Attribute firstName : EString<<1..1>>
@@ -59,10 +68,21 @@ Package fair <http://www.verticon.com/ns/tracker/fair/0.1.0>
     Attribute /name : EString<<1..1>>
     Attribute comments : EString
     Attribute pin : PremisesIdNumber
+    Attribute salesOrder : EInt
+    Attribute exhibitorNumber : EInt
 
   Class YoungPerson -> Person
     Reference parents : Person<<1..*>>
     Reference club : YouthClub<<1..1>>
+
+  Enum Award
+    Literal Unspecified = 0
+    Literal GrandChampion = 1
+    Literal ReserveChampion = 2
+    Literal BlueRibbon = 3
+    Literal RedRibbon = 4
+    Literal WhiteRibbon = 5
+    Literal PinkRibbon = 6
 
   DataType ZipCode <java.lang.String>
 

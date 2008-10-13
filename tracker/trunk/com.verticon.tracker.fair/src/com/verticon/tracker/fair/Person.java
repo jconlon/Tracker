@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.fair.Person#getComments <em>Comments</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Person#getPin <em>Pin</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Person#getSalesOrder <em>Sales Order</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Person#getExhibitorNumber <em>Exhibitor Number</em>}</li>
  * </ul>
  * </p>
  *
@@ -353,5 +354,31 @@ public interface Person extends EObject {
 	 * @generated
 	 */
 	void setSalesOrder(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Exhibitor Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Exhibitor Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Exhibitor Number</em>' attribute.
+	 * @see #setExhibitorNumber(int)
+	 * @see com.verticon.tracker.fair.FairPackage#getPerson_ExhibitorNumber()
+	 * @model
+	 * @generated
+	 */
+	int getExhibitorNumber();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.fair.Person#getExhibitorNumber <em>Exhibitor Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Exhibitor Number</em>' attribute.
+	 * @see #getExhibitorNumber()
+	 * @generated
+	 */
+	void setExhibitorNumber(int value);
 
 } // Person

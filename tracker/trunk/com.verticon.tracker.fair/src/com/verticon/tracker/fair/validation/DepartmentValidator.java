@@ -30,5 +30,7 @@ public interface DepartmentValidator {
 
 	boolean validateDivision(Division value);
 
+	boolean validateComments(String value);
+
 	boolean validateSuperIntendent(EList<Person> value);
 }

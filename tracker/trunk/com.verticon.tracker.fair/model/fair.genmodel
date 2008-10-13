@@ -98,9 +98,13 @@
       <genFeatures createChild="false" propertyCategory="Address" ecoreFeature="ecore:EAttribute fair.ecore#//Person/zipCode"/>
       <genFeatures property="Readonly" createChild="false" propertyCategory="Name"
           ecoreFeature="ecore:EAttribute fair.ecore#//Person/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/comments"/>
-      <genFeatures createChild="false" propertyCategory="Premises of Person" ecoreFeature="ecore:EAttribute fair.ecore#//Person/pin"/>
+      <genFeatures createChild="false" propertyDescription="Comments about the Person"
+          ecoreFeature="ecore:EAttribute fair.ecore#//Person/comments"/>
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Number Assigned to the Livestock Premises of the Persons Animal(s)"
+          ecoreFeature="ecore:EAttribute fair.ecore#//Person/pin"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/salesOrder"/>
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Assigned Exhibitor Number"
+          ecoreFeature="ecore:EAttribute fair.ecore#//Person/exhibitorNumber"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//YoungPerson">
       <genFeatures notify="false" createChild="false" propertyCategory="Sponsors"

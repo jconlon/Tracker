@@ -35,4 +35,6 @@ public interface FairValidator {
 
 	boolean validatePeople(EList<Person> value);
 
+	boolean validateComments(String value);
+
 }

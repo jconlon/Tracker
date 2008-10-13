@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getComments <em>Comments</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getPin <em>Pin</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getSalesOrder <em>Sales Order</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.PersonImpl#getExhibitorNumber <em>Exhibitor Number</em>}</li>
  * </ul>
  * </p>
  *
@@ -264,6 +265,26 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @ordered
 	 */
 	protected int salesOrder = SALES_ORDER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getExhibitorNumber() <em>Exhibitor Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExhibitorNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int EXHIBITOR_NUMBER_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getExhibitorNumber() <em>Exhibitor Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExhibitorNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected int exhibitorNumber = EXHIBITOR_NUMBER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -560,6 +581,27 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getExhibitorNumber() {
+		return exhibitorNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExhibitorNumber(int newExhibitorNumber) {
+		int oldExhibitorNumber = exhibitorNumber;
+		exhibitorNumber = newExhibitorNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.PERSON__EXHIBITOR_NUMBER, oldExhibitorNumber, exhibitorNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -585,6 +627,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return getPin();
 			case FairPackage.PERSON__SALES_ORDER:
 				return new Integer(getSalesOrder());
+			case FairPackage.PERSON__EXHIBITOR_NUMBER:
+				return new Integer(getExhibitorNumber());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -629,6 +673,9 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return;
 			case FairPackage.PERSON__SALES_ORDER:
 				setSalesOrder(((Integer)newValue).intValue());
+				return;
+			case FairPackage.PERSON__EXHIBITOR_NUMBER:
+				setExhibitorNumber(((Integer)newValue).intValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -675,6 +722,9 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case FairPackage.PERSON__SALES_ORDER:
 				setSalesOrder(SALES_ORDER_EDEFAULT);
 				return;
+			case FairPackage.PERSON__EXHIBITOR_NUMBER:
+				setExhibitorNumber(EXHIBITOR_NUMBER_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -709,6 +759,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return isSetPin();
 			case FairPackage.PERSON__SALES_ORDER:
 				return salesOrder != SALES_ORDER_EDEFAULT;
+			case FairPackage.PERSON__EXHIBITOR_NUMBER:
+				return exhibitorNumber != EXHIBITOR_NUMBER_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -743,6 +795,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 		if (pinESet) result.append(pin); else result.append("<unset>");
 		result.append(", salesOrder: ");
 		result.append(salesOrder);
+		result.append(", exhibitorNumber: ");
+		result.append(exhibitorNumber);
 		result.append(')');
 		return result.toString();
 	}

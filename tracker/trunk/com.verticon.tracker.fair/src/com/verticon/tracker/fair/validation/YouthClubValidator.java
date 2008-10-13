@@ -23,5 +23,7 @@ public interface YouthClubValidator {
 
 	boolean validateContacts(EList<Person> value);
 
+	boolean validateComments(String value);
+
 	boolean validateContact(EList<Person> value);
 }
