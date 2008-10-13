@@ -3,11 +3,13 @@ package com.verticon.tracker.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -15,6 +17,7 @@ import org.eclipse.jface.wizard.WizardDialog;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.util.TrackerTableEditorUtils;
 import com.verticon.tracker.editor.util.TrackerView;
 import com.verticon.tracker.fair.Exhibit;
@@ -24,6 +27,11 @@ import com.verticon.tracker.fair.Person;
 public class AnimalsView extends TrackerView {
 
 	private static final String NAME_OF_ITEM_IN_MASTER = "Animal";
+	
+	/**
+	 * Reference to Observable for table Input
+	 */
+	private IObservableList tableInput;
 
 	/**
 	 * Subclasses can override this to provide a more useful name for
@@ -46,7 +54,7 @@ public class AnimalsView extends TrackerView {
 	@Override
 	protected Object addAnItem() {
 		// Instantiates and initializes the wizard
-		Premises premises = getPremises(queryDataSetProvider.getEditingDomain());
+		Premises premises = getPremises(getEditingDomain());
 		AddAnimalWizard wizard = new AddAnimalWizard();
 		wizard.init(getSite().getWorkbenchWindow().getWorkbench()
 				.getActiveWorkbenchWindow(), premises);
@@ -64,36 +72,44 @@ public class AnimalsView extends TrackerView {
 
 	/**
 	 * Override point for subclasses to create the tableViewer columns.
+	 * 
+	 * To fix Task number 261 this method now uses a databinding contentProvider
+	 * for the tableViewer
+	 * 
+	 * @see #handleViewerInputChange()
 	 */
 	@Override
 	protected void setUpTable(AdapterFactory adapterFactory) {
 		TableViewer viewer = masterFilteredTable.getViewer();
 		TrackerTableEditorUtils.setUpAnimalsTableViewer(viewer);
 		masterFilteredTable.setColumns(viewer.getTable().getColumns());
-
-		viewer.setContentProvider(new AdapterFactoryContentProvider(
-				adapterFactory) // 14.2.2
-				{
-					@Override
-					public Object[] getElements(Object object) {
-						return ((Premises) object).getAnimals().toArray();
-					}
-
-				});
+		// Set up databinding context here
+		ObservableListContentProvider cp = new ObservableListContentProvider();
+		viewer.setContentProvider(cp);
 		viewer
 				.setLabelProvider(new AdapterFactoryLabelProvider(
 						adapterFactory));
 	}
 
 	/**
-	 * Override point for subclasses to obtain the necessary input to feed the
-	 * tableViewer.
+	 * Override point for subclasses to obtain the necessary tableInput to feed
+	 * the tableViewer.
+	 * 
+	 * @see #setUpTable(AdapterFactory)
 	 */
 	@Override
 	protected void handleViewerInputChange() {
-		Premises premises = getPremises(queryDataSetProvider.getEditingDomain());
+		Premises premises = getPremises(getEditingDomain());
 		TableViewer viewer = masterFilteredTable.getViewer();
-		viewer.setInput(premises);
+		if (tableInput != null) {
+			tableInput.dispose();
+		}
+		if (premises == null) {
+			return;
+		}
+		tableInput = EMFObservables.observeList(premises,
+				TrackerPackage.Literals.PREMISES__ANIMALS);
+		viewer.setInput(tableInput);
 	}
 
 	/**
@@ -138,7 +154,7 @@ public class AnimalsView extends TrackerView {
 	/**
 	 * Convienence method to find the Root
 	 * 
-	 * @return
+	 * @return premises
 	 */
 	private static Premises getPremises(EditingDomain editingDomain) {
 		Resource resource = editingDomain.getResourceSet().getResources()

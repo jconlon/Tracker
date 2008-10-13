@@ -37,6 +37,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 
+import com.verticon.tracker.editor.presentation.CustomActionBarContributor;
 import com.verticon.tracker.editor.presentation.ICustomActionBarContributor;
 
 /**
@@ -61,7 +62,7 @@ public class FairActionBarContributor
 	 * 
 	 * @generated NOT
 	 */
-	private ICustomActionBarContributor customActionBarContributor = new FairCustomActionBarContributor();
+	private final ICustomActionBarContributor customActionBarContributor = new CustomActionBarContributor();
 	
 	/**
 	 * This keeps track of the active editor.

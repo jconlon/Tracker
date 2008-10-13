@@ -68,16 +68,13 @@ import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 
-import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
-import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.FairFactory;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
 import com.verticon.tracker.fair.editor.presentation.FairEditor;
 import com.verticon.tracker.fair.editor.presentation.FairEditorPlugin;
 import com.verticon.tracker.fair.transaction.editor.domain.FairResourceLoadedListener;
-import com.verticon.tracker.transaction.editor.presentation.TransactionalEventHistoryContentProvider;
 
 /**
  * 
@@ -556,14 +553,6 @@ public class FairTransactionEditor extends FairEditor {
 		return selectionViewer;
 	}
 	
-
-	public TableViewer getExhibitsTableViewer(){
-		return exhibitsTableViewer;
-	}
-	
-	public TableViewer getPeopleTableViewer(){
-		return peopleTableViewer;
-	}
 	
 	@Override
 	public void createPages() {
@@ -578,26 +567,15 @@ public class FairTransactionEditor extends FairEditor {
 
 			createSelectionTreeViewer(FairEditorPlugin.INSTANCE.getString("_UI_SelectionPage_label"));
 
-			createListViewer(FairEditorPlugin.INSTANCE.getString("_UI_ListPage_label"));
+			// createListViewer(FairEditorPlugin.INSTANCE.getString(
+			// "_UI_ListPage_label"));
 
-//			createEventsTableViewer(getString("_UI_EventsTablePage_label"));
-//
-//			createAnimalsTableViewer(getString("_UI_AnimalsTablePage_label"));
-			
-			createExhibitsTableViewer(FairEditorPlugin.INSTANCE.getString("_UI_ExhibitsTablePage_label"));
-			
-			createPeopleTableViewer(FairEditorPlugin.INSTANCE.getString("_UI_PeopleTablePage_label"));
 
 			IEditorActionBarContributor abc = getActionBarContributor();
 			if(abc != null && abc instanceof FairTransactionActionBarContributor){
 				FairTransactionActionBarContributor fairActionBarContributor =(FairTransactionActionBarContributor)abc;
-				SelectionViewerFilter svf = fairActionBarContributor.getCustomActionBarContributor().
-					getSelectionViewerFilter();
 				fairActionBarContributor.getCustomActionBarContributor().getSelectionViewerFilter().setMainViewer(selectionViewer);
-//				svf.addViewer(eventsTableViewer);
-//				svf.addViewer(animalsTableViewer);
-				svf.addViewer(peopleTableViewer);
-				svf.addViewer(exhibitsTableViewer);
+
 			}
 			
 			setActivePage(0);
@@ -621,44 +599,7 @@ public class FairTransactionEditor extends FairEditor {
 
 		updateProblemIndication();
 	}
-	//.CUSTOM: Set the TransactionalAdpapterFactory Content and Label Providers.
-	@Override
-	protected void addAnimalsTableViewerProviders() {
-		/**
-		 * The default ItemProvider returned via the adapterFactory
-		 * for Premises should be able to handle all notifications 
-		 * of animals being added or removed.
-		 * 
-		 * To get Animal Elements override the getElements method 
-		 */
-		animalsTableViewer.setContentProvider(
-		        new TransactionalAdapterFactoryContentProvider(
-		        		(TransactionalEditingDomain)getEditingDomain(),
-		        		adapterFactory) // 14.2.2
-		        {
-		          @Override
-		          public Object [] getElements(Object object)
-		          {
-		            return ((Premises)object).getAnimals().toArray();
-		          }
-
-		        });
-		animalsTableViewer.setLabelProvider(new TransactionalAdapterFactoryLabelProvider(
-				(TransactionalEditingDomain)getEditingDomain(),
-				adapterFactory));
-	}
-
-	//.CUSTOM: Set the TransactionalAdpapterFactory Content and Label Providers.
-	@Override
-	protected void addExhibitsTableViewerProviders() {
-		exhibitsTableViewer.setContentProvider(new TransactionalExhibitsContentAdapter(
-        		(TransactionalEditingDomain)getEditingDomain(),
-        		adapterFactory));
-		exhibitsTableViewer.setLabelProvider(new TransactionalAdapterFactoryLabelProvider(
-				(TransactionalEditingDomain)getEditingDomain(),
-				adapterFactory));
-
-	}
+	
 
 	//.CUSTOM: Set the TransactionalAdpapterFactory Content and Label Providers.
 	@Override
@@ -672,42 +613,7 @@ public class FairTransactionEditor extends FairEditor {
 				adapterFactory));
 	}
 
-	//.CUSTOM: Set the TransactionalAdpapterFactory Content and Label Providers.
-	@Override
-	protected void addPeopleTableViewerProviders() {
-		/**
-		 * The default ItemProvider returned via the adapterFactory for Premises
-		 * should be able to handle all notifications of animals being added or
-		 * removed.
-		 * 
-		 * To get People Elements override the getElements method
-		 */
-		peopleTableViewer.setContentProvider(new TransactionalAdapterFactoryContentProvider(
-				(TransactionalEditingDomain)getEditingDomain(),adapterFactory) {
-			@Override
-			public Object[] getElements(Object object) {
-				Fair fair = (Fair) object;
-
-				return fair.getPeople().toArray();
-			}
-
-		});
-		peopleTableViewer.setLabelProvider(new TransactionalAdapterFactoryLabelProvider(
-				(TransactionalEditingDomain)getEditingDomain(),adapterFactory));
-
-	}
-
-	//.CUSTOM: Set the TransactionalAdpapterFactory Content and Label Providers.
-	@Override
-	protected void addEventsTableViewerProviders() {
-		eventsTableViewer.setContentProvider(new TransactionalEventHistoryContentProvider(
-				(TransactionalEditingDomain)getEditingDomain(),
-				adapterFactory));
-		eventsTableViewer.setLabelProvider(
-				new TransactionalAdapterFactoryLabelProvider(
-						(TransactionalEditingDomain)getEditingDomain(),
-						adapterFactory));
-	}
+	
 	
 	//.CUSTOM: Set the TransactionalAdpapterFactory Content and Label Providers.
 	@Override
@@ -1116,5 +1022,23 @@ public class FairTransactionEditor extends FairEditor {
 
 		}
 		return adapterFactoryNoLongerNeeded;
+	}
+	@Override
+	public void addViewer(TableViewer tableViewer) {
+		FairTransactionActionBarContributor fairActionBarContributor = (FairTransactionActionBarContributor) getActionBarContributor();
+		SelectionViewerFilter svf = fairActionBarContributor
+				.getCustomActionBarContributor().getSelectionViewerFilter();
+
+		svf.addViewer(tableViewer);
+
+	}
+
+	@Override
+	public void removeViewer(TableViewer tableViewer) {
+		FairTransactionActionBarContributor fairActionBarContributor = (FairTransactionActionBarContributor) getActionBarContributor();
+		SelectionViewerFilter svf = fairActionBarContributor
+				.getCustomActionBarContributor().getSelectionViewerFilter();
+
+		svf.removeViewer(tableViewer);
 	}
 }

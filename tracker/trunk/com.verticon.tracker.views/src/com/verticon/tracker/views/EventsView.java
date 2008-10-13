@@ -3,6 +3,7 @@ package com.verticon.tracker.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -24,9 +25,15 @@ import com.verticon.tracker.fair.Person;
 public class EventsView extends TrackerView {
 
 	private static final String NAME_OF_ITEM_IN_MASTER = "Event";
+	private IObservableList input;
 
 	/**
 	 * Override point for subclasses to create the tableViewer columns.
+	 * 
+	 * For Task number 261 would like to use a databinding contentProvider for
+	 * the tableViewer
+	 * 
+	 * @see #handleViewerInputChange()
 	 */
 	@Override
 	protected void setUpTable(AdapterFactory adapterFactory) {
@@ -34,9 +41,14 @@ public class EventsView extends TrackerView {
 		TrackerTableEditorUtils.setUpEventsTableViewer(viewer);
 		masterFilteredTable.setColumns(viewer.getTable().getColumns());
 
-		viewer.setContentProvider(new EventHistoryContentProvider(
+		// // Set up databinding context here
+		// ObservableListContentProvider cp = new
+		// ObservableListContentProvider();
+		// viewer.setContentProvider(cp);
+
+		 viewer.setContentProvider(new EventHistoryContentProvider(
 				adapterFactory));
-		viewer
+		 viewer
 				.setLabelProvider(new AdapterFactoryLabelProvider(
 						adapterFactory));
 	}
@@ -47,9 +59,17 @@ public class EventsView extends TrackerView {
 	 */
 	@Override
 	protected void handleViewerInputChange() {
-		Premises premises = getPremises(queryDataSetProvider.getEditingDomain());
+		Premises premises = getPremises(getEditingDomain());
 		TableViewer viewer = masterFilteredTable.getViewer();
 		viewer.setInput(premises);
+
+		// if (input != null) {
+		// input.dispose();
+		// }
+		// input = EMFObservables.observeList(premises,
+		// TrackerPackage.Literals.P);
+		//		
+		// viewer.setInput(input);
 	}
 
 	/**
@@ -109,7 +129,7 @@ public class EventsView extends TrackerView {
 	@Override
 	protected Object addAnItem() {
 		// Instantiates and initializes the wizard
-		Premises premises = getPremises(queryDataSetProvider.getEditingDomain());
+		Premises premises = getPremises(getEditingDomain());
 		AddEventWizard wizard = new AddEventWizard();
 		wizard.init(getSite().getWorkbenchWindow().getWorkbench()
 				.getActiveWorkbenchWindow(), premises, tableViewer

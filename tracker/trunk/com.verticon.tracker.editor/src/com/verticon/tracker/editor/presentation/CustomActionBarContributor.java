@@ -20,8 +20,6 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
  * <ul>
  *   <li>Collapse Selection Tree,</li>
  *   <li>Expand Selection Tree, </li>
- *   <li>Select from Animals,</li>
- *   <li> Select from Events</li>
  * </ul>
  * 
  * @author jconlon
@@ -55,25 +53,7 @@ public class CustomActionBarContributor implements ICustomActionBarContributor {
 	 */
 	protected static ImageDescriptor expandImage = AbstractUIPlugin.imageDescriptorFromPlugin(
     		"com.verticon.tracker.editor", "icons/full/elcl16/expandall.gif");
-	
-	
-	/**
-	 * Image for selectFromAnimals toolbar button
-	 * 
-	 * @generated NOT
-	 */
-	protected static ImageDescriptor selectFromAnimalsImage = AbstractUIPlugin.imageDescriptorFromPlugin(
-    		"com.verticon.tracker.editor", "icons/full/elcl16/selectFromAnimals.gif");
-	
-	
-	/**
-	 * Image for selectFromEvents toolbar button
-	 * 
-	 * @generated NOT
-	 */
-	protected static ImageDescriptor selectFromEventsImage = AbstractUIPlugin.imageDescriptorFromPlugin(
-    		"com.verticon.tracker.editor", "icons/full/elcl16/selectFromEvents.gif");
-	    
+   
 	
 	/**
 	 * Collapse Action
@@ -121,71 +101,13 @@ public class CustomActionBarContributor implements ICustomActionBarContributor {
 			}
 		}
 	};
-	
-	
-	/**
-	 * Action to Select the Animals in the SelectionTable from the rows 
-	 * selected in the AnimalsTable.
-	 * 
-	 * @generated NOT
-	 */
-	protected IAction selectAnimalsAction = 
-		
-		new Action("Link Selection with Animals Table",selectFromAnimalsImage) {
 
-		@Override
-		public void run() {
-			ISelectionViewerProvider selectionViewerProvider = 
-				(ISelectionViewerProvider)activeEditorPart.getAdapter(ISelectionViewerProvider.class);
-			
-			IAnimalSelectionProvider animalSelectionProvider = 
-				(IAnimalSelectionProvider)activeEditorPart.getAdapter(IAnimalSelectionProvider.class);
-				
-			if (selectionViewerProvider !=null && animalSelectionProvider !=null) {
-				selectionViewerProvider.setSelectionViewerSelection(
-						animalSelectionProvider.getAnimalSelection());
-					
-				
-			}
-			
-		}
-	};
-	
-	
-	/**
-	 * Action to Select the Animals in the SelectionTable from the rows 
-	 * selected in the AnimalsTable.
-	 * 
-	 * @generated NOT
-	 */
-	protected IAction selectEventsAction = 
-		
-		new Action("Link Selection with Events Table",selectFromEventsImage) {
-
-		@Override
-		public void run() {
-			ISelectionViewerProvider selectionViewerProvider = 
-				(ISelectionViewerProvider)activeEditorPart.getAdapter(ISelectionViewerProvider.class);
-			
-			IEventSelectionProvider eventSelectionProvider = 
-				(IEventSelectionProvider)activeEditorPart.getAdapter(IEventSelectionProvider.class);
-				
-			if (selectionViewerProvider !=null && eventSelectionProvider !=null) {
-				selectionViewerProvider.setSelectionViewerSelection(
-						eventSelectionProvider.getEventSelection());
-					
-				
-			}
-			
-		}
-	};
 	
 	
 	/* (non-Javadoc)
 	 * @see com.verticon.tracker.editor.presentation.ICustomActionBarContributor#contributeToMenu(org.eclipse.jface.action.IMenuManager)
 	 */
 	public void contributeToMenu(IMenuManager menuManager) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -196,8 +118,6 @@ public class CustomActionBarContributor implements ICustomActionBarContributor {
 		toolBarManager.add(new Separator());
 		toolBarManager.add(collapseTreeAction);
 		toolBarManager.add(expandTreeAction);
-		toolBarManager.add(selectAnimalsAction);
-		toolBarManager.add(selectEventsAction);
 		addChildrenToToolBar( toolBarManager);
 		if(masterViewerFilterAction == null){
 			masterViewerFilterAction = new SelectionViewerFilter();
@@ -235,14 +155,10 @@ public class CustomActionBarContributor implements ICustomActionBarContributor {
 	}
 
 	public void disableSelectionViewerActions() {
-		selectEventsAction.setEnabled(false);
-		selectAnimalsAction.setEnabled(false);
 		masterViewerFilterAction.setEnabled(false);
 	}
 
 	public void enableSelectionViewerActions() {
-		selectEventsAction.setEnabled(true);
-		selectAnimalsAction.setEnabled(true);
 		masterViewerFilterAction.setEnabled(true);
 	}
 	

@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -63,7 +64,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
-import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.util.AbstractModelObject;
 
@@ -84,7 +84,7 @@ import com.verticon.tracker.util.AbstractModelObject;
  * 
  */
 public abstract class TrackerView extends ViewPart implements
-		ISelectionListener, ISelectionChangedListener {
+		ISelectionListener, ISelectionChangedListener, IEditingDomainProvider {
 	
 
 	
@@ -96,7 +96,16 @@ public abstract class TrackerView extends ViewPart implements
 	 * 
 	 * @see com.verticon.tracker.editor.presentation.IQueryDataSetProvider
 	 */
-	protected IQueryDataSetProvider queryDataSetProvider = null;
+	// protected IQueryDataSetProvider queryDataSetProvider = null;
+	
+
+	public EditingDomain getEditingDomain() {
+		if (activeEditorPart instanceof IEditingDomainProvider) {
+			return ((IEditingDomainProvider)activeEditorPart).getEditingDomain();
+		}
+		return null;
+		
+	}
 
 	/**
 	 * This field is referenced by subclasses.
@@ -165,6 +174,8 @@ public abstract class TrackerView extends ViewPart implements
 	private ScrolledComposite formParent;
 
 	private Composite tableParent;
+
+	private IEditorPart activeEditorPart;
 
 	/**
 	 * 
@@ -331,37 +342,35 @@ public abstract class TrackerView extends ViewPart implements
 		if (workbenchWindow == null || workbenchWindow.getActivePage() == null) {
 			return;
 		}
-
-		IEditorPart editorPart = workbenchWindow.getActivePage()
+		IEditorPart oldActiveEditorPart = activeEditorPart;
+		activeEditorPart = workbenchWindow.getActivePage()
 				.getActiveEditor();
-		if (editorPart == null) {
-			return;
-		}
+		
 
-		IQueryDataSetProvider selectedQueryDataSetProvider = (IQueryDataSetProvider) editorPart
-				.getAdapter(IQueryDataSetProvider.class);
-
-		if (selectedQueryDataSetProvider == null) {
-			return;
-		}
-
-		if (this.queryDataSetProvider == selectedQueryDataSetProvider) {
+		if (activeEditorPart == oldActiveEditorPart) {
 			logger.debug(
-					"Workbench selectionChanged detected from old provider {}",
-					queryDataSetProvider);
+					"Workbench selectionChanged detected on old editor {}",
+					oldActiveEditorPart);
 			routeWorkbenchPartSelection(selection);
 			return;
 		}
-		this.queryDataSetProvider = selectedQueryDataSetProvider;
+
+		if (oldActiveEditorPart != null) {
+			unregisterFilter(oldActiveEditorPart);
+		}
+		
+		
+		registerFilter(activeEditorPart);
+
 		logger.debug(
-				"Workbench selectionChanged detected from new provider {}",
-				queryDataSetProvider);
+				"Workbench selectionChanged detected on new editor {}",
+				activeEditorPart);
 		handleViewerInputChange();
 		routeWorkbenchPartSelection(selection);
 		return;
 	}
 
-	/**
+		/**
 	 * Implements ISelectionChangedListener to listen for selections on the
 	 * MasterTableViewer.
 	 */
@@ -375,6 +384,22 @@ public abstract class TrackerView extends ViewPart implements
 		}
 		refresh(event.getSelection());
 	}
+
+	private void registerFilter(IEditorPart iEditorPart) {
+		if (!(iEditorPart instanceof ITrackerViewRegister)) {
+			return;
+		}
+		((ITrackerViewRegister) iEditorPart).addViewer(tableViewer);
+	}
+
+	private void unregisterFilter(IEditorPart iEditorPart) {
+		if (!(iEditorPart instanceof ITrackerViewRegister)) {
+			return;
+		}
+		((ITrackerViewRegister) iEditorPart).removeViewer(tableViewer);
+	}
+
+	
 
 	/**
 	 * @param selection

@@ -77,7 +77,6 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -86,7 +85,6 @@ import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
-import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -100,8 +98,6 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.IActionBars;
@@ -128,36 +124,37 @@ import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
-import com.verticon.tracker.editor.util.TrackerTableEditorUtils;
+import com.verticon.tracker.editor.util.ITrackerViewRegister;
 import com.verticon.tracker.editor.validation.LiveValidationContentAdapter;
 import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelProvider;
 
-
 /**
- * This is an example of a Tracker model editor.
- * <!-- begin-user-doc -->
- * This editor differs from the generated EMF implementation in the following ways:
+ * This is an example of a Tracker model editor. <!-- begin-user-doc --> This
+ * editor differs from the generated EMF implementation in the following ways:
  * <ul>
- *   <li>offers import and export facilities</li>
- *   <li>offers OCL Selection facilities</li>
- *   <li>adds a FairRegistration, Animals and an Events table</li>
- *   <li>adds SelectionTree expansion and  contraction actions to the 
- *   	 ActionBarContributor</li>
- *   <li>adds Selection linking between Animals and Events Tables</li>
- *   <li>implements previous two items with adapters for IEventSelectionProvider, 
- *   	 IAnimalSelectionProvider, ISelectionViewerProvider,  </li>
- *   <li>adds support for OCL Query View using an IQueryDataSetProvider adapter</li>
+ * <li>offers import and export facilities</li>
+ * <li>offers OCL Selection facilities</li>
+ * <li>adds a FairRegistration, Animals and an Events table</li>
+ * <li>adds SelectionTree expansion and contraction actions to the
+ * ActionBarContributor</li>
+ * <li>implements ISelectionViewerProvider,</li>
+ * <li>adds support for OCL Query View using an IQueryDataSetProvider adapter</li>
+ * <li>adds support for registering views by implementing ITrackerViewRegister</li>
  * </ul>
- * ---- ITabbedPropertySheetPageContributor
- * <!-- end-user-doc -->
+ * 
+ * @implements ITrackerViewRegister
+ * 
+ * 
+ *             ---- ITabbedPropertySheetPageContributor <!-- end-user-doc -->
  * @generated
  */
 public class TrackerEditor
 	extends MultiPageEditorPart
-	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
+	implements
+		IEditingDomainProvider, ISelectionProvider, IMenuListener,
+		IViewerProvider, IGotoMarker, ITrackerViewRegister {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -169,20 +166,13 @@ public class TrackerEditor
 	 * slf4j Logger
 	 */
 	private final Logger logger = LoggerFactory.getLogger(TrackerEditor.class);
-	
-	/**
-	 * Offers a selection on a set of Animals. 
-	 */
-	private IAnimalSelectionProvider animalSelectionProvider;
+
 	
 	/**
 	 * Offers a generic selection. 
 	 */
 	private ISelectionViewerProvider selectionViewerProvider;
-	/**
-	 * Offers a selection on a set of Events. 
-	 */
-	private IEventSelectionProvider eventSelectionProvider;
+	
 	/**
 	 * Offers a query on a dataSet. 
 	 */
@@ -237,11 +227,6 @@ public class TrackerEditor
 	 */
 	protected PropertySheetPage propertySheetPage;
 	
-	
-	/**
-	 * Alternative to PropertySheetPage
-	 */
-//	protected PropertySheetForm propertySheetPage;
 
 	/**
 	 * This is the viewer that shadows the selection in the content outline.
@@ -285,27 +270,6 @@ public class TrackerEditor
 	 * @generated
 	 */
 	protected TableViewer tableViewer;
-
-	/**
-	 * Events Table Viewer
-	 * @generated NOT
-	 */
-	protected TableViewer eventsTableViewer;
-	
-
-	/**
-	 * FairRegistration Table Viewer
-	 * @generated NOT
-	 */
-	protected TableViewer fairRegistrationTableViewer;
-	
-
-	
-	/**
-	 * Animals Table Viewer
-	 * @generated NOT
-	 */
-	protected TableViewer animalsTableViewer;
 
 	/**
 	 * This shows how a tree view with columns works.
@@ -640,7 +604,7 @@ public class TrackerEditor
 			updateProblemIndication = true;
 			updateProblemIndication();
 			//Added
-			resetInputOnTableViewers();
+			// resetInputOnTableViewers();
 		}
 	}
 	
@@ -664,20 +628,20 @@ public class TrackerEditor
 //		}
 //	}
 
-	/**
-	 * 
-	 */
-	private void resetInputOnTableViewers() {
-		  Object rootObject = getRoot();
-		  if (rootObject instanceof Premises)
-		  {
-			logger.debug("Setting input on tables");
-			animalsTableViewer.setInput((Premises)rootObject);
-			eventsTableViewer.setInput((Premises)rootObject);
-		  }else{
-			  logger.error("Root not a Premises. Did not reset input on viewers.");
-		  }
-	}
+	// /**
+	// *
+	// */
+	// private void resetInputOnTableViewers() {
+	// Object rootObject = getRoot();
+	// if (rootObject instanceof Premises)
+	// {
+	// logger.debug("Setting input on tables");
+	// animalsTableViewer.setInput(rootObject);
+	// eventsTableViewer.setInput(rootObject);
+	// }else{
+	// logger.error("Root not a Premises. Did not reset input on viewers.");
+	// }
+	// }
   
 	/**
 	 * Updates the problems indication with the information described in the specified diagnostic.
@@ -864,21 +828,25 @@ public class TrackerEditor
 			super(adapterFactory);
 		}
 
+		@Override
 		public Object [] getElements(Object object) {
 			Object parent = super.getParent(object);
 			return (parent == null ? Collections.EMPTY_SET : Collections.singleton(parent)).toArray();
 		}
 
+		@Override
 		public Object [] getChildren(Object object) {
 			Object parent = super.getParent(object);
 			return (parent == null ? Collections.EMPTY_SET : Collections.singleton(parent)).toArray();
 		}
 
+		@Override
 		public boolean hasChildren(Object object) {
 			Object parent = super.getParent(object);
 			return parent != null;
 		}
 
+		@Override
 		public Object getParent(Object object) {
 			return null;
 		}
@@ -1063,39 +1031,29 @@ public class TrackerEditor
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public void createPages() {
 		// Creates the model from the editor input
-		//
 		createModel();
 
 		// Only creates the other pages if there is something that can be edited
-		//
 		if (!getEditingDomain().getResourceSet().getResources().isEmpty() &&
-				!((Resource)getEditingDomain().getResourceSet().getResources().get(0)).getContents().isEmpty()) {
+				!(getEditingDomain().getResourceSet().getResources().get(0)).getContents().isEmpty()) {
 
 			createSelectionTreeViewer(getString("_UI_SelectionPage_label"));
 
-			createParentTreeViewer(getString("_UI_ParentPage_label"));
+			// createParentTreeViewer(getString("_UI_ParentPage_label"));
+			//
+			// createListViewer(getString("_UI_ListPage_label"));
+			//
+			// createTreeViewer(getString("_UI_TreePage_label"));
 
-			createListViewer(getString("_UI_ListPage_label"));
-
-			createTreeViewer(getString("_UI_TreePage_label"));
-
-			createEventsTableViewer(getString("_UI_EventsTablePage_label"));
-
-			createAnimalsTableViewer(getString("_UI_TableAnimals_label"));
-			
-
-//			createTableTreeViewer(getString("_UI_TreeWithColumnsPage_label"));
 			
 			IEditorActionBarContributor abc = getActionBarContributor();
 			if(abc != null && abc instanceof TrackerActionBarContributor){
 				TrackerActionBarContributor trackerActionBarContributor =(TrackerActionBarContributor)abc;
-				SelectionViewerFilter svf = trackerActionBarContributor.customActionBarContributor.getSelectionViewerFilter();
 				trackerActionBarContributor.customActionBarContributor.getSelectionViewerFilter().setMainViewer(selectionViewer);
-				svf.addViewer(eventsTableViewer);
-				svf.addViewer(animalsTableViewer);
-				svf.addViewer(fairRegistrationTableViewer);
+				
 			}
 			
 
@@ -1108,6 +1066,7 @@ public class TrackerEditor
 		getContainer().addControlListener
 			(new ControlAdapter() {
 				boolean guard = false;
+				@Override
 				public void controlResized(ControlEvent event) {
 					if (!guard) {
 						guard = true;
@@ -1127,9 +1086,11 @@ public class TrackerEditor
 	private void createTableTreeViewer(String pageName) {
 		ViewerPane viewerPane =
 			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+				@Override
 				public Viewer createViewer(Composite composite) {
 					return new TreeViewer(composite);
 				}
+				@Override
 				public void requestActivation() {
 					super.requestActivation();
 					setCurrentViewerPane(this);
@@ -1163,83 +1124,95 @@ public class TrackerEditor
 		setPageText(pageIndex, pageName);
 	}
 
-	/**
-	 * 
-	 */
-	private void createTreeViewer(String pageName) {
-		ViewerPane viewerPane =
-			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-				public Viewer createViewer(Composite composite) {
-					return new TreeViewer(composite);
-				}
-				public void requestActivation() {
-					super.requestActivation();
-					setCurrentViewerPane(this);
-				}
-			};
-		viewerPane.createControl(getContainer());
-		treeViewer = (TreeViewer)viewerPane.getViewer();
-		treeViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-		treeViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, treeViewer));
-
-		new AdapterFactoryTreeEditor(treeViewer.getTree(), adapterFactory);
-
-		createContextMenuFor(treeViewer);
-		int pageIndex = addPage(viewerPane.getControl());
-		setPageText(pageIndex, pageName);
-	}
-
-	/**
-	 * 
-	 */
-	private void createListViewer(String pageName) {
-		ViewerPane viewerPane =
-			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-				public Viewer createViewer(Composite composite) {
-					return new ListViewer(composite);
-				}
-				public void requestActivation() {
-					super.requestActivation();
-					setCurrentViewerPane(this);
-				}
-			};
-		viewerPane.createControl(getContainer());
-		listViewer = (ListViewer)viewerPane.getViewer();
-		listViewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
-		listViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, listViewer));
-
-		createContextMenuFor(listViewer);
-		int pageIndex = addPage(viewerPane.getControl());
-		setPageText(pageIndex, pageName);
-	}
-
-	/**
-	 * 
-	 */
-	private void createParentTreeViewer(String pageName) {
-		ViewerPane viewerPane =
-			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-				public Viewer createViewer(Composite composite) {
-					Tree tree = new Tree(composite, SWT.MULTI);
-					TreeViewer newTreeViewer = new TreeViewer(tree);
-					return newTreeViewer;
-				}
-				public void requestActivation() {
-					super.requestActivation();
-					setCurrentViewerPane(this);
-				}
-			};
-		viewerPane.createControl(getContainer());
-
-		parentViewer = (TreeViewer)viewerPane.getViewer();
-		parentViewer.setAutoExpandLevel(30);
-		parentViewer.setContentProvider(new ReverseAdapterFactoryContentProvider(adapterFactory));
-		parentViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, parentViewer));
-
-		createContextMenuFor(parentViewer);
-		int pageIndex = addPage(viewerPane.getControl());
-		setPageText(pageIndex, pageName);
-	}
+	// /**
+	// *
+	// */
+	// private void createTreeViewer(String pageName) {
+	// ViewerPane viewerPane =
+	// new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+	// @Override
+	// public Viewer createViewer(Composite composite) {
+	// return new TreeViewer(composite);
+	// }
+	// @Override
+	// public void requestActivation() {
+	// super.requestActivation();
+	// setCurrentViewerPane(this);
+	// }
+	// };
+	// viewerPane.createControl(getContainer());
+	// treeViewer = (TreeViewer)viewerPane.getViewer();
+	// treeViewer.setContentProvider(new
+	// AdapterFactoryContentProvider(adapterFactory));
+	// treeViewer.setLabelProvider(new
+	// WorkaroundAdapterFactoryLabelProvider(adapterFactory, treeViewer));
+	//
+	// new AdapterFactoryTreeEditor(treeViewer.getTree(), adapterFactory);
+	//
+	// createContextMenuFor(treeViewer);
+	// int pageIndex = addPage(viewerPane.getControl());
+	// setPageText(pageIndex, pageName);
+	// }
+	//
+	// /**
+	// *
+	// */
+	// private void createListViewer(String pageName) {
+	// ViewerPane viewerPane =
+	// new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+	// @Override
+	// public Viewer createViewer(Composite composite) {
+	// return new ListViewer(composite);
+	// }
+	// @Override
+	// public void requestActivation() {
+	// super.requestActivation();
+	// setCurrentViewerPane(this);
+	// }
+	// };
+	// viewerPane.createControl(getContainer());
+	// listViewer = (ListViewer)viewerPane.getViewer();
+	// listViewer.setContentProvider(new
+	// AdapterFactoryContentProvider(adapterFactory));
+	// listViewer.setLabelProvider(new
+	// WorkaroundAdapterFactoryLabelProvider(adapterFactory, listViewer));
+	//
+	// createContextMenuFor(listViewer);
+	// int pageIndex = addPage(viewerPane.getControl());
+	// setPageText(pageIndex, pageName);
+	// }
+	//
+	// /**
+	// *
+	// */
+	// private void createParentTreeViewer(String pageName) {
+	// ViewerPane viewerPane =
+	// new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+	// @Override
+	// public Viewer createViewer(Composite composite) {
+	// Tree tree = new Tree(composite, SWT.MULTI);
+	// TreeViewer newTreeViewer = new TreeViewer(tree);
+	// return newTreeViewer;
+	// }
+	// @Override
+	// public void requestActivation() {
+	// super.requestActivation();
+	// setCurrentViewerPane(this);
+	// }
+	// };
+	// viewerPane.createControl(getContainer());
+	//
+	// parentViewer = (TreeViewer)viewerPane.getViewer();
+	// parentViewer.setAutoExpandLevel(30);
+	// parentViewer.setContentProvider(new
+	// ReverseAdapterFactoryContentProvider(adapterFactory));
+	// parentViewer.setLabelProvider(new
+	// WorkaroundAdapterFactoryLabelProvider(adapterFactory, parentViewer));
+	//
+	// createContextMenuFor(parentViewer);
+	// int pageIndex = addPage(viewerPane.getControl());
+	// setPageText(pageIndex, pageName);
+	// }
 
 	/**
 	 * 
@@ -1247,11 +1220,13 @@ public class TrackerEditor
 	private void createSelectionTreeViewer(String pageName ) {
 		ViewerPane viewerPane =
 			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
+				@Override
 				public Viewer createViewer(Composite composite) {
 					Tree tree = new Tree(composite, SWT.MULTI);
 					TreeViewer newTreeViewer = new TreeViewer(tree);
 					return newTreeViewer;
 				}
+				@Override
 				public void requestActivation() {
 					super.requestActivation();
 					setCurrentViewerPane(this);
@@ -1273,11 +1248,8 @@ public class TrackerEditor
 		);
            
 		selectionViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, selectionViewer));
-		//Changed to show the Premises as the root
-//				selectionViewer.setInput(editingDomain.getResourceSet());
-//				viewerPane.setTitle(editingDomain.getResourceSet());
 		ResourceSet resourceSet = editingDomain.getResourceSet();
-		Resource resource = (Resource)resourceSet.getResources().get(0);
+		Resource resource = resourceSet.getResources().get(0);
 		selectionViewer.setInput(resource);
 		viewerPane.setTitle(resource);
 
@@ -1289,103 +1261,6 @@ public class TrackerEditor
 	}
 
 	
-	/**
-	 * Events Table
-	 */
-	private void createEventsTableViewer(String tableName) {
-		ViewerPane viewerPane =
-			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-			public Viewer createViewer(Composite composite) {
-				return new TableViewer(composite);
-			}
-			public void requestActivation() {
-				super.requestActivation();
-				setCurrentViewerPane(this);
-				this.getViewer().refresh();
-			}
-		};
-		viewerPane.createControl(getContainer());
-		eventsTableViewer = (TableViewer) viewerPane.getViewer();
-		
-		TrackerTableEditorUtils.setUpEventsTableViewer(eventsTableViewer);
-		
-		
-		eventsTableViewer.setContentProvider(new EventHistoryContentProvider(adapterFactory));
-		eventsTableViewer.setLabelProvider(
-				new AdapterFactoryLabelProvider(adapterFactory));
-		
-
-		Object rootObject = getRoot();
-		if (rootObject instanceof Premises){
-			eventsTableViewer.setInput((Premises)rootObject);
-			viewerPane.setTitle((Premises)rootObject);
-		}
-		createContextMenuFor(eventsTableViewer);
-		int pageIndex = addPage(viewerPane.getControl());
-		setPageText(pageIndex, tableName);
-	}
-
-	/**
-	 * Animals Table
-	 * References fields animalsTableViewer, 
-	 * @param tableName 
-	 */
-	private void createAnimalsTableViewer(String tableName) {
-		ViewerPane viewerPane =
-			new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-				public Viewer createViewer(Composite composite) {
-					return new TableViewer(composite);
-				}
-				public void requestActivation() {
-					super.requestActivation();
-					setCurrentViewerPane(this);
-				}
-			};
-			
-		viewerPane.createControl(getContainer());
-		animalsTableViewer = (TableViewer) viewerPane.getViewer();
-			
-		TrackerTableEditorUtils.setUpAnimalsTableViewer(animalsTableViewer);
-		
-		/**
-		 * The default ItemProvider returned via the adapterFactory
-		 * for Premises should be able to handle all notifications 
-		 * of animals being added or removed.
-		 * 
-		 * To get Animal Elements override the getElements method 
-		 */
-		animalsTableViewer.setContentProvider(
-		        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
-		        {
-		          @Override
-		          public Object [] getElements(Object object)
-		          {
-		            return ((Premises)object).getAnimals().toArray();
-		          }
-
-		        });
-		animalsTableViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
-		//14.2.2
-		  Object rootObject = getRoot();
-		  if (rootObject instanceof Premises)
-		  {
-			animalsTableViewer.setInput((Premises)rootObject);
-		    viewerPane.setTitle((Premises)rootObject);
-		  }
-		  
-		createContextMenuFor(animalsTableViewer);
-		int pageIndex = addPage(viewerPane.getControl());
-		setPageText(pageIndex, tableName);
-	}
-
-	/**
-	 * @return
-	 */
-	private Object getRoot() {
-		Resource resource = (Resource)editingDomain.getResourceSet().getResources().get(0);
-		  Object rootObject = resource.getContents().get(0);
-		return rootObject;
-	}
 
 	/**
 	 * If there is just one page in the multi-page editor part,
@@ -1478,30 +1353,12 @@ public class TrackerEditor
 			return showOutlineView() ? getContentOutlinePage() : null;
 		}
 		else if (key.equals(IPropertySheetPage.class)) {
-//			return new TrackerEditorPropertySheetPage(this);
 			return getPropertySheetPage();
-//			return new PropertySheetForm();
 		}
 		else if (key.equals(IGotoMarker.class)) {
 			return this;
 		}
-		//Added to support AnimalSelections
-		else if (key.equals(IAnimalSelectionProvider.class)){
-			if (animalSelectionProvider==null){
-				animalSelectionProvider = new IAnimalSelectionProvider(){
-
-					public ISelection getAnimalSelection() {
-						return TrackerEditor.this.getAnimalSelection();
-					}
-
-					public void setAnimalSelection(ISelection selection) {
-						TrackerEditor.this.setAnimalSelection(selection);
-					}
-					
-				};
-			}
-			return animalSelectionProvider;
-		}
+		
 		//Added to support the main Viewer Selections
 		else if (key.equals(ISelectionViewerProvider.class)){
 			if (selectionViewerProvider==null){
@@ -1520,23 +1377,7 @@ public class TrackerEditor
 			}
 			return selectionViewerProvider;
 		}
-		else if (key.equals(IEventSelectionProvider.class)){
-			if (eventSelectionProvider==null){
-				eventSelectionProvider = new IEventSelectionProvider(){
-
-					public ISelection getEventSelection() {
-						return TrackerEditor.this.getEventSelection();
-					}
-
-					public void setEventSelection(ISelection selection) {
-						TrackerEditor.this.setEventSelection(selection);
-					}
-
-					
-				};
-			}
-			return eventSelectionProvider;
-		}
+		
 		//Adds adaptive support for IQueryDataSetProvider 	
 		else if (key.equals(IQueryDataSetProvider.class)){
 			if (queryDataSetProvider==null){
@@ -1662,38 +1503,10 @@ public class TrackerEditor
 	 * @generated NOT
 	 */
 	public IPropertySheetPage getPropertySheetPage() {
-//		return getPropertySheetForm();
 		return getPropertySheetPageGen(); 
 	}
 	
 
-//	/**
-//	 * @return propertySheetPage implemented with the new PropertySheetForm
-//	 */
-//	private IPropertySheetPage getPropertySheetForm() {
-//		if (propertySheetPage == null) {
-//			
-//			propertySheetPage =
-//				new PropertySheetForm(editingDomain){
-//					@Override
-//					public void setSelectionToViewer(List<?> selection) {
-//						TrackerEditor.this.setSelectionToViewer(selection);
-//						TrackerEditor.this.setFocus();
-//					}
-//
-//					@Override
-//					public void setActionBars(IActionBars actionBars) {
-//						super.setActionBars(actionBars);
-//						getActionBarContributor().shareGlobalActions(this, actionBars);
-//					}
-//				};
-//			propertySheetPage.setPropertySourceProvider(
-//					new AdapterFactoryItemDelegator(adapterFactory));
-//			
-//		}
-//
-//		return propertySheetPage;
-//	}
 
 	/**
 	 * This deals with how we want selection in the outliner to affect the other views.
@@ -1723,43 +1536,49 @@ public class TrackerEditor
 					//
 					selectionViewer.setSelection(new StructuredSelection(selectionList));
 				// Handle animalsTableViewer
-				} else if (currentViewerPane.getViewer() == animalsTableViewer){
-					if (selectedElement instanceof Animal){
-				
-					ArrayList<Object> selectionList = new ArrayList<Object>();
-					selectionList.add(selectedElement);
-					while (selectedElements.hasNext()) {
-						Object o = selectedElements.next();
-						if(o instanceof Animal){
-							selectionList.add(o);
-						}
-						
-					}
-					
-					// Set the selection to the widget.
+					// } else if (currentViewerPane.getViewer() ==
+					// animalsTableViewer){
+					// if (selectedElement instanceof Animal){
+					//				
+					// ArrayList<Object> selectionList = new
+					// ArrayList<Object>();
+					// selectionList.add(selectedElement);
+					// while (selectedElements.hasNext()) {
+					// Object o = selectedElements.next();
+					// if(o instanceof Animal){
+					// selectionList.add(o);
+					// }
+					//						
+					// }
+					//					
+					// // Set the selection to the widget.
+					// //
+					// animalsTableViewer.setSelection(new
+					// StructuredSelection(selectionList));
+					//					
+					// }
+					//					
+					// // Handle eventsTableViewer
+					// } else if (currentViewerPane.getViewer() ==
+					// eventsTableViewer){
+					// if(selectedElement instanceof Event){
 					//
-					animalsTableViewer.setSelection(new StructuredSelection(selectionList));
-					
-					}
-					
-				// Handle eventsTableViewer
-				} else if (currentViewerPane.getViewer() == eventsTableViewer){
-					if(selectedElement instanceof Event){
-
-						ArrayList<Object> selectionList = new ArrayList<Object>();
-						selectionList.add(selectedElement);
-						while (selectedElements.hasNext()) {
-							Object o = selectedElements.next();
-							if(o instanceof Event){
-								selectionList.add(o);
-							}
-
-						}
-
-						// Set the selection to the widget.
-						//
-						eventsTableViewer.setSelection(new StructuredSelection(selectionList));
-					}
+					// ArrayList<Object> selectionList = new
+					// ArrayList<Object>();
+					// selectionList.add(selectedElement);
+					// while (selectedElements.hasNext()) {
+					// Object o = selectedElements.next();
+					// if(o instanceof Event){
+					// selectionList.add(o);
+					// }
+					//
+					// }
+					//
+					// // Set the selection to the widget.
+					// //
+					// eventsTableViewer.setSelection(new
+					// StructuredSelection(selectionList));
+					// }
 					
 				
 				}else if (currentViewerPane.getViewer() == listViewer
@@ -2164,24 +1983,23 @@ public class TrackerEditor
 	protected boolean showOutlineView() {
 		return true;
 	}
-	
 
-	public ISelection getEventSelection() {
-		return eventsTableViewer.getSelection();
-	}
-
-	public void setEventSelection(ISelection selection) {
-		eventsTableViewer.setSelection(selection);
-		
-	}
-
-	public ISelection getAnimalSelection() {
-		return animalsTableViewer.getSelection();
-	}
-
-	public void setAnimalSelection(ISelection selection) {
-		animalsTableViewer.setSelection(selection);
-	}
+	// public ISelection getEventSelection() {
+	// return eventsTableViewer.getSelection();
+	// }
+	//
+	// public void setEventSelection(ISelection selection) {
+	// eventsTableViewer.setSelection(selection);
+	//		
+	// }
+	//
+	// public ISelection getAnimalSelection() {
+	// return animalsTableViewer.getSelection();
+	// }
+	//
+	// public void setAnimalSelection(ISelection selection) {
+	// animalsTableViewer.setSelection(selection);
+	// }
 
 	public ISelection getSelectionViewerSelection() {
 		return selectionViewer.getSelection();
@@ -2191,12 +2009,20 @@ public class TrackerEditor
 		selectionViewer.setSelection(selection);
 	}
 
-	
-//	/**
-//	 * Added to support TabbedPropertiesSheets
-//	 * @generated NOT
-//	 */
-//	public String getContributorId() {
-//		return getSite().getId();
-//	}
+	public void addViewer(TableViewer tableViewer) {
+		TrackerActionBarContributor trackerActionBarContributor = (TrackerActionBarContributor) getActionBarContributor();
+		SelectionViewerFilter svf = trackerActionBarContributor
+				.getCustomActionBarContributor().getSelectionViewerFilter();
+
+		svf.addViewer(tableViewer);
+
+	}
+
+	public void removeViewer(TableViewer tableViewer) {
+		TrackerActionBarContributor trackerActionBarContributor = (TrackerActionBarContributor) getActionBarContributor();
+		SelectionViewerFilter svf = trackerActionBarContributor
+				.getCustomActionBarContributor().getSelectionViewerFilter();
+
+		svf.removeViewer(tableViewer);
+	}
 }

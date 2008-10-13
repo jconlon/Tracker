@@ -76,7 +76,6 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -85,7 +84,6 @@ import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
-import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -96,13 +94,9 @@ import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Tree;
-import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorActionBarContributor;
 import org.eclipse.ui.IEditorInput;
@@ -127,46 +121,36 @@ import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
-import com.verticon.tracker.editor.presentation.EventHistoryContentProvider;
-import com.verticon.tracker.editor.presentation.IAnimalSelectionProvider;
-import com.verticon.tracker.editor.presentation.IEventSelectionProvider;
 import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
 import com.verticon.tracker.editor.presentation.ISelectionViewerProvider;
 import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
-import com.verticon.tracker.editor.util.TrackerTableEditorUtils;
-import com.verticon.tracker.fair.Exhibit;
-import com.verticon.tracker.fair.Fair;
-import com.verticon.tracker.fair.Person;
+import com.verticon.tracker.editor.util.ITrackerViewRegister;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
-import com.verticon.tracker.fair.editor.util.ExhibitsContentAdapter;
-import com.verticon.tracker.fair.editor.util.FairTableEditorUtils;
-
 
 /**
- * This is an example of a Fair model editor.
- * <!-- begin-user-doc -->
- * This editor differs from the generated EMF implementation in the following ways:
+ * This is an example of a Fair model editor. <!-- begin-user-doc --> This
+ * editor differs from the generated EMF implementation in the following ways:
  * <ul>
- *   <li>adds an Animals table</li>
- *   <li>adds an Events table</li>
- *   <li>adds an Exhibits table </li>
- *   <li>adds an People table </li>
- *   <li>adds support for OCL Query View using an IQueryDataSetProvider adapter</li>
- *    <li>adds SelectionTree expansion and  contraction actions to the 
- *   	 ActionBarContributor</li>
- *   <li>adds Selection linking between Animals and Events Tables</li>
- *   <li>implements previous two items with adapters for IEventSelectionProvider, 
- *   	 IAnimalSelectionProvider, ISelectionViewerProvider,  </li>
+ * 
+ * <li>adds support for OCL Query View using an IQueryDataSetProvider adapter</li>
+ * <li>adds SelectionTree expansion and contraction actions to the
+ * ActionBarContributor</li>
+ * <li>implements ISelectionViewerProvider,</li>
+ * <li>adds support for registering views by implementing ITrackerViewRegister</li>
  * </ul>
- * <!-- end-user-doc -->
+ * 
+ * @implements ITrackerViewRegister
+ * 
+ *             <!-- end-user-doc -->
  * @generated
  */
 public class FairEditor
 	extends MultiPageEditorPart
-	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
+	implements
+		IEditingDomainProvider, ISelectionProvider, IMenuListener,
+		IViewerProvider, IGotoMarker, ITrackerViewRegister {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -219,37 +203,7 @@ public class FairEditor
 	 * @generated
 	 */
 	protected TreeViewer contentOutlineViewer;
-	
-	/**
-	 * Events Table Viewer
-	 * @generated NOT
-	 */
-	protected TableViewer eventsTableViewer;
-	
 
-	/**
-	 * Animals Table Viewer
-	 * @generated NOT
-	 */
-	protected TableViewer animalsTableViewer;
-	
-	/**
-	 * People Table Viewer
-	 * @generated NOT
-	 */
-	protected TableViewer peopleTableViewer;
-	
-	/**
-	 * Exhibit Table Viewer
-	 * @generated NOT
-	 */
-	protected TableViewer exhibitsTableViewer;
-	
-	/**
-	 * Offers a selection on a set of Animals. 
-	 * @generated NOT
-	 */
-	private IAnimalSelectionProvider animalSelectionProvider;
 	
 	/**
 	 * Offers a generic selection. 
@@ -257,11 +211,6 @@ public class FairEditor
 	 */
 	private ISelectionViewerProvider selectionViewerProvider;
 	
-	/**
-	 * Offers a selection on a set of Events. 
-	 * @generated NOT
-	 */
-	private IEventSelectionProvider eventSelectionProvider;
 	
 	/**
 	 * Offers a query on a dataSet. 
@@ -658,28 +607,10 @@ public class FairEditor
 			}
 			updateProblemIndication = true;
 			updateProblemIndication();
-			//Added
-			resetInputOnTableViewers();
 		}
 	}
 
-	/**
-	 * Resets the Input on TableViewers
-	 * 
-	 * @generated NOT
-	 */
-	private void resetInputOnTableViewers() {
-		logger.debug("Reloading resources");
-		  Fair rootObject = getFair();
-		  if (rootObject !=null && rootObject.getPremises()!=null)
-		  {
-			logger.debug("Setting input on Premises tables");
-					 animalsTableViewer.setInput(rootObject.getPremises());
-					 eventsTableViewer.setInput(rootObject.getPremises());
-		  }else{
-			  logger.error("Root object was not a Premises, but a  {}", rootObject.getClass().toString());
-		  }
-	}
+	
 
   
 	/**
@@ -1093,30 +1024,17 @@ public class FairEditor
 		// Only creates the other pages if there is something that can be edited
 		//
 		if (!getEditingDomain().getResourceSet().getResources().isEmpty() &&
-				!((Resource)getEditingDomain().getResourceSet().getResources().get(0)).getContents().isEmpty()) {
+				!(getEditingDomain().getResourceSet().getResources().get(0)).getContents().isEmpty()) {
 
 			createSelectionTreeViewer(getString("_UI_SelectionPage_label"));
 
-			createListViewer(getString("_UI_ListPage_label"));
+			// createListViewer(getString("_UI_ListPage_label"));
 
-			createEventsTableViewer(getString("_UI_EventsTablePage_label"));
-
-			createAnimalsTableViewer(getString("_UI_AnimalsTablePage_label"));
-			
-			createExhibitsTableViewer(getString("_UI_ExhibitsTablePage_label"));
-			
-			createPeopleTableViewer(getString("_UI_PeopleTablePage_label"));
 
 			IEditorActionBarContributor abc = getActionBarContributor();
 			if(abc != null && abc instanceof FairActionBarContributor){
 				FairActionBarContributor fairActionBarContributor =(FairActionBarContributor)abc;
-				SelectionViewerFilter svf = fairActionBarContributor.
-					getCustomActionBarContributor().getSelectionViewerFilter();
 				fairActionBarContributor.getCustomActionBarContributor().getSelectionViewerFilter().setMainViewer(selectionViewer);
-				svf.addViewer(eventsTableViewer);
-				svf.addViewer(animalsTableViewer);
-				svf.addViewer(peopleTableViewer);
-				svf.addViewer(exhibitsTableViewer);
 			}
 			
 			setActivePage(0);
@@ -1128,6 +1046,7 @@ public class FairEditor
 		getContainer().addControlListener
 			(new ControlAdapter() {
 				boolean guard = false;
+				@Override
 				public void controlResized(ControlEvent event) {
 					if (!guard) {
 						guard = true;
@@ -1146,9 +1065,11 @@ public class FairEditor
 	protected void createListViewer(String pageName) {
 		ViewerPane viewerPane =
 			new ViewerPane(getSite().getPage(), FairEditor.this) {
+				@Override
 				public Viewer createViewer(Composite composite) {
 					return new ListViewer(composite);
 				}
+				@Override
 				public void requestActivation() {
 					super.requestActivation();
 					setCurrentViewerPane(this);
@@ -1178,11 +1099,13 @@ public class FairEditor
 	protected void createSelectionTreeViewer(String pageName ) {
 		ViewerPane viewerPane =
 			new ViewerPane(getSite().getPage(), FairEditor.this) {
+				@Override
 				public Viewer createViewer(Composite composite) {
 					Tree tree = new Tree(composite, SWT.MULTI);
 					TreeViewer newTreeViewer = new TreeViewer(tree);
 					return newTreeViewer;
 				}
+				@Override
 				public void requestActivation() {
 					super.requestActivation();
 					setCurrentViewerPane(this);
@@ -1221,229 +1144,10 @@ public class FairEditor
 		selectionViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
 	}
 	
-	/**
-	 * Events Table
-	 */
-	protected void createEventsTableViewer(String tableName) {
-		ViewerPane viewerPane =
-			new ViewerPane(getSite().getPage(), FairEditor.this) {
-			public Viewer createViewer(Composite composite) {
-				return new TableViewer(composite);
-			}
-			public void requestActivation() {
-				super.requestActivation();
-				setCurrentViewerPane(this);
-				this.getViewer().refresh();
-			}
-		};
-		viewerPane.createControl(getContainer());
-		
-		eventsTableViewer = (TableViewer)viewerPane.getViewer();
-		
-		TrackerTableEditorUtils.setUpEventsTableViewer(eventsTableViewer);
-		addEventsTableViewerProviders();
-		
-
-		Fair fair = getFair();
-		if (fair !=null){
-			eventsTableViewer.setInput(fair.getPremises());
-			viewerPane.setTitle(fair.getPremises());
-		}
-		createContextMenuFor(eventsTableViewer);
-		int pageIndex = addPage(viewerPane.getControl());
-		setPageText(pageIndex, tableName);
-		
-	}
-
-	/**
-	 * 
-	 */
-	protected void addEventsTableViewerProviders() {
-		eventsTableViewer.setContentProvider(new EventHistoryContentProvider(adapterFactory));
-		eventsTableViewer.setLabelProvider(
-				new AdapterFactoryLabelProvider(adapterFactory));
-	}
-	
-	/**
-	 * Animals Table
-	 * References fields animalsTableViewer, 
-	 * @param tableName 
-	 */
-	protected void createAnimalsTableViewer(String tableName) {
-		ViewerPane viewerPane =
-			new ViewerPane(getSite().getPage(), FairEditor.this) {
-			public Viewer createViewer(Composite composite) {
-				return new TableViewer(composite);
-			}
-			public void requestActivation() {
-				super.requestActivation();
-				setCurrentViewerPane(this);
-			}
-		};
-//		viewerPane.createControl(getContainer());
-//		animalsTableViewer = TrackerTableEditorUtils.createAnimalsTableViewer(viewerPane);
-
-		viewerPane.createControl(getContainer());
-		animalsTableViewer = (TableViewer) viewerPane.getViewer();
-			
-		TrackerTableEditorUtils.setUpAnimalsTableViewer(animalsTableViewer);
-		
-		addAnimalsTableViewerProviders();
-		
-		Fair rootObject = getFair();
-		if (rootObject !=null)
-		{
-			animalsTableViewer.setInput(rootObject.getPremises());
-			viewerPane.setTitle(rootObject.getPremises());
-		}
-
-		createContextMenuFor(animalsTableViewer);
-		int pageIndex = addPage(viewerPane.getControl());
-		setPageText(pageIndex, tableName);
-	}
-
-	/**
-	 * 
-	 */
-	protected void addAnimalsTableViewerProviders() {
-		/**
-		 * The default ItemProvider returned via the adapterFactory
-		 * for Premises should be able to handle all notifications 
-		 * of animals being added or removed.
-		 * 
-		 * To get Animal Elements override the getElements method 
-		 */
-		animalsTableViewer.setContentProvider(
-		        new AdapterFactoryContentProvider(adapterFactory) // 14.2.2
-		        {
-		          @Override
-		          public Object [] getElements(Object object)
-		          {
-		            return ((Premises)object).getAnimals().toArray();
-		          }
-
-		        });
-		animalsTableViewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
-	}
 	
 	
-	/**
-	 * Exhibits Table
-	 * References fields exhibitsTableViewer, 
-	 * @param tableName 
-	 */
-	protected void createExhibitsTableViewer(String tableName) {
-		ViewerPane viewerPane =
-			new ViewerPane(getSite().getPage(), FairEditor.this) {
-			public Viewer createViewer(Composite composite) {
-				return new TableViewer(composite);
-			}
-			public void requestActivation() {
-				super.requestActivation();
-				setCurrentViewerPane(this);
-			}
-		};
-		viewerPane.createControl(getContainer());
-		exhibitsTableViewer = (TableViewer) viewerPane.getViewer();
-		FairTableEditorUtils.setUpExhibitsTableViewer( exhibitsTableViewer);
-		addExhibitsTableViewerProviders();
-
-		Fair fair = getFair();
-		if (fair !=null)
-		{
-			exhibitsTableViewer.setInput(fair);
-			viewerPane.setTitle(fair);
-		}
-		
-
-		createContextMenuFor(exhibitsTableViewer);
-		int pageIndex = addPage(viewerPane.getControl());
-		setPageText(pageIndex, tableName);
-	}
-
-	/**
-	 * 
-	 */
-	protected void addExhibitsTableViewerProviders() {
-		exhibitsTableViewer.setContentProvider(new ExhibitsContentAdapter(adapterFactory));
-		exhibitsTableViewer.setLabelProvider(new AdapterFactoryLabelProvider(
-				adapterFactory));
-	}
-
-	/**
-	 * People Table
-	 * References fields peopleTableViewer, 
-	 * @param tableName 
-	 */
-	protected void createPeopleTableViewer(String tableName) {
-		ViewerPane viewerPane =
-			new ViewerPane(getSite().getPage(), FairEditor.this) {
-			public Viewer createViewer(Composite composite) {
-				return new TableViewer(composite);
-			}
-			public void requestActivation() {
-				super.requestActivation();
-				setCurrentViewerPane(this);
-			}
-		};
-		viewerPane.createControl(getContainer());
-		peopleTableViewer = (TableViewer) viewerPane.getViewer();
-		FairTableEditorUtils.setUpPeopleTableViewer( peopleTableViewer);
-		
-		addPeopleTableViewerProviders();
-
-		Fair fair = getFair();
-		if (fair !=null)
-		{
-			peopleTableViewer.setInput(fair);
-			viewerPane.setTitle(fair);
-		}
-
-		createContextMenuFor(peopleTableViewer);
-		int pageIndex = addPage(viewerPane.getControl());
-		setPageText(pageIndex, tableName);
-	}
-
-	/**
-	 * 
-	 */
-	protected void addPeopleTableViewerProviders() {
-		/**
-		 * The default ItemProvider returned via the adapterFactory for Premises
-		 * should be able to handle all notifications of animals being added or
-		 * removed.
-		 * 
-		 * To get People Elements override the getElements method
-		 */
-		peopleTableViewer.setContentProvider(new AdapterFactoryContentProvider(
-				adapterFactory) {
-			@Override
-			public Object[] getElements(Object object) {
-				Fair fair = (Fair) object;
-
-				return fair.getPeople().toArray();
-			}
-
-		});
-		peopleTableViewer.setLabelProvider(new AdapterFactoryLabelProvider(
-				adapterFactory));
-	}
 	
-	/**
-	 * 
-	 * @return fair
-	 */
-	private Fair getFair(){
-		Fair fair = null;
-		for (Resource resource : editingDomain.getResourceSet().getResources()) {
-			Object o = resource.getContents().get(0);
-			if(o instanceof Fair){
-				fair = (Fair)o;
-				break;
-			}
-		}
-		return fair;
-	}
+
 
 
 	/**
@@ -1518,23 +1222,7 @@ public class FairEditor
 		else if (key.equals(IGotoMarker.class)) {
 			return this;
 		}
-		//Added to support AnimalSelections
-		else if (key.equals(IAnimalSelectionProvider.class)){
-			if (animalSelectionProvider==null){
-				animalSelectionProvider = new IAnimalSelectionProvider(){
-
-					public ISelection getAnimalSelection() {
-						return FairEditor.this.getAnimalSelection();
-					}
-
-					public void setAnimalSelection(ISelection selection) {
-						FairEditor.this.setAnimalSelection(selection);
-					}
-					
-				};
-			}
-			return animalSelectionProvider;
-		}
+		
 		//Added to support the main Viewer Selections
 		else if (key.equals(ISelectionViewerProvider.class)){
 			if (selectionViewerProvider==null){
@@ -1553,23 +1241,7 @@ public class FairEditor
 			}
 			return selectionViewerProvider;
 		}
-		else if (key.equals(IEventSelectionProvider.class)){
-			if (eventSelectionProvider==null){
-				eventSelectionProvider = new IEventSelectionProvider(){
-
-					public ISelection getEventSelection() {
-						return FairEditor.this.getEventSelection();
-					}
-
-					public void setEventSelection(ISelection selection) {
-						FairEditor.this.setEventSelection(selection);
-					}
-
-					
-				};
-			}
-			return eventSelectionProvider;
-		}
+		
 		//Adds adaptive support for IQueryDataSetProvider 	
 		else if (key.equals(IQueryDataSetProvider.class)){
 			if (queryDataSetProvider==null){
@@ -1698,82 +1370,9 @@ public class FairEditor
 				//
 				Object selectedElement = selectedElements.next();
 
-				// If it's the animalsTableViewer viewer, then we want it to select the same selection as this selection.
-				//
-				if (currentViewerPane.getViewer() == animalsTableViewer){
-					if (selectedElement instanceof Animal){
 				
-					ArrayList<Object> selectionList = new ArrayList<Object>();
-					selectionList.add(selectedElement);
-					while (selectedElements.hasNext()) {
-						Object o = selectedElements.next();
-						if(o instanceof Animal){
-							selectionList.add(o);
-						}
-						
-					}
-					
-					// Set the selection to the widget.
-					//
-					animalsTableViewer.setSelection(new StructuredSelection(selectionList));
-					
-					}
-					
-				// Handle eventsTableViewer
-				} else if (currentViewerPane.getViewer() == eventsTableViewer){
-					if(selectedElement instanceof Event){
-
-						ArrayList<Object> selectionList = new ArrayList<Object>();
-						selectionList.add(selectedElement);
-						while (selectedElements.hasNext()) {
-							Object o = selectedElements.next();
-							if(o instanceof Event){
-								selectionList.add(o);
-							}
-
-						}
-
-						// Set the selection to the widget.
-						//
-						eventsTableViewer.setSelection(new StructuredSelection(selectionList));
-					}
-					// Handle peopleTableViewer
-				} else if (currentViewerPane.getViewer() == peopleTableViewer){
-					if(selectedElement instanceof Person){
-
-						ArrayList<Object> selectionList = new ArrayList<Object>();
-						selectionList.add(selectedElement);
-						while (selectedElements.hasNext()) {
-							Object o = selectedElements.next();
-							if(o instanceof Person){
-								selectionList.add(o);
-							}
-
-						}
-
-						// Set the selection to the widget.
-						//
-						peopleTableViewer.setSelection(new StructuredSelection(selectionList));
-					}
-				} else if (currentViewerPane.getViewer() == exhibitsTableViewer){
-					if(selectedElement instanceof Exhibit){
-
-						ArrayList<Object> selectionList = new ArrayList<Object>();
-						selectionList.add(selectedElement);
-						while (selectedElements.hasNext()) {
-							Object o = selectedElements.next();
-							if(o instanceof Exhibit){
-								selectionList.add(o);
-							}
-
-						}
-
-						// Set the selection to the widget.
-						//
-						exhibitsTableViewer.setSelection(new StructuredSelection(selectionList));
-					}
 				//Handle listViewer
-				} else if (currentViewerPane.getViewer() == listViewer
+				if (currentViewerPane.getViewer() == listViewer
 						&& selectedElement instanceof Animal) // 14.2.2
 				{
 					Animal selectedAnimal = (Animal) selectedElement;
@@ -2201,22 +1800,6 @@ public class FairEditor
 		return true;
 	}
 	
-	public ISelection getEventSelection() {
-		return eventsTableViewer.getSelection();
-	}
-
-	public void setEventSelection(ISelection selection) {
-		eventsTableViewer.setSelection(selection);
-		
-	}
-
-	public ISelection getAnimalSelection() {
-		return animalsTableViewer.getSelection();
-	}
-
-	public void setAnimalSelection(ISelection selection) {
-		animalsTableViewer.setSelection(selection);
-	}
 
 	public ISelection getSelectionViewerSelection() {
 		return selectionViewer.getSelection();
@@ -2224,5 +1807,22 @@ public class FairEditor
 
 	public void setSelectionViewerSelection(ISelection selection) {
 		selectionViewer.setSelection(selection);
+	}
+
+	public void addViewer(TableViewer tableViewer) {
+		FairActionBarContributor fairActionBarContributor = (FairActionBarContributor) getActionBarContributor();
+		SelectionViewerFilter svf = fairActionBarContributor
+				.getCustomActionBarContributor().getSelectionViewerFilter();
+
+		svf.addViewer(tableViewer);
+
+	}
+
+	public void removeViewer(TableViewer tableViewer) {
+		FairActionBarContributor fairActionBarContributor = (FairActionBarContributor) getActionBarContributor();
+		SelectionViewerFilter svf = fairActionBarContributor
+				.getCustomActionBarContributor().getSelectionViewerFilter();
+
+		svf.removeViewer(tableViewer);
 	}
 }
