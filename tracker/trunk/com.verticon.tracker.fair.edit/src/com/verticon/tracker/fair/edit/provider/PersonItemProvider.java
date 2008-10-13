@@ -91,6 +91,7 @@ public class PersonItemProvider
 			addCommentsPropertyDescriptor(object);
 			addPinPropertyDescriptor(object);
 			addSalesOrderPropertyDescriptor(object);
+			addExhibitorNumberPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -283,7 +284,7 @@ public class PersonItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Person_comments_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Person_comments_feature", "_UI_Person_type"),
+				 getString("_UI_Person_comments_description"),
 				 FairPackage.Literals.PERSON__COMMENTS,
 				 true,
 				 false,
@@ -305,13 +306,13 @@ public class PersonItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Person_pin_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Person_pin_feature", "_UI_Person_type"),
+				 getString("_UI_Person_pin_description"),
 				 FairPackage.Literals.PERSON__PIN,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 getString("_UI_PremisesofPersonPropertyCategory"),
+				 getString("_UI_IdentificationPropertyCategory"),
 				 null));
 	}
 
@@ -334,6 +335,28 @@ public class PersonItemProvider
 				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Exhibitor Number feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addExhibitorNumberPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Person_exhibitorNumber_feature"),
+				 getString("_UI_Person_exhibitorNumber_description"),
+				 FairPackage.Literals.PERSON__EXHIBITOR_NUMBER,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 getString("_UI_IdentificationPropertyCategory"),
 				 null));
 	}
 
@@ -385,6 +408,7 @@ public class PersonItemProvider
 			case FairPackage.PERSON__COMMENTS:
 			case FairPackage.PERSON__PIN:
 			case FairPackage.PERSON__SALES_ORDER:
+			case FairPackage.PERSON__EXHIBITOR_NUMBER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -414,6 +438,7 @@ public class PersonItemProvider
 		return FairEditPlugin.INSTANCE;
 	}
 
+	@Override
 	public Object getColumnImage(Object object, int columnIndex) {
 		switch (columnIndex){
         	case 0: return getImage(object);
@@ -427,6 +452,7 @@ public class PersonItemProvider
 	 * Name, First Name, Last Name, Phone Number, Street, City, State, Zip Code
 	 * 
 	 */
+	@Override
 	public String getColumnText(Object object, int columnIndex) 
 	  {
 	    Person person = (Person)object;
@@ -434,14 +460,24 @@ public class PersonItemProvider
 	        case 0: return getText(object); 
 	    	case 1: return person.getFirstName(); 
 	    	case 2: return person.getLastName(); 
-	    	case 3: return Integer.toString(person.getSalesOrder()); 
-	    	case 4: return person.getPhone();
-	    	case 5: return person.getStreet();
-	    	case 6: return person.getCity();
-	    	case 7: return person.getState();
-	    	case 8: return person.getZipCode();
-	    	case 9:	return person.getPin();
-	    	case 10: return person.getComments();
+	    	case 3:
+			return Integer.toString(person.getExhibitorNumber());
+		case 4:
+			return Integer.toString(person.getSalesOrder());
+		case 5:
+			return person.getPhone();
+		case 6:
+			return person.getStreet();
+		case 7:
+			return person.getCity();
+		case 8:
+			return person.getState();
+		case 9:
+			return person.getZipCode();
+		case 10:
+			return person.getPin();
+		case 11:
+			return person.getComments();
 	    	default :
 	    		return "unknown " + columnIndex;
 	    }

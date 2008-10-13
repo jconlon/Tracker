@@ -7,6 +7,7 @@ package com.verticon.tracker.fair.editor.presentation;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -100,6 +101,24 @@ public class FairModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	public static final String copyright = "Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.";
+
+	/**
+	 * The supported extensions for created files.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final List<String> FILE_EXTENSIONS =
+		Collections.unmodifiableList(Arrays.asList(FairEditorPlugin.INSTANCE.getString("_UI_FairEditorFilenameExtensions").split("\\s*,\\s*")));
+
+	/**
+	 * A formatted list of supported file extensions, suitable for display.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String FORMATTED_FILE_EXTENSIONS =
+		FairEditorPlugin.INSTANCE.getString("_UI_FairEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", ");
 
 	/**
 	 * This caches an instance of the model package.
@@ -321,21 +340,15 @@ public class FairModelWizard extends Wizard implements INewWizard {
 	@Override
 		protected boolean validatePage() {
 			if (super.validatePage()) {
-				// Make sure the file ends in ".fair".
-				//
-				String requiredExt = FairEditorPlugin.INSTANCE.getString("_UI_FairEditorFilenameExtension");
-				String enteredExt = new Path(getFileName()).getFileExtension();
-				if (enteredExt == null || !enteredExt.equals(requiredExt)) {
-					setErrorMessage(FairEditorPlugin.INSTANCE.getString("_WARN_FilenameExtension", new Object [] { requiredExt }));
+				String extension = new Path(getFileName()).getFileExtension();
+				if (extension == null || !FILE_EXTENSIONS.contains(extension)) {
+					String key = FILE_EXTENSIONS.size() > 1 ? "_WARN_FilenameExtensions" : "_WARN_FilenameExtension";
+					setErrorMessage(FairEditorPlugin.INSTANCE.getString(key, new Object [] { FORMATTED_FILE_EXTENSIONS }));
 					return false;
 				}
-				else {
-					return true;
-				}
+				return true;
 			}
-			else {
-				return false;
-			}
+			return false;
 		}
 
 		/**
@@ -569,7 +582,7 @@ public class FairModelWizard extends Wizard implements INewWizard {
 		newFileCreationPage = new FairModelWizardNewFileCreationPage("Whatever", selection);
 		newFileCreationPage.setTitle(FairEditorPlugin.INSTANCE.getString("_UI_FairModelWizard_label"));
 		newFileCreationPage.setDescription(FairEditorPlugin.INSTANCE.getString("_UI_FairModelWizard_description"));
-		newFileCreationPage.setFileName(FairEditorPlugin.INSTANCE.getString("_UI_FairEditorFilenameDefaultBase") + "." + FairEditorPlugin.INSTANCE.getString("_UI_FairEditorFilenameExtension"));
+		newFileCreationPage.setFileName(FairEditorPlugin.INSTANCE.getString("_UI_FairEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
 		addPage(newFileCreationPage);
 
 		// Try and get the resource selection to determine a current directory for the file dialog.
@@ -596,7 +609,7 @@ public class FairModelWizard extends Wizard implements INewWizard {
 					// Make up a unique new name here.
 					//
 					String defaultModelBaseFilename = FairEditorPlugin.INSTANCE.getString("_UI_FairEditorFilenameDefaultBase");
-					String defaultModelFilenameExtension = FairEditorPlugin.INSTANCE.getString("_UI_FairEditorFilenameExtension");
+					String defaultModelFilenameExtension = FILE_EXTENSIONS.get(0);
 					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
 						modelFilename = defaultModelBaseFilename + i + "." + defaultModelFilenameExtension;
