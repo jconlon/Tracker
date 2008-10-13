@@ -39,6 +39,8 @@ public class FairTableEditorUtils {
 		NAME("Name",new ColumnWeightData(3, 200, true)), 
 		FIRST_NAME("First Name",new ColumnWeightData(2, 100, true)),
 		LAST_NAME("Last Name",new ColumnWeightData(2, 100, true)), 
+		EXHIBITOR_NUMBER(
+				"Exhibitor Number", new ColumnWeightData(2, 80, true)),
 		SALES_ORDER("Sales Order in Auction",new ColumnWeightData(2, 150, true)),
 		PHONE("Phone",new ColumnWeightData(2, 100, true)), 
 		STREET("Street",new ColumnWeightData(2, 200, true)), 
@@ -113,73 +115,7 @@ public class FairTableEditorUtils {
 			nameColumn.addListener(SWT.Selection, sortListener);
 		}
 
-		tableViewer.setColumnProperties(PeopleColumn.colNames);
-		
-//		// Create the cell editors
-//	    CellEditor[] editors = new CellEditor[PeopleColumn.colNames.length];
-//			
-//	     // Column 1 : Name
-//	    TextCellEditor textEditor = new TextCellEditor(table);
-//		((Text) textEditor.getControl()).setTextLimit(60);
-//		editors[0] = textEditor;
-//		
-//		// Column 2 : First Name
-//	    textEditor = new TextCellEditor(table);
-//		((Text) textEditor.getControl()).setTextLimit(60);
-//		editors[1] = textEditor;
-//		
-//		// Column 10 : Name (Free text)
-//	    textEditor = new TextCellEditor(table);
-//		((Text) textEditor.getControl()).setTextLimit(60);
-//		editors[9] = textEditor;
-
-//		// Assign the cell editors to the viewer
-//		tableViewer.setCellEditors(editors);
-//		// Set the cell modifier for the viewer
-//		tableViewer.setCellModifier(new ICellModifier(){
-//
-//		   //TODO Issue 217
-//			public boolean canModify(Object element, String text) {
-//				// Find the index of the column
-////				if(PeopleColumn.COMMENTS.property.equals(text)){
-////					return true;
-////				}
-////				if(PeopleColumn.NAME.property.equals(text)){
-////					return false;
-////				}
-////				if(PeopleColumn.FIRST_NAME.property.equals(text)){
-////					return true;
-////				}
-//
-//				return false;
-//			}
-//
-//			public Object getValue(Object element, String text) {
-//				Person person = (Person) element;
-//				
-//				if(PeopleColumn.COMMENTS.property.equals(text)){
-//					return person.getComments();
-//				}
-//				if(PeopleColumn.FIRST_NAME.property.equals(text)){
-//					return person.getFirstName();
-//				}
-//				return null;
-//			}
-//
-//			public void modify(Object element, String text, Object value) {
-//				TableItem item = (TableItem) element;
-//				Person person = (Person) item.getData();
-//				if(PeopleColumn.COMMENTS.property.equals(text)){
-//					 person.setComments((String)value);
-//				}else if(PeopleColumn.FIRST_NAME.property.equals(text)){
-//					 person.setFirstName((String)value);
-//				
-//					
-//				}
-//				
-//			}
-//			
-//		});
+		tableViewer.setColumnProperties(PeopleColumn.colNames);	
 
 	}
 

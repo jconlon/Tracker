@@ -65,6 +65,7 @@ public class PeopleSorter extends ViewerSorter {
 	/* (non-Javadoc)
 	 * Method declared on ViewerSorter.
 	 */
+	@Override
 	public int compare(Viewer viewer, Object o1, Object o2) {
 		Person person1 = (Person) o1;
 		Person person2 = (Person) o2;
@@ -81,6 +82,9 @@ public class PeopleSorter extends ViewerSorter {
 			case FIRST_NAME :
 				returnValue = compareFirstNames(person1, person2);
 				break;
+			case EXHIBITOR_NUMBER:
+			returnValue = compareExhibitorNumbers(person1, person2);
+			break;
 			case SALES_ORDER :
 				Integer value1 = person1.getSalesOrder();
 				Integer value2 = person2.getSalesOrder();
@@ -128,7 +132,6 @@ public class PeopleSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	protected int compareStreets(Person person1, Person person2) {
 		String value1 = person1.getStreet()==null?"":person1.getStreet();
 		String value2 = person2.getStreet()==null?"":person2.getStreet();
@@ -148,7 +151,6 @@ public class PeopleSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	private int compareCities(Person person1, Person person2) {
 		String value1 = person1.getCity()==null?"":person1.getCity();
 		String value2 = person2.getCity()==null?"":person2.getCity();
@@ -166,7 +168,6 @@ public class PeopleSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	private int compareLastNames(Person person1, Person person2) {
 		String value1 = person1.getLastName()==null?"":person1.getLastName();
 		String value2 = person2.getLastName()==null?"":person2.getLastName();
@@ -184,7 +185,6 @@ public class PeopleSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	private int compareFirstNames(Person person1, Person person2) {
 		String value1 = person1.getFirstName()==null?"":person1.getFirstName();
 		String value2 = person2.getFirstName()==null?"":person2.getFirstName();
@@ -204,7 +204,6 @@ public class PeopleSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	protected int compareStates(Person person1, Person person2) {
 		String value1 = person1.getState()==null?"":person1.getState();
 		String value2 = person2.getState()==null?"":person2.getState();
@@ -222,7 +221,6 @@ public class PeopleSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	protected int comparePhones(Person person1, Person person2) {
 		String value1 = person1.getPhone()==null?"":person1.getPhone();
 		String value2 = person2.getPhone()==null?"":person2.getPhone();
@@ -240,7 +238,6 @@ public class PeopleSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	protected int compareZips(Person person1, Person person2) {
 		String value1 = person1.getZipCode()==null?"":person1.getZipCode();
 		String value2 = person2.getZipCode()==null?"":person2.getZipCode();
@@ -260,7 +257,6 @@ public class PeopleSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	protected int compareNames(Person person1, Person person2) {
 		String value1 = person1.getName()==null?"":person1.getClass().getName()+person1.getName();
 		String value2 = person2.getName()==null?"":person2.getClass().getName()+person2.getName();
@@ -278,7 +274,6 @@ public class PeopleSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	protected int compareComments(Person person1, Person person2) {
 		String value1 = person1.getComments()==null?"":person1.getComments();
 		String value2 = person2.getComments()==null?"":person2.getComments();
@@ -296,14 +291,28 @@ public class PeopleSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	protected int comparePins(Person person1, Person person2) {
 		String value1 = person1.getPin()==null?"":person1.getPin();
 		String value2 = person2.getPin()==null?"":person2.getPin();
 		return value1.compareTo(value2);
 	}
 	
-	
+	/**
+	 * Returns a number reflecting the order of the given people based on the
+	 * exhibitorNumber.
+	 * 
+	 * @param person1
+	 * @param person2
+	 * @return a negative number if the first element is less than the second
+	 *         element; the value <code>0</code> if the first element is equal
+	 *         to the second element; and a positive number if the first element
+	 *         is greater than the second element
+	 */
+	private int compareExhibitorNumbers(Person person1, Person person2) {
+		return person1.getExhibitorNumber() <= person2.getExhibitorNumber() ? -1
+				: person1.getExhibitorNumber() == person2.getExhibitorNumber() ? 0
+						: 1;
+	}
 	
 	
 }

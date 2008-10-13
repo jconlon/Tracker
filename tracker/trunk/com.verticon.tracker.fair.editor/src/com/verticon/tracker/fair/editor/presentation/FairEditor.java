@@ -76,6 +76,7 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -84,6 +85,7 @@ import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
+import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -94,9 +96,13 @@ import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorActionBarContributor;
 import org.eclipse.ui.IEditorInput;
@@ -130,7 +136,8 @@ import com.verticon.tracker.editor.util.ITrackerViewRegister;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
 
 /**
- * This is an example of a Fair model editor. <!-- begin-user-doc --> This
+ * This is an example of a Fair model editor.
+ * <!-- begin-user-doc --> This
  * editor differs from the generated EMF implementation in the following ways:
  * <ul>
  * 
@@ -470,75 +477,70 @@ public class FairEditor
 	protected IResourceChangeListener resourceChangeListener =
 		new IResourceChangeListener() {
 			public void resourceChanged(IResourceChangeEvent event) {
-				// Only listening to these.
-				// if (event.getType() == IResourceDelta.POST_CHANGE)
-				{
-					IResourceDelta delta = event.getDelta();
-					try {
-						class ResourceDeltaVisitor implements IResourceDeltaVisitor {
-							protected ResourceSet resourceSet = editingDomain.getResourceSet();
-							protected Collection<Resource> changedResources = new ArrayList<Resource>();
-							protected Collection<Resource> removedResources = new ArrayList<Resource>();
+				IResourceDelta delta = event.getDelta();
+				try {
+					class ResourceDeltaVisitor implements IResourceDeltaVisitor {
+						protected ResourceSet resourceSet = editingDomain.getResourceSet();
+						protected Collection<Resource> changedResources = new ArrayList<Resource>();
+						protected Collection<Resource> removedResources = new ArrayList<Resource>();
 
-							public boolean visit(IResourceDelta delta) {
-								if (delta.getFlags() != IResourceDelta.MARKERS &&
-								    delta.getResource().getType() == IResource.FILE) {
-									if ((delta.getKind() & (IResourceDelta.CHANGED | IResourceDelta.REMOVED)) != 0) {
-										Resource resource = resourceSet.getResource(URI.createURI(delta.getFullPath().toString()), false);
-										if (resource != null) {
-											if ((delta.getKind() & IResourceDelta.REMOVED) != 0) {
-												removedResources.add(resource);
-											}
-											else if (!savedResources.remove(resource)) {
-												changedResources.add(resource);
-											}
+						public boolean visit(IResourceDelta delta) {
+							if (delta.getResource().getType() == IResource.FILE) {
+								if (delta.getKind() == IResourceDelta.REMOVED ||
+								    delta.getKind() == IResourceDelta.CHANGED && delta.getFlags() != IResourceDelta.MARKERS) {
+									Resource resource = resourceSet.getResource(URI.createURI(delta.getFullPath().toString()), false);
+									if (resource != null) {
+										if (delta.getKind() == IResourceDelta.REMOVED) {
+											removedResources.add(resource);
+										}
+										else if (!savedResources.remove(resource)) {
+											changedResources.add(resource);
 										}
 									}
 								}
-
-								return true;
 							}
 
-							public Collection<Resource> getChangedResources() {
-								return changedResources;
-							}
-
-							public Collection<Resource> getRemovedResources() {
-								return removedResources;
-							}
+							return true;
 						}
 
-						ResourceDeltaVisitor visitor = new ResourceDeltaVisitor();
-						delta.accept(visitor);
-
-						if (!visitor.getRemovedResources().isEmpty()) {
-							removedResources.addAll(visitor.getRemovedResources());
-							if (!isDirty()) {
-								getSite().getShell().getDisplay().asyncExec
-									(new Runnable() {
-										 public void run() {
-											 getSite().getPage().closeEditor(FairEditor.this, false);
-											 FairEditor.this.dispose();
-										 }
-									 });
-							}
+						public Collection<Resource> getChangedResources() {
+							return changedResources;
 						}
 
-						if (!visitor.getChangedResources().isEmpty()) {
-							changedResources.addAll(visitor.getChangedResources());
-							if (getSite().getPage().getActiveEditor() == FairEditor.this) {
-								getSite().getShell().getDisplay().asyncExec
-									(new Runnable() {
-										 public void run() {
-											 handleActivate();
-										 }
-									 });
-							}
+						public Collection<Resource> getRemovedResources() {
+							return removedResources;
 						}
 					}
-					catch (CoreException exception) {
-						FairEditorPlugin.INSTANCE.log(exception);
+
+					ResourceDeltaVisitor visitor = new ResourceDeltaVisitor();
+					delta.accept(visitor);
+
+					if (!visitor.getRemovedResources().isEmpty()) {
+						removedResources.addAll(visitor.getRemovedResources());
+						if (!isDirty()) {
+							getSite().getShell().getDisplay().asyncExec
+								(new Runnable() {
+									 public void run() {
+										 getSite().getPage().closeEditor(FairEditor.this, false);
+									 }
+								 });
+						}
 					}
+
+					if (!visitor.getChangedResources().isEmpty()) {
+						changedResources.addAll(visitor.getChangedResources());
+						if (getSite().getPage().getActiveEditor() == FairEditor.this) {
+							getSite().getShell().getDisplay().asyncExec
+								(new Runnable() {
+									 public void run() {
+										 handleActivate();
+									 }
+								 });
+						}
+					}
+				}
+				catch (CoreException exception) {
+					FairEditorPlugin.INSTANCE.log(exception);
 				}
 			}
 		};
@@ -563,7 +565,6 @@ public class FairEditor
 		if (!removedResources.isEmpty()) {
 			if (handleDirtyConflict()) {
 				getSite().getPage().closeEditor(FairEditor.this, false);
-				FairEditor.this.dispose();
 			}
 			else {
 				removedResources.clear();
@@ -1469,8 +1470,11 @@ public class FairEditor
 					for (Resource resource : editingDomain.getResourceSet().getResources()) {
 						if ((first || !resource.getContents().isEmpty() || isPersisted(resource)) && !editingDomain.isReadOnly(resource)) {
 							try {
-								savedResources.add(resource);
+								long timeStamp = resource.getTimeStamp();
 								resource.save(saveOptions);
+								if (resource.getTimeStamp() != timeStamp) {
+									savedResources.add(resource);
+								}
 							}
 							catch (Exception exception) {
 								resourceToDiagnosticMap.put(resource, analyzeResourceProblems(resource, exception));
