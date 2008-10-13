@@ -28,4 +28,8 @@ public interface PersonValidator {
 	boolean validateComments(String value);
 
 	boolean validatePin(String value);
+
+	boolean validateSalesOrder(int value);
+
+	boolean validateExhibitorNumber(int value);
 }

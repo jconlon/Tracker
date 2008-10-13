@@ -626,13 +626,22 @@ public interface FairPackage extends EPackage {
 	int PERSON__SALES_ORDER = 10;
 
 	/**
+	 * The feature id for the '<em><b>Exhibitor Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__EXHIBITOR_NUMBER = 11;
+
+	/**
 	 * The number of structural features of the '<em>Person</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = 11;
+	int PERSON_FEATURE_COUNT = 12;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.YoungPersonImpl <em>Young Person</em>}' class.
@@ -742,6 +751,15 @@ public interface FairPackage extends EPackage {
 	 * @ordered
 	 */
 	int YOUNG_PERSON__SALES_ORDER = PERSON__SALES_ORDER;
+
+	/**
+	 * The feature id for the '<em><b>Exhibitor Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOUNG_PERSON__EXHIBITOR_NUMBER = PERSON__EXHIBITOR_NUMBER;
 
 	/**
 	 * The feature id for the '<em><b>Parents</b></em>' reference list.
@@ -1388,6 +1406,17 @@ public interface FairPackage extends EPackage {
 	EAttribute getPerson_SalesOrder();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Person#getExhibitorNumber <em>Exhibitor Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Exhibitor Number</em>'.
+	 * @see com.verticon.tracker.fair.Person#getExhibitorNumber()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_ExhibitorNumber();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.YoungPerson <em>Young Person</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1920,6 +1949,14 @@ public interface FairPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PERSON__SALES_ORDER = eINSTANCE.getPerson_SalesOrder();
+
+		/**
+		 * The meta object literal for the '<em><b>Exhibitor Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__EXHIBITOR_NUMBER = eINSTANCE.getPerson_ExhibitorNumber();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.YoungPersonImpl <em>Young Person</em>}' class.

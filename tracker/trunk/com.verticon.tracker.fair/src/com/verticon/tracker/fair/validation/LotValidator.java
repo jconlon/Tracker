@@ -25,4 +25,6 @@ public interface LotValidator {
 	boolean validateExhibits(EList<Exhibit> value);
 
 	boolean validateClass(com.verticon.tracker.fair.Class value);
+
+	boolean validateComments(String value);
 }
