@@ -1,10 +1,12 @@
 package com.verticon.tracker.fair.views;
 
+import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -15,6 +17,7 @@ import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.util.TrackerView;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
+import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
 import com.verticon.tracker.fair.editor.util.FairTableEditorUtils;
@@ -28,9 +31,18 @@ import com.verticon.tracker.fair.editor.util.FairTableEditorUtils;
 public class PeopleView extends TrackerView {
 
 	private static final String NAME_OF_ITEM_IN_MASTER = "Person";
+	
+	/**
+	 * Reference to Observable for table Input
+	 */
+	private IObservableList tableInput;
 
 	/**
-	 * Override point for subclasses to create the tableViewer columns.
+	 * Override point for subclasses to create the tableViewer columns. To fix
+	 * Task number 261 this method now uses a databinding contentProvider for
+	 * the tableViewer
+	 * 
+	 * @see #handleViewerInputChange()
 	 */
 	@Override
 	protected void setUpTable(AdapterFactory adapterFactory) {
@@ -38,31 +50,34 @@ public class PeopleView extends TrackerView {
 		FairTableEditorUtils.setUpPeopleTableViewer(tableViewer);
 		masterFilteredTable.setColumns(tableViewer.getTable().getColumns());
 
-		tableViewer.setContentProvider(new AdapterFactoryContentProvider(
-				adapterFactory) {
-			@Override
-			public Object[] getElements(Object object) {
-				Fair fair = (Fair) object;
+		// // Set up databinding context here
+		ObservableListContentProvider cp = new ObservableListContentProvider();
+		tableViewer.setContentProvider(cp);
 
-				return fair.getPeople().toArray();
-			}
-
-		});
 		tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(
 				adapterFactory));
 	}
 
 	/**
-	 * Override point for subclasses to obtain the necessary input to feed the
-	 * tableViewer.
+	 * Override point for subclasses to obtain the necessary tableInput to feed
+	 * the tableViewer.
+	 * 
+	 * @see #setUpTable(AdapterFactory)
 	 */
 	@Override
 	protected void handleViewerInputChange() {
 		TableViewer tableViewer = masterFilteredTable.getViewer();
-		Fair rootObject = getFair();
-		if (rootObject != null) {
-			tableViewer.setInput(rootObject);
+		Fair fair = getFair();
+		if (tableInput != null) {
+			tableInput.dispose();
 		}
+		if (fair == null) {
+			return;
+		}
+		tableInput = EMFObservables.observeList(fair,
+				FairPackage.Literals.FAIR__PEOPLE);
+
+		tableViewer.setInput(tableInput);
 
 	}
 
@@ -154,7 +169,7 @@ public class PeopleView extends TrackerView {
 	 */
 	private Fair getFair() {
 		Fair fair = null;
-		for (Resource resource : queryDataSetProvider.getEditingDomain()
+		for (Resource resource : getEditingDomain()
 				.getResourceSet().getResources()) {
 			Object o = resource.getContents().get(0);
 			if (o instanceof Fair) {

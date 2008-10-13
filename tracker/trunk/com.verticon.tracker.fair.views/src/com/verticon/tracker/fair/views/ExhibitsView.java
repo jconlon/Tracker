@@ -141,7 +141,7 @@ public class ExhibitsView extends TrackerView {
 		}
 		return null;
 	}
-
+	
 	/**
 	 * @param exhibitToSelect
 	 */
@@ -160,7 +160,7 @@ public class ExhibitsView extends TrackerView {
 	 */
 	private Fair getFair() {
 		Fair fair = null;
-		for (Resource resource : queryDataSetProvider.getEditingDomain()
+		for (Resource resource : getEditingDomain()
 				.getResourceSet().getResources()) {
 			Object o = resource.getContents().get(0);
 			if (o instanceof Fair) {

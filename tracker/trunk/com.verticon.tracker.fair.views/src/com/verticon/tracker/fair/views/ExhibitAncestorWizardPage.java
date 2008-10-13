@@ -220,13 +220,18 @@ abstract class ExhibitAncestorWizardPage extends WizardPage implements
 		setControl(composite);
 	}
 
+	/**
+	 * 
+	 * @param tableComposite
+	 * @return a tableViewer with a Databinding ContentProvider
+	 */
 	protected TableViewer createSingleColumnTableViewer(Composite tableComposite) {
-		final TableViewer v = new TableViewer(tableComposite);
+		final TableViewer tableViewer = new TableViewer(tableComposite);
 		ObservableListContentProvider cp = new ObservableListContentProvider();
-		v.setContentProvider(cp);
-		v.setLabelProvider(new AdapterFactoryLabelProvider(
+		tableViewer.setContentProvider(cp);
+		tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(
 				new FairItemProviderAdapterFactory()));
-		return v;
+		return tableViewer;
 
 	}
 
