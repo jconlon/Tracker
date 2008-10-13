@@ -58,8 +58,10 @@ public class TrackerActionBarContributor
 	 * 
 	 * @generated NOT
 	 */
-	ICustomActionBarContributor customActionBarContributor = new FairCustomActionBarContributor();
+	ICustomActionBarContributor customActionBarContributor = new CustomActionBarContributor();
 	
+	
+
 	/**
 	 * This keeps track of the active editor.
 	 * <!-- begin-user-doc -->
@@ -447,6 +449,10 @@ public class TrackerActionBarContributor
 	private boolean useSubMenus(){
 		Preferences store = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
 		return  store.getBoolean(PreferenceConstants.P_USE_SUBMENUS);
+	}
+	
+	public ICustomActionBarContributor getCustomActionBarContributor() {
+		return customActionBarContributor;
 	}
 
 	/**
