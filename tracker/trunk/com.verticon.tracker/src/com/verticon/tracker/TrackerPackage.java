@@ -223,13 +223,22 @@ public interface TrackerPackage extends EPackage {
 	int ANIMAL__TYPE = 15;
 
 	/**
+	 * The feature id for the '<em><b>Visual ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANIMAL__VISUAL_ID = 16;
+
+	/**
 	 * The number of structural features of the '<em>Animal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL_FEATURE_COUNT = 16;
+	int ANIMAL_FEATURE_COUNT = 17;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.TagImpl <em>Tag</em>}' class.
@@ -430,6 +439,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOVINE__TYPE = ANIMAL__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Visual ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE__VISUAL_ID = ANIMAL__VISUAL_ID;
 
 	/**
 	 * The number of structural features of the '<em>Bovine</em>' class.
@@ -890,6 +908,15 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE_BEEF__TYPE = BOVINE__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Visual ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_BEEF__VISUAL_ID = BOVINE__VISUAL_ID;
+
+	/**
 	 * The feature id for the '<em><b>Beef Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1060,6 +1087,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int OVINE__TYPE = ANIMAL__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Visual ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OVINE__VISUAL_ID = ANIMAL__VISUAL_ID;
 
 	/**
 	 * The feature id for the '<em><b>Sheep Breed</b></em>' attribute.
@@ -1243,6 +1279,15 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE_BISON__TYPE = BOVINE__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Visual ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_BISON__VISUAL_ID = BOVINE__VISUAL_ID;
+
+	/**
 	 * The feature id for the '<em><b>Buffalo Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1413,6 +1458,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOVINE_DAIRY__TYPE = BOVINE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Visual ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_DAIRY__VISUAL_ID = BOVINE__VISUAL_ID;
 
 	/**
 	 * The feature id for the '<em><b>Dairy Breed</b></em>' attribute.
@@ -2767,6 +2821,15 @@ public interface TrackerPackage extends EPackage {
 	int SWINE__TYPE = ANIMAL__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Visual ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWINE__VISUAL_ID = ANIMAL__VISUAL_ID;
+
+	/**
 	 * The feature id for the '<em><b>Swine Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2957,6 +3020,15 @@ public interface TrackerPackage extends EPackage {
 	int EQUINE__TYPE = ANIMAL__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Visual ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__VISUAL_ID = ANIMAL__VISUAL_ID;
+
+	/**
 	 * The feature id for the '<em><b>Horse Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3127,6 +3199,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int CAPRINE__TYPE = ANIMAL__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Visual ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__VISUAL_ID = ANIMAL__VISUAL_ID;
 
 	/**
 	 * The feature id for the '<em><b>Goat Breed</b></em>' attribute.
@@ -4683,6 +4764,17 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getAnimal_Type();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Animal#getVisualID <em>Visual ID</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Visual ID</em>'.
+	 * @see com.verticon.tracker.Animal#getVisualID()
+	 * @see #getAnimal()
+	 * @generated
+	 */
+	EAttribute getAnimal_VisualID();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Tag <em>Tag</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6199,6 +6291,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ANIMAL__TYPE = eINSTANCE.getAnimal_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Visual ID</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ANIMAL__VISUAL_ID = eINSTANCE.getAnimal_VisualID();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.TagImpl <em>Tag</em>}' class.

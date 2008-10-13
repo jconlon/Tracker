@@ -36,9 +36,9 @@ import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.CollectionFilter;
-import com.verticon.tracker.util.TrackerUtils;
 import com.verticon.tracker.util.EventHistoryAdapterFactory;
 import com.verticon.tracker.util.Species;
+import com.verticon.tracker.util.TrackerUtils;
 
 /**
  * <!-- begin-user-doc -->
@@ -63,6 +63,7 @@ import com.verticon.tracker.util.Species;
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getWeight <em>Weight</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getWeightGainPerDay <em>Weight Gain Per Day</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getType <em>Type</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getVisualID <em>Visual ID</em>}</li>
  * </ul>
  * </p>
  *
@@ -277,6 +278,28 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @ordered
 	 */
 	protected static final AnimalType TYPE_EDEFAULT = AnimalType.UNSPECIFIED;
+
+
+	/**
+	 * The default value of the '{@link #getVisualID() <em>Visual ID</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisualID()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VISUAL_ID_EDEFAULT = null;
+
+
+	/**
+	 * The cached value of the '{@link #getVisualID() <em>Visual ID</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisualID()
+	 * @generated
+	 * @ordered
+	 */
+	protected String visualID = VISUAL_ID_EDEFAULT;
 
 
 	/**
@@ -602,6 +625,27 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getVisualID() {
+		return visualID;
+	}
+
+			/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisualID(String newVisualID) {
+		String oldVisualID = visualID;
+		visualID = newVisualID;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__VISUAL_ID, oldVisualID, visualID));
+	}
+
 	//	private WeighIn getLastWeighIn(){
 //		WeighIn lastWeighIn = null;
 //		if(!eventHistory().isEmpty()){
@@ -633,6 +677,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Deprecated
 	public EList<Event> allEvents() {
 		EventHistory eventHistory = (EventHistory) EventHistoryAdapterFactory.INSTANCE.adapt(
 				this, EventHistory.class);
@@ -763,6 +808,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return getWeightGainPerDay();
 			case TrackerPackage.ANIMAL__TYPE:
 				return getType();
+			case TrackerPackage.ANIMAL__VISUAL_ID:
+				return getVisualID();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -798,6 +845,9 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 			case TrackerPackage.ANIMAL__SIRE:
 				setSire((Animal)newValue);
 				return;
+			case TrackerPackage.ANIMAL__VISUAL_ID:
+				setVisualID((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -830,6 +880,9 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return;
 			case TrackerPackage.ANIMAL__SIRE:
 				setSire((Animal)null);
+				return;
+			case TrackerPackage.ANIMAL__VISUAL_ID:
+				setVisualID(VISUAL_ID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -875,6 +928,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return WEIGHT_GAIN_PER_DAY_EDEFAULT == null ? getWeightGainPerDay() != null : !WEIGHT_GAIN_PER_DAY_EDEFAULT.equals(getWeightGainPerDay());
 			case TrackerPackage.ANIMAL__TYPE:
 				return getType() != TYPE_EDEFAULT;
+			case TrackerPackage.ANIMAL__VISUAL_ID:
+				return VISUAL_ID_EDEFAULT == null ? visualID != null : !VISUAL_ID_EDEFAULT.equals(visualID);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -895,6 +950,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 		result.append(sex);
 		result.append(", comments: ");
 		result.append(comments);
+		result.append(", visualID: ");
+		result.append(visualID);
 		result.append(')');
 		return result.toString();
 	}
