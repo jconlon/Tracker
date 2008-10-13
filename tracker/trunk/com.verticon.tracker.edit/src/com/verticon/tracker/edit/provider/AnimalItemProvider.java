@@ -90,6 +90,7 @@ public class AnimalItemProvider
 			addWeightPropertyDescriptor(object);
 			addWeightGainPerDayPropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
+			addVisualIDPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -497,6 +498,30 @@ public class AnimalItemProvider
 	}
 
 /**
+	 * This adds a property descriptor for the Visual ID feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVisualIDPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Animal_visualID_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_visualID_feature", "_UI_Animal_type"),
+				 TrackerPackage.Literals.ANIMAL__VISUAL_ID,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 getString("_UI_IdentificationPropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
+	}
+
+/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -600,6 +625,7 @@ public class AnimalItemProvider
 			case TrackerPackage.ANIMAL__WEIGHT:
 			case TrackerPackage.ANIMAL__WEIGHT_GAIN_PER_DAY:
 			case TrackerPackage.ANIMAL__TYPE:
+			case TrackerPackage.ANIMAL__VISUAL_ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TrackerPackage.ANIMAL__TAGS:

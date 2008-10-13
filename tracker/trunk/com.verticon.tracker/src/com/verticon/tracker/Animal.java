@@ -37,6 +37,7 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getWeight <em>Weight</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getWeightGainPerDay <em>Weight Gain Per Day</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getType <em>Type</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getVisualID <em>Visual ID</em>}</li>
  * </ul>
  * </p>
  *
@@ -368,6 +369,32 @@ public interface Animal extends EObject {
 	AnimalType getType();
 
 	/**
+	 * Returns the value of the '<em><b>Visual ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Visual ID</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Visual ID</em>' attribute.
+	 * @see #setVisualID(String)
+	 * @see com.verticon.tracker.TrackerPackage#getAnimal_VisualID()
+	 * @model
+	 * @generated
+	 */
+	String getVisualID();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.Animal#getVisualID <em>Visual ID</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Visual ID</em>' attribute.
+	 * @see #getVisualID()
+	 * @generated
+	 */
+	void setVisualID(String value);
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * @deprecated use eventHistory() instead
 	 * 
@@ -411,7 +438,7 @@ public interface Animal extends EObject {
 	 * <!-- begin-model-doc -->
 	 * The most recent WeighIn event for this animal.
 	 * <!-- end-model-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='WeighIn lastWeighIn = null;\n\t\tif(!eventHistory().isEmpty()){\n\t\t\tCollectionFilter<Event> weighInsProducer = new CollectionFilter<Event>();\n\t\t\tweighInsProducer.addFilter(TrackerUtils.weighInFilterCriteria);\n\t\t\tList<Event> weighIns = new ArrayList<Event>(weighInsProducer.filterCopy(eventHistory()));\n\t\t\tif(weighIns.isEmpty()){\n\t\t\t\treturn null;\n\t\t\t}\n\t\t\tCollections.sort(weighIns, TrackerUtils.DATE_COMPARATOR);\n\t\t\tlastWeighIn = (WeighIn) weighIns.get(weighIns.size()-1);\n\t\t}\n\t\treturn lastWeighIn;'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='WeighIn lastWeighIn = null;\n\t\tif(!eventHistory().isEmpty()){\n\t\t\tCollectionFilter<Event> weighInsProducer = new CollectionFilter<Event>();\n\t\t\tweighInsProducer.addFilter(CommonUtilities.weighInFilterCriteria);\n\t\t\tList<Event> weighIns = new ArrayList<Event>(weighInsProducer.filterCopy(eventHistory()));\n\t\t\tif(weighIns.isEmpty()){\n\t\t\t\treturn null;\n\t\t\t}\n\t\t\tCollections.sort(weighIns, CommonUtilities.DATE_COMPARATOR);\n\t\t\tlastWeighIn = (WeighIn) weighIns.get(weighIns.size()-1);\n\t\t}\n\t\treturn lastWeighIn;'"
 	 * @generated
 	 */
 	WeighIn lastWeighIn();

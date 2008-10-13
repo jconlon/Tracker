@@ -21,7 +21,7 @@
     </eOperations>
     <eOperations name="lastWeighIn" eType="#//WeighIn">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="WeighIn lastWeighIn = null;&#xA;&#x9;&#x9;if(!eventHistory().isEmpty()){&#xA;&#x9;&#x9;&#x9;CollectionFilter&lt;Event> weighInsProducer = new CollectionFilter&lt;Event>();&#xA;&#x9;&#x9;&#x9;weighInsProducer.addFilter(CommonUtilities.weighInFilterCriteria);&#xA;&#x9;&#x9;&#x9;List&lt;Event> weighIns = new ArrayList&lt;Event>(weighInsProducer.filterCopy(eventHistory()));&#xA;&#x9;&#x9;&#x9;if(weighIns.isEmpty()){&#xA;&#x9;&#x9;&#x9;&#x9;return null;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;Collections.sort(weighIns, CommonUtilities.DATE_COMPARATOR);&#xA;&#x9;&#x9;&#x9;lastWeighIn = (WeighIn) weighIns.get(weighIns.size()-1);&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;return lastWeighIn;"/>
+        <details key="body" value="WeighIn lastWeighIn = null;&#xA;&#x9;&#x9;if(!eventHistory().isEmpty()){&#xA;&#x9;&#x9;&#x9;CollectionFilter&lt;Event> weighInsProducer = new CollectionFilter&lt;Event>();&#xA;&#x9;&#x9;&#x9;weighInsProducer.addFilter(TrackerUtils.weighInFilterCriteria);&#xA;&#x9;&#x9;&#x9;List&lt;Event> weighIns = new ArrayList&lt;Event>(weighInsProducer.filterCopy(eventHistory()));&#xA;&#x9;&#x9;&#x9;if(weighIns.isEmpty()){&#xA;&#x9;&#x9;&#x9;&#x9;return null;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;Collections.sort(weighIns, TrackerUtils.DATE_COMPARATOR);&#xA;&#x9;&#x9;&#x9;lastWeighIn = (WeighIn) weighIns.get(weighIns.size()-1);&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;return lastWeighIn;"/>
         <details key="documentation" value="The most recent WeighIn event for this animal."/>
       </eAnnotations>
     </eOperations>
@@ -54,6 +54,7 @@
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//AnimalType"
         changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visualID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Sex">
     <eLiterals name="Unspecified" literal=""/>
