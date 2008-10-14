@@ -31,7 +31,7 @@ public class GenericObservableMapCellLabelProvider extends ColumnLabelProvider {
 	/**
 	 * Template text
 	 */
-	private String templateText;
+	private final String templateText;
 
 	/**
 	 * The attribute maps
@@ -41,7 +41,8 @@ public class GenericObservableMapCellLabelProvider extends ColumnLabelProvider {
 	/**
 	 * Change listener to track changes
 	 */
-	private IMapChangeListener mapChangeListener = new IMapChangeListener() {
+	private final IMapChangeListener mapChangeListener = new IMapChangeListener() {
+		@SuppressWarnings("unchecked")
 		public void handleMapChange(MapChangeEvent event) {
 			Set affectedElements = event.diff.getChangedKeys();
 			LabelProviderChangedEvent newEvent = new LabelProviderChangedEvent(
@@ -71,6 +72,7 @@ public class GenericObservableMapCellLabelProvider extends ColumnLabelProvider {
 		this.templateText = templateText;
 	}
 
+	@Override
 	public void dispose() {
 		for (int i = 0; i < attributeMaps.length; i++) {
 			attributeMaps[i].removeMapChangeListener(mapChangeListener);
@@ -78,10 +80,12 @@ public class GenericObservableMapCellLabelProvider extends ColumnLabelProvider {
 		super.dispose();
 	}
 
+	@Override
 	public Image getImage(Object element) {
 		return null;
 	}
 
+	@Override
 	public String getText(Object element) {
 		if (templateText != null && templateText.length() > 0) {
 			Object[] elements = new Object[attributeMaps.length];

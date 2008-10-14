@@ -5,7 +5,7 @@
  * 
  */
 
-package com.verticon.tracker.fair.editor.util;
+package com.verticon.tracker.fair.views;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
@@ -37,7 +37,7 @@ import com.verticon.tracker.fair.Person;
 public class PeopleSorter extends ViewerSorter {
 
 	// Criteria that the instance uses 
-	private final FairTableEditorUtils.PeopleColumn criteria;
+	private final PeopleView.PeopleColumn criteria;
 	private final int dir;
 	
 	
@@ -56,7 +56,7 @@ public class PeopleSorter extends ViewerSorter {
 	 *  or 
 	 *  <code>CLASS</code>
 	 */
-	public PeopleSorter(FairTableEditorUtils.PeopleColumn criteria, int dir) {
+	public PeopleSorter(PeopleView.PeopleColumn criteria, int dir) {
 		super();
 		this.criteria = criteria;
 		this.dir=dir;
@@ -102,9 +102,9 @@ public class PeopleSorter extends ViewerSorter {
 			case ZIP :
 				returnValue = compareZips(person1, person2);
 				break;
-			case NAME :
-				returnValue = compareNames(person1, person2);
-				break;
+		// case NAME :
+		// returnValue = compareNames(person1, person2);
+		// break;
 			case COMMENTS :
 				returnValue = compareComments(person1, person2);
 				break;

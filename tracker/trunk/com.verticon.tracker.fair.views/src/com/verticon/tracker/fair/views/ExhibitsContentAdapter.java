@@ -1,4 +1,4 @@
-package com.verticon.tracker.fair.editor.util;
+package com.verticon.tracker.fair.views;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -11,7 +11,6 @@ import org.eclipse.jface.viewers.Viewer;
 import com.verticon.tracker.fair.AllExhibits;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.editor.presentation.ExhibitsContentAdapterDelegate;
-import com.verticon.tracker.fair.impl.FairAllExhibitsAdapter;
 import com.verticon.tracker.fair.util.AllExhibitsAdapterFactory;
 
 /**
@@ -22,7 +21,6 @@ import com.verticon.tracker.fair.util.AllExhibitsAdapterFactory;
  * with the Transaction version of this class.
  * 
  * @see ExhibitsContentAdapterDelegate
- * @see FairAllExhibitsAdapter
  * @see AllExhibitsAdapterFactory
  * @see AllExhibits
  * @author jconlon
@@ -37,7 +35,7 @@ public class ExhibitsContentAdapter extends AdapterFactoryContentProvider
 	private TableViewer eventsTableViewer = null;
 	
 	
-	private ExhibitsContentAdapterDelegate delegate = 
+	private final ExhibitsContentAdapterDelegate delegate = 
 		new ExhibitsContentAdapterDelegate(){
 			@Override
 			protected void refresh() {
