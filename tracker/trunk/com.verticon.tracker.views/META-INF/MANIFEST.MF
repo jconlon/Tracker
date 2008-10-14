@@ -4,7 +4,8 @@ Bundle-Name: Tracker Views
 Bundle-SymbolicName: com.verticon.tracker.views;singleton:=true
 Bundle-Version: 0.1.1
 Bundle-Vendor: Verticon, Inc.
-Import-Package: com.verticon.tracker;version="0.1.0",
+Import-Package: at.bestsolution.dataforms.util.viewers,
+ com.verticon.tracker;version="0.1.0",
  com.verticon.tracker.edit.provider;version="0.1.0",
  com.verticon.tracker.editor.actions,
  com.verticon.tracker.editor.presentation,
