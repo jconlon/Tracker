@@ -5,7 +5,7 @@
  * 
  */
 
-package com.verticon.tracker.editor.presentation;
+package com.verticon.tracker.views;
 import java.util.Date;
 
 import org.eclipse.jface.viewers.Viewer;
@@ -86,6 +86,7 @@ public class AnimalSorter extends ViewerSorter {
 	/* (non-Javadoc)
 	 * Method declared on ViewerSorter.
 	 */
+	@Override
 	public int compare(Viewer viewer, Object o1, Object o2) {
 		Animal animal1 = (Animal) o1;
 		Animal animal2 = (Animal) o2;

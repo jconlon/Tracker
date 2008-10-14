@@ -5,13 +5,12 @@
  * 
  */
 
-package com.verticon.tracker.fair.editor.presentation;
+package com.verticon.tracker.fair.views;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 
 import com.verticon.tracker.fair.Exhibit;
-import com.verticon.tracker.fair.editor.util.FairTableEditorUtils;
 
 
 /**
@@ -41,7 +40,7 @@ public class ExhibitSorter extends ViewerSorter {
 	
 
 	// Criteria that the instance uses 
-	private final FairTableEditorUtils.ExhibitColumn criteria;
+	private final ExhibitsView.ExhibitColumn criteria;
 	private final int dir;
 	
 	
@@ -60,7 +59,7 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  or 
 	 *  <code>CLASS</code>
 	 */
-	public ExhibitSorter(FairTableEditorUtils.ExhibitColumn criteria, int dir) {
+	public ExhibitSorter(ExhibitsView.ExhibitColumn criteria, int dir) {
 		super();
 		this.criteria = criteria;
 		this.dir=dir;
@@ -69,6 +68,7 @@ public class ExhibitSorter extends ViewerSorter {
 	/* (non-Javadoc)
 	 * Method declared on ViewerSorter.
 	 */
+	@Override
 	public int compare(Viewer viewer, Object o1, Object o2) {
 		Exhibit exhibit1 = (Exhibit) o1;
 		Exhibit exhibit2 = (Exhibit) o2;
@@ -125,7 +125,6 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	protected int compareClasses(Exhibit exhibit1, Exhibit exhibit2) {
 		String value1 = exhibit1.getLot().getClass_().getName()==null?
 				"":exhibit1.getLot().getClass_().getName();
@@ -148,7 +147,6 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	private int compareLots(Exhibit exhibit1, Exhibit exhibit2) {
 		String value1 = exhibit1.getLot().getName()==null?
 				"":exhibit1.getLot().getName();
@@ -168,7 +166,6 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	private int compareDepartments(Exhibit exhibit1, Exhibit exhibit2) {
 		
 		String value1 = exhibit1.getLot().getClass_().getDepartment().getName()==null?
@@ -190,7 +187,6 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	private int compareAnimals(Exhibit exhibit1, Exhibit exhibit2) {
 		String value1 = (exhibit1.getAnimal()==null || exhibit1.getAnimal().getId()==null)?
 				"":exhibit1.getAnimal().getId();
@@ -213,7 +209,6 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	protected int compareNumbers(Exhibit exhibit1, Exhibit exhibit2) {
 		 if( exhibit1.getNumber() < exhibit2.getNumber()){
 			 return -1;
@@ -234,7 +229,6 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	protected int compareExhibitors(Exhibit exhibit1, Exhibit exhibit2) {
 		String value1 = (exhibit1.getExhibitor()==null || exhibit1.getExhibitor().getName()==null)?
 				"":exhibit1.getExhibitor().getName();
@@ -255,7 +249,6 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	protected int compareDivisions(Exhibit exhibit1, Exhibit exhibit2) {
 		String value1 = exhibit1.getLot().getClass_().getDepartment().getDivision().getName()==null?
 				"":exhibit1.getLot().getClass_().getDepartment().getDivision().getName();
@@ -277,7 +270,6 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	protected int compareNames(Exhibit exhibit1, Exhibit exhibit2) {
 		String value1 = exhibit1.getName()==null?"":exhibit1.getName();
 		String value2 = exhibit2.getName()==null?"":exhibit2.getName();
@@ -297,7 +289,6 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	@SuppressWarnings("unchecked")
 	protected int compareComments(Exhibit exhibit1, Exhibit exhibit2) {
 		String comments1 = exhibit1.getComments()==null?"":exhibit1.getComments();
 		String comments2 = exhibit2.getComments()==null?"":exhibit2.getComments();

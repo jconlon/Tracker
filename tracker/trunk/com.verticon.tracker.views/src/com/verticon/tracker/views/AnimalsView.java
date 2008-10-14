@@ -31,7 +31,6 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.editor.presentation.AnimalSorter;
 import com.verticon.tracker.editor.util.TrackerView;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
@@ -257,12 +256,12 @@ public class AnimalsView extends TrackerView {
 		// BirthDate
 		viewerColumn = new TableViewerColumn(tableViewer, SWT.LEAD);
 		final TableColumn dDateColumn = viewerColumn.getColumn();
-		layout.addColumnData(new ColumnWeightData(2, 150, true));
+		layout.addColumnData(new ColumnWeightData(2, 120, true));
 		dDateColumn.setText(getString("_UI_BirthDateColumn_label"));
 		dDateColumn.setMoveable(true);
 		viewerColumn
 				.setLabelProvider(new GenericObservableMapCellLabelProvider(
-						maps, "{4}"));
+						maps, "{4,date,medium}"));
 
 		// Age
 		viewerColumn = new TableViewerColumn(tableViewer, SWT.LEAD);
@@ -277,7 +276,7 @@ public class AnimalsView extends TrackerView {
 		// LastEventDateTime
 		viewerColumn = new TableViewerColumn(tableViewer, SWT.LEAD);
 		final TableColumn lastEventDateTimeColumn = viewerColumn.getColumn();
-		layout.addColumnData(new ColumnWeightData(2, 150, true));
+		layout.addColumnData(new ColumnWeightData(2, 130, true));
 		lastEventDateTimeColumn.setText(getString("_UI_LastEventColumn_label"));
 		lastEventDateTimeColumn.setMoveable(true);
 		viewerColumn
