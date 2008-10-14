@@ -10,12 +10,16 @@
  ******************************************************************************/
 package com.verticon.tracker.editor.util;
 
+import org.eclipse.jface.viewers.CellLabelProvider;
+import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
+
+import at.bestsolution.dataforms.util.viewers.GenericObservableMapCellLabelProvider;
 
 public class TableColumnPatternFilter extends ViewerFilter {
 
@@ -27,19 +31,30 @@ public class TableColumnPatternFilter extends ViewerFilter {
 		if (patternString == null) {
 			return true;
 		}
-		
 		String text = null;
-		IBaseLabelProvider baseLabelProvider = ((TableViewer)viewer).getLabelProvider();
-		if (baseLabelProvider instanceof ITableLabelProvider) {
-			ITableLabelProvider tableLabelProvider = (ITableLabelProvider)baseLabelProvider;
-			text = tableLabelProvider.getColumnText(element, columnIndex);
-		} else if (baseLabelProvider instanceof ILabelProvider) {
-			ILabelProvider labelProvider = (ILabelProvider)baseLabelProvider;
-			text = labelProvider.getText(element);
-		} else {
-			text = element.toString();
+		// If the viewer has a
+		if (viewer instanceof ColumnViewer) {
+			CellLabelProvider cellLabelProvider = ((ColumnViewer) viewer)
+					.getLabelProvider(columnIndex);
+			if (cellLabelProvider instanceof GenericObservableMapCellLabelProvider) {
+				text = ((GenericObservableMapCellLabelProvider) cellLabelProvider)
+						.getText(element);
+			}
 		}
-		
+		if (text == null) {
+			IBaseLabelProvider baseLabelProvider = ((TableViewer) viewer)
+					.getLabelProvider();
+			if (baseLabelProvider instanceof ITableLabelProvider) {
+				ITableLabelProvider tableLabelProvider = (ITableLabelProvider) baseLabelProvider;
+				text = tableLabelProvider.getColumnText(element, columnIndex);
+			} else if (baseLabelProvider instanceof ILabelProvider) {
+				ILabelProvider labelProvider = (ILabelProvider) baseLabelProvider;
+				text = labelProvider.getText(element);
+			} else {
+				
+				text = element.toString();
+			}
+		}
 		if (text == null) return false;
 		
 		return text.startsWith(patternString);

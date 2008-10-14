@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ViewersObservables;
 import org.eclipse.jface.databinding.wizard.WizardPageSupport;
@@ -43,7 +42,6 @@ import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.presentation.SelectEventWizardPage;
-import com.verticon.tracker.editor.util.TrackerTableEditorUtils;
 
 /**
  * Wizard for adding an event.
@@ -227,104 +225,13 @@ public class AddEventWizard extends Wizard {
 				Composite tableComposite) {
 
 			final TableViewer v = new TableViewer(tableComposite);
-			TrackerTableEditorUtils.setUpAnimalsTableViewer(v);
-			ObservableListContentProvider cp = new ObservableListContentProvider();
+			ObservableListContentProvider cp = AnimalsView
+					.setUpAnimalsTableViewer(v,
+							new TrackerItemProviderAdapterFactory());
 			v.setContentProvider(cp);
-			v.setLabelProvider(new AdapterFactoryLabelProvider(
-					new TrackerItemProviderAdapterFactory()));
 			return v;
 
 		}
 	}
-
-	// static class SelectEventTypeWizardPage extends WizardPage {
-	// protected SelectEventTypeWizardPage() {
-	// super("Event", "Choose an Event Type", ImageDescriptor
-	// .createFromImage(new Image(Display.getDefault(), 16, 16)));
-	// }
-	//
-	// public void createControl(Composite parent) {
-	// DataBindingContext dbc = new DataBindingContext();
-	// WizardPageSupport.create(this, dbc);
-	// Composite composite = new Composite(parent, SWT.NONE);
-	//			
-	// //Set up label and text box showing selection from page one
-	// Label label = new Label(composite, SWT.NONE);
-	// label.setText("Add Event to Animal with ID:");
-	// Text text = new Text(composite, SWT.BORDER);
-	//			
-	// Premises premises = ((SampleWizard) getWizard()).getPremises();
-	//
-	// IObservableValue animalSelection = ((SampleWizard) getWizard())
-	// .getAnimalSelection();
-	//
-	// // Watch the animal selection from the first page
-	// // and show the TagID in the text box
-	// EditingDomain editingDomain = AdapterFactoryEditingDomain
-	// .getEditingDomainFor(premises);
-	//
-	// IObservableValue idOfAnimal = EMFEditObservables
-	// .observeDetailValue(Realm.getDefault(), editingDomain,
-	// animalSelection, TrackerPackage.Literals.ANIMAL__ID);
-	//
-	// dbc.bindValue(SWTObservables.observeText(text, SWT.Modify),
-	// idOfAnimal, null,
-	// null);
-	//
-	//
-	// //Set up a table to show a list of a possible Event types
-	// TableViewer tableViewer = createSingleColumnTableViewer(composite);
-	// GridData data = new GridData(GridData.FILL_BOTH);
-	// data.grabExcessHorizontalSpace = true;
-	// data.horizontalSpan = 2;
-	// data.heightHint = 300;
-	// data.widthHint = 300;
-	// tableViewer.getTable().setLayoutData(data);
-	//			
-	// // Create the input for the table
-	// IObservableList input = EMFObservables.observeList(premises,
-	// TrackerPackage.Literals.PREMISES__ANIMALS);
-	// // Set it on the viewer
-	// tableViewer.setInput(input);
-	// GridLayoutFactory.swtDefaults().numColumns(2).generateLayout(
-	// composite);
-	// setControl(composite);
-	// }
-	//		
-	// protected TableViewer createSingleColumnTableViewer(
-	// Composite tableComposite) {
-	//
-	// final TableViewer v = new TableViewer(tableComposite);
-	// // TrackerTableEditorUtils.setUpAnimalsTableViewer(v);
-	// // ObservableListContentProvider cp = new
-	// // ObservableListContentProvider();
-	// // v.setContentProvider(cp);
-	//
-	// v.setContentProvider(new IStructuredContentProvider() {
-	//
-	// public void inputChanged(Viewer v, Object oldInput,
-	// Object newInput) {
-	// }
-	//
-	// public void dispose() {
-	// }
-	//
-	// public Object[] getElements(Object input) {
-	// if (input instanceof Animal) {
-	// Animal animal = (Animal) input;
-	// Tag tag = animal.activeTag();
-	//
-	// }
-	// return new Object[0];
-	// }
-	//
-	// });
-	//
-	// v.setLabelProvider(new AdapterFactoryLabelProvider(
-	// new TrackerItemProviderAdapterFactory()));
-	// return v;
-	//
-	// }
-	// }
 
 }

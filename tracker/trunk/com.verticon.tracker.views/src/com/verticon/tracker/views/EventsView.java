@@ -3,20 +3,25 @@ package com.verticon.tracker.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.editor.presentation.EventHistoryContentProvider;
-import com.verticon.tracker.editor.util.TrackerTableEditorUtils;
+import com.verticon.tracker.editor.presentation.EventSorter;
 import com.verticon.tracker.editor.util.TrackerView;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
@@ -25,7 +30,7 @@ import com.verticon.tracker.fair.Person;
 public class EventsView extends TrackerView {
 
 	private static final String NAME_OF_ITEM_IN_MASTER = "Event";
-	private IObservableList input;
+
 
 	/**
 	 * Override point for subclasses to create the tableViewer columns.
@@ -38,13 +43,8 @@ public class EventsView extends TrackerView {
 	@Override
 	protected void setUpTable(AdapterFactory adapterFactory) {
 		TableViewer viewer = masterFilteredTable.getViewer();
-		TrackerTableEditorUtils.setUpEventsTableViewer(viewer);
+		setUpEventsTableViewer(viewer);
 		masterFilteredTable.setColumns(viewer.getTable().getColumns());
-
-		// // Set up databinding context here
-		// ObservableListContentProvider cp = new
-		// ObservableListContentProvider();
-		// viewer.setContentProvider(cp);
 
 		 viewer.setContentProvider(new EventHistoryContentProvider(
 				adapterFactory));
@@ -62,14 +62,6 @@ public class EventsView extends TrackerView {
 		Premises premises = getPremises(getEditingDomain());
 		TableViewer viewer = masterFilteredTable.getViewer();
 		viewer.setInput(premises);
-
-		// if (input != null) {
-		// input.dispose();
-		// }
-		// input = EMFObservables.observeList(premises,
-		// TrackerPackage.Literals.P);
-		//		
-		// viewer.setInput(input);
 	}
 
 	/**
@@ -174,4 +166,101 @@ public class EventsView extends TrackerView {
 		return null;
 	}
 
+	/**
+	 * Events Table
+	 */
+	static void setUpEventsTableViewer(final TableViewer eventsTableViewer) {
+
+		final Table table = eventsTableViewer.getTable();
+
+		TableLayout layout = new TableLayout();
+		table.setLayout(layout);
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		eventsTableViewer.setUseHashlookup(true);
+
+		// Date of Event
+		final TableColumn dateTimeColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 170, true));
+		dateTimeColumn.setText(getString("_UI_DateTimeColumn_label"));
+		dateTimeColumn.setMoveable(true);
+
+		// Event Type
+		final TableColumn eventNameColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 60, true));
+		eventNameColumn.setText(getString("_UI_EventNameColumn_label"));
+		eventNameColumn.setMoveable(true);
+
+		// Animal
+		final TableColumn animalIDColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(3, 230, true));
+		animalIDColumn.setText(getString("_UI_AnimalParentColumn_label"));
+		animalIDColumn.setMoveable(true);
+
+		// Tag ID Number
+		final TableColumn tagIDColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(2, 150, true));
+		tagIDColumn.setText(getString("_UI_TagColumn_label"));
+		tagIDColumn.setMoveable(true);
+
+		// Comments
+		final TableColumn eventCommentsColumn = new TableColumn(table, SWT.NONE);
+		layout.addColumnData(new ColumnWeightData(3, 180, true));
+		eventCommentsColumn.setText(getString("_UI_CommentsColumn_label"));
+		eventCommentsColumn.setMoveable(true);
+
+		Listener sortListener = new Listener() {
+
+			public void handleEvent(org.eclipse.swt.widgets.Event e) {
+				// determine new sort column and direction
+				TableColumn sortColumn = table.getSortColumn();
+				TableColumn currentColumn = (TableColumn) e.widget;
+				int dir = table.getSortDirection();
+				if (sortColumn == currentColumn) {
+					dir = dir == SWT.UP ? SWT.DOWN : SWT.UP;
+				} else {
+					table.setSortColumn(currentColumn);
+					dir = SWT.UP;
+				}
+
+				// sort the data based on column and direction
+
+				int sortIdentifier = 0;
+
+				if (currentColumn == animalIDColumn) {
+					sortIdentifier = EventSorter.ANIMAL_IDNUMBER;
+				}
+
+				if (currentColumn == tagIDColumn) {
+					sortIdentifier = EventSorter.TAG_IDNUMBER;
+				}
+
+				if (currentColumn == dateTimeColumn) {
+					sortIdentifier = EventSorter.DATETIME;
+				}
+
+				if (currentColumn == eventNameColumn) {
+					sortIdentifier = EventSorter.EVENT_TYPE;
+				}
+
+				if (currentColumn == eventCommentsColumn) {
+					sortIdentifier = EventSorter.EVENT_COMMENTS;
+				}
+
+				table.setSortDirection(dir);
+				eventsTableViewer
+						.setSorter(new EventSorter(sortIdentifier, dir));
+			}
+
+		};
+
+		animalIDColumn.addListener(SWT.Selection, sortListener);
+		tagIDColumn.addListener(SWT.Selection, sortListener);
+		dateTimeColumn.addListener(SWT.Selection, sortListener);
+		eventNameColumn.addListener(SWT.Selection, sortListener);
+		eventCommentsColumn.addListener(SWT.Selection, sortListener);
+		eventsTableViewer.setColumnProperties(new String[] { "a", "b", "c",
+				"d", "e" });
+
+	}
 }
