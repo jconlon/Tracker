@@ -57,6 +57,12 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 */
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
+	// /**
+	// * slf4j Logger
+	// */
+	// private final Logger logger =
+	// LoggerFactory.getLogger(PremisesImpl.class);
+
 	/**
 	 * Used for copying animalTemplates.
 	 */
@@ -366,26 +372,78 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * Hand implemented for speed (versus OCL??) because this method is used to generate 
-	 * all the events for the Premises.
-	 * Originally generated with the following OCL:
-	 * if (animals -> notEmpty()) and (animals.tags->notEmpty())
-	 * then  animals.tags.events
-	 * else Set{}
-	 * endif
+	 * <!-- begin-user-doc --> Hand implemented for speed (versus OCL??) because
+	 * this method is used to generate all the events for the Premises.
+	 * Originally generated with the following OCL: if (animals -> notEmpty())
+	 * and (animals.tags->notEmpty()) then animals.tags.events else Set{} endif
+	 * 
+	 * Tested with an implementation using the
+	 * ItemPropertyDescriptor.getReachableObjectsOfType getEventHistory2() but
+	 * this is much slower.
+	 * 
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public EList<Event> eventHistory() {
-		EventHistory eventHistory = (EventHistory) EventHistoryAdapterFactory.INSTANCE.adapt(
-				this, EventHistory.class);
-		if(eventHistory ==null){
+
+		// long startTime = System.nanoTime();
+		 EList<Event> results = getEventHistory();
+		// EList<Event> results = getEventHistory2();
+		// long endTime = System.nanoTime();
+		// logger.debug("event history fetched in {} nanoseconds", endTime
+		// - startTime);
+		return results;
+	}
+
+	/**
+	 * 
+	 * Use the original implementation
+	 * 
+	 * @return eventHistory
+	 * @throws IllegalStateException
+	 */
+	private EList<Event> getEventHistory() throws IllegalStateException {
+		
+		EventHistory eventHistory = (EventHistory) EventHistoryAdapterFactory.INSTANCE
+				.adapt(this, EventHistory.class);
+		if (eventHistory == null) {
 			throw new IllegalStateException("No eventHistory for premises");
 		}
 		return eventHistory.eventHistory();
-	
 	}
+
+	// private final EList<Event> eventHistory = new BasicEList<Event>();
+	//
+	// /**
+	// * Experiment with ItemPropertyDescriptor
+	// *
+	// * Alternatively try
+	// * ItemPropertyDescriptor.collectReachableObjectsOfType(visitedEvents,
+	// * eventHistory, this, TrackerPackage.Literals.EVENT);
+	// *
+	// * @return eventHistory
+	// */
+	// @SuppressWarnings("unused")
+	// private EList<Event> getEventHistory2() {
+	// Collection<EObject> retrievedEventHistory = ItemPropertyDescriptor
+	// .getReachableObjectsOfType(this, TrackerPackage.Literals.EVENT);
+	//		
+	// // Remove all events from resultEvent list that are not in the retrieved
+	// // list.
+	// eventHistory.retainAll(retrievedEventHistory);
+	//
+	// for (EObject object : retrievedEventHistory) {
+	// // Filter out the (Animal)event.getTag().eContainer()
+	// if (getUnAppliedTags().contains(object.eContainer())) {
+	// continue;
+	// } else if (!eventHistory.contains(object)) {
+	// eventHistory.add((Event) object);
+	// }
+	// }
+	//		
+	// return eventHistory;
+	// }
 	
 	/**
 	 * <!-- begin-user-doc -->

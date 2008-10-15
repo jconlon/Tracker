@@ -6,11 +6,15 @@
  */
 package com.verticon.tracker.tests;
 
+import java.util.Collection;
+
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +23,7 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
+import com.verticon.tracker.TrackerPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -154,6 +159,15 @@ public class PremisesTest extends TestCase {
 		getFixture().getAnimals().add(animal1);
 		assertEquals("EventHistory should have one event (animal1=tag1=1)", 1, getFixture().eventHistory().size());
 		assertTrue("EventHistory should contain event1", getFixture().eventHistory().contains(event1));
+		
+		// Experiment with ItemPropertyDescriptor
+		Collection<EObject> col = ItemPropertyDescriptor
+				.getReachableObjectsOfType(getFixture(),
+						TrackerPackage.Literals.EVENT);
+		assertEquals("Col should have one event (animal1=tag1=1)", 1, col
+				.size());
+		assertTrue("Col should contain event1", col.contains(event1));
+		
 		
 		logger.info("Adding a tag2 to animal1 with tag2 and event2");
 		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
