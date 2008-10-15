@@ -79,7 +79,6 @@ public class AnimalItemProvider
 			addSexPropertyDescriptor(object);
 			addSpeciesPropertyDescriptor(object);
 			addBreedPropertyDescriptor(object);
-			addAgePropertyDescriptor(object);
 			addSexCodePropertyDescriptor(object);
 			addSpeciesCodePropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
@@ -91,6 +90,7 @@ public class AnimalItemProvider
 			addWeightGainPerDayPropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
 			addVisualIDPropertyDescriptor(object);
+			addAgeInDaysPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -186,30 +186,6 @@ public class AnimalItemProvider
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 getString("_UI_CodesPropertyCategory"),
-				 new String[] {
-					"org.eclipse.ui.views.properties.expert"
-				 }));
-	}
-
-	/**
-	 * This adds a property descriptor for the Age feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAgePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Animal_age_feature"),
-				 getString("_UI_Animal_age_description"),
-				 TrackerPackage.Literals.ANIMAL__AGE,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 getString("_UI_AgePropertyCategory"),
 				 new String[] {
 					"org.eclipse.ui.views.properties.expert"
 				 }));
@@ -355,7 +331,8 @@ public class AnimalItemProvider
 					"org.eclipse.ui.views.properties.expert"
 				 })
 	       {
-	         public Collection<?> getChoiceOfValues(Object object)
+	         @Override
+			public Collection<?> getChoiceOfValues(Object object)
 	         {
 	        	 Animal animal = (Animal)object;
 	          
@@ -405,7 +382,8 @@ public class AnimalItemProvider
 					"org.eclipse.ui.views.properties.expert"
 				 })
 	       {
-	         public Collection<?> getChoiceOfValues(Object object)
+	         @Override
+			public Collection<?> getChoiceOfValues(Object object)
 	         {
 	        	 Animal animal = (Animal)object;
 	          
@@ -522,6 +500,30 @@ public class AnimalItemProvider
 	}
 
 /**
+	 * This adds a property descriptor for the Age In Days feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAgeInDaysPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Animal_ageInDays_feature"),
+				 getString("_UI_Animal_ageInDays_description"),
+				 TrackerPackage.Literals.ANIMAL__AGE_IN_DAYS,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 getString("_UI_AgePropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
+	}
+
+/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -616,7 +618,6 @@ public class AnimalItemProvider
 			case TrackerPackage.ANIMAL__SEX:
 			case TrackerPackage.ANIMAL__SPECIES:
 			case TrackerPackage.ANIMAL__BREED:
-			case TrackerPackage.ANIMAL__AGE:
 			case TrackerPackage.ANIMAL__SEX_CODE:
 			case TrackerPackage.ANIMAL__SPECIES_CODE:
 			case TrackerPackage.ANIMAL__ID:
@@ -626,6 +627,7 @@ public class AnimalItemProvider
 			case TrackerPackage.ANIMAL__WEIGHT_GAIN_PER_DAY:
 			case TrackerPackage.ANIMAL__TYPE:
 			case TrackerPackage.ANIMAL__VISUAL_ID:
+			case TrackerPackage.ANIMAL__AGE_IN_DAYS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TrackerPackage.ANIMAL__TAGS:
@@ -666,7 +668,10 @@ public class AnimalItemProvider
 	/**
 	 * Adds table support
 	 * 
+	 * @deprecated use the databinding framework in the tracker.views project
 	 */
+	@Deprecated
+	@Override
 	public String getColumnText(Object object, int columnIndex) // 14.2.2
 	  {
 	    Animal animal = (Animal)object;
@@ -684,24 +689,24 @@ public class AnimalItemProvider
 	    			return df.format(animal.getBirthDate());
 	    		}
 	    		return "";
+			// case 7:
+			// if(animal.getAge()!=null){
+			// return animal.getAge().toString();
+			// }
+			// return "";
 	    	case 7: 
-	    		if(animal.getAge()!=null){
-	    			return animal.getAge().toString();
-	    		}
-	    		return "";
-	    	case 8: 
 	    		if(animal.getLastEventDateTime()!=null){
 	    			return animal.getLastEventDateTime().toString();
 	    		}
 	    		return "";
 	    
-	    	case 9:
+	    	case 8:
 	    		return animal.getWeight()==null?"":animal.getWeight().toString();
 
-	    	case 10:
+	    	case 9:
 	    		return animal.getWeightGainPerDay()==null?"":animal.getWeightGainPerDay().toString();
 	    		
-	    	case 11:
+	    	case 10:
 	    		return animal.getComments();
 	    	default :
 	    		return "unknown " + columnIndex;
@@ -715,6 +720,7 @@ public class AnimalItemProvider
 	/**
 	 * Adds table support
 	 */
+	@Override
 	public Object getColumnImage(Object object, int columnIndex) // 14.2.2
 	  {
 		switch (columnIndex){

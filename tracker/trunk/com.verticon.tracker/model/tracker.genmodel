@@ -381,10 +381,6 @@
           propertyDescription="Code assigned to the breed of the animal" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/breed">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
-      <genFeatures property="Readonly" createChild="false" propertyCategory="Age"
-          propertyDescription="Age in days" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/age">
-        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
-      </genFeatures>
       <genFeatures property="Readonly" createChild="false" propertyCategory="Codes"
           propertyDescription="Code assigned to the sex of the animal" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/sexCode">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
@@ -414,6 +410,10 @@
           propertyDescription="Weight gain per day in pounds" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/weightGainPerDay"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/type"/>
       <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/visualID">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Age"
+          propertyDescription="Age of animal in days since birth" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/ageInDays">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
       <genOperations ecoreOperation="tracker.ecore#//Animal/allEvents"/>

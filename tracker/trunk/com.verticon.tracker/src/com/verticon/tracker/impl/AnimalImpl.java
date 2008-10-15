@@ -7,6 +7,7 @@
 package com.verticon.tracker.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -31,7 +32,6 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.Tag;
-import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
@@ -52,7 +52,6 @@ import com.verticon.tracker.util.TrackerUtils;
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSpecies <em>Species</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getBreed <em>Breed</em>}</li>
- *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getAge <em>Age</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSexCode <em>Sex Code</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getSpeciesCode <em>Species Code</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getId <em>Id</em>}</li>
@@ -64,6 +63,7 @@ import com.verticon.tracker.util.TrackerUtils;
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getWeightGainPerDay <em>Weight Gain Per Day</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getType <em>Type</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getVisualID <em>Visual ID</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getAgeInDays <em>Age In Days</em>}</li>
  * </ul>
  * </p>
  *
@@ -157,16 +157,6 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @ordered
 	 */
 	protected static final String BREED_EDEFAULT = "";
-
-	/**
-	 * The default value of the '{@link #getAge() <em>Age</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAge()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Age AGE_EDEFAULT = (Age)TrackerFactory.eINSTANCE.createFromString(TrackerPackage.eINSTANCE.getAge(), "");
 
 	/**
 	 * The default value of the '{@link #getSexCode() <em>Sex Code</em>}' attribute.
@@ -303,6 +293,17 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 
 	/**
+	 * The default value of the '{@link #getAgeInDays() <em>Age In Days</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAgeInDays()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int AGE_IN_DAYS_EDEFAULT = 0;
+
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -402,16 +403,15 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 */
 	public abstract String getBreed();
 
-
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Age getAge() {
-		return birthDate==null?null:new Age(birthDate);
-	}
+	//
+	// /**
+	// * <!-- begin-user-doc -->
+	// * <!-- end-user-doc -->
+	// * @generated NOT
+	// */
+	// public Age getAge() {
+	// return birthDate==null?null:new Age(birthDate);
+	// }
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -646,6 +646,37 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__VISUAL_ID, oldVisualID, visualID));
 	}
 
+	int ageInDays = 0;
+	long millisToReCalculateAge = 0;
+
+	private void calculateAge() {
+		if (birthDate == null) {
+			millisToReCalculateAge = 0;
+			ageInDays = 0;
+		} else {
+			// Get a calendar and set it to Midnight
+			Calendar c = Calendar.getInstance();
+			c.set(Calendar.HOUR_OF_DAY, 24);
+			c.set(Calendar.MINUTE, 0);
+			c.set(Calendar.MILLISECOND, 0);
+			millisToReCalculateAge = c.getTimeInMillis();
+			Age age = new Age(birthDate);
+			ageInDays = age.getTotalDays();
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public int getAgeInDays() {
+		if (System.currentTimeMillis() > millisToReCalculateAge) {
+			calculateAge();
+		}
+		return ageInDays;
+	}
+
 	//	private WeighIn getLastWeighIn(){
 //		WeighIn lastWeighIn = null;
 //		if(!eventHistory().isEmpty()){
@@ -757,6 +788,17 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Age getAge() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -784,8 +826,6 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return getSpecies();
 			case TrackerPackage.ANIMAL__BREED:
 				return getBreed();
-			case TrackerPackage.ANIMAL__AGE:
-				return getAge();
 			case TrackerPackage.ANIMAL__SEX_CODE:
 				return getSexCode();
 			case TrackerPackage.ANIMAL__SPECIES_CODE:
@@ -810,6 +850,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return getType();
 			case TrackerPackage.ANIMAL__VISUAL_ID:
 				return getVisualID();
+			case TrackerPackage.ANIMAL__AGE_IN_DAYS:
+				return new Integer(getAgeInDays());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -906,8 +948,6 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return SPECIES_EDEFAULT == null ? getSpecies() != null : !SPECIES_EDEFAULT.equals(getSpecies());
 			case TrackerPackage.ANIMAL__BREED:
 				return BREED_EDEFAULT == null ? getBreed() != null : !BREED_EDEFAULT.equals(getBreed());
-			case TrackerPackage.ANIMAL__AGE:
-				return AGE_EDEFAULT == null ? getAge() != null : !AGE_EDEFAULT.equals(getAge());
 			case TrackerPackage.ANIMAL__SEX_CODE:
 				return SEX_CODE_EDEFAULT == null ? getSexCode() != null : !SEX_CODE_EDEFAULT.equals(getSexCode());
 			case TrackerPackage.ANIMAL__SPECIES_CODE:
@@ -930,6 +970,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return getType() != TYPE_EDEFAULT;
 			case TrackerPackage.ANIMAL__VISUAL_ID:
 				return VISUAL_ID_EDEFAULT == null ? visualID != null : !VISUAL_ID_EDEFAULT.equals(visualID);
+			case TrackerPackage.ANIMAL__AGE_IN_DAYS:
+				return getAgeInDays() != AGE_IN_DAYS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

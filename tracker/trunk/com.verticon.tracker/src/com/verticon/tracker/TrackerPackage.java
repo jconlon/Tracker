@@ -124,22 +124,13 @@ public interface TrackerPackage extends EPackage {
 	int ANIMAL__BREED = 4;
 
 	/**
-	 * The feature id for the '<em><b>Age</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANIMAL__AGE = 5;
-
-	/**
 	 * The feature id for the '<em><b>Sex Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL__SEX_CODE = 6;
+	int ANIMAL__SEX_CODE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Species Code</b></em>' attribute.
@@ -148,7 +139,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL__SPECIES_CODE = 7;
+	int ANIMAL__SPECIES_CODE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -157,7 +148,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL__ID = 8;
+	int ANIMAL__ID = 7;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute.
@@ -166,7 +157,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL__COMMENTS = 9;
+	int ANIMAL__COMMENTS = 8;
 
 	/**
 	 * The feature id for the '<em><b>Last Event Date Time</b></em>' attribute.
@@ -175,7 +166,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL__LAST_EVENT_DATE_TIME = 10;
+	int ANIMAL__LAST_EVENT_DATE_TIME = 9;
 
 	/**
 	 * The feature id for the '<em><b>Dam</b></em>' reference.
@@ -184,7 +175,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL__DAM = 11;
+	int ANIMAL__DAM = 10;
 
 	/**
 	 * The feature id for the '<em><b>Sire</b></em>' reference.
@@ -193,7 +184,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL__SIRE = 12;
+	int ANIMAL__SIRE = 11;
 
 	/**
 	 * The feature id for the '<em><b>Weight</b></em>' attribute.
@@ -202,7 +193,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL__WEIGHT = 13;
+	int ANIMAL__WEIGHT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Weight Gain Per Day</b></em>' attribute.
@@ -211,7 +202,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL__WEIGHT_GAIN_PER_DAY = 14;
+	int ANIMAL__WEIGHT_GAIN_PER_DAY = 13;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -220,7 +211,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL__TYPE = 15;
+	int ANIMAL__TYPE = 14;
 
 	/**
 	 * The feature id for the '<em><b>Visual ID</b></em>' attribute.
@@ -229,7 +220,16 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL__VISUAL_ID = 16;
+	int ANIMAL__VISUAL_ID = 15;
+
+	/**
+	 * The feature id for the '<em><b>Age In Days</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANIMAL__AGE_IN_DAYS = 16;
 
 	/**
 	 * The number of structural features of the '<em>Animal</em>' class.
@@ -342,15 +342,6 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE__BREED = ANIMAL__BREED;
 
 	/**
-	 * The feature id for the '<em><b>Age</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOVINE__AGE = ANIMAL__AGE;
-
-	/**
 	 * The feature id for the '<em><b>Sex Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -448,6 +439,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOVINE__VISUAL_ID = ANIMAL__VISUAL_ID;
+
+	/**
+	 * The feature id for the '<em><b>Age In Days</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE__AGE_IN_DAYS = ANIMAL__AGE_IN_DAYS;
 
 	/**
 	 * The number of structural features of the '<em>Bovine</em>' class.
@@ -809,15 +809,6 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE_BEEF__BREED = BOVINE__BREED;
 
 	/**
-	 * The feature id for the '<em><b>Age</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOVINE_BEEF__AGE = BOVINE__AGE;
-
-	/**
 	 * The feature id for the '<em><b>Sex Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -917,6 +908,15 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE_BEEF__VISUAL_ID = BOVINE__VISUAL_ID;
 
 	/**
+	 * The feature id for the '<em><b>Age In Days</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_BEEF__AGE_IN_DAYS = BOVINE__AGE_IN_DAYS;
+
+	/**
 	 * The feature id for the '<em><b>Beef Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -988,15 +988,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int OVINE__BREED = ANIMAL__BREED;
-
-	/**
-	 * The feature id for the '<em><b>Age</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OVINE__AGE = ANIMAL__AGE;
 
 	/**
 	 * The feature id for the '<em><b>Sex Code</b></em>' attribute.
@@ -1098,6 +1089,15 @@ public interface TrackerPackage extends EPackage {
 	int OVINE__VISUAL_ID = ANIMAL__VISUAL_ID;
 
 	/**
+	 * The feature id for the '<em><b>Age In Days</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OVINE__AGE_IN_DAYS = ANIMAL__AGE_IN_DAYS;
+
+	/**
 	 * The feature id for the '<em><b>Sheep Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1178,15 +1178,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOVINE_BISON__BREED = BOVINE__BREED;
-
-	/**
-	 * The feature id for the '<em><b>Age</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOVINE_BISON__AGE = BOVINE__AGE;
 
 	/**
 	 * The feature id for the '<em><b>Sex Code</b></em>' attribute.
@@ -1288,6 +1279,15 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE_BISON__VISUAL_ID = BOVINE__VISUAL_ID;
 
 	/**
+	 * The feature id for the '<em><b>Age In Days</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_BISON__AGE_IN_DAYS = BOVINE__AGE_IN_DAYS;
+
+	/**
 	 * The feature id for the '<em><b>Buffalo Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1359,15 +1359,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOVINE_DAIRY__BREED = BOVINE__BREED;
-
-	/**
-	 * The feature id for the '<em><b>Age</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOVINE_DAIRY__AGE = BOVINE__AGE;
 
 	/**
 	 * The feature id for the '<em><b>Sex Code</b></em>' attribute.
@@ -1467,6 +1458,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOVINE_DAIRY__VISUAL_ID = BOVINE__VISUAL_ID;
+
+	/**
+	 * The feature id for the '<em><b>Age In Days</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_DAIRY__AGE_IN_DAYS = BOVINE__AGE_IN_DAYS;
 
 	/**
 	 * The feature id for the '<em><b>Dairy Breed</b></em>' attribute.
@@ -2722,15 +2722,6 @@ public interface TrackerPackage extends EPackage {
 	int SWINE__BREED = ANIMAL__BREED;
 
 	/**
-	 * The feature id for the '<em><b>Age</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SWINE__AGE = ANIMAL__AGE;
-
-	/**
 	 * The feature id for the '<em><b>Sex Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2830,6 +2821,15 @@ public interface TrackerPackage extends EPackage {
 	int SWINE__VISUAL_ID = ANIMAL__VISUAL_ID;
 
 	/**
+	 * The feature id for the '<em><b>Age In Days</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWINE__AGE_IN_DAYS = ANIMAL__AGE_IN_DAYS;
+
+	/**
 	 * The feature id for the '<em><b>Swine Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2919,15 +2919,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int EQUINE__BREED = ANIMAL__BREED;
-
-	/**
-	 * The feature id for the '<em><b>Age</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EQUINE__AGE = ANIMAL__AGE;
 
 	/**
 	 * The feature id for the '<em><b>Sex Code</b></em>' attribute.
@@ -3029,6 +3020,15 @@ public interface TrackerPackage extends EPackage {
 	int EQUINE__VISUAL_ID = ANIMAL__VISUAL_ID;
 
 	/**
+	 * The feature id for the '<em><b>Age In Days</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__AGE_IN_DAYS = ANIMAL__AGE_IN_DAYS;
+
+	/**
 	 * The feature id for the '<em><b>Horse Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3100,15 +3100,6 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int CAPRINE__BREED = ANIMAL__BREED;
-
-	/**
-	 * The feature id for the '<em><b>Age</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CAPRINE__AGE = ANIMAL__AGE;
 
 	/**
 	 * The feature id for the '<em><b>Sex Code</b></em>' attribute.
@@ -3208,6 +3199,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int CAPRINE__VISUAL_ID = ANIMAL__VISUAL_ID;
+
+	/**
+	 * The feature id for the '<em><b>Age In Days</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__AGE_IN_DAYS = ANIMAL__AGE_IN_DAYS;
 
 	/**
 	 * The feature id for the '<em><b>Goat Breed</b></em>' attribute.
@@ -4643,17 +4643,6 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getAnimal_Breed();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Animal#getAge <em>Age</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Age</em>'.
-	 * @see com.verticon.tracker.Animal#getAge()
-	 * @see #getAnimal()
-	 * @generated
-	 */
-	EAttribute getAnimal_Age();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Animal#getSexCode <em>Sex Code</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4773,6 +4762,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAnimal_VisualID();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Animal#getAgeInDays <em>Age In Days</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Age In Days</em>'.
+	 * @see com.verticon.tracker.Animal#getAgeInDays()
+	 * @see #getAnimal()
+	 * @generated
+	 */
+	EAttribute getAnimal_AgeInDays();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Tag <em>Tag</em>}'.
@@ -6205,14 +6205,6 @@ public interface TrackerPackage extends EPackage {
 		EAttribute ANIMAL__BREED = eINSTANCE.getAnimal_Breed();
 
 		/**
-		 * The meta object literal for the '<em><b>Age</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ANIMAL__AGE = eINSTANCE.getAnimal_Age();
-
-		/**
 		 * The meta object literal for the '<em><b>Sex Code</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6299,6 +6291,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ANIMAL__VISUAL_ID = eINSTANCE.getAnimal_VisualID();
+
+		/**
+		 * The meta object literal for the '<em><b>Age In Days</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ANIMAL__AGE_IN_DAYS = eINSTANCE.getAnimal_AgeInDays();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.TagImpl <em>Tag</em>}' class.

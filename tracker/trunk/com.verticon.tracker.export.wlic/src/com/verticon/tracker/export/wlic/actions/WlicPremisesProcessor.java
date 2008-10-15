@@ -188,7 +188,6 @@ public class WlicPremisesProcessor implements PremisesProcessor {
 	}
 	
 	
-	@SuppressWarnings("unchecked")
 	private String getHeaderField(int key, Premises premises){
 		String out = null;
 		switch (key) {

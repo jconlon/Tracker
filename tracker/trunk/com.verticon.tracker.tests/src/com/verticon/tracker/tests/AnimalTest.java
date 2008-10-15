@@ -32,7 +32,6 @@ import com.verticon.tracker.util.Age;
  * <ul>
  *   <li>{@link com.verticon.tracker.Animal#getSpecies() <em>Species</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getBreed() <em>Breed</em>}</li>
- *   <li>{@link com.verticon.tracker.Animal#getAge() <em>Age</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getSexCode() <em>Sex Code</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getSpeciesCode() <em>Species Code</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getId() <em>Id</em>}</li>
@@ -40,6 +39,7 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getWeight() <em>Weight</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getWeightGainPerDay() <em>Weight Gain Per Day</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getType() <em>Type</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getAgeInDays() <em>Age In Days</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -50,6 +50,7 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#activeTag() <em>Active Tag</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#eventHistory() <em>Event History</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#lastWeighIn() <em>Last Weigh In</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getAge() <em>Get Age</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -146,10 +147,10 @@ public abstract class AnimalTest extends TestCase {
 		fail();
 	}
 
-	/**
-	 * Tests the '{@link com.verticon.tracker.Animal#getAge() <em>Age</em>}' feature getter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 /**
+	 * Tests the '{@link com.verticon.tracker.Animal#getAge() <em>Age</em>}'
+	 * feature getter. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see com.verticon.tracker.Animal#getAge()
 	 * @generated NOT
 	 */
@@ -157,21 +158,21 @@ public abstract class AnimalTest extends TestCase {
 		assertNotNull(getFixture());
 		assertNotNull(getFixture().getAge());
 		assertEquals(new Age(ANIMAL_BIRTHDAY), getFixture().getAge());
-		
+
 		Calendar someBirthday = Calendar.getInstance();
-		//FIXME Fix this test
-//		someBirthday.add(Calendar.DAY_OF_MONTH, -5);
-//		getFixture().setBirthDate(someBirthday.getTime());
-//		assertEquals("D05", getFixture().getAge().toRoundedString());
-//		assertEquals("5 days old", getFixture().getAge().toString());
-		
+		// FIXME Fix this test
+		// someBirthday.add(Calendar.DAY_OF_MONTH, -5);
+		// getFixture().setBirthDate(someBirthday.getTime());
+		// assertEquals("D05", getFixture().getAge().toRoundedString());
+		// assertEquals("5 days old", getFixture().getAge().toString());
+
 		someBirthday.add(Calendar.MONTH, -7);
 		getFixture().setBirthDate(someBirthday.getTime());
-		assertEquals("M07", getFixture().getAge().toRoundedString() );
+		assertEquals("M07", getFixture().getAge().toRoundedString());
 
 		someBirthday.add(Calendar.YEAR, -3);
 		getFixture().setBirthDate(someBirthday.getTime());
-		assertEquals("Y03",getFixture().getAge().toRoundedString());
+		assertEquals("Y03", getFixture().getAge().toRoundedString());
 	}
 	
 
@@ -404,6 +405,19 @@ public abstract class AnimalTest extends TestCase {
 		Animal animal = getFixture();
 		assertNotNull(animal.getType());
 		assertTrue(animal.getClass().getSimpleName()+" "+animal.getType().getLiteral(), animal.getClass().getSimpleName().startsWith(animal.getType().getLiteral()));
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Animal#getAgeInDays() <em>Age In Days</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#getAgeInDays()
+	 * @generated
+	 */
+	public void testGetAgeInDays() {
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
 	}
 
 	public void testGetWeightGainPerDayWithNulls() {
@@ -657,5 +671,6 @@ public abstract class AnimalTest extends TestCase {
 		
 		assertEquals(we, animal.lastWeighIn());
 	}
+
 
 } //AnimalTest
