@@ -189,7 +189,7 @@ public class AnimalsView extends TrackerView {
 					TrackerPackage.Literals.ANIMAL__SEX,
 					TrackerPackage.Literals.ANIMAL__BREED,
 					TrackerPackage.Literals.ANIMAL__BIRTH_DATE,
-					TrackerPackage.Literals.ANIMAL__AGE,
+				// TrackerPackage.Literals.ANIMAL__AGE,
 					TrackerPackage.Literals.ANIMAL__LAST_EVENT_DATE_TIME,
 					TrackerPackage.Literals.ANIMAL__WEIGHT,
 					TrackerPackage.Literals.ANIMAL__WEIGHT_GAIN_PER_DAY,
@@ -263,15 +263,15 @@ public class AnimalsView extends TrackerView {
 				.setLabelProvider(new GenericObservableMapCellLabelProvider(
 						maps, "{4,date,medium}"));
 
-		// Age
-		viewerColumn = new TableViewerColumn(tableViewer, SWT.LEAD);
-		final TableColumn ageColumn = viewerColumn.getColumn();
-		layout.addColumnData(new ColumnWeightData(2, 80, true));
-		ageColumn.setText(getString("_UI_AgeColumn_label"));
-		ageColumn.setMoveable(true);
-		viewerColumn
-				.setLabelProvider(new GenericObservableMapCellLabelProvider(
-						maps, "{5}"));
+		// // Age
+		// viewerColumn = new TableViewerColumn(tableViewer, SWT.LEAD);
+		// final TableColumn ageColumn = viewerColumn.getColumn();
+		// layout.addColumnData(new ColumnWeightData(2, 80, true));
+		// ageColumn.setText(getString("_UI_AgeColumn_label"));
+		// ageColumn.setMoveable(true);
+		// viewerColumn
+		// .setLabelProvider(new GenericObservableMapCellLabelProvider(
+		// maps, "{5}"));
 
 		// LastEventDateTime
 		viewerColumn = new TableViewerColumn(tableViewer, SWT.LEAD);
@@ -281,7 +281,7 @@ public class AnimalsView extends TrackerView {
 		lastEventDateTimeColumn.setMoveable(true);
 		viewerColumn
 				.setLabelProvider(new GenericObservableMapCellLabelProvider(
-						maps, "{6}"));
+						maps, "{5}"));
 
 		// Weight
 		viewerColumn = new TableViewerColumn(tableViewer, SWT.LEAD);
@@ -291,7 +291,7 @@ public class AnimalsView extends TrackerView {
 		weightColumn.setMoveable(true);
 		viewerColumn
 				.setLabelProvider(new GenericObservableMapCellLabelProvider(
-						maps, "{7}"));
+						maps, "{6}"));
 
 		// WeightGainPerDay
 		viewerColumn = new TableViewerColumn(tableViewer, SWT.LEAD);
@@ -301,7 +301,7 @@ public class AnimalsView extends TrackerView {
 		weightGainColumn.setMoveable(true);
 		viewerColumn
 				.setLabelProvider(new GenericObservableMapCellLabelProvider(
-						maps, "{8}"));
+						maps, "{7}"));
 
 		// Comments
 		viewerColumn = new TableViewerColumn(tableViewer, SWT.LEAD);
@@ -311,7 +311,7 @@ public class AnimalsView extends TrackerView {
 		commentsColumn.setMoveable(true);
 		viewerColumn
 				.setLabelProvider(new GenericObservableMapCellLabelProvider(
-						maps, "{9}"));
+						maps, "{8}"));
 
 		Listener sortListener = new Listener() {
 
@@ -341,8 +341,8 @@ public class AnimalsView extends TrackerView {
 					sortIdentifier = AnimalSorter.SEX;
 				} else if (currentColumn == breedColumn) {
 					sortIdentifier = AnimalSorter.BREED;
-				} else if (currentColumn == ageColumn) {
-					sortIdentifier = AnimalSorter.AGE;
+					// } else if (currentColumn == ageColumn) {
+					// sortIdentifier = AnimalSorter.AGE;
 				} else if (currentColumn == weightColumn) {
 					sortIdentifier = AnimalSorter.WEIGHT;
 				} else if (currentColumn == weightGainColumn) {
@@ -366,13 +366,13 @@ public class AnimalsView extends TrackerView {
 		animalTypeColumn.addListener(SWT.Selection, sortListener);
 		sexColumn.addListener(SWT.Selection, sortListener);
 		dDateColumn.addListener(SWT.Selection, sortListener);
-		ageColumn.addListener(SWT.Selection, sortListener);
+		// ageColumn.addListener(SWT.Selection, sortListener);
 		weightColumn.addListener(SWT.Selection, sortListener);
 		weightGainColumn.addListener(SWT.Selection, sortListener);
 		commentsColumn.addListener(SWT.Selection, sortListener);
 
 		tableViewer.setColumnProperties(new String[] { "a", "b", "c", "d", "e",
-				"f", "g", "h", "i", "j" });
+				"f", "g", "h", "i" });
 
 		return cp;
 	}

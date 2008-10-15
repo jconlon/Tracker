@@ -19,10 +19,6 @@
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Animal/breed"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PBsQEVmCEd2tRZ2K3aMUww"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_PBs3IFmCEd2tRZ2K3aMUww" type="2001">
-        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Animal/age"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_PBs3IVmCEd2tRZ2K3aMUww"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_PBs3IlmCEd2tRZ2K3aMUww" type="2001">
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Animal/sexCode"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PBs3I1mCEd2tRZ2K3aMUww"/>
@@ -59,6 +55,10 @@
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Animal/visualID"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_L3wRwZlLEd2pG_n2YQiBig"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_Gs3sIJpaEd2AlIpLuy7nyg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Animal/ageInDays"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Gs3sIZpaEd2AlIpLuy7nyg"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PBHBQVmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PBHBQlmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_PBHoUFmCEd2tRZ2K3aMUww"/>
@@ -83,6 +83,10 @@
       <children xmi:type="notation:Node" xmi:id="_PB5rcFmCEd2tRZ2K3aMUww" type="2002">
         <element xmi:type="ecore:EOperation" href="tracker.ecore#//Animal/lastWeighIn"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PB5rcVmCEd2tRZ2K3aMUww"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_KBfUkZrIEd2YGsjuwiafLw" type="2002">
+        <element xmi:type="ecore:EOperation" href="tracker.ecore#//Animal/getAge"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_KBfUkprIEd2YGsjuwiafLw"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PBIPYVmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PBIPYlmCEd2tRZ2K3aMUww"/>

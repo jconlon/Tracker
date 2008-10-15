@@ -57,6 +57,8 @@ public interface AnimalValidator {
 
 	boolean validateVisualID(String value);
 
+	boolean validateAgeInDays(int value);
+
 	boolean validateWeightGainPerDay(Integer value);
 
 	boolean validateWeight(int value);
