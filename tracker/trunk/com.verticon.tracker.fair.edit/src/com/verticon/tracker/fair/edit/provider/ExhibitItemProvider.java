@@ -346,12 +346,13 @@ public class ExhibitItemProvider
 	 * to be done one level up to see the TrackerItemProviderAdapterFactory.  
 	 * @generated NOT
 	 */
+	@Override
 	public Object getColumnImage(Object object, int columnIndex) {
 		Exhibit exhibit= (Exhibit)object;
 		IItemLabelProvider itemLabelProvider;
 	    switch (columnIndex){
 	        case 0: return getImage(object); 
-	    	case 1: return getImage(object); 
+	    	case 1: return null; 
 	    	
 	    	case 2: 
 	    		if(exhibit.getExhibitor()==null){
@@ -374,49 +375,49 @@ public class ExhibitItemProvider
 	    		return itemLabelProvider.getImage(animal);
 	    	
 	    	
-	    	case 4: 
-	    		if(exhibit.getLot()==null){
-	    			return null;
-	    		}
-	    		Lot lot = exhibit.getLot();
-	    	    itemLabelProvider =
-	    			(IItemLabelProvider)adapterFactory.adapt(lot, IItemLabelProvider.class);
-	    		return itemLabelProvider.getImage(lot);
-	    		
-	    	case 5: 
-	    		if (exhibit.getLot()==null || 
-	    				exhibit.getLot().getClass_()==null){
-	    			return null;
-	    		}
-	    		com.verticon.tracker.fair.Class clazz =	exhibit.getLot().getClass_();
-	    		itemLabelProvider =
-	    			(IItemLabelProvider)adapterFactory.adapt(clazz, IItemLabelProvider.class);
-	    		return itemLabelProvider.getImage(clazz);
-	    
-	    	case 6: 
-	    		if (exhibit.getLot()==null || 
-	    				exhibit.getLot().getClass_()==null || 
-	    				exhibit.getLot().getClass_().getDepartment()==null){
-	    				return null;
-	    		}
-	    		
-	    		Department department = exhibit.getLot().getClass_().getDepartment();
-	    		itemLabelProvider =
-	    			(IItemLabelProvider)adapterFactory.adapt(department, IItemLabelProvider.class);
-	    		return itemLabelProvider.getImage(department);
-	    	case 7: 
-	    		if (exhibit.getLot()==null || 
-	    				exhibit.getLot().getClass_()==null || 
-	    				exhibit.getLot().getClass_().getDepartment()==null ||
-	    				exhibit.getLot().getClass_().getDepartment().getDivision()==null){
-	    				return null;
-	    		}
-	    		Division division = exhibit.getLot().getClass_().getDepartment().getDivision();
-	    		itemLabelProvider =
-	    			(IItemLabelProvider)adapterFactory.adapt(division, IItemLabelProvider.class);
-	    		return itemLabelProvider.getImage(division);
-	    	case 8: 
-	    		return getImage(object);
+//	    	case 4: 
+//	    		if(exhibit.getLot()==null){
+//	    			return null;
+//	    		}
+//	    		Lot lot = exhibit.getLot();
+//	    	    itemLabelProvider =
+//	    			(IItemLabelProvider)adapterFactory.adapt(lot, IItemLabelProvider.class);
+//	    		return itemLabelProvider.getImage(lot);
+//	    		
+//	    	case 5: 
+//	    		if (exhibit.getLot()==null || 
+//	    				exhibit.getLot().getClass_()==null){
+//	    			return null;
+//	    		}
+//	    		com.verticon.tracker.fair.Class clazz =	exhibit.getLot().getClass_();
+//	    		itemLabelProvider =
+//	    			(IItemLabelProvider)adapterFactory.adapt(clazz, IItemLabelProvider.class);
+//	    		return itemLabelProvider.getImage(clazz);
+//	    
+//	    	case 6: 
+//	    		if (exhibit.getLot()==null || 
+//	    				exhibit.getLot().getClass_()==null || 
+//	    				exhibit.getLot().getClass_().getDepartment()==null){
+//	    				return null;
+//	    		}
+//	    		
+//	    		Department department = exhibit.getLot().getClass_().getDepartment();
+//	    		itemLabelProvider =
+//	    			(IItemLabelProvider)adapterFactory.adapt(department, IItemLabelProvider.class);
+//	    		return itemLabelProvider.getImage(department);
+//	    	case 7: 
+//	    		if (exhibit.getLot()==null || 
+//	    				exhibit.getLot().getClass_()==null || 
+//	    				exhibit.getLot().getClass_().getDepartment()==null ||
+//	    				exhibit.getLot().getClass_().getDepartment().getDivision()==null){
+//	    				return null;
+//	    		}
+//	    		Division division = exhibit.getLot().getClass_().getDepartment().getDivision();
+//	    		itemLabelProvider =
+//	    			(IItemLabelProvider)adapterFactory.adapt(division, IItemLabelProvider.class);
+//	    		return itemLabelProvider.getImage(division);
+//	    	case 8: 
+//	    		return getImage(object);
 	    	default :
 	    		return null;
 	    }
@@ -425,22 +426,21 @@ public class ExhibitItemProvider
 	/**
 	 * Name, Number, Exhibitor, Animal, Lot, Class, Department, Division, Comments
 	 */
+	@Override
 	public String getColumnText(Object object, int columnIndex) {
 		Exhibit exhibit= (Exhibit)object;
 		IItemLabelProvider itemLabelProvider;
 	    switch (columnIndex){
 	        case 0: return getText(object); 
-	    	case 1: return Integer.toString(exhibit.getNumber()); 
+	    	case 1: 
+	    		return Integer.toString(exhibit.getNumber()); 
 	    	
 	    	case 2: 
 	    		if(exhibit.getExhibitor()==null){
 	    			return "";
 	    		}
-	    		Person person = exhibit.getExhibitor();
-	    		
-	    	    itemLabelProvider =
-	    			(IItemLabelProvider)adapterFactory.adapt(person, IItemLabelProvider.class);
-	    		return itemLabelProvider.getText(person);
+	    		Person person2 = exhibit.getExhibitor();
+	    		return person2.getName();
 	    		
 	    		
 	    	case 3: 
@@ -452,17 +452,13 @@ public class ExhibitItemProvider
 	    		FairItemProviderAdapterFactory faf = (FairItemProviderAdapterFactory)adapterFactory;
 	    	    itemLabelProvider = (IItemLabelProvider)faf.getRootAdapterFactory().adapt(animal, IItemLabelProvider.class);
 	    	    
-	    		return itemLabelProvider.getText(animal);
-//	    		return animal==null?"":exhibit.getAnimal().getId();
-	    	
+	    		return itemLabelProvider.getText(animal);	    	
 	    	case 4: 
 	    		if(exhibit.getLot()==null){
 	    			return "";
 	    		}
 	    		Lot lot = exhibit.getLot();
-	    	    itemLabelProvider =
-	    			(IItemLabelProvider)adapterFactory.adapt(lot, IItemLabelProvider.class);
-	    		return itemLabelProvider.getText(lot);
+	    		return lot.getName();
 	    		
 	    	case 5: 
 	    		if (exhibit.getLot()==null || 
@@ -470,9 +466,7 @@ public class ExhibitItemProvider
 	    			return "";
 	    		}
 	    		com.verticon.tracker.fair.Class clazz =	exhibit.getLot().getClass_();
-	    		itemLabelProvider =
-	    			(IItemLabelProvider)adapterFactory.adapt(clazz, IItemLabelProvider.class);
-	    		return itemLabelProvider.getText(clazz);
+	    		return clazz.getName();
 	    
 	    	case 6: 
 	    		if (exhibit.getLot()==null || 
@@ -482,9 +476,7 @@ public class ExhibitItemProvider
 	    		}
 	    		
 	    		Department department = exhibit.getLot().getClass_().getDepartment();
-	    		itemLabelProvider =
-	    			(IItemLabelProvider)adapterFactory.adapt(department, IItemLabelProvider.class);
-	    		return itemLabelProvider.getText(department);
+	    		return department.getName();
 	    	case 7: 
 	    		if (exhibit.getLot()==null || 
 	    				exhibit.getLot().getClass_()==null || 
@@ -493,9 +485,7 @@ public class ExhibitItemProvider
 	    				return "";
 	    		}
 	    		Division division = exhibit.getLot().getClass_().getDepartment().getDivision();
-	    		itemLabelProvider =
-	    			(IItemLabelProvider)adapterFactory.adapt(division, IItemLabelProvider.class);
-	    		return itemLabelProvider.getText(division);
+	    		return division.getName();
 	    	case 8: 
 	    		return exhibit.getComments();
 	    	default :
