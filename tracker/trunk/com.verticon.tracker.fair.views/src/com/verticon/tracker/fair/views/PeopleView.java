@@ -9,6 +9,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
@@ -22,6 +23,7 @@ import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -29,8 +31,10 @@ import org.eclipse.swt.widgets.TableColumn;
 import at.bestsolution.dataforms.util.viewers.GenericObservableMapCellLabelProvider;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.Event;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
+import com.verticon.tracker.editor.util.ISelectionController;
+import com.verticon.tracker.editor.util.ItemsView;
+import com.verticon.tracker.editor.util.SelectionController;
 import com.verticon.tracker.editor.util.TrackerView;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
@@ -44,15 +48,75 @@ import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
  * @author jconlon
  * 
  */
-public class PeopleView extends TrackerView {
+public class PeopleView extends TrackerView implements ItemsView{
 
 	private static final String NAME_OF_ITEM_IN_MASTER = "Person";
+	
+	private ISelectionController exhibitsSelectionController;
 	
 	/**
 	 * Reference to Observable for table Input
 	 */
 	private IObservableList tableInput;
 
+	public void handleViewerInputChange2() {
+		handleViewerInputChange();
+	}
+	
+	/**
+	 * Override super to add an AnimalSelectionController
+	 */
+	@Override
+	public void createPartControl(Composite base) {
+		super.createPartControl(base);
+		exhibitsSelectionController = new SelectionController(
+				this, new PeopleStrategy(this));
+		exhibitsSelectionController.open();
+		getSite().getPage().addSelectionListener(exhibitsSelectionController);
+		getSite().getPage().addPartListener(exhibitsSelectionController);
+		tableViewer.addSelectionChangedListener(exhibitsSelectionController);
+	}
+	
+	/**
+	 * Override super to remove the listeners and close the
+	 * AnimalSelectionController
+	 */
+	@Override
+	public void dispose() {
+		tableViewer.removeSelectionChangedListener(exhibitsSelectionController);
+		exhibitsSelectionController.close();
+		getSite().getPage().removePartListener(exhibitsSelectionController);
+		getSite().getPage().removeSelectionListener(exhibitsSelectionController);
+		super.dispose();
+	}
+	
+	@Override
+	protected String getNameOfItemInMaster() {
+		return NAME_OF_ITEM_IN_MASTER;
+	}
+	
+	/**
+	 * Displays a one page wizard to add a Person to the model. The page prompts
+	 * the user fill in a first and last name.
+	 * 
+	 */
+	@Override
+	protected Object addAnItem() {
+		// Instantiates and initializes the wizard
+		Fair fair = getFair();
+		AddPeopleWizard wizard = new AddPeopleWizard();
+		wizard.init(getSite().getWorkbenchWindow().getWorkbench()
+				.getActiveWorkbenchWindow(), fair);
+		// Instantiates the wizard container with the wizard and opens it
+		WizardDialog dialog = new WizardDialog(getSite().getShell(), wizard);
+		dialog.create();
+		dialog.open();
+		wizard.dispose();
+		for (Object object : wizard.getResults()) {
+			return object;
+		}
+		return null;
+	}
 	/**
 	 * Override point for subclasses to create the tableViewer columns. To fix
 	 * Task number 261 this method now uses a databinding contentProvider for
@@ -86,6 +150,7 @@ public class PeopleView extends TrackerView {
 		Fair fair = getFair();
 		if (tableInput != null) {
 			tableInput.dispose();
+			tableInput = null;
 		}
 		if (fair == null) {
 			return;
@@ -108,65 +173,11 @@ public class PeopleView extends TrackerView {
 		return adapterFactory;
 	}
 
-	/**
-	 * Setup for Exhibit, Person, Event, and Exhibit
-	 * 
-	 * @param sselection
-	 */
-	@Override
-	protected void handleMasterSelection(Object first) {
-		Person person = null;
-		if (first instanceof Animal) {
-			// logger.debug("Animal selection");
-			// One Person per animal
-			person = getPersonFromAnimal((Animal) first, getFair());
-		} else if (first instanceof Event) {
-			// logger.debug("Event selection");
-			// One person per event
-			person = getPersonFromEvent((Event) first, getFair());
-		} else if (first instanceof Exhibit
-				&& ((Exhibit) first).getExhibitor() != null) {
-			// logger.debug("Exhibit selection");
-			person = ((Exhibit) first).getExhibitor();
-		} else if (first instanceof Person) {
-			// logger.debug("Person selection");
-			person = (Person) first;
-		}
-		setSelection(person);
-	}
-
-	/**
-	 * Displays a one page wizard to add a Person to the model. The page prompts
-	 * the user fill in a first and last name.
-	 * 
-	 */
-	@Override
-	protected Object addAnItem() {
-		// Instantiates and initializes the wizard
-		Fair fair = getFair();
-		AddPeopleWizard wizard = new AddPeopleWizard();
-		wizard.init(getSite().getWorkbenchWindow().getWorkbench()
-				.getActiveWorkbenchWindow(), fair);
-		// Instantiates the wizard container with the wizard and opens it
-		WizardDialog dialog = new WizardDialog(getSite().getShell(), wizard);
-		dialog.create();
-		dialog.open();
-		wizard.dispose();
-		for (Object object : wizard.getResults()) {
-			return object;
-		}
-		return null;
-	}
-
-	@Override
-	protected String getNameOfItemInMaster() {
-		return NAME_OF_ITEM_IN_MASTER;
-	}
-
+	
 	/**
 	 * @param person
 	 */
-	private void setSelection(Object person) {
+	 void setSelection(Object person) {
 		TableViewer tableViewer = masterFilteredTable.getViewer();
 		if (person != null) {
 			tableViewer.setSelection(new StructuredSelection(person), true);
@@ -179,8 +190,13 @@ public class PeopleView extends TrackerView {
 	 * @return fair
 	 */
 	private Fair getFair() {
+		EditingDomain domain = exhibitsSelectionController.getEditingDomain();
+		if (domain == null) {
+			return null;
+		}
+		
 		Fair fair = null;
-		for (Resource resource : getEditingDomain()
+		for (Resource resource : domain
 				.getResourceSet().getResources()) {
 			Object o = resource.getContents().get(0);
 			if (o instanceof Fair) {
@@ -191,7 +207,7 @@ public class PeopleView extends TrackerView {
 		return fair;
 	}
 
-	private static Person getPersonFromAnimal(Animal animal, Fair fair) {
+    static Person getPersonFromAnimal(Animal animal, Fair fair) {
 		if (animal == null || fair == null) {
 			return null;
 		}
@@ -204,16 +220,16 @@ public class PeopleView extends TrackerView {
 		return null;
 	}
 
-	private static Person getPersonFromEvent(Event event, Fair fair) {
-		if (event == null || fair == null) {
-			return null;
-		}
-		if (event.getTag() != null && event.getTag().eContainer() != null) {
-			Animal animal = (Animal) event.getTag().eContainer();
-			return getPersonFromAnimal(animal, fair);
-		}
-		return null;
-	}
+//	private static Person getPersonFromEvent(Event event, Fair fair) {
+//		if (event == null || fair == null) {
+//			return null;
+//		}
+//		if (event.getTag() != null && event.getTag().eContainer() != null) {
+//			Animal animal = (Animal) event.getTag().eContainer();
+//			return getPersonFromAnimal(animal, fair);
+//		}
+//		return null;
+//	}
 
 	/**
 	 * Enum on Person Element
@@ -361,4 +377,7 @@ public class PeopleView extends TrackerView {
 		tableViewer.setColumnProperties(PeopleColumn.colNames);
 		return cp;
 	}
+
+
+
 }

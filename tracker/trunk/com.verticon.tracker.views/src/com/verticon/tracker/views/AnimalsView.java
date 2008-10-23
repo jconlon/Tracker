@@ -1,55 +1,80 @@
 package com.verticon.tracker.views;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ITableLabelProvider;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 import at.bestsolution.dataforms.util.viewers.GenericObservableMapCellLabelProvider;
 
-import com.verticon.tracker.Animal;
-import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.editor.util.ISelectionController;
+import com.verticon.tracker.editor.util.ItemsView;
+import com.verticon.tracker.editor.util.SelectionController;
 import com.verticon.tracker.editor.util.TrackerView;
-import com.verticon.tracker.fair.Exhibit;
-import com.verticon.tracker.fair.Fair;
-import com.verticon.tracker.fair.Person;
 
-public class AnimalsView extends TrackerView {
+public class AnimalsView extends TrackerView implements ItemsView {
 
 	private static final String NAME_OF_ITEM_IN_MASTER = "Animal";
-	
+
+	private ISelectionController animalSelectionController;
+
 	/**
 	 * Reference to Observable for table Input
 	 */
 	private IObservableList tableInput;
 
+	public void handleViewerInputChange2() {
+		handleViewerInputChange();
+	}
+	
 	/**
-	 * Subclasses can override this to provide a more useful name for
-	 * deleteAction dialog.
+	 * Override super to add an AnimalSelectionController
+	 */
+	@Override
+	public void createPartControl(Composite base) {
+		super.createPartControl(base);
+		animalSelectionController = new SelectionController(
+				this, new AnimalsStrategy(this));
+		animalSelectionController.open();
+		getSite().getPage().addSelectionListener(animalSelectionController);
+		getSite().getPage().addPartListener(animalSelectionController);
+		tableViewer.addSelectionChangedListener(animalSelectionController);
+	}
+
+	/**
+	 * Override super to remove the listeners and close the
+	 * AnimalSelectionController
+	 */
+	@Override
+	public void dispose() {
+		tableViewer.removeSelectionChangedListener(animalSelectionController);
+		animalSelectionController.close();
+		getSite().getPage().removePartListener(animalSelectionController);
+		getSite().getPage().removeSelectionListener(animalSelectionController);
+		super.dispose();
+	}
+	
+	/**
+	 * Subclasses can override this to provide a more useful name for dialog.
 	 * 
-	 * @return plural name of the items to delete
+	 * @return singular name of the items for wizard
 	 */
 	@Override
 	protected String getNameOfItemInMaster() {
@@ -66,7 +91,8 @@ public class AnimalsView extends TrackerView {
 	@Override
 	protected Object addAnItem() {
 		// Instantiates and initializes the wizard
-		Premises premises = getPremises(getEditingDomain());
+		Premises premises = getPremises(animalSelectionController
+				.getEditingDomain());
 		AddAnimalWizard wizard = new AddAnimalWizard();
 		wizard.init(getSite().getWorkbenchWindow().getWorkbench()
 				.getActiveWorkbenchWindow(), premises);
@@ -106,95 +132,36 @@ public class AnimalsView extends TrackerView {
 	 */
 	@Override
 	protected void handleViewerInputChange() {
-		Premises premises = getPremises(getEditingDomain());
-		TableViewer viewer = masterFilteredTable.getViewer();
 		if (tableInput != null) {
 			tableInput.dispose();
+			tableInput = null;
 		}
-		if (premises == null) {
-			return;
-		}
-		tableInput = EMFObservables.observeList(premises,
-				TrackerPackage.Literals.PREMISES__ANIMALS);
-		viewer.setInput(tableInput);
+
+		tableInput = getObservableList();
+		masterFilteredTable.getViewer().setInput(tableInput);
 	}
 
-	/**
-	 * Override point for subclasses to control how to deal with selections on
-	 * the main editors.
-	 * 
-	 * Setup for Exhibit, Person, Event, and Exhibit
-	 * 
-	 * @param sselection
-	 */
-	@Override
-	protected void handleMasterSelection(Object first) {
-		TableViewer viewer = masterFilteredTable.getViewer();
-		if (first instanceof Animal) {
-			// logger.debug("Animal selection");
-			viewer.setSelection(new StructuredSelection(first), true);
-		} else if (first instanceof Event) {
-			// logger.debug("Event selection");
-			Object animal = ((Event) first).eContainer().eContainer();
-			viewer.setSelection(new StructuredSelection(animal), true);
-		} else if (first instanceof Exhibit
-				&& ((Exhibit) first).getAnimal() != null) {
-			// logger.debug("Exhibit selection");
-			viewer.setSelection(new StructuredSelection(((Exhibit) first)
-					.getAnimal()), true);
-		} else if (first instanceof Person) {
-			// logger.debug("Person selection");
-			Person person = (Person) first;
-			List<Animal> animals = new ArrayList<Animal>();
-			Fair fair = (Fair) person.eContainer();
-			for (Exhibit exhib : fair.exhibits()) {
-				if (person == exhib.getExhibitor()) {
-					animals.add(exhib.getAnimal());
-				}
-			}
-			//logger.debug("Person selection associated with {} animals.",animals
-			// .size());
-			viewer.setSelection(new StructuredSelection(animals), true);
-		}
-	}
 
 	/**
-	 * Convienence method to find the Root
+	 * Sets up the Animals TableViewer.
 	 * 
-	 * @return premises
+	 * Also used by AddEventWizard so access is package-friendly.
 	 */
-	private static Premises getPremises(EditingDomain editingDomain) {
-		Resource resource = editingDomain.getResourceSet().getResources()
-				.get(0);
-		Object rootObject = resource.getContents().get(0);
-		if (rootObject instanceof Premises) {
-			return (Premises) rootObject;
-		} else if (rootObject instanceof Fair) {
-			return ((Fair) rootObject).getPremises();
-		}
-
-		return null;
-	}
-
-	/**
-	 * Animals Table
-	 */
-	 static ObservableListContentProvider setUpAnimalsTableViewer(final TableViewer tableViewer,
-			 final AdapterFactory adapterFactory) {
-		 ObservableListContentProvider cp = new ObservableListContentProvider();
-			IObservableMap[] maps = EMFObservables.observeMaps(cp
-					.getKnownElements(), new EStructuralFeature[] {
-					TrackerPackage.Literals.ANIMAL__ID,
-					TrackerPackage.Literals.ANIMAL__TYPE,
-					TrackerPackage.Literals.ANIMAL__SEX,
-					TrackerPackage.Literals.ANIMAL__BREED,
-					TrackerPackage.Literals.ANIMAL__BIRTH_DATE,
-				// TrackerPackage.Literals.ANIMAL__AGE,
-					TrackerPackage.Literals.ANIMAL__LAST_EVENT_DATE_TIME,
-					TrackerPackage.Literals.ANIMAL__WEIGHT,
-					TrackerPackage.Literals.ANIMAL__WEIGHT_GAIN_PER_DAY,
-					TrackerPackage.Literals.ANIMAL__COMMENTS,
-					TrackerPackage.Literals.ANIMAL__SPECIES, });
+	static ObservableListContentProvider setUpAnimalsTableViewer(
+			final TableViewer tableViewer, final AdapterFactory adapterFactory) {
+		ObservableListContentProvider cp = new ObservableListContentProvider();
+		IObservableMap[] maps = EMFObservables.observeMaps(cp
+				.getKnownElements(), new EStructuralFeature[] {
+				TrackerPackage.Literals.ANIMAL__ID,
+				TrackerPackage.Literals.ANIMAL__TYPE,
+				TrackerPackage.Literals.ANIMAL__SEX,
+				TrackerPackage.Literals.ANIMAL__BREED,
+				TrackerPackage.Literals.ANIMAL__BIRTH_DATE,
+				TrackerPackage.Literals.ANIMAL__LAST_EVENT_DATE_TIME,
+				TrackerPackage.Literals.ANIMAL__WEIGHT,
+				TrackerPackage.Literals.ANIMAL__WEIGHT_GAIN_PER_DAY,
+				TrackerPackage.Literals.ANIMAL__COMMENTS,
+				TrackerPackage.Literals.ANIMAL__SPECIES, });
 		final Table table = tableViewer.getTable();
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
@@ -212,10 +179,9 @@ public class AnimalsView extends TrackerView {
 		viewerColumn
 				.setLabelProvider(new GenericObservableMapCellLabelProvider(
 						maps, "{0}"));
-		
+
 		// Type
-		viewerColumn = new TableViewerColumn(tableViewer,
-				SWT.LEAD);
+		viewerColumn = new TableViewerColumn(tableViewer, SWT.LEAD);
 		final TableColumn animalTypeColumn = viewerColumn.getColumn();
 		layout.addColumnData(new ColumnWeightData(2, 90, true));
 		animalTypeColumn.setText(getString("_UI_AnimalTypeColumn_label"));
@@ -226,12 +192,12 @@ public class AnimalsView extends TrackerView {
 
 					private final ITableLabelProvider lp = new AdapterFactoryLabelProvider(
 							adapterFactory);
+
 					@Override
 					public Image getImage(Object element) {
 						return lp.getColumnImage(element, 0);
 					}
 				});
-		
 
 		// Sex
 		viewerColumn = new TableViewerColumn(tableViewer, SWT.LEAD);
@@ -242,7 +208,7 @@ public class AnimalsView extends TrackerView {
 		viewerColumn
 				.setLabelProvider(new GenericObservableMapCellLabelProvider(
 						maps, "{2}"));
-		
+
 		// Breed
 		viewerColumn = new TableViewerColumn(tableViewer, SWT.LEAD);
 		final TableColumn breedColumn = viewerColumn.getColumn();
@@ -252,7 +218,7 @@ public class AnimalsView extends TrackerView {
 		viewerColumn
 				.setLabelProvider(new GenericObservableMapCellLabelProvider(
 						maps, "{3}"));
-		
+
 		// BirthDate
 		viewerColumn = new TableViewerColumn(tableViewer, SWT.LEAD);
 		final TableColumn dDateColumn = viewerColumn.getColumn();
@@ -262,16 +228,6 @@ public class AnimalsView extends TrackerView {
 		viewerColumn
 				.setLabelProvider(new GenericObservableMapCellLabelProvider(
 						maps, "{4,date,medium}"));
-
-		// // Age
-		// viewerColumn = new TableViewerColumn(tableViewer, SWT.LEAD);
-		// final TableColumn ageColumn = viewerColumn.getColumn();
-		// layout.addColumnData(new ColumnWeightData(2, 80, true));
-		// ageColumn.setText(getString("_UI_AgeColumn_label"));
-		// ageColumn.setMoveable(true);
-		// viewerColumn
-		// .setLabelProvider(new GenericObservableMapCellLabelProvider(
-		// maps, "{5}"));
 
 		// LastEventDateTime
 		viewerColumn = new TableViewerColumn(tableViewer, SWT.LEAD);
@@ -376,4 +332,23 @@ public class AnimalsView extends TrackerView {
 
 		return cp;
 	}
+
+	/**
+	 * 
+	 * @return an ObservableList of Animals
+	 */
+	private IObservableList getObservableList() {
+		// There may be no editors return a null if so
+		if (animalSelectionController.getEditingDomain() == null) {
+			return null;
+		}
+		Premises premises = getPremises(animalSelectionController
+				.getEditingDomain());
+		if (premises == null) {
+			return null;
+		}
+		return EMFObservables.observeList(premises,
+				TrackerPackage.Literals.PREMISES__ANIMALS);
+	}
+
 }

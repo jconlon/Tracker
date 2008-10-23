@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2008 Trevor S. Kaufman.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *     Trevor S. Kaufman - initial API and implementation
- ******************************************************************************/
 package com.verticon.tracker.fair.views;
 
 import java.util.ArrayList;
@@ -15,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.ColumnLayoutData;
@@ -24,103 +15,65 @@ import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.Event;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
+import com.verticon.tracker.editor.util.ISelectionController;
+import com.verticon.tracker.editor.util.ItemsView;
+import com.verticon.tracker.editor.util.SelectionController;
 import com.verticon.tracker.editor.util.TrackerView;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
-import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
 import com.verticon.tracker.fair.views.PeopleView.PeopleColumn;
 
-public class ExhibitsView extends TrackerView {
+public class ExhibitsView extends TrackerView implements ItemsView{
 
-	protected static final String NAME_OF_ITEM_IN_MASTER = "Exhibit";
-
+	private static final String NAME_OF_ITEM_IN_MASTER = "Exhibit";
+	
+	
+	private ISelectionController exhibitsSelectionController;
+	
+	public void handleViewerInputChange2() {
+		handleViewerInputChange();
+	}
+	
 	/**
-	 * Override point for subclasses to create the tableViewer columns.
+	 * Override super to add an AnimalSelectionController
 	 */
 	@Override
-	protected void setUpTable(AdapterFactory adapterFactory) {
-		TableViewer tableViewer = masterFilteredTable.getViewer();
-		setUpExhibitsTableViewer(tableViewer);
-		masterFilteredTable.setColumns(tableViewer.getTable().getColumns());
-
-		tableViewer.setContentProvider(new ExhibitsContentAdapter(
-				adapterFactory));
-		tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(
-				adapterFactory));
+	public void createPartControl(Composite base) {
+		super.createPartControl(base);
+		exhibitsSelectionController = new SelectionController(
+				this, new ExhibitsStrategy(this));
+		exhibitsSelectionController.open();
+		getSite().getPage().addSelectionListener(exhibitsSelectionController);
+		getSite().getPage().addPartListener(exhibitsSelectionController);
+		tableViewer.addSelectionChangedListener(exhibitsSelectionController);
 	}
 
 	/**
-	 * Override point for subclasses to obtain the necessary input to feed the
-	 * tableViewer.
+	 * Override super to remove the listeners and close the
+	 * AnimalSelectionController
 	 */
 	@Override
-	protected void handleViewerInputChange() {
-		TableViewer tableViewer = masterFilteredTable.getViewer();
-		Fair rootObject = getFair();
-		if (rootObject != null) {
-			tableViewer.setInput(rootObject);
-		}
-
+	public void dispose() {
+		tableViewer.removeSelectionChangedListener(exhibitsSelectionController);
+		exhibitsSelectionController.close();
+		getSite().getPage().removePartListener(exhibitsSelectionController);
+		getSite().getPage().removeSelectionListener(exhibitsSelectionController);
+		super.dispose();
 	}
-
-	/**
-	 * Setup for Exhibit, Person, Event, and Exhibit
-	 * 
-	 * @param sselection
-	 */
-	@Override
-	protected void handleMasterSelection(Object first) {
-		TableViewer tableViewer = masterFilteredTable.getViewer();
-		Object exhibit = null;
-		if (first instanceof Animal) {
-			// logger.debug("Animal selection");
-			exhibit = getExhibitFromAnimal((Animal) first, getFair());
-		} else if (first instanceof Event) {
-			// logger.debug("Event selection");
-			exhibit = getExhibitFromEvent((Event) first, getFair());
-		} else if (first instanceof Exhibit) {
-			// logger.debug("Exhibit selection");
-			exhibit = first;
-		} else if (first instanceof Person) {
-			// logger.debug("Person selection");
-			// A person can have multiple exhibits
-			Person person = (Person) first;
-			List<Exhibit> exhibits = new ArrayList<Exhibit>();
-			Fair fair = (Fair) person.eContainer();
-			for (Exhibit exhib : fair.exhibits()) {
-				if (person == exhib.getExhibitor()) {
-					exhibits.add(exhib);
-				}
-			}
-			tableViewer.setSelection(new StructuredSelection(exhibits), true);
-			return;
-		}
-		setSelection(exhibit);
-	}
-
+	
 	@Override
 	protected String getNameOfItemInMaster() {
 		return NAME_OF_ITEM_IN_MASTER;
 	}
-
-	@Override
-	protected AdapterFactory createAdapterFactory() {
-		ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(
-				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-		adapterFactory.addAdapterFactory(new FairItemProviderAdapterFactory());
-		adapterFactory
-				.addAdapterFactory(new TrackerItemProviderAdapterFactory());
-		return adapterFactory;
-	}
-
+	
 	/**
 	 * Displays a several page wizard to add a Division, Department, Class, Lot,
 	 * or Exhibit to the fair model.
@@ -149,9 +102,48 @@ public class ExhibitsView extends TrackerView {
 	}
 	
 	/**
+	 * Override point for subclasses to create the tableViewer columns.
+	 */
+	@Override
+	protected void setUpTable(AdapterFactory adapterFactory) {
+		TableViewer tableViewer = masterFilteredTable.getViewer();
+		setUpExhibitsTableViewer(tableViewer);
+		masterFilteredTable.setColumns(tableViewer.getTable().getColumns());
+
+		tableViewer.setContentProvider(new ExhibitsContentAdapter(
+				adapterFactory));
+		tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(
+				adapterFactory));
+	}
+
+	/**
+	 * Override point for subclasses to obtain the necessary input to feed the
+	 * tableViewer.
+	 */
+	@Override
+	protected void handleViewerInputChange() {
+		TableViewer tableViewer = masterFilteredTable.getViewer();
+		Fair rootObject = getFair();
+		if (rootObject != null) {
+			tableViewer.setInput(rootObject);
+		} 
+	}
+
+	@Override
+	protected AdapterFactory createAdapterFactory() {
+		ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(
+				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		adapterFactory.addAdapterFactory(new FairItemProviderAdapterFactory());
+		adapterFactory
+				.addAdapterFactory(new TrackerItemProviderAdapterFactory());
+		return adapterFactory;
+	}
+	
+		
+	/**
 	 * @param exhibitToSelect
 	 */
-	private void setSelection(Object exhibitToSelect) {
+	 void setSelection(Object exhibitToSelect) {
 		TableViewer tableViewer = masterFilteredTable.getViewer();
 		if (exhibitToSelect != null) {
 			tableViewer.setSelection(new StructuredSelection(exhibitToSelect),
@@ -164,9 +156,13 @@ public class ExhibitsView extends TrackerView {
 	/**
 	 * @return fair
 	 */
-	private Fair getFair() {
+	 Fair getFair() {
+		EditingDomain domain = exhibitsSelectionController.getEditingDomain();
+		if (domain == null) {
+			return null;
+		}	
 		Fair fair = null;
-		for (Resource resource : getEditingDomain()
+		for (Resource resource : domain
 				.getResourceSet().getResources()) {
 			Object o = resource.getContents().get(0);
 			if (o instanceof Fair) {
@@ -177,7 +173,8 @@ public class ExhibitsView extends TrackerView {
 		return fair;
 	}
 
-	private static Exhibit getExhibitFromAnimal(Animal animal, Fair fair) {
+	  Exhibit getExhibitFromAnimal(Animal animal) {
+		Fair fair = getFair();
 		if (animal == null || fair == null) {
 			return null;
 		}
@@ -190,24 +187,13 @@ public class ExhibitsView extends TrackerView {
 		return null;
 	}
 
-	private static Exhibit getExhibitFromEvent(Event event, Fair fair) {
-		if (event == null || fair == null) {
-			return null;
-		}
-		if (event.getTag() != null && event.getTag().eContainer() != null) {
-			Animal animal = (Animal) event.getTag().eContainer();
-			return getExhibitFromAnimal(animal, fair);
-		}
-		return null;
-	}
-
 	/**
 	 * Enum on Exhibit Element
 	 * 
 	 * @author jconlon
 	 * 
 	 */
-	public enum ExhibitColumn {
+	 enum ExhibitColumn {
 		NAME("Exhibit", new ColumnWeightData(3, 100, true)), NUMBER("Number",
 				new ColumnWeightData(3, 30, true)), EXHIBITOR("Exhibitor",
 				new ColumnWeightData(2, 150, true)), ANIMAL("Animal",
@@ -244,7 +230,7 @@ public class ExhibitsView extends TrackerView {
 	 * Exhibits Table Name, Number, Exhibitor, Animal, Lot, Class, Department,
 	 * Division, Comments
 	 */
-	public static void setUpExhibitsTableViewer(final TableViewer tableViewer) {
+	private static void setUpExhibitsTableViewer(final TableViewer tableViewer) {
 		final Table table = tableViewer.getTable();
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
@@ -283,4 +269,6 @@ public class ExhibitsView extends TrackerView {
 		tableViewer.setColumnProperties(PeopleColumn.colNames);
 
 	}
+
+	
 }
