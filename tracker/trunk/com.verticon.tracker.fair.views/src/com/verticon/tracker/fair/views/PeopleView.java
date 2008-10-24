@@ -103,7 +103,7 @@ public class PeopleView extends TrackerView implements ItemsView{
 	@Override
 	protected Object addAnItem() {
 		// Instantiates and initializes the wizard
-		Fair fair = getFair();
+		Fair fair = getFair(exhibitsSelectionController.getEditingDomain());
 		AddPeopleWizard wizard = new AddPeopleWizard();
 		wizard.init(getSite().getWorkbenchWindow().getWorkbench()
 				.getActiveWorkbenchWindow(), fair);
@@ -133,9 +133,6 @@ public class PeopleView extends TrackerView implements ItemsView{
 
 		// // Set up databinding context here
 		tableViewer.setContentProvider(cp);
-
-		// tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(
-		// adapterFactory));
 	}
 
 	/**
@@ -146,22 +143,37 @@ public class PeopleView extends TrackerView implements ItemsView{
 	 */
 	@Override
 	protected void handleViewerInputChange() {
-		TableViewer tableViewer = masterFilteredTable.getViewer();
-		Fair fair = getFair();
 		if (tableInput != null) {
 			tableInput.dispose();
 			tableInput = null;
 		}
-		if (fair == null) {
-			return;
-		}
-		tableInput = EMFObservables.observeList(fair,
-				FairPackage.Literals.FAIR__PEOPLE);
-
-		tableViewer.setInput(tableInput);
+		tableInput = getObservableList();
+		masterFilteredTable.getViewer().setInput(tableInput);
 
 	}
 
+//	/**
+//	 * @param fair
+//	 */
+//	private void getObservableList(Fair fair) {
+//		tableInput = EMFObservables.observeList(fair,
+//				FairPackage.Literals.FAIR__PEOPLE);
+//	}
+
+	private IObservableList getObservableList() {
+		// There may be no editors return a null if so
+		if (exhibitsSelectionController.getEditingDomain() == null) {
+			return null;
+		}
+		Fair premises = getFair(exhibitsSelectionController
+				.getEditingDomain());
+		if (premises == null) {
+			return null;
+		}
+		return EMFObservables.observeList(premises,
+				FairPackage.Literals.FAIR__PEOPLE);
+	}
+	
 	 @Override
 	protected AdapterFactory createAdapterFactory() {
 		ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(
@@ -189,8 +201,8 @@ public class PeopleView extends TrackerView implements ItemsView{
 	/**
 	 * @return fair
 	 */
-	private Fair getFair() {
-		EditingDomain domain = exhibitsSelectionController.getEditingDomain();
+	private Fair getFair(EditingDomain domain) {
+//		EditingDomain domain = exhibitsSelectionController.getEditingDomain();
 		if (domain == null) {
 			return null;
 		}

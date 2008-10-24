@@ -81,7 +81,7 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 	@Override
 	protected Object addAnItem() {
 		// Instantiates and initializes the wizard
-		Fair fair = getFair();
+		Fair fair = getFair(exhibitsSelectionController.getEditingDomain());
 		AddExhibitWizard wizard = new AddExhibitWizard(fair, getSite()
 				.getWorkbenchWindow().getWorkbench().getActiveWorkbenchWindow());
 		// Instantiates the wizard container with the wizard and opens it
@@ -122,13 +122,11 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 	 */
 	@Override
 	protected void handleViewerInputChange() {
-		TableViewer tableViewer = masterFilteredTable.getViewer();
-		Fair rootObject = getFair();
-		if (rootObject != null) {
-			tableViewer.setInput(rootObject);
-		} 
+		Fair premises = getFair(exhibitsSelectionController.getEditingDomain());
+		TableViewer viewer = masterFilteredTable.getViewer();
+		viewer.setInput(premises);
 	}
-
+	
 	@Override
 	protected AdapterFactory createAdapterFactory() {
 		ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(
@@ -153,28 +151,29 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 		}
 	}
 
-	/**
-	 * @return fair
-	 */
-	 Fair getFair() {
-		EditingDomain domain = exhibitsSelectionController.getEditingDomain();
-		if (domain == null) {
-			return null;
-		}	
-		Fair fair = null;
-		for (Resource resource : domain
-				.getResourceSet().getResources()) {
-			Object o = resource.getContents().get(0);
-			if (o instanceof Fair) {
-				fair = (Fair) o;
-				break;
+	 
+	 /**
+		 * @return fair
+		 */
+		private Fair getFair(EditingDomain domain) {
+			if (domain == null) {
+				return null;
 			}
+			
+			Fair fair = null;
+			for (Resource resource : domain
+					.getResourceSet().getResources()) {
+				Object o = resource.getContents().get(0);
+				if (o instanceof Fair) {
+					fair = (Fair) o;
+					break;
+				}
+			}
+			return fair;
 		}
-		return fair;
-	}
 
 	  Exhibit getExhibitFromAnimal(Animal animal) {
-		Fair fair = getFair();
+		Fair fair = getFair(exhibitsSelectionController.getEditingDomain());
 		if (animal == null || fair == null) {
 			return null;
 		}
@@ -194,15 +193,23 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 	 * 
 	 */
 	 enum ExhibitColumn {
-		NAME("Exhibit", new ColumnWeightData(3, 100, true)), NUMBER("Number",
-				new ColumnWeightData(3, 30, true)), EXHIBITOR("Exhibitor",
-				new ColumnWeightData(2, 150, true)), ANIMAL("Animal",
-				new ColumnWeightData(2, 200, true)), LOT("Lot",
-				new ColumnWeightData(2, 150, true)), CLASS("Class",
-				new ColumnWeightData(2, 150, true)), DEPARTMENT("Department",
-				new ColumnWeightData(2, 150, true)), DIVISION("Division",
-				new ColumnWeightData(2, 150, true)), COMMENTS("Comments",
-				new ColumnWeightData(2, 120, true));
+		NAME("Exhibit", new ColumnWeightData(3, 100, true)), 
+		
+		NUMBER("Number", new ColumnWeightData(3, 30, true)), 
+		
+//		EXHIBITOR("Exhibitor",new ColumnWeightData(2, 150, true)), 
+		
+		ANIMAL("Animal", new ColumnWeightData(2, 200, true)), 
+		
+		LOT("Lot", new ColumnWeightData(2, 150, true)), 
+		
+		CLASS("Class", new ColumnWeightData(2, 150, true)), 
+				
+		DEPARTMENT("Department", new ColumnWeightData(2, 150, true)), 
+		
+		DIVISION("Division", new ColumnWeightData(2, 150, true)), 
+		
+		COMMENTS("Comments", new ColumnWeightData(2, 120, true));
 
 		ColumnLayoutData layoutData;
 		String text;
