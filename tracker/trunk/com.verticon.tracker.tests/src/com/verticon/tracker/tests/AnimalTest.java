@@ -6,12 +6,20 @@
  */
 package com.verticon.tracker.tests;
 
+import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +28,7 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
+import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
 
@@ -412,12 +421,17 @@ public abstract class AnimalTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#getAgeInDays()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testGetAgeInDays() {
-		// TODO: implement this feature getter test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		assertNotNull(getFixture());
+		assertNotNull(getFixture().getAge());
+		assertEquals(new Age(ANIMAL_BIRTHDAY), getFixture().getAge());
+
+		Calendar someBirthday = Calendar.getInstance();
+		 someBirthday.add(Calendar.DAY_OF_MONTH, -5);
+		 getFixture().setBirthDate(someBirthday.getTime());
+		 assertEquals(5, getFixture().getAgeInDays());
 	}
 
 	public void testGetWeightGainPerDayWithNulls() {
@@ -672,5 +686,83 @@ public abstract class AnimalTest extends TestCase {
 		assertEquals(we, animal.lastWeighIn());
 	}
 
+	/**
+	 * Ticket 280 Tests serializing and de serializing an animal EObject
+	 */
+	public void testSerializing() {
+		TrackerPackage.eINSTANCE.eClass();
+		Animal animal = getFixture();
+		assertNull("Should have no weight on animal", animal.getWeight());
+		
+		Tag tag = TrackerFactory.eINSTANCE.createTag();
+		animal.getTags().add(tag);
+		//First weighIn 10 days ago and 100 lbs
+		WeighIn we = TrackerFactory.eINSTANCE.createWeighIn();
+		we.setComments("First");
+		Calendar firstWeighInDate = Calendar.getInstance();
+		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
+		we.setDateTime(
+				firstWeighInDate.getTime());
+		we.setWeight(100);
+		tag.getEvents().add(we);
+		
+		assertNotNull( animal.lastWeighIn());
+		
+		assertEquals(we, animal.lastWeighIn());
+		String serializedAnimal = null;
+		try {
+			serializedAnimal = serialiaze(animal);
+			System.out.println("Here it is:: " + serializedAnimal);
+		} catch (Exception e) {
+			fail("Failed to serialize animal");
+		}
+		if (serializedAnimal == null)
+			fail("serializedAnimal is null");
+		Animal aninimalAfterLoad = load(serializedAnimal);
+		assertNotNull(aninimalAfterLoad);
+		assertNotNull(aninimalAfterLoad.lastWeighIn());
 
+		assertEquals(we.getDateTime(), aninimalAfterLoad.lastWeighIn()
+				.getDateTime());
+	}
+	
+	private String serialiaze(EObject root) throws Exception {
+		String returnStr = null;
+		XMLResource xmlResource = new XMLResourceImpl();
+		// xmlResource.setURI(URI.createURI("dummy"));
+		XMLHelperImpl xmlHelper = new XMLHelperImpl(xmlResource);
+		ArrayList<EObject> arrayList = new ArrayList<EObject>();
+		arrayList.add(root);
+		try {
+		    returnStr = XMLHelperImpl.saveString(new HashMap(),arrayList, "UTF-8",
+		xmlHelper);
+		}
+		catch (Exception ex) {
+		    logger.error("Failed to serialize", ex);
+			throw ex;
+		}
+		return returnStr;
+	}
+	
+	private Animal load(String root) {
+		XMLResource xmlResource = new XMLResourceImpl();
+		xmlResource.setXMLVersion("2.0");// needs this to prevent a
+											// "Error: Feature 'version' not found."
+		// xmlResource.setURI(URI.createURI("dummy"));
+		// XMLHelperImpl xmlHelper = new XMLHelperImpl(xmlResource);
+		Animal esmML = null;
+		ByteArrayInputStream bais = new ByteArrayInputStream(root.getBytes());
+		try {
+			xmlResource.load(bais, new HashMap());
+		
+		} catch (Resource.IOWrappedException ex) {// FeatureNotFoundException
+			Throwable t = ex.getCause(); // ex) {
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		esmML = (Animal) xmlResource.getContents().get(0);
+		xmlResource.getContents().clear();
+		return esmML;
+	}
 } //AnimalTest
