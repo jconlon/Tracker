@@ -327,18 +327,4 @@ POSSIBILITY OF SUCH DAMAGES.
          version="0.0.0"
          unpack="false"/>
 
-   <plugin
-         id="com.verticon.tracker.views"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.verticon.tracker.fair.views"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
 </feature>
