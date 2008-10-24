@@ -222,7 +222,9 @@ public abstract class TrackerView extends ViewPart {
 		sash.dispose();
 		sashForm.dispose();
 		masterFilteredTable.dispose();
-		statusMessageObservable.dispose();
+		if(statusMessageObservable!=null){
+			statusMessageObservable.dispose();
+		}
 		super.dispose();
 
 	}
