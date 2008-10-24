@@ -99,7 +99,7 @@ class ExhibitsStrategy implements SelectionStrategy {
 			@Override
 			public Object casePerson(Person person) {
 //				logger.debug("Received Person selection");
-				exhibitsView.setFilter(person.getName(), 2);
+				exhibitsView.setFilter(person.getName(), 0);
 				return person;
 			}
 

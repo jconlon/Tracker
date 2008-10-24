@@ -79,9 +79,9 @@ public class ExhibitSorter extends ViewerSorter {
 			case NUMBER :
 				returnValue = compareNumbers(exhibit1, exhibit2);
 				break;
-			case EXHIBITOR :
-				returnValue = compareExhibitors(exhibit1, exhibit2);
-				break;
+//			case EXHIBITOR :
+//				returnValue = compareExhibitors(exhibit1, exhibit2);
+//				break;
 			case ANIMAL :
 				returnValue = compareAnimals(exhibit1, exhibit2);
 				break;
