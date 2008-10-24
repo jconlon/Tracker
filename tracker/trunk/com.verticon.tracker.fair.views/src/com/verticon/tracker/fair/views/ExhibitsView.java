@@ -87,16 +87,17 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 		// Instantiates the wizard container with the wizard and opens it
 		WizardDialog dialog = new WizardDialog(getSite().getShell(), wizard);
 		dialog.create();
-		dialog.open();
+		int results = dialog.open();
 
 		wizard.dispose();
+		if(results == WizardDialog.OK){
+			for (Object object : wizard.getResults()) {
+				if (object instanceof Exhibit) {
 
-		for (Object object : wizard.getResults()) {
-			if (object instanceof Exhibit) {
+					return object;
+				}
 
-				return object;
 			}
-
 		}
 		return null;
 	}
