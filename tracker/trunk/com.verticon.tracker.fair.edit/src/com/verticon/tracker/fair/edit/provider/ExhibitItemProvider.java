@@ -96,9 +96,9 @@ public class ExhibitItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Exhibit_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibit_name_feature", "_UI_Exhibit_type"),
+				 getString("_UI_Exhibit_name_description"),
 				 FairPackage.Literals.EXHIBIT__NAME,
-				 true,
+				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
@@ -118,9 +118,9 @@ public class ExhibitItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Exhibit_number_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Exhibit_number_feature", "_UI_Exhibit_type"),
+				 getString("_UI_Exhibit_number_description"),
 				 FairPackage.Literals.EXHIBIT__NUMBER,
-				 true,
+				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
@@ -351,11 +351,8 @@ public class ExhibitItemProvider
 		Exhibit exhibit= (Exhibit)object;
 		IItemLabelProvider itemLabelProvider;
 	    switch (columnIndex){
-	        case 0: return getImage(object); 
-	    	case 1: return null; 
-	    	
-	    	case 2: 
-	    		if(exhibit.getExhibitor()==null){
+	        case 0: 
+	        	if(exhibit.getExhibitor()==null){
 	    			return null;
 	    		}
 	    		Person person = exhibit.getExhibitor();
@@ -364,8 +361,9 @@ public class ExhibitItemProvider
 	    			(IItemLabelProvider)adapterFactory.adapt(person, IItemLabelProvider.class);
 	    		return itemLabelProvider.getImage(person);
 	    		
-	    		
-	    	case 3: 
+	    	case 1: return null; 
+	    	
+	    	case 2: 
 	    		if(exhibit.getAnimal()==null){
 	    			return null;
 	    		}
@@ -431,19 +429,11 @@ public class ExhibitItemProvider
 		Exhibit exhibit= (Exhibit)object;
 		IItemLabelProvider itemLabelProvider;
 	    switch (columnIndex){
-	        case 0: return getText(object); 
+	        case 0: return exhibit.getExhibitor() ==null? "": exhibit.getExhibitor().getName(); 
 	    	case 1: 
 	    		return Integer.toString(exhibit.getNumber()); 
 	    	
-	    	case 2: 
-	    		if(exhibit.getExhibitor()==null){
-	    			return "";
-	    		}
-	    		Person person2 = exhibit.getExhibitor();
-	    		return person2.getName();
-	    		
-	    		
-	    	case 3: 
+	    	case 2:  
 	    		if(exhibit.getAnimal()==null){
 	    			return "";
 	    		}
@@ -453,14 +443,14 @@ public class ExhibitItemProvider
 	    	    itemLabelProvider = (IItemLabelProvider)faf.getRootAdapterFactory().adapt(animal, IItemLabelProvider.class);
 	    	    
 	    		return itemLabelProvider.getText(animal);	    	
-	    	case 4: 
+	    	case 3: 
 	    		if(exhibit.getLot()==null){
 	    			return "";
 	    		}
 	    		Lot lot = exhibit.getLot();
 	    		return lot.getName();
 	    		
-	    	case 5: 
+	    	case 4: 
 	    		if (exhibit.getLot()==null || 
 	    				exhibit.getLot().getClass_()==null){
 	    			return "";
@@ -468,7 +458,7 @@ public class ExhibitItemProvider
 	    		com.verticon.tracker.fair.Class clazz =	exhibit.getLot().getClass_();
 	    		return clazz.getName();
 	    
-	    	case 6: 
+	    	case 5: 
 	    		if (exhibit.getLot()==null || 
 	    				exhibit.getLot().getClass_()==null || 
 	    				exhibit.getLot().getClass_().getDepartment()==null){
@@ -477,7 +467,7 @@ public class ExhibitItemProvider
 	    		
 	    		Department department = exhibit.getLot().getClass_().getDepartment();
 	    		return department.getName();
-	    	case 7: 
+	    	case 6: 
 	    		if (exhibit.getLot()==null || 
 	    				exhibit.getLot().getClass_()==null || 
 	    				exhibit.getLot().getClass_().getDepartment()==null ||
@@ -486,7 +476,7 @@ public class ExhibitItemProvider
 	    		}
 	    		Division division = exhibit.getLot().getClass_().getDepartment().getDivision();
 	    		return division.getName();
-	    	case 8: 
+	    	case 7: 
 	    		return exhibit.getComments();
 	    	default :
 	    		return "unknown " + columnIndex;

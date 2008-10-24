@@ -50,25 +50,15 @@ public interface Exhibit extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
 	 * @see com.verticon.tracker.fair.FairPackage#getExhibit_Name()
-	 * @model required="true"
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link com.verticon.tracker.fair.Exhibit#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
-	/**
 	 * Returns the value of the '<em><b>Number</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Number</em>' attribute isn't clear,
@@ -76,22 +66,11 @@ public interface Exhibit extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Number</em>' attribute.
-	 * @see #setNumber(int)
 	 * @see com.verticon.tracker.fair.FairPackage#getExhibit_Number()
-	 * @model
+	 * @model default="0" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	int getNumber();
-
-	/**
-	 * Sets the value of the '{@link com.verticon.tracker.fair.Exhibit#getNumber <em>Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Number</em>' attribute.
-	 * @see #getNumber()
-	 * @generated
-	 */
-	void setNumber(int value);
 
 	/**
 	 * Returns the value of the '<em><b>Comments</b></em>' attribute.

@@ -256,7 +256,7 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 	public static final Fair getFair(IAdaptable adaptable) throws IOException  {
 		EditingDomain editingDomain = getEditingDomain(adaptable);
 		
-		Resource modelResource = (Resource) editingDomain.getResourceSet()
+		Resource modelResource = editingDomain.getResourceSet()
 				.getResources().get(0);
 		Object rootObject = modelResource.getContents().get(0);
 		if(rootObject instanceof Fair){
@@ -441,36 +441,36 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		}
 		Exhibit exhibit = FairFactory.eINSTANCE.createExhibit();
 		exhibit.setComments(getColumnValue( row, FairPackage.Literals.EXHIBIT__COMMENTS));
-		exhibit.setName(getColumnValue( row, FairPackage.Literals.EXHIBIT__NAME));
-		if(exhibit.getName()==null || exhibit.getName().length()==0){
-			if(importPeoplePage.isUsePersonNameForExhibitName()){
-				exhibit.setName(person.getName());
-			}
-		}
-		String numAsString = getColumnValue( row, FairPackage.Literals.EXHIBIT__NUMBER);
-		if(numAsString!=null ){
-			try {
-				int exhibitNumber = Integer.parseInt(numAsString);
-				exhibit.setNumber(exhibitNumber);
-			} catch (NumberFormatException e) {
-				logger.error("Row="+row.getRowNum()+" could not parse "+numAsString+" to create an exhibit number.",e);
-			}
-		}
-		
-		if(exhibit.getNumber()==0 && importPeoplePage.isUseEarTagForExhibitNum()){
-			try {
-				Long earTagLong = Long.parseLong(animal.getId());
-				int earTag =0;
-				if(earTagLong>Integer.MAX_VALUE){
-					//Cut out the high order numbers from the animal.id
-					earTag = Integer.parseInt(animal.getId().substring(10));
-				}else{
-					earTag= earTagLong.intValue();
-				}
-				exhibit.setNumber(earTag);
-			} catch (NumberFormatException e) {
-			}
-		}
+//		exhibit.setName(getColumnValue( row, FairPackage.Literals.EXHIBIT__NAME));
+//		if(exhibit.getName()==null || exhibit.getName().length()==0){
+//			if(importPeoplePage.isUsePersonNameForExhibitName()){
+//				exhibit.setName(person.getName());
+//			}
+//		}
+//		String numAsString = getColumnValue( row, FairPackage.Literals.EXHIBIT__NUMBER);
+//		if(numAsString!=null ){
+//			try {
+//				int exhibitNumber = Integer.parseInt(numAsString);
+//				exhibit.setNumber(exhibitNumber);
+//			} catch (NumberFormatException e) {
+//				logger.error("Row="+row.getRowNum()+" could not parse "+numAsString+" to create an exhibit number.",e);
+//			}
+//		}
+//		
+//		if(exhibit.getNumber()==0 && importPeoplePage.isUseEarTagForExhibitNum()){
+//			try {
+//				Long earTagLong = Long.parseLong(animal.getId());
+//				int earTag =0;
+//				if(earTagLong>Integer.MAX_VALUE){
+//					//Cut out the high order numbers from the animal.id
+//					earTag = Integer.parseInt(animal.getId().substring(10));
+//				}else{
+//					earTag= earTagLong.intValue();
+//				}
+//				exhibit.setNumber(earTag);
+//			} catch (NumberFormatException e) {
+//			}
+//		}
 		
 		Lot lot = exhibitPage.getSelectedLot();
 		Command command = AddCommand.create(
