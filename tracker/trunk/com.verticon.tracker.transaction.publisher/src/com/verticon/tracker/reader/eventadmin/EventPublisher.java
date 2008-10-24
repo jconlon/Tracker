@@ -74,6 +74,7 @@ public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
 			tag.setId(Long.toString(tagId));
 		}
 		Hashtable<String, Object> table = new Hashtable<String, Object>();
+		// FIXME Ticket 280 should not send a mutable object as a property
 		table.put(TrackerConstants.EVENT_ADMIN_PROPERTY_ANIMAL_TEMPLATE,
 				templateAnimal);
 		table.put(Constants.BUNDLE_SYMBOLICNAME, ReaderPlugin.getDefault().getSymbolicName());
@@ -83,6 +84,8 @@ public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
 		EventAdmin ea = ReaderPlugin.getDefault().getService();
 		
 		if(ea != null) {
+			// Todo Sends synchronously but could (should) asynchronous with a
+			// postEvent call
 			ea.sendEvent(
 					new Event(
 							TrackerConstants.EVENT_ADMIN_TOPIC_READER, table));
