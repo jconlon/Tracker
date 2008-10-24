@@ -61,7 +61,9 @@ public class PeopleStrategy implements SelectionStrategy {
 			public Object caseExhibit(Exhibit exhibit) {
 //				logger.debug("Received Exhibit selection");
 				Person person = exhibit.getExhibitor();
-				viewer.setSelection(new StructuredSelection(person));
+				if(person != null){
+					viewer.setSelection(new StructuredSelection(person));
+				}
 				return exhibit;
 			}
 

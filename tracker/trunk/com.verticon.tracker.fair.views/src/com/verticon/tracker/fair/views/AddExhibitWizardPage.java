@@ -16,10 +16,10 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Text;
 
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
@@ -37,21 +37,19 @@ import com.verticon.tracker.fair.FairFactory;
 @Deprecated
 public class AddExhibitWizardPage extends WizardPage implements
 		AddExhibitWizardPageParent {
-	final IObservableValue newTargetName = new WritableValue(null, String.class);
+//	final IObservableValue newTargetName = new WritableValue(null, String.class);
+	final IObservableValue createAnExhibit = new WritableValue(null, Boolean.class);
 	final Fair fair;
 	final AddExhibitWizardPageParent parentPage;
+	
 
 	private final class SingleDigitValidator implements IValidator {
 		public IStatus validate(Object value) {
-			String i = (String) value;
-			if (i == null) {
-				return ValidationStatus.info("Please enter a value.");
+			Boolean i = (Boolean) value;
+			if (!i) {
+				return ValidationStatus.info("Please check selection to create a Exhibit.");
 			}
-			String s = (String) value;
-			if (s == null || s.trim().length() < 1) {
-				return ValidationStatus
-						.info("Please enter a value for the Exhibit Name" + '.');
-			}
+			
 			return ValidationStatus.ok();
 		}
 	}
@@ -68,12 +66,13 @@ public class AddExhibitWizardPage extends WizardPage implements
 		WizardPageSupport.create(this, dbc);
 		Composite composite = new Composite(parent, SWT.NONE);
 		Label label = new Label(composite, SWT.NONE);
-		label.setText("Enter a name for the Exhibit:");
-		Text text = new Text(composite, SWT.BORDER);
+		label.setText("Create an Exhibit:");
+		
+	    Button createButton = new Button(composite, SWT.CHECK);
 
-		dbc.bindValue(SWTObservables.observeText(text, SWT.Modify),
-				newTargetName, new UpdateValueStrategy()
-						.setAfterConvertValidator(new SingleDigitValidator()),
+		dbc.bindValue(SWTObservables.observeSelection(createButton),
+				createAnExhibit, new UpdateValueStrategy()
+				.setAfterConvertValidator(new SingleDigitValidator()),
 				null);
 
 		GridLayoutFactory.swtDefaults().numColumns(2).generateLayout(composite);
@@ -83,19 +82,16 @@ public class AddExhibitWizardPage extends WizardPage implements
 	public Command getCommand(EObject child) {
 		if (newTargetHasValue()) {
 			Exhibit exhibit = FairFactory.eINSTANCE.createExhibit();
-//			exhibit.setName((String) newTargetName.getValue());
 			return parentPage.getCommand(exhibit);
-
 		}
 		return parentPage.getCommand(null);
 	}
 
 	public boolean newTargetHasValue() {
-		if (newTargetName.getValue() == null) {
+		if (createAnExhibit.getValue() == null) {
 			return false;
 		}
-		String s = (String) newTargetName.getValue();
-		return s.trim().length() > 0;
+		return (Boolean) createAnExhibit.getValue();
 	}
 
 	public IObservableValue getSelectedTarget() {

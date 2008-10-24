@@ -58,8 +58,10 @@ class ExhibitsStrategy implements SelectionStrategy {
 				.getFirstElement();
 
 //		logger.debug("Sending Animal selection event");
-		selectionController.sendSelectionToChannel(new StructuredSelection(
+		if(exhibit!=null && exhibit.getAnimal()!=null){
+			selectionController.sendSelectionToChannel(new StructuredSelection(
 				exhibit.getAnimal()), getEventAdminSourceName());
+		}
 
 		exhibitsView.setSelectionOnOutlinePage(selection);
 	}
@@ -90,8 +92,10 @@ class ExhibitsStrategy implements SelectionStrategy {
 				viewer.setSelection(new StructuredSelection(exhibit));
 				
 //				logger.debug("Sending Animal selection event");
-				selectionController.sendSelectionToChannel(new StructuredSelection(
+				if(exhibit.getAnimal()!=null){
+					selectionController.sendSelectionToChannel(new StructuredSelection(
 						exhibit.getAnimal()), getEventAdminSourceName());
+				}
 
 				return exhibit;
 			}
