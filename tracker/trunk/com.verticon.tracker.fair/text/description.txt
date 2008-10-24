@@ -17,8 +17,8 @@ Package fair <http://www.verticon.com/ns/tracker/fair/0.1.0>
     Operation exhibits() : Exhibit<<0..*>>
 
   Class Exhibit
-    Attribute name : EString<<1..1>>
-    Attribute number : EInt
+    Attribute /name : EString<<1..1>>
+    Attribute /number : EInt
     Attribute comments : EString
     Reference animal : Animal<<1..1>>
     Reference exhibitor : Person<<1..1>>

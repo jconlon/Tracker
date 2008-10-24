@@ -35,8 +35,10 @@
       <genOperations ecoreOperation="fair.ecore#//Fair/exhibits"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//Exhibit">
-      <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/name"/>
-      <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/number">
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Details"
+          propertyDescription="Name of Exhibitor" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/name"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Details"
+          propertyDescription="Exhibitor Number" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/number">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/comments"/>

@@ -21,6 +21,8 @@ import com.verticon.tracker.fair.Person;
  * <p>
  * The following features are tested:
  * <ul>
+ *   <li>{@link com.verticon.tracker.fair.Exhibit#getName() <em>Name</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Exhibit#getNumber() <em>Number</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Exhibit#getSalesOrder() <em>Sales Order</em>}</li>
  * </ul>
  * </p>
@@ -105,6 +107,44 @@ public class ExhibitTest extends TestCase {
 	}
 
 	/**
+	 * Tests the '{@link com.verticon.tracker.fair.Exhibit#getName() <em>Name</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.fair.Exhibit#getName()
+	 * @generated NOT
+	 */
+	public void testGetName() {
+		Exhibit exhibit = getFixture();
+		assertNotNull(exhibit);
+		assertEquals(0, exhibit.getSalesOrder());
+		
+		Person person = FairFactory.eINSTANCE.createPerson();
+		person.setFirstName("Jack");
+		person.setLastName("Condor");
+		exhibit.setExhibitor(person);
+		assertEquals("Jack Condor", exhibit.getName());
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.fair.Exhibit#getNumber() <em>Number</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.fair.Exhibit#getNumber()
+	 * @generated NOT
+	 */
+	public void testGetNumber() {
+		Exhibit exhibit = getFixture();
+		assertNotNull(exhibit);
+		assertEquals(0, exhibit.getSalesOrder());
+		
+		Person person = FairFactory.eINSTANCE.createPerson();
+		person.setExhibitorNumber(5);
+		exhibit.setExhibitor(person);
+		assertEquals(5, exhibit.getNumber());
+		
+	}
+
+	/**
 	 * Tests the '{@link com.verticon.tracker.fair.Exhibit#getSalesOrder() <em>Sales Order</em>}' feature getter.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -129,10 +169,6 @@ public class ExhibitTest extends TestCase {
 		assertEquals(5, exhibit.getSalesOrder());
 		exhibit.setInAuction(false);
 		assertEquals(0, exhibit.getSalesOrder());
-		
-		
-		
-		
 		
 	}
 

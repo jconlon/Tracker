@@ -60,16 +60,6 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	protected static final String NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getNumber() <em>Number</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,16 +68,6 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	 * @ordered
 	 */
 	protected static final int NUMBER_EDEFAULT = 0;
-
-	/**
-	 * The cached value of the '{@link #getNumber() <em>Number</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNumber()
-	 * @generated
-	 * @ordered
-	 */
-	protected int number = NUMBER_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getComments() <em>Comments</em>}' attribute.
@@ -201,43 +181,26 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getName() {
-		return name;
+		if (getExhibitor()==null){
+			return "";
+		}
+		
+		return getExhibitor().getFirstName()+' '+getExhibitor().getLastName();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.EXHIBIT__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public int getNumber() {
-		return number;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setNumber(int newNumber) {
-		int oldNumber = number;
-		number = newNumber;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.EXHIBIT__NUMBER, oldNumber, number));
+		if (getExhibitor()==null){
+			return 0;
+		}
+		return getExhibitor().getExhibitorNumber();
 	}
 
 	/**
@@ -521,12 +484,6 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FairPackage.EXHIBIT__NAME:
-				setName((String)newValue);
-				return;
-			case FairPackage.EXHIBIT__NUMBER:
-				setNumber(((Integer)newValue).intValue());
-				return;
 			case FairPackage.EXHIBIT__COMMENTS:
 				setComments((String)newValue);
 				return;
@@ -557,12 +514,6 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FairPackage.EXHIBIT__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case FairPackage.EXHIBIT__NUMBER:
-				setNumber(NUMBER_EDEFAULT);
-				return;
 			case FairPackage.EXHIBIT__COMMENTS:
 				setComments(COMMENTS_EDEFAULT);
 				return;
@@ -594,9 +545,9 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case FairPackage.EXHIBIT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+				return NAME_EDEFAULT == null ? getName() != null : !NAME_EDEFAULT.equals(getName());
 			case FairPackage.EXHIBIT__NUMBER:
-				return number != NUMBER_EDEFAULT;
+				return getNumber() != NUMBER_EDEFAULT;
 			case FairPackage.EXHIBIT__COMMENTS:
 				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
 			case FairPackage.EXHIBIT__ANIMAL:
@@ -625,11 +576,7 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", number: ");
-		result.append(number);
-		result.append(", comments: ");
+		result.append(" (comments: ");
 		result.append(comments);
 		result.append(", inAuction: ");
 		result.append(inAuction);

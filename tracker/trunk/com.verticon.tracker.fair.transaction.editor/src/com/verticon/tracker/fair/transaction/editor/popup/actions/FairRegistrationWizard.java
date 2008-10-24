@@ -49,7 +49,7 @@ public class FairRegistrationWizard extends Wizard  {
 
 	private EditingDomain editingDomain;
 	private MovedIn firstMovedInEvent;
-	private Collection<Animal> animalsToRegister = new ArrayList<Animal>();
+	private final Collection<Animal> animalsToRegister = new ArrayList<Animal>();
     
 	private FairRegistrationSelectPersonWizardPage selectPersonPage = null;
 	private BaseConfigureExhibitWizardPage selectLotPage = null;
@@ -78,7 +78,7 @@ public class FairRegistrationWizard extends Wizard  {
 		this.workbenchWindow=workbenchWindow;
 		firstMovedInEvent=(MovedIn)selection.getFirstElement();
 		if (selection instanceof IStructuredSelection) {
-			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+			IStructuredSelection structuredSelection = selection;
 			
 			List<?> events = structuredSelection.toList();
 			for (Object event : events) {
@@ -151,7 +151,7 @@ public class FairRegistrationWizard extends Wizard  {
 			 exhibit = FairFactory.eINSTANCE.createExhibit();
 			 exhibit.setAnimal(animal);
 			 exhibit.setExhibitor(getSelectedPerson());
-			 exhibit.setName(getSelectedPerson().getLastName()+'-'+animal.getId());
+//			 exhibit.setName(getSelectedPerson().getLastName()+'-'+animal.getId());
 			 exhibitsToAdd.add(exhibit);
 		}
 		
