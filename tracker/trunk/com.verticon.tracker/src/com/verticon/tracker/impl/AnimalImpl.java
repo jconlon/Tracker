@@ -403,15 +403,15 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 */
 	public abstract String getBreed();
 
-	//
-	// /**
-	// * <!-- begin-user-doc -->
-	// * <!-- end-user-doc -->
-	// * @generated NOT
-	// */
-	// public Age getAge() {
-	// return birthDate==null?null:new Age(birthDate);
-	// }
+	
+	 /**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	 public Age getAge() {
+		 return birthDate==null?null:new Age(birthDate);
+	 }
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -783,16 +783,6 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return lastWeighIn;
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Age getAge() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
 
 	/**
 	 * <!-- begin-user-doc -->
