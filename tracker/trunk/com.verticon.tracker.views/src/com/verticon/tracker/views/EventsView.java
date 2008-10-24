@@ -56,11 +56,13 @@ public class EventsView extends TrackerView implements ItemsView{
 		// Instantiates the wizard container with the wizard and opens it
 		WizardDialog dialog = new WizardDialog(getSite().getShell(), wizard);
 		dialog.create();
-		dialog.open();
+		int results = dialog.open();
 		wizard.dispose();
-		for (Object object : wizard.getResults()) {
-			return object;
+		if(results == WizardDialog.OK){
+			for (Object object : wizard.getResults()) {
+				return object;
 
+			}
 		}
 		return null;
 	}

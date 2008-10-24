@@ -31,6 +31,11 @@ class EventsStrategy implements SelectionStrategy {
 
 	public void handleManualTableViewerSelection(ISelection selection,
 			SelectionController selectionController) {
+
+		if( ((StructuredSelection) selection)
+				.getFirstElement()==null){
+			return;
+		}
 //		logger.debug("Firing selection event");
 		selectionController.sendSelectionToChannel(
 				convertEventSelectionToAnimalSelection(selection),
