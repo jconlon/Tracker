@@ -70,7 +70,7 @@ import com.verticon.tracker.util.AbstractModelObject;
  * @author jconlon
  * 
  */
-public abstract class TrackerView extends ViewPart {
+public abstract class TrackerView extends ViewPart implements ItemsView{
 
 	/**
 	 * This field is referenced by subclasses.
@@ -140,11 +140,11 @@ public abstract class TrackerView extends ViewPart {
 	 */
 	protected abstract void setUpTable(AdapterFactory adapterFactory);
 
-	/**
-	 * Override point for subclasses to obtain the necessary input to feed the
-	 * tableViewer.
-	 */
-	protected abstract void handleViewerInputChange();
+//	/**
+//	 * Override point for subclasses to obtain the necessary input to feed the
+//	 * tableViewer.
+//	 */
+//	protected abstract void handleViewerInputChange();
 
 	/**
 	 * Subclasses must override this to identify the name of the item in the
@@ -248,6 +248,11 @@ public abstract class TrackerView extends ViewPart {
 			item.dispose();
 		}
 		fillPropertiesFolder(selection, adapterFactory, detailFormTabFolder);
+	}
+	
+	public void enableMenus(boolean enabled){
+		this.deleteAction.setEnabled(enabled);
+		this.addAction.setEnabled(enabled);
 	}
 
 	/**
@@ -426,7 +431,7 @@ public abstract class TrackerView extends ViewPart {
 	}
 
 	protected void makeActions() {
-
+		
 		// Show Advanced Properties
 		filterAction = new Action() {
 			@Override

@@ -144,24 +144,16 @@ public class PeopleView extends TrackerView implements ItemsView{
 	 * 
 	 * @see #setUpTable(AdapterFactory)
 	 */
-	@Override
-	protected void handleViewerInputChange() {
+	public void handleViewerInputChange() {
 		if (tableInput != null) {
 			tableInput.dispose();
 			tableInput = null;
 		}
 		tableInput = getObservableList();
 		masterFilteredTable.getViewer().setInput(tableInput);
-
+		enableMenus(tableInput!=null);
 	}
 
-//	/**
-//	 * @param fair
-//	 */
-//	private void getObservableList(Fair fair) {
-//		tableInput = EMFObservables.observeList(fair,
-//				FairPackage.Literals.FAIR__PEOPLE);
-//	}
 
 	private IObservableList getObservableList() {
 		// There may be no editors return a null if so

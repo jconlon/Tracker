@@ -93,16 +93,13 @@ public class EventsView extends TrackerView implements ItemsView{
 	 * Override point for subclasses to obtain the necessary input to feed the
 	 * tableViewer.
 	 */
-	@Override
-	protected void handleViewerInputChange() {
+	public void handleViewerInputChange() {
 		Premises premises = getPremises(eventSelectionController.getEditingDomain());
 		TableViewer viewer = masterFilteredTable.getViewer();
 		viewer.setInput(premises);
+		enableMenus(premises!=null);
 	}
 	
-	public void handleViewerInputChange2() {
-		handleViewerInputChange();
-	}
 
 	/**
 	 * Override super to add an AnimalSelectionController

@@ -116,8 +116,9 @@ public class SelectionController implements ISelectionController {
 				Utils.unregisterFilter(oldActiveEditorPart, itemsView);
 			}
 			Utils.registerFilter(activeEditorPart, itemsView);
-			itemsView.handleViewerInputChange2();
+			itemsView.handleViewerInputChange();
 		}
+		
 	}
 
 	
@@ -171,7 +172,7 @@ public class SelectionController implements ISelectionController {
 		if (activeEditorPart == partRef.getPart(false)) {
 			Utils.unregisterFilter(activeEditorPart, itemsView);
 			activeEditorPart = null;
-			itemsView.handleViewerInputChange2();
+			itemsView.handleViewerInputChange();
 		}
 	}
 	
@@ -182,7 +183,7 @@ public class SelectionController implements ISelectionController {
 		IWorkbenchPart part = partRef.getPart(false);
 		 if(Utils.isTrackerFamilyEditor(part)){
 			 handleEditorChange( part);
-			 itemsView.handleViewerInputChange2();
+			 itemsView.handleViewerInputChange();
 		 }
 	}
 

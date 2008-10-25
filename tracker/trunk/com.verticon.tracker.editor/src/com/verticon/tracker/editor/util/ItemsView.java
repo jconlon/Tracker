@@ -12,11 +12,13 @@ import org.eclipse.ui.IWorkbenchPartSite;
  */
 public interface ItemsView {
 
-	void handleViewerInputChange2();
+	void handleViewerInputChange();
 	
 	void refresh(ISelection selection);
 	
 	FilteredTable getMasterFilteredTable();
 	
 	IWorkbenchPartSite getSite();
+	
+	void enableMenus(boolean enable);
 }
