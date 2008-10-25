@@ -25,11 +25,10 @@ import at.bestsolution.dataforms.util.viewers.GenericObservableMapCellLabelProvi
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.util.ISelectionController;
-import com.verticon.tracker.editor.util.ItemsView;
 import com.verticon.tracker.editor.util.SelectionController;
 import com.verticon.tracker.editor.util.TrackerView;
 
-public class AnimalsView extends TrackerView implements ItemsView {
+public class AnimalsView extends TrackerView  {
 
 	private static final String NAME_OF_ITEM_IN_MASTER = "Animal";
 
@@ -40,9 +39,6 @@ public class AnimalsView extends TrackerView implements ItemsView {
 	 */
 	private IObservableList tableInput;
 
-	public void handleViewerInputChange2() {
-		handleViewerInputChange();
-	}
 	
 	/**
 	 * Override super to add an AnimalSelectionController
@@ -135,8 +131,7 @@ public class AnimalsView extends TrackerView implements ItemsView {
 	 * 
 	 * @see #setUpTable(AdapterFactory)
 	 */
-	@Override
-	protected void handleViewerInputChange() {
+	public void handleViewerInputChange() {
 		if (tableInput != null) {
 			tableInput.dispose();
 			tableInput = null;
@@ -144,6 +139,7 @@ public class AnimalsView extends TrackerView implements ItemsView {
 
 		tableInput = getObservableList();
 		masterFilteredTable.getViewer().setInput(tableInput);
+		enableMenus(tableInput!=null);
 	}
 
 
