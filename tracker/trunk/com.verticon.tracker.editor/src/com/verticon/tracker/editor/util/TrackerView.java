@@ -173,7 +173,18 @@ public abstract class TrackerView extends ViewPart {
 	}
 
 	/**
-	 * Primary entry point for the view to create the UI components
+	 * Primary entry point for the view to create the UI components.
+	 * Subclasses of this abstract class will have their 
+	 * <ul>
+	 * <li>{@link #createTableViewer()}</li>
+	 * <li>{@link #makeActions()}</li>
+	 * <li>{@link #createFormFolder()}</li>
+	 * <li>{@link #hookContextMenu()}</li>
+	 * <li>{@link #contributeToActionBars()}
+	 * </ul>
+	 * methods called. 
+	 * 
+	 * 
 	 */
 	@Override
 	public void createPartControl(Composite base) {

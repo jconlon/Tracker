@@ -33,7 +33,7 @@ public class AnimalsView extends TrackerView implements ItemsView {
 
 	private static final String NAME_OF_ITEM_IN_MASTER = "Animal";
 
-	private ISelectionController animalSelectionController;
+	private ISelectionController selectionController;
 
 	/**
 	 * Reference to Observable for table Input
@@ -50,12 +50,15 @@ public class AnimalsView extends TrackerView implements ItemsView {
 	@Override
 	public void createPartControl(Composite base) {
 		super.createPartControl(base);
-		animalSelectionController = new SelectionController(
+		
+		selectionController = new SelectionController(
 				this, new AnimalsStrategy(this));
-		animalSelectionController.open();
-		getSite().getPage().addSelectionListener(animalSelectionController);
-		getSite().getPage().addPartListener(animalSelectionController);
-		tableViewer.addSelectionChangedListener(animalSelectionController);
+		selectionController.open();
+		getSite().getPage().addSelectionListener(selectionController);
+		getSite().getPage().addPartListener(selectionController);
+		tableViewer.addSelectionChangedListener(selectionController);
+		//Fill view if there is an activeEditorPart.
+		handleViewerInputChange();
 	}
 
 	/**
@@ -64,10 +67,10 @@ public class AnimalsView extends TrackerView implements ItemsView {
 	 */
 	@Override
 	public void dispose() {
-		tableViewer.removeSelectionChangedListener(animalSelectionController);
-		animalSelectionController.close();
-		getSite().getPage().removePartListener(animalSelectionController);
-		getSite().getPage().removeSelectionListener(animalSelectionController);
+		tableViewer.removeSelectionChangedListener(selectionController);
+		selectionController.close();
+		getSite().getPage().removePartListener(selectionController);
+		getSite().getPage().removeSelectionListener(selectionController);
 		super.dispose();
 	}
 	
@@ -91,7 +94,7 @@ public class AnimalsView extends TrackerView implements ItemsView {
 	@Override
 	protected Object addAnItem() {
 		// Instantiates and initializes the wizard
-		Premises premises = getPremises(animalSelectionController
+		Premises premises = getPremises(selectionController
 				.getEditingDomain());
 		AddAnimalWizard wizard = new AddAnimalWizard();
 		wizard.init(getSite().getWorkbenchWindow().getWorkbench()
@@ -341,10 +344,10 @@ public class AnimalsView extends TrackerView implements ItemsView {
 	 */
 	private IObservableList getObservableList() {
 		// There may be no editors return a null if so
-		if (animalSelectionController.getEditingDomain() == null) {
+		if (selectionController.getEditingDomain() == null) {
 			return null;
 		}
-		Premises premises = getPremises(animalSelectionController
+		Premises premises = getPremises(selectionController
 				.getEditingDomain());
 		if (premises == null) {
 			return null;

@@ -1,6 +1,7 @@
 package com.verticon.tracker.editor.util;
 
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.ui.IWorkbenchPartSite;
 
 
 /**
@@ -16,4 +17,6 @@ public interface ItemsView {
 	void refresh(ISelection selection);
 	
 	FilteredTable getMasterFilteredTable();
+	
+	IWorkbenchPartSite getSite();
 }

@@ -116,6 +116,7 @@ public class EventsView extends TrackerView implements ItemsView{
 		getSite().getPage().addSelectionListener(eventSelectionController);
 		getSite().getPage().addPartListener(eventSelectionController);
 		tableViewer.addSelectionChangedListener(eventSelectionController);
+		handleViewerInputChange();
 	}
 
 	/**

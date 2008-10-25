@@ -12,10 +12,10 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IPartListener2;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartReference;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.event.Event;
@@ -93,36 +93,31 @@ public class SelectionController implements ISelectionController {
 	 *            the current selection.
 	 */
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		IWorkbenchWindow workbenchWindow = part.getSite().getWorkbenchWindow();
-		
-		if (Utils.isNotTrackerStructuredSelection(selection, workbenchWindow)) {
+		if (Utils.isNotTrackerStructuredSelection(selection, part)) {
 			return;
 		}
 		
-		
-		IEditorPart oldActiveEditorPart = activeEditorPart;
-
-		activeEditorPart = workbenchWindow.getActivePage().getActiveEditor();
-
-		if (activeEditorPart == oldActiveEditorPart) {
-//			logger.debug(
-//					"Workbench selectionChanged detected on old editor {}",
-//					oldActiveEditorPart);
-			handleWorkbenchAndEventAdminSelection(selection, null);
-			return;
-		}
-		
-		if (oldActiveEditorPart != null) {
-			Utils.unregisterFilter(oldActiveEditorPart, itemsView);
-		}
-
-		Utils.registerFilter(activeEditorPart, itemsView);
-
-//		logger.debug("Workbench selectionChanged detected on new editor {}",
-//				activeEditorPart);
-		itemsView.handleViewerInputChange2();
+		handleEditorChange(part);
 		handleWorkbenchAndEventAdminSelection(selection, null);
-		return;
+	
+	}
+
+	/**
+	 * @param part
+	 */
+	private void handleEditorChange(IWorkbenchPart part) {
+		IEditorPart oldActiveEditorPart = activeEditorPart;
+		activeEditorPart = (IEditorPart)part;
+		
+		//The old editor and a new editors are different
+		if (activeEditorPart != oldActiveEditorPart) {
+			//There is an old editor - unregister it
+			if (oldActiveEditorPart != null) {
+				Utils.unregisterFilter(oldActiveEditorPart, itemsView);
+			}
+			Utils.registerFilter(activeEditorPart, itemsView);
+			itemsView.handleViewerInputChange2();
+		}
 	}
 
 	
@@ -142,6 +137,9 @@ public class SelectionController implements ISelectionController {
 	}
 
 	public EditingDomain getEditingDomain() {
+		if(activeEditorPart == null){
+			activeEditorPart = itemsView.getSite().getPage().getActiveEditor();
+		}
 		if (activeEditorPart instanceof IEditingDomainProvider) {
 			return ((IEditingDomainProvider) activeEditorPart)
 					.getEditingDomain();
@@ -166,16 +164,26 @@ public class SelectionController implements ISelectionController {
 		itemsView.refresh(event.getSelection());
 	}
 
+	/**
+	 * Implements {@link IPartListener2} to empty view if the activeEditorPart is closed.
+	 */
 	public void partClosed(IWorkbenchPartReference partRef) {
 		if (activeEditorPart == partRef.getPart(false)) {
 			Utils.unregisterFilter(activeEditorPart, itemsView);
 			activeEditorPart = null;
-			// System.out.println("part closed " + partRef.getPart(false));
 			itemsView.handleViewerInputChange2();
 		}
 	}
 	
+	/**
+	 * Implements {@link IPartListener2} to fill view if a new TrackerEditor is activated.
+	 */
 	public void partActivated(IWorkbenchPartReference partRef) {
+		IWorkbenchPart part = partRef.getPart(false);
+		 if(Utils.isTrackerFamilyEditor(part)){
+			 handleEditorChange( part);
+			 itemsView.handleViewerInputChange2();
+		 }
 	}
 
 	public void partBroughtToTop(IWorkbenchPartReference partRef) {
@@ -317,20 +325,16 @@ public class SelectionController implements ISelectionController {
 		 * @return
 		 */
 		static boolean isNotTrackerStructuredSelection(ISelection selection,
-				IWorkbenchWindow workbenchWindow) {
-			return !isTrackerFamilyEditor(workbenchWindow) || !isStructureSelectionWithEObject( selection);
+				IWorkbenchPart part) {
+			return !isTrackerFamilyEditor(part) || !isStructureSelectionWithEObject( selection);
 		}
 		
 		/**
 		 * @param workbenchWindow
 		 * @return
 		 */
-		 static boolean isTrackerFamilyEditor(IWorkbenchWindow workbenchWindow) {
-			if(workbenchWindow ==null || workbenchWindow.getActivePage()==null  || 
-					workbenchWindow.getActivePage().getActiveEditor() == null){
-				return false;
-			}
-			return workbenchWindow.getActivePage().getActiveEditor() instanceof ITrackerViewRegister;
+		 static boolean isTrackerFamilyEditor(IWorkbenchPart part) {
+			return part instanceof ITrackerViewRegister;
 		}
 
 		 static boolean isStructureSelectionWithEObject(ISelection selection){

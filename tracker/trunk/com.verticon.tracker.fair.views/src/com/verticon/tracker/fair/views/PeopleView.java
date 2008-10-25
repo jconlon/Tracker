@@ -75,6 +75,7 @@ public class PeopleView extends TrackerView implements ItemsView{
 		getSite().getPage().addSelectionListener(exhibitsSelectionController);
 		getSite().getPage().addPartListener(exhibitsSelectionController);
 		tableViewer.addSelectionChangedListener(exhibitsSelectionController);
+		handleViewerInputChange();
 	}
 	
 	/**
