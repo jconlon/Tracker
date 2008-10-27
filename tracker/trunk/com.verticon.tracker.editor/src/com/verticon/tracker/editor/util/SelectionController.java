@@ -21,8 +21,6 @@ import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventConstants;
 import org.osgi.service.event.EventHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**
@@ -35,11 +33,11 @@ import org.slf4j.LoggerFactory;
  */
 public class SelectionController implements ISelectionController {
 
-	/**
-	 * slf4j Logger
-	 */
-	final Logger logger = LoggerFactory
-			.getLogger(SelectionController.class);
+//	/**
+//	 * slf4j Logger
+//	 */
+//	final Logger logger = LoggerFactory
+//			.getLogger(SelectionController.class);
 	
 	private IEditorPart activeEditorPart;
 	private IEditorPart getActiveEditorPart() {
@@ -59,7 +57,6 @@ public class SelectionController implements ISelectionController {
 			return;
 		}
 		
-		
 		//There is a new editorPart
 		IEditorPart oldActiveEditorPart = activeEditorPart;
 		activeEditorPart = newActiveEditorPart;
@@ -68,14 +65,14 @@ public class SelectionController implements ISelectionController {
 		if (!activeEditorPart.equals(oldActiveEditorPart)) {
 			//There is an old editor - unregister it
 			if (oldActiveEditorPart != null) {
-				System.out.println("Unregistering "+itemsView);
+				
 				Utils.unregisterFilter(oldActiveEditorPart, itemsView);
 			}
-			logger.debug("Registering {} on activeEditor {}", itemsView, activeEditorPart);
+//			logger.debug("Registering {} on activeEditor {}", itemsView, activeEditorPart);
 			Utils.registerFilter(activeEditorPart, itemsView);
 			
 		}else{
-			logger.debug("Ignoring {} on activeEditor {}", itemsView, activeEditorPart);
+//			logger.debug("Ignoring {} on activeEditor {}", itemsView, activeEditorPart);
 		}
 		
 	}
