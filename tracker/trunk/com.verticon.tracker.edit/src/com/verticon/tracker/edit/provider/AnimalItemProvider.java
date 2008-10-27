@@ -345,7 +345,7 @@ public class AnimalItemProvider
 	             if (otherAnimal == animal){
 	               i.remove();//remove self
 	             }else if(otherAnimal==null){
-	            	 i.remove();//remove nulls
+	            	 //Ticket 270 there has to be a null so this value can be unset
 	             }else if (otherAnimal.getSex()==null){
 	            	 i.remove();//remove unspecified
 	             }else if (!Sex.F_LITERAL.equals( otherAnimal.getSex())){
@@ -393,10 +393,10 @@ public class AnimalItemProvider
 	           for (Iterator<?> i = result.iterator(); i.hasNext(); )
 	           {
 	        	 Animal otherAnimal = (Animal)i.next();
-	             if (otherAnimal == animal){
-	               i.remove();//remove self
+	             if (otherAnimal == animal){//remove self
+	               i.remove();
 	             }else if(otherAnimal==null){
-	            	 i.remove();//remove nulls
+	            	//Ticket 270 there has to be a null so this value can be unset
 	             }else if (otherAnimal.getSex()==null){
 	            	 i.remove();//remove unspecified
 	             }else if (!Sex.M_LITERAL.equals( otherAnimal.getSex())){
