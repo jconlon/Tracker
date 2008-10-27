@@ -14,8 +14,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -28,11 +26,11 @@ import com.verticon.tracker.Tag;
  */
 public class SelectionViewerFilter extends ViewerFilterAction {
 	
-	/**
-	 * slf4j Logger
-	 */
-	private final Logger logger = LoggerFactory
-			.getLogger(SelectionViewerFilter.class);
+//	/**
+//	 * slf4j Logger
+//	 */
+//	private final Logger logger = LoggerFactory
+//			.getLogger(SelectionViewerFilter.class);
 	
 	private static final String TARGETING_OFF = "Target Selections";
 	private static final String TARGETING_ON = "Target Selections";
@@ -86,8 +84,8 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 			if( targetedAnimals.contains(element)){
 				return true;
 			}
-			Animal animal = (Animal)element;
-			logger.debug("Filtering {} with targeted animals ={} ",animal, targetedAnimals.size());
+//			Animal animal = (Animal)element;
+//			logger.debug("Filtering {} with targeted animals ={} ",element, targetedAnimals.size());
 			
 			return false;
 		}
@@ -98,8 +96,8 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 				if( targetedEvents.contains(element)){
 					return true;
 				}
-				Event event = (Event)element;
-				logger.debug("Filtering {} with targeted events ={} ",event, targetedEvents.size());
+//				Event event = (Event)element;
+//				logger.debug("Filtering {} with targeted events ={} ",element, targetedEvents.size());
 				return false;
 			}
 			
@@ -163,7 +161,7 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 	 * parents of selected Events, and selected Events.
 	 */
 	protected void computeTargets(ISelection selection) {
-		logger.debug("computing targets ");
+//		logger.debug("computing targets ");
 		 
 		clearTargets();
 		if (selection instanceof IStructuredSelection) {
@@ -184,8 +182,8 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 				}
 			}
 		}
-		logger.debug("Targeted animals = {}",targetedAnimals.size());
-		logger.debug("Targeted events = {}",targetedEvents.size());
+//		logger.debug("Targeted animals = {}",targetedAnimals.size());
+//		logger.debug("Targeted events = {}",targetedEvents.size());
 	}
 
 	/**

@@ -21,6 +21,8 @@ import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventConstants;
 import org.osgi.service.event.EventHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -33,13 +35,52 @@ import org.osgi.service.event.EventHandler;
  */
 public class SelectionController implements ISelectionController {
 
-//	/**
-//	 * slf4j Logger
-//	 */
-//	final Logger logger = LoggerFactory
-//			.getLogger(SelectionController.class);
+	/**
+	 * slf4j Logger
+	 */
+	final Logger logger = LoggerFactory
+			.getLogger(SelectionController.class);
 	
 	private IEditorPart activeEditorPart;
+	private IEditorPart getActiveEditorPart() {
+		return activeEditorPart;
+	}
+
+	private void setActiveEditorPart(IEditorPart newActiveEditorPart) {
+		//Both new and old editors are null. 
+		if(activeEditorPart == null&& newActiveEditorPart==null){
+			return;
+		}
+		
+		//New editor is null, but there is an old one.
+		if(activeEditorPart!=null && newActiveEditorPart==null){
+			Utils.unregisterFilter(activeEditorPart, itemsView);
+			activeEditorPart = null;
+			return;
+		}
+		
+		
+		//There is a new editorPart
+		IEditorPart oldActiveEditorPart = activeEditorPart;
+		activeEditorPart = newActiveEditorPart;
+		
+		//The old editor and a new editors are different
+		if (!activeEditorPart.equals(oldActiveEditorPart)) {
+			//There is an old editor - unregister it
+			if (oldActiveEditorPart != null) {
+				System.out.println("Unregistering "+itemsView);
+				Utils.unregisterFilter(oldActiveEditorPart, itemsView);
+			}
+			logger.debug("Registering {} on activeEditor {}", itemsView, activeEditorPart);
+			Utils.registerFilter(activeEditorPart, itemsView);
+			
+		}else{
+			logger.debug("Ignoring {} on activeEditor {}", itemsView, activeEditorPart);
+		}
+		
+	}
+
+
 	protected final ItemsView itemsView;
 	private final SelectionStrategy strategy;
 	
@@ -94,6 +135,10 @@ public class SelectionController implements ISelectionController {
 	 */
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		if (Utils.isNotTrackerStructuredSelection(selection, part)) {
+//			if (activeEditorPart != null) {
+//				Utils.unregisterFilter(activeEditorPart, itemsView);
+//				activeEditorPart=null;
+//			}
 			return;
 		}
 		
@@ -106,18 +151,8 @@ public class SelectionController implements ISelectionController {
 	 * @param part
 	 */
 	private void handleEditorChange(IWorkbenchPart part) {
-		IEditorPart oldActiveEditorPart = activeEditorPart;
-		activeEditorPart = (IEditorPart)part;
-		
-		//The old editor and a new editors are different
-		if (activeEditorPart != oldActiveEditorPart) {
-			//There is an old editor - unregister it
-			if (oldActiveEditorPart != null) {
-				Utils.unregisterFilter(oldActiveEditorPart, itemsView);
-			}
-			Utils.registerFilter(activeEditorPart, itemsView);
-			itemsView.handleViewerInputChange();
-		}
+		setActiveEditorPart((IEditorPart)part);
+		itemsView.handleViewerInputChange();
 		
 	}
 
@@ -138,11 +173,12 @@ public class SelectionController implements ISelectionController {
 	}
 
 	public EditingDomain getEditingDomain() {
-		if(activeEditorPart == null){
-			activeEditorPart = itemsView.getSite().getPage().getActiveEditor();
+		if(getActiveEditorPart() == null){
+			setActiveEditorPart(itemsView.getSite().getPage().getActiveEditor());
 		}
-		if (activeEditorPart instanceof IEditingDomainProvider) {
-			return ((IEditingDomainProvider) activeEditorPart)
+		
+		if (getActiveEditorPart() instanceof IEditingDomainProvider) {
+			return ((IEditingDomainProvider) getActiveEditorPart())
 					.getEditingDomain();
 		}
 		return null;
@@ -169,9 +205,9 @@ public class SelectionController implements ISelectionController {
 	 * Implements {@link IPartListener2} to empty view if the activeEditorPart is closed.
 	 */
 	public void partClosed(IWorkbenchPartReference partRef) {
-		if (activeEditorPart == partRef.getPart(false)) {
-			Utils.unregisterFilter(activeEditorPart, itemsView);
-			activeEditorPart = null;
+		if (getActiveEditorPart() == partRef.getPart(false)) {
+			setActiveEditorPart(null);
+			
 			itemsView.handleViewerInputChange();
 		}
 	}
