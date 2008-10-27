@@ -35,7 +35,7 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery {
 	private static final String CONTEXT_TYPE_CANNOT_BE_BLANK = "Context type cannot be blank.";
 	private static final String QUERY_CANNOT_BE_BLANK = "Query cannot be blank.";
 	private static final String OCL_CONDITION_MUST_BE_A_BOOLEAN_EXPRESSION = "OCL condition must be a boolean expression.";
-	private static final String SELECT_THE_TRACKER_ELEMENT = "Please select the Tracker element.";
+	private static final String SELECT_THE_TRACKER_ELEMENT = "Please select an element in a Tracker editor.";
 	private static final String ARGUMENT_CONTEXT_IS_NULL = "Argument 'context' is null";
 	private static final String SELECT_TRACKER_EDITOR_ACTIVE_EDITOR = "Please select a TrackerEditor as the Active Editor.";
 	private static final String UNEXPECTED_EXCEPTION = "An unexpected exception prevented the operation from completing successfully.  See Error Log View for details.";

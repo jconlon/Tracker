@@ -110,6 +110,7 @@ public abstract class AbstractQueryDelegate
 	/**
 	 * Gets all of the {@link EObject}s in the current selection, if any.
 	 */
+	@Override
 	public void selectionChanged(IAction action, final ISelection selection) {
 		selectedEObjects = Collections.emptyList();
 		
@@ -132,12 +133,17 @@ public abstract class AbstractQueryDelegate
 	 * Get the active library editor and its host shell.
 	 */
 	public void setActiveEditor(IAction action, IEditorPart targetEditor) {
-		IQueryDataSetProvider queryDataSetProvider = 
-			(IQueryDataSetProvider)targetEditor.getAdapter(IQueryDataSetProvider.class);
-		
-		if(queryDataSetProvider==null){
+		if(targetEditor==null){
+			return;
+		}
+		Object o = targetEditor.getAdapter(IQueryDataSetProvider.class);
+		if(o==null){
 			throw new UnsupportedOperationException("Please choose an Editor that implements an IQueryDataSetProvider.");
 		}
+		IQueryDataSetProvider queryDataSetProvider = 
+			(IQueryDataSetProvider)o;
+		
+		
 		
 		this.editor = queryDataSetProvider;
 		
