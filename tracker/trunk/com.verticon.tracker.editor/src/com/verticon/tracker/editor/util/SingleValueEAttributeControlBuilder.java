@@ -1,5 +1,6 @@
 package com.verticon.tracker.editor.util;
 
+import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -58,14 +59,18 @@ public class SingleValueEAttributeControlBuilder implements ControlBuilder {
 		UpdateValueStrategy mToTStrategy = UpdateStrategies.INSTANCE
 				.getModelToTargetStrategy(eStructuralFeature);
 		
-		// Certain features cannot be updated
-		dataBindingContext.bindValue(SWTObservables.observeText(text,
+		Binding binding = dataBindingContext.bindValue(SWTObservables.observeText(text,
 				SWT.Modify), EMFEditObservables.observeValue(
 				AdapterFactoryEditingDomain.getEditingDomainFor(eObject),
 				eObject, eStructuralFeature), tToMStrategy, // TargetToModel
 				mToTStrategy);// ModelToTarget
 		
-
+	    
+		if(tToMStrategy instanceof TransactionalAwareUpdateValueStrategy){
+			TransactionalAwareUpdateValueStrategy st = 
+				(TransactionalAwareUpdateValueStrategy)tToMStrategy;
+			st.setBinding(binding);
+		}
 	}
 
 	

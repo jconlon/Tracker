@@ -26,14 +26,17 @@ public class ControlBuilderFactory {
 			} else {
 				return new SingleValueEReferenceControlBuilder();
 			}
-			
+		
+		//Boolean
 		} else if (isSingleValueEAttributeEBoolean(object,
 				itemPropertyDescriptor)) {
 			return new SingleValueEAttributeEBooleanControlBuilder();
-			
+		
+		//ENum
 		} else if (isSingleValueEAttributeEENum(object, itemPropertyDescriptor)) {
 			return new SingleValueEAttributeENumControlBuilder();
-			
+		
+		//SingleValue
 		} else if (isSingleValueEAttribute(object, itemPropertyDescriptor)) {
 			return new SingleValueEAttributeControlBuilder();
 		}	
