@@ -1,5 +1,6 @@
 package com.verticon.tracker.editor.util;
 
+
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.observable.IObserving;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
@@ -9,6 +10,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.util.CheckISO7064Mod37_36;
@@ -22,18 +24,30 @@ import com.verticon.tracker.util.CheckISO7064Mod37_36;
  */
 public class UpdateStrategies {
 
+//	/**
+//	 * slf4j Logger
+//	 */
+//	private final Logger logger = LoggerFactory
+//			.getLogger(UpdateStrategies.class);
+//	
+	
+	/**
+	 * Private constructor prevents instantiation.
+	 */
 	private UpdateStrategies() {
 		super();
 	}
 
+	
 	/**
 	 * The singleton instance
 	 */
 	static UpdateStrategies INSTANCE = new UpdateStrategies();
 
-	private static UpdateValueStrategy eReferenceSingleValueStrategy = new EReferenceSingleValueUpdateValueStrategy();
-	private static UpdateValueStrategy pinUpdateStrategy = new PinUpdateValueStrategy();
-
+	private static final UpdateValueStrategy eReferenceSingleValueStrategy = new EReferenceSingleValueUpdateValueStrategy();
+	private static final UpdateValueStrategy pinUpdateStrategy = new PinUpdateValueStrategy();
+	private static final IValidator doubleValidator = new DoubleValidator();
+	private static final IValidator integerValidator = new IntegerValidator();
 	
 	 /**
 	 * Main entry to class to find a target to model strategy for a given
@@ -58,8 +72,40 @@ public class UpdateStrategies {
 			
 		}
 		
-		return null;// defaultValueStrategy;
+		return new TransactionalAwareUpdateValueStrategy().setAfterGetValidator(getValidator(eStructuralFeature));
 	}
+    
+    private IValidator getValidator(EStructuralFeature eStructuralFeature){
+    	
+    	IValidator validator = null;
+    	
+    	switch (eStructuralFeature.getEType().getClassifierID()) {
+    	case EcorePackage.EDOUBLE_OBJECT:
+		case EcorePackage.EDOUBLE:
+//			logger.debug("Returning double for element {} attribute {} and type {}", 
+//					new Object[] {eStructuralFeature.getContainerClass(),
+//					eStructuralFeature.getName(), eStructuralFeature.getEType().getName()});
+			validator = doubleValidator;
+			break;
+
+		case EcorePackage.EINTEGER_OBJECT:
+		case EcorePackage.EINT:
+//			logger.debug("Returning Integer for element {} attribute {} and type {}", 
+//					new Object[] {eStructuralFeature.getContainerClass(),
+//					eStructuralFeature.getName(), eStructuralFeature.getEType().getName()});
+			validator = integerValidator;
+			break;
+		case EcorePackage.ESTRING:  //Ignore string
+			break;
+		default:
+//			logger.error("Null validation for element {} attribute {} and type {}", 
+//					new Object[] {eStructuralFeature.getContainerClass(),
+//					eStructuralFeature.getName(), eStructuralFeature.getEType().getName()});
+			break;
+		}
+    	
+    	return validator;
+    }
 	
     /**
 	 * Main entry to class to find a model to target strategy for a given
@@ -96,7 +142,7 @@ public class UpdateStrategies {
 
 	}
 	
-	/**
+	  /**
 	 * Strategy for dealing with Pins
 	 * 
 	 * @author jconlon
@@ -146,6 +192,32 @@ public class UpdateStrategies {
 		
 	}
 	
-	
+}
+ 
+final class DoubleValidator implements IValidator {
+	public IStatus validate(Object value) {
+		String s = (String)value;
+		try {
+			Double.parseDouble(s);
+			return ValidationStatus.ok();
+		} catch (NumberFormatException e) {
+			return ValidationStatus
+			.error("Value must be numeric.");
+		}
 
+	}
+}
+
+final class IntegerValidator implements IValidator {
+	public IStatus validate(Object value) {
+		String s = (String)value;
+		try {
+			Integer.parseInt(s);
+			return ValidationStatus.ok();
+		} catch (NumberFormatException e) {
+			return ValidationStatus
+			.error("Value must be numeric.");
+		}
+
+	}
 }
