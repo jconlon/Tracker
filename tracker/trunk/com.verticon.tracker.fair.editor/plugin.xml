@@ -46,11 +46,11 @@
       <wizard
             category="org.eclipse.ui.Basic"
             class="com.verticon.tracker.fair.editor.actions.ImportSpreadSheetWizard"
-            icon="icons/Person.gif"
+            icon="icons/full/elcl16/defaults_ps.gif"
             id="com.verticon.tracker.fair.editor.ImportPeopleWizard"
-            name="Spread Sheet Import">
+            name="Copy a Spreadsheet into a Project Folder">
          <description>
-            Import a spread sheet file from the local file system into the selected project.
+            Copy a spreadsheet file from the local file system into the selected project.
          </description>
       </wizard>
    </extension>
