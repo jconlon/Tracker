@@ -124,9 +124,10 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.presentation.ICustomActionBarContributor;
-import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
+import com.verticon.tracker.editor.presentation.IPremisesProvider;
 import com.verticon.tracker.editor.presentation.ISelectionViewerProvider;
 import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
 import com.verticon.tracker.editor.util.ITrackerViewRegister;
@@ -161,9 +162,9 @@ import com.verticon.tracker.transaction.editor.domain.ResourceLoadedListener;
  * <li>adds SelectionTree expansion and contraction actions to the
  * ActionBarContributor</li>
  * <li>adds Selection linking between Animals and Events Tables</li>
- * <li>adds support for OCL Query View using an IQueryDataSetProvider adapter</li>
+ * <li>adds support for OCL Query View using an IPremisesProvider adapter</li>
  * <li>implements previous three items with interfaces IEventSelectionProvider,
- * IAnimalSelectionProvider, ISelectionViewerProvider, IQueryDataSetProvider</li>
+ * IAnimalSelectionProvider, ISelectionViewerProvider, IPremisesProvider</li>
  * <li>adds support for registering views by implementing ITrackerViewRegister</li>
  * </ul>
  * 
@@ -192,7 +193,7 @@ public class TrackerTransactionEditor
 	/**
 	 * Offers a query on a dataSet. 
 	 */
-	private IQueryDataSetProvider queryDataSetProvider;
+	private IPremisesProvider premisesProvider;
 	
 	/**
 	 * Synchronizes workspace changes with the editing domain.
@@ -1227,7 +1228,7 @@ public class TrackerTransactionEditor
 	 * This is how the framework determines which interfaces we implement.
 	 * <!-- begin-user-doc -->
 	 * Modified to offer IAnimalSelectionProvider, ISelectionViewerProvider, 
-	 * IQueryDataSetProvider
+	 * IPremisesProvider
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -1267,10 +1268,10 @@ public class TrackerTransactionEditor
 			return selectionViewerProvider;
 		}
 
-		//Adds adaptive support for IQueryDataSetProvider 	
-		else if (key.equals(IQueryDataSetProvider.class)){
-			if (queryDataSetProvider==null){
-				queryDataSetProvider = new IQueryDataSetProvider(){
+		//Adds adaptive support for IPremisesProvider 	
+		else if (key.equals(IPremisesProvider.class)){
+			if (premisesProvider==null){
+				premisesProvider = new IPremisesProvider(){
 
 					public EditingDomain getEditingDomain() {
 						return TrackerTransactionEditor.this.getEditingDomain();
@@ -1280,9 +1281,16 @@ public class TrackerTransactionEditor
 						TrackerTransactionEditor.this.setSelectionToViewer(collection);
 					}
 					
+					public Premises getPremises() {
+						Resource modelResource = TrackerTransactionEditor.this.getEditingDomain().getResourceSet()
+						.getResources().get(0);
+						Object rootObject = modelResource.getContents().get(0);
+						return(Premises) rootObject;
+					}
+					
 				};
 			}
-			return queryDataSetProvider;
+			return premisesProvider;
 		}
 		else {
 			return super.getAdapter(key);
