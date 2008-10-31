@@ -113,7 +113,7 @@ public class SelectionController implements ISelectionController {
 	 * the workbench.
 	 * 
 	 * If the part is a
-	 * {@link com.verticon.tracker.editor.presentation.IQueryDataSetProvider}
+	 * {@link com.verticon.tracker.editor.presentation.IPremisesProvider}
 	 * 
 	 * First the {@link TrackerView#handleViewerInputChange()} method will be
 	 * called to load obtain rows for the

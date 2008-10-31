@@ -73,7 +73,11 @@ public class AddTagIdsAnimalAndEventWizard extends Wizard {
 
 		Premises premises;
 		try {
-			premises = ActionUtils.getPremises( editor);
+			IPremisesProvider premisesProvider = (IPremisesProvider)editor.getAdapter(IPremisesProvider.class);
+			if(premisesProvider==null){
+				throw new FileNotFoundException("adaptable parameter does not support a IPremisesProvider");
+			}
+			premises=premisesProvider.getPremises();
 		} catch (FileNotFoundException e1) {
 			selectEventWizardPage.setErrorMessage(e1.getMessage());
 			return false;
