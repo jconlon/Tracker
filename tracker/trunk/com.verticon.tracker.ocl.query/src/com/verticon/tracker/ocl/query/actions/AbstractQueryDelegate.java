@@ -33,7 +33,7 @@ import org.eclipse.ui.IEditorActionDelegate;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.actions.ActionDelegate;
 
-import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
+import com.verticon.tracker.editor.presentation.IPremisesProvider;
 
 
 /**
@@ -52,7 +52,7 @@ public abstract class AbstractQueryDelegate
 	/**
 	 * The active editor
 	 */
-	private IQueryDataSetProvider editor = null;
+	private IPremisesProvider editor = null;
 
 	/**
 	 * Selected {@link EObject}s.
@@ -136,16 +136,16 @@ public abstract class AbstractQueryDelegate
 		if(targetEditor==null){
 			return;
 		}
-		Object o = targetEditor.getAdapter(IQueryDataSetProvider.class);
+		Object o = targetEditor.getAdapter(IPremisesProvider.class);
 		if(o==null){
-			throw new UnsupportedOperationException("Please choose an Editor that implements an IQueryDataSetProvider.");
+			throw new UnsupportedOperationException("Please choose an Editor that implements an IPremisesProvider.");
 		}
-		IQueryDataSetProvider queryDataSetProvider = 
-			(IQueryDataSetProvider)o;
+		IPremisesProvider premisesProvider = 
+			(IPremisesProvider)o;
 		
 		
 		
-		this.editor = queryDataSetProvider;
+		this.editor = premisesProvider;
 		
 		if (targetEditor != null) {
 			this.shell = targetEditor.getSite().getShell();
