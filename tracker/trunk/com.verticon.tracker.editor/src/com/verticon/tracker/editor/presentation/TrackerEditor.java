@@ -77,7 +77,6 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -86,7 +85,6 @@ import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
-import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -100,8 +98,6 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.IActionBars;
@@ -128,6 +124,7 @@ import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
 import com.verticon.tracker.editor.util.ITrackerViewRegister;
@@ -145,7 +142,7 @@ import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelPr
  * <li>adds SelectionTree expansion and contraction actions to the
  * ActionBarContributor</li>
  * <li>implements ISelectionViewerProvider,</li>
- * <li>adds support for OCL Query View using an IQueryDataSetProvider adapter</li>
+ * <li>adds support for OCL Query View using an IPremisesProvider adapter</li>
  * <li>adds support for registering views by implementing ITrackerViewRegister</li>
  * </ul>
  * 
@@ -181,7 +178,7 @@ public class TrackerEditor
 	/**
 	 * Offers a query on a dataSet. 
 	 */
-	private IQueryDataSetProvider queryDataSetProvider;
+	private IPremisesProvider premisesProvider;
 	
 	
 	/**
@@ -790,7 +787,7 @@ public class TrackerEditor
 	}
 
 	/* (non-Javadoc)
-	 * @see com.verticon.tracker.editor.presentation.IQueryDataSetProvider#setSelectionToViewer(java.util.Collection)
+	 * @see com.verticon.tracker.editor.presentation.IPremisesProvider#setSelectionToViewer(java.util.Collection)
 	 */
 	public void setSelectionToViewer(Collection<?> collection) {
 		final Collection<?> theSelection = collection;
@@ -817,7 +814,7 @@ public class TrackerEditor
 	}
 
 	/* (non-Javadoc)
-	 * @see com.verticon.tracker.editor.presentation.IQueryDataSetProvider#getEditingDomain()
+	 * @see com.verticon.tracker.editor.presentation.IPremisesProvider#getEditingDomain()
 	 */
 	public EditingDomain getEditingDomain() {
 		return editingDomain;
@@ -1347,7 +1344,7 @@ public class TrackerEditor
 	 * This is how the framework determines which interfaces we implement.
 	 * <!-- begin-user-doc -->
 	 * Modified to offer IAnimalSelectionProvider, ISelectionViewerProvider, 
-	 * IQueryDataSetProvider
+	 * IPremisesProvider
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -1383,10 +1380,10 @@ public class TrackerEditor
 			return selectionViewerProvider;
 		}
 		
-		//Adds adaptive support for IQueryDataSetProvider 	
-		else if (key.equals(IQueryDataSetProvider.class)){
-			if (queryDataSetProvider==null){
-				queryDataSetProvider = new IQueryDataSetProvider(){
+		//Adds adaptive support for IPremisesProvider 	
+		else if (key.equals(IPremisesProvider.class)){
+			if (premisesProvider==null){
+				premisesProvider = new IPremisesProvider(){
 
 					public EditingDomain getEditingDomain() {
 						return TrackerEditor.this.getEditingDomain();
@@ -1395,10 +1392,17 @@ public class TrackerEditor
 					public void setSelectionToViewer(Collection<?> collection) {
 						TrackerEditor.this.setSelectionToViewer(collection);
 					}
+
+					public Premises getPremises() {
+						Resource modelResource = TrackerEditor.this.getEditingDomain().getResourceSet()
+						.getResources().get(0);
+						Object rootObject = modelResource.getContents().get(0);
+						return(Premises) rootObject;
+					}
 					
 				};
 			}
-			return queryDataSetProvider;
+			return premisesProvider;
 		}
 		else {
 			return super.getAdapter(key);

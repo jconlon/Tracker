@@ -76,7 +76,6 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -85,7 +84,6 @@ import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
-import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -96,13 +94,9 @@ import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Tree;
-import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorActionBarContributor;
 import org.eclipse.ui.IEditorInput;
@@ -127,12 +121,14 @@ import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
-import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
+import com.verticon.tracker.editor.presentation.IPremisesProvider;
 import com.verticon.tracker.editor.presentation.ISelectionViewerProvider;
 import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
 import com.verticon.tracker.editor.util.ITrackerViewRegister;
+import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
 
 /**
@@ -141,7 +137,7 @@ import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
  * editor differs from the generated EMF implementation in the following ways:
  * <ul>
  * 
- * <li>adds support for OCL Query View using an IQueryDataSetProvider adapter</li>
+ * <li>adds support for OCL Query View using an IPremisesProvider adapter</li>
  * <li>adds SelectionTree expansion and contraction actions to the
  * ActionBarContributor</li>
  * <li>implements ISelectionViewerProvider,</li>
@@ -223,7 +219,7 @@ public class FairEditor
 	 * Offers a query on a dataSet. 
 	 * @generated NOT
 	 */
-	private IQueryDataSetProvider queryDataSetProvider;
+	private IPremisesProvider premisesProvider;
 
 	/**
 	 * This is the property sheet page.
@@ -1205,7 +1201,7 @@ public class FairEditor
 	/**
 	 * This is how the framework determines which interfaces we implement.
 	 * <!-- begin-user-doc -->
-	 * Modified to offer a IQueryDataSetProvider to support OCL Queries
+	 * Modified to offer a IPremisesProvider to support OCL Queries
 	 * Modified to offer IAnimalSelectionProvider, ISelectionViewerProvider to 
 	 * support navigation
 	 * <!-- end-user-doc -->
@@ -1243,10 +1239,10 @@ public class FairEditor
 			return selectionViewerProvider;
 		}
 		
-		//Adds adaptive support for IQueryDataSetProvider 	
-		else if (key.equals(IQueryDataSetProvider.class)){
-			if (queryDataSetProvider==null){
-				queryDataSetProvider = new IQueryDataSetProvider(){
+		//Adds adaptive support for IPremisesProvider 	
+		else if (key.equals(IPremisesProvider.class)){
+			if (premisesProvider==null){
+				premisesProvider = new IPremisesProvider(){
 
 					public EditingDomain getEditingDomain() {
 						return FairEditor.this.getEditingDomain();
@@ -1256,9 +1252,16 @@ public class FairEditor
 						FairEditor.this.setSelectionToViewer(collection);
 					}
 					
+					public Premises getPremises() {
+						Resource modelResource = FairEditor.this.getEditingDomain().getResourceSet()
+						.getResources().get(0);
+						Fair fair = (Fair)modelResource.getContents().get(0);
+						return fair.getPremises();
+					}
+					
 				};
 			}
-			return queryDataSetProvider;
+			return premisesProvider;
 		}
 		else {
 			return super.getAdapter(key);

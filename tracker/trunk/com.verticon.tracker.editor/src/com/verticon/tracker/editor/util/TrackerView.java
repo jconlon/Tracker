@@ -63,7 +63,7 @@ import com.verticon.tracker.util.AbstractModelObject;
  * 
  * The Master FilteredTable is populated by a when an
  * {@link org.eclipse.jface.viewers.ISelectionProvider} and
- * {@link com.verticon.tracker.editor.presentation.IQueryDataSetProvider} sends
+ * {@link com.verticon.tracker.editor.presentation.IPremisesProvider} sends
  * a {@link TrackerView#selectionChanged(IWorkbenchPart, ISelection)} event.
  * 
  * 

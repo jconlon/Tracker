@@ -63,7 +63,7 @@ import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
 import com.verticon.tracker.editor.dialogs.WSFileDialog;
 import com.verticon.tracker.editor.preferences.PreferenceConstants;
-import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
+import com.verticon.tracker.editor.presentation.IPremisesProvider;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.util.TrackerUtils;
@@ -95,7 +95,7 @@ public class ActionUtils {
 	 * @return
 	 * @throws FileNotFoundException
 	 */
-	public static final TagsBean getTagsBean(IQueryDataSetProvider editor,
+	public static final TagsBean getTagsBean(IPremisesProvider editor,
 			ISelection selection) throws FileNotFoundException {
 		IResource resource = getSelectedResource(editor, selection);
 		
@@ -135,11 +135,11 @@ public class ActionUtils {
 	 */
 	public static final TagsBean getTagsBean(IAdaptable adaptable,
 			ISelection selection) throws FileNotFoundException {
-		IQueryDataSetProvider queryDataSetProvider = (IQueryDataSetProvider)adaptable.getAdapter(IQueryDataSetProvider.class);
-		if(queryDataSetProvider==null){
-			throw new IllegalArgumentException("adaptable parameter does not support a IQueryDataSetProvider");
+		IPremisesProvider premisesProvider = (IPremisesProvider)adaptable.getAdapter(IPremisesProvider.class);
+		if(premisesProvider==null){
+			throw new IllegalArgumentException("adaptable parameter does not support a IPremisesProvider");
 		}
-		return getTagsBean(queryDataSetProvider,
+		return getTagsBean(premisesProvider,
 				 selection);
 	}
 
@@ -187,24 +187,25 @@ public class ActionUtils {
 		return templateBean;
 	}
 
-	public static final Premises getPremises(IQueryDataSetProvider editor) {
-		Premises premises = null;
-		EditingDomain editingDomain = editor.getEditingDomain();
-		Resource modelResource = editingDomain.getResourceSet()
-				.getResources().get(0);
-		Object rootObject = modelResource.getContents().get(0);
-		premises = (Premises) rootObject;
-		return premises;
-	}
 	
-
-	public static final Premises getPremises(IAdaptable adaptable) throws FileNotFoundException {
-		IQueryDataSetProvider queryDataSetProvider = (IQueryDataSetProvider)adaptable.getAdapter(IQueryDataSetProvider.class);
-		if(queryDataSetProvider==null){
-			throw new FileNotFoundException("adaptable parameter does not support a IQueryDataSetProvider");
-		}
-		return getPremises(queryDataSetProvider);
-	}
+//	public static final Premises getPremises(IPremisesProvider editor) {
+//		Premises premises = null;
+//		EditingDomain editingDomain = editor.getEditingDomain();
+//		Resource modelResource = editingDomain.getResourceSet()
+//				.getResources().get(0);
+//		Object rootObject = modelResource.getContents().get(0);
+//		premises = (Premises) rootObject;
+//		return premises;
+//	}
+	
+//
+//	public static final Premises getPremises(IAdaptable adaptable) throws FileNotFoundException {
+//		IPremisesProvider premisesProvider = (IPremisesProvider)adaptable.getAdapter(IPremisesProvider.class);
+//		if(premisesProvider==null){
+//			throw new FileNotFoundException("adaptable parameter does not support a IPremisesProvider");
+//		}
+//		return premisesProvider.getPremises();
+//	}
 	/**
 	 * Add an animal template to the premises.  Duplicate tags will be ignored.
 	 * 
@@ -216,10 +217,10 @@ public class ActionUtils {
 	public static final void addTagsAndTemplate(Premises premises, TagsBean tagsBean,
 			AnimalTemplateBean animalTemplateBean, IEditorPart editor) {
 		
-		IQueryDataSetProvider queryDataSetProvider = (IQueryDataSetProvider)editor.getAdapter(IQueryDataSetProvider.class);
-		if(queryDataSetProvider==null){
+		IPremisesProvider premisesProvider = (IPremisesProvider)editor.getAdapter(IPremisesProvider.class);
+		if(premisesProvider==null){
 			MessageDialog.openError(editor.getSite().getShell(),
-					ADD_TEMPLATE_TO_PREMISES_OPERATION, "The Active Editor does not support a IQueryDataSetProvider");
+					ADD_TEMPLATE_TO_PREMISES_OPERATION, "The Active Editor does not support a IPremisesProvider");
 			return;
 		}
 		
@@ -244,7 +245,7 @@ public class ActionUtils {
 
 				Collection<Event> eventsToAddTheWhereNotDeferred = filterOutDeferedEvents(animal.activeTag(), potentialEventsToAdd);
 				deferedEvents = deferedEvents + (potentialEventsToAdd.size() - eventsToAddTheWhereNotDeferred.size());
-				command = createAddCommand(animal.activeTag(), queryDataSetProvider.getEditingDomain(),
+				command = createAddCommand(animal.activeTag(), premisesProvider.getEditingDomain(),
 						eventsToAddTheWhereNotDeferred);
 
 				
@@ -253,14 +254,14 @@ public class ActionUtils {
 				command = createAddAnimalToPremiseCommand(
 						premises,
 						animalTemplateBean.getAnimal(tag.toString(),premises),//adds all events as well 
-						queryDataSetProvider.getEditingDomain());
+						premisesProvider.getEditingDomain());
 				
 			}
 			if(command !=null){
 				compoundCommand.append(command);
 			}
 		}
-		queryDataSetProvider.getEditingDomain().getCommandStack().execute(compoundCommand);
+		premisesProvider.getEditingDomain().getCommandStack().execute(compoundCommand);
 		MessageDialog.openInformation(editor.getSite().getShell(),
 				ADD_TEMPLATE_TO_PREMISES_OPERATION, "The "
 						+ animalTemplateBean.getName() + " and " + tagsBean.getName()
@@ -279,10 +280,10 @@ public class ActionUtils {
 	 */
 	public static final void addTemplateToAnimals(Collection<Animal> animals,
 			AnimalTemplateBean templateBean, IEditorPart editor) {
-		IQueryDataSetProvider queryDataSetProvider = (IQueryDataSetProvider)editor.getAdapter(IQueryDataSetProvider.class);
-		if(queryDataSetProvider==null){
+		IPremisesProvider premisesProvider = (IPremisesProvider)editor.getAdapter(IPremisesProvider.class);
+		if(premisesProvider==null){
 			MessageDialog.openError(editor.getSite().getShell(),
-					ADD_TEMPLATE_TO_ANIMALS_OPERATION, "The Active Editor does not support a IQueryDataSetProvider");
+					ADD_TEMPLATE_TO_ANIMALS_OPERATION, "The Active Editor does not support a IPremisesProvider");
 			return;
 		}
 		CompoundCommand compoundCommand = new CompoundCommand();
@@ -306,14 +307,14 @@ public class ActionUtils {
 					animal.activeTag(), potentialEventsToAdd);
 			deferedEvents = deferedEvents + (potentialEventsToAdd.size() - eventsToAddTheWhereNotDeferred.size());
 			
-			command = createAddCommand(animal.activeTag(), queryDataSetProvider.getEditingDomain(),
+			command = createAddCommand(animal.activeTag(), premisesProvider.getEditingDomain(),
 					eventsToAddTheWhereNotDeferred);
 			if(command !=null){
 				compoundCommand.append(command);
 			}
 		}
 
-		queryDataSetProvider.getEditingDomain().getCommandStack().execute(compoundCommand);
+		premisesProvider.getEditingDomain().getCommandStack().execute(compoundCommand);
 		MessageDialog.openInformation(editor.getSite().getShell(),
 				ADD_TEMPLATE_TO_ANIMALS_OPERATION, "The "
 						+ templateBean.getName() + " processed "
@@ -383,7 +384,7 @@ public class ActionUtils {
 		return command;
 	}
 
-	private static IResource getSelectedResource(IQueryDataSetProvider editor,
+	private static IResource getSelectedResource(IPremisesProvider editor,
 			ISelection selection) {
 		IResource resource = null;
 		if (selection instanceof IStructuredSelection) {
@@ -408,7 +409,7 @@ public class ActionUtils {
 		return resource;
 	}
 
-	public static IQueryDataSetProvider getTrackerEditor(IWorkbenchPart targetPart) {
+	public static IPremisesProvider getTrackerEditor(IWorkbenchPart targetPart) {
 		IEditorPart editor = PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 
@@ -419,7 +420,7 @@ public class ActionUtils {
 					"Could not find an active TrackerEditor ");
 			return null;
 		}
-		return (IQueryDataSetProvider) editor;
+		return (IPremisesProvider) editor;
 	}
 
 	public static Event promptUserForEvent(IWorkbenchPart targetPart) {

@@ -34,14 +34,10 @@ public class AddTagIdsAndTemplateWizard extends Wizard {
 	private SelectAnimalDocumentWizardPage selectAnimalDocumentWizardPage;
 
 	public void init(IEditorPart editor,
-			IStructuredSelection selection) {
+			IStructuredSelection selection, Premises premises) {
 		this.selectionOfTagIdResources = selection;
 		this.editor = editor;
-		try {
-			premises = ActionUtils.getPremises( editor);
-		} catch (FileNotFoundException e) {
-		
-		}
+		this.premises = premises;
 	}
 
 	@Override

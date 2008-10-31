@@ -8,15 +8,16 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
 
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.editor.presentation.AddTagIdsAndTemplateWizard;
-import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
-import com.verticon.tracker.editor.util.ActionUtils;
+import com.verticon.tracker.editor.presentation.IPremisesProvider;
 
 /**
  * Action associated with a selection on a Capture *.tags file.
@@ -36,7 +37,7 @@ import com.verticon.tracker.editor.util.ActionUtils;
 public class AddTagIdsAndTemplateActionDelegate implements IObjectActionDelegate {
 
 	private IWorkbenchPart targetPart;
-	private IStructuredSelection selectionOfTagIdResources;
+	private IStructuredSelection selection;
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IObjectActionDelegate#setActivePart(org.eclipse.jface.action.IAction, org.eclipse.ui.IWorkbenchPart)
@@ -51,28 +52,58 @@ public class AddTagIdsAndTemplateActionDelegate implements IObjectActionDelegate
 		IWorkbenchWindow workbenchWindow = site.getWorkbenchWindow();
 		
 		IEditorPart editorPart = workbenchWindow.getActivePage().getActiveEditor();
-		IQueryDataSetProvider queryDataSetProvider = (IQueryDataSetProvider)editorPart.getAdapter(IQueryDataSetProvider.class);
-		if(queryDataSetProvider==null || ActionUtils.getPremises(queryDataSetProvider)==null){
-			MessageDialog.openError(editorPart.getSite().getShell(),
-					"Add TagIds and Template", "Unsupported function. The Active Editor does not support a Tracker Animal Premises Model. Activate a Tracker editor instead.");
-			return;
+		if(editorPart == null){
+			failedToFindFairEditorShowDialog(workbenchWindow.getShell(), new Exception(
+					"There is no Active Editor in the workbench. Please open a Premises editor and try again."
+			));
+		}else{
+			IPremisesProvider premisesProvider = (IPremisesProvider)editorPart.getAdapter(IPremisesProvider.class);
+			if(premisesProvider==null){
+				failedToFindFairEditorShowDialog(workbenchWindow.getShell(), new Exception(
+						"The Active Editor in the workbench is not a Premises provider. Please open a Premises editor and try again."
+				));
+			}else{
+				Premises premises = premisesProvider.getPremises();
+				showWizard(workbenchWindow, editorPart, premises, selection);
+			}
+			
 		}
+		
+	}
 
+	/**
+	 * @param workbenchWindow
+	 * @param editorPart
+	 */
+	protected void showWizard(IWorkbenchWindow workbenchWindow,
+			IEditorPart editorPart, Premises premises, IStructuredSelection selectionOfTagIdResources) {
 		AddTagIdsAndTemplateWizard wizard = new AddTagIdsAndTemplateWizard();
-		wizard.init( editorPart, selectionOfTagIdResources);
+		wizard.init( editorPart, selectionOfTagIdResources, premises);
 		WizardDialog dialog = new WizardDialog(workbenchWindow.getShell(), wizard);
 		dialog.open();
-		
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction, org.eclipse.jface.viewers.ISelection)
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
-		this.selectionOfTagIdResources = 
+		this.selection = 
 			selection instanceof IStructuredSelection
 			? (IStructuredSelection)selection
 			: null;
+	}
+	
+	private void failedToFindFairEditorShowDialog(Shell shell, Exception e){
+		MessageDialog.openError(shell,
+				getTitle(), "Unsupported function. "+ e.getMessage());
+		
+	}
+
+	/**
+	 * @return
+	 */
+	protected String getTitle() {
+		return "Import TagIds as Template";
 	}
 	
 }

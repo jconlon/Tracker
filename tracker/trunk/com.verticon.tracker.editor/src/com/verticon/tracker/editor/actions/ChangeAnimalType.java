@@ -12,7 +12,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
 
-import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
+import com.verticon.tracker.editor.presentation.IPremisesProvider;
 
 public class ChangeAnimalType implements IObjectActionDelegate {
 
@@ -48,14 +48,14 @@ public class ChangeAnimalType implements IObjectActionDelegate {
 		IEditorPart editorPart = workbenchWindow.getActivePage().getActiveEditor();
 
 		
-		IQueryDataSetProvider queryDataSetProvider = (IQueryDataSetProvider)editorPart.getAdapter(IQueryDataSetProvider.class);
-		if(queryDataSetProvider==null){
+		IPremisesProvider premisesProvider = (IPremisesProvider)editorPart.getAdapter(IPremisesProvider.class);
+		if(premisesProvider==null){
 			MessageDialog.openError(targetPart.getSite().getShell(),
-					FAILED_TO_ADD_EXHIBIT, "The Active Editor does not support a IQueryDataSetProvider");
+					FAILED_TO_ADD_EXHIBIT, "The Active Editor does not support a IPremisesProvider");
 			return;
 		}
 		ChangeAnimalTypeWizard wizard = new ChangeAnimalTypeWizard();
-		wizard.init(workbenchWindow, queryDataSetProvider.getEditingDomain(), 
+		wizard.init(workbenchWindow, premisesProvider.getEditingDomain(), 
 				selection);
 		WizardDialog dialog = new WizardDialog(workbenchWindow.getShell(), wizard);
 		dialog.open();

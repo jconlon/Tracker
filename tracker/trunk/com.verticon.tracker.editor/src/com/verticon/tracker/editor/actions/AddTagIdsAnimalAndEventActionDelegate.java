@@ -3,20 +3,14 @@
  */
 package com.verticon.tracker.editor.actions;
 
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IObjectActionDelegate;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
 
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.editor.presentation.AddTagIdsAnimalAndEventWizard;
-import com.verticon.tracker.editor.presentation.IQueryDataSetProvider;
-import com.verticon.tracker.editor.util.ActionUtils;
+
 
 /**
  * Action associated with a selection on a Capture *.tags file.
@@ -36,47 +30,22 @@ import com.verticon.tracker.editor.util.ActionUtils;
  * @author jconlon
  * 
  */
-public class AddTagIdsAnimalAndEventActionDelegate implements IObjectActionDelegate {
-	
-	private IWorkbenchPart targetPart;
-	private IStructuredSelection selectionOfTagIdResources;
+public class AddTagIdsAnimalAndEventActionDelegate extends AddTagIdsAndTemplateActionDelegate {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IObjectActionDelegate#setActivePart(org.eclipse.jface.action.IAction, org.eclipse.ui.IWorkbenchPart)
-	 */
-	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
-		this.targetPart=targetPart;
+	
+	@Override
+	protected String getTitle() {
+		return "Import TagIds as Animal and Event";
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction, org.eclipse.jface.viewers.ISelection)
-	 */
-	public void selectionChanged(IAction action, ISelection selection) {
-		this.selectionOfTagIdResources = 
-			selection instanceof IStructuredSelection
-			? (IStructuredSelection)selection
-			: null;
-	}
 
-
-	public void run(IAction action) {
-		IWorkbenchPartSite site = targetPart.getSite();
-		IWorkbenchWindow workbenchWindow = site.getWorkbenchWindow();
-		
-		IEditorPart editorPart = workbenchWindow.getActivePage().getActiveEditor();
-		
-		IQueryDataSetProvider queryDataSetProvider = (IQueryDataSetProvider)editorPart.getAdapter(IQueryDataSetProvider.class);
-		if(queryDataSetProvider==null || ActionUtils.getPremises(queryDataSetProvider)==null){
-			MessageDialog.openError(editorPart.getSite().getShell(),
-					"Add TagIds and Animal", "Unsupported function. The Active Editor does not support a Tracker Animal Premises Model. Activate a Tracker editor instead.");
-			return;
-		}
-
+	@Override
+	protected void showWizard(IWorkbenchWindow workbenchWindow,
+			IEditorPart editorPart, Premises premises, IStructuredSelection selection) {
 		AddTagIdsAnimalAndEventWizard wizard = new AddTagIdsAnimalAndEventWizard();
-		wizard.init( editorPart, selectionOfTagIdResources);
+		wizard.init( editorPart, selection);
 		WizardDialog dialog = new WizardDialog(workbenchWindow.getShell(), wizard);
 		dialog.open();
-		
 	}
-
+	
 }
