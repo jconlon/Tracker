@@ -53,13 +53,13 @@ public class AddTagIdsAndTemplateActionDelegate implements IObjectActionDelegate
 		
 		IEditorPart editorPart = workbenchWindow.getActivePage().getActiveEditor();
 		if(editorPart == null){
-			failedToFindFairEditorShowDialog(workbenchWindow.getShell(), new Exception(
+			failedToFindEditorShowDialog(workbenchWindow.getShell(), new Exception(
 					"There is no Active Editor in the workbench. Please open a Premises editor and try again."
 			));
 		}else{
 			IPremisesProvider premisesProvider = (IPremisesProvider)editorPart.getAdapter(IPremisesProvider.class);
 			if(premisesProvider==null){
-				failedToFindFairEditorShowDialog(workbenchWindow.getShell(), new Exception(
+				failedToFindEditorShowDialog(workbenchWindow.getShell(), new Exception(
 						"The Active Editor in the workbench is not a Premises provider. Please open a Premises editor and try again."
 				));
 			}else{
@@ -93,7 +93,7 @@ public class AddTagIdsAndTemplateActionDelegate implements IObjectActionDelegate
 			: null;
 	}
 	
-	private void failedToFindFairEditorShowDialog(Shell shell, Exception e){
+	private void failedToFindEditorShowDialog(Shell shell, Exception e){
 		MessageDialog.openError(shell,
 				getTitle(), "Unsupported function. "+ e.getMessage());
 		
