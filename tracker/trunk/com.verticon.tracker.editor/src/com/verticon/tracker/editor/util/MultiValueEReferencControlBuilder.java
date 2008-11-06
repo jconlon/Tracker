@@ -104,7 +104,7 @@ public class MultiValueEReferencControlBuilder implements ControlBuilder {
 						labelProvider);
 				List<?> currentValues = (List<?>) eObject
 						.eGet(eStructuralFeature);
-				if (results.equals(currentValues)) {
+				if (results != null && results.equals(currentValues)) {
 					logger.debug("Values are equal");
 				} else {
 					handleResults(results, eObject, eStructuralFeature);
