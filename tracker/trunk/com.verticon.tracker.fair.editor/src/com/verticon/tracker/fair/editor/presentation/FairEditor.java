@@ -219,7 +219,7 @@ public class FairEditor
 	 * Offers a query on a dataSet. 
 	 * @generated NOT
 	 */
-	private IPremisesProvider premisesProvider;
+	private IPremisesProvider fairProvider;
 
 	/**
 	 * This is the property sheet page.
@@ -1240,9 +1240,9 @@ public class FairEditor
 		}
 		
 		//Adds adaptive support for IPremisesProvider 	
-		else if (key.equals(IPremisesProvider.class)){
-			if (premisesProvider==null){
-				premisesProvider = new IPremisesProvider(){
+		else if (key.equals(IPremisesProvider.class) || key.equals(IFairProvider.class)){
+			if (fairProvider==null){
+				fairProvider = new IFairProvider(){
 
 					public EditingDomain getEditingDomain() {
 						return FairEditor.this.getEditingDomain();
@@ -1253,15 +1253,18 @@ public class FairEditor
 					}
 					
 					public Premises getPremises() {
+						return getFair().getPremises();
+					}
+
+					public Fair getFair() {
 						Resource modelResource = FairEditor.this.getEditingDomain().getResourceSet()
 						.getResources().get(0);
-						Fair fair = (Fair)modelResource.getContents().get(0);
-						return fair.getPremises();
+						return (Fair)modelResource.getContents().get(0);
 					}
 					
 				};
 			}
-			return premisesProvider;
+			return fairProvider;
 		}
 		else {
 			return super.getAdapter(key);
