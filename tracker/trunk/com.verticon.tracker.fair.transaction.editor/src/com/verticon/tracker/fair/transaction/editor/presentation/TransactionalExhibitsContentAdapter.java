@@ -72,7 +72,7 @@ public class TransactionalExhibitsContentAdapter extends
 	/**
 	 * Exhibits table shows the hierarchy elements of the Exhibit. These
 	 * elements are shown in the table columns through ItemProviders so
-	 * they by default adapt to a string based on the name of these elements.
+	 * they by default adapt to a string based on the personName of these elements.
 	 * 
 	 * Detecting changes to these hierarchy element names will be used to trigger 
 	 * viewer.refresh.

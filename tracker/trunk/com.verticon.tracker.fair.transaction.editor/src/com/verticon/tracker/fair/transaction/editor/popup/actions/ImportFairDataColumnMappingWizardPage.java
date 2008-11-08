@@ -17,16 +17,11 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -37,36 +32,42 @@ import com.verticon.tracker.fair.FairPackage;
 
 
 /**
- * Presents a list viewer and a control for selecting the header row to create
- * column names.
+ * Presents a list viewer and selection controls for mapping spreadsheet 
+ * data in columns, based on the column names in the spreadsheet header row.
  * 
  * @author jconlon
  * 
  */
-public class ImportPeopleDataWizardPage extends WizardPage {
+public class ImportFairDataColumnMappingWizardPage extends WizardPage {
 
 	
 	/**
 	 * slf4j Logger
 	 */
 	private final Logger logger = LoggerFactory
-			.getLogger(ImportPeopleDataWizardPage.class);
+			.getLogger(ImportFairDataColumnMappingWizardPage.class);
 	
 	private TableViewer tableViewer;
+	
 	private final List<ColumnMapper> spreadSheetColumnsToFeatureMap = 
 		new LinkedList<ColumnMapper>();
+	
 	private int headerRow = -1;
 	
-	private boolean usePersonNameForExhibitName = false;
-	private boolean useEarTagForExhibitNum = false;
+//	private boolean usePersonNameForExhibitName = false;
+//	
+//	private boolean useEarTagForExhibitNum = false;
+	
+	/**
+	 * Reference to a class that shows the state of the mappings.
+	 */
+	private static final Flags flags = new Flags();
 
-	protected ImportPeopleDataWizardPage() {
+	protected ImportFairDataColumnMappingWizardPage() {
 		super("selectPerson");
 		setTitle("Import Fair Data Column Mapper");
 		setDescription("Map the Imported SpreadSheet's Column Names to Fair Model Element Feature Names.");
-		
 	}
-	
 	
 
 	public void createControl(Composite parent) {
@@ -85,19 +86,19 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 		data.widthHint = 300;
 		tableViewer.getControl().setLayoutData(data);
 		
-		Composite c1 = new Composite (container, SWT.BORDER );
-		c1.setLayout (new RowLayout ());
-		data= new GridData(GridData.FILL_BOTH);
-		data.grabExcessHorizontalSpace = true;
-		data.horizontalSpan = 4;
-		c1.setLayoutData(data);
-		
-		Composite c2 = new Composite (container, SWT.BORDER );
-		c2.setLayout (new RowLayout ());
-		data= new GridData(GridData.FILL_BOTH);
-		data.grabExcessHorizontalSpace = true;
-		data.horizontalSpan = 4;
-		c2.setLayoutData(data);
+//		Composite c1 = new Composite (container, SWT.BORDER );
+//		c1.setLayout (new RowLayout ());
+//		data= new GridData(GridData.FILL_BOTH);
+//		data.grabExcessHorizontalSpace = true;
+//		data.horizontalSpan = 4;
+//		c1.setLayoutData(data);
+//		
+//		Composite c2 = new Composite (container, SWT.BORDER );
+//		c2.setLayout (new RowLayout ());
+//		data= new GridData(GridData.FILL_BOTH);
+//		data.grabExcessHorizontalSpace = true;
+//		data.horizontalSpan = 4;
+//		c2.setLayoutData(data);
 		
 //		final Composite [] composites = new Composite [] {c1, c2};
 //		Listener radioGroup = new Listener () {
@@ -119,75 +120,67 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 //		  };
 //		
 
-		Label label = new Label(c1, SWT.NULL);
-		label.setText("How do you want to name an Exhibit? ");
-		label.setBackground(container.getDisplay().getSystemColor(
-				SWT.COLOR_YELLOW));
-		
+//		Label label = new Label(c1, SWT.NULL);
+//		label.setText("How do you want to personName an Exhibit? ");
+//		label.setBackground(container.getDisplay().getSystemColor(
+//				SWT.COLOR_YELLOW));
+//		
+//
+//		Button usePersonNameButton = new Button(c1, SWT.RADIO);
+//		usePersonNameButton.setText("Use Person's personName");
+//		usePersonNameButton.addSelectionListener(new SelectionAdapter() {
+//
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				usePersonNameForExhibitName = true;
+//			}
+//
+//		});
+//		
+//		Button dontUsePersonNameButton = new Button(c1, SWT.RADIO);
+//		dontUsePersonNameButton.setText("Use above mapping or leave blank");
+//		dontUsePersonNameButton.setSelection(true);
+//		dontUsePersonNameButton.addSelectionListener(new SelectionAdapter() {
+//
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				usePersonNameForExhibitName = false;
+//			}
+//
+//		});
+//		dontUsePersonNameButton.setSelection(true);
+//		
+//		
+//		
+//		
+//		Label label2 = new Label(c2, SWT.NULL);
+//		label2.setText("How do you want to number an Exhibit? ");
+//		label2.setBackground(container.getDisplay().getSystemColor(
+//				SWT.COLOR_YELLOW));
 
-		Button usePersonNameButton = new Button(c1, SWT.RADIO);
-		usePersonNameButton.setText("Use Person's name");
-//		usePersonNameButton.addListener(SWT.Selection, radioGroup);
-		usePersonNameButton.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				usePersonNameForExhibitName = true;
-			}
-
-		});
-		
-		Button dontUsePersonNameButton = new Button(c1, SWT.RADIO);
-		dontUsePersonNameButton.setText("Use above mapping or leave blank");
-		dontUsePersonNameButton.setSelection(true);
-//		dontUsePersonNameButton.addListener(SWT.Selection, radioGroup);
-		dontUsePersonNameButton.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				usePersonNameForExhibitName = false;
-			}
-
-		});
-		dontUsePersonNameButton.setSelection(true);
-		
-		
-		
-		
-		Label label2 = new Label(c2, SWT.NULL);
-		label2.setText("How do you want to number an Exhibit? ");
-		label2.setBackground(container.getDisplay().getSystemColor(
-				SWT.COLOR_YELLOW));
-//		data= new GridData(GridData.FILL_BOTH);
-//		data.grabExcessHorizontalSpace = true;
-//		data.horizontalSpan = 2;
-//		label2.setLayoutData(data);
-
-		Button useEarTagButton = new Button(c2, SWT.RADIO);
-		useEarTagButton.setText("Use Animal's eartag number");
-//		useEarTagButton.addListener(SWT.Selection, radioGroup);
-		useEarTagButton.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				useEarTagForExhibitNum = true;
-			}
-
-		});
-		
-		Button dontUseEarTagButton = new Button(c2, SWT.RADIO);
-		dontUseEarTagButton.setText("Use above mapping or leave blank");
-		dontUseEarTagButton.setSelection(true);
-//		dontUseEarTagButton.addListener(SWT.Selection, radioGroup);
-		dontUseEarTagButton.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				useEarTagForExhibitNum = false;
-			}
-
-		});
-		dontUseEarTagButton.setSelection(true);
+//		Button useEarTagButton = new Button(c2, SWT.RADIO);
+//		useEarTagButton.setText("Use Animal's eartag number");
+//		useEarTagButton.addSelectionListener(new SelectionAdapter() {
+//
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				useEarTagForExhibitNum = true;
+//			}
+//
+//		});
+//		
+//		Button dontUseEarTagButton = new Button(c2, SWT.RADIO);
+//		dontUseEarTagButton.setText("Use above mapping or leave blank");
+//		dontUseEarTagButton.setSelection(true);
+//		dontUseEarTagButton.addSelectionListener(new SelectionAdapter() {
+//
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				useEarTagForExhibitNum = false;
+//			}
+//
+//		});
+//		dontUseEarTagButton.setSelection(true);
 		
 		setControl(child);
 	}
@@ -195,7 +188,9 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 	@Override
 	public void setVisible(boolean visible) {
 		if (visible) {
-			refreshColumnNames();
+			if(spreadSheetColumnsToFeatureMap.isEmpty()){
+				refreshColumnNames();
+			}
 			setPageComplete(false);
 		}
 		super.setVisible(visible);
@@ -297,6 +292,7 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 		});
 		cv.setLabelProvider(new LabelProvider() {
 				
+			@Override
 			public String getText(Object element) {
 				EStructuralFeature feature =(EStructuralFeature)element;
 				if(feature==FairPackage.Literals.FAIR__NAME){
@@ -308,7 +304,7 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 		
 		});
 		
-		cv.setInput(((ImportPeopleDataWizard) getWizard()).getFeaturesToMap());
+		cv.setInput(((ImportFairDataWizard) getWizard()).getFeaturesToMap());
 		
 		cellEditors[2] = cv;
 
@@ -346,20 +342,44 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 		viewer.setInput(spreadSheetColumnsToFeatureMap);
 		return viewer;
 	}
+
+	List<ColumnMapper> getSpreadSheetColumnsToFeatureMap() {
+		return spreadSheetColumnsToFeatureMap;
+	}
+
+
+	int getHeaderRow() {
+		return headerRow;
+	}
+
+//	boolean isUsePersonNameForExhibitName() {
+//		return usePersonNameForExhibitName;
+//	}
+//
+//	boolean isUseEarTagForExhibitNum() {
+//		return useEarTagForExhibitNum;
+//	}
 	
-	
+	 boolean mapContainsCompleteDeptClassLot(){
+		flags.setFlags(spreadSheetColumnsToFeatureMap);
+		return flags.mapContainsCompleteDeptClassLot();
+	 }
 
 	/**
 	 * Update the current page complete state based on the field content.
 	 */
 	private void updatePageComplete() {
 		setPageComplete(false);
-
-		
+		flags.setFlags(spreadSheetColumnsToFeatureMap);
 		try {
-			if (!mapContainsPersonMapping()) {
+			if (!flags.mapContainsPersonMapping()) {
 				setMessage(null);
-				setErrorMessage("You must at a minimium select mapping for both Person:firstName and Person:lastName or just a Person:name"
+				setErrorMessage("You must at a minimium select mapping for both Person:firstName and Person:lastName or just a Person:personName."
+						);
+				return;
+			} else if (flags.mapContainsIncompleteDeptClassLot()){
+				setMessage(null);
+				setErrorMessage("You must either select mapping for Division:name, Deptartment:name, Class:name and Lot:name or mapping for none of them."
 						);
 				return;
 			}
@@ -376,29 +396,9 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 		setMessage(null);
 		return;
 	}
-	
-	private boolean mapContainsPersonMapping(){
-		boolean lastName = false;
-		boolean firstName = false;
-		boolean name = false;
-		
-		for (ColumnMapper columnMapper : spreadSheetColumnsToFeatureMap) {
-			if(columnMapper.getFeature()==FairPackage.Literals.PERSON__LAST_NAME){
-				lastName=true;
-			}else if(columnMapper.getFeature()==FairPackage.Literals.PERSON__FIRST_NAME){
-				firstName=true;
-			}else if(columnMapper.getFeature()==FairPackage.Literals.PERSON__NAME){
-				name=true;
-			}
-		}
-		if((lastName || firstName) && name){
-			throw new IllegalStateException("You can't combine mappings of Person:lastName or Person:firstName with a Person:name. Please reselect a different set of mappings.");
-		}
-		return (lastName && firstName) || name;
-	}
 
 	private void refreshColumnNames() {
-		HSSFSheet sheet = ((ImportPeopleDataWizard) getWizard())
+		HSSFSheet sheet = ((ImportFairDataWizard) getWizard())
 				.getWorkSheet();
 		HSSFRow row = null;
 		for (int i = sheet.getFirstRowNum(); i < sheet.getLastRowNum()+1; i++) {
@@ -410,15 +410,12 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 						 headerRow=i;
 						 break;
 					 }
-					
 				 }
 			} catch (RuntimeException e) {
 				logger.error("Failed to process row "+i,e);
 			}
 		}
-		
 		tableViewer.refresh();
-
 	}
 
 	private boolean foundColumnNames( HSSFRow row) {
@@ -431,33 +428,64 @@ public class ImportPeopleDataWizardPage extends WizardPage {
 			}
 		}
 		return spreadSheetColumnsToFeatureMap.size()>1;
+	}
+	
+	private static class Flags{
+		boolean lastName;
+		boolean firstName;
+		boolean personName;
+		boolean lotName;
+		boolean className;
+		boolean deptName;
+		boolean divName;
+
+		void setFlags(List<ColumnMapper> spreadSheetColumnsToFeatureMap){
+			lastName=false;
+			firstName=false;
+			personName = false;
+			lotName = false;
+			className = false;
+			deptName = false;
+			divName = false;
+			
+			for (ColumnMapper columnMapper : spreadSheetColumnsToFeatureMap) {
+				if(columnMapper.getFeature()==FairPackage.Literals.PERSON__LAST_NAME){
+					lastName=true;
+				}else if(columnMapper.getFeature()==FairPackage.Literals.PERSON__FIRST_NAME){
+					firstName=true;
+				}else if(columnMapper.getFeature()==FairPackage.Literals.PERSON__NAME){
+					personName=true;
+				}else if(columnMapper.getFeature()==FairPackage.Literals.LOT__NAME){
+					lotName=true;
+				}else if(columnMapper.getFeature()==FairPackage.Literals.CLASS__NAME){
+					className=true;
+				}else if(columnMapper.getFeature()==FairPackage.Literals.DEPARTMENT__NAME){
+					deptName=true;
+				}else if(columnMapper.getFeature()==FairPackage.Literals.DIVISION__NAME){
+					divName=true;
+				}
+			}
+		}
+		boolean mapContainsPersonMapping(){
+			if((lastName || firstName) && personName){
+				throw new IllegalStateException("You can't combine mappings of Person:lastName or Person:firstName with a Person:personName. Please reselect a different set of mappings.");
+			}
+			return (lastName && firstName) || personName;
+		}
 		
+		/**
+		 * 
+		 * @return if any of the lot, class, or dept is set and they are not all set
+		 */
+		 boolean mapContainsIncompleteDeptClassLot(){
+			return (lotName || className || deptName || divName) && (!mapContainsCompleteDeptClassLot());
+		}
+		
+		 boolean mapContainsCompleteDeptClassLot(){
+			return (lotName && className && deptName && divName);
+		}
 	}
-
-
-
-	public List<ColumnMapper> getSpreadSheetColumnsToFeatureMap() {
-		return spreadSheetColumnsToFeatureMap;
-	}
-
-
-
-	public int getHeaderRow() {
-		return headerRow;
-	}
-
-
-
-	public boolean isUsePersonNameForExhibitName() {
-		return usePersonNameForExhibitName;
-	}
-
-
-
-	public boolean isUseEarTagForExhibitNum() {
-		return useEarTagForExhibitNum;
-	}
-	
-	
-
 }
+	
+
+

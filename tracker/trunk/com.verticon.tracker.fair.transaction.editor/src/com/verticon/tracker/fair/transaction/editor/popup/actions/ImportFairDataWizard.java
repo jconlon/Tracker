@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,8 +23,8 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -33,9 +34,9 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.actions.WorkspaceModifyDelegatingOperation;
 import org.slf4j.Logger;
@@ -65,85 +66,168 @@ import com.verticon.tracker.fair.YouthClub;
  * @author jconlon
  *
  */
-public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
+public class ImportFairDataWizard extends Wizard  {
 
 	/**
 	 * slf4j Logger
 	 */
-	private final Logger logger = LoggerFactory
-			.getLogger(ImportPeopleDataWizard.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(ImportFairDataWizard.class);
 	private static final String IMPORT_PEOPLE = "ImportPeople";
 	
-	private final List<EStructuralFeature> featuresToMap = 
-		new ArrayList<EStructuralFeature>(); 
+	/**
+	 * Reference to the list of {@link EStructuralFeature}s that
+	 * will be shown offered as features for mapping to spreadsheet
+	 * columns.
+	 */
+	public static final List<EStructuralFeature> featuresList ;
 	
+	/**
+	 * Reference to the Set of YouthClub Names that were added by this import task.
+	 * @deprecated
+	 */
+	@Deprecated
 	private final Set<String> addedYouthClubs = new HashSet<String>();
-	private final Set<String> addedPersons = new HashSet<String>();
-	private int addedExhibits = 0;
-	private Fair fair = null;
 	
+	/**
+	 * Reference to the Set of Person names that were added by this import task.
+	 * @deprecated
+	 */
+	@Deprecated
+	private final Set<String> addedPersons = new HashSet<String>();
+	
+	/**
+	 * Reference to a count of the number of Exhibits added in this import task.
+	 * @deprecated
+	 */
+	@Deprecated
+	private int addedExhibits = 0;
+	
+	/**
+	 * Active workbench
+	 */
 	private IWorkbench workbench;
+	
+	/**
+	 * Reference to the workSheet that is the source of the import data.
+	 */
 	private HSSFSheet workSheet;
 	
-	private BaseConfigureExhibitWizardPage exhibitPage;
-	private ImportPeopleDataWizardPage importPeoplePage;
+	/**
+	 * Reference to the Fair which will be the target for import data.
+	 */
+	private Fair fair = null;
 	
 	
-	private int processedRows = 0;
-	
-	public ImportPeopleDataWizard() {
-		initializeTheFeaturesToMap();
-	}
-
 	/**
 	 * 
 	 */
-	private void initializeTheFeaturesToMap() {
-		featuresToMap.add(FairPackage.Literals.FAIR__NAME);
-		featuresToMap.add(FairPackage.Literals.PERSON__NAME);
-		for (EStructuralFeature feature : FairPackage.Literals.PERSON.getEAllStructuralFeatures()) {
-			if(!feature.isDerived()){
-				featuresToMap.add(feature);
-			}
-		}
-		featuresToMap.add(FairPackage.Literals.YOUNG_PERSON__PARENTS);
-		featuresToMap.add(FairPackage.Literals.YOUNG_PERSON__CLUB);
-		featuresToMap.add(TrackerPackage.Literals.SWINE__LEFT_EAR_NOTCHING);
-		featuresToMap.add(TrackerPackage.Literals.SWINE__RIGHT_EAR_NOTCHING);
-		featuresToMap.add(TrackerPackage.Literals.OVINE__SCRAPIE_TAG);
-		
-		for (EStructuralFeature feature : FairPackage.Literals.EXHIBIT.getEAllStructuralFeatures()) {
-			if(!feature.isDerived()){
-				featuresToMap.add(feature);
-			}
-		}
+	private ImportFairDataColumnMappingWizardPage importFairDataColumnMappingPage;
+	
+	private BaseConfigureExhibitWizardPage exhibitPage;
+	
+	private int processedRows = 0;
+	
+	private ExecutableProcreator procreator = null;
+	
+    static{
+    	List<EStructuralFeature> list = new ArrayList<EStructuralFeature>(); 
+		initializeTheFeaturesToMap(list);
+		featuresList = Collections.unmodifiableList(list);
 	}
 
+	/**
+	 * Called by the {@link ImportFairDataWizardDelegate} to initialize the wizard.
+	 * @param workbench
+	 * @param selection
+	 * @param fair
+	 */
+	public void init(IWorkbench workbench, IStructuredSelection selection, Fair fair) {
+		this.workbench=workbench;
+		File file = getSelectedResource( selection);
+		workSheet = getWorkSheet(file);
+		this.fair =fair;
+		setNeedsProgressMonitor(true);
+	}
+
+	/**
+	 * Add the default sequence of pages
+	 */
+	@Override
+	public void addPages() {
+		setWindowTitle(IMPORT_PEOPLE);
+		importFairDataColumnMappingPage = new ImportFairDataColumnMappingWizardPage();
+		addPage(importFairDataColumnMappingPage);
+		exhibitPage = new BaseConfigureExhibitWizardPage("selectLot", fair);
+		exhibitPage.setDescription("Select the Lot to use for creating all new Exhibits");
+		exhibitPage.setTitle("Select a Lot");
+		addPage(exhibitPage);
+		
+	}
+	
 	@Override
 	public boolean canFinish() {
-		return exhibitPage!=null && exhibitPage.getSelectedLot()!=null ;
+		return importFairDataColumnMappingPage.mapContainsCompleteDeptClassLot() || 
+		(exhibitPage!=null && exhibitPage.getSelectedLot()!=null);
 	}
 	
 	@Override
 	public boolean performFinish() {
+
+		if(importFairDataColumnMappingPage.mapContainsCompleteDeptClassLot()){
+			procreator = ExecutableProcreators.newDivisionProcreator();
+		}else{
+			procreator = ExecutableProcreators.newExhibitProcreator();
+		}
+		
 		IRunnableWithProgress op = new
 			WorkspaceModifyDelegatingOperation(getRunnable());
-		
-			try {
-				getContainer().run(false, true, op);
-				 MessageDialog.openInformation(workbench.getDisplay().getActiveShell(),
-				            "Fair Data Import", "Imported "+addedPersons.size()+" people, " +
-				            +addedExhibits+" exhibits, " +
-				            +addedYouthClubs.size()+" youthClubs, " +
-				            		"from "+processedRows+" spreadsheet rows.");
-						return true;
-			} catch (InvocationTargetException e) {
-				exhibitPage.setErrorMessage("Fair Data Import Error. "+e.getMessage());
-			} catch (InterruptedException e) {
-				// Restore the interrupted status
-	             Thread.currentThread().interrupt();
+
+		try {
+			getContainer().run(false, true, op);
+			String procreatorStatus = "";
+			if(procreator !=null){
+				procreatorStatus= procreator.getStatus();
+				procreator.dispose();
 			}
+
+			String message = "Imported " +
+			procreatorStatus+
+			"from "+processedRows+" spreadsheet rows.";
+
+			MessageDialog.openInformation(workbench.getDisplay().getActiveShell(),
+					"Fair Data Import", message);
+			return true;
+		} catch (InvocationTargetException e) {
+			exhibitPage.setErrorMessage("Fair Data Import Error. "+e.getMessage());
+		} catch (InterruptedException e) {
+			// Restore the interrupted status
+			Thread.currentThread().interrupt();
+		}
 		return false;
+	}
+	
+
+    @Override
+	public IWizardPage getNextPage(IWizardPage page) {
+    	if(page==importFairDataColumnMappingPage && importFairDataColumnMappingPage.mapContainsCompleteDeptClassLot()){
+    		return null;
+    	}
+		return super.getNextPage(page);
+	}
+
+	@Override
+	public IWizardPage getPreviousPage(IWizardPage page) {
+		// TODO Auto-generated method stub
+		return super.getPreviousPage(page);
+	}
+
+	HSSFSheet getWorkSheet() {
+		return workSheet;
+	}
+
+	List<EStructuralFeature> getFeaturesToMap() {
+		return featuresList;
 	}
 	
 	private IRunnableWithProgress getRunnable(){
@@ -151,51 +235,54 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 
 			public void run(IProgressMonitor monitor)
 					throws InvocationTargetException, InterruptedException {
-				monitor.beginTask("Processing worksheet...", workSheet.getLastRowNum());
+				monitor.beginTask("Processing worksheet...", workSheet.getLastRowNum()+10);
 				IEditorPart editorPart = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 				EditingDomain editingDomain = getEditingDomain(editorPart);
 				
 				processedRows = processWorksheet(workSheet, fair, 
-						importPeoplePage.getHeaderRow()+1, monitor, editingDomain);
+						importFairDataColumnMappingPage.getHeaderRow()+1, monitor, editingDomain);
 				fair.eResource().setModified(true);
 				
 			}};
 	}
-
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		this.workbench=workbench;
-		File file = getSelectedResource( selection);
-		workSheet = getWorkSheet(file);
-		setNeedsProgressMonitor(true);
-	}
 	
-	/**
-	 * Add the default sequence of pages
-	 */
-	@Override
-	public void addPages() {
-		setWindowTitle(IMPORT_PEOPLE);
-		importPeoplePage = new ImportPeopleDataWizardPage();
-		addPage(importPeoplePage);
-		try {
-			exhibitPage = new BaseConfigureExhibitWizardPage("selectLot", findFair());
-			exhibitPage.setDescription("Select the Lot to use for creating all new Exhibits");
-			exhibitPage.setTitle("Select a Lot");
-			addPage(exhibitPage);
-		} catch (IOException e) {
-//			// Create the required Status object
-//	        Status status = new Status(IStatus.ERROR, "com.verticon.tracker.fair.editor", 0,
-//	            "Failed to open the Fair Editor", e);
-//
-//	        // Display the dialog
-//	        ErrorDialog.openError(workbench.getDisplay().getActiveShell(),
-//	            "People Import Error", "Please select a Fair Editor", status);
-			importPeoplePage.setErrorMessage(
-					"Fair Data Import Error. The Active Editor must be a Fair Editor");
+	
+	private static void initializeTheFeaturesToMap(List<EStructuralFeature> list) {
+		list.add(FairPackage.Literals.FAIR__NAME);
+		list.add(FairPackage.Literals.PERSON__NAME);
+		for (EStructuralFeature feature : FairPackage.Literals.PERSON.getEAllStructuralFeatures()) {
+			if(!feature.isDerived()){
+				list.add(feature);
+			}
+		}
+		list.add(FairPackage.Literals.YOUNG_PERSON__PARENTS);
+		list.add(FairPackage.Literals.YOUNG_PERSON__CLUB);
+		
+		
+		list.add(FairPackage.Literals.DIVISION__NAME);
+		list.add(FairPackage.Literals.DIVISION__COMMENTS);
+		
+		list.add(FairPackage.Literals.DEPARTMENT__NAME);
+		list.add(FairPackage.Literals.DEPARTMENT__COMMENTS);
+		
+		list.add(FairPackage.Literals.CLASS__NAME);
+		list.add(FairPackage.Literals.CLASS__COMMENTS);
+		
+		list.add(FairPackage.Literals.LOT__NAME);
+		list.add(FairPackage.Literals.LOT__COMMENTS);
+		
+		for (EStructuralFeature feature : FairPackage.Literals.EXHIBIT.getEAllStructuralFeatures()) {
+			if(!feature.isDerived()){
+				list.add(feature);
+			}
 		}
 		
+		list.add(TrackerPackage.Literals.SWINE__LEFT_EAR_NOTCHING);
+		list.add(TrackerPackage.Literals.SWINE__RIGHT_EAR_NOTCHING);
+		list.add(TrackerPackage.Literals.OVINE__SCRAPIE_TAG);
+		
 	}
-
+	
 	private static File getSelectedResource(
 			ISelection selection) {
 		if (selection instanceof IStructuredSelection) {
@@ -221,7 +308,7 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 	            "Failed to open the Fair Editor", e);
 	        // Display the dialog
 	        ErrorDialog.openError(workbench.getActiveWorkbenchWindow().getShell(),
-	            "People Import Error", "Please insure the data file contains valid column names and row values.", status);
+	            "Fair Data Import Error", "Please insure the data file contains valid column names and row values.", status);
 	        
 		}finally{
 			// once all the events are processed close our file input stream
@@ -235,34 +322,6 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		}
 		return s;
         
-	}
-
-	public HSSFSheet getWorkSheet() {
-		return workSheet;
-	}
-
-	public List<EStructuralFeature> getFeaturesToMap() {
-		return featuresToMap;
-	}
-
-	public Fair findFair() throws IOException {
-		if(fair ==null){
-			IEditorPart editorPart = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-			fair = getFair(editorPart);
-		}
-		return fair;
-	}
-	
-	public static final Fair getFair(IAdaptable adaptable) throws IOException  {
-		EditingDomain editingDomain = getEditingDomain(adaptable);
-		
-		Resource modelResource = editingDomain.getResourceSet()
-				.getResources().get(0);
-		Object rootObject = modelResource.getContents().get(0);
-		if(rootObject instanceof Fair){
-			return (Fair) rootObject;
-		}
-		throw new IOException(modelResource.getURI().toString()+" is not a Fair Resource.");
 	}
 
 	/**
@@ -279,39 +338,65 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		return editingDomain;
 	}
 	
-	//editingDomain.getCommandStack().execute(SetCommand.create(editingDomain, getCommandOwner(eObject), parentReference, value));
+	/**
+	 * Process the Worksheet and import data into the Fair.
+	 * @param sheet
+	 * @param fair
+	 * @param firstDataRow
+	 * @param monitor
+	 * @param editingDomain
+	 * @return
+	 * @throws MissingCriticalDataException 
+	 */
 	private int processWorksheet(HSSFSheet sheet, Fair fair, int firstDataRow, IProgressMonitor monitor,
 			EditingDomain editingDomain) {
-		CompoundCommand compoundCommand = new CompoundCommand();
-		
+
 		int count = 0;
 		
-		logger.debug("Worksheet has {} rows", sheet.getLastRowNum());
-	   
+		EObject root = null;
+		if(importFairDataColumnMappingPage.mapContainsCompleteDeptClassLot()){
+			root = fair;
+			logger.debug("Importing {} rows of worksheet data specifying Division, Department, Class and Lot.", sheet.getLastRowNum());
+		}else{
+	    	root = exhibitPage.getSelectedLot();
+			logger.debug("Importing {} rows of worksheet data to a selected Lot.", sheet.getLastRowNum());
+	    }
 		for (int i = firstDataRow; i < sheet.getLastRowNum()+1; i++) {
-			monitor.worked(1);
 			logger.debug("processing row {}",i);
 			
 			try {
-			    createPerson( compoundCommand, sheet.getRow(i), fair,editingDomain);
+				monitor.worked(1);
+				procreator.prepare(fair, sheet.getRow(i), 
+						importFairDataColumnMappingPage.getSpreadSheetColumnsToFeatureMap(),
+						root, false, editingDomain);
+
 			    count++;
+			    
 			} catch (RuntimeException e) {
-//				e.printStackTrace();
 				logger.error("Failed to process row "+i,e);
+			} catch (MissingCriticalDataException e) {
+				logger.error("Failed to process row "+i,e);
+				break;
 			}
 		}
-		editingDomain.getCommandStack().execute(compoundCommand);
+			//Add all newly imported Divisions, Departments, Classes, and Lots
+			logger.debug("Loading worksheet data.");
+			procreator.execute();
+			monitor.worked(10);
 		return count;
 	}
 	
 	/**
 	 * @param row
 	 * @return
+	 * @deprecated
 	 */
-	private void createPerson(CompoundCommand compoundCommand,HSSFRow row,Fair fair,EditingDomain editingDomain) {
+	@Deprecated
+	private void processRow(CompoundCommand compoundCommand,HSSFRow row,Fair fair,
+			EditingDomain editingDomain) {
 		Person person = null;
 		String parents = null;
-		short parentsCellNum = findColumnNumber(FairPackage.Literals.YOUNG_PERSON__PARENTS);
+		short parentsCellNum = findColumnNumber(FairPackage.Literals.YOUNG_PERSON__PARENTS,importFairDataColumnMappingPage.getSpreadSheetColumnsToFeatureMap());
 		if(parentsCellNum != -1){
 			try {
 				HSSFCell cellParents = row.getCell(parentsCellNum);
@@ -354,7 +439,7 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		}else{
 			logger.debug("Row={} found an existing person {}",row.getRowNum(), person.getName());
 		}
-		createExhibit(compoundCommand, row,  person,  fair, editingDomain);
+		processExhibit(compoundCommand, row,  person,  fair, editingDomain);
 		setSupplementalAnimalTags(compoundCommand, row,  person,  fair, editingDomain);
 		
 	}
@@ -365,7 +450,9 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 	 * @param fair
 	 * @param editingDomain
 	 * @param person
+	 * @deprecated
 	 */
+	@Deprecated
 	private boolean addPersonCommand(CompoundCommand compoundCommand, HSSFRow row,
 			Fair fair, EditingDomain editingDomain, Person person) {
 		if(!addedPersons.contains(person.getName())){
@@ -391,13 +478,22 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 	 * Checks for an existing YoungPerson
 	 * @param fair
 	 * @return
+	 * @deprecated
 	 */
+	@Deprecated
 	private YoungPerson createYoungPerson(HSSFRow row) {
 		YoungPerson person = FairFactory.eINSTANCE.createYoungPerson();
 		populatePersonAttributes(person, row);
 		return person;
 	}
 	
+	/**
+	 * @deprecated
+	 * @param row
+	 * @param fair
+	 * @return
+	 */
+	@Deprecated
 	private Person findPerson(HSSFRow row,Fair fair){
 		Person person = FairFactory.eINSTANCE.createYoungPerson();
 		populatePersonAttributes(person, row);
@@ -408,7 +504,9 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 	 *  
 	 * @param fair
 	 * @return person based on row attributes
+	 * @deprecated
 	 */
+	@Deprecated
 	private Person createPerson(HSSFRow row,Fair fair) {
 		Person person = FairFactory.eINSTANCE.createPerson();
 		populatePersonAttributes(person, row);
@@ -416,34 +514,36 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 	}
 	
 	/**
+	 * @deprecated
 	 * Create an exibit if there is an animal mapped in the row.
 	 * @param compoundCommand
 	 * @param row
 	 * @param person
 	 * @param fair
 	 * @param editingDomain
+	 * @deprecated
 	 */
-	private void createExhibit(CompoundCommand compoundCommand, HSSFRow row, Person person, Fair fair, EditingDomain editingDomain){
+	@Deprecated
+	private void processExhibit(CompoundCommand compoundCommand, HSSFRow row, Person person, 
+			Fair fair, EditingDomain editingDomain){
 		//Need to have an animal map to create an Exhibit
 		Assert.isNotNull(fair, "Fair cannot be null");
 		String id = getColumnValue( row, FairPackage.Literals.EXHIBIT__ANIMAL);
 
+		Animal animal = null;
 		if(id==null){
-			logger.warn("Row={} could not find animal mapper in row to create an exhibit.",
-					row.getRowNum());
-			return;
+//			logger.debug("Row={} could not find an animal mapper in the row.",
+//					row.getRowNum());
+//			
+		}else{
+			 animal = fair.getPremises().findAnimal(id);
 		}
-		Animal animal = fair.getPremises().findAnimal(id);
-		if(animal==null){
-			logger.warn("Row={} could not find animal with id {} to create an exhibit.",
-					row.getRowNum(),id);
-			return;
-		}
+		
 		Exhibit exhibit = FairFactory.eINSTANCE.createExhibit();
 		exhibit.setComments(getColumnValue( row, FairPackage.Literals.EXHIBIT__COMMENTS));
 //		exhibit.setName(getColumnValue( row, FairPackage.Literals.EXHIBIT__NAME));
 //		if(exhibit.getName()==null || exhibit.getName().length()==0){
-//			if(importPeoplePage.isUsePersonNameForExhibitName()){
+//			if(importFairDataColumnMappingPage.isUsePersonNameForExhibitName()){
 //				exhibit.setName(person.getName());
 //			}
 //		}
@@ -457,7 +557,7 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 //			}
 //		}
 //		
-//		if(exhibit.getNumber()==0 && importPeoplePage.isUseEarTagForExhibitNum()){
+//		if(exhibit.getNumber()==0 && importFairDataColumnMappingPage.isUseEarTagForExhibitNum()){
 //			try {
 //				Long earTagLong = Long.parseLong(animal.getId());
 //				int earTag =0;
@@ -472,26 +572,32 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 //			}
 //		}
 		
-		Lot lot = exhibitPage.getSelectedLot();
-		Command command = AddCommand.create(
-				editingDomain, //domain
-				lot,//owner
-				FairPackage.Literals.LOT__EXHIBITS,//feature
-				exhibit//value
-		);
-		compoundCommand.append(command);
-		logger.info("Row={} creating exhibit using animal with id {}.",
-				row.getRowNum(),id);
-		addedExhibits++;
 		
-		command = SetCommand.create(
-				editingDomain, //domain
-				exhibit,//owner
-				FairPackage.Literals.EXHIBIT__EXHIBITOR,//feature
-				person//value
-				);
-		compoundCommand.append(command);
+		processExhibitAncestors(compoundCommand, row, editingDomain, id,
+				exhibit);
 		
+		createCommandToSetPersonOnExhibit(compoundCommand, person,
+				editingDomain, exhibit);
+		
+		if(animal!=null){
+			createCommandToSetAnimalOnExhibit(compoundCommand, editingDomain,
+					animal, exhibit);
+		}
+		
+	}
+
+	/**
+	 * @deprecated
+	 * @param compoundCommand
+	 * @param editingDomain
+	 * @param animal
+	 * @param exhibit
+	 */
+	@Deprecated
+	private void createCommandToSetAnimalOnExhibit(
+			CompoundCommand compoundCommand, EditingDomain editingDomain,
+			Animal animal, Exhibit exhibit) {
+		Command command;
 		command = SetCommand.create(
 				editingDomain, //domain
 				exhibit,//owner
@@ -500,16 +606,86 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 				);
 		compoundCommand.append(command);
 	}
+
+	/**
+	 * @deprecated
+	 * @param compoundCommand
+	 * @param person
+	 * @param editingDomain
+	 * @param exhibit
+	 */
+	@Deprecated
+	private void createCommandToSetPersonOnExhibit(
+			CompoundCommand compoundCommand, Person person,
+			EditingDomain editingDomain, Exhibit exhibit) {
+		Command command;
+		command = SetCommand.create(
+				editingDomain, //domain
+				exhibit,//owner
+				FairPackage.Literals.EXHIBIT__EXHIBITOR,//feature
+				person//value
+				);
+		compoundCommand.append(command);
+	}
+
+	/**
+	 * @deprecated
+	 * @param compoundCommand
+	 * @param row
+	 * @param editingDomain
+	 * @param id
+	 * @param exhibit
+	 */
+	@Deprecated
+	private void processExhibitAncestors(
+			CompoundCommand compoundCommand, HSSFRow row,
+			EditingDomain editingDomain, String id, Exhibit exhibit) {
+		Command command = null;
+		Lot lot = null;
+		if(importFairDataColumnMappingPage.mapContainsCompleteDeptClassLot()){
+			//Use a family of Procreators to create the hierarchy for the Exhibit
+			//The lot returned will already exist in the fair, or may be created 
+			//prior to the addition of the Exhibits.
+			
+			try {
+				procreator.process( fair, row, 
+						importFairDataColumnMappingPage.getSpreadSheetColumnsToFeatureMap(), 
+						fair, false, editingDomain, new CompoundCommand());
+			} catch (MissingCriticalDataException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			//A Lot in the fair was selected buy the user.
+			lot = exhibitPage.getSelectedLot();
+
+			command = AddCommand.create(
+					editingDomain, //domain
+					lot,//owner
+					FairPackage.Literals.LOT__EXHIBITS,//feature
+					exhibit//value
+			);
+			compoundCommand.append(command);
+
+
+			logger.info("Row={} creating exhibit in lot {}.",
+					row.getRowNum(),lot.getName());
+		}
+		addedExhibits++;
+	}
+
 	
 	/**
+	 * @deprecated
 	 * The FirstName and LastName cannot have spaces.  Replace these with a 
 	 * dash.
 	 * @param row
 	 * @param person
 	 */
+	@Deprecated
 	private void populatePersonAttributes(Person person, HSSFRow row) {
 		for (EStructuralFeature feature : FairPackage.Literals.PERSON.getEAllStructuralFeatures()) {
-			short cellNum = findColumnNumber(feature);
+			short cellNum = findColumnNumber(feature,importFairDataColumnMappingPage.getSpreadSheetColumnsToFeatureMap());
 			if(cellNum==-1){
 				continue;
 			}
@@ -530,16 +706,17 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 			if(value!=null){
 				if(feature==FairPackage.Literals.PERSON__FIRST_NAME || feature==FairPackage.Literals.PERSON__LAST_NAME){
 					value = value.trim();
-					value = value.replace(' ', '/');
-					value = value.replace("//", "/");
-					value = value.replace("//", "/");
+					value = value.replace(' ', '-');
+//					value = value.replace("//", "/");
+//					value = value.replace("//", "/");
+					value = value.replace("&", "and");
 				}
-				logger.debug("Row={} adding attribute={}, value={}", 
-						new Object[] {row.getRowNum(), feature.getName(),value});
+//				logger.debug("Row={} adding attribute={}, value={}", 
+//						new Object[] {row.getRowNum(), feature.getName(),value});
 				if(feature==FairPackage.Literals.PERSON__NAME ){
 						person.setLastName(NormalizeName.parseLastName(value));
 						person.setFirstName(NormalizeName.parseFirstName(value));
-						logger.debug("Set person name {}", person.getName());	
+						logger.debug("Set person personName {}", person.getName());	
 				}else if(feature==FairPackage.Literals.PERSON__SALES_ORDER){
 					try {
 						person.setSalesOrder(Integer.parseInt(value));
@@ -550,6 +727,12 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 					person.setFirstName(NormalizeName.capitalizeAndTrimEnglishNames(value.toLowerCase()));
 				}else if(feature==FairPackage.Literals.PERSON__LAST_NAME){
 					person.setLastName(NormalizeName.capitalizeAndTrimEnglishNames(value.toLowerCase()));
+				}else if(feature==FairPackage.Literals.PERSON__EXHIBITOR_NUMBER){
+					try {
+						person.setExhibitorNumber(Integer.parseInt(value));
+					} catch (NumberFormatException e) {
+						logger.error("Could not set Person:exhibitorNumber to "+value,e);
+					}
 				}else{
 					person.eSet(feature, value);
 				}
@@ -560,6 +743,15 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		}
 	}
 	
+	/**
+	 * @deprecated
+	 * @param compoundCommand
+	 * @param kid
+	 * @param row
+	 * @param fair
+	 * @param editingDomain
+	 */
+	@Deprecated
 	private void  joinYouthClub(CompoundCommand compoundCommand, YoungPerson kid, HSSFRow row, Fair fair, EditingDomain editingDomain){
 		String nameOfYouthClub = getColumnValue( row, FairPackage.Literals.YOUNG_PERSON__CLUB);
 		
@@ -599,11 +791,18 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		
 	}
 	
+	/**
+	 * @deprecated
+	 * @param nameOfYouthClub
+	 * @param fair
+	 * @return
+	 */
+	@Deprecated
 	private YouthClub findYouthClub(String nameOfYouthClub, Fair fair){
 		
 		for (YouthClub club : fair.getYouthClubs()) {
 //			if(club.getName()==null ){
-//				logger.error("There needs to be a name on all youth clubs setting it to Error");
+//				logger.error("There needs to be a personName on all youth clubs setting it to Error");
 //				club.setName("Error");
 //			} else 
 			if(club.getName().equals(nameOfYouthClub)){
@@ -613,13 +812,33 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		return null;
 		
 	}
+	
+	/**
+	 * @deprecated
+	 * @param row
+	 * @param feature
+	 * @return
+	 */
+	@Deprecated
 	private String getColumnValue(HSSFRow row, EStructuralFeature feature){
+		return getColumnValue( row,  feature, importFairDataColumnMappingPage.getSpreadSheetColumnsToFeatureMap());
+	}
+	
+	/**
+	 * @deprecated
+	 * @param row
+	 * @param feature
+	 * @param listColumnMapper
+	 * @return
+	 */
+	@Deprecated
+	private static String getColumnValue(HSSFRow row, EStructuralFeature feature, List<ColumnMapper> listColumnMapper){
 		String result = null;
-		    short index = findColumnNumber(feature);
+		    short index = findColumnNumber(feature, listColumnMapper);
 		    if (index !=-1) {
-				logger.debug("Row={} ColumnName {} maps to index {}", 
-						new Object[]{row.getRowNum(),feature.getName(),
-						index});
+//				logger.debug("Row={} ColumnName {} maps to index {}", 
+//						new Object[]{row.getRowNum(),feature.getName(),
+//						index});
 				try {
 					HSSFCell cellContents = row.getCell(index);
 					if (cellContents != null) {
@@ -645,6 +864,16 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		return result;
 	}
 	
+	 /**
+	  * @deprecated
+	  * @param compoundCommand
+	  * @param row
+	  * @param kid
+	  * @param parents
+	  * @param fair
+	  * @param editingDomain
+	  */
+	@Deprecated
 	private void findParentsAtFair(CompoundCommand compoundCommand, HSSFRow row,YoungPerson kid, 
 			String parents, Fair fair, EditingDomain editingDomain){
 		logger.debug("Row={} {} is looking for his parents {}",
@@ -659,10 +888,10 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		   parent = findParent(row, parentName, fair, kid);
 		   
 		   if(parent!=null){
-			   logger.info("Row={} found a parent for {} with the name {}",
+			   logger.info("Row={} found a parent for {} with the personName {}",
 					   new Object[]{row.getRowNum(),kid.getName(), parentName});
 		   }else{
-			   logger.info("Row={} creating a parent for {} with the name {}",
+			   logger.info("Row={} creating a parent for {} with the personName {}",
 					   new Object[]{row.getRowNum(),kid.getName(), parentName});
 			   
 			   parent = FairFactory.eINSTANCE.createPerson();
@@ -690,9 +919,18 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		
 	}
 	
+	/**
+	 * @deprecated
+	 * @param row
+	 * @param parentName
+	 * @param fair
+	 * @param kid
+	 * @return
+	 */
+	@Deprecated
 	private Person findParent(HSSFRow row, String parentName, Fair fair, YoungPerson kid){
 		Person parent = null;
-		//try last name
+		//try last personName
 		parent = findPersonWithName(row, kid.getLastName()+','+parentName,  fair);
 		
 		if(parent==null){
@@ -702,6 +940,14 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		return parent;
 	}
 	
+	/**
+	 * @deprecated
+	 * @param row
+	 * @param personName
+	 * @param fair
+	 * @return
+	 */
+	@Deprecated
 	private Person findPersonWithName(HSSFRow row, String personName, Fair fair){
 		Person parent = null;
 		logger.debug("Row={} Searching through {} people at the fair for a person named {}",
@@ -720,9 +966,15 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 		}
 		return parent;
 	}
-	
-	private short findColumnNumber(EStructuralFeature feature){
-		for (ColumnMapper columnMapper : importPeoplePage.getSpreadSheetColumnsToFeatureMap()) {
+	/**
+	 * @deprecated
+	 * @param feature
+	 * @param columnMap
+	 * @return
+	 */
+    @Deprecated
+	private static short findColumnNumber(EStructuralFeature feature, List<ColumnMapper> columnMap){
+		for (ColumnMapper columnMapper : columnMap) {
 			if(columnMapper.getFeature()==feature){
 				return columnMapper.getIndex();
 			}
@@ -731,6 +983,7 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 	}
 	
 	/**
+	 * @deprecated
 	 * Create an exibit if there is an animal mapped in the row.
 	 * @param compoundCommand
 	 * @param row
@@ -738,13 +991,14 @@ public class ImportPeopleDataWizard extends Wizard implements IImportWizard {
 	 * @param fair
 	 * @param editingDomain
 	 */
+	@Deprecated
 	private void setSupplementalAnimalTags(CompoundCommand compoundCommand, HSSFRow row, Person person, Fair fair, EditingDomain editingDomain){
 		//Need to have an animal map to create an Exhibit
 		String id = getColumnValue( row, FairPackage.Literals.EXHIBIT__ANIMAL);
 
 		if(id==null){
-			logger.warn("Row={} could not find animal mapper in row to set animal supplemental tags.",
-					row.getRowNum(),id);
+//			logger.warn("Row={} could not find animal mapper in row to set animal supplemental tags.",
+//					row.getRowNum(),id);
 			return;
 		}
 		Animal animal = fair.getPremises().findAnimal(id);

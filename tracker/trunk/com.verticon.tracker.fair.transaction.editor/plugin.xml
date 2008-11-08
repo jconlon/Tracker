@@ -29,7 +29,7 @@
            objectClass="com.verticon.tracker.MovedIn">
         <menu
               id="com.verticon.tracker.editor.event.popupSubMenu"
-              label="Tracker"
+              label="%menu.label.0"
               path="additions">
            <separator
                  name="group1">
@@ -40,9 +40,9 @@
               definitionId="com.verticon.tracker.fair.transaction.editor.set.exhibit"
               enablesFor="+"
               id="com.verticon.tracker.fair.transaction.editor.newAction"
-              label="Fair Registration"
+              label="%action.label.0"
               menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
-              tooltip="Register an animal in the Fair">
+              tooltip="%action.tooltip.0">
         </action>
      </objectContribution>
   </extension>
@@ -55,7 +55,7 @@
            objectClass="com.verticon.tracker.fair.Person">
         <menu
               id="com.verticon.tracker.editor.event.popupSubMenu"
-              label="Tracker"
+              label="%menu.label.1"
               path="additions">
            <separator
                  name="group1">
@@ -65,17 +65,17 @@
               class="com.verticon.tracker.fair.transaction.editor.popup.actions.UpdatePinsAction"
               enablesFor="+"
               id="com.verticon.tracker.fair.transaction.editor.newAction"
-              label="Update Pins on Movedxxx Events"
+              label="%action.label.1"
               menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
-              tooltip="Update MovedIn and/or MovedOut events with Pin assigned to Person">
+              tooltip="%action.tooltip.1">
         </action>
         <action
           class="com.verticon.tracker.editor.util.SelectInOutline"
           enablesFor="+"
           id="com.verticon.tracker.editor.actions.SelectPeopleInOutline"
-          label="Select in Outline"
+          label="%action.label.2"
           menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
-          tooltip="Selects one or more people in the Outline view.">
+          tooltip="%action.tooltip.2">
     	</action>
      </objectContribution>
   </extension>
@@ -88,7 +88,7 @@
            objectClass="com.verticon.tracker.fair.Exhibit">
         <menu
               id="com.verticon.tracker.editor.event.popupSubMenu"
-              label="Tracker"
+              label="%menu.label.2"
               path="additions">
            <separator
                  name="group1">
@@ -98,60 +98,36 @@
           class="com.verticon.tracker.editor.util.SelectInOutline"
           enablesFor="+"
           id="com.verticon.tracker.editor.actions.SelectExhibitsInOutline"
-          label="Select in Outline"
+          label="%action.label.3"
           menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
-          tooltip="Selects one or more exhibits in the Outline view.">
+          tooltip="%action.tooltip.3">
     	</action>
      </objectContribution>
   </extension>
-  <extension
-        point="org.eclipse.ui.importWizards">
-     <category
-            id="com.verticon.tracker.import.category" name="Tracker"/>
-     <wizard
-     	   category="com.verticon.tracker.import.category"
-           class="com.verticon.tracker.fair.transaction.editor.popup.actions.ImportPeopleDataWizard"
-           icon="icons/full/obj16/FairModelFile.gif"
-           id="com.verticon.tracker.fair.transaction.editor.wizard1"
-           name="Fair Registration Details from an XLS file">
-       <description>
-            Import Fair Registration Data from an Excel Spreadsheet
-         </description>
-         <selection class="org.eclipse.core.resources.IResource" name="*.xls"/>
-     </wizard>
-  </extension>
   
-  
-  <!-- Can't get the bindings to work
-  <extension point="org.eclipse.ui.bindings">
-      <key
-            commandId="com.verticon.tracker.fair.transaction.editor.set.exhibit"
-            contextId="org.eclipse.ui.textEditorScope"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="Ctrl+Shift+9"/>
-   </extension>
-   
-   <extension point="org.eclipse.ui.commands">
-      <command
-            name="Tracker: Fair Registration"
-            id="com.verticon.tracker.fair.transaction.editor.set.exhibit">
-      </command>
- </extension>
--->
-     
-  <!--
-   <extension
-        point="org.eclipse.emf.transaction.editingDomains">
-     <editingDomain
-           factory="com.verticon.tracker.fair.transaction.editor.domain.FairEditingDomainFactory"
-           id="com.verticon.tracker.fair.transaction.editor.presentation.FairEditingDomain"/>
-  </extension>
   <extension
-        point="org.eclipse.emf.transaction.listeners">
-     <listener class="com.verticon.tracker.fair.transaction.editor.domain.FairResourceLoadedListener">
-        <editingDomain id="com.verticon.tracker.fair.transaction.editor.presentation.FairEditingDomain"/>
-     </listener>
-  </extension>  
--->
+        point="org.eclipse.ui.popupMenus">
+     <objectContribution
+           adaptable="true"
+           id="com.verticon.tracker.editor.popupMenu"
+           nameFilter="*.xls"
+           objectClass="org.eclipse.core.resources.IResource">
+        <menu
+              id="com.verticon.tracker.editor.popupSubMenu"
+              label="%menu.label.3"
+              path="additions">
+           <groupMarker name="content"/>
+           <separator name="additions"/>
+        </menu>
+        <action
+              class="com.verticon.tracker.fair.transaction.editor.popup.actions.ImportFairDataWizardDelegate"
+              enablesFor="+"
+              id="com.verticon.tracker.fair.import.registration.details"
+              label="%action.label.4"
+              menubarPath="com.verticon.tracker.editor.popupSubMenu/content"
+              tooltip="%action.tooltip.4"/>    
+              
+     </objectContribution>
+  </extension>    
   
 </plugin>
