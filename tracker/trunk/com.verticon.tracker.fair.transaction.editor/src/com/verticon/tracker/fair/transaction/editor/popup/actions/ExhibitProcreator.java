@@ -55,8 +55,6 @@ public class ExhibitProcreator implements ExecutableProcreator {
 
 	private final Procreator child;
 
-
-
 	public ExhibitProcreator(Procreator child) {
 		super();
 		this.child = child;
@@ -144,7 +142,8 @@ public class ExhibitProcreator implements ExecutableProcreator {
 	}
 
 	public String getStatus() {
-		 return exception!=null? exception.getMessage():totalChildrenAdded + " exhibits, " + child.getStatus();
+		 return exception!=null? exception.getMessage():
+			 totalChildrenAdded + " exhibits, " + child.getStatus();
 	}
 
 	public void dispose() {
@@ -153,6 +152,10 @@ public class ExhibitProcreator implements ExecutableProcreator {
 		child.dispose();
 	}
 
+	public Exception getError() {
+		return exception;
+	}
+	
 	/**
 	 * @param division
 	 * @param personName, String animalId
@@ -254,8 +257,6 @@ public class ExhibitProcreator implements ExecutableProcreator {
 		}
 		return results;
 	}
-
-	
 
 	/**
 	 * @param listColumnMapper

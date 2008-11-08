@@ -65,7 +65,7 @@ public class AnimalProcreator implements Procreator {
 	 * @see com.verticon.tracker.fair.transaction.editor.popup.actions.Procreator#getStatus()
 	 */
 	public String getStatus() {
-		return countOfSets + " Animal References, ";
+		return countOfSets + " Animal References, "+child.getStatus();
 	}
 	
 	

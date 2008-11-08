@@ -33,7 +33,7 @@ public class MissingCriticalDataException extends Exception {
 	@Override
 	public String getMessage() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Failed to import feature ").append(feature.getFeatureID()).append(feature.getName()).append(", from data row ").
+		sb.append("Failed to import feature ").append(feature.getContainerClass().getSimpleName()).append(':').append(feature.getName()).append(", from data row ").
 		append(rowID).append(", columnNumber ").append(columnNumber).append(" because: ").append(super.getMessage());
 		return sb.toString();
 	}

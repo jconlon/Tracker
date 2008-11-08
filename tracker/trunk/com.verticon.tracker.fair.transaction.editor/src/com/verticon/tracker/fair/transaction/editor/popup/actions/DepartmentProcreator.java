@@ -54,7 +54,6 @@ public class DepartmentProcreator implements Procreator {
 		this.child = child;
 	}
 
-
 	public void process(Fair fair, HSSFRow row,
 			List<ColumnMapper> listColumnMapper, EObject parent,
 			boolean parentWasCreated, EditingDomain editingDomain, CompoundCommand compoundCommand) throws MissingCriticalDataException {
@@ -69,7 +68,7 @@ public class DepartmentProcreator implements Procreator {
 				FairPackage.Literals.DEPARTMENT__NAME, listColumnMapper);
 		
 	
-		Department department = findPreviouslyAddedDepartment(departmentName, division);
+		Department department = cachedInstance(departmentName, division);
 		
 		// If the parent was created than create the department directly on the
 		// parent
@@ -80,7 +79,7 @@ public class DepartmentProcreator implements Procreator {
 			// If the parent was found than search for the department and create
 			// it if it was not found
 		} else if (!parentWasCreated && department==null){
-			department = getDepartmentFromFair(division, departmentName);
+			department = fairInstance(division, departmentName);
 			
 			if (department != null) {// department is in the fair
 				logger.info("Row={} Department {} is already in Fair.",
@@ -119,7 +118,7 @@ public class DepartmentProcreator implements Procreator {
 	 * @param departmentName
 	 * @return
 	 */
-	private Department getDepartmentFromFair(Division division,
+	private Department fairInstance(Division division,
 			String departmentName) {
 		// Is the named Department already in the fair?
 		Department department = null;
@@ -130,7 +129,6 @@ public class DepartmentProcreator implements Procreator {
 		}
 		return department;
 	}
-	
 	
 	/**
 	 * The Department was not found in the Fair, so this method finds one that
@@ -180,7 +178,7 @@ public class DepartmentProcreator implements Procreator {
 	 * @param department
 	 * @return
 	 */
-	private Department findPreviouslyAddedDepartment(String nameOfElement,
+	private Department cachedInstance(String nameOfElement,
 			Division division) {
 		Department results = null;
 		//directly added
@@ -200,8 +198,6 @@ public class DepartmentProcreator implements Procreator {
 		return results;
 	}
 
-	
-
 	/**
 	 * @param listColumnMapper
 	 * @param row
@@ -210,13 +206,15 @@ public class DepartmentProcreator implements Procreator {
 	 */
 	private Department newInstance(List<ColumnMapper> listColumnMapper,
 			HSSFRow row, String nameOfElement) {
-		Department department;
-		// Create it
-		String comments = ExecutableProcreators.getValue(row,
-				FairPackage.Literals.DEPARTMENT__COMMENTS, listColumnMapper);
-		department = FairFactory.eINSTANCE.createDepartment();
+		
+		Department department = FairFactory.eINSTANCE.createDepartment();
 		department.setName(nameOfElement);
-		department.setComments(comments);
+		department.setComments(
+				ExecutableProcreators.getValue(row,
+				FairPackage.Literals.DEPARTMENT__COMMENTS, listColumnMapper));
+		department.setDescription(
+				ExecutableProcreators.getValue(row,
+				FairPackage.Literals.DEPARTMENT__DESCRIPTION, listColumnMapper));
 		totalChildrenAdded++;
 		return department;
 	}

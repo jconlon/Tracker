@@ -304,7 +304,7 @@ public class ImportFairDataColumnMappingWizardPage extends WizardPage {
 		
 		});
 		
-		cv.setInput(((ImportFairDataWizard) getWizard()).getFeaturesToMap());
+		cv.setInput(((ImportFairExhibitDataWizard) getWizard()).getFeaturesToMap());
 		
 		cellEditors[2] = cv;
 
@@ -398,7 +398,7 @@ public class ImportFairDataColumnMappingWizardPage extends WizardPage {
 	}
 
 	private void refreshColumnNames() {
-		HSSFSheet sheet = ((ImportFairDataWizard) getWizard())
+		HSSFSheet sheet = ((ImportFairExhibitDataWizard) getWizard())
 				.getWorkSheet();
 		HSSFRow row = null;
 		for (int i = sheet.getFirstRowNum(); i < sheet.getLastRowNum()+1; i++) {
