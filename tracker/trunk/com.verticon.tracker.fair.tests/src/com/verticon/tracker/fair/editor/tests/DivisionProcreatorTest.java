@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.edit.command.AddCommand;
+import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
@@ -25,6 +26,11 @@ import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.verticon.tracker.Animal;
+import com.verticon.tracker.Premises;
+import com.verticon.tracker.Tag;
+import com.verticon.tracker.TrackerFactory;
+import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.fair.Department;
 import com.verticon.tracker.fair.Division;
@@ -50,6 +56,8 @@ public class DivisionProcreatorTest extends TestCase {
 	ExecutableProcreator procreator = null;
 	AdapterFactoryEditingDomain editingDomain = null;
 	Fair fair = null;
+	
+	Premises premises = null;
 
 	List<ColumnMapper> spreadSheetColumnsToFeatureMap = null;
 
@@ -79,9 +87,15 @@ public class DivisionProcreatorTest extends TestCase {
 		URI uri = URI.createFileURI(new File("myTestModelInstance.xml").getAbsolutePath());
 		Resource fairResource = editingDomain.getResourceSet().createResource(
 				uri);
-		
 		fairResource.getContents().add(fair);
+		
+	    premises = TrackerFactory.eINSTANCE.createPremises();
+		URI trackerUri = URI.createFileURI(new File("myTestTrackerModelInstance.xml").getAbsolutePath());
+		Resource trackerResource = editingDomain.getResourceSet().createResource(
+				trackerUri);
+		trackerResource.getContents().add(premises);
 
+		
 	}
 
 	@Override
@@ -94,15 +108,15 @@ public class DivisionProcreatorTest extends TestCase {
 		fair=null;
 	}
 
-//	public void testResource() {
-//		assertNotNull(editingDomain);
-//		assertNotNull(editingDomain.getResourceSet());
-//		assertFalse(editingDomain.getResourceSet().getResources().isEmpty());
-//
-//		File folder = new File("testFiles");
-//		assertTrue(folder.isDirectory());
-//
-//	}
+	public void testResource() {
+		assertNotNull(editingDomain);
+		assertNotNull(editingDomain.getResourceSet());
+		assertFalse(editingDomain.getResourceSet().getResources().isEmpty());
+
+		File folder = new File("testFiles");
+		assertTrue(folder.isDirectory());
+
+	}
 	
 	public void testEditingDomainIsFunctional() {
 		assertTrue(fair.getDivisions().isEmpty());
@@ -122,7 +136,7 @@ public class DivisionProcreatorTest extends TestCase {
 		
 	}
 
-	public void testImport_Exhibits_withParents() {
+	public void testImport_Exhibits_Parents() {
 		populateDefaultMap();
 		try {
 			importSpreadSheet("importExhibits-Parents.xls");
@@ -144,11 +158,11 @@ public class DivisionProcreatorTest extends TestCase {
 		assertEquals(40, flags.clazzes);
 		assertTrue("Wrong Classes "+status, status.contains("40 classes"));
 		
-		assertEquals(259, flags.lots);
-		assertTrue("Wrong Lots "+status, status.contains("259 lots"));
+		assertEquals(260, flags.lots);
+		assertTrue("Wrong Lots "+status, status.contains("260 lots"));
 		
-		assertEquals(1251, flags.exhibits);
-		assertTrue("Wrong Exhibts "+status, status.contains("1251 exhibits"));
+		assertEquals(1252, flags.exhibits);
+		assertTrue("Wrong Exhibts "+status, status.contains("1252 exhibits"));
 		
 		assertEquals(278, flags.people);
 		assertTrue("Wrong People "+status, status.contains("274 people"));
@@ -164,7 +178,7 @@ public class DivisionProcreatorTest extends TestCase {
 		
 		assertTrue("Animal References "+status, status.contains("0 Animal References"));
 
-		assertEquals(1251, flags.exhibits);
+		assertEquals(1252, flags.exhibits);
 
 	}
 	
@@ -191,6 +205,239 @@ public class DivisionProcreatorTest extends TestCase {
 	}
 
 	/**
+	 * Test importing youthClubs
+	 */
+	public void testImport_Exhibits_Parents_YouthClubs() {
+		populateDefaultMap();
+		try {
+			importSpreadSheet("importExhibits-Parents_YouthClubs.xls");
+		} catch (MissingCriticalDataException e) {
+			logger.error("Failed to import data",e);
+			fail(e.getMessage());
+		}
+		
+		String status = procreator.getStatus();
+	
+		Flags flags = new Flags();
+		
+		assertEquals(1, flags.divs);
+		assertTrue("Wrong Divison", status.contains("1 divisions"));
+		
+		assertEquals(7, flags.depts);
+		assertTrue("Wrong Departments "+status, status.contains("7 departments"));
+		
+		assertEquals(40, flags.clazzes);
+		assertTrue("Wrong Classes "+status, status.contains("40 classes"));
+		
+		assertEquals(260, flags.lots);
+		assertTrue("Wrong Lots "+status, status.contains("260 lots"));
+		
+		assertEquals(1252, flags.exhibits);
+		assertTrue("Wrong Exhibts "+status, status.contains("1252 exhibits"));
+		
+		assertEquals(278, flags.people);
+		assertTrue("Wrong People "+status, status.contains("274 people"));
+		
+		assertEquals(274, flags.youngPeople);
+		
+		assertEquals(4, flags.oldPeople);
+		assertTrue("Wrong Parents "+status, status.contains("4 parents"));
+		
+		assertEquals(2, flags.youthClubs);
+		assertTrue("Wrong Youth Clubs "+status, status.contains("2 Youth Clubs"));
+		
+		
+		assertTrue("Animal References "+status, status.contains("0 Animal References"));
+
+		assertEquals(1252, flags.exhibits);
+
+	}
+	
+	/**
+	 * Test importing with Animal references
+	 */
+	public void testImport_Exhibits_Parents_YouthClubs_Animals() {
+		
+		Command command = SetCommand.create(
+				editingDomain, //domain
+				fair,//owner
+				FairPackage.Literals.FAIR__PREMISES,//feature
+				premises//value
+		);
+			
+		command.execute();
+		assertEquals(premises, fair.getPremises());
+		
+		//Add 3 animals
+		String tags[] = {"1234567890","1234567891","1234567892"};
+		
+		for (String tagId : tags) {
+			Animal animal = TrackerFactory.eINSTANCE.createBovineBeef();
+			Tag tag = TrackerFactory.eINSTANCE.createTag();
+			tag.setId(tagId);
+			animal.getTags().add(tag);
+			premises.getAnimals().add(animal);
+			Command addcommand = AddCommand.create(
+					editingDomain, //domain
+					premises,//owner
+					TrackerPackage.Literals.PREMISES__ANIMALS,//feature
+					animal//value
+			);
+			addcommand.execute();
+		}
+		
+		assertEquals(3, premises.getAnimals().size());
+		
+		
+		
+		populateDefaultMap();
+		try {
+			importSpreadSheet("importExhibits-Parents_YouthClubs_Animals.xls");
+		} catch (MissingCriticalDataException e) {
+			logger.error("Failed to import data",e);
+			fail(e.getMessage());
+		}
+		
+		String status = procreator.getStatus();
+	
+		Flags flags = new Flags();
+		
+		assertEquals(1, flags.divs);
+		assertTrue("Wrong Divison", status.contains("1 divisions"));
+		
+		assertEquals(7, flags.depts);
+		assertTrue("Wrong Departments "+status, status.contains("7 departments"));
+		
+		assertEquals(40, flags.clazzes);
+		assertTrue("Wrong Classes "+status, status.contains("40 classes"));
+		
+		assertEquals(260, flags.lots);
+		assertTrue("Wrong Lots "+status, status.contains("260 lots"));
+		
+		assertEquals(1252, flags.exhibits);
+		assertTrue("Wrong Exhibts "+status, status.contains("1252 exhibits"));
+		
+		assertEquals(278, flags.people);
+		assertTrue("Wrong People "+status, status.contains("274 people"));
+		
+		assertEquals(274, flags.youngPeople);
+		
+		assertEquals(4, flags.oldPeople);
+		assertTrue("Wrong Parents "+status, status.contains("4 parents"));
+		
+		assertEquals(2, flags.youthClubs);
+		assertTrue("Wrong Youth Clubs "+status, status.contains("2 Youth Clubs"));
+		
+		
+		assertTrue("Animal References "+status, status.contains("3 Animal References"));
+
+		assertEquals(1252, flags.exhibits);
+
+	}
+	
+	
+	/**
+	 * Test importing SuplementalTags
+	 */
+	
+	/**
+	 * Test importing with Animal references
+	 */
+	public void testImport_Exhibits_Parents_YouthClubs_Animals_SupID() {
+		
+		Command command = SetCommand.create(
+				editingDomain, //domain
+				fair,//owner
+				FairPackage.Literals.FAIR__PREMISES,//feature
+				premises//value
+		);
+			
+		command.execute();
+		assertEquals(premises, fair.getPremises());
+		
+		//Add 3 animals
+		String tags[] = {"1234567890","1234567891","1234567892"};
+		Animal animals[] = {
+				TrackerFactory.eINSTANCE.createBovineBeef(),
+				TrackerFactory.eINSTANCE.createSwine(),
+				TrackerFactory.eINSTANCE.createOvine()		};
+		
+		for (int i = 0; i < tags.length; i++) {
+			Animal animal = animals[i];
+			Tag tag = TrackerFactory.eINSTANCE.createTag();
+			tag.setId(tags[i]);
+			animal.getTags().add(tag);
+			premises.getAnimals().add(animal);
+			Command addcommand = AddCommand.create(
+					editingDomain, //domain
+					premises,//owner
+					TrackerPackage.Literals.PREMISES__ANIMALS,//feature
+					animal//value
+			);
+			addcommand.execute();
+		}
+		
+		assertEquals(3, premises.getAnimals().size());
+		
+		
+		
+		populateDefaultMap();
+		populateColumnMap(14, "Swine Right Ear", TrackerPackage.Literals.SWINE__RIGHT_EAR_NOTCHING);
+		populateColumnMap(15, "Swine Left Ear", TrackerPackage.Literals.SWINE__LEFT_EAR_NOTCHING);
+		populateColumnMap(16, "Scrapies", TrackerPackage.Literals.OVINE__SCRAPIE_TAG);
+		populateColumnMap(17, "Visual ID", TrackerPackage.Literals.ANIMAL__VISUAL_ID);
+		
+		try {
+			importSpreadSheet("importExhibits-Parents_YouthClubs_Animals_SupID.xls");
+		} catch (MissingCriticalDataException e) {
+			logger.error("Failed to import data",e);
+			fail(e.getMessage());
+		}
+		
+		String status = procreator.getStatus();
+	
+		Flags flags = new Flags();
+		
+		assertEquals(1, flags.divs);
+		assertTrue("Wrong Divison", status.contains("1 divisions"));
+		
+		assertEquals(7, flags.depts);
+		assertTrue("Wrong Departments "+status, status.contains("7 departments"));
+		
+		assertEquals(40, flags.clazzes);
+		assertTrue("Wrong Classes "+status, status.contains("40 classes"));
+		
+		assertEquals(260, flags.lots);
+		assertTrue("Wrong Lots "+status, status.contains("260 lots"));
+		
+		assertEquals(1252, flags.exhibits);
+		assertTrue("Wrong Exhibts "+status, status.contains("1252 exhibits"));
+		
+		assertEquals(278, flags.people);
+		assertTrue("Wrong People "+status, status.contains("274 people"));
+		
+		assertEquals(274, flags.youngPeople);
+		
+		assertEquals(4, flags.oldPeople);
+		assertTrue("Wrong Parents "+status, status.contains("4 parents"));
+		
+		assertEquals(2, flags.youthClubs);
+		assertTrue("Wrong Youth Clubs "+status, status.contains("2 Youth Clubs"));
+		
+		
+		assertTrue("Animal References "+status, status.contains("3 Animal References"));
+
+		assertEquals(1252, flags.exhibits);
+
+		assertTrue("Visual IDs "+status, status.contains("3 visual IDs set"));
+		
+		assertTrue("Visual IDs "+status, status.contains("2 supplemental IDs set"));
+	}
+	
+	
+	
+	
+	/**
 	 * @throws MissingCriticalDataException 
 	 * 
 	 */
@@ -206,7 +453,7 @@ public class DivisionProcreatorTest extends TestCase {
 
 		assertNotNull(sheet);
 		
-		for (int i = 2; i < sheet.getLastRowNum() + 1; i++) {
+		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
 //			logger.debug("processing row {}", i);
 
 			try {
@@ -221,7 +468,6 @@ public class DivisionProcreatorTest extends TestCase {
 		
 		procreator.execute();
 	}
-
 
 	private HSSFSheet getWorkSheet(File f) throws Exception {
 		FileInputStream fin = null;
@@ -259,9 +505,6 @@ public class DivisionProcreatorTest extends TestCase {
 		spreadSheetColumnsToFeatureMap.add(cm1);
 	}
 	
-	/**
-	 * 
-	 */
 	private void populateDefaultMap() {
 		populateColumnMap(0, "MemberID", FairPackage.Literals.PERSON__EXHIBITOR_NUMBER);
 		populateColumnMap(1, "First Name", FairPackage.Literals.PERSON__FIRST_NAME);
@@ -275,6 +518,8 @@ public class DivisionProcreatorTest extends TestCase {
 		populateColumnMap(9, "Division", FairPackage.Literals.DIVISION__NAME);
 		populateColumnMap(10, "Division Description", FairPackage.Literals.DEPARTMENT__COMMENTS);
 		populateColumnMap(11, "Parents", FairPackage.Literals.YOUNG_PERSON__PARENTS);
+		populateColumnMap(12, "Youth Clubs", FairPackage.Literals.YOUNG_PERSON__CLUB);
+		populateColumnMap(13, "Animal ID", FairPackage.Literals.EXHIBIT__ANIMAL);
 	}
 	
 	private class Flags{

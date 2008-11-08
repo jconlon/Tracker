@@ -120,7 +120,7 @@
            <separator name="additions"/>
         </menu>
         <action
-              class="com.verticon.tracker.fair.transaction.editor.popup.actions.ImportFairDataWizardDelegate"
+              class="com.verticon.tracker.fair.transaction.editor.popup.actions.ImportFairExhibitDataWizardDelegate"
               enablesFor="+"
               id="com.verticon.tracker.fair.import.registration.details"
               label="%action.label.4"

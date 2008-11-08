@@ -8,6 +8,9 @@ import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EAttribute;
@@ -35,8 +38,11 @@ public class EMFDataBindingTest extends TestCase {
 	private EAttribute shipToAttribute;
 	private DefaultRealm realm;
 	private EMFDataBindingContext dbc;
-	private WritableValue value;
+	private WritableValue value1;
+	private WritableValue value2;
+	
 	private Binding binding;
+	private IObservableValue iovModelAttribute;
 	
 	/**
 	 * Creates the EClasses for the test case.
@@ -82,14 +88,31 @@ public class EMFDataBindingTest extends TestCase {
 	private void createBindings(UpdateValueStrategy updateValueStrategy) {
 		realm = new DefaultRealm();
 
-		value = WritableValue.withValueType(String.class);
+		value1 = WritableValue.withValueType(String.class);
 		
-		IObservableValue iovModelAttribute = EMFObservables.observeValue(realm,
+		iovModelAttribute = EMFObservables.observeValue(realm,
 				firstObject, shipToAttribute);
 		
 		dbc = new EMFDataBindingContext(realm);
 
-		binding = dbc.bindValue(value, iovModelAttribute, updateValueStrategy, null);
+		binding = dbc.bindValue(value1, iovModelAttribute, updateValueStrategy, null);
+		
+		
+	}
+	
+	/**
+	 * 
+	 */
+	private void createGenericBindings(UpdateValueStrategy updateValueStrategy) {
+		realm = new DefaultRealm();
+
+		value1 = WritableValue.withValueType(String.class);
+		value2 = WritableValue.withValueType(String.class);
+		
+		
+		dbc = new EMFDataBindingContext(realm);
+
+		binding = dbc.bindValue(value1, value2, updateValueStrategy, null);
 		
 		
 	}
@@ -103,8 +126,8 @@ public class EMFDataBindingTest extends TestCase {
 		firstObject = null;
 		shipToAttribute = null;
 		dbc.dispose();
-		value.dispose();
-		value = null;
+		value1.dispose();
+		value1 = null;
 	}
 
 
@@ -113,7 +136,7 @@ public class EMFDataBindingTest extends TestCase {
 		assertNotNull(firstObject);
 		firstObject.eSet(shipToAttribute, "My address");
 		assertEquals(OUT_OF_SYNC_ERROR, 
-				value.getValue(), firstObject.eGet(shipToAttribute));
+				value1.getValue(), firstObject.eGet(shipToAttribute));
 
 	}
 	
@@ -121,29 +144,70 @@ public class EMFDataBindingTest extends TestCase {
 	public void testValueToModel() {
 		createBindings(null);
 		assertNotNull(firstObject);
-		value.setValue("My address");
+		value1.setValue("My address");
 		assertEquals(OUT_OF_SYNC_ERROR, 
-				value.getValue(), firstObject.eGet(shipToAttribute));
+				value1.getValue(), firstObject.eGet(shipToAttribute));
 		
 	}
 	
-	public void testValueToModelwithSimulatedRollback() {
+	public void testValueToEMFModelwithSimulatedRollback() {
 		createBindings(new SimulatedRollBackStrategy());
 		assertNotNull(firstObject);
-		value.setValue("My address");
+		value1.setValue("My address");
 		assertEquals( ROLL_BACK_VALUE, firstObject.eGet(shipToAttribute));
 		assertEquals(OUT_OF_SYNC_ERROR, 
-				value.getValue(), firstObject.eGet(shipToAttribute));
+				value1.getValue(), firstObject.eGet(shipToAttribute));
+	}
+	
+	public void testValueToGenericModelwithSimulatedRollback() {
+		createGenericBindings(new SimulatedRollBackStrategy());
+		assertNotNull(firstObject);
+		value1.setValue("My address");
+//		assertEquals( ROLL_BACK_VALUE, firstObject.eGet(shipToAttribute));
+		assertEquals(OUT_OF_SYNC_ERROR, 
+				value1.getValue(), value2.getValue());
 	}
 	
 	public void testValueToModelwithSimulatedRollbackAndWorkaround() {
 		createBindings(new SimulatedRollBackStrategy());
 		assertNotNull(firstObject);
-		value.setValue("My address");
+		value1.setValue("My address");
 		assertEquals( ROLL_BACK_VALUE, firstObject.eGet(shipToAttribute));
 		binding.updateModelToTarget();
 		assertEquals(OUT_OF_SYNC_ERROR, 
-				value.getValue(), firstObject.eGet(shipToAttribute));
+				value1.getValue(), firstObject.eGet(shipToAttribute));
+	}
+	
+	public void testMisc() {
+		createBindings(new SimulatedRollBackStrategy());
+		firstObject.eAdapters().add(new Adapter(){
+
+			public Notifier getTarget() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			public boolean isAdapterForType(Object type) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			public void notifyChanged(Notification notification) {
+				System.out.println(notification);
+			}
+
+			public void setTarget(Notifier newTarget) {
+				// TODO Auto-generated method stub
+				
+			}});
+		
+		assertNotNull(firstObject);
+		assertNull(firstObject.eGet(shipToAttribute));
+		System.out.println("Getting null");
+		value1.setValue("My address");
+		assertEquals( ROLL_BACK_VALUE, firstObject.eGet(shipToAttribute));
+		assertEquals(OUT_OF_SYNC_ERROR, 
+				value1.getValue(), firstObject.eGet(shipToAttribute));
 	}
 	
 	
@@ -152,7 +216,19 @@ public class EMFDataBindingTest extends TestCase {
 		@Override
 		protected IStatus doSet(IObservableValue observableValue, Object value) {
 			IStatus results = super.doSet(observableValue, value);
-			firstObject.eSet(shipToAttribute, ROLL_BACK_VALUE);
+//			firstObject.eSet(shipToAttribute, ROLL_BACK_VALUE);
+			iovModelAttribute.setValue(ROLL_BACK_VALUE);
+			return results;
+		}
+		
+	}
+	
+	class SimulatedGenericRollBackStrategy extends UpdateValueStrategy{
+
+		@Override
+		protected IStatus doSet(IObservableValue observableValue, Object value) {
+			IStatus results = super.doSet(observableValue, value);
+			value2.setValue("SomeRolledbackValue");
 			return results;
 		}
 		

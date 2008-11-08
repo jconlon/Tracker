@@ -22,7 +22,7 @@ import com.verticon.tracker.fair.editor.presentation.IFairProvider;
  * @author jconlon
  *
  */
-public class ImportFairDataWizardDelegate implements IObjectActionDelegate {
+public class ImportFairExhibitDataWizardDelegate implements IObjectActionDelegate {
 
 	private IWorkbenchPart targetPart;
 	private IStructuredSelection selection;
@@ -57,7 +57,7 @@ public class ImportFairDataWizardDelegate implements IObjectActionDelegate {
 //		
 //		try {
 //			
-//			Fair fair = ImportFairDataWizard.getFair(editorPart);
+//			Fair fair = ImportFairExhibitDataWizard.getFair(editorPart);
 //			if(fair==null){
 //				failedToFindFairEditorShowDialog(workbenchWindow.getShell(), 
 //						new Exception("There is no Active Editor in the workbench. Please open a Tracker Fair editor and try again."));
@@ -101,7 +101,7 @@ public class ImportFairDataWizardDelegate implements IObjectActionDelegate {
 	}
 	
 	private void showWizard(IWorkbenchWindow workbenchWindow, Fair fair){
-		ImportFairDataWizard wizard = new ImportFairDataWizard();
+		ImportFairExhibitDataWizard wizard = new ImportFairExhibitDataWizard();
 		wizard.init(workbenchWindow.getWorkbench(),  selection, fair);
 		WizardDialog dialog = new WizardDialog(workbenchWindow.getShell(), wizard);
 		dialog.open();

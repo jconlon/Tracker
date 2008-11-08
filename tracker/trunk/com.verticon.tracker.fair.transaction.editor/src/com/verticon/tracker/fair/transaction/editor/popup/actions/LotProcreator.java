@@ -47,8 +47,6 @@ public class LotProcreator implements Procreator {
 	
 	private final Procreator child;
 
-	
-
 	public LotProcreator(Procreator child) {
 		super();
 		this.child = child;
@@ -73,23 +71,23 @@ public class LotProcreator implements Procreator {
 		com.verticon.tracker.fair.Class clazz = (com.verticon.tracker.fair.Class)parent;
 		String lotName = ExecutableProcreators.getCriticalValue(row, FairPackage.Literals.LOT__NAME, listColumnMapper);
 		
-		Lot lot = findPreviouslyAddedLot(lotName, clazz);
+		Lot lot = cachedInstance(lotName, clazz);
 		
 		//If the parent is new don't check the fair
 		if(parentWasCreated && lot == null){
-			lot = createLot(listColumnMapper, row, lotName);
+			lot = newInstance(listColumnMapper, row, lotName);
 			clazz.getLots().add(lot);
 			
 			
 		}else  if (!parentWasCreated && lot == null){
-		    lot = getLotFromFair(clazz,lotName);
+		    lot = fairInstance(clazz,lotName);
 			if(lot != null){
 				logger.info("Row={} Lot already in Fair with name {}.",
 						row.getRowNum(),lotName);
 				 child.process(fair, row, listColumnMapper, lot,
 							false, editingDomain,  compoundCommand);
 			}else{
-				lot = createLot(  listColumnMapper, row, clazz, lotName, editingDomain,compoundCommand);
+				lot = newInstance(  listColumnMapper, row, clazz, lotName, editingDomain,compoundCommand);
 			}
 		}else{
 			logger.info("Row={} found previously created Department {}.", row
@@ -114,7 +112,7 @@ public class LotProcreator implements Procreator {
 	 * @param departmentName
 	 * @return
 	 */
-	private Lot getLotFromFair(com.verticon.tracker.fair.Class parent,
+	private Lot fairInstance(com.verticon.tracker.fair.Class parent,
 			String lotName) {
 		//Is the named Lot already in the fair?
 		Lot lot = null;
@@ -126,17 +124,16 @@ public class LotProcreator implements Procreator {
 		return lot;
 	}
 
-	
 	/**
 	 * The Lot was not found in the Fair, so this method finds one that was already
 	 * created as part of this import task or creates a new command for one.
 	 * @param row
 	 * @param nameOfElement
 	 */
-	private Lot createLot(List<ColumnMapper> listColumnMapper, 
+	private Lot newInstance(List<ColumnMapper> listColumnMapper, 
 			HSSFRow row, com.verticon.tracker.fair.Class owner, String nameOfElement, 
 			EditingDomain editingDomain, CompoundCommand compoundCommand) {
-		Lot lot = createLot(listColumnMapper, row, nameOfElement);
+		Lot lot = newInstance(listColumnMapper, row, nameOfElement);
 		
 		Command command = AddCommand.create(
 				editingDomain, //domain
@@ -173,7 +170,7 @@ public class LotProcreator implements Procreator {
 	 * @param clazz
 	 * @return
 	 */
-	private Lot findPreviouslyAddedLot(
+	private Lot cachedInstance(
 			String nameOfElement, com.verticon.tracker.fair.Class clazz) {
 		Lot results = null;
 		// directly added
@@ -201,18 +198,14 @@ public class LotProcreator implements Procreator {
 	 * @param nameOfElement
 	 * @return
 	 */
-	private Lot createLot(List<ColumnMapper> listColumnMapper, HSSFRow row,
+	private Lot newInstance(List<ColumnMapper> listColumnMapper, HSSFRow row,
 			String nameOfElement) {
-		Lot lot;
-		//Create it
-		String comments = ExecutableProcreators.getValue(row, FairPackage.Literals.LOT__COMMENTS, listColumnMapper);
-		lot = FairFactory.eINSTANCE.createLot();
+		Lot lot = FairFactory.eINSTANCE.createLot();
 		lot.setName(nameOfElement);
-		lot.setComments(comments);
+		lot.setComments(ExecutableProcreators.getValue(row, FairPackage.Literals.LOT__COMMENTS, listColumnMapper));
+		lot.setDescription(ExecutableProcreators.getValue(row, FairPackage.Literals.LOT__DESCRIPTION, listColumnMapper));
 		totalChildrenAdded++;
 		return lot;
 	}
-	
-	
-	
+		
 }

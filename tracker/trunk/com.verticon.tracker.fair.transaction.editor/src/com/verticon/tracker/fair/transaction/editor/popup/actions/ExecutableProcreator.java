@@ -28,4 +28,8 @@ public interface ExecutableProcreator extends Procreator {
      * Execute commands prepared by the ExecutableProcreator
      */
     void execute();
+    
+    Exception getError();
+    
+    
 }

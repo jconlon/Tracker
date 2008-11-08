@@ -79,7 +79,7 @@ public class DivisionProcreator implements ExecutableProcreator {
 		String divName = ExecutableProcreators.getCriticalValue(row,
 				FairPackage.Literals.DIVISION__NAME, listColumnMapper);
 
-		Division division = getDivisionFromFair(fair, divName);
+		Division division = fairInstance(fair, divName);
 
 		if (division != null) {
 			logger.info("Row={} Division {} was already in Fair.", row
@@ -88,12 +88,12 @@ public class DivisionProcreator implements ExecutableProcreator {
 					false, editingDomain,  compoundCommand);
 
 		} else {// Division is not in the fair.
-			division = findPreviouslyCreatedDivision(row, divName);
+			division = cachedInstance(row, divName);
 			if (division != null) {
 				logger.info("Row={} found previously created Division {}.", row
 						.getRowNum(), divName);
 			} else {
-				division = createNewDivision(listColumnMapper, row, fair,
+				division = newInstance(listColumnMapper, row, fair,
 						divName, editingDomain);
 				logger.info("Row={} added a command to create Division {}.",
 						row.getRowNum(), divName);
@@ -124,13 +124,17 @@ public class DivisionProcreator implements ExecutableProcreator {
 		createdElements.clear();
 		child.dispose();
 	}
+	
+	public Exception getError() {
+		return exception;
+	}
 
 	/**
 	 * @param fair
 	 * @param divName
 	 * @return
 	 */
-	private Division getDivisionFromFair(Fair fair, String divName) {
+	private Division fairInstance(Fair fair, String divName) {
 		// Is the named Division already in the fair?
 		Division division = null;
 		for (Division divisionInFair : fair.getDivisions()) {
@@ -149,16 +153,18 @@ public class DivisionProcreator implements ExecutableProcreator {
 	 * @param row
 	 * @param nameOfElement
 	 */
-	private Division createNewDivision(List<ColumnMapper> listColumnMapper,
+	private Division newInstance(List<ColumnMapper> listColumnMapper,
 			HSSFRow row, Fair fair, String nameOfElement,
 			EditingDomain editingDomain) {
-		Division division = null;
-		// Create a division
-		String comments = ExecutableProcreators.getValue(row,
-				FairPackage.Literals.DIVISION__COMMENTS, listColumnMapper);
-		division = FairFactory.eINSTANCE.createDivision();
+		
+		Division division = FairFactory.eINSTANCE.createDivision();
 		division.setName(nameOfElement);
-		division.setComments(comments);
+		division.setDescription(
+				ExecutableProcreators.getValue(row,
+				FairPackage.Literals.DIVISION__DESCRIPTION, listColumnMapper));
+		division.setComments(
+				ExecutableProcreators.getValue(row,
+				FairPackage.Literals.DIVISION__COMMENTS, listColumnMapper));
 
 		Command command = AddCommand.create(editingDomain, // domain
 				fair,// owner
@@ -176,7 +182,7 @@ public class DivisionProcreator implements ExecutableProcreator {
 	 * @param nameOfElement
 	 * @param division
 	 */
-	private Division findPreviouslyCreatedDivision(HSSFRow row,
+	private Division cachedInstance(HSSFRow row,
 			String nameOfElement) {
 		Division results = null;
 		for (Division addedDivision : createdElements) {
@@ -186,6 +192,8 @@ public class DivisionProcreator implements ExecutableProcreator {
 		}
 		return results;
 	}
+
+	
 
 
 	

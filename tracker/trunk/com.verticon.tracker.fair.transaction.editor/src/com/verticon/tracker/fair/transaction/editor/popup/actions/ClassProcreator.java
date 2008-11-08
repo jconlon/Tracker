@@ -65,26 +65,26 @@ public class ClassProcreator implements Procreator {
 		String className = ExecutableProcreators.getCriticalValue(row,
 				FairPackage.Literals.CLASS__NAME, listColumnMapper);
 
-		com.verticon.tracker.fair.Class clazz = findPreviouslyAddedClass(
+		com.verticon.tracker.fair.Class clazz = cachedInstance(
 				className, department);
 
 		// If the parent was created than create the class directly on the
 		// parent
 		if (parentWasCreated && clazz == null) {
-			clazz = createClass(listColumnMapper, row, className);
+			clazz = newInstance(listColumnMapper, row, className);
 			department.getClasses().add(clazz);
 
 			// If the parent was found than search for the clazz and create it
 			// if it was not found
 		} else if (!parentWasCreated && clazz == null) {
-			clazz = getClassFromFair(department, className);
+			clazz = fairInstance(department, className);
 			if (clazz != null) {// Clazz is in the fair
 				logger.info("Row={} Class {} already in Fair.",
 						row.getRowNum(), className);
 				child.process(fair, row, listColumnMapper, clazz, false,
 						editingDomain, compoundCommand);
 			} else {// Division is not in the fair.
-				clazz = createClass(listColumnMapper, row, department,
+				clazz = newInstance(listColumnMapper, row, department,
 						className, editingDomain, compoundCommand);
 			}
 		} else {
@@ -110,7 +110,7 @@ public class ClassProcreator implements Procreator {
 	 * @param departmentName
 	 * @return
 	 */
-	private com.verticon.tracker.fair.Class getClassFromFair(
+	private com.verticon.tracker.fair.Class fairInstance(
 			Department department, String clazzName) {
 		// Is the named Class already in the fair?
 		com.verticon.tracker.fair.Class clazz = null;
@@ -131,12 +131,12 @@ public class ClassProcreator implements Procreator {
 	 * @param row
 	 * @param nameOfElement
 	 */
-	private com.verticon.tracker.fair.Class createClass(
+	private com.verticon.tracker.fair.Class newInstance(
 			List<ColumnMapper> listColumnMapper, HSSFRow row, Department owner,
 			String nameOfElement, EditingDomain editingDomain,
 			CompoundCommand compoundCommand) {
 
-		com.verticon.tracker.fair.Class clazz = createClass(listColumnMapper,
+		com.verticon.tracker.fair.Class clazz = newInstance(listColumnMapper,
 				row, nameOfElement);
 
 		Command command = AddCommand.create(editingDomain, // domain
@@ -172,7 +172,7 @@ public class ClassProcreator implements Procreator {
 	 * @param department
 	 * @return
 	 */
-	private com.verticon.tracker.fair.Class findPreviouslyAddedClass(
+	private com.verticon.tracker.fair.Class cachedInstance(
 			String nameOfElement, Department department) {
 		com.verticon.tracker.fair.Class results = null;
 		// directly added
@@ -201,15 +201,18 @@ public class ClassProcreator implements Procreator {
 	 * @param nameOfElement
 	 * @return
 	 */
-	private com.verticon.tracker.fair.Class createClass(
+	private com.verticon.tracker.fair.Class newInstance(
 			List<ColumnMapper> listColumnMapper, HSSFRow row,
 			String nameOfElement) {
-		com.verticon.tracker.fair.Class clazz;
-		String comments = ExecutableProcreators.getValue(row,
-				FairPackage.Literals.CLASS__COMMENTS, listColumnMapper);
-		clazz = FairFactory.eINSTANCE.createClass();
+		
+		com.verticon.tracker.fair.Class clazz = FairFactory.eINSTANCE.createClass();
 		clazz.setName(nameOfElement);
-		clazz.setComments(comments);
+		clazz.setDescription(
+				ExecutableProcreators.getValue(row,
+				FairPackage.Literals.CLASS__DESCRIPTION, listColumnMapper));
+		clazz.setComments(
+				ExecutableProcreators.getValue(row,
+				FairPackage.Literals.CLASS__COMMENTS, listColumnMapper));
 		totalChildrenAdded++;
 		return clazz;
 	}
