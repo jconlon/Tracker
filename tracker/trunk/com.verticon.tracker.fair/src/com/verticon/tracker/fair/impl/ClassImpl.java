@@ -38,8 +38,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getLots <em>Lots</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getDepartment <em>Department</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getJudges <em>Judges</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getDepartment <em>Department</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getComments <em>Comments</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getDescription <em>Description</em>}</li>
  * </ul>
@@ -343,10 +343,10 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 				return getName();
 			case FairPackage.CLASS__LOTS:
 				return getLots();
-			case FairPackage.CLASS__DEPARTMENT:
-				return getDepartment();
 			case FairPackage.CLASS__JUDGES:
 				return getJudges();
+			case FairPackage.CLASS__DEPARTMENT:
+				return getDepartment();
 			case FairPackage.CLASS__COMMENTS:
 				return getComments();
 			case FairPackage.CLASS__DESCRIPTION:
@@ -371,12 +371,12 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 				getLots().clear();
 				getLots().addAll((Collection<? extends Lot>)newValue);
 				return;
-			case FairPackage.CLASS__DEPARTMENT:
-				setDepartment((Department)newValue);
-				return;
 			case FairPackage.CLASS__JUDGES:
 				getJudges().clear();
 				getJudges().addAll((Collection<? extends Person>)newValue);
+				return;
+			case FairPackage.CLASS__DEPARTMENT:
+				setDepartment((Department)newValue);
 				return;
 			case FairPackage.CLASS__COMMENTS:
 				setComments((String)newValue);
@@ -402,11 +402,11 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 			case FairPackage.CLASS__LOTS:
 				getLots().clear();
 				return;
-			case FairPackage.CLASS__DEPARTMENT:
-				setDepartment((Department)null);
-				return;
 			case FairPackage.CLASS__JUDGES:
 				getJudges().clear();
+				return;
+			case FairPackage.CLASS__DEPARTMENT:
+				setDepartment((Department)null);
 				return;
 			case FairPackage.CLASS__COMMENTS:
 				setComments(COMMENTS_EDEFAULT);
@@ -430,10 +430,10 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case FairPackage.CLASS__LOTS:
 				return lots != null && !lots.isEmpty();
-			case FairPackage.CLASS__DEPARTMENT:
-				return getDepartment() != null;
 			case FairPackage.CLASS__JUDGES:
 				return judges != null && !judges.isEmpty();
+			case FairPackage.CLASS__DEPARTMENT:
+				return getDepartment() != null;
 			case FairPackage.CLASS__COMMENTS:
 				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
 			case FairPackage.CLASS__DESCRIPTION:

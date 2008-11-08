@@ -443,22 +443,22 @@ public interface FairPackage extends EPackage {
 	int CLASS__LOTS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Department</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__DEPARTMENT = 2;
-
-	/**
 	 * The feature id for the '<em><b>Judges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__JUDGES = 3;
+	int CLASS__JUDGES = 2;
+
+	/**
+	 * The feature id for the '<em><b>Department</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__DEPARTMENT = 3;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute.

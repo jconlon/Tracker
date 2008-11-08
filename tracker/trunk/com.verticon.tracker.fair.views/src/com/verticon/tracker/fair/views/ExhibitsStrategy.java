@@ -114,7 +114,7 @@ class ExhibitsStrategy implements SelectionStrategy {
 //					logger.debug("Received Animal selection");
 					animal = (Animal) object;
 					String id = animal.getId();
-					exhibitsView.setFilter(id, 3);
+					exhibitsView.setFilter(id, 2);
 					viewer.setSelection(new StructuredSelection(), true);
 				}
 				return animal;
