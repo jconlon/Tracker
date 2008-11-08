@@ -49,8 +49,8 @@ Package fair <http://www.verticon.com/ns/tracker/fair/0.1.0>
   Class Class
     Attribute name : EString<<1..1>>
     Reference lots : Lot<<1..*>>
-    Reference department : Department<<1..1>>
     Reference judges : Person<<1..*>>
+    Reference department : Department<<1..1>>
     Attribute comments : EString
     Attribute description : EString<<1..1>>
 

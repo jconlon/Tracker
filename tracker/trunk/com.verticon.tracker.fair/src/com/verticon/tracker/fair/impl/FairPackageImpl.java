@@ -849,8 +849,8 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		classEClass = createEClass(CLASS);
 		createEAttribute(classEClass, CLASS__NAME);
 		createEReference(classEClass, CLASS__LOTS);
-		createEReference(classEClass, CLASS__DEPARTMENT);
 		createEReference(classEClass, CLASS__JUDGES);
+		createEReference(classEClass, CLASS__DEPARTMENT);
 		createEAttribute(classEClass, CLASS__COMMENTS);
 		createEAttribute(classEClass, CLASS__DESCRIPTION);
 
@@ -964,8 +964,8 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		initEClass(classEClass, com.verticon.tracker.fair.Class.class, "Class", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getClass_Name(), ecorePackage.getEString(), "name", null, 1, 1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_Lots(), this.getLot(), this.getLot_Class(), "lots", null, 1, -1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClass_Department(), this.getDepartment(), this.getDepartment_Classes(), "department", null, 1, 1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_Judges(), this.getPerson(), null, "judges", null, 1, -1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClass_Department(), this.getDepartment(), this.getDepartment_Classes(), "department", null, 1, 1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getClass_Comments(), ecorePackage.getEString(), "comments", null, 0, 1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getClass_Description(), ecorePackage.getEString(), "description", null, 1, 1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

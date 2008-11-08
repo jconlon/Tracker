@@ -19,8 +19,8 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.Class#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Class#getLots <em>Lots</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.Class#getDepartment <em>Department</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Class#getJudges <em>Judges</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Class#getDepartment <em>Department</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Class#getComments <em>Comments</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Class#getDescription <em>Description</em>}</li>
  * </ul>
