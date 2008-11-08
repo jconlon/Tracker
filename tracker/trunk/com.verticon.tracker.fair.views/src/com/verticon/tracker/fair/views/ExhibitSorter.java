@@ -12,7 +12,6 @@ import org.eclipse.swt.SWT;
 
 import com.verticon.tracker.fair.Exhibit;
 
-
 /**
  * Sorter that relates items of type 
  * <code>Exhibit</code>.
@@ -37,14 +36,10 @@ import com.verticon.tracker.fair.Exhibit;
  */
 public class ExhibitSorter extends ViewerSorter {
 
-	
-
 	// Criteria that the instance uses 
 	private final ExhibitsView.ExhibitColumn criteria;
 	private final int dir;
 	
-	
-
 	/**
 	 * Creates a resource sorter that will use the given sort criteria.
 	 *
@@ -79,23 +74,32 @@ public class ExhibitSorter extends ViewerSorter {
 			case NUMBER :
 				returnValue = compareNumbers(exhibit1, exhibit2);
 				break;
-//			case EXHIBITOR :
-//				returnValue = compareExhibitors(exhibit1, exhibit2);
-//				break;
 			case ANIMAL :
 				returnValue = compareAnimals(exhibit1, exhibit2);
 				break;
 			case LOT :
 				returnValue = compareLots(exhibit1, exhibit2);
 				break;
+			case LOT_DESC :
+				returnValue = compareLotDescriptions(exhibit1, exhibit2);
+				break;
 			case CLASS :
 				returnValue = compareClasses(exhibit1, exhibit2);
+				break;
+			case CLASS_DESC :
+				returnValue = compareClassDescriptions(exhibit1, exhibit2);
 				break;
 			case DEPARTMENT :
 				returnValue = compareDepartments(exhibit1, exhibit2);
 				break;
+			case DEPARTMENT_DESC :
+				returnValue = compareDepartmentDescriptions(exhibit1, exhibit2);
+				break;
 			case DIVISION :
 				returnValue = compareDivisions(exhibit1, exhibit2);
+				break;
+			case DIVISION_DESC :
+				returnValue = compareDivisionsDescription(exhibit1, exhibit2);
 				break;
 			case NAME :
 				returnValue = compareNames(exhibit1, exhibit2);
@@ -115,8 +119,6 @@ public class ExhibitSorter extends ViewerSorter {
 	}
 
 	/**
-	 * Returns a number reflecting the collation order of the given exhibit
-	 * based on the Class.
 	 *
 	 * @param exhibit1 the first element to be ordered
 	 * @param exhibit2 the second element to be ordered
@@ -125,7 +127,7 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	protected int compareClasses(Exhibit exhibit1, Exhibit exhibit2) {
+	private int compareClasses(Exhibit exhibit1, Exhibit exhibit2) {
 		String value1 = exhibit1.getLot().getClass_().getName()==null?
 				"":exhibit1.getLot().getClass_().getName();
 		String value2 = exhibit2.getLot().getClass_().getName()==null?
@@ -134,11 +136,25 @@ public class ExhibitSorter extends ViewerSorter {
 		
 	}
 	
-	
+	/**
+	 *
+	 * @param exhibit1 the first element to be ordered
+	 * @param exhibit2 the second element to be ordered
+	 * @return a negative number if the first element is less  than the 
+	 *  second element; the value <code>0</code> if the first element is
+	 *  equal to the second element; and a positive number if the first
+	 *  element is greater than the second element
+	 */
+	private int compareClassDescriptions(Exhibit exhibit1, Exhibit exhibit2) {
+		String value1 = exhibit1.getLot().getClass_().getDescription()==null?
+				"":exhibit1.getLot().getClass_().getDescription();
+		String value2 = exhibit2.getLot().getClass_().getDescription()==null?
+				"":exhibit2.getLot().getClass_().getDescription();
+		return value1.compareTo(value2);
+		
+	}
 	
 	/**
-	 * Returns a number reflecting the collation order of the given exhibit
-	 * based on the Log
 	 *
 	 * @param exhibit1
 	 * @param exhibit2
@@ -156,9 +172,24 @@ public class ExhibitSorter extends ViewerSorter {
 	}
 	
 	/**
-	 * Returns a number reflecting the collation order of the given people
-	 * based on the name of the Last Name
 	 *
+	 * @param exhibit1
+	 * @param exhibit2
+	 * @return a negative number if the first element is less  than the 
+	 *  second element; the value <code>0</code> if the first element is
+	 *  equal to the second element; and a positive number if the first
+	 *  element is greater than the second element
+	 */
+	private int compareLotDescriptions(Exhibit exhibit1, Exhibit exhibit2) {
+		String value1 = exhibit1.getLot().getDescription()==null?
+				"":exhibit1.getLot().getDescription();
+		String value2 = exhibit2.getLot().getDescription()==null?
+				"":exhibit2.getLot().getDescription();
+		return value1.compareTo(value2);
+	}
+	
+	/**
+	 * 
 	 * @param exhibit1
 	 * @param exhibit2
 	 * @return a negative number if the first element is less  than the 
@@ -177,8 +208,25 @@ public class ExhibitSorter extends ViewerSorter {
 	}
 	
 	/**
-	 * Returns a number reflecting the collation order of the given people
-	 * based on the firstName.
+	 * 
+	 * @param exhibit1
+	 * @param exhibit2
+	 * @return a negative number if the first element is less  than the 
+	 *  second element; the value <code>0</code> if the first element is
+	 *  equal to the second element; and a positive number if the first
+	 *  element is greater than the second element
+	 */
+	private int compareDepartmentDescriptions(Exhibit exhibit1, Exhibit exhibit2) {
+		
+		String value1 = exhibit1.getLot().getClass_().getDepartment().getDescription()==null?
+				"":exhibit1.getLot().getClass_().getDepartment().getDescription();
+		String value2 = exhibit2.getLot().getClass_().getDepartment().getDescription()==null?
+				"":exhibit2.getLot().getClass_().getDepartment().getDescription();
+		return value1.compareTo(value2);
+		
+	}
+	
+	/**
 	 *
 	 * @param exhibit1
 	 * @param exhibit2
@@ -196,12 +244,7 @@ public class ExhibitSorter extends ViewerSorter {
 		
 	}
 
-	
-	
 	/**
-	 * Returns a number reflecting the collation order of the given people
-	 * based on the State.
-	 *
 	 * @param exhibit1 the first task element to be ordered
 	 * @param resource2 the second task element to be ordered
 	 * @return a negative number if the first element is less  than the 
@@ -209,7 +252,7 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	protected int compareNumbers(Exhibit exhibit1, Exhibit exhibit2) {
+	private int compareNumbers(Exhibit exhibit1, Exhibit exhibit2) {
 		 if( exhibit1.getNumber() < exhibit2.getNumber()){
 			 return -1;
 		 }else if(exhibit1.getNumber() == exhibit2.getNumber()){
@@ -219,8 +262,6 @@ public class ExhibitSorter extends ViewerSorter {
 	}
 
 	/**
-	 * Returns a number reflecting the collation order of the given people
-	 * based on their species.
 	 *
 	 * @param resource1 the first resource element to be ordered
 	 * @param resource2 the second resource element to be ordered
@@ -229,7 +270,7 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	protected int compareExhibitors(Exhibit exhibit1, Exhibit exhibit2) {
+	private int compareExhibitors(Exhibit exhibit1, Exhibit exhibit2) {
 		String value1 = (exhibit1.getExhibitor()==null || exhibit1.getExhibitor().getName()==null)?
 				"":exhibit1.getExhibitor().getName();
 		String value2 = (exhibit2.getExhibitor()==null|| exhibit2.getExhibitor().getName()==null)?
@@ -239,9 +280,6 @@ public class ExhibitSorter extends ViewerSorter {
 	}
 
 	/**
-	 * Returns a number reflecting the collation order of the given people
-	 * based on the name of the comments of event.
-	 *
 	 * @param resource1 the first resource element to be ordered
 	 * @param resource2 the second resource element to be ordered
 	 * @return a negative number if the first element is less  than the 
@@ -249,19 +287,31 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	protected int compareDivisions(Exhibit exhibit1, Exhibit exhibit2) {
+	private int compareDivisions(Exhibit exhibit1, Exhibit exhibit2) {
 		String value1 = exhibit1.getLot().getClass_().getDepartment().getDivision().getName()==null?
 				"":exhibit1.getLot().getClass_().getDepartment().getDivision().getName();
 		String value2 = exhibit2.getLot().getClass_().getDepartment().getDivision().getName()==null?
 				"":exhibit2.getLot().getClass_().getDepartment().getDivision().getName();
 		return value1.compareTo(value2);
 	}
-	
-	
+
+	/**
+	 * @param resource1 the first resource element to be ordered
+	 * @param resource2 the second resource element to be ordered
+	 * @return a negative number if the first element is less  than the 
+	 *  second element; the value <code>0</code> if the first element is
+	 *  equal to the second element; and a positive number if the first
+	 *  element is greater than the second element
+	 */
+	private int compareDivisionsDescription(Exhibit exhibit1, Exhibit exhibit2) {
+		String value1 = exhibit1.getLot().getClass_().getDepartment().getDivision().getDescription()==null?
+				"":exhibit1.getLot().getClass_().getDepartment().getDivision().getDescription();
+		String value2 = exhibit2.getLot().getClass_().getDepartment().getDivision().getDescription()==null?
+				"":exhibit2.getLot().getClass_().getDepartment().getDivision().getDescription();
+		return value1.compareTo(value2);
+	}
 	
 	/**
-	 * Returns a number reflecting the collation order of the given people
-	 * based on the labels associated with the people.
 	 *
 	 * @param resource1 the first resource element to be ordered
 	 * @param resource2 the second resource element to be ordered
@@ -270,18 +320,15 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	protected int compareNames(Exhibit exhibit1, Exhibit exhibit2) {
-		String value1 = exhibit1.getName()==null?"":exhibit1.getName();
-		String value2 = exhibit2.getName()==null?"":exhibit2.getName();
+	private int compareNames(Exhibit exhibit1, Exhibit exhibit2) {
+		String value1 = exhibit1.getExhibitor()==null?"":exhibit1.getExhibitor().getName();
+		String value2 = exhibit2.getExhibitor()==null?"":exhibit2.getExhibitor().getName();
 		return value1.compareTo(value2);
 		
 		
 	}
 	
 	/**
-	 * Returns a number reflecting the collation order of the given people
-	 * based on the labels associated with the people.
-	 *
 	 * @param resource1 the first resource element to be ordered
 	 * @param resource2 the second resource element to be ordered
 	 * @return a negative number if the first element is less  than the 
@@ -289,12 +336,10 @@ public class ExhibitSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	protected int compareComments(Exhibit exhibit1, Exhibit exhibit2) {
+	private int compareComments(Exhibit exhibit1, Exhibit exhibit2) {
 		String comments1 = exhibit1.getComments()==null?"":exhibit1.getComments();
 		String comments2 = exhibit2.getComments()==null?"":exhibit2.getComments();
 		return comments1.compareTo(comments2);
 	}
-	
-	
 	
 }

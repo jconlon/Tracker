@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.fair.Division#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Division#getDepartments <em>Departments</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.Division#getComments <em>Comments</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.Division#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,5 +105,31 @@ public interface Division extends EObject {
 	 * @generated
 	 */
 	void setComments(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Description</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Description</em>' attribute.
+	 * @see #setDescription(String)
+	 * @see com.verticon.tracker.fair.FairPackage#getDivision_Description()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getDescription();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.fair.Division#getDescription <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Description</em>' attribute.
+	 * @see #getDescription()
+	 * @generated
+	 */
+	void setDescription(String value);
 
 } // Division

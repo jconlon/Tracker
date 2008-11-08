@@ -74,6 +74,7 @@ public class LotItemProvider
 
 			addNamePropertyDescriptor(object);
 			addCommentsPropertyDescriptor(object);
+			addDescriptionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -119,6 +120,28 @@ public class LotItemProvider
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Description feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDescriptionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Lot_description_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Lot_description_feature", "_UI_Lot_type"),
+				 FairPackage.Literals.LOT__DESCRIPTION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 getString("_UI_IdentificationPropertyCategory"),
 				 null));
 	}
 
@@ -191,6 +214,7 @@ public class LotItemProvider
 		switch (notification.getFeatureID(Lot.class)) {
 			case FairPackage.LOT__NAME:
 			case FairPackage.LOT__COMMENTS:
+			case FairPackage.LOT__DESCRIPTION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case FairPackage.LOT__EXHIBITS:

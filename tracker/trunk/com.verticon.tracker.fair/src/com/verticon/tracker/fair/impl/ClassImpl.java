@@ -38,9 +38,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getLots <em>Lots</em>}</li>
- *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getJudges <em>Judges</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getDepartment <em>Department</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getJudges <em>Judges</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getComments <em>Comments</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.ClassImpl#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -113,6 +114,26 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 	 * @ordered
 	 */
 	protected String comments = COMMENTS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -245,6 +266,27 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.CLASS__DESCRIPTION, oldDescription, description));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -301,12 +343,14 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 				return getName();
 			case FairPackage.CLASS__LOTS:
 				return getLots();
-			case FairPackage.CLASS__JUDGES:
-				return getJudges();
 			case FairPackage.CLASS__DEPARTMENT:
 				return getDepartment();
+			case FairPackage.CLASS__JUDGES:
+				return getJudges();
 			case FairPackage.CLASS__COMMENTS:
 				return getComments();
+			case FairPackage.CLASS__DESCRIPTION:
+				return getDescription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -327,15 +371,18 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 				getLots().clear();
 				getLots().addAll((Collection<? extends Lot>)newValue);
 				return;
+			case FairPackage.CLASS__DEPARTMENT:
+				setDepartment((Department)newValue);
+				return;
 			case FairPackage.CLASS__JUDGES:
 				getJudges().clear();
 				getJudges().addAll((Collection<? extends Person>)newValue);
 				return;
-			case FairPackage.CLASS__DEPARTMENT:
-				setDepartment((Department)newValue);
-				return;
 			case FairPackage.CLASS__COMMENTS:
 				setComments((String)newValue);
+				return;
+			case FairPackage.CLASS__DESCRIPTION:
+				setDescription((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -355,14 +402,17 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 			case FairPackage.CLASS__LOTS:
 				getLots().clear();
 				return;
-			case FairPackage.CLASS__JUDGES:
-				getJudges().clear();
-				return;
 			case FairPackage.CLASS__DEPARTMENT:
 				setDepartment((Department)null);
 				return;
+			case FairPackage.CLASS__JUDGES:
+				getJudges().clear();
+				return;
 			case FairPackage.CLASS__COMMENTS:
 				setComments(COMMENTS_EDEFAULT);
+				return;
+			case FairPackage.CLASS__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -380,12 +430,14 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case FairPackage.CLASS__LOTS:
 				return lots != null && !lots.isEmpty();
-			case FairPackage.CLASS__JUDGES:
-				return judges != null && !judges.isEmpty();
 			case FairPackage.CLASS__DEPARTMENT:
 				return getDepartment() != null;
+			case FairPackage.CLASS__JUDGES:
+				return judges != null && !judges.isEmpty();
 			case FairPackage.CLASS__COMMENTS:
 				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
+			case FairPackage.CLASS__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -404,6 +456,8 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 		result.append(name);
 		result.append(", comments: ");
 		result.append(comments);
+		result.append(", description: ");
+		result.append(description);
 		result.append(')');
 		return result.toString();
 	}

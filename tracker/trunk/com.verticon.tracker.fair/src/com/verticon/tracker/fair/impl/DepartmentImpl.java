@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getSuperintendents <em>Superintendents</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getDivision <em>Division</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getComments <em>Comments</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.DepartmentImpl#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -113,6 +114,26 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 	 * @ordered
 	 */
 	protected String comments = COMMENTS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -245,6 +266,27 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.DEPARTMENT__DESCRIPTION, oldDescription, description));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -307,6 +349,8 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 				return getDivision();
 			case FairPackage.DEPARTMENT__COMMENTS:
 				return getComments();
+			case FairPackage.DEPARTMENT__DESCRIPTION:
+				return getDescription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -337,6 +381,9 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 			case FairPackage.DEPARTMENT__COMMENTS:
 				setComments((String)newValue);
 				return;
+			case FairPackage.DEPARTMENT__DESCRIPTION:
+				setDescription((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -364,6 +411,9 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 			case FairPackage.DEPARTMENT__COMMENTS:
 				setComments(COMMENTS_EDEFAULT);
 				return;
+			case FairPackage.DEPARTMENT__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -386,6 +436,8 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 				return getDivision() != null;
 			case FairPackage.DEPARTMENT__COMMENTS:
 				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
+			case FairPackage.DEPARTMENT__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -404,6 +456,8 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 		result.append(name);
 		result.append(", comments: ");
 		result.append(comments);
+		result.append(", description: ");
+		result.append(description);
 		result.append(')');
 		return result.toString();
 	}

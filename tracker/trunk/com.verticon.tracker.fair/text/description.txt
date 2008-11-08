@@ -36,6 +36,7 @@ Package fair <http://www.verticon.com/ns/tracker/fair/0.1.0>
     Attribute name : EString<<1..1>>
     Reference departments : Department<<1..*>>
     Attribute comments : EString
+    Attribute description : EString<<1..1>>
 
   Class Department
     Attribute name : EString<<1..1>>
@@ -43,19 +44,22 @@ Package fair <http://www.verticon.com/ns/tracker/fair/0.1.0>
     Reference superintendents : Person<<0..*>>
     Reference division : Division<<1..1>>
     Attribute comments : EString
+    Attribute description : EString<<1..1>>
 
   Class Class
     Attribute name : EString<<1..1>>
     Reference lots : Lot<<1..*>>
-    Reference judges : Person<<1..*>>
     Reference department : Department<<1..1>>
+    Reference judges : Person<<1..*>>
     Attribute comments : EString
+    Attribute description : EString<<1..1>>
 
   Class Lot
     Attribute name : EString<<1..1>>
     Reference exhibits : Exhibit<<1..*>>
     Reference class : Class<<1..1>>
     Attribute comments : EString
+    Attribute description : EString<<1..1>>
 
   Class Person
     Attribute firstName : EString<<1..1>>

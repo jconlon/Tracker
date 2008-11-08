@@ -25,4 +25,6 @@ public interface DivisionValidator {
 	boolean validateDepartments(EList<Department> value);
 
 	boolean validateComments(String value);
+
+	boolean validateDescription(String value);
 }
