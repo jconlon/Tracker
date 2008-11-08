@@ -88,6 +88,7 @@ public class DivisionItemProvider
 
 			addNamePropertyDescriptor(object);
 			addCommentsPropertyDescriptor(object);
+			addDescriptionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -133,6 +134,28 @@ public class DivisionItemProvider
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Description feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDescriptionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Division_description_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Division_description_feature", "_UI_Division_type"),
+				 FairPackage.Literals.DIVISION__DESCRIPTION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 getString("_UI_IdentificationPropertyCategory"),
 				 null));
 	}
 
@@ -205,6 +228,7 @@ public class DivisionItemProvider
 		switch (notification.getFeatureID(Division.class)) {
 			case FairPackage.DIVISION__NAME:
 			case FairPackage.DIVISION__COMMENTS:
+			case FairPackage.DIVISION__DESCRIPTION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case FairPackage.DIVISION__DEPARTMENTS:

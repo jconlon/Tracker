@@ -429,8 +429,10 @@ public class ExhibitItemProvider
 		Exhibit exhibit= (Exhibit)object;
 		IItemLabelProvider itemLabelProvider;
 	    switch (columnIndex){
-	        case 0: return exhibit.getExhibitor() ==null? "": exhibit.getExhibitor().getName(); 
-	    	case 1: 
+	        case 0: //Exhibit
+	        	return exhibit.getExhibitor() ==null? "": exhibit.getExhibitor().getName(); 
+	    	
+	        case 1: //Number
 	    		return Integer.toString(exhibit.getNumber()); 
 	    	
 	    	case 2:  
@@ -442,23 +444,39 @@ public class ExhibitItemProvider
 	    		FairItemProviderAdapterFactory faf = (FairItemProviderAdapterFactory)adapterFactory;
 	    	    itemLabelProvider = (IItemLabelProvider)faf.getRootAdapterFactory().adapt(animal, IItemLabelProvider.class);
 	    	    
-	    		return itemLabelProvider.getText(animal);	    	
-	    	case 3: 
+	    		return itemLabelProvider.getText(animal);	
+	    		
+	    	case 3: //Lot
 	    		if(exhibit.getLot()==null){
 	    			return "";
 	    		}
 	    		Lot lot = exhibit.getLot();
 	    		return lot.getName();
+	    	
+	    	case 4: //Lot Description
+	    		if(exhibit.getLot()==null){
+	    			return "";
+	    		}
+	    		Lot lot2 = exhibit.getLot();
+	    		return lot2.getDescription();
 	    		
-	    	case 4: 
+	    	case 5: //Class
 	    		if (exhibit.getLot()==null || 
 	    				exhibit.getLot().getClass_()==null){
 	    			return "";
 	    		}
 	    		com.verticon.tracker.fair.Class clazz =	exhibit.getLot().getClass_();
 	    		return clazz.getName();
+	    		
+	    	case 6: //Class Description
+	    		if (exhibit.getLot()==null || 
+	    				exhibit.getLot().getClass_()==null){
+	    			return "";
+	    		}
+	    		com.verticon.tracker.fair.Class clazz2 =	exhibit.getLot().getClass_();
+	    		return clazz2.getDescription();
 	    
-	    	case 5: 
+	    	case 7: //Department
 	    		if (exhibit.getLot()==null || 
 	    				exhibit.getLot().getClass_()==null || 
 	    				exhibit.getLot().getClass_().getDepartment()==null){
@@ -467,7 +485,18 @@ public class ExhibitItemProvider
 	    		
 	    		Department department = exhibit.getLot().getClass_().getDepartment();
 	    		return department.getName();
-	    	case 6: 
+	    	
+	    	case 8: //Department Description
+	    		if (exhibit.getLot()==null || 
+	    				exhibit.getLot().getClass_()==null || 
+	    				exhibit.getLot().getClass_().getDepartment()==null){
+	    				return "";
+	    		}
+	    		
+	    		Department department2 = exhibit.getLot().getClass_().getDepartment();
+	    		return department2.getDescription();
+	    	
+	    	case 9: //Lot
 	    		if (exhibit.getLot()==null || 
 	    				exhibit.getLot().getClass_()==null || 
 	    				exhibit.getLot().getClass_().getDepartment()==null ||
@@ -476,8 +505,20 @@ public class ExhibitItemProvider
 	    		}
 	    		Division division = exhibit.getLot().getClass_().getDepartment().getDivision();
 	    		return division.getName();
-	    	case 7: 
+	    	
+	    	case 10: //Lot Description
+	    		if (exhibit.getLot()==null || 
+	    				exhibit.getLot().getClass_()==null || 
+	    				exhibit.getLot().getClass_().getDepartment()==null ||
+	    				exhibit.getLot().getClass_().getDepartment().getDivision()==null){
+	    				return "";
+	    		}
+	    		Division division2 = exhibit.getLot().getClass_().getDepartment().getDivision();
+	    		return division2.getDescription();
+	    		
+	    	case 11: 
 	    		return exhibit.getComments();
+	    		
 	    	default :
 	    		return "unknown " + columnIndex;
 	    }

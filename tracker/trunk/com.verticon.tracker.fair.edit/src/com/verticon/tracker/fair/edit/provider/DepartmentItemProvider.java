@@ -76,6 +76,7 @@ public class DepartmentItemProvider
 			addNamePropertyDescriptor(object);
 			addSuperintendentsPropertyDescriptor(object);
 			addCommentsPropertyDescriptor(object);
+			addDescriptionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -143,6 +144,28 @@ public class DepartmentItemProvider
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Description feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDescriptionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Department_description_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Department_description_feature", "_UI_Department_type"),
+				 FairPackage.Literals.DEPARTMENT__DESCRIPTION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 getString("_UI_IdentificationPropertyCategory"),
 				 null));
 	}
 
@@ -215,6 +238,7 @@ public class DepartmentItemProvider
 		switch (notification.getFeatureID(Department.class)) {
 			case FairPackage.DEPARTMENT__NAME:
 			case FairPackage.DEPARTMENT__COMMENTS:
+			case FairPackage.DEPARTMENT__DESCRIPTION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case FairPackage.DEPARTMENT__CLASSES:

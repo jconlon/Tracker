@@ -27,4 +27,6 @@ public interface LotValidator {
 	boolean validateClass(com.verticon.tracker.fair.Class value);
 
 	boolean validateComments(String value);
+
+	boolean validateDescription(String value);
 }

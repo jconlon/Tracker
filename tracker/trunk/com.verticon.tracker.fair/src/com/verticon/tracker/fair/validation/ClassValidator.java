@@ -32,5 +32,7 @@ public interface ClassValidator {
 
 	boolean validateComments(String value);
 
+	boolean validateDescription(String value);
+
 	boolean validateJudge(EList<Person> value);
 }

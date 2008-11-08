@@ -425,6 +425,15 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDivision_Description() {
+		return (EAttribute)divisionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDepartment() {
 		return departmentEClass;
 	}
@@ -472,6 +481,15 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 */
 	public EAttribute getDepartment_Comments() {
 		return (EAttribute)departmentEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDepartment_Description() {
+		return (EAttribute)departmentEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -533,6 +551,15 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getClass_Description() {
+		return (EAttribute)classEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getLot() {
 		return lotEClass;
 	}
@@ -571,6 +598,15 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 	 */
 	public EAttribute getLot_Comments() {
 		return (EAttribute)lotEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLot_Description() {
+		return (EAttribute)lotEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -800,6 +836,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		createEAttribute(divisionEClass, DIVISION__NAME);
 		createEReference(divisionEClass, DIVISION__DEPARTMENTS);
 		createEAttribute(divisionEClass, DIVISION__COMMENTS);
+		createEAttribute(divisionEClass, DIVISION__DESCRIPTION);
 
 		departmentEClass = createEClass(DEPARTMENT);
 		createEAttribute(departmentEClass, DEPARTMENT__NAME);
@@ -807,19 +844,22 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		createEReference(departmentEClass, DEPARTMENT__SUPERINTENDENTS);
 		createEReference(departmentEClass, DEPARTMENT__DIVISION);
 		createEAttribute(departmentEClass, DEPARTMENT__COMMENTS);
+		createEAttribute(departmentEClass, DEPARTMENT__DESCRIPTION);
 
 		classEClass = createEClass(CLASS);
 		createEAttribute(classEClass, CLASS__NAME);
 		createEReference(classEClass, CLASS__LOTS);
-		createEReference(classEClass, CLASS__JUDGES);
 		createEReference(classEClass, CLASS__DEPARTMENT);
+		createEReference(classEClass, CLASS__JUDGES);
 		createEAttribute(classEClass, CLASS__COMMENTS);
+		createEAttribute(classEClass, CLASS__DESCRIPTION);
 
 		lotEClass = createEClass(LOT);
 		createEAttribute(lotEClass, LOT__NAME);
 		createEReference(lotEClass, LOT__EXHIBITS);
 		createEReference(lotEClass, LOT__CLASS);
 		createEAttribute(lotEClass, LOT__COMMENTS);
+		createEAttribute(lotEClass, LOT__DESCRIPTION);
 
 		personEClass = createEClass(PERSON);
 		createEAttribute(personEClass, PERSON__FIRST_NAME);
@@ -911,6 +951,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		initEAttribute(getDivision_Name(), ecorePackage.getEString(), "name", null, 1, 1, Division.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDivision_Departments(), this.getDepartment(), this.getDepartment_Division(), "departments", null, 1, -1, Division.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDivision_Comments(), ecorePackage.getEString(), "comments", null, 0, 1, Division.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDivision_Description(), ecorePackage.getEString(), "description", null, 1, 1, Division.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(departmentEClass, Department.class, "Department", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDepartment_Name(), ecorePackage.getEString(), "name", null, 1, 1, Department.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -918,19 +959,22 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 		initEReference(getDepartment_Superintendents(), this.getPerson(), null, "superintendents", null, 0, -1, Department.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDepartment_Division(), this.getDivision(), this.getDivision_Departments(), "division", null, 1, 1, Department.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDepartment_Comments(), ecorePackage.getEString(), "comments", null, 0, 1, Department.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDepartment_Description(), ecorePackage.getEString(), "description", null, 1, 1, Department.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classEClass, com.verticon.tracker.fair.Class.class, "Class", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getClass_Name(), ecorePackage.getEString(), "name", null, 1, 1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_Lots(), this.getLot(), this.getLot_Class(), "lots", null, 1, -1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClass_Judges(), this.getPerson(), null, "judges", null, 1, -1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_Department(), this.getDepartment(), this.getDepartment_Classes(), "department", null, 1, 1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClass_Judges(), this.getPerson(), null, "judges", null, 1, -1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getClass_Comments(), ecorePackage.getEString(), "comments", null, 0, 1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClass_Description(), ecorePackage.getEString(), "description", null, 1, 1, com.verticon.tracker.fair.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(lotEClass, Lot.class, "Lot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLot_Name(), ecorePackage.getEString(), "name", null, 1, 1, Lot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLot_Exhibits(), this.getExhibit(), this.getExhibit_Lot(), "exhibits", null, 1, -1, Lot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLot_Class(), this.getClass_(), this.getClass_Lots(), "class", null, 1, 1, Lot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLot_Comments(), ecorePackage.getEString(), "comments", null, 0, 1, Lot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLot_Description(), ecorePackage.getEString(), "description", null, 1, 1, Lot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(personEClass, Person.class, "Person", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPerson_FirstName(), ecorePackage.getEString(), "firstName", null, 1, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

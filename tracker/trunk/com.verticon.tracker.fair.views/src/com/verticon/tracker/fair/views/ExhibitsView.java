@@ -201,11 +201,19 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 		
 		LOT("Lot", new ColumnWeightData(2, 150, true)), 
 		
+		LOT_DESC("Lot Description", new ColumnWeightData(2, 150, true)),
+		
 		CLASS("Class", new ColumnWeightData(2, 150, true)), 
+		
+		CLASS_DESC("Class Description", new ColumnWeightData(2, 150, true)), 
 				
 		DEPARTMENT("Department", new ColumnWeightData(2, 150, true)), 
 		
+		DEPARTMENT_DESC("Department Description", new ColumnWeightData(2, 150, true)), 
+		
 		DIVISION("Division", new ColumnWeightData(2, 150, true)), 
+		
+		DIVISION_DESC("Division Description", new ColumnWeightData(2, 150, true)), 
 		
 		COMMENTS("Comments", new ColumnWeightData(2, 120, true));
 

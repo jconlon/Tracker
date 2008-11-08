@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.verticon.tracker.fair.impl.LotImpl#getExhibits <em>Exhibits</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.LotImpl#getClass_ <em>Class</em>}</li>
  *   <li>{@link com.verticon.tracker.fair.impl.LotImpl#getComments <em>Comments</em>}</li>
+ *   <li>{@link com.verticon.tracker.fair.impl.LotImpl#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -100,6 +101,26 @@ public class LotImpl extends EObjectImpl implements Lot {
 	 * @ordered
 	 */
 	protected String comments = COMMENTS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -220,6 +241,27 @@ public class LotImpl extends EObjectImpl implements Lot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FairPackage.LOT__DESCRIPTION, oldDescription, description));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -280,6 +322,8 @@ public class LotImpl extends EObjectImpl implements Lot {
 				return getClass_();
 			case FairPackage.LOT__COMMENTS:
 				return getComments();
+			case FairPackage.LOT__DESCRIPTION:
+				return getDescription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -306,6 +350,9 @@ public class LotImpl extends EObjectImpl implements Lot {
 			case FairPackage.LOT__COMMENTS:
 				setComments((String)newValue);
 				return;
+			case FairPackage.LOT__DESCRIPTION:
+				setDescription((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -330,6 +377,9 @@ public class LotImpl extends EObjectImpl implements Lot {
 			case FairPackage.LOT__COMMENTS:
 				setComments(COMMENTS_EDEFAULT);
 				return;
+			case FairPackage.LOT__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -350,6 +400,8 @@ public class LotImpl extends EObjectImpl implements Lot {
 				return getClass_() != null;
 			case FairPackage.LOT__COMMENTS:
 				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
+			case FairPackage.LOT__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -368,6 +420,8 @@ public class LotImpl extends EObjectImpl implements Lot {
 		result.append(name);
 		result.append(", comments: ");
 		result.append(comments);
+		result.append(", description: ");
+		result.append(description);
 		result.append(')');
 		return result.toString();
 	}

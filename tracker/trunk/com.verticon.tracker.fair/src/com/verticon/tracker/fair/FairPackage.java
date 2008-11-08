@@ -324,13 +324,22 @@ public interface FairPackage extends EPackage {
 	int DIVISION__COMMENTS = 2;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIVISION__DESCRIPTION = 3;
+
+	/**
 	 * The number of structural features of the '<em>Division</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIVISION_FEATURE_COUNT = 3;
+	int DIVISION_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.DepartmentImpl <em>Department</em>}' class.
@@ -388,13 +397,22 @@ public interface FairPackage extends EPackage {
 	int DEPARTMENT__COMMENTS = 4;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPARTMENT__DESCRIPTION = 5;
+
+	/**
 	 * The number of structural features of the '<em>Department</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPARTMENT_FEATURE_COUNT = 5;
+	int DEPARTMENT_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.ClassImpl <em>Class</em>}' class.
@@ -425,22 +443,22 @@ public interface FairPackage extends EPackage {
 	int CLASS__LOTS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Judges</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__JUDGES = 2;
-
-	/**
 	 * The feature id for the '<em><b>Department</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__DEPARTMENT = 3;
+	int CLASS__DEPARTMENT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Judges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__JUDGES = 3;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute.
@@ -452,13 +470,22 @@ public interface FairPackage extends EPackage {
 	int CLASS__COMMENTS = 4;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__DESCRIPTION = 5;
+
+	/**
 	 * The number of structural features of the '<em>Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_FEATURE_COUNT = 5;
+	int CLASS_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.LotImpl <em>Lot</em>}' class.
@@ -507,13 +534,22 @@ public interface FairPackage extends EPackage {
 	int LOT__COMMENTS = 3;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOT__DESCRIPTION = 4;
+
+	/**
 	 * The number of structural features of the '<em>Lot</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOT_FEATURE_COUNT = 4;
+	int LOT_FEATURE_COUNT = 5;
 
 
 	/**
@@ -1091,6 +1127,17 @@ public interface FairPackage extends EPackage {
 	EAttribute getDivision_Comments();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Division#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see com.verticon.tracker.fair.Division#getDescription()
+	 * @see #getDivision()
+	 * @generated
+	 */
+	EAttribute getDivision_Description();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Department <em>Department</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1154,6 +1201,17 @@ public interface FairPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDepartment_Comments();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Department#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see com.verticon.tracker.fair.Department#getDescription()
+	 * @see #getDepartment()
+	 * @generated
+	 */
+	EAttribute getDepartment_Description();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Class <em>Class</em>}'.
@@ -1221,6 +1279,17 @@ public interface FairPackage extends EPackage {
 	EAttribute getClass_Comments();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Class#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see com.verticon.tracker.fair.Class#getDescription()
+	 * @see #getClass_()
+	 * @generated
+	 */
+	EAttribute getClass_Description();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Lot <em>Lot</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1273,6 +1342,17 @@ public interface FairPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getLot_Comments();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Lot#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see com.verticon.tracker.fair.Lot#getDescription()
+	 * @see #getLot()
+	 * @generated
+	 */
+	EAttribute getLot_Description();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.Person <em>Person</em>}'.
@@ -1711,6 +1791,14 @@ public interface FairPackage extends EPackage {
 		EAttribute DIVISION__COMMENTS = eINSTANCE.getDivision_Comments();
 
 		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DIVISION__DESCRIPTION = eINSTANCE.getDivision_Description();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.DepartmentImpl <em>Department</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1759,6 +1847,14 @@ public interface FairPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DEPARTMENT__COMMENTS = eINSTANCE.getDepartment_Comments();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEPARTMENT__DESCRIPTION = eINSTANCE.getDepartment_Description();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.ClassImpl <em>Class</em>}' class.
@@ -1811,6 +1907,14 @@ public interface FairPackage extends EPackage {
 		EAttribute CLASS__COMMENTS = eINSTANCE.getClass_Comments();
 
 		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CLASS__DESCRIPTION = eINSTANCE.getClass_Description();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.LotImpl <em>Lot</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1851,6 +1955,14 @@ public interface FairPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute LOT__COMMENTS = eINSTANCE.getLot_Comments();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LOT__DESCRIPTION = eINSTANCE.getLot_Description();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.PersonImpl <em>Person</em>}' class.
