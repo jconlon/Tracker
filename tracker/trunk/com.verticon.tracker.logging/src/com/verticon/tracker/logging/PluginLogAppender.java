@@ -1,60 +1,46 @@
-/**
- * 
- */
+
 package com.verticon.tracker.logging;
-
-/*******************************************************************************
- * Copyright (c) 2005 John J. Franey
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- *******************************************************************************/
-
 
 import java.text.MessageFormat;
 
-import org.apache.log4j.AppenderSkeleton;
-import org.apache.log4j.Level;
-import org.apache.log4j.spi.LoggingEvent;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.osgi.framework.Bundle;
 
-/**
- * log4j appender to an eclipse plugin's Ilog.
- * @author John J. Franey
- *
- */
-public class PluginLogAppender extends AppenderSkeleton {
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.spi.LoggingEvent;
+import ch.qos.logback.core.AppenderBase;
+import ch.qos.logback.core.spi.FilterReply;
+
+
+public class PluginLogAppender  extends AppenderBase<LoggingEvent> {
 
 	private String symbolicName;
 	
-
-	/* (non-Javadoc)
-	 * @see org.apache.log4j.AppenderSkeleton#append(org.apache.log4j.spi.LoggingEvent)
-	 */
+	@Override
 	protected void append(LoggingEvent event) {
 		
 		// don't go any further if event is not severe enough.
-		if(! isAsSevereAsThreshold(event.getLevel())) return;
+		FilterReply reply = this.getFilterChainDecision(event);
+		
+		if(reply != FilterReply.ACCEPT) return;
 		
 		ILog log = getBundleILog();
 		if(log == null) return;
 		
 		// if throwable information is available, extract it.
 		Throwable t = null;
-		if(event.getThrowableInformation() != null && layout.ignoresThrowable())
-			t = event.getThrowableInformation().getThrowable();
+		
+		if(event.getThrowableProxy() != null )
+			t = event.getThrowableProxy().getThrowable();
 		
 		// build an Eclipse Status record, map severity and code from Event.
 		Status s = new Status(getSeverity(event),
 				getSymbolicName(),
 				getCode(event),
-				layout.format(event), t);
+				getLayout().doLayout(event), t);
 
 		
 		log.log(s);
@@ -66,17 +52,27 @@ public class PluginLogAppender extends AppenderSkeleton {
 	 * @param ev
 	 * @return
 	 */
-	private int getSeverity(LoggingEvent ev) {
-		
-		Level level = ev.getLevel();
-		if(level == Level.FATAL || level == Level.ERROR)
-			return IStatus.ERROR;
-		else if(level == Level.WARN)
-			return IStatus.WARNING;
-		else if(level == Level.INFO) 
-			return IStatus.INFO;
-		else // debug, trace and custom levels
-			return IStatus.OK;
+	private int getSeverity(LoggingEvent event) {
+		int result;
+		switch (event.getLevel().toInt()) {
+		case Level.ERROR_INT:
+			result = IStatus.ERROR;
+			break;
+
+		case Level.WARN_INT:
+			result = IStatus.WARNING;
+			break;
+
+		case Level.INFO_INT:
+			result = IStatus.INFO;
+			break;
+
+		// debug, trace and custom levels
+		default:
+			result = IStatus.OK;
+			break;
+		}
+		return result;
 	}
 	
 	/**
@@ -117,7 +113,7 @@ public class PluginLogAppender extends AppenderSkeleton {
 		if(b == null) {
 			String m = MessageFormat.format("Plugin: {0} not found in {1}.",
 					new Object[] {getSymbolicName(), this.name});
-			this.errorHandler.error(m);
+			this.addError(m);
 			return null;
 		}
 	

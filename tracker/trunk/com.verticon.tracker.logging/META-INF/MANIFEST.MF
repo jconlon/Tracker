@@ -9,10 +9,15 @@ Bundle-ClassPath: config/,
 Bundle-Vendor: Verticon, Inc.
 Eclipse-RegisterBuddy: org.apache.log4j
 Bundle-Activator: com.verticon.tracker.logging.Activator
-Import-Package: org.apache.log4j,
- org.apache.log4j.spi,
+Import-Package: ch.qos.logback.classic;version="0.9.11",
+ ch.qos.logback.classic.pattern;version="0.9.11",
+ ch.qos.logback.classic.spi;version="0.9.11",
+ ch.qos.logback.core;version="0.9.11",
+ ch.qos.logback.core.filter;version="0.9.11",
+ ch.qos.logback.core.spi;version="0.9.11",
  org.osgi.framework;version="1.4.0",
- org.slf4j;version="1.5.0"
+ org.osgi.service.log;version="1.3.0",
+ org.slf4j;version="[1.5.5,1.6.0)"
 Require-Bundle: org.eclipse.ui.console,
  org.eclipse.core.runtime,
  org.eclipse.ui

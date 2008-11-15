@@ -1,5 +1,7 @@
 package com.verticon.tracker.impl;
 
+import static com.verticon.tracker.TrackerPlugin.bundleMarker;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationWrapper;
@@ -36,7 +38,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 			.getLogger(AnimalEventHistoryAdapter.class);
 
 	private Animal animal = null;
-	private EList<Event> events = new BasicEList<Event>();
+	private final EList<Event> events = new BasicEList<Event>();
 	private Adapter forwardingAdapter = null;
 
 	public AnimalEventHistoryAdapter() {
@@ -86,6 +88,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 	/**
 	 * Set the animal before calling calling super.
 	 */
+	@Override
 	public void setTarget(Notifier target) {
 		if (animal == null && target instanceof Animal) {
 			animal = (Animal) target;
@@ -113,12 +116,12 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 			case Notification.ADD:
 				Event event = (Event) n.getNewValue();
 				if (events.contains(event)) {
-					logger.warn("{} from tag {} already exists", event
+					logger.warn(bundleMarker,"{} from tag {} already exists", event
 							.getClass().getSimpleName(),
 							((Tag) n.getNotifier()).getId());
 				} else {
 					events.add(event);
-					logger.debug("{} added to tag {}", event.getClass()
+					logger.debug(bundleMarker,"{} added to tag {}", event.getClass()
 							.getSimpleName(), ((Tag) n.getNotifier()).getId());
 					forwardAdd(event);
 				}
@@ -127,7 +130,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 			case Notification.ADD_MANY:
 				EList<Event> eventsToAdd = (EList<Event>) n.getNewValue();
 				if (events.addAll(eventsToAdd)) {
-					logger.debug("Tag {} added {} events", ((Tag) n
+					logger.debug(bundleMarker,"Tag {} added {} events", ((Tag) n
 							.getNotifier()).getId(), eventsToAdd.size());
 					forwardAdd(eventsToAdd);
 				}
@@ -135,7 +138,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 			case Notification.REMOVE_MANY:
 				EList<Event> eventsToRemove = (EList<Event>) n.getOldValue();
 				if (events.remove(eventsToRemove)) {
-					logger.debug("Tag {} removed {} events", ((Tag) n
+					logger.debug(bundleMarker,"Tag {} removed {} events", ((Tag) n
 							.getNotifier()).getId(), eventsToRemove.size());
 					forwardRemove(eventsToRemove);
 				}
@@ -144,11 +147,11 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 				Event eventToRemove = (Event) n.getOldValue();
 				if (events.contains(eventToRemove)) {
 					events.remove(eventToRemove);
-					logger.debug("{} removed ", eventToRemove.getClass()
+					logger.debug(bundleMarker,"{} removed ", eventToRemove.getClass()
 							.getSimpleName());
 					forwardRemove(eventToRemove);
 				} else {
-					logger.warn("TagHandler: {} already removed from events",
+					logger.warn(bundleMarker,"TagHandler: {} already removed from events",
 							eventToRemove.getClass().getSimpleName());
 				}
 
@@ -181,12 +184,12 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 			case Notification.REMOVING_ADAPTER:
 				Event eventAffected = (Event) n.getNotifier();
 				if (events.contains(eventAffected)) {
-					logger.debug("EventHandler: removing {}", eventAffected
+					logger.debug(bundleMarker,"EventHandler: removing {}", eventAffected
 							.getClass().getSimpleName());
 					events.remove(eventAffected);
 					forwardRemove(eventAffected);
 				} else {
-					logger.warn("EventHandler: already removed {} ",
+					logger.warn(bundleMarker,"EventHandler: already removed {} ",
 							eventAffected.getClass().getSimpleName());
 				}
 				break;
@@ -218,13 +221,13 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 			switch (n.getEventType()) {
 			case Notification.ADD:
 				Tag tag = (Tag) n.getNewValue();
-				logger.debug("{} added to animal {}", tag.getId(), n);
+				logger.debug(bundleMarker,"{} added to animal {}", tag.getId(), n);
 				if (tag.getEvents().isEmpty()) {
 					logger.debug("Tag {} had no events to add", tag.getId());
 					break;
 				}
 				events.addAll(tag.getEvents());
-				logger.debug("Tag {} added {} events", tag.getId(), tag
+				logger.debug(bundleMarker,"Tag {} added {} events", tag.getId(), tag
 						.getEvents().size());
 				// forward(new NotificationImpl(Notification.ADD_MANY, null, tag
 				// .getEvents()));
@@ -237,7 +240,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 					eventsToAdd.addAll(tagToAdd.getEvents());
 				}
 				if (events.addAll(eventsToAdd)) {
-					logger.debug("Added {} tags {} with {} events", tagsToAdd
+					logger.debug(bundleMarker,"Added {} tags {} with {} events", tagsToAdd
 							.size(), eventsToAdd.size());
 					forwardAdd(eventsToAdd);
 				}
@@ -246,7 +249,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 				tag = (Tag) n.getOldValue();
 				if (events.removeAll(tag.getEvents())) {
 					logger
-							.debug(
+							.debug(bundleMarker,
 									"{} tag removed at least one event from a list of {} events",
 									tag.getId(), tag.getEvents().size());
 					forwardAdd(tag.getEvents());
@@ -259,21 +262,21 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 				EList<Event> eventsToRemove = new BasicEList<Event>();
 
 				for (Tag tagToRemove : tagsToRemove) {
-					logger.debug("{} added to animal {}", tagToRemove.getId(),
+					logger.debug(bundleMarker,"{} added to animal {}", tagToRemove.getId(),
 							n);
 					eventsToRemove.addAll(tagToRemove.getEvents());
 
 				}
 				if (events.removeAll(eventsToRemove)) {
 					logger
-							.debug(
+							.debug(bundleMarker,
 									"At least one event was removed from a removal of {} tags ",
 									tagsToRemove.size());
 				}
 				forwardRemove(eventsToRemove);
 				break;
 			default:
-				// logger.error("Did not handle Animal {}", n);
+				// logger.error(bundleMarker,"Did not handle Animal {}", n);
 				break;
 			}
 
@@ -290,7 +293,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 				Premises premises = (Premises) animal.eContainer();
 				Adapter premisesAdapter = EventHistoryAdapterFactory.INSTANCE
 						.adapt(premises, EventHistory.class);
-				logger.debug("Forwarding notification {}", n);
+				logger.debug(bundleMarker,"Forwarding notification {}", n);
 				premisesAdapter.notifyChanged(new NotificationWrapper(this, n));
 
 			}
