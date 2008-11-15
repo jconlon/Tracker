@@ -1,5 +1,7 @@
 package com.verticon.tracker.impl;
 
+import static com.verticon.tracker.TrackerPlugin.bundleMarker;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationWrapper;
@@ -33,7 +35,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 	 */
 	private final Logger logger = LoggerFactory
 			.getLogger(PremisesEventHistoryAdapter.class);
-	private EList<Event> events = new BasicEList<Event>();
+	private final EList<Event> events = new BasicEList<Event>();
 
 	/**
 	 * Premises that is being adapted
@@ -50,7 +52,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 		if (premises.getAnimals().isEmpty()) {
 			events.clear();
 		} else if (events.isEmpty()) {
-			logger.debug("Building events from scratch");
+			logger.debug(bundleMarker,"Building events from scratch");
 			for (Animal animal : premises.getAnimals()) {
 				events.addAll(animal.eventHistory());
 			}
@@ -59,7 +61,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 	}
 
 	public void setForwarding(Adapter adapter) {
-		logger.debug("Setting forwarding to adapter={} on={}", adapter, this);
+		logger.debug(bundleMarker,"Setting forwarding to adapter={} on={}", adapter, this);
 		this.forwardingAdapter = adapter;
 	}
 
@@ -77,7 +79,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 		} else if (notifier instanceof Premises) {
 			handlePremisesNotification(notification);
 		} else {
-			logger.error("BaseHandler: Did not handle {} from {}",
+			logger.error(bundleMarker,"BaseHandler: Did not handle {} from {}",
 					notification, notifier);
 		}
 
@@ -86,6 +88,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 	/**
 	 * Set the animal before calling calling super.
 	 */
+	@Override
 	public void setTarget(Notifier target) {
 		if (premises == null && target instanceof Premises) {
 			premises = (Premises) target;
@@ -112,7 +115,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 
 			} else {
 				events.add(event);
-				logger.debug("{} added ", event.getClass().getSimpleName());
+				logger.debug(bundleMarker,"{} added ", event.getClass().getSimpleName());
 				forward(n);
 			}
 			break;
@@ -120,7 +123,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 		case Notification.ADD_MANY:
 			EList<Event> eventsToAdd = (EList<Event>) n.getNewValue();
 			if (events.addAll(eventsToAdd)) {
-				logger.debug("Added {} events", eventsToAdd.size());
+				logger.debug(bundleMarker,"Added {} events", eventsToAdd.size());
 				forward(n);
 			}
 			break;
@@ -128,7 +131,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 		case Notification.REMOVE_MANY:
 			EList<Event> eventsToRemove = (EList<Event>) n.getOldValue();
 			if (events.removeAll(eventsToRemove)) {
-				logger.debug("Removed {} events", eventsToRemove.size());
+				logger.debug(bundleMarker,"Removed {} events", eventsToRemove.size());
 				forward(n);
 			}
 			break;
@@ -137,7 +140,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 			Event eventToRemove = (Event) n.getOldValue();
 			if (events.contains(eventToRemove)) {
 				events.remove(eventToRemove);
-				logger.debug("{} removed from events", eventToRemove.getClass()
+				logger.debug(bundleMarker,"{} removed from events", eventToRemove.getClass()
 						.getSimpleName());
 				forward(n);
 			} else {
@@ -170,7 +173,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 				Animal animal = (Animal) n.getNewValue();
 				eventsChanged = animal.eventHistory();
 				if (events.addAll(eventsChanged)) {
-					logger.debug("Animal {} added one or more events", animal
+					logger.debug(bundleMarker,"Animal {} added one or more events", animal
 							.getId());
 					forwardAdd(eventsChanged);
 				}
@@ -183,7 +186,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 
 				}
 				if (events.addAll(eventsChanged)) {
-					logger.debug("{} animals added one or more events",
+					logger.debug(bundleMarker,"{} animals added one or more events",
 							animalsToAdd.size());
 					forwardAdd(eventsChanged);
 				}
@@ -193,7 +196,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 				eventsChanged = animal.eventHistory();
 
 				if (events.removeAll(animal.eventHistory())) {
-					logger.debug("Animal {} removed {} events", animal.getId(),
+					logger.debug(bundleMarker,"Animal {} removed {} events", animal.getId(),
 							eventsChanged.size());
 					forwardRemove(eventsChanged);
 				}
@@ -208,12 +211,12 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 				}
 
 				if (events.removeAll(eventsChanged)) {
-					logger.debug("Several animals removed {} events",
+					logger.debug(bundleMarker,"Several animals removed {} events",
 							eventsChanged.size());
 				}
 				break;
 			default:
-				logger.error("Did not handle Premises {}", n);
+				logger.error(bundleMarker,"Did not handle Premises {}", n);
 				break;
 			}
 
@@ -227,7 +230,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 
 	private void forward(Notification n) {
 		if (forwardingAdapter == null) {
-			logger.debug("Forwarding adapter for {} is null {}", this, this.forwardingAdapter);
+			logger.debug(bundleMarker,"Forwarding adapter for {} is null {}", this, this.forwardingAdapter);
 		} else {
 			forwardingAdapter.notifyChanged(n);
 		}

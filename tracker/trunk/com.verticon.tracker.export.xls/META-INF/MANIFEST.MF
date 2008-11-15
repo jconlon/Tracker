@@ -20,4 +20,4 @@ Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)",
  org.apache.poi.hssf.usermodel,
  org.eclipse.emf.common.ui,
  org.eclipse.emf.edit.provider,
- org.slf4j;version="1.5.0"
+ org.slf4j;version="[1.5.5,1.6.0)"

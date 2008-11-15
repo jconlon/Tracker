@@ -5,6 +5,10 @@ package com.verticon.tracker;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 /**
  * @author jconlon
@@ -17,8 +21,19 @@ public class TrackerPlugin extends Plugin {
 
 	   // The shared instance.
 	   private static TrackerPlugin plugin;
-
 	   
+	   /**
+	    * slf4j Logger
+	    */
+	   private final Logger logger = LoggerFactory.getLogger(TrackerPlugin.class);
+
+	   public static final Marker bundleMarker = createBundleMarker();
+	   private static final Marker createBundleMarker() {
+		   Marker bundleMarker = MarkerFactory.getMarker(ID);
+		   bundleMarker.add(MarkerFactory.getMarker("IS_MARKER"));
+		   return bundleMarker;
+	   }
+	    
 	   /**
 	    * The constructor.
 	    */
@@ -30,17 +45,21 @@ public class TrackerPlugin extends Plugin {
 	   /**
 	    * This method is called upon plug-in activation
 	    */
-	   public void start(BundleContext context) throws Exception {
+	   @Override
+	public void start(BundleContext context) throws Exception {
 	      super.start(context);
+	      logger.debug(bundleMarker, "started");
 	   }
 
 	   /**
 	    * This method is called when the plug-in is stopped
 	    */
-	   public void stop(BundleContext context) throws Exception {
+	   @Override
+	public void stop(BundleContext context) throws Exception {
 	      super.stop(context);
 	     
 	      plugin = null;
+	      logger.debug(bundleMarker, "stopped");
 	   }
 
 	   /**

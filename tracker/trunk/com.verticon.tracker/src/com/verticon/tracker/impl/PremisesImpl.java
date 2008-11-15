@@ -6,6 +6,8 @@
  */
 package com.verticon.tracker.impl;
 
+import static com.verticon.tracker.TrackerPlugin.bundleMarker;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -391,7 +393,7 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 		 EList<Event> results = getEventHistory();
 		// EList<Event> results = getEventHistory2();
 		// long endTime = System.nanoTime();
-		// logger.debug("event history fetched in {} nanoseconds", endTime
+		// logger.debug(bundleMarker,"event history fetched in {} nanoseconds", endTime
 		// - startTime);
 		return results;
 	}

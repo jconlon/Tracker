@@ -14,10 +14,8 @@ Require-Bundle: org.junit;visibility:=reexport,
  com.verticon.tracker;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.ocl,
- slf4j.api;bundle-version="1.5.0",
  org.eclipse.ocl.ecore,
- com.verticon.tracker.fair.transaction.editor;bundle-version="0.1.1",
- com.verticon.tracker.logging;bundle-version="0.1.0"
+ com.verticon.tracker.fair.transaction.editor;bundle-version="0.1.1"
 Eclipse-LazyStart: true
 Import-Package: com.verticon.tracker.edit.provider;version="0.1.0",
  com.verticon.tracker.fair.edit.provider,
@@ -25,4 +23,5 @@ Import-Package: com.verticon.tracker.edit.provider;version="0.1.0",
  org.eclipse.emf.edit.command,
  org.eclipse.emf.edit.domain,
  org.eclipse.emf.edit.provider,
- org.eclipse.emf.edit.provider.resource
+ org.eclipse.emf.edit.provider.resource,
+ org.slf4j;version="[1.5.5,1.6.0)"

@@ -6,7 +6,8 @@
  */
 package com.verticon.tracker.impl;
 
-import com.verticon.tracker.*;
+import static com.verticon.tracker.TrackerPlugin.bundleMarker;
+
 import java.net.URI;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,7 +18,6 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -113,7 +113,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			Logger logger = LoggerFactory
 					.getLogger(TrackerFactoryImpl.class);
 			
-			logger.error("Failed to initialize TrackerFactory",exception);
+			logger.error(bundleMarker,"Failed to initialize TrackerFactory",exception);
 		}
 		return new TrackerFactoryImpl();
 	}
@@ -936,7 +936,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 		
 		try {
 			if(CheckISO7064Mod37_36.verify(initialValue)){
-				return (String)initialValue;
+				return initialValue;
 			}
 		} catch (NumberFormatException e) {
 			return null;
@@ -963,7 +963,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public String createEmailFromString(EDataType eDataType, String initialValue) {
 		if(initialValue == null) return null;
 		if(CheckEmail.validate(initialValue)){
-			return (String)initialValue;
+			return initialValue;
 		}
 		throw new IllegalArgumentException(initialValue+" is not a legal Email Contact");
 		

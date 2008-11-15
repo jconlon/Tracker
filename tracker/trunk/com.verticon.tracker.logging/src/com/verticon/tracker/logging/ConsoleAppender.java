@@ -3,32 +3,30 @@
  */
 package com.verticon.tracker.logging;
 
-import org.apache.log4j.AppenderSkeleton;
-import org.apache.log4j.Level;
-import org.apache.log4j.spi.LoggingEvent;
 import org.eclipse.ui.PlatformUI;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.spi.LoggingEvent;
+import ch.qos.logback.core.AppenderBase;
 
 /**
  * @author jconlon
- *
+ * 
  */
-public class ConsoleAppender extends AppenderSkeleton {
-	
+public class ConsoleAppender extends AppenderBase<LoggingEvent> {
 
 	private String consoleName;
-	
-	
-	@Override
-	public void activateOptions() {
-		super.activateOptions();
-	}
 
-	/* (non-Javadoc)
-	 * @see org.apache.log4j.AppenderSkeleton#append(org.apache.log4j.spi.LoggingEvent)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.apache.log4j.AppenderSkeleton#append(org.apache.log4j.spi.LoggingEvent
+	 * )
 	 */
 	protected void appendInternal(LoggingEvent event) {
-		 String message = this.layout.format(event);
-		 switch (event.getLevel().toInt()) {
+		String message = super.getLayout().doLayout(event);
+		switch (event.getLevel().toInt()) {
 		case Level.ERROR_INT:
 			ConsoleUtil.printError(consoleName, message);
 			break;
@@ -36,53 +34,49 @@ public class ConsoleAppender extends AppenderSkeleton {
 		case Level.WARN_INT:
 			ConsoleUtil.printWarning(consoleName, message);
 			break;
-			
+
 		case Level.INFO_INT:
 			ConsoleUtil.printInfo(consoleName, message);
 			break;
-			
+
 		case Level.DEBUG_INT:
 			ConsoleUtil.print(consoleName, message);
 			break;
-			
+
 		default:
 			ConsoleUtil.print(consoleName, message);
 			break;
 		}
 	}
-	
+
 	/**
 	 * The console is running on the SWT UI thre
 	 */
 	@Override
-	protected void append(final LoggingEvent event){
-		
+	protected void append(final LoggingEvent event) {
+
 		try {
-			PlatformUI.getWorkbench().getDisplay().asyncExec (new Runnable () {
-			  public void run () {
-				  appendInternal(event);
-			  }
+			PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+				public void run() {
+					appendInternal(event);
+				}
 			});
 		} catch (RuntimeException e) {
-			//ignore
+			// ignore
 		}
-	
+
 	}
 
-	/* (non-Javadoc)
-	 * @see org.apache.log4j.AppenderSkeleton#close()
-	 */
 	@Override
-	public void close() {
+	public void stop() {
 		ConsoleUtil.unregisterConsole(consoleName);
+		super.stop();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.apache.log4j.AppenderSkeleton#requiresLayout()
-	 */
 	@Override
-	public boolean requiresLayout() {
-		return true;
+	public void start() {
+		ConsoleUtil.registerConsole(consoleName);
+		super.start();
 	}
 
 	public String getConsoleName() {
@@ -92,6 +86,5 @@ public class ConsoleAppender extends AppenderSkeleton {
 	public void setConsoleName(String consoleName) {
 		this.consoleName = consoleName;
 	}
-	
-	
+
 }
