@@ -1,4 +1,5 @@
 package com.verticon.tracker.fair.impl;
+import static com.verticon.tracker.fair.FairPlugin.bundleMarker;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -27,7 +28,7 @@ public class FairAllExhibitsAdapter extends EContentAdapter implements
 			.getLogger(FairAllExhibitsAdapter.class);
 
 	private Fair fair = null;
-	private EList<Exhibit> exhibits = new BasicEList<Exhibit>();
+	private final EList<Exhibit> exhibits = new BasicEList<Exhibit>();
 	private Adapter forwardingAdapter = null;
 
 
@@ -68,7 +69,7 @@ public class FairAllExhibitsAdapter extends EContentAdapter implements
 		}
 		super.notifyChanged(notification);
 		if (forwardingAdapter == null) {
-			logger.debug("Forwarding adapter for {} is null {}", this, this.forwardingAdapter);
+			logger.debug(bundleMarker,"Forwarding adapter for {} is null {}", this, this.forwardingAdapter);
 		} else {
 			forwardingAdapter.notifyChanged(notification);
 		}
