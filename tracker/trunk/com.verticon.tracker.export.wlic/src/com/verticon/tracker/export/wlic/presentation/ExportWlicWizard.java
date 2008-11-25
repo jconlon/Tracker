@@ -1,6 +1,8 @@
 
 package com.verticon.tracker.export.wlic.presentation;
 
+import static com.verticon.tracker.export.wlic.ExportWlicPlugin.bundleMarker;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
@@ -62,6 +64,7 @@ public class ExportWlicWizard extends Wizard implements IExportWizard {
 	 * This method is called by the wizard framework when the user presses the
 	 * Finish button.
 	 */
+	@Override
 	public boolean performFinish() {
 
 		premisesProcessor= new WlicPremisesProcessor(selectExportDateRangePage.getQueryFromDate());
@@ -82,7 +85,7 @@ public class ExportWlicWizard extends Wizard implements IExportWizard {
 				}
 			});
 		} catch (InvocationTargetException e) {
-			logger.error(
+			logger.error(bundleMarker,
 					"Failed to export "+premisesFile.getProjectRelativePath().toString(), 
 					e);
 			selectExportDateRangePage.setErrorMessage("Failed to export "+premisesFile.getProjectRelativePath().toString()+": "+e.getCause());
@@ -128,7 +131,7 @@ public class ExportWlicWizard extends Wizard implements IExportWizard {
 	private void performOperation(IProgressMonitor monitor) throws IOException,
 			CoreException {
 		new Exporter(premisesProcessor).export(monitor);
-		logger.info(premisesProcessor.getCompletionMessage());
+		logger.info(bundleMarker,premisesProcessor.getCompletionMessage());
 	}
 
 	class Exporter extends ExportPremisesBase {
