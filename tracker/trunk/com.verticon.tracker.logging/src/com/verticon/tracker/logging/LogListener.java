@@ -62,7 +62,7 @@ public class LogListener implements org.osgi.service.log.LogListener {
 	
 	static Marker createBundleAndServiceMarker(LogEntry entry, BundleContext context){
 		String id = context.getBundle().getSymbolicName();
-		Marker bundleMarker = MarkerFactory.getMarker(id);
+		Marker bundleMarker = MarkerFactory.getMarker(id); 
 		//Not sure what to do with the serviceReference
 		ServiceReference ref = entry.getServiceReference();
 		Object sid = ref.getProperty(Constants.SERVICE_ID);
@@ -71,6 +71,7 @@ public class LogListener implements org.osgi.service.log.LogListener {
 		}
 		bundleMarker.add(MarkerFactory.getMarker("IS_MARKER"));
 		return bundleMarker;
+		
 	}
 	
 }
