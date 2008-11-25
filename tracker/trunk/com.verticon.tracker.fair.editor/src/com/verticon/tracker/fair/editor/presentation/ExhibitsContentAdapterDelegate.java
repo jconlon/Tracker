@@ -1,4 +1,5 @@
 package com.verticon.tracker.fair.editor.presentation;
+import static com.verticon.tracker.fair.editor.presentation.FairEditorPlugin.bundleMarker;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -30,7 +31,7 @@ public class ExhibitsContentAdapterDelegate implements Adapter{
 		
 		if(oldInput==null && newInput!=null){
 			Fair fairInput = (Fair)newInput;
-			logger.debug(
+			logger.debug(bundleMarker,
 					"Started, viewer={} newInput={}",
 					viewer, fairInput.getName());
 			//Set up the new
@@ -40,7 +41,7 @@ public class ExhibitsContentAdapterDelegate implements Adapter{
 			allExhibitsInFair.setForwarding(this);
 		}else if(oldInput!=null && newInput==null){
 			Fair fairOldInput = (Fair)oldInput;
-			logger.debug("Stopped, viewer={} oldInput={}",
+			logger.debug(bundleMarker,"Stopped, viewer={} oldInput={}",
 					viewer==null?"no viewer":viewer, fairOldInput.getName());
 			AllExhibits allExhibitsInFair =  (AllExhibits) AllExhibitsAdapterFactory.INSTANCE.adapt(
 					fairOldInput, AllExhibits.class);
@@ -49,7 +50,7 @@ public class ExhibitsContentAdapterDelegate implements Adapter{
 		}else if (oldInput!=null && newInput!=null){
 			Fair fairInput = (Fair)newInput;
 			Fair fairOldInput = (Fair)oldInput;
-			logger.debug("Changed, viewer={} newInput={} oldInput={}",
+			logger.debug(bundleMarker,"Changed, viewer={} newInput={} oldInput={}",
 					new Object[] {viewer,fairInput.getName(),fairOldInput.getName()});
 			//Teardown the old
 			AllExhibits allExhibitsInFair =  (AllExhibits) AllExhibitsAdapterFactory.INSTANCE.adapt(
@@ -64,7 +65,7 @@ public class ExhibitsContentAdapterDelegate implements Adapter{
 			
 			
 		}else if (oldInput!=null && newInput!=null){
-			logger.debug("Emptied, viewer={} but both old and new input are null",
+			logger.debug(bundleMarker,"Emptied, viewer={} but both old and new input are null",
 					viewer);
 			
 		}

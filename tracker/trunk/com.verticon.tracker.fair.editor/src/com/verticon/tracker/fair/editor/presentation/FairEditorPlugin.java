@@ -11,6 +11,10 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
@@ -23,6 +27,8 @@ import com.verticon.tracker.fair.Fair;
  * @generated
  */
 public final class FairEditorPlugin extends EMFPlugin {
+	private static final String ID = "com.verticon.tracker.fair.editor";
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -46,6 +52,21 @@ public final class FairEditorPlugin extends EMFPlugin {
 	 */
 	private static Implementation plugin;
 
+	/**
+	 * slf4j Logger
+	 */
+	private final static Logger logger = LoggerFactory.getLogger(FairEditorPlugin.class);
+
+	/**
+	 * slf4j Marker to keep track of bundle
+	 */
+	public static final Marker bundleMarker = createBundleMarker();
+	private static final Marker createBundleMarker() {
+		Marker bundleMarker = MarkerFactory.getMarker(ID);
+		bundleMarker.add(MarkerFactory.getMarker("IS_MARKER"));
+		return bundleMarker;
+	}
+	
 	/**
 	 * Create the instance.
 	 * <!-- begin-user-doc -->
@@ -92,6 +113,12 @@ public final class FairEditorPlugin extends EMFPlugin {
 	 * @generated NOT
 	 */
 	public static class Implementation extends EclipseUIPlugin {
+		@Override
+		public void stop(BundleContext context) throws Exception {
+			super.stop(context);
+			logger.debug(bundleMarker, "Stopped Bundle");
+		}
+
 		/**
 		 * Creates an instance.
 		 * <!-- begin-user-doc -->
@@ -111,6 +138,7 @@ public final class FairEditorPlugin extends EMFPlugin {
 			super.start(context);
 			Platform.getAdapterManager().registerAdapters(new PremisesProviderFactory(),
 					Fair.class);
+			logger.debug(bundleMarker, "Started Bundle");
 		}
 	}
 	
