@@ -3,6 +3,8 @@
  */
 package com.verticon.tracker.editor.util;
 
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
+
 import java.util.List;
 
 import org.eclipse.core.databinding.Binding;
@@ -61,7 +63,7 @@ final class TransactionalAwareUpdateValueStrategy extends
 		IStatus result = super.doSet(observableValue, value);
 		ModelValidationService.getInstance().removeValidationListener(this);
 		if (this.validationStatus!=IStatus.OK) {
-			logger.debug("Failed to validate {}  because {}",value, validationIStatus.getMessage());
+			logger.debug(bundleMarker,"Failed to validate {}  because {}",value, validationIStatus.getMessage());
 			//Write the results to the status label
 				result = validationIStatus;
 				binding.updateModelToTarget();

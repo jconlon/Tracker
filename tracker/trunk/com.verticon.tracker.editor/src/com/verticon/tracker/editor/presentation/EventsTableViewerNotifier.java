@@ -3,6 +3,8 @@
  */
 package com.verticon.tracker.editor.presentation;
 
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
+
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -24,6 +26,7 @@ import com.verticon.tracker.TrackerPackage;
  * @author jconlon
  * 
  */
+@Deprecated
 public class EventsTableViewerNotifier extends EContentAdapter {
 	
 	private volatile Event lastEvent;
@@ -48,7 +51,7 @@ public class EventsTableViewerNotifier extends EContentAdapter {
 	}
 
 	public void setResource(Resource resource) {
-		logger.debug("Setting resource {}", resource.getURI());
+		logger.debug(bundleMarker,"Setting resource {}", resource.getURI());
 		this.activeResource = resource.getResourceSet();
 		super.setTarget(activeResource);
 	}
@@ -80,13 +83,13 @@ public class EventsTableViewerNotifier extends EContentAdapter {
         	
         if (notification.getFeature() == TrackerPackage.eINSTANCE
 				.getTag_Events()) {
-			logger.error("Refreshing Events table for Tag_Events");
+			logger.error(bundleMarker,"Refreshing Events table for Tag_Events");
 
 			refreshViewer(eventsTableViewer);
 
 		} else if (notification.getFeature() == TrackerPackage.eINSTANCE
 				.getTag_Id()) {
-			logger.error( "Refreshing eventsTable for Tag_ID, from a {}");
+			logger.error(bundleMarker, "Refreshing eventsTable for Tag_ID, from a {}");
 			refreshViewer(eventsTableViewer); 
 		}
 
@@ -100,17 +103,17 @@ public class EventsTableViewerNotifier extends EContentAdapter {
         int featureID = n.getFeatureID(Event.class);
         if (featureID == TrackerPackage.EVENT__COMMENTS){
                 Event b = (Event) n.getNotifier();
-                logger.debug("The event comments are now {}",b.getComments() );
+                logger.debug(bundleMarker,"The event comments are now {}",b.getComments() );
                 updateViewer(eventsTableViewer, b, null);
         }else
         if (featureID == TrackerPackage.EVENT__TAG){
-        	logger.debug("Ignored feature {}",n.getFeature());
+        	logger.debug(bundleMarker,"Ignored feature {}",n.getFeature());
         }else
         if(featureID == -1){
-        	logger.debug("Ignored notification {} isViewer={}", n,isViewer);
+        	logger.debug(bundleMarker,"Ignored notification {} isViewer={}", n,isViewer);
         }
         else{
-        	logger.error("Implement feature {} isViewer={}",n.getFeature(),isViewer);
+        	logger.error(bundleMarker,"Implement feature {} isViewer={}",n.getFeature(),isViewer);
         }
     }
 	
@@ -124,7 +127,7 @@ public class EventsTableViewerNotifier extends EContentAdapter {
                 
                 lastEvent=event;
                 
-                logger.debug("{} added by tag {} to the tableViewer by {} using {}",
+                logger.debug(bundleMarker,"{} added by tag {} to the tableViewer by {} using {}",
                 		new Object[] {
                 		event.getClass().getSimpleName(),
                 		((Tag)n.getNotifier()).getId(), 
@@ -137,7 +140,7 @@ public class EventsTableViewerNotifier extends EContentAdapter {
             } else
             if (n.getEventType() == Notification.REMOVE){
                     Event b = (Event) n.getOldValue(); 
-                    logger.debug("Old Event {} was removed from the Tag {} and the tableViewer", 
+                    logger.debug(bundleMarker,"Old Event {} was removed from the Tag {} and the tableViewer", 
                     		b, n.getNotifier());
                     
                     removeFromViewer(eventsTableViewer, b);
@@ -146,7 +149,7 @@ public class EventsTableViewerNotifier extends EContentAdapter {
             
             
             else{
-            	logger.error("Implement feature {}",n.getFeature());
+            	logger.error(bundleMarker,"Implement feature {}",n.getFeature());
             }
         }
     }

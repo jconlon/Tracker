@@ -7,6 +7,8 @@
 package com.verticon.tracker.editor.presentation;
 
 
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -585,7 +587,7 @@ public class TrackerEditor
 	 * @generated NOT
 	 */
 	protected void handleChangedResources() {
-		logger.debug("HandleChangeResources entered");
+		logger.debug(bundleMarker,"HandleChangeResources entered");
 		if (!changedResources.isEmpty() && (!isDirty() || handleDirtyConflict())) {
 			editingDomain.getCommandStack().flush();
 
@@ -617,7 +619,7 @@ public class TrackerEditor
 //	 * @generated NOT
 //	 */
 //	protected void handleChangedResources() {
-//		logger.debug("handleChangedResources entered");
+//		logger.debug(bundleMarker,"handleChangedResources entered");
 //		boolean isChangeResources = !changedResources.isEmpty();
 //		boolean reload = !isChangeResources && (!isDirty() || handleDirtyConflict());
 //		handleChangedResourcesGen();
@@ -625,7 +627,7 @@ public class TrackerEditor
 //		if (reload) {
 //			  resetInputOnTableViewers();
 //		}else{
-//			logger.warn("Reload did not occur isChangeResource={}",
+//			logger.warn(bundleMarker,"Reload did not occur isChangeResource={}",
 //					isChangeResources);
 //		}
 //	}
@@ -637,11 +639,11 @@ public class TrackerEditor
 	// Object rootObject = getRoot();
 	// if (rootObject instanceof Premises)
 	// {
-	// logger.debug("Setting input on tables");
+	// logger.debug(bundleMarker,"Setting input on tables");
 	// animalsTableViewer.setInput(rootObject);
 	// eventsTableViewer.setInput(rootObject);
 	// }else{
-	// logger.error("Root not a Premises. Did not reset input on viewers.");
+	// logger.error(bundleMarker,"Root not a Premises. Did not reset input on viewers.");
 	// }
 	// }
   

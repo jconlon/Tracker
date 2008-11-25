@@ -1,5 +1,7 @@
 package com.verticon.tracker.editor.util;
 
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,7 +51,7 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 
 	public DefaultPropertiesFormProvider() {
 		super();
-		logger.debug("Constructed");
+		logger.debug(bundleMarker,"Constructed");
 	}
 
 	private CTabItem item1;
@@ -62,9 +64,9 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 	public void fillProperties(ISelection selection,
 			AdapterFactory adapterFactory, CTabFolder cTabFolder,
 			String nameOfTab, boolean showAdvanceProperties) {
-		logger.debug("filling properties");
+		logger.debug(bundleMarker,"Filling properties");
 		if (item1 != null) {
-			logger.debug("Desposing of CTabItem");
+			logger.debug(bundleMarker,"Desposing of CTabItem");
 			item1.dispose();
 			item1 = null;
 		}
@@ -179,13 +181,13 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 					for (String filter : filters) {
 						if (filter.equals(this.FILTER_ID_EXPERT)) {
 							filterProperty = true;
-							//logger.debug("Filtering Property {} has filter {}"
+							//logger.debug(bundleMarker,"Filtering Property {} has filter {}"
 							// ,
 							// itemPropertyDescriptor
 							// .getDisplayName(object), filter);
 						}
 						// else {
-						// logger.debug(
+						// logger.debug(bundleMarker,
 						// "Not Filtering Property {} has filter {}",
 						// itemPropertyDescriptor
 						// .getDisplayName(object), filter);
@@ -197,7 +199,7 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 				continue;
 			}
 			// Create a label with the name of the property
-			logger.debug("Creating label for property {} with filter {}",
+			logger.debug(bundleMarker,"Creating label for property {} with filter {}",
 					itemPropertyDescriptor.getDisplayName(object),
 					itemPropertyDescriptor.getFilterFlags(object));
 			String categoryName = itemPropertyDescriptor.getCategory(object);

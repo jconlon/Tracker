@@ -3,6 +3,8 @@
  */
 package com.verticon.tracker.editor.util;
 
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -99,7 +101,7 @@ public class ActionUtils {
 			ISelection selection) throws FileNotFoundException {
 		IResource resource = getSelectedResource(editor, selection);
 		
-		logger.info("Adding tags from resource {}", resource.getFullPath());
+		logger.info(bundleMarker,"Adding tags from resource {}", resource.getFullPath());
 		Scanner sc = null;
 		Set<Long> tagNumbers = null;
 		FileNotFoundException ex = null;
@@ -414,7 +416,7 @@ public class ActionUtils {
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 
 		if (editor == null || (!(editor instanceof TrackerEditor))) {
-			logger.error("The active editor is not a TrackerEditor.");
+			logger.error(bundleMarker,"The active editor is not a TrackerEditor.");
 			MessageDialog.openError(targetPart.getSite().getShell(),
 					"Failed to add tags",
 					"Could not find an active TrackerEditor ");
@@ -629,7 +631,7 @@ public class ActionUtils {
 				cal.add(Calendar.SECOND, -timeoutWindow);
 				Date subtractedDate = cal.getTime();
 				if(historicalEventDate.after(subtractedDate)){
-					logger.info(
+					logger.info(bundleMarker,
 							"Defered adding the event {} to the animal {} because it's dateTime {} is within {} second(s) of an similar event on the animal. Check the duplicate event window in user preferences.",
 							new Object[] {
 										eventToAdd.getClass().getSimpleName(), 

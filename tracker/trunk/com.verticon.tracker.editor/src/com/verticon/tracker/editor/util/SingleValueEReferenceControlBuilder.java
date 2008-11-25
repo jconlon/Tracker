@@ -1,5 +1,7 @@
 package com.verticon.tracker.editor.util;
 
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class SingleValueEReferenceControlBuilder implements ControlBuilder {
 			IItemPropertyDescriptor itemPropertyDescriptor,
 			AdapterFactory adapterFactory, DataBindingContext dataBindingContext) {
 
-		logger.debug("Creating Control For {}", object);
+		logger.debug(bundleMarker,"Creating Control For {}", object);
 		
 		ComboViewer comboViewer = createControl(object, parent,
 				itemPropertyDescriptor, adapterFactory);

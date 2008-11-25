@@ -1,5 +1,7 @@
 package com.verticon.tracker.editor.util;
 
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,7 +107,7 @@ public class MultiValueEReferencControlBuilder implements ControlBuilder {
 				List<?> currentValues = (List<?>) eObject
 						.eGet(eStructuralFeature);
 				if (results != null && results.equals(currentValues)) {
-					logger.debug("Values are equal");
+					logger.debug(bundleMarker,"Values are equal");
 				} else {
 					handleResults(results, eObject, eStructuralFeature);
 				}
@@ -119,7 +121,7 @@ public class MultiValueEReferencControlBuilder implements ControlBuilder {
 			 */
 			private void handleResults(EList<?> results, EObject eObject,
 					EStructuralFeature eStructuralFeature) {
-				logger.debug("Handling Result: " + results);
+				logger.debug(bundleMarker,"Handling Result: " + results);
 				
 				EditingDomain ed = AdapterFactoryEditingDomain
 						.getEditingDomainFor(eObject);
