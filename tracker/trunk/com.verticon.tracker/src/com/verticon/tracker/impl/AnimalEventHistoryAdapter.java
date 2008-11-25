@@ -80,7 +80,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 		} else if (notifier instanceof Animal) {
 			handleAnimalNotification(notification);
 		} else {
-			logger.error("BaseHandler: Did not handle {} from {}",
+			logger.error(bundleMarker,"BaseHandler: Did not handle {} from {}",
 					notification, notifier);
 		}
 	}
@@ -158,7 +158,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 				break;
 
 			default:
-				logger.error("Did not handle a Tag {}", n);
+				logger.error(bundleMarker,"Did not handle a Tag {}", n);
 				break;
 			}
 
@@ -195,7 +195,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 				break;
 			// case TrackerPackage.EVENT__COMMENTS:
 			// case TrackerPackage.EVENT__TAG:
-			// logger.warn("EventHandler: Ignored Event feature {}",
+			// logger.warn(bundleMarker,"EventHandler: Ignored Event feature {}",
 			// n.getFeature());
 			// break;
 			default:
@@ -203,7 +203,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 			}
 
 		default:
-			// logger.error("EventHandler: Did not handle Event {}", n);
+			// logger.error(bundleMarker,"EventHandler: Did not handle Event {}", n);
 			break;
 		}
 
@@ -223,7 +223,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 				Tag tag = (Tag) n.getNewValue();
 				logger.debug(bundleMarker,"{} added to animal {}", tag.getId(), n);
 				if (tag.getEvents().isEmpty()) {
-					logger.debug("Tag {} had no events to add", tag.getId());
+					logger.debug(bundleMarker,"Tag {} had no events to add", tag.getId());
 					break;
 				}
 				events.addAll(tag.getEvents());
