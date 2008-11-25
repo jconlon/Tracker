@@ -42,7 +42,7 @@ public class PeopleStrategy implements SelectionStrategy {
 	public void handleManualTableViewerSelection(ISelection selection,
 			SelectionController selectionController) {
 
-//		logger.debug("Sending People selection event");
+//		logger.debug(bundleMarker,"Sending People selection event");
 
 		selectionController.sendSelectionToChannel(selection,
 				getEventAdminSourceName());
@@ -59,7 +59,7 @@ public class PeopleStrategy implements SelectionStrategy {
 
 			@Override
 			public Object caseExhibit(Exhibit exhibit) {
-//				logger.debug("Received Exhibit selection");
+//				logger.debug(bundleMarker,"Received Exhibit selection");
 				Person person = exhibit.getExhibitor();
 				if(person != null){
 					viewer.setSelection(new StructuredSelection(person));
@@ -69,7 +69,7 @@ public class PeopleStrategy implements SelectionStrategy {
 
 			@Override
 			public Object casePerson(Person person) {
-//				logger.debug("Received Person selection");
+//				logger.debug(bundleMarker,"Received Person selection");
 				viewer.setSelection(new StructuredSelection(person), true);
 				return person;
 			}
