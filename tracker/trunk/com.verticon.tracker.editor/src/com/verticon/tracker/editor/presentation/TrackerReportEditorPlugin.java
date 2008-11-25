@@ -10,6 +10,10 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 /**
  * This is the central singleton for the TrackerReport editor plugin.
@@ -40,6 +44,24 @@ public final class TrackerReportEditorPlugin extends EMFPlugin {
 	 * @generated
 	 */
 	private static Implementation plugin;
+	
+	//The identifier for this plugin
+	public static final String ID = "com.verticon.tracker.editor";
+
+	/**
+	 * slf4j Logger
+	 */
+	private final static Logger logger = LoggerFactory.getLogger(TrackerReportEditorPlugin.class);
+
+	/**
+	 * slf4j Marker to keep track of bundle
+	 */
+	public static final Marker bundleMarker = createBundleMarker();
+	private static final Marker createBundleMarker() {
+		Marker bundleMarker = MarkerFactory.getMarker(ID);
+		bundleMarker.add(MarkerFactory.getMarker("IS_MARKER"));
+		return bundleMarker;
+	}
 
 	/**
 	 * Create the instance.
@@ -84,6 +106,12 @@ public final class TrackerReportEditorPlugin extends EMFPlugin {
 	 */
 	public static class Implementation extends EclipseUIPlugin {//implements EventHandler{
 
+		@Override
+		public void stop(BundleContext context) throws Exception {
+			logger.debug(bundleMarker, "Stopped Bundle");
+			super.stop(context);
+		}
+
 		/**
 		 * Creates an instance.
 		 * <!-- begin-user-doc -->
@@ -101,8 +129,10 @@ public final class TrackerReportEditorPlugin extends EMFPlugin {
 		@Override
 		public void start(BundleContext context) throws Exception {
 			super.start(context);
-
+			logger.debug(bundleMarker, "Started Bundle");
 		}
+		
+		
 
 	}
 }

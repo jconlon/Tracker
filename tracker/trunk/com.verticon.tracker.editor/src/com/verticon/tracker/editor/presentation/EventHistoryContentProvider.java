@@ -1,5 +1,7 @@
 package com.verticon.tracker.editor.presentation;
 
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -19,8 +21,7 @@ import com.verticon.tracker.util.EventHistoryAdapterFactory;
  * ContentProvider for the Events TableViewer.  Works with the EventHistory adapter
  * on the Premises to add or delete events from a TableViewer.
  * s
- * @see AnimalEventHistoryAdapter
- * @see PremisesEventHistoryAdapter
+
  * @see EventHistoryAdapterFactory
  * @see EventHistory
  * @author jconlon
@@ -59,7 +60,7 @@ public class EventHistoryContentProvider extends AdapterFactoryContentProvider i
 		
 		if(oldInput==null && newInput!=null){
 			Premises premisesInput = (Premises)newInput;
-			logger.debug(
+			logger.debug(bundleMarker,
 					"Started, viewer={} newInput={}",
 					viewer, premisesInput.getName());
 			//Set up the new
@@ -69,7 +70,7 @@ public class EventHistoryContentProvider extends AdapterFactoryContentProvider i
 			premisesEventHistoryAdapter.setForwarding(this);
 		}else if(oldInput!=null && newInput==null){
 			Premises premisesOldInput = (Premises)oldInput;
-			logger.debug("Stopped, viewer={} oldInput={}",
+			logger.debug(bundleMarker,"Stopped, viewer={} oldInput={}",
 					viewer==null?"no viewer":viewer, premisesOldInput.getName());
 			EventHistory premisesEventHistoryAdapter =  (EventHistory) EventHistoryAdapterFactory.INSTANCE.adapt(
 					premisesOldInput, EventHistory.class);
@@ -78,7 +79,7 @@ public class EventHistoryContentProvider extends AdapterFactoryContentProvider i
 		}else if (oldInput!=null && newInput!=null){
 			Premises premisesInput = (Premises)newInput;
 			Premises premisesOldInput = (Premises)oldInput;
-			logger.debug("Changed, viewer={} newInput={} oldInput={}",
+			logger.debug(bundleMarker,"Changed, viewer={} newInput={} oldInput={}",
 					new Object[] {viewer,premisesInput.getName(),premisesOldInput.getName()});
 			//Teardown the old
 			EventHistory premisesEventHistoryAdapter =  (EventHistory) EventHistoryAdapterFactory.INSTANCE.adapt(
@@ -93,7 +94,7 @@ public class EventHistoryContentProvider extends AdapterFactoryContentProvider i
 			
 			
 		}else if (oldInput!=null && newInput!=null){
-			logger.debug("Emptied, viewer={} but both old and new input are null",
+			logger.debug(bundleMarker,"Emptied, viewer={} but both old and new input are null",
 					viewer);
 			
 		}

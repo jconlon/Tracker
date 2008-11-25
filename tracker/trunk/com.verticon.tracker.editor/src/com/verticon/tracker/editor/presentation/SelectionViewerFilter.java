@@ -85,7 +85,7 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 				return true;
 			}
 //			Animal animal = (Animal)element;
-//			logger.debug("Filtering {} with targeted animals ={} ",element, targetedAnimals.size());
+//			logger.debug(bundleMarker,"Filtering {} with targeted animals ={} ",element, targetedAnimals.size());
 			
 			return false;
 		}
@@ -97,7 +97,7 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 					return true;
 				}
 //				Event event = (Event)element;
-//				logger.debug("Filtering {} with targeted events ={} ",element, targetedEvents.size());
+//				logger.debug(bundleMarker,"Filtering {} with targeted events ={} ",element, targetedEvents.size());
 				return false;
 			}
 			
@@ -161,7 +161,7 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 	 * parents of selected Events, and selected Events.
 	 */
 	protected void computeTargets(ISelection selection) {
-//		logger.debug("computing targets ");
+//		logger.debug(bundleMarker,"computing targets ");
 		 
 		clearTargets();
 		if (selection instanceof IStructuredSelection) {
@@ -182,8 +182,8 @@ public class SelectionViewerFilter extends ViewerFilterAction {
 				}
 			}
 		}
-//		logger.debug("Targeted animals = {}",targetedAnimals.size());
-//		logger.debug("Targeted events = {}",targetedEvents.size());
+//		logger.debug(bundleMarker,"Targeted animals = {}",targetedAnimals.size());
+//		logger.debug(bundleMarker,"Targeted events = {}",targetedEvents.size());
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package com.verticon.tracker.editor.util;
 
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
+
 import org.osgi.framework.BundleContext;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventAdmin;
@@ -23,7 +25,7 @@ public class EventAdminTracker extends ServiceTracker implements EventAdmin {
 		if (ea != null) {
 			ea.postEvent(event);
 		} else {
-			logger.error("Could not find EventAdmin Serivce");
+			logger.error(bundleMarker,"Could not find EventAdmin Serivce");
 		}
 
 	}
@@ -33,7 +35,7 @@ public class EventAdminTracker extends ServiceTracker implements EventAdmin {
 		if (ea != null) {
 			ea.sendEvent(event);
 		} else {
-			logger.error("Could not find EventAdmin Serivce");
+			logger.error(bundleMarker,"Could not find EventAdmin Serivce");
 		}
 	}
 

@@ -1,5 +1,7 @@
 package com.verticon.tracker.editor.util;
 
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
+
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -23,7 +25,7 @@ public class DefaultControlBuilder implements ControlBuilder {
 			IItemPropertyDescriptor itemPropertyDescriptor,
 			AdapterFactory adapterFactory, DataBindingContext dataBindingContext) {
 		
-		logger.error("Setting up a default text widget for feature {}",
+		logger.error(bundleMarker,"Setting up a default text widget for feature {}",
 				itemPropertyDescriptor.getFeature(object));
 		Text text = new Text(
 				parent, SWT.NONE);

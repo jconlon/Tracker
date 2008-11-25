@@ -68,11 +68,11 @@ public class SelectionController implements ISelectionController {
 				
 				Utils.unregisterFilter(oldActiveEditorPart, itemsView);
 			}
-//			logger.debug("Registering {} on activeEditor {}", itemsView, activeEditorPart);
+//			logger.debug(bundleMarker,"Registering {} on activeEditor {}", itemsView, activeEditorPart);
 			Utils.registerFilter(activeEditorPart, itemsView);
 			
 		}else{
-//			logger.debug("Ignoring {} on activeEditor {}", itemsView, activeEditorPart);
+//			logger.debug(bundleMarker, "Ignoring {} on activeEditor {}", itemsView, activeEditorPart);
 		}
 		
 	}
@@ -256,7 +256,7 @@ public class SelectionController implements ISelectionController {
 	private synchronized void handleWorkbenchAndEventAdminSelection(
 			ISelection selection,
 			Event event) {
-//		logger.debug("handleTableViewerSelection entered");
+//		logger.debug(bundleMarker,"handleTableViewerSelection entered");
 		
 		handlingWorkbenchPartOrEventAdminIgnoreSelection.set(true);
 
@@ -265,7 +265,7 @@ public class SelectionController implements ISelectionController {
 		FilteredTable masterFilteredTable = itemsView.getMasterFilteredTable();
 		switch (sselection.size()) {
 		case 0:
-//			logger.debug(
+//			logger.debug(bundleMarker,
 //					"Empty selection - deselect any selection in the tableViewer"
 //			);
 
@@ -274,7 +274,7 @@ public class SelectionController implements ISelectionController {
 					sselection);
 			break;
 		case 1:
-//			logger.debug(
+//			logger.debug(bundleMarker,
 //					"Single selection - send it to the subclass for handling");
 
 			strategy.handleWorkbenchAndEventAdminSingleSelection(sselection.getFirstElement(),
@@ -283,7 +283,7 @@ public class SelectionController implements ISelectionController {
 			break;
 
 		default:
-//			logger.debug("Multiple selection");
+//			logger.debug(bundleMarker,"Multiple selection");
 		masterFilteredTable.setFilterText("");
 		masterFilteredTable.getViewer().setSelection(
 				sselection);
@@ -316,7 +316,7 @@ public class SelectionController implements ISelectionController {
 		 */
 		EventHandler handler = new EventHandler() {
 			public void handleEvent(final Event event) {
-//				logger.debug("Handling incoming Selection Event");
+//				logger.debug(bundleMarker,"Handling incoming Selection Event");
 
 				final ISelection selection = (ISelection) event
 						.getProperty(TrackerConstants.EVENT_ADMIN_PROPERTY_SELECTION);
@@ -402,7 +402,7 @@ public class SelectionController implements ISelectionController {
 
 	public void sendSelectionToChannel(ISelection selection,
 			String source) {
-//		logger.debug("Sending osgi event to Animals View Topic from {}",source);
+//		logger.debug(bundleMarker,"Sending osgi event to Animals View Topic from {}",source);
 		Hashtable<String, Object> table = new Hashtable<String, Object>();
 		// FIXME Task 280 should not send a mutable object as a property
 		table.put(TrackerConstants.EVENT_ADMIN_PROPERTY_SELECTION, selection);

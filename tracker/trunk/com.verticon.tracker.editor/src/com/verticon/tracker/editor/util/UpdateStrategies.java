@@ -82,7 +82,7 @@ public class UpdateStrategies {
     	switch (eStructuralFeature.getEType().getClassifierID()) {
     	case EcorePackage.EDOUBLE_OBJECT:
 		case EcorePackage.EDOUBLE:
-//			logger.debug("Returning double for element {} attribute {} and type {}", 
+//			logger.debug(bundleMarker,"Returning double for element {} attribute {} and type {}", 
 //					new Object[] {eStructuralFeature.getContainerClass(),
 //					eStructuralFeature.getName(), eStructuralFeature.getEType().getName()});
 			validator = doubleValidator;
@@ -90,7 +90,7 @@ public class UpdateStrategies {
 
 		case EcorePackage.EINTEGER_OBJECT:
 		case EcorePackage.EINT:
-//			logger.debug("Returning Integer for element {} attribute {} and type {}", 
+//			logger.debug(bundleMarker,"Returning Integer for element {} attribute {} and type {}", 
 //					new Object[] {eStructuralFeature.getContainerClass(),
 //					eStructuralFeature.getName(), eStructuralFeature.getEType().getName()});
 			validator = integerValidator;
@@ -98,7 +98,7 @@ public class UpdateStrategies {
 		case EcorePackage.ESTRING:  //Ignore string
 			break;
 		default:
-//			logger.error("Null validation for element {} attribute {} and type {}", 
+//			logger.error(bundleMarker,"Null validation for element {} attribute {} and type {}", 
 //					new Object[] {eStructuralFeature.getContainerClass(),
 //					eStructuralFeature.getName(), eStructuralFeature.getEType().getName()});
 			break;

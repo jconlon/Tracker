@@ -1,5 +1,7 @@
 package com.verticon.tracker.editor.util;
 
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
+
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
@@ -188,7 +190,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	 */
 	@Override
 	public void createPartControl(Composite base) {
-//		logger.debug("createPartControl Entered");
+//		logger.debug(bundleMark, "createPartControl Entered");
 		// Our layout will have a row of buttons, and
 		// then a SashForm below it.
 		base.setLayout(new GridLayout(1, false));
@@ -225,7 +227,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	 */
 	@Override
 	public void dispose() {
-//		logger.debug("Disposing resources");
+//		logger.debug(bundleMarker,"Disposing resources");
 		for (CTabItem item : detailFormTabFolder.getItems()) {
 			item.dispose();
 		}
@@ -312,7 +314,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	private void fillPropertiesFolder(ISelection selection,
 			AdapterFactory adapterFactory, CTabFolder cTabFolder) {
 		if (defaultPropertiesFormProvider == null) {
-			// logger.debug("Creating a defaultPropertiesFormProvider");
+			// logger.debug(bundleMarker,"Creating a defaultPropertiesFormProvider");
 			defaultPropertiesFormProvider = new DefaultPropertiesFormProvider();
 		}
 		initialStatusObservable(viewModel.getStatus());
@@ -358,7 +360,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 				}
 			});
 		} catch (Exception e) {
-			logger.error("Failed to attach listner to tableViewer", e);
+			logger.error(bundleMarker,"Failed to attach listner to tableViewer", e);
 		}
 
 		defaultPropertiesFormProvider

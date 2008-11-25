@@ -1,5 +1,7 @@
 package com.verticon.tracker.editor.util;
 
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
+
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -60,7 +62,7 @@ public class SingleValueEAttributeENumControlBuilder implements ControlBuilder {
 
 		EObject eObject = (EObject) AdapterFactoryEditingDomain.unwrap(object);
 
-		logger.debug("Binding {} feature {} to a combo widget", eObject
+		logger.debug(bundleMarker,"Binding {} feature {} to a combo widget", eObject
 				.getClass().getSimpleName(), eStructuralFeature.getName());
 
 		UpdateValueStrategy tToMStrategy = UpdateStrategies.INSTANCE
