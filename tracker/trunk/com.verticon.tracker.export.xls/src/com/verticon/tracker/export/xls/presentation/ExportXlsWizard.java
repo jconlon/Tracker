@@ -1,4 +1,5 @@
 package com.verticon.tracker.export.xls.presentation;
+import static com.verticon.tracker.export.xls.ExportXlsPlugin.bundleMarker;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -144,6 +145,7 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 	 * This method is called by the wizard framework when the user presses the
 	 * Finish button.
 	 */
+	@Override
 	public boolean performFinish() {
 
 		destination = selectExportFilePathPage.getDestinationLocation();
@@ -164,7 +166,7 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 				}
 			});
 		} catch (InvocationTargetException e) {
-			logger.error("Failed to export "+premisesFile.getProjectRelativePath().toString(), 
+			logger.error(bundleMarker,"Failed to export "+premisesFile.getProjectRelativePath().toString(), 
 					e);
 			selectExportFilePathPage.setErrorMessage("Failed to export "+premisesFile.getProjectRelativePath().toString()+": "+e.getCause());
 			return false;
@@ -223,7 +225,7 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 	private void performOperation(IProgressMonitor monitor) throws IOException,
 			CoreException {
 		new Exporter().export(monitor);
-		logger.info("Exported {} as {} data to {}", 
+		logger.info(bundleMarker,"Exported {} as {} data to {}", 
 				new Object[] {
 				premisesFile.getProjectRelativePath(), 
 				typeToExport,
@@ -247,7 +249,7 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 			try {
 				super.export(monitor, premisesFile);
 			} catch (RuntimeException e) {
-				logger.error("Failed to export.",e);
+				logger.error(bundleMarker,"Failed to export.",e);
 				throw e;
 			}
 		}
