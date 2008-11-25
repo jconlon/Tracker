@@ -2,6 +2,7 @@
  * 
  */
 package com.verticon.tracker.fair.transaction.editor.popup.actions;
+import static com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditorPlugin.bundleMarker;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -79,7 +80,7 @@ public class ClassProcreator implements Procreator {
 		} else if (!parentWasCreated && clazz == null) {
 			clazz = fairInstance(department, className);
 			if (clazz != null) {// Clazz is in the fair
-				logger.info("Row={} Class {} already in Fair.",
+				logger.info(bundleMarker,"Row={} Class {} already in Fair.",
 						row.getRowNum(), className);
 				child.process(fair, row, listColumnMapper, clazz, false,
 						editingDomain, compoundCommand);
@@ -88,7 +89,7 @@ public class ClassProcreator implements Procreator {
 						className, editingDomain, compoundCommand);
 			}
 		} else {
-			logger.info("Row={} found previously created Class {}.", row
+			logger.info(bundleMarker,"Row={} found previously created Class {}.", row
 					.getRowNum(), className);
 		}
 
@@ -151,7 +152,7 @@ public class ClassProcreator implements Procreator {
 		}
 		childrenAddedToFairParents.get(owner).add(clazz);
 
-		logger.info("Row={} added a command to create Class {}.", row
+		logger.info(bundleMarker,"Row={} added a command to create Class {}.", row
 				.getRowNum(), nameOfElement);
 		return clazz;
 	}

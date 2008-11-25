@@ -2,6 +2,7 @@
  * 
  */
 package com.verticon.tracker.fair.transaction.editor.popup.actions;
+import static com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditorPlugin.bundleMarker;
 
 import java.util.HashSet;
 import java.util.List;
@@ -102,12 +103,12 @@ public class YouthClubProcreator implements Procreator {
 				FairPackage.Literals.YOUNG_PERSON__CLUB, listColumnMapper);
 
 		if (nameOfYouthClub == null) {
-			logger.debug(
+			logger.debug(bundleMarker,
 					"Row={} {} does not indicate he belongs to a youth club ",
 					row.getRowNum(), offspring.getName());
 			return;
 		}
-		logger.debug("Row={} {} wants to join youth club {}", new Object[] {
+		logger.debug(bundleMarker,"Row={} {} wants to join youth club {}", new Object[] {
 				row.getRowNum(), offspring.getName(), nameOfYouthClub });
 
 		YouthClub myClub = findYouthClub(nameOfYouthClub, fair);
@@ -122,7 +123,7 @@ public class YouthClubProcreator implements Procreator {
 						);
 				compoundCommand.append(command);
 				addedYouthClubs.add(nameOfYouthClub);
-				logger.info("Row={} creating a new youthClub {}", row
+				logger.info(bundleMarker,"Row={} creating a new youthClub {}", row
 						.getRowNum(), youthClub.getName());
 			}
 		}
@@ -141,7 +142,7 @@ public class YouthClubProcreator implements Procreator {
 
 		for (YouthClub club : fair.getYouthClubs()) {
 			// if(club.getName()==null ){
-			// logger.error(
+			// logger.error(bundleMarker,
 			// "There needs to be a personName on all youth clubs setting it to Error"
 			// );
 			// club.setName("Error");

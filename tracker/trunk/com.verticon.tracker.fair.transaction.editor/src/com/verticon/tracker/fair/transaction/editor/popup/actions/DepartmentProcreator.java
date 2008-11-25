@@ -2,6 +2,7 @@
  * 
  */
 package com.verticon.tracker.fair.transaction.editor.popup.actions;
+import static com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditorPlugin.bundleMarker;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -82,7 +83,7 @@ public class DepartmentProcreator implements Procreator {
 			department = fairInstance(division, departmentName);
 			
 			if (department != null) {// department is in the fair
-				logger.info("Row={} Department {} is already in Fair.",
+				logger.info(bundleMarker,"Row={} Department {} is already in Fair.",
 						row.getRowNum(), departmentName);
 				 child.process(fair, row, listColumnMapper, department,
 						false, editingDomain,  compoundCommand);
@@ -92,7 +93,7 @@ public class DepartmentProcreator implements Procreator {
 						departmentName, editingDomain,  compoundCommand);
 			}
 		} else{
-			logger.info("Row={} found previously created Department {}.", row
+			logger.info(bundleMarker,"Row={} found previously created Department {}.", row
 					.getRowNum(), departmentName);
 		}
 
@@ -108,7 +109,7 @@ public class DepartmentProcreator implements Procreator {
 	}
 
 	public void dispose() {
-		logger.debug("Disposing");
+		logger.debug(bundleMarker,"Disposing");
 		childrenAddedToFairParents.clear();
 		child.dispose();
 	}
@@ -155,7 +156,7 @@ public class DepartmentProcreator implements Procreator {
 		}
 		childrenAddedToFairParents.get(owner).add(department);
 
-		logger.info(
+		logger.info(bundleMarker,
 				"Row={} added a command to create Department {}.",
 				row.getRowNum(), nameOfElement);
 		

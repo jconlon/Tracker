@@ -2,6 +2,7 @@
  * 
  */
 package com.verticon.tracker.fair.transaction.editor.popup.actions;
+import static com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditorPlugin.bundleMarker;
 
 import java.util.HashSet;
 import java.util.List;
@@ -82,7 +83,7 @@ public class DivisionProcreator implements ExecutableProcreator {
 		Division division = fairInstance(fair, divName);
 
 		if (division != null) {
-			logger.info("Row={} Division {} was already in Fair.", row
+			logger.info(bundleMarker,"Row={} Division {} was already in Fair.", row
 					.getRowNum(), divName);
 			 child.process(fair, row, listColumnMapper, division,
 					false, editingDomain,  compoundCommand);
@@ -90,12 +91,12 @@ public class DivisionProcreator implements ExecutableProcreator {
 		} else {// Division is not in the fair.
 			division = cachedInstance(row, divName);
 			if (division != null) {
-				logger.info("Row={} found previously created Division {}.", row
+				logger.info(bundleMarker,"Row={} found previously created Division {}.", row
 						.getRowNum(), divName);
 			} else {
 				division = newInstance(listColumnMapper, row, fair,
 						divName, editingDomain);
-				logger.info("Row={} added a command to create Division {}.",
+				logger.info(bundleMarker,"Row={} added a command to create Division {}.",
 						row.getRowNum(), divName);
 			}
 		}

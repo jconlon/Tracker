@@ -2,6 +2,7 @@
  * 
  */
 package com.verticon.tracker.fair.transaction.editor.popup.actions;
+import static com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditorPlugin.bundleMarker;
 
 import java.util.HashSet;
 import java.util.List;
@@ -75,7 +76,7 @@ public class PersonProcreator implements Procreator {
 			person = getElementFromFair(fair, personName);
 
 			if (person != null) {// person is in the fair
-				logger.info("Row={} person {} is already in Fair.", row
+				logger.info(bundleMarker,"Row={} person {} is already in Fair.", row
 						.getRowNum(), personName);
 
 			} else {// Exhibit is not in the fair, Create it.
@@ -86,7 +87,7 @@ public class PersonProcreator implements Procreator {
 				// associtation this with an exhibit
 			}
 		} else {
-			logger.info("Row={} found previously created Person {}.", row
+			logger.info(bundleMarker,"Row={} found previously created Person {}.", row
 					.getRowNum(), personName);
 		}
 		if (parentWasCreated) {
@@ -112,7 +113,7 @@ public class PersonProcreator implements Procreator {
 	}
 
 	public void dispose() {
-		logger.debug("Disposing");
+		logger.debug(bundleMarker,"Disposing");
 		childrenAddedToFairParents.clear();
 		child.dispose();
 	}
@@ -184,7 +185,7 @@ public class PersonProcreator implements Procreator {
 			childrenAddedToFairParents.add(person);
 		}
 
-		logger.info("Row={} added a command to create Person {}.", row
+		logger.info(bundleMarker,"Row={} added a command to create Person {}.", row
 				.getRowNum(), person.getName());
 
 		return person;
@@ -211,7 +212,7 @@ public class PersonProcreator implements Procreator {
 				case HSSFCell.CELL_TYPE_STRING:
 					parents = cellParents.getStringCellValue();
 					parents.trim();
-					logger.debug("Row={} parents are {} ", row.getRowNum(),
+					logger.debug(bundleMarker,"Row={} parents are {} ", row.getRowNum(),
 							parents);
 					break;
 
@@ -272,17 +273,17 @@ public class PersonProcreator implements Procreator {
 					// value = value.replace("//", "/");
 					value = value.replace("&", "and");
 				}
-				// logger.debug("Row={} adding attribute={}, value={}",
+				// logger.debug(bundleMarker,"Row={} adding attribute={}, value={}",
 				// new Object[] {row.getRowNum(), feature.getName(),value});
 				if (feature == FairPackage.Literals.PERSON__NAME) {
 					person.setLastName(NormalizeName.parseLastName(value));
 					person.setFirstName(NormalizeName.parseFirstName(value));
-					logger.debug("Set person personName {}", person.getName());
+					logger.debug(bundleMarker,"Set person personName {}", person.getName());
 				} else if (feature == FairPackage.Literals.PERSON__SALES_ORDER) {
 					try {
 						person.setSalesOrder(Integer.parseInt(value));
 					} catch (NumberFormatException e) {
-						logger.error("Could not set Person:salesOrder to "
+						logger.error(bundleMarker,"Could not set Person:salesOrder to "
 								+ value, e);
 					}
 				} else if (feature == FairPackage.Literals.PERSON__FIRST_NAME) {
@@ -299,14 +300,14 @@ public class PersonProcreator implements Procreator {
 					try {
 						person.setExhibitorNumber(Integer.parseInt(value));
 					} catch (NumberFormatException e) {
-						logger.error("Could not set Person:exhibitorNumber to "
+						logger.error(bundleMarker,"Could not set Person:exhibitorNumber to "
 								+ value, e);
 					}
 				} else {
 					person.eSet(feature, value);
 				}
 			} else {
-				logger.debug("Row={} had no value for attribute={}", row
+				logger.debug(bundleMarker,"Row={} had no value for attribute={}", row
 						.getRowNum(), feature.getName());
 			}
 		}
