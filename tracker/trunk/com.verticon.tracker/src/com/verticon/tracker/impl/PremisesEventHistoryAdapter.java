@@ -144,7 +144,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 						.getSimpleName());
 				forward(n);
 			} else {
-				logger.warn("{} already removed from events", eventToRemove
+				logger.warn(bundleMarker,"{} already removed from events", eventToRemove
 						.getClass().getSimpleName());
 			}
 
