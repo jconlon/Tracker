@@ -50,14 +50,14 @@ class ExhibitsStrategy implements SelectionStrategy {
 	public void handleManualTableViewerSelection(ISelection selection,
 			SelectionController selectionController) {
 
-//		logger.debug("Sending Exhibits selection event");
+//		logger.debug(bundleMarker, "Sending Exhibits selection event");
 		selectionController.sendSelectionToChannel(selection,
 				getEventAdminSourceName());
 
 		Exhibit exhibit = (Exhibit) ((StructuredSelection) selection)
 				.getFirstElement();
 
-//		logger.debug("Sending Animal selection event");
+//		logger.debug(bundleMarker,"Sending Animal selection event");
 		if(exhibit!=null && exhibit.getAnimal()!=null){
 			selectionController.sendSelectionToChannel(new StructuredSelection(
 				exhibit.getAnimal()), getEventAdminSourceName());
@@ -88,10 +88,10 @@ class ExhibitsStrategy implements SelectionStrategy {
 
 			@Override
 			public Object caseExhibit(Exhibit exhibit) {
-//				logger.debug("Received Exhibit selection");
+//				logger.debug(bundleMarker,"Received Exhibit selection");
 				viewer.setSelection(new StructuredSelection(exhibit));
 				
-//				logger.debug("Sending Animal selection event");
+//				logger.debug(bundleMarker,"Sending Animal selection event");
 				if(exhibit.getAnimal()!=null){
 					selectionController.sendSelectionToChannel(new StructuredSelection(
 						exhibit.getAnimal()), getEventAdminSourceName());
@@ -102,7 +102,7 @@ class ExhibitsStrategy implements SelectionStrategy {
 
 			@Override
 			public Object casePerson(Person person) {
-//				logger.debug("Received Person selection");
+//				logger.debug(bundleMarker,"Received Person selection");
 				exhibitsView.setFilter(person.getName(), 0);
 				return person;
 			}
@@ -111,7 +111,7 @@ class ExhibitsStrategy implements SelectionStrategy {
 			public Object defaultCase(EObject object) {
 				Animal animal = null;
 				if(object instanceof Animal){
-//					logger.debug("Received Animal selection");
+//					logger.debug(bundleMarker,"Received Animal selection");
 					animal = (Animal) object;
 					String id = animal.getId();
 					exhibitsView.setFilter(id, 2);
