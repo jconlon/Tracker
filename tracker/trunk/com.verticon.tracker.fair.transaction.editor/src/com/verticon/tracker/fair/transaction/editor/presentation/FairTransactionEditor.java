@@ -1,4 +1,5 @@
 package com.verticon.tracker.fair.transaction.editor.presentation;
+import static com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditorPlugin.bundleMarker;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -385,7 +386,7 @@ public class FairTransactionEditor extends FairEditor {
 	//.CUSTOM: Instead of the command-stack listener, we create an
 	//         operation-history listener.  We also create our undo context.
 	protected void initializeTransactionEditingDomain() {
-		logger.info("Initializing the transactionEditingDomain");
+		logger.info(bundleMarker,"Initializing the transactionEditingDomain");
 		
 		editingDomain = (AdapterFactoryEditingDomain) 
 			TransactionalEditingDomain.Registry.INSTANCE.getEditingDomain(
@@ -427,7 +428,7 @@ public class FairTransactionEditor extends FairEditor {
 	@Override
 	protected void initializeEditingDomain() {
 		//Do nothing
-		logger.info("Ignoring super initialization");
+		logger.info(bundleMarker,"Ignoring super initialization");
 	}
 	
 	/**

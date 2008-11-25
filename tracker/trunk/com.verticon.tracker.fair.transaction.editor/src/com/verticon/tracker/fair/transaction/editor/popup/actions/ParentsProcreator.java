@@ -2,6 +2,7 @@
  * 
  */
 package com.verticon.tracker.fair.transaction.editor.popup.actions;
+import static com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditorPlugin.bundleMarker;
 
 import java.util.HashSet;
 import java.util.List;
@@ -77,7 +78,7 @@ public class ParentsProcreator implements Procreator {
 	}
 
 	public void dispose() {
-		logger.debug("Disposing");
+		logger.debug(bundleMarker,"Disposing");
 		addedPersons.clear();
 	}
 
@@ -107,7 +108,7 @@ public class ParentsProcreator implements Procreator {
 				case HSSFCell.CELL_TYPE_STRING:
 					parents = cellParents.getStringCellValue();
 					parents.trim();
-					logger.debug("Row={} parents are {} ", row.getRowNum(),
+					logger.debug(bundleMarker,"Row={} parents are {} ", row.getRowNum(),
 							parents);
 					break;
 
@@ -124,7 +125,7 @@ public class ParentsProcreator implements Procreator {
 	
 	private void findParentsAtFair(CompoundCommand compoundCommand, HSSFRow row, YoungPerson kid, 
 			String parents, Fair fair, EditingDomain editingDomain){
-		logger.debug("Row={} {} is looking for his parents {}",
+		logger.debug(bundleMarker,"Row={} {} is looking for his parents {}",
 				new Object[]{row.getRowNum(),kid.getName(), parents});
 		StringTokenizer st = new StringTokenizer(parents);
 		Person parent = null;
@@ -136,10 +137,10 @@ public class ParentsProcreator implements Procreator {
 		   parent = findParent(row, parentName, fair, kid);
 		   
 		   if(parent!=null){
-			   logger.info("Row={} found a parent for {} with the personName {}",
+			   logger.info(bundleMarker,"Row={} found a parent for {} with the personName {}",
 					   new Object[]{row.getRowNum(),kid.getName(), parentName});
 		   }else{
-			   logger.info("Row={} creating a parent for {} with the personName {}",
+			   logger.info(bundleMarker,"Row={} creating a parent for {} with the personName {}",
 					   new Object[]{row.getRowNum(),kid.getName(), parentName});
 			   
 			   parent = FairFactory.eINSTANCE.createPerson();
@@ -179,7 +180,7 @@ public class ParentsProcreator implements Procreator {
 	
 	private static Person findPersonWithName(HSSFRow row, String personName, Fair fair){
 		Person parent = null;
-		logger.debug("Row={} Searching through {} people at the fair for a person named {}",
+		logger.debug(bundleMarker,"Row={} Searching through {} people at the fair for a person named {}",
 				new Object[]{row.getRowNum(),fair.getPeople().size(), personName});
 		for (Person person : fair.getPeople()) {
 			String cleanedUpPersonInFairName = person.getName().toLowerCase().trim();
@@ -191,7 +192,7 @@ public class ParentsProcreator implements Procreator {
 			}
 		}
 		if(parent==null){
-			logger.debug("Row={} Can't find person named {}", row.getRowNum(),personName);
+			logger.debug(bundleMarker,"Row={} Can't find person named {}", row.getRowNum(),personName);
 		}
 		return parent;
 	}
@@ -215,9 +216,9 @@ public class ParentsProcreator implements Procreator {
 			compoundCommand.append(command);
 			addedPersons.add(person.getName());
 			if(person instanceof YoungPerson){
-				logger.info("Row={} creating a new youngPerson {}",row.getRowNum(), person.getName());
+				logger.info(bundleMarker,"Row={} creating a new youngPerson {}",row.getRowNum(), person.getName());
 			}else{
-				logger.info("Row={} creating a new person {}",row.getRowNum(), person.getName());
+				logger.info(bundleMarker,"Row={} creating a new person {}",row.getRowNum(), person.getName());
 			}
 			return true;
 		}

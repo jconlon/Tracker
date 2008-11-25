@@ -2,6 +2,7 @@
  * 
  */
 package com.verticon.tracker.fair.transaction.editor.popup.actions;
+import static com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditorPlugin.bundleMarker;
 
 import java.util.List;
 
@@ -104,7 +105,7 @@ public class SuplementalAnimalTagsProcreator implements Procreator {
 					visualID//value
 			);
 			compoundCommand.append(command);
-			logger.info("Row={} Visual ID {} set for animal id {}.",
+			logger.info(bundleMarker,"Row={} Visual ID {} set for animal id {}.",
         			new Object[] {row.getRowNum(),visualID, animal.getId()});
 			return true;
 		
@@ -119,7 +120,7 @@ private static boolean setSupplementalAnimalTags(CompoundCommand compoundCommand
 			String swineLeftEarNotch = ExecutableProcreators.getValue( row, TrackerPackage.Literals.SWINE__LEFT_EAR_NOTCHING, listColumnMapper);
 			String swineRightEarNotch = ExecutableProcreators.getValue( row, TrackerPackage.Literals.SWINE__RIGHT_EAR_NOTCHING, listColumnMapper);
             if(swineLeftEarNotch==null && swineLeftEarNotch==null){
-            	logger.warn("Row={} could not find supplemental tag information for animal with id {}.",
+            	logger.warn(bundleMarker,"Row={} could not find supplemental tag information for animal with id {}.",
             			row.getRowNum(),animal.getId());
             	return false;
             }
@@ -132,7 +133,7 @@ private static boolean setSupplementalAnimalTags(CompoundCommand compoundCommand
 			);
 			compoundCommand.append(command);
 
-			logger.info("Row={} Swine left ear notching for animal id {} is {}",
+			logger.info(bundleMarker,"Row={} Swine left ear notching for animal id {} is {}",
         			new Object[] {row.getRowNum(),animal.getId(), Integer.parseInt(swineLeftEarNotch)});
 			
 			command = SetCommand.create(
@@ -142,7 +143,7 @@ private static boolean setSupplementalAnimalTags(CompoundCommand compoundCommand
 					Integer.parseInt(swineRightEarNotch)//value
 			);
 			compoundCommand.append(command);
-			logger.info("Row={} Swine right ear notching for animal id {} is {}",
+			logger.info(bundleMarker,"Row={} Swine right ear notching for animal id {} is {}",
         			new Object[] {row.getRowNum(),animal.getId(), Integer.parseInt(swineRightEarNotch)});
 			return true;
 		}
@@ -162,7 +163,7 @@ private static boolean setSupplementalAnimalTags(CompoundCommand compoundCommand
 					scrapieTag//value
 			);
 			compoundCommand.append(command);
-			logger.info("Row={} Ovine scrapie tag for animal id {} is {}",
+			logger.info(bundleMarker,"Row={} Ovine scrapie tag for animal id {} is {}",
         			new Object[] {row.getRowNum(),animal.getId(), scrapieTag});
 
 		}

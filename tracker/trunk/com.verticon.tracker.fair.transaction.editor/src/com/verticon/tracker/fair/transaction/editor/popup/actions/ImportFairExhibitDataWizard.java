@@ -1,4 +1,5 @@
 package com.verticon.tracker.fair.transaction.editor.popup.actions;
+import static com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditorPlugin.bundleMarker;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -273,7 +274,7 @@ public class ImportFairExhibitDataWizard extends Wizard  {
             HSSFWorkbook w = new HSSFWorkbook(fin);
             s = w.getSheetAt(0);
 		} catch (Exception e) {
-			logger.error("Failed to process the spreadsheet",e);
+			logger.error(bundleMarker,"Failed to process the spreadsheet",e);
 			// Create the required Status object
 	        Status status = new Status(IStatus.ERROR, "com.verticon.tracker.fair.editor", 0,
 	            "Failed to open the Fair Editor", e);
@@ -327,13 +328,13 @@ public class ImportFairExhibitDataWizard extends Wizard  {
 		EObject root = null;
 		if(importFairDataColumnMappingPage.mapContainsCompleteDeptClassLot()){
 			root = fair;
-			logger.debug("Importing {} rows of worksheet data specifying Division, Department, Class and Lot.", sheet.getLastRowNum());
+			logger.debug(bundleMarker,"Importing {} rows of worksheet data specifying Division, Department, Class and Lot.", sheet.getLastRowNum());
 		}else{
 			root = exhibitPage.getSelectedLot();
-			logger.debug("Importing {} rows of worksheet data to a selected Lot.", sheet.getLastRowNum());
+			logger.debug(bundleMarker,"Importing {} rows of worksheet data to a selected Lot.", sheet.getLastRowNum());
 		}
 		for (int i = firstDataRow; i < sheet.getLastRowNum()+1; i++) {
-			logger.debug("processing row {}",i);
+			logger.debug(bundleMarker,"Processing row {}",i);
 
 			try {
 				monitor.worked(1);
@@ -344,14 +345,14 @@ public class ImportFairExhibitDataWizard extends Wizard  {
 				count++;
 
 			} catch (RuntimeException e) {
-				logger.error("Failed to process row "+i,e);
+				logger.error(bundleMarker,"Failed to process row "+i,e);
 			} catch (MissingCriticalDataException e) {
-				logger.error("Failed to process row "+i,e);
+				logger.error(bundleMarker,"Failed to process row "+i,e);
 				return count;
 			}
 		}
 		//Add all newly imported Divisions, Departments, Classes, and Lots
-		logger.debug("Loading worksheet data.");
+		logger.debug(bundleMarker,"Loading worksheet data.");
 		procreator.execute();
 		monitor.worked(10);
 		return count;

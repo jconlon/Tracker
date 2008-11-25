@@ -1,4 +1,5 @@
 package com.verticon.tracker.fair.transaction.editor.popup.actions;
+import static com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditorPlugin.bundleMarker;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -402,7 +403,7 @@ public class ImportFairDataColumnMappingWizardPage extends WizardPage {
 				.getWorkSheet();
 		HSSFRow row = null;
 		for (int i = sheet.getFirstRowNum(); i < sheet.getLastRowNum()+1; i++) {
-			logger.debug("processing row {}",i);
+			logger.debug(bundleMarker,"Processing row {}",i);
 			 try {
 				row = sheet.getRow(i);
 				 if(row!=null){
@@ -412,7 +413,7 @@ public class ImportFairDataColumnMappingWizardPage extends WizardPage {
 					 }
 				 }
 			} catch (RuntimeException e) {
-				logger.error("Failed to process row "+i,e);
+				logger.error(bundleMarker,"Failed to process row "+i,e);
 			}
 		}
 		tableViewer.refresh();
@@ -420,7 +421,7 @@ public class ImportFairDataColumnMappingWizardPage extends WizardPage {
 
 	private boolean foundColumnNames( HSSFRow row) {
 		for (short i = row.getFirstCellNum(); i < row.getLastCellNum(); i++) {
-			logger.debug("processing cell {}",i);
+			logger.debug(bundleMarker,"Processing cell {}",i);
 			
 			String s = row.getCell(i).getStringCellValue();
 			if(s.trim().length()!=0){

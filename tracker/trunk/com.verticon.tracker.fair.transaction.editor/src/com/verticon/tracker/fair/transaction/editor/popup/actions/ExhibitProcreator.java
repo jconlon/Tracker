@@ -2,6 +2,7 @@
  * 
  */
 package com.verticon.tracker.fair.transaction.editor.popup.actions;
+import static com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditorPlugin.bundleMarker;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -111,18 +112,18 @@ public class ExhibitProcreator implements ExecutableProcreator {
 			exhibit = getElementFromFair(lot, personName, animalId);
 			
 			if (exhibit != null) {// exhibit is in the fair
-				logger.info("Row={} Department {} is already in Fair.",
+				logger.info(bundleMarker,"Row={} Department {} is already in Fair.",
 						row.getRowNum(), personName);
 				 child.process(fair, row, listColumnMapper, exhibit,
 						false, editingDomain,  commoundCommand);
 			} else {// Exhibit is not in the fair, Create it.
 				exhibit = createExhibit(listColumnMapper, row, lot, editingDomain, commoundCommand);
-				logger.info(
+				logger.info(bundleMarker,
 						"Row={} added a command to create Exhibit for {}.",
 						row.getRowNum(), personName);
 			}
 		} else{
-			logger.info("Row={} found previously created Department {}.", row
+			logger.info(bundleMarker,"Row={} found previously created Department {}.", row
 					.getRowNum(), personName);
 		}
 		child.process(fair, row, listColumnMapper, exhibit,
@@ -147,7 +148,7 @@ public class ExhibitProcreator implements ExecutableProcreator {
 	}
 
 	public void dispose() {
-		logger.debug("Disposing");
+		logger.debug(bundleMarker,"Disposing");
 		childrenAddedToFairParents.clear();
 		child.dispose();
 	}

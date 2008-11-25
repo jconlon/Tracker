@@ -1,4 +1,5 @@
 package com.verticon.tracker.fair.transaction.editor.presentation;
+import static com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditorPlugin.bundleMarker;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -49,7 +50,7 @@ public class FairTransactionSelectionViewerFilter extends SelectionViewerFilter 
 				return true;
 			}
 			Animal animal = (Animal)element;
-			logger.debug("Filtering {} with targeted animals ={} ",animal, targetedAnimals.size());
+			logger.debug(bundleMarker,"Filtering {} with targeted animals ={} ",animal, targetedAnimals.size());
 			
 			return false;
 		}
@@ -61,7 +62,7 @@ public class FairTransactionSelectionViewerFilter extends SelectionViewerFilter 
 					return true;
 				}
 				Event event = (Event)element;
-				logger.debug("Filtering {} with targeted events ={} ",event, targetedEvents.size());
+				logger.debug(bundleMarker,"Filtering {} with targeted events ={} ",event, targetedEvents.size());
 				return false;
 			}
 			
@@ -93,8 +94,9 @@ public class FairTransactionSelectionViewerFilter extends SelectionViewerFilter 
 	 * From the selection in the MainViewer target the Selected Animals, the Animal
 	 * parents of selected Events, and selected Events.
 	 */
+	@Override
 	protected void computeTargets(ISelection selection) {
-		logger.debug("computing targets ");
+		logger.debug(bundleMarker,"Computing targets ");
 		 
 		clearTargets();
 		if (selection instanceof IStructuredSelection) {
@@ -128,8 +130,8 @@ public class FairTransactionSelectionViewerFilter extends SelectionViewerFilter 
 				}
 			}
 		}
-		logger.debug("Targeted animals = {}",targetedAnimals.size());
-		logger.debug("Targeted events = {}",targetedEvents.size());
+		logger.debug(bundleMarker,"Targeted animals = {}",targetedAnimals.size());
+		logger.debug(bundleMarker,"Targeted events = {}",targetedEvents.size());
 	}
 
 }
