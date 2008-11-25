@@ -1,4 +1,5 @@
 package com.verticon.tracker.fair.editor.actions;
+import static com.verticon.tracker.fair.editor.presentation.FairEditorPlugin.bundleMarker;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,6 +45,7 @@ import com.verticon.tracker.fair.YouthClub;
  * @author jconlon
  *
  */
+@Deprecated
 public class AddPeopleActionDelegate implements IObjectActionDelegate {
 
 	/**
@@ -104,7 +106,7 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 			return;
 		}
 		
-		logger.info("Fair name is {}",fair.getName());
+		logger.info(bundleMarker,"Fair name is {}",fair.getName());
 
 		File data = getSelectedResource( selection);
 		
@@ -117,7 +119,7 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 			return null;
 		}
 		EditingDomain editingDomain = queryDataSetProvider.getEditingDomain();
-		Resource modelResource = (Resource) editingDomain.getResourceSet()
+		Resource modelResource = editingDomain.getResourceSet()
 				.getResources().get(0);
 		Object rootObject = modelResource.getContents().get(0);
 		if(rootObject instanceof Fair){
@@ -140,7 +142,7 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
                     "People Import",
                     "Added "+count+" People to the "+fair.getName());
 		} catch (Exception e) {
-			logger.error("Failed to process the spreadsheet",e);
+			logger.error(bundleMarker,"Failed to process the spreadsheet",e);
 			// Create the required Status object
 	        Status status = new Status(IStatus.ERROR, "com.verticon.tracker.fair.editor", 0,
 	            "Failed to open the Fair Editor", e);
@@ -180,13 +182,13 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 	 * @return
 	 */
 	private void buildFeatureToColumnMap(HSSFRow row) {
-		logger.info("Matching column names in the first row to the attributes of a Fair Person");
+		logger.info(bundleMarker,"Matching column names in the first row to the attributes of a Fair Person");
 		
 		
 		
 		for (short i = row.getFirstCellNum(); i < row.getLastCellNum(); i++) {
 			String s = row.getCell(i).getStringCellValue();
-			logger.info("Processing cell number={} to text={}", i, s);
+			logger.info(bundleMarker,"Processing cell number={} to text={}", i, s);
 			String colName = s.toLowerCase().trim();
 			
 			if (colName.equals("firstname")|| colName.equals("first name")) {
@@ -216,11 +218,11 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 			}else if (colName.equals("comments")) {
 				featureMap.put(FairPackage.eINSTANCE.getPerson_Comments(),i);
 			}else if (colName.equals("parents")){
-				logger.warn("Mapping extra column cell number={} to text={}", i, 
+				logger.warn(bundleMarker,"Mapping extra column cell number={} to text={}", i, 
 						colName);
 				extraColMap.put(colName, i);
 			}else if (colName.equals("youth club")){
-				logger.warn("Mapping extra column cell number={} to text={}", i, 
+				logger.warn(bundleMarker,"Mapping extra column cell number={} to text={}", i, 
 						colName);
 				extraColMap.put(colName, i);
 			}
@@ -233,23 +235,23 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 	private int processWorksheet(HSSFSheet sheet, Fair fair) throws Exception {
 		int count = 0;
 		
-		logger.debug("Worksheet has {} rows", sheet.getLastRowNum());
+		logger.debug(bundleMarker,"Worksheet has {} rows", sheet.getLastRowNum());
 	    buildFeatureToColumnMap(sheet.getRow(sheet.getFirstRowNum()));
 	    if(featureMap.isEmpty()){
 	    	throw new Exception("Could not match attribute names to the values in the first column. ");
 	    }else{
-	    	logger.info("ColumnMap is {}",featureMap);
+	    	logger.info(bundleMarker,"ColumnMap is {}",featureMap);
 	    }
 		
 		for (int i = sheet.getFirstRowNum()+1; i < sheet.getLastRowNum()+1; i++) {
-			logger.debug("processing row {}",i);
+			logger.debug(bundleMarker,"processing row {}",i);
 			
 			try {
 			    createPerson(sheet.getRow(i), fair);
 			    count++;
 			} catch (RuntimeException e) {
 				e.printStackTrace();
-				logger.error("Failed to process row {}",i);
+				logger.error(bundleMarker,"Failed to process row {}",i);
 			}
 		}
 		return count;
@@ -280,16 +282,16 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 				
 				
 				if(value!=null){
-					logger.debug("Row={}, adding attribute={}, value={}", 
+					logger.debug(bundleMarker,"Row={}, adding attribute={}, value={}", 
 							new Object[] {row.getRowNum(), entry.getKey().getName(),value});
 					person.eSet(entry.getKey(), value);
 				}else{
-					logger.debug("Row={}, had no value for attribute={}",
+					logger.debug(bundleMarker,"Row={}, had no value for attribute={}",
 							row.getRowNum(), entry.getKey().getName());
 				}
 //			} catch (RuntimeException e) {
 //				e.printStackTrace();
-//				logger.debug("Row={}, failed to find a value for attribute={}",
+//				logger.debug(bundleMarker,"Row={}, failed to find a value for attribute={}",
 //						row.getRowNum(), entry.getKey().getName());
 //			}
 		}
@@ -314,7 +316,7 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 			case HSSFCell.CELL_TYPE_STRING:
 				parents = cellParents.getStringCellValue();
 				parents.trim();
-				logger.debug("Creating parents {} for person in row {}", parents, row.getRowNum());
+				logger.debug(bundleMarker,"Creating parents {} for person in row {}", parents, row.getRowNum());
 				break;
 
 			default:
@@ -331,9 +333,9 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 			populateAttributes(person, row);
 			
 			fair.getPeople().add(person);
-			logger.debug("Adding {} to the fair. Fair now has {} people.", person.getName(),fair.getPeople().size());
+			logger.debug(bundleMarker,"Adding {} to the fair. Fair now has {} people.", person.getName(),fair.getPeople().size());
 		}else{
-			logger.debug("Creating a youngPerson with parents ", parents);
+			logger.debug(bundleMarker,"Creating a youngPerson with parents ", parents);
 			person = FairFactory.eINSTANCE.createYoungPerson();
 			populateAttributes(person, row);
 			fair.getPeople().add(person);
@@ -349,7 +351,7 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 	private String getExtrColumnValue(HSSFRow row, String columnName){
 		String result = null;
 		    short index = extraColMap.get(columnName);
-		    logger.debug("ColumnName {} maps to index {}", columnName, index);
+		    logger.debug(bundleMarker,"ColumnName {} maps to index {}", columnName, index);
 			try {
 				HSSFCell cellComments = row.getCell(index);
 				if(cellComments!=null){
@@ -376,10 +378,10 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 		String nameOfYouthClub = getExtrColumnValue( row, "youth club");
 		
 		if(nameOfYouthClub==null){
-			logger.debug("{} does not indicate he belongs to a youth club ", kid.getName());
+			logger.debug(bundleMarker,"{} does not indicate he belongs to a youth club ", kid.getName());
 			return;
 		}
-		logger.debug("{} wants to join youth club {}", kid.getName(), nameOfYouthClub);
+		logger.debug(bundleMarker,"{} wants to join youth club {}", kid.getName(), nameOfYouthClub);
 		YouthClub myClub = findOrCreateYouthClub( nameOfYouthClub,  fair);
 		
 		kid.setClub(myClub);
@@ -390,7 +392,7 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 		
 		for (YouthClub club : fair.getYouthClubs()) {
 			if(club.getName()==null ){
-				logger.error("There needs to be a name on all youth clubs setting it to Error");
+				logger.error(bundleMarker,"There needs to be a name on all youth clubs setting it to Error");
 				club.setName("Error");
 			} else 
 			if(club.getName().equals(nameOfYouthClub)){
@@ -404,7 +406,7 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 	}
 	
 	private void findParentsAtFair(YoungPerson kid, String parents, Fair fair){
-		logger.debug("{} is looking for his parents {}",kid.getName(), parents);
+		logger.debug(bundleMarker,"{} is looking for his parents {}",kid.getName(), parents);
 		StringTokenizer st = new StringTokenizer(parents);
 		Person parent = null;
 		while (st.hasMoreTokens()) {
@@ -414,10 +416,10 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 		   }
 		   parent = findParent(parentName, fair, kid);
 		   if(parent!=null){
-			   logger.info("{} found parent {}",kid.getName(), parentName);
+			   logger.info(bundleMarker,"{} found parent {}",kid.getName(), parentName);
 			   kid.getParents().add(parent);
 		   }else{
-			   logger.warn("{} can't find parent {}",kid.getName(), parentName);
+			   logger.warn(bundleMarker,"{} can't find parent {}",kid.getName(), parentName);
 		   }
 		} 
 		if(parent==null){
@@ -439,7 +441,7 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 	
 	private Person findPersonWithName(String personName, Fair fair){
 		Person parent = null;
-		logger.debug("Searching through {} people at the fair for a person named {}",
+		logger.debug(bundleMarker,"Searching through {} people at the fair for a person named {}",
 				fair.getPeople().size(), personName);
 		for (Person person : fair.getPeople()) {
 			String cleanedUpPersonInFairName = person.getName().toLowerCase().trim();
@@ -450,11 +452,11 @@ public class AddPeopleActionDelegate implements IObjectActionDelegate {
 				break;
 			}
 //			else{
-//				logger.debug("Person in fair <{}> did not match parentName <{}>", cleanedUpPersonInFairName, cleanedUpParentName );
+//				logger.debug(bundleMarker,"Person in fair <{}> did not match parentName <{}>", cleanedUpPersonInFairName, cleanedUpParentName );
 //			}
 		}
 		if(parent==null){
-			logger.warn("Can't find person named {}", personName);
+			logger.warn(bundleMarker,"Can't find person named {}", personName);
 		}
 		return parent;
 	}
