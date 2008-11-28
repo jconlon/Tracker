@@ -2,6 +2,7 @@
  * 
  */
 package com.verticon.tracker.reader.event.generator;
+import static com.verticon.tracker.reader.ReaderPlugin.bundleMarker;
 
 import java.io.IOException;
 import java.net.URI;
@@ -103,7 +104,7 @@ public class GeneratingReader extends AbstractModelObject implements
 
 	public synchronized void setName(String name) {
 		String oldValue = this.name;
-		logger.info("{} name set to {}",this, name);
+		logger.info(bundleMarker,"{} name set to {}",this, name);
 		this.name = name;
 		firePropertyChange("name", oldValue, name);
 
@@ -164,7 +165,7 @@ public class GeneratingReader extends AbstractModelObject implements
 	 */
 	private void start() throws IOException {
 		if (transactionPublisher != null) {
-			logger.debug("Already Started ");
+			logger.debug(bundleMarker,"Already Started ");
 		} else if (transactionPublisher == null) {
 			IFile templateFile = getTemplateFile();
 			
@@ -184,7 +185,7 @@ public class GeneratingReader extends AbstractModelObject implements
 					getSecondsBetweenGeneratedEvents(), 
 					TimeUnit.SECONDS
 			);
-			logger.info("{} scheduled event generation {}.",this,
+			logger.info(bundleMarker,"{} scheduled event generation {}.",this,
 					target);
 		}
 	}
@@ -228,7 +229,7 @@ public class GeneratingReader extends AbstractModelObject implements
 		if (scheduledFuture != null) {
 			scheduledFuture.cancel(false);
 			scheduledFuture = null;
-			logger.info("{} stopped generating events {}", this, target);
+			logger.info(bundleMarker,"{} stopped generating events {}", this, target);
 		}
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		workspace.removeResourceChangeListener(this);
@@ -236,7 +237,7 @@ public class GeneratingReader extends AbstractModelObject implements
 
 	private void reset() {
 		if (isRunning()) {
-			logger.info("{} reStarting", this);
+			logger.info(bundleMarker,"{} reStarting", this);
 			setStarted(false);
 			setStarted(true);
 		} 

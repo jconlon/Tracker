@@ -1,5 +1,5 @@
 package com.verticon.tracker.connector.comm;
-
+import static com.verticon.tracker.connector.comm.CommReaderPlugin.bundleMarker;
 import gnu.io.CommPortIdentifier;
 import gnu.io.NoSuchPortException;
 import gnu.io.PortInUseException;
@@ -48,7 +48,7 @@ public abstract class AbstractSerialPortConnection {
 	}
 	
 	public void close() throws IOException {
-		logger.debug("{} closing serialPort",uri);
+		logger.debug(bundleMarker,"{} closing serialPort",uri);
 //				
 //		if(Thread.currentThread().isInterrupted()){
 //			Thread.interrupted();
@@ -59,7 +59,7 @@ public abstract class AbstractSerialPortConnection {
 //		}
 //			
 
-		logger.debug("{} closed serialPort",uri);
+		logger.debug(bundleMarker,"{} closed serialPort",uri);
 	}
 
 }

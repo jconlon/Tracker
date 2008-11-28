@@ -7,6 +7,7 @@
  */
 
 package com.verticon.tracker.reader.views;
+import static com.verticon.tracker.reader.ReaderPlugin.bundleMarker;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -60,9 +61,9 @@ public class ReaderViewModel implements PropertyChangeListener{
 
 	private List<IReader> readers;
 
-	private Set<IReaderModelListener> readerModelListeners = new HashSet<IReaderModelListener>();
+	private final Set<IReaderModelListener> readerModelListeners = new HashSet<IReaderModelListener>();
 	
-	private List<IReaderFactory> factories = new ArrayList<IReaderFactory>();
+	private final List<IReaderFactory> factories = new ArrayList<IReaderFactory>();
 
 	/**
 	 * Constructor
@@ -157,13 +158,13 @@ public class ReaderViewModel implements PropertyChangeListener{
 			// Ignored... no items exist yet.
 		} catch (Exception e) {
 			// Log the exception and move on.
-			logger.error("Failed to load readers", e);
+			logger.error(bundleMarker,"Failed to load readers", e);
 		} finally {
 			try {
 				if (fileReader != null)
 					fileReader.close();
 			} catch (IOException e) {
-				logger.error("Failed to close the fileReader",e);
+				logger.error(bundleMarker,"Failed to close the fileReader",e);
 			}
 		}
 	}
@@ -178,7 +179,7 @@ public class ReaderViewModel implements PropertyChangeListener{
 			if (reader != null){
 				addReader( reader);
 			}else{
-				logger.error("Found no factory to create reader type {}", 
+				logger.error(bundleMarker,"Found no factory to create reader type {}", 
 						children[i].getString(TAG_NAME));
 			}
 		}
@@ -220,13 +221,13 @@ public class ReaderViewModel implements PropertyChangeListener{
 			writer = new FileWriter(getReadersFile());
 			memento.save(writer);
 		} catch (IOException e) {
-			logger.error("Failed to save readers",e);
+			logger.error(bundleMarker,"Failed to save readers",e);
 		} finally {
 			try {
 				if (writer != null)
 					writer.close();
 			} catch (IOException e) {
-				logger.error("Failed to close the fileWriter",e);
+				logger.error(bundleMarker,"Failed to close the fileWriter",e);
 			}
 		}
 	}
@@ -299,7 +300,7 @@ public class ReaderViewModel implements PropertyChangeListener{
 	public void propertyChange(PropertyChangeEvent evt) {
 		
 		IReader reader = (IReader)evt.getSource();
-//		logger.debug("Property {} changed on Reader {}",evt.getPropertyName(), reader);
+//		logger.debug(bundleMarker,"Property {} changed on Reader {}",evt.getPropertyName(), reader);
 		Iterator<IReaderModelListener> iterator = readerModelListeners.iterator();
 		while (iterator.hasNext()) {
 			iterator.next().updateReader(reader);

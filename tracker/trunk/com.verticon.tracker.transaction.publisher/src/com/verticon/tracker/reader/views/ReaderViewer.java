@@ -1,4 +1,5 @@
 package com.verticon.tracker.reader.views;
+import static com.verticon.tracker.reader.ReaderPlugin.bundleMarker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,7 @@ public class ReaderViewer {
 	private Table table;
 	private TableViewer tableViewer;
 
-	private ReaderViewModel readerViewModel = new ReaderViewModel();
+	private final ReaderViewModel readerViewModel = new ReaderViewModel();
 
 	public enum Column {
 		STARTED("started"), NAME("name"), TYPE("type"), TEMPLATE("template"), TARGET(
@@ -206,6 +207,7 @@ public class ReaderViewer {
 		// clicked
 		column.addSelectionListener(new SelectionAdapter() {
 
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				tableViewer.setSorter(new ReaderSorter(Column.NAME));
 			}
@@ -217,6 +219,7 @@ public class ReaderViewer {
 		column.setWidth(70);
 		// Add listener to column so tasks are sorted by type when clicked
 		column.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				tableViewer.setSorter(new ReaderSorter(Column.TYPE));
 			}
@@ -229,6 +232,7 @@ public class ReaderViewer {
 		// Add listener to column so tasks are sorted by percent when clicked
 		column.addSelectionListener(new SelectionAdapter() {
 
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				tableViewer.setSorter(new ReaderSorter(Column.TEMPLATE));
 			}
@@ -241,6 +245,7 @@ public class ReaderViewer {
 		// Add listener to column so tasks are sorted by percent when clicked
 		column.addSelectionListener(new SelectionAdapter() {
 
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				tableViewer.setSorter(new ReaderSorter(Column.TARGET));
 			}
@@ -305,7 +310,7 @@ public class ReaderViewer {
 		 * @see ITaskListViewer#addTask(ExampleTask)
 		 */
 		public void addReader(IReader reader){
-			logger.debug("Adding reader {}",reader);
+			logger.debug(bundleMarker,"Adding reader {}",reader);
 			tableViewer.add(reader);
 		}
 
@@ -315,7 +320,7 @@ public class ReaderViewer {
 		 * @see ITaskListViewer#removeTask(ExampleTask)
 		 */
 		public void removeReader(IReader reader) {
-			logger.debug("Removing reader {}",reader);
+			logger.debug(bundleMarker,"Removing reader {}",reader);
 			tableViewer.remove(reader);
 		}
 
@@ -325,7 +330,7 @@ public class ReaderViewer {
 		 * @see ITaskListViewer#updateTask(ExampleTask)
 		 */
 		public void updateReader(IReader reader) {
-//			logger.debug("Updating reader {}",reader);
+//			logger.debug(bundleMarker,"Updating reader {}",reader);
 			tableViewer.update(reader, null);
 		}
 	}

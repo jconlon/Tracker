@@ -10,8 +10,12 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.event.EventAdmin;
-import org.osgi.util.tracker.ServiceTracker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
+import com.verticon.tracker.editor.util.EventAdminTracker;
 import com.verticon.tracker.reader.event.connection.ReaderCompletionService;
 import com.verticon.tracker.reader.event.connection.RefreshableReader;
 
@@ -29,11 +33,26 @@ public class ReaderPlugin extends AbstractUIPlugin {
 	
 	// The shared instance
 	private static ReaderPlugin plugin;
-	private ServiceTracker tracker;
+	private EventAdminTracker tracker;
 	private ReaderCompletionService readerCompletionService = null;
 	private BundleContext bundleContext;
 	
 
+	/**
+	 * slf4j Logger
+	 */
+	private final static Logger logger = LoggerFactory.getLogger(ReaderPlugin.class);
+
+	/**
+	 * slf4j Marker to keep track of bundle
+	 */
+	public static final Marker bundleMarker = createBundleMarker();
+	private static final Marker createBundleMarker() {
+		Marker bundleMarker = MarkerFactory.getMarker(PLUGIN_ID);
+		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
+		return bundleMarker;
+	}
+	
 
 	/**
 	 * The constructor
@@ -49,16 +68,15 @@ public class ReaderPlugin extends AbstractUIPlugin {
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		bundleContext = context;
-		tracker = new ServiceTracker(context, EventAdmin.class.getName(), null);
+		tracker = new EventAdminTracker(context);
 		tracker.open();
 		readerCompletionService = new ReaderCompletionService();
 	    
 		readerCompletionService.start();
-		
+		logger.debug(bundleMarker, "Started Bundle");
 	}
 	
 	
@@ -75,6 +93,7 @@ public class ReaderPlugin extends AbstractUIPlugin {
 		plugin = null;
 		bundleContext=null;
 		super.stop(context);
+		logger.debug(bundleMarker, "Stopped Bundle");
 	}
 
 	/**

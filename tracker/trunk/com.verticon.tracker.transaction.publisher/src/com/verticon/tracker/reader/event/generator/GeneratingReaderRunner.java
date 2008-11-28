@@ -2,6 +2,7 @@
  * 
  */
 package com.verticon.tracker.reader.event.generator;
+import static com.verticon.tracker.reader.ReaderPlugin.bundleMarker;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -97,7 +98,7 @@ public class GeneratingReaderRunner implements Runnable {
 	private void sendARandomTag(){
 		int index = (int) (Math.random() * cache.size());
 		Long tag = cache.get(index);
-		logger.debug("Sending {} which is #{} out of {} cached tags.",
+		logger.debug(bundleMarker,"Sending {} which is #{} out of {} cached tags.",
 				new Object[]{tag, index, cache.size()});
 		tagIDPublisher.publish(tag);
 	}
