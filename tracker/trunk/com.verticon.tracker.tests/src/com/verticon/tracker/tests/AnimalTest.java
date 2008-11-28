@@ -5,6 +5,7 @@
  * $Id$
  */
 package com.verticon.tracker.tests;
+import static com.verticon.tracker.tests.Constants.bundleMarker;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -509,21 +510,21 @@ public abstract class AnimalTest extends TestCase {
 	public void testAllEvents() {
 		
 		//Animal2 add a tag1
-		logger.info("Animal2 add a tag1");
+		logger.info(bundleMarker, "Animal2 add a tag1");
 		Animal animal2 = TrackerFactory.eINSTANCE.createBovineBeef();
 		Tag tag1 = TrackerFactory.eINSTANCE.createTag();
 		tag1.setId(AIN_1);
 		animal2.getTags().add(tag1);
 		
 		//Add event1 to tag1 on animal2
-		logger.info("Add event1 to tag1 on animal2");
+		logger.info(bundleMarker,"Add event1 to tag1 on animal2");
 		Event event1 = TrackerFactory.eINSTANCE.createTagApplied();
 		tag1.getEvents().add(event1);
 		assertEquals("Animal2 should have one event",1, animal2.eventHistory().size());
 		assertTrue("Animald2 should contain the event1", animal2.eventHistory().contains(event1));
 		
 		//Add a second event to tag1
-		logger.info("Add a second event to tag1");
+		logger.info(bundleMarker,"Add a second event to tag1");
 		Event event2 = TrackerFactory.eINSTANCE.createReplacedTag();
 		tag1.getEvents().add(event2);
 		assertEquals("Animal2 should have two events",2, animal2.eventHistory().size());
@@ -531,20 +532,20 @@ public abstract class AnimalTest extends TestCase {
 		
 		
 		//Create a second tag and add it to animal2
-		logger.info("Create a second tag and add it to animal2");
+		logger.info(bundleMarker,"Create a second tag and add it to animal2");
 		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
 		animal2.getTags().add(tag2);
 		tag2.setId(AIN_2);
 		
 		//Create an event and add it to tag2 
-		logger.info("Create an event and add it to tag2");
+		logger.info(bundleMarker,"Create an event and add it to tag2");
 		Event event3 = TrackerFactory.eINSTANCE.createReplacedTag();
 		tag2.getEvents().add(event3);
 		assertEquals("Animal2 should have three events (tag1==2, tag2==1)",3, animal2.eventHistory().size());
 		assertTrue("Animald2 should contain event3",animal2.eventHistory().contains(event3));
 		
 		//Create another event and add it to tag2
-		logger.info("Create another event and add it to tag2");
+		logger.info(bundleMarker,"Create another event and add it to tag2");
 		Event event4 = TrackerFactory.eINSTANCE.createReplacedTag();
 		tag2.getEvents().add(event4);
 		
@@ -552,20 +553,20 @@ public abstract class AnimalTest extends TestCase {
 		assertTrue("Animald2 should contain event3",animal2.eventHistory().contains(event4));
 		
 		//Delete an event
-		logger.info("Deleting an event");
+		logger.info(bundleMarker,"Deleting an event");
 		tag2.getEvents().remove(event3);
 		assertEquals("Animal2 should have two events (tag1==2, tag2==1) ",3, animal2.eventHistory().size());
 		assertFalse("Animald2 should NOT contain event3",animal2.eventHistory().contains(event3));
 		assertTrue("Animald2 should Still contain event4",animal2.eventHistory().contains(event4));
 		
 		//Delete a tag
-		logger.info("Deleting a tag");
+		logger.info(bundleMarker,"Deleting a tag");
 		animal2.getTags().remove(tag2);
 		assertFalse("Animald2 should NOT contain event4",animal2.eventHistory().contains(event4));
 		assertEquals("Animal2 should have two events (tag1==2) ",2, animal2.eventHistory().size());
 		
 		//Create a third tag add two events to it then add it to animal2
-		logger.info("Create a third tag add events to it then add it to animal2");
+		logger.info(bundleMarker,"Create a third tag add events to it then add it to animal2");
 		Tag tag3 = TrackerFactory.eINSTANCE.createTag();
 		tag3.setId(AIN_3);
 		Event event5 = TrackerFactory.eINSTANCE.createReplacedTag();
@@ -712,7 +713,7 @@ public abstract class AnimalTest extends TestCase {
 		String serializedAnimal = null;
 		try {
 			serializedAnimal = serialiaze(animal);
-			System.out.println("Here it is:: " + serializedAnimal);
+//			System.out.println("Here it is:: " + serializedAnimal);
 		} catch (Exception e) {
 			fail("Failed to serialize animal");
 		}
@@ -738,7 +739,7 @@ public abstract class AnimalTest extends TestCase {
 		xmlHelper);
 		}
 		catch (Exception ex) {
-		    logger.error("Failed to serialize", ex);
+		    logger.error(bundleMarker, "Failed to serialize", ex);
 			throw ex;
 		}
 		return returnStr;

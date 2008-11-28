@@ -5,6 +5,7 @@
  * $Id$
  */
 package com.verticon.tracker.tests;
+import static com.verticon.tracker.tests.Constants.bundleMarker;
 
 import java.util.Collection;
 
@@ -147,7 +148,7 @@ public class PremisesTest extends TestCase {
 	 * @generated NOT
 	 */
 	public void testEventHistory() {
-		logger.info("Setting up an anima1l with tag1 and event1");
+		logger.info(bundleMarker, "Setting up an anima1l with tag1 and event1");
 		//Add one animal with two tags
 		Animal animal1 = TrackerFactory.eINSTANCE.createBovineBeef();
 		Tag tag1 = TrackerFactory.eINSTANCE.createTag();
@@ -155,7 +156,7 @@ public class PremisesTest extends TestCase {
 		animal1.getTags().add(tag1);
 		Event event1 = TrackerFactory.eINSTANCE.createTagApplied();
 		tag1.getEvents().add(event1);
-		logger.info("Adding the animal with one tag and one event");
+		logger.info(bundleMarker,"Adding the animal with one tag and one event");
 		getFixture().getAnimals().add(animal1);
 		assertEquals("EventHistory should have one event (animal1=tag1=1)", 1, getFixture().eventHistory().size());
 		assertTrue("EventHistory should contain event1", getFixture().eventHistory().contains(event1));
@@ -169,7 +170,7 @@ public class PremisesTest extends TestCase {
 		assertTrue("Col should contain event1", col.contains(event1));
 		
 		
-		logger.info("Adding a tag2 to animal1 with tag2 and event2");
+		logger.info(bundleMarker,"Adding a tag2 to animal1 with tag2 and event2");
 		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
 		animal1.getTags().add(tag2);
 		tag2.setId(AIN_2);
@@ -181,14 +182,14 @@ public class PremisesTest extends TestCase {
 		
 		
 		//Add second animal with two tags
-		logger.info("Setting up a animal2 with tag3 and event 3");
+		logger.info(bundleMarker,"Setting up a animal2 with tag3 and event 3");
 		Animal animal2 = TrackerFactory.eINSTANCE.createBovineBeef();
 		Tag tag3 = TrackerFactory.eINSTANCE.createTag();
 		tag3.setId(AIN_1);
 		animal2.getTags().add(tag3);
 		Event event3 = TrackerFactory.eINSTANCE.createTagApplied();
 		tag3.getEvents().add(event3);
-		logger.info("Add animal2 with tag3 and event 3");
+		logger.info(bundleMarker,"Add animal2 with tag3 and event 3");
 		getFixture().getAnimals().add(animal2);
 		
 		assertEquals("EventHistory should have three events (animal1=tag1=1)+(animal1=tag2=1)=2",
