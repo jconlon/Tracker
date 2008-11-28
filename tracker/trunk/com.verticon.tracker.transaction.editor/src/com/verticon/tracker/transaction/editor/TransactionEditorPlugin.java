@@ -15,6 +15,10 @@ import org.eclipse.emf.common.util.ResourceLocator;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.event.EventConstants;
 import org.osgi.service.event.EventHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import com.verticon.tracker.editor.util.TrackerConstants;
 import com.verticon.tracker.transaction.editor.event.TransactionEventHandler;
@@ -26,6 +30,8 @@ import com.verticon.tracker.transaction.editor.event.TransactionEventHandler;
  * @generated
  */
 public final class TransactionEditorPlugin extends EMFPlugin {
+	private static final String ID = "com.verticon.tracker.transaction.editor";
+
 	/**
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
@@ -42,6 +48,21 @@ public final class TransactionEditorPlugin extends EMFPlugin {
 	 */
 	private static Implementation plugin;
 
+	/**
+	 * slf4j Logger
+	 */
+	private final static Logger logger = LoggerFactory.getLogger(TransactionEditorPlugin.class);
+
+	/**
+	 * slf4j Marker to keep track of bundle
+	 */
+	public static final Marker bundleMarker = createBundleMarker();
+	private static final Marker createBundleMarker() {
+		Marker bundleMarker = MarkerFactory.getMarker(ID);
+		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
+		return bundleMarker;
+	}
+	
 	/**
 	 * Create the instance.
 	 * <!-- begin-user-doc -->
@@ -110,12 +131,13 @@ public final class TransactionEditorPlugin extends EMFPlugin {
 					TrackerConstants.EVENT_ADMIN_TOPIC_READER);
 			context.registerService(EventHandler.class.getName(), 
 					new TransactionEventHandler(), d);
+			logger.debug(bundleMarker, "Started Bundle");
 		}
 
 		@Override
 		public void stop(BundleContext context) throws Exception {
-			// TODO Auto-generated method stub
 			super.stop(context);
+			logger.debug(bundleMarker, "Stopped Bundle");
 		}
 	}
 

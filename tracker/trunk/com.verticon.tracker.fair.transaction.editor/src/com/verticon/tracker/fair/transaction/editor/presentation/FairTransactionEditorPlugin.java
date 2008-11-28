@@ -59,7 +59,7 @@ public final class FairTransactionEditorPlugin extends EMFPlugin {
 	public static final Marker bundleMarker = createBundleMarker();
 	private static final Marker createBundleMarker() {
 		Marker bundleMarker = MarkerFactory.getMarker(ID);
-		bundleMarker.add(MarkerFactory.getMarker("IS_MARKER"));
+		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
 		return bundleMarker;
 	}
 	

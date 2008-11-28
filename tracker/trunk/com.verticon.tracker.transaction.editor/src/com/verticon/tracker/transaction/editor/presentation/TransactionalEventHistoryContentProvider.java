@@ -1,4 +1,5 @@
 package com.verticon.tracker.transaction.editor.presentation;
+import static com.verticon.tracker.transaction.editor.TransactionEditorPlugin.bundleMarker;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -26,8 +27,8 @@ import com.verticon.tracker.util.EventHistoryAdapterFactory;
  * TransactionalExhibitsContentAdapter.  That class solved code copying problem with a 
  * delegate. 
  * TODO Consolidate in a similar way as com.verticon.tracker.fair.transaction.editor.presentation.TransactionalExhibitsContentAdapter
- * @see AnimalEventHistoryAdapter
- * @see PremisesEventHistoryAdapter
+ * AnimalEventHistoryAdapter
+ * PremisesEventHistoryAdapter
  * @see EventHistoryAdapterFactory
  * @see EventHistory
  * @author jconlon
@@ -49,7 +50,7 @@ public class TransactionalEventHistoryContentProvider extends TransactionalAdapt
 		super(editingDomain, adapterFactory);
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public Object[] getElements(Object object) {
 		return ((Premises) object).eventHistory().toArray();
@@ -66,7 +67,7 @@ public class TransactionalEventHistoryContentProvider extends TransactionalAdapt
 		
 		if(oldInput==null && newInput!=null){
 			Premises premisesInput = (Premises)newInput;
-			logger.debug(
+			logger.debug(bundleMarker,
 					"Started, viewer={} newInput={}",
 					viewer, premisesInput.getName());
 			//Set up the new
@@ -76,7 +77,7 @@ public class TransactionalEventHistoryContentProvider extends TransactionalAdapt
 			premisesEventHistoryAdapter.setForwarding(this);
 		}else if(oldInput!=null && newInput==null){
 			Premises premisesOldInput = (Premises)oldInput;
-			logger.debug("Stopped, viewer={} oldInput={}",
+			logger.debug(bundleMarker,"Stopped, viewer={} oldInput={}",
 					viewer==null?"no viewer":viewer, premisesOldInput.getName());
 			EventHistory premisesEventHistoryAdapter =  (EventHistory) EventHistoryAdapterFactory.INSTANCE.adapt(
 					premisesOldInput, EventHistory.class);
@@ -85,7 +86,7 @@ public class TransactionalEventHistoryContentProvider extends TransactionalAdapt
 		}else if (oldInput!=null && newInput!=null){
 			Premises premisesInput = (Premises)newInput;
 			Premises premisesOldInput = (Premises)oldInput;
-			logger.debug("Changed, viewer={} newInput={} oldInput={}",
+			logger.debug(bundleMarker,"Changed, viewer={} newInput={} oldInput={}",
 					new Object[] {viewer,premisesInput.getName(),premisesOldInput.getName()});
 			//Teardown the old
 			EventHistory premisesEventHistoryAdapter =  (EventHistory) EventHistoryAdapterFactory.INSTANCE.adapt(
@@ -100,7 +101,7 @@ public class TransactionalEventHistoryContentProvider extends TransactionalAdapt
 			
 			
 		}else if (oldInput!=null && newInput!=null){
-			logger.debug("Emptied, viewer={} but both old and new input are null",
+			logger.debug(bundleMarker,"Emptied, viewer={} but both old and new input are null",
 					viewer);
 			
 		}
@@ -126,7 +127,6 @@ public class TransactionalEventHistoryContentProvider extends TransactionalAdapt
 	 * 
 	 * @param n
 	 */
-	@SuppressWarnings("unchecked")
 	private void handleEventHistoryNotification(Notification n) {
 		switch (n.getEventType()) {
 
