@@ -1,4 +1,5 @@
 package com.verticon.tracker.fair.editor.tests;
+import static com.verticon.tracker.fair.tests.Constants.bundleMarker;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -141,7 +142,7 @@ public class DivisionProcreatorTest extends TestCase {
 		try {
 			importSpreadSheet("importExhibits-Parents.xls");
 		} catch (MissingCriticalDataException e) {
-			logger.error("Failed to import data",e);
+			logger.error(bundleMarker,"Failed to import data",e);
 			fail(e.getMessage());
 		}
 		
@@ -188,7 +189,7 @@ public class DivisionProcreatorTest extends TestCase {
 			importSpreadSheet("importExhibits-Missing_DivFields.xls");
 			fail("Should have thrown a missingCriticalDataException");
 		} catch (MissingCriticalDataException e) {
-			logger.info(e.getMessage());
+			logger.info(bundleMarker,e.getMessage());
 		}
 		
 	}
@@ -199,7 +200,7 @@ public class DivisionProcreatorTest extends TestCase {
 			importSpreadSheet("importExhibits-Missing_DeptFields.xls");
 			fail("Should have thrown a missingCriticalDataException");
 		} catch (MissingCriticalDataException e) {
-			logger.info(e.getMessage());
+			logger.info(bundleMarker,e.getMessage());
 		}
 		
 	}
@@ -212,7 +213,7 @@ public class DivisionProcreatorTest extends TestCase {
 		try {
 			importSpreadSheet("importExhibits-Parents_YouthClubs.xls");
 		} catch (MissingCriticalDataException e) {
-			logger.error("Failed to import data",e);
+			logger.error(bundleMarker,"Failed to import data",e);
 			fail(e.getMessage());
 		}
 		
@@ -294,7 +295,7 @@ public class DivisionProcreatorTest extends TestCase {
 		try {
 			importSpreadSheet("importExhibits-Parents_YouthClubs_Animals.xls");
 		} catch (MissingCriticalDataException e) {
-			logger.error("Failed to import data",e);
+			logger.error(bundleMarker,"Failed to import data",e);
 			fail(e.getMessage());
 		}
 		
@@ -390,7 +391,7 @@ public class DivisionProcreatorTest extends TestCase {
 		try {
 			importSpreadSheet("importExhibits-Parents_YouthClubs_Animals_SupID.xls");
 		} catch (MissingCriticalDataException e) {
-			logger.error("Failed to import data",e);
+			logger.error(bundleMarker,"Failed to import data",e);
 			fail(e.getMessage());
 		}
 		
@@ -462,7 +463,7 @@ public class DivisionProcreatorTest extends TestCase {
 						editingDomain);
 
 			} catch (RuntimeException e) {
-				logger.error("Failed to process row " + i, e);
+				logger.error(bundleMarker, "Failed to process row " + i, e);
 			}
 		}
 		
@@ -473,7 +474,7 @@ public class DivisionProcreatorTest extends TestCase {
 		FileInputStream fin = null;
 		HSSFSheet s = null;
 		Exception ex = null;
-		logger.debug("Loading worksheet data.");
+		logger.debug(bundleMarker,"Loading worksheet data.");
 		try {
 			// create a new file input stream with the input file specified
 			// at the command line

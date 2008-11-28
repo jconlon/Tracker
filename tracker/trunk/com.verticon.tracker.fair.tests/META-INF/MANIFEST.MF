@@ -19,6 +19,7 @@ Require-Bundle: org.junit;visibility:=reexport,
 Eclipse-LazyStart: true
 Import-Package: com.verticon.tracker.edit.provider;version="0.1.0",
  com.verticon.tracker.fair.edit.provider,
+ org.apache.log4j,
  org.apache.poi.hssf.usermodel,
  org.eclipse.emf.edit.command,
  org.eclipse.emf.edit.domain,

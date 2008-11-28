@@ -5,12 +5,11 @@
  */
 package com.verticon.tracker.fair.tests;
 
+import junit.framework.TestCase;
+import junit.textui.TestRunner;
+
 import com.verticon.tracker.fair.FairFactory;
 import com.verticon.tracker.fair.YouthClub;
-
-import junit.framework.TestCase;
-
-import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
@@ -94,6 +93,18 @@ public class YouthClubTest extends TestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+	
+	/**
+	 *
+	 * @generated NOT
+	 */
+	public void testName() {
+		assertNotNull(getFixture());
+		assertNull(getFixture().getName());
+		getFixture().setName("TEST");
+		assertEquals("TEST", getFixture().getName());
+		
 	}
 
 } //YouthClubTest

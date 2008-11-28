@@ -5,12 +5,11 @@
  */
 package com.verticon.tracker.fair.tests;
 
+import junit.framework.TestCase;
+import junit.textui.TestRunner;
+
 import com.verticon.tracker.fair.FairFactory;
 import com.verticon.tracker.fair.Person;
-
-import junit.framework.TestCase;
-
-import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
@@ -107,12 +106,13 @@ public class PersonTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.fair.Person#getName()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testGetName() {
-		// TODO: implement this feature getter test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		
+		getFixture().setFirstName("First");
+		getFixture().setLastName("Last");
+		assertEquals("Last,First", getFixture().getName());
 	}
 
 	/**
@@ -120,12 +120,10 @@ public class PersonTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.fair.Person#setName(java.lang.String)
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testSetName() {
-		// TODO: implement this feature setter test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+//		noop
 	}
 
 } //PersonTest
