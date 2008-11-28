@@ -2,6 +2,7 @@
  * 
  */
 package com.verticon.tracker.reader.comm.plugin.tests;
+import static com.verticon.tracker.tests.Constants.bundleMarker;
 
 import java.io.File;
 import java.net.URI;
@@ -31,6 +32,7 @@ public class SerialPortReaderTest extends TestCase {
 	/* (non-Javadoc)
 	 * @see junit.framework.TestCase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		instance = new SerialPortReader();
@@ -39,6 +41,7 @@ public class SerialPortReaderTest extends TestCase {
 	/* (non-Javadoc)
 	 * @see junit.framework.TestCase#tearDown()
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		if(instance !=null){
 			if(instance.isStarted()){
@@ -54,7 +57,7 @@ public class SerialPortReaderTest extends TestCase {
 	 * Test method for {@link com.verticon.tracker.reader.event.comm.SerialPortReader#SerialPortReader()}.
 	 */
 	public void testSerialPortReader() {
-		logger.debug("Starting tests");
+		logger.debug(bundleMarker, "Starting tests");
 		assertNotNull("instance should not be Null",instance);
 	}
 	
