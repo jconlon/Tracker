@@ -92,31 +92,6 @@ that can be installed and used with other Eclipse (3.3)-based offerings.
    </plugins>
 
    <features>
-      <feature id="org.eclipse.platform" version="3.4.0.v20080610-9I96EhtEm-T_5LxIsybz-3MdGZmOA3uwv7Ka_M"/>
-      <feature id="org.eclipse.equinox.executable" version="3.3.100.v20080606-7H-ELQEDdVv0SVkW65GwAA"/>
-      <feature id="org.eclipse.emf" version="2.4.0.v200806091234"/>
-      <feature id="org.eclipse.emf.common" version="2.4.0.v200806091234"/>
-      <feature id="org.eclipse.emf.common.ui" version="2.4.0.v200806091234"/>
-      <feature id="org.eclipse.emf.ecore" version="2.4.0.v200806091234"/>
-      <feature id="org.eclipse.emf.ecore.edit" version="2.4.0.v200806091234"/>
-      <feature id="org.eclipse.emf.ecore.editor" version="2.4.0.v200806091234"/>
-      <feature id="org.eclipse.emf.edit" version="2.4.0.v200806091234"/>
-      <feature id="org.eclipse.emf.edit.ui" version="2.4.0.v200806091234"/>
-      <feature id="org.eclipse.emf.query" version="1.2.0.v200805130238-11-7w311916241349"/>
-      <feature id="org.eclipse.emf.databinding" version="1.0.0.v200806091234"/>
-      <feature id="org.eclipse.emf.workspace" version="1.2.0.v200805130238-23-8s733I3C59379I"/>
-      <feature id="org.eclipse.emf.databinding.edit" version="1.0.0.v200806091234"/>
-      <feature id="org.eclipse.emf.query.ocl" version="1.2.0.v200805130238-11-7w311916241349"/>
-      <feature id="org.eclipse.emf.query.doc" version="1.2.0.v200805130238-23-8s733I3C59379I"/>
-      <feature id="org.eclipse.emf.transaction" version="1.2.0.v200805130238-23-8s733I3C59379I"/>
-      <feature id="org.eclipse.emf.ocl" version="1.1.100.v200805130238-108Y7w311916241349"/>
-      <feature id="org.eclipse.emf.validation" version="1.2.0.v200805130238-35-9oA55S5J8H5ADM"/>
-      <feature id="org.eclipse.emf.validation.ocl" version="1.2.0.v200805130238-11-7w311916241349"/>
-      <feature id="org.eclipse.emf.validation.doc" version="1.2.0.v200805130238-23-8s733I3C6D376E"/>
-      <feature id="org.eclipse.emf.workspace.doc" version="1.2.0.v200805130238-11-7w311916241349"/>
-      <feature id="org.eclipse.emf.ocl.doc" version="1.2.0.v200805130238-108Y7w311916241349"/>
-      <feature id="org.eclipse.ocl" version="1.2.0.v200805130238-34-9oA55S5I6M7JBK"/>
-      <feature id="org.eclipse.ocl.doc" version="1.2.0.v200805041323-23-8s733I3C59379I"/>
       <feature id="com.verticon.tracker.help" version="0.2.3"/>
       <feature id="com.verticon.tracker.validation.core" version="0.1.3"/>
       <feature id="com.verticon.tracker.ocl.query" version="0.1.4"/>
@@ -129,16 +104,6 @@ that can be installed and used with other Eclipse (3.3)-based offerings.
       <feature id="com.verticon.tracker.export.xls" version="0.2.2"/>
       <feature id="gnu.io.rxtx" version="2.1.7.4_v20071016-7B57e7UAXMAAqGAGf"/>
       <feature id="org.eclipse.datatools.enablement.oda.ecore" version="0.1.0"/>
-      <feature id="org.eclipse.datatools.enablement.jdbc.feature" version="1.6.0.v200805301340-3-09oA55S5J8JADJJ"/>
-      <feature id="org.eclipse.datatools.enablement.oda.designer.feature" version="1.6.0.v200804021-21-8s733I3C7F4K63"/>
-      <feature id="org.eclipse.datatools.enablement.feature" version="1.6.0.v200804021-7D8H09FSoK_ZabCz-1W8blbFlWui"/>
-      <feature id="org.eclipse.datatools.enablement.oda.feature" version="1.6.0.v200804021-797P4CYQCD4CpIiDmMN"/>
-      <feature id="org.eclipse.datatools.connectivity.feature" version="1.6.0.v200805151245-7_7K0Dn-QXuj8_GoX7JfPiBEG"/>
-      <feature id="org.eclipse.datatools.connectivity.oda.feature" version="1.6.0.v200804021-7F27KBcMAAwAeIeHbVf"/>
-      <feature id="org.eclipse.datatools.connectivity.oda.designer.feature" version="1.6.0.v200804260945-7C67HCYQCD4CnIkMYha"/>
-      <feature id="org.eclipse.datatools.modelbase.feature" version="1.6.0.v200804021-6-0BcMAAwAfFgKSbi"/>
-      <feature id="org.eclipse.datatools.doc.user" version="1.6.0.v200806171040-37_-8w95CKAECFAEGI_"/>
-      <feature id="org.eclipse.birt" version="2.3.0.v200804251-7N7Y-AYdeIEKS6mGZPHGhs-0vEl6"/>
       <feature id="org.eclipse.birt.doc" version="2.3.0.v200805131-22-7w31191728b"/>
       <feature id="org.eclipse.birt.report.designer" version="2.3.0.v20080431-7X7n-ECLmlsLx_z-4z0LEaYz-mA8"/>
       <feature id="org.eclipse.birt.report.runtime" version="2.3.0.v20080516-7g890ELRXmproz-xIDPOJ1"/>
@@ -149,17 +114,52 @@ that can be installed and used with other Eclipse (3.3)-based offerings.
       <feature id="org.eclipse.birt.chart.runtime" version="2.3.0.v20080331-7X8n-EMNbos-qrRSYtmR1"/>
       <feature id="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqlbuilder.feature" version="2.3.0.v200806021-787A-9xtEFULkYwnqspz00yJEQPK"/>
       <feature id="org.eclipse.birt.report.designer.debug" version="2.3.0.v200806102-45-8s733I3E537"/>
-      <feature id="org.eclipse.gef" version="3.4.0.v20080115-677-8082A5696H274A"/>
       <feature id="org.eclipse.birt.report.designer.editor.xml.wtp" version="2.3.0.v200806102-22-7w311917213"/>
-      <feature id="org.eclipse.jdt" version="3.4.0.v20080603-2000-7o7tEAXEFpPqqoXxgaBhhhq"/>
+      <feature id="org.eclipse.birt.example" version="2.3.0.v20071113-7D7J-CYQCD4CpDm"/>
+      <feature id="org.eclipse.platform" version="3.4.1.r341_v20080731-9I96EiDElYevwz-p1bP5z-NlAaP7vtX6Utotqsu"/>
+      <feature id="org.eclipse.equinox.executable" version="3.3.100.v20080606-7H-ELQEDdVv0SVkW65GwAA"/>
+      <feature id="org.eclipse.emf" version="2.4.1.v200808251517"/>
+      <feature id="org.eclipse.emf.common" version="2.4.0.v200808251517"/>
+      <feature id="org.eclipse.emf.common.ui" version="2.4.0.v200808251517"/>
+      <feature id="org.eclipse.emf.ecore" version="2.4.1.v200808251517"/>
+      <feature id="org.eclipse.emf.ecore.edit" version="2.4.1.v200808251517"/>
+      <feature id="org.eclipse.emf.ecore.editor" version="2.4.0.v200808251517"/>
+      <feature id="org.eclipse.emf.edit" version="2.4.1.v200808251517"/>
+      <feature id="org.eclipse.emf.edit.ui" version="2.4.1.v200808251517"/>
+      <feature id="org.eclipse.emf.query" version="1.2.0.v200805130238-11-7w311916241349"/>
+      <feature id="org.eclipse.emf.databinding" version="1.0.0.v200808251517"/>
+      <feature id="org.eclipse.emf.workspace" version="1.2.2.v200809171833-2318s733I3G5C4C9D"/>
+      <feature id="org.eclipse.emf.databinding.edit" version="1.0.0.v200808251517"/>
+      <feature id="org.eclipse.emf.query.ocl" version="1.2.0.v200805130238-11-7w311916241349"/>
+      <feature id="org.eclipse.emf.query.doc" version="1.2.0.v200805130238-23-8s733I3C59379I"/>
+      <feature id="org.eclipse.emf.transaction" version="1.2.1.v200807161719-2308s733I3E5B4B7J"/>
+      <feature id="org.eclipse.emf.ocl" version="1.1.101.v200808291106-108Z7w3119193_2217"/>
+      <feature id="org.eclipse.emf.validation" version="1.2.0.v200805130238-35-9oA55S5L8G6FCT"/>
+      <feature id="org.eclipse.emf.validation.ocl" version="1.2.0.v200805130238-11-7w311916241349"/>
+      <feature id="org.eclipse.emf.validation.doc" version="1.2.1.v200807161729-2308s733I3E6G4B5F"/>
+      <feature id="org.eclipse.emf.workspace.doc" version="1.2.0.v200805130238-11-7w311916241349"/>
+      <feature id="org.eclipse.emf.ocl.doc" version="1.2.1.v200807161725-108Z7w311918272836"/>
+      <feature id="org.eclipse.ocl" version="1.2.2.v200808291106-3429oA55S5N9A8UED"/>
+      <feature id="org.eclipse.ocl.doc" version="1.2.1.v200807161725-2308s733I3E5B4B8F"/>
+      <feature id="org.eclipse.datatools.enablement.jdbc.feature" version="1.6.1.v200809191145-3-09oA55S5J8JADJJ"/>
+      <feature id="org.eclipse.datatools.enablement.oda.designer.feature" version="1.6.1.v200809191145-2118s733I3I6C4_6C"/>
+      <feature id="org.eclipse.datatools.enablement.feature" version="1.6.1.v200809191145-7D8H7C9FSwOBZabCz-MXEZLR8Rnc"/>
+      <feature id="org.eclipse.datatools.enablement.oda.feature" version="1.6.1.v200809191145-797P6CYQCD4CvIcEeNW"/>
+      <feature id="org.eclipse.datatools.connectivity.feature" version="1.6.1.v200809191145-7_7K7_Dn-QY4jNGDlg0YiVa76H"/>
+      <feature id="org.eclipse.datatools.connectivity.oda.feature" version="1.6.1.v200809191145-7F27PBcMAAwAtKkESVZ"/>
+      <feature id="org.eclipse.datatools.connectivity.oda.designer.feature" version="1.6.1.v200809191145-7C67OCYQCD4D-JkHcYh"/>
+      <feature id="org.eclipse.datatools.modelbase.feature" version="1.6.1.v200809191145-6-0BcMAAwAmEgFXTT"/>
+      <feature id="org.eclipse.datatools.doc.user" version="1.6.1.v200809191145-37A09oA55S5P_P8CEO24"/>
+      <feature id="org.eclipse.gef" version="3.4.0.v20080115-67708082A56A5H274A"/>
+      <feature id="org.eclipse.jdt" version="3.4.1.r341_v20080709-0800-7o7tEAfEF_U5qyUgrb2HAp539P97"/>
+      <feature id="org.eclipse.pde" version="3.4.1.r341_v20080731-7T7U0E9mlRIuGUYviF_VP"/>
+      <feature id="org.eclipse.equinox.p2.user.ui" version="1.0.1.r34x_v20080721-7d-7OEMsLAz-vTBJ-ZHQaF155CE"/>
+      <feature id="org.eclipse.datatools.enablement.apache.derby.feature" version="1.6.1.v200809191145-652AlJAKaLiJyLhdmBEKK"/>
+      <feature id="org.eclipse.birt" version="2.3.1.v20080630-7N7Y7AAYdlIXLgz-SLsyMQ21x2fI"/>
       <feature id="com.lowagie.itext" version="1.5.4.v20080225-1437w31191339"/>
       <feature id="org.w3c.sac" version="1.3.0.v20080102-46-_kE77b7U_N56BA"/>
       <feature id="org.mozilla.rhino" version="1.6.7.v20071217-1567w31191325"/>
-      <feature id="org.eclipse.pde" version="3.4.0.v20080603-7T7U-E_EkMNrNKb39WcMC"/>
-      <feature id="org.eclipse.birt.example" version="2.3.0.v20071113-7D7J-CYQCD4CpDm"/>
       <feature id="org.apache.derby.core" version="10.3.1.4"/>
-      <feature id="org.eclipse.equinox.p2.user.ui" version="1.0.0.v20080516-7d--ETu637E5se-QIGiA"/>
-      <feature id="org.eclipse.datatools.enablement.apache.derby.feature" version="1.6.0.v200804021-650AlJAKaLeL1NnfvBEKK"/>
    </features>
 
 </product>
