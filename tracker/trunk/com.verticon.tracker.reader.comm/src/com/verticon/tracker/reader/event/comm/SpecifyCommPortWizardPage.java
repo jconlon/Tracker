@@ -2,7 +2,7 @@
  * 
  */
 package com.verticon.tracker.reader.event.comm;
-
+import static com.verticon.tracker.connector.comm.CommReaderPlugin.bundleMarker;
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.PortInUseException;
@@ -46,7 +46,7 @@ public class SpecifyCommPortWizardPage extends WizardPage implements
 
 	private ListViewer listViewer;
 
-	private Vector<String> portNames = new Vector<String>();
+	private final Vector<String> portNames = new Vector<String>();
 	
 	private String selectedPortName = null;
 
@@ -71,6 +71,7 @@ public class SpecifyCommPortWizardPage extends WizardPage implements
 		listViewer = new ListViewer(container, SWT.SINGLE | SWT.H_SCROLL
 				| SWT.V_SCROLL | SWT.BORDER);
 		listViewer.setLabelProvider(new LabelProvider() {
+			@Override
 			public String getText(Object element) {
 				return (String) element;
 			}
@@ -186,10 +187,10 @@ public class SpecifyCommPortWizardPage extends WizardPage implements
 				}
 				break;
 			case CommPortIdentifier.PORT_PARALLEL:
-				logger.debug("Identified {} as a parallel port.", portName);
+				logger.debug(bundleMarker,"Identified {} as a parallel port.", portName);
 				break;
 			default:
-				logger.debug("Identified {} as a port of unknown type.",
+				logger.debug(bundleMarker,"Identified {} as a port of unknown type.",
 						portName);
 				break;
 			}
@@ -208,7 +209,7 @@ public class SpecifyCommPortWizardPage extends WizardPage implements
 	private void configureValidSerialPorts(){
 		String serialPorts = CommReaderPlugin.getDefault().getPreferenceStore().
 		getString(PreferenceConstants.P_SERIAL_PORTS);
-		logger.debug("Setting System Property {} with value {}",
+		logger.debug(bundleMarker,"Setting System Property {} with value {}",
 				CommReaderPlugin.GNU_IO_RXTX_SERIAL_PORTS,serialPorts);
 		
 		System.setProperty(CommReaderPlugin.GNU_IO_RXTX_SERIAL_PORTS, 

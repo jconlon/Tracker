@@ -1,4 +1,5 @@
 package com.verticon.tracker.reader.eventadmin;
+import static com.verticon.tracker.reader.ReaderPlugin.bundleMarker;
 
 import java.io.IOException;
 import java.util.Hashtable;
@@ -55,7 +56,7 @@ public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
 	 * @see com.verticon.tracker.reader.ITransactionPublisher#init()
 	 */
 	  public synchronized void init() throws IOException {
-		logger.debug("{} synchronizing contents of template file: {}"
+		logger.debug(bundleMarker,"{} synchronizing contents of template file: {}"
 				,reader, animalTemplateFile.getName());
 		Resource templateResource = getResource(animalTemplateFile);
 		if (templateResource.getContents().isEmpty()) {

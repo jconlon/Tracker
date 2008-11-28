@@ -1,4 +1,5 @@
 package com.verticon.tracker.connector.bluetooth;
+import static com.verticon.tracker.connector.bluetooth.BluetoothReaderPlugin.bundleMarker;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -21,48 +22,48 @@ public class WrappedConnection implements InputConnection {
 	private InputStream inputStream = null;
 	
 	public WrappedConnection(InputConnection connection) {
-		logger.debug("Constructing wrapped connection");
+		logger.debug(bundleMarker,"Constructing wrapped connection");
 		this.connection=connection;
 	}
 
 	public void close() throws IOException {
 		
 		try {
-			logger.debug("Closing connection");
+			logger.debug(bundleMarker,"Closing connection");
 			connection.close();
 			if(dataInputStream != null){
-				logger.debug("Closing dataInputStream");
+				logger.debug(bundleMarker,"Closing dataInputStream");
 				dataInputStream.close();
 			}
 			if(inputStream != null){
-				logger.debug("Closing inputStream");
+				logger.debug(bundleMarker,"Closing inputStream");
 				inputStream.close();
 			}
 		} catch (IOException e) {
-			logger.error("Failed to close connection",e);
+			logger.error(bundleMarker,"Failed to close connection",e);
 			throw e;
 		}
 		
 	}
 
 	public DataInputStream openDataInputStream() throws IOException {
-		logger.info("Opening DataInputStream connection");
+		logger.info(bundleMarker,"Opening DataInputStream connection");
 		try {
 			dataInputStream = connection.openDataInputStream();
 			return dataInputStream;
 		} catch (IOException e) {
-			logger.error("Failed to open connection",e);
+			logger.error(bundleMarker,"Failed to open connection",e);
 			throw e;
 		}
 	}
 
 	public InputStream openInputStream() throws IOException {
-		logger.debug("Opening InputStream connection");
+		logger.debug(bundleMarker,"Opening InputStream connection");
 		try {
 			inputStream =  connection.openInputStream();
 			return inputStream;
 		} catch (IOException e) {
-			logger.error("Failed to open connection",e);
+			logger.error(bundleMarker,"Failed to open connection",e);
 			throw e;
 		}
 	}

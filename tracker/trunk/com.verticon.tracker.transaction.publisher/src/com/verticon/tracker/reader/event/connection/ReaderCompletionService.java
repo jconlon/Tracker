@@ -2,6 +2,7 @@
  * 
  */
 package com.verticon.tracker.reader.event.connection;
+import static com.verticon.tracker.reader.ReaderPlugin.bundleMarker;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
@@ -57,7 +58,7 @@ final public class ReaderCompletionService {
     }
 
 	public synchronized final void start() {
-		logger.debug("Background task completion service starting.");
+		logger.debug(bundleMarker,"Background task completion service starting.");
 		
 		if(executorService==null || executorService.isShutdown()){
 			executorService = Executors.newCachedThreadPool();
@@ -69,7 +70,7 @@ final public class ReaderCompletionService {
 	}
 
 	public final synchronized boolean stop() throws InterruptedException {
-		logger.info("Background task completion service shutingdown all background tasks and the service.");
+		logger.info(bundleMarker,"Background task completion service shutingdown all background tasks and the service.");
 		executorService.shutdownNow();
 		scheduler.shutdown();
 		return executorService.awaitTermination(3, TimeUnit.SECONDS);
@@ -77,9 +78,9 @@ final public class ReaderCompletionService {
 	}
 	
 
-	private Runnable runner = new Runnable() {
+	private final Runnable runner = new Runnable() {
 		public void run() {
-			logger.info("Background task completion service started.");
+			logger.info(bundleMarker,"Background task completion service started.");
 			try {
 				while (true) {
 					processFutures(completionService.take());
@@ -87,7 +88,7 @@ final public class ReaderCompletionService {
 			} catch (InterruptedException ex) {
 				Thread.currentThread().interrupt();// reset inturuption
 			}
-			logger.info("Background task completion service finished.");
+			logger.info(bundleMarker,"Background task completion service finished.");
 		}
 	};
 

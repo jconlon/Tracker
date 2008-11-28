@@ -1,4 +1,5 @@
 package com.verticon.tracker.reader.event.bluetooth;
+import static com.verticon.tracker.connector.bluetooth.BluetoothReaderPlugin.bundleMarker;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
@@ -54,7 +55,7 @@ public class SelectServiceWizardPage extends WizardPage implements
 	// private ListViewer listViewer;
 	private TableViewer tableViewer;
 
-	private List<ServiceRecord> deviceServices = new CopyOnWriteArrayList<ServiceRecord>();
+	private final List<ServiceRecord> deviceServices = new CopyOnWriteArrayList<ServiceRecord>();
 
 	private ServiceRecord selectedServiceRecord = null;
 
@@ -294,19 +295,19 @@ public class SelectServiceWizardPage extends WizardPage implements
 	private void processDataElement(DataElement de, int attributeID) {
 		switch (de.getDataType()) {
 		case DataElement.STRING:
-			logger.debug("Attribute id={}, String value={}", attributeID,
-					(String) de.getValue());
+			logger.debug(bundleMarker,"Attribute id={}, String value={}", attributeID,
+					de.getValue());
 			break;
 		case DataElement.UUID:
-			logger.debug("Attribute id={}, UUID value={}", attributeID,
-					(UUID) de.getValue());
+			logger.debug(bundleMarker,"Attribute id={}, UUID value={}", attributeID,
+					de.getValue());
 			break;
 		case DataElement.URL:
-			logger.debug("Attribute id={}, URL value={}", attributeID,
-					(String) de.getValue());
+			logger.debug(bundleMarker,"Attribute id={}, URL value={}", attributeID,
+					de.getValue());
 			break;
 		case DataElement.DATALT:
-			logger.debug("Found a DatAlt for attribute id={}", attributeID);
+			logger.debug(bundleMarker,"Found a DatAlt for attribute id={}", attributeID);
 			Enumeration en = (Enumeration) de.getValue();
 			while (en.hasMoreElements()) {
 				DataElement object = (DataElement) en.nextElement();
@@ -316,7 +317,7 @@ public class SelectServiceWizardPage extends WizardPage implements
 			break;
 
 		case DataElement.DATSEQ:
-			logger.debug("Found a DatSeq for attribute id={}", attributeID);
+			logger.debug(bundleMarker,"Found a DatSeq for attribute id={}", attributeID);
 			Enumeration en2 = (Enumeration) de.getValue();
 			while (en2.hasMoreElements()) {
 				DataElement object = (DataElement) en2.nextElement();
@@ -325,7 +326,7 @@ public class SelectServiceWizardPage extends WizardPage implements
 
 			break;
 		default:
-			logger.debug("Attribute id={}, value={}", attributeID);
+			logger.debug(bundleMarker,"Attribute id={}, value={}", attributeID);
 			break;
 		}
 	}
@@ -344,13 +345,13 @@ public class SelectServiceWizardPage extends WizardPage implements
 					transactionID);
 			break;
 		case DiscoveryListener.SERVICE_SEARCH_TERMINATED:
-			logger.info("User cancelled search {}.", transactionID);
+			logger.info(bundleMarker,"User cancelled search {}.", transactionID);
 			break;
 		case DiscoveryListener.SERVICE_SEARCH_COMPLETED:
-			logger.info("Service search {} complete.", transactionID);
+			logger.info(bundleMarker,"Service search {} complete.", transactionID);
 			break;
 		default:
-			logger.error("Unexpected response code {} from search {}.",
+			logger.error(bundleMarker,"Unexpected response code {} from search {}.",
 					responseCode, transactionID);
 		}
 
@@ -373,10 +374,10 @@ public class SelectServiceWizardPage extends WizardPage implements
 		try {
 			barrier.await();
 		} catch (InterruptedException e) {
-			logger.debug("Unanticipated result", e);
+			logger.debug(bundleMarker,"Unanticipated result", e);
 			Thread.currentThread().interrupt();
 		} catch (BrokenBarrierException e) {
-			logger.error("Unanticipated result", e);
+			logger.error(bundleMarker,"Unanticipated result", e);
 		}
 	}
 
@@ -386,18 +387,18 @@ public class SelectServiceWizardPage extends WizardPage implements
 	public void inquiryCompleted(int arg0) {
 		switch (arg0) {
 		case DiscoveryListener.INQUIRY_COMPLETED:
-			logger.debug("Completed discovery.");
+			logger.debug(bundleMarker,"Completed discovery.");
 			break;
 
 		case DiscoveryListener.INQUIRY_ERROR:
-			logger.error("Bluetooth error.");
+			logger.error(bundleMarker,"Bluetooth error.");
 			break;
 
 		case DiscoveryListener.INQUIRY_TERMINATED:
-			logger.debug("Canceled discovery.");
+			logger.debug(bundleMarker,"Canceled discovery.");
 			break;
 		default:
-			logger.debug("Unanticipated result {}", arg0);
+			logger.debug(bundleMarker,"Unanticipated result {}", arg0);
 			break;
 		}
 		getContainer().getShell().getDisplay().asyncExec(new Runnable() {
@@ -419,10 +420,10 @@ public class SelectServiceWizardPage extends WizardPage implements
 		try {
 			barrier.await();
 		} catch (InterruptedException e) {
-			logger.debug("Unanticipated result", e);
+			logger.debug(bundleMarker,"Unanticipated result", e);
 			Thread.currentThread().interrupt();
 		} catch (BrokenBarrierException e) {
-			logger.error("Unanticipated result", e);
+			logger.error(bundleMarker,"Unanticipated result", e);
 		}
 
 	}
@@ -498,12 +499,12 @@ public class SelectServiceWizardPage extends WizardPage implements
 	private final void searchServices(RemoteDevice device, DiscoveryAgent agent) {
 
 		try {
-			logger.info("Searching {} for services", device
+			logger.info(bundleMarker,"Searching {} for services", device
 					.getBluetoothAddress());
 			int trans = agent.searchServices(attrIDs, searchList, device, this);
-			logger.info("Service Search {} started", trans);
+			logger.info(bundleMarker,"Service Search {} started", trans);
 		} catch (BluetoothStateException ex) {
-			logger.error("BluetoothStateException: " + ex.getMessage(), ex);
+			logger.error(bundleMarker,"BluetoothStateException: " + ex.getMessage(), ex);
 		}
 
 	}

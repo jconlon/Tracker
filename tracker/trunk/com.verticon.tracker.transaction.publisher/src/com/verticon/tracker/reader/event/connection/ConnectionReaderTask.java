@@ -1,4 +1,5 @@
 package com.verticon.tracker.reader.event.connection;
+import static com.verticon.tracker.reader.ReaderPlugin.bundleMarker;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,7 +53,7 @@ public class ConnectionReaderTask implements Callable<RefreshableReader> {
 	 * with a thread interruption.
 	 */
 	public RefreshableReader call() throws Exception {
-		logger.debug("{} opening background connection to {}",reader,target);
+		logger.debug(bundleMarker,"{} opening background connection to {}",reader,target);
 		ConnectorService cs = getConnectorService();
 		InputConnection connection = (InputConnection)cs.open(target, ConnectorService.READ);
 		
@@ -62,7 +63,7 @@ public class ConnectionReaderTask implements Callable<RefreshableReader> {
 		try {
 			
 			in = connection.openInputStream();//  openInputStream(target);
-			logger.info("{} background connection {} opened",reader, target);
+			logger.info(bundleMarker, "{} background connection {} opened",reader, target);
 			while ( !Thread.currentThread().isInterrupted()) {
 				if(in.available()>0){
 			          int i=in.read(tmp, 0, 1024);
@@ -73,11 +74,11 @@ public class ConnectionReaderTask implements Callable<RefreshableReader> {
 			}
 			connection.close();
 			
-			logger.info("{} background connection {} has terminated.",
+			logger.info(bundleMarker,"{} background connection {} has terminated.",
 					reader, target);
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
-			logger.info("{} canceled background connection {}.",
+			logger.info(bundleMarker,"{} canceled background connection {}.",
 					reader, target);
 		} catch (IOException e) {
 			if (!Thread.currentThread().isInterrupted()) {
@@ -93,7 +94,7 @@ public class ConnectionReaderTask implements Callable<RefreshableReader> {
 				}
 				ex=e;
 			} else {
-				logger.info("{} background connection {} cancelled", reader, target);
+				logger.info(bundleMarker,"{} background connection {} cancelled", reader, target);
 			}
 		} finally {
 			if (connection != null)
@@ -101,11 +102,11 @@ public class ConnectionReaderTask implements Callable<RefreshableReader> {
 					//in.close(); //closing the inputStream is not good enough
 					connection.close(); //must close the connection or the port will stay in use.
 					
-					logger.info("{} background connection {} closed.",
+					logger.info(bundleMarker,"{} background connection {} closed.",
 							reader,target);
 
 				} catch (IOException e) {
-					logger.error(reader+" failed to close background connection " + target,
+					logger.error(bundleMarker, reader+" failed to close background connection " + target,
 							e);
 				}
 		}
@@ -124,14 +125,14 @@ public class ConnectionReaderTask implements Callable<RefreshableReader> {
 					target);
 			return;
 		}
-		logger.debug("{} background connection {} publishing {}", 
+		logger.debug(bundleMarker,"{} background connection {} publishing {}", 
 				new Object[]{
 				reader,
 				target, 
 				tag}
 		);
 		reader.publish(tag);
-		logger.info("{} background connection {} published {}", 
+		logger.info(bundleMarker,"{} background connection {} published {}", 
 				new Object[]{
 				reader,
 				target, 

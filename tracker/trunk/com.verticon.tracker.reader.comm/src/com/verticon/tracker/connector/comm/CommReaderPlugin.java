@@ -5,6 +5,10 @@ import java.util.Hashtable;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.io.ConnectionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import com.verticon.tracker.reader.event.comm.PreferenceConstants;
 
@@ -28,10 +32,18 @@ public class CommReaderPlugin extends AbstractUIPlugin {
 	private ConnectionFactoryImpl connectionFactory;
 
 	/**
-	 * The constructor
+	 * slf4j Logger
 	 */
-	public CommReaderPlugin() {
-		
+	private final static Logger logger = LoggerFactory.getLogger(CommReaderPlugin.class);
+
+	/**
+	 * slf4j Marker to keep track of bundle
+	 */
+	public static final Marker bundleMarker = createBundleMarker();
+	private static final Marker createBundleMarker() {
+		Marker bundleMarker = MarkerFactory.getMarker(PLUGIN_ID);
+		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
+		return bundleMarker;
 	}
 
 	/*
@@ -39,6 +51,7 @@ public class CommReaderPlugin extends AbstractUIPlugin {
 	 * 
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
@@ -49,6 +62,7 @@ public class CommReaderPlugin extends AbstractUIPlugin {
 		connectionFactory = new ConnectionFactoryImpl();
 		context.registerService(ConnectionFactory.class.getName(), connectionFactory,
 				properties);
+		logger.debug(bundleMarker, "Started Bundle");
 	}
 
 	/*
@@ -56,11 +70,13 @@ public class CommReaderPlugin extends AbstractUIPlugin {
 	 * 
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
 	 */
+	@Override
 	public void stop(BundleContext context) throws Exception {
 		connectionFactory = null;
 		plugin = null;
 		
 		super.stop(context);
+		logger.debug(bundleMarker, "Stopped Bundle");
 	}
 
 	/**

@@ -1,5 +1,5 @@
 package com.verticon.tracker.connector.comm;
-
+import static com.verticon.tracker.connector.comm.CommReaderPlugin.bundleMarker;
 import gnu.io.NoSuchPortException;
 import gnu.io.PortInUseException;
 import gnu.io.UnsupportedCommOperationException;
@@ -41,12 +41,13 @@ public class CommInputConnection extends AbstractSerialPortConnection implements
 	}
 
 	public InputStream openInputStream() throws IOException {
-		logger.debug("{} opening inputStream",uri);
+		logger.debug(bundleMarker,"{} opening inputStream",uri);
 		return serialPort.getInputStream();
 	}
 	
+	@Override
 	public void close() throws IOException {
-		logger.debug("{} closing serialPort",uri);
+		logger.debug(bundleMarker,"{} closing serialPort",uri);
 		super.close();
 	}
 

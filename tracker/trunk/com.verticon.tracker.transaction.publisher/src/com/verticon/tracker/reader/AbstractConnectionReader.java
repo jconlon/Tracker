@@ -1,4 +1,5 @@
 package com.verticon.tracker.reader;
+import static com.verticon.tracker.reader.ReaderPlugin.bundleMarker;
 
 import java.io.IOException;
 import java.net.URI;
@@ -97,14 +98,14 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 		boolean oldValue = isStarted();
 		if (start) {
 			try {
-				logger.debug("{} starting",this);
+				logger.debug(bundleMarker,"{} starting",this);
 				start();
 			} catch (IOException e) {
 				logger.error(toString()+" failed to start", e);
 				return;
 			}
 		} else {
-			logger.debug("{} user requested cancellation of connection to {}",this,target);
+			logger.debug(bundleMarker,"{} user requested cancellation of connection to {}",this,target);
 			stop();
 		}
 		firePropertyChange("started", oldValue, !oldValue);
@@ -121,7 +122,7 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 
 	public synchronized void setName(String name) {
 		String oldValue = this.name;
-		logger.info("{} name set to {}",this, name);
+		logger.info(bundleMarker,"{} name set to {}",this, name);
 		this.name = name;
 		firePropertyChange("name", oldValue, name);
 	}
@@ -188,7 +189,7 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 
 	public synchronized void refresh() {
 		firePropertyChange("started", null, isStarted());
-		logger.debug("{} refreshed state, isStarted={}",
+		logger.debug(bundleMarker,"{} refreshed state, isStarted={}",
 				this,isStarted());
 	}
 
@@ -217,12 +218,12 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 		Callable<RefreshableReader> command = new ConnectionReaderTask(this,
 				ReaderPlugin.getDefault().getBundleContext());
 
-		logger.info("{} submitting futureTask, to read TagIds from {}.", this, target);
+		logger.info(bundleMarker,"{} submitting futureTask, to read TagIds from {}.", this, target);
 		Future<RefreshableReader> task = ReaderPlugin.getDefault().submit(
 				command);
 
 		
-		logger.debug("{} submitted futureTask, to read TagIds from {}.", this, target);
+		logger.debug(bundleMarker,"{} submitted futureTask, to read TagIds from {}.", this, target);
 		return task;
 
 	}
@@ -233,7 +234,7 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 	private void stop() {
 		if (futureTask != null) {
 			futureTask.cancel(true);
-			logger.info("{} canceled connnection to {}", this,target);
+			logger.info(bundleMarker,"{} canceled connnection to {}", this,target);
 		}
 
 		if (tagIdPublisher != null) {
@@ -245,7 +246,7 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 
 	private void reset() {
 		if (isRunning()) {
-			logger.info("{} reStarting", this);
+			logger.info(bundleMarker,"{} reStarting", this);
 			setStarted(false);
 			setStarted(true);
 		}

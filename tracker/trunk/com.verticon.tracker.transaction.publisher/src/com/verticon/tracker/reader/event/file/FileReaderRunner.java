@@ -2,6 +2,7 @@
  * 
  */
 package com.verticon.tracker.reader.event.file;
+import static com.verticon.tracker.reader.ReaderPlugin.bundleMarker;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -53,7 +54,7 @@ public class FileReaderRunner implements Runnable {
 	 * tagNumbersToSend.
 	 */
 	public void run() {
-		logger.debug("{} scanning for new TagIds in {}",reader,file.getAbsolutePath());
+		logger.debug(bundleMarker,"{} scanning for new TagIds in {}",reader,file.getAbsolutePath());
 		tagNumbersToSend.clear();
 		Scanner sc = null;
 		Long tag = null;
