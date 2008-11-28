@@ -69,7 +69,7 @@ public class LogListener implements org.osgi.service.log.LogListener {
 		if(sid !=null){
 			bundleMarker.add(MarkerFactory.getMarker(((Long)sid).toString()));
 		}
-		bundleMarker.add(MarkerFactory.getMarker("IS_MARKER"));
+		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
 		return bundleMarker;
 		
 	}

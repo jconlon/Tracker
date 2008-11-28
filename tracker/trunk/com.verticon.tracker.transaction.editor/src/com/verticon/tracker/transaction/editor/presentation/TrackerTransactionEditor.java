@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker.transaction.editor.presentation;
 
+import static com.verticon.tracker.transaction.editor.TransactionEditorPlugin.bundleMarker;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -538,7 +539,7 @@ public class TrackerTransactionEditor
 	//.CUSTOM: This editor edits only a single resource and uses a
 	//         WorkspaceSynchronizer to detect external changes
 	protected void handleActivate() {
-		logger.debug("HandleActivate entered");
+		logger.debug(bundleMarker,"HandleActivate entered");
 		// Recompute the read only state.
 		//
 		if (editingDomain.getResourceToReadOnlyMap() != null) {
@@ -641,14 +642,14 @@ public class TrackerTransactionEditor
 	 */
 	//.CUSTOM: Replaces EMF-generated handleChangedResources() method
 	protected void handleChangedResources() {
-		logger.debug("HandleChangeResources entered");
+		logger.debug(bundleMarker,"HandleChangeResources entered");
 		Resource res = getResource();
 		boolean myResourceChanged = changedResources.contains(res);
 
-		logger.debug("HandleChangeResources myResourceChanged={} somethingChanged={}, ", myResourceChanged, !changedResources.isEmpty());
+		logger.debug(bundleMarker,"HandleChangeResources myResourceChanged={} somethingChanged={}, ", myResourceChanged, !changedResources.isEmpty());
 		if (changedResources.contains(res) && 
 				(!isDirty() || handleDirtyConflict())) {
-			logger.debug("Attempting to load resource");
+			logger.debug(bundleMarker,"Attempting to load resource");
 			changedResources.remove(res);
 			
 			getOperationHistory().dispose(undoContext, true, true, true);
@@ -662,7 +663,7 @@ public class TrackerTransactionEditor
 					res.unload();
 					try {
 						res.load(Collections.EMPTY_MAP);
-						logger.debug("Loaded changed Resource {}",res);
+						logger.debug(bundleMarker,"Loaded changed Resource {}",res);
 					} catch (IOException exception) {
 						TransactionEditorPlugin.INSTANCE.log(exception);
 					}
