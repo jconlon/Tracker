@@ -32,7 +32,7 @@ public class AnimalsStrategy implements SelectionStrategy {
 
 	public void handleManualTableViewerSelection(ISelection selection,
 			SelectionController selectionController) {
-//		logger.debug("Sending Animals selection event");
+//		logger.debug(bundleMarker,"Sending Animals selection event");
 		selectionController.sendSelectionToChannel(selection,getEventAdminSourceName());
 		animalsView.setSelectionOnOutlinePage(selection);
 	}
@@ -48,7 +48,7 @@ public class AnimalsStrategy implements SelectionStrategy {
 			 */
 			@Override
 			public Object caseAnimal(Animal animal) {
-//				logger.debug("Received Animal selection");
+//				logger.debug(bundleMarker,"Received Animal selection");
 				ISelection selection = new StructuredSelection(animal);
 				viewer.setSelection(selection, true);
 				return animal;

@@ -36,7 +36,7 @@ class EventsStrategy implements SelectionStrategy {
 				.getFirstElement()==null){
 			return;
 		}
-//		logger.debug("Firing selection event");
+//		logger.debug(bundleMarker,"Firing selection event");
 		selectionController.sendSelectionToChannel(
 				convertEventSelectionToAnimalSelection(selection),
 				
@@ -46,7 +46,7 @@ class EventsStrategy implements SelectionStrategy {
 
 	public void handleWorkbenchAndEventAdminSingleSelection(Object selectedObject, final TableViewer viewer,
 			final org.osgi.service.event.Event osgiEvent, SelectionController selectionController) {
-//		logger.debug("handleWorkbenchAndEventAdminSingleSelection selectedObject={} and event={}",selectedObject, osgiEvent);
+//		logger.debug(bundleMarker,"handleWorkbenchAndEventAdminSingleSelection selectedObject={} and event={}",selectedObject, osgiEvent);
 		
 		//Only deal with Event objects
 		TrackerSwitch<Object> visitor = new TrackerSwitch<Object>() {
@@ -56,7 +56,7 @@ class EventsStrategy implements SelectionStrategy {
 			 */
 			@Override
 			public Object caseEvent(Event event) {
-//				logger.debug("Event selection");
+//				logger.debug(bundleMarker,"Event selection");
 				animalsView.setFilter("", 3);
 				ISelection selection = new StructuredSelection(event);
 				viewer.setSelection(selection, true);
@@ -68,8 +68,8 @@ class EventsStrategy implements SelectionStrategy {
 			 */
 			@Override
 			public Object caseAnimal(Animal animal) {
-//				logger.debug("Animal selection");
-				// logger.debug("Event selection");
+//				logger.debug(bundleMarker,"Animal selection");
+				// logger.debug(bundleMarker,"Event selection");
 				String id = animal.getId();
 				animalsView.setFilter(id, 3);
 				viewer.setSelection(new StructuredSelection(), true);
