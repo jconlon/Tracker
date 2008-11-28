@@ -1,4 +1,5 @@
 package com.verticon.tracker.transaction.editor.event;
+import static com.verticon.tracker.transaction.editor.TransactionEditorPlugin.bundleMarker;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,7 +45,7 @@ public class TransactionEventHandler implements EventHandler {
 			TransactionalEditingDomain.Registry.INSTANCE
 				.getEditingDomain("com.verticon.transaction.editor.TrackerEditingDomain");
 		if(domain==null){
-			logger.error("Can't find the EditingDomain");
+			logger.error(bundleMarker,"Can't find the EditingDomain");
 			return;
 		}
 		Animal templateAnimal = (Animal)event.getProperty(
@@ -70,7 +71,7 @@ public class TransactionEventHandler implements EventHandler {
 		EList<Resource> resources = rs.getResources();
 		for (Resource resource : resources) {
 			if (resources.size() > 1) {
-				logger.debug("Processing {}",resource.toString());
+				logger.debug(bundleMarker,"Processing {}",resource.toString());
 			}
 			process(readerName, domain, resource, templateAnimal);
 
@@ -86,7 +87,7 @@ public class TransactionEventHandler implements EventHandler {
 							.get(0);
 					addTemplateEventsToAnimalInPremises(readerName, templateAnimal, premises);
 				} else {
-					logger.warn("{} resource {} contained no premises to process",readerName, resource.toString());
+					logger.warn(bundleMarker,"{} resource {} contained no premises to process",readerName, resource.toString());
 				}
 			}
 		});
@@ -109,7 +110,7 @@ public class TransactionEventHandler implements EventHandler {
 		Collection<com.verticon.tracker.Event> events = 
 			copyValidEvents(templateAnimal.eventHistory(), animal);
 		for (com.verticon.tracker.Event event : events) {
-			logger.info("{} added {}, to animal {}, ", 
+			logger.info(bundleMarker,"{} added {}, to animal {}, ", 
 					new Object[]{
 						readerName,
 						simpleName( event),  

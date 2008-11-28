@@ -16,6 +16,7 @@
  */
 
 package com.verticon.tracker.transaction.editor.domain;
+import static com.verticon.tracker.transaction.editor.TransactionEditorPlugin.bundleMarker;
 
 import java.util.Set;
 
@@ -63,7 +64,7 @@ public class ResourceLoadedListener extends DemultiplexingListener {
 	public ResourceLoadedListener() {
 		super(NotificationFilter.createFeatureFilter(
 				EcorePackage.eINSTANCE.getEResource(), Resource.RESOURCE__IS_LOADED));
-		
+		logger.debug(bundleMarker, "Constructing");
 		instance = this;
 	}
 	
@@ -96,10 +97,11 @@ public class ResourceLoadedListener extends DemultiplexingListener {
 		ignoredResources.remove(res);
 	}
 
+	@Override
 	protected void handleNotification(TransactionalEditingDomain domain, Notification notification) {
 		if (ignoredResources.contains(notification.getNotifier())) {
 			// skip any resource that we are supposed to ignore
-			logger.info("Skipping.");
+			logger.info(bundleMarker,"Skipping.");
 			return;
 		}
 	
@@ -116,7 +118,7 @@ public class ResourceLoadedListener extends DemultiplexingListener {
 							
 							if (page != null) {
 								IEditorPart activeEditor = page.getActiveEditor();
-								logger.info("Opening "+file+ " with "+this);
+								logger.info(bundleMarker,"Opening file {}",file.getName());
 								
 								page.openEditor(
 										new FileEditorInput(file),
@@ -144,7 +146,7 @@ public class ResourceLoadedListener extends DemultiplexingListener {
 				Display.getDefault().asyncExec(new Runnable() {
 					public void run() {
 						IWorkbenchPage page = getActivePage();
-						logger.info("Closing "+file+ " with "+this);
+						logger.info(bundleMarker,"Closing file {}", file.getName());
 						
 						if (page != null) {
 							IEditorReference[] editors = page.findEditors(
