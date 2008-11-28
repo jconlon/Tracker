@@ -5,8 +5,11 @@
  * $Id$
  */
 package com.verticon.tracker.tests;
-
+import static com.verticon.tracker.tests.Constants.bundleMarker;
 import junit.textui.TestRunner;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BovineBeef;
@@ -27,6 +30,11 @@ public class BovineBeefTest extends BovineTest {
 	 */
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory.getLogger(BovineBeefTest.class);
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -63,6 +71,7 @@ public class BovineBeefTest extends BovineTest {
 	 * @see junit.framework.TestCase#setUp()
 	 * @generated NOT
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		BovineBeef animal = TrackerFactory.eINSTANCE.createBovineBeef();
 		animal.setBeefBreed(BeefBreed.AB_LITERAL);
@@ -85,6 +94,8 @@ public class BovineBeefTest extends BovineTest {
 	public void testGetBreed() {
 		assertNotNull(getFixture().getBreed());
 		assertEquals(BeefBreed.get(BeefBreed.AB).getName(), getFixture().getBreed());
+		Exception ex = new Exception("A test exception");
+		logger.error(bundleMarker, "This is a test", ex);
 	}
 
 	@Override

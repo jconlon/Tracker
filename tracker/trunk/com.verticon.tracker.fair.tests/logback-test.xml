@@ -11,12 +11,12 @@
 <configuration>
 
   <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <File>logBack.log</File>
+    <File>${user.home}/tracker.log</File>
     <layout class="ch.qos.logback.classic.PatternLayout">
       <pattern>%d{HH:mm:ss.SSS} %-10level [%marker] [%thread] [%logger{25}] -  %message %nopex %n</pattern>
     </layout>
     <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-      <FileNamePattern>logBack.%i.log</FileNamePattern>
+      <FileNamePattern>tracker.%i.log</FileNamePattern>
       <minIndex>1</minIndex>
       <maxIndex>2</maxIndex>
     </rollingPolicy>
