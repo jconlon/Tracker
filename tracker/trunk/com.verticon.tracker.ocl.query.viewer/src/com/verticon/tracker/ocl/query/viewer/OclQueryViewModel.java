@@ -1,4 +1,5 @@
 package com.verticon.tracker.ocl.query.viewer;
+import static com.verticon.tracker.ocl.query.viewer.OclQueryViewerPlugin.bundleMarker;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,7 +41,7 @@ public class OclQueryViewModel {
 
 	private List<IOclQuery> queries;
 
-	private Set<IOclQueryModelListener> changeListeners = new HashSet<IOclQueryModelListener>();
+	private final Set<IOclQueryModelListener> changeListeners = new HashSet<IOclQueryModelListener>();
 
 	/**
 	 * Constructor
@@ -132,13 +133,13 @@ public class OclQueryViewModel {
 			// Ignored... no items exist yet.
 		} catch (Exception e) {
 			// Log the exception and move on.
-			logger.error("Failed to load the queries",e);
+			logger.error(bundleMarker,"Failed to load the queries",e);
 		} finally {
 			try {
 				if (reader != null)
 					reader.close();
 			} catch (IOException e) {
-				logger.error("Failed to close the FileReader",e);
+				logger.error(bundleMarker,"Failed to close the FileReader",e);
 			}
 		}
 	}
@@ -173,14 +174,14 @@ public class OclQueryViewModel {
 			writer = new FileWriter(getQueriesFile());
 			memento.save(writer);
 		} catch (IOException e) {
-			logger.error("Failed to save the queries",e);
+			logger.error(bundleMarker,"Failed to save the queries",e);
 									// launched
 		} finally {
 			try {
 				if (writer != null)
 					writer.close();
 			} catch (IOException e) {
-				logger.error("Failed to close the fileWriter",e);
+				logger.error(bundleMarker,"Failed to close the fileWriter",e);
 			}
 		}
 	}
