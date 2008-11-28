@@ -221,13 +221,13 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 			switch (n.getEventType()) {
 			case Notification.ADD:
 				Tag tag = (Tag) n.getNewValue();
-				logger.debug(bundleMarker,"{} added to animal {}", tag.getId(), n);
+				logger.trace(bundleMarker,"{} added to animal {}", tag.getId(), n);
 				if (tag.getEvents().isEmpty()) {
 					logger.debug(bundleMarker,"Tag {} had no events to add", tag.getId());
 					break;
 				}
 				events.addAll(tag.getEvents());
-				logger.debug(bundleMarker,"Tag {} added {} events", tag.getId(), tag
+				logger.trace(bundleMarker,"Tag {} added {} events", tag.getId(), tag
 						.getEvents().size());
 				// forward(new NotificationImpl(Notification.ADD_MANY, null, tag
 				// .getEvents()));
@@ -240,7 +240,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 					eventsToAdd.addAll(tagToAdd.getEvents());
 				}
 				if (events.addAll(eventsToAdd)) {
-					logger.debug(bundleMarker,"Added {} tags {} with {} events", tagsToAdd
+					logger.trace(bundleMarker,"Added {} tags {} with {} events", tagsToAdd
 							.size(), eventsToAdd.size());
 					forwardAdd(eventsToAdd);
 				}
@@ -249,7 +249,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 				tag = (Tag) n.getOldValue();
 				if (events.removeAll(tag.getEvents())) {
 					logger
-							.debug(bundleMarker,
+							.trace(bundleMarker,
 									"{} tag removed at least one event from a list of {} events",
 									tag.getId(), tag.getEvents().size());
 					forwardAdd(tag.getEvents());
@@ -262,21 +262,21 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 				EList<Event> eventsToRemove = new BasicEList<Event>();
 
 				for (Tag tagToRemove : tagsToRemove) {
-					logger.debug(bundleMarker,"{} added to animal {}", tagToRemove.getId(),
+					logger.trace(bundleMarker,"{} added to animal {}", tagToRemove.getId(),
 							n);
 					eventsToRemove.addAll(tagToRemove.getEvents());
 
 				}
 				if (events.removeAll(eventsToRemove)) {
 					logger
-							.debug(bundleMarker,
+							.trace(bundleMarker,
 									"At least one event was removed from a removal of {} tags ",
 									tagsToRemove.size());
 				}
 				forwardRemove(eventsToRemove);
 				break;
 			default:
-				// logger.error(bundleMarker,"Did not handle Animal {}", n);
+				logger.error(bundleMarker,"Did not handle Animal {}", n);
 				break;
 			}
 
