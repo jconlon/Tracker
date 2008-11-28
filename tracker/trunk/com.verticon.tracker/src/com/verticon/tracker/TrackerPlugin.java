@@ -34,7 +34,7 @@ public class TrackerPlugin extends Plugin {
 
 	private static final Marker createBundleMarker() {
 		Marker bundleMarker = MarkerFactory.getMarker(ID);
-		bundleMarker.add(MarkerFactory.getMarker("IS_MARKER"));
+		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
 		return bundleMarker;
 	}
 
