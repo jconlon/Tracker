@@ -16,7 +16,7 @@ Require-Bundle: org.eclipse.emf.workspace,
  com.verticon.tracker.transaction.editor,
  org.eclipse.emf.databinding.edit,
  org.eclipse.jface.databinding
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Import-Package: com.verticon.tracker.editor.presentation;version="0.1.0",
  com.verticon.tracker.editor.util;version="0.1.0",
  org.apache.poi.hssf.usermodel,
