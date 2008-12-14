@@ -37,7 +37,6 @@
         </menu>
         <action
               class="com.verticon.tracker.fair.transaction.editor.popup.actions.FairRegistrationAction"
-              definitionId="com.verticon.tracker.fair.transaction.editor.set.exhibit"
               enablesFor="+"
               id="com.verticon.tracker.fair.transaction.editor.newAction"
               label="%action.label.0"
