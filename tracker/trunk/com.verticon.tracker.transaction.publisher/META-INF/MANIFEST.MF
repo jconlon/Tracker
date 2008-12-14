@@ -9,13 +9,14 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.transaction,
  org.eclipse.core.resources,
  org.eclipse.equinox.io
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)",
  com.verticon.tracker.editor.presentation;version="[0.1.0,1.0.0)",
  com.verticon.tracker.editor.util;version="[0.1.0,1.0.0)",
  com.verticon.tracker.util;version="[0.1.0,1.0.0)",
  org.osgi.service.event;version="1.1.0",
  org.osgi.service.io;version="1.0.0",
- org.slf4j;version="1.5.0"
+ org.slf4j;version="[1.5.5,1.6.0)"
 Export-Package: com.verticon.tracker.reader;version="0.1.0",
  com.verticon.tracker.reader.views;version="0.1.0"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
