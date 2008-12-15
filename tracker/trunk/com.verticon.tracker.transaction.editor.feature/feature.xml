@@ -299,8 +299,6 @@ POSSIBILITY OF SUCH DAMAGES.
    </license>
 
    <requires>
-      <import plugin="com.verticon.tracker"/>
-      <import plugin="com.verticon.tracker.edit"/>
       <import plugin="org.eclipse.core.runtime" version="3.2.0" match="compatible"/>
       <import plugin="org.eclipse.core.resources" version="3.2.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecore.xmi" version="2.2.0" match="compatible"/>
@@ -310,9 +308,11 @@ POSSIBILITY OF SUCH DAMAGES.
       <import plugin="org.eclipse.emf.transaction.ui" version="1.0.0" match="compatible"/>
       <import plugin="org.eclipse.emf.workspace.ui" version="1.0.0" match="compatible"/>
       <import plugin="org.eclipse.ui.console" version="3.1.100" match="compatible"/>
+      <import plugin="com.verticon.tracker"/>
+      <import plugin="com.verticon.tracker.edit"/>
       <import plugin="com.verticon.tracker.editor"/>
       <import plugin="org.eclipse.osgi.services"/>
-      <import plugin="slf4j.api"/>
+      <import plugin="com.verticon.tracker.logging.logback"/>
    </requires>
 
    <plugin
