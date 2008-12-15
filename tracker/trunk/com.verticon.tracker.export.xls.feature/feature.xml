@@ -299,14 +299,18 @@ POSSIBILITY OF SUCH DAMAGES.
    </license>
 
    <requires>
-      <import plugin="com.verticon.tracker"/>
-      <import plugin="com.verticon.tracker.editor"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.osgi"/>
-      <import plugin="org.apache.commons.logging"/>
+      <import plugin="com.verticon.tracker"/>
+      <import plugin="com.verticon.tracker.edit"/>
+      <import plugin="com.verticon.tracker.editor"/>
+      <import plugin="com.verticon.tracker.fair"/>
+      <import plugin="com.verticon.tracker.fair.editor"/>
+      <import plugin="org.eclipse.emf.common.ui"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="com.verticon.tracker.logging.logback"/>
    </requires>
 
    <plugin
@@ -318,13 +322,6 @@ POSSIBILITY OF SUCH DAMAGES.
 
    <plugin
          id="org.apache.poi"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.apache.commons.logging"
          download-size="0"
          install-size="0"
          version="0.0.0"
