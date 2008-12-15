@@ -397,6 +397,7 @@ END OF TERMS AND CONDITIONS
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.eclipse.ocl.ecore"/>
       <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.eclipse.core.databinding" version="1.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
@@ -404,10 +405,14 @@ END OF TERMS AND CONDITIONS
       <import plugin="org.eclipse.ui.console"/>
       <import plugin="org.eclipse.ui.intro"/>
       <import plugin="org.eclipse.emf.validation"/>
+      <import plugin="org.eclipse.jface.databinding"/>
+      <import plugin="org.eclipse.core.databinding.beans"/>
+      <import plugin="org.eclipse.emf.databinding"/>
+      <import plugin="org.eclipse.emf.databinding.edit"/>
       <import plugin="org.eclipse.osgi.services"/>
       <import plugin="org.eclipse.osgi"/>
-      <import plugin="org.eclipse.jface"/>
-      <import plugin="org.eclipse.swt"/>
+      <import plugin="org.eclipse.net4j.jms.api"/>
+      <import plugin="com.verticon.tracker.logging.logback" version="0.9.11" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -433,28 +438,6 @@ END OF TERMS AND CONDITIONS
 
    <plugin
          id="com.verticon.tracker.logging"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="slf4j.api"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="slf4j.log4j12"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
-         unpack="false"/>
-
-   <plugin
-         id="org.apache.log4j"
          download-size="0"
          install-size="0"
          version="0.0.0"
