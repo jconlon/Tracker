@@ -300,24 +300,15 @@ POSSIBILITY OF SUCH DAMAGES.
    </license>
 
    <requires>
-      <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.workspace"/>
       <import plugin="org.eclipse.emf.transaction.ui"/>
       <import plugin="com.verticon.tracker.fair.editor"/>
       <import plugin="com.verticon.tracker.transaction.editor"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="com.ibm.icu"/>
       <import plugin="com.verticon.tracker.editor"/>
       <import plugin="org.apache.poi"/>
-      <import plugin="org.eclipse.osgi.services"/>
-      <import plugin="slf4j.api"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.core.databinding" version="1.1.0" match="equivalent"/>
-      <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="org.eclipse.swt" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.jface" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.equinox.common" version="3.2.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.databinding.edit"/>
+      <import plugin="org.eclipse.jface.databinding"/>
+      <import plugin="com.verticon.tracker.logging.logback"/>
    </requires>
 
    <plugin
