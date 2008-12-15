@@ -310,9 +310,8 @@ POSSIBILITY OF SUCH DAMAGES.
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="com.verticon.tracker"/>
       <import plugin="com.verticon.tracker.editor"/>
-      <import plugin="org.eclipse.osgi"/>
       <import plugin="org.eclipse.osgi.services"/>
-      <import plugin="slf4j.api"/>
+      <import plugin="com.verticon.tracker.logging.logback"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="gnu.io.rxtx"/>
    </requires>
