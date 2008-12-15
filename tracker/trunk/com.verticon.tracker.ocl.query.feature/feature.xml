@@ -304,15 +304,15 @@ POSSIBILITY OF SUCH DAMAGES.
       <import plugin="org.eclipse.ui" version="3.2.0" match="compatible"/>
       <import plugin="com.verticon.tracker.editor" version="0.1.0" match="compatible"/>
       <import plugin="com.verticon.tracker" version="0.1.0" match="compatible"/>
+      <import plugin="org.eclipse.ocl.ecore" version="1.1.0" match="compatible"/>
       <import plugin="org.eclipse.emf.query.ocl"/>
       <import plugin="com.verticon.tracker.fair"/>
-      <import plugin="slf4j.api"/>
       <import plugin="org.eclipse.ui.console" version="3.1.0" match="compatible"/>
       <import plugin="org.eclipse.jface.text" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.ocl.ecore" version="1.1.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecore.edit" version="2.3.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecore.xmi" version="2.3.0" match="compatible"/>
       <import plugin="org.eclipse.emf.edit.ui" version="2.3.0" match="compatible"/>
+      <import plugin="com.verticon.tracker.logging.logback"/>
    </requires>
 
    <plugin
