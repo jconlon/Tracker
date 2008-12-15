@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.2"?>
+
+<target name="Tracker 01">
+
+   <location path="/home/jconlon/eclipse-target-platforms/eclipse-modeling-ganymede-SRI-incubation-01/eclipse"/>
+
+   <content>
+      <plugins>
+         <plugin id="javax.xml"/>
+         <plugin id="org.apache.poi"/>
+         <plugin id="org.eclipse.equinox.cm"/>
+         <plugin id="org.eclipse.equinox.event"/>
+         <plugin id="org.eclipse.equinox.io"/>
+         <plugin id="org.eclipse.equinox.util"/>
+         <plugin id="org.junit"/>
+      </plugins>
+      <features>
+         <feature id="com.verticon.tracker.group.dep.feature"/>
+      </features>
+      <extraLocations>
+         <location path="/home/jconlon/eclipse-target-platforms/eclipse-modeling-ganymede-SRI-incubation-01/eclipse/dropins/equinox"/>
+         <location path="/home/jconlon/eclipse-target-platforms/eclipse-modeling-ganymede-SRI-incubation-01/eclipse/dropins/gnuIoRxtx"/>
+         <location path="/home/jconlon/eclipse-target-platforms/eclipse-modeling-ganymede-SRI-incubation-01/eclipse/dropins/apache-poi"/>
+      </extraLocations>
+   </content>
+
+</target>
