@@ -19,6 +19,7 @@ Tracker is powered by Eclipse technology and includes Eclipse plugins that can b
 
    <configIni use="default">
       <linux>/com.verticon.tracker.editor/config.ini</linux>
+      <win32>/com.verticon.tracker.editor/config.ini</win32>
    </configIni>
 
    <launcherArgs>
@@ -50,7 +51,7 @@ Tracker is powered by Eclipse technology and includes Eclipse plugins that can b
 
    <features>
       <feature id="com.verticon.tracker.group.feature" version="0.3.1"/>
-      <feature id="com.verticon.tracker.group.dep.feature" version="0.3.1"/>
+      <feature id="com.verticon.tracker.base.dep.feature" version="0.3.1"/>
    </features>
 
 </product>
