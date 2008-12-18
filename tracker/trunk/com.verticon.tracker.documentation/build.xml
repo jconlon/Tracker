@@ -53,6 +53,7 @@
       - target:  clean
       -->
 	<target name="clean" description="Cleans up generated files.">
+		<echo message="Cleaning directories." />
 		<delete dir="${doc.dir}" />
 		<delete dir="${gen.dir}" />
 		<delete dir="${dist.dir}" />
