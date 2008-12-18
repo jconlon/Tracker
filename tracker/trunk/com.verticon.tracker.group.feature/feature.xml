@@ -51,11 +51,11 @@
          version="0.0.0"/>
 
    <includes
-         id="com.verticon.tracker.fair"
+         id="com.verticon.tracker.fair.transaction.editor"
          version="0.0.0"/>
 
    <includes
-         id="com.verticon.tracker.fair.transaction.editor"
+         id="com.verticon.tracker.fair.editor"
          version="0.0.0"/>
 
 </feature>
