@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="com.verticon.tracker.fair"
+      id="com.verticon.tracker.fair.editor"
       label="Tracker Fair Editor"
       version="0.1.5"
       provider-name="Verticon, Inc."
