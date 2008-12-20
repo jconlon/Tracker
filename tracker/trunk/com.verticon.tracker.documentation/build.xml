@@ -25,7 +25,7 @@
 	<property name="merge.docs" value="${src.dir}/mergeDocs.xml" />
 	<property name="merged.doc.name" value="mergedDoc.xml" />
 	<property name="merged.doc" value="${gen.dir}/${merged.doc.name}" />
-	<property name="xml.stylesheet" value="${src.dir}/merge-using-merge-doc.xslt" />
+	<property name="xml.merge.doc.stylesheet" value="${src.dir}/merge-using-merge-doc.xslt" />
 	<property name="fo.stylesheet" value="${docbook.xsl.dir}/fo/docbook.xsl" />
 	<property name="html.stylesheet" value="${docbook.xsl.dir}/eclipse/eclipse.xsl" />
 	<property name="xalan.lib.dir" value="lib/xalan-j_2_7_0" />
@@ -100,7 +100,7 @@
       -->
 	<target name="build-xml" depends="depends" 
 	        description="Generates one XML DocBook XML">
-		<xslt style="${xml.stylesheet}"  
+		<xslt style="${xml.merge.doc.stylesheet}"  
 	            in="${merge.docs}" out="${merged.doc}">
 			<classpath refid="xalan.classpath" />
 			
