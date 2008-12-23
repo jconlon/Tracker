@@ -68,7 +68,7 @@ public class ExportFairBase {
 		if (validateBeforeExport && !validate(fair,
 				validationDiagnostics)) {
 			throw new IOException(
-							"Fair Model is not valid.  Please create a validate model before exporting.");
+							"Fair Model is not valid.  Please create a valid model before exporting.");
 		}
 
 		if (fair == null) {
