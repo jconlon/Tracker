@@ -63,7 +63,7 @@ public class ExportPremisesBase {
 		if (validateBeforeExport && !ActionUtils.validate(premises,
 				validationDiagnostics)) {
 			throw new IOException(
-							"Tracker Model is not valid.  Please create a validate model before exporting.");
+							"Tracker Model is not valid.  Please create a valid model before exporting.");
 		}
 
 		if (premises == null) {
