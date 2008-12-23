@@ -310,4 +310,9 @@
          context="com.verticon.tracker.fair.premises.validation.context"
          category="com.verticon.tracker.validation.catagory.ocl/com.verticon.tracker.fair.premises.validation"/>
    </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="com.verticon.tracker.fair.validation.Startup"></startup>
+   </extension>
 </plugin>

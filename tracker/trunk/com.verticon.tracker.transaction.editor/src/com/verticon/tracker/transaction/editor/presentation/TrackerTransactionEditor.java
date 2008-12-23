@@ -998,7 +998,7 @@ public class TrackerTransactionEditor
 			BasicDiagnostic basicDiagnostic =
 				new BasicDiagnostic
 					(Diagnostic.ERROR,
-					 "com.verticon.tracker.fair.editor",
+					 "com.verticon.tracker.transaction.editor",
 					 0,
 					 getString("_UI_CreateModelError_message", resource.getURI()),
 					 new Object [] { exception == null ? (Object)resource : exception });
@@ -1009,7 +1009,7 @@ public class TrackerTransactionEditor
 			return
 				new BasicDiagnostic
 					(Diagnostic.ERROR,
-					 "com.verticon.tracker.fair.editor",
+					 "com.verticon.tracker.transaction.editor",
 					 0,
 					 getString("_UI_CreateModelError_message", resource.getURI()),
 					 new Object[] { exception });

@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.editor"
       label="Tracker Editor"
-      version="0.3.1"
+      version="0.3.1.qualifier"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.editor">
 
@@ -462,6 +462,27 @@ END OF TERMS AND CONDITIONS
          install-size="0"
          version="0.0.0"
          fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.transaction.editor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.validation.adapter"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.validation.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

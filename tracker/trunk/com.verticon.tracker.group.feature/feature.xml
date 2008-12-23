@@ -3,8 +3,7 @@
       id="com.verticon.tracker.group.feature"
       label="Tracker Group Feature"
       version="0.3.1"
-      provider-name="Verticon, Inc."
-      plugin="com.verticon.tracker.editor">
+      provider-name="Verticon, Inc.">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
@@ -39,19 +38,7 @@
          version="0.0.0"/>
 
    <includes
-         id="com.verticon.tracker.transaction.editor"
-         version="0.0.0"/>
-
-   <includes
-         id="com.verticon.tracker.validation.core"
-         version="0.0.0"/>
-
-   <includes
          id="com.verticon.tracker.export.wlic"
-         version="0.0.0"/>
-
-   <includes
-         id="com.verticon.tracker.fair.transaction.editor"
          version="0.0.0"/>
 
    <includes
