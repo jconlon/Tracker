@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.ui.IStartup;
 
 import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.fair.FairPackage;
+import com.verticon.tracker.validation.adapter.expressions.EValidatorAdapter;
 
 
 /**
@@ -42,13 +42,9 @@ public class Startup
 	/**
 	 * Install the validator.
 	 */
-	@SuppressWarnings("unchecked")
 	public void earlyStartup() {
 		EValidator.Registry.INSTANCE.put(
 			TrackerPackage.eINSTANCE,
 			new EValidatorAdapter());
-		EValidator.Registry.INSTANCE.put(
-				FairPackage.eINSTANCE,
-				new EValidatorAdapter());
 	}
 }

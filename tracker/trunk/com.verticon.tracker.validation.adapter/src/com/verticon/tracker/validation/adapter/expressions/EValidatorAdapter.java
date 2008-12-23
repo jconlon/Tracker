@@ -16,7 +16,7 @@
  */
 
 
-package com.verticon.tracker.validation.adapter;
+package com.verticon.tracker.validation.adapter.expressions;
 
 import java.util.Map;
 
