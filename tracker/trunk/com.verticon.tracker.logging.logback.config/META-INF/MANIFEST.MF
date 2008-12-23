@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Logback Config Fragment
 Bundle-SymbolicName: com.verticon.tracker.logging.logback.config
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Verticon, Inc.
 Fragment-Host: com.verticon.tracker.logging.logback
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
