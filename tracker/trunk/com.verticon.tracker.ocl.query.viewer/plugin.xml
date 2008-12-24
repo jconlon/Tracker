@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
+   <extension-point id="packages" name="OCL Packages" schema="schema/packages.exsd"/>
 
    <extension
          point="org.eclipse.ui.views">
@@ -91,6 +92,15 @@
           schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
           sequence="M1+7">
     </key>
+ </extension>
+ <extension
+       point="com.verticon.tracker.ocl.query.viewer.packages">
+    <package
+          uri="http://www.verticon.com/ns/tracker/0.1.0">
+    </package>
+    <package
+          uri="http://www.verticon.com/ns/tracker/fair/0.1.0">
+    </package>
  </extension>
  
 </plugin>

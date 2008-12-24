@@ -3,13 +3,19 @@
  */
 package com.verticon.tracker.ocl.query.viewer;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.query.ocl.conditions.BooleanOCLCondition;
 import org.eclipse.emf.query.statements.FROM;
 import org.eclipse.emf.query.statements.IQueryResult;
@@ -20,8 +26,6 @@ import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 
-import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.ocl.query.actions.AbstractQueryDelegate;
 
 /**
@@ -32,6 +36,9 @@ import com.verticon.tracker.ocl.query.actions.AbstractQueryDelegate;
  *
  */
 public class OclQuery extends AbstractQueryDelegate implements IOclQuery {
+	private static final String PACKAGES = "packages";
+	private static final String URI = "uri";
+	private static final String PACKAGE = "package";
 	private static final String CONTEXT_TYPE_CANNOT_BE_BLANK = "Context type cannot be blank.";
 	private static final String QUERY_CANNOT_BE_BLANK = "Query cannot be blank.";
 	private static final String OCL_CONDITION_MUST_BE_A_BOOLEAN_EXPRESSION = "OCL condition must be a boolean expression.";
@@ -47,6 +54,7 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery {
 	private String query = "";
 	private String syntaxErrors = "";
 	private String type = "";
+	private static String[] cachedOCLPackages;
 	
 
 	private BooleanOCLCondition<EClassifier, EClass, EObject> condition;
@@ -225,14 +233,52 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery {
 	}
 
 	/**
-	 * 
+	 * Find a registered packages to resolve the type to an EClass
 	 * @return the EClass for the type
 	 */
 	private EClass getContextClass(){
-		EClass eclass = (EClass)TrackerPackage.eINSTANCE.getEClassifier(type);
-		if(eclass==null){
-			eclass = (EClass)FairPackage.eINSTANCE.getEClassifier(type);
+		EPackage.Registry registry = EPackage.Registry.INSTANCE;	
+
+		for (String key : getPackages()) {
+			EPackage pack = registry.getEPackage(key);
+		
+			EClass eclass = (EClass)pack.getEClassifier(type);
+			if(eclass!=null){
+				return eclass;
+			}
 		}
-		return eclass;
+
+		return null;
 	}
+	
+	/**
+	 * 
+	 * @return Package uris registered with the packages extension point.
+	 */
+	public static String[] getPackages(){
+		if(cachedOCLPackages ==null){
+		IExtension[] extensions = Platform.getExtensionRegistry().getExtensionPoint(
+				OclQueryViewerPlugin.PLUGIN_ID, PACKAGES)
+				 .getExtensions();
+		
+		List<String> packages = new ArrayList<String>();
+		
+		for (int i = 0; i < extensions.length; i++) {
+			IConfigurationElement[] configElements =
+					extensions[i].getConfigurationElements();
+			for (int j = 0; j < configElements.length; j++) {
+				if (configElements[j].getName().equals(PACKAGE)){
+				     packages.add(configElements[j].getAttribute(URI));
+				}
+			}
+		 }
+		  cachedOCLPackages = new String[packages.size()];
+		  cachedOCLPackages = packages.toArray(cachedOCLPackages);
+		}
+		
+		return cachedOCLPackages;
+		
+	}
+	
+	
 }
