@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ComboBoxCellEditor;
 import org.eclipse.jface.viewers.ISelection;
@@ -36,10 +37,9 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.ocl.query.viewer.IOclQuery;
 import com.verticon.tracker.ocl.query.viewer.IOclQueryModelListener;
+import com.verticon.tracker.ocl.query.viewer.OclQuery;
 import com.verticon.tracker.ocl.query.viewer.OclQueryViewModel;
 
 /**
@@ -62,7 +62,7 @@ public class OclQueryViewer {
 	private TableViewer tableViewer;
 	private Button executeButton;
 
-	private OclQueryViewModel oclQueryViewModel = new OclQueryViewModel();
+	private final OclQueryViewModel oclQueryViewModel = new OclQueryViewModel();
 	
 
 	/**
@@ -147,6 +147,7 @@ public class OclQueryViewer {
 	private void setupExecuteQueryButton() {
 		// Add a listener for the execute button
 		executeButton.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				IOclQuery task = (IOclQuery) ((IStructuredSelection) tableViewer
 						.getSelection()).getFirstElement();
@@ -220,6 +221,7 @@ public class OclQueryViewer {
 		// clicked
 		column.addSelectionListener(new SelectionAdapter() {
 
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				tableViewer.setSorter(new OclQuerySorter(Column.NAME));
 			}
@@ -231,6 +233,7 @@ public class OclQueryViewer {
 		column.setWidth(80);
 		// Add listener to column so tasks are sorted by type when clicked
 		column.addSelectionListener(new SelectionAdapter() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				tableViewer.setSorter(new OclQuerySorter(Column.TYPE));
 			}
@@ -243,6 +246,7 @@ public class OclQueryViewer {
 		// Add listener to column so tasks are sorted by percent when clicked
 		column.addSelectionListener(new SelectionAdapter() {
 
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				tableViewer.setSorter(new OclQuerySorter(Column.QUERY));
 			}
@@ -256,6 +260,7 @@ public class OclQueryViewer {
 		// Add listener to column so tasks are sorted by percent when clicked
 		column.addSelectionListener(new SelectionAdapter() {
 
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				tableViewer.setSorter(new OclQuerySorter(Column.ERRORS));
 			}
@@ -304,13 +309,24 @@ public class OclQueryViewer {
 	public String[] types() {
 		// show only EClasses (cannot query for EDataType values)
 
-		List<EClassifier> classes = new LinkedList<EClassifier>(
-				TrackerPackage.eINSTANCE.getEClassifiers());
+//		List<EClassifier> classes = new LinkedList<EClassifier>(
+//				TrackerPackage.eINSTANCE.getEClassifiers());
+//		
+//		List<EClassifier> fairClasses = new LinkedList<EClassifier>(
+//				FairPackage.eINSTANCE.getEClassifiers());
+//		
+//		classes.addAll(fairClasses);
 		
-		List<EClassifier> fairClasses = new LinkedList<EClassifier>(
-				FairPackage.eINSTANCE.getEClassifiers());
+		EPackage.Registry registry = EPackage.Registry.INSTANCE;	
+		List<EClassifier> classes = new LinkedList<EClassifier>();
 		
-		classes.addAll(fairClasses);
+		for (String key : OclQuery.getPackages()) {
+			EPackage pack = registry.getEPackage(key);
+			if(pack !=null){
+				classes.addAll(pack.getEClassifiers());
+			}
+			
+		}
 		
 		for (Iterator<EClassifier> iter = classes.iterator(); iter.hasNext();) {
 			if (!(iter.next() instanceof EClass)) {
