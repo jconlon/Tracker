@@ -18,17 +18,12 @@
 package com.verticon.tracker.ocl.query.actions;
 
 import java.util.Collection;
+import java.util.List;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExecutableExtension;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.query.ocl.conditions.BooleanOCLCondition;
-import org.eclipse.emf.query.statements.FROM;
-import org.eclipse.emf.query.statements.IQueryResult;
-import org.eclipse.emf.query.statements.SELECT;
-import org.eclipse.emf.query.statements.WHERE;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -40,14 +35,19 @@ import com.verticon.tracker.ocl.query.wizards.QueryWithContextWizard;
 /**
  * Action that pops up a dialog to accept a context metaclass and an OCL
  * condition expression, to query the model.
+ * 
+ * This Delegate is called from the extension point.  It in turn calls a Wizard
+ * that 
  */
 public class OCLQueryDelegate
-	extends AbstractQueryDelegate {
+	extends AbstractQueryDelegate implements IExecutableExtension {
 
 	private static String TITLE = QueryOCLMessages.oclQuery_title;
 	private static String NOT_FOUND = QueryOCLMessages.oclQuery_message_notFound;
 	
-	private BooleanOCLCondition<EClassifier, EClass, EObject> condition;
+	
+	
+	private String pkgURIs;
 	
 	/**
 	 * Initializes me.
@@ -56,6 +56,7 @@ public class OCLQueryDelegate
 		super();
 	}
 
+	@Override
 	public void run(IAction action) {
 		Collection<EObject> selection = getSelectedObjects();
 		
@@ -73,17 +74,18 @@ public class OCLQueryDelegate
 		
 		if (condition != null) {
 			try {
-				IQueryResult result = performQuery(getSelectedObjects(), null,
-					new NullProgressMonitor());
-				if (result.isEmpty()) {
+
+				List<Object> results = performQueryWithProgress();
+
+				if (results.isEmpty()) {
 					MessageDialog.openInformation(getShell(), TITLE, NOT_FOUND);
 				} else {
-					selectInEditor(result);
+					selectInEditor(results);
 				}
 			} catch (Exception e) {
 				// Exceptions are not expected
 				MessageDialog.openInformation(getShell(), TITLE,
-					QueryOCLMessages.message_exception);
+						QueryOCLMessages.message_exception);
 				throw new RuntimeException(e);
 			}
 		}
@@ -93,28 +95,12 @@ public class OCLQueryDelegate
 	 * @return
 	 */
 	protected QueryWithContextWizard getWizard() {
-		QueryWithContextWizard wizard = new QueryWithContextWizard();
+		QueryWithContextWizard wizard = new QueryWithContextWizard(pkgURIs);
 		return wizard;
 	}
 	
-	/**
-	 * Implements the inherited method using an OCL query condition.
-	 */
-	protected IQueryResult performQuery(Collection<EObject> context, String value,
-			IProgressMonitor monitor)
-		throws Exception {
-		if (null == context) {
-			throw new NullPointerException("Argument 'context' is null"); //$NON-NLS-1$
-		}
-
-		// Build the select query statement
-		SELECT statement = new SELECT(SELECT.UNBOUNDED, false,
-			new FROM(context), new WHERE(condition), monitor);
-
-		// clear the condition for next invocation
-		condition = null;
-		
-		// Execute query
-		return statement.execute();
+	public void setInitializationData(IConfigurationElement config,
+			String propertyName, Object data) throws CoreException {
+		this.pkgURIs = (String)data;
 	}
 }

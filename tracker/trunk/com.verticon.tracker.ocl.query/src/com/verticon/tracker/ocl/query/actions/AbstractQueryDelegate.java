@@ -17,23 +17,36 @@
 
 package com.verticon.tracker.ocl.query.actions;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.ui.viewer.IViewerProvider;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
+import org.eclipse.emf.query.ocl.conditions.BooleanOCLCondition;
+import org.eclipse.emf.query.statements.FROM;
+import org.eclipse.emf.query.statements.IQueryResult;
+import org.eclipse.emf.query.statements.SELECT;
+import org.eclipse.emf.query.statements.WHERE;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorActionDelegate;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionDelegate;
-
-import com.verticon.tracker.editor.presentation.IPremisesProvider;
 
 
 /**
@@ -44,21 +57,18 @@ public abstract class AbstractQueryDelegate
 	extends ActionDelegate
 	implements IEditorActionDelegate {
 
-	/**
-	 * The shell this action is hosted in.
-	 */
-	private Shell shell = null;
 
 	/**
 	 * The active editor
 	 */
-	private IPremisesProvider editor = null;
+	protected IEditorPart editor = null;
 
 	/**
 	 * Selected {@link EObject}s.
 	 */
 	private Collection<EObject> selectedEObjects = Collections.emptyList();
 
+	protected BooleanOCLCondition<EClassifier, EClass, EObject> condition;
 	/**
 	 * Initializes me.
 	 */
@@ -78,7 +88,8 @@ public abstract class AbstractQueryDelegate
 		
 		if (editor != null && (result == null || result.isEmpty())) {
 			result = new ArrayList<EObject>();
-			ResourceSet rset = editor.getEditingDomain().getResourceSet();
+			IEditingDomainProvider iEditingDomainProvider = (IEditingDomainProvider)editor.getAdapter(IEditingDomainProvider.class);
+			ResourceSet rset = iEditingDomainProvider.getEditingDomain().getResourceSet();
 			for (Resource res : rset.getResources()) {
 				if (res.isLoaded()) {
 					result.addAll(res.getContents());
@@ -95,7 +106,7 @@ public abstract class AbstractQueryDelegate
 	 * @return my shell
 	 */
 	protected Shell getShell() {
-		return shell;
+		return editor.getEditorSite().getShell();
 	}
 	
 	/**
@@ -103,8 +114,11 @@ public abstract class AbstractQueryDelegate
 	 * 
 	 * @param objects the objects to select (may be empty)
 	 */
-	protected void selectInEditor(Collection<?> objects) {
-		editor.setSelectionToViewer(objects);
+	protected void selectInEditor( Collection<?> objects) {
+		if (objects != null && !objects.isEmpty()) {
+			IViewerProvider iViewerProvider = (IViewerProvider)editor.getAdapter(IViewerProvider.class);
+			iViewerProvider.getViewer().setSelection(new StructuredSelection(objects.toArray()));
+		}	
 	}
 
 	/**
@@ -136,19 +150,58 @@ public abstract class AbstractQueryDelegate
 		if(targetEditor==null){
 			return;
 		}
-		Object o = targetEditor.getAdapter(IPremisesProvider.class);
-		if(o==null){
-			throw new UnsupportedOperationException("Please choose an Editor that implements an IPremisesProvider.");
+		if(targetEditor.getAdapter(IViewerProvider.class)==null){
+			throw new UnsupportedOperationException("Please choose an Editor that implements an IViewerProvider.");
 		}
-		IPremisesProvider premisesProvider = 
-			(IPremisesProvider)o;
-		
-		
-		
-		this.editor = premisesProvider;
-		
-		if (targetEditor != null) {
-			this.shell = targetEditor.getSite().getShell();
+		if(targetEditor.getAdapter(IEditingDomainProvider.class)==null){
+			throw new UnsupportedOperationException("Please choose an Editor that implements an IEditingDomainProvider.");
 		}
+		
+		this.editor = targetEditor;
+	}
+
+	/**
+	 * @return
+	 * @throws InvocationTargetException
+	 * @throws InterruptedException
+	 */
+	protected List<Object> performQueryWithProgress()
+			throws InvocationTargetException, InterruptedException {
+				IWorkbenchWindow window = editor.getEditorSite().getWorkbenchWindow();
+				final List<Object> res = new ArrayList<Object>();
+				window.run(true, true, new IRunnableWithProgress() {
+			
+					public void run(IProgressMonitor monitor)
+							throws InvocationTargetException,
+							InterruptedException {
+						try {
+							IQueryResult result = performQuery(getSelectedObjects(), 
+									monitor);
+							res.addAll(result);
+						} catch (Exception e) {
+							throw new InvocationTargetException(e);
+						}
+						
+					}});
+				return res;
+			}
+
+	/**
+	 * Implements the inherited method using an OCL query condition.
+	 */
+	protected IQueryResult performQuery(Collection<EObject> context, IProgressMonitor monitor) throws Exception {
+		if (null == context) {
+			throw new NullPointerException("Argument 'context' is null"); //$NON-NLS-1$
+		}
+	
+		// Build the select query statement
+		SELECT statement = new SELECT(SELECT.UNBOUNDED, false,
+			new FROM(context), new WHERE(condition), monitor);
+	
+		// clear the condition for next invocation
+		condition = null;
+		
+		// Execute query
+		return statement.execute();
 	}
 }

@@ -18,17 +18,9 @@
 package com.verticon.tracker.ocl.query.actions;
 
 import java.util.Collection;
+import java.util.List;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.query.ocl.conditions.BooleanOCLCondition;
-import org.eclipse.emf.query.statements.FROM;
-import org.eclipse.emf.query.statements.IQueryResult;
-import org.eclipse.emf.query.statements.SELECT;
-import org.eclipse.emf.query.statements.WHERE;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -47,7 +39,6 @@ public class ContextFreeQueryDelegate
 	private static String TITLE = QueryOCLMessages.cfQuery_title;
 	private static String NOT_FOUND = QueryOCLMessages.oclQuery_message_notFound;
 	
-	private BooleanOCLCondition<EClassifier, EClass, EObject> condition;
 	
 	/**
 	 * Initializes me.
@@ -56,6 +47,7 @@ public class ContextFreeQueryDelegate
 		super();
 	}
 
+	@Override
 	public void run(IAction action) {
 		Collection<EObject> selection = getSelectedObjects();
 		
@@ -64,7 +56,7 @@ public class ContextFreeQueryDelegate
 			return;
 		}
 
-		ContextFreeQueryWizard wizard = new ContextFreeQueryWizard();
+		ContextFreeQueryWizard wizard = new ContextFreeQueryWizard(null);
 		WizardDialog dlg = new WizardDialog(getShell(), wizard);
 		dlg.setTitle(TITLE);
 		dlg.open();
@@ -73,40 +65,19 @@ public class ContextFreeQueryDelegate
 		
 		if (condition != null) {
 			try {
-				IQueryResult result = performQuery(getSelectedObjects(), null,
-					new NullProgressMonitor());
-				if (result.isEmpty()) {
+				List<Object> results = performQueryWithProgress();
+
+				if (results.isEmpty()) {
 					MessageDialog.openInformation(getShell(), TITLE, NOT_FOUND);
 				} else {
-					selectInEditor(result);
+					selectInEditor(results);
 				}
 			} catch (Exception e) {
 				// Exceptions are not expected
 				MessageDialog.openInformation(getShell(), TITLE,
-					QueryOCLMessages.message_exception);
+						QueryOCLMessages.message_exception);
 				throw new RuntimeException(e);
 			}
 		}
-	}
-	
-	/**
-	 * Implements the inherited method using an OCL query condition.
-	 */
-	protected IQueryResult performQuery(Collection<EObject> context, String value,
-			IProgressMonitor monitor)
-		throws Exception {
-		if (null == context) {
-			throw new NullPointerException("Argument 'context' is null"); //$NON-NLS-1$
-		}
-
-		// Build the select query statement
-		SELECT statement = new SELECT(SELECT.UNBOUNDED, false,
-			new FROM(context), new WHERE(condition), monitor);
-
-		// clear the condition for next invocation
-		condition = null;
-		
-		// Execute query
-		return statement.execute();
 	}
 }
