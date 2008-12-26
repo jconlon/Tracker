@@ -27,11 +27,12 @@ public class ContextFreeQueryWizard
 	/**
 	 * Initializes me.
 	 */
-	public ContextFreeQueryWizard() {
-		super();
+	public ContextFreeQueryWizard(String pkgURIs) {
+		super(pkgURIs);
 	}
 
-	protected IOCLQueryWizardPage createOclQueryPage() {
+	@Override
+	protected IOCLQueryWizardPage createOclQueryPage(String pkgURIs) {
 		return new ContextFreeQueryWizardPage();
 	}
 }

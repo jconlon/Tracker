@@ -24,6 +24,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.query.ocl.conditions.BooleanOCLCondition;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
@@ -45,7 +46,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.ocl.query.internal.l10n.QueryOCLMessages;
 
 
@@ -67,11 +67,15 @@ class QueryWithContextWizardPage
 	private Text conditionText;
 	private BooleanOCLCondition<EClassifier, EClass, EObject> condition;
 	
+	private final String[] pkgURIs;
+	
+	
 	/**
 	 * Initializes me.
 	 */
-	public QueryWithContextWizardPage() {
+	public QueryWithContextWizardPage(String pkgURIs) {
 		super("main", TITLE, null); //$NON-NLS-1$
+		this.pkgURIs=pkgURIs.split(" ");
 	}
 
 	public void createControl(Composite parent) {
@@ -175,17 +179,25 @@ class QueryWithContextWizardPage
 	 * @return EClassifier from Tracker Package
 	 */
 	protected EClassifier getDefaultSelection() {
-		EClassifier defaultSelection = TrackerPackage.eINSTANCE
-				.getEClassifier(METACLASS_DEFAULT);
-		return defaultSelection;
+		
+		return getPackageEClassifiers().get(0);
 	}
 
 	/**
-	 * @return EClassifiers from Tracker Package
+	 * @return EClassifiers from Packages
 	 */
 	protected List<EClassifier> getPackageEClassifiers() {
-		List<EClassifier> classes = new LinkedList<EClassifier>(
-				TrackerPackage.eINSTANCE.getEClassifiers());
+		EPackage.Registry registry = EPackage.Registry.INSTANCE;	
+		List<EClassifier> classes = new LinkedList<EClassifier>();
+		
+		for (String key : pkgURIs) {
+			EPackage pack = registry.getEPackage(key);
+			if(pack !=null){
+				classes.addAll(pack.getEClassifiers());
+			}
+			
+		}
+		
 		return classes;
 	}
 	

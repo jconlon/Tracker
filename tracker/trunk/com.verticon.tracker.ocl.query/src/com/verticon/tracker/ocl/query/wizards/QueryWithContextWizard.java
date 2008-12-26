@@ -27,11 +27,12 @@ public class QueryWithContextWizard
 	/**
 	 * Initializes me.
 	 */
-	public QueryWithContextWizard() {
-		super();
+	public QueryWithContextWizard(String pkgURIs) {
+		super(pkgURIs);
 	}
 
-	protected IOCLQueryWizardPage createOclQueryPage() {
-		return new QueryWithContextWizardPage();
+	@Override
+	protected IOCLQueryWizardPage createOclQueryPage(String pkgURIs) {
+		return new QueryWithContextWizardPage(pkgURIs);
 	}
 }
