@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Plugin.name
 Bundle-SymbolicName: com.verticon.tracker.export.wlic; singleton:=true
-Bundle-Version: 0.2.2
+Bundle-Version: 0.2.2.qualifier
 Bundle-Activator: com.verticon.tracker.export.wlic.ExportWlicPlugin
 Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
