@@ -307,16 +307,6 @@ public class OclQueryViewer {
 	}
 
 	public String[] types() {
-		// show only EClasses (cannot query for EDataType values)
-
-//		List<EClassifier> classes = new LinkedList<EClassifier>(
-//				TrackerPackage.eINSTANCE.getEClassifiers());
-//		
-//		List<EClassifier> fairClasses = new LinkedList<EClassifier>(
-//				FairPackage.eINSTANCE.getEClassifiers());
-//		
-//		classes.addAll(fairClasses);
-		
 		EPackage.Registry registry = EPackage.Registry.INSTANCE;	
 		List<EClassifier> classes = new LinkedList<EClassifier>();
 		
