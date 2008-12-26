@@ -14,5 +14,4 @@ Require-Bundle: org.eclipse.core.runtime,
  com.verticon.tracker.fair.edit;visibility:=reexport,
  com.verticon.tracker.editor
 Bundle-ActivationPolicy: lazy
-Import-Package: org.apache.poi.hssf.usermodel,
- org.slf4j;version="[1.5.5,1.6.0)"
+Import-Package: org.slf4j;version="[1.5.5,1.6.0)"
