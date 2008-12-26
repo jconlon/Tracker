@@ -303,14 +303,11 @@ POSSIBILITY OF SUCH DAMAGES.
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="com.verticon.tracker"/>
-      <import plugin="com.verticon.tracker.edit"/>
-      <import plugin="com.verticon.tracker.editor"/>
-      <import plugin="com.verticon.tracker.fair"/>
-      <import plugin="com.verticon.tracker.fair.editor"/>
       <import plugin="org.eclipse.emf.common.ui"/>
       <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="com.verticon.tracker.logging.logback"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import feature="com.verticon.tracker.editor" version="0.3.1.qualifier"/>
+      <import feature="com.verticon.tracker.fair.editor" version="0.1.5.qualifier"/>
    </requires>
 
    <plugin
