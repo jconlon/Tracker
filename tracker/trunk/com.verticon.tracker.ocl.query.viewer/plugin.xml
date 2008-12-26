@@ -93,14 +93,6 @@
           sequence="M1+7">
     </key>
  </extension>
- <extension
-       point="com.verticon.tracker.ocl.query.viewer.packages">
-    <package
-          uri="http://www.verticon.com/ns/tracker/0.1.0">
-    </package>
-    <package
-          uri="http://www.verticon.com/ns/tracker/fair/0.1.0">
-    </package>
- </extension>
+
  
 </plugin>
