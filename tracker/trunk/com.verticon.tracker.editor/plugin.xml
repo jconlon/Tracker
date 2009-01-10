@@ -9,8 +9,6 @@
 -->
 
 <plugin>
-
-
   <extension
     point = "org.eclipse.ui.newWizards">
     
@@ -21,8 +19,6 @@
     <category
           id="com.verticon.tracker.editor.Wizard.category.ID"
           name="Tracker Wizards"/>
-          
-    
      
     <wizard
       id = "com.verticon.tracker.editor.presentation.TrackerModelWizardID"
@@ -52,7 +48,7 @@
             project="true"
             id="com.verticon.tracker.editor.wizards.NewTrackerProjectWizard">
          <description>
-            Create a new Tabbed Properties View Hockey League Example Project
+            Create a new Tracker Example Project
          </description>
       </wizard>
   </extension>
@@ -79,103 +75,6 @@
         contributorClass="com.verticon.tracker.editor.presentation.TrackerActionBarContributor" >
     </editor>
   </extension> 
-  <extension
-        point="org.eclipse.ui.popupMenus">
-        <!-- Popup extension associated with *.tags resources -->
-     <objectContribution
-           adaptable="true"
-           id="com.verticon.tracker.editor.popupMenu"
-           nameFilter="*.tags"
-           objectClass="org.eclipse.core.resources.IResource">
-        <menu
-              id="com.verticon.tracker.editor.popupSubMenu"
-              label="%_UI_TrackerPopup_label"
-              path="additions">
-           <groupMarker name="content"/>
-           <separator name="additions"/>
-        </menu>
-        <action
-              class="com.verticon.tracker.editor.actions.AddTagIdsAndTemplateActionDelegate"
-              enablesFor="+"
-              id="com.verticon.tracker.editor.actions.addTemplate"
-              label="%_UI_TrackerTagsPopupPremisesTemplateEvents_label"
-              menubarPath="com.verticon.tracker.editor.popupSubMenu/content"
-              tooltip="%_UI_TrackerTagsPopupPremisesTemplateEvents_description"/>    
-              
-        <action
-              class="com.verticon.tracker.editor.actions.AddTagIdsAnimalAndEventActionDelegate"
-              enablesFor="+"
-              id="com.verticon.tracker.editor.actions.addToAnimals"
-              label="%_UI_TrackerTagsPopupPremisesAnimalEvents_label"
-              menubarPath="com.verticon.tracker.editor.popupSubMenu/content"
-              tooltip="%_UI_TrackerTagsPopupPremisesAnimalEvents_description"/>
-       
-     </objectContribution>
-  </extension>    
-  <extension point="org.eclipse.ui.popupMenus">
-  	<objectContribution adaptable="true"
-  		id="com.verticon.tracker.editor.animal.popupMenu"
-  		objectClass="com.verticon.tracker.Animal">
-  		<menu id="com.verticon.tracker.editor.animal.popupSubMenu"
-  			label="%_UI_TrackerPopup_label" path="additions">
-  			<groupMarker name="content" />
-  			<separator name="additions" />
-  		</menu>
-  		<action
-  			class="com.verticon.tracker.editor.actions.AddTemplateToAnimalsActionDelegate"
-  			enablesFor="+"
-  			id="com.verticon.tracker.editor.actions.addTemplateEventsToAnimals"
-  			label="%_UI_TrackerTagsPopupAnimalsTemplateEvents_label"
-  			menubarPath="com.verticon.tracker.editor.animal.popupSubMenu/content"
-  			tooltip="%_UI_TrackerTagsPopupAnimalsTemplateEvents_description" />
-    <action
-          class="com.verticon.tracker.editor.actions.ChangeAnimalType"
-          enablesFor="+"
-          id="com.verticon.tracker.editor.actions.ChangeAnimalTypes"
-          label="Change Animal Type"
-          menubarPath="com.verticon.tracker.editor.animal.popupSubMenu/content"
-          tooltip="Changes the Types of the selected animals.">
-    </action>
-    <action
-          class="com.verticon.tracker.editor.util.SelectInOutline"
-          enablesFor="+"
-          id="com.verticon.tracker.editor.actions.SelectAnimalInOutline"
-          label="Select in Outline"
-          menubarPath="com.verticon.tracker.editor.animal.popupSubMenu/content"
-          tooltip="Selects one or more animals in the Outline view.">
-    </action>
-
-  	</objectContribution>
-  </extension>
-  
-  <extension point="org.eclipse.ui.popupMenus">
-  	<objectContribution adaptable="true"
-  		id="com.verticon.tracker.editor.event.popupMenu"
-  		objectClass="com.verticon.tracker.Event">
-  		<menu id="com.verticon.tracker.editor.event.popupSubMenu"
-  			label="%_UI_TrackerPopup_label" path="additions">
-  			<groupMarker name="content" />
-  			<separator name="additions" />
-  		</menu>
-  		<action
-  			class="com.verticon.tracker.editor.actions.ModifyEventsActionDelegate"
-  			enablesFor="+"
-  			id="com.verticon.tracker.editor.actions.ModifyEvents"
-  			label="Modify Events"
-  			menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
-  			tooltip="Modify attributes on selected Events." />
-
-		<action
-          class="com.verticon.tracker.editor.util.SelectInOutline"
-          enablesFor="+"
-          id="com.verticon.tracker.editor.actions.SelectEventInOutline"
-          label="Select in Outline"
-          menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
-          tooltip="Selects one or more events in the Outline view.">
-    	</action>
-		
-  	</objectContribution>
-  </extension>
   
   <extension
         id="Tracker"
@@ -303,5 +202,184 @@
           productId="com.verticon.tracker.editor.Tracker">
     </introProductBinding>
    </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="%_UI_commands_Tracker_category_description"
+            id="com.verticon.tracker.editor.commands.Tracker.category"
+            name="_UI_commands_Tracker_category_name">
+      </category>
+      
+       <!-- 
+         	Many of these commands have defaultHandler classes that have workarounds to 
+         	activate on what could be an adapt condition on the 
+         	activeEditor. All these classes can be simplified when the
+         	
+              https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743
+              Cannot get adapt working on an IAdaptable, fix is available 
+              Eclipse in 3.5
+              
+              Here is an example handler of how it could work in 3.5.
+              
+             <handler
+            	class="com.verticon.tracker.editor.commands.ImportTagIdsAsTemplateEventsHandler"
+            	commandId="com.verticon.tracker.editor.commands.importTagIds.asTemplate.command">
+             	<activeWhen>
+    				<with variable="activeEditor">
+         				<adapt type="com.verticon.tracker.editor.presentation.IPremisesProvider"/>
+         	 	</activeWhen>
+         	 </handler>
+         	see handler class for workaround
+         	-->
+      <!-- Select Command -->
+       <command
+             id="com.verticon.tracker.fair.editor.commands.generic.select.command"
+             defaultHandler="com.verticon.tracker.editor.handlers.GenericSelectInOutlineHandler"
+             categoryId="com.verticon.tracker.fair.editor.commands.Fair.category"
+             description="%_UI_commands_generic_select_description"
+             name="%_UI_commands_generic_select_name">
+      </command>
+      
+      <!-- TagIds Commands -->
+      <command
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            defaultHandler="com.verticon.tracker.editor.handlers.ImportTagIdsAsSelectedEventsHandler"
+            description="%_UI_commands_importTagIds_asTemplate_description"
+            id="com.verticon.tracker.editor.commands.importTagIds.asTemplate.command"
+            name="%_UI_commands_importTagIds_asTemplate_name">
+      </command>
+      <command
+            id="com.verticon.tracker.editor.commands.importTagIds.asSelected.command"
+            defaultHandler="com.verticon.tracker.editor.handlers.ImportTagIdsAsSelectedEventsHandler"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            description="%_UI_commands_importTagIds_asSelected_description"
+            name="%_UI_commands_importTagIds_asSelected_name">
+      </command>
+      
+      <!-- Animal Commands -->
+      <command
+            id="com.verticon.tracker.editor.commands.animal.changeType.command"
+            defaultHandler="com.verticon.tracker.editor.handlers.AnimalsChangeTypeOfHandler"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            description="%_UI_commands_animal_changeType_description"
+            name="%_UI_commands_animal_changeType_name">
+      </command>
+      <command
+            id="com.verticon.tracker.editor.commands.animal.addTemplateEvent.command"
+            defaultHandler="com.verticon.tracker.editor.handlers.AnimalsAddTemplateEventHandler"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            description="%_UI_commands_animal_addTemplateEvent_description"
+            name="%_UI_commands_animal_addTemplateEvent_name">
+      </command>
+      
+      
+      <!-- Event Commands -->
+       <command
+             id="com.verticon.tracker.editor.commands.event.modify.command"
+             defaultHandler="com.verticon.tracker.editor.handlers.EventsModifyHandler"
+             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+             description="%_UI_commands_event_modify_description"
+             name="%_UI_commands_event_modify_name">
+      </command>
+      
+      
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+         
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+        <!-- restrict this to command to adapt on IContentOutlinePage when  
+               	https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743
+              		Scheduled for fix in 3.5 -->
+               <command
+                     commandId="com.verticon.tracker.fair.editor.commands.generic.select.command"
+                     mnemonic="S"
+                     style="push">
+                  <visibleWhen
+                        checkEnabled="false">
+                     <iterate>
+                        <instanceof
+                              value="org.eclipse.emf.ecore.EObject">
+                        </instanceof>
+                     </iterate>
+                  </visibleWhen>
+               </command>
+      </menuContribution>
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+            <!--TODO Change this to Import -->
+         <menu
+               label="Tracker TagId Import Actions"
+               mnemonic="T">
+               <visibleWhen>
+		               <with variable="activeMenuSelection">
+		                  <iterate>
+		                      <adapt type="org.eclipse.core.resources.IResource">
+		          					<test property="org.eclipse.core.resources.name" 
+		               				 value="*.tags"/>
+		      				 </adapt>
+		                  </iterate>
+		               </with>
+	            </visibleWhen>
+               <command
+                     commandId="com.verticon.tracker.editor.commands.importTagIds.asTemplate.command"
+                     mnemonic="T"
+                     style="push">
+               </command>
+               <command
+                     commandId="com.verticon.tracker.editor.commands.importTagIds.asSelected.command"
+                     mnemonic="S"
+                     style="push">
+               </command>
+         </menu>
+      </menuContribution>
+      
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               label="Tracker Animal Actions"
+               mnemonic="T">
+               <visibleWhen>
+               		<with variable="activeMenuSelection">
+		                  <iterate>
+      						 <instanceof value="com.verticon.tracker.Animal"/>
+    					  </iterate>
+    			     </with>
+	            </visibleWhen>
+	            
+               
+               <command
+                     commandId="com.verticon.tracker.editor.commands.animal.changeType.command"
+               	style="push">
+               	</command>
+               	<command
+                     commandId="com.verticon.tracker.editor.commands.animal.addTemplateEvent.command"
+               	style="push">
+               </command>
+               
+         </menu>
+      </menuContribution>
+      
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               label="Tracker Event Actions"
+               mnemonic="T">
+               <visibleWhen>
+                         <with variable="activeMenuSelection">
+		                  <iterate>
+      						 <instanceof value="com.verticon.tracker.Event"/>
+    					  </iterate>
+    					 </with>
+	            </visibleWhen>
+               <command
+                     commandId="com.verticon.tracker.editor.commands.event.modify.command"
+               	style="push">
+               	</command>
+         </menu>
+      </menuContribution>
+   </extension>
+   
    
 </plugin>
