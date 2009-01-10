@@ -21,89 +21,42 @@
         contributorClass="com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionActionBarContributor" >
     </editor>
   </extension>
-  <extension
-        point="org.eclipse.ui.popupMenus">
-     <objectContribution
-           adaptable="true"
-           id="com.verticon.tracker.fair.transaction.editor.popupMenu"
-           objectClass="com.verticon.tracker.MovedIn">
-        <menu
-              id="com.verticon.tracker.editor.event.popupSubMenu"
-              label="%menu.label.0"
-              path="additions">
-           <separator
-                 name="group1">
-           </separator>
-        </menu>
-        <action
-              class="com.verticon.tracker.fair.transaction.editor.popup.actions.FairRegistrationAction"
-              enablesFor="+"
-              id="com.verticon.tracker.fair.transaction.editor.newAction"
-              label="%action.label.0"
-              menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
-              tooltip="%action.tooltip.0">
-        </action>
-     </objectContribution>
-  </extension>
+
   
-  <extension
-        point="org.eclipse.ui.popupMenus">
-     <objectContribution
-           adaptable="true"
-           id="com.verticon.tracker.fair.transaction.editor.popupMenu.Person"
-           objectClass="com.verticon.tracker.fair.Person">
-        <menu
-              id="com.verticon.tracker.editor.event.popupSubMenu"
-              label="%menu.label.1"
-              path="additions">
-           <separator
-                 name="group1">
-           </separator>
-        </menu>
-        <action
-              class="com.verticon.tracker.fair.transaction.editor.popup.actions.UpdatePinsAction"
-              enablesFor="+"
-              id="com.verticon.tracker.fair.transaction.editor.newAction"
-              label="%action.label.1"
-              menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
-              tooltip="%action.tooltip.1">
-        </action>
-        <action
-          class="com.verticon.tracker.editor.util.SelectInOutline"
-          enablesFor="+"
-          id="com.verticon.tracker.editor.actions.SelectPeopleInOutline"
-          label="%action.label.2"
-          menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
-          tooltip="%action.tooltip.2">
-    	</action>
-     </objectContribution>
-  </extension>
+  <!--TODO Move this out of this plug in to a separate plugin feature as a command/handler 
   
-    <extension
-        point="org.eclipse.ui.popupMenus">
-     <objectContribution
-           adaptable="true"
-           id="com.verticon.tracker.fair.transaction.editor.popupMenu.Exhibit"
-           objectClass="com.verticon.tracker.fair.Exhibit">
-        <menu
-              id="com.verticon.tracker.editor.event.popupSubMenu"
-              label="%menu.label.2"
-              path="additions">
-           <separator
-                 name="group1">
-           </separator>
-        </menu>
-        <action
-          class="com.verticon.tracker.editor.util.SelectInOutline"
-          enablesFor="+"
-          id="com.verticon.tracker.editor.actions.SelectExhibitsInOutline"
-          label="%action.label.3"
-          menubarPath="com.verticon.tracker.editor.event.popupSubMenu/content"
-          tooltip="%action.tooltip.3">
-    	</action>
-     </objectContribution>
-  </extension>
+    <command
+             id="com.verticon.tracker.fair.editor.commands.fairData.import.command"
+             defaultHandler="com.verticon.tracker.fair.editor.handlers.MovedInFairRegistrationHandler"
+             categoryId="com.verticon.tracker.fair.editor.commands.Fair.category"
+             description="%_UI_commands_fairData_import_description"
+             name="%_UI_commands_fairData_import_name">
+      </command>
+      
+   <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+            
+         <menu
+               label="Tracker Fair Exhibit Data Actions">
+               <visibleWhen>
+		               <with variable="activeMenuSelection">
+		                  <iterate>
+		                      <adapt type="org.eclipse.core.resources.IResource">
+		          					<test property="org.eclipse.core.resources.name" 
+		               				 value="*.xls"/>
+		      				 </adapt>
+		                  </iterate>
+		               </with>
+	            </visibleWhen>
+               <command
+                     commandId="com.verticon.tracker.fair.editor.commands.fairData.import.command"
+               style="push">
+               </command>
+         </menu>
+      </menuContribution>
   
+  
+  -->
   <extension
         point="org.eclipse.ui.popupMenus">
      <objectContribution
