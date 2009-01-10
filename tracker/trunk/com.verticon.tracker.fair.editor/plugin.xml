@@ -8,14 +8,11 @@
 -->
 
 <plugin>
-
-
   <extension
     point = "org.eclipse.ui.newWizards">
     <category
           id="com.verticon.tracker.editor.Wizard.category.ID"
           name="Tracker Wizards"/>
-
     <wizard
       id = "com.verticon.tracker.fair.editor.presentation.FairModelWizardID"
       name = "%_UI_FairModelWizard_label"
@@ -38,8 +35,6 @@
     </editor>
   </extension>    
   
-  
-  
    <extension
          point="org.eclipse.ui.importWizards">
       <!--Use the Basic category-->
@@ -54,5 +49,95 @@
          </description>
       </wizard>
    </extension>
-  
+   
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="%_UI_commands_fair_category_description"
+            id="com.verticon.tracker.fair.editor.commands.Fair.category"
+            name="%_UI_commands_fair_category_name">
+      </category>
+      
+       <!-- 
+         	Many of these commands have defaultHandler classes that have workarounds to 
+         	activate on what could be an adapt condition on the 
+         	activeEditor. All these classes can be simplified when the
+         	
+              https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743
+              Cannot get adapt working on an IAdaptable, fix is available 
+              Eclipse in 3.5
+              
+              Here is an example handler of how it could work in 3.5.
+              
+             <handler
+            	class="com.verticon.tracker.editor.commands.ImportTagIdsAsTemplateEventsHandler"
+            	commandId="com.verticon.tracker.editor.commands.importTagIds.asTemplate.command">
+             	<activeWhen>
+    				<with variable="activeEditor">
+         				<adapt type="com.verticon.tracker.editor.presentation.IPremisesProvider"/>
+         	 	</activeWhen>
+         	 </handler>
+         	see handler class for workaround
+         	-->
+
+      <!-- Person Commands -->
+      <command
+            id="com.verticon.tracker.fair.editor.commands.person.changeMovedEventPins.command"
+            categoryId="com.verticon.tracker.fair.editor.commands.Fair.category"
+            defaultHandler="com.verticon.tracker.fair.editor.handlers.PeopleChangeMoveEventPinsHandler"
+            description="%_UI_commands_person_changeMovedEventPins_descriptions"
+            name="%_UI_commands_person_changeMovedEventPins_name">
+      </command>
+      
+      <!-- MovedIn Commands -->
+       <command
+             id="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
+             defaultHandler="com.verticon.tracker.fair.editor.handlers.MovedInFairRegistrationHandler"
+             categoryId="com.verticon.tracker.fair.editor.commands.Fair.category"
+             description="%_UI_commands_movedIn_fairRegistration_description"
+             name="%_UI_commands_movedIn_fairRegistration_name">
+      </command>
+      
+      </extension>
+      <extension
+         point="org.eclipse.ui.menus">
+
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               label="Tracker Fair Person Actions"
+               mnemonic="T">
+               <visibleWhen>
+               			<with variable="activeMenuSelection">
+		                  <iterate>
+      						 <instanceof value="com.verticon.tracker.fair.Person"/>
+    					  </iterate>
+    			     	</with>
+	            </visibleWhen>
+               <command
+                     commandId="com.verticon.tracker.fair.editor.commands.person.changeMovedEventPins.command"
+               	style="push">
+               	</command>
+         </menu>
+      </menuContribution>
+     <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               label="Tracker Fair MovedIn Event Actions"
+               mnemonic="T">
+               <visibleWhen>
+               			<with variable="activeMenuSelection">
+		                  <iterate>
+      						 <instanceof value="com.verticon.tracker.MovedIn"/>
+    					  </iterate>
+    					</with>
+	            </visibleWhen>
+               <command
+                     commandId="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
+               	style="push">
+               	</command>
+         </menu>
+      </menuContribution>  
+   </extension>
+
 </plugin>
