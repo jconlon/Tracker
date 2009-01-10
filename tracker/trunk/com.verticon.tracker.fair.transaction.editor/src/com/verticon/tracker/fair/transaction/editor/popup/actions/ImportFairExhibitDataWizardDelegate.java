@@ -19,8 +19,10 @@ import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.editor.presentation.IFairProvider;
 
 /**
- * @author jconlon
  *
+ * 
+ * @author jconlon
+ * 
  */
 public class ImportFairExhibitDataWizardDelegate implements IObjectActionDelegate {
 
