@@ -6,7 +6,7 @@ package com.verticon.tracker.editor.presentation;
 import java.io.FileNotFoundException;
 
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
-import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IEditorPart;
 
@@ -35,14 +35,14 @@ import com.verticon.tracker.editor.util.TagsBean;
 public class AddTagIdsAnimalAndEventWizard extends Wizard {
 
 	private static final String MODIFY_WIZARD_TITLE = "Add Animal To Premises";
-	private IStructuredSelection selectionOfTagIdResources;
+	private ISelection selectionOfTagIdResources;
 	private IEditorPart editor;
 	private SelectAnimalWizardPage selectAnimalWizardPage;
 	private SelectEventWizardPage selectEventWizardPage;
 
 
 	public void init(IEditorPart editor,
-			IStructuredSelection selection) {
+			ISelection selection) {
 		this.selectionOfTagIdResources = selection;
 		this.editor = editor;
 	}

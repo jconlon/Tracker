@@ -7,7 +7,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.jface.dialogs.IDialogSettings;
-import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IEditorPart;
 
@@ -44,7 +44,7 @@ public class AddTemplateToAnimalsWizard extends Wizard {
 	}
 
 	public void init(IEditorPart editor,
-			IStructuredSelection selection) {
+			ISelection selection) {
 		selectedAnimals = ActionUtils.getSelectedAnimals(selection);
 		this.editor = editor;
 	}

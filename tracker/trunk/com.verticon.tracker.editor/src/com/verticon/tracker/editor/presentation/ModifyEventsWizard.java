@@ -13,7 +13,7 @@ import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IWorkbenchWindow;
 
@@ -53,7 +53,8 @@ public class ModifyEventsWizard extends Wizard {
 		setDialogSettings(wizardSettings);		
 	}
 
-	public void init(IWorkbenchWindow workbenchWindow, EditingDomain editingDomain,IStructuredSelection selection){
+	public void init(IWorkbenchWindow workbenchWindow, EditingDomain editingDomain,
+			ISelection selection){
 		this.workbenchWindow=workbenchWindow;
 		eventsToModify = ActionUtils.getSelectedEvents(selection);
 		this.editingDomain=editingDomain;
