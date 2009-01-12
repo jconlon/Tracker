@@ -41,10 +41,10 @@ import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YoungPerson;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
-import com.verticon.tracker.fair.transaction.editor.popup.actions.ColumnMapper;
-import com.verticon.tracker.fair.transaction.editor.popup.actions.ExecutableProcreator;
-import com.verticon.tracker.fair.transaction.editor.popup.actions.ExecutableProcreators;
-import com.verticon.tracker.fair.transaction.editor.popup.actions.MissingCriticalDataException;
+import com.verticon.tracker.fair.poi.importxls.ColumnMapper;
+import com.verticon.tracker.fair.poi.importxls.ExecutableProcreator;
+import com.verticon.tracker.fair.poi.importxls.ExecutableProcreators;
+import com.verticon.tracker.fair.poi.importxls.MissingCriticalDataException;
 
 public class DivisionProcreatorTest extends TestCase {
 
