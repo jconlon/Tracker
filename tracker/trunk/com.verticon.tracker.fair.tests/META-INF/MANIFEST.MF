@@ -15,7 +15,8 @@ Require-Bundle: org.junit;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.ocl,
  org.eclipse.ocl.ecore,
- com.verticon.tracker.fair.transaction.editor;bundle-version="0.1.1"
+ com.verticon.tracker.fair.transaction.editor;bundle-version="0.1.1",
+ com.verticon.tracker.fair.poi
 Bundle-ActivationPolicy: lazy
 Import-Package: com.verticon.tracker.edit.provider;version="0.1.0",
  com.verticon.tracker.fair.edit.provider,
