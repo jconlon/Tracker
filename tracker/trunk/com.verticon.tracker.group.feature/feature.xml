@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.group.feature"
       label="Tracker Group Feature"
-      version="0.3.1"
+      version="0.3.1.qualifier"
       provider-name="Verticon, Inc.">
 
    <description url="http://www.example.com/description">
@@ -19,10 +19,6 @@
 
    <includes
          id="com.verticon.tracker.editor"
-         version="0.0.0"/>
-
-   <includes
-         id="com.verticon.tracker.export.xls"
          version="0.0.0"/>
 
    <includes
@@ -43,6 +39,14 @@
 
    <includes
          id="com.verticon.tracker.fair.editor"
+         version="0.0.0"/>
+
+   <includes
+         id="org.apache.poi"
+         version="0.0.0"/>
+
+   <includes
+         id="com.verticon.tracker.fair.poi"
          version="0.0.0"/>
 
 </feature>
