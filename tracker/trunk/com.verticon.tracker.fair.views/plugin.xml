@@ -16,7 +16,7 @@
       </view>
       <view
             name="Exhibits"
-            icon="icons/sample.gif"
+            icon="icons/Exhibit.gif"
             category="com.verticon.tracker.views"
             class="com.verticon.tracker.fair.views.ExhibitsView"
             id="com.verticon.tracker.fair.views.ExhibitsView">
