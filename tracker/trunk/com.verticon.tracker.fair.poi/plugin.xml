@@ -20,11 +20,11 @@
          point="org.eclipse.ui.menus">
       
        <menuContribution
-            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
-            
-         <menu
-               label="%menu.label.0"
-               mnemonic="%menu.mnemonic.0">
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+               <command
+                     commandId="com.verticon.tracker.fair.poi.commands.fairData.import.command"
+                     icon="icons/etool16/import_wiz.gif"
+                     style="push">
                <visibleWhen>
                        
 		               <with variable="activeMenuSelection">
@@ -38,11 +38,7 @@
 		               
 		               
 	            </visibleWhen>
-               <command
-                     commandId="com.verticon.tracker.fair.poi.commands.fairData.import.command"
-               style="push">
                </command>
-         </menu>
       </menuContribution>
    </extension>
    <extension
