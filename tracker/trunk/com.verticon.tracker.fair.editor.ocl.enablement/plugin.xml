@@ -10,53 +10,110 @@
             uri="http://www.verticon.com/ns/tracker/0.1.0">
       </package>
    </extension>
-   <extension point="org.eclipse.ui.editorActions"> 
-   <!-- Fair Editor -->
-       <editorContribution
-            id="com.verticon.tracker.ocl.query.fairEditorContribution"
-            targetID="com.verticon.tracker.fair.editor.presentation.FairEditorID">
-         <menu
-               label="%_UI_OclMenu_label"
-               path="com.verticon.tracker.fairMenuID/additions"
-			   id="org.eclipse.emf.oclQueryMenuIDFairEditor">
-              <separator name="additions"/>
-         </menu>
-         <action
-               label="%_UI_CtxFreeQuery_label"
-               class="com.verticon.tracker.ocl.query/com.verticon.tracker.ocl.query.actions.ContextFreeQueryDelegate"
-               menubarPath="com.verticon.tracker.fairMenuID/org.eclipse.emf.oclQueryMenuIDFairEditor/additions"
-               icon="$nl$/icons/elcl16/oclqryedit_co.gif"
-               id="com.verticon.tracker.fair.editor.ocl.query.ContextFreeQueryAction"/>
-         <action
-               label="%_UI_OclQuery_label"
-               class="com.verticon.tracker.ocl.query/com.verticon.tracker.ocl.query.actions.OCLQueryDelegate:http://www.verticon.com/ns/tracker/fair/0.1.0 http://www.verticon.com/ns/tracker/0.1.0"
-               menubarPath="com.verticon.tracker.fairMenuID/org.eclipse.emf.oclQueryMenuIDFairEditor/additions"
-               icon="$nl$/icons/elcl16/oclqryedit_co.gif"
-               id="com.verticon.tracker.fair.editor.ocl.query.OclQueryAction"/>
-      </editorContribution> 
+
+   <extension
+         point="org.eclipse.ui.menus">
+
+
+ 		<menuContribution
+            locationURI="menu:com.verticon.tracker.ocl.query.main?after=additions">
+                 
+               	<command
+               		commandId="com.verticon.tracker.editor.ocl.enablement.commands.oclQuery.command"
+                       icon="icons/elcl16/oclqryedit_co.gif"
+                       style="push">
+               	   
+				   <parameter
+			               name="com.verticon.tracker.ocl.commands.packageURIs"
+			               value="http://www.verticon.com/ns/tracker/fair/0.1.0 http://www.verticon.com/ns/tracker/0.1.0">
+			       </parameter>
+			         <visibleWhen
+			               checkEnabled="false">
+			               <or>
+								          <with variable="activeEditorId">
+								             <equals
+								                   value="com.verticon.tracker.fair.transaction.editor.presentation.FairEditorID">
+								             </equals>
+								          </with>
+								          
+								          <with
+								                variable="activeEditorId">
+								             <equals
+								                   value="com.verticon.tracker.fair.editor.presentation.FairEditorID">
+								             </equals>
+								          </with>
+							</or>
+			         </visibleWhen>
+			       
+               	</command>
+        
+      </menuContribution>
       
-      <!-- Premises Transaction Editor -->
-      <editorContribution
-            id="com.verticon.tracker.ocl.query.fairTransactionEditorContribution"
-            targetID="com.verticon.tracker.fair.transaction.editor.presentation.FairEditorID">
-         <menu
-               label="%_UI_OclMenu_label"
-               path="com.verticon.tracker.fairMenuID/additions"
-			   id="org.eclipse.emf.oclQueryMenuIDFairTransactionEditor">
-              <separator name="additions"/>
-         </menu>
-         <action
-               label="%_UI_CtxFreeQuery_label"
-               class="com.verticon.tracker.ocl.query/com.verticon.tracker.ocl.query.actions.ContextFreeQueryDelegate"
-               menubarPath="com.verticon.tracker.fairMenuID/org.eclipse.emf.oclQueryMenuIDFairTransactionEditor/additions"
-               icon="$nl$/icons/elcl16/oclqryedit_co.gif"
-               id="com.verticon.tracker.fair.editor.ocl.query.ContextFreeQueryAction"/>
-         <action
-               label="%_UI_OclQuery_label"
-               class="com.verticon.tracker.ocl.query/com.verticon.tracker.ocl.query.actions.OCLQueryDelegate:http://www.verticon.com/ns/tracker/fair/0.1.0 http://www.verticon.com/ns/tracker/0.1.0"
-               menubarPath="com.verticon.tracker.fairMenuID/org.eclipse.emf.oclQueryMenuIDFairTransactionEditor/additions"
-               icon="$nl$/icons/elcl16/oclqryedit_co.gif"
-               id="com.verticon.tracker.fair.editor.ocl.query.OclQueryAction"/>
-      </editorContribution> 
-</extension>
+      <menuContribution
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+               	 <command
+                       commandId="com.verticon.tracker.editor.ocl.enablement.commands.oclQuery.command"
+                       icon="icons/elcl16/oclqryedit_co.gif"
+                       style="push">
+               	   
+				   <parameter
+			               name="com.verticon.tracker.ocl.commands.packageURIs"
+			               value="http://www.verticon.com/ns/tracker/fair/0.1.0 http://www.verticon.com/ns/tracker/0.1.0">
+			       </parameter>
+			       <!-- show when the selecting an EObject and either the Premise Editor or 
+			       	the Transaction Premises Editor -->
+			       <visibleWhen
+			             checkEnabled="false">
+			          <and>
+				          <with variable="activeMenuSelection">
+			                  <iterate>
+	      						 <instanceof value="org.eclipse.emf.ecore.EObject"/>
+	    					  </iterate>
+	    			      </with>
+				          <or>
+					          <with variable="activeEditorId">
+					             <equals
+					                   value="com.verticon.tracker.fair.transaction.editor.presentation.FairEditorID">
+					             </equals>
+					          </with>
+					          
+					          <with
+					                variable="activeEditorId">
+					             <equals
+					                   value="com.verticon.tracker.fair.editor.presentation.FairEditorID">
+					             </equals>
+					          </with>
+				          </or>
+			          </and>
+			       </visibleWhen>
+               	</command>
+        
+      </menuContribution>
+      
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.handlers">
+      
+      <handler
+            class="com.verticon.tracker.ocl.query.handlers.OCLQueryHandler"
+            commandId="com.verticon.tracker.editor.ocl.enablement.commands.oclQuery.command">
+         <activeWhen>
+			  <or>
+		          <with variable="activeEditorId">
+		             <equals
+		                   value="com.verticon.tracker.fair.transaction.editor.presentation.FairEditorID">
+		             </equals>
+		          </with>
+		          
+		          <with
+		                variable="activeEditorId">
+		             <equals
+		                   value="com.verticon.tracker.fair.editor.presentation.FairEditorID">
+		             </equals>
+		          </with>
+	          </or> 
+         </activeWhen>
+      </handler>
+   </extension>
 </plugin>

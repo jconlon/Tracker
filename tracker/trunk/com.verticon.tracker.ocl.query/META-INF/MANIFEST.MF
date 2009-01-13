@@ -8,6 +8,7 @@ Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
 Export-Package: com.verticon.tracker.ocl.query;version="0.1.0",
  com.verticon.tracker.ocl.query.actions;version="0.1.0",
+ com.verticon.tracker.ocl.query.handlers,
  com.verticon.tracker.ocl.query.internal.l10n;version="0.1.0";x-internal:=true,
  com.verticon.tracker.ocl.query.wizards;version="0.1.0"
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.2.0,4.0.0)",
