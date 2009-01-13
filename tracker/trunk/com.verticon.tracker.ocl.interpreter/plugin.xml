@@ -20,31 +20,23 @@
 -->
 <plugin>
 
-    <extension point="org.eclipse.ui.editorActions"> 
-      <editorContribution 
-         id="com.verticon.tracker.ocl.editorContribution" 
-         targetID="com.verticon.tracker.editor.presentation.TrackerEditorID"> 
-        <menu
-               label="%_UI_OCLMenu_label"
-               path="com.verticon.trackerMenuID/additions"
-               id="org.eclipse.emf.oclEngineMenuID">
-            <separator name="additions"/>
-         </menu>
-         <action
-               label="%_UI_ShowConsole_label"
-               class="org.eclipse.emf.ocl.examples.interpreter.actions.ShowConsoleDelegate"
-               menubarPath="com.verticon.trackerMenuID/org.eclipse.emf.oclEngineMenuID/additions"
-               icon="$nl$/icons/elcl16/oclconsole_co.gif"
-               id="org.eclipse.emf.ocl.examples.interpreter.ShowConsoleAction"/>
-      </editorContribution> 
-
-   </extension> 
-
-   <extension point="org.eclipse.ui.console.consoleFactories">
-      <consoleFactory
-            label="%_UI_ConsoleFactory_label"
-            class="org.eclipse.emf.ocl.examples.interpreter.console.OCLConsoleFactory"
-            icon="$nl$/icons/elcl16/oclconsole_co.gif">
-      </consoleFactory>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="com.verticon.tracker.ocl.interpreter.handlers.ShowOCLConsoleHandler"
+            id="com.verticon.tracker.ocl.interpreter.commands.showConsole"
+            name="%_UI_ShowConsole_label">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:com.verticon.tracker.ocl.query.main?after=additions">
+         <command
+               commandId="com.verticon.tracker.ocl.interpreter.commands.showConsole"
+               icon="icons/elcl16/oclconsole_co.gif"
+               style="push">
+         </command>
+      </menuContribution>
    </extension>
 </plugin>
