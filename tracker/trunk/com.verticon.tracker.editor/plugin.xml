@@ -231,11 +231,20 @@
          	 </handler>
          	see handler class for workaround
          	-->
+      <!-- Place Holder in Popups Command -->
+      <command
+             id="com.verticon.tracker.editor.menus.popupany"
+             
+             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+             description="%_UI_commands_generic_select_description"
+             name="%_UI_commands_generic_select_name">
+      </command>
+      
       <!-- Select Command -->
        <command
              id="com.verticon.tracker.fair.editor.commands.generic.select.command"
              defaultHandler="com.verticon.tracker.editor.handlers.GenericSelectInOutlineHandler"
-             categoryId="com.verticon.tracker.fair.editor.commands.Fair.category"
+             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
              description="%_UI_commands_generic_select_description"
              name="%_UI_commands_generic_select_name">
       </command>
@@ -286,15 +295,21 @@
    </extension>
    <extension
          point="org.eclipse.ui.menus">
-         
       <menuContribution
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               commandId="com.verticon.tracker.editor.menus.popupany"
+               label="&amp;Tracker Actions">
+         </menu>
+      </menuContribution>  
+      <menuContribution
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
         <!-- restrict this to command to adapt on IContentOutlinePage when  
                	https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743
               		Scheduled for fix in 3.5 -->
                <command
                      commandId="com.verticon.tracker.fair.editor.commands.generic.select.command"
-                     mnemonic="S"
+                     icon="icons/full/obj16/selected_mode.gif"
                      style="push">
                   <visibleWhen
                         checkEnabled="false">
@@ -305,14 +320,13 @@
                      </iterate>
                   </visibleWhen>
                </command>
-      </menuContribution>
-      <menuContribution
-            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
-            <!--TODO Change this to Import -->
-         <menu
-               label="Tracker TagId Import Actions"
-               mnemonic="T">
-               <visibleWhen>
+               
+               <!-- TagIds -->
+                <command
+                      commandId="com.verticon.tracker.editor.commands.importTagIds.asTemplate.command"
+                      icon="icons/full/obj16/import_wiz.gif"
+                      style="push">
+                  <visibleWhen>
 		               <with variable="activeMenuSelection">
 		                  <iterate>
 		                      <adapt type="org.eclipse.core.resources.IResource">
@@ -322,63 +336,65 @@
 		                  </iterate>
 		               </with>
 	            </visibleWhen>
-               <command
-                     commandId="com.verticon.tracker.editor.commands.importTagIds.asTemplate.command"
-                     mnemonic="T"
-                     style="push">
                </command>
                <command
                      commandId="com.verticon.tracker.editor.commands.importTagIds.asSelected.command"
-                     mnemonic="S"
+                     icon="icons/full/obj16/import_wiz.gif"
                      style="push">
+                     <visibleWhen>
+		               <with variable="activeMenuSelection">
+		                  <iterate>
+		                      <adapt type="org.eclipse.core.resources.IResource">
+		          					<test property="org.eclipse.core.resources.name" 
+		               				 value="*.tags"/>
+		      				 </adapt>
+		                  </iterate>
+		               </with>
+	            </visibleWhen>
                </command>
-         </menu>
-      </menuContribution>
-      
-      <menuContribution
-            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
-         <menu
-               label="Tracker Animal Actions"
-               mnemonic="T">
-               <visibleWhen>
+               
+               <!-- Animals -->
+                <command
+                      commandId="com.verticon.tracker.editor.commands.animal.changeType.command"
+                      icon="icons/full/obj16/AnimalModelFile.gif"
+                      style="push">
+               	<visibleWhen>
                		<with variable="activeMenuSelection">
 		                  <iterate>
       						 <instanceof value="com.verticon.tracker.Animal"/>
     					  </iterate>
     			     </with>
 	            </visibleWhen>
-	            
-               
-               <command
-                     commandId="com.verticon.tracker.editor.commands.animal.changeType.command"
-               	style="push">
                	</command>
                	<command
-                     commandId="com.verticon.tracker.editor.commands.animal.addTemplateEvent.command"
-               	style="push">
+                      commandId="com.verticon.tracker.editor.commands.animal.addTemplateEvent.command"
+                      icon="icons/full/obj16/AnimalModelFile.gif"
+                      style="push">
+               	<visibleWhen>
+               		<with variable="activeMenuSelection">
+		                  <iterate>
+      						 <instanceof value="com.verticon.tracker.Animal"/>
+    					  </iterate>
+    			     </with>
+	            </visibleWhen>
                </command>
                
-         </menu>
-      </menuContribution>
-      
-      <menuContribution
-            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
-         <menu
-               label="Tracker Event Actions"
-               mnemonic="T">
-               <visibleWhen>
+               <!-- Event -->
+                <command
+                      commandId="com.verticon.tracker.editor.commands.event.modify.command"
+                      icon="icons/full/obj16/waiting.gif"
+                      style="push">
+               	<visibleWhen>
                          <with variable="activeMenuSelection">
 		                  <iterate>
       						 <instanceof value="com.verticon.tracker.Event"/>
     					  </iterate>
     					 </with>
 	            </visibleWhen>
-               <command
-                     commandId="com.verticon.tracker.editor.commands.event.modify.command"
-               	style="push">
                	</command>
-         </menu>
       </menuContribution>
+     
+      
    </extension>
    
    
