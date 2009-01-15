@@ -12,7 +12,7 @@ Export-Package: com.verticon.tracker;version="0.1.0",
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.ocl.ecore,
- com.verticon.tracker.logging.logback;bundle-version="0.9.11"
+ com.verticon.tracker.logging.logback
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: com.verticon.tracker.TrackerPlugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
