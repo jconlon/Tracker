@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Bluecove Plug-in
 Bundle-SymbolicName: net.sf.bluecove
-Bundle-Version: 2.0.3.quantifier
+Bundle-Version: 2.0.3.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: Verticon, Inc.
 Export-Package: com.intel.bluetooth,
