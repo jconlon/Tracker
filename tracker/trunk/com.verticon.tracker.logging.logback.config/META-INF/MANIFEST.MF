@@ -5,4 +5,4 @@ Bundle-SymbolicName: com.verticon.tracker.logging.logback.config
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Verticon, Inc.
 Fragment-Host: com.verticon.tracker.logging.logback
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -13,4 +13,4 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-ActivationPolicy: lazy
 Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)",
  com.verticon.tracker.util;version="[0.1.0,1.0.0)"
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
