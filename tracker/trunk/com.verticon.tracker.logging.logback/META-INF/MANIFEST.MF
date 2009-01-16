@@ -60,4 +60,4 @@ Export-Package: ch.qos.logback.classic;version="0.9.11",
  org.apache.commons.logging,
  org.apache.log4j,
  org.slf4j;version="1.5.5"
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

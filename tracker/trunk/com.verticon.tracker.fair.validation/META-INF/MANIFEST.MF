@@ -10,5 +10,5 @@ Require-Bundle: org.eclipse.emf.validation,
  com.verticon.tracker.fair,
  org.eclipse.core.runtime,
  org.eclipse.ui;bundle-version="3.4.1"
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: com.verticon.tracker.validation.adapter.expressions

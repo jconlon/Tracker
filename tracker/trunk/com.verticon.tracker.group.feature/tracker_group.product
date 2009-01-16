@@ -51,7 +51,6 @@ Tracker is powered by Eclipse technology and includes Eclipse plugins that can b
 
    <features>
       <feature id="com.verticon.tracker.group.feature" version="0.3.1"/>
-      <feature id="com.verticon.tracker.base.dep.feature" version="0.3.1"/>
    </features>
 
 </product>
