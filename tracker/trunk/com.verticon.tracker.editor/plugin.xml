@@ -14,11 +14,11 @@
     
     <category
           id="com.verticon.tracker.editor.Wizard.category.examples"
-          name="Tracker Examples"/> 
+          name="%category.name.0"/> 
     
     <category
           id="com.verticon.tracker.editor.Wizard.category.ID"
-          name="Tracker Wizards"/>
+          name="%category.name.1"/>
      
     <wizard
       id = "com.verticon.tracker.editor.presentation.TrackerModelWizardID"
@@ -41,14 +41,14 @@
     </wizard>
     
     <wizard
-            name="Tracker Example Project"
+            name="%wizard.name.0"
             icon="icons/full/obj16/TrackerModelFile.gif"
             category="com.verticon.tracker.editor.Wizard.category.examples"
             class="com.verticon.tracker.editor.presentation.SampleTrackerProjectWizard"
             project="true"
             id="com.verticon.tracker.editor.wizards.NewTrackerProjectWizard">
          <description>
-            Create a new Tracker Example Project
+            %wizard.description.0
          </description>
       </wizard>
   </extension>
@@ -68,7 +68,7 @@
   <extension point = "org.eclipse.ui.editors">
     <editor
         id = "com.verticon.tracker.editor.presentation.AnimalEditorID"
-        name = "Animal Template Editor"
+        name = "%editor.name.0"
         icon = "icons/full/obj16/AnimalModelFile.gif"
         extensions = "animal"
         class = "com.verticon.tracker.editor.presentation.TrackerEditor" 
@@ -81,8 +81,8 @@
         point="org.eclipse.core.runtime.products">
      <product
            application="org.eclipse.ui.ide.workbench"
-           description="Tracker models animal event history within a premises"
-           name="Tracker Animal Information Platform">
+           description="%product.description.0"
+           name="%product.name.0">
         <property
               name="windowImages"
               value="icons/verticon32.gif"/>
@@ -129,7 +129,7 @@
            adaptable="true"
            class="com.verticon.tracker.editor.decorators.TrackerTemplateDecorator"
            id="com.verticon.tracker.editor.decorator"
-           label="Template"
+           label="%decorator.label.0"
            lightweight="true"
            state="true">
         <enablement>
@@ -150,7 +150,7 @@
      <page
            class="com.verticon.tracker.editor.preferences.internal.TrackerEditorPreferencePage"
            id="com.verticon.tracker.prefs.view"
-           name="Tracker">
+           name="%page.name.0">
      </page>
   </extension>
   
@@ -166,7 +166,7 @@
            class="com.verticon.tracker.editor.perspective.PerspectiveFactory"
            id="com.verticon.tracker.perspective"
            icon="icons/full/obj16/TrackerModelFile.gif"
-           name="Tracker">
+           name="%perspective.name.0">
      </perspective>
   </extension>
   <extension
@@ -207,7 +207,7 @@
       <category
             description="%_UI_commands_Tracker_category_description"
             id="com.verticon.tracker.editor.commands.Tracker.category"
-            name="_UI_commands_Tracker_category_name">
+            name="%category.name.2">
       </category>
       
        <!-- 
@@ -299,7 +299,7 @@
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
          <menu
                commandId="com.verticon.tracker.editor.menus.popupany"
-               label="&amp;Tracker Actions">
+               label="%menu.label.0">
          </menu>
       </menuContribution>  
       <menuContribution
