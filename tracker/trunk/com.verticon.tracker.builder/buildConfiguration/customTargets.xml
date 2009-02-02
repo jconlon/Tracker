@@ -1,0 +1,496 @@
+<project name="Build specific targets and properties" default="noDefault">
+
+	<!-- ===================================================================== -->
+	<!-- Run a given ${target} on all elements being built -->
+	<!-- Add on <ant> task for each top level element being built. -->
+	<!-- ===================================================================== -->
+	<available property="allElementsFile" file="${builder}/allElements.xml" value="${builder}/allElements.xml"/>
+	<property name="allElementsFile" location="${eclipse.pdebuild.templates}/headless-build/allElements.xml"/>
+
+	<import file="${allElementsFile}" />
+	<target name="allElements">
+		<antcall target="allElementsDelegator" />
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- ===================================================================== -->
+	<target name="getBaseComponents" depends="checkLocalBase" unless="skipBase">
+		<get src="${eclipseBaseURL}" dest="${buildDirectory}/../temp-base.zip" />
+		<unzip dest="${base}" overwrite="true" src="${buildDirectory}/../temp-base.zip" />
+	</target>
+
+	<target name="checkLocalBase">
+		<available file="${base}" property="skipBase" />
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Check out map files from correct repository -->
+	<!-- Replace values for mapsCheckoutTag as desired. -->
+	<!-- ===================================================================== -->
+	<target name="getMapFiles" depends="checkLocalMaps" unless="skipMaps">
+		<property name="mapsCheckoutTag" value="HEAD" />
+		<cvs cvsRoot="${mapsRepo}" package="${mapsRoot}" dest="${buildDirectory}/maps" tag="${mapsCheckoutTag}" />
+	</target>
+
+	<target name="checkLocalMaps">
+		<available property="skipMaps" file="${buildDirectory}/maps" />
+	</target>
+
+	<target name="tagMapFiles" if="tagMaps">
+		<cvs dest="${buildDirectory}/maps/${mapsRoot}" command="tag ${mapsTagTag}" />
+	</target>
+
+	<!-- ===================================================================== -->
+
+	<target name="clean" unless="noclean">
+		<antcall target="allElements">
+			<param name="target" value="cleanElement" />
+		</antcall>
+	</target>
+
+	<target name="gatherLogs">
+		<mkdir dir="${buildDirectory}/${buildLabel}/compilelogs" />
+		<antcall target="allElements">
+			<param name="target" value="gatherLogs" />
+		</antcall>
+		<unzip dest="${buildDirectory}/${buildLabel}/compilelogs" overwrite="true">
+			<fileset dir="${buildDirectory}/features">
+				<include name="**/*.log.zip" />
+			</fileset>
+		</unzip>
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before setup -->
+	<!-- Modified TEMPLATE -->
+	<!-- ===================================================================== -->
+	<target name="preSetup" depends="copyProjects">
+		<antcall target="updateProductVersion">
+		</antcall>
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after setup but before starting the build proper -->
+	<!-- ===================================================================== -->
+	<target name="postSetup">
+		<antcall target="getBaseComponents" />
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before fetching the build elements -->
+	<!-- ===================================================================== -->
+	<target name="preFetch">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after fetching the build elements -->
+	<!-- ===================================================================== -->
+	<target name="postFetch">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before generating the build scripts. -->
+	<!-- ===================================================================== -->
+	<target name="preGenerate">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after generating the build scripts. -->
+	<!-- ===================================================================== -->
+	<target name="postGenerate">
+		<antcall target="clean" />
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before running the build.xmls for the elements being built. -->
+	<!-- ===================================================================== -->
+	<target name="preProcess">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after running the build.xmls for the elements being built. -->
+	<!-- ===================================================================== -->
+	<target name="postProcess">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before running assemble. -->
+	<!-- ===================================================================== -->
+	<target name="preAssemble">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after  running assemble. -->
+	<!-- ===================================================================== -->
+	<target name="postAssemble">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before running package. -->
+	<!-- ===================================================================== -->
+	<target name="prePackage">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after  running package. -->
+	<!-- ===================================================================== -->
+	<target name="postPackage">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after the build is done. -->
+	<!-- ===================================================================== -->
+	<target name="postBuild">
+		<antcall target="gatherLogs" />
+		<antcall target="extract.p2.product.internal"/>
+	</target>
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: extract.p2.product.internal                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="extract.p2.product.internal">
+    	<property file="${buildDirectory}/product.version"/> 
+    	<delete dir="${buildDirectory}/result" />
+    			<mkdir dir="${buildDirectory}/result/tmp" />
+    			<property name="root.ui" value="com.verticon.tracker.product.desktop.application"/>
+
+    			<!--
+    			<antcall target="fixBad.Platform.jar"></antcall>
+    			<echo>Fixed the bad platform jar.</echo>
+    			-->
+    			<antcall target="postBuild.linux" />
+    			<antcall target="postBuild.win" />
+    </target>
+
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: extract.p2.product                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="extract.p2.product">
+    	<tstamp></tstamp>
+    	<record name="${buildDirectory}/extractedProduct-v${DSTAMP}${TSTAMP}-build.log"
+    		              loglevel="verbose" />
+    	 
+    	<echoproperties/>
+    	<antcall target="extract.p2.product.internal"/>
+    		
+    	<eclipse.refreshLocal 
+    	    	    				resource="com.verticon.tracker.builder/buildDirectory/result"
+    	    	    				depth="infinite"
+    	    	    			/>
+		
+    </target>
+
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do to test the build results -->
+	<!-- ===================================================================== -->
+	<target name="test">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do to publish the build results -->
+	<!-- ===================================================================== -->
+	<target name="publish">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Default target                                                        -->
+	<!-- ===================================================================== -->
+	<target name="noDefault">
+		<echo message="You must specify a target when invoking this file" />
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: copyProjects  
+          Custom                    
+         - - - - - - - - - - - - - - - - - -->
+	<target name="copyProjects">
+		<tstamp/>
+		<delete dir="${buildDirectory}" />
+		<mkdir dir="${buildDirectory}" />
+
+		<record name="${buildDirectory}/v${DSTAMP}${TSTAMP}-build.log"
+	              loglevel="verbose" />
+		<echoproperties />
+		<!-- 
+		  
+	      <mkdir dir="${buildDirectory}/features/com.qualityeclipse.favorites" />
+		  <copy todir="${buildDirectory}/features/com.qualityeclipse.favorites">
+	         <fileset dir="../com.qualityeclipse.favorites.feature" />
+	      </copy>
+		
+		<mkdir dir="${buildDirectory}/features/com.verticon.tracker.editor" />
+		<copy todir="${buildDirectory}/features/com.qualityeclipse.favorites">
+			         <fileset dir="../com.qualityeclipse.favorites.feature" />
+		</copy>
+		-->
+		<mkdir dir="${buildDirectory}/features" />
+		<copy todir="${buildDirectory}/features">
+			<fileset dir="../../..">
+				<include name="com.verticon.tracker.base.dep.feature/**" />
+				<include name="com.verticon.tracker.product.desktop.feature/**" />
+				
+				
+				
+				<!--
+				<include name="com.verticon.tracker.base.dep.feature/**" />
+				<include name="com.verticon.tracker.editor.feature/**" />
+				<include name="com.verticon.tracker.help.feature/**" />
+				<include name="com.verticon.tracker.reader.feature/**" />
+				<include name="com.verticon.tracker.ocl.query.feature/**" />
+				
+				
+			    <include name="org.apache.poi/**" />	
+				<include name="com.verticon.tracker.fair.editor.feature/**" />
+				<include name="com.verticon.tracker.fair.poi.feature/**" />
+				<include name="com.verticon.tracker.export.wlic.feature/**" />
+					     	
+				-->
+				<exclude name="*/bin/**" />
+			</fileset>
+		</copy>
+
+		<mkdir dir="${buildDirectory}/plugins" />
+		<copy todir="${buildDirectory}/plugins">
+			<fileset dir="../../..">
+				<include name="com.verticon.tracker.product.desktop/**" />
+				<!--
+				<include name="com.verticon.tracker/**" />
+				<include name="com.verticon.tracker.edit/**" />
+				<include name="com.verticon.tracker.editor/**" />
+				<include name="com.verticon.tracker.editor.ocl.enablement/**" />
+				<include name="com.verticon.tracker.help/**" />
+				<include name="com.verticon.tracker.logging/**" />
+				<include name="com.verticon.tracker.logging.log4j/**" />
+				<include name="com.verticon.tracker.logging.logback/**" />
+				<include name="com.verticon.tracker.logging.logback.config/**" />
+				<include name="com.verticon.tracker.ocl.interpreter/**" />
+				<include name="com.verticon.tracker.ocl.query/**" />
+				<include name="com.verticon.tracker.ocl.query.viewer/**" />
+				<include name="com.verticon.tracker.reader/**" />
+				<include name="com.verticon.tracker.reader.bluetooth/**" />
+				<include name="com.verticon.tracker.reader.comm/**" />
+				<include name="com.verticon.tracker.transaction.editor/**" />
+				<include name="com.verticon.tracker.validation.adapter/**" />
+				<include name="com.verticon.tracker.validation.core/**" />
+				<include name="com.verticon.tracker.views/**" />
+				<include name="net.sf.bluecove/**" />
+				<include name="org.eclipse.emf.ocl.examples.interpreter/**" />
+				
+				
+	         	<include name="com.verticon.tracker.export.wlic/**" />
+	         	<include name="com.verticon.tracker.fair/**" />
+	         	<include name="com.verticon.tracker.fair.edit/**" />
+	         	<include name="com.verticon.tracker.fair.editor/**" />
+	         	<include name="com.verticon.tracker.fair.editor.ocl.enablement/**" />
+	         	<include name="com.verticon.tracker.fair.poi/**" />
+	         	<include name="com.verticon.tracker.fair.transaction.editor/**" />
+	         	<include name="com.verticon.tracker.fair.validation/**" />
+	         	<include name="com.verticon.tracker.fair.views/**" />
+				 -->
+				<exclude name="*/bin/**" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: updateProductVersion                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="updateProductVersion">
+		
+		<property name="trackerVersion" 
+			value="${tracker.product.version}.v${DSTAMP}${TSTAMP}"/>
+
+		<replace file="${product}" token="0.0.0.qualifier" 
+			value="${trackerVersion}" />
+		
+		<replace 
+		    file="${buildDirectory}/plugins/com.verticon.tracker.product.desktop/about.mappings">
+		  <replacefilter 
+		    token="0.0.0" 
+		    value="${tracker.product.version}"/>
+		  <replacefilter 
+			token="qualifier" 
+			value="v${DSTAMP}${TSTAMP}"/>
+		</replace>
+		
+		<delete file="${buildDirectory}/product.version" failonerror="false"/>
+		<concat destfile="${buildDirectory}/product.version">trackerVersion=${trackerVersion}</concat>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: run.director                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="run.director">
+		<property name="eclipse.exec" value="${base}/eclipse/eclipse" />
+		<!--property name="eclipse.exec" value="/home/jconlon/eclipse-target-platforms/eclipse-modeling-ganymede-SRI-incubation-02/eclipse/eclipse" /-->
+
+		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
+		<exec executable="${eclipse.exec}" failonerror="false" timeout="900000">
+			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
+			<arg line="-nosplash" />
+			<arg line="--launcher.suppressErrors" />
+			<arg line="-consoleLog" />
+			<arg line="-flavor ${p2.flavor}" />
+			<arg line="-installIU ${p2.IU}" />
+			<arg line="-version ${p2.version}" />
+			<arg line="-p2.os ${p2.os}" />
+			<arg line="-p2.ws ${p2.ws}" />
+			<arg line="-p2.arch ${p2.arch}" />
+			<arg line="-roaming" />
+			<arg line="-profile TrackerProfile" />
+			<arg line="-profileProperties org.eclipse.update.install.features=true" />
+			<arg line="-metadataRepository file:${buildDirectory}/repo/ " />
+			<arg line="-artifactRepository file:${buildDirectory}/repo/" />
+			<arg line="-destination ${p2.director.install.path}" />
+			<arg line="-bundlepool ${p2.director.install.path}" />
+			<arg line="-debug" />
+			<arg line="-vmargs" />
+			<arg line="-Declipse.p2.data.area=${p2.director.install.path}/p2" />
+			
+			
+			<arg line="-Xmx512M"/>
+			<arg line="-XX:PermSize=512M"/>
+			<arg line="-XX:MaxPermSize=512m"/>
+			<!-- 
+	<arg line="-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8888" />
+			-->
+		</exec>
+
+		<!-- delete the metadata cache as well as the artifacts for unzipped bundles -->
+		<delete failonerror="false" includeEmptyDirs="true" 
+				dir="${p2.director.install.path}/p2/org.eclipse.equinox.p2.core/cache" />
+	</target>
+
+
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: postBuild.linux                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="postBuild.linux">
+		<antcall target="run.director">
+			<param name="p2.director.install.path" 
+					value="${buildDirectory}/result/tmp/eclipse"/>
+			<param name="p2.os" value="linux"/>
+			<param name="p2.ws" value="gtk"/>
+			<param name="p2.arch" value="x86"/>
+			<param name="p2.IU" value="${root.ui}" />
+			<param name="p2.version" value="${trackerVersion}"/>
+		</antcall>
+		
+		<move file="${buildDirectory}/result/tmp/eclipse" 
+			tofile="${buildDirectory}/result/tmp/tracker"/>
+		
+		<antcall target="add.repo.prefs"/>
+		
+		 <tar compression="gzip"
+			destfile="${buildDirectory}/result/${buildId}-p2-RCP-linux-${trackerVersion}.tar.gz">
+		  <tarfileset dir="${buildDirectory}/result/tmp" mode="755">
+		    <include name="tracker/tracker"/>
+		  </tarfileset>
+		  <tarfileset dir="${buildDirectory}/result/tmp">
+			    <include name="tracker/**"/>
+			    <exclude name="tracker/tracker"/>
+		  </tarfileset>
+		 
+		</tar>
+		
+		<delete dir="${buildDirectory}/result/tmp" />
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+	          target: postBuild.win                      
+	         - - - - - - - - - - - - - - - - - -->
+	<target name="postBuild.win">
+		
+		<antcall target="run.director">
+			<param name="p2.director.install.path" 
+					value="${buildDirectory}/result/tmp/eclipse"/>
+			<param name="p2.os" value="win32"/>
+			<param name="p2.ws" value="win32"/>
+			<param name="p2.arch" value="x86"/>
+			<param name="p2.IU" value="${root.ui}" />
+			<param name="p2.version" value="${trackerVersion}"/>
+		</antcall>
+		<move file="${buildDirectory}/result/tmp/eclipse" tofile="${buildDirectory}/result/tmp/tracker"/>
+		<antcall target="add.repo.prefs"/>
+		<zip 
+			  destfile="${buildDirectory}/result/${buildId}-p2-RCP-win32-${trackerVersion}.zip" 
+				basedir="${buildDirectory}/result/tmp" />
+		<delete dir="${buildDirectory}/result/tmp" />
+	</target>
+
+   
+
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: add.repo.prefs                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="add.repo.prefs">
+    	
+    	<property name="repo.perf.name1" 
+    		value="file\:_home_jconlon_eclipse-workspaces_tracker-TRUNK_com.verticon.tracker.builder_buildDirectory_repo"/>
+    	<property name="repo.perf.url1" 
+    	    		value="file\:/home/jconlon/eclipse-workspaces/tracker-TRUNK/com.verticon.tracker.builder/buildDirectory/repo"/>		   
+    	
+    	<property name="repo.perf.name2" 
+    	    		value="file\:_tmp_buckminster_com.verticon.tracker.update_0.1.0-buckminster_build_siterepo"/>
+    	<property name="repo.perf.url2" 
+    	    	    		value="file\:/tmp/buckminster/com.verticon.tracker.update_0.1.0-buckminster/build/siterepo"/>		   
+    	    
+    	
+    	<property name="repo.perf.name3" 
+    	    	    		value="http\:__www.verticon.com_Products_Tracker_features_siterepo"/>
+    	<property name="repo.perf.url3" 
+    	    	    	    value="http\://www.verticon.com/Products/Tracker/features/siterepo"/>	
+    	
+    	<property name="repo.perf.name4" 
+    	    	    	    		value="http\:__www.verticon.com_Products_Tracker_features_siterepo"/>
+    	<property name="repo.perf.url4" 
+    	    	    	    	    value="http\://www.verticon.com/Products/Tracker/features/siterepo"/>	
+    	    	    
+    	
+    	
+    	<property name="settingsDir" 
+    		location="${buildDirectory}/result/tmp/tracker/configuration/.settings"/>
+		<echoproperties></echoproperties>
+		<mkdir dir="${settingsDir}"/>
+		<copy todir="${settingsDir}">
+			<fileset dir="${builder}">
+				<include name="org.eclipse.equinox.p2.*.repository.prefs"/>
+			</fileset>
+		    <filterset>
+		      <filter token="NAME1" value="${repo.perf.name1}"/>
+		      <filter token="URL1" value="${repo.perf.url1}"/>
+		      <filter token="NAME2" value="${repo.perf.name2}"/>
+		      <filter token="URL2" value="${repo.perf.url2}"/>
+		    	
+		      <filter token="NAME3" value="${repo.perf.name3}"/>
+		      <filter token="URL3" value="${repo.perf.url3}"/>
+		      <filter token="NAME4" value="${repo.perf.name4}"/>
+		      <filter token="URL4" value="${repo.perf.url4}"/>
+		    </filterset>
+		</copy>
+    </target>
+	
+	<!-- ================================= 
+          target: test.repo.perfs              
+         ================================= -->
+    <target name="test.repo.perfs"  description="description">
+    	<property name="buildDirectory" 
+    	    		location="${basedir}/../buildDirectory"/>
+    	<property name="builder" 
+    	    	    		location="${basedir}/../buildConfiguration"/>
+    	<antcall target="add.repo.prefs"/>
+    	<eclipse.refreshLocal 
+    	    				resource="com.verticon.tracker.builder/buildDirectory/result"
+    	    				depth="infinite"
+    	    			/>
+    </target>
+
+
+	
+	
+	
+</project>
