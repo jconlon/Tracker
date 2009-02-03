@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <category-def name="Fair" label="Fair Editor Features">
+      <description>
+         Features associated with editing and manipulating Fair model documents.
+      </description>
+   </category-def>
+   <category-def name="Optional" label="Optional Features"/>
+   <category-def name="Premises" label="Premises Editor Features">
+      <description>
+         Features associated with editing and manipulating Premises model documents.
+      </description>
+   </category-def>
+   <category-def name="Core" label="Core Features"/>
+</site>
