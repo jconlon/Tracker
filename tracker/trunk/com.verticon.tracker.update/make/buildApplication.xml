@@ -1,0 +1,247 @@
+<project name="provisioning build" default="build.p2.app.site">
+
+	
+	
+
+
+	<!-- ================================= 
+		          target: build.p2.app.site   
+					Generating metadata for an existing Eclipse application that does not contain p2 metadata (-config argument)
+			 		 -config <path> 
+    					the path of an Eclipse application that is not p2-enabled
+			 		
+			 		 -exe <path> 
+					    the location of the application launcher executable 
+					-launcherConfig <path> 
+					    the path of the launcher configuration file (eclipse.ini) 
+					-features <path> 
+					    the location of features to generate metadata for 
+					-bundles <path> 
+					    the location of bundles to generate metadata for 
+					-base <path> 
+					    a base location containing a plugins/ and features/ directory 
+					-p2.os 
+					    the operating system of the application metadata is being generated for 
+					-site <path> 
+					    the URL of a site.xml file used to generator categories
+		    		              
+		    		              
+		    		-config D:/application/
+   		-metadataRepository file:D:/repository/
+   		-metadataRepositoryName "My Update Site"
+  		 -artifactRepository file:D:/repository/
+   		-artifactRepositoryName "My Artifacts"
+   		-publishArtifacts
+   		-publishArtifactRepository
+   -root my.application
+   -rootVersion 1.0.0
+   -compress
+   -noDefaultIUs
+   -vmargs -Xmx256m
+		          
+		     =================================   -->
+		<target name="build.p2.app.site" depends="init" 
+			 description="Generates P2 Metadata repository for a site">
+			
+			<property name="launcherConfig" value="${product.directory}/configuration/config.ini" />
+			
+			<echo>Product home is ${sp:product.directory} ; 
+				Output will go to Repo  ${sp:p2.repo}</echo>
+
+		
+			<exec executable="${eclipse.exec}" failonerror="false" timeout="900000">
+				<arg line="-application ${application}" />
+				<arg line="-config ${sp:product.directory}" />
+				
+				<arg line="-metadataRepository file:${sp:p2.repo}" />
+				<arg line="-artifactRepository file:${sp:p2.repo}" />
+				<arg line="-metadataRepositoryName &quot;${p2.repo.name}&quot;" />
+				<arg line="-artifactRepositoryName &quot;${p2.repo.name}&quot;" />		
+				<arg line="-publishArtifacts" />
+				<arg line="-publishArtifactRepository"/>					 
+				<arg line="-root ${rootName}"/>
+				<arg line="-rootVersion 0.3.1"/>
+				<arg line="-compress" />
+				<arg line="-noDefaultIUs" />
+				<arg line="-append" />
+				<arg line="-consoleLog" />
+				<arg line="-nosplash" />
+				<arg line="--launcher.suppressErrors" />
+				
+				<!--
+			    <arg line="-exe file:${product.directory}/tracker"/>
+				<arg line="-launcherConfig file:${launcherConfig}" />					   
+				<arg line="-base file:${config}" />
+				<arg line="" />
+				-p2.os 
+									    the operating system of the application metadata is being generated for
+				<arg line="-site ${site}" />
+				arg line="-rootVersion ${p2.generator.root.version}" />
+		    				<arg line="-source ${p2.generator.source}" />
+		    				<arg line="-root ${p2.generator.root}" 
+		    				
+		    				<arg line="-append" />
+		    				/-->
+				<arg line="-flavor ${p2.flavor}" />
+				<arg line="-vmargs -Zmx256m " />
+			</exec>
+			<echo>Created repo in  ${sp:p2.repo}</echo>
+		</target>
+
+
+	
+
+	<!-- ================================= 
+	          target: extract.product.from.site             
+	         ================================= -->
+		<target name="extract.product.from.site">
+			
+			<!--property file="${buildDirectory}/product.version"/-->
+			
+			<antcall target="postBuild.linux" />
+			<antcall target="postBuild.win" />
+			
+		</target>
+
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+	          target: init                      
+	         - - - - - - - - - - - - - - - - - -->
+	<target name="init">
+		<property name="application" 
+			value="org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
+	</target>
+
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: unzipsite                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="unzipsite">
+		<unzip dest="${updatesite}">
+			<fileset dir="${sp:input}">
+				<include name="**/*.zip" />
+				<exclude name="**/tmp*.zip" />
+			</fileset>
+		</unzip>
+	</target>
+
+
+	<!-- - - - - - - - - - - - - - - - - - 
+	          target: run.director                      
+	         - - - - - - - - - - - - - - - - - -->
+		<target name="run.director">
+			<property name="eclipse.exec" value="${base}/eclipse/eclipse" />
+			<!--property name="eclipse.exec" value="/home/jconlon/eclipse-target-platforms/eclipse-modeling-ganymede-SRI-incubation-02/eclipse/eclipse" /-->
+
+			<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
+			<exec executable="${eclipse.exec}" failonerror="false" timeout="900000">
+				<arg line="-application org.eclipse.equinox.p2.director.app.application" />
+				<arg line="-nosplash" />
+				<arg line="--launcher.suppressErrors" />
+				<arg line="-consoleLog" />
+				<arg line="-flavor ${p2.flavor}" />
+				<arg line="-installIU ${p2.IU}" />
+				<arg line="-p2.os ${p2.os}" />
+				<arg line="-p2.ws ${p2.ws}" />
+				<arg line="-p2.arch ${p2.arch}" />
+				<arg line="-roaming" />
+				<arg line="-profile TrackerProfile" />
+				<arg line="-profileProperties org.eclipse.update.install.features=true" />
+				<arg line="-metadataRepository ${p2.repo}" />
+				<arg line="-artifactRepository ${p2.repo}" />
+				<arg line="-destination ${sp:action.output}" />
+				<arg line="-bundlepool ${sp:action.output}" />
+				<arg line="-debug" />
+				<arg line="-vmargs" />
+				<arg line="-Declipse.p2.data.area=${p2.director.install.path}/p2" />
+				<arg line="-Xmx512M"/>
+				<arg line="-XX:PermSize=512M"/>
+				<arg line="-XX:MaxPermSize=512m"/>
+				<!-- 
+		<arg line="-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8888" />
+				-->
+			</exec>
+
+			<!-- delete the metadata cache as well as the artifacts for unzipped bundles -->
+			<delete failonerror="false" includeEmptyDirs="true" 
+					dir="${p2.director.install.path}/p2/org.eclipse.equinox.p2.core/cache" />
+		</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+	          target: postBuild.linux                      
+	         - - - - - - - - - - - - - - - - - -->
+		<target name="postBuild.linux">
+			<mkdir dir="${buckminster.temp}/result/tmp" />
+						
+			<antcall target="run.director">
+				<param name="p2.director.install.path" 
+						value="${buckminster.temp}/result/tmp/eclipse"/>
+				<param name="p2.os" value="linux"/>
+				<param name="p2.ws" value="gtk"/>
+				<param name="p2.arch" value="x86"/>
+				<param name="p2.IU" value="com.verticon.tracker.product.desktop" />
+				<param name="p2.repo" value="file:${p2.repo}"/>
+				
+			</antcall>
+			
+			<move file="${buckminster.temp}/result/tmp/eclipse" 
+				tofile="${buckminster.temp}/result/tmp/tracker"/>
+			
+			<antcall target="add.repo.prefs"/>
+			
+			 <tar compression="gzip"
+				destfile="${sp:action.output}/${buildId}-p2-RCP-linux-${trackerVersion}.tar.gz">
+			  <tarfileset dir="${buckminster.temp}/result/tmp" mode="755">
+			    <include name="tracker/tracker"/>
+			  </tarfileset>
+			  <tarfileset dir="${buckminster.temp}/result/tmp">
+				    <include name="tracker/**"/>
+				    <exclude name="tracker/tracker"/>
+			  </tarfileset>
+			 
+			</tar>
+			
+			<delete dir="${buckminster.temp}/result/tmp" />
+		</target>
+
+		<!-- - - - - - - - - - - - - - - - - - 
+		          target: postBuild.win                      
+		         - - - - - - - - - - - - - - - - - -->
+		<target name="postBuild.win">
+			<mkdir dir="${buildDirectory}/result/tmp" />
+						
+			<antcall target="run.director">
+				<param name="p2.director.install.path" 
+						value="${buildDirectory}/result/tmp/eclipse"/>
+				<param name="p2.os" value="win32"/>
+				<param name="p2.ws" value="win32"/>
+				<param name="p2.arch" value="x86"/>
+				<param name="p2.IU" value="com.verticon.tracker.editor.Tracker" />
+				<param name="p2.repo" value="file:${p2.repo}"/>
+			</antcall>
+			<move file="${buildDirectory}/result/tmp/eclipse" tofile="${buildDirectory}/result/tmp/tracker"/>
+			<antcall target="add.repo.prefs"/>
+			<zip 
+				  destfile="${buildDirectory}/result/${buildId}-p2-RCP-win32-${trackerVersion}.zip" 
+					basedir="${buildDirectory}/result/tmp" />
+			<delete dir="${buildDirectory}/result/tmp" />
+		</target>
+
+	   
+
+
+		<!-- - - - - - - - - - - - - - - - - - 
+	          target: add.repo.prefs                      
+	         - - - - - - - - - - - - - - - - - -->
+	    <target name="add.repo.prefs">
+	    	<property name="settingsDir" 
+	    		location="${buckminster.temp}/result/tmp/tracker/configuration/.settings"/>
+			<echoproperties></echoproperties>
+			<mkdir dir="${settingsDir}"/>
+			<copy todir="${settingsDir}">
+			<fileset dir="${buckminster.home}/make">
+				<include name="org.eclipse.equinox.p2.*.repository.prefs"/>
+			</fileset>
+			</copy>
+	    </target>
+</project>

@@ -1,0 +1,76 @@
+<project name="provisioning build" default="build.p2.site">
+
+
+	<!-- ================================= 
+	          target: generate.site.repo  
+				Generating metadata for a traditional Eclipse update site (-updateSite argument)
+		 		-updateSite <path> 
+		    		the path of a traditional update site to generate p2 metadata for 
+				
+				-site <path> 
+		    		the URL of a site.xml file used to generator categories 
+	     =================================   -->
+	<target name="build.p2.site" description="Generates P2 Metadata repository for a site">
+		<property name="updatesite" value="${sp:action.output}" />
+		<property name="site" value="file:${updatesite}/site.xml" />
+
+		<echo message="Embed a line break:${line.separator}" />
+		<echo>Eclipse is Running=${eclipse.running} from ${eclipse.exec} 
+	    		update site is ${sp:input}
+	    		output will go to ${updatesite}
+	    	</echo>
+
+		<echo>Site directory is  ${site.dir}</echo>
+		<antcall target="unzipsite" />
+		<exec executable="${eclipse.exec}" failonerror="false" timeout="900000">
+			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
+			<arg line="-updatesite ${updatesite}" />
+			<arg line="-site ${site}" />
+			<arg line="-metadataRepository file:${updatesite}" />
+			<arg line="-artifactRepository file:${updatesite}" />
+			<arg line="-metadataRepositoryName &quot;${p2.metadata.repo.name}&quot;" />
+			<arg line="-artifactRepositoryName &quot;${p2.artifact.repo.name}&quot;" />
+			<arg line="-noDefaultIUs" />
+			<arg line="-consoleLog" />
+			<arg line="-nosplash" />
+			<arg line="--launcher.suppressErrors" />
+
+			<!--
+			<arg line="-compress" />
+			arg line="-rootVersion ${p2.generator.root.version}" />
+	    				<arg line="-source ${p2.generator.source}" />
+	    				<arg line="-root ${p2.generator.root}" 
+	    				<arg line="-publishArtifacts" />
+	    				<arg line="-append" />
+	    				/-->
+			<arg line="-flavor ${p2.flavor}" />
+			<arg line="-vmargs -Zmx256m " />
+		</exec>
+		<echo>Created repo at ${updatesite} from ${sp:input}</echo>
+	</target>
+
+
+	<!-- ================================= 
+          target: clean.generic             
+         ================================= -->
+	<target name="clean.generic" description="Cleans the action.output directory">
+		<delete dir="${sp:action.output}" />
+		<echo>Deleted ${sp:action.output}</echo>
+	</target>
+
+
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: unzipsite                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="unzipsite">
+		<unzip dest="${updatesite}">
+			<fileset dir="${sp:input}">
+				<include name="**/*.zip" />
+				<exclude name="**/tmp*.zip" />
+			</fileset>
+		</unzip>
+	</target>
+
+
+</project>
