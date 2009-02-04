@@ -1,4 +1,4 @@
-<project name="provisioning build" default="build.p2.site">
+<project name="provisioning build" default="build.p2.oda.site">
 
 
 	<!-- ================================= 
@@ -10,29 +10,30 @@
 				-site <path> 
 		    		the URL of a site.xml file used to generator categories 
 	     =================================   -->
-	<target name="build.p2.site" description="Generates P2 Metadata repository for a site">
+	<target name="build.p2.oda.site" description="Generates P2 Metadata repository for a site">
 		<property name="updatesite" value="${sp:action.output}" />
-		<property name="site" value="file:${updatesite}/site.xml" />
-
-		<echo message="Embed a line break:${line.separator}" />
-		<echo>Eclipse is Running=${eclipse.running} from ${eclipse.exec} 
-	    		update site is ${sp:input}
-	    		output will go to ${updatesite}
-	    	</echo>
-
-		<echo>Site directory is  ${site.dir}</echo>
-		
-		<unzip dest="${updatesite}">
-					<fileset dir="${sp:input}">
-						<include name="**/*.zip" />
-						<exclude name="**/tmp*.zip" />
-					</fileset>
+		<property name="source.dir" location="${buckminster.temp}/unzipped"/>
+		<property name="source" location="${source.dir}/eclipse"/>
+		<mkdir dir="${source.dir}"/>
+	
+		<echoproperties></echoproperties>
+		<!--
+				Unzip the contents of ${oda.downloads.dir}/somezip
+				Set the source to the eclipse directory of the unziped file
+				source = /home/jconlon/eclipse-target-platforms/dtp-incubator-1.7/eclipse
+		-->
+		<unzip dest="${source.dir}">
+			<fileset dir="${oda.downloads.dir}">
+							<include name="**/*.zip" />
+			</fileset>
 		</unzip>
 		
 		<exec executable="${eclipse.exec}" failonerror="false" timeout="900000">
 			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
-			<arg line="-updatesite ${updatesite}" />
-			<arg line="-site ${site}" />
+			<arg line="-source ${source}" />
+			<arg line="-publishArtifacts" />
+			<arg line="-publishArtifactRepository" />
+			<arg line="-compress" />
 			<arg line="-metadataRepository file:${updatesite}" />
 			<arg line="-artifactRepository file:${updatesite}" />
 			<arg line="-metadataRepositoryName &quot;${p2.metadata.repo.name}&quot;" />
@@ -41,9 +42,7 @@
 			<arg line="-consoleLog" />
 			<arg line="-nosplash" />
 			<arg line="--launcher.suppressErrors" />
-			<arg line="-compress" />
 			<!--
-			
 			arg line="-rootVersion ${p2.generator.root.version}" />
 	    				<arg line="-source ${p2.generator.source}" />
 	    				<arg line="-root ${p2.generator.root}" 
@@ -53,17 +52,9 @@
 			<arg line="-flavor ${p2.flavor}" />
 			<arg line="-vmargs -Zmx256m " />
 		</exec>
-		<echo>Created repo at ${updatesite} from ${sp:input}</echo>
+		<echo>Created repo at ${updatesite} </echo>
 	</target>
 
-
-	<!-- ================================= 
-          target: clean.generic             
-         ================================= -->
-	<target name="clean.generic" description="Cleans the action.output directory">
-		<delete dir="${sp:action.output}" />
-		<echo>Deleted ${sp:action.output}</echo>
-	</target>
 
 
 </project>
