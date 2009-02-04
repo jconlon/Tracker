@@ -2,19 +2,20 @@
 <feature
       id="org.apache.poi"
       label="Poi Feature"
-      version="2.5.1"
-      provider-name="Apache Foundation">
+      version="2.5.1.qualifier"
+      provider-name="Apache Foundation"
+      plugin="org.apache.poi.branding">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description url="http://poi.apache.org/">
+      Apache POI - Java API To Access Microsoft Format Files
    </description>
 
    <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+      Copyright © 2002-2007 The Apache Software Foundation. All rights reserved.
    </copyright>
 
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
+   <license url="http://www.apache.org/foundation/licence-FAQ.html">
+      The POI project is OpenSource  and developed/distributed under the  Apache Software License. Unlike other licenses this license allows free open source development; however, it does not require you to release your source or use any particular license for your source. If you wish to contribute to POI (which you&apos;re very welcome and encouraged to do so) then you must agree to release the rights of your source to us under this license.
    </license>
 
    <plugin
@@ -23,5 +24,11 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
+   <plugin
+         id="org.apache.poi.branding"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
 
 </feature>
