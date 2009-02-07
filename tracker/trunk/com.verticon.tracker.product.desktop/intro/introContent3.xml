@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<introContent>
+  <extensionContent id="extra" name="Tracker" alt-style="css/swt.properties" style="css/sample.css" 
+  		  path="overview/@">
+  		  <group style-id="content-group" id="comverticontrackerproductdesktop-introLink-group">
+  		  <link label="Tracker Animal Information Desktop Preview" 
+  		     url="http://org.eclipse.ui.intro/showPage?id=trackerOverview" 
+    					  id="comverticontrackerproductdesktop-introLink" style-id="content-link">
+          		<text>Introduction to technologies used in the Tracker Livestock Information Desktop</text>
+          </link>
+          </group>
+       </extensionContent>
+     
+       <page id="trackerOverview" style="$theme$/html/overview.css" style-id="page">
+          <title style-id="intro-header">$introTitle$</title>
+          <group id="extra-group1" filteredFrom="swt"/>
+          <include path="overview/navigation-links"/>
+          <group id="trackerOverview-page-content">
+                <group id="content-header" label="Tracker Desktop Technology Introduction" filteredFrom="swt">
+                </group>
+                <text style-id="page-title" id="page-title" filteredFrom="html">Tracker Technologies</text>
+                <text style-id="page-description" id="page-description">These are the technologies and features offered by the Tracker Desktop.</text>
+    	        
+    	        <anchor id="additions"/>
+          </group>
+       </page>
+      
+</introContent>
