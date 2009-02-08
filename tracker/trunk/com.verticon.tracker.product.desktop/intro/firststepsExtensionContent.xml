@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<introContent>
+  	<extensionContent id="com.verticon.tracker.product.desktop.firststeps" 
+  		name="Tracker Updates" 
+  		alt-style="css/swt.properties" 
+  		style="css/sample.css"   
+		path="firststeps/@">
+  	   <group style-id="content-group" 
+  	          id="com.verticon.tracker.product.desktop.firststeps-group">
+       		<link style-id="content-link"  
+       			label="Provision Tracker Desktop" 
+       		  	url="http://org.eclipse.ui.intro/runAction?pluginId=org.eclipse.platform&amp;class=org.eclipse.platform.internal.LaunchUpdateIntroAction" 
+       		    id="updatelink">
+          		<text>Provision Tracker Desktop with new features or update it from the Verticon.com and Eclipse.org repositories</text>
+       		</link>
+       			
+       </group>
+  	</extensionContent>
+</introContent>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<introContent>
+  	<extensionContent id="com.verticon.tracker.product.desktop" 
+  		name="Whats New Tracker" 
+  		alt-style="css/whatsnew.properties" 
+  		style="css/sample.css" 
+  		path="whatsnew/@">
+  	   <group style-id="content-group" id="content-group">
+       		<link style-id="content-link" 
+       		label="Tracker" 
+       		url="http://org.eclipse.ui.intro/openBrowser?url=http://www.verticon.com/Products/Tracker/trac/" 
+       		id="comverticontrackerproductdesktop">
+          		<text>Find out the significant changes made to Tracker Desktop</text>
+       		</link>
+       </group>
+  	</extensionContent>
+</introContent>

@@ -108,12 +108,30 @@
             name="Intro Customization">
       </page>
    </extension>
+   
    <extension
          point="org.eclipse.ui.intro.configExtension">
       <configExtension
             configId="org.eclipse.ui.intro.universalConfig"
-            content="intro/introContent3.xml">
+            content="intro/overviewExtensionContent.xml">
       </configExtension>
+      
+      <configExtension
+            configId="org.eclipse.ui.intro.universalConfig"
+            content="intro/firststepsExtensionContent.xml">
+      </configExtension>
+      
+      <configExtension
+            configId="org.eclipse.ui.intro.universalConfig"
+            content="intro/whatsnewExtensionContent.xml">
+      </configExtension>
+      
+      <configExtension
+            configId="org.eclipse.ui.intro.universalConfig"
+            content="intro/whatsnewExtensionContent1.xml">
+      </configExtension>
+    
    </extension>
+ 
 
 </plugin>
