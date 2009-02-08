@@ -8,7 +8,14 @@
             file="toc.xml"
             primary="true">
       </toc>
-      
    </extension>
 
+ <extension
+         point="org.eclipse.ui.intro.configExtension">
+      <configExtension
+            configId="org.eclipse.ui.intro.universalConfig"
+            content="intro/overviewExtensionContent.xml">
+      </configExtension>
+    
+   </extension>
 </plugin>
