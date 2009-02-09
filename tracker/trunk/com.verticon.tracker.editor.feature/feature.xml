@@ -393,38 +393,18 @@ END OF TERMS AND CONDITIONS
    </license>
 
    <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.ocl.ecore"/>
-      <import plugin="com.verticon.tracker.logging.logback" version="0.9.11" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="org.eclipse.core.databinding" version="1.1.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.ui.console"/>
       <import plugin="org.eclipse.ui.intro"/>
-      <import plugin="org.eclipse.emf.validation"/>
       <import plugin="org.eclipse.jface.databinding"/>
-      <import plugin="org.eclipse.core.databinding.beans"/>
-      <import plugin="org.eclipse.emf.databinding"/>
-      <import plugin="org.eclipse.emf.databinding.edit"/>
       <import plugin="org.eclipse.osgi.services"/>
       <import plugin="org.eclipse.osgi"/>
-      <import plugin="org.eclipse.net4j.jms.api"/>
-      <import plugin="org.eclipse.core.runtime" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.core.resources" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecore.xmi" version="2.2.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.edit.ui" version="2.2.0" match="compatible"/>
       <import plugin="org.eclipse.ui.ide" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.workspace" version="1.0.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.transaction.ui" version="1.0.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.workspace.ui" version="1.0.0" match="compatible"/>
       <import plugin="org.eclipse.ui.console" version="3.1.100" match="compatible"/>
-      <import plugin="org.eclipse.core.expressions"/>
-      <import plugin="com.verticon.tracker.ocl.query" version="0.1.3" match="greaterOrEqual"/>
-      <import plugin="com.verticon.tracker.ocl.query.viewer" version="0.1.5" match="greaterOrEqual"/>
+      <import feature="com.verticon.tracker.ocl.query" version="0.1.4.qualifier"/>
+      <import feature="com.verticon.tracker.logging.logback" version="0.1.0.qualifier"/>
+      <import feature="com.verticon.tracker.base.dep" version="0.3.1.qualifier"/>
    </requires>
 
    <plugin
@@ -449,13 +429,6 @@ END OF TERMS AND CONDITIONS
          unpack="false"/>
 
    <plugin
-         id="com.verticon.tracker.logging"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="com.verticon.tracker.views"
          download-size="0"
          install-size="0"
@@ -463,21 +436,14 @@ END OF TERMS AND CONDITIONS
          unpack="false"/>
 
    <plugin
-         id="com.verticon.tracker.logging.logback"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="com.verticon.tracker.logging.logback.config"
+         id="com.verticon.tracker.transaction.editor"
          download-size="0"
          install-size="0"
          version="0.0.0"
-         fragment="true"
          unpack="false"/>
 
    <plugin
-         id="com.verticon.tracker.transaction.editor"
+         id="com.verticon.tracker.editor.ocl.enablement"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -492,13 +458,6 @@ END OF TERMS AND CONDITIONS
 
    <plugin
          id="com.verticon.tracker.validation.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.verticon.tracker.editor.ocl.enablement"
          download-size="0"
          install-size="0"
          version="0.0.0"
