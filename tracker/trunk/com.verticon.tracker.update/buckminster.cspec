@@ -69,10 +69,25 @@ should be in a shared site or have it's own site by then.</cs:documentation>
                 <cs:property key="buildFile" value="make/build.xml"/>
                 <cs:property key="targets" value="clean.generic"/>
             </cs:actorProperties>
-            <cs:prerequisites>
-                <cs:attribute name="clean.site"/>
-            </cs:prerequisites>
             <cs:products alias="action.output" base="siterepo/"/>
+        </cs:public>
+        <cs:public name="clean.site" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="make/build.xml"/>
+                <cs:property key="targets" value="clean.generic"/>
+            </cs:actorProperties>
+            <cs:products alias="action.output" base="site/"/>
+        </cs:public>
+        <cs:public name="deploy.s3.site" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="make/buildNetworkRepo.xml"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="repo.features" value="${buckminster.output}/siterepo/"/>
+                <cs:property key="repo.oda" value="${buckminster.output}/siteodarepo/"/>
+                <cs:property key="repo.product" value="${workspace.root}/com.verticon.tracker.builder/buildDirectory/repo/"/>
+            </cs:properties>
+            <cs:products alias="action.output" base="p2Repositories/"/>
         </cs:public>
         <cs:private name="build.p2.app.site" actor="ant">
             <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Not functioning needs rework.  Use the com.verticon.tracker.builder pde build
@@ -106,14 +121,7 @@ to build tracker products.</cs:documentation>
                 <cs:attribute name="site.rootFiles" alias="rootFiles"/>
                 <cs:attribute name="site.template" alias="template"/>
             </cs:prerequisites>
-            <cs:products alias="action.output" base="site/"/>
-        </cs:private>
-        <cs:private name="clean.site" actor="ant">
-            <cs:actorProperties>
-                <cs:property key="buildFile" value="make/build.xml"/>
-                <cs:property key="targets" value="clean.generic"/>
-            </cs:actorProperties>
-            <cs:products alias="action.output" base="site/"/>
+            <cs:products alias="action.output" base="${buckminster.output}/site/" fileCount="1" upToDatePolicy="COUNT"/>
         </cs:private>
         <cs:private name="extract.product.from.site" actor="ant">
             <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Not yet implemented</cs:documentation>

@@ -1,0 +1,31 @@
+<project name="provisioning build" default="deploy.p2.repositories">
+
+
+	<!-- ================================= 
+	          target: deploy.p2.repositories  
+				
+	     =================================   -->
+	<target name="deploy.p2.repositories" description="Copies all repos to a common folder for synchronization with a remote site">
+		
+		<echoproperties></echoproperties>
+		
+		<copy todir="${user.dir}/p2Repositories/product">
+			<fileset dir="${repo.product}"/>
+		</copy>
+		
+		<copy todir="${user.dir}/p2Repositories/features">
+					<fileset dir="${repo.features}"/>
+		</copy>
+		
+		<copy todir="${user.dir}/p2Repositories/oda">
+				    <fileset dir="${repo.oda}"/>
+		</copy>
+		
+		 <zip destfile="${sp:action.output}"
+		       basedir="${user.dir}/p2Repositories"
+		  />
+	</target>
+
+
+
+</project>
