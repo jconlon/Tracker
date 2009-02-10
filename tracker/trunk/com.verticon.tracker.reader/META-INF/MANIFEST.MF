@@ -19,4 +19,4 @@ Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)",
  org.slf4j;version="[1.5.5,1.6.0)"
 Export-Package: com.verticon.tracker.reader;version="0.1.0",
  com.verticon.tracker.reader.views;version="0.1.0"
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

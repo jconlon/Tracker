@@ -31,4 +31,4 @@ Import-Package: at.bestsolution.dataforms.util.viewers,
  org.slf4j;version="[1.5.5,1.6.0)"
 Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.edit.ui
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
