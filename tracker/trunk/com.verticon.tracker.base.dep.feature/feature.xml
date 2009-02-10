@@ -1,36 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="com.verticon.tracker.base.dep.feature"
-      label="Base Tracker Fair Feature"
-      version="0.3.1"
+      id="com.verticon.tracker.base.dep"
+      label="Tracker Base Dependencies Features"
+      version="0.3.1.qualifier"
       provider-name="Verticon, Inc.">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description>
+      Set of feature dependencies for the Core Tracker Editor Feature.
    </description>
 
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+   <copyright>
+      See copyright notices associated with individual features.
    </copyright>
 
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
+   <license>
+      See license agreements associated with individual features.
    </license>
-
-   <includes
-         id="gnu.io.rxtx"
-         version="0.0.0"/>
 
    <includes
          id="org.eclipse.emf.ecore"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.ecore.edit"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.emf.ecore.editor"
+         id="org.eclipse.emf.common"
          version="0.0.0"/>
 
    <includes
@@ -42,19 +34,27 @@
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.query"
+         id="org.eclipse.emf.common.ui"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.query.doc"
+         id="org.eclipse.emf.databinding"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.query.ocl"
+         id="org.eclipse.emf.databinding.edit"
          version="0.0.0"/>
 
    <includes
          id="org.eclipse.emf.transaction"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.ocl"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.emf.ocl"
          version="0.0.0"/>
 
    <includes
@@ -66,66 +66,24 @@
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.ocl"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.emf.ocl.doc"
-         version="0.0.0"/>
-
-   <includes
          id="org.eclipse.emf.workspace"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.emf.workspace.doc"
+         id="org.eclipse.emf.query"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.ocl"
+         id="org.eclipse.emf.query.ocl"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.ocl.doc"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.emf.common"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.emf.common.ui"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.emf"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.emf.validation.doc"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.help"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.platform"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.ocl.uml"
+         id="org.eclipse.emf.ecore.edit"
          version="0.0.0"/>
 
    <requires>
       <import plugin="org.eclipse.osgi"/>
       <import plugin="org.eclipse.osgi.services"/>
-      <import plugin="org.eclipse.emf.ecore" version="2.4.0" match="compatible"/>
-      <import plugin="org.eclipse.core.runtime" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecore" version="2.2.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecore.xmi" version="2.4.0" match="compatible"/>
-      <import plugin="org.eclipse.uml2.common" version="1.2.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.mapping.ecore2xml" version="2.2.0" match="compatible"/>
    </requires>
 
    <plugin
@@ -158,20 +116,6 @@
 
    <plugin
          id="javax.servlet"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.uml2.common"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.uml2.uml"
          download-size="0"
          install-size="0"
          version="0.0.0"
