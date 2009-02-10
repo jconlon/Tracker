@@ -78,7 +78,7 @@ should be in a shared site or have it's own site by then.</cs:documentation>
             </cs:actorProperties>
             <cs:products alias="action.output" base="site/"/>
         </cs:public>
-        <cs:public name="deploy.s3.site" actor="ant">
+        <cs:public name="deploy.p2.repositories" actor="ant">
             <cs:actorProperties>
                 <cs:property key="buildFile" value="make/buildNetworkRepo.xml"/>
             </cs:actorProperties>
