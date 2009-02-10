@@ -10,7 +10,7 @@
   		  			id="comverticontrackerproductdesktop-introLink-group">
   		  		<link 	label="Tracker Livestock Information Desktop" 
   		     		  	url="http://org.eclipse.ui.intro/showPage?id=trackerOverview" 
-    					id="comverticontrackerproductdesktop" 
+    					id="comverticontrackerproductdesktop-overview" 
     					style-id="content-link">
           			<text>Find out about the Tracker Livestock Information Desktop Preview</text>
           		</link>
