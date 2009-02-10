@@ -429,28 +429,30 @@
          - - - - - - - - - - - - - - - - - -->
     <target name="add.repo.prefs">
     	
+    	<!-- Verticon repo for Tracker Features -->
     	<property name="repo.perf.name1" 
-    		value="file\:_home_jconlon_eclipse-workspaces_tracker-TRUNK_com.verticon.tracker.builder_buildDirectory_repo"/>
+    	    	    		value="http\:__www.verticon.com_Products_Tracker_p2Repositories_features"/>
     	<property name="repo.perf.url1" 
-    	    		value="file\:/home/jconlon/eclipse-workspaces/tracker-TRUNK/com.verticon.tracker.builder/buildDirectory/repo"/>		   
+    	    	    	    value="http\://www.verticon.com/Products/Tracker/p2Repositories/features"/>	
     	
+    	<!-- Verticon repo for Tracker Products -->
     	<property name="repo.perf.name2" 
-    	    		value="file\:_tmp_buckminster_com.verticon.tracker.update_0.1.0-buckminster_build_siterepo"/>
+    	    	    	    value="http\:__www.verticon.com_Products_Tracker_p2Repositories_product"/>
     	<property name="repo.perf.url2" 
-    	    	    		value="file\:/tmp/buckminster/com.verticon.tracker.update_0.1.0-buckminster/build/siterepo"/>		   
-    	    
-    	
+    	    	    	    value="http\://www.verticon.com/Products/Tracker/p2Repositories/product"/>	
+    	    	   
+    	<!-- Verticon repo of Ecore ODA Enablement -->
     	<property name="repo.perf.name3" 
-    	    	    		value="http\:__www.verticon.com_Products_Tracker_features_siterepo"/>
+    	    	    	    		value="http\:__www.verticon.com_Products_Tracker_p2Repositories_oda"/>
     	<property name="repo.perf.url3" 
-    	    	    	    value="http\://www.verticon.com/Products/Tracker/features/siterepo"/>	
+    	    	    	    	    value="http\://www.verticon.com/Products/Tracker/p2Repositories/oda"/>	
     	
+    	<!--  repo for DTP -->
     	<property name="repo.perf.name4" 
-    	    	    	    		value="http\:__www.verticon.com_Products_Tracker_features_siterepo"/>
+    	    		value="http\:__download.eclipse.org_datatools_updates"/>
     	<property name="repo.perf.url4" 
-    	    	    	    	    value="http\://www.verticon.com/Products/Tracker/features/siterepo"/>	
+    	    	    		value="http\://download.eclipse.org/datatools/updates"/>		   
     	    	    
-    	
     	
     	<property name="settingsDir" 
     		location="${buildDirectory}/result/tmp/tracker/configuration/.settings"/>
@@ -463,11 +465,13 @@
 		    <filterset>
 		      <filter token="NAME1" value="${repo.perf.name1}"/>
 		      <filter token="URL1" value="${repo.perf.url1}"/>
+		    	
 		      <filter token="NAME2" value="${repo.perf.name2}"/>
 		      <filter token="URL2" value="${repo.perf.url2}"/>
 		    	
 		      <filter token="NAME3" value="${repo.perf.name3}"/>
 		      <filter token="URL3" value="${repo.perf.url3}"/>
+		    	
 		      <filter token="NAME4" value="${repo.perf.name4}"/>
 		      <filter token="URL4" value="${repo.perf.url4}"/>
 		    </filterset>
