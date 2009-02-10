@@ -400,11 +400,24 @@ END OF TERMS AND CONDITIONS
       <import plugin="org.eclipse.jface.databinding"/>
       <import plugin="org.eclipse.osgi.services"/>
       <import plugin="org.eclipse.osgi"/>
-      <import plugin="org.eclipse.ui.ide" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.ui.console" version="3.1.100" match="compatible"/>
-      <import feature="com.verticon.tracker.ocl.query" version="0.1.4.qualifier"/>
-      <import feature="com.verticon.tracker.logging.logback" version="0.1.0.qualifier"/>
-      <import feature="com.verticon.tracker.base.dep" version="0.3.1.qualifier"/>
+      <import feature="com.verticon.tracker.ocl.query"/>
+      <import feature="com.verticon.tracker.logging.logback"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.ocl.ecore"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.eclipse.core.databinding"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.emf.validation"/>
+      <import plugin="org.eclipse.core.databinding.beans"/>
+      <import plugin="org.eclipse.core.expressions"/>
+      <import plugin="org.eclipse.emf.databinding"/>
+      <import plugin="org.eclipse.emf.databinding.edit"/>
+      <import plugin="org.eclipse.emf.transaction.ui"/>
+      <import plugin="org.eclipse.emf.workspace"/>
+      <import plugin="org.eclipse.emf.workspace.ui"/>
+      <import plugin="org.eclipse.emf.ecore"/>
    </requires>
 
    <plugin
