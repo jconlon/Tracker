@@ -82,13 +82,13 @@
      <product
            application="org.eclipse.ui.ide.workbench"
            description="%product.description.0"
-           name="%product.name.0">
+           name="Tracker Animal Information Platform">
         <property
               name="windowImages"
               value="icons/verticon32.gif"/>
         <property
               name="aboutText"
-              value="Tracker Animal Information Platform&#x0A;Version: {0}&#x0A;&#x0A;(c) Copyright Verticon, Inc. 2008.  All rights reserved. &#x0A;&#x0A;Visit http:/www.verticon.com&#x0A;&#x0A;Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and used with other Eclipsr (3.4.1) based offerings."/>
+              value="Tracker Animal Information Platform&#x0A;Version: {0}&#x0A;Build id: {1}&#x0A;&#x0A;(c) Copyright Verticon, Inc. 2008.  All rights reserved. &#x0A;&#x0A;Visit http:/www.verticon.com&#x0A;&#x0A;Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and used with other Eclipsr (3.4.1) based offerings."/>
         <property
               name="aboutImage"
               value="icons/tracker_lg.gif"/>
@@ -120,6 +120,10 @@
         <property
               name="introDescription-overview"
               value="Tracker overview description here....">
+        </property>
+        <property
+              name="introBrandingImage"
+              value="product:icons/verticon32.jpg">
         </property>
      </product>
   </extension>
