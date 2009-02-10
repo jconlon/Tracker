@@ -1,5 +1,11 @@
 #Mon Jan 26 13:31:00 CST 2009
-#repositories/file\:_home_jconlon_eclipse-workspaces_tracker-TRUNK_com.verticon.tracker.builder_buildDirectory_repo/url=file\:/home/jconlon/eclipse-workspaces/tracker-TRUNK/com.verticon.tracker.builder/buildDirectory/repo
+#testing repo for Products
+repositories/file\:_home_jconlon_p2Repositories_product/url=file\:/home/jconlon/p2Repositories/product
+#testing repo for Features
+repositories/file\:_home_jconlon_p2Repositories_features/url=file\:/home/jconlon/p2Repositories/features
+#testing repo for ODA Feature
+repositories/file\:_home_jconlon_p2Repositories_oda/url=file\:/home/jconlon/p2Repositories/oda
+
 repositories/@NAME1@/url=@URL1@
 repositories/@NAME2@/url=@URL2@
 repositories/@NAME3@/url=@URL3@
