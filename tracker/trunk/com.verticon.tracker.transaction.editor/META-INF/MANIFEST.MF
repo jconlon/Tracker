@@ -14,9 +14,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.emf.ecore.xmi;bundle-version="[2.2.0,3.0.0)";visibility:=reexport,
  org.eclipse.emf.edit.ui;bundle-version="[2.2.0,3.0.0)";visibility:=reexport,
  org.eclipse.ui.ide;bundle-version="[3.2.0,4.0.0)";visibility:=reexport,
- org.eclipse.emf.workspace;bundle-version="[1.0.0,2.0.0)",
  org.eclipse.emf.transaction.ui;bundle-version="[1.0.0,2.0.0)",
- org.eclipse.emf.workspace.ui;bundle-version="[1.0.0,2.0.0)",
  org.eclipse.ui.console;bundle-version="[3.1.100,4.0.0)"
 Bundle-ActivationPolicy: lazy
 Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)",
@@ -25,6 +23,9 @@ Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)",
  com.verticon.tracker.editor.presentation;version="[0.1.0,1.0.0)",
  com.verticon.tracker.editor.util;version="[0.1.0,1.0.0)",
  com.verticon.tracker.util;version="[0.1.0,1.0.0)",
+ org.eclipse.emf.workspace,
+ org.eclipse.emf.workspace.ui.actions,
+ org.eclipse.emf.workspace.util,
  org.osgi.service.event;version="1.1.0",
  org.slf4j;version="[1.5.5,1.6.0)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
