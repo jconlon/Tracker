@@ -299,20 +299,13 @@ POSSIBILITY OF SUCH DAMAGES.
    </license>
 
    <requires>
-      <import feature="com.verticon.tracker.editor" version="0.3.0"/>
-      <import feature="com.verticon.tracker.editor" version="0.3.0"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="com.verticon.tracker"/>
       <import plugin="org.eclipse.ocl.ecore"/>
-      <import plugin="com.verticon.tracker.logging.logback"/>
       <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="com.verticon.tracker.edit"/>
-      <import plugin="org.apache.poi"/>
       <import plugin="org.eclipse.emf.validation"/>
       <import plugin="org.eclipse.ui" version="3.4.1" match="greaterOrEqual"/>
-      <import plugin="com.verticon.tracker.validation.adapter"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.core.databinding"/>
       <import plugin="org.eclipse.emf.databinding"/>
@@ -322,9 +315,7 @@ POSSIBILITY OF SUCH DAMAGES.
       <import plugin="org.eclipse.osgi.services"/>
       <import plugin="org.eclipse.emf.workspace"/>
       <import plugin="org.eclipse.emf.transaction.ui"/>
-      <import plugin="com.verticon.tracker.transaction.editor"/>
-      <import plugin="com.verticon.tracker.ocl.query" version="0.1.3" match="greaterOrEqual"/>
-      <import plugin="com.verticon.tracker.ocl.query.viewer" version="0.1.5" match="greaterOrEqual"/>
+      <import feature="com.verticon.tracker.editor" version="0.3.1" match="compatible"/>
    </requires>
 
    <plugin
