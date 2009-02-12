@@ -9,7 +9,6 @@
         <cs:dependency name="com.verticon.tracker.help" componentType="eclipse.feature"/>
         <cs:dependency name="com.verticon.tracker.logging.logback" componentType="eclipse.feature"/>
         <cs:dependency name="com.verticon.tracker.ocl.query" componentType="eclipse.feature"/>
-        <cs:dependency name="com.verticon.tracker.product.desktop" componentType="eclipse.feature"/>
         <cs:dependency name="com.verticon.tracker.reader" componentType="eclipse.feature"/>
         <cs:dependency name="org.apache.poi" componentType="eclipse.feature"/>
     </cs:dependencies>
@@ -22,7 +21,7 @@
         <cs:private name="site.template" path="site.xml"/>
     </cs:artifacts>
     <cs:actions>
-        <cs:public name="build.p2.oda.site" actor="ant">
+        <cs:private name="build.p2.oda.site" actor="ant">
             <cs:documentation xmlns="http://www.w3.org/1999/xhtml">This action is a workaround to create an update site for the org.eclipse.datatools.enablement.ecore 
 feature.
 
@@ -36,11 +35,11 @@ should be in a shared site or have it's own site by then.</cs:documentation>
                 <cs:property key="oda.downloads.dir" value="${buckminster.home}/downloads"/>
                 <cs:property key="p2.artifact.repo.name" value="Ecore ODA Enablement Artifacts"/>
                 <cs:property key="p2.flavor" value="tracker"/>
-                <cs:property key="p2.metadata.repo.name" value="EDA ODA Enablement Updates"/>
+                <cs:property key="p2.metadata.repo.name" value="Ecore ODA Enablement Updates"/>
             </cs:properties>
             <cs:products alias="action.output" base="siteodarepo/"/>
-        </cs:public>
-        <cs:public name="build.p2.site" actor="ant">
+        </cs:private>
+        <cs:private name="build.p2.site" actor="ant">
             <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Builds a p2 repository.</cs:documentation>
             <cs:actorProperties>
                 <cs:property key="buildFile" value="make/build.xml"/>
@@ -55,57 +54,6 @@ should be in a shared site or have it's own site by then.</cs:documentation>
                 <cs:attribute name="build.site"/>
             </cs:prerequisites>
             <cs:products alias="action.output" base="siterepo/"/>
-        </cs:public>
-        <cs:public name="clean.p2.oda.site" actor="ant">
-            <cs:actorProperties>
-                <cs:property key="buildFile" value="make/build.xml"/>
-                <cs:property key="targets" value="clean.generic"/>
-            </cs:actorProperties>
-            <cs:products alias="action.output" base="siteodarepo/"/>
-        </cs:public>
-        <cs:public name="clean.p2.site" actor="ant">
-            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">cleans the repo and the site directories</cs:documentation>
-            <cs:actorProperties>
-                <cs:property key="buildFile" value="make/build.xml"/>
-                <cs:property key="targets" value="clean.generic"/>
-            </cs:actorProperties>
-            <cs:products alias="action.output" base="siterepo/"/>
-        </cs:public>
-        <cs:public name="clean.site" actor="ant">
-            <cs:actorProperties>
-                <cs:property key="buildFile" value="make/build.xml"/>
-                <cs:property key="targets" value="clean.generic"/>
-            </cs:actorProperties>
-            <cs:products alias="action.output" base="site/"/>
-        </cs:public>
-        <cs:public name="deploy.p2.repositories" actor="ant">
-            <cs:actorProperties>
-                <cs:property key="buildFile" value="make/buildNetworkRepo.xml"/>
-            </cs:actorProperties>
-            <cs:properties>
-                <cs:property key="repo.features" value="${buckminster.output}/siterepo/"/>
-                <cs:property key="repo.oda" value="${buckminster.output}/siteodarepo/"/>
-                <cs:property key="repo.product" value="${workspace.root}/com.verticon.tracker.builder/buildDirectory/repo/"/>
-            </cs:properties>
-            <cs:products alias="action.output" base="p2Repositories/"/>
-        </cs:public>
-        <cs:private name="build.p2.app.site" actor="ant">
-            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Not functioning needs rework.  Use the com.verticon.tracker.builder pde build
-to build tracker products.</cs:documentation>
-            <cs:actorProperties>
-                <cs:property key="buildFile" value="make/buildApplication.xml"/>
-            </cs:actorProperties>
-            <cs:properties>
-                <cs:property key="eclipse.exec" value="${eclipse.home}/eclipse"/>
-                <cs:property key="p2.flavor" value="tracker"/>
-                <cs:property key="p2.repo.name" value="Tracker Product Updates"/>
-                <cs:property key="rootName" value="com.verticon.tracker.product.desktop.application"/>
-            </cs:properties>
-            <cs:prerequisites>
-                <cs:attribute name="build.p2.site" alias="p2.repo"/>
-                <cs:attribute name="create.com.verticon.tracker.product.desktop.application" alias="product.directory" component="com.verticon.tracker.product.desktop"/>
-            </cs:prerequisites>
-            <cs:products alias="action.output" base="apprepo/"/>
         </cs:private>
         <cs:private name="build.site" actor="ant">
             <cs:actorProperties>
@@ -123,18 +71,70 @@ to build tracker products.</cs:documentation>
             </cs:prerequisites>
             <cs:products alias="action.output" base="${buckminster.output}/site/" fileCount="1" upToDatePolicy="COUNT"/>
         </cs:private>
-        <cs:private name="extract.product.from.site" actor="ant">
-            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Not yet implemented</cs:documentation>
+        <cs:private name="clean.deployed.repo" actor="ant">
             <cs:actorProperties>
                 <cs:property key="buildFile" value="make/build.xml"/>
+                <cs:property key="targets" value="clean.generic"/>
             </cs:actorProperties>
-            <cs:prerequisites>
-                <cs:attribute name="build.p2.app.site" alias="p2.repo"/>
-            </cs:prerequisites>
-            <cs:products alias="action.output" base="result/"/>
+            <cs:products alias="action.output" base="${user.dir}/p2Repositories/"/>
+        </cs:private>
+        <cs:private name="clean.p2.oda.site" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="make/build.xml"/>
+                <cs:property key="targets" value="clean.generic"/>
+            </cs:actorProperties>
+            <cs:products alias="action.output" base="siteodarepo/"/>
+        </cs:private>
+        <cs:private name="clean.p2.site" actor="ant">
+            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">cleans the repo and the site directories</cs:documentation>
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="make/build.xml"/>
+                <cs:property key="targets" value="clean.generic"/>
+            </cs:actorProperties>
+            <cs:products alias="action.output" base="siterepo/"/>
+        </cs:private>
+        <cs:private name="clean.site" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="make/build.xml"/>
+                <cs:property key="targets" value="clean.generic"/>
+            </cs:actorProperties>
+            <cs:products alias="action.output" base="site/"/>
+        </cs:private>
+        <cs:private name="deploy.p2.repositories" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="make/buildLocalRepo.xml"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="repo.features" value="${buckminster.output}/siterepo/"/>
+                <cs:property key="repo.oda" value="${buckminster.output}/siteodarepo/"/>
+            </cs:properties>
+            <cs:products alias="action.output" base="${user.dir}/s3/Tracker/p2/">
+                <cs:private name="features" base="${user.dir}/s3/Tracker/p2/"/>
+                <cs:private name="oda" base="${user.dir}/s3/Tracker/p2/"/>
+            </cs:products>
         </cs:private>
     </cs:actions>
     <cs:groups>
+        <cs:public name="buckminster.clean">
+            <cs:attribute name="clean.deployed.repo"/>
+            <cs:attribute name="clean.p2.oda.site"/>
+            <cs:attribute name="clean.p2.site"/>
+            <cs:attribute name="clean.site"/>
+            <cs:attribute name="buckminster.clean" component="com.verticon.tracker.editor"/>
+            <cs:attribute name="buckminster.clean" component="com.verticon.tracker.export.wlic"/>
+            <cs:attribute name="buckminster.clean" component="com.verticon.tracker.fair.editor"/>
+            <cs:attribute name="buckminster.clean" component="com.verticon.tracker.fair.poi"/>
+            <cs:attribute name="buckminster.clean" component="com.verticon.tracker.help"/>
+            <cs:attribute name="buckminster.clean" component="com.verticon.tracker.logging.logback"/>
+            <cs:attribute name="buckminster.clean" component="com.verticon.tracker.ocl.query"/>
+            <cs:attribute name="buckminster.clean" component="com.verticon.tracker.reader"/>
+            <cs:attribute name="buckminster.clean" component="org.apache.poi"/>
+        </cs:public>
+        <cs:public name="build-and-deploy.repositories">
+            <cs:attribute name="build.p2.oda.site"/>
+            <cs:attribute name="build.p2.site"/>
+            <cs:attribute name="deploy.p2.repositories"/>
+        </cs:public>
         <cs:private name="Core">
             <cs:attribute name="feature.jars" component="com.verticon.tracker.logging.logback"/>
             <cs:attribute name="feature.jars" component="com.verticon.tracker.ocl.query"/>
