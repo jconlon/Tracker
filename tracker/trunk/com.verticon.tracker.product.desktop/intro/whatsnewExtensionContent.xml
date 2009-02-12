@@ -8,9 +8,9 @@
   	   <group style-id="content-group" id="content-group">
        		<link style-id="content-link" 
        		label="Tracker" 
-       		url="http://org.eclipse.ui.intro/openBrowser?url=http://www.verticon.com/Products/Tracker/trac/" 
+       		url="http://org.eclipse.ui.intro/openBrowser?url=http://public.resources.verticon.com.s3.amazonaws.com/Tracker/issues/query.html" 
        		id="comverticontrackerproductdesktop">
-          		<text>Find out the significant changes made to Tracker Desktop</text>
+          	  <text>Find out the significant changes made to Tracker Desktop</text>
        		</link>
        </group>
   	</extensionContent>
