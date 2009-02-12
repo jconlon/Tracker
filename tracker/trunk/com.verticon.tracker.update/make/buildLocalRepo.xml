@@ -9,16 +9,6 @@
 		<echoproperties></echoproperties>
 		
 		<property name="repo" location="${sp:action.output}"/>
-
-		<mkdir dir="${repo}"/>
-		
-		<delete dir="${repo}"/>
-		
-		<!--  Handle product in the com.verticon.tracker.builder
-		<copy todir="${repo}/product">
-			<fileset dir="${repo.product}"/>
-		</copy>
-		-->
 		
 		<copy todir="${repo}/features">
 					<fileset dir="${repo.features}"/>
