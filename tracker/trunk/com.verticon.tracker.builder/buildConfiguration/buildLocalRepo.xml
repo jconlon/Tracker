@@ -44,12 +44,14 @@
     	<echo>Deleted ${sp:action.output}</echo>
     	
     	<!-- loosing permissions -->
-    	<untar dest="${sp:action.output}">
+    	<untar dest="${sp:action.output}../">
     	    <fileset dir="${result}">
     	        <include name="**/*.tar"/>
     	        <exclude name="**/*.zip"/>
     	    </fileset>
     	</untar>
+    	
+    	<chmod file="${sp:action.output}/tracker" perm="700"/>
     </target>
 
 	<!-- ================================= 
