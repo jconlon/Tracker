@@ -14,6 +14,13 @@ repositories/http\:__public.resources.verticon.com.s3.amazonaws.com_Tracker_p2_p
 repositories/http\:__public.resources.verticon.com.s3.amazonaws.com_Tracker_p2_product_/enabled=false
 repositories/http\:__download.eclipse.org_datatools_updates/url=http\://download.eclipse.org/datatools/updates/
 repositories/http\:__download.eclipse.org_datatools_updates/enabled=true
+
+repositories/http\:__rxtx.qbang.org_eclipse/url=http\://rxtx.qbang.org/eclipse/
+repositories/http\:__rxtx.qbang.org_eclipse/enabled=true
+
+repositories/http\:__www.rxtx.org_eclipse/url=http\://www.rxtx.org/eclipse/
+repositories/http\:__www.rxtx.org_eclipse/enabled=false
+
 eclipse.preferences.version=1
 
 
