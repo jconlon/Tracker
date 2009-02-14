@@ -6,6 +6,7 @@
 	<dependencies>
         <dependency name="com.verticon.tracker.base.dep" componentType="eclipse.feature"/>
         <dependency name="com.verticon.tracker.product.desktop" componentType="eclipse.feature"/>
+        <dependency name="com.verticon.tracker.update" componentType="buckminster"/>
     </dependencies>
 	<generators>
 		<!-- Place your Generators here -->
@@ -14,18 +15,57 @@
 		<!-- Place your Artifacts here -->
 	</artifacts>
 	<actions>
-		<public name="extract.p2.product" actor="ant">
-            <actorProperties>
-                <property key="buildFile" value="buildConfiguration/customTargets.xml"/>
-            </actorProperties>
-            <properties>
-	           <property key="base" value="/home/jconlon/eclipse-target-platforms/eclipse-modeling-ganymede-SRI-incubation-02"/>
-                <property key="buildDirectory" value="${buckminster.home}buildDirectory"/>
-                <property key="buildId" value="tracker"/>
-                <property key="builder" value="${buckminster.home}buildConfiguration"/>
-                <property key="p2.flavor" value="tracker"/>
-            </properties>
-        </public>
+	     <public name="clean.product.repo" actor="ant">
+	            <actorProperties>
+	                <property key="buildFile" value="buildConfiguration/buildLocalRepo.xml"/>
+	            </actorProperties>
+	            <products alias="action.output" base="${user.dir}/s3/Tracker/p2/product/"/>
+	     </public>
+	     <public name="deploy.product.repo" actor="ant">
+	            <actorProperties>
+	                <property key="buildFile" value="buildConfiguration/buildLocalRepo.xml"/>
+	            </actorProperties>
+	            <properties>
+	                <property key="repo.product" value="${buckminster.home}buildDirectory/repo/"/>
+	            </properties>
+	            <products alias="action.output" base="${user.dir}/s3/Tracker/p2/product">
+	                <private name="product" base="${user.dir}/s3/Tracker/p2/product"/>
+	            </products>
+	        </public>
+	      <public name="deploy.product.downloads" actor="ant">
+	            <actorProperties>
+	                <property key="buildFile" value="buildConfiguration/buildLocalRepo.xml"/>
+	            </actorProperties>
+	            <properties>
+	                <property key="result" value="${buckminster.home}buildDirectory/result/"/>
+	            </properties>
+	            <products alias="action.output" base="${user.dir}/s3/Tracker/downloads">
+	                <private name="downloads" base="${user.dir}/s3/Tracker/downloads"/>
+	            </products>
+	       </public>
+	       <public name="deploy.product.test" actor="ant">
+	            <actorProperties>
+	                <property key="buildFile" value="buildConfiguration/buildLocalRepo.xml"/>
+	            </actorProperties>
+	            <properties>
+	                <property key="result" value="${buckminster.home}buildDirectory/result/"/>
+	            </properties>
+	            <products alias="action.output" base="/tmp/tracker"/>
+	       </public>
+	       
+	       <public name="s3cmd.sync" actor="ant">
+	            <actorProperties>
+	                <property key="buildFile" value="buildConfiguration/buildLocalRepo.xml"/>
+	            </actorProperties>
+	            <properties>
+	                <property key="s3cmd.exec" value="/usr/bin/s3cmd"/>
+	                <property key="local.dir.to.sync" value="${user.dir}/s3/Tracker"/>
+	                <property key="s3.bucket" value="s3://public.resources.verticon.com/"/>
+	                <property key="s3.bucket.location" value="EU"/>
+	            </properties>
+	            <products alias="action.output" base="/tmp/tracker"/>
+	       </public>
+	       
 	</actions>
 	<groups>
 		<!-- Place your Groups here -->

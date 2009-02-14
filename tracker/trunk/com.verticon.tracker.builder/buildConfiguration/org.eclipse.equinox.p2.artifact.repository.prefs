@@ -1,14 +1,20 @@
 #Mon Jan 26 13:31:01 CST 2009
 #testing repo for Products
-repositories/file\:_home_jconlon_p2Repositories_product/url=file\:/home/jconlon/p2Repositories/product
+#repositories/file\:_home_jconlon_p2Repositories_product/url=file\:/home/jconlon/p2Repositories/product
 #testing repo for Features
-repositories/file\:_home_jconlon_p2Repositories_features/url=file\:/home/jconlon/p2Repositories/features
+#repositories/file\:_home_jconlon_p2Repositories_features/url=file\:/home/jconlon/p2Repositories/features
 #testing repo for ODA Feature
-repositories/file\:_home_jconlon_p2Repositories_oda/url=file\:/home/jconlon/p2Repositories/oda
+#repositories/file\:_home_jconlon_p2Repositories_oda/url=file\:/home/jconlon/p2Repositories/oda
 
-repositories/@NAME1@/url=@URL1@
-repositories/@NAME2@/url=@URL2@
-repositories/@NAME3@/url=@URL3@
-repositories/@NAME4@/url=@URL4@
+repositories/http\:__public.resources.verticon.com.s3.amazonaws.com_Tracker_p2_oda_/url=http\://public.resources.verticon.com.s3.amazonaws.com/Tracker/p2/oda/
+repositories/http\:__public.resources.verticon.com.s3.amazonaws.com_Tracker_p2_oda_/enabled=true
+repositories/http\:__public.resources.verticon.com.s3.amazonaws.com_Tracker_p2_features_/url=http\://public.resources.verticon.com.s3.amazonaws.com/Tracker/p2/features/
+repositories/http\:__public.resources.verticon.com.s3.amazonaws.com_Tracker_p2_features_/enabled=true
+repositories/http\:__public.resources.verticon.com.s3.amazonaws.com_Tracker_p2_product_/url=http\://public.resources.verticon.com.s3.amazonaws.com/Tracker/p2/product/
+repositories/http\:__public.resources.verticon.com.s3.amazonaws.com_Tracker_p2_product_/enabled=false
+repositories/http\:__download.eclipse.org_datatools_updates/url=http\://download.eclipse.org/datatools/updates/
+repositories/http\:__download.eclipse.org_datatools_updates/enabled=true
 eclipse.preferences.version=1
+
+
 
