@@ -6,11 +6,12 @@ import org.eclipse.ui.IPerspectiveFactory;
 
 public class PerspectiveFactory implements IPerspectiveFactory {
 
-	private static final String ORG_ECLIPSE_UI_CONSOLE_CONSOLE_VIEW = "org.eclipse.ui.console.ConsoleView";
+	private static final String ORG_ECLIPSE_UI_CONSOLE_CONSOLE_VIEW = 
+		"org.eclipse.ui.console.ConsoleView";
 	
 	@Override
 	public void createInitialLayout(IPageLayout layout) {
-String editorArea = layout.getEditorArea();
+		String editorArea = layout.getEditorArea();
 		
 		
 		//Left folder

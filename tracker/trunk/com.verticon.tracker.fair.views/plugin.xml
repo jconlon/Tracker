@@ -25,7 +25,7 @@
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
-            targetID="com.verticon.tracker.perspective">
+            targetID="com.verticon.tracker.product.desktop.perspective">
          <view
                visible="true"
                relative="org.eclipse.ui.views.PropertySheet"
@@ -41,6 +41,9 @@
                id="com.verticon.tracker.fair.views.ExhibitsView">
          </view>
          <viewShortcut id="com.verticon.tracker.fair.views.ExhibitsView"/>
+         <newWizardShortcut
+               id="com.verticon.tracker.fair.editor.presentation.FairModelWizardID">
+         </newWizardShortcut>
       </perspectiveExtension>
    </extension>
 

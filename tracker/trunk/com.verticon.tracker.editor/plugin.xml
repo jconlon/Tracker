@@ -75,7 +75,7 @@
         contributorClass="com.verticon.tracker.editor.presentation.TrackerActionBarContributor" >
     </editor>
   </extension> 
-  
+  <!--
   <extension
         id="Tracker"
         point="org.eclipse.core.runtime.products">
@@ -127,6 +127,7 @@
         </property>
      </product>
   </extension>
+  -->
   <extension
         point="org.eclipse.ui.decorators">
      <decorator
@@ -164,24 +165,11 @@
            class="com.verticon.tracker.editor.preferences.internal.PreferenceInitializer">
      </initializer>
   </extension>
-  <extension
-        point="org.eclipse.ui.perspectives">
-     <perspective
-           class="com.verticon.tracker.editor.perspective.PerspectiveFactory"
-           id="com.verticon.tracker.perspective"
-           icon="icons/full/obj16/TrackerModelFile.gif"
-           name="%perspective.name.0">
-     </perspective>
-  </extension>
+
   <extension
          point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
-         <perspectiveShortcut id="com.verticon.tracker.perspective"/>
-      </perspectiveExtension>
-   </extension>
-  <extension
-         point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension targetID="com.verticon.tracker.perspective">
+      
+      <perspectiveExtension targetID="com.verticon.tracker.product.desktop.perspective">
          <perspectiveShortcut id="org.eclipse.ui.resourcePerspective"/>
          <newWizardShortcut
                id="com.verticon.tracker.editor.presentation.TrackerModelWizardID">
@@ -190,7 +178,13 @@
                id="com.verticon.tracker.editor.presentation.TrackerTemplateWizardID">
          </newWizardShortcut>
       </perspectiveExtension>
-   </extension>
+      
+      <perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+         <perspectiveShortcut id="com.verticon.tracker.product.desktop.perspective"/>
+      </perspectiveExtension>
+      
+  </extension>
+   
    
    <extension point="org.eclipse.ui.intro"> 
     <introProductBinding
