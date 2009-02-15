@@ -76,7 +76,7 @@ should be in a shared site or have it's own site by then.</cs:documentation>
                 <cs:property key="buildFile" value="make/build.xml"/>
                 <cs:property key="targets" value="clean.generic"/>
             </cs:actorProperties>
-            <cs:products alias="action.output" base="${user.dir}/s3/Tracker/p2/oda/"/>
+            <cs:products alias="action.output" base="${user.dir}/s3/Tracker/p2/features/"/>
         </cs:private>
         <cs:private name="clean.deployed.oda.repo" actor="ant">
             <cs:actorProperties>
@@ -123,6 +123,7 @@ should be in a shared site or have it's own site by then.</cs:documentation>
     </cs:actions>
     <cs:groups>
         <cs:public name="buckminster.clean">
+            <cs:attribute name="clean.deployed.featues.repo"/>
             <cs:attribute name="clean.deployed.oda.repo"/>
             <cs:attribute name="clean.p2.oda.site"/>
             <cs:attribute name="clean.p2.site"/>
@@ -136,7 +137,6 @@ should be in a shared site or have it's own site by then.</cs:documentation>
             <cs:attribute name="buckminster.clean" component="com.verticon.tracker.ocl.query"/>
             <cs:attribute name="buckminster.clean" component="com.verticon.tracker.reader"/>
             <cs:attribute name="buckminster.clean" component="org.apache.poi"/>
-            <cs:attribute name="clean.deployed.featues.repo"/>
         </cs:public>
         <cs:public name="build-and-deploy.repositories">
             <cs:attribute name="build.p2.oda.site"/>
