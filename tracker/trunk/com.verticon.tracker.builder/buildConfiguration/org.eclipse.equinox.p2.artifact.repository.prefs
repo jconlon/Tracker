@@ -21,6 +21,9 @@ repositories/http\:__rxtx.qbang.org_eclipse/enabled=true
 repositories/http\:__www.rxtx.org_eclipse/url=http\://www.rxtx.org/eclipse/
 repositories/http\:__www.rxtx.org_eclipse/enabled=false
 
+repositories/http\:__download.eclipse.org_releases_ganymede/url=http\://download.eclipse.org/releases/ganymede
+repositories/http\:__download.eclipse.org_releases_ganymede/enabled=true
+
 eclipse.preferences.version=1
 
 
