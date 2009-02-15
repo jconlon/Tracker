@@ -16,7 +16,7 @@
 	</target>
 
 	<!-- ================================= 
-	          target: clean.generic             
+	          target: clean.product.repo             
 	         ================================= -->
 		<target name="clean.product.repo" description="Cleans the action.output directory">
 			<delete dir="${sp:action.output}" />
