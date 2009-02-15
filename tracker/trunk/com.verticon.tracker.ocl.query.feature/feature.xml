@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.ocl.query"
       label="Tracker OCL Query"
-      version="0.1.5.qualifier"
+      version="0.1.6.qualifier"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.ocl.query">
 

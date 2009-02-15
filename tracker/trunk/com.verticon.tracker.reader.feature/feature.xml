@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.reader"
       label="Tracker Reader"
-      version="0.2.5.qualifier"
+      version="0.2.6.qualifier"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.reader">
 

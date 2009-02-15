@@ -8,14 +8,14 @@
       <product
             application="org.eclipse.ui.ide.workbench"
             description="Contains all prerequisite Eclipse dependencies for Tracker Applications."
-            name="Tracker Livestock Information Desktop">
+            name="Tracker Animal Information Platform">
          <property
                name="windowImages"
-               value="icons/tracker_desktop_16.png,icons/tracker_desktop_32.png">
+               value="icons/tracker_desktop_16.png,icons/verticon_32.gif">
          </property>
           <property
                 name="aboutText"
-                value="Tracker Livestock Information Desktop&#x0A;Version: {0}&#x0A;Build id: {1}&#x0A;&#x0A;(c) Copyright Verticon, Inc. 2008.  All rights reserved. &#x0A;&#x0A;Visit http:/www.verticon.com&#x0A;&#x0A;Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and used with other Eclipsr (3.4.1) based offerings."/>
+                value="Tracker Animal Information Platform&#x0A;Version: {0}&#x0A;Build id: {1}&#x0A;&#x0A;(c) Copyright Verticon, Inc. 2008.  All rights reserved. &#x0A;&#x0A;Visit http:/www.verticon.com&#x0A;&#x0A;Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and used with other Eclipsr (3.4.1) based offerings."/>
         
          <property
                name="aboutImage"
@@ -60,7 +60,7 @@
         </property>
         <property
               name="appName"
-              value="Tracker Livestock Information Desktop">
+              value="Tracker Animal Information Platform">
         </property>
         <property
               name="introBrandingImage"
@@ -77,28 +77,23 @@
             icon="icons/tracker_desktop_16.png"
             id="com.verticon.tracker.product.desktop.intro">
       </intro>
-      <!--
-      <introProductBinding
-            introId="com.verticon.tracker.product.desktop.intro"
-            productId="com.verticon.tracker.product.desktop.application">
-      </introProductBinding>
-      -->
       <introProductBinding
             introId="org.eclipse.ui.intro.universal"
             productId="com.verticon.tracker.product.desktop.application">
       </introProductBinding>
    </extension>
    
-  
+
    <extension
          point="org.eclipse.ui.perspectives">
       <perspective
             class="com.verticon.tracker.product.desktop.PerspectiveFactory"
             icon="icons/tracker_desktop_16.png"
-            id="com.verticon.tracker.perspective"
+            id="com.verticon.tracker.product.desktop.perspective"
             name="Tracker">
       </perspective>
    </extension>
+  
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
@@ -131,6 +126,15 @@
             content="intro/whatsnewExtensionContent1.xml">
       </configExtension>
     
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="*">
+         <perspectiveShortcut
+               id="com.verticon.tracker.product.desktop.perspective">
+         </perspectiveShortcut>
+      </perspectiveExtension>
    </extension>
  
 

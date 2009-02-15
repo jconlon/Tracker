@@ -35,7 +35,7 @@
 	<extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
-            targetID="com.verticon.tracker.perspective">
+            targetID="com.verticon.tracker.product.desktop.perspective">
          <view
                visible="true"
                relative="org.eclipse.ui.views.PropertySheet"
