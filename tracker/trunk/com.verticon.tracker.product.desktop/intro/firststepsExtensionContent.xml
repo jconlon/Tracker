@@ -7,11 +7,17 @@
 		path="firststeps/@">
   	   <group style-id="content-group" 
   	          id="com.verticon.tracker.product.desktop.firststeps-group">
+  	        <link url="http://org.eclipse.ui.intro/showStandby?partId=org.eclipse.platform.cheatsheet&amp;input=com.verticon.tracker.product.desktop.cheatsheet.provision" 
+  	        	  label="Learn How to Provision Tracker Desktop" 
+  	        	  id="updatelink" 
+  	        	  style-id="content-link">
+        		<text>New User? Use this cheat sheet to learn how to provision the Tracker Desktop with product features.</text>
+      		</link>
        		<link style-id="content-link"  
        			label="Provision Tracker Desktop" 
        		  	url="http://org.eclipse.ui.intro/runAction?pluginId=org.eclipse.platform&amp;class=org.eclipse.platform.internal.LaunchUpdateIntroAction" 
        		    id="updatelink">
-          		<text>Provision Tracker Desktop with new features or update it from the Verticon.com and Eclipse.org repositories</text>
+          		<text>Experienced User? Provision Tracker Desktop with new features or update it from the Verticon.com and Eclipse.org repositories</text>
        		</link>
        			
        </group>

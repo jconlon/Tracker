@@ -8,14 +8,14 @@
       <product
             application="org.eclipse.ui.ide.workbench"
             description="Contains all prerequisite Eclipse dependencies for Tracker Applications."
-            name="Tracker Animal Information Platform">
+            name="Tracker Livestock Information Desktop">
          <property
                name="windowImages"
-               value="icons/tracker_desktop_16.png,icons/verticon_32.gif">
+               value="icons/tracker_desktop_16.png,icons/tracker_desktop_32.png">
          </property>
           <property
                 name="aboutText"
-                value="Tracker Animal Information Platform&#x0A;Version: {0}&#x0A;Build id: {1}&#x0A;&#x0A;(c) Copyright Verticon, Inc. 2008.  All rights reserved. &#x0A;&#x0A;Visit http:/www.verticon.com&#x0A;&#x0A;Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and used with other Eclipsr (3.4.1) based offerings."/>
+                value="Tracker Livestock Information Desktop&#x0A;Version: {0}&#x0A;Build id: {1}&#x0A;&#x0A;(c) Copyright Verticon, Inc. 2008.  All rights reserved. &#x0A;&#x0A;Visit http:/www.verticon.com&#x0A;&#x0A;Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and used with other Eclipsr (3.4.1) based offerings."/>
         
          <property
                name="aboutImage"
@@ -60,7 +60,7 @@
         </property>
         <property
               name="appName"
-              value="Tracker Animal Information Platform">
+              value="Tracker Livestock Information Desktop">
         </property>
         <property
               name="introBrandingImage"
@@ -135,6 +135,23 @@
                id="com.verticon.tracker.product.desktop.perspective">
          </perspectiveShortcut>
       </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.cheatsheets.cheatSheetContent">
+      <category
+            id="com.verticon.tracker.product.desktop.category.cheatSheets"
+            name="Tracker">
+      </category>
+      <cheatsheet
+            category="com.verticon.tracker.product.desktop.category.cheatSheets"
+            composite="false"
+            contentFile="$nl$/cheetsheets/UpdateCheatsheet.xml"
+            id="com.verticon.tracker.product.desktop.cheatsheet.provision"
+            name="Adding Features to the Tracker Desktop">
+         <description>
+            This cheat sheet will show you how to add features to the Tracker Desktop Product.
+         </description>
+      </cheatsheet>
    </extension>
  
 
