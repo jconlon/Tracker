@@ -117,6 +117,7 @@ public class ReaderViewModel implements PropertyChangeListener{
 	 * @param reader
 	 */
 	public void removeReader(IReader reader) {
+		reader.setStarted(false);
 		readers.remove(reader);
 		Iterator<IReaderModelListener> iterator = readerModelListeners.iterator();
 		while (iterator.hasNext()) {
