@@ -78,5 +78,37 @@
          </description>
       </wizard>
    </extension>
+   <extension
+         point="org.eclipse.ui.cheatsheets.cheatSheetContent">
+      <category
+            id="com.verticon.tracker.category.cheatSheets"
+            name="Tracker">
+      </category>
+      <cheatsheet
+            category="com.verticon.tracker.category.cheatSheets"
+            composite="false"
+            contentFile="$nl$/cheatsheets/ReaderCheatSheet.xml"
+            id="com.verticon.tracker.reader.cheatsheet1934224592"
+            name="Adding a TagId Reader">
+         <description>
+            This cheat sheet will show you how to add a Tag ID Reader to the Tracker Desktop.
+         </description>
+      </cheatsheet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="Commands related to TagID Readers"
+            id="com.verticon.tracker.reader.category1"
+            name="Tracker Readers">
+      </category>
+      <command
+            categoryId="com.verticon.tracker.reader.category1"
+            defaultHandler="com.verticon.tracker.reader.handlers.AddTagIDReaderHandler"
+            description="Add a Tag ID Reader to the Readers view"
+            id="com.verticon.tracker.reader.commands.addReader"
+            name="Add Reader">
+      </command>
+   </extension>
 
 </plugin>
