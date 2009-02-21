@@ -20,6 +20,8 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
  */
 
 public class ReaderViewPart extends ViewPart {
+	public static final String ID = "com.verticon.tracker.reader.view";
+	
 	private ReaderViewer viewer;
 	private RemoveReaderAction removeReaderAction;
 	private AddReaderAction addReaderAction;
@@ -31,10 +33,14 @@ public class ReaderViewPart extends ViewPart {
 	public ReaderViewPart() {
 	}
 
+	public ReaderViewModel getModel(){
+		return viewer==null?null:viewer.getReaderViewModel();
+	}
 	/**
 	 * This is a callback that will allow us
 	 * to create the viewer and initialize it.
 	 */
+	@Override
 	public void createPartControl(Composite parent) {
 		viewer = new ReaderViewer(parent);
 		
@@ -48,6 +54,7 @@ public class ReaderViewPart extends ViewPart {
 	/**
 	 * Passing the focus request to the viewer's control.
 	 */
+	@Override
 	public void setFocus() {
 		viewer.getControl().setFocus();
 	}

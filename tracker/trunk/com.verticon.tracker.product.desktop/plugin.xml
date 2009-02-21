@@ -139,11 +139,11 @@
    <extension
          point="org.eclipse.ui.cheatsheets.cheatSheetContent">
       <category
-            id="com.verticon.tracker.product.desktop.category.cheatSheets"
+            id="com.verticon.tracker.category.cheatSheets"
             name="Tracker">
       </category>
       <cheatsheet
-            category="com.verticon.tracker.product.desktop.category.cheatSheets"
+            category="com.verticon.tracker.category.cheatSheets"
             composite="false"
             contentFile="$nl$/cheetsheets/UpdateCheatsheet.xml"
             id="com.verticon.tracker.product.desktop.cheatsheet.provision"
