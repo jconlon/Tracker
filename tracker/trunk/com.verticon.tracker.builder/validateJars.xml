@@ -79,16 +79,28 @@
 
 
 	<!-- - - - - - - - - - - - - - - - - - 
-	          target: validateJarInRepo                      
+	          target: validateJarInRepo     
+	          1. pde export builds a bad jar 
+	          	 [echo] verifying /home/jconlon/Desktop/tracker/tracker-0.3.2/repository/plugins/org.eclipse.platform_3.3.101.v200809111700.jar
+     			 [exec] jarsigner: java.lang.SecurityException: SHA1 digest error for plugin_customization.ini   
+     		  2. pdeBuild builds a bad jar     
+     		     [echo] verifying /home/jconlon/eclipse-workspaces/tracker-TRUNK/com.verticon.tracker.builder/buildDirectory/repo/plugins/org.eclipse.platform_3.3.101.v200809111700.jar
+     			 [exec] jarsigner: java.lang.SecurityException: SHA1 digest error for plugin_customization.ini    
 	         - - - - - - - - - - - - - - - - - -->
 	<target name="validateJarInRepo">
+		<!--property name="repoToValidate" location="/home/jconlon/Desktop/tracker/tracker-0.3.2/repository/plugins"/-->
+		<property name="repoToValidate" location="${buildDirectory}/repo/plugins"/>
+		
+
 		<for param="file">
 			<path>
-				<fileset dir="${buildDirectory}/repo/plugins">
+				<fileset dir="${repoToValidate}">
 					<include name="**/org.eclipse.ui.workbench.compatibility*.jar" />
 					<include name="**/org.eclipse.core.runtime.compatibility*.jar" />
-					<include name="**/org.eclipse.platform*.jar" />
+					
 					<include name="**/org.eclipse.equinox.launcher*.jar" />
+					<include name="**/org.eclipse.equinox.launcher.gtk.linux.*.jar" />
+					<include name="**/org.eclipse.platform*.jar" />
 					<!--
 						<include name="**/org.eclipse.ui.intro.universal*.jar" />
 						<include name="**/org.eclipse.jdt.debug*.jar" />
@@ -96,7 +108,7 @@
 						<include name="**/org.eclipse.pde.build*.jar" />
 						<include name="**/org.junit*.jar" />
 						<include name="**/org.apache.ant*.jar"/>
-						-->
+					-->
 
 				</fileset>
 			</path>
