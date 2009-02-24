@@ -15,12 +15,6 @@
 		<!-- Place your Artifacts here -->
 	</artifacts>
 	<actions>
-	     <public name="clean.product.repo" actor="ant">
-	            <actorProperties>
-	                <property key="buildFile" value="buildConfiguration/buildLocalRepo.xml"/>
-	            </actorProperties>
-	            <products alias="action.output" base="${user.dir}/s3/Tracker/p2/product/"/>
-	     </public>
 	     <public name="deploy.product.repo" actor="ant">
 	            <actorProperties>
 	                <property key="buildFile" value="buildConfiguration/buildLocalRepo.xml"/>
