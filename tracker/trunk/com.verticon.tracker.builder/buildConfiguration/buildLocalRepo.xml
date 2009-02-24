@@ -5,7 +5,8 @@
 	          target: deploy.product.repo  
 				
 	     =================================   -->
-	<target name="deploy.product.repo" description="Copies all repos to a common folder for synchronization with a remote site">
+	<target name="deploy.product.repo" depends="clean.product.repo"
+		description="Copies all repos to a common folder for synchronization with a remote site">
 		
 		<copy todir="${sp:action.output}">
 			<fileset dir="${repo.product}"/>
@@ -15,10 +16,11 @@
 		<echo>Copied ${repo.product} to ${sp:action.output} </echo>
 	</target>
 
-	<!-- ================================= 
-	          target: clean.product.repo             
-	         ================================= -->
-		<target name="clean.product.repo" description="Cleans the action.output directory">
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: clean.product.repo                      
+         - - - - - - - - - - - - - - - - - -->
+		<target name="clean.product.repo" >
 			<delete dir="${sp:action.output}" />
 			<echo>Deleted ${sp:action.output}</echo>
 		</target>
