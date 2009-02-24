@@ -394,6 +394,23 @@
      
       
    </extension>
+   <extension
+         point="org.eclipse.ui.cheatsheets.cheatSheetContent">
+       <category
+            id="com.verticon.tracker.category.cheatSheets"
+            name="Tracker">
+      </category>
+      <cheatsheet
+            category="com.verticon.tracker.category.cheatSheets"
+            composite="false"
+            contentFile="$nl$/cheatsheets/PremisesDocumentCheatSheet.xml"
+            id="com.verticon.tracker.editor.cheatsheet1737513866"
+            name="Create a Premises Document">
+         <description>
+            This cheat sheet will show you how to create a Premises Document for documenting information about the Livestock at your Premises.
+         </description>
+      </cheatsheet>
+   </extension>
    
    
 </plugin>

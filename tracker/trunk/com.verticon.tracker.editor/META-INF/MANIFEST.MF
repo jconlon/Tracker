@@ -24,7 +24,8 @@ Require-Bundle: org.eclipse.core.databinding,
  org.eclipse.ui.intro,
  org.eclipse.emf.validation,
  org.eclipse.jface.databinding,
- org.eclipse.core.databinding.beans
+ org.eclipse.core.databinding.beans,
+ org.eclipse.ui.cheatsheets
 Bundle-ActivationPolicy: lazy
 Import-Package: com.verticon.tracker;version="[0.1.0,1.0.0)",
  com.verticon.tracker.edit.provider;version="[0.1.0,1.0.0)",
