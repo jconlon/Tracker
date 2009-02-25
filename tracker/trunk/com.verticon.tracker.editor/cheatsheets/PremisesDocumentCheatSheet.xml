@@ -27,7 +27,7 @@
    </item>
    <item title="Create New Premises Document" dialog="true">
       <description>
-         File &gt; New &gt; <b>Premises Document</b>.<br/><br/>Then Select the parent project folder of the Premises Document
+         File &gt; New &gt; <b>Premises Document</b>.<br/><br/>Then Select the parent project folder of the <b>Premises Document</b>.
       </description>
       <command
             required="false"
@@ -50,27 +50,40 @@
       </description>
    </item>
    
-   <item title="Add Animals">
+   <item title="Show Animals View">
       <command
             required="false"
             serialization="org.eclipse.ui.views.showView(org.eclipse.ui.views.showView.viewId=com.verticon.tracker.views.AnimalsView)"/> 
       <description>
           Open the <b>Animals</b> view to add <b>Animals</b> to the <b>Premises Document</b>.<br/><br/>
-The Animals view is a master-detail view of showing the <b>Animals</b> in the <b>Premises Document</b>. <br/><br/>
-Like the <b>Properties</b> view you can use this view to see and edit details about <b>Animals</b>.  You can also use this view to sort,  filter, and navigate through all <b>Animals</b> in the <b>Premises Document</b>.
       </description>
    </item>
    
-   <item title="Add Events">
+   <item title="Add Animals">
+            <description>
+          The <b>Animals</b> view is a composite master-detail view of the <b>Animals</b> in a <b>Premises</b>. <br/><br/>
+		  Like the <b>Properties</b> view you can use this view to see and edit details about <b>Animals</b>.  You can also use this view to sort, filter, and navigate through all <b>Animals</b> in the <b>Premises Document</b>.
+      	  Select the green + in the toolbar of the <b>Animals</b> view to add <b>Animals</b> to the <b>Premises</b>.
+      </description>
+   </item>
+   
+   <item title="Show Events View">
       <description>
       Once you have added one or more <b>Animals</b> you can associate event information with them.  Open the <b>Events</b> view to add <b>Events</b> to <b>Animals</b> in the <b>Premises Document</b>.<br/><br/>
-		Like the <b>Animals</b> view the <b>Events</b> view is a master-detail view of all the <b>Events</b> in the <b>Premises Document</b>.<br/><br/>
- 		Use this view to add details, filter, and navigate through all <b>Events</b> in the <b>Premises Document</b>.
       </description>
       <command
             required="false"
             serialization="org.eclipse.ui.views.showView(org.eclipse.ui.views.showView.viewId=com.verticon.tracker.views.EventsView)"/>
    </item>
+   
+   <item title="Add Events">
+      <description>
+      Like the <b>Animals</b> view the <b>Events</b> view is a composite master-detail view of the <b>Events</b> associated with the <b>Animals</b> in a <b>Premises</b>.<br/><br/>
+ 	  Use this view to add details, filter, and navigate through all <b>Events</b> in the <b>Premises Document</b>.
+      Select the green + in the toolbar of the <b>Events</b> view to add <b>Events</b> to the <b>Animals</b>.
+      </description>
+   </item>
+   
    <item
          title="Save Document">
       <description>
