@@ -54,7 +54,7 @@
 	            <properties>
 	                <property key="s3cmd.exec" value="/usr/bin/s3cmd"/>
 	                <property key="local.dir.to.sync" value="${user.dir}/s3/Tracker"/>
-	                <property key="s3.bucket" value="s3://public.resources.verticon.com/"/>
+	                <property key="s3.bucket" value="s3://tracker.verticon.com/"/>
 	                <property key="s3.bucket.location" value="EU"/>
 	            </properties>
 	            <products alias="action.output" base="/tmp/tracker"/>
