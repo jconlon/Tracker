@@ -139,5 +139,22 @@
          </menu>
       </menuContribution>  
    </extension>
+      <extension
+            point="org.eclipse.ui.cheatsheets.cheatSheetContent">
+         <category
+               id="com.verticon.tracker.category.cheatSheets"
+               name="Tracker">
+         </category>
+         <cheatsheet
+               category="com.verticon.tracker.category.cheatSheets"
+               composite="false"
+               contentFile="$nl$/cheatsheets/FairDocumentCheatSheet.xml"
+               id="com.verticon.tracker.fair.editor.cheatsheet1972313380"
+               name="Create a Fair Document">
+            <description>
+               This cheat sheet will show you how to create a Fair Document for documenting information about the People, Exhibits, and Livestock at an Animal Exposition.
+            </description>
+         </cheatsheet>
+      </extension>
 
 </plugin>

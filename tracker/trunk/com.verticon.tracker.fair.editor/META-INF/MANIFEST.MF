@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.verticon.tracker.fair.editor; singleton:=true
-Bundle-Version: 0.1.5.qualifier
+Bundle-Version: 0.1.6.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: com.verticon.tracker.fair.editor.presentation.FairEditorPlugin$Implementation
 Bundle-Vendor: %providerName
@@ -12,6 +12,7 @@ Export-Package: com.verticon.tracker.fair.editor.presentation,
  com.verticon.tracker.fair.editor.util
 Require-Bundle: org.eclipse.core.runtime,
  com.verticon.tracker.fair.edit;visibility:=reexport,
- com.verticon.tracker.editor
+ com.verticon.tracker.editor,
+ org.eclipse.ui.cheatsheets
 Bundle-ActivationPolicy: lazy
 Import-Package: org.slf4j;version="[1.5.5,1.6.0)"
