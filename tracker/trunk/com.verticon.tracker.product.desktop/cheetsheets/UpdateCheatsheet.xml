@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cheatsheet
       title="Adding Features to the Tracker Desktop">
-   <intro>
+   <intro
+         href="/org.eclipse.platform.doc.user/tasks/tasks-2.htm">
       <description>
          This cheat sheet will show you how to add features to the <b>Tracker Desktop</b> product.
       </description>
