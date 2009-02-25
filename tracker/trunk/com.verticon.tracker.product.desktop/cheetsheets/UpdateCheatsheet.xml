@@ -2,15 +2,19 @@
 <cheatsheet
       title="Adding Features to the Tracker Desktop">
    <intro
-         href="/org.eclipse.platform.doc.user/tasks/tasks-2.htm">
+         href="/org.eclipse.platform.doc.user/tasks/tasks-129.htm">
       <description>
          This cheat sheet will show you how to add features to the <b>Tracker Desktop</b> product.
       </description>
    </intro>
    <item
-         title="Open Software Updates" dialog="true">
+         dialog="true"
+         href="/org.eclipse.platform.doc.user/tasks/tasks-121.htm"
+         title="Open Software Updates">
       <description>
-         Open the <b>Software Updates and Add Ons</b> User Inteface.
+         To browse for Tracker Feature Plugins, open the <b>Software Updates and Add Ons</b> User Inteface.<br/>
+         From the workbench menu:<br/><br/>
+         Help > Software Updates ...  
       </description>
       <command
             required="false"
@@ -18,32 +22,42 @@
      
    </item>
    <item
-         title="Show Available Software" dialog="true">
+         title="Show Available Software" 
+         href="/org.eclipse.platform.doc.user/tasks/tasks-121.htm"
+         dialog="true">
       <description>
          Select the <b>Available Software</b> Tab at the top of the User Interface.
       </description>
    </item>
    <item
-         title="Locate the Tracker Feature Update" dialog="true">
+         title="Locate the Tracker Feature Update" 
+         href="/org.eclipse.platform.doc.user/tasks/tasks-121.htm"
+         dialog="true">
       <description>
          Locate the <b>Tracker Feature Update</b> entry.
       </description>
    </item>
    <item
-         title="Review Available Features" dialog="true">
+         title="Review Available Features" 
+         href="/org.eclipse.platform.doc.user/tasks/tasks-121.htm"
+         dialog="true">
       <description>
          Select the arrow next to the entry name to display all the <b>Tracker</b> features you can install.
       </description>
    </item>
    <item
-         title="Select Features to Install" dialog="true">
+         title="Select Features to Install" 
+         href="/org.eclipse.platform.doc.user/tasks/tasks-121.htm"
+         dialog="true">
       <description>
          Select the desired features for installation.<br/>
          <br/>If your a new user just select the parent checkbox of the Tracker Feature Update entry to install all the features.<br/><br/><b>You can always uninstall features you do not need later.</b>
       </description>
    </item>
    <item
-         title="Install the Features." dialog="true">
+         title="Install the Features." 
+         href="/org.eclipse.platform.doc.user/tasks/tasks-121.htm"
+         dialog="true">
       <description>
          Select the <b>Install</b> button in the upper right hand corner of the window to install the selected features.<br/>
          <br/>Follow the directions given in the Updates Dialog boxes that follow.
