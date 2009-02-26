@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.tracker.editor"
-      label="Tracker Editor"
+      label="Tracker Premises Editor"
       version="0.3.3.qualifier"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.editor">
 
    <description>
-      Tracker Editor is the Core feature of the Tracker application.
-The Core feature models Animal Event Histories for Producer and/or
+      Tracker Premises Editor is the basic Editor feature of the Tracker application.
+The Premises Editor models Animal Event Histories for Producer and/or
 Non Producer Premises.  
 Premises model documents are displayed and manipulated with Tracker
 Editors, Wizards, and various Importing and Exporting utilities.
    </description>
 
    <copyright>
-      Tracker Premises Event Manager Copyright (C) 2008
+      Tracker Copyright (C) 2009
 Verticon, Inc. All Rights Reserved.
    </copyright>
 
