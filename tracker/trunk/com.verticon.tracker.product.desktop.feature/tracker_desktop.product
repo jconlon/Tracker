@@ -26,7 +26,13 @@ Tracker is powered by Eclipse technology and includes Eclipse plugins that can b
    </configIni>
 
    <launcherArgs>
+      <vmArgsLin>-Xms256m
+-Xmx512m
+-XX:MaxPermSize=256m</vmArgsLin>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+      <vmArgsWin>-Xms256m
+-Xmx512m
+-XX:MaxPermSize=256m</vmArgsWin>
    </launcherArgs>
 
    <windowImages i16="/com.verticon.tracker.product.desktop/icons/tracker_desktop_16.png" i32="/com.verticon.tracker.product.desktop/icons/tracker_desktop_32.png"/>
