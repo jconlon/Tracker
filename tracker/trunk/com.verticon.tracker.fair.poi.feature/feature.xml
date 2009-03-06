@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.fair.poi"
       label="Tracker Fair Excel Import Export Feature"
-      version="0.1.0.qualifier"
+      version="0.1.1.qualifier"
       provider-name="Verticon, Inc.">
 
    <description>
@@ -36,5 +36,11 @@ You should have received a copy of the GNU General Public License along with Tra
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.fair.poi.documenation"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
 
 </feature>
