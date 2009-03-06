@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE preface PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" 
+ "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<preface>
+		<?dbhtml filename="preface/preface.html" ?>
+		<title>The Need for Animal Tracking</title>
+		<para>
+			Either for hunting or husbandry human beings have always
+			observed and remembered animal movements. Today, with larger
+			herds and more interaction between producers and
+			infrastructure providers, more animal movements mean
+		    more information for the producer or provider to manage.
+		</para>
+		<para>
+			To ease the information management burden and reduce the
+			cost for farm animal producers and livestock infrastructure
+			providers, information technology solutions using
+			computers, software applications and animal event sensors
+			are required to record and manage animal movements and histories.
+		</para>
+</preface>
+

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" 
+ "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter>
+  	<?dbhtml filename="overview/frameworkOverview.html" ?>
+	<title>Tracker Overview</title>
+
+	<section>
+		<title>What is the Tracker?</title>
+		<para>
+			Tracker is an <emphasis>Open Source</emphasis>, <emphasis>Component Based</emphasis>,
+			<emphasis>Software Application Framework</emphasis> for the development of <emphasis>Multi-platform</emphasis>
+			<emphasis>Livestock Information Solutions</emphasis>.
+		</para>
+	</section>
+
+    <section>
+        <?dbhtml filename="overview/frameworkOverview_goals.html" ?>
+		<title>Project Goals</title>
+		<para>
+			The Tracker project was undertaken to provide;
+			<orderedlist numeration="loweralpha">
+				<listitem>
+					<para>
+						Livestock information technology analysts, designers, and developers 
+						a framework for the creation of software solutions useful for livestock producers and
+						infrastructure providers;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Low cost development solution to enable both large and
+						small scale deployment of Livestock Information Technology application solutions;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						A common industry development environment for the creation of a livestock event history
+						inter-exchange solutions.
+					</para>
+				</listitem>
+
+			</orderedlist>
+		</para>
+	</section>
+	
+	<section>
+		<?dbhtml filename="overview/frameworkOverview_proposition.html" ?>
+		<title>Service Proposition</title>
+		<para>
+			Software Application Products built from the Tracker Livestock Information
+			Framework are used by livestock producers, infrastructure providers
+			and process control auditors as effective, low cost solutions for;
+			<itemizedlist mark='bullet'>
+				<listitem>
+					<para>recording animal event history;</para>
+				</listitem>
+				<listitem>
+					<para>maintaining production efficiency;</para>
+				</listitem>
+				<listitem>
+					<para>improving product quality;</para>
+				</listitem>
+				<listitem>
+					<para>documenting process control.</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+</chapter>
+	
