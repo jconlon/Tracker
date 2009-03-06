@@ -1,0 +1,39 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Tag IdNumber Files</title><link href="book.css" rel="stylesheet" type="text/css"><link href="../book.css" rel="stylesheet" type="text/css"><meta content="DocBook XSL Stylesheets V1.72.0" name="generator"><style type="text/css">
+body { background-image: url('http://docbook.sourceforge.net/release/images/draft.png');
+       background-repeat: no-repeat;
+       background-position: top left;
+       /* The following properties make the watermark "fixed" on the page. */
+       /* I think that's just a bit too distracting for the reader... */
+       /* background-attachment: fixed; */
+       /* background-position: center center; */
+     }</style><link rel="start" href="../index.html" title=""><link rel="up" href="premisesBulkEventProcessing.html" title="Bulk Event Processing"><link rel="prev" href="premisesBulkEventProcessing_animalTemplates.html" title="Animal Document Templates"><link rel="next" href="premisesBulkEventProcessing_usageAndOperations.html" title="Usage and operations"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Tag IdNumber Files</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="premisesBulkEventProcessing_animalTemplates.html">Prev</a>&nbsp;</td><th align="center" width="60%">Bulk Event Processing</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="premisesBulkEventProcessing_usageAndOperations.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="chBulkEventProcessingIdNumberFiles"></a>Tag IdNumber Files</h3></div></div></div><p>
+			Commercial tag readers typically transmit animal id numbers to computers as
+			<acronym class="acronym">ASCII</acronym>
+			encoded characters (For more information on ASCII, see the Wikipedia entry for
+			<a xmlns:xlink="http://www.w3.org/1999/xlink" href="http://en.wikipedia.org/wiki/ASCII" target="_top">
+				<em class="citetitle">ASCII</em>
+			</a>
+			). Tag Readers send this data to computers over serial communication ports or Bluetooth network connections. 
+			<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+					In the Tracker Premises Model, the Tag id Numbers are represented as Tracker  
+					<code class="code">Tag/@idNumber</code> attributes.
+				</p></div>
+			A convenient way to handle serial and/or Bluetooth tag id number transmissions is to setup the receiving computer's communication facility to capture this data as text files. 
+			Capture files containing <acronym class="acronym">ASCII</acronym> numbers that are saved with a *.tags extension are identified by Tracker as
+			<span class="emphasis"><em>Tag IdNumber Files.</em></span>
+		</p><p>
+			To indicate to Tracker that the read time of the tags in a Tag IdNumber file is significant, the name of the tag file may be formated to reflect that time. To timestamp a Tag IdNumber file use the formating of
+			<code class="code">yyMMddHHmmss</code>
+			, where
+			<table summary="Simple list" border="0" class="simplelist"><tr><td>yy is the last two digits of the year,</td></tr><tr><td>MM is the month,</td></tr><tr><td>dd is the day of the month,</td></tr><tr><td>
+					HH is the hour of the day in 24 hour clock,
+				</td></tr><tr><td>mm is the minute of the hour,</td></tr><tr><td>ss is the second</td></tr></table>
+			<div class="example"><a name="N101D0"></a><p class="title"><b>Example&nbsp;1.&nbsp;A Time stamped Tag IdNumber File Name</b></p><div class="example-contents"><p><b>060409131111.tags.&nbsp;</b>
+						Specifies the date of all
+						<code class="code">Tag/@idNumber</code>
+						reads to have occurred at 2006-04-09T13:11:11.
+					</p></div></div><br class="example-break">
+
+		</p><div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Tip</h3><p>
+				Tag IdNumber Files can also be utilized by the transaction infrastructure. See ...
+			</p></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="premisesBulkEventProcessing_animalTemplates.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="premisesBulkEventProcessing.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="premisesBulkEventProcessing_usageAndOperations.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Animal Document Templates&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;Usage and operations</td></tr></table></div></body></html>

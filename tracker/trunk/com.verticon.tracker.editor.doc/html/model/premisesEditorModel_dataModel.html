@@ -1,0 +1,45 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Tracker Data Model</title><link href="book.css" rel="stylesheet" type="text/css"><link href="../book.css" rel="stylesheet" type="text/css"><meta content="DocBook XSL Stylesheets V1.72.0" name="generator"><style type="text/css">
+body { background-image: url('http://docbook.sourceforge.net/release/images/draft.png');
+       background-repeat: no-repeat;
+       background-position: top left;
+       /* The following properties make the watermark "fixed" on the page. */
+       /* I think that's just a bit too distracting for the reader... */
+       /* background-attachment: fixed; */
+       /* background-position: center center; */
+     }</style><link rel="start" href="../index.html" title=""><link rel="up" href="premisesEditorModel.html" title="Premises Model"><link rel="prev" href="premisesEditorModel_premisesDocuments.html" title="Tracker Premises Documents"><link rel="next" href="premisesEditorModel_enteringDateTime.html" title="Entering Date and DateTime"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Tracker Data Model</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="premisesEditorModel_premisesDocuments.html">Prev</a>&nbsp;</td><th align="center" width="60%">Premises Model</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="premisesEditorModel_enteringDateTime.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="chModelDataModel"></a>Tracker Data Model</h3></div></div></div><p>
+		Because all user activity centers around the creation and manipulation
+		of
+		<span class="emphasis"><em>Tracker Premises Documents</em></span>
+		, understanding the structure of Tracker Premises documents is the
+		easiest way to learn to use the information management facilities of
+		the Tracker.
+	</p><p>
+		All Tracker Premises documents structurally conform to the
+		<span class="emphasis"><em>Tracker Premises Model</em></span>
+		. In the Tracker Premises Model a single Premises contains zero or
+		more animals. Each Animal must have at least one but may have more
+		than one (identification) tag. Each Tag must have at least one but may
+		have more than one associated event.
+	</p><p>
+		In
+		<a href="premisesEditorModel_dataModel.html#fig_coreDataModel1" title="Figure&nbsp;1.&nbsp;Premises Core Model">Figure&nbsp;1, &ldquo;Premises Core Model&rdquo;</a>
+		below you will find a graphic representation of the core elements of
+		the Tracker Core Premises Model.
+
+	</p><div class="figure"><a name="fig_coreDataModel1"></a><p class="title"><b>Figure&nbsp;1.&nbsp;Premises Core Model</b></p><div class="figure-contents"><div class="mediaobject" align="center"><img src="../images/model/coreDataModel3.png" align="middle" alt="Premises Core Model"></div></div></div><br class="figure-break"><p>
+			<div class="orderedlist"><ol type="a"><li><p>The core elements of the Premises Model are depicted as the blue rectangles in the figure.</p></li><li><p>The notation within the elements are the attributes of the element.</p></li><li><p>The notation between the elements are the relationships of the elements.</p></li></ol></div>
+		</p><p>The following table offers a text explanation of the Element Relationships.<div class="table"><a name="N10097"></a><p class="title"><b>Table&nbsp;1.&nbsp;Core Elements of the Premises Model</b></p><div class="table-contents"><table summary="Core Elements of the Premises Model" border="1"><colgroup><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Element Name</th><th align="left">
+								Relationship to other Elements
+							</th></tr></thead><tbody><tr><td align="left">Premises</td><td align="left">
+								There is one premises in a document
+							</td></tr><tr><td align="left">Animal</td><td align="left">
+								A premises can have zero or many animals
+							</td></tr><tr><td align="left">Tag</td><td align="left">
+								An Animal can have one or many tags
+							</td></tr><tr><td align="left">&nbsp;</td><td align="left">A Premises can have zero or many tags that are unassigned</td></tr><tr><td align="left">Event</td><td align="left">
+								A Tag can have one or many events
+							</td></tr></tbody></table></div></div><br class="table-break">
+
+		</p><p>The Premises Data Model supports multiple Event types as shown in <a href="premisesEditorModel_dataModel.html#fig_coreDataModelEvents" title="Figure&nbsp;2.&nbsp;Premises Event Model">Figure&nbsp;2, &ldquo;Premises Event Model&rdquo;</a>
+				
+	   </p><div class="figure"><a name="fig_coreDataModelEvents"></a><p class="title"><b>Figure&nbsp;2.&nbsp;Premises Event Model</b></p><div class="figure-contents"><div class="mediaobject" align="center"><img src="../images/model/dataModelEvents.png" align="middle" alt="Premises Event Model"></div></div></div><br class="figure-break"></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="premisesEditorModel_premisesDocuments.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="premisesEditorModel.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="premisesEditorModel_enteringDateTime.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Tracker Premises Documents&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="../index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;Entering Date and DateTime</td></tr></table></div></body></html>
