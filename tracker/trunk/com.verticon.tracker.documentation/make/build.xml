@@ -4,7 +4,7 @@
 	<property name="docbookproject" location="${ant.file}/../.."/>
 
 	<property name="xincludeclassname" value="com.verticon.ant.utilities.xsl.XIncludeTask"/>
-	<property name="xinclude.path.dir" location="${docbookproject}/../com.verticon.ant.utilities/artifact"/>
+	<property name="xinclude.path.dir" location="${docbookproject}/../com.verticon.tracker.ant.utilities/artifact"/>
 
 	<property name="htmldir" value="${sp:action.output}" />
 	<property name="docbookdir" value="${docbookproject}/docbook-xsl-1.72.0/eclipse" />
