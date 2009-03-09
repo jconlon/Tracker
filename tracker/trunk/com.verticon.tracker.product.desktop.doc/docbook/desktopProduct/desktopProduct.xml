@@ -4,33 +4,52 @@
 
 <chapter id="DesktopProduct">
     <?dbhtml filename="desktopProduct/desktopProduct.html" ?>
-	<title>Tracker Desktop Product</title>
+	<title>Desktop Product</title>
 	
     <section id="Overview">
- 	<?dbhtml filename="overview/desktopOverview.html" ?>
-	<title>Tracker Desktop Product Overview</title>
+	<title>Overview</title>
 	
 	<section>
 		<title>What is the Tracker Desktop Product?</title>
 	<para>The Tracker Desktop Product is an <emphasis>Open Source</emphasis> Livestock Information Browser descended 
 	from the Tracker Information Framework suite of products and managed by Verticon, Inc. 
-	Tracker Desktop is an based on the Eclipse Rich Client Platform, the Eclipse Modeling 
+	Tracker Desktop is based on the Eclipse Rich Client Platform, the Eclipse Modeling 
 	Framework and OSGi technologies.</para>
 	</section>
 	
 	<section id="Definitions">
 	<?dbhtml filename="overview/desktopOverview_definitions.html" ?>
-	<title>Tracker Workbench Instances, Workspaces, and Projects</title>
+	<title>Workbench Instances, Workspaces, and Projects</title>
 		<para>The main focus of activity in the Tracker Application is the editing of Animal Premises Documents.  In order to discuss the mechanics of editing Tracker Animal Premises Documents, some definitions are in order:
 		<itemizedlist mark='bullet'>
 			    <listitem>
-					<para>A Tracker <emphasis>installation</emphasis>  is a location on your disk that contains a distribution of the Tracker. When you unpack a Tracker distribution to a location on your disk, you effectively create a local platform installation at that location. The installation contains a set of tools that were packaged together by the organization that created the distribution. Each of the tools in the platform installation contributes some functionality to the Tracker. You may have several platform installations on your machine, each of which may contain a different set of tools.</para>
+					<para>A Tracker <emphasis>installation</emphasis>  is a location on your disk 
+					that contains a distribution of the Tracker. When you unpack a Tracker distribution 
+					to a location on your disk, you effectively create a local platform installation at 
+					that location. The installation contains a set of tools that were packaged together 
+					by the organization that created the distribution. Each of the tools in the platform 
+					installation contributes some functionality to the Tracker. You may have several 
+					platform installations on your machine, each of which may contain a different set of 
+					tools. </para>
 				</listitem>
 				<listitem>
-					<para>A Tracker <emphasis>workbench instance</emphasis> is a runtime instance of the Tracker. Every time you launch the Tracker, a workbench instance is created, making the tools in the platform installation from which the instance was loaded available for use.</para>
+					<para>A Tracker <emphasis>workbench instance</emphasis> is a runtime instance of the 
+					Tracker. Every time you launch the Tracker, a workbench instance is created, making 
+					the tools in the platform installation from which the instance was loaded available 
+					for use.  
+					</para>
+					<para> For more information, see the Workbook User Guide concept definition for
+						<ulink url="PLUGINS_ROOT/org.eclipse.platform.doc.user/concepts/concepts-2.htm"><citetitle>Workbench</citetitle></ulink>.
+					</para>
 				</listitem>
 				<listitem>
-					<para>A Tracker <emphasis>workspace</emphasis> is a location on your disk that is associated with a running workbench instance. It contains the resources (Tracker Documents, files, folders, etc.) that comprise the <emphasis>projects</emphasis> you work on. The tools contained in the platform installation from which the workbench instance was launched can be used to work with the projects in the workspace. Each workbench instance has exclusive access to its associated workspace: concurrently running workbench instances can not share the same workspace. </para>
+					<para>A Tracker <emphasis>workspace</emphasis> is a location on your disk that is 
+					associated with a running workbench instance. It contains the resources (Tracker 
+					Documents, files, folders, etc.) that comprise the <emphasis>projects</emphasis> you 
+					work on. The tools contained in the platform installation from which the workbench 
+					instance was launched can be used to work with the projects in the workspace. Each 
+					workbench instance has exclusive access to its associated workspace: concurrently 
+					running workbench instances can not share the same workspace. </para>
 				</listitem>
 				
 			</itemizedlist>
@@ -39,22 +58,15 @@
 	</section>
 	<section id="Perspective">
 	    <?dbhtml filename="overview/desktopOverview_perspective.html" ?>
-		<title>Tracker Perspective, Editors and Views</title>
-		<!--  
-		<para>Within the Tracker Workbench, Animal Premises Documents are edited, manipulated, and examined with Tracker specific tools called Document Editors and Views.  To assist you as you work with Animal Premises Documents, a Tracker <emphasis>Perspective</emphasis> visualizes and positions these Tracker specific tools within the Workbench.</para>
-		<figure>
-			<title>Tracker Perspective</title>
-			<literallayout></literallayout>
-			<graphic srccredit="Verticon, Inc., 2009"
-			fileref="../images/overview/fullScreenShot.png" align="left" scalefit="1" />
-		</figure>
-		-->
-		<para>Within the Tracker Workbench, Animal Premises Documents are edited, manipulated, and examined with Tracker specific tools called Document Editors and Views.  To assist you as you work with Animal Premises Documents, a Tracker <emphasis>Perspective</emphasis> visualizes and positions these Tracker specific tools within the Workbench 
-		 as shown in
-                <xref linkend="fig_ExcludeResultPrefixesContentAssist1"/>
-                .
-            </para>
-            <figure id="fig_ExcludeResultPrefixesContentAssist1">
+		<title>Perspective, Editors and Views</title>
+		
+		<para>Within the Tracker Workbench, Documents are edited, manipulated, and examined with 
+		data model specific Document Editors and Views.  To assist you as you work with Documents, 
+		a Tracker <emphasis>Perspective</emphasis> visualizes and positions these Tracker specific 
+		Editors and Views within the Workbench as shown in <xref 
+		linkend="fig_ExcludeResultPrefixesContentAssist1"/>.
+       </para>
+       <figure id="fig_ExcludeResultPrefixesContentAssist1">
                 <title>Tracker Perspective
                 </title>
                 <mediaobject>
@@ -63,28 +75,54 @@
                             fileref="../images/overview/fullScreenShot.png"/>
                     </imageobject>
                 </mediaobject>
-            </figure>
-		
-		<para>The Tracker Perspective organizes the workbench into four areas, outlined in the above figure. </para>
+        </figure>
+		<para> For more information, see the Workbook User Guide concept definitions for
+						<ulink url="PLUGINS_ROOT/org.eclipse.platform.doc.user/concepts/concepts-6.htm">
+						<citetitle>Editor</citetitle></ulink>, <ulink url="PLUGINS_ROOT/org.eclipse.platform.doc.user/concepts/concepts-5.htm">
+						<citetitle>View</citetitle></ulink>, and <ulink url="PLUGINS_ROOT/org.eclipse.platform.doc.user/concepts/concepts-4.htm">
+						<citetitle>Perspective</citetitle></ulink>.
+					</para>
+		<para>The Tracker Perspective organizes the workbench into four areas, outlined in colors in
+		the above figure. </para>
 		<para>
 			<orderedlist numeration="loweralpha">
 				<listitem>
-					<para>The resource navigation area, highlighted in yellow, provides is the standard Resource Navigator view which presents the tree of Projects, Folders, Files and other resources in the workspace.</para>
+					<para>The resource navigation area, highlighted in yellow, provides is the 
+					standard Resource Navigator view which presents the tree of Projects, Folders, 
+					Files and other resources in the workspace.</para>
 				</listitem>
 				<listitem>
-					<para>An area for visualizing editors, highlighted in red, where Tracker Document and other Resource Editors display.</para>
+					<para>An area for visualizing editors, highlighted in red, where Tracker 
+					Document Editors<footnote id="fnrex1b">
+					<para>Displayed is the optional Premises Editor that may be installed 
+					(called <glossterm>provisioned</glossterm>) by the user.</para>
+					</footnote>
+					and other Resource Editors display.</para>
 				</listitem>
 				<listitem>
-					<para>The Outline View, highlighted in green, displays an outline of a structured file that is currently open in the editor area, and lists structural elements.</para>
+					<para>The <ulink url="PLUGINS_ROOT/org.eclipse.platform.doc.user/reference/ref-30.htm">
+						<citetitle>Outline View</citetitle></ulink>
+						, highlighted in green, displays an outline of a structured 
+					file that is currently open in the editor area, and lists structural elements.</para>
 				</listitem>
 				<listitem>
-					<para>The support views area, highlighted in blue, is where the Properties, Console, Problems, Tasks, Ocl Queries, Event Publishers, views are displayed.</para>
-					<para>The Properties View displays read-only information, such as the properties of a file resource. Or it can display information that can be edited, such as the properties of an Animal Document.</para>
-					<para>The Console View displays program output information, such as error or warning messages.</para>
+					<para>The support views area, highlighted in blue, is where the Properties, 
+					Console, Problems, Tasks, Ocl Queries<footnote id="fnrex1a">
+					<para>An optional feature that may be provisioned by the user.</para>
+					</footnote>, Readers<footnoteref linkend="fnrex1a"/>, views are displayed.</para>
+					<para>The <ulink url="PLUGINS_ROOT/org.eclipse.platform.doc.user/reference/ref-29.htm">
+						<citetitle>Properties View</citetitle></ulink> displays read-only information, such as the 
+					properties of a file resource and information that can be edited, 
+					such as the properties of an Entry in a Document.</para>
+					<para>The Console View displays program output information, such as error or 
+					warning messages.</para>
 					<para>The Problems View displays problems related to workbench or resources.</para>
 					<para>The Tasks View displays user reminders of things to do. </para>
-					<para>The Ocl Queries View displays a list of quick selection mechanisms for selecting and find information in Tracker Animal Documents.</para>
-					<para>The Event Publishers View displays a list of Tracker Event listeners, for interfacing with one or more RFID Animal Tag Readers.</para>
+					<para>The Ocl Queries View<footnoteref linkend="fnrex1a"/> displays a list of 
+					quick selection mechanisms for selecting and find information in 
+					Tracker Documents.</para>
+					<para>The Readers View<footnoteref linkend="fnrex1a"/> displays a list of 
+					configured Tag ID Readers.</para>
 				</listitem>
 			</orderedlist>
 		</para>

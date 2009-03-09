@@ -14,12 +14,10 @@
 		<edition>
 			Tracker User's Guide version 0.1.0
 		</edition>
-		<pubdate>March 6, 2009</pubdate>
+		<pubdate>March 7, 2009</pubdate>
 		<copyright>
-		    <year>2007</year>
 			<year>2008</year>
 			<year>2009</year>
-			<year>2010</year>
 			<holder>Verticon, Inc.</holder>
 		</copyright>
 
@@ -69,31 +67,55 @@
 		<?dbhtml filename="preface/preface.html" ?>
 		<title>The Need for Animal Tracking</title>
 		<para>
-			Either for hunting or husbandry human beings have always
+			Either for hunting or husbandry, human beings have always
 			observed and remembered animal movements. Today, with larger
-			herds and more interaction between producers and
-			infrastructure providers, more animal movements mean
-		    more information for the producer or provider to manage.
+			herds and more interaction between producers,
+			infrastructure providers, and process auditors more animal movements mean
+		    more information for the producer, the provider, and the auditor to manage.
 		</para>
 		<para>
-			To ease the information management burden and reduce the
-			cost for farm animal producers and livestock infrastructure
-			providers, information technology solutions using
-			computers, software applications and animal event sensors
-			are required to record and manage animal movements and histories.
+			Computers, software applications and animal event sensors that record, 
+			manage and detect animal events can improve information management practices 
+		    and reduce costs for producers, infrastructure providers, and 
+			process auditors.
+		</para>
+		
+		<para>
+			Tracker is used by livestock producers, infrastructure providers and process control 
+			auditors as an effective, low cost solution for;
+			<itemizedlist mark="bullet">
+				<listitem>
+					<para>recording animal event histories;</para>
+				</listitem>
+				<listitem>
+					<para>maintaining production efficiency;</para>
+				</listitem>
+				<listitem>
+					<para>improving health and product quality;</para>
+				</listitem>
+				<listitem>
+					<para>documenting process controls.</para>
+				</listitem>
+			</itemizedlist>
 		</para>
 </preface>
 	<colophon xml:base="colophon/colophon.xml">
 	<?dbhtml filename="colophon/colophon.html" ?>
 	<para>
 		Production versions of this documentation were produced with
-		the DocBook DSSSL Stylesheets, called by the Apache Ant build tool,
-		from within an Eclipse IDE.
-		</para>
+		the <ulink url="http://www.docbook.org/">
+		<citetitle>Docbook</citetitle></ulink> 
+		<ulink url="http://en.wikipedia.org/wiki/Document_Style_Semantics_and_Specification_Language">
+			<citetitle><acronym>DSSSL</acronym></citetitle> style sheets,
+		</ulink> called by the
+		<ulink url="http://ant.apache.org/"><citetitle>Apache Ant build tool</citetitle></ulink>,
+		  from within an <ulink url="http://www.eclipse.org/"><citetitle>Eclipse IDE</citetitle></ulink>.
+	</para>
+		
 </colophon>
 	<chapter xml:base="overview/overview.xml">
   	<?dbhtml filename="overview/frameworkOverview.html" ?>
-	<title>Tracker Overview</title>
+	<title>Overview</title>
 
 	<section>
 		<title>What is the Tracker?</title>
@@ -112,21 +134,26 @@
 			<orderedlist continuation="restarts" inheritnum="ignore" numeration="loweralpha">
 				<listitem>
 					<para>
-						Livestock information technology analysts, designers, and developers 
-						a framework for the creation of software solutions useful for livestock producers and
+						Livestock information technology framework for the rapid creation of 
+						software solutions useful for livestock producers and
 						infrastructure providers;
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						Low cost development solution to enable both large and
+						Free Open Source solutions to enable both large and
 						small scale deployment of Livestock Information Technology application solutions;
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						A common industry development environment for the creation of a livestock event history
-						inter-exchange solutions.
+						Low cost custom solutions for Livestock producers, infrastructure providers and 
+						process auditors;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Ubiquitous livestock event history inter-exchange solutions.
 					</para>
 				</listitem>
 
@@ -160,22 +187,121 @@
 </chapter>
 	<chapter xml:base="product/product.xml">
   	<?dbhtml filename="product/product.html" ?>
-	<title>Product</title>
-	<para>Tracker Livestock Information Framework Instances are typically provisioned with one Product 
-	component.</para>
+	<title>Product Family</title>
+	<para>The Tracker product line
+	consists of the following products:
+	<itemizedlist mark="bullet">
+				<listitem>
+					<para>Tracker Desktop;<footnote>
+						<para>Tracker Desktop is the initial product offering.</para></footnote></para>
+				</listitem>
+				<listitem>
+					<para>Tracker Server;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker Mult-User Client;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker Web Client;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker Mobile Client;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker Embedded Agent.</para>
+				</listitem>
+			</itemizedlist>
+ 		</para>
 
 </chapter>
 	<chapter xml:base="editors/editors.xml">
   	<?dbhtml filename="editors/editors.html" ?>
-	<title>Editors</title>
-	<para>Tracker Livestock Information Framework Instances are provisioned with one or more Editor Features.</para>
+	<title>Provisioned Editors</title>
+	<para>Livestock producers, processors and auditors require tools for
+	modeling, recording, editing, and reporting on livestock operational information. These tools
+	must be able to meet requirements common to each type of livestock operation but also be capable of adapting to 
+	specific use cases. For each use case the essential consideration is how to structure 
+	or <emphasis>model</emphasis> the operational data to ensure vital information can be 
+	efficiently captured, stored, analyzed, and utilized in a operationally valuable way.
+	</para>
 	
+	<para>Common operational use cases are analyzed, then modeled by Tracker business analysts resulting
+	in concise <emphasis>data model</emphasis> specifications.  From these data model specifications 
+	Tracker engineers craft use case specific editors, tools, and utilities which are then
+    delivered as Tracker features to end users.
+	</para>
+	
+	<para>The Tracker product line
+	consists of the following data model specific Editor Features:
+	<itemizedlist mark="bullet">
+				<listitem>
+					<para>Premises Editor;<footnote>
+						<para>Premises Editor is the primary Tracker Livestock editor and its associated data model 
+						is often extended by the other data model editors.</para>
+						</footnote>
+				  </para>
+				</listitem>
+				<listitem>
+					<para>Fair Editor;<footnote>
+						<para>Extends the Premises Editor to model and document people and animals at a 
+						Livestock Exhibition. The Premises Editor and the Fair Editor are the initial Tracker editors.</para>
+						</footnote>
+					</para>
+				</listitem>
+				<listitem>
+					<para>Abattoir Premises Editor;</para>
+				</listitem>
+				<listitem>
+					<para>Auction Premises Editor;</para>
+				</listitem>
+				<listitem>
+					<para>Livestock Transportation Editor;</para>
+				</listitem>
+				<listitem>
+					<para>Custom Editors.<footnote>
+						<para>Custom editors are based on a individual operational use case analysis and resulting data model.</para>
+						</footnote>
+					</para>
+				</listitem>
+			</itemizedlist>
+ 		</para>
+
 </chapter>
 	<chapter xml:base="features/features.xml">
   	<?dbhtml filename="features/features.html" ?>
-	<title>Features</title>
-	<para>Tracker Livestock Information Framework Instances are provisioned with one or more Features.</para>
-	
+	<title>Provisioned Features</title>
+	<para>Tracker Livestock Information Framework Instances may be provisioned 
+	with one or more task specific tools or utilities to complement data model specific
+    Editors.</para>
+    
+    <para>The Tracker product line
+	consists of the following types of task specific utilities and tools features:
+	<itemizedlist mark="bullet">
+				<listitem>
+					<para>Data Importing Utilities;
+				  </para>
+				</listitem>
+				<listitem>
+					<para>Data Exporting Utilities;
+					</para>
+				</listitem>
+				<listitem>
+					<para>Tools for Querying Operational Data;</para>
+				</listitem>
+				<listitem>
+					<para>Utilities for interfacing with Tag Id Readers.<footnote>
+						<para>Includes support for serial and Bluetooth connections.</para>
+						</footnote>
+					</para>
+				</listitem>
+				<listitem>
+					<para>Business Intelligence Reporting Tools.<footnote>
+						<para>Eclipse BIRT.</para>
+						</footnote>
+					</para>
+				</listitem>
+			</itemizedlist>
+ 		</para>
 </chapter>
 	<appendix id="gfdl" xml:base="appendix/fdl.xml">
   <?dbhtml filename="appendix/gnuDoclicense.html" ?>

@@ -3,8 +3,55 @@
  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <chapter>
   	<?dbhtml filename="editors/editors.html" ?>
-	<title>Editors</title>
-	<para>Tracker Livestock Information Framework Instances are provisioned with one or more Editor Features.</para>
+	<title>Provisioned Editors</title>
+	<para>Livestock producers, processors and auditors require tools for
+	modeling, recording, editing, and reporting on livestock operational information. These tools
+	must be able to meet requirements common to each type of livestock operation but also be capable of adapting to 
+	specific use cases. For each use case the essential consideration is how to structure 
+	or <emphasis>model</emphasis> the operational data to ensure vital information can be 
+	efficiently captured, stored, analyzed, and utilized in a operationally valuable way.
+	</para>
 	
+	<para>Common operational use cases are analyzed, then modeled by Tracker business analysts resulting
+	in concise <emphasis>data model</emphasis> specifications.  From these data model specifications 
+	Tracker engineers craft use case specific editors, tools, and utilities which are then
+    delivered as Tracker features to end users.
+	</para>
+	
+	<para>The Tracker product line
+	consists of the following data model specific Editor Features:
+	<itemizedlist mark='bullet'>
+				<listitem>
+					<para>Premises Editor;<footnote>
+						<para>Premises Editor is the primary Tracker Livestock editor and its associated data model 
+						is often extended by the other data model editors.</para>
+						</footnote>
+				  </para>
+				</listitem>
+				<listitem>
+					<para>Fair Editor;<footnote>
+						<para>Extends the Premises Editor to model and document people and animals at a 
+						Livestock Exhibition. The Premises Editor and the Fair Editor are the initial Tracker editors.</para>
+						</footnote>
+					</para>
+				</listitem>
+				<listitem>
+					<para>Abattoir Premises Editor;</para>
+				</listitem>
+				<listitem>
+					<para>Auction Premises Editor;</para>
+				</listitem>
+				<listitem>
+					<para>Livestock Transportation Editor;</para>
+				</listitem>
+				<listitem>
+					<para>Custom Editors.<footnote>
+						<para>Custom editors are based on a individual operational use case analysis and resulting data model.</para>
+						</footnote>
+					</para>
+				</listitem>
+			</itemizedlist>
+ 		</para>
+
 </chapter>
 	
