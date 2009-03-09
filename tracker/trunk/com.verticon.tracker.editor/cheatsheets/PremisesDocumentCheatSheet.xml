@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cheatsheet
       title="Create a Premises Document">
-   <intro>
+   <intro
+         href="/com.verticon.tracker.editor.doc/html/model/premisesEditorModel_premisesDocuments.html">
       <description>
          This cheat sheet will show you how to create a <b>Premises Document</b> for documenting information about the Livestock at your Premises.
       </description>
    </intro>
    <item
+         href="/com.verticon.tracker.product.desktop.doc/html/desktopProduct/desktopProduct.html#Perspective"
          title="Show Tracker Perspective">
       <description>
          Open the <b>Tracker</b> perspective in the Workbench.
@@ -25,7 +27,10 @@
             required="false"
             serialization="org.eclipse.ui.newWizard(newWizardId=org.eclipse.ui.wizards.new.project)"/>
    </item>
-   <item title="Create New Premises Document" dialog="true">
+   <item
+         dialog="true"
+         href="/com.verticon.tracker.editor.doc/html/model/premisesEditorModel_premisesDocuments.html"
+         title="Create New Premises Document">
       <description>
          File &gt; New &gt; <b>Premises Document</b>.<br/><br/>Then Select the parent project folder of the <b>Premises Document</b>.
       </description>
@@ -43,14 +48,18 @@
       </description>
    </item>
    
-    <item title="Document Premises Details">
+    <item
+          href="/com.verticon.tracker.editor.doc/html/editingPremisesDocuments/editingPremisesDocuments.html"
+          title="Document Premises Details">
       <description>
          Tracker Editors show documents as trees of parent and child entries.<br/><br/>Selecting entries in the Editor trees will display their details in the <b>Properties</b> view. <br/><br/>In the instance of the <b>Premises Editor</b> where the new <b>Premises Document</b> is displayed, select the root <b>Premises</b> entry.<br/><br/>
  In the <b>Properties</b> view you can now enter or change the properties of the <b>Premises</b> entry.
       </description>
    </item>
    
-   <item title="Show Animals View">
+   <item
+         href="/com.verticon.tracker.editor.doc/html/masterDetailViews/masterDetailViews.html"
+         title="Show Animals View">
       <command
             required="false"
             serialization="org.eclipse.ui.views.showView(org.eclipse.ui.views.showView.viewId=com.verticon.tracker.views.AnimalsView)"/> 
@@ -59,7 +68,9 @@
       </description>
    </item>
    
-   <item title="Add Animals">
+   <item
+         href="/com.verticon.tracker.editor.doc/html/masterDetailViews/masterDetailViews.html"
+         title="Add Animals">
             <description>
           The <b>Animals</b> view is a composite master-detail view of the <b>Animals</b> in a <b>Premises</b>. <br/><br/>
 		  Like the <b>Properties</b> view you can use this view to see and edit details about <b>Animals</b>.  You can also use this view to sort, filter, and navigate through all <b>Animals</b> in the <b>Premises Document</b>.
@@ -67,7 +78,9 @@
       </description>
    </item>
    
-   <item title="Show Events View">
+   <item
+         href="/com.verticon.tracker.editor.doc/html/masterDetailViews/masterDetailViews_events.html"
+         title="Show Events View">
       <description>
       Once you have added one or more <b>Animals</b> you can associate event information with them.  Open the <b>Events</b> view to add <b>Events</b> to <b>Animals</b> in the <b>Premises Document</b>.<br/><br/>
       </description>
@@ -76,7 +89,9 @@
             serialization="org.eclipse.ui.views.showView(org.eclipse.ui.views.showView.viewId=com.verticon.tracker.views.EventsView)"/>
    </item>
    
-   <item title="Add Events">
+   <item
+         href="/com.verticon.tracker.editor.doc/html/masterDetailViews/masterDetailViews_events.html"
+         title="Add Events">
       <description>
       Like the <b>Animals</b> view the <b>Events</b> view is a composite master-detail view of the <b>Events</b> associated with the <b>Animals</b> in a <b>Premises</b>.<br/><br/>
  	  Use this view to add details, filter, and navigate through all <b>Events</b> in the <b>Premises Document</b>.
