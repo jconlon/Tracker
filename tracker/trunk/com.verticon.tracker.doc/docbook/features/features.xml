@@ -3,8 +3,38 @@
  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <chapter>
   	<?dbhtml filename="features/features.html" ?>
-	<title>Features</title>
-	<para>Tracker Livestock Information Framework Instances are provisioned with one or more Features.</para>
-	
+	<title>Provisioned Features</title>
+	<para>Tracker Livestock Information Framework Instances may be provisioned 
+	with one or more task specific tools or utilities to complement data model specific
+    Editors.</para>
+    
+    <para>The Tracker product line
+	consists of the following types of task specific utilities and tools features:
+	<itemizedlist mark='bullet'>
+				<listitem>
+					<para>Data Importing Utilities;
+				  </para>
+				</listitem>
+				<listitem>
+					<para>Data Exporting Utilities;
+					</para>
+				</listitem>
+				<listitem>
+					<para>Tools for Querying Operational Data;</para>
+				</listitem>
+				<listitem>
+					<para>Utilities for interfacing with Tag Id Readers.<footnote>
+						<para>Includes support for serial and Bluetooth connections.</para>
+						</footnote>
+					</para>
+				</listitem>
+				<listitem>
+					<para>Business Intelligence Reporting Tools.<footnote>
+						<para>Eclipse BIRT.</para>
+						</footnote>
+					</para>
+				</listitem>
+			</itemizedlist>
+ 		</para>
 </chapter>
 	

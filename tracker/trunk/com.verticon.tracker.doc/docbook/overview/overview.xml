@@ -3,7 +3,7 @@
  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <chapter>
   	<?dbhtml filename="overview/frameworkOverview.html" ?>
-	<title>Tracker Overview</title>
+	<title>Overview</title>
 
 	<section>
 		<title>What is the Tracker?</title>
@@ -22,21 +22,26 @@
 			<orderedlist numeration="loweralpha">
 				<listitem>
 					<para>
-						Livestock information technology analysts, designers, and developers 
-						a framework for the creation of software solutions useful for livestock producers and
+						Livestock information technology framework for the rapid creation of 
+						software solutions useful for livestock producers and
 						infrastructure providers;
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						Low cost development solution to enable both large and
+						Free Open Source solutions to enable both large and
 						small scale deployment of Livestock Information Technology application solutions;
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						A common industry development environment for the creation of a livestock event history
-						inter-exchange solutions.
+						Low cost custom solutions for Livestock producers, infrastructure providers and 
+						process auditors;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Ubiquitous livestock event history inter-exchange solutions.
 					</para>
 				</listitem>
 

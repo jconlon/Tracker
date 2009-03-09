@@ -5,18 +5,36 @@
 		<?dbhtml filename="preface/preface.html" ?>
 		<title>The Need for Animal Tracking</title>
 		<para>
-			Either for hunting or husbandry human beings have always
+			Either for hunting or husbandry, human beings have always
 			observed and remembered animal movements. Today, with larger
-			herds and more interaction between producers and
-			infrastructure providers, more animal movements mean
-		    more information for the producer or provider to manage.
+			herds and more interaction between producers,
+			infrastructure providers, and process auditors more animal movements mean
+		    more information for the producer, the provider, and the auditor to manage.
 		</para>
 		<para>
-			To ease the information management burden and reduce the
-			cost for farm animal producers and livestock infrastructure
-			providers, information technology solutions using
-			computers, software applications and animal event sensors
-			are required to record and manage animal movements and histories.
+			Computers, software applications and animal event sensors that record, 
+			manage and detect animal events can improve information management practices 
+		    and reduce costs for producers, infrastructure providers, and 
+			process auditors.
+		</para>
+		
+		<para>
+			Tracker is used by livestock producers, infrastructure providers and process control 
+			auditors as an effective, low cost solution for;
+			<itemizedlist mark='bullet'>
+				<listitem>
+					<para>recording animal event histories;</para>
+				</listitem>
+				<listitem>
+					<para>maintaining production efficiency;</para>
+				</listitem>
+				<listitem>
+					<para>improving health and product quality;</para>
+				</listitem>
+				<listitem>
+					<para>documenting process controls.</para>
+				</listitem>
+			</itemizedlist>
 		</para>
 </preface>
 

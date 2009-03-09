@@ -9,36 +9,36 @@
 		</xsl:copy>
 	</xsl:template>	 
 			 
-    <xsl:template  match="//topic[@label='Product']">
+    <xsl:template  match="//topic[@label='Product Family']">
     		<xsl:element name="topic">
     		    <xsl:attribute  name="href">
                        <xsl:value-of  select="@href" />
                 </xsl:attribute> 
-  				<xsl:attribute name="label">Product</xsl:attribute>
+  				<xsl:attribute name="label">Product Family</xsl:attribute>
   				<xsl:element name="anchor">
   					<xsl:attribute name="id">tracker_product</xsl:attribute>
   				</xsl:element>
   			 </xsl:element>       
     </xsl:template>
  
-    <xsl:template  match="//topic[@label='Editors']">
+    <xsl:template  match="//topic[@label='Provisioned Editors']">
     		<xsl:element name="topic">
     		    <xsl:attribute  name="href">
                        <xsl:value-of  select="@href" />
                 </xsl:attribute> 
-  				<xsl:attribute name="label">Editors</xsl:attribute>
+  				<xsl:attribute name="label">Provisioned Editors</xsl:attribute>
   				<xsl:element name="anchor">
   					<xsl:attribute name="id">tracker_editor</xsl:attribute>
   				</xsl:element>
   			 </xsl:element>   
     </xsl:template>
     
-    <xsl:template  match="//topic[@label='Features']">
+    <xsl:template  match="//topic[@label='Provisioned Features']">
     		<xsl:element name="topic">
     		    <xsl:attribute  name="href">
                        <xsl:value-of  select="@href" />
                 </xsl:attribute> 
-  				<xsl:attribute name="label">Features</xsl:attribute>
+  				<xsl:attribute name="label">Provisioned Features</xsl:attribute>
   				<xsl:element name="anchor">
   					<xsl:attribute name="id">tracker_feature</xsl:attribute>
   				</xsl:element>

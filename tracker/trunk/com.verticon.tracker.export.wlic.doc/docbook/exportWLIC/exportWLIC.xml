@@ -6,15 +6,16 @@
 	<title>WLIC Export</title>
 	<section>
 	<?dbhtml filename="overview/wlicExport.html" ?>
-	<title>WLIC Export Overview</title>
+	<title>Overview</title>
 	<section>
 		<title>What is WLIC Exporting?</title>
 		<para>
 			The Wisconsin Livestock Identification Consortium
 			<acronym>WLIC</acronym> is the State of Wisconsin's Premises and
-			The <acronym>WLIC</acronym> is registering premises as the authorized agent of the Wisconsin Department of Agriculture, 
-			the Trade and Consumer Protection <acronym>DATCP</acronym>. WLIC is a multi-species effort led 
-			by Wisconsin’s livestock and industry organizations. 
+			The <acronym>WLIC</acronym> is registering premises as the authorized agent of 
+			the Wisconsin Department of Agriculture, 
+			the Trade and Consumer Protection <acronym>DATCP</acronym>. WLIC is a multi-species 
+			effort led by Wisconsin’s livestock and industry organizations. 
 			Contact WLIC at 1-888-808-1910.
    		</para>
 		<para>
