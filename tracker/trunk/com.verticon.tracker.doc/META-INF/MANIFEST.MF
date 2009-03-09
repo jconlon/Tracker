@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tracker Framework Documenation
+Bundle-Name: Tracker Framework Documentation
 Bundle-SymbolicName: com.verticon.tracker.doc;singleton:=true
 Bundle-Version: 0.1.0
 Require-Bundle: org.eclipse.ui;bundle-version="3.4.1",
  org.eclipse.core.runtime;bundle-version="3.4.0"
+Bundle-Vendor: Verticon, Inc.
