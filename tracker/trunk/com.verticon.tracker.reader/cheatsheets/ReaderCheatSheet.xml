@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cheatsheet
       title="Adding a TagId Reader">
-   <intro>
+   <intro
+         href="/com.verticon.tracker.reader.doc/html/reader/reader.html">
       <description>
          This cheat sheet will show you how to connect <b>Tracker Desktop</b> to a Tag ID Reader and map Tag ID reads to Animals and Events.
       </description>
    </intro>
    <item
+         href="/com.verticon.tracker.reader.doc/html/reader/reader.html"
          title="Open Readers View">
       <description>
          Open the <b>Readers</b> view in the workbench.
@@ -16,7 +18,9 @@
             serialization="org.eclipse.ui.views.showView(org.eclipse.ui.views.showView.viewId=com.verticon.tracker.reader.view)"/>
    </item>
    <item
-         title="Start the Add a Reader Wizard" dialog="true">
+         dialog="true"
+         href="/com.verticon.tracker.reader.doc/html/reader/reader.html"
+         title="Start the Add a Reader Wizard">
       <description>
          Start the <b>Add an Event Reader Wizard</b> to add a new <b>Reader</b> to the <b>Readers</b> view.
       </description>
@@ -40,6 +44,7 @@
    </item>
    
    <item
+         href="/com.verticon.tracker.reader.doc/html/reader/reader.html"
          skip="true"
          title="Start the Reader">
       <description>
