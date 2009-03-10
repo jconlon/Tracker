@@ -207,7 +207,8 @@
 		<copy todir="${buildDirectory}/plugins">
 			<fileset dir="../../..">
 				<include name="com.verticon.tracker.product.desktop/**" />
-				
+				<include name="com.verticon.tracker.product.desktop.doc/**" />
+				<include name="com.verticon.tracker.doc/**" />
 				<exclude name="*/bin/**" />
 			</fileset>
 		</copy>
