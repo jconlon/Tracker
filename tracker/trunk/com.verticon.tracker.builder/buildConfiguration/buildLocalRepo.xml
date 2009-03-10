@@ -63,11 +63,14 @@
     <target name="s3cmd.sync"  description="Syncs a directory with S3">
 			<exec executable="${s3cmd.exec}" failonerror="false" timeout="9000000">
 				<arg line="sync" />
+				<arg line="-v" />
 				<arg line="--acl-public" />
 				<arg line="--guess-mime-type" />
 				<arg line="--bucket-location=${s3.bucket.location}" />
+				<arg line="--delete-removed" />
 				<arg line="${local.dir.to.sync}" />
 				<arg line="${s3.bucket}" />
+				
 			</exec>
     </target>
 
