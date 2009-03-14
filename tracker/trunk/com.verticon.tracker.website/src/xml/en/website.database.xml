@@ -119,7 +119,7 @@
       </div>
    </document>
 
-   <document targetdoc="contact" baseuri="index.php" dir="contact/">
+   <document targetdoc="contact" baseuri="index.html" dir="contact/">
       <div element="webpage" href="#contact" number="" targetptr="contact">
          <ttl>Contact Us</ttl>
          <xreftext>Contact Us</xreftext>
