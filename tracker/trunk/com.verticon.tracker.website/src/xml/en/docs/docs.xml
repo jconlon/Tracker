@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<webpage id="docs">
+	<config param="rcsdate" value="$Date: 2006/04/19 13:19:59 $" />
+	<head>
+		<title>Documentation</title>
+		<summary>Tracker Documentation
+		</summary>
+		<keywords>livestock, open source, NAIS, XML, Eclipse, RFID,
+			herd management
+		</keywords>
+	</head>
+
+    <section id="issues">
+    <title>Issues Tracking Report</title>
+    <para><ulink url="http://tracker.verticon.com/Tracker/issues/query.html">
+    Milestone3 issues report</ulink> generated from the Trac<footnote>
+		<para>Trac is the issues tracking tool used to track defects, enhancements and tasks 
+		for the Tracker, other than that <emphasis>there is no relationship to Tracker.</emphasis></para>
+		<para>This system is NOT Internet accessible at this time, so a report will have to serve. </para>
+		</footnote>
+		issues tracking system.  
+	</para>
+	</section>
+	
+	<section id="userGuide">
+    <title>User Guide</title>
+    <para>TODO</para>
+	</section>
+</webpage>
