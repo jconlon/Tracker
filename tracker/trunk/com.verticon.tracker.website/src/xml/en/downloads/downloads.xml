@@ -1,0 +1,112 @@
+<?xml version='1.0'?>
+<webpage id="downloads">
+	<config param="rcsdate" value="$Date: 2006/04/08 15:54:17 $" />
+	<head>
+		<title>Downloads</title>
+		<summary>Tracker Product Downloads</summary>
+		<keywords>Tracker, Livestock, Open Source, Verticon, Inc.,
+			Software
+		</keywords>
+	</head>
+
+	<section>
+		<title>Tracker Desktop Product</title>
+		<table xml:id="ex.calstable" frame='all'>
+			<title>Revision 0.3.2, Released on: March 09, 2009</title>
+			<tgroup cols='3' align='left' colsep='1' rowsep='1'>
+				<colspec colname='c1' />
+				<colspec colname='c2' />
+				<colspec colname='c3' />
+				<thead>
+					<row>
+						<entry>Download File</entry>
+						<entry>Size</entry>
+						<entry>OS</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>
+							<ulink
+								url="http://tracker.verticon.com/Tracker/downloads/Tracker-p2-RCP-win32-0.3.2.v200903091327.zip">
+								Tracker-p2-RCP-win32-0.3.2.v200903091327.zip
+							</ulink>
+						</entry>
+						<entry>47.8M</entry>
+						<entry>WIN</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+		<para>To install:</para>
+		<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>Down load and extract compressed file to a
+			desirable directory.</para>
+			</listitem>
+			<listitem >
+				<para>The top level directory is called tracker.</para>
+			</listitem>
+			<listitem>
+				<para>Invoke the tracker executive inside the top level tracker director.</para>
+			</listitem>
+		</itemizedlist>
+
+	</section>
+
+	<section>
+		<title>Tracker Update Repositories</title>
+		<table xml:id="ex.calstable" frame='all'>
+			<title>Note: These urls are just for reference. They will be
+				configured in
+				your down loaded product.</title>
+			<tgroup cols='2' align='left' colsep='1' rowsep='1'>
+				<colspec colname='c1' />
+				<colspec colname='c2' />
+				<thead>
+					<row>
+						<entry>Name</entry>
+						<entry>URL</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>Product Updates</entry>
+						<entry>
+							<ulink url="http://tracker.verticon.com/Tracker/p2/product/" />
+						</entry>
+					</row>
+					<row>
+						<entry>Features Updates</entry>
+						<entry>
+							<ulink url="http://tracker.verticon.com/Tracker/p2/features/" />
+						</entry>
+					</row>
+					<row>
+						<entry>ODA Feature Updates</entry>
+						<entry>
+							<ulink url="http://tracker.verticon.com/Tracker/p2/oda/" />
+						</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+
+	<sidebar id="prerequisites">
+		<variablelist>
+			<title>Prerequisites</title>
+			<varlistentry>
+				<term>Java SE JRE 6</term>
+				<listitem>
+					<para>
+						Prior to installing Tracker Desktop, you must first install
+						<ulink url="http://java.sun.com/javase/downloads/index.jsp">
+							Java SE Runtime Environment (JRE 6 or higher)
+						</ulink>.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</sidebar>
+</webpage>
