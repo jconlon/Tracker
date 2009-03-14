@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <webpage id="downloads">
-	<config param="rcsdate" value="$Date: 2006/04/08 15:54:17 $" />
+	<config param="rcsdate" value="$Date$" />
 	<head>
 		<title>Downloads</title>
 		<summary>Tracker Product Downloads</summary>

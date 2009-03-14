@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <webpage id="faqs">
-	<config param="rcsdate" value="$Date: 2006/04/19 13:19:59 $" />
+	<config param="rcsdate" value="$Date$" />
 	<head>
 		<title>Frequently Asked Questions</title>
 		<summary>Tracker FAQs

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <webpage xmlns:html="http://www.w3.org/1999/xhtml"
 	 id="search">
-  <config param="rcsdate" value="$Date: 2006/04/08 15:54:17 $"/>
+  <config param="rcsdate" value="$Date$"/>
   <head>
     <title>Search</title>
     <summary>Search this site</summary>
