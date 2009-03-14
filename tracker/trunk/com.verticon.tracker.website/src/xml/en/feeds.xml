@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <webpage id="feeds">
-  <config param="rcsdate" value="$Date: 2006/04/19 13:17:48 $"/>
+  <config param="rcsdate" value="$Date$"/>
   <head>
     <title>Content Feeds</title>
     <summary>Content Feeds</summary>

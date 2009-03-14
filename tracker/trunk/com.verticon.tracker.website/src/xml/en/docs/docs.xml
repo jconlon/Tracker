@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <webpage id="docs">
-	<config param="rcsdate" value="$Date: 2006/04/19 13:19:59 $" />
+	<config param="rcsdate" value="$Date$" />
 	<head>
 		<title>Documentation</title>
 		<summary>Tracker Documentation
