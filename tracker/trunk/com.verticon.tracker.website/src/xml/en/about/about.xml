@@ -1,5 +1,5 @@
 <webpage id="about">
-  <config param="rcsdate" value="@DATE@"/>
+  <config param="rcsdate" value="$LastChangedDate$"/>
   <head>
     <title>About</title>
     <summary>
