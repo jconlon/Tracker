@@ -6,7 +6,6 @@
         <cs:dependency name="com.verticon.tracker.export.wlic" componentType="eclipse.feature"/>
         <cs:dependency name="com.verticon.tracker.fair.editor" componentType="eclipse.feature"/>
         <cs:dependency name="com.verticon.tracker.fair.poi" componentType="eclipse.feature"/>
-        <cs:dependency name="com.verticon.tracker.help" componentType="eclipse.feature"/>
         <cs:dependency name="com.verticon.tracker.logging.logback" componentType="eclipse.feature"/>
         <cs:dependency name="com.verticon.tracker.ocl.query" componentType="eclipse.feature"/>
         <cs:dependency name="com.verticon.tracker.reader" componentType="eclipse.feature"/>
@@ -132,7 +131,6 @@ should be in a shared site or have it's own site by then.</cs:documentation>
             <cs:attribute name="buckminster.clean" component="com.verticon.tracker.export.wlic"/>
             <cs:attribute name="buckminster.clean" component="com.verticon.tracker.fair.editor"/>
             <cs:attribute name="buckminster.clean" component="com.verticon.tracker.fair.poi"/>
-            <cs:attribute name="buckminster.clean" component="com.verticon.tracker.help"/>
             <cs:attribute name="buckminster.clean" component="com.verticon.tracker.logging.logback"/>
             <cs:attribute name="buckminster.clean" component="com.verticon.tracker.ocl.query"/>
             <cs:attribute name="buckminster.clean" component="com.verticon.tracker.reader"/>
@@ -155,7 +153,6 @@ should be in a shared site or have it's own site by then.</cs:documentation>
         <cs:private name="Optional">
             <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Optional features.</cs:documentation>
             <cs:attribute name="feature.jars" component="com.verticon.tracker.export.wlic"/>
-            <cs:attribute name="feature.jars" component="com.verticon.tracker.help"/>
             <cs:attribute name="feature.jars" component="com.verticon.tracker.reader"/>
             <cs:attribute name="feature.jars" component="org.apache.poi"/>
         </cs:private>
@@ -167,7 +164,6 @@ should be in a shared site or have it's own site by then.</cs:documentation>
             <cs:attribute name="bundle.jars" component="com.verticon.tracker.export.wlic"/>
             <cs:attribute name="bundle.jars" component="com.verticon.tracker.fair.editor"/>
             <cs:attribute name="bundle.jars" component="com.verticon.tracker.fair.poi"/>
-            <cs:attribute name="bundle.jars" component="com.verticon.tracker.help"/>
             <cs:attribute name="bundle.jars" component="com.verticon.tracker.logging.logback"/>
             <cs:attribute name="bundle.jars" component="com.verticon.tracker.ocl.query"/>
             <cs:attribute name="bundle.jars" component="com.verticon.tracker.reader"/>
