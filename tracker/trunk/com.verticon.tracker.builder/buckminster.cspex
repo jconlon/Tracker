@@ -7,6 +7,7 @@
         <dependency name="com.verticon.tracker.base.dep" componentType="eclipse.feature"/>
         <dependency name="com.verticon.tracker.product.desktop" componentType="eclipse.feature"/>
         <dependency name="com.verticon.tracker.update" componentType="buckminster"/>
+        <dependency name="com.verticon.tracker.documentation" componentType="buckminster"/>
     </dependencies>
 	<generators>
 		<!-- Place your Generators here -->
@@ -63,6 +64,9 @@
 	</actions>
 	<groups>
 		<!-- Place your Groups here -->
+		<public name="deploy.documentation">
+            <attribute name="deploy.documentation.to.local.p2.staging" component="com.verticon.tracker.documentation"/>
+        </public>
 	</groups>
 	<alterDependencies>
 		<!-- Place your Dependency alterations here -->

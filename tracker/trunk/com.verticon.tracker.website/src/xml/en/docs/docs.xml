@@ -24,6 +24,10 @@
 	
 	<section id="userGuide">
     <title>User Guide</title>
-    <para>TODO</para>
+    <para>
+    Installation, Customization and Usage Guide. The <ulink 
+    url="http://tracker.verticon.com/Tracker/documentation/trackerUserGuide.pdf">trackerUserGuide.pdf</ulink> is an extensive reference for 
+    installing, using and customizing the Tracker software. 
+    </para>
 	</section>
 </webpage>

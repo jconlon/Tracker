@@ -1,35 +1,33 @@
 <?xml version="1.0"?>
-<!--
-  - Author:  Nathan A. Good <mail@nathanagood.com>
-  -->
-<project name="docbook-src" default="build-html">
+<project name="docbook-src" default="build-pdf">
 
 	<description>
-            This Ant build.xml file is used to transform DocBook XML to various
+            This Ant build.xml file is used to transform DocBook XML to PDF
     </description>
 
-	<!--
-      - Configure basic properties that will be used in the file.
-      
-      -->
-	<property name="docbook.xsl.dir" value="docbook-xsl-1.72.0" />
-	<property name="doc.dir" value="doc" />
-
-	<property name="doc.figures.dir" value="${doc.dir}/figures" />
-	<property name="src.dir" value="src" />
-	<property name="dist.dir" value="dist" />
-	<property name="src.figures.dir" value="${src.dir}/figures" />
-	<property name="gen.dir" value="generated-xml" />
-	<property name="fo.dir" value="fo" /> 
-	<property name="fo.figures.dir" value="figures" />
-	<property name="merge.docs" value="${src.dir}/mergeDocs.xml" />
+	<property name="thisproject" location="${ant.file}/.."/>
+	<property name="docbook.xsl.dir" location="${thisproject}/docbook-xsl-1.72.0" />
+	<property name="dist.dir" location="${thisproject}/dist" />
+	<property name="gen.dir" location="${thisproject}/generated-xml" />
+	<property name="fo.dir" location="${thisproject}/fo" />
+	<property name="docbooksource" location="${thisproject}/docbook/"/>
+	<property name="xinclude.path.dir" location="${thisproject}/../com.verticon.tracker.ant.utilities/artifact"/>
+	<property name="xalan.lib.dir" location="${thisproject}/lib/xalan-j_2_7_0" />
+	
+	<property name="xincludeclassname" value="com.verticon.ant.utilities.xsl.XIncludeTask"/>
+	
 	<property name="merged.doc.name" value="mergedDoc.xml" />
-	<property name="merged.doc" value="${gen.dir}/${merged.doc.name}" />
-	<property name="xml.merge.doc.stylesheet" value="${src.dir}/merge-using-merge-doc.xslt" />
-	<property name="fo.stylesheet" value="${docbook.xsl.dir}/fo/docbook.xsl" />
-	<property name="html.stylesheet" value="${docbook.xsl.dir}/eclipse/eclipse.xsl" />
-	<property name="xalan.lib.dir" value="lib/xalan-j_2_7_0" />
+	<property name="merged.doc" location="${gen.dir}/${merged.doc.name}" />
+	
+	<property name="fo.stylesheet" location="${docbook.xsl.dir}/fo/docbook.xsl" />
+	
+	<property name="pdf.document.name" value="trackerUserGuide.pdf"/>
+	
+	<property name="local.output" location="${dist.dir}/${pdf.document.name}"/>
 
+	
+	
+	
 	<!--
       - Sets up the classpath for the Xalan and Xerces implementations
       - that are to be used in this script, since the versions that ship
@@ -43,13 +41,6 @@
 	</path>
 
 	<!--
-      - target:  usage
-      -->
-	<target name="usage" description="Prints the Ant build.xml usage">
-		<echo message="Use -projecthelp to get a list of the available targets." />
-	</target>
-
-	<!--
       - target:  clean
       -->
 	<target name="clean" description="Cleans up generated files.">
@@ -58,88 +49,143 @@
 		<delete dir="${gen.dir}" />
 		<delete dir="${dist.dir}" />
 		<delete dir="${fo.dir}" />
-		<delete dir="${fo.figures.dir}" />
 	</target>
 
-	<!--
-      - target:  depends
-      -->
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: depends                      
+         - - - - - - - - - - - - - - - - - -->
 	<target name="depends" depends="clean">
-		<mkdir dir="${doc.dir}" />
-		<mkdir dir="${doc.figures.dir}" />
 		<mkdir dir="${gen.dir}" />
 		<mkdir dir="${dist.dir}"/>
 		<mkdir dir="${fo.dir}"/>
-		<mkdir dir="${fo.figures.dir}"/>
 	</target>
 
-	<!--
-      - target:  build-html
-      - description:  Iterates through a directory and transforms
-      -     .xml files into .html files using the DocBook XSL.
-      -->
-	<target name="build-html" depends="build-pdf" 
-        description="Generates HTML files from DocBook XML">
-		<xslt style="${html.stylesheet}" extension=".html" 
-            basedir="generated-xml" destdir="doc">
-			<classpath refid="xalan.classpath" />
-			<param name="draft.mode" expression="yes"/>
-			<param name="eclipse.plugin.name" expression="Tracker Documentation"/>
-			<param name="eclipse.plugin.id" expression="com.verticon.tracker.help"/>
-			<param name="eclipse.plugin.provider" expression="Verticon, Inc."/>
-		</xslt>
-		<copy todir="${doc.figures.dir}">
-		    <fileset dir="${src.figures.dir}"/>
-		</copy>
-	</target>
-
-	<!--
-      - target:  build-xml
-      - description:  Iterates through a directory and transforms
-      -     chapter-x.xml files into one xml DocBook instance.
-      -->
-	<target name="build-xml" depends="depends" 
-	        description="Generates one XML DocBook XML">
-		<xslt style="${xml.merge.doc.stylesheet}"  
-	            in="${merge.docs}" out="${merged.doc}">
-			<classpath refid="xalan.classpath" />
+	<!-- ================================= 
+	          target: mergeDoc            
+	         ================================= -->
+	<target name="mergeDoc"  depends="depends, setup.xsl.include.task" 
+		description="Generates one XML DocBook XML">
+       <echo>Starting include from ${docbooksource}/trackerhelp.dbk to ${gen.dir}/mergedDoc.xml</echo>
+		
+		<xsl.include in="${docbooksource}/trackerhelp.dbk" 
+	    			 out="${gen.dir}/mergedDoc.xml" />
+		
+		<!-- 
+		
+		    1. add attribute scale="65" all imagedata elements
+		    
+			2. Replace all ulinks pointing to Eclipse plugins with the form of 
+			<ulink url="PLUGINS_ROOT/org.eclipse.platform.doc.user/concepts/concepts-6.htm">
+			with ulinks like
+			<ulink url="http://help.eclipse.org/ganymede/index.jsp?topic=/org.eclipse.platform.doc.user/concepts/concepts-6.htm">
 			
-		</xslt>
+			author's note: Should do this in one style
+		-->
+		<property name="scale.images" location="${thisproject}/misc-xsl/scaleImages.xsl"/>
+
+		<xslt in="${gen.dir}/mergedDoc.xml" out="${gen.dir}/mergedDocTemp.xml"
+		      style="${scale.images}"/>
+		
+		<move file="${gen.dir}/mergedDocTemp.xml" tofile="${gen.dir}/mergedDoc.xml"/>
+		
+		<replace file="${gen.dir}/mergedDoc.xml">
+		  <replacetoken><![CDATA[PLUGINS_ROOT]]></replacetoken>
+		  <replacevalue><![CDATA[http://help.eclipse.org/ganymede/index.jsp?topic=]]></replacevalue>
+		</replace>
 	</target>
+
 	
-	<!--
-	    - target:  build-pdf
-	    - description:  Iterates through a directory and transforms
-	    -     .xml files into .fo files which can then be turned into DocBook XML
-	    -     files.
-	    -->
-	<target name="build-pdf" depends="build-xml" 
+
+	
+	<!-- ================================= 
+          target: build-pdf   
+          description: Iterates through a directory and transforms
+	       .xml files into .fo files which can then be turned into PDF
+         ================================= -->
+	<target name="build-pdf" depends="mergeDoc, setup.fop.task" 
 	   description="Generates PDF files from DocBook XML">
-	    <xslt style="${fo.stylesheet}" extension=".fo" 
-	        basedir="${gen.dir}" destdir="${fo.dir}">
-	        <classpath refid="xalan.classpath" />
-	        <include name="${merged.doc.name}" />
-	    </xslt>
+		<echo>Styling the mergedDoc to fo</echo>
+		<antcall target="style.for.buckminster"></antcall>
+		<antcall target="style.for.plain.ant"></antcall>
 
-	    <property name="fop.home" value="lib/fop-0.93" />
+		<!--  
+		Fop must be able to find the images referenced in the mergedDoc.fo which are relative to 
+		a base directory.  Set the basedir attribute to point to a directory below the root for 
+		this to work.
+		 -->
+		<echo>foping the fo to pdf</echo>
+		<fop format="application/pdf" 
+			fofile="${fo.dir}/mergedDoc.fo"
+			basedir="./src/"
+	        outfile="${local.output}" />
+	</target>
 
-	    <taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop">
-	        <classpath>
-	            <fileset dir="${fop.home}/lib">
-	                <include name="*.jar" />
-	            </fileset>
-	            <fileset dir="${fop.home}/build">
-	                <include name="fop.jar" />
-	                <include name="fop-hyph.jar" />
-	            </fileset>
-	        </classpath>
-	     </taskdef>
-		<copy todir="${fo.figures.dir}">
-				    <fileset dir="${src.figures.dir}"/>
-		</copy>
-	    <fop format="application/pdf" fofile="${fo.dir}/mergedDoc.fo" 
-	        outfile="${dist.dir}/book.pdf" />
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: setup.xsl.include.task                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="setup.xsl.include.task">
+		<echo>Setting up xsl.incude. task</echo>
+		<path id="xinclude.path">
+			<fileset dir="${xinclude.path.dir}" includes="*.jar" />
+		</path>
+
+		<typedef name="xsl.include" classname="${xincludeclassname}" classpathref="xinclude.path" />
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: setup.fop.task                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="setup.fop.task">
+    	<echo>Setting up fop task</echo>
+    	<property name="fop.home" value="lib/fop-0.93" />
+		<taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop">
+			<classpath>
+				<fileset dir="${fop.home}/lib">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="${fop.home}/build">
+					<include name="fop.jar" />
+					<include name="fop-hyph.jar" />
+				</fileset>
+			</classpath>
+		</taskdef>
     </target>
 
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: style.for.buckminster                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="style.for.buckminster" if="buckminster.home">
+    	<xslt style="${fo.stylesheet}" extension=".fo" 
+    		        basedir="${gen.dir}" destdir="${fo.dir}">
+    				<!--classpath refid="xalan.classpath" /-->
+    				<include name="${merged.doc.name}" />
+    	</xslt>
+    </target>
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: style.for.buckminster                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="style.for.plain.ant" unless="buckminster.home">
+    	<xslt style="${fo.stylesheet}" extension=".fo" 
+    		        basedir="${gen.dir}" destdir="${fo.dir}">
+    				<classpath refid="xalan.classpath" />
+    				<include name="${merged.doc.name}" />
+    	</xslt>
+    </target>
+
+
+	<!-- ================================= 
+	          target: deploy.p2.repositories  
+			  This will have to move for Ticket # 315
+	     =================================   -->
+	<target name="deploy.documentation.to.local.p2.staging" if="buckminster.home"
+		description="Copies all repos to a common folder for synchronization with a remote site">
+		<echoproperties></echoproperties>
+		<copy file="${local.output}" todir="${sp:action.output}"/>
+		
+	</target>
+	
+	
 
 </project>
