@@ -73,9 +73,10 @@
 				<listitem>
 					<para>
 						In real time, from tag ID readers, through the Tracker Readers Feature
-						<footnote id="fnrex1a">
-							<para>An optional feature that may be provisioned by the user.</para>
-					</footnote>.
+					</para>
+					<para>
+					    See <link linkend="editingPremisesDocuments">Editing Premises Documents</link> for details on
+					    Tracker Readers Feature and Premises document editing.
 					</para>
 				</listitem>
 
@@ -269,10 +270,15 @@
 				<listitem>
 					<para>The Premises Transaction Editor can be used in a similar way to 
 					the Premises Editor, but it has additional functionality to support
-				    the Readers Feature<footnote>
-					<para>An optional feature that may be provisioned by the user.</para>
-					</footnote> enabling online Tag ID Event Readers to add Event Transactions to 
+				    the Readers Feature.
+					<note><title>Reader Feature</title>
+					<para>The Readers Feature is an optional Feature that may be installed 
+					(called <glossterm>provisioned</glossterm>) by the user. The Readers Feature
+					allows the Tracker Desktop User to control and configure connections to one or more 
+				    Tag ID Event Readers enabling them to independently add Event Transactions to 
 					Premises Documents.</para>
+					</note>
+					</para>
 				</listitem>
 			</orderedlist>
 		</para>
@@ -295,9 +301,9 @@
 			Specific views, each giving the user a unique way to <emphasis>view and edit</emphasis> 
 			the information in a Premises Document. Selecting information in the Premises Editor 
 			will synchronize selections in complementary views
-			as shown in <xref linkend="fig_ExcludeResultPrefixesContentAssist1"/>.
+			as shown in <xref linkend="fig_editorAndOutline"/>.
 		</para>
-		<figure id="fig_ExcludeResultPrefixesContentAssist1">
+		<figure id="fig_editorAndOutline">
                 <title>Premises Editor Synchronized with Views
                 </title>
                 <mediaobject>
