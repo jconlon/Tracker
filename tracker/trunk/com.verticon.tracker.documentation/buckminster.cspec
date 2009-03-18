@@ -5,6 +5,7 @@
     </cs:dependencies>
     <cs:artifacts>
         <cs:public name="eclipse.help.builder" path="build.xml" base="make/"/>
+        <cs:private name="fair-MetaModel.pdf" path="fair-MetaModel.pdf" base="src/"/>
         <cs:private name="premises-MetaModel.pdf" path="premises-MetaModel.pdf" base="src/"/>
     </cs:artifacts>
     <cs:actions>
@@ -27,6 +28,7 @@
     <cs:groups>
         <cs:private name="docs">
             <cs:attribute name="premises-MetaModel.pdf"/>
+            <cs:attribute name="fair-MetaModel.pdf"/>
         </cs:private>
     </cs:groups>
 </cs:cspec>

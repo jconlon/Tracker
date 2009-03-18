@@ -57,6 +57,16 @@
 						<entry>Premises Editor</entry>
 						<entry>http://www.verticon.com/ns/tracker/0.1.0</entry>
 					</row>
+					<row>
+						<entry>
+							<ulink
+								url="http://tracker.verticon.com/Tracker/documentation/fair-MetaModel.pdf">
+								fair-MetaModel.pdf
+							</ulink>
+						</entry>
+						<entry>Fair Editor</entry>
+						<entry>http://www.verticon.com/ns/tracker/fair/0.1.0</entry>
+					</row>
 				</tbody>
 			</tgroup>
 		</table>

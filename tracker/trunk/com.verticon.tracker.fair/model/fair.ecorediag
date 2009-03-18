@@ -384,7 +384,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ToFE0WMkEd2cfb89hdQDkA" fontName="Sans" fontHeight="36" bold="true" description="Fair MetaModel"/>
     <element xsi:nil="true"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ToFE0mMkEd2cfb89hdQDkA" x="40" y="210"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ToFE0mMkEd2cfb89hdQDkA" x="10" y="10"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_rFH-EGMkEd2cfb89hdQDkA" type="Text">
     <children xmi:type="notation:Node" xmi:id="_rFaR8GMkEd2cfb89hdQDkA" type="DiagramName">
@@ -407,6 +407,28 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_CmL0oWMlEd2cfb89hdQDkA" fontName="Sans" fontHeight="16" description="&lt;------ Exhibit references animal: Tracker.Animal ----"/>
     <element xsi:nil="true"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CmL0omMlEd2cfb89hdQDkA" x="310" y="870"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_JGBoMBPlEd6OX4ZnaZCE8A" type="Text">
+    <children xmi:type="notation:Node" xmi:id="_JGMAQBPlEd6OX4ZnaZCE8A" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_JGMnUBPlEd6OX4ZnaZCE8A" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_JGBoMRPlEd6OX4ZnaZCE8A" fontName="Sans" fontHeight="36"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JGBoMhPlEd6OX4ZnaZCE8A" x="50" y="292"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_N7SG8BPlEd6OX4ZnaZCE8A" type="Text">
+    <children xmi:type="notation:Node" xmi:id="_N7SuABPlEd6OX4ZnaZCE8A" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_N7SuARPlEd6OX4ZnaZCE8A" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_N7SG8RPlEd6OX4ZnaZCE8A" fontName="Sans" fontHeight="26" description="Package URI http://www.verticon.com/ns/tracker/fair/0.1.0"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_N7SG8hPlEd6OX4ZnaZCE8A" x="380" y="20"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_JuqDQWMREd2cfb89hdQDkA"/>
   <element xmi:type="ecore:EPackage" href="fair.ecore#/"/>
