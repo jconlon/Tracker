@@ -7,6 +7,7 @@
 
 	<property name="thisproject" location="${ant.file}/.."/>
 	<property name="docbook.xsl.dir" location="${thisproject}/docbook-xsl-1.72.0" />
+	<property name="src.dir" location="${thisproject}/src" />
 	<property name="dist.dir" location="${thisproject}/dist" />
 	<property name="gen.dir" location="${thisproject}/generated-xml" />
 	<property name="fo.dir" location="${thisproject}/fo" />
@@ -182,8 +183,15 @@
 	<target name="deploy.documentation.to.local.p2.staging" if="buckminster.home"
 		description="Copies all repos to a common folder for synchronization with a remote site">
 		<echoproperties></echoproperties>
-		<copy file="${local.output}" todir="${sp:action.output}"/>
+		<copy todir="${dist.dir}">
+		    <fileset dir="${src.dir}">
+		      <include name="**/*.pdf"/>
+		    </fileset>
+		  </copy>
 		
+		<copy todir="${sp:action.output}">
+		    <fileset dir="${dist.dir}"/>
+		  </copy>
 	</target>
 	
 	
