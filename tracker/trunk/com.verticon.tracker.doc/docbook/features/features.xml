@@ -23,15 +23,12 @@
 					<para>Tools for Querying Operational Data;</para>
 				</listitem>
 				<listitem>
-					<para>Utilities for interfacing with Tag Id Readers.<footnote>
-						<para>Includes support for serial and Bluetooth connections.</para>
-						</footnote>
+					<para>Utilities for interfacing with Tag Id Readers, including support for 
+					serial and Bluetooth connections;
 					</para>
 				</listitem>
 				<listitem>
-					<para>Business Intelligence Reporting Tools.<footnote>
-						<para>Eclipse BIRT.</para>
-						</footnote>
+					<para>Eclipse Business Intelligence Reporting Tools <acronym>BIRT</acronym>.
 					</para>
 				</listitem>
 			</itemizedlist>
