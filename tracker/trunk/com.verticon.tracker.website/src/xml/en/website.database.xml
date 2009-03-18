@@ -73,6 +73,14 @@
             <ttl>User Guide</ttl>
             <xreftext>the section called “User Guide”</xreftext>
          </div>
+         <div element="section" href="#d8e46" number="">
+            <ttl>Other Documentation</ttl>
+            <xreftext>the section called “Other Documentation”</xreftext>
+            <obj element="table" href="#tracker.docs.models.table" number="1">
+               <ttl>Tracker Editor MetaModels</ttl>
+               <xreftext>Table 1, “Tracker Editor MetaModels”</xreftext>
+            </obj>
+         </div>
       </div>
    </document>
 
