@@ -177,10 +177,10 @@
 
 
 	<!-- ================================= 
-	          target: deploy.p2.repositories  
-			  This will have to move for Ticket # 315
+	          target: deploy.documentation.to.local.s3.staging 
+			 
 	     =================================   -->
-	<target name="deploy.documentation.to.local.p2.staging" if="buckminster.home"
+	<target name="deploy.documentation.to.local.s3.staging" if="buckminster.home"
 		description="Copies all repos to a common folder for synchronization with a remote site">
 		<echoproperties></echoproperties>
 		<copy todir="${dist.dir}">
