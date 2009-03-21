@@ -92,7 +92,8 @@ public class GenericObservableMapCellLabelProvider extends ColumnLabelProvider {
 			for (int i = 0; i < elements.length; i++) {
 				elements[i] = attributeMaps[i].get(element);
 			}
-			return MessageFormat.format(templateText, elements);
+			String out = MessageFormat.format(templateText, elements);
+			return out.equals("null")?null:out;
 		}
 		
 		return null;
