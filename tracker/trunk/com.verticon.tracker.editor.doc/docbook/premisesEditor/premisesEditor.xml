@@ -344,7 +344,11 @@
 		<section id="editingPremisesDocuments_enteringDateTime">
 			<?dbhtml filename="editingPremisesDocuments/editingPremisesDocuments_enteringDateTime.html" ?>
 			<title>Entering Date and Time</title>
-			<para>When manually entering Dates and DateTime attribute values in Premises documents the following formating patterns are determinative:<table frame='all'>
+			<para>When manually entering Dates<footnote >
+				<para>The Animal BirthDate value is the only Date value that can be set to null by entering the text <userinput>0-0-0</userinput> 
+				in the Properties view or the Animals view. </para>
+				</footnote>  
+				and DateTime attribute values in Premises documents the following formating patterns are determinative:<table frame='all'>
 				<title>Format Patterns for Text Entry</title>
 				<tgroup cols='2' align='left' colsep='1' rowsep='1'>
 					<colspec colname='c1' />
