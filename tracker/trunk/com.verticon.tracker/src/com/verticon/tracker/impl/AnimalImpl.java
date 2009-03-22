@@ -336,11 +336,26 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setBirthDate(Date newBirthDate) {
+	public void setBirthDateGen(Date newBirthDate) {
 		Date oldBirthDate = birthDate;
 		birthDate = newBirthDate;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__BIRTH_DATE, oldBirthDate, birthDate));
+	}
+	private final static Calendar OLDEST_VALID_DATE = Calendar.getInstance();
+	static{
+		OLDEST_VALID_DATE.set(Calendar.YEAR, 1900);
+	}
+	/**
+	 * Extends functionality of generated setBirthDate so the user can null the date.
+	 * @generated NOT
+	 */
+	public void setBirthDate(Date newBirthDate) {
+		if(OLDEST_VALID_DATE.getTime().before(newBirthDate)){
+			setBirthDateGen(newBirthDate);
+		}else{
+		    setBirthDateGen(null);
+		}
 	}
 
 	/**
