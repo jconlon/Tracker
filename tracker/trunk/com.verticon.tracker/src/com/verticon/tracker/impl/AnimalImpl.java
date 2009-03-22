@@ -350,12 +350,22 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * Extends functionality of generated setBirthDate so the user can null the date.
 	 * @generated NOT
 	 */
+	/**
+	 * Extends functionality of generated setBirthDate so the user can null the date.
+	 * @generated NOT
+	 */
 	public void setBirthDate(Date newBirthDate) {
 		if(OLDEST_VALID_DATE.getTime().before(newBirthDate)){
 			setBirthDateGen(newBirthDate);
 		}else{
 		    setBirthDateGen(null);
 		}
+		int oldAgeInDays = getAgeInDays();
+		calculateAge();
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__AGE_IN_DAYS, 
+					oldAgeInDays, getAgeInDays()));
+		
 	}
 
 	/**
