@@ -48,9 +48,9 @@
 	
 	<section id="overviewFunctionaldesc">
 	     <?dbhtml filename="overview/premisesEditorOverview_functionalDescription.html" ?>
-		<title>Functional Description</title>
+		<title>Functional Overview</title>
 		<para>
-			Premises Editor are used to document animal event histories for farm animal
+			The Premises Editor is used to document animal event histories for farm animal
 			producers and/or livestock infrastructure providers. Premises details, 
 			animals and event histories are created, edited, manipulated, and persisted 
 			as Premises documents.
@@ -85,6 +85,88 @@
 		</section>
 	</section>
  
+    <section id="useCase">
+      <?dbhtml filename="usecase/premisesEditorModel_useCase.html" ?>
+		<title>Premises Editor Use Cases</title>
+		<para>
+		To best depict what the Premises Editor can do for Tracker users the following 
+		section presents a series of <emphasis>Use-Case</emphasis> diagrams.  
+		<xref linkend="fig_CoreUseCases" />   shows core usage requirements for the Premises 
+		Editor. 
+		</para>
+		<figure id="fig_CoreUseCases">
+			<title>Premises Editor Overview</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/useCases/core.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+	
+	    <para>
+		  Once the Tracker Desktop and the Premises Editor are installed setup takes less than a minute.
+		  Administration use-cases are shown in
+		<xref linkend="fig_setUpUseCases" />. 
+		</para>
+	    
+	    <figure id="fig_setUpUseCases">
+			<title>Setting Up the Premises Editor</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/useCases/setup.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+		<para>
+		  Updating document use-cases are shown in
+		<xref linkend="fig_updateUseCases" />. 
+		</para>
+		<figure id="fig_updateUseCases">
+			<title>Updating Documents</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/useCases/update.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+		<para>
+		  Tracker Operators may need to work with large Premises documents. Providing Tracker Operators
+		  with the tools to navigate around these large documents has been a major design goal of the 
+		  Premises Editor. Navigation use-cases are shown in
+		<xref linkend="fig_navigateUseCases" />. 
+		</para>
+		<figure id="fig_navigateUseCases">
+			<title>Navigating in the Editor</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/useCases/navigate.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+		
+		<para>
+		  As shown in previous use-cases Premises Documents can be created and updated by human operators
+		  Premises Editor.  To improve efficiency new animals and events can also be added to Premises 
+		  Documents by using external tag ID readers connected to the Tracker via data 
+		  communications channels.  This is shown in
+		<xref linkend="fig_connectedReadersUseCases" />. 
+		</para>
+		<figure id="fig_connectedReadersUseCases">
+			<title>Working with Connected Readers</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/useCases/readers.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+    </section>
+    
+    
+    
+    
 	<section id="premisesDocuments">
 		<?dbhtml filename="model/premisesEditorModel_premisesDocuments.html" ?>
 		<title>Premises Documents</title>
