@@ -86,9 +86,7 @@ public class ChangeAnimalTypeWizard extends Wizard  {
 	}
 
 	/**
-	 * On the selected Lot use an AddCommand to create a new Exhibit
-	 * for each selected animal, and assign the exhibitor for each exhibit 
-	 * to the selected person.
+	 * .
 	 */
 	@Override
 	public boolean performFinish() {
