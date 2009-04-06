@@ -250,7 +250,7 @@
       <!-- TagIds Commands -->
       <command
             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
-            defaultHandler="com.verticon.tracker.editor.handlers.ImportTagIdsAsSelectedEventsHandler"
+            defaultHandler="com.verticon.tracker.editor.handlers.ImportTagIdsAsTemplateEventsHandler"
             description="%_UI_commands_importTagIds_asTemplate_description"
             id="com.verticon.tracker.editor.commands.importTagIds.asTemplate.command"
             name="%_UI_commands_importTagIds_asTemplate_name">
