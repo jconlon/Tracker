@@ -625,7 +625,10 @@
 					</para>
 				</listitem>
 				<listitem>
-					<para>Indirectly selecting an animal or set of animals in the Premises Document from lists of Tag/@idNumbers contained in Tag IdNumber files. See<xref linkend="chBulkEventProcessing_IdNumberFiles" />
+					<para>
+					Indirectly selecting an animal or set of animals in the Premises Document from 
+					lists of Tag/@idNumbers contained in Tag IdNumber files. 
+					See<xref linkend="chBulkEventProcessing_IdNumberFiles" />
 					</para>
 				</listitem>
 			</orderedlist>
@@ -671,33 +674,25 @@
 				<listitem>
 					<para>
 						Date Time attributes of Animal Document Event Elements are considered significant
-					    and are copied to the Event Elements that are added to the specified Animal or set of Animal Elements in the Premises Document. The following are special exceptions;
-						<orderedlist numeration="arabic">
-							<listitem>
-								<para>
-									When a tags file name uses the format yyMMddHHmmss.tags. The Date 
-									Time attributes of all Event Elements copied to the Premises Document
-								    will assume the time stamp of of the date pattern
-									<emphasis>yyMMddHHss</emphasis>
-									. For example the tags file 060409131111.Tags will set the Date Time 
-									attribute of all Event Elements to 2006-04-09T13:11:11;
-								</para>
-							</listitem>
-							<listitem>
-								<para>
-									When the date of an event in an Animal Document Template is set to 
-									a year earlier than 1000 AD, then the date of the event copied to 
-									the Premises Document is set to the current time the Event.
-								</para>
-							</listitem>
-
-						</orderedlist>
-						<note>
+					    and are copied to the Event Elements that are added to the specified Animal or 
+					    set of Animal Elements in the Premises Document. 
+					 </para>
+					 <note>
+					   <para>
+					 	To set the time of the events loaded to the Premises Document to the current 
+						time, set the dates of all the events in an Animal Document Template to 
+						date times earlier than 1000 AD. 
+					 	</para>
+					 </note>
+					 <note>
 							<para>
-								Bulk loading of events is only applicable to the the Tracker Editor, when transaction Events and Animals are added to Premises Documents using the Tracker Transaction processing facility, the Event Element added to the Premises Document will always have the Date Time attributes set to the current time.
+								Bulk loading of events is only applicable to the the Tracker 
+								Editor, when transaction Events and Animals are added to Premises 
+								Documents using the Tracker Transaction processing facility, the 
+								Event Element added to the Premises Document will always have the 
+								Date Time attributes set to the current time.
 							</para>
-						</note>
-					</para>
+					</note>
 				</listitem>
 			</orderedlist>
 		</para>
@@ -721,7 +716,7 @@
 					<code>Tag/@idNumber</code> attributes.
 				</para>
 			</note>
-			The generic way to handle serial and/or Bluetooth tag id number transmissions 
+			A generic way to handle serial and/or Bluetooth tag id number transmissions 
 			is to setup the receiving computer's communication facility to capture this data 
 			as text files.  Capture files containing <acronym>ASCII</acronym> numbers that 
 			are saved with a *.tags extension are identified as
@@ -744,7 +739,7 @@
 				<member>ss is the second</member>
 			</simplelist>
 			<example>
-				<title>A Time stamped Tag IdNumber File Name</title>
+				<title>A Time Stamped Tag IdNumber File Name</title>
 				<formalpara>
 					<title>060409131111.tags</title>
 					<para>
@@ -754,7 +749,13 @@
 					</para>
 				</formalpara>
 			</example>
-
+			<note>
+			  <para>
+				  To use the Time Stamped Tag IdNumber File Names the dates of  
+				  the events in an Animal Document Template must be set 
+				  to date times earlier than 1000 AD. 
+			  </para>
+			</note>
 		</para>
 		<tip>
 			<para>
