@@ -3,6 +3,7 @@
  */
 package com.verticon.tracker.editor.util;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -10,8 +11,10 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.Preferences;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 
 import com.verticon.tracker.Animal;
@@ -23,48 +26,144 @@ import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.editor.preferences.PreferenceConstants;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
+import com.verticon.tracker.util.TrackerUtils;
 
 /**
- * Data container for an Animal template and a flag indicating how to use event
- * timestamps
+ * Container modeling the an Animal Template (*.animal) Document File
+ * and behavior associated with copying events from a template animal
+ * for loading to animals in a Premises Document. 
+ * 
+ * Under certain conditions the dates of the Events in this bean will be
+ * changed before being returned to clients.
+ * 
+ * Three dateTime manipulations are supported:
+ * 
+ * 1. If the dateTimes of templateEvents are after a reference time, then
+ * dateTimes of the copied events are the same as in the template events. 
+ * 
+ * 2. If the dateTimes of templateEvents are before a reference time AND there is NO
+ * default date time set then the current dateTime is used instead of the dateTime in 
+ * the template events.
+ * 
+ * 3. If the dateTimes of templateEvents are before a reference time AND there IS a
+ * default date time set then a default dateTime is used for all events.
  * 
  * @author jconlon
  *
  */
  public class AnimalTemplateBean {
-	private final Animal animalInTemplate;
+	
+	private static final GregorianCalendar DATE_REFERENCE = 
+		new GregorianCalendar(2000, Calendar.JANUARY, 1);  
+
+	private final Animal animalInTemplate; 
 	private Date defaultEventDate = null;
-	private final String tagsFileName;
+	private final String fileNameOfTemplate;
 	private final static Copier copier = new Copier(false, false);
 	
-	/**
-	 * When a tagsFileName uses the format yyMMddHHmmss.tags the Date Time 
-	 * attributes of all Event Elements copied to the Premises Document will 
-	 * assume the time stamp of of the date pattern yyMMddHHss. For example 
-	 * the tags file 060409131111.Tags will set the Date Time attribute of 
-	 * all Event Elements to 2006-04-09T13:11:11
-	 * 
-	 * @param animalInTemplate
-	 * @param tagsFileName of the Template. 
+	/** 
+	 * Internal constructor
+	 * @param animal
+	 * @param fileNameOfTemplate
 	 */
-	public AnimalTemplateBean(Animal animal, String tagsFileName) {
+	private AnimalTemplateBean(Animal animal, String fileNameOfTemplate) {
 		super();
 		this.animalInTemplate = animal;
-		this.tagsFileName=tagsFileName;
-	}
-
-	/**
-	 * @deprecated use method with the string parm 
-	 * @return the animalInTemplate and set all the event dates if useCurrentDate is set.
-	 */
-	@Deprecated
-	public Animal getAnimal(Long tag) {
-		return getAnimal( tag.toString(), null);
+		this.fileNameOfTemplate=fileNameOfTemplate;
 	}
 	
+	
+	/**
+	 * 
+	 * @param animalTemplateFile 
+	 * @return AnimalTemplateBean or null if one could not be created from the animalTemplateFile
+	 */
+	public final static AnimalTemplateBean instance(IFile animalTemplateFile){
+		Animal animal = getAnimal( animalTemplateFile);
+		if(animal==null){
+			return null;
+		}
+		AnimalTemplateBean templateBean = new AnimalTemplateBean(animal, animalTemplateFile.getName());
+		return templateBean;
+	}
+	/**
+	 * 
+	 * @param animal in the bean
+	 * @param event to be added to the animal
+	 * @return AnimalTemplateBean
+	 */
+	public static final AnimalTemplateBean instance(Animal animal, Event event) {
+		Tag tag = TrackerFactory.eINSTANCE.createTag();
+		tag.getEvents().add(event);
+		animal.getTags().add(tag);
+		AnimalTemplateBean templateBean = new AnimalTemplateBean(animal,
+				"User prompted dialog");
+		return templateBean;
+	}
+	
+	/**
+	 * 
+	 * @return number of Events in bean
+	 */
+	public int numberOfEvents(){
+		return animalInTemplate.eventHistory().size();
+	}
+	
+	/**
+	 * 
+	 * @return a collection of events copied from the template.
+	 */
+	public Collection<Event> getEvents(Premises premises){
+		Animal copiedAnimal = (Animal)copier.copy(animalInTemplate);
+		if(premises!=null){
+			setLocationOnCopiedSightingEvents( copiedAnimal.eventHistory(),  premises);
+		}
+		Collection<Event> events = null;
+		if(copiedAnimal.eventHistory().isEmpty()){
+			events= Collections.emptyList();
+		}else{
+			setAppropriateDateOnEvents(copiedAnimal, defaultEventDate);
+			events = new ArrayList<Event>();
+			events.addAll(copiedAnimal.eventHistory());//Just add all the events
+		}
+		return events;
+	}
 
 	/**
-	 * Copy the animalInTemplate and its tree of Tags and Events.
+	 * This is the defaultDate to use for copied events
+	 * when the date Time of an event in this 
+	 * template is before the reference date.
+	 * 
+	 * If it is set to null, the default then events with
+	 * dateTimes before the reference will be set to a null
+	 * value.
+	 * 
+	 * @param date
+	 */
+    void setDateForAllEvents(Date date) {
+		this.defaultEventDate = date;
+	}
+
+	@Override
+	public String toString() {
+		return "Template resource: "+fileNameOfTemplate;
+	}
+	
+	/**
+	 * 
+	 * @return the defaultEventDate
+	 */
+	 Date getDate() {
+		return defaultEventDate;
+	}
+	 
+	
+	String getFileNameOfTemplate() {
+		return fileNameOfTemplate;
+	}
+
+	/**
+	 * Return a copy of the Animal and its trees of Tags and Events.
 	 * Sets Event dates if useCurrentDate is set.
 	 * 
 	 * Copier does not copy or any references so this has to 
@@ -74,7 +173,7 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 	 * 
 	 * @return copied animalInTemplate.
 	 */
-	public Animal getAnimal(String tag, Premises premises){
+	 Animal getAnimal(String tag, Premises premises){
 		
 		Animal copiedTemplateAnimal = (Animal)copier.copy(animalInTemplate);
 		if(premises!=null){
@@ -84,7 +183,7 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 			copiedTemplateAnimal.activeTag().setId(tag);
 			setAppropriateDateOnEvents(copiedTemplateAnimal, defaultEventDate);
 		}else{
-			//no active tag on the template animal, just create a tag
+			//no active tag on the template animal, just create an tag without events
 			Tag newTag = TrackerFactory.eINSTANCE.createTag();
 			newTag.setId(tag);
 			copiedTemplateAnimal.getTags().add(newTag);
@@ -92,6 +191,24 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 		return copiedTemplateAnimal;
 	}
 
+	/**
+	 * @param animalTemplateFile 
+	 * @return animal from the animalTemplateFile
+	 */
+	private final static Animal getAnimal(IFile animalTemplateFile) {
+		Resource resource;
+		try {
+			resource = ActionUtils.getResource(animalTemplateFile);
+		} catch (IOException e) {
+			return null;
+		}
+		if(resource==null){
+			return null;
+		}
+		Animal animal = TrackerUtils.getAnimalFromTemplate(resource);
+		return animal;
+	}
+	
 	/**
 	 * Sets appropriate dates on all animalInTemplate events.
 	 * @param copiedAnimal
@@ -194,49 +311,9 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 	}
 	
 
-	public int numberOfEvents(){
-		return animalInTemplate.eventHistory().size();
-	}
-	/**
-	 * 
-	 * @return a list of events using the current date if necessary.
-	 */
-	public Collection<Event> getEvents(Premises premises){
-		Animal copiedAnimal = (Animal)copier.copy(animalInTemplate);
-		if(premises!=null){
-			setLocationOnCopiedSightingEvents( copiedAnimal.eventHistory(),  premises);
-		}
-		Collection<Event> events = null;
-		if(copiedAnimal.eventHistory().isEmpty()){
-			events= Collections.emptyList();
-		}else{
-			setAppropriateDateOnEvents(copiedAnimal, defaultEventDate);
-			events = new ArrayList<Event>();
-			events.addAll(copiedAnimal.eventHistory());//Just add all the events
-		}
-		
-		return events;
-	}
-
-	public Date getDate() {
-		return defaultEventDate;
-	}
-
-	public void setDateForAllEvents(Date date) {
-		this.defaultEventDate = date;
-	}
-
-	public String getName() {
-		return tagsFileName;
-	}
-
-	@Override
-	public String toString() {
-		return "Template resource: "+tagsFileName;
-	}
 	
-	public static final GregorianCalendar DATE_REFERENCE = new GregorianCalendar(1000, Calendar.JANUARY, 1);  
-
+	
+	
     private static final void setEventDateIfTemplateDateBeforeReference(Event event, Date defaultDate){
 		if(event.getDateTime().before(DATE_REFERENCE.getTime())){
 			event.setDateTime(defaultDate);

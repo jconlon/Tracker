@@ -600,8 +600,8 @@
 		<title>Bulk Loading New Events and Animals</title>
 		<para>Although Premises Editors make it easy to add individual animals and 
 		events to Premises Documents, individually adding dozens of animals, or hundreds of events 
-		to a Premises is not practical. For bulk loading of animals and events Premises Editors
-	    use Animal Document Templates, Tag IdNumber files and event manipulation features to simplify 
+		to a Premises is not practical. For bulk loading of animals and events, Premises Editors
+	    use Animal Document Templates, Tag IdNumber files and event manipulation wizards to simplify 
 	    the process.</para>
 		<para>Like Premises Documents, Animal Document Templates are document files created by 
 		Premises Editor Document Creation Wizards. Think of Animal Documents as containing some but not 
@@ -611,7 +611,7 @@
 		serve as a way to represent an event or a set of events that can then be applied to one or more 
 		specified animals in a Premises Document.</para>
 		<para>Within a Premises Document you can specify which animals to apply the events contained 
-		in the Animal Document Template to, by:<orderedlist numeration="arabic">
+		in the Animal Document Template by:<orderedlist numeration="arabic">
 				<listitem>
 					<para>Directly selecting the animal or a set of animals in the Premises Document 
 					with mouse	selections.<tip>
@@ -639,19 +639,27 @@
 	    <?dbhtml filename="bulkProcessing/premisesBulkEventProcessing_animalTemplates.html" ?>
 		<title>Animal Document Templates</title>
 		<para>
-			Animal Document Templates are similar to Premises documents accept they use the *.animal 
-			extension, contain a default animal, an attached tag, and a set of representative events.  
-			Tracker Event manipulation utilities accessible through popup menus allow Animal Document 
-			Templates to be used to add various combinations of animals and/or events to specified 
-			sets of animals in the Premises Document.
+			Animal Document Templates are files that representative a single animal and a set of 
+			associated events.  Tracker event modification wizards<footnote>
+						<para>Event modification wizards are accessible through popup menus on specific 
+						Tracker document elements and File Resources.</para>
+						</footnote>
+			and Animal Document Templates allow the Tracker user
+			to add various combinations of animals and/or events to Premises Documents.
 		</para>
 		<para>
 			Animal Document Templates have the following characteristics;
 			<orderedlist numeration="loweralpha">
+			    <listitem>
+					<para>
+						Animal Document Templates are persisted as file resources with a 
+						*.animal extension;
+					</para>
+				</listitem>
 				<listitem>
 					<para>
-						Animal Documents contain a default Animal, a Tag and a set of representative 
-						events;
+						Animal Document Templates contain a default Animal, a Tag and a set of 
+						representative events;
 					</para>
 				</listitem>
 				<listitem>
@@ -660,36 +668,37 @@
 						is not considered significant and is ignored;
 					</para>
 				</listitem>
+				
 				<listitem>
 					<para>
-						Animal Documents are persisted in files with a *.animal extension;
+						Representative Events in Animal Document Templates are significant and will 
+						be copied to specified Animal or set Animals in the Premises Document;
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						All Animal Document Event Elements are significant and will be copied to the 
-						specified Animal or set Animals in the Premises Document;
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						Date Time attributes of Animal Document Event Elements are considered significant
-					    and are copied to the Event Elements that are added to the specified Animal or 
-					    set of Animal Elements in the Premises Document. 
+						Date Time attributes of Animal Document Templates Events are considered 
+						significant dates, if the Date Time value is a date after the year 2000. These 
+						attributes are copied to the Event Elements that are added to the 
+						Premises Document. 
 					 </para>
-					 <note>
-					   <para>
-					 	To set the time of the events loaded to the Premises Document to the current 
-						time, set the dates of all the events in an Animal Document Template to 
-						date times earlier than 1000 AD. 
-					 	</para>
-					 </note>
+					 <para>
+						When using 
+			            <link linkend="chBulkEventProcessing_IdNumberFiles">tagIdNumber Files</link>
+			            with date encoded names, 
+						Date Time attributes of Animal Document Templates Events are considered 
+						reference dates if the Date Time value of the Templated Event is a date 
+						before the year 2000. These attributes are changed to the date encoded in the 
+						name of the tagIdNumber file before being copied to the Event Elements that 
+						are added to the Premises Document. 
+					 </para>
+					 
 					 <note>
 							<para>
-								Bulk loading of events is only applicable to the the Tracker 
-								Editor, when transaction Events and Animals are added to Premises 
-								Documents using the Tracker Transaction processing facility, the 
-								Event Element added to the Premises Document will always have the 
+								When Events are added to Premises 
+								Documents using Tracker Readers feature, the 
+								Date Time attributes of the Events 
+							    added to the Premises Document will always have the 
 								Date Time attributes set to the current time.
 							</para>
 					</note>
@@ -753,7 +762,7 @@
 			  <para>
 				  To use the Time Stamped Tag IdNumber File Names the dates of  
 				  the events in an Animal Document Template must be set 
-				  to date times earlier than 1000 AD. 
+				  to date times earlier than the 2000 AD reference. 
 			  </para>
 			</note>
 		</para>

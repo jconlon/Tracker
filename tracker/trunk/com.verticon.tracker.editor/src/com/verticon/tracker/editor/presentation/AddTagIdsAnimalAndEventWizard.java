@@ -106,9 +106,8 @@ public class AddTagIdsAnimalAndEventWizard extends Wizard {
 	
 	
 	private AnimalTemplateBean getTemplateAnimalBean(){
-		Animal animal = selectAnimalWizardPage.getAnimal();
-		Event event = selectEventWizardPage.getEvent();
-		return ActionUtils.createTemplateBean(animal, event);
+		return AnimalTemplateBean.instance(selectAnimalWizardPage.getAnimal(), 
+				selectEventWizardPage.getEvent());
 	}
 
 }

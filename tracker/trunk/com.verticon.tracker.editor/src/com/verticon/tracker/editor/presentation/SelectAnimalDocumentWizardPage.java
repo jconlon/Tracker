@@ -3,7 +3,6 @@
  */
 package com.verticon.tracker.editor.presentation;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,7 +11,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -28,11 +26,9 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
-import com.verticon.tracker.Animal;
 import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
 import com.verticon.tracker.editor.util.ActionUtils;
 import com.verticon.tracker.editor.util.AnimalTemplateBean;
-import com.verticon.tracker.util.TrackerUtils;
 
 /**
  * @author jconlon
@@ -84,6 +80,7 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 	/**
 	 * Update the content before becoming visible.
 	 */
+	@Override
 	public void setVisible(boolean visible) {
 		if (visible) {
 			treeViewer.setInput(project);
@@ -96,42 +93,18 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 		if(selectedFile==null){
 			return null;
 		}
-		Resource resource = getResource();
-		if(resource == null){
-			return null;
-		}
-		return getTemplateAnimalBean(resource);
+		
+		return getTemplateAnimalBean(selectedFile);
 	}
 
 	/**
 	 * @param resource
 	 * @return
 	 */
-	private AnimalTemplateBean getTemplateAnimalBean(Resource resource) {
-		Animal animal = TrackerUtils.getAnimalFromTemplate(resource);
-		if(animal==null){
-			return null;
-		}
-		AnimalTemplateBean templateBean = new AnimalTemplateBean(animal, selectedFile.getName());
+	private AnimalTemplateBean getTemplateAnimalBean(IFile animalTemplateFile) {
+		AnimalTemplateBean templateBean = AnimalTemplateBean.instance(animalTemplateFile);
 		return templateBean;
 	}
-
-	/**
-	 * @return
-	 */
-	private Resource getResource() {
-		Resource resource;
-		try {
-			resource = ActionUtils.getResource(selectedFile);
-		} catch (IOException e) {
-			return null;
-		}
-		if(resource==null){
-			return null;
-		}
-		return resource;
-	}
-
 	
 	public void init(IEditorPart editor){
 		project = ActionUtils.extractResource(editor).getProject();
@@ -177,12 +150,6 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 	    */
 	   private void updatePageComplete() {
 	      setPageComplete(false);
-	      
-//	      if (((AddTagIdsAndTemplateWizard) getWizard()).getPremises()==null){
-//	    	  setMessage(null);
-//		         setErrorMessage("Can't proceed with this action because, the active editor does not have an Animal Premises.");
-//		         return;
-//	      }
 
 	      if (selectedFile == null ) {
 	         setMessage(null);
@@ -190,15 +157,7 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 	         return;
 	      }
 
-	      Resource resource = getResource();
-	      if (resource == null) {
-	         setMessage(null);
-	         setErrorMessage(
-	            "Please specify an Animal Document file");
-	         return;
-	      }
-
-	      AnimalTemplateBean templateAnimalBean =  getTemplateAnimalBean(resource);
+	      AnimalTemplateBean templateAnimalBean =  getTemplateAnimalBean(selectedFile);
 	      if (templateAnimalBean == null || templateAnimalBean.numberOfEvents()==0) {
 		         setMessage(null);
 		         setErrorMessage(
