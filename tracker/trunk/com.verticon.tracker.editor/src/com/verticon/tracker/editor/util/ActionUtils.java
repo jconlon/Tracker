@@ -68,7 +68,6 @@ import com.verticon.tracker.editor.preferences.PreferenceConstants;
 import com.verticon.tracker.editor.presentation.IPremisesProvider;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
-import com.verticon.tracker.util.TrackerUtils;
 
 /**
  * @author jconlon
@@ -147,7 +146,6 @@ public class ActionUtils {
 
 	public static final AnimalTemplateBean getTemplateBean(TrackerEditor editor,
 			IWorkbenchPart targetPart) {
-		Animal animal = null;
 		IProject project = extractResource(editor).getProject();
 
 		WSFileDialog dialog = new WSFileDialog(targetPart.getSite().getShell(),
@@ -164,50 +162,23 @@ public class ActionUtils {
 		if (result == null) {
 			return null;
 		}
-		IFile f = (IFile) result;
-
-		Resource templateResource;
-		try {
-			templateResource = getResource(f);
-		} catch (IOException e) {
-			MessageDialog.openError(targetPart.getSite().getShell(),
-					"Failed to load a template", e.getLocalizedMessage());
-			return null;
-		}
-		animal = TrackerUtils.getAnimalFromTemplate(templateResource);
-
-		if (animal == null) {
+		IFile animalTemplateFile = (IFile) result;
+		
+		AnimalTemplateBean templateBean;
+		
+		templateBean = AnimalTemplateBean.instance(animalTemplateFile);
+		
+		if(templateBean == null){
 			MessageDialog
-					.openError(targetPart.getSite().getShell(),
-							"Failed to load a template",
-							"Could not extract a template");
+			.openError(targetPart.getSite().getShell(),
+					"Failed to load a template",
+					"Could not extract a template");
 
-			return null;
 		}
-
-		AnimalTemplateBean templateBean = new AnimalTemplateBean(animal, f.getName());
-		return templateBean;
+       return templateBean;
 	}
 
-	
-//	public static final Premises getPremises(IPremisesProvider editor) {
-//		Premises premises = null;
-//		EditingDomain editingDomain = editor.getEditingDomain();
-//		Resource modelResource = editingDomain.getResourceSet()
-//				.getResources().get(0);
-//		Object rootObject = modelResource.getContents().get(0);
-//		premises = (Premises) rootObject;
-//		return premises;
-//	}
-	
-//
-//	public static final Premises getPremises(IAdaptable adaptable) throws FileNotFoundException {
-//		IPremisesProvider premisesProvider = (IPremisesProvider)adaptable.getAdapter(IPremisesProvider.class);
-//		if(premisesProvider==null){
-//			throw new FileNotFoundException("adaptable parameter does not support a IPremisesProvider");
-//		}
-//		return premisesProvider.getPremises();
-//	}
+
 	/**
 	 * Add an animal template to the premises.  Duplicate tags will be ignored.
 	 * 
@@ -266,7 +237,7 @@ public class ActionUtils {
 		premisesProvider.getEditingDomain().getCommandStack().execute(compoundCommand);
 		MessageDialog.openInformation(editor.getSite().getShell(),
 				ADD_TEMPLATE_TO_PREMISES_OPERATION, "The "
-						+ animalTemplateBean.getName() + " and " + tagsBean.getName()
+						+ animalTemplateBean.getFileNameOfTemplate() + " and " + tagsBean.getName()
 						+ " processed " + animalTemplateBean.getEvents(null).size()
 						+ " events on " + newAnimalsCreated
 						+ " new Animals and " + existingAnimals
@@ -319,7 +290,7 @@ public class ActionUtils {
 		premisesProvider.getEditingDomain().getCommandStack().execute(compoundCommand);
 		MessageDialog.openInformation(editor.getSite().getShell(),
 				ADD_TEMPLATE_TO_ANIMALS_OPERATION, "The "
-						+ templateBean.getName() + " processed "
+						+ templateBean.getFileNameOfTemplate() + " processed "
 						+ numberOfEventsInTemplate + " events on "
 						+ animals.size() + " animals.  With "+deferedEvents+" events deferred.");
 
@@ -533,15 +504,6 @@ public class ActionUtils {
 		return (Animal) TrackerFactory.eINSTANCE.create(eClass);
 	}
 
-	public static final AnimalTemplateBean createTemplateBean(Animal animal,
-			Event event) {
-		Tag tag = TrackerFactory.eINSTANCE.createTag();
-		tag.getEvents().add(event);
-		animal.getTags().add(tag);
-		AnimalTemplateBean templateBean = new AnimalTemplateBean(animal,
-				"User prompted dialog");
-		return templateBean;
-	}
 
 	public static final IResource extractResource(IEditorPart editor) {
 		IEditorInput input = editor.getEditorInput();
@@ -661,9 +623,5 @@ public class ActionUtils {
 		}
 		return selectedEvents;
 	}
-	
-	
-
-
 	
 }
