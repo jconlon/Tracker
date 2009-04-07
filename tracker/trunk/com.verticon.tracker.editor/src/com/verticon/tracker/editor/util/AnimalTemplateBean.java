@@ -32,28 +32,39 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
  *
  */
  public class AnimalTemplateBean {
-	private final Animal animal;
+	private final Animal animalInTemplate;
 	private Date defaultEventDate = null;
-	private final String name;
+	private final String tagsFileName;
 	private final static Copier copier = new Copier(false, false);
 	
-	public AnimalTemplateBean(Animal animal, String name) {
+	/**
+	 * When a tagsFileName uses the format yyMMddHHmmss.tags the Date Time 
+	 * attributes of all Event Elements copied to the Premises Document will 
+	 * assume the time stamp of of the date pattern yyMMddHHss. For example 
+	 * the tags file 060409131111.Tags will set the Date Time attribute of 
+	 * all Event Elements to 2006-04-09T13:11:11
+	 * 
+	 * @param animalInTemplate
+	 * @param tagsFileName of the Template. 
+	 */
+	public AnimalTemplateBean(Animal animal, String tagsFileName) {
 		super();
-		this.animal = animal;
-		this.name=name;
+		this.animalInTemplate = animal;
+		this.tagsFileName=tagsFileName;
 	}
 
 	/**
 	 * @deprecated use method with the string parm 
-	 * @return the animal and set all the event dates if useCurrentDate is set.
+	 * @return the animalInTemplate and set all the event dates if useCurrentDate is set.
 	 */
+	@Deprecated
 	public Animal getAnimal(Long tag) {
 		return getAnimal( tag.toString(), null);
 	}
 	
 
 	/**
-	 * Copy the animal and its tree of Tags and Events.
+	 * Copy the animalInTemplate and its tree of Tags and Events.
 	 * Sets Event dates if useCurrentDate is set.
 	 * 
 	 * Copier does not copy or any references so this has to 
@@ -61,33 +72,33 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 	 * but could be extended to handle other references.
 	 * 
 	 * 
-	 * @return copied animal.
+	 * @return copied animalInTemplate.
 	 */
 	public Animal getAnimal(String tag, Premises premises){
 		
-		Animal copiedAnimal = (Animal)copier.copy(animal);
+		Animal copiedTemplateAnimal = (Animal)copier.copy(animalInTemplate);
 		if(premises!=null){
-			setLocationOnCopiedSightingEvents(copiedAnimal.eventHistory(),  premises);
+			setLocationOnCopiedSightingEvents(copiedTemplateAnimal.eventHistory(),  premises);
 		}
-		if(copiedAnimal.activeTag()!=null){
-			copiedAnimal.activeTag().setId(tag);
-			setAppropriateDateOnEvents(copiedAnimal, defaultEventDate);
+		if(copiedTemplateAnimal.activeTag()!=null){
+			copiedTemplateAnimal.activeTag().setId(tag);
+			setAppropriateDateOnEvents(copiedTemplateAnimal, defaultEventDate);
 		}else{
-			//no active tag create one
+			//no active tag on the template animal, just create a tag
 			Tag newTag = TrackerFactory.eINSTANCE.createTag();
 			newTag.setId(tag);
-			copiedAnimal.getTags().add(newTag);
+			copiedTemplateAnimal.getTags().add(newTag);
 		}
-		return copiedAnimal;
+		return copiedTemplateAnimal;
 	}
 
 	/**
-	 * Sets appropriate dates on all animal events.
+	 * Sets appropriate dates on all animalInTemplate events.
 	 * @param copiedAnimal
 	 * @param presetDate
 	 */
 	 private static void setAppropriateDateOnEvents(Animal copiedAnimal, Date presetDate) {
-		Preferences prefs = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
+		int interval = getIntervalBetweenEventsPreference();
 		Calendar cal = null;
 		for (Event event : copiedAnimal.eventHistory()) {
 			if(isFirstEvent(cal) ){
@@ -98,11 +109,25 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 					cal = Calendar.getInstance();
 				}
 			}else{//All subsequent events add the Spread Interval to space out the events.
-				cal.add(Calendar.SECOND, prefs.getInt(PreferenceConstants.P_SPREAD_INTERVAL));
+				cal.add(Calendar.SECOND, interval);
 			}
 			setEventDateIfTemplateDateBeforeReference( event, cal.getTime());
 			
 		}
+	}
+
+	/**
+	 * @return
+	 */
+	private static int getIntervalBetweenEventsPreference() {
+		int interval = 1;
+		if(TrackerReportEditorPlugin.getPlugin()!=null){
+			Preferences prefs = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
+			if(prefs!=null){
+				interval = prefs.getInt(PreferenceConstants.P_SPREAD_INTERVAL);
+			}
+		}
+		return interval;
 	}
 
 	/**
@@ -137,7 +162,7 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 	 */
 	private Location getLocationFromPrimalAnimal(int position, Premises premises){
 		int myposition = 0;
-		for (Event event : animal.eventHistory()) {
+		for (Event event : animalInTemplate.eventHistory()) {
 			if(event instanceof Sighting){
 				myposition++;
 				if(myposition == position){
@@ -170,14 +195,14 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 	
 
 	public int numberOfEvents(){
-		return animal.eventHistory().size();
+		return animalInTemplate.eventHistory().size();
 	}
 	/**
 	 * 
 	 * @return a list of events using the current date if necessary.
 	 */
 	public Collection<Event> getEvents(Premises premises){
-		Animal copiedAnimal = (Animal)copier.copy(animal);
+		Animal copiedAnimal = (Animal)copier.copy(animalInTemplate);
 		if(premises!=null){
 			setLocationOnCopiedSightingEvents( copiedAnimal.eventHistory(),  premises);
 		}
@@ -202,12 +227,12 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 	}
 
 	public String getName() {
-		return name;
+		return tagsFileName;
 	}
 
 	@Override
 	public String toString() {
-		return "Template resource: "+name;
+		return "Template resource: "+tagsFileName;
 	}
 	
 	public static final GregorianCalendar DATE_REFERENCE = new GregorianCalendar(1000, Calendar.JANUARY, 1);  
