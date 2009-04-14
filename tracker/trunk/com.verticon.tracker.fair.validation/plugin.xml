@@ -21,9 +21,7 @@
 	  <constraintProvider
          cache="true">
          <package namespaceUri="http://www.verticon.com/ns/tracker/fair/0.1.0"/>
-         <description>
-             Constraints for the Fair resource.
-         </description>
+         <description>Constraints for the Fair resource</description>
          <constraints categories="com.verticon.tracker.validation.catagory.ocl/com.verticon.tracker.fair.fair.validation">
              <!-- This constraint applies to Person names-->
             <constraint
@@ -184,7 +182,7 @@
             cache="true"
             mode="Batch">
          <package namespaceUri="http://www.verticon.com/ns/tracker/0.1.0"/>
-         
+         <description>Constraints for Fair Premises resource</description>
          <constraints categories="com.verticon.tracker.validation.catagory.ocl/com.verticon.tracker.fair.premises.validation">
             
             <!-- Specific VCF: An animal must have one and only one FairRegistration Event 
@@ -270,11 +268,22 @@
                  Event.allInstances()->select(e : Event | e.oclIsTypeOf(MovedOut) and e.id=self.id)->size()>0
                ]]>
             </constraint>
+            <!-- This constraint applies to Registered Animals-->
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.fair.validation.constraints.AllAnimalsRegisteredConstraint"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="All Animals must be registered in the Fair"
+                  id="animalNotRegistered"
+                  statusCode="102">
+               	<description>All Animals in a Premises associated with a Fair must be registered in at least one exhibit at the Fair.</description>
+      			<message>"Fair Constraint: {0}" Animal must be registered in the Fair. </message>
+      			<target class="Animal"/>
+            </constraint> 
             
          </constraints>
-         <description>
-            Don't know where this belongs
-         </description>
+         
       </constraintProvider>
    </extension>
    
