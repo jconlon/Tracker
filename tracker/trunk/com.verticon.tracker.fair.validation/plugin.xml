@@ -268,17 +268,33 @@
                  Event.allInstances()->select(e : Event | e.oclIsTypeOf(MovedOut) and e.id=self.id)->size()>0
                ]]>
             </constraint>
+            
+            
             <!-- This constraint applies to Registered Animals-->
             <constraint
                   lang="Java"
                   class="com.verticon.tracker.fair.validation.constraints.AllAnimalsRegisteredConstraint"
                   severity="ERROR"
                   mode="Batch"
-                  name="All Animals must be registered in the Fair"
+                  name="Animals must be registered in the Fair"
                   id="animalNotRegistered"
                   statusCode="102">
-               	<description>All Animals in a Premises associated with a Fair must be registered in at least one exhibit at the Fair.</description>
+               	<description>Animals in a Fair Premises must be registered in at least one exhibit at the Fair.</description>
       			<message>"Fair Constraint: {0}" Animal must be registered in the Fair. </message>
+      			<target class="Animal"/>
+            </constraint> 
+            
+            <!-- This constraint applies to Registered Animal MoveIn Events to People with Pins-->
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.fair.validation.constraints.AnimalsRegisteredWithPinsConstraint"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="Animals must have the same moveIn and moveOut pins as Exhibitor"
+                  id="animalMovePinsNotSet"
+                  statusCode="103">
+               	<description>Animals in a Fair and registered to a Person with a PIN, must have at least one movedIn event and at least one movedOut event with pin attributes set to that PIN.</description>
+      			<message>"Fair Constraint: {0}" Animal must have at least one MovedIn sourcePin and at least one MovedOut destinationPin set to premisesIdNumber {1}. </message>
       			<target class="Animal"/>
             </constraint> 
             
