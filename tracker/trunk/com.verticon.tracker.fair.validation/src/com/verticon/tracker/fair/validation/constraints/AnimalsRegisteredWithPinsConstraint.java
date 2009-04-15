@@ -49,21 +49,21 @@ public class AnimalsRegisteredWithPinsConstraint extends AbstractModelConstraint
 		if(pin ==null){
 			return false;
 		}
-		boolean hasMovedInPinSet = false;
-		boolean hasMovedOutPinSet = false;
+		boolean needsMovedInPinSet = true;
+		boolean needsMovedOutPinSet = true;
 		for (Event event : animal.eventHistory()) {
-			if(event instanceof MovedIn && !hasMovedInPinSet){
-				hasMovedInPinSet = pin.equals(((MovedIn)event).getSourcePin());
+			if(event instanceof MovedIn && needsMovedInPinSet){
+				needsMovedInPinSet = !pin.equals(((MovedIn)event).getSourcePin());
 			}
 			else
-			if(event instanceof MovedOut && !hasMovedOutPinSet){
-					hasMovedOutPinSet = pin.equals(((MovedOut)event).getDestinationPin());
+			if(event instanceof MovedOut && needsMovedOutPinSet){
+					needsMovedOutPinSet = !pin.equals(((MovedOut)event).getDestinationPin());
 			}
 				
 		}
 		
 		
-		return hasMovedInPinSet && hasMovedOutPinSet;
+		return needsMovedInPinSet || needsMovedOutPinSet;
 	}
 
 	private String getAnimalExhibitorsPin(Animal animal){
