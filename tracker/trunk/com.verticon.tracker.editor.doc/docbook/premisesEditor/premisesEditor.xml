@@ -91,7 +91,7 @@
 		<para>
 		To best depict what the Premises Editor can do for Tracker users the following 
 		section presents a series of <emphasis>Use-Case</emphasis> diagrams.  
-		<xref linkend="fig_CoreUseCases" />   shows core usage requirements for the Premises 
+		<xref linkend="fig_CoreUseCases" /> shows core usage requirements for the Premises 
 		Editor. 
 		</para>
 		<figure id="fig_CoreUseCases">
