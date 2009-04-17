@@ -3,38 +3,36 @@
  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <preface>
 		<?dbhtml filename="preface/preface.html" ?>
-		<title>The Need for Animal Tracking</title>
+		<title>The Need for Livestock Information Management</title>
 		<para>
 			Either for hunting or husbandry, human beings have always
 			observed and remembered animal movements. Today, with larger
-			herds and more interaction between producers,
-			infrastructure providers, and process auditors more animal movements mean
-		    more information for the producer, the provider, and the auditor to manage.
+			herds and more interaction between producers, infrastructure providers, and process
+			auditors more animal movements mean more information for the producer, the provider, 
+			and the auditor to manage.
 		</para>
 		<para>
-			Computers, software applications and animal event sensors that record, 
-			manage and detect animal events can improve information management practices 
-		    and reduce costs for producers, infrastructure providers, and 
-			process auditors.
-		</para>
-		
-		<para>
-			Tracker is used by livestock producers, infrastructure providers and process control 
-			auditors as an effective, low cost solution for;
+			Tracker is a suite of software application solutions for the
 			<itemizedlist mark='bullet'>
 				<listitem>
-					<para>recording animal event histories;</para>
+					<para>Documentation;</para>
 				</listitem>
 				<listitem>
-					<para>maintaining production efficiency;</para>
+					<para>Management;</para>
 				</listitem>
 				<listitem>
-					<para>improving health and product quality;</para>
+					<para>Analysis;</para>
 				</listitem>
 				<listitem>
-					<para>documenting process controls.</para>
+					<para>Reporting;</para>
+				</listitem>
+				<listitem>
+					<para>and Collaboration;</para>
 				</listitem>
 			</itemizedlist>
+			of Animal Livestock <emphasis>Information</emphasis>.
 		</para>
+		
+		
 </preface>
 
