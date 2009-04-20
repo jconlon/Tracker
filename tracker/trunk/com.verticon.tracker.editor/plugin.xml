@@ -228,7 +228,12 @@
          	 	</activeWhen>
          	 </handler>
          	see handler class for workaround
-         	-->
+         	
+         	NOTE: 
+         	There still needs to be a further test to see if PremisesProvider really has a Premises
+         	and if the Editor is a Simple or Transaction Based Editor
+         	so a PremisesEditorTester PropertyTester was created. 
+       -->
       <!-- Place Holder in Popups Command -->
       <command
              id="com.verticon.tracker.editor.menus.popupany"
@@ -263,7 +268,8 @@
             name="%_UI_commands_importTagIds_asSelected_name">
       </command>
       
-      <!-- Animal Commands -->
+      <!-- Animal Commands    
+      -->
       <command
             id="com.verticon.tracker.editor.commands.animal.changeType.command"
             defaultHandler="com.verticon.tracker.editor.handlers.AnimalsChangeTypeOfHandler"
@@ -302,9 +308,11 @@
       </menuContribution>  
       <menuContribution
             locationURI="popup:com.verticon.tracker.editor.menus.popupany">
-        <!-- restrict this to command to adapt on IContentOutlinePage when  
+        <!-- restrict this command to adapt on IContentOutlinePage when  
                	https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743
               		Scheduled for fix in 3.5 -->
+              		
+               <!-- Select the EObject elements in the Outline View -->
                <command
                      commandId="com.verticon.tracker.fair.editor.commands.generic.select.command"
                      icon="icons/full/obj16/selected_mode.gif"
@@ -319,12 +327,18 @@
                   </visibleWhen>
                </command>
                
-               <!-- TagIds -->
+               <!-- 
+               Import tagIds as Template Events;
+               works on a *.tags File;
+               works with simple and transaction based editors;
+			   needs a Premises in the Editor so it No longer is visible from Animal Templates
+               -->
                 <command
                       commandId="com.verticon.tracker.editor.commands.importTagIds.asTemplate.command"
                       icon="icons/full/obj16/import_wiz.gif"
                       style="push">
                   <visibleWhen>
+                       <and>
 		               <with variable="activeMenuSelection">
 		                  <iterate>
 		                      <adapt type="org.eclipse.core.resources.IResource">
@@ -333,13 +347,30 @@
 		      				 </adapt>
 		                  </iterate>
 		               </with>
+		               <!-- 
+    			        	Restricted to show only if the active Editors isPremisesEditor.
+    			        	This will No longer shows command for Animal templates
+    			        	Ticket#366
+              			 -->
+              			 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+    			     </and>
 	            </visibleWhen>
                </command>
+               
+               <!-- 
+               Import TagIds Specifying Animal and Event Types;
+               works on a *.tags File;
+               works with simple and transaction based editors;
+			   needs a Premises in the Editor so it No longer is visible from Animal Templates
+               -->
                <command
                      commandId="com.verticon.tracker.editor.commands.importTagIds.asSelected.command"
                      icon="icons/full/obj16/import_wiz.gif"
                      style="push">
                      <visibleWhen>
+                       <and>
 		               <with variable="activeMenuSelection">
 		                  <iterate>
 		                      <adapt type="org.eclipse.core.resources.IResource">
@@ -348,36 +379,71 @@
 		      				 </adapt>
 		                  </iterate>
 		               </with>
+		               <!-- 
+    			        	Restricted to show only if the active Editors isPremisesEditor.
+    			        	This will No longer shows command for Animal templates
+    			        	Ticket#366
+              			 -->
+              			 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+    			     </and>
 	            </visibleWhen>
                </command>
                
                <!-- Animals -->
+               
+               <!-- 
+               Change Animal(s) Type;
+               works on a Animal Element;
+               works with simple and transaction based editors (after fix in Ticket #373);
+			   needs a Premises in the Editor so it No longer is visible from Animal Templates
+			   -->
                 <command
                       commandId="com.verticon.tracker.editor.commands.animal.changeType.command"
                       icon="icons/full/obj16/AnimalModelFile.gif"
                       style="push">
                	<visibleWhen>
-               		<with variable="activeMenuSelection">
+               	    <and>
+               			<with variable="activeMenuSelection">
 		                  <iterate>
       						 <instanceof value="com.verticon.tracker.Animal"/>
     					  </iterate>
-    			     </with>
+    			     	</with>
+    			        
+              			 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+    			     </and>
 	            </visibleWhen>
                	</command>
+               	
+               	<!-- 
+               	Add template event to selected anmimal(s) 
+               	works on a Animal Element;
+               	works with simple and transaction based editors (after fix in Ticket #373);
+			   	needs a Premises in the Editor so it No longer is visible from Animal Templates			 
+               	-->
                	<command
                       commandId="com.verticon.tracker.editor.commands.animal.addTemplateEvent.command"
                       icon="icons/full/obj16/AnimalModelFile.gif"
                       style="push">
                	<visibleWhen>
+               	    <and>
                		<with variable="activeMenuSelection">
 		                  <iterate>
       						 <instanceof value="com.verticon.tracker.Animal"/>
     					  </iterate>
     			     </with>
+    			     <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              		 </test>
+    			     </and>
 	            </visibleWhen>
                </command>
                
-               <!-- Event -->
+               <!-- Modify Selected Events 
+               works with simple and transaction based editors-->
                 <command
                       commandId="com.verticon.tracker.editor.commands.event.modify.command"
                       icon="icons/full/obj16/waiting.gif"
@@ -390,6 +456,7 @@
     					 </with>
 	            </visibleWhen>
                	</command>
+                
       </menuContribution>
      
       
@@ -410,6 +477,18 @@
             This cheat sheet will show you how to create a Premises Document for documenting information about the Livestock at your Premises.
          </description>
       </cheatsheet>
+   </extension>
+   
+   <!-- Added for Ticket #366-->
+   <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="com.verticon.tracker.editor.propertyTester.PremisesEditorTester"
+            id="com.verticon.tracker.editor.propertyTester.PremisesEditorTester"
+            namespace="com.verticon.tracker.editor"
+            properties="isPremisesEditor, isSimplePremisesEditor"
+            type="java.lang.Object">
+      </propertyTester>
    </extension>
    
    

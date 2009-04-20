@@ -29,6 +29,7 @@ import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -1396,10 +1397,16 @@ public class TrackerEditor
 					}
 
 					public Premises getPremises() {
-						Resource modelResource = TrackerEditor.this.getEditingDomain().getResourceSet()
-						.getResources().get(0);
-						Object rootObject = modelResource.getContents().get(0);
-						return(Premises) rootObject;
+						ResourceSet resourceSet = TrackerEditor.this.getEditingDomain().getResourceSet();
+						Premises premises = null;
+						for (Resource resource : resourceSet.getResources()) {
+							if(resource.getURI().fileExtension().endsWith("premises")){
+							  premises = (Premises)	resource.getEObject("/");
+							  break;
+							}
+						}
+						Assert.isNotNull(premises, "Premises can't be null. "+this);
+						return premises;
 					}
 					
 				};

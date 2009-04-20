@@ -224,10 +224,12 @@ public class ActionUtils {
 				
 			} else {
 				newAnimalsCreated++;
-				command = createAddAnimalToPremiseCommand(
-						premises,
-						animalTemplateBean.getAnimal(tag.toString(),premises),//adds all events as well 
-						premisesProvider.getEditingDomain());
+				command = AddCommand.create(
+						premisesProvider.getEditingDomain(), //Domain
+						premises, //Owner
+						TrackerPackage.Literals.PREMISES__ANIMALS,
+						animalTemplateBean.getAnimal(tag.toString(),premises)//value
+				);
 				
 			}
 			if(command !=null){
@@ -287,12 +289,19 @@ public class ActionUtils {
 			}
 		}
 
-		premisesProvider.getEditingDomain().getCommandStack().execute(compoundCommand);
-		MessageDialog.openInformation(editor.getSite().getShell(),
-				ADD_TEMPLATE_TO_ANIMALS_OPERATION, "The "
-						+ templateBean.getFileNameOfTemplate() + " processed "
-						+ numberOfEventsInTemplate + " events on "
-						+ animals.size() + " animals.  With "+deferedEvents+" events deferred.");
+		try {
+			premisesProvider.getEditingDomain().getCommandStack().execute(compoundCommand);
+			MessageDialog.openInformation(editor.getSite().getShell(),
+					ADD_TEMPLATE_TO_ANIMALS_OPERATION, "The "
+							+ templateBean.getFileNameOfTemplate() + " processed "
+							+ numberOfEventsInTemplate + " events on "
+							+ animals.size() + " animals.  With "+deferedEvents+" events deferred.");
+		} catch (Exception e) {
+			MessageDialog.openError(editor.getSite().getShell(), 
+					ADD_TEMPLATE_TO_ANIMALS_OPERATION, 
+					"Failed to add Template Events because: " + e);
+			
+		}
 
 	}
 
@@ -350,12 +359,7 @@ public class ActionUtils {
 	
 	
 
-	private static Command createAddAnimalToPremiseCommand(Premises premises,
-			Animal animal, EditingDomain editingDomain) {
-		Command command = AddCommand.create(editingDomain, premises,
-				TrackerPackage.eINSTANCE.getPremises(), animal);
-		return command;
-	}
+	
 
 	private static IResource getSelectedResource(IPremisesProvider editor,
 			ISelection selection) {

@@ -26,6 +26,7 @@ import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -1257,9 +1258,16 @@ public class FairEditor
 					}
 
 					public Fair getFair() {
-						Resource modelResource = FairEditor.this.getEditingDomain().getResourceSet()
-						.getResources().get(0);
-						return (Fair)modelResource.getContents().get(0);
+						ResourceSet resourceSet = FairEditor.this.getEditingDomain().getResourceSet();
+						Fair fair = null;
+						for (Resource resource : resourceSet.getResources()) {
+							if(resource.getURI().fileExtension().endsWith("fair")){
+							  fair = (Fair)	resource.getEObject("/");
+							  break;
+							}
+						}
+						Assert.isNotNull(fair, "Fair can't be null. "+this);
+						return fair;
 					}
 					
 				};
