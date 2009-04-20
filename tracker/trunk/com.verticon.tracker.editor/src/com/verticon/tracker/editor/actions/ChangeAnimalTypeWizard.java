@@ -9,9 +9,11 @@ import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
+import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -21,6 +23,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IWorkbenchWindow;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
@@ -86,7 +89,14 @@ public class ChangeAnimalTypeWizard extends Wizard  {
 	}
 
 	/**
-	 * .
+	 * Finishes the wizard.
+	 * 
+	 * Ticket 366 Tracker Action Change Animal Type does not work in Transaction Editors
+	 * In TransactionalEditingDomain the org.eclipse.emf.transaction.RecordingCommand
+	 * should do the execution. 
+	 * 
+	 * Resolution
+	 * 
 	 */
 	@Override
 	public boolean performFinish() {
@@ -95,6 +105,7 @@ public class ChangeAnimalTypeWizard extends Wizard  {
 			editingDomain.getCommandStack().execute(createCommand());
 			
 		} catch (RuntimeException e) {
+			e.printStackTrace();
 			MessageDialog.openError(workbenchWindow.getShell(), 
 					"Change Animal Type Failed", "Failed to change to "+
 						getSelectedAnimal().getClass().getSimpleName()+" because: " + e);
@@ -106,9 +117,10 @@ public class ChangeAnimalTypeWizard extends Wizard  {
 		return true;
 	}
 
+	
 	/**
 	 * 
-	 * @return command to add an exhibit for each animal to the lot
+	 * @return command to change the animal type
 	 */
 	private Command createCommand(){
 		CompoundCommand compoundCommand = new CompoundCommand();
@@ -116,14 +128,15 @@ public class ChangeAnimalTypeWizard extends Wizard  {
 		for (Animal animalSource : animalsToChange) {
 			
 			Animal animalToAdd = (Animal)EcoreUtil.copy(selectedTypeOfAnimal);
-			animalToAdd.getTags().addAll(animalSource.getTags());
-			animalToAdd.setBirthDate(animalSource.getBirthDate());
+			//Set values with simple types that do not change the model
+			if(animalSource.getBirthDate()!=null){
+				animalToAdd.setBirthDate(animalSource.getBirthDate());
+			}
 			animalToAdd.setComments(animalSource.getComments());
-			animalToAdd.setDam(animalSource.getDam());
 			animalToAdd.setSex(animalSource.getSex());
-			animalToAdd.setSire(animalSource.getSire());
+			animalToAdd.setVisualID(animalSource.getVisualID());
 			
-			
+			//Add the animal
 			Command command = AddCommand.create(
 					editingDomain, //Domain
 					animalSource.eContainer(), //Owner
@@ -132,6 +145,36 @@ public class ChangeAnimalTypeWizard extends Wizard  {
 			);
 			compoundCommand.append(command);
 			
+			//Set references from the model with a command
+			//TagsToAdd
+			EList<Tag> tagsToAdd = animalSource.getTags();
+			command = SetCommand.create(
+					editingDomain, 
+					animalToAdd, 
+					TrackerPackage.Literals.ANIMAL__TAGS, 
+					tagsToAdd);
+			compoundCommand.append(command);
+			
+			//DamToAdd
+			Animal damToAdd = animalSource.getDam();
+			command = SetCommand.create(
+					editingDomain, 
+					animalToAdd, 
+					TrackerPackage.Literals.ANIMAL__DAM, 
+					damToAdd);
+			compoundCommand.append(command);
+			
+			//SireToAdd
+			Animal sireToAdd = animalSource.getDam();
+			command = SetCommand.create(
+					editingDomain, 
+					animalToAdd, 
+					TrackerPackage.Literals.ANIMAL__SIRE, 
+					sireToAdd);
+			compoundCommand.append(command);
+			
+		
+			//Remove animal
 		    command = RemoveCommand.create(
 					editingDomain, //Domain
 					animalSource.eContainer(), //Owner
@@ -142,7 +185,6 @@ public class ChangeAnimalTypeWizard extends Wizard  {
 			
 		}
 		
-		
 		return compoundCommand;
 	}
 	
@@ -150,12 +192,9 @@ public class ChangeAnimalTypeWizard extends Wizard  {
 		return selectTypePage.getSelectedAnimal();
 	} 
 
-	
-
 	@Override
 	public boolean canFinish() {
 		return  getSelectedAnimal() != null;
 	}
 
-	
 }
