@@ -99,9 +99,75 @@
       </command>
       
       </extension>
+      
+      
+      
       <extension
          point="org.eclipse.ui.menus">
 
+      <menuContribution
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+            
+            	<!-- 
+               	Register an Exhibit 
+               	works on a Animal Element;
+               	works with simple and transaction based editors ;
+			   	needs a Premises in the Editor so it No longer is visible from Animal Templates	
+			   	and needs a Fair in the ResourceSet		 
+               -->
+               <command
+                    commandId="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
+               		icon="icons/full/obj16/Exhibit.gif"
+               		style="push">
+	               	<visibleWhen>
+	               	    <and>
+	               		<with variable="activeMenuSelection">
+			                  <iterate>
+			                     <!--
+			                     TODO replace MovedIn with selection on Animal
+	      						 <instanceof value="com.verticon.tracker.Animal"/>
+	      						 -->
+	      						 <instanceof value="com.verticon.tracker.MovedIn"/>
+	    					  </iterate>
+	    			     </with>
+	    			     <test
+                   			forcePluginActivation="true"
+                   			property="com.verticon.tracker.fair.editor.isFairEditor">
+              		 	</test>
+	    			     </and>
+		            </visibleWhen>
+               </command>
+               
+               <!-- 
+               	Update Pins on all Exhibited Animal Events 
+               	works on a collection of Person Elements;
+               	works with simple and transaction based editors ;
+			   	needs a Person to be Registed, so it No longer is visible from just any Person	
+               -->
+               <command
+                    commandId="com.verticon.tracker.fair.editor.commands.person.changeMovedEventPins.command"
+               		icon="icons/full/obj16/MovedInOut.gif"
+               		style="push">
+               		<visibleWhen>
+               		    <and>
+               			<with variable="activeMenuSelection">
+		                  <iterate>
+      						 <instanceof value="com.verticon.tracker.fair.Person"/>
+    					  </iterate>
+    			     	</with>
+    			     	<test
+                   			forcePluginActivation="true"
+                   			property="com.verticon.tracker.fair.editor.isPersonRegistered">
+              		 	</test>
+	    			     </and>
+	            	</visibleWhen>
+               	</command>
+      </menuContribution>
+      
+      
+      
+     
+      <!--
       <menuContribution
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
          <menu
@@ -120,6 +186,8 @@
                	</command>
          </menu>
       </menuContribution>
+      
+     
      <menuContribution
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
          <menu
@@ -138,7 +206,10 @@
                	</command>
          </menu>
       </menuContribution>  
+      -->
    </extension>
+   
+   
       <extension
             point="org.eclipse.ui.cheatsheets.cheatSheetContent">
          <category
@@ -155,6 +226,28 @@
                This cheat sheet will show you how to create a Fair Document for documenting information about the People, Exhibits, and Livestock at an Animal Exposition.
             </description>
          </cheatsheet>
+      </extension>
+      
+      
+      <extension
+            point="org.eclipse.core.expressions.propertyTesters">
+         <propertyTester
+               class="com.verticon.tracker.fair.editor.propertyTester.FairEditorTester"
+               id="com.verticon.tracker.fair.editor.propertyTester.FairEditorPropertyTester"
+               namespace="com.verticon.tracker.fair.editor"
+               properties="isFairEditor, isSimpleFairEditor"
+               type="java.lang.Object">
+         </propertyTester>
+         
+         <!-- Test if the selected objects are a collection of Person objects.  Must be used 
+         with an iterate on a Person. -->
+         <propertyTester
+               class="com.verticon.tracker.fair.editor.propertyTester.PersonRegisteredTester"
+               id="com.verticon.tracker.fair.editor.propertyTester.PersonRegisteredPropertyTester"
+               namespace="com.verticon.tracker.fair.editor"
+               properties="isPersonRegistered"
+               type="java.lang.Object">
+         </propertyTester>
       </extension>
 
 </plugin>

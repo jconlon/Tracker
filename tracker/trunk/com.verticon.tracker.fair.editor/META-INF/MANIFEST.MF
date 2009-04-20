@@ -13,6 +13,7 @@ Export-Package: com.verticon.tracker.fair.editor.presentation,
 Require-Bundle: org.eclipse.core.runtime,
  com.verticon.tracker.fair.edit;visibility:=reexport,
  com.verticon.tracker.editor,
- org.eclipse.ui.cheatsheets
+ org.eclipse.ui.cheatsheets,
+ org.eclipse.core.expressions
 Bundle-ActivationPolicy: lazy
 Import-Package: org.slf4j;version="[1.5.5,1.6.0)"
