@@ -16,6 +16,10 @@ public interface IPremisesProvider extends IEditingDomainProvider{
 	 */
 	public abstract void setSelectionToViewer(Collection<?> collection);
 	
+	/**
+	 * 
+	 * @return premises or null
+	 */
 	public Premises getPremises();
 
 }
