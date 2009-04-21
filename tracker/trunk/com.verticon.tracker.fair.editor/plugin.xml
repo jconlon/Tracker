@@ -112,8 +112,7 @@
                	Register an Exhibit 
                	works on a Animal Element;
                	works with simple and transaction based editors ;
-			   	needs a Premises in the Editor so it No longer is visible from Animal Templates	
-			   	and needs a Fair in the ResourceSet		 
+			   	needs a Fair in the Editor so it No longer is visible from Premises Editors	 
                -->
                <command
                     commandId="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
@@ -231,6 +230,10 @@
       
       <extension
             point="org.eclipse.core.expressions.propertyTesters">
+            
+         <!--
+         Test if the editor is a Fair Editor
+         -->
          <propertyTester
                class="com.verticon.tracker.fair.editor.propertyTester.FairEditorTester"
                id="com.verticon.tracker.fair.editor.propertyTester.FairEditorPropertyTester"
@@ -239,8 +242,10 @@
                type="java.lang.Object">
          </propertyTester>
          
-         <!-- Test if the selected objects are a collection of Person objects.  Must be used 
-         with an iterate on a Person. -->
+         <!-- 
+         Test if the selected objects are a collection of Person objects.  Must be used 
+         with an iterate on a Person. 
+         -->
          <propertyTester
                class="com.verticon.tracker.fair.editor.propertyTester.PersonRegisteredTester"
                id="com.verticon.tracker.fair.editor.propertyTester.PersonRegisteredPropertyTester"
