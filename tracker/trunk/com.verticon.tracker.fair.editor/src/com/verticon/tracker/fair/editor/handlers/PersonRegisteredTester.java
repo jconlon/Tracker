@@ -1,4 +1,4 @@
-package com.verticon.tracker.fair.editor.propertyTester;
+package com.verticon.tracker.fair.editor.handlers;
 
 import java.util.Collection;
 

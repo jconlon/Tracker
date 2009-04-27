@@ -1,4 +1,4 @@
-package com.verticon.tracker.fair.editor.propertyTester;
+package com.verticon.tracker.fair.editor.handlers;
 
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
@@ -66,7 +66,7 @@ public class FairEditorTester extends PropertyTester {
 		return false;
 	}
 	
-	private IFairProvider getFairProvider(){
+	static IFairProvider getFairProvider(){
 		IWorkbench wb = PlatformUI.getWorkbench();
 		if(wb == null){
 			return null;

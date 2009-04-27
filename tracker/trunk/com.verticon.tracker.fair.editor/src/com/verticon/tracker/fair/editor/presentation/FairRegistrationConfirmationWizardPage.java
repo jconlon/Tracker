@@ -15,10 +15,14 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
-import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
@@ -36,12 +40,22 @@ import com.verticon.tracker.editor.util.IPropertiesFormProvider;
 public class FairRegistrationConfirmationWizardPage extends WizardPage
 		implements ISelectionChangedListener {
 
+	private static final String MOVED_OUT_SELECTION = "movedOutSelection";
+	private static final String MOVED_IN_SELECTION = "movedInSelection";
+	private CTabFolder detailFormTabFolder;
+	private ScrolledComposite formParent;
+	
+	private Button movedInButton;
+	private Button movedOutButton;
+
+
 	private ListViewer listViewer;
 	private IPropertiesFormProvider defaultPropertiesFormProvider;
-	protected CTabFolder cTabFolder;
 	private Composite child = null;
 	private Text personText = null;
 	private Text lotText = null;
+	
+	
 
 	private final AdapterFactory adapterFactory;
 
@@ -54,10 +68,7 @@ public class FairRegistrationConfirmationWizardPage extends WizardPage
 	}
 
 	public void createControl(Composite parent) {
-		child = new Composite(parent, SWT.NULL);
-		child.setLayout(new FillLayout(SWT.VERTICAL));
-
-		// Container houses the global buttons and labels
+		child =  FairRegistrationSelectPersonWizardPage.createSash( parent);
 		Composite container = new Composite(child, SWT.NULL);
 		final GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 3;
@@ -74,24 +85,46 @@ public class FairRegistrationConfirmationWizardPage extends WizardPage
 		personText=createPersonUI(container);
 
 		lotText = createLotUI(container);
-
 		
-		cTabFolder = new CTabFolder(child, SWT.LEFT);
-		cTabFolder.setForeground(child.getDisplay().getSystemColor(
-				SWT.COLOR_BLACK));
-		cTabFolder.setBackground(child.getDisplay().getSystemColor(
-				SWT.COLOR_WHITE));
+		createPinGroup(container);
+		
 
+		createFormFolder(child);
+		
 		setControl(child);
 
 	}
 
+	/**
+	 * @param container
+	 */
+	private void createPinGroup(Composite parent) {
+		Group group = new Group(parent, SWT.SHADOW_ETCHED_IN);
+//		group.setLocation(50, 50);
+ 
+		group.setText("Update Pins in Animal Events");
+ 
+		createMovedInUI(group);
+		createMovedOutUI(group);
+		group.pack();
+	}
+	
+	
+
+	public boolean updateMovedIn(){
+		return movedInButton.getSelection();
+	}
+	
+	public boolean updateMovedOut(){
+		return movedOutButton.getSelection();
+	}
+	
 	public void selectionChanged(SelectionChangedEvent event) {
 		// Remove all the tabs in the TabFolder
-		for (CTabItem item : cTabFolder.getItems()) {
+		for (CTabItem item : detailFormTabFolder.getItems()) {
 			item.dispose();
 		}
-		fillPropertiesFolder(event.getSelection(), adapterFactory, cTabFolder);
+		fillPropertiesFolder(event.getSelection(), adapterFactory, detailFormTabFolder);
 	}
 
 	@Override
@@ -108,7 +141,90 @@ public class FairRegistrationConfirmationWizardPage extends WizardPage
 		super.setVisible(visible);
 	}
 	
+	/**
+	 * @param container
+	 */
+	private void createMovedInUI(Composite container) {
+		movedInButton = new Button(container, SWT.CHECK);
+		movedInButton.setText("Update all MovedIn Pins");
+		movedInButton.setBackground(container.getDisplay().getSystemColor(
+				SWT.COLOR_YELLOW));
+		movedInButton.setSelection(getDialogSettings().getBoolean(MOVED_IN_SELECTION));
+		movedInButton.setLocation(20,20);
+		movedInButton.addSelectionListener(
+				
+				new SelectionListener(){
+
+					@Override
+					public void widgetDefaultSelected(SelectionEvent e) {
+						movedInSelected();
+					}
+
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						movedInSelected();
+					}
+					
+				});
+		
+		movedInButton.pack();
+		
+		
+	}
 	
+	private void movedInSelected(){
+		getDialogSettings().put(MOVED_IN_SELECTION, movedInButton.getSelection());
+	}
+	
+	private void movedOutSelected(){
+		getDialogSettings().put(MOVED_OUT_SELECTION, movedOutButton.getSelection());
+	}
+	
+	/**
+	 * @param container
+	 */
+	private void createMovedOutUI(Composite container) {
+		movedOutButton = new Button(container, SWT.CHECK);
+		movedOutButton.setText("Update all MovedOut Pins");
+		movedOutButton.setBackground(container.getDisplay().getSystemColor(
+				SWT.COLOR_YELLOW));
+		movedOutButton.setSelection(getDialogSettings().getBoolean(MOVED_OUT_SELECTION));
+		
+		movedOutButton.setLocation(20,45);
+		movedOutButton.addSelectionListener(
+				
+				new SelectionListener(){
+
+					@Override
+					public void widgetDefaultSelected(SelectionEvent e) {
+						movedOutSelected();
+					}
+
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						movedOutSelected();
+					}
+					
+					
+				});
+		
+		movedOutButton.pack();
+	}
+	
+	/**
+	 * Second window will be the form
+	 */
+	private void createFormFolder(Composite container) {
+		formParent = new ScrolledComposite(container, SWT.BORDER | SWT.H_SCROLL
+				| SWT.V_SCROLL);
+
+		detailFormTabFolder = new CTabFolder(formParent, SWT.LEFT
+				| SWT.H_SCROLL | SWT.V_SCROLL);
+		detailFormTabFolder.setForeground(formParent.getDisplay()
+				.getSystemColor(SWT.COLOR_BLACK));
+		formParent.setContent(detailFormTabFolder);
+	}
+
 
 	/**
 	 * @param container
@@ -178,26 +294,35 @@ public class FairRegistrationConfirmationWizardPage extends WizardPage
 		return viewer;
 
 	}
-
-
+	
 	/**
 	 * @param selection
 	 * @return
 	 */
-	protected void fillPropertiesFolder(ISelection selection,
+	private void fillPropertiesFolder(ISelection selection,
 			AdapterFactory adapterFactory, CTabFolder cTabFolder) {
-		// Only deal with an IStructuredSelection
-
 		if (defaultPropertiesFormProvider == null) {
+			// logger.debug(bundleMarker,"Creating a defaultPropertiesFormProvider");
 			defaultPropertiesFormProvider = new DefaultPropertiesFormProvider();
-			defaultPropertiesFormProvider.setWizardPage(this);
 		}
-
 		defaultPropertiesFormProvider.fillProperties(selection, adapterFactory,
 				cTabFolder, "Animal Details", true);
-		setControl(child);
-		return;
+		cTabFolder.pack(true);
 
+	}
+	
+	/**
+	 * Disposes all the tabs in the TabFolder and resources.
+	 */
+	@Override
+	public void dispose() {
+		for (CTabItem item : detailFormTabFolder.getItems()) {
+			item.dispose();
+		}
+		detailFormTabFolder.dispose();
+		child.dispose();
+		formParent.dispose();
+		super.dispose();
 	}
 
 }

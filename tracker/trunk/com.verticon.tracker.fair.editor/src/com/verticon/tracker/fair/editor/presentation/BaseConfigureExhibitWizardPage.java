@@ -1,18 +1,22 @@
 package com.verticon.tracker.fair.editor.presentation;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -27,6 +31,7 @@ import com.verticon.tracker.fair.Lot;
 
 public class BaseConfigureExhibitWizardPage extends WizardPage implements ISelectionChangedListener{
 
+	private static final String LOT_NAME = "lotName";
 	private Lot selectedLot;
 	private ListViewer listViewer;
 	protected final Fair fair;
@@ -69,9 +74,30 @@ public class BaseConfigureExhibitWizardPage extends WizardPage implements ISelec
 			selectedLot=null;
 			listViewer.setInput("");
 			listViewer.refresh();
-			setPageComplete(false);
+			ISelection oldLot = findOldLot();
+			if(oldLot!=null ){
+				listViewer.setSelection(oldLot);
+			}else{
+				setPageComplete(false);
+			}
 		}
 		super.setVisible(visible);
+	}
+	
+	private ISelection findOldLot(){
+		ISelection result = null;
+		String oldLotName = getDialogSettings().get(LOT_NAME);
+		if(oldLotName != null){
+			for (Lot lot : getLots()) {
+				if(oldLotName.equals(lot.getName())){
+					result = new StructuredSelection(lot);
+					break;
+				}
+			}
+			
+		}
+		
+		return result;
 	}
 
 	public void selectionChanged(SelectionChangedEvent event) {
@@ -116,6 +142,7 @@ public class BaseConfigureExhibitWizardPage extends WizardPage implements ISelec
 		});
 		
 		viewer.setLabelProvider(new LabelProvider() {
+			@Override
 			public String getText(Object element) {
 				return ((Lot)element).getName();
 			}
@@ -126,9 +153,9 @@ public class BaseConfigureExhibitWizardPage extends WizardPage implements ISelec
 	}
 
 	private EList<Lot> getLots() {
-		EList<Lot> lots = new BasicEList<Lot>();
+		
 		if(fair!=null){
-			lots.clear();
+			EList<Lot> lots = new BasicEList<Lot>();
 			for (Division division : fair.getDivisions()) {
 				for (Department department : division.getDepartments()) {
 					for (com.verticon.tracker.fair.Class clazz : department.getClasses()) {
@@ -136,6 +163,12 @@ public class BaseConfigureExhibitWizardPage extends WizardPage implements ISelec
 					}
 				}
 			}
+			Collections.sort(lots, new Comparator<Lot>() {
+				@Override
+				public int compare(Lot o1, Lot o2) {
+					// TODO Auto-generated method stub
+					return o1.getName().compareTo(o2.getName());
+				}});
 			return ECollections.unmodifiableEList(lots);
 		}
 		
@@ -164,6 +197,8 @@ public class BaseConfigureExhibitWizardPage extends WizardPage implements ISelec
 		IStructuredSelection selection =(IStructuredSelection) listViewer.getSelection();
 		try {
 			selectedLot =validate((Lot) selection.getFirstElement());
+			getDialogSettings().put(LOT_NAME, selectedLot.getName());
+			
 		} catch (Exception e) {
 			setMessage(null);
 			setErrorMessage(
