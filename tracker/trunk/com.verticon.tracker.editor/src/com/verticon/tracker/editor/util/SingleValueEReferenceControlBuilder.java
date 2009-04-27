@@ -2,12 +2,14 @@ package com.verticon.tracker.editor.util;
 
 import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Comparator;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.databinding.edit.EMFEditObservables;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -46,13 +48,14 @@ public class SingleValueEReferenceControlBuilder implements ControlBuilder {
 	private ComboViewer createControl(Object object, Composite parent,
 			IItemPropertyDescriptor propertyDescriptor,
 			AdapterFactory adapterFactory) {
-		 EObject eObject = (EObject) AdapterFactoryEditingDomain.unwrap(object);
 		ComboViewer comboViewer = new ComboViewer(parent,
 				SWT.DROP_DOWN);
 
 		// Getting choices may or may not include a null.
 		// Nulls in choices will cause an error
-		List<Object> choices = new ArrayList<Object>();
+		
+		///
+       EList<Object> choices = new BasicEList<Object>(propertyDescriptor.getChoiceOfValues(object).size());
 		
 		for (Object object2 : propertyDescriptor.getChoiceOfValues(object)) {
 			if (object2 != null) {
@@ -65,7 +68,16 @@ public class SingleValueEReferenceControlBuilder implements ControlBuilder {
 		if (choices.isEmpty()) {
 			return comboViewer;
 		}
-		
+		final AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(
+				adapterFactory);
+		Comparator<Object> comparator = new Comparator<Object>(){
+
+			public int compare(Object o1, Object o2) {
+				return labelProvider.getText(o1).compareTo(labelProvider.getText(o2));
+			}
+			
+		};
+		ECollections.sort(choices, comparator);
 		
 		comboViewer.setContentProvider(new ArrayContentProvider());
 		comboViewer.setLabelProvider(new AdapterFactoryLabelProvider(
