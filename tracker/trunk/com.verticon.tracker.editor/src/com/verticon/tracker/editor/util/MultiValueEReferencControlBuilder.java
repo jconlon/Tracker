@@ -103,7 +103,7 @@ public class MultiValueEReferencControlBuilder implements ControlBuilder {
 						parent.getShell(),
 						choiceOfValues,  
 						eStructuralFeature,
-						labelProvider);
+						labelProvider,true);
 				List<?> currentValues = (List<?>) eObject
 						.eGet(eStructuralFeature);
 				if (results != null && results.equals(currentValues)) {
@@ -115,6 +115,8 @@ public class MultiValueEReferencControlBuilder implements ControlBuilder {
 				
 
 			}
+			
+			
 
 			/**
 			 * @param results
@@ -136,7 +138,7 @@ public class MultiValueEReferencControlBuilder implements ControlBuilder {
 		return text;
 	}
 
-	private void bind(Object object, DataBindingContext dataBindingContext,
+	 static void bind(Object object, DataBindingContext dataBindingContext,
 			IItemPropertyDescriptor itemPropertyDescriptor,
 			final AdapterFactory adapterFactory, Text text) {
 			
@@ -181,22 +183,29 @@ public class MultiValueEReferencControlBuilder implements ControlBuilder {
 		
 	}
 	
-	EList<?> createDialog(EObject eObject,
+	static EList<?> createDialog(EObject eObject,
 			IItemPropertyDescriptor itemPropertyDescriptor, Shell shell,
 			List<?> choiceOfValues, EStructuralFeature feature,
-			ILabelProvider labelProvider) {
+			ILabelProvider labelProvider, boolean multiline) {
 	
-		FeatureEditorDialog dialog = new FeatureEditorDialog(shell,
-				labelProvider, eObject, feature,
+		FeatureEditorDialog dialog = new FeatureEditorDialog(
+				shell,
+				labelProvider, 
+				eObject, 
+				feature.getEType(),
+				(List<?>)eObject.eGet(feature),
 				"Choose references",
-				choiceOfValues);
+				choiceOfValues, 
+				multiline, 
+				true //sorted
+				);
 		
 		dialog.open();
 		
 		return dialog.getResult();
 	}
 	
-	 public ILabelProvider getLabelProvider(
+	 public static ILabelProvider getLabelProvider(
 			IItemPropertyDescriptor itemPropertyDescriptor, Object object) {
 		final IItemLabelProvider itemLabelProvider = itemPropertyDescriptor
 				.getLabelProvider(object);
