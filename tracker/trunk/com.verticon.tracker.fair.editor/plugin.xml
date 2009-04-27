@@ -89,13 +89,15 @@
             name="%_UI_commands_person_changeMovedEventPins_name">
       </command>
       
-      <!-- MovedIn Commands -->
+      <!-- 
+		Animals
+	   -->
        <command
              id="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
-             defaultHandler="com.verticon.tracker.fair.editor.handlers.MovedInFairRegistrationHandler"
+             defaultHandler="com.verticon.tracker.fair.editor.handlers.AnimalFairRegistrationHandler"
              categoryId="com.verticon.tracker.fair.editor.commands.Fair.category"
-             description="%_UI_commands_movedIn_fairRegistration_description"
-             name="%_UI_commands_movedIn_fairRegistration_name">
+             description="%_UI_commands_animal_fairRegistration_description"
+             name="%_UI_commands_animal_fairRegistration_name">
       </command>
       
       </extension>
@@ -109,37 +111,89 @@
             locationURI="popup:com.verticon.tracker.editor.menus.popupany">
             
             	<!-- 
-               	Register an Exhibit 
-               	works on a Animal Element;
-               	works with simple and transaction based editors ;
-			   	needs a Fair in the Editor so it No longer is visible from Premises Editors	 
+               	Register an Exhibit from a FairRegistrationSelection.
+               	Works on a Animal Elements, Event Elements, a single Person, and a single Lot;
+               	works with simple and transaction based editors, if it is a set of animals alone 
+               	it requires that the active editor is a FairEditor so as not to show when there
+               	is an active PremisesEditor.
                -->
                <command
                     commandId="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
                		icon="icons/full/obj16/Exhibit.gif"
                		style="push">
 	               	<visibleWhen>
-	               	    <and>
-	               		<with variable="activeMenuSelection">
-			                  <iterate>
-			                     <!--
-			                     TODO replace MovedIn with selection on Animal
-	      						 <instanceof value="com.verticon.tracker.Animal"/>
-	      						 -->
-	      						 <instanceof value="com.verticon.tracker.MovedIn"/>
-	    					  </iterate>
-	    			     </with>
-	    			     <test
-                   			forcePluginActivation="true"
-                   			property="com.verticon.tracker.fair.editor.isFairEditor">
-              		 	</test>
-	    			     </and>
+			    			     <test
+		                   			forcePluginActivation="true"
+		                   			property="com.verticon.tracker.fair.editor.isFairRegistionSelection">
+		              		 	</test>
 		            </visibleWhen>
                </command>
                
                <!-- 
-               	Update Pins on all Exhibited Animal Events 
-               	works on a collection of Person Elements;
+               	Register an Exhibit visible from an Animals Selection in the Animals View.
+               	Works on a Animal Elements when there is not an active FairRegistrationSelection. This
+               	command will show in the Animals View, but will not show (alongside the same command made visible
+               	from the above declaration) in a FairEditor.
+               -->
+                <command
+                    commandId="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
+               		icon="icons/full/obj16/Exhibit.gif"
+               		style="push">
+	               	<visibleWhen>
+
+	               	    	 <and>
+			               	    <with variable="activeMenuSelection">
+				                  <iterate>
+		      						 <instanceof value="com.verticon.tracker.Animal"/>
+		    					  </iterate>
+		    			     	</with>
+		    			     	<test
+                   					forcePluginActivation="true"
+                   					property="com.verticon.tracker.fair.editor.isFairEditor">
+              		 			</test>
+              		 			<test
+		                   			forcePluginActivation="true"
+		                   			property="com.verticon.tracker.fair.editor.notFairRegistionSelection">
+		              		 	</test>
+		    			     </and>	
+		            </visibleWhen>
+               </command>
+               
+               
+               <!-- 
+               	Register an Exhibit visible from an Events Selection in the Events View.
+               	Works on a Events Elements when there is not an active FairRegistrationSelection. This
+               	command will show in the Events View, but will not show (alongside the same command made visible
+               	from the above declaration) in a FairEditor.
+               -->
+                <command
+                    commandId="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
+               		icon="icons/full/obj16/Exhibit.gif"
+               		style="push">
+	               	<visibleWhen>
+
+	               	    	 <and>
+			               	    <with variable="activeMenuSelection">
+				                  <iterate>
+		      						 <instanceof value="com.verticon.tracker.Event"/>
+		    					  </iterate>
+		    			     	</with>
+		    			     	<test
+                   					forcePluginActivation="true"
+                   					property="com.verticon.tracker.fair.editor.isFairEditor">
+              		 			</test>
+              		 			<test
+		                   			forcePluginActivation="true"
+		                   			property="com.verticon.tracker.fair.editor.notFairRegistionSelection">
+		              		 	</test>
+		    			     </and>	
+		            </visibleWhen>
+               </command>
+               
+               
+               <!-- 
+               	Update Pins on all Exhibited Animal Move Events visible from Person selections.
+               	Works on a collection of Person Elements;
                	works with simple and transaction based editors ;
 			   	needs a Person to be Registed, so it No longer is visible from just any Person	
                -->
@@ -164,51 +218,7 @@
       </menuContribution>
       
       
-      
-     
-      <!--
-      <menuContribution
-            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
-         <menu
-               label="Tracker Fair Person Actions"
-               mnemonic="T">
-               <visibleWhen>
-               			<with variable="activeMenuSelection">
-		                  <iterate>
-      						 <instanceof value="com.verticon.tracker.fair.Person"/>
-    					  </iterate>
-    			     	</with>
-	            </visibleWhen>
-               <command
-                     commandId="com.verticon.tracker.fair.editor.commands.person.changeMovedEventPins.command"
-               	style="push">
-               	</command>
-         </menu>
-      </menuContribution>
-      
-     
-     <menuContribution
-            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
-         <menu
-               label="Tracker Fair MovedIn Event Actions"
-               mnemonic="T">
-               <visibleWhen>
-               			<with variable="activeMenuSelection">
-		                  <iterate>
-      						 <instanceof value="com.verticon.tracker.MovedIn"/>
-    					  </iterate>
-    					</with>
-	            </visibleWhen>
-               <command
-                     commandId="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
-               	style="push">
-               	</command>
-         </menu>
-      </menuContribution>  
-      -->
    </extension>
-   
-   
       <extension
             point="org.eclipse.ui.cheatsheets.cheatSheetContent">
          <category
@@ -232,10 +242,10 @@
             point="org.eclipse.core.expressions.propertyTesters">
             
          <!--
-         Test if the editor is a Fair Editor
+         Test if the active editor is a Fair Editor
          -->
          <propertyTester
-               class="com.verticon.tracker.fair.editor.propertyTester.FairEditorTester"
+               class="com.verticon.tracker.fair.editor.handlers.FairEditorTester"
                id="com.verticon.tracker.fair.editor.propertyTester.FairEditorPropertyTester"
                namespace="com.verticon.tracker.fair.editor"
                properties="isFairEditor, isSimpleFairEditor"
@@ -243,14 +253,26 @@
          </propertyTester>
          
          <!-- 
-         Test if the selected objects are a collection of Person objects.  Must be used 
+         Test if the selected objects are a collection of Person objects with Exhibits in a Fair.  Must be used 
          with an iterate on a Person. 
          -->
          <propertyTester
-               class="com.verticon.tracker.fair.editor.propertyTester.PersonRegisteredTester"
+               class="com.verticon.tracker.fair.editor.handlers.PersonRegisteredTester"
                id="com.verticon.tracker.fair.editor.propertyTester.PersonRegisteredPropertyTester"
                namespace="com.verticon.tracker.fair.editor"
                properties="isPersonRegistered"
+               type="java.lang.Object">
+         </propertyTester>
+         
+         <!--
+         Test if the selected objects are suitable for FairRegistration.  Selected objects can be
+         a set of animals, animal events, a single lot or a single Person.
+         -->
+         <propertyTester
+               class="com.verticon.tracker.fair.editor.handlers.FairRegistrationTester"
+               id="com.verticon.tracker.fair.editor.propertyTester.FairRegistrationPropertyTester"
+               namespace="com.verticon.tracker.fair.editor"
+               properties="isFairRegistionSelection, notFairRegistionSelection"
                type="java.lang.Object">
          </propertyTester>
       </extension>

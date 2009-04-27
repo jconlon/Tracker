@@ -141,7 +141,6 @@ public class UpdatePinsWizard extends Wizard {
 	 * 
 	 */
 	private Command createCommand() {
-		CompoundCommand compoundCommand = new CompoundCommand();
 		Command command = null;
 
 		// Get all the exhibits that are associated with the selectedPersons
@@ -154,11 +153,32 @@ public class UpdatePinsWizard extends Wizard {
 		List<Exhibit> selectedPersonExhibits = new ArrayList<Exhibit>(
 				exhibitsOfPersons.filterCopy(findFair().exhibits()));
 
+		CompoundCommand compoundCommand = new CompoundCommand();
+		return createUpdatePinCommand(editingDomain,
+				selectedPersonExhibits, 
+				updatePinsPage.updateMovedOut(), 
+				updatePinsPage.updateMovedIn(), 
+				compoundCommand);
+		
+	}
+
+	/**
+	 * @param selectedPersonExhibits
+	 * @param updateMovedOut
+	 * @param updateMovedIn
+	 * @return
+	 */
+	public static Command createUpdatePinCommand(EditingDomain editingDomain,
+			List<Exhibit> selectedPersonExhibits, boolean updateMovedOut,
+			boolean updateMovedIn,CompoundCommand compoundCommand) {
+		Command command;
+		
+		
 		// Create setCommands for each animal's Movexx events
 		for (Exhibit exhibit : selectedPersonExhibits) {
 			//Get all the two movedxxx events for that animal
 			for (Event event : exhibit.getAnimal().eventHistory()) {
-				if (event instanceof MovedIn && updatePinsPage.updateMovedIn()) {
+				if (event instanceof MovedIn && updateMovedIn) {
 					command = SetCommand.create(editingDomain, // Domain
 							event, // Owner
 							TrackerPackage.Literals.MOVED_IN__SOURCE_PIN, // Feature
@@ -167,17 +187,19 @@ public class UpdatePinsWizard extends Wizard {
 					if (command != null) {
 						compoundCommand.append(command);
 					}
-				} else if (event instanceof MovedOut
-						&& updatePinsPage.updateMovedOut()) {
-					if (event instanceof MovedOut) {
-						command = SetCommand.create(
-								editingDomain, // Domain
-								event, // Owner
-								TrackerPackage.Literals.MOVED_OUT__DESTINATION_PIN, // Feature
-								exhibit.getExhibitor().getPin()// value
-						);
-						if (command != null) {
-							compoundCommand.append(command);
+				} else {
+					if (event instanceof MovedOut
+							&& updateMovedOut) {
+						if (event instanceof MovedOut) {
+							command = SetCommand.create(
+									editingDomain, // Domain
+									event, // Owner
+									TrackerPackage.Literals.MOVED_OUT__DESTINATION_PIN, // Feature
+									exhibit.getExhibitor().getPin()// value
+							);
+							if (command != null) {
+								compoundCommand.append(command);
+							}
 						}
 					}
 				}

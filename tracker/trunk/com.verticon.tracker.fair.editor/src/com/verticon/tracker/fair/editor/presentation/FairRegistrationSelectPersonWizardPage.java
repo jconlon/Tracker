@@ -3,9 +3,13 @@ package com.verticon.tracker.fair.editor.presentation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -21,9 +25,10 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -39,13 +44,16 @@ import com.verticon.tracker.fair.YoungPerson;
 
 public class FairRegistrationSelectPersonWizardPage extends WizardPage
 		implements ISelectionChangedListener {
+	
+	private CTabFolder detailFormTabFolder;
+	private ScrolledComposite formParent;
 
 	private Person selectedPerson = null;
 	private TableViewer tableViewer;
 	private boolean viewingOnlyPersons;
 	private IPropertiesFormProvider defaultPropertiesFormProvider;
-	protected CTabFolder cTabFolder;
-	Composite child = null;
+
+	private Composite child = null;
 
 	private final AdapterFactory adapterFactory;
 
@@ -58,23 +66,43 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 	}
 
 	public void createControl(Composite parent) {
-		child = new Composite(parent, SWT.NULL);
-		child.setLayout(new FillLayout(SWT.VERTICAL));
+		child = createSash( parent);
 
 		Composite container = new Composite(child, SWT.NULL);
 		final GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 3;
 		container.setLayout(gridLayout);
-		Composite tableComposite = new Composite(container, SWT.NONE);
-		tableViewer = createSingleColumnTableViewer(tableComposite);
-		GridData data = new GridData(GridData.FILL_BOTH);
-		data.grabExcessHorizontalSpace = true;
-		data.horizontalSpan = 3;
-		data.heightHint = 300;
-		data.widthHint = 300;
-		tableComposite.setLayoutData(data);
-		tableViewer.addSelectionChangedListener(this);
+		
+		
+		createTable(container);
 
+		createLabelsAndButtons(container);
+		createFormFolder(child);
+		
+		setControl(child);
+
+	}
+	
+	static Composite createSash(Composite parent){
+		// Create the SashForm
+	    final SashForm sashForm = new SashForm(parent, SWT.VERTICAL);
+
+	    // Change the width of the sashes
+	    sashForm.SASH_WIDTH = 7;
+
+	    // Change the color used to paint the sashes
+	    sashForm.setBackground(parent.getDisplay().getSystemColor(SWT.COLOR_GRAY));
+	    // Set the relative weights for the buttons
+//	    sashForm.setWeights(new int[] { 1, 2, 3});
+	    return sashForm;
+	}
+	
+	
+
+	/**
+	 * @param container
+	 */
+	private void createLabelsAndButtons(Composite container) {
 		Label label = new Label(container, SWT.NULL);
 		label.setText("Filter on Person Type: ");
 		label.setBackground(container.getDisplay().getSystemColor(
@@ -111,15 +139,37 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 			}
 
 		});
-		cTabFolder = new CTabFolder(child, SWT.LEFT);
-		cTabFolder.setForeground(child.getDisplay().getSystemColor(
-				SWT.COLOR_BLACK));
-		cTabFolder.setBackground(child.getDisplay().getSystemColor(
-				SWT.COLOR_WHITE));
-
-		setControl(child);
-
 	}
+
+	/**
+	 * @param container
+	 */
+	private void createTable(Composite container) {
+		Composite tableComposite = new Composite(container, SWT.NONE);
+		tableViewer = createSingleColumnTableViewer(tableComposite);
+		GridData data = new GridData(GridData.FILL_BOTH);
+		data.grabExcessHorizontalSpace = true;
+		data.horizontalSpan = 3;
+		data.heightHint = 300;
+		data.widthHint = 300;
+		tableComposite.setLayoutData(data);
+		tableViewer.addSelectionChangedListener(this);
+	}
+	
+	/**
+	 * Second window will be the form
+	 */
+	private void createFormFolder(Composite container) {
+		formParent = new ScrolledComposite(container, SWT.BORDER | SWT.H_SCROLL
+				| SWT.V_SCROLL);
+
+		detailFormTabFolder = new CTabFolder(formParent, SWT.LEFT
+				| SWT.H_SCROLL | SWT.V_SCROLL);
+		detailFormTabFolder.setForeground(formParent.getDisplay()
+				.getSystemColor(SWT.COLOR_BLACK));
+		formParent.setContent(detailFormTabFolder);
+	}
+
 
 	public Person getSelectedPerson() {
 		return selectedPerson;
@@ -135,10 +185,10 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 
 	public void selectionChanged(SelectionChangedEvent event) {
 		// Remove all the tabs in the TabFolder
-		for (CTabItem item : cTabFolder.getItems()) {
+		for (CTabItem item : detailFormTabFolder.getItems()) {
 			item.dispose();
 		}
-		fillPropertiesFolder(event.getSelection(), adapterFactory, cTabFolder);
+		fillPropertiesFolder(event.getSelection(), adapterFactory, detailFormTabFolder);
 		updatePageComplete();
 	}
 
@@ -194,7 +244,16 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 	protected Collection<Person> getPersons() {
 		Fair fair = ((FairRegistrationWizard) getWizard()).findFair();
 		if (fair != null) {
-			return fair.getPeople();
+			EList<Person> people = new BasicEList<Person>(fair.getPeople());
+			
+			Collections.sort(people, new Comparator<Person>() {
+				@Override
+				public int compare(Person o1, Person o2) {
+					// TODO Auto-generated method stub
+					return o1.getName().compareTo(o2.getName());
+				}});
+			return ECollections.unmodifiableEList(people);
+			
 		}
 
 		return Collections.emptyList();
@@ -245,23 +304,36 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 
 	}
 
+
+	
 	/**
 	 * @param selection
 	 * @return
 	 */
-	protected void fillPropertiesFolder(ISelection selection,
+	private void fillPropertiesFolder(ISelection selection,
 			AdapterFactory adapterFactory, CTabFolder cTabFolder) {
 		if (defaultPropertiesFormProvider == null) {
+			// logger.debug(bundleMarker,"Creating a defaultPropertiesFormProvider");
 			defaultPropertiesFormProvider = new DefaultPropertiesFormProvider();
-			defaultPropertiesFormProvider.setWizardPage(this);
 		}
-
 		defaultPropertiesFormProvider.fillProperties(selection, adapterFactory,
 				cTabFolder, "Person Details", true);
-		setControl(child);
-		return;
+		cTabFolder.pack(true);
 
 	}
 	
 
+	/**
+	 * Disposes all the tabs in the TabFolder and resources.
+	 */
+	@Override
+	public void dispose() {
+		for (CTabItem item : detailFormTabFolder.getItems()) {
+			item.dispose();
+		}
+		detailFormTabFolder.dispose();
+		child.dispose();
+		formParent.dispose();
+		super.dispose();
+	}
 }

@@ -5,11 +5,14 @@ package com.verticon.tracker.fair.editor.presentation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.edit.command.AddCommand;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.jface.dialogs.IDialogSettings;
@@ -20,9 +23,6 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IWorkbenchWindow;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.Event;
-import com.verticon.tracker.MovedIn;
-import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
@@ -31,10 +31,17 @@ import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.Lot;
 import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
+import com.verticon.tracker.fair.editor.handlers.FairRegistrationSelection;
 
 /**
- * Wizard for assisting operator in the Registration of Exhibitors at an 
- * Animal MovedIn Event.
+ * Wizard for assisting operator in the Registration of Exhibit. 
+ * Goal is to determine which animals are to be exhibited, the lot
+ * for the exhibit, and the Person that is registering the Animals.
+ * 
+ * These choices can come from user selections or from selections in the wizard.
+ * 
+ * This wizard will not be called if the FairRegistrationSelection is invalid.
+ * @see FairRegistrationWizard
  * 
  * Pages:
  * <ul>
@@ -48,9 +55,8 @@ import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
  */
 public class FairRegistrationWizard extends Wizard  {
 
-	private EditingDomain editingDomain;
-	private MovedIn firstMovedInEvent;
-	private final Collection<Animal> animalsToRegister = new ArrayList<Animal>();
+	private FairRegistrationSelection fairRegistrationSelection = null;
+	
     
 	private FairRegistrationSelectPersonWizardPage selectPersonPage = null;
 	private BaseConfigureExhibitWizardPage selectLotPage = null;
@@ -72,22 +78,31 @@ public class FairRegistrationWizard extends Wizard  {
 			wizardSettings = 
 				trackerSettings.addNewSection(ADD_EXHIBIT_WIZARD);
 		}
-		setDialogSettings(wizardSettings);		
+		setDialogSettings(wizardSettings);	
+		
 	}
 
-	public void init(IWorkbenchWindow workbenchWindow, EditingDomain editingDomain,ISelection selection){
+	/**
+	 * 
+	 * @param workbenchWindow
+	 * @param fairProvider
+	 * @param selection can be one person, and/or one lot, and/or a set of animals
+	 */
+	public void init(IWorkbenchWindow workbenchWindow, IFairProvider fairProvider,
+			ISelection selection){
 		this.workbenchWindow=workbenchWindow;
 		
 		if (selection instanceof IStructuredSelection) {
-			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
-			firstMovedInEvent=(MovedIn)structuredSelection.getFirstElement();
-			List<?> events = structuredSelection.toList();
-			for (Object event : events) {
-				animalsToRegister.add((Animal)((Event)event).getTag().eContainer());
-			}
+			fairRegistrationSelection=FairRegistrationSelection.instance(
+					((IStructuredSelection) selection).toList()
+			);
+			
 		}
-		this.editingDomain=editingDomain;
 	}
+	
+	
+	
+	
 
 	/**
 	 * Add the default sequence of pages
@@ -96,13 +111,24 @@ public class FairRegistrationWizard extends Wizard  {
 	public void addPages() {
 		setWindowTitle(ADD_EXHIBIT);
 		ComposedAdapterFactory composedAdapterFactory = createAdapterFactory();
-		
-		selectPersonPage = new FairRegistrationSelectPersonWizardPage(composedAdapterFactory);
-		addPage(selectPersonPage);
-		selectLotPage = new FairRegistrationConfigureExhibitWizardPage(findFair());
-     	addPage(selectLotPage);
+		if(fairRegistrationSelection.getSelectedPerson()==null){
+			selectPersonPage = new FairRegistrationSelectPersonWizardPage(composedAdapterFactory);
+			addPage(selectPersonPage);
+		}
+		if(fairRegistrationSelection.getSelectedLot()==null){
+			selectLotPage = new FairRegistrationConfigureExhibitWizardPage(findFair());
+			addPage(selectLotPage);
+		}
      	createConfirmationPage= new FairRegistrationConfirmationWizardPage(composedAdapterFactory);
      	addPage(createConfirmationPage);
+     	
+	}
+
+	/**
+	 * @return Fair
+	 */
+	public Fair findFair() {
+		return fairRegistrationSelection.getFair();
 	}
 
 	/**
@@ -122,9 +148,9 @@ public class FairRegistrationWizard extends Wizard  {
 	 */
 	@Override
 	public boolean performFinish() {
-		String attWording = animalsToRegister.size()==1?" exhibit.": " exhibits.";
+		String attWording = fairRegistrationSelection.getSelectedAnimals().size()==1?" exhibit.": " exhibits.";
 		try {
-			editingDomain.getCommandStack().execute(createCommand());
+			getEditingDomain().getCommandStack().execute(createCommand());
 			
 		} catch (RuntimeException e) {
 			MessageDialog.openError(workbenchWindow.getShell(), 
@@ -134,7 +160,7 @@ public class FairRegistrationWizard extends Wizard  {
 		}
 		MessageDialog.openInformation(workbenchWindow.getShell(), 
 				"Registered Exhibitor", "Registered "+getSelectedPerson().getName()+
-				" with "+animalsToRegister.size()+
+				" with "+fairRegistrationSelection.getSelectedAnimals().size()+
 				attWording);
 		return true;
 	}
@@ -144,9 +170,10 @@ public class FairRegistrationWizard extends Wizard  {
 	 * @return command to add an exhibit for each animal to the lot
 	 */
 	private Command createCommand(){
+		
 		List<Exhibit> exhibitsToAdd = new ArrayList<Exhibit>();
 		Exhibit exhibit = null;
-		for (Animal animal : animalsToRegister) {
+		for (Animal animal : getAnimalsToRegister()) {
 			 exhibit = FairFactory.eINSTANCE.createExhibit();
 			 exhibit.setAnimal(animal);
 			 exhibit.setExhibitor(getSelectedPerson());
@@ -155,24 +182,36 @@ public class FairRegistrationWizard extends Wizard  {
 		}
 		
 		Command command = AddCommand.create(
-				editingDomain, //Domain
+				getEditingDomain(),//fairProvider.getEditingDomain(), //Domain
 				getSelectedLot(), //Owner
 				FairPackage.Literals.LOT__EXHIBITS,
 				exhibitsToAdd
 		);
+		if(createConfirmationPage.updateMovedOut() || createConfirmationPage.updateMovedIn()){
+			CompoundCommand compoundCommand = new CompoundCommand();
+			compoundCommand.append(command);
+			return UpdatePinsWizard.createUpdatePinCommand(
+					getEditingDomain(), 
+					exhibitsToAdd, 
+					createConfirmationPage.updateMovedOut(), 
+					createConfirmationPage.updateMovedIn(), 
+					compoundCommand);
+			
+		}
 		return command;
 	}
 	
 	public Person getSelectedPerson() {
-		return selectPersonPage.getSelectedPerson();
+		return  fairRegistrationSelection.getSelectedPerson()!=null?
+				fairRegistrationSelection.getSelectedPerson(): 
+					selectPersonPage.getSelectedPerson();
 	} 
 
-	public MovedIn getMovedInEvent(){
-		return this.firstMovedInEvent;
-	}
 	
 	public Lot getSelectedLot(){
-		return selectLotPage.getSelectedLot();
+		return fairRegistrationSelection.getSelectedLot()!=null?
+				fairRegistrationSelection.getSelectedLot(): 
+					selectLotPage.getSelectedLot();
 	}
 
 	@Override
@@ -180,29 +219,23 @@ public class FairRegistrationWizard extends Wizard  {
 		return getSelectedLot()!=null && getSelectedPerson() != null;
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.verticon.tracker.fair.transaction.editor.popup.actions.FairFinder#findFair()
-	 */
-	public Fair findFair(){
-		Premises premisesOfEvent = (Premises) getMovedInEvent().eContainer().eContainer().eContainer();
-		Fair fair = null;
-		for (Resource resource : editingDomain.getResourceSet().getResources()) {
-			if(resource.getContents().get(0) instanceof Fair){
-				if(((Fair)resource.getContents().get(0)).getPremises()==premisesOfEvent){
-					fair = ((Fair)resource.getContents().get(0));
-					break;
-				}
-			}
-		}
-		return fair;
-	}
-
-
-	public EditingDomain getEditingDomain() {
-		return editingDomain;
-	}
 
 	public Collection<Animal> getAnimalsToRegister() {
-		return animalsToRegister;
+		List<Animal>animals = new ArrayList<Animal>(fairRegistrationSelection.getSelectedAnimals());
+		
+		Collections.sort(animals, new Comparator<Animal>() {
+			@Override
+			public int compare(Animal o1, Animal o2) {
+				return o1.getId().compareTo(o2.getId());
+			}});
+		
+		return animals;
 	}
+	
+	private EditingDomain getEditingDomain(){
+		 EditingDomain result = AdapterFactoryEditingDomain.getEditingDomainFor(getSelectedLot());
+		    return result;
+
+	}
+	 
 }
