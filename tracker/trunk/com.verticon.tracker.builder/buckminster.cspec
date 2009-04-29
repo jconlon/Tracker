@@ -8,8 +8,7 @@
     </cs:dependencies>
     <cs:actions>
         <cs:public name="deploy.product.downloads" actor="ant">
-            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Copies only the Widows version of the 
-product to the local s3 repo.</cs:documentation>
+            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Deploys latest version of the product artifact to the local s3 downloads directory.</cs:documentation>
             <cs:actorProperties>
                 <cs:property key="buildFile" value="buildConfiguration/buildLocalRepo.xml"/>
             </cs:actorProperties>
@@ -19,6 +18,7 @@ product to the local s3 repo.</cs:documentation>
             <cs:products alias="action.output" base="${user.dir}/s3/Tracker/downloads/"/>
         </cs:public>
         <cs:public name="deploy.product.repo" actor="ant">
+            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Deploys the product feature to ${user.dir}/s3/Tracker/p2/product/ P2 repo.</cs:documentation>
             <cs:actorProperties>
                 <cs:property key="buildFile" value="buildConfiguration/buildLocalRepo.xml"/>
             </cs:actorProperties>
@@ -30,6 +30,7 @@ product to the local s3 repo.</cs:documentation>
             </cs:products>
         </cs:public>
         <cs:public name="deploy.product.test" actor="ant">
+            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Deploys the current product to the /tmp/tracker directory.  Used for testing.</cs:documentation>
             <cs:actorProperties>
                 <cs:property key="buildFile" value="buildConfiguration/buildLocalRepo.xml"/>
             </cs:actorProperties>
@@ -39,6 +40,7 @@ product to the local s3 repo.</cs:documentation>
             <cs:products alias="action.output" base="/tmp/tracker/"/>
         </cs:public>
         <cs:public name="s3cmd.sync" actor="ant">
+            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Syncs the files in the users s3 directory with Amazon S3.</cs:documentation>
             <cs:actorProperties>
                 <cs:property key="buildFile" value="buildConfiguration/buildLocalRepo.xml"/>
             </cs:actorProperties>
@@ -53,6 +55,9 @@ product to the local s3 repo.</cs:documentation>
     </cs:actions>
     <cs:groups>
         <cs:public name="deploy.features.repos.and.documentation">
+            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Calls the com.verticon.tracker.update to deploy features to the S3 repo staging directory and
+com.verticon.tracker.documentation to deploy standalone documentation to the S3 documentation
+staging directory.</cs:documentation>
             <cs:attribute name="deploy.documentation.to.local.s3.staging" component="com.verticon.tracker.documentation"/>
             <cs:attribute name="build-and-deploy.repositories" component="com.verticon.tracker.update"/>
         </cs:public>

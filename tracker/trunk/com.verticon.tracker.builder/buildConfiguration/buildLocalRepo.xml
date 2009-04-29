@@ -26,14 +26,12 @@
 		</target>
 
 	
-	<!-- ================================= 
+	<!-- =================================
           target: deploy.product.downloads              
          ================================= -->
     <target name="deploy.product.downloads" description="Copies the products to the local downloads directory">
     	<copy todir="${sp:action.output}">
-    		<fileset dir="${result}">
-    		      <exclude name="**/*.tar"/>
-    		</fileset>
+    		<fileset dir="${result}"/>
     	</copy>
     </target>
 
