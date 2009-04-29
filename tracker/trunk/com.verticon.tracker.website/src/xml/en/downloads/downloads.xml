@@ -12,7 +12,7 @@
 	<section>
 		<title>Tracker Desktop Product</title>
 		<table xml:id="ex.calstable" frame='all'>
-			<title>Revision 0.3.2, Released on: March 09, 2009</title>
+			<title>Revision 0.3.4, Engineering Released on: April 29, 2009</title>
 			<tgroup cols='3' align='left' colsep='1' rowsep='1'>
 				<colspec colname='c1' />
 				<colspec colname='c2' />
@@ -28,12 +28,22 @@
 					<row>
 						<entry>
 							<ulink
-								url="http://tracker.verticon.com/Tracker/downloads/Tracker-p2-RCP-win32-0.3.2.v200903091327.zip">
-								Tracker-p2-RCP-win32-0.3.2.v200903091327.zip
+								url="http://tracker.verticon.com/Tracker/downloads/Tracker-p2-RCP-win32-0.3.4.v200904291013.zip">
+								Tracker-p2-RCP-win32-0.3.4.v200904291013.zip
 							</ulink>
 						</entry>
-						<entry>47.8M</entry>
+						<entry>45.9M</entry>
 						<entry>WIN</entry>
+					</row>
+					<row>
+						<entry>
+							<ulink
+								url="http://tracker.verticon.com/Tracker/downloads/Tracker-p2-RCP-linux-0.3.4.v200904291013.tar">
+								Tracker-p2-RCP-linux-0.3.4.v200904291013.tar
+							</ulink>
+						</entry>
+						<entry>52.9M</entry>
+						<entry>Linux</entry>
 					</row>
 				</tbody>
 			</tgroup>

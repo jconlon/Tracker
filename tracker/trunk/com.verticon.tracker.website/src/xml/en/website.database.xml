@@ -38,11 +38,11 @@
             <ttl>Tracker Desktop Product</ttl>
             <xreftext>the section called “Tracker Desktop Product”</xreftext>
             <obj element="table" href="#ex.calstable" number="1">
-               <ttl>Revision 0.3.2, Released on: March 09, 2009</ttl>
-               <xreftext>Table 1, “Revision 0.3.2, Released on: March 09, 2009”</xreftext>
+               <ttl>Revision 0.3.4, Engineering Released on: April 29, 2009</ttl>
+               <xreftext>Table 1, “Revision 0.3.4, Engineering Released on: April 29, 2009”</xreftext>
             </obj>
          </div>
-         <div element="section" href="#d7e91" number="">
+         <div element="section" href="#d7e106" number="">
             <ttl>Tracker Update Repositories</ttl>
             <xreftext>the section called “Tracker Update Repositories”</xreftext>
             <obj element="table" href="#ex.calstable" number="2">
