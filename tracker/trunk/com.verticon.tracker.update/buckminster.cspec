@@ -20,6 +20,35 @@
         <cs:private name="site.template" path="site.xml"/>
     </cs:artifacts>
     <cs:actions>
+        <cs:public name="build.p2.site" actor="ant">
+            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Builds a p2 repository. This is failing see Ticket #359</cs:documentation>
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="make/build.xml"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="eclipse.exec" value="${eclipse.home}/eclipse"/>
+                <cs:property key="p2.artifact.repo.name" value="Tracker Feature Artifacts"/>
+                <cs:property key="p2.flavor" value="tracker"/>
+                <cs:property key="p2.metadata.repo.name" value="Tracker Feature Updates"/>
+            </cs:properties>
+            <cs:prerequisites alias="input">
+                <cs:attribute name="build.site"/>
+            </cs:prerequisites>
+            <cs:products alias="action.output" base="siterepo/"/>
+        </cs:public>
+        <cs:public name="deploy.p2.repositories" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="make/buildLocalRepo.xml"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="repo.features" value="${buckminster.output}/siterepo/"/>
+                <cs:property key="repo.oda" value="${buckminster.output}/siteodarepo/"/>
+            </cs:properties>
+            <cs:products alias="action.output" base="${user.dir}/s3/Tracker/p2/">
+                <cs:private name="features" base="${user.dir}/s3/Tracker/p2/"/>
+                <cs:private name="oda" base="${user.dir}/s3/Tracker/p2/"/>
+            </cs:products>
+        </cs:public>
         <cs:private name="build.p2.oda.site" actor="ant">
             <cs:documentation xmlns="http://www.w3.org/1999/xhtml">This action is a workaround to create an update site for the org.eclipse.datatools.enablement.ecore 
 feature.
@@ -37,22 +66,6 @@ should be in a shared site or have it's own site by then.</cs:documentation>
                 <cs:property key="p2.metadata.repo.name" value="Ecore ODA Enablement Updates"/>
             </cs:properties>
             <cs:products alias="action.output" base="siteodarepo/"/>
-        </cs:private>
-        <cs:private name="build.p2.site" actor="ant">
-            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Builds a p2 repository.</cs:documentation>
-            <cs:actorProperties>
-                <cs:property key="buildFile" value="make/build.xml"/>
-            </cs:actorProperties>
-            <cs:properties>
-                <cs:property key="eclipse.exec" value="${eclipse.home}/eclipse"/>
-                <cs:property key="p2.artifact.repo.name" value="Tracker Feature Artifacts"/>
-                <cs:property key="p2.flavor" value="tracker"/>
-                <cs:property key="p2.metadata.repo.name" value="Tracker Feature Updates"/>
-            </cs:properties>
-            <cs:prerequisites alias="input">
-                <cs:attribute name="build.site"/>
-            </cs:prerequisites>
-            <cs:products alias="action.output" base="siterepo/"/>
         </cs:private>
         <cs:private name="build.site" actor="ant">
             <cs:actorProperties>
@@ -105,19 +118,6 @@ should be in a shared site or have it's own site by then.</cs:documentation>
                 <cs:property key="targets" value="clean.generic"/>
             </cs:actorProperties>
             <cs:products alias="action.output" base="site/"/>
-        </cs:private>
-        <cs:private name="deploy.p2.repositories" actor="ant">
-            <cs:actorProperties>
-                <cs:property key="buildFile" value="make/buildLocalRepo.xml"/>
-            </cs:actorProperties>
-            <cs:properties>
-                <cs:property key="repo.features" value="${buckminster.output}/siterepo/"/>
-                <cs:property key="repo.oda" value="${buckminster.output}/siteodarepo/"/>
-            </cs:properties>
-            <cs:products alias="action.output" base="${user.dir}/s3/Tracker/p2/">
-                <cs:private name="features" base="${user.dir}/s3/Tracker/p2/"/>
-                <cs:private name="oda" base="${user.dir}/s3/Tracker/p2/"/>
-            </cs:products>
         </cs:private>
     </cs:actions>
     <cs:groups>
