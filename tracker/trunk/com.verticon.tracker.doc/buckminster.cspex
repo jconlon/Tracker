@@ -4,8 +4,9 @@
 	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0"
 	xmlns="http://www.eclipse.org/buckminster/CSpec-1.0">
 	<dependencies>
-		<!-- Place your Dependencies here -->
+		<!-- Place your Dependencies here 
 		<dependency name="com.verticon.tracker.documentation"/>
+		-->
 	</dependencies>
 	<generators>
 		<!-- Place your Generators here -->
