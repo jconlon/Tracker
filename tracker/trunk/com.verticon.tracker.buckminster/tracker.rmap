@@ -12,7 +12,7 @@
      componentTypes="eclipse.feature,osgi.bundle,buckminster"
      source="true">
       <uri
-       format=" svn://trout/projects/java/tracker/trunk/{0}">
+       format=" https://verticon.sourcerepo.com/verticon/Tracker/tracker/trunk/{0}">
         <bc:propertyRef key="buckminster.component" />
       </uri>
     </provider>
@@ -26,7 +26,7 @@
      componentTypes="eclipse.feature"
      source="true">
       <uri
-       format=" svn://trout/projects/java/tracker/trunk/{0}.feature">
+       format=" https://verticon.sourcerepo.com/verticon/Tracker/tracker/trunk/{0}.feature">
         <bc:propertyRef key="buckminster.component" />
       </uri>
     </provider>
@@ -51,6 +51,8 @@
   <locator searchPathRef="slf" pattern="^slf4j\..*" />
   <locator searchPathRef="default" pattern="^com\.verticon\..*" />
   <locator searchPathRef="default" pattern="^net\.sf\.bluecove" />
+  <locator searchPathRef="default" pattern="^org\.apache\.poi"/>
+  
   <!--redirect href="http://www.eclipse.org/buckminster/samples/rmaps/dogfood2.rmap" pattern=".*"/-->
   <redirect href="dogfood3.rmap?format=raw" pattern=".*"/>
 </rmap>
