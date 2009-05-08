@@ -137,10 +137,10 @@ Tracker is powered by Eclipse technology and includes Eclipse plugins that can b
    </plugins>
 
    <features>
-      <feature id="com.verticon.tracker.product.desktop" version="0.3.1.qualifier"/>
+      <feature id="com.verticon.tracker.product.desktop" version="0.3.4.qualifier"/>
       <feature id="com.verticon.tracker.base.dep" version="0.3.1.qualifier"/>
       <feature id="com.verticon.tracker.editor" version="0.3.1.qualifier"/>
-      <feature id="com.verticon.tracker.reader" version="0.2.4.qualifier"/>
+      <feature id="com.verticon.tracker.reader" version="0.2.7.qualifier"/>
       <feature id="org.eclipse.help" version="1.0.1.R34x_v20080827-7r7xEIxEI6Zu5nEqN7M3UBpglaat"/>
       <feature id="org.eclipse.equinox.p2.user.ui" version="1.0.1.r34x_v20080721-7d-7OEMsLAz-vTBJ-ZHQaF155CE"/>
       <feature id="org.eclipse.platform" version="3.4.1.r341_v20080731-9I96EiDElYevwz-p1bP5z-NlAaP7vtX6Utotqsu"/>
