@@ -42,6 +42,22 @@ The 'out' parameter is the name of the output file.</cs:documentation>
                 <cs:path path="."/>
             </cs:products>
         </cs:private>
+        
+          <cs:public name="buckminster.prebind" actor="ant">
+
+			<cs:actorProperties>
+				<cs:property key="buildFile" value="make/prebind.xml" />
+			</cs:actorProperties>
+
+			<cs:prerequisites>
+				<cs:attribute component="ant" alias="ant.jar" name="java.binary.archives"/>
+				</cs:prerequisites>
+
+			<cs:products alias="output" base="${buckminster.home}">
+				<cs:path path="jars/" />
+			</cs:products>
+
+		</cs:public>
     </cs:actions>
     <cs:groups>
         <cs:public name="java.binaries">
