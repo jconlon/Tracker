@@ -16,7 +16,7 @@ specifies the include specifications like:
  'xi:include href="bookinfo/bookinfo.xml"'
 The 'out' parameter is the name of the output file.</cs:documentation>
     <cs:dependencies>
-        <cs:dependency name="ant" componentType="maven" versionDesignator="[1.7.1,1.7.1]" versionType="Triplet"/>
+        <cs:dependency name="ant"/>
     </cs:dependencies>
     <cs:artifacts>
         <cs:public name="source" path="src/"/>
