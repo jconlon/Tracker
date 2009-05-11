@@ -49,4 +49,8 @@
          id="com.verticon.tracker.fair.poi"
          version="0.0.0"/>
 
+   <includes
+         id="com.verticon.tracker.product.desktop"
+         version="0.0.0"/>
+
 </feature>

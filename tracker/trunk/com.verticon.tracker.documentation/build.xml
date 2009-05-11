@@ -12,7 +12,7 @@
 	<property name="gen.dir" location="${thisproject}/generated-xml" />
 	<property name="fo.dir" location="${thisproject}/fo" />
 	<property name="docbooksource" location="${thisproject}/docbook/"/>
-	<property name="xinclude.path.dir" location="${thisproject}/../com.verticon.tracker.ant.utilities/artifact"/>
+	<property name="xinclude.path.dir" location="${thisproject}/../com.verticon.tracker.ant.utilities/bin/jars"/>
 	<property name="xalan.lib.dir" location="${thisproject}/lib/xalan-j_2_7_0" />
 	
 	<property name="xincludeclassname" value="com.verticon.ant.utilities.xsl.XIncludeTask"/>
