@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="com.verticon.tracker.buckminster" componentType="buckminster" version="1.0.0" versionType="OSGi">
+    <cs:dependencies>
+        <cs:dependency name="com.verticon.tracker.builder" componentType="buckminster"/>
+    </cs:dependencies>
+</cs:cspec>
