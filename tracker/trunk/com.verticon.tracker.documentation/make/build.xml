@@ -4,7 +4,8 @@
 	<property name="docbookproject" location="${ant.file}/../.."/>
 
 	<property name="xincludeclassname" value="com.verticon.ant.utilities.xsl.XIncludeTask"/>
-	<property name="xinclude.path.dir" location="${docbookproject}/../com.verticon.tracker.ant.utilities/artifact"/>
+	<property name="xinclude.path.dir" 
+		location="${docbookproject}/../com.verticon.tracker.ant.utilities/bin/jars"/>
 
 	<property name="htmldir" value="${sp:action.output}" />
 	<property name="docbookdir" value="${docbookproject}/docbook-xsl-1.72.0/eclipse" />
@@ -28,7 +29,12 @@
 			<fileset dir="${xinclude.path.dir}" includes="*.jar" />
 		</path>
 
-		<typedef name="xsl.include" classname="${xincludeclassname}" classpathref="xinclude.path" />
+		<typedef name="xsl.include" classname="${xincludeclassname}" 
+			classpathref="xinclude.path" />
+		
+		<!--typedef name="xsl.include" 
+			classname="org.eclipse.wst.xsl.core.internal.ant.XIncludeTask"/-->
+		
 		<xsl.include in="${docbooksource}/trackerhelp.dbk" out="${docbooksource}/trackerhelpcombined.dbk" />
 	</target>
 
