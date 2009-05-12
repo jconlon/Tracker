@@ -5,6 +5,7 @@
         <cs:dependency name="com.verticon.tracker.documentation"/>
         <cs:dependency name="com.verticon.tracker.product.desktop" componentType="eclipse.feature"/>
         <cs:dependency name="com.verticon.tracker.update" componentType="buckminster"/>
+        <cs:dependency name="org.eclipse.pde.build" componentType="osgi.bundle"/>
     </cs:dependencies>
     <cs:actions>
         <cs:public name="deploy.product.downloads" actor="ant">
