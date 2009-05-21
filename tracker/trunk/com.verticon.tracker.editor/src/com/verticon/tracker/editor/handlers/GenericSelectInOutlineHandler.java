@@ -42,7 +42,7 @@ public class GenericSelectInOutlineHandler extends AbstractHandler  {
 	@Override
 	public void setEnabled(Object evaluationContext) {
 		IEditorPart editorPart = (IEditorPart) HandlerUtil.getVariable(evaluationContext, ISources.ACTIVE_EDITOR_NAME);
-		isEnabled = editorPart.getAdapter(IContentOutlinePage.class) != null;
+		isEnabled = editorPart!=null && editorPart.getAdapter(IContentOutlinePage.class) != null;
 		super.setEnabled(evaluationContext);
 	}
 

@@ -12,7 +12,7 @@ public class FairRegistrationTester extends PropertyTester {
 	@Override
 	public boolean test(Object receiver, String property, Object[] args,
 			Object expectedValue) {
-		System.out.println("Receiver: "+receiver);
+//		System.out.println("Receiver: "+receiver);
 		
 		//Need to get the receiver as well as well as the selections in the Animals and the People Views.
 //		   IWorkbench wb = PlatformUI.getWorkbench();
@@ -29,7 +29,7 @@ public class FairRegistrationTester extends PropertyTester {
 			Collection<?> selection = (Collection<?>)receiver;
 			result = FairRegistrationSelection.instance(selection).isValidRegistration();
 		}
-		System.out.println(this + " returning "+result);
+//		System.out.println(this + " returning "+result);
 		
 		if(IS_FAIR_REGISTION_SELECTION.equals(property)){
 			return result;

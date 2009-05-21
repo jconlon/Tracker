@@ -46,12 +46,13 @@ public class PremisesEditorTester extends PropertyTester {
 	
 	private boolean validateIsPremisesEditor() {
 		IPremisesProvider premisesProvider = getPremisesProvider();
-		return premisesProvider.getPremises()!=null;
+		return premisesProvider!=null&&
+				premisesProvider.getPremises()!=null;
 	}
 	
 	private boolean validateIsSimplePremisesEditor() {
 		IPremisesProvider premisesProvider = getPremisesProvider();
-		return validateEditingDomain( premisesProvider);
+		return premisesProvider!=null && validateEditingDomain( premisesProvider);
 	}
 	
 	protected boolean validateEditingDomain(IPremisesProvider premisesProvider){

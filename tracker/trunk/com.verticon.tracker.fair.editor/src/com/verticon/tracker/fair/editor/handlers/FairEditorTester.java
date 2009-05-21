@@ -46,12 +46,12 @@ public class FairEditorTester extends PropertyTester {
 	
 	private boolean validateIsFairEditor() {
 		IFairProvider fairProvider = getFairProvider();
-		return fairProvider.getFair()!=null;
+		return fairProvider!=null && fairProvider.getFair()!=null;
 	}
 	
 	private boolean validateIsSimpleFairEditor() {
 		IFairProvider fairProvider = getFairProvider();
-		return validateEditingDomain( fairProvider);
+		return fairProvider!=null && validateEditingDomain( fairProvider);
 	}
 	
 	protected boolean validateEditingDomain(IFairProvider fairProvider){
