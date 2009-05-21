@@ -2,6 +2,8 @@ package com.verticon.tracker.editor.presentation;
 
 import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -153,11 +155,21 @@ public class EventHistoryContentProvider extends AdapterFactoryContentProvider i
 				public void run() {
 					if (tableViewer.getControl() != null
 							&& !tableViewer.getControl().isDisposed()) {
-						tableViewer.add(element);
+						addOneOrMoreObjectsToViewer(tableViewer, element);
 					}
 				}
 			});
 		} else {
+			addOneOrMoreObjectsToViewer(tableViewer, element);
+		}
+	}
+
+	private static void addOneOrMoreObjectsToViewer(
+			final TableViewer tableViewer, final Object element) {
+		if(element instanceof Collection){
+			Collection<?> col = (Collection<?>)element;
+			tableViewer.add(col.toArray());
+		}else{
 			tableViewer.add(element);
 		}
 	}
