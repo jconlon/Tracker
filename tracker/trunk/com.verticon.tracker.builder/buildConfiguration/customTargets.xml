@@ -151,15 +151,13 @@
 	    <target name="extract.p2.product.internal">
 	    	<property file="${buildDirectory}/product.version"/> 
 	    	<delete dir="${buildDirectory}/result" />
-	    			<mkdir dir="${buildDirectory}/result/tmp" />
-	    			<property name="root.ui" value="com.verticon.tracker.product.desktop.application"/>
+	    	<mkdir dir="${buildDirectory}/result/tmp" />
+	    	<property name="root.ui" value="com.verticon.tracker.product.desktop.application"/>
 
-	    			<!--
-	    			<antcall target="fixBad.Platform.jar"></antcall>
-	    			<echo>Fixed the bad platform jar.</echo>
-	    			-->
 	    			<antcall target="postBuild.linux" />
+	    	
 	    			<antcall target="postBuild.win" />
+	    	
 	    </target>
 
 	<!-- ===================================================================== -->
@@ -243,10 +241,26 @@
           target: run.director                      
          - - - - - - - - - - - - - - - - - -->
 	<target name="run.director">
+		<!--
 		<property name="eclipse.exec" value="${base}/eclipse/eclipse" />
-		<!--property name="eclipse.exec" value="/home/jconlon/eclipse-target-platforms/eclipse-modeling-ganymede-SRI-incubation-02/eclipse/eclipse" /-->
+		<property name="eclipse.exec" value="/home/jconlon/eclipse-target-platforms/eclipse-modeling-ganymede-SRI-incubation-02/eclipse/eclipse" /
+		<echo> installUI = ${p2.IU}</echo>
+		<echo> version = ${p2.version}</echo>
+		<echo> file:${buildDirectory}/repo/</echo>
+		-->
 
-		<!-- note: use the full path to the exe here, otherwise it seems to call the exe from the builder -->
+		<!-- 
+		note 1: use the full path to the exe here, otherwise it seems to call the exe from the builder 
+		note 2: So many problems creating a p2 capable product seem to be related to metadata in 
+		the repo of the eclipse installation that a simple eclipse install is now used for the director
+		just to keep the metadata clean.  If generation problems occur again, try deleting the installation
+		and re extracting one from the tar.
+		
+		This property is now set in the build.properties file
+		<property name="eclipse.exec" value="/opt/Eclipse/eclipse-java-ganymede-SR2/eclipse/eclipse"/>
+		
+		-->
+				
 		<exec executable="${eclipse.exec}" failonerror="false" timeout="900000">
 			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
 			<arg line="-nosplash" />
@@ -317,6 +331,7 @@
 		</tar>
 		
 		<delete dir="${buildDirectory}/result/tmp" />
+		
 	</target>
 
 	<!-- - - - - - - - - - - - - - - - - - 
@@ -345,7 +360,8 @@
 
 
 	<!-- - - - - - - - - - - - - - - - - - 
-          target: add.repo.prefs                      
+          target: add.repo.prefs 
+          This is a hack to add a set of preference data to limit the P2 update sites                     
          - - - - - - - - - - - - - - - - - -->
     <target name="add.repo.prefs">
     	
