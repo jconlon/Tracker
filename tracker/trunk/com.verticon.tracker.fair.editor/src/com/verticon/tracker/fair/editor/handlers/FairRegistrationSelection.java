@@ -40,7 +40,7 @@ public class FairRegistrationSelection extends FairSwitch<Object> {
 	 */
 	boolean isValidRegistration(){
 		if(unwantedObject!=null){
-			System.out.println(this + " returning false with unwanted object "+ unwantedObject);
+			//System.out.println(this + " returning false with unwanted object "+ unwantedObject);
 			return false;
 		}
 		//Need a Fair
