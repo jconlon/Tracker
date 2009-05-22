@@ -215,10 +215,11 @@ public class ActionUtils {
 			if (animal != null) {
 				existingAnimals++;
 				Collection<Event> potentialEventsToAdd = animalTemplateBean.getEvents(premises);
-
-				Collection<Event> eventsToAddTheWhereNotDeferred = filterOutDeferedEvents(animal.activeTag(), potentialEventsToAdd);
+				Tag activeTag = animal.activeTag()!=null?animal.activeTag():animal.getTags().get(0);
+									
+				Collection<Event> eventsToAddTheWhereNotDeferred = filterOutDeferedEvents(activeTag, potentialEventsToAdd);
 				deferedEvents = deferedEvents + (potentialEventsToAdd.size() - eventsToAddTheWhereNotDeferred.size());
-				command = createAddCommand(animal.activeTag(), premisesProvider.getEditingDomain(),
+				command = createAddCommand(activeTag, premisesProvider.getEditingDomain(),
 						eventsToAddTheWhereNotDeferred);
 
 				
@@ -345,6 +346,9 @@ public class ActionUtils {
 	 */
 	public static Collection<Event> filterOutDeferedEvents(Tag tag,
 			Collection<Event> events) {
+		if(tag==null){
+			throw new NullPointerException("tag argument cannot be null");
+		}
 		Collection<Event> eventsToAdd = new ArrayList<Event>();
 		for (Event event : events) {
 			
