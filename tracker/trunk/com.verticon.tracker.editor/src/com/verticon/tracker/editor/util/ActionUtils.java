@@ -102,6 +102,7 @@ public class ActionUtils {
 		
 		logger.info(bundleMarker,"Adding tags from resource {}", resource.getFullPath());
 		Scanner sc = null;
+		//Use a list to keep order Ticket #382
 		List<Long> tagNumbers = null;
 		FileNotFoundException ex = null;
 		try {
