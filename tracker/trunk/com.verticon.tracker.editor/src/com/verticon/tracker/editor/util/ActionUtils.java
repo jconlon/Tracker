@@ -102,13 +102,18 @@ public class ActionUtils {
 		
 		logger.info(bundleMarker,"Adding tags from resource {}", resource.getFullPath());
 		Scanner sc = null;
-		Set<Long> tagNumbers = null;
+		List<Long> tagNumbers = null;
 		FileNotFoundException ex = null;
 		try {
 			sc = new Scanner(new File(resource.getLocationURI()));
-			tagNumbers = new HashSet<Long>();
+			tagNumbers = new ArrayList<Long>(5);
+			Long tagNumber;
 			while (sc.hasNextLong()) {
-				tagNumbers.add(sc.nextLong());
+				tagNumber = sc.nextLong();
+				if(tagNumbers.contains(tagNumber)){
+					continue;
+				}
+				tagNumbers.add(tagNumber);
 			}
 
 		} catch (FileNotFoundException e) {
