@@ -1,6 +1,7 @@
 package com.verticon.tracker.fair.views;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -16,12 +17,12 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
+import com.verticon.tracker.editor.util.GenericViewSorter;
 import com.verticon.tracker.editor.util.ISelectionController;
 import com.verticon.tracker.editor.util.ItemsView;
 import com.verticon.tracker.editor.util.SelectionController;
@@ -191,40 +192,147 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 	 * 
 	 */
 	 enum ExhibitColumn {
-		NAME("Exhibit", new ColumnWeightData(3, 100, true)), 
+		NAME("Exhibit", new ColumnWeightData(3, 100, true), 
+		new Comparator<Exhibit>(){
+
+			public int compare(Exhibit exhibit1, Exhibit exhibit2) {
+				String value1 = exhibit1.getExhibitor()==null?"":exhibit1.getExhibitor().getName();
+				String value2 = exhibit2.getExhibitor()==null?"":exhibit2.getExhibitor().getName();
+				return value1.compareTo(value2);
+			}}), 
 		
-		NUMBER("Number", new ColumnWeightData(3, 30, true)), 
+		NUMBER("Number", new ColumnWeightData(3, 30, true), 
+		new Comparator<Exhibit>(){
+
+			public int compare(Exhibit exhibit1, Exhibit exhibit2) {
+				 if( exhibit1.getNumber() < exhibit2.getNumber()){
+					 return -1;
+				 }else if(exhibit1.getNumber() == exhibit2.getNumber()){
+					return 0;
+				 }
+				 return 1;
+			}}),  
 		
 //		EXHIBITOR("Exhibitor",new ColumnWeightData(2, 150, true)), 
 		
-		ANIMAL("Animal", new ColumnWeightData(2, 200, true)), 
-		
-		LOT("Lot", new ColumnWeightData(2, 150, true)), 
-		
-		LOT_DESC("Lot Description", new ColumnWeightData(2, 150, true)),
-		
-		CLASS("Class", new ColumnWeightData(2, 150, true)), 
-		
-		CLASS_DESC("Class Description", new ColumnWeightData(2, 150, true)), 
-				
-		DEPARTMENT("Department", new ColumnWeightData(2, 150, true)), 
-		
-		DEPARTMENT_DESC("Department Description", new ColumnWeightData(2, 150, true)), 
-		
-		DIVISION("Division", new ColumnWeightData(2, 150, true)), 
-		
-		DIVISION_DESC("Division Description", new ColumnWeightData(2, 150, true)), 
-		
-		COMMENTS("Comments", new ColumnWeightData(2, 120, true));
+		ANIMAL("Animal", new ColumnWeightData(2, 200, true), 
+		new Comparator<Exhibit>(){
 
-		ColumnLayoutData layoutData;
-		String text;
+			public int compare(Exhibit exhibit1, Exhibit exhibit2) {
+				String value1 = (exhibit1.getAnimal()==null || exhibit1.getAnimal().getId()==null)?
+						"":exhibit1.getAnimal().getId();
+				String value2 = (exhibit2.getAnimal()==null || exhibit2.getAnimal().getId()==null)?
+						"":exhibit2.getAnimal().getId();
+				return value1.compareTo(value2);
+			}}), 
+		
+		LOT("Lot", new ColumnWeightData(2, 150, true), 
+		new Comparator<Exhibit>(){
+
+			public int compare(Exhibit exhibit1, Exhibit exhibit2) {
+				String value1 = exhibit1.getLot().getName()==null?
+						"":exhibit1.getLot().getName();
+				String value2 = exhibit2.getLot().getName()==null?
+						"":exhibit2.getLot().getName();
+				return value1.compareTo(value2);
+			}}),  
+		
+		LOT_DESC("Lot Description", new ColumnWeightData(2, 150, true), 
+		new Comparator<Exhibit>(){
+
+			public int compare(Exhibit exhibit1, Exhibit exhibit2) {
+				String value1 = exhibit1.getLot().getDescription()==null?
+						"":exhibit1.getLot().getDescription();
+				String value2 = exhibit2.getLot().getDescription()==null?
+						"":exhibit2.getLot().getDescription();
+				return value1.compareTo(value2);
+			}}), 
+		
+		CLASS("Class", new ColumnWeightData(2, 150, true), 
+		new Comparator<Exhibit>(){
+
+			public int compare(Exhibit exhibit1, Exhibit exhibit2) {
+				String value1 = exhibit1.getLot().getClass_().getName()==null?
+						"":exhibit1.getLot().getClass_().getName();
+				String value2 = exhibit2.getLot().getClass_().getName()==null?
+						"":exhibit2.getLot().getClass_().getName();
+				return value1.compareTo(value2);
+			}}),  
+		
+		CLASS_DESC("Class Description", new ColumnWeightData(2, 150, true), 
+		new Comparator<Exhibit>(){
+
+			public int compare(Exhibit exhibit1, Exhibit exhibit2) {
+				String value1 = exhibit1.getLot().getClass_().getDescription()==null?
+						"":exhibit1.getLot().getClass_().getDescription();
+				String value2 = exhibit2.getLot().getClass_().getDescription()==null?
+						"":exhibit2.getLot().getClass_().getDescription();
+				return value1.compareTo(value2);
+			}}),  
+				
+		DEPARTMENT("Department", new ColumnWeightData(2, 150, true), 
+		new Comparator<Exhibit>(){
+
+			public int compare(Exhibit exhibit1, Exhibit exhibit2) {
+				String value1 = exhibit1.getLot().getClass_().getDepartment().getName()==null?
+						"":exhibit1.getLot().getClass_().getDepartment().getName();
+				String value2 = exhibit2.getLot().getClass_().getDepartment().getName()==null?
+						"":exhibit2.getLot().getClass_().getDepartment().getName();
+				return value1.compareTo(value2);
+			}}), 
+		
+		DEPARTMENT_DESC("Department Description", new ColumnWeightData(2, 150, true), 
+		new Comparator<Exhibit>(){
+
+			public int compare(Exhibit exhibit1, Exhibit exhibit2) {
+				String value1 = exhibit1.getLot().getClass_().getDepartment().getDescription()==null?
+						"":exhibit1.getLot().getClass_().getDepartment().getDescription();
+				String value2 = exhibit2.getLot().getClass_().getDepartment().getDescription()==null?
+						"":exhibit2.getLot().getClass_().getDepartment().getDescription();
+				return value1.compareTo(value2);
+			}}),  
+		
+		DIVISION("Division", new ColumnWeightData(2, 150, true), 
+		new Comparator<Exhibit>(){
+
+			public int compare(Exhibit exhibit1, Exhibit exhibit2) {
+				String value1 = exhibit1.getLot().getClass_().getDepartment().getDivision().getName()==null?
+						"":exhibit1.getLot().getClass_().getDepartment().getDivision().getName();
+				String value2 = exhibit2.getLot().getClass_().getDepartment().getDivision().getName()==null?
+						"":exhibit2.getLot().getClass_().getDepartment().getDivision().getName();
+				return value1.compareTo(value2);
+			}}),  
+		
+		DIVISION_DESC("Division Description", new ColumnWeightData(2, 150, true), 
+		new Comparator<Exhibit>(){
+
+			public int compare(Exhibit exhibit1, Exhibit exhibit2) {
+				String value1 = exhibit1.getLot().getClass_().getDepartment().getDivision().getDescription()==null?
+						"":exhibit1.getLot().getClass_().getDepartment().getDivision().getDescription();
+				String value2 = exhibit2.getLot().getClass_().getDepartment().getDivision().getDescription()==null?
+						"":exhibit2.getLot().getClass_().getDepartment().getDivision().getDescription();
+				return value1.compareTo(value2);
+			}}),  
+		
+		COMMENTS("Comments", new ColumnWeightData(2, 120, true), 
+		new Comparator<Exhibit>(){
+
+			public int compare(Exhibit exhibit1, Exhibit exhibit2) {
+				String comments1 = exhibit1.getComments()==null?"":exhibit1.getComments();
+				String comments2 = exhibit2.getComments()==null?"":exhibit2.getComments();
+				return comments1.compareTo(comments2);
+			}});
+
+		final ColumnLayoutData layoutData;
+		final String text;
+		final Comparator<Exhibit> comparator;
 		static List<String> columnNames;
 		static String[] colNames;
 
-		ExhibitColumn(String text, ColumnLayoutData layoutData) {
+		ExhibitColumn(String text, ColumnLayoutData layoutData, Comparator<Exhibit> comparator) {
 			this.text = text;
 			this.layoutData = layoutData;
+			this.comparator=comparator;
 		}
 
 		static {
@@ -243,45 +351,43 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 	 * Exhibits Table Name, Number, Exhibitor, Animal, Lot, Class, Department,
 	 * Division, Comments
 	 */
-	private static void setUpExhibitsTableViewer(final TableViewer tableViewer) {
+	@SuppressWarnings("unchecked")
+	private void setUpExhibitsTableViewer(final TableViewer tableViewer) {
 		final Table table = tableViewer.getTable();
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 
-		Listener sortListener = new Listener() {
-			public void handleEvent(org.eclipse.swt.widgets.Event e) {
-				// determine new sort column and direction
-				TableColumn sortColumn = table.getSortColumn();
-				TableColumn currentColumn = (TableColumn) e.widget;
-
-				int dir = table.getSortDirection();
-				if (sortColumn == currentColumn) {
-					dir = dir == SWT.UP ? SWT.DOWN : SWT.UP;
-				} else {
-					table.setSortColumn(currentColumn);
-					dir = SWT.UP;
-				}
-				table.setSortDirection(dir);
-				tableViewer.setSorter(new ExhibitSorter(
-						(ExhibitColumn) currentColumn.getData(), dir));
-			}
-
-		};
-
+		List<TableColumn> tableColumns = new ArrayList<TableColumn>(ExhibitColumn.values().length);
+	    List<Comparator> comparators = new ArrayList<Comparator>(ExhibitColumn.values().length);
+			
 		for (ExhibitColumn col : ExhibitColumn.values()) {
 			final TableColumn nameColumn = new TableColumn(table, SWT.NONE);
+			tableColumns.add(nameColumn);
+			comparators.add(col.comparator);
 			layout.addColumnData(col.layoutData);
 			nameColumn.setText(col.text);
 			nameColumn.setMoveable(true);
 			nameColumn.setData(col);
-			nameColumn.addListener(SWT.Selection, sortListener);
 		}
+		
+		TableColumn[] tableCols = new TableColumn[tableColumns.size()];
+        Comparator[] compares = new Comparator[comparators.size()];
+        
+	    sorter = new GenericViewSorter(
+				tableViewer,  tableColumns.toArray(tableCols),
+					comparators.toArray(compares));
+		if (memento != null){
+					sorter.init(memento);
+		}
+		
+		tableViewer.setSorter(sorter);
 
 		tableViewer.setColumnProperties(PeopleColumn.colNames);
 
-	}
+		}
+	
 
 	
 }

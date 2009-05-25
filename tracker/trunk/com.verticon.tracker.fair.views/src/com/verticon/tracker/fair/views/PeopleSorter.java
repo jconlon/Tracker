@@ -33,6 +33,7 @@ import com.verticon.tracker.fair.Person;
  * <code>ANIMAL</code>: ANIMAL number of the event (String).
  *
  * </p>
+ * @deprecated use GenericViewSorter
  */
 public class PeopleSorter extends ViewerSorter {
 
@@ -257,7 +258,7 @@ public class PeopleSorter extends ViewerSorter {
 	 *  equal to the second element; and a positive number if the first
 	 *  element is greater than the second element
 	 */
-	protected int compareNames(Person person1, Person person2) {
+	private int compareNames(Person person1, Person person2) {
 		String value1 = person1.getName()==null?"":person1.getClass().getName()+person1.getName();
 		String value2 = person2.getName()==null?"":person2.getClass().getName()+person2.getName();
 		return value1.compareTo(value2);

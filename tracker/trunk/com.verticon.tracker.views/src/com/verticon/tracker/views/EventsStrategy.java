@@ -12,6 +12,7 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.editor.util.SelectionController;
 import com.verticon.tracker.editor.util.SelectionStrategy;
 import com.verticon.tracker.editor.util.TrackerConstants;
+import com.verticon.tracker.editor.util.TrackerView;
 import com.verticon.tracker.util.TrackerSwitch;
 
 /**
@@ -21,10 +22,10 @@ import com.verticon.tracker.util.TrackerSwitch;
  */
 class EventsStrategy implements SelectionStrategy {
 
-	private final EventsView animalsView;
+	private final TrackerView animalsView;
 
 	
-	public EventsStrategy(EventsView animalsView) {
+	public EventsStrategy(TrackerView animalsView) {
 		super();
 		this.animalsView = animalsView;
 	}

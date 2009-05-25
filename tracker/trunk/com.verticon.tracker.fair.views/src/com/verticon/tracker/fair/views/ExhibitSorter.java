@@ -33,6 +33,7 @@ import com.verticon.tracker.fair.Exhibit;
  * <code>ANIMAL</code>: ANIMAL number of the event (String).
  *
  * </p>
+ * @deprecated use GenericViewSorter
  */
 public class ExhibitSorter extends ViewerSorter {
 

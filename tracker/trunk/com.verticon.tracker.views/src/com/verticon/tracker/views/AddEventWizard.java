@@ -227,7 +227,7 @@ public class AddEventWizard extends Wizard {
 			final TableViewer v = new TableViewer(tableComposite);
 			ObservableListContentProvider cp = AnimalsView
 					.setUpAnimalsTableViewer(v,
-							new TrackerItemProviderAdapterFactory());
+							new TrackerItemProviderAdapterFactory(),null);
 			v.setContentProvider(cp);
 			return v;
 

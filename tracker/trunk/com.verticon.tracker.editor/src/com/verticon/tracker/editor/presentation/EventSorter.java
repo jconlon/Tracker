@@ -13,6 +13,7 @@ import java.util.Date;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
+import org.eclipse.ui.IMemento;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -32,6 +33,7 @@ import com.verticon.tracker.util.TrackerUtils;
  * <p>
  * <code>AIN</code>: AIN number of the event (String).
  * </p>
+ * @deprecated use the GenericViewSorter in the TrackerViews plugin.
  */
 public class EventSorter extends ViewerSorter {
 
@@ -47,6 +49,8 @@ public class EventSorter extends ViewerSorter {
 	public final static int EVENT_COMMENTS 	= 6;
 	public final static int EVENT_TEXT 	= 7;
 	public final static int DATETIME_REVERSE = 8;
+	
+	private final static String TAG_DESCENDING ="descending";
 	
 	private final static DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss z");
 
@@ -268,4 +272,10 @@ public class EventSorter extends ViewerSorter {
 		}
 		return resourceName ;
 	}
+	
+//	public void saveState(IMemento memento){
+//		for (int i = 0; i < infos.length; i++){
+//			
+//		}
+//	}
 }
