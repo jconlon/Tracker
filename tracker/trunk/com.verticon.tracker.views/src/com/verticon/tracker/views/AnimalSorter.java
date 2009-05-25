@@ -36,6 +36,8 @@ import com.verticon.tracker.util.TrackerUtils;
  * <code>AIN</code>: AIN number of the event (String).
  *
  * </p>
+ * 
+ * @deprecated use the GenericViewSorter in the TrackerViews plugin.
  */
 public class AnimalSorter extends ViewerSorter {
 

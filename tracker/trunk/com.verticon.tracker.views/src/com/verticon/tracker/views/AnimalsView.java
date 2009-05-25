@@ -1,5 +1,8 @@
 package com.verticon.tracker.views;
 
+import java.util.Comparator;
+import java.util.Date;
+
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -16,17 +19,20 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.ui.IMemento;
 
 import at.bestsolution.dataforms.util.viewers.GenericObservableMapCellLabelProvider;
 
+import com.verticon.tracker.Animal;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.editor.util.GenericViewSorter;
 import com.verticon.tracker.editor.util.ISelectionController;
 import com.verticon.tracker.editor.util.SelectionController;
 import com.verticon.tracker.editor.util.TrackerView;
+import com.verticon.tracker.util.TrackerUtils;
 
 public class AnimalsView extends TrackerView  {
 
@@ -39,7 +45,7 @@ public class AnimalsView extends TrackerView  {
 	 */
 	private IObservableList tableInput;
 
-	
+
 	/**
 	 * Override super to add an AnimalSelectionController
 	 */
@@ -121,7 +127,8 @@ public class AnimalsView extends TrackerView  {
 	protected void setUpTable(AdapterFactory adapterFactory) {
 		TableViewer viewer = masterFilteredTable.getViewer();
 		viewer.setContentProvider(setUpAnimalsTableViewer(viewer,
-				adapterFactory));
+				adapterFactory,this)
+				);
 		masterFilteredTable.setColumns(viewer.getTable().getColumns());
 	}
 
@@ -142,14 +149,15 @@ public class AnimalsView extends TrackerView  {
 		enableMenus(tableInput!=null);
 	}
 
-
+   
 	/**
 	 * Sets up the Animals TableViewer.
 	 * 
 	 * Also used by AddEventWizard so access is package-friendly.
 	 */
 	static ObservableListContentProvider setUpAnimalsTableViewer(
-			final TableViewer tableViewer, final AdapterFactory adapterFactory) {
+			final TableViewer tableViewer, final AdapterFactory adapterFactory,
+			AnimalsView instance) {
 		ObservableListContentProvider cp = new ObservableListContentProvider();
 		IObservableMap[] maps = EMFObservables.observeMaps(cp
 				.getKnownElements(), new EStructuralFeature[] {
@@ -180,6 +188,7 @@ public class AnimalsView extends TrackerView  {
 		viewerColumn
 				.setLabelProvider(new GenericObservableMapCellLabelProvider(
 						maps, "{0}"));
+		
 
 		// Type
 		viewerColumn = new TableViewerColumn(tableViewer, SWT.LEAD);
@@ -270,67 +279,22 @@ public class AnimalsView extends TrackerView  {
 				.setLabelProvider(new GenericObservableMapCellLabelProvider(
 						maps, "{8}"));
 
-		Listener sortListener = new Listener() {
-
-			public void handleEvent(org.eclipse.swt.widgets.Event e) {
-				// determine new sort column and direction
-				TableColumn sortColumn = table.getSortColumn();
-				TableColumn currentColumn = (TableColumn) e.widget;
-				int dir = table.getSortDirection();
-				if (sortColumn == currentColumn) {
-					dir = dir == SWT.UP ? SWT.DOWN : SWT.UP;
-				} else {
-					table.setSortColumn(currentColumn);
-					dir = SWT.UP;
-				}
-
-				// sort the data based on column and direction
-
-				int sortIdentifier = 0;
-
-				if (currentColumn == ainColumn) {
-					sortIdentifier = AnimalSorter.AIN;
-				} else if (currentColumn == animalTypeColumn) {
-					sortIdentifier = AnimalSorter.ANIMAL;
-				} else if (currentColumn == dDateColumn) {
-					sortIdentifier = AnimalSorter.BIRTHDATE;
-				} else if (currentColumn == sexColumn) {
-					sortIdentifier = AnimalSorter.SEX;
-				} else if (currentColumn == breedColumn) {
-					sortIdentifier = AnimalSorter.BREED;
-					// } else if (currentColumn == ageColumn) {
-					// sortIdentifier = AnimalSorter.AGE;
-				} else if (currentColumn == weightColumn) {
-					sortIdentifier = AnimalSorter.WEIGHT;
-				} else if (currentColumn == weightGainColumn) {
-					sortIdentifier = AnimalSorter.WEIGHT_GAIN;
-
-				} else if (currentColumn == commentsColumn) {
-					sortIdentifier = AnimalSorter.COMMENTS;
-				} else if (currentColumn == lastEventDateTimeColumn) {
-					sortIdentifier = AnimalSorter.LAST_EVENT_DATE;
-				}
-
-				table.setSortDirection(dir);
-				tableViewer.setSorter(new AnimalSorter(sortIdentifier, dir));
-			}
-
-		};
-
-		breedColumn.addListener(SWT.Selection, sortListener);
-		ainColumn.addListener(SWT.Selection, sortListener);
-		lastEventDateTimeColumn.addListener(SWT.Selection, sortListener);
-		animalTypeColumn.addListener(SWT.Selection, sortListener);
-		sexColumn.addListener(SWT.Selection, sortListener);
-		dDateColumn.addListener(SWT.Selection, sortListener);
-		// ageColumn.addListener(SWT.Selection, sortListener);
-		weightColumn.addListener(SWT.Selection, sortListener);
-		weightGainColumn.addListener(SWT.Selection, sortListener);
-		commentsColumn.addListener(SWT.Selection, sortListener);
-
+		GenericViewSorter sorter = createTableSorter( tableViewer, 
+				new TableColumn[] {
+				ainColumn,animalTypeColumn,sexColumn,
+				breedColumn, dDateColumn, lastEventDateTimeColumn, 
+				weightColumn, weightGainColumn, commentsColumn
+				}, instance!=null?instance.memento:null );
+		
 		tableViewer.setColumnProperties(new String[] { "a", "b", "c", "d", "e",
 				"f", "g", "h", "i" });
 
+		if(instance !=null){
+			instance.sorter=sorter;
+			if (instance.memento != null){
+				sorter.init(instance.memento);
+			}
+		}
 		return cp;
 	}
 
@@ -351,5 +315,126 @@ public class AnimalsView extends TrackerView  {
 		return EMFObservables.observeList(premises,
 				TrackerPackage.Literals.PREMISES__ANIMALS);
 	}
+	
+	/**
+	 * Order of comparators must match with the array of columns" 
+	 * ainColumn,animalTypeColumn,sexColumn,
+	 * breedColumn, dDateColumn, lastEventDateTimeColumn, 
+	 * weightColumn, weightGainColumn, commentsColumn
+	 * 
+	 * @param viewer
+	 * @param tableColumns
+	 */
+	@SuppressWarnings("unchecked")
+	private static GenericViewSorter createTableSorter(final TableViewer viewer,
+			TableColumn[] tableColumns,IMemento memento) {
+		
+//		ainColumn, animalTypeColumn,sexColumn,
+//		 * breedColumn, dDateColumn, lastEventDateTimeColumn, 
+//		 * weightColumn, weightGainColumn, commentsColumn
+//		 * 
+		Comparator<Animal> ainComparator = new Comparator<Animal>() {
+			public int compare(Animal animal1, Animal animal2) {
+				return animal1.getId().compareTo(animal2.getId());
+			}
+		};
+		
+		Comparator<Animal> typeComparator = new Comparator<Animal>() {
+			public int compare(Animal animal1, Animal animal2) {
+				return animal1.getClass().getSimpleName().compareTo(animal2.getClass().getSimpleName());
+			}
+		};
+
+		Comparator<Animal> sexComparator = new Comparator<Animal>() {
+			public int compare(Animal animal1, Animal animal2) {
+				return animal1.getSexCode().compareTo(animal2.getSexCode());
+			}
+		};
+		
+		
+		Comparator<Animal> breedComparator = new Comparator<Animal>() {
+			public int compare(Animal animal1, Animal animal2) {
+				return animal1.getBreed().compareTo(animal2.getBreed());
+			}
+		};
+		
+		
+		
+		Comparator<Animal> bdateComparator = new Comparator<Animal>() {
+			public int compare(Animal animal1, Animal animal2) {
+				Date date1 = animal1.getBirthDate()==null?TrackerUtils.DATE_REFERENCE.getTime():animal1.getBirthDate();
+				Date date2 = animal2.getBirthDate()==null?TrackerUtils.DATE_REFERENCE.getTime():animal2.getBirthDate();
+				return date1.compareTo(date2);
+			}
+		};
+		
+		Comparator<Animal> lastEventTimeComparator = new Comparator<Animal>() {
+			public int compare(Animal animal1, Animal animal2) {
+				Date date1 = animal1.getLastEventDateTime()==null?TrackerUtils.DATE_REFERENCE.getTime():animal1.getLastEventDateTime();
+				Date date2 = animal2.getLastEventDateTime()==null?TrackerUtils.DATE_REFERENCE.getTime():animal2.getLastEventDateTime();
+				return date1.compareTo(date2);
+			}
+		};
+		
+		Comparator<Animal> weightComparator = new Comparator<Animal>() {
+			public int compare(Animal animal1, Animal animal2) {
+				if(animal1.getWeight()==null && animal2.getWeight()==null){
+					return 0;
+				}
+				if(animal1.getWeight()==null){
+					return -1;
+				}
+				if(animal2.getWeight()==null){
+					return 1;
+				}
+				return animal1.getWeight().compareTo(animal2.getWeight());
+			}
+		};
+		
+		Comparator<Animal> weightGainComparator = new Comparator<Animal>() {
+			public int compare(Animal animal1, Animal animal2) {
+				if(animal1.getWeightGainPerDay()==null && animal2.getWeightGainPerDay()==null){
+					return 0;
+				}
+				if(animal1.getWeightGainPerDay()==null){
+					return -1;
+				}
+				if(animal2.getWeightGainPerDay()==null){
+					return 1;
+				}
+				return animal1.getWeightGainPerDay().compareTo(animal2.getWeightGainPerDay());
+			}
+		};
+
+		Comparator<Animal> commentsComparator = new Comparator<Animal>() {
+			public int compare(Animal animal1, Animal animal2) {
+				String comments1 = animal1.getComments() == null ? "" : animal1
+						.getComments();
+				String comments2 = animal2.getComments() == null ? "" : animal2
+						.getComments();
+				return comments1.compareTo(comments2);
+			}
+		};
+		GenericViewSorter sorter = new GenericViewSorter(viewer, tableColumns,
+		// Remember order is important
+				// ainColumn,animalTypeColumn,sexColumn,
+				//  breedColumn, dDateColumn, lastEventDateTimeColumn, 
+				// weightColumn, weightGainColumn, commentsColumn
+				  
+				new Comparator[] { 
+						ainComparator,
+						typeComparator,
+						sexComparator,
+						breedComparator, 
+						bdateComparator,
+						lastEventTimeComparator,
+						weightComparator, 
+						weightGainComparator,
+						commentsComparator });
+		
+		viewer.setSorter(sorter);
+		return sorter;
+	}
+
 
 }

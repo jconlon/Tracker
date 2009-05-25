@@ -12,6 +12,7 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.editor.util.SelectionController;
 import com.verticon.tracker.editor.util.SelectionStrategy;
 import com.verticon.tracker.editor.util.TrackerConstants;
+import com.verticon.tracker.editor.util.TrackerView;
 import com.verticon.tracker.util.TrackerSwitch;
 
 public class AnimalsStrategy implements SelectionStrategy {
@@ -22,10 +23,10 @@ public class AnimalsStrategy implements SelectionStrategy {
 //	private final Logger logger = LoggerFactory
 //			.getLogger(AnimalsStrategy.class);
 //	
-	private final AnimalsView animalsView;
+	private final TrackerView animalsView;
 	
 	
-	public AnimalsStrategy(AnimalsView animalsView) {
+	public AnimalsStrategy(TrackerView animalsView) {
 		super();
 		this.animalsView = animalsView;
 	}

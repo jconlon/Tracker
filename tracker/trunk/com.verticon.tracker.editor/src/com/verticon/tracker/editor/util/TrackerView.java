@@ -40,10 +40,13 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IMemento;
 import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -74,10 +77,25 @@ import com.verticon.tracker.util.AbstractModelObject;
  */
 public abstract class TrackerView extends ViewPart implements ItemsView{
 
+	private static final String TAG_SASH_SECOND_WEIGHT = "TagSashSecondWeight";
+	private static final String TAG_SASH_FIRST_WEIGHT = "TagSashFirstWeight";
+	private static final String TAG_ADVANCED_PROPS_VISIBLE = "showAdvancedProps";
+	private static final String TAG_MASTER_VISIBLE = "Master_Visible";
+	private static final String TAG_DETAIL_VISIBLE = "Detail_Visible";
+	private static final String TAG_SASH_ORIENTATION = "sashOrientation";
+	private static final String TAG_COLUMN_POSITION = "TagColumnPosition";
+    private static final String TAG_COLUMN_INDEX = "TagColumnIndex";
+    private static final String TAG_COLUMN_ORDER_INDEX_TYPE = "TagColumnOrderIndexType";
+
+	
 	/**
 	 * This field is referenced by subclasses.
 	 */
 	protected FilteredTable masterFilteredTable; // disposed
+	
+	protected IMemento memento;
+	
+	protected GenericViewSorter sorter;
 
 	public FilteredTable getMasterFilteredTable() {
 		return masterFilteredTable;
@@ -103,7 +121,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 
 	private TableColumnPatternFilter patternFilter;
 	private Action reorientSashFormAction;
-	private Action filterAction;
+	private Action showAdvancedPropertiesAction;
 	private Action showMasterAction;
 	private Action showDetailAction;
 	private Action addAction;
@@ -203,15 +221,83 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		// Change the width of the sashes
 		sashForm.SASH_WIDTH = 7;
 		// Change the color used to paint the sashes
-		sashForm
-				.setBackground(base.getDisplay().getSystemColor(SWT.COLOR_GRAY));
+		sashForm.setBackground(base.getDisplay().getSystemColor(SWT.COLOR_GRAY));
 
+		
 		createTableViewer();
 		makeActions();
-
+		
 		createFormFolder();
 		hookContextMenu();
 		contributeToActionBars();
+		setColumnOrder(tableViewer.getTable());
+		
+		if (memento != null){
+			initSashForm(memento);
+		}
+		
+	}
+	
+	private void initSashForm(IMemento memento) {
+		 Integer value = memento.getInteger(TAG_SASH_ORIENTATION);
+         if (value != null){
+        	 if(SWT.HORIZONTAL==value){
+        		 switchOnOrientation(SWT.VERTICAL);//inverts the value
+        	 }else{
+        		 switchOnOrientation(SWT.HORIZONTAL);//inverts the value
+        	 }
+        	
+         }
+         
+         Boolean showDetails = memento.getBoolean(TAG_DETAIL_VISIBLE);
+         if(showDetails !=null){
+        	 showDetailAction.setChecked(showDetails);
+        	 showDetailAction.run();
+         }
+         Boolean showMaster = memento.getBoolean(TAG_MASTER_VISIBLE);
+         if(showMaster !=null){
+        	 showMasterAction.setChecked(showMaster);
+        	 showMasterAction.run();
+         }
+         
+         Boolean showAdvancedProps = memento.getBoolean(TAG_ADVANCED_PROPS_VISIBLE);
+         if(showAdvancedProps !=null){
+        	 showAdvancedPropertiesAction.setChecked(showAdvancedProps);
+        	 showAdvancedPropertiesAction.run();
+         }
+         
+         Integer firstWeight = memento.getInteger(TAG_SASH_FIRST_WEIGHT);
+         Integer secondWeight = memento.getInteger(TAG_SASH_SECOND_WEIGHT);
+         if(firstWeight !=null && secondWeight!=null){
+        	 sashForm.setWeights(new int[]{firstWeight, secondWeight});
+         }
+	}
+
+	private void switchOnOrientation(int value) {
+		switch (value) {
+			case SWT.HORIZONTAL:
+				sashForm.setOrientation(SWT.VERTICAL);
+				reorientSashFormAction.setImageDescriptor(AbstractUIPlugin
+						.imageDescriptorFromPlugin(
+								"com.verticon.tracker.editor",
+								"icons/full/elcl16/horizontal.gif"));
+				reorientSashFormAction
+						.setText("&Reorient layout horizontally");
+				reorientSashFormAction
+						.setToolTipText("Reorient layout horizontally");
+				break;
+			case SWT.VERTICAL:
+				sashForm.setOrientation(SWT.HORIZONTAL);
+				reorientSashFormAction.setImageDescriptor(AbstractUIPlugin
+						.imageDescriptorFromPlugin(
+								"com.verticon.tracker.editor",
+								"icons/full/elcl16/vertical.gif"));
+				reorientSashFormAction
+						.setText("&Reorient layout vertically");
+				reorientSashFormAction
+						.setToolTipText("Reorient layout vertically");
+				break;
+			}
 	}
 
 	/**
@@ -435,7 +521,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	protected void makeActions() {
 		
 		// Show Advanced Properties
-		filterAction = new Action() {
+		showAdvancedPropertiesAction = new Action() {
 			@Override
 			public void run() {
 				if (isChecked()) {
@@ -445,12 +531,12 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 				}
 			}
 		};
-		filterAction.setText("Show &Advanced Properties");
-		filterAction.setToolTipText("Show Advanced Properties");
-		filterAction.setImageDescriptor(AbstractUIPlugin
+		showAdvancedPropertiesAction.setText("Show &Advanced Properties");
+		showAdvancedPropertiesAction.setToolTipText("Show Advanced Properties");
+		showAdvancedPropertiesAction.setImageDescriptor(AbstractUIPlugin
 				.imageDescriptorFromPlugin("com.verticon.tracker.editor",
 						"icons/full/elcl16/filter_ps.gif"));
-		filterAction.setChecked(false);
+		showAdvancedPropertiesAction.setChecked(false);
 
 		// ShowMaster
 		showMasterAction = new Action() {
@@ -479,35 +565,13 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 				.imageDescriptorFromPlugin("com.verticon.tracker.editor",
 						"icons/full/elcl16/settings.gif"));
 		showDetailAction.setChecked(true);
+		
 
 		// Reorient Sash
 		reorientSashFormAction = new Action() {
 			@Override
 			public void run() {
-				switch (sashForm.getOrientation()) {
-				case SWT.HORIZONTAL:
-					sashForm.setOrientation(SWT.VERTICAL);
-					reorientSashFormAction.setImageDescriptor(AbstractUIPlugin
-							.imageDescriptorFromPlugin(
-									"com.verticon.tracker.editor",
-									"icons/full/elcl16/horizontal.gif"));
-					reorientSashFormAction
-							.setText("&Reorient layout horizontally");
-					reorientSashFormAction
-							.setToolTipText("Reorient layout horizontally");
-					break;
-				case SWT.VERTICAL:
-					sashForm.setOrientation(SWT.HORIZONTAL);
-					reorientSashFormAction.setImageDescriptor(AbstractUIPlugin
-							.imageDescriptorFromPlugin(
-									"com.verticon.tracker.editor",
-									"icons/full/elcl16/vertical.gif"));
-					reorientSashFormAction
-							.setText("&Reorient layout vertically");
-					reorientSashFormAction
-							.setToolTipText("Reorient layout vertically");
-					break;
-				}
+				switchOnOrientation(sashForm.getOrientation());
 			}
 		};
 		reorientSashFormAction
@@ -535,8 +599,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 				.imageDescriptorFromPlugin("org.eclipse.ui",
 						"$nl$/icons/full/obj16/add_obj.gif"));
 
-		// Delete an animal
-
+		
 		IWorkbench workbench = PlatformUI.getWorkbench();
 		ISharedImages platformImages = workbench.getSharedImages();
 		deleteAction = new Action() {
@@ -572,7 +635,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		manager.add(addAction);
 		manager.add(deleteAction);
 		manager.add(reorientSashFormAction);
-		manager.add(filterAction);
+		manager.add(showAdvancedPropertiesAction);
 		manager.add(showMasterAction);
 		manager.add(showDetailAction);
 		// Other plug-ins can contribute there actions here
@@ -583,7 +646,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		manager.add(addAction);
 		manager.add(deleteAction);
 		manager.add(reorientSashFormAction);
-		manager.add(filterAction);
+		manager.add(showAdvancedPropertiesAction);
 		manager.add(showMasterAction);
 		manager.add(showDetailAction);
 		manager.add(new Separator());
@@ -593,7 +656,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		manager.add(addAction);
 		manager.add(deleteAction);
 		manager.add(reorientSashFormAction);
-		manager.add(filterAction);
+		manager.add(showAdvancedPropertiesAction);
 		manager.add(showMasterAction);
 		manager.add(showDetailAction);
 	}
@@ -681,5 +744,61 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 			return;
 		}
 		contentOutlinePage.setSelection(selection);
+	}
+
+	/**
+	    * Initializes this view with the given view site. A memento is passed to the
+	    * view which contains a snapshot of the views state such as sort order and
+	    * filter state from a previous session. In our case, the sort and filter
+	    * state cannot be initialized immediately, so we cache the memento for
+	    * later.
+	    */
+	public void init(IViewSite site, IMemento memento) throws PartInitException {
+	      super.init(site, memento);
+	      this.memento = memento;
+	}
+	
+	/**
+	    * Saves the view state such as sort order and filter state 
+	    * within a memento.
+	    */
+	   public void saveState(IMemento memento) {
+		 //Save the Sash Orientation
+		 memento.putInteger(TAG_SASH_ORIENTATION, sashForm.getOrientation()); 
+		 memento.putBoolean(TAG_DETAIL_VISIBLE, showDetailAction.isChecked());
+		 memento.putBoolean(TAG_MASTER_VISIBLE, showMasterAction.isChecked());
+		 memento.putBoolean(TAG_ADVANCED_PROPS_VISIBLE, showAdvancedPropertiesAction.isChecked());
+		 memento.putInteger(TAG_SASH_FIRST_WEIGHT, sashForm.getWeights()[0]);
+		 memento.putInteger(TAG_SASH_SECOND_WEIGHT, sashForm.getWeights()[1]);
+		 if(sorter!=null){
+			 sorter.saveState(memento);
+		 }
+		 saveColOrder(memento, tableViewer.getTable());
+		 super.saveState(memento);
+	   }
+
+	private void saveColOrder(IMemento memento, Table table) {
+		int[] positions = table.getColumnOrder();
+		for (int i = 0; i < positions.length; i++) {
+			int j = positions[i];
+			IMemento mem = memento.createChild(TAG_COLUMN_ORDER_INDEX_TYPE);
+			mem.putInteger(TAG_COLUMN_INDEX, j);
+			mem.putInteger(TAG_COLUMN_POSITION, i);
+		}
+	}
+	
+	private void setColumnOrder(Table table){
+		if (memento != null){
+			
+			IMemento[] mems = memento.getChildren(TAG_COLUMN_ORDER_INDEX_TYPE);
+			int[] colOrder = new int[mems.length];
+			for (int i = 0; i < mems.length; i++) {
+				int position = mems[i].getInteger(TAG_COLUMN_POSITION);
+				colOrder[position]=mems[i].getInteger(TAG_COLUMN_INDEX);
+			}
+			if(colOrder.length==table.getColumnCount()){
+				table.setColumnOrder(colOrder);
+			}
+		}
 	}
 }

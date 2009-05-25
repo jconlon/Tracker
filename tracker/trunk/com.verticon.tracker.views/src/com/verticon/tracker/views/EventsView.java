@@ -1,5 +1,8 @@
 package com.verticon.tracker.views;
 
+import java.util.Comparator;
+import java.util.Date;
+
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -8,23 +11,26 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
+import com.verticon.tracker.Animal;
+import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.editor.presentation.EventHistoryContentProvider;
-import com.verticon.tracker.editor.presentation.EventSorter;
+import com.verticon.tracker.editor.util.GenericViewSorter;
 import com.verticon.tracker.editor.util.ISelectionController;
 import com.verticon.tracker.editor.util.ItemsView;
 import com.verticon.tracker.editor.util.SelectionController;
 import com.verticon.tracker.editor.util.TrackerView;
+import com.verticon.tracker.util.TrackerUtils;
 
 public class EventsView extends TrackerView implements ItemsView{
 
 	private static final String NAME_OF_ITEM_IN_MASTER = "Event";
 
 	private ISelectionController eventSelectionController;
+	
 	
 	/**
 	 * Subclasses can override this to provide a more useful name for
@@ -84,8 +90,7 @@ public class EventsView extends TrackerView implements ItemsView{
 
 		 viewer.setContentProvider(new EventHistoryContentProvider(
 				adapterFactory));
-		 viewer
-				.setLabelProvider(new AdapterFactoryLabelProvider(
+		 viewer.setLabelProvider(new AdapterFactoryLabelProvider(
 						adapterFactory));
 	}
 
@@ -131,7 +136,7 @@ public class EventsView extends TrackerView implements ItemsView{
 	/**
 	 * Events Table
 	 */
-	static void setUpEventsTableViewer(final TableViewer eventsTableViewer) {
+	private void setUpEventsTableViewer(final TableViewer eventsTableViewer) {
 
 		final Table table = eventsTableViewer.getTable();
 
@@ -171,60 +176,80 @@ public class EventsView extends TrackerView implements ItemsView{
 		eventCommentsColumn.setText(getString("_UI_CommentsColumn_label"));
 		eventCommentsColumn.setMoveable(true);
 
-		Listener sortListener = new Listener() {
 
-			public void handleEvent(org.eclipse.swt.widgets.Event e) {
-				// determine new sort column and direction
-				TableColumn sortColumn = table.getSortColumn();
-				TableColumn currentColumn = (TableColumn) e.widget;
-				int dir = table.getSortDirection();
-				if (sortColumn == currentColumn) {
-					dir = dir == SWT.UP ? SWT.DOWN : SWT.UP;
-				} else {
-					table.setSortColumn(currentColumn);
-					dir = SWT.UP;
-				}
-
-				// sort the data based on column and direction
-
-				int sortIdentifier = 0;
-
-				if (currentColumn == animalIDColumn) {
-					sortIdentifier = EventSorter.ANIMAL_IDNUMBER;
-				}
-
-				if (currentColumn == tagIDColumn) {
-					sortIdentifier = EventSorter.TAG_IDNUMBER;
-				}
-
-				if (currentColumn == dateTimeColumn) {
-					sortIdentifier = EventSorter.DATETIME;
-				}
-
-				if (currentColumn == eventNameColumn) {
-					sortIdentifier = EventSorter.EVENT_TYPE;
-				}
-
-				if (currentColumn == eventCommentsColumn) {
-					sortIdentifier = EventSorter.EVENT_COMMENTS;
-				}
-
-				table.setSortDirection(dir);
-				eventsTableViewer
-						.setSorter(new EventSorter(sortIdentifier, dir));
-			}
-
-		};
-
-		animalIDColumn.addListener(SWT.Selection, sortListener);
-		tagIDColumn.addListener(SWT.Selection, sortListener);
-		dateTimeColumn.addListener(SWT.Selection, sortListener);
-		eventNameColumn.addListener(SWT.Selection, sortListener);
-		eventCommentsColumn.addListener(SWT.Selection, sortListener);
+		createTableSorter( eventsTableViewer, 
+				new TableColumn[] {
+					tagIDColumn, 
+					animalIDColumn, 
+					dateTimeColumn, 
+					eventNameColumn,
+					eventCommentsColumn});
 		eventsTableViewer.setColumnProperties(new String[] { "a", "b", "c",
 				"d", "e" });
 
 	}
 
-	
+	/**
+	 * Order of comparators must match with the array of columns" tagId,
+	 * animalId, dateTime, eventName, eventComments
+	 * 
+	 * @param viewer
+	 * @param tableColumns
+	 */
+	@SuppressWarnings("unchecked")
+	private void createTableSorter(final TableViewer viewer,
+			TableColumn[] tableColumns) {
+		Comparator<Event> tagIDNumberComparator = new Comparator<Event>() {
+			public int compare(Event event1, Event event2) {
+				return event1.getId().compareTo(event2.getId());
+			}
+		};
+
+		Comparator<Event> animalIDNumberComparator = new Comparator<Event>() {
+			public int compare(Event event1, Event event2) {
+				Animal animal1 = (Animal) event1.getTag().eContainer();
+				Animal animal2 = (Animal) event2.getTag().eContainer();
+				return animal1.getId().compareTo(animal2.getId());
+			}
+		};
+		Comparator<Event> dateComparator = new Comparator<Event>() {
+			public int compare(Event event1, Event event2) {
+				Date date1 = event1.getDateTime() == null ? TrackerUtils.DATE_REFERENCE
+						.getTime()
+						: event1.getDateTime();
+				Date date2 = event2.getDateTime() == null ? TrackerUtils.DATE_REFERENCE
+						.getTime()
+						: event2.getDateTime();
+				return date1.compareTo(date2);
+			}
+		};
+		Comparator<Event> nameComparator = new Comparator<Event>() {
+			public int compare(Event event1, Event event2) {
+				return event1.getClass().getSimpleName().compareTo(
+						event2.getClass().getSimpleName());
+			}
+		};
+
+		Comparator<Event> commentsComparator = new Comparator<Event>() {
+			public int compare(Event event1, Event event2) {
+				String comments1 = event1.getComments() == null ? "" : event1
+						.getComments();
+				String comments2 = event2.getComments() == null ? "" : event2
+						.getComments();
+				return comments1.compareTo(comments2);
+			}
+		};
+	    sorter = new GenericViewSorter(viewer, tableColumns,
+		// Remember order is important
+				// tagId, animalId, dateTime, eventName, eventComments
+				new Comparator[] { tagIDNumberComparator,
+						animalIDNumberComparator, dateComparator,
+						nameComparator, commentsComparator });
+		if (memento != null){
+			sorter.init(memento);
+		}
+		viewer.setSorter(sorter);
+	}
+
+
 }

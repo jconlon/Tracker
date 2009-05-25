@@ -1,6 +1,7 @@
 package com.verticon.tracker.fair.views;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.list.IObservableList;
@@ -24,7 +25,6 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
@@ -32,6 +32,7 @@ import at.bestsolution.dataforms.util.viewers.GenericObservableMapCellLabelProvi
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
+import com.verticon.tracker.editor.util.GenericViewSorter;
 import com.verticon.tracker.editor.util.ISelectionController;
 import com.verticon.tracker.editor.util.ItemsView;
 import com.verticon.tracker.editor.util.SelectionController;
@@ -239,7 +240,7 @@ public class PeopleView extends TrackerView implements ItemsView{
 //	}
 
 	/**
-	 * Enum on Person Element
+	 * Enum specifying columns for the Person Element 
 	 * 
 	 * @author jconlon
 	 * 
@@ -248,55 +249,133 @@ public class PeopleView extends TrackerView implements ItemsView{
 		// NAME(
 		// "Name", new ColumnWeightData(3, 200, true)),
 		FIRST_NAME("First Name", new ColumnWeightData(2, 100, true),
-				FairPackage.Literals.PERSON__FIRST_NAME, "{0}"),
+				FairPackage.Literals.PERSON__FIRST_NAME, "{0}", 
+				new Comparator<Person>(){
+
+					public int compare(Person person1, Person person2) {
+						String value1 = person1.getFirstName()==null?"":person1.getFirstName();
+						String value2 = person2.getFirstName()==null?"":person2.getFirstName();
+						return value1.compareTo(value2);
+					}}),
 
 		LAST_NAME("Last Name", new ColumnWeightData(2, 100, true),
-				FairPackage.Literals.PERSON__LAST_NAME, "{1}"),
+				FairPackage.Literals.PERSON__LAST_NAME, "{1}", 
+				new Comparator<Person>(){
+
+			public int compare(Person person1, Person person2) {
+				String value1 = person1.getLastName()==null?"":person1.getLastName();
+				String value2 = person2.getLastName()==null?"":person2.getLastName();
+				return value1.compareTo(value2);
+			}}),
 
 		EXHIBITOR_NUMBER("Exhibitor #", new ColumnWeightData(2, 90, true),
 				FairPackage.Literals.PERSON__EXHIBITOR_NUMBER,
-				"{2,number,######}"),
+				"{2,number,######}", 
+				new Comparator<Person>(){
+
+					public int compare(Person person1, Person person2) {
+						return person1.getExhibitorNumber() <= person2.getExhibitorNumber() ? -1
+								: person1.getExhibitorNumber() == person2.getExhibitorNumber() ? 0
+										: 1;
+					}}),
 
 		SALES_ORDER("Sales Order",
 				new ColumnWeightData(2, 150, true),
-				FairPackage.Literals.PERSON__SALES_ORDER, "{3,number,###}"),
+				FairPackage.Literals.PERSON__SALES_ORDER, "{3,number,###}",
+				new Comparator<Person>(){
+
+			public int compare(Person person1, Person person2) {
+				return person1.getSalesOrder() - person2.getSalesOrder();
+				
+			}}),
 
 		PHONE("Phone", new ColumnWeightData(2, 100, true),
-				FairPackage.Literals.PERSON__PHONE, "{4}"),
+				FairPackage.Literals.PERSON__PHONE, "{4}", 
+				new Comparator<Person>(){
+
+			public int compare(Person person1, Person person2) {
+				String value1 = person1.getPhone()==null?"":person1.getPhone();
+				String value2 = person2.getPhone()==null?"":person2.getPhone();
+				return value1.compareTo(value2);
+			}}),
 
 		STREET("Street", new ColumnWeightData(2, 200, true),
-				FairPackage.Literals.PERSON__STREET, "{5}"),
+				FairPackage.Literals.PERSON__STREET, "{5}", 
+				new Comparator<Person>(){
+
+			public int compare(Person person1, Person person2) {
+				String value1 = person1.getStreet()==null?"":person1.getStreet();
+				String value2 = person2.getStreet()==null?"":person2.getStreet();
+				return value1.compareTo(value2);
+			}}),
 
 		CITY("City", new ColumnWeightData(2, 80, true),
-				FairPackage.Literals.PERSON__CITY, "{6}"),
+				FairPackage.Literals.PERSON__CITY, "{6}", 
+				new Comparator<Person>(){
+
+			public int compare(Person person1, Person person2) {
+				String value1 = person1.getCity()==null?"":person1.getCity();
+				String value2 = person2.getCity()==null?"":person2.getCity();
+				return value1.compareTo(value2);
+			}}),
 
 		STATE("State", new ColumnWeightData(2, 45, true),
-				FairPackage.Literals.PERSON__STATE, "{7}"),
+				FairPackage.Literals.PERSON__STATE, "{7}", 
+				new Comparator<Person>(){
+
+			public int compare(Person person1, Person person2) {
+				String value1 = person1.getState()==null?"":person1.getState();
+				String value2 = person2.getState()==null?"":person2.getState();
+				return value1.compareTo(value2);
+			}}),
 
 		ZIP("Zip", new ColumnWeightData(2, 45, true),
-				FairPackage.Literals.PERSON__ZIP_CODE, "{8}"),
+				FairPackage.Literals.PERSON__ZIP_CODE, "{8}", 
+				new Comparator<Person>(){
+
+			public int compare(Person person1, Person person2) {
+				String value1 = person1.getZipCode()==null?"":person1.getZipCode();
+				String value2 = person2.getZipCode()==null?"":person2.getZipCode();
+				return value1.compareTo(value2);
+			}}),
 
 		PIN("Premieses ID", new ColumnWeightData(2, 70, true),
-				FairPackage.Literals.PERSON__PIN, "{9}"),
+				FairPackage.Literals.PERSON__PIN, "{9}", 
+				new Comparator<Person>(){
+
+			public int compare(Person person1, Person person2) {
+				String value1 = person1.getPin()==null?"":person1.getPin();
+				String value2 = person2.getPin()==null?"":person2.getPin();
+				return value1.compareTo(value2);
+			}}),
 
 		COMMENTS("Comments", new ColumnWeightData(2, 120, true),
-				FairPackage.Literals.PERSON__COMMENTS, "{10}");
+				FairPackage.Literals.PERSON__COMMENTS, "{10}", 
+				new Comparator<Person>(){
+
+			public int compare(Person person1, Person person2) {
+				String value1 = person1.getComments()==null?"":person1.getComments();
+				String value2 = person2.getComments()==null?"":person2.getComments();
+				return value1.compareTo(value2);
+			}});
 
 		final ColumnLayoutData layoutData;
 		final String text;
 		final EStructuralFeature feature;
 		final String pattern;
+		final Comparator<Person> comparator;
 		
 		static List<String> columnNames;
 		static String[] colNames;
 		static EStructuralFeature[] features;
 
 		PeopleColumn(String text, ColumnLayoutData layoutData,
-				EStructuralFeature feature, String pattern) {
+				EStructuralFeature feature, String pattern, Comparator<Person> comparator) {
 			this.text = text;
 			this.layoutData = layoutData;
 			this.feature = feature;
 			this.pattern = pattern;
+			this.comparator=comparator;
 		}
 
 		static {
@@ -321,7 +400,8 @@ public class PeopleView extends TrackerView implements ItemsView{
 	 * People Table Name, First Name, Last Name, Phone Number, Street, City,
 	 * State, Zip Code
 	 */
-	static ObservableListContentProvider setUpPeopleTableViewer(
+	@SuppressWarnings("unchecked")
+	private ObservableListContentProvider setUpPeopleTableViewer(
 			final TableViewer tableViewer, final AdapterFactory adapterFactory) {
 		ObservableListContentProvider cp = new ObservableListContentProvider();
 		IObservableMap[] maps = EMFObservables.observeMaps(cp
@@ -331,36 +411,19 @@ public class PeopleView extends TrackerView implements ItemsView{
 		table.setLayout(layout);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
-
-		Listener sortListener = new Listener() {
-			public void handleEvent(org.eclipse.swt.widgets.Event e) {
-				// determine new sort column and direction
-				TableColumn sortColumn = table.getSortColumn();
-				TableColumn currentColumn = (TableColumn) e.widget;
-
-				int dir = table.getSortDirection();
-				if (sortColumn == currentColumn) {
-					dir = dir == SWT.UP ? SWT.DOWN : SWT.UP;
-				} else {
-					table.setSortColumn(currentColumn);
-					dir = SWT.UP;
-				}
-				table.setSortDirection(dir);
-				tableViewer.setSorter(new PeopleSorter(
-						(PeopleColumn) currentColumn.getData(), dir));
-			}
-
-		};
-      
+		
+        List<TableColumn> tableColumns = new ArrayList<TableColumn>(PeopleColumn.values().length);
+        List<Comparator> comparators = new ArrayList<Comparator>(PeopleColumn.values().length);
 		for (PeopleColumn col : PeopleColumn.values()) {
 			TableViewerColumn viewerColumn = new TableViewerColumn(tableViewer,
 					SWT.LEAD);
 			final TableColumn nameColumn = viewerColumn.getColumn();
+			tableColumns.add(nameColumn);
+			comparators.add(col.comparator);
 			layout.addColumnData(col.layoutData);
 			nameColumn.setText(col.text);
 			nameColumn.setMoveable(true);
 			nameColumn.setData(col);
-			nameColumn.addListener(SWT.Selection, sortListener);
 			if (col == PeopleColumn.FIRST_NAME) {
 				viewerColumn
 						.setLabelProvider(new GenericObservableMapCellLabelProvider(
@@ -380,7 +443,16 @@ public class PeopleView extends TrackerView implements ItemsView{
 			}
 			
 		}
-
+        TableColumn[] tableCols = new TableColumn[tableColumns.size()];
+        Comparator[] compares = new Comparator[comparators.size()];
+	    sorter = new GenericViewSorter(
+				tableViewer,  tableColumns.toArray(tableCols),
+					comparators.toArray(compares));
+		if (memento != null){
+					sorter.init(memento);
+		}
+		
+		tableViewer.setSorter(sorter);
 		tableViewer.setColumnProperties(PeopleColumn.colNames);
 		return cp;
 	}
