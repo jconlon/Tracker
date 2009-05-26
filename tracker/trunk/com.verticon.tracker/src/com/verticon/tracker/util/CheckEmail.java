@@ -38,7 +38,7 @@ public class CheckEmail {
 		
 		
 		// Set the email pattern string
-		p = Pattern.compile("^[a-zA-Z_0-9.]+@[a-zA-Z_.]+?\\.+[a-zA-Z]{2,3}$");
+		p = Pattern.compile("^[a-zA-Z_0-9.]+@[a-zA-Z_0-9.]+?\\.+[a-zA-Z]{2,3}$");
 
 		// Match the given string with the pattern
 		m = p.matcher(email);

@@ -246,8 +246,6 @@ public class PeopleView extends TrackerView implements ItemsView{
 	 * 
 	 */
 	enum PeopleColumn {
-		// NAME(
-		// "Name", new ColumnWeightData(3, 200, true)),
 		FIRST_NAME("First Name", new ColumnWeightData(2, 100, true),
 				FairPackage.Literals.PERSON__FIRST_NAME, "{0}", 
 				new Comparator<Person>(){
@@ -339,8 +337,18 @@ public class PeopleView extends TrackerView implements ItemsView{
 				return value1.compareTo(value2);
 			}}),
 
+	    EMAIL("Email", new ColumnWeightData(2, 200, true),
+					FairPackage.Literals.PERSON__EMAIL, "{9}", 
+					new Comparator<Person>(){
+
+				public int compare(Person person1, Person person2) {
+					String value1 = person1.getEmail()==null?"":person1.getEmail();
+					String value2 = person2.getEmail()==null?"":person2.getEmail();
+					return value1.compareTo(value2);
+				}}),
+				
 		PIN("Premieses ID", new ColumnWeightData(2, 70, true),
-				FairPackage.Literals.PERSON__PIN, "{9}", 
+				FairPackage.Literals.PERSON__PIN, "{10}", 
 				new Comparator<Person>(){
 
 			public int compare(Person person1, Person person2) {
@@ -350,7 +358,7 @@ public class PeopleView extends TrackerView implements ItemsView{
 			}}),
 
 		COMMENTS("Comments", new ColumnWeightData(2, 120, true),
-				FairPackage.Literals.PERSON__COMMENTS, "{10}", 
+				FairPackage.Literals.PERSON__COMMENTS, "{11}", 
 				new Comparator<Person>(){
 
 			public int compare(Person person1, Person person2) {
