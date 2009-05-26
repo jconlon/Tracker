@@ -92,6 +92,7 @@ public class PersonItemProvider
 			addPinPropertyDescriptor(object);
 			addSalesOrderPropertyDescriptor(object);
 			addExhibitorNumberPropertyDescriptor(object);
+			addEmailPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -361,6 +362,28 @@ public class PersonItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Email feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEmailPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Person_email_feature"),
+				 getString("_UI_Person_email_description"),
+				 FairPackage.Literals.PERSON__EMAIL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns Person.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -409,6 +432,7 @@ public class PersonItemProvider
 			case FairPackage.PERSON__PIN:
 			case FairPackage.PERSON__SALES_ORDER:
 			case FairPackage.PERSON__EXHIBITOR_NUMBER:
+			case FairPackage.PERSON__EMAIL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

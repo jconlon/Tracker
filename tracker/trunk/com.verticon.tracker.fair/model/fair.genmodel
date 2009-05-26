@@ -118,6 +118,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/salesOrder"/>
       <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Assigned Exhibitor Number"
           ecoreFeature="ecore:EAttribute fair.ecore#//Person/exhibitorNumber"/>
+      <genFeatures createChild="false" propertyDescription="Email Address" ecoreFeature="ecore:EAttribute fair.ecore#//Person/email"/>
     </genClasses>
     <genClasses ecoreClass="fair.ecore#//YoungPerson">
       <genFeatures notify="false" createChild="false" propertyCategory="Sponsors"
