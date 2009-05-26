@@ -255,6 +255,10 @@
         <element xmi:type="ecore:EAttribute" href="fair.ecore#//Person/exhibitorNumber"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Xi3UYJlTEd2pG_n2YQiBig"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_vcuGkEn5Ed6DwaUjhb8B3Q" type="2001">
+        <element xmi:type="ecore:EAttribute" href="fair.ecore#//Person/email"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_vcuGkUn5Ed6DwaUjhb8B3Q"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_JvPSEmMREd2cfb89hdQDkA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_JvPSE2MREd2cfb89hdQDkA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_JvPSFGMREd2cfb89hdQDkA"/>

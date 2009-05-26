@@ -671,13 +671,22 @@ public interface FairPackage extends EPackage {
 	int PERSON__EXHIBITOR_NUMBER = 11;
 
 	/**
+	 * The feature id for the '<em><b>Email</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__EMAIL = 12;
+
+	/**
 	 * The number of structural features of the '<em>Person</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = 12;
+	int PERSON_FEATURE_COUNT = 13;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.fair.impl.YoungPersonImpl <em>Young Person</em>}' class.
@@ -796,6 +805,15 @@ public interface FairPackage extends EPackage {
 	 * @ordered
 	 */
 	int YOUNG_PERSON__EXHIBITOR_NUMBER = PERSON__EXHIBITOR_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Email</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int YOUNG_PERSON__EMAIL = PERSON__EMAIL;
 
 	/**
 	 * The feature id for the '<em><b>Parents</b></em>' reference list.
@@ -1497,6 +1515,17 @@ public interface FairPackage extends EPackage {
 	EAttribute getPerson_ExhibitorNumber();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.fair.Person#getEmail <em>Email</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Email</em>'.
+	 * @see com.verticon.tracker.fair.Person#getEmail()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_Email();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.fair.YoungPerson <em>Young Person</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2069,6 +2098,14 @@ public interface FairPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PERSON__EXHIBITOR_NUMBER = eINSTANCE.getPerson_ExhibitorNumber();
+
+		/**
+		 * The meta object literal for the '<em><b>Email</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__EMAIL = eINSTANCE.getPerson_Email();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.fair.impl.YoungPersonImpl <em>Young Person</em>}' class.

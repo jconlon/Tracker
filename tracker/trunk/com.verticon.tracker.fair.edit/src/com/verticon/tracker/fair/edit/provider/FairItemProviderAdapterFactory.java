@@ -351,6 +351,7 @@ public class FairItemProviderAdapterFactory extends FairAdapterFactory implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected void associate(Adapter adapter, Notifier target) {
 		super.associate(adapter, target);
 		if (adapter != null) {
