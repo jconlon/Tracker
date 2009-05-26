@@ -478,13 +478,13 @@ public class PersonItemProvider
 	 */
 	@Override
 	public String getColumnText(Object object, int columnIndex) 
-	  {
-	    Person person = (Person)object;
-	    switch (columnIndex){
-	        case 0: return getText(object); 
-	    	case 1: return person.getFirstName(); 
-	    	case 2: return person.getLastName(); 
-	    	case 3:
+	{
+		Person person = (Person)object;
+		switch (columnIndex){
+		case 0: return getText(object); 
+		case 1: return person.getFirstName(); 
+		case 2: return person.getLastName(); 
+		case 3:
 			return Integer.toString(person.getExhibitorNumber());
 		case 4:
 			return Integer.toString(person.getSalesOrder());
@@ -499,12 +499,14 @@ public class PersonItemProvider
 		case 9:
 			return person.getZipCode();
 		case 10:
-			return person.getPin();
+			return person.getEmail();
 		case 11:
+			return person.getPin();
+		case 12:
 			return person.getComments();
-	    	default :
-	    		return "unknown " + columnIndex;
-	    }
-	  }
+		default :
+			return "unknown " + columnIndex;
+		}
+	}
 
 }
