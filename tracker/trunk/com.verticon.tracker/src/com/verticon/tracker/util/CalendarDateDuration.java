@@ -142,9 +142,29 @@ public class CalendarDateDuration {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof CalendarDateDuration) {
-			return this.getTotalDays()==((CalendarDateDuration)obj).getTotalDays();
+			CalendarDateDuration cddObj = (CalendarDateDuration)obj;
+			return getTotalDays()==cddObj.getTotalDays() &&
+			getType()==cddObj.getType();
 		}
 		return false;
 	}
+
+	// Lazily initialized, cached hashCode
+	private volatile int hashCode; 
+	
+	@Override
+	public int hashCode() {
+		int result = hashCode;
+		if (result == 0){
+			result = 17;
+			result = 31 * result + getTotalDays();
+			result = 31 * result + getType().hashCode();
+			hashCode = result;
+		}
+		return result;
+	}
+	
+	
+	
 }
 
