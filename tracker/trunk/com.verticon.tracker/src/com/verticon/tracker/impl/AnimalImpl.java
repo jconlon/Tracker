@@ -64,6 +64,7 @@ import com.verticon.tracker.util.TrackerUtils;
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getType <em>Type</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getVisualID <em>Visual ID</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getAgeInDays <em>Age In Days</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getAlternativeID <em>Alternative ID</em>}</li>
  * </ul>
  * </p>
  *
@@ -293,6 +294,16 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 
 	/**
+	 * This is true if the Visual ID attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean visualIDESet;
+
+
+	/**
 	 * The default value of the '{@link #getAgeInDays() <em>Age In Days</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -301,6 +312,17 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @ordered
 	 */
 	protected static final int AGE_IN_DAYS_EDEFAULT = 0;
+
+
+	/**
+	 * The default value of the '{@link #getAlternativeID() <em>Alternative ID</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAlternativeID()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ALTERNATIVE_ID_EDEFAULT = null;
 
 
 	/**
@@ -768,10 +790,34 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	public void setVisualID(String newVisualID) {
 		String oldVisualID = visualID;
 		visualID = newVisualID;
+		boolean oldVisualIDESet = visualIDESet;
+		visualIDESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__VISUAL_ID, oldVisualID, visualID));
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__VISUAL_ID, oldVisualID, visualID, !oldVisualIDESet));
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void unsetVisualID() {
+		String oldVisualID = visualID;
+		boolean oldVisualIDESet = visualIDESet;
+		visualID = VISUAL_ID_EDEFAULT;
+		visualIDESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, TrackerPackage.ANIMAL__VISUAL_ID, oldVisualID, VISUAL_ID_EDEFAULT, oldVisualIDESet));
+	}
+
+			/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSetVisualID() {
+		return visualIDESet;
+	}
 	int ageInDays = 0;
 	long millisToReCalculateAge = 0;
 
@@ -804,6 +850,16 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	}
 
 	
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Overriden in selected subclasses.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getAlternativeID() {
+		return ALTERNATIVE_ID_EDEFAULT;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -885,7 +941,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * TODO optimize this to watch for weighIn events from the notifications.
+	 * TODO refactor this adding setMostCurrentWeighIn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -963,6 +1019,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				return getVisualID();
 			case TrackerPackage.ANIMAL__AGE_IN_DAYS:
 				return new Integer(getAgeInDays());
+			case TrackerPackage.ANIMAL__ALTERNATIVE_ID:
+				return getAlternativeID();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1035,7 +1093,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				setSire((Animal)null);
 				return;
 			case TrackerPackage.ANIMAL__VISUAL_ID:
-				setVisualID(VISUAL_ID_EDEFAULT);
+				unsetVisualID();
 				return;
 		}
 		super.eUnset(featureID);
@@ -1080,9 +1138,11 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 			case TrackerPackage.ANIMAL__TYPE:
 				return getType() != TYPE_EDEFAULT;
 			case TrackerPackage.ANIMAL__VISUAL_ID:
-				return VISUAL_ID_EDEFAULT == null ? visualID != null : !VISUAL_ID_EDEFAULT.equals(visualID);
+				return isSetVisualID();
 			case TrackerPackage.ANIMAL__AGE_IN_DAYS:
 				return getAgeInDays() != AGE_IN_DAYS_EDEFAULT;
+			case TrackerPackage.ANIMAL__ALTERNATIVE_ID:
+				return ALTERNATIVE_ID_EDEFAULT == null ? getAlternativeID() != null : !ALTERNATIVE_ID_EDEFAULT.equals(getAlternativeID());
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1104,7 +1164,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 		result.append(", comments: ");
 		result.append(comments);
 		result.append(", visualID: ");
-		result.append(visualID);
+		if (visualIDESet) result.append(visualID); else result.append("<unset>");
 		result.append(')');
 		return result.toString();
 	}

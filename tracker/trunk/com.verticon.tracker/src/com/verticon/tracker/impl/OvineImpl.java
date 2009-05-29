@@ -141,14 +141,17 @@ public class OvineImpl extends AnimalImpl implements Ovine {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Added notification for 
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setScrapieTag(String newScrapieTag) {
 		String oldScrapieTag = scrapieTag;
 		scrapieTag = newScrapieTag;
-		if (eNotificationRequired())
+		if (eNotificationRequired()){
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.OVINE__SCRAPIE_TAG, oldScrapieTag, scrapieTag));
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__ALTERNATIVE_ID, oldScrapieTag, scrapieTag));
+		}
 	}
 
 	/**
@@ -258,5 +261,16 @@ public class OvineImpl extends AnimalImpl implements Ovine {
 	public AnimalType getType() {
 		return AnimalType.OVINE;
 	}
+
+	/**
+	 * Sheep scrapieTags are an alternative official
+	 * Identification.  
+	 */
+	@Override
+	public String getAlternativeID() {
+		return this.getScrapieTag();
+	}
+	
+	
 
 } //OvineImpl

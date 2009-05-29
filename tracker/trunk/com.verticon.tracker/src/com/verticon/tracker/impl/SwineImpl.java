@@ -6,6 +6,8 @@
  */
 package com.verticon.tracker.impl;
 
+import java.text.MessageFormat;
+
 import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Swine;
 import com.verticon.tracker.SwineBreed;
@@ -158,8 +160,10 @@ public class SwineImpl extends AnimalImpl implements Swine {
 	public void setRightEarNotching(int newRightEarNotching) {
 		int oldRightEarNotching = rightEarNotching;
 		rightEarNotching = newRightEarNotching;
-		if (eNotificationRequired())
+		if (eNotificationRequired()){
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.SWINE__RIGHT_EAR_NOTCHING, oldRightEarNotching, rightEarNotching));
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.SWINE__ALTERNATIVE_ID, formatAlternativeID(oldRightEarNotching, leftEarNotching), getAlternativeID()));
+		}
 	}
 
 	/**
@@ -174,13 +178,15 @@ public class SwineImpl extends AnimalImpl implements Swine {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setLeftEarNotching(int newLeftEarNotching) {
 		int oldLeftEarNotching = leftEarNotching;
 		leftEarNotching = newLeftEarNotching;
-		if (eNotificationRequired())
+		if (eNotificationRequired()){
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.SWINE__LEFT_EAR_NOTCHING, oldLeftEarNotching, leftEarNotching));
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.SWINE__ALTERNATIVE_ID, formatAlternativeID(rightEarNotching, oldLeftEarNotching), getAlternativeID()));
+		}
 	}
 
 	/**
@@ -311,5 +317,15 @@ public class SwineImpl extends AnimalImpl implements Swine {
 	public AnimalType getType() {
 		return AnimalType.SWINE;
 	}
+
+	@Override
+	public String getAlternativeID() {
+		return formatAlternativeID(rightEarNotching,leftEarNotching);
+	}
+	
+	private String formatAlternativeID(int rightNotch, int leftNotch){
+		return MessageFormat.format("{0}-{1}", new Object[]{rightNotch,leftNotch});
+	}
+	
 
 } //SwineImpl
