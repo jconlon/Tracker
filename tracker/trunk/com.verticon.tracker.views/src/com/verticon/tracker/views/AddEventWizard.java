@@ -225,10 +225,11 @@ public class AddEventWizard extends Wizard {
 				Composite tableComposite) {
 
 			final TableViewer v = new TableViewer(tableComposite);
-			ObservableListContentProvider cp = AnimalsView
-					.setUpAnimalsTableViewer(v,
-							new TrackerItemProviderAdapterFactory(),null);
-			v.setContentProvider(cp);
+//			ObservableListContentProvider cp = AnimalsView
+//					.setUpAnimalsTableViewer(v,
+//							new TrackerItemProviderAdapterFactory(),null);
+//			v.setContentProvider(cp);
+			AnimalColumn.setup(v, null, new TrackerItemProviderAdapterFactory());
 			return v;
 
 		}
