@@ -54,6 +54,7 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getWeightGainPerDay() <em>Weight Gain Per Day</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getType() <em>Type</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getAgeInDays() <em>Age In Days</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getAlternativeID() <em>Alternative ID</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -502,6 +503,19 @@ public abstract class AnimalTest extends TestCase {
 		 someBirthday.add(Calendar.DAY_OF_MONTH, -5);
 		 getFixture().setBirthDate(someBirthday.getTime());
 		 assertEquals(5, getFixture().getAgeInDays());
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Animal#getAlternativeID() <em>Alternative ID</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#getAlternativeID()
+	 * @generated
+	 */
+	public void testGetAlternativeID() {
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
 	}
 
 	/**

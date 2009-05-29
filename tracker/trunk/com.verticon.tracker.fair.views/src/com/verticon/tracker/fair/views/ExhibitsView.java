@@ -188,7 +188,6 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 	/**
 	 * Enum on Exhibit Element
 	 * 
-	 * @author jconlon
 	 * 
 	 */
 	 enum ExhibitColumn {
@@ -213,8 +212,6 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 				 return 1;
 			}}),  
 		
-//		EXHIBITOR("Exhibitor",new ColumnWeightData(2, 150, true)), 
-		
 		ANIMAL("Animal", new ColumnWeightData(2, 200, true), 
 		new Comparator<Exhibit>(){
 
@@ -225,7 +222,29 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 						"":exhibit2.getAnimal().getId();
 				return value1.compareTo(value2);
 			}}), 
-		
+			
+		ANIMAL_WEIGHT("Animal Weight", new ColumnWeightData(2, 80, true), 
+					new Comparator<Exhibit>(){
+
+			public int compare(Exhibit exhibit1, Exhibit exhibit2) {
+					Integer value1 = (exhibit1.getAnimal()==null || exhibit1.getAnimal().getWeight()==null)?
+							0:exhibit1.getAnimal().getWeight();
+					Integer value2 = (exhibit2.getAnimal()==null || exhibit2.getAnimal().getWeight()==null)?
+							0:exhibit2.getAnimal().getWeight();
+					return value1.compareTo(value2);
+		    }}), 
+
+	    ANIMAL_WEIGHT_GAIN("Animal Weight Gain", new ColumnWeightData(2, 80, true), 
+					new Comparator<Exhibit>(){
+
+			public int compare(Exhibit exhibit1, Exhibit exhibit2) {
+					Double value1 = (exhibit1.getAnimal()==null || exhibit1.getAnimal().getWeightGainPerDay()==null)?
+							0:exhibit1.getAnimal().getWeightGainPerDay();
+					Double value2 = (exhibit2.getAnimal()==null || exhibit2.getAnimal().getWeightGainPerDay()==null)?
+							0:exhibit2.getAnimal().getWeightGainPerDay();
+					return value1.compareTo(value2);
+		    }}), 
+
 		LOT("Lot", new ColumnWeightData(2, 150, true), 
 		new Comparator<Exhibit>(){
 

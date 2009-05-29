@@ -228,16 +228,6 @@ public class PeopleView extends TrackerView implements ItemsView{
 		return null;
 	}
 
-//	private static Person getPersonFromEvent(Event event, Fair fair) {
-//		if (event == null || fair == null) {
-//			return null;
-//		}
-//		if (event.getTag() != null && event.getTag().eContainer() != null) {
-//			Animal animal = (Animal) event.getTag().eContainer();
-//			return getPersonFromAnimal(animal, fair);
-//		}
-//		return null;
-//	}
 
 	/**
 	 * Enum specifying columns for the Person Element 
