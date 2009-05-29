@@ -38,6 +38,7 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getType <em>Type</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getVisualID <em>Visual ID</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getAgeInDays <em>Age In Days</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getAlternativeID <em>Alternative ID</em>}</li>
  * </ul>
  * </p>
  *
@@ -361,9 +362,11 @@ public interface Animal extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Visual ID</em>' attribute.
+	 * @see #isSetVisualID()
+	 * @see #unsetVisualID()
 	 * @see #setVisualID(String)
 	 * @see com.verticon.tracker.TrackerPackage#getAnimal_VisualID()
-	 * @model
+	 * @model unsettable="true"
 	 * @generated
 	 */
 	String getVisualID();
@@ -373,10 +376,35 @@ public interface Animal extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Visual ID</em>' attribute.
+	 * @see #isSetVisualID()
+	 * @see #unsetVisualID()
 	 * @see #getVisualID()
 	 * @generated
 	 */
 	void setVisualID(String value);
+
+	/**
+	 * Unsets the value of the '{@link com.verticon.tracker.Animal#getVisualID <em>Visual ID</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSetVisualID()
+	 * @see #getVisualID()
+	 * @see #setVisualID(String)
+	 * @generated
+	 */
+	void unsetVisualID();
+
+	/**
+	 * Returns whether the value of the '{@link com.verticon.tracker.Animal#getVisualID <em>Visual ID</em>}' attribute is set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return whether the value of the '<em>Visual ID</em>' attribute is set.
+	 * @see #unsetVisualID()
+	 * @see #getVisualID()
+	 * @see #setVisualID(String)
+	 * @generated
+	 */
+	boolean isSetVisualID();
 
 	/**
 	 * Returns the value of the '<em><b>Age In Days</b></em>' attribute.
@@ -392,6 +420,21 @@ public interface Animal extends EObject {
 	 * @generated
 	 */
 	int getAgeInDays();
+
+	/**
+	 * Returns the value of the '<em><b>Alternative ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Alternative ID</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Alternative ID</em>' attribute.
+	 * @see com.verticon.tracker.TrackerPackage#getAnimal_AlternativeID()
+	 * @model unique="false" transient="true" changeable="false" volatile="true" derived="true" ordered="false"
+	 * @generated
+	 */
+	String getAlternativeID();
 
 	/**
 	 * <!-- begin-user-doc -->

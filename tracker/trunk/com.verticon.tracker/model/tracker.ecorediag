@@ -59,6 +59,10 @@
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Animal/ageInDays"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Gs3sIZpaEd2AlIpLuy7nyg"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_cXt6sUxhEd64B4VLL37tPg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Animal/alternativeID"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_cXt6skxhEd64B4VLL37tPg"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PBHBQVmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PBHBQlmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_PBHoUFmCEd2tRZ2K3aMUww"/>

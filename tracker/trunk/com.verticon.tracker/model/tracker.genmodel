@@ -409,11 +409,16 @@
       <genFeatures property="Readonly" createChild="false" propertyCategory="Weight"
           propertyDescription="Weight gain per day in pounds" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/weightGainPerDay"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/type"/>
-      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/visualID">
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Alternative Visual Identification"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/visualID">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
       <genFeatures property="Readonly" createChild="false" propertyCategory="Age"
           propertyDescription="Age of animal in days since birth" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/ageInDays">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Identification"
+          propertyDescription="Alternative Official Identification" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/alternativeID">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
       <genOperations ecoreOperation="tracker.ecore#//Animal/allEvents"/>
@@ -423,6 +428,7 @@
       <genOperations ecoreOperation="tracker.ecore#//Animal/activeTag"/>
       <genOperations ecoreOperation="tracker.ecore#//Animal/eventHistory"/>
       <genOperations ecoreOperation="tracker.ecore#//Animal/lastWeighIn"/>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/getAge"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Tag">
       <genFeatures property="Readonly" createChild="false" propertyCategory="Details"

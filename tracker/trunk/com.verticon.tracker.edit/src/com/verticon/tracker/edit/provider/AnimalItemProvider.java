@@ -91,6 +91,7 @@ public class AnimalItemProvider
 			addTypePropertyDescriptor(object);
 			addVisualIDPropertyDescriptor(object);
 			addAgeInDaysPropertyDescriptor(object);
+			addAlternativeIDPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -487,7 +488,7 @@ public class AnimalItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Animal_visualID_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_visualID_feature", "_UI_Animal_type"),
+				 getString("_UI_Animal_visualID_description"),
 				 TrackerPackage.Literals.ANIMAL__VISUAL_ID,
 				 true,
 				 false,
@@ -518,6 +519,30 @@ public class AnimalItemProvider
 				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 getString("_UI_AgePropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
+	}
+
+/**
+	 * This adds a property descriptor for the Alternative ID feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAlternativeIDPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Animal_alternativeID_feature"),
+				 getString("_UI_Animal_alternativeID_description"),
+				 TrackerPackage.Literals.ANIMAL__ALTERNATIVE_ID,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 getString("_UI_IdentificationPropertyCategory"),
 				 new String[] {
 					"org.eclipse.ui.views.properties.expert"
 				 }));
@@ -628,6 +653,7 @@ public class AnimalItemProvider
 			case TrackerPackage.ANIMAL__TYPE:
 			case TrackerPackage.ANIMAL__VISUAL_ID:
 			case TrackerPackage.ANIMAL__AGE_IN_DAYS:
+			case TrackerPackage.ANIMAL__ALTERNATIVE_ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TrackerPackage.ANIMAL__TAGS:
