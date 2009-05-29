@@ -98,4 +98,18 @@ public class SwineTest extends AnimalTest {
 		assertEquals(Species.POR.name(), getFixture().getSpeciesCode());
 	}
 
+	@Override
+	public void testGetAlternativeID() {
+		assertEquals("0-0",getFixture().getAlternativeID());
+		
+		getFixture().setRightEarNotching(5);
+		assertEquals("5-0",getFixture().getAlternativeID());
+		
+		getFixture().setLeftEarNotching(6);
+		assertEquals("5-6",getFixture().getAlternativeID());
+		
+	}
+	
+	
+
 } //SwineTest

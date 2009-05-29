@@ -97,5 +97,14 @@ public class OvineTest extends AnimalTest {
 		assertNotNull(getFixture().getSpeciesCode());
 		assertEquals(Species.OVI.name(), getFixture().getSpeciesCode());
 	}
+	
+	@Override
+	public void testGetAlternativeID() {
+		assertNull(getFixture().getAlternativeID());
+		
+		getFixture().setScrapieTag("some value");
+		assertEquals("some value",getFixture().getAlternativeID());
+		
+	}
 
 } //OvineTest

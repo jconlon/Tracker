@@ -510,12 +510,10 @@ public abstract class AnimalTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.Animal#getAlternativeID()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testGetAlternativeID() {
-		// TODO: implement this feature getter test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		assertNull(getFixture().getAlternativeID());
 	}
 
 	/**
