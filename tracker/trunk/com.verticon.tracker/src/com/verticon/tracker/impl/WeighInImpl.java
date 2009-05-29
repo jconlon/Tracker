@@ -43,6 +43,8 @@ import com.verticon.tracker.util.FilterCriteria;
  * @generated
  */
 public class WeighInImpl extends EventImpl implements WeighIn {
+	private static final double INITIAL_AVG_VALUE = Double.MIN_NORMAL;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -80,6 +82,13 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	 */
 	protected static final Double WEIGHT_GAIN_PER_DAY_EDEFAULT = null;
 
+	/**
+	 * Cache of the average daily gain. 
+	 * Start out with a known initializing value and calculated it at startup.
+	 * 
+	 */
+	private Double adg = INITIAL_AVG_VALUE;
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -119,22 +128,48 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Send out WeightGainPerDay notifications whenever the value
+	 * of weight changes.
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setWeight(Integer newWeight) {
 		Integer oldWeight = weight;
 		weight = newWeight;
-		if (eNotificationRequired())
+		if (eNotificationRequired()){
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.WEIGH_IN__WEIGHT, oldWeight, weight));
+			WeighIn lastWeighIn = previousWeighIn();
+			if(lastWeighIn==null || lastWeighIn.getWeight()==null){
+				return;
+			}else{
+				Double oldValue = adg;
+				adg = calculateWeightGain();
+				eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.WEIGH_IN__WEIGHT_GAIN_PER_DAY, 
+						oldValue, adg));
+			}
+		
+		}
 	}
-
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * @return cached calculated average daily weight gain.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Double getWeightGainPerDay() {
+		if(adg!=null && adg==INITIAL_AVG_VALUE){
+			adg = calculateWeightGain();
+		}
+		return adg;
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public Double getWeightGainPerDay() {
+	public Double calculateWeightGain() {
 		if(weight==null || weight==0){
 			return null;
 		}
