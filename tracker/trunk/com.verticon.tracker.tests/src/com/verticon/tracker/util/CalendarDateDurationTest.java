@@ -273,4 +273,31 @@ public class CalendarDateDurationTest extends TestCase {
 		assertEquals("Y20", instance.toRoundedString());
 	}
 
+	/**
+	 * Test method for {@link com.verticon.tracker.util.Age#toRoundedString()}.
+	 */
+	public void testEquals() {
+		CalendarDate datea = new CalendarDate(2000, 1, 1);
+		CalendarDate dateb = new CalendarDate(2000, 1, 2);
+		CalendarDateDuration instance2 = new CalendarDateDuration(datea, dateb);
+		assertEquals(instance, instance2);
+		assertEquals(instance.hashCode(), instance2.hashCode());
+		
+		CalendarDate datec = new CalendarDate(2000, 1, 11);
+		CalendarDate dated = new CalendarDate(2000, 1, 12);
+		CalendarDateDuration instance3 = new CalendarDateDuration(datec, dated);
+		assertEquals(instance, instance3);
+		assertEquals(instance.hashCode(), instance3.hashCode());
+		
+		
+
+		CalendarDate datee = new CalendarDate(2000, 1, 11);
+		CalendarDate datef = new CalendarDate(2000, 1, 13);
+		CalendarDateDuration instance4 = new CalendarDateDuration(datee, datef);
+		assertNotSame(instance, instance4);
+		assertNotSame(instance.hashCode(), instance4.hashCode());
+		
+	}
+	
+	
 }
