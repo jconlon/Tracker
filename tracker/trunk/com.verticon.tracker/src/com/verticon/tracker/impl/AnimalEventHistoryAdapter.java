@@ -57,7 +57,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 		return ECollections.unmodifiableEList(events);
 	}
 
-	public void setForwarding(Adapter adapter) {
+	public synchronized void setForwarding(Adapter adapter) {
 		this.forwardingAdapter = adapter;
 	}
 
@@ -89,7 +89,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 	 * Set the animal before calling calling super.
 	 */
 	@Override
-	public void setTarget(Notifier target) {
+	public synchronized void setTarget(Notifier target) {
 		if (animal == null && target instanceof Animal) {
 			animal = (Animal) target;
 		}

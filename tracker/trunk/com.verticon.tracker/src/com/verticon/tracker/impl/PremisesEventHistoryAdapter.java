@@ -60,7 +60,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 		return ECollections.unmodifiableEList(events);
 	}
 
-	public void setForwarding(Adapter adapter) {
+	public synchronized void setForwarding(Adapter adapter) {
 		logger.debug(bundleMarker,"Setting forwarding to adapter={} on={}", adapter, this);
 		this.forwardingAdapter = adapter;
 	}
@@ -89,7 +89,7 @@ public class PremisesEventHistoryAdapter extends AdapterImpl implements
 	 * Set the animal before calling calling super.
 	 */
 	@Override
-	public void setTarget(Notifier target) {
+	public synchronized void setTarget(Notifier target) {
 		if (premises == null && target instanceof Premises) {
 			premises = (Premises) target;
 		}
