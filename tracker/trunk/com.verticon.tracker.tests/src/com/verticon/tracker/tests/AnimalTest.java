@@ -16,6 +16,9 @@ import java.util.HashMap;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -31,6 +34,7 @@ import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.WeighIn;
+import com.verticon.tracker.impl.AnimalImpl;
 import com.verticon.tracker.util.Age;
 
 /**
@@ -315,8 +319,31 @@ public abstract class AnimalTest extends TestCase {
 	 * @generated NOT
 	 */
 	public void testGetWeight() {
+		 //Need to see a notification that there is a change of activeTag
+		DebugAdapter debugAdapter = 
+	    
+	    		new DebugAdapter(){
+					@Override
+					public void notifyChanged(Notification notification) {
+						//System.out.println("********"+notification.getFeature());
+						switch (notification.getFeatureID(Event.class)) {
+						case TrackerPackage.ANIMAL__LAST_EVENT_DATE_TIME:
+							break;
+						case TrackerPackage.ANIMAL__WEIGHT:
+							counter++;
+							break;
+						case TrackerPackage.ANIMAL__WEIGHT_GAIN_PER_DAY:
+							break;
+						default:
+							break;
+						}
+					}
+	    };
+
+	    getFixture().eAdapters().add(debugAdapter);
 		Animal animal = getFixture();
 		assertNull("No weight on animal", animal.getWeight());
+		assertEquals("No notifications",0, debugAdapter.counter);
 		
 		Tag tag = TrackerFactory.eINSTANCE.createTag();
 		animal.getTags().add(tag);
@@ -331,6 +358,7 @@ public abstract class AnimalTest extends TestCase {
 		tag.getEvents().add(we);
 		
 		assertEquals(new Integer(100), animal.getWeight());
+		assertEquals("Should have one notification",1, debugAdapter.counter);
 		
 		//Second weighIn today 250 lbs
 		WeighIn we2 = TrackerFactory.eINSTANCE.createWeighIn();
@@ -341,6 +369,8 @@ public abstract class AnimalTest extends TestCase {
 		we2.setWeight(250);
 		tag.getEvents().add(we2);
 		assertEquals(new Integer(250), animal.getWeight());
+		assertEquals("Should have a second notification",2, debugAdapter.counter);
+		
 		
 		//Third weighIn today 350 lbs
 		WeighIn we3 = TrackerFactory.eINSTANCE.createWeighIn();
@@ -352,8 +382,14 @@ public abstract class AnimalTest extends TestCase {
 				thirdWeighInDate.getTime());
 		tag.getEvents().add(we3);
 		assertEquals(new Integer(350), animal.getWeight());
+		assertEquals("Should have a third notification",3, debugAdapter.counter);
 		
 		
+		//Reset the last event to a different weight
+		we3.setWeight(333);
+		assertEquals(new Integer(333), animal.getWeight());
+		assertEquals("Should have a forth notification",4, debugAdapter.counter);
+
 	}
 
 
@@ -365,8 +401,29 @@ public abstract class AnimalTest extends TestCase {
 	 * @generated NOT
 	 */
 	public void testGetWeightGainPerDay() {
+		DebugAdapter debugAdapter = 
+		    
+    		new DebugAdapter(){
+				@Override
+				public void notifyChanged(Notification notification) {
+					switch (notification.getFeatureID(Event.class)) {
+					case TrackerPackage.ANIMAL__LAST_EVENT_DATE_TIME:
+						break;
+					case TrackerPackage.ANIMAL__WEIGHT:
+						break;
+					case TrackerPackage.ANIMAL__WEIGHT_GAIN_PER_DAY:
+						counter++;
+						break;
+					default:
+						break;
+					}
+				}
+    };
+
+    getFixture().eAdapters().add(debugAdapter);
 		Animal animal = getFixture();
 		assertNull("No weight on animal", animal.getWeight());
+		assertEquals("No notifications",0, debugAdapter.counter);
 		
 		Tag tag = TrackerFactory.eINSTANCE.createTag();
 		animal.getTags().add(tag);
@@ -380,7 +437,9 @@ public abstract class AnimalTest extends TestCase {
 		we.setWeight(100);
 		tag.getEvents().add(we);
 		
-		assertNull( animal.getWeightGainPerDay());
+		assertNull("should be null but was "+ animal.getWeightGainPerDay(),animal.getWeightGainPerDay());
+		assertEquals("One notifications",1, debugAdapter.counter);
+		
 		
 		//Second weighIn today 250 lbs
 		WeighIn we2 = TrackerFactory.eINSTANCE.createWeighIn();
@@ -391,6 +450,8 @@ public abstract class AnimalTest extends TestCase {
 		we2.setWeight(250);
 		tag.getEvents().add(we2);
 		assertEquals(new Double(15.0), animal.getWeightGainPerDay());
+		assertEquals("Two notifications",2, debugAdapter.counter);
+		
 		
 		//Third weighIn today 350 lbs
 		WeighIn we3 = TrackerFactory.eINSTANCE.createWeighIn();
@@ -402,6 +463,14 @@ public abstract class AnimalTest extends TestCase {
 				thirdWeighInDate.getTime());
 		tag.getEvents().add(we3);
 		assertEquals(new Double(10.0), animal.getWeightGainPerDay());
+		assertEquals("Three notifications",3, debugAdapter.counter);
+		
+		//Reset the last event to a different weight
+		we3.setWeight(333);
+		assertEquals(new Integer(333), animal.getWeight());
+		assertEquals("Should have a forth notification",4, debugAdapter.counter);
+
+		
 	}
 	
 	/**
@@ -435,53 +504,61 @@ public abstract class AnimalTest extends TestCase {
 		 assertEquals(5, getFixture().getAgeInDays());
 	}
 
+	/**
+	 * Test getWeightPerDay method with multiple weighIn events
+	 * some of which have a null weight
+	 */
 	public void testGetWeightGainPerDayWithNulls() {
 		Animal animal = getFixture();
 		assertNull("Should have no weight on animal", animal.getWeight());
 		
 		Tag tag = TrackerFactory.eINSTANCE.createTag();
 		animal.getTags().add(tag);
+		
 		//First weighIn 10 days ago and 100 lbs
-		WeighIn we = TrackerFactory.eINSTANCE.createWeighIn();
-		we.setComments("First");
+		WeighIn we1 = TrackerFactory.eINSTANCE.createWeighIn();
+		we1.setComments("First");
 		Calendar firstWeighInDate = Calendar.getInstance();
 		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
-		we.setDateTime(
-				firstWeighInDate.getTime());
-		we.setWeight(100);
-		tag.getEvents().add(we);
-		
-		assertNull( animal.getWeightGainPerDay());
-		
-		//Second weighIn today 250 lbs
-		WeighIn we1 = TrackerFactory.eINSTANCE.createWeighIn();
-		we1.setComments("Null added");
-		Calendar knullWeighInDate = Calendar.getInstance();
 		we1.setDateTime(
-				knullWeighInDate.getTime());
+				firstWeighInDate.getTime());
+		we1.setWeight(100);
 		tag.getEvents().add(we1);
+		
+		assertNull( animal.getWeightGainPerDay());
+		
+		//Second weighIn today with no weight set
+		WeighIn we2 = TrackerFactory.eINSTANCE.createWeighIn();
+		we2.setComments("Null weight on weighIn");
+		Calendar knullWeighInDate = Calendar.getInstance();
+		we2.setDateTime(
+				knullWeighInDate.getTime());
+		tag.getEvents().add(we2);
 		assertNull( animal.getWeightGainPerDay());
 		
 		
-		//Second weighIn today 250 lbs
-		WeighIn we2 = TrackerFactory.eINSTANCE.createWeighIn();
-		we2.setComments("Second");
+		//Third weighIn today 250 lbs
+		WeighIn we3 = TrackerFactory.eINSTANCE.createWeighIn();
+		we3.setComments("Second");
 		Calendar secondWeighInDate = Calendar.getInstance();
-		we2.setDateTime(
+		we3.setDateTime(
 				secondWeighInDate.getTime());
-		we2.setWeight(250);
-		tag.getEvents().add(we2);
+		we3.setWeight(250);
+		tag.getEvents().add(we3);
+		assertEquals(new Double(15.0), we3.getWeightGainPerDay());
+		
+		assertEquals("Wrong Event as lastEvent",we3.getDateTime(), animal.getLastEventDateTime());
 		assertEquals(new Double(15.0), animal.getWeightGainPerDay());
 		
-		//Third weighIn today 350 lbs
-		WeighIn we3 = TrackerFactory.eINSTANCE.createWeighIn();
-		we3.setComments("Third");
-		we3.setWeight(350);
+		//Fourth weighIn today 350 lbs
+		WeighIn we4 = TrackerFactory.eINSTANCE.createWeighIn();
+		we4.setComments("Fourth");
+		we4.setWeight(350);
 		Calendar thirdWeighInDate = Calendar.getInstance();
 		thirdWeighInDate.add(Calendar.DAY_OF_MONTH, 10);
-		we3.setDateTime(
+		we4.setDateTime(
 				thirdWeighInDate.getTime());
-		tag.getEvents().add(we3);
+		tag.getEvents().add(we4);
 		assertEquals(new Double(10.0), animal.getWeightGainPerDay());
 	}
 
@@ -631,8 +708,10 @@ public abstract class AnimalTest extends TestCase {
 	public void testActiveTag() {
 		Tag tag1 = TrackerFactory.eINSTANCE.createTag();
 		tag1.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
+		
+		//Wait 1 second then create a second tag
 		try {
-	        long numMillisecondsToSleep = 1000; // 5 seconds
+	        long numMillisecondsToSleep = 1000; // 1 second
 	        Thread.sleep(numMillisecondsToSleep);
 	    } catch (InterruptedException e) {
 	    }
@@ -644,7 +723,29 @@ public abstract class AnimalTest extends TestCase {
 		
 		getFixture().getTags().add(tag1);
 		getFixture().getTags().add(tag2);
-		assertEquals(tag2, getFixture().activeTag());
+		assertEquals("Tag2 should have been the active tag",tag2, getFixture().activeTag());
+		
+		//Wait 1 second then add an event to the first tag
+		try {
+	        long numMillisecondsToSleep = 1000; // 1 second
+	        Thread.sleep(numMillisecondsToSleep);
+	    } catch (InterruptedException e) {
+	    }
+		
+	    tag1.getEvents().add(TrackerFactory.eINSTANCE.createBirthing());
+	    assertEquals("Tag1 should have been the active tag",tag1, getFixture().activeTag());
+	    
+	   
+	    getFixture().setComments("Testing");
+	    
+	  //Wait 1 second then add an event to the second tag
+		try {
+	        long numMillisecondsToSleep = 1000; // 1 second
+	        Thread.sleep(numMillisecondsToSleep);
+	    } catch (InterruptedException e) {
+	    }
+	    
+	    tag2.getEvents().add(TrackerFactory.eINSTANCE.createAnimalMissing());
 		
 	}
 
@@ -766,4 +867,38 @@ public abstract class AnimalTest extends TestCase {
 		xmlResource.getContents().clear();
 		return esmML;
 	}
+	
+	class DebugAdapter implements Adapter{
+		Notifier target = null;
+	
+		int counter = 0;
+		
+		
+		public Notifier getTarget() {
+			// TODO Auto-generated method stub
+			return target;
+		}
+
+		
+		public boolean isAdapterForType(Object type) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		
+		public void notifyChanged(Notification notification) {
+			System.out.println("Notification feature: "+notification);
+			
+		}
+
+		
+		public void setTarget(Notifier newTarget) {
+			this.target=newTarget;
+		}
+	}
+		
+		
+		
+		
+	
 } //AnimalTest

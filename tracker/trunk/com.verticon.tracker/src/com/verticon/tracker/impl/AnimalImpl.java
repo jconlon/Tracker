@@ -525,24 +525,118 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__COMMENTS, oldComments, comments));
 	}
 
-/**
+
+	/**
+	 * Calculated values should fire notifications. Changing attributes on an event
+	 * will fire notifications that are detected in the AnimalEventHistoryAdapter
+	 * that was added through the EventHistoryAdapterFactory which was added
+	 * in the allEvents method
+	 * @param n Notification forwarded from the AnimalEventHistoryAdapter 
+	 * 
+	 * @see #allEvents()
+	 * @see EventHistoryAdapterFactory
+	 * @see AnimalEventHistoryAdapter
+	 * @see #getWeight()
+	 * @see #getWeightGainPerDay()
+	 * @see #getLastEventDateTime()
+	 */
+	  void forward(Notification n){
+		  if(n.getNotifier() instanceof Event){
+			  switch (n.getFeatureID(Event.class)) {
+			  case TrackerPackage.EVENT__DATE_TIME:
+				  mostCurrentEvent = (Event) n.getNotifier();
+				  setMostCurrentWeighIn();
+				 
+				  eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__LAST_EVENT_DATE_TIME, n.getOldValue(), n.getNewValue())); 
+				  break;
+			  case TrackerPackage.WEIGH_IN__WEIGHT_GAIN_PER_DAY:
+				  eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__WEIGHT_GAIN_PER_DAY,  null, getWeightGainPerDay())); 
+				  break;
+			  case TrackerPackage.WEIGH_IN__WEIGHT:
+				  eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__WEIGHT, n.getOldValue(), n.getNewValue())); 
+				  break;
+			  default:
+
+				  break;
+			  }
+		}else if (n.getNotifier() instanceof Tag){
+			switch (n.getFeatureID(Tag.class)) {
+			  case TrackerPackage.TAG__EVENTS:
+				  //LastDateTime
+				  Date oldLastDateTime = mostCurrentEvent!=null?mostCurrentEvent.getDateTime():null;
+				  mostCurrentEvent =  findMostCurrentEvent();
+				  //Weight
+				  Integer oldWeight = mostCurrentWeighIn==null ? null: mostCurrentWeighIn.getWeight();
+				  Double oldWeightGain = mostCurrentWeighIn==null ? null: mostCurrentWeighIn.getWeightGainPerDay();
+//				  mostCurrentWeighIn = mostCurrentEvent instanceof WeighIn? 
+//						  (WeighIn)mostCurrentEvent: lastWeighIn();
+						  setMostCurrentWeighIn();
+
+				  eNotify(new ENotificationImpl(this, Notification.SET, 
+						  TrackerPackage.ANIMAL__LAST_EVENT_DATE_TIME, oldLastDateTime, mostCurrentEvent.getDateTime())); 
+				  eNotify(new ENotificationImpl(this, Notification.SET, 
+						  TrackerPackage.ANIMAL__WEIGHT, 
+						  oldWeight, 
+						  mostCurrentWeighIn==null ? null: mostCurrentWeighIn.getWeight()));  
+				  eNotify(new ENotificationImpl(this, Notification.SET, 
+						  TrackerPackage.ANIMAL__WEIGHT_GAIN_PER_DAY, 
+						  oldWeightGain, 
+						  mostCurrentWeighIn==null ? null: mostCurrentWeighIn.getWeightGainPerDay())); 
+				  
+				  break;
+			  default:
+				  break;
+			  }
+		}
+	  }
+
+	//TODO refactor this into lastWeighIn
+	private void setMostCurrentWeighIn() {
+		if(mostCurrentEvent instanceof WeighIn){
+			  if( ((WeighIn)mostCurrentEvent).getWeight()!=null){
+				  mostCurrentWeighIn = (WeighIn)mostCurrentEvent;
+				  return;
+			  }
+		}
+		mostCurrentWeighIn =	lastWeighIn();
+	}
+	
+	 /**
+	  *  MostCurrentEvent of this animal is
+	  *  used contains the active tag and the lastEventDateTime. It is calculated on initial
+	  *  startup and on notification processing.
+	  *  @see #getLastEventDateTime()
+	  *  @see #activeTag()
+	  */
+	 private Event mostCurrentEvent = null;
+	 
+ /**
 	 * <!-- begin-user-doc -->
+	 * Refactored to eliminate the dynamic processing of the event Tree.
+	 * 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public Date getLastEventDateTime() {
-		List<Event> winners = new LinkedList<Event>();
-		winners.addAll(eventHistory());
-		if(winners.isEmpty()){
-			return null;
+		if(mostCurrentEvent == null){
+			mostCurrentEvent =  findMostCurrentEvent();
 		}
-		// Sort events according to date
-		Collections.sort(winners, new Comparator<Event>() {
-		    public int compare(Event event1, Event event2) {
-		        return event2.getDateTime().compareTo(event1.getDateTime());
-		    }});
-		return winners.get(0).getDateTime();
+		return mostCurrentEvent.getDateTime();
 	}
+
+	
+//	private Date calculateLastDateTime() {
+//		List<Event> winners = new LinkedList<Event>(eventHistory());
+//		if(winners.isEmpty()){
+//			return null;
+//		}
+//		// Sort events according to date
+//		Collections.sort(winners, new Comparator<Event>() {
+//			public int compare(Event event1, Event event2) {
+//				return event2.getDateTime().compareTo(event1.getDateTime());
+//			}});
+//		return winners.get(0).getDateTime();
+//	}
 
 /**
 	 * <!-- begin-user-doc -->
@@ -620,14 +714,19 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.ANIMAL__SIRE, oldSire, sire));
 	}
 
-/**
+	
+	private WeighIn mostCurrentWeighIn = null;
+	
+   /**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public Integer getWeight() {
-		WeighIn lastWeighIn = lastWeighIn();
-		return lastWeighIn==null ? null: lastWeighIn.getWeight();
+		if(mostCurrentWeighIn == null){
+			mostCurrentWeighIn = lastWeighIn();
+		}
+		return mostCurrentWeighIn==null ? null: mostCurrentWeighIn.getWeight();
 	}
 	
 	 /**
@@ -636,8 +735,10 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @generated NOT
 	 */
 	public Double getWeightGainPerDay() {
-		WeighIn lastWeighIn = lastWeighIn();
-		return lastWeighIn==null?null: lastWeighIn.getWeightGainPerDay();
+		if(mostCurrentWeighIn == null){
+			mostCurrentWeighIn = lastWeighIn();
+		}
+		return mostCurrentWeighIn==null?null: mostCurrentWeighIn.getWeightGainPerDay();
 	}
 
    /**
@@ -702,21 +803,6 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 		return ageInDays;
 	}
 
-	//	private WeighIn getLastWeighIn(){
-//		WeighIn lastWeighIn = null;
-//		if(!eventHistory().isEmpty()){
-//			CollectionFilter<Event> weighInsProducer = new CollectionFilter<Event>();
-//			weighInsProducer.addFilter(TrackerUtils.weighInFilterCriteria);
-//			List<Event> weighIns = new ArrayList<Event>(weighInsProducer.filterCopy(eventHistory()));
-//			if(weighIns.isEmpty()){
-//				return null;
-//			}
-//			Collections.sort(weighIns, TrackerUtils.DATE_COMPARATOR);
-//			lastWeighIn = (WeighIn) weighIns.get(weighIns.size()-1);
-//		}
-//		return lastWeighIn;
-//	}
-	
 	
 
 	/**
@@ -758,25 +844,34 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 		}
 	}
 
-/**
+   /**
 	 * <!-- begin-user-doc -->
 	 * Tag currently identifying the Animal is the tag with the most current event timestamp.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public Tag activeTag() {
+		if(mostCurrentEvent ==null){
+			 mostCurrentEvent = findMostCurrentEvent();
+		}
+	    return mostCurrentEvent!=null? mostCurrentEvent.getTag():null;
+	}
+
+	/**
+	 * 
+	 * @return the most current event associated with this animal
+	 */
+	private Event findMostCurrentEvent() {
 		if(eventHistory().isEmpty()){
 			return null;
 		}
-		List<Event> winners = new LinkedList<Event>();
-		winners.addAll(eventHistory());
-		
+		List<Event> eventsByDate = new LinkedList<Event>(eventHistory());
 		// Sort events according to date
-		Collections.sort(winners, new Comparator<Event>() {
-		    public int compare(Event event1, Event event2) {
-		        return event2.getDateTime().compareTo(event1.getDateTime());
-		    }});
-		return winners.get(0).getTag();
+		Collections.sort(eventsByDate, new Comparator<Event>() {
+			public int compare(Event event1, Event event2) {
+				return event2.getDateTime().compareTo(event1.getDateTime());
+			}});
+		return eventsByDate.get(0);
 	}
 
 	/**
@@ -790,6 +885,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * TODO optimize this to watch for weighIn events from the notifications.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
