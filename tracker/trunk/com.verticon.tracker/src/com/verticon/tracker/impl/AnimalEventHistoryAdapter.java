@@ -125,6 +125,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 							.getSimpleName(), ((Tag) n.getNotifier()).getId());
 					forwardAdd(event);
 				}
+				
 				break;
 
 			case Notification.ADD_MANY:
@@ -162,6 +163,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 				break;
 			}
 
+			((AnimalImpl)animal).forward(n);//To send notifications when events are added to tags
 			break;
 
 		default:
@@ -176,10 +178,16 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 	 * @param n
 	 */
 	private void handleEventNotification(Notification n) {
+       int featureId = n.getFeatureID(Event.class);
+		switch (featureId) {
+		
+		case TrackerPackage.EVENT__DATE_TIME:
+		case TrackerPackage.WEIGH_IN__WEIGHT:
+		case TrackerPackage.WEIGH_IN__WEIGHT_GAIN_PER_DAY:
+			((AnimalImpl)animal).forward(n);
+			break;
 
-		switch (n.getFeatureID(Event.class)) {
-
-		case -1:
+		case Notification.NO_FEATURE_ID:
 			switch (n.getEventType()) {
 			case Notification.REMOVING_ADAPTER:
 				Event eventAffected = (Event) n.getNotifier();
@@ -203,7 +211,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 			}
 
 		default:
-			// logger.error(bundleMarker,"EventHandler: Did not handle Event {}", n);
+			logger.error(bundleMarker,"EventHandler: Did not handle Event {}", n);
 			break;
 		}
 
