@@ -138,7 +138,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 				break;
 			case Notification.REMOVE_MANY:
 				EList<Event> eventsToRemove = (EList<Event>) n.getOldValue();
-				if (events.remove(eventsToRemove)) {
+				if (events.removeAll(eventsToRemove)) {
 					logger.debug(bundleMarker,"Tag {} removed {} events", ((Tag) n
 							.getNotifier()).getId(), eventsToRemove.size());
 					forwardRemove(eventsToRemove);
@@ -178,9 +178,9 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 	 * @param n
 	 */
 	private void handleEventNotification(Notification n) {
-       int featureId = n.getFeatureID(Event.class);
+		int featureId = n.getFeatureID(Event.class);
 		switch (featureId) {
-		
+
 		case TrackerPackage.EVENT__DATE_TIME:
 		case TrackerPackage.WEIGH_IN__WEIGHT:
 		case TrackerPackage.WEIGH_IN__WEIGHT_GAIN_PER_DAY:
@@ -201,18 +201,18 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 							eventAffected.getClass().getSimpleName());
 				}
 				break;
-			// case TrackerPackage.EVENT__COMMENTS:
-			// case TrackerPackage.EVENT__TAG:
-			// logger.warn(bundleMarker,"EventHandler: Ignored Event feature {}",
-			// n.getFeature());
-			// break;
+				// case TrackerPackage.EVENT__COMMENTS:
+				// case TrackerPackage.EVENT__TAG:
+				// logger.warn(bundleMarker,"EventHandler: Ignored Event feature {}",
+				// n.getFeature());
+				// break;
 			default:
 				break;
 			}
 
 		default:
 			logger.error(bundleMarker,"EventHandler: Did not handle Event {}", n);
-			break;
+		break;
 		}
 
 	}
@@ -260,7 +260,7 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 							.trace(bundleMarker,
 									"{} tag removed at least one event from a list of {} events",
 									tag.getId(), tag.getEvents().size());
-					forwardAdd(tag.getEvents());
+					forwardRemove(tag.getEvents());
 				}
 
 				break;
