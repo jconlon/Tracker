@@ -5,8 +5,6 @@ package com.verticon.tracker.editor.presentation;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;

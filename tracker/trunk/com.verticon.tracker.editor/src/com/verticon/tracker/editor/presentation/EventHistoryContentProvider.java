@@ -45,7 +45,6 @@ public class EventHistoryContentProvider extends AdapterFactoryContentProvider i
 		super(adapterFactory);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Object[] getElements(Object object) {
 		return ((Premises) object).eventHistory().toArray();
@@ -122,7 +121,6 @@ public class EventHistoryContentProvider extends AdapterFactoryContentProvider i
 	 * 
 	 * @param n
 	 */
-	@SuppressWarnings("unchecked")
 	private void handleEventHistoryNotification(Notification n) {
 		switch (n.getEventType()) {
 
