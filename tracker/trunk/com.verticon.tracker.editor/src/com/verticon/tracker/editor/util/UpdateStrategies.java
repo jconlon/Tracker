@@ -156,15 +156,14 @@ public class UpdateStrategies {
 			return new MyPinValidator().validate(value);
 		}
 
+		//If the value is a string of 7 spaces unset the value to a null.
 		@Override
 		protected IStatus doSet(IObservableValue observableValue, Object value) {
-			IStatus result = super.doSet(observableValue, value);
-			if (result.isOK()) {
-				Object changed = observableValue;
-				if (changed instanceof IObserving) {
-					changed = ((IObserving) changed).getObserved();
-				}
-				
+			IStatus result = null;
+			if(value instanceof String && ((String)value).trim().length()<1){
+			    result = super.doSet(observableValue, null);
+			}else{
+				result = super.doSet(observableValue, value);
 			}
 			return result;
 		}
@@ -176,6 +175,9 @@ public class UpdateStrategies {
 			if(initialValue.length()!=7){
 				return ValidationStatus.error("Premises Id must contain 7 digits: " + initialValue+
 					", to delete enter 7 spaces.");
+			}
+			if(initialValue.trim().length()<1){
+				return ValidationStatus.ok();
 			}
 			try {
 				if(CheckISO7064Mod37_36.verify(initialValue)){
