@@ -661,7 +661,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		manager.add(showDetailAction);
 	}
 
-	private class ViewModel {
+	private static class ViewModel {
 		// model
 		private final Status status = new Status();
 
