@@ -104,7 +104,7 @@ public class TrackerAnimalModelWizard extends TrackerModelWizard {
 	 * Creates the new Animal template model file.
 	 * 
 	 */
-	public class MyNewFileCreationPage extends WizardNewFileCreationPage {
+	private static class MyNewFileCreationPage extends WizardNewFileCreationPage {
 		
 		public MyNewFileCreationPage(String pageId,
 				IStructuredSelection selection) {
