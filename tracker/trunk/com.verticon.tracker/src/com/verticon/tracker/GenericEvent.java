@@ -6,7 +6,7 @@
 package com.verticon.tracker;
 
 import java.util.Map;
-import java.util.Map.Entry;
+
 import org.eclipse.emf.common.util.EMap;
 
 /**

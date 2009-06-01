@@ -6,7 +6,6 @@
  */
 package com.verticon.tracker.util;
 
-import com.verticon.tracker.*;
 import java.util.List;
 import java.util.Map;
 
