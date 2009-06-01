@@ -17,7 +17,6 @@ import org.eclipse.swt.widgets.Text;
 
 public class SingleValueEAttributeControlBuilder implements ControlBuilder {
 
-	private Text text;
 
 	public void createControl(Object object, Composite parent,
 			IItemPropertyDescriptor itemPropertyDescriptor,

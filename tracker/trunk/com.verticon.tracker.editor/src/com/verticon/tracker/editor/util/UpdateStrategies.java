@@ -2,7 +2,6 @@ package com.verticon.tracker.editor.util;
 
 
 import org.eclipse.core.databinding.UpdateValueStrategy;
-import org.eclipse.core.databinding.observable.IObserving;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
