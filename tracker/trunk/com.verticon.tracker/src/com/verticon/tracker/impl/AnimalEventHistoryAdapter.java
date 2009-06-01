@@ -173,7 +173,10 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 	}
 
 	/**
-	 * Notifications from Event
+	 * Notifications from Event.
+	 * 
+	 * Catch and forward DateTime changes on all events, Weight and gain changes on WeighIn events.  
+	 * 
 	 * 
 	 * @param n
 	 */
@@ -209,7 +212,10 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 			default:
 				break;
 			}
-
+		case TrackerPackage.EVENT__TAG :
+			//When an event is deleted the Event will also set its tag to null first
+			//Ignore this
+			break;
 		default:
 			logger.error(bundleMarker,"EventHandler: Did not handle Event {}", n);
 		break;
@@ -326,7 +332,5 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 		forward(new NotificationImpl(Notification.REMOVE_MANY, eventsToRemove,
 				null));
 	}
-
-	
 
 }

@@ -124,19 +124,46 @@ public class CalendarDateDuration {
 	@Override
 	public String toString() {
 		NumberFormat nf = NumberFormat.getInstance();
-		return type == Type.FUTURE ? nf.format(totalDays)+" days old" : nf.format(totalDays)+" until birth";
+		StringBuilder sb = null;
+		if(type == Type.FUTURE){
+			sb = new StringBuilder(nf.format(totalDays));
+			sb.append(" days old");
+		}else{
+			sb = new StringBuilder(nf.format(totalDays));
+			sb.append(" until birth");
+		}
+		return sb.toString();
 	}
 
 	public String toRoundedString() {
-			if(getTotalYears()!=0){
-				String yearsString = Integer.toString(getTotalYears());
-				return yearsString.length()==1?"Y0"+yearsString:'Y'+yearsString;
+		    StringBuilder sb = new StringBuilder();
+		    int years = getTotalYears();
+			if(years!=0){
+				if(years<10){
+					sb.append("Y0");
+				}else{
+					sb.append('Y');
+				}
+				sb.append(years);
+				return sb.toString();
+				
 			}else if(totalMonths!=0){
-				String monthsString = Integer.toString(totalMonths);
-				return monthsString.length()==1?"M0"+monthsString:'M'+monthsString;
+				if (totalMonths<10){
+					sb.append("M0");
+				}else{
+					sb.append('M');
+				}
+				sb.append(totalMonths);
+				return sb.toString();
 			}
-			String daysString = Integer.toString(totalDays);
-			return daysString.length()==1?"D0"+daysString:'D'+daysString;
+			if(totalDays<10){
+				sb.append("D0");
+			}else{
+				sb.append('D');
+			}
+
+			sb.append(totalDays);
+			return sb.toString();
 		}
 
 	@Override
