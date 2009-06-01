@@ -40,7 +40,7 @@ public class GenericViewSorter extends ViewerSorter
 
    // Simple data structure for grouping
    // sort information by column.
-   private class SortInfo
+   private static class SortInfo
    {
       int columnIndex;
       Comparator<Object> comparator;

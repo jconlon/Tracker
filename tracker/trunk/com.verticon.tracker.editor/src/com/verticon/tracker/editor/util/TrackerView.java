@@ -670,7 +670,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		}
 	}
 
-	private class Status extends AbstractModelObject {
+	private static class Status extends AbstractModelObject {
 		private String status = "";
 
 		public String getStatus() {
