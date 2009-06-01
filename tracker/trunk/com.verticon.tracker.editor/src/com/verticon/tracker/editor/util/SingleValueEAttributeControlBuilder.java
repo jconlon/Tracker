@@ -31,9 +31,6 @@ public class SingleValueEAttributeControlBuilder implements ControlBuilder {
 			IItemPropertyDescriptor itemPropertyDescriptor,
 			AdapterFactory adapterFactory) {
 
-		if (text != null) {
-			text.dispose();
-		}
 
 		Text text = new Text(parent, SWT.BORDER | SWT.None);
 		text.setEnabled(itemPropertyDescriptor.canSetProperty(object));
