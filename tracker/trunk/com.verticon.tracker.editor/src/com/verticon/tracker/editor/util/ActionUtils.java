@@ -15,11 +15,9 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -120,7 +118,9 @@ public class ActionUtils {
 		} catch (FileNotFoundException e) {
 			ex = e;
 		} finally {
-			sc.close();
+			if(sc !=null){
+				sc.close();
+			}
 			if (ex != null) {
 				throw ex;
 			}

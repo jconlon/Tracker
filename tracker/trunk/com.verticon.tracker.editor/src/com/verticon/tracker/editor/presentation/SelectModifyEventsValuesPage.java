@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.wizard.WizardPage;
@@ -157,12 +156,6 @@ public class SelectModifyEventsValuesPage extends WizardPage {
 	}
 
 	
-	/**
-	 * Update the current page complete state based on the field content.
-	 */
-	private void updatePageComplete() {
-		setPageComplete(true);
-	}
 
 	public Map<EAttribute, Object> getChangesToMakeOnSelectedEvents() {
 		Map<EAttribute, Object> result = new HashMap<EAttribute, Object>();

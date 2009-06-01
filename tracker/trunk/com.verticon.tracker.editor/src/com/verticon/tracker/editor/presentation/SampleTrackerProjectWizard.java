@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Random;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -454,7 +455,8 @@ public class SampleTrackerProjectWizard extends BasicNewResourceWizard {
 	}
 
 	static int getWeigh(int mean){
-		return (int) (Math.random() * 100) + mean; 
+		Random r = new Random();
+		return r.nextInt(100) + mean;
 	}
 	
 	private final static void createTestEvents(Premises premises, TrackerFactory trackerFactory){
