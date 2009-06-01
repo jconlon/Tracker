@@ -827,39 +827,6 @@ public class TrackerEditor
 		return editingDomain;
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public class ReverseAdapterFactoryContentProvider extends AdapterFactoryContentProvider {
-		public ReverseAdapterFactoryContentProvider(AdapterFactory adapterFactory) {
-			super(adapterFactory);
-		}
-
-		@Override
-		public Object [] getElements(Object object) {
-			Object parent = super.getParent(object);
-			return (parent == null ? Collections.EMPTY_SET : Collections.singleton(parent)).toArray();
-		}
-
-		@Override
-		public Object [] getChildren(Object object) {
-			Object parent = super.getParent(object);
-			return (parent == null ? Collections.EMPTY_SET : Collections.singleton(parent)).toArray();
-		}
-
-		@Override
-		public boolean hasChildren(Object object) {
-			Object parent = super.getParent(object);
-			return parent != null;
-		}
-
-		@Override
-		public Object getParent(Object object) {
-			return null;
-		}
-	}
 
 	/**
 	 * <!-- begin-user-doc -->
