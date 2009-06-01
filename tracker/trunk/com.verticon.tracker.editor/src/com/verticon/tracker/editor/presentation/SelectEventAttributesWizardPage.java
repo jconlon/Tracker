@@ -148,7 +148,7 @@ public class SelectEventAttributesWizardPage extends WizardPage {
 		}
 	}
 
-	class EventAttributesContentProvider implements IStructuredContentProvider {
+	private static class EventAttributesContentProvider implements IStructuredContentProvider {
 
 		public void dispose() {
 
@@ -164,7 +164,7 @@ public class SelectEventAttributesWizardPage extends WizardPage {
 
 	}
 	
-	class EventAttributesLabelProvider implements ITableLabelProvider {
+	private static class EventAttributesLabelProvider implements ITableLabelProvider {
 
 		public Image getImage(Object element) {
 			return null;

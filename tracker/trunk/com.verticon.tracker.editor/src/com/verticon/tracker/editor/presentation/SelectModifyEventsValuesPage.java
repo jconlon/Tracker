@@ -81,7 +81,6 @@ public class SelectModifyEventsValuesPage extends WizardPage {
 
 		createComments(container);
 
-		initContents();
 	}
 
 	/**
@@ -160,26 +159,7 @@ public class SelectModifyEventsValuesPage extends WizardPage {
 
 	}
 
-	/**
-	 * Called by <code>createControl</code> to initialize the receiver's
-	 * content based upon the cached selection provided by the wizard.
-	 */
-	private void initContents() {
-		if (initialSourcePath == null)
-			return;
-		IPath rootLoc = ResourcesPlugin.getWorkspace().getRoot().getLocation();
-		IPath path = initialSourcePath;
-		if (rootLoc.isPrefixOf(path))
-			path = path.setDevice(null).removeFirstSegments(
-					rootLoc.segmentCount());
-		commentsField.setText(path.toString());
-		destinationFileField.setText(path.removeLastSegments(1).append(
-				"plugin.properties").toString());
-		updatePageComplete();
-		setMessage(null);
-		setErrorMessage(null);
-	}
-
+	
 	/**
 	 * Update the current page complete state based on the field content.
 	 */
