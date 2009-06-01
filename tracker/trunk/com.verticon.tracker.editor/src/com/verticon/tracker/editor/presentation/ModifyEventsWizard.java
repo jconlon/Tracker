@@ -5,6 +5,8 @@ package com.verticon.tracker.editor.presentation;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
@@ -96,17 +98,17 @@ public class ModifyEventsWizard extends Wizard {
 		CompoundCommand compoundCommand = new CompoundCommand();
 		Command command = null;
 		for (Event event : eventsToModify) {
-			for(EAttribute attribute :changesToMake.keySet()){
+			for(Map.Entry<EAttribute, Object> entry :changesToMake.entrySet()){
 				command = SetCommand.create(
 						editingDomain, //Domain
 						 event, //Owner
-						 attribute, //Feature
-						 changesToMake.get(attribute)//value
+						 entry.getKey(), //Feature
+						 entry.getValue()//value
 				);
 				if(command !=null){
 					compoundCommand.append(command);
 				}
-			}		    
+			}		
 		}
 		return compoundCommand;
 	}
