@@ -324,7 +324,10 @@ public class SwineImpl extends AnimalImpl implements Swine {
 	}
 	
 	private String formatAlternativeID(int rightNotch, int leftNotch){
-		return MessageFormat.format("{0}-{1}", new Object[]{rightNotch,leftNotch});
+		StringBuilder sb = new StringBuilder(rightNotch);
+		sb.append('-');
+		sb.append(leftNotch);
+		return sb.toString();
 	}
 	
 
