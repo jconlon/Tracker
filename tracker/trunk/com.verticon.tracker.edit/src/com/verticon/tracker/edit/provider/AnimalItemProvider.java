@@ -36,14 +36,13 @@ import com.verticon.tracker.TrackerPackage;
 /**
  * This is the item provider adapter for a {@link com.verticon.tracker.Animal} object.
  * <!-- begin-user-doc -->
- * Adds support for Tables
- * @implements ITableItemLabelProvider
+ * Now using a separate plugin for tables so this class no longer supports Tables via an ITableItemLabelProvider
  * <!-- end-user-doc -->
  * @generated
  */
 public class AnimalItemProvider
 	extends ItemProviderAdapter
-	implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider {
+	implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -690,72 +689,6 @@ public class AnimalItemProvider
 	public ResourceLocator getResourceLocator() {
 		return TrackerReportEditPlugin.INSTANCE;
 	}
-
-	/**
-	 * Adds table support
-	 * 
-	 * @deprecated use the databinding framework in the tracker.views project
-	 */
-	@Deprecated
-	@Override
-	public String getColumnText(Object object, int columnIndex) // 14.2.2
-	  {
-	    Animal animal = (Animal)object;
-	    switch (columnIndex){
-	        //FIXME 184712 Column 0 must present the first object as getText() for both table and tree
-	    	case 0: return getText( object); 
-	    	case 1: return ((Animal)object).getId(); 
-	    	case 2: return getString("_UI_"+getResourceName(object)+"_type") ;//Animal 
-	    	case 3: return animal.getSpeciesCode();
-	    	case 4: return animal.getSexCode();
-	    	case 5: return animal.getBreed();
-	    	case 6: 
-	    		if(animal.getBirthDate()!=null){
-	    			DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
-	    			return df.format(animal.getBirthDate());
-	    		}
-	    		return "";
-			// case 7:
-			// if(animal.getAge()!=null){
-			// return animal.getAge().toString();
-			// }
-			// return "";
-	    	case 7: 
-	    		if(animal.getLastEventDateTime()!=null){
-	    			return animal.getLastEventDateTime().toString();
-	    		}
-	    		return "";
-	    
-	    	case 8:
-	    		return animal.getWeight()==null?"":animal.getWeight().toString();
-
-	    	case 9:
-	    		return animal.getWeightGainPerDay()==null?"":animal.getWeightGainPerDay().toString();
-	    		
-	    	case 10:
-	    		return animal.getComments();
-	    	default :
-	    		return "unknown " + columnIndex;
-	    }
-	  }
-
-
-	
-	
-
-	/**
-	 * Adds table support
-	 */
-	@Override
-	public Object getColumnImage(Object object, int columnIndex) // 14.2.2
-	  {
-		switch (columnIndex){
-    	case 0: return getImage(object);
-    	default :
-    		return null ;
-		}
-	    
-	  }
 
 
 }
