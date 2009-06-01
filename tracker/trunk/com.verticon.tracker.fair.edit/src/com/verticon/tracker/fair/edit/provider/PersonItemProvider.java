@@ -30,15 +30,14 @@ import com.verticon.tracker.fair.Person;
 /**
  * This is the item provider adapter for a {@link com.verticon.tracker.fair.Person} object.
  * <!-- begin-user-doc -->
- * Adds support for Tables
- * @implements ITableItemLabelProvider
+ *  Now using a separate plugin for tables so this class no longer supports Tables via an ITableItemLabelProvider
  * <!-- end-user-doc -->
  * @generated
  */
 public class PersonItemProvider
 	extends ItemProviderAdapter
 	implements	
-		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider {
+		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -462,51 +461,5 @@ public class PersonItemProvider
 		return FairEditPlugin.INSTANCE;
 	}
 
-	@Override
-	public Object getColumnImage(Object object, int columnIndex) {
-		switch (columnIndex){
-        	case 0: return getImage(object);
-    	default :
-    		return null;
-		}
-	}
-
-	/**
-	 * Adds table support
-	 * Name, First Name, Last Name, Phone Number, Street, City, State, Zip Code
-	 * 
-	 */
-	@Override
-	public String getColumnText(Object object, int columnIndex) 
-	{
-		Person person = (Person)object;
-		switch (columnIndex){
-		case 0: return getText(object); 
-		case 1: return person.getFirstName(); 
-		case 2: return person.getLastName(); 
-		case 3:
-			return Integer.toString(person.getExhibitorNumber());
-		case 4:
-			return Integer.toString(person.getSalesOrder());
-		case 5:
-			return person.getPhone();
-		case 6:
-			return person.getStreet();
-		case 7:
-			return person.getCity();
-		case 8:
-			return person.getState();
-		case 9:
-			return person.getZipCode();
-		case 10:
-			return person.getEmail();
-		case 11:
-			return person.getPin();
-		case 12:
-			return person.getComments();
-		default :
-			return "unknown " + columnIndex;
-		}
-	}
-
+	
 }
