@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -34,8 +33,6 @@ import com.verticon.tracker.TrackerPackage;
 public class SelectModifyEventsValuesPage extends WizardPage {
 
 	private Text commentsField;
-	private Text destinationFileField;
-	private IPath initialSourcePath;
 	private Collection<EAttribute> selectedAttributes;
 	private Composite container;
 	private Button correctionButton;
