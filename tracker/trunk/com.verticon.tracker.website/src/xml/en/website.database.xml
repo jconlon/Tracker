@@ -66,14 +66,14 @@
          <ttl>Documentation</ttl>
          <xreftext>Documentation</xreftext>
          <div element="section" href="#issues" number="" targetptr="issues">
-            <ttl>Issues Tracking Report</ttl>
-            <xreftext>the section called “Issues Tracking Report”</xreftext>
+            <ttl>Tracker Wiki</ttl>
+            <xreftext>the section called “Tracker Wiki”</xreftext>
          </div>
          <div element="section" href="#userGuide" number="" targetptr="userGuide">
             <ttl>User Guide</ttl>
             <xreftext>the section called “User Guide”</xreftext>
          </div>
-         <div element="section" href="#d8e46" number="">
+         <div element="section" href="#d8e38" number="">
             <ttl>Other Documentation</ttl>
             <xreftext>the section called “Other Documentation”</xreftext>
             <obj element="table" href="#tracker.docs.models.table" number="1">
