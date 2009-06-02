@@ -35,13 +35,14 @@ import com.verticon.tracker.TrackerPackage;
 /**
  * This is the item provider adapter for a {@link com.verticon.tracker.Event} object.
  * <!-- begin-user-doc -->
- * Now using a separate plugin for tables so this class no longer supports Tables via an ITableItemLabelProvider
+ * Adds support for Tables
+ * @implements ITableItemLabelProvider
  * <!-- end-user-doc -->
  * @generated
  */
 public class EventItemProvider
 	extends ItemProviderAdapter
-	implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+	implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -49,7 +50,7 @@ public class EventItemProvider
 	 */
 	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
-	private final DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss z");
+	 final static DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss z");
 	
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -307,5 +308,81 @@ public class EventItemProvider
 	public ResourceLocator getResourceLocator() {
 		return TrackerReportEditPlugin.INSTANCE;
 	}
+
+	/**
+	 * Adds table support
+	 * 
+	 */
+	@Override
+	public String getColumnText(Object object, int columnIndex) // 14.2.2
+	{
+		Event event = (Event)object;
+		switch (columnIndex){
+		case 0: //Date of Event
+			if(event.getDateTime()!=null){
+				return df.format(event.getDateTime());
+			}
+			return "";
+			
+		case 1: //Event Type
+			String simpleName = event.getClass().getSimpleName();
+			return simpleName.substring(0,simpleName.indexOf("Impl"));
+			
+		case 2: //Animal
+			
+			if(event.getTag()==null || event.getTag().eContainer()==null){
+    			return "";
+    		}
+    		Animal animal = (Animal)event.getTag().eContainer();
+    		
+    		IItemLabelProvider itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(animal, IItemLabelProvider.class);
+    		String numAnimal = itemLabelProvider.getText(animal);
+    		
+    		int space = numAnimal.indexOf(' ');
+    		//Some animals may not have a name with a tag if so just use the numAnimal
+    		if(space == -1){
+    			return numAnimal;
+    		}
+    		String numPart = numAnimal.substring(0, space);
+    		
+    		return numAnimal.substring(space, numAnimal.length())
+					.trim()
+					+ ' '
+					+ numPart;
+    	
+		case 3: //Tag ID Number
+			return event.getTag()!=null?event.getTag().getId():"";
+
+		case 4: //Comments
+			return event.getComments();
+		default :
+			return "unknown " + columnIndex;
+		}
+	}
+
+	/**
+	 * Adds table support
+	 */
+	@Override
+	public Object getColumnImage(Object object, int columnIndex) // 14.2.2
+	  {
+		switch (columnIndex){
+    	case 0: return null;//return getImage(object);
+    	case 1: return getImage(object);
+    	case 2:
+    		Event event = (Event)object;
+    		if(event.getTag()==null || event.getTag().eContainer()==null){
+    			return null;
+    		}
+    		Animal animal = (Animal)event.getTag().eContainer();
+    		
+    		IItemLabelProvider itemLabelProvider = (IItemLabelProvider)adapterFactory.adapt(animal, IItemLabelProvider.class);
+    		return itemLabelProvider.getImage(animal);
+    	
+    	default :
+    		return null;
+		}
+	    
+	  }
 
 }
