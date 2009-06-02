@@ -10,7 +10,7 @@
             </cs:actorProperties>
             <cs:properties>
                 <cs:property key="default.temp.dir" value="${buckminster.home}html"/>
-                <cs:property key="local.dir.to.sync" value="${user.home}/s3"/>
+                <cs:property key="local.dir.to.sync" value="${user.home}/Uploads/s3"/>
                 <cs:property key="user.dir" value="${buckminster.home}"/>
             </cs:properties>
         </cs:public>
