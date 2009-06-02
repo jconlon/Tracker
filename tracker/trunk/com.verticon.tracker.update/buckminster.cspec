@@ -44,9 +44,9 @@
                 <cs:property key="repo.features" value="${buckminster.output}/siterepo/"/>
                 <cs:property key="repo.oda" value="${buckminster.output}/siteodarepo/"/>
             </cs:properties>
-            <cs:products alias="action.output" base="${user.dir}/s3/Tracker/p2/">
-                <cs:private name="features" base="${user.dir}/s3/Tracker/p2/"/>
-                <cs:private name="oda" base="${user.dir}/s3/Tracker/p2/"/>
+            <cs:products alias="action.output" base="${user.dir}/Uploads/s3/Tracker/p2/">
+                <cs:private name="features" base="${user.dir}/Uploads/s3/Tracker/p2/"/>
+                <cs:private name="oda" base="${user.dir}/Uploads/s3/Tracker/p2/"/>
             </cs:products>
         </cs:public>
         <cs:private name="build.p2.oda.site" actor="ant">
@@ -88,14 +88,14 @@ should be in a shared site or have it's own site by then.</cs:documentation>
                 <cs:property key="buildFile" value="make/build.xml"/>
                 <cs:property key="targets" value="clean.generic"/>
             </cs:actorProperties>
-            <cs:products alias="action.output" base="${user.dir}/s3/Tracker/p2/features/"/>
+            <cs:products alias="action.output" base="${user.dir}/Uploads/s3/Tracker/p2/features/"/>
         </cs:private>
         <cs:private name="clean.deployed.oda.repo" actor="ant">
             <cs:actorProperties>
                 <cs:property key="buildFile" value="make/build.xml"/>
                 <cs:property key="targets" value="clean.generic"/>
             </cs:actorProperties>
-            <cs:products alias="action.output" base="${user.dir}/s3/Tracker/p2/oda/"/>
+            <cs:products alias="action.output" base="${user.dir}/Uploads/s3/Tracker/p2/oda/"/>
         </cs:private>
         <cs:private name="clean.p2.oda.site" actor="ant">
             <cs:actorProperties>
