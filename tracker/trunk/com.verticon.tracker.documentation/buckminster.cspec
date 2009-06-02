@@ -27,7 +27,7 @@ or the transient dependencies of the build-pdf action have changed.</cs:document
                 <cs:attribute name="docs"/>
                 <cs:attribute name="java.binary.archives" component="com.verticon.tracker.ant.utilities"/>
             </cs:prerequisites>
-            <cs:products alias="action.output" base="${user.dir}/s3/Tracker/documentation/" fileCount="1" upToDatePolicy="COUNT"/>
+            <cs:products alias="action.output" base="${user.dir}/Uploads/s3/Tracker/documentation/" fileCount="1" upToDatePolicy="COUNT"/>
         </cs:public>
         <cs:private name="build-pdf" actor="ant">
             <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Merges all docbooks from the various doc plugins into a common pdf 
