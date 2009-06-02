@@ -344,11 +344,11 @@ public class EventItemProvider
     			return numAnimal;
     		}
     		String numPart = numAnimal.substring(0, space);
-    		
-    		return numAnimal.substring(space, numAnimal.length())
-					.trim()
-					+ ' '
-					+ numPart;
+    		StringBuilder sb = new StringBuilder(
+    				numAnimal.substring(space, numAnimal.length()).trim());
+    				sb.append(' ');
+    				sb.append(numPart);
+    		return sb.toString();
     	
 		case 3: //Tag ID Number
 			return event.getTag()!=null?event.getTag().getId():"";
@@ -356,7 +356,9 @@ public class EventItemProvider
 		case 4: //Comments
 			return event.getComments();
 		default :
-			return "unknown " + columnIndex;
+			StringBuilder sb2 = new StringBuilder("unknown ");
+			sb2.append(columnIndex);
+			return sb2.toString();
 		}
 	}
 
