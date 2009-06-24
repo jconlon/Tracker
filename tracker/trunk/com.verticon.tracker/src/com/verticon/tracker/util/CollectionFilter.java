@@ -14,7 +14,7 @@ import java.util.List;
  * @param <E>
  */
 public class CollectionFilter<E> {
-	List <FilterCriteria<E>> filters = new ArrayList<FilterCriteria<E>>();
+	private List <FilterCriteria<E>> filters = new ArrayList<FilterCriteria<E>>();
 	
 	/**
 	 * 

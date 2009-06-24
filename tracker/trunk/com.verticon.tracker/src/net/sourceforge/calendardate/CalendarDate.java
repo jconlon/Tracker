@@ -207,7 +207,7 @@ public final class CalendarDate implements Comparable<CalendarDate>, Serializabl
 	 * Returns true if the given instant in time is before EARLIEST or after
 	 * LATEST in the given timezone.
 	 */
-	public static boolean isOutsideRange(TimeZone tzone, Date instantInTime) {
+	protected static boolean isOutsideRange(TimeZone tzone, Date instantInTime) {
 		GregorianCalendar cal = new GregorianCalendar(tzone);
 		cal.setTime(instantInTime);
 		return yearOutOfRange(cal.get(Calendar.YEAR));
@@ -373,7 +373,7 @@ public final class CalendarDate implements Comparable<CalendarDate>, Serializabl
 	 * @param year
 	 * @return
 	 */
-	static int daysToYear(int year) {
+	private static int daysToYear(int year) {
 		return (365 * year) + numLeapsToYear(year);
 	}
 
@@ -384,7 +384,7 @@ public final class CalendarDate implements Comparable<CalendarDate>, Serializabl
 	 * @param year
 	 * @return The number of leap years
 	 */
-	static int numLeapsToYear(int year) {
+	private static int numLeapsToYear(int year) {
 		int num4y = (year - 1) / 4;
 		int num100y = (year - 1) / 100;
 		int num400y = (year - 1) / 400;
@@ -399,7 +399,7 @@ public final class CalendarDate implements Comparable<CalendarDate>, Serializabl
 	 *            The year to consider
 	 * @return True if <code>year</code> is a leap year
 	 */
-	public static boolean isLeapYear(int year) {
+	private static boolean isLeapYear(int year) {
 		return (year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0));
 	}
 
@@ -516,7 +516,7 @@ public final class CalendarDate implements Comparable<CalendarDate>, Serializabl
 	 *             if the hour, min or sec parameters are outside the correct
 	 *             range
 	 */
-	public Date toDate(TimeZone timezone, int hour, int min, int sec) {
+	private Date toDate(TimeZone timezone, int hour, int min, int sec) {
 		checkHourMinSec(hour, min, sec);
 		GregorianCalendar cal = new GregorianCalendar(timezone);
 		cal.clear();
