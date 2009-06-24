@@ -23,10 +23,10 @@ public class CalendarDateDuration {
 	private final Type type;
 	
 	
-	public enum Type{FUTURE,PAST}
+	enum Type{FUTURE,PAST}
 	
 	
-	public CalendarDateDuration(CalendarDate date1, CalendarDate date2){
+	protected CalendarDateDuration(CalendarDate date1, CalendarDate date2){
 		CalendarDate startDate;
 		CalendarDate finishDate;
 		
