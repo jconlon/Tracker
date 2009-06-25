@@ -8,7 +8,7 @@ Bundle-ClassPath: logback-classic-0.9.11.jar,
  slf4j-api-1.5.5.jar,
  log4j-over-slf4j-1.5.5.jar
 Bundle-Vendor: Verticon, Inc.
-Import-Package: javax.jms;version="1.1.0",
+Import-Package: javax.jms;version="1.1.0";resolution:=optional,
  javax.mail;version="[1.4.0,2.0.0)";resolution:=optional,
  javax.mail.internet;version="[1.4.0,2.0.0)";resolution:=optional,
  javax.management,
