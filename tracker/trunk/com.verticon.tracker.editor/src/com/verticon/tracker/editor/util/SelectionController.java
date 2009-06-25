@@ -1,6 +1,7 @@
 package com.verticon.tracker.editor.util;
 
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -403,7 +404,7 @@ public class SelectionController implements ISelectionController {
 	public void sendSelectionToChannel(ISelection selection,
 			String source) {
 //		logger.debug(bundleMarker,"Sending osgi event to Animals View Topic from {}",source);
-		Hashtable<String, Object> table = new Hashtable<String, Object>();
+		Map<String, Object> table = new HashMap<String, Object>();
 		// FIXME Task 280 should not send a mutable object as a property
 		table.put(TrackerConstants.EVENT_ADMIN_PROPERTY_SELECTION, selection);
 		table.put(TrackerConstants.EVENT_ADMIN_PROPERTY_SELECTION_SOURCE,

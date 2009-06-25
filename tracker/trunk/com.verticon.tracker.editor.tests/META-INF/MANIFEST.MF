@@ -5,6 +5,6 @@ Bundle-SymbolicName: com.verticon.tracker.editor.tests
 Bundle-Version: 0.1.0
 Bundle-Vendor: Verticon, Inc.
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.junit;bundle-version="3.8.2",
- com.verticon.tracker.editor;bundle-version="0.3.4"
+Require-Bundle: com.verticon.tracker.editor;bundle-version="0.3.4",
+ org.junit4;bundle-version="4.3.1"
 Import-Package: com.verticon.tracker;version="0.1.0"

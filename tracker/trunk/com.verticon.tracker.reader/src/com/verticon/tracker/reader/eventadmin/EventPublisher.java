@@ -2,7 +2,8 @@ package com.verticon.tracker.reader.eventadmin;
 import static com.verticon.tracker.reader.ReaderPlugin.bundleMarker;
 
 import java.io.IOException;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -74,7 +75,7 @@ public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
 		for (Tag tag : templateAnimal.getTags()) {
 			tag.setId(Long.toString(tagId));
 		}
-		Hashtable<String, Object> table = new Hashtable<String, Object>();
+		Map<String, Object> table = new HashMap<String, Object>();
 		// FIXME Ticket 280 should not send a mutable object as a property
 		table.put(TrackerConstants.EVENT_ADMIN_PROPERTY_ANIMAL_TEMPLATE,
 				templateAnimal);
