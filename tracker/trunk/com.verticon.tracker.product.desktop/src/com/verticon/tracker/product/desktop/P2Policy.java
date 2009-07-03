@@ -20,80 +20,12 @@ import org.eclipse.equinox.internal.provisional.p2.ui.policy.Policy;
  * 
  * @since 3.5
  */
+@SuppressWarnings("restriction")
 public class P2Policy extends Policy {
 	public P2Policy() {
-//		//User has no access to manipulate repositories
-//		setRepositoryManipulator(new RepositoryManipulator(){
-//
-//			@Override
-//			public AddRepositoryOperation getAddOperation(URI repoLocation) {
-//				// TODO Auto-generated method stub
-//				return null;
-//			}
-//
-//			@Override
-//			public String getAddOperationLabel() {
-//				// TODO Auto-generated method stub
-//				return null;
-//			}
-//
-//			@Override
-//			public URI[] getKnownRepositories() {
-//				// TODO Auto-generated method stub
-//				return null;
-//			}
-//
-//			@Override
-//			public String getManipulatorButtonLabel() {
-//				// TODO Auto-generated method stub
-//				return "Manipulate";
-//			}
-//
-//			@Override
-//			public String getManipulatorInstructionString() {
-//				// TODO Auto-generated method stub
-//				return "Manipulate repos";
-//			}
-//
-//			@Override
-//			public String getManipulatorLinkLabel() {
-//				// TODO Auto-generated method stub
-//				return "Link label";
-//			}
-//
-//			@Override
-//			public RemoveRepositoryOperation getRemoveOperation(
-//					URI[] repoLocations) {
-//				// TODO Auto-generated method stub
-//				return null;
-//			}
-//
-//			@Override
-//			public String getRemoveOperationLabel() {
-//				// TODO Auto-generated method stub
-//				return "Remove Repository";
-//			}
-//
-//			@Override
-//			public RepositoryLocationValidator getRepositoryLocationValidator(
-//					Shell shell) {
-//				// TODO Auto-generated method stub
-//				return new DefaultMetadataURLValidator();
-//			}
-//
-//			@Override
-//			public String getRepositoryNotFoundInstructionString() {
-//				// TODO Auto-generated method stub
-//				return "Repository Not Found";
-//			}
-//
-//			@Override
-//			public boolean manipulateRepositories(Shell shell) {
-//				// TODO Auto-generated method stub
-//				return true;
-//			}});
 
-		// XXX Use the pref-based repository manipulator
+
+		//Use the pref-based repository manipulator
 		setRepositoryManipulator(
 				new ColocatedRepositoryManipulator(
 						this, PreferenceConstants.PREF_PAGE_SITES));
