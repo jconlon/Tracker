@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="p2policy">
+	<implementation class="com.verticon.tracker.product.desktop.P2Policy"/>
+	<service>
+		<provide interface="org.eclipse.equinox.internal.provisional.p2.ui.policy.Policy"/>
+	</service>
+ <property name="service.ranking" type="Integer" value="1000"/>
+</scr:component>
