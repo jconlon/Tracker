@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.5"?>
+
+<target name="Tracker Composite Install">
+<locations>
+<location path="/opt/Eclipse/tracker-eclipse_target_platform-200906290814/eclipse" type="Directory"/>
+<location id="org.eclipse.datatools.enablement.oda.ecore.sdk.feature" path="/opt/Eclipse/dtp-incubator-sdk-1.7.1M1-200907020500-target_platform/eclipse" type="Feature"/>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.datatools.enablement.sdk.feature.feature.group" version="1.7.0.v200906050400-7I8r-FE9JfFkjWT8qt6UI5jX2laJ"/>
+<unit id="org.eclipse.datatools.sdk.feature.feature.group" version="1.7.0.v200906050400-7O9H-FD0IVEH6AsdTaISiFGNkk6p"/>
+<repository location="http://download.eclipse.org/releases/galileo"/>
+</location>
+</locations>
+</target>
