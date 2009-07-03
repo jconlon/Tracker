@@ -121,3 +121,6 @@ This project uses PDE Build to
     3. p2Installer still giving problems -
       tried to monitor with lsof but couldn't catch the org.eclipse.platform being created.
     4. Try replacing the corrupted file in the repo with a good one and try the 
+    
+ This project is deprecated and replaced by com.verticon.tracker.product.desktop.releng.
+ See Ticket #398
