@@ -11,7 +11,7 @@
 	<target name="allElements">
 		<antcall target="allElementsDelegator" />
 	</target>
-
+	
 	<!-- ===================================================================== -->
 	<!-- ===================================================================== -->
 	<target name="getBaseComponents" depends="checkLocalBase" unless="skipBase">
@@ -89,6 +89,18 @@
 	</target>
 
 	<!-- ===================================================================== -->
+	<!-- Steps to do before the repositories are being processed -->
+	<!-- ===================================================================== -->
+	<target name="preProcessRepos">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after the repositories have been processed -->
+	<!-- ===================================================================== -->
+	<target name="postProcessRepos">
+	</target>
+	
+	<!-- ===================================================================== -->
 	<!-- Steps to do before generating the build scripts. -->
 	<!-- ===================================================================== -->
 	<target name="preGenerate">
@@ -142,24 +154,9 @@
 	<!-- ===================================================================== -->
 	<target name="postBuild">
 		<antcall target="gatherLogs" />
-		<antcall target="extract.p2.product.internal"/>
+		<antcall target="change.archive.extensions"/>
 	</target>
 	
-	<!-- - - - - - - - - - - - - - - - - - 
-	          target: extract.p2.product.internal                      
-	         - - - - - - - - - - - - - - - - - -->
-	    <target name="extract.p2.product.internal">
-	    	<property file="${buildDirectory}/product.version"/> 
-	    	<delete dir="${buildDirectory}/result" />
-	    	<mkdir dir="${buildDirectory}/result/tmp" />
-	    	<property name="root.ui" value="com.verticon.tracker.product.desktop.application"/>
-
-	    			<antcall target="postBuild.linux" />
-	    	
-	    			<antcall target="postBuild.win" />
-	    	
-	    </target>
-
 	<!-- ===================================================================== -->
 	<!-- Steps to do to test the build results -->
 	<!-- ===================================================================== -->
@@ -179,6 +176,8 @@
 		<echo message="You must specify a target when invoking this file" />
 	</target>
 
+    <!-- The following are all the custom tasks added for building tracker
+    -->
 	<!-- - - - - - - - - - - - - - - - - - 
           target: copyProjects  
           Custom                    
@@ -190,7 +189,6 @@
 
 		<record name="${buildDirectory}/v${DSTAMP}${TSTAMP}-build.log"
 	              loglevel="verbose" />
-		<echoproperties />
 		
 		<mkdir dir="${buildDirectory}/features" />
 		<copy todir="${buildDirectory}/features">
@@ -237,164 +235,22 @@
 		<concat destfile="${buildDirectory}/product.version">trackerVersion=${trackerVersion}</concat>
 	</target>
 
-	<!-- - - - - - - - - - - - - - - - - - 
-          target: run.director                      
-         - - - - - - - - - - - - - - - - - -->
-	<target name="run.director">
-		<!--
-		<property name="eclipse.exec" value="${base}/eclipse/eclipse" />
-		<property name="eclipse.exec" value="/home/jconlon/eclipse-target-platforms/eclipse-modeling-ganymede-SRI-incubation-02/eclipse/eclipse" /
-		<echo> installUI = ${p2.IU}</echo>
-		<echo> version = ${p2.version}</echo>
-		<echo> file:${buildDirectory}/repo/</echo>
-		-->
-
-		<!-- 
-		note 1: use the full path to the exe here, otherwise it seems to call the exe from the builder 
-		note 2: So many problems creating a p2 capable product seem to be related to metadata in 
-		the repo of the eclipse installation that a simple eclipse install is now used for the director
-		just to keep the metadata clean.  If generation problems occur again, try deleting the installation
-		and re extracting one from the tar.
-		
-		This property is now set in the build.properties file
-		<property name="eclipse.exec" value="/opt/Eclipse/eclipse-java-ganymede-SR2/eclipse/eclipse"/>
-		
-		-->
-				
-		<exec executable="${eclipse.exec}" failonerror="false" timeout="900000">
-			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
-			<arg line="-nosplash" />
-			<arg line="--launcher.suppressErrors" />
-			<arg line="-consoleLog" />
-			<arg line="-flavor ${p2.flavor}" />
-			<arg line="-installIU ${p2.IU}" />
-			<arg line="-version ${p2.version}" />
-			<arg line="-p2.os ${p2.os}" />
-			<arg line="-p2.ws ${p2.ws}" />
-			<arg line="-p2.arch ${p2.arch}" />
-			<arg line="-roaming" />
-			<arg line="-profile TrackerProfile" />
-			<arg line="-profileProperties org.eclipse.update.install.features=true" />
-			<arg line="-metadataRepository file:${buildDirectory}/repo/ " />
-			<arg line="-artifactRepository file:${buildDirectory}/repo/" />
-			<arg line="-destination ${p2.director.install.path}" />
-			<arg line="-bundlepool ${p2.director.install.path}" />
-			<arg line="-debug" />
-			<arg line="-vmargs" />
-			<arg line="-Declipse.p2.data.area=${p2.director.install.path}/p2" />
-			
-			
-			<arg line="-Xmx512M"/>
-			<arg line="-XX:PermSize=512M"/>
-			<arg line="-XX:MaxPermSize=512m"/>
-			<!-- 
-	<arg line="-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8888" />
-			-->
-		</exec>
-
-		<!-- delete the metadata cache as well as the artifacts for unzipped bundles -->
-		<delete failonerror="false" includeEmptyDirs="true" 
-				dir="${p2.director.install.path}/p2/org.eclipse.equinox.p2.core/cache" />
-	</target>
-
-
-	
-	<!-- - - - - - - - - - - - - - - - - - 
-          target: postBuild.linux                      
-         - - - - - - - - - - - - - - - - - -->
-	<target name="postBuild.linux">
-		<antcall target="run.director">
-			<param name="p2.director.install.path" 
-					value="${buildDirectory}/result/tmp/eclipse"/>
-			<param name="p2.os" value="linux"/>
-			<param name="p2.ws" value="gtk"/>
-			<param name="p2.arch" value="x86"/>
-			<param name="p2.IU" value="${root.ui}" />
-			<param name="p2.version" value="${trackerVersion}"/>
-		</antcall>
-		
-		<move file="${buildDirectory}/result/tmp/eclipse" 
-			tofile="${buildDirectory}/result/tmp/tracker"/>
-		
-		<antcall target="add.repo.prefs"/>
-		
-		 <tar 
-			destfile="${buildDirectory}/result/${buildId}-p2-RCP-linux-${trackerVersion}.tar">
-		  <tarfileset dir="${buildDirectory}/result/tmp" mode="755">
-		    <include name="tracker/tracker"/>
-		  </tarfileset>
-		  <tarfileset dir="${buildDirectory}/result/tmp">
-			    <include name="tracker/**"/>
-			    <exclude name="tracker/tracker"/>
-		  </tarfileset>
-		 
-		</tar>
-		
-		<delete dir="${buildDirectory}/result/tmp" />
-		
-	</target>
-
-	<!-- - - - - - - - - - - - - - - - - - 
-	          target: postBuild.win                      
-	         - - - - - - - - - - - - - - - - - -->
-	<target name="postBuild.win">
-		
-		<antcall target="run.director">
-			<param name="p2.director.install.path" 
-					value="${buildDirectory}/result/tmp/eclipse"/>
-			<param name="p2.os" value="win32"/>
-			<param name="p2.ws" value="win32"/>
-			<param name="p2.arch" value="x86"/>
-			<param name="p2.IU" value="${root.ui}" />
-			<param name="p2.version" value="${trackerVersion}"/>
-		</antcall>
-		<move file="${buildDirectory}/result/tmp/eclipse" tofile="${buildDirectory}/result/tmp/tracker"/>
-		<antcall target="add.repo.prefs"/>
-		<zip 
-			  destfile="${buildDirectory}/result/${buildId}-p2-RCP-win32-${trackerVersion}.zip" 
-				basedir="${buildDirectory}/result/tmp" />
-		<delete dir="${buildDirectory}/result/tmp" />
-	</target>
-
    
-
-
 	<!-- - - - - - - - - - - - - - - - - - 
-          target: add.repo.prefs 
-          This is a hack to add a set of preference data to limit the P2 update sites                     
+          target: change.archive.extensions
+          1. Add versioning info to archive names
+          2. For some reason the Linux tar still has a zip extension. Change it to a tar.                      
          - - - - - - - - - - - - - - - - - -->
-    <target name="add.repo.prefs">
-    	
-    	<loadproperties srcFile="${builder}/repo.properties"/>
-    	
-    	<property name="settingsDir" 
-    		location="${buildDirectory}/result/tmp/tracker/configuration/.settings"/>
-		<echoproperties></echoproperties>
-		<mkdir dir="${settingsDir}"/>
-		<copy todir="${settingsDir}">
-			<fileset dir="${builder}">
-				<include name="org.eclipse.equinox.p2.*.repository.prefs"/>
-			</fileset>
-		</copy>
-    </target>
-	
-	<!-- ================================= 
-          target: test.repo.perfs              
-         ================================= -->
-    <target name="test.repo.perfs"  description="description">
-    	<property name="buildDirectory" 
-    	    		location="${basedir}/../buildDirectory"/>
-    	<property name="builder" 
-    	    	    		location="${basedir}/../buildConfiguration"/>
-    	<antcall target="add.repo.prefs"/>
-    	<eclipse.refreshLocal 
-    	    				resource="com.verticon.tracker.builder/buildDirectory/result"
-    	    				depth="infinite"
-    	    			/>
-    </target>
+    <target name="change.archive.extensions">
+    	  <property file="${buildDirectory}/product.version"/>
+    	  <property name="archive.dir" location="${buildDirectory}/${buildLabel}"/>
+    	  <property name="win.root.name" value="Tracker-win32.win32.x86"/>
+    	  <property name="win.archive" location="${archive.dir}/${win.root.name}.zip"/>
+    	  <move file="${win.archive}" tofile="${archive.dir}/${win.root.name}-${trackerVersion}.zip"/>
 
-
-	
-	
+    	  <property name="linux.root.name" value="Tracker-linux.gtk.x86"/>
+          <property name="linux.archive" location="${archive.dir}/${linux.root.name}.zip"/>
+    	  <move file="${linux.archive}" tofile="${archive.dir}/${linux.root.name}-${trackerVersion}.tar"/>
+    </target>
 	
 </project>
