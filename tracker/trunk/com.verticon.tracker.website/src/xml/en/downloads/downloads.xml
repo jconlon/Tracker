@@ -12,7 +12,7 @@
 	<section>
 		<title>Tracker Desktop Product</title>
 		<table xml:id="ex.calstable" frame='all'>
-			<title>Revision 0.3.4, Engineering Released on: April 29, 2009</title>
+			<title>Revision 0.3.5, Engineering Released on: July 2, 2009</title>
 			<tgroup cols='3' align='left' colsep='1' rowsep='1'>
 				<colspec colname='c1' />
 				<colspec colname='c2' />
@@ -28,18 +28,18 @@
 					<row>
 						<entry>
 							<ulink
-								url="http://tracker.verticon.com/Tracker/downloads/Tracker-p2-RCP-win32-0.3.4.v200905211233.zip">
-								Tracker-p2-RCP-win32-0.3.4.v200905211233.zip
+								url="http://tracker.verticon.com/Tracker/downloads/Tracker-win32.win32.x86-0.3.5.v200907021535.zip">
+								Tracker-win32.win32.x86-0.3.5.v200907021535.zip
 							</ulink>
 						</entry>
-						<entry>45.9M</entry>
+						<entry>50.4M</entry>
 						<entry>WIN</entry>
 					</row>
 					<row>
 						<entry>
 							<ulink
-								url="http://tracker.verticon.com/Tracker/downloads/Tracker-p2-RCP-linux-0.3.4.v200905211233.tar">
-								Tracker-p2-RCP-linux-0.3.4.v200905211233.tar
+								url="http://tracker.verticon.com/Tracker/downloads/Tracker-linux.gtk.x86-0.3.5.v200907021535.tar">
+								Tracker-linux.gtk.x86-0.3.5.v200907021535.tar
 							</ulink>
 						</entry>
 						<entry>52.9M</entry>
@@ -90,12 +90,6 @@
 						<entry>Features Updates</entry>
 						<entry>
 							<ulink url="http://tracker.verticon.com/Tracker/p2/features/" />
-						</entry>
-					</row>
-					<row>
-						<entry>ODA Feature Updates</entry>
-						<entry>
-							<ulink url="http://tracker.verticon.com/Tracker/p2/oda/" />
 						</entry>
 					</row>
 				</tbody>
