@@ -45,7 +45,6 @@ import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchActionConstants;
-import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
@@ -65,11 +64,6 @@ import com.verticon.tracker.util.AbstractModelObject;
  * FilteredTable and Form are separated by a sash that can be oriented
  * horizontally or vertically. The Form is created dynamically when a row is
  * selected in the tableViewer.
- * 
- * The Master FilteredTable is populated by a when an
- * {@link org.eclipse.jface.viewers.ISelectionProvider} and
- * {@link com.verticon.tracker.editor.presentation.IPremisesProvider} sends
- * a {@link TrackerView#selectionChanged(IWorkbenchPart, ISelection)} event.
  * 
  * 
  * @author jconlon
@@ -714,7 +708,6 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	/**
 	 * Setup the proper filter TagID
 	 * 
-	 * @param tagId
 	 */
 	public void setFilter(String value , int index) {
 		getMasterFilteredTable().setFilterText(value);
@@ -759,23 +752,23 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	}
 	
 	/**
-	    * Saves the view state such as sort order and filter state 
-	    * within a memento.
-	    */
-	   public void saveState(IMemento memento) {
-		 //Save the Sash Orientation
-		 memento.putInteger(TAG_SASH_ORIENTATION, sashForm.getOrientation()); 
-		 memento.putBoolean(TAG_DETAIL_VISIBLE, showDetailAction.isChecked());
-		 memento.putBoolean(TAG_MASTER_VISIBLE, showMasterAction.isChecked());
-		 memento.putBoolean(TAG_ADVANCED_PROPS_VISIBLE, showAdvancedPropertiesAction.isChecked());
-		 memento.putInteger(TAG_SASH_FIRST_WEIGHT, sashForm.getWeights()[0]);
-		 memento.putInteger(TAG_SASH_SECOND_WEIGHT, sashForm.getWeights()[1]);
-		 if(sorter!=null){
-			 sorter.saveState(memento);
-		 }
-		 saveColOrder(memento, tableViewer.getTable());
-		 super.saveState(memento);
-	   }
+	 * Saves the view state such as sort order and filter state 
+	 * within a memento.
+	 */
+	public void saveState(IMemento memento) {
+		//Save the Sash Orientation
+		memento.putInteger(TAG_SASH_ORIENTATION, sashForm.getOrientation()); 
+		memento.putBoolean(TAG_DETAIL_VISIBLE, showDetailAction.isChecked());
+		memento.putBoolean(TAG_MASTER_VISIBLE, showMasterAction.isChecked());
+		memento.putBoolean(TAG_ADVANCED_PROPS_VISIBLE, showAdvancedPropertiesAction.isChecked());
+		memento.putInteger(TAG_SASH_FIRST_WEIGHT, sashForm.getWeights()[0]);
+		memento.putInteger(TAG_SASH_SECOND_WEIGHT, sashForm.getWeights()[1]);
+		if(sorter!=null){
+			sorter.saveState(memento);
+		}
+		saveColOrder(memento, tableViewer.getTable());
+		super.saveState(memento);
+	}
 
 	private void saveColOrder(IMemento memento, Table table) {
 		int[] positions = table.getColumnOrder();
