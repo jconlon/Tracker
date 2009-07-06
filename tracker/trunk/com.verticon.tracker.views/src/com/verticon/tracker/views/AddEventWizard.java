@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ViewersObservables;
 import org.eclipse.jface.databinding.wizard.WizardPageSupport;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -229,7 +228,7 @@ public class AddEventWizard extends Wizard {
 //					.setUpAnimalsTableViewer(v,
 //							new TrackerItemProviderAdapterFactory(),null);
 //			v.setContentProvider(cp);
-			AnimalColumn.setup(v, null, new TrackerItemProviderAdapterFactory());
+			AnimalColumn.setup(v, null, new TrackerItemProviderAdapterFactory(),null);
 			return v;
 
 		}

@@ -3,11 +3,14 @@ package com.verticon.tracker.views;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.ui.IMemento;
 
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
@@ -25,6 +28,8 @@ public class AnimalsView extends TrackerView  {
 	 * Reference to Observable for table Input
 	 */
 	private IObservableList tableInput;
+
+	private Menu headerMenu;
 
 
 	/**
@@ -106,9 +111,16 @@ public class AnimalsView extends TrackerView  {
 	 */
 	@Override
 	protected void setUpTable(AdapterFactory adapterFactory) {
-		TableViewer viewer = masterFilteredTable.getViewer();
-		sorter = AnimalColumn.setup(viewer, memento,adapterFactory);
+		final TableViewer viewer = masterFilteredTable.getViewer();
+
+		headerMenu = new Menu(getViewSite().getShell(), SWT.POP_UP);
+		sorter = AnimalColumn.setup(viewer, memento,adapterFactory,headerMenu);
 		masterFilteredTable.setColumns(viewer.getTable().getColumns());
+		viewer.getTable().addListener(SWT.MenuDetect, new Listener() {
+			public void handleEvent(Event event) {
+				viewer.getTable().setMenu(headerMenu);// ? headerMenu : tableMenu);
+			}
+		});
 	}
 
 	/**
@@ -144,6 +156,12 @@ public class AnimalsView extends TrackerView  {
 		}
 		return EMFObservables.observeList(premises,
 				TrackerPackage.Literals.PREMISES__ANIMALS);
+	}
+
+	@Override
+	public void saveState(IMemento memento) {
+		super.saveState(memento);
+		AnimalColumn.saveState(memento, headerMenu);
 	}
 	
 	

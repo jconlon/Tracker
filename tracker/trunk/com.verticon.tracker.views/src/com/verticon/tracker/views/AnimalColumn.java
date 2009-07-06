@@ -14,7 +14,6 @@ import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
-import org.eclipse.jface.viewers.ColumnLayoutData;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableLayout;
@@ -22,6 +21,10 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.IMemento;
@@ -160,7 +163,10 @@ enum AnimalColumn {
 	});
 	
 	
-	final ColumnLayoutData layoutData;
+	private static final String TAG_COLUMN_TEXT = "tagColumnText";
+	private static final String TAG_COLUMN_VISIBLE = "tagColumnVisible";
+	private static final String TAG_TYPE = "ColumnInfo";
+	final ColumnWeightData layoutData;
 	final String text;
 	final EStructuralFeature feature;
 	final String pattern;
@@ -178,7 +184,7 @@ enum AnimalColumn {
 	 * @param pattern of MessageFormat outputing of the value of the data
 	 * @param comparator for sorting of the column
 	 */
-	AnimalColumn(String text, ColumnLayoutData layoutData,
+	AnimalColumn(String text, ColumnWeightData layoutData,
 			EStructuralFeature feature, String pattern, Comparator<Animal> comparator) {
 		this.text = text;
 		this.layoutData = layoutData;
@@ -188,8 +194,8 @@ enum AnimalColumn {
 	}
 
 	static {
-		columnNames = new ArrayList<String>();
-		List<EStructuralFeature> eStructrualFeatures = new ArrayList<EStructuralFeature>();
+		columnNames = new ArrayList<String>(values().length);
+		List<EStructuralFeature> eStructrualFeatures = new ArrayList<EStructuralFeature>(values().length);
 		for (AnimalColumn col : values()) {
 			columnNames.add(col.name());
 			eStructrualFeatures.add(col.feature);
@@ -203,7 +209,10 @@ enum AnimalColumn {
 		
 	}
 
-	static GenericViewSorter setup(TableViewer tableViewer, IMemento memento, final AdapterFactory adapterFactory){
+	@SuppressWarnings("unchecked")
+	static GenericViewSorter setup(TableViewer tableViewer, IMemento memento, 
+			final AdapterFactory adapterFactory, Menu parent){
+		
 		ObservableListContentProvider cp = new ObservableListContentProvider();
 		IObservableMap[] maps = EMFObservables.observeMaps(cp
 				.getKnownElements(), features);
@@ -218,18 +227,25 @@ enum AnimalColumn {
 		table.setLinesVisible(true);
 		
 		List<TableColumn> tableColumns = new ArrayList<TableColumn>(AnimalColumn.values().length);
-	    List<Comparator> comparators = new ArrayList<Comparator>(AnimalColumn.values().length);
-			
+	    List<Comparator<Animal>> comparators = new ArrayList<Comparator<Animal>>(AnimalColumn.values().length);
+
+       
 		for (AnimalColumn col : values()) {
 			TableViewerColumn viewerColumn = new TableViewerColumn(tableViewer,
 					SWT.LEAD);
 		    TableColumn nameColumn = viewerColumn.getColumn();
 			tableColumns.add(nameColumn);
 			comparators.add(col.comparator);
-			layout.addColumnData(col.layoutData);
 			nameColumn.setText(col.text);
 			nameColumn.setMoveable(true);
 			nameColumn.setData(col);
+			boolean isVisible = isColumnVisible( memento, col.text);
+			if(!isVisible){
+				layout.addColumnData(new ColumnWeightData(0, 0, false));
+			}else{
+				layout.addColumnData(col.layoutData);
+			}
+			
 			if (col == TYPE) {
 				viewerColumn
 						.setLabelProvider(new GenericObservableMapCellLabelProvider(
@@ -247,7 +263,10 @@ enum AnimalColumn {
 					.setLabelProvider(new GenericObservableMapCellLabelProvider(
 							maps, col.pattern));
 			}
-			
+			if(parent!=null){
+				createMenuItem( parent, nameColumn, col.layoutData.minimumWidth, 
+						isVisible);
+			}
 		}
 		
 		TableColumn[] tableCols = new TableColumn[tableColumns.size()];
@@ -259,6 +278,8 @@ enum AnimalColumn {
 				comparators.toArray(compares));
 		if (memento != null){
 					sorter.init(memento);
+					
+					
 		}
 		
 		tableViewer.setSorter(sorter);
@@ -266,6 +287,54 @@ enum AnimalColumn {
 		
 		tableViewer.setColumnProperties(colNames);
 		tableViewer.setContentProvider(cp);
+		
 		return sorter;
 	}
+	
+	private static void createMenuItem(Menu parent, final TableColumn column, final int defaultSize,boolean visible) {
+		final MenuItem itemName = new MenuItem(parent, SWT.CHECK);
+		itemName.setText(column.getText());
+		itemName.setSelection(visible);
+
+		itemName.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event event) {
+				if (itemName.getSelection()) {
+					column.setWidth(defaultSize);
+					column.setResizable(true);
+					
+				} else {
+					column.setWidth(0);
+					column.setResizable(false);
+					
+				}
+			}
+		});
+	}
+	
+	static void saveState(IMemento memento, Menu parent) {
+		for (MenuItem menuItem : parent.getItems()) {
+			IMemento mem = memento.createChild(TAG_TYPE);
+			mem.putString(TAG_COLUMN_TEXT, menuItem.getText());
+			mem.putBoolean(TAG_COLUMN_VISIBLE, menuItem.getSelection());
+		}
+	}
+
+	private static boolean isColumnVisible(IMemento memento, String columnText){
+		if(memento==null){
+			return true;
+		}
+		for (IMemento iMemento : memento.getChildren(TAG_TYPE)) {
+			String tagColumnText = iMemento.getString(TAG_COLUMN_TEXT);
+			if (tagColumnText == null || !columnText.equals(tagColumnText)){
+				continue;
+			}
+			Boolean visible = iMemento.getBoolean(TAG_COLUMN_VISIBLE);
+			if(visible == null){
+				return true;
+			}
+			return visible;
+		}
+		return true;
+	}
+
 }
