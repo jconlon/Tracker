@@ -2,6 +2,7 @@ package com.verticon.tracker.editor.util;
 
 import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
@@ -90,6 +91,8 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	protected IMemento memento;
 	
 	protected GenericViewSorter sorter;
+	
+	protected List<Action> actions = new ArrayList<Action>();
 
 	public FilteredTable getMasterFilteredTable() {
 		return masterFilteredTable;
@@ -389,7 +392,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 
 	/**
 	 * @param selection
-	 * @return
+	 * 
 	 */
 	private void fillPropertiesFolder(ISelection selection,
 			AdapterFactory adapterFactory, CTabFolder cTabFolder) {
@@ -610,6 +613,8 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		deleteAction.setDisabledImageDescriptor(platformImages
 				.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE_DISABLED));
 
+		
+		
 	}
 
 	private void hookContextMenu() {
@@ -643,7 +648,14 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		manager.add(showAdvancedPropertiesAction);
 		manager.add(showMasterAction);
 		manager.add(showDetailAction);
-		manager.add(new Separator());
+		
+		MenuManager menu1 = new MenuManager("&Control Column Visibility", "columnVisibility");
+		for (Action action : actions) {
+			menu1.add(action);
+		}
+		manager.add(menu1);
+		manager.add(new Separator());   
+		
 	}
 
 	protected void fillLocalToolBar(IToolBarManager manager) {
@@ -671,6 +683,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 			return status;
 		}
 
+		@SuppressWarnings("unused")
 		public void setStatus(String status) {
 			this.status = status;
 		}
@@ -767,6 +780,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 			sorter.saveState(memento);
 		}
 		saveColOrder(memento, tableViewer.getTable());
+		ColumnUtils.saveState(memento, actions);
 		super.saveState(memento);
 	}
 

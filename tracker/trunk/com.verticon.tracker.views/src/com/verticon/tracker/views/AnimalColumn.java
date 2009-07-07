@@ -13,6 +13,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.action.Action;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -21,10 +22,6 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.IMemento;
@@ -33,6 +30,7 @@ import at.bestsolution.dataforms.util.viewers.GenericObservableMapCellLabelProvi
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.editor.util.ColumnUtils;
 import com.verticon.tracker.editor.util.GenericViewSorter;
 import com.verticon.tracker.util.TrackerUtils;
 
@@ -163,9 +161,7 @@ enum AnimalColumn {
 	});
 	
 	
-	private static final String TAG_COLUMN_TEXT = "tagColumnText";
-	private static final String TAG_COLUMN_VISIBLE = "tagColumnVisible";
-	private static final String TAG_TYPE = "ColumnInfo";
+	
 	final ColumnWeightData layoutData;
 	final String text;
 	final EStructuralFeature feature;
@@ -211,7 +207,7 @@ enum AnimalColumn {
 
 	@SuppressWarnings("unchecked")
 	static GenericViewSorter setup(TableViewer tableViewer, IMemento memento, 
-			final AdapterFactory adapterFactory, Menu parent){
+			final AdapterFactory adapterFactory,  List<Action> actions){// Menu parent){
 		
 		ObservableListContentProvider cp = new ObservableListContentProvider();
 		IObservableMap[] maps = EMFObservables.observeMaps(cp
@@ -239,7 +235,7 @@ enum AnimalColumn {
 			nameColumn.setText(col.text);
 			nameColumn.setMoveable(true);
 			nameColumn.setData(col);
-			boolean isVisible = isColumnVisible( memento, col.text);
+			boolean isVisible = ColumnUtils.isColumnVisible( memento, col.text);
 			if(!isVisible){
 				layout.addColumnData(new ColumnWeightData(0, 0, false));
 			}else{
@@ -263,8 +259,9 @@ enum AnimalColumn {
 					.setLabelProvider(new GenericObservableMapCellLabelProvider(
 							maps, col.pattern));
 			}
-			if(parent!=null){
-				createMenuItem( parent, nameColumn, col.layoutData.minimumWidth, 
+
+			if(actions!=null){
+				ColumnUtils.createMenuItem( actions, nameColumn, col.layoutData.minimumWidth, 
 						isVisible);
 			}
 		}
@@ -291,50 +288,4 @@ enum AnimalColumn {
 		return sorter;
 	}
 	
-	private static void createMenuItem(Menu parent, final TableColumn column, final int defaultSize,boolean visible) {
-		final MenuItem itemName = new MenuItem(parent, SWT.CHECK);
-		itemName.setText(column.getText());
-		itemName.setSelection(visible);
-
-		itemName.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event event) {
-				if (itemName.getSelection()) {
-					column.setWidth(defaultSize);
-					column.setResizable(true);
-					
-				} else {
-					column.setWidth(0);
-					column.setResizable(false);
-					
-				}
-			}
-		});
-	}
-	
-	static void saveState(IMemento memento, Menu parent) {
-		for (MenuItem menuItem : parent.getItems()) {
-			IMemento mem = memento.createChild(TAG_TYPE);
-			mem.putString(TAG_COLUMN_TEXT, menuItem.getText());
-			mem.putBoolean(TAG_COLUMN_VISIBLE, menuItem.getSelection());
-		}
-	}
-
-	private static boolean isColumnVisible(IMemento memento, String columnText){
-		if(memento==null){
-			return true;
-		}
-		for (IMemento iMemento : memento.getChildren(TAG_TYPE)) {
-			String tagColumnText = iMemento.getString(TAG_COLUMN_TEXT);
-			if (tagColumnText == null || !columnText.equals(tagColumnText)){
-				continue;
-			}
-			Boolean visible = iMemento.getBoolean(TAG_COLUMN_VISIBLE);
-			if(visible == null){
-				return true;
-			}
-			return visible;
-		}
-		return true;
-	}
-
 }

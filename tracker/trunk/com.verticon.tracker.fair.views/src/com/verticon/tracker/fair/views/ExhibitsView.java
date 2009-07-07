@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.jface.viewers.ColumnLayoutData;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableLayout;
@@ -22,6 +21,7 @@ import org.eclipse.swt.widgets.TableColumn;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
+import com.verticon.tracker.editor.util.ColumnUtils;
 import com.verticon.tracker.editor.util.GenericViewSorter;
 import com.verticon.tracker.editor.util.ISelectionController;
 import com.verticon.tracker.editor.util.ItemsView;
@@ -190,7 +190,7 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 	 * 
 	 * 
 	 */
-	 enum ExhibitColumn {
+	 private enum ExhibitColumn {
 		NAME("Exhibit", new ColumnWeightData(3, 100, true), 
 		new Comparator<Exhibit>(){
 
@@ -342,13 +342,13 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 				return comments1.compareTo(comments2);
 			}});
 
-		final ColumnLayoutData layoutData;
+		final ColumnWeightData layoutData;
 		final String text;
 		final Comparator<Exhibit> comparator;
 		static List<String> columnNames;
 		static String[] colNames;
 
-		ExhibitColumn(String text, ColumnLayoutData layoutData, Comparator<Exhibit> comparator) {
+		ExhibitColumn(String text, ColumnWeightData layoutData, Comparator<Exhibit> comparator) {
 			this.text = text;
 			this.layoutData = layoutData;
 			this.comparator=comparator;
@@ -385,10 +385,20 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 			final TableColumn nameColumn = new TableColumn(table, SWT.NONE);
 			tableColumns.add(nameColumn);
 			comparators.add(col.comparator);
-			layout.addColumnData(col.layoutData);
 			nameColumn.setText(col.text);
 			nameColumn.setMoveable(true);
 			nameColumn.setData(col);
+			boolean isVisible = ColumnUtils.isColumnVisible( memento, col.text);
+			if(!isVisible){
+				layout.addColumnData(new ColumnWeightData(0, 0, false));
+			}else{
+				layout.addColumnData(col.layoutData);
+			}
+			
+			if(actions!=null){
+				ColumnUtils.createMenuItem( actions, nameColumn, col.layoutData.minimumWidth, 
+						isVisible);
+			}
 		}
 		
 		TableColumn[] tableCols = new TableColumn[tableColumns.size()];
