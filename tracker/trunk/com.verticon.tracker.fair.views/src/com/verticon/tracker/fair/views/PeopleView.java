@@ -14,7 +14,6 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
-import org.eclipse.jface.viewers.ColumnLayoutData;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -32,6 +31,7 @@ import at.bestsolution.dataforms.util.viewers.GenericObservableMapCellLabelProvi
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
+import com.verticon.tracker.editor.util.ColumnUtils;
 import com.verticon.tracker.editor.util.GenericViewSorter;
 import com.verticon.tracker.editor.util.ISelectionController;
 import com.verticon.tracker.editor.util.ItemsView;
@@ -357,7 +357,7 @@ public class PeopleView extends TrackerView implements ItemsView{
 				return value1.compareTo(value2);
 			}});
 
-		final ColumnLayoutData layoutData;
+		final ColumnWeightData layoutData;
 		final String text;
 		final EStructuralFeature feature;
 		final String pattern;
@@ -367,7 +367,7 @@ public class PeopleView extends TrackerView implements ItemsView{
 		static String[] colNames;
 		static EStructuralFeature[] features;
 
-		PeopleColumn(String text, ColumnLayoutData layoutData,
+		PeopleColumn(String text, ColumnWeightData layoutData,
 				EStructuralFeature feature, String pattern, Comparator<Person> comparator) {
 			this.text = text;
 			this.layoutData = layoutData;
@@ -418,10 +418,21 @@ public class PeopleView extends TrackerView implements ItemsView{
 			final TableColumn nameColumn = viewerColumn.getColumn();
 			tableColumns.add(nameColumn);
 			comparators.add(col.comparator);
-			layout.addColumnData(col.layoutData);
+			
 			nameColumn.setText(col.text);
 			nameColumn.setMoveable(true);
 			nameColumn.setData(col);
+			boolean isVisible = ColumnUtils.isColumnVisible( memento, col.text);
+			if(!isVisible){
+				layout.addColumnData(new ColumnWeightData(0, 0, false));
+			}else{
+				layout.addColumnData(col.layoutData);
+			}
+
+			if(actions!=null){
+				ColumnUtils.createMenuItem( actions, nameColumn, col.layoutData.minimumWidth, 
+						isVisible);
+			}
 			if (col == PeopleColumn.FIRST_NAME) {
 				viewerColumn
 						.setLabelProvider(new GenericObservableMapCellLabelProvider(
