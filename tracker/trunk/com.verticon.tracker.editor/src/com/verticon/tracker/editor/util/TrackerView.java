@@ -72,6 +72,7 @@ import com.verticon.tracker.util.AbstractModelObject;
  */
 public abstract class TrackerView extends ViewPart implements ItemsView{
 
+	private static final String TAG_SYNCHRONIZE_SELECTION = "tagSynchronizeSelection";
 	private static final String TAG_SASH_SECOND_WEIGHT = "TagSashSecondWeight";
 	private static final String TAG_SASH_FIRST_WEIGHT = "TagSashFirstWeight";
 	private static final String TAG_ADVANCED_PROPS_VISIBLE = "showAdvancedProps";
@@ -123,6 +124,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	private Action showDetailAction;
 	private Action addAction;
 	private Action deleteAction;
+	private Action synchroizeSelectionHandling;
 	private AdapterFactory adapterFactory = null;
 	private IPropertiesFormProvider defaultPropertiesFormProvider;
 	private final ViewModel viewModel = new ViewModel();
@@ -268,6 +270,11 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
          if(firstWeight !=null && secondWeight!=null){
         	 sashForm.setWeights(new int[]{firstWeight, secondWeight});
          }
+         
+         Boolean syncSelection = memento.getBoolean(TAG_SYNCHRONIZE_SELECTION);
+         if(syncSelection!=null){
+        	 synchroizeSelectionHandling.setChecked(syncSelection);
+         }
 	}
 
 	private void switchOnOrientation(int value) {
@@ -340,6 +347,11 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		this.addAction.setEnabled(enabled);
 	}
 
+	
+	public boolean isSelectionHandlingEnabled(){
+		return synchroizeSelectionHandling.isChecked();
+	}
+	
 	/**
 	 * Second window will be the form
 	 */
@@ -614,6 +626,14 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 				.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE_DISABLED));
 
 		
+		// Enable selection handling
+		synchroizeSelectionHandling = new Action("&Synchronize Selection Handling",Action.AS_CHECK_BOX){};
+		synchroizeSelectionHandling.setChecked(true);
+		synchroizeSelectionHandling.setImageDescriptor(platformImages.getImageDescriptor(
+				ISharedImages.IMG_ELCL_SYNCED));
+		synchroizeSelectionHandling.setDisabledImageDescriptor(platformImages.getImageDescriptor(
+				ISharedImages.IMG_ELCL_SYNCED_DISABLED));
+		synchroizeSelectionHandling.setToolTipText("Synchronize selections on this view with other Tracker Editors and Views.");
 		
 	}
 
@@ -637,6 +657,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		manager.add(showAdvancedPropertiesAction);
 		manager.add(showMasterAction);
 		manager.add(showDetailAction);
+		manager.add(synchroizeSelectionHandling);
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
@@ -648,13 +669,16 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		manager.add(showAdvancedPropertiesAction);
 		manager.add(showMasterAction);
 		manager.add(showDetailAction);
+		manager.add(synchroizeSelectionHandling);
 		
 		MenuManager menu1 = new MenuManager("&Control Column Visibility", "columnVisibility");
 		for (Action action : actions) {
 			menu1.add(action);
 		}
 		manager.add(menu1);
-		manager.add(new Separator());   
+		// Other plug-ins can contribute there actions here
+		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
+  
 		
 	}
 
@@ -665,6 +689,9 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		manager.add(showAdvancedPropertiesAction);
 		manager.add(showMasterAction);
 		manager.add(showDetailAction);
+		manager.add(synchroizeSelectionHandling);
+		// Other plug-ins can contribute there actions here
+		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 
 	private static class ViewModel {
@@ -776,6 +803,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		memento.putBoolean(TAG_ADVANCED_PROPS_VISIBLE, showAdvancedPropertiesAction.isChecked());
 		memento.putInteger(TAG_SASH_FIRST_WEIGHT, sashForm.getWeights()[0]);
 		memento.putInteger(TAG_SASH_SECOND_WEIGHT, sashForm.getWeights()[1]);
+		memento.putBoolean(TAG_SYNCHRONIZE_SELECTION, synchroizeSelectionHandling.isChecked());
 		if(sorter!=null){
 			sorter.saveState(memento);
 		}

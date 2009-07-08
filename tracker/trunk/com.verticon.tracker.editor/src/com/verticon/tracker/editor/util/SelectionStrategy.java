@@ -48,4 +48,6 @@ public interface SelectionStrategy {
 	 * @param selection
 	 */
 	void handleManualTableViewerSelection(ISelection selection, SelectionController selectionController);
+
+	
 }

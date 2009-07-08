@@ -61,7 +61,9 @@ public class PeopleStrategy implements SelectionStrategy {
 	public void handleWorkbenchAndEventAdminSingleSelection(
 			Object selectedObject, final TableViewer viewer, Event osgiEvent, 
 			SelectionController selectionController) {
-		
+		if(!peopleView.isSelectionHandlingEnabled()){
+			return;
+		}
 		FairSwitch<Object> visitor = new FairSwitch<Object>() {
 
 			@Override

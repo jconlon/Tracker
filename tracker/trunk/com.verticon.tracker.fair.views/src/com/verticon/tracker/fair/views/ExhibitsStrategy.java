@@ -87,6 +87,9 @@ class ExhibitsStrategy implements SelectionStrategy {
 			Object selectedObject, final TableViewer viewer, final Event event, 
 			final SelectionController selectionController) {
 		
+		if(!exhibitsView.isSelectionHandlingEnabled()){
+			return;
+		}
 		exhibitsView.setFilter("", 0);
 		
 		FairSwitch<Object> visitor = new FairSwitch<Object>() {

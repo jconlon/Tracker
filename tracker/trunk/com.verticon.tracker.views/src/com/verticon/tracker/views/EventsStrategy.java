@@ -48,7 +48,9 @@ class EventsStrategy implements SelectionStrategy {
 	public void handleWorkbenchAndEventAdminSingleSelection(Object selectedObject, final TableViewer viewer,
 			final org.osgi.service.event.Event osgiEvent, SelectionController selectionController) {
 //		logger.debug(bundleMarker,"handleWorkbenchAndEventAdminSingleSelection selectedObject={} and event={}",selectedObject, osgiEvent);
-		
+		if(!animalsView.isSelectionHandlingEnabled()){
+			return;
+		}
 		//Only deal with Event objects
 		TrackerSwitch<Object> visitor = new TrackerSwitch<Object>() {
 
