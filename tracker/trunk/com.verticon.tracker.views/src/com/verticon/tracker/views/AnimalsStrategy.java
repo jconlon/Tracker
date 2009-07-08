@@ -23,24 +23,28 @@ public class AnimalsStrategy implements SelectionStrategy {
 //	private final Logger logger = LoggerFactory
 //			.getLogger(AnimalsStrategy.class);
 //	
-	private final TrackerView animalsView;
+	private final TrackerView trackerView;
 	
 	
 	public AnimalsStrategy(TrackerView animalsView) {
 		super();
-		this.animalsView = animalsView;
+		this.trackerView = animalsView;
 	}
 
 	public void handleManualTableViewerSelection(ISelection selection,
 			SelectionController selectionController) {
 //		logger.debug(bundleMarker,"Sending Animals selection event");
 		selectionController.sendSelectionToChannel(selection,getEventAdminSourceName());
-		animalsView.setSelectionOnOutlinePage(selection);
+		trackerView.setSelectionOnOutlinePage(selection);
 	}
 	
 	
 	public void handleWorkbenchAndEventAdminSingleSelection(Object selectedObject, final TableViewer viewer,
 			final Event event, SelectionController selectionController) {
+		
+		if(!trackerView.isSelectionHandlingEnabled()){
+			return;
+		}
 		//Only deal with Animal objects
 		TrackerSwitch<Object> visitor = new TrackerSwitch<Object>() {
 
@@ -71,4 +75,7 @@ public class AnimalsStrategy implements SelectionStrategy {
 	public String getEventAdminTopicForListening() {
 		return TrackerConstants.EVENT_ADMIN_TOPIC_VIEW_SELECTION;
 	}
+
+	
+	
 }
