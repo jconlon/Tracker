@@ -17,7 +17,9 @@ import com.verticon.tracker.fair.editor.presentation.FairEditorPlugin;
 import com.verticon.tracker.fair.util.FairSwitch;
 
 /**
- * 
+ * Selection Strategy that listens to channel selections triggering 
+ * filters when an animal or person is received and sends out
+ * Exhibit selections and animals derived from the Exhibit selection.
  * @author jconlon
  * 
  */
@@ -39,8 +41,8 @@ class ExhibitsStrategy implements SelectionStrategy {
 	}
 
 	/**
-	 * Sends out a Selection to the Event Admin Service to synchronize all
-	 * views.
+	 * Sends out an Animal Selection to the Event Admin Service to synchronize all
+	 * views listening to animals.
 	 * 
 	 * Override this to implement what actions happen when a user manually
 	 * selects a single item in the TableViewer
@@ -62,30 +64,37 @@ class ExhibitsStrategy implements SelectionStrategy {
 			selectionController.sendSelectionToChannel(new StructuredSelection(
 				exhibit.getAnimal()), getEventAdminSourceName());
 		}
+		
+//		logger.debug(bundleMarker,"Sending Person selection event");
+		if(exhibit!=null && exhibit.getExhibitor()!=null){
+			selectionController.sendSelectionToChannel(new StructuredSelection(
+				exhibit.getExhibitor()), getEventAdminSourceName());
+		}
 
 		exhibitsView.setSelectionOnOutlinePage(selection);
 	}
 
 	/**
-	 * 
 	 * Selections may come from the EventAdmin or the Workbench part.
 	 * 
-	 * Different types of editor selections are handled in the following manner:
+	 * Different types of selection objects are handled in the following manner:
 	 * <ul>
-	 * <li>No selection removes all filters and de-selects previous selection;</li>
-	 * <li>One item selected triggers special handling;</li>
-	 * <li>Multiple items removes all filters and passes on the selection.</li>
+	 * <li>A selection removes all filters and de-selects previous selection;</li>
+	 * <li>A single selected animal or person deploys the appropriate filter;</li>
 	 * </ul>
-	 * 
-	 * @param selection
 	 */
 	public void handleWorkbenchAndEventAdminSingleSelection(
-			Object selectedObject, final TableViewer viewer, final Event event, final SelectionController selectionController) {
+			Object selectedObject, final TableViewer viewer, final Event event, 
+			final SelectionController selectionController) {
 		
 		exhibitsView.setFilter("", 0);
-		// Only deal with Animal objects
+		
 		FairSwitch<Object> visitor = new FairSwitch<Object>() {
 
+			/**
+			 * Handle Exhibit selection by selecting that exhibit in the viewer
+			 * and sending the animal of the exhibit to animal listeners.
+			 */
 			@Override
 			public Object caseExhibit(Exhibit exhibit) {
 //				logger.debug(bundleMarker,"Received Exhibit selection");
@@ -100,6 +109,9 @@ class ExhibitsStrategy implements SelectionStrategy {
 				return exhibit;
 			}
 
+			/**
+			 * Handle Person by setting a view filter for that person.
+			 */
 			@Override
 			public Object casePerson(Person person) {
 //				logger.debug(bundleMarker,"Received Person selection");
@@ -107,6 +119,16 @@ class ExhibitsStrategy implements SelectionStrategy {
 				return person;
 			}
 
+			/**
+			 * Handle an animal setting a view filter for that animal
+			 * and clear the current selection.
+			 * 
+			 * For the People View to synchronize on an animal this 
+			 * method would have to find the corresponding Exhibit
+			 * and send out a Person selection, but there maybe multiple
+			 * people that are exhibiting the same animal. So this method
+			 * does not resend an 
+			 */
 			@Override
 			public Object defaultCase(EObject object) {
 				Animal animal = null;
@@ -115,9 +137,13 @@ class ExhibitsStrategy implements SelectionStrategy {
 					animal = (Animal) object;
 					String id = animal.getId();
 					exhibitsView.setFilter(id, 2);
-					viewer.setSelection(new StructuredSelection(), true);
+					clearViewerSelection(viewer);
 				}
 				return animal;
+			}
+
+			private void clearViewerSelection(final TableViewer viewer) {
+				viewer.setSelection(new StructuredSelection(), true);
 			}
 
 		};

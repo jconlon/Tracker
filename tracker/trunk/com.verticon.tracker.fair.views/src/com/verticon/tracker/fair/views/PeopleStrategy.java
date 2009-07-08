@@ -31,8 +31,8 @@ public class PeopleStrategy implements SelectionStrategy {
 	}
 
 	/**
-	 * Sends out a Selection to the Event Admin Service to synchronize all
-	 * views.
+	 * Sends out a People Selection to the Event Admin Service to synchronize all
+	 * views listening for people.
 	 * 
 	 * Override this to implement what actions happen when a user manually
 	 * selects a single item in the TableViewer
@@ -49,12 +49,19 @@ public class PeopleStrategy implements SelectionStrategy {
 		peopleView.setSelectionOnOutlinePage(selection);
 	}
 	
-	
-
+	/**
+	 * Selections may come from the EventAdmin or the Workbench part.
+	 * 
+	 * Different types of selection objects are handled in the following manner:
+	 * <ul>
+	 * <li>A selection removes all filters and de-selects previous selection;</li>
+	 * <li>A single selected exhibit or person deploys the appropriate filter;</li>
+	 * </ul>
+	 */
 	public void handleWorkbenchAndEventAdminSingleSelection(
-			Object selectedObject, final TableViewer viewer, Event osgiEvent, SelectionController selectionController) {
+			Object selectedObject, final TableViewer viewer, Event osgiEvent, 
+			SelectionController selectionController) {
 		
-		// Only deal with Animal objects
 		FairSwitch<Object> visitor = new FairSwitch<Object>() {
 
 			@Override
