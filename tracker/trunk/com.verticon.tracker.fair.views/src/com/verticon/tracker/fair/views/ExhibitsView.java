@@ -1,6 +1,7 @@
 package com.verticon.tracker.fair.views;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -29,6 +31,7 @@ import com.verticon.tracker.editor.util.SelectionController;
 import com.verticon.tracker.editor.util.TrackerView;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
+import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
 import com.verticon.tracker.fair.views.PeopleView.PeopleColumn;
 
@@ -125,6 +128,16 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 		viewer.setInput(premises);
 		enableMenus(premises!=null);
 	}
+
+	 /**
+	  * @return a collection of ViewerFilters
+	  */
+	 @Override
+	 protected Collection<ViewerFilter> getViewerFilters(){
+		 return ViewsPlugin.plugin.getViewerFilters(FairPackage.Literals.EXHIBIT);
+	 }
+	 
+	 
 	
 	@Override
 	protected AdapterFactory createAdapterFactory() {

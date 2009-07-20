@@ -1,6 +1,7 @@
 package com.verticon.tracker.fair.views;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -30,6 +32,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import at.bestsolution.dataforms.util.viewers.GenericObservableMapCellLabelProvider;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.util.ColumnUtils;
 import com.verticon.tracker.editor.util.GenericViewSorter;
@@ -155,7 +158,15 @@ public class PeopleView extends TrackerView implements ItemsView{
 		enableMenus(tableInput!=null);
 	}
 
-
+	 /**
+	  * @return a collection of ViewerFilters
+	  */
+	 @Override
+	 protected Collection<ViewerFilter> getViewerFilters(){
+		 return ViewsPlugin.plugin.getViewerFilters(FairPackage.Literals.PERSON);
+	 }
+	 
+	 
 	private IObservableList getObservableList() {
 		// There may be no editors return a null if so
 		if (exhibitsSelectionController.getEditingDomain() == null) {

@@ -1,9 +1,12 @@
 package com.verticon.tracker.views;
 
+import java.util.Collection;
+
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Composite;
 
@@ -126,6 +129,14 @@ public class AnimalsView extends TrackerView  {
 		enableMenus(tableInput!=null);
 	}
 
+	/**
+	 * @return a collection of ViewerFilters
+	 */
+	@Override
+	protected Collection<ViewerFilter> getViewerFilters(){
+		return ViewsPlugin.plugin.getViewerFilters(TrackerPackage.Literals.ANIMAL);
+	}
+	
 	/**
 	 * 
 	 * @return an ObservableList of Animals
