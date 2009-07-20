@@ -167,8 +167,6 @@ public class OclQueryViewer {
 
 	/**
 	 * Create a new shell, add the widgets, open the shell
-	 * 
-	 * @return the shell that was created
 	 */
 	private void addChildControls(Composite composite) {
 
@@ -351,10 +349,12 @@ public class OclQueryViewer {
 	class QueryModelContentProvider implements IStructuredContentProvider,
 			IOclQueryModelListener {
 		public void inputChanged(Viewer v, Object oldInput, Object newInput) {
-			if (newInput != null)
+			if (newInput != null){
 				((OclQueryViewModel) newInput).addChangeListener(this);
-			if (oldInput != null)
+			}
+			if (oldInput != null){
 				((OclQueryViewModel) oldInput).removeChangeListener(this);
+			}
 		}
 
 		public void dispose() {
@@ -366,7 +366,7 @@ public class OclQueryViewer {
 			return oclQueryViewModel.getTasks().toArray();
 		}
 
-		public void addQuery(IOclQuery query) {
+		public void addOclQuery(IOclQuery query) {
 			tableViewer.add(query);
 		}
 
