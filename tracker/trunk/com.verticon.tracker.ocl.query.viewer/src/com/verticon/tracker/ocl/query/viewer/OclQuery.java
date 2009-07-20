@@ -35,7 +35,7 @@ import com.verticon.tracker.ocl.query.actions.AbstractQueryDelegate;
  * @author jconlon
  *
  */
-public class OclQuery extends AbstractQueryDelegate implements IOclQuery {
+public class OclQuery extends AbstractQueryDelegate implements IOclQuery, Cloneable {
 	private static final String PACKAGES = "packages";
 	private static final String URI = "uri";
 	private static final String PACKAGE = "package";
@@ -107,8 +107,8 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery {
 	/* (non-Javadoc)
 	 * @see com.verticon.tracker.ocl.query.viewer.IOclQuery#setDescription(java.lang.String)
 	 */
-	public void setErrorSyntax(String description) {
-		this.syntaxErrors=description;
+	public void setErrorSyntax(String syntaxErrors) {
+		this.syntaxErrors=syntaxErrors;
 	}
 
 	/* (non-Javadoc)
@@ -116,6 +116,26 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery {
 	 */
 	public void setName(String name) {
 		this.name=name;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof OclQuery){
+			OclQuery anotherQuery = (OclQuery)obj;
+			if(anotherQuery.getName().equals(name)){
+				if(anotherQuery.getType().equals(type)){
+					return true;
+				}
+				
+			}
+		}
+		
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return 17 * type.hashCode() * name.hashCode();
 	}
 
 	/* (non-Javadoc)
@@ -189,6 +209,37 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery {
 		return statement.execute();
 	}
 	
+	public boolean conditionIsSatisfied(EObject eObject){
+		if(condition==null){
+		  if(!validateQuery()){
+			  return false;
+		  }
+		}
+		if(condition!=null){
+			return condition.isSatisfied(eObject);
+		}
+		return false;
+//		Constraint invariant = null;
+//		OCL<?, EClassifier, ?, ?, ?, ?, ?, ?, ?, Constraint, EClass, EObject> ocl;
+//	    ocl = OCL.newInstance(EcoreEnvironmentFactory.INSTANCE);
+//	    
+//	    // create an OCL helper object
+//	    OCLHelper<EClassifier, ?, ?, Constraint> helper = ocl.createOCLHelper();
+//	    
+//
+//		try {
+//		    // set the OCL context classifier
+//		    helper.setContext(getContextClass());
+//		    
+//		    invariant = helper.createInvariant(
+//		        "Library.allInstances()->forAll(b1, b2 | b1 <> b2 implies b1.title <> b2.title)");
+//		} catch (ParserException e) {
+//		    // record failure to parse
+//		    System.err.println(e.getLocalizedMessage());
+//		}
+
+	}
+	
 	/**
 	 * Validates the query statement.
 	 * 
@@ -236,7 +287,7 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery {
 	 * Find a registered packages to resolve the type to an EClass
 	 * @return the EClass for the type
 	 */
-	private EClass getContextClass(){
+	public EClass getContextClass(){
 		EPackage.Registry registry = EPackage.Registry.INSTANCE;	
 
 		for (String key : getPackages()) {
@@ -278,6 +329,15 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery {
 		
 		return cachedOCLPackages;
 		
+	}
+
+	@Override
+	public OclQuery clone() {
+		OclQuery copy = new OclQuery(name);
+		copy.setErrorSyntax(syntaxErrors);
+		copy.setQuery(query);
+		copy.setType(type);
+		return copy;
 	}
 	
 	

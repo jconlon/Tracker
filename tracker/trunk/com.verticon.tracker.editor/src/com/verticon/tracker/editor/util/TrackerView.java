@@ -3,6 +3,8 @@ package com.verticon.tracker.editor.util;
 import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.databinding.beans.BeansObservables;
@@ -27,6 +29,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
@@ -105,6 +108,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	 */
 	protected TableViewer tableViewer;
 
+
 	private CTabFolder detailFormTabFolder;
 
 	/**
@@ -125,6 +129,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	private Action addAction;
 	private Action deleteAction;
 	private Action synchroizeSelectionHandling;
+	private Action removeAllViewerFilters;
 	private AdapterFactory adapterFactory = null;
 	private IPropertiesFormProvider defaultPropertiesFormProvider;
 	private final ViewModel viewModel = new ViewModel();
@@ -140,6 +145,9 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	private ScrolledComposite formParent;
 
 	private Composite tableParent;
+	
+	private List<FilterAction> activeFilters= new ArrayList<FilterAction>();
+	
 
 	/**
 	 * @return title of the folder
@@ -627,13 +635,31 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 
 		
 		// Enable selection handling
-		synchroizeSelectionHandling = new Action("&Synchronize Selection Handling",Action.AS_CHECK_BOX){};
+		synchroizeSelectionHandling = new Action("&Synchronize Selection Handling",
+				Action.AS_CHECK_BOX){};
 		synchroizeSelectionHandling.setChecked(true);
 		synchroizeSelectionHandling.setImageDescriptor(platformImages.getImageDescriptor(
 				ISharedImages.IMG_ELCL_SYNCED));
 		synchroizeSelectionHandling.setDisabledImageDescriptor(platformImages.getImageDescriptor(
 				ISharedImages.IMG_ELCL_SYNCED_DISABLED));
 		synchroizeSelectionHandling.setToolTipText("Synchronize selections on this view with other Tracker Editors and Views.");
+		
+		
+		removeAllViewerFilters = new Action("&Remove all View Filters") {
+			@Override
+			public void run() {
+				for (FilterAction filterAction : activeFilters) {
+					tableViewer.removeFilter(filterAction.getFilter());
+				}
+				activeFilters.clear();
+				setEnabled(false);
+			}
+		};
+		removeAllViewerFilters.setImageDescriptor(platformImages.getImageDescriptor(
+				ISharedImages.IMG_ELCL_REMOVEALL));
+		removeAllViewerFilters.setDisabledImageDescriptor(platformImages.getImageDescriptor(
+				ISharedImages.IMG_ELCL_REMOVEALL_DISABLED));
+		removeAllViewerFilters.setEnabled(false);
 		
 	}
 
@@ -671,14 +697,99 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		manager.add(showDetailAction);
 		manager.add(synchroizeSelectionHandling);
 		
-		MenuManager menu1 = new MenuManager("&Control Column Visibility", "columnVisibility");
+		MenuManager menu1 = new MenuManager("&Column Visibility", "columnVisibility");
 		for (Action action : actions) {
 			menu1.add(action);
 		}
 		manager.add(menu1);
+		
+		final MenuManager menu2 = new MenuManager("&Table Filters", "tableFilters");
+		Action action = new Action("Example", Action.AS_CHECK_BOX){};
+		action.setEnabled(true);
+		menu2.add(action);
+		
+		menu2.addMenuListener(new IMenuListener(){
+
+			@Override
+			public void menuAboutToShow(IMenuManager manager) {
+				manager.removeAll();
+				manager.add(removeAllViewerFilters);
+				List<FilterAction> actionsToShow = new ArrayList<FilterAction>(activeFilters);
+			    Collection<ViewerFilter> filters;
+				try {
+					filters = getViewerFilters();
+				} catch (Exception e) {
+					e.printStackTrace();
+					return;
+				}
+			    
+				for (final ViewerFilter filter : filters){
+					FilterAction action = new FilterAction(filter);
+					if(!actionsToShow.contains(action)){
+						actionsToShow.add(action);
+					}
+				}
+				
+				Collections.sort(actionsToShow);
+				for (FilterAction action : actionsToShow) {
+					manager.add(action);
+				}
+				
+			}});
+
+		manager.add(menu2);
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
-  
+	}
+		//Action Encapsulating a ViewerFilter
+	class FilterAction extends Action implements Comparable<FilterAction>{
+	    final ViewerFilter filter;
+
+		private FilterAction(ViewerFilter filter) {
+			super(filter.toString(), Action.AS_CHECK_BOX);
+			this.filter = filter;
+		}
+		@Override
+		public void run() {
+			if (isChecked()) {
+				tableViewer.addFilter(filter);
+				activeFilters.add(this);
+				removeAllViewerFilters.setEnabled(true);
+			} else {
+				tableViewer.removeFilter(filter);
+				activeFilters.remove(this);
+				if(activeFilters.isEmpty()){
+					removeAllViewerFilters.setEnabled(false);
+				}
+			}
+		}
+		
+		ViewerFilter getFilter() {
+			return filter;
+		}
+		//Equal if both filters are equal
+		@Override
+		public boolean equals(Object obj) {
+			if(obj instanceof FilterAction){
+				return filter.equals(((FilterAction)obj).getFilter());
+			}
+			System.out.println(this+ " not equal to "+obj);
+			return false;
+		}
+		@Override
+		public int hashCode() {
+			return filter.hashCode() * 17;
+		}
+		@Override
+		public int compareTo(FilterAction o) {
+			return toString().compareTo(o.toString());
+		}
+		@Override
+		public String toString() {
+			return "FilterAction:"+filter;
+		}
+		
+		
 		
 	}
 
@@ -690,6 +801,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		manager.add(showMasterAction);
 		manager.add(showDetailAction);
 		manager.add(synchroizeSelectionHandling);
+		manager.add(removeAllViewerFilters);
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
@@ -811,7 +923,25 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		ColumnUtils.saveState(memento, actions);
 		super.saveState(memento);
 	}
+//	private CopyOnWriteArrayList<ViewerFilter>  filters 
+//	= new CopyOnWriteArrayList<ViewerFilter>();
 
+	
+//	public void removeViewerFilter(ViewerFilter filter, EClass type){
+//		filters.remove(filter);
+//	}
+//	
+//	
+//	public void addViewerFilter(ViewerFilter filter, EClass type){
+//		filters.add(filter);
+//	}
+
+	/**
+	 * Subclasses provide ViewerFilters appropriate to the element
+	 * they display
+	 */
+	protected abstract Collection<ViewerFilter> getViewerFilters();
+	
 	private void saveColOrder(IMemento memento, Table table) {
 		int[] positions = table.getColumnOrder();
 		for (int i = 0; i < positions.length; i++) {

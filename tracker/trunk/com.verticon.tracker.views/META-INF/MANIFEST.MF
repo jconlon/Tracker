@@ -32,3 +32,6 @@ Import-Package: at.bestsolution.dataforms.util.viewers,
 Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.edit.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: com.verticon.tracker.views.ViewsPlugin
+

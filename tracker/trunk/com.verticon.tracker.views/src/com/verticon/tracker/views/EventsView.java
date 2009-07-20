@@ -1,12 +1,16 @@
 package com.verticon.tracker.views;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Composite;
 
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.presentation.EventHistoryContentProvider;
 import com.verticon.tracker.editor.util.ISelectionController;
 import com.verticon.tracker.editor.util.ItemsView;
@@ -121,4 +125,12 @@ public class EventsView extends TrackerView implements ItemsView{
 		getSite().getPage().removeSelectionListener(eventSelectionController);
 		super.dispose();
 	}
+	 
+	 /**
+	  * @return a collection of ViewerFilters
+	  */
+	 @Override
+	 protected Collection<ViewerFilter> getViewerFilters(){
+		 return ViewsPlugin.plugin.getViewerFilters(TrackerPackage.Literals.EVENT);
+	 }
 }
