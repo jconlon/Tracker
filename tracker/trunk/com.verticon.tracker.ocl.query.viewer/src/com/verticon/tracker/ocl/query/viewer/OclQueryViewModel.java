@@ -74,7 +74,7 @@ public class OclQueryViewModel {
 		queries.add(queries.size(), query);
 		Iterator<IOclQueryModelListener> iterator = changeListeners.iterator();
 		while (iterator.hasNext()) {
-			iterator.next().addQuery(query);
+			iterator.next().addOclQuery(query);
 		}
 		query.validateQuery();
 		saveQueries();

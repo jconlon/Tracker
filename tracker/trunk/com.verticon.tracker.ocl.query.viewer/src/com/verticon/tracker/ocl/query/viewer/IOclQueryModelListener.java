@@ -12,9 +12,8 @@ public interface IOclQueryModelListener {
 	/**
 	 * Reflect the fact that a IOclQuery was added to the IOclQuery Model
 	 * 
-	 * @param publisher
 	 */
-	public void addQuery(IOclQuery query);
+	public void addOclQuery(IOclQuery query);
 
 	/**
 	 * Update the view to reflect the fact that a IOclQuery was removed from the
