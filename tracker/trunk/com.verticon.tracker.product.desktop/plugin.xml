@@ -11,7 +11,7 @@
             name="Tracker Livestock Information Desktop">
          <property
                name="windowImages"
-               value="icons/tracker_desktop_16.png,icons/tracker_desktop_32.png">
+               value="icons/cow_16.png,icons/cow_32.png">
          </property>
           <property
                 name="aboutText"
@@ -64,7 +64,7 @@
         </property>
         <property
               name="introBrandingImage"
-              value="product:icons/tracker_desktop_32.png">
+              value="product:icons/cow_32.png">
         </property>
       </product>
    </extension>
@@ -74,7 +74,7 @@
          point="org.eclipse.ui.intro">
       <intro
             class="org.eclipse.ui.intro.config.CustomizableIntroPart"
-            icon="icons/tracker_desktop_16.png"
+            icon="icons/cow_16.png"
             id="com.verticon.tracker.product.desktop.intro">
       </intro>
       <introProductBinding
@@ -88,7 +88,7 @@
          point="org.eclipse.ui.perspectives">
       <perspective
             class="com.verticon.tracker.product.desktop.PerspectiveFactory"
-            icon="icons/tracker_desktop_16.png"
+            icon="icons/cow_16.png"
             id="com.verticon.tracker.product.desktop.perspective"
             name="Tracker">
       </perspective>
