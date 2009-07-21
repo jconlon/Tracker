@@ -35,7 +35,7 @@ Tracker is powered by Eclipse technology and includes Eclipse plugins that can b
 -XX:MaxPermSize=256m</vmArgsWin>
    </launcherArgs>
 
-   <windowImages i16="/com.verticon.tracker.product.desktop/icons/tracker_desktop_16.png" i32="/com.verticon.tracker.product.desktop/icons/tracker_desktop_32.png"/>
+   <windowImages i16="/com.verticon.tracker.product.desktop/icons/cow_16.png" i32="/com.verticon.tracker.product.desktop/icons/cow_32.png" i48="/com.verticon.tracker.product.desktop/icons/cow_48.png"/>
 
    <splash
       location="com.verticon.tracker.product.desktop"
@@ -43,10 +43,13 @@ Tracker is powered by Eclipse technology and includes Eclipse plugins that can b
       startupMessageRect="7,225,441,20"
       startupForegroundColor="ADD8E6" />
    <launcher name="tracker">
-      <linux icon="/com.verticon.tracker.product.desktop/icons/icon.xpm"/>
+      <linux icon="/com.verticon.tracker.product.desktop/icons/cow.xpm"/>
       <solaris/>
       <win useIco="false">
-         <bmp/>
+         <bmp
+            winSmallHigh="/com.verticon.tracker.product.desktop/icons/cow_16_32.bmp"
+            winMediumHigh="/com.verticon.tracker.product.desktop/icons/cow_32_32.bmp"
+            winLargeHigh="/com.verticon.tracker.product.desktop/icons/cow_48_32.bmp"/>
       </win>
    </launcher>
 
