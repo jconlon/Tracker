@@ -6,7 +6,6 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.ISources;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.verticon.tracker.editor.presentation.AddTagIdsAndTemplateWizard;
@@ -30,34 +29,6 @@ import com.verticon.tracker.editor.presentation.IPremisesProvider;
  */
 public class ImportTagIdsAsTemplateEventsHandler extends AbstractHandler {
 
-	/**
-	 *  workaround for  https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743 
-	 *  Scheduled for fix in 3.5
-	 */
-	private boolean isEnabled;
-	
-	/**
-	 *  workaround for  https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743 
-	 *  Scheduled for fix in 3.5
-	 */
-	@Override
-	public boolean isEnabled() {
-		return isEnabled;
-	}
-
-	/**
-	 *  workaround for  https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743 
-	 *  Scheduled for fix in 3.5
-	 */
-	@Override
-	public void setEnabled(Object evaluationContext) {
-		IEditorPart editorPart = (IEditorPart) HandlerUtil.getVariable(evaluationContext, 
-				ISources.ACTIVE_EDITOR_NAME);
-		isEnabled = 
-				editorPart.getAdapter(IPremisesProvider.class) != null;
-		super.setEnabled(evaluationContext);
-	}
-	
 	/*
 	 * (non-Javadoc)
 	 * 

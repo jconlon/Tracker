@@ -23,31 +23,6 @@ import com.verticon.tracker.fair.editor.presentation.UpdatePinsWizard;
 public class PeopleChangeMoveEventPinsHandler extends AbstractHandler implements
 		IHandler {
 
-//	/**
-//	 *  workaround for  https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743 
-//	 *  Scheduled for fix in 3.5
-//	 */
-//	private boolean isEnabled;
-//	
-//	/**
-//	 *  workaround for  https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743 
-//	 *  Scheduled for fix in 3.5
-//	 */
-//	@Override
-//	public boolean isEnabled() {
-//		return isEnabled;
-//	}
-//
-//	/**
-//	 *  workaround for  https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743 
-//	 *  Scheduled for fix in 3.5
-//	 */
-//	@Override
-//	public void setEnabled(Object evaluationContext) {
-//		IEditorPart editorPart = (IEditorPart) HandlerUtil.getVariable(evaluationContext, ISources.ACTIVE_EDITOR_NAME);
-//		isEnabled = editorPart.getAdapter(IEditingDomainProvider.class) != null;
-//		super.setEnabled(evaluationContext);
-//	}
 	/* (non-Javadoc)
 	 * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
 	 */

@@ -11,7 +11,6 @@ import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.ISources;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.verticon.tracker.editor.presentation.IPremisesProvider;
@@ -23,31 +22,6 @@ import com.verticon.tracker.editor.presentation.ModifyEventsWizard;
  */
 public class EventsModifyHandler extends AbstractHandler implements IHandler {
 
-	/**
-	 *  workaround for  https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743 
-	 *  Scheduled for fix in 3.5
-	 */
-	private boolean isEnabled;
-	
-	/**
-	 *  workaround for  https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743 
-	 *  Scheduled for fix in 3.5
-	 */
-	@Override
-	public boolean isEnabled() {
-		return isEnabled;
-	}
-
-	/**
-	 *  workaround for  https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743 
-	 *  Scheduled for fix in 3.5
-	 */
-	@Override
-	public void setEnabled(Object evaluationContext) {
-		IEditorPart editorPart = (IEditorPart) HandlerUtil.getVariable(evaluationContext, ISources.ACTIVE_EDITOR_NAME);
-		isEnabled = editorPart.getAdapter(IEditingDomainProvider.class) != null;
-		super.setEnabled(evaluationContext);
-	}
 	/* (non-Javadoc)
 	 * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
 	 */
@@ -64,5 +38,4 @@ public class EventsModifyHandler extends AbstractHandler implements IHandler {
 		dialog.open();
 		return null;
 	}
-
 }
