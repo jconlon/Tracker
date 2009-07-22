@@ -193,7 +193,7 @@ public class TagImpl extends EObjectImpl implements Tag {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.TAG__USAIN_NUMBER_USED:
-				return isUsainNumberUsed() ? Boolean.TRUE : Boolean.FALSE;
+				return isUsainNumberUsed();
 			case TrackerPackage.TAG__EVENTS:
 				return getEvents();
 			case TrackerPackage.TAG__ID:

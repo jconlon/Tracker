@@ -272,15 +272,15 @@ public class MilkTestImpl extends EventImpl implements MilkTest {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.MILK_TEST__POUNDS_PRODUCED:
-				return new Double(getPoundsProduced());
+				return getPoundsProduced();
 			case TrackerPackage.MILK_TEST__PERCENT_BUTTER_FAT:
-				return new Double(getPercentButterFat());
+				return getPercentButterFat();
 			case TrackerPackage.MILK_TEST__PERCENT_PROTEIN:
-				return new Double(getPercentProtein());
+				return getPercentProtein();
 			case TrackerPackage.MILK_TEST__SOMATIC_CELL_COUNTS:
-				return new Integer(getSomaticCellCounts());
+				return getSomaticCellCounts();
 			case TrackerPackage.MILK_TEST__OTHER_SOLIDS:
-				return new Double(getOtherSolids());
+				return getOtherSolids();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -294,19 +294,19 @@ public class MilkTestImpl extends EventImpl implements MilkTest {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackerPackage.MILK_TEST__POUNDS_PRODUCED:
-				setPoundsProduced(((Double)newValue).doubleValue());
+				setPoundsProduced((Double)newValue);
 				return;
 			case TrackerPackage.MILK_TEST__PERCENT_BUTTER_FAT:
-				setPercentButterFat(((Double)newValue).doubleValue());
+				setPercentButterFat((Double)newValue);
 				return;
 			case TrackerPackage.MILK_TEST__PERCENT_PROTEIN:
-				setPercentProtein(((Double)newValue).doubleValue());
+				setPercentProtein((Double)newValue);
 				return;
 			case TrackerPackage.MILK_TEST__SOMATIC_CELL_COUNTS:
-				setSomaticCellCounts(((Integer)newValue).intValue());
+				setSomaticCellCounts((Integer)newValue);
 				return;
 			case TrackerPackage.MILK_TEST__OTHER_SOLIDS:
-				setOtherSolids(((Double)newValue).doubleValue());
+				setOtherSolids((Double)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

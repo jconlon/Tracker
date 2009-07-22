@@ -104,7 +104,7 @@ public class BirthDefectImpl extends EventImpl implements BirthDefect {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.BIRTH_DEFECT__FREEMARTIN:
-				return isFreemartin() ? Boolean.TRUE : Boolean.FALSE;
+				return isFreemartin();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -118,7 +118,7 @@ public class BirthDefectImpl extends EventImpl implements BirthDefect {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackerPackage.BIRTH_DEFECT__FREEMARTIN:
-				setFreemartin(((Boolean)newValue).booleanValue());
+				setFreemartin((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

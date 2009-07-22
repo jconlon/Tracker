@@ -266,7 +266,7 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 	 * @generated
 	 */
 	public Tag getTag() {
-		if (eContainerFeatureID != TrackerPackage.EVENT__TAG) return null;
+		if (eContainerFeatureID() != TrackerPackage.EVENT__TAG) return null;
 		return (Tag)eContainer();
 	}
 
@@ -286,7 +286,7 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 	 * @generated
 	 */
 	public void setTag(Tag newTag) {
-		if (newTag != eInternalContainer() || (eContainerFeatureID != TrackerPackage.EVENT__TAG && newTag != null)) {
+		if (newTag != eInternalContainer() || (eContainerFeatureID() != TrackerPackage.EVENT__TAG && newTag != null)) {
 			if (EcoreUtil.isAncestor(this, newTag))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -347,7 +347,7 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case TrackerPackage.EVENT__TAG:
 				return eInternalContainer().eInverseRemove(this, TrackerPackage.TAG__EVENTS, Tag.class, msgs);
 		}
@@ -365,11 +365,11 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 			case TrackerPackage.EVENT__DATE_TIME:
 				return getDateTime();
 			case TrackerPackage.EVENT__EVENT_CODE:
-				return new Integer(getEventCode());
+				return getEventCode();
 			case TrackerPackage.EVENT__ELECTRONICALLY_READ:
-				return isElectronicallyRead() ? Boolean.TRUE : Boolean.FALSE;
+				return isElectronicallyRead();
 			case TrackerPackage.EVENT__CORRECTION:
-				return isCorrection() ? Boolean.TRUE : Boolean.FALSE;
+				return isCorrection();
 			case TrackerPackage.EVENT__COMMENTS:
 				return getComments();
 			case TrackerPackage.EVENT__TAG:
@@ -392,10 +392,10 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 				setDateTime((Date)newValue);
 				return;
 			case TrackerPackage.EVENT__ELECTRONICALLY_READ:
-				setElectronicallyRead(((Boolean)newValue).booleanValue());
+				setElectronicallyRead((Boolean)newValue);
 				return;
 			case TrackerPackage.EVENT__CORRECTION:
-				setCorrection(((Boolean)newValue).booleanValue());
+				setCorrection((Boolean)newValue);
 				return;
 			case TrackerPackage.EVENT__COMMENTS:
 				setComments((String)newValue);
