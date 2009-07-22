@@ -98,6 +98,17 @@ public class BovineDairyItemProvider
 	}
 
 	/**
+	 * This returns BovineDairy.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/BovineDairy"));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * Uses superclass implemenation to return a local specific label
