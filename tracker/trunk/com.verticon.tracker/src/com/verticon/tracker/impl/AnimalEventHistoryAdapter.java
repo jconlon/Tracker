@@ -217,8 +217,9 @@ public class AnimalEventHistoryAdapter extends EContentAdapter implements
 			//Ignore this
 			break;
 		default:
-			logger.error(bundleMarker,"EventHandler: Did not handle Event {}", n);
-		break;
+			//	Ignore all other features
+			//	logger.error(bundleMarker,"EventHandler: Did not handle Event {}", n);
+			break;
 		}
 
 	}
