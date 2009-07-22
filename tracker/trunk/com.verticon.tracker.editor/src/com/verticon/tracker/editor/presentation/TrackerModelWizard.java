@@ -288,7 +288,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	 static class TrackerModelWizardNewFileCreationPage extends WizardNewFileCreationPage {
+	 public class TrackerModelWizardNewFileCreationPage extends WizardNewFileCreationPage {
 		/**
 		 * Pass in the selection.
 		 * <!-- begin-user-doc -->
