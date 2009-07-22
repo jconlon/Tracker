@@ -54,7 +54,6 @@ public class ViewsPlugin extends Plugin implements IViewerFilters{
 
 	@Override
 	public void start(BundleContext context) throws Exception {
-		System.out.println("Starting Tracker ViewsPlugin");
 		bundleContext=context;
 		super.start(context);
 	}
