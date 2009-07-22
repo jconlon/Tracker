@@ -189,9 +189,9 @@ public class BirthingImpl extends EventImpl implements Birthing {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.BIRTHING__VIABILITY:
-				return isViability() ? Boolean.TRUE : Boolean.FALSE;
+				return isViability();
 			case TrackerPackage.BIRTHING__ASSISTED:
-				return isAssisted() ? Boolean.TRUE : Boolean.FALSE;
+				return isAssisted();
 			case TrackerPackage.BIRTHING__DIFFICULTY:
 				return getDifficulty();
 		}
@@ -207,10 +207,10 @@ public class BirthingImpl extends EventImpl implements Birthing {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackerPackage.BIRTHING__VIABILITY:
-				setViability(((Boolean)newValue).booleanValue());
+				setViability((Boolean)newValue);
 				return;
 			case TrackerPackage.BIRTHING__ASSISTED:
-				setAssisted(((Boolean)newValue).booleanValue());
+				setAssisted((Boolean)newValue);
 				return;
 			case TrackerPackage.BIRTHING__DIFFICULTY:
 				setDifficulty((OneToTen)newValue);

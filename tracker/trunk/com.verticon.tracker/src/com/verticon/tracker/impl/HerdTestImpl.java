@@ -176,9 +176,9 @@ public class HerdTestImpl extends EventImpl implements HerdTest {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.HERD_TEST__PREGNANT:
-				return isPregnant() ? Boolean.TRUE : Boolean.FALSE;
+				return isPregnant();
 			case TrackerPackage.HERD_TEST__DAYS_SINCE_BRED_ESTIMATE:
-				return new Integer(getDaysSinceBredEstimate());
+				return getDaysSinceBredEstimate();
 			case TrackerPackage.HERD_TEST__BRED_DATE_ESTIMATE:
 				return getBredDateEstimate();
 		}
@@ -194,10 +194,10 @@ public class HerdTestImpl extends EventImpl implements HerdTest {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackerPackage.HERD_TEST__PREGNANT:
-				setPregnant(((Boolean)newValue).booleanValue());
+				setPregnant((Boolean)newValue);
 				return;
 			case TrackerPackage.HERD_TEST__DAYS_SINCE_BRED_ESTIMATE:
-				setDaysSinceBredEstimate(((Integer)newValue).intValue());
+				setDaysSinceBredEstimate((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

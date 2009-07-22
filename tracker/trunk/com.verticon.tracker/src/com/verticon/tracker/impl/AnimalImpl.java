@@ -1018,7 +1018,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 			case TrackerPackage.ANIMAL__VISUAL_ID:
 				return getVisualID();
 			case TrackerPackage.ANIMAL__AGE_IN_DAYS:
-				return new Integer(getAgeInDays());
+				return getAgeInDays();
 			case TrackerPackage.ANIMAL__ALTERNATIVE_ID:
 				return getAlternativeID();
 		}

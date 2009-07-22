@@ -166,7 +166,7 @@ public class ReplacedTagImpl extends EventImpl implements ReplacedTag {
 			case TrackerPackage.REPLACED_TAG__OLD_ID:
 				return getOldId();
 			case TrackerPackage.REPLACED_TAG__USAIN_NUMBER_USED_FOR_OLD_ID:
-				return isUsainNumberUsedForOldId() ? Boolean.TRUE : Boolean.FALSE;
+				return isUsainNumberUsedForOldId();
 			case TrackerPackage.REPLACED_TAG__OLD_TAG:
 				if (resolve) return getOldTag();
 				return basicGetOldTag();
