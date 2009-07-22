@@ -14,11 +14,12 @@
     
     <category
           id="com.verticon.tracker.editor.Wizard.category.examples"
-          name="%category.name.0"/> 
+          name="%category.name.0"
+          parentCategory="org.eclipse.ui.Examples"/> 
     
     <category
           id="com.verticon.tracker.editor.Wizard.category.ID"
-          name="%category.name.1"/>
+          name="%category.name.0"/>
      
     <wizard
       id = "com.verticon.tracker.editor.presentation.TrackerModelWizardID"
@@ -43,7 +44,7 @@
     <wizard
             name="%wizard.name.0"
             icon="icons/full/obj16/TrackerModelFile.gif"
-            category="com.verticon.tracker.editor.Wizard.category.examples"
+            category="org.eclipse.ui.Examples/com.verticon.tracker.editor.Wizard.category.examples"
             class="com.verticon.tracker.editor.presentation.SampleTrackerProjectWizard"
             project="true"
             id="com.verticon.tracker.editor.wizards.NewTrackerProjectWizard">
