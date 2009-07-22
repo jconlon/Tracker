@@ -208,32 +208,6 @@
             name="%category.name.2">
       </category>
       
-       <!-- 
-         	Many of these commands have defaultHandler classes that have workarounds to 
-         	activate on what could be an adapt condition on the 
-         	activeEditor. All these classes can be simplified when the
-         	
-              https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743
-              Cannot get adapt working on an IAdaptable, fix is available 
-              Eclipse in 3.5
-              
-              Here is an example handler of how it could work in 3.5.
-              
-             <handler
-            	class="com.verticon.tracker.editor.commands.ImportTagIdsAsTemplateEventsHandler"
-            	commandId="com.verticon.tracker.editor.commands.importTagIds.asTemplate.command">
-             	<activeWhen>
-    				<with variable="activeEditor">
-         				<adapt type="com.verticon.tracker.editor.presentation.IPremisesProvider"/>
-         	 	</activeWhen>
-         	 </handler>
-         	see handler class for workaround
-         	
-         	NOTE: 
-         	There still needs to be a further test to see if PremisesProvider really has a Premises
-         	and if the Editor is a Simple or Transaction Based Editor
-         	so a PremisesEditorTester PropertyTester was created. 
-       -->
       <!-- Place Holder in Popups Command -->
       <command
              id="com.verticon.tracker.editor.menus.popupany"
@@ -308,22 +282,27 @@
       </menuContribution>  
       <menuContribution
             locationURI="popup:com.verticon.tracker.editor.menus.popupany">
-        <!-- restrict this command to adapt on IContentOutlinePage when  
-               	https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743
-              		Scheduled for fix in 3.5 -->
-              		
+                  		
                <!-- Select the EObject elements in the Outline View -->
                <command
                      commandId="com.verticon.tracker.fair.editor.commands.generic.select.command"
                      icon="icons/full/obj16/selected_mode.gif"
                      style="push">
-                  <visibleWhen
-                        checkEnabled="false">
+                  <visibleWhen>
+                     <and>
                      <iterate>
                         <instanceof
                               value="org.eclipse.emf.ecore.EObject">
                         </instanceof>
                      </iterate>
+                	 <!-- 
+			        	Restricted to show only if the active Editor is a ContentOutlinePage.
+			        	Ticket#403
+          			 -->
+          			 <test
+               			 property="com.verticon.tracker.editor.isContentOutlinePage">
+          			</test>
+         			</and>
                   </visibleWhen>
                </command>
                
@@ -449,11 +428,21 @@
                       icon="icons/full/obj16/waiting.gif"
                       style="push">
                	<visibleWhen>
+               	     <and>
                          <with variable="activeMenuSelection">
 		                  <iterate>
       						 <instanceof value="com.verticon.tracker.Event"/>
     					  </iterate>
     					 </with>
+    					 
+    					 <!-- 
+    			        	Restricted to show only if the active Editors isPremisesEditor.
+    			        	Ticket#403
+              			 -->
+              			 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+    			     </and>
 	            </visibleWhen>
                	</command>
                 
@@ -487,6 +476,13 @@
             id="com.verticon.tracker.editor.propertyTester.PremisesEditorTester"
             namespace="com.verticon.tracker.editor"
             properties="isPremisesEditor, isSimplePremisesEditor"
+            type="java.lang.Object">
+      </propertyTester>
+      <propertyTester
+            class="com.verticon.tracker.editor.propertyTester.ContentOutlinePageTester"
+            id="com.verticon.tracker.editor.propertyTester.ContentOutlinePageTester"
+            namespace="com.verticon.tracker.editor"
+            properties="isContentOutlinePage"
             type="java.lang.Object">
       </propertyTester>
    </extension>
