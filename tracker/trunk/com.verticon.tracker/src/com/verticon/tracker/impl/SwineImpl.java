@@ -155,7 +155,7 @@ public class SwineImpl extends AnimalImpl implements Swine {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setRightEarNotching(int newRightEarNotching) {
 		int oldRightEarNotching = rightEarNotching;
@@ -200,9 +200,9 @@ public class SwineImpl extends AnimalImpl implements Swine {
 			case TrackerPackage.SWINE__SWINE_BREED:
 				return getSwineBreed();
 			case TrackerPackage.SWINE__RIGHT_EAR_NOTCHING:
-				return new Integer(getRightEarNotching());
+				return getRightEarNotching();
 			case TrackerPackage.SWINE__LEFT_EAR_NOTCHING:
-				return new Integer(getLeftEarNotching());
+				return getLeftEarNotching();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -219,10 +219,10 @@ public class SwineImpl extends AnimalImpl implements Swine {
 				setSwineBreed((SwineBreed)newValue);
 				return;
 			case TrackerPackage.SWINE__RIGHT_EAR_NOTCHING:
-				setRightEarNotching(((Integer)newValue).intValue());
+				setRightEarNotching((Integer)newValue);
 				return;
 			case TrackerPackage.SWINE__LEFT_EAR_NOTCHING:
-				setLeftEarNotching(((Integer)newValue).intValue());
+				setLeftEarNotching((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
