@@ -20,33 +20,6 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
  */
 public class GenericSelectInOutlineHandler extends AbstractHandler  {
 
-//	/**
-//	 *  workaround for  https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743 
-//	 *  Scheduled for fix in 3.5
-//	 *  FIXME isEnabled
-//	 */
-//	private boolean isEnabled;
-//	
-//	/**
-//	 *  workaround for  https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743 
-//	 *  Scheduled for fix in 3.5
-//	 */
-//	@Override
-//	public boolean isEnabled() {
-//		return isEnabled;
-//	}
-//
-//	/**
-//	 *  workaround for  https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743 
-//	 *  Scheduled for fix in 3.5
-//	 */
-//	@Override
-//	public void setEnabled(Object evaluationContext) {
-//		IEditorPart editorPart = (IEditorPart) HandlerUtil.getVariable(evaluationContext, ISources.ACTIVE_EDITOR_NAME);
-//		isEnabled = editorPart!=null && editorPart.getAdapter(IContentOutlinePage.class) != null;
-//		super.setEnabled(evaluationContext);
-//	}
-
 	/* (non-Javadoc)
 	 * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
 	 */
