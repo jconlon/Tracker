@@ -496,7 +496,7 @@
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
     </genClasses>
-    <genClasses image="false" ecoreClass="tracker.ecore#//BovineDairy">
+    <genClasses ecoreClass="tracker.ecore#//BovineDairy">
       <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//BovineDairy/dairyBreed">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
