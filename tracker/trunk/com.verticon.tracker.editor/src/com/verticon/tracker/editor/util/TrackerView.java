@@ -18,15 +18,19 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
@@ -167,11 +171,6 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	 */
 	protected abstract void setUpTable(AdapterFactory adapterFactory);
 
-//	/**
-//	 * Override point for subclasses to obtain the necessary input to feed the
-//	 * tableViewer.
-//	 */
-//	protected abstract void handleViewerInputChange();
 
 	/**
 	 * Subclasses must override this to identify the name of the item in the
@@ -181,6 +180,14 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	 */
 	protected abstract String getNameOfItemInMaster();
 
+
+	/**
+	 * Subclasses provide ViewerFilters appropriate to the element
+	 * they display
+	 */
+	protected abstract Collection<ViewerFilter> getViewerFilters();
+	
+	
 	/**
 	 * Override point for subclasses to create their own AdapterFactory
 	 * 
@@ -396,7 +403,13 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 						| SWT.BORDER, patternFilter);
 		masterFilteredTable.setFilterText("");
 		tableViewer = masterFilteredTable.getViewer();
-		// tableViewer.addSelectionChangedListener(this);
+		tableViewer.addSelectionChangedListener(new ISelectionChangedListener(){
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				setStatusLineManager(event.getSelectionProvider().getSelection());
+				
+			}});
 
 		Table table = tableViewer.getTable();
 		// set up table layout data
@@ -923,25 +936,8 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		ColumnUtils.saveState(memento, actions);
 		super.saveState(memento);
 	}
-//	private CopyOnWriteArrayList<ViewerFilter>  filters 
-//	= new CopyOnWriteArrayList<ViewerFilter>();
 
-	
-//	public void removeViewerFilter(ViewerFilter filter, EClass type){
-//		filters.remove(filter);
-//	}
-//	
-//	
-//	public void addViewerFilter(ViewerFilter filter, EClass type){
-//		filters.add(filter);
-//	}
 
-	/**
-	 * Subclasses provide ViewerFilters appropriate to the element
-	 * they display
-	 */
-	protected abstract Collection<ViewerFilter> getViewerFilters();
-	
 	private void saveColOrder(IMemento memento, Table table) {
 		int[] positions = table.getColumnOrder();
 		for (int i = 0; i < positions.length; i++) {
@@ -963,6 +959,34 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 			}
 			if(colOrder.length==table.getColumnCount()){
 				table.setColumnOrder(colOrder);
+			}
+		}
+	}
+	
+	private void setStatusLineManager(ISelection selection) {
+		IStatusLineManager statusLineManager = getViewSite().getActionBars().getStatusLineManager();
+
+		if (statusLineManager != null) {
+			if (selection instanceof IStructuredSelection) {
+				Collection<?> collection = ((IStructuredSelection)selection).toList();
+				switch (collection.size()) {
+					case 0: {
+						statusLineManager.setMessage("");
+						break;
+					}
+					case 1: {
+						String text = new AdapterFactoryItemDelegator(adapterFactory).getText(collection.iterator().next());
+						statusLineManager.setMessage("Selected Object: " + text);
+						break;
+					}
+					default: {
+						statusLineManager.setMessage("Selected "+ Integer.toString(collection.size())+' '+getNameOfItemInMaster()+" objects");
+						break;
+					}
+				}
+			}
+			else {
+				statusLineManager.setMessage("");
 			}
 		}
 	}
