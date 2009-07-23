@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -59,7 +60,7 @@ public class OclQueryViewModel {
 	}
 
 	/**
-	 * Add a query to the collection
+	 * Add a new query to the model
 	 * 
 	 */
 	public void addQuery() {
@@ -68,7 +69,33 @@ public class OclQueryViewModel {
 	}
 
 	/**
-	 * Add a new query to the collection
+	 * 
+	 * @param query
+	 * @return true if the query is already in the model
+	 */
+	private boolean contains(IOclQuery query){
+		return queries.contains(query);
+	}
+	
+	/**
+	 * 
+	 * @param queries to add
+	 * @return number of queries added to the model
+	 */
+	public int add(Collection<IOclQuery> queries){
+			int addedQueries = 0;
+			for (IOclQuery query : queries) {
+				if(!contains(query) ){
+					addQuery(query);
+					addedQueries ++;
+				}
+			}
+		return addedQueries;
+	}
+	
+	/**
+	 * 
+	 * @param query to add
 	 */
 	public void addQuery(IOclQuery query) {
 		queries.add(queries.size(), query);
@@ -81,7 +108,7 @@ public class OclQueryViewModel {
 	}
 
 	/**
-	 * @param query
+	 * @param query to remove
 	 */
 	public void removeQuery(IOclQuery query) {
 		queries.remove(query);
@@ -93,7 +120,7 @@ public class OclQueryViewModel {
 	}
 
 	/**
-	 * @param query
+	 * @param query to change
 	 */
 	public void queryChanged(IOclQuery query) {
 		Iterator<IOclQueryModelListener> iterator = changeListeners.iterator();
