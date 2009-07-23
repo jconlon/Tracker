@@ -650,6 +650,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 			public void run() {
 				for (FilterAction filterAction : activeFilters) {
 					tableViewer.removeFilter(filterAction.getFilter());
+					filterAction.setChecked(false);
 				}
 				activeFilters.clear();
 				setEnabled(false);
