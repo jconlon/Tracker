@@ -45,12 +45,10 @@ public class FairRegistrationSelection extends FairSwitch<Object> {
 		}
 		//Need a Fair
 		if(getFair()==null){
-			System.out.println(this + " returning false no fair");
 			return false;
 		}
 		
 		if(selectedAnimals.isEmpty()){
-			System.out.println(this + " returning false with no animals");
 			return false;
 		}
 		return true;

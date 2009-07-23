@@ -774,7 +774,6 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 			if(obj instanceof FilterAction){
 				return filter.equals(((FilterAction)obj).getFilter());
 			}
-			System.out.println(this+ " not equal to "+obj);
 			return false;
 		}
 		@Override

@@ -38,7 +38,6 @@ public class ViewsPlugin extends Plugin implements IViewerFilters{
 				result = service.getViewerFilters(type);
 				bundleContext.ungetService(reference);
 			}else{
-				System.out.println("No Service available!");
 				result = Collections.emptyList();
 			}
 
