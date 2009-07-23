@@ -94,7 +94,7 @@ public class SampleQueriesHandler extends AbstractHandler {
 			    	 MessageDialog.openError(
 								window.getShell(),
 								"Add Sample Queries",
-								"Could not find a Queries View to add sample queries. Please open one.");
+								"Could not find a Queries View to add sample queries. Please open one and add the default queries.");
 			     }
 			 }
 		return null;
