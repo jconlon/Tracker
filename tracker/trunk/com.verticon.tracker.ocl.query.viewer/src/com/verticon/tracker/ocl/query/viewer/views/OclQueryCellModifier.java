@@ -2,8 +2,14 @@ package com.verticon.tracker.ocl.query.viewer.views;
 
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.swt.widgets.TableItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import com.verticon.tracker.ocl.query.viewer.IOclQuery;
+import com.verticon.tracker.ocl.query.viewer.OclQueryViewModel;
+import static com.verticon.tracker.ocl.query.viewer.OclQueryViewerPlugin.bundleMarker;
 
 /**
  * ICellModifier for the QueryViewer ICellModifier is called when the user
@@ -11,7 +17,14 @@ import com.verticon.tracker.ocl.query.viewer.IOclQuery;
  */
 
 public class OclQueryCellModifier implements ICellModifier {
-	private OclQueryViewer queryViewer;
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(OclQueryCellModifier.class);
+	
+	
+	private final OclQueryViewer queryViewer;
 
 	/**
 	 * Constructor
@@ -28,7 +41,8 @@ public class OclQueryCellModifier implements ICellModifier {
 	 *      java.lang.String)
 	 */
 	public boolean canModify(Object element, String property) {
-		return true;
+		
+		return element !=null;
 	}
 
 	/**
@@ -79,6 +93,10 @@ public class OclQueryCellModifier implements ICellModifier {
 		int columnIndex = queryViewer.getColumnNames().indexOf(property);
 
 		TableItem item = (TableItem) element;
+		if(item ==null){
+			logger.error(bundleMarker, "Failed to find an element for the OclViewer model.");
+			return;
+		}
 		IOclQuery query = (IOclQuery) item.getData();
 		String valueString;
 
