@@ -36,6 +36,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Widget;
 
 import com.verticon.tracker.ocl.query.viewer.IOclQuery;
 import com.verticon.tracker.ocl.query.viewer.IOclQueryModelListener;
@@ -270,7 +271,26 @@ public class OclQueryViewer {
 	 */
 	private void createTableViewer() {
 
-		tableViewer = new TableViewer(table);
+		tableViewer = new TableViewer(table){
+            
+			/**
+			 * 
+			 * OclQuery.equals was implemented to equal logically equal 
+			 * other OclQuery objects in collections. Changing these values
+			 * in this viewer will create the problem of not locating InputItems.
+			 * Although it looks unnecessary the following 
+			 * overrided method is necessary to find the OclQuery elements
+			 * associated MenuItems in the model. 
+			 * 
+			 * @since 0.3.5 
+			 */
+			@Override
+			protected Widget doFindInputItem(Object element) {
+				
+				Widget result = super.doFindItem(element);
+				return result;
+				
+			}};
 
 		tableViewer.setUseHashlookup(true);
 
@@ -363,12 +383,15 @@ public class OclQueryViewer {
 
 		// Return the tasks as an array of Objects
 		public Object[] getElements(Object parent) {
-			return oclQueryViewModel.getTasks().toArray();
+			
+			Object[] results = oclQueryViewModel.getTasks().toArray();
+			return results;
 		}
 
 		public void addOclQuery(IOclQuery query) {
 			tableViewer.add(query);
 		}
+		
 
 		public void removeOclQuery(IOclQuery query) {
 			tableViewer.remove(query);
