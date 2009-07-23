@@ -40,12 +40,12 @@ public class ViewsPlugin extends Plugin implements IViewerFilters{
 				result = service.getViewerFilters(type);
 				bundleContext.ungetService(reference);
 			}else{
-				System.out.println("No Service available!");
+//				System.out.println("No Service available!");
 				result = Collections.emptyList();
 			}
 
 		}else{
-			System.out.println("No BundleContext available in "+this+"!");
+//			System.out.println("No BundleContext available in "+this+"!");
 			result = Collections.emptyList();
 		}
 		return result;

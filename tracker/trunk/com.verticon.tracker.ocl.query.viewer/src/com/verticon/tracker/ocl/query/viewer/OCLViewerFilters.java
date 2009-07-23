@@ -34,10 +34,8 @@ public class OCLViewerFilters implements IViewerFilters {
 				 filters.add(filter);
 				}
 			}
-			System.out.println(this+" has # of filters "+filters.size());
 			return filters;
 		}
-		System.out.println("No OCLQueryViewer");
 		return Collections.emptyList();
 	}
 	

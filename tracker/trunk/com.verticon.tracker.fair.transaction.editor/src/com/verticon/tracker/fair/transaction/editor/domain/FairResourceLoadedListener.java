@@ -93,7 +93,7 @@ public class FairResourceLoadedListener extends DemultiplexingListener {
 	protected void handleNotification(TransactionalEditingDomain domain, Notification notification) {
 		if (ignoredResources.contains(notification.getNotifier())) {
 			// skip any resource that we are supposed to ignore
-			System.out.println("Skipping..."+this);
+//			System.out.println("Skipping..."+this);
 			return;
 		}
 	
@@ -107,7 +107,7 @@ public class FairResourceLoadedListener extends DemultiplexingListener {
 					public void run() {
 						try {
 							IWorkbenchPage page = getActivePage();
-							System.out.println("Opening "+file+ " with "+this);
+//							System.out.println("Opening "+file+ " with "+this);
 							if (page != null) {
 								IEditorPart activeEditor = page.getActiveEditor();
 								
@@ -137,7 +137,7 @@ public class FairResourceLoadedListener extends DemultiplexingListener {
 				Display.getDefault().asyncExec(new Runnable() {
 					public void run() {
 						IWorkbenchPage page = getActivePage();
-						System.out.println("Closing "+file+ " with "+this);
+//						System.out.println("Closing "+file+ " with "+this);
 						if (page != null) {
 							IEditorReference[] editors = page.findEditors(
 									new FileEditorInput(file),
