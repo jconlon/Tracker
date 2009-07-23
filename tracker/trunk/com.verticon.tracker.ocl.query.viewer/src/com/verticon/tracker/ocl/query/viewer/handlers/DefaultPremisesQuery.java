@@ -13,10 +13,10 @@ enum DefaultPremisesQuery {
 			"self.eventHistory() -> select(e : Event | (e.oclIsTypeOf(MovedIn) and e.oclAsType(MovedIn).sourcePin.oclIsUndefined()) or (e.oclIsTypeOf(MovedOut) and e.oclAsType(MovedOut).destinationPin.oclIsUndefined())) ->size() > 0",
 			"Animal"),
 			
-   ANIMAL_UNIDENTIFIED_MOVEDOUT_PINS(
-					"Moved out to an unidentified premises",
-					"self.eventHistory() -> select(e : Event | (e.oclIsTypeOf(MovedOut) and e.oclAsType(MovedOut).destinationPin.oclIsUndefined()) ) ->size() > 0",
-					"Animal"),
+    ANIMAL_UNIDENTIFIED_MOVEDOUT_PINS(
+			"Moved out to an unidentified premises",
+			"self.eventHistory() -> select(e : Event | (e.oclIsTypeOf(MovedOut) and e.oclAsType(MovedOut).destinationPin.oclIsUndefined()) ) ->size() > 0",
+			"Animal"),
 
 	ANIMAL_UNIDENTIFIED_MOVEIN_PINS(
 			"Moved in from an unidentified premises",
@@ -25,17 +25,37 @@ enum DefaultPremisesQuery {
 			
 	ANIMAL_LOST_TAGS(
 			"Have lost tags",
-			"self.eventHistory() -> select(e : Event | (e.oclIsTypeOf(LostTag)) ) ->size() > 0",
+			"self.eventHistory() -> select(e : Event | (e.oclIsTypeOf(LostTag))) ->size() > 0",
 			"Animal"),
+			
+	BOVINE_MIN_WEIGHT_GAINERS(
+			"Bovine minimium weight gain (2)",
+			"self.weightGainPerDay.oclIsUndefined() = false and self.weightGainPerDay >= 2",
+			"Bovine"),
 	
-	ANIMAL_LOW_WEIGHT_GAINERS(
-			"Low weight gainers",
-			"self.weightGainPerDay.oclIsUndefined() = false and self.weightGainPerDay<3",
-			"Animal"),
+	BOVINE_MIN_WEIGHT(
+			"Bovine minimium weight (1100)",
+			"self.weight.oclIsUndefined() = false and self.weight >= 1100",
+			"Bovine"),
+			
+	SWINE_MIN_WEIGHT_GAINERS(
+			"Swine minimium weight gain (1.5)",
+			"self.weightGainPerDay.oclIsUndefined() = false and self.weightGainPerDay >= 1.5",
+			"Swine"),
+			
+	SWINE_MIN_WEIGHT(
+			"Swine minimium weight (235)",
+			"self.weight.oclIsUndefined() = false and self.weight >= 235",
+			"Swine"),
 	
+	OVINE_MIN_WEIGHT(
+			"Sheep minimium weight (100)",
+			"self.weight.oclIsUndefined() = false and self.weight >= 100",
+			"Ovine"),
+					
 	EVENT_LOW_WEIGHT_GAINERS(
 			"Low weight gainers",
-			"self.weightGainPerDay.oclIsUndefined() = false and self.weightGainPerDay<3",
+			"self.weightGainPerDay.oclIsUndefined() = false and self.weightGainPerDay < 3",
 			"WeighIn"),
 		
     EVENT_EXCESSIVE_CELL_COUNT(

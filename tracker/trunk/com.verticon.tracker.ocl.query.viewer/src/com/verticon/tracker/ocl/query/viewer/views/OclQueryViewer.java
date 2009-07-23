@@ -4,6 +4,7 @@
 package com.verticon.tracker.ocl.query.viewer.views;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -349,6 +350,7 @@ public class OclQueryViewer {
 	
 
 		String[] out = {};
+		Collections.sort(classNames);
 		return classNames.toArray(out);
 	}
 
