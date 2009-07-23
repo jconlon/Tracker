@@ -44,20 +44,6 @@
          <viewShortcut id="com.verticon.tracker.views.EventsView"/>
       </perspectiveExtension>
    </extension>
-   <extension
-         point="org.eclipse.ui.menus">
-      <menuContribution
-            locationURI="menu: com.verticon.tracker.views.menuContribution1">
-         <menu
-               label="Filters"
-               mnemonic="F">
-            <dynamic
-                  class="com.verticon.tracker.views.ContributionItem1"
-                  id="com.verticon.tracker.views.dynamic1">
-            </dynamic>
-         </menu>
-      </menuContribution>
-   </extension>
 
 
 </plugin>
