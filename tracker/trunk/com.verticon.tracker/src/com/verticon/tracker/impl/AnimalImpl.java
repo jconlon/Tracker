@@ -643,22 +643,9 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 		if(mostCurrentEvent == null){
 			mostCurrentEvent =  findMostCurrentEvent();
 		}
-		return mostCurrentEvent.getDateTime();
+		return mostCurrentEvent != null ? mostCurrentEvent.getDateTime():null;
 	}
 
-	
-//	private Date calculateLastDateTime() {
-//		List<Event> winners = new LinkedList<Event>(eventHistory());
-//		if(winners.isEmpty()){
-//			return null;
-//		}
-//		// Sort events according to date
-//		Collections.sort(winners, new Comparator<Event>() {
-//			public int compare(Event event1, Event event2) {
-//				return event2.getDateTime().compareTo(event1.getDateTime());
-//			}});
-//		return winners.get(0).getDateTime();
-//	}
 
 /**
 	 * <!-- begin-user-doc -->
