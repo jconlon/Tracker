@@ -426,6 +426,13 @@ public class TrackerSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TrackerPackage.US_OVINE_GRADING: {
+				USOvineGrading usOvineGrading = (USOvineGrading)theEObject;
+				T result = caseUSOvineGrading(usOvineGrading);
+				if (result == null) result = caseEvent(usOvineGrading);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -847,6 +854,21 @@ public class TrackerSwitch<T> {
 	 * @generated
 	 */
 	public T caseUSBeefGrading(USBeefGrading object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>US Ovine Grading</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>US Ovine Grading</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUSOvineGrading(USOvineGrading object) {
 		return null;
 	}
 

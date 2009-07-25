@@ -377,6 +377,7 @@
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USBeefYieldGrade/Five"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//Level">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Level/Unspecified"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Level/Low"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Level/Average"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Level/High"/>
@@ -654,6 +655,14 @@
       </genFeatures>
       <genFeatures createChild="false" propertyDescription="Usable lean meat on carcass"
           ecoreFeature="ecore:EAttribute tracker.ecore#//USBeefGrading/yieldGrade"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//USOvineGrading">
+      <genFeatures createChild="false" propertyCategory="Marbling, color, and maturity"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//USOvineGrading/qualityGrade"/>
+      <genFeatures createChild="false" propertyCategory="Marbling, color, and maturity"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//USOvineGrading/qualityGradeLevel">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

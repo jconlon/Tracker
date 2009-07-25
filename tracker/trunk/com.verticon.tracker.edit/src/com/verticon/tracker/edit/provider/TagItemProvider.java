@@ -372,6 +372,7 @@ public class TagItemProvider
 			public Object caseOvine(Ovine object) {
 				addBirthingEventChild(newChildDescriptors);
 				addMilkTestEventChild(newChildDescriptors);
+				addUSOvineGradingEventChild(newChildDescriptors);
 				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.OVINE, object.eContainer());
 				return object;
 			}
@@ -472,6 +473,17 @@ public class TagItemProvider
 				(createChildParameter
 					(TrackerPackage.Literals.TAG__EVENTS,
 					 TrackerFactory.eINSTANCE.createUSBeefGrading()));
+			}
+			
+			/**
+			 * @param newChildDescriptors
+			 */
+			private void addUSOvineGradingEventChild(
+					final Collection<Object> newChildDescriptors) {
+				newChildDescriptors.add
+				(createChildParameter
+					(TrackerPackage.Literals.TAG__EVENTS,
+					 TrackerFactory.eINSTANCE.createUSOvineGrading()));
 			}
 		};
 

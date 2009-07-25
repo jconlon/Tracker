@@ -75,6 +75,7 @@ import com.verticon.tracker.Treatment;
 import com.verticon.tracker.TreatmentMethod;
 import com.verticon.tracker.USBeefGrading;
 import com.verticon.tracker.USBeefYieldGrade;
+import com.verticon.tracker.USOvineGrading;
 import com.verticon.tracker.USQualityGrade;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
@@ -289,6 +290,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EClass usBeefGradingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass usOvineGradingEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1510,6 +1518,33 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getUSOvineGrading() {
+		return usOvineGradingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUSOvineGrading_QualityGrade() {
+		return (EAttribute)usOvineGradingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUSOvineGrading_QualityGradeLevel() {
+		return (EAttribute)usOvineGradingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPremises() {
 		return premisesEClass;
 	}
@@ -2194,6 +2229,10 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(usBeefGradingEClass, US_BEEF_GRADING__QUALITY_GRADE_LEVEL);
 		createEAttribute(usBeefGradingEClass, US_BEEF_GRADING__YIELD_GRADE);
 
+		usOvineGradingEClass = createEClass(US_OVINE_GRADING);
+		createEAttribute(usOvineGradingEClass, US_OVINE_GRADING__QUALITY_GRADE);
+		createEAttribute(usOvineGradingEClass, US_OVINE_GRADING__QUALITY_GRADE_LEVEL);
+
 		// Create enums
 		sexEEnum = createEEnum(SEX);
 		bisonBreedEEnum = createEEnum(BISON_BREED);
@@ -2281,6 +2320,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		herdTestEClass.getESuperTypes().add(this.getEvent());
 		genericEventEClass.getESuperTypes().add(this.getEvent());
 		usBeefGradingEClass.getESuperTypes().add(this.getEvent());
+		usOvineGradingEClass.getESuperTypes().add(this.getEvent());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2490,6 +2530,10 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getUSBeefGrading_QualityGrade(), this.getUSQualityGrade(), "qualityGrade", null, 0, 1, USBeefGrading.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUSBeefGrading_QualityGradeLevel(), this.getLevel(), "qualityGradeLevel", null, 0, 1, USBeefGrading.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUSBeefGrading_YieldGrade(), this.getUSBeefYieldGrade(), "yieldGrade", null, 0, 1, USBeefGrading.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(usOvineGradingEClass, USOvineGrading.class, "USOvineGrading", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getUSOvineGrading_QualityGrade(), this.getUSQualityGrade(), "qualityGrade", null, 0, 1, USOvineGrading.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUSOvineGrading_QualityGradeLevel(), this.getLevel(), "qualityGradeLevel", null, 0, 1, USOvineGrading.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");
