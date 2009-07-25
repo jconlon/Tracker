@@ -4475,6 +4475,115 @@ public interface TrackerPackage extends EPackage {
 	int SCHEMA_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.USBeefGradingImpl <em>US Beef Grading</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.USBeefGradingImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSBeefGrading()
+	 * @generated
+	 */
+	int US_BEEF_GRADING = 41;
+
+	/**
+	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_BEEF_GRADING__DATE_TIME = EVENT__DATE_TIME;
+
+	/**
+	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_BEEF_GRADING__EVENT_CODE = EVENT__EVENT_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Electronically Read</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_BEEF_GRADING__ELECTRONICALLY_READ = EVENT__ELECTRONICALLY_READ;
+
+	/**
+	 * The feature id for the '<em><b>Correction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_BEEF_GRADING__CORRECTION = EVENT__CORRECTION;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_BEEF_GRADING__COMMENTS = EVENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_BEEF_GRADING__TAG = EVENT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_BEEF_GRADING__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Quality Grade</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_BEEF_GRADING__QUALITY_GRADE = EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Quality Grade Level</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_BEEF_GRADING__QUALITY_GRADE_LEVEL = EVENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Yield Grade</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_BEEF_GRADING__YIELD_GRADE = EVENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>US Beef Grading</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_BEEF_GRADING_FEATURE_COUNT = EVENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Sex <em>Sex</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4482,7 +4591,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 41;
+	int SEX = 42;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BisonBreed <em>Bison Breed</em>}' enum.
@@ -4492,7 +4601,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBisonBreed()
 	 * @generated
 	 */
-	int BISON_BREED = 42;
+	int BISON_BREED = 43;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SheepBreed <em>Sheep Breed</em>}' enum.
@@ -4502,7 +4611,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSheepBreed()
 	 * @generated
 	 */
-	int SHEEP_BREED = 43;
+	int SHEEP_BREED = 44;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BeefBreed <em>Beef Breed</em>}' enum.
@@ -4512,7 +4621,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBeefBreed()
 	 * @generated
 	 */
-	int BEEF_BREED = 44;
+	int BEEF_BREED = 45;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.DairyBreed <em>Dairy Breed</em>}' enum.
@@ -4522,7 +4631,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDairyBreed()
 	 * @generated
 	 */
-	int DAIRY_BREED = 45;
+	int DAIRY_BREED = 46;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SwineBreed <em>Swine Breed</em>}' enum.
@@ -4532,7 +4641,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSwineBreed()
 	 * @generated
 	 */
-	int SWINE_BREED = 46;
+	int SWINE_BREED = 47;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.HorseBreed <em>Horse Breed</em>}' enum.
@@ -4542,7 +4651,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getHorseBreed()
 	 * @generated
 	 */
-	int HORSE_BREED = 47;
+	int HORSE_BREED = 48;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.GoatBreed <em>Goat Breed</em>}' enum.
@@ -4552,7 +4661,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getGoatBreed()
 	 * @generated
 	 */
-	int GOAT_BREED = 48;
+	int GOAT_BREED = 49;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Treatment <em>Treatment</em>}' enum.
@@ -4562,7 +4671,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatment()
 	 * @generated
 	 */
-	int TREATMENT = 49;
+	int TREATMENT = 50;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.TreatmentMethod <em>Treatment Method</em>}' enum.
@@ -4572,7 +4681,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatmentMethod()
 	 * @generated
 	 */
-	int TREATMENT_METHOD = 50;
+	int TREATMENT_METHOD = 51;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.OneToTen <em>One To Ten</em>}' enum.
@@ -4582,7 +4691,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getOneToTen()
 	 * @generated
 	 */
-	int ONE_TO_TEN = 51;
+	int ONE_TO_TEN = 52;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.AnimalType <em>Animal Type</em>}' enum.
@@ -4592,7 +4701,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAnimalType()
 	 * @generated
 	 */
-	int ANIMAL_TYPE = 52;
+	int ANIMAL_TYPE = 53;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.EventDataType <em>Event Data Type</em>}' enum.
@@ -4602,7 +4711,37 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventDataType()
 	 * @generated
 	 */
-	int EVENT_DATA_TYPE = 53;
+	int EVENT_DATA_TYPE = 54;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.USQualityGrade <em>US Quality Grade</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.USQualityGrade
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSQualityGrade()
+	 * @generated
+	 */
+	int US_QUALITY_GRADE = 55;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.USBeefYieldGrade <em>US Beef Yield Grade</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.USBeefYieldGrade
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSBeefYieldGrade()
+	 * @generated
+	 */
+	int US_BEEF_YIELD_GRADE = 56;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.Level <em>Level</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Level
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getLevel()
+	 * @generated
+	 */
+	int LEVEL = 57;
 
 	/**
 	 * The meta object id for the '<em>Premises Id Number</em>' data type.
@@ -4612,7 +4751,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPremisesIdNumber()
 	 * @generated
 	 */
-	int PREMISES_ID_NUMBER = 54;
+	int PREMISES_ID_NUMBER = 58;
 
 	/**
 	 * The meta object id for the '<em>Email</em>' data type.
@@ -4622,7 +4761,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 55;
+	int EMAIL = 59;
 
 
 	/**
@@ -4633,7 +4772,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAge()
 	 * @generated
 	 */
-	int AGE = 56;
+	int AGE = 60;
 
 
 	/**
@@ -4644,7 +4783,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSPhoneNumber()
 	 * @generated
 	 */
-	int US_PHONE_NUMBER = 57;
+	int US_PHONE_NUMBER = 61;
 
 
 	/**
@@ -4655,7 +4794,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 58;
+	int URI = 62;
 
 
 	/**
@@ -5690,6 +5829,49 @@ public interface TrackerPackage extends EPackage {
 	EReference getSchema_EventSchemas();
 
 	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.USBeefGrading <em>US Beef Grading</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>US Beef Grading</em>'.
+	 * @see com.verticon.tracker.USBeefGrading
+	 * @generated
+	 */
+	EClass getUSBeefGrading();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.USBeefGrading#getQualityGrade <em>Quality Grade</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Quality Grade</em>'.
+	 * @see com.verticon.tracker.USBeefGrading#getQualityGrade()
+	 * @see #getUSBeefGrading()
+	 * @generated
+	 */
+	EAttribute getUSBeefGrading_QualityGrade();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.USBeefGrading#getQualityGradeLevel <em>Quality Grade Level</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Quality Grade Level</em>'.
+	 * @see com.verticon.tracker.USBeefGrading#getQualityGradeLevel()
+	 * @see #getUSBeefGrading()
+	 * @generated
+	 */
+	EAttribute getUSBeefGrading_QualityGradeLevel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.USBeefGrading#getYieldGrade <em>Yield Grade</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Yield Grade</em>'.
+	 * @see com.verticon.tracker.USBeefGrading#getYieldGrade()
+	 * @see #getUSBeefGrading()
+	 * @generated
+	 */
+	EAttribute getUSBeefGrading_YieldGrade();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Premises <em>Premises</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6167,6 +6349,36 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getEventDataType();
+
+	/**
+	 * Returns the meta object for enum '{@link com.verticon.tracker.USQualityGrade <em>US Quality Grade</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>US Quality Grade</em>'.
+	 * @see com.verticon.tracker.USQualityGrade
+	 * @generated
+	 */
+	EEnum getUSQualityGrade();
+
+	/**
+	 * Returns the meta object for enum '{@link com.verticon.tracker.USBeefYieldGrade <em>US Beef Yield Grade</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>US Beef Yield Grade</em>'.
+	 * @see com.verticon.tracker.USBeefYieldGrade
+	 * @generated
+	 */
+	EEnum getUSBeefYieldGrade();
+
+	/**
+	 * Returns the meta object for enum '{@link com.verticon.tracker.Level <em>Level</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Level</em>'.
+	 * @see com.verticon.tracker.Level
+	 * @generated
+	 */
+	EEnum getLevel();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>Premises Id Number</em>}'.
@@ -7069,6 +7281,40 @@ public interface TrackerPackage extends EPackage {
 		EReference SCHEMA__EVENT_SCHEMAS = eINSTANCE.getSchema_EventSchemas();
 
 		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.USBeefGradingImpl <em>US Beef Grading</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.USBeefGradingImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSBeefGrading()
+		 * @generated
+		 */
+		EClass US_BEEF_GRADING = eINSTANCE.getUSBeefGrading();
+
+		/**
+		 * The meta object literal for the '<em><b>Quality Grade</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute US_BEEF_GRADING__QUALITY_GRADE = eINSTANCE.getUSBeefGrading_QualityGrade();
+
+		/**
+		 * The meta object literal for the '<em><b>Quality Grade Level</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute US_BEEF_GRADING__QUALITY_GRADE_LEVEL = eINSTANCE.getUSBeefGrading_QualityGradeLevel();
+
+		/**
+		 * The meta object literal for the '<em><b>Yield Grade</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute US_BEEF_GRADING__YIELD_GRADE = eINSTANCE.getUSBeefGrading_YieldGrade();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.PremisesImpl <em>Premises</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7489,6 +7735,36 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum EVENT_DATA_TYPE = eINSTANCE.getEventDataType();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.USQualityGrade <em>US Quality Grade</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.USQualityGrade
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSQualityGrade()
+		 * @generated
+		 */
+		EEnum US_QUALITY_GRADE = eINSTANCE.getUSQualityGrade();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.USBeefYieldGrade <em>US Beef Yield Grade</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.USBeefYieldGrade
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSBeefYieldGrade()
+		 * @generated
+		 */
+		EEnum US_BEEF_YIELD_GRADE = eINSTANCE.getUSBeefYieldGrade();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.Level <em>Level</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.Level
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getLevel()
+		 * @generated
+		 */
+		EEnum LEVEL = eINSTANCE.getLevel();
 
 		/**
 		 * The meta object literal for the '<em>Premises Id Number</em>' data type.

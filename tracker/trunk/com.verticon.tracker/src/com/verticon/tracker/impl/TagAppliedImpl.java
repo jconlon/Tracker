@@ -49,11 +49,10 @@ public class TagAppliedImpl extends EventImpl implements TagApplied {
 		return TrackerPackage.Literals.TAG_APPLIED;
 	}
 
-				/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	/**
 	 * @generated NOT
 	 */
+	@Override
 	public int getEventCode() {
 		return EVENT_CODE;
 	}

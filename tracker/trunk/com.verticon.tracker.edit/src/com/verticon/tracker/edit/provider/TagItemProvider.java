@@ -387,6 +387,7 @@ public class TagItemProvider
 			@Override
 			public Object caseBovineBeef(BovineBeef object) {
 				addCalvingEventChild(newChildDescriptors);
+				addUSBeefGradingEventChild(newChildDescriptors);
 				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.BOVINE_BEEF, object.eContainer());
 				return object;
 			}
@@ -395,6 +396,7 @@ public class TagItemProvider
 			public Object caseBovineDairy(BovineDairy object) {
 				addCalvingEventChild(newChildDescriptors);
 				addMilkTestEventChild(newChildDescriptors);
+				addUSBeefGradingEventChild(newChildDescriptors);
 				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.BOVINE_DAIRY, object.eContainer());
 				return object;
 			}
@@ -403,6 +405,7 @@ public class TagItemProvider
 			public Object caseBovineBison(BovineBison object) {
 				addCalvingEventChild(newChildDescriptors);
 				addMilkTestEventChild(newChildDescriptors);
+				addUSBeefGradingEventChild(newChildDescriptors);
 				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.BOVINE_BISON, object.eContainer());
 				return object;
 			}
@@ -458,6 +461,17 @@ public class TagItemProvider
 				(createChildParameter
 					(TrackerPackage.Literals.TAG__EVENTS,
 					 TrackerFactory.eINSTANCE.createMilkTest()));
+			}
+			
+			/**
+			 * @param newChildDescriptors
+			 */
+			private void addUSBeefGradingEventChild(
+					final Collection<Object> newChildDescriptors) {
+				newChildDescriptors.add
+				(createChildParameter
+					(TrackerPackage.Literals.TAG__EVENTS,
+					 TrackerFactory.eINSTANCE.createUSBeefGrading()));
 			}
 		};
 

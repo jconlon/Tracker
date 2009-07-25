@@ -27,6 +27,28 @@ enum DefaultPremisesQuery {
 			"Have lost tags",
 			"self.eventHistory() -> select(e : Event | (e.oclIsTypeOf(LostTag))) ->size() > 0",
 			"Animal"),
+	
+	BEEF_GRADING_MINIMIUM_YIELD(
+			"Bovine minimum yield grading (3 or better)",
+			"self.eventHistory() -> select(" +
+				"e : Event | ("+
+					"e.oclIsTypeOf(USBeefGrading) and "+
+						"(e.oclAsType(USBeefGrading).yieldGrade=USBeefYieldGrade::One or "+
+						"e.oclAsType(USBeefGrading).yieldGrade=USBeefYieldGrade::Two or "+
+						"e.oclAsType(USBeefGrading).yieldGrade=USBeefYieldGrade::Three) "+
+				") ) -> size() = 1",
+		    
+			"Bovine"),
+	
+	BEEF_GRADING_MINIMIUM_QUALITY(
+			"Bovine minimum quality grading (Choice or Prime)",
+			"self.eventHistory() -> select(" +
+				"e : Event | ("+
+					"e.oclIsTypeOf(USBeefGrading) and "+
+					"(e.oclAsType(USBeefGrading).qualityGrade=USQualityGrade::Prime or "+
+					"e.oclAsType(USBeefGrading).qualityGrade=USQualityGrade::Choice) "+
+				 ") ) ->size() = 1",
+					"Bovine"),
 			
 	BOVINE_MIN_WEIGHT_GAINERS(
 			"Bovine minimium weight gain (2)",

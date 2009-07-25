@@ -81,11 +81,12 @@ public class TagRetiredItemProvider
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
-	 * Uses superclass implemenation to return a local specific label
+	 * Uses superclass implementation to return a local specific label
 	 * appropriate to this subclass
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public String getText(Object object) {
 		return super.getText(object);
 	}

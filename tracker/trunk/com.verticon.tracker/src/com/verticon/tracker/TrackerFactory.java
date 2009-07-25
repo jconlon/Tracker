@@ -240,6 +240,15 @@ public interface TrackerFactory extends EFactory {
 	Schema createSchema();
 
 	/**
+	 * Returns a new object of class '<em>US Beef Grading</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>US Beef Grading</em>'.
+	 * @generated
+	 */
+	USBeefGrading createUSBeefGrading();
+
+	/**
 	 * Returns a new object of class '<em>Premises</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
