@@ -653,4 +653,14 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualityGrade" eType="#//USQualityGrade"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualityGradeLevel" eType="#//Level"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="USSwineQualityGrade">
+    <eLiterals name="Unspecified" literal=""/>
+    <eLiterals name="One" value="1" literal="U.S. No. 1"/>
+    <eLiterals name="Two" value="2" literal="U.S. No. 2"/>
+    <eLiterals name="Three" value="3" literal="U.S. No. 3"/>
+    <eLiterals name="Four" value="4" literal="U.S. No. 4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="USSwineGrading" eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualityGrade" eType="#//USSwineQualityGrade"/>
+  </eClassifiers>
 </ecore:EPackage>

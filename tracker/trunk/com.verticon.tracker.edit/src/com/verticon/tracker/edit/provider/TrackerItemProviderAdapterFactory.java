@@ -682,6 +682,29 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.USSwineGrading} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected USSwineGradingItemProvider usSwineGradingItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.USSwineGrading}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUSSwineGradingAdapter() {
+		if (usSwineGradingItemProvider == null) {
+			usSwineGradingItemProvider = new USSwineGradingItemProvider(this);
+		}
+
+		return usSwineGradingItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Premises} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1142,6 +1165,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (schemaItemProvider != null) schemaItemProvider.dispose();
 		if (usBeefGradingItemProvider != null) usBeefGradingItemProvider.dispose();
 		if (usOvineGradingItemProvider != null) usOvineGradingItemProvider.dispose();
+		if (usSwineGradingItemProvider != null) usSwineGradingItemProvider.dispose();
 	}
 
 }

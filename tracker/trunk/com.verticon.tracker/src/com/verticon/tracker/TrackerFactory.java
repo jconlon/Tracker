@@ -258,6 +258,15 @@ public interface TrackerFactory extends EFactory {
 	USOvineGrading createUSOvineGrading();
 
 	/**
+	 * Returns a new object of class '<em>US Swine Grading</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>US Swine Grading</em>'.
+	 * @generated
+	 */
+	USSwineGrading createUSSwineGrading();
+
+	/**
 	 * Returns a new object of class '<em>Premises</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

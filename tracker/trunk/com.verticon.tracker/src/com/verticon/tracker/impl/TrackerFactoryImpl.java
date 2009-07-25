@@ -178,6 +178,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.SCHEMA: return createSchema();
 			case TrackerPackage.US_BEEF_GRADING: return createUSBeefGrading();
 			case TrackerPackage.US_OVINE_GRADING: return createUSOvineGrading();
+			case TrackerPackage.US_SWINE_GRADING: return createUSSwineGrading();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -223,6 +224,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createUSBeefYieldGradeFromString(eDataType, initialValue);
 			case TrackerPackage.LEVEL:
 				return createLevelFromString(eDataType, initialValue);
+			case TrackerPackage.US_SWINE_QUALITY_GRADE:
+				return createUSSwineQualityGradeFromString(eDataType, initialValue);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return createPremisesIdNumberFromString(eDataType, initialValue);
 			case TrackerPackage.EMAIL:
@@ -278,6 +281,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return convertUSBeefYieldGradeToString(eDataType, instanceValue);
 			case TrackerPackage.LEVEL:
 				return convertLevelToString(eDataType, instanceValue);
+			case TrackerPackage.US_SWINE_QUALITY_GRADE:
+				return convertUSSwineQualityGradeToString(eDataType, instanceValue);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return convertPremisesIdNumberToString(eDataType, instanceValue);
 			case TrackerPackage.EMAIL:
@@ -551,6 +556,16 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public USOvineGrading createUSOvineGrading() {
 		USOvineGradingImpl usOvineGrading = new USOvineGradingImpl();
 		return usOvineGrading;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public USSwineGrading createUSSwineGrading() {
+		USSwineGradingImpl usSwineGrading = new USSwineGradingImpl();
+		return usSwineGrading;
 	}
 
 	/**
@@ -1012,6 +1027,26 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * @generated
 	 */
 	public String convertLevelToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public USSwineQualityGrade createUSSwineQualityGradeFromString(EDataType eDataType, String initialValue) {
+		USSwineQualityGrade result = USSwineQualityGrade.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertUSSwineQualityGradeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

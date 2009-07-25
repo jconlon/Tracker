@@ -77,6 +77,8 @@ import com.verticon.tracker.USBeefGrading;
 import com.verticon.tracker.USBeefYieldGrade;
 import com.verticon.tracker.USOvineGrading;
 import com.verticon.tracker.USQualityGrade;
+import com.verticon.tracker.USSwineGrading;
+import com.verticon.tracker.USSwineQualityGrade;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.TrackerValidator;
@@ -303,6 +305,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass usSwineGradingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass premisesEClass = null;
 
 	/**
@@ -507,6 +516,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EEnum levelEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum usSwineQualityGradeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1545,6 +1561,24 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getUSSwineGrading() {
+		return usSwineGradingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUSSwineGrading_QualityGrade() {
+		return (EAttribute)usSwineGradingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPremises() {
 		return premisesEClass;
 	}
@@ -1986,6 +2020,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getUSSwineQualityGrade() {
+		return usSwineQualityGradeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getPremisesIdNumber() {
 		return premisesIdNumberEDataType;
 	}
@@ -2233,6 +2276,9 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(usOvineGradingEClass, US_OVINE_GRADING__QUALITY_GRADE);
 		createEAttribute(usOvineGradingEClass, US_OVINE_GRADING__QUALITY_GRADE_LEVEL);
 
+		usSwineGradingEClass = createEClass(US_SWINE_GRADING);
+		createEAttribute(usSwineGradingEClass, US_SWINE_GRADING__QUALITY_GRADE);
+
 		// Create enums
 		sexEEnum = createEEnum(SEX);
 		bisonBreedEEnum = createEEnum(BISON_BREED);
@@ -2250,6 +2296,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		usQualityGradeEEnum = createEEnum(US_QUALITY_GRADE);
 		usBeefYieldGradeEEnum = createEEnum(US_BEEF_YIELD_GRADE);
 		levelEEnum = createEEnum(LEVEL);
+		usSwineQualityGradeEEnum = createEEnum(US_SWINE_QUALITY_GRADE);
 
 		// Create data types
 		premisesIdNumberEDataType = createEDataType(PREMISES_ID_NUMBER);
@@ -2321,6 +2368,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		genericEventEClass.getESuperTypes().add(this.getEvent());
 		usBeefGradingEClass.getESuperTypes().add(this.getEvent());
 		usOvineGradingEClass.getESuperTypes().add(this.getEvent());
+		usSwineGradingEClass.getESuperTypes().add(this.getEvent());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2534,6 +2582,9 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(usOvineGradingEClass, USOvineGrading.class, "USOvineGrading", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUSOvineGrading_QualityGrade(), this.getUSQualityGrade(), "qualityGrade", null, 0, 1, USOvineGrading.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUSOvineGrading_QualityGradeLevel(), this.getLevel(), "qualityGradeLevel", null, 0, 1, USOvineGrading.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(usSwineGradingEClass, USSwineGrading.class, "USSwineGrading", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getUSSwineGrading_QualityGrade(), this.getUSSwineQualityGrade(), "qualityGrade", null, 0, 1, USSwineGrading.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");
@@ -2904,6 +2955,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEEnumLiteral(levelEEnum, Level.LOW);
 		addEEnumLiteral(levelEEnum, Level.AVERAGE);
 		addEEnumLiteral(levelEEnum, Level.HIGH);
+
+		initEEnum(usSwineQualityGradeEEnum, USSwineQualityGrade.class, "USSwineQualityGrade");
+		addEEnumLiteral(usSwineQualityGradeEEnum, USSwineQualityGrade.UNSPECIFIED);
+		addEEnumLiteral(usSwineQualityGradeEEnum, USSwineQualityGrade.ONE);
+		addEEnumLiteral(usSwineQualityGradeEEnum, USSwineQualityGrade.TWO);
+		addEEnumLiteral(usSwineQualityGradeEEnum, USSwineQualityGrade.THREE);
+		addEEnumLiteral(usSwineQualityGradeEEnum, USSwineQualityGrade.FOUR);
 
 		// Initialize data types
 		initEDataType(premisesIdNumberEDataType, String.class, "PremisesIdNumber", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

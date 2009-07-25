@@ -414,6 +414,7 @@ public class TagItemProvider
 			@Override
 			public Object caseSwine(Swine object) {
 				addBirthingEventChild(newChildDescriptors);
+				addUSSwineGradingEventChild(newChildDescriptors);
 				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.SWINE, object.eContainer());
 				return object;
 			}
@@ -484,6 +485,17 @@ public class TagItemProvider
 				(createChildParameter
 					(TrackerPackage.Literals.TAG__EVENTS,
 					 TrackerFactory.eINSTANCE.createUSOvineGrading()));
+			}
+			
+			/**
+			 * @param newChildDescriptors
+			 */
+			private void addUSSwineGradingEventChild(
+					final Collection<Object> newChildDescriptors) {
+				newChildDescriptors.add
+				(createChildParameter
+					(TrackerPackage.Literals.TAG__EVENTS,
+					 TrackerFactory.eINSTANCE.createUSSwineGrading()));
 			}
 		};
 

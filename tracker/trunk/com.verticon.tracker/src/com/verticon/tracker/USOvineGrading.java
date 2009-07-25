@@ -29,7 +29,7 @@ public interface USOvineGrading extends Event {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright 2009 Verticon, Inc. All Rights Reserved.";
+	String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 	
 	/**
 	 * @NOT
