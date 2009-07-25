@@ -636,6 +636,29 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.USBeefGrading} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected USBeefGradingItemProvider usBeefGradingItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.USBeefGrading}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUSBeefGradingAdapter() {
+		if (usBeefGradingItemProvider == null) {
+			usBeefGradingItemProvider = new USBeefGradingItemProvider(this);
+		}
+
+		return usBeefGradingItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Premises} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1094,6 +1117,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (eventSchemaItemProvider != null) eventSchemaItemProvider.dispose();
 		if (eventAttributeSchemaItemProvider != null) eventAttributeSchemaItemProvider.dispose();
 		if (schemaItemProvider != null) schemaItemProvider.dispose();
+		if (usBeefGradingItemProvider != null) usBeefGradingItemProvider.dispose();
 	}
 
 }

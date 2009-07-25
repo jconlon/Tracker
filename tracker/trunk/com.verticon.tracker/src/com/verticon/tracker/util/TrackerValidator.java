@@ -230,6 +230,8 @@ public class TrackerValidator extends EObjectValidator {
 				return validateEventAttributeSchema((EventAttributeSchema)value, diagnostics, context);
 			case TrackerPackage.SCHEMA:
 				return validateSchema((Schema)value, diagnostics, context);
+			case TrackerPackage.US_BEEF_GRADING:
+				return validateUSBeefGrading((USBeefGrading)value, diagnostics, context);
 			case TrackerPackage.SEX:
 				return validateSex((Sex)value, diagnostics, context);
 			case TrackerPackage.BISON_BREED:
@@ -256,6 +258,12 @@ public class TrackerValidator extends EObjectValidator {
 				return validateAnimalType((AnimalType)value, diagnostics, context);
 			case TrackerPackage.EVENT_DATA_TYPE:
 				return validateEventDataType((EventDataType)value, diagnostics, context);
+			case TrackerPackage.US_QUALITY_GRADE:
+				return validateUSQualityGrade((USQualityGrade)value, diagnostics, context);
+			case TrackerPackage.US_BEEF_YIELD_GRADE:
+				return validateUSBeefYieldGrade((USBeefYieldGrade)value, diagnostics, context);
+			case TrackerPackage.LEVEL:
+				return validateLevel((Level)value, diagnostics, context);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return validatePremisesIdNumber((String)value, diagnostics, context);
 			case TrackerPackage.EMAIL:
@@ -519,6 +527,15 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validateUSBeefGrading(USBeefGrading usBeefGrading, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(usBeefGrading, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validatePremises(Premises premises, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(premises, diagnostics, context);
 	}
@@ -754,6 +771,33 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateEventDataType(EventDataType eventDataType, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateUSQualityGrade(USQualityGrade usQualityGrade, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateUSBeefYieldGrade(USBeefYieldGrade usBeefYieldGrade, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateLevel(Level level, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

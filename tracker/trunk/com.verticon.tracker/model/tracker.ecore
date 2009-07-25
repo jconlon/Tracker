@@ -623,4 +623,30 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="eventSchemas" upperBound="-1"
         eType="#//EventSchema" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="USQualityGrade">
+    <eLiterals name="Unspecified" literal=""/>
+    <eLiterals name="Standard" value="1"/>
+    <eLiterals name="Select" value="2"/>
+    <eLiterals name="Choice" value="3"/>
+    <eLiterals name="Prime" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="USBeefYieldGrade">
+    <eLiterals name="Unspecified" literal=""/>
+    <eLiterals name="One" value="1" literal="1"/>
+    <eLiterals name="Two" value="2" literal="2"/>
+    <eLiterals name="Three" value="3" literal="3"/>
+    <eLiterals name="Four" value="4" literal="4"/>
+    <eLiterals name="Five" value="5" literal="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="USBeefGrading" eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualityGrade" eType="#//USQualityGrade"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualityGradeLevel" eType="#//Level"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="yieldGrade" eType="#//USBeefYieldGrade"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Level">
+    <eLiterals name="Unspecified" literal=""/>
+    <eLiterals name="Low" value="1"/>
+    <eLiterals name="Average" value="2"/>
+    <eLiterals name="High" value="3"/>
+  </eClassifiers>
 </ecore:EPackage>

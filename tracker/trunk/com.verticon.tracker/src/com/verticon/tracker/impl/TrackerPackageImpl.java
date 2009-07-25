@@ -45,6 +45,7 @@ import com.verticon.tracker.GoatBreed;
 import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.Imported;
+import com.verticon.tracker.Level;
 import com.verticon.tracker.Location;
 import com.verticon.tracker.LostTag;
 import com.verticon.tracker.Mastitis;
@@ -72,6 +73,9 @@ import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.Treatment;
 import com.verticon.tracker.TreatmentMethod;
+import com.verticon.tracker.USBeefGrading;
+import com.verticon.tracker.USBeefYieldGrade;
+import com.verticon.tracker.USQualityGrade;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.TrackerValidator;
@@ -284,6 +288,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass usBeefGradingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass premisesEClass = null;
 
 	/**
@@ -467,6 +478,27 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EEnum eventDataTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum usQualityGradeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum usBeefYieldGradeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum levelEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1442,6 +1474,42 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getUSBeefGrading() {
+		return usBeefGradingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUSBeefGrading_QualityGrade() {
+		return (EAttribute)usBeefGradingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUSBeefGrading_QualityGradeLevel() {
+		return (EAttribute)usBeefGradingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUSBeefGrading_YieldGrade() {
+		return (EAttribute)usBeefGradingEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPremises() {
 		return premisesEClass;
 	}
@@ -1856,6 +1924,33 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getUSQualityGrade() {
+		return usQualityGradeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getUSBeefYieldGrade() {
+		return usBeefYieldGradeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getLevel() {
+		return levelEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getPremisesIdNumber() {
 		return premisesIdNumberEDataType;
 	}
@@ -2094,6 +2189,11 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		schemaEClass = createEClass(SCHEMA);
 		createEReference(schemaEClass, SCHEMA__EVENT_SCHEMAS);
 
+		usBeefGradingEClass = createEClass(US_BEEF_GRADING);
+		createEAttribute(usBeefGradingEClass, US_BEEF_GRADING__QUALITY_GRADE);
+		createEAttribute(usBeefGradingEClass, US_BEEF_GRADING__QUALITY_GRADE_LEVEL);
+		createEAttribute(usBeefGradingEClass, US_BEEF_GRADING__YIELD_GRADE);
+
 		// Create enums
 		sexEEnum = createEEnum(SEX);
 		bisonBreedEEnum = createEEnum(BISON_BREED);
@@ -2108,6 +2208,9 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		oneToTenEEnum = createEEnum(ONE_TO_TEN);
 		animalTypeEEnum = createEEnum(ANIMAL_TYPE);
 		eventDataTypeEEnum = createEEnum(EVENT_DATA_TYPE);
+		usQualityGradeEEnum = createEEnum(US_QUALITY_GRADE);
+		usBeefYieldGradeEEnum = createEEnum(US_BEEF_YIELD_GRADE);
+		levelEEnum = createEEnum(LEVEL);
 
 		// Create data types
 		premisesIdNumberEDataType = createEDataType(PREMISES_ID_NUMBER);
@@ -2177,6 +2280,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		milkTestEClass.getESuperTypes().add(this.getEvent());
 		herdTestEClass.getESuperTypes().add(this.getEvent());
 		genericEventEClass.getESuperTypes().add(this.getEvent());
+		usBeefGradingEClass.getESuperTypes().add(this.getEvent());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2381,6 +2485,11 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		initEClass(schemaEClass, Schema.class, "Schema", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSchema_EventSchemas(), this.getEventSchema(), null, "eventSchemas", null, 0, -1, Schema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(usBeefGradingEClass, USBeefGrading.class, "USBeefGrading", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getUSBeefGrading_QualityGrade(), this.getUSQualityGrade(), "qualityGrade", null, 0, 1, USBeefGrading.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUSBeefGrading_QualityGradeLevel(), this.getLevel(), "qualityGradeLevel", null, 0, 1, USBeefGrading.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUSBeefGrading_YieldGrade(), this.getUSBeefYieldGrade(), "yieldGrade", null, 0, 1, USBeefGrading.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");
@@ -2730,6 +2839,27 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEEnumLiteral(eventDataTypeEEnum, EventDataType.STRING);
 		addEEnumLiteral(eventDataTypeEEnum, EventDataType.INTEGER);
 		addEEnumLiteral(eventDataTypeEEnum, EventDataType.BOOLEAN);
+
+		initEEnum(usQualityGradeEEnum, USQualityGrade.class, "USQualityGrade");
+		addEEnumLiteral(usQualityGradeEEnum, USQualityGrade.UNSPECIFIED);
+		addEEnumLiteral(usQualityGradeEEnum, USQualityGrade.STANDARD);
+		addEEnumLiteral(usQualityGradeEEnum, USQualityGrade.SELECT);
+		addEEnumLiteral(usQualityGradeEEnum, USQualityGrade.CHOICE);
+		addEEnumLiteral(usQualityGradeEEnum, USQualityGrade.PRIME);
+
+		initEEnum(usBeefYieldGradeEEnum, USBeefYieldGrade.class, "USBeefYieldGrade");
+		addEEnumLiteral(usBeefYieldGradeEEnum, USBeefYieldGrade.UNSPECIFIED);
+		addEEnumLiteral(usBeefYieldGradeEEnum, USBeefYieldGrade.ONE);
+		addEEnumLiteral(usBeefYieldGradeEEnum, USBeefYieldGrade.TWO);
+		addEEnumLiteral(usBeefYieldGradeEEnum, USBeefYieldGrade.THREE);
+		addEEnumLiteral(usBeefYieldGradeEEnum, USBeefYieldGrade.FOUR);
+		addEEnumLiteral(usBeefYieldGradeEEnum, USBeefYieldGrade.FIVE);
+
+		initEEnum(levelEEnum, Level.class, "Level");
+		addEEnumLiteral(levelEEnum, Level.UNSPECIFIED);
+		addEEnumLiteral(levelEEnum, Level.LOW);
+		addEEnumLiteral(levelEEnum, Level.AVERAGE);
+		addEEnumLiteral(levelEEnum, Level.HIGH);
 
 		// Initialize data types
 		initEDataType(premisesIdNumberEDataType, String.class, "PremisesIdNumber", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

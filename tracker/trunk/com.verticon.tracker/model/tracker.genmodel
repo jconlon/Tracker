@@ -361,6 +361,26 @@
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventDataType/Integer"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventDataType/Boolean"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//USQualityGrade">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USQualityGrade/Unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USQualityGrade/Standard"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USQualityGrade/Select"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USQualityGrade/Choice"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USQualityGrade/Prime"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//USBeefYieldGrade">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USBeefYieldGrade/Unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USBeefYieldGrade/One"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USBeefYieldGrade/Two"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USBeefYieldGrade/Three"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USBeefYieldGrade/Four"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USBeefYieldGrade/Five"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//Level">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Level/Low"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Level/Average"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Level/High"/>
+    </genEnums>
     <genDataTypes ecoreDataType="tracker.ecore#//PremisesIdNumber"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Email"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Age"/>
@@ -624,6 +644,16 @@
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Schema">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Schema/eventSchemas"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//USBeefGrading">
+      <genFeatures createChild="false" propertyCategory="Marbling, color, and maturity"
+          propertyDescription="" ecoreFeature="ecore:EAttribute tracker.ecore#//USBeefGrading/qualityGrade"/>
+      <genFeatures createChild="false" propertyCategory="Marbling, color, and maturity"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//USBeefGrading/qualityGradeLevel">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" propertyDescription="Usable lean meat on carcass"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//USBeefGrading/yieldGrade"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
