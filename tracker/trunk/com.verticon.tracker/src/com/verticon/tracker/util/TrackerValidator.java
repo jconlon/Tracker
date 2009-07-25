@@ -232,6 +232,8 @@ public class TrackerValidator extends EObjectValidator {
 				return validateSchema((Schema)value, diagnostics, context);
 			case TrackerPackage.US_BEEF_GRADING:
 				return validateUSBeefGrading((USBeefGrading)value, diagnostics, context);
+			case TrackerPackage.US_OVINE_GRADING:
+				return validateUSOvineGrading((USOvineGrading)value, diagnostics, context);
 			case TrackerPackage.SEX:
 				return validateSex((Sex)value, diagnostics, context);
 			case TrackerPackage.BISON_BREED:
@@ -529,6 +531,15 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validateUSBeefGrading(USBeefGrading usBeefGrading, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(usBeefGrading, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateUSOvineGrading(USOvineGrading usOvineGrading, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(usOvineGrading, diagnostics, context);
 	}
 
 	/**

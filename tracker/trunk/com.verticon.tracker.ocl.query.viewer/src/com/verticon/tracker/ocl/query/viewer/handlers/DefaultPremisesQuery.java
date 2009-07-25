@@ -74,7 +74,17 @@ enum DefaultPremisesQuery {
 			"Sheep minimium weight (100)",
 			"self.weight.oclIsUndefined() = false and self.weight >= 100",
 			"Ovine"),
-					
+			
+	OVINE_GRADING_MINIMIUM_QUALITY(
+			"Sheep minimum quality grading (Choice or Prime)",
+			"self.eventHistory() -> select(" +
+			"e : Event | ("+
+				"e.oclIsTypeOf(USOvineGrading) and "+
+				"(e.oclAsType(USOvineGrading).qualityGrade=USQualityGrade::Prime or "+
+				"e.oclAsType(USOvineGrading).qualityGrade=USQualityGrade::Choice) "+
+			") ) ->size() = 1",
+			"Ovine"),
+										
 	EVENT_LOW_WEIGHT_GAINERS(
 			"Low weight gainers",
 			"self.weightGainPerDay.oclIsUndefined() = false and self.weightGainPerDay < 3",

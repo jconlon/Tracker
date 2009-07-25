@@ -177,6 +177,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.EVENT_ATTRIBUTE_SCHEMA: return createEventAttributeSchema();
 			case TrackerPackage.SCHEMA: return createSchema();
 			case TrackerPackage.US_BEEF_GRADING: return createUSBeefGrading();
+			case TrackerPackage.US_OVINE_GRADING: return createUSOvineGrading();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -540,6 +541,16 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public USBeefGrading createUSBeefGrading() {
 		USBeefGradingImpl usBeefGrading = new USBeefGradingImpl();
 		return usBeefGrading;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public USOvineGrading createUSOvineGrading() {
+		USOvineGradingImpl usOvineGrading = new USOvineGradingImpl();
+		return usOvineGrading;
 	}
 
 	/**

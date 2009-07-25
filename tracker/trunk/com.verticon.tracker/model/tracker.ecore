@@ -649,4 +649,8 @@
     <eLiterals name="Average" value="2"/>
     <eLiterals name="High" value="3"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="USOvineGrading" eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualityGrade" eType="#//USQualityGrade"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualityGradeLevel" eType="#//Level"/>
+  </eClassifiers>
 </ecore:EPackage>

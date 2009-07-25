@@ -249,6 +249,15 @@ public interface TrackerFactory extends EFactory {
 	USBeefGrading createUSBeefGrading();
 
 	/**
+	 * Returns a new object of class '<em>US Ovine Grading</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>US Ovine Grading</em>'.
+	 * @generated
+	 */
+	USOvineGrading createUSOvineGrading();
+
+	/**
 	 * Returns a new object of class '<em>Premises</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

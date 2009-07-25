@@ -288,6 +288,10 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 				return createUSBeefGradingAdapter();
 			}
 			@Override
+			public Adapter caseUSOvineGrading(USOvineGrading object) {
+				return createUSOvineGradingAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -696,6 +700,20 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUSBeefGradingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.USOvineGrading <em>US Ovine Grading</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.USOvineGrading
+	 * @generated
+	 */
+	public Adapter createUSOvineGradingAdapter() {
 		return null;
 	}
 
