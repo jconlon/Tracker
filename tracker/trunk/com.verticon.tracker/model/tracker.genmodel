@@ -382,6 +382,13 @@
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Level/Average"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Level/High"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//USSwineQualityGrade">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USSwineQualityGrade/Unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USSwineQualityGrade/One"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USSwineQualityGrade/Two"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USSwineQualityGrade/Three"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USSwineQualityGrade/Four"/>
+    </genEnums>
     <genDataTypes ecoreDataType="tracker.ecore#//PremisesIdNumber"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Email"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Age"/>
@@ -663,6 +670,9 @@
           ecoreFeature="ecore:EAttribute tracker.ecore#//USOvineGrading/qualityGradeLevel">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//USSwineGrading">
+      <genFeatures createChild="false" propertyDescription="Carcass Quality" ecoreFeature="ecore:EAttribute tracker.ecore#//USSwineGrading/qualityGrade"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

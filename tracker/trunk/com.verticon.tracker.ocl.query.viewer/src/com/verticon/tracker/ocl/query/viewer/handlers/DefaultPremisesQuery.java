@@ -70,6 +70,16 @@ enum DefaultPremisesQuery {
 			"self.weight.oclIsUndefined() = false and self.weight >= 235",
 			"Swine"),
 	
+	SWINE_GRADING_MINIMIUM_QUALITY(
+			"Swine minimum quality grading (One or Two)",
+			"self.eventHistory() -> select(" +
+				"e : Event | ("+
+					"e.oclIsTypeOf(USSwineGrading) and "+
+							"(e.oclAsType(USSwineGrading).qualityGrade=USSwineQualityGrade::One or "+
+							"e.oclAsType(USSwineGrading).qualityGrade=USSwineQualityGrade::Two) "+
+						 ") ) ->size() = 1",
+			"Swine"),
+							
 	OVINE_MIN_WEIGHT(
 			"Sheep minimium weight (100)",
 			"self.weight.oclIsUndefined() = false and self.weight >= 100",

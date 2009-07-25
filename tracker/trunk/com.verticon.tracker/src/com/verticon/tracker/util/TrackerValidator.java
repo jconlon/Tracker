@@ -234,6 +234,8 @@ public class TrackerValidator extends EObjectValidator {
 				return validateUSBeefGrading((USBeefGrading)value, diagnostics, context);
 			case TrackerPackage.US_OVINE_GRADING:
 				return validateUSOvineGrading((USOvineGrading)value, diagnostics, context);
+			case TrackerPackage.US_SWINE_GRADING:
+				return validateUSSwineGrading((USSwineGrading)value, diagnostics, context);
 			case TrackerPackage.SEX:
 				return validateSex((Sex)value, diagnostics, context);
 			case TrackerPackage.BISON_BREED:
@@ -266,6 +268,8 @@ public class TrackerValidator extends EObjectValidator {
 				return validateUSBeefYieldGrade((USBeefYieldGrade)value, diagnostics, context);
 			case TrackerPackage.LEVEL:
 				return validateLevel((Level)value, diagnostics, context);
+			case TrackerPackage.US_SWINE_QUALITY_GRADE:
+				return validateUSSwineQualityGrade((USSwineQualityGrade)value, diagnostics, context);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return validatePremisesIdNumber((String)value, diagnostics, context);
 			case TrackerPackage.EMAIL:
@@ -547,6 +551,15 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validateUSSwineGrading(USSwineGrading usSwineGrading, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(usSwineGrading, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validatePremises(Premises premises, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(premises, diagnostics, context);
 	}
@@ -809,6 +822,15 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateLevel(Level level, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateUSSwineQualityGrade(USSwineQualityGrade usSwineQualityGrade, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
