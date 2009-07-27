@@ -88,7 +88,13 @@
             description="%_UI_commands_person_changeMovedEventPins_descriptions"
             name="%_UI_commands_person_changeMovedEventPins_name">
       </command>
-      
+      <command
+             categoryId="com.verticon.tracker.fair.editor.commands.Fair.category"
+             defaultHandler="com.verticon.tracker.fair.editor.handlers.CopyPersonHandler"
+             description="Create another Person with the attributes of this Person."
+             id="com.verticon.tracker.fair.editor.commands.copyPerson"
+             name="Copy Person">
+       </command>
       <!-- 
 		Animals
 	   -->
@@ -99,6 +105,7 @@
              description="%_UI_commands_animal_fairRegistration_description"
              name="%_UI_commands_animal_fairRegistration_name">
       </command>
+       
       
       </extension>
       
@@ -215,6 +222,20 @@
 	    			     </and>
 	            	</visibleWhen>
                	</command>
+               <command
+                     commandId="com.verticon.tracker.fair.editor.commands.copyPerson"
+                     label="Copy this person"
+                     icon="icons/full/obj16/Person.gif"
+               		 style="push"
+                     tooltip="Copies attributes of this person to a new person.">
+                  <visibleWhen>
+                     <with variable="activeMenuSelection">
+		                  <iterate>
+      						 <instanceof value="com.verticon.tracker.fair.Person"/>
+    					  </iterate>
+    			     	</with>
+                  </visibleWhen>
+               </command>
       </menuContribution>
       
       
@@ -276,5 +297,6 @@
                type="java.lang.Object">
          </propertyTester>
       </extension>
+
 
 </plugin>
