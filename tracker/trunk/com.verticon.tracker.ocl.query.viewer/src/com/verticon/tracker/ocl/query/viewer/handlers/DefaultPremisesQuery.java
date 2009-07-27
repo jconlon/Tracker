@@ -104,6 +104,16 @@ enum DefaultPremisesQuery {
     		"Excessive Somatic Cell Counts",
     		"self.somaticCellCounts>200",
     		"MilkTest"),
+    
+    EVENT_WEIGHIN(
+    	    "WeighIn Events",
+    	    "true",
+    	    "WeighIn"),
+    	    
+    EVENT_MOVED(
+    	    "MovedIn or MovedOut Events",
+    	    "oclIsTypeOf(MovedOut) or oclIsTypeOf(MovedIn)",
+    	    "Event"),
 	;
 
 

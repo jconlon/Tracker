@@ -26,6 +26,16 @@ enum DefaultFairQuery {
 			"Without no registered exhibit",
 			"Exhibit.allInstances()->select(e : Exhibit | e.exhibitor=self)-> size()<1",
 			"Person"),
+			
+	YOUNG_PERSON(
+			"Young Person",
+			"true",
+			"YoungPerson"),
+	
+	OLD_PERSON(
+			"Old Person",
+			"oclIsKindOf(YoungPerson) = false",
+			"Person"),
 
 	;
 
