@@ -6,19 +6,15 @@
  */
 package com.verticon.tracker.impl;
 
-import java.text.MessageFormat;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Swine;
 import com.verticon.tracker.SwineBreed;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.util.Species;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -324,7 +320,8 @@ public class SwineImpl extends AnimalImpl implements Swine {
 	}
 	
 	private String formatAlternativeID(int rightNotch, int leftNotch){
-		StringBuilder sb = new StringBuilder(rightNotch);
+		StringBuilder sb = new StringBuilder();
+		sb.append(rightNotch);
 		sb.append('-');
 		sb.append(leftNotch);
 		return sb.toString();

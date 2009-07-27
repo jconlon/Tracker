@@ -34,7 +34,7 @@ public interface USOvineGrading extends Event {
 	/**
 	 * @NOT
 	 */
-	public static final int EVENT_CODE = 110;
+	public static final int EVENT_CODE = 111;
 
 	/**
 	 * Returns the value of the '<em><b>Quality Grade</b></em>' attribute.
