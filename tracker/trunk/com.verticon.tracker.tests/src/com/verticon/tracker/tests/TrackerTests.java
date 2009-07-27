@@ -73,6 +73,9 @@ public class TrackerTests extends TestSuite {
 		suite.addTestSuite(MilkTestTest.class);
 		suite.addTestSuite(HerdTestTest.class);
 		suite.addTestSuite(GenericEventTest.class);
+		suite.addTestSuite(USBeefGradingTest.class);
+		suite.addTestSuite(USOvineGradingTest.class);
+		suite.addTestSuite(USSwineGradingTest.class);
 		return suite;
 	}
 
