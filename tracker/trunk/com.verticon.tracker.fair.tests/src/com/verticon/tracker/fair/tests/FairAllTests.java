@@ -5,6 +5,8 @@
  */
 package com.verticon.tracker.fair.tests;
 
+import com.verticon.tracker.fair.editor.tests.DivisionProcreatorTest;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -36,12 +38,19 @@ public class FairAllTests extends TestSuite {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Added non-generated tests
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public static Test suite() {
 		TestSuite suite = new FairAllTests("Fair Tests");
 		suite.addTest(FairTests.suite());
+		suite.addTestSuite(ClassTest.class);
+		suite.addTestSuite(DepartmentTest.class);
+		suite.addTestSuite(DivisionTest.class);
+		suite.addTestSuite(LotTest.class);
+		suite.addTestSuite(YouthClubTest.class);
+		suite.addTestSuite(DivisionProcreatorTest.class);
 		return suite;
 	}
 

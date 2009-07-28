@@ -25,26 +25,35 @@
     </triggeringPolicy>
   </appender>
  
- <!--  
+ <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+    </layout>
+  </appender>
+ 
+  
   <logger name="com.verticon.tracker.reader">
     <level value="WARN"/>
   </logger>
   
   <logger name="com.verticon.tracker">
-    <level value="DEBUG"/>
-  </logger>
-  
-  <logger name="com.verticon.tracker.export">
-    <level value="INFO"/>
-  </logger>
-  <logger name="com.verticon.tracker.editor.presentation.SelectionViewerFilter">
     <level value="WARN"/>
   </logger>
-  -->
+  
+  <logger name="com.verticon.tracker.fair.editor.tests">
+    <level value="DEBUG"/>
+  </logger>
+  <logger name="com.verticon.tracker.fair.poi.importxls.SuplementalAnimalTagsProcreator">
+    <level value="DEBUG"/>
+  </logger>
+  
   
   <root>
-    <level value="DEBUG"/>
-    <!-- appender-ref ref="RollingFile"/> -->
+    <level value="WARN"/>
+    <appender-ref ref="STDOUT" />
+    <!-- 
+    <appender-ref ref="RollingFile"/> 
+    -->
   </root>
   	
   <consolePlugin />

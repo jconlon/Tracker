@@ -72,8 +72,10 @@ public class SuplementalAnimalTagsProcreator implements Procreator {
 			throw new IllegalArgumentException("Parent should be a Animal");
 		}
 		Animal animal = (Animal) parent;
+		logger.debug(bundleMarker, "Processing row {} and animal {} ",row.getRowNum(), animal.getId());
 		if(setSupplementalAnimalTags(compoundCommand, row, listColumnMapper, animal, fair, editingDomain)){
 			supplementalIDsSet++;
+			logger.debug(bundleMarker, "animal {}, {} supplementalIDs",new Object [] {animal.getId(),supplementalIDsSet});
 		}
 		if(setVisualAnimalID(compoundCommand, row, listColumnMapper, animal, fair, editingDomain)){
 			visualIDsSet++;
@@ -165,8 +167,9 @@ private static boolean setSupplementalAnimalTags(CompoundCommand compoundCommand
 			compoundCommand.append(command);
 			logger.info(bundleMarker,"Row={} Ovine scrapie tag for animal id {} is {}",
         			new Object[] {row.getRowNum(),animal.getId(), scrapieTag});
+			return true;
 
 		}
-		return true;
+		return false;
 	}
 }
