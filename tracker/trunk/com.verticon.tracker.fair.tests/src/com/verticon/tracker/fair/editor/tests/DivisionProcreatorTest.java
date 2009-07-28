@@ -248,7 +248,7 @@ public class DivisionProcreatorTest extends TestCase {
 		assertTrue("Wrong Youth Clubs "+status, status.contains("2 Youth Clubs"));
 		
 		
-		assertTrue("Animal References "+status, status.contains("0 Animal References"));
+		assertTrue("Wrong Animal References "+status, status.contains("0 Animal References"));
 
 		assertEquals(1252, flags.exhibits);
 
@@ -345,7 +345,7 @@ public class DivisionProcreatorTest extends TestCase {
 	 * Test importing with Animal references
 	 */
 	public void testImport_Exhibits_Parents_YouthClubs_Animals_SupID() {
-		
+		logger.debug(bundleMarker,"Starting testImport_Exhibits_Parents_YouthClubs_Animals_SupID");
 		Command command = SetCommand.create(
 				editingDomain, //domain
 				fair,//owner
@@ -426,13 +426,13 @@ public class DivisionProcreatorTest extends TestCase {
 		assertTrue("Wrong Youth Clubs "+status, status.contains("2 Youth Clubs"));
 		
 		
-		assertTrue("Animal References "+status, status.contains("3 Animal References"));
+		assertTrue("Wrong Animal References "+status, status.contains("3 Animal References"));
 
 		assertEquals(1252, flags.exhibits);
 
-		assertTrue("Visual IDs "+status, status.contains("3 visual IDs set"));
+		assertTrue("Wrong Visual IDs "+status, status.contains("3 visual IDs set"));
 		
-		assertTrue("Visual IDs "+status, status.contains("2 supplemental IDs set"));
+		assertTrue("Wrong Supplemental IDs "+status, status.contains("2 supplemental IDs set"));
 	}
 	
 	
