@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * 
- * For Tracker Issue 278 and bugzilla 
+ * Test created for Tracker Issue 278 and bugzilla 
  * https://bugs.eclipse.org/bugs/show_bug.cgi?id=252612
  * @author jconlon
  *
