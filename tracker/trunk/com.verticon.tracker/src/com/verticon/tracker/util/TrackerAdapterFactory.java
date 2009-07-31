@@ -6,7 +6,6 @@
  */
 package com.verticon.tracker.util;
 
-import com.verticon.tracker.*;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -54,6 +53,9 @@ import com.verticon.tracker.TagAllocated;
 import com.verticon.tracker.TagApplied;
 import com.verticon.tracker.TagRetired;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.USBeefGrading;
+import com.verticon.tracker.USOvineGrading;
+import com.verticon.tracker.USSwineGrading;
 import com.verticon.tracker.WeighIn;
 
 /**

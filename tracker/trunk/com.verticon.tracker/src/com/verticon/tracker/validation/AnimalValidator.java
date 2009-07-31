@@ -6,17 +6,16 @@
  */
 package com.verticon.tracker.validation;
 
+import java.util.Date;
+
+import org.eclipse.emf.common.util.EList;
+
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.Tag;
-
 import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.CalendarDateDuration;
-
-import java.util.Date;
-
-import org.eclipse.emf.common.util.EList;
 
 /**
  * A sample validator interface for {@link com.verticon.tracker.Animal}.

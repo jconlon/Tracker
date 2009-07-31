@@ -6,9 +6,9 @@
  */
 package com.verticon.tracker.validation;
 
-import com.verticon.tracker.Event;
-
 import org.eclipse.emf.common.util.EList;
+
+import com.verticon.tracker.Event;
 
 /**
  * A sample validator interface for {@link com.verticon.tracker.Tag}.
