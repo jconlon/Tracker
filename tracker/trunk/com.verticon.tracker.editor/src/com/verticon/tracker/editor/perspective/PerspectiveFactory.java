@@ -24,7 +24,8 @@ public class PerspectiveFactory implements IPerspectiveFactory {
 	 * @see org.eclipse.ui.IPerspectiveFactory#createInitialLayout(org.eclipse.ui.IPageLayout)
 	 */
 	public void createInitialLayout(IPageLayout layout) {
-String editorArea = layout.getEditorArea();
+		//Get the editor area.
+		String editorArea = layout.getEditorArea();
 		
 		
 		//Left folder
@@ -34,10 +35,12 @@ String editorArea = layout.getEditorArea();
 					IPageLayout.LEFT, 
 					0.25f, 
 					editorArea);
-		//With an outline
-		left.addView(IPageLayout.ID_RES_NAV);
 		
-		//Bottom left is the navigator
+		
+		//With an Navigator
+		left.addView(IPageLayout.ID_PROJECT_EXPLORER);
+		
+		//Bottom left is the Outline
 		layout.addView(
 				IPageLayout.ID_OUTLINE, 
 				IPageLayout.BOTTOM, 
