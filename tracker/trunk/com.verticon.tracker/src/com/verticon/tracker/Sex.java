@@ -64,8 +64,10 @@ public enum Sex implements Enumerator
 	 * @ordered
 	 */
 	S_LITERAL(4, "S", "Neutered/spayed female");
+	
 	/**
 	 * <!-- begin-user-doc -->
+	 * @SuppressWarnings("ucd")
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -78,6 +80,7 @@ public enum Sex implements Enumerator
 	 * If the meaning of '<em><b>Unspecified</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
+	 * @SuppressWarnings("ucd")
 	 * <!-- end-user-doc -->
 	 * @see #UNSPECIFIED_LITERAL
 	 * @model name="Unspecified" literal=""
@@ -90,24 +93,24 @@ public enum Sex implements Enumerator
 	 * The '<em><b>F</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>F</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * Sex code for female
 	 * </p>
+	 * @SuppressWarnings("ucd")
 	 * <!-- end-user-doc -->
 	 * @see #F_LITERAL
 	 * @model literal="Female"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int F = 1;
+	public static final int F = 1; 
 
 	/**
 	 * The '<em><b>M</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>M</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * Sex code for male
 	 * </p>
+	 * @SuppressWarnings("ucd")
 	 * <!-- end-user-doc -->
 	 * @see #M_LITERAL
 	 * @model literal="Male"
@@ -120,9 +123,9 @@ public enum Sex implements Enumerator
 	 * The '<em><b>C</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>C</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * Sex code for castrated.
 	 * </p>
+	 * @SuppressWarnings("ucd")
 	 * <!-- end-user-doc -->
 	 * @see #C_LITERAL
 	 * @model literal="Neutered/castrated male"
@@ -135,9 +138,9 @@ public enum Sex implements Enumerator
 	 * The '<em><b>S</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>S</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * Sex code for spayed
 	 * </p>
+	 * @SuppressWarnings("ucd")
 	 * <!-- end-user-doc -->
 	 * @see #S_LITERAL
 	 * @model literal="Neutered/spayed female"
@@ -164,6 +167,7 @@ public enum Sex implements Enumerator
 	/**
 	 * A public read-only list of all the '<em><b>Sex</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
+	 * @SuppressWarnings("ucd")
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -188,6 +192,7 @@ public enum Sex implements Enumerator
 	/**
 	 * Returns the '<em><b>Sex</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
+	 * @SuppressWarnings("ucd")
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -204,6 +209,7 @@ public enum Sex implements Enumerator
 	/**
 	 * Returns the '<em><b>Sex</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
+	 * @SuppressWarnings("ucd")
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
