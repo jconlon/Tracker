@@ -38,21 +38,12 @@ public class TrackerUtils {
 	}
 	
 	/**
-	 * @deprecated use getAnimalFromTemplate
-	 * @param resource
-	 * @return
+	 * 
+	 * @param template
+	 * @return animal from the template
 	 */
-	@Deprecated
-	public static Premises getPremisesFromTemplate(Resource resource){
-		Object o = resource.getContents().get(0);
-		if(o instanceof Premises){
-			return (Premises)o;
-		}
-		return null;
-	}
-	
-	public static Animal getAnimalFromTemplate(Resource resource){
-		Object o = resource.getContents().get(0);
+	public static Animal getAnimalFromTemplate(Resource template){
+		Object o = template.getContents().get(0);
 		Animal animal = null;
 		if(o instanceof Animal){
 			animal= (Animal)o;
@@ -65,10 +56,10 @@ public class TrackerUtils {
 	/**
 	 * Finds an existing Animal or creates it in the Premises.
 	 * @param tagNumber
-	 * @param premises
+	 * @param activePremises
 	 * @param defaultAnimal
 	 * 
-	 * @return
+	 * @return animal
 	 */
 	public static final Animal findOrCreateAnimal(String tagNumber, Premises activePremises, Animal defaultAnimal){
 		if(defaultAnimal==null){

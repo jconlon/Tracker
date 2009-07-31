@@ -5,6 +5,8 @@
  */
 package com.verticon.tracker.impl;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EMap;
@@ -19,8 +21,6 @@ import com.verticon.tracker.EventAttributeSchema;
 import com.verticon.tracker.EventSchema;
 import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.TrackerPackage;
-import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * <!-- begin-user-doc -->
@@ -160,7 +160,6 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unchecked")
 	public EventAttributeSchema findSchema(Map.Entry<String, String> eventAttribute) {
 		if(getEventSchema() ==null ){
 			return null;

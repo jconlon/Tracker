@@ -6,7 +6,6 @@
  */
 package com.verticon.tracker.impl;
 
-import com.verticon.tracker.*;
 import static com.verticon.tracker.TrackerPlugin.bundleMarker;
 
 import java.net.URI;
@@ -19,7 +18,6 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,6 +45,7 @@ import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
+import com.verticon.tracker.Level;
 import com.verticon.tracker.Location;
 import com.verticon.tracker.LostTag;
 import com.verticon.tracker.Mastitis;
@@ -74,6 +73,12 @@ import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.Treatment;
 import com.verticon.tracker.TreatmentMethod;
+import com.verticon.tracker.USBeefGrading;
+import com.verticon.tracker.USBeefYieldGrade;
+import com.verticon.tracker.USOvineGrading;
+import com.verticon.tracker.USQualityGrade;
+import com.verticon.tracker.USSwineGrading;
+import com.verticon.tracker.USSwineQualityGrade;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.CheckEmail;
