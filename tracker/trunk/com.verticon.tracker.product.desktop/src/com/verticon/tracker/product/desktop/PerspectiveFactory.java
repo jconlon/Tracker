@@ -22,7 +22,7 @@ public class PerspectiveFactory implements IPerspectiveFactory {
 					0.25f, 
 					editorArea);
 		//With an outline
-		left.addView(IPageLayout.ID_RES_NAV);
+		left.addView(IPageLayout.ID_PROJECT_EXPLORER);
 		
 		//Bottom left is the navigator
 		layout.addView(
