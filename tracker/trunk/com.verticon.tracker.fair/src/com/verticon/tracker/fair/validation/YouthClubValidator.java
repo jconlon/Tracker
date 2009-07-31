@@ -6,8 +6,9 @@
  */
 package com.verticon.tracker.fair.validation;
 
-import com.verticon.tracker.fair.Person;
 import org.eclipse.emf.common.util.EList;
+
+import com.verticon.tracker.fair.Person;
 
 
 /**

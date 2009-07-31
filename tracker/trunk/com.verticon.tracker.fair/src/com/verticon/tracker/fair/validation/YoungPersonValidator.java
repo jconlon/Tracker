@@ -6,10 +6,10 @@
  */
 package com.verticon.tracker.fair.validation;
 
+import org.eclipse.emf.common.util.EList;
+
 import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YouthClub;
-
-import org.eclipse.emf.common.util.EList;
 
 /**
  * A sample validator interface for {@link com.verticon.tracker.fair.YoungPerson}.

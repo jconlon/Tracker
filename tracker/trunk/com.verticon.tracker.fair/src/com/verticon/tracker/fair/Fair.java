@@ -5,11 +5,10 @@
  */
 package com.verticon.tracker.fair;
 
-import com.verticon.tracker.Premises;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
+
+import com.verticon.tracker.Premises;
 
 /**
  * <!-- begin-user-doc -->

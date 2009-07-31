@@ -5,9 +5,9 @@
  */
 package com.verticon.tracker.fair;
 
-import com.verticon.tracker.Animal;
-
 import org.eclipse.emf.ecore.EObject;
+
+import com.verticon.tracker.Animal;
 
 /**
  * <!-- begin-user-doc -->
