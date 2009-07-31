@@ -114,9 +114,6 @@ abstract class ExhibitAncestorWizardPage extends WizardPage implements
 		return selectedTarget;
 	}
 
-	/**
-	 * @return
-	 */
 	public boolean newTargetHasValue() {
 		if (getNewTargetName() == null || getNewTargetName().getValue() == null) {
 			return false;
@@ -256,12 +253,9 @@ abstract class ExhibitAncestorWizardPage extends WizardPage implements
 		public NonNullStringValidator(String name, TableViewer tableViewer) {
 			super();
 			this.name = name;
-			this.tableViewer = tableViewer;
 		}
 
 		final String name;
-		final TableViewer tableViewer;
-
 		public IStatus validate(Object value) {
 			if (selectionHasValue()) {
 				return ValidationStatus.ok();
