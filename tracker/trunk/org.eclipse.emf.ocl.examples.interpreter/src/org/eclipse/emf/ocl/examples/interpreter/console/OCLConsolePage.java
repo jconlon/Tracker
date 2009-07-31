@@ -463,7 +463,7 @@ public class OCLConsolePage
 		
 		if (object == null) {
 			toPrint = Collections.EMPTY_SET;
-		} else if (object instanceof Collection) {
+		} else if (object instanceof Collection<?>) {
 			toPrint = (Collection<?>) object;
 		} else if (object.getClass().isArray()) {
 			toPrint = Arrays.asList((Object[]) object);
@@ -487,6 +487,7 @@ public class OCLConsolePage
 	 * 
 	 * @see #print(Object, Color, boolean)
 	 */
+	@SuppressWarnings("unchecked")
 	String toString(Object object) {
 		if (object instanceof EObject) {
 			EObject eObject = (EObject) object;

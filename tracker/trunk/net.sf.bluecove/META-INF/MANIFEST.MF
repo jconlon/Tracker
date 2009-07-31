@@ -11,5 +11,5 @@ Export-Package: com.intel.bluetooth,
 Bundle-NativeCode: bluecove.dll;intelbth.dll;osname=WindowsXP;osname=Windows2000;osname=WindowsNT;processor=x86,
  bluecove_ce.dll;intelbth_ce.dll;osname=WindowsCE;processor=ARM,libbluecove.co;osname=Linux, *
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.equinox.io;bundle-version="1.0.100"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
