@@ -59,7 +59,6 @@ class QueryWithContextWizardPage
 
 	private static String TITLE = QueryOCLMessages.oclQuery_title;
 	private static String METACLASS_PROMPT = QueryOCLMessages.oclQuery_prompt_metaclass;
-	private static String METACLASS_DEFAULT = QueryOCLMessages.oclQuery_default_metaclass;
 	private static String CONDITION_PROMPT = QueryOCLMessages.oclQuery_prompt_condition;
 	private static String CONDITION_DEFAULT = QueryOCLMessages.oclQuery_default_condition;
 	

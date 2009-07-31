@@ -32,14 +32,11 @@ public class ConnectionReaderTask implements Callable<RefreshableReader> {
 	private final RefreshableReader reader;
 	private final StringBuilder builder = new StringBuilder();
 
+	
 	/**
-	 * 
-	 * Primary Constructor
-	 * 
-	 * @param tagIdPublisher
-	 *            to send tagIds
-	 * @param target
-	 *            of Connection
+	 * Primary constructor
+	 * @param eventReader
+	 * @param bundleContext
 	 */
 	public ConnectionReaderTask(AbstractConnectionReader eventReader, 
 			BundleContext bundleContext) {

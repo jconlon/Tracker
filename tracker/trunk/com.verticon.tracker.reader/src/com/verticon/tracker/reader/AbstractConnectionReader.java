@@ -101,7 +101,8 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 				logger.debug(bundleMarker,"{} starting",this);
 				start();
 			} catch (IOException e) {
-				logger.error(toString()+" failed to start", e);
+				logger.error(bundleMarker,toString()+" failed to start. "+e.getLocalizedMessage(), e);
+				e.printStackTrace();
 				return;
 			}
 		} else {
@@ -262,6 +263,7 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 	private IFile getTemplateFile() {
 		Path ipath = new Path(getTemplate());
 		IFile ifile = ResourcesPlugin.getWorkspace().getRoot().getFile(ipath);
+		
 		return ifile;
 	}
 

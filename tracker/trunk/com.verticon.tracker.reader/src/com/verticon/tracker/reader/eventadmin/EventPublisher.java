@@ -40,6 +40,9 @@ public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
 	
 	public EventPublisher(IReader name, IFile animalTemplateFile) throws IOException {
 		super();
+		if(!animalTemplateFile.exists()){
+			throw new IOException(animalTemplateFile.getName()+" does not exist.");
+		}
 		this.reader=name;
 		this.animalTemplateFile = animalTemplateFile;
 		Resource templateResource = getResource(animalTemplateFile);

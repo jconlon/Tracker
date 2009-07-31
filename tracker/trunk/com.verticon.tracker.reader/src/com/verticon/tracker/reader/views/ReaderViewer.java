@@ -150,7 +150,7 @@ public class ReaderViewer {
 	/**
 	 * Create a new shell, add the widgets, open the shell
 	 * 
-	 * @return the shell that was created
+	 * 
 	 */
 	private void addChildControls(Composite composite) {
 

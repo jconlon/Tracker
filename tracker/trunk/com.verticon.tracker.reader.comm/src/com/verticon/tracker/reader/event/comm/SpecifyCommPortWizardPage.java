@@ -146,7 +146,7 @@ public class SpecifyCommPortWizardPage extends WizardPage implements
 		
 	@SuppressWarnings("unchecked")
 	void init() throws NoAvailableSerialPortsException {
-		configureValidSerialPorts();
+		CommReaderPlugin.getDefault().configureValidSerialPorts();
 		portNames.clear();
 		Enumeration e = CommPortIdentifier.getPortIdentifiers();
 		while (e.hasMoreElements()) {
@@ -155,7 +155,6 @@ public class SpecifyCommPortWizardPage extends WizardPage implements
 
 			switch (com.getPortType()) {
 			case CommPortIdentifier.PORT_SERIAL:
-				System.out.print(", a serial port, ");
 				if (com.isCurrentlyOwned()) {
 					logger.debug(
 						"Identified {} as a serial port, but it is owned by the {} application.",
@@ -206,13 +205,5 @@ public class SpecifyCommPortWizardPage extends WizardPage implements
 		return selectedPortName;
 	}
 
-	private void configureValidSerialPorts(){
-		String serialPorts = CommReaderPlugin.getDefault().getPreferenceStore().
-		getString(PreferenceConstants.P_SERIAL_PORTS);
-		logger.debug(bundleMarker,"Setting System Property {} with value {}",
-				CommReaderPlugin.GNU_IO_RXTX_SERIAL_PORTS,serialPorts);
-		
-		System.setProperty(CommReaderPlugin.GNU_IO_RXTX_SERIAL_PORTS, 
-				serialPorts);
-	}
+	
 }

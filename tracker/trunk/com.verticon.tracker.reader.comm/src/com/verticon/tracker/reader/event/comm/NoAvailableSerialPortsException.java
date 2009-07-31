@@ -6,7 +6,6 @@ public class NoAvailableSerialPortsException extends IOException {
 
 	public NoAvailableSerialPortsException(String s) {
 		super(s);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

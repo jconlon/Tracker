@@ -29,8 +29,8 @@ import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.util.TrackerUtils;
 
 /**
- * Container modeling the an Animal Template (*.animal) Document File
- * and behavior associated with copying events from a template animal
+ * Container modeling an Animal Template (*.animal) Document File
+ * and the behavior associated with copying events from a template animal
  * for loading to animals in a Premises Document. 
  * 
  * Under certain conditions the dates of the Events in this bean will be
