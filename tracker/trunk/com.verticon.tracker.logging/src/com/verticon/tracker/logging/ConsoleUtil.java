@@ -99,8 +99,6 @@ public class ConsoleUtil {
 	 * 
 	 * @param name -
 	 *            the name for the console
-	 * @param image -
-	 *            the image associated with the console
 	 * @return the message console
 	 */
 	public synchronized static MessageConsole registerConsole(String name) {
