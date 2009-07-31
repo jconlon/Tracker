@@ -244,10 +244,6 @@ public class ConnectionFactoryImplTest extends TestCase {
 	 * Requires a Serial Reader.
 	 */
 	public void testReadingFromInputStream(){
-//		Console console = System.console();
-//		if(console == null) {
-//		   fail("Could not find a console.");
-//		}
 		String portName = testPortSetting();
 		System.out.println("This test requires a serial device reader connected to "+portName);
 		
