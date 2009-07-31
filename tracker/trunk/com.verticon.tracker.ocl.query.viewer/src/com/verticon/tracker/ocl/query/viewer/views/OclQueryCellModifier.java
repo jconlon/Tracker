@@ -1,15 +1,13 @@
 package com.verticon.tracker.ocl.query.viewer.views;
 
+import static com.verticon.tracker.ocl.query.viewer.OclQueryViewerPlugin.bundleMarker;
+
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.swt.widgets.TableItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
-import org.slf4j.MarkerFactory;
 
 import com.verticon.tracker.ocl.query.viewer.IOclQuery;
-import com.verticon.tracker.ocl.query.viewer.OclQueryViewModel;
-import static com.verticon.tracker.ocl.query.viewer.OclQueryViewerPlugin.bundleMarker;
 
 /**
  * ICellModifier for the QueryViewer ICellModifier is called when the user
