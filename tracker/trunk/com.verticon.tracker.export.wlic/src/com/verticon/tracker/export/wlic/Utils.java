@@ -32,7 +32,7 @@ public class Utils {
 	
 	/**
 	 * @param trackerFile
-	 * @return
+	 * @return exports folder
 	 */
 	public static IFolder getExportsFolder(IFile trackerFile) {
 		IProject project = trackerFile.getProject();
@@ -131,8 +131,8 @@ public class Utils {
 
 	/**
 	 * Parse a fileName like 003ALKM 20070925190543.IND
-	 * @param nonProducerPid
-	 * @return
+	 * @param fileName
+	 * @return date
 	 */
 	public static final Date parseWlicFileName(String fileName) throws ParseException{
 		String date = fileName.substring(7, 21);
