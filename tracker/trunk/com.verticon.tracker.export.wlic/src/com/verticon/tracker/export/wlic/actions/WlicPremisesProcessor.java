@@ -230,7 +230,7 @@ public class WlicPremisesProcessor implements PremisesProcessor {
 	/**
 	 * Create a fileName like 003ALKM20070925190543.IND
 	 * @param nonProducerPid
-	 * @return
+	 * @return filename
 	 */
 	public static final String createWlicFileName(String nonProducerPid){
 		String date = Utils.FILE_NAME_DATE_FORMAT.format(new Date());
