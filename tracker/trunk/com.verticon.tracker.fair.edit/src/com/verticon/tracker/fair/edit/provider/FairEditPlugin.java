@@ -5,11 +5,10 @@
  */
 package com.verticon.tracker.fair.edit.provider;
 
-import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
-
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
+
+import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
 
 /**
  * This is the central singleton for the Fair edit plugin.
