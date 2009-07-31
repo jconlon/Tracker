@@ -251,7 +251,7 @@ public class ReaderViewModel implements PropertyChangeListener{
 	}
 
 	/**
-	 * @return
+	 * 
 	 * @throws InvalidRegistryObjectException
 	 */
 	 private void loadFactories()

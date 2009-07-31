@@ -88,10 +88,20 @@ public class CommReaderPlugin extends AbstractUIPlugin {
 		return plugin;
 	}
 	
-	private void configureValidSerialPorts(){
+	public void configureValidSerialPorts(){
+		String serialPorts = getPreferenceStore().getString(PreferenceConstants.P_SERIAL_PORTS);
+		if(serialPorts.trim().length()>0){
+			logger.info(bundleMarker,"Setting System Property {} with value {}",
+					CommReaderPlugin.GNU_IO_RXTX_SERIAL_PORTS,serialPorts);
+			
+			System.setProperty(GNU_IO_RXTX_SERIAL_PORTS, 
+					serialPorts);
+		}else{
+			logger.info(bundleMarker,"No preferences ares set, defered setting System Property {}. Current value is {}",
+					CommReaderPlugin.GNU_IO_RXTX_SERIAL_PORTS,System.getProperty(GNU_IO_RXTX_SERIAL_PORTS));
+			
+		}
 		
-		System.setProperty(GNU_IO_RXTX_SERIAL_PORTS, 
-				this.getPreferenceStore().getString(PreferenceConstants.P_SERIAL_PORTS));
 	}
 
 }

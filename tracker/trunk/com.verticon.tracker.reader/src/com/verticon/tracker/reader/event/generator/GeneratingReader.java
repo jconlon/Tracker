@@ -277,10 +277,11 @@ public class GeneratingReader extends AbstractModelObject implements
 	}
 
 	/**
+	 * 
 	 * The port stores the secondsBetweenGeneratedEvents
-	 * @return
+	 * @return seconds
 	 */
-	public int getSecondsBetweenGeneratedEvents() {
+	private int getSecondsBetweenGeneratedEvents() {
 		return target.getPort();
 	}
 
