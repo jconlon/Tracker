@@ -91,7 +91,7 @@ public class ActionUtils {
 	 * 
 	 * @param editor
 	 * @param selection
-	 * @return
+	 * @return TagsBean
 	 * @throws FileNotFoundException
 	 */
 	public static final TagsBean getTagsBean(IPremisesProvider editor,
@@ -137,7 +137,7 @@ public class ActionUtils {
 	 * 
 	 * @param adaptable
 	 * @param selection
-	 * @return
+	 * @return TagsBean
 	 * @throws FileNotFoundException
 	 */
 	public static final TagsBean getTagsBean(IAdaptable adaptable,
@@ -332,7 +332,7 @@ public class ActionUtils {
 	 * @param tag
 	 * @param editingDomain
 	 * @param eventsToAdd
-	 * @return
+	 * @return AddCommand
 	 */
 	public static Command createAddCommand(Tag tag,
 			EditingDomain editingDomain, Collection<Event> eventsToAdd) {
@@ -348,7 +348,7 @@ public class ActionUtils {
 	/**
 	 * @param tag
 	 * @param events
-	 * @return
+	 * @return Collection of Events without the deferred events
 	 */
 	public static Collection<Event> filterOutDeferedEvents(Tag tag,
 			Collection<Event> events) {

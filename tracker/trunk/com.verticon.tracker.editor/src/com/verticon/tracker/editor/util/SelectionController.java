@@ -116,15 +116,6 @@ public class SelectionController implements ISelectionController {
 	 * If the part is a
 	 * {@link com.verticon.tracker.editor.presentation.IPremisesProvider}
 	 * 
-	 * First the {@link TrackerView#handleViewerInputChange()} method will be
-	 * called to load obtain rows for the
-	 * {@link TrackerView#masterFilteredTable} (if this method is called by a
-	 * previously known part, then new rows will not be loaded.)
-	 * 
-	 * Second the {@link TrackerView#handleSelection(ISelection)} method will be
-	 * called to determine to handle it directly or send it to be handled by the
-	 * subclass.
-	 * 
 	 * @see ISelectionListener#selectionChanged(IWorkbenchPart, ISelection)
 	 * @param part
 	 *            the workbench part containing the selection
@@ -133,10 +124,6 @@ public class SelectionController implements ISelectionController {
 	 */
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		if (Utils.isNotTrackerStructuredSelection(selection, part)) {
-//			if (activeEditorPart != null) {
-//				Utils.unregisterFilter(activeEditorPart, itemsView);
-//				activeEditorPart=null;
-//			}
 			return;
 		}
 		

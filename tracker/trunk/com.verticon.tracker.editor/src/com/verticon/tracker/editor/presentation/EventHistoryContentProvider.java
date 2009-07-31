@@ -164,7 +164,7 @@ public class EventHistoryContentProvider extends AdapterFactoryContentProvider i
 
 	private static void addOneOrMoreObjectsToViewer(
 			final TableViewer tableViewer, final Object element) {
-		if(element instanceof Collection){
+		if(element instanceof Collection<?>){
 			Collection<?> col = (Collection<?>)element;
 			tableViewer.add(col.toArray());
 		}else{

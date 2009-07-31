@@ -37,9 +37,7 @@ public class SelectModifyEventsValuesPage extends WizardPage {
 	private Button correctionButton;
 	private Button electrionicReadButton;
 
-	/**
-	 * @param pageName
-	 */
+	
 	public SelectModifyEventsValuesPage() {
 		super("selectValues");
 		setTitle("Select Attribute Values");
