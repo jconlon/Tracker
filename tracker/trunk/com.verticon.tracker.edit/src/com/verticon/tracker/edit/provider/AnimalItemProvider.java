@@ -7,7 +7,6 @@
 package com.verticon.tracker.edit.provider;
 
 
-import java.text.DateFormat;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -22,7 +21,6 @@ import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
@@ -618,7 +616,7 @@ public class AnimalItemProvider
 
 	/**
 	 * @param object
-	 * @return
+	 * @return resourceName
 	 */
 	public static final String getResourceName(Object object) {
 		String simpleName = object.getClass().getSimpleName();
