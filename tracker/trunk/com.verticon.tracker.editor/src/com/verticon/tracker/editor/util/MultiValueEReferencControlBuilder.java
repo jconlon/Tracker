@@ -154,7 +154,7 @@ public class MultiValueEReferencControlBuilder implements ControlBuilder {
 			 */
 			@Override
 			public Object convert(Object value) {
-				if (value instanceof EObjectResolvingEList) {
+				if (value instanceof EObjectResolvingEList<?>) {
 					StringBuilder result = new StringBuilder();
 					EObjectResolvingEList<?> c = (EObjectResolvingEList<?>) value;
 					for (Object object : c) {

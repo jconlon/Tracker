@@ -52,9 +52,7 @@ public class SelectEventAttributesWizardPage extends WizardPage {
 		possibleAttributes.put(TrackerPackage.eINSTANCE.getEvent_ElectronicallyRead(), "Specify if the event was read electrionically");
 	}
 
-	/**
-	 * @param pageName
-	 */
+	
 	public SelectEventAttributesWizardPage() {
 		super("selectAttributes");
 		setTitle("Select Attributes");
