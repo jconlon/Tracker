@@ -200,7 +200,7 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 	 * @generated
 	 */
 	public Department getDepartment() {
-		if (eContainerFeatureID != FairPackage.CLASS__DEPARTMENT) return null;
+		if (eContainerFeatureID() != FairPackage.CLASS__DEPARTMENT) return null;
 		return (Department)eContainer();
 	}
 
@@ -220,7 +220,7 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 	 * @generated
 	 */
 	public void setDepartment(Department newDepartment) {
-		if (newDepartment != eInternalContainer() || (eContainerFeatureID != FairPackage.CLASS__DEPARTMENT && newDepartment != null)) {
+		if (newDepartment != eInternalContainer() || (eContainerFeatureID() != FairPackage.CLASS__DEPARTMENT && newDepartment != null)) {
 			if (EcoreUtil.isAncestor(this, newDepartment))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -319,7 +319,7 @@ public class ClassImpl extends EObjectImpl implements com.verticon.tracker.fair.
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case FairPackage.CLASS__DEPARTMENT:
 				return eInternalContainer().eInverseRemove(this, FairPackage.DEPARTMENT__CLASSES, Department.class, msgs);
 		}

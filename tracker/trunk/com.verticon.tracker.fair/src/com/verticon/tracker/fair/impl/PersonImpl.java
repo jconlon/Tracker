@@ -666,9 +666,9 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case FairPackage.PERSON__PIN:
 				return getPin();
 			case FairPackage.PERSON__SALES_ORDER:
-				return new Integer(getSalesOrder());
+				return getSalesOrder();
 			case FairPackage.PERSON__EXHIBITOR_NUMBER:
-				return new Integer(getExhibitorNumber());
+				return getExhibitorNumber();
 			case FairPackage.PERSON__EMAIL:
 				return getEmail();
 		}
@@ -714,10 +714,10 @@ public class PersonImpl extends EObjectImpl implements Person {
 				setPin((String)newValue);
 				return;
 			case FairPackage.PERSON__SALES_ORDER:
-				setSalesOrder(((Integer)newValue).intValue());
+				setSalesOrder((Integer)newValue);
 				return;
 			case FairPackage.PERSON__EXHIBITOR_NUMBER:
-				setExhibitorNumber(((Integer)newValue).intValue());
+				setExhibitorNumber((Integer)newValue);
 				return;
 			case FairPackage.PERSON__EMAIL:
 				setEmail((String)newValue);

@@ -200,7 +200,7 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 	 * @generated
 	 */
 	public Division getDivision() {
-		if (eContainerFeatureID != FairPackage.DEPARTMENT__DIVISION) return null;
+		if (eContainerFeatureID() != FairPackage.DEPARTMENT__DIVISION) return null;
 		return (Division)eContainer();
 	}
 
@@ -220,7 +220,7 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 	 * @generated
 	 */
 	public void setDivision(Division newDivision) {
-		if (newDivision != eInternalContainer() || (eContainerFeatureID != FairPackage.DEPARTMENT__DIVISION && newDivision != null)) {
+		if (newDivision != eInternalContainer() || (eContainerFeatureID() != FairPackage.DEPARTMENT__DIVISION && newDivision != null)) {
 			if (EcoreUtil.isAncestor(this, newDivision))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -319,7 +319,7 @@ public class DepartmentImpl extends EObjectImpl implements Department {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case FairPackage.DEPARTMENT__DIVISION:
 				return eInternalContainer().eInverseRemove(this, FairPackage.DIVISION__DEPARTMENTS, Division.class, msgs);
 		}

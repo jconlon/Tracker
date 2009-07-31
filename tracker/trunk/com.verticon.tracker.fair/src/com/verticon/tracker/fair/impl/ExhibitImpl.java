@@ -306,7 +306,7 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	 * @generated
 	 */
 	public Lot getLot() {
-		if (eContainerFeatureID != FairPackage.EXHIBIT__LOT) return null;
+		if (eContainerFeatureID() != FairPackage.EXHIBIT__LOT) return null;
 		return (Lot)eContainer();
 	}
 
@@ -326,7 +326,7 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	 * @generated
 	 */
 	public void setLot(Lot newLot) {
-		if (newLot != eInternalContainer() || (eContainerFeatureID != FairPackage.EXHIBIT__LOT && newLot != null)) {
+		if (newLot != eInternalContainer() || (eContainerFeatureID() != FairPackage.EXHIBIT__LOT && newLot != null)) {
 			if (EcoreUtil.isAncestor(this, newLot))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -437,7 +437,7 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case FairPackage.EXHIBIT__LOT:
 				return eInternalContainer().eInverseRemove(this, FairPackage.LOT__EXHIBITS, Lot.class, msgs);
 		}
@@ -455,7 +455,7 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 			case FairPackage.EXHIBIT__NAME:
 				return getName();
 			case FairPackage.EXHIBIT__NUMBER:
-				return new Integer(getNumber());
+				return getNumber();
 			case FairPackage.EXHIBIT__COMMENTS:
 				return getComments();
 			case FairPackage.EXHIBIT__ANIMAL:
@@ -467,9 +467,9 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 			case FairPackage.EXHIBIT__LOT:
 				return getLot();
 			case FairPackage.EXHIBIT__SALES_ORDER:
-				return new Integer(getSalesOrder());
+				return getSalesOrder();
 			case FairPackage.EXHIBIT__IN_AUCTION:
-				return isInAuction() ? Boolean.TRUE : Boolean.FALSE;
+				return isInAuction();
 			case FairPackage.EXHIBIT__AWARD:
 				return getAward();
 		}
@@ -497,7 +497,7 @@ public class ExhibitImpl extends EObjectImpl implements Exhibit {
 				setLot((Lot)newValue);
 				return;
 			case FairPackage.EXHIBIT__IN_AUCTION:
-				setInAuction(((Boolean)newValue).booleanValue());
+				setInAuction((Boolean)newValue);
 				return;
 			case FairPackage.EXHIBIT__AWARD:
 				setAward((Award)newValue);

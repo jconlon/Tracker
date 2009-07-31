@@ -175,7 +175,7 @@ public class LotImpl extends EObjectImpl implements Lot {
 	 * @generated
 	 */
 	public com.verticon.tracker.fair.Class getClass_() {
-		if (eContainerFeatureID != FairPackage.LOT__CLASS) return null;
+		if (eContainerFeatureID() != FairPackage.LOT__CLASS) return null;
 		return (com.verticon.tracker.fair.Class)eContainer();
 	}
 
@@ -195,7 +195,7 @@ public class LotImpl extends EObjectImpl implements Lot {
 	 * @generated
 	 */
 	public void setClass(com.verticon.tracker.fair.Class newClass) {
-		if (newClass != eInternalContainer() || (eContainerFeatureID != FairPackage.LOT__CLASS && newClass != null)) {
+		if (newClass != eInternalContainer() || (eContainerFeatureID() != FairPackage.LOT__CLASS && newClass != null)) {
 			if (EcoreUtil.isAncestor(this, newClass))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -294,7 +294,7 @@ public class LotImpl extends EObjectImpl implements Lot {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case FairPackage.LOT__CLASS:
 				return eInternalContainer().eInverseRemove(this, FairPackage.CLASS__LOTS, com.verticon.tracker.fair.Class.class, msgs);
 		}

@@ -83,7 +83,7 @@ public interface FairFactory extends EFactory {
 	 * @return a new object of class '<em>Class</em>'.
 	 * @generated
 	 */
-	com.verticon.tracker.fair.Class createClass();
+	Class createClass();
 
 	/**
 	 * Returns a new object of class '<em>Lot</em>'.
