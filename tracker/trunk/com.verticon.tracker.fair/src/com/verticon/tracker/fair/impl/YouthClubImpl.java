@@ -5,19 +5,18 @@
  */
 package com.verticon.tracker.fair.impl;
 
-import com.verticon.tracker.fair.FairPackage;
-import com.verticon.tracker.fair.Person;
-import com.verticon.tracker.fair.YouthClub;
-
 import java.util.Collection;
-import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
+import com.verticon.tracker.fair.FairPackage;
+import com.verticon.tracker.fair.Person;
+import com.verticon.tracker.fair.YouthClub;
 
 /**
  * <!-- begin-user-doc -->

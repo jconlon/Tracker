@@ -5,7 +5,6 @@
  */
 package com.verticon.tracker.fair.impl;
 
-import com.verticon.tracker.fair.Award;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -13,6 +12,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
+import com.verticon.tracker.fair.Award;
 import com.verticon.tracker.fair.Department;
 import com.verticon.tracker.fair.Division;
 import com.verticon.tracker.fair.Exhibit;

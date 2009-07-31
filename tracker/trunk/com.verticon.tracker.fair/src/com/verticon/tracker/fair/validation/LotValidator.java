@@ -6,9 +6,9 @@
  */
 package com.verticon.tracker.fair.validation;
 
-import com.verticon.tracker.fair.Exhibit;
-
 import org.eclipse.emf.common.util.EList;
+
+import com.verticon.tracker.fair.Exhibit;
 
 /**
  * A sample validator interface for {@link com.verticon.tracker.fair.Lot}.

@@ -5,15 +5,13 @@
  */
 package com.verticon.tracker.fair.util;
 
-import com.verticon.tracker.fair.FairPackage;
-
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.resource.Resource;
-
 import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
+
+import com.verticon.tracker.fair.FairPackage;
 
 /**
  * This class contains helper methods to serialize and deserialize XML documents

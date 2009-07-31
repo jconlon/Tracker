@@ -7,7 +7,6 @@
 package com.verticon.tracker.fair.validation;
 
 import com.verticon.tracker.Animal;
-
 import com.verticon.tracker.fair.Award;
 import com.verticon.tracker.fair.Lot;
 import com.verticon.tracker.fair.Person;

@@ -6,7 +6,6 @@
 package com.verticon.tracker.fair;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
