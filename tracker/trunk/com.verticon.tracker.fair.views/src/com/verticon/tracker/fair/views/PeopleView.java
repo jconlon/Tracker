@@ -32,7 +32,6 @@ import org.eclipse.swt.widgets.TableColumn;
 import at.bestsolution.dataforms.util.viewers.GenericObservableMapCellLabelProvider;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.util.ColumnUtils;
 import com.verticon.tracker.editor.util.GenericViewSorter;
