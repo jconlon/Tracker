@@ -141,8 +141,6 @@ public class UpdatePinsWizard extends Wizard {
 	 * 
 	 */
 	private Command createCommand() {
-		Command command = null;
-
 		// Get all the exhibits that are associated with the selectedPersons
 		CollectionFilter<Exhibit> exhibitsOfPersons = new CollectionFilter<Exhibit>();
 		exhibitsOfPersons.addFilter(new FilterCriteria<Exhibit>() {
@@ -166,7 +164,7 @@ public class UpdatePinsWizard extends Wizard {
 	 * @param selectedPersonExhibits
 	 * @param updateMovedOut
 	 * @param updateMovedIn
-	 * @return
+	 * @return command
 	 */
 	public static Command createUpdatePinCommand(EditingDomain editingDomain,
 			List<Exhibit> selectedPersonExhibits, boolean updateMovedOut,

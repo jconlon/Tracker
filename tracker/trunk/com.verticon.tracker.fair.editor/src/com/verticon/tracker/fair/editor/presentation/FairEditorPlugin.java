@@ -156,13 +156,15 @@ public final class FairEditorPlugin extends EMFPlugin {
 	 */
 	static class PremisesProviderFactory implements IAdapterFactory {
 
-		private static final java.lang.Class[] types = {
+		
+		private static final java.lang.Class<?>[] types = {
 			Premises.class
 		};
 		
 		/**
 		 * The actual providing of the Premises
 		 */
+		@SuppressWarnings("unchecked")
 		public Object getAdapter(Object fair,
 				java.lang.Class clazz) {
 			if(clazz == Premises.class && fair instanceof Fair){
@@ -172,7 +174,7 @@ public final class FairEditorPlugin extends EMFPlugin {
 			}
 		}
 
-		public java.lang.Class[] getAdapterList() {
+		public java.lang.Class<?>[] getAdapterList() {
 			return types;
 		}
 		

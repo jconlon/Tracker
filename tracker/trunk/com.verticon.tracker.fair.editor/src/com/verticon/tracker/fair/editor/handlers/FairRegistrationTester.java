@@ -25,7 +25,7 @@ public class FairRegistrationTester extends PropertyTester {
 //		   IViewPart animals = page.findView("com.verticon.tracker.views.AnimalsView");
 //		   
 		boolean result = false;
-		if(receiver instanceof Collection && !((Collection<?>)receiver).isEmpty() ){
+		if(receiver instanceof Collection<?> && !((Collection<?>)receiver).isEmpty() ){
 			Collection<?> selection = (Collection<?>)receiver;
 			result = FairRegistrationSelection.instance(selection).isValidRegistration();
 		}

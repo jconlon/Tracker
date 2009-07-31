@@ -297,7 +297,6 @@ public class FairRegistrationConfirmationWizardPage extends WizardPage
 	
 	/**
 	 * @param selection
-	 * @return
 	 */
 	private void fillPropertiesFolder(ISelection selection,
 			AdapterFactory adapterFactory, CTabFolder cTabFolder) {

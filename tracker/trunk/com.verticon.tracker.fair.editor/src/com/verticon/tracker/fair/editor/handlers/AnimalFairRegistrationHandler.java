@@ -9,7 +9,6 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.WizardDialog;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.verticon.tracker.fair.editor.presentation.FairRegistrationWizard;
@@ -31,10 +30,6 @@ public class AnimalFairRegistrationHandler extends AbstractHandler implements IH
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		ISelection selection = HandlerUtil.getActiveMenuSelectionChecked(event);	
-		IEditorPart editorPart = HandlerUtil.getActiveEditorChecked(event);
-//		IEditingDomainProvider editingDomainProvider = (IEditingDomainProvider) editorPart
-//		.getAdapter(IPremisesProvider.class);
-		
 		FairRegistrationWizard wizard = new FairRegistrationWizard();
 		
 		wizard.init(HandlerUtil.getActiveWorkbenchWindowChecked(event), 
