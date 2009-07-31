@@ -435,8 +435,8 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	
 
 	/**
-	 * @NOT
-	 * @return
+	 * @generated NOT
+	 * @return species
 	 */
 	public abstract Species getSpeciesEnum();
 

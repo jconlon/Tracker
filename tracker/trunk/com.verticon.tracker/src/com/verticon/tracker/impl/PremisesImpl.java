@@ -6,8 +6,6 @@
  */
 package com.verticon.tracker.impl;
 
-import static com.verticon.tracker.TrackerPlugin.bundleMarker;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
