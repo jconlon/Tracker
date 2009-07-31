@@ -12,6 +12,10 @@ import java.util.regex.Pattern;
  */
 public class CheckEmail {
 
+	private static final String EXPRESSION = "^[a-zA-Z_0-9.]+@[a-zA-Z_0-9.]+?\\.+[a-zA-Z]{2,3}$";
+	@SuppressWarnings("unused")
+	//An alternative expression for use with ignore case
+	private static final String ALT_EXPRESSION = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$";
 	/**
 	 * 
 	 */
@@ -38,7 +42,8 @@ public class CheckEmail {
 		
 		
 		// Set the email pattern string
-		p = Pattern.compile("^[a-zA-Z_0-9.]+@[a-zA-Z_0-9.]+?\\.+[a-zA-Z]{2,3}$");
+		p = Pattern.compile(EXPRESSION);
+		             
 
 		// Match the given string with the pattern
 		m = p.matcher(email);
