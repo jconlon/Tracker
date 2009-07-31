@@ -77,7 +77,7 @@ public class PluginLogAppender  extends AppenderBase<LoggingEvent> {
 	
 	/**
 	 * Return the pluginId under which the messages will be logged
-	 * @return
+	 * @return symbolicName
 	 */
 	public String getSymbolicName() {
 		return this.symbolicName;
