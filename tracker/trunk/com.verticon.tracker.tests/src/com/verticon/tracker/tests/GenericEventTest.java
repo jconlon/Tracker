@@ -21,7 +21,7 @@ import com.verticon.tracker.TrackerFactory;
  * <p>
  * The following operations are tested:
  * <ul>
- *   <li>{@link com.verticon.tracker.GenericEvent#findSchema(java.util.Map.Entry) <em>Find Schema</em>}</li>
+ *   <li>{@link GenericEvent#findSchema(java.util.Map.Entry)} <em>Find Schema</em>}</li>
  * </ul>
  * </p>
  * @generated
