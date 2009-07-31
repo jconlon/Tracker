@@ -34,7 +34,6 @@ import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.WeighIn;
-import com.verticon.tracker.impl.AnimalImpl;
 import com.verticon.tracker.util.Age;
 
 /**
@@ -848,7 +847,7 @@ public abstract class AnimalTest extends TestCase {
 		ArrayList<EObject> arrayList = new ArrayList<EObject>();
 		arrayList.add(root);
 		try {
-		    returnStr = XMLHelperImpl.saveString(new HashMap(),arrayList, "UTF-8",
+		    returnStr = XMLHelperImpl.saveString(new HashMap<Object, Object>(),arrayList, "UTF-8",
 		xmlHelper);
 		}
 		catch (Exception ex) {
@@ -867,10 +866,10 @@ public abstract class AnimalTest extends TestCase {
 		Animal esmML = null;
 		ByteArrayInputStream bais = new ByteArrayInputStream(root.getBytes());
 		try {
-			xmlResource.load(bais, new HashMap());
+			xmlResource.load(bais, new HashMap<Object, Object>());
 		
 		} catch (Resource.IOWrappedException ex) {// FeatureNotFoundException
-			Throwable t = ex.getCause(); // ex) {
+//			Throwable t = ex.getCause(); // ex) {
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -887,13 +886,11 @@ public abstract class AnimalTest extends TestCase {
 		
 		
 		public Notifier getTarget() {
-			// TODO Auto-generated method stub
 			return target;
 		}
 
 		
 		public boolean isAdapterForType(Object type) {
-			// TODO Auto-generated method stub
 			return false;
 		}
 

@@ -7,4 +7,6 @@ Bundle-Vendor: Verticon, Inc.
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: com.verticon.tracker.editor;bundle-version="0.3.4",
  org.junit4;bundle-version="4.3.1"
-Import-Package: com.verticon.tracker;version="0.1.0"
+Import-Package: com.verticon.tracker;version="0.1.0",
+ org.slf4j;version="1.5.5"
+Export-Package: com.verticon.tracker.editor.util

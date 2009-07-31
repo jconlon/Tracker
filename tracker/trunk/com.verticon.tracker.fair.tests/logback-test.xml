@@ -41,17 +41,18 @@
   </logger>
   
   <logger name="com.verticon.tracker.fair.editor.tests">
-    <level value="DEBUG"/>
+    <level value="WARN"/>
   </logger>
   <logger name="com.verticon.tracker.fair.poi.importxls.SuplementalAnimalTagsProcreator">
-    <level value="DEBUG"/>
+    <level value="WARN"/>
   </logger>
   
   
   <root>
     <level value="WARN"/>
-    <appender-ref ref="STDOUT" />
+    
     <!-- 
+    <appender-ref ref="STDOUT" />
     <appender-ref ref="RollingFile"/> 
     -->
   </root>

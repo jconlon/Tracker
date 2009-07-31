@@ -48,6 +48,8 @@ import com.verticon.tracker.fair.poi.importxls.MissingCriticalDataException;
 
 public class DivisionProcreatorTest extends TestCase {
 
+	public static final String VERTICON_FAIR_EDITOR_TESTS = "verticon.fair.editor.tests";
+
 	/**
 	 * slf4j Logger
 	 */
@@ -61,9 +63,14 @@ public class DivisionProcreatorTest extends TestCase {
 	Premises premises = null;
 
 	List<ColumnMapper> spreadSheetColumnsToFeatureMap = null;
+	File testsDirectory = null;
 
 	@Override
 	protected void setUp() throws Exception {
+		String testsFilesDir = System.getProperty(VERTICON_FAIR_EDITOR_TESTS);
+		assertNotNull("System property is null", testsFilesDir);
+	    testsDirectory = new File(testsFilesDir);
+		
 		spreadSheetColumnsToFeatureMap = new LinkedList<ColumnMapper>();
 		procreator = ExecutableProcreators.newDivisionProcreator();
 		fair = FairFactory.eINSTANCE.createFair();
@@ -107,6 +114,7 @@ public class DivisionProcreatorTest extends TestCase {
 		spreadSheetColumnsToFeatureMap = null;
 		editingDomain=null;
 		fair=null;
+		testsDirectory=null;
 	}
 
 	public void testResource() {
@@ -114,8 +122,9 @@ public class DivisionProcreatorTest extends TestCase {
 		assertNotNull(editingDomain.getResourceSet());
 		assertFalse(editingDomain.getResourceSet().getResources().isEmpty());
 
-		File folder = new File("testFiles");
-		assertTrue(folder.isDirectory());
+		
+		assertTrue(testsDirectory+" directory does not exist", testsDirectory.exists());
+		assertTrue(testsDirectory+" is not a directory",testsDirectory.isDirectory());
 
 	}
 	
@@ -443,7 +452,8 @@ public class DivisionProcreatorTest extends TestCase {
 	 * 
 	 */
 	private void importSpreadSheet(String fileName) throws MissingCriticalDataException {
-		File file = new File("testFiles/"+fileName);
+		
+		File file = new File(this.testsDirectory,  fileName);
 		HSSFSheet sheet = null;
 		try {
 			sheet = getWorkSheet(file);

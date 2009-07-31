@@ -1,4 +1,4 @@
-package com.verticon.tracker.tests;
+package com.verticon.tracker.experiments;
 
 import java.util.Scanner;
 import java.text.DecimalFormat;
@@ -7,7 +7,7 @@ import java.text.NumberFormat;
 /**
  * To test common Java arithmetic problems
  * 
- * {@link http://www.devarticles.com/c/a/Java/How-the-BigDecimal-Class-Helps-Java-Get-its-Arithmetic-Right/}
+ * href="http://www.devarticles.com/c/a/Java/How-the-BigDecimal-Class-Helps-Java-Get-its-Arithmetic-Right" 
  * @author jconlon
  *
  */

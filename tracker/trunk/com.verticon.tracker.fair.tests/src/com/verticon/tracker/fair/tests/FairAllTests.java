@@ -43,7 +43,7 @@ public class FairAllTests extends TestSuite {
 	 * @generated NOT
 	 */
 	public static Test suite() {
-		TestSuite suite = new FairAllTests("Fair Tests");
+		TestSuite suite = new FairAllTests("Tracker Fair Tests");
 		suite.addTest(FairTests.suite());
 		suite.addTestSuite(ClassTest.class);
 		suite.addTestSuite(DepartmentTest.class);

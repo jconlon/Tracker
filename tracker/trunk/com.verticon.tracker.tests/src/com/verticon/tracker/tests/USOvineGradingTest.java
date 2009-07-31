@@ -5,13 +5,12 @@
  */
 package com.verticon.tracker.tests;
 
+import junit.textui.TestRunner;
+
 import com.verticon.tracker.Level;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.USOvineGrading;
 import com.verticon.tracker.USQualityGrade;
-import com.verticon.tracker.USSwineQualityGrade;
-
-import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->

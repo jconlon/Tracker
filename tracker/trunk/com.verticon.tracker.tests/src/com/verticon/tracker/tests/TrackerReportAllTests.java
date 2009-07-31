@@ -10,6 +10,10 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
+import com.verticon.tracker.util.CalendarDateDurationTest;
+import com.verticon.tracker.util.test.CheckEmailTest;
+import com.verticon.tracker.util.test.CheckISO7064Mod37_36Test;
+
 /**
  * <!-- begin-user-doc -->
  * A test suite for the '<em><b>TrackerReport</b></em>' model.
@@ -35,12 +39,26 @@ public class TrackerReportAllTests extends TestSuite {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Added non-generated tests
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public static Test suite() {
-		TestSuite suite = new TrackerReportAllTests("TrackerReport Tests");
+		TestSuite suite = new TrackerReportAllTests("Tracker Core Tests");
 		suite.addTest(TrackerTests.suite());
+		
+		suite.addTestSuite(EventAttributeSchemaTest.class);
+		suite.addTestSuite(EventAttributeTest.class);
+		suite.addTestSuite(EventHistoryAdapterFactoryTest.class);
+		suite.addTestSuite(EventSchemaTest.class);
+		suite.addTestSuite(LocationTest.class);
+		suite.addTestSuite(SchemaTest.class);
+		suite.addTestSuite(TrackerFactoryTest.class);
+		
+		suite.addTestSuite(CalendarDateDurationTest.class);
+		suite.addTestSuite(CheckEmailTest.class);
+		suite.addTestSuite(CheckISO7064Mod37_36Test.class);
+				
 		return suite;
 	}
 
