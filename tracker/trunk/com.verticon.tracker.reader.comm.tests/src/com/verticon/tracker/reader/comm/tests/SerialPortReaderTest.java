@@ -27,6 +27,9 @@ import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+import org.osgi.service.io.ConnectorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,14 +37,18 @@ import com.verticon.tracker.reader.event.comm.SerialPortReader;
 
 
 /**
+ * Test of the SerialPortReader in a Plugin.
+ * Copies a local copy of an animal template to the testing workspace 
+ * so it can be used as a reference for testing the SerialPortReader.
  * @author jconlon
  *
  */
 public class SerialPortReaderTest extends TestCase {
 
+	private static final String VERTICON_READER_COMM_TESTS_TEMPLATE = "verticon.reader.comm.tests.template";
 	private static final String FOLDER_NAME = "test1";
-
 	private static final String PROJECT_NAME = "ProjectName";
+	private static final String TEMPLATE_IN_TESTING_PROJECT = PROJECT_NAME+'/'+FOLDER_NAME+'/'+"example.animal";
 
 	/**
 	 * slf4j Logger
@@ -50,12 +57,23 @@ public class SerialPortReaderTest extends TestCase {
 			.getLogger(SerialPortReaderTest.class);
 	
 	private SerialPortReader instance = null;
-	/* (non-Javadoc)
+	private URI testsDirectory = null;
+	
+	/* 
+	 * Sets up the template and the SerialPort reader.
+	 * (non-Javadoc)
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		String testTemplate = System.getProperty(VERTICON_READER_COMM_TESTS_TEMPLATE);
+		assertNotNull("System property not set", testTemplate);
+		File file = new File(testTemplate);
+		assertTrue("Template: "+testTemplate+" does not exist", file.exists());
+		assertTrue("Template: "+testTemplate+" does is not a file", file.isFile());
+	    
+	    testsDirectory = URI.create(testTemplate);
 		instance = new SerialPortReader();
 	}
 
@@ -70,11 +88,15 @@ public class SerialPortReaderTest extends TestCase {
 			}
 			instance = null;
 		}
-		
+		testsDirectory = null;
 		super.tearDown();
 	}
 
-	public void testProperties() {
+	/**
+	 * Tests that all properties and services are configured and available.
+	 * Starts services if they are not already started.
+	 */
+	public void testPropertiesAndServices() {
 		logger.debug(bundleMarker, GNU_IO_RXTX_SERIAL_PORTS + "={}", 
 				System
 				.getProperty(GNU_IO_RXTX_SERIAL_PORTS));
@@ -87,6 +109,19 @@ public class SerialPortReaderTest extends TestCase {
 		
 		testPortSetting();
 		
+		
+		Activator a = Activator.getDefault();
+		BundleContext bc = a.getBundle().getBundleContext();
+		//Another test has the code to starting and testing the needed bundles
+		ConnectorServiceTest.startBundles(logger, bc);
+		ServiceReference sr = bc.getServiceReference(ConnectorService.class.getName());
+		    
+		assertNotNull("Failed to find a ConnectorServiceReference.", sr);
+		    
+	    ConnectorService cs = (ConnectorService)bc.getService(sr);
+		    
+		assertNotNull("Failed to find a ConnectorService.", cs);
+		    
 	}
 	/**
 	 * Test method for {@link com.verticon.tracker.reader.event.comm.SerialPortReader#SerialPortReader()}.
@@ -96,8 +131,6 @@ public class SerialPortReaderTest extends TestCase {
 		assertNotNull("instance should not be Null",instance);
 	}
 	
-	
-
 	/**
 	 * Test method for {@link com.verticon.tracker.reader.AbstractConnectionReader#setName(java.lang.String)}.
 	 */
@@ -166,30 +199,25 @@ public class SerialPortReaderTest extends TestCase {
 	 */
 	public void testSetTemplate() {
 		assertEquals("Should be an empty string","",instance.getTemplate());
-		String template = setupTemplate();
-		assertEquals(template, instance.getTemplate());
+		setUpWorkspace();
+		instance.setTemplate(TEMPLATE_IN_TESTING_PROJECT);
+		assertEquals(TEMPLATE_IN_TESTING_PROJECT, instance.getTemplate());
 	}
 	
-	public void testTemplateExistence(){
-		String template = "test1/example.animal";
-		File file = new File(template);
-		assertTrue(file.exists());
-	}
+	
 
 	/**
-	 * @return
+	 * Creates a project and copies the local template to that project in
+	 * the testing workspace.
 	 */
-	private String setupTemplate() {
-		String template = "test1/example.animal";
-		URI templateURI = URI.create(template);
-		
+	private void setUpWorkspace() {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		final String rootLocation = workspace.getRoot().getLocation().toString();
 		
 		logger.debug(bundleMarker, "Workspace root location = {}", rootLocation);
 		
 		final IFileSystem fileSystem = EFS.getLocalFileSystem();
-		final IFileStore templateFile = fileSystem.getStore(templateURI);
+		final IFileStore templateFile = fileSystem.getStore(testsDirectory);
 
 		;
 		final IProject project = workspace.getRoot().getProject(PROJECT_NAME);
@@ -232,10 +260,6 @@ public class SerialPortReaderTest extends TestCase {
 			e.printStackTrace();
 			fail(e.getLocalizedMessage());
 		}
-//		assertTrue(ifile.getFullPath()+" does not exist.",ifile.exists());
-		String templateResult = PROJECT_NAME+'/'+FOLDER_NAME+'/'+"example.animal";
-		instance.setTemplate(templateResult);
-		return templateResult;
 	}
 	
 	
@@ -251,13 +275,13 @@ public class SerialPortReaderTest extends TestCase {
 	 * @throws InterruptedException 
 	 */
 	public void testSetStarted() throws InterruptedException {
-		
-		setupTemplate();
+		setUpWorkspace();
+		instance.setTemplate(TEMPLATE_IN_TESTING_PROJECT);
 		setupTarget();
 		
 		instance.setName("setStarted Test");
 		instance.setStarted(true);
-		TimeUnit.SECONDS.sleep(20);
+		TimeUnit.SECONDS.sleep(10);
 		assertTrue("SerialPortReader Instance did not start.",instance.isStarted());
 		
 	}

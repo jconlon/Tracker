@@ -115,50 +115,35 @@ public class ConnectorServiceTest extends TestCase {
 	}
 	
 	
-	
+	/**
+	 * User is prompted to run this optional test. 
+	 * 
+	 * Test requires a serial connected to the 
+	 * serial port to read in 4 tags. 
+	 */
 	public void testFindingServiceAndReadingFromInputStream(){
 		String portName = testPortSetting();
-		
 		assertNotNull(bc);
 		
-		//Start the equinox.io and the reader bundles
-		Bundle ioBundle = null;
-		Bundle readerCommBundle = null;
-		Bundle[] bundles = bc.getBundles();
-		for (Bundle bundle : bundles) {
-			if(bundle.getSymbolicName().equals("com.verticon.tracker.reader.comm")){
-				readerCommBundle = bundle;
-				logger.debug(bundleMarker,"Starting "+ readerCommBundle.getSymbolicName());
-				try {
-					readerCommBundle.start();
-					
-				} catch (BundleException e) {
-					fail("Failed to start readerCommBundle. "+e.getMessage());
-				}
-			}else 
-				if(bundle.getSymbolicName().equals("org.eclipse.equinox.io")) {
-				ioBundle = bundle;
-				logger.debug(bundleMarker,"Starting "+ ioBundle.getSymbolicName());
-				try {
-					ioBundle.start();
-					
-				} catch (BundleException e) {
-					fail("Failed to start bundle. "+e.getMessage());
-				}
-				
-			}else{
-//				logger.debug(bundleMarker,"Saw bundle {}",bundle.getSymbolicName());
+        System.out.println("This test requires a serial device reader connected to "+portName);
+		
+		int ch;
+	    System.out.print ("Type y to continue: ");
+	    
+	    try {
+			ch = System.in.read ();
+			if(ch != 'y'){
+				System.out.println("Defering testFindingServiceAndReadingFromInputStream");
+				logger.debug(bundleMarker,"Skipping testReadingFromInputStream");
+				return;
 			}
+		} catch (IOException e1) {
+			System.out.println("Defering testFindingServiceAndReadingFromInputStream");
+			logger.debug(bundleMarker,"Skipping testFindingServiceAndReadingFromInputStream");
+			return;
 		}
-
-		assertNotNull("Did not find the reader.conn bundle",readerCommBundle);
-		assertEquals("Did not start the reader.conn bundle", Bundle.ACTIVE, readerCommBundle.getState());
 		
-		assertNotNull("Did not find the equinox.io bundle",ioBundle);
-		assertEquals("Did not start the equinox.io bundle", Bundle.ACTIVE, ioBundle.getState());
-		
-		
-		assertEquals("Did not start the reader.conn.tests bundle", Bundle.ACTIVE, bc.getBundle().getState());
+		startBundles(logger, bc);
 		
 	    ServiceReference sr = bc.getServiceReference(ConnectorService.class.getName());
 	    
@@ -201,6 +186,50 @@ public class ConnectorServiceTest extends TestCase {
 				}
 		}
 	    
+	}
+
+	static void startBundles(Logger logger, BundleContext bc) {
+		//Start the equinox.io and the reader bundles
+		Bundle ioBundle = null;
+		Bundle readerCommBundle = null;
+		Bundle[] bundles = bc.getBundles();
+		for (Bundle bundle : bundles) {
+			if(bundle.getSymbolicName().equals("com.verticon.tracker.reader.comm")){
+				readerCommBundle = bundle;
+				if(bundle.getState()!=Bundle.ACTIVE){
+					logger.debug(bundleMarker,"Starting "+ readerCommBundle.getSymbolicName());
+					try {
+						readerCommBundle.start();
+
+					} catch (BundleException e) {
+						fail("Failed to start readerCommBundle. "+e.getMessage());
+					}
+				}
+			}else 
+				if(bundle.getSymbolicName().equals("org.eclipse.equinox.io") ) {
+				ioBundle = bundle;
+				if(bundle.getState()!=Bundle.ACTIVE){
+					logger.debug(bundleMarker,"Starting "+ ioBundle.getSymbolicName());
+					try {
+						ioBundle.start();
+					
+					} catch (BundleException e) {
+						fail("Failed to start bundle. "+e.getMessage());
+					}
+				}
+			}else{
+//				logger.debug(bundleMarker,"Saw bundle {}",bundle.getSymbolicName());
+			}
+		}
+
+		assertNotNull("Did not find the reader.conn bundle",readerCommBundle);
+		assertEquals("Did not start the reader.conn bundle", Bundle.ACTIVE, readerCommBundle.getState());
+		
+		assertNotNull("Did not find the equinox.io bundle",ioBundle);
+		assertEquals("Did not start the equinox.io bundle", Bundle.ACTIVE, ioBundle.getState());
+		
+		
+		assertEquals("Did not start the reader.conn.tests bundle", Bundle.ACTIVE, bc.getBundle().getState());
 	}
 	
 }
