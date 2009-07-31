@@ -6,9 +6,9 @@
  */
 package com.verticon.tracker.validation;
 
-import com.verticon.tracker.EventSchema;
-
 import org.eclipse.emf.common.util.EMap;
+
+import com.verticon.tracker.EventSchema;
 
 /**
  * A sample validator interface for {@link com.verticon.tracker.GenericEvent}.

@@ -6,7 +6,6 @@
  */
 package com.verticon.tracker.util;
 
-import com.verticon.tracker.*;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -41,6 +40,7 @@ import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
+import com.verticon.tracker.Level;
 import com.verticon.tracker.Location;
 import com.verticon.tracker.LostTag;
 import com.verticon.tracker.Mastitis;
@@ -67,6 +67,12 @@ import com.verticon.tracker.TagRetired;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.Treatment;
 import com.verticon.tracker.TreatmentMethod;
+import com.verticon.tracker.USBeefGrading;
+import com.verticon.tracker.USBeefYieldGrade;
+import com.verticon.tracker.USOvineGrading;
+import com.verticon.tracker.USQualityGrade;
+import com.verticon.tracker.USSwineGrading;
+import com.verticon.tracker.USSwineQualityGrade;
 import com.verticon.tracker.WeighIn;
 
 /**

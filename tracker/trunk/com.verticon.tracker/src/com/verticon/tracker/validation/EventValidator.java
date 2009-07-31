@@ -6,9 +6,9 @@
  */
 package com.verticon.tracker.validation;
 
-import com.verticon.tracker.Tag;
-
 import java.util.Date;
+
+import com.verticon.tracker.Tag;
 
 /**
  * A sample validator interface for {@link com.verticon.tracker.Event}.

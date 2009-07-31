@@ -6,10 +6,10 @@
  */
 package com.verticon.tracker.validation;
 
+import org.eclipse.emf.common.util.EList;
+
 import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.EventAttributeSchema;
-
-import org.eclipse.emf.common.util.EList;
 
 /**
  * A sample validator interface for {@link com.verticon.tracker.EventSchema}.

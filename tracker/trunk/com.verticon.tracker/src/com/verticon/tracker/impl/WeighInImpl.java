@@ -25,8 +25,8 @@ import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.CollectionFilter;
-import com.verticon.tracker.util.TrackerUtils;
 import com.verticon.tracker.util.FilterCriteria;
+import com.verticon.tracker.util.TrackerUtils;
 
 /**
  * <!-- begin-user-doc -->
