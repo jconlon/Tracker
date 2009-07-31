@@ -21,7 +21,7 @@ import com.verticon.tracker.TrackerFactory;
  * <p>
  * The following operations are tested:
  * <ul>
- *   <li>{@link com.verticon.tracker.GenericEvent#findSchema(org.eclipse.emf.common.util.EMap) <em>Find Schema</em>}</li>
+ *   <li>{@link com.verticon.tracker.GenericEvent#findSchema(java.util.Map.Entry) <em>Find Schema</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -88,10 +88,10 @@ public class GenericEventTest extends EventTest {
 	}
 	
 	/**
-	 * Tests the '{@link com.verticon.tracker.GenericEvent#findSchema(org.eclipse.emf.common.util.EMap) <em>Find Schema</em>}' operation.
+	 * Tests the '{@link com.verticon.tracker.GenericEvent#findSchema(java.util.Map.Entry) <em>Find Schema</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.GenericEvent#findSchema(org.eclipse.emf.common.util.EMap)
+	 * @see com.verticon.tracker.GenericEvent#findSchema(java.util.Map.Entry)
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unchecked")

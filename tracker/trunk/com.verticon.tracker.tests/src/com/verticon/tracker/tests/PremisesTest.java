@@ -204,7 +204,7 @@ public class PremisesTest extends TestCase {
 	 * Tests the '{@link com.verticon.tracker.Premises#findAnimal(java.lang.String) <em>Find Animal</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.Premises#findAnimal(long)
+	 * @see com.verticon.tracker.Premises#findAnimal(String)
 	 * @generated NOT
 	 */
 	public void testFindAnimal__String() {

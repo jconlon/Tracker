@@ -2,8 +2,12 @@ package com.verticon.tracker.editor.util;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
 
 import junit.framework.TestCase;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -12,22 +16,41 @@ import com.verticon.tracker.TrackerFactory;
 
 /**
  * 
+ * From the AnimalTemplateBean doc:
+ * Three dateTime manipulations are supported:
  * 
- * AnimalTemplateBean uses a default date and a reference date
+ * 1. If the dateTimes of templateEvents are after a reference time, then
+ * dateTimes of the copied events are the same as in the template events. 
  * 
- * When a tagsIdFileName uses the format yyMMddHHmmss.tags 
+ * 2. If the dateTimes of templateEvents are before a reference time AND there is NO
+ * default date time set then the current dateTime is used instead of the dateTime in 
+ * the template events.
  * 
- * Date Time 
- * attributes of all Event Elements copied to the Premises Document will 
- * assume the time stamp of of the dateOfEventInAnimalTemplateBean pattern yyMMddHHss for every event
- * in the AnimalTemplate that is set with a dateOfEventInAnimalTemplateBean earlier than the DATE_REFERENCE.
+ * 3. If the dateTimes of templateEvents are before a reference time AND there IS a
+ * default date time set then a default dateTime is used for all events.
+ * 
+ * 
+ * AnimalTemplateBean uses a default date and a reference date, when a tagsIdFileName 
+ * uses a formated name of yyMMddHHmmss.tags the Date Time attributes of all Event 
+ * Elements copied to the Premises Document will assume the time stamp of the 
+ * dateOfEventInAnimalTemplateBean pattern yyMMddHHss for every event in the 
+ * AnimalTemplate that is set with a 
+ * dateOfEventInAnimalTemplateBean earlier than the DATE_REFERENCE.
+ * 
  * For example the tags file 060409131111.Tags will set the Date Time attribute of 
  * all Events to 2006-04-09T13:11:11 if those events are set before 1000-01-01.
  *  
  */
 public class AnimalTemplateBeanTest extends TestCase {
 
-	private final GregorianCalendar DATE_REFERENCE = 
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(AnimalTemplateBeanTest.class);
+
+
+	private final GregorianCalendar DATE_REFERENCE_2000_01 = 
 		new GregorianCalendar(2000, Calendar.JANUARY, 1);
 	
 	private AnimalTemplateBean animalTemplateBean;
@@ -63,6 +86,7 @@ public class AnimalTemplateBeanTest extends TestCase {
 
 	
 	public void test_setup_AnimalTemplateBean() {
+		logger.debug("Testing setup");
 		assertNotNull(animalTemplateBean); 
 	}
 	
@@ -71,8 +95,12 @@ public class AnimalTemplateBeanTest extends TestCase {
 		
 	}
 	
-	public void test_numberOfEvents() {
+	public void test_setup_numberOfEvents() {
 		assertEquals(1, animalTemplateBean.numberOfEvents()); 
+	}
+	
+	public void test_setup_defaultDate() {
+		assertNull("AnimalTemplate should not have a default dates set", animalTemplateBean.getDate()); 
 	}
 
 
@@ -102,49 +130,54 @@ public class AnimalTemplateBeanTest extends TestCase {
 	public void test_getAnimal_date_current() {
 		String animalName = "someTag";
 		
-		//Set the date of the event in the template before the reference
-		//an animal returned from the template should have the date
-		//of it's event set to the current time
-		DATE_REFERENCE.add(Calendar.MONTH, -1);
-		Date beforeRef = DATE_REFERENCE.getTime();
-		eventOfAnimalInTemplateBean.setDateTime(beforeRef);
+		setEventDateInBeanBeforeReference();
+		
+		Date timestamp = new Date();
+
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			
+		}
+		
 		Animal a2 = animalTemplateBean.getAnimal(animalName, premisesDestinationForCopiedAnimals);
-		assertTrue(dateOfEventInAnimalTemplateBean.before(a2.eventHistory().get(0).getDateTime()));
 		
-		
-		//Set a defaultTime which is what a tagIdNumbers file interacts with the TemplateBean
-		GregorianCalendar badEventDay = 
-		new GregorianCalendar(2001, Calendar.SEPTEMBER, 11);
-		
-		
-		
-		animalTemplateBean.setDateForAllEvents(badEventDay.getTime());
-		a2 = animalTemplateBean.getAnimal(animalName, premisesDestinationForCopiedAnimals);
-		assertEquals(badEventDay.getTime(), 
-				a2.eventHistory().get(0).getDateTime());
-		
+		assertTrue("The event did not have the current time.",
+				timestamp.before(a2.eventHistory().get(0).getDateTime()));
+	
 	}
 	
 	/**
 	 * 
 	 * Date in the bean IS before the reference and there IS a defaultDate set.
-	 * The current date should be the date of the reference.
+	 * The animal retrieved from the bean will have events with the default date.
 	 */
 	public void test_getAnimal_date_default() {
 		String animalName = "someTag";
 		
+		setEventDateInBeanBeforeReference();
+		
+		GregorianCalendar defaultDate = setDefaultDateOnBean();
+		
+		Animal a2 = animalTemplateBean.getAnimal(animalName, premisesDestinationForCopiedAnimals);
+		
+		assertEquals(defaultDate.getTime(), 
+				a2.eventHistory().get(0).getDateTime());
+		
+	}
+
+	private GregorianCalendar setDefaultDateOnBean() {
 		//Set a defaultTime which is what a tagIdNumbers file interacts with the TemplateBean
 		GregorianCalendar badEventDay = 
 		new GregorianCalendar(2001, Calendar.SEPTEMBER, 11);
-		
-		DATE_REFERENCE.add(Calendar.MONTH, -1);
-		Date beforeRef = DATE_REFERENCE.getTime();
-		eventOfAnimalInTemplateBean.setDateTime(beforeRef);
 		animalTemplateBean.setDateForAllEvents(badEventDay.getTime());
-		Animal a2 = animalTemplateBean.getAnimal(animalName, premisesDestinationForCopiedAnimals);
-		assertEquals(badEventDay.getTime(), 
-				a2.eventHistory().get(0).getDateTime());
-		
+		return badEventDay;
+	}
+
+	private void setEventDateInBeanBeforeReference() {
+		DATE_REFERENCE_2000_01.add(Calendar.MONTH, -1);
+		Date beforeRef = DATE_REFERENCE_2000_01.getTime();
+		eventOfAnimalInTemplateBean.setDateTime(beforeRef);
 	}
 	
 	

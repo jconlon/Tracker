@@ -23,22 +23,13 @@ public class CheckEmailTest extends TestCase {
 		
 		assertTrue(CheckEmail.validate("timothy.rehbein@ces.uwex.edu"));
 		
+		assertTrue(CheckEmail.validate("joe@123aspx.com"));
 	}
 	
 	public void testDoesNotValidate() {
-		try {
-			assertFalse(CheckEmail.validate("Not yet implemented"));
-		} catch (RuntimeException e) {
-			fail(e.toString());
-		}
-		
-		assertFalse(CheckEmail.validate("joe@123aspx.com"));
-		
-		assertFalse(CheckEmail.validate("joe@web.info"));
-		
-//		assertFalse(CheckEmail.validate("joe@company.co.uk"));
-		
+		assertFalse(CheckEmail.validate("Not yet implemented"));
 		assertFalse(CheckEmail.validate("@co.uk"));
+		assertFalse(CheckEmail.validate("joe@web.info"));
 		
 	}
 
