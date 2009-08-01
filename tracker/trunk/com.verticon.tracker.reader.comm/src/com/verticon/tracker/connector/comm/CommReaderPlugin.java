@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-import com.verticon.tracker.reader.event.comm.PreferenceConstants;
+import static com.verticon.tracker.reader.event.comm.PreferenceConstants.P_SERIAL_PORTS;;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -89,7 +89,7 @@ public class CommReaderPlugin extends AbstractUIPlugin {
 	}
 	
 	public void configureValidSerialPorts(){
-		String serialPorts = getPreferenceStore().getString(PreferenceConstants.P_SERIAL_PORTS);
+		String serialPorts = getPreferenceStore().getString(P_SERIAL_PORTS);
 		if(serialPorts.trim().length()>0){
 			logger.info(bundleMarker,"Setting System Property {} with value {}",
 					CommReaderPlugin.GNU_IO_RXTX_SERIAL_PORTS,serialPorts);

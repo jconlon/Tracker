@@ -1,10 +1,13 @@
 package com.verticon.tracker.reader.event.comm;
 
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import com.verticon.tracker.connector.comm.CommReaderPlugin;
+
+import static com.verticon.tracker.reader.event.comm.PreferenceConstants.P_SERIAL_PORTS;
 
 /**
  * This class represents a preference page that
@@ -39,7 +42,7 @@ public class PreferencePage
 	public void createFieldEditors() {
 		
 		PortEditor ports = new PortEditor(
-				PreferenceConstants.P_SERIAL_PORTS,//name
+				P_SERIAL_PORTS,//name
 				"&SerialPortReader valid port identifiers:",//lableText
 				"Specify a port identifier",//chooserText
 		 		getFieldEditorParent()//parent
