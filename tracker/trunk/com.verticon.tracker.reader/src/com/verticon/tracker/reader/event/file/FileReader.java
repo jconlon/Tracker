@@ -3,6 +3,7 @@
  */
 package com.verticon.tracker.reader.event.file;
 import static com.verticon.tracker.reader.ReaderPlugin.bundleMarker;
+import static com.verticon.tracker.reader.event.file.PreferenceConstants.P_READ_INTERVAL;
 
 import java.io.IOException;
 import java.net.URI;
@@ -16,7 +17,7 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Preferences;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,8 +47,8 @@ public class FileReader extends AbstractModelObject implements
 	 */
 	private final Logger logger = LoggerFactory.getLogger(FileReader.class);
 	
-	private final Preferences prefs = ReaderPlugin.getDefault()
-	.getPluginPreferences();
+	private final IPreferenceStore prefs = ReaderPlugin.getDefault().getPreferenceStore();
+	
 	
 	/**
 	 * Keeps track of the count of FileReaders so a simple name appended 
@@ -177,10 +178,12 @@ public class FileReader extends AbstractModelObject implements
 
 			Runnable command = new FileReaderRunner(this, transactionPublisher, getTargetFile());
 			
+			int delay = prefs.getInt(P_READ_INTERVAL);
 			scheduledFuture = ReaderPlugin.getDefault().scheduleWithFixedDelay(command, 4, 
-					prefs.getInt(PreferenceConstants.P_READ_INTERVAL), 
+					delay, 
 					TimeUnit.SECONDS);
-			logger.info(bundleMarker,"{} monitoring {} at {} second intervals.", new Object[] {this, target, prefs.getInt(PreferenceConstants.P_READ_INTERVAL)});
+			
+			logger.info(bundleMarker,"{} monitoring {} at {} second intervals.", new Object[] {this, target, delay});
 
 		}
 	}
