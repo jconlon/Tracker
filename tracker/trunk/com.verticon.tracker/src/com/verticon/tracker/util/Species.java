@@ -14,14 +14,14 @@ public enum Species {
 	POR("Porcine (Swine)"), 
 	OVI("Ovine (Sheep)"), 
 	CAP("Caprine (Goats)"), 
-	CER("Cervids (Deer and Elk)"), 
-	POU("Poultry"), 
-	AQU("Aquaculture"), 
-	RAT("Ratities (emu, ostrich)");
+	CER("Cervids (Deer and Elk)"),  // NO_UCD
+	POU("Poultry"),  // NO_UCD
+	AQU("Aquaculture"),  // NO_UCD
+	RAT("Ratities (emu, ostrich)");// NO_UCD
 
 	private final String literal;
 
-	Species(String literal) {
+	private Species(String literal) {
 		this.literal = literal;
 	}
 

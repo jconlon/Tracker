@@ -5,6 +5,7 @@
  */
 package com.verticon.tracker.tests;
 
+import java.util.Date;
 import java.util.TimeZone;
 
 import junit.textui.TestRunner;
@@ -99,7 +100,7 @@ public class HerdTestTest extends EventTest {
 		TimeZone tz= TimeZone.getDefault();
 		
 		
-		CalendarDate dateOfEvent = new CalendarDate (tz);
+		CalendarDate dateOfEvent = new CalendarDate (tz, new Date());
 		getFixture().setDateTime(dateOfEvent.toDate(tz));
 		
 		//Set the days Since Bred Estimate

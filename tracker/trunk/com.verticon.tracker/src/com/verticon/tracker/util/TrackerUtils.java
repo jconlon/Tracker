@@ -31,11 +31,7 @@ public class TrackerUtils {
 
 	public static final GregorianCalendar DATE_REFERENCE = new GregorianCalendar(1000, Calendar.JANUARY, 1);  
 
-	public static final void setEventDate(Event event){
-		if(event.getDateTime().before(DATE_REFERENCE.getTime())){
-			event.setDateTime(new Date());
-		}
-	}
+	
 	
 	/**
 	 * 

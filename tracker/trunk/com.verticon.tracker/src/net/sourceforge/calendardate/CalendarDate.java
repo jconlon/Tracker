@@ -192,16 +192,6 @@ public final class CalendarDate implements Comparable<CalendarDate>, Serializabl
 		init(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
 	}
 
-	/**
-	 * Creates a CalendarDate representing the current date in the given
-	 * timezone. Equivalent to <code>CalendarDate(tzone, new Date())</code>
-	 * 
-	 * @param tzone
-	 *            The timezone to be considered
-	 */
-	public CalendarDate(TimeZone tzone) {
-		this(tzone, new Date());
-	}
 
 	/**
 	 * Returns true if the given instant in time is before EARLIEST or after
