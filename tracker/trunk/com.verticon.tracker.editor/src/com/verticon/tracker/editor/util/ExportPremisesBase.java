@@ -8,18 +8,18 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Preferences;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
 
 import com.verticon.tracker.Premises;
-import com.verticon.tracker.editor.preferences.PreferenceConstants;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_VALIDATE_BEFORE_EXPORT;
 
 /**
  * Base class for exporting Excel spreadsheets. Subclasses only need to set the
@@ -58,8 +58,8 @@ public class ExportPremisesBase {
 			throws IOException, CoreException {
 		Premises premises;
 		premises = ActionUtils.getPremises(iFile);
-		Preferences store = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
-		boolean validateBeforeExport = store.getBoolean(PreferenceConstants.P_VALIDATE_BEFORE_EXPORT);
+		IPreferenceStore store = TrackerReportEditorPlugin.getPlugin().getPreferenceStore();
+		boolean validateBeforeExport = store.getBoolean(P_VALIDATE_BEFORE_EXPORT);
 		if (validateBeforeExport && !ActionUtils.validate(premises,
 				validationDiagnostics)) {
 			throw new IOException(
