@@ -74,8 +74,8 @@ public class MovedOutWorkSheetBuilder extends AbstractWorkSheetBuilder implement
 	
 	
 	/**
-	 * Load only FairRegistration Events sorting on particpant.
-	 * @param premises
+	 * Load only MovedOut Events.
+	 * @param fair
 	 */
 	@Override
 	public void loadList(Fair fair ){
@@ -95,7 +95,7 @@ public class MovedOutWorkSheetBuilder extends AbstractWorkSheetBuilder implement
 	/**
 	 * Create a Row per each time an animal was movedIn  
 	 * @param sheet
-	 * @param premises
+	 * @param fair
 	 */
 	@Override
 	public void createRows(HSSFSheet sheet, Fair fair) {

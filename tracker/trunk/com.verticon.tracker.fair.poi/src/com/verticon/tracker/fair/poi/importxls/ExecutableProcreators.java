@@ -11,8 +11,6 @@ import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.fair.Fair;
 
@@ -22,20 +20,11 @@ import com.verticon.tracker.fair.Fair;
  */
 public class ExecutableProcreators {
 
-	/**
-	 * slf4j Logger
-	 */
-	private final static Logger logger = LoggerFactory
-			.getLogger(ExecutableProcreators.class);
-	
 	private ExecutableProcreators() {
 		// Prevents instantiation
 	}
 
-	/**
-	 * 
-	 * @return 
-	 */
+	
 	public static final ExecutableProcreator newDivisionProcreator(){
 		return new DivisionProcreator(
 				new DepartmentProcreator(
@@ -48,10 +37,7 @@ public class ExecutableProcreators {
 		);
 	}
 	
-	/**
-	 * 
-	 * @return 
-	 */
+	
 	public static final ExecutableProcreator newExhibitProcreator(){
 		return 
 		new ExhibitProcreator(

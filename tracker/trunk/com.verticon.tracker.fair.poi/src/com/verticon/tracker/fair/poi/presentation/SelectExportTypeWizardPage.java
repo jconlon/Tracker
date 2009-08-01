@@ -33,9 +33,7 @@ public class SelectExportTypeWizardPage extends WizardPage {
 	private Button[] radios;
 
 
-	/**
-	 * @param pageName
-	 */
+	
 	public SelectExportTypeWizardPage() {
 		super("Select Type");
 		setTitle("Select Type of Export");

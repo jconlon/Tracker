@@ -102,19 +102,12 @@ public class ImportFairExhibitDataWizard extends Wizard  {
 	}
 
 	/**
-	 * Called by the {@link ImportFairExhibitDataWizardDelegate} to initialize the wizard.
-	 * @param workbench
-	 * @param selection
+	 * Initializes this wizard
+	 * @param workbenchWindow
+	 * @param editingDomain
 	 * @param fair
-//	 */
-//	public void init(IWorkbenchWindow workbench, ISelection selection, Fair fair) {
-//		this.workbench=workbench;
-//		File file = getSelectedResource( selection);
-//		workSheet = getWorkSheet(file);
-//		this.fair =fair;
-//		setNeedsProgressMonitor(true);
-//	}
-	
+	 * @param selection
+	 */
 	public void init(IWorkbenchWindow workbenchWindow, 
 			EditingDomain editingDomain, Fair fair,
 			ISelection selection

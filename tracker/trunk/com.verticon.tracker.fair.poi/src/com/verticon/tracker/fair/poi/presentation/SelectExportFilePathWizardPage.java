@@ -126,8 +126,9 @@ public class SelectExportFilePathWizardPage extends WizardPage
    }
    
    /**
-    * Called by the wizard to initialize the receiver's cached selection.
-    * @param selection the selection or <code>null</code> if none
+    * Initializes WizardPage
+    * @param file
+    * @param typeToExport
     */
    public void init(IFile file, ExportType typeToExport) {
       
