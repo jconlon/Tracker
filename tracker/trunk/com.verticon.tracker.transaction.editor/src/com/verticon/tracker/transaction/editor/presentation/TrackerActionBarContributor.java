@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.eclipse.core.runtime.Preferences;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -32,6 +31,7 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.action.SubContributionItem;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -45,11 +45,12 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
-import com.verticon.tracker.editor.preferences.PreferenceConstants;
 import com.verticon.tracker.editor.presentation.CustomActionBarContributor;
 import com.verticon.tracker.editor.presentation.ICustomActionBarContributor;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.transaction.editor.TransactionEditorPlugin;
+
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_USE_SUBMENUS;
 
 /**
  * This is the action bar contributor for the EXTLibrary model editor.
@@ -493,8 +494,8 @@ public class TrackerActionBarContributor
 	 * @return
 	 */
 	private boolean useSubMenus(){
-		Preferences store = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
-		return  store.getBoolean(PreferenceConstants.P_USE_SUBMENUS);
+		IPreferenceStore store = TrackerReportEditorPlugin.getPlugin().getPreferenceStore();
+		return  store.getBoolean(P_USE_SUBMENUS);
 	}
 	
 	/**

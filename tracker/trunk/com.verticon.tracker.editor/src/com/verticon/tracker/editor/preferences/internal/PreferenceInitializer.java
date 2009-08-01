@@ -1,9 +1,17 @@
 package com.verticon.tracker.editor.preferences.internal;
 
-import org.eclipse.core.runtime.Preferences;
-import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.DEFAULT_IGNORE_WINDOW;
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.DEFAULT_SPREAD_INTERVAL;
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.DEFAULT_USE_SUBMENUS;
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.DEFAULT_VALIDATE_BEFORE_EXPORT;
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_IGNORE_WINDOW;
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_SPREAD_INTERVAL;
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_USE_SUBMENUS;
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_VALIDATE_BEFORE_EXPORT;
 
-import com.verticon.tracker.editor.preferences.PreferenceConstants;
+import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
+import org.eclipse.jface.preference.IPreferenceStore;
+
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 
 /**
@@ -19,12 +27,11 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 * @see org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer#initializeDefaultPreferences()
 	 */
 	public void initializeDefaultPreferences() {
-		Preferences store = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
-		
-		store.setDefault(PreferenceConstants.P_IGNORE_WINDOW,PreferenceConstants.DEFAULT_IGNORE_WINDOW);
-		store.setDefault(PreferenceConstants.P_VALIDATE_BEFORE_EXPORT,PreferenceConstants.DEFAULT_VALIDATE_BEFORE_EXPORT);
-		store.setDefault(PreferenceConstants.P_USE_SUBMENUS,PreferenceConstants.DEFAULT_USE_SUBMENUS);
-		store.setDefault(PreferenceConstants.P_SPREAD_INTERVAL, PreferenceConstants.DEFAULT_SPREAD_INTERVAL);
+		IPreferenceStore store = TrackerReportEditorPlugin.getPlugin().getPreferenceStore();
+		store.setDefault(P_IGNORE_WINDOW,DEFAULT_IGNORE_WINDOW);
+		store.setDefault(P_VALIDATE_BEFORE_EXPORT,DEFAULT_VALIDATE_BEFORE_EXPORT);
+		store.setDefault(P_USE_SUBMENUS,DEFAULT_USE_SUBMENUS);
+		store.setDefault(P_SPREAD_INTERVAL, DEFAULT_SPREAD_INTERVAL);
 	}
 
 }

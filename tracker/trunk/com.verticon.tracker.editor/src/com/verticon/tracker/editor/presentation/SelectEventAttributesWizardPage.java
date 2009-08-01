@@ -168,13 +168,6 @@ public class SelectEventAttributesWizardPage extends WizardPage {
 			return null;
 		}
 
-		public String getText(Object element) {
-			if(element instanceof EAttribute){
-				return ((EAttribute)element).getName();
-			}
-			return "Unknown";
-		}
-
 		public void addListener(ILabelProviderListener listener) {
 			
 		}

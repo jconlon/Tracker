@@ -1,17 +1,18 @@
 package com.verticon.tracker.transaction.editor.event;
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_SPREAD_INTERVAL;
 import static com.verticon.tracker.transaction.editor.TransactionEditorPlugin.bundleMarker;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
-import org.eclipse.core.runtime.Preferences;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.osgi.service.event.EventHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,6 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
-import com.verticon.tracker.editor.preferences.PreferenceConstants;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.editor.util.ActionUtils;
 import com.verticon.tracker.editor.util.TrackerConstants;
@@ -146,7 +146,7 @@ public class TransactionEventHandler implements EventHandler {
 	private  Collection<Event> copyValidEvents(
 			
 			Collection<Event> templateEvents, Animal animal) {
-		Preferences prefs = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
+		IPreferenceStore prefs = TrackerReportEditorPlugin.getPlugin().getPreferenceStore();
 		Calendar currentDate =null;
 		
 		Copier copier = new Copier();
@@ -156,7 +156,7 @@ public class TransactionEventHandler implements EventHandler {
 			if(currentDate==null){
 				currentDate= Calendar.getInstance();
 			}else{
-				currentDate.add(Calendar.SECOND, prefs.getInt(PreferenceConstants.P_SPREAD_INTERVAL));
+				currentDate.add(Calendar.SECOND, prefs.getInt(P_SPREAD_INTERVAL));
 			}
 			outputEvent = (Event) copier.copy(o);
 			outputEvent.setDateTime(currentDate.getTime());

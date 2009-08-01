@@ -4,7 +4,11 @@ import org.eclipse.jface.preference.*;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbench;
 
-import com.verticon.tracker.editor.preferences.PreferenceConstants;
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_USE_SUBMENUS;
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_IGNORE_WINDOW;
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_SPREAD_INTERVAL;
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_VALIDATE_BEFORE_EXPORT;
+
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 
 /**
@@ -39,20 +43,20 @@ public class TrackerEditorPreferencePage
 	 */
 	public void createFieldEditors() {
 		addField(new IntegerFieldEditor(
-				PreferenceConstants.P_IGNORE_WINDOW,
+				P_IGNORE_WINDOW,
 				"&Seconds Interval to Ignore Duplicate Bulk Events:",
 				getFieldEditorParent()));
 		addField(new BooleanFieldEditor(
-				PreferenceConstants.P_VALIDATE_BEFORE_EXPORT,
+				P_VALIDATE_BEFORE_EXPORT,
 				"&Validate Documents Before Exporting:",
 				getFieldEditorParent()));
 		addField(new BooleanFieldEditor(
-				PreferenceConstants.P_USE_SUBMENUS,
+				P_USE_SUBMENUS,
 				"&Use Submenus in Model Element Popup Menus:",
 				getFieldEditorParent()));
 		
 		IntegerFieldEditor spreadInterval = new IntegerFieldEditor(
-				PreferenceConstants.P_SPREAD_INTERVAL,//name
+				P_SPREAD_INTERVAL,//name
 				"&Concurrent Event interval.  "+
 				"\nSeconds added to seperate dateTimes"+
 				"\nwhen adding multiple events to an animal:",//lableText

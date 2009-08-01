@@ -12,10 +12,10 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.Preferences;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.eclipse.jface.preference.IPreferenceStore;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
@@ -24,9 +24,9 @@ import com.verticon.tracker.Premises;
 import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
-import com.verticon.tracker.editor.preferences.PreferenceConstants;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.util.TrackerUtils;
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_SPREAD_INTERVAL;
 
 /**
  * Container modeling an Animal Template (*.animal) Document File
@@ -239,9 +239,9 @@ import com.verticon.tracker.util.TrackerUtils;
 	private static int getIntervalBetweenEventsPreference() {
 		int interval = 1;
 		if(TrackerReportEditorPlugin.getPlugin()!=null){
-			Preferences prefs = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
+			IPreferenceStore prefs = TrackerReportEditorPlugin.getPlugin().getPreferenceStore();
 			if(prefs!=null){
-				interval = prefs.getInt(PreferenceConstants.P_SPREAD_INTERVAL);
+				interval = prefs.getInt(P_SPREAD_INTERVAL);
 			}
 		}
 		return interval;

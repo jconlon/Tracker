@@ -23,7 +23,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.core.runtime.Preferences;
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
@@ -38,6 +37,7 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -62,11 +62,11 @@ import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
 import com.verticon.tracker.editor.dialogs.WSFileDialog;
-import com.verticon.tracker.editor.preferences.PreferenceConstants;
 import com.verticon.tracker.editor.presentation.IPremisesProvider;
 import com.verticon.tracker.editor.presentation.TrackerEditor;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_IGNORE_WINDOW;
 /**
  * @author jconlon
  * 
@@ -602,8 +602,8 @@ public class ActionUtils {
 				//Subtract the timeout interval seconds from the eventToAddDate
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(eventToAddDate);
-				Preferences store = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
-				int timeoutWindow = store.getInt(PreferenceConstants.P_IGNORE_WINDOW);
+				IPreferenceStore store = TrackerReportEditorPlugin.getPlugin().getPreferenceStore();
+				int timeoutWindow = store.getInt(P_IGNORE_WINDOW);
 				cal.add(Calendar.SECOND, -timeoutWindow);
 				Date subtractedDate = cal.getTime();
 				if(historicalEventDate.after(subtractedDate)){
