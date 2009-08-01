@@ -158,9 +158,11 @@ public class ExhibitProcreator implements ExecutableProcreator {
 	}
 	
 	/**
-	 * @param division
-	 * @param personName, String animalId
-	 * @return
+	 * 
+	 * @param lot
+	 * @param person
+	 * @param animalId
+	 * @return exhibit
 	 */
 	private Exhibit getElementFromFair(Lot lot,
 			String person, String animalId) {

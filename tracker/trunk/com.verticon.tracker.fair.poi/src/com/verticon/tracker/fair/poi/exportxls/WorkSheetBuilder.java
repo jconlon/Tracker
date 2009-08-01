@@ -10,10 +10,7 @@ import com.verticon.tracker.fair.Fair;
 public interface WorkSheetBuilder {
 
 	public static final String DATE_STYLE = "dateSytle";
-	/**
-	 * @param premises
-	 * @param wb
-	 */
+	
 	public abstract void createWorkSheet(Fair fair, HSSFSheet sheet, Map<String, HSSFCellStyle> styleMap);
 
 }

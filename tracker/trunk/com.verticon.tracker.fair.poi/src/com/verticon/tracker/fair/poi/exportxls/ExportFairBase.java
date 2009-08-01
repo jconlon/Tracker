@@ -1,5 +1,7 @@
 package com.verticon.tracker.fair.poi.exportxls;
 
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_VALIDATE_BEFORE_EXPORT;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -8,7 +10,6 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Preferences;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -18,15 +19,14 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
 
-import com.verticon.tracker.editor.preferences.PreferenceConstants;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.editor.util.FairProcessor;
-
 /**
  * Base class for exporting Excel spreadsheets. Subclasses only need to set the
  * premiseProcessor in a super call to the constructor.
@@ -63,8 +63,8 @@ public class ExportFairBase {
 	protected void export(IProgressMonitor monitor, IFile iFile)
 			throws IOException, CoreException {
 		Fair fair = getFair(iFile);
-		Preferences store = TrackerReportEditorPlugin.getPlugin().getPluginPreferences();
-		boolean validateBeforeExport = store.getBoolean(PreferenceConstants.P_VALIDATE_BEFORE_EXPORT);
+		IPreferenceStore store = TrackerReportEditorPlugin.getPlugin().getPreferenceStore();
+		boolean validateBeforeExport = store.getBoolean(P_VALIDATE_BEFORE_EXPORT);
 		if (validateBeforeExport && !validate(fair,
 				validationDiagnostics)) {
 			throw new IOException(

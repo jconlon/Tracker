@@ -83,9 +83,9 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 			this.description=description;
 		}
 		/**
-		 * Creates a PremisesProcessor for the ExportType
+		 * Creates a FairProcessor for the ExportType
 		 * @param destination of the output
-		 * @return
+		 * @return FairProcessor
 		 */
 		public FairProcessor getProcessor(IPath destination) {
 			XLSPremisesProcessor result = null;
