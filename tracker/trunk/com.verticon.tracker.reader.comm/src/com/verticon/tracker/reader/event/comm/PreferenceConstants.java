@@ -5,6 +5,6 @@ package com.verticon.tracker.reader.event.comm;
  */
 public class PreferenceConstants {
 	
-	public static final String P_SERIAL_PORTS = "serialPorts";
+	 public static final String P_SERIAL_PORTS = "serialPorts";
 	
 }
