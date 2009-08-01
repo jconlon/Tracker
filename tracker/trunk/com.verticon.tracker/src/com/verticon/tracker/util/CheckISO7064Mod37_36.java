@@ -13,7 +13,7 @@ public class CheckISO7064Mod37_36  {
 	
 	private CheckISO7064Mod37_36 (){}
 	
-	public final static int getValue(char ch){
+	private final static int getValue(char ch){
 		return MAP.indexOf(ch);
 	}
 	
@@ -52,14 +52,6 @@ public class CheckISO7064Mod37_36  {
 		return digits + computeCheckChar(digits);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.modp.checkdigit.CheckDigit#getCheckDigit(java.lang.String)
-	 */
-	public final static char getCheckDigit(String digits) {
-		return digits.charAt(digits.length() - 1);
-	}
 
 	/*
 	 * (non-Javadoc)

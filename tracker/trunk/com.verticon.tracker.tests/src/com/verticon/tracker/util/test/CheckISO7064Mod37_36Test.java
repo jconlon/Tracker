@@ -5,10 +5,7 @@ import junit.framework.TestCase;
 import com.verticon.tracker.util.CheckISO7064Mod37_36;
 
 public class CheckISO7064Mod37_36Test extends TestCase {
-	public void testCheckDigit() {
-		assertEquals('3', CheckISO7064Mod37_36.getCheckDigit("104G7M3"));
-		
-	}
+	
 	
 	public void testGetData() {
 		
