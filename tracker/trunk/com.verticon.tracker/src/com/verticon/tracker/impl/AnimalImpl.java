@@ -587,6 +587,9 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 				  //LastDateTime
 				  Date oldLastDateTime = mostCurrentEvent!=null?mostCurrentEvent.getDateTime():null;
 				  mostCurrentEvent =  findMostCurrentEvent();
+				  if(mostCurrentEvent==null){
+					  return;
+				  }
 				  //Weight
 				  Integer oldWeight = mostCurrentWeighIn==null ? null: mostCurrentWeighIn.getWeight();
 				  Double oldWeightGain = mostCurrentWeighIn==null ? null: mostCurrentWeighIn.getWeightGainPerDay();
