@@ -3,6 +3,8 @@
  */
 package com.verticon.tracker.editor.util;
 
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_SPREAD_INTERVAL;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,7 +14,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -26,7 +27,6 @@ import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.util.TrackerUtils;
-import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_SPREAD_INTERVAL;
 
 /**
  * Container modeling an Animal Template (*.animal) Document File
@@ -110,21 +110,23 @@ import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_SPRE
 	}
 	
 	/**
-	 * 
+	 * @param premises
 	 * @return a collection of events copied from the template.
 	 */
-	public Collection<Event> getEvents(Premises premises){
-		Animal copiedAnimal = (Animal)copier.copy(animalInTemplate);
-		if(premises!=null){
-			setLocationOnCopiedSightingEvents( copiedAnimal.eventHistory(),  premises);
-		}
+	protected Collection<Event> getEvents(Premises premises){
 		Collection<Event> events = null;
-		if(copiedAnimal.eventHistory().isEmpty()){
+		if(animalInTemplate.eventHistory().isEmpty()){
 			events= Collections.emptyList();
 		}else{
-			setAppropriateDateOnEvents(copiedAnimal, defaultEventDate);
-			events = new ArrayList<Event>();
-			events.addAll(copiedAnimal.eventHistory());//Just add all the events
+			events = new ArrayList<Event>(animalInTemplate.eventHistory().size());
+			for (Event event : animalInTemplate.eventHistory()) {
+				Event copiedEvent = (Event)copier.copy(event);
+				events.add(copiedEvent);
+			}
+			setAppropriateDateOnEvents(events, defaultEventDate);
+			if(premises!=null){
+				setLocationOnCopiedSightingEvents(events,  premises);
+			}
 		}
 		return events;
 	}
@@ -181,7 +183,7 @@ import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_SPRE
 		}
 		if(copiedTemplateAnimal.activeTag()!=null){
 			copiedTemplateAnimal.activeTag().setId(tag);
-			setAppropriateDateOnEvents(copiedTemplateAnimal, defaultEventDate);
+			setAppropriateDateOnEvents(copiedTemplateAnimal.eventHistory(), defaultEventDate);
 		}else{
 			//no active tag on the template animal, just create an tag without events
 			Tag newTag = TrackerFactory.eINSTANCE.createTag();
@@ -210,14 +212,14 @@ import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_SPRE
 	}
 	
 	/**
-	 * Sets appropriate dates on all animalInTemplate events.
-	 * @param copiedAnimal
+	 * Sets appropriate dates on all events.
+	 * @param events
 	 * @param presetDate
 	 */
-	 private static void setAppropriateDateOnEvents(Animal copiedAnimal, Date presetDate) {
+	 private static void setAppropriateDateOnEvents(Collection<Event> events, Date presetDate) {
 		int interval = getIntervalBetweenEventsPreference();
 		Calendar cal = null;
-		for (Event event : copiedAnimal.eventHistory()) {
+		for (Event event : events) {
 			if(isFirstEvent(cal) ){
 				if(presetDate !=null){
 					cal = Calendar.getInstance();
@@ -259,7 +261,7 @@ import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_SPRE
 	 * Need to reference a valid location in the Premises on the copied SightEvents
 	 * @param copiedAnimal
 	 */
-	private void setLocationOnCopiedSightingEvents(EList<Event> events, Premises premises){
+	private void setLocationOnCopiedSightingEvents(Collection<Event> events, Premises premises){
 		int position = 0;
 		for (Event event : events) {
 			if(event instanceof Sighting){
