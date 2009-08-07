@@ -139,12 +139,12 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	private final ViewModel viewModel = new ViewModel();
 	private IObservableValue statusMessageObservable;
 
-	protected boolean isShowingExpertProperties = false;
+	private boolean isShowingExpertProperties = false;
 
 	/**
 	 * slf4j Logger
 	 */
-	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private ScrolledComposite formParent;
 
@@ -511,8 +511,11 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 				.getSelection();
 
 		List<EObject> selectedItems = selection.toList();
-		deleteItemsDialog(getViewSite().getShell(), selectedItems.size());
-
+		boolean delete = deleteItemsDialog(getViewSite().getShell(), selectedItems.size());
+        
+		if (!delete){
+			return;
+		}
 		EditingDomain ed = AdapterFactoryEditingDomain
 				.getEditingDomainFor(selectedItems.get(0));
 		ed.getCommandStack().execute(RemoveCommand.create(ed, selectedItems));
@@ -548,7 +551,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		}
 	}
 
-	protected void makeActions() {
+	private void makeActions() {
 		
 		// Show Advanced Properties
 		showAdvancedPropertiesAction = new Action() {
@@ -702,7 +705,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 
-	protected void fillLocalPullDown(IMenuManager manager) {
+	private void fillLocalPullDown(IMenuManager manager) {
 		manager.add(addAction);
 		manager.add(deleteAction);
 		manager.add(reorientSashFormAction);
@@ -806,7 +809,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		
 	}
 
-	protected void fillLocalToolBar(IToolBarManager manager) {
+	private void fillLocalToolBar(IToolBarManager manager) {
 		manager.add(addAction);
 		manager.add(deleteAction);
 		manager.add(reorientSashFormAction);
