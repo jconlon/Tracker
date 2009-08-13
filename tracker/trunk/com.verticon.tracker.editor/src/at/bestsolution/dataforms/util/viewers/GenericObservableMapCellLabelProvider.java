@@ -51,14 +51,7 @@ public class GenericObservableMapCellLabelProvider extends ColumnLabelProvider {
 		}
 	};
 
-	/**
-	 * @param attributeMap
-	 * @param templateText 
-	 */
-	public GenericObservableMapCellLabelProvider(IObservableMap attributeMap,
-			String templateText) {
-		this(new IObservableMap[] { attributeMap },templateText);
-	}
+	
 
 	/**
 	 * @param attributeMaps

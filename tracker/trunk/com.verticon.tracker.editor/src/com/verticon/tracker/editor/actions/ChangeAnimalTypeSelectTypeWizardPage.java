@@ -29,8 +29,8 @@ public class ChangeAnimalTypeSelectTypeWizardPage extends WizardPage
 
 	private Animal selectedAnimalType = null;
 	private TableViewer tableViewer;
-	Composite child = null;
-	List<Animal> model = new ArrayList<Animal>();
+	private Composite child = null;
+	private List<Animal> model = new ArrayList<Animal>();
 
 	private final AdapterFactory adapterFactory;
 
@@ -98,7 +98,7 @@ public class ChangeAnimalTypeSelectTypeWizardPage extends WizardPage
 		super.setVisible(visible);
 	}
 
-	protected TableViewer createSingleColumnTableViewer(Composite tableComposite) {
+	private TableViewer createSingleColumnTableViewer(Composite tableComposite) {
 		
 		final TableViewer v = new TableViewer(tableComposite);
 		 v.getTable().setLinesVisible(true);
@@ -155,10 +155,5 @@ public class ChangeAnimalTypeSelectTypeWizardPage extends WizardPage
 		return;
 
 	}
-
-	
-
-	
-	
 
 }

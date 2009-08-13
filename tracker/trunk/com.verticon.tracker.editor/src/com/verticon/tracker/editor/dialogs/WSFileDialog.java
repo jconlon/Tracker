@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ISelection;
@@ -75,24 +74,6 @@ public class WSFileDialog extends Dialog {
 	}
 	
 	/**
-	 * Open on the workspace root without filters or workingset
-	 * 
-	 * @param parentShell this shell will be blocked by the modal WSFileDialog
-	 * @param selectionStyle must be SWT.SINGLE or SWT.MULTI
-	 * @param title the dialog title
-	 */
-	public WSFileDialog(Shell parentShell, int selectionStyle, String title) {
-		this(
-				parentShell,
-				selectionStyle,
-				title,
-				ResourcesPlugin.getWorkspace().getRoot(),
-				true,
-				null,
-				null);
-	}
-
-	/**
 	 * Only files with the given file extensions will be shown
 	 * @param extensions
 	 */
@@ -117,8 +98,7 @@ public class WSFileDialog extends Dialog {
 		return comp;
 	}
 	
-	protected TreeViewer createViewer(Composite parent) {
-//		ResourceNavigator nav = new ResourceNavigator();
+	private TreeViewer createViewer(Composite parent) {
 		TreeViewer viewer =
 			new TreeViewer(parent, selectionStyle | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 		viewer.setUseHashlookup(true);
@@ -136,7 +116,7 @@ public class WSFileDialog extends Dialog {
 	 * Attach the filters to the tree viewer
 	 * @param viewer
 	 */
-	protected void initFilters(TreeViewer viewer) {
+	private void initFilters(TreeViewer viewer) {
 		viewer.addFilter(patternFilter);
 		if (workingSet != null) {
 			workingSetFilter.setWorkingSet(workingSet);
@@ -149,17 +129,12 @@ public class WSFileDialog extends Dialog {
 	 * with all the resource information
 	 * @param viewer
 	 */
-	protected void initContentProvider(TreeViewer viewer) {
+	private void initContentProvider(TreeViewer viewer) {
 		viewer.setContentProvider(new WorkbenchContentProvider());
 	}
 	
-	protected void initLabelProvider(TreeViewer viewer) {
+	private void initLabelProvider(TreeViewer viewer) {
 		viewer.setLabelProvider(new WorkbenchLabelProvider());
-//		viewer.setLabelProvider(
-//			new DecoratingLabelProvider(
-//				new WorkbenchLabelProvider(),
-//				IDEWorkbenchPlugin.getDefault().getWorkbench().getDecoratorManager().getLabelDecorator())
-//			);
 	}
 
 	/**

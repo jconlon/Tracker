@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.Shell;
  * hidden by the user. Subclasses are responsible for providing the
  * content of the details section.
  */
-public abstract class AbstractDetailsDialog extends Dialog
+abstract class AbstractDetailsDialog extends Dialog
 {
    private final String title;
    private final String message;
@@ -42,7 +42,7 @@ public abstract class AbstractDetailsDialog extends Dialog
     * @param image the image to be displayed
     * @param message the message to be displayed
     */
-   public AbstractDetailsDialog(Shell parentShell, String title,
+   protected AbstractDetailsDialog(Shell parentShell, String title,
          Image image, String message)
    {
       super(parentShell);
@@ -69,7 +69,7 @@ public abstract class AbstractDetailsDialog extends Dialog
     * @param message the message to be displayed
     */
    /* $codepro.preprocessor.if version >= 3.1 $ */
-   public AbstractDetailsDialog(
+   protected AbstractDetailsDialog(
          org.eclipse.jface.window.IShellProvider parentShell,
          String title, Image image, String message)
    {
@@ -157,7 +157,7 @@ public abstract class AbstractDetailsDialog extends Dialog
     * Toggles the unfolding of the details area. This is triggered by
     * the user pressing the Details button.
     */
-   protected void toggleDetailsArea() {
+   private void toggleDetailsArea() {
       Point oldWindowSize = getShell().getSize();
       Point newWindowSize = cachedWindowSize;
       cachedWindowSize = oldWindowSize;

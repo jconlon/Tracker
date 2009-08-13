@@ -5,6 +5,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
@@ -39,6 +40,9 @@ public class ImportTagIdsAsTemplateEventsHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		
 		ISelection selectionOfTagIdResources = HandlerUtil.getActiveMenuSelectionChecked(event);	
+		if(selectionOfTagIdResources.isEmpty()){
+			throw new ExecutionException("Selected tagId resources cannot be empty.");
+		}
 		IEditorPart editorPart = HandlerUtil.getActiveEditorChecked(event);
 
 		IPremisesProvider premisesProvider = (IPremisesProvider) editorPart
@@ -49,8 +53,9 @@ public class ImportTagIdsAsTemplateEventsHandler extends AbstractHandler {
 				editorPart, 
 				selectionOfTagIdResources, 
 				premisesProvider.getPremises());
+		Shell shell = HandlerUtil.getActiveShellChecked(event);
 		WizardDialog dialog = new WizardDialog(
-				HandlerUtil.getActiveShellChecked(event), wizard);
+				shell, wizard);
 		dialog.open();
 		
 		
