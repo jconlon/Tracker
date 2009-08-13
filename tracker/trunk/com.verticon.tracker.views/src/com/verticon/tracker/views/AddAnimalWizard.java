@@ -182,7 +182,7 @@ public class AddAnimalWizard extends Wizard {
 		 */
 		private void createTagIdUI(Composite container) {
 			Label label = new Label(container, SWT.NULL);
-			label.setText("Animal Tag Identification: ");
+			label.setText("Animal Tag Identification:");
 			label.setBackground(container.getDisplay().getSystemColor(
 					SWT.COLOR_YELLOW));
 
