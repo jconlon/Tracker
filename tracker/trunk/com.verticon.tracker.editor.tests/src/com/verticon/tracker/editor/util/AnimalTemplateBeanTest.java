@@ -1,5 +1,6 @@
 package com.verticon.tracker.editor.util;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
@@ -180,9 +181,17 @@ public class AnimalTemplateBeanTest extends TestCase {
 		eventOfAnimalInTemplateBean.setDateTime(beforeRef);
 	}
 	
-	
+	/**
+	 * Events should not have a container.
+	 */
 	public void testGetEvents() {
 		assertEquals(1, animalTemplateBean.getEvents(premisesDestinationForCopiedAnimals).size());
+		
+		Collection<Event> events = animalTemplateBean.getEvents(null);
+		for (Event event : events) {
+			assertNull("Event should not have a container", event.eContainer());
+		}
+		
 	}
 
 
