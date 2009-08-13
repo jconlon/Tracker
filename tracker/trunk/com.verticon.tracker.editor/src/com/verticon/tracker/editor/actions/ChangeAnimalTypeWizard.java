@@ -46,10 +46,8 @@ public class ChangeAnimalTypeWizard extends Wizard  {
     
 	private ChangeAnimalTypeSelectTypeWizardPage selectTypePage = null;
 	private static final String ADD_SECTION = "ChangeAnimalType";
-	public static final String ADD_CHANGE_TYPE_WIZARD = "ChangeAnimalTypeWizard";
-	
-    
-    IWorkbenchWindow workbenchWindow;
+	private static final String ADD_CHANGE_TYPE_WIZARD = "ChangeAnimalTypeWizard";
+	private IWorkbenchWindow workbenchWindow;
     
     
 	public ChangeAnimalTypeWizard() {
