@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SingleValueEAttributeENumControlBuilder implements ControlBuilder {
+class SingleValueEAttributeENumControlBuilder implements ControlBuilder {
 
 	/**
 	 * slf4j Logger

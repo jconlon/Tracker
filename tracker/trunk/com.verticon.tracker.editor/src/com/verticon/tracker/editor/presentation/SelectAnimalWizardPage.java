@@ -35,7 +35,7 @@ import com.verticon.tracker.editor.util.ActionUtils;
  * @since 0.2
  * 
  */
-public class SelectAnimalWizardPage extends WizardPage implements ISelectionChangedListener {
+class SelectAnimalWizardPage extends WizardPage implements ISelectionChangedListener {
 
 	private ListViewer listViewer;
 	
@@ -65,7 +65,7 @@ public class SelectAnimalWizardPage extends WizardPage implements ISelectionChan
 	}
 	
 	
-	protected ListViewer createViewer(Composite parent) {
+	private ListViewer createViewer(Composite parent) {
 		ListViewer viewer =
 			new ListViewer(parent, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 		viewer.setUseHashlookup(true);

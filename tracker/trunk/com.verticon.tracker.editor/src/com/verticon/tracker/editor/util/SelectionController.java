@@ -79,7 +79,7 @@ public class SelectionController implements ISelectionController {
 	}
 
 
-	protected final ItemsView itemsView;
+	private final ItemsView itemsView;
 	private final SelectionStrategy strategy;
 	
 	/**

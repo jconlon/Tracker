@@ -18,7 +18,7 @@ import java.util.Date;
 	private final Collection<Long> tags;
 	private final String name;
 	
-	public TagsBean(Date date, Collection<Long> tags, String name) {
+	protected TagsBean(Date date, Collection<Long> tags, String name) {
 		super();
 		this.date = date;
 		this.tags = tags;

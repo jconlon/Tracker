@@ -1,7 +1,8 @@
 package com.verticon.tracker.editor.util;
 
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_VALIDATE_BEFORE_EXPORT;
+
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,17 +10,11 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbenchWindow;
 
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
-import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_VALIDATE_BEFORE_EXPORT;
 
 /**
  * Base class for exporting Excel spreadsheets. Subclasses only need to set the
@@ -30,23 +25,18 @@ import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_VALI
  */
 public class ExportPremisesBase {
 
-	protected List<Diagnostic> validationDiagnostics = new ArrayList<Diagnostic>();
+	private List<Diagnostic> validationDiagnostics = new ArrayList<Diagnostic>();
 	protected IEditorPart targetEditor;
-	protected final PremisesProcessor premisesProcessor;
+	private final PremisesProcessor premisesProcessor;
 
 	public ExportPremisesBase(PremisesProcessor premisesProcessor) {
 		this.premisesProcessor = premisesProcessor;
 
 	}
 
-	public void selectionChanged(IAction action, ISelection selection) {
+	
 
-	}
-
-	public void setActiveEditor(IAction action, IEditorPart targetEditor) {
-		this.targetEditor = targetEditor;
-
-	}
+	
 	
 	/**
 	 * @param monitor
@@ -74,55 +64,6 @@ public class ExportPremisesBase {
 		monitor.done();
 	}
 
-	public void run(IAction action) {
-
-		InvocationTargetException ite = null;
-		
-		IWorkbenchWindow window = targetEditor.getSite().getWorkbenchWindow();
-
-		try {
-			window.run(true, true, new IRunnableWithProgress() {
-				public void run(IProgressMonitor monitor)
-						throws InvocationTargetException, InterruptedException {
-
-					IFile iFile = (IFile) targetEditor.getEditorInput()
-							.getAdapter(IFile.class);
-				
-
-					try {
-						export(monitor, iFile);
-
-					} catch (IOException e) {
-						throw new InvocationTargetException(e);
-
-					} catch (CoreException e) {
-						throw new InvocationTargetException(e);
-					}
-				}
-
-				
-			});
-		} catch (InvocationTargetException e) {
-			ite = e;
-
-		} catch (InterruptedException e) {
-
-		}
-
-		if (ite == null) {
-			MessageDialog.openInformation(targetEditor.getSite().getShell(),
-					"Process Completed", premisesProcessor
-							.getCompletionMessage());
-
-		} else {
-			MessageDialog.openError(
-					targetEditor.getSite().getShell(),
-					premisesProcessor.getFailureTitle(), //
-				    "Process Failed because: "+
-				    ite.getTargetException()==null?ite.toString():
-				    	ite.getTargetException().getLocalizedMessage());
-		}
-
-	}
+	
 
 }

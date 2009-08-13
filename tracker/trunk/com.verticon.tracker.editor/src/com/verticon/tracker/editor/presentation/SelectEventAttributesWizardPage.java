@@ -5,11 +5,10 @@ package com.verticon.tracker.editor.presentation;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -40,16 +39,18 @@ import com.verticon.tracker.TrackerPackage;
  * @author jconlon
  * 
  */
-public class SelectEventAttributesWizardPage extends WizardPage {
+class SelectEventAttributesWizardPage extends WizardPage {
 
 	private CheckboxTableViewer checkboxTableViewer;
 	
-	private final static Map<EAttribute, String> possibleAttributes = new HashMap<EAttribute, String>();
+	private final static Map<EAttribute, String> possibleAttributes = new LinkedHashMap<EAttribute, String>();
 
 	static {
 		possibleAttributes.put(TrackerPackage.eINSTANCE.getEvent_Comments(), "Add a comment to the event");
 		possibleAttributes.put(TrackerPackage.eINSTANCE.getEvent_Correction(), "Flag the event as a correction to a previous Event");
 		possibleAttributes.put(TrackerPackage.eINSTANCE.getEvent_ElectronicallyRead(), "Specify if the event was read electrionically");
+	
+	
 	}
 
 	
@@ -60,16 +61,7 @@ public class SelectEventAttributesWizardPage extends WizardPage {
 
 	}
 
-	/**
-	 * @param pageName
-	 * @param title
-	 * @param titleImage
-	 */
-	public SelectEventAttributesWizardPage(String pageName, String title,
-			ImageDescriptor titleImage) {
-		super(pageName, title, titleImage);
-
-	}
+	
 
 	/**
 	 * Creates the top level control for this dialog page under the given parent
@@ -164,7 +156,7 @@ public class SelectEventAttributesWizardPage extends WizardPage {
 	
 	private static class EventAttributesLabelProvider implements ITableLabelProvider {
 
-		public Image getImage(Object element) {
+		protected Image getImage(Object element) {
 			return null;
 		}
 

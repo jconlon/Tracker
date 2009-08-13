@@ -41,9 +41,7 @@ final class TransactionalAwareUpdateValueStrategy extends
 	 */
 	private Binding binding;
 
-	Binding getBinding() {
-		return binding;
-	}
+	
 
 	void setBinding(Binding binding) {
 		this.binding = binding;

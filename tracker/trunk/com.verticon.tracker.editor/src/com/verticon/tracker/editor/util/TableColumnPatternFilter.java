@@ -21,7 +21,7 @@ import org.eclipse.jface.viewers.ViewerFilter;
 
 import at.bestsolution.dataforms.util.viewers.GenericObservableMapCellLabelProvider;
 
-public class TableColumnPatternFilter extends ViewerFilter {
+class TableColumnPatternFilter extends ViewerFilter {
 
 	private String patternString = "";
 	private int columnIndex;

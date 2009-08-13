@@ -9,6 +9,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 
 import com.verticon.tracker.editor.util.ActionUtils;
@@ -21,6 +22,13 @@ import com.verticon.tracker.editor.util.ActionUtils;
  *
  */
 public class TrackerAnimalModelWizard extends TrackerModelWizard {
+
+	@Override
+   public void init(IWorkbench workbench, IStructuredSelection selection) {
+	// TODO Auto-generated method stub
+	super.init(workbench, selection);
+	this.setWindowTitle(TrackerReportEditorPlugin.INSTANCE.getString("_UI_Animal_Wizard_label"));
+}
 
 	/**
 	 * Need a unique NeFileCreation page.
@@ -106,7 +114,7 @@ public class TrackerAnimalModelWizard extends TrackerModelWizard {
 	 */
 	private static class MyNewFileCreationPage extends WizardNewFileCreationPage {
 		
-		public MyNewFileCreationPage(String pageId,
+		protected MyNewFileCreationPage(String pageId,
 				IStructuredSelection selection) {
 			super(pageId, selection);
 		}

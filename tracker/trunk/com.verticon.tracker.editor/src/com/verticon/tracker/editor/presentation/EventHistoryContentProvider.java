@@ -145,7 +145,7 @@ public class EventHistoryContentProvider extends AdapterFactoryContentProvider i
 	 * @param properties
 	 * 
 	 */
-	protected static void addToViewer(final TableViewer tableViewer,
+	private static void addToViewer(final TableViewer tableViewer,
 			final Object element) {
 		Display d = tableViewer.getControl().getDisplay();
 		if (d != Display.getCurrent()) {
@@ -178,7 +178,7 @@ public class EventHistoryContentProvider extends AdapterFactoryContentProvider i
 	 * @param properties
 	 * 
 	 */
-	protected static void removeFromViewer(final TableViewer tableViewer,
+	private static void removeFromViewer(final TableViewer tableViewer,
 			final Object element) {
 		Display d = tableViewer.getControl().getDisplay();
 		if (d != Display.getCurrent()) {

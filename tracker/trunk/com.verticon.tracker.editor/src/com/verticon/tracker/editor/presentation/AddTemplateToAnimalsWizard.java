@@ -26,7 +26,7 @@ import com.verticon.tracker.editor.util.AnimalTemplateBean;
 public class AddTemplateToAnimalsWizard extends Wizard {
 
 	private static final String MODIFY_WIZARD_TITLE = "Add Template To Animals";
-	public static final String MODIFY_EVENTS_WIZARD = "ModifyEventsWizard";
+	private static final String MODIFY_EVENTS_WIZARD = "ModifyEventsWizard";
 	private Collection<Animal> selectedAnimals;
 	private IEditorPart editor;
 	private SelectAnimalDocumentWizardPage selectAnimalDocumentWizardPage;

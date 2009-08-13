@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
-	public String FILTER_ID_EXPERT = "org.eclipse.ui.views.properties.expert"; //$NON-NLS-1$
+	private String FILTER_ID_EXPERT = "org.eclipse.ui.views.properties.expert"; //$NON-NLS-1$
 
 	private IObservableValue statusMessageObservable;
 
@@ -105,7 +105,7 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 	 * @param nameOfTab
 	 *            TODO
 	 */
-	protected Composite createEmptyCTabItem(CTabFolder cTabFolder,
+	private Composite createEmptyCTabItem(CTabFolder cTabFolder,
 			String nameOfTab) {
 
 		item1 = new CTabItem(cTabFolder, SWT.NONE);
@@ -142,7 +142,7 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 	 * @param adapterFactory
 	 * @param composite1
 	 */
-	protected void handleSelection(IStructuredSelection structuredSelection,
+	private void handleSelection(IStructuredSelection structuredSelection,
 			AdapterFactory adapterFactory, Composite composite1,
 			boolean showAdvanceProperties) {
 		// Only deal with an IStructuredSelection
@@ -157,7 +157,7 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 	 * @param parent
 	 * @param object
 	 */
-	protected void createForm(Composite parent, Object object,
+	private void createForm(Composite parent, Object object,
 			AdapterFactory adapterFactory, boolean showAdvanceProperties) {
 		Map<String, Group> mp = new HashMap<String, Group>();
 

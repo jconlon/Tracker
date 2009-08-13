@@ -35,6 +35,9 @@ public class AddTagIdsAndTemplateWizard extends Wizard {
 
 	public void init(IEditorPart editor,
 			ISelection selection, Premises premises) {
+		if(selection.isEmpty()){
+			throw new IllegalStateException("Selected tagId resources cannot be empty.");
+		}
 		this.selectionOfTagIdResources = selection;
 		this.editor = editor;
 		this.premises = premises;

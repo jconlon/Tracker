@@ -31,8 +31,8 @@ public class TrackerConstants {
 	public static final String EVENT_ADMIN_TOPIC_VIEW_SELECTION = "com/verticon/tracker/view/animal";
 		
 	
-	public static final String EVENT_ADMIN_PROPERTY_SELECTION = "com.verticon.tracker.view.selection";
-	public static final String EVENT_ADMIN_PROPERTY_SELECTION_SOURCE = "com.verticon.tracker.view.selection.source";
+	protected static final String EVENT_ADMIN_PROPERTY_SELECTION = "com.verticon.tracker.view.selection";
+	protected static final String EVENT_ADMIN_PROPERTY_SELECTION_SOURCE = "com.verticon.tracker.view.selection.source";
 	public static final String EVENT_ADMIN_VALUE_SELECTION_SOURCE_ANIMALS_VIEW = "Animals Detail";
 	public static final String EVENT_ADMIN_VALUE_SELECTION_SOURCE_EVENTS_VIEW = "Events Detail";
 	

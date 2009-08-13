@@ -24,7 +24,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SingleValueEReferenceControlBuilder implements ControlBuilder {
+class SingleValueEReferenceControlBuilder implements ControlBuilder {
 
 	/**
 	 * slf4j Logger

@@ -72,7 +72,7 @@ public class FilteredTable extends Composite {
 	 * value may be <code>null</code> if no such button exists, or if the
 	 * controls have not yet been created.
 	 */
-	protected ToolBarManager filterToolBar;
+	private ToolBarManager filterToolBar;
 
 	/**
 	 * The viewer for the filtered tree. This value should never be
@@ -85,7 +85,7 @@ public class FilteredTable extends Composite {
 	 * set the background color of the filter controls to match the surrounding
 	 * controls.
 	 */
-	protected Composite filterComposite;
+	private Composite filterComposite;
 
 	/**
 	 * The pattern filter for the tree. This value must not be <code>null</code>.
@@ -107,7 +107,7 @@ public class FilteredTable extends Composite {
 	 * 
 	 * @since 3.3
 	 */
-	protected Composite parent;
+	private Composite parent;
 
 	/**
 	 * Whether or not to show the filter controls (text and clear button). The
@@ -117,12 +117,12 @@ public class FilteredTable extends Composite {
 	 * 
 	 * org.eclipse.ui/SHOW_FILTERED_TEXTS=false
 	 */
-	protected boolean showFilterControls;
+	private boolean showFilterControls;
 
 	/**
 	 * @since 3.3
 	 */
-	protected Composite tableComposite;
+	private Composite tableComposite;
 
 	/**
 	 * Holds the columnCombo that is an index to the column
@@ -173,7 +173,7 @@ public class FilteredTable extends Composite {
 	 * @param filter
 	 *            the filter to be used
 	 */
-	public FilteredTable(Composite parent, int tableStyle,
+	protected FilteredTable(Composite parent, int tableStyle,
 			TableColumnPatternFilter filter) {
 		super(parent, SWT.NONE);
 		this.parent = parent;
@@ -192,6 +192,7 @@ public class FilteredTable extends Composite {
 	 * 
 	 * @since 3.3
 	 */
+	@SuppressWarnings("ucd")
 	protected FilteredTable(Composite parent) {
 		super(parent, SWT.NONE);
 		this.parent = parent;
@@ -207,7 +208,7 @@ public class FilteredTable extends Composite {
 	 * 
 	 * @since 3.3
 	 */
-	protected void init(int tableStyle, TableColumnPatternFilter filter) {
+	private void init(int tableStyle, TableColumnPatternFilter filter) {
 		tableColumnPatternFilter = filter;
 		showFilterControls = PlatformUI.getPreferenceStore().getBoolean(
 				IWorkbenchPreferenceConstants.SHOW_FILTERED_TEXTS);
@@ -223,7 +224,7 @@ public class FilteredTable extends Composite {
 	 * @param parent
 	 * @param tableStyle
 	 */
-	protected void createControl(Composite parent, int tableStyle) {
+	private void createControl(Composite parent, int tableStyle) {
 		GridLayout layout = new GridLayout();
 		layout.marginHeight = 0;
 		layout.marginWidth = 0;
@@ -262,7 +263,7 @@ public class FilteredTable extends Composite {
 	 *            parent <code>Composite</code> of the filter controls
 	 * @return the <code>Composite</code> that contains the filter controls
 	 */
-	protected Composite createFilterControls(Composite parent) {
+	private Composite createFilterControls(Composite parent) {
 		createFilterText(parent);
 		createColumnCombo(parent);
 		createClearText(parent);
@@ -274,7 +275,7 @@ public class FilteredTable extends Composite {
 		return parent;
 	}
 
-	protected void createColumnCombo(Composite parent) {
+	private void createColumnCombo(Composite parent) {
 		columnCombo = new Combo(parent, SWT.DROP_DOWN | SWT.READ_ONLY);
 		columnCombo.setItems(new String[] {""});
 		columnCombo.addModifyListener(new ModifyListener() {
@@ -312,7 +313,7 @@ public class FilteredTable extends Composite {
 	 *            SWT style bits used to create the tree
 	 * @return the tree
 	 */
-	protected Control createTableControl(Composite parent, int style) {
+	private Control createTableControl(Composite parent, int style) {
 		tableViewer = doCreateTableViewer(parent, style);
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 		tableViewer.getControl().setLayoutData(data);
@@ -344,7 +345,7 @@ public class FilteredTable extends Composite {
 	 * 
 	 * @since 3.3
 	 */
-	protected TableViewer doCreateTableViewer(Composite parent, int style) {
+	private TableViewer doCreateTableViewer(Composite parent, int style) {
 		// return new NotifyingTreeViewer(parent, style);
 		return new TableViewer(parent, style);
 	}
@@ -418,7 +419,7 @@ public class FilteredTable extends Composite {
 	 * @param parent
 	 *            <code>Composite</code> of the filter text
 	 */
-	protected void createFilterText(Composite parent) {
+	private void createFilterText(Composite parent) {
 		filterText = doCreateFilterText(parent);
 		filterText.getAccessible().addAccessibleListener(
 				new AccessibleAdapter() {
@@ -548,7 +549,7 @@ public class FilteredTable extends Composite {
 	 * 
 	 * @since 3.3
 	 */
-	protected Text doCreateFilterText(Composite parent) {
+	private Text doCreateFilterText(Composite parent) {
 		return new Text(parent, SWT.SINGLE | SWT.BORDER | SWT.SEARCH
 				| SWT.CANCEL);
 	}
@@ -705,7 +706,7 @@ public class FilteredTable extends Composite {
 	 * Select all text in the filter text field.
 	 * 
 	 */
-	protected void selectAll() {
+	private void selectAll() {
 		if (filterText != null) {
 			filterText.selectAll();
 		}
