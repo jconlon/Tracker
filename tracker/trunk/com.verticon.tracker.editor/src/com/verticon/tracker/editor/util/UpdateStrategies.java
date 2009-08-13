@@ -21,15 +21,8 @@ import com.verticon.tracker.util.CheckISO7064Mod37_36;
  * @author jconlon
  * 
  */
-public class UpdateStrategies {
+class UpdateStrategies {
 
-//	/**
-//	 * slf4j Logger
-//	 */
-//	private final Logger logger = LoggerFactory
-//			.getLogger(UpdateStrategies.class);
-//	
-	
 	/**
 	 * Private constructor prevents instantiation.
 	 */

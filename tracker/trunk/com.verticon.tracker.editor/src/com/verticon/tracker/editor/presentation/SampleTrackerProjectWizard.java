@@ -206,7 +206,7 @@ public class SampleTrackerProjectWizard extends BasicNewResourceWizard {
 	 */
 	private void addSampleQueries(final IWorkbenchPart activePart) {
 		String commandId = 
-			"com.verticon.tracker.ocl.query.viewer.commands.addSampleQueryCommand";
+			"com.verticon.tracker.ocl.query.viewer.commands.addDefaultPremisesQueries";
 		 IHandlerService handlerService = (IHandlerService) activePart.getSite()
 	    .getService(IHandlerService.class);
 			

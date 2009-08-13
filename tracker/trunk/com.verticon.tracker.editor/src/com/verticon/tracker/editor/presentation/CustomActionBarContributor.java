@@ -43,7 +43,7 @@ public class CustomActionBarContributor implements ICustomActionBarContributor {
 	 * 
 	 * @generated NOT
 	 */
-	protected static ImageDescriptor collapseImage = AbstractUIPlugin.imageDescriptorFromPlugin(
+	private static ImageDescriptor collapseImage = AbstractUIPlugin.imageDescriptorFromPlugin(
 	    		"com.verticon.tracker.editor", "icons/full/elcl16/collapseall.gif");
 	
 	/**
@@ -51,7 +51,7 @@ public class CustomActionBarContributor implements ICustomActionBarContributor {
 	 * 
 	 * @generated NOT
 	 */
-	protected static ImageDescriptor expandImage = AbstractUIPlugin.imageDescriptorFromPlugin(
+	private static ImageDescriptor expandImage = AbstractUIPlugin.imageDescriptorFromPlugin(
     		"com.verticon.tracker.editor", "icons/full/elcl16/expandall.gif");
    
 	
@@ -126,7 +126,7 @@ public class CustomActionBarContributor implements ICustomActionBarContributor {
 
 	}
 
-	protected void addChildrenToToolBar(IToolBarManager toolBarManager) {	
+	private void addChildrenToToolBar(IToolBarManager toolBarManager) {	
 	}
 	
 	/* (non-Javadoc)

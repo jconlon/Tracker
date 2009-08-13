@@ -15,7 +15,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
-public class SingleValueEAttributeControlBuilder implements ControlBuilder {
+class SingleValueEAttributeControlBuilder implements ControlBuilder {
 
 
 	public void createControl(Object object, Composite parent,

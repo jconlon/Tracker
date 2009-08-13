@@ -68,7 +68,7 @@ public class SelectFileWizardPage extends WizardPage implements ISelectionChange
 		setControl(container);
 	}
 	
-	protected TreeViewer createViewer(Composite parent) {
+	private TreeViewer createViewer(Composite parent) {
 		TreeViewer viewer =
 			new TreeViewer(parent, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 		viewer.setUseHashlookup(true);
@@ -95,9 +95,7 @@ public class SelectFileWizardPage extends WizardPage implements ISelectionChange
 		project = ActionUtils.extractResource(editor).getProject();
 	}
 
-	public void init(IProject project){
-		this.project = project;
-	}
+	
 	
 	public void selectionChanged(SelectionChangedEvent event) {
 		ISelection selection = event.getSelection();

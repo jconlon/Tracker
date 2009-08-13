@@ -68,7 +68,7 @@ public class SelectEventWizardPage extends WizardPage implements ISelectionChang
 	
 	
 	
-	protected ListViewer createViewer(Composite parent) {
+	private ListViewer createViewer(Composite parent) {
 		ListViewer viewer =
 			new ListViewer(parent, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 		viewer.setUseHashlookup(true);

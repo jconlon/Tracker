@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -29,7 +28,7 @@ import com.verticon.tracker.TrackerPackage;
  * @author jconlon
  * 
  */
-public class SelectModifyEventsValuesPage extends WizardPage {
+class SelectModifyEventsValuesPage extends WizardPage {
 
 	private Text commentsField;
 	private Collection<EAttribute> selectedAttributes;
@@ -44,15 +43,7 @@ public class SelectModifyEventsValuesPage extends WizardPage {
 		setDescription("Select the values for the Event attributes");
 	}
 
-	/**
-	 * @param pageName
-	 * @param title
-	 * @param titleImage
-	 */
-	public SelectModifyEventsValuesPage(String pageName, String title,
-			ImageDescriptor titleImage) {
-		super(pageName, title, titleImage);
-	}
+	
 
 	/**
 	 * Creates the top level control for this dialog page under the given parent

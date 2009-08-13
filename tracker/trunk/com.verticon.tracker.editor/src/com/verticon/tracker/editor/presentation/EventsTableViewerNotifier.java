@@ -56,11 +56,7 @@ public class EventsTableViewerNotifier extends EContentAdapter {
 		super.setTarget(activeResource);
 	}
 
-	public void unset() {
-		if (activeResource != null) {
-			super.unsetTarget(activeResource);
-		}
-	}
+	
 
 	@Override
 	public void notifyChanged(Notification notification) {
@@ -180,7 +176,7 @@ public class EventsTableViewerNotifier extends EContentAdapter {
 	 * @param properties
 	 * 
 	 */
-	protected void updateViewer(final TableViewer tableViewer, final Object element, final String[] properties) {
+	private void updateViewer(final TableViewer tableViewer, final Object element, final String[] properties) {
 		Display d = tableViewer.getControl().getDisplay();
 		if (d != Display.getCurrent()) {
 			d.asyncExec(new Runnable() {
@@ -203,7 +199,7 @@ public class EventsTableViewerNotifier extends EContentAdapter {
 	 * @param properties
 	 * 
 	 */
-	protected static void addToViewer(final TableViewer tableViewer, final Object element) {
+	private static void addToViewer(final TableViewer tableViewer, final Object element) {
 		Display d = tableViewer.getControl().getDisplay();
 		if (d != Display.getCurrent()) {
 			d.asyncExec(new Runnable() {
@@ -225,7 +221,7 @@ public class EventsTableViewerNotifier extends EContentAdapter {
 	 * @param properties
 	 * 
 	 */
-	protected static void removeFromViewer(final TableViewer tableViewer, final Object element) {
+	private static void removeFromViewer(final TableViewer tableViewer, final Object element) {
 		Display d = tableViewer.getControl().getDisplay();
 		if (d != Display.getCurrent()) {
 			d.asyncExec(new Runnable() {

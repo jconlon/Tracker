@@ -52,7 +52,7 @@ public class ColumnUtils {
 		actions.add(action);
 	}
 
-   public static void saveState(IMemento memento, List<Action> actions) {
+   protected static void saveState(IMemento memento, List<Action> actions) {
 		for (Action action : actions) {
 			IMemento mem = memento.createChild(TAG_TYPE);
 			mem.putString(TAG_COLUMN_TEXT, action.getText());

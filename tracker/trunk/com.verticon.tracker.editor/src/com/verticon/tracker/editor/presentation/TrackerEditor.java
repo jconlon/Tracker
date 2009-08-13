@@ -608,46 +608,9 @@ public class TrackerEditor
 			}
 			updateProblemIndication = true;
 			updateProblemIndication();
-			//Added
-			// resetInputOnTableViewers();
 		}
 	}
-	
-//	/**
-//	 * Handles what to do with changed resources on activation.
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 * @generated NOT
-//	 */
-//	protected void handleChangedResources() {
-//		logger.debug(bundleMarker,"handleChangedResources entered");
-//		boolean isChangeResources = !changedResources.isEmpty();
-//		boolean reload = !isChangeResources && (!isDirty() || handleDirtyConflict());
-//		handleChangedResourcesGen();
-//		
-//		if (reload) {
-//			  resetInputOnTableViewers();
-//		}else{
-//			logger.warn(bundleMarker,"Reload did not occur isChangeResource={}",
-//					isChangeResources);
-//		}
-//	}
 
-	// /**
-	// *
-	// */
-	// private void resetInputOnTableViewers() {
-	// Object rootObject = getRoot();
-	// if (rootObject instanceof Premises)
-	// {
-	// logger.debug(bundleMarker,"Setting input on tables");
-	// animalsTableViewer.setInput(rootObject);
-	// eventsTableViewer.setInput(rootObject);
-	// }else{
-	// logger.error(bundleMarker,"Root not a Premises. Did not reset input on viewers.");
-	// }
-	// }
-  
 	/**
 	 * Updates the problems indication with the information described in the specified diagnostic.
 	 * <!-- begin-user-doc -->
@@ -1155,96 +1118,6 @@ public class TrackerEditor
 		setPageText(pageIndex, pageName);
 	}
 
-	// /**
-	// *
-	// */
-	// private void createTreeViewer(String pageName) {
-	// ViewerPane viewerPane =
-	// new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-	// @Override
-	// public Viewer createViewer(Composite composite) {
-	// return new TreeViewer(composite);
-	// }
-	// @Override
-	// public void requestActivation() {
-	// super.requestActivation();
-	// setCurrentViewerPane(this);
-	// }
-	// };
-	// viewerPane.createControl(getContainer());
-	// treeViewer = (TreeViewer)viewerPane.getViewer();
-	// treeViewer.setContentProvider(new
-	// AdapterFactoryContentProvider(adapterFactory));
-	// treeViewer.setLabelProvider(new
-	// WorkaroundAdapterFactoryLabelProvider(adapterFactory, treeViewer));
-	//
-	// new AdapterFactoryTreeEditor(treeViewer.getTree(), adapterFactory);
-	//
-	// createContextMenuFor(treeViewer);
-	// int pageIndex = addPage(viewerPane.getControl());
-	// setPageText(pageIndex, pageName);
-	// }
-	//
-	// /**
-	// *
-	// */
-	// private void createListViewer(String pageName) {
-	// ViewerPane viewerPane =
-	// new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-	// @Override
-	// public Viewer createViewer(Composite composite) {
-	// return new ListViewer(composite);
-	// }
-	// @Override
-	// public void requestActivation() {
-	// super.requestActivation();
-	// setCurrentViewerPane(this);
-	// }
-	// };
-	// viewerPane.createControl(getContainer());
-	// listViewer = (ListViewer)viewerPane.getViewer();
-	// listViewer.setContentProvider(new
-	// AdapterFactoryContentProvider(adapterFactory));
-	// listViewer.setLabelProvider(new
-	// WorkaroundAdapterFactoryLabelProvider(adapterFactory, listViewer));
-	//
-	// createContextMenuFor(listViewer);
-	// int pageIndex = addPage(viewerPane.getControl());
-	// setPageText(pageIndex, pageName);
-	// }
-	//
-	// /**
-	// *
-	// */
-	// private void createParentTreeViewer(String pageName) {
-	// ViewerPane viewerPane =
-	// new ViewerPane(getSite().getPage(), TrackerEditor.this) {
-	// @Override
-	// public Viewer createViewer(Composite composite) {
-	// Tree tree = new Tree(composite, SWT.MULTI);
-	// TreeViewer newTreeViewer = new TreeViewer(tree);
-	// return newTreeViewer;
-	// }
-	// @Override
-	// public void requestActivation() {
-	// super.requestActivation();
-	// setCurrentViewerPane(this);
-	// }
-	// };
-	// viewerPane.createControl(getContainer());
-	//
-	// parentViewer = (TreeViewer)viewerPane.getViewer();
-	// parentViewer.setAutoExpandLevel(30);
-	// parentViewer.setContentProvider(new
-	// ReverseAdapterFactoryContentProvider(adapterFactory));
-	// parentViewer.setLabelProvider(new
-	// WorkaroundAdapterFactoryLabelProvider(adapterFactory, parentViewer));
-	//
-	// createContextMenuFor(parentViewer);
-	// int pageIndex = addPage(viewerPane.getControl());
-	// setPageText(pageIndex, pageName);
-	// }
-
 	/**
 	 * 
 	 */
@@ -1564,11 +1437,9 @@ public class TrackerEditor
 			Iterator<?> selectedElements = ((IStructuredSelection)selection).iterator();
 			if (selectedElements.hasNext()) {
 				// Get the first selected element.
-				//
 				Object selectedElement = selectedElements.next();
 
 				// If it's the selection viewer, then we want it to select the same selection as this selection.
-				//
 				if (currentViewerPane.getViewer() == selectionViewer ) {
 					ArrayList<Object> selectionList = new ArrayList<Object>();
 					selectionList.add(selectedElement);
@@ -1577,53 +1448,7 @@ public class TrackerEditor
 					}
 
 					// Set the selection to the widget.
-					//
-					selectionViewer.setSelection(new StructuredSelection(selectionList));
-				// Handle animalsTableViewer
-					// } else if (currentViewerPane.getViewer() ==
-					// animalsTableViewer){
-					// if (selectedElement instanceof Animal){
-					//				
-					// ArrayList<Object> selectionList = new
-					// ArrayList<Object>();
-					// selectionList.add(selectedElement);
-					// while (selectedElements.hasNext()) {
-					// Object o = selectedElements.next();
-					// if(o instanceof Animal){
-					// selectionList.add(o);
-					// }
-					//						
-					// }
-					//					
-					// // Set the selection to the widget.
-					// //
-					// animalsTableViewer.setSelection(new
-					// StructuredSelection(selectionList));
-					//					
-					// }
-					//					
-					// // Handle eventsTableViewer
-					// } else if (currentViewerPane.getViewer() ==
-					// eventsTableViewer){
-					// if(selectedElement instanceof Event){
-					//
-					// ArrayList<Object> selectionList = new
-					// ArrayList<Object>();
-					// selectionList.add(selectedElement);
-					// while (selectedElements.hasNext()) {
-					// Object o = selectedElements.next();
-					// if(o instanceof Event){
-					// selectionList.add(o);
-					// }
-					//
-					// }
-					//
-					// // Set the selection to the widget.
-					// //
-					// eventsTableViewer.setSelection(new
-					// StructuredSelection(selectionList));
-					// }
-					
+					selectionViewer.setSelection(new StructuredSelection(selectionList));					
 				
 				}else if (currentViewerPane.getViewer() == listViewer
 						&& selectedElement instanceof Animal) // 14.2.2

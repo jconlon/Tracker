@@ -129,7 +129,7 @@ public class GenericViewSorter extends ViewerSorter
       viewer.refresh();
    }
 
-   public void saveState(IMemento memento) {
+   protected void saveState(IMemento memento) {
       for (int i = 0; i < infos.length; i++) {
          SortInfo info = infos[i];
          IMemento mem = memento.createChild(TAG_TYPE);

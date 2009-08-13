@@ -3,6 +3,7 @@
  */
 package com.verticon.tracker.editor.util;
 
+import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_IGNORE_WINDOW;
 import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
 
 import java.io.File;
@@ -20,7 +21,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.CommonPlugin;
@@ -39,18 +39,10 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.window.Window;
-import org.eclipse.swt.SWT;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.dialogs.ListDialog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,15 +50,9 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
-import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
-import com.verticon.tracker.editor.dialogs.WSFileDialog;
 import com.verticon.tracker.editor.presentation.IPremisesProvider;
-import com.verticon.tracker.editor.presentation.TrackerEditor;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
-
-import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_IGNORE_WINDOW;
 /**
  * @author jconlon
  * 
@@ -94,7 +80,7 @@ public class ActionUtils {
 	 * @return TagsBean
 	 * @throws FileNotFoundException
 	 */
-	public static final TagsBean getTagsBean(IPremisesProvider editor,
+	private static final TagsBean getTagsBean(IPremisesProvider editor,
 			ISelection selection) throws FileNotFoundException {
 		IResource resource = getSelectedResource(editor, selection);
 		
@@ -150,39 +136,7 @@ public class ActionUtils {
 				 selection);
 	}
 
-	public static final AnimalTemplateBean getTemplateBean(TrackerEditor editor,
-			IWorkbenchPart targetPart) {
-		IProject project = extractResource(editor).getProject();
-
-		WSFileDialog dialog = new WSFileDialog(targetPart.getSite().getShell(),
-				SWT.SINGLE, "Select a template", project, true,
-				new String[] { "animal" }, null);
-
-		dialog.setPatternFilter(new TemplateViewerFilter());
-
-		if (dialog.open() == Window.CANCEL) {
-			return null;
-		}
-
-		IResource result = dialog.getSingleResult();
-		if (result == null) {
-			return null;
-		}
-		IFile animalTemplateFile = (IFile) result;
-		
-		AnimalTemplateBean templateBean;
-		
-		templateBean = AnimalTemplateBean.instance(animalTemplateFile);
-		
-		if(templateBean == null){
-			MessageDialog
-			.openError(targetPart.getSite().getShell(),
-					"Failed to load a template",
-					"Could not extract a template");
-
-		}
-       return templateBean;
-	}
+	
 
 
 	/**
@@ -334,7 +288,7 @@ public class ActionUtils {
 	 * @param eventsToAdd
 	 * @return AddCommand
 	 */
-	public static Command createAddCommand(Tag tag,
+	private static Command createAddCommand(Tag tag,
 			EditingDomain editingDomain, Collection<Event> eventsToAdd) {
 		Command command = null;
 		if(!eventsToAdd.isEmpty()){
@@ -350,7 +304,7 @@ public class ActionUtils {
 	 * @param events
 	 * @return Collection of Events without the deferred events
 	 */
-	public static Collection<Event> filterOutDeferedEvents(Tag tag,
+	private static Collection<Event> filterOutDeferedEvents(Tag tag,
 			Collection<Event> events) {
 		if(tag==null){
 			throw new NullPointerException("tag argument cannot be null");
@@ -383,7 +337,7 @@ public class ActionUtils {
 		return resource;
 	}
 
-	public static Resource getResource(IFile file) throws IOException {
+	protected static Resource getResource(IFile file) throws IOException {
 
 		ResourceSet resourceSet = new ResourceSetImpl();
 
@@ -396,127 +350,11 @@ public class ActionUtils {
 		return resource;
 	}
 
-	public static IPremisesProvider getTrackerEditor(IWorkbenchPart targetPart) {
-		IEditorPart editor = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+	
 
-		if (editor == null || (!(editor instanceof TrackerEditor))) {
-			logger.error(bundleMarker,"The active editor is not a TrackerEditor.");
-			MessageDialog.openError(targetPart.getSite().getShell(),
-					"Failed to add tags",
-					"Could not find an active TrackerEditor ");
-			return null;
-		}
-		return (IPremisesProvider) editor;
-	}
+	
 
-	public static Event promptUserForEvent(IWorkbenchPart targetPart) {
-		ListDialog dialog = new ListDialog(targetPart.getSite().getShell());
-
-		dialog.setMessage("Select the Type of Event to add.");
-		dialog.setTitle("Event Selection");
-		dialog.setLabelProvider(new LabelProvider() {
-			@Override
-			public String getText(Object element) {
-
-				return (String) element;
-			}
-
-		}
-
-		);
-		dialog.setContentProvider(new IStructuredContentProvider() {
-			List<String> model = new ArrayList<String>();
-
-			public void inputChanged(Viewer v, Object oldInput, Object newInput) {
-			}
-
-			public void dispose() {
-			}
-
-			public Object[] getElements(Object parent) {
-				if (model.isEmpty()) {
-					model.addAll(getModelInstances(TrackerPackage.eINSTANCE
-							.getEvent()));
-				}
-				return model.toArray();
-			}
-
-		}
-
-		);
-		dialog.setInput("dont care just send some imput");
-
-		if (dialog.open() == Window.CANCEL) {
-			return null;
-		}
-
-		// This will be a string of event names
-		Object[] results = dialog.getResult();
-
-		if (results == null || results.length != 1) {
-			return null;
-		}
-		String nameOfEvent = (String) results[0];
-		EClass eClass = (EClass) TrackerPackage.eINSTANCE
-				.getEClassifier(nameOfEvent);
-		return (Event) TrackerFactory.eINSTANCE.create(eClass);
-
-	}
-
-	public static Animal promptUserForAnimal(IWorkbenchPart targetPart) {
-		ListDialog dialog = new ListDialog(targetPart.getSite().getShell());
-
-		dialog.setMessage("Select the Type of Animal to add.");
-		dialog.setTitle("Animal Selection");
-		dialog.setLabelProvider(new LabelProvider() {
-			@Override
-			public String getText(Object element) {
-
-				return (String) element;
-			}
-
-		}
-
-		);
-		dialog.setContentProvider(new IStructuredContentProvider() {
-			List<String> model = new ArrayList<String>();
-
-			public void inputChanged(Viewer v, Object oldInput, Object newInput) {
-			}
-
-			public void dispose() {
-			}
-
-			public Object[] getElements(Object parent) {
-				if (model.isEmpty()) {
-					model.addAll(getModelInstances(TrackerPackage.eINSTANCE
-							.getAnimal()));
-
-				}
-				return model.toArray();
-			}
-
-		}
-
-		);
-		dialog.setInput("dont care just send some imput");
-
-		if (dialog.open() == Window.CANCEL) {
-			return null;
-		}
-
-		// This will be a string of animal names
-		Object[] results = dialog.getResult();
-
-		if (results == null || results.length != 1) {
-			return null;
-		}
-		String nameOfAnimal = (String) results[0];
-		EClass eClass = (EClass) TrackerPackage.eINSTANCE
-				.getEClassifier(nameOfAnimal);
-		return (Animal) TrackerFactory.eINSTANCE.create(eClass);
-	}
+	
 
 
 	public static final IResource extractResource(IEditorPart editor) {
@@ -562,7 +400,7 @@ public class ActionUtils {
 		return initialObjectNames;
 	}
 
-	public static boolean validate(Premises premises,
+	protected static boolean validate(Premises premises,
 			List<Diagnostic> validationDiagnostics) {
 		validationDiagnostics.clear();
 		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(premises);

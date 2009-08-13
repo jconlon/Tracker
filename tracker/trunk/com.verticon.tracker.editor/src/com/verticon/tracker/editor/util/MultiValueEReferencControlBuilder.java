@@ -36,7 +36,7 @@ import org.eclipse.swt.widgets.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MultiValueEReferencControlBuilder implements ControlBuilder {
+class MultiValueEReferencControlBuilder implements ControlBuilder {
 
 	/**
 	 * slf4j Logger
@@ -138,7 +138,7 @@ public class MultiValueEReferencControlBuilder implements ControlBuilder {
 		return text;
 	}
 
-	 static void bind(Object object, DataBindingContext dataBindingContext,
+	 private static void bind(Object object, DataBindingContext dataBindingContext,
 			IItemPropertyDescriptor itemPropertyDescriptor,
 			final AdapterFactory adapterFactory, Text text) {
 			
@@ -205,7 +205,7 @@ public class MultiValueEReferencControlBuilder implements ControlBuilder {
 		return dialog.getResult();
 	}
 	
-	 public static ILabelProvider getLabelProvider(
+	 protected static ILabelProvider getLabelProvider(
 			IItemPropertyDescriptor itemPropertyDescriptor, Object object) {
 		final IItemLabelProvider itemLabelProvider = itemPropertyDescriptor
 				.getLabelProvider(object);

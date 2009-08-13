@@ -401,6 +401,7 @@ public class TrackerModelWizard extends Wizard implements INewWizard {
 				data.horizontalAlignment = GridData.FILL;
 				data.grabExcessHorizontalSpace = true;
 				initialObjectField.setLayoutData(data);
+				initialObjectField.setToolTipText(TrackerReportEditorPlugin.INSTANCE.getString("_UI_ModelObject_ToolTip"));
 			}
 
 			for (String objectName : getInitialObjectNames()) {

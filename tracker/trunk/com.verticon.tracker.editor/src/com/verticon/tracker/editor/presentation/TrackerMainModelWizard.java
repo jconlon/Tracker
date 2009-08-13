@@ -29,7 +29,7 @@ public class TrackerMainModelWizard extends TrackerModelWizard {
 			return "UTF-8";
 		}
 
-		public MyPage(String pageId) {
+		protected MyPage(String pageId) {
 			super(pageId);
 		}
 		

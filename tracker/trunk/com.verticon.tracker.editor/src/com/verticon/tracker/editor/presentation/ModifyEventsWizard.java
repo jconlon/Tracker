@@ -35,12 +35,12 @@ import com.verticon.tracker.editor.util.ActionUtils;
 public class ModifyEventsWizard extends Wizard {
 
 	private static final String MODIFY_ATTRIBUTES = "ModifyAttributes";
-	public static final String MODIFY_EVENTS_WIZARD = "ModifyEventsWizard";
+	private static final String MODIFY_EVENTS_WIZARD = "ModifyEventsWizard";
 	private Collection<Event> eventsToModify;
     private EditingDomain editingDomain;
     private SelectEventAttributesWizardPage selectEventAttributesWizardPage;
     private SelectModifyEventsValuesPage selectModifyEventsValuesPage;
-    IWorkbenchWindow workbenchWindow;
+    private IWorkbenchWindow workbenchWindow;
     
     
 	public ModifyEventsWizard() {

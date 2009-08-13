@@ -6,7 +6,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
-public class ControlBuilderFactory {
+class ControlBuilderFactory {
 
 	/**
 	 * Constructor suppressed for noninstantiability
@@ -15,7 +15,7 @@ public class ControlBuilderFactory {
 		throw new AssertionError();
 	}
 
-	public static ControlBuilder getInstance(Object object,
+	protected static ControlBuilder getInstance(Object object,
 			IItemPropertyDescriptor itemPropertyDescriptor) {
 
 		if (isEReference(object, itemPropertyDescriptor)) {
