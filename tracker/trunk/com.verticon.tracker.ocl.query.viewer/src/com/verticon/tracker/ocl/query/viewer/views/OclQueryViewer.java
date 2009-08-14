@@ -52,10 +52,10 @@ import com.verticon.tracker.ocl.query.viewer.OclQueryViewModel;
  */
 public class OclQueryViewer {
 
-	 static final String EXECUTE_QUERY_TEXT = "Execute";
+	 private static final String EXECUTE_QUERY_TEXT = "Execute";
 	 static final String EXECUTE_SELECTED_QUERY_TOOLTIP = "Execute the Selected Query";
 
-	public OclQueryViewer(Composite parent) {
+	protected OclQueryViewer(Composite parent) {
 
 		this.addChildControls(parent);
 	}
@@ -72,7 +72,7 @@ public class OclQueryViewer {
 	 * @author jconlon
 	 * 
 	 */
-	public enum Column {
+  enum Column {
 		NAME("Name"), TYPE("Type"), QUERY("Query"), ERRORS("Synatax Errors");
 
 		String property;
@@ -161,7 +161,7 @@ public class OclQueryViewer {
 	/**
 	 * Release resources
 	 */
-	public void dispose() {
+	protected void dispose() {
 
 		// Tell the label provider to release its ressources
 		tableViewer.getLabelProvider().dispose();
@@ -325,7 +325,7 @@ public class OclQueryViewer {
 				});
 	}
 
-	public String[] types() {
+	protected String[] types() {
 		EPackage.Registry registry = EPackage.Registry.INSTANCE;	
 		List<EClassifier> classes = new LinkedList<EClassifier>();
 		
@@ -354,15 +354,7 @@ public class OclQueryViewer {
 		return classNames.toArray(out);
 	}
 
-	/*
-	 * Close the window and dispose of resources
-	 */
-	public void close() {
-		Shell shell = table.getShell();
-
-		if (shell != null && !shell.isDisposed())
-			shell.dispose();
-	}
+	
 
 	/**
 	 * InnerClass that acts as a proxy for the model providing content for the

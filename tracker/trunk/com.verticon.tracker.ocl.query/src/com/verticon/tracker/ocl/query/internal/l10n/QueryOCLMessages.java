@@ -35,9 +35,12 @@ public class QueryOCLMessages extends NLS {
 	public static String oclQuery_message_wizard;
 	public static String oclQuery_prompt_metaclass;
 	public static String oclQuery_prompt_condition;
+	@SuppressWarnings("ucd")
 	public static String oclQuery_default_metaclass;
+	@SuppressWarnings("ucd")
 	public static String oclQuery_fair_default_metaclass;
 	public static String oclQuery_default_condition;
+	@SuppressWarnings("ucd")
 	public static String oclQuery_fair_default_condition;
 	public static String oclQuery_message_notFound;
 	public static String oclQuery_message_boolean;

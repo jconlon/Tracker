@@ -28,7 +28,7 @@ import org.eclipse.emf.query.ocl.conditions.BooleanOCLCondition;
 /**
  * Interface for OCL query wizard pages to provide the query condition.
  */
-public interface IOCLQueryWizardPage
+interface IOCLQueryWizardPage
 	extends IWizardPage {
 	
 	/**

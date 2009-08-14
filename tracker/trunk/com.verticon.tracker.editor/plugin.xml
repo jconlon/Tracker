@@ -76,59 +76,7 @@
         contributorClass="com.verticon.tracker.editor.presentation.TrackerActionBarContributor" >
     </editor>
   </extension> 
-  <!--
-  <extension
-        id="Tracker"
-        point="org.eclipse.core.runtime.products">
-     <product
-           application="org.eclipse.ui.ide.workbench"
-           description="%product.description.0"
-           name="Tracker Animal Information Platform">
-        <property
-              name="windowImages"
-              value="icons/verticon32.gif"/>
-        <property
-              name="aboutText"
-              value="Tracker Animal Information Platform&#x0A;Version: {0}&#x0A;Build id: {1}&#x0A;&#x0A;(c) Copyright Verticon, Inc. 2008.  All rights reserved. &#x0A;&#x0A;Visit http:/www.verticon.com&#x0A;&#x0A;Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and used with other Eclipsr (3.4.1) based offerings."/>
-        <property
-              name="aboutImage"
-              value="icons/tracker_lg.gif"/>
-        <property
-              name="startupForegroundColor"
-              value="ADD8E6"/>
-        <property
-              name="startupProgressRect"
-              value="62,400,515,15"/>
-        <property
-              name="startupMessageRect"
-              value="7,225,441,20"/>
-        <property
-              name="appName"
-              value="Tracker Animal Information Platform">
-        </property>
-        <property
-              name="preferenceCustomization"
-              value="plugin_customization.ini">
-        </property>
-        <property
-              name="introTitle"
-              value="Welcome to the Tracker Animal Information Manager">
-        </property>
-        <property
-              name="introBrandingImageText"
-              value="Tracker by Verticon, Inc.">
-        </property>
-        <property
-              name="introDescription-overview"
-              value="Tracker overview description here....">
-        </property>
-        <property
-              name="introBrandingImage"
-              value="product:icons/verticon32.jpg">
-        </property>
-     </product>
-  </extension>
-  -->
+  
   <extension
         point="org.eclipse.ui.decorators">
      <decorator

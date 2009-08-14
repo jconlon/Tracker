@@ -12,7 +12,7 @@ import com.verticon.tracker.ocl.query.viewer.IOclQuery;
  * 
  * @see org.eclipse.jface.viewers.LabelProvider
  */
-public class OclQueryLabelProvider extends LabelProvider implements
+class OclQueryLabelProvider extends LabelProvider implements
 		ITableLabelProvider {
 	/**
 	 * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object,

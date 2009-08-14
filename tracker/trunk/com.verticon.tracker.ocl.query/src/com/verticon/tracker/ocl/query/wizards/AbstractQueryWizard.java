@@ -36,7 +36,7 @@ abstract class AbstractQueryWizard
 	/**
 	 * Initializes me.
 	 */
-	public AbstractQueryWizard(String pkgURIs) {
+	protected AbstractQueryWizard(String pkgURIs) {
 		super();
 		this.pkgURIs=pkgURIs;
 	}

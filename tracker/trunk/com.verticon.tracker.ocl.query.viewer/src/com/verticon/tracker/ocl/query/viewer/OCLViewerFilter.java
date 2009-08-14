@@ -8,7 +8,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 
 class OCLViewerFilter extends ViewerFilter{
-	final IOclQuery query;
+	private final IOclQuery query;
 	OCLViewerFilter(IOclQuery query) {
 		super();
 		this.query=query;
