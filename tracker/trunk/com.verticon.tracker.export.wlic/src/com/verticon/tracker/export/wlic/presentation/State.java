@@ -7,7 +7,7 @@ package com.verticon.tracker.export.wlic.presentation;
  * @author jconlon
  *
  */
-public interface State {
+interface State {
 	boolean isPageComplete();
 	String getMessage();
 	String getErrorMessage();

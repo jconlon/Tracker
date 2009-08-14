@@ -1,6 +1,5 @@
 package com.verticon.tracker.export.wlic;
 
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
@@ -14,11 +13,8 @@ import org.slf4j.MarkerFactory;
 public class ExportWlicPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String ID = "com.verticon.tracker.export.wlic";
+	private static final String ID = "com.verticon.tracker.export.wlic";
 
-	// The shared instance
-	private static ExportWlicPlugin plugin;
-	
 	/**
 	 * slf4j Logger
 	 */
@@ -37,7 +33,6 @@ public class ExportWlicPlugin extends AbstractUIPlugin {
 	 * The constructor
 	 */
 	public ExportWlicPlugin() {
-		plugin = this;
 	}
 
 	/*
@@ -56,28 +51,11 @@ public class ExportWlicPlugin extends AbstractUIPlugin {
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
-		plugin = null;
 		super.stop(context);
 		logger.debug(bundleMarker,"Stopped Bundle");
 	}
 
-	/**
-	 * Returns the shared instance
-	 *
-	 * @return the shared instance
-	 */
-	public static ExportWlicPlugin getDefault() {
-		return plugin;
-	}
+	
 
-	/**
-	 * Returns an image descriptor for the image file at the given
-	 * plug-in relative path
-	 *
-	 * @param path the path
-	 * @return the image descriptor
-	 */
-	public static ImageDescriptor getImageDescriptor(String path) {
-		return imageDescriptorFromPlugin(ID, path);
-	}
+	
 }

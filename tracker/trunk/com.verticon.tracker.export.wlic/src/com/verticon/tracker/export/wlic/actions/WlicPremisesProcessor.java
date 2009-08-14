@@ -232,7 +232,7 @@ public class WlicPremisesProcessor implements PremisesProcessor {
 	 * @param nonProducerPid
 	 * @return filename
 	 */
-	public static final String createWlicFileName(String nonProducerPid){
+	private static final String createWlicFileName(String nonProducerPid){
 		String date = Utils.FILE_NAME_DATE_FORMAT.format(new Date());
 		return nonProducerPid+date+".IND";
 	}
