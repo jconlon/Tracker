@@ -1,6 +1,6 @@
 package com.verticon.tracker.export.wlic.presentation;
 
-public class HasLastReportState implements State {
+class HasLastReportState implements State {
 
 	public String getErrorMessage() {
 		// TODO Auto-generated method stub

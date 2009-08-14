@@ -7,7 +7,7 @@ package com.verticon.tracker.export.wlic.presentation;
  * @author jconlon
  *
  */
-public class ValidReportDefinitionState implements State {
+class ValidReportDefinitionState implements State {
 
 	/* (non-Javadoc)
 	 * @see com.verticon.tracker.export.wlic.presentation.State#getErrorMessage()

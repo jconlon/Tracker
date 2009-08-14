@@ -41,7 +41,7 @@ import com.verticon.tracker.util.FilterCriteria;
  * 
  * Because of the semi complex logic this pages uses the GoF State Pattern.
  */
-public class SelectExportDateRangeWizardPage extends WizardPage {
+class SelectExportDateRangeWizardPage extends WizardPage {
 
 	/**
 	 * Funky date format to make dates look like the funky dateTime control.
@@ -440,9 +440,9 @@ public class SelectExportDateRangeWizardPage extends WizardPage {
 	}
 
 	/**
-	 * @return
+	 * @return event list
 	 */
-     EList<Event> getPremisesEvents() {
+     private EList<Event> getPremisesEvents() {
 		return premises.eventHistory()==null?new BasicEList<Event>(): premises.eventHistory();
 	}
 

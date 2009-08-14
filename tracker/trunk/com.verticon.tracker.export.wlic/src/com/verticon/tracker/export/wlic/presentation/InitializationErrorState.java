@@ -8,11 +8,11 @@ package com.verticon.tracker.export.wlic.presentation;
  * @author jconlon
  *
  */
-public class InitializationErrorState implements State {
+class InitializationErrorState implements State {
 
 	private final Exception initializationError;
 	
-	public InitializationErrorState(Exception initializationError) {
+	protected InitializationErrorState(Exception initializationError) {
 		this.initializationError=initializationError;
 	}
 

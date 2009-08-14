@@ -135,7 +135,7 @@ public class ExportWlicWizard extends Wizard implements IExportWizard {
 	}
 
 	class Exporter extends ExportPremisesBase {
-		public Exporter(PremisesProcessor premisesProcessor) {
+		protected Exporter(PremisesProcessor premisesProcessor) {
 			super(premisesProcessor);
 		}
 
