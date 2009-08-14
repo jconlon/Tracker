@@ -11,7 +11,7 @@ import com.verticon.tracker.ocl.query.viewer.views.OclQueryViewer.Column;
  * 
  */
 
-public class OclQuerySorter extends ViewerSorter {
+class OclQuerySorter extends ViewerSorter {
 
 	// Criteria that the instance uses
 	private Column criteria;
@@ -24,7 +24,7 @@ public class OclQuerySorter extends ViewerSorter {
 	 *            <code>TYPE</code> or <code>TEMPLATE</code> or
 	 *            <code>TARGET</code> columns
 	 */
-	public OclQuerySorter(Column criteria) {
+	protected OclQuerySorter(Column criteria) {
 		super();
 		this.criteria = criteria;
 	}
@@ -62,7 +62,7 @@ public class OclQuerySorter extends ViewerSorter {
 	 *         is greater than the second element
 	 */
 	@SuppressWarnings("unchecked")
-	protected int compareNames(IOclQuery query1, IOclQuery query2) {
+	private int compareNames(IOclQuery query1, IOclQuery query2) {
 		return getComparator().compare(query1.getName(), query2.getName());
 	}
 
@@ -80,7 +80,7 @@ public class OclQuerySorter extends ViewerSorter {
 	 *         is greater than the second element
 	 */
 	@SuppressWarnings("unchecked")
-	protected int compareContexts(IOclQuery query1, IOclQuery query2) {
+	private int compareContexts(IOclQuery query1, IOclQuery query2) {
 		return getComparator().compare(query1.getType(), query2.getType());
 	}
 
@@ -98,7 +98,7 @@ public class OclQuerySorter extends ViewerSorter {
 	 *         is greater than the second element
 	 */
 	@SuppressWarnings("unchecked")
-	protected int compareDescriptions(IOclQuery query1, IOclQuery query2) {
+	private int compareDescriptions(IOclQuery query1, IOclQuery query2) {
 		return getComparator().compare(query1.getErrorSyntax(),
 				query2.getErrorSyntax());
 	}
@@ -117,7 +117,7 @@ public class OclQuerySorter extends ViewerSorter {
 	 *         is greater than the second element
 	 */
 	@SuppressWarnings("unchecked")
-	protected int compareQueries(IOclQuery query1, IOclQuery query2) {
+	private int compareQueries(IOclQuery query1, IOclQuery query2) {
 		return getComparator().compare(query1.getQuery(), query2.getQuery());
 	}
 

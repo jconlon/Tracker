@@ -97,7 +97,7 @@ public class OclQueryViewModel {
 	 * 
 	 * @param query to add
 	 */
-	public void addQuery(IOclQuery query) {
+	private void addQuery(IOclQuery query) {
 		queries.add(queries.size(), query);
 		Iterator<IOclQueryModelListener> iterator = changeListeners.iterator();
 		while (iterator.hasNext()) {
@@ -191,7 +191,7 @@ public class OclQueryViewModel {
 		return query;
 	}
 
-	public void saveQueries() {
+	private void saveQueries() {
 		if (queries == null)
 			return;
 		XMLMemento memento = XMLMemento.createWriteRoot(TAG_OCL_QUERIES);

@@ -14,7 +14,7 @@ import com.verticon.tracker.ocl.query.viewer.IOclQuery;
  * modifies a cell in the QueryViewer
  */
 
-public class OclQueryCellModifier implements ICellModifier {
+class OclQueryCellModifier implements ICellModifier {
 	/**
 	 * slf4j Logger
 	 */
@@ -29,7 +29,7 @@ public class OclQueryCellModifier implements ICellModifier {
 	 * 
 	 * @param queryViewer
 	 */
-	public OclQueryCellModifier(OclQueryViewer queryViewer) {
+	protected OclQueryCellModifier(OclQueryViewer queryViewer) {
 		super();
 		this.queryViewer = queryViewer;
 	}

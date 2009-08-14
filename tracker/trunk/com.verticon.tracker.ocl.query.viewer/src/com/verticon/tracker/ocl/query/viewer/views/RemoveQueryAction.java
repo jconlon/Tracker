@@ -10,11 +10,11 @@ import org.eclipse.jface.action.Action;
  * @author jconlon
  *
  */
-public class RemoveQueryAction extends Action {
+class RemoveQueryAction extends Action {
 
 	private OclQueryViewer view;
 
-	   public RemoveQueryAction(OclQueryViewer view, String text) {
+	   protected RemoveQueryAction(OclQueryViewer view, String text) {
 	      super(text);
 	      this.view = view;
 	   }

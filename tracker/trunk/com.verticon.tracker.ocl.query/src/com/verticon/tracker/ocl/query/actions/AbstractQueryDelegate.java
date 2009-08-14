@@ -17,12 +17,10 @@
 
 package com.verticon.tracker.ocl.query.actions;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
@@ -38,14 +36,12 @@ import org.eclipse.emf.query.statements.IQueryResult;
 import org.eclipse.emf.query.statements.SELECT;
 import org.eclipse.emf.query.statements.WHERE;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorActionDelegate;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionDelegate;
 
 
@@ -61,14 +57,14 @@ public abstract class AbstractQueryDelegate
 	/**
 	 * The active editor
 	 */
-	protected IEditorPart editor = null;
+	private IEditorPart editor = null;
 
 	/**
 	 * Selected {@link EObject}s.
 	 */
 	private Collection<EObject> selectedEObjects = Collections.emptyList();
 
-	protected BooleanOCLCondition<EClassifier, EClass, EObject> condition;
+	private BooleanOCLCondition<EClassifier, EClass, EObject> condition;
 	/**
 	 * Initializes me.
 	 */
@@ -159,32 +155,6 @@ public abstract class AbstractQueryDelegate
 		
 		this.editor = targetEditor;
 	}
-
-	/**
-	 * @return
-	 * @throws InvocationTargetException
-	 * @throws InterruptedException
-	 */
-	protected List<Object> performQueryWithProgress()
-			throws InvocationTargetException, InterruptedException {
-				IWorkbenchWindow window = editor.getEditorSite().getWorkbenchWindow();
-				final List<Object> res = new ArrayList<Object>();
-				window.run(true, true, new IRunnableWithProgress() {
-			
-					public void run(IProgressMonitor monitor)
-							throws InvocationTargetException,
-							InterruptedException {
-						try {
-							IQueryResult result = performQuery(getSelectedObjects(), 
-									monitor);
-							res.addAll(result);
-						} catch (Exception e) {
-							throw new InvocationTargetException(e);
-						}
-						
-					}});
-				return res;
-			}
 
 	/**
 	 * Implements the inherited method using an OCL query condition.

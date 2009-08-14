@@ -194,7 +194,7 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery, Clonea
 	/**
 	 * Implements the inherited method using an OCL query condition.
 	 */
-	protected IQueryResult performQuery(Collection<EObject> context, String value,
+	private IQueryResult performQuery(Collection<EObject> context, String value,
 			IProgressMonitor monitor)
 		throws Exception {
 		if (null == context) {

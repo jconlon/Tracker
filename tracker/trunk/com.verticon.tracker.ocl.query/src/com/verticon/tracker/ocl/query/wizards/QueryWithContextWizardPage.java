@@ -72,7 +72,7 @@ class QueryWithContextWizardPage
 	/**
 	 * Initializes me.
 	 */
-	public QueryWithContextWizardPage(String pkgURIs) {
+	protected QueryWithContextWizardPage(String pkgURIs) {
 		super("main", TITLE, null); //$NON-NLS-1$
 		this.pkgURIs=pkgURIs.split(" ");
 	}
@@ -130,11 +130,11 @@ class QueryWithContextWizardPage
 	/**
 	 * 
 	 */
-	protected void setConditionText() {
+	private void setConditionText() {
 		setConditionText(CONDITION_DEFAULT);
 	}
 
-	protected void setConditionText(String text) {
+	private void setConditionText(String text) {
 		conditionText.setText(text);
 	}
 	
@@ -177,7 +177,7 @@ class QueryWithContextWizardPage
 	/**
 	 * @return EClassifier from Tracker Package
 	 */
-	protected EClassifier getDefaultSelection() {
+	private EClassifier getDefaultSelection() {
 		
 		return getPackageEClassifiers().get(0);
 	}
@@ -185,7 +185,7 @@ class QueryWithContextWizardPage
 	/**
 	 * @return EClassifiers from Packages
 	 */
-	protected List<EClassifier> getPackageEClassifiers() {
+	private List<EClassifier> getPackageEClassifiers() {
 		EPackage.Registry registry = EPackage.Registry.INSTANCE;	
 		List<EClassifier> classes = new LinkedList<EClassifier>();
 		

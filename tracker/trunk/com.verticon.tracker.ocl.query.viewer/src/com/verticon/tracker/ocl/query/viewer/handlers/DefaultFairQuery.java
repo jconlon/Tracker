@@ -8,30 +8,36 @@ import com.verticon.tracker.ocl.query.viewer.IOclQuery;
 import com.verticon.tracker.ocl.query.viewer.OclQuery;
 
 enum DefaultFairQuery {
+	@SuppressWarnings("ucd")
 	EXHIBIT_PEOPLE_WITH_PINS(
 			"Exhibitors with PINs",
 			"self.exhibitor.pin.oclIsUndefined() = false", 
 			"Exhibit"), 
 			
+    @SuppressWarnings("ucd")
     EXHIBIT_PEOPLE_WITHOUT_PINS(
 			"Exhibitors without PINs", "self.exhibitor.pin.oclIsUndefined()",
 			"Exhibit"),
 
+	@SuppressWarnings("ucd")
 	PERSON_WITH_EXHIBITS(
 			"With a registered exhibit",
 			"Exhibit.allInstances()->select(e : Exhibit | e.exhibitor=self)-> size()>0",
 			"Person"),
 
+	@SuppressWarnings("ucd")
 	PERSON_WITHOUT_EXHIBIT(
 			"Without no registered exhibit",
 			"Exhibit.allInstances()->select(e : Exhibit | e.exhibitor=self)-> size()<1",
 			"Person"),
 			
+	@SuppressWarnings("ucd")
 	YOUNG_PERSON(
 			"Young Person",
 			"true",
 			"YoungPerson"),
 	
+	@SuppressWarnings("ucd")
 	OLD_PERSON(
 			"Old Person",
 			"oclIsKindOf(YoungPerson) = false",
@@ -41,7 +47,7 @@ enum DefaultFairQuery {
 
 	private final OclQuery query;
 
-	DefaultFairQuery(String uiName, String query, String type) {
+	private DefaultFairQuery(String uiName, String query, String type) {
 		OclQuery sampleQuery = new OclQuery();
 		sampleQuery.setName(uiName);
 		sampleQuery.setType(type);
@@ -49,7 +55,7 @@ enum DefaultFairQuery {
 		this.query = sampleQuery;
 	}
 
-	IOclQuery getQuery() {
+	private IOclQuery getQuery() {
 		return query;
 	}
 

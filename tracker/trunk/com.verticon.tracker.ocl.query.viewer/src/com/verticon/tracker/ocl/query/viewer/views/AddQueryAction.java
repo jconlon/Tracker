@@ -11,11 +11,11 @@ import org.eclipse.jface.action.Action;
  * @author jconlon
  *
  */
-public class AddQueryAction extends Action {
+class AddQueryAction extends Action {
 
 	private OclQueryViewer viewer;
 
-	   public AddQueryAction(OclQueryViewer viewer, String text) {
+	   protected AddQueryAction(OclQueryViewer viewer, String text) {
 	      super(text);
 	      this.viewer = viewer;
 	   }

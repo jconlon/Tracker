@@ -12,11 +12,11 @@ import com.verticon.tracker.ocl.query.viewer.IOclQuery;
  * @author jconlon
  *
  */
-public class ExecuteQueryAction extends Action {
+class ExecuteQueryAction extends Action {
 
 	private OclQueryViewer viewer;
 
-	public ExecuteQueryAction(OclQueryViewer viewer, String text) {
+	protected ExecuteQueryAction(OclQueryViewer viewer, String text) {
 		super(text);
 		this.viewer = viewer;
 	}
