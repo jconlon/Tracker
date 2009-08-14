@@ -32,12 +32,9 @@ import com.verticon.tracker.fair.FairFactory;
  * 
  * @see AddExhibitWizardPageParent#getCommand(EObject)
  * @author jconlon
- * @deprecated the name attribute is now derived.
  */
-@Deprecated
 public class AddExhibitWizardPage extends WizardPage implements
 		AddExhibitWizardPageParent {
-//	final IObservableValue newTargetName = new WritableValue(null, String.class);
 	final IObservableValue createAnExhibit = new WritableValue(null, Boolean.class);
 	final Fair fair;
 	final AddExhibitWizardPageParent parentPage;
