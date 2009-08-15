@@ -162,7 +162,7 @@ public class DivisionProcreatorTest extends TestCase {
 		assertEquals(1252, sheet.getLastRowNum());
 
 		
-		//There are 112 rows of data and one blank rows at the end.
+		//There are 113 rows of data but only 10 filled with data.
 		//This file is used in the next test.
 		file = new File(this.testsDirectory,  
 				"beefWeighIn4111208.xls");
