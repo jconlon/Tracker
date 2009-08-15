@@ -63,7 +63,7 @@ public class ImportFairExhibitDataWizard extends Wizard  {
 	 * will be shown offered as features for mapping to spreadsheet
 	 * columns.
 	 */
-	public static final List<EStructuralFeature> featuresList ;
+	private static final List<EStructuralFeature> featuresList ;
 	
 	/**
 	 * Active workbench
@@ -179,6 +179,7 @@ public class ImportFairExhibitDataWizard extends Wizard  {
 			
 			
 		} catch (InvocationTargetException e) {
+			logger.error(bundleMarker,"Fair Data Import Error. "+e.getMessage(),e);
 			exhibitPage.setErrorMessage("Fair Data Import Error. "+e.getMessage());
 		} catch (InterruptedException e) {
 			// Restore the interrupted status
@@ -343,6 +344,7 @@ public class ImportFairExhibitDataWizard extends Wizard  {
 			} catch (RuntimeException e) {
 				logger.error(bundleMarker,"Failed to process row "+i,e);
 			} catch (MissingCriticalDataException e) {
+				//TODO 
 				logger.error(bundleMarker,"Failed to process row "+i,e);
 				return count;
 			}

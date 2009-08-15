@@ -4,6 +4,7 @@ import static com.verticon.tracker.fair.poi.FairPoiPlugin.bundleMarker;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.eclipse.emf.ecore.EClass;
@@ -41,7 +42,7 @@ import com.verticon.tracker.fair.poi.importxls.ColumnMapper;
  * @author jconlon
  * 
  */
-public class ImportFairDataColumnMappingWizardPage extends WizardPage {
+class ImportFairDataColumnMappingWizardPage extends WizardPage {
 
 	
 	/**
@@ -199,7 +200,7 @@ public class ImportFairDataColumnMappingWizardPage extends WizardPage {
 		super.setVisible(visible);
 	}
 
-	protected TableViewer createViewer(Composite parent) {
+	private TableViewer createViewer(Composite parent) {
 		Table table = new Table(
 				parent, SWT.SINGLE | SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.HIDE_SELECTION);
 		table.setHeaderVisible(true);
@@ -424,10 +425,12 @@ public class ImportFairDataColumnMappingWizardPage extends WizardPage {
 	private boolean foundColumnNames( HSSFRow row) {
 		for (short i = row.getFirstCellNum(); i < row.getLastCellNum(); i++) {
 			logger.debug(bundleMarker,"Processing cell {}",i);
-			
-			String s = row.getCell(i).getStringCellValue();
-			if(s.trim().length()!=0){
-				spreadSheetColumnsToFeatureMap.add(new ColumnMapper(i, s));
+			HSSFCell cell = row.getCell(i);
+			if(cell != null){
+				String s = cell.getStringCellValue();
+				if(s.trim().length()!=0){
+					spreadSheetColumnsToFeatureMap.add(new ColumnMapper(i, s));
+				}
 			}
 		}
 		return spreadSheetColumnsToFeatureMap.size()>1;

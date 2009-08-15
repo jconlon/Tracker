@@ -4,7 +4,6 @@
 package com.verticon.tracker.fair.poi.presentation;
 
 
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
@@ -26,7 +25,7 @@ import com.verticon.tracker.fair.poi.presentation.ExportXlsWizard.ExportType;
  * @author jconlon
  * 
  */
-public class SelectExportTypeWizardPage extends WizardPage {
+class SelectExportTypeWizardPage extends WizardPage {
 	
 	
 	private ExportXlsWizard wizard;
@@ -41,16 +40,7 @@ public class SelectExportTypeWizardPage extends WizardPage {
 
 	}
 
-	/**
-	 * @param pageName
-	 * @param title
-	 * @param titleImage
-	 */
-	public SelectExportTypeWizardPage(String pageName, String title,
-			ImageDescriptor titleImage) {
-		super(pageName, title, titleImage);
-
-	}
+	
 
 	/**
 	 * Creates the top level control for this dialog page under the given parent

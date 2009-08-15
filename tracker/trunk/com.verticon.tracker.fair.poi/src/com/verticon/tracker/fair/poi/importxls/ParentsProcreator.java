@@ -29,7 +29,7 @@ import com.verticon.tracker.fair.YoungPerson;
  * @author jconlon
  * 
  */
-public class ParentsProcreator implements Procreator {
+class ParentsProcreator implements Procreator {
 
 	/**
 	 * slf4j Logger

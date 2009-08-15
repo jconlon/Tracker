@@ -22,7 +22,7 @@ public class MissingCriticalDataException extends Exception {
 	
 	private final short columnNumber;
 
-	public MissingCriticalDataException(String message, short columnNumber,
+	protected MissingCriticalDataException(String message, short columnNumber,
 			EStructuralFeature feature, int rowID) {
 		super(message);
 		this.columnNumber = columnNumber;

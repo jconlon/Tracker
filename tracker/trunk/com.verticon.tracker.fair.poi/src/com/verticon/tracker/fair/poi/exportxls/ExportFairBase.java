@@ -3,7 +3,6 @@ package com.verticon.tracker.fair.poi.exportxls;
 import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_VALIDATE_BEFORE_EXPORT;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,13 +15,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbenchWindow;
 
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.fair.Fair;
@@ -36,23 +30,18 @@ import com.verticon.tracker.fair.editor.util.FairProcessor;
  */
 public class ExportFairBase {
 
-	protected List<Diagnostic> validationDiagnostics = new ArrayList<Diagnostic>();
+	private List<Diagnostic> validationDiagnostics = new ArrayList<Diagnostic>();
 	protected IEditorPart targetEditor;
-	protected final FairProcessor premisesProcessor;
+	private final FairProcessor premisesProcessor;
 
 	public ExportFairBase(FairProcessor premisesProcessor) {
 		this.premisesProcessor = premisesProcessor;
 
 	}
 
-	public void selectionChanged(IAction action, ISelection selection) {
+	
 
-	}
-
-	public void setActiveEditor(IAction action, IEditorPart targetEditor) {
-		this.targetEditor = targetEditor;
-
-	}
+	
 	
 	/**
 	 * @param monitor
@@ -79,6 +68,7 @@ public class ExportFairBase {
 		monitor.done();
 	}
 
+/* TODO UCdetector: Remove unused code: 
 	public void run(IAction action) {
 
 		InvocationTargetException ite = null;
@@ -129,8 +119,9 @@ public class ExportFairBase {
 		}
 
 	}
+*/
 
-	public static boolean validate(Fair fair,
+	private static boolean validate(Fair fair,
 			List<Diagnostic> validationDiagnostics) {
 		validationDiagnostics.clear();
 		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(fair);
@@ -140,7 +131,7 @@ public class ExportFairBase {
 		return validationDiagnostics.isEmpty();
 	}
 	
-	public static Fair getFair(IFile file) throws IOException {
+	private static Fair getFair(IFile file) throws IOException {
 		ResourceSet resourceSet = new ResourceSetImpl();
 
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(),

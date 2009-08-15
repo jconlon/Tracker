@@ -41,7 +41,7 @@ public class MovedOutWorkSheetBuilder extends AbstractWorkSheetBuilder implement
 		}
 	}
 	
-	List<MovedOut> movedOutEvents = new ArrayList<MovedOut>();
+	private List<MovedOut> movedOutEvents = new ArrayList<MovedOut>();
 	
 	public void createColumnHeader(HSSFSheet sheet){
 		HSSFRow row = createRow(sheet);
@@ -58,7 +58,7 @@ public class MovedOutWorkSheetBuilder extends AbstractWorkSheetBuilder implement
 	 * @param event
 	 * @param cell
 	 */
-    void fillRow(MovedOut movedOut, HSSFRow row){
+    private void fillRow(MovedOut movedOut, HSSFRow row){
     	HSSFCell cell = null;
     	//EarTag
 		row.createCell(Column.EAR_TAG.colNum()).setCellValue(movedOut.getTag().getId());

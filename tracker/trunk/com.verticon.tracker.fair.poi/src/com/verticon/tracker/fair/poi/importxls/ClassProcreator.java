@@ -29,7 +29,7 @@ import com.verticon.tracker.fair.FairPackage;
  * @author jconlon
  * 
  */
-public class ClassProcreator implements Procreator {
+class ClassProcreator implements Procreator {
 
 	/**
 	 * slf4j Logger
@@ -48,7 +48,7 @@ public class ClassProcreator implements Procreator {
 
 	private final Procreator child;
 
-	public ClassProcreator(Procreator child) {
+	protected ClassProcreator(Procreator child) {
 		super();
 		this.child = child;
 	}

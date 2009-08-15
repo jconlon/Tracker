@@ -26,7 +26,7 @@ import com.verticon.tracker.fair.FairPackage;
  * @author jconlon
  * 
  */
-public class DivisionProcreator implements ExecutableProcreator {
+class DivisionProcreator implements ExecutableProcreator {
 
 	/**
 	 * slf4j Logger
@@ -45,7 +45,7 @@ public class DivisionProcreator implements ExecutableProcreator {
 	
 	private Exception exception = null;
 
-	public DivisionProcreator(Procreator child) {
+	protected DivisionProcreator(Procreator child) {
 		super();
 		this.child = child;
 	}

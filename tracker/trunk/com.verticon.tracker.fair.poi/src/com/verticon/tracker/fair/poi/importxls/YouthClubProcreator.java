@@ -29,7 +29,7 @@ import com.verticon.tracker.fair.YouthClub;
  * @author jconlon
  * 
  */
-public class YouthClubProcreator implements Procreator {
+class YouthClubProcreator implements Procreator {
 
 	/**
 	 * slf4j Logger
