@@ -29,7 +29,7 @@ import com.verticon.tracker.fair.FairPackage;
  * @author jconlon
  * 
  */
-public class DepartmentProcreator implements Procreator {
+class DepartmentProcreator implements Procreator {
 
 	/**
 	 * slf4j Logger
@@ -50,7 +50,7 @@ public class DepartmentProcreator implements Procreator {
 
 	private final Procreator child;
 
-	public DepartmentProcreator(Procreator child) {
+	protected DepartmentProcreator(Procreator child) {
 		super();
 		this.child = child;
 	}
@@ -101,8 +101,7 @@ public class DepartmentProcreator implements Procreator {
 				true, editingDomain,  compoundCommand);
 	}
 
-	public void execute(EditingDomain editingDomain) {
-	}
+	
 
 	public String getStatus() {
 		return totalChildrenAdded + " departments, " + child.getStatus();

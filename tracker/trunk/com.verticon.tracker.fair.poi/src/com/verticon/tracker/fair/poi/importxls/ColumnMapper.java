@@ -44,26 +44,31 @@ public class ColumnMapper extends AbstractModelObject {
 	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(
 			this);
 
+	@SuppressWarnings("ucd")
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		propertyChangeSupport.addPropertyChangeListener(listener);
 	}
 
+	@SuppressWarnings("ucd")
 	public void addPropertyChangeListener(String propertyName,
 			PropertyChangeListener listener) {
 		propertyChangeSupport.addPropertyChangeListener(propertyName,
 				listener);
 	}
 
+	@SuppressWarnings("ucd")
 	public void removePropertyChangeListener(PropertyChangeListener listener) {
 		propertyChangeSupport.removePropertyChangeListener(listener);
 	}
 
+	@SuppressWarnings("ucd")
 	public void removePropertyChangeListener(String propertyName,
 			PropertyChangeListener listener) {
 		propertyChangeSupport.removePropertyChangeListener(propertyName,
 				listener);
 	}
 
+	@SuppressWarnings("ucd")
 	protected void firePropertyChange(String propertyName, Object oldValue,
 			Object newValue) {
 		propertyChangeSupport.firePropertyChange(propertyName, oldValue,

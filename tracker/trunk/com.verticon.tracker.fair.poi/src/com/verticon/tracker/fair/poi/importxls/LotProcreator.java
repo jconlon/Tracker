@@ -28,7 +28,7 @@ import com.verticon.tracker.fair.Lot;
  * @author jconlon
  *
  */
-public class LotProcreator implements Procreator {
+class LotProcreator implements Procreator {
 	
 	/**
 	 * slf4j Logger
@@ -48,7 +48,7 @@ public class LotProcreator implements Procreator {
 	
 	private final Procreator child;
 
-	public LotProcreator(Procreator child) {
+	protected LotProcreator(Procreator child) {
 		super();
 		this.child = child;
 	}

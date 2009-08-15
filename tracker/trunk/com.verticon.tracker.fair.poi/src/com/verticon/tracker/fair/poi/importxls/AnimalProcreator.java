@@ -21,13 +21,13 @@ import com.verticon.tracker.fair.FairPackage;
  * @author jconlon
  *
  */
-public class AnimalProcreator implements Procreator {
+class AnimalProcreator implements Procreator {
 
-	int countOfSets = 0;
+	private int countOfSets = 0;
 
 	private final Procreator child;
 
-	public AnimalProcreator(Procreator child) {
+	protected AnimalProcreator(Procreator child) {
 		super();
 		this.child = child;
 	}

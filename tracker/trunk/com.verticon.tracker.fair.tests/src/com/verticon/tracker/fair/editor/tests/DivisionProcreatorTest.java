@@ -146,6 +146,49 @@ public class DivisionProcreatorTest extends TestCase {
 		
 	}
 
+	public void testRowCount() {
+
+		File file = new File(this.testsDirectory,  
+		"importExhibits-Parents.xls");
+		HSSFSheet sheet = null;
+		try {
+			sheet = getWorkSheet(file);
+
+		} catch (Exception e) {
+			fail(e.toString());
+		}
+
+		assertNotNull(sheet);
+		assertEquals(1252, sheet.getLastRowNum());
+
+		
+		//There are 112 rows of data and one blank rows at the end.
+		//This file is used in the next test.
+		file = new File(this.testsDirectory,  
+				"beefWeighIn4111208.xls");
+		sheet = null;
+		try {
+			sheet = getWorkSheet(file);
+
+		} catch (Exception e) {
+			fail(e.toString());
+		}
+
+		assertNotNull(sheet);
+		assertEquals(113, sheet.getLastRowNum());
+	}
+	
+	public void testWithBlankLastRowInSpreadsheet() {
+		populateColumnMap(3, "First Name", FairPackage.Literals.PERSON__FIRST_NAME);
+		populateColumnMap(4, "Last Name", FairPackage.Literals.PERSON__LAST_NAME);
+		try {
+			importSpreadSheet("beefWeighIn4111208.xls");
+			fail("There is a blank row in the spreadsheet, should have thrown a MissingCriticalDataException");
+		} catch (MissingCriticalDataException e) {
+			//expected
+		}
+	}
+	
 	public void testImport_Exhibits_Parents() {
 		populateDefaultMap();
 		try {

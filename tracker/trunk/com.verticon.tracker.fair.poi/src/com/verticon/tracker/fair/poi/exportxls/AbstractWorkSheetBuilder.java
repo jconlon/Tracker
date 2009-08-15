@@ -8,7 +8,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 
 import com.verticon.tracker.fair.Fair;
 
-public abstract class AbstractWorkSheetBuilder {
+abstract class AbstractWorkSheetBuilder {
 
 	private int rowCount = 0;
 	protected Map<String, HSSFCellStyle> styleMap;
@@ -17,6 +17,7 @@ public abstract class AbstractWorkSheetBuilder {
 		super();
 	}
 
+	@SuppressWarnings("ucd")
 	public void createWorkSheet(Fair fair, HSSFSheet sheet, Map<String, HSSFCellStyle> styleMap) {
 		loadList( fair);
 		this.styleMap=styleMap;

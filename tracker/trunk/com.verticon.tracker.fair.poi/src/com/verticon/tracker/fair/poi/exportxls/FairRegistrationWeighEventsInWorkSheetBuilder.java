@@ -138,7 +138,7 @@ public class FairRegistrationWeighEventsInWorkSheetBuilder implements WorkSheetB
 	 * @param event
 	 * @param cell
 	 */
-    static void fillRow(Exhibit exhibit, HSSFRow row, WeighIn weighIn, Map<String, HSSFCellStyle> styleMap){
+    private static void fillRow(Exhibit exhibit, HSSFRow row, WeighIn weighIn, Map<String, HSSFCellStyle> styleMap){
     	HSSFCell cell = null;
     	// First Name
 		cell = row.createCell(Column.FIRST_NAME.colNum());

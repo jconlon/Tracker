@@ -67,7 +67,7 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 	 * Specifies the type of report to export.
 	 *
 	 */
-	public enum ExportType {
+	enum ExportType {
 		FAIR_WEIGHIN_EVENTS(
 				"Fair Weigh In Events", "Raw WeighIn events, by Fair exhibitor."), 
 		FAIR_SUMMARY(
@@ -87,7 +87,7 @@ public class ExportXlsWizard extends Wizard implements IExportWizard,
 		 * @param destination of the output
 		 * @return FairProcessor
 		 */
-		public FairProcessor getProcessor(IPath destination) {
+		protected FairProcessor getProcessor(IPath destination) {
 			XLSPremisesProcessor result = null;
 
 			switch (this) {

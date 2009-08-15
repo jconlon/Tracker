@@ -9,7 +9,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 
 import com.verticon.tracker.fair.Fair;
 
-public interface Procreator  {
+interface Procreator  {
 	
 	void process(Fair fair, HSSFRow row, 
 			List<ColumnMapper> listColumnMapper, EObject parent, boolean newParent, 

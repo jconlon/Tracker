@@ -11,9 +11,9 @@ import java.util.Map;
  * @author jconlon
  *
  */
-public class NormalizeName {
+class NormalizeName {
 	
-	 public static final Map<String, String> enCapExceptions = new HashMap<String,String>();
+	 private static final Map<String, String> enCapExceptions = new HashMap<String,String>();
 	    static {
 	        enCapExceptions.put("macintosh", "Macintosh");
 	        enCapExceptions.put("von", "von");
@@ -24,23 +24,9 @@ public class NormalizeName {
 	        enCapExceptions.put("di", "di");
 	}
 	    
-	public static String parseName(String txt){
-		String[] name = txt.toLowerCase().split(",");
-		String lastName = "";
-		StringBuffer fullName = new StringBuffer();
-		for (int i = 0; i < name.length; i++) {
-			if(i==0){
-				lastName = name[i];
-			}else{
-				fullName.append(name[i]);
-				fullName.append(' ');
-			}
-		}
-		fullName.append(lastName);
-		return fullName.toString().trim();
-	}
 	
-	public static String parseFirstName(String txt){
+	
+	protected static String parseFirstName(String txt){
 		String[] name = txt.toLowerCase().split(",");
 		StringBuffer firstName = new StringBuffer();
 		for (int i = 0; i < name.length; i++) {
@@ -55,12 +41,12 @@ public class NormalizeName {
 		return capitalizeAndTrimEnglishNames(firstName.toString());
 	}
 	
-	public static String parseLastName(String txt){
+	protected static String parseLastName(String txt){
 		String[] name = txt.toLowerCase().split(",");
 		return capitalizeAndTrimEnglishNames(name[0]);
 	}
 	
-	public static String capitalizeAndTrimEnglishNames(String txt) {
+	protected static String capitalizeAndTrimEnglishNames(String txt) {
         if (txt == null)
             return "";
         String lcName = txt.toLowerCase(Locale.UK).trim();

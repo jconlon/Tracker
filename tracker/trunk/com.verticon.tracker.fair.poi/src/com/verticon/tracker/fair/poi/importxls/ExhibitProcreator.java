@@ -32,7 +32,7 @@ import com.verticon.tracker.fair.Lot;
  * @author jconlon
  * 
  */
-public class ExhibitProcreator implements ExecutableProcreator {
+class ExhibitProcreator implements ExecutableProcreator {
 
 	/**
 	 * slf4j Logger
@@ -56,7 +56,7 @@ public class ExhibitProcreator implements ExecutableProcreator {
 
 	private final Procreator child;
 
-	public ExhibitProcreator(Procreator child) {
+	protected ExhibitProcreator(Procreator child) {
 		super();
 		this.child = child;
 	}

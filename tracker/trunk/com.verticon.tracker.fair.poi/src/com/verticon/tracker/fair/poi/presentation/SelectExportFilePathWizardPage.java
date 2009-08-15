@@ -24,7 +24,7 @@ import com.verticon.tracker.fair.poi.presentation.ExportXlsWizard.ExportType;
  * The second page of the ExportXlsWizard displays Destination File text fields, 
  * with a browse button to the right.
  */
-public class SelectExportFilePathWizardPage extends WizardPage
+class SelectExportFilePathWizardPage extends WizardPage
 {
   
    private Text destinationFileField;
@@ -130,7 +130,7 @@ public class SelectExportFilePathWizardPage extends WizardPage
     * @param file
     * @param typeToExport
     */
-   public void init(IFile file, ExportType typeToExport) {
+   protected void init(IFile file, ExportType typeToExport) {
       
       this.typeToExport=typeToExport;
      

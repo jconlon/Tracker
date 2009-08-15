@@ -63,7 +63,7 @@ public class ExecutableProcreators {
 		private final Procreator[] children;
 		
 		
-		public Splitter(Procreator[] children) {
+		protected Splitter(Procreator[] children) {
 			super();
 			this.children = children;
 		}
@@ -97,11 +97,11 @@ public class ExecutableProcreators {
 		
 	}
 	
-	public static String getCriticalValue(HSSFRow row, EStructuralFeature feature, List<ColumnMapper> listColumnMapper) throws MissingCriticalDataException{
+	protected static String getCriticalValue(HSSFRow row, EStructuralFeature feature, List<ColumnMapper> listColumnMapper) throws MissingCriticalDataException{
 		String result = getValue(row, feature, listColumnMapper);
 		if(result == null || result.trim().length()<1){
 			short index = findColumnNumber(feature, listColumnMapper);
-			throw new MissingCriticalDataException("Data value is empty",
+			throw new MissingCriticalDataException("The data value in a critical spreadsheet cell is empty. Please remove all blank rows and fill in values for all critical cells.",
 					index,feature, row.getRowNum());
 		}
 		return result;

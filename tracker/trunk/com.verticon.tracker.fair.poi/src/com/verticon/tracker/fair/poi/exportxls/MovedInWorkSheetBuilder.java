@@ -41,7 +41,7 @@ public class MovedInWorkSheetBuilder extends AbstractWorkSheetBuilder implements
 		}
 	}
 	
-	List<MovedIn> movedInEvents = new ArrayList<MovedIn>();
+	private List<MovedIn> movedInEvents = new ArrayList<MovedIn>();
 	
 	
 	public void createColumnHeader(HSSFSheet sheet){
@@ -60,7 +60,7 @@ public class MovedInWorkSheetBuilder extends AbstractWorkSheetBuilder implements
 	 * @param event
 	 * @param cell
 	 */
-    void fillRow(MovedIn movedIn, HSSFRow row){
+    private void fillRow(MovedIn movedIn, HSSFRow row){
     	HSSFCell cell = null;
     	//EarTag
 		row.createCell(Column.EAR_TAG.colNum()).setCellValue(movedIn.getTag().getId());
