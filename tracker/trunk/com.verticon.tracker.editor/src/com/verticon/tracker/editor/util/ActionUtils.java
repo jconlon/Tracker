@@ -350,14 +350,11 @@ public class ActionUtils {
 		return resource;
 	}
 
-	
-
-	
-
-	
-
 
 	public static final IResource extractResource(IEditorPart editor) {
+		if(editor==null){
+			return null;
+		}
 		IEditorInput input = editor.getEditorInput();
 		if (!(input instanceof IFileEditorInput))
 			return null;

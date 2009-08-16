@@ -3,6 +3,7 @@ package com.verticon.tracker.reader.handlers;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -48,6 +49,9 @@ public class AddTagIDReaderHandler extends AbstractHandler{
 			dialog.open();
 		} catch (PartInitException e) {
 			logger.error("Failed to open the Readers view", e);
+			ErrorDialog.openError(window.getShell(), "Add Reader Problems", //$NON-NLS-1$
+					null, // no special message
+					((PartInitException) e).getStatus());
 		}
 		
 		return null;
