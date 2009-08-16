@@ -9,6 +9,7 @@ import org.eclipse.jface.wizard.IWizardNode;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PartInitException;
 
 import com.verticon.tracker.editor.presentation.SelectAnimalDocumentWizardPage;
 import com.verticon.tracker.editor.util.AnimalTemplateBean;
@@ -31,7 +32,7 @@ import com.verticon.tracker.reader.views.ReaderViewModel;
 public class AddEventReaderWizard extends Wizard {
 
 	private static final String WIZARD_TITLE = "Add an Event Reader";
-	public static final String WIZARD_DIALOG_TAG = "AddReaderWizard";
+	private static final String WIZARD_DIALOG_TAG = "AddReaderWizard";
 
 	private final ReaderViewModel readerViewModel;
 	private IWorkbench workbench;
@@ -65,7 +66,12 @@ public class AddEventReaderWizard extends Wizard {
 		return false;
 	}
 
-	public void init(IWorkbench workbench) {
+	public void init(IWorkbench workbench) throws PartInitException {
+		
+		if(workbench.getActiveWorkbenchWindow()
+		.getActivePage().getActiveEditor() == null){
+		   throw new PartInitException("Can't find an Editor in the workbench. Please open a Premises document.");
+		}
 		this.workbench = workbench;
 	}
 
