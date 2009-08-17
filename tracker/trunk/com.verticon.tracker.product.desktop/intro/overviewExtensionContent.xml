@@ -8,11 +8,11 @@
   	path="overview/@">
   		  <group 	style-id="content-group" 
   		  			id="comverticontrackerproductdesktop-introLink-group">
-  		  		<link 	label="Tracker Livestock Information Desktop" 
+  		  		<link 	label="Tracker Livestock Business Intelligence Toolkit" 
   		     		  	url="http://org.eclipse.ui.intro/showPage?id=trackerOverview" 
     					id="comverticontrackerproductdesktop-overview" 
     					style-id="content-link">
-          			<text>Find out about the Tracker Livestock Information Desktop Preview</text>
+          			<text>Find out about the Tracker Livestock Business Intelligence Toolkit</text>
           		</link>
           		
           </group>
@@ -24,7 +24,7 @@
           <include path="overview/navigation-links"/>
           <group id="trackerOverview-page-content">
                 <group 	id="content-header" 
-                		label="Tracker Desktop (milestone3) Preview" 
+                		label="Tracker Business Intelligence Toolkit" 
                 		filteredFrom="swt">
                 </group>
                 <text 	style-id="page-title" id="page-title" 
@@ -39,8 +39,8 @@
 &lt;br/&gt;
 When previewing the Tracker Desktop please keep the following in mind:
 &lt;ul&gt;
-&lt;li&gt;This is a milestone3 release of the Tracker Desktop.&lt;/li&gt;
-&lt;li&gt;The Tracker Desktop milestone3 releases are consider pre-beta milestone releases. (Beta testing will begin with the milestone4 releases.)&lt;/li&gt;
+&lt;li&gt;This is a milestone3 release of the Tracker BI Toolkit.&lt;/li&gt;
+&lt;li&gt;The Tracker BI Toolkit milestone3 releases are consider pre-beta milestone releases. (Beta testing will begin with the milestone4 releases.)&lt;/li&gt;
 &lt;li&gt;The milestone3 releases of Tracker Desktop are intended for demonstration to prospective beta testing candidates and project sponsors only.&lt;/li&gt;
 &lt;/ul&gt;
 </text>
@@ -50,17 +50,17 @@ When previewing the Tracker Desktop please keep the following in mind:
   		  			id="comverticontrackertechpreview-group2"> 		
 <text id="mynotes2">
 &lt;br/&gt;
-The Tracker Desktop is Provisioning Enabled Eclipse Rich Client Platform Product:
+The Tracker BI Toolkit is a provisioning enabled Eclipse Rich Client Platform Product:
 &lt;ul&gt;
-&lt;li&gt;The Tracker Desktop supports the new Eclipse P2 Provisioning service.&lt;/li&gt;
-&lt;li&gt;When it is first installed, the Tracker Desktop contains no Tracker features.&lt;/li&gt;
-&lt;li&gt;All Tracker features will have to be provisioned by the user from network based component repositories.&lt;/li&gt;
+&lt;li&gt;The Tracker BI Toolkit utilizes inter-network based component repositories to install and update software.&lt;/li&gt;
+&lt;li&gt;When the Tracker archive is initially downloaded and installed, the Tracker Desktop Toolkit contains no Tracker tool features.&lt;/li&gt;
+&lt;li&gt;To utilize Tracker BI tool solutions, these tool features will have to be provisioned by the user from network based component repositories.&lt;/li&gt;
 &lt;/ul&gt;
 </text>
-<link style-id="content-link" label="Provision Tracker Desktop" 
+<link style-id="content-link" label="Provision Tracker Desktop Toolkit" 
 			url="http://org.eclipse.ui.intro/runAction?pluginId=org.eclipse.platform&amp;class=org.eclipse.platform.internal.LaunchUpdateIntroAction" 
 				id="updatelink">
-          		<text>Provision Tracker Desktop with features or update it from the Verticon.com and Eclipse.org repositories</text>
+          		<text>Provision Tracker Desktop Toolkit with tool features or update it from the Verticon.com and Eclipse.org repositories</text>
 </link>
           </group>
           <anchor id="additions"/>
