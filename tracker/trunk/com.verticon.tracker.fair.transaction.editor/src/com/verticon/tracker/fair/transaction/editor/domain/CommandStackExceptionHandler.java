@@ -34,7 +34,7 @@ import com.verticon.tracker.fair.transaction.editor.presentation.FairTransaction
  *
  * @author Christian W. Damus (cdamus)
  */
-public class CommandStackExceptionHandler implements ExceptionHandler {
+class CommandStackExceptionHandler implements ExceptionHandler {
 
 	// Documentation copied from the inherited specification
 	public void handleException(final Exception e) {

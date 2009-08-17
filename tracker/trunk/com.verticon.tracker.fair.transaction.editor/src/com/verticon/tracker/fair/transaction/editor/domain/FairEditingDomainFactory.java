@@ -27,6 +27,7 @@ import org.eclipse.emf.workspace.WorkspaceEditingDomainFactory;
  *
  * @author Christian W. Damus (cdamus)
  */
+@SuppressWarnings("ucd")
 public class FairEditingDomainFactory implements TransactionalEditingDomain.Factory {
 
 	public TransactionalEditingDomain createEditingDomain() {
