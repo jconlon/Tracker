@@ -24,7 +24,7 @@ public class FairSelectionViewerFilter extends SelectionViewerFilter {
 	private final ArrayList<Person> targetedPeople = new ArrayList<Person>();
 	private final ArrayList<Exhibit> targetedExhibits = new ArrayList<Exhibit>();
 
-	protected Viewer exhibitviewer;
+	
 
 	/**
 	 * The superclass will clear and then recreateTargets. Let the superclass

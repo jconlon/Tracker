@@ -54,9 +54,9 @@ public class UpdatePinsWizard extends Wizard {
 	private UpdatePinsWizardPage updatePinsPage = null;
 
 	private static final String UPDATE_PINS = "UpdatePins";
-	public static final String UPDATE_PINS_WIZARD = "UpdatesPinsWizard";
+	private static final String UPDATE_PINS_WIZARD = "UpdatesPinsWizard";
 
-	IWorkbenchWindow workbenchWindow;
+	private IWorkbenchWindow workbenchWindow;
 
 	public UpdatePinsWizard() {
 		IDialogSettings trackerSettings = FairEditorPlugin
@@ -166,7 +166,7 @@ public class UpdatePinsWizard extends Wizard {
 	 * @param updateMovedIn
 	 * @return command
 	 */
-	public static Command createUpdatePinCommand(EditingDomain editingDomain,
+	protected static Command createUpdatePinCommand(EditingDomain editingDomain,
 			List<Exhibit> selectedPersonExhibits, boolean updateMovedOut,
 			boolean updateMovedIn,CompoundCommand compoundCommand) {
 		Command command;
@@ -229,7 +229,7 @@ public class UpdatePinsWizard extends Wizard {
 	 * 
 	 * @return fair associated with Event
 	 */
-	Fair findFair() {
+	private Fair findFair() {
 		Person firstPerson = selectedPeopleWithPins.iterator().next();
 		return (Fair) firstPerson.eContainer();
 	}

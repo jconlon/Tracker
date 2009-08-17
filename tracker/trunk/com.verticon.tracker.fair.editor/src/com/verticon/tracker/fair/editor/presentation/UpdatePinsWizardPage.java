@@ -15,7 +15,7 @@ import org.eclipse.swt.widgets.Label;
  * @author jconlon
  * 
  */
-public class UpdatePinsWizardPage extends WizardPage {
+class UpdatePinsWizardPage extends WizardPage {
 	
 	private Button movedInButton;
 	private Button movedOutButton;
@@ -44,11 +44,11 @@ public class UpdatePinsWizardPage extends WizardPage {
 	}
 	
 
-	public boolean updateMovedIn(){
+	protected boolean updateMovedIn(){
 		return movedInButton.getSelection();
 	}
 	
-	public boolean updateMovedOut(){
+	protected boolean updateMovedOut(){
 		return movedOutButton.getSelection();
 	}
 	

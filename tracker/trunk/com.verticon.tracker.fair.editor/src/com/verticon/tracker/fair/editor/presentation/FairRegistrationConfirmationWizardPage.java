@@ -37,7 +37,7 @@ import com.verticon.tracker.editor.util.IPropertiesFormProvider;
  * @author jconlon
  * 
  */
-public class FairRegistrationConfirmationWizardPage extends WizardPage
+class FairRegistrationConfirmationWizardPage extends WizardPage
 		implements ISelectionChangedListener {
 
 	private static final String MOVED_OUT_SELECTION = "movedOutSelection";
@@ -111,11 +111,11 @@ public class FairRegistrationConfirmationWizardPage extends WizardPage
 	
 	
 
-	public boolean updateMovedIn(){
+	protected boolean updateMovedIn(){
 		return movedInButton.getSelection();
 	}
 	
-	public boolean updateMovedOut(){
+	protected boolean updateMovedOut(){
 		return movedOutButton.getSelection();
 	}
 	
@@ -260,7 +260,7 @@ public class FairRegistrationConfirmationWizardPage extends WizardPage
 		return lotText;
 	}
 
-	protected ListViewer createViewer(Composite parent) {
+	private ListViewer createViewer(Composite parent) {
 		ListViewer viewer = new ListViewer(parent, SWT.SINGLE | SWT.H_SCROLL
 				| SWT.V_SCROLL | SWT.BORDER);
 		viewer.setUseHashlookup(true);

@@ -30,11 +30,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 
 
-public class ImportSpreadSheetWizardPage extends WizardNewFileCreationPage {
+class ImportSpreadSheetWizardPage extends WizardNewFileCreationPage {
 	
 	protected FileFieldEditor editor;
 
-	public ImportSpreadSheetWizardPage(String pageName, IStructuredSelection selection) {
+	protected ImportSpreadSheetWizardPage(String pageName, IStructuredSelection selection) {
 		super(pageName, selection);
 		setTitle(pageName); //NON-NLS-1
 		setDescription("Import a spreadsheet from the local file system into the workspace"); //NON-NLS-1

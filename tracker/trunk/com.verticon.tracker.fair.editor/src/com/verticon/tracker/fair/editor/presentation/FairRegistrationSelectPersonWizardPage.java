@@ -42,7 +42,7 @@ import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.YoungPerson;
 
-public class FairRegistrationSelectPersonWizardPage extends WizardPage
+class FairRegistrationSelectPersonWizardPage extends WizardPage
 		implements ISelectionChangedListener {
 	
 	private CTabFolder detailFormTabFolder;
@@ -179,9 +179,7 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 		this.selectedPerson = selectedPerson;
 	}
 
-	public boolean needToCreatePerson() {
-		return selectedPerson == null;
-	}
+	
 
 	public void selectionChanged(SelectionChangedEvent event) {
 		// Remove all the tabs in the TabFolder
@@ -204,7 +202,7 @@ public class FairRegistrationSelectPersonWizardPage extends WizardPage
 		super.setVisible(visible);
 	}
 
-	protected TableViewer createSingleColumnTableViewer(Composite tableComposite) {
+	private TableViewer createSingleColumnTableViewer(Composite tableComposite) {
 		
 		final TableViewer v = new TableViewer(tableComposite);
 		 v.getTable().setLinesVisible(true);
