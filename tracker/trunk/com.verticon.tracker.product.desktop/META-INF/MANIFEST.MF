@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tracker Desktop
+Bundle-Name: Tracker Desktop Toolkit
 Bundle-SymbolicName: com.verticon.tracker.product.desktop;singleton:=true
 Bundle-Version: 0.3.3
 Bundle-Vendor: Verticon, Inc
