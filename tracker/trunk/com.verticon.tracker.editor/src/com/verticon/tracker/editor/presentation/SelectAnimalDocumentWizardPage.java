@@ -107,7 +107,14 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 	}
 	
 	public void init(IEditorPart editor){
-		project = ActionUtils.extractResource(editor).getProject();
+		if(editor==null){
+			throw new IllegalArgumentException("The editor argument can not be null");
+		}
+		IResource resource = ActionUtils.extractResource(editor);
+		if(resource == null){
+			throw new IllegalStateException("Could not find the editor resource.");
+		}
+		project = resource.getProject();
 	}
 
 	
