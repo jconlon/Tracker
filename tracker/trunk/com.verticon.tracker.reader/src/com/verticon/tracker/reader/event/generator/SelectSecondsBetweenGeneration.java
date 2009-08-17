@@ -17,11 +17,11 @@ import org.eclipse.swt.widgets.Text;
  * @author jconlon
  *
  */
-public class SelectSecondsBetweenGeneration extends WizardPage {
+class SelectSecondsBetweenGeneration extends WizardPage {
 
 	private static final String SECONDS_BETWEEN_EVENTS = "Seconds between Generated Events: ";
 	int secondsBetweenGenerations;
-	Slider slider;
+	private Slider slider;
 	Text value;
 	
 	protected SelectSecondsBetweenGeneration(String pageName) {

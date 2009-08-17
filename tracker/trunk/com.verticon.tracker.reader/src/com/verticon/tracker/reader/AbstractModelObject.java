@@ -7,21 +7,21 @@ import java.beans.PropertyChangeSupport;
 public abstract class AbstractModelObject {
 	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(
 			this);
-
+	@SuppressWarnings("ucd")
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		propertyChangeSupport.addPropertyChangeListener(listener);
 	}
-
+	@SuppressWarnings("ucd")
 	public void addPropertyChangeListener(String propertyName,
 			PropertyChangeListener listener) {
 		propertyChangeSupport.addPropertyChangeListener(propertyName,
 				listener);
 	}
-
+	@SuppressWarnings("ucd")
 	public void removePropertyChangeListener(PropertyChangeListener listener) {
 		propertyChangeSupport.removePropertyChangeListener(listener);
 	}
-
+	@SuppressWarnings("ucd")
 	public void removePropertyChangeListener(String propertyName,
 			PropertyChangeListener listener) {
 		propertyChangeSupport.removePropertyChangeListener(propertyName,

@@ -23,7 +23,7 @@ import com.verticon.tracker.reader.IReaderWizard;
  * @author jconlon
  *
  */
-public class ReaderWizardProxy implements IReaderWizard {
+class ReaderWizardProxy implements IReaderWizard {
 
 	private static final String ATT_CLASS = "class";
 	private static final String ELM_DESCRIPTION = "description";
@@ -38,7 +38,7 @@ public class ReaderWizardProxy implements IReaderWizard {
 	private IReaderWizard delegate = null;
 	
 	
-	public ReaderWizardProxy(IConfigurationElement configElm) {
+	protected ReaderWizardProxy(IConfigurationElement configElm) {
 		super();
 		this.configElement = configElm;
 		this.id = getAttribute(configElm, ATT_ID, null);

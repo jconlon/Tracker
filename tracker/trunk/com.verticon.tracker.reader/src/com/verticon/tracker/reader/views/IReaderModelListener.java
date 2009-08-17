@@ -11,7 +11,7 @@ import com.verticon.tracker.reader.IReader;
  * @author jconlon
  *
  */
-public interface IReaderModelListener {
+interface IReaderModelListener {
 	
 	/**
 	 * Reflect the fact that a IReader was added 

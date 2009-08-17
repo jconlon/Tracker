@@ -26,7 +26,7 @@ import com.verticon.tracker.reader.eventadmin.ITagIdPublisher;
  * @author jconlon
  *
  */
-public class FileReaderRunner implements Runnable {
+class FileReaderRunner implements Runnable {
 	private final Logger logger = LoggerFactory.getLogger(FileReaderRunner.class);
 	private final ITagIdPublisher tagIdPublisher ;
 	private final File file ;
@@ -42,7 +42,7 @@ public class FileReaderRunner implements Runnable {
 	 * @param transactionProcessor to send Long numbers to.
 	 * @param file to Scan
 	 */
-	public FileReaderRunner(IReader reader,ITagIdPublisher transactionProcessor, IFile file) {
+	protected FileReaderRunner(IReader reader,ITagIdPublisher transactionProcessor, IFile file) {
 		this.tagIdPublisher=transactionProcessor;
 		this.file=new File(file.getLocationURI());
 		this.reader=reader;

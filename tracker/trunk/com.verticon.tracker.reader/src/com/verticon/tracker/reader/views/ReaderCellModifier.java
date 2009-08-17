@@ -15,13 +15,13 @@ import com.verticon.tracker.reader.IReader;
  * ReaderViewer
  */
 
-public class ReaderCellModifier implements ICellModifier {
+class ReaderCellModifier implements ICellModifier {
 	private ReaderViewer readerViewer;
 	/**
 	 * Constructor 
 	 * @param readerViewer
 	 */
-	public ReaderCellModifier(ReaderViewer readerViewer) {
+	protected ReaderCellModifier(ReaderViewer readerViewer) {
 		super();
 		this.readerViewer = readerViewer;
 	}

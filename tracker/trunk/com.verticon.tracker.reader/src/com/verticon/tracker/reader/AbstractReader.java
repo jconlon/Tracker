@@ -14,10 +14,10 @@ import java.net.URI;
  */
 public class AbstractReader extends AbstractModelObject implements IReader {
 
-	String name = "dummy";
-	URI target = URI.create("abstract://something");
-	String template = "Some template";
-	boolean started = true;
+	private String name = "dummy";
+	private URI target = URI.create("abstract://something");
+	private String template = "Some template";
+	private boolean started = true;
 
 	public AbstractReader(String name) {
 		super();

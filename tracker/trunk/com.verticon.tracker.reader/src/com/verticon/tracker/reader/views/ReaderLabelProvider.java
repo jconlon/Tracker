@@ -17,13 +17,13 @@ import com.verticon.tracker.reader.IReader;
  * 
  * @see org.eclipse.jface.viewers.LabelProvider 
  */
-public class ReaderLabelProvider 
+class ReaderLabelProvider 
 	extends LabelProvider
 	implements ITableLabelProvider {
 
 	// Names of images used to represent checkboxes
-	public static final String CHECKED_IMAGE 	= "checked";
-	public static final String UNCHECKED_IMAGE  = "unchecked";
+	private static final String CHECKED_IMAGE 	= "checked";
+	private static final String UNCHECKED_IMAGE  = "unchecked";
 
 	// For the checkbox images
 	private static ImageRegistry imageRegistry = new ImageRegistry();

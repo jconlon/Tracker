@@ -26,7 +26,7 @@ import com.verticon.tracker.reader.AbstractConnectionReader;
 public class ConnectionReaderTask implements Callable<RefreshableReader> {
 
 	private static final int SLEEP_MILS = 100;
-	final Logger logger = LoggerFactory.getLogger(ConnectionReaderTask.class);
+	private final Logger logger = LoggerFactory.getLogger(ConnectionReaderTask.class);
 	private final String target;
 	private final BundleContext bundleContext;
 	private final RefreshableReader reader;
