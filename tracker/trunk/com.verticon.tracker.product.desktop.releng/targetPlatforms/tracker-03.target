@@ -6,14 +6,19 @@
 <location path="/opt/Eclipse/tracker-eclipse_target_platform-200906290814/eclipse" type="Directory"/>
 <location id="org.eclipse.datatools.enablement.oda.ecore.sdk.feature" path="/opt/Eclipse/dtp-incubator-sdk-1.7.1M1-200907020500-target_platform/eclipse" type="Feature"/>
 <location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
-<unit id="org.eclipse.datatools.enablement.sdk.feature.feature.group" version="1.7.0.v200906050400-7I8r-FE9JfFkjWT8qt6UI5jX2laJ"/>
-<unit id="org.eclipse.datatools.sdk.feature.feature.group" version="1.7.0.v200906050400-7O9H-FD0IVEH6AsdTaISiFGNkk6p"/>
-<repository location="http://download.eclipse.org/releases/galileo"/>
-</location>
-<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
 <unit id="org.eclipse.swtbot.eclipse.feature.group" version="2.0.0.371-dev-e35"/>
 <unit id="org.eclipse.swtbot.feature.group" version="2.0.0.371-dev-e35"/>
 <repository location="http://download.eclipse.org/technology/swtbot/galileo/dev-build/update-site"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.birt.feature.group" version="2.5.0.v20090607-9ODS6GD7wmMtz-DbWuHKMt_6VlSF"/>
+<unit id="org.eclipse.birt.chart.cshelp.feature.group" version="2.5.0.v20090402-34-7w311A1728"/>
+<unit id="org.eclipse.birt.cshelp.feature.group" version="2.5.0.v20090402-34-7w311A1728"/>
+<unit id="org.eclipse.birt.doc.feature.group" version="2.5.0.v20090521-34-7w311A1726"/>
+<unit id="org.eclipse.birt.example.feature.group" version="2.5.0.v20090611-7F7Y-DZRDEBDrGg"/>
+<unit id="org.eclipse.datatools.enablement.sdk.feature.feature.group" version="1.7.0.v200906050400-7I8r-FE9JfFkjWT8qt6UI5jX2laJ"/>
+<unit id="org.eclipse.datatools.sdk.feature.feature.group" version="1.7.0.v200906050400-7O9H-FD0IVEH6AsdTaISiFGNkk6p"/>
+<repository location="http://download.eclipse.org/releases/galileo"/>
 </location>
 </locations>
 </target>
