@@ -21,6 +21,12 @@
    <feature url="features/com.verticon.tracker.export.wlic_0.2.3.qualifier.jar" id="com.verticon.tracker.export.wlic" version="0.2.3.qualifier">
       <category name="com.verticon.tracker.optionalFeatures"/>
    </feature>
+   <feature url="features/com.verticon.tracker.birt.feature_0.1.0.qualifier.jar" id="com.verticon.tracker.birt.feature" version="0.1.0.qualifier">
+      <category name="com.verticon.tracker.optionalFeatures"/>
+   </feature>
+   <feature url="features/com.verticon.tracker.birt_0.1.0.qualifier.jar" id="com.verticon.tracker.birt" version="0.1.0.qualifier">
+      <category name="com.verticon.tracker.optionalFeatures"/>
+   </feature>
    <category-def name="com.verticon.tracker.premisesEditor" label="Premises Editor">
       <description>
          Editor for creating and managing Livestock Premises Information.
