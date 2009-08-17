@@ -7,11 +7,8 @@
       plugin="com.verticon.tracker.editor">
 
    <description>
-      Tracker Premises Editor is the basic Editor feature of the Tracker application.
-The Premises Editor models Animal Event Histories for Producer and/or
-Non Producer Premises.  
-Premises model documents are displayed and manipulated with Tracker
-Editors, Wizards, and various Importing and Exporting utilities.
+      Tracker Premises Editor is the primary editing and data management tool feature of the Tracker Livestock Business Intelligence Toolkit.  The Premises Editor Feature models Animal Event Histories for Producer and/or Non Producer Premises.  
+Premises information is displayed, manipulated, and managed with document Editors, Wizards, and various data importing and exporting utilities.
    </description>
 
    <copyright>
@@ -391,6 +388,10 @@ OF THE
 POSSIBILITY OF SUCH DAMAGES.
 END OF TERMS AND CONDITIONS
    </license>
+
+   <url>
+      <discovery label="Tracker Release Update Site" url="http://tracker.verticon.com/Tracker/p2/product"/>
+   </url>
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>

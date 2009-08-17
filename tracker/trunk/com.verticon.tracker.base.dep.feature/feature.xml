@@ -6,7 +6,7 @@
       provider-name="Verticon, Inc.">
 
    <description>
-      Set of feature dependencies for the Core Tracker Editor Feature.
+      Tracker Base Dependencies Features include all the prerequisite Eclipse components needed by the Tracker Livestock Business Intelligence Toolkit.
    </description>
 
    <copyright>
@@ -17,7 +17,9 @@
       See license agreements associated with individual features.
    </license>
 
-   
+   <url>
+      <discovery label="Tracker Release Update Site" url="http://tracker.verticon.com/Tracker/p2/product"/>
+   </url>
 
    <requires>
       <import plugin="org.eclipse.osgi"/>

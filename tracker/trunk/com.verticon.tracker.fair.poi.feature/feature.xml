@@ -24,6 +24,10 @@ Tracker is distributed in the hope that it will be useful, but WITHOUT ANY WARRA
 You should have received a copy of the GNU General Public License along with Tracker.
    </license>
 
+   <url>
+      <discovery label="Tracker Release Update Site" url="http://tracker.verticon.com/Tracker/p2/product"/>
+   </url>
+
    <requires>
       <import feature="org.apache.poi" version="2.5.1" match="greaterOrEqual"/>
       <import feature="com.verticon.tracker.editor" version="0.3.1" match="greaterOrEqual"/>

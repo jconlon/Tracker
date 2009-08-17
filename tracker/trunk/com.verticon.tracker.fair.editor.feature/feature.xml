@@ -298,6 +298,10 @@ POSSIBILITY OF SUCH DAMAGES.
        END OF TERMS AND CONDITIONS
    </license>
 
+   <url>
+      <discovery label="Tracker Release Update Site" url="http://tracker.verticon.com/Tracker/p2/product"/>
+   </url>
+
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.ecore"/>
