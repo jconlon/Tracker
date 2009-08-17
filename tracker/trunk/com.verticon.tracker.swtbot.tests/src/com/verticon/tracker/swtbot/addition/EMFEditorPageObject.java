@@ -7,11 +7,14 @@ import org.eclipse.swtbot.addition.page.impl.DialogPageObject;
 import org.eclipse.swtbot.addition.page.impl.EditorPageObject;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.utils.TableCollection;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
 
 public class EMFEditorPageObject extends EditorPageObject {
+	private static final String LOAD_RESOURCE = "Load Resource";
 	private final String editorType;
 
 	public EMFEditorPageObject(SWTWorkbenchBot bot, String editorName,
@@ -101,6 +104,20 @@ public class EMFEditorPageObject extends EditorPageObject {
 		}
 		itsBot.menu(editorType).menu("New Child").menu(child).click();
 
+	}
+	
+	public void loadResource(final String resourceName) {
+		log.debug("Loading <"+resourceName+"> in <"+editorType+'>');
+		try {
+			itsBot.menu(editorType).menu(LOAD_RESOURCE+"...").click();
+		} catch (WidgetNotFoundException e) {
+		
+			throw e;
+		}
+		SWTBotShell loadResourceShell = itsBot.shell("LOAD_RESOURCE");
+		loadResourceShell.activate();
+        itsBot.text().setText(resourceName);
+        itsBot.button("OK").click();
 	}
 
 	/**
