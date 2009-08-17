@@ -15,17 +15,11 @@
    <feature url="features/com.verticon.tracker.reader_0.2.7.qualifier.jar" id="com.verticon.tracker.reader" version="0.2.7.qualifier">
       <category name="com.verticon.tracker.optionalFeatures"/>
    </feature>
-   <feature url="features/org.eclipse.datatools.enablement.oda.ecore.feature_1.7.0.v200906050400-3--8s733L385B4I8B.jar" id="org.eclipse.datatools.enablement.oda.ecore.feature" version="1.7.0.v200906050400-3--8s733L385B4I8B">
-      <category name="com.verticon.tracker.optionalFeatures"/>
-   </feature>
    <feature url="features/com.verticon.tracker.export.wlic_0.2.3.qualifier.jar" id="com.verticon.tracker.export.wlic" version="0.2.3.qualifier">
       <category name="com.verticon.tracker.optionalFeatures"/>
    </feature>
-   <feature url="features/com.verticon.tracker.birt.feature_0.1.0.qualifier.jar" id="com.verticon.tracker.birt.feature" version="0.1.0.qualifier">
-      <category name="com.verticon.tracker.optionalFeatures"/>
-   </feature>
    <feature url="features/com.verticon.tracker.birt_0.1.0.qualifier.jar" id="com.verticon.tracker.birt" version="0.1.0.qualifier">
-      <category name="com.verticon.tracker.optionalFeatures"/>
+      <category name="com.verticon.tracker.birt"/>
    </feature>
    <category-def name="com.verticon.tracker.premisesEditor" label="Premises Editor">
       <description>
@@ -40,6 +34,11 @@
    <category-def name="com.verticon.tracker.optionalFeatures" label="Optional Features">
       <description>
          Optional features adding functionality to the base Premises Editor.
+      </description>
+   </category-def>
+   <category-def name="com.verticon.tracker.birt" label="Business Intelligence Reporting Tool (BIRT)">
+      <description>
+         Eclipse Business Intelligence Reporting Tool (BIRT) Designer, Runtime, and Tracker enablement features.
       </description>
    </category-def>
 </site>
