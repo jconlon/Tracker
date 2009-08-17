@@ -63,10 +63,10 @@ public class FairRegistrationWizard extends Wizard  {
 	private FairRegistrationConfirmationWizardPage createConfirmationPage = null;
     
 	private static final String ADD_EXHIBIT = "AddExhibit";
-	public static final String ADD_EXHIBIT_WIZARD = "FairRegistrationWizard";
+	private static final String ADD_EXHIBIT_WIZARD = "FairRegistrationWizard";
 	
     
-    IWorkbenchWindow workbenchWindow;
+    private IWorkbenchWindow workbenchWindow;
     
     
 	public FairRegistrationWizard() {
@@ -127,7 +127,7 @@ public class FairRegistrationWizard extends Wizard  {
 	/**
 	 * @return Fair
 	 */
-	public Fair findFair() {
+	protected Fair findFair() {
 		return fairRegistrationSelection.getFair();
 	}
 

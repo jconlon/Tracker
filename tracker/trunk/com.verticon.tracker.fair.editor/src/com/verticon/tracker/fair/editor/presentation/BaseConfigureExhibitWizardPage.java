@@ -8,7 +8,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
@@ -29,24 +28,20 @@ import com.verticon.tracker.fair.Division;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.Lot;
 
-public class BaseConfigureExhibitWizardPage extends WizardPage implements ISelectionChangedListener{
+class BaseConfigureExhibitWizardPage extends WizardPage implements ISelectionChangedListener{
 
 	private static final String LOT_NAME = "lotName";
 	private Lot selectedLot;
 	private ListViewer listViewer;
-	protected final Fair fair;
+	private final Fair fair;
 	protected boolean failedTofindAnyLots = false;
 
-	public BaseConfigureExhibitWizardPage(String pageName, Fair fair) {
+	protected BaseConfigureExhibitWizardPage(String pageName, Fair fair) {
 		super(pageName);
 		this.fair=fair;
 	}
 
-	public BaseConfigureExhibitWizardPage(String pageName, String title,
-			ImageDescriptor titleImage, Fair fair)  {
-		super(pageName, title, titleImage);
-		this.fair=fair;;
-	}
+	
 
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
@@ -112,7 +107,7 @@ public class BaseConfigureExhibitWizardPage extends WizardPage implements ISelec
 		this.selectedLot = selectedLot;
 	}
 
-	protected ListViewer createViewer(Composite parent) {
+	private ListViewer createViewer(Composite parent) {
 		ListViewer viewer =
 			new ListViewer(parent, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 		viewer.setUseHashlookup(true);

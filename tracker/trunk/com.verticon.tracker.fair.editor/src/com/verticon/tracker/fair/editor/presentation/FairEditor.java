@@ -1052,30 +1052,7 @@ public class FairEditor
 		updateProblemIndication();
 	}
 	
-	/**
-	 * ListViewer
-	 */
-	protected void createListViewer(String pageName) {
-		ViewerPane viewerPane =
-			new ViewerPane(getSite().getPage(), FairEditor.this) {
-				@Override
-				public Viewer createViewer(Composite composite) {
-					return new ListViewer(composite);
-				}
-				@Override
-				public void requestActivation() {
-					super.requestActivation();
-					setCurrentViewerPane(this);
-				}
-			};
-		viewerPane.createControl(getContainer());
-		listViewer = (ListViewer)viewerPane.getViewer();
-		addListViewerProviders();
-
-		createContextMenuFor(listViewer);
-		int pageIndex = addPage(viewerPane.getControl());
-		setPageText(pageIndex, pageName);
-	}
+	
 
 	/**
 	 * 

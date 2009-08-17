@@ -5,7 +5,7 @@ import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.Lot;
 import com.verticon.tracker.fair.YoungPerson;
 
-public class FairRegistrationConfigureExhibitWizardPage extends BaseConfigureExhibitWizardPage  {
+class FairRegistrationConfigureExhibitWizardPage extends BaseConfigureExhibitWizardPage  {
 
 	protected FairRegistrationConfigureExhibitWizardPage(Fair  fair) {
 		super("selectLot", fair);
