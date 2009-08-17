@@ -57,7 +57,7 @@ import com.verticon.tracker.reader.ReaderPlugin;
  * @author jconlon
  *
  */
-public class EventReaderWizardSelectionPage extends WizardSelectionPage {
+class EventReaderWizardSelectionPage extends WizardSelectionPage {
 	
 	
 	
@@ -93,7 +93,7 @@ public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 	}
 	
 	
-	protected TableViewer createViewer(Composite parent) {
+	private TableViewer createViewer(Composite parent) {
 		TableViewer tableViewer = new TableViewer(parent, SWT.SINGLE
 				| SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 		final Table table = tableViewer.getTable();
@@ -180,7 +180,7 @@ public class EventReaderWizardSelectionPage extends WizardSelectionPage {
 	  * 
 	  * @return
 	  */
-	 IReaderWizard[] getReaderWizardsFromContributors(){
+	 private IReaderWizard[] getReaderWizardsFromContributors(){
 		 
 		 if (cachedWizards !=null){
 			 return cachedWizards;

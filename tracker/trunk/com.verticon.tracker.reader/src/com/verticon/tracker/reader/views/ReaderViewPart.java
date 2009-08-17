@@ -59,16 +59,6 @@ public class ReaderViewPart extends ViewPart {
 		viewer.getControl().setFocus();
 	}
 	
-	/**
-	 * Handle a 'close' event by disposing of the view
-	 */
-	public void handleDispose() {
-		this.getSite().getPage().hideView(this);
-	}
-	
-	
-	
-	
         
 	private void createToolbarButtons() {
 		  

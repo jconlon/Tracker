@@ -50,7 +50,7 @@ import com.verticon.tracker.reader.IReader;
  * @created Apr 2, 2003
  */
 
-public class ReaderViewer {
+class ReaderViewer {
 
 	/**
 	 * slf4j Logger
@@ -62,9 +62,11 @@ public class ReaderViewer {
 
 	private final ReaderViewModel readerViewModel = new ReaderViewModel();
 
-	public enum Column {
-		STARTED("started"), NAME("name"), TYPE("type"), TEMPLATE("template"), TARGET(
-				"target");
+    enum Column {
+		NAME("name"), 
+		TYPE("type"), 
+		TEMPLATE("template"), 
+		TARGET("target");
 
 		String property;
 		static List<String> columnNames;
@@ -89,7 +91,7 @@ public class ReaderViewer {
 	/**
 	 * @param parent
 	 */
-	public ReaderViewer(Composite parent) {
+	protected ReaderViewer(Composite parent) {
 		this.addChildControls(parent);
 	}
 
@@ -141,7 +143,7 @@ public class ReaderViewer {
 	/**
 	 * Release resources
 	 */
-	public void dispose() {
+	protected void dispose() {
 
 		// Tell the label provider to release its ressources
 		tableViewer.getLabelProvider().dispose();

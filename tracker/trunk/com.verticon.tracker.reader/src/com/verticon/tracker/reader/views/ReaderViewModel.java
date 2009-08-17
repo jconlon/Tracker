@@ -32,7 +32,6 @@ import org.eclipse.ui.XMLMemento;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.verticon.tracker.reader.AbstractReader;
 import com.verticon.tracker.reader.IReader;
 import com.verticon.tracker.reader.IReaderFactory;
 import com.verticon.tracker.reader.ReaderPlugin;
@@ -88,17 +87,7 @@ public class ReaderViewModel implements PropertyChangeListener{
 		return readers;
 	}
 
-	/**
-	 * Add a Dummy reader for testing to the collection of tasks
-	 * 
-	 */
-	public void addReader() {
-		IReader task = new AbstractReader("New dummy");
-		readers.add(readers.size(), task);
-		Iterator<IReaderModelListener> iterator = readerModelListeners.iterator();
-		while (iterator.hasNext())
-			iterator.next().addReader(task);
-	}
+	
 
 	/**
 	 * Add a new reader to the collection of readers
@@ -116,7 +105,7 @@ public class ReaderViewModel implements PropertyChangeListener{
 	/**
 	 * @param reader
 	 */
-	public void removeReader(IReader reader) {
+	protected void removeReader(IReader reader) {
 		reader.setStarted(false);
 		readers.remove(reader);
 		Iterator<IReaderModelListener> iterator = readerModelListeners.iterator();
@@ -132,14 +121,14 @@ public class ReaderViewModel implements PropertyChangeListener{
 	/**
 	 * @param viewer
 	 */
-	public void removeChangeListener(IReaderModelListener viewer) {
+	protected void removeChangeListener(IReaderModelListener viewer) {
 		readerModelListeners.remove(viewer);
 	}
 
 	/**
 	 * @param viewer
 	 */
-	public void addChangeListener(IReaderModelListener viewer) {
+	protected void addChangeListener(IReaderModelListener viewer) {
 		readerModelListeners.add(viewer);
 	}
 
@@ -212,7 +201,7 @@ public class ReaderViewModel implements PropertyChangeListener{
 	}
 	
 	
-	public void saveReaders() {
+	private void saveReaders() {
 		if (readers == null)
 			return;
 		XMLMemento memento = XMLMemento.createWriteRoot(TAG_READERS);

@@ -26,7 +26,7 @@ import com.verticon.tracker.reader.eventadmin.ITagIdPublisher;
  * @author jconlon
  *
  */
-public class GeneratingReaderRunner implements Runnable {
+class GeneratingReaderRunner implements Runnable {
 
 	/**
 	 * slf4j Logger
@@ -48,7 +48,7 @@ public class GeneratingReaderRunner implements Runnable {
 	 * @param transactionProcessor to send Long numbers to.
 	 * @param file to Scan
 	 */
-	public GeneratingReaderRunner(IReader reader, ITagIdPublisher transactionProcessor, IFile file) {
+	protected GeneratingReaderRunner(IReader reader, ITagIdPublisher transactionProcessor, IFile file) {
 		this.tagIDPublisher=transactionProcessor;
 		this.reader = reader;
 		this.file=new File(file.getLocationURI());
@@ -71,7 +71,7 @@ public class GeneratingReaderRunner implements Runnable {
 	}
 	
 	
-	void loadTags(){
+	private void loadTags(){
 		Scanner sc = null;
 		Long tag = null;
 		try {

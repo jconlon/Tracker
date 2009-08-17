@@ -45,9 +45,9 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 	 */
 	private final static AtomicLong count = new AtomicLong(0);
 
-	protected String name = "";
-	protected URI target = null;
-	protected String template = "";
+	private String name = "";
+	private URI target = null;
+	private String template = "";
 
 	private EventPublisher tagIdPublisher = null;
 	private Future<RefreshableReader> futureTask = null;
@@ -55,7 +55,7 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 	/**
 	 * slf4j Logger
 	 */
-	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * Construct and create a default name.

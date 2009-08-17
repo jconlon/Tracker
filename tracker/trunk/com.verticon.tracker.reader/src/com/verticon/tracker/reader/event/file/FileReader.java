@@ -57,15 +57,15 @@ public class FileReader extends AbstractModelObject implements
 	private static int count;
 	
 	private String name = "";
-	URI target = null;
-	String template = "";
-	boolean started = false;
+	private URI target = null;
+	private String template = "";
+	private boolean started = false;
 
 
 	private ScheduledFuture<?> scheduledFuture = null;
 	private ITagIdPublisher transactionPublisher = null;
 
-	public FileReader(String name) {
+	protected FileReader(String name) {
 		super();
 		this.name=name;
 	}

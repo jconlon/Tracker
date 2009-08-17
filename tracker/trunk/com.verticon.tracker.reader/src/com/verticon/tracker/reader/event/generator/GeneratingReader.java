@@ -54,16 +54,16 @@ public class GeneratingReader extends AbstractModelObject implements
 	private static int count;
 	
 	private String name = "";
-	URI target = null;
-	String template = "";
-	boolean started = false;
+	private URI target = null;
+	private String template = "";
+	private boolean started = false;
 
 
 	private ScheduledFuture<?> scheduledFuture = null;
 	
 	private ITagIdPublisher transactionPublisher = null;
 
-	public GeneratingReader(String name) {
+	protected GeneratingReader(String name) {
 		super();
 		this.name=name;
 	}

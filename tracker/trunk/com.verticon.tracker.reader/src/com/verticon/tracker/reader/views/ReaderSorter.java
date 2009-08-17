@@ -11,7 +11,7 @@ import com.verticon.tracker.reader.views.ReaderViewer.Column;
  *
  */
 
-public class ReaderSorter extends ViewerSorter {
+class ReaderSorter extends ViewerSorter {
 	
 	// Criteria that the instance uses 
 	private Column criteria;
@@ -22,7 +22,7 @@ public class ReaderSorter extends ViewerSorter {
 	 * @param criteria the sort criterion to use: one of <code>NAME</code> or 
 	 *   <code>TYPE</code> or <code>TEMPLATE</code> or <code>TARGET</code> columns
 	 */
-	public ReaderSorter(Column criteria) {
+	protected ReaderSorter(Column criteria) {
 		super();
 		this.criteria = criteria;
 	}
@@ -59,7 +59,7 @@ public class ReaderSorter extends ViewerSorter {
 	 *  element is greater than the second element
 	 */
 	@SuppressWarnings("unchecked")
-	protected int compareNames(IReader reader1, IReader reader2) {
+	private int compareNames(IReader reader1, IReader reader2) {
 		return getComparator().compare(reader1.getName(), reader2.getName());
 	}
 
@@ -75,7 +75,7 @@ public class ReaderSorter extends ViewerSorter {
 	 *  element is greater than the second element
 	 */
 	@SuppressWarnings("unchecked")
-	protected int compareTypes(IReader reader1, IReader reader2) {
+	private int compareTypes(IReader reader1, IReader reader2) {
 		return getComparator().compare(reader1.getType(), reader2.getType());
 	}
 	
@@ -91,7 +91,7 @@ public class ReaderSorter extends ViewerSorter {
 	 *  element is greater than the second element
 	 */
 	@SuppressWarnings("unchecked")
-	protected int compareTemplates(IReader reader1, IReader reader2) {
+	private int compareTemplates(IReader reader1, IReader reader2) {
 		return getComparator().compare(reader1.getTemplate(), reader2.getTemplate());
 	}
 	
@@ -107,7 +107,7 @@ public class ReaderSorter extends ViewerSorter {
 	 *  element is greater than the second element
 	 */
 	@SuppressWarnings("unchecked")
-	protected int compareTargets(IReader reader1, IReader reader2) {
+	private int compareTargets(IReader reader1, IReader reader2) {
 		return getComparator().compare(reader1.getTarget(), reader2.getTarget());
 	}
 	
