@@ -27,8 +27,10 @@ import com.verticon.tracker.fair.util.AllExhibitsAdapterFactory;
  * @see AllExhibitsAdapterFactory
  * @see AllExhibits
  * @author jconlon
+ * @deprecated this class does not appear to be used.  Kept for historical reference??
  *
  */
+@SuppressWarnings("ucd")
 public class TransactionalExhibitsContentAdapter extends 
 	TransactionalAdapterFactoryContentProvider {
 	

@@ -27,11 +27,7 @@ import org.eclipse.osgi.util.NLS;
 public class Messages
 	extends NLS {
 
-	private static final String BUNDLE_NAME = "com.verticon.tracker.fair.transaction.editor.internal.l10n.Messages"; //$NON-NLS-1$
-
-	public static String readConsole_title;
-	public static String readJob_title;
-	public static String readJob_msg; 
+	private static final String BUNDLE_NAME = "com.verticon.tracker.fair.transaction.editor.internal.l10n.Messages"; //$NON-NLS-1$	 
 	public static String cmdFailed;
 	public static String cmdRollback;
 	public static String cmdException;

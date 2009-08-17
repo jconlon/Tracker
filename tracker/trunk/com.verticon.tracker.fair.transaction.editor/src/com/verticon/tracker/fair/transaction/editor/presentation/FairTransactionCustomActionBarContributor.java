@@ -16,7 +16,7 @@ import com.verticon.tracker.fair.editor.presentation.FairSelectionViewerFilter;
  * @author jconlon
  * 
  */
-public class FairTransactionCustomActionBarContributor extends
+class FairTransactionCustomActionBarContributor extends
 		CustomActionBarContributor {
 
 	public FairTransactionCustomActionBarContributor() {

@@ -437,6 +437,7 @@ public class FairTransactionEditor extends FairEditor {
 	 * @generated NOT
 	 */
 	//.CUSTOM: EMF-generated class extends AdapterFactoryContentProvider
+	@SuppressWarnings("ucd")
 	public class ReverseAdapterFactoryContentProvider extends TransactionalAdapterFactoryContentProvider {
 		/**
 		 * <!-- begin-user-doc -->
