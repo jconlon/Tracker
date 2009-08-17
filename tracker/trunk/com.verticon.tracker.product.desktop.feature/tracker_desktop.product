@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Tracker Livestock Information Desktop" uid="tracker_desktop.product" id="com.verticon.tracker.product.desktop.application" application="org.eclipse.ui.ide.workbench" version="0.0.0.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="Tracker Livestock Business Intelligence Toolkit" uid="tracker_desktop.product" id="com.verticon.tracker.product.desktop.application" application="org.eclipse.ui.ide.workbench" version="0.0.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/com.verticon.tracker.product.desktop/icons/cattle_lg.gif"/>
       <text>
-         Tracker Livestock Information Desktop
+         Tracker Livestock Business Intelligence Toolkit
 Version: {0}
 Build id: {1}
 

@@ -300,6 +300,10 @@ POSSIBILITY OF SUCH DAMAGES.
        END OF TERMS AND CONDITIONS
    </license>
 
+   <url>
+      <discovery label="Tracker Release Update Site" url="http://tracker.verticon.com/Tracker/p2/product"/>
+   </url>
+
    <includes
          id="gnu.io.rxtx"
          version="0.0.0"/>

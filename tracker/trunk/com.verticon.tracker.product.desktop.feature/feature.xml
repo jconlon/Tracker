@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.tracker.product.desktop"
-      label="Tracker Desktop"
+      label="Tracker Desktop Toolkit"
       version="0.3.5.qualifier"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.product.desktop">
 
    <description>
-      Tracker Base is the base feature of a Tracker Desktop application.  Tracker Base includes all the prerequisite Eclipse components needed to compose Tracker Livestock Desktop applications.
+      Tracker Desktop Toolkit is a desktop based container for Tracker Business Intelligence Tools.
    </description>
 
    <copyright>
-      Tracker Base Feature Copyright (C) 2009
+      Tracker Desktop Toolkit Feature Copyright (C) 2009
 Verticon, Inc. All Rights Reserved.
    </copyright>
 
@@ -297,6 +297,10 @@ POSSIBILITY OF SUCH DAMAGES.
 
        END OF TERMS AND CONDITIONS
    </license>
+
+   <url>
+      <discovery label="Tracker Release Update Site" url="http://tracker.verticon.com/Tracker/p2/product"/>
+   </url>
 
    <requires>
       <import plugin="org.eclipse.ui.intro" version="3.2.201" match="greaterOrEqual"/>
