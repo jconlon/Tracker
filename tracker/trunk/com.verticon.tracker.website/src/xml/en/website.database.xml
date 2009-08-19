@@ -6,8 +6,8 @@
 
    <document targetdoc="home" baseuri="index.html">
       <div element="webpage" href="#home" number="" targetptr="home">
-         <ttl>What's Tracker?</ttl>
-         <xreftext>What's Tracker?</xreftext>
+         <ttl>Tracker</ttl>
+         <xreftext>Tracker</xreftext>
          <div element="section" href="#keyfeatures" number="" targetptr="keyfeatures">
             <ttl>Key Benefits</ttl>
             <xreftext>the section called “Key Benefits”</xreftext>
@@ -19,6 +19,22 @@
       <div element="webpage" href="#about" number="" targetptr="about">
          <ttl>About</ttl>
          <xreftext>About</xreftext>
+         <div element="section" href="#businessIntelligenceToolkit" number="" targetptr="businessIntelligenceToolkit">
+            <ttl>Livestock Business Intelligence Toolkit</ttl>
+            <xreftext>the section called “Livestock Business Intelligence Toolkit”</xreftext>
+         </div>
+         <div element="section" href="#businessIntelligenceFeatures" number="" targetptr="businessIntelligenceFeatures">
+            <ttl>Tracker Business Intelligence Features</ttl>
+            <xreftext>the section called “Tracker Business Intelligence Features”</xreftext>
+         </div>
+         <div element="section" href="#businessSolutions" number="" targetptr="businessSolutions">
+            <ttl>Tracker Business Intelligence Solutions</ttl>
+            <xreftext>the section called “Tracker Business Intelligence Solutions”</xreftext>
+         </div>
+         <div element="section" href="#businessObjects" number="" targetptr="businessObjects">
+            <ttl>Network Aware Business Objects</ttl>
+            <xreftext>the section called “Network Aware Business Objects”</xreftext>
+         </div>
          <div element="section" href="#colophon" number="" targetptr="colophon">
             <ttl>Colophon</ttl>
             <xreftext>the section called “Colophon”</xreftext>
@@ -73,7 +89,7 @@
             <ttl>User Guide</ttl>
             <xreftext>the section called “User Guide”</xreftext>
          </div>
-         <div element="section" href="#d8e38" number="">
+         <div element="section" href="#d8e41" number="">
             <ttl>Other Documentation</ttl>
             <xreftext>the section called “Other Documentation”</xreftext>
             <obj element="table" href="#tracker.docs.models.table" number="1">

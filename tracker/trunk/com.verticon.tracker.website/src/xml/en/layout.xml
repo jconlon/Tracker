@@ -8,6 +8,8 @@
 
 <config param="title" value="Tracker"/>
 
+<config param="banner" value="img/logo.png" altval="Tracker"/>
+
 <copyright role="about">
   <year>2007</year>
   <year>2008</year>
@@ -15,7 +17,7 @@
   <holder role="http://www.verticon.com/">Verticon, Inc.</holder>
 </copyright>
 
-<headlink rel="icon" href="/img/favicon.ico" type="image/x-icon"/>
+<headlink rel="icon" href="img/favicon.ico" type="image/x-icon"/>
 <style src="css/tracker.css" type="text/css" media="screen"/>
 
 <toc page="index.xml" filename="index.html">
@@ -24,7 +26,9 @@
   <tocentry page="docs/docs.xml" dir="docs" filename="index.html">
   	<tocentry page="docs/faqs.xml" filename="faqs.html"/>
   </tocentry>
-  <!-- tocentry page="feeds.xml" dir="issues" filename="index.html"/-->
+  <!-- 
+  tocentry page="feeds.xml" dir="issues" filename="index.html"/
+  -->
   <tocentry page="contact/contact.xml" dir="contact" filename="index.html"/>
 </toc>
 

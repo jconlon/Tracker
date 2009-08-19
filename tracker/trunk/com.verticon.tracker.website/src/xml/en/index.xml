@@ -1,26 +1,24 @@
 <?xml version="1.0"?>
+<!-- 
+<!DOCTYPE webpage PUBLIC "-//SF DocBook//DTD Website V2.0//EN"
+          SYSTEM "http://www.sf.net/docbook/release/website/2.0/website.dtd>
+ -->
+
 <webpage id="home">
 	<config param="rcsdate" value="$Date$" />
 	<head>
-		<title>What's Tracker?</title>
-		<summary>A Livestock Information Framework based on Eclipse</summary>
-		<keywords>livestock, open source, NAIS, XML, Eclipse, RFID,
-			herd management
+		<title>Tracker</title>
+		<summary>Business Intelligence for Animal Agriculture Professionals</summary>
+		<keywords>Livestock, Open Source, NAIS, XML, Eclipse, RFID,
+			Herd management
 		</keywords>
 	</head>
 	<para>
-			Tracker is an
-			<emphasis>Open Source</emphasis>
-			, <ulink url="http://www.eclipse.org/">Eclipse</ulink>
-			based,
-			<emphasis>Component Oriented</emphasis>
-			,
-			<emphasis>Software Application Framework</emphasis>
-			for the development of
-			<emphasis>Multi-platform</emphasis>
-			<emphasis>Livestock Information Solutions</emphasis>
-			.
-			<olink targetdoc="docs">Learn more</olink>
+			Tracker is an <ulink url="http://www.eclipse.org/">Eclipse</ulink>
+			based <olink targetdoc="about">Business Intelligence Toolkit and suite of 
+			Business Intelligence
+            solutions </olink> for animal agriculture professionals.
+			<olink targetdoc="docs">Learn More</olink>
 	</para>
 	<section id="keyfeatures">
 		<title>Key Benefits</title>
@@ -30,7 +28,6 @@
 		</para>
 
 		<variablelist>
-	
 			<varlistentry>
 				<term>Document Livestock Herds and Premises</term>
 				<listitem>
@@ -63,9 +60,6 @@
 						, <ulink url="http://www.osgi.org/About/Technology?section=2">
 						<acronym>OSGi</acronym></ulink>
 						the Open Systems Gateway Initiative
-						
-						
-						
 						plug-in component extension framework, to allow for easy interfacing
 					    with existing Eclipse Analytical Features, as well as custom, and third party
 					    business analysis tools. 
