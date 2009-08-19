@@ -20,8 +20,8 @@
          <ttl>About</ttl>
          <xreftext>About</xreftext>
          <div element="section" href="#businessIntelligenceToolkit" number="" targetptr="businessIntelligenceToolkit">
-            <ttl>Livestock Business Intelligence Toolkit</ttl>
-            <xreftext>the section called “Livestock Business Intelligence Toolkit”</xreftext>
+            <ttl>Tracker Business Intelligence Toolkit</ttl>
+            <xreftext>the section called “Tracker Business Intelligence Toolkit”</xreftext>
          </div>
          <div element="section" href="#businessIntelligenceFeatures" number="" targetptr="businessIntelligenceFeatures">
             <ttl>Tracker Business Intelligence Features</ttl>
@@ -31,10 +31,24 @@
             <ttl>Tracker Business Intelligence Solutions</ttl>
             <xreftext>the section called “Tracker Business Intelligence Solutions”</xreftext>
          </div>
-         <div element="section" href="#businessObjects" number="" targetptr="businessObjects">
-            <ttl>Network Aware Business Objects</ttl>
-            <xreftext>the section called “Network Aware Business Objects”</xreftext>
-         </div>
+      </div>
+   </document>
+
+   <document targetdoc="contact" baseuri="contact.html" dir="about/">
+      <div element="webpage" href="#contact" number="" targetptr="contact">
+         <ttl>Contact Us</ttl>
+         <xreftext>Contact Us</xreftext>
+         <obj element="sidebar" href="#also" number="" targetptr="also">
+            <ttl>Reach Us</ttl>
+            <xreftext>Reach Us</xreftext>
+         </obj>
+      </div>
+   </document>
+
+   <document targetdoc="aboutWebsite" baseuri="aboutWebsite.html" dir="about/">
+      <div element="webpage" href="#aboutWebsite" number="" targetptr="aboutWebsite">
+         <ttl>About the Website</ttl>
+         <xreftext>About the Website</xreftext>
          <div element="section" href="#colophon" number="" targetptr="colophon">
             <ttl>Colophon</ttl>
             <xreftext>the section called “Colophon”</xreftext>
@@ -46,11 +60,94 @@
       </div>
    </document>
 
+   <document targetdoc="license" baseuri="license.html" dir="about/">
+      <div element="webpage" href="#license" number="" targetptr="license">
+         <ttl>Licensing</ttl>
+         <xreftext>Licensing</xreftext>
+         <div element="section" href="#container" number="" targetptr="container">
+            <ttl>GNU General Public License</ttl>
+            <xreftext>the section called “GNU General Public License”</xreftext>
+            <div element="section" href="#gpl-legalnotice" number="" targetptr="gpl-legalnotice">
+               <ttl/>
+               <xreftext>the section called “”</xreftext>
+            </div>
+         </div>
+         <div element="section" href="#gpl-1" number="" targetptr="gpl-1">
+            <ttl>Preamble</ttl>
+            <xreftext>the section called “Preamble”</xreftext>
+         </div>
+         <div element="section" href="#gpl-2" number="" targetptr="gpl-2">
+            <ttl>TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION</ttl>
+            <xreftext>the section called “TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION”</xreftext>
+            <div element="section" href="#gpl-2-0" number="" targetptr="gpl-2-0">
+               <ttl>Section 0</ttl>
+               <xreftext>the section called “Section 0”</xreftext>
+            </div>
+            <div element="section" href="#gpl-2-1" number="" targetptr="gpl-2-1">
+               <ttl>Section 1</ttl>
+               <xreftext>the section called “Section 1”</xreftext>
+            </div>
+            <div element="section" href="#gpl-2-2" number="" targetptr="gpl-2-2">
+               <ttl>Section 2</ttl>
+               <xreftext>the section called “Section 2”</xreftext>
+            </div>
+            <div element="section" href="#gpl-2-3" number="" targetptr="gpl-2-3">
+               <ttl>Section 3</ttl>
+               <xreftext>the section called “Section 3”</xreftext>
+            </div>
+            <div element="section" href="#gpl-2-4" number="" targetptr="gpl-2-4">
+               <ttl>Section 4</ttl>
+               <xreftext>the section called “Section 4”</xreftext>
+            </div>
+            <div element="section" href="#gpl-2-5" number="" targetptr="gpl-2-5">
+               <ttl>Section 5</ttl>
+               <xreftext>the section called “Section 5”</xreftext>
+            </div>
+            <div element="section" href="#gpl-2-6" number="" targetptr="gpl-2-6">
+               <ttl>Section 6</ttl>
+               <xreftext>the section called “Section 6”</xreftext>
+            </div>
+            <div element="section" href="#gpl-2-7" number="" targetptr="gpl-2-7">
+               <ttl>Section 7</ttl>
+               <xreftext>the section called “Section 7”</xreftext>
+            </div>
+            <div element="section" href="#gpl-2-8" number="" targetptr="gpl-2-8">
+               <ttl>Section 8</ttl>
+               <xreftext>the section called “Section 8”</xreftext>
+            </div>
+            <div element="section" href="#gpl-2-9" number="" targetptr="gpl-2-9">
+               <ttl>Section 9</ttl>
+               <xreftext>the section called “Section 9”</xreftext>
+            </div>
+            <div element="section" href="#gpl-2-10" number="" targetptr="gpl-2-10">
+               <ttl>Section 10</ttl>
+               <xreftext>the section called “Section 10”</xreftext>
+            </div>
+            <div element="section" href="#gpl-2-11" number="" targetptr="gpl-2-11">
+               <ttl>NO WARRANTY Section 11</ttl>
+               <xreftext>the section called “NO WARRANTY Section 11”</xreftext>
+            </div>
+            <div element="section" href="#gpl-2-12" number="" targetptr="gpl-2-12">
+               <ttl>Section 12</ttl>
+               <xreftext>the section called “Section 12”</xreftext>
+            </div>
+         </div>
+         <div element="section" href="#gpl-3" number="" targetptr="gpl-3">
+            <ttl>How to Apply These Terms to Your New Programs</ttl>
+            <xreftext>the section called “How to Apply These Terms to Your New Programs”</xreftext>
+         </div>
+         <obj element="sidebar" href="#fsf" number="" targetptr="fsf">
+            <ttl>Free Software Foundation, Inc.</ttl>
+            <xreftext>Free Software Foundation, Inc.</xreftext>
+         </obj>
+      </div>
+   </document>
+
    <document targetdoc="downloads" baseuri="index.html" dir="downloads/">
       <div element="webpage" href="#downloads" number="" targetptr="downloads">
          <ttl>Downloads</ttl>
          <xreftext>Downloads</xreftext>
-         <div element="section" href="#d7e14" number="">
+         <div element="section" href="#d10e14" number="">
             <ttl>Tracker Desktop Product</ttl>
             <xreftext>the section called “Tracker Desktop Product”</xreftext>
             <obj element="table" href="#ex.calstable" number="1">
@@ -58,7 +155,7 @@
                <xreftext>Table 1, “Revision 0.3.5, Engineering Released on: July 2, 2009”</xreftext>
             </obj>
          </div>
-         <div element="section" href="#d7e106" number="">
+         <div element="section" href="#d10e106" number="">
             <ttl>Tracker Update Repositories</ttl>
             <xreftext>the section called “Tracker Update Repositories”</xreftext>
             <obj element="table" href="#ex.calstable" number="2">
@@ -81,15 +178,11 @@
       <div element="webpage" href="#docs" number="" targetptr="docs">
          <ttl>Documentation</ttl>
          <xreftext>Documentation</xreftext>
-         <div element="section" href="#issues" number="" targetptr="issues">
-            <ttl>Tracker Wiki</ttl>
-            <xreftext>the section called “Tracker Wiki”</xreftext>
-         </div>
          <div element="section" href="#userGuide" number="" targetptr="userGuide">
             <ttl>User Guide</ttl>
             <xreftext>the section called “User Guide”</xreftext>
          </div>
-         <div element="section" href="#d8e41" number="">
+         <div element="section" href="#d11e28" number="">
             <ttl>Other Documentation</ttl>
             <xreftext>the section called “Other Documentation”</xreftext>
             <obj element="table" href="#tracker.docs.models.table" number="1">
@@ -104,38 +197,38 @@
       <div element="webpage" href="#faqs" number="" targetptr="faqs">
          <ttl>Frequently Asked Questions</ttl>
          <xreftext>Frequently Asked Questions</xreftext>
-         <div element="qandaset" href="#d9e14" number="">
+         <div element="qandaset" href="#d12e14" number="">
             <ttl>???TITLE???</ttl>
             <xreftext>???TITLE???</xreftext>
-            <div element="qandaentry" href="#d9e20" number="">
+            <div element="qandaentry" href="#d12e20" number="">
                <ttl>Question</ttl>
                <xreftext>Q: 1.1</xreftext>
             </div>
-            <div element="qandaentry" href="#d9e35" number="">
+            <div element="qandaentry" href="#d12e35" number="">
                <ttl>Question</ttl>
                <xreftext>Q: 1.2</xreftext>
             </div>
-            <div element="qandaentry" href="#d9e63" number="">
+            <div element="qandaentry" href="#d12e63" number="">
                <ttl>Question</ttl>
                <xreftext>Q: 2.1</xreftext>
             </div>
-            <div element="qandaentry" href="#d9e83" number="">
+            <div element="qandaentry" href="#d12e83" number="">
                <ttl>Question</ttl>
                <xreftext>Q: 3.1</xreftext>
             </div>
-            <div element="qandaentry" href="#d9e118" number="">
+            <div element="qandaentry" href="#d12e118" number="">
                <ttl>Question</ttl>
                <xreftext>Q: 3.2</xreftext>
             </div>
-            <div element="qandaentry" href="#d9e133" number="">
+            <div element="qandaentry" href="#d12e133" number="">
                <ttl>Question</ttl>
                <xreftext>Q: 3.3</xreftext>
             </div>
-            <div element="qandaentry" href="#d9e153" number="">
+            <div element="qandaentry" href="#d12e153" number="">
                <ttl>Question</ttl>
                <xreftext>Q: 4.1</xreftext>
             </div>
-            <div element="qandaentry" href="#d9e168" number="">
+            <div element="qandaentry" href="#d12e168" number="">
                <ttl>Question</ttl>
                <xreftext>Q: 4.2</xreftext>
             </div>
@@ -143,14 +236,33 @@
       </div>
    </document>
 
-   <document targetdoc="contact" baseuri="index.html" dir="contact/">
-      <div element="webpage" href="#contact" number="" targetptr="contact">
-         <ttl>Contact Us</ttl>
-         <xreftext>Contact Us</xreftext>
-         <obj element="sidebar" href="#also" number="" targetptr="also">
-            <ttl>Reach Us</ttl>
-            <xreftext>Reach Us</xreftext>
-         </obj>
+   <document targetdoc="goals" baseuri="goals.html" dir="docs/">
+      <div element="webpage" href="#goals" number="" targetptr="goals">
+         <ttl>Design Goals</ttl>
+         <xreftext>Design Goals</xreftext>
+         <div element="section" href="#businessObjects" number="" targetptr="businessObjects">
+            <ttl>Network Aware Business Objects</ttl>
+            <xreftext>the section called “Network Aware Business Objects”</xreftext>
+         </div>
+      </div>
+   </document>
+
+   <document targetdoc="project" baseuri="index.html" dir="project/">
+      <div element="webpage" href="#project" number="" targetptr="project">
+         <ttl>Project</ttl>
+         <xreftext>Project</xreftext>
+         <div element="section" href="#wikiSite" number="" targetptr="wikiSite">
+            <ttl>Tracker Project Management Wiki</ttl>
+            <xreftext>the section called “Tracker Project Management Wiki”</xreftext>
+         </div>
+         <div element="section" href="#issues" number="" targetptr="issues">
+            <ttl>Issues Tracking</ttl>
+            <xreftext>the section called “Issues Tracking”</xreftext>
+         </div>
+         <div element="section" href="#svn" number="" targetptr="svn">
+            <ttl>Code Control</ttl>
+            <xreftext>the section called “Code Control”</xreftext>
+         </div>
       </div>
    </document>
 

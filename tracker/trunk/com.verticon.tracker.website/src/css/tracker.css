@@ -13,13 +13,14 @@
 ----------------------------------------------- */
 
 @import url(phenix/main.css);
+
 /*
-#header div#title { background: url(../img/mw_logo.gif) top left no-repeat; }
+#header div#title { background: url(../img/logo.gif) top left no-repeat; }
 */
 
 #header {
         background:#566e41;
-        height: 90px;
+        height: 100px;
         }
 
 #header div#title a:hover { border-bottom: 0px; }
@@ -35,11 +36,11 @@
 	font-size: 150%;
 	color: #fff;
         }
-
+/*
 #header div#title {
 	margin-top: 23px;
         }
-
+*/
 
 #footer {
         background: #fff;
