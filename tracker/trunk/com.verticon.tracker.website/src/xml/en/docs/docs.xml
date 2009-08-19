@@ -3,7 +3,7 @@
 	<config param="rcsdate" value="$Date$" />
 	<head>
 		<title>Documentation</title>
-		<summary>Tracker Documentation
+		<summary>FAQ, Guide and Project Wiki
 		</summary>
 		<keywords>livestock, open source, NAIS, XML, Eclipse, RFID,
 			herd management
@@ -25,6 +25,7 @@
     Installation, Customization and Usage Guide. The <ulink 
     url="http://tracker.verticon.com/Tracker/documentation/trackerUserGuide.pdf">trackerUserGuide.pdf</ulink> is an extensive reference for 
     installing, using and customizing the Tracker software. 
+    <olink targetdoc="faqs">Faqs</olink>
     </para>
     </section>
     

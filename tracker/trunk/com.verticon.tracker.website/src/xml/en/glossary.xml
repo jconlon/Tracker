@@ -613,4 +613,39 @@
   <glossseealso otherterm="xml"/>
 </glossentry>
 
+<glossentry xml:id="bi">
+  <glossterm>Business Intelligence</glossterm>
+  <acronym>BI</acronym>
+  <glossdef>
+  <para>Business intelligence refers to skills, technologies, applications and
+  practices used to help a business acquire a better understanding of
+  its commercial context. Business intelligence may also refer to the
+  collected information itself. 
+  </para>
+  <para>BI technologies provide historical,
+  current, and predictive views of business operations. Common functions
+  of business intelligence technologies are reporting, OLAP, analytics,
+  data mining, business performance management, benchmarking, text
+  mining, and predictive analytics.</para></glossdef>
+  <glossseealso otherterm="birt"/>
+</glossentry>
+
+<glossentry xml:id="birt">
+  <glossterm>Business Intelligence Reporting Tools</glossterm>
+  <acronym>BIRT</acronym>
+  <glossdef>
+  <para>The Business Intelligence and Reporting Tools Project is an open 
+  source software project that provides reporting and business intelligence 
+  capabilities for rich client and web applications, especially those based on 
+  Java and J2EE.</para>
+  <para>BIRT is a top level software project within the Eclipse Foundation, an 
+  independent not-for-profit consortium of software industry vendors and an 
+  open source community.
+ </para></glossdef>
+ <!--  
+  <glossseealso otherterm="eclipse"/>
+  <glossseealso otherterm="emf"/>
+  -->
+  <glossseealso otherterm="bi"/>
+</glossentry>
 </glossary>
