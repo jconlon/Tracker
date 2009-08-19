@@ -3,22 +3,14 @@
 	<config param="rcsdate" value="$Date$" />
 	<head>
 		<title>Documentation</title>
-		<summary>FAQ, Guide and Project Wiki
+		<summary>FAQ, User Guide and Data Models
 		</summary>
 		<keywords>livestock, open source, NAIS, XML, Eclipse, RFID,
 			herd management
 		</keywords>
 	</head>
 
-    <section id="issues">
-    <title>Tracker Wiki</title>
-    <para><ulink url="http://tracker-project.verticon.com/verticon_Tracker">
-    Tracker Wiki and Issues Tracking</ulink> by Trac. 
-		Trac is the issues tracking tool used to track defects, enhancements and tasks 
-		for the Tracker.<emphasis>Other than a similarity of naming there is no relationship to Tracker.</emphasis>  
-	</para>
-	</section>
-	
+   
 	<section id="userGuide">
     <title>User Guide</title>
     <para>
