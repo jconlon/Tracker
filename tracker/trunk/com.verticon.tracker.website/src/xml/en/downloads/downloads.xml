@@ -9,7 +9,7 @@
 	</head>
 
 	<section>
-		<title>Tracker Desktop Product</title>
+		<title>Tracker BI Toolkit</title>
 		<table xml:id="ex.calstable" frame='all'>
 			<title>Revision 0.3.5, Engineering Released on: July 2, 2009</title>
 			<tgroup cols='3' align='left' colsep='1' rowsep='1'>
@@ -104,7 +104,7 @@
 				<term>Java SE JRE 6</term>
 				<listitem>
 					<para>
-						Prior to installing Tracker Desktop, you must first install
+						Prior to installing Tracker BI Toolkit, you must first install
 						<ulink url="http://java.sun.com/javase/downloads/index.jsp">
 							Java SE Runtime Environment (JRE 6 or higher)
 						</ulink>.
