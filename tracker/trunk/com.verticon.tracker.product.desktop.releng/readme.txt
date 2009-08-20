@@ -1,5 +1,8 @@
 This project is a releng builder for the com.verticon.tracker.product.desktop project.
 
+=======================================
+Notes
+
 1) This build requires 3.5 or later
 
 2) This build requires the deltapack.  By default it looks beside the eclipse install for "deltapack/eclipse/*".  
@@ -14,3 +17,13 @@ This project is a releng builder for the com.verticon.tracker.product.desktop pr
 5) The build.properties file specifically defines the JRE's for CDC-1.1/Foundation-1.1 and
    J2SE-1.6 because these are the required bundle execution environments in the example.
    The build should be run on a 1.6 VM.
+   
+   
+=======================================
+Build Instructions
+
+For releases:
+1. Remove (and save?) repository containing old builds
+2. Run Tracker.launch - to build product and product p2 metadata
+3. From any feature, Export all features to the repository -  Deploys p2 metadata to repository. (updatesite/catalog.xml specs the categories)
+4. Run Sync S3.launch - Moves all artifacts over to ~/Uploads/s3 and mirrors these to S3.
