@@ -5,7 +5,7 @@
   		alt-style="css/whatsnew.properties" 
   		style="css/sample.css" 
   		path="whatsnew/@org.eclipse.ui.workbench/content-group/updates">
-  	   <link style-id="content-link" label="Provision Tracker Desktop" 
+  	   <link style-id="content-link" label="Provision Tracker Desktop Toolkit" 
        		url="http://org.eclipse.ui.intro/runAction?pluginId=org.eclipse.platform&amp;class=org.eclipse.platform.internal.LaunchUpdateIntroAction" 
        		id="updates">
           		<text>Get the latest Tracker updates from Verticon.com and Eclipse.org</text>

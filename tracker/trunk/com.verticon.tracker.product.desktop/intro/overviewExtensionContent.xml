@@ -30,18 +30,18 @@
                 <text 	style-id="page-title" id="page-title" 
                 		filteredFrom="html">Tracker Technologies</text>
                 <!--  text 	style-id="page-description" 
-                		id="page-description">About the Tracker Desktop Preview</text>
+                		id="page-description">About the Tracker BI Toolkit Preview</text>
                 		-->
           </group>
           <group 	style-id="content-group" style="$theme$/html/shared.css"
   		  			id="comverticontrackertechpreview-group"> 		
 <text id="mynotes1">
 &lt;br/&gt;
-When previewing the Tracker Desktop please keep the following in mind:
+When previewing the Tracker BI Toolkit please keep the following in mind:
 &lt;ul&gt;
 &lt;li&gt;This is a milestone3 release of the Tracker BI Toolkit.&lt;/li&gt;
 &lt;li&gt;The Tracker BI Toolkit milestone3 releases are consider pre-beta milestone releases. (Beta testing will begin with the milestone4 releases.)&lt;/li&gt;
-&lt;li&gt;The milestone3 releases of Tracker Desktop are intended for demonstration to prospective beta testing candidates and project sponsors only.&lt;/li&gt;
+&lt;li&gt;The milestone3 releases of Tracker BI Toolkit are intended for demonstration to prospective beta testing candidates and project sponsors only.&lt;/li&gt;
 &lt;/ul&gt;
 </text>
           </group>

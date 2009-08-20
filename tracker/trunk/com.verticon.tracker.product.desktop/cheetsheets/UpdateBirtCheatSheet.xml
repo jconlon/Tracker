@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cheatsheet
-      title="Adding BIRT Features to the Tracker Desktop">
+      title="Adding BIRT Features to the Tracker BI Toolkit">
    <intro
          href="/org.eclipse.platform.doc.user/tasks/tasks-129.htm">
       <description>
-         This cheat sheet will show you how to add BIRT features to the <b>Tracker Desktop</b> product.
+         This cheat sheet will show you how to add BIRT features to the <b>Tracker BI Toolkit</b> product.
       </description>
    </intro>
    <item
