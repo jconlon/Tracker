@@ -2,8 +2,8 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" 
  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <chapter>
-  	<?dbhtml filename="overview/frameworkOverview.html" ?>
-	<title>Overview</title>
+  	<?dbhtml filename="overview/frameworkUseCases.html" ?>
+	<title>Use Cases</title><!--
 
   	 <section>
   	 <?dbhtml filename="overview/frameworkOverview_biwhatIsTracker.html" ?>
@@ -20,6 +20,8 @@
     </para>
   	</section>
   	
+  	
+  	Test fop gen with this commented.  Suspect doc page is too long
   	<section>
   	<?dbhtml filename="overview/frameworkOverview_bifeatures.html" ?>
     <title>Tracker Business Intelligence Features</title>
@@ -113,7 +115,9 @@
 		</para>
 	</section>
 	
-	<!--<section>
+	-->
+	
+	<section>
 	<?dbhtml filename="overview/frameworkOverview_useCaseDiagrams.html" ?>
 		<title>Tracker Solution Use-Cases</title>
 		<para>
@@ -428,5 +432,5 @@
 			</para>
 		</section>
 	</section>
---></chapter>
+</chapter>
 	

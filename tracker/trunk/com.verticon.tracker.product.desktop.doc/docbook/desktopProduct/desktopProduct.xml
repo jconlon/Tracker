@@ -4,26 +4,33 @@
 
 <chapter id="DesktopProduct">
     <?dbhtml filename="desktopProduct/desktopProduct.html" ?>
-	<title>Desktop Product</title>
+	<title>Tracker Desktop Toolkit</title>
 	
     <section id="Overview">
 	<title>Overview</title>
 	
 	<section>
-		<title>What is the Tracker Desktop Product?</title>
-	<para>The Tracker Desktop Product is an <emphasis>Open Source</emphasis> Livestock Information Browser descended 
-	from the Tracker Information Framework suite of products and managed by Verticon, Inc. 
-	Tracker Desktop is based on the Eclipse Rich Client Platform, the Eclipse Modeling 
-	Framework and OSGi technologies.</para>
-	</section>
-	
+	<title>What is the Tracker Desktop Toolkit?</title>
+
+	<para>
+		The Tracker Desktop Toolkit is a desktop based Business Intelligence 
+		(<acronym>BI</acronym>) solutions toolkit for animal agriculture professionals. 
+		The Tracker Desktop Toolkit is a <emphasis>network aware rich client platform</emphasis>
+		that can be installed with one or more user selected <acronym>BI</acronym> features.
+	</para>
+	<para>
+		Tracker Desktop Toolkit is based on the Eclipse Rich Client Platform (RCP), the Eclipse
+		Modeling Framework (EMF) and Open System Gateway Initiative (OSGi) technologies.
+	</para>
+</section>  
+  
 	<section id="desktopDefinitions">
 	<?dbhtml filename="overview/desktopOverview_definitions.html" ?>
 	<title>Workbench Instances, Workspaces, and Projects</title>
 		<para>The main focus of activity in the Tracker Application is the editing of Animal Premises Documents.  In order to discuss the mechanics of editing Tracker Animal Premises Documents, some definitions are in order:
 		<itemizedlist mark='bullet'>
 			    <listitem>
-					<para>A Tracker <emphasis>installation</emphasis>  is a location on your disk 
+					<para>A Tracker Desktop Toolkit <emphasis>installation</emphasis>  is a location on your disk 
 					that contains a distribution of the Tracker. When you unpack a Tracker distribution 
 					to a location on your disk, you effectively create a local platform installation at 
 					that location. The installation contains a set of tools that were packaged together 
@@ -33,7 +40,7 @@
 					tools. </para>
 				</listitem>
 				<listitem>
-					<para>A Tracker <emphasis>workbench instance</emphasis> is a runtime instance of the 
+					<para>A Tracker<emphasis>workbench instance</emphasis> is a runtime instance of the 
 					Tracker. Every time you launch the Tracker, a workbench instance is created, making 
 					the tools in the platform installation from which the instance was loaded available 
 					for use.  

@@ -2,7 +2,7 @@
 <!DOCTYPE bookinfo PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" 
  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
  <bookinfo>
-		<title>Tracker User Guide</title>
+		<title>Tracker Business Intelligence Toolkit User Guide</title>
 		<authorgroup>
 			<author>
 				<firstname>John</firstname>
@@ -13,9 +13,9 @@
 			</author>
 		</authorgroup>
 		<edition>
-			Tracker User's Guide version 0.2.0
+			Tracker Business Intelligence Toolkit User Guide version 0.2.1
 		</edition>
-		<pubdate>April 17, 2009</pubdate>
+		<pubdate>August 19, 2009</pubdate>
 		<copyright>
 			<year>2008</year>
 			<year>2009</year>
@@ -40,7 +40,8 @@
 		<legalnotice>
 			<blockquote>
 				<para>
-					Tracker is free software: you can redistribute it
+					Tracker Business Intelligence Toolkit is 
+				    free software: you can redistribute it
 					and/or modify it under the terms of the
 					<acronym>GNU</acronym>
 					General Public License as published by the Free

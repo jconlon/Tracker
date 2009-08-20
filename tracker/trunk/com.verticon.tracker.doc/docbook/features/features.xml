@@ -4,12 +4,12 @@
 <chapter>
   	<?dbhtml filename="features/features.html" ?>
 	<title>Provisioned Features</title>
-	<para>Tracker Livestock Information Framework Instances may be provisioned 
+	<para>Tracker Livestock Business Intelligence Toolkit Instances may be provisioned 
 	with one or more task specific tools or utilities to complement data model specific
     Editors.</para>
     
-    <para>The Tracker product line
-	consists of the following types of task specific utilities and tools features:
+    <para>The Tracker Business Intelligence Toolkit and Features
+	consists of the following types of task specific utilities and tools:
 	<itemizedlist mark='bullet'>
 				<listitem>
 					<para>Data Importing Utilities;

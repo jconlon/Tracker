@@ -104,7 +104,7 @@
 		</figure>
 	
 	    <para>
-		  Once the Tracker Desktop and the Premises Editor are installed setup takes less than a minute.
+		  Once the Tracker <acronym>BI</acronym> Toolkit and the Premises Editor Feature are installed setup takes less than a minute.
 		  Administration use-cases are shown in
 		<xref linkend="fig_setUpUseCases" />. 
 		</para>
@@ -356,7 +356,7 @@
 					<note><title>Reader Feature</title>
 					<para>The Readers Feature is an optional Feature that may be installed 
 					(called <glossterm>provisioned</glossterm>) by the user. The Readers Feature
-					allows the Tracker Desktop User to control and configure connections to one or more 
+					allows the Tracker <acronym>BI</acronym> Toolkit User to control and configure connections to one or more 
 				    Tag ID Event Readers enabling them to independently add Event Transactions to 
 					Premises Documents.</para>
 					</note>
