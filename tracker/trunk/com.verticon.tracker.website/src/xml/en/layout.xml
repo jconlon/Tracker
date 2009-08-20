@@ -1,4 +1,8 @@
 <?xml version="1.0"?>
+<!--  
+<!DOCTYPE layout PUBLIC "-//Norman Walsh//DTD Website Layout V2.5.0//EN"
+                 "http://docbook.sourceforge.net/release/website/2.5.0/layout.dtd">
+-->
   <layout>
 
 <config param="headlink" value="sitemap" altval="Site Map"/>
@@ -10,7 +14,7 @@
 
 <config param="banner" value="img/logo.png" altval="Tracker"/>
 
-<copyright role="about">
+<copyright >
   <year>2007</year>
   <year>2008</year>
   <year>2009</year>
@@ -18,7 +22,7 @@
 </copyright>
 
 <headlink rel="icon" href="img/favicon.ico" type="image/x-icon"/>
-<style src="css/tracker.css" type="text/css" media="screen"/>
+<style src="css/tracker.css" type="text/css" />
 
 <toc page="index.xml" filename="index.html">
   <tocentry page="about/about.xml" dir="about" filename="index.html">
