@@ -148,8 +148,8 @@
          <ttl>Downloads</ttl>
          <xreftext>Downloads</xreftext>
          <div element="section" href="#d10e14" number="">
-            <ttl>Tracker Desktop Product</ttl>
-            <xreftext>the section called “Tracker Desktop Product”</xreftext>
+            <ttl>Tracker BI Toolkit</ttl>
+            <xreftext>the section called “Tracker BI Toolkit”</xreftext>
             <obj element="table" href="#ex.calstable" number="1">
                <ttl>Revision 0.3.5, Engineering Released on: July 2, 2009</ttl>
                <xreftext>Table 1, “Revision 0.3.5, Engineering Released on: July 2, 2009”</xreftext>
@@ -240,9 +240,17 @@
       <div element="webpage" href="#goals" number="" targetptr="goals">
          <ttl>Design Goals</ttl>
          <xreftext>Design Goals</xreftext>
+         <div element="section" href="#frameworkOverview_goals" number="" targetptr="frameworkOverview_goals">
+            <ttl>Project Goals</ttl>
+            <xreftext>the section called “Project Goals”</xreftext>
+         </div>
+         <div element="section" href="#d13e49" number="">
+            <ttl>Methodology</ttl>
+            <xreftext>the section called “Methodology”</xreftext>
+         </div>
          <div element="section" href="#businessObjects" number="" targetptr="businessObjects">
-            <ttl>Network Aware Business Objects</ttl>
-            <xreftext>the section called “Network Aware Business Objects”</xreftext>
+            <ttl>Direction</ttl>
+            <xreftext>the section called “Direction”</xreftext>
          </div>
       </div>
    </document>

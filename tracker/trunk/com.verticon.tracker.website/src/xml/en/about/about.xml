@@ -7,10 +7,10 @@
     </summary>
     <keywords>Tracker, Business Intelligence, Eclipse, OSGi</keywords>
   </head>
-<!-- TODO move to a Design Goals page
-Tracker follows open industry standards, open data accessibility, and open source licensing. -->
   <para>
-    Tracker is a Business Intelligence (<acronym>BI</acronym>) Toolkit and suite of <acronym>BI</acronym> Featured
+    Tracker is a 
+    <ulink url="http://en.wikipedia.org/wiki/Business_intelligence">Business Intelligence</ulink> 
+    (<acronym>BI</acronym>) Toolkit and suite of <acronym>BI</acronym> Featured
     solutions for animal agriculture professionals. Tracker <acronym>BI</acronym> Features
     provide historical, current, and predictive views of animal agriculture business operations.
   </para>
@@ -19,7 +19,8 @@ Tracker follows open industry standards, open data accessibility, and open sourc
   <section id="businessIntelligenceToolkit">
     <title>Tracker Business Intelligence Toolkit</title>
     <para>
-	The Tracker <acronym>BI</acronym> Toolkit is an Eclipse based <emphasis>network aware rich client 
+	Tracker <acronym>BI</acronym> Toolkit is an 
+	<ulink url="http://www.eclipse.org/">Eclipse</ulink> based <emphasis>network aware rich client 
 	platform</emphasis> that can be installed with one or more <acronym>BI</acronym> Features.
 	</para>
   </section>  

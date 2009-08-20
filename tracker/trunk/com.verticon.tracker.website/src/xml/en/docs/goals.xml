@@ -9,14 +9,54 @@
 		<keywords>Tracker, Business Intelligence, Eclipse, OSGi</keywords>
 	</head>
 
-	<para>
-		Follow open industry standards, open data accessibility, open source
-		licensing within a collaborative
-		business technology development environment.
-   </para>
+    <section id="frameworkOverview_goals" >
+		<title>Project Goals</title>
+		<para>
+			The Tracker project was undertaken to provide;
+			<itemizedlist numeration="opencircle">
+				<listitem>
+					<para>
+						Business Intelligence Toolkit for the rapid creation of 
+						Business Intelligence solutions useful for Livestock
+					    producers and infrastructure providers;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						free Open Source technologies to encourage widespread vendor
+						integration and user deployment of generic Livestock Business 
+						Intelligence solutions;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						lower costing custom solutions for Livestock producers, 
+						infrastructure providers and 
+						process auditors;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						create ubiquitous livestock event history inter-exchange solutions
+						via associations and marketplaces.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	<section>
+	    <title>Methodology</title>
+		<para>
+		Utilize state of the art software technologies that leverage component modularization,
+	    distributed network computing, and business object modeling. Work within a collaborative 
+		business technology friendly environment that adheres to open industry standards, 
+		open data interfaces and open source licensing. 
+   		</para>
+   </section>
 
 	<section id="businessObjects">
-		<title>Network Aware Business Objects</title>
+		<title>Direction</title>
+		<para>The creation of Network Aware Business Objects.</para>
 		<para>
 			Tracker
 			<acronym>BI</acronym>
