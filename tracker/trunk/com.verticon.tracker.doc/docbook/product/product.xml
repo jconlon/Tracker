@@ -4,11 +4,11 @@
 <chapter>
   	<?dbhtml filename="product/product.html" ?>
 	<title>Product Family</title>
-	<para>The Tracker product line
+	<para>The Tracker Business Intelligence Toolkit and Features
 	consists of the following products:
 	<itemizedlist mark='bullet'>
 				<listitem>
-					<para>Tracker Desktop, is the initial product offering;</para>
+					<para>Tracker BI Toolkit Desktop, is the initial product offering;</para>
 				</listitem>
 				<listitem>
 					<para>Tracker Collaboration Service Provider;</para>

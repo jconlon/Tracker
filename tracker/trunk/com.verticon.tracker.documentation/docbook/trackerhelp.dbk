@@ -8,6 +8,7 @@
 	<xi:include href="../../com.verticon.tracker.doc/docbook/preface/preface.xml"/>
 	<xi:include href="../../com.verticon.tracker.doc/docbook/colophon/colophon.xml"/>
 	<xi:include href="../../com.verticon.tracker.doc/docbook/overview/overview.xml"/>
+	<xi:include href="../../com.verticon.tracker.doc/docbook/overview/usecases.xml"/>
 	<xi:include href="../../com.verticon.tracker.doc/docbook/product/product.xml"/>
 	<!-- Add products -->
 	<xi:include href="../../com.verticon.tracker.product.desktop.doc/docbook/desktopProduct/desktopProduct.xml"/>
