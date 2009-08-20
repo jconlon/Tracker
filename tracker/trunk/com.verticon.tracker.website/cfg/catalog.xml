@@ -11,7 +11,12 @@
 
    <public publicId="-//Norman Walsh//DTD Website Autolayout V2.5.0//EN"
    	      uri="file:///opt/Docbook/Silkpage/silkpage-core-0_6_0/share/tools/docbook-website/schema/dtd/autolayout.dtd"/>
- 
+  
+   <public publicId="-//Norman Walsh//DTD Website Layout V2.5.0//EN"
+   	      uri="file:///opt/Docbook/Silkpage/silkpage-core-0_6_0/share/tools/docbook-website/schema/dtd/layout.dtd"/>
+  
+  
+   
  <!-- 
  http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=423087
    -->
