@@ -63,6 +63,7 @@
 	<!-- ===================================================================== -->
 	<!-- Steps to do before setup -->
 	<!-- Modified TEMPLATE -->
+	<!-- Called from productBuild main   -->
 	<!-- ===================================================================== -->
 	<target name="preSetup" depends="copyProjects">
 		<antcall target="updateProductVersion">
@@ -241,6 +242,7 @@
 		
 		<property name="trackerVersion" 
 			value="${tracker.product.version}.v${DSTAMP}${TSTAMP}"/>
+		<echo>${product} will have token replaced with:    ${trackerVersion}</echo>
 
 		<replace file="${product}" token="0.0.0.qualifier" 
 			value="${trackerVersion}" />
