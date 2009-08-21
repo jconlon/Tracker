@@ -27,3 +27,5 @@ For releases:
 2. Run Tracker.launch - to build product and product p2 metadata
 3. From any feature, Export all features to the repository -  Deploys p2 metadata to repository. (updatesite/catalog.xml specs the categories)
 4. Run Sync S3.launch - Moves all artifacts over to ~/Uploads/s3 and mirrors these to S3.
+5. Sync any changed documentation to S3 - see documentation
+6. Change downloads page on website and sync it. - see website
