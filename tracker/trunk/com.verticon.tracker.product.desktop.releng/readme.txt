@@ -23,7 +23,8 @@ Notes
 Build Instructions
 
 For releases:
-1. Remove (and save?) repository containing old builds
+1. Old repos can be removed or left in place.  If left in place artifacts of the same 
+version overwrite the preexisting ones. 
 2. Run Tracker.launch - to build product and product p2 metadata
 3. From any feature, Export all features to the repository -  Deploys p2 metadata to repository. (updatesite/catalog.xml specs the categories)
 4. Run Sync S3.launch - Moves all artifacts over to ~/Uploads/s3 and mirrors these to S3.
