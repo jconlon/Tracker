@@ -19,6 +19,11 @@ import org.eclipse.swtbot.swt.finder.results.WidgetResult;
 import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot;
 import org.hamcrest.Matcher;
 
+/**
+ * 
+ * @author seelmann@apache.org, jconlon@verticon.com
+ *
+ */
 public class ContextMenuHelper {
 	private static Logger log = Logger.getLogger(ContextMenuHelper.class);
   /**
