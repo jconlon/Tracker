@@ -1,0 +1,114 @@
+<project name="provisioning build" default="build.p2.site">
+
+
+	<!-- ================================= 
+	          target: generate.site.repo  
+				Generating metadata for a traditional Eclipse update site (-updateSite argument)
+		 		-updateSite <path> 
+		    		the path of a traditional update site to generate p2 metadata for 
+				
+				-site <path> 
+		    		the URL of a site.xml file used to generator categories 
+	     =================================   -->
+	<target name="build.p2.site" description="Generates P2 Metadata repository for a site" >
+		<property name="updatesite" value="${sp:action.output}" />
+		<property name="site" value="file:${updatesite}/site.xml" />
+
+		<echo message="Embed a line break:${line.separator}" />
+		<echo>Eclipse is Running=${eclipse.running} from ${eclipse.exec} 
+	    		update site is ${sp:input}
+	    		output will go to ${updatesite}
+	    	</echo>
+
+		<echo>Site directory is  ${site.dir}</echo>
+		
+		<unzip dest="${updatesite}">
+					<fileset dir="${sp:input}">
+						<include name="**/*.zip" />
+						<exclude name="**/tmp*.zip" />
+					</fileset>
+		</unzip>
+		
+		<!--
+			Attempt to fix Ticket #293
+		<antcall target="quailifyBrandingPluginWithFeatureVersion"/>
+		-->
+		<exec executable="${eclipse.exec}" failonerror="false" timeout="900000">
+			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
+			<arg line="-updatesite ${updatesite}" />
+			<arg line="-site ${site}" />
+			<arg line="-metadataRepository file:${updatesite}" />
+			<arg line="-artifactRepository file:${updatesite}" />
+			<arg line="-metadataRepositoryName &quot;${p2.metadata.repo.name}&quot;" />
+			<arg line="-artifactRepositoryName &quot;${p2.artifact.repo.name}&quot;" />
+			<arg line="-noDefaultIUs" />
+			<arg line="-consoleLog" />
+			<arg line="-nosplash" />
+			<arg line="--launcher.suppressErrors" />
+			<arg line="-compress" />
+			<arg line="-reusePack200Files" />
+			   
+			<!--
+			<arg line="-publishArtifactRepository" />
+			arg line="-rootVersion ${p2.generator.root.version}" />
+	    				<arg line="-source ${p2.generator.source}" />
+	    				<arg line="-root ${p2.generator.root}" 
+	    				<arg line="-publishArtifacts" />
+	    				<arg line="-append" />
+	    				/-->
+			<arg line="-flavor ${p2.flavor}" />
+			<arg line="-vmargs -Zmx256m " />
+		</exec>
+		<echo>Created repo at ${updatesite} from ${sp:input}</echo>
+	</target>
+
+
+	<!-- ================================= 
+          target: clean.generic             
+         ================================= -->
+	<target name="clean.generic" description="Cleans the action.output directory">
+		<delete dir="${sp:action.output}" />
+		<echo>Deleted ${sp:action.output}</echo>
+	</target>
+
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+		          target: quailifyBrandingPluginWithFeatureVersion    
+		          
+		          ${updatesite} now contains a features directory and a plugins directory.  
+					1. foreach feature in the features directory
+						a. from the feature.xml get the version, the qualifier and the branding plugin
+						b. unzip the branding plugin and replace the about.mapping values
+						c.                   
+		         - - - - - - - - - - - - - - - - - -->
+		<target name="quailifyBrandingPluginWithFeatureVersion" depends="init">
+			<for param="file">
+				<path>
+					<fileset dir="${buildDirectory}/repo/plugins">
+						<include name="**/org.eclipse.ui.workbench.compatibility*.jar" />
+						<include name="**/org.eclipse.core.runtime.compatibility*.jar" />
+						<include name="**/org.eclipse.platform*.jar" />
+						<include name="**/org.eclipse.equinox.launcher*.jar" />
+						
+					</fileset>
+				</path>
+				<sequential>
+					<antcall target="verifyJar">
+						<param name="jarFile" value="@{file}" />
+					</antcall>
+				</sequential>
+			</for>
+		</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: init                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="init">
+    	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+    				<classpath>
+    					<pathelement location="/home/jconlon/downloads/Ant/ant-contrib-0.6.jar" />
+    				</classpath>
+    	</taskdef>
+    </target>
+
+</project>

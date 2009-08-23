@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet
+      title="Adding a TagId Reader">
+   <intro
+         href="/com.verticon.tracker.reader.doc/html/reader/reader.html">
+      <description>
+         This cheat sheet will show you how to connect <b>Tracker Toolkit</b> to a Tag ID Reader and map Tag ID reads to Animals and Events.
+      </description>
+   </intro>
+   <item
+         href="/com.verticon.tracker.reader.doc/html/reader/reader.html"
+         title="Open Readers View">
+      <description>
+         Open the <b>Readers</b> view in the workbench.
+      </description>
+      <command
+            required="false"
+            serialization="org.eclipse.ui.views.showView(org.eclipse.ui.views.showView.viewId=com.verticon.tracker.reader.view)"/>
+   </item>
+   <item
+         dialog="true"
+         href="/com.verticon.tracker.reader.doc/html/reader/reader.html"
+         title="Start the Add a Reader Wizard">
+      <description>
+         Start the <b>Add an Event Reader Wizard</b> to add a new <b>Reader</b> to the <b>Readers</b> view.
+      </description>
+      <command
+            required="false"
+            serialization="com.verticon.tracker.reader.commands.addReader"/>
+      
+   </item>
+   <item
+         title="Answer Wizard Dialogs" dialog="true">
+      <description>
+         Respond to <b>Add an Event Reader Wizard</b> dialogs.
+      </description>
+      
+      <subitem
+            label="Select an Animal Document for mapping Animals and Events to Reader Tag IDs">
+      </subitem>
+      <subitem
+            label="Select the type of Reader and respond to all dialog questions specific to the Reader Type.">
+      </subitem>
+   </item>
+   
+   <item
+         href="/com.verticon.tracker.reader.doc/html/reader/reader.html"
+         skip="true"
+         title="Start the Reader">
+      <description>
+         The <b>Reader</b> you added will show up as a new row in the <b>Readers</b> view. <br/><br/>Check the start box in the first column of the row to start the connection to the <b>Reader</b>.
+      </description>
+   </item>
+   
+</cheatsheet>

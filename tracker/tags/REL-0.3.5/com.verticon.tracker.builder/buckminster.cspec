@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="com.verticon.tracker.builder" componentType="buckminster" version="1.0.0" versionType="OSGi">
+    <cs:dependencies>
+        <cs:dependency name="com.verticon.tracker.base.dep" componentType="eclipse.feature"/>
+        <cs:dependency name="com.verticon.tracker.documentation"/>
+        <cs:dependency name="com.verticon.tracker.product.desktop" componentType="eclipse.feature"/>
+        <cs:dependency name="com.verticon.tracker.update" componentType="buckminster"/>
+        <cs:dependency name="org.eclipse.pde.build" componentType="osgi.bundle"/>
+    </cs:dependencies>
+    <cs:actions>
+        <cs:public name="deploy.product.downloads" actor="ant">
+            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Deploys latest version of the product artifact to the local s3 downloads directory.</cs:documentation>
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="buildConfiguration/buildLocalRepo.xml"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="result" value="${buckminster.home}buildDirectory/result/"/>
+            </cs:properties>
+            <cs:products alias="action.output" base="${user.dir}/Uploads/s3/Tracker/downloads/"/>
+        </cs:public>
+        <cs:public name="deploy.product.repo" actor="ant">
+            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Deploys the product feature to ${user.dir}/Uploads/s3/Tracker/p2/product/ P2 repo.</cs:documentation>
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="buildConfiguration/buildLocalRepo.xml"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="repo.product" value="${buckminster.home}buildDirectory/repo/"/>
+            </cs:properties>
+            <cs:products alias="action.output" base="${user.dir}/Uploads/s3/Tracker/p2/product/">
+                <cs:private name="product" base="${user.dir}/Uploads/s3/Tracker/p2/product/"/>
+            </cs:products>
+        </cs:public>
+        <cs:public name="deploy.product.test" actor="ant">
+            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Deploys the current product to the /tmp/tracker directory.  Used for testing.</cs:documentation>
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="buildConfiguration/buildLocalRepo.xml"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="result" value="${buckminster.home}buildDirectory/result/"/>
+            </cs:properties>
+            <cs:products alias="action.output" base="/tmp/tracker/"/>
+        </cs:public>
+        <cs:public name="s3cmd.sync" actor="ant">
+            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Syncs the files in the users s3 directory with Amazon S3.</cs:documentation>
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="buildConfiguration/buildLocalRepo.xml"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="local.dir.to.sync" value="${user.dir}/Uploads/s3/"/>
+                <cs:property key="s3.bucket" value="s3://tracker.verticon.com/"/>
+                <cs:property key="s3.bucket.location" value="US"/>
+                <cs:property key="s3cmd.exec" value="/usr/bin/s3cmd"/>
+            </cs:properties>
+            <cs:products alias="action.output" base="/tmp/tracker/"/>
+        </cs:public>
+    </cs:actions>
+    <cs:groups>
+        <cs:public name="deploy.features.repos.and.documentation">
+            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Calls the com.verticon.tracker.update to deploy features to the S3 repo staging directory and
+com.verticon.tracker.documentation to deploy standalone documentation to the S3 documentation
+staging directory.</cs:documentation>
+            <cs:attribute name="deploy.documentation.to.local.s3.staging" component="com.verticon.tracker.documentation"/>
+            <cs:attribute name="build-and-deploy.repositories" component="com.verticon.tracker.update"/>
+        </cs:public>
+        <cs:private name="deploy.documentation">
+            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Calls action on com.verticon.tracker.documentation to 
+deploy documentation to the local s3 repo.</cs:documentation>
+            <cs:attribute name="deploy.documentation.to.local.s3.staging" component="com.verticon.tracker.documentation"/>
+        </cs:private>
+    </cs:groups>
+</cs:cspec>

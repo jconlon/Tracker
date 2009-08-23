@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.verticon.tracker.fair.poi"
+      label="Tracker Fair Excel Import Export Feature"
+      version="0.1.1.qualifier"
+      provider-name="Verticon, Inc.">
+
+   <description>
+      Tracker Fair Excel Import and Export, exports and imports Fair
+Registration and Weigh-In Animal Event data to and from MicroSoft
+Excel Spreadsheet files.
+   </description>
+
+   <copyright>
+      Tracker Fair Excel Import and Export
+Copyright (C) 2008, 2009 Verticon, Inc. All Rights Reserved.
+   </copyright>
+
+   <license url="http://www.gnu.org/licenses/gpl.html">
+      Tracker is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+Tracker is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details. 
+
+You should have received a copy of the GNU General Public License along with Tracker.
+   </license>
+
+   <url>
+      <discovery label="Tracker Release Update Site" url="http://tracker.verticon.com/Tracker/p2/product"/>
+   </url>
+
+   <requires>
+      <import feature="org.apache.poi" version="2.5.1" match="greaterOrEqual"/>
+      <import feature="com.verticon.tracker.editor" version="0.3.1" match="greaterOrEqual"/>
+      <import feature="com.verticon.tracker.fair.editor" version="0.1.5" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="com.verticon.tracker.fair.poi"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.fair.poi.documenation"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+</feature>
