@@ -1,0 +1,97 @@
+<webpage id="goals">
+	<config param="rcsdate"
+		value="$Date: 2009-08-18 23:37:34 -0500 (Tue, 18 Aug 2009) $" />
+	<head>
+		<title>Design Goals</title>
+		<summary>
+			Methodology, Technology and Direction
+    </summary>
+		<keywords>Tracker, Business Intelligence, Eclipse, OSGi</keywords>
+	</head>
+
+    <section id="frameworkOverview_goals" >
+		<title>Project Goals</title>
+		<para>
+			The Tracker project was undertaken to provide;
+			<itemizedlist numeration="opencircle">
+				<listitem>
+					<para>
+						a Business Intelligence Toolkit for the rapid creation of 
+						Business Intelligence solutions useful for Livestock
+					    producers and infrastructure providers;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						free Open Source technologies to encourage widespread vendor
+						integration and user deployment of generic Livestock Business 
+						Intelligence solutions;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						lower costing custom solutions for Livestock producers, 
+						infrastructure providers and 
+						process auditors;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						create ubiquitous livestock event history inter-exchange solutions
+						via associations and marketplaces.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	<section>
+	    <title>Methodology</title>
+		<para>
+		Utilize state of the art software technologies that leverage component modularization,
+	    distributed network computing, and business object modeling. Work within a collaborative 
+		business technology friendly environment that adheres to open industry standards, 
+		open data interfaces and open source licensing. 
+   		</para>
+   </section>
+
+	<section id="businessObjects">
+		<title>Direction</title>
+		<para>The creation of Network Aware Business Objects.</para>
+		<para>
+			Tracker
+			<acronym>BI</acronym>
+			Features are network repository resident business objects that
+			can be selected by the user for installation in the Tracker Toolkit.
+			Once installed Tracker
+			<acronym>BI</acronym>
+			Features are updated and managed from within the Tracker
+			<acronym>BI</acronym>
+			Toolkit to meet specific business needs of the user. Tracker
+			<acronym>BI</acronym>
+			Features support:
+			<itemizedlist mark='opencircle'>
+				<listitem>
+					<para>Open Data formats for improved data management,</para>
+				</listitem>
+				<listitem>
+					<para>Open Source Code to insure auditing transparency and future
+						extensibility,</para>
+				</listitem>
+				<listitem>
+					<para>Component Based functionality to speed development and
+						administration,</para>
+				</listitem>
+				<listitem>
+					<para>Industry Standardization to meet the needs of a multi-vendor
+						integrated marketplace,</para>
+				</listitem>
+				<listitem>
+					<para>and Multi-platform runtimes to expand user and use-case
+						operating system and hardware platform choices.</para>
+				</listitem>
+			</itemizedlist>
+
+		</para>
+	</section>
+
+</webpage>

@@ -1,0 +1,80 @@
+<webpage id="about">
+  <config param="rcsdate" value="$Date$"/>
+  <head>
+    <title>About</title>
+    <summary>
+    Tracker Business Intelligence Toolkit and Featured Solutions
+    </summary>
+    <keywords>Tracker, Business Intelligence, Eclipse, OSGi</keywords>
+  </head>
+  <para>
+    Tracker is a 
+    <ulink url="http://en.wikipedia.org/wiki/Business_intelligence">Business Intelligence</ulink> 
+    (<acronym>BI</acronym>) Toolkit and suite of <acronym>BI</acronym> Featured
+    solutions for animal agriculture professionals. Tracker <acronym>BI</acronym> Features
+    provide historical, current, and predictive views of animal agriculture business operations.
+  </para>
+
+ 
+  <section id="businessIntelligenceToolkit">
+    <title>Tracker Business Intelligence Toolkit</title>
+    <para>
+	Tracker <acronym>BI</acronym> Toolkit is an 
+	<ulink url="http://www.eclipse.org/">Eclipse</ulink> based <emphasis>network aware rich client 
+	platform</emphasis> that can be installed with one or more <acronym>BI</acronym> Features.
+	</para>
+  </section>  
+  
+  <section id="businessIntelligenceFeatures">
+    <title>Tracker Business Intelligence Features</title>
+    <para>
+  	Tracker <acronym>BI</acronym> Features are used by <emphasis>Animal Agriculture producers</emphasis>, 
+  	<emphasis>infrastructure providers</emphasis> and <emphasis>process control auditors</emphasis> to 
+ 	<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>Document;</para>
+			</listitem>
+			<listitem >
+				<para>Manage;</para>
+			</listitem>
+			<listitem>
+				<para>Analyze;</para>
+			</listitem>
+			<listitem>
+				<para>Report;</para>
+			</listitem>
+			<listitem>
+				<para>and Inter-exchange business information.</para>
+			</listitem>
+	</itemizedlist>
+    </para>
+    </section>
+
+    <section id="businessSolutions">
+    <title>Tracker Business Intelligence Solutions</title>
+	<para>
+	Tracker <acronym>BI</acronym> Features are cost effective solutions for;
+	<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>recording animal event histories;</para>
+			</listitem>
+			<listitem >
+				<para>maintaining production efficiency;</para>
+			</listitem>
+			<listitem>
+				<para>improving herd quality;</para>
+			</listitem>
+			<listitem>
+				<para>documenting process controls;</para>
+			</listitem>
+			<listitem>
+				<para>recording animal movements;</para>
+			</listitem>
+			<listitem>
+				<para>and sharing animal history information.</para>
+			</listitem>
+	</itemizedlist>
+	</para>
+	</section>
+  
+</webpage>

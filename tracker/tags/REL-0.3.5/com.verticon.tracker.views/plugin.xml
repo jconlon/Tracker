@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+<extension
+         point="org.eclipse.ui.views">
+         <category
+            name="Tracker"
+            id="com.verticon.tracker.views">
+      </category>
+      <view
+            name="Animals"
+            icon="icons/BovineBeef.gif"
+            category="com.verticon.tracker.views"
+            class="com.verticon.tracker.views.AnimalsView"
+            id="com.verticon.tracker.views.AnimalsView">
+      </view>
+      <view
+            name="Events"
+            icon="icons/waiting.gif"
+            category="com.verticon.tracker.views"
+            class="com.verticon.tracker.views.EventsView"
+            id="com.verticon.tracker.views.EventsView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="com.verticon.tracker.product.desktop.perspective">
+         <view
+               visible="true"
+               relative="org.eclipse.ui.views.PropertySheet"
+               relationship="stack"
+               id="com.verticon.tracker.views.AnimalsView">
+         </view>
+         <viewShortcut id="com.verticon.tracker.views.AnimalsView"/>
+         
+         <view
+               visible="true"
+               relative="org.eclipse.ui.views.PropertySheet"
+               relationship="stack"
+               id="com.verticon.tracker.views.EventsView">
+         </view>
+         <viewShortcut id="com.verticon.tracker.views.EventsView"/>
+      </perspectiveExtension>
+   </extension>
+
+
+</plugin>
