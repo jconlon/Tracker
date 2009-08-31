@@ -20,7 +20,6 @@ import org.eclipse.jface.databinding.viewers.ViewersObservables;
 import org.eclipse.jface.databinding.wizard.WizardPageSupport;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -28,10 +27,8 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchWindow;
 
 import com.verticon.tracker.Animal;
@@ -62,6 +59,12 @@ public class AddEventWizard extends Wizard {
 	private IObservableValue animalSelection;
 	private SelectEventWizardPage selectEventWizardPage;
 	private Collection<?> results;
+	
+
+	public AddEventWizard() {
+		super();
+		this.setDefaultPageImageDescriptor(ViewsPlugin.imageDescriptorFromPlugin("icons/waiting.gif"));
+	}
 
 	@Override
 	public void addPages() {
@@ -171,10 +174,15 @@ public class AddEventWizard extends Wizard {
 
 	private static class SelectAnimalWizardPage extends WizardPage {
 
+		@Override
+		public void dispose() {
+			// TODO Auto-generated method stub
+			super.dispose();
+		}
+
 		protected SelectAnimalWizardPage() {
 			super("Animal", "Select the Animal Associated with the Event",
-					ImageDescriptor.createFromImage(new Image(Display
-							.getDefault(), 16, 16)));
+					ViewsPlugin.imageDescriptorFromPlugin("icons/BovineBeef.gif"));
 		}
 
 		public void createControl(Composite parent) {
