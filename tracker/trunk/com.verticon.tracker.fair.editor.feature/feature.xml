@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.fair.editor"
       label="Tracker Fair Editor"
-      version="0.2.1.qualifier"
+      version="0.2.2.qualifier"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.fair.editor">
 

@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.editor"
       label="Tracker Premises Editor"
-      version="0.3.6.qualifier"
+      version="0.3.7.qualifier"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.editor">
 
