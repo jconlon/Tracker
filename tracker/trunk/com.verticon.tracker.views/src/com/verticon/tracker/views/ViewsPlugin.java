@@ -6,9 +6,10 @@ package com.verticon.tracker.views;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.eclipse.core.runtime.Plugin;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
@@ -18,15 +19,20 @@ import com.verticon.tracker.editor.util.IViewerFilters;
  * @author jconlon
  *
  */
-public class ViewsPlugin extends Plugin implements IViewerFilters{
+public class ViewsPlugin extends AbstractUIPlugin implements IViewerFilters{
 
 	// The shared instance.
     static ViewsPlugin plugin;
 	private BundleContext bundleContext = null;
+	private static final String ID = "com.verticon.tracker.views";
 	
 	
 	public ViewsPlugin() {
 		plugin = this;
+	}
+	
+	static ImageDescriptor imageDescriptorFromPlugin(String imageFilePath){ 
+		return AbstractUIPlugin.imageDescriptorFromPlugin(ID, imageFilePath);
 	}
 
 
