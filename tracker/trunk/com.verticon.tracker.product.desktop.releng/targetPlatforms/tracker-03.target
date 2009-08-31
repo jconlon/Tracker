@@ -20,5 +20,9 @@
 <unit id="org.eclipse.datatools.sdk.feature.feature.group" version="1.7.0.v200906050400-7O9H-FD0IVEH6AsdTaISiFGNkk6p"/>
 <repository location="http://download.eclipse.org/releases/galileo"/>
 </location>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.swt.tools" version="3.5.0.0"/>
+<repository location="http://www.eclipse.org/swt/updates/3.5"/>
+</location>
 </locations>
 </target>
