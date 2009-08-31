@@ -12,13 +12,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.databinding.wizard.WizardPageSupport;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 
 import com.verticon.tracker.fair.Exhibit;
@@ -52,8 +49,7 @@ public class AddExhibitWizardPage extends WizardPage implements
 	}
 
 	protected AddExhibitWizardPage(Fair fair, AddExhibitWizardPageParent parent) {
-		super("Exhibit", "Add an Exhibit", ImageDescriptor
-				.createFromImage(new Image(Display.getDefault(), 16, 16)));
+		super("Exhibit", "Add an Exhibit", null);
 		this.fair = fair;
 		this.parentPage = parent;
 	}
