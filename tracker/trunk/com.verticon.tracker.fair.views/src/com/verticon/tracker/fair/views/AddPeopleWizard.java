@@ -20,14 +20,11 @@ import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.databinding.wizard.WizardPageSupport;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -173,8 +170,8 @@ public class AddPeopleWizard extends Wizard {
 		}
 
 		protected FirstWizardPage() {
-			super("Person", "Enter a Person Details", ImageDescriptor
-					.createFromImage(new Image(Display.getDefault(), 16, 16)));
+			super("Person", "Enter a Person Details", 
+					ViewsPlugin.imageDescriptorFromPlugin("icons/Person.gif"));
 		}
 
 		public void createControl(Composite parent) {

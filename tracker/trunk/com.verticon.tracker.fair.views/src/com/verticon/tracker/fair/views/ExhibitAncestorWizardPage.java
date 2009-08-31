@@ -82,9 +82,7 @@ abstract class ExhibitAncestorWizardPage extends WizardPage implements
 
 	ExhibitAncestorWizardPage(String pageName, EStructuralFeature feature,
 			EObject owner, ExhibitAncestorWizardPage parentPage) {
-		super(feature.getName(), "Choose or Create a " + pageName,
-				ImageDescriptor.createFromImage(new Image(Display.getDefault(),
-						16, 16)));
+		super(feature.getName(), "Choose or Create a " + pageName,null);
 		eStructuralFeature = feature;
 		this.owner = owner;
 		this.parentPage = parentPage;

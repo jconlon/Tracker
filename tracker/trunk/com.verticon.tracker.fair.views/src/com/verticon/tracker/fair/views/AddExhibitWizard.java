@@ -31,6 +31,8 @@ public class AddExhibitWizard extends Wizard {
 		super();
 		this.fair = fair;
 		this.workbenchWindow = workbenchWindow;
+		this.setDefaultPageImageDescriptor(
+				ViewsPlugin.imageDescriptorFromPlugin("icons/Exhibit.gif"));
 	}
 
 	/**

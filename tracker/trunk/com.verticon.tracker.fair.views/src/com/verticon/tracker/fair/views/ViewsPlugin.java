@@ -6,9 +6,10 @@ package com.verticon.tracker.fair.views;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.eclipse.core.runtime.Plugin;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
@@ -18,17 +19,22 @@ import com.verticon.tracker.editor.util.IViewerFilters;
  * @author jconlon
  *
  */
-public class ViewsPlugin extends Plugin implements IViewerFilters{
+public class ViewsPlugin extends AbstractUIPlugin implements IViewerFilters{
 
 	// The shared instance.
     static ViewsPlugin plugin;
 	private BundleContext bundleContext = null;
+    static final String ID = "com.verticon.tracker.fair.views";
 	
 	
 	public ViewsPlugin() {
 		plugin = this;
 	}
 
+	static ImageDescriptor imageDescriptorFromPlugin(String imageFilePath){ 
+		return AbstractUIPlugin.imageDescriptorFromPlugin(ID, imageFilePath);
+	}
+	
 	public Collection<ViewerFilter> getViewerFilters(EClass type) {
 		Collection<ViewerFilter> result;
 		if(bundleContext!=null){
@@ -47,7 +53,6 @@ public class ViewsPlugin extends Plugin implements IViewerFilters{
 		return result;
 	}
 
-
 	@Override
 	public void start(BundleContext context) throws Exception {
 		bundleContext=context;
@@ -59,7 +64,5 @@ public class ViewsPlugin extends Plugin implements IViewerFilters{
 		bundleContext=null;
 		super.stop(context);
 	}
-
-	
 
 }
