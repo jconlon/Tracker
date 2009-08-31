@@ -35,7 +35,7 @@ public class PersonRegisteredTester extends PropertyTester {
 	boolean isPersonRegistered(Person person){
 		Fair fair = (Fair)person.eContainer();
 		for (Exhibit exhibit : fair.exhibits()) {
-			if(exhibit.getExhibitor().equals(person)){
+			if(exhibit.getExhibitor()!=null && exhibit.getExhibitor().equals(person)){
 				return true;
 			}
 		}
