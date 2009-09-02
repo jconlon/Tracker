@@ -11,6 +11,9 @@ import com.verticon.tracker.fair.Person;
 public class PersonRegisteredTester extends PropertyTester {
 	
 
+	/**
+	 * Must be a collection of people that are registered.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean test(Object receiver, String property, Object[] args,
@@ -18,9 +21,13 @@ public class PersonRegisteredTester extends PropertyTester {
 		
 		
 		if(receiver instanceof Collection){
-			Collection<Person> people = (Collection<Person>)receiver;
-			for (Person person : people) {//Everyperson must be registered 
-				if(!isPersonRegistered( person)){
+			Collection<?> objects = (Collection<?>)receiver;
+			for (Object object : objects) {//Everyperson must be registered 
+				if(object instanceof Person){
+					if(!isPersonRegistered( (Person)object)){
+						return false;
+					}
+				}else{
 					return false;
 				}
 			}
