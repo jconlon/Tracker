@@ -245,8 +245,9 @@
                         </instanceof>
                      </iterate>
                 	 <!-- 
-			        	Restricted to show only if the active Editor is a ContentOutlinePage.
-			        	Ticket#403
+			        	Restricted to show only if the active Editor is a ContentOutlinePage
+			        	provider Ticket#403
+			        	And only when the OutlinePage is showing Ticket#452
           			 -->
           			 <test
                			 property="com.verticon.tracker.editor.isContentOutlinePage">
