@@ -71,7 +71,7 @@ class ExhibitsStrategy implements SelectionStrategy {
 				exhibit.getExhibitor()), getEventAdminSourceName());
 		}
 
-		exhibitsView.setSelectionOnOutlinePage(selection);
+//		exhibitsView.setSelectionOnOutlinePage(selection);
 	}
 
 	/**

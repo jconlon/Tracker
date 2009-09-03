@@ -46,7 +46,7 @@ public class PeopleStrategy implements SelectionStrategy {
 
 		selectionController.sendSelectionToChannel(selection,
 				getEventAdminSourceName());
-		peopleView.setSelectionOnOutlinePage(selection);
+//		peopleView.setSelectionOnOutlinePage(selection);
 	}
 	
 	/**

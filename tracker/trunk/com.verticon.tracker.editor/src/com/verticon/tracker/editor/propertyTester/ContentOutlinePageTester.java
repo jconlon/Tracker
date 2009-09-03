@@ -2,6 +2,8 @@ package com.verticon.tracker.editor.propertyTester;
 
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IPageLayout;
+import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -23,8 +25,15 @@ public class ContentOutlinePageTester extends PropertyTester {
 	 */
 	public boolean test(Object receiver, String property, Object[] args,
 			Object expectedValue) {
-		IContentOutlinePage premisesProvider = getContentOutlinePage();
-		return premisesProvider!=null;
+		IViewReference[] viewrefs=PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getViewReferences();
+		for (IViewReference iViewReference : viewrefs) {
+			if(iViewReference.getId().equals(IPageLayout.ID_OUTLINE)){
+				IContentOutlinePage contentOutlinePage = getContentOutlinePage();
+				return contentOutlinePage!=null;
+			}
+				
+		}
+		return false;
 	}
 	
 	
