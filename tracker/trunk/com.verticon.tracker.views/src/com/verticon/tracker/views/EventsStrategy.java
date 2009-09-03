@@ -40,9 +40,8 @@ class EventsStrategy implements SelectionStrategy {
 //		logger.debug(bundleMarker,"Firing selection event");
 		selectionController.sendSelectionToChannel(
 				convertEventSelectionToAnimalSelection(selection),
-				
 				getEventAdminSourceName());
-		animalsView.setSelectionOnOutlinePage(selection);
+//		animalsView.setSelectionOnOutlinePage(selection);
 	}
 
 	public void handleWorkbenchAndEventAdminSingleSelection(Object selectedObject, final TableViewer viewer,

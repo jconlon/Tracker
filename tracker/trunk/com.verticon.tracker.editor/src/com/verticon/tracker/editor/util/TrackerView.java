@@ -883,7 +883,10 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	}
 	
 	/**
+	 * Show selection in the Outline View.
 	 * @param selection
+	 * @deprecated use event admin to send out selection events. 
+	 * Offer Tracker Action to select element in the Outline View
 	 */
 	 public void setSelectionOnOutlinePage(ISelection selection) {
 		if (PlatformUI.getWorkbench().getActiveWorkbenchWindow() == null
@@ -904,6 +907,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 			// Can't find an outline try to get the QueryDataSetProvider
 			return;
 		}
+		//SWT Leak?
 		contentOutlinePage.setSelection(selection);
 	}
 

@@ -35,7 +35,7 @@ public class AnimalsStrategy implements SelectionStrategy {
 			SelectionController selectionController) {
 //		logger.debug(bundleMarker,"Sending Animals selection event");
 		selectionController.sendSelectionToChannel(selection,getEventAdminSourceName());
-		trackerView.setSelectionOnOutlinePage(selection);
+//		trackerView.setSelectionOnOutlinePage(selection);
 	}
 	
 	
