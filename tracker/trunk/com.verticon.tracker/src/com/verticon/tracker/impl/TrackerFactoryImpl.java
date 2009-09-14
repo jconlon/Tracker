@@ -1097,9 +1097,36 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * @generated NOT
 	 */
 	public String createEmailFromString(EDataType eDataType, String initialValue) {
-		if(initialValue == null) return null;
+		/*
+		if(initialValue == null) {
+			return null;
+		}
+		if(initialValue.length()!=7){
+			throw new IllegalArgumentException("Premises Id must contain 7 digits: " + initialValue+
+					", to delete enter 7 spaces.");
+		}
+		
+		try {
+			if(CheckISO7064Mod37_36.verify(initialValue)){
+				return initialValue;
+			}
+		} catch (NumberFormatException e) {
+			return null;
+		}
+		throw new IllegalArgumentException(initialValue+" is a not legal Premises Id. To delete enter 7 spaces.");
+		
+		
+		
+		*/
+		if(initialValue == null) {
+			return null;
+		}
+		
 		if(CheckEmail.validate(initialValue)){
 			return initialValue;
+		}
+		if(initialValue.trim().length()<1){
+			return null;
 		}
 		throw new IllegalArgumentException(initialValue+" is not a legal Email Contact");
 		
