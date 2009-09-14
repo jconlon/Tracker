@@ -1,6 +1,7 @@
 package com.verticon.tracker.ocl.query.viewer;
 
 import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -11,12 +12,23 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.editor.util.IViewerFilters;
 import com.verticon.tracker.ocl.query.viewer.views.OclQueryViewPart;
 import com.verticon.tracker.ocl.query.viewer.views.OclQueryViewer;
 
+import static com.verticon.tracker.ocl.query.viewer.OclQueryViewerPlugin.bundleMarker;
+
 public class OCLViewerFilters implements IViewerFilters {
+
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(OCLViewerFilters.class);
+
 
 	private static final String COM_VERTICON_TRACKER_OCL_QUERY_VIEW = "com.verticon.tracker.ocl.query.view";
 
@@ -27,7 +39,13 @@ public class OCLViewerFilters implements IViewerFilters {
 		if(viewer!=null){
 			List<ViewerFilter> filters = new ArrayList<ViewerFilter>();
 			for (IOclQuery oclQuery : viewer.getViewModel().getTasks()) {
-				if(type.isSuperTypeOf(oclQuery.getContextClass())){
+				EClass contextClass = oclQuery.getContextClass();
+				if(contextClass == null){
+					//Context class of query is null
+					logger.warn(bundleMarker, "OclQuery named:{} had a null contextClass",oclQuery.getName());
+					continue;
+				}
+				if(type.isSuperTypeOf(contextClass)){
 				 ViewerFilter filter = new OCLViewerFilter(
 						 ((OclQuery)oclQuery).clone()
 				 );
