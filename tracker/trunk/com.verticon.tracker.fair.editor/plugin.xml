@@ -296,6 +296,15 @@
                properties="isFairRegistionSelection, notFairRegistionSelection"
                type="java.lang.Object">
          </propertyTester>
+         
+     	 <propertyTester
+            class="com.verticon.tracker.fair.editor.handlers.PersonPinAndEmailPropertyTester"
+            id="com.verticon.tracker.fair.propertyTester.PersonPinAndEmail"
+            namespace="com.verticon.tracker.fair.editor"
+            properties="hasPin, hasEmail"
+            type="java.lang.Object">
+      	</propertyTester>
+   
       </extension>
 
 
