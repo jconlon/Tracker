@@ -38,9 +38,10 @@
     <level value="WARN"/>
   </logger>
   
-  <logger name="com.verticon.tracker.export">
-    <level value="WARN"/>
+  <logger name="com.verticon.tracker.birt">
+    <level value="INFO"/>
   </logger>
+  
   <logger name="com.verticon.tracker.editor.presentation.SelectionViewerFilter">
     <level value="WARN"/>
   </logger>
