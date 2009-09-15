@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="com.verticon.tracker.ant.utilities" shortDesc="Custom Ant Tasks for Tracker">
+    <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Set of Ant Tasks in a jar file.  
+In the cspec of the dependent component action that uses this this componet.
+
+attribute component="org.demo.worlds" alias="custom.jar" name="java.binary.archives"
+
+	typedef name="localNameOfTask" classname="${xincludeclassname}" 
+			classpathref="xinclude.path"	
+
+ Ant Tasks include:
+
+1. com.verticon.ant.utilities.xsl.XIncludeTask
+Task for integrating a set of xml documents in one document.  The 'in' parameter indicates the xml document which 
+specifies the include specifications like:
+ 'xi:include href="bookinfo/bookinfo.xml"'
+The 'out' parameter is the name of the output file.</cs:documentation>
+    <cs:dependencies>
+        <cs:dependency name="ant"/>
+    </cs:dependencies>
+    <cs:artifacts>
+        <cs:public name="source" path="src/"/>
+    </cs:artifacts>
+    <cs:actions>
+        <cs:public name="java.binary.archives" actor="ant">
+            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Jars the classes.</cs:documentation>
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="make/build.xml"/>
+            </cs:actorProperties>
+            <cs:prerequisites alias="input">
+                <cs:attribute name="eclipse.build"/>
+            </cs:prerequisites>
+            <cs:products alias="output" base="${buckminster.home}/bin/jars/">
+                <cs:path path="tracker-ant-utilities.jar"/>
+            </cs:products>
+        </cs:public>
+        <cs:private name="eclipse.build" actor="eclipse.build">
+            <cs:prerequisites>
+                <cs:attribute name="source"/>
+            </cs:prerequisites>
+            <cs:products base="${buckminster.home}/bin/classes/">
+                <cs:path path="."/>
+            </cs:products>
+        </cs:private>
+        
+          <cs:public name="buckminster.prebind" actor="ant">
+
+			<cs:actorProperties>
+				<cs:property key="buildFile" value="make/prebind.xml" />
+			</cs:actorProperties>
+
+			<cs:prerequisites>
+				<cs:attribute component="ant" alias="ant.jar" name="java.binary.archives"/>
+				</cs:prerequisites>
+
+			<cs:products alias="output" base="${buckminster.home}">
+				<cs:path path="jars/" />
+			</cs:products>
+
+		</cs:public>
+    </cs:actions>
+    <cs:groups>
+        <cs:public name="java.binaries">
+            <cs:attribute name="eclipse.build"/>
+        </cs:public>
+    </cs:groups>
+</cs:cspec>
