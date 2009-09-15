@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+         <category
+            name="Tracker"
+            id="com.verticon.tracker.views">
+      </category>
+      <view
+            name="Tracker Events View"
+            icon="icons/sample.gif"
+            category="com.verticon.tracker.views"
+            class="com.verticon.tracker.view.events.views.TrackerEventsView"
+            id="com.verticon.tracker.view.events.views.EventsView">
+      </view>
+      
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="com.verticon.tracker.perspective">
+         <view
+               visible="true"
+               relative="org.eclipse.ui.views.PropertySheet"
+               relationship="stack"
+               id="com.verticon.tracker.reader.view">
+         </view>
+         <viewShortcut id="com.verticon.tracker.view.events.views.EventsView"/>
+      </perspectiveExtension>
+   </extension>
+
+</plugin>

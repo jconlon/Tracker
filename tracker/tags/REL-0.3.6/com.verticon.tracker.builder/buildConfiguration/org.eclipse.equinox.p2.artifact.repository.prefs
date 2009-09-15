@@ -1,0 +1,32 @@
+#Deprecated with Galileo
+
+#Mon Jan 26 13:31:01 CST 2009
+#testing repo for Products
+#repositories/file\:_home_jconlon_p2Repositories_product/url=file\:/home/jconlon/p2Repositories/product
+#testing repo for Features
+#repositories/file\:_home_jconlon_p2Repositories_features/url=file\:/home/jconlon/p2Repositories/features
+#testing repo for ODA Feature
+#repositories/file\:_home_jconlon_p2Repositories_oda/url=file\:/home/jconlon/p2Repositories/oda
+
+repositories/http\:__tracker.verticon.com_Tracker_p2_oda_/url=http\://tracker.verticon.com/Tracker/p2/oda/
+repositories/http\:__tracker.verticon.com_Tracker_p2_oda_/enabled=true
+repositories/http\:__tracker.verticon.com_Tracker_p2_features_/url=http\://tracker.verticon.com/Tracker/p2/features/
+repositories/http\:__tracker.verticon.com_Tracker_p2_features_/enabled=true
+repositories/http\:__tracker.verticon.com_Tracker_p2_product_/url=http\://tracker.verticon.com/Tracker/p2/product/
+repositories/http\:__tracker.verticon.com_Tracker_p2_product_/enabled=false
+repositories/http\:__download.eclipse.org_datatools_updates/url=http\://download.eclipse.org/datatools/updates/
+repositories/http\:__download.eclipse.org_datatools_updates/enabled=true
+
+repositories/http\:__rxtx.qbang.org_eclipse/url=http\://rxtx.qbang.org/eclipse/
+repositories/http\:__rxtx.qbang.org_eclipse/enabled=true
+
+repositories/http\:__www.rxtx.org_eclipse/url=http\://www.rxtx.org/eclipse/
+repositories/http\:__www.rxtx.org_eclipse/enabled=false
+
+repositories/http\:__download.eclipse.org_releases_ganymede/url=http\://download.eclipse.org/releases/ganymede
+repositories/http\:__download.eclipse.org_releases_ganymede/enabled=true
+
+eclipse.preferences.version=1
+
+
+

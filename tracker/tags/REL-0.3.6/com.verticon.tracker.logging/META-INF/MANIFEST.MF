@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracker Logging
+Bundle-SymbolicName: com.verticon.tracker.logging
+Bundle-Version: 0.2.0.qualifier
+Bundle-ClassPath: config/,
+ bin/,
+ .
+Bundle-Vendor: Verticon, Inc.
+Eclipse-RegisterBuddy: org.apache.log4j
+Bundle-Activator: com.verticon.tracker.logging.Activator
+Require-Bundle: com.verticon.tracker.logging.logback;bundle-version="0.9.11",
+ org.eclipse.ui.console,
+ org.eclipse.core.runtime,
+ org.eclipse.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.osgi.service.log;version="1.3.0"
