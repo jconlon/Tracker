@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.verticon.tracker.irouter.abbott">
-   <implementation class="com.verticon.tracker.irouter.abbott.ComponentFactory"/>
-   <service>
-      <provide interface="org.osgi.service.cm.ManagedServiceFactory"/>
-   </service>
-   <property name="service.pid" type="String" value="com.verticon.tracker.irouter.abbott.controllerfactory"/>
-</scr:component>
