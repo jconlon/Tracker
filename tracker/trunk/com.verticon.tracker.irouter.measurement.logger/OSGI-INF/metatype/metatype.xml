@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0">
+
+  <OCD description="Configuration for the Tracker Measurement Logger Instance" name="Tracker Measurement Logger" id="com.verticon.tracker.irouter.measurement.loggerfactory">
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" type="String"/> 
+ 
+ 	<AD name="Consumable measurement name" id="consumable.scope" type="String"
+		cardinality="3" />
+	
+    <AD name="Type of logger" id="logger.type" type="Integer">
+    	<Option label="Normalized Transaction" value="0"/>
+		<Option label="Aggegated Transaction" value="1"/>
+	</AD>
+   
+   <AD name="Logger name"  id="logger.name" type="String" required="false" default="transaction"/> 
+ 
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.measurement.loggerfactory" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.measurement.loggerfactory"/>
+  </Designate>
+  
+  
+</metatype:MetaData>
