@@ -1,0 +1,408 @@
+h1.  Abbott Diagnositcs Bleed Operations Network Project (beta) User Guide
+
+__Version 0.1.3__
+
+__01/03/10__
+
+{toc}
+
+h2. TODO
+
+# Configure and document Plug
+# Rework config admin documentation
+# Update TruTest configuration documentation
+# Test
+# Upgrade Firmware on TruTest
+# Test
+# Create serial port emulator for Mettler
+# Test with connection on UDS
+## Power up down UDS, TruTest, and bringup and down the Mettler emulating connection.
+
+h2. Introduction
+
+This is a beta test release of the Tracker Information Router for the Abbott Bleed Operations Network.  This Abbott Bleed Operations Network connects information generated
+# the Tracker Information Router (a network appliance for connecting, routing, and managing measurement devices and generated information flows), 
+# two Lantronix UDS2100 device servers,
+# an ethernet hub,
+# two Tru-Test XR3000 scale heads,
+# two Mettler balances. 
+
+__Note: The the Tracker Information Router, ethernet hub and Lantronix Device Servers are housed in a common wall mounted enclosure.__
+
+h2. Operation
+
+h3. System Power Up and Power down TODO
+
+# Insure that the  RS232 cables coming from the enclosure are connected to the Tru-Test indicator and the Mettler balance.  __Note the connection labeling on the enclosure.__  
+# Switch on the Tru-Test indicator.
+# Set up a new file to record the Animal Bleed Event records.
+## Press @FILES@ to display the **List of Files** screen.
+## Put the cursor on the row of the desired file. 
+# Press @ESC@ to exit **List of Files** screen and go to the Tru-Test weighing screen. 
+# Apply power to the enclosure housing the Tracker appliance and the Lantronix device server.  
+# The tracker appliance will send two audible beeps to the Tru-Test scale head indicating that the system is operational.  See "Boot Time Ticket 457":http://tracker-project.verticon.com/verticon_Tracker/ticket/457
+# After weighing and bleed sessions power down the system.
+
+h3. Animal Weigh In and Blood Sampling
+
+# Lead animal onto the scale.  The Tru-Test indicator will show a weight in kilograms on the upper RHS(Right Hand Screen) and no Animal LifeData on the LHS(Left Hand Screen).
+# Scan EID tag of animal.  Animal LifeData will populate the LHS(Left Hand Screen).
+## If there is no or incomplete animal LifeData use the indicators key pad to enter it on the LHS(Left Hand Screen).
+# The Cal BW field will be updated based on the stable weight of the animal and the value of the BW Mult in the life data.  __Note the system default for polling for new LifeData records is 5 seconds. So the a Cal BW will be updated within this time frame.__  
+# Draw blood from the animal and extract it to a blood bag on the balance. __Note the system default for reading balance weight is 2 seconds.__
+# System will display stable weight readings from the balance in the Act BW field.       
+# After 30 seconds of blood weighing inactivity the system will record animal blood sampling record to file data.  Please see "Inactivity Recording Ticket 458":http://tracker-project.verticon.com/verticon_Tracker/ticket/458
+
+h3. Known anomalies
+
+* "Boot Time Ticket 457":http://tracker-project.verticon.com/verticon_Tracker/ticket/457
+** Workaround: None
+* "Synchronization Ticket 456":http://tracker-project.verticon.com/verticon_Tracker/ticket/456
+** Avoidance
+*** Do all configuration of Tru-Test file manipulation prior to powering up appliance. 
+*** Allow system to automatically record weighIn and bleeding event after 30 second inactivity timeout. __Yes I know that is a bug too.__
+** Workaround: Reboot
+* "Inactivity Recording Ticket 458":http://tracker-project.verticon.com/verticon_Tracker/ticket/458
+** Avoidance: None
+** Workaround: None
+* "Null records considered valid Ticket 459":http://tracker-project.verticon.com/verticon_Tracker/ticket/459
+** Avoidance:  Keep only valid animal lifeData in the indicator. 
+
+h3. Problems
+
+If any problems occur during operation power cycle the unit to reset.  If problems continue please note the sequence of operations that may have caused the problem and report the problem to "Verticon, Inc. technical support":mailto://support@verticon.com
+
+h2. Upgrading Software
+
+To obtain the latest software contact  "Verticon, Inc. technical support":mailto://support@verticon.com
+
+To upgrade the Tracker-embedded appliance software:
+# Open the enclosure housing the Tracker Appliance.
+# Remove the SD card from the appliance.
+# Replace it with a SD card containing the new version.
+# Power off the unit, then power it back on.
+
+
+h2. System Setup
+
+__System peripherals and interconnections are configured at installation time and should not require reconfiguration.  The follow documentation is  intended for reference by IDology or Verticon customer and system engineering.__
+
+h3. Tru-Test XR3000
+
+h4. Configuration
+
+Notes: 
+# __The precise naming of Tru-Test indicator lifedata and filedata fields is required for proper  operation of the system.__
+# __Configuration of Tru-Test indicator while connected to the Tracker-embedded appliance will cause synchronization problems. Please configure the indicator before it is connected to the appliance.__ 
+
+h5. Animal LifeData Setup
+
+* **EID** is a text field with 15 characters that is an ID.
+* **TAG** is a text field with 5 characters that is an ID.
+* **BW Mult** is a number field with the format #.## that repeats. (It repeats to assist the operator when adding Life Data values for a new animal.)
+* **SPECIES** is a custom field that is also designated an id.  Enumerated constants are:
+# Sheep
+# Goat
+
+h5. FileData Setup
+
+Turn on @DATE STAMPING@ and @TIME STAMPING@
+**Calc BW** is a number with the format ####.#
+**Act BW** is a number with the format ####.#
+
+h5. System
+
+Set Country to @CA@
+
+h5. Serial
+
+@WEIGHT OUTPUT: X@
+@CON 2 INPUT: X@
+
+
+h5. Weighing Screen
+
+h6. LHS
+
+Choose the following fields
+* Prompt Message
+* EID
+* TAG
+* BW Mult
+* Species
+
+h6. RHS
+
+Choose the following fields
+* Calc BW
+* Act BW 
+
+__(After configuration the Act BW should be the last field shown on the RHS of the weighing screen.__
+
+h3. Lantronix UDS2100
+
+h4. Network
+
+h3. Device Server
+
+* Hardware Address: 00-20-4a-_____-_____-_____
+** Name: lantronix1
+** IP Address: 192.168.0.201
+** Subnet Mask: 255.255.255.0
+* Hardware Address: 00-20-4a-B2-BC-9B
+** Name: lantronix2
+** IP Address: 192.168.0.202
+** Subnet Mask: 255.255.255.0
+
+h4. Channel 1
+
+h5. Serial Setting
+
+* Protocol: RS232
+* Baud: 9600bps
+* Data Bits:  8
+* Parity: N
+* Stop bits: 1
+* Flow: None
+
+h5. Connection
+
+**Connect Protocol**
+* Protocol: TCP
+**Connect Mode**
+* Passive Connection
+** Accept Incoming: -> With Active Mdm Ctrl In 
+__This will prevent connections to this port when there is no active cable connection or power from the device.__
+* Active Connection
+** Active Connect: -> None
+**Endpoint Configuration**
+* Local Port: 
+** Port1: 10001
+** Port2: 10002
+* Remote Host: 0.0.0.0
+* Remote Port: 0
+**Common Options:**
+* Telnet Com Port Cntrl: Disable
+**Disconnect Mode**
+* On Mdm_Ctrl_In Drop: Yes
+__This will break connections to this port when there is no active cable connection or power from the device.__
+* Hard Disconnect: Yes
+
+h4. Channel 2
+
+h5. Serial Setting
+
+* Protocol: RS232
+* Baud: 9600bps
+* Data Bits:  8
+* Parity: N
+* Stop bits: 1
+* Flow: None
+
+h5. Connection
+
+**Connect Protocol**
+* Protocol: TCP
+**Connect Mode**
+* Passive Connection
+** Accept Incoming: No
+* Active Connection
+** Active Connect: Auto Start
+**Endpoint Configuration**
+* Remote Port: 8085
+* Remote Host: 192.168.0.200
+**Common Options:**
+* Telnet Com Port Cntrl: Disable
+**Disconnect Mode**
+* On Mdm_Ctrl_In Drop: Yes
+* Hard Disconnect: Yes
+
+
+h3. Peripheral Interconnection 
+
+# Connect all cables.
+## Serial 1 of UDS2100 must connect to Con 2 of Tru-Test indicator.
+## Serial 2 of UDS2100 must connect to the balance.
+# Connect UDS2100 and Tracker-embedded appliance via Ethernet.
+# Power on the Tracker-embedded appliance and all connected devices.
+# Two audible beeps indicate the appliance is connected to devices and is operational.
+
+
+h3. Tracker Information Router
+
+h4. Introduction
+
+h4. Primary Generic Components
+
+h5.  Mettler Balance ComponentFactory
+
+The Mettler Balance Component Factory is a factory  (OSGi bundle name: **com.verticon.tracker.mettler**)  for creating software instances to connect and manage information flows from a Mettler Balance.  
+
+The following are the configuration attributes required for configuring this component.
+
+# **Connection uri** 	@socket://192.168.0.115:2345@
+## The above uri is a emulated balance running on a testing and developement machine. Change this attribute to specify a socket on the Lantronix device server associated with a production Mettler balance.
+# **Wiring group name**	@one@
+
+The default configuration will __Produce:__
+* Mettler weight measurements (**mettler.weight.measurement**), 
+** But the **Product measurement name** configuration attribute can customize the name of the produced measurement (**xxx.weight.measurement**)
+** An attribute value of @blood@ will produce measurement name of (**blood.weight.measurement**)
+
+There are other configuration attributes but these should be changed only by Tracker qualified engineers.
+__Note__ **Poll interval milliseconds**  can be changed from the default of 500 to 100 to speed up readings from the balance.
+
+h5.  TruTest Indicator ComponentFactory
+
+The TruTest Indicator Component Factory is a factory  (OSGi bundle name: **com.verticon.tracker.trutest**)  for creating software instances to connect and manage information flows from a TruTest animal (scale head) indicator.  
+
+The following are the configuration attributes required for configuring this component.
+
+# **Connection uri** 	@socket://lantronix2:10001@
+## The above uri is for a production indicator connected to a Lantronix device server.
+# **Wiring group name**	@one@
+
+A TruTest Indicator Component instance is hard coded to __Consume:__
+# TruTest indicator commands (**trutest.command.string**};
+
+A TruTest Indicator Component instance is hardcoded to  __Produce:__
+# Tru-test indicator __Record__ key presses (**transaction.state**) and 
+# TruTest Animal weight measurements (**animal.weight.measurement**)
+# TruTest Animal tag numbers (**animal.tag.number**)
+
+There are other configuration attributes but these should be changed only by Tracker qualified engineers.
+
+h5.  TruTest Adapter ComponentFactory
+
+The TruTest Adapter Component Factory is a factory  (OSGi bundle name: **com.verticon.tracker.trutest.adapter**)  for creating software instances to translate 
+# measurement information to TruTest animal (scale head) indicator display fields 
+# state information to TruTest indicator alarms.
+
+The following are the configuration attributes required for configuring this component.
+
+# **Connection uri** 	@socket://lantronix2:10001@
+## The above uri is for a production indicator connected to a Lantronix device server.
+# **Wiring group name**	@one@
+# **Consumable measurement names**  @blood.weight@ and @calculated.blood.weight@
+# **Target fields** specify which TruTest Indicator field will be used to display the measurements. 
+## Act BW Field @{SXD19}%13%%10%{SXC16}%13%@
+## Calc BW Field @{SXD18}%13%%10%{SXC16}%13%@
+
+
+A TruTest Adapter Component instance will __Consume:__
+# Hard coded alarm states (**alarm.state**) 
+# Generic measurements (**xxx.xxx.measurement**)
+## The **Consumable measurement names** configuration attribute is required to customize the name of the consumed measurement (**xxx.xxx.measurement**)
+## An attribute value of @blood.weight@ will consume measurement name of (**blood.weight.measurement**)
+
+A TruTest Adapter Component instance is hardcoded to  __Produce:__
+# TruTest indicator commands (**trutest.command.string**};
+
+There are other configuration attributes but these should be changed only by Tracker qualified engineers.
+
+h5.  Measurement Logger ComponentFactory
+
+The Measurement Component Factory is a factory  (OSGi bundle name: **com.verticon.tracker.mesurement.logger**)  for creating software instances to log measurement transactions from measurement and state producers.  Two different loggers can be configured.
+# Aggregated Transaction Logger
+# Normalized Transaction Logger
+
+The following are the configuration attributes required for configuring this component.
+
+# **Wiring group name**	@one@
+
+The default configuration will __Consume:__
+for (String scopeName : context.getConfigurationArray(CONSUMER_SCOPE)) {
+			if(scopeName==null || scopeName.trim().length()==0){
+				break;
+			}
+			v.add(scopeName+".measurement");
+		}
+		v.add(TRANSACTION_STATE_SCOPE);
+		v.add(ANIMAL_TAG_NUMBER_SCOPE);
+		
+* Mettler weight measurements (**mettler.weight.measurement**), 
+** But the **Product measurement name** configuration attribute can customize the name of the produced measurement (**xxx.weight.measurement**)
+
+There are other configuration attributes but these should be changed only by Tracker qualified engineers.
+
+h5.  Measurement Converter ComponentFactory
+
+The Measurement Converter Component Factory is a factory  (OSGi bundle name: **com.verticon.tracker.mesurement.converter**)  for creating software instances to convert measurement flows between source measurement producers and destination measurement consumers.
+
+The following are the configuration attributes required for configuring this component.
+
+# **Connection uri** 	@socket://mudshark:2345@
+## The above uri is a emulated balance running on a testing and developement machine. Change the uri to the c
+# **Wiring group name**	@one@
+
+The default configuration will __Produce:__
+* Mettler weight measurements (**mettler.weight.measurement**), 
+** But the **Product measurement name** configuration attribute can customize the name of the produced measurement (**xxx.weight.measurement**)
+
+There are other configuration attributes but these should be changed only by Tracker qualified engineers.
+
+
+h5.  Measurement Converter ComponentFactory
+
+The Measurement Converter Component Factory is a factory  (OSGi bundle name: **com.verticon.tracker.measurement.converter**)  for creating software instances to convert measurements between source measurement Producers and destination measurement Consumers.  
+
+The following are the configuration attributes required for configuring this component.
+
+# **Connection uri** 	@socket://mudshark:2345@
+# **Wiring group name**	@one@
+
+The default configuration will __Produce:__
+* Mettler weight measurements (**mettler.weight.measurement**), 
+** But the **Product measurement name** configuration attribute can customize the name of the produced measurement (**xxx.weight.measurement**)
+
+There are other configuration attributes but these should be changed only by Tracker qualified engineers.
+
+
+h4. Primary Abbott Specific Components
+
+h5. Abbott ComponentFactory
+
+The Abbott Component Factory is a custom Abbott specific factory (OSGi bundle name: **com.verticon.tracker.abbott**)  for creating software instances to manage information flows between a Mettler Balances and TruTest indicators.  It is a composite factory embedded with Abbott specific business logic. 
+__This is a early prototype and is now depreciated.  Use generic components instead.__
+
+# Display a calculated blood weight the TruTest Indicator
+# Display actual blood weight on the TruTest Indicator
+# Turn on and off TruTest Indicator alarm
+
+It is hard coded to __Consume:__
+# Mettler weight measurements (**mettler.weight.measurement**), 
+# Tru-test indicator __Record__ key presses (**transaction.state**) and 
+# TruTest Animal weight measurements (**animal.weight.measurement**)
+	
+and to __Produce:__
+# TruTest indicator commands (**trutest.command.string**};
+
+The following are the configuration attributes required for configuring this component.
+# Wiring group name:	@one@
+
+h4. Support Components
+
+# com.verticon.tracker.connector.socket
+# com.verticon.tracker.wireadmin
+
+h3.  Tracker Log
+
+h4. Installed at openrd boot time
+
+bc. 	config.sl tracker.log.pid ../../../bundles/../tracker/plugins/com.verticon.tracker.embedded.log.reader_0.1.0.jar
+
+h4.  installed from dev machine
+
+bc. 	config.sl tracker.log.pid com.verticon.tracker.embedded.log.reader_0.1.0.jar
+
+h3. Tracker Engine
+
+h4. Installed at openrd boot
+
+bc. 	config.sl tracker.engine.pid ../../../bundles/../tracker/plugins/com.verticon.tracker.embedded.sp.engine_0.1.0.jar 
+
+h4. Installed from dev machine
+
+bc. config.sl tracker.engine.pid com.verticon.tracker.embedded.sp.engine_0.1.0.jar
+
+
