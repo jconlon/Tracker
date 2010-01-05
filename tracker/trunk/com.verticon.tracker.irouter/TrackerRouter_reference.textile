@@ -1,0 +1,349 @@
+h1.  Tracker Information Router Reference
+
+__Version 0.1.0__
+
+__12/23/09__
+
+{toc}
+
+h2. Introduction
+
+This version is based on an Intel based hardware "PC Engines Alix-1c":http://www.pcengines.ch/alix1c.htm  with 256MB, an internal 2GB Compact Flash drive, a Ubuntu 9.10 minimum command line system, OpenJDK JRE Headless  JVM, and a Felix Karaf OSGi framework.  
+
+This system configuration is the current stable release.
+
+h2. hardware
+
+"PC Engines Alix-1c":http://www.pcengines.ch/alix1c.htm  with 256MB, an internal 2GB Compact Flash drive.
+
+h2. OS
+
+Ubuntu 9.10 minimum command line system
+
+
+h3. Configuration
+
+Steps to configuring the Sheeva Plug (OpenRD Client is similar) 
+# Install a Ubuntu 9.10 minimum command line system
+# Add a JRE
+# Add the OSGi Framework
+# Configure the framework as a OS Service, so it will come up and down when the system boots and shutsdown.
+
+h3. User
+
+* jconlon
+** __Same as usual__
+* __TODO__ add admin user
+**  set pw to nosoup4u
+
+
+h3. Versions after OS Install
+
+After install the OS and distro Versions look like:
+
+bc.. 
+jconlon@tracker1:~$ cat /etc/issue
+Ubuntu 9.10 \n \l
+
+jconlon@tracker1:~$ cat /etc/debian_version
+squeeze/sid
+jconlon@tracker1:~$ uname -a
+Linux tracker1 2.6.31-14-generic #48-Ubuntu SMP Fri Oct 16 14:04:26 UTC 2009 i586 GNU/Linux
+jconlon@tracker1:~$ uname -r
+2.6.31-14-generic
+
+h2. Install Java Runtime
+
+Install OpenJDK JRE headless version.
+
+bc.. 
+sudo apt-get update openjdk-6-jre-headless
+
+h2. Add and enable ssh server
+
+bc.. 
+jconlon@tracker1:sudo apt-get install openssh-server
+jconlon@mudshark:~$ scp .ssh/id_dsa.pub jconlon@tracker1:.ssh/authorized_keys
+
+h2. Set up IP
+
+* Edit /etc/hosts
+** add the hostname of the development machine to /etc/hosts
+** add device servers
+
+bc.. 
+192.168.0.116	mudshark	dev
+192.168.0.201	lantronix1
+192.168.0.202	lantronix2
+
+p. 
+
+* configure a static IP address
+** "HowTo":http://www.cyberciti.biz/tips/howto-ubuntu-linux-convert-dhcp-network-configuration-to-static-ip-configuration.html
+** 192.168.0.204   tracker1
+
+h2. File System
+
+h3. Tumb drive
+
+A thumb drive is used for log files and for software updates and configuration. The tumb drive will be the initial way for output data to be moved from the Tracker Router to a user machine and new/updated bundles to be moved to the Tracker Router from a user machine.
+
+* Set up /etc/fstab for mounting of a thumb drive (tumbdrives typically use a vfat format) 
+** with all user permissions 
+*** "vfat permissions":http://ubuntuforums.org/showthread.php?t=605300
+** see last line in cat below for the change
+
+bc.. 
+ 	jconlon@tracker1:~$ cat /etc/fstab
+# /etc/fstab: static file system information.
+#
+# Use 'blkid -o value -s UUID' to print the universally unique identifier
+# for a device; this may be used with UUID= as a more robust way to name
+# devices that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+proc            /proc           proc    defaults        0       0
+# / was on /dev/sda1 during installation
+UUID=4d4893ac-f711-48e0-a771-9843affb608a /               ext4    errors=remount-ro 0       1
+# swap was on /dev/sda5 during installation
+UUID=3cebb172-4a9e-4bf0-9608-4512691127be none            swap    sw              0       0
+# usb device
+/dev/sdb1       /mnt/USB       vfat users,defaults,umask=000 0 0 
+ 
+
+jconlon@tracker1:~$ df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/sda1             1.8G  730M  957M  44% /
+udev                  119M  184K  119M   1% /dev
+none                  119M     0  119M   0% /dev/shm
+none                  119M   32K  119M   1% /var/run
+none                  119M     0  119M   0% /var/lock
+none                  119M     0  119M   0% /lib/init/rw
+/dev/sdb1             490M   32K  490M   1% /mnt/USB
+
+p. 
+
+h3. Set up directories on thumb drive
+
+The tumbdrive will be the initial way for output data to be moved from the Tracker Router to a user machine and new/updated bundles to be moved to the Tracker Router from a user machine.
+
+# Create directory for logging output called: **log**
+# Create directory for deployment of Tracker bundles called: **deploy**
+
+h2. OSGi Framework
+
+"Felix Karaf":http://felix.apache.org/site/apache-felix-karaf.html is the selected OSGi framework and shell.
+
+h3. Karaf Installation
+
+* "Download Karaf":http://apache.securedservers.com/felix/apache-felix-karaf-1.2.0.tar.gz
+
+bc.. 
+jconlon@mudshark:~/Downloads/Felix$ scp apache-felix-karaf-1.2.0.tar.gz tracker1:/tmp
+apache-felix-karaf-1.2.0.tar.gz                                          100% 4336KB   4.2MB/s   00:00 
+ 
+jconlon@tracker1:/opt$ sudo mkdir felix
+
+jconlon@tracker1:/tmp$ sudo tar xvf apache-felix-karaf-1.2.0.tar.gz -C /opt/felix
+
+p. 
+
+* Add the JAVA_HOME enviroment variable to /etc/environment 
+bc.. 
+sudo vi /etc/environment
+JAVA_HOME="/usr/lib/jvm/java-6-openjdk"
+p. 
+
+* Change the group of the deploy directory to allow scp from adm group users to deploy bundles.
+bc.. 
+jconlon@tracker1:/opt/felix/apache-felix-karaf-1.2.0$ sudo chgrp adm deploy
+jconlon@tracker1:/opt/felix/apache-felix-karaf-1.2.0$ sudo chmod 775 deploy
+
+
+h4. Configure as an OS Service 
+
+* Start karaf
+bc.. 
+jconlon@tracker1:/opt/felix/apache-felix-karaf-1.2.0$ bin/karaf
+p. 
+
+* Add the wrapper feature
+bc.. 
+karaf@root> features:install wrapper
+p. 
+
+* Install the wrapper
+bc.. 
+karaf@root> wrapper:install 
+Creating file: /opt/felix/apache-felix-karaf-1.2.0/bin/karaf-wrapper
+Creating file: /opt/felix/apache-felix-karaf-1.2.0/bin/karaf-service
+Creating file: /opt/felix/apache-felix-karaf-1.2.0/etc/karaf-wrapper.conf
+Creating file: /opt/felix/apache-felix-karaf-1.2.0/lib/libwrapper.so
+Creating file: /opt/felix/apache-felix-karaf-1.2.0/lib/karaf-wrapper.jar
+p. 
+
+* Integrated the service with the commands
+bc.. 
+  To install the service:
+    $ ln -s /opt/felix/apache-felix-karaf-1.0.0/bin/karaf-service /etc/init.d/
+
+  To start the service when the machine is rebooted:
+    $ update-rc.d karaf-service defaults
+
+  To disable starting the service when the machine is rebooted:
+    $ update-rc.d -f karaf-service remove
+
+  To start the service:
+    $ /etc/init.d/karaf-service start
+
+  To stop the service:
+    $ /etc/init.d/karaf-service stop
+
+  To uninstall the service :
+    $ rm /etc/init.d/karaf-service
+
+p. 
+
+h4. Remote console
+
+* SSH to a Remote console on the server
+** SSH client to connect to the Karaf instance. The default port is 8101.
+
+bc.. 
+> ssh -p 8101 -l karaf ubuntuCLI
+karaf@localhost's password: karaf
+karaf@root:/>
+p. 
+** To exit the ssh session
+bc.. 
+  karaf@root:/> ~.
+p. 
+* Karaf client
+bc.. 
+jconlon@mudshark:/opt/Felix/apache-felix-karaf-1.2.0$ java -jar lib/karaf-client.jar -h tracker1 -u karaf -p karaf
+p. 
+** To exit the client session __TBD__
+
+ 
+h4. Add Dependencies
+
+__TODO Consider refactoring these as a feature. For an example of a features repository see:__
+"Felix Karaf Features file":http://repo2.maven.org/maven2/org/apache/felix/karaf/apache-felix-karaf/1.2.0/apache-felix-karaf-1.2.0-features.xml
+
+
+h5. Add WebConsole Feature
+
+* Install the WebConsole
+bc.. 
+karaf@root> features:install webconsole
+p. 
+* Brand the WebConsole __TODO__
+"Webconsole branding":http://felix.apache.org/site/branding-the-web-console.html
+ 
+h4. Add Dependent Bundles
+
+__These bundles are added directly to the deploy directory and not just installed, to insure they are there in the file system, in case the data directory needs to be deleted due to a system hang.__
+
+
+# Install Declarative Services bundle
+** org.apache.felix.scr-1.4.0.jar
+# Add Equinox Support Bundles
+** org.eclipse.osgi.services_3.2.0.v20090520-1800.jar
+** org.eclipse.equinox.io_1.0.100.v20090520-1800.jar
+** org.eclipse.equinox.util_1.0.100.v20090520-1800.jar
+** org.eclipse.osgi.util_3.2.0.v20090520-1800.jar
+** org.eclipse.equinox.wireadmin_1.0.100.v20090520-1800.jar
+bc.. 
+jconlon@mudshark:~/Downloads/Felix/tracker_deps$ ls
+org.apache.felix.scr-1.4.0.jar                       org.eclipse.equinox.wireadmin_1.0.100.v20090520-1800.jar
+org.eclipse.equinox.io_1.0.100.v20090520-1800.jar    org.eclipse.osgi.services_3.2.0.v20090520-1800.jar
+org.eclipse.equinox.util_1.0.100.v20090520-1800.jar  org.eclipse.osgi.util_3.2.0.v20090520-1800.jar
+jconlon@mudshark:~/Downloads/Felix/tracker_deps$ scp *.jar tracker1:/opt/felix/apache-felix-karaf-1.2.0/deploy
+org.apache.felix.scr-1.4.0.jar                                                                      100%  181KB 181.1KB/s   00:00    
+org.eclipse.equinox.io_1.0.100.v20090520-1800.jar                                                   100%   37KB  37.3KB/s   00:00    
+org.eclipse.equinox.util_1.0.100.v20090520-1800.jar                                                 100%   74KB  73.8KB/s   00:00    
+org.eclipse.equinox.wireadmin_1.0.100.v20090520-1800.jar                                            100%   34KB  33.7KB/s   00:00    
+org.eclipse.osgi.services_3.2.0.v20090520-1800.jar                                                  100%   65KB  64.5KB/s   00:00    
+org.eclipse.osgi.util_3.2.0.v20090520-1800.jar                                                      100%   22KB  21.9KB/s   00:00  
+
+h3. Logging
+
+* Edit the logging spec to save logging files to the thumbdrive.
+
+bc.. 
+jconlon@tracker1:/opt/felix/apache-felix-karaf-1.2.0/etc$ cat org.ops4j.pax.logging.cfg
+...
+log4j.rootLogger=INFO, R, x, osgi:VmLogAppender
+...
+
+# ***** R is set to be a RollingFileAppender.
+log4j.appender.R=org.apache.log4j.RollingFileAppender
+log4j.appender.R.File=/mnt/USB/log/tracker.log
+# ***** Max file size is set to 100KB
+log4j.appender.R.MaxFileSize=100KB
+# ***** Keep one backup file
+log4j.appender.R.MaxBackupIndex=5
+# ***** R uses PatternLayout.
+log4j.appender.R.layout=org.apache.log4j.PatternLayout
+log4j.appender.R.layout.ConversionPattern=%p %t %c - %m%n
+
+# SocketAppender for use with Chainsaw
+log4j.appender.x=org.apache.log4j.net.SocketAppender
+log4j.appender.x.RemoteHost=mudshark
+log4j.appender.x.Port=4560
+log4j.appender.x.LocationInfo=true
+log4j.appender.x.layout=org.apache.log4j.PatternLayout
+log4j.appender.x.layout.ConversionPattern=[%d{MMM dd HH:mm:ss}] %-5p (%F:%L) - %m%n
+
+log4j.logger.com.verticon.tracker=DEBUG
+
+
+
+h3. Tracker
+
+* Add Tracker Information Router bundles.
+bc.. 
+jconlon@mudshark:~/Workspaces/tracker_dev-e-01/com.verticon.tracker.embedded.sp/deploy/plugins$ scp com.verticon.tracker.connector.socket_0.1.0.jar tracker1:/mnt/USB/deploy
+com.verticon.tracker.connector.socket_0.1.0.jar                                                                              100% 6214     6.1KB/s   00:00    
+jconlon@mudshark:~/Workspaces/tracker_dev-e-01/com.verticon.tracker.embedded.sp/deploy/plugins$ scp com.verticon.tracker.wireadmin_0.1.0.jar tracker1:/mnt/USB/deploy
+com.verticon.tracker.wireadmin_0.1.0.jar                                                                                     100%   14KB  13.7KB/s   00:00    
+jconlon@mudshark:~/Workspaces/tracker_dev-e-01/com.verticon.tracker.embedded.sp/deploy/plugins$ scp com.verticon.tracker.mettler_0.1.0.jar tracker1:/mnt/USB/deploy
+com.verticon.tracker.mettler_0.1.0.jar                                                                                       100%   14KB  14.5KB/s   00:00    
+
+
+
+h3. Configuration Admin
+
+# Refer to "Felix Config Admin Details":http://www.osgilook.com/2009/08/20/apache-felix-file-install-part-2-dynamic-configurations/
+# Add a managedFactoryService instance for org.apache.felix.fileinstall to watch directory:
+* /mnt/USB/deploy
+
+
+
+
+
+h2. Todo -----------------------------------------------------------
+
+# TruTest metadata
+# Optimize Logs
+## statements
+## output
+## file names
+# Brand web console
+
+
+h5. Creating the distribution __??__
+
+# Shutdown OSGi service
+# On the SD, 
+# Remove osgi/bin/vms/j9/storage directory
+# Clean up all logs
+## Remove all unused bundles
+## Tar and compress J9 and OSGi directories
+### Name it tracker_embedded-0.1.0.targz
+### tar cvzf tracker_embedded-0.1.0.targz j9 osgi
+# Modifiy the osgi.init script
+## Extract compressed distribution to the /dev/shm
+### tar xvf /mnt/sdcard/tracker_embedded-0.1.0.targz -C /dev/shm
+## Run the start script on there 
+### Calling sequence: osgi.init -> /dev/shm/osgi/bin/mbsa/mbsa_start 
