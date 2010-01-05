@@ -52,6 +52,19 @@ Linux tracker1 2.6.31-14-generic #48-Ubuntu SMP Fri Oct 16 14:04:26 UTC 2009 i58
 jconlon@tracker1:~$ uname -r
 2.6.31-14-generic
 
+h3. Optimize Power - Up Time
+
+"Ticket 461":http://tracker-project.verticon.com/verticon_Tracker/ticket/461
+"See":https://help.ubuntu.com/community/Grub2
+
+Edited /etc/default/grub and commented out @#GRUB_TIMEOUT=10@
+
+Power up to Ping return time (headless) is ~25 seconds.
+Sample times...
+Power On						  : Tue Jan  5 10:57:40 CST 2010
+Ping returned oka    	  : Tue Jan  5 10:58:05 CST 2010
+Connection to a device  :Tue Jan  5 10:58:34 CST 2010
+
 h2. Install Java Runtime
 
 Install OpenJDK JRE headless version.
