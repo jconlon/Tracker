@@ -1,0 +1,34 @@
+#!/bin/bash
+### BEGIN Script INFO
+# Provides:          irouter-pickle
+# Short-Description: Archives Tracker IRouter
+# Description:       Archives the OSGi Framework, configuration, and Tracker iRouter to a PERSIST DIR
+### END INIT INFO
+
+
+PERSIST_DIR=/opt/tracker
+PERSIST_TARGET=/opt/tracker/tracker_irouter-0.1.0.targz
+MEMORY_DRIVE=/dev/shm
+FELIX_DIR=apache-felix-karaf-1.2.0
+OSGI_DIR=/dev/shm/apache-felix-karaf-1.2.0
+RETVAL=0;
+
+# Test if the PERSIST_DIR is there and that the OSGI_DIR is there
+# then Archive distribution to the PERSIST_DIR 
+   if [ -d $PERSIST_DIR ] ; then
+   			if [ -d $OSGI_DIR ] ; then
+            	echo 'archiving iRouter to' "$PERSIST_TARGET"
+            	cd $MEMORY_DRIVE
+            	tar cvzf $PERSIST_TARGET $FELIX_DIR
+            	echo "pickled Tracker iRouter"
+            else
+            	echo "$OSGI_DIR" 'Does not exist'
+            fi
+   else
+			echo "$PERSIST_DIR" 'Does not exist'
+			
+   fi
+   
+
+exit $RETVAL
+

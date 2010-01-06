@@ -31,10 +31,10 @@ Steps to configuring the Sheeva Plug (OpenRD Client is similar)
 
 h3. User
 
-* jconlon
-** __Same as usual__
-* __TODO__ add admin user
-**  set pw to nosoup4u
+* userName __jconlon__
+** pw __Same as usual__
+* userName __goethe__
+** pw __nosoup4u__
 
 
 h3. Versions after OS Install
@@ -65,12 +65,28 @@ Power On						  : Tue Jan  5 10:57:40 CST 2010
 Ping returned oka    	  : Tue Jan  5 10:58:05 CST 2010
 Connection to a device  :Tue Jan  5 10:58:34 CST 2010
 
-h2. Install Java Runtime
+h2. Java Virtual Machine
+
+h3. Install Java Runtime
 
 Install OpenJDK JRE headless version.
 
 bc.. 
 sudo apt-get update openjdk-6-jre-headless
+
+h3. Configuration
+
+"See Ticket #467":http://tracker-project.verticon.com/verticon_Tracker/ticket/467
+
+Changed the etc/karaf-wrapper.conf 
+
+bc.. 
+# Maximum Java Heap Size (in MB)
+wrapper.java.maxmemory=512
+
+change to: 
+# Maximum Java Heap Size (in MB)
+# wrapper.java.maxmemory=128
 
 h2. Add and enable ssh server
 
@@ -149,28 +165,25 @@ h2. OSGi Framework
 
 h3. Karaf Installation
 
+**Karaf and the Tracker applications will be installed in a memory drive. Rebooting the machine will wipe it clean. Do not reboot until this entire step is completed or you will loose your work.**
+
 * "Download Karaf":http://apache.securedservers.com/felix/apache-felix-karaf-1.2.0.tar.gz
 
 bc.. 
 jconlon@mudshark:~/Downloads/Felix$ scp apache-felix-karaf-1.2.0.tar.gz tracker1:/tmp
 apache-felix-karaf-1.2.0.tar.gz                                          100% 4336KB   4.2MB/s   00:00 
- 
-jconlon@tracker1:/opt$ sudo mkdir felix
-
-jconlon@tracker1:/tmp$ sudo tar xvf apache-felix-karaf-1.2.0.tar.gz -C /opt/felix
-
 p. 
 
-* Add the JAVA_HOME enviroment variable to /etc/environment 
+* Install it to the memory drive as the jconlon user
 bc.. 
-sudo vi /etc/environment
+jconlon@tracker1:/tmp$ tar xvf apache-felix-karaf-1.2.0.tar.gz -C /dev/shm
+p. 
+
+* Add the JAVA_HOME enviroment variable by adding the following line to the  bin/karaf script
 JAVA_HOME="/usr/lib/jvm/java-6-openjdk"
-p. 
 
-* Change the group of the deploy directory to allow scp from adm group users to deploy bundles.
 bc.. 
-jconlon@tracker1:/opt/felix/apache-felix-karaf-1.2.0$ sudo chgrp adm deploy
-jconlon@tracker1:/opt/felix/apache-felix-karaf-1.2.0$ sudo chmod 775 deploy
+jconlon@tracker1:/dev/shm/apache-felix-karaf-1.2.0/bin$ vi karaf
 
 
 h4. Configure as an OS Service 
@@ -180,25 +193,48 @@ bc..
 jconlon@tracker1:/opt/felix/apache-felix-karaf-1.2.0$ bin/karaf
 p. 
 
-* Add the wrapper feature
+* Add the wrapper feature and install it
 bc.. 
 karaf@root> features:install wrapper
-p. 
-
-* Install the wrapper
-bc.. 
+karaf@root> wrapper install
+Command not found:  *:wrapper
 karaf@root> wrapper:install 
-Creating file: /opt/felix/apache-felix-karaf-1.2.0/bin/karaf-wrapper
-Creating file: /opt/felix/apache-felix-karaf-1.2.0/bin/karaf-service
-Creating file: /opt/felix/apache-felix-karaf-1.2.0/etc/karaf-wrapper.conf
-Creating file: /opt/felix/apache-felix-karaf-1.2.0/lib/libwrapper.so
-Creating file: /opt/felix/apache-felix-karaf-1.2.0/lib/karaf-wrapper.jar
-p. 
+Creating file: /dev/shm/apache-felix-karaf-1.2.0/bin/karaf-wrapper
+Creating file: /dev/shm/apache-felix-karaf-1.2.0/bin/karaf-service
+Creating file: /dev/shm/apache-felix-karaf-1.2.0/etc/karaf-wrapper.conf
+Creating file: /dev/shm/apache-felix-karaf-1.2.0/lib/libwrapper.so
+Creating file: /dev/shm/apache-felix-karaf-1.2.0/lib/karaf-wrapper.jar
 
-* Integrated the service with the commands
-bc.. 
+Setup complete.  You may want to tweak the JVM properties in the wrapper configuration file:
+	/dev/shm/apache-felix-karaf-1.2.0/etc/karaf-wrapper.conf
+before installing and starting the service.
+
+The way the service is installed depends upon your flavor of Linux.
+
+On Redhat/Fedora/CentOS Systems:
   To install the service:
-    $ ln -s /opt/felix/apache-felix-karaf-1.0.0/bin/karaf-service /etc/init.d/
+    $ ln -s /dev/shm/apache-felix-karaf-1.2.0/bin/karaf-service /etc/init.d/
+    $ chkconfig karaf-service --add
+
+  To start the service when the machine is rebooted:
+    $ chkconfig karaf-service on
+
+  To disable starting the service when the machine is rebooted:
+    $ chkconfig karaf-service off
+
+  To start the service:
+    $ service karaf-service start
+
+  To stop the service:
+    $ service karaf-service stop
+
+  To uninstall the service :
+    $ chkconfig karaf-service --del
+    $ rm /etc/init.d/karaf-service
+
+On Ubuntu/Debian Systems:
+  To install the service:
+    $ ln -s /dev/shm/apache-felix-karaf-1.2.0/bin/karaf-service /etc/init.d/
 
   To start the service when the machine is rebooted:
     $ update-rc.d karaf-service defaults
@@ -214,8 +250,92 @@ bc..
 
   To uninstall the service :
     $ rm /etc/init.d/karaf-service
+karaf@root> 
 
 p. 
+
+h3. Harden the Framework and the Tracker iRouter
+
+"See Ticket #462":http://tracker-project.verticon.com/verticon_Tracker/ticket/462
+
+Hardening the framework and the iRouter is conceived as running the framework and bundles out of the Ubuntu memory disk **/dev/shm**.  To do the framework filesystem will have to be persisted somewhere and extracted into the memory disk at startup.  
+
+h4. Framework and iRouter app will be persisted to a tracker specific directory /opt/tracker
+
+* create /opt/tracker directory
+bc.. 
+jconlon@tracker1:/opt$ sudo mkdir tracker
+jconlon@tracker1:/opt$ cd tracker
+jconlon@tracker1:/opt/tracker$ sudo chown jconlon .
+p. 
+
+h4. Modify karaf-service wrapper to do the extraction before the service starts
+
+* See first part of scripts/karaf-service in this project.
+
+h4. Move karaf-service and setup karaf-service
+
+bc.. 
+jconlon@mudshark:~/Workspaces/tracker_dev-01/com.verticon.tracker.irouter/scripts$ scp karaf-service tracker1:/opt/tracker
+
+jconlon@tracker1:/opt/tracker$ sudo ln -s /opt/tracker/karaf-service /etc/init.d/
+jconlon@tracker1:/opt/tracker$ sudo update-rc.d karaf-service defaults
+
+h4. Move the pickle script to tracker directory
+
+The pickle script will be used by administrators to archive any changed distro to a persistent compressed archive on the tracker diretory.  This is where the modified karaf-service will try and find it. 
+
+*  add the irouter-pickle script to the tracker dirctory. 
+bc.. 
+jconlon@mudshark:~/Workspaces/tracker_dev-01/com.verticon.tracker.irouter/scripts$ scp irouter-pickle tracker1:/opt/tracker
+
+h4. Archive the Framework and IRouter
+
+* Here is how to run the pickle script
+bc.. jconlon@tracker1:/opt/tracker$ ./irouter-pickle
+ 
+
+h3. Add Dependencies
+
+__TODO Consider refactoring these as a feature. For an example of a features repository see:__
+"Felix Karaf Features file":http://repo2.maven.org/maven2/org/apache/felix/karaf/apache-felix-karaf/1.2.0/apache-felix-karaf-1.2.0-features.xml
+
+h4. Add Dependent Bundles
+
+__These bundles are added directly to the deploy directory and not just installed, to insure they are there in the file system, in case the data directory needs to be deleted due to a system hang.__
+
+h5. Add WebConsole Feature
+
+* Install the WebConsole
+bc.. 
+karaf@root> features:install webconsole
+p. 
+
+* Browse to the "WebConsole":http://tracker1:8181/system/console/admin
+
+h6.  Brand the WebConsole __TODO__
+
+"Webconsole branding":http://felix.apache.org/site/branding-the-web-console.html
+ 
+h5. Add Tracker specific dependencies
+
+# Install Declarative Services bundle
+** org.apache.felix.scr-1.4.0.jar
+# Add Equinox Support Bundles
+** org.eclipse.osgi.services_3.2.0.v20090520-1800.jar
+** org.eclipse.equinox.io_1.0.100.v20090520-1800.jar
+** org.eclipse.equinox.util_1.0.100.v20090520-1800.jar
+** org.eclipse.osgi.util_3.2.0.v20090520-1800.jar
+** org.eclipse.equinox.wireadmin_1.0.100.v20090520-1800.jar
+bc.. 
+jconlon@mudshark:~/Downloads/Felix/tracker_deps$ ls
+org.apache.felix.scr-1.4.0.jar                       org.eclipse.equinox.wireadmin_1.0.100.v20090520-1800.jar
+org.eclipse.equinox.io_1.0.100.v20090520-1800.jar    org.eclipse.osgi.services_3.2.0.v20090520-1800.jar
+org.eclipse.equinox.util_1.0.100.v20090520-1800.jar  org.eclipse.osgi.util_3.2.0.v20090520-1800.jar
+ 
+jconlon@mudshark:~/Downloads/Felix/tracker_deps$ scp *.jar tracker1:/dev/shm/apache-felix-karaf-1.2.0/deploy
+
+h3. Connecting to the framework
 
 h4. Remote console
 
@@ -231,67 +351,53 @@ p.
 bc.. 
   karaf@root:/> ~.
 p. 
-* Karaf client
+
+h4.  Karaf client
+
 bc.. 
 jconlon@mudshark:/opt/Felix/apache-felix-karaf-1.2.0$ java -jar lib/karaf-client.jar -h tracker1 -u karaf -p karaf
 p. 
-** To exit the client session __TBD__
+** To exit the client session __^D__
 
- 
-h4. Add Dependencies
+h4. Web client
 
-__TODO Consider refactoring these as a feature. For an example of a features repository see:__
-"Felix Karaf Features file":http://repo2.maven.org/maven2/org/apache/felix/karaf/apache-felix-karaf/1.2.0/apache-felix-karaf-1.2.0-features.xml
+"Web Console":http://tracker1:8181/system/console/admin
 
 
-h5. Add WebConsole Feature
+h3. Tracker IRouter
 
-* Install the WebConsole
+* Add Tracker Information Router bundles.
 bc.. 
-karaf@root> features:install webconsole
-p. 
-* Brand the WebConsole __TODO__
-"Webconsole branding":http://felix.apache.org/site/branding-the-web-console.html
- 
-h4. Add Dependent Bundles
-
-__These bundles are added directly to the deploy directory and not just installed, to insure they are there in the file system, in case the data directory needs to be deleted due to a system hang.__
+jconlon@mudshark:~/Workspaces/tracker_dev-01/com.verticon.tracker.router/deploy/plugins$ ls
+com.verticon.tracker.connector.socket_0.1.0.jar            com.verticon.tracker.irouter.mettler_0.1.0.jar
+com.verticon.tracker.irouter.abbott_0.1.0.jar              com.verticon.tracker.irouter.trutest_0.1.0.jar
+com.verticon.tracker.irouter.measurement.logger_0.1.0.jar  com.verticon.tracker.irouter.wireadmin_0.1.0.jar
+jconlon@mudshark:~/Workspaces/tracker_dev-01/com.verticon.tracker.router/deploy/plugins$ scp *.jar tracker1:/dev/shm/apache-felix-karaf-1.2.0/deploy
 
 
-# Install Declarative Services bundle
-** org.apache.felix.scr-1.4.0.jar
-# Add Equinox Support Bundles
-** org.eclipse.osgi.services_3.2.0.v20090520-1800.jar
-** org.eclipse.equinox.io_1.0.100.v20090520-1800.jar
-** org.eclipse.equinox.util_1.0.100.v20090520-1800.jar
-** org.eclipse.osgi.util_3.2.0.v20090520-1800.jar
-** org.eclipse.equinox.wireadmin_1.0.100.v20090520-1800.jar
-bc.. 
-jconlon@mudshark:~/Downloads/Felix/tracker_deps$ ls
-org.apache.felix.scr-1.4.0.jar                       org.eclipse.equinox.wireadmin_1.0.100.v20090520-1800.jar
-org.eclipse.equinox.io_1.0.100.v20090520-1800.jar    org.eclipse.osgi.services_3.2.0.v20090520-1800.jar
-org.eclipse.equinox.util_1.0.100.v20090520-1800.jar  org.eclipse.osgi.util_3.2.0.v20090520-1800.jar
-jconlon@mudshark:~/Downloads/Felix/tracker_deps$ scp *.jar tracker1:/opt/felix/apache-felix-karaf-1.2.0/deploy
-org.apache.felix.scr-1.4.0.jar                                                                      100%  181KB 181.1KB/s   00:00    
-org.eclipse.equinox.io_1.0.100.v20090520-1800.jar                                                   100%   37KB  37.3KB/s   00:00    
-org.eclipse.equinox.util_1.0.100.v20090520-1800.jar                                                 100%   74KB  73.8KB/s   00:00    
-org.eclipse.equinox.wireadmin_1.0.100.v20090520-1800.jar                                            100%   34KB  33.7KB/s   00:00    
-org.eclipse.osgi.services_3.2.0.v20090520-1800.jar                                                  100%   65KB  64.5KB/s   00:00    
-org.eclipse.osgi.util_3.2.0.v20090520-1800.jar                                                      100%   22KB  21.9KB/s   00:00  
+h3. Logging TODO
 
-h3. Logging
+"See Ticket #466":http://tracker-project.verticon.com/verticon_Tracker/ticket/466
 
 * Edit the logging spec to save logging files to the thumbdrive.
 
 bc.. 
-jconlon@tracker1:/opt/felix/apache-felix-karaf-1.2.0/etc$ cat org.ops4j.pax.logging.cfg
-...
+# Root logger
 log4j.rootLogger=INFO, R, x, osgi:VmLogAppender
-...
+
+# Transaction category
+log4j.category.transaction=INFO, F
+
+# ***** F is set to be the Transaction File appender
+log4j.appender.F=org.apache.log4j.FileAppender
+log4j.appender.F.layout=org.apache.log4j.PatternLayout
+log4j.appender.F.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss},%m%n
+log4j.appender.F.file=/mnt/USB/transaction.log
+log4j.appender.F.append=true
 
 # ***** R is set to be a RollingFileAppender.
 log4j.appender.R=org.apache.log4j.RollingFileAppender
-log4j.appender.R.File=/mnt/USB/log/tracker.log
+log4j.appender.R.File=/mnt/USB/tracker.log
 # ***** Max file size is set to 100KB
 log4j.appender.R.MaxFileSize=100KB
 # ***** Keep one backup file
@@ -309,54 +415,90 @@ log4j.appender.x.layout=org.apache.log4j.PatternLayout
 log4j.appender.x.layout.ConversionPattern=[%d{MMM dd HH:mm:ss}] %-5p (%F:%L) - %m%n
 
 log4j.logger.com.verticon.tracker=DEBUG
-
-
-
-h3. Tracker
-
-* Add Tracker Information Router bundles.
-bc.. 
-jconlon@mudshark:~/Workspaces/tracker_dev-e-01/com.verticon.tracker.embedded.sp/deploy/plugins$ scp com.verticon.tracker.connector.socket_0.1.0.jar tracker1:/mnt/USB/deploy
-com.verticon.tracker.connector.socket_0.1.0.jar                                                                              100% 6214     6.1KB/s   00:00    
-jconlon@mudshark:~/Workspaces/tracker_dev-e-01/com.verticon.tracker.embedded.sp/deploy/plugins$ scp com.verticon.tracker.wireadmin_0.1.0.jar tracker1:/mnt/USB/deploy
-com.verticon.tracker.wireadmin_0.1.0.jar                                                                                     100%   14KB  13.7KB/s   00:00    
-jconlon@mudshark:~/Workspaces/tracker_dev-e-01/com.verticon.tracker.embedded.sp/deploy/plugins$ scp com.verticon.tracker.mettler_0.1.0.jar tracker1:/mnt/USB/deploy
-com.verticon.tracker.mettler_0.1.0.jar                                                                                       100%   14KB  14.5KB/s   00:00    
-
+#log4j.logger.com.verticon.tracker.mettler=DEBUG
 
 
 h3. Configuration Admin
 
-# Refer to "Felix Config Admin Details":http://www.osgilook.com/2009/08/20/apache-felix-file-install-part-2-dynamic-configurations/
-# Add a managedFactoryService instance for org.apache.felix.fileinstall to watch directory:
-* /mnt/USB/deploy
+On the webconsole go to the Configuration tab and create Tracker Factory Configuations.  Create two instances for each Factory.
+# Wiring group @one@ and Wiring group @two@
+
+h4. Tracker Abbott Controller 
+
+h5. Wiring Group __one__
+
+Configuration for the Tracker Abbott Controller Instance __change the following attributes__
+**Wiring group name** @one@
+
+h5. Wiring Group __two__
+
+Configuration for the Tracker Abbott Controller Instance __change the following attributes__
+**Wiring group name** @two@
 
 
+h4. Tracker Measurement Logger 
 
+h5. Wiring Group __one__
+
+Configuration for the Tracker Measurement Logger Instance __change the following attributes__
+**Wiring group name** @one@
+**Consumable measurement name** 
+# @animal.weight@
+# @mettler.weight@ 
+
+h5. Wiring Group __two__
+
+Configuration for the Tracker Measurement Logger Instance __change the following attributes__
+**Wiring group name** @two@
+**Consumable measurement name** 
+# @animal.weight@
+# @mettler.weight@ 
+
+h4. Tracker Mettler Balance 
+
+h5. Wiring Group __one__
+
+Configuration for the Tracker Mettler Balance Instance __change the following attributes__
+
+**Connection uri** @socket://lantronix1:10002
+**Wiring group name** @one@
+
+h5. Wiring Group __two__
+
+Configuration for the Tracker Mettler Balance Instance __change the following attributes__
+**Connection uri** @socket://lantronix2:10002
+**Wiring group name** @two@
+
+h4. Tracker TruTest Indicator
+
+h5. Wiring Group __one__
+
+Configuration for the Tracker TruTest Indicator Instance __change the following attributes__
+
+**Connection uri** @socket://lantronix1:10001
+**Wiring group name** @one@
+
+h5. Wiring Group __two__
+
+Configuration for the Tracker TruTest Indicator Instance __change the following attributes__
+**Connection uri** @socket://lantronix2:10001
+**Wiring group name** @two@
+
+
+h3. **Save the work!**
+
+* Run the pickle script
+bc.. jconlon@tracker1:/opt/tracker$ ./irouter-pickle
+ 
 
 
 h2. Todo -----------------------------------------------------------
 
-# TruTest metadata
-# Optimize Logs
-## statements
-## output
-## file names
-# Brand web console
+# Logs
+## Levels
+## Files
+# TruTest 
+## Load new Microcode
+## Test beep code
 
 
-h5. Creating the distribution __??__
-
-# Shutdown OSGi service
-# On the SD, 
-# Remove osgi/bin/vms/j9/storage directory
-# Clean up all logs
-## Remove all unused bundles
-## Tar and compress J9 and OSGi directories
-### Name it tracker_embedded-0.1.0.targz
-### tar cvzf tracker_embedded-0.1.0.targz j9 osgi
-# Modifiy the osgi.init script
-## Extract compressed distribution to the /dev/shm
-### tar xvf /mnt/sdcard/tracker_embedded-0.1.0.targz -C /dev/shm
-## Run the start script on there 
-### Calling sequence: osgi.init -> /dev/shm/osgi/bin/mbsa/mbsa_start 
