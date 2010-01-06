@@ -1,0 +1,103 @@
+package com.verticon.tracker.irouter.mettler;
+
+import java.util.Collection;
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import org.osgi.framework.BundleContext;
+import org.osgi.service.cm.ConfigurationException;
+import org.osgi.service.cm.ManagedServiceFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class FactoryComponent implements ManagedServiceFactory {
+
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger log = LoggerFactory.getLogger(FactoryComponent.class);
+
+
+	private Map<String, Balance> balances = null;
+	private ExecutorService exec;
+	private BundleContext bc;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "FactoryComponent [name=" + getName() + "]";
+	}
+
+	protected void activate(BundleContext bc) throws Exception {
+		this.bc = bc;
+		// There will be multiple balances each running within it's own thread
+		exec = Executors.newCachedThreadPool();
+		balances = new HashMap<String, Balance>();
+		log.debug("{}: Started", this);
+	}
+
+	protected void deactivate(BundleContext context) throws Exception {
+		Collection<Balance> balanceInstances = balances.values();
+		for (Balance balance : balanceInstances) {
+			balance.stop();
+		}
+		balances.clear();
+		balances = null;
+
+		exec.shutdown();
+		exec = null;
+
+	}
+
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see org.osgi.service.cm.ManagedServiceFactory#deleted(String)
+	 */
+	@Override
+	public void deleted(String pid) {
+		Balance balance = (Balance) balances.get(pid);
+		if (balance != null) {
+			balances.remove(pid);
+			balance.stop();
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.osgi.service.cm.ManagedServiceFactory#getName()
+	 */
+	@Override
+	public String getName() {
+		return "Weight Measurement Producer Factory";
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.osgi.service.cm.ManagedServiceFactory#updated(java.lang.String,
+	 * java.util.Dictionary)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void updated(String pid, Dictionary config)
+			throws ConfigurationException {
+		log.info("{}: Updating pid {}", this, pid);
+
+		Balance balance = (Balance) balances.get(pid);
+		if (balance == null) {
+			balance = new Balance(pid, config, exec);
+			balances.put(pid, balance);
+		}
+		balance.updated(bc, config);
+	}
+
+}
