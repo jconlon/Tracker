@@ -4,9 +4,9 @@ import java.util.Dictionary;
 
 import org.osgi.service.cm.ConfigurationException;
 
-import com.verticon.tracker.common.AbstractComponentFactory;
-import com.verticon.tracker.common.IService;
-import com.verticon.tracker.common.ServiceController;
+import com.verticon.tracker.irouter.common.AbstractComponentFactory;
+import com.verticon.tracker.irouter.common.IService;
+import com.verticon.tracker.irouter.common.ServiceController;
 
 
 public class ComponentFactory extends AbstractComponentFactory {
@@ -17,7 +17,7 @@ public class ComponentFactory extends AbstractComponentFactory {
 		ServiceController controller = null;
 		Context context = new Context(pid, config, exec, scheduler);
 		IService commandProducer = new MeasurementLoggingConsumer(context);
-		controller = new ServiceController(context, new IService[]{commandProducer});
+		controller = new ServiceController(context, new IService[]{commandProducer}, log);
 		return controller;
 	}
 

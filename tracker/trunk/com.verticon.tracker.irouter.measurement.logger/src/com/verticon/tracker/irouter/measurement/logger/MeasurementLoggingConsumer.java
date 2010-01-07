@@ -1,8 +1,8 @@
 package com.verticon.tracker.irouter.measurement.logger;
 
-import static com.verticon.tracker.common.TrackerConstants.ANIMAL_TAG_NUMBER_SCOPE;
-import static com.verticon.tracker.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
-import static com.verticon.tracker.common.TrackerConstants.TRANSACTION_STATE_SCOPE;
+import static com.verticon.tracker.irouter.common.TrackerConstants.ANIMAL_TAG_NUMBER_SCOPE;
+import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
+import static com.verticon.tracker.irouter.common.TrackerConstants.TRANSACTION_STATE_SCOPE;
 import static com.verticon.tracker.irouter.measurement.logger.Context.*;
 
 import java.util.Arrays;
@@ -13,9 +13,9 @@ import org.osgi.service.wireadmin.Wire;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.verticon.tracker.common.AbstractConsumer;
-import com.verticon.tracker.common.IContext;
-import com.verticon.tracker.common.ITransactionHandler;
+import com.verticon.tracker.irouter.common.AbstractConsumer;
+import com.verticon.tracker.irouter.common.IContext;
+import com.verticon.tracker.irouter.common.ITransactionHandler;
 
 /**
  * Consumers a set of measurement scopes contained within a transaction and normalizes the
