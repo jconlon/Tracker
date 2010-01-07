@@ -175,7 +175,7 @@ public class MeasurementProducerCallable implements Callable<Void> {
 		} catch (InterruptedException e) {
 			// // Allow thread to exit
 			 log.debug("{}:Interrupted.....",this);
-			 //TODO SHould this be rethrown?
+			 
 		} finally {
 			log.debug(this + ":Terminating.....");
 			if (Thread.currentThread().isInterrupted()) {
@@ -205,13 +205,14 @@ public class MeasurementProducerCallable implements Callable<Void> {
 		
 		Measurement measurement = createWeight(response);
 		if (measurement != null) {
+			log.debug("{}: sending {}", this,measurement);
+			
 			measurementSender.send(measurement);
 		}
 	}
 
 	Measurement createWeight(String response) {
 		Double polledWeight = parseBalanceWeight(response);
-		log.debug("{}:Parsed response polledWeight<{}>", this,polledWeight);
 		
 		if (polledWeight == null) {
 			return null;
@@ -230,14 +231,6 @@ public class MeasurementProducerCallable implements Callable<Void> {
 
 	Double parseBalanceWeight(String response) {
 		Double result = null;
-//		String responsePattern = balance
-//				.getConfigurationString(RESPONSE_PATTERN);
-//		if (!responsePattern.equals(this.responsePattern)) {
-//			this.responsePattern = responsePattern;
-//			Pattern pattern = Pattern.compile(responsePattern);
-//			matcher = pattern.matcher("");
-//
-//		}
 		matcher.reset(response.trim());
 		if (matcher.matches()) {
 			String s = matcher.group(4);
