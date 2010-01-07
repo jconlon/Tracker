@@ -1,7 +1,7 @@
 package com.verticon.tracker.irouter.measurement.logger;
 
-import static com.verticon.tracker.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
-import static com.verticon.tracker.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME_DEFAULT;
+import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
+import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME_DEFAULT;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -10,7 +10,7 @@ import java.util.concurrent.ScheduledExecutorService;
 
 import org.osgi.service.cm.ConfigurationException;
 
-import com.verticon.tracker.common.AbstractContext;
+import com.verticon.tracker.irouter.common.AbstractContext;
 
 public class Context extends AbstractContext {
 	

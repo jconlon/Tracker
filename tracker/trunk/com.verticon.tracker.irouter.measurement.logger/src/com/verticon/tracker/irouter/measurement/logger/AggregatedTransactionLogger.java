@@ -9,7 +9,7 @@ import java.util.Map;
 import org.osgi.util.measurement.Measurement;
 import org.slf4j.Logger;
 
-import com.verticon.tracker.common.AbstractTransactionHandler;
+import com.verticon.tracker.irouter.common.AbstractTransactionHandler;
 
 /**
  * 

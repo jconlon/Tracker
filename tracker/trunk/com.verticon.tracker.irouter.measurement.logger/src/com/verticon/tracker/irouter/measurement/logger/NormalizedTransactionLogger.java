@@ -2,7 +2,7 @@ package com.verticon.tracker.irouter.measurement.logger;
 
 import org.slf4j.Logger;
 
-import com.verticon.tracker.common.AbstractTransactionHandler;
+import com.verticon.tracker.irouter.common.AbstractTransactionHandler;
 
 public class NormalizedTransactionLogger extends AbstractTransactionHandler{
 
