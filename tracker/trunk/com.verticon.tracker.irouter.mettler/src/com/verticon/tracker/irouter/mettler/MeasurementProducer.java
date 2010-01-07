@@ -51,7 +51,6 @@ public class MeasurementProducer implements Producer, IMeasurementSender{
 	public MeasurementProducer(IContext context) {
 		super();
 		this.context = context;
-		//FIXME
 		scopeName = 
 			context.getConfigurationString(PRODUCER_WEIGHT_MEASUREMENT_NAME)+
 			'.'+WEIGHT_MEASUREMENT_SCOPE;
