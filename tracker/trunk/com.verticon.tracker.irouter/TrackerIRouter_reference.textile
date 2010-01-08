@@ -375,52 +375,102 @@ com.verticon.tracker.irouter.measurement.logger_0.1.0.jar  com.verticon.tracker.
 jconlon@mudshark:~/Workspaces/tracker_dev-01/com.verticon.tracker.router/deploy/plugins$ scp *.jar tracker1:/dev/shm/apache-felix-karaf-1.2.0/deploy
 
 
-h3. Logging TODO
+h3. Logging
+
+h4. Guidelines on what iRouter components are logging
+
+iRouter components adhere to the following logging policy. 
 
 "See Ticket #466":http://tracker-project.verticon.com/verticon_Tracker/ticket/466
 
-* Edit the logging spec to save logging files to the thumbdrive.
+h5. c.v.tracker.irouter.abbott
+
+* INFO policy:
+** ComponentFactory will log the update and deletion of instances.
+
+* DEBUG policy:
+** CompositeConsumer will log wire connections and sending of data
+** CommandProducer will log wire connections and sending of data, 
+ 
+* WARN policy:
+** CommandProducer send aborts when there are no wires.
+ 
+* ERROR policy:
+** Both Services will log unexpected 
+
+h5. c.v.tracker.irouter.common
+
+* DEBUG policy:
+** TaskMonitoringService will log task submission, monitoring, and canceling
+ 
+* WARN policy:
+
+* ERROR policy:
+** TaskMonitoringService will log task that have failed with an error or unexpected results
+
+h5. c.v.tracker.irouter.mettler
+
+* INFO policy:
+** ComponentFactory will log the update and deletion of instances.
+
+* DEBUG policy:
+** MeasurementProducer will log wire connections and sending of data
+** MeasurementProducerCallable will log device connections, data retrieval, and sending of data to the MeasurementProducer, 
+ 
+* WARN policy:
+** CommandProducer send aborts when there are no wires.
+ 
+* ERROR policy:
+** Both Services will log unexpected data and connection errors
+
+
+h5. c.v.tracker.irouter.TruTest
+
+* INFO policy:
+** ComponentFactory will log the update and deletion of instances.
+
+* DEBUG policy:
+** CommandConsumer will log wire connections
+** CommandConsumerCallable will log device connections, data retrieval, and sending of data to the device, 
+** EnvelopeProducer will log wire connections and produced envelopes
+** EnvelopeProducerCallable will log device connections, data retrieval, and sending of data to the EnvelopeProducer, 
+
+* Log WARN policy:
+** EnvelopeProducer will log send aborts when there are no wires.
+ 
+* Log ERROR policy:
+** Both Services will log unexpected data and connection errors
+
+
+
+h5. c.v.tracker.irouter.wireadmin
+
+* INFO policy:
+** Component will log wireAdmin wire creation events.
+
+* DEBUG policy:
+** Component will log all wireAdmin events except wire creation and log the active creating and deleting of wires.
+** GroupConnector will log all creating and deleting of wires.
+
+
+h4. Configuration
+
+* modified log4j properties file
+** to save logging files to the thumbdrive
+** to save a separate information file transaction.log file 
 
 bc.. 
-# Root logger
-log4j.rootLogger=INFO, R, x, osgi:VmLogAppender
+jconlon@mudshark:~/Workspaces/tracker_dev-01/com.verticon.tracker.irouter/propertyFiles$ scp tracker1:/dev/shm/apache-felix-karaf-1.2.0/etc/org.ops4j.pax.logging.cfg .
+p. 
 
-# Transaction category
-log4j.category.transaction=INFO, F
 
-# ***** F is set to be the Transaction File appender
-log4j.appender.F=org.apache.log4j.FileAppender
-log4j.appender.F.layout=org.apache.log4j.PatternLayout
-log4j.appender.F.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss},%m%n
-log4j.appender.F.file=/mnt/USB/transaction.log
-log4j.appender.F.append=true
-
-# ***** R is set to be a RollingFileAppender.
-log4j.appender.R=org.apache.log4j.RollingFileAppender
-log4j.appender.R.File=/mnt/USB/tracker.log
-# ***** Max file size is set to 100KB
-log4j.appender.R.MaxFileSize=100KB
-# ***** Keep one backup file
-log4j.appender.R.MaxBackupIndex=5
-# ***** R uses PatternLayout.
-log4j.appender.R.layout=org.apache.log4j.PatternLayout
-log4j.appender.R.layout.ConversionPattern=%p %t %c - %m%n
-
-# SocketAppender for use with Chainsaw
-log4j.appender.x=org.apache.log4j.net.SocketAppender
-log4j.appender.x.RemoteHost=mudshark
-log4j.appender.x.Port=4560
-log4j.appender.x.LocationInfo=true
-log4j.appender.x.layout=org.apache.log4j.PatternLayout
-log4j.appender.x.layout.ConversionPattern=[%d{MMM dd HH:mm:ss}] %-5p (%F:%L) - %m%n
-
-log4j.logger.com.verticon.tracker=DEBUG
-#log4j.logger.com.verticon.tracker.mettler=DEBUG
 
 
 h3. Configuration Admin
 
-On the webconsole go to the Configuration tab and create Tracker Factory Configuations.  Create two instances for each Factory.
+Tracker iRouter is a configuration driven framework of software factories.  These software factories create __Producer__ and __Consumer__ Services which produce and consume __Measurement__, __Command__, and __State__ information.   
+
+On the webconsole go to the Configuration tab and create Tracker Factory Configuations.  The initial beta user will create two instances for each iRouter ComponentFactory.
 # Wiring group @one@ and Wiring group @two@
 
 h4. Tracker Abbott Controller 
@@ -490,13 +540,13 @@ h3. **Save the work!**
 * Run the pickle script
 bc.. jconlon@tracker1:/opt/tracker$ ./irouter-pickle
  
+h3. Diagnostics
 
+Each Producer and Consumer Service will register a data flavor and scopes property with the framework.  These can be inspected in the Configuration Status browser page.
 
 h2. Todo -----------------------------------------------------------
 
-# Logs
-## Levels
-## Files
+
 # TruTest 
 ## Load new Microcode
 ## Test beep code
