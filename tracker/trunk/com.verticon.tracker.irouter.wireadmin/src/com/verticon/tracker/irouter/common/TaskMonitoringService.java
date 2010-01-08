@@ -1,5 +1,6 @@
 package com.verticon.tracker.irouter.common;
 
+import java.net.NoRouteToHostException;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -118,9 +119,19 @@ public class TaskMonitoringService implements Callable<Void> {
 				completedFuture.get();
 				log.error((String.format("%s: Task completed prematurely without throwing an error.", this)));
 			}
+		/*
+		 * log as debug
+		 * } catch (NoRouteToHostException e){
+				log.info(this + ":No Route to Host {} ", uri);
+				throw e;
+		 */
 		} catch (ExecutionException e) {
-			log.error((String.format("%s: Task failed with an error.", this)), e
-					.getCause());
+			Throwable cause = e.getCause();
+			if(cause instanceof NoRouteToHostException){
+				log.debug(this + ": Task could not connect to target host.");
+			}else{
+				log.error((String.format("%s: Task failed with an error.", this)), cause);
+			}
 		} finally{
 			boolean removed = futures.remove(completedFuture);
 			if (!removed) {
