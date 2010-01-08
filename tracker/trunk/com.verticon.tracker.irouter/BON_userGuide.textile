@@ -107,8 +107,16 @@ h5. Animal LifeData Setup
 h5. FileData Setup
 
 Turn on @DATE STAMPING@ and @TIME STAMPING@
+
+h6. Displaying grams 
+
 **Calc BW** is a number with the format ####.#
 **Act BW** is a number with the format ####.#
+			
+h6. Displaying kilograms 
+
+**Calc BW** is a number with the format #.####
+**Act BW** is a number with the format #.####
 
 h5. System
 
