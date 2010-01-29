@@ -1,5 +1,6 @@
 package com.verticon.tracker.irouter.common;
 
+import java.net.ConnectException;
 import java.net.NoRouteToHostException;
 import java.util.Set;
 import java.util.concurrent.Callable;
@@ -128,9 +129,13 @@ public class TaskMonitoringService implements Callable<Void> {
 		} catch (ExecutionException e) {
 			Throwable cause = e.getCause();
 			if(cause instanceof NoRouteToHostException){
-				log.debug(this + ": Task could not connect to target host.");
+				log.debug(this + ": Task could not connect to target host. "+ cause.getMessage());
+			
+			}else if(cause instanceof ConnectException){
+				log.debug(this + ": Task could not connect to target host."+ cause.getMessage());
+			
 			}else{
-				log.error((String.format("%s: Task failed with an error.", this)), cause);
+				log.error((String.format("%s: Task failed.", this)), cause);
 			}
 		} finally{
 			boolean removed = futures.remove(completedFuture);
