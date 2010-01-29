@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.ConnectException;
 import java.net.NoRouteToHostException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -106,14 +107,16 @@ public class MeasurementProducerCallable implements Callable<Void> {
 				in = new BufferedReader(new InputStreamReader(connection
 						.openInputStream()));
 			} catch (NoRouteToHostException e){
-				log.warn(this + ":No Route to Host {} ", uri);
+				log.warn("{} :No Route to Host {} ", this, uri);
 				throw e;
 			} catch (UnknownHostException e) {
-				log.error("{}:Unknown Host {}", this, uri);
+				log.warn("{} :Unknown Host {}", this, uri);
+				throw e;
+			} catch (ConnectException e) {
+				log.warn("{} :Couldn't connect to: {} because {}", new Object[]{this, uri, e.getMessage()});
 				throw e;
 			} catch (IOException e) {
-				log.error(this + ":Couldn't get I/O for "
-						+ "the connection to: " + uri, e);
+				log.warn("{} :Couldn't io exception connecting to: {} because {}", new Object[]{this, uri, e.getMessage()});
 				throw e;
 			}
 
