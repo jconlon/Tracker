@@ -2,6 +2,7 @@ package com.verticon.tracker.irouter.common;
 
 import java.net.ConnectException;
 import java.net.NoRouteToHostException;
+import java.net.UnknownHostException;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -133,7 +134,8 @@ public class TaskMonitoringService implements Callable<Void> {
 			
 			}else if(cause instanceof ConnectException){
 				log.debug(this + ": Task could not connect to target host."+ cause.getMessage());
-			
+			}else if(cause instanceof UnknownHostException){
+				log.debug(this + ": Task could not connect to unknown host."+ cause.getMessage());
 			}else{
 				log.error((String.format("%s: Task failed.", this)), cause);
 			}
