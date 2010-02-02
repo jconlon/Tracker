@@ -1,0 +1,509 @@
+h1.  Tracker iRouter Distribution Reference
+
+__com.verticon.tracker.irouter.distro 0.1.0 (milestone irouter.beta.0.1)__
+
+__01/11/10__
+
+{toc}
+
+h2. Introduction
+
+Tracker iRouter is Network Appliance for the routing of Measurement, Event and Command Information between discrete devices and  Enterprise and Internetwork Service Infrastructures.
+
+Tracker iRouter is based on OSGi, Felix Karaf, and the "Debian live distribution.":http://debian-live.alioth.debian.org/ 
+
+h3. Requirements
+
+This **com.verticon.tracker.irouter.distro 0.1.0** live image will offer
+
+# Device Measurement, Event and Command Information Routing Server 
+## Industry standards, Open Source and Open Data.
+### Rapid development
+### Rapid deployment 
+### Rapid integration
+# Beta customer specific business logic components.
+# An agile component framework with management interface
+## Based on the OSGi and Felix Karaf 
+# Zero Administration Operating Environment
+## Flash based Embedded Read Only File System
+# Snap Shot Persistence 
+## Configuration
+### Tuning iRouter component configuration defaults
+### Adding new components
+# Industry standard logging
+# Small and Simple low power hardware enclosure
+## No controls
+## No monitor
+## No keyboard
+## Ethernet
+## Two USB ports
+
+
+h2. Building the distro
+
+h3. Overview 
+
+What is added to the  Debian live distro?
+# a Java Virtual Machine, -  Installed as a deb package
+# Felix Karaf
+## Copied to config/chroot_locals_includes
+## Modified bin/karaf to point to the JAVA_HOME
+## Java Wrapper Startup Service
+# Components
+## 3rd party iRouter dependent components
+## iRouter foundation components
+# Default IP configuration 
+## As a static IP configuration set to 192.168.0.204
+# ssh connectivity
+## user: @irouter@
+## pw: @live@
+# Persistence functionality
+## Snapshot persistence
+
+What are the build artifacts, and how are they distributed?
+
+# binary.iso 
+## As a file
+## Bootable CDROM
+# binary.image
+## As a file
+## Bootable thumb drive
+
+
+h3. Options for **lh_config** the binary build
+
+**--hostname NAME**
+sets the hostname of the live system.
+ 
+**--iso-application NAME**
+sets the APPLICATION field in the header of a resulting CD/DVD image and defaults to "Debian Live" in debian mode, and to "Emdebian Live" in emdebian mode.
+
+**--iso-preparer NAME**
+sets the PREPARER field in the header of a resulting CD/DVD image. By default this is set to "live-helper VERSION;
+http://packages.qa.debian.org/live-helper", whereas VERSION is exanded to the version of live-helper that was used to build the image.
+
+**--iso-publisher NAME**
+sets the PUBLISHED field in the header of a resulting CD/DVD image. By  default,  this  is  set  to  'Debian  Live
+project;  http://debian-live.alioth.debian.org/;  debian-live@lists.debian.org'.  Remember  to  change this to the
+appropriate values at latest when you distributing custom and unofficial images.
+
+**--iso-volume NAME**
+sets the VOLUME field in the header of a resulting CD/DVD and defaults to 'Debian Live (DATE)' in debian mode, and  'Emdebian  Live  (DATE)'  in emdebian mode, whereas DATE is expanded with the current date and time of the generation.
+
+**--packages PACKAGE|"PACKAGES"**
+defines one or more packages to be installed in the live system. This is a quick and convenient place to add a few packages when building an image (limited by the  max  length  of  shell).  Packages  that  should  be  permanently
+installed should be put into a local packages list.
+           
+**--syslinux-timeout SECONDS**
+defines the timeout the syslinux bootloader should wait for input from the user at the  bootprompt  prior  booting
+the default kernel. This defaults to 0 which means it will wait forever.
+           
+**--username NAME**
+sets the name of the account of the default user in the live system.
+
+**--syslinux-timeout SECONDS**
+defines the timeout the syslinux bootloader should wait for input from the user at the bootprompt prior booting the default  kernel.  This defaults to 0 which means it will wait forever.
+__See following section for details__
+
+h4. Boot parms
+
+"see":http://grml.org/online-docs/live-initramfs.en.7.html
+
+**--bootappend-live PARAMETER|"PARAMETERS"**
+sets boot parameters specific to debian-live. A complete list of boot parameters can be found, for etch, in the manpage of casper, for all other  distributions  in  the  manpage  of  live-initramfs.  On the images, a list of all parameters (without comments) is included in the  /parameters.txt.
+
+**persistent**
+live-initramfs will look for persistent and snapshot partitions or files labeled "live-rw", "home-rw", and files called "live-sn*", "home-sn*" and will try to, in order: mount as /cow the first, mount the second in /home, and just copy the contents of the latter in appropriate locations (snapshots). Snapshots will be tried to be updated on reboot/shutdown. Look at live-snapshot(1) for more informations.
+
+
+**ip=frommedia**
+           If this variable is set, dhcp and static configuration are just
+           skipped and the system will use the (must be) media-preconfigured
+           /etc/network/interfaces instead.
+__TODO May not hard code IP in the future builds. Instead may leave this as an option to be configured and persisted.__
+
+h4. lh_config for ISO Image
+        
+bc.. 
+lh_config --hostname tracker1 --username irouter --iso-application "Tracker iRouter" --packages "openjdk-6-jre-headless ssh" --iso-preparer "Verticon, Inc. Tracker; http://tracker.verticon.com/index.html" --iso-publisher "Verticon, Inc.; http://www.verticon.com" --syslinux-timeout 5 --bootappend-live "persistent ip=frommedia" -b iso
+
+
+h4. lh_config for USB/HDD image
+        
+bc.. 
+lh_config --hostname tracker1 --username irouter --iso-application "Tracker iRouter" --packages "openjdk-6-jre-headless ssh" --iso-preparer "Verticon, Inc. Tracker; http://tracker.verticon.com/index.html" --iso-publisher "Verticon, Inc.; http://www.verticon.com" --syslinux-timeout 5 --bootappend-live "persistent ip=frommedia" -b usb-hdd
+
+h3. Add to the build/config/chroot_local-includes
+
+h4. opt/apache-felix-karaf-1.2.0
+
+"Felix Karaf":http://felix.apache.org/site/apache-felix-karaf.html is the selected OSGi framework and shell.
+
+* Create an opt dir in chroot_local-includes
+bc.. 
+jconlon@mudshark:~/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.distro$ mkdir -p build/config/chroot_local-includes/opt/
+p. 
+* "Download Karaf":http://apache.securedservers.com/felix/apache-felix-karaf-1.2.0.tar.gz and extract it to the opt directory.
+
+* Add the JAVA_HOME enviroment variable by adding the following line to the  bin/karaf script
+JAVA_HOME="/usr/lib/jvm/java-6-openjdk"
+
+* To the base directory create a @data@ directory
+** In the system directory create a directory to hold Tracker third party bundle dependencies
+@mkdir -p system/com/verticon/tracker/deps@
+** Add third party bundles
+bc.. 
+org.apache.felix.scr-1.4.0.jar
+org.eclipse.osgi.services_3.2.0.v20090520-1800.jar
+org.eclipse.equinox.io_1.0.100.v20090520-1800.jar
+org.eclipse.equinox.util_1.0.100.v20090520-1800.jar
+org.eclipse.osgi.util_3.2.0.v20090520-1800.jar
+org.eclipse.equinox.wireadmin_1.0.100.v20090520-1800.jar
+p. 
+** In the system directory create a directory to hold Tracker foundation bundles
+@mkdir -p system/com/verticon/tracker/foundation@
+*** Add Tracker foundation bundles there
+bc.. 
+com.verticon.tracker.irouter.wireadmin_0.1.0.jar
+com.verticon.tracker.connector.socket_0.1.0.jar
+p. 
+* To the top level deploy directory
+** Add Tracker bundles
+bc. 
+com.verticon.tracker.irouter.mettler_0.1.0.jar
+com.verticon.tracker.irouter.abbott_0.1.0.jar              com.verticon.tracker.irouter.trutest_0.1.0.jar
+com.verticon.tracker.irouter.measurement.logger_0.1.0.jar  
+
+h5. Optional Dependencies -  Webconsole 
+
+**Defered adding these at this time.  These may instead be installed as a package and saved with the persistence service.**
+Here are the bundles necessary to load the webconsole
+
+bc.. 
+[  44] [Active     ] [            ] [   60] geronimo-servlet_2.5_spec (1.1.2)
+[  45] [Active     ] [            ] [   60] Apache ServiceMix Bundles: jetty-6.1.14 (6.1.14.1)
+[  46] [Active     ] [            ] [   60] OPS4J Pax Web - API (0.7.1)
+[  47] [Active     ] [            ] [   60] OPS4J Pax Web - Service SPI (0.7.1)
+[  48] [Active     ] [            ] [   60] OPS4J Pax Web - Runtime (0.7.1)
+[  49] [Active     ] [            ] [   60] OPS4J Pax Web - Jetty (0.7.1)
+[  50] [Active     ] [            ] [   60] Apache Felix Metatype Service (1.0.2)
+[  51] [Active     ] [            ] [   60] Apache Felix Web Management Console (2.0.0)
+[  52] [Active     ] [Created     ] [   60] Apache Felix Karaf :: Web Console :: Admin Plugin (1.2.0)
+[  53] [Active     ] [Created     ] [   60] Apache Felix Karaf :: Web Console :: Features Plugin (1.2.0)
+[  54] [Active     ] [Created     ] [   60] Apache Felix Karaf :: Web Console :: Gogo Plugin (1.2.0)
+
+h6.  Brand the WebConsole __TODO__
+
+"Webconsole branding":http://felix.apache.org/site/branding-the-web-console.html
+
+h5. Configure as an OS Service 
+
+A Java wrapper can be associated with Karaf to bring it up and down as a service. This is typically done from within Karaf, but it can be done externally.
+
+* Add the wrapper components to the felix directory
+bc.. 
+ apache-felix-karaf-1.2.0/bin/karaf-wrapper
+ apache-felix-karaf-1.2.0/bin/karaf-service
+ apache-felix-karaf-1.2.0/etc/karaf-wrapper.conf
+ apache-felix-karaf-1.2.0/lib/libwrapper.so
+ apache-felix-karaf-1.2.0/lib/karaf-wrapper.jar
+
+p. 
+
+* Tweak the JVM properties in the wrapper configuration file: etc/karaf-wrapper.conf to accomadate system memory.
+	
+"See Ticket #467":http://tracker-project.verticon.com/verticon_Tracker/ticket/467 
+
+bc.. 
+# Maximum Java Heap Size (in MB)
+wrapper.java.maxmemory=512
+
+change to: 
+# Maximum Java Heap Size (in MB)
+# wrapper.java.maxmemory=128
+p. 
+
+
+h4. etc
+
+# init.d/karaf-service - java wrapper service for karaf  __This will be enable by the hooks script
+# network/interfaces - ip configuration
+** "HowTo":http://www.cyberciti.biz/tips/howto-ubuntu-linux-convert-dhcp-network-configuration-to-static-ip-configuration.html
+# fstab - mounts
+# resolve.conf - 
+
+h3. Build it
+
+@sudo lh_build 2>&1 | tee build.log@
+
+
+h2. Distribution
+
+h3. Copying to a USB/HDD stick
+
+h4. Identify the drive
+
+bc.. 
+ls -la /dev/disk/by-id/usb-*
+lrwxrwxrwx 1 root root  9 2010-01-14 13:26 /dev/disk/by-id/usb-Kingston_DataTraveler_2.0_08E05450B2021C14-0:0 -> ../../sdb
+lrwxrwxrwx 1 root root 10 2010-01-14 13:26 /dev/disk/by-id/usb-Kingston_DataTraveler_2.0_08E05450B2021C14-0:0-part1 -> ../../sdb1
+
+h4. Copy the image to the drive
+
+Image contains a VFAT partition and the systlinux bootlader.  __THIS WILL OVERWRITE ALL DATA__
+
+bc.. 
+jconlon@mudshark:~/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.distro/deploy/usb_image$ sudo dd if=irouter-0.1.0.img of=/dev/sdb
+[sudo] password for jconlon: 
+491520+0 records in
+491520+0 records out
+251658240 bytes (252 MB) copied, 226.778 s, 1.1 MB/s
+
+
+h4. Adding a second partition
+
+Add a second vfat 32 partition to be used for persistence and logging.
+
+bc.. 
+jconlon@mudshark:~$ sudo gparted /dev/sdb
+
+
+
+h2. Connecting to the iRouter
+
+h3. Connecting to the Karaf Shell and the OSGi Framework
+
+h4. Remote console
+
+* SSH to a Remote console on the server
+** SSH client to connect to the Karaf instance. The default port is 8101.
+
+bc.. 
+> ssh -p 8101 -l karaf tracker1
+karaf@localhost's password: karaf
+karaf@root:/>
+p. 
+** To exit the ssh session
+bc.. 
+  karaf@root:/> ~.
+p. 
+
+h4.  Karaf client
+
+bc.. 
+jconlon@mudshark:/opt/Felix/apache-felix-karaf-1.2.0$ java -jar lib/karaf-client.jar -h tracker1 -u karaf -p karaf
+p. 
+** To exit the client session __^D__
+
+h4. Web client
+
+__Only supported if the Karaf @webconsole@ feature is installed.__
+
+"Web Console":http://tracker1:8181/system/console/admin
+
+h3. Connecting to the Operating System
+
+bc.. 
+ssh irouter@tracker1
+p. 
+
+With a password of: @live@
+
+h2. Persistence 
+
+Debian Live Snapshot persistence is used to persist adding new files and changing existing files from the factory defaults.  
+
+To change an existing system.  
+# Connect to the iRouter Operating System.  
+# Make changes to the system. 
+# Run the command @sudo live-snapshot -d /dev/hda2@ where __<Destination>__ is the destination device to store the snapshot.
+
+
+h2.  Customer Beta components
+
+h3. Logging
+
+h4. Mounting an external log system on a live system.
+
+An external file system can be mounted for logging output by modifying the bin/karaf-service adding a few lines to mount and umount the filesystem like:
+
+bc.. 
+'start')
+	## Modified by jconlon@verticon.com
+	mount -t vfat -o users,defaults,umask=000 /dev/sda2 /mnt/USB
+	## End modification
+
+        checkUser $1 touchlock
+        start
+        ;;
+
+    'stop')
+        checkUser $1
+        stopit
+				## Modified by jconlon@verticon.com
+        umount /dev/sda2
+        ## End modification
+
+        ;;
+
+p. 
+
+h4. Guidelines on what iRouter components are logging
+
+iRouter components adhere to the following logging policy. 
+
+"See Ticket #466":http://tracker-project.verticon.com/verticon_Tracker/ticket/466
+
+h5. Customer beta component c.v.tracker.irouter.abbott 
+
+* INFO policy:
+** ComponentFactory will log the update and deletion of instances.
+
+* DEBUG policy:
+** CompositeConsumer will log wire connections and sending of data
+** CommandProducer will log wire connections and sending of data, 
+ 
+* WARN policy:
+** CommandProducer send aborts when there are no wires.
+ 
+* ERROR policy:
+** Both Services will log unexpected 
+
+h5. c.v.tracker.irouter.common
+
+* DEBUG policy:
+** TaskMonitoringService will log task submission, monitoring, canceling of tasks, and NoRouteToHostExceptions.
+ 
+* WARN policy:
+
+* ERROR policy:
+** TaskMonitoringService will log task that have failed with an error or unexpected results
+
+h5. c.v.tracker.irouter.mettler
+
+* INFO policy:
+** ComponentFactory will log the update and deletion of instances.
+
+* DEBUG policy:
+** MeasurementProducer will log wire connections and sending of data
+** MeasurementProducerCallable will log device connections, data retrieval, and sending of data to the MeasurementProducer, 
+ 
+* WARN policy:
+** CommandProducer send aborts when there are no wires,
+** MeasurementProducerCallable will log NoRouteToHostExceptions.
+ 
+* ERROR policy:
+** Both Services will log unexpected data and connection errors
+
+
+h5. c.v.tracker.irouter.TruTest
+
+* INFO policy:
+** ComponentFactory will log the update and deletion of instances.
+
+* DEBUG policy:
+** CommandConsumer will log wire connections
+** CommandConsumerCallable will log device connections, data retrieval, and sending of data to the device, 
+** EnvelopeProducer will log wire connections and produced envelopes
+** EnvelopeProducerCallable will log device connections, data retrieval, and sending of data to the EnvelopeProducer, 
+
+* Log WARN policy:
+** EnvelopeProducerCallable will log NoRouteToHostExceptions, 
+** CommandConsumerCallable will log NoRouteToHostExceptions, 
+** EnvelopeProducer will log send aborts when there are no wires.
+
+* Log ERROR policy:
+** Both Services will log unexpected data and connection errors
+
+h5. c.v.tracker.irouter.wireadmin
+
+* INFO policy:
+** Component will log wireAdmin wire creation events.
+
+* DEBUG policy:
+** Component will log all wireAdmin events except wire creation and log the active creating and deleting of wires.
+** GroupConnector will log all creating and deleting of wires.
+
+
+h3. Configuration Admin Tracker Factory Configuations.
+
+Tracker iRouter is a configuration driven framework of software factories.  These software factories create __Producer__ and __Consumer__ Services which produce and consume __Measurement__, __Command__, and __State__ information.   
+
+ The initial beta user will create two instances for each iRouter ComponentFactory.
+# Wiring group @one@ 
+# Wiring group @two@
+
+h4. Tracker Abbott Controller 
+
+__The following description uses named device servers.  These may instead be IP addresses.
+h5. Wiring Group __one__
+
+Configuration for the Tracker Abbott Controller Instance __change the following attributes__
+**Wiring group name** @one@
+
+h5. Wiring Group __two__
+
+Configuration for the Tracker Abbott Controller Instance __change the following attributes__
+**Wiring group name** @two@
+
+
+h4. Tracker Measurement Logger 
+
+h5. Wiring Group __one__
+
+Configuration for the Tracker Measurement Logger Instance __change the following attributes__
+**Wiring group name** @one@
+**Consumable measurement name** 
+# @animal.weight@
+# @mettler.weight@ 
+
+h5. Wiring Group __two__
+
+Configuration for the Tracker Measurement Logger Instance __change the following attributes__
+**Wiring group name** @two@
+**Consumable measurement name** 
+# @animal.weight@
+# @mettler.weight@ 
+
+h4. Tracker Mettler Balance 
+
+h5. Wiring Group __one__
+
+Configuration for the Tracker Mettler Balance Instance __change the following attributes__
+
+**Connection uri** @socket://lantronix1:10002
+**Wiring group name** @one@
+
+h5. Wiring Group __two__
+
+Configuration for the Tracker Mettler Balance Instance __change the following attributes__
+**Connection uri** @socket://lantronix2:10002
+**Wiring group name** @two@
+
+h4. Tracker TruTest Indicator
+
+h5. Wiring Group __one__
+
+Configuration for the Tracker TruTest Indicator Instance __change the following attributes__
+
+**Connection uri** @socket://lantronix1:10001
+**Wiring group name** @one@
+
+h5. Wiring Group __two__
+
+Configuration for the Tracker TruTest Indicator Instance __change the following attributes__
+**Connection uri** @socket://lantronix2:10001
+**Wiring group name** @two@
+
+h2. Hardware
+
+"PCEngines ALIX 1c":http://www.pcengines.ch/alix1c.htm
+
+__For boot hanging issue and workaround, see__
+
+# Ticket "#473":http://tracker-project.verticon.com/verticon_Tracker/ticket/473
+# "Ubuntu Forums":http://ubuntuforums.org/archive/index.php/t-840576.html
+
+
+
+
