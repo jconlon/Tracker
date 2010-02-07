@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 	  public final static int defaultPort = 2345;
 	 
 	  public static void main(String[] args) {
-	  
+	    Date startDate = new Date();
 	    int port = defaultPort;
 	    
 	    try {
@@ -25,8 +25,11 @@ import java.util.concurrent.TimeUnit;
 	      ServerSocket ss = new ServerSocket(port);
 	      while (true) {
 	        try {
-	          Socket s = ss.accept();      
-	          System.out.println(new Date()+" Connected to "+ s.getInetAddress()+':'+ s.getPort());
+	          Socket s = ss.accept();   
+	          Date connectDate = new Date();
+	          long mills = connectDate.getTime() - startDate.getTime();
+	          System.out.println(connectDate+
+	        		  " Connected to "+ s.getInetAddress()+':'+ s.getPort()+" in "+mills/1000+" seconds.");
 	          OutputStream out = s.getOutputStream();
 	          emulate(out);
 	          System.out.println(new Date()+" Closing "+ s.getInetAddress()+':'+ s.getPort());
