@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tracker Views
 Bundle-SymbolicName: com.verticon.tracker.views;singleton:=true
-Bundle-Version: 0.1.5.qualifier
+Bundle-Version: 0.1.6.qualifier
 Bundle-Vendor: Verticon, Inc.
 Import-Package: at.bestsolution.dataforms.util.viewers,
  com.verticon.tracker;version="0.1.0",
@@ -17,6 +17,11 @@ Import-Package: at.bestsolution.dataforms.util.viewers,
  org.eclipse.core.databinding.observable.map,
  org.eclipse.core.databinding.observable.masterdetail,
  org.eclipse.core.databinding.observable.value,
+ org.eclipse.core.databinding.property,
+ org.eclipse.core.databinding.property.list,
+ org.eclipse.core.databinding.property.map,
+ org.eclipse.core.databinding.property.set,
+ org.eclipse.core.databinding.property.value,
  org.eclipse.core.databinding.validation,
  org.eclipse.core.runtime,
  org.eclipse.emf.databinding,

@@ -6,12 +6,10 @@ package com.verticon.tracker.views;
 import java.util.Collection;
 
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.observable.ChangeEvent;
-import org.eclipse.core.databinding.observable.IChangeListener;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
@@ -201,21 +199,16 @@ public class AddEventWizard extends Wizard {
 
 			// Create the input for the table
 			Premises premises = ((AddEventWizard) getWizard()).getPremises();
-			IObservableList input = EMFObservables.observeList(premises,
-					TrackerPackage.Literals.PREMISES__ANIMALS);
+			IObservableList input = 
+				EMFProperties.list(TrackerPackage.Literals.PREMISES__ANIMALS).observe(premises);
+			
+			
 			// Set it on the viewer
 			tableViewer.setInput(input);
 
 			IObservableValue animalSelection = ViewersObservables
 					.observeSingleSelection(tableViewer);
 			((AddEventWizard) getWizard()).setAnimalSelection(animalSelection);
-
-			// Watch the selection - any will do
-			animalSelection.addChangeListener(new IChangeListener() {
-				public void handleChange(ChangeEvent event) {
-					setPageComplete(true);
-				}
-			});
 
 			// Was there an initially selected Event/Tag
 			StructuredSelection initiallySelectedAnimal = ((AddEventWizard) getWizard())
@@ -232,10 +225,7 @@ public class AddEventWizard extends Wizard {
 				Composite tableComposite) {
 
 			final TableViewer v = new TableViewer(tableComposite);
-//			ObservableListContentProvider cp = AnimalsView
-//					.setUpAnimalsTableViewer(v,
-//							new TrackerItemProviderAdapterFactory(),null);
-//			v.setContentProvider(cp);
+
 			AnimalColumn.setup(v, null, new TrackerItemProviderAdapterFactory(),null);
 			return v;
 
