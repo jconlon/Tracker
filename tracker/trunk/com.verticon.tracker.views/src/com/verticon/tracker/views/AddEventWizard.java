@@ -6,8 +6,14 @@ package com.verticon.tracker.views;
 import java.util.Collection;
 
 import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.ObservablesManager;
+import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.databinding.observable.value.WritableValue;
+import org.eclipse.core.databinding.validation.IValidator;
+import org.eclipse.core.databinding.validation.ValidationStatus;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -51,23 +57,33 @@ import com.verticon.tracker.editor.presentation.SelectEventWizardPage;
  */
 public class AddEventWizard extends Wizard {
 
+	
+
 	private IWorkbenchWindow workbenchWindow;
 	private Tag targetTag = null;
 	private Premises premises;
-	private IObservableValue animalSelection;
+	
 	private SelectEventWizardPage selectEventWizardPage;
 	private Collection<?> results;
-	
+	private ObservablesManager observablesManager = new ObservablesManager();
+	private final EventWizardModel model;
 
 	public AddEventWizard() {
 		super();
 		this.setDefaultPageImageDescriptor(ViewsPlugin.imageDescriptorFromPlugin("icons/waiting.gif"));
+		model = new EventWizardModel();
+		observablesManager.addObservable(model.selectedAnimal);
 	}
 
 	@Override
+	public void dispose() {
+		observablesManager.dispose();
+		super.dispose();
+	}
+	
+	@Override
 	public void addPages() {
 		addPage(new SelectAnimalWizardPage());
-		// addPage(new SelectEventTypeWizardPage());
 		selectEventWizardPage = new SelectEventWizardPage();
 		addPage(selectEventWizardPage);
 	}
@@ -119,9 +135,9 @@ public class AddEventWizard extends Wizard {
 		return premises;
 	}
 
-	private void setAnimalSelection(IObservableValue animalSelection) {
-		this.animalSelection = animalSelection;
-	}
+//	private void setAnimalSelection(IObservableValue animalSelection) {
+//		this.animalSelection = animalSelection;
+//	}
 
 	private StructuredSelection getInitialAnimalSelection() {
 		return targetTag == null ? null : new StructuredSelection(targetTag
@@ -129,8 +145,8 @@ public class AddEventWizard extends Wizard {
 	}
 
 	private Animal getSelectedAnimal() {
-		return (animalSelection == null || animalSelection.getValue() == null) ? null
-				: (Animal) animalSelection.getValue();
+		return (model.selectedAnimal.getValue() == null ) ? null
+				: (Animal) model.selectedAnimal.getValue();
 	}
 
 	private Event getSelectedEvent() {
@@ -157,6 +173,14 @@ public class AddEventWizard extends Wizard {
 		return command;
 	}
 
+	/**
+	 * If there is an event selected in the workbenchWindow set it's the targetTag
+	 * to it's parent.  This will also select an event in the wizard event.
+	 * 
+	 * @param workbenchWindow
+	 * @param premises
+	 * @param selection
+	 */
 	void init(IWorkbenchWindow workbenchWindow, Premises premises,
 			ISelection selection) {
 		this.workbenchWindow = workbenchWindow;
@@ -170,12 +194,22 @@ public class AddEventWizard extends Wizard {
 		this.premises = premises;
 	}
 
-	private static class SelectAnimalWizardPage extends WizardPage {
+	private class SelectAnimalWizardPage extends WizardPage {
 
+		
 		@Override
-		public void dispose() {
-			// TODO Auto-generated method stub
-			super.dispose();
+		public boolean canFlipToNextPage() {
+			return ((AddEventWizard)getWizard()).getSelectedAnimal()!=null;
+		}
+
+		private final class SingleSelectionValidator implements IValidator{
+			@Override
+			public IStatus validate(Object value) {
+				if(value==null){
+					return ValidationStatus.info("Please select an animal");
+				}
+				return ValidationStatus.ok();
+			}
 		}
 
 		protected SelectAnimalWizardPage() {
@@ -189,6 +223,7 @@ public class AddEventWizard extends Wizard {
 			DataBindingContext dbc = new DataBindingContext();
 			WizardPageSupport.create(this, dbc);
 			Composite composite = new Composite(parent, SWT.NONE);
+			
 			TableViewer tableViewer = createSingleColumnTableViewer(composite);
 			GridData data = new GridData(GridData.FILL_BOTH);
 			data.grabExcessHorizontalSpace = true;
@@ -201,15 +236,22 @@ public class AddEventWizard extends Wizard {
 			Premises premises = ((AddEventWizard) getWizard()).getPremises();
 			IObservableList input = 
 				EMFProperties.list(TrackerPackage.Literals.PREMISES__ANIMALS).observe(premises);
-			
-			
+			observablesManager.addObservable(input);
 			// Set it on the viewer
 			tableViewer.setInput(input);
 
 			IObservableValue animalSelection = ViewersObservables
 					.observeSingleSelection(tableViewer);
-			((AddEventWizard) getWizard()).setAnimalSelection(animalSelection);
+			observablesManager.addObservable(animalSelection);
 
+			
+			dbc.bindValue(
+					animalSelection, 
+					model.selectedAnimal,
+					new UpdateValueStrategy().setAfterConvertValidator(new SingleSelectionValidator()),
+					null
+					
+			);
 			// Was there an initially selected Event/Tag
 			StructuredSelection initiallySelectedAnimal = ((AddEventWizard) getWizard())
 					.getInitialAnimalSelection();
@@ -232,4 +274,7 @@ public class AddEventWizard extends Wizard {
 		}
 	}
 
+	private class EventWizardModel{
+		IObservableValue selectedAnimal = new WritableValue(null, Animal.class);
+	}
 }
