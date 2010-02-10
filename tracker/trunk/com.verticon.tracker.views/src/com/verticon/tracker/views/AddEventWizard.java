@@ -101,16 +101,20 @@ public class AddEventWizard extends Wizard {
 	}
 
 	/**
-	 * Add an animal.
+	 * Adds the selected event, to the active tag of the selected animal.
 	 */
 	@Override
 	public boolean performFinish() {
-		EditingDomain editingDomain = AdapterFactoryEditingDomain
+		EditingDomain eDomain = AdapterFactoryEditingDomain
 				.getEditingDomainFor(premises);
 
-		Command command = createCommand();
+		Command command = createCommand( 
+				eDomain, 
+				getSelectedAnimal().activeTag(), 
+				getSelectedEvent());
+		
 		try {
-			editingDomain.getCommandStack().execute(command);
+			eDomain.getCommandStack().execute(command);
 
 		} catch (RuntimeException e) {
 			MessageDialog.openError(workbenchWindow.getShell(),
@@ -135,9 +139,6 @@ public class AddEventWizard extends Wizard {
 		return premises;
 	}
 
-//	private void setAnimalSelection(IObservableValue animalSelection) {
-//		this.animalSelection = animalSelection;
-//	}
 
 	private StructuredSelection getInitialAnimalSelection() {
 		return targetTag == null ? null : new StructuredSelection(targetTag
@@ -154,20 +155,20 @@ public class AddEventWizard extends Wizard {
 	}
 
 	/**
+	 * Create a command to add an event to the selected animal active tag.
 	 * 
-	 * @return command to add an exhibit for each animal to the lot
+	 * @return command to add an event.
 	 */
-	private Command createCommand() {
-		Animal animal = getSelectedAnimal();
-		Tag tag = animal.activeTag();
-		Event event = (Event) EcoreUtil.copy(getSelectedEvent());
+	private Command createCommand(EditingDomain eDomain, Tag activeTag, Event selectedEvent ) {
+		
+		Event event = (Event) EcoreUtil.copy(selectedEvent);
 
-		EditingDomain editingDomain = AdapterFactoryEditingDomain
-				.getEditingDomainFor(tag);
 
-		Command command = AddCommand.create(editingDomain, // Domain
-				tag, // Owner
-				TrackerPackage.Literals.TAG__EVENTS, event// value
+		Command command = AddCommand.create(
+				eDomain, // Domain
+				activeTag, // Animals active Tag 
+				TrackerPackage.Literals.TAG__EVENTS, 
+				event// value
 				);
 
 		return command;
