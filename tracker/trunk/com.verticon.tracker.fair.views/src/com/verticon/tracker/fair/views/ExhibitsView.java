@@ -94,12 +94,13 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 		if(results == WizardDialog.OK){
 			for (Object object : wizard.getResults()) {
 				if (object instanceof Exhibit) {
-
+					wizard.disposeObservables();
 					return object;
 				}
 
 			}
 		}
+		wizard.disposeObservables();
 		return null;
 	}
 	

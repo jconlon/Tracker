@@ -6,6 +6,7 @@ package com.verticon.tracker.fair.views;
 import java.util.Collection;
 
 import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.ObservablesManager;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
@@ -52,6 +53,22 @@ public class AddPeopleWizard extends Wizard {
 	private Fair fair;
 	private Collection<?> results;
 
+	private ObservablesManager observablesManager = new ObservablesManager();
+
+	
+	AddPeopleWizard() {
+		super();
+		observablesManager.addObservable(model.firstNameValue);
+		observablesManager.addObservable(model.isYoungPerson);
+		observablesManager.addObservable(model.lastNameValue);
+	}
+
+	@Override
+	public void dispose() {
+		observablesManager.dispose();
+		super.dispose();
+	}
+	
 	@Override
 	public void addPages() {
 		addPage(new FirstWizardPage());

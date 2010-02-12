@@ -1,6 +1,7 @@
 package com.verticon.tracker.fair.views;
 
 import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.ObservablesManager;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.databinding.observable.list.IObservableList;
@@ -76,7 +77,8 @@ abstract class ExhibitAncestorWizardPage extends WizardPage implements
 	 */
 	protected final IObservableValue newTargetName = new WritableValue(null,
 			String.class);
-
+	
+	
 	ExhibitAncestorWizardPage(String pageName, EStructuralFeature feature,
 			EObject owner, ExhibitAncestorWizardPage parentPage) {
 		super(feature.getName(), "Choose or Create a " + pageName,null);
@@ -84,7 +86,7 @@ abstract class ExhibitAncestorWizardPage extends WizardPage implements
 		this.owner = owner;
 		this.parentPage = parentPage;
 	}
-
+	
 	@Override
 	public void setVisible(boolean visible) {
 		if (visible) {
