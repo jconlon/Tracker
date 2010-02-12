@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.action.Action;
@@ -205,16 +205,33 @@ enum AnimalColumn {
 		
 	}
 
+	/**
+	 * Set up the Animals Table on the TableViewer.  
+	 * 
+	 * @param tableViewer
+	 * @param memento
+	 * @param adapterFactory
+	 * @param actions
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
-	static GenericViewSorter setup(TableViewer tableViewer, IMemento memento, 
+	static GenericViewSorter setupTable(TableViewer tableViewer, IMemento memento, 
 			final AdapterFactory adapterFactory,  List<Action> actions){// Menu parent){
 		
+		//Create a content provider that will take a list of Premises Animals
+		//This will be disposed with the table
 		ObservableListContentProvider cp = new ObservableListContentProvider();
-		IObservableMap[] maps = EMFObservables.observeMaps(cp
-				.getKnownElements(), features);
 		
-		//TODO figure out how to add a computed value as a map to observe
-		//an alternate ID changing for scrapies and ear notches
+		//Create an array of maps one for each feature.  The map keys will be the set 
+		//of elements in the content provider (animals from the premises) the detail 
+		//to observe is the feature.
+		//
+		//These maps will be disposed along with the table
+		final IObservableMap[] maps = new IObservableMap[features.length];
+		
+		for (int i = 0; i < features.length; i++) {
+			maps[i] = EMFProperties.value(features[i]).observeDetail(cp.getKnownElements());
+		}
 		
 		final Table table = tableViewer.getTable();
 		TableLayout layout = new TableLayout();
