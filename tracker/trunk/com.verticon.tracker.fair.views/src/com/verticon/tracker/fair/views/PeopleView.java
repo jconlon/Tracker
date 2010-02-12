@@ -8,7 +8,8 @@ import java.util.List;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.databinding.EMFProperties;
+import org.eclipse.emf.databinding.IEMFListProperty;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -60,7 +61,7 @@ public class PeopleView extends TrackerView implements ItemsView{
 	/**
 	 * Reference to Observable for table Input
 	 */
-	private IObservableList tableInput;
+	private IObservableList observablePeople;
 
 	public void handleViewerInputChange2() {
 		handleViewerInputChange();
@@ -91,6 +92,10 @@ public class PeopleView extends TrackerView implements ItemsView{
 		exhibitsSelectionController.close();
 		getSite().getPage().removePartListener(exhibitsSelectionController);
 		getSite().getPage().removeSelectionListener(exhibitsSelectionController);
+		if (observablePeople != null) {
+			observablePeople.dispose();
+			observablePeople = null;
+		}
 		super.dispose();
 	}
 	
@@ -142,19 +147,19 @@ public class PeopleView extends TrackerView implements ItemsView{
 	}
 
 	/**
-	 * Override point for subclasses to obtain the necessary tableInput to feed
+	 * Override point for subclasses to obtain the necessary observablePeople to feed
 	 * the tableViewer.
 	 * 
 	 * @see #setUpTable(AdapterFactory)
 	 */
 	public void handleViewerInputChange() {
-		if (tableInput != null) {
-			tableInput.dispose();
-			tableInput = null;
+		if (observablePeople != null) {
+			observablePeople.dispose();
+			observablePeople = null;
 		}
-		tableInput = getObservableList();
-		masterFilteredTable.getViewer().setInput(tableInput);
-		enableMenus(tableInput!=null);
+		observablePeople = getObservableList();
+		masterFilteredTable.getViewer().setInput(observablePeople);
+		enableMenus(observablePeople!=null);
 	}
 
 	 /**
@@ -176,8 +181,9 @@ public class PeopleView extends TrackerView implements ItemsView{
 		if (premises == null) {
 			return null;
 		}
-		return EMFObservables.observeList(premises,
-				FairPackage.Literals.FAIR__PEOPLE);
+		IEMFListProperty prop = EMFProperties.list(FairPackage.Literals.FAIR__PEOPLE);
+		return prop.observe(premises);
+		
 	}
 	
 	 @Override
@@ -405,15 +411,29 @@ public class PeopleView extends TrackerView implements ItemsView{
 
 	
 	/**
-	 * People Table Name, First Name, Last Name, Phone Number, Street, City,
+	 * People Table is a set of columns by feature. The features are
+	 * Name, First Name, Last Name, Phone Number, Street, City,
 	 * State, Zip Code
+	 * 
+	 * Create a Table based on an array of observableMaps one for each 
+	 * feature of the table.
 	 */
 	@SuppressWarnings("unchecked")
 	private ObservableListContentProvider setUpPeopleTableViewer(
 			final TableViewer tableViewer, final AdapterFactory adapterFactory) {
+		
+		//This should be disposed with the table
 		ObservableListContentProvider cp = new ObservableListContentProvider();
-		IObservableMap[] maps = EMFObservables.observeMaps(cp
-				.getKnownElements(), PeopleColumn.features);
+
+		//Create an array of Observable Maps one for each feature. The key of each
+		//map is the feature
+		//This should be disposed with the table
+		IObservableMap[] maps = new IObservableMap[PeopleColumn.features.length];
+		for (int i = 0; i < PeopleColumn.features.length; i++) {
+			maps[i] = 
+				EMFProperties.value(PeopleColumn.features[i]).observeDetail(cp.getKnownElements()); 
+		}
+
 		final Table table = tableViewer.getTable();
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
@@ -422,6 +442,8 @@ public class PeopleView extends TrackerView implements ItemsView{
 		
         List<TableColumn> tableColumns = new ArrayList<TableColumn>(PeopleColumn.values().length);
         List<Comparator> comparators = new ArrayList<Comparator>(PeopleColumn.values().length);
+        
+        //Create the columns
 		for (PeopleColumn col : PeopleColumn.values()) {
 			TableViewerColumn viewerColumn = new TableViewerColumn(tableViewer,
 					SWT.LEAD);

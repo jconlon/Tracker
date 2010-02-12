@@ -36,7 +36,6 @@ public class AddExhibitWizardPage extends WizardPage implements
 	final Fair fair;
 	final AddExhibitWizardPageParent parentPage;
 	
-
 	private final class SingleDigitValidator implements IValidator {
 		public IStatus validate(Object value) {
 			Boolean i = (Boolean) value;

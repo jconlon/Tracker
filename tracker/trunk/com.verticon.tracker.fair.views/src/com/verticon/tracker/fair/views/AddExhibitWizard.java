@@ -2,6 +2,7 @@ package com.verticon.tracker.fair.views;
 
 import java.util.Collection;
 
+import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.command.AddCommand;
@@ -33,6 +34,41 @@ public class AddExhibitWizard extends Wizard {
 		this.workbenchWindow = workbenchWindow;
 		this.setDefaultPageImageDescriptor(
 				ViewsPlugin.imageDescriptorFromPlugin("icons/Exhibit.gif"));
+	}
+
+
+	public void disposeObservables() {
+		try {
+
+			IWizardPage[] pages = this.getPages();
+			for (IWizardPage iWizardPage : pages) {
+				if(iWizardPage instanceof AddExhibitWizardPage){
+					AddExhibitWizardPage p =(AddExhibitWizardPage)iWizardPage;
+					IObservableValue o = p.getSelectedTarget();
+					if(o!=null && !o.isDisposed()){
+						o.dispose();
+					}
+					o = p.createAnExhibit;
+					if(o!=null && !o.isDisposed()){
+						o.dispose();
+					}
+				}else{
+					ExhibitAncestorWizardPage p =(ExhibitAncestorWizardPage)iWizardPage;
+					IObservableValue o = p.getSelectedTarget();
+					if(o!=null && !o.isDisposed()){
+						o.dispose();
+					}
+					o = p.getNewTargetName();
+					if(o!=null && !o.isDisposed()){
+						o.dispose();
+					}
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**
@@ -201,6 +237,7 @@ public class AddExhibitWizard extends Wizard {
 				"Added Exhibit or Exhibit Ancestor ",
 				"Added an Exhibit or Exhibit Ancestor to the model");
 		results = command.getResult();
+		
 		return true;
 	}
 
