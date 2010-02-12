@@ -269,7 +269,7 @@ public class AddEventWizard extends Wizard {
 
 			final TableViewer v = new TableViewer(tableComposite);
 
-			AnimalColumn.setup(v, null, new TrackerItemProviderAdapterFactory(),null);
+			AnimalColumn.setupTable(v, null, new TrackerItemProviderAdapterFactory(),null);
 			return v;
 
 		}

@@ -4,7 +4,8 @@ import java.util.Collection;
 
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.databinding.EMFProperties;
+import org.eclipse.emf.databinding.IEMFListProperty;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -25,7 +26,7 @@ public class AnimalsView extends TrackerView  {
 	/**
 	 * Reference to Observable for table Input
 	 */
-	private IObservableList tableInput;
+	private IObservableList observableAnimals;
 
 
 	/**
@@ -55,6 +56,11 @@ public class AnimalsView extends TrackerView  {
 		selectionController.close();
 		getSite().getPage().removePartListener(selectionController);
 		getSite().getPage().removeSelectionListener(selectionController);
+		//Dispose observables
+		if (observableAnimals != null) {
+			observableAnimals.dispose();
+			observableAnimals = null;
+		}
 		super.dispose();
 	}
 	
@@ -108,25 +114,25 @@ public class AnimalsView extends TrackerView  {
 	@Override
 	protected void setUpTable(AdapterFactory adapterFactory) {
 		final TableViewer viewer = masterFilteredTable.getViewer();
-		sorter = AnimalColumn.setup(viewer, memento,adapterFactory,actions);
+		sorter = AnimalColumn.setupTable(viewer, memento,adapterFactory,actions);
 		masterFilteredTable.setColumns(viewer.getTable().getColumns());
 	}
 
 	/**
-	 * Override point for subclasses to obtain the necessary tableInput to feed
+	 * Override point for subclasses to obtain the necessary observableAnimals to feed
 	 * the tableViewer.
 	 * 
 	 * @see #setUpTable(AdapterFactory)
 	 */
 	public void handleViewerInputChange() {
-		if (tableInput != null) {
-			tableInput.dispose();
-			tableInput = null;
+		if (observableAnimals != null) {
+			observableAnimals.dispose();
+			observableAnimals = null;
 		}
 
-		tableInput = getObservableList();
-		masterFilteredTable.getViewer().setInput(tableInput);
-		enableMenus(tableInput!=null);
+		observableAnimals = getObservableList();
+		masterFilteredTable.getViewer().setInput(observableAnimals);
+		enableMenus(observableAnimals!=null);
 	}
 
 	/**
@@ -139,6 +145,9 @@ public class AnimalsView extends TrackerView  {
 	
 	/**
 	 * 
+	 * From the Premises get an ObservableList of Animals.  This list
+	 * of animals will be used as input for the table.
+	 * 
 	 * @return an ObservableList of Animals
 	 */
 	private IObservableList getObservableList() {
@@ -146,13 +155,15 @@ public class AnimalsView extends TrackerView  {
 		if (selectionController.getEditingDomain() == null) {
 			return null;
 		}
-		Premises premises = getPremises(selectionController
-				.getEditingDomain());
+		
+		Premises premises = getPremises(selectionController.getEditingDomain());
 		if (premises == null) {
 			return null;
 		}
-		return EMFObservables.observeList(premises,
-				TrackerPackage.Literals.PREMISES__ANIMALS);
+		IEMFListProperty listProp = EMFProperties.list(TrackerPackage.Literals.PREMISES__ANIMALS);
+		
+		IObservableList observableAnimals = listProp.observe(premises);
+		return observableAnimals;
 	}
 	
 }
