@@ -1,6 +1,6 @@
 package com.verticon.tracker.irouter.mettler.emulator.socket;
 	
-	import java.io.IOException;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -25,7 +25,8 @@ import java.util.concurrent.TimeUnit;
 	      ServerSocket ss = new ServerSocket(port);
 	      while (true) {
 	        try {
-	          Socket s = ss.accept();   
+	          Socket s = ss.accept();
+	          s.setKeepAlive(true);
 	          Date connectDate = new Date();
 	          long mills = connectDate.getTime() - startDate.getTime();
 	          System.out.println(connectDate+
