@@ -82,7 +82,9 @@ public class MeasurementProducerCallable implements Callable<Void> {
 
 	@Override
 	public String toString() {
-		return "MeasruementProducerCallable [pid=" + pid + "]";
+		return "MeasurementProducerCallable [uri=" + uri + ", pid="
+				+ pid
+				+ "]";
 	}
 
 	@Override
@@ -185,6 +187,7 @@ public class MeasurementProducerCallable implements Callable<Void> {
 			 
 		} finally {
 			log.debug(this + ":Terminating.....");
+			balance.unregisterProducer();
 			if (Thread.currentThread().isInterrupted()) {
 				log.debug("{}:Task was cancelled",this);
 			}
