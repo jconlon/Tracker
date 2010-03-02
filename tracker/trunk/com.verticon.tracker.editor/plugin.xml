@@ -190,7 +190,14 @@
             description="%_UI_commands_importTagIds_asSelected_description"
             name="%_UI_commands_importTagIds_asSelected_name">
       </command>
-      
+      <!-- Text file commands -->
+      <command
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            defaultHandler="com.verticon.tracker.editor.handlers.ImportTextAsLifeDataEventsHandler"
+            description="Imports text file as animals with life data."
+            id="com.verticon.tracker.editor.commands.importText.asLifeData.command"
+            name="Import Text File as Animal Life Data">
+      </command>
       <!-- Animal Commands    
       -->
       <command
@@ -288,6 +295,36 @@
 	            </visibleWhen>
                </command>
                
+               <!-- Text file commands 
+               Import text file as animal life data;
+               works on a *.txt File;
+               works with simple and transaction based editors;
+               uses edit command redo and undo framework;
+               needs a Premises in the Editor.
+               -->
+               <command
+                      commandId="com.verticon.tracker.editor.commands.importText.asLifeData.command"
+                      icon="icons/full/obj16/import_wiz.gif"
+                      style="push">
+                  <visibleWhen>
+                       <and>
+		               <with variable="activeMenuSelection">
+		                  <iterate>
+		                      <adapt type="org.eclipse.core.resources.IResource">
+		          					<test property="org.eclipse.core.resources.name" 
+		               				 value="*.txt"/>
+		      				 </adapt>
+		                  </iterate>
+		               </with>
+		               <!-- 
+    			        	Restricted to show only if the active Editors isPremisesEditor.
+              			-->
+              			 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+    			     </and>
+	            </visibleWhen>
+               </command>
                <!-- 
                Import TagIds Specifying Animal and Event Types;
                works on a *.tags File;
