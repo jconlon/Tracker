@@ -15,7 +15,7 @@
     <ImmediateFlush>true</ImmediateFlush>
     <layout class="ch.qos.logback.classic.PatternLayout">
       <!--pattern>%d{HH:mm:ss.SSS} %-10level [%bundle] [%thread] %logger{25} %message %n</pattern-->
-      <pattern>%d{HH:mm:ss.SSS} %-10level [%marker] [%thread] [%logger{25}] -  %message %ex %n</pattern>
+      <pattern>%date %-10level [%marker] [%thread] [%logger{25}] -  %message %ex %n</pattern>
       <!--pattern>[%d{ISO8601}]%5p%6.6r[%t]%bundle - %C.%M(%F:%L) - %m%n</pattern-->
     </layout>
     
@@ -44,6 +44,10 @@
   
   <logger name="com.verticon.tracker.editor.presentation.SelectionViewerFilter">
     <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.editor.presentation.ImportAnimalLifeDataWizard">
+    <level value="INFO"/>
   </logger>
   
   <root>
