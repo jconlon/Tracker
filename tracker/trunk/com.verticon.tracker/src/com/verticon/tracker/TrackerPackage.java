@@ -2712,13 +2712,22 @@ public interface TrackerPackage extends EPackage {
 	int WEIGH_IN__WEIGHT_GAIN_PER_DAY = EVENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Unit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEIGH_IN__UNIT = EVENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Weigh In</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WEIGH_IN_FEATURE_COUNT = EVENT_FEATURE_COUNT + 2;
+	int WEIGH_IN_FEATURE_COUNT = EVENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.SwineImpl <em>Swine</em>}' class.
@@ -4945,6 +4954,16 @@ public interface TrackerPackage extends EPackage {
 	int US_SWINE_QUALITY_GRADE = 60;
 
 	/**
+	 * The meta object id for the '{@link com.verticon.tracker.WeightMeasurementUnit <em>Weight Measurement Unit</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.WeightMeasurementUnit
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getWeightMeasurementUnit()
+	 * @generated
+	 */
+	int WEIGHT_MEASUREMENT_UNIT = 61;
+
+	/**
 	 * The meta object id for the '<em>Premises Id Number</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4952,7 +4971,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPremisesIdNumber()
 	 * @generated
 	 */
-	int PREMISES_ID_NUMBER = 61;
+	int PREMISES_ID_NUMBER = 62;
 
 	/**
 	 * The meta object id for the '<em>Email</em>' data type.
@@ -4962,7 +4981,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 62;
+	int EMAIL = 63;
 
 
 	/**
@@ -4973,7 +4992,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAge()
 	 * @generated
 	 */
-	int AGE = 63;
+	int AGE = 64;
 
 
 	/**
@@ -4984,7 +5003,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSPhoneNumber()
 	 * @generated
 	 */
-	int US_PHONE_NUMBER = 64;
+	int US_PHONE_NUMBER = 65;
 
 
 	/**
@@ -4995,7 +5014,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 65;
+	int URI = 66;
 
 
 	/**
@@ -5427,6 +5446,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getWeighIn_WeightGainPerDay();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.WeighIn#getUnit <em>Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Unit</em>'.
+	 * @see com.verticon.tracker.WeighIn#getUnit()
+	 * @see #getWeighIn()
+	 * @generated
+	 */
+	EAttribute getWeighIn_Unit();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Swine <em>Swine</em>}'.
@@ -6645,6 +6675,16 @@ public interface TrackerPackage extends EPackage {
 	EEnum getUSSwineQualityGrade();
 
 	/**
+	 * Returns the meta object for enum '{@link com.verticon.tracker.WeightMeasurementUnit <em>Weight Measurement Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Weight Measurement Unit</em>'.
+	 * @see com.verticon.tracker.WeightMeasurementUnit
+	 * @generated
+	 */
+	EEnum getWeightMeasurementUnit();
+
+	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>Premises Id Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7061,6 +7101,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute WEIGH_IN__WEIGHT_GAIN_PER_DAY = eINSTANCE.getWeighIn_WeightGainPerDay();
+
+		/**
+		 * The meta object literal for the '<em><b>Unit</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WEIGH_IN__UNIT = eINSTANCE.getWeighIn_Unit();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.SwineImpl <em>Swine</em>}' class.
@@ -8083,6 +8131,16 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum US_SWINE_QUALITY_GRADE = eINSTANCE.getUSSwineQualityGrade();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.WeightMeasurementUnit <em>Weight Measurement Unit</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.WeightMeasurementUnit
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getWeightMeasurementUnit()
+		 * @generated
+		 */
+		EEnum WEIGHT_MEASUREMENT_UNIT = eINSTANCE.getWeightMeasurementUnit();
 
 		/**
 		 * The meta object literal for the '<em>Premises Id Number</em>' data type.
