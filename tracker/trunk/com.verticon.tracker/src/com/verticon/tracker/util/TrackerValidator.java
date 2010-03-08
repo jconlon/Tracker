@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker.util;
 
+import com.verticon.tracker.*;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -276,6 +277,8 @@ public class TrackerValidator extends EObjectValidator {
 				return validateLevel((Level)value, diagnostics, context);
 			case TrackerPackage.US_SWINE_QUALITY_GRADE:
 				return validateUSSwineQualityGrade((USSwineQualityGrade)value, diagnostics, context);
+			case TrackerPackage.WEIGHT_MEASUREMENT_UNIT:
+				return validateWeightMeasurementUnit((WeightMeasurementUnit)value, diagnostics, context);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return validatePremisesIdNumber((String)value, diagnostics, context);
 			case TrackerPackage.EMAIL:
@@ -837,6 +840,15 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateUSSwineQualityGrade(USSwineQualityGrade usSwineQualityGrade, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateWeightMeasurementUnit(WeightMeasurementUnit weightMeasurementUnit, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
