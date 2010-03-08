@@ -167,7 +167,7 @@ public class EventItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Event_correction_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Event_correction_feature", "_UI_Event_type"),
+				 getString("_UI_Event_correction_description"),
 				 TrackerPackage.Literals.EVENT__CORRECTION,
 				 true,
 				 false,
