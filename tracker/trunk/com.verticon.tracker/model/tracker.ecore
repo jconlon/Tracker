@@ -391,6 +391,8 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="weightGainPerDay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"
         changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//WeightMeasurementUnit"
+        defaultValueLiteral="pound"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="SwineBreed">
     <eLiterals name="BK" literal="BERKSHIRE"/>
@@ -662,5 +664,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="USSwineGrading" eSuperTypes="#//Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualityGrade" eType="#//USSwineQualityGrade"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="WeightMeasurementUnit">
+    <eLiterals name="pound" literal="pound"/>
+    <eLiterals name="kilogram" value="1" literal="kilogram"/>
   </eClassifiers>
 </ecore:EPackage>

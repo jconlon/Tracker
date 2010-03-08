@@ -1430,6 +1430,10 @@
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//WeighIn/weightGainPerDay"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PDu3cVmCEd2tRZ2K3aMUww"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_2-oT0CrMEd-fk5dCRFgHIQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//WeighIn/unit"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_2-oT0SrMEd-fk5dCRFgHIQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PDtpUlmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PDuQYFmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_PDuQYVmCEd2tRZ2K3aMUww"/>
@@ -2603,7 +2607,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_rUWX0XiwEd6BJb9DkEW_Pg" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EEnum" href="tracker.ecore#//Level"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rUWX0niwEd6BJb9DkEW_Pg" x="778" y="1594"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rUWX0niwEd6BJb9DkEW_Pg" x="696" y="1632"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_D58mYHkmEd6vCqNEOEhy1g" type="1001">
     <children xmi:type="notation:Node" xmi:id="_D5-bkHkmEd6vCqNEOEhy1g" type="4001"/>
@@ -2658,7 +2662,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ZrLjcXk5Ed6yk6ogHytbCA" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EEnum" href="tracker.ecore#//USSwineQualityGrade"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZrLjcnk5Ed6yk6ogHytbCA" x="832" y="1456"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZrLjcnk5Ed6yk6ogHytbCA" x="696" y="1452"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Qy768Hk6Ed6yk6ogHytbCA" type="1001">
     <children xmi:type="notation:Node" xmi:id="_Qy9JEHk6Ed6yk6ogHytbCA" type="4001"/>
@@ -2679,6 +2683,25 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Qy768Xk6Ed6yk6ogHytbCA" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="tracker.ecore#//USSwineGrading"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Qy768nk6Ed6yk6ogHytbCA" x="1320" y="1080" width="287"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_SoMtUSrMEd-fk5dCRFgHIQ" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_SoPwoCrMEd-fk5dCRFgHIQ" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_SoQ-wCrMEd-fk5dCRFgHIQ" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_c5EgMCrMEd-fk5dCRFgHIQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="tracker.ecore#//WeightMeasurementUnit/pound"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_c5EgMSrMEd-fk5dCRFgHIQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_nKDn0CrMEd-fk5dCRFgHIQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="tracker.ecore#//WeightMeasurementUnit/kilogram"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_nKDn0SrMEd-fk5dCRFgHIQ"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_SoQ-wSrMEd-fk5dCRFgHIQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_SoQ-wirMEd-fk5dCRFgHIQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_SoQ-wyrMEd-fk5dCRFgHIQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_SoNUYCrMEd-fk5dCRFgHIQ" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="tracker.ecore#//WeightMeasurementUnit"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_SoNUYSrMEd-fk5dCRFgHIQ" x="686" y="1790"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_O8ow8FmCEd2tRZ2K3aMUww"/>
   <element xmi:type="ecore:EPackage" href="tracker.ecore#/"/>
