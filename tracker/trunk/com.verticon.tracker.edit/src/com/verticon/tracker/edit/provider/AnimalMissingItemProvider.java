@@ -7,6 +7,7 @@
 package com.verticon.tracker.edit.provider;
 
 
+import com.verticon.tracker.AnimalMissing;
 import java.util.Collection;
 import java.util.List;
 
