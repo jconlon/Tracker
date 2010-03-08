@@ -69,6 +69,7 @@ public class WeighInItemProvider
 
 			addWeightPropertyDescriptor(object);
 			addWeightGainPerDayPropertyDescriptor(object);
+			addUnitPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -118,6 +119,28 @@ public class WeighInItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Unit feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addUnitPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_WeighIn_unit_feature"),
+				 getString("_UI_WeighIn_unit_description"),
+				 TrackerPackage.Literals.WEIGH_IN__UNIT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 getString("_UI_WeightPropertyCategory"),
+				 null));
+	}
+
+	/**
 	 * This returns WeighIn.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -154,6 +177,7 @@ public class WeighInItemProvider
 		switch (notification.getFeatureID(WeighIn.class)) {
 			case TrackerPackage.WEIGH_IN__WEIGHT:
 			case TrackerPackage.WEIGH_IN__WEIGHT_GAIN_PER_DAY:
+			case TrackerPackage.WEIGH_IN__UNIT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

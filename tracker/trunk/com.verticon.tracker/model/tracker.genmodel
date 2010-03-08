@@ -389,6 +389,10 @@
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USSwineQualityGrade/Three"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USSwineQualityGrade/Four"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//WeightMeasurementUnit">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//WeightMeasurementUnit/pound"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//WeightMeasurementUnit/kilogram"/>
+    </genEnums>
     <genDataTypes ecoreDataType="tracker.ecore#//PremisesIdNumber"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Email"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Age"/>
@@ -477,7 +481,8 @@
       <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/electronicallyRead">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
-      <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/correction">
+      <genFeatures createChild="false" propertyCategory="Details" propertyDescription="true if this event is a correction of a previous event."
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Event/correction">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/comments"/>
@@ -558,10 +563,12 @@
     <genClasses ecoreClass="tracker.ecore#//AnimalMissing"/>
     <genClasses ecoreClass="tracker.ecore#//ICVI"/>
     <genClasses ecoreClass="tracker.ecore#//WeighIn">
-      <genFeatures createChild="false" propertyCategory="Weight" propertyDescription="Weight of animal in pounds"
+      <genFeatures createChild="false" propertyCategory="Weight" propertyDescription="Weight of animal in units of measurement"
           ecoreFeature="ecore:EAttribute tracker.ecore#//WeighIn/weight"/>
       <genFeatures property="Readonly" createChild="false" propertyCategory="Weight"
-          propertyDescription="Weight gain per day in pounds" ecoreFeature="ecore:EAttribute tracker.ecore#//WeighIn/weightGainPerDay"/>
+          propertyDescription="Weight gain per day in units of measurement" ecoreFeature="ecore:EAttribute tracker.ecore#//WeighIn/weightGainPerDay"/>
+      <genFeatures createChild="false" propertyCategory="Weight" propertyDescription="Units used for weight measurement"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//WeighIn/unit"/>
       <genOperations ecoreOperation="tracker.ecore#//WeighIn/previousWeighIn"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Swine">

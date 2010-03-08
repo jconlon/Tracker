@@ -80,6 +80,7 @@ import com.verticon.tracker.USQualityGrade;
 import com.verticon.tracker.USSwineGrading;
 import com.verticon.tracker.USSwineQualityGrade;
 import com.verticon.tracker.WeighIn;
+import com.verticon.tracker.WeightMeasurementUnit;
 import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.TrackerValidator;
 
@@ -523,6 +524,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EEnum usSwineQualityGradeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum weightMeasurementUnitEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -987,6 +995,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 */
 	public EAttribute getWeighIn_WeightGainPerDay() {
 		return (EAttribute)weighInEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getWeighIn_Unit() {
+		return (EAttribute)weighInEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2029,6 +2046,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getWeightMeasurementUnit() {
+		return weightMeasurementUnitEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getPremisesIdNumber() {
 		return premisesIdNumberEDataType;
 	}
@@ -2193,6 +2219,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		weighInEClass = createEClass(WEIGH_IN);
 		createEAttribute(weighInEClass, WEIGH_IN__WEIGHT);
 		createEAttribute(weighInEClass, WEIGH_IN__WEIGHT_GAIN_PER_DAY);
+		createEAttribute(weighInEClass, WEIGH_IN__UNIT);
 
 		swineEClass = createEClass(SWINE);
 		createEAttribute(swineEClass, SWINE__SWINE_BREED);
@@ -2297,6 +2324,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		usBeefYieldGradeEEnum = createEEnum(US_BEEF_YIELD_GRADE);
 		levelEEnum = createEEnum(LEVEL);
 		usSwineQualityGradeEEnum = createEEnum(US_SWINE_QUALITY_GRADE);
+		weightMeasurementUnitEEnum = createEEnum(WEIGHT_MEASUREMENT_UNIT);
 
 		// Create data types
 		premisesIdNumberEDataType = createEDataType(PREMISES_ID_NUMBER);
@@ -2495,6 +2523,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(weighInEClass, WeighIn.class, "WeighIn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getWeighIn_Weight(), ecorePackage.getEIntegerObject(), "weight", null, 1, 1, WeighIn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getWeighIn_WeightGainPerDay(), ecorePackage.getEDoubleObject(), "weightGainPerDay", null, 0, 1, WeighIn.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getWeighIn_Unit(), this.getWeightMeasurementUnit(), "unit", "pound", 0, 1, WeighIn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(weighInEClass, this.getWeighIn(), "previousWeighIn", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -2962,6 +2991,10 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEEnumLiteral(usSwineQualityGradeEEnum, USSwineQualityGrade.TWO);
 		addEEnumLiteral(usSwineQualityGradeEEnum, USSwineQualityGrade.THREE);
 		addEEnumLiteral(usSwineQualityGradeEEnum, USSwineQualityGrade.FOUR);
+
+		initEEnum(weightMeasurementUnitEEnum, WeightMeasurementUnit.class, "WeightMeasurementUnit");
+		addEEnumLiteral(weightMeasurementUnitEEnum, WeightMeasurementUnit.POUND);
+		addEEnumLiteral(weightMeasurementUnitEEnum, WeightMeasurementUnit.KILOGRAM);
 
 		// Initialize data types
 		initEDataType(premisesIdNumberEDataType, String.class, "PremisesIdNumber", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

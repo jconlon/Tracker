@@ -17,6 +17,7 @@ package com.verticon.tracker;
  * <ul>
  *   <li>{@link com.verticon.tracker.WeighIn#getWeight <em>Weight</em>}</li>
  *   <li>{@link com.verticon.tracker.WeighIn#getWeightGainPerDay <em>Weight Gain Per Day</em>}</li>
+ *   <li>{@link com.verticon.tracker.WeighIn#getUnit <em>Unit</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,6 +79,36 @@ public interface WeighIn extends Event {
 	 * @generated
 	 */
 	Double getWeightGainPerDay();
+
+	/**
+	 * Returns the value of the '<em><b>Unit</b></em>' attribute.
+	 * The default value is <code>"pound"</code>.
+	 * The literals are from the enumeration {@link com.verticon.tracker.WeightMeasurementUnit}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Unit</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Unit</em>' attribute.
+	 * @see com.verticon.tracker.WeightMeasurementUnit
+	 * @see #setUnit(WeightMeasurementUnit)
+	 * @see com.verticon.tracker.TrackerPackage#getWeighIn_Unit()
+	 * @model default="pound"
+	 * @generated
+	 */
+	WeightMeasurementUnit getUnit();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.WeighIn#getUnit <em>Unit</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Unit</em>' attribute.
+	 * @see com.verticon.tracker.WeightMeasurementUnit
+	 * @see #getUnit()
+	 * @generated
+	 */
+	void setUnit(WeightMeasurementUnit value);
 
 	/**
 	 * <!-- begin-user-doc -->

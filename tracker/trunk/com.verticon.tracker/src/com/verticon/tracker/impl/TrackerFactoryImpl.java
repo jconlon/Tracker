@@ -6,6 +6,7 @@
  */
 package com.verticon.tracker.impl;
 
+import com.verticon.tracker.*;
 import static com.verticon.tracker.TrackerPlugin.bundleMarker;
 
 import java.net.URI;
@@ -18,6 +19,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -231,6 +233,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createLevelFromString(eDataType, initialValue);
 			case TrackerPackage.US_SWINE_QUALITY_GRADE:
 				return createUSSwineQualityGradeFromString(eDataType, initialValue);
+			case TrackerPackage.WEIGHT_MEASUREMENT_UNIT:
+				return createWeightMeasurementUnitFromString(eDataType, initialValue);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return createPremisesIdNumberFromString(eDataType, initialValue);
 			case TrackerPackage.EMAIL:
@@ -288,6 +292,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return convertLevelToString(eDataType, instanceValue);
 			case TrackerPackage.US_SWINE_QUALITY_GRADE:
 				return convertUSSwineQualityGradeToString(eDataType, instanceValue);
+			case TrackerPackage.WEIGHT_MEASUREMENT_UNIT:
+				return convertWeightMeasurementUnitToString(eDataType, instanceValue);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return convertPremisesIdNumberToString(eDataType, instanceValue);
 			case TrackerPackage.EMAIL:
@@ -1052,6 +1058,26 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * @generated
 	 */
 	public String convertUSSwineQualityGradeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WeightMeasurementUnit createWeightMeasurementUnitFromString(EDataType eDataType, String initialValue) {
+		WeightMeasurementUnit result = WeightMeasurementUnit.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertWeightMeasurementUnitToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

@@ -24,6 +24,7 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.WeighIn;
+import com.verticon.tracker.WeightMeasurementUnit;
 import com.verticon.tracker.util.CollectionFilter;
 import com.verticon.tracker.util.FilterCriteria;
 import com.verticon.tracker.util.TrackerUtils;
@@ -37,6 +38,7 @@ import com.verticon.tracker.util.TrackerUtils;
  * <ul>
  *   <li>{@link com.verticon.tracker.impl.WeighInImpl#getWeight <em>Weight</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.WeighInImpl#getWeightGainPerDay <em>Weight Gain Per Day</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.WeighInImpl#getUnit <em>Unit</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,6 +83,26 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	 * @ordered
 	 */
 	protected static final Double WEIGHT_GAIN_PER_DAY_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getUnit() <em>Unit</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUnit()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final WeightMeasurementUnit UNIT_EDEFAULT = WeightMeasurementUnit.POUND;
+
+	/**
+	 * The cached value of the '{@link #getUnit() <em>Unit</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUnit()
+	 * @generated
+	 * @ordered
+	 */
+	protected WeightMeasurementUnit unit = UNIT_EDEFAULT;
 
 	/**
 	 * Cache of the average daily gain. 
@@ -164,6 +186,27 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 		return adg;
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WeightMeasurementUnit getUnit() {
+		return unit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUnit(WeightMeasurementUnit newUnit) {
+		WeightMeasurementUnit oldUnit = unit;
+		unit = newUnit == null ? UNIT_EDEFAULT : newUnit;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.WEIGH_IN__UNIT, oldUnit, unit));
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -305,6 +348,8 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 				return getWeight();
 			case TrackerPackage.WEIGH_IN__WEIGHT_GAIN_PER_DAY:
 				return getWeightGainPerDay();
+			case TrackerPackage.WEIGH_IN__UNIT:
+				return getUnit();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -320,6 +365,9 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 			case TrackerPackage.WEIGH_IN__WEIGHT:
 				setWeight((Integer)newValue);
 				return;
+			case TrackerPackage.WEIGH_IN__UNIT:
+				setUnit((WeightMeasurementUnit)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -334,6 +382,9 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 		switch (featureID) {
 			case TrackerPackage.WEIGH_IN__WEIGHT:
 				setWeight(WEIGHT_EDEFAULT);
+				return;
+			case TrackerPackage.WEIGH_IN__UNIT:
+				setUnit(UNIT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -351,6 +402,8 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 				return WEIGHT_EDEFAULT == null ? weight != null : !WEIGHT_EDEFAULT.equals(weight);
 			case TrackerPackage.WEIGH_IN__WEIGHT_GAIN_PER_DAY:
 				return WEIGHT_GAIN_PER_DAY_EDEFAULT == null ? getWeightGainPerDay() != null : !WEIGHT_GAIN_PER_DAY_EDEFAULT.equals(getWeightGainPerDay());
+			case TrackerPackage.WEIGH_IN__UNIT:
+				return unit != UNIT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -367,6 +420,8 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (weight: ");
 		result.append(weight);
+		result.append(", unit: ");
+		result.append(unit);
 		result.append(')');
 		return result.toString();
 	}
