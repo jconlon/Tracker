@@ -4300,13 +4300,13 @@ public interface TrackerPackage extends EPackage {
 	int GENERIC_EVENT__EVENT_ATTRIBUTES = EVENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Event Schema</b></em>' reference.
+	 * The feature id for the '<em><b>Ocd</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_EVENT__EVENT_SCHEMA = EVENT_FEATURE_COUNT + 1;
+	int GENERIC_EVENT__OCD = EVENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Generic Event</em>' class.
@@ -4318,14 +4318,14 @@ public interface TrackerPackage extends EPackage {
 	int GENERIC_EVENT_FEATURE_COUNT = EVENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link com.verticon.tracker.impl.EventAttributeImpl <em>Event Attribute</em>}' class.
+	 * The meta object id for the '{@link com.verticon.tracker.impl.StringToStringMapImpl <em>String To String Map</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.impl.EventAttributeImpl
-	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventAttribute()
+	 * @see com.verticon.tracker.impl.StringToStringMapImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getStringToStringMap()
 	 * @generated
 	 */
-	int EVENT_ATTRIBUTE = 37;
+	int STRING_TO_STRING_MAP = 37;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -4334,7 +4334,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_ATTRIBUTE__KEY = 0;
+	int STRING_TO_STRING_MAP__KEY = 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -4343,16 +4343,16 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_ATTRIBUTE__VALUE = 1;
+	int STRING_TO_STRING_MAP__VALUE = 1;
 
 	/**
-	 * The number of structural features of the '<em>Event Attribute</em>' class.
+	 * The number of structural features of the '<em>String To String Map</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_ATTRIBUTE_FEATURE_COUNT = 2;
+	int STRING_TO_STRING_MAP_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.EventSchemaImpl <em>Event Schema</em>}' class.
@@ -5897,27 +5897,27 @@ public interface TrackerPackage extends EPackage {
 	EReference getGenericEvent_EventAttributes();
 
 	/**
-	 * Returns the meta object for the reference '{@link com.verticon.tracker.GenericEvent#getEventSchema <em>Event Schema</em>}'.
+	 * Returns the meta object for the reference '{@link com.verticon.tracker.GenericEvent#getOcd <em>Ocd</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Event Schema</em>'.
-	 * @see com.verticon.tracker.GenericEvent#getEventSchema()
+	 * @return the meta object for the reference '<em>Ocd</em>'.
+	 * @see com.verticon.tracker.GenericEvent#getOcd()
 	 * @see #getGenericEvent()
 	 * @generated
 	 */
-	EReference getGenericEvent_EventSchema();
+	EReference getGenericEvent_Ocd();
 
 	/**
-	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Event Attribute</em>}'.
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>String To String Map</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Event Attribute</em>'.
+	 * @return the meta object for class '<em>String To String Map</em>'.
 	 * @see java.util.Map.Entry
 	 * @model keyDataType="org.eclipse.emf.ecore.EString" keyRequired="true"
 	 *        valueDataType="org.eclipse.emf.ecore.EString" valueRequired="true"
 	 * @generated
 	 */
-	EClass getEventAttribute();
+	EClass getStringToStringMap();
 
 	/**
 	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
@@ -5925,10 +5925,10 @@ public interface TrackerPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Key</em>'.
 	 * @see java.util.Map.Entry
-	 * @see #getEventAttribute()
+	 * @see #getStringToStringMap()
 	 * @generated
 	 */
-	EAttribute getEventAttribute_Key();
+	EAttribute getStringToStringMap_Key();
 
 	/**
 	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
@@ -5936,10 +5936,10 @@ public interface TrackerPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
 	 * @see java.util.Map.Entry
-	 * @see #getEventAttribute()
+	 * @see #getStringToStringMap()
 	 * @generated
 	 */
-	EAttribute getEventAttribute_Value();
+	EAttribute getStringToStringMap_Value();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.EventSchema <em>Event Schema</em>}'.
@@ -7465,22 +7465,22 @@ public interface TrackerPackage extends EPackage {
 		EReference GENERIC_EVENT__EVENT_ATTRIBUTES = eINSTANCE.getGenericEvent_EventAttributes();
 
 		/**
-		 * The meta object literal for the '<em><b>Event Schema</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Ocd</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference GENERIC_EVENT__EVENT_SCHEMA = eINSTANCE.getGenericEvent_EventSchema();
+		EReference GENERIC_EVENT__OCD = eINSTANCE.getGenericEvent_Ocd();
 
 		/**
-		 * The meta object literal for the '{@link com.verticon.tracker.impl.EventAttributeImpl <em>Event Attribute</em>}' class.
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.StringToStringMapImpl <em>String To String Map</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see com.verticon.tracker.impl.EventAttributeImpl
-		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventAttribute()
+		 * @see com.verticon.tracker.impl.StringToStringMapImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getStringToStringMap()
 		 * @generated
 		 */
-		EClass EVENT_ATTRIBUTE = eINSTANCE.getEventAttribute();
+		EClass STRING_TO_STRING_MAP = eINSTANCE.getStringToStringMap();
 
 		/**
 		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
@@ -7488,7 +7488,7 @@ public interface TrackerPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute EVENT_ATTRIBUTE__KEY = eINSTANCE.getEventAttribute_Key();
+		EAttribute STRING_TO_STRING_MAP__KEY = eINSTANCE.getStringToStringMap_Key();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -7496,7 +7496,7 @@ public interface TrackerPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute EVENT_ATTRIBUTE__VALUE = eINSTANCE.getEventAttribute_Value();
+		EAttribute STRING_TO_STRING_MAP__VALUE = eINSTANCE.getStringToStringMap_Value();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.EventSchemaImpl <em>Event Schema</em>}' class.

@@ -271,8 +271,8 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 				return createGenericEventAdapter();
 			}
 			@Override
-			public Adapter caseEventAttribute(Map.Entry<String, String> object) {
-				return createEventAttributeAdapter();
+			public Adapter caseStringToStringMap(Map.Entry<String, String> object) {
+				return createStringToStringMapAdapter();
 			}
 			@Override
 			public Adapter caseEventSchema(EventSchema object) {
@@ -641,7 +641,7 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Event Attribute</em>}'.
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>String To String Map</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
@@ -650,7 +650,7 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @see java.util.Map.Entry
 	 * @generated
 	 */
-	public Adapter createEventAttributeAdapter() {
+	public Adapter createStringToStringMapAdapter() {
 		return null;
 	}
 

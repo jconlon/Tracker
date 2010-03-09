@@ -229,8 +229,8 @@ public class TrackerValidator extends EObjectValidator {
 				return validateHerdTest((HerdTest)value, diagnostics, context);
 			case TrackerPackage.GENERIC_EVENT:
 				return validateGenericEvent((GenericEvent)value, diagnostics, context);
-			case TrackerPackage.EVENT_ATTRIBUTE:
-				return validateEventAttribute((Map.Entry<?, ?>)value, diagnostics, context);
+			case TrackerPackage.STRING_TO_STRING_MAP:
+				return validateStringToStringMap((Map.Entry<?, ?>)value, diagnostics, context);
 			case TrackerPackage.EVENT_SCHEMA:
 				return validateEventSchema((EventSchema)value, diagnostics, context);
 			case TrackerPackage.EVENT_ATTRIBUTE_SCHEMA:
@@ -506,8 +506,8 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateEventAttribute(Map.Entry<?, ?> eventAttribute, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint((EObject)eventAttribute, diagnostics, context);
+	public boolean validateStringToStringMap(Map.Entry<?, ?> stringToStringMap, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint((EObject)stringToStringMap, diagnostics, context);
 	}
 
 	/**

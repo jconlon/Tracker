@@ -6,9 +6,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.validation.AbstractModelConstraint;
 import org.eclipse.emf.validation.EMFEventType;
 import org.eclipse.emf.validation.IValidationContext;
+import org.osgi.service.metatype.AttributeDefinition;
 
-import com.verticon.tracker.EventAttributeSchema;
-import com.verticon.tracker.EventDataType;
 import com.verticon.tracker.GenericEvent;
 
 public class EventAttributeConstraint extends AbstractModelConstraint {
@@ -30,7 +29,7 @@ public class EventAttributeConstraint extends AbstractModelConstraint {
 		}
 		BasicEMap.Entry<String, String> eventAttribute = (BasicEMap.Entry<String, String>) eObj;
 		GenericEvent ge = (GenericEvent) eObj.eContainer();
-		if (ge.getEventSchema() == null) {
+		if (ge.findAttributeDefinition(eventAttribute) == null) {
 			return ctx
 					.createFailureStatus(new Object[] {
 							eObj.eClass().getName(), "of an unknown type",
@@ -38,53 +37,33 @@ public class EventAttributeConstraint extends AbstractModelConstraint {
 							"Please delete this event, validate the schema, and recreate the event." });
 		}
 
-		String nameOfGenericEvent = ge.getEventSchema().getName();
+		String nameOfGenericEvent = ge.findAttributeDefinition(eventAttribute).getName();
 		String valueOfAttribute = eventAttribute.getValue();
 		String keyNameOfAttribute = eventAttribute.getKey();
-		EventAttributeSchema eventAttributeSchema = ge
-				.findSchema(eventAttribute);
-		EventDataType eventDataType = eventAttributeSchema.getDataType();
+		AttributeDefinition attributeDefinition = ge.findAttributeDefinition(eventAttribute);
+		
 
 		EMFEventType eType = ctx.getEventType();
-		// In the case of batch mode.
+		
 		if (eType == EMFEventType.NULL) {
-
+			// In the case of batch mode.
 			if (valueOfAttribute == null || valueOfAttribute.length() == 0) {
 				return createNullFailure(ctx, eObj, eventAttribute, ge,
 						nameOfGenericEvent);
 
 			}
 
-			switch (eventDataType.getValue()) {
-			case EventDataType.INTEGER_VALUE:
-				try {
-					Integer.decode(valueOfAttribute);
-				} catch (NumberFormatException e) {
-					return ctx
-							.createFailureStatus(new Object[] {
-									eObj.eClass().getName(),
-									nameOfGenericEvent, keyNameOfAttribute,
-									"The value must be an Integer." });
-				}
-				break;
-			case EventDataType.STRING_VALUE:
-				// Just accept it
-				break;
-			case EventDataType.BOOLEAN_VALUE:
-				if (!valueOfAttribute.toLowerCase().equals("true")
-						&& !valueOfAttribute.toLowerCase().equals("false")) {
-					return ctx.createFailureStatus(new Object[] {
-							eObj.eClass().getName(), nameOfGenericEvent,
-							keyNameOfAttribute,
-							"The value must be set to true or false." });
-				}
-				break;
-
+			String result = attributeDefinition.validate(valueOfAttribute);
+			if(result != null && result.length()!=0){
+				
+			return ctx.createFailureStatus(new Object[] {
+					eObj.eClass().getName(),
+					nameOfGenericEvent, keyNameOfAttribute,
+					result });
 			}
-
-			// In the case of live mode.
+			
 		} else {
-
+			// In the case of live mode.
 			Object newValue = ctx.getFeatureNewValue();
 			String value = (String)newValue;
 			
@@ -93,33 +72,14 @@ public class EventAttributeConstraint extends AbstractModelConstraint {
 						nameOfGenericEvent);
 			}
 			
-			switch (eventDataType.getValue()) {
-			case EventDataType.INTEGER_VALUE:
-				try {
-					Integer.decode(value);
-				} catch (NumberFormatException e) {
-					return ctx
-							.createFailureStatus(new Object[] {
-									eObj.eClass().getName(),
-									nameOfGenericEvent, keyNameOfAttribute,
-									"The value must be an Integer." });
-				}
-				break;
-			case EventDataType.STRING_VALUE:
-				// Just accept it
-				break;
-			case EventDataType.BOOLEAN_VALUE:
-				if (!value.toLowerCase().equals("true")
-						&& !value.toLowerCase().equals("false")) {
-					return ctx.createFailureStatus(new Object[] {
-							eObj.eClass().getName(), nameOfGenericEvent,
-							keyNameOfAttribute,
-							"The value must be set to true or false." });
-				}
-				break;
-
+			
+			String result = attributeDefinition.validate(valueOfAttribute);
+			if(result != null && result.length()!=0){
+				return ctx.createFailureStatus(new Object[] {
+					eObj.eClass().getName(),
+					nameOfGenericEvent, keyNameOfAttribute,
+					result });
 			}
-
 		}
 
 		return ctx.createSuccessStatus();

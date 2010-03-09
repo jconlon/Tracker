@@ -5,9 +5,11 @@
  */
 package com.verticon.tracker;
 
+import com.verticon.osgi.metatype.OCD;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EMap;
+import org.osgi.service.metatype.AttributeDefinition;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,7 +20,7 @@ import org.eclipse.emf.common.util.EMap;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.verticon.tracker.GenericEvent#getEventAttributes <em>Event Attributes</em>}</li>
- *   <li>{@link com.verticon.tracker.GenericEvent#getEventSchema <em>Event Schema</em>}</li>
+ *   <li>{@link com.verticon.tracker.GenericEvent#getOcd <em>Ocd</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,43 +53,53 @@ public interface GenericEvent extends Event {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Event Attributes</em>' map.
 	 * @see com.verticon.tracker.TrackerPackage#getGenericEvent_EventAttributes()
-	 * @model mapType="com.verticon.tracker.EventAttribute<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
+	 * @model mapType="com.verticon.tracker.StringToStringMap<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
 	 * @generated
 	 */
 	EMap<String, String> getEventAttributes();
 
 	/**
-	 * Returns the value of the '<em><b>Event Schema</b></em>' reference.
+	 * Returns the value of the '<em><b>Ocd</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Event Schema</em>' reference isn't clear,
+	 * If the meaning of the '<em>Ocd</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Event Schema</em>' reference.
-	 * @see #setEventSchema(EventSchema)
-	 * @see com.verticon.tracker.TrackerPackage#getGenericEvent_EventSchema()
-	 * @model required="true"
+	 * @return the value of the '<em>Ocd</em>' reference.
+	 * @see #setOcd(OCD)
+	 * @see com.verticon.tracker.TrackerPackage#getGenericEvent_Ocd()
+	 * @model
 	 * @generated
 	 */
-	EventSchema getEventSchema();
+	OCD getOcd();
 
 	/**
-	 * Sets the value of the '{@link com.verticon.tracker.GenericEvent#getEventSchema <em>Event Schema</em>}' reference.
+	 * Sets the value of the '{@link com.verticon.tracker.GenericEvent#getOcd <em>Ocd</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Event Schema</em>' reference.
-	 * @see #getEventSchema()
+	 * @param value the new value of the '<em>Ocd</em>' reference.
+	 * @see #getOcd()
 	 * @generated
 	 */
-	void setEventSchema(EventSchema value);
+	void setOcd(OCD value);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model eventAttributeMapType="com.verticon.tracker.EventAttribute<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
+	 * @model type="com.verticon.osgi.metatype.AttributeDefinition" eventAttributeMapType="com.verticon.tracker.StringToStringMap<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if(getOcd() ==null ){\n\treturn null;\n}\n\nfor (AttributeDefinition attributeDefinition : this.getOcd().getAttributeDefinitions(\n<%org.osgi.service.metatype.ObjectClassDefinition%>.ALL)) {\n\tif(eventAttribute.getKey().equals(attributeDefinition.getName())){\n\t\t\treturn attributeDefinition;\n\t}\n}\n\nreturn null;'"
 	 * @generated
 	 */
-	EventAttributeSchema findSchema(Map.Entry<String, String> eventAttribute);
+	AttributeDefinition findAttributeDefinition(Map.Entry<String, String> eventAttribute);
 
-} // GenericEvent
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return getOcd()==null?null:getOcd().getName(); '"
+	 * @generated
+	 */
+	String findName();
+
+} 

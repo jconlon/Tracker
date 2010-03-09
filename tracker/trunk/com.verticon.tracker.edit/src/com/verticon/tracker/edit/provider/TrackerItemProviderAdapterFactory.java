@@ -549,7 +549,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EventAttributeItemProvider eventAttributeItemProvider;
+	protected StringToStringMapItemProvider stringToStringMapItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link java.util.Map.Entry}.
@@ -558,12 +558,12 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	 * @generated
 	 */
 	@Override
-	public Adapter createEventAttributeAdapter() {
-		if (eventAttributeItemProvider == null) {
-			eventAttributeItemProvider = new EventAttributeItemProvider(this);
+	public Adapter createStringToStringMapAdapter() {
+		if (stringToStringMapItemProvider == null) {
+			stringToStringMapItemProvider = new StringToStringMapItemProvider(this);
 		}
 
-		return eventAttributeItemProvider;
+		return stringToStringMapItemProvider;
 	}
 
 	/**
@@ -1159,7 +1159,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (milkTestItemProvider != null) milkTestItemProvider.dispose();
 		if (herdTestItemProvider != null) herdTestItemProvider.dispose();
 		if (genericEventItemProvider != null) genericEventItemProvider.dispose();
-		if (eventAttributeItemProvider != null) eventAttributeItemProvider.dispose();
+		if (stringToStringMapItemProvider != null) stringToStringMapItemProvider.dispose();
 		if (eventSchemaItemProvider != null) eventSchemaItemProvider.dispose();
 		if (eventAttributeSchemaItemProvider != null) eventAttributeSchemaItemProvider.dispose();
 		if (schemaItemProvider != null) schemaItemProvider.dispose();

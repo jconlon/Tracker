@@ -7,6 +7,8 @@ package com.verticon.tracker;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.FeatureMap;
 
 /**
  * <!-- begin-user-doc -->
@@ -93,5 +95,14 @@ public interface Tag extends EObject {
 	 * @generated
 	 */
 	void setId(String value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.Boolean" featureDataType="org.eclipse.emf.ecore.xml.type.Int" qualifierDataType="org.eclipse.emf.ecore.xml.type.String"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return Boolean.TRUE;'"
+	 * @generated
+	 */
+	boolean canContain(int feature, String qualifier);
 
 } // Tag

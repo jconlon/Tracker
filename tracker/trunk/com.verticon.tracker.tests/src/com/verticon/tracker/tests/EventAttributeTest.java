@@ -85,7 +85,7 @@ public class EventAttributeTest extends TestCase {
 	@Override
 	@SuppressWarnings("unchecked")
 	protected void setUp() throws Exception {
-		setFixture((Map.Entry<String, String>)TrackerFactory.eINSTANCE.create(TrackerPackage.Literals.EVENT_ATTRIBUTE));
+		setFixture((Map.Entry<String, String>)TrackerFactory.eINSTANCE.create(TrackerPackage.Literals.STRING_TO_STRING_MAP));
 	}
 
 	/**
