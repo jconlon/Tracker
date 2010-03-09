@@ -179,7 +179,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.MILK_TEST: return createMilkTest();
 			case TrackerPackage.HERD_TEST: return createHerdTest();
 			case TrackerPackage.GENERIC_EVENT: return createGenericEvent();
-			case TrackerPackage.EVENT_ATTRIBUTE: return (EObject)createEventAttribute();
+			case TrackerPackage.STRING_TO_STRING_MAP: return (EObject)createStringToStringMap();
 			case TrackerPackage.EVENT_SCHEMA: return createEventSchema();
 			case TrackerPackage.EVENT_ATTRIBUTE_SCHEMA: return createEventAttributeSchema();
 			case TrackerPackage.SCHEMA: return createSchema();
@@ -514,9 +514,9 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Map.Entry<String, String> createEventAttribute() {
-		EventAttributeImpl eventAttribute = new EventAttributeImpl();
-		return eventAttribute;
+	public Map.Entry<String, String> createStringToStringMap() {
+		StringToStringMapImpl stringToStringMap = new StringToStringMapImpl();
+		return stringToStringMap;
 	}
 
 	/**

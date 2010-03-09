@@ -5,31 +5,34 @@
  */
 package com.verticon.tracker.impl;
 
+import com.verticon.tracker.TrackerPackage;
+
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EMap;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import com.verticon.tracker.TrackerPackage;
-
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Event Attribute</b></em>'.
+ * An implementation of the model object '<em><b>String To String Map</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.verticon.tracker.impl.EventAttributeImpl#getTypedKey <em>Key</em>}</li>
- *   <li>{@link com.verticon.tracker.impl.EventAttributeImpl#getTypedValue <em>Value</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.StringToStringMapImpl#getTypedKey <em>Key</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.StringToStringMapImpl#getTypedValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class EventAttributeImpl extends EObjectImpl implements BasicEMap.Entry<String,String> {
+public class StringToStringMapImpl extends EObjectImpl implements BasicEMap.Entry<String,String> {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -82,7 +85,7 @@ public class EventAttributeImpl extends EObjectImpl implements BasicEMap.Entry<S
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EventAttributeImpl() {
+	protected StringToStringMapImpl() {
 		super();
 	}
 
@@ -93,7 +96,7 @@ public class EventAttributeImpl extends EObjectImpl implements BasicEMap.Entry<S
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TrackerPackage.Literals.EVENT_ATTRIBUTE;
+		return TrackerPackage.Literals.STRING_TO_STRING_MAP;
 	}
 
 	/**
@@ -114,7 +117,7 @@ public class EventAttributeImpl extends EObjectImpl implements BasicEMap.Entry<S
 		String oldKey = key;
 		key = newKey;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.EVENT_ATTRIBUTE__KEY, oldKey, key));
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.STRING_TO_STRING_MAP__KEY, oldKey, key));
 	}
 
 	/**
@@ -135,7 +138,7 @@ public class EventAttributeImpl extends EObjectImpl implements BasicEMap.Entry<S
 		String oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.EVENT_ATTRIBUTE__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.STRING_TO_STRING_MAP__VALUE, oldValue, value));
 	}
 
 	/**
@@ -146,9 +149,9 @@ public class EventAttributeImpl extends EObjectImpl implements BasicEMap.Entry<S
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TrackerPackage.EVENT_ATTRIBUTE__KEY:
+			case TrackerPackage.STRING_TO_STRING_MAP__KEY:
 				return getTypedKey();
-			case TrackerPackage.EVENT_ATTRIBUTE__VALUE:
+			case TrackerPackage.STRING_TO_STRING_MAP__VALUE:
 				return getTypedValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -162,10 +165,10 @@ public class EventAttributeImpl extends EObjectImpl implements BasicEMap.Entry<S
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TrackerPackage.EVENT_ATTRIBUTE__KEY:
+			case TrackerPackage.STRING_TO_STRING_MAP__KEY:
 				setTypedKey((String)newValue);
 				return;
-			case TrackerPackage.EVENT_ATTRIBUTE__VALUE:
+			case TrackerPackage.STRING_TO_STRING_MAP__VALUE:
 				setTypedValue((String)newValue);
 				return;
 		}
@@ -180,10 +183,10 @@ public class EventAttributeImpl extends EObjectImpl implements BasicEMap.Entry<S
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TrackerPackage.EVENT_ATTRIBUTE__KEY:
+			case TrackerPackage.STRING_TO_STRING_MAP__KEY:
 				setTypedKey(KEY_EDEFAULT);
 				return;
-			case TrackerPackage.EVENT_ATTRIBUTE__VALUE:
+			case TrackerPackage.STRING_TO_STRING_MAP__VALUE:
 				setTypedValue(VALUE_EDEFAULT);
 				return;
 		}
@@ -198,9 +201,9 @@ public class EventAttributeImpl extends EObjectImpl implements BasicEMap.Entry<S
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TrackerPackage.EVENT_ATTRIBUTE__KEY:
+			case TrackerPackage.STRING_TO_STRING_MAP__KEY:
 				return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
-			case TrackerPackage.EVENT_ATTRIBUTE__VALUE:
+			case TrackerPackage.STRING_TO_STRING_MAP__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
@@ -302,4 +305,4 @@ public class EventAttributeImpl extends EObjectImpl implements BasicEMap.Entry<S
 		return container == null ? null : (EMap<String, String>)container.eGet(eContainmentFeature());
 	}
 
-} //EventAttributeImpl
+} //StringToStringMapImpl

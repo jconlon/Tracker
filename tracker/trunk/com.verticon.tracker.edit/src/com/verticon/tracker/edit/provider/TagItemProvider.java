@@ -12,11 +12,14 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -28,6 +31,10 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import com.verticon.osgi.metatype.DocumentRoot;
+import com.verticon.osgi.metatype.MetaData;
+import com.verticon.osgi.metatype.OCD;
+import com.verticon.osgi.metatype.util.MetatypeSwitch;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.BovineBeef;
@@ -35,7 +42,6 @@ import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.BovineDairy;
 import com.verticon.tracker.Caprine;
 import com.verticon.tracker.Equine;
-import com.verticon.tracker.EventSchema;
 import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.Premises;
@@ -349,9 +355,10 @@ public class TagItemProvider
 				(TrackerPackage.Literals.TAG__EVENTS,
 						TrackerFactory.eINSTANCE.createHerdTest()));
 		
+		addGenericEventChildDescriptors(newChildDescriptors, tag);
 		
 		//This is what is modified
-		addChildrenBasedOnTagAnimal(newChildDescriptors, object);
+		addChildrenBasedOnTagAnimal(newChildDescriptors, tag);
 		
 	}
 
@@ -360,20 +367,19 @@ public class TagItemProvider
 	 * @param object
 	 */
 	private void addChildrenBasedOnTagAnimal(
-			final Collection<Object> newChildDescriptors, Object object) {
+			final Collection<Object> newChildDescriptors, Tag tag) {
 		
-		Tag tag = (Tag)object;
 		if(tag==null){
 			return;
 		}
 		
+		//Create an animalVisitor to create tags based on animals
 		TrackerSwitch<Object> visitor = new TrackerSwitch<Object>(){
 			@Override
 			public Object caseOvine(Ovine object) {
 				addBirthingEventChild(newChildDescriptors);
 				addMilkTestEventChild(newChildDescriptors);
 				addUSOvineGradingEventChild(newChildDescriptors);
-				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.OVINE, object.eContainer());
 				return object;
 			}
 
@@ -381,7 +387,6 @@ public class TagItemProvider
 			public Object caseCaprine(Caprine object) {
 				addBirthingEventChild(newChildDescriptors);
 				addMilkTestEventChild(newChildDescriptors);
-				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.CAPRINE, object.eContainer());
 				return object;
 			}
 
@@ -389,7 +394,6 @@ public class TagItemProvider
 			public Object caseBovineBeef(BovineBeef object) {
 				addCalvingEventChild(newChildDescriptors);
 				addUSBeefGradingEventChild(newChildDescriptors);
-				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.BOVINE_BEEF, object.eContainer());
 				return object;
 			}
 			
@@ -398,7 +402,6 @@ public class TagItemProvider
 				addCalvingEventChild(newChildDescriptors);
 				addMilkTestEventChild(newChildDescriptors);
 				addUSBeefGradingEventChild(newChildDescriptors);
-				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.BOVINE_DAIRY, object.eContainer());
 				return object;
 			}
 			
@@ -407,7 +410,6 @@ public class TagItemProvider
 				addCalvingEventChild(newChildDescriptors);
 				addMilkTestEventChild(newChildDescriptors);
 				addUSBeefGradingEventChild(newChildDescriptors);
-				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.BOVINE_BISON, object.eContainer());
 				return object;
 			}
 			
@@ -415,14 +417,12 @@ public class TagItemProvider
 			public Object caseSwine(Swine object) {
 				addBirthingEventChild(newChildDescriptors);
 				addUSSwineGradingEventChild(newChildDescriptors);
-				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.SWINE, object.eContainer());
 				return object;
 			}
 			
 			@Override
 			public Object caseEquine(Equine object) {
 				addBirthingEventChild(newChildDescriptors);
-				createAnimalSpecificGenericEvents(newChildDescriptors, AnimalType.EQUINE, object.eContainer());
 				return object;
 			}
 			
@@ -502,30 +502,31 @@ public class TagItemProvider
 		visitor.doSwitch(tag.eContainer());
 	}
 
-	/**
-	 * @param newChildDescriptors
-	 */
-	private void createAnimalSpecificGenericEvents(
-			final Collection<Object> newChildDescriptors, AnimalType animalType, EObject animalContainer) {
-		if(animalContainer != null &&  animalContainer instanceof Premises){
-			EList<EventSchema> eventSchemas = findEventSchemas(animalType,  (Premises)animalContainer);
-			for (EventSchema eventSchema : eventSchemas) {
-				createGenericEvent(newChildDescriptors,  eventSchema);
+	
+	private void addGenericEventChildDescriptors(
+			final Collection<Object> newChildDescriptors, Tag tag) {
+		if(tag.eContainer() != null &&  tag.eContainer() instanceof Animal){
+			ResourceSet rs = tag.eResource().getResourceSet();
+			EList<OCD> objectClassDescriptors = findOCDs(rs);
+			
+			for (OCD ocd : objectClassDescriptors) {
+				if(tag.canContain(TrackerPackage.GENERIC_EVENT, ocd.getID())){
+					addGenericEventChildDescriptor(newChildDescriptors,  ocd);
+				}
+				
 			}
 			
 		}
-		
 	}
 	
 	/**
 	 * 
 	 * @param newChildDescriptors
-	 * @param eventSchema
+	 * @param ocd
 	 */
-	private void createGenericEvent(final Collection<Object> newChildDescriptors, EventSchema eventSchema){
+	private void addGenericEventChildDescriptor(final Collection<Object> newChildDescriptors, OCD ocd){
 		GenericEvent ge = TrackerFactory.eINSTANCE.createGenericEvent();
-		ge.setEventSchema(eventSchema);
-
+		ge.setOcd(ocd);
 		
 		newChildDescriptors.add(
 				createChildParameter(
@@ -534,21 +535,46 @@ public class TagItemProvider
 				);
 	}
 	
-	
 	/**
 	 * 
 	 * @param animalType
 	 * @param premises
 	 * @return all EventSchema Elements for a specified animalType
 	 */
-	private EList<EventSchema> findEventSchemas(AnimalType animalType, Premises premises){
-		if(premises.getSchema()==null){
-			return ECollections.emptyEList();
-		}
-		EList<EventSchema> results = new BasicEList<EventSchema>();
-	    for (EventSchema eventSchema : premises.getSchema().getEventSchemas()) {
-			if(eventSchema.getAnimalType().contains(animalType)){
-				results.add(eventSchema);
+	private EList<OCD> findOCDs(ResourceSet rs){
+		final EList<OCD> results = new BasicEList<OCD>();
+		MetatypeSwitch<Boolean> ocdVisitor = new MetatypeSwitch<Boolean>(){
+			@Override
+			public Boolean caseOCD(OCD object) {
+				results.add(object);
+				return Boolean.FALSE;
+			}
+
+			@Override
+			public Boolean caseDocumentRoot(DocumentRoot object) {
+				return  Boolean.TRUE;
+			}
+
+			
+			@Override
+			public Boolean caseMetaData(MetaData object) {
+				return  Boolean.TRUE;
+			}
+
+			@Override
+			public Boolean defaultCase(EObject object) {
+				return Boolean.FALSE;
+			}
+		};
+		
+		
+		for(TreeIterator<?> iter = EcoreUtil.getAllContents(rs, true); iter.hasNext();){
+			Object o =  iter.next();
+			if(o instanceof EObject){
+				EObject eObject = (EObject)o;
+				if(ocdVisitor.doSwitch(eObject) == Boolean.FALSE){
+					iter.prune();
+				}
 			}
 		}
 		return results;
@@ -573,8 +599,8 @@ public class TagItemProvider
 			Object child, Collection<?> selection) {
 		if(child instanceof GenericEvent){
 			GenericEvent ge = (GenericEvent)child;
-			if(ge.getEventSchema()!=null && ge.getEventSchema().getName()!=null){
-				return ge.getEventSchema().getName();
+			if(ge.findName()!=null){
+				return ge.findName();
 			}
 		}
 		return super.getCreateChildText(owner, feature, child, selection);

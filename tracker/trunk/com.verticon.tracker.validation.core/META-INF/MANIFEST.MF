@@ -11,3 +11,4 @@ Require-Bundle: org.eclipse.emf.validation,
  com.verticon.tracker,
  org.eclipse.core.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.osgi.service.metatype;version="1.1.0"

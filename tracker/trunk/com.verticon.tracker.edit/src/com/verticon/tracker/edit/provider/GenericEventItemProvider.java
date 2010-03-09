@@ -67,6 +67,7 @@ public class GenericEventItemProvider
 			super.getPropertyDescriptors(object);
 
 			addEventAttributesPropertyDescriptor(object);
+			addOcdPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -94,6 +95,28 @@ public class GenericEventItemProvider
 	}
 	
 
+
+	/**
+	 * This adds a property descriptor for the Ocd feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addOcdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_GenericEvent_ocd_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_GenericEvent_ocd_feature", "_UI_GenericEvent_type"),
+				 TrackerPackage.Literals.GENERIC_EVENT__OCD,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
 
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
@@ -147,8 +170,8 @@ public class GenericEventItemProvider
 	 */
 	public String getText(Object object) {
 		GenericEvent ge = (GenericEvent)object;
-		if(ge.getEventSchema()!=null){
-			return super.getText(ge.getDateTime(), ge.getEventSchema().getName())   ;
+		if(ge.findName()!=null){
+			return super.getText(ge.getDateTime(),ge.findName())   ;
 		}
 		return super.getText(object);
 	}
@@ -165,9 +188,6 @@ public class GenericEventItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(GenericEvent.class)) {
-			case TrackerPackage.GENERIC_EVENT__EVENT_SCHEMA:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
 			case TrackerPackage.GENERIC_EVENT__EVENT_ATTRIBUTES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;

@@ -8,9 +8,11 @@ package com.verticon.tracker.tests;
 import junit.textui.TestRunner;
 
 import org.eclipse.emf.common.util.BasicEMap;
+import org.osgi.service.metatype.ObjectClassDefinition;
 
-import com.verticon.tracker.EventAttributeSchema;
-import com.verticon.tracker.EventSchema;
+import com.verticon.osgi.metatype.AD;
+import com.verticon.osgi.metatype.MetatypeFactory;
+import com.verticon.osgi.metatype.OCD;
 import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.TrackerFactory;
 
@@ -21,7 +23,7 @@ import com.verticon.tracker.TrackerFactory;
  * <p>
  * The following operations are tested:
  * <ul>
- *   <li>{@link GenericEvent#findSchema(java.util.Map.Entry)} <em>Find Schema</em>}</li>
+ *   <li>{@link GenericEvent#findAttributeDefinition(java.util.Map.Entry)} <em>Find AttributeDefinition</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -87,66 +89,39 @@ public class GenericEventTest extends EventTest {
 		setFixture(null);
 	}
 	
-	/**
-	 * Tests the '{@link com.verticon.tracker.GenericEvent#findSchema(java.util.Map.Entry) <em>Find Schema</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.GenericEvent#findSchema(java.util.Map.Entry)
-	 * @generated NOT
-	 */
+	
 	@SuppressWarnings("unchecked")
-	public void testFindSchema__EMap() {
+	public void testfindAttributeDefinition__AttributeDefinition() {
 		
-		//Setup the schema
-		EventSchema schema = TrackerFactory.eINSTANCE.createEventSchema();
-		schema.setName("someName");
-		EventAttributeSchema eas = TrackerFactory.eINSTANCE.createEventAttributeSchema();
-		eas.setName("testMe");
-		schema.getEventAttributes().add(eas);
+		//Setup the ObjectClassDefinition
+		OCD ocd = MetatypeFactory.eINSTANCE.createOCD();
+		ocd.setName("someName");
+		//Add an attribute
+		AD ad = MetatypeFactory.eINSTANCE.createAD();
+		ad.setName("testMe");
+        //Add the 
+		ocd.getAD().add(ad);
+		
+		//For the following to create the map entries that represent attributes the following
+		//MUST NOT return NULL
+		assertNotNull(ocd.getAttributeDefinitions(ObjectClassDefinition.ALL));
+		
 		
 		//Set the schema - EventAttributes are now added
 		GenericEvent genericEvent = getFixture();
-		genericEvent.setEventSchema(schema);
+		genericEvent.setOcd(ocd);
 		
-		//Test to see if the eventAtribute is added
+		//Test to see if the eventAttribute is added
 		Object o = genericEvent.getEventAttributes().get(0);
 		assertNotNull(o);
-		assertTrue(o instanceof BasicEMap.Entry);
+		assertTrue(o instanceof BasicEMap.Entry<?,?>);
 		BasicEMap.Entry<String, String> eventAttribute = (BasicEMap.Entry<String, String>) o;
 		
 		//Find the associated schema and see if it is the same
-		assertEquals(eas, genericEvent.findSchema(eventAttribute));
+		assertEquals(ad, genericEvent.findAttributeDefinition(eventAttribute));
 	}
 	
-	/**
-	 * @generated NOT
-	 */
-	@SuppressWarnings("unchecked")
-	public void testSetSchema() {
-		
-		//Setup the schema
-		EventSchema schema = TrackerFactory.eINSTANCE.createEventSchema();
-		schema.setName("someName");
-		EventAttributeSchema eas = TrackerFactory.eINSTANCE.createEventAttributeSchema();
-		eas.setName("testMe");
-		schema.getEventAttributes().add(eas);
-		
-		//Set the schema - the EventAttributes are now added
-		GenericEvent genericEvent = getFixture();
-		genericEvent.setEventSchema(schema);
-		
-		//Test the Schema 
-		assertEquals(schema, genericEvent.getEventSchema());
-		
-		//Test to see if the eventAtribute is added
-		Object o = genericEvent.getEventAttributes().get(0);
-		assertNotNull(o);
-		assertTrue(o instanceof BasicEMap.Entry);
-		BasicEMap.Entry<String, String> eventAttribute = (BasicEMap.Entry<String, String>) o;
-		
-		//Test the name of the eventAttribute is the same as the EventAttributeSchema name
-		assertEquals(eas.getName(), eventAttribute.getKey());
-	}
+
 
 	@Override
 	public void testGetEventCode() {

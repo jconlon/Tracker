@@ -398,9 +398,9 @@ public class TrackerSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TrackerPackage.EVENT_ATTRIBUTE: {
-				@SuppressWarnings("unchecked") Map.Entry<String, String> eventAttribute = (Map.Entry<String, String>)theEObject;
-				T result = caseEventAttribute(eventAttribute);
+			case TrackerPackage.STRING_TO_STRING_MAP: {
+				@SuppressWarnings("unchecked") Map.Entry<String, String> stringToStringMap = (Map.Entry<String, String>)theEObject;
+				T result = caseStringToStringMap(stringToStringMap);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -793,17 +793,17 @@ public class TrackerSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Event Attribute</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>String To String Map</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Event Attribute</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>String To String Map</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEventAttribute(Map.Entry<String, String> object) {
+	public T caseStringToStringMap(Map.Entry<String, String> object) {
 		return null;
 	}
 

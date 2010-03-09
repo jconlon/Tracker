@@ -6,6 +6,8 @@
  */
 package com.verticon.tracker.impl;
 
+import com.verticon.osgi.metatype.MetatypePackage;
+import com.verticon.osgi.metatype.impl.MetatypePackageImpl;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -19,6 +21,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.AnimalType;
@@ -264,7 +267,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass eventAttributeEClass = null;
+	private EClass stringToStringMapEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -613,11 +616,19 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		isInited = true;
 
+		// Initialize simple dependencies
+		XMLTypePackage.eINSTANCE.eClass();
+
+		// Obtain or create and register interdependencies
+		MetatypePackageImpl theMetatypePackage = (MetatypePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(MetatypePackage.eNS_URI) instanceof MetatypePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(MetatypePackage.eNS_URI) : MetatypePackage.eINSTANCE);
+
 		// Create package meta-data objects
 		theTrackerPackage.createPackageContents();
+		theMetatypePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theTrackerPackage.initializePackageContents();
+		theMetatypePackage.initializePackageContents();
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
@@ -1380,7 +1391,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getGenericEvent_EventSchema() {
+	public EReference getGenericEvent_Ocd() {
 		return (EReference)genericEventEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1389,8 +1400,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getEventAttribute() {
-		return eventAttributeEClass;
+	public EClass getStringToStringMap() {
+		return stringToStringMapEClass;
 	}
 
 	/**
@@ -1398,8 +1409,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEventAttribute_Key() {
-		return (EAttribute)eventAttributeEClass.getEStructuralFeatures().get(0);
+	public EAttribute getStringToStringMap_Key() {
+		return (EAttribute)stringToStringMapEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1407,8 +1418,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEventAttribute_Value() {
-		return (EAttribute)eventAttributeEClass.getEStructuralFeatures().get(1);
+	public EAttribute getStringToStringMap_Value() {
+		return (EAttribute)stringToStringMapEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2274,11 +2285,11 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		genericEventEClass = createEClass(GENERIC_EVENT);
 		createEReference(genericEventEClass, GENERIC_EVENT__EVENT_ATTRIBUTES);
-		createEReference(genericEventEClass, GENERIC_EVENT__EVENT_SCHEMA);
+		createEReference(genericEventEClass, GENERIC_EVENT__OCD);
 
-		eventAttributeEClass = createEClass(EVENT_ATTRIBUTE);
-		createEAttribute(eventAttributeEClass, EVENT_ATTRIBUTE__KEY);
-		createEAttribute(eventAttributeEClass, EVENT_ATTRIBUTE__VALUE);
+		stringToStringMapEClass = createEClass(STRING_TO_STRING_MAP);
+		createEAttribute(stringToStringMapEClass, STRING_TO_STRING_MAP__KEY);
+		createEAttribute(stringToStringMapEClass, STRING_TO_STRING_MAP__VALUE);
 
 		eventSchemaEClass = createEClass(EVENT_SCHEMA);
 		createEAttribute(eventSchemaEClass, EVENT_SCHEMA__NAME);
@@ -2356,6 +2367,10 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		setName(eNAME);
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
+
+		// Obtain other dependent packages
+		XMLTypePackage theXMLTypePackage = (XMLTypePackage)EPackage.Registry.INSTANCE.getEPackage(XMLTypePackage.eNS_URI);
+		MetatypePackage theMetatypePackage = (MetatypePackage)EPackage.Registry.INSTANCE.getEPackage(MetatypePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -2439,6 +2454,10 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getTag_UsainNumberUsed(), ecorePackage.getEBoolean(), "usainNumberUsed", null, 1, 1, Tag.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getTag_Events(), this.getEvent(), this.getEvent_Tag(), "events", null, 1, -1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTag_Id(), ecorePackage.getEString(), "id", "", 1, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(tagEClass, theXMLTypePackage.getBoolean(), "canContain", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theXMLTypePackage.getInt(), "feature", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theXMLTypePackage.getString(), "qualifier", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(bovineEClass, Bovine.class, "Bovine", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2579,15 +2598,17 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getHerdTest_BredDateEstimate(), ecorePackage.getEDate(), "bredDateEstimate", null, 0, 1, HerdTest.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(genericEventEClass, GenericEvent.class, "GenericEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGenericEvent_EventAttributes(), this.getEventAttribute(), null, "eventAttributes", null, 0, -1, GenericEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getGenericEvent_EventSchema(), this.getEventSchema(), null, "eventSchema", null, 1, 1, GenericEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGenericEvent_EventAttributes(), this.getStringToStringMap(), null, "eventAttributes", null, 0, -1, GenericEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGenericEvent_Ocd(), theMetatypePackage.getOCD(), null, "ocd", null, 0, 1, GenericEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(genericEventEClass, this.getEventAttributeSchema(), "findSchema", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getEventAttribute(), "eventAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(genericEventEClass, theMetatypePackage.getAttributeDefinition(), "findAttributeDefinition", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getStringToStringMap(), "eventAttribute", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(eventAttributeEClass, Map.Entry.class, "EventAttribute", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEventAttribute_Key(), ecorePackage.getEString(), "key", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEventAttribute_Value(), ecorePackage.getEString(), "value", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		addEOperation(genericEventEClass, theXMLTypePackage.getString(), "findName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(stringToStringMapEClass, Map.Entry.class, "StringToStringMap", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStringToStringMap_Key(), ecorePackage.getEString(), "key", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStringToStringMap_Value(), ecorePackage.getEString(), "value", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventSchemaEClass, EventSchema.class, "EventSchema", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEventSchema_Name(), ecorePackage.getEString(), "name", null, 1, 1, EventSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3018,7 +3039,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";				
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";					
 		addAnnotation
 		  (premisesIdNumberEDataType, 
 		   source, 
@@ -3027,7 +3048,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 			 "maxLength", "7",
 			 "length", "7",
 			 "maxExclusive", "adcdefg"
-		   });	
+		   });			
 	}
 
 } //TrackerPackageImpl

@@ -637,6 +637,7 @@
           propertyMultiLine="true" ecoreFeature="ecore:EReference tracker.ecore#//GenericEvent/eventAttributes"/>
       <genFeatures property="None" createChild="false" propertySortChoices="true"
           ecoreFeature="ecore:EReference tracker.ecore#//GenericEvent/eventSchema"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//GenericEvent/ocd"/>
       <genOperations ecoreOperation="tracker.ecore#//GenericEvent/findSchema">
         <genParameters ecoreParameter="tracker.ecore#//GenericEvent/findSchema/eventAttribute"/>
       </genOperations>
@@ -680,6 +681,116 @@
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//USSwineGrading">
       <genFeatures createChild="false" propertyDescription="Carcass Quality" ecoreFeature="ecore:EAttribute tracker.ecore#//USSwineGrading/qualityGrade"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Metatype" basePackage="com.verticon.osgi" ecorePackage="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar">
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/String"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/Long"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/Integer"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/Short"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/Char"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/Byte"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/Double"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/Float"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/Boolean"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AttributeDefinitionArray"/>
+    <genDataTypes ecoreDataType="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//InputStream"/>
+    <genDataTypes ecoreDataType="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//IOException"/>
+    <genDataTypes ecoreDataType="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//ScalarObject"/>
+    <genDataTypes ecoreDataType="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//StringArray"/>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/option"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/cardinality"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/default"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/iD"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/max"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/min"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/required"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/dataType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/anyAttribute"/>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/getType"/>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/validate">
+        <genParameters ecoreParameter="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/validate/value"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/getOptionValues"/>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/getOptionLabels"/>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/getDefaultValue"/>
+    </genClasses>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Attribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Attribute/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Attribute/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Attribute/adref"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Attribute/content"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Attribute/anyAttribute"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AttributeDefinition"/>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate/object"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate/bundle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate/factoryPid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate/merge"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate/optional"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate/pid"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//DocumentRoot/metaData"/>
+    </genClasses>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Icon">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Icon/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Icon/resource"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Icon/size"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Icon/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/oCD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/designate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/localization"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/anyAttribute"/>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/getLocales"/>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/getObjectClassDefinition">
+        <genParameters ecoreParameter="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/getObjectClassDefinition/id"/>
+        <genParameters ecoreParameter="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/getObjectClassDefinition/locale"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaTypeProvider"/>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Object">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Object/attribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Object/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Object/ocdref"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Object/anyAttribute"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//ObjectClassDefinition"/>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/aD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/icon"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/iD"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/anyAttribute"/>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/getIcon">
+        <genParameters ecoreParameter="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/getIcon/size"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/getAttributeDefinitions">
+        <genParameters ecoreParameter="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/getAttributeDefinitions/filter"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Option">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Option/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Option/label"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Option/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Option/anyAttribute"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

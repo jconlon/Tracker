@@ -16,9 +16,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.osgi.service.metatype.AttributeDefinition;
+import org.osgi.service.metatype.ObjectClassDefinition;
 
-import com.verticon.tracker.EventAttributeSchema;
-import com.verticon.tracker.EventSchema;
+import com.verticon.osgi.metatype.OCD;
 import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.TrackerPackage;
 
@@ -30,7 +31,7 @@ import com.verticon.tracker.TrackerPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.verticon.tracker.impl.GenericEventImpl#getEventAttributes <em>Event Attributes</em>}</li>
- *   <li>{@link com.verticon.tracker.impl.GenericEventImpl#getEventSchema <em>Event Schema</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.GenericEventImpl#getOcd <em>Ocd</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,14 +56,14 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 	protected EMap<String, String> eventAttributes;
 
 	/**
-	 * The cached value of the '{@link #getEventSchema() <em>Event Schema</em>}' reference.
+	 * The cached value of the '{@link #getOcd() <em>Ocd</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEventSchema()
+	 * @see #getOcd()
 	 * @generated
 	 * @ordered
 	 */
-	protected EventSchema eventSchema;
+	protected OCD ocd;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -90,86 +91,105 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 	 */
 	public EMap<String, String> getEventAttributes() {
 		if (eventAttributes == null) {
-			eventAttributes = new EcoreEMap<String,String>(TrackerPackage.Literals.EVENT_ATTRIBUTE, EventAttributeImpl.class, this, TrackerPackage.GENERIC_EVENT__EVENT_ATTRIBUTES);
+			eventAttributes = new EcoreEMap<String,String>(TrackerPackage.Literals.STRING_TO_STRING_MAP, StringToStringMapImpl.class, this, TrackerPackage.GENERIC_EVENT__EVENT_ATTRIBUTES);
 		}
 		return eventAttributes;
 	}
 
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EventSchema getEventSchema() {
-		if (eventSchema != null && eventSchema.eIsProxy()) {
-			InternalEObject oldEventSchema = (InternalEObject)eventSchema;
-			eventSchema = (EventSchema)eResolveProxy(oldEventSchema);
-			if (eventSchema != oldEventSchema) {
+	public OCD getOcd() {
+		if (ocd != null && ocd.eIsProxy()) {
+			InternalEObject oldOcd = (InternalEObject)ocd;
+			ocd = (OCD)eResolveProxy(oldOcd);
+			if (ocd != oldOcd) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackerPackage.GENERIC_EVENT__EVENT_SCHEMA, oldEventSchema, eventSchema));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackerPackage.GENERIC_EVENT__OCD, oldOcd, ocd));
 			}
 		}
-		return eventSchema;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EventSchema basicGetEventSchema() {
-		return eventSchema;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEventSchemaGen(EventSchema newEventSchema) {
-		EventSchema oldEventSchema = eventSchema;
-		eventSchema = newEventSchema;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.GENERIC_EVENT__EVENT_SCHEMA, oldEventSchema, eventSchema));
+		return ocd;
 	}
 	
+
 	/**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OCD basicGetOcd() {
+		return ocd;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOcdGen(OCD newOcd) {
+		OCD oldOcd = ocd;
+		ocd = newOcd;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.GENERIC_EVENT__OCD, oldOcd, ocd));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * When a new ObjectClassDefinition is set clear attributes if it is empty 
+	 * and build attributes if there are no preexisting ones.
+	 * 
+	 * TODO this method only creates a crude set of attributes, refactor it
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void setEventSchema(EventSchema newEventSchema) {
-		setEventSchemaGen( newEventSchema);
-		if(newEventSchema == null || newEventSchema.getEventAttributes().isEmpty()){
-			getEventAttributes().clear();
+	public void setOcd(OCD newOcd) {
+		setOcdGen(newOcd);
+		
+		if(newOcd == null || newOcd.getAttributeDefinitions(ObjectClassDefinition.ALL)==null){
+			//The newOcdref is null or empty: clear the current set of EventAttributes.
+			getEventAttributes().clear();//Is this right?
 			return;
 		}else if (getEventAttributes().isEmpty()) {
-			for (EventAttributeSchema eventAttributeSchema : newEventSchema.getEventAttributes()) {
-				EventAttributeImpl eventAttribute =new EventAttributeImpl();
-				eventAttribute.setKey(eventAttributeSchema.getName());
+			//There is metadata in the newOcdref and there are no EventAttributes
+			//Add entries for all the attributes -> Is this right?
+			for (AttributeDefinition attributeDefinition : newOcd.getAttributeDefinitions(ObjectClassDefinition.ALL)) {
+				StringToStringMapImpl eventAttribute =new StringToStringMapImpl();
+				eventAttribute.setKey(attributeDefinition.getName());
 				getEventAttributes().add(eventAttribute);
 			}
 			return;
 		}
 	}
-
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AttributeDefinition findAttributeDefinition(Map.Entry<String, String> eventAttribute) {
+		if(getOcd() ==null ){
+			return null;
+		}
+		
+		for (AttributeDefinition attributeDefinition : this.getOcd().getAttributeDefinitions(
+		ObjectClassDefinition.ALL)) {
+			if(eventAttribute.getKey().equals(attributeDefinition.getName())){
+					return attributeDefinition;
+			}
+		}
+		
+		return null;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * Implemented operation
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public EventAttributeSchema findSchema(Map.Entry<String, String> eventAttribute) {
-		if(getEventSchema() ==null ){
-			return null;
-		}
-		for (EventAttributeSchema eventAttributeSchema : this.getEventSchema().getEventAttributes()) {
-			if(eventAttribute.getKey().equals(eventAttributeSchema.getName())){
-				return eventAttributeSchema;
-			}
-		}
-		return null;
+	public String findName() {
+		return getOcd()==null?null:getOcd().getName(); 
 	}
 
 	/**
@@ -197,9 +217,9 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 			case TrackerPackage.GENERIC_EVENT__EVENT_ATTRIBUTES:
 				if (coreType) return getEventAttributes();
 				else return getEventAttributes().map();
-			case TrackerPackage.GENERIC_EVENT__EVENT_SCHEMA:
-				if (resolve) return getEventSchema();
-				return basicGetEventSchema();
+			case TrackerPackage.GENERIC_EVENT__OCD:
+				if (resolve) return getOcd();
+				return basicGetOcd();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -215,8 +235,8 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 			case TrackerPackage.GENERIC_EVENT__EVENT_ATTRIBUTES:
 				((EStructuralFeature.Setting)getEventAttributes()).set(newValue);
 				return;
-			case TrackerPackage.GENERIC_EVENT__EVENT_SCHEMA:
-				setEventSchema((EventSchema)newValue);
+			case TrackerPackage.GENERIC_EVENT__OCD:
+				setOcd((OCD)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -233,8 +253,8 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 			case TrackerPackage.GENERIC_EVENT__EVENT_ATTRIBUTES:
 				getEventAttributes().clear();
 				return;
-			case TrackerPackage.GENERIC_EVENT__EVENT_SCHEMA:
-				setEventSchema((EventSchema)null);
+			case TrackerPackage.GENERIC_EVENT__OCD:
+				setOcd((OCD)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -250,8 +270,8 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 		switch (featureID) {
 			case TrackerPackage.GENERIC_EVENT__EVENT_ATTRIBUTES:
 				return eventAttributes != null && !eventAttributes.isEmpty();
-			case TrackerPackage.GENERIC_EVENT__EVENT_SCHEMA:
-				return eventSchema != null;
+			case TrackerPackage.GENERIC_EVENT__OCD:
+				return ocd != null;
 		}
 		return super.eIsSet(featureID);
 	}

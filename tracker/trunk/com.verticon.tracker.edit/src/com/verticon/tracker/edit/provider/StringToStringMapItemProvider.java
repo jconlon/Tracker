@@ -6,13 +6,17 @@
 package com.verticon.tracker.edit.provider;
 
 
+import com.verticon.tracker.TrackerPackage;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -24,21 +28,19 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import com.verticon.tracker.TrackerPackage;
-
 /**
  * This is the item provider adapter for a {@link java.util.Map.Entry} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class EventAttributeItemProvider
+public class StringToStringMapItemProvider
 	extends ItemProviderAdapter
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
 		IItemPropertySource {
 	/**
 	 * <!-- begin-user-doc -->
@@ -53,7 +55,7 @@ public class EventAttributeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EventAttributeItemProvider(AdapterFactory adapterFactory) {
+	public StringToStringMapItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -85,10 +87,10 @@ public class EventAttributeItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_EventAttribute_key_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EventAttribute_key_feature", "_UI_EventAttribute_type"),
-				 TrackerPackage.Literals.EVENT_ATTRIBUTE__KEY,
-				 false,
+				 getString("_UI_StringToStringMap_key_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StringToStringMap_key_feature", "_UI_StringToStringMap_type"),
+				 TrackerPackage.Literals.STRING_TO_STRING_MAP__KEY,
+				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
@@ -107,9 +109,9 @@ public class EventAttributeItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_EventAttribute_value_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EventAttribute_value_feature", "_UI_EventAttribute_type"),
-				 TrackerPackage.Literals.EVENT_ATTRIBUTE__VALUE,
+				 getString("_UI_StringToStringMap_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StringToStringMap_value_feature", "_UI_StringToStringMap_type"),
+				 TrackerPackage.Literals.STRING_TO_STRING_MAP__VALUE,
 				 true,
 				 false,
 				 false,
@@ -119,14 +121,14 @@ public class EventAttributeItemProvider
 	}
 
 	/**
-	 * This returns EventAttribute.gif.
+	 * This returns StringToStringMap.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/EventAttribute"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/StringToStringMap"));
 	}
 
 	/**
@@ -137,8 +139,8 @@ public class EventAttributeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Map.Entry<?, ?> eventAttribute = (Map.Entry<?, ?>)object;
-		return "" + eventAttribute.getKey() + " -> " + eventAttribute.getValue();
+		Map.Entry<?, ?> stringToStringMap = (Map.Entry<?, ?>)object;
+		return "" + stringToStringMap.getKey() + " -> " + stringToStringMap.getValue();
 	}
 
 	/**
@@ -153,8 +155,8 @@ public class EventAttributeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Map.Entry.class)) {
-			case TrackerPackage.EVENT_ATTRIBUTE__KEY:
-			case TrackerPackage.EVENT_ATTRIBUTE__VALUE:
+			case TrackerPackage.STRING_TO_STRING_MAP__KEY:
+			case TrackerPackage.STRING_TO_STRING_MAP__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
