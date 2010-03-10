@@ -9,9 +9,7 @@ package com.verticon.tracker.validation;
 import org.eclipse.emf.common.util.EList;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.EventSchema;
 import com.verticon.tracker.Location;
-import com.verticon.tracker.Schema;
 import com.verticon.tracker.Tag;
 
 /**
@@ -32,9 +30,7 @@ public interface PremisesValidator {
 
 	boolean validateUri(String value);
 
-	boolean validateSchema(Schema value);
-
+	
 	boolean validateName(String value);
 
-	boolean validateEventSchemas(EList<EventSchema> value);
 }

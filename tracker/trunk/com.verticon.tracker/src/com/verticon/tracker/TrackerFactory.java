@@ -213,33 +213,6 @@ public interface TrackerFactory extends EFactory {
 	GenericEvent createGenericEvent();
 
 	/**
-	 * Returns a new object of class '<em>Event Schema</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Event Schema</em>'.
-	 * @generated
-	 */
-	EventSchema createEventSchema();
-
-	/**
-	 * Returns a new object of class '<em>Event Attribute Schema</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Event Attribute Schema</em>'.
-	 * @generated
-	 */
-	EventAttributeSchema createEventAttributeSchema();
-
-	/**
-	 * Returns a new object of class '<em>Schema</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Schema</em>'.
-	 * @generated
-	 */
-	Schema createSchema();
-
-	/**
 	 * Returns a new object of class '<em>US Beef Grading</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -265,6 +238,33 @@ public interface TrackerFactory extends EFactory {
 	 * @generated
 	 */
 	USSwineGrading createUSSwineGrading();
+
+	/**
+	 * Returns a new object of class '<em>Policy</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Policy</em>'.
+	 * @generated
+	 */
+	Policy createPolicy();
+
+	/**
+	 * Returns a new object of class '<em>Event Inclusion</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Event Inclusion</em>'.
+	 * @generated
+	 */
+	EventInclusion createEventInclusion();
+
+	/**
+	 * Returns a new object of class '<em>Generic Event Inclusion</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Generic Event Inclusion</em>'.
+	 * @generated
+	 */
+	GenericEventInclusion createGenericEventInclusion();
 
 	/**
 	 * Returns a new object of class '<em>Premises</em>'.

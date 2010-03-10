@@ -493,4 +493,13 @@ public interface Animal extends EObject {
 	 */
 	Age getAge();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.Boolean" ocdIdDataType="org.eclipse.emf.ecore.xml.type.String"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if(eContainer instanceof <%Premises%>){\n\treturn ((Premises)eContainer).canContain(\n\t\t\teventType, ocdId, getType());\n}\nreturn Boolean.TRUE;'"
+	 * @generated
+	 */
+	boolean canContain(EventType eventType, String ocdId);
+
 } // Animal

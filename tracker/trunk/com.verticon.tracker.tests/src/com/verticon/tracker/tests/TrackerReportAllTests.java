@@ -47,12 +47,12 @@ public class TrackerReportAllTests extends TestSuite {
 		TestSuite suite = new TrackerReportAllTests("Tracker Core Tests");
 		suite.addTest(TrackerTests.suite());
 		
-		suite.addTestSuite(EventAttributeSchemaTest.class);
+		
 		suite.addTestSuite(EventAttributeTest.class);
 		suite.addTestSuite(EventHistoryAdapterFactoryTest.class);
-		suite.addTestSuite(EventSchemaTest.class);
+		
 		suite.addTestSuite(LocationTest.class);
-		suite.addTestSuite(SchemaTest.class);
+		
 		suite.addTestSuite(TrackerFactoryTest.class);
 		
 		suite.addTestSuite(CalendarDateDurationTest.class);

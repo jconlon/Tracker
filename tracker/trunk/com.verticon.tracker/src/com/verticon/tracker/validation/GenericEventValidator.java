@@ -8,8 +8,6 @@ package com.verticon.tracker.validation;
 
 import org.eclipse.emf.common.util.EMap;
 
-import com.verticon.tracker.EventSchema;
-
 /**
  * A sample validator interface for {@link com.verticon.tracker.GenericEvent}.
  * This doesn't really do anything, and it's not a real EMF artifact.
@@ -20,5 +18,5 @@ public interface GenericEventValidator {
 	boolean validate();
 
 	boolean validateEventAttributes(EMap<String, String> value);
-	boolean validateEventSchema(EventSchema value);
 }
+	

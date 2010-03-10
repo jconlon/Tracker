@@ -6,39 +6,41 @@
 package com.verticon.tracker.edit.provider;
 
 
+import com.verticon.tracker.GenericEventInclusion;
+import com.verticon.tracker.TrackerPackage;
+
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.ecore.EStructuralFeature;
+
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import com.verticon.tracker.Schema;
-import com.verticon.tracker.TrackerFactory;
-import com.verticon.tracker.TrackerPackage;
-
 /**
- * This is the item provider adapter for a {@link com.verticon.tracker.Schema} object.
+ * This is the item provider adapter for a {@link com.verticon.tracker.GenericEventInclusion} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class SchemaItemProvider
+public class GenericEventInclusionItemProvider
 	extends ItemProviderAdapter
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
 		IItemPropertySource {
 	/**
 	 * <!-- begin-user-doc -->
@@ -53,7 +55,7 @@ public class SchemaItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SchemaItemProvider(AdapterFactory adapterFactory) {
+	public GenericEventInclusionItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -68,49 +70,65 @@ public class SchemaItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addSpeciesPropertyDescriptor(object);
+			addOcdPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * This adds a property descriptor for the Species feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(TrackerPackage.Literals.SCHEMA__EVENT_SCHEMAS);
-		}
-		return childrenFeatures;
+	protected void addSpeciesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_GenericEventInclusion_species_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_GenericEventInclusion_species_feature", "_UI_GenericEventInclusion_type"),
+				 TrackerPackage.Literals.GENERIC_EVENT_INCLUSION__SPECIES,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
+	 * This adds a property descriptor for the Ocd feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
+	protected void addOcdPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_GenericEventInclusion_ocd_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_GenericEventInclusion_ocd_feature", "_UI_GenericEventInclusion_type"),
+				 TrackerPackage.Literals.GENERIC_EVENT_INCLUSION__OCD,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This returns Schema.gif.
+	 * This returns GenericEventInclusion.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Schema"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/GenericEventInclusion"));
 	}
 
 	/**
@@ -121,7 +139,7 @@ public class SchemaItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Schema_type");
+		return getString("_UI_GenericEventInclusion_type");
 	}
 
 	/**
@@ -135,9 +153,9 @@ public class SchemaItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Schema.class)) {
-			case TrackerPackage.SCHEMA__EVENT_SCHEMAS:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+		switch (notification.getFeatureID(GenericEventInclusion.class)) {
+			case TrackerPackage.GENERIC_EVENT_INCLUSION__SPECIES:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -153,11 +171,6 @@ public class SchemaItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.SCHEMA__EVENT_SCHEMAS,
-				 TrackerFactory.eINSTANCE.createEventSchema()));
 	}
 
 	/**

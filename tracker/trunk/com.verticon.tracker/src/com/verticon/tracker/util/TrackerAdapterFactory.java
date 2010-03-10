@@ -27,10 +27,10 @@ import com.verticon.tracker.Caprine;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Equine;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventAttributeSchema;
-import com.verticon.tracker.EventSchema;
+import com.verticon.tracker.EventInclusion;
 import com.verticon.tracker.Exported;
 import com.verticon.tracker.GenericEvent;
+import com.verticon.tracker.GenericEventInclusion;
 import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
@@ -43,9 +43,9 @@ import com.verticon.tracker.MilkTest;
 import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.Ovine;
+import com.verticon.tracker.Policy;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
-import com.verticon.tracker.Schema;
 import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Slaughtered;
 import com.verticon.tracker.Swine;
@@ -275,18 +275,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 				return createStringToStringMapAdapter();
 			}
 			@Override
-			public Adapter caseEventSchema(EventSchema object) {
-				return createEventSchemaAdapter();
-			}
-			@Override
-			public Adapter caseEventAttributeSchema(EventAttributeSchema object) {
-				return createEventAttributeSchemaAdapter();
-			}
-			@Override
-			public Adapter caseSchema(Schema object) {
-				return createSchemaAdapter();
-			}
-			@Override
 			public Adapter caseUSBeefGrading(USBeefGrading object) {
 				return createUSBeefGradingAdapter();
 			}
@@ -297,6 +285,18 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseUSSwineGrading(USSwineGrading object) {
 				return createUSSwineGradingAdapter();
+			}
+			@Override
+			public Adapter casePolicy(Policy object) {
+				return createPolicyAdapter();
+			}
+			@Override
+			public Adapter caseEventInclusion(EventInclusion object) {
+				return createEventInclusionAdapter();
+			}
+			@Override
+			public Adapter caseGenericEventInclusion(GenericEventInclusion object) {
+				return createGenericEventInclusionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -655,48 +655,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.EventSchema <em>Event Schema</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.verticon.tracker.EventSchema
-	 * @generated
-	 */
-	public Adapter createEventSchemaAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.EventAttributeSchema <em>Event Attribute Schema</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.verticon.tracker.EventAttributeSchema
-	 * @generated
-	 */
-	public Adapter createEventAttributeSchemaAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.Schema <em>Schema</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.verticon.tracker.Schema
-	 * @generated
-	 */
-	public Adapter createSchemaAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.USBeefGrading <em>US Beef Grading</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -735,6 +693,48 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUSSwineGradingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.Policy <em>Policy</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.Policy
+	 * @generated
+	 */
+	public Adapter createPolicyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.EventInclusion <em>Event Inclusion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.EventInclusion
+	 * @generated
+	 */
+	public Adapter createEventInclusionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.GenericEventInclusion <em>Generic Event Inclusion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.GenericEventInclusion
+	 * @generated
+	 */
+	public Adapter createGenericEventInclusionAdapter() {
 		return null;
 	}
 

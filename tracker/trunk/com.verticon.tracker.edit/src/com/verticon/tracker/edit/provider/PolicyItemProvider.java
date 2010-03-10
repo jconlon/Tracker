@@ -6,12 +6,18 @@
 package com.verticon.tracker.edit.provider;
 
 
+import com.verticon.tracker.Policy;
+import com.verticon.tracker.TrackerFactory;
+import com.verticon.tracker.TrackerPackage;
+
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -24,23 +30,19 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import com.verticon.tracker.EventSchema;
-import com.verticon.tracker.TrackerFactory;
-import com.verticon.tracker.TrackerPackage;
-
 /**
- * This is the item provider adapter for a {@link com.verticon.tracker.EventSchema} object.
+ * This is the item provider adapter for a {@link com.verticon.tracker.Policy} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class EventSchemaItemProvider
+public class PolicyItemProvider
 	extends ItemProviderAdapter
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
 		IItemPropertySource {
 	/**
 	 * <!-- begin-user-doc -->
@@ -55,7 +57,7 @@ public class EventSchemaItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EventSchemaItemProvider(AdapterFactory adapterFactory) {
+	public PolicyItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -70,99 +72,30 @@ public class EventSchemaItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
-			addDescriptionPropertyDescriptor(object);
-			addAnimalTypePropertyDescriptor(object);
-			addEventAttributesPropertyDescriptor(object);
+			addIncludedSpeciesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
+	 * This adds a property descriptor for the Included Species feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamePropertyDescriptor(Object object) {
+	protected void addIncludedSpeciesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_EventSchema_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EventSchema_name_feature", "_UI_EventSchema_type"),
-				 TrackerPackage.Literals.EVENT_SCHEMA__NAME,
+				 getString("_UI_Policy_includedSpecies_feature"),
+				 getString("_UI_Policy_includedSpecies_description"),
+				 TrackerPackage.Literals.POLICY__INCLUDED_SPECIES,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Description feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDescriptionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_EventSchema_description_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EventSchema_description_feature", "_UI_EventSchema_type"),
-				 TrackerPackage.Literals.EVENT_SCHEMA__DESCRIPTION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Animal Type feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAnimalTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_EventSchema_animalType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EventSchema_animalType_feature", "_UI_EventSchema_type"),
-				 TrackerPackage.Literals.EVENT_SCHEMA__ANIMAL_TYPE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Event Attributes feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addEventAttributesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_EventSchema_eventAttributes_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EventSchema_eventAttributes_feature", "_UI_EventSchema_type"),
-				 TrackerPackage.Literals.EVENT_SCHEMA__EVENT_ATTRIBUTES,
-				 false,
-				 true,
-				 false,
-				 null,
-				 null,
+				 getString("_UI_InclusionPolicyPropertyCategory"),
 				 null));
 	}
 
@@ -178,7 +111,8 @@ public class EventSchemaItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TrackerPackage.Literals.EVENT_SCHEMA__EVENT_ATTRIBUTES);
+			childrenFeatures.add(TrackerPackage.Literals.POLICY__INCLUDED_EVENTS);
+			childrenFeatures.add(TrackerPackage.Literals.POLICY__INCLUDED_GENERIC_EVENTS);
 		}
 		return childrenFeatures;
 	}
@@ -197,14 +131,14 @@ public class EventSchemaItemProvider
 	}
 
 	/**
-	 * This returns EventSchema.gif.
+	 * This returns Policy.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/EventSchema"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Policy"));
 	}
 
 	/**
@@ -215,10 +149,7 @@ public class EventSchemaItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((EventSchema)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_EventSchema_type") :
-			getString("_UI_EventSchema_type") + " " + label;
+		return getString("_UI_Policy_type");
 	}
 
 	/**
@@ -232,13 +163,12 @@ public class EventSchemaItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(EventSchema.class)) {
-			case TrackerPackage.EVENT_SCHEMA__NAME:
-			case TrackerPackage.EVENT_SCHEMA__DESCRIPTION:
-			case TrackerPackage.EVENT_SCHEMA__ANIMAL_TYPE:
+		switch (notification.getFeatureID(Policy.class)) {
+			case TrackerPackage.POLICY__INCLUDED_SPECIES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case TrackerPackage.EVENT_SCHEMA__EVENT_ATTRIBUTES:
+			case TrackerPackage.POLICY__INCLUDED_EVENTS:
+			case TrackerPackage.POLICY__INCLUDED_GENERIC_EVENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -258,8 +188,13 @@ public class EventSchemaItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TrackerPackage.Literals.EVENT_SCHEMA__EVENT_ATTRIBUTES,
-				 TrackerFactory.eINSTANCE.createEventAttributeSchema()));
+				(TrackerPackage.Literals.POLICY__INCLUDED_EVENTS,
+				 TrackerFactory.eINSTANCE.createEventInclusion()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TrackerPackage.Literals.POLICY__INCLUDED_GENERIC_EVENTS,
+				 TrackerFactory.eINSTANCE.createGenericEventInclusion()));
 	}
 
 	/**

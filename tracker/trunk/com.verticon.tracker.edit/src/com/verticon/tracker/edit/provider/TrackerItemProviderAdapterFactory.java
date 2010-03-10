@@ -567,75 +567,6 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.EventSchema} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected EventSchemaItemProvider eventSchemaItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.verticon.tracker.EventSchema}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createEventSchemaAdapter() {
-		if (eventSchemaItemProvider == null) {
-			eventSchemaItemProvider = new EventSchemaItemProvider(this);
-		}
-
-		return eventSchemaItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.EventAttributeSchema} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected EventAttributeSchemaItemProvider eventAttributeSchemaItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.verticon.tracker.EventAttributeSchema}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createEventAttributeSchemaAdapter() {
-		if (eventAttributeSchemaItemProvider == null) {
-			eventAttributeSchemaItemProvider = new EventAttributeSchemaItemProvider(this);
-		}
-
-		return eventAttributeSchemaItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Schema} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SchemaItemProvider schemaItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link com.verticon.tracker.Schema}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSchemaAdapter() {
-		if (schemaItemProvider == null) {
-			schemaItemProvider = new SchemaItemProvider(this);
-		}
-
-		return schemaItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.USBeefGrading} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -702,6 +633,75 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		}
 
 		return usSwineGradingItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Policy} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PolicyItemProvider policyItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.Policy}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPolicyAdapter() {
+		if (policyItemProvider == null) {
+			policyItemProvider = new PolicyItemProvider(this);
+		}
+
+		return policyItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.EventInclusion} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EventInclusionItemProvider eventInclusionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.EventInclusion}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEventInclusionAdapter() {
+		if (eventInclusionItemProvider == null) {
+			eventInclusionItemProvider = new EventInclusionItemProvider(this);
+		}
+
+		return eventInclusionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.GenericEventInclusion} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected GenericEventInclusionItemProvider genericEventInclusionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.GenericEventInclusion}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createGenericEventInclusionAdapter() {
+		if (genericEventInclusionItemProvider == null) {
+			genericEventInclusionItemProvider = new GenericEventInclusionItemProvider(this);
+		}
+
+		return genericEventInclusionItemProvider;
 	}
 
 	/**
@@ -1160,12 +1160,12 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (herdTestItemProvider != null) herdTestItemProvider.dispose();
 		if (genericEventItemProvider != null) genericEventItemProvider.dispose();
 		if (stringToStringMapItemProvider != null) stringToStringMapItemProvider.dispose();
-		if (eventSchemaItemProvider != null) eventSchemaItemProvider.dispose();
-		if (eventAttributeSchemaItemProvider != null) eventAttributeSchemaItemProvider.dispose();
-		if (schemaItemProvider != null) schemaItemProvider.dispose();
 		if (usBeefGradingItemProvider != null) usBeefGradingItemProvider.dispose();
 		if (usOvineGradingItemProvider != null) usOvineGradingItemProvider.dispose();
 		if (usSwineGradingItemProvider != null) usSwineGradingItemProvider.dispose();
+		if (policyItemProvider != null) policyItemProvider.dispose();
+		if (eventInclusionItemProvider != null) eventInclusionItemProvider.dispose();
+		if (genericEventInclusionItemProvider != null) genericEventInclusionItemProvider.dispose();
 	}
 
 }

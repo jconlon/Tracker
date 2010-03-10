@@ -26,10 +26,10 @@ import com.verticon.tracker.Caprine;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Equine;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventAttributeSchema;
-import com.verticon.tracker.EventSchema;
+import com.verticon.tracker.EventInclusion;
 import com.verticon.tracker.Exported;
 import com.verticon.tracker.GenericEvent;
+import com.verticon.tracker.GenericEventInclusion;
 import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
@@ -42,9 +42,9 @@ import com.verticon.tracker.MilkTest;
 import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.Ovine;
+import com.verticon.tracker.Policy;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
-import com.verticon.tracker.Schema;
 import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Slaughtered;
 import com.verticon.tracker.Swine;
@@ -404,24 +404,6 @@ public class TrackerSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TrackerPackage.EVENT_SCHEMA: {
-				EventSchema eventSchema = (EventSchema)theEObject;
-				T result = caseEventSchema(eventSchema);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TrackerPackage.EVENT_ATTRIBUTE_SCHEMA: {
-				EventAttributeSchema eventAttributeSchema = (EventAttributeSchema)theEObject;
-				T result = caseEventAttributeSchema(eventAttributeSchema);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TrackerPackage.SCHEMA: {
-				Schema schema = (Schema)theEObject;
-				T result = caseSchema(schema);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case TrackerPackage.US_BEEF_GRADING: {
 				USBeefGrading usBeefGrading = (USBeefGrading)theEObject;
 				T result = caseUSBeefGrading(usBeefGrading);
@@ -440,6 +422,24 @@ public class TrackerSwitch<T> {
 				USSwineGrading usSwineGrading = (USSwineGrading)theEObject;
 				T result = caseUSSwineGrading(usSwineGrading);
 				if (result == null) result = caseEvent(usSwineGrading);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TrackerPackage.POLICY: {
+				Policy policy = (Policy)theEObject;
+				T result = casePolicy(policy);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TrackerPackage.EVENT_INCLUSION: {
+				EventInclusion eventInclusion = (EventInclusion)theEObject;
+				T result = caseEventInclusion(eventInclusion);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TrackerPackage.GENERIC_EVENT_INCLUSION: {
+				GenericEventInclusion genericEventInclusion = (GenericEventInclusion)theEObject;
+				T result = caseGenericEventInclusion(genericEventInclusion);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -808,51 +808,6 @@ public class TrackerSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Event Schema</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Event Schema</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEventSchema(EventSchema object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Event Attribute Schema</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Event Attribute Schema</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEventAttributeSchema(EventAttributeSchema object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Schema</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Schema</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSchema(Schema object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>US Beef Grading</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -894,6 +849,51 @@ public class TrackerSwitch<T> {
 	 * @generated
 	 */
 	public T caseUSSwineGrading(USSwineGrading object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Policy</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Policy</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePolicy(Policy object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event Inclusion</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event Inclusion</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventInclusion(EventInclusion object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Generic Event Inclusion</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Generic Event Inclusion</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGenericEventInclusion(GenericEventInclusion object) {
 		return null;
 	}
 

@@ -26,6 +26,13 @@
       </eAnnotations>
     </eOperations>
     <eOperations name="getAge" eType="#//Age"/>
+    <eOperations name="canContain" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="if(eContainer instanceof &lt;%Premises%>){&#xA;&#x9;return ((Premises)eContainer).canContain(&#xA;&#x9;&#x9;&#x9;eventType, ocdId, getType());&#xA;}&#xA;return Boolean.TRUE;"/>
+      </eAnnotations>
+      <eParameters name="eventType" eType="#//EventType"/>
+      <eParameters name="ocdId" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sex" eType="#//Sex" defaultValueLiteral="Unspecified"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tags" lowerBound="1" upperBound="-1"
@@ -71,10 +78,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="Tag">
     <eOperations name="canContain" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="return Boolean.TRUE;"/>
+        <details key="body" value="if(eContainer instanceof Animal){&#xA;&#x9;return ((Animal)eContainer).canContain(eventType, ocdId);&#xA;}else if (eContainer instanceof Premises){&#xA;&#x9;if(eventType!=&lt;%EventType%>.TAG_APPLIED){&#xA;&#x9;&#x9;return Boolean.FALSE;&#xA;&#x9;}&#xA;}&#xA;return Boolean.TRUE;"/>
       </eAnnotations>
-      <eParameters name="feature" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"/>
-      <eParameters name="qualifier" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+      <eParameters name="eventType" eType="#//EventType"/>
+      <eParameters name="ocdId" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="usainNumberUsed" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
@@ -115,6 +122,14 @@
       </eParameters>
       <eParameters name="animalTemplate" eType="#//Animal"/>
     </eOperations>
+    <eOperations name="canContain" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="if(getPolicy()!=null){&#xA;&#x9;return getPolicy().canContain( eventType,  ocdId,  animalType);&#xA;}&#xA;return Boolean.TRUE;"/>
+      </eAnnotations>
+      <eParameters name="eventType" eType="#//EventType"/>
+      <eParameters name="ocdId" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+      <eParameters name="animalType" eType="#//AnimalType"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="premisesId" lowerBound="1"
         eType="#//PremisesIdNumber"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="emailContact" lowerBound="1"
@@ -126,9 +141,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="locations" upperBound="-1"
         eType="#//Location" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="#//URI"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="schema" eType="#//Schema"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="policy" eType="#//Policy"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="PremisesIdNumber" instanceClassName="java.lang.String">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -603,16 +618,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EventSchema">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="animalType" upperBound="-1"
-        eType="#//AnimalType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eventAttributes" lowerBound="1"
-        upperBound="-1" eType="#//EventAttributeSchema" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="AnimalType">
     <eLiterals name="Unspecified" literal=""/>
     <eLiterals name="Swine" value="2"/>
@@ -623,21 +628,10 @@
     <eLiterals name="BovineDairy" value="6"/>
     <eLiterals name="BovineBison" value="7"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EventAttributeSchema">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" lowerBound="1"
-        eType="#//EventDataType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EventDataType">
     <eLiterals name="String"/>
     <eLiterals name="Integer" value="1"/>
     <eLiterals name="Boolean" value="2"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Schema">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eventSchemas" upperBound="-1"
-        eType="#//EventSchema" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="USQualityGrade">
     <eLiterals name="Unspecified" literal=""/>
@@ -682,5 +676,50 @@
   <eClassifiers xsi:type="ecore:EEnum" name="WeightMeasurementUnit">
     <eLiterals name="pound" literal="pound"/>
     <eLiterals name="kilogram" value="1" literal="kilogram"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Policy">
+    <eOperations name="canContain" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="//Filter species if there are some in the list.  If not pass all species to the next filter.&#xA;if(!getIncludedSpecies().isEmpty()){&#xA;&#x9;//Filter out species that are not included &#xA;        boolean result = false;&#xA;&#x9;for (AnimalType includedAnimalType : getIncludedSpecies()) {&#xA;&#x9;&#x9;if(animalType==includedAnimalType){&#xA;                        result=true;&#xA;&#x9;&#x9;&#x9;break;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;        if(!result){&#xA;                //There was a list of included species but this one was not in it.&#xA;&#x9;&#x9;return Boolean.FALSE;&#xA;        }&#xA;}&#xA;if(ocdId !=null){&#xA;        // If the includedGeneric list is empty pass all GenericEvents.&#xA;       if(getIncludedGenericEvents().isEmpty()){&#xA;           return Boolean.TRUE;&#xA;       }&#xA;      &#xA;        // If there are includedGeneric events in the list.  &#xA;        // See if the GenericEvent is in the list.  Pass it if it has there is an species match&#xA;&#x9;for (GenericEventInclusion genericEventInclusion : getIncludedGenericEvents()) {&#xA;&#x9;&#x9;if(genericEventInclusion.getOcd().getID().equals(ocdId)){&#xA;&#x9;&#x9;&#x9;for (AnimalType includedAnimalType : genericEventInclusion.getSpecies()) {&#xA;&#x9;&#x9;&#x9;&#x9;if(animalType==includedAnimalType){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return Boolean.TRUE;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;                        //There was a ocdId match but no animal&#xA;&#x9;&#x9;&#x9;return Boolean.FALSE;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;        //There was no match in the included list pass it.&#xA;}else if(!getIncludedEvents().isEmpty()){&#xA;&#x9;//Filter events&#xA;&#x9;for (EventInclusion eventInclusion : getIncludedEvents()) {&#xA;&#x9;&#x9;//Find the Event&#xA;&#x9;&#x9;for (EventType includedEventType : eventInclusion.getEvent()) {&#xA;&#x9;&#x9;&#x9;if(eventType==includedEventType){&#xA;&#x9;&#x9;&#x9;&#x9;//Find the animal&#xA;&#x9;&#x9;&#x9;&#x9;for (AnimalType includedAnimalType : eventInclusion.getSpecies()) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if(animalType==includedAnimalType){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;return Boolean.TRUE;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;return Boolean.FALSE;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;return Boolean.TRUE;"/>
+      </eAnnotations>
+      <eParameters name="eventType" eType="#//EventType"/>
+      <eParameters name="ocdId" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+      <eParameters name="animalType" eType="#//AnimalType"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="includedSpecies" upperBound="-1"
+        eType="#//AnimalType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="includedEvents" upperBound="-1"
+        eType="#//EventInclusion" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="includedGenericEvents"
+        upperBound="-1" eType="#//GenericEventInclusion" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventInclusion">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="species" lowerBound="1"
+        upperBound="-1" eType="#//AnimalType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="event" lowerBound="1" upperBound="-1"
+        eType="#//EventType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GenericEventInclusion">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="species" lowerBound="1"
+        upperBound="-1" eType="#//AnimalType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ocd" lowerBound="1" eType="ecore:EClass ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EventType">
+    <eLiterals name="TagAllocated"/>
+    <eLiterals name="TagApplied" value="1"/>
+    <eLiterals name="MovedIn" value="2"/>
+    <eLiterals name="MovedOut" value="3"/>
+    <eLiterals name="Exported" value="4"/>
+    <eLiterals name="ICVI" value="5"/>
+    <eLiterals name="Died" value="6"/>
+    <eLiterals name="AnimalMissing" value="7"/>
+    <eLiterals name="Slaughtered" value="8"/>
+    <eLiterals name="Sighting" value="9"/>
+    <eLiterals name="TagRetired" value="10"/>
+    <eLiterals name="WeighIn" value="11"/>
+    <eLiterals name="GenericEvent" value="12"/>
+    <eLiterals name="LostTag" value="13"/>
+    <eLiterals name="ReplacedTag" value="14"/>
+    <eLiterals name="Imported" value="15"/>
   </eClassifiers>
 </ecore:EPackage>

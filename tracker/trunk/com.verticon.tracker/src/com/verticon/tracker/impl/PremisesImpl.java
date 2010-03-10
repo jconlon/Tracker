@@ -20,11 +20,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.EventHistory;
+import com.verticon.tracker.EventType;
 import com.verticon.tracker.Location;
+import com.verticon.tracker.Policy;
 import com.verticon.tracker.Premises;
-import com.verticon.tracker.Schema;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.util.EventHistoryAdapterFactory;
@@ -42,8 +44,8 @@ import com.verticon.tracker.util.EventHistoryAdapterFactory;
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getUnAppliedTags <em>Un Applied Tags</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getLocations <em>Locations</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getUri <em>Uri</em>}</li>
- *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getSchema <em>Schema</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getName <em>Name</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getPolicy <em>Policy</em>}</li>
  * </ul>
  * </p>
  *
@@ -160,16 +162,6 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	protected String uri = URI_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSchema() <em>Schema</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSchema()
-	 * @generated
-	 * @ordered
-	 */
-	protected Schema schema;
-
-	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -188,6 +180,16 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getPolicy() <em>Policy</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPolicy()
+	 * @generated
+	 * @ordered
+	 */
+	protected Policy policy;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -312,49 +314,6 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Schema getSchema() {
-		return schema;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetSchema(Schema newSchema, NotificationChain msgs) {
-		Schema oldSchema = schema;
-		schema = newSchema;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__SCHEMA, oldSchema, newSchema);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSchema(Schema newSchema) {
-		if (newSchema != schema) {
-			NotificationChain msgs = null;
-			if (schema != null)
-				msgs = ((InternalEObject)schema).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__SCHEMA, null, msgs);
-			if (newSchema != null)
-				msgs = ((InternalEObject)newSchema).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__SCHEMA, null, msgs);
-			msgs = basicSetSchema(newSchema, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__SCHEMA, newSchema, newSchema));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getName() {
 		return name;
 	}
@@ -369,6 +328,49 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Policy getPolicy() {
+		return policy;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetPolicy(Policy newPolicy, NotificationChain msgs) {
+		Policy oldPolicy = policy;
+		policy = newPolicy;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__POLICY, oldPolicy, newPolicy);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPolicy(Policy newPolicy) {
+		if (newPolicy != policy) {
+			NotificationChain msgs = null;
+			if (policy != null)
+				msgs = ((InternalEObject)policy).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__POLICY, null, msgs);
+			if (newPolicy != null)
+				msgs = ((InternalEObject)newPolicy).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__POLICY, null, msgs);
+			msgs = basicSetPolicy(newPolicy, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__POLICY, newPolicy, newPolicy));
 	}
 
 	/**
@@ -487,6 +489,18 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean canContain(EventType eventType, String ocdId, AnimalType animalType) {
+		if(getPolicy()!=null){
+			return getPolicy().canContain( eventType,  ocdId,  animalType);
+		}
+		return Boolean.TRUE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -496,8 +510,8 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return ((InternalEList<?>)getUnAppliedTags()).basicRemove(otherEnd, msgs);
 			case TrackerPackage.PREMISES__LOCATIONS:
 				return ((InternalEList<?>)getLocations()).basicRemove(otherEnd, msgs);
-			case TrackerPackage.PREMISES__SCHEMA:
-				return basicSetSchema(null, msgs);
+			case TrackerPackage.PREMISES__POLICY:
+				return basicSetPolicy(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -522,10 +536,10 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return getLocations();
 			case TrackerPackage.PREMISES__URI:
 				return getUri();
-			case TrackerPackage.PREMISES__SCHEMA:
-				return getSchema();
 			case TrackerPackage.PREMISES__NAME:
 				return getName();
+			case TrackerPackage.PREMISES__POLICY:
+				return getPolicy();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -560,11 +574,11 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 			case TrackerPackage.PREMISES__URI:
 				setUri((String)newValue);
 				return;
-			case TrackerPackage.PREMISES__SCHEMA:
-				setSchema((Schema)newValue);
-				return;
 			case TrackerPackage.PREMISES__NAME:
 				setName((String)newValue);
+				return;
+			case TrackerPackage.PREMISES__POLICY:
+				setPolicy((Policy)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -596,11 +610,11 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 			case TrackerPackage.PREMISES__URI:
 				setUri(URI_EDEFAULT);
 				return;
-			case TrackerPackage.PREMISES__SCHEMA:
-				setSchema((Schema)null);
-				return;
 			case TrackerPackage.PREMISES__NAME:
 				setName(NAME_EDEFAULT);
+				return;
+			case TrackerPackage.PREMISES__POLICY:
+				setPolicy((Policy)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -626,10 +640,10 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return locations != null && !locations.isEmpty();
 			case TrackerPackage.PREMISES__URI:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
-			case TrackerPackage.PREMISES__SCHEMA:
-				return schema != null;
 			case TrackerPackage.PREMISES__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case TrackerPackage.PREMISES__POLICY:
+				return policy != null;
 		}
 		return super.eIsSet(featureID);
 	}
