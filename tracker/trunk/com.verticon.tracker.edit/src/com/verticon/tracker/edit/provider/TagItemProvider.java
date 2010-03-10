@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -36,12 +35,12 @@ import com.verticon.osgi.metatype.MetaData;
 import com.verticon.osgi.metatype.OCD;
 import com.verticon.osgi.metatype.util.MetatypeSwitch;
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.BovineDairy;
 import com.verticon.tracker.Caprine;
 import com.verticon.tracker.Equine;
+import com.verticon.tracker.EventType;
 import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.Premises;
@@ -240,6 +239,7 @@ public class TagItemProvider
 	 * Modified to distinguish and filter species unique events.
 	 * <!-- end-user-doc -->
 	 * TODO Add all new events from model to this method
+	 * TODO Refactor for Policy
 	 * @generated NOT
 	 */
 	@Override
@@ -258,115 +258,146 @@ public class TagItemProvider
 		}
 		
 		
-
+		if(tag.canContain(EventType.TAG_APPLIED, null)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createTagApplied()));
+		}
 
+		if(tag.canContain(EventType.MOVED_IN, null)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createMovedIn()));
-
+		}
+		
+		if(tag.canContain(EventType.MOVED_OUT, null)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createMovedOut()));
+		}
 
+		if(tag.canContain(EventType.LOST_TAG, null)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createLostTag()));
+		}
 
+		if(tag.canContain(EventType.REPLACED_TAG, null)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createReplacedTag()));
-
+		}
+		if(tag.canContain(EventType.IMPORTED, null)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createImported()));
-
+		}
+		if(tag.canContain(EventType.EXPORTED, null)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createExported()));
-
+		}
+		
+		if(tag.canContain(EventType.SIGHTING, null)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createSighting()));
+		}
 
+		if(tag.canContain(EventType.SLAUGHTERED, null)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createSlaughtered()));
+		}
 
+		if(tag.canContain(EventType.DIED, null)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createDied()));
+		}
 
+		if(tag.canContain(EventType.TAG_RETIRED, null)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createTagRetired()));
-
+		}
+		
+		if(tag.canContain(EventType.ANIMAL_MISSING, null)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createAnimalMissing()));
+		}
 
+		if(tag.canContain(EventType.ICVI, null)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createICVI()));
+		}
 
+		if(tag.canContain(EventType.WEIGH_IN, null)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createWeighIn()));
+		}
 
+		//TODO Remove and replace with generic event
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createMedicalCondition()));
+		
 
+		//TODO Remove and replace with generic event
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createMedicalTreatment()));
 
-		
+		//TODO Remove and replace with generic event
 		newChildDescriptors.add
 		(createChildParameter
 			(TrackerPackage.Literals.TAG__EVENTS,
 			 TrackerFactory.eINSTANCE.createBirthDefect()));
 
+		//TODO Remove and replace with generic event
 		newChildDescriptors.add
 		(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 						TrackerFactory.eINSTANCE.createMastitis()));
 
+		//TODO Remove and replace with generic event
 		newChildDescriptors.add
 		(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 						TrackerFactory.eINSTANCE.createHerdTest()));
 		
-		addGenericEventChildDescriptors(newChildDescriptors, tag);
+		addGenericEventChildern(newChildDescriptors, tag);
 		
 		//This is what is modified
-		addChildrenBasedOnTagAnimal(newChildDescriptors, tag);
+		addChildrenBasedOnAnimalSpecies(newChildDescriptors, tag);
 		
 	}
 
 	/**
 	 * @param newChildDescriptors
 	 * @param object
+	 * @deprecated This should be removed when species appropriate events are replaced with Generic Events
 	 */
-	private void addChildrenBasedOnTagAnimal(
+	private void addChildrenBasedOnAnimalSpecies(
 			final Collection<Object> newChildDescriptors, Tag tag) {
 		
 		if(tag==null){
@@ -499,19 +530,20 @@ public class TagItemProvider
 			}
 		};
 
+		//Creates ch
 		visitor.doSwitch(tag.eContainer());
 	}
 
 	
-	private void addGenericEventChildDescriptors(
+	private void addGenericEventChildern(
 			final Collection<Object> newChildDescriptors, Tag tag) {
 		if(tag.eContainer() != null &&  tag.eContainer() instanceof Animal){
 			ResourceSet rs = tag.eResource().getResourceSet();
 			EList<OCD> objectClassDescriptors = findOCDs(rs);
 			
 			for (OCD ocd : objectClassDescriptors) {
-				if(tag.canContain(TrackerPackage.GENERIC_EVENT, ocd.getID())){
-					addGenericEventChildDescriptor(newChildDescriptors,  ocd);
+				if(tag.canContain(EventType.GENERIC_EVENT, ocd.getID())){
+					addGenericEventCommandParameter(newChildDescriptors,  ocd);
 				}
 				
 			}
@@ -519,12 +551,13 @@ public class TagItemProvider
 		}
 	}
 	
+	
 	/**
 	 * 
 	 * @param newChildDescriptors
 	 * @param ocd
 	 */
-	private void addGenericEventChildDescriptor(final Collection<Object> newChildDescriptors, OCD ocd){
+	private void addGenericEventCommandParameter(final Collection<Object> newChildDescriptors, OCD ocd){
 		GenericEvent ge = TrackerFactory.eINSTANCE.createGenericEvent();
 		ge.setOcd(ocd);
 		

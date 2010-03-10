@@ -29,7 +29,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.EventType;
 import com.verticon.tracker.EventHistory;
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
@@ -459,6 +461,19 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 public Age getAge() {
 		 return birthDate==null?null:new Age(birthDate);
 	 }
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean canContain(EventType eventType, String ocdId) {
+		if(eContainer instanceof Premises){
+			return ((Premises)eContainer).canContain(
+					eventType, ocdId, getType());
+		}
+		return Boolean.TRUE;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -25,7 +25,10 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import com.verticon.tracker.AnimalType;
+import com.verticon.tracker.EventType;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 
@@ -184,7 +187,7 @@ public class PremisesItemProvider
 			childrenFeatures.add(TrackerPackage.Literals.PREMISES__ANIMALS);
 			childrenFeatures.add(TrackerPackage.Literals.PREMISES__UN_APPLIED_TAGS);
 			childrenFeatures.add(TrackerPackage.Literals.PREMISES__LOCATIONS);
-			childrenFeatures.add(TrackerPackage.Literals.PREMISES__SCHEMA);
+			childrenFeatures.add(TrackerPackage.Literals.PREMISES__POLICY);
 		}
 		return childrenFeatures;
 	}
@@ -248,7 +251,7 @@ public class PremisesItemProvider
 			case TrackerPackage.PREMISES__ANIMALS:
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
 			case TrackerPackage.PREMISES__LOCATIONS:
-			case TrackerPackage.PREMISES__SCHEMA:
+			case TrackerPackage.PREMISES__POLICY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -260,46 +263,60 @@ public class PremisesItemProvider
 	 * that can be created under this object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
+		Premises premises = (Premises)object;
+		if(premises.canContain(null,null,AnimalType.BOVINE_BEEF)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.PREMISES__ANIMALS,
 				 TrackerFactory.eINSTANCE.createBovineBeef()));
+		}
 
+		if(premises.canContain(null,null,AnimalType.OVINE)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.PREMISES__ANIMALS,
 				 TrackerFactory.eINSTANCE.createOvine()));
+		}
 
+		if(premises.canContain(null,null,AnimalType.BOVINE_BISON)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.PREMISES__ANIMALS,
 				 TrackerFactory.eINSTANCE.createBovineBison()));
+		}
 
+		if(premises.canContain(null,null,AnimalType.BOVINE_DAIRY)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.PREMISES__ANIMALS,
 				 TrackerFactory.eINSTANCE.createBovineDairy()));
+		}
 
+		if(premises.canContain(null,null,AnimalType.SWINE)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.PREMISES__ANIMALS,
 				 TrackerFactory.eINSTANCE.createSwine()));
+		}
 
+		if(premises.canContain(null,null,AnimalType.EQUINE)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.PREMISES__ANIMALS,
 				 TrackerFactory.eINSTANCE.createEquine()));
+		}
 
+		if(premises.canContain(null,null,AnimalType.CAPRINE)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.PREMISES__ANIMALS,
 				 TrackerFactory.eINSTANCE.createCaprine()));
+		}
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -313,8 +330,8 @@ public class PremisesItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TrackerPackage.Literals.PREMISES__SCHEMA,
-				 TrackerFactory.eINSTANCE.createSchema()));
+				(TrackerPackage.Literals.PREMISES__POLICY,
+				 TrackerFactory.eINSTANCE.createPolicy()));
 	}
 
 	/**

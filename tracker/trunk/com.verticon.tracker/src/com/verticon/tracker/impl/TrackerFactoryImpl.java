@@ -37,11 +37,12 @@ import com.verticon.tracker.Caprine;
 import com.verticon.tracker.DairyBreed;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Equine;
-import com.verticon.tracker.EventAttributeSchema;
 import com.verticon.tracker.EventDataType;
-import com.verticon.tracker.EventSchema;
+import com.verticon.tracker.EventInclusion;
+import com.verticon.tracker.EventType;
 import com.verticon.tracker.Exported;
 import com.verticon.tracker.GenericEvent;
+import com.verticon.tracker.GenericEventInclusion;
 import com.verticon.tracker.GoatBreed;
 import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.HorseBreed;
@@ -58,9 +59,9 @@ import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.OneToTen;
 import com.verticon.tracker.Ovine;
+import com.verticon.tracker.Policy;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
-import com.verticon.tracker.Schema;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.SheepBreed;
 import com.verticon.tracker.Sighting;
@@ -82,6 +83,7 @@ import com.verticon.tracker.USQualityGrade;
 import com.verticon.tracker.USSwineGrading;
 import com.verticon.tracker.USSwineQualityGrade;
 import com.verticon.tracker.WeighIn;
+import com.verticon.tracker.WeightMeasurementUnit;
 import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.CheckEmail;
 import com.verticon.tracker.util.CheckISO7064Mod37_36;
@@ -180,12 +182,12 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.HERD_TEST: return createHerdTest();
 			case TrackerPackage.GENERIC_EVENT: return createGenericEvent();
 			case TrackerPackage.STRING_TO_STRING_MAP: return (EObject)createStringToStringMap();
-			case TrackerPackage.EVENT_SCHEMA: return createEventSchema();
-			case TrackerPackage.EVENT_ATTRIBUTE_SCHEMA: return createEventAttributeSchema();
-			case TrackerPackage.SCHEMA: return createSchema();
 			case TrackerPackage.US_BEEF_GRADING: return createUSBeefGrading();
 			case TrackerPackage.US_OVINE_GRADING: return createUSOvineGrading();
 			case TrackerPackage.US_SWINE_GRADING: return createUSSwineGrading();
+			case TrackerPackage.POLICY: return createPolicy();
+			case TrackerPackage.EVENT_INCLUSION: return createEventInclusion();
+			case TrackerPackage.GENERIC_EVENT_INCLUSION: return createGenericEventInclusion();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -235,6 +237,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return createUSSwineQualityGradeFromString(eDataType, initialValue);
 			case TrackerPackage.WEIGHT_MEASUREMENT_UNIT:
 				return createWeightMeasurementUnitFromString(eDataType, initialValue);
+			case TrackerPackage.EVENT_TYPE:
+				return createEventTypeFromString(eDataType, initialValue);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return createPremisesIdNumberFromString(eDataType, initialValue);
 			case TrackerPackage.EMAIL:
@@ -294,6 +298,8 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 				return convertUSSwineQualityGradeToString(eDataType, instanceValue);
 			case TrackerPackage.WEIGHT_MEASUREMENT_UNIT:
 				return convertWeightMeasurementUnitToString(eDataType, instanceValue);
+			case TrackerPackage.EVENT_TYPE:
+				return convertEventTypeToString(eDataType, instanceValue);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return convertPremisesIdNumberToString(eDataType, instanceValue);
 			case TrackerPackage.EMAIL:
@@ -524,36 +530,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EventSchema createEventSchema() {
-		EventSchemaImpl eventSchema = new EventSchemaImpl();
-		return eventSchema;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EventAttributeSchema createEventAttributeSchema() {
-		EventAttributeSchemaImpl eventAttributeSchema = new EventAttributeSchemaImpl();
-		return eventAttributeSchema;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Schema createSchema() {
-		SchemaImpl schema = new SchemaImpl();
-		return schema;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public USBeefGrading createUSBeefGrading() {
 		USBeefGradingImpl usBeefGrading = new USBeefGradingImpl();
 		return usBeefGrading;
@@ -577,6 +553,36 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public USSwineGrading createUSSwineGrading() {
 		USSwineGradingImpl usSwineGrading = new USSwineGradingImpl();
 		return usSwineGrading;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Policy createPolicy() {
+		PolicyImpl policy = new PolicyImpl();
+		return policy;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventInclusion createEventInclusion() {
+		EventInclusionImpl eventInclusion = new EventInclusionImpl();
+		return eventInclusion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GenericEventInclusion createGenericEventInclusion() {
+		GenericEventInclusionImpl genericEventInclusion = new GenericEventInclusionImpl();
+		return genericEventInclusion;
 	}
 
 	/**
@@ -1078,6 +1084,26 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * @generated
 	 */
 	public String convertWeightMeasurementUnitToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventType createEventTypeFromString(EDataType eDataType, String initialValue) {
+		EventType result = EventType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertEventTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

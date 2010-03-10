@@ -23,8 +23,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.Premises#getUnAppliedTags <em>Un Applied Tags</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getLocations <em>Locations</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getUri <em>Uri</em>}</li>
- *   <li>{@link com.verticon.tracker.Premises#getSchema <em>Schema</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getName <em>Name</em>}</li>
+ *   <li>{@link com.verticon.tracker.Premises#getPolicy <em>Policy</em>}</li>
  * </ul>
  * </p>
  *
@@ -168,32 +168,6 @@ public interface Premises extends EObject {
 	void setUri(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Schema</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Schema</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Schema</em>' containment reference.
-	 * @see #setSchema(Schema)
-	 * @see com.verticon.tracker.TrackerPackage#getPremises_Schema()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Schema getSchema();
-
-	/**
-	 * Sets the value of the '{@link com.verticon.tracker.Premises#getSchema <em>Schema</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Schema</em>' containment reference.
-	 * @see #getSchema()
-	 * @generated
-	 */
-	void setSchema(Schema value);
-
-	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -220,6 +194,32 @@ public interface Premises extends EObject {
 	void setName(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Policy</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Policy</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Policy</em>' containment reference.
+	 * @see #setPolicy(Policy)
+	 * @see com.verticon.tracker.TrackerPackage#getPremises_Policy()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Policy getPolicy();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.Premises#getPolicy <em>Policy</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Policy</em>' containment reference.
+	 * @see #getPolicy()
+	 * @generated
+	 */
+	void setPolicy(Policy value);
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model
@@ -242,5 +242,14 @@ public interface Premises extends EObject {
 	 * @generated
 	 */
 	void addTemplate(EList<String> ains, Animal animalTemplate);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.Boolean" ocdIdDataType="org.eclipse.emf.ecore.xml.type.String"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if(getPolicy()!=null){\n\treturn getPolicy().canContain( eventType,  ocdId,  animalType);\n}\nreturn Boolean.TRUE;'"
+	 * @generated
+	 */
+	boolean canContain(EventType eventType, String ocdId, AnimalType animalType);
 
 } // Premises

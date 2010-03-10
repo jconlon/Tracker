@@ -99,10 +99,10 @@ public interface Tag extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.Boolean" featureDataType="org.eclipse.emf.ecore.xml.type.Int" qualifierDataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return Boolean.TRUE;'"
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.Boolean" ocdIdDataType="org.eclipse.emf.ecore.xml.type.String"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if(eContainer instanceof Animal){\n\treturn ((Animal)eContainer).canContain(eventType, ocdId);\n}else if (eContainer instanceof Premises){\n\tif(eventType!=<%EventType%>.TAG_APPLIED){\n\t\treturn Boolean.FALSE;\n\t}\n}\nreturn Boolean.TRUE;'"
 	 * @generated
 	 */
-	boolean canContain(int feature, String qualifier);
+	boolean canContain(EventType eventType, String ocdId);
 
 } // Tag

@@ -11,16 +11,16 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.EventType;
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.util.TrackerUtils;
@@ -158,7 +158,14 @@ public class TagImpl extends EObjectImpl implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean canContain(int feature, String qualifier) {
+	public boolean canContain(EventType eventType, String ocdId) {
+		if(eContainer instanceof Animal){
+			return ((Animal)eContainer).canContain(eventType, ocdId);
+		}else if (eContainer instanceof Premises){
+			if(eventType!=EventType.TAG_APPLIED){
+				return Boolean.FALSE;
+			}
+		}
 		return Boolean.TRUE;
 	}
 

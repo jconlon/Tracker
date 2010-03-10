@@ -6,12 +6,17 @@
 package com.verticon.tracker.edit.provider;
 
 
+import com.verticon.tracker.EventInclusion;
+import com.verticon.tracker.TrackerPackage;
+
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -23,22 +28,19 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import com.verticon.tracker.EventAttributeSchema;
-import com.verticon.tracker.TrackerPackage;
-
 /**
- * This is the item provider adapter for a {@link com.verticon.tracker.EventAttributeSchema} object.
+ * This is the item provider adapter for a {@link com.verticon.tracker.EventInclusion} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class EventAttributeSchemaItemProvider
+public class EventInclusionItemProvider
 	extends ItemProviderAdapter
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
 		IItemPropertySource {
 	/**
 	 * <!-- begin-user-doc -->
@@ -53,7 +55,7 @@ public class EventAttributeSchemaItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EventAttributeSchemaItemProvider(AdapterFactory adapterFactory) {
+	public EventInclusionItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -68,27 +70,26 @@ public class EventAttributeSchemaItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
-			addDataTypePropertyDescriptor(object);
-			addDescriptionPropertyDescriptor(object);
+			addSpeciesPropertyDescriptor(object);
+			addEventPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
+	 * This adds a property descriptor for the Species feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamePropertyDescriptor(Object object) {
+	protected void addSpeciesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_EventAttributeSchema_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EventAttributeSchema_name_feature", "_UI_EventAttributeSchema_type"),
-				 TrackerPackage.Literals.EVENT_ATTRIBUTE_SCHEMA__NAME,
+				 getString("_UI_EventInclusion_species_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventInclusion_species_feature", "_UI_EventInclusion_type"),
+				 TrackerPackage.Literals.EVENT_INCLUSION__SPECIES,
 				 true,
 				 false,
 				 false,
@@ -98,19 +99,19 @@ public class EventAttributeSchemaItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Data Type feature.
+	 * This adds a property descriptor for the Event feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addDataTypePropertyDescriptor(Object object) {
+	protected void addEventPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_EventAttributeSchema_dataType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EventAttributeSchema_dataType_feature", "_UI_EventAttributeSchema_type"),
-				 TrackerPackage.Literals.EVENT_ATTRIBUTE_SCHEMA__DATA_TYPE,
+				 getString("_UI_EventInclusion_event_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EventInclusion_event_feature", "_UI_EventInclusion_type"),
+				 TrackerPackage.Literals.EVENT_INCLUSION__EVENT,
 				 true,
 				 false,
 				 false,
@@ -120,36 +121,14 @@ public class EventAttributeSchemaItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Description feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDescriptionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_EventAttributeSchema_description_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EventAttributeSchema_description_feature", "_UI_EventAttributeSchema_type"),
-				 TrackerPackage.Literals.EVENT_ATTRIBUTE_SCHEMA__DESCRIPTION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This returns EventAttributeSchema.gif.
+	 * This returns EventInclusion.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/EventAttributeSchema"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/EventInclusion"));
 	}
 
 	/**
@@ -160,10 +139,7 @@ public class EventAttributeSchemaItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((EventAttributeSchema)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_EventAttributeSchema_type") :
-			getString("_UI_EventAttributeSchema_type") + " " + label;
+		return getString("_UI_EventInclusion_type");
 	}
 
 	/**
@@ -177,10 +153,9 @@ public class EventAttributeSchemaItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(EventAttributeSchema.class)) {
-			case TrackerPackage.EVENT_ATTRIBUTE_SCHEMA__NAME:
-			case TrackerPackage.EVENT_ATTRIBUTE_SCHEMA__DATA_TYPE:
-			case TrackerPackage.EVENT_ATTRIBUTE_SCHEMA__DESCRIPTION:
+		switch (notification.getFeatureID(EventInclusion.class)) {
+			case TrackerPackage.EVENT_INCLUSION__SPECIES:
+			case TrackerPackage.EVENT_INCLUSION__EVENT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

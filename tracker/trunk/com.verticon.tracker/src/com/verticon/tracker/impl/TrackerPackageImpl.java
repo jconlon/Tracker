@@ -6,8 +6,6 @@
  */
 package com.verticon.tracker.impl;
 
-import com.verticon.osgi.metatype.MetatypePackage;
-import com.verticon.osgi.metatype.impl.MetatypePackageImpl;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -20,8 +18,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
+
+import com.verticon.osgi.metatype.MetatypePackage;
+import com.verticon.osgi.metatype.impl.MetatypePackageImpl;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.AnimalType;
@@ -39,11 +39,12 @@ import com.verticon.tracker.DairyBreed;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Equine;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventAttributeSchema;
 import com.verticon.tracker.EventDataType;
-import com.verticon.tracker.EventSchema;
+import com.verticon.tracker.EventInclusion;
+import com.verticon.tracker.EventType;
 import com.verticon.tracker.Exported;
 import com.verticon.tracker.GenericEvent;
+import com.verticon.tracker.GenericEventInclusion;
 import com.verticon.tracker.GoatBreed;
 import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.HorseBreed;
@@ -59,9 +60,9 @@ import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.OneToTen;
 import com.verticon.tracker.Ovine;
+import com.verticon.tracker.Policy;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
-import com.verticon.tracker.Schema;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.SheepBreed;
 import com.verticon.tracker.Sighting;
@@ -274,27 +275,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass eventSchemaEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass eventAttributeSchemaEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass schemaEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass usBeefGradingEClass = null;
 
 	/**
@@ -310,6 +290,27 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EClass usSwineGradingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass policyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass eventInclusionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass genericEventInclusionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -534,6 +535,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EEnum weightMeasurementUnitEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum eventTypeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1427,105 +1435,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getEventSchema() {
-		return eventSchemaEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEventSchema_Name() {
-		return (EAttribute)eventSchemaEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEventSchema_Description() {
-		return (EAttribute)eventSchemaEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEventSchema_AnimalType() {
-		return (EAttribute)eventSchemaEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEventSchema_EventAttributes() {
-		return (EReference)eventSchemaEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEventAttributeSchema() {
-		return eventAttributeSchemaEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEventAttributeSchema_Name() {
-		return (EAttribute)eventAttributeSchemaEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEventAttributeSchema_DataType() {
-		return (EAttribute)eventAttributeSchemaEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEventAttributeSchema_Description() {
-		return (EAttribute)eventAttributeSchemaEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getSchema() {
-		return schemaEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSchema_EventSchemas() {
-		return (EReference)schemaEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getUSBeefGrading() {
 		return usBeefGradingEClass;
 	}
@@ -1607,6 +1516,96 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPolicy() {
+		return policyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPolicy_IncludedSpecies() {
+		return (EAttribute)policyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPolicy_IncludedEvents() {
+		return (EReference)policyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPolicy_IncludedGenericEvents() {
+		return (EReference)policyEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEventInclusion() {
+		return eventInclusionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEventInclusion_Species() {
+		return (EAttribute)eventInclusionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEventInclusion_Event() {
+		return (EAttribute)eventInclusionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getGenericEventInclusion() {
+		return genericEventInclusionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGenericEventInclusion_Species() {
+		return (EAttribute)genericEventInclusionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getGenericEventInclusion_Ocd() {
+		return (EReference)genericEventInclusionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPremises() {
 		return premisesEClass;
 	}
@@ -1670,8 +1669,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPremises_Schema() {
-		return (EReference)premisesEClass.getEStructuralFeatures().get(6);
+	public EAttribute getPremises_Name() {
+		return (EAttribute)premisesEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1679,8 +1678,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPremises_Name() {
-		return (EAttribute)premisesEClass.getEStructuralFeatures().get(7);
+	public EReference getPremises_Policy() {
+		return (EReference)premisesEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -2066,6 +2065,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getEventType() {
+		return eventTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getPremisesIdNumber() {
 		return premisesIdNumberEDataType;
 	}
@@ -2179,8 +2187,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEReference(premisesEClass, PREMISES__UN_APPLIED_TAGS);
 		createEReference(premisesEClass, PREMISES__LOCATIONS);
 		createEAttribute(premisesEClass, PREMISES__URI);
-		createEReference(premisesEClass, PREMISES__SCHEMA);
 		createEAttribute(premisesEClass, PREMISES__NAME);
+		createEReference(premisesEClass, PREMISES__POLICY);
 
 		bovineBeefEClass = createEClass(BOVINE_BEEF);
 		createEAttribute(bovineBeefEClass, BOVINE_BEEF__BEEF_BREED);
@@ -2291,20 +2299,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(stringToStringMapEClass, STRING_TO_STRING_MAP__KEY);
 		createEAttribute(stringToStringMapEClass, STRING_TO_STRING_MAP__VALUE);
 
-		eventSchemaEClass = createEClass(EVENT_SCHEMA);
-		createEAttribute(eventSchemaEClass, EVENT_SCHEMA__NAME);
-		createEAttribute(eventSchemaEClass, EVENT_SCHEMA__DESCRIPTION);
-		createEAttribute(eventSchemaEClass, EVENT_SCHEMA__ANIMAL_TYPE);
-		createEReference(eventSchemaEClass, EVENT_SCHEMA__EVENT_ATTRIBUTES);
-
-		eventAttributeSchemaEClass = createEClass(EVENT_ATTRIBUTE_SCHEMA);
-		createEAttribute(eventAttributeSchemaEClass, EVENT_ATTRIBUTE_SCHEMA__NAME);
-		createEAttribute(eventAttributeSchemaEClass, EVENT_ATTRIBUTE_SCHEMA__DATA_TYPE);
-		createEAttribute(eventAttributeSchemaEClass, EVENT_ATTRIBUTE_SCHEMA__DESCRIPTION);
-
-		schemaEClass = createEClass(SCHEMA);
-		createEReference(schemaEClass, SCHEMA__EVENT_SCHEMAS);
-
 		usBeefGradingEClass = createEClass(US_BEEF_GRADING);
 		createEAttribute(usBeefGradingEClass, US_BEEF_GRADING__QUALITY_GRADE);
 		createEAttribute(usBeefGradingEClass, US_BEEF_GRADING__QUALITY_GRADE_LEVEL);
@@ -2316,6 +2310,19 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		usSwineGradingEClass = createEClass(US_SWINE_GRADING);
 		createEAttribute(usSwineGradingEClass, US_SWINE_GRADING__QUALITY_GRADE);
+
+		policyEClass = createEClass(POLICY);
+		createEAttribute(policyEClass, POLICY__INCLUDED_SPECIES);
+		createEReference(policyEClass, POLICY__INCLUDED_EVENTS);
+		createEReference(policyEClass, POLICY__INCLUDED_GENERIC_EVENTS);
+
+		eventInclusionEClass = createEClass(EVENT_INCLUSION);
+		createEAttribute(eventInclusionEClass, EVENT_INCLUSION__SPECIES);
+		createEAttribute(eventInclusionEClass, EVENT_INCLUSION__EVENT);
+
+		genericEventInclusionEClass = createEClass(GENERIC_EVENT_INCLUSION);
+		createEAttribute(genericEventInclusionEClass, GENERIC_EVENT_INCLUSION__SPECIES);
+		createEReference(genericEventInclusionEClass, GENERIC_EVENT_INCLUSION__OCD);
 
 		// Create enums
 		sexEEnum = createEEnum(SEX);
@@ -2336,6 +2343,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		levelEEnum = createEEnum(LEVEL);
 		usSwineQualityGradeEEnum = createEEnum(US_SWINE_QUALITY_GRADE);
 		weightMeasurementUnitEEnum = createEEnum(WEIGHT_MEASUREMENT_UNIT);
+		eventTypeEEnum = createEEnum(EVENT_TYPE);
 
 		// Create data types
 		premisesIdNumberEDataType = createEDataType(PREMISES_ID_NUMBER);
@@ -2450,14 +2458,18 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		addEOperation(animalEClass, this.getAge(), "getAge", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(animalEClass, theXMLTypePackage.getBoolean(), "canContain", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getEventType(), "eventType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theXMLTypePackage.getString(), "ocdId", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(tagEClass, Tag.class, "Tag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTag_UsainNumberUsed(), ecorePackage.getEBoolean(), "usainNumberUsed", null, 1, 1, Tag.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getTag_Events(), this.getEvent(), this.getEvent_Tag(), "events", null, 1, -1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTag_Id(), ecorePackage.getEString(), "id", "", 1, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(tagEClass, theXMLTypePackage.getBoolean(), "canContain", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theXMLTypePackage.getInt(), "feature", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theXMLTypePackage.getString(), "qualifier", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getEventType(), "eventType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theXMLTypePackage.getString(), "ocdId", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(bovineEClass, Bovine.class, "Bovine", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2479,8 +2491,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEReference(getPremises_UnAppliedTags(), this.getTag(), null, "unAppliedTags", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPremises_Locations(), this.getLocation(), null, "locations", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPremises_Uri(), this.getURI(), "uri", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPremises_Schema(), this.getSchema(), null, "schema", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPremises_Name(), ecorePackage.getEString(), "name", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPremises_Policy(), this.getPolicy(), null, "policy", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(premisesEClass, this.getEvent(), "eventHistory", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -2493,6 +2505,11 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "ains", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getAnimal(), "animalTemplate", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(premisesEClass, theXMLTypePackage.getBoolean(), "canContain", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getEventType(), "eventType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theXMLTypePackage.getString(), "ocdId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getAnimalType(), "animalType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(bovineBeefEClass, BovineBeef.class, "BovineBeef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBovineBeef_BeefBreed(), this.getBeefBreed(), "beefBreed", "Unspecified", 0, 1, BovineBeef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2610,20 +2627,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getStringToStringMap_Key(), ecorePackage.getEString(), "key", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStringToStringMap_Value(), ecorePackage.getEString(), "value", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(eventSchemaEClass, EventSchema.class, "EventSchema", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEventSchema_Name(), ecorePackage.getEString(), "name", null, 1, 1, EventSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEventSchema_Description(), ecorePackage.getEString(), "description", null, 1, 1, EventSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEventSchema_AnimalType(), this.getAnimalType(), "animalType", null, 0, -1, EventSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEventSchema_EventAttributes(), this.getEventAttributeSchema(), null, "eventAttributes", null, 1, -1, EventSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(eventAttributeSchemaEClass, EventAttributeSchema.class, "EventAttributeSchema", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEventAttributeSchema_Name(), ecorePackage.getEString(), "name", null, 1, 1, EventAttributeSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEventAttributeSchema_DataType(), this.getEventDataType(), "dataType", null, 1, 1, EventAttributeSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEventAttributeSchema_Description(), ecorePackage.getEString(), "description", null, 1, 1, EventAttributeSchema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(schemaEClass, Schema.class, "Schema", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSchema_EventSchemas(), this.getEventSchema(), null, "eventSchemas", null, 0, -1, Schema.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(usBeefGradingEClass, USBeefGrading.class, "USBeefGrading", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUSBeefGrading_QualityGrade(), this.getUSQualityGrade(), "qualityGrade", null, 0, 1, USBeefGrading.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUSBeefGrading_QualityGradeLevel(), this.getLevel(), "qualityGradeLevel", null, 0, 1, USBeefGrading.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2635,6 +2638,24 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		initEClass(usSwineGradingEClass, USSwineGrading.class, "USSwineGrading", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUSSwineGrading_QualityGrade(), this.getUSSwineQualityGrade(), "qualityGrade", null, 0, 1, USSwineGrading.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(policyEClass, Policy.class, "Policy", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPolicy_IncludedSpecies(), this.getAnimalType(), "includedSpecies", null, 0, -1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPolicy_IncludedEvents(), this.getEventInclusion(), null, "includedEvents", null, 0, -1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPolicy_IncludedGenericEvents(), this.getGenericEventInclusion(), null, "includedGenericEvents", null, 0, -1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(policyEClass, theXMLTypePackage.getBoolean(), "canContain", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getEventType(), "eventType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theXMLTypePackage.getString(), "ocdId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getAnimalType(), "animalType", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(eventInclusionEClass, EventInclusion.class, "EventInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEventInclusion_Species(), this.getAnimalType(), "species", null, 1, -1, EventInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEventInclusion_Event(), this.getEventType(), "event", null, 1, -1, EventInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(genericEventInclusionEClass, GenericEventInclusion.class, "GenericEventInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getGenericEventInclusion_Species(), this.getAnimalType(), "species", null, 1, -1, GenericEventInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGenericEventInclusion_Ocd(), theMetatypePackage.getOCD(), null, "ocd", null, 1, 1, GenericEventInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");
@@ -3017,6 +3038,24 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEEnumLiteral(weightMeasurementUnitEEnum, WeightMeasurementUnit.POUND);
 		addEEnumLiteral(weightMeasurementUnitEEnum, WeightMeasurementUnit.KILOGRAM);
 
+		initEEnum(eventTypeEEnum, EventType.class, "EventType");
+		addEEnumLiteral(eventTypeEEnum, EventType.TAG_ALLOCATED);
+		addEEnumLiteral(eventTypeEEnum, EventType.TAG_APPLIED);
+		addEEnumLiteral(eventTypeEEnum, EventType.MOVED_IN);
+		addEEnumLiteral(eventTypeEEnum, EventType.MOVED_OUT);
+		addEEnumLiteral(eventTypeEEnum, EventType.EXPORTED);
+		addEEnumLiteral(eventTypeEEnum, EventType.ICVI);
+		addEEnumLiteral(eventTypeEEnum, EventType.DIED);
+		addEEnumLiteral(eventTypeEEnum, EventType.ANIMAL_MISSING);
+		addEEnumLiteral(eventTypeEEnum, EventType.SLAUGHTERED);
+		addEEnumLiteral(eventTypeEEnum, EventType.SIGHTING);
+		addEEnumLiteral(eventTypeEEnum, EventType.TAG_RETIRED);
+		addEEnumLiteral(eventTypeEEnum, EventType.WEIGH_IN);
+		addEEnumLiteral(eventTypeEEnum, EventType.GENERIC_EVENT);
+		addEEnumLiteral(eventTypeEEnum, EventType.LOST_TAG);
+		addEEnumLiteral(eventTypeEEnum, EventType.REPLACED_TAG);
+		addEEnumLiteral(eventTypeEEnum, EventType.IMPORTED);
+
 		// Initialize data types
 		initEDataType(premisesIdNumberEDataType, String.class, "PremisesIdNumber", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(emailEDataType, String.class, "Email", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -3039,7 +3078,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";					
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";							
 		addAnnotation
 		  (premisesIdNumberEDataType, 
 		   source, 
@@ -3048,7 +3087,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 			 "maxLength", "7",
 			 "length", "7",
 			 "maxExclusive", "adcdefg"
-		   });			
+		   });				
 	}
 
 } //TrackerPackageImpl

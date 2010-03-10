@@ -745,22 +745,22 @@ public interface TrackerPackage extends EPackage {
 	int PREMISES__URI = 5;
 
 	/**
-	 * The feature id for the '<em><b>Schema</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PREMISES__SCHEMA = 6;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREMISES__NAME = 7;
+	int PREMISES__NAME = 6;
+
+	/**
+	 * The feature id for the '<em><b>Policy</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREMISES__POLICY = 7;
 
 	/**
 	 * The number of structural features of the '<em>Premises</em>' class.
@@ -4355,135 +4355,6 @@ public interface TrackerPackage extends EPackage {
 	int STRING_TO_STRING_MAP_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link com.verticon.tracker.impl.EventSchemaImpl <em>Event Schema</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.impl.EventSchemaImpl
-	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventSchema()
-	 * @generated
-	 */
-	int EVENT_SCHEMA = 38;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_SCHEMA__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_SCHEMA__DESCRIPTION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Animal Type</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_SCHEMA__ANIMAL_TYPE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Event Attributes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_SCHEMA__EVENT_ATTRIBUTES = 3;
-
-	/**
-	 * The number of structural features of the '<em>Event Schema</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_SCHEMA_FEATURE_COUNT = 4;
-
-	/**
-	 * The meta object id for the '{@link com.verticon.tracker.impl.EventAttributeSchemaImpl <em>Event Attribute Schema</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.impl.EventAttributeSchemaImpl
-	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventAttributeSchema()
-	 * @generated
-	 */
-	int EVENT_ATTRIBUTE_SCHEMA = 39;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_ATTRIBUTE_SCHEMA__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Data Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_ATTRIBUTE_SCHEMA__DATA_TYPE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_ATTRIBUTE_SCHEMA__DESCRIPTION = 2;
-
-	/**
-	 * The number of structural features of the '<em>Event Attribute Schema</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_ATTRIBUTE_SCHEMA_FEATURE_COUNT = 3;
-
-	/**
-	 * The meta object id for the '{@link com.verticon.tracker.impl.SchemaImpl <em>Schema</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see com.verticon.tracker.impl.SchemaImpl
-	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSchema()
-	 * @generated
-	 */
-	int SCHEMA = 40;
-
-	/**
-	 * The feature id for the '<em><b>Event Schemas</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCHEMA__EVENT_SCHEMAS = 0;
-
-	/**
-	 * The number of structural features of the '<em>Schema</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCHEMA_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.USBeefGradingImpl <em>US Beef Grading</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4491,7 +4362,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSBeefGrading()
 	 * @generated
 	 */
-	int US_BEEF_GRADING = 41;
+	int US_BEEF_GRADING = 38;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -4600,7 +4471,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSOvineGrading()
 	 * @generated
 	 */
-	int US_OVINE_GRADING = 42;
+	int US_OVINE_GRADING = 39;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -4700,7 +4571,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSSwineGrading()
 	 * @generated
 	 */
-	int US_SWINE_GRADING = 43;
+	int US_SWINE_GRADING = 40;
 
 	/**
 	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
@@ -4782,6 +4653,126 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int US_SWINE_GRADING_FEATURE_COUNT = EVENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.PolicyImpl <em>Policy</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.PolicyImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPolicy()
+	 * @generated
+	 */
+	int POLICY = 41;
+
+	/**
+	 * The feature id for the '<em><b>Included Species</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY__INCLUDED_SPECIES = 0;
+
+	/**
+	 * The feature id for the '<em><b>Included Events</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY__INCLUDED_EVENTS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Included Generic Events</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY__INCLUDED_GENERIC_EVENTS = 2;
+
+	/**
+	 * The number of structural features of the '<em>Policy</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.EventInclusionImpl <em>Event Inclusion</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.EventInclusionImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventInclusion()
+	 * @generated
+	 */
+	int EVENT_INCLUSION = 42;
+
+	/**
+	 * The feature id for the '<em><b>Species</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_INCLUSION__SPECIES = 0;
+
+	/**
+	 * The feature id for the '<em><b>Event</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_INCLUSION__EVENT = 1;
+
+	/**
+	 * The number of structural features of the '<em>Event Inclusion</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_INCLUSION_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.GenericEventInclusionImpl <em>Generic Event Inclusion</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.GenericEventInclusionImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getGenericEventInclusion()
+	 * @generated
+	 */
+	int GENERIC_EVENT_INCLUSION = 43;
+
+	/**
+	 * The feature id for the '<em><b>Species</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_EVENT_INCLUSION__SPECIES = 0;
+
+	/**
+	 * The feature id for the '<em><b>Ocd</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_EVENT_INCLUSION__OCD = 1;
+
+	/**
+	 * The number of structural features of the '<em>Generic Event Inclusion</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_EVENT_INCLUSION_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Sex <em>Sex</em>}' enum.
@@ -4964,6 +4955,16 @@ public interface TrackerPackage extends EPackage {
 	int WEIGHT_MEASUREMENT_UNIT = 61;
 
 	/**
+	 * The meta object id for the '{@link com.verticon.tracker.EventType <em>Event Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.EventType
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventType()
+	 * @generated
+	 */
+	int EVENT_TYPE = 62;
+
+	/**
 	 * The meta object id for the '<em>Premises Id Number</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4971,7 +4972,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPremisesIdNumber()
 	 * @generated
 	 */
-	int PREMISES_ID_NUMBER = 62;
+	int PREMISES_ID_NUMBER = 63;
 
 	/**
 	 * The meta object id for the '<em>Email</em>' data type.
@@ -4981,7 +4982,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 63;
+	int EMAIL = 64;
 
 
 	/**
@@ -4992,7 +4993,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAge()
 	 * @generated
 	 */
-	int AGE = 64;
+	int AGE = 65;
 
 
 	/**
@@ -5003,7 +5004,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSPhoneNumber()
 	 * @generated
 	 */
-	int US_PHONE_NUMBER = 65;
+	int US_PHONE_NUMBER = 66;
 
 
 	/**
@@ -5014,7 +5015,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 66;
+	int URI = 67;
 
 
 	/**
@@ -5942,124 +5943,6 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getStringToStringMap_Value();
 
 	/**
-	 * Returns the meta object for class '{@link com.verticon.tracker.EventSchema <em>Event Schema</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Event Schema</em>'.
-	 * @see com.verticon.tracker.EventSchema
-	 * @generated
-	 */
-	EClass getEventSchema();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.EventSchema#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.verticon.tracker.EventSchema#getName()
-	 * @see #getEventSchema()
-	 * @generated
-	 */
-	EAttribute getEventSchema_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.EventSchema#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see com.verticon.tracker.EventSchema#getDescription()
-	 * @see #getEventSchema()
-	 * @generated
-	 */
-	EAttribute getEventSchema_Description();
-
-	/**
-	 * Returns the meta object for the attribute list '{@link com.verticon.tracker.EventSchema#getAnimalType <em>Animal Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Animal Type</em>'.
-	 * @see com.verticon.tracker.EventSchema#getAnimalType()
-	 * @see #getEventSchema()
-	 * @generated
-	 */
-	EAttribute getEventSchema_AnimalType();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.EventSchema#getEventAttributes <em>Event Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Event Attributes</em>'.
-	 * @see com.verticon.tracker.EventSchema#getEventAttributes()
-	 * @see #getEventSchema()
-	 * @generated
-	 */
-	EReference getEventSchema_EventAttributes();
-
-	/**
-	 * Returns the meta object for class '{@link com.verticon.tracker.EventAttributeSchema <em>Event Attribute Schema</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Event Attribute Schema</em>'.
-	 * @see com.verticon.tracker.EventAttributeSchema
-	 * @generated
-	 */
-	EClass getEventAttributeSchema();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.EventAttributeSchema#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see com.verticon.tracker.EventAttributeSchema#getName()
-	 * @see #getEventAttributeSchema()
-	 * @generated
-	 */
-	EAttribute getEventAttributeSchema_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.EventAttributeSchema#getDataType <em>Data Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Data Type</em>'.
-	 * @see com.verticon.tracker.EventAttributeSchema#getDataType()
-	 * @see #getEventAttributeSchema()
-	 * @generated
-	 */
-	EAttribute getEventAttributeSchema_DataType();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.EventAttributeSchema#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see com.verticon.tracker.EventAttributeSchema#getDescription()
-	 * @see #getEventAttributeSchema()
-	 * @generated
-	 */
-	EAttribute getEventAttributeSchema_Description();
-
-	/**
-	 * Returns the meta object for class '{@link com.verticon.tracker.Schema <em>Schema</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Schema</em>'.
-	 * @see com.verticon.tracker.Schema
-	 * @generated
-	 */
-	EClass getSchema();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.Schema#getEventSchemas <em>Event Schemas</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Event Schemas</em>'.
-	 * @see com.verticon.tracker.Schema#getEventSchemas()
-	 * @see #getSchema()
-	 * @generated
-	 */
-	EReference getSchema_EventSchemas();
-
-	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.USBeefGrading <em>US Beef Grading</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6156,6 +6039,113 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getUSSwineGrading_QualityGrade();
 
 	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.Policy <em>Policy</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Policy</em>'.
+	 * @see com.verticon.tracker.Policy
+	 * @generated
+	 */
+	EClass getPolicy();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link com.verticon.tracker.Policy#getIncludedSpecies <em>Included Species</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Included Species</em>'.
+	 * @see com.verticon.tracker.Policy#getIncludedSpecies()
+	 * @see #getPolicy()
+	 * @generated
+	 */
+	EAttribute getPolicy_IncludedSpecies();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.Policy#getIncludedEvents <em>Included Events</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Included Events</em>'.
+	 * @see com.verticon.tracker.Policy#getIncludedEvents()
+	 * @see #getPolicy()
+	 * @generated
+	 */
+	EReference getPolicy_IncludedEvents();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.Policy#getIncludedGenericEvents <em>Included Generic Events</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Included Generic Events</em>'.
+	 * @see com.verticon.tracker.Policy#getIncludedGenericEvents()
+	 * @see #getPolicy()
+	 * @generated
+	 */
+	EReference getPolicy_IncludedGenericEvents();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.EventInclusion <em>Event Inclusion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Event Inclusion</em>'.
+	 * @see com.verticon.tracker.EventInclusion
+	 * @generated
+	 */
+	EClass getEventInclusion();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link com.verticon.tracker.EventInclusion#getSpecies <em>Species</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Species</em>'.
+	 * @see com.verticon.tracker.EventInclusion#getSpecies()
+	 * @see #getEventInclusion()
+	 * @generated
+	 */
+	EAttribute getEventInclusion_Species();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link com.verticon.tracker.EventInclusion#getEvent <em>Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Event</em>'.
+	 * @see com.verticon.tracker.EventInclusion#getEvent()
+	 * @see #getEventInclusion()
+	 * @generated
+	 */
+	EAttribute getEventInclusion_Event();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.GenericEventInclusion <em>Generic Event Inclusion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Generic Event Inclusion</em>'.
+	 * @see com.verticon.tracker.GenericEventInclusion
+	 * @generated
+	 */
+	EClass getGenericEventInclusion();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link com.verticon.tracker.GenericEventInclusion#getSpecies <em>Species</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Species</em>'.
+	 * @see com.verticon.tracker.GenericEventInclusion#getSpecies()
+	 * @see #getGenericEventInclusion()
+	 * @generated
+	 */
+	EAttribute getGenericEventInclusion_Species();
+
+	/**
+	 * Returns the meta object for the reference '{@link com.verticon.tracker.GenericEventInclusion#getOcd <em>Ocd</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ocd</em>'.
+	 * @see com.verticon.tracker.GenericEventInclusion#getOcd()
+	 * @see #getGenericEventInclusion()
+	 * @generated
+	 */
+	EReference getGenericEventInclusion_Ocd();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Premises <em>Premises</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6232,17 +6222,6 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getPremises_Uri();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.verticon.tracker.Premises#getSchema <em>Schema</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Schema</em>'.
-	 * @see com.verticon.tracker.Premises#getSchema()
-	 * @see #getPremises()
-	 * @generated
-	 */
-	EReference getPremises_Schema();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Premises#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6252,6 +6231,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPremises_Name();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link com.verticon.tracker.Premises#getPolicy <em>Policy</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Policy</em>'.
+	 * @see com.verticon.tracker.Premises#getPolicy()
+	 * @see #getPremises()
+	 * @generated
+	 */
+	EReference getPremises_Policy();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.BovineBeef <em>Bovine Beef</em>}'.
@@ -6683,6 +6673,16 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getWeightMeasurementUnit();
+
+	/**
+	 * Returns the meta object for enum '{@link com.verticon.tracker.EventType <em>Event Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Event Type</em>'.
+	 * @see com.verticon.tracker.EventType
+	 * @generated
+	 */
+	EEnum getEventType();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>Premises Id Number</em>}'.
@@ -7499,100 +7499,6 @@ public interface TrackerPackage extends EPackage {
 		EAttribute STRING_TO_STRING_MAP__VALUE = eINSTANCE.getStringToStringMap_Value();
 
 		/**
-		 * The meta object literal for the '{@link com.verticon.tracker.impl.EventSchemaImpl <em>Event Schema</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.verticon.tracker.impl.EventSchemaImpl
-		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventSchema()
-		 * @generated
-		 */
-		EClass EVENT_SCHEMA = eINSTANCE.getEventSchema();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EVENT_SCHEMA__NAME = eINSTANCE.getEventSchema_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EVENT_SCHEMA__DESCRIPTION = eINSTANCE.getEventSchema_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Animal Type</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EVENT_SCHEMA__ANIMAL_TYPE = eINSTANCE.getEventSchema_AnimalType();
-
-		/**
-		 * The meta object literal for the '<em><b>Event Attributes</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EVENT_SCHEMA__EVENT_ATTRIBUTES = eINSTANCE.getEventSchema_EventAttributes();
-
-		/**
-		 * The meta object literal for the '{@link com.verticon.tracker.impl.EventAttributeSchemaImpl <em>Event Attribute Schema</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.verticon.tracker.impl.EventAttributeSchemaImpl
-		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventAttributeSchema()
-		 * @generated
-		 */
-		EClass EVENT_ATTRIBUTE_SCHEMA = eINSTANCE.getEventAttributeSchema();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EVENT_ATTRIBUTE_SCHEMA__NAME = eINSTANCE.getEventAttributeSchema_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Data Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EVENT_ATTRIBUTE_SCHEMA__DATA_TYPE = eINSTANCE.getEventAttributeSchema_DataType();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EVENT_ATTRIBUTE_SCHEMA__DESCRIPTION = eINSTANCE.getEventAttributeSchema_Description();
-
-		/**
-		 * The meta object literal for the '{@link com.verticon.tracker.impl.SchemaImpl <em>Schema</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see com.verticon.tracker.impl.SchemaImpl
-		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSchema()
-		 * @generated
-		 */
-		EClass SCHEMA = eINSTANCE.getSchema();
-
-		/**
-		 * The meta object literal for the '<em><b>Event Schemas</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SCHEMA__EVENT_SCHEMAS = eINSTANCE.getSchema_EventSchemas();
-
-		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.USBeefGradingImpl <em>US Beef Grading</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7671,6 +7577,92 @@ public interface TrackerPackage extends EPackage {
 		EAttribute US_SWINE_GRADING__QUALITY_GRADE = eINSTANCE.getUSSwineGrading_QualityGrade();
 
 		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.PolicyImpl <em>Policy</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.PolicyImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPolicy()
+		 * @generated
+		 */
+		EClass POLICY = eINSTANCE.getPolicy();
+
+		/**
+		 * The meta object literal for the '<em><b>Included Species</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POLICY__INCLUDED_SPECIES = eINSTANCE.getPolicy_IncludedSpecies();
+
+		/**
+		 * The meta object literal for the '<em><b>Included Events</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference POLICY__INCLUDED_EVENTS = eINSTANCE.getPolicy_IncludedEvents();
+
+		/**
+		 * The meta object literal for the '<em><b>Included Generic Events</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference POLICY__INCLUDED_GENERIC_EVENTS = eINSTANCE.getPolicy_IncludedGenericEvents();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.EventInclusionImpl <em>Event Inclusion</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.EventInclusionImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventInclusion()
+		 * @generated
+		 */
+		EClass EVENT_INCLUSION = eINSTANCE.getEventInclusion();
+
+		/**
+		 * The meta object literal for the '<em><b>Species</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EVENT_INCLUSION__SPECIES = eINSTANCE.getEventInclusion_Species();
+
+		/**
+		 * The meta object literal for the '<em><b>Event</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EVENT_INCLUSION__EVENT = eINSTANCE.getEventInclusion_Event();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.GenericEventInclusionImpl <em>Generic Event Inclusion</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.GenericEventInclusionImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getGenericEventInclusion()
+		 * @generated
+		 */
+		EClass GENERIC_EVENT_INCLUSION = eINSTANCE.getGenericEventInclusion();
+
+		/**
+		 * The meta object literal for the '<em><b>Species</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GENERIC_EVENT_INCLUSION__SPECIES = eINSTANCE.getGenericEventInclusion_Species();
+
+		/**
+		 * The meta object literal for the '<em><b>Ocd</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GENERIC_EVENT_INCLUSION__OCD = eINSTANCE.getGenericEventInclusion_Ocd();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.PremisesImpl <em>Premises</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7729,20 +7721,20 @@ public interface TrackerPackage extends EPackage {
 		EAttribute PREMISES__URI = eINSTANCE.getPremises_Uri();
 
 		/**
-		 * The meta object literal for the '<em><b>Schema</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PREMISES__SCHEMA = eINSTANCE.getPremises_Schema();
-
-		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute PREMISES__NAME = eINSTANCE.getPremises_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Policy</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PREMISES__POLICY = eINSTANCE.getPremises_Policy();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.BovineBeefImpl <em>Bovine Beef</em>}' class.
@@ -8141,6 +8133,16 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum WEIGHT_MEASUREMENT_UNIT = eINSTANCE.getWeightMeasurementUnit();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.EventType <em>Event Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.EventType
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventType()
+		 * @generated
+		 */
+		EEnum EVENT_TYPE = eINSTANCE.getEventType();
 
 		/**
 		 * The meta object literal for the '<em>Premises Id Number</em>' data type.

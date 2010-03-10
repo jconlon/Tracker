@@ -31,11 +31,12 @@ import com.verticon.tracker.DairyBreed;
 import com.verticon.tracker.Died;
 import com.verticon.tracker.Equine;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventAttributeSchema;
 import com.verticon.tracker.EventDataType;
-import com.verticon.tracker.EventSchema;
+import com.verticon.tracker.EventInclusion;
+import com.verticon.tracker.EventType;
 import com.verticon.tracker.Exported;
 import com.verticon.tracker.GenericEvent;
+import com.verticon.tracker.GenericEventInclusion;
 import com.verticon.tracker.GoatBreed;
 import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.HorseBreed;
@@ -52,9 +53,9 @@ import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.OneToTen;
 import com.verticon.tracker.Ovine;
+import com.verticon.tracker.Policy;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
-import com.verticon.tracker.Schema;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.SheepBreed;
 import com.verticon.tracker.Sighting;
@@ -75,6 +76,7 @@ import com.verticon.tracker.USQualityGrade;
 import com.verticon.tracker.USSwineGrading;
 import com.verticon.tracker.USSwineQualityGrade;
 import com.verticon.tracker.WeighIn;
+import com.verticon.tracker.WeightMeasurementUnit;
 
 /**
  * <!-- begin-user-doc -->
@@ -231,18 +233,18 @@ public class TrackerValidator extends EObjectValidator {
 				return validateGenericEvent((GenericEvent)value, diagnostics, context);
 			case TrackerPackage.STRING_TO_STRING_MAP:
 				return validateStringToStringMap((Map.Entry<?, ?>)value, diagnostics, context);
-			case TrackerPackage.EVENT_SCHEMA:
-				return validateEventSchema((EventSchema)value, diagnostics, context);
-			case TrackerPackage.EVENT_ATTRIBUTE_SCHEMA:
-				return validateEventAttributeSchema((EventAttributeSchema)value, diagnostics, context);
-			case TrackerPackage.SCHEMA:
-				return validateSchema((Schema)value, diagnostics, context);
 			case TrackerPackage.US_BEEF_GRADING:
 				return validateUSBeefGrading((USBeefGrading)value, diagnostics, context);
 			case TrackerPackage.US_OVINE_GRADING:
 				return validateUSOvineGrading((USOvineGrading)value, diagnostics, context);
 			case TrackerPackage.US_SWINE_GRADING:
 				return validateUSSwineGrading((USSwineGrading)value, diagnostics, context);
+			case TrackerPackage.POLICY:
+				return validatePolicy((Policy)value, diagnostics, context);
+			case TrackerPackage.EVENT_INCLUSION:
+				return validateEventInclusion((EventInclusion)value, diagnostics, context);
+			case TrackerPackage.GENERIC_EVENT_INCLUSION:
+				return validateGenericEventInclusion((GenericEventInclusion)value, diagnostics, context);
 			case TrackerPackage.SEX:
 				return validateSex((Sex)value, diagnostics, context);
 			case TrackerPackage.BISON_BREED:
@@ -279,6 +281,8 @@ public class TrackerValidator extends EObjectValidator {
 				return validateUSSwineQualityGrade((USSwineQualityGrade)value, diagnostics, context);
 			case TrackerPackage.WEIGHT_MEASUREMENT_UNIT:
 				return validateWeightMeasurementUnit((WeightMeasurementUnit)value, diagnostics, context);
+			case TrackerPackage.EVENT_TYPE:
+				return validateEventType((EventType)value, diagnostics, context);
 			case TrackerPackage.PREMISES_ID_NUMBER:
 				return validatePremisesIdNumber((String)value, diagnostics, context);
 			case TrackerPackage.EMAIL:
@@ -515,33 +519,6 @@ public class TrackerValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateEventSchema(EventSchema eventSchema, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(eventSchema, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateEventAttributeSchema(EventAttributeSchema eventAttributeSchema, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(eventAttributeSchema, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateSchema(Schema schema, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(schema, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean validateUSBeefGrading(USBeefGrading usBeefGrading, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(usBeefGrading, diagnostics, context);
 	}
@@ -562,6 +539,33 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validateUSSwineGrading(USSwineGrading usSwineGrading, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(usSwineGrading, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePolicy(Policy policy, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(policy, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEventInclusion(EventInclusion eventInclusion, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(eventInclusion, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateGenericEventInclusion(GenericEventInclusion genericEventInclusion, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(genericEventInclusion, diagnostics, context);
 	}
 
 	/**
@@ -849,6 +853,15 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateWeightMeasurementUnit(WeightMeasurementUnit weightMeasurementUnit, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEventType(EventType eventType, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 
