@@ -2304,6 +2304,10 @@
         <element xmi:type="ecore:EOperation" href="tracker.ecore#//GenericEvent/findName"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_4h35gSsfEd-aq5NpDyjngg"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_PVpyACyOEd-UNpCBP8NtMA" type="2002">
+        <element xmi:type="ecore:EOperation" href="tracker.ecore#//GenericEvent/value"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_PVpyASyOEd-UNpCBP8NtMA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PEpdeVmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PEpdelmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_PEpde1mCEd2tRZ2K3aMUww"/>
