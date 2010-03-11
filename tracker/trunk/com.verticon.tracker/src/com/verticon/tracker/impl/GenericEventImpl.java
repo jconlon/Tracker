@@ -38,6 +38,7 @@ import com.verticon.tracker.TrackerPackage;
  * @generated
  */
 public class GenericEventImpl extends EventImpl implements GenericEvent {
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -148,8 +149,7 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 	public void setOcd(OCD newOcd) {
 		setOcdGen(newOcd);
 		
-		if(newOcd == null || newOcd.getAttributeDefinitions(ObjectClassDefinition.ALL)==null){
-			//The newOcdref is null or empty: clear the current set of EventAttributes.
+		if(newOcd == null || (!newOcd.eIsProxy() && newOcd.getAD().isEmpty())){
 			getEventAttributes().clear();//Is this right?
 			return;
 		}else if (getEventAttributes().isEmpty()) {
@@ -190,6 +190,43 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 	 */
 	public String findName() {
 		return getOcd()==null?null:getOcd().getName(); 
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object value(String key) {
+		for (Map.Entry<String, String> eventAttribute : getEventAttributes().entrySet()) {
+					if(eventAttribute.getKey().equals(key)){
+						String value = eventAttribute.getValue();
+						AttributeDefinition ad = findAttributeDefinition(eventAttribute);
+						switch (ad.getType()) {
+						case AttributeDefinition.DOUBLE:
+							return Double.parseDouble(value);
+						case AttributeDefinition.BOOLEAN:
+							return Boolean.parseBoolean(value);
+						case AttributeDefinition.BYTE:
+							return Byte.parseByte(value);
+						case AttributeDefinition.CHARACTER:
+							return value.charAt(0);
+						case AttributeDefinition.FLOAT:
+							return Float.parseFloat(value);
+						case AttributeDefinition.INTEGER:
+							return Integer.parseInt(value);	
+						case AttributeDefinition.LONG:
+							return Long.parseLong(value);
+						case AttributeDefinition.SHORT:
+							return Short.parseShort(value);	
+						case AttributeDefinition.STRING:
+							return value;
+						default:
+							break;
+						}
+					}
+				}
+		return null;
 	}
 
 	/**
