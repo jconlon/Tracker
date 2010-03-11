@@ -136,7 +136,8 @@
 		</sequence>
 		<attribute name="name" type="string" use="required" />
 		<attribute name="description" type="string" use="optional" />
-		<attribute name="id" type="string" use="required" ecore:name="iD"/>
+		<!-- id attribute changed from type="string" See Ticket#530 -->
+		<attribute name="id" type="ID" use="required" ecore:name="iD"/>
 		<anyAttribute />
 		
 	</complexType>
