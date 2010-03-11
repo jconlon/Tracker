@@ -102,4 +102,13 @@ public interface GenericEvent extends Event {
 	 */
 	String findName();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model keyDataType="org.eclipse.emf.ecore.xml.type.String"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='for (Map.Entry<String, String> eventAttribute : getEventAttributes().entrySet()) {\n\t\t\tif(eventAttribute.getKey().equals(key)){\n\t\t\t\tString value = eventAttribute.getValue();\n\t\t\t\tAttributeDefinition ad = findAttributeDefinition(eventAttribute);\n\t\t\t\tswitch (ad.getType()) {\n\t\t\t\tcase AttributeDefinition.DOUBLE:\n\t\t\t\t\treturn Double.parseDouble(value);\n\t\t\t\tcase AttributeDefinition.BOOLEAN:\n\t\t\t\t\treturn Boolean.parseBoolean(value);\n\t\t\t\tcase AttributeDefinition.BYTE:\n\t\t\t\t\treturn Byte.parseByte(value);\n\t\t\t\tcase AttributeDefinition.CHARACTER:\n\t\t\t\t\treturn value.charAt(0);\n\t\t\t\tcase AttributeDefinition.FLOAT:\n\t\t\t\t\treturn Float.parseFloat(value);\n\t\t\t\tcase AttributeDefinition.INTEGER:\n\t\t\t\t\treturn Integer.parseInt(value);\t\n\t\t\t\tcase AttributeDefinition.LONG:\n\t\t\t\t\treturn Long.parseLong(value);\n\t\t\t\tcase AttributeDefinition.SHORT:\n\t\t\t\t\treturn Short.parseShort(value);\t\n\t\t\t\tcase AttributeDefinition.STRING:\n\t\t\t\t\treturn value;\n\t\t\t\tdefault:\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t}\n\t\t}\nreturn null;'"
+	 * @generated
+	 */
+	Object value(String key);
+
 } 
