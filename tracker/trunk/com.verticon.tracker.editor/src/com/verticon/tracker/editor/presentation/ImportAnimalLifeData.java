@@ -37,13 +37,13 @@ public class ImportAnimalLifeData {
 	private final Premises premises;
 	private final File file;
 	private final EditingDomain editingDomain;
-	private final List<ImportDataColumnMappingWizardPage.ColumnMapper> fileColumnsToFeatureMap;
+	private final List<ImportLifeDataColumnMappingWizardPage.ColumnMapper> fileColumnsToFeatureMap;
 	private final Map<String, EClass> speciesMap;
 	private final int index;
 	private final CompoundCommand compoundCommand = new CompoundCommand();
 
 	ImportAnimalLifeData(Premises premises, File file, EditingDomain editingDomain,
-			List<ImportDataColumnMappingWizardPage.ColumnMapper> fileColumnsToFeatureMap,
+			List<ImportLifeDataColumnMappingWizardPage.ColumnMapper> fileColumnsToFeatureMap,
 			Map<String, EClass> speciesMap, int index) {
 		super();
 		this.premises = premises;
