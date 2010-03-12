@@ -201,7 +201,7 @@
       <!-- Pending Ticket#501
        <command
             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
-            defaultHandler="com.verticon.tracker.editor.handlers.ImportTextAsEventDataEventsHandler"
+            defaultHandler="com.verticon.tracker.editor.handlers.ImportStandardEventHandler"
             description="Imports log file as standard animal event data."
             id="com.verticon.tracker.editor.commands.importText.asEventData.command"
             name="Import Log File as Standard Event Data">
