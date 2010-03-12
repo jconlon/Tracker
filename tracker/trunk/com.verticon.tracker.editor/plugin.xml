@@ -198,6 +198,15 @@
             id="com.verticon.tracker.editor.commands.importText.asLifeData.command"
             name="Import Text File as Animal Life Data">
       </command>
+      <!-- Pending Ticket#501
+       <command
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            defaultHandler="com.verticon.tracker.editor.handlers.ImportTextAsEventDataEventsHandler"
+            description="Imports log file as standard animal event data."
+            id="com.verticon.tracker.editor.commands.importText.asEventData.command"
+            name="Import Log File as Standard Event Data">
+      </command>
+      -->
       <!-- Animal Commands    
       -->
       <command
@@ -295,7 +304,7 @@
 	            </visibleWhen>
                </command>
                
-               <!-- Text file commands 
+               <!-- Animal Life Data Import from Text file commands 
                Import text file as animal life data;
                works on a *.txt File;
                works with simple and transaction based editors;
@@ -325,6 +334,37 @@
     			     </and>
 	            </visibleWhen>
                </command>
+               
+                <!-- Event Data Import from Text file commands 
+               Import text file as event data;
+               works on a *.log File;
+               works with simple and transaction based editors;
+               uses edit command redo and undo framework;
+               needs a Premises in the Editor.
+               Pending completion of Ticket#501
+               
+               <command
+                      commandId="com.verticon.tracker.editor.commands.importText.asEventData.command"
+                      icon="icons/full/obj16/import_wiz.gif"
+                      style="push">
+                  <visibleWhen>
+                       <and>
+		               <with variable="activeMenuSelection">
+		                  <iterate>
+		                      <adapt type="org.eclipse.core.resources.IResource">
+		          					<test property="org.eclipse.core.resources.name" 
+		               				 value="*.log"/>
+		      				 </adapt>
+		                  </iterate>
+		               </with>
+		               
+              			 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+    			     </and>
+	            </visibleWhen>
+               </command>
+               -->
                <!-- 
                Import TagIds Specifying Animal and Event Types;
                works on a *.tags File;
