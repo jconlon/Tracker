@@ -28,8 +28,8 @@ import com.verticon.tracker.Premises;
  * <ul>
  * <li>Page to prompts user to map the text file columns to Animal attributes
  * described as EMF Features.</li>
- * <li>Page to prompt user to select the animal species or the values in the
- * text file that map to species.</li>
+ * <li>Page to prompt user to select the animal datatime or the values in the
+ * text file that map to datatime.</li>
  * </ul>
  * 
  * This wizard is similar to the ImportFairExhibitDataWizard which:
@@ -62,7 +62,7 @@ public class ImportAnimalLifeDataWizard extends Wizard {
 	
 	private int importedAnimals = 0;
 	private EditingDomain editingDomain;
-	private ImportDataColumnMappingWizardPage importDataColumnMappingWizardPage;
+	private ImportLifeDataColumnMappingWizardPage importDataColumnMappingWizardPage;
 	private ImportSpeciesColumnMappingWizardPage importSpeciesColumnMappingWizardPage;
 
 	private IRunnableWithProgress getRunnable(final ImportAnimalLifeData p) {
@@ -149,7 +149,7 @@ public class ImportAnimalLifeDataWizard extends Wizard {
 	@Override
 	public void addPages() {
 		setWindowTitle(MODIFY_WIZARD_TITLE);
-		importDataColumnMappingWizardPage = new ImportDataColumnMappingWizardPage();
+		importDataColumnMappingWizardPage = new ImportLifeDataColumnMappingWizardPage();
 		addPage(importDataColumnMappingWizardPage);
 		importSpeciesColumnMappingWizardPage = new ImportSpeciesColumnMappingWizardPage();
 		addPage(importSpeciesColumnMappingWizardPage);
