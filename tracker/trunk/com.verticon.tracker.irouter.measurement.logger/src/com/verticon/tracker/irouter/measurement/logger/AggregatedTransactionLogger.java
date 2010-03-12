@@ -40,18 +40,24 @@ public class AggregatedTransactionLogger extends AbstractTransactionHandler {
 		Collections.sort(m, DATE_ORDER);
 	
 		for (Measurement measurement : m) {
-			String key = null;
+			String wireAdminEnvelopeScope = null;
 			for (Map.Entry<String, Measurement> entry : measurements.entrySet()) {
 				if(measurement.equals(entry.getValue())){
-					key=entry.getKey();
+					wireAdminEnvelopeScope=entry.getKey();
 				}
 			}
 			//2009-12-14 12:32:34
-			log.info(String.format("Aggregated Transaction: dateTime='%1$tF %1$tT', id='%2$s', type='%3$s', value='%4$.4f'",
-					measurement.getTime(),
-					id,
-					key,
-					measurement.getValue()));
+			log.info(
+					String.format(
+							"type='measurement',dateTime='%1$tF %1$tT',id='%2$s',scope='%3$s',value='%4$.4f',error='%5$.4f',unit='%6$s'",
+							measurement.getTime(),
+							id,
+							wireAdminEnvelopeScope,
+							measurement.getValue(),
+							measurement.getError(),
+							measurement.getUnit()
+					)
+			);
 			}
 	}
 	
