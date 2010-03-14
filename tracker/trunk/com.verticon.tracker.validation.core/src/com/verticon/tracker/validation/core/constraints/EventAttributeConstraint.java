@@ -29,6 +29,7 @@ public class EventAttributeConstraint extends AbstractModelConstraint {
 		}
 		BasicEMap.Entry<String, String> eventAttribute = (BasicEMap.Entry<String, String>) eObj;
 		GenericEvent ge = (GenericEvent) eObj.eContainer();
+		//Generic Event must find an AttributeDefinition associated with this map entry
 		if (ge.findAttributeDefinition(eventAttribute) == null) {
 			return ctx
 					.createFailureStatus(new Object[] {
@@ -37,28 +38,30 @@ public class EventAttributeConstraint extends AbstractModelConstraint {
 							"Please delete this event, validate the schema, and recreate the event." });
 		}
 
-		String nameOfGenericEvent = ge.findAttributeDefinition(eventAttribute).getName();
+		AttributeDefinition attributeDefinition = ge.findAttributeDefinition(eventAttribute);
+		String nameOfAttributeDefinition = attributeDefinition.getName();
 		String valueOfAttribute = eventAttribute.getValue();
 		String keyNameOfAttribute = eventAttribute.getKey();
-		AttributeDefinition attributeDefinition = ge.findAttributeDefinition(eventAttribute);
+		
 		
 
 		EMFEventType eType = ctx.getEventType();
 		
 		if (eType == EMFEventType.NULL) {
 			// In the case of batch mode.
+			
+			//Value cannot be null
 			if (valueOfAttribute == null || valueOfAttribute.length() == 0) {
 				return createNullFailure(ctx, eObj, eventAttribute, ge,
-						nameOfGenericEvent);
-
+						nameOfAttributeDefinition);
 			}
-
+			//Value must validate
 			String result = attributeDefinition.validate(valueOfAttribute);
 			if(result != null && result.length()!=0){
 				
 			return ctx.createFailureStatus(new Object[] {
 					eObj.eClass().getName(),
-					nameOfGenericEvent, keyNameOfAttribute,
+					nameOfAttributeDefinition, keyNameOfAttribute,
 					result });
 			}
 			
@@ -66,18 +69,18 @@ public class EventAttributeConstraint extends AbstractModelConstraint {
 			// In the case of live mode.
 			Object newValue = ctx.getFeatureNewValue();
 			String value = (String)newValue;
-			
+			//Value cannot be null
 			if (value == null || value.length() == 0) {
 				return createNullFailure(ctx, eObj, eventAttribute, ge,
-						nameOfGenericEvent);
+						nameOfAttributeDefinition);
 			}
 			
-			
+			//Value must validate
 			String result = attributeDefinition.validate(valueOfAttribute);
 			if(result != null && result.length()!=0){
 				return ctx.createFailureStatus(new Object[] {
 					eObj.eClass().getName(),
-					nameOfGenericEvent, keyNameOfAttribute,
+					nameOfAttributeDefinition, keyNameOfAttribute,
 					result });
 			}
 		}
