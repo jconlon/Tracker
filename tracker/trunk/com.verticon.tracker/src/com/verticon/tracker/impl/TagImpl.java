@@ -9,14 +9,22 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import com.verticon.osgi.metatype.DocumentRoot;
+import com.verticon.osgi.metatype.MetaData;
+import com.verticon.osgi.metatype.OCD;
+import com.verticon.osgi.metatype.util.MetatypeSwitch;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.EventType;
@@ -167,6 +175,63 @@ public class TagImpl extends EObjectImpl implements Tag {
 			}
 		}
 		return Boolean.TRUE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OCD findOCD(String ocdId) {
+		for (OCD ocd : findOCDs()) {
+			if(ocd.getID().equals(ocdId)){
+				return ocd;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<OCD> findOCDs() {
+		final EList<OCD> results = new BasicEList<OCD>();
+		MetatypeSwitch<Boolean> ocdVisitor = new MetatypeSwitch<Boolean>(){
+			@Override
+			public Boolean caseOCD(OCD object) {
+				results.add(object);
+				return Boolean.FALSE;
+			}
+		
+			@Override
+			public Boolean caseDocumentRoot(DocumentRoot object) {
+				return  Boolean.TRUE;
+			}
+		
+					
+			@Override
+			public Boolean caseMetaData(MetaData object) {
+				return  Boolean.TRUE;
+			}
+		
+			@Override
+			public Boolean defaultCase(EObject object) {
+				return Boolean.FALSE;
+			}
+		};
+		
+		for(TreeIterator<?> iter = EcoreUtil.getAllContents(eResource().getResourceSet(), true); iter.hasNext();){
+			Object o =  iter.next();
+			if(o instanceof EObject){
+				EObject eObject = (EObject)o;
+				if(ocdVisitor.doSwitch(eObject) == Boolean.FALSE){
+					iter.prune();
+				}
+			}
+		}
+		return results;
 	}
 
 	/**

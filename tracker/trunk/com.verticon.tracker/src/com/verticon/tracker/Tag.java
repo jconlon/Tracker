@@ -5,6 +5,7 @@
  */
 package com.verticon.tracker;
 
+import com.verticon.osgi.metatype.OCD;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -104,5 +105,22 @@ public interface Tag extends EObject {
 	 * @generated
 	 */
 	boolean canContain(EventType eventType, String ocdId);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='for (OCD ocd : findOCDs()) {\n\tif(ocd.getID().equals(ocdId)){\n\t\treturn ocd;\n\t}\n}\nreturn null;'"
+	 * @generated
+	 */
+	OCD findOCD(String ocdId);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model many="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='final EList<OCD> results = new <%org.eclipse.emf.common.util.BasicEList%><OCD>();\n<%com.verticon.osgi.metatype.util.MetatypeSwitch%><Boolean> ocdVisitor = new MetatypeSwitch<Boolean>(){\n\t@Override\n\tpublic Boolean caseOCD(OCD object) {\n\t\tresults.add(object);\n\t\treturn Boolean.FALSE;\n\t}\n\n\t@Override\n\tpublic Boolean caseDocumentRoot(<%com.verticon.osgi.metatype.DocumentRoot%> object) {\n\t\treturn  Boolean.TRUE;\n\t}\n\n\t\t\t\n\t@Override\n\tpublic Boolean caseMetaData(<%com.verticon.osgi.metatype.MetaData%> object) {\n\t\treturn  Boolean.TRUE;\n\t}\n\n\t@Override\n\tpublic Boolean defaultCase(EObject object) {\n\t\treturn Boolean.FALSE;\n\t}\n};\n\nfor(<%org.eclipse.emf.common.util.TreeIterator%><?> iter = <%org.eclipse.emf.ecore.util.EcoreUtil%>.getAllContents(eResource().getResourceSet(), true); iter.hasNext();){\n\tObject o =  iter.next();\n\tif(o instanceof EObject){\n\t\t<%org.eclipse.emf.ecore.EObject%> eObject = (EObject)o;\n\t\tif(ocdVisitor.doSwitch(eObject) == Boolean.FALSE){\n\t\t\titer.prune();\n\t\t}\n\t}\n}\nreturn results;'"
+	 * @generated
+	 */
+	EList<OCD> findOCDs();
 
 } // Tag

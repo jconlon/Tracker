@@ -48,12 +48,12 @@ public interface WeighIn extends Event {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Weight</em>' attribute.
-	 * @see #setWeight(Integer)
+	 * @see #setWeight(Double)
 	 * @see com.verticon.tracker.TrackerPackage#getWeighIn_Weight()
 	 * @model required="true"
 	 * @generated
 	 */
-	Integer getWeight();
+	Double getWeight();
 
 	/**
 	 * Sets the value of the '{@link com.verticon.tracker.WeighIn#getWeight <em>Weight</em>}' attribute.
@@ -63,7 +63,7 @@ public interface WeighIn extends Event {
 	 * @see #getWeight()
 	 * @generated
 	 */
-	void setWeight(Integer value);
+	void setWeight(Double value);
 
 	/**
 	 * Returns the value of the '<em><b>Weight Gain Per Day</b></em>' attribute.

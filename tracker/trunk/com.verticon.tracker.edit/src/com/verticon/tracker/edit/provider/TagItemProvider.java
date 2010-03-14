@@ -539,7 +539,7 @@ public class TagItemProvider
 			final Collection<Object> newChildDescriptors, Tag tag) {
 		if(tag.eContainer() != null &&  tag.eContainer() instanceof Animal){
 			ResourceSet rs = tag.eResource().getResourceSet();
-			EList<OCD> objectClassDescriptors = findOCDs(rs);
+			EList<OCD> objectClassDescriptors = tag.findOCDs();
 			
 			for (OCD ocd : objectClassDescriptors) {
 				if(tag.canContain(EventType.GENERIC_EVENT, ocd.getID())){
@@ -568,50 +568,50 @@ public class TagItemProvider
 				);
 	}
 	
-	/**
-	 * 
-	 * @param animalType
-	 * @param premises
-	 * @return all EventSchema Elements for a specified animalType
-	 */
-	private EList<OCD> findOCDs(ResourceSet rs){
-		final EList<OCD> results = new BasicEList<OCD>();
-		MetatypeSwitch<Boolean> ocdVisitor = new MetatypeSwitch<Boolean>(){
-			@Override
-			public Boolean caseOCD(OCD object) {
-				results.add(object);
-				return Boolean.FALSE;
-			}
-
-			@Override
-			public Boolean caseDocumentRoot(DocumentRoot object) {
-				return  Boolean.TRUE;
-			}
-
-			
-			@Override
-			public Boolean caseMetaData(MetaData object) {
-				return  Boolean.TRUE;
-			}
-
-			@Override
-			public Boolean defaultCase(EObject object) {
-				return Boolean.FALSE;
-			}
-		};
-		
-		
-		for(TreeIterator<?> iter = EcoreUtil.getAllContents(rs, true); iter.hasNext();){
-			Object o =  iter.next();
-			if(o instanceof EObject){
-				EObject eObject = (EObject)o;
-				if(ocdVisitor.doSwitch(eObject) == Boolean.FALSE){
-					iter.prune();
-				}
-			}
-		}
-		return results;
-	}
+//	/**
+//	 * 
+//	 * @param animalType
+//	 * @param premises
+//	 * @return all EventSchema Elements for a specified animalType
+//	 */
+//	private static EList<OCD> findOCDs(ResourceSet rs){
+//		final EList<OCD> results = new BasicEList<OCD>();
+//		MetatypeSwitch<Boolean> ocdVisitor = new MetatypeSwitch<Boolean>(){
+//			@Override
+//			public Boolean caseOCD(OCD object) {
+//				results.add(object);
+//				return Boolean.FALSE;
+//			}
+//
+//			@Override
+//			public Boolean caseDocumentRoot(DocumentRoot object) {
+//				return  Boolean.TRUE;
+//			}
+//
+//			
+//			@Override
+//			public Boolean caseMetaData(MetaData object) {
+//				return  Boolean.TRUE;
+//			}
+//
+//			@Override
+//			public Boolean defaultCase(EObject object) {
+//				return Boolean.FALSE;
+//			}
+//		};
+//		
+//		
+//		for(TreeIterator<?> iter = EcoreUtil.getAllContents(rs, true); iter.hasNext();){
+//			Object o =  iter.next();
+//			if(o instanceof EObject){
+//				EObject eObject = (EObject)o;
+//				if(ocdVisitor.doSwitch(eObject) == Boolean.FALSE){
+//					iter.prune();
+//				}
+//			}
+//		}
+//		return results;
+//	}
 
 	/**
 	 * Return the resource locator for this item provider's resources.

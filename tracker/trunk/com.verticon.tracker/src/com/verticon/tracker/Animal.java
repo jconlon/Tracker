@@ -319,7 +319,7 @@ public interface Animal extends EObject {
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	Integer getWeight();
+	Double getWeight();
 
 	/**
 	 * Returns the value of the '<em><b>Weight Gain Per Day</b></em>' attribute.

@@ -2435,7 +2435,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getAnimal_LastEventDateTime(), ecorePackage.getEDate(), "lastEventDateTime", null, 1, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getAnimal_Dam(), this.getAnimal(), null, "dam", null, 0, 1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnimal_Sire(), this.getAnimal(), null, "sire", null, 0, 1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAnimal_Weight(), ecorePackage.getEIntegerObject(), "weight", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAnimal_Weight(), ecorePackage.getEDoubleObject(), "weight", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_WeightGainPerDay(), ecorePackage.getEDoubleObject(), "weightGainPerDay", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_Type(), this.getAnimalType(), "type", null, 1, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_VisualID(), ecorePackage.getEString(), "visualID", null, 0, 1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2470,6 +2470,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		op = addEOperation(tagEClass, theXMLTypePackage.getBoolean(), "canContain", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getEventType(), "eventType", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theXMLTypePackage.getString(), "ocdId", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(tagEClass, theMetatypePackage.getOCD(), "findOCD", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "ocdId", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(tagEClass, null, "findOCDs", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEEList());
+		g2 = createEGenericType(theMetatypePackage.getOCD());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
 
 		initEClass(bovineEClass, Bovine.class, "Bovine", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2557,7 +2566,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(icviEClass, com.verticon.tracker.ICVI.class, "ICVI", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(weighInEClass, WeighIn.class, "WeighIn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getWeighIn_Weight(), ecorePackage.getEIntegerObject(), "weight", null, 1, 1, WeighIn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getWeighIn_Weight(), ecorePackage.getEDoubleObject(), "weight", null, 1, 1, WeighIn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getWeighIn_WeightGainPerDay(), ecorePackage.getEDoubleObject(), "weightGainPerDay", null, 0, 1, WeighIn.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getWeighIn_Unit(), this.getWeightMeasurementUnit(), "unit", "pound", 0, 1, WeighIn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3081,7 +3090,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";							
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";									
 		addAnnotation
 		  (premisesIdNumberEDataType, 
 		   source, 
