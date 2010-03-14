@@ -241,9 +241,9 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 					new Comparator<Exhibit>(){
 
 			public int compare(Exhibit exhibit1, Exhibit exhibit2) {
-					Integer value1 = (exhibit1.getAnimal()==null || exhibit1.getAnimal().getWeight()==null)?
+					Double value1 = (exhibit1.getAnimal()==null || exhibit1.getAnimal().getWeight()==null)?
 							0:exhibit1.getAnimal().getWeight();
-					Integer value2 = (exhibit2.getAnimal()==null || exhibit2.getAnimal().getWeight()==null)?
+					Double value2 = (exhibit2.getAnimal()==null || exhibit2.getAnimal().getWeight()==null)?
 							0:exhibit2.getAnimal().getWeight();
 					return value1.compareTo(value2);
 		    }}), 
