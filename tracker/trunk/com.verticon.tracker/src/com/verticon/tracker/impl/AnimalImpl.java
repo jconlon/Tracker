@@ -249,7 +249,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Integer WEIGHT_EDEFAULT = null;
+	protected static final Double WEIGHT_EDEFAULT = null;
 
 	/**
 	 * The default value of the '{@link #getWeightGainPerDay() <em>Weight Gain Per Day</em>}' attribute.
@@ -606,7 +606,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 					  return;
 				  }
 				  //Weight
-				  Integer oldWeight = mostCurrentWeighIn==null ? null: mostCurrentWeighIn.getWeight();
+				  Double oldWeight = mostCurrentWeighIn==null ? null: mostCurrentWeighIn.getWeight();
 				  Double oldWeightGain = mostCurrentWeighIn==null ? null: mostCurrentWeighIn.getWeightGainPerDay();
 //				  mostCurrentWeighIn = mostCurrentEvent instanceof WeighIn? 
 //						  (WeighIn)mostCurrentEvent: lastWeighIn();
@@ -749,7 +749,7 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public Integer getWeight() {
+	public Double getWeight() {
 		if(mostCurrentWeighIn == null){
 			mostCurrentWeighIn = lastWeighIn();
 		}

@@ -354,10 +354,10 @@ public abstract class AnimalTest extends TestCase {
 		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
 		we.setDateTime(
 				firstWeighInDate.getTime());
-		we.setWeight(100);
+		we.setWeight(100d);
 		tag.getEvents().add(we);
 		
-		assertEquals(new Integer(100), animal.getWeight());
+		assertEquals(new Double(100), animal.getWeight());
 		assertEquals("Should have one notification",1, debugAdapter.counter);
 		
 		//Second weighIn today 250 lbs
@@ -366,28 +366,28 @@ public abstract class AnimalTest extends TestCase {
 		Calendar secondWeighInDate = Calendar.getInstance();
 		we2.setDateTime(
 				secondWeighInDate.getTime());
-		we2.setWeight(250);
+		we2.setWeight(250d);
 		tag.getEvents().add(we2);
-		assertEquals(new Integer(250), animal.getWeight());
+		assertEquals(new Double(250), animal.getWeight());
 		assertEquals("Should have a second notification",2, debugAdapter.counter);
 		
 		
 		//Third weighIn today 350 lbs
 		WeighIn we3 = TrackerFactory.eINSTANCE.createWeighIn();
 		we3.setComments("Third");
-		we3.setWeight(350);
+		we3.setWeight(350d);
 		Calendar thirdWeighInDate = Calendar.getInstance();
 		thirdWeighInDate.add(Calendar.DAY_OF_MONTH, 10);
 		we3.setDateTime(
 				thirdWeighInDate.getTime());
 		tag.getEvents().add(we3);
-		assertEquals(new Integer(350), animal.getWeight());
+		assertEquals(new Double(350), animal.getWeight());
 		assertEquals("Should have a third notification",3, debugAdapter.counter);
 		
 		
 		//Reset the last event to a different weight
-		we3.setWeight(333);
-		assertEquals(new Integer(333), animal.getWeight());
+		we3.setWeight(333d);
+		assertEquals(new Double(333), animal.getWeight());
 		assertEquals("Should have a forth notification",4, debugAdapter.counter);
 
 	}
@@ -434,7 +434,7 @@ public abstract class AnimalTest extends TestCase {
 		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
 		we.setDateTime(
 				firstWeighInDate.getTime());
-		we.setWeight(100);
+		we.setWeight(100d);
 		tag.getEvents().add(we);
 		
 		assertNull("should be null but was "+ animal.getWeightGainPerDay(),animal.getWeightGainPerDay());
@@ -447,7 +447,7 @@ public abstract class AnimalTest extends TestCase {
 		Calendar secondWeighInDate = Calendar.getInstance();
 		we2.setDateTime(
 				secondWeighInDate.getTime());
-		we2.setWeight(250);
+		we2.setWeight(250d);
 		tag.getEvents().add(we2);
 		assertEquals(new Double(15.0), animal.getWeightGainPerDay());
 		assertEquals("Two notifications",2, debugAdapter.counter);
@@ -456,7 +456,7 @@ public abstract class AnimalTest extends TestCase {
 		//Third weighIn today 350 lbs
 		WeighIn we3 = TrackerFactory.eINSTANCE.createWeighIn();
 		we3.setComments("Third");
-		we3.setWeight(350);
+		we3.setWeight(350d);
 		Calendar thirdWeighInDate = Calendar.getInstance();
 		thirdWeighInDate.add(Calendar.DAY_OF_MONTH, 10);
 		we3.setDateTime(
@@ -466,8 +466,8 @@ public abstract class AnimalTest extends TestCase {
 		assertEquals("Three notifications",3, debugAdapter.counter);
 		
 		//Reset the last event to a different weight
-		we3.setWeight(333);
-		assertEquals(new Integer(333), animal.getWeight());
+		we3.setWeight(333d);
+		assertEquals(new Double(333), animal.getWeight());
 		assertEquals("Should have a forth notification",4, debugAdapter.counter);
 
 		
@@ -533,7 +533,7 @@ public abstract class AnimalTest extends TestCase {
 		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
 		we1.setDateTime(
 				firstWeighInDate.getTime());
-		we1.setWeight(100);
+		we1.setWeight(100d);
 		tag.getEvents().add(we1);
 		
 		assertNull( animal.getWeightGainPerDay());
@@ -554,7 +554,7 @@ public abstract class AnimalTest extends TestCase {
 		Calendar secondWeighInDate = Calendar.getInstance();
 		we3.setDateTime(
 				secondWeighInDate.getTime());
-		we3.setWeight(250);
+		we3.setWeight(250d);
 		tag.getEvents().add(we3);
 		assertEquals(new Double(15.0), we3.getWeightGainPerDay());
 		
@@ -564,7 +564,7 @@ public abstract class AnimalTest extends TestCase {
 		//Fourth weighIn today 350 lbs
 		WeighIn we4 = TrackerFactory.eINSTANCE.createWeighIn();
 		we4.setComments("Fourth");
-		we4.setWeight(350);
+		we4.setWeight(350d);
 		Calendar thirdWeighInDate = Calendar.getInstance();
 		thirdWeighInDate.add(Calendar.DAY_OF_MONTH, 10);
 		we4.setDateTime(
@@ -791,7 +791,7 @@ public abstract class AnimalTest extends TestCase {
 		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
 		we.setDateTime(
 				firstWeighInDate.getTime());
-		we.setWeight(100);
+		we.setWeight(100d);
 		tag.getEvents().add(we);
 		
 		assertNotNull( animal.lastWeighIn());
@@ -816,7 +816,7 @@ public abstract class AnimalTest extends TestCase {
 		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
 		we.setDateTime(
 				firstWeighInDate.getTime());
-		we.setWeight(100);
+		we.setWeight(100d);
 		tag.getEvents().add(we);
 		
 		assertNotNull( animal.lastWeighIn());

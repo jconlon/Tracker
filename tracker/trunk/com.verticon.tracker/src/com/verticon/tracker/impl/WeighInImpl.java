@@ -62,7 +62,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Integer WEIGHT_EDEFAULT = null;
+	protected static final Double WEIGHT_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getWeight() <em>Weight</em>}' attribute.
@@ -72,7 +72,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	 * @generated
 	 * @ordered
 	 */
-	protected Integer weight = WEIGHT_EDEFAULT;
+	protected Double weight = WEIGHT_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getWeightGainPerDay() <em>Weight Gain Per Day</em>}' attribute.
@@ -144,9 +144,10 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Integer getWeight() {
+	public Double getWeight() {
 		return weight;
 	}
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -155,8 +156,8 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void setWeight(Integer newWeight) {
-		Integer oldWeight = weight;
+	public void setWeight(Double newWeight) {
+		Double oldWeight = weight;
 		weight = newWeight;
 		if (eNotificationRequired()){
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.WEIGH_IN__WEIGHT, oldWeight, weight));
@@ -363,7 +364,7 @@ public class WeighInImpl extends EventImpl implements WeighIn {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TrackerPackage.WEIGH_IN__WEIGHT:
-				setWeight((Integer)newValue);
+				setWeight((Double)newValue);
 				return;
 			case TrackerPackage.WEIGH_IN__UNIT:
 				setUnit((WeightMeasurementUnit)newValue);

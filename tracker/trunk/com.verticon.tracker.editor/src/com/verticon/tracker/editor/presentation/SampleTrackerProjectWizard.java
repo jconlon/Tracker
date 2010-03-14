@@ -454,7 +454,7 @@ public class SampleTrackerProjectWizard extends BasicNewResourceWizard {
 		return swine;
 	}
 
-	static int getWeigh(int mean){
+	static double getWeigh(int mean){
 		Random r = new Random();
 		return r.nextInt(100) + mean;
 	}

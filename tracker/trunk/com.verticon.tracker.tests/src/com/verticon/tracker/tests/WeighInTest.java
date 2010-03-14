@@ -114,7 +114,7 @@ public class WeighInTest extends EventTest {
 		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
 		we1.setDateTime(
 				firstWeighInDate.getTime());
-		we1.setWeight(100);
+		we1.setWeight(100d);
 		tag.getEvents().add(we1);
 		
 		//Second weighIn today 250 lbs
@@ -123,7 +123,7 @@ public class WeighInTest extends EventTest {
 		Calendar secondWeighInDate = Calendar.getInstance();
 		we2.setDateTime(
 				secondWeighInDate.getTime());
-		we2.setWeight(250);
+		we2.setWeight(250d);
 		tag.getEvents().add(we2);
 		
 		WeighInImpl weImpl = (WeighInImpl)we1;
@@ -145,7 +145,7 @@ public class WeighInTest extends EventTest {
 		//Third weighIn today 250 lbs
 		WeighIn we3 = TrackerFactory.eINSTANCE.createWeighIn();
 		we3.setComments("Third");
-		we3.setWeight(350);
+		we3.setWeight(350d);
 		Calendar thirdWeighInDate = Calendar.getInstance();
 		thirdWeighInDate.add(Calendar.DAY_OF_MONTH, 10);
 		we3.setDateTime(
@@ -196,7 +196,7 @@ public class WeighInTest extends EventTest {
 		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
 		we1.setDateTime(
 				firstWeighInDate.getTime());
-		we1.setWeight(100);
+		we1.setWeight(100d);
 		tag.getEvents().add(we1);
 		
 		//Second weighIn today 250 lbs
@@ -205,7 +205,7 @@ public class WeighInTest extends EventTest {
 		Calendar secondWeighInDate = Calendar.getInstance();
 		we2.setDateTime(
 				secondWeighInDate.getTime());
-		we2.setWeight(250);
+		we2.setWeight(250d);
 		tag.getEvents().add(we2);
 		
 		WeighInImpl weImpl1 = (WeighInImpl)we1;
@@ -239,7 +239,7 @@ public class WeighInTest extends EventTest {
 		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
 		we1.setDateTime(
 				firstWeighInDate.getTime());
-		we1.setWeight(100);
+		we1.setWeight(100d);
 		tag.getEvents().add(we1);
 		
 		assertNull( we1.getWeightGainPerDay());
@@ -260,14 +260,14 @@ public class WeighInTest extends EventTest {
 		Calendar secondWeighInDate = Calendar.getInstance();
 		we3.setDateTime(
 				secondWeighInDate.getTime());
-		we3.setWeight(250);
+		we3.setWeight(250d);
 		tag.getEvents().add(we3);
 		assertEquals(new Double(15.0), we3.getWeightGainPerDay());
 		
 		//Fourth weighIn today 350 lbs
 		WeighIn we4 = TrackerFactory.eINSTANCE.createWeighIn();
 		we4.setComments("Third");
-		we4.setWeight(350);
+		we4.setWeight(350d);
 		Calendar thirdWeighInDate = Calendar.getInstance();
 		thirdWeighInDate.add(Calendar.DAY_OF_MONTH, 10);
 		we4.setDateTime(

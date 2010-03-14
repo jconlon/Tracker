@@ -46,7 +46,7 @@ public final class TrackerReportEditorPlugin extends EMFPlugin {
 	private static Implementation plugin;
 	
 	//The identifier for this plugin
-	private static final String ID = "com.verticon.tracker.editor";
+    public static final String ID = "com.verticon.tracker.editor";
 
 	/**
 	 * slf4j Logger

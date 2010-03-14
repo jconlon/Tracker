@@ -54,7 +54,7 @@
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dam" eType="#//Animal"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sire" eType="#//Animal"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="weightGainPerDay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"
         changeable="false" volatile="true" transient="true" derived="true"/>
@@ -82,6 +82,20 @@
       </eAnnotations>
       <eParameters name="eventType" eType="#//EventType"/>
       <eParameters name="ocdId" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+    </eOperations>
+    <eOperations name="findOCD" eType="ecore:EClass ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="for (OCD ocd : findOCDs()) {&#xA;&#x9;if(ocd.getID().equals(ocdId)){&#xA;&#x9;&#x9;return ocd;&#xA;&#x9;}&#xA;}&#xA;return null;"/>
+      </eAnnotations>
+      <eParameters name="ocdId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="findOCDs">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="final EList&lt;OCD> results = new &lt;%org.eclipse.emf.common.util.BasicEList%>&lt;OCD>();&#xA;&lt;%com.verticon.osgi.metatype.util.MetatypeSwitch%>&lt;Boolean> ocdVisitor = new MetatypeSwitch&lt;Boolean>(){&#xA;&#x9;@Override&#xA;&#x9;public Boolean caseOCD(OCD object) {&#xA;&#x9;&#x9;results.add(object);&#xA;&#x9;&#x9;return Boolean.FALSE;&#xA;&#x9;}&#xA;&#xA;&#x9;@Override&#xA;&#x9;public Boolean caseDocumentRoot(&lt;%com.verticon.osgi.metatype.DocumentRoot%> object) {&#xA;&#x9;&#x9;return  Boolean.TRUE;&#xA;&#x9;}&#xA;&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;@Override&#xA;&#x9;public Boolean caseMetaData(&lt;%com.verticon.osgi.metatype.MetaData%> object) {&#xA;&#x9;&#x9;return  Boolean.TRUE;&#xA;&#x9;}&#xA;&#xA;&#x9;@Override&#xA;&#x9;public Boolean defaultCase(EObject object) {&#xA;&#x9;&#x9;return Boolean.FALSE;&#xA;&#x9;}&#xA;};&#xA;&#xA;for(&lt;%org.eclipse.emf.common.util.TreeIterator%>&lt;?> iter = &lt;%org.eclipse.emf.ecore.util.EcoreUtil%>.getAllContents(eResource().getResourceSet(), true); iter.hasNext();){&#xA;&#x9;Object o =  iter.next();&#xA;&#x9;if(o instanceof EObject){&#xA;&#x9;&#x9;&lt;%org.eclipse.emf.ecore.EObject%> eObject = (EObject)o;&#xA;&#x9;&#x9;if(ocdVisitor.doSwitch(eObject) == Boolean.FALSE){&#xA;&#x9;&#x9;&#x9;iter.prune();&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;return results;"/>
+      </eAnnotations>
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+        <eTypeArguments eClassifier="ecore:EClass ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD"/>
+      </eGenericType>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="usainNumberUsed" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
@@ -410,7 +424,7 @@
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="weightGainPerDay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//WeightMeasurementUnit"
