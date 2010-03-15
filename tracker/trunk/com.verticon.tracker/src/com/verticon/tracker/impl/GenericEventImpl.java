@@ -245,7 +245,9 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 		boolean doesNotHavaAllRequiredAttributes;
 		OCD ocd = getOcd();
 				
-		if(ocd!=null && ocd.getAttributeDefinitions(OCD.REQUIRED).length!=0){
+		if(ocd!=null &&  
+				ocd.getAttributeDefinitions(OCD.REQUIRED)!=null && 
+		                ocd.getAttributeDefinitions(OCD.REQUIRED).length!=0){
 			doesNotHavaAllRequiredAttributes = false;
 			for (AttributeDefinition requiredAttributeDefinition : ocd.getAttributeDefinitions(OCD.REQUIRED)) {
 				String value = this.getEventAttributes().get(requiredAttributeDefinition.getName());
