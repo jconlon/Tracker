@@ -112,12 +112,20 @@ public class TrackerValidator extends EObjectValidator {
 	public static final String DIAGNOSTIC_SOURCE = "com.verticon.tracker";
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Has Required Attributes' of 'Generic Event'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int GENERIC_EVENT__HAS_REQUIRED_ATTRIBUTES = 1;
+
+	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 0;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 1;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -502,7 +510,25 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateGenericEvent(GenericEvent genericEvent, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(genericEvent, diagnostics, context);
+		boolean result = validate_EveryMultiplicityConforms(genericEvent, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(genericEvent, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(genericEvent, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(genericEvent, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(genericEvent, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(genericEvent, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(genericEvent, diagnostics, context);
+		if (result || diagnostics != null) result &= validateGenericEvent_hasRequiredAttributes(genericEvent, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the hasRequiredAttributes constraint of '<em>Generic Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateGenericEvent_hasRequiredAttributes(GenericEvent genericEvent, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return genericEvent.hasRequiredAttributes(diagnostics, context);
 	}
 
 	/**

@@ -9,11 +9,16 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.osgi.service.metatype.AttributeDefinition;
@@ -22,6 +27,7 @@ import org.osgi.service.metatype.ObjectClassDefinition;
 import com.verticon.osgi.metatype.OCD;
 import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.util.TrackerValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -227,6 +233,44 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 					}
 				}
 		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean hasRequiredAttributes(DiagnosticChain diagnostics, Map context) {
+		// -> specify the condition that violates the invariant
+		boolean doesNotHavaAllRequiredAttributes;
+		OCD ocd = getOcd();
+				
+		if(ocd!=null && ocd.getAttributeDefinitions(OCD.REQUIRED).length!=0){
+			doesNotHavaAllRequiredAttributes = false;
+			for (AttributeDefinition requiredAttributeDefinition : ocd.getAttributeDefinitions(OCD.REQUIRED)) {
+				String value = this.getEventAttributes().get(requiredAttributeDefinition.getName());
+				if(value==null){
+					doesNotHavaAllRequiredAttributes=true;
+				}
+			}
+		}else{
+			doesNotHavaAllRequiredAttributes = false;
+		}
+				
+		if(doesNotHavaAllRequiredAttributes) {
+			if (diagnostics != null) {
+				diagnostics.add
+				// -> verify the details of the diagnostic, including severity and message
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+							TrackerValidator.DIAGNOSTIC_SOURCE,
+						        TrackerValidator.GENERIC_EVENT__HAS_REQUIRED_ATTRIBUTES,
+							EcorePlugin.INSTANCE.getString("_UI_GenericInvariant_diagnostic", new Object[] { "hasRequiredAttributes", EObjectValidator.getObjectLabel(this, context) }),
+							new Object [] { this }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
