@@ -637,6 +637,13 @@
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap"/>
     </eOperations>
+    <eOperations name="hasValidAttributes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="// -> specify the condition that violates the invariant&#xA;boolean doesNotHavaAllValidAttributes;&#xA;OCD ocd = getOcd();&#xA;if(ocd!=null &amp;&amp;  &#xA;&#x9;&#x9;ocd.getAttributeDefinitions(OCD.REQUIRED)!=null &amp;&amp; &#xA;&#x9;&#x9;ocd.getAttributeDefinitions(OCD.REQUIRED).length!=0){&#xA;&#x9;doesNotHavaAllValidAttributes = false;&#xA;&#x9;for (Map.Entry&lt;String, String> eventAttribute : getEventAttributes()) {&#xA;&#x9; &#x9;AttributeDefinition ad = findAttributeDefinition(eventAttribute);&#xA;&#x9;&#x9;if(ad.validate(eventAttribute.getValue())==null || &#xA;&#x9;&#x9;&#x9;ad.validate(eventAttribute.getValue()).trim().length()==0){&#xA;&#x9;&#x9;&#x9;//IsValid&#xA;&#x9;&#x9;}else{&#xA;&#x9;&#x9;&#x9;doesNotHavaAllValidAttributes = true;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}else{&#xA;&#x9;doesNotHavaAllValidAttributes = false;&#xA;}&#xA;&#xA;if (doesNotHavaAllValidAttributes) {&#xA;&#x9;if (diagnostics != null) {&#xA;&#x9;&#x9;diagnostics.add&#xA;&#x9;&#x9;&#x9;(new BasicDiagnostic&#xA;&#x9;&#x9;&#x9;&#x9;(Diagnostic.ERROR,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TrackerValidator.DIAGNOSTIC_SOURCE,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;TrackerValidator.GENERIC_EVENT__HAS_VALID_ATTRIBUTES,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;EcorePlugin.INSTANCE.getString(&quot;_UI_GenericInvariant_diagnostic&quot;, new Object[] { &quot;hasValidAttributes&quot;, EObjectValidator.getObjectLabel(this, context) }),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;new Object [] { this }));&#xA;&#x9;}&#xA;&#x9;return false;&#xA;}&#xA;return true;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eventAttributes" upperBound="-1"
         eType="#//StringToStringMap" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ocd" lowerBound="1" eType="ecore:EClass ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD"/>

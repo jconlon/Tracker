@@ -19,7 +19,7 @@
          </description>
          <constraints categories="com.verticon.tracker.validation.catagory.ocl/core">
            
-           <!-- This constraint applies to GenericEvent value-->
+           <!-- This constraint applies to the GenericEvent EventAttribute values-->
             <constraint
                   lang="Java"
                   class="com.verticon.tracker.validation.core.constraints.EventAttributeConstraint"

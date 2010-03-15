@@ -10,6 +10,13 @@ import org.osgi.service.metatype.AttributeDefinition;
 
 import com.verticon.tracker.GenericEvent;
 
+/**
+ * GenericEvent Attributes must not be null and they must validate with the specified Attribute
+ * The first is already part of the model definition
+ * The second should be an invariant on the model element.
+ * @author jconlon
+ *
+ */
 public class EventAttributeConstraint extends AbstractModelConstraint {
 
 	/**
@@ -18,7 +25,7 @@ public class EventAttributeConstraint extends AbstractModelConstraint {
 	 * To conform to the format and message text:
 	 * 
 	 * Core Constraint: {0} for GenericEvent {1}; attribute {2}. {3}"
-	 * 
+	 * Core Constraint: StringToStringMap for GenericeEvent BloodWeight; attribute Blood Weight. The value must be a non null value.
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
@@ -33,9 +40,10 @@ public class EventAttributeConstraint extends AbstractModelConstraint {
 		if (ge.findAttributeDefinition(eventAttribute) == null) {
 			return ctx
 					.createFailureStatus(new Object[] {
-							eObj.eClass().getName(), "of an unknown type",
+							eObj.eClass().getName(), 
+							"of an unknown type",
 							eventAttribute.getKey(),
-							"Please delete this event, validate the schema, and recreate the event." });
+							"Please delete this event, validate the metatype specification, and recreate the event." });
 		}
 
 		AttributeDefinition attributeDefinition = ge.findAttributeDefinition(eventAttribute);
@@ -60,7 +68,7 @@ public class EventAttributeConstraint extends AbstractModelConstraint {
 			if(result != null && result.length()!=0){
 				
 			return ctx.createFailureStatus(new Object[] {
-					eObj.eClass().getName(),
+					"EventAttribute",
 					nameOfAttributeDefinition, keyNameOfAttribute,
 					result });
 			}
@@ -76,12 +84,16 @@ public class EventAttributeConstraint extends AbstractModelConstraint {
 			}
 			
 			//Value must validate
+			// Core Constraint: {0} 			  for GenericEvent  {1};         attribute {2}.          {3}"
+			// Core Constraint: StringToStringMap for GenericeEvent BloodWeight; attribute Blood Weight. Double invalid. empty String.
 			String result = attributeDefinition.validate(valueOfAttribute);
 			if(result != null && result.length()!=0){
 				return ctx.createFailureStatus(new Object[] {
-					eObj.eClass().getName(),
-					nameOfAttributeDefinition, keyNameOfAttribute,
-					result });
+					"EventAttribute",
+					nameOfAttributeDefinition, 
+					keyNameOfAttribute,
+					result //3
+					});
 			}
 		}
 
@@ -89,6 +101,11 @@ public class EventAttributeConstraint extends AbstractModelConstraint {
 	}
 
 	/**
+	 * 
+	 * Core Constraint: {0} 			  for GenericEvent  {1};         attribute {2}.          {3}"
+	 * Core Constraint: StringToStringMap for GenericeEvent BloodWeight; attribute Blood Weight. The value must be a non null value.
+	 * 
+	 * 
 	 * @param ctx
 	 * @param eObj
 	 * @param eventAttribute
@@ -101,10 +118,12 @@ public class EventAttributeConstraint extends AbstractModelConstraint {
 			String nameOfEvent) {
 		IStatus failureStatus = ctx
 				.createFailureStatus(new Object[] {
-						eObj.eClass().getName(),
-						nameOfEvent,
-						eventAttribute.getKey(),
-						"The value must be a non null value." });
+						"EventAttribute",//0
+						nameOfEvent,//1
+						eventAttribute.getKey(),//2
+						"The value must not be null." //3
+						}
+	 );
 		return failureStatus;
 	}
 
