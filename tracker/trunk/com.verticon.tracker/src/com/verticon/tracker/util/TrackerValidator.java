@@ -120,12 +120,20 @@ public class TrackerValidator extends EObjectValidator {
 	public static final int GENERIC_EVENT__HAS_REQUIRED_ATTRIBUTES = 1;
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Has Valid Attributes' of 'Generic Event'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int GENERIC_EVENT__HAS_VALID_ATTRIBUTES = 2;
+
+	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 1;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 2;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -518,6 +526,7 @@ public class TrackerValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(genericEvent, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(genericEvent, diagnostics, context);
 		if (result || diagnostics != null) result &= validateGenericEvent_hasRequiredAttributes(genericEvent, diagnostics, context);
+		if (result || diagnostics != null) result &= validateGenericEvent_hasValidAttributes(genericEvent, diagnostics, context);
 		return result;
 	}
 
@@ -529,6 +538,16 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validateGenericEvent_hasRequiredAttributes(GenericEvent genericEvent, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return genericEvent.hasRequiredAttributes(diagnostics, context);
+	}
+
+	/**
+	 * Validates the hasValidAttributes constraint of '<em>Generic Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateGenericEvent_hasValidAttributes(GenericEvent genericEvent, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return genericEvent.hasValidAttributes(diagnostics, context);
 	}
 
 	/**

@@ -120,4 +120,12 @@ public interface GenericEvent extends Event {
 	 */
 	boolean hasRequiredAttributes(DiagnosticChain diagnostics, Map context);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='// -> specify the condition that violates the invariant\nboolean doesNotHavaAllValidAttributes;\nOCD ocd = getOcd();\nif(ocd!=null &&  \n\t\tocd.getAttributeDefinitions(OCD.REQUIRED)!=null && \n\t\tocd.getAttributeDefinitions(OCD.REQUIRED).length!=0){\n\tdoesNotHavaAllValidAttributes = false;\n\tfor (Map.Entry<String, String> eventAttribute : getEventAttributes()) {\n\t \tAttributeDefinition ad = findAttributeDefinition(eventAttribute);\n\t\tif(ad.validate(eventAttribute.getValue())==null || \n\t\t\tad.validate(eventAttribute.getValue()).trim().length()==0){\n\t\t\t//IsValid\n\t\t}else{\n\t\t\tdoesNotHavaAllValidAttributes = true;\n\t\t}\n\t}\n}else{\n\tdoesNotHavaAllValidAttributes = false;\n}\n\nif (doesNotHavaAllValidAttributes) {\n\tif (diagnostics != null) {\n\t\tdiagnostics.add\n\t\t\t(new BasicDiagnostic\n\t\t\t\t(Diagnostic.ERROR,\n\t\t\t\t\tTrackerValidator.DIAGNOSTIC_SOURCE,\n\t\t\t\t\tTrackerValidator.GENERIC_EVENT__HAS_VALID_ATTRIBUTES,\n\t\t\t\t\tEcorePlugin.INSTANCE.getString(\"_UI_GenericInvariant_diagnostic\", new Object[] { \"hasValidAttributes\", EObjectValidator.getObjectLabel(this, context) }),\n\t\t\t\t\tnew Object [] { this }));\n\t}\n\treturn false;\n}\nreturn true;'"
+	 * @generated
+	 */
+	boolean hasValidAttributes(DiagnosticChain diagnostics, Map context);
+
 } 

@@ -280,6 +280,47 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean hasValidAttributes(DiagnosticChain diagnostics, Map context) {
+		// -> specify the condition that violates the invariant
+		boolean doesNotHavaAllValidAttributes;
+		OCD ocd = getOcd();
+		if(ocd!=null &&  
+				ocd.getAttributeDefinitions(OCD.REQUIRED)!=null && 
+				ocd.getAttributeDefinitions(OCD.REQUIRED).length!=0){
+			doesNotHavaAllValidAttributes = false;
+			for (Map.Entry<String, String> eventAttribute : getEventAttributes()) {
+			 	AttributeDefinition ad = findAttributeDefinition(eventAttribute);
+				if(ad.validate(eventAttribute.getValue())==null || 
+					ad.validate(eventAttribute.getValue()).trim().length()==0){
+					//IsValid
+				}else{
+					doesNotHavaAllValidAttributes = true;
+				}
+			}
+		}else{
+			doesNotHavaAllValidAttributes = false;
+		}
+		
+		if (doesNotHavaAllValidAttributes) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+							TrackerValidator.DIAGNOSTIC_SOURCE,
+							TrackerValidator.GENERIC_EVENT__HAS_VALID_ATTRIBUTES,
+							EcorePlugin.INSTANCE.getString("_UI_GenericInvariant_diagnostic", new Object[] { "hasValidAttributes", EObjectValidator.getObjectLabel(this, context) }),
+							new Object [] { this }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
