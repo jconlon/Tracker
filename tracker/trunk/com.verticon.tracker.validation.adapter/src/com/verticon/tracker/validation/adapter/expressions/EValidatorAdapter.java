@@ -28,20 +28,19 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EObjectValidator;
-
 import org.eclipse.emf.validation.model.EvaluationMode;
 import org.eclipse.emf.validation.model.IConstraintStatus;
 import org.eclipse.emf.validation.service.IBatchValidator;
 import org.eclipse.emf.validation.service.ModelValidationService;
+
+import com.verticon.tracker.util.TrackerValidator;
 
 
 /**
  * An adapter that plugs the EMF Model Validation Service API into the
  * {@link org.eclipse.emf.ecore.EValidator} API.
  */
-public class EValidatorAdapter
-	extends EObjectValidator {
+public class EValidatorAdapter extends TrackerValidator{
 
 	/**
 	 * Model Validation Service interface for batch validation of EMF elements.
