@@ -4,5 +4,5 @@ Bundle-Name: Logback Config Fragment
 Bundle-SymbolicName: com.verticon.tracker.logging.logback.config
 Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Verticon, Inc.
-Fragment-Host: com.verticon.tracker.logging.logback
+Fragment-Host: ch.qos.logback.classic;bundle-version="0.9.18"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
