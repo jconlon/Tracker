@@ -30,7 +30,7 @@
                   statusCode="100">
                <description>The Generic Event attribute values must conform to the attribute definitions described in the referenced Metatype OCD element.</description>
       		   <message>Core Constraint: {0} for GenericEvent {1}; attribute {2}. {3}" </message>
-      		   <target class="EventAttribute">
+      		   <target class="StringToStringMap">
          			<event name="Set">
             			<feature name="value"/>
        				</event>
