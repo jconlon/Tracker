@@ -6,9 +6,9 @@
 # ./tracker -vmargs -Dlogback.configurationFile=file:/home/jconlon/Desktop/tracker/logback-test.xml 
 # or in windows with:
 # "C:\Program Files\tracker\tracker.exe" -vmargs "-Dlogback.configurationFile=file:C:/Downloads/tracker/logback-test.xml"
-
+<configuration debug="true" scan="true">
 -->
-<configuration>
+<configuration scan="true">
   
   <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <File>${user.home}/tracker.log</File>
@@ -29,15 +29,36 @@
       <MaxFileSize>100KB</MaxFileSize>
     </triggeringPolicy>
   </appender>
+  
+ <appender name="STDOUT"
+    class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</Pattern>
+    </layout>
+  </appender>
+
+ <appender name="SOCKET" class="ch.qos.logback.classic.net.SocketAppender">
+    <RemoteHost>localhost</RemoteHost>
+    <Port>4560</Port>
+    <ReconnectionDelay>10000</ReconnectionDelay>
+    <IncludeCallerData>false</IncludeCallerData>
+  </appender>
+
  
   <logger name="com.verticon.tracker.reader">
     <level value="WARN"/>
   </logger>
   
   <logger name="com.verticon.tracker.impl.AnimalEventHistoryAdapter">
-    <level value="WARN"/>
+    <level value="DEBUG"/>
+  </logger>
+  <logger name="com.verticon.tracker.editor.util.UpdateStrategies">
+     <level value="DEBUG"/>
   </logger>
   
+  <logger name="com.verticon.tracker.editor.util.GenericControlBuilderFactory">
+  <level value="DEBUG"/>
+  </logger>
   <logger name="com.verticon.tracker.birt">
     <level value="INFO"/>
   </logger>
@@ -52,10 +73,13 @@
   
   <root>
     <level value="WARN"/>
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="SOCKET"/>
     <!--  
     <appender-ref ref="RollingFile"/>
     -->
   </root>
-  	
-  <consolePlugin />
+  
+  <!--  <consolePlugin /> -->	
+ 
 </configuration>

@@ -12,7 +12,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl.ecore,
  org.eclipse.emf.edit.ui,
  org.eclipse.emf.databinding;bundle-version="1.0.0",
- com.verticon.tracker.logging.logback;bundle-version="0.9.11",
  org.junit4;bundle-version="4.3.1"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: com.verticon.tracker.tests.Activator
@@ -20,4 +19,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: com.verticon.osgi.metatype,
  com.verticon.osgi.metatype.util,
  org.osgi.service.metatype;version="1.1.0",
- org.osgi.util.measurement;version="1.0.1"
+ org.osgi.util.measurement;version="1.0.1",
+ org.slf4j;version="1.5.11"
