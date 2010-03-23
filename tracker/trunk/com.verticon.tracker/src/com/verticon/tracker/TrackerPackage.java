@@ -5915,7 +5915,7 @@ public interface TrackerPackage extends EPackage {
 	 * @return the meta object for class '<em>String To String Map</em>'.
 	 * @see java.util.Map.Entry
 	 * @model keyDataType="org.eclipse.emf.ecore.EString" keyRequired="true"
-	 *        valueDataType="org.eclipse.emf.ecore.EString" valueRequired="true"
+	 *        valueDataType="org.eclipse.emf.ecore.EString"
 	 * @generated
 	 */
 	EClass getStringToStringMap();
