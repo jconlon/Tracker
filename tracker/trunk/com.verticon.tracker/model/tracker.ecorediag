@@ -2320,6 +2320,10 @@
         <element xmi:type="ecore:EOperation" href="tracker.ecore#//GenericEvent/hasRequiredAttributes"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_C35i4i_mEd-59cz8NZSGGQ"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_f9OhcDbEEd-WRpxutNqkxw" type="2002">
+        <element xmi:type="ecore:EOperation" href="tracker.ecore#//GenericEvent/hasAllAttributes"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_f9OhcTbEEd-WRpxutNqkxw"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_x-iIsDBLEd-59cz8NZSGGQ" type="2002">
         <element xmi:type="ecore:EOperation" href="tracker.ecore#//GenericEvent/hasValidAttributes"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_x-iIsTBLEd-59cz8NZSGGQ"/>

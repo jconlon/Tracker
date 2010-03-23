@@ -242,17 +242,21 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 	 */
 	public boolean hasRequiredAttributes(DiagnosticChain diagnostics, Map context) {
 		// -> specify the condition that violates the invariant
+		// All attributes defined in the OCD are required to be present in the document but
+		//  not all attributes NEED to be set this validates if all requiredAttributes are not null
 		boolean doesNotHavaAllRequiredAttributes;
 		OCD ocd = getOcd();
-				
+		String message =null;		
 		if(ocd!=null &&  
 				ocd.getAttributeDefinitions(OCD.REQUIRED)!=null && 
 		                ocd.getAttributeDefinitions(OCD.REQUIRED).length!=0){
 			doesNotHavaAllRequiredAttributes = false;
+		        //get the Attribute definitions from the OCD
 			for (AttributeDefinition requiredAttributeDefinition : ocd.getAttributeDefinitions(OCD.REQUIRED)) {
 				String value = this.getEventAttributes().get(requiredAttributeDefinition.getName());
 				if(value==null){
 					doesNotHavaAllRequiredAttributes=true;
+					message=" is missing attribute("+requiredAttributeDefinition.getName()+')';
 				}
 			}
 		}else{
@@ -267,7 +271,8 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 						(Diagnostic.ERROR,
 							TrackerValidator.DIAGNOSTIC_SOURCE,
 						        TrackerValidator.GENERIC_EVENT__HAS_REQUIRED_ATTRIBUTES,
-							EcorePlugin.INSTANCE.getString("_UI_GenericInvariant_diagnostic", new Object[] { "hasRequiredAttributes", EObjectValidator.getObjectLabel(this, context) }),
+							EcorePlugin.INSTANCE.getString("_UI_GenericInvariant_diagnostic", 
+		                                           new Object[] { "hasRequiredAttributes"+ message, EObjectValidator.getObjectLabel(this, context) }),
 							new Object [] { this }));
 			}
 			return false;
@@ -284,17 +289,26 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 		// -> specify the condition that violates the invariant
 		boolean doesNotHavaAllValidAttributes;
 		OCD ocd = getOcd();
+		String message = null;
+		
 		if(ocd!=null &&  
-				ocd.getAttributeDefinitions(OCD.REQUIRED)!=null && 
-				ocd.getAttributeDefinitions(OCD.REQUIRED).length!=0){
+				ocd.getAttributeDefinitions(OCD.ALL)!=null && 
+				ocd.getAttributeDefinitions(OCD.ALL).length!=0){
 			doesNotHavaAllValidAttributes = false;
+		        //Get all the attributes in the event
 			for (Map.Entry<String, String> eventAttribute : getEventAttributes()) {
+		                if(eventAttribute.getValue()==null){
+		                        //Dont validate nulls.  Let the hasRequiredAttributes invariant deal with these
+					continue;
+		                }
 			 	AttributeDefinition ad = findAttributeDefinition(eventAttribute);
-				if(ad.validate(eventAttribute.getValue())==null || 
-					ad.validate(eventAttribute.getValue()).trim().length()==0){
+		                //For every attribute get the value and validate it.
+				message = ad.validate(eventAttribute.getValue());
+				if(message==null ||  message.trim().length()==0){
 					//IsValid
 				}else{
 					doesNotHavaAllValidAttributes = true;
+		                        message = "attribute("+eventAttribute.getKey()+") dataType "+message;
 				}
 			}
 		}else{
@@ -308,7 +322,63 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 						(Diagnostic.ERROR,
 							TrackerValidator.DIAGNOSTIC_SOURCE,
 							TrackerValidator.GENERIC_EVENT__HAS_VALID_ATTRIBUTES,
-							EcorePlugin.INSTANCE.getString("_UI_GenericInvariant_diagnostic", new Object[] { "hasValidAttributes", EObjectValidator.getObjectLabel(this, context) }),
+							EcorePlugin.INSTANCE.getString("_UI_GenericInvariant_diagnostic",
+				 				 new Object[] { "hasValidAttributes "+message, EObjectValidator.getObjectLabel(this, context) }),
+							new Object [] { this }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean hasAllAttributes(DiagnosticChain diagnostics, Map context) {
+		// -> specify the condition that violates the invariant
+		// All attributes defined in the OCD are required to be present in the document but
+		//  not all attributes NEED to be set this validates if all attributes are present
+		boolean doesNotHavaAllAttributes;
+		OCD ocd = getOcd();
+				
+		String message =null;
+		if(ocd!=null &&  ocd.getAttributeDefinitions(OCD.ALL)!=null && 
+				              ocd.getAttributeDefinitions(OCD.ALL).length!=0){
+			doesNotHavaAllAttributes = false;
+		        //get the Attribute definitions from the OCD
+			for (AttributeDefinition attributeDefinition : ocd.getAttributeDefinitions(OCD.ALL)) {
+				//for every attributeDefinition there needs to be a entry
+				boolean foundAttributeEntry = false;
+				for (Map.Entry<String, String> entry : this.getEventAttributes()) {
+					if(entry.getKey().equals(attributeDefinition.getName())){
+						foundAttributeEntry = true;
+					}else{
+						message=" is missing attribute("+attributeDefinition.getName()+')';
+					}
+				}
+				if(!foundAttributeEntry){
+					doesNotHavaAllAttributes = true;
+					break;
+				}
+			}
+		}else{
+			doesNotHavaAllAttributes = false;
+		}
+				
+		if (doesNotHavaAllAttributes) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+							TrackerValidator.DIAGNOSTIC_SOURCE,
+						        TrackerValidator.GENERIC_EVENT__HAS_ALL_ATTRIBUTES,
+							EcorePlugin.INSTANCE.getString("_UI_GenericInvariant_diagnostic", 
+									new Object[] {
+									"hasAllAttributes"+ message, 
+									EObjectValidator.getObjectLabel(this, context) 
+									}),
 							new Object [] { this }));
 			}
 			return false;
