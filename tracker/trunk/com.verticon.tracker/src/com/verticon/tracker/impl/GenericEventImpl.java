@@ -164,6 +164,9 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 			for (AttributeDefinition attributeDefinition : newOcd.getAttributeDefinitions(ObjectClassDefinition.ALL)) {
 				StringToStringMapImpl eventAttribute =new StringToStringMapImpl();
 				eventAttribute.setKey(attributeDefinition.getName());
+				if(attributeDefinition.getType()!= AttributeDefinition.BOOLEAN && attributeDefinition.getDefaultValue()!=null){
+					eventAttribute.setValue(attributeDefinition.getDefaultValue()[0]);
+				}
 				getEventAttributes().add(eventAttribute);
 			}
 			return;
