@@ -205,6 +205,7 @@ public class GenericEventItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(TrackerPackage.Literals.GENERIC_EVENT__EVENT_ATTRIBUTES);
 		}
 		return childrenFeatures;
 	}
