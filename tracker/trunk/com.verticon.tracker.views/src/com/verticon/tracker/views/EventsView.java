@@ -3,6 +3,7 @@ package com.verticon.tracker.views;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
@@ -84,7 +85,17 @@ public class EventsView extends TrackerView implements ItemsView{
 		viewer.setContentProvider(new EventHistoryContentProvider(
 				adapterFactory));
 		viewer.setLabelProvider(new AdapterFactoryLabelProvider(
-						adapterFactory));
+						adapterFactory){
+
+							@Override
+							public String getColumnText(Object object,
+									int columnIndex) {
+								if(columnIndex!=1){
+									return super.getColumnText(object, columnIndex);
+								}
+								String text = super.getColumnText(object, columnIndex);
+								return text;
+							}});
 	}
 
 	/**
@@ -108,6 +119,7 @@ public class EventsView extends TrackerView implements ItemsView{
 		eventSelectionController = new SelectionController(
 				this, new EventsStrategy(this));
 		eventSelectionController.open();
+		
 		getSite().getPage().addSelectionListener(eventSelectionController);
 		getSite().getPage().addPartListener(eventSelectionController);
 		tableViewer.addSelectionChangedListener(eventSelectionController);
