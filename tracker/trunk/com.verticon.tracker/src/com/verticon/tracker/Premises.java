@@ -51,7 +51,7 @@ public interface Premises extends EObject {
 	 * @return the value of the '<em>Premises Id</em>' attribute.
 	 * @see #setPremisesId(String)
 	 * @see com.verticon.tracker.TrackerPackage#getPremises_PremisesId()
-	 * @model dataType="com.verticon.tracker.PremisesIdNumber" required="true"
+	 * @model dataType="com.verticon.tracker.PremisesIdNumber"
 	 * @generated
 	 */
 	String getPremisesId();

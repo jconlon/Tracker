@@ -99,6 +99,22 @@
                ]]>
             </constraint>
             
+            <!-- This constraint applies to Premises premisesId value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Batch"
+         		name="%premisesId.name"
+         		id="premisesId"
+         		statusCode="102">
+      		<description>%premisesId.desc</description>
+      		<message>%premisesId.msg</message>
+      		<target class="Premises"/>
+      		<![CDATA[
+         		self.premisesId.oclIsUndefined() = false 
+         	]]>
+      		</constraint>
+      		
             <!-- Slaughtered Duplicate Event Constraint (Batch Mode) -->
                <constraint
                   lang="OCL"
