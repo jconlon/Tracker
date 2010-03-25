@@ -71,9 +71,7 @@ public class StringToStringMapItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		
 		if (itemPropertyDescriptors == null) {
-//			System.out.printf("%s building itemPropertyDescriptors \n",this);
 			super.getPropertyDescriptors(object);
 
 			addKeyPropertyDescriptor(object);
