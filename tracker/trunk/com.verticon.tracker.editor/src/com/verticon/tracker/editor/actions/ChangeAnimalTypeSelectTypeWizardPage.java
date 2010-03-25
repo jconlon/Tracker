@@ -22,8 +22,17 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TableColumn;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.AnimalType;
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerFactory;
 
+/**
+ * Present a list of animal types that are appropriate to the policy of the 
+ * document.
+ * 
+ * @author jconlon
+ *
+ */
 public class ChangeAnimalTypeSelectTypeWizardPage extends WizardPage
 		implements ISelectionChangedListener {
 
@@ -33,21 +42,40 @@ public class ChangeAnimalTypeSelectTypeWizardPage extends WizardPage
 	private List<Animal> model = new ArrayList<Animal>();
 
 	private final AdapterFactory adapterFactory;
+	
 
 	public ChangeAnimalTypeSelectTypeWizardPage(
-			AdapterFactory adapterFactory) {
+			AdapterFactory adapterFactory, Premises premises) {
 		super("selectAnimal");
 		this.adapterFactory = adapterFactory;
 		setTitle("Select Animal Type");
 		setDescription("Select the new Animal Type you wish to change the selected animals to.");
 		
-		model.add(TrackerFactory.eINSTANCE.createBovineBeef());
-		model.add(TrackerFactory.eINSTANCE.createBovineBison());
-		model.add(TrackerFactory.eINSTANCE.createBovineDairy());
-		model.add(TrackerFactory.eINSTANCE.createCaprine());
-		model.add(TrackerFactory.eINSTANCE.createEquine());
-		model.add(TrackerFactory.eINSTANCE.createOvine());
-		model.add(TrackerFactory.eINSTANCE.createSwine());
+		if(premises.canContain(null,null,AnimalType.BOVINE_BEEF)){
+			model.add(TrackerFactory.eINSTANCE.createBovineBeef());
+		}
+		
+		if(premises.canContain(null,null,AnimalType.BOVINE_BISON)){
+			model.add(TrackerFactory.eINSTANCE.createBovineBison());
+		}
+		if(premises.canContain(null,null,AnimalType.BOVINE_DAIRY)){
+			model.add(TrackerFactory.eINSTANCE.createBovineDairy());
+		}
+		if(premises.canContain(null,null,AnimalType.CAPRINE)){
+			model.add(TrackerFactory.eINSTANCE.createCaprine());
+		}
+		
+		if(premises.canContain(null,null,AnimalType.EQUINE)){
+			model.add(TrackerFactory.eINSTANCE.createEquine());
+		}
+			
+		if(premises.canContain(null,null,AnimalType.OVINE)){
+			model.add(TrackerFactory.eINSTANCE.createOvine());
+		}
+		
+		if(premises.canContain(null,null,AnimalType.SWINE)){
+			model.add(TrackerFactory.eINSTANCE.createSwine());
+		}
 		
 	}
 
