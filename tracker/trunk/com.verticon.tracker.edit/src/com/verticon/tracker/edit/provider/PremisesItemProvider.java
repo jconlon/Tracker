@@ -26,9 +26,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.verticon.tracker.AnimalType;
-import com.verticon.tracker.EventType;
 import com.verticon.tracker.Premises;
-import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 
