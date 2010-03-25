@@ -35,6 +35,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import com.verticon.tracker.fair.Fair;
+import com.verticon.tracker.fair.FairFactory;
 import com.verticon.tracker.fair.FairPackage;
 
 /**
