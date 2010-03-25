@@ -144,8 +144,7 @@
       <eParameters name="ocdId" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
       <eParameters name="animalType" eType="#//AnimalType"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="premisesId" lowerBound="1"
-        eType="#//PremisesIdNumber"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="premisesId" eType="#//PremisesIdNumber"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="emailContact" lowerBound="1"
         eType="#//Email" defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="animals" upperBound="-1"
