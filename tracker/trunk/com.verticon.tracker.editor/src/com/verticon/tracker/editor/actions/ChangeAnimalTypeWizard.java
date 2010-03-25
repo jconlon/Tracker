@@ -23,6 +23,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IWorkbenchWindow;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
@@ -48,9 +49,10 @@ public class ChangeAnimalTypeWizard extends Wizard  {
 	private static final String ADD_SECTION = "ChangeAnimalType";
 	private static final String ADD_CHANGE_TYPE_WIZARD = "ChangeAnimalTypeWizard";
 	private IWorkbenchWindow workbenchWindow;
+	private final Premises premises;
     
     
-	public ChangeAnimalTypeWizard() {
+	public ChangeAnimalTypeWizard(Premises premises) {
 		IDialogSettings trackerSettings = 
 			TrackerReportEditorPlugin.getPlugin().getDialogSettings();
 		IDialogSettings wizardSettings =
@@ -60,6 +62,7 @@ public class ChangeAnimalTypeWizard extends Wizard  {
 				trackerSettings.addNewSection(ADD_CHANGE_TYPE_WIZARD);
 		}
 		setDialogSettings(wizardSettings);		
+		this.premises=premises;
 	}
 
 	public void init(IWorkbenchWindow workbenchWindow, EditingDomain editingDomain, ISelection selection){
@@ -81,7 +84,8 @@ public class ChangeAnimalTypeWizard extends Wizard  {
 	@Override
 	public void addPages() {
 		setWindowTitle(ADD_SECTION);
-		selectTypePage = new ChangeAnimalTypeSelectTypeWizardPage(new TrackerItemProviderAdapterFactory());
+		selectTypePage = new ChangeAnimalTypeSelectTypeWizardPage(
+				new TrackerItemProviderAdapterFactory(),premises);
 		addPage(selectTypePage);
 
 	}

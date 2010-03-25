@@ -13,6 +13,7 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.editor.actions.ChangeAnimalTypeWizard;
 import com.verticon.tracker.editor.presentation.IPremisesProvider;
 
@@ -30,10 +31,12 @@ public class AnimalsChangeTypeOfHandler extends AbstractHandler implements
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		ISelection selectionOfTagIdResources = HandlerUtil.getActiveMenuSelectionChecked(event);	
 		IEditorPart editorPart = HandlerUtil.getActiveEditorChecked(event);
+		Premises premises = ((IPremisesProvider)editorPart.getAdapter(IPremisesProvider.class)).getPremises();
+		
 		IEditingDomainProvider editingDomainProvider = (IEditingDomainProvider) editorPart
 		.getAdapter(IPremisesProvider.class);
 		
-		ChangeAnimalTypeWizard wizard = new ChangeAnimalTypeWizard();
+		ChangeAnimalTypeWizard wizard = new ChangeAnimalTypeWizard(premises);
 		wizard.init(
 				HandlerUtil.getActiveWorkbenchWindowChecked(event),
 				editingDomainProvider.getEditingDomain(), 
