@@ -7,18 +7,18 @@ package com.verticon.tracker.edit.provider;
 
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.edit.command.CommandParameter;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -29,11 +29,10 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.verticon.osgi.metatype.DocumentRoot;
-import com.verticon.osgi.metatype.MetaData;
 import com.verticon.osgi.metatype.OCD;
-import com.verticon.osgi.metatype.util.MetatypeSwitch;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.BovineBison;
@@ -72,6 +71,16 @@ public class TagItemProvider
 		ITreeItemContentProvider,	
 		IItemLabelProvider,	
 		IItemPropertySource {
+	
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(TagItemProvider.class);
+
+	private static final CommandComparator commandComparator = new CommandComparator();
+	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -242,6 +251,7 @@ public class TagItemProvider
 	 * TODO Refactor for Policy
 	 * @generated NOT
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void collectNewChildDescriptors(final Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
@@ -390,6 +400,12 @@ public class TagItemProvider
 		//This is what is modified
 		addChildrenBasedOnAnimalSpecies(newChildDescriptors, tag);
 		
+		//Sort the newChildDescriptors
+		if(newChildDescriptors instanceof List<?>){
+			Collections.sort((List)newChildDescriptors, commandComparator);
+			
+		}
+		
 	}
 
 	/**
@@ -534,14 +550,36 @@ public class TagItemProvider
 		visitor.doSwitch(tag.eContainer());
 	}
 
-	
+	/**
+	 * Add GenericEvent children descriptors to the newChildDescriptors.
+	 * @param newChildDescriptors
+	 * @param tag
+	 */
 	private void addGenericEventChildern(
 			final Collection<Object> newChildDescriptors, Tag tag) {
 		if(tag.eContainer() != null &&  tag.eContainer() instanceof Animal){
-			ResourceSet rs = tag.eResource().getResourceSet();
 			EList<OCD> objectClassDescriptors = tag.findOCDs();
 			
 			for (OCD ocd : objectClassDescriptors) {
+				//validate it first
+				Diagnostic diagnostic = Diagnostician.INSTANCE.validate(ocd);
+				if(diagnostic.getSeverity() != Diagnostic.OK){
+					logger.error("Can not create genericEvent for Metatype OCD name={} because it is invalid. {}",
+							ocd.getName(), 
+							diagnostic.getMessage()
+					);
+					for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
+						switch (childDiagnostic.getSeverity()) {
+						case Diagnostic.ERROR:
+						case Diagnostic.WARNING:	
+							logger.error("Can not create genericEvent for Metatype OCD name={} because it is invalid. {}",
+									ocd.getName(), 
+									childDiagnostic.getMessage()
+							);
+						}
+					}
+					continue;
+				}
 				if(tag.canContain(EventType.GENERIC_EVENT, ocd.getID())){
 					addGenericEventCommandParameter(newChildDescriptors,  ocd);
 				}
@@ -557,7 +595,8 @@ public class TagItemProvider
 	 * @param newChildDescriptors
 	 * @param ocd
 	 */
-	private void addGenericEventCommandParameter(final Collection<Object> newChildDescriptors, OCD ocd){
+	private void addGenericEventCommandParameter(
+			final Collection<Object> newChildDescriptors, OCD ocd){
 		GenericEvent ge = TrackerFactory.eINSTANCE.createGenericEvent();
 		ge.setOcd(ocd);
 		
@@ -568,50 +607,6 @@ public class TagItemProvider
 				);
 	}
 	
-//	/**
-//	 * 
-//	 * @param animalType
-//	 * @param premises
-//	 * @return all EventSchema Elements for a specified animalType
-//	 */
-//	private static EList<OCD> findOCDs(ResourceSet rs){
-//		final EList<OCD> results = new BasicEList<OCD>();
-//		MetatypeSwitch<Boolean> ocdVisitor = new MetatypeSwitch<Boolean>(){
-//			@Override
-//			public Boolean caseOCD(OCD object) {
-//				results.add(object);
-//				return Boolean.FALSE;
-//			}
-//
-//			@Override
-//			public Boolean caseDocumentRoot(DocumentRoot object) {
-//				return  Boolean.TRUE;
-//			}
-//
-//			
-//			@Override
-//			public Boolean caseMetaData(MetaData object) {
-//				return  Boolean.TRUE;
-//			}
-//
-//			@Override
-//			public Boolean defaultCase(EObject object) {
-//				return Boolean.FALSE;
-//			}
-//		};
-//		
-//		
-//		for(TreeIterator<?> iter = EcoreUtil.getAllContents(rs, true); iter.hasNext();){
-//			Object o =  iter.next();
-//			if(o instanceof EObject){
-//				EObject eObject = (EObject)o;
-//				if(ocdVisitor.doSwitch(eObject) == Boolean.FALSE){
-//					iter.prune();
-//				}
-//			}
-//		}
-//		return results;
-//	}
 
 	/**
 	 * Return the resource locator for this item provider's resources.
@@ -625,7 +620,7 @@ public class TagItemProvider
 	}
 
 	/**
-	 * Change the child menu text for GenericEvent to be the EventSchema name
+	 * Change the child menu text for GenericEvent to be the name of the generic event
 	 */
 	@Override
 	public String getCreateChildText(Object owner, Object feature,
@@ -639,4 +634,24 @@ public class TagItemProvider
 		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
+}
+
+final class CommandComparator implements Comparator<CommandParameter>{
+
+	@Override
+	public int compare(CommandParameter parm1, CommandParameter parm2) {
+		String name1 = getName(parm1);
+		String name2 = getName(parm2);
+		
+		return name1.compareTo(name2);
+	}
+	
+	private String getName(CommandParameter parm){
+		if(parm.getValue() instanceof GenericEvent){
+			return ((GenericEvent)parm.getValue()).findName();
+		}
+			
+		return parm.getValue().getClass().getSimpleName();
+	}
+	
 }
