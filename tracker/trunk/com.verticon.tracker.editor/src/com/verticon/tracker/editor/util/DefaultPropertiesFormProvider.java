@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.eclipse.core.databinding.AggregateValidationStatus;
 import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
@@ -19,6 +20,8 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -34,29 +37,48 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
-	private String FILTER_ID_EXPERT = "org.eclipse.ui.views.properties.expert"; //$NON-NLS-1$
-
-	private IObservableValue statusMessageObservable;
-
-	public void setStatusMessageObservable(
-			IObservableValue statusMessageObservable) {
-		this.statusMessageObservable = statusMessageObservable;
-	}
+	
 
 	/**
 	 * slf4j Logger
 	 */
-	private static final Logger logger = LoggerFactory
+	private final Logger logger = LoggerFactory
 			.getLogger(DefaultPropertiesFormProvider.class);
 
+	private String FILTER_ID_EXPERT = "org.eclipse.ui.views.properties.expert"; //$NON-NLS-1$
+
+	//Needs disposing
+	private IObservableValue statusMessageObservable; 
+	private Map<String, Group> categoryNameToGroupMap;
+	private DataBindingContext dataBindingContext;
+	private WizardPage wizardPage = null;
+	private CTabItem cTabItem; 
+	
+	
+	private int cTabItemCounters = 0;
+	private int groupCounter=0;
+	
 	public DefaultPropertiesFormProvider() {
 		super();
-		logger.debug(bundleMarker,"Constructed");
+		logger.debug(bundleMarker,"{} Constructed.",this);
+	}
+	
+	void dispose(){
+		disposeStatusMessage();
+		disposeGroupMap();
+		disposeDataBindingContext();
+		disposeWizardPage();
+		disposeCTabItem();
+	}
+	
+	public void setStatusMessageObservable(
+			IObservableValue statusMessageObservable) {
+		disposeStatusMessage();
+		this.statusMessageObservable = statusMessageObservable;
 	}
 
-	private CTabItem item1;
-	private WizardPage wizardPage = null;
-
+	
+	
 	/**
 	 * Use the selection to create a Form in the cTabFolder.
 	 * 
@@ -64,24 +86,32 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 	public void fillProperties(ISelection selection,
 			AdapterFactory adapterFactory, CTabFolder cTabFolder,
 			String nameOfTab, boolean showAdvanceProperties) {
-		logger.debug(bundleMarker,"Filling properties");
-		if (item1 != null) {
-			logger.debug(bundleMarker,"Desposing of CTabItem");
-			item1.dispose();
-			item1 = null;
-		}
+		logger.debug(bundleMarker,"{} Filling properties",this);
+		disposeCTabItem();
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
 
-			item1 = new CTabItem(cTabFolder, SWT.NONE);
-			item1.setText(nameOfTab);
+			cTabItem = new CTabItem(cTabFolder, SWT.NONE);
+			cTabItemCounters++;
+			
+			cTabItem.addDisposeListener(
+					new WidgetDisposal("cTabItem",cTabItemCounters){
+
+						@Override
+						public void widgetDisposed(DisposeEvent e) {
+							cTabItemCounters--;
+							super.widgetDisposed(e);
+						}}
+			);
+			
+			cTabItem.setText(nameOfTab);
 			// Create a composite with a two column layout
 			Composite composite1 = new Composite(cTabFolder, SWT.NONE);
 			composite1.setForeground(cTabFolder.getDisplay().getSystemColor(
 					SWT.COLOR_BLUE));
 			composite1.setBackground(cTabFolder.getDisplay().getSystemColor(
 					SWT.COLOR_WHITE));
-			item1.setControl(composite1);
+			cTabItem.setControl(composite1);
 			{
 				GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 				data.horizontalAlignment = SWT.END;
@@ -94,11 +124,13 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 			}
 			handleSelection(structuredSelection, adapterFactory, composite1,
 					showAdvanceProperties);
-			cTabFolder.setSelection(item1);
+			cTabFolder.setSelection(cTabItem);
 		} else {
 			createEmptyCTabItem(cTabFolder, nameOfTab);
 		}
 	}
+
+	
 
 	/**
 	 * @param cTabFolder
@@ -108,15 +140,15 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 	private Composite createEmptyCTabItem(CTabFolder cTabFolder,
 			String nameOfTab) {
 
-		item1 = new CTabItem(cTabFolder, SWT.NONE);
-		item1.setText(nameOfTab);
+		cTabItem = new CTabItem(cTabFolder, SWT.NONE);
+		cTabItem.setText(nameOfTab);
 		// Create a composite with a two column layout
 		Composite composite1 = new Composite(cTabFolder, SWT.NONE);
 		composite1.setForeground(cTabFolder.getDisplay().getSystemColor(
 				SWT.COLOR_BLACK));
 		composite1.setBackground(cTabFolder.getDisplay().getSystemColor(
 				SWT.COLOR_WHITE));
-		item1.setControl(composite1);
+		cTabItem.setControl(composite1);
 		{
 			GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 			data.horizontalAlignment = SWT.END;
@@ -131,7 +163,7 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 			composite1.setLayout(layout);
 		}
 
-		cTabFolder.setSelection(item1);
+		cTabFolder.setSelection(cTabItem);
 		return composite1;
 	}
 
@@ -159,20 +191,29 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 	 */
 	private void createForm(Composite parent, Object object,
 			AdapterFactory adapterFactory, boolean showAdvanceProperties) {
-		Map<String, Group> mp = new HashMap<String, Group>();
-
+		if(categoryNameToGroupMap==null){
+			categoryNameToGroupMap = new HashMap<String, Group>();
+		}else if(!categoryNameToGroupMap.isEmpty()){
+			disposeGroupMap();
+		}
+		if(dataBindingContext!=null){
+			disposeDataBindingContext();
+		}
+		dataBindingContext = new EMFDataBindingContext();
+		
 		IItemPropertySource itemPropertySource = (IItemPropertySource) adapterFactory
 				.adapt(object, IItemPropertySource.class);
-		// Create the databinding context
-		DataBindingContext dataBindingContext = new EMFDataBindingContext();
+
 		if (wizardPage != null) {
 			WizardPageSupport.create(wizardPage, dataBindingContext);
 		}
 
 		// IItemProperySource is already set
 		// get all the IItemPropertyDescriptors for the object
+		int propCounter = 0;
 		for (IItemPropertyDescriptor itemPropertyDescriptor : itemPropertySource
 				.getPropertyDescriptors(object)) {
+			propCounter++;
 			boolean filterProperty = false;
 			if (!showAdvanceProperties) {
 				String[] filters = itemPropertyDescriptor
@@ -199,15 +240,26 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 				continue;
 			}
 			// Create a label with the name of the property
-			logger.debug(bundleMarker,"Creating label for property {} with filter {}",
-					itemPropertyDescriptor.getDisplayName(object),
-					itemPropertyDescriptor.getFilterFlags(object));
+//			logger.debug(bundleMarker,"Creating label for property {} with filter {}",
+//					itemPropertyDescriptor.getDisplayName(object),
+//					itemPropertyDescriptor.getFilterFlags(object));
 			String categoryName = itemPropertyDescriptor.getCategory(object);
 			if (categoryName == null) {
 				categoryName = itemPropertyDescriptor.getDescription(object);
 			}
-			if (!mp.containsKey(categoryName)) {
+			if (!categoryNameToGroupMap.containsKey(categoryName)) {
 				Group group = new Group(parent, SWT.BORDER);
+				groupCounter++;
+				
+				group.addDisposeListener(
+						new WidgetDisposal("group:"+categoryName,groupCounter){
+
+							@Override
+							public void widgetDisposed(DisposeEvent e) {
+								groupCounter--;
+								super.widgetDisposed(e);
+							}}
+				);
 				group.setText(categoryName);
 				GridLayout layout = new GridLayout();
 				layout.marginHeight = 0;
@@ -217,10 +269,10 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 				GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 				group.setLayoutData(data);
 
-				mp.put(categoryName, group);
+				categoryNameToGroupMap.put(categoryName, group);
 			}
 
-			Label label = new Label(mp.get(categoryName), SWT.NONE);
+			Label label = new Label(categoryNameToGroupMap.get(categoryName), SWT.NONE);
 			label.setForeground(parent.getDisplay().getSystemColor(
 					SWT.COLOR_BLUE));
 			label.setBackground(parent.getDisplay().getSystemColor(
@@ -234,8 +286,10 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 				label.setToolTipText(itemPropertyDescriptor
 						.getDescription(object));
 			}
+			
+			label.addDisposeListener(new WidgetDisposal("label:"+itemPropertyDescriptor.getDisplayName(object),propCounter));
 
-			visualize(object, mp, dataBindingContext, itemPropertyDescriptor,
+			visualize(object, categoryNameToGroupMap, dataBindingContext, itemPropertyDescriptor,
 					categoryName, adapterFactory);
 
 		}
@@ -251,9 +305,21 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 
 	}
 
+	
+	private void disposeDataBindingContext() {
+		dataBindingContext.dispose();
+	}
+
+	private void disposeGroupMap() {
+		for (Group group : categoryNameToGroupMap.values()) {
+			group.dispose();
+		}
+		categoryNameToGroupMap.clear();
+	}
+
 	/**
 	 * @param object
-	 * @param mp
+	 * @param categoryNameToGroupMap
 	 * @param dataBindingContext
 	 * @param itemPropertyDescriptor
 	 * @param categoryName
@@ -265,6 +331,7 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 
 		ControlBuilder builder = ControlBuilderFactory.getInstance(object,
 				itemPropertyDescriptor);
+		
 		builder.createControl(object, mp.get(categoryName),
 				itemPropertyDescriptor, adapterFactory, dataBindingContext);
 
@@ -275,7 +342,54 @@ public class DefaultPropertiesFormProvider implements IPropertiesFormProvider {
 	}
 
 	public void setWizardPage(WizardPage wizardPage) {
+		disposeWizardPage();
 		this.wizardPage = wizardPage;
+		
 	}
 
+	private void disposeWizardPage() {
+		if(this.wizardPage!=null){
+			wizardPage.dispose();
+			wizardPage=null;
+		}
+	}
+
+	private void disposeStatusMessage() {
+		if(statusMessageObservable!=null){
+			statusMessageObservable.dispose();
+		}
+	}
+	
+	private void disposeCTabItem() {
+		if (cTabItem != null) {
+			logger.debug(bundleMarker,"{} Invoking dispose() of cTabItem, id={}",this,cTabItemCounters);
+			cTabItem.dispose();
+			cTabItem = null;
+		}
+	}
+	
+	class WidgetDisposal implements DisposeListener{
+		final String name;
+		final int id;
+		private WidgetDisposal(String name, int id) {
+			super();
+			this.name = name;
+			this.id = id;
+			logger.debug(bundleMarker,"{} Constructed. {} id={}",
+					new Object[]{this,name,id});
+		}
+		
+		@Override
+		public String toString() {
+			return "WidgetDisposal [id=" + id + ", name=" + name + "]";
+		}
+
+		@Override
+		public void widgetDisposed(DisposeEvent e) {
+			
+			logger.debug(bundleMarker,"{} widgetDisposed invoked name={} id={}",
+					new Object[]{this, name,id});
+		}
+		
+	}
 }

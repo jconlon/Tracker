@@ -1,7 +1,11 @@
 package com.verticon.tracker.editor.util;
 
 
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
+
 import org.eclipse.core.databinding.UpdateValueStrategy;
+import org.eclipse.core.databinding.conversion.Converter;
+import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
@@ -10,10 +14,12 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.edit.provider.AttributeItemPropertyDescriptor;
 import com.verticon.tracker.util.CheckISO7064Mod37_36;
-
 
 /**
  * Utility class for finding UpdateValueStrategy for EMF features.
@@ -30,7 +36,13 @@ class UpdateStrategies {
 		super();
 	}
 
-	
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(UpdateStrategies.class);
+
+
 	/**
 	 * The singleton instance
 	 */
@@ -40,13 +52,14 @@ class UpdateStrategies {
 	private static final UpdateValueStrategy pinUpdateStrategy = new PinUpdateValueStrategy();
 	private static final IValidator doubleValidator = new DoubleValidator();
 	private static final IValidator integerValidator = new IntegerValidator();
+	private static final IConverter stringToBooleanConverter = new StringToBoolean();
+	private static final IConverter booleanToStringConverter = new BooleanToString();
 	
 	 /**
-	 * Main entry to class to find a target to model strategy for a given
-	 * Feature
+	 * 
 	 * 
 	 * @param eStructuralFeature
-	 * @return
+	 * @return UpdateValueStrategy for a EFeature
 	 */
     UpdateValueStrategy getTargetToModelStrategy(
 			EStructuralFeature eStructuralFeature) {
@@ -54,7 +67,15 @@ class UpdateStrategies {
 			EAttribute e = (EAttribute)eStructuralFeature;
 			if(e.getEAttributeType().equals(TrackerPackage.eINSTANCE.getPremisesIdNumber())){
 				return pinUpdateStrategy;
+			}else if(e.getEAttributeType().equals(TrackerPackage.eINSTANCE.getStringToStringMap())){
+				logger.debug(bundleMarker,"Matched attribute={} with dataType={}",
+						new Object[]{e.getName(),  e.getEAttributeType().getName()});
+			}else{
+				logger.debug(bundleMarker,
+						"Did not match attribute={} with dataType={}",
+						new Object[]{e.getName(), e.getEAttributeType().getName()});
 			}
+			
 		} else if (eStructuralFeature instanceof EReference) {
 			if (eStructuralFeature.isMany()) {
 				return null;
@@ -64,8 +85,40 @@ class UpdateStrategies {
 			
 		}
 		
+		
 		return new TransactionalAwareUpdateValueStrategy().setAfterGetValidator(getValidator(eStructuralFeature));
 	}
+    
+    /**
+     * 
+     * @param attributeItemPropertyDescriptor
+     * @return UpdateValueStrategy for a AttributeItemPropertyDescriptor of a GenericEvent
+     */
+    UpdateValueStrategy getTargetToModelStrategy(
+    		AttributeItemPropertyDescriptor attributeItemPropertyDescriptor){
+    	
+    	if(attributeItemPropertyDescriptor.isBoolean()){
+    		return new UpdateValueStrategy().setBeforeSetValidator(
+        			new AttributeDefinitionValidator(attributeItemPropertyDescriptor))
+        				.setConverter(booleanToStringConverter);
+    	}
+    	return new UpdateValueStrategy().setBeforeSetValidator(
+    			new AttributeDefinitionValidator(attributeItemPropertyDescriptor));
+    }
+    
+    /**
+     * 
+     * @param attributeItemPropertyDescriptor
+     * @return UpdateValueStrategy for a AttributeItemPropertyDescriptor of a GenericEvent
+     */
+    UpdateValueStrategy getModelToTargetStrategy(
+    		AttributeItemPropertyDescriptor attributeItemPropertyDescriptor){
+    	
+    	if(attributeItemPropertyDescriptor.isBoolean()){
+    		return new UpdateValueStrategy().setConverter(stringToBooleanConverter);
+    	}
+    	return null;
+    }
     
     private IValidator getValidator(EStructuralFeature eStructuralFeature){
     	
@@ -74,17 +127,17 @@ class UpdateStrategies {
     	switch (eStructuralFeature.getEType().getClassifierID()) {
     	case EcorePackage.EDOUBLE_OBJECT:
 		case EcorePackage.EDOUBLE:
-//			logger.debug(bundleMarker,"Returning double for element {} attribute {} and type {}", 
-//					new Object[] {eStructuralFeature.getContainerClass(),
-//					eStructuralFeature.getName(), eStructuralFeature.getEType().getName()});
+			logger.debug(bundleMarker,"Returning double for element {} attribute {} and type {}", 
+					new Object[] {eStructuralFeature.getContainerClass(),
+					eStructuralFeature.getName(), eStructuralFeature.getEType().getName()});
 			validator = doubleValidator;
 			break;
 
 		case EcorePackage.EINTEGER_OBJECT:
 		case EcorePackage.EINT:
-//			logger.debug(bundleMarker,"Returning Integer for element {} attribute {} and type {}", 
-//					new Object[] {eStructuralFeature.getContainerClass(),
-//					eStructuralFeature.getName(), eStructuralFeature.getEType().getName()});
+			logger.debug(bundleMarker,"Returning Integer for element {} attribute {} and type {}", 
+					new Object[] {eStructuralFeature.getContainerClass(),
+					eStructuralFeature.getName(), eStructuralFeature.getEType().getName()});
 			validator = integerValidator;
 			break;
 		case EcorePackage.ESTRING:  //Ignore string
@@ -188,6 +241,31 @@ class UpdateStrategies {
 	
 }
  
+/**
+ * Validator for AttributeDefinition based attributes of GenericEvent objects.
+ * @author jconlon
+ *
+ */
+final class AttributeDefinitionValidator implements IValidator{
+
+	private final AttributeItemPropertyDescriptor attributeItemPropertyDescriptor;
+	
+    AttributeDefinitionValidator(
+			AttributeItemPropertyDescriptor attributeItemPropertyDescriptor) {
+		super();
+		this.attributeItemPropertyDescriptor = attributeItemPropertyDescriptor;
+	}
+	@Override
+	public IStatus validate(Object value) {
+		String error = attributeItemPropertyDescriptor.validate((String)value);
+		return error==null || error.trim().length()==0?
+				ValidationStatus.ok():
+			    ValidationStatus.error(error);
+	}
+	
+}
+
+
 final class DoubleValidator implements IValidator {
 	public IStatus validate(Object value) {
 		String s = (String)value;
@@ -213,5 +291,33 @@ final class IntegerValidator implements IValidator {
 			.error("Value must be numeric.");
 		}
 
+	}
+}
+
+final class BooleanToString extends Converter{
+	public BooleanToString() {
+		super(Boolean.class, String.class);
+	}
+
+	@Override
+	public Object convert(Object fromObject) {
+		Boolean b = (Boolean)fromObject;
+		
+		return b==null || !b? "false": "true";
+		
+	}
+}
+
+final class StringToBoolean extends Converter{
+	public StringToBoolean() {
+		super(String.class, Boolean.class);
+	}
+
+	@Override
+	public Object convert(Object fromObject) {
+		String b = (String)fromObject;
+		
+		return b==null || b.toLowerCase().equals("false")? Boolean.FALSE: Boolean.TRUE;
+		
 	}
 }

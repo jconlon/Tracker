@@ -7,9 +7,6 @@ import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
@@ -23,22 +20,25 @@ import org.eclipse.swt.widgets.Composite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Creates a Combo Widget for a multi choice attribute. 
+import com.verticon.tracker.edit.provider.AttributeItemPropertyDescriptor;
 
+/**
+ * Creates a Combo Widget for a multi choice attribute. This ControlBuilder supports creating
+ * widgets for StringToStringMap entries that are associated with an AttributeItemPropertyDescriptor.
+ * 
  * This will dispose of IObservableValue when the Combo Widget is disposed.
  * 
  * @author jconlon
  *
  */
-class SingleValueEAttributeENumControlBuilder implements ControlBuilder {
+class SingleValueEAttributeChoiceControlBuilder implements ControlBuilder {
 
 	/**
 	 * slf4j Logger
 	 */
 	private final Logger logger = LoggerFactory
-			.getLogger(SingleValueEAttributeENumControlBuilder.class);
-
+			.getLogger(SingleValueEAttributeChoiceControlBuilder.class);
+	
 	//Needs disposing
 	private IObservableValue model;
 	
@@ -72,12 +72,9 @@ class SingleValueEAttributeENumControlBuilder implements ControlBuilder {
 		Combo combo = new Combo(parent, SWT.DROP_DOWN);
 		combo.setEnabled(itemPropertyDescriptor.canSetProperty(object));
 
-		EAttribute eAttribute = (EAttribute) itemPropertyDescriptor
-				.getFeature(object);
-		EEnum enummer = (EEnum) eAttribute.getEAttributeType();
 
-		for (EEnumLiteral lit : enummer.getELiterals()) {
-			combo.add(lit.getLiteral());
+		for (Object lit : itemPropertyDescriptor.getChoiceOfValues(object)) {
+			combo.add(lit.toString());
 		}
 
 		return combo;
@@ -89,27 +86,48 @@ class SingleValueEAttributeENumControlBuilder implements ControlBuilder {
 		EStructuralFeature eStructuralFeature = (EStructuralFeature) itemPropertyDescriptor
 				.getFeature(object);
 
-		EObject eObject = (EObject) AdapterFactoryEditingDomain.unwrap(object);
-
-		logger.debug(bundleMarker,"Binding {} feature {} to a combo widget", eObject
-				.getClass().getSimpleName(), eStructuralFeature.getName());
-
-		UpdateValueStrategy tToMStrategy = UpdateStrategies.INSTANCE
+		EObject eObject;
+		UpdateValueStrategy tToMStrategy = null;
+		UpdateValueStrategy mToTStrategy = null;
+		
+		if(itemPropertyDescriptor instanceof AttributeItemPropertyDescriptor){
+			AttributeItemPropertyDescriptor attributeItemPropertyDescriptor = 
+				((AttributeItemPropertyDescriptor)itemPropertyDescriptor);
+			//The object is a GenericEvent but the bind needs to be on a particular 
+			//child eventAttrribute of the GenericEvent which is a 
+			//StringToStringMap entry
+			Object stringToStringMapEntry = attributeItemPropertyDescriptor.findEntry(object);
+			eObject = (EObject) AdapterFactoryEditingDomain.unwrap(stringToStringMapEntry);
+			//The attributeItemPropertyDescriptor can do its own validation
+			tToMStrategy = UpdateStrategies.INSTANCE
+				.getTargetToModelStrategy(attributeItemPropertyDescriptor);
+			
+		}else{
+			eObject= (EObject) AdapterFactoryEditingDomain.unwrap(object);
+			 tToMStrategy = UpdateStrategies.INSTANCE
 				.getTargetToModelStrategy(eStructuralFeature);
-
-		UpdateValueStrategy mToTStrategy = UpdateStrategies.INSTANCE
+			 mToTStrategy = UpdateStrategies.INSTANCE
 				.getModelToTargetStrategy(eStructuralFeature);
+		}
 
+		logger.debug(bundleMarker,"Binding eObject={} with descriptor= {} to a combo widget", 
+				eObject, 
+				itemPropertyDescriptor);
+
+		
 		model = EMFEditProperties.value(
 				AdapterFactoryEditingDomain.getEditingDomainFor(eObject), 
 				eStructuralFeature).observe(eObject);
 		
 		dataBindingContext.bindValue(
 				SWTObservables.observeSelection(combo),
-				model, 
+				model,
 				tToMStrategy, // TargetToModel
 				mToTStrategy);// ModelToTarget
+		
+		
 		//FIXME normalize with SingleValueEAttributeControlBuilder
+
 	}
 
 }
