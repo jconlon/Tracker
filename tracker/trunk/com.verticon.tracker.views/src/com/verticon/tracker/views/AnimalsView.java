@@ -86,7 +86,7 @@ public class AnimalsView extends TrackerView  {
 		// Instantiates and initializes the wizard
 		Premises premises = getPremises(selectionController
 				.getEditingDomain());
-		AddAnimalWizard wizard = new AddAnimalWizard();
+		AddAnimalWizard wizard = new AddAnimalWizard(premises);
 		wizard.init(getSite().getWorkbenchWindow().getWorkbench()
 				.getActiveWorkbenchWindow(), premises);
 		// Instantiates the wizard container with the wizard and opens it
