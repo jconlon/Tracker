@@ -6,8 +6,12 @@
 package com.verticon.tracker.edit.provider;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -19,8 +23,11 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.osgi.service.metatype.AttributeDefinition;
 
+import com.verticon.osgi.metatype.OCD;
 import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.TrackerPackage;
 
@@ -55,21 +62,89 @@ public class GenericEventItemProvider
 		super(adapterFactory);
 	}
 
+	Map <String,  List<IItemPropertyDescriptor>> itemPropertyDescriptorsMap = new HashMap<String,  List<IItemPropertyDescriptor>>();
 	/**
 	 * This returns the property descriptors for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
+
+		OCD ocd = ((GenericEvent)object).getOcd();
+		
+		if (!itemPropertyDescriptorsMap.containsKey(ocd.getID())) {
+			//Build new propertyDescirptors for this unique ocdId GenericEvent
 			super.getPropertyDescriptors(object);
 
-			addEventAttributesPropertyDescriptor(object);
-			addOcdPropertyDescriptor(object);
+			
+			List<IItemPropertyDescriptor> genericEventOCDPropDescriptors = new ArrayList<IItemPropertyDescriptor>();
+			//Add a propertyDesciptor for each attribute in the OCD
+			for (AttributeDefinition eventAttributeDefinition : ocd.getAttributeDefinitions(OCD.ALL)) {
+				addEventAttributePropertyDescriptor(
+						genericEventOCDPropDescriptors,eventAttributeDefinition, ocd.getName(),(GenericEvent)object);
+			}
+			
+			genericEventOCDPropDescriptors.addAll(itemPropertyDescriptors);
+			
+			itemPropertyDescriptorsMap.put(ocd.getID(), genericEventOCDPropDescriptors);
 		}
-		return itemPropertyDescriptors;
+		return itemPropertyDescriptorsMap.get(ocd.getID());
+	}
+	
+	/**
+	 * This creates type specific attributes that are based on 
+	 * Attribute definition
+	 * @param attributeDefinition
+	 * @param value
+	 */
+	private void addEventAttributePropertyDescriptor(
+			List<IItemPropertyDescriptor> genericEventOCDPropDescriptors, 
+			final AttributeDefinition attributeDefinition, final String category, GenericEvent ge){
+
+		ge.getEventAttributes().get(0);
+		IItemPropertyDescriptor valueItemPropertyDescriptor = getValuePropertyDescriptor(ge.getEventAttributes().get(0));
+			
+		genericEventOCDPropDescriptors.add(
+				new AttributeItemPropertyDescriptor(attributeDefinition, 
+						valueItemPropertyDescriptor, category)
+						
+		);
+		
+	}
+	
+	
+	
+	//Have the other class build it
+	protected IItemPropertyDescriptor getValuePropertyDescriptor(Entry<String,String> map) {
+		StringToStringMapItemProvider mapItemProvider = (StringToStringMapItemProvider)
+			adapterFactory.adapt(map, IItemPropertySource.class);
+		List<IItemPropertyDescriptor> descriptors = mapItemProvider.getPropertyDescriptors(map);
+		for (IItemPropertyDescriptor descriptor : descriptors) {
+			if(descriptor.getDisplayName(map).toLowerCase().equals("value")){
+				return descriptor;
+			}
+		}
+		return null;
+		
+			 
+	}
+
+	//Build it 
+	protected IItemPropertyDescriptor getValuePropertyDescriptor(){
+		return createItemPropertyDescriptor
+		(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+		 getResourceLocator(),
+		 getString("_UI_StringToStringMap_value_feature"),
+		 getString("_UI_PropertyDescriptor_description", "_UI_StringToStringMap_value_feature", "_UI_StringToStringMap_type"),
+		 TrackerPackage.Literals.STRING_TO_STRING_MAP__VALUE,//STRING_TO_STRING_MAP__VALUE,
+		 true,
+		 false,
+		 false,
+		 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+		 null,
+		 null);
 	}
 
 	/**
@@ -130,7 +205,6 @@ public class GenericEventItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TrackerPackage.Literals.GENERIC_EVENT__EVENT_ATTRIBUTES);
 		}
 		return childrenFeatures;
 	}
@@ -175,6 +249,32 @@ public class GenericEventItemProvider
 		}
 		return super.getText(object);
 	}
+	
+	/**
+	 * 
+	 * TODO
+	 * Return the image from the associated metatype if there is one
+	 * @generated NOT
+	 */
+	@Override
+	public Object getColumnImage(Object object, int columnIndex) {
+		return super.getColumnImage(object, columnIndex);
+	}
+
+	/**
+	 * Return the name based on metatype
+	 * @generated NOT
+	 */
+	@Override
+	public String getColumnText(Object object, int columnIndex) {
+		if(columnIndex == 1){
+			GenericEvent ge = (GenericEvent)object;
+			if(ge.findName()!=null){
+				return ge.findName();
+			}
+		}
+		return super.getColumnText(object, columnIndex);
+	}
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -206,5 +306,6 @@ public class GenericEventItemProvider
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
+
 
 }
