@@ -7,9 +7,10 @@ import java.util.List;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.databinding.edit.EMFEditObservables;
+import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
@@ -24,6 +25,8 @@ import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
@@ -36,6 +39,14 @@ import org.eclipse.swt.widgets.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Creates a Text Widget for a reference with a multivalue dialog. 
+ * 
+ * This will dispose of IObservableValue when the Widget is disposed.
+ * 
+ * @author jconlon
+ *
+ */
 class MultiValueEReferencControlBuilder implements ControlBuilder {
 
 	/**
@@ -44,8 +55,13 @@ class MultiValueEReferencControlBuilder implements ControlBuilder {
 	private final Logger logger = LoggerFactory
 			.getLogger(MultiValueEReferencControlBuilder.class);
 	
+	//Needs disposing
+	private IObservableValue model;
 	
-	
+	/*
+	 * (non-Javadoc)
+	 * @see com.verticon.tracker.editor.util.ControlBuilder#createControl(java.lang.Object, org.eclipse.swt.widgets.Composite, org.eclipse.emf.edit.provider.IItemPropertyDescriptor, org.eclipse.emf.common.notify.AdapterFactory, org.eclipse.core.databinding.DataBindingContext)
+	 */
 	public void createControl(Object object, Composite parent,
 			IItemPropertyDescriptor itemPropertyDescriptor,
 			AdapterFactory adapterFactory, DataBindingContext dataBindingContext) {
@@ -53,7 +69,18 @@ class MultiValueEReferencControlBuilder implements ControlBuilder {
 		Text text = createControl( object,  parent,
 				 itemPropertyDescriptor,
 				 adapterFactory);
-		
+		text.addDisposeListener(new DisposeListener(){
+			
+			@Override
+			public void widgetDisposed(DisposeEvent e) {
+				if(model!=null){
+					model.dispose();
+					logger.debug(bundleMarker,"{} disposed model",this);
+				}else{
+					logger.debug(bundleMarker,"{} widget disposed but model was null", this);
+				}
+			}
+		});
 		bind(object, dataBindingContext,
 			 itemPropertyDescriptor,
 				adapterFactory, text);
@@ -124,7 +151,9 @@ class MultiValueEReferencControlBuilder implements ControlBuilder {
 			private void handleResults(EList<?> results, EObject eObject,
 					EStructuralFeature eStructuralFeature) {
 				logger.debug(bundleMarker,"Handling Result: " + results);
-				
+				//Is it easier to just do a set on the model which because
+				//of the binding and the converter will fill in the text
+				//box, like below?
 				EditingDomain ed = AdapterFactoryEditingDomain
 						.getEditingDomainFor(eObject);
 
@@ -138,7 +167,7 @@ class MultiValueEReferencControlBuilder implements ControlBuilder {
 		return text;
 	}
 
-	 private static void bind(Object object, DataBindingContext dataBindingContext,
+	 private void bind(Object object, DataBindingContext dataBindingContext,
 			IItemPropertyDescriptor itemPropertyDescriptor,
 			final AdapterFactory adapterFactory, Text text) {
 			
@@ -174,11 +203,14 @@ class MultiValueEReferencControlBuilder implements ControlBuilder {
 			}
 
 		};
+		model = EMFEditProperties.value(
+				AdapterFactoryEditingDomain.getEditingDomainFor(eObject), //May throw nulls
+				eStructuralFeature).observe(eObject);
 		
-		dataBindingContext.bindValue(SWTObservables.observeText(text,
-				SWT.Modify), EMFEditObservables.observeValue(
-				AdapterFactoryEditingDomain.getEditingDomainFor(eObject),
-				eObject, eStructuralFeature), null, // TargetToModel
+		dataBindingContext.bindValue(
+				SWTObservables.observeText(text,SWT.Modify), 
+				model, 
+				null, // TargetToModel
 				st);// ModelToTarget
 		
 	}

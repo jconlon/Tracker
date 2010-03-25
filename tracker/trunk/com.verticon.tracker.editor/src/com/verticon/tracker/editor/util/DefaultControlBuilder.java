@@ -13,6 +13,13 @@ import org.eclipse.swt.widgets.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * This is a flagging class.  When it is displayed it will show the user
+ * text with error messages indicating that the attributes of a model
+ * could not be displayed.
+ * @author jconlon
+ *
+ */
 class DefaultControlBuilder implements ControlBuilder {
 
 	/**

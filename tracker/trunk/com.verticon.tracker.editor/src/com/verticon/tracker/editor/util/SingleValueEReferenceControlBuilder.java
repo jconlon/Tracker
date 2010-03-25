@@ -6,11 +6,12 @@ import java.util.Comparator;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.databinding.edit.EMFEditObservables;
+import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
@@ -20,10 +21,21 @@ import org.eclipse.jface.databinding.viewers.ViewersObservables;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Composite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Creates a ComboViewer for a multi choice reference.
+
+ * This will dispose of IObservableValue when the Combo Widget of the Viewer
+ * is disposed.
+ * 
+ * @author jconlon
+ *
+ */
 class SingleValueEReferenceControlBuilder implements ControlBuilder {
 
 	/**
@@ -32,15 +44,32 @@ class SingleValueEReferenceControlBuilder implements ControlBuilder {
 	private final Logger logger = LoggerFactory
 			.getLogger(SingleValueEReferenceControlBuilder.class);
 	
+	//Needs disposing
+	private IObservableValue model;
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.verticon.tracker.editor.util.ControlBuilder#createControl(java.lang.Object, org.eclipse.swt.widgets.Composite, org.eclipse.emf.edit.provider.IItemPropertyDescriptor, org.eclipse.emf.common.notify.AdapterFactory, org.eclipse.core.databinding.DataBindingContext)
+	 */
 	public void createControl(Object object, Composite parent,
 			IItemPropertyDescriptor itemPropertyDescriptor,
 			AdapterFactory adapterFactory, DataBindingContext dataBindingContext) {
-
-		logger.debug(bundleMarker,"Creating Control For {}", object);
-		
+	
 		ComboViewer comboViewer = createControl(object, parent,
 				itemPropertyDescriptor, adapterFactory);
 
+		comboViewer.getCombo().addDisposeListener(new DisposeListener(){
+			
+			@Override
+			public void widgetDisposed(DisposeEvent e) {
+				if(model!=null){
+					model.dispose();
+					logger.debug(bundleMarker,"{} disposed model",this);
+				}else{
+					logger.debug(bundleMarker,"{} widget disposed but model was null", this);
+				}
+			}
+		});
 		bind(object, dataBindingContext, itemPropertyDescriptor, comboViewer);
 
 	}
@@ -99,11 +128,13 @@ class SingleValueEReferenceControlBuilder implements ControlBuilder {
 				.getModelToTargetStrategy(eStructuralFeature);
 		
 
-		dataBindingContext.bindValue(ViewersObservables
-				.observeSingleSelection(comboViewer), EMFEditObservables
-				.observeValue(AdapterFactoryEditingDomain
-						.getEditingDomainFor(eObject), eObject,
-						eStructuralFeature),
+		model = EMFEditProperties.value(
+				AdapterFactoryEditingDomain.getEditingDomainFor(eObject), 
+				eStructuralFeature).observe(eObject);
+		
+		dataBindingContext.bindValue(
+				ViewersObservables.observeSingleSelection(comboViewer), 
+				model,
 				tToMStrategy, // TargetToModel
 				mToTStrategy);// ModelToTarget
 
