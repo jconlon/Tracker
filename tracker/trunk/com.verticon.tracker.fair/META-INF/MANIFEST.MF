@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.verticon.tracker.fair; singleton:=true
-Bundle-Version: 0.1.5.qualifier
+Bundle-Version: 0.1.6.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -16,4 +16,5 @@ Bundle-ActivationPolicy: lazy
 Export-Package: com.verticon.tracker.fair,
  com.verticon.tracker.fair.impl,
  com.verticon.tracker.fair.util
-Import-Package: org.slf4j;version="[1.5.5,1.6.0)"
+Import-Package: com.verticon.osgi.metatype,
+ org.slf4j;version="[1.5.5,1.6.0)"

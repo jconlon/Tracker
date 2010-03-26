@@ -5,6 +5,7 @@
  */
 package com.verticon.tracker.fair.impl;
 
+import com.verticon.osgi.metatype.MetatypePackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -172,6 +173,7 @@ public class FairPackageImpl extends EPackageImpl implements FairPackage {
 
 		// Initialize simple dependencies
 		TrackerPackage.eINSTANCE.eClass();
+		MetatypePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theFairPackage.createPackageContents();
