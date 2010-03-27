@@ -1310,7 +1310,8 @@ public class TrackerEditor
 							  break;
 							}
 						}
-						Assert.isNotNull(premises, "Premises can't be null. "+this);
+						//Yes it can if there is only an animal template
+						//Assert.isNotNull(premises, "Premises can't be null. "+this);
 						return premises;
 					}
 					
