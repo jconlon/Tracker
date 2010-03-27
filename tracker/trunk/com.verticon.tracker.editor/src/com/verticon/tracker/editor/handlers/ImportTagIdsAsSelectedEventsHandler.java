@@ -8,7 +8,9 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.editor.presentation.AddTagIdsAnimalAndEventWizard;
+import com.verticon.tracker.editor.presentation.IPremisesProvider;
 
 /**
  * Handler associated with a selection on a Capture *.tags file.
@@ -42,7 +44,9 @@ public class ImportTagIdsAsSelectedEventsHandler extends AbstractHandler{
 		
 		ISelection selectionOfTagIdResources = HandlerUtil.getActiveMenuSelectionChecked(event);	
 		IEditorPart editorPart = HandlerUtil.getActiveEditorChecked(event);
-		AddTagIdsAnimalAndEventWizard wizard = new AddTagIdsAnimalAndEventWizard();
+		Premises premises = ((IPremisesProvider)editorPart.getAdapter(IPremisesProvider.class)).getPremises();
+		
+		AddTagIdsAnimalAndEventWizard wizard = new AddTagIdsAnimalAndEventWizard( premises);
 		wizard.init(
 				editorPart, 
 				selectionOfTagIdResources);

@@ -12,14 +12,22 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.verticon.osgi.metatype.OCD;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.EventType;
+import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.Location;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Sighting;
@@ -53,6 +61,12 @@ import com.verticon.tracker.util.TrackerUtils;
  */
  public class AnimalTemplateBean {
 	
+	 /**
+		 * slf4j Logger
+		 */
+		private final static Logger logger = LoggerFactory
+				.getLogger(AnimalTemplateBean.class);
+		
 	private static final GregorianCalendar DATE_REFERENCE = 
 		new GregorianCalendar(2000, Calendar.JANUARY, 1);  
 
@@ -114,7 +128,7 @@ import com.verticon.tracker.util.TrackerUtils;
 	 * @return a collection of events copied from the template.
 	 */
 	protected Collection<Event> getEvents(Premises premises){
-		Collection<Event> events = null;
+		List<Event> events = null;
 		if(animalInTemplate.eventHistory().isEmpty()){
 			events= Collections.emptyList();
 		}else{
@@ -126,6 +140,8 @@ import com.verticon.tracker.util.TrackerUtils;
 			setAppropriateDateOnEvents(events, defaultEventDate);
 			if(premises!=null){
 				setLocationOnCopiedSightingEvents(events,  premises);
+				//Go through the genericEvents setting the OCDs 
+				setOCDReferences(premises,  animalInTemplate.eventHistory(), events);
 			}
 		}
 		return events;
@@ -170,28 +186,89 @@ import com.verticon.tracker.util.TrackerUtils;
 	 * 
 	 * Copier does not copy or any references so this has to 
 	 * be done after the copy. Now only done for Sighting events
-	 * but could be extended to handle other references.
+	 * and GenericEvents.
 	 * 
 	 * 
 	 * @return copied animalInTemplate.
+	 * @throws PremisesPolicyException 
 	 */
-	 Animal getAnimal(String tag, Premises premises){
-		
-		Animal copiedTemplateAnimal = (Animal)copier.copy(animalInTemplate);
+	 Animal getAnimal(String tag, Premises premises) throws PremisesPolicyException{
+		//Is the animal appropriate
+			if(!premises.canContain(null, null, animalInTemplate.getType())){
+				throw new PremisesPolicyException("Policy violation. Can't add "+animalInTemplate.getType());
+			}
+		Animal targetAnimal = (Animal)copier.copy(animalInTemplate);
 		if(premises!=null){
-			setLocationOnCopiedSightingEvents(copiedTemplateAnimal.eventHistory(),  premises);
+			setLocationOnCopiedSightingEvents(targetAnimal.eventHistory(),  premises);
 		}
-		if(copiedTemplateAnimal.activeTag()!=null){
-			copiedTemplateAnimal.activeTag().setId(tag);
-			setAppropriateDateOnEvents(copiedTemplateAnimal.eventHistory(), defaultEventDate);
+		if(targetAnimal.activeTag()!=null){
+			targetAnimal.activeTag().setId(tag);
+			setAppropriateDateOnEvents(targetAnimal.eventHistory(), defaultEventDate);
 		}else{
 			//no active tag on the template animal, just create an tag without events
 			Tag newTag = TrackerFactory.eINSTANCE.createTag();
 			newTag.setId(tag);
-			copiedTemplateAnimal.getTags().add(newTag);
+			targetAnimal.getTags().add(newTag);
 		}
-		return copiedTemplateAnimal;
+		//Go through the genericEvents setting the OCDs 
+
+		setOCDReferences(premises, animalInTemplate.eventHistory(), targetAnimal.eventHistory());
+		//Go through the events Removing the ones that are not allowed in the premises
+		for (Iterator<Event> iterator = targetAnimal.activeTag().getEvents().iterator(); iterator.hasNext();) {
+			Event event = iterator.next();
+			if(event instanceof GenericEvent){
+				GenericEvent ge = (GenericEvent)event;
+				if(!premises.canContain(EventType.GENERIC_EVENT, ge.getOcd().getID(), targetAnimal.getType())){
+					iterator.remove();
+					logger.warn("Policy violation. Deferred adding GenericEvent with ocdId={}",ge.getOcd().getID());
+				}
+			}else{
+				if(!premises.canContain(TrackerUtils.getType(event), null, targetAnimal.getType())){
+					iterator.remove();
+					logger.warn("Policy violation. Deferred adding Event ={}",TrackerUtils.getType(event));
+				}
+			}
+			
+		}
+		return targetAnimal;
 	}
+	 
+	 /*
+		 * There may be a policy on the premises and there may be OCDs that are not 
+		 * accessible on the premises.  Insure that only the appropriate events
+		 * are added to the animal.
+		 */
+//		private final static void setReferencesOnGenericEvents(Premises premises, 
+//				Animal animalInTemplate, Animal copiedAnimal){
+//			EList<Event> eventsInTemplate =  animalInTemplate.eventHistory();
+//			EList<Event> eventsCopiedAnimal = copiedAnimal.eventHistory();
+//			setOCDReferences(premises, eventsInTemplate, eventsCopiedAnimal);
+//		}
+
+
+		/**
+		 * 
+		 * @param premises of the target document
+		 * @param sourceEvents
+		 * @param targetEvents
+		 */
+		private static void setOCDReferences(Premises premises,
+				List<Event> sourceEvents, List<Event> targetEvents) {
+			for (int i = 0; i < targetEvents.size(); i++) {
+				
+				if(targetEvents.get(i) instanceof GenericEvent){
+					String ocdId = ((GenericEvent)sourceEvents.get(i)).getOcd().getID();
+					for (OCD ocd : TrackerUtils.findOCDs(premises)) {
+						if(ocd.getID().equals(ocdId)){
+							GenericEvent ge = (GenericEvent)targetEvents.get(i);
+							ge.setOcd(ocd);
+							break;
+						}
+					}
+					
+				}
+			}
+		}
 
 	/**
 	 * @param animalTemplateFile 

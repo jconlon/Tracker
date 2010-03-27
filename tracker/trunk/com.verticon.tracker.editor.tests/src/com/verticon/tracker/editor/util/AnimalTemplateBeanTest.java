@@ -109,8 +109,9 @@ public class AnimalTemplateBeanTest extends TestCase {
 	 * 
 	 * Date in the bean is NOT before the reference.
 	 * The date in the bean should be the date out of the bean
+	 * @throws PremisesPolicyException 
 	 */
-	public void test_getAnimal_date_same() {
+	public void test_getAnimal_date_same() throws PremisesPolicyException {
 		String animalName = "someTag";
 		Animal a2 = animalTemplateBean.getAnimal(animalName, premisesDestinationForCopiedAnimals);
 		assertNotNull("Should not be null", a2);
@@ -127,8 +128,9 @@ public class AnimalTemplateBeanTest extends TestCase {
 	 * 
 	 * Date in the bean IS before the reference AND there is NO defaultDate set.
 	 * The current date should be the date out of the bean
+	 * @throws PremisesPolicyException 
 	 */
-	public void test_getAnimal_date_current() {
+	public void test_getAnimal_date_current() throws PremisesPolicyException {
 		String animalName = "someTag";
 		
 		setEventDateInBeanBeforeReference();
@@ -152,8 +154,9 @@ public class AnimalTemplateBeanTest extends TestCase {
 	 * 
 	 * Date in the bean IS before the reference and there IS a defaultDate set.
 	 * The animal retrieved from the bean will have events with the default date.
+	 * @throws PremisesPolicyException 
 	 */
-	public void test_getAnimal_date_default() {
+	public void test_getAnimal_date_default() throws PremisesPolicyException {
 		String animalName = "someTag";
 		
 		setEventDateInBeanBeforeReference();
