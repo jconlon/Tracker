@@ -159,6 +159,8 @@ public class TransactionEventHandler implements EventHandler {
 				currentDate.add(Calendar.SECOND, prefs.getInt(P_SPREAD_INTERVAL));
 			}
 			outputEvent = (Event) copier.copy(o);
+			//Copy the references to pickup any OCD references on any GenericEvent
+			copier.copyReferences();
 			outputEvent.setDateTime(currentDate.getTime());
 			if (ActionUtils.canAddEventToAnimal(animal, outputEvent)) {
 				outputResults.add(outputEvent);
