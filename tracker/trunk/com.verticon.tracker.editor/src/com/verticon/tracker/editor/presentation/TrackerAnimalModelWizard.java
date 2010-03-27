@@ -92,7 +92,8 @@ public class TrackerAnimalModelWizard extends TrackerModelWizard {
 					//
 					String defaultModelBaseFilename = TrackerReportEditorPlugin.INSTANCE
 							.getString("_UI_AnimalTemplateFilenameDefaultBase");
-					String defaultModelFilenameExtension = TrackerReportEditorPlugin.INSTANCE.getString("_UI_TrackerTemplateFilenameExtension");
+					String defaultModelFilenameExtension = //FIXME
+						TrackerReportEditorPlugin.INSTANCE.getString("_UI_AnimalTemplateFilenameExtension");
 					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
 						modelFilename = defaultModelBaseFilename + i + "." + defaultModelFilenameExtension;

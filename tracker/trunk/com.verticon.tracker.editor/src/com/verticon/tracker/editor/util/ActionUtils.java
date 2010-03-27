@@ -20,9 +20,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+import org.eclipse.core.databinding.validation.IValidator;
+import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
@@ -48,11 +51,13 @@ import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.presentation.IPremisesProvider;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
+import com.verticon.tracker.util.TrackerUtils;
 /**
  * @author jconlon
  * 
@@ -177,20 +182,26 @@ public class ActionUtils {
 				Collection<Event> potentialEventsToAdd = animalTemplateBean.getEvents(premises);
 				Tag activeTag = animal.activeTag()!=null?animal.activeTag():animal.getTags().get(0);
 									
-				Collection<Event> eventsToAddTheWhereNotDeferred = filterOutDeferedEvents(activeTag, potentialEventsToAdd);
-				deferedEvents = deferedEvents + (potentialEventsToAdd.size() - eventsToAddTheWhereNotDeferred.size());
+				Collection<Event> eventsToAddThatWhereNotDeferred = filterOutDeferedEvents(activeTag, potentialEventsToAdd);
+				
+				deferedEvents = deferedEvents + (potentialEventsToAdd.size() - eventsToAddThatWhereNotDeferred.size());
 				command = createAddCommand(activeTag, premisesProvider.getEditingDomain(),
-						eventsToAddTheWhereNotDeferred);
+						eventsToAddThatWhereNotDeferred);
 
 				
 			} else {
-				newAnimalsCreated++;
-				command = AddCommand.create(
-						premisesProvider.getEditingDomain(), //Domain
-						premises, //Owner
-						TrackerPackage.Literals.PREMISES__ANIMALS,
-						animalTemplateBean.getAnimal(tag.toString(),premises)//value
-				);
+				try {
+					animal = animalTemplateBean.getAnimal(tag.toString(),premises);
+					command = AddCommand.create(
+							premisesProvider.getEditingDomain(), //Domain
+							premises, //Owner
+							TrackerPackage.Literals.PREMISES__ANIMALS,
+							animal//value
+					);
+					newAnimalsCreated++;
+				} catch (PremisesPolicyException e) {
+					logger.warn("Did not create a new animal for tag={}.",tag,e);
+				}
 				
 			}
 			if(command !=null){
@@ -375,6 +386,13 @@ public class ActionUtils {
 		return date;
 	}
 
+	/**
+	 * 
+	 * @param superEClass
+	 * @return
+	 * 
+	 * @deprecated
+	 */
 	public static List<String> getModelInstances(EClass superEClass) {
 
 		List<String> initialObjectNames = new ArrayList<String>();
@@ -430,6 +448,14 @@ public class ActionUtils {
 	 * @return true if the event can be added
 	 */
 	public static boolean canAddEventToAnimal(Animal animalToReceiveEvent, Event eventToAdd){
+		//Get rid of the Explicit Document Policy violations first
+		String ocdId = null;
+		if(eventToAdd instanceof GenericEvent){
+			ocdId = ((GenericEvent)eventToAdd).getOcd().getID();
+		}
+		if(!animalToReceiveEvent.canContain(TrackerUtils.getType(eventToAdd), ocdId)){
+			return false;
+		}
 		for (Event historicalEvent : animalToReceiveEvent.eventHistory()) {
 			if (historicalEvent.getEventCode() == eventToAdd.getEventCode()) {
 				Date historicalEventDate = historicalEvent.getDateTime();
@@ -473,4 +499,13 @@ public class ActionUtils {
 		return selectedEvents;
 	}
 	
+	public static final IValidator singleSelectionValidator = new IValidator(){
+		@Override
+		public IStatus validate(Object value) {
+			if(value==null){
+				return ValidationStatus.info("Please select an event");
+			}
+			return ValidationStatus.ok();
+		}
+	};
 }

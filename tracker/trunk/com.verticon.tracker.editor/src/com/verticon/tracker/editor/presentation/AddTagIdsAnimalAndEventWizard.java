@@ -5,6 +5,8 @@ package com.verticon.tracker.editor.presentation;
 
 import java.io.FileNotFoundException;
 
+import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -39,7 +41,13 @@ public class AddTagIdsAnimalAndEventWizard extends Wizard {
 	private IEditorPart editor;
 	private SelectAnimalWizardPage selectAnimalWizardPage;
 	private SelectEventWizardPage selectEventWizardPage;
-
+	
+	private final Premises premises;
+	
+	public AddTagIdsAnimalAndEventWizard(Premises premises) {
+		super();
+		this.premises = premises;
+	}
 
 	public void init(IEditorPart editor,
 			ISelection selection) {
@@ -49,11 +57,13 @@ public class AddTagIdsAnimalAndEventWizard extends Wizard {
 
 	@Override
 	public boolean canFinish() {
-		Animal animal = selectAnimalWizardPage.getAnimal();
-		Event event = selectEventWizardPage.getEvent();
-		return (event!=null && animal!=null);
+		Animal animal = selectAnimalWizardPage.getSelectedAnimal();
+		Event event = selectEventWizardPage.getSelectedEvent();
+		return (event != null && animal != null);
 	}
+	
 
+	
 	/**
 	 * Will need two pages. The first to choose a default animal the second to 
 	 * choose an event.
@@ -61,27 +71,15 @@ public class AddTagIdsAnimalAndEventWizard extends Wizard {
 	@Override
 	public void addPages() {
 		setWindowTitle(MODIFY_WIZARD_TITLE);
-		selectAnimalWizardPage = new SelectAnimalWizardPage();
+		selectAnimalWizardPage = new SelectAnimalWizardPage(premises);
 		addPage(selectAnimalWizardPage);
-		selectEventWizardPage = new SelectEventWizardPage();
+		selectEventWizardPage = new SelectEventWizardPage(premises);
 		addPage(selectEventWizardPage);
 	}
 	
 
 	@Override
 	public boolean performFinish() {
-
-		Premises premises;
-		try {
-			IPremisesProvider premisesProvider = (IPremisesProvider)editor.getAdapter(IPremisesProvider.class);
-			if(premisesProvider==null){
-				throw new FileNotFoundException("adaptable parameter does not support a IPremisesProvider");
-			}
-			premises=premisesProvider.getPremises();
-		} catch (FileNotFoundException e1) {
-			selectEventWizardPage.setErrorMessage(e1.getMessage());
-			return false;
-		}
 		TagsBean tagsBean = null;
 
 		try {
@@ -106,8 +104,12 @@ public class AddTagIdsAnimalAndEventWizard extends Wizard {
 	
 	
 	private AnimalTemplateBean getTemplateAnimalBean(){
-		return AnimalTemplateBean.instance(selectAnimalWizardPage.getAnimal(), 
-				selectEventWizardPage.getEvent());
+		return AnimalTemplateBean.instance(getSelectedAnimal(), 
+				selectEventWizardPage.getSelectedEvent());
 	}
 
+	Animal getSelectedAnimal(){
+		return selectAnimalWizardPage.getSelectedAnimal();
+	}
+	
 }
