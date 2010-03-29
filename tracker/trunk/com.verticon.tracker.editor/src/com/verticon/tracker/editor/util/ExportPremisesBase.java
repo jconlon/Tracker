@@ -47,10 +47,10 @@ public class ExportPremisesBase {
 	protected void export(IProgressMonitor monitor, IFile iFile)
 			throws IOException, CoreException {
 		Premises premises;
-		premises = ActionUtils.getPremises(iFile);
+		premises = TrackerEditorUtils.getPremises(iFile);
 		IPreferenceStore store = TrackerReportEditorPlugin.getPlugin().getPreferenceStore();
 		boolean validateBeforeExport = store.getBoolean(P_VALIDATE_BEFORE_EXPORT);
-		if (validateBeforeExport && !ActionUtils.validate(premises,
+		if (validateBeforeExport && !TrackerEditorUtils.validate(premises,
 				validationDiagnostics)) {
 			throw new IOException(
 							"Tracker Model is not valid.  Please create a valid model before exporting.");

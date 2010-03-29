@@ -277,7 +277,7 @@ import com.verticon.tracker.util.TrackerUtils;
 	private final static Animal getAnimal(IFile animalTemplateFile) {
 		Resource resource;
 		try {
-			resource = ActionUtils.getResource(animalTemplateFile);
+			resource = TrackerEditorUtils.getResource(animalTemplateFile);
 		} catch (IOException e) {
 			return null;
 		}

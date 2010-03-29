@@ -27,7 +27,7 @@ import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
 import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
-import com.verticon.tracker.editor.util.ActionUtils;
+import com.verticon.tracker.editor.util.TrackerEditorUtils;
 import com.verticon.tracker.editor.util.AnimalTemplateBean;
 
 /**
@@ -110,7 +110,7 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 		if(editor==null){
 			throw new IllegalArgumentException("The editor argument can not be null");
 		}
-		IResource resource = ActionUtils.extractResource(editor);
+		IResource resource = TrackerEditorUtils.extractResource(editor);
 		if(resource == null){
 			throw new IllegalStateException("Could not find the editor resource.");
 		}

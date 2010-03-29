@@ -62,18 +62,18 @@ import com.verticon.tracker.util.TrackerUtils;
  * @author jconlon
  * 
  */
-public class ActionUtils {
+public class TrackerEditorUtils {
 
 	/**
 	 * slf4j Logger
 	 */
-	private static final Logger logger = LoggerFactory.getLogger(ActionUtils.class);
+	private static final Logger logger = LoggerFactory.getLogger(TrackerEditorUtils.class);
 	
 	private static final String ADD_TEMPLATE_TO_ANIMALS_OPERATION = "Add Template to Animals Operation";
 	private static final String ADD_TEMPLATE_TO_PREMISES_OPERATION = "Add Template to Premises Operation";
 
 	// Suppress default constructor for noninstantiability
-	private ActionUtils() {
+	private TrackerEditorUtils() {
 		throw new AssertionError();
 	}
 
@@ -323,7 +323,7 @@ public class ActionUtils {
 		Collection<Event> eventsToAdd = new ArrayList<Event>();
 		for (Event event : events) {
 			
-			if(ActionUtils.canAddEventToAnimal((Animal)tag.eContainer(), event) ){
+			if(TrackerEditorUtils.canAddEventToAnimal((Animal)tag.eContainer(), event) ){
 				//FIXME to not add concurrent times
 				eventsToAdd.add(event);
 				

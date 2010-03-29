@@ -31,7 +31,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
-import com.verticon.tracker.editor.util.ActionUtils;
+import com.verticon.tracker.editor.util.TrackerEditorUtils;
 import com.verticon.tracker.export.wlic.Utils;
 import com.verticon.tracker.util.FilterCriteria;
 
@@ -274,7 +274,7 @@ class SelectExportDateRangeWizardPage extends WizardPage {
 	void init(IFile premisesFile) {
 		this.premisesFile = premisesFile;
 		try {
-			this.premises = ActionUtils.getPremises(premisesFile);
+			this.premises = TrackerEditorUtils.getPremises(premisesFile);
 			if (premises == null) {
 				throw new Exception("a Premises could NOT be created from the file.");
 			}

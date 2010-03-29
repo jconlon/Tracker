@@ -12,7 +12,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 
-import com.verticon.tracker.editor.util.ActionUtils;
+import com.verticon.tracker.editor.util.TrackerEditorUtils;
 
 
 /**
@@ -42,7 +42,7 @@ public class TrackerAnimalModelWizard extends TrackerModelWizard {
 	@Override
 	protected Collection<String> getInitialObjectNames() {
 		if (initialObjectNames == null) {
-			initialObjectNames = ActionUtils.getModelInstances(trackerPackage.getAnimal());
+			initialObjectNames = TrackerEditorUtils.getModelInstances(trackerPackage.getAnimal());
 		}
 		return initialObjectNames;
 	}
