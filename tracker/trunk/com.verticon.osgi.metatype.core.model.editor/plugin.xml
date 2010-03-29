@@ -12,13 +12,13 @@
 
    <extension point="org.eclipse.ui.newWizards">
       <category
-            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            id="com.verticon.tracker.editor.Wizard.category.ID"
             name="%_UI_Wizard_category"/>
       <wizard
             id="com.verticon.osgi.metatype.presentation.MetatypeModelWizardID"
             name="%_UI_MetatypeModelWizard_label"
             class="com.verticon.osgi.metatype.presentation.MetatypeModelWizard"
-            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            category="com.verticon.tracker.editor.Wizard.category.ID"
             icon="icons/full/obj16/MetatypeModelFile.gif">
          <description>%_UI_MetatypeModelWizard_description</description>
          <selection class="org.eclipse.core.resources.IResource"/>
