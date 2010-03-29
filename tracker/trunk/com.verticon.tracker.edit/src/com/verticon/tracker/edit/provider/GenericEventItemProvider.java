@@ -6,6 +6,10 @@
 package com.verticon.tracker.edit.provider;
 
 
+import static com.verticon.tracker.edit.provider.TrackerReportEditPlugin.bundleMarker;
+
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -26,6 +30,8 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.osgi.service.metatype.AttributeDefinition;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.osgi.metatype.OCD;
 import com.verticon.tracker.GenericEvent;
@@ -45,6 +51,14 @@ public class GenericEventItemProvider
 		ITreeItemContentProvider,	
 		IItemLabelProvider,	
 		IItemPropertySource {
+	
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(GenericEventItemProvider.class);
+
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -225,11 +239,29 @@ public class GenericEventItemProvider
 	/**
 	 * This returns GenericEvent.gif.
 	 * <!-- begin-user-doc -->
+	 * Load a genericEvent icon if there is one defined in the metatype
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Object getImage(Object object) {
+		GenericEvent ge = (GenericEvent)object;
+		if(ge.getOcd()!=null && ge.getOcd().getIcon()!=null){
+			String spec = ge.getOcd().getIcon().getResource();
+			
+			try {
+				URL url = new URL(spec);
+				File file = new File(url.toURI());;
+				if(file.exists()){
+					return overlayImage(object, url);
+				}
+			} catch (Exception e) {
+				logger.error(bundleMarker, "Failed to load GenericEvent icon "+spec,e);
+			}
+			
+			
+		}
+	
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/GenericEvent"));
 	}
 
@@ -252,9 +284,8 @@ public class GenericEventItemProvider
 	
 	/**
 	 * 
-	 * TODO
 	 * Return the image from the associated metatype if there is one
-	 * @generated NOT
+	 * @generated
 	 */
 	@Override
 	public Object getColumnImage(Object object, int columnIndex) {

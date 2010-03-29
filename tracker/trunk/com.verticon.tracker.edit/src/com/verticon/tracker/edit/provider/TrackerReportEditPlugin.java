@@ -8,6 +8,8 @@ package com.verticon.tracker.edit.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 /**
  * This is the central singleton for the TrackerReport edit plugin.
@@ -39,6 +41,19 @@ public final class TrackerReportEditPlugin extends EMFPlugin {
 	 */
 	private static Implementation plugin;
 
+	//The identifier for this plugin
+    public static final String ID = "com.verticon.tracker.edit";
+    
+	/**
+	 * slf4j Marker to keep track of bundle
+	 */
+	public static final Marker bundleMarker = createBundleMarker();
+	private static final Marker createBundleMarker() {
+		Marker bundleMarker = MarkerFactory.getMarker(ID);
+		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
+		return bundleMarker;
+	}
+	
 	/**
 	 * Create the instance.
 	 * <!-- begin-user-doc -->
