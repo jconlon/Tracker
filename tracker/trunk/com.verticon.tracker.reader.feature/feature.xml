@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.reader"
       label="Tracker Reader"
-      version="0.2.7.qualifier"
+      version="0.2.8.qualifier"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.reader">
 
@@ -315,9 +315,12 @@ POSSIBILITY OF SUCH DAMAGES.
       <import plugin="com.verticon.tracker"/>
       <import plugin="com.verticon.tracker.editor"/>
       <import plugin="org.eclipse.osgi.services"/>
-      <import plugin="com.verticon.tracker.logging.logback"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="gnu.io.rxtx"/>
+      <import plugin="org.eclipse.ui.cheatsheets"/>
+      <import plugin="slf4j.api"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.bluecove"/>
    </requires>
 
    <plugin
@@ -356,13 +359,6 @@ POSSIBILITY OF SUCH DAMAGES.
          unpack="false"/>
 
    <plugin
-         id="net.sf.bluecove"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="com.verticon.tracker.reader.bluetooth"
          download-size="0"
          install-size="0"
@@ -381,5 +377,27 @@ POSSIBILITY OF SUCH DAMAGES.
          download-size="0"
          install-size="0"
          version="0.0.0"/>
+
+   <plugin
+         id="org.bluecove"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.bluecove.gpl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.connector.bluetooth"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>
