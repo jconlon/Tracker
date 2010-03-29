@@ -21,7 +21,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IWorkbenchWindow;
 
 import com.verticon.tracker.Event;
-import com.verticon.tracker.editor.util.ActionUtils;
+import com.verticon.tracker.editor.util.TrackerEditorUtils;
 
 /**
  * Wizard for updating one or more events.
@@ -59,7 +59,7 @@ public class ModifyEventsWizard extends Wizard {
 	public void init(IWorkbenchWindow workbenchWindow, EditingDomain editingDomain,
 			ISelection selection){
 		this.workbenchWindow=workbenchWindow;
-		eventsToModify = ActionUtils.getSelectedEvents(selection);
+		eventsToModify = TrackerEditorUtils.getSelectedEvents(selection);
 		this.editingDomain=editingDomain;
 	}
 	

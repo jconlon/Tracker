@@ -15,7 +15,7 @@ import org.eclipse.ui.IEditorPart;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
-import com.verticon.tracker.editor.util.ActionUtils;
+import com.verticon.tracker.editor.util.TrackerEditorUtils;
 import com.verticon.tracker.editor.util.AnimalTemplateBean;
 import com.verticon.tracker.editor.util.TagsBean;
 
@@ -83,7 +83,7 @@ public class AddTagIdsAnimalAndEventWizard extends Wizard {
 		TagsBean tagsBean = null;
 
 		try {
-			tagsBean = ActionUtils.getTagsBean(editor, selectionOfTagIdResources);
+			tagsBean = TrackerEditorUtils.getTagsBean(editor, selectionOfTagIdResources);
 		} catch (FileNotFoundException e) {
 			selectAnimalWizardPage.setErrorMessage(e.getMessage());
 			return false;
@@ -93,7 +93,7 @@ public class AddTagIdsAnimalAndEventWizard extends Wizard {
 					"Found no unique events to import from template "+tagsBean.getName());
 			return false;
 		}
-		ActionUtils.addTagsAndTemplate(premises, tagsBean, getTemplateAnimalBean(), editor);
+		TrackerEditorUtils.addTagsAndTemplate(premises, tagsBean, getTemplateAnimalBean(), editor);
 		// Refresh the current viewer
 		IViewerProvider viewerProvider = (IViewerProvider)editor.getAdapter(IViewerProvider.class);
 		if(viewerProvider !=null){

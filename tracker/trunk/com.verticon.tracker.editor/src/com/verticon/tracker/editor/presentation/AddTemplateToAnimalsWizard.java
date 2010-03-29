@@ -12,7 +12,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IEditorPart;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.editor.util.ActionUtils;
+import com.verticon.tracker.editor.util.TrackerEditorUtils;
 import com.verticon.tracker.editor.util.AnimalTemplateBean;
 
 /**
@@ -45,7 +45,7 @@ public class AddTemplateToAnimalsWizard extends Wizard {
 
 	public void init(IEditorPart editor,
 			ISelection selection) {
-		selectedAnimals = ActionUtils.getSelectedAnimals(selection);
+		selectedAnimals = TrackerEditorUtils.getSelectedAnimals(selection);
 		this.editor = editor;
 	}
 
@@ -66,7 +66,7 @@ public class AddTemplateToAnimalsWizard extends Wizard {
 
 	@Override
 	public boolean performFinish() {
-		ActionUtils.addTemplateToAnimals(selectedAnimals, selectAnimalDocumentWizardPage
+		TrackerEditorUtils.addTemplateToAnimals(selectedAnimals, selectAnimalDocumentWizardPage
 				.getTemplateBean(), editor);
 		// Refresh the current viewer
 		IViewerProvider viewerProvider = (IViewerProvider)editor.getAdapter(IViewerProvider.class);

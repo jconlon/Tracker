@@ -28,7 +28,7 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
-import com.verticon.tracker.editor.util.ActionUtils;
+import com.verticon.tracker.editor.util.TrackerEditorUtils;
 import com.verticon.tracker.util.TrackerUtils;
 
 
@@ -100,7 +100,7 @@ class SelectEventWizardPage extends WizardPage {
 		dataBindingContext.bindValue(
 				selection, 
 				model.selection,
-				new UpdateValueStrategy().setAfterConvertValidator(ActionUtils.singleSelectionValidator),
+				new UpdateValueStrategy().setAfterConvertValidator(TrackerEditorUtils.singleSelectionValidator),
 				null
 				
 		);

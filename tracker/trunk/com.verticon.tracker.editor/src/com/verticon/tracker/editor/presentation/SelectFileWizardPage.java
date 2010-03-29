@@ -26,7 +26,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
-import com.verticon.tracker.editor.util.ActionUtils;
+import com.verticon.tracker.editor.util.TrackerEditorUtils;
 
 /**
  * @author jconlon
@@ -92,7 +92,7 @@ public class SelectFileWizardPage extends WizardPage implements ISelectionChange
 
 	
 	public void init(IEditorPart editor){
-		project = ActionUtils.extractResource(editor).getProject();
+		project = TrackerEditorUtils.extractResource(editor).getProject();
 	}
 
 	

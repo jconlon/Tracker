@@ -27,7 +27,7 @@ import org.eclipse.swt.widgets.Composite;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
-import com.verticon.tracker.editor.util.ActionUtils;
+import com.verticon.tracker.editor.util.TrackerEditorUtils;
 import com.verticon.tracker.util.TrackerUtils;
 
 /**
@@ -98,7 +98,7 @@ class SelectAnimalWizardPage extends WizardPage  {
 		dataBindingContext.bindValue(
 				selection, 
 				model.selection,
-				new UpdateValueStrategy().setAfterConvertValidator(ActionUtils.singleSelectionValidator),
+				new UpdateValueStrategy().setAfterConvertValidator(TrackerEditorUtils.singleSelectionValidator),
 				null
 				
 		);
@@ -167,7 +167,7 @@ class SelectAnimalWizardPage extends WizardPage  {
 //
 //			public Object[] getElements(Object parent) {
 //				if (model.isEmpty()) {
-//					model.addAll(ActionUtils.getModelInstances(TrackerPackage.eINSTANCE
+//					model.addAll(TrackerEditorUtils.getModelInstances(TrackerPackage.eINSTANCE
 //							.getAnimal()));
 //				}
 //				return model.toArray();

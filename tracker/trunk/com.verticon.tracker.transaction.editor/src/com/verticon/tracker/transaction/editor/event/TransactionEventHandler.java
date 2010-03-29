@@ -22,7 +22,7 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
-import com.verticon.tracker.editor.util.ActionUtils;
+import com.verticon.tracker.editor.util.TrackerEditorUtils;
 import com.verticon.tracker.editor.util.TrackerConstants;
 import com.verticon.tracker.util.TrackerUtils;
 
@@ -162,7 +162,7 @@ public class TransactionEventHandler implements EventHandler {
 			//Copy the references to pickup any OCD references on any GenericEvent
 			copier.copyReferences();
 			outputEvent.setDateTime(currentDate.getTime());
-			if (ActionUtils.canAddEventToAnimal(animal, outputEvent)) {
+			if (TrackerEditorUtils.canAddEventToAnimal(animal, outputEvent)) {
 				outputResults.add(outputEvent);
 			}
 		}
