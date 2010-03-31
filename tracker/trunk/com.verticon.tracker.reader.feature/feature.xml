@@ -318,7 +318,6 @@ POSSIBILITY OF SUCH DAMAGES.
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="gnu.io.rxtx"/>
       <import plugin="org.eclipse.ui.cheatsheets"/>
-      <import plugin="slf4j.api"/>
       <import plugin="org.eclipse.osgi"/>
       <import plugin="org.bluecove"/>
    </requires>
