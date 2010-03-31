@@ -6,12 +6,9 @@ Bundle-Version: 0.1.3.qualifier
 Bundle-Vendor: Verticon, Inc.
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.equinox.io
+ org.bluecove;bundle-version="2.1.1"
 Bundle-ActivationPolicy: lazy
-Import-Package: com.intel.bluetooth,
- com.verticon.tracker.editor.presentation;version="0.1.0",
- com.verticon.tracker.reader;version="0.1.0",
- javax.bluetooth,
+Import-Package: com.verticon.tracker.reader;version="0.1.0",
  org.osgi.service.io;version="1.0.0",
  org.slf4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
