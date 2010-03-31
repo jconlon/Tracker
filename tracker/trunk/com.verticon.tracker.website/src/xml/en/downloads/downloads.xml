@@ -87,15 +87,9 @@ release.lin.size=50.2M
 				</thead>
 				<tbody>
 					<row>
-						<entry>Product Updates</entry>
+						<entry>Tracker Updates</entry>
 						<entry>
-							<ulink url="http://tracker.verticon.com/Tracker/p2/product/" />
-						</entry>
-					</row>
-					<row>
-						<entry>Features Updates</entry>
-						<entry>
-							<ulink url="http://tracker.verticon.com/Tracker/p2/features/" />
+							<ulink url="http://tracker.verticon.com/Tracker/updates/" />
 						</entry>
 					</row>
 				</tbody>
