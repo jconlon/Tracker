@@ -3,10 +3,8 @@
 #instructions.install.import=\
 #	org.eclipse.equinox.p2.touchpoint.natives.chmod;
 instructions.configure = \
-    addRepository(location:http${#58}//tracker.verticon.com/Tracker/p2/product,type:0,name:Tracker Release,enabled:true);\
-    addRepository(location:http${#58}//tracker.verticon.com/Tracker/p2/product,type:1,name:Tracker Release,enabled:true);\
-    addRepository(location:http${#58}//tracker.verticon.com/Tracker/p2/features,type:0,name:Tracker Engineering,enabled:false);\
-    addRepository(location:http${#58}//tracker.verticon.com/Tracker/p2/features,type:1,name:Tracker Engineering,enabled:false);\
+    addRepository(location:http${#58}//tracker.verticon.com/Tracker/updates,type:0,name:Tracker Release,enabled:true);\
+    addRepository(location:http${#58}//tracker.verticon.com/Tracker/updates,type:1,name:Tracker Release,enabled:true);\
     addRepository(location:http${#58}//rxtx.qbang.org/eclipse,type:0,name:RXTX,enabled:true);\
     addRepository(location:http${#58}//rxtx.qbang.org/eclipse,type:1,name:RXTX,enabled:true);\
     addRepository(location:http${#58}//www.rxtx.org/eclipse,type:0,name:RXTX Deprecated,enabled:false);\
