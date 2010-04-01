@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.product.desktop"
       label="Tracker Desktop Toolkit"
-      version="0.3.5.qualifier"
+      version="0.4.1.qualifier"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.product.desktop">
 
@@ -11,7 +11,7 @@
    </description>
 
    <copyright>
-      Tracker Desktop Toolkit Feature Copyright (C) 2009
+      Tracker Desktop Toolkit Feature Copyright (C) 2010
 Verticon, Inc. All Rights Reserved.
    </copyright>
 
