@@ -12,9 +12,9 @@
          href="/org.eclipse.platform.doc.user/tasks/tasks-121.htm"
          title="Open Software Updates">
       <description>
-         To browse for Tracker Feature Plugins, open the <b>Software Updates and Add Ons</b> User Inteface.<br/>
+         To browse for Tracker Feature Plugins, open the <b>Install New Software </b> User Inteface.<br/>
          From the workbench menu:<br/><br/>
-         Help > Software Updates ...  
+         Help > Install New Software ...  
       </description>
       <command
             required="false"
