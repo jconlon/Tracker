@@ -12,7 +12,7 @@
     point = "org.eclipse.ui.newWizards">
     <category
           id="com.verticon.tracker.editor.Wizard.category.ID"
-          name="Tracker Wizards"/>
+          name="Tracker"/>
     <wizard
       id = "com.verticon.tracker.fair.editor.presentation.FairModelWizardID"
       name = "%_UI_FairModelWizard_label"
