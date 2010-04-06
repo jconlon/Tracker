@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.junit.launchconfig">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/com.verticon.tracker.alltests/src/com/verticon/tracker/alltests/AllTests.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.junit.CONTAINER" value=""/>
+<booleanAttribute key="org.eclipse.jdt.junit.KEEPRUNNING_ATTR" value="false"/>
+<stringAttribute key="org.eclipse.jdt.junit.TESTNAME" value=""/>
+<stringAttribute key="org.eclipse.jdt.junit.TEST_KIND" value="org.eclipse.jdt.junit.loader.junit4"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.verticon.tracker.alltests.AllTests"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="com.verticon.tracker.alltests"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dlogback.configurationFile=file:logback-test.xml -Dverticon.fair.editor.tests=${workspace_loc}/com.verticon.tracker.fair.tests/testFiles -Djava.library.path=${workspace_loc}/com.verticon.tracker.reader.comm.tests/drivers/rxtx-2.1-7-bins-r2/Linux/i686-unknown-linux-gnu -Dgnu.io.rxtx.SerialPorts=/dev/ttyS0"/>
+</launchConfiguration>

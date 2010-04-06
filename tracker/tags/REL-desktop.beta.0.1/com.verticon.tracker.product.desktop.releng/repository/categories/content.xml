@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?metadataRepository class='org.eclipse.equinox.internal.p2.metadata.repository.LocalMetadataRepository' version='1.0.0'?>
+<repository name='The Eclipse Project Updates' type='org.eclipse.equinox.internal.p2.metadata.repository.LocalMetadataRepository' version='1.0.0'>
+  <properties size='2'>
+    <property name='p2.compressed' value='true'/>
+    <property name='p2.timestamp' value='1235426489722'/>
+  </properties>
+
+
+
+  <units size='6'>
+     <unit id='com.verticon.tracker.editor.categoryIU' version='0.0.0'>
+      <properties size='2'>
+        <property name='org.eclipse.equinox.p2.name' value='Premises Editor'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.editor.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.editor.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+    
+    <unit id='com.verticon.tracker.export.wlic.categoryIU' version='0.0.0'>
+      <properties size='2'>
+        <property name='org.eclipse.equinox.p2.name' value='Optional Features'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.export.wlic.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.export.wlic.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+    <unit id='com.verticon.tracker.reader.categoryIU' version='0.0.0'>
+      <properties size='2'>
+        <property name='org.eclipse.equinox.p2.name' value='Optional Features'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.reader.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.reader.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+
+   <unit id='com.verticon.tracker.fair.editor.categoryIU' version='0.0.0'>
+      <properties size='2'>
+        <property name='org.eclipse.equinox.p2.name' value='Fair Editor'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.fair.editor.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.fair.editor.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+
+    <unit id='com.verticon.tracker.fair.poi.categoryIU' version='0.0.0'>
+      <properties size='2'>
+        <property name='org.eclipse.equinox.p2.name' value='Fair Editor'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.fair.poi.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.fair.poi.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+
+     <unit id='com.verticon.tracker.birt.categoryIU' version='0.0.0'>
+      <properties size='2'>
+        <property name='org.eclipse.equinox.p2.name' value='Business Intelligence Reporting Tool (BIRT)'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.fair.poi.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.birt.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+     
+  </units>
+</repository>

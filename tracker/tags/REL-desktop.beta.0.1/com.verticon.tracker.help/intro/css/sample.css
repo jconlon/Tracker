@@ -1,0 +1,5 @@
+a#comverticontrackerproductdesktop img { background-image : url(graphics/sample.gif); }
+a#comverticontrackerproductdesktop:hover img { background-image : url(graphics/tracker_desktop_72.gif); }
+
+a#comverticontrackereditor img { background-image : url(graphics/sample.gif); }
+a#comverticontrackereditor:hover img { background-image : url(graphics/tracker_desktop_72.gif); }

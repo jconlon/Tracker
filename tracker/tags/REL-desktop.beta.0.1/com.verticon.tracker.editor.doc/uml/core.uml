@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_Mu3GAB17Ed6cgcWknUDsMw" name="Premises Editor Overview">
+  <elementImport xmi:id="_Mv6O4B17Ed6cgcWknUDsMw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_Mv618B17Ed6cgcWknUDsMw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_Mv618R17Ed6cgcWknUDsMw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_Mv618h17Ed6cgcWknUDsMw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Component" xmi:id="_RbLEIB17Ed6cgcWknUDsMw" name="Tracker Desktop Premises Editor" useCase="_XRZ3sB17Ed6cgcWknUDsMw _gkQjIB17Ed6cgcWknUDsMw _idXZ0B17Ed6cgcWknUDsMw _q5QBAB17Ed6cgcWknUDsMw _DuSA4B18Ed6cgcWknUDsMw _HN0p4B18Ed6cgcWknUDsMw _ZdvW8B18Ed6cgcWknUDsMw _gVbngB18Ed6cgcWknUDsMw _z0Ib4B18Ed6cgcWknUDsMw __1f8AB18Ed6cgcWknUDsMw _OFngwB1_Ed6cgcWknUDsMw _ct6m4B1_Ed6cgcWknUDsMw _gNqEMB1_Ed6cgcWknUDsMw">
+    <ownedUseCase xmi:id="_XRZ3sB17Ed6cgcWknUDsMw" name="Setup Premises" subject="_RbLEIB17Ed6cgcWknUDsMw">
+      <include xmi:id="_tNF2cB18Ed6cgcWknUDsMw" addition="_HN0p4B18Ed6cgcWknUDsMw"/>
+      <include xmi:id="_uHdM8B18Ed6cgcWknUDsMw" addition="_DuSA4B18Ed6cgcWknUDsMw"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_gkQjIB17Ed6cgcWknUDsMw" name="Add Animals" subject="_RbLEIB17Ed6cgcWknUDsMw">
+      <include xmi:id="_UJFmcB18Ed6cgcWknUDsMw" addition="_q5QBAB17Ed6cgcWknUDsMw"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_idXZ0B17Ed6cgcWknUDsMw" name="Add Events" subject="_RbLEIB17Ed6cgcWknUDsMw"/>
+    <ownedUseCase xmi:id="_q5QBAB17Ed6cgcWknUDsMw" name="Identify Animals" subject="_RbLEIB17Ed6cgcWknUDsMw"/>
+    <ownedUseCase xmi:id="_DuSA4B18Ed6cgcWknUDsMw" name="Setup contact information" subject="_RbLEIB17Ed6cgcWknUDsMw"/>
+    <ownedUseCase xmi:id="_HN0p4B18Ed6cgcWknUDsMw" name="Create Locations" subject="_RbLEIB17Ed6cgcWknUDsMw"/>
+    <ownedUseCase xmi:id="_ZdvW8B18Ed6cgcWknUDsMw" name="Bulkload Events" subject="_RbLEIB17Ed6cgcWknUDsMw">
+      <extend xmi:id="_roNjUB18Ed6cgcWknUDsMw" extendedCase="_idXZ0B17Ed6cgcWknUDsMw"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_gVbngB18Ed6cgcWknUDsMw" name="Manually Add Event" subject="_RbLEIB17Ed6cgcWknUDsMw">
+      <extend xmi:id="_qosnEB18Ed6cgcWknUDsMw" extendedCase="_idXZ0B17Ed6cgcWknUDsMw"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_z0Ib4B18Ed6cgcWknUDsMw" name="Manually Add Animal" subject="_RbLEIB17Ed6cgcWknUDsMw">
+      <extend xmi:id="_HVxPgB19Ed6cgcWknUDsMw" extendedCase="_gkQjIB17Ed6cgcWknUDsMw"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="__1f8AB18Ed6cgcWknUDsMw" name="Bulkload Animals" subject="_RbLEIB17Ed6cgcWknUDsMw">
+      <extend xmi:id="_IZSiAB19Ed6cgcWknUDsMw" extendedCase="_gkQjIB17Ed6cgcWknUDsMw"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_OFngwB1_Ed6cgcWknUDsMw" name="Create Documents" subject="_RbLEIB17Ed6cgcWknUDsMw">
+      <include xmi:id="_WrDFgB1_Ed6cgcWknUDsMw" addition="_XRZ3sB17Ed6cgcWknUDsMw"/>
+      <include xmi:id="_XaCScB1_Ed6cgcWknUDsMw" addition="_gkQjIB17Ed6cgcWknUDsMw"/>
+      <include xmi:id="_aERrIB1_Ed6cgcWknUDsMw" addition="_idXZ0B17Ed6cgcWknUDsMw"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_ct6m4B1_Ed6cgcWknUDsMw" name="Compare Documents" subject="_RbLEIB17Ed6cgcWknUDsMw"/>
+    <ownedUseCase xmi:id="_gNqEMB1_Ed6cgcWknUDsMw" name="Validate Documents" subject="_RbLEIB17Ed6cgcWknUDsMw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_TJr0YB17Ed6cgcWknUDsMw" name="Operator"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_wNczoB19Ed6cgcWknUDsMw" name="Setting Up"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_yrPEsB19Ed6cgcWknUDsMw" name="Working with Readers"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_IqKaIB1-Ed6cgcWknUDsMw" name="Updating Documents"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_YebkIB1-Ed6cgcWknUDsMw" name="Navigating in the Editor"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_VRq3wB1_Ed6cgcWknUDsMw" memberEnd="_VRq3wR1_Ed6cgcWknUDsMw _VRre0h1_Ed6cgcWknUDsMw" navigableOwnedEnd="_VRq3wR1_Ed6cgcWknUDsMw _VRre0h1_Ed6cgcWknUDsMw">
+    <ownedEnd xmi:id="_VRq3wR1_Ed6cgcWknUDsMw" name="src" type="_TJr0YB17Ed6cgcWknUDsMw" association="_VRq3wB1_Ed6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VRre0R1_Ed6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VRre0B1_Ed6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_VRre0h1_Ed6cgcWknUDsMw" name="dst" type="_OFngwB1_Ed6cgcWknUDsMw" association="_VRq3wB1_Ed6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VRsF4B1_Ed6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VRre0x1_Ed6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_iQznsB1_Ed6cgcWknUDsMw" memberEnd="_iQznsR1_Ed6cgcWknUDsMw _iQ0Owh1_Ed6cgcWknUDsMw" navigableOwnedEnd="_iQznsR1_Ed6cgcWknUDsMw _iQ0Owh1_Ed6cgcWknUDsMw">
+    <ownedEnd xmi:id="_iQznsR1_Ed6cgcWknUDsMw" name="src" type="_TJr0YB17Ed6cgcWknUDsMw" association="_iQznsB1_Ed6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_iQ0OwR1_Ed6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iQ0OwB1_Ed6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_iQ0Owh1_Ed6cgcWknUDsMw" name="dst" type="_ct6m4B1_Ed6cgcWknUDsMw" association="_iQznsB1_Ed6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_iQ010B1_Ed6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iQ0Owx1_Ed6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jTiQAB1_Ed6cgcWknUDsMw" memberEnd="_jTi3EB1_Ed6cgcWknUDsMw _jTi3Ex1_Ed6cgcWknUDsMw" navigableOwnedEnd="_jTi3EB1_Ed6cgcWknUDsMw _jTi3Ex1_Ed6cgcWknUDsMw">
+    <ownedEnd xmi:id="_jTi3EB1_Ed6cgcWknUDsMw" name="src" type="_TJr0YB17Ed6cgcWknUDsMw" association="_jTiQAB1_Ed6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jTi3Eh1_Ed6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jTi3ER1_Ed6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_jTi3Ex1_Ed6cgcWknUDsMw" name="dst" type="_gNqEMB1_Ed6cgcWknUDsMw" association="_jTiQAB1_Ed6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jTjeIR1_Ed6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jTjeIB1_Ed6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Package>

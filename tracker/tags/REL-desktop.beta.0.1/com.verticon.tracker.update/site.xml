@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <category-def name="Fair" label="Fair Editor Features">
+      <description>
+         Features associated with editing and manipulating Fair model documents.
+      </description>
+   </category-def>
+   <category-def name="Optional" label="Optional Features">
+      <description>
+         Optional Features that can be added to Tracker
+      </description>
+   </category-def>
+   <category-def name="Premises" label="Premises Editor Features">
+      <description>
+         Features associated with editing and manipulating Premises model documents.
+      </description>
+   </category-def>
+   <category-def name="Core" label="Core Features">
+      <description>
+         Features dependencies required by Tracker.
+      </description>
+   </category-def>
+   <category-def name="BIRT" label="BIRT Enablement Features">
+      <description>
+         Features needed to use the Eclipse Business Intelligence Reporting Tool to report on Tracker Data Model Instances.
+      </description>
+   </category-def>
+</site>
