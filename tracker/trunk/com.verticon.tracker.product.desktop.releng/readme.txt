@@ -30,3 +30,9 @@ version overwrite the preexisting ones.
 4. Run Sync S3.launch - Moves all artifacts over to ~/Uploads/s3 and mirrors these to S3.
 5. Sync any changed documentation to S3 - see documentation
 6. Change downloads page on website and sync it. - see website
+
+=======================================
+Taging a release
+
+HowTo? In SVN Repository View select the tracker/trunk in the context menu 
+refactor>copyTo and a dialog will ask wha name to use. Use REL-desktop.beta.0.1
