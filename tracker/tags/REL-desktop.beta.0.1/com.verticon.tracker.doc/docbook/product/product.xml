@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" 
+ "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter>
+  	<?dbhtml filename="product/product.html" ?>
+	<title>Product Family</title>
+	<para>The Tracker Business Intelligence Toolkit and Features
+	consists of the following products:
+	<itemizedlist mark='bullet'>
+				<listitem>
+					<para>Tracker BI Toolkit Desktop, is the initial product offering;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker Collaboration Service Provider;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker Mult-User Client;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker Web Client;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker Mobile Client;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker Embedded Agent.</para>
+				</listitem>
+			</itemizedlist>
+ 		</para>
+
+</chapter>
+	

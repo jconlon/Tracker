@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cspecExtension
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0"
+	xmlns="http://www.eclipse.org/buckminster/CSpec-1.0">
+	<dependencies>
+		<!-- Place your Dependencies here -->
+	</dependencies>
+	<generators>
+		<!-- Place your Generators here -->
+	</generators>
+	<artifacts>
+  		
+	</artifacts>
+	<actions>
+	    <!-- Initial attempt to address Ticket #293 
+		<private name="qualified.about" actor="ant">
+     		<actorProperties>
+       		 	<property key="buildFile" value="make/buildBrandingQualifier.xml"/>
+     		</actorProperties>
+     		<properties>
+        		<property key="product.version" value="1.2.3"/>
+     		</properties>
+     		<prerequisites>
+        		<attribute name="manifest" alias="action.input"/>
+    		 </prerequisites>
+     		<products alias="action.output" base="generated/">
+       			<path path="about.mappings"/>
+      		</products>
+   		</private> 
+   		-->
+	</actions>
+	<groups>
+		<!-- Place your Groups here -->
+	</groups>
+	<alterDependencies>
+		<!-- Place your Dependency alterations here -->
+	</alterDependencies>
+	<alterArtifacts>
+		<!-- Place your Artifact alterations here -->
+	</alterArtifacts>
+	<alterActions>
+		<!-- Place your Action alterations here -->
+	</alterActions>
+	<alterGroups>
+	    <!--
+		<public name="feature.jars" >
+            <attribute name="qualified.about"/>
+        </public>
+        -->
+	</alterGroups>
+</cspecExtension>
