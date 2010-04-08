@@ -458,7 +458,7 @@ public interface Animal extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if(mostCurrentEvent ==null){\n\t\t\t mostCurrentEvent = findMostCurrentEvent();\n}\n return mostCurrentEvent!=null? mostCurrentEvent.getTag(): \n\t    \tthis.tags.isEmpty()?null:tags.get(0);'"
 	 * @generated
 	 */
 	Tag activeTag();

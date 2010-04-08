@@ -693,20 +693,36 @@ public abstract class AnimalTest extends TestCase {
 		tag1.getEvents().add(TrackerFactory.eINSTANCE.createSlaughtered());
 		animal1.getTags().add(tag1);
 		
+		//The animal fixture does have a tag on it but without any events
+		//Since Ticket#552 an animal with no events but with a tag
+		//will be consider to have at least one activetag (the first one
+		//returned from the tags EList
+		
 		//There is no activeTag so don't accept the events
 		getFixture().addTemplate(animal1.activeTag().getEvents());
-		assertEquals(0, getFixture().eventHistory().size());
+		assertEquals("Should be three events on the fixture",3, getFixture().eventHistory().size());
 		
 		//Add an activeTag 
 		Tag tag2 = TrackerFactory.eINSTANCE.createTag();
 		tag2.setId(AIN_2);
 		tag2.getEvents().add(TrackerFactory.eINSTANCE.createTagApplied());
-		getFixture().getTags().add(tag2);
-		assertEquals(1, getFixture().eventHistory().size());
+		getFixture().getTags().add(tag2);//Fixture now has a new tag that should be the active one
+		assertEquals("Should be four events on the fixture",4, getFixture().eventHistory().size());
 		
 		//There is now an activeTag so accept the events
 		getFixture().addTemplate(animal1.activeTag().getEvents());
-		assertEquals(4, getFixture().eventHistory().size());
+		assertEquals("Should be seven events on the fixture",7, getFixture().eventHistory().size());
+		
+		
+
+		//Create an animal without a tag and try and add events
+		//There is no activeTag so don't accept the events
+		Animal animal = TrackerFactory.eINSTANCE.createBovineBeef();
+		animal.addTemplate(animal1.activeTag().getEvents());
+		assertEquals(0, animal.eventHistory().size());
+		
+		animal.getTags().add(tag2);//Animal now has a new tag that should be the active one
+		assertEquals(1, animal.eventHistory().size());
 	}
 
 	/**
