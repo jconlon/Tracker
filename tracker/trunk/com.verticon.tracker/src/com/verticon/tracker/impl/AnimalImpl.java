@@ -908,14 +908,16 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
    /**
 	 * <!-- begin-user-doc -->
 	 * Tag currently identifying the Animal is the tag with the most current event timestamp.
+	 * See model annotation.
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public Tag activeTag() {
 		if(mostCurrentEvent ==null){
-			 mostCurrentEvent = findMostCurrentEvent();
+					 mostCurrentEvent = findMostCurrentEvent();
 		}
-	    return mostCurrentEvent!=null? mostCurrentEvent.getTag():null;
+		 return mostCurrentEvent!=null? mostCurrentEvent.getTag(): 
+			    	this.tags.isEmpty()?null:tags.get(0);
 	}
 
 	/**

@@ -3102,7 +3102,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";									
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";										
 		addAnnotation
 		  (premisesIdNumberEDataType, 
 		   source, 
