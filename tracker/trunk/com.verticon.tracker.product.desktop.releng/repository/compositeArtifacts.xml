@@ -7,6 +7,7 @@
   <children size='3'>
     <child location='product-desktop.beta.01'/>
     <child location='features-desktop.beta.01'/>
+    <child location='features-desktop.beta.01.v20100409'/>
     <child location='categories'/>
   </children>
 </repository>
