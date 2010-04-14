@@ -11,7 +11,7 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.editor.util.SelectionController;
 import com.verticon.tracker.editor.util.SelectionStrategy;
-import com.verticon.tracker.editor.util.TrackerConstants;
+import com.verticon.tracker.editor.util.TrackerEditorConstants;
 import com.verticon.tracker.editor.util.TrackerView;
 import com.verticon.tracker.util.TrackerSwitch;
 
@@ -69,11 +69,11 @@ public class AnimalsStrategy implements SelectionStrategy {
 	}
 	
 	public String getEventAdminSourceName() {
-		return TrackerConstants.EVENT_ADMIN_VALUE_SELECTION_SOURCE_ANIMALS_VIEW;
+		return TrackerEditorConstants.EVENT_ADMIN_VALUE_SELECTION_SOURCE_ANIMALS_VIEW;
 	}
 	
 	public String getEventAdminTopicForListening() {
-		return TrackerConstants.EVENT_ADMIN_TOPIC_VIEW_SELECTION;
+		return TrackerEditorConstants.EVENT_ADMIN_TOPIC_VIEW_SELECTION;
 	}
 
 	

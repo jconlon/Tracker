@@ -6,6 +6,9 @@
  */
 package com.verticon.tracker.transaction.editor;
 
+import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMIN_TOPIC_EVENT;
+import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMIN_TOPIC_READER;
+
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -20,7 +23,6 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-import com.verticon.tracker.editor.util.TrackerConstants;
 import com.verticon.tracker.transaction.editor.event.TransactionEventHandler;
 
 /**
@@ -31,6 +33,10 @@ import com.verticon.tracker.transaction.editor.event.TransactionEventHandler;
  */
 public final class TransactionEditorPlugin extends EMFPlugin {
 	private static final String ID = "com.verticon.tracker.transaction.editor";
+	
+	//Register to listen to Readers and Events
+	private static final String[] topics = new String[]{EVENT_ADMIN_TOPIC_READER, 
+				 EVENT_ADMIN_TOPIC_EVENT};
 
 	/**
 	 * Keep track of the singleton.
@@ -123,12 +129,17 @@ public final class TransactionEditorPlugin extends EMFPlugin {
 			plugin = this;
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
+		 */
 		@Override
 		public void start(BundleContext context) throws Exception {
 			super.start(context);
-			Dictionary<String, String> d = new Hashtable<String, String>();
+			Dictionary<String, Object> d = new Hashtable<String, Object>();
+			
 			d.put(EventConstants.EVENT_TOPIC,
-					TrackerConstants.EVENT_ADMIN_TOPIC_READER);
+					topics);
 			context.registerService(EventHandler.class.getName(), 
 					new TransactionEventHandler(), d);
 			logger.debug(bundleMarker, "Started Bundle");
