@@ -37,7 +37,7 @@ public class MeasurementEntity extends Measurement{
 	private final String scope;
 	private final String id;
 	
-	private final static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+    public final static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 	private final static String REGEX=".*type='(.*)',dateTime='(.*)',id='(\\S*)',scope='(.*)',value='(.*)',error='(.*)',unit='(kg|pound)'";
 	public final static Pattern PATTERN = Pattern.compile(REGEX);
 	

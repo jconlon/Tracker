@@ -3,6 +3,16 @@
  */
 package com.verticon.tracker.util;
 
+import static com.verticon.tracker.TrackerPlugin.bundleMarker;
+import static com.verticon.tracker.util.MeasurementEntity.DATE_FORMAT;
+import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_COMMENTS;
+import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_DATE;
+import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_TYPE;
+import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_WEIGHIN_OCDID;
+import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_WEIGHIN_UNIT;
+import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_WEIGHIN_WEIGHT;
+
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -10,6 +20,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Properties;
+import java.util.Map.Entry;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.BasicEList;
@@ -21,6 +33,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.osgi.service.metatype.AttributeDefinition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +51,7 @@ import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.WeighIn;
+import com.verticon.tracker.WeightMeasurementUnit;
 
 /**
  * @author jconlon
@@ -338,7 +352,141 @@ public class TrackerUtils {
 		public int compare(Animal parm1, Animal parm2) {
 			return  parm1.getClass().getSimpleName().compareTo( parm2.getClass().getSimpleName());
 		}
-		
-		
 	};
+	
+	public static final Event createEvent(Properties props, Tag tag){
+		String type = props.getProperty(EVENT_ADMIN_PROPERTY_EVENT_TYPE);
+		EventType eventType = EventType.get(type);
+		Event event = null;
+		String ocdId = null;
+		switch (eventType.getValue()) {
+		case EventType.ANIMAL_MISSING_VALUE:
+			event = TrackerFactory.eINSTANCE.createAnimalMissing();
+			break;
+		case EventType.DIED_VALUE:
+			event = TrackerFactory.eINSTANCE.createDied();
+			break;
+		case EventType.EXPORTED_VALUE:
+			event = TrackerFactory.eINSTANCE.createExported();
+			break;
+		case EventType.GENERIC_EVENT_VALUE:
+			event = TrackerFactory.eINSTANCE.createGenericEvent();
+		    ocdId = props.getProperty(EVENT_ADMIN_PROPERTY_EVENT_WEIGHIN_OCDID);
+			
+			if(ocdId == null){
+				logger.error(bundleMarker,
+						"Could not create a GenericEvent because the osgi.event did not have a {} set.",
+						EVENT_ADMIN_PROPERTY_EVENT_WEIGHIN_OCDID);
+						return null;
+			}
+			OCD ocd = tag.findOCD(ocdId);
+			if(ocd == null){
+				logger.error(bundleMarker,
+						"Could not create a GenericEvent because the {} could not find an OCD.",
+						tag);
+						return null;
+			}
+			
+			((GenericEvent)event).setOcd(ocd);
+			
+			for (Entry<String, String> ad : ((GenericEvent)event).getEventAttributes()) {
+				AttributeDefinition def = ((GenericEvent)event).findAttributeDefinition(ad);
+				String key = ad.getKey();
+				String value = props.getProperty(key);
+				if (value!=null){
+					String error = def.validate(value);
+					if(error==null){
+						ad.setValue(value);
+					}else{
+						logger.error(bundleMarker,
+						"Could not create a GenericEvent because attribute {} failed to validate. {}",
+							ad.getKey(), error);
+						return null;
+					}
+				}
+			}
+			//Add all attributes and values
+			
+			break;
+		case EventType.ICVI_VALUE:
+			event = TrackerFactory.eINSTANCE.createICVI();
+			break;
+		case EventType.LOST_TAG_VALUE:
+			event = TrackerFactory.eINSTANCE.createLostTag();
+			break;
+		case EventType.MOVED_IN_VALUE:
+			event = TrackerFactory.eINSTANCE.createMovedIn();
+			//TODO SourcePin
+			break;
+		case EventType.MOVED_OUT_VALUE:
+			event = TrackerFactory.eINSTANCE.createMovedOut();
+			//TODO DestinationPin
+			break;
+		case EventType.REPLACED_TAG_VALUE:
+			event = TrackerFactory.eINSTANCE.createReplacedTag();
+			//TODO OldTag Reference
+//			((ReplacedTag)event).setOldTag(props.getProperty("com.verticon.tracker.event.date"));
+			break;
+		case EventType.SIGHTING_VALUE:
+			event = TrackerFactory.eINSTANCE.createSighting();
+			break;
+		case EventType.SLAUGHTERED_VALUE:
+			event = TrackerFactory.eINSTANCE.createSlaughtered();
+			break;
+		case EventType.TAG_ALLOCATED_VALUE:
+			event = TrackerFactory.eINSTANCE.createTagAllocated();
+			break;
+		case EventType.TAG_APPLIED_VALUE:
+			event = TrackerFactory.eINSTANCE.createTagApplied();
+			break;
+		case EventType.TAG_RETIRED_VALUE:
+			event = TrackerFactory.eINSTANCE.createTagRetired();
+			break;
+		case EventType.WEIGH_IN_VALUE:
+			event = TrackerFactory.eINSTANCE.createWeighIn();
+			WeightMeasurementUnit unit = WeightMeasurementUnit.get(
+					props.getProperty(EVENT_ADMIN_PROPERTY_EVENT_WEIGHIN_UNIT)
+			);
+			if(unit!=null){
+				((WeighIn)event).setUnit(unit);
+			}
+			
+			Object d = props.get(EVENT_ADMIN_PROPERTY_EVENT_WEIGHIN_WEIGHT);
+			if(d instanceof Double){
+				((WeighIn)event).setWeight((Double)d);
+			}else{
+				logger.error(bundleMarker,
+						"Failed to create weighIn Event, because there was no weight value property set as a double number.");
+				return null;
+			}
+			
+			break;
+		default:
+			logger.error(bundleMarker,
+					"Unsupported eventType={}.",eventType);
+			return null;
+		}
+		
+		if(tag.canContain(eventType, ocdId)){
+			logger.warn(bundleMarker,"Containment policy for {} does not allow adding {}",
+	    			 new Object[]{tag.eContainer(), eventType});
+			return null;
+		}
+		
+		event.setComments(props.getProperty(EVENT_ADMIN_PROPERTY_EVENT_COMMENTS));
+		Date date = null;
+		try {
+			date = DATE_FORMAT.parse(props.getProperty(EVENT_ADMIN_PROPERTY_EVENT_DATE));
+		} catch (ParseException e) {
+			logger.error(bundleMarker,
+					"Failed to create the {} dateTime value failed to parse.",event);
+			return null;
+					
+		}
+		event.setDateTime(date);
+		event.setElectronicallyRead(true);
+		event.setCorrection(false);
+		return event;
+	}
+	
 }
