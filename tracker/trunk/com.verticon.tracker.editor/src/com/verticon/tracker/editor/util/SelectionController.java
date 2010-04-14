@@ -23,6 +23,8 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventConstants;
 import org.osgi.service.event.EventHandler;
 
+import static com.verticon.tracker.editor.util.TrackerEditorConstants.*;
+
 
 /**
  * Concrete implementation of ISelectionController that
@@ -307,7 +309,7 @@ public class SelectionController implements ISelectionController {
 //				logger.debug(bundleMarker,"Handling incoming Selection Event");
 
 				final ISelection selection = (ISelection) event
-						.getProperty(TrackerConstants.EVENT_ADMIN_PROPERTY_SELECTION);
+						.getProperty(EVENT_ADMIN_PROPERTY_SELECTION);
 
 				if (selection == null) {
 					return;
@@ -332,7 +334,7 @@ public class SelectionController implements ISelectionController {
 				topic);
 		// Ignore events sent by this viewer
 		properties.put(EventConstants.EVENT_FILTER, "(!("
-				+ TrackerConstants.EVENT_ADMIN_PROPERTY_SELECTION_SOURCE + "="
+				+ EVENT_ADMIN_PROPERTY_SELECTION_SOURCE + "="
 				+ eventAdminSourceName + "))");
 
 		return context.registerService(
@@ -393,11 +395,11 @@ public class SelectionController implements ISelectionController {
 //		logger.debug(bundleMarker,"Sending osgi event to Animals View Topic from {}",source);
 		Map<String, Object> table = new HashMap<String, Object>();
 		// FIXME Task 280 should not send a mutable object as a property
-		table.put(TrackerConstants.EVENT_ADMIN_PROPERTY_SELECTION, selection);
-		table.put(TrackerConstants.EVENT_ADMIN_PROPERTY_SELECTION_SOURCE,
+		table.put(EVENT_ADMIN_PROPERTY_SELECTION, selection);
+		table.put(EVENT_ADMIN_PROPERTY_SELECTION_SOURCE,
 				source);
 		eventAdminTracker.postEvent(new Event(
-				TrackerConstants.EVENT_ADMIN_TOPIC_VIEW_SELECTION, table));
+				EVENT_ADMIN_TOPIC_VIEW_SELECTION, table));
 		
 	}
 }
