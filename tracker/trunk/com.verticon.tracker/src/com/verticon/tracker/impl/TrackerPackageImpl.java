@@ -868,6 +868,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTag_Animal() {
+		return (EReference)tagEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBovine() {
 		return bovineEClass;
 	}
@@ -2166,6 +2175,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(tagEClass, TAG__USAIN_NUMBER_USED);
 		createEReference(tagEClass, TAG__EVENTS);
 		createEAttribute(tagEClass, TAG__ID);
+		createEReference(tagEClass, TAG__ANIMAL);
 
 		bovineEClass = createEClass(BOVINE);
 
@@ -2425,7 +2435,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAnimal_BirthDate(), ecorePackage.getEDate(), "birthDate", null, 0, 1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_Sex(), this.getSex(), "sex", "Unspecified", 0, 1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAnimal_Tags(), this.getTag(), null, "tags", null, 1, -1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnimal_Tags(), this.getTag(), this.getTag_Animal(), "tags", null, 1, -1, Animal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_Species(), ecorePackage.getEString(), "species", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_Breed(), ecorePackage.getEString(), "breed", "", 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnimal_SexCode(), ecorePackage.getEString(), "sexCode", null, 0, 1, Animal.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -2466,6 +2476,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getTag_UsainNumberUsed(), ecorePackage.getEBoolean(), "usainNumberUsed", null, 1, 1, Tag.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getTag_Events(), this.getEvent(), this.getEvent_Tag(), "events", null, 1, -1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTag_Id(), ecorePackage.getEString(), "id", "", 1, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTag_Animal(), this.getAnimal(), this.getAnimal_Tags(), "Animal", null, 0, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(tagEClass, theXMLTypePackage.getBoolean(), "canContain", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getEventType(), "eventType", 0, 1, IS_UNIQUE, IS_ORDERED);

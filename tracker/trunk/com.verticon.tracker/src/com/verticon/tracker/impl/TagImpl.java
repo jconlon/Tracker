@@ -43,6 +43,7 @@ import com.verticon.tracker.util.TrackerUtils;
  *   <li>{@link com.verticon.tracker.impl.TagImpl#isUsainNumberUsed <em>Usain Number Used</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.TagImpl#getEvents <em>Events</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.TagImpl#getId <em>Id</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.TagImpl#getAnimal <em>Animal</em>}</li>
  * </ul>
  * </p>
  *
@@ -166,6 +167,47 @@ public class TagImpl extends EObjectImpl implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Animal getAnimal() {
+		if (eContainerFeatureID() != TrackerPackage.TAG__ANIMAL) return null;
+		return (Animal)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetAnimal(Animal newAnimal, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newAnimal, TrackerPackage.TAG__ANIMAL, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAnimal(Animal newAnimal) {
+		if (newAnimal != eInternalContainer() || (eContainerFeatureID() != TrackerPackage.TAG__ANIMAL && newAnimal != null)) {
+			if (EcoreUtil.isAncestor(this, newAnimal))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newAnimal != null)
+				msgs = ((InternalEObject)newAnimal).eInverseAdd(this, TrackerPackage.ANIMAL__TAGS, Animal.class, msgs);
+			msgs = basicSetAnimal(newAnimal, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.TAG__ANIMAL, newAnimal, newAnimal));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean canContain(EventType eventType, String ocdId) {
 		if(eContainer instanceof Animal){
 			return ((Animal)eContainer).canContain(eventType, ocdId);
@@ -245,6 +287,10 @@ public class TagImpl extends EObjectImpl implements Tag {
 		switch (featureID) {
 			case TrackerPackage.TAG__EVENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEvents()).basicAdd(otherEnd, msgs);
+			case TrackerPackage.TAG__ANIMAL:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetAnimal((Animal)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -259,8 +305,24 @@ public class TagImpl extends EObjectImpl implements Tag {
 		switch (featureID) {
 			case TrackerPackage.TAG__EVENTS:
 				return ((InternalEList<?>)getEvents()).basicRemove(otherEnd, msgs);
+			case TrackerPackage.TAG__ANIMAL:
+				return basicSetAnimal(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case TrackerPackage.TAG__ANIMAL:
+				return eInternalContainer().eInverseRemove(this, TrackerPackage.ANIMAL__TAGS, Animal.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -277,6 +339,8 @@ public class TagImpl extends EObjectImpl implements Tag {
 				return getEvents();
 			case TrackerPackage.TAG__ID:
 				return getId();
+			case TrackerPackage.TAG__ANIMAL:
+				return getAnimal();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -297,6 +361,9 @@ public class TagImpl extends EObjectImpl implements Tag {
 			case TrackerPackage.TAG__ID:
 				setId((String)newValue);
 				return;
+			case TrackerPackage.TAG__ANIMAL:
+				setAnimal((Animal)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -314,6 +381,9 @@ public class TagImpl extends EObjectImpl implements Tag {
 				return;
 			case TrackerPackage.TAG__ID:
 				setId(ID_EDEFAULT);
+				return;
+			case TrackerPackage.TAG__ANIMAL:
+				setAnimal((Animal)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -333,6 +403,8 @@ public class TagImpl extends EObjectImpl implements Tag {
 				return events != null && !events.isEmpty();
 			case TrackerPackage.TAG__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case TrackerPackage.TAG__ANIMAL:
+				return getAnimal() != null;
 		}
 		return super.eIsSet(featureID);
 	}

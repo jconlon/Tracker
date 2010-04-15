@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  *   <li>{@link com.verticon.tracker.Tag#isUsainNumberUsed <em>Usain Number Used</em>}</li>
  *   <li>{@link com.verticon.tracker.Tag#getEvents <em>Events</em>}</li>
  *   <li>{@link com.verticon.tracker.Tag#getId <em>Id</em>}</li>
+ *   <li>{@link com.verticon.tracker.Tag#getAnimal <em>Animal</em>}</li>
  * </ul>
  * </p>
  *
@@ -96,6 +97,34 @@ public interface Tag extends EObject {
 	 * @generated
 	 */
 	void setId(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Animal</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link com.verticon.tracker.Animal#getTags <em>Tags</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Animal</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Animal</em>' container reference.
+	 * @see #setAnimal(Animal)
+	 * @see com.verticon.tracker.TrackerPackage#getTag_Animal()
+	 * @see com.verticon.tracker.Animal#getTags
+	 * @model opposite="tags" transient="false"
+	 * @generated
+	 */
+	Animal getAnimal();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.Tag#getAnimal <em>Animal</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Animal</em>' container reference.
+	 * @see #getAnimal()
+	 * @generated
+	 */
+	void setAnimal(Animal value);
 
 	/**
 	 * <!-- begin-user-doc -->
