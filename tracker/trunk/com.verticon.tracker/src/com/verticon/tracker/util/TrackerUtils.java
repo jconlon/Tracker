@@ -4,11 +4,11 @@
 package com.verticon.tracker.util;
 
 import static com.verticon.tracker.TrackerPlugin.bundleMarker;
-import static com.verticon.tracker.util.MeasurementEntity.DATE_FORMAT;
+import static com.verticon.tracker.util.TrackerConstants.DATE_FORMAT;
 import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_COMMENTS;
 import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_DATE;
 import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_TYPE;
-import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_WEIGHIN_OCDID;
+import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_GENERICEVENT_OCDID;
 import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_WEIGHIN_UNIT;
 import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_WEIGHIN_WEIGHT;
 
@@ -52,6 +52,7 @@ import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.WeightMeasurementUnit;
+
 
 /**
  * @author jconlon
@@ -371,12 +372,12 @@ public class TrackerUtils {
 			break;
 		case EventType.GENERIC_EVENT_VALUE:
 			event = TrackerFactory.eINSTANCE.createGenericEvent();
-		    ocdId = props.getProperty(EVENT_ADMIN_PROPERTY_EVENT_WEIGHIN_OCDID);
+		    ocdId = props.getProperty(EVENT_ADMIN_PROPERTY_EVENT_GENERICEVENT_OCDID);
 			
 			if(ocdId == null){
 				logger.error(bundleMarker,
 						"Could not create a GenericEvent because the osgi.event did not have a {} set.",
-						EVENT_ADMIN_PROPERTY_EVENT_WEIGHIN_OCDID);
+						EVENT_ADMIN_PROPERTY_EVENT_GENERICEVENT_OCDID);
 						return null;
 			}
 			OCD ocd = tag.findOCD(ocdId);
@@ -391,11 +392,11 @@ public class TrackerUtils {
 			
 			for (Entry<String, String> ad : ((GenericEvent)event).getEventAttributes()) {
 				AttributeDefinition def = ((GenericEvent)event).findAttributeDefinition(ad);
-				String key = ad.getKey();
+				String key = def.getID();
 				String value = props.getProperty(key);
 				if (value!=null){
 					String error = def.validate(value);
-					if(error==null){
+					if(error==null||error.length()==0){
 						ad.setValue(value);
 					}else{
 						logger.error(bundleMarker,
@@ -467,7 +468,7 @@ public class TrackerUtils {
 			return null;
 		}
 		
-		if(tag.canContain(eventType, ocdId)){
+		if(!tag.canContain(eventType, ocdId)){
 			logger.warn(bundleMarker,"Containment policy for {} does not allow adding {}",
 	    			 new Object[]{tag.eContainer(), eventType});
 			return null;
@@ -476,7 +477,7 @@ public class TrackerUtils {
 		event.setComments(props.getProperty(EVENT_ADMIN_PROPERTY_EVENT_COMMENTS));
 		Date date = null;
 		try {
-			date = DATE_FORMAT.parse(props.getProperty(EVENT_ADMIN_PROPERTY_EVENT_DATE));
+			date = TrackerConstants.DATE_FORMAT.parse(props.getProperty(EVENT_ADMIN_PROPERTY_EVENT_DATE));
 		} catch (ParseException e) {
 			logger.error(bundleMarker,
 					"Failed to create the {} dateTime value failed to parse.",event);
