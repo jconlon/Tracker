@@ -1,8 +1,6 @@
 package com.verticon.tracker.util;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,8 +35,7 @@ public class MeasurementEntity extends Measurement{
 	private final String scope;
 	private final String id;
 	
-    public final static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-	private final static String REGEX=".*type='(.*)',dateTime='(.*)',id='(\\S*)',scope='(.*)',value='(.*)',error='(.*)',unit='(kg|pound)'";
+    private final static String REGEX=".*type='(.*)',dateTime='(.*)',id='(\\S*)',scope='(.*)',value='(.*)',error='(.*)',unit='(kg|pound)'";
 	public final static Pattern PATTERN = Pattern.compile(REGEX);
 	
 	/**
@@ -77,7 +74,7 @@ public class MeasurementEntity extends Measurement{
 
 		Date date;
 		try {
-			date = (Date)DATE_FORMAT.parse(matcher.group(DATE_TIME));
+			date = (Date)TrackerConstants.DATE_FORMAT.parse(matcher.group(DATE_TIME));
 		} catch (ParseException e) {
 			throw new ParseException("Log Entry=<"+log+"> failed to parse dateTime.", DATE_TIME);
 		}
