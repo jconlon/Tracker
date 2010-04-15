@@ -10,7 +10,7 @@ import org.osgi.service.event.Event;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.editor.util.SelectionController;
 import com.verticon.tracker.editor.util.SelectionStrategy;
-import com.verticon.tracker.editor.util.TrackerConstants;
+import com.verticon.tracker.editor.util.TrackerEditorConstants;
 import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.editor.presentation.FairEditorPlugin;
@@ -163,6 +163,6 @@ class ExhibitsStrategy implements SelectionStrategy {
 	}
 
 	public String getEventAdminTopicForListening() {
-		return TrackerConstants.EVENT_ADMIN_TOPIC_VIEW_SELECTION;
+		return TrackerEditorConstants.EVENT_ADMIN_TOPIC_VIEW_SELECTION;
 	}
 }
