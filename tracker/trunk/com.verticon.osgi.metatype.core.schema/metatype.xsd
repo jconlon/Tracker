@@ -182,7 +182,19 @@
 		
 		case LONG:
 			try {
-				Long.parseLong(value);
+				Long l = Long.parseLong(value);
+				if(min !=null){
+					Long lmin = Long.parseLong(min);
+					if(l.compareTo(lmin)&lt;0){
+						return "Value is less than permitted minimum value.";
+					}
+				}
+				if(max !=null){
+					Long lmax = Long.parseLong(max);
+					if(l.compareTo(lmax)&gt;0){
+						return "Value is greater than permitted maximum value.";
+					}
+				}
 			} catch (NumberFormatException e) {
 				return "Long invalid. "+e.getLocalizedMessage();
 			}
@@ -190,14 +202,38 @@
 		
 		case DOUBLE:
 			try {
-				Double.parseDouble(value);
+				Double d = Double.parseDouble(value);
+				if(min !=null){
+					Double dmin = Double.parseDouble(min);
+					if(d.compareTo(dmin)&lt;0){
+						return "Value is less than permitted minimum value.";
+					}
+				}
+				if(max !=null){
+					Double dmax = Double.parseDouble(max);
+					if(d.compareTo(dmax)&gt;0){
+						return "Value is greater than permitted maximum value.";
+					}
+				}
 			} catch (NumberFormatException e) {
 				return "Double invalid. "+e.getLocalizedMessage();
 			}
 			break;
 		case FLOAT:
 			try {
-				Float.parseFloat(value);
+				Float f = Float.parseFloat(value);
+				if(min !=null){
+					Float fmin = Float.parseFloat(min);
+					if(f.compareTo(fmin)&lt;0){
+						return "Value is less than permitted minimum value.";
+					}
+				}
+				if(max !=null){
+					Float fmax = Float.parseFloat(max);
+					if(f.compareTo(fmax)&gt;0){
+						return "Value is greater than permitted maximum value.";
+					}
+				}
 			} catch (NumberFormatException e) {
 				return "Float invalid. "+e.getLocalizedMessage();
 			}
@@ -205,7 +241,19 @@
 		
 		case INTEGER:
 			try {
-				Integer.parseInt(value);
+				Integer i = Integer.parseInt(value);
+				if(min !=null){
+					Integer imin = Integer.parseInt(min);
+					if(i.compareTo(imin)&lt;0){
+						return "Value is less than permitted minimum value.";
+					}
+				}
+				if(max !=null){
+					Integer imax = Integer.parseInt(max);
+					if(i.compareTo(imax)&gt;0){
+						return "Value is greater than permitted maximum value.";
+					}
+				}
 			} catch (NumberFormatException e) {
 				return "Integer invalid. "+e.getLocalizedMessage();
 			}

@@ -183,6 +183,15 @@ public class ADTest extends TestCase {
 		assertEquals("",fixture.validate("123456789012345"));
 		assertEquals("",fixture.validate("-33123456789012345"));
 		assertEquals("",fixture.validate("1000222"));
+		fixture.setMin("1");
+		fixture.setMax("100");
+		assertEquals("",fixture.validate("1"));
+		assertEquals("",fixture.validate("2"));
+		assertEquals("Value is less than permitted minimum value.",fixture.validate("-33"));
+		assertEquals("Value is greater than permitted maximum value.",fixture.validate("1000"));
+		//Reset
+		fixture.setMin(null);
+		fixture.setMax(null);
 		
 		fixture.setDataType(Scalar.DOUBLE);
 		assertTrue( fixture.validate("").startsWith("Double invalid."));
@@ -191,6 +200,17 @@ public class ADTest extends TestCase {
 		assertEquals("",fixture.validate("2.002"));
 		assertEquals("",fixture.validate("-33.8"));
 		assertEquals("",fixture.validate("1000.222"));
+		//test min and max
+		fixture.setMin("1");
+		fixture.setMax("100");
+		assertEquals("",fixture.validate("1"));
+		assertEquals("",fixture.validate("2.002"));
+		assertEquals("Value is less than permitted minimum value.",fixture.validate("-33.8"));
+		assertEquals("Value is greater than permitted maximum value.",fixture.validate("1000.222"));
+		//Reset
+		fixture.setMin(null);
+		fixture.setMax(null);
+		
 		
 		fixture.setDataType(Scalar.FLOAT);
 		assertTrue( fixture.validate("").startsWith("Float invalid."));
@@ -199,6 +219,16 @@ public class ADTest extends TestCase {
 		assertEquals("",fixture.validate("2.002"));
 		assertEquals("",fixture.validate("-33.8"));
 		assertEquals("",fixture.validate("1000.222"));
+		//test min and max
+		fixture.setMin("1");
+		fixture.setMax("100");
+		assertEquals("",fixture.validate("1"));
+		assertEquals("",fixture.validate("2.002"));
+		assertEquals("Value is less than permitted minimum value.",fixture.validate("-33.8"));
+		assertEquals("Value is greater than permitted maximum value.",fixture.validate("1000.222"));
+		//Reset
+		fixture.setMin(null);
+		fixture.setMax(null);
 		
 		fixture.setDataType(Scalar.INTEGER);
 		assertTrue( fixture.validate("").startsWith("Integer invalid."));
@@ -207,6 +237,15 @@ public class ADTest extends TestCase {
 		assertEquals("",fixture.validate("2002"));
 		assertEquals("",fixture.validate("338"));
 		assertEquals("",fixture.validate("1000222"));
+		fixture.setMin("1");
+		fixture.setMax("100");
+		assertEquals("",fixture.validate("1"));
+		assertEquals("",fixture.validate("2"));
+		assertEquals("Value is less than permitted minimum value.",fixture.validate("-33"));
+		assertEquals("Value is greater than permitted maximum value.",fixture.validate("1000"));
+		//Reset
+		fixture.setMin(null);
+		fixture.setMax(null);
 		
 		fixture.setDataType(Scalar.CHAR);
 		assertTrue( fixture.validate("").startsWith("Character invalid."));
