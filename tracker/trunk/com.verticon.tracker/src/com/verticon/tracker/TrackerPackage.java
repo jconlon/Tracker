@@ -287,13 +287,22 @@ public interface TrackerPackage extends EPackage {
 	int TAG__ID = 2;
 
 	/**
+	 * The feature id for the '<em><b>Animal</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG__ANIMAL = 3;
+
+	/**
 	 * The number of structural features of the '<em>Tag</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TAG_FEATURE_COUNT = 3;
+	int TAG_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.BovineImpl <em>Bovine</em>}' class.
@@ -5270,6 +5279,17 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getTag_Id();
 
 	/**
+	 * Returns the meta object for the container reference '{@link com.verticon.tracker.Tag#getAnimal <em>Animal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Animal</em>'.
+	 * @see com.verticon.tracker.Tag#getAnimal()
+	 * @see #getTag()
+	 * @generated
+	 */
+	EReference getTag_Animal();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Bovine <em>Bovine</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6949,6 +6969,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TAG__ID = eINSTANCE.getTag_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Animal</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TAG__ANIMAL = eINSTANCE.getTag_Animal();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.BovineImpl <em>Bovine</em>}' class.

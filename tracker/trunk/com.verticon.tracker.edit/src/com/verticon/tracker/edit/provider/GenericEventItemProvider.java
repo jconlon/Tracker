@@ -283,16 +283,6 @@ public class GenericEventItemProvider
 	}
 	
 	/**
-	 * 
-	 * Return the image from the associated metatype if there is one
-	 * @generated
-	 */
-	@Override
-	public Object getColumnImage(Object object, int columnIndex) {
-		return super.getColumnImage(object, columnIndex);
-	}
-
-	/**
 	 * Return the name based on metatype
 	 * @generated NOT
 	 */

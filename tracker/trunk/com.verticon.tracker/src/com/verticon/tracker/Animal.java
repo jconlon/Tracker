@@ -113,6 +113,7 @@ public interface Animal extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Tags</b></em>' containment reference list.
 	 * The list contents are of type {@link com.verticon.tracker.Tag}.
+	 * It is bidirectional and its opposite is '{@link com.verticon.tracker.Tag#getAnimal <em>Animal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Tags</em>' containment reference list isn't clear,
@@ -121,7 +122,8 @@ public interface Animal extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Tags</em>' containment reference list.
 	 * @see com.verticon.tracker.TrackerPackage#getAnimal_Tags()
-	 * @model containment="true" required="true"
+	 * @see com.verticon.tracker.Tag#getAnimal
+	 * @model opposite="Animal" containment="true" required="true"
 	 * @generated
 	 */
 	EList<Tag> getTags();
