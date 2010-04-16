@@ -6,6 +6,10 @@
 # ./tracker -vmargs -Dlogback.configurationFile=file:/home/jconlon/Desktop/tracker/logback-test.xml 
 # or in windows with:
 # "C:\Program Files\tracker\tracker.exe" -vmargs "-Dlogback.configurationFile=file:C:/Downloads/tracker/logback-test.xml"
+#
+#
+# This file is the primary logback configuration file for Tracker dev and the deployed mudshark tracker.
+
 <configuration debug="true" scan="true">
 -->
 <configuration scan="true" debug="false">
