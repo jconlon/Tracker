@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.verticon.tracker.birt"
+      label="BIRT Feature"
+      version="0.1.0.qualifier"
+      provider-name="Verticon, Inc.">
+
+   <description url="http://www.eclipse.org/birt/phoenix/">
+      Eclipse Business Intelligence Reporting Tools (BIRT) is an open source Eclipse-based reporting system that integrates with the Tracker Business Intelligence Toolkit to produce compelling reports. 
+
+The Tracker Birt Feature includes all the prerequisite
+Eclipse BIRT components needed to run within the Tracker Livestock Business Intelligence
+Toolkit.
+   </description>
+
+   <license url="license.html">
+      %license
+   </license>
+
+   <url>
+      <discovery label="Tracker Release Update Site" url="http://tracker.verticon.com/Tracker/p2/product"/>
+   </url>
+
+   <includes
+         id="org.eclipse.datatools.enablement.oda.ecore.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.birt"
+         version="0.0.0"
+         search-location="both"/>
+
+   <includes
+         id="org.eclipse.birt.chart.cshelp"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.birt.cshelp"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.birt.doc"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.birt.example"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.birt.report.designer.editor.xml.wtp"
+         version="0.0.0"/>
+
+</feature>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.4"?>
+
+<product name="Tracker Animal Information Platform" id="com.verticon.tracker.editor.Tracker" application="org.eclipse.ui.ide.workbench" version="0.3.1" useFeatures="true">
+
+   <aboutInfo>
+      <image path="/com.verticon.tracker.editor/icons/tracker_lg.gif"/>
+      <text>
+         Tracker Animal Information Platform
+Version: {0}
+
+(c) Copyright Verticon, Inc. 2008.  All rights reserved. 
+
+Visit http:/www.verticon.com
+
+Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and used with other Eclipsr (3.4.1) based offerings.
+      </text>
+   </aboutInfo>
+
+   <configIni use="default">
+      <linux>/com.verticon.tracker.editor/config.ini</linux>
+      <win32>/com.verticon.tracker.editor/config.ini</win32>
+   </configIni>
+
+   <launcherArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+   </launcherArgs>
+
+   <windowImages i32="/com.verticon.tracker.editor/icons/verticon32.gif"/>
+
+   <splash
+      location="com.verticon.tracker.editor"
+      startupProgressRect="62,400,515,15"
+      startupMessageRect="7,225,441,20"
+      startupForegroundColor="ADD8E6" />
+   <launcher name="tracker">
+      <linux icon="/com.verticon.tracker.editor/icon.xpm"/>
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <intro introId="com.verticon.tracker.editor.intro"/>
+
+   <vm>
+   </vm>
+
+   <plugins>
+   </plugins>
+
+   <features>
+      <feature id="com.verticon.tracker.group.feature" version="0.3.1"/>
+   </features>
+
+</product>

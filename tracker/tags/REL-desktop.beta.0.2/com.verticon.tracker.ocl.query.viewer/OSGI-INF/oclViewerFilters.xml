@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"  
+	name="OclViewerFilters">
+	<implementation class="com.verticon.tracker.ocl.query.viewer.OCLViewerFilters"/>
+ <service>
+    <provide interface="com.verticon.tracker.editor.util.IViewerFilters"/>
+ </service>
+ 
+ </scr:component>
+

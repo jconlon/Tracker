@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0">
+
+  <OCD description="Configuration for the Tracker Mettler Balance Instance" name="Tracker Mettler Balance" id="com.verticon.tracker.irouter.mettler.balancefactory">
+    <AD name="Connection uri"  id="connection.uri" type="String" default=""/> 
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" required="true" type="String" default=""/>  
+    <AD name="Stable weight measurement error"  id="stable.weight.error" required="false" type="Double" default=".002"/>
+    <AD name="Unstable weight measurement error"  id="unstable.weight.error" required="false" type="Double" default=".01"/>
+    <AD name="Poll interval milliseconds"  id="poll.milliseconds.delay" required="false" type="Long" default="100"/>
+    <AD name="Request command"  id="request.command" required="false" type="String" default=""/>
+    <AD name="Response pattern"  id="response.pattern" required="false" type="String" default="^S (D|S)((\\s*)(.*))\\sg$"/>
+    <AD name="Connection retry interval seconds"  id="connection.retry.seconds" required="false" type="Long" default="5"/>
+  
+    <AD name="Name of the weight.measurement produced" id="producer.weight.measurement.name" type="String"
+		required="false" default="mettler" />
+  
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.mettler.balancefactory" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.mettler.balancefactory"/>
+  </Designate>
+  
+  
+</metatype:MetaData>
