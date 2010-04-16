@@ -35,4 +35,4 @@ version overwrite the preexisting ones.
 Taging a release
 
 HowTo? In SVN Repository View select the tracker/trunk in the context menu 
-refactor>copyTo and a dialog will ask wha name to use. Use REL-desktop.beta.0.1
+refactor>copyTo and a dialog will ask what name to use. Use REL-desktop.beta.0.2
