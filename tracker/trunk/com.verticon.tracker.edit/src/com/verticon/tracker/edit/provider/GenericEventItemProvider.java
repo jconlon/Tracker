@@ -19,6 +19,7 @@ import java.util.Map.Entry;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -247,19 +248,34 @@ public class GenericEventItemProvider
 	public Object getImage(Object object) {
 		GenericEvent ge = (GenericEvent)object;
 		if(ge.getOcd()!=null && ge.getOcd().getIcon()!=null){
+			
 			String spec = ge.getOcd().getIcon().getResource();
-			
-			try {
-				URL url = new URL(spec);
-				File file = new File(url.toURI());;
-				if(file.exists()){
-					return overlayImage(object, url);
+			if(spec!=null){
+				try {
+					URI iconURI = URI.createURI(spec);
+					if(iconURI.isRelative()){
+						URI resourceURI = URI.createPlatformResourceURI(
+								spec, true);
+						logger.debug(bundleMarker, "Icon {} isRelative Trying {}",
+								spec, resourceURI);
+						return overlayImage(object, new URL(resourceURI.toString()));
+					}else if(iconURI.isPlatform()){
+						logger.debug(bundleMarker, "Icon {} isPlatform Trying {}",
+								spec, iconURI);
+						return overlayImage(object, new URL(iconURI.toString()));
+					}else if(iconURI.isFile()){
+						File file = new File(iconURI.toFileString());
+						if(file.exists()){
+							logger.debug(bundleMarker, "Icon {} isFile Trying {}",
+									spec, file.toURI().toURL());
+							return overlayImage(object, file.toURI().toURL());
+						}
+					}
+				} catch (Exception e) {
+					logger.error(bundleMarker, "Failed to load GenericEvent icon "+spec,e);
 				}
-			} catch (Exception e) {
-				logger.error(bundleMarker, "Failed to load GenericEvent icon "+spec,e);
 			}
-			
-			
+
 		}
 	
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/GenericEvent"));
