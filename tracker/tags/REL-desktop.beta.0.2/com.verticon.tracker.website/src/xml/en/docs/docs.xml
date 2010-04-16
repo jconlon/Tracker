@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<webpage id="docs">
+	<config param="rcsdate" value="$Date$" />
+	<head>
+		<title>Documentation</title>
+		<summary>FAQ, User Guide and Data Models
+		</summary>
+		<keywords>livestock, open source, NAIS, XML, Eclipse, RFID,
+			herd management
+		</keywords>
+	</head>
+
+   
+	<section id="userGuide">
+    <title>User Guide</title>
+    <para>
+    Installation, Customization and Usage Guide. The <ulink 
+    url="http://tracker.verticon.com/Tracker/documentation/trackerUserGuide.pdf">trackerUserGuide.pdf</ulink> is an extensive reference for 
+    installing, using and customizing the Tracker software. 
+    <olink targetdoc="faqs">Faqs</olink>
+    </para>
+    </section>
+    
+    <section>
+		<title>Other Documentation</title>
+		<table xml:id="tracker.docs.models.table" frame='all'>
+			<title>Tracker Editor MetaModels</title>
+			<tgroup cols='3' align='left' colsep='1' rowsep='1'>
+				<colspec colname='c1' />
+				<colspec colname='c2' />
+				<colspec colname='c3' />
+				<thead>
+					<row>
+						<entry>Download File</entry>
+						<entry>Editor</entry>
+						<entry>ECore Package URI</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>
+							<ulink
+								url="http://tracker.verticon.com/Tracker/documentation/premises-MetaModel.pdf">
+								premises-MetaModel.pdf
+							</ulink>
+						</entry>
+						<entry>Premises Editor</entry>
+						<entry>http://www.verticon.com/ns/tracker/0.1.0</entry>
+					</row>
+					<row>
+						<entry>
+							<ulink
+								url="http://tracker.verticon.com/Tracker/documentation/fair-MetaModel.pdf">
+								fair-MetaModel.pdf
+							</ulink>
+						</entry>
+						<entry>Fair Editor</entry>
+						<entry>http://www.verticon.com/ns/tracker/fair/0.1.0</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+</webpage>
