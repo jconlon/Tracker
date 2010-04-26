@@ -1,4 +1,5 @@
 package com.verticon.tracker.editor.presentation;
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -317,9 +318,9 @@ class ImportSpeciesColumnMappingWizardPage extends WizardPage {
 			// close file
 			csvFile.close();
 		} catch (IOException e) {
-			logger.error("Failed to read file ", e);
+			logger.error(bundleMarker,"Failed to read file ", e);
 		} catch (Exception e) {
-			logger.error("Failed to read file ", e);
+			logger.error(bundleMarker,"Failed to read file ", e);
 		}
 
 		tableViewer.refresh();

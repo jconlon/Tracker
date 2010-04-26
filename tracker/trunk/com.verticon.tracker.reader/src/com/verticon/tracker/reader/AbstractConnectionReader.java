@@ -182,7 +182,7 @@ public abstract class AbstractConnectionReader extends AbstractModelObject
 	 */
 	public synchronized void publish(Long tag) {
 		if(tag < 100000000000000L){
-			logger.warn("{} received a partial tag {}",this,tag );
+			logger.warn(bundleMarker,"{} received a partial tag {}",this,tag );
 			return;
 		}
 		tagIdPublisher.publish(tag);

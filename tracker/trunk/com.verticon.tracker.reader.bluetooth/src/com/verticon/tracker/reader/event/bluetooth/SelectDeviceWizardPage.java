@@ -1,6 +1,8 @@
 package com.verticon.tracker.reader.event.bluetooth;
 
 
+import static com.verticon.tracker.reader.event.bluetooth.Constants.bundleMarker;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
@@ -135,7 +137,7 @@ public class SelectDeviceWizardPage extends WizardPage implements
 	 * Called by the discovery task thread.
 	 */
 	public void deviceDiscovered(RemoteDevice arg0, DeviceClass arg1) {
-		logger.debug("Adding device {} to list of discovered devices.", arg0);
+		logger.debug(bundleMarker,"Adding device {} to list of discovered devices.", arg0);
 		remoteDevices.add(arg0);
 	}
 
@@ -145,18 +147,18 @@ public class SelectDeviceWizardPage extends WizardPage implements
 	public void inquiryCompleted(int arg0) {
 		switch (arg0) {
 		case DiscoveryListener.INQUIRY_COMPLETED:
-			logger.debug("Completed discovery.");
+			logger.debug(bundleMarker,"Completed discovery.");
 			break;
 
 		case DiscoveryListener.INQUIRY_ERROR:
-			logger.error("Bluetooth error.");
+			logger.error(bundleMarker,"Bluetooth error.");
 			break;
 
 		case DiscoveryListener.INQUIRY_TERMINATED:
-			logger.debug("Canceled discovery.");
+			logger.debug(bundleMarker,"Canceled discovery.");
 			break;
 		default:
-			logger.debug("Unanticipated result {}", arg0);
+			logger.debug(bundleMarker,"Unanticipated result {}", arg0);
 			break;
 		}
 		getContainer().getShell().getDisplay().asyncExec(new Runnable() {
@@ -178,10 +180,10 @@ public class SelectDeviceWizardPage extends WizardPage implements
 		try {
 			barrier.await();
 		} catch (InterruptedException e) {
-			logger.debug("Unanticipated result", e);
+			logger.debug(bundleMarker,"Unanticipated result", e);
 			Thread.currentThread().interrupt();
 		} catch (BrokenBarrierException e) {
-			logger.error("Unanticipated result", e);
+			logger.error(bundleMarker,"Unanticipated result", e);
 		}
 
 	}

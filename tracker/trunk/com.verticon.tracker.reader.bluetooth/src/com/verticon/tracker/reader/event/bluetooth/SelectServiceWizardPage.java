@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CyclicBarrier;
+import static com.verticon.tracker.reader.event.bluetooth.Constants.bundleMarker;
 
 import javax.bluetooth.BluetoothStateException;
 import javax.bluetooth.DataElement;
@@ -301,25 +302,25 @@ public class SelectServiceWizardPage extends WizardPage implements
 	private void processDataElement(DataElement de, int attributeID) {
 		switch (de.getDataType()) {
 		case DataElement.STRING:
-			logger.debug("{}: Attribute id={}, String value={}",
+			logger.debug(bundleMarker,"{}: Attribute id={}, String value={}",
 					new Object[]{this,
 					attributeID,
 					de.getValue()});
 			break;
 		case DataElement.UUID:
-			logger.debug("{}: Attribute id={}, UUID value={}", 
+			logger.debug(bundleMarker,"{}: Attribute id={}, UUID value={}", 
 					new Object[]{this,
 					attributeID,
 					de.getValue()});
 			break;
 		case DataElement.URL:
-			logger.debug("{}: Attribute id={}, URL value={}", 
+			logger.debug(bundleMarker,"{}: Attribute id={}, URL value={}", 
 					new Object[]{this,
 					attributeID,
 					de.getValue()});
 			break;
 		case DataElement.DATALT:
-			logger.debug("{}: Found a DatAlt for attribute id={}", this, attributeID);
+			logger.debug(bundleMarker,"{}: Found a DatAlt for attribute id={}", this, attributeID);
 			Enumeration en = (Enumeration) de.getValue();
 			while (en.hasMoreElements()) {
 				DataElement object = (DataElement) en.nextElement();
@@ -329,7 +330,7 @@ public class SelectServiceWizardPage extends WizardPage implements
 			break;
 
 		case DataElement.DATSEQ:
-			logger.debug("(): Found a DatSeq for attribute id={}", this, attributeID);
+			logger.debug(bundleMarker,"(): Found a DatSeq for attribute id={}", this, attributeID);
 			Enumeration en2 = (Enumeration) de.getValue();
 			while (en2.hasMoreElements()) {
 				DataElement object = (DataElement) en2.nextElement();
@@ -338,7 +339,7 @@ public class SelectServiceWizardPage extends WizardPage implements
 
 			break;
 		default:
-			logger.debug("{}: Attribute id={}, value={}", this,attributeID);
+			logger.debug(bundleMarker,"{}: Attribute id={}, value={}", this,attributeID);
 			break;
 		}
 	}
@@ -347,23 +348,23 @@ public class SelectServiceWizardPage extends WizardPage implements
 
 		switch (responseCode) {
 		case DiscoveryListener.SERVICE_SEARCH_DEVICE_NOT_REACHABLE:
-			logger.warn("{}: Could not find device on search {}.", this, transactionID);
+			logger.warn(bundleMarker,"{}: Could not find device on search {}.", this, transactionID);
 			break;
 		case DiscoveryListener.SERVICE_SEARCH_ERROR:
-			logger.warn("{}: Error searching device on search {}.", this, transactionID);
+			logger.warn(bundleMarker,"{}: Error searching device on search {}.", this, transactionID);
 			break;
 		case DiscoveryListener.SERVICE_SEARCH_NO_RECORDS:
-			logger.warn("{}: No service records on device on search {}.",this,
+			logger.warn(bundleMarker,"{}: No service records on device on search {}.",this,
 					transactionID);
 			break;
 		case DiscoveryListener.SERVICE_SEARCH_TERMINATED:
-			logger.info("{}: User cancelled search {}.", this, transactionID);
+			logger.info(bundleMarker,"{}: User cancelled search {}.", this, transactionID);
 			break;
 		case DiscoveryListener.SERVICE_SEARCH_COMPLETED:
-			logger.info("{}: Service search {} complete.", this, transactionID);
+			logger.info(bundleMarker,"{}: Service search {} complete.", this, transactionID);
 			break;
 		default:
-			logger.error("{}: Unexpected response code {} from search {}.", new Object[]{this,
+			logger.error(bundleMarker,"{}: Unexpected response code {} from search {}.", new Object[]{this,
 					responseCode, transactionID});
 		}
 
@@ -399,18 +400,18 @@ public class SelectServiceWizardPage extends WizardPage implements
 	public void inquiryCompleted(int arg0) {
 		switch (arg0) {
 		case DiscoveryListener.INQUIRY_COMPLETED:
-			logger.debug("{}: Completed discovery.",this);
+			logger.debug(bundleMarker,"{}: Completed discovery.",this);
 			break;
 
 		case DiscoveryListener.INQUIRY_ERROR:
-			logger.error("{}: Bluetooth error.", this);
+			logger.error(bundleMarker,"{}: Bluetooth error.", this);
 			break;
 
 		case DiscoveryListener.INQUIRY_TERMINATED:
-			logger.debug("{}: Canceled discovery.", this);
+			logger.debug(bundleMarker,"{}: Canceled discovery.", this);
 			break;
 		default:
-			logger.debug("{}: Unanticipated result {}", this, arg0);
+			logger.debug(bundleMarker,"{}: Unanticipated result {}", this, arg0);
 			break;
 		}
 		getContainer().getShell().getDisplay().asyncExec(new Runnable() {
@@ -511,12 +512,12 @@ public class SelectServiceWizardPage extends WizardPage implements
 	private final void searchServices(RemoteDevice device, DiscoveryAgent agent) {
 
 		try {
-			logger.info("{}: Searching {} for services", this, device
+			logger.info(bundleMarker,"{}: Searching {} for services", this, device
 					.getBluetoothAddress());
 			int trans = agent.searchServices(attrIDs, searchList, device, this);
-			logger.info("{}: Service Search {} started", this, trans);
+			logger.info(bundleMarker,"{}: Service Search {} started", this, trans);
 		} catch (BluetoothStateException ex) {
-			logger.error(this+": BluetoothStateException: " + ex.getMessage(), ex);
+			logger.error(bundleMarker,this+": BluetoothStateException: " + ex.getMessage(), ex);
 		}
 
 	}

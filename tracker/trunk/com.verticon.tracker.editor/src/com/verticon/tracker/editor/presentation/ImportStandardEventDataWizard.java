@@ -187,7 +187,7 @@ public class ImportStandardEventDataWizard extends Wizard {
 //				int fileSize = importSpeciesColumnMappingWizardPage.getCsvFileLineNumber()-1;
 //				String message = "Imported " + importedAnimals + " animals from "
 //						+ file + " with " +(fileSize - importedAnimals)+ " defered.";
-//				logger.info("{} : "+message,this);
+//				
 //
 //				MessageDialog.openInformation(editor.getSite().getShell(),
 //						"Life Data Import", message);

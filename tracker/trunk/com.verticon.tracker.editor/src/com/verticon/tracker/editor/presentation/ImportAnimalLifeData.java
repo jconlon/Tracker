@@ -1,5 +1,6 @@
 package com.verticon.tracker.editor.presentation;
 
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -123,7 +124,7 @@ public class ImportAnimalLifeData {
 		// Only add an animal if it does not exist
 		for (Animal animal : premises.getAnimals()) {
 			if (animal.getId().equals(eObjectAnimal.getId())) {
-				logger.warn("Deferred adding {} {} because it already is in the premises.", animal.getClass().getSimpleName(), animal.getId());
+				logger.warn(bundleMarker,"Deferred adding {} {} because it already is in the premises.", animal.getClass().getSimpleName(), animal.getId());
 				return;
 			}
 		}

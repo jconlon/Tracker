@@ -5,6 +5,7 @@
  */
 package com.verticon.tracker.edit.provider;
 
+import static com.verticon.tracker.edit.provider.TrackerReportEditPlugin.bundleMarker;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -564,7 +565,7 @@ public class TagItemProvider
 				//validate it first
 				Diagnostic diagnostic = Diagnostician.INSTANCE.validate(ocd);
 				if(diagnostic.getSeverity() != Diagnostic.OK){
-					logger.error("Can not create genericEvent for Metatype OCD name={} because it is invalid. {}",
+					logger.error(bundleMarker,"Can not create genericEvent for Metatype OCD name={} because it is invalid. {}",
 							ocd.getName(), 
 							diagnostic.getMessage()
 					);
@@ -572,7 +573,7 @@ public class TagItemProvider
 						switch (childDiagnostic.getSeverity()) {
 						case Diagnostic.ERROR:
 						case Diagnostic.WARNING:	
-							logger.error("Can not create genericEvent for Metatype OCD name={} because it is invalid. {}",
+							logger.error(bundleMarker,"Can not create genericEvent for Metatype OCD name={} because it is invalid. {}",
 									ocd.getName(), 
 									childDiagnostic.getMessage()
 							);

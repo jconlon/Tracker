@@ -95,7 +95,7 @@ public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
 					new Event(
 							TrackerEditorConstants.EVENT_ADMIN_TOPIC_READER, table));
 		}else{
-			logger.warn("{} failed to find EventAdmin service",reader);
+			logger.warn(bundleMarker,"{} failed to find EventAdmin service",reader);
 		}
 	}
 

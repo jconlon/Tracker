@@ -1,4 +1,5 @@
 package com.verticon.tracker.reader.handlers;
+import static com.verticon.tracker.reader.ReaderPlugin.bundleMarker;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -48,7 +49,7 @@ public class AddTagIDReaderHandler extends AbstractHandler{
 			WizardDialog dialog = new WizardDialog(window.getShell(),addWizard);
 			dialog.open();
 		} catch (PartInitException e) {
-			logger.error("Failed to open the Readers view", e);
+			logger.error(bundleMarker,"Failed to open the Readers view", e);
 			ErrorDialog.openError(window.getShell(), "Add Reader Problems", //$NON-NLS-1$
 					null, // no special message
 					((PartInitException) e).getStatus());

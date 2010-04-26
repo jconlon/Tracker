@@ -1,4 +1,5 @@
 package com.verticon.tracker.editor.presentation;
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
 
 import java.io.File;
 import java.io.IOException;
@@ -129,7 +130,7 @@ public class ImportAnimalLifeDataWizard extends Wizard {
 				int fileSize = importSpeciesColumnMappingWizardPage.getCsvFileLineNumber()-1;
 				String message = "Imported " + importedAnimals + " animals from "
 						+ file + " with " +(fileSize - importedAnimals)+ " defered.";
-				logger.info("{} : "+message,this);
+				logger.info(bundleMarker, "{} : "+message,this);
 
 				MessageDialog.openInformation(editor.getSite().getShell(),
 						"Life Data Import", message);
