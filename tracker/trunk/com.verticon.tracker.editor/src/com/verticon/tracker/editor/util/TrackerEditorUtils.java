@@ -2,7 +2,6 @@
  * 
  */
 package com.verticon.tracker.editor.util;
-
 import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_IGNORE_WINDOW;
 import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
 
@@ -201,7 +200,7 @@ public class TrackerEditorUtils {
 					);
 					newAnimalsCreated++;
 				} catch (PremisesPolicyException e) {
-					logger.warn("Did not create a new animal for tag={}.",tag,e);
+					logger.warn(bundleMarker,"Did not create a new animal for tag={}.",tag,e);
 				}
 				
 			}

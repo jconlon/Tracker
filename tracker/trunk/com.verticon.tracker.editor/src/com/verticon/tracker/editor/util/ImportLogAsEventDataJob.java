@@ -1,4 +1,5 @@
 package com.verticon.tracker.editor.util;
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,6 +26,7 @@ import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.util.MeasurementEntity;
+import com.verticon.tracker.util.MeasurementEntity.EventCreationException;
 
 public class ImportLogAsEventDataJob extends Job {
 
@@ -64,7 +66,7 @@ public class ImportLogAsEventDataJob extends Job {
 			createCommand( monitor);
 			int events=compoundCommand.getCommandList().size();
 			monitor.subTask("Adding" + events+" events to the Premises");
-			logger.warn("{} :Adding {} events to the Premises",this,events);
+			logger.warn(bundleMarker,"{} :Adding {} events to the Premises",this,events);
 			display.syncExec(
 					  new Runnable() {
 					    public void run(){
@@ -73,7 +75,7 @@ public class ImportLogAsEventDataJob extends Job {
 			});
 			affectedObjects = compoundCommand.getAffectedObjects().size();
 			monitor.subTask("Added" + affectedObjects+" events to the Premises");
-			logger.warn("{} :Added {} events to the Premises",this,affectedObjects);
+			logger.warn(bundleMarker,"{} :Added {} events to the Premises",this,affectedObjects);
 			monitor.done();
 			status= Status.OK_STATUS;
 		} catch (IOException e) {
@@ -102,14 +104,14 @@ public class ImportLogAsEventDataJob extends Job {
 		               
 				}
 		        monitor.subTask("Processing line #" + lineNumber);
-		        logger.warn("{} :Processing line #{}",this,lineNumber);
+		        logger.warn(bundleMarker,"{} :Processing line #{}",this,lineNumber);
 				try {
 					processLine(logEntry, lineNumber, monitor);
 				} catch (ParseException e) {
 					monitor.subTask(e.getMessage()+" While processing lineNumber #" + lineNumber);
-					 logger.error("{} :{} While processing line #{}",new Object[]{this,e.getMessage(),lineNumber});
+					 logger.error(bundleMarker,"{} :{} While processing line #{}",new Object[]{this,e.getMessage(),lineNumber});
 				} catch (MeasurementEntity.EventCreationException e) {
-					logger.error("{} :{} While processing line #{}",new Object[]{this,e.getMessage(),lineNumber});
+					logger.error(bundleMarker,"{} :{} While processing line #{}",new Object[]{this,e.getMessage(),lineNumber});
 				}
 				// increment line number
 				lineNumber++;
@@ -158,7 +160,7 @@ public class ImportLogAsEventDataJob extends Job {
 		if(animal==null){
 			message = "Deferred adding "+measurement+" at lineNumber# "+lineNumber+" because there is no animal with that ID in the premises.";
 			monitor.subTask(message);
-			logger.error("{} :"+message,this);
+			logger.error(bundleMarker,"{} :"+message,this);
 			defered++;
 			return;
 		}
@@ -167,7 +169,7 @@ public class ImportLogAsEventDataJob extends Job {
 		if(!measurement.canBeIn(tag)){
 			message = "Deferred adding "+measurement+" at lineNumber# "+lineNumber+" because there is a policy prevent event inclusion.";
 			monitor.subTask(message);
-			logger.error("{} :"+message,this);
+			logger.error(bundleMarker,"{} :"+message,this);
 			defered++;
 			return;
 		}
@@ -183,7 +185,7 @@ public class ImportLogAsEventDataJob extends Job {
 				TrackerPackage.Literals.TAG__EVENTS, event));
 		String message = "Appended command to add "+event+" , from "+measurement+" #"+lineNumber+" of "+compoundCommand.getCommandList().size();
 		monitor.subTask(message);
-		logger.warn("{} :{}",this,message);
+		logger.warn(bundleMarker,"{} :{}",this,message);
 	}
 
 

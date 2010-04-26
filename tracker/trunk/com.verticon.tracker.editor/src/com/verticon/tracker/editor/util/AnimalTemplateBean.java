@@ -4,6 +4,7 @@
 package com.verticon.tracker.editor.util;
 
 import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_SPREAD_INTERVAL;
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -220,12 +220,12 @@ import com.verticon.tracker.util.TrackerUtils;
 				GenericEvent ge = (GenericEvent)event;
 				if(!premises.canContain(EventType.GENERIC_EVENT, ge.getOcd().getID(), targetAnimal.getType())){
 					iterator.remove();
-					logger.warn("Policy violation. Deferred adding GenericEvent with ocdId={}",ge.getOcd().getID());
+					logger.warn(bundleMarker,"Policy violation. Deferred adding GenericEvent with ocdId={}",ge.getOcd().getID());
 				}
 			}else{
 				if(!premises.canContain(TrackerUtils.getType(event), null, targetAnimal.getType())){
 					iterator.remove();
-					logger.warn("Policy violation. Deferred adding Event ={}",TrackerUtils.getType(event));
+					logger.warn(bundleMarker,"Policy violation. Deferred adding Event ={}",TrackerUtils.getType(event));
 				}
 			}
 			
