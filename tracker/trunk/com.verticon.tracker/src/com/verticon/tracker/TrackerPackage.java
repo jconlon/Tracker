@@ -559,13 +559,22 @@ public interface TrackerPackage extends EPackage {
 	int EVENT__ID = 6;
 
 	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT__DATE = 7;
+
+	/**
 	 * The number of structural features of the '<em>Event</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_FEATURE_COUNT = 7;
+	int EVENT_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.TagAllocatedImpl <em>Tag Allocated</em>}' class.
@@ -639,6 +648,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int TAG_ALLOCATED__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG_ALLOCATED__DATE = EVENT__DATE;
 
 	/**
 	 * The number of structural features of the '<em>Tag Allocated</em>' class.
@@ -1623,6 +1641,15 @@ public interface TrackerPackage extends EPackage {
 	int TAG_APPLIED__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG_APPLIED__DATE = EVENT__DATE;
+
+	/**
 	 * The number of structural features of the '<em>Tag Applied</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1703,6 +1730,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int MOVED_IN__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVED_IN__DATE = EVENT__DATE;
 
 	/**
 	 * The feature id for the '<em><b>Source Pin</b></em>' attribute.
@@ -1796,6 +1832,15 @@ public interface TrackerPackage extends EPackage {
 	int MOVED_OUT__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVED_OUT__DATE = EVENT__DATE;
+
+	/**
 	 * The feature id for the '<em><b>Destination Pin</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1887,6 +1932,15 @@ public interface TrackerPackage extends EPackage {
 	int LOST_TAG__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOST_TAG__DATE = EVENT__DATE;
+
+	/**
 	 * The number of structural features of the '<em>Lost Tag</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1967,6 +2021,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int REPLACED_TAG__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPLACED_TAG__DATE = EVENT__DATE;
 
 	/**
 	 * The feature id for the '<em><b>Old Id</b></em>' attribute.
@@ -2078,6 +2141,15 @@ public interface TrackerPackage extends EPackage {
 	int IMPORTED__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORTED__DATE = EVENT__DATE;
+
+	/**
 	 * The number of structural features of the '<em>Imported</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2160,6 +2232,15 @@ public interface TrackerPackage extends EPackage {
 	int EXPORTED__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPORTED__DATE = EVENT__DATE;
+
+	/**
 	 * The number of structural features of the '<em>Exported</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2240,6 +2321,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int SIGHTING__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIGHTING__DATE = EVENT__DATE;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' reference.
@@ -2333,6 +2423,15 @@ public interface TrackerPackage extends EPackage {
 	int SLAUGHTERED__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAUGHTERED__DATE = EVENT__DATE;
+
+	/**
 	 * The number of structural features of the '<em>Slaughtered</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2403,6 +2502,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int DIED__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIED__DATE = EVENT__DATE;
 
 	/**
 	 * The number of structural features of the '<em>Died</em>' class.
@@ -2477,6 +2585,15 @@ public interface TrackerPackage extends EPackage {
 	int TAG_RETIRED__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG_RETIRED__DATE = EVENT__DATE;
+
+	/**
 	 * The number of structural features of the '<em>Tag Retired</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2549,6 +2666,15 @@ public interface TrackerPackage extends EPackage {
 	int ANIMAL_MISSING__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANIMAL_MISSING__DATE = EVENT__DATE;
+
+	/**
 	 * The number of structural features of the '<em>Animal Missing</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2619,6 +2745,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int ICVI__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ICVI__DATE = EVENT__DATE;
 
 	/**
 	 * The number of structural features of the '<em>ICVI</em>' class.
@@ -2701,6 +2836,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int WEIGH_IN__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEIGH_IN__DATE = EVENT__DATE;
 
 	/**
 	 * The feature id for the '<em><b>Weight</b></em>' attribute.
@@ -3428,6 +3572,15 @@ public interface TrackerPackage extends EPackage {
 	int MEDICAL_CONDITION__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_CONDITION__DATE = EVENT__DATE;
+
+	/**
 	 * The number of structural features of the '<em>Medical Condition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3508,6 +3661,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int MEDICAL_TREATMENT__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT__DATE = EVENT__DATE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3655,6 +3817,15 @@ public interface TrackerPackage extends EPackage {
 	int BIRTHING__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BIRTHING__DATE = EVENT__DATE;
+
+	/**
 	 * The feature id for the '<em><b>Viability</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3762,6 +3933,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALVING__ID = BIRTHING__ID;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALVING__DATE = BIRTHING__DATE;
 
 	/**
 	 * The feature id for the '<em><b>Viability</b></em>' attribute.
@@ -3873,6 +4053,15 @@ public interface TrackerPackage extends EPackage {
 	int BIRTH_DEFECT__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BIRTH_DEFECT__DATE = EVENT__DATE;
+
+	/**
 	 * The feature id for the '<em><b>Freemartin</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3962,6 +4151,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int MASTITIS__ID = MEDICAL_CONDITION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MASTITIS__DATE = MEDICAL_CONDITION__DATE;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' attribute.
@@ -4062,6 +4260,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int MILK_TEST__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_TEST__DATE = EVENT__DATE;
 
 	/**
 	 * The feature id for the '<em><b>Pounds Produced</b></em>' attribute.
@@ -4191,6 +4398,15 @@ public interface TrackerPackage extends EPackage {
 	int HERD_TEST__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HERD_TEST__DATE = EVENT__DATE;
+
+	/**
 	 * The feature id for the '<em><b>Pregnant</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4298,6 +4514,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int GENERIC_EVENT__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_EVENT__DATE = EVENT__DATE;
 
 	/**
 	 * The feature id for the '<em><b>Event Attributes</b></em>' map.
@@ -4437,6 +4662,15 @@ public interface TrackerPackage extends EPackage {
 	int US_BEEF_GRADING__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_BEEF_GRADING__DATE = EVENT__DATE;
+
+	/**
 	 * The feature id for the '<em><b>Quality Grade</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4546,6 +4780,15 @@ public interface TrackerPackage extends EPackage {
 	int US_OVINE_GRADING__ID = EVENT__ID;
 
 	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_OVINE_GRADING__DATE = EVENT__DATE;
+
+	/**
 	 * The feature id for the '<em><b>Quality Grade</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4644,6 +4887,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int US_SWINE_GRADING__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_SWINE_GRADING__DATE = EVENT__DATE;
 
 	/**
 	 * The feature id for the '<em><b>Quality Grade</b></em>' attribute.
@@ -5385,6 +5637,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEvent_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Event#getDate <em>Date</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Date</em>'.
+	 * @see com.verticon.tracker.Event#getDate()
+	 * @see #getEvent()
+	 * @generated
+	 */
+	EAttribute getEvent_Date();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.TagAllocated <em>Tag Allocated</em>}'.
@@ -7053,6 +7316,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EVENT__ID = eINSTANCE.getEvent_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Date</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EVENT__DATE = eINSTANCE.getEvent_Date();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.TagAllocatedImpl <em>Tag Allocated</em>}' class.

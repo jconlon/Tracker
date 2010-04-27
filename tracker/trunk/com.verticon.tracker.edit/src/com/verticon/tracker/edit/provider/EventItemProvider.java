@@ -279,6 +279,7 @@ public class EventItemProvider
 			case TrackerPackage.EVENT__CORRECTION:
 			case TrackerPackage.EVENT__COMMENTS:
 			case TrackerPackage.EVENT__ID:
+			case TrackerPackage.EVENT__DATE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
