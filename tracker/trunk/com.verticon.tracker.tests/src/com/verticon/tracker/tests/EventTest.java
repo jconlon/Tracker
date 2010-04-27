@@ -15,6 +15,7 @@ import junit.framework.TestCase;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
+import com.verticon.tracker.util.TrackerConstants;
 
 /**
  * <!-- begin-user-doc -->
@@ -135,6 +136,23 @@ public abstract class EventTest extends TestCase {
 		
 		getFixture().setDateTime(date);
 		assertEquals(date, getFixture().getDateTime());
+		
+	}
+	//"January 6, 1972"
+	public void testDate(){
+		String myDate = "January 6, 1972";
+		assertNotNull(getFixture().getDate());
+//		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		Date date = null;
+		try {
+			 date = TrackerConstants.DAY_FORMAT.parse(myDate);
+			
+		} catch (ParseException e) {
+			fail(e.toString());
+		}
+		
+		getFixture().setDateTime(date);
+		assertEquals(myDate, getFixture().getDate());
 		
 	}
 

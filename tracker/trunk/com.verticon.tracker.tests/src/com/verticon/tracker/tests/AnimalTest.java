@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.EventType;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
@@ -853,6 +854,52 @@ public abstract class AnimalTest extends TestCase {
 
 		assertEquals(we.getDateTime(), aninimalAfterLoad.lastWeighIn()
 				.getDateTime());
+	}
+	
+	/**
+	 * Ticket 558 Tests findingLastEvent by EventType
+	 */
+	public void testLastEvent(){
+		Animal animal = getFixture();
+		assertNull("Should have no weight on animal", animal.getWeight());
+		
+		Tag tag = TrackerFactory.eINSTANCE.createTag();
+		animal.getTags().add(tag);
+		//First weighIn 10 days ago and 100 lbs
+		WeighIn we = TrackerFactory.eINSTANCE.createWeighIn();
+		we.setComments("First");
+		Calendar firstWeighInDate = Calendar.getInstance();
+		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
+		we.setDateTime(
+				firstWeighInDate.getTime());
+		we.setWeight(100d);
+		tag.getEvents().add(we);
+		assertNotNull( animal.lastEvent(EventType.WEIGH_IN, null));
+		assertEquals(we, animal.lastEvent(EventType.WEIGH_IN, null));
+		
+		
+		we = TrackerFactory.eINSTANCE.createWeighIn();
+		we.setComments("Second");
+		Calendar secondWeighInDate = Calendar.getInstance();
+		secondWeighInDate.add(Calendar.DAY_OF_MONTH, -5);
+		we.setDateTime(
+				secondWeighInDate.getTime());
+		we.setWeight(100d);
+		tag.getEvents().add(we);
+		assertEquals(we, animal.lastEvent(EventType.WEIGH_IN, null));
+		
+		
+		Event e = TrackerFactory.eINSTANCE.createGenericEvent();
+		e.setComments("Third");
+		Calendar thirdDate = Calendar.getInstance();
+		thirdDate.add(Calendar.DAY_OF_MONTH, -5);
+		e.setDateTime(
+				thirdDate.getTime());
+		
+		tag.getEvents().add(e);
+		assertEquals(e, animal.lastEvent(EventType.GENERIC_EVENT, null));
+		
+		
 	}
 	
 	private String serialiaze(EObject root) throws Exception {
