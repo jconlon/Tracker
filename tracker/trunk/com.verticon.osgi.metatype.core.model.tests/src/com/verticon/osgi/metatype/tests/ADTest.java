@@ -13,6 +13,7 @@ import junit.textui.TestRunner;
 
 import com.verticon.osgi.metatype.AD;
 import com.verticon.osgi.metatype.MetatypeFactory;
+import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.osgi.metatype.Option;
 import com.verticon.osgi.metatype.Scalar;
 
@@ -115,9 +116,7 @@ public class ADTest extends TestCase {
 	 * @generated NOT
 	 */
 	public void testGetType() {
-//		for (Scalar scalar : Scalar.VALUES) {
-//			System.out.println(scalar.getName()+scalar.getValue());
-//		}
+		assertEquals(Scalar.STRING, fixture.getDataType() );
 		assertEquals(STRING, fixture.getType() );
 		
 		fixture.setDataType(Scalar.BOOLEAN);
