@@ -525,6 +525,7 @@
       <genFeatures property="Readonly" createChild="false" propertyCategory="Identification"
           propertyDescription="" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/id"/>
       <genFeatures property="None" createChild="false" propertyDescription="" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/date"/>
+      <genFeatures property="None" createChild="false" propertyDescription="" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/dateKey"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//TagAllocated"/>
     <genClasses ecoreClass="tracker.ecore#//Premises">

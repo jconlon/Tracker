@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.Event#getTag <em>Tag</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getId <em>Id</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getDate <em>Date</em>}</li>
+ *   <li>{@link com.verticon.tracker.Event#getDateKey <em>Date Key</em>}</li>
  * </ul>
  * </p>
  *
@@ -217,9 +218,23 @@ public interface Event extends EObject {
 	 * @return the value of the '<em>Date</em>' attribute.
 	 * @see com.verticon.tracker.TrackerPackage#getEvent_Date()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" transient="true" changeable="false" volatile="true" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if(dateTime==null){\n\t\t\treturn null;\n\t\t}\nreturn TrackerConstants.DAY_FORMAT.format(dateTime);'"
 	 * @generated
 	 */
 	String getDate();
+
+	/**
+	 * Returns the value of the '<em><b>Date Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Date Key</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Date Key</em>' attribute.
+	 * @see com.verticon.tracker.TrackerPackage#getEvent_DateKey()
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	String getDateKey();
 
 } // Event
