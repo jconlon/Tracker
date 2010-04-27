@@ -76,6 +76,10 @@
         <element xmi:type="ecore:EOperation" href="tracker.ecore#//Animal/addTemplate"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PBxIkVmCEd2tRZ2K3aMUww"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_tKxmwVIhEd-Uqegvp1lu1g" type="2002">
+        <element xmi:type="ecore:EOperation" href="tracker.ecore#//Animal/lastEvent"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_tKxmwlIhEd-Uqegvp1lu1g"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_PBxIklmCEd2tRZ2K3aMUww" type="2002">
         <element xmi:type="ecore:EOperation" href="tracker.ecore#//Animal/activeTag"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PBxIk1mCEd2tRZ2K3aMUww"/>

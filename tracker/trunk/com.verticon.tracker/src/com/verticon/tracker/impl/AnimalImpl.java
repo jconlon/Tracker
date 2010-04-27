@@ -481,6 +481,26 @@ public abstract class AnimalImpl extends EObjectImpl implements Animal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Event lastEvent(EventType type, String name) {
+		Event result = null;
+				if(!eventHistory().isEmpty() && type!=null){
+					CollectionFilter<Event> eventsProducer = new CollectionFilter<Event>();
+					eventsProducer.addFilter(TrackerUtils.createFilterCriteria(type, name));
+					List<Event> events = new ArrayList<Event>(eventsProducer.filterCopy(eventHistory()));
+					if(events.isEmpty()){
+						return null;
+					}
+					Collections.sort(events, TrackerUtils.DATE_COMPARATOR);
+					result = events.get(events.size()-1);
+				}
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
