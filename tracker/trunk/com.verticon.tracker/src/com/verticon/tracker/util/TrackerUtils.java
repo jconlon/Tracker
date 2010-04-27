@@ -165,6 +165,18 @@ public class TrackerUtils {
 		}
 		
 	};
+	public static FilterCriteria<Event> createFilterCriteria(
+			final String date){
+		
+		return new FilterCriteria<Event>(){
+
+			@Override
+			public boolean passes(Event event) {
+				return event.getDate().equals(date);
+			}
+			
+		};
+	}
 	
 	public static FilterCriteria<Event> createFilterCriteria(
 			final EventType type, final String name){

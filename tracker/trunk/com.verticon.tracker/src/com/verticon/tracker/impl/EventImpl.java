@@ -6,10 +6,15 @@
  */
 package com.verticon.tracker.impl;
 
+import java.util.Collections;
 import java.util.Date;
 
+import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -17,8 +22,13 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.verticon.tracker.Event;
+import com.verticon.tracker.EventType;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.util.CollectionFilter;
+import com.verticon.tracker.util.TrackerUtils;
+import java.util.ArrayList;
+import com.verticon.tracker.util.FilterCriteria;
 import com.verticon.tracker.util.TrackerConstants;
 
 /**
@@ -353,6 +363,53 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 	 */
 	public String getDateKey() {
 		return getDate()+'|'+getId();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Event dateEvent(EventType type, String name) {
+		Event result = null;
+				if(!dateEvents().isEmpty() && type!=null){
+					CollectionFilter<Event> eventsProducer = new CollectionFilter<Event>();
+					eventsProducer.addFilter(TrackerUtils.createFilterCriteria(type, name));
+					List<Event> events = new ArrayList<Event>(eventsProducer.filterCopy(dateEvents()));
+					if(events.isEmpty()){
+						return null;
+					}
+					Collections.sort(events, TrackerUtils.DATE_COMPARATOR);
+					result = events.get(events.size()-1);
+				}
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Event> dateEvents() {
+		//Get all the days events
+		if(getTag()!=null && getDate()!=null){
+		CollectionFilter<Event> eventsProducer = new CollectionFilter<Event>();
+			eventsProducer.addFilter(
+					new FilterCriteria<Event>(){
+		
+						@Override
+						public boolean passes(Event event) {
+							return event.getDate().equals(EventImpl.this.getDate());
+						}
+					}
+					
+			);
+			BasicEList<Event> events = new BasicEList<Event>(eventsProducer.filterCopy(getTag().getEvents()));
+			return events;
+		
+		}
+		EList<Event> result = ECollections.emptyEList();
+		return result;
 	}
 
 	/**

@@ -2528,6 +2528,12 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getEvent_Date(), theXMLTypePackage.getString(), "date", null, 0, 1, Event.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_DateKey(), theXMLTypePackage.getString(), "dateKey", null, 0, 1, Event.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
+		op = addEOperation(eventEClass, this.getEvent(), "dateEvent", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getEventType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theXMLTypePackage.getString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(eventEClass, this.getEvent(), "dateEvents", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(tagAllocatedEClass, TagAllocated.class, "TagAllocated", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(premisesEClass, Premises.class, "Premises", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3139,7 +3145,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";											
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";													
 		addAnnotation
 		  (premisesIdNumberEDataType, 
 		   source, 
