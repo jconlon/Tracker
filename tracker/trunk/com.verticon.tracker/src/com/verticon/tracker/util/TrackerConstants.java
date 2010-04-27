@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 public class TrackerConstants {
 
 	public final static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	public final static DateFormat DAY_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+	public final static DateFormat DAY_FORMAT = new SimpleDateFormat("MMMM D, yyyy");
 	private TrackerConstants() {
 	} // Prevents Instantiation
 
