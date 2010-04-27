@@ -198,6 +198,10 @@
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Event/eventCode"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PCEqkVmCEd2tRZ2K3aMUww"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_vV7nAFIyEd-Uqegvp1lu1g" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Event/date"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_vV7nAVIyEd-Uqegvp1lu1g"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_PCFRoFmCEd2tRZ2K3aMUww" type="2001">
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Event/electronicallyRead"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PCFRoVmCEd2tRZ2K3aMUww"/>

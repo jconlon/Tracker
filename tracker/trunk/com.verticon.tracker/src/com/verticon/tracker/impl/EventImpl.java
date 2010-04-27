@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.util.TrackerConstants;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,6 +35,7 @@ import com.verticon.tracker.TrackerPackage;
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getComments <em>Comments</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getTag <em>Tag</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getId <em>Id</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.EventImpl#getDate <em>Date</em>}</li>
  * </ul>
  * </p>
  *
@@ -146,6 +148,16 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 	 * @ordered
 	 */
 	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getDate() <em>Date</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDate()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DATE_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -313,6 +325,18 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getDate() {
+		if(dateTime==null){
+			return null;
+		}
+		return TrackerConstants.DAY_FORMAT.format(dateTime);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -376,6 +400,8 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 				return getTag();
 			case TrackerPackage.EVENT__ID:
 				return getId();
+			case TrackerPackage.EVENT__DATE:
+				return getDate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -456,6 +482,8 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 				return getTag() != null;
 			case TrackerPackage.EVENT__ID:
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
+			case TrackerPackage.EVENT__DATE:
+				return DATE_EDEFAULT == null ? getDate() != null : !DATE_EDEFAULT.equals(getDate());
 		}
 		return super.eIsSet(featureID);
 	}
