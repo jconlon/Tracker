@@ -31,6 +31,8 @@ import com.verticon.tracker.util.TrackerConstants;
  * @generated
  */
 public abstract class EventTest extends TestCase {
+	private static final String JANUARY_6_1972 = "January 6, 1972";
+
 	private static final String TAG_ID = "123456789012345";
 
 	/**
@@ -138,21 +140,31 @@ public abstract class EventTest extends TestCase {
 		assertEquals(date, getFixture().getDateTime());
 		
 	}
-	//"January 6, 1972"
+	
 	public void testDate(){
-		String myDate = "January 6, 1972";
+		
 		assertNotNull(getFixture().getDate());
-//		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
 		Date date = null;
 		try {
-			 date = TrackerConstants.DAY_FORMAT.parse(myDate);
+			 date = TrackerConstants.DAY_FORMAT.parse(JANUARY_6_1972);
 			
 		} catch (ParseException e) {
 			fail(e.toString());
 		}
 		
 		getFixture().setDateTime(date);
-		assertEquals(myDate, getFixture().getDate());
+		assertEquals(JANUARY_6_1972, getFixture().getDate());
+		
+	}
+	
+	public void testDateKey(){
+		testDate();
+		assertEquals(JANUARY_6_1972+'|', getFixture().getDateKey());
+		String value = "12345";
+		Tag t = TrackerFactory.eINSTANCE.createTag();
+		t.setId(value);
+		t.getEvents().add(getFixture());
+		assertEquals(JANUARY_6_1972+'|'+value, getFixture().getDateKey());
 		
 	}
 

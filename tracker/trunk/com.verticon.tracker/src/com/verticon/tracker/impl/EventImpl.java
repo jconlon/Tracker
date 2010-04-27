@@ -36,6 +36,7 @@ import com.verticon.tracker.util.TrackerConstants;
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getTag <em>Tag</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getId <em>Id</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getDate <em>Date</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.EventImpl#getDateKey <em>Date Key</em>}</li>
  * </ul>
  * </p>
  *
@@ -158,6 +159,16 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 	 * @ordered
 	 */
 	protected static final String DATE_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getDateKey() <em>Date Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDateKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DATE_KEY_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -336,6 +347,16 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Used as a key for reporting and joining events by day
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getDateKey() {
+		return getDate()+'|'+getId();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -402,6 +423,8 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 				return getId();
 			case TrackerPackage.EVENT__DATE:
 				return getDate();
+			case TrackerPackage.EVENT__DATE_KEY:
+				return getDateKey();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -484,6 +507,8 @@ public abstract class EventImpl extends EObjectImpl implements Event {
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 			case TrackerPackage.EVENT__DATE:
 				return DATE_EDEFAULT == null ? getDate() != null : !DATE_EDEFAULT.equals(getDate());
+			case TrackerPackage.EVENT__DATE_KEY:
+				return DATE_KEY_EDEFAULT == null ? getDateKey() != null : !DATE_KEY_EDEFAULT.equals(getDateKey());
 		}
 		return super.eIsSet(featureID);
 	}

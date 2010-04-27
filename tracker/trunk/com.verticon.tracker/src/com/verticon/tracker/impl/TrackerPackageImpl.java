@@ -967,6 +967,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getEvent_DateKey() {
+		return (EAttribute)eventEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTagAllocated() {
 		return tagAllocatedEClass;
 	}
@@ -2197,6 +2206,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEReference(eventEClass, EVENT__TAG);
 		createEAttribute(eventEClass, EVENT__ID);
 		createEAttribute(eventEClass, EVENT__DATE);
+		createEAttribute(eventEClass, EVENT__DATE_KEY);
 
 		tagAllocatedEClass = createEClass(TAG_ALLOCATED);
 
@@ -2516,6 +2526,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEReference(getEvent_Tag(), this.getTag(), this.getTag_Events(), "tag", null, 1, 1, Event.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_Id(), ecorePackage.getEString(), "id", null, 1, 1, Event.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_Date(), theXMLTypePackage.getString(), "date", null, 0, 1, Event.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEvent_DateKey(), theXMLTypePackage.getString(), "dateKey", null, 0, 1, Event.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(tagAllocatedEClass, TagAllocated.class, "TagAllocated", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -3128,7 +3139,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";												
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";											
 		addAnnotation
 		  (premisesIdNumberEDataType, 
 		   source, 
