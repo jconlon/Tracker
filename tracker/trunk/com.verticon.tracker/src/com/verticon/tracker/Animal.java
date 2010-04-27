@@ -504,4 +504,16 @@ public interface Animal extends EObject {
 	 */
 	boolean canContain(EventType eventType, String ocdId);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The most recent event for this animal.
+	 * <!-- end-model-doc -->
+	 * @model nameDataType="org.eclipse.emf.ecore.xml.type.String"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='Event result = null;\n\t\tif(!eventHistory().isEmpty() && type!=null){\n\t\t\tCollectionFilter<Event> eventsProducer = new CollectionFilter<Event>();\n\t\t\teventsProducer.addFilter(TrackerUtils.createFilterCriteria(type, name));\n\t\t\tList<Event> events = new ArrayList<Event>(eventsProducer.filterCopy(eventHistory()));\n\t\t\tif(events.isEmpty()){\n\t\t\t\treturn null;\n\t\t\t}\n\t\t\tCollections.sort(events, TrackerUtils.DATE_COMPARATOR);\n\t\t\tresult = events.get(events.size()-1);\n\t\t}\nreturn result;'"
+	 * @generated
+	 */
+	Event lastEvent(EventType type, String name);
+
 } // Animal

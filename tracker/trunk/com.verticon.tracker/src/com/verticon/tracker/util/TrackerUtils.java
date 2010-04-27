@@ -166,6 +166,28 @@ public class TrackerUtils {
 		
 	};
 	
+	public static FilterCriteria<Event> createFilterCriteria(
+			final EventType type, final String name){
+		
+		return new FilterCriteria<Event>(){
+
+			@Override
+			public boolean passes(Event event) {
+				if(EventType.GENERIC_EVENT.equals(type) && 
+						EventType.GENERIC_EVENT.equals(getType(event))){
+					GenericEvent ge = (GenericEvent)event;
+					if(name!=null){
+						return ge.findName().equals(name);
+					}
+					return true;
+				}
+				return getType(event).equals(type);
+				
+			}
+			
+		};
+	}
+	
 	public static EList<OCD> findOCDs(EObject object) {
 		final EList<OCD> results = new BasicEList<OCD>();
 		MetatypeSwitch<Boolean> ocdVisitor = new MetatypeSwitch<Boolean>(){

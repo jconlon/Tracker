@@ -37,6 +37,14 @@
       <eParameters name="eventType" eType="#//EventType"/>
       <eParameters name="ocdId" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
     </eOperations>
+    <eOperations name="lastEvent" eType="#//Event">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="Event result = null;&#xA;&#x9;&#x9;if(!eventHistory().isEmpty() &amp;&amp; type!=null){&#xA;&#x9;&#x9;&#x9;CollectionFilter&lt;Event> eventsProducer = new CollectionFilter&lt;Event>();&#xA;&#x9;&#x9;&#x9;eventsProducer.addFilter(TrackerUtils.createFilterCriteria(type, name));&#xA;&#x9;&#x9;&#x9;List&lt;Event> events = new ArrayList&lt;Event>(eventsProducer.filterCopy(eventHistory()));&#xA;&#x9;&#x9;&#x9;if(events.isEmpty()){&#xA;&#x9;&#x9;&#x9;&#x9;return null;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;Collections.sort(events, TrackerUtils.DATE_COMPARATOR);&#xA;&#x9;&#x9;&#x9;result = events.get(events.size()-1);&#xA;&#x9;&#x9;}&#xA;return result;"/>
+        <details key="documentation" value="The most recent event for this animal."/>
+      </eAnnotations>
+      <eParameters name="type" eType="#//EventType"/>
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sex" eType="#//Sex" defaultValueLiteral="Unspecified"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tags" lowerBound="1" upperBound="-1"
