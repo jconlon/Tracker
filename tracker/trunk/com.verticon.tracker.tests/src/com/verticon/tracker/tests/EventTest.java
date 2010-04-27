@@ -8,13 +8,17 @@ package com.verticon.tracker.tests;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 
 import junit.framework.TestCase;
 
 import com.verticon.tracker.Event;
+import com.verticon.tracker.EventType;
+import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
+import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.TrackerConstants;
 
 /**
@@ -165,6 +169,80 @@ public abstract class EventTest extends TestCase {
 		t.setId(value);
 		t.getEvents().add(getFixture());
 		assertEquals(JANUARY_6_1972+'|'+value, getFixture().getDateKey());
+		
+	}
+	
+	public void testDateEvents(){
+		String value = "12345";
+		Tag t = TrackerFactory.eINSTANCE.createTag();
+		t.setId(value);
+		t.getEvents().add(getFixture());
+		//First weighIn 10 days ago and 100 lbs
+		WeighIn we = TrackerFactory.eINSTANCE.createWeighIn();
+		we.setComments("First");
+		Calendar firstWeighInDate = Calendar.getInstance();
+		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
+		we.setDateTime(
+				firstWeighInDate.getTime());
+		we.setWeight(100d);
+		t.getEvents().add(we);
+		
+	    we = TrackerFactory.eINSTANCE.createWeighIn();
+		we.setComments("Second");
+	    firstWeighInDate = Calendar.getInstance();
+		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
+		we.setDateTime(
+				firstWeighInDate.getTime());
+		we.setWeight(100d);
+		t.getEvents().add(we);
+		
+		Sighting s = TrackerFactory.eINSTANCE.createSighting();
+		firstWeighInDate = Calendar.getInstance();
+		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
+		s.setDateTime(
+				firstWeighInDate.getTime());
+		t.getEvents().add(s);
+		
+		assertEquals(1, getFixture().dateEvents().size());
+		
+		assertEquals(3, we.dateEvents().size());
+		
+	}
+	
+	public void testDateType(){
+		String value = "12345";
+		Tag t = TrackerFactory.eINSTANCE.createTag();
+		t.setId(value);
+		t.getEvents().add(getFixture());
+		//First weighIn 10 days ago and 100 lbs
+		WeighIn we = TrackerFactory.eINSTANCE.createWeighIn();
+		we.setComments("First");
+		Calendar firstWeighInDate = Calendar.getInstance();
+		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
+		we.setDateTime(
+				firstWeighInDate.getTime());
+		we.setWeight(100d);
+		t.getEvents().add(we);
+		
+	    we = TrackerFactory.eINSTANCE.createWeighIn();
+		we.setComments("Second");
+	    firstWeighInDate = Calendar.getInstance();
+		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
+		we.setDateTime(
+				firstWeighInDate.getTime());
+		we.setWeight(100d);
+		t.getEvents().add(we);
+		
+		Sighting s = TrackerFactory.eINSTANCE.createSighting();
+		firstWeighInDate = Calendar.getInstance();
+		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
+		s.setDateTime(
+				firstWeighInDate.getTime());
+		t.getEvents().add(s);
+		
+		
+		
+		assertEquals(s, we.dateEvent(EventType.SIGHTING, null));
 		
 	}
 
