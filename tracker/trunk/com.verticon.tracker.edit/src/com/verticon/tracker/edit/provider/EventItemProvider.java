@@ -280,6 +280,7 @@ public class EventItemProvider
 			case TrackerPackage.EVENT__COMMENTS:
 			case TrackerPackage.EVENT__ID:
 			case TrackerPackage.EVENT__DATE:
+			case TrackerPackage.EVENT__DATE_KEY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
