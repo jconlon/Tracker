@@ -183,13 +183,13 @@
 		case LONG:
 			try {
 				Long l = Long.parseLong(value);
-				if(min !=null){
+				if(min !=null &amp;&amp; min.trim().length() &gt; 0){
 					Long lmin = Long.parseLong(min);
 					if(l.compareTo(lmin)&lt;0){
 						return "Value is less than permitted minimum value.";
 					}
 				}
-				if(max !=null){
+				if(max !=null &amp;&amp; max.trim().length() &gt; 0){
 					Long lmax = Long.parseLong(max);
 					if(l.compareTo(lmax)&gt;0){
 						return "Value is greater than permitted maximum value.";
@@ -203,13 +203,13 @@
 		case DOUBLE:
 			try {
 				Double d = Double.parseDouble(value);
-				if(min !=null){
+				if(min !=null &amp;&amp; min.trim().length() &gt; 0){
 					Double dmin = Double.parseDouble(min);
 					if(d.compareTo(dmin)&lt;0){
 						return "Value is less than permitted minimum value.";
 					}
 				}
-				if(max !=null){
+				if(max !=null &amp;&amp; max.trim().length() &gt; 0){
 					Double dmax = Double.parseDouble(max);
 					if(d.compareTo(dmax)&gt;0){
 						return "Value is greater than permitted maximum value.";
@@ -222,13 +222,13 @@
 		case FLOAT:
 			try {
 				Float f = Float.parseFloat(value);
-				if(min !=null){
+				if(min !=null &amp;&amp; min.trim().length() &gt; 0){
 					Float fmin = Float.parseFloat(min);
 					if(f.compareTo(fmin)&lt;0){
 						return "Value is less than permitted minimum value.";
 					}
 				}
-				if(max !=null){
+				if(max !=null &amp;&amp; max.trim().length() &gt; 0){
 					Float fmax = Float.parseFloat(max);
 					if(f.compareTo(fmax)&gt;0){
 						return "Value is greater than permitted maximum value.";
@@ -242,13 +242,13 @@
 		case INTEGER:
 			try {
 				Integer i = Integer.parseInt(value);
-				if(min !=null){
+				if(min !=null &amp;&amp; min.trim().length() &gt; 0){
 					Integer imin = Integer.parseInt(min);
 					if(i.compareTo(imin)&lt;0){
 						return "Value is less than permitted minimum value.";
 					}
 				}
-				if(max !=null){
+				if(max !=null &amp;&amp; max.trim().length() &gt; 0){
 					Integer imax = Integer.parseInt(max);
 					if(i.compareTo(imax)&gt;0){
 						return "Value is greater than permitted maximum value.";
@@ -352,7 +352,7 @@
 		<attribute name="id" type="string" use="required" ecore:name="iD" />
 		
 		<attribute name="type" type="metatype:Tscalar" use="required" 
-			 ecore:name="dataType" />
+			 ecore:name="dataType" ecore:unsettable="false"/>
 		
 		<attribute name="cardinality" type="int" use="optional"
 			default="0" />
