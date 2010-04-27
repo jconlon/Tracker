@@ -8,6 +8,7 @@ package com.verticon.tracker;
 
 import java.util.Date;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -236,5 +237,22 @@ public interface Event extends EObject {
 	 * @generated
 	 */
 	String getDateKey();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model nameDataType="org.eclipse.emf.ecore.xml.type.String"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='Event result = null;\n\t\tif(!dateEvents().isEmpty() && type!=null){\n\t\t\tCollectionFilter<Event> eventsProducer = new CollectionFilter<Event>();\n\t\t\teventsProducer.addFilter(<%com.verticon.tracker.util.TrackerUtils%>.createFilterCriteria(type, name));\n\t\t\tList<Event> events = new ArrayList<Event>(eventsProducer.filterCopy(dateEvents()));\n\t\t\tif(events.isEmpty()){\n\t\t\t\treturn null;\n\t\t\t}\n\t\t\tCollections.sort(events, TrackerUtils.DATE_COMPARATOR);\n\t\t\tresult = events.get(events.size()-1);\n\t\t}\nreturn result;'"
+	 * @generated
+	 */
+	Event dateEvent(EventType type, String name);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='//Get all the days events\nif(getTag()!=null && getDate()!=null){\n<%com.verticon.tracker.util.CollectionFilter%><Event> eventsProducer = new CollectionFilter<Event>();\n\teventsProducer.addFilter(\n\t\t\tnew FilterCriteria<Event>(){\n\n\t\t\t\t@Override\n\t\t\t\tpublic boolean passes(Event event) {\n\t\t\t\t\treturn event.getDate().equals(EventImpl.this.getDate());\n\t\t\t\t}\n\t\t\t}\n\t\t\t\n\t);\n\tBasicEList<Event> events = new BasicEList<Event>(eventsProducer.filterCopy(getTag().getEvents()));\n\treturn events;\n\n}\nEList<Event> result = ECollections.emptyEList();\nreturn result;'"
+	 * @generated
+	 */
+	EList<Event> dateEvents();
 
 } // Event
