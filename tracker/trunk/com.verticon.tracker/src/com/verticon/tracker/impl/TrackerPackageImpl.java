@@ -1579,6 +1579,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPolicy_ExcludeUnspecifiedEvents() {
+		return (EAttribute)policyEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEventInclusion() {
 		return eventInclusionEClass;
 	}
@@ -2345,6 +2354,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(policyEClass, POLICY__INCLUDED_SPECIES);
 		createEReference(policyEClass, POLICY__INCLUDED_EVENTS);
 		createEReference(policyEClass, POLICY__INCLUDED_GENERIC_EVENTS);
+		createEAttribute(policyEClass, POLICY__EXCLUDE_UNSPECIFIED_EVENTS);
 
 		eventInclusionEClass = createEClass(EVENT_INCLUSION);
 		createEAttribute(eventInclusionEClass, EVENT_INCLUSION__SPECIES);
@@ -2710,6 +2720,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getPolicy_IncludedSpecies(), this.getAnimalType(), "includedSpecies", null, 0, -1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPolicy_IncludedEvents(), this.getEventInclusion(), null, "includedEvents", null, 0, -1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPolicy_IncludedGenericEvents(), this.getGenericEventInclusion(), null, "includedGenericEvents", null, 0, -1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPolicy_ExcludeUnspecifiedEvents(), theXMLTypePackage.getBoolean(), "excludeUnspecifiedEvents", null, 0, 1, Policy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(policyEClass, theXMLTypePackage.getBoolean(), "canContain", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getEventType(), "eventType", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -3122,6 +3133,17 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEEnumLiteral(eventTypeEEnum, EventType.LOST_TAG);
 		addEEnumLiteral(eventTypeEEnum, EventType.REPLACED_TAG);
 		addEEnumLiteral(eventTypeEEnum, EventType.IMPORTED);
+		addEEnumLiteral(eventTypeEEnum, EventType.MEDICAL_CONDITION);
+		addEEnumLiteral(eventTypeEEnum, EventType.MEDICAL_TREATMENT);
+		addEEnumLiteral(eventTypeEEnum, EventType.BIRTH_DEFECT);
+		addEEnumLiteral(eventTypeEEnum, EventType.MASTITIS);
+		addEEnumLiteral(eventTypeEEnum, EventType.HERD_TEST);
+		addEEnumLiteral(eventTypeEEnum, EventType.BIRTHING);
+		addEEnumLiteral(eventTypeEEnum, EventType.MILK_TEST);
+		addEEnumLiteral(eventTypeEEnum, EventType.US_OVINE_GRADING);
+		addEEnumLiteral(eventTypeEEnum, EventType.CALVING);
+		addEEnumLiteral(eventTypeEEnum, EventType.US_BEEF_GRADING);
+		addEEnumLiteral(eventTypeEEnum, EventType.US_SWINE_GRADING);
 
 		// Initialize data types
 		initEDataType(premisesIdNumberEDataType, String.class, "PremisesIdNumber", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

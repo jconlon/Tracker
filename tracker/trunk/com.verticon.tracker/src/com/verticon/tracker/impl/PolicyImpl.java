@@ -7,10 +7,12 @@ package com.verticon.tracker.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -33,6 +35,7 @@ import com.verticon.tracker.TrackerPackage;
  *   <li>{@link com.verticon.tracker.impl.PolicyImpl#getIncludedSpecies <em>Included Species</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PolicyImpl#getIncludedEvents <em>Included Events</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PolicyImpl#getIncludedGenericEvents <em>Included Generic Events</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.PolicyImpl#isExcludeUnspecifiedEvents <em>Exclude Unspecified Events</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,6 +78,26 @@ public class PolicyImpl extends EObjectImpl implements Policy {
 	 * @ordered
 	 */
 	protected EList<GenericEventInclusion> includedGenericEvents;
+
+	/**
+	 * The default value of the '{@link #isExcludeUnspecifiedEvents() <em>Exclude Unspecified Events</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExcludeUnspecifiedEvents()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EXCLUDE_UNSPECIFIED_EVENTS_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isExcludeUnspecifiedEvents() <em>Exclude Unspecified Events</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExcludeUnspecifiedEvents()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean excludeUnspecifiedEvents = EXCLUDE_UNSPECIFIED_EVENTS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -136,6 +159,27 @@ public class PolicyImpl extends EObjectImpl implements Policy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isExcludeUnspecifiedEvents() {
+		return excludeUnspecifiedEvents;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExcludeUnspecifiedEvents(boolean newExcludeUnspecifiedEvents) {
+		boolean oldExcludeUnspecifiedEvents = excludeUnspecifiedEvents;
+		excludeUnspecifiedEvents = newExcludeUnspecifiedEvents;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.POLICY__EXCLUDE_UNSPECIFIED_EVENTS, oldExcludeUnspecifiedEvents, excludeUnspecifiedEvents));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean canContain(EventType eventType, String ocdId, AnimalType animalType) {
 		//Filter species if there are some in the list.  If not pass all species to the next filter.
 		if(!getIncludedSpecies().isEmpty()){
@@ -152,9 +196,16 @@ public class PolicyImpl extends EObjectImpl implements Policy {
 				return Boolean.FALSE;
 		        }
 		}
+		
+		//Filter genericEvents
 		if(ocdId !=null){
-		        // If the includedGeneric list is empty pass all GenericEvents.
+		        // If the includedGeneric list is empty 
 		       if(getIncludedGenericEvents().isEmpty()){
+			  if(isExcludeUnspecifiedEvents()){
+				//block all Unspecified GenericEvents.
+				return Boolean.FALSE;
+			  }
+			  //pass all Unspecified GenericEvents.
 		           return Boolean.TRUE;
 		       }
 		      
@@ -189,6 +240,12 @@ public class PolicyImpl extends EObjectImpl implements Policy {
 				}
 			}
 		}
+		//Unspecified Event
+		 if(isExcludeUnspecifiedEvents()){
+				//block all Unspecified GenericEvents.
+				return Boolean.FALSE;
+		}
+		//pass all Unspecified GenericEvents.
 		return Boolean.TRUE;
 	}
 
@@ -222,6 +279,8 @@ public class PolicyImpl extends EObjectImpl implements Policy {
 				return getIncludedEvents();
 			case TrackerPackage.POLICY__INCLUDED_GENERIC_EVENTS:
 				return getIncludedGenericEvents();
+			case TrackerPackage.POLICY__EXCLUDE_UNSPECIFIED_EVENTS:
+				return isExcludeUnspecifiedEvents();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -247,6 +306,9 @@ public class PolicyImpl extends EObjectImpl implements Policy {
 				getIncludedGenericEvents().clear();
 				getIncludedGenericEvents().addAll((Collection<? extends GenericEventInclusion>)newValue);
 				return;
+			case TrackerPackage.POLICY__EXCLUDE_UNSPECIFIED_EVENTS:
+				setExcludeUnspecifiedEvents((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -268,6 +330,9 @@ public class PolicyImpl extends EObjectImpl implements Policy {
 			case TrackerPackage.POLICY__INCLUDED_GENERIC_EVENTS:
 				getIncludedGenericEvents().clear();
 				return;
+			case TrackerPackage.POLICY__EXCLUDE_UNSPECIFIED_EVENTS:
+				setExcludeUnspecifiedEvents(EXCLUDE_UNSPECIFIED_EVENTS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -286,6 +351,8 @@ public class PolicyImpl extends EObjectImpl implements Policy {
 				return includedEvents != null && !includedEvents.isEmpty();
 			case TrackerPackage.POLICY__INCLUDED_GENERIC_EVENTS:
 				return includedGenericEvents != null && !includedGenericEvents.isEmpty();
+			case TrackerPackage.POLICY__EXCLUDE_UNSPECIFIED_EVENTS:
+				return excludeUnspecifiedEvents != EXCLUDE_UNSPECIFIED_EVENTS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -302,6 +369,8 @@ public class PolicyImpl extends EObjectImpl implements Policy {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (includedSpecies: ");
 		result.append(includedSpecies);
+		result.append(", excludeUnspecifiedEvents: ");
+		result.append(excludeUnspecifiedEvents);
 		result.append(')');
 		return result.toString();
 	}

@@ -173,7 +173,95 @@ public enum EventType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	IMPORTED(15, "Imported", "Imported");
+	IMPORTED(15, "Imported", "Imported"), /**
+	 * The '<em><b>Medical Condition</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MEDICAL_CONDITION_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	MEDICAL_CONDITION(16, "MedicalCondition", "MedicalCondition"), /**
+	 * The '<em><b>Medical Treatment</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MEDICAL_TREATMENT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	MEDICAL_TREATMENT(17, "MedicalTreatment", "MedicalTreatment"), /**
+	 * The '<em><b>Birth Defect</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BIRTH_DEFECT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	BIRTH_DEFECT(18, "BirthDefect", "BirthDefect"), /**
+	 * The '<em><b>Mastitis</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MASTITIS_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	MASTITIS(19, "Mastitis", "Mastitis"), /**
+	 * The '<em><b>Herd Test</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #HERD_TEST_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	HERD_TEST(20, "HerdTest", "HerdTest"), /**
+	 * The '<em><b>Birthing</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BIRTHING_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	BIRTHING(21, "Birthing", "Birthing"), /**
+	 * The '<em><b>Milk Test</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MILK_TEST_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	MILK_TEST(22, "MilkTest", "MilkTest"), /**
+	 * The '<em><b>US Ovine Grading</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #US_OVINE_GRADING_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	US_OVINE_GRADING(23, "USOvineGrading", "USOvineGrading"), /**
+	 * The '<em><b>Calving</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CALVING_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	CALVING(24, "Calving", "Calving"), /**
+	 * The '<em><b>US Beef Grading</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #US_BEEF_GRADING_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	US_BEEF_GRADING(25, "USBeefGrading", "USBeefGrading"), /**
+	 * The '<em><b>US Swine Grading</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #US_SWINE_GRADING_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	US_SWINE_GRADING(26, "USSwineGrading", "USSwineGrading");
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -423,6 +511,171 @@ public enum EventType implements Enumerator {
 	public static final int IMPORTED_VALUE = 15;
 
 	/**
+	 * The '<em><b>Medical Condition</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Medical Condition</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #MEDICAL_CONDITION
+	 * @model name="MedicalCondition"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MEDICAL_CONDITION_VALUE = 16;
+
+	/**
+	 * The '<em><b>Medical Treatment</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Medical Treatment</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #MEDICAL_TREATMENT
+	 * @model name="MedicalTreatment"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MEDICAL_TREATMENT_VALUE = 17;
+
+	/**
+	 * The '<em><b>Birth Defect</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Birth Defect</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #BIRTH_DEFECT
+	 * @model name="BirthDefect"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIRTH_DEFECT_VALUE = 18;
+
+	/**
+	 * The '<em><b>Mastitis</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Mastitis</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #MASTITIS
+	 * @model name="Mastitis"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MASTITIS_VALUE = 19;
+
+	/**
+	 * The '<em><b>Herd Test</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Herd Test</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #HERD_TEST
+	 * @model name="HerdTest"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int HERD_TEST_VALUE = 20;
+
+	/**
+	 * The '<em><b>Birthing</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Birthing</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #BIRTHING
+	 * @model name="Birthing"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIRTHING_VALUE = 21;
+
+	/**
+	 * The '<em><b>Milk Test</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Milk Test</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #MILK_TEST
+	 * @model name="MilkTest"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MILK_TEST_VALUE = 22;
+
+	/**
+	 * The '<em><b>US Ovine Grading</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>US Ovine Grading</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #US_OVINE_GRADING
+	 * @model name="USOvineGrading"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int US_OVINE_GRADING_VALUE = 23;
+
+	/**
+	 * The '<em><b>Calving</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Calving</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #CALVING
+	 * @model name="Calving"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CALVING_VALUE = 24;
+
+	/**
+	 * The '<em><b>US Beef Grading</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>US Beef Grading</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #US_BEEF_GRADING
+	 * @model name="USBeefGrading"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int US_BEEF_GRADING_VALUE = 25;
+
+	/**
+	 * The '<em><b>US Swine Grading</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>US Swine Grading</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #US_SWINE_GRADING
+	 * @model name="USSwineGrading"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int US_SWINE_GRADING_VALUE = 26;
+
+	/**
 	 * An array of all the '<em><b>Event Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -446,6 +699,17 @@ public enum EventType implements Enumerator {
 			LOST_TAG,
 			REPLACED_TAG,
 			IMPORTED,
+			MEDICAL_CONDITION,
+			MEDICAL_TREATMENT,
+			BIRTH_DEFECT,
+			MASTITIS,
+			HERD_TEST,
+			BIRTHING,
+			MILK_TEST,
+			US_OVINE_GRADING,
+			CALVING,
+			US_BEEF_GRADING,
+			US_SWINE_GRADING,
 		};
 
 	/**
@@ -512,6 +776,17 @@ public enum EventType implements Enumerator {
 			case LOST_TAG_VALUE: return LOST_TAG;
 			case REPLACED_TAG_VALUE: return REPLACED_TAG;
 			case IMPORTED_VALUE: return IMPORTED;
+			case MEDICAL_CONDITION_VALUE: return MEDICAL_CONDITION;
+			case MEDICAL_TREATMENT_VALUE: return MEDICAL_TREATMENT;
+			case BIRTH_DEFECT_VALUE: return BIRTH_DEFECT;
+			case MASTITIS_VALUE: return MASTITIS;
+			case HERD_TEST_VALUE: return HERD_TEST;
+			case BIRTHING_VALUE: return BIRTHING;
+			case MILK_TEST_VALUE: return MILK_TEST;
+			case US_OVINE_GRADING_VALUE: return US_OVINE_GRADING;
+			case CALVING_VALUE: return CALVING;
+			case US_BEEF_GRADING_VALUE: return US_BEEF_GRADING;
+			case US_SWINE_GRADING_VALUE: return US_SWINE_GRADING;
 		}
 		return null;
 	}
