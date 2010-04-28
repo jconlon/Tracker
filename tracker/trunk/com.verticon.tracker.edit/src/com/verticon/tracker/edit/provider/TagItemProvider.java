@@ -44,6 +44,7 @@ import com.verticon.tracker.EventType;
 import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.Sex;
 import com.verticon.tracker.Swine;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
@@ -248,8 +249,6 @@ public class TagItemProvider
 	 * <!-- begin-user-doc -->
 	 * Modified to distinguish and filter species unique events.
 	 * <!-- end-user-doc -->
-	 * TODO Add all new events from model to this method
-	 * TODO Refactor for Policy
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unchecked")
@@ -365,36 +364,41 @@ public class TagItemProvider
 				 TrackerFactory.eINSTANCE.createWeighIn()));
 		}
 
-		//TODO Remove and replace with generic event
+		if(tag.canContain(EventType.MEDICAL_CONDITION, null)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createMedicalCondition()));
+		}
 		
 
-		//TODO Remove and replace with generic event
+		if(tag.canContain(EventType.MEDICAL_TREATMENT, null)){
 		newChildDescriptors.add
 			(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 				 TrackerFactory.eINSTANCE.createMedicalTreatment()));
+		}
 
-		//TODO Remove and replace with generic event
+		if(tag.canContain(EventType.BIRTH_DEFECT, null)){
 		newChildDescriptors.add
 		(createChildParameter
 			(TrackerPackage.Literals.TAG__EVENTS,
 			 TrackerFactory.eINSTANCE.createBirthDefect()));
+		}
 
-		//TODO Remove and replace with generic event
+		if(tag.canContain(EventType.MASTITIS, null)){
 		newChildDescriptors.add
 		(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 						TrackerFactory.eINSTANCE.createMastitis()));
+		}
 
-		//TODO Remove and replace with generic event
+		if(tag.canContain(EventType.HERD_TEST, null)){
 		newChildDescriptors.add
 		(createChildParameter
 				(TrackerPackage.Literals.TAG__EVENTS,
 						TrackerFactory.eINSTANCE.createHerdTest()));
+		}
 		
 		addGenericEventChildern(newChildDescriptors, tag);
 		
@@ -410,12 +414,13 @@ public class TagItemProvider
 	}
 
 	/**
+	 * 
+	 * Constrains to species and sex.  This will override illogical user policies.
 	 * @param newChildDescriptors
 	 * @param object
-	 * @deprecated This should be removed when species appropriate events are replaced with Generic Events
 	 */
 	private void addChildrenBasedOnAnimalSpecies(
-			final Collection<Object> newChildDescriptors, Tag tag) {
+			final Collection<Object> newChildDescriptors, final Tag tag) {
 		
 		if(tag==null){
 			return;
@@ -425,59 +430,75 @@ public class TagItemProvider
 		TrackerSwitch<Object> visitor = new TrackerSwitch<Object>(){
 			@Override
 			public Object caseOvine(Ovine object) {
-				addBirthingEventChild(newChildDescriptors);
-				addMilkTestEventChild(newChildDescriptors);
+				if(object.getSex().equals(Sex.F_LITERAL)){
+					addBirthingEventChild(newChildDescriptors);
+					addMilkTestEventChild(newChildDescriptors);
+				}
 				addUSOvineGradingEventChild(newChildDescriptors);
 				return object;
 			}
 
 			@Override
 			public Object caseCaprine(Caprine object) {
-				addBirthingEventChild(newChildDescriptors);
-				addMilkTestEventChild(newChildDescriptors);
+				if(object.getSex().equals(Sex.F_LITERAL)){
+					addBirthingEventChild(newChildDescriptors);
+					addMilkTestEventChild(newChildDescriptors);
+				}
 				return object;
 			}
 
 			@Override
 			public Object caseBovineBeef(BovineBeef object) {
-				addCalvingEventChild(newChildDescriptors);
+				if(object.getSex().equals(Sex.F_LITERAL)){
+					addCalvingEventChild(newChildDescriptors);
+				}
 				addUSBeefGradingEventChild(newChildDescriptors);
 				return object;
 			}
 			
 			@Override
 			public Object caseBovineDairy(BovineDairy object) {
-				addCalvingEventChild(newChildDescriptors);
-				addMilkTestEventChild(newChildDescriptors);
+				if(object.getSex().equals(Sex.F_LITERAL)){
+					addCalvingEventChild(newChildDescriptors);
+					addMilkTestEventChild(newChildDescriptors);
+				}
 				addUSBeefGradingEventChild(newChildDescriptors);
 				return object;
 			}
 			
 			@Override
 			public Object caseBovineBison(BovineBison object) {
+				if(object.getSex().equals(Sex.F_LITERAL)){
 				addCalvingEventChild(newChildDescriptors);
-				addMilkTestEventChild(newChildDescriptors);
+//				addMilkTestEventChild(newChildDescriptors);
+				}
 				addUSBeefGradingEventChild(newChildDescriptors);
 				return object;
 			}
 			
 			@Override
 			public Object caseSwine(Swine object) {
-				addBirthingEventChild(newChildDescriptors);
+				if(object.getSex().equals(Sex.F_LITERAL)){
+					addBirthingEventChild(newChildDescriptors);
+				}
 				addUSSwineGradingEventChild(newChildDescriptors);
 				return object;
 			}
 			
 			@Override
 			public Object caseEquine(Equine object) {
-				addBirthingEventChild(newChildDescriptors);
+				if(object.getSex().equals(Sex.F_LITERAL)){
+					addBirthingEventChild(newChildDescriptors);
+				}
 				return object;
 			}
 			
 			@Override
-			public Object caseAnimal(Animal eObject){
-				addBirthingEventChild(newChildDescriptors);
-				return eObject;
+			public Object caseAnimal(Animal object){
+				if(object.getSex().equals(Sex.F_LITERAL)){
+					addBirthingEventChild(newChildDescriptors);
+				}
+				return object;
 			}
 
 			/**
@@ -485,10 +506,12 @@ public class TagItemProvider
 			 */
 			private void addBirthingEventChild(
 					final Collection<Object> newChildDescriptors) {
+				if(tag.canContain(EventType.BIRTHING, null)){
 				newChildDescriptors.add
 				(createChildParameter
 					(TrackerPackage.Literals.TAG__EVENTS,
 					 TrackerFactory.eINSTANCE.createBirthing()));
+				}
 			}
 			
 			/**
@@ -496,10 +519,12 @@ public class TagItemProvider
 			 */
 			private void addCalvingEventChild(
 					final Collection<Object> newChildDescriptors) {
+				if(tag.canContain(EventType.CALVING, null)){
 				newChildDescriptors.add
 				(createChildParameter
 						(TrackerPackage.Literals.TAG__EVENTS,
 								TrackerFactory.eINSTANCE.createCalving()));
+				}
 			}
 
 			/**
@@ -507,10 +532,12 @@ public class TagItemProvider
 			 */
 			private void addMilkTestEventChild(
 					final Collection<Object> newChildDescriptors) {
+				if(tag.canContain(EventType.MILK_TEST, null)){
 				newChildDescriptors.add
 				(createChildParameter
 					(TrackerPackage.Literals.TAG__EVENTS,
 					 TrackerFactory.eINSTANCE.createMilkTest()));
+				}
 			}
 			
 			/**
@@ -518,10 +545,12 @@ public class TagItemProvider
 			 */
 			private void addUSBeefGradingEventChild(
 					final Collection<Object> newChildDescriptors) {
+				if(tag.canContain(EventType.US_BEEF_GRADING, null)){
 				newChildDescriptors.add
 				(createChildParameter
 					(TrackerPackage.Literals.TAG__EVENTS,
 					 TrackerFactory.eINSTANCE.createUSBeefGrading()));
+				}
 			}
 			
 			/**
@@ -529,10 +558,12 @@ public class TagItemProvider
 			 */
 			private void addUSOvineGradingEventChild(
 					final Collection<Object> newChildDescriptors) {
+				if(tag.canContain(EventType.US_OVINE_GRADING, null)){
 				newChildDescriptors.add
 				(createChildParameter
 					(TrackerPackage.Literals.TAG__EVENTS,
 					 TrackerFactory.eINSTANCE.createUSOvineGrading()));
+				}
 			}
 			
 			/**
@@ -540,10 +571,12 @@ public class TagItemProvider
 			 */
 			private void addUSSwineGradingEventChild(
 					final Collection<Object> newChildDescriptors) {
+				if(tag.canContain(EventType.US_SWINE_GRADING, null)){
 				newChildDescriptors.add
 				(createChildParameter
 					(TrackerPackage.Literals.TAG__EVENTS,
 					 TrackerFactory.eINSTANCE.createUSSwineGrading()));
+				}
 			}
 		};
 

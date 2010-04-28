@@ -4,11 +4,10 @@
 package com.verticon.tracker.util;
 
 import static com.verticon.tracker.TrackerPlugin.bundleMarker;
-import static com.verticon.tracker.util.TrackerConstants.DATE_FORMAT;
 import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_COMMENTS;
 import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_DATE;
-import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_TYPE;
 import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_GENERICEVENT_OCDID;
+import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_TYPE;
 import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_WEIGHIN_UNIT;
 import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_WEIGHIN_WEIGHT;
 

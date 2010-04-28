@@ -1112,7 +1112,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_PCycQVmCEd2tRZ2K3aMUww" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
     <element xmi:type="ecore:EEnum" href="tracker.ecore#//BeefBreed"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PCycQlmCEd2tRZ2K3aMUww" x="160"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PCycQlmCEd2tRZ2K3aMUww" x="156"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_PDUAtFmCEd2tRZ2K3aMUww" type="1005">
     <children xmi:type="notation:Node" xmi:id="_PDUnwlmCEd2tRZ2K3aMUww" type="4010"/>
@@ -1355,7 +1355,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_PDlGeVmCEd2tRZ2K3aMUww" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
     <element xmi:type="ecore:EClass" href="tracker.ecore#//Sighting"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PDlGelmCEd2tRZ2K3aMUww" x="2090" y="870" height="55"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PDlGelmCEd2tRZ2K3aMUww" x="2148" y="864" height="55"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_PDmUkFmCEd2tRZ2K3aMUww" type="1001">
     <children xmi:type="notation:Node" xmi:id="_PDm7oFmCEd2tRZ2K3aMUww" type="4001"/>
@@ -2686,6 +2686,10 @@
   <children xmi:type="notation:Node" xmi:id="_PKZPMCvIEd-f1KzmKvQ0JQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_PKiZICvIEd-f1KzmKvQ0JQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_PKjAMCvIEd-f1KzmKvQ0JQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_bICF4VLYEd-cx-2mpwd3zw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Policy/excludeUnspecifiedEvents"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_bICF4lLYEd-cx-2mpwd3zw"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_dNL0gCvIEd-f1KzmKvQ0JQ" type="2001">
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Policy/includedSpecies"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_dNL0gSvIEd-f1KzmKvQ0JQ"/>
@@ -2813,6 +2817,50 @@
       <children xmi:type="notation:Node" xmi:id="_gWVncCxwEd-UNpCBP8NtMA" type="2006">
         <element xmi:type="ecore:EEnumLiteral" href="tracker.ecore#//EventType/Imported"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_gWVncSxwEd-UNpCBP8NtMA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_wirCgFLYEd-cx-2mpwd3zw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="tracker.ecore#//EventType/MedicalCondition"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_wirCgVLYEd-cx-2mpwd3zw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_1vynoFLYEd-cx-2mpwd3zw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="tracker.ecore#//EventType/MedicalTreatment"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1vynoVLYEd-cx-2mpwd3zw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_5SPasFLYEd-cx-2mpwd3zw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="tracker.ecore#//EventType/BirthDefect"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_5SPasVLYEd-cx-2mpwd3zw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_79pRAFLYEd-cx-2mpwd3zw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="tracker.ecore#//EventType/Mastitis"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_79pRAVLYEd-cx-2mpwd3zw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_-1OiIFLYEd-cx-2mpwd3zw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="tracker.ecore#//EventType/HerdTest"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-1OiIVLYEd-cx-2mpwd3zw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Bxb0kFLZEd-cx-2mpwd3zw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="tracker.ecore#//EventType/Birthing"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Bxb0kVLZEd-cx-2mpwd3zw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_EWUzMFLZEd-cx-2mpwd3zw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="tracker.ecore#//EventType/MilkTest"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_EWUzMVLZEd-cx-2mpwd3zw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_IpaZAFLZEd-cx-2mpwd3zw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="tracker.ecore#//EventType/USOvineGrading"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_IpaZAVLZEd-cx-2mpwd3zw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_OTlGgFLZEd-cx-2mpwd3zw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="tracker.ecore#//EventType/Calving"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_OTlGgVLZEd-cx-2mpwd3zw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Q7kccFLZEd-cx-2mpwd3zw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="tracker.ecore#//EventType/USBeefGrading"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Q7kccVLZEd-cx-2mpwd3zw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_T42F4FLZEd-cx-2mpwd3zw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="tracker.ecore#//EventType/USSwineGrading"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_T42F4VLZEd-cx-2mpwd3zw"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_utKRYSvTEd-f1KzmKvQ0JQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_utKRYivTEd-f1KzmKvQ0JQ"/>

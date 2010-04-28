@@ -73,6 +73,7 @@ public class PolicyItemProvider
 			super.getPropertyDescriptors(object);
 
 			addIncludedSpeciesPropertyDescriptor(object);
+			addExcludeUnspecifiedEventsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -96,6 +97,28 @@ public class PolicyItemProvider
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 getString("_UI_InclusionPolicyPropertyCategory"),
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Exclude Unspecified Events feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addExcludeUnspecifiedEventsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Policy_excludeUnspecifiedEvents_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Policy_excludeUnspecifiedEvents_feature", "_UI_Policy_type"),
+				 TrackerPackage.Literals.POLICY__EXCLUDE_UNSPECIFIED_EVENTS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
 				 null));
 	}
 
@@ -149,7 +172,8 @@ public class PolicyItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Policy_type");
+		Policy policy = (Policy)object;
+		return getString("_UI_Policy_type") + " " + policy.isExcludeUnspecifiedEvents();
 	}
 
 	/**
@@ -165,6 +189,7 @@ public class PolicyItemProvider
 
 		switch (notification.getFeatureID(Policy.class)) {
 			case TrackerPackage.POLICY__INCLUDED_SPECIES:
+			case TrackerPackage.POLICY__EXCLUDE_UNSPECIFIED_EVENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TrackerPackage.POLICY__INCLUDED_EVENTS:

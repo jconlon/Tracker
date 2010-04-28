@@ -5205,13 +5205,22 @@ public interface TrackerPackage extends EPackage {
 	int POLICY__INCLUDED_GENERIC_EVENTS = 2;
 
 	/**
+	 * The feature id for the '<em><b>Exclude Unspecified Events</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POLICY__EXCLUDE_UNSPECIFIED_EVENTS = 3;
+
+	/**
 	 * The number of structural features of the '<em>Policy</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POLICY_FEATURE_COUNT = 3;
+	int POLICY_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.EventInclusionImpl <em>Event Inclusion</em>}' class.
@@ -6626,6 +6635,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPolicy_IncludedGenericEvents();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Policy#isExcludeUnspecifiedEvents <em>Exclude Unspecified Events</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Exclude Unspecified Events</em>'.
+	 * @see com.verticon.tracker.Policy#isExcludeUnspecifiedEvents()
+	 * @see #getPolicy()
+	 * @generated
+	 */
+	EAttribute getPolicy_ExcludeUnspecifiedEvents();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.EventInclusion <em>Event Inclusion</em>}'.
@@ -8179,6 +8199,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference POLICY__INCLUDED_GENERIC_EVENTS = eINSTANCE.getPolicy_IncludedGenericEvents();
+
+		/**
+		 * The meta object literal for the '<em><b>Exclude Unspecified Events</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POLICY__EXCLUDE_UNSPECIFIED_EVENTS = eINSTANCE.getPolicy_ExcludeUnspecifiedEvents();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.EventInclusionImpl <em>Event Inclusion</em>}' class.

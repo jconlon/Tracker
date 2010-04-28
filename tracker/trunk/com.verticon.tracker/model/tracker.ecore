@@ -750,7 +750,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Policy">
     <eOperations name="canContain" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="//Filter species if there are some in the list.  If not pass all species to the next filter.&#xA;if(!getIncludedSpecies().isEmpty()){&#xA;&#x9;//Filter out species that are not included &#xA;        boolean result = false;&#xA;&#x9;for (AnimalType includedAnimalType : getIncludedSpecies()) {&#xA;&#x9;&#x9;if(animalType==includedAnimalType){&#xA;                        result=true;&#xA;&#x9;&#x9;&#x9;break;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;        if(!result){&#xA;                //There was a list of included species but this one was not in it.&#xA;&#x9;&#x9;return Boolean.FALSE;&#xA;        }&#xA;}&#xA;if(ocdId !=null){&#xA;        // If the includedGeneric list is empty pass all GenericEvents.&#xA;       if(getIncludedGenericEvents().isEmpty()){&#xA;           return Boolean.TRUE;&#xA;       }&#xA;      &#xA;        // If there are includedGeneric events in the list.  &#xA;        // See if the GenericEvent is in the list.  Pass it if it has there is an species match&#xA;&#x9;for (GenericEventInclusion genericEventInclusion : getIncludedGenericEvents()) {&#xA;&#x9;&#x9;if(genericEventInclusion.getOcd().getID().equals(ocdId)){&#xA;&#x9;&#x9;&#x9;for (AnimalType includedAnimalType : genericEventInclusion.getSpecies()) {&#xA;&#x9;&#x9;&#x9;&#x9;if(animalType==includedAnimalType){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return Boolean.TRUE;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;                        //There was a ocdId match but no animal&#xA;&#x9;&#x9;&#x9;return Boolean.FALSE;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;        //There was no match in the included list pass it.&#xA;}else if(!getIncludedEvents().isEmpty()){&#xA;&#x9;//Filter events&#xA;&#x9;for (EventInclusion eventInclusion : getIncludedEvents()) {&#xA;&#x9;&#x9;//Find the Event&#xA;&#x9;&#x9;for (EventType includedEventType : eventInclusion.getEvent()) {&#xA;&#x9;&#x9;&#x9;if(eventType==includedEventType){&#xA;&#x9;&#x9;&#x9;&#x9;//Find the animal&#xA;&#x9;&#x9;&#x9;&#x9;for (AnimalType includedAnimalType : eventInclusion.getSpecies()) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if(animalType==includedAnimalType){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;return Boolean.TRUE;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;return Boolean.FALSE;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;return Boolean.TRUE;"/>
+        <details key="body" value="//Filter species if there are some in the list.  If not pass all species to the next filter.&#xA;if(!getIncludedSpecies().isEmpty()){&#xA;&#x9;//Filter out species that are not included &#xA;        boolean result = false;&#xA;&#x9;for (AnimalType includedAnimalType : getIncludedSpecies()) {&#xA;&#x9;&#x9;if(animalType==includedAnimalType){&#xA;                        result=true;&#xA;&#x9;&#x9;&#x9;break;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;        if(!result){&#xA;                //There was a list of included species but this one was not in it.&#xA;&#x9;&#x9;return Boolean.FALSE;&#xA;        }&#xA;}&#xA;&#xA;//Filter genericEvents&#xA;if(ocdId !=null){&#xA;        // If the includedGeneric list is empty &#xA;       if(getIncludedGenericEvents().isEmpty()){&#xA;&#x9;  if(isExcludeUnspecifiedEvents()){&#xA;&#x9;&#x9;//block all Unspecified GenericEvents.&#xA;&#x9;&#x9;return Boolean.FALSE;&#xA;&#x9;  }&#xA;&#x9;  //pass all Unspecified GenericEvents.&#xA;           return Boolean.TRUE;&#xA;       }&#xA;      &#xA;        // If there are includedGeneric events in the list.  &#xA;        // See if the GenericEvent is in the list.  Pass it if it has there is an species match&#xA;&#x9;for (GenericEventInclusion genericEventInclusion : getIncludedGenericEvents()) {&#xA;&#x9;&#x9;if(genericEventInclusion.getOcd().getID().equals(ocdId)){&#xA;&#x9;&#x9;&#x9;for (AnimalType includedAnimalType : genericEventInclusion.getSpecies()) {&#xA;&#x9;&#x9;&#x9;&#x9;if(animalType==includedAnimalType){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return Boolean.TRUE;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;                        //There was a ocdId match but no animal&#xA;&#x9;&#x9;&#x9;return Boolean.FALSE;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;        //There was no match in the included list pass it.&#xA;}else if(!getIncludedEvents().isEmpty()){&#xA;&#x9;//Filter events&#xA;&#x9;for (EventInclusion eventInclusion : getIncludedEvents()) {&#xA;&#x9;&#x9;//Find the Event&#xA;&#x9;&#x9;for (EventType includedEventType : eventInclusion.getEvent()) {&#xA;&#x9;&#x9;&#x9;if(eventType==includedEventType){&#xA;&#x9;&#x9;&#x9;&#x9;//Find the animal&#xA;&#x9;&#x9;&#x9;&#x9;for (AnimalType includedAnimalType : eventInclusion.getSpecies()) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if(animalType==includedAnimalType){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;return Boolean.TRUE;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;return Boolean.FALSE;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;//Unspecified Event&#xA; if(isExcludeUnspecifiedEvents()){&#xA;&#x9;&#x9;//block all Unspecified GenericEvents.&#xA;&#x9;&#x9;return Boolean.FALSE;&#xA;}&#xA;//pass all Unspecified GenericEvents.&#xA;return Boolean.TRUE;"/>
       </eAnnotations>
       <eParameters name="eventType" eType="#//EventType"/>
       <eParameters name="ocdId" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
@@ -762,6 +762,8 @@
         eType="#//EventInclusion" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="includedGenericEvents"
         upperBound="-1" eType="#//GenericEventInclusion" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="excludeUnspecifiedEvents"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EventInclusion">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="species" lowerBound="1"
@@ -791,5 +793,16 @@
     <eLiterals name="LostTag" value="13"/>
     <eLiterals name="ReplacedTag" value="14"/>
     <eLiterals name="Imported" value="15"/>
+    <eLiterals name="MedicalCondition" value="16" literal="MedicalCondition"/>
+    <eLiterals name="MedicalTreatment" value="17"/>
+    <eLiterals name="BirthDefect" value="18"/>
+    <eLiterals name="Mastitis" value="19"/>
+    <eLiterals name="HerdTest" value="20"/>
+    <eLiterals name="Birthing" value="21"/>
+    <eLiterals name="MilkTest" value="22"/>
+    <eLiterals name="USOvineGrading" value="23"/>
+    <eLiterals name="Calving" value="24"/>
+    <eLiterals name="USBeefGrading" value="25"/>
+    <eLiterals name="USSwineGrading" value="26"/>
   </eClassifiers>
 </ecore:EPackage>
