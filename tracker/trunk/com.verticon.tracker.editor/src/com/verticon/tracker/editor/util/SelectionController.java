@@ -1,13 +1,16 @@
 package com.verticon.tracker.editor.util;
 
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
+import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMIN_PROPERTY_SELECTION;
+import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMIN_PROPERTY_SELECTION_SOURCE;
+import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMIN_TOPIC_VIEW_SELECTION;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -22,8 +25,11 @@ import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventConstants;
 import org.osgi.service.event.EventHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import static com.verticon.tracker.editor.util.TrackerEditorConstants.*;
+import com.verticon.tracker.Premises;
+import com.verticon.tracker.editor.presentation.IPremisesProvider;
 
 
 /**
@@ -36,14 +42,19 @@ import static com.verticon.tracker.editor.util.TrackerEditorConstants.*;
  */
 public class SelectionController implements ISelectionController {
 
-//	/**
-//	 * slf4j Logger
-//	 */
-//	final Logger logger = LoggerFactory
-//			.getLogger(SelectionController.class);
+	/**
+	 * slf4j Logger
+	 */
+	final Logger logger = LoggerFactory
+			.getLogger(SelectionController.class);
 	
 	private IEditorPart activeEditorPart;
-	private IEditorPart getActiveEditorPart() {
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.verticon.tracker.editor.util.ISelectionController#getActiveEditorPart()
+	 */
+	public IEditorPart getActiveEditorPart() {
 		return activeEditorPart;
 	}
 
@@ -71,11 +82,11 @@ public class SelectionController implements ISelectionController {
 				
 				Utils.unregisterFilter(oldActiveEditorPart, itemsView);
 			}
-//			logger.debug(bundleMarker,"Registering {} on activeEditor {}", itemsView, activeEditorPart);
+			logger.debug(bundleMarker,"Registering {} on activeEditor {}", itemsView, activeEditorPart);
 			Utils.registerFilter(activeEditorPart, itemsView);
 			
 		}else{
-//			logger.debug(bundleMarker, "Ignoring {} on activeEditor {}", itemsView, activeEditorPart);
+			logger.debug(bundleMarker, "Ignoring {} on activeEditor {}", itemsView, activeEditorPart);
 		}
 		
 	}
@@ -139,6 +150,7 @@ public class SelectionController implements ISelectionController {
 	 */
 	private void handleEditorChange(IWorkbenchPart part) {
 		setActiveEditorPart((IEditorPart)part);
+		logger.debug(bundleMarker, "handleEditorChange entered, editor={}",part );
 		itemsView.handleViewerInputChange();
 		
 	}
@@ -158,18 +170,20 @@ public class SelectionController implements ISelectionController {
 		 eventAdminTracker.close();
 		 eventAdminTracker = null;
 	}
-
-	public EditingDomain getEditingDomain() {
-		if(getActiveEditorPart() == null){
+	
+	@Override
+	public Premises getPremises() {
+	    Premises premises = null;
+	    if(getActiveEditorPart() == null){
 			setActiveEditorPart(itemsView.getSite().getPage().getActiveEditor());
 		}
-		
-		if (getActiveEditorPart() instanceof IEditingDomainProvider) {
-			return ((IEditingDomainProvider) getActiveEditorPart())
-					.getEditingDomain();
+		if(getActiveEditorPart() != null){
+			IPremisesProvider o  = (IPremisesProvider)	getActiveEditorPart().getAdapter(IPremisesProvider.class);
+			if(o != null){
+				premises = o.getPremises();
+			}
 		}
-		return null;
-
+		return premises;
 	}
 
 	/**
@@ -246,7 +260,7 @@ public class SelectionController implements ISelectionController {
 	private synchronized void handleWorkbenchAndEventAdminSelection(
 			ISelection selection,
 			Event event) {
-//		logger.debug(bundleMarker,"handleTableViewerSelection entered");
+		logger.debug(bundleMarker,"handleTableViewerSelection entered");
 		
 		handlingWorkbenchPartOrEventAdminIgnoreSelection.set(true);
 
@@ -255,17 +269,17 @@ public class SelectionController implements ISelectionController {
 		FilteredTable masterFilteredTable = itemsView.getMasterFilteredTable();
 		switch (sselection.size()) {
 		case 0:
-//			logger.debug(bundleMarker,
-//					"Empty selection - deselect any selection in the tableViewer"
-//			);
+			logger.debug(bundleMarker,
+					"Empty selection - deselect any selection in the tableViewer"
+			);
 
 			masterFilteredTable.setFilterText("");
 			masterFilteredTable.getViewer().setSelection(
 					sselection);
 			break;
 		case 1:
-//			logger.debug(bundleMarker,
-//					"Single selection - send it to the subclass for handling");
+			logger.debug(bundleMarker,
+					"Single selection - send it to the subclass for handling");
 
 			strategy.handleWorkbenchAndEventAdminSingleSelection(sselection.getFirstElement(),
 					masterFilteredTable
@@ -273,7 +287,7 @@ public class SelectionController implements ISelectionController {
 			break;
 
 		default:
-//			logger.debug(bundleMarker,"Multiple selection");
+			logger.debug(bundleMarker,"Multiple selection");
 		masterFilteredTable.setFilterText("");
 		masterFilteredTable.getViewer().setSelection(
 				sselection);
@@ -306,7 +320,7 @@ public class SelectionController implements ISelectionController {
 		 */
 		EventHandler handler = new EventHandler() {
 			public void handleEvent(final Event event) {
-//				logger.debug(bundleMarker,"Handling incoming Selection Event");
+				logger.debug(bundleMarker,"Handling incoming Selection Event");
 
 				final ISelection selection = (ISelection) event
 						.getProperty(EVENT_ADMIN_PROPERTY_SELECTION);
@@ -392,7 +406,7 @@ public class SelectionController implements ISelectionController {
 
 	public void sendSelectionToChannel(ISelection selection,
 			String source) {
-//		logger.debug(bundleMarker,"Sending osgi event to Animals View Topic from {}",source);
+		logger.debug(bundleMarker,"Sending osgi event to Animals View Topic from {}",source);
 		Map<String, Object> table = new HashMap<String, Object>();
 		// FIXME Task 280 should not send a mutable object as a property
 		table.put(EVENT_ADMIN_PROPERTY_SELECTION, selection);
