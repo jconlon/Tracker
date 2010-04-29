@@ -3,6 +3,7 @@ import static com.verticon.tracker.fair.transaction.editor.presentation.FairTran
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.eclipse.core.commands.operations.ObjectUndoContext;
 import org.eclipse.core.commands.operations.OperationHistoryEvent;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -30,6 +32,7 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
@@ -69,12 +72,16 @@ import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
+import com.verticon.tracker.editor.presentation.IPremisesProvider;
 import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
+import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.FairFactory;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
 import com.verticon.tracker.fair.editor.presentation.FairEditor;
 import com.verticon.tracker.fair.editor.presentation.FairEditorPlugin;
+import com.verticon.tracker.fair.editor.presentation.IFairProvider;
 import com.verticon.tracker.fair.transaction.editor.domain.FairResourceLoadedListener;
 
 /**
@@ -115,6 +122,12 @@ public class FairTransactionEditor extends FairEditor {
 	
 	//.CUSTOM: We track dirty state by the last operation executed when saved
 	private IUndoableOperation savedOperation;
+	
+	/**
+	 * .CUSTOM Offers a query on a dataSet. 
+	 * @generated NOT
+	 */
+	private IPremisesProvider fairProvider;
 	
 	//.CUSTOM: Applies this editor's undo context to operations that affect
 	//         its resource.  Also sets selection to viewer on execution of
@@ -655,6 +668,37 @@ public class FairTransactionEditor extends FairEditor {
 		else if (key.equals(IUndoContext.class)) {
 			//.CUSTOM: used by undo/redo actions to get their undo context
 			return undoContext;
+		}
+		//Adds adaptive support for IPremisesProvider 	
+		else if (key.equals(IPremisesProvider.class) || key.equals(IFairProvider.class)){
+			if (fairProvider==null){
+				fairProvider = new IFairProvider(){
+
+					public EditingDomain getEditingDomain() {
+						return FairTransactionEditor.this.getEditingDomain();
+					}
+
+					public void setSelectionToViewer(Collection<?> collection) {
+						FairTransactionEditor.this.setSelectionToViewer(collection);
+					}
+					
+					public Premises getPremises() {
+						return getFair().getPremises();
+					}
+
+					//On a TransactionEditor there is only one resource.
+					public Fair getFair() {
+						Fair fair = null;
+							if(resource.getURI().fileExtension().endsWith("fair")){
+							  fair = (Fair)	resource.getEObject("/");
+							 
+						}
+						return fair;
+					}
+					
+				};
+			}
+			return fairProvider;
 		}
 		else {
 			return super.getAdapter(key);
