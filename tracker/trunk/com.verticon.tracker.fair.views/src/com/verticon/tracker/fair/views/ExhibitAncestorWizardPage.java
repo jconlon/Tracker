@@ -1,7 +1,6 @@
 package com.verticon.tracker.fair.views;
 
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.ObservablesManager;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.databinding.observable.list.IObservableList;

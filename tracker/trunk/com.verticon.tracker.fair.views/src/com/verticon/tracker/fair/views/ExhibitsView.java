@@ -6,8 +6,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -33,6 +31,7 @@ import com.verticon.tracker.fair.Exhibit;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
+import com.verticon.tracker.fair.editor.presentation.IFairProvider;
 import com.verticon.tracker.fair.views.PeopleView.PeopleColumn;
 
 public class ExhibitsView extends TrackerView implements ItemsView{
@@ -82,7 +81,7 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 	@Override
 	protected Object addAnItem() {
 		// Instantiates and initializes the wizard
-		Fair fair = getFair(exhibitsSelectionController.getEditingDomain());
+		Fair fair = getFair();
 		AddExhibitWizard wizard = new AddExhibitWizard(fair, getSite()
 				.getWorkbenchWindow().getWorkbench().getActiveWorkbenchWindow());
 		// Instantiates the wizard container with the wizard and opens it
@@ -104,6 +103,15 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 		return null;
 	}
 	
+	private Fair getFair(){
+		if(exhibitsSelectionController.getActiveEditorPart()!=null){
+			IFairProvider o = (IFairProvider) exhibitsSelectionController.getActiveEditorPart().getAdapter(IFairProvider.class);
+			if(o!=null){
+				return o.getFair();
+			}
+		}
+		return null;
+	}
 	/**
 	 * Override point for subclasses to create the tableViewer columns.
 	 */
@@ -124,7 +132,7 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 	 * tableViewer.
 	 */
 	public void handleViewerInputChange() {
-		Fair premises = getFair(exhibitsSelectionController.getEditingDomain());
+		Fair premises = getFair();
 		TableViewer viewer = masterFilteredTable.getViewer();
 		viewer.setInput(premises);
 		enableMenus(premises!=null);
@@ -164,29 +172,9 @@ public class ExhibitsView extends TrackerView implements ItemsView{
 		}
 	}
 
-	 
-	 /**
-		 * @return fair
-		 */
-		private Fair getFair(EditingDomain domain) {
-			if (domain == null) {
-				return null;
-			}
-			
-			Fair fair = null;
-			for (Resource resource : domain
-					.getResourceSet().getResources()) {
-				Object o = resource.getContents().get(0);
-				if (o instanceof Fair) {
-					fair = (Fair) o;
-					break;
-				}
-			}
-			return fair;
-		}
 
 	  Exhibit getExhibitFromAnimal(Animal animal) {
-		Fair fair = getFair(exhibitsSelectionController.getEditingDomain());
+		Fair fair = getFair();
 		if (animal == null || fair == null) {
 			return null;
 		}
