@@ -1,5 +1,7 @@
 package com.verticon.tracker.views;
 
+import static com.verticon.tracker.views.ViewsPlugin.bundleMarker;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -8,6 +10,8 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Composite;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
@@ -19,9 +23,15 @@ import com.verticon.tracker.editor.util.TrackerView;
 
 public class EventsView extends TrackerView implements ItemsView{
 
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory.getLogger(EventsView.class);
+
+
 	private static final String NAME_OF_ITEM_IN_MASTER = "Event";
 
-	private ISelectionController eventSelectionController;
+	private ISelectionController selectionController;
 	
 	
 	/**
@@ -46,7 +56,7 @@ public class EventsView extends TrackerView implements ItemsView{
 	@Override
 	protected Object addAnItem() {
 		// Instantiates and initializes the wizard
-		Premises premises = getPremises(eventSelectionController.getEditingDomain());
+		Premises premises = selectionController.getPremises();
 		AddEventWizard wizard = new AddEventWizard();
 		wizard.init(getSite().getWorkbenchWindow().getWorkbench()
 				.getActiveWorkbenchWindow(), premises, tableViewer
@@ -102,7 +112,8 @@ public class EventsView extends TrackerView implements ItemsView{
 	 * tableViewer.
 	 */
 	public void handleViewerInputChange() {
-		Premises premises = getPremises(eventSelectionController.getEditingDomain());
+		Premises premises = selectionController.getPremises();
+		logger.debug(bundleMarker,"Changed premises={}", premises);
 		TableViewer viewer = masterFilteredTable.getViewer();
 		viewer.setInput(premises);
 		enableMenus(premises!=null);
@@ -110,18 +121,19 @@ public class EventsView extends TrackerView implements ItemsView{
 	
 
 	/**
-	 * Override super to add an AnimalSelectionController
+	 * Override super to add an EventSelectionController
 	 */
 	@Override
 	public void createPartControl(Composite base) {
+		logger.debug(bundleMarker,"createPartControl entered");
 		super.createPartControl(base);
-		eventSelectionController = new SelectionController(
+		selectionController = new SelectionController(
 				this, new EventsStrategy(this));
-		eventSelectionController.open();
+		selectionController.open();
 		
-		getSite().getPage().addSelectionListener(eventSelectionController);
-		getSite().getPage().addPartListener(eventSelectionController);
-		tableViewer.addSelectionChangedListener(eventSelectionController);
+		getSite().getPage().addSelectionListener(selectionController);
+		getSite().getPage().addPartListener(selectionController);
+		tableViewer.addSelectionChangedListener(selectionController);
 		handleViewerInputChange();
 	}
 
@@ -130,10 +142,11 @@ public class EventsView extends TrackerView implements ItemsView{
 	 */
 	 @Override
 	public void dispose() {
-		tableViewer.removeSelectionChangedListener(eventSelectionController);
-		eventSelectionController.close();
-		getSite().getPage().removePartListener(eventSelectionController);
-		getSite().getPage().removeSelectionListener(eventSelectionController);
+		logger.debug(bundleMarker,"dispose entered");
+		tableViewer.removeSelectionChangedListener(selectionController);
+		selectionController.close();
+		getSite().getPage().removePartListener(selectionController);
+		getSite().getPage().removeSelectionListener(selectionController);
 		super.dispose();
 	}
 	 

@@ -12,6 +12,8 @@ import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import com.verticon.tracker.editor.util.IViewerFilters;
 
@@ -26,6 +28,16 @@ public class ViewsPlugin extends AbstractUIPlugin implements IViewerFilters{
 	private BundleContext bundleContext = null;
 	private static final String ID = "com.verticon.tracker.views";
 	
+	/**
+	 * slf4j Marker to keep track of bundle
+	 */
+	public static final Marker bundleMarker = createBundleMarker();
+
+	private static final Marker createBundleMarker() {
+		Marker bundleMarker = MarkerFactory.getMarker(ID);
+		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
+		return bundleMarker;
+	}
 	
 	public ViewsPlugin() {
 		plugin = this;
