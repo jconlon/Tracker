@@ -84,8 +84,7 @@ public class AnimalsView extends TrackerView  {
 	@Override
 	protected Object addAnItem() {
 		// Instantiates and initializes the wizard
-		Premises premises = getPremises(selectionController
-				.getEditingDomain());
+		Premises premises = selectionController.getPremises();
 		AddAnimalWizard wizard = new AddAnimalWizard(premises);
 		wizard.init(getSite().getWorkbenchWindow().getWorkbench()
 				.getActiveWorkbenchWindow(), premises);
@@ -151,12 +150,8 @@ public class AnimalsView extends TrackerView  {
 	 * @return an ObservableList of Animals
 	 */
 	private IObservableList getObservableList() {
-		// There may be no editors return a null if so
-		if (selectionController.getEditingDomain() == null) {
-			return null;
-		}
 		
-		Premises premises = getPremises(selectionController.getEditingDomain());
+		Premises premises = selectionController.getPremises();
 		if (premises == null) {
 			return null;
 		}
