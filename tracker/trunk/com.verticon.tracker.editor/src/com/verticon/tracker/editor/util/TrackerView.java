@@ -11,10 +11,8 @@ import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.ChangeEvent;
 import org.eclipse.core.databinding.observable.IChangeListener;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -61,7 +59,6 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 import com.verticon.tracker.util.AbstractModelObject;
@@ -222,7 +219,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	 */
 	@Override
 	public void createPartControl(Composite base) {
-//		logger.debug(bundleMark, "createPartControl Entered");
+		logger.debug(bundleMarker, "createPartControl Entered");
 		// Our layout will have a row of buttons, and
 		// then a SashForm below it.
 		base.setLayout(new GridLayout(1, false));
@@ -332,7 +329,7 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 	 */
 	@Override
 	public void dispose() {
-//		logger.debug(bundleMarker,"Disposing resources");
+		logger.debug(bundleMarker,"Disposing resources");
 		for (CTabItem item : detailFormTabFolder.getItems()) {
 			item.dispose();
 		}
@@ -844,34 +841,6 @@ public abstract class TrackerView extends ViewPart implements ItemsView{
 		}
 	}
 
-	/**
-	 * Convenience method to find the Premises from an editingDomain.
-	 * Ticket 276 - To prevent including dependencies for Add on Plugins in the base
-	 * com.verticon.tracker.editor plugin all add-on Editors that edit 
-	 * a model instance that contains a Premises
-	 * in their model should register an IAdapterFactory with the 
-	 * Platform AdapterManager to return a Premises.
-	 * 
-	 * @param editingDomain of the activeEditor
-	 * @return Premises from the editingDomain
-	 */
-	protected static Premises getPremises(EditingDomain editingDomain) {
-		if(editingDomain == null || editingDomain.getResourceSet() ==null || editingDomain.getResourceSet().getResources().isEmpty()){
-			return null;
-		}
-		Resource resource = editingDomain.getResourceSet().getResources()
-				.get(0);
-		Object rootObject = resource.getContents().get(0);
-		if (rootObject instanceof Premises) {
-			return (Premises) rootObject;
-		} else {
-			Object adaptable = Platform.getAdapterManager().getAdapter(rootObject, Premises.class);
-			if(adaptable!=null){
-				return (Premises)adaptable;
-			}
-		}
-		return null;
-	}
 	
 	/**
 	 * Setup the proper filter TagID
