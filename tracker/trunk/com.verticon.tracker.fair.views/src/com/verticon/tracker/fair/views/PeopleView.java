@@ -11,8 +11,6 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.IEMFListProperty;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
@@ -45,6 +43,7 @@ import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.Person;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
+import com.verticon.tracker.fair.editor.presentation.IFairProvider;
 
 /**
  * View of People at a Fair.
@@ -112,7 +111,7 @@ public class PeopleView extends TrackerView implements ItemsView{
 	@Override
 	protected Object addAnItem() {
 		// Instantiates and initializes the wizard
-		Fair fair = getFair(exhibitsSelectionController.getEditingDomain());
+		Fair fair = getFair();
 		AddPeopleWizard wizard = new AddPeopleWizard();
 		wizard.init(getSite().getWorkbenchWindow().getWorkbench()
 				.getActiveWorkbenchWindow(), fair);
@@ -173,18 +172,16 @@ public class PeopleView extends TrackerView implements ItemsView{
 	 
 	private IObservableList getObservableList() {
 		// There may be no editors return a null if so
-		if (exhibitsSelectionController.getEditingDomain() == null) {
-			return null;
-		}
-		Fair premises = getFair(exhibitsSelectionController
-				.getEditingDomain());
-		if (premises == null) {
+		Fair fair = getFair();
+		if (fair == null) {
 			return null;
 		}
 		IEMFListProperty prop = EMFProperties.list(FairPackage.Literals.FAIR__PEOPLE);
-		return prop.observe(premises);
+		return prop.observe(fair);
 		
 	}
+	
+	
 	
 	 @Override
 	protected AdapterFactory createAdapterFactory() {
@@ -210,26 +207,6 @@ public class PeopleView extends TrackerView implements ItemsView{
 		}
 	}
 
-	/**
-	 * @return fair
-	 */
-	private Fair getFair(EditingDomain domain) {
-//		EditingDomain domain = exhibitsSelectionController.getEditingDomain();
-		if (domain == null) {
-			return null;
-		}
-		
-		Fair fair = null;
-		for (Resource resource : domain
-				.getResourceSet().getResources()) {
-			Object o = resource.getContents().get(0);
-			if (o instanceof Fair) {
-				fair = (Fair) o;
-				break;
-			}
-		}
-		return fair;
-	}
 
     static Person getPersonFromAnimal(Animal animal, Fair fair) {
 		if (animal == null || fair == null) {
@@ -498,6 +475,14 @@ public class PeopleView extends TrackerView implements ItemsView{
 		return cp;
 	}
 
-
+	private Fair getFair(){
+		if(exhibitsSelectionController.getActiveEditorPart()!=null){
+			IFairProvider o = (IFairProvider) exhibitsSelectionController.getActiveEditorPart().getAdapter(IFairProvider.class);
+			if(o!=null){
+				return o.getFair();
+			}
+		}
+		return null;
+	}
 
 }
