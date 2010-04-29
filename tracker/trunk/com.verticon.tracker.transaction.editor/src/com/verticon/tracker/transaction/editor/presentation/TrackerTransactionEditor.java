@@ -28,7 +28,6 @@ import org.eclipse.core.commands.operations.OperationHistoryEvent;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -1284,15 +1283,10 @@ public class TrackerTransactionEditor
 					}
 					
 					public Premises getPremises() {
-						ResourceSet resourceSet = TrackerTransactionEditor.this.getEditingDomain().getResourceSet();
 						Premises premises = null;
-						for (Resource resource : resourceSet.getResources()) {
-							if(resource.getURI().fileExtension().endsWith("premises")){
+						if(resource.getURI().fileExtension().endsWith("premises")){
 							  premises = (Premises)	resource.getEObject("/");
-							  break;
-							}
 						}
-						Assert.isNotNull(premises, "Premises can't be null. "+this);
 						return premises;
 					}
 					
