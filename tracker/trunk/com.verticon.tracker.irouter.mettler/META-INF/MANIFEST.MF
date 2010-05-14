@@ -15,3 +15,4 @@ Import-Package: com.verticon.tracker.irouter.common,
  org.osgi.util.measurement;version="1.0.0",
  org.slf4j;version="1.5.5"
 Require-Bundle: org.eclipse.equinox.io;bundle-version="1.0.100"
+Bundle-ActivationPolicy: lazy
