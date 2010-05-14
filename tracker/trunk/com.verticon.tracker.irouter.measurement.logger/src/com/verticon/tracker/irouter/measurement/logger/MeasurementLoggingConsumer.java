@@ -3,6 +3,7 @@ package com.verticon.tracker.irouter.measurement.logger;
 import static com.verticon.tracker.irouter.common.TrackerConstants.ANIMAL_TAG_NUMBER_SCOPE;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRANSACTION_STATE_SCOPE;
+import static com.verticon.tracker.irouter.measurement.logger.ComponentFactory.bundleMarker;
 import static com.verticon.tracker.irouter.measurement.logger.Context.*;
 
 import java.util.Arrays;
@@ -12,6 +13,7 @@ import org.osgi.service.wireadmin.Envelope;
 import org.osgi.service.wireadmin.Wire;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
 
 import com.verticon.tracker.irouter.common.AbstractConsumer;
 import com.verticon.tracker.irouter.common.IContext;
@@ -28,6 +30,11 @@ import com.verticon.tracker.irouter.common.ITransactionHandler;
  * 
  */
 public class MeasurementLoggingConsumer extends AbstractConsumer {
+
+	@Override
+	protected Marker bundleMarker() {
+		return bundleMarker;
+	}
 
 	private final String[] scope;
 	private final ITransactionHandler transactionHandler;
