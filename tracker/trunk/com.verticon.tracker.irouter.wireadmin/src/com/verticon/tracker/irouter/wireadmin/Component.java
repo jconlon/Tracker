@@ -17,6 +17,8 @@ import org.osgi.service.wireadmin.WireAdminEvent;
 import org.osgi.service.wireadmin.WireAdminListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 public class Component implements WireAdminListener, IWireCreator {
 
@@ -24,6 +26,18 @@ public class Component implements WireAdminListener, IWireCreator {
 	 * slf4j Logger
 	 */
 	private final Logger logger = LoggerFactory.getLogger(Component.class);
+	/**
+	 * Identify the plugin to the logger
+	 */
+	private final static String PLUGIN_ID = "com.verticon.tracker.irouter.wireadmin";
+	/**
+	 * slf4j Marker to keep track of bundle
+	 */
+	public static final Marker bundleMarker;
+	static {
+		bundleMarker = MarkerFactory.getMarker(PLUGIN_ID);
+		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
+	}
 
 
 	private final Map<String, GroupConnector> groupConnectors = new HashMap<String, GroupConnector>();
@@ -52,9 +66,8 @@ public class Component implements WireAdminListener, IWireCreator {
 	@Override
 	public boolean createWire(WireParameters wireParameters) {
 		if(wireAdmin==null){
-			logger.warn(
-					"{}: No wireAdmin Service found, so could not create wire with {}",
-					this, 
+			logger.warn(bundleMarker,
+					"No wireAdmin Service found, so could not create wire with {}",
 					wireParameters);
 			return false;
 		}
@@ -68,11 +81,13 @@ public class Component implements WireAdminListener, IWireCreator {
 			wires = wireAdmin.getWires(filter);
 			
 		} catch (InvalidSyntaxException e) {
-			logger.error("{}: Programing error, bad filter={}",this,filter);
+			logger.error(bundleMarker,
+					"Programing error, bad filter={}",filter);
 			return false;
 		}
 		if(wires == null || wires.length==0){
-			logger.debug("{}: Create a new wire for {}",this,wireParameters);
+			logger.debug(bundleMarker,
+					"Create a new wire for {}",wireParameters);
 					
 			wireAdmin.createWire(wireParameters.getProducerPid(), wireParameters
 					.getConsumerPid(), wireParameters.getProperties());
@@ -81,8 +96,9 @@ public class Component implements WireAdminListener, IWireCreator {
 //			log.debug((String.format(
 //					"{}: A wire already exists. Defered creating a new one.",this)));
 		}else{
-			logger.debug("{}: {} wires already exist. Deleting all existing wires, before creating one.",
-					this,wires.length);
+			logger.debug(bundleMarker,
+					"{} wires already exist. Deleting all existing wires, before creating one.",
+					wires.length);
 			for (Wire wire : wires) {
 				wireAdmin.deleteWire(wire);
 			}
@@ -112,8 +128,9 @@ public class Component implements WireAdminListener, IWireCreator {
 						.get(WIREADMIN_PRODUCER_PID);
 				String consumerPid = (String) event.getWire().getProperties()
 						.get(WIREADMIN_CONSUMER_PID);
-				logger.info("{}: Wire created entity={}, producerPid={}, consumerPid={}, scope={},",
-										new Object[]{this, group, producerPid, consumerPid,
+				logger.info(bundleMarker,
+						"Wire created entity={}, producerPid={}, consumerPid={}, scope={},",
+										new Object[]{group, producerPid, consumerPid,
 										Arrays.toString(scope)});
 			}
 			break;
@@ -123,8 +140,9 @@ public class Component implements WireAdminListener, IWireCreator {
 				.get(WIREADMIN_PRODUCER_PID);
 				String consumerPid = (String) event.getWire().getProperties()
 				.get(WIREADMIN_CONSUMER_PID);
-				logger.debug("{}: Wire connected entity={}, producerPid={}, consumerPid={}, scope={},",
-						new Object[]{this, group, producerPid, consumerPid,
+				logger.debug(bundleMarker,
+						"Wire connected entity={}, producerPid={}, consumerPid={}, scope={},",
+						new Object[]{group, producerPid, consumerPid,
 						Arrays.toString(scope)});
 			}
 			break;
@@ -134,9 +152,9 @@ public class Component implements WireAdminListener, IWireCreator {
 				.get(WIREADMIN_PRODUCER_PID);
 				String consumerPid = (String) event.getWire().getProperties()
 				.get(WIREADMIN_CONSUMER_PID);
-				logger.debug(
-						"{}: Wire disconnected entity={}, producerPid={}, consumerPid={}, scope={},",
-						new Object[]{this, group, producerPid, consumerPid,
+				logger.debug(bundleMarker,
+						"Wire disconnected entity={}, producerPid={}, consumerPid={}, scope={},",
+						new Object[]{group, producerPid, consumerPid,
 						Arrays.toString(scope)});
 			}
 			break;
@@ -145,9 +163,10 @@ public class Component implements WireAdminListener, IWireCreator {
 				.get(WIREADMIN_PRODUCER_PID);
 				String consumerPid = (String) event.getWire().getProperties()
 				.get(WIREADMIN_CONSUMER_PID);
-				logger.error(String.format(
-						"%s: Consumer Exception entity=%s, producerPid=%s, consumerPid=%s, scope=%s,",
-						this, group, producerPid, consumerPid,
+				logger.error(bundleMarker,
+						String.format(
+						"Consumer Exception entity=%s, producerPid=%s, consumerPid=%s, scope=%s,",
+						group, producerPid, consumerPid,
 						Arrays.toString(scope)),event.getThrowable());
 			
 			break;
@@ -156,9 +175,10 @@ public class Component implements WireAdminListener, IWireCreator {
 			.get(WIREADMIN_PRODUCER_PID);
 			consumerPid = (String) event.getWire().getProperties()
 			.get(WIREADMIN_CONSUMER_PID);
-			logger.error(String.format(
-					"{}: Producer Exception wire for entity=%s, producerPid=%s, consumerPid=%s, scope=%s,",
-					this, group, producerPid, consumerPid,
+			logger.error(bundleMarker,
+					String.format(
+					"Producer Exception wire for entity=%s, producerPid=%s, consumerPid=%s, scope=%s,",
+					group, producerPid, consumerPid,
 					Arrays.toString(scope)),event.getThrowable());
 		
 		break;
