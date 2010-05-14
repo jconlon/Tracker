@@ -1,5 +1,6 @@
 package com.verticon.tracker.irouter.mettler;
 
+import static com.verticon.tracker.irouter.mettler.FactoryComponent.bundleMarker;
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.RETRY_CONNECTION_DELAY;
 
@@ -168,7 +169,7 @@ public class Balance implements ICallableFactory, IBalance {
 	 */
 	synchronized void updated(BundleContext bc, Dictionary<?, ?> config)
 			throws ConfigurationException {
-		log.debug("{}: Updating",this);
+		log.debug(bundleMarker,"{}: Updating",this);
 		
 		context.setBundleContext(bc);
 		context.setConfig(config);
@@ -193,14 +194,14 @@ public class Balance implements ICallableFactory, IBalance {
 			boolean canceledTaskMonitor = taskMonitorFuture.cancel(true);
 			if(log.isDebugEnabled()){
 				  if(canceledTaskMonitor){
-					  log.debug(this + ": Canceled the "+taskMonitorFuture);
+					  log.debug(bundleMarker,this + ": Canceled the "+taskMonitorFuture);
 				  }else{
-					  log.debug(this + ": Failed to cancel the "+taskMonitorFuture);
+					  log.debug(bundleMarker,this + ": Failed to cancel the "+taskMonitorFuture);
 				  }
 			}
 			taskMonitorFuture = null;
 		}else{
-			log.error("{}: Should have found a taskMonitor",this);
+			log.error(bundleMarker,"{}: Should have found a taskMonitor",this);
 		}
 		unregisterProducer();
 		taskMonitoringService = null;

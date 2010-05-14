@@ -6,6 +6,7 @@ import static com.verticon.tracker.irouter.common.TrackerConstants.REQUEST_COMMA
 import static com.verticon.tracker.irouter.common.TrackerConstants.RESPONSE_PATTERN;
 import static com.verticon.tracker.irouter.common.TrackerConstants.STABLE_WEIGHT_ERROR;
 import static com.verticon.tracker.irouter.common.TrackerConstants.UNSTABLE_WEIGHT_ERROR;
+import static com.verticon.tracker.irouter.mettler.FactoryComponent.bundleMarker;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -98,7 +99,7 @@ public class MeasurementProducerCallable implements Callable<Void> {
 		try {
 			try {
 				
-				log.debug(this + ": Opening connection");
+				log.debug(bundleMarker,this + ": Opening connection");
 				ConnectorService cs = balance.getConnectorService();
 
 				connection = (StreamConnection) cs.open(uri,
@@ -109,16 +110,16 @@ public class MeasurementProducerCallable implements Callable<Void> {
 				in = new BufferedReader(new InputStreamReader(connection
 						.openInputStream()));
 			} catch (NoRouteToHostException e){
-				log.warn("{} :No Route to Host {} ", this, uri);
+				log.warn(bundleMarker,"{} :No Route to Host {} ", this, uri);
 				throw e;
 			} catch (UnknownHostException e) {
-				log.warn("{} :Unknown Host {}", this, uri);
+				log.warn(bundleMarker,"{} :Unknown Host {}", this, uri);
 				throw e;
 			} catch (ConnectException e) {
-				log.warn("{} :Couldn't connect to: {} because {}", new Object[]{this, uri, e.getMessage()});
+				log.warn(bundleMarker,"{} :Couldn't connect to: {} because {}", new Object[]{this, uri, e.getMessage()});
 				throw e;
 			} catch (IOException e) {
-				log.warn("{} :Couldn't io exception connecting to: {} because {}", new Object[]{this, uri, e.getMessage()});
+				log.warn(bundleMarker,"{} :Couldn't io exception connecting to: {} because {}", new Object[]{this, uri, e.getMessage()});
 				throw e;
 			}
 
@@ -136,7 +137,7 @@ public class MeasurementProducerCallable implements Callable<Void> {
 			// try {
 			while (!Thread.currentThread().isInterrupted()) {
 				if (command != null && command.length() > 0) {
-					log.debug("{} Polling for weight with command={}"
+					log.debug(bundleMarker,"{} Polling for weight with command={}"
 								,this, Utils.toAscii(command));
 					
 					out.write(command);
@@ -152,7 +153,7 @@ public class MeasurementProducerCallable implements Callable<Void> {
 						TimeUnit.MILLISECONDS.sleep(delayI);
 					}
 				} catch (SocketTimeoutException e) {
-					log.debug("{}: Timeout waiting for response to command.",this);
+					log.debug(bundleMarker,"{}: Timeout waiting for response to command.",this);
 					
 					// normal
 
@@ -183,27 +184,27 @@ public class MeasurementProducerCallable implements Callable<Void> {
 			}
 		} catch (InterruptedException e) {
 			// // Allow thread to exit
-			 log.debug("{}:Interrupted.....",this);
+			 log.debug(bundleMarker,"{}:Interrupted.....",this);
 			 
 		} finally {
-			log.debug(this + ":Terminating.....");
+			log.debug(bundleMarker,this + ":Terminating.....");
 			balance.unregisterProducer();
 			if (Thread.currentThread().isInterrupted()) {
-				log.debug("{}:Task was cancelled",this);
+				log.debug(bundleMarker,"{}:Task was cancelled",this);
 			}
 			if (out != null) {
-				log.debug("{}:Closing out",this);
+				log.debug(bundleMarker,"{}:Closing out",this);
 				out.close();
 			}
 			if (in != null) {
-				log.debug("{}:Closing in",this);
+				log.debug(bundleMarker,"{}:Closing in",this);
 				in.close();
 			}
 			if (connection != null) {
-				log.debug("{}:Closing connection",this);
+				log.debug(bundleMarker,"{}:Closing connection",this);
 				connection.close();
 			}
-			log.debug("{}:Terminated",this);
+			log.debug(bundleMarker,"{}:Terminated",this);
 		}
 
 		return null;
@@ -215,7 +216,7 @@ public class MeasurementProducerCallable implements Callable<Void> {
 		
 		Measurement measurement = createWeight(response);
 		if (measurement != null) {
-			log.debug("{}: sending {}", this,measurement);
+			log.debug(bundleMarker,"{}: sending {}", this,measurement);
 			
 			measurementSender.send(measurement);
 		}

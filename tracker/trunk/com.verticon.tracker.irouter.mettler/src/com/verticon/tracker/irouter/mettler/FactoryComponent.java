@@ -12,9 +12,23 @@ import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.cm.ManagedServiceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 public class FactoryComponent implements ManagedServiceFactory {
 
+	protected static String PLUGIN_ID = "com.verticon.tracker.irouter.mettler";
+
+	/**
+	 * slf4j Marker to keep track of bundle
+	 */
+	public static final Marker bundleMarker;
+
+	static {
+		bundleMarker = MarkerFactory.getMarker(PLUGIN_ID);
+		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
+	}
+	
 	/**
 	 * slf4j Logger
 	 */
@@ -90,7 +104,7 @@ public class FactoryComponent implements ManagedServiceFactory {
 	@Override
 	public void updated(String pid, Dictionary config)
 			throws ConfigurationException {
-		log.info("{}: Updating pid {}", this, pid);
+		log.info(bundleMarker,"{}: Updating pid {}", this, pid);
 
 		Balance balance = (Balance) balances.get(pid);
 		if (balance == null) {
