@@ -1,6 +1,6 @@
 package com.verticon.tracker.irouter.measurement.logger;
 
-
+import static com.verticon.tracker.irouter.measurement.logger.ComponentFactory.bundleMarker;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.osgi.util.measurement.Measurement;
 import org.slf4j.Logger;
+import org.slf4j.Marker;
 
 import com.verticon.tracker.irouter.common.AbstractTransactionHandler;
 
@@ -20,6 +21,12 @@ import com.verticon.tracker.irouter.common.AbstractTransactionHandler;
 public class AggregatedTransactionLogger extends AbstractTransactionHandler {
 	
 	
+	@Override
+	protected Marker bundleMarker() {
+		return bundleMarker;
+	}
+
+
 	public AggregatedTransactionLogger(Logger log) {
 		super(log);
 	}
@@ -47,7 +54,7 @@ public class AggregatedTransactionLogger extends AbstractTransactionHandler {
 				}
 			}
 			//2009-12-14 12:32:34
-			log.info(
+			log.info(bundleMarker,
 					String.format(
 							"type='measurement',dateTime='%1$tF %1$tT',id='%2$s',scope='%3$s',value='%4$.4f',error='%5$.4f',unit='%6$s'",
 							measurement.getTime(),
