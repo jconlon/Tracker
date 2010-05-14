@@ -11,6 +11,7 @@ import org.osgi.service.wireadmin.Envelope;
 import org.osgi.util.measurement.Measurement;
 import org.osgi.util.measurement.State;
 import org.slf4j.Logger;
+import org.slf4j.Marker;
 
 
 public abstract class AbstractTransactionHandler implements ITransactionHandler {
@@ -24,6 +25,7 @@ public abstract class AbstractTransactionHandler implements ITransactionHandler 
 	private final String scopeOfId = ANIMAL_TAG_NUMBER_SCOPE;
 	protected Long id = null;
 
+	protected abstract Marker bundleMarker();
 	
 	protected AbstractTransactionHandler(Logger log) {
 		super();
@@ -41,17 +43,17 @@ public abstract class AbstractTransactionHandler implements ITransactionHandler 
 			 if(envelope.getValue() instanceof Long){
 				 id = (Long)envelope.getValue();
 				 
-				 log.debug("{}:Received {}={}",
+				 log.debug(bundleMarker(),"{}:Received {}={}",
 							new Object[]{this,scopeOfId,id});
 				 
 			 }else{
-					log.error("EID Envelope unknown value={}",envelope.getValue());
+					log.error(bundleMarker(),"EID Envelope unknown value={}",envelope.getValue());
 			 }
 		 }else{
 			 if(envelope.getValue() instanceof Measurement){
 				 measurements.put(envelope.getScope(), (Measurement) envelope.getValue());
 			 }else{
-					log.error("id='{}', type='{}' has unknown value of {}",
+					log.error(bundleMarker(),"id='{}', type='{}' has unknown value of {}",
 							new Object[]{id,
 							envelope.getScope(),
 							envelope.getValue()});

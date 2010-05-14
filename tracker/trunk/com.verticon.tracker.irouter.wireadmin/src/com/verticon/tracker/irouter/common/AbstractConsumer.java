@@ -18,6 +18,7 @@ import org.osgi.service.wireadmin.Envelope;
 import org.osgi.service.wireadmin.Wire;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
 
 
 public abstract class AbstractConsumer implements Consumer, IService {
@@ -28,6 +29,7 @@ public abstract class AbstractConsumer implements Consumer, IService {
 	protected final Logger log = LoggerFactory
 			.getLogger(this.getClass());
 
+	protected abstract Marker bundleMarker();
 
 	protected final IContext context;
 	protected ServiceRegistration serviceRegistration = null;
@@ -40,7 +42,7 @@ public abstract class AbstractConsumer implements Consumer, IService {
 	@Override
 	public void producersConnected(Wire[] wires) {
 		if (wires == null) {
-			log.debug("{}: Not connected to any wires.", this);
+			log.debug(bundleMarker(),"{}: Not connected to any wires.", this);
 
 		} else {
 			HashSet<String> producers = new HashSet<String>();
@@ -49,7 +51,7 @@ public abstract class AbstractConsumer implements Consumer, IService {
 						WIREADMIN_PRODUCER_PID));
 			}
 
-			log.debug("{}: Connected to {} wires, and {} producers={}",
+			log.debug(bundleMarker(),"{}: Connected to {} wires, and {} producers={}",
 					new Object[] { this, wires.length, producers.size(),
 							producers });
 		}
@@ -63,11 +65,11 @@ public abstract class AbstractConsumer implements Consumer, IService {
 	 */
 	public void start(BundleContext bc) throws InterruptedException,
 			ExecutionException {
-		log.info("{}:Starting.", this);
+		log.info(bundleMarker(),"{}:Starting.", this);
 
 		registerService(bc);
 		if (log.isInfoEnabled()) {
-			log.info("{}:Started.", this);
+			log.info(bundleMarker(),"{}:Started.", this);
 		}
 	}
 
@@ -87,7 +89,7 @@ public abstract class AbstractConsumer implements Consumer, IService {
 	public void logError(Wire wire, Object in) {
 		String group = (String) wire.getProperties().get(
 				TRACKER_WIRE_GROUP_NAME);
-		log.error("{}: Received unknown object={}, Wire group={}, scope={},",
+		log.error(bundleMarker(),"{}: Received unknown object={}, Wire group={}, scope={},",
 				new Object[]{this, in.getClass(), group,
 					Arrays.toString(wire.getScope())});
 		
@@ -96,7 +98,7 @@ public abstract class AbstractConsumer implements Consumer, IService {
 	public void logUnknownScopeError(Wire wire, Object in) {
 		String group = (String) wire.getProperties().get(
 				TRACKER_WIRE_GROUP_NAME);
-		log.error("{}: Received unknown object={}, Wire group={}, scope={},",
+		log.error(bundleMarker(),"{}: Received unknown object={}, Wire group={}, scope={},",
 					new Object[]{this, in, group,
 					Arrays.toString(wire.getScope())});
 		

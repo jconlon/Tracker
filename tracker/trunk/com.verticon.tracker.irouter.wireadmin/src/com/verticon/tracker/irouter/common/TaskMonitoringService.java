@@ -1,5 +1,7 @@
 package com.verticon.tracker.irouter.common;
 
+import static com.verticon.tracker.irouter.wireadmin.Component.bundleMarker;
+
 import java.net.ConnectException;
 import java.net.NoRouteToHostException;
 import java.net.UnknownHostException;
@@ -63,15 +65,15 @@ public class TaskMonitoringService implements Callable<Void> {
 							.getSecondsBetweenRestarts());
 				}else{
 					
-					log.warn("{}: Thread is Interrupted", this);
+					log.warn(bundleMarker,"{}: Thread is Interrupted", this);
 				}
 			}
 		} catch (InterruptedException e) {
-			log.debug("{}: Terminating.", this);
+			log.debug(bundleMarker,"{}: Terminating.", this);
 			//Allow thread to exit
 		}
 		cancelRemainingTasks();
-		log.debug("{}: Terminated.", this);
+		log.debug(bundleMarker,"{}: Terminated.", this);
 		return null;
 	}
 
@@ -88,15 +90,15 @@ public class TaskMonitoringService implements Callable<Void> {
 
 	private void cancelRemainingTasks() {
 		
-		log.debug("{}: canceling the remaining {} tasks", this, futures.size());
+		log.debug(bundleMarker,"{}: canceling the remaining {} tasks", this, futures.size());
 		
 		for (Future<Void> f : futures) {
 			boolean wasCanceled = f.cancel(true);
 			if (log.isDebugEnabled()) {
 				if(wasCanceled){
-					log.debug("{}: canceled task", this);
+					log.debug(bundleMarker,"{}: canceled task", this);
 				}else{
-					log.debug("{}: failed to cancel task", this);
+					log.debug(bundleMarker,"{}: failed to cancel task", this);
 				}
 				
 			}
@@ -111,15 +113,15 @@ public class TaskMonitoringService implements Callable<Void> {
 	 */
 	private void monitorTasks() throws InterruptedException  {
 		
-		log.debug("{}: monitoring {} tasks", this, futures.size());
+		log.debug(bundleMarker,"{}: monitoring {} tasks", this, futures.size());
 		
 		Future<Void> completedFuture = compService.take();
 		try {
 			if (completedFuture.isCancelled()) {
-				log.warn("{}: Task was canceled.", this);
+				log.warn(bundleMarker,"{}: Task was canceled.", this);
 			}else {
 				completedFuture.get();
-				log.error((String.format("%s: Task completed prematurely without throwing an error.", this)));
+				log.error(bundleMarker,(String.format("%s: Task completed prematurely without throwing an error.", this)));
 			}
 		/*
 		 * log as debug
@@ -130,19 +132,19 @@ public class TaskMonitoringService implements Callable<Void> {
 		} catch (ExecutionException e) {
 			Throwable cause = e.getCause();
 			if(cause instanceof NoRouteToHostException){
-				log.debug(this + ": Task could not connect to target host. "+ cause.getMessage());
+				log.debug(bundleMarker,this + ": Task could not connect to target host. "+ cause.getMessage());
 			
 			}else if(cause instanceof ConnectException){
-				log.debug(this + ": Task could not connect to target host."+ cause.getMessage());
+				log.debug(bundleMarker,this + ": Task could not connect to target host."+ cause.getMessage());
 			}else if(cause instanceof UnknownHostException){
-				log.debug(this + ": Task could not connect to unknown host."+ cause.getMessage());
+				log.debug(bundleMarker,this + ": Task could not connect to unknown host."+ cause.getMessage());
 			}else{
-				log.error((String.format("%s: Task failed.", this)), cause);
+				log.error(bundleMarker,(String.format("%s: Task failed.", this)), cause);
 			}
 		} finally{
 			boolean removed = futures.remove(completedFuture);
 			if (!removed) {
-				log.error("{}: task was NOT removed from set of tasks", this);
+				log.error(bundleMarker,"{}: task was NOT removed from set of tasks", this);
 			}
 		}
 		
@@ -158,7 +160,7 @@ public class TaskMonitoringService implements Callable<Void> {
 			throw new InterruptedException();
 		}
 		for (Callable<Void> c : callableFactory.getCallables()) {
-			log.debug("{}: Submitting {}", this, c);
+			log.debug(bundleMarker,"{}: Submitting {}", this, c);
 			
 			futures.add(compService.submit(c));
 		}
