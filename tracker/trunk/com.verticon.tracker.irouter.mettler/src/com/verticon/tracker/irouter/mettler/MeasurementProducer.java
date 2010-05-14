@@ -8,6 +8,7 @@ import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_UR
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
 import static com.verticon.tracker.irouter.common.TrackerConstants.WEIGHT_MEASUREMENT_SCOPE;
 import static com.verticon.tracker.irouter.mettler.Context.*;
+import static com.verticon.tracker.irouter.mettler.FactoryComponent.bundleMarker;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -76,7 +77,7 @@ public class MeasurementProducer implements Producer, IMeasurementSender{
 			this.wires.addAll(Arrays.asList(wires));
 		}
 		if(this.wires.isEmpty()){
-			log.debug("{}: Not connected to any wires.",
+			log.debug(bundleMarker,"{}: Not connected to any wires.",
 					this
 			);
 		}else{
@@ -85,7 +86,7 @@ public class MeasurementProducer implements Producer, IMeasurementSender{
 				consumers.add((String)wire.getProperties().get(WIREADMIN_CONSUMER_PID));
 			}
 			
-			log.debug("{}: Connected to {} wires, and {} consumers={}",
+			log.debug(bundleMarker,"{}: Connected to {} wires, and {} consumers={}",
 						new Object[]{this, wires.length, consumers.size() ,consumers}
 			);
 			
@@ -110,7 +111,7 @@ public class MeasurementProducer implements Producer, IMeasurementSender{
 	public void send(Measurement measurement) {
 		this.envelope = new BasicEnvelope(measurement,context.getPid(),scopeName);
 		if(!wires.isEmpty()){
-			log.debug("{}: sending measuement={}, to {} wires",
+			log.debug(bundleMarker,"{}: sending measuement={}, to {} wires",
 					new Object[]{this,wires.size(), measurement}
 				);
 			
@@ -121,7 +122,7 @@ public class MeasurementProducer implements Producer, IMeasurementSender{
 //						this,measurement,wire));
 			}
 		}else{
-			log.warn("{}: No wires found. Aborted sending measuement={}",
+			log.warn(bundleMarker,"{}: No wires found. Aborted sending measuement={}",
 					this,measurement);
 		}
 	}
@@ -131,11 +132,11 @@ public class MeasurementProducer implements Producer, IMeasurementSender{
 	 */
 	void unRegister(){
 		if(wireAdminReg != null){
-			log.debug(this + ":Unregistering.....");
+			log.debug(bundleMarker,this + ":Unregistering.....");
 			 wireAdminReg.unregister();
 			 wireAdminReg=null;
 		 }
-		log.debug(this + ":Unregistered");
+		log.debug(bundleMarker,this + ":Unregistered");
 	}
 	
 	/**
