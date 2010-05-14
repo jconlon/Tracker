@@ -1,5 +1,6 @@
 package com.verticon.tracker.irouter.wireadmin;
 
+import static com.verticon.tracker.irouter.wireadmin.Component.bundleMarker;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
 import static org.osgi.framework.Constants.SERVICE_PID;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_SCOPE;
@@ -74,7 +75,7 @@ public class GroupConnector {
 		String producerPid = (String)properties.get(SERVICE_PID);
     	if(!producers.containsKey(producerPid)){
     		producers.put(producerPid, properties);
-    		logger.debug("{}: Added producer producerPid={}", 
+    		logger.debug(bundleMarker,"{}: Added producer producerPid={}", 
 								this, producerPid);
     		
     	}
@@ -94,7 +95,7 @@ public class GroupConnector {
     		}
     		Hashtable<String, Object> regProps = new Hashtable<String, Object>();
     		regProps.put(TRACKER_WIRE_GROUP_NAME,group);
-    		logger.debug(
+    		logger.debug(bundleMarker,
     			"{}: Creating wireParameters for Producer producerPid={}, consumerPid={}, calculatedScope={}", 
 								new Object[]{this, 
 								producerPid,
@@ -134,7 +135,7 @@ public class GroupConnector {
     	String consumerPid = (String)properties.get(SERVICE_PID);
     	if(!consumers.containsKey(consumerPid)){
     		consumers.put(consumerPid, properties);
-    		logger.debug(
+    		logger.debug(bundleMarker,
     			"{}: Added consumer consumerPid={}", 
 								this, consumerPid);
     		
@@ -155,7 +156,7 @@ public class GroupConnector {
     		}
     		Hashtable<String, Object> regProps = new Hashtable<String, Object>();
     		regProps.put(TRACKER_WIRE_GROUP_NAME,group);
-    		logger.debug("{}: Creating wireParameters for Consumer producerPid={}, consumerPid={}, calculatedScope={}", 
+    		logger.debug(bundleMarker,"{}: Creating wireParameters for Consumer producerPid={}, consumerPid={}, calculatedScope={}", 
 								new Object[]{this, 
 								producerPid,
 								consumerPid, 

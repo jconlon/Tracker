@@ -13,6 +13,7 @@ import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.cm.ManagedServiceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
 
 
 public abstract class AbstractComponentFactory implements ManagedServiceFactory {
@@ -29,13 +30,15 @@ public abstract class AbstractComponentFactory implements ManagedServiceFactory 
 	protected ScheduledExecutorService scheduler;
 	private BundleContext bc;
 	
+	protected abstract Marker bundleMarker();
+	
 
 	protected void activate(BundleContext bc) throws Exception {
 		this.bc = bc;
 		exec = Executors.newCachedThreadPool();
 		scheduler = Executors.newSingleThreadScheduledExecutor();
 		servicControllers = new HashMap<String, ServiceController>();
-		log.debug("{}: Started", this);
+		log.debug(bundleMarker(),"{}: Started", this);
 	}
 
 	protected void deactivate(BundleContext context) throws Exception {
@@ -60,7 +63,7 @@ public abstract class AbstractComponentFactory implements ManagedServiceFactory 
 	@Override
 	public void updated(String pid, Dictionary config)
 			throws ConfigurationException {
-				log.info(this + ": Updating pid " + pid);
+				log.info(bundleMarker(),this + ": Updating pid " + pid);
 			
 				ServiceController controller = servicControllers.get(pid);
 				if (controller == null) {
@@ -72,7 +75,7 @@ public abstract class AbstractComponentFactory implements ManagedServiceFactory 
 
 	@Override
 	public void deleted(String pid) {
-		log.info(this + ": Deleting pid " + pid);
+		log.info(bundleMarker(),this + ": Deleting pid " + pid);
 		ServiceController serviceController = servicControllers.get(pid);
 		if (serviceController != null) {
 			servicControllers.remove(pid);
