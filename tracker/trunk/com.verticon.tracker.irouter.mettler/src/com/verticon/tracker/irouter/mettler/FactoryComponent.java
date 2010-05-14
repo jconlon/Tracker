@@ -1,5 +1,7 @@
 package com.verticon.tracker.irouter.mettler;
 
+import static com.verticon.tracker.irouter.mettler.FactoryComponent.bundleMarker;
+
 import java.util.Collection;
 import java.util.Dictionary;
 import java.util.HashMap;
@@ -54,7 +56,7 @@ public class FactoryComponent implements ManagedServiceFactory {
 		// There will be multiple balances each running within it's own thread
 		exec = Executors.newCachedThreadPool();
 		balances = new HashMap<String, Balance>();
-		log.debug("{}: Started", this);
+		log.debug(bundleMarker,"{}: Started", this);
 	}
 
 	protected void deactivate(BundleContext context) throws Exception {
