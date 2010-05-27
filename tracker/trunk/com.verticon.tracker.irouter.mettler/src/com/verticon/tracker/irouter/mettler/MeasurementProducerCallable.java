@@ -116,10 +116,15 @@ public class MeasurementProducerCallable implements Callable<Void> {
 				log.warn(bundleMarker,"{} :Unknown Host {}", this, uri);
 				throw e;
 			} catch (ConnectException e) {
-				log.warn(bundleMarker,"{} :Couldn't connect to: {} because {}", new Object[]{this, uri, e.getMessage()});
+				log.warn(bundleMarker,
+						this+ " :Couldn't connect to: "+uri, 
+						e);
 				throw e;
 			} catch (IOException e) {
-				log.warn(bundleMarker,"{} :Couldn't io exception connecting to: {} because {}", new Object[]{this, uri, e.getMessage()});
+				log.warn(bundleMarker,
+						this+ " :IO exception connecting to: "+uri, 
+						e
+				);
 				throw e;
 			}
 
