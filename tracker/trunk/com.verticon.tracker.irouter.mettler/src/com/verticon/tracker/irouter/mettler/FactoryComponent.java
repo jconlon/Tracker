@@ -56,7 +56,7 @@ public class FactoryComponent implements ManagedServiceFactory {
 		// There will be multiple balances each running within it's own thread
 		exec = Executors.newCachedThreadPool();
 		balances = new HashMap<String, Balance>();
-		log.debug(bundleMarker,"{}: Started", this);
+		log.debug(bundleMarker,"Started");
 	}
 
 	protected void deactivate(BundleContext context) throws Exception {
@@ -106,7 +106,7 @@ public class FactoryComponent implements ManagedServiceFactory {
 	@Override
 	public void updated(String pid, Dictionary config)
 			throws ConfigurationException {
-		log.info(bundleMarker,"{}: Updating pid {}", this, pid);
+		log.info(bundleMarker,"Updating pid {}", pid);
 
 		Balance balance = (Balance) balances.get(pid);
 		if (balance == null) {
