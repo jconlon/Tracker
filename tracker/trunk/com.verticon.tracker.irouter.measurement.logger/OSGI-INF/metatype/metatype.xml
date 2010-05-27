@@ -2,17 +2,22 @@
 <metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
 
   <OCD description="Configuration for the Tracker Measurement Logger Instance" name="Tracker Measurement Logger" id="com.verticon.tracker.irouter.measurement.loggerfactory">
-    <AD name="Wiring group name"  id="tracker.wiring.group.name" type="String"/> 
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" type="String"
+        description="Name of the group of components that will be wired together."/> 
  
  	<AD name="Consumable measurement name" id="consumable.scope" type="String"
-		cardinality="3" />
+		cardinality="3" 
+		description="List of the names of the wire measurement products to log. Use only the prefix of the measurement product names, as each prefix entered in this list will have the .measurement suffix automatically appended." />
 	
-    <AD name="Type of logger" id="logger.type" type="Integer">
+    <AD name="Type of logger" id="logger.type" type="Integer" 
+    	description="Kind of transaction logger to create. Normalized - log entries are comma delimited and include all measurements. Aggregated - Separate log entries per measurement.">
     	<Option label="Normalized Transaction" value="0"/>
 		<Option label="Aggegated Transaction" value="1"/>
 	</AD>
    
-   <AD name="Logger name"  id="logger.name" type="String" required="false" default="transaction"/> 
+   <AD name="Logger name"  id="logger.name" type="String" required="false" 
+   	  default="transaction"
+   	  description="Name of the file to send logs."/> 
  
   </OCD>
   
