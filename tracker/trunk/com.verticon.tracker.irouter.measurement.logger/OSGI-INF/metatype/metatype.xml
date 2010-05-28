@@ -11,8 +11,8 @@
 	
     <AD name="Type of logger" id="logger.type" type="Integer" 
     	description="Kind of transaction logger to create. Normalized - log entries are comma delimited and include all measurements. Aggregated - Separate log entries per measurement.">
-    	<Option label="Normalized Transaction" value="0"/>
-		<Option label="Aggegated Transaction" value="1"/>
+    	<Option label="Normalized" value="0"/>
+		<Option label="Aggegated" value="1"/>
 	</AD>
    
    <AD name="Logger name"  id="logger.name" type="String" required="false" 
