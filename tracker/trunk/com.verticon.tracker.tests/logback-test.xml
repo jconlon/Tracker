@@ -66,8 +66,12 @@
  </appender>
 
  
-  <logger name="com.verticon.tracker.reader">
-    <level value="WARN"/>
+  <logger name="com.verticon.tracker">
+    <level value="DEBUG"/>
+  </logger>
+  
+   <logger name="com.verticon.osgi">
+    <level value="DEBUG"/>
   </logger>
   
   <logger name="com.verticon.tracker.impl.AnimalEventHistoryAdapter">
