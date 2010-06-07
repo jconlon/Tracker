@@ -6,12 +6,13 @@
  */
 package com.verticon.osgi.metatype.tests;
 
+import junit.framework.TestCase;
+import junit.textui.TestRunner;
+
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 import com.verticon.osgi.metatype.Designate;
 import com.verticon.osgi.metatype.MetatypeFactory;
-
-import junit.framework.TestCase;
-
-import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
@@ -88,6 +89,27 @@ public class DesignateTest extends TestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+	
+	public void testEquality() {
+		Designate desCopy1 = (Designate) EcoreUtil.copy(getFixture());
+		assertTrue(EcoreUtil.equals(getFixture(), desCopy1));
+		desCopy1.setPid("xxx");
+		assertFalse(EcoreUtil.equals(getFixture(), desCopy1));
+		getFixture().setPid("xxx");
+		assertTrue(EcoreUtil.equals(getFixture(), desCopy1));
+		
+		com.verticon.osgi.metatype.Object o = MetatypeFactory.eINSTANCE.createObject();
+		getFixture().setObject(o);
+		assertFalse(EcoreUtil.equals(getFixture(), desCopy1));
+		
+		desCopy1 = (Designate) EcoreUtil.copy(getFixture());
+		assertTrue(EcoreUtil.equals(getFixture(), desCopy1));
+		
+		getFixture().getObject().setOcdref("xxyy");
+		assertFalse(EcoreUtil.equals(getFixture(), desCopy1));
+		
+		
 	}
 
 } //DesignateTest
