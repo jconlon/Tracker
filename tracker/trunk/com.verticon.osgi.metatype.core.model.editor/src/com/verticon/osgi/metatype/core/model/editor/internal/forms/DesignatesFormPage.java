@@ -30,7 +30,7 @@ public class DesignatesFormPage extends FormPage {
 	private final IEditorPart editorPart;
 	
 	public DesignatesFormPage(IEditorPart editorPart) {
-		super("iRouterDesignate", "iRouter Designate Configuration");
+		super("iRouterFactoryServices", "iRouter Factory Services Configuration");
 		this.editorPart = editorPart;
 		block = new DesignatesMasterDetailsBlock(this);
 	}
@@ -38,7 +38,7 @@ public class DesignatesFormPage extends FormPage {
 	
 	protected void createFormContent(final IManagedForm managedForm) {
 		final ScrolledForm form = managedForm.getForm();
-		form.setText("iRouter Designate Configuration");
+		form.setText("iRouter Factory Services Configuration");
 		block.createContent(managedForm);
 	}
 	
