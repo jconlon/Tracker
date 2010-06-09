@@ -75,7 +75,10 @@ public class PremisesItemProvider
 			addPremisesIdPropertyDescriptor(object);
 			addEmailContactPropertyDescriptor(object);
 			addUriPropertyDescriptor(object);
+			addAdministratorPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
+			addDescriptionPropertyDescriptor(object);
+			addPhoneNumberPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -92,7 +95,7 @@ public class PremisesItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Premises_premisesId_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Premises_premisesId_feature", "_UI_Premises_type"),
+				 getString("_UI_Premises_premisesId_description"),
 				 TrackerPackage.Literals.PREMISES__PREMISES_ID,
 				 true,
 				 false,
@@ -136,7 +139,7 @@ public class PremisesItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Premises_uri_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Premises_uri_feature", "_UI_Premises_type"),
+				 getString("_UI_Premises_uri_description"),
 				 TrackerPackage.Literals.PREMISES__URI,
 				 true,
 				 false,
@@ -146,6 +149,28 @@ public class PremisesItemProvider
 				 new String[] {
 					"org.eclipse.ui.views.properties.expert"
 				 }));
+	}
+
+	/**
+	 * This adds a property descriptor for the Administrator feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAdministratorPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Premises_administrator_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Premises_administrator_feature", "_UI_Premises_type"),
+				 TrackerPackage.Literals.PREMISES__ADMINISTRATOR,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 getString("_UI_ContactsPropertyCategory"),
+				 null));
 	}
 
 	/**
@@ -167,6 +192,50 @@ public class PremisesItemProvider
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 getString("_UI_IdentificationPropertyCategory"),
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Description feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDescriptionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Premises_description_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Premises_description_feature", "_UI_Premises_type"),
+				 TrackerPackage.Literals.PREMISES__DESCRIPTION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 getString("_UI_IdentificationPropertyCategory"),
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Phone Number feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPhoneNumberPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Premises_phoneNumber_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Premises_phoneNumber_feature", "_UI_Premises_type"),
+				 TrackerPackage.Literals.PREMISES__PHONE_NUMBER,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 getString("_UI_ContactsPropertyCategory"),
 				 null));
 	}
 
@@ -243,7 +312,10 @@ public class PremisesItemProvider
 			case TrackerPackage.PREMISES__PREMISES_ID:
 			case TrackerPackage.PREMISES__EMAIL_CONTACT:
 			case TrackerPackage.PREMISES__URI:
+			case TrackerPackage.PREMISES__ADMINISTRATOR:
 			case TrackerPackage.PREMISES__NAME:
+			case TrackerPackage.PREMISES__DESCRIPTION:
+			case TrackerPackage.PREMISES__PHONE_NUMBER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TrackerPackage.PREMISES__ANIMALS:
