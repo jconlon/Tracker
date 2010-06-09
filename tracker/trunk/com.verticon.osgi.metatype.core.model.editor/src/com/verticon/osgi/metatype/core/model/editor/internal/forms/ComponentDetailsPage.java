@@ -105,7 +105,7 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 	 */
 	@Override
 	protected String getNameOfForm() {
-		return "Component Context";
+		return "Factory Parent";
 	}
 
 	/*
@@ -174,9 +174,9 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 				TableWrapData.TOP);
 		td.grabHorizontal = true;
 		section.setLayoutData(td);
-		section.setText("Component Configuration");
+		section.setText("Service Configuration");
 		section.setDescription("Configurable attributes of the "
-				+ ocd.getName() + " component. ");
+				+ ocd.getName() + " service. ");
 
 		// Build a sectionClient
 		Composite configurationSectionClient = toolkit.createComposite(section);
@@ -522,8 +522,12 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 				mmng.removeMessage("validation", t);
 				return ValidationStatus.ok();
 			} else {
-				mmng.addMessage("validation", error, null,
-						IMessageProvider.ERROR, t);
+				mmng.addMessage(
+						"validation", //key
+						error, //message
+						null,//data
+						IMessageProvider.ERROR, //int
+						t);//Control
 				return ValidationStatus.error(error);
 			}
 		}

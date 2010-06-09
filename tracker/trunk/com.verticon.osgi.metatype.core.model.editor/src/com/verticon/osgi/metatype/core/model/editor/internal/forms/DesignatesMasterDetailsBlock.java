@@ -82,6 +82,10 @@ import com.verticon.osgi.metatype.presentation.MetatypeEditorPlugin;
 
 public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 
+	private static final String MASTER_SECTION_DESCRIPTION = "The tree contains iRouter factories and services.  Service configuration details are editable on the right";
+
+	private static final String MASTER_SECTION_TEXT = "Factories and Services";
+
 	/**
 	 * slf4j Logger
 	 */
@@ -134,8 +138,8 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 		FormToolkit toolkit = managedForm.getToolkit();
 
 		Section section = toolkit.createSection(parent, Section.DESCRIPTION);
-		section.setText("Factories and Components");
-		section.setDescription("The tree contains iRouter factories and component configurations.  Component configuration details are editable on the right");
+		section.setText(MASTER_SECTION_TEXT);
+		section.setDescription(MASTER_SECTION_DESCRIPTION);
 		section.marginWidth = 10;
 		section.marginHeight = 5;
 		toolkit.createCompositeSeparator(section);
@@ -456,7 +460,16 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 
 		@Override
 		public void dispose() {
-			// TODO Auto-generated method stub
+
+			 if(metaDataDesignatesObs !=null)
+			 metaDataDesignatesObs.dispose();
+			 
+			 if(treeObs != null)
+			 treeObs.dispose();
+			 
+			 masterDesignate.dispose();
+		     masterOCD.dispose();
+				
 
 		}
 
@@ -520,7 +533,7 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 						styledString = new StyledString(getName(designate,getMetaData()));
 					    decoration = " ("
 							+ Utils.getTemplateChildren(designate).size()
-							+ " components)";
+							+ " services)";
 						
 					} catch (ConfigurationException e) {
 						styledString = new StyledString("Template with a ConfigurationException:");
