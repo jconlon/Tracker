@@ -1706,7 +1706,25 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	public EAttribute getPremises_Name() {
-		return (EAttribute)premisesEClass.getEStructuralFeatures().get(6);
+		return (EAttribute)premisesEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPremises_Description() {
+		return (EAttribute)premisesEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPremises_PhoneNumber() {
+		return (EAttribute)premisesEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -1715,7 +1733,16 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	public EReference getPremises_Policy() {
-		return (EReference)premisesEClass.getEStructuralFeatures().get(7);
+		return (EReference)premisesEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPremises_Administrator() {
+		return (EAttribute)premisesEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -2226,8 +2253,11 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEReference(premisesEClass, PREMISES__UN_APPLIED_TAGS);
 		createEReference(premisesEClass, PREMISES__LOCATIONS);
 		createEAttribute(premisesEClass, PREMISES__URI);
-		createEAttribute(premisesEClass, PREMISES__NAME);
 		createEReference(premisesEClass, PREMISES__POLICY);
+		createEAttribute(premisesEClass, PREMISES__ADMINISTRATOR);
+		createEAttribute(premisesEClass, PREMISES__NAME);
+		createEAttribute(premisesEClass, PREMISES__DESCRIPTION);
+		createEAttribute(premisesEClass, PREMISES__PHONE_NUMBER);
 
 		bovineBeefEClass = createEClass(BOVINE_BEEF);
 		createEAttribute(bovineBeefEClass, BOVINE_BEEF__BEEF_BREED);
@@ -2553,8 +2583,11 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEReference(getPremises_UnAppliedTags(), this.getTag(), null, "unAppliedTags", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPremises_Locations(), this.getLocation(), null, "locations", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPremises_Uri(), this.getURI(), "uri", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPremises_Name(), ecorePackage.getEString(), "name", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPremises_Policy(), this.getPolicy(), null, "policy", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPremises_Administrator(), ecorePackage.getEString(), "administrator", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPremises_Name(), ecorePackage.getEString(), "name", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPremises_Description(), ecorePackage.getEString(), "description", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPremises_PhoneNumber(), this.getUSPhoneNumber(), "phoneNumber", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(premisesEClass, this.getEvent(), "eventHistory", 0, -1, IS_UNIQUE, IS_ORDERED);
 

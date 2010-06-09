@@ -23,8 +23,11 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.Premises#getUnAppliedTags <em>Un Applied Tags</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getLocations <em>Locations</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getUri <em>Uri</em>}</li>
- *   <li>{@link com.verticon.tracker.Premises#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getPolicy <em>Policy</em>}</li>
+ *   <li>{@link com.verticon.tracker.Premises#getAdministrator <em>Administrator</em>}</li>
+ *   <li>{@link com.verticon.tracker.Premises#getName <em>Name</em>}</li>
+ *   <li>{@link com.verticon.tracker.Premises#getDescription <em>Description</em>}</li>
+ *   <li>{@link com.verticon.tracker.Premises#getPhoneNumber <em>Phone Number</em>}</li>
  * </ul>
  * </p>
  *
@@ -194,6 +197,58 @@ public interface Premises extends EObject {
 	void setName(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Description</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Description</em>' attribute.
+	 * @see #setDescription(String)
+	 * @see com.verticon.tracker.TrackerPackage#getPremises_Description()
+	 * @model
+	 * @generated
+	 */
+	String getDescription();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.Premises#getDescription <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Description</em>' attribute.
+	 * @see #getDescription()
+	 * @generated
+	 */
+	void setDescription(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Phone Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Phone Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Phone Number</em>' attribute.
+	 * @see #setPhoneNumber(String)
+	 * @see com.verticon.tracker.TrackerPackage#getPremises_PhoneNumber()
+	 * @model dataType="com.verticon.tracker.USPhoneNumber"
+	 * @generated
+	 */
+	String getPhoneNumber();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.Premises#getPhoneNumber <em>Phone Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Phone Number</em>' attribute.
+	 * @see #getPhoneNumber()
+	 * @generated
+	 */
+	void setPhoneNumber(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Policy</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -218,6 +273,32 @@ public interface Premises extends EObject {
 	 * @generated
 	 */
 	void setPolicy(Policy value);
+
+	/**
+	 * Returns the value of the '<em><b>Administrator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Administrator</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Administrator</em>' attribute.
+	 * @see #setAdministrator(String)
+	 * @see com.verticon.tracker.TrackerPackage#getPremises_Administrator()
+	 * @model
+	 * @generated
+	 */
+	String getAdministrator();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.Premises#getAdministrator <em>Administrator</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Administrator</em>' attribute.
+	 * @see #getAdministrator()
+	 * @generated
+	 */
+	void setAdministrator(String value);
 
 	/**
 	 * <!-- begin-user-doc -->

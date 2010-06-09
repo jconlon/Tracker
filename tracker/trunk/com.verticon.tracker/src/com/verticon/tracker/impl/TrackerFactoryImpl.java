@@ -6,20 +6,20 @@
  */
 package com.verticon.tracker.impl;
 
-import com.verticon.tracker.*;
 import static com.verticon.tracker.TrackerPlugin.bundleMarker;
 
 import java.net.URI;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -1238,10 +1238,14 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Validation code added.
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String createUSPhoneNumberFromString(EDataType eDataType, String initialValue) {
+		if(!isPhoneNumberValid(initialValue)){
+			throw new IllegalArgumentException(initialValue+" is not a legal US Phone Number");
+		}
 		return (String)super.createFromString(eDataType, initialValue);
 	}
 
@@ -1298,5 +1302,37 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public static TrackerPackage getPackage() {
 		return TrackerPackage.eINSTANCE;
 	}
+	
+	/** isPhoneNumberValid: Validate phone number using Java reg ex.
+	 * This method checks if the input string is a valid phone number.
+	 * @param email String. Phone number to validate
+	 * @return boolean: true if phone number is valid, false otherwise.
+	 */
+	public static boolean isPhoneNumberValid(String phoneNumber){
+		boolean isValid = false;
+		/* Phone Number formats: (nnn)nnn-nnnn; nnnnnnnnnn; nnn-nnn-nnnn
+		^\\(? : May start with an option "(" .
+		(\\d{3}): Followed by 3 digits.
+		\\)? : May have an optional ")"
+		[- ]? : May have an optional "-" after the first 3 digits or after optional ) character.
+		(\\d{3}) : Followed by 3 digits.
+		 [- ]? : May have another optional "-" after numeric digits.
+		 (\\d{4})$ : ends with four digits.
+
+	         Examples: Matches following phone numbers:
+	         (123)456-7890, 123-456-7890, 1234567890, (123)-456-7890
+
+		 */
+		//Initialize reg ex for phone number. 
+		String expression = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$";
+		CharSequence inputStr = phoneNumber;
+		Pattern pattern = Pattern.compile(expression);
+		Matcher matcher = pattern.matcher(inputStr);
+		if(matcher.matches()){
+			isValid = true;
+		}
+		return isValid;
+	}
+
 
 } //TrackerFactoryImpl

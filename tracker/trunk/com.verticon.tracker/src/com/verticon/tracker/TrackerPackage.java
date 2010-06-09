@@ -790,22 +790,49 @@ public interface TrackerPackage extends EPackage {
 	int PREMISES__URI = 5;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PREMISES__NAME = 6;
-
-	/**
 	 * The feature id for the '<em><b>Policy</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREMISES__POLICY = 7;
+	int PREMISES__POLICY = 6;
+
+	/**
+	 * The feature id for the '<em><b>Administrator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREMISES__ADMINISTRATOR = 7;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREMISES__NAME = 8;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREMISES__DESCRIPTION = 9;
+
+	/**
+	 * The feature id for the '<em><b>Phone Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREMISES__PHONE_NUMBER = 10;
 
 	/**
 	 * The number of structural features of the '<em>Premises</em>' class.
@@ -814,7 +841,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PREMISES_FEATURE_COUNT = 8;
+	int PREMISES_FEATURE_COUNT = 11;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.BovineBeefImpl <em>Bovine Beef</em>}' class.
@@ -6799,6 +6826,28 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getPremises_Name();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Premises#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see com.verticon.tracker.Premises#getDescription()
+	 * @see #getPremises()
+	 * @generated
+	 */
+	EAttribute getPremises_Description();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Premises#getPhoneNumber <em>Phone Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Phone Number</em>'.
+	 * @see com.verticon.tracker.Premises#getPhoneNumber()
+	 * @see #getPremises()
+	 * @generated
+	 */
+	EAttribute getPremises_PhoneNumber();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link com.verticon.tracker.Premises#getPolicy <em>Policy</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6808,6 +6857,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPremises_Policy();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Premises#getAdministrator <em>Administrator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Administrator</em>'.
+	 * @see com.verticon.tracker.Premises#getAdministrator()
+	 * @see #getPremises()
+	 * @generated
+	 */
+	EAttribute getPremises_Administrator();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.BovineBeef <em>Bovine Beef</em>}'.
@@ -8327,12 +8387,36 @@ public interface TrackerPackage extends EPackage {
 		EAttribute PREMISES__NAME = eINSTANCE.getPremises_Name();
 
 		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PREMISES__DESCRIPTION = eINSTANCE.getPremises_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Phone Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PREMISES__PHONE_NUMBER = eINSTANCE.getPremises_PhoneNumber();
+
+		/**
 		 * The meta object literal for the '<em><b>Policy</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference PREMISES__POLICY = eINSTANCE.getPremises_Policy();
+
+		/**
+		 * The meta object literal for the '<em><b>Administrator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PREMISES__ADMINISTRATOR = eINSTANCE.getPremises_Administrator();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.BovineBeefImpl <em>Bovine Beef</em>}' class.
