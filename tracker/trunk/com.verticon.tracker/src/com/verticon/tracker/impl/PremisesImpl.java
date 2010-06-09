@@ -44,8 +44,11 @@ import com.verticon.tracker.util.EventHistoryAdapterFactory;
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getUnAppliedTags <em>Un Applied Tags</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getLocations <em>Locations</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getUri <em>Uri</em>}</li>
- *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getPolicy <em>Policy</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getAdministrator <em>Administrator</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getName <em>Name</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getPhoneNumber <em>Phone Number</em>}</li>
  * </ul>
  * </p>
  *
@@ -162,6 +165,36 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	protected String uri = URI_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getPolicy() <em>Policy</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPolicy()
+	 * @generated
+	 * @ordered
+	 */
+	protected Policy policy;
+
+	/**
+	 * The default value of the '{@link #getAdministrator() <em>Administrator</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAdministrator()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ADMINISTRATOR_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAdministrator() <em>Administrator</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAdministrator()
+	 * @generated
+	 * @ordered
+	 */
+	protected String administrator = ADMINISTRATOR_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -182,14 +215,44 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getPolicy() <em>Policy</em>}' containment reference.
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPolicy()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected Policy policy;
+	protected static final String DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPhoneNumber() <em>Phone Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPhoneNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PHONE_NUMBER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPhoneNumber() <em>Phone Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPhoneNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String phoneNumber = PHONE_NUMBER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -335,6 +398,48 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__DESCRIPTION, oldDescription, description));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPhoneNumber(String newPhoneNumber) {
+		String oldPhoneNumber = phoneNumber;
+		phoneNumber = newPhoneNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__PHONE_NUMBER, oldPhoneNumber, phoneNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Policy getPolicy() {
 		return policy;
 	}
@@ -371,6 +476,27 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__POLICY, newPolicy, newPolicy));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getAdministrator() {
+		return administrator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAdministrator(String newAdministrator) {
+		String oldAdministrator = administrator;
+		administrator = newAdministrator;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__ADMINISTRATOR, oldAdministrator, administrator));
 	}
 
 	/**
@@ -536,10 +662,16 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return getLocations();
 			case TrackerPackage.PREMISES__URI:
 				return getUri();
-			case TrackerPackage.PREMISES__NAME:
-				return getName();
 			case TrackerPackage.PREMISES__POLICY:
 				return getPolicy();
+			case TrackerPackage.PREMISES__ADMINISTRATOR:
+				return getAdministrator();
+			case TrackerPackage.PREMISES__NAME:
+				return getName();
+			case TrackerPackage.PREMISES__DESCRIPTION:
+				return getDescription();
+			case TrackerPackage.PREMISES__PHONE_NUMBER:
+				return getPhoneNumber();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -574,11 +706,20 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 			case TrackerPackage.PREMISES__URI:
 				setUri((String)newValue);
 				return;
+			case TrackerPackage.PREMISES__POLICY:
+				setPolicy((Policy)newValue);
+				return;
+			case TrackerPackage.PREMISES__ADMINISTRATOR:
+				setAdministrator((String)newValue);
+				return;
 			case TrackerPackage.PREMISES__NAME:
 				setName((String)newValue);
 				return;
-			case TrackerPackage.PREMISES__POLICY:
-				setPolicy((Policy)newValue);
+			case TrackerPackage.PREMISES__DESCRIPTION:
+				setDescription((String)newValue);
+				return;
+			case TrackerPackage.PREMISES__PHONE_NUMBER:
+				setPhoneNumber((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -610,11 +751,20 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 			case TrackerPackage.PREMISES__URI:
 				setUri(URI_EDEFAULT);
 				return;
+			case TrackerPackage.PREMISES__POLICY:
+				setPolicy((Policy)null);
+				return;
+			case TrackerPackage.PREMISES__ADMINISTRATOR:
+				setAdministrator(ADMINISTRATOR_EDEFAULT);
+				return;
 			case TrackerPackage.PREMISES__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case TrackerPackage.PREMISES__POLICY:
-				setPolicy((Policy)null);
+			case TrackerPackage.PREMISES__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
+				return;
+			case TrackerPackage.PREMISES__PHONE_NUMBER:
+				setPhoneNumber(PHONE_NUMBER_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -640,10 +790,16 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return locations != null && !locations.isEmpty();
 			case TrackerPackage.PREMISES__URI:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
-			case TrackerPackage.PREMISES__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TrackerPackage.PREMISES__POLICY:
 				return policy != null;
+			case TrackerPackage.PREMISES__ADMINISTRATOR:
+				return ADMINISTRATOR_EDEFAULT == null ? administrator != null : !ADMINISTRATOR_EDEFAULT.equals(administrator);
+			case TrackerPackage.PREMISES__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case TrackerPackage.PREMISES__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case TrackerPackage.PREMISES__PHONE_NUMBER:
+				return PHONE_NUMBER_EDEFAULT == null ? phoneNumber != null : !PHONE_NUMBER_EDEFAULT.equals(phoneNumber);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -664,8 +820,14 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 		result.append(emailContact);
 		result.append(", uri: ");
 		result.append(uri);
+		result.append(", administrator: ");
+		result.append(administrator);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", description: ");
+		result.append(description);
+		result.append(", phoneNumber: ");
+		result.append(phoneNumber);
 		result.append(')');
 		return result.toString();
 	}

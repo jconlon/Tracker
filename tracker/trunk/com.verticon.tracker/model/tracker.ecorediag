@@ -270,6 +270,10 @@
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Premises/emailContact"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PCRe4VmCEd2tRZ2K3aMUww"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_zQYZEXQNEd-3i6V7pV4XUw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Premises/administrator"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_zQYZEnQNEd-3i6V7pV4XUw"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_PCSF8FmCEd2tRZ2K3aMUww" type="2001">
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Premises/uri"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PCSF8VmCEd2tRZ2K3aMUww"/>
@@ -277,6 +281,14 @@
       <children xmi:type="notation:Node" xmi:id="_PCSF8lmCEd2tRZ2K3aMUww" type="2001">
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Premises/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PCStAFmCEd2tRZ2K3aMUww"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_D4KqsHQOEd-3i6V7pV4XUw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Premises/description"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_D4KqsXQOEd-3i6V7pV4XUw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_jOyIQHQOEd-3i6V7pV4XUw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Premises/phoneNumber"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_jOyIQXQOEd-3i6V7pV4XUw"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PCIU8lmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PCIU81mCEd2tRZ2K3aMUww"/>

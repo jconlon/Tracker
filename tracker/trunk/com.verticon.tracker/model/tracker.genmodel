@@ -410,6 +410,17 @@
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/LostTag"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/ReplacedTag"/>
       <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/Imported"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/MedicalCondition"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/MedicalTreatment"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/BirthDefect"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/Mastitis"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/HerdTest"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/Birthing"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/MilkTest"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/USOvineGrading"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/Calving"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/USBeefGrading"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/USSwineGrading"/>
     </genEnums>
     <genDataTypes ecoreDataType="tracker.ecore#//PremisesIdNumber"/>
     <genDataTypes ecoreDataType="tracker.ecore#//Email"/>
@@ -526,19 +537,32 @@
           propertyDescription="" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/id"/>
       <genFeatures property="None" createChild="false" propertyDescription="" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/date"/>
       <genFeatures property="None" createChild="false" propertyDescription="" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/dateKey"/>
+      <genOperations ecoreOperation="tracker.ecore#//Event/dateEvent">
+        <genParameters ecoreParameter="tracker.ecore#//Event/dateEvent/type"/>
+        <genParameters ecoreParameter="tracker.ecore#//Event/dateEvent/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//Event/dateEvents"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//TagAllocated"/>
     <genClasses ecoreClass="tracker.ecore#//Premises">
-      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/premisesId"/>
-      <genFeatures createChild="false" propertyCategory="Contacts" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/emailContact"/>
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="USDA assigned Premises Identification Number (USDA PIN)"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/premisesId"/>
+      <genFeatures createChild="false" propertyCategory="Contacts" propertyDescription=""
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/emailContact"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/animals"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/unAppliedTags"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/locations"/>
-      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/uri">
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Premises identifier as a Universal Resource Identifier (URI)"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/uri">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
-      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/policy"/>
+      <genFeatures createChild="false" propertyCategory="Contacts" propertyDescription=""
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/administrator"/>
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/name"/>
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription=""
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/description"/>
+      <genFeatures createChild="false" propertyCategory="Contacts" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/phoneNumber"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/eventHistory"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/findAnimal">
         <genParameters ecoreParameter="tracker.ecore#//Premises/findAnimal/id"/>
@@ -732,6 +756,7 @@
       <genFeatures property="None" children="true" createChild="true" propertyCategory="Inclusion Policy"
           propertyDescription="Generic events associated with animal species that are included in the premises."
           ecoreFeature="ecore:EReference tracker.ecore#//Policy/includedGenericEvents"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Policy/excludeUnspecifiedEvents"/>
       <genOperations ecoreOperation="tracker.ecore#//Policy/canContain">
         <genParameters ecoreParameter="tracker.ecore#//Policy/canContain/eventType"/>
         <genParameters ecoreParameter="tracker.ecore#//Policy/canContain/ocdId"/>
