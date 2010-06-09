@@ -1243,7 +1243,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 * @generated NOT
 	 */
 	public String createUSPhoneNumberFromString(EDataType eDataType, String initialValue) {
-		if(!isPhoneNumberValid(initialValue)){
+		if(initialValue!=null && initialValue.trim().length()>0 && !isPhoneNumberValid(initialValue)){
 			throw new IllegalArgumentException(initialValue+" is not a legal US Phone Number");
 		}
 		return (String)super.createFromString(eDataType, initialValue);
@@ -1305,7 +1305,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	
 	/** isPhoneNumberValid: Validate phone number using Java reg ex.
 	 * This method checks if the input string is a valid phone number.
-	 * @param email String. Phone number to validate
+	 * @param phoneNumber String. Phone number to validate
 	 * @return boolean: true if phone number is valid, false otherwise.
 	 */
 	public static boolean isPhoneNumberValid(String phoneNumber){
