@@ -369,8 +369,6 @@ public class PremisesFormPage extends FormPage {
 				}
 			}
 
-		} else {
-			form.setMessage(null, IMessageProvider.NONE);
-		}
+		} 
 	}
 }
