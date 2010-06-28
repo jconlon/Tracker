@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.tracker.editor"
-      label="Tracker Premises Editor"
+      label="%featureName"
       version="0.4.1.qualifier"
-      provider-name="Verticon, Inc."
+      provider-name="%providerName"
       plugin="com.verticon.tracker.editor">
 
    <description>
-      Tracker Premises Editor is the primary editing and data management tool feature of the Tracker Livestock Business Intelligence Toolkit.  The Premises Editor Feature models Animal Event Histories for Producer and/or Non Producer Premises.  
-Premises information is displayed, manipulated, and managed with document Editors, Wizards, and various data importing and exporting utilities.
+      %description
    </description>
 
    <copyright>
-      Tracker Copyright (C) 2010
-Verticon, Inc. All Rights Reserved.
+      %copyright
    </copyright>
 
    <license url="http://www.gnu.org/licenses/gpl.html">
@@ -390,7 +388,7 @@ END OF TERMS AND CONDITIONS
    </license>
 
    <url>
-      <discovery label="Tracker Release Update Site" url="http://tracker.verticon.com/Tracker/p2/product"/>
+      <discovery label="*TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
 
    <requires>
