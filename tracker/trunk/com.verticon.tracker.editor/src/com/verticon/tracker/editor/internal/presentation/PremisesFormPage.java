@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2008 IBM Corporation and others.
+ * Copyright (c) 2010 Verticon, Inc. and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     IBM Corporation - initial API and implementation
+ *     Verticon, Inc. - initial API and implementation
  *******************************************************************************/
 package com.verticon.tracker.editor.internal.presentation;
 
@@ -53,13 +53,11 @@ import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.presentation.IPremisesProvider;
 
 /**
- * @author dejan
+ * @author jconlon
  * 
- *         To change the template for this generated type comment go to Window -
- *         Preferences - Java - Code Generation - Code and Comments
  */
 @SuppressWarnings("restriction")
-public class PremisesFormPage extends FormPage {
+public class PremisesFormPage extends FormPage implements IValueChangeListener{
 	private static final String FORM_TITLE = "Premises";
 	private ManagedForm managedForm;
 	private final IPremisesProvider premisesProvider;
@@ -68,6 +66,7 @@ public class PremisesFormPage extends FormPage {
 
 	private ObservablesManager defaultMgr = new ObservablesManager();
 	private DataBindingContext ctx;
+	private AggregateValidationStatus aggregateStatus;
 
 	public PremisesFormPage(IPremisesProvider premisesProvider) {
 		super("premises", "Premises");
@@ -126,7 +125,7 @@ public class PremisesFormPage extends FormPage {
 
 		ctx = new EMFDataBindingContext();
 		IMessageManager immng = managedForm.getMessageManager();
-		addStatusSupport(defaultMgr, ctx, form, managedForm.getMessageManager());
+		addStatusSupport(defaultMgr, ctx);
 		createIdSection(form, prop, toolkit, immng);
 		createContactsSection(form, prop, toolkit, immng);
 	}
@@ -284,6 +283,7 @@ public class PremisesFormPage extends FormPage {
 
 	@Override
 	public void dispose() {
+		aggregateStatus.removeValueChangeListener(this);
 		componentImage.dispose();
 		if (defaultMgr != null) {
 			defaultMgr.dispose();
@@ -324,28 +324,22 @@ public class PremisesFormPage extends FormPage {
 	}
 
 	private void addStatusSupport(ObservablesManager mgr,
-			final DataBindingContext ctx, final ScrolledForm form,
-			final IMessageManager mmng) {
+			final DataBindingContext ctx) {
 
-		AggregateValidationStatus aggregateStatus = new AggregateValidationStatus(
+		aggregateStatus = new AggregateValidationStatus(
 				ctx.getValidationStatusProviders(),
 				AggregateValidationStatus.MAX_SEVERITY);
 
-		aggregateStatus.addValueChangeListener(new IValueChangeListener() {
-			public void handleValueChange(ValueChangeEvent event) {
-				handleStateChange((IStatus) event.diff.getNewValue(), ctx,
-						form, mmng);
-			}
-		});
+		aggregateStatus.addValueChangeListener(this);
 	}
-
-	private void handleStateChange(IStatus currentStatus,
-			DataBindingContext ctx, ScrolledForm form, IMessageManager mmng) {
-		mmng.removeAllMessages();
-		if (form.isDisposed()) {
+	
+	@Override
+	public void handleValueChange(ValueChangeEvent event) {
+		IStatus currentStatus =(IStatus) event.diff.getNewValue();
+		if (managedForm.getForm().isDisposed()) {
 			return;
 		}
-
+		managedForm.getMessageManager().removeAllMessages();
 		if (currentStatus != null && currentStatus.getSeverity() != IStatus.OK) {
 			for (Iterator<?> it = ctx.getValidationStatusProviders().iterator(); it
 					.hasNext();) {
@@ -357,18 +351,20 @@ public class PremisesFormPage extends FormPage {
 						.getTargets().get(0);
 				Control control = (Control) dec.getWidget();
 				if (!status.isOK()) {
-					mmng.addMessage("validation", // key
+					managedForm.getMessageManager().addMessage("validation", // key
 							status.getMessage(), // message
 							null,// data
 							IMessageProvider.ERROR, // int
 							control);// Control
 
 				} else {
-					mmng.removeMessage("validation", control);
+					managedForm.getMessageManager().removeMessage("validation", control);
 
 				}
 			}
 
 		} 
 	}
+
+	
 }
