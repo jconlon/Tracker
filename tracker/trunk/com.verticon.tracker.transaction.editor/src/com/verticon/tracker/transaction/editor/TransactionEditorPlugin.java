@@ -1,9 +1,13 @@
-/**
- * <copyright>
- * </copyright>
+/*******************************************************************************
+ * Copyright (c) 2010 Verticon, Inc. and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- * $Id: EXTLibraryEditorPlugin.java,v 1.1 2006/01/30 16:30:09 cdamus Exp $
- */
+ * Contributors:
+ *    Verticon, Inc. - initial API and implementation
+ *******************************************************************************/
 package com.verticon.tracker.transaction.editor;
 
 import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMIN_TOPIC_EVENT;

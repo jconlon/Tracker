@@ -1,9 +1,13 @@
-/**
- * <copyright>
- * </copyright>
+/*******************************************************************************
+ * Copyright (c) 2010 Verticon, Inc. and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- * $Id: EXTLibraryActionBarContributor.java,v 1.2 2006/02/22 15:17:44 cmcgee Exp $
- */
+ * Contributors:
+ *    Verticon, Inc. - initial API and implementation
+ *******************************************************************************/
 package com.verticon.tracker.transaction.editor.presentation;
 
 import java.util.ArrayList;
