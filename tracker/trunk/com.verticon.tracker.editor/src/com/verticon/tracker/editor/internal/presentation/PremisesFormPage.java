@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     Verticon, Inc. - initial API and implementation
+ *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
 package com.verticon.tracker.editor.internal.presentation;
 
