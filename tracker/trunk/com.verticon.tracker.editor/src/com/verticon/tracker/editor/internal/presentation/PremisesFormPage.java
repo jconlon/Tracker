@@ -336,7 +336,7 @@ public class PremisesFormPage extends FormPage implements IValueChangeListener{
 	@Override
 	public void handleValueChange(ValueChangeEvent event) {
 		IStatus currentStatus =(IStatus) event.diff.getNewValue();
-		if (managedForm.getForm().isDisposed()) {
+		if (managedForm.getForm().isDisposed() ) {
 			return;
 		}
 		managedForm.getMessageManager().removeAllMessages();
@@ -350,6 +350,9 @@ public class PremisesFormPage extends FormPage implements IValueChangeListener{
 				SWTObservableValueDecorator dec = (SWTObservableValueDecorator) validationStatusProvider
 						.getTargets().get(0);
 				Control control = (Control) dec.getWidget();
+				if(control.isDisposed()){
+					continue;
+				}
 				if (!status.isOK()) {
 					managedForm.getMessageManager().addMessage("validation", // key
 							status.getMessage(), // message
