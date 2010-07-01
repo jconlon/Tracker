@@ -11,7 +11,7 @@ instructions.configure = \
     addRepository(location:http${#58}//www.rxtx.org/eclipse,type:1,name:RXTX Deprecated,enabled:false);\
     addRepository(location:http${#58}//download.eclipse.org/datatools/updates,type:0,name:Eclipse Datatools,enabled:true);\
     addRepository(location:http${#58}//download.eclipse.org/datatools/updates,type:1,name:Eclipse Datatools,enabled:true);\
-    addRepository(location:http${#58}//download.eclipse.org/releases/galileo,type:0,name:Eclipse Galileo Release,enabled:true);\
-    addRepository(location:http${#58}//download.eclipse.org/releases/galileo,type:1,name:Eclipse Galileo Release,enabled:true);
+    addRepository(location:http${#58}//download.eclipse.org/releases/helios,type:0,name:Eclipse Helios Release,enabled:true);\
+    addRepository(location:http${#58}//download.eclipse.org/releases/helios,type:1,name:Eclipse Helios Release,enabled:true);
 instructions.configure.import=\
 	org.eclipse.equinox.p2.touchpoint.eclipse.addRepository;
