@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tracker Desktop Toolkit
 Bundle-SymbolicName: com.verticon.tracker.product.desktop;singleton:=true
-Bundle-Version: 0.3.3
+Bundle-Version: 0.4.0.qualifier
 Bundle-Vendor: Verticon, Inc
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.ui.intro;bundle-version="3.2.201",
@@ -11,6 +11,5 @@ Require-Bundle: org.eclipse.ui.intro;bundle-version="3.2.201",
  org.eclipse.ui.intro.universal;bundle-version="3.2.200",
  org.eclipse.ui.cheatsheets,
  org.eclipse.equinox.p2.ui
-Import-Package: org.eclipse.equinox.internal.provisional.p2.ui.policy
 Service-Component: OSGI-INF/p2policy.xml
 

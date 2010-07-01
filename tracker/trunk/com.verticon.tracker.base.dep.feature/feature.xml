@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.tracker.base.dep"
-      label="Tracker Base Dependencies Features"
-      version="0.3.1.qualifier"
-      provider-name="Verticon, Inc.">
+      label="%featureName"
+      version="0.4.0.qualifier"
+      provider-name="%providerName">
 
    <description>
-      Tracker Base Dependencies Features include all the prerequisite Eclipse components needed by the Tracker Livestock Business Intelligence Toolkit.
+      %description
    </description>
 
    <copyright>
-      See copyright notices associated with individual features.
+      %copyright
    </copyright>
 
-   <license>
-      See license agreements associated with individual features.
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %license
    </license>
 
    <url>

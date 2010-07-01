@@ -29,7 +29,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
    </license>
 
    <url>
-      <discovery label="Tracker Release Update Site" url="http://tracker.verticon.com/Tracker/p2/product"/>
+      <discovery label="Tracker Release Update Site" url="http://tracker.verticon.com/Tracker/updates"/>
    </url>
 
    <requires>
