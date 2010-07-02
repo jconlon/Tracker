@@ -3,8 +3,8 @@
 	<loadproperties srcFile="buildProduct.properties"/>
 
 	<property name="repo" location="${basedir}/repository"/>
-	<property name="base" location="${repo}/product-desktop.beta.01"/>
-	<property name="child" location="${repo}/features-desktop.beta.01"/>
+	<property name="base" location="${repo}/product-desktop.beta.04"/>
+	<property name="child" location="${repo}/features-desktop.beta.04"/>
 	<property name="categories" location="${repo}/categories"/>
 	
 	<target name="main">
