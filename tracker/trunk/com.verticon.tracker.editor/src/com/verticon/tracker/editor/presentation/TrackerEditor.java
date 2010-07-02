@@ -1086,7 +1086,7 @@ public class TrackerEditor
 		ep.createPartControl(getContainer());
 
 		try {
-			int index = addPage(ep, null);
+			int index = addPage(ep, getEditorInput());
 			setPageText(index, label);
 		} catch (PartInitException e) {
 			logger.error(bundleMarker, "Could not create the forms page.",e);
