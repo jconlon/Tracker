@@ -152,16 +152,7 @@
             This cheat sheet will show you how to add Tracker features to the Tracker Desktop Toolkit.
          </description>
       </cheatsheet>
-      <cheatsheet
-            category="com.verticon.tracker.category.cheatSheets"
-            composite="false"
-            contentFile="$nl$/cheetsheets/UpdateBirtCheatSheet.xml"
-            id="com.verticon.tracker.product.desktop.cheatsheet1277514429"
-            name="Adding BIRT Features to the Tracker Desktop Toolkit">
-        <description>
-            This cheat sheet will show you how to add BIRT features to the Tracker Desktop Toolkit.
-         </description>
-      </cheatsheet>
+      
    </extension>
  
 

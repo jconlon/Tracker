@@ -12,29 +12,21 @@
          href="/org.eclipse.platform.doc.user/tasks/tasks-121.htm"
          title="Open Software Updates">
       <description>
-         To browse for Tracker Feature Plugins, open the <b>Install New Software </b> User Inteface.<br/>
+         To add Tracker Feature Plugins, open the <b>Install New Software </b> User Inteface.<br/>
          From the workbench menu:<br/><br/>
-         Help > Install New Software ...  
+         Help &gt; Install New Software ...  
       </description>
       <command
             required="false"
-            serialization="org.eclipse.equinox.p2.ui.sdk.update"/>
+            serialization="org.eclipse.equinox.p2.ui.sdk.install"/>
      
    </item>
    <item
-         title="Show Available Software" 
+         title="Choose a Software Site" 
          href="/org.eclipse.platform.doc.user/tasks/tasks-121.htm"
          dialog="true">
       <description>
-         Select the <b>Available Software</b> Tab at the top of the User Interface.
-      </description>
-   </item>
-   <item
-         title="Locate the Tracker Feature Update" 
-         href="/org.eclipse.platform.doc.user/tasks/tasks-121.htm"
-         dialog="true">
-      <description>
-         Locate the <b>Tracker Feature Update</b> entry.
+         In the <b>Work with</b> pull down. Select the <b>Tracker Release</b> item.
       </description>
    </item>
    <item
