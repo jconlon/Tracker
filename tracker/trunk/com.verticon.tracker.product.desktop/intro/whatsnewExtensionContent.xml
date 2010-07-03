@@ -8,9 +8,9 @@
   	   <group style-id="content-group" id="content-group">
        		<link style-id="content-link" 
        		label="Tracker" 
-       		url="http://org.eclipse.ui.intro/openBrowser?url=http://public.resources.verticon.com.s3.amazonaws.com/Tracker/issues/query.html" 
+       		url="http://org.eclipse.ui.intro/openBrowser?url=http://tracker-project.verticon.com/verticon_Tracker/report/11" 
        		id="comverticontrackerproductdesktop">
-          	  <text>Find out the significant changes made to Tracker BI Toolkit</text>
+          	  <text>Find out about the major new features in this release of the Tracker BI Toolkit</text>
        		</link>
        </group>
   	</extensionContent>

@@ -57,11 +57,7 @@ The Tracker BI Toolkit is a provisioning enabled Eclipse Rich Client Platform Pr
 &lt;li&gt;To utilize Tracker BI tool solutions, these tool features will have to be provisioned by the user from network based component repositories.&lt;/li&gt;
 &lt;/ul&gt;
 </text>
-<link style-id="content-link" label="Provision Tracker Desktop Toolkit" 
-			url="http://org.eclipse.ui.intro/runAction?pluginId=org.eclipse.platform&amp;class=org.eclipse.platform.internal.LaunchUpdateIntroAction" 
-				id="updatelink">
-          		<text>Provision Tracker Desktop Toolkit with tool features or update it from the Verticon.com and Eclipse.org repositories</text>
-</link>
+
           </group>
           <anchor id="additions"/>
        </page>
