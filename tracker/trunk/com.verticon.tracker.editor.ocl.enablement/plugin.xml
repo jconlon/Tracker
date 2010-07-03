@@ -58,18 +58,27 @@
                        		commandId="com.verticon.tracker.editor.ocl.enablement.commands.oclQuery.command"
 		                       icon="icons/elcl16/oclqryedit_co.gif"
 		                       style="push">
+		                       
+		                     <parameter
+			               		name="com.verticon.tracker.ocl.commands.packageURIs"
+			               		value="http://www.verticon.com/ns/tracker/0.1.0">
+			       		   </parameter>
 				        	<visibleWhen
-                                 checkEnabled="false">
-                              <with
-                                    variable="selection">
-                                 <iterate
-                                       ifEmpty="false"
-                                       operator="or">
-                                    <instanceof
-                                          value="org.eclipse.emf.ecore.EObject">
-                                    </instanceof>
-                                 </iterate>
-                              </with>
+                                 checkEnabled="true">
+                               	<or>
+		          						<with variable="activeEditorId">
+		             						<equals
+		                   						value="com.verticon.tracker.transaction.editor.TrackerEditorID">
+		             						</equals>
+		          						</with>
+		          
+		          						<with
+		                					variable="activeEditorId">
+		             						<equals
+		                   						value="com.verticon.tracker.editor.presentation.TrackerEditorID">
+		             						</equals>
+		          						</with>
+	          					</or> 
                            </visibleWhen>
 		               	</command>
                  </menu>
@@ -107,14 +116,31 @@
 			       <!-- show when the selecting an EObject and either the Premise Editor or 
 			       	the Transaction Premises Editor -->
 			       <visibleWhen
-                           checkEnabled="false">
-               			<with variable="selection">
-		                  <iterate
-                          ifEmpty="false"
-                          operator="or">
-      						 <instanceof value="org.eclipse.emf.ecore.EObject"/>
-    					  </iterate>
-    			     	</with>
+                           checkEnabled="true">
+                           <and>
+               					<with variable="selection">
+		                  			<iterate
+                          				ifEmpty="false"
+                          				operator="or">
+      						 		<instanceof value="org.eclipse.emf.ecore.EObject"/>
+    					  			</iterate>
+    			     			</with>
+    			     	
+    			     			<or>
+		          					<with variable="activeEditorId">
+		             					<equals
+		                   					value="com.verticon.tracker.transaction.editor.TrackerEditorID">
+		             					</equals>
+		          					</with>
+		          
+		          					<with
+		                				variable="activeEditorId">
+		             					<equals
+		                   						value="com.verticon.tracker.editor.presentation.TrackerEditorID">
+		             					</equals>
+		          					</with>
+	          					</or> 
+    			     	  </and>
 	            	</visibleWhen>
                	</command>
       </menuContribution>
