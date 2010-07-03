@@ -263,7 +263,9 @@
                      style="push">
                   <visibleWhen>
                      <and>
-                     <iterate>
+                     <iterate
+                           ifEmpty="false"
+                           operator="or">
                         <instanceof
                               value="org.eclipse.emf.ecore.EObject">
                         </instanceof>
@@ -293,7 +295,9 @@
                   <visibleWhen>
                        <and>
 		               <with variable="activeMenuSelection">
-		                  <iterate>
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
 		                      <adapt type="org.eclipse.core.resources.IResource">
 		          					<test property="org.eclipse.core.resources.name" 
 		               				 value="*.tags"/>
@@ -325,8 +329,10 @@
                       style="push">
                   <visibleWhen>
                        <and>
-		               <with variable="activeMenuSelection">
-		                  <iterate>
+		               <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
 		                      <adapt type="org.eclipse.core.resources.IResource">
 		          					<test property="org.eclipse.core.resources.name" 
 		               				 value="*.txt"/>
@@ -355,8 +361,10 @@
                       style="push">
                   <visibleWhen>
                        <and>
-		               <with variable="activeMenuSelection">
-		                  <iterate>
+		               <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
 		                      <adapt type="org.eclipse.core.resources.IResource">
 		          					<test property="org.eclipse.core.resources.name" 
 		               				 value="*.log"/>
@@ -412,8 +420,10 @@
                      style="push">
                      <visibleWhen>
                        <and>
-		               <with variable="activeMenuSelection">
-		                  <iterate>
+		               <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
 		                      <adapt type="org.eclipse.core.resources.IResource">
 		          					<test property="org.eclipse.core.resources.name" 
 		               				 value="*.tags"/>
@@ -446,8 +456,10 @@
                       style="push">
                	<visibleWhen>
                	    <and>
-               			<with variable="activeMenuSelection">
-		                  <iterate>
+               			<with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
       						 <instanceof value="com.verticon.tracker.Animal"/>
     					  </iterate>
     			     	</with>
@@ -471,8 +483,10 @@
                       style="push">
                	<visibleWhen>
                	    <and>
-               		<with variable="activeMenuSelection">
-		                  <iterate>
+               		<with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
       						 <instanceof value="com.verticon.tracker.Animal"/>
     					  </iterate>
     			     </with>
@@ -491,8 +505,10 @@
                       style="push">
                	<visibleWhen>
                	     <and>
-                         <with variable="activeMenuSelection">
-		                  <iterate>
+                         <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
       						 <instanceof value="com.verticon.tracker.Event"/>
     					  </iterate>
     					 </with>
