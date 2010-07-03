@@ -13,11 +13,13 @@
   	        	  style-id="content-link">
         		<text>New User? Use this cheat sheet to learn how to provision the Tracker BI Toolkit with product features.</text>
       		</link>
+       		
+       		
        		<link style-id="content-link"  
-       			label="Provision Tracker BI Toolkit" 
+       			label="Update Tracker BI Toolkit" 
        		  	url="http://org.eclipse.ui.intro/runAction?pluginId=org.eclipse.platform&amp;class=org.eclipse.platform.internal.LaunchUpdateIntroAction" 
        		    id="updatelink">
-          		<text>Experienced User? Provision Tracker BI Toolkit with new features or update it from the Verticon.com and Eclipse.org repositories</text>
+          		<text>Already provisioned and just need to update? Update Tracker BI Toolkit from the Verticon.com and Eclipse.org repositories</text>
        		</link>
        			
        </group>
