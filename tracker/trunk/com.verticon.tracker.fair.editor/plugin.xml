@@ -149,8 +149,10 @@
 	               	<visibleWhen>
 
 	               	    	 <and>
-			               	    <with variable="activeMenuSelection">
-				                  <iterate>
+			               	    <with variable="selection">
+				                  <iterate
+                            ifEmpty="false"
+                            operator="or">
 		      						 <instanceof value="com.verticon.tracker.Animal"/>
 		    					  </iterate>
 		    			     	</with>
@@ -180,8 +182,10 @@
 	               	<visibleWhen>
 
 	               	    	 <and>
-			               	    <with variable="activeMenuSelection">
-				                  <iterate>
+			               	    <with variable="selection">
+				                  <iterate
+                            ifEmpty="false"
+                            operator="or">
 		      						 <instanceof value="com.verticon.tracker.Event"/>
 		    					  </iterate>
 		    			     	</with>
@@ -210,8 +214,10 @@
                		style="push">
                		<visibleWhen>
                		    <and>
-               			<with variable="activeMenuSelection">
-		                  <iterate>
+               			<with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
       						 <instanceof value="com.verticon.tracker.fair.Person"/>
     					  </iterate>
     			     	</with>
@@ -229,8 +235,10 @@
                		 style="push"
                      tooltip="Copies attributes of this person to a new person.">
                   <visibleWhen>
-                     <with variable="activeMenuSelection">
-		                  <iterate>
+                     <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
       						 <instanceof value="com.verticon.tracker.fair.Person"/>
     					  </iterate>
     			     	</with>

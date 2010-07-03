@@ -66,8 +66,10 @@
                       style="push">
                	<visibleWhen>
                	    <and>
-               			<with variable="activeMenuSelection">
-		                  <iterate>
+               			<with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
       						 <instanceof value="com.verticon.osgi.metatype.Designate"/>
     					  </iterate>
     			     	</with>
