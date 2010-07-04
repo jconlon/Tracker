@@ -32,7 +32,13 @@ version overwrite the preexisting ones.
 6. Change downloads page on website and sync it. - see website
 
 =======================================
-Taging a release
+Tagging a release
 
-HowTo? In SVN Repository View select the tracker/trunk in the context menu 
-refactor>copyTo and a dialog will ask what name to use. Use REL-desktop.beta.0.2
+HowTo? 
+
+1. In SVN Repository View select the tracker/trunk in the context menu 
+refactor>copyTo 
+
+2. Select the tags branch.
+
+3. A dialog will ask what name to use. Use REL-desktop.beta.0.4
