@@ -1,0 +1,153 @@
+<project name="Build specific targets and properties" default="validateJarinRepo1">
+
+
+	<!-- ================================= 
+		          target: validateJarinRepo1              
+		         ================================= -->
+	<target name="validateJarinRepo1" depends="init" 
+		description="Step 1 - Validates the platform jar in the repo.">
+		<antcall target="validateJarInRepo">
+		</antcall>
+	</target>
+
+	<!-- ================================= 
+			          target: validateFolderInTestBuildZip2              
+			 ================================= -->
+	<target name="validateFolderInTestBuildZip2" depends="init" 
+		   description="Step 2 - Validates the Platform folder in the I.TestBuild.">
+		<property name="zipToUnwind" 
+			value="${buildDirectory}/I.Tracker/Tracker-linux.gtk.x86.zip" />
+		<antcall target="validateJarInFolderInZip">
+		</antcall>
+
+	</target>
+
+	<!-- ================================= 
+				     target: validateFolderInTargetPlatform3              
+		 ================================= -->
+		<target name="validateFolderInTargetPlatform3" depends="init" description="Validates the Platform folder in the Target Platform.">
+			
+			<jar destfile="${reJar}" basedir="${targetPlatform}" 
+						includes="**/org.eclipse.platform*" />
+
+					<antcall target="verifyJar">
+						<param name="jarFile" value="${reJar}" />
+					</antcall>
+
+		</target>
+	
+
+	<!-- ================================= 
+				          target: validateFolderInResultZip4             
+				 ================================= -->
+		<target name="validateFolderInResultZip4" depends="init" 
+			description="Validates the Platform folder in the result zip.">
+			<property name="zipToUnwind" 
+				value="${buildDirectory}/result/Tracker-p2-RCP-win32-0.3.1.v2009012261716.zip" />
+			<antcall target="validateJarInFolderInZip">
+			</antcall>
+
+		</target>
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: init                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="init">
+		<property name="buildDirectory" location="${basedir}/buildDirectory" />
+		<property name="temp" location="temp" />
+		<property name="zipcontents" location="${temp}/zipcontents" />
+		<property name="rejarDir" location="${temp}/rejarDir" />
+	    <property name="reJar" value="${rejarDir}/platform.jar" />
+		<property name="targetPlatform" 
+			location="/home/jconlon/eclipse-target-platforms/eclipse-modeling-ganymede-SRI-incubation-02/eclipse/plugins"/>
+
+		
+		<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+			<classpath>
+				<pathelement location="/home/jconlon/downloads/Ant/ant-contrib-0.6.jar" />
+			</classpath>
+		</taskdef>
+		
+		<delete dir= "${temp}" />
+		<mkdir dir="${temp}" />
+		<mkdir dir="${zipcontents}" />
+		<mkdir dir="${rejarDir}" />
+		<echoproperties />
+	</target>
+
+
+
+
+	<!-- - - - - - - - - - - - - - - - - - 
+	          target: validateJarInRepo     
+	          1. pde export builds a bad jar 
+	          	 [echo] verifying /home/jconlon/Desktop/tracker/tracker-0.3.2/repository/plugins/org.eclipse.platform_3.3.101.v200809111700.jar
+     			 [exec] jarsigner: java.lang.SecurityException: SHA1 digest error for plugin_customization.ini   
+     		  2. pdeBuild builds a bad jar     
+     		     [echo] verifying /home/jconlon/eclipse-workspaces/tracker-TRUNK/com.verticon.tracker.builder/buildDirectory/repo/plugins/org.eclipse.platform_3.3.101.v200809111700.jar
+     			 [exec] jarsigner: java.lang.SecurityException: SHA1 digest error for plugin_customization.ini    
+	         - - - - - - - - - - - - - - - - - -->
+	<target name="validateJarInRepo">
+		<!--property name="repoToValidate" location="/home/jconlon/Desktop/tracker/tracker-0.3.2/repository/plugins"/-->
+		<property name="repoToValidate" location="${buildDirectory}/repo/plugins"/>
+		
+
+		<for param="file">
+			<path>
+				<fileset dir="${repoToValidate}">
+					<include name="**/org.eclipse.ui.workbench.compatibility*.jar" />
+					<include name="**/org.eclipse.core.runtime.compatibility*.jar" />
+					
+					<include name="**/org.eclipse.equinox.launcher*.jar" />
+					<include name="**/org.eclipse.equinox.launcher.gtk.linux.*.jar" />
+					<include name="**/org.eclipse.platform*.jar" />
+					<!--
+						<include name="**/org.eclipse.ui.intro.universal*.jar" />
+						<include name="**/org.eclipse.jdt.debug*.jar" />
+						<include name="**/org.eclipse.sdk*.jar" />
+						<include name="**/org.eclipse.pde.build*.jar" />
+						<include name="**/org.junit*.jar" />
+						<include name="**/org.apache.ant*.jar"/>
+					-->
+
+				</fileset>
+			</path>
+			<sequential>
+				<antcall target="verifyJar">
+					<param name="jarFile" value="@{file}" />
+				</antcall>
+			</sequential>
+		</for>
+	</target>
+
+
+	<target name="verifyJar">
+		<echo message="verifying ${jarFile}" />
+		<exec executable="/opt/java/jdk1.6.0_05/bin/jarsigner" failonerror="true">
+			<arg line="-verify -verbose -certs ${jarFile}" />
+		</exec>
+	</target>
+
+
+	<!-- - - - - - - - - - - - - - - - - - 
+		          target: validateJarInFolder                      
+     - - - - - - - - - - - - - - - - - -->
+	<target name="validateJarInFolderInZip">
+
+		<!-- unjar the output -->
+		<unzip src="${zipToUnwind}" 
+			dest="${zipcontents}">
+		</unzip>
+
+		<jar destfile="${reJar}" basedir="${zipcontents}/tracker/plugins" 
+			includes="**/org.eclipse.platform*" />
+
+		<antcall target="verifyJar">
+			<param name="jarFile" value="${reJar}" />
+		</antcall>
+
+
+	</target>
+
+
+</project>

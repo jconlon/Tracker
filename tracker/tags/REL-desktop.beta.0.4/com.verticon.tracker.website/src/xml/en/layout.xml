@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--  
+<!DOCTYPE layout PUBLIC "-//Norman Walsh//DTD Website Layout V2.5.0//EN"
+                 "http://docbook.sourceforge.net/release/website/2.5.0/layout.dtd">
+-->
+  <layout>
+
+<config param="headlink" value="sitemap" altval="Site Map"/>
+<config param="headlink" value="search" altval="Search"/>
+
+<config param="footlink" value="feeds" altval="Content Feeds"/>
+
+<config param="title" value="Tracker"/>
+
+<config param="banner" value="img/logo.png" altval="Tracker"/>
+
+<copyright >
+  <year>2007</year>
+  <year>2008</year>
+  <year>2009</year>
+  <year>2010</year>
+  <holder role="http://www.verticon.com/">Verticon, Inc.</holder>
+</copyright>
+
+<headlink rel="SHORTCUT ICON" href="http://tracker.verticon.com/img/favicon.ico" type="image/x-icon"/>
+<style src="css/tracker.css" type="text/css" />
+
+<toc page="index.xml" filename="index.html">
+  <tocentry page="about/about.xml" dir="about" filename="index.html">
+   		<tocentry page="about/contact.xml" filename="contact.html"/>
+   		<tocentry page="about/aboutWebsite.xml" filename="aboutWebsite.html"/>
+   		<tocentry page="about/license.xml" filename="license.html"/>
+  </tocentry>
+  
+  <tocentry page="downloads/downloads.xml" dir="downloads" filename="index.html"/>
+  
+  <tocentry page="docs/docs.xml" dir="docs" filename="index.html">
+  		<tocentry page="docs/faqs.xml" filename="faqs.html"/>
+  		<tocentry page="docs/goals.xml" filename="goals.html"/>
+  </tocentry>
+  
+  <tocentry page="project/projectPage.xml" dir="project" filename="index.html"/>
+</toc>
+
+<notoc page="sitemap.xml" filename="sitemap.html"/>
+<notoc page="search.xml" dir="search" filename="index.html"/>
+</layout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="Tracker Updates" url="http://tracker.verticon.com/Tracker/p2/features/">
+      This site contains feature and plugin versions for the Tracker releases, published in the form expected by the Eclipse P2 Update Manager.
+   </description>
+   <feature url="features/com.verticon.tracker.logging.logback_0.1.0.200907022005.jar" id="com.verticon.tracker.logging.logback" version="0.1.0.200907022005">
+      <category name="Required Features"/>
+   </feature>
+   <feature url="features/com.verticon.tracker.ocl.query_0.1.8.200907022005.jar" id="com.verticon.tracker.ocl.query" version="0.1.8.200907022005">
+      <category name="Required Features"/>
+   </feature>
+   <feature url="features/com.verticon.tracker.editor_0.3.6.200907022005.jar" id="com.verticon.tracker.editor" version="0.3.6.200907022005">
+      <category name="Premises Editor"/>
+   </feature>
+   <feature url="features/com.verticon.tracker.fair.editor_0.1.9.200907022005.jar" id="com.verticon.tracker.fair.editor" version="0.1.9.200907022005">
+      <category name="Fair Editor"/>
+   </feature>
+   <feature url="features/com.verticon.tracker.fair.poi_0.1.1.200907022005.jar" id="com.verticon.tracker.fair.poi" version="0.1.1.200907022005">
+      <category name="Fair Editor"/>
+   </feature>
+   <feature url="features/com.verticon.tracker.export.wlic_0.2.3.200907022005.jar" id="com.verticon.tracker.export.wlic" version="0.2.3.200907022005">
+      <category name="Optional Features"/>
+   </feature>
+   <feature url="features/com.verticon.tracker.reader_0.2.7.200907022005.jar" id="com.verticon.tracker.reader" version="0.2.7.200907022005">
+      <category name="Optional Features"/>
+   </feature>
+   <feature url="features/org.apache.poi_2.5.1.200907022005.jar" id="org.apache.poi" version="2.5.1.200907022005">
+      <category name="Optional Features"/>
+   </feature>
+   <feature url="features/org.eclipse.datatools.enablement.oda.ecore.feature_1.7.0.v200906050400-3--8s733L385B4I8B.jar" id="org.eclipse.datatools.enablement.oda.ecore.feature" version="1.7.0.v200906050400-3--8s733L385B4I8B">
+      <category name="Optional Features"/>
+   </feature>
+   <category-def name="Required Features" label="Required Tracker Features">
+      <description>
+         Required functionality needed by all Tracker Editors.
+      </description>
+   </category-def>
+   <category-def name="Premises Editor" label="Premises Editor">
+      <description>
+         Editor for creating and managing Livestock Premises Information.
+      </description>
+   </category-def>
+   <category-def name="Fair Editor" label="Fair Editor">
+      <description>
+         Editor for creating and managing people and livestock exhibits at a Fair or Animal Exhibition. Supplements functionality of the Tracker Premises Editor.
+      </description>
+   </category-def>
+   <category-def name="Optional Features" label="Optional Features">
+      <description>
+         Optional features adding functionality to the base Premises Editor.
+      </description>
+   </category-def>
+</site>

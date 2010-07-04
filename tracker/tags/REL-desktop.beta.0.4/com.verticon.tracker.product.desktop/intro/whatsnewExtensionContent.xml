@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<introContent>
+  	<extensionContent id="com.verticon.tracker.product.desktop" 
+  		name="Whats New Tracker" 
+  		alt-style="css/whatsnew.properties" 
+  		style="css/sample.css" 
+  		path="whatsnew/@">
+  	   <group style-id="content-group" id="content-group">
+       		<link style-id="content-link" 
+       		label="Tracker" 
+       		url="http://org.eclipse.ui.intro/openBrowser?url=http://tracker-project.verticon.com/verticon_Tracker/report/11" 
+       		id="comverticontrackerproductdesktop">
+          	  <text>Find out about the major new features in this release of the Tracker BI Toolkit</text>
+       		</link>
+       </group>
+  	</extensionContent>
+</introContent>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/com.verticon.tracker.fair.poi_0.1.1.qualifier.jar" id="com.verticon.tracker.fair.poi" version="0.1.1.qualifier">
+      <category name="com.verticon.tracker.fairEditor"/>
+   </feature>
+   <feature url="features/com.verticon.tracker.birt_0.1.0.qualifier.jar" id="com.verticon.tracker.birt" version="0.1.0.qualifier">
+      <category name="com.verticon.tracker.birt"/>
+   </feature>
+   <feature url="features/com.verticon.tracker.editor_0.3.8.qualifier.jar" id="com.verticon.tracker.editor" version="0.3.8.qualifier">
+      <category name="com.verticon.tracker.premisesEditor"/>
+   </feature>
+   <feature url="features/com.verticon.tracker.fair.editor_0.2.3.qualifier.jar" id="com.verticon.tracker.fair.editor" version="0.2.3.qualifier">
+      <category name="com.verticon.tracker.fairEditor"/>
+   </feature>
+   
+   
+   <feature url="features/com.verticon.tracker.reader_0.2.8.qualifier.jar" id="com.verticon.tracker.reader" version="0.2.8.qualifier">
+      <category name="com.verticon.tracker.optionalFeatures"/>
+   </feature>
+   <feature url="features/com.verticon.tracker.export.wlic_0.2.3.qualifier.jar" id="com.verticon.tracker.export.wlic" version="0.2.3.qualifier">
+      <category name="com.verticon.tracker.optionalFeatures"/>
+   </feature>
+   <feature url="features/org.apache.poi_2.5.1.qualifier.jar" id="org.apache.poi" version="2.5.1.qualifier">
+      <category name="com.verticon.tracker.optionalFeatures"/>
+   </feature>
+   
+   
+   <category-def name="com.verticon.tracker.premisesEditor" label="Premises Editor">
+      <description>
+         Editor for creating and managing Livestock Premises Information.
+      </description>
+   </category-def>
+   <category-def name="com.verticon.tracker.fairEditor" label="Fair Editor">
+      <description>
+         Editor for creating and managing people and livestock exhibits at a Fair or Animal Exhibition. Supplements functionality of the Tracker Premises Editor.
+      </description>
+   </category-def>
+   <category-def name="com.verticon.tracker.optionalFeatures" label="Optional Features">
+      <description>
+         Optional features adding functionality to the base Premises Editor.
+      </description>
+   </category-def>
+   <category-def name="com.verticon.tracker.birt" label="Business Intelligence Reporting Tool (BIRT)">
+      <description>
+         Eclipse Business Intelligence Reporting Tool (BIRT) Designer, Runtime, and Tracker enablement features.
+      </description>
+   </category-def>
+</site>

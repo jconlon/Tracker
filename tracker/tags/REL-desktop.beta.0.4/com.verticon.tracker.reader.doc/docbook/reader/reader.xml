@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" 
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" >
+<chapter id="chReader">
+     <?dbhtml filename="reader/reader.html" ?>
+	<title>Tag ID Reader</title>
+     <section>
+	<?dbhtml filename="overview/readerOverview.html" ?>
+	<title>Tag ID Reader Overview</title>
+	<section>
+		<title>Adding Event Transactions to Documents</title>
+		<para>
+			Tracker's Transaction processing infrastructure supports
+			adding real time
+			<acronym>RFID</acronym>
+			Tag reader events to Tracker Premises Documents. Premises
+			Documents can receive new events concurrently from one or
+			many
+			<acronym>RFID</acronym>
+			Tag readers. Communication connections from
+			<acronym>RFID</acronym>
+			Tag readers are managed by Tracker Event Publishers. Tracker
+			Event Publishers publish messages received from
+			<acronym>RFID</acronym>
+			Tag readers as Event Transactions. These Event Transactions are then processed by
+			Tracker's Transaction processing infrastructure.
+			
+		</para>
+		<para>
+			Similar to Tracker Bulk Event Processing, Tracker Event
+			Publishers use Animal Document Templates to
+			<emphasis>associate</emphasis>
+			event details with specific
+			<acronym>RFID</acronym>
+			Tag reader messages. As
+			<acronym>RFID</acronym>
+			Tag reader messages are received they are published as one
+			or more event transactions and subsequently added to the
+			Animal corresponding to the Tag/@idNumber in the message.
+		</para>
+
+	</section>
+
+	<section>
+		<?dbhtml filename="overview/readerOverview_fileTailing.html" ?>
+		<title>File Tailing Event Publisher</title>
+		<para>
+			Most tag readers transmit the numbers representing the
+			animal id as an
+			<acronym>ASCII</acronym>
+			text string. A typical way to handle these text strings is
+			to appended them as they are received to end of text files.
+			Tracker's File Tailing Event Publisher will periodically
+			read and create Event Transactions from new messages added
+			to the tail end of specified text files.
+			<note>
+				<para>
+					For the beta release only a single File Tailing Event 
+					Publisher is supported at this time.
+				</para>
+			</note>
+		</para>
+	</section>
+	<section>
+		<title>Usage and operations</title>
+		<section>
+			<?dbhtml filename="overview/readerOverview_usageAndOperations.html" ?>
+			<title>Tracker Event Publisher View</title>
+			<para>
+				From the Workbench <code>Window</code> menu
+				<orderedlist numeration="loweralpha">
+					<listitem>
+						<para>
+							Select <code>Show View</code>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Select <code>Other</code>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Select <code>Tracker</code>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Select <code>Event Publishers</code>
+						</para>
+					</listitem>
+				</orderedlist>
+			</para>
+		</section>
+		<section>
+			<?dbhtml filename="overview/readerOverview_configuringFileTailing.html" ?>
+			<title>Configuring File Tailing Event Publisher</title>
+			<para>
+				From the Workbench <code>Window</code> menu: 
+				<orderedlist numeration="loweralpha">
+					<listitem>
+						<para>
+							Select <code>Preferences...</code>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Select <code>Tracker</code>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Select <code>Event Publisher</code>
+						</para>
+					</listitem>
+				</orderedlist>
+				Configuring requires setting the preferences for: 
+				<orderedlist numeration="loweralpha">
+					<listitem>
+						<para>
+						   The <code>Capture File</code> is the name of the 
+						   file to be read
+						   periodically by the File Tailing Publisher. This is the file that the RFID
+						   reader will be appending messages to.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							The <code>Template File</code> that will be associated 
+							with the incoming RFID messages.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							The <code>Capture File Read Interval</code> is the time interval
+							to wait before rereading the file for new messages.
+						</para>
+					</listitem>
+				</orderedlist>
+			</para>
+		</section>
+	</section>
+	</section>
+</chapter>
