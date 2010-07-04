@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="com.verticon.tracker.documentation" componentType="buckminster" version="1.0.0" versionType="OSGi" shortDesc="Builds downloadable documentation for the Tracker website.">
+    <cs:dependencies>
+        <cs:dependency name="com.verticon.tracker.ant.utilities"/>
+        <cs:dependency name="com.verticon.tracker.doc" componentType="osgi.bundle"/>
+        <cs:dependency name="com.verticon.tracker.editor.doc" componentType="osgi.bundle"/>
+        <cs:dependency name="com.verticon.tracker.export.wlic.doc" componentType="osgi.bundle"/>
+        <cs:dependency name="com.verticon.tracker.fair.poi.documenation" componentType="osgi.bundle"/>
+        <cs:dependency name="com.verticon.tracker.ocl.query.doc" componentType="osgi.bundle"/>
+        <cs:dependency name="com.verticon.tracker.product.desktop.doc" componentType="osgi.bundle"/>
+        <cs:dependency name="com.verticon.tracker.reader.doc" componentType="osgi.bundle"/>
+    </cs:dependencies>
+    <cs:artifacts>
+        <cs:public name="eclipse.help.builder" path="build.xml" base="make/"/>
+        <cs:private name="fair-MetaModel.pdf" path="fair-MetaModel.pdf" base="src/"/>
+        <cs:private name="premises-MetaModel.pdf" path="premises-MetaModel.pdf" base="src/"/>
+    </cs:artifacts>
+    <cs:actions>
+        <cs:public name="deploy.documentation.to.local.s3.staging" actor="ant">
+            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Deploys documentation to the local s3 staging area if the metaModel documents
+or the transient dependencies of the build-pdf action have changed.</cs:documentation>
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="build.xml"/>
+            </cs:actorProperties>
+            <cs:prerequisites>
+                <cs:attribute name="build-pdf"/>
+                <cs:attribute name="docs"/>
+                <cs:attribute name="java.binary.archives" component="com.verticon.tracker.ant.utilities"/>
+            </cs:prerequisites>
+            <cs:products alias="action.output" base="${user.dir}/Uploads/s3/Tracker/documentation/" fileCount="1" upToDatePolicy="COUNT"/>
+        </cs:public>
+        <cs:private name="build-pdf" actor="ant">
+            <cs:documentation xmlns="http://www.w3.org/1999/xhtml">Merges all docbooks from the various doc plugins into a common pdf 
+Tracker User Guide.  Only should run if any of the plugin docbooks change.</cs:documentation>
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="build.xml"/>
+            </cs:actorProperties>
+            <cs:prerequisites>
+                <cs:attribute name="docbooks"/>
+            </cs:prerequisites>
+            <cs:products alias="action.output" base="${buckminster.home}dist/" fileCount="1" upToDatePolicy="COUNT"/>
+        </cs:private>
+    </cs:actions>
+    <cs:groups>
+        <cs:private name="docbooks">
+            <cs:attribute name="docbook" component="com.verticon.tracker.doc"/>
+            <cs:attribute name="docbook" component="com.verticon.tracker.editor.doc"/>
+            <cs:attribute name="docbook" component="com.verticon.tracker.export.wlic.doc"/>
+            <cs:attribute name="docbook" component="com.verticon.tracker.fair.poi.documenation"/>
+            <cs:attribute name="docbook" component="com.verticon.tracker.ocl.query.doc"/>
+            <cs:attribute name="docbook" component="com.verticon.tracker.product.desktop.doc"/>
+            <cs:attribute name="docbook" component="com.verticon.tracker.reader.doc"/>
+        </cs:private>
+        <cs:private name="docs">
+            <cs:attribute name="fair-MetaModel.pdf"/>
+            <cs:attribute name="premises-MetaModel.pdf"/>
+        </cs:private>
+    </cs:groups>
+</cs:cspec>

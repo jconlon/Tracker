@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_dZIzUB1tEd6cgcWknUDsMw" name="Working with Readers">
+  <elementImport xmi:id="_dabz0B1tEd6cgcWknUDsMw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_dabz0R1tEd6cgcWknUDsMw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_dabz0h1tEd6cgcWknUDsMw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_dabz0x1tEd6cgcWknUDsMw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Component" xmi:id="_xBi9UB1tEd6cgcWknUDsMw" name="Tracker Desktop Premises Editor" useCase="_CQ_2cB1vEd6cgcWknUDsMw _18uL8B1vEd6cgcWknUDsMw _dKBccB1xEd6cgcWknUDsMw _UZovcB1yEd6cgcWknUDsMw _XHF0MB1yEd6cgcWknUDsMw">
+    <ownedUseCase xmi:id="_CQ_2cB1vEd6cgcWknUDsMw" name="Edit properties on new events" subject="_xBi9UB1tEd6cgcWknUDsMw"/>
+    <ownedUseCase xmi:id="_18uL8B1vEd6cgcWknUDsMw" name="Save Document" subject="_xBi9UB1tEd6cgcWknUDsMw"/>
+    <ownedUseCase xmi:id="_dKBccB1xEd6cgcWknUDsMw" name="Manage Readers" subject="_xBi9UB1tEd6cgcWknUDsMw">
+      <include xmi:id="_eUnK0B1yEd6cgcWknUDsMw" addition="_UZovcB1yEd6cgcWknUDsMw"/>
+      <include xmi:id="_fRUDoB1yEd6cgcWknUDsMw" addition="_XHF0MB1yEd6cgcWknUDsMw"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_UZovcB1yEd6cgcWknUDsMw" name="Connect" subject="_xBi9UB1tEd6cgcWknUDsMw"/>
+    <ownedUseCase xmi:id="_XHF0MB1yEd6cgcWknUDsMw" name="Disconnect" subject="_xBi9UB1tEd6cgcWknUDsMw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_zJEDcB1tEd6cgcWknUDsMw" name="Reader Operator"/>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_34SysB1tEd6cgcWknUDsMw" name="Tracker Operator"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_EbWYsB1wEd6cgcWknUDsMw" name="Connected TagId Reader" useCase="_DTMvwB1uEd6cgcWknUDsMw">
+    <ownedUseCase xmi:id="_DTMvwB1uEd6cgcWknUDsMw" name="Read Animal Tag" subject="_EbWYsB1wEd6cgcWknUDsMw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_NAwvUB1wEd6cgcWknUDsMw" memberEnd="_NAx9cB1wEd6cgcWknUDsMw _NAzLkR1wEd6cgcWknUDsMw" navigableOwnedEnd="_NAx9cB1wEd6cgcWknUDsMw _NAzLkR1wEd6cgcWknUDsMw">
+    <ownedEnd xmi:id="_NAx9cB1wEd6cgcWknUDsMw" name="src" type="_zJEDcB1tEd6cgcWknUDsMw" association="_NAwvUB1wEd6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NAzLkB1wEd6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NAykgB1wEd6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_NAzLkR1wEd6cgcWknUDsMw" name="dst" type="_DTMvwB1uEd6cgcWknUDsMw" association="_NAwvUB1wEd6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NAzyoR1wEd6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NAzyoB1wEd6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_UdBQEB1xEd6cgcWknUDsMw" memberEnd="_UdBQER1xEd6cgcWknUDsMw _UdB3Ih1xEd6cgcWknUDsMw" navigableOwnedEnd="_UdBQER1xEd6cgcWknUDsMw _UdB3Ih1xEd6cgcWknUDsMw">
+    <ownedEnd xmi:id="_UdBQER1xEd6cgcWknUDsMw" name="src" type="_34SysB1tEd6cgcWknUDsMw" association="_UdBQEB1xEd6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_UdB3IR1xEd6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_UdB3IB1xEd6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_UdB3Ih1xEd6cgcWknUDsMw" name="dst" type="_CQ_2cB1vEd6cgcWknUDsMw" association="_UdBQEB1xEd6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_UdCeMR1xEd6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_UdCeMB1xEd6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_VbY80B1xEd6cgcWknUDsMw" memberEnd="_VbY80R1xEd6cgcWknUDsMw _VbZj4h1xEd6cgcWknUDsMw" navigableOwnedEnd="_VbY80R1xEd6cgcWknUDsMw _VbZj4h1xEd6cgcWknUDsMw">
+    <ownedEnd xmi:id="_VbY80R1xEd6cgcWknUDsMw" name="src" type="_34SysB1tEd6cgcWknUDsMw" association="_VbY80B1xEd6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VbZj4R1xEd6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VbZj4B1xEd6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_VbZj4h1xEd6cgcWknUDsMw" name="dst" type="_18uL8B1vEd6cgcWknUDsMw" association="_VbY80B1xEd6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VbaK8B1xEd6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VbZj4x1xEd6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_hW2CMB1xEd6cgcWknUDsMw" memberEnd="_hW2CMR1xEd6cgcWknUDsMw _hW2pQh1xEd6cgcWknUDsMw" navigableOwnedEnd="_hW2CMR1xEd6cgcWknUDsMw _hW2pQh1xEd6cgcWknUDsMw">
+    <ownedEnd xmi:id="_hW2CMR1xEd6cgcWknUDsMw" name="src" type="_34SysB1tEd6cgcWknUDsMw" association="_hW2CMB1xEd6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hW2pQR1xEd6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hW2pQB1xEd6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_hW2pQh1xEd6cgcWknUDsMw" name="dst" type="_dKBccB1xEd6cgcWknUDsMw" association="_hW2CMB1xEd6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hW3QUB1xEd6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hW2pQx1xEd6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Package>

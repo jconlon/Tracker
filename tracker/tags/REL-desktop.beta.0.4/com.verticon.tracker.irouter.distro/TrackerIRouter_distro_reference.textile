@@ -1,0 +1,415 @@
+h1.  Tracker iRouter Distribution Reference
+
+__com.verticon.tracker.irouter.distro 0.1.1 (milestone irouter.beta.0.2)__
+
+__02/02/10__
+
+{toc}
+
+h2. Introduction
+
+Tracker iRouter is Network Appliance for the routing of Measurement, Event and Command Information between discrete devices and  Enterprise and Internetwork Service Infrastructures.
+
+Tracker iRouter is based on OSGi, Felix Karaf, and the "Debian live distribution.":http://debian-live.alioth.debian.org/ 
+
+
+h3. Requirements
+
+This **com.verticon.tracker.irouter.distro 0.1.0** live image will offer
+
+# Device Measurement, Event and Command Information Routing Server 
+## Industry standards, Open Source and Open Data.
+### Rapid development
+### Rapid deployment 
+### Rapid integration
+# Beta customer specific business logic components.
+# An agile component framework with management interface
+## Based on the OSGi and Felix Karaf 
+# Zero Administration Operating Environment
+## Flash based Embedded Read Only File System
+# Snap Shot Persistence 
+## Configuration
+### IP Configuration 
+#### Static configuration by default 
+##### address @192.168.0.204@
+##### netmask @255.255.255.0@
+### Tuning iRouter component configuration defaults
+### Adding new components
+# Industry standard logging
+# Small and Simple low power hardware enclosure
+## No controls
+## No monitor
+## No keyboard
+## Ethernet
+## Two USB ports
+
+
+h2. Building the distro
+
+__Build process will move from manual to script based in next release.__
+
+h3. Overview 
+
+What is added to the  Debian live distro?
+# a Java Virtual Machine, -  Installed as a deb package
+# Felix Karaf
+## Copied to config/chroot_locals_includes
+## Modified bin/karaf to point to the JAVA_HOME
+## Java Wrapper Startup Service
+# Components
+## 3rd party iRouter dependent components
+## iRouter foundation components
+# Default IP configuration 
+## As a static IP configuration set to 192.168.0.204
+# ssh connectivity
+## user: @irouter@
+## pw: @live@
+# Persistence functionality
+## Snapshot persistence
+
+What are the build artifacts, and how are they distributed?
+
+# binary.iso 
+## Is a file to create a Bootable CDROM
+# binary.img
+## Is an image file to create a Bootable usb or hdd
+
+
+h3. Options for **lh_config** the binary build
+
+**--hostname NAME**
+sets the hostname of the live system.
+ 
+**--iso-application NAME**
+sets the APPLICATION field in the header of a resulting CD/DVD image and defaults to "Debian Live" in debian mode, and to "Emdebian Live" in emdebian mode.
+
+**--iso-preparer NAME**
+sets the PREPARER field in the header of a resulting CD/DVD image. By default this is set to "live-helper VERSION;
+http://packages.qa.debian.org/live-helper", whereas VERSION is exanded to the version of live-helper that was used to build the image.
+
+**--iso-publisher NAME**
+sets the PUBLISHED field in the header of a resulting CD/DVD image. By  default,  this  is  set  to  'Debian  Live
+project;  http://debian-live.alioth.debian.org/;  debian-live@lists.debian.org'.  Remember  to  change this to the
+appropriate values at latest when you distributing custom and unofficial images.
+
+**--iso-volume NAME**
+sets the VOLUME field in the header of a resulting CD/DVD and defaults to 'Debian Live (DATE)' in debian mode, and  'Emdebian  Live  (DATE)'  in emdebian mode, whereas DATE is expanded with the current date and time of the generation.
+
+**--packages PACKAGE|"PACKAGES"**
+defines one or more packages to be installed in the live system. This is a quick and convenient place to add a few packages when building an image (limited by the  max  length  of  shell).  Packages  that  should  be  permanently
+installed should be put into a local packages list.
+           
+**--syslinux-timeout SECONDS**
+defines the timeout the syslinux bootloader should wait for input from the user at the  bootprompt  prior  booting
+the default kernel. This defaults to 0 which means it will wait forever.
+           
+**--username NAME**
+sets the name of the account of the default user in the live system.
+
+**--syslinux-timeout SECONDS**
+defines the timeout the syslinux bootloader should wait for input from the user at the bootprompt prior booting the default  kernel.  This defaults to 0 which means it will wait forever.
+__See following section for details__
+
+h4. Boot parms
+
+"see":http://grml.org/online-docs/live-initramfs.en.7.html
+
+**--bootappend-live PARAMETER|"PARAMETERS"**
+sets boot parameters specific to debian-live. A complete list of boot parameters can be found, for etch, in the manpage of casper, for all other  distributions  in  the  manpage  of  live-initramfs.  On the images, a list of all parameters (without comments) is included in the  /parameters.txt.
+
+**persistent**
+live-initramfs will look for persistent and snapshot partitions or files labeled "live-rw", "home-rw", and files called "live-sn*", "home-sn*" and will try to, in order: mount as /cow the first, mount the second in /home, and just copy the contents of the latter in appropriate locations (snapshots). Snapshots will be tried to be updated on reboot/shutdown. Look at live-snapshot(1) for more informations.
+
+
+**ip=frommedia**
+           If this variable is set, dhcp and static configuration are just
+           skipped and the system will use the (must be) media-preconfigured
+           /etc/network/interfaces instead.
+__TODO May not hard code IP in the future builds. Instead may leave this as an option to be configured and persisted.__
+
+h4. lh_config for ISO Image
+        
+bc.. 
+lh_config --hostname tracker1 --username irouter --iso-application "Tracker iRouter" --packages "openjdk-6-jre-headless ssh" --iso-preparer "Verticon, Inc. Tracker; http://tracker.verticon.com/index.html" --iso-publisher "Verticon, Inc.; http://www.verticon.com" --syslinux-timeout 5 --bootappend-live "persistent ip=frommedia" -b iso
+
+
+h4. lh_config for USB/HDD image
+        
+bc.. 
+lh_config --hostname tracker1 --username irouter --iso-application "Tracker iRouter" --packages "openjdk-6-jre-headless ssh" --iso-preparer "Verticon, Inc. Tracker; http://tracker.verticon.com/index.html" --iso-publisher "Verticon, Inc.; http://www.verticon.com" --syslinux-timeout 5 --bootappend-live "persistent ip=frommedia" -b usb-hdd
+
+h3. Files Added to the build/config/chroot_local-includes
+
+h4. opt/apache-felix-karaf-1.2.0
+
+"Felix Karaf":http://felix.apache.org/site/apache-felix-karaf.html is the selected OSGi framework and shell.
+
+* Create an opt dir in chroot_local-includes
+bc.. 
+jconlon@mudshark:~/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.distro$ mkdir -p build/config/chroot_local-includes/opt/
+p. 
+* "Download Karaf":http://apache.securedservers.com/felix/apache-felix-karaf-1.2.0.tar.gz and extract it to the opt directory.
+
+* Add the JAVA_HOME enviroment variable by adding the following line to the  bin/karaf script
+JAVA_HOME="/usr/lib/jvm/java-6-openjdk"
+
+* To the base directory create a @data@ directory
+** In the system directory create a directory to hold Tracker third party bundle dependencies
+@mkdir -p system/com/verticon/tracker/deps@
+** Add third party bundles
+bc.. 
+org.apache.felix.scr-1.4.0.jar
+org.eclipse.osgi.services_3.2.0.v20090520-1800.jar
+org.eclipse.equinox.io_1.0.100.v20090520-1800.jar
+org.eclipse.equinox.util_1.0.100.v20090520-1800.jar
+org.eclipse.osgi.util_3.2.0.v20090520-1800.jar
+org.eclipse.equinox.wireadmin_1.0.100.v20090520-1800.jar
+p. 
+** In the system directory create a directory to hold Tracker foundation bundles
+@mkdir -p system/com/verticon/tracker/foundation@
+*** Add Tracker foundation bundles there
+bc.. 
+com.verticon.tracker.irouter.wireadmin_0.1.0.jar
+com.verticon.tracker.connector.socket_0.1.0.jar
+p. 
+* To the top level deploy directory
+** Add Tracker bundles
+bc. 
+com.verticon.tracker.irouter.mettler_0.1.0.jar
+com.verticon.tracker.irouter.abbott_0.1.0.jar              com.verticon.tracker.irouter.trutest_0.1.0.jar
+com.verticon.tracker.irouter.measurement.logger_0.1.0.jar  
+
+h5. Optional Dependencies -  Webconsole 
+
+**Defered adding these at this time.  These may instead be installed as a package and saved with the persistence service.**
+Here are the bundles necessary to load the webconsole
+
+bc.. 
+[  44] [Active     ] [            ] [   60] geronimo-servlet_2.5_spec (1.1.2)
+[  45] [Active     ] [            ] [   60] Apache ServiceMix Bundles: jetty-6.1.14 (6.1.14.1)
+[  46] [Active     ] [            ] [   60] OPS4J Pax Web - API (0.7.1)
+[  47] [Active     ] [            ] [   60] OPS4J Pax Web - Service SPI (0.7.1)
+[  48] [Active     ] [            ] [   60] OPS4J Pax Web - Runtime (0.7.1)
+[  49] [Active     ] [            ] [   60] OPS4J Pax Web - Jetty (0.7.1)
+[  50] [Active     ] [            ] [   60] Apache Felix Metatype Service (1.0.2)
+[  51] [Active     ] [            ] [   60] Apache Felix Web Management Console (2.0.0)
+[  52] [Active     ] [Created     ] [   60] Apache Felix Karaf :: Web Console :: Admin Plugin (1.2.0)
+[  53] [Active     ] [Created     ] [   60] Apache Felix Karaf :: Web Console :: Features Plugin (1.2.0)
+[  54] [Active     ] [Created     ] [   60] Apache Felix Karaf :: Web Console :: Gogo Plugin (1.2.0)
+
+
+h5. Configure as an OS Service 
+
+A Java wrapper can be associated with Karaf to bring it up and down as a service. This is typically done from within Karaf, but it can be done externally.
+
+* Add the wrapper components to the felix directory
+bc.. 
+ apache-felix-karaf-1.2.0/bin/karaf-wrapper
+ apache-felix-karaf-1.2.0/bin/karaf-service
+ apache-felix-karaf-1.2.0/etc/karaf-wrapper.conf
+ apache-felix-karaf-1.2.0/lib/libwrapper.so
+ apache-felix-karaf-1.2.0/lib/karaf-wrapper.jar
+
+p. 
+
+* Tweak the JVM properties in the wrapper configuration file: etc/karaf-wrapper.conf to accomadate system memory.
+	
+"See Ticket #467":http://tracker-project.verticon.com/verticon_Tracker/ticket/467 
+
+bc.. 
+# Maximum Java Heap Size (in MB)
+wrapper.java.maxmemory=512
+
+change to: 
+# Maximum Java Heap Size (in MB)
+# wrapper.java.maxmemory=128
+p. 
+
+
+h4. etc
+
+# init.d/karaf-service - java wrapper service for karaf  __This will be enable by the hooks script
+# network/interfaces - ip configuration
+** "HowTo":http://www.cyberciti.biz/tips/howto-ubuntu-linux-convert-dhcp-network-configuration-to-static-ip-configuration.html
+# fstab - mounts
+# resolve.conf - 
+
+h3. Build it
+
+@sudo lh_build 2>&1 | tee build.log@
+
+
+h2. Distribution
+
+h3. Create a USB/HDD stick
+
+Here is a review of what will be on the drive:
+
+## First partion is a vfat filesystem
+### Bootable Debian Live
+### iRouter framework
+### Optional Deployment Packages
+### Destination for tracker.log files
+### Documentation - including this reference
+### Visible when drive is mounted on  Windows machines
+## Second partition is a ext2 filestystem
+### Additional Optional and test Deployment Packages
+### Destination for tracker.log files
+### Is not visible when drive is mounted on Windows machines
+
+h4. Identify the drive
+
+bc.. 
+ls -la /dev/disk/by-id/usb-*
+lrwxrwxrwx 1 root root  9 2010-01-14 13:26 /dev/disk/by-id/usb-Kingston_DataTraveler_2.0_08E05450B2021C14-0:0 -> ../../sdb
+lrwxrwxrwx 1 root root 10 2010-01-14 13:26 /dev/disk/by-id/usb-Kingston_DataTraveler_2.0_08E05450B2021C14-0:0-part1 -> ../../sdb1
+
+h4. Copy the image to the drive
+
+Image contains a VFAT partition and the systlinux bootlader.  __THIS WILL OVERWRITE ALL DATA__
+
+bc.. 
+jconlon@mudshark:~/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.distro/deploy/usb_image$ sudo dd if=irouter-0.1.0.img of=/dev/sdb
+[sudo] password for jconlon: 
+491520+0 records in
+491520+0 records out
+251658240 bytes (252 MB) copied, 226.778 s, 1.1 MB/s
+
+
+h4. Adding a second partition
+
+Add a second ext2 partition to be used for holding documentation, the raw *.img file, and the iso file of the distro.
+
+__Note: Expanding the first partition with gparted corrupted the boot image, and boots failed.__
+
+bc.. 
+jconlon@mudshark:~$ sudo gparted /dev/sdb
+
+
+h2. Hardware
+
+"PCEngines ALIX 1c":http://www.pcengines.ch/alix1c.htm
+
+__For boot hanging issue and workaround, see__
+
+# Ticket "#473":http://tracker-project.verticon.com/verticon_Tracker/ticket/473
+# "Ubuntu Forums":http://ubuntuforums.org/archive/index.php/t-840576.html
+
+h3. Copying Distro to the HDD
+
+h4. Initial boot
+
+# Install a 2GB (or greater) CF card on the motherboard
+# Attach monitor and keyboard
+# Attach  the usb drive created in the first part of this documentation. 
+# Boot off the usb drive
+## On power up type @esc@ key to get the boot selection menu
+## Select the USB drive
+
+h4. Indentify the drives
+
+List the drives by id on the machine for reference.  You should see something like:
+
+bc.. 
+irouter@tracker1:~$ sudo ls -la /dev/disk/by-id/
+total 0
+drwxr-xr-x 2 root root 140 2010-02-03 16:25 .
+drwxr-xr-x 6 root root 120 2010-02-03 16:24 ..
+lrwxrwxrwx 1 root root   9 2010-02-03 16:24 ata-CF_CARD_4GB_20081205_0000E379 -> ../../hda
+lrwxrwxrwx 1 root root  10 2010-02-03 16:24 ata-CF_CARD_4GB_20081205_0000E379-part1 -> ../../hda1
+lrwxrwxrwx 1 root root   9 2010-02-03 16:25 usb-_USB_Flash_Memory_001CC0C83C18C9B0B42E0764-0:0 -> ../../sda
+lrwxrwxrwx 1 root root  10 2010-02-03 16:25 usb-_USB_Flash_Memory_001CC0C83C18C9B0B42E0764-0:0-part1 -> ../../sda1
+lrwxrwxrwx 1 root root  10 2010-02-03 16:25 usb-_USB_Flash_Memory_001CC0C83C18C9B0B42E0764-0:0-part2 -> ../../sda2
+
+
+h4. Copy the image to the drive hda 
+
+# Create a mount point for the payload @sudo mkdir /mnt/payload@
+# Moun t the payload partition of the USB drive @sudo mount -t ext2 /dev/sda2 /mnt/payload@ 
+# cd to the payload mount @cd /mnt/payload@
+
+Note that the irouter*.img file contains a VFAT partition and the systlinux bootlader.  __THIS WILL OVERWRITE ALL DATA on the hard drive.__
+
+bc.. 
+irouter@tracker1:/mnt/payload$ sudo dd if=irouter-0.1.1.img of=/dev/hda
+[sudo] password for jconlon: 
+491520+0 records in
+491520+0 records out
+251658240 bytes (252 MB) copied, 226.778 s, 1.1 MB/s
+
+
+h4. Adding a second partition
+
+# Use fdisk to add a second ext2 partition to be used for holding snapshot data. @sudo fdisk /dev/hda@
+# Adding a labeled filesystem @sudo mkfs.ext2 -L SNAPS /dev/hda2@
+## Note: Adding a labeled filesystem @live-sn@ on the device may cause boot failures if there are not files in this partition.
+## The live-sn label will indicate that it is a partition for snapshoting changes.
+# Tune it 
+bc.. irouter@tracker1:~$ sudo tune2fs -c 0 -i 0 /dev/hda2
+
+h3. Changing HW Datetime
+
+Change the time on the BIOS.
+__This works for the logging, but if a date command is given it shows as UTC time. Can the hwclock make this show local time when a date command is given?__
+
+h2. Connecting to the iRouter
+
+h3. Connecting to the Karaf Shell and the OSGi Framework
+
+h4. Remote console
+
+* SSH to a Remote console on the server
+** SSH client to connect to the Karaf instance. The default port is 8101.
+
+bc.. 
+> ssh -p 8101 -l karaf tracker1
+karaf@localhost's password: karaf
+karaf@root:/>
+p. 
+** To exit the ssh session
+bc.. 
+  karaf@root:/> ~.
+p. 
+
+h4.  Karaf client
+
+bc.. 
+jconlon@mudshark:/opt/Felix/apache-felix-karaf-1.2.0$ java -jar lib/karaf-client.jar -h tracker1 -u karaf -p karaf
+p. 
+** To exit the client session __^D__
+
+h4. Web client
+
+"Web Console":http://tracker1:8080/system/console/
+
+* username: @admin@
+* password: @admin@
+
+h3. Connecting to the Operating System
+
+bc.. 
+ssh irouter@tracker1
+p. 
+
+With a password of: @live@
+
+h2. Persistence 
+
+Debian Live Snapshot persistence is used to persist new files and changed existing files from the factory defaults.  
+
+To capture the changes to a system with a full snapshot.  
+# Prior to taking a snapshot shutdown karaf first @/etc/init.d/karaf-service stop@
+# Consider removing files in the karaf data directory.
+# Run the command @sudo live-snapshot -d /dev/hda2@ 
+## To avoid snapshoting the 
+# Shutdown the system
+
+To capture partial changes to a  system with a partial snapshot.  __THIS DOES NOT WORK.__
+# Create an excludes file @echo "/opt/apache-felix-karaf-1.2.0/data" > /home/irouter/excludes@
+# Run the command @sudo live-snapshot -d /dev/hda2 -e /home/irouter/excludes@ 
+__FAILS WITH @live-snapshot: invalid option -- e@__
+
+
+h2. Issues Tracking
+
+See the Tracker Issues tracking report "All IRouter Tickets By Milestone":http://tracker-project.verticon.com/verticon_Tracker/report/9

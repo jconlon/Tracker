@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="plugin_export" name="build">
+	<target name="plugin_export">
+		<pde.exportPlugins destination="/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.abbott.deploy/deploy" exportSource="false" exportType="directory" plugins="com.verticon.tracker.irouter.trutest" useJARFormat="true"/>
+	</target>
+</project>

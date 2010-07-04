@@ -1,0 +1,126 @@
+This project uses PDE Build to 
+	Step 1: build the Tracker product (two configs linux and windows), 
+	Step 2: a P2 metadata repository for it, and 
+	Step 3: with the Headless Director (org.eclipse.equinox.p2.director.app.application) create
+		zips of the product that contain P2 metadata.
+	
+	This project is failing in Step 3 with the error:
+	run.director.two:
+     [java] Install location:
+     [java]     file:/home/jconlon/eclipse-target-platforms/eclipse-modeling-ganymede-SRI-incubation-01/eclipse/
+     [java] Configuration file:
+     [java]     file:/home/jconlon/eclipse-target-platforms/eclipse-modeling-ganymede-SRI-incubation-01/eclipse/configuration/config.ini loaded
+     [java] Configuration location:
+     [java]     file:/home/jconlon/eclipse-target-platforms/eclipse-modeling-ganymede-SRI-incubation-01/eclipse/configuration/
+     [java] Framework located:
+     [java]     file:/home/jconlon/eclipse-target-platforms/eclipse-modeling-ganymede-SRI-incubation-01/eclipse/plugins/org.eclipse.osgi_3.4.2.R34x_v20080826-1230.jar
+     [java] Framework classpath:
+     [java]     file:/home/jconlon/eclipse-target-platforms/eclipse-modeling-ganymede-SRI-incubation-01/eclipse/plugins/org.eclipse.osgi_3.4.2.R34x_v20080826-1230.jar
+     [java] Debug options:
+     [java]     file:/home/jconlon/eclipse-workspaces/tracker-TRUNK/org.eclipse.pde.build/scripts/productBuild/.options not found
+     [java] Time to load bundles: 38
+     [java] Starting application: 43688
+     [java] !SESSION 2009-01-19 09:49:40.096 -----------------------------------------------
+     [java] eclipse.buildId=M20080911-1700
+     [java] java.version=1.6.0_05
+     [java] java.vendor=Sun Microsystems Inc.
+     [java] BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+     [java] Framework arguments:  --launcher.suppressErrors -application org.eclipse.equinox.p2.director.app.application -flavor tooling -installIU com.verticon.tracker.editor.Tracker -version 0.3.1.v200901190943 -p2.os win32 -p2.ws win32 -p2.arch x86 -roaming -profileProperties org.eclipse.update.install.features=true -profile TrackerProfile -metadataRepository file:/home/jconlon/eclipse-workspaces/tracker-TRUNK/com.verticon.tracker.builder/buildDirectory/repo -artifactRepository file:/home/jconlon/eclipse-workspaces/tracker-TRUNK/com.verticon.tracker.builder/buildDirectory/repo -destination /home/jconlon/eclipse-workspaces/tracker-TRUNK/com.verticon.tracker.builder/buildDirectory/result/tmp/eclipse -bundlepool /home/jconlon/eclipse-workspaces/tracker-TRUNK/com.verticon.tracker.builder/buildDirectory/result/tmp/eclipse
+     [java] Command-line arguments:  -clean -consoleLog -debug --launcher.suppressErrors -application org.eclipse.equinox.p2.director.app.application -flavor tooling -installIU com.verticon.tracker.editor.Tracker -debug -consoleLog -version 0.3.1.v200901190943 -p2.os win32 -p2.ws win32 -p2.arch x86 -roaming -profileProperties org.eclipse.update.install.features=true -profile TrackerProfile -metadataRepository file:/home/jconlon/eclipse-workspaces/tracker-TRUNK/com.verticon.tracker.builder/buildDirectory/repo -artifactRepository file:/home/jconlon/eclipse-workspaces/tracker-TRUNK/com.verticon.tracker.builder/buildDirectory/repo -destination /home/jconlon/eclipse-workspaces/tracker-TRUNK/com.verticon.tracker.builder/buildDirectory/result/tmp/eclipse -bundlepool /home/jconlon/eclipse-workspaces/tracker-TRUNK/com.verticon.tracker.builder/buildDirectory/result/tmp/eclipse
+     [java] 
+     [java] !ENTRY org.eclipse.equinox.p2.metadata.repository 2 0 2009-01-19 09:51:57.823
+     [java] !MESSAGE Error parsing metadata repository
+     [java] !SUBENTRY 1 org.eclipse.equinox.p2.core 2 0 2009-01-19 09:51:57.823
+     [java] !MESSAGE Error at line 10, column 91: Missing required attribute in "repository": url
+     [java] !SUBENTRY 1 org.eclipse.equinox.p2.core 2 0 2009-01-19 09:51:57.824
+     [java] !MESSAGE Error at line 10, column 91: Illegal value for attribute "url" of element "repository": null
+     [java] !SUBENTRY 1 org.eclipse.equinox.p2.core 2 0 2009-01-19 09:51:57.824
+     [java] !MESSAGE Error at line 11, column 91: Missing required attribute in "repository": url
+     [java] !SUBENTRY 1 org.eclipse.equinox.p2.core 2 0 2009-01-19 09:51:57.824
+     [java] !MESSAGE Error at line 11, column 91: Illegal value for attribute "url" of element "repository": null
+     [java] !SUBENTRY 1 org.eclipse.equinox.p2.core 2 0 2009-01-19 09:51:57.824
+     [java] !MESSAGE Error at line 12, column 90: Missing required attribute in "repository": url
+     [java] !SUBENTRY 1 org.eclipse.equinox.p2.core 2 0 2009-01-19 09:51:57.824
+     [java] !MESSAGE Error at line 12, column 90: Illegal value for attribute "url" of element "repository": null
+     [java] !SUBENTRY 1 org.eclipse.equinox.p2.core 2 0 2009-01-19 09:51:57.825
+     [java] !MESSAGE Error at line 13, column 90: Missing required attribute in "repository": url
+     [java] !SUBENTRY 1 org.eclipse.equinox.p2.core 2 0 2009-01-19 09:51:57.825
+     [java] !MESSAGE Error at line 13, column 90: Illegal value for attribute "url" of element "repository": null
+     [java] Installing com.verticon.tracker.editor.Tracker 0.3.1.v200901190943.
+     [java] Installation failed.
+     [java] 
+     [java] !ENTRY org.eclipse.equinox.p2.engine 4 4 2009-01-19 09:53:34.418
+     [java] !MESSAGE An error occurred while collecting items to be installed
+     [java] !SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 0 2009-01-19 09:53:34.419
+     [java] !MESSAGE Problems downloading artifact: osgi.bundle,org.eclipse.platform,3.3.101.v200809111700.
+     [java] !SUBENTRY 2 org.eclipse.core.runtime 0 0 2009-01-19 09:53:34.419
+     [java] !MESSAGE OK
+     [java] !SUBENTRY 2 org.eclipse.equinox.p2.artifact.repository 4 4 2009-01-19 09:53:34.419
+     [java] !MESSAGE File has invalid content: /tmp/signatureFile17624.jar
+     [java] !SUBENTRY 3 org.eclipse.equinox.p2.artifact.repository 4 0 2009-01-19 09:53:34.419
+     [java] !MESSAGE Invalid content: plugin_customization.ini
+     [java] !STACK 0
+     [java] org.eclipse.osgi.signedcontent.InvalidContentException: The file "plugin_customization.ini" in the jar "/tmp/signatureFile17624.jar" has been tampered!
+     [java] 	at org.eclipse.osgi.internal.signedcontent.DigestedInputStream.verifyDigests(DigestedInputStream.java:102)
+     [java] 	at org.eclipse.osgi.internal.signedcontent.DigestedInputStream.read(DigestedInputStream.java:129)
+     [java] 	at org.eclipse.osgi.baseadaptor.bundlefile.BundleEntry.getBytes(BundleEntry.java:102)
+     [java] 	at org.eclipse.osgi.internal.signedcontent.SignedContentImpl$SignedContentEntryImpl.verify(SignedContentImpl.java:167)
+     [java] 	at org.eclipse.osgi.internal.signedcontent.SignedContentFile.getSignedEntries(SignedContentFile.java:51)
+     [java] 	at org.eclipse.equinox.internal.p2.artifact.repository.SignatureVerifier.verifyContent(SignatureVerifier.java:82)
+     [java] 	at org.eclipse.equinox.internal.p2.artifact.repository.SignatureVerifier.verify(SignatureVerifier.java:59)
+     [java] 	at org.eclipse.equinox.internal.p2.artifact.repository.SignatureVerifier.close(SignatureVerifier.java:100)
+     [java] 	at org.eclipse.equinox.internal.p2.artifact.repository.simple.SimpleArtifactRepository.reportStatus(SimpleArtifactRepository.java:815)
+     [java] 	at org.eclipse.equinox.internal.p2.artifact.repository.simple.SimpleArtifactRepository.downloadArtifact(SimpleArtifactRepository.java:442)
+     [java] 	at org.eclipse.equinox.internal.p2.artifact.repository.simple.SimpleArtifactRepository.getArtifact(SimpleArtifactRepository.java:515)
+     [java] 	at org.eclipse.equinox.internal.p2.artifact.repository.MirrorRequest.transferSingle(MirrorRequest.java:162)
+     [java] 	at org.eclipse.equinox.internal.p2.artifact.repository.MirrorRequest.transfer(MirrorRequest.java:146)
+     [java] 	at org.eclipse.equinox.internal.p2.artifact.repository.MirrorRequest.perform(MirrorRequest.java:94)
+     [java] 	at org.eclipse.equinox.internal.p2.artifact.repository.simple.SimpleArtifactRepository.getArtifact(SimpleArtifactRepository.java:504)
+     [java] 	at org.eclipse.equinox.internal.p2.artifact.repository.simple.DownloadJob.run(DownloadJob.java:64)
+     [java] 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+     [java] !SUBENTRY 2 org.eclipse.core.runtime 0 0 2009-01-19 09:53:34.421
+     [java] !MESSAGE OK
+     [java] Java Result: 13
+     
+     Similar errors are comming from the Admin UI:
+     An error occurred while collecting items to be installed
+  Problems downloading artifact: osgi.bundle,org.eclipse.platform,3.3.101.v200809111700.
+    File has invalid content: /tmp/signatureFile9067.jar
+      Invalid content: plugin_customization.ini
+      The file "plugin_customization.ini" in the jar "/tmp/signatureFile9067.jar" has been tampered!
+     
+	Suspect this is due to a problem in the repository associated with this eclipse
+	
+	
+	ToDo:
+	1. Reduce the Tracker Product to the minimum number of Features.
+			<include name="com.verticon.tracker.base.dep.feature/**" />
+			<include name="com.verticon.tracker.editor.feature/**" />
+	     	<include name="com.verticon.tracker.group.feature/**" />
+	     	<include name="com.verticon.tracker.help.feature/**" />
+	     	<include name="com.verticon.tracker.reader.feature/**" />
+	     	<include name="com.verticon.tracker.ocl.query.feature/**" />
+	        <include name="org.apache.poi/**" />
+	2. Add metadata and artifacts to the repo for optional features:
+			<include name="com.verticon.tracker.fair.editor.feature/**" />
+	     	<include name="com.verticon.tracker.export.wlic.feature/**" />
+	     	<include name="com.verticon.tracker.fair.poi.feature/**" />
+    3. Try running the Headless Director from an alternate eclipse sdk, one 
+    	that has the default repositories in the manage sites.
+    	
+    4. Reexamine Buckminster building - using a different repo?
+       Alternative - Use the PDE Build to build the product, 
+       Buckminster to create an update site and add features to the repo.
+       
+       
+    Update Jan22
+    1. After creating a new targetPlatform from a new 3.4.1 Modeling with DeltaPack and the handful of deps -
+    Was able to create the product with PDE Build.
+    2. Admin UI could not build a product, until after I removed 
+    http://download.eclipse.org/eclipse/updates/3.4.x
+    3. p2Installer still giving problems -
+      tried to monitor with lsof but couldn't catch the org.eclipse.platform being created.
+    4. Try replacing the corrupted file in the repo with a good one and try the 
+    
+ This project is deprecated and replaced by com.verticon.tracker.product.desktop.releng.
+ See Ticket #398
