@@ -19,7 +19,9 @@ For Product releases:
 0. Prepare and upload product and documentation artifacts.  See com.verticon.tracker.product.desktop.releng and
    com.verticon.tracker.documentation readme.txt instructions.
     
-1. Manually edit the file names in the downloads page to match the real product archives.
+1. Note it is not necessary to manually edit the file names in the downloads page to match the 
+   real product archives as this is taken care of by the script referring to an properties file
+   in the com.verticon.tracker.product.desktop.releng that was created during the product build. 
 
 2. Run Buckminster: deploy.to.local.repo.dir - to move all artifacts 
    over to ~/Uploads/s3.  
