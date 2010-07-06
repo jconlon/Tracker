@@ -111,6 +111,7 @@ public class CreateDesignateHandler extends AbstractHandler implements IHandler 
 				.getAttributeDefinitions(OCD.ALL)) {
 			Attribute attribute = MetatypeFactory.eINSTANCE.createAttribute();
 			attribute.setAdref(attributeDefinition.getID());
+			//Some attributeDefinintion may not have defaults. Check for this first.
 			if(attributeDefinition.getDefaultValue()!=null){
 				for (String value : attributeDefinition.getDefaultValue()) {
 					attribute.getValue().add(value);
