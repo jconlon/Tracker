@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Verticon, Inc. and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Verticon, Inc. - initial API and implementation
+ *******************************************************************************/
 package com.verticon.tracker.connector.socket;
 
 import java.io.DataInputStream;
@@ -11,6 +21,11 @@ import java.net.UnknownHostException;
 
 import javax.microedition.io.StreamConnection;
 
+/**
+ * 
+ * @author jconlon
+ *
+ */
 public class SocketStreamConnection implements StreamConnection {
 
 	private static final int PORT_TIMEOUT_DEFAULT = 5000;
@@ -33,8 +48,15 @@ public class SocketStreamConnection implements StreamConnection {
 			throw new IllegalArgumentException("Not a socket schema");
 		}
 		
+		
 		hostName = uri.getHost();// matcher.group(2);
+		if(hostName==null){
+			throw new IllegalArgumentException("No hostname found. Check format.");
+		}
 		port = uri.getPort();// Integer.parseInt(matcher.group(3));
+		if(port<0){
+			throw new IllegalArgumentException("No port found. Check format.");
+		}
 		this.timeouts = timeouts;
 	}
 
@@ -113,7 +135,7 @@ public class SocketStreamConnection implements StreamConnection {
 	}
 	
 	public int getPort() throws IOException{
-		return socket.getPort();
+		return port;
 		
 	}
 	
