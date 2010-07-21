@@ -34,11 +34,12 @@ public abstract class AbstractComponentFactory implements ManagedServiceFactory 
 	
 
 	protected void activate(BundleContext bc) throws Exception {
+		log.debug(bundleMarker(),"Starting");
 		this.bc = bc;
 		exec = Executors.newCachedThreadPool();
 		scheduler = Executors.newSingleThreadScheduledExecutor();
 		servicControllers = new HashMap<String, ServiceController>();
-		log.debug(bundleMarker(),"{}: Started", this);
+		log.debug(bundleMarker(),"Started");
 	}
 
 	protected void deactivate(BundleContext context) throws Exception {

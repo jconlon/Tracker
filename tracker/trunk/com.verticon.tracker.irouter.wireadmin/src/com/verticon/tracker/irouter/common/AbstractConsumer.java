@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -31,6 +32,10 @@ public abstract class AbstractConsumer implements Consumer, IService {
 
 	protected abstract Marker bundleMarker();
 
+	
+	protected final AtomicInteger wiresConnected
+	    = new AtomicInteger(0);
+
 	protected final IContext context;
 	protected ServiceRegistration serviceRegistration = null;
 
@@ -41,14 +46,16 @@ public abstract class AbstractConsumer implements Consumer, IService {
 
 	@Override
 	public void producersConnected(Wire[] wires) {
+		wiresConnected.set(0);
 		if (wires == null) {
 			log.debug(bundleMarker(),"{}: Not connected to any wires.", this);
-
+			
 		} else {
 			HashSet<String> producers = new HashSet<String>();
 			for (Wire wire : wires) {
 				producers.add((String) wire.getProperties().get(
 						WIREADMIN_PRODUCER_PID));
+				wiresConnected.incrementAndGet();
 			}
 
 			log.debug(bundleMarker(),"{}: Connected to {} wires, and {} producers={}",
