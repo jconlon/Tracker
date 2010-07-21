@@ -4,11 +4,13 @@ import static com.verticon.tracker.irouter.common.TrackerConstants.ANIMAL_TAG_NU
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRANSACTION_STATE_SCOPE;
 import static com.verticon.tracker.irouter.measurement.logger.ComponentFactory.bundleMarker;
-import static com.verticon.tracker.irouter.measurement.logger.Context.*;
+import static com.verticon.tracker.irouter.measurement.logger.Context.CONSUMER_SCOPE;
 
 import java.util.Arrays;
 import java.util.Vector;
 
+import org.osgi.service.monitor.Monitorable;
+import org.osgi.service.monitor.StatusVariable;
 import org.osgi.service.wireadmin.Envelope;
 import org.osgi.service.wireadmin.Wire;
 import org.slf4j.Logger;
@@ -29,13 +31,13 @@ import com.verticon.tracker.irouter.common.ITransactionHandler;
  * @author jconlon
  * 
  */
-public class MeasurementLoggingConsumer extends AbstractConsumer {
+public class MeasurementLoggingConsumer extends AbstractConsumer implements Monitorable{
 
 	@Override
 	protected Marker bundleMarker() {
 		return bundleMarker;
 	}
-
+	private static final String WIRES_COUNT = "consumer.Connected_Wires";
 	private final String[] scope;
 	private final ITransactionHandler transactionHandler;
 
@@ -111,6 +113,48 @@ public class MeasurementLoggingConsumer extends AbstractConsumer {
 		v.add(ANIMAL_TAG_NUMBER_SCOPE);
 		return v.toArray(new String[] {});
 
+	}
+
+	@Override
+	public String[] getStatusVariableNames() {
+		return new String[]{WIRES_COUNT};
+	}
+
+	@Override
+	public StatusVariable getStatusVariable(String name)
+	throws IllegalArgumentException {
+		
+		if (WIRES_COUNT.equals(name)){
+			return
+			new StatusVariable(name,
+					StatusVariable.CM_GAUGE,
+					wiresConnected.get()
+					);
+		}else{
+			throw new IllegalArgumentException(
+					"Invalid Status Variable name " + name);
+		}
+	}
+	
+	@Override
+	public boolean notifiesOnChange(String id) throws IllegalArgumentException {
+		return false;
+	}
+
+	@Override
+	public boolean resetStatusVariable(String id)
+			throws IllegalArgumentException {
+
+		return false;
+	}
+
+	@Override
+	public String getDescription(String name) throws IllegalArgumentException {	
+		if (WIRES_COUNT.equals(name)){
+			return
+			"The number of connected wires.";
+		}
+		return null;
 	}
 
 }
