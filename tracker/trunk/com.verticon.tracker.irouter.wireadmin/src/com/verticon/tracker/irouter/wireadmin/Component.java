@@ -209,6 +209,7 @@ public class Component implements WireAdminListener, IWireCreator {
 	}
 
 	public void setWireAdmin(WireAdmin wireAdmin) {
+		logger.debug(bundleMarker, "wireAdmin set");
 		this.wireAdmin = wireAdmin;
 		
 	}
