@@ -76,6 +76,19 @@ public class EntityConnectorTest {
 
 	}
 	
+	@Test
+	public void testFilter2(){
+		Integer mask = new Integer( WireAdminEvent.WIRE_CREATED
+				|WireAdminEvent.CONSUMER_EXCEPTION
+				|WireAdminEvent.PRODUCER_EXCEPTION
+				   | WireAdminEvent.WIRE_CONNECTED
+				   | WireAdminEvent.WIRE_DISCONNECTED 
+				   | WireAdminEvent.WIRE_UPDATED);
+		
+		assertEquals(new Integer(111),mask);
+
+	}
+	
 	
 	@Test
 	public void testSetSingleProducer() {
