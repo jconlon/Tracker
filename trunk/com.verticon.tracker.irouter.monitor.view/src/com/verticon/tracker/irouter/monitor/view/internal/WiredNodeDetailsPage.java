@@ -1,15 +1,18 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2006 IBM Corporation and others.
+ * Copyright (c) 2010 Verticon, Inc. and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     IBM Corporation - initial API and implementation
+ *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
 package com.verticon.tracker.irouter.monitor.view.internal;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -18,6 +21,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IDetailsPage;
@@ -148,8 +152,6 @@ public class WiredNodeDetailsPage implements IDetailsPage {
 		sectionClient.setLayout(new GridLayout(3, false));
 		
 		//Refresh button
-//		Label l = toolkit.createLabel(sectionClient, "Refresh Status Variables:");
-//		l.setToolTipText("Polls service for latest status");
 		Button b = toolkit.createButton(sectionClient, "Refresh Status Variables", SWT.PUSH);
 		b.setToolTipText("Polls service for latest status");
 		b.setLayoutData(new GridData(SWT.LEFT, SWT.DEFAULT, true, false, 3,
@@ -161,7 +163,17 @@ public class WiredNodeDetailsPage implements IDetailsPage {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				update();
+				
+				try {
+					update();
+				} catch (Exception e1) {
+					Status status = new Status(IStatus.ERROR, Component.PLUGIN_ID, 0,
+				            "MonitorAdmin Error Message", null);
+
+			        ErrorDialog.openError(Display.getCurrent().getActiveShell(),
+			            "Failed to obtain response for a Monitorable service. Is the service still active?", e1.getMessage(), status);
+			      
+				}
 				
 			}
 
@@ -197,7 +209,9 @@ public class WiredNodeDetailsPage implements IDetailsPage {
 	 * @see org.eclipse.ui.forms.IDetailsPage#dispose()
 	 */
 	public void dispose() {
+		
 	}
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.forms.IDetailsPage#isDirty()
 	 */
