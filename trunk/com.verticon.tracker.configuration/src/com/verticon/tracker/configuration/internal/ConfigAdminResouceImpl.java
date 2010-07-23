@@ -502,8 +502,14 @@ public class ConfigAdminResouceImpl extends XMLResourceImpl {
 		Copier copier = new Copier();
 		final Bundle[] bundles = bctx.getBundles();
 		for (int i = 0; i < bundles.length; i++) {
-			Enumeration<URL> en = bundles[i]
-					.getResources("OSGI-INF/metatype/metatype.xml");
+			Enumeration<URL> en;
+			try {
+				en = bundles[i]
+						.getResources("OSGI-INF/metatype/metatype.xml");
+			} catch (Exception e2) {
+				logger.error(bundleMarker, "Failed to load metadata from {}", bundles[i].getSymbolicName());
+				continue;
+			}
 			if (en != null) {
 
 				while (en.hasMoreElements()) {
