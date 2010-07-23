@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Verticon, Inc. and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Verticon, Inc. - initial API and implementation
+ *******************************************************************************/
 package com.verticon.tracker.irouter.monitor.view.internal;
 
 import static com.verticon.tracker.irouter.monitor.view.internal.Component.bundleMarker;
@@ -35,10 +45,12 @@ public class WiredNodeGraphEntityContentProvider implements
 	private Set<WiredNode> model;
 	private StructuredViewer viewer;
 	private final Display display;
+	private final MonitorMasterDetailsBlock masterDetail;
 
-	WiredNodeGraphEntityContentProvider(Display display) {
+	WiredNodeGraphEntityContentProvider( MonitorMasterDetailsBlock masterDetail) {
 		super();
-		this.display = display;
+		this.display = masterDetail.getDisplay();
+		this.masterDetail =masterDetail;
 	}
 
 	@Override
@@ -91,15 +103,17 @@ public class WiredNodeGraphEntityContentProvider implements
 		Set<WiredNode> consumers = new HashSet<WiredNode>();
 		String producerPid = producer.getPid();
 		Wire[] wires = Component.INSTANCE.getWires();
-		for (Wire wire : wires) {
-			String wirePid = (String) wire.getProperties().get(
-					WIREADMIN_PRODUCER_PID);
-			if (producerPid.equals(wirePid)) {
-				String consumerPid = (String) wire.getProperties().get(
-						WIREADMIN_CONSUMER_PID);
-				WiredNode consumer = findConsumer(consumerPid);
-				if (consumer != null) {
-					consumers.add(consumer);
+		if(wires!=null){	
+			for (Wire wire : wires) {
+				String wirePid = (String) wire.getProperties().get(
+						WIREADMIN_PRODUCER_PID);
+				if (producerPid.equals(wirePid)) {
+					String consumerPid = (String) wire.getProperties().get(
+							WIREADMIN_CONSUMER_PID);
+					WiredNode consumer = findConsumer(consumerPid);
+					if (consumer != null) {
+						consumers.add(consumer);
+					}
 				}
 			}
 		}
@@ -240,6 +254,10 @@ public class WiredNodeGraphEntityContentProvider implements
 		remove(dif.getRemovals());
 	}
 
+	/**
+	 * This should also remove any pages
+	 * @param wiredNodes
+	 */
 	private void remove(final Set<WiredNode> wiredNodes) {
 		if (wiredNodes == null) {
 			return;
@@ -248,9 +266,10 @@ public class WiredNodeGraphEntityContentProvider implements
 			public void run() {
 				for (WiredNode wiredNode : wiredNodes) {
 					((GraphViewer) viewer).removeNode(wiredNode);
-					// viewer.refresh(wiredNode,false);
+					masterDetail.removePage(wiredNode);
 					logger.debug(bundleMarker, "Removed {}", wiredNode);
 				}
+				((GraphViewer) viewer).applyLayout();
 			}
 		});
 
@@ -267,6 +286,7 @@ public class WiredNodeGraphEntityContentProvider implements
 					// viewer.refresh(wiredNode,false);
 					logger.debug(bundleMarker, "Added {}", wiredNode);
 				}
+				((GraphViewer) viewer).applyLayout();
 			}
 		});
 

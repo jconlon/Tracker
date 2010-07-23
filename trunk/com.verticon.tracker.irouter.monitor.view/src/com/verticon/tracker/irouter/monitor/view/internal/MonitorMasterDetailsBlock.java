@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Verticon, Inc. and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Verticon, Inc. - initial API and implementation
+ *******************************************************************************/
 package com.verticon.tracker.irouter.monitor.view.internal;
 
 import java.net.MalformedURLException;
@@ -25,23 +35,31 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.zest.core.viewers.GraphViewer;
 import org.eclipse.zest.core.widgets.ZestStyles;
+import org.eclipse.zest.layouts.LayoutAlgorithm;
+import org.eclipse.zest.layouts.LayoutStyles;
+import org.eclipse.zest.layouts.algorithms.GridLayoutAlgorithm;
+import org.eclipse.zest.layouts.algorithms.HorizontalTreeLayoutAlgorithm;
+import org.eclipse.zest.layouts.algorithms.RadialLayoutAlgorithm;
+import org.eclipse.zest.layouts.algorithms.SpringLayoutAlgorithm;
+import org.eclipse.zest.layouts.algorithms.TreeLayoutAlgorithm;
 
 
 public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 
 	private GraphViewer viewer;
-	
+	private Display display;
+
 	/**
 	 * Map factory Pids as keys to IDetailsPage implementations. A template factory use a 
 	 * TEMPLATE constant .
 	 */
-	private Map<Object, IDetailsPage> keyMap = new HashMap<Object, IDetailsPage>();
+	private Map<WiredNode, IDetailsPage> keyMap = new HashMap<WiredNode, IDetailsPage>();
 	
 	
 	@Override
 	protected void createMasterPart(final IManagedForm managedForm, final Composite parent) {
 		FormToolkit toolkit = managedForm.getToolkit();
-		
+		this.display = parent.getDisplay();
 		Section section = toolkit.createSection(parent, Section.DESCRIPTION);
 		section.setText("iRouter Network Services and Wire Connections");
 		section.setDescription(
@@ -68,19 +86,26 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 		});
 		
 		
-		setUpViewer(parent.getDisplay());
+		setUpViewer();
 	}
 	
-	private void setUpViewer(Display display) {
-		viewer.setContentProvider(new WiredNodeGraphEntityContentProvider(display));
+	private void setUpViewer() {
+		viewer.setContentProvider(new WiredNodeGraphEntityContentProvider(this));
 		viewer.setLabelProvider(new WiredNodeLabelProvider());
 		//viewer.setSorter(new NameSorter());
 		IObservableSet observables = (IObservableSet)Component.INSTANCE.getModel();
 		//Model contains a set WiredNode objects
 		viewer.setInput(observables);
-		
+	    setTreeLayout(viewer);
 	}
 
+	/**
+	 * @return the viewer
+	 */
+	GraphViewer getViewer() {
+		return viewer;
+	}
+	
 	@Override
 	protected void registerPages(DetailsPart detailsPart) {
 		
@@ -144,6 +169,62 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 		}
 		form.getToolBarManager().add(haction);
 		form.getToolBarManager().add(vaction);
+	}
+
+	/**
+	 * Wired Node was removed from the model
+	 * @param wiredNode
+	 */
+	void removePage(WiredNode wiredNode){
+		IDetailsPage page = keyMap.get(wiredNode);
+		if(page!=null){
+			page.dispose();
+			keyMap.remove(wiredNode);
+		}
+	}
+	
+	/**
+	 * @return the display
+	 */
+	Display getDisplay() {
+		return display;
+	}
+	
+	static void setTreeLayout(GraphViewer viewer) {
+		LayoutAlgorithm layout = new 
+		TreeLayoutAlgorithm();
+		viewer.setLayoutAlgorithm(layout, true);
+		viewer.applyLayout();
+	}
+	
+	static void setSpringLayout(GraphViewer viewer) {
+		LayoutAlgorithm layout = new
+		 SpringLayoutAlgorithm();
+		viewer.setLayoutAlgorithm(layout, true);
+		viewer.applyLayout();
+	}
+
+	static void setGridLayout(GraphViewer viewer) {
+		LayoutAlgorithm layout = new
+		 GridLayoutAlgorithm();
+		viewer.setLayoutAlgorithm(layout, true);
+		viewer.applyLayout();
+
+	}
+
+	static void setHorizontalLayout(GraphViewer viewer) {
+		LayoutAlgorithm layout = new
+		 HorizontalTreeLayoutAlgorithm();
+		viewer.setLayoutAlgorithm(layout, true);
+		viewer.applyLayout();
+	}
+
+
+	static void setRadialLayout(GraphViewer viewer) {
+		LayoutAlgorithm layout = new
+		 RadialLayoutAlgorithm();
+		viewer.setLayoutAlgorithm(layout, true);
+		viewer.applyLayout();
 	}
 
 }
