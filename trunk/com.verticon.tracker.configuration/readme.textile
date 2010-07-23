@@ -1,0 +1,56 @@
+h1.  Tracker Configuration  com.verticon.tracker.configuration 
+
+__Version 0.1.0__
+
+__06/03/10__
+
+{toc}
+
+
+h2. Introduction
+
+Components for implementing an EMF Resource for Metatype based on deployed metatype.xml resources and ConfigAdmin configurations.
+
+"See Ticket#551":http://tracker-project.verticon.com/verticon_Tracker/ticket/551
+
+h3. Exported classes
+
+* ConfigAdminResourceFactoryImpl.java
+**  Implements an EMF ResourceFactory
+
+h3. Internal classes
+
+* ConfigAdminResourceImpl.java
+** Implements an EMF Resource for the ConfigurationAdmin services
+** EMF Resource for creating a Metatype model
+*** Metatype resources in deployed bundles
+*** Configurations in the ConfigurationAdmin service
+** Extends XMLResourceImpl
+
+h3. Related projects
+
+* com.verticon.tracker.configuration.tests
+* com.verticon.tracker.configuration.editor
+* com.verticon.osgi.metatype.core.model
+* com.verticon.tracker.configuration.modelresource
+** This was an experimental project that implemented the ModelResource Services defined in com.verticon.osgi.metatype.core
+
+h3. Problems
+
+* ConfigAdminModelResource.java 
+## Extends AbstractModelResource.java
+## Saving issues.
+
+h3. Tests
+
+See com.verticon.tracker.configuration.tests project
+
+# ConfigAdminResourceImplTest.java
+
+h3. TODO
+
+* Create ConfigAdminModelResourceTest JUnit test in com.verticon.tracker.configuration.tests project
+**  to test use cases and resolve problems with loading, saving, and using the Undo facilities while keeping
+the isDirty state synchronized.
+
+
