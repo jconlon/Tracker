@@ -42,6 +42,7 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 	private Action setGridLayoutAction;
 	private Action setSpringLayoutAction;
 	private Action setHorizontalLayoutAction;
+	private Action refresh;
 
 	public MonitorView() {
 		super();
@@ -116,6 +117,8 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 		toolBarManager.add(setGridLayoutAction);
 		toolBarManager.add(setSpringLayoutAction);
 		toolBarManager.add(setHorizontalLayoutAction);
+		toolBarManager.add(new Separator());
+		toolBarManager.add(refresh);
 	}
 	
 	/**
@@ -133,6 +136,8 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 		manager.add(setTreeLayoutAction);
 		manager.add(setRadialLayoutAction);
 		manager.add(new Separator());
+		manager.add(refresh);
+		manager.add(new Separator());
 		manager.add(contextZoomContributionViewItem);
 	}
 
@@ -146,40 +151,48 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 				MonitorMasterDetailsBlock.setTreeLayout(block.getViewer());
 			}
 		};
-		setTreeLayoutAction.setText("TreeLayout");
-		setTreeLayoutAction.setToolTipText("Set the layout to a tree like view");
+		setTreeLayoutAction.setText("Tree");
+		setTreeLayoutAction.setToolTipText("Set the layout of the graph to a tree like view");
 
 		setRadialLayoutAction = new Action() {
 			public void run() {
 				MonitorMasterDetailsBlock.setRadialLayout(block.getViewer());
 			}
 		};
-		setRadialLayoutAction.setText("RadialLayout");
-		setRadialLayoutAction.setToolTipText("Set the layout to a circular like view");
+		setRadialLayoutAction.setText("Radial");
+		setRadialLayoutAction.setToolTipText("Set the layout of the graph to a circular like view");
 
 		setGridLayoutAction = new Action() {
 			public void run() {
 				MonitorMasterDetailsBlock.setGridLayout(block.getViewer());
 			}
 		};
-		setGridLayoutAction.setText("GridLayout");
-		setGridLayoutAction.setToolTipText("Set the layout to a grid like view");
+		setGridLayoutAction.setText("Grid");
+		setGridLayoutAction.setToolTipText("Set the layout of the graph to a grid like view");
 
 		setSpringLayoutAction = new Action() {
 			public void run() {
 				MonitorMasterDetailsBlock.setSpringLayout(block.getViewer());
 			}
 		};
-		setSpringLayoutAction.setText("SpringLayout");
-		setSpringLayoutAction.setToolTipText("Set the layout to a spring like view");
+		setSpringLayoutAction.setText("Spring");
+		setSpringLayoutAction.setToolTipText("Set the layout of the graph to a spring like view");
 
 		setHorizontalLayoutAction = new Action() {
 			public void run() {
 				MonitorMasterDetailsBlock.setHorizontalLayout(block.getViewer());
 			}
 		};
-		setHorizontalLayoutAction.setText("HorizontalLayout");
-		setHorizontalLayoutAction.setToolTipText("Set the layout to a horizontal like view");
+		setHorizontalLayoutAction.setText("Horizontal");
+		setHorizontalLayoutAction.setToolTipText("Set the layout of the graph to a horizontal like view");
+
+		refresh = new Action() {
+			public void run() {
+				block.getViewer().refresh();
+			}
+		};
+		refresh.setText("Refresh");
+		refresh.setToolTipText("Refresh the graph.");
 
 	}
 }
