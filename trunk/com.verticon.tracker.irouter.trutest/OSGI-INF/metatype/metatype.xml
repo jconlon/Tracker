@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD description="Configuration for the Tracker Tru-Test Indicator Instance" name="Tracker Tru-Test Indicator" 
+  	id="com.verticon.tracker.irouter.trutest.indicatorfactory">
+  	
+    <AD name="Connection uri"  id="connection.uri" required="true" type="String" 
+    	default=""
+    	description="URI to connect to the balance. Example socket://192.168.0.118:3001"/> 
+    	
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" required="true" type="String" default=""
+        description="Name of the group of components that will be wired together."/>
+        
+    <AD name="Stable weight measurement error"  id="stable.weight.error" required="false" 
+    	type="Double" default=".01" description="Measurement error to use for stable weights."/>
+    	
+    <AD name="Unstable weight measurement error"  id="unstable.weight.error" required="false" 
+    	type="Double" default=".1" description="Measurement error to use for unstable weights."/>
+    	
+    <AD name="Poll interval miliseconds"  id="poll.milliseconds.delay" required="false" type="Long" 
+    	default="200" 
+    	description="Miliseconds pause between polls to request new information from the scale."/>
+    	
+    <AD name="Request command"  id="request.command" required="false" type="String" 
+    	default="{RP}%13%" description="Command to use to request information from the scale."/>
+    	
+    <AD name="Response pattern"  id="response.pattern" required="false" type="String" 
+    	default="^\\[(.+)\\]$" description="Regex pattern for parsing information responses from the scale."/>
+    	
+    <AD name="Connection retry interval seconds"  id="connection.retry.seconds" required="false" 
+    	type="Long" default="5" description="Seconds to wait between reconnection attempts."/>
+    	
+  	<AD name="Command consumption delay milliseconds" id="consumer.command.delay" required="false" 
+  		type="Integer" default="100" 
+  		description="MiliSeconds to wait between attempts to consume commands sent on wires from other components."/>
+  		
+    <AD name="Send unstable weights" id="send.unstable.weights" required="false" type="Boolean" 
+    	default="true"
+    	description="Should unstable weights be sent to components?"/>
+    	
+    <AD name="Animal Life Data upload record pattern" id="upload.record.pattern" type="String" 
+    	default="^[0-9]{15,15},[0-9]{4,4},[1-2],\d.\d\d$" 
+    	description="Pattern to use for uploading life data. Watch out for the slashes.  Use single slashes will produce a
+			 string with double slashes."/>
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.trutest.indicatorfactory" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.trutest.indicatorfactory"/>
+  </Designate>
+  
+  
+</metatype:MetaData>
