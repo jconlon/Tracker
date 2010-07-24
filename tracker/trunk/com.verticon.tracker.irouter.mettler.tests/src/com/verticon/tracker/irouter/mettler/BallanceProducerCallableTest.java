@@ -156,6 +156,11 @@ public class BallanceProducerCallableTest{
 		d = instance.parseBalanceWeight(one);
 		assertEquals(new Double(120.1), d);
 		
+		one = "S D     295.90 g\r\n";
+		d = instance.parseBalanceWeight(one);
+		assertEquals(new Double(295.9), d);
+		
+		
 	}
 	@Test
 	public void testCreateWeight() {
@@ -305,7 +310,7 @@ public class BallanceProducerCallableTest{
 		@Override
 		public Double getConfigurationDouble(String key) {
 			// TODO Auto-generated method stub
-			return null;
+			return (Double)Context.DEFAULTS.get(key);
 		}
 
 		@Override
