@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Blood Weight Control Test
+Bundle-SymbolicName: com.verticon.tracker.irouter.bwcontrol.test
+Bundle-Version: 0.1.1
+Bundle-Vendor: Verticon, Inc.
+Fragment-Host: com.verticon.tracker.irouter.bwcontrol;bundle-version="0.1.5"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
