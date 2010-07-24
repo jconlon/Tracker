@@ -1,14 +1,14 @@
 package com.verticon.tracker.irouter.mettler;
 
+import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
+import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
+import static com.verticon.tracker.irouter.common.TrackerConstants.WEIGHT_MEASUREMENT_SCOPE;
+import static com.verticon.tracker.irouter.mettler.Context.PRODUCER_WEIGHT_MEASUREMENT_NAME;
+import static com.verticon.tracker.irouter.mettler.FactoryComponent.bundleMarker;
 import static org.osgi.framework.Constants.SERVICE_PID;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_PID;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_PRODUCER_FLAVORS;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_PRODUCER_SCOPE;
-import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
-import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
-import static com.verticon.tracker.irouter.common.TrackerConstants.WEIGHT_MEASUREMENT_SCOPE;
-import static com.verticon.tracker.irouter.mettler.Context.*;
-import static com.verticon.tracker.irouter.mettler.FactoryComponent.bundleMarker;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -18,6 +18,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
+import org.osgi.service.monitor.Monitorable;
+import org.osgi.service.monitor.StatusVariable;
 import org.osgi.service.wireadmin.BasicEnvelope;
 import org.osgi.service.wireadmin.Envelope;
 import org.osgi.service.wireadmin.Producer;
@@ -30,7 +32,7 @@ import com.verticon.tracker.irouter.common.IContext;
 import com.verticon.tracker.irouter.common.IMeasurementSender;
 
 
-public class MeasurementProducer implements Producer, IMeasurementSender{
+public class MeasurementProducer implements Producer, IMeasurementSender, Monitorable{
 
 	/**
 	 * slf4j Logger
@@ -38,6 +40,9 @@ public class MeasurementProducer implements Producer, IMeasurementSender{
 	private final Logger log = LoggerFactory
 			.getLogger(MeasurementProducer.class);
 
+	private static final String COMMAND_LAST = "producer.Last_Weight_Sent";
+	private static final String WIRES_COUNT = "producer.Connected_Consumers";
+	
 	private final IContext context;
 	
 	//Shared wires protected with concurrent collection
@@ -48,6 +53,10 @@ public class MeasurementProducer implements Producer, IMeasurementSender{
 	private final String scopeName;
 	
 	private ServiceRegistration wireAdminReg = null;
+	private ServiceRegistration monitorableReg = null;
+	
+	
+	private Float lastWeight = new Float(0);
 	
 	public MeasurementProducer(IContext context) {
 		super();
@@ -109,6 +118,7 @@ public class MeasurementProducer implements Producer, IMeasurementSender{
 	 */
 	@Override
 	public void send(Measurement measurement) {
+		lastWeight = new Float(measurement.getValue());
 		this.envelope = new BasicEnvelope(measurement,context.getPid(),scopeName);
 		if(!wires.isEmpty()){
 			log.debug(bundleMarker,"{}: sending measuement={}, to {} wires",
@@ -136,6 +146,11 @@ public class MeasurementProducer implements Producer, IMeasurementSender{
 			 wireAdminReg.unregister();
 			 wireAdminReg=null;
 		 }
+		if(monitorableReg != null){
+			log.debug(bundleMarker,this + ":Unregistering monitorable.....");
+			monitorableReg.unregister();
+			monitorableReg=null;
+		 }
 		log.debug(bundleMarker,this + ":Unregistered");
 	}
 	
@@ -155,5 +170,63 @@ public class MeasurementProducer implements Producer, IMeasurementSender{
 				context.getConfigurationString(TRACKER_WIRE_GROUP_NAME));
 		wireAdminReg = bc.registerService(Producer.class
 				.getName(), this, regProps);
+		monitorableReg = bc.registerService(Monitorable.class.getName(), this, regProps);
+	}
+
+    @Override
+	public String[] getStatusVariableNames() {
+		return new String[]{COMMAND_LAST,WIRES_COUNT};
+	}
+
+	@Override
+	public StatusVariable getStatusVariable(String name)
+	throws IllegalArgumentException {
+		if (COMMAND_LAST.equals(name)){
+			return
+			new StatusVariable(name,
+					StatusVariable.CM_SI,
+					lastWeight
+					);
+		}
+		
+		
+		
+		if (WIRES_COUNT.equals(name)){
+			return
+			new StatusVariable(name,
+					StatusVariable.CM_GAUGE,
+					wires.size()
+					);
+		}else{
+			throw new IllegalArgumentException(
+					"Invalid Status Variable name " + name);
+		}
+	}
+	
+	@Override
+	public boolean notifiesOnChange(String id) throws IllegalArgumentException {
+		return false;
+	}
+
+	@Override
+	public boolean resetStatusVariable(String id)
+			throws IllegalArgumentException {
+		
+		return false;
+	}
+
+	@Override
+	public String getDescription(String name) throws IllegalArgumentException {
+		if (COMMAND_LAST.equals(name)){
+			return
+			"The last command sent to the TruTest scalehead";
+		}
+		
+		
+		if (WIRES_COUNT.equals(name)){
+			return
+			"The number of connected wires.";
+		}
+		return null;
 	}
 }
