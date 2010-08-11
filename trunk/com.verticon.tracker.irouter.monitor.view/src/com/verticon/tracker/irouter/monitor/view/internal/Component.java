@@ -10,10 +10,8 @@
  *******************************************************************************/
 package com.verticon.tracker.irouter.monitor.view.internal;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.databinding.observable.set.WritableSet;
@@ -59,6 +57,7 @@ public class Component implements WireAdminListener {
 
 	
 	
+	@SuppressWarnings("unchecked")
 	public Component() {
 		super();
 		if(Realm.getDefault() ==null){
@@ -66,7 +65,6 @@ public class Component implements WireAdminListener {
 
 				@Override
 				public boolean isCurrent() {
-					// TODO Auto-generated method stub
 					return true;
 				}});
 		}else{

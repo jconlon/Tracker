@@ -65,18 +65,37 @@ public class WiredNode {
 		this.service_id = service_id;
 	}
 
+//     String nodeText(){
+//    	StringBuilder buf = new StringBuilder(
+//    			group);
+//    	buf.append('\n');
+//    	
+//    	String name = (String) pid;
+//    	String prefix = "com.verticon.tracker.irouter.";
+//    	int nameIndex2 = name.indexOf('.', prefix.length());
+//    	buf.append(name.substring(prefix.length(), nameIndex2));//.append('-');
+//    	return buf.toString();
+//    }
+     
+     /**
+      * Strip off the pid number from the end and if the name of the 
+      * WiredNode begins with the verticon prefix,
+      * strip this off, if not just include it.
+      */
      String nodeText(){
-    	StringBuilder buf = new StringBuilder(
-    			group);
-    	buf.append('\n');
-    	
-    	String name = (String) pid;
-    	String prefix = "com.verticon.tracker.irouter.";
-    	int nameIndex2 = name.indexOf('.', prefix.length());
-    	buf.append(name.substring(prefix.length(), nameIndex2));//.append('-');
-//    	buf.append(type).append('\n').append(scope);
-    	return buf.toString();
-    }
+     	String name = (String) pid;
+     	String prefix = "com.verticon.tracker.irouter.";
+     	if(pid.contains(prefix)){
+     		int nameIndex2 = name.indexOf('.', prefix.length());
+     		name = name.substring(prefix.length(), nameIndex2);
+     	}else{
+     		int nameIndex = name.indexOf('-');
+     		if(nameIndex!=-1){
+     			name = name.substring(0, nameIndex);
+     		}
+     	}
+     	return name;
+     }
      
     boolean isProducer(){
     	return type == Type.PRODUCER;
