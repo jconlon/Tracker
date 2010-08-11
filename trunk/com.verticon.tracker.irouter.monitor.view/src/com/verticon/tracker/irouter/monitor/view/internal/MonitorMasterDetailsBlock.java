@@ -16,14 +16,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.databinding.observable.set.IObservableSet;
+import org.eclipse.draw2d.SWTGraphics;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.DetailsPart;
 import org.eclipse.ui.forms.IDetailsPage;
 import org.eclipse.ui.forms.IDetailsPageProvider;
@@ -34,9 +41,9 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.zest.core.viewers.GraphViewer;
+import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.ZestStyles;
 import org.eclipse.zest.layouts.LayoutAlgorithm;
-import org.eclipse.zest.layouts.LayoutStyles;
 import org.eclipse.zest.layouts.algorithms.GridLayoutAlgorithm;
 import org.eclipse.zest.layouts.algorithms.HorizontalTreeLayoutAlgorithm;
 import org.eclipse.zest.layouts.algorithms.RadialLayoutAlgorithm;
@@ -47,7 +54,6 @@ import org.eclipse.zest.layouts.algorithms.TreeLayoutAlgorithm;
 public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 
 	private GraphViewer viewer;
-	private Display display;
 
 	/**
 	 * Map factory Pids as keys to IDetailsPage implementations. A template factory use a 
@@ -59,7 +65,6 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 	@Override
 	protected void createMasterPart(final IManagedForm managedForm, final Composite parent) {
 		FormToolkit toolkit = managedForm.getToolkit();
-		this.display = parent.getDisplay();
 		Section section = toolkit.createSection(parent, Section.DESCRIPTION);
 		section.setText("iRouter Network Services and Wire Connections");
 		section.setDescription(
@@ -169,6 +174,42 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 		}
 		form.getToolBarManager().add(haction);
 		form.getToolBarManager().add(vaction);
+		
+		Action screenshotAction = new Action() {
+			public void run() {
+
+				Shell shell = Display.getCurrent().getActiveShell();
+				Graph g = (Graph) viewer.getControl();
+				Rectangle bounds = g.getContents().getBounds();
+				Point size = new Point(g.getContents().getSize().width, g.getContents().getSize().height);
+				org.eclipse.draw2d.geometry.Point viewLocation = g.getViewport().getViewLocation();
+				final Image image = new Image(null, size.x, size.y);
+				GC gc = new GC(image);
+				SWTGraphics swtGraphics = new SWTGraphics(gc);
+
+				swtGraphics.translate(-1 * bounds.x + viewLocation.x, -1 * bounds.y + viewLocation.y);
+				g.getViewport().paint(swtGraphics);
+				gc.copyArea(image, 0, 0);
+				gc.dispose();
+
+				ImagePreviewPane previewPane = new ImagePreviewPane(shell);
+				previewPane.setText("Image Preview");
+				previewPane.open(image, size);
+			}
+		};
+
+		screenshotAction.setText("Take A Screenshot");
+		try {
+			URL url = new URL("platform:/plugin/com.verticon.tracker.irouter.monitor.view/icons/snapshot.gif");
+			
+			screenshotAction.setImageDescriptor( ImageDescriptor.createFromURL(url));
+		} catch (MalformedURLException e) {
+
+		}
+		screenshotAction.setToolTipText("Take screenshot");
+		screenshotAction.setEnabled(true);
+		form.getToolBarManager().add(new Separator());
+		form.getToolBarManager().add(screenshotAction);
 	}
 
 	/**
@@ -181,13 +222,6 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 			page.dispose();
 			keyMap.remove(wiredNode);
 		}
-	}
-	
-	/**
-	 * @return the display
-	 */
-	Display getDisplay() {
-		return display;
 	}
 	
 	static void setTreeLayout(GraphViewer viewer) {

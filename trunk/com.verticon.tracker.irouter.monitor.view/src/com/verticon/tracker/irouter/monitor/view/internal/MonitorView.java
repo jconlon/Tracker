@@ -36,7 +36,6 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 	private final MonitorMasterDetailsBlock block;
 	private ZoomContributionViewItem contextZoomContributionViewItem;
 	private ZoomContributionViewItem toolbarZoomContributionViewItem;
-//	private Action screenshotAction;
 	private Action setTreeLayoutAction;
 	private Action setRadialLayoutAction;
 	private Action setGridLayoutAction;
