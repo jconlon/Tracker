@@ -234,6 +234,8 @@ public class MeasurementProducerCallable implements Callable<Void> {
 			log.debug(bundleMarker,"{}: sending {}", this,measurement);
 			
 			measurementSender.send(measurement);
+		}else{
+			log.warn("{}: failed to create weight response={}",this, Utils.toAscii(response));
 		}
 	}
 
