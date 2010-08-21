@@ -108,7 +108,7 @@ public class ComponentFactory extends AbstractComponentFactory {
 	 */
 	@Override
 	public String getName() {
-		return "Abbott Bleed Operations Controller";
+		return "Bleed Operations Controller";
 	}
 
 	/*
