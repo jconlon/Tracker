@@ -15,7 +15,6 @@ import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.monitor.Monitorable;
 import org.slf4j.Logger;
 
-import com.verticon.tracker.irouter.common.internal.MonitorableHandler;;
 
 /**
  * A controller for starting and stopping wireadmin services.

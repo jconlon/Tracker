@@ -60,7 +60,7 @@ public abstract class AbstractComponentFactory implements ManagedServiceFactory 
 	protected abstract ServiceController createServiceController(String pid,
 			Dictionary<?,?> config) throws ConfigurationException ;
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void updated(String pid, Dictionary config)
 			throws ConfigurationException {
