@@ -47,6 +47,7 @@ public class Component implements ManagedServiceFactory {
 
 
 	private Map<String, Indicator> indicators = null;
+//	private Map<String, ServiceRegistration> registrations = null;
 	private ExecutorService exec;
 	private ScheduledExecutorService scheduler;
 	private BundleContext bc;
@@ -68,12 +69,20 @@ public class Component implements ManagedServiceFactory {
 		exec = Executors.newCachedThreadPool();
 		scheduler = Executors.newSingleThreadScheduledExecutor();
 		indicators = new HashMap<String, Indicator>();
+//		registrations = new HashMap<String, ServiceRegistration>();
 		log.debug(bundleMarker,"Started");
 	}
 
 	protected void deactivate(BundleContext context) throws Exception {
+//		for (ServiceRegistration registration : registrations.values()) {
+//			registration.unregister();
+//		}
+//		registrations.clear();
+//		registrations=null;
+		
 		Collection<Indicator> indicatorInstances = indicators.values();
 		for (Indicator indicator : indicatorInstances) {
+			indicator.unregisterMonitorable();
 			indicator.stop();
 		}
 		indicators.clear();
@@ -93,7 +102,7 @@ public class Component implements ManagedServiceFactory {
 	 * @see org.osgi.service.cm.ManagedServiceFactory#updated(String,
 	 *      Dictionary)
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void updated(String pid, Dictionary config)
 			throws ConfigurationException {
@@ -103,6 +112,7 @@ public class Component implements ManagedServiceFactory {
 		if (indicator == null) {
 			indicator = new Indicator(pid,  exec, scheduler);
 			indicators.put(pid, indicator);
+			indicator.registerMonitorable();
 		}
 		indicator.updated(bc, config);
 	}

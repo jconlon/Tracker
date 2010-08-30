@@ -52,6 +52,7 @@ import java.util.Collection;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
@@ -63,16 +64,35 @@ import java.util.concurrent.ScheduledExecutorService;
 import javax.microedition.io.StreamConnection;
 
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
+import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.io.ConnectorService;
+import org.osgi.service.monitor.Monitorable;
+import org.osgi.service.monitor.StatusVariable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.irouter.common.ICallableFactory;
+import com.verticon.tracker.irouter.common.MonitorableHandler;
 import com.verticon.tracker.irouter.common.TaskMonitoringService;
 
-public class Indicator implements ICallableFactory, IIndicator {
+/**
+ * 
+ * Implementation of an TruTest Indicator and ICallableFactory. 
+ * 
+ * Provides a Writer, Reader, PID, configuration, executorService 
+ * and a scheduledExecutorService.
+ * 
+ * @author jconlon
+ *
+ */
+public class Indicator implements ICallableFactory, IIndicator, Monitorable{
+
+	private static final String DOWNLOAD_RECORDS_COUNT = "producer.Downloaded_Records";
+	private static final String UPLOAD_RECORDS_COUNT = "producer.Uploaded_Records";
+	private static final String CONNECTED = "producer.Is_Connected";
 
 	/**
 	 * slf4j Logger
@@ -99,9 +119,14 @@ public class Indicator implements ICallableFactory, IIndicator {
 	private BufferedReader in = null;
 	private volatile StreamConnection connection = null;
 	
-	
-	
+	private int upLoadedRecords;
+	private int downLoadedRecords;
 
+	private final Monitorable monitorableDelegate;
+
+
+	private ServiceRegistration monitorableRegistration;
+	
 	static {
 		DEFAULTS = new Hashtable<String, Object>();//socket://lantronix2:10001
 		DEFAULTS.put(CONNECTION_URI, CONNECTION_URI_DEFAULT);
@@ -135,6 +160,15 @@ public class Indicator implements ICallableFactory, IIndicator {
 		this.commandQueue = new LinkedBlockingQueue<String[]>();
 		this.envelopeProducer = new EnvelopeProducer(this);
 		this.commandConsumer = new CommandConsumer(this, commandQueue);
+		this.monitorableDelegate=createMonitorables();
+	}
+
+	private Monitorable createMonitorables() {
+		List<Monitorable> monitorables = new ArrayList<Monitorable>();
+		monitorables.add(envelopeProducer);
+		monitorables.add(commandConsumer);
+		monitorables.add(this);
+		return new MonitorableHandler(monitorables);
 	}
 
 	/**
@@ -154,7 +188,7 @@ public class Indicator implements ICallableFactory, IIndicator {
 		this.commandQueue = commandQueue;
 		this.envelopeProducer = new EnvelopeProducer(this);
 		this.commandConsumer = new CommandConsumer(this, commandQueue);
-		
+		this.monitorableDelegate=createMonitorables();
 	}
 
 	@Override
@@ -477,10 +511,6 @@ public class Indicator implements ICallableFactory, IIndicator {
 
 		ConnectorService cs = (ConnectorService) bundleContext.getService(sr);
 
-		if (sr == null) {
-			throw new IOException("Failed to find a ConnectorService.");
-		}
-
 		return cs;
 	}
 
@@ -571,6 +601,99 @@ public class Indicator implements ICallableFactory, IIndicator {
 	
 	public synchronized void  initialized() {
 		this.initialized = true;
+	}
+
+	@Override
+	public String[] getStatusVariableNames() {
+		return new String[]{DOWNLOAD_RECORDS_COUNT,UPLOAD_RECORDS_COUNT,CONNECTED };
+	}
+
+	@Override
+	public StatusVariable getStatusVariable(String name)
+			throws IllegalArgumentException {
+		if (DOWNLOAD_RECORDS_COUNT.equals(name)){
+			return
+			new StatusVariable(name,
+					StatusVariable.CM_CC,
+					downLoadedRecords
+					);
+		}
+		
+		if (UPLOAD_RECORDS_COUNT.equals(name)){
+			return
+			new StatusVariable(name,
+					StatusVariable.CM_CC,
+					upLoadedRecords
+					);
+		}
+		if (CONNECTED.equals(name)){
+			return
+			new StatusVariable(name,
+					StatusVariable.CM_DER,
+					in!=null
+					);
+		
+		}else{
+			throw new IllegalArgumentException(
+					"Invalid Status Variable name " + name);
+		}
+	}
+
+	@Override
+	public boolean notifiesOnChange(String id) throws IllegalArgumentException {
+		return false;
+	}
+
+	@Override
+	public boolean resetStatusVariable(String id)
+			throws IllegalArgumentException {
+		return false;
+	}
+
+	@Override
+	public String getDescription(String name) throws IllegalArgumentException {
+		if (DOWNLOAD_RECORDS_COUNT.equals(name)){
+			return
+			"The number of records downloaded to the scalehead.";
+		}
+		if (UPLOAD_RECORDS_COUNT.equals(name)){
+			return
+			"The number of records uploaded to the scalehead.";
+		}
+		if (CONNECTED.equals(name)){
+			return
+			"If there is a connected scalehead.";
+		}
+		return null;
+	}
+
+	@Override
+	public void setUpLoadedRecords(int upLoadedRecords) {
+		this.upLoadedRecords = upLoadedRecords;
+	}
+
+	/**
+	 * @param downLoadedRecords the downLoadedRecords to set
+	 */
+	public void setDownLoadedRecords(int downLoadedRecords) {
+		this.downLoadedRecords = downLoadedRecords;
+	}
+	
+	
+
+	@Override
+	public void registerMonitorable() {
+		Properties props = new Properties();
+		props.put("service.pid", pid);
+		monitorableRegistration = FrameworkUtil.getBundle(this.getClass()).getBundleContext()
+			.registerService(
+				Monitorable.class.getName(), monitorableDelegate, props);
+		
+	}
+
+	@Override
+	public void unregisterMonitorable() {
+		monitorableRegistration.unregister();
 	}
 
 }

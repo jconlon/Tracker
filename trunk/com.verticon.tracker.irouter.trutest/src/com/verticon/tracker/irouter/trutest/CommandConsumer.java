@@ -13,11 +13,11 @@
  */
 package com.verticon.tracker.irouter.trutest;
 
-import static com.verticon.tracker.irouter.trutest.Component.bundleMarker;
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.POLL_DELAY;
 import static com.verticon.tracker.irouter.common.TrackerConstants.REQUEST_COMMAND;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
+import static com.verticon.tracker.irouter.trutest.Component.bundleMarker;
 import static com.verticon.tracker.irouter.trutest.Constants.CONSUMER_SCOPE;
 import static com.verticon.tracker.irouter.trutest.Constants.SET_RP_POLL_COMMAND_ID;
 import static com.verticon.tracker.irouter.trutest.Constants.TURN_OFF_ACK;
@@ -30,12 +30,14 @@ import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_PRODUCER_PID;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
+import org.osgi.service.monitor.Monitorable;
+import org.osgi.service.monitor.StatusVariable;
 import org.osgi.service.wireadmin.Consumer;
 import org.osgi.service.wireadmin.Wire;
 import org.slf4j.Logger;
@@ -51,8 +53,10 @@ import com.verticon.tracker.irouter.common.Utils;
  * @author jconlon
  * 
  */
-class CommandConsumer implements Consumer {
+class CommandConsumer implements Consumer, Monitorable {
 	
+	private static final String WIRES_COUNT = "consumer.Connected_Producers";
+	private static final String LAST_COMMANDS = "consumer.Last_Commands";
 	
 	private static final int RESET_INTERVAL_SECONDS = 10;
 	private static final String[] INITIALIZE_COMMANDS = 
@@ -73,7 +77,11 @@ class CommandConsumer implements Consumer {
 	private ScheduledFuture<?> pollingTask = null;
 	private ScheduledFuture<?> writerFuture = null;
 	
+	private final AtomicInteger wiresConnected
+    = new AtomicInteger(0);
 
+	private String lastCommandsSent = null;
+	
 	/**
 	 * 
 	 * @param indicator context.
@@ -98,6 +106,7 @@ class CommandConsumer implements Consumer {
 	 */
 	@Override
 	public void producersConnected(Wire[] wires) {
+		wiresConnected.set(0);
 		if (wires == null) {
 			log.debug(bundleMarker,"{}: Not connected to any wires.", this);
 		} else {
@@ -105,6 +114,7 @@ class CommandConsumer implements Consumer {
 			for (Wire wire : wires) {
 				producers.add((String) wire.getProperties().get(
 						WIREADMIN_PRODUCER_PID));
+				wiresConnected.incrementAndGet();
 			}
 			
 			log.debug(bundleMarker,"{}: Connected to {} wires, and {} producers={}", new Object[]{this,
@@ -187,6 +197,7 @@ class CommandConsumer implements Consumer {
 	 */
 	void processString(String commands) {
 		try {
+			lastCommandsSent=commands.replace('\n', ';');
 			commandQueue.put(commands.split("\n"));
 			if(commandQueue.size()>10){
 				log.warn(bundleMarker,"{}: queue depth={}", this, commandQueue.size());
@@ -253,5 +264,55 @@ class CommandConsumer implements Consumer {
 			}
 		}
 
+	}
+
+	@Override
+	public String[] getStatusVariableNames() {
+		return new String[]{WIRES_COUNT,LAST_COMMANDS};
+	}
+
+	@Override
+	public StatusVariable getStatusVariable(String name)
+	throws IllegalArgumentException {
+		
+		if (WIRES_COUNT.equals(name)){
+			return
+			new StatusVariable(name,
+					StatusVariable.CM_GAUGE,
+					wiresConnected.get()
+					);
+		}if (LAST_COMMANDS.equals(name)){
+			return
+			new StatusVariable(name,
+					StatusVariable.CM_DER,
+					lastCommandsSent
+					);
+		}else{
+			throw new IllegalArgumentException(
+					"Invalid Status Variable name " + name);
+		}
+	}
+	
+	@Override
+	public boolean notifiesOnChange(String id) throws IllegalArgumentException {
+		return false;
+	}
+
+	@Override
+	public boolean resetStatusVariable(String id)
+			throws IllegalArgumentException {
+
+		return false;
+	}
+
+	@Override
+	public String getDescription(String name) throws IllegalArgumentException {	
+		if (WIRES_COUNT.equals(name)){
+			return
+			"The number of connected producers.";
+		}if (LAST_COMMANDS.equals(name)){
+			return "Last set of commands sent to the scalehead";
+		}
+		return null;
 	}
 }
