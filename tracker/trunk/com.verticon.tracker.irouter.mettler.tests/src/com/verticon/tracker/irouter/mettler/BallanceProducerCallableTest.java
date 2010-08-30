@@ -16,8 +16,6 @@ import static com.verticon.tracker.irouter.common.TrackerConstants.REQUEST_COMMA
 import static com.verticon.tracker.irouter.common.TrackerConstants.RESPONSE_PATTERN;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -27,16 +25,12 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 import javax.microedition.io.Connection;
-
 
 import org.junit.After;
 import org.junit.Before;
@@ -52,9 +46,6 @@ import org.slf4j.LoggerFactory;
 import com.verticon.tracker.connector.socket.SocketStreamConnection;
 import com.verticon.tracker.irouter.common.IContext;
 import com.verticon.tracker.irouter.common.IMeasurementSender;
-import com.verticon.tracker.irouter.mettler.Context;
-import com.verticon.tracker.irouter.mettler.IBalance;
-import com.verticon.tracker.irouter.mettler.MeasurementProducerCallable;
 
 public class BallanceProducerCallableTest{
 
@@ -118,35 +109,36 @@ public class BallanceProducerCallableTest{
 		assertNotNull(instance);
 	}
 
-	/**
-	 * Start the instance and wait for 10 seconds.
-	 * The emulator will be sending out continuous measurements at least 
-	 * 20 measurements should be collected.  
-	 * 
-	 * Note that the Balance Producer wraps Measurements with Envelopes and
-	 * sends these out to wires. 
-	 * 
-	 * This test must be called with an emulator running.
-	 */
-	@Test
-	public void testCall() {
-		future = exec.submit(instance);
-		try {
-			future.get(10, TimeUnit.SECONDS);
-		} catch (InterruptedException e) {
-			fail("Call to future interrupted.");
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-			fail(e.getCause().toString());
-		} catch (TimeoutException e) {
-			//expected
-		}
-		
-		assertTrue(
-				"Should have received over 9 measurements but only got "+
-				measurementSender.measurements.size(), 
-				measurementSender.measurements.size()>9);
-	}
+//	/**
+//	 * Start the instance and wait for 10 seconds.
+//	 * The emulator will be sending out continuous measurements at least 
+//	 * 20 measurements should be collected.  
+//	 * 
+//	 * Note that the Balance Producer wraps Measurements with Envelopes and
+//	 * sends these out to wires. 
+//	 * 
+//	 * This test must be called with an emulator running.
+//   * @deprecated use system test cases instead
+//	 */
+//	@Test
+//	public void testCall() {
+//		future = exec.submit(instance);
+//		try {
+//			future.get(10, TimeUnit.SECONDS);
+//		} catch (InterruptedException e) {
+//			fail("Call to future interrupted.");
+//		} catch (ExecutionException e) {
+//			e.printStackTrace();
+//			fail(e.getCause().toString());
+//		} catch (TimeoutException e) {
+//			//expected
+//		}
+//		
+//		assertTrue(
+//				"Should have received over 9 measurements but only got "+
+//				measurementSender.measurements.size(), 
+//				measurementSender.measurements.size()>9);
+//	}
 	@Test
 	public void testParseBalanceWeight() {
 		String one = "S S "+"     20.11"+" g\r\n";
