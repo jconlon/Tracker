@@ -68,6 +68,8 @@ public class MeasurementProducerCallable implements Callable<Void> {
 	private final long delayI;
 	private final String pid;
 
+	private String responsePattern;
+
 	/**
 	 * Manages a connection to a balance. Continuously reads from a balance and
 	 * outputs weight information.
@@ -80,7 +82,7 @@ public class MeasurementProducerCallable implements Callable<Void> {
 		this.balance = balance;
 		this.measurementSender = measurementSender;
 		IContext context = balance.getContext();
-		String responsePattern = context.getConfigurationString(RESPONSE_PATTERN);
+		responsePattern = context.getConfigurationString(RESPONSE_PATTERN);
 		Pattern pattern = Pattern.compile(responsePattern);
 		matcher = pattern.matcher("");
 		stableWeightError= context.getConfigurationDouble(STABLE_WEIGHT_ERROR);
@@ -235,7 +237,7 @@ public class MeasurementProducerCallable implements Callable<Void> {
 			
 			measurementSender.send(measurement);
 		}else{
-			log.warn("{}: failed to create weight response={}",this, Utils.toAscii(response));
+			log.warn(bundleMarker,"{}: failed to create weight response={}",this, Utils.toAscii(response));
 		}
 	}
 
@@ -265,8 +267,11 @@ public class MeasurementProducerCallable implements Callable<Void> {
 			try {
 				result = new Double(Double.parseDouble(s));
 			} catch (NumberFormatException e) {
-				// ignore
+				log.warn(bundleMarker,"{}: failed to parse matched group={}",this,s);
 			}
+		}else{
+			log.warn(bundleMarker,"{}: failed to match response=<{}> with pattern=<{}>",
+					new Object[]{this,response,responsePattern});
 		}
 
 		return result;
