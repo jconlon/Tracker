@@ -12,27 +12,21 @@ package com.verticon.tracker.irouter.trutest;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.trutest.Constants.BEEP_COMMAND;
-import static com.verticon.tracker.irouter.trutest.Constants.DOWNLOAD_RECORD_PATTERN;
 import static com.verticon.tracker.irouter.trutest.Constants.POLL_COMMAND;
 import static com.verticon.tracker.irouter.trutest.Constants.TURN_ON_ACK;
 import static com.verticon.tracker.irouter.trutest.Constants.TURN_ON_CRLF;
 import static com.verticon.tracker.irouter.trutest.Constants.TURN_ON_ERROR_CODES;
-import static com.verticon.tracker.irouter.trutest.Constants.UPLOAD_RECORD_PATTERN;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -46,22 +40,15 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.microedition.io.Connection;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.osgi.service.cm.ConfigurationException;
-import org.osgi.service.io.ConnectorService;
-import org.osgi.service.wireadmin.Envelope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.connector.socket.SocketStreamConnection;
-import com.verticon.tracker.irouter.common.IEnvelopeSender;
 import com.verticon.tracker.irouter.common.Utils;
 
 /**
@@ -70,7 +57,7 @@ import com.verticon.tracker.irouter.common.Utils;
  * A truTest mockIndicator or emulator must be running at the INDICATOR_URI
  * for it to test the Indicator class.
  * 
- * 
+ * @deprecated use system tests instead
  * @author jconlon
  *
  */
@@ -105,6 +92,8 @@ public class IndicatorTest{
 	private SocketStreamConnection connection =null;
 	private Writer fileWriter;
 	
+	private File downLoadedRawFile = null;
+	
 	@Override
 	public String toString() {
 		return "IndicatorCallableTest []";
@@ -120,12 +109,17 @@ public class IndicatorTest{
 		exec = Executors.newCachedThreadPool();
 		scheduler = Executors.newSingleThreadScheduledExecutor();
 	    commandQueue = new LinkedBlockingQueue<String[]>();
-//	    envelopeSender = new EnvelopeSender();
 		mockIndicator = new MockIndicator( INDICATOR_URI, exec, scheduler,commandQueue);
 		mockWritingCallable = new MockWritingCallable(mockIndicator,commandQueue);
 		mockReadingCallable =  new MockReadingCallable(mockIndicator);
 		//Clean out any downloads
 		mockIndicator.getDownload().delete();
+		
+		downLoadedRawFile = new File("/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.trutest.tests/testData/downloaded-raw.txt");
+		if(downLoadedRawFile.exists()){
+			downLoadedRawFile.delete();
+		}
+		
 		log.debug("SetUp finished .......................................................................");
 		
 	}
@@ -174,6 +168,7 @@ public class IndicatorTest{
 			fileWriter=null;
 		}
 		TimeUnit.SECONDS.sleep(5);
+		downLoadedRawFile = null;
 		log.debug("TearDown finished .......................................................................");
 	}
 
@@ -477,8 +472,214 @@ public class IndicatorTest{
 			}
 			
 		}
+		
+		
 	}
 
+	@Test  //FileUploading is not built into the mockIndicator.  Don't need to test this as it will write over previous uploaded data.
+	public void testUploadRawData() throws InterruptedException, ExecutionException, IOException {
+		log.debug("Starting: testRawFileUpload()");
+		
+		connection = new SocketStreamConnection(IndicatorTest.INDICATOR_URI, true);
+		
+		BufferedReader reader = new BufferedReader(new InputStreamReader(connection
+				.openInputStream()));
+		
+		Writer writer = new BufferedWriter(new OutputStreamWriter(connection
+				.openOutputStream()));
+		
+		/*
+		 * 
+		 * 1. Optionally, turn acknowledgements on with {ZA1}.
+		 * 2. Optionally, turn error responses on with {ZE1}.
+		 * 3. Optionally change the bit rate to 38400 bps for faster uploading using {SEBX38400}.
+		 * 
+ 		 * 6. Optionally, use {FC} to clear the file if necessary.
+		 * 7. Optionally, use various {FPxx} commands to set file properties as necessary (if file is empty). Any
+		 * 		File properties that are not set will take defaults. If the mockIndicator is only used with one type of load
+		 * 		bars or load cells, the resolution etc will be set to what is normal for this mockIndicator.
+		 * 8. Optionally us various {SFxx} commands to set up the File Data fields, {SLxx} commands to set up
+		 * 		Life Data fields, and {SOCU} to set up custom field values.
+		 * 9. Use {FI...} to specify which fields are to be uploaded.
+		 * 10. Use {FU} to upload each record. Use CRCs in every upload record if required.
+		 * 11. Use a long timeout of 20 seconds, because sometimes the mockIndicator must spend time rearranging
+		 * 	   the heap during an upload.
+		 * 
+		 */
+				
+		//4. Optionally, select the page that is to be downloaded using {FGss} (defaults to File data).
+		// {FGLD} for 
+		String selectLifeDataPage = "{FGLD}\r";
+		
+		// 5. Optionally, change the file using {FFn} (defaults to the current file).
+		
+		/*
+		 * 6. Optionally, use {FC} to clear the file if necessary. 
+		 */
+		String fileClear = "{FC1}\r";
+		
+		/*
+		 * 
+		 * 7. Optionally, use various {FPxx} commands to set file properties as necessary (if file is empty). Any
+		 * 	  File properties that are not set will take defaults. If the mockIndicator is only used with one type of load
+		 * 	  bars or load cells, the resolution etc will be set to what is normal for this mockIndicator.
+		 * 8. Optionally us various {SFxx} commands to set up the File Data fields, {SLxx} commands to set up
+		 * 	  Life Data fields, and {SOCU} to set up custom field values.
+		 * 
+		 * 
+		 * 9. Use {FI...} to specify which fields are to be uploaded.
+		 * {FH}
+		 * [F1AEID]
+		 * {FH}
+		 * [F2ATAG]
+		 * {FH}
+		 * [F3NBW Mult]
+		 * {FH}
+		 * [F4OSPECIES]
+		 * {FH}
+		 * []
+		 */
+		// EID TAG SPECIES BWMult
+		String fileHeaderList = "{FIF1,F2,F3,F4}\r";
+		
+		commandQueue.put(new String[]{TURN_ON_CRLF,
+				TURN_ON_ACK,
+				  TURN_ON_ERROR_CODES,
+				  selectLifeDataPage, fileClear,fileHeaderList});
+		
+		
+		/*
+		 * 
+		 * 10. Use {FU} to upload each record. Use CRCs in every upload record if required.
+		 * 11. Use a long timeout of 20 seconds, because sometimes the mockIndicator must spend time rearranging
+		 * 	   the heap during an upload.
+		 * 
+		 */
+		// EID TAG BWMult SPECIES
+		String[] records = new String[]{
+				"{FU123456789012345,1234,1,0.01}\r", 
+				"{FU123456789012346,4321,2,0.02}\r",
+				"{FU123456789012347,1111,1,0.03}\r"
+		};
+		
+		commandQueue.put(records);
+		
+		/*
+		 * 9. Use {FN} to get each record. An empty response means there are no more records.
+		 */
+		
+		String nextRecord = "{FN}\r";
+		
+		
+		while(!Thread.currentThread().isInterrupted()){
+			TimeUnit.MILLISECONDS.sleep(100);
+			String[] commands = commandQueue.take();
+			for (String command : commands) {
+				log.debug("{}: Sending command={}", this,Utils.toAscii(command));
+				writer.write(command);
+				writer.flush();
+				log.debug(this+": sent: "+command);
+			}
+			try {
+				
+				String response = reader.readLine();
+				log.debug("{}: Received response={}", this,Utils.toAscii(response));
+				if(response.startsWith("[]")){
+					log.debug(this+": No more data");
+					break;
+				}else if(response.startsWith("[")){
+					log.debug(this+": Record "+response);
+					
+				}
+				
+				commandQueue.add(new String[]{nextRecord});
+				
+			} catch (Exception e) {
+				log.debug(this+": timedout");
+			}
+		}
+		
+		TimeUnit.SECONDS.sleep(2);
+	}
+	
+	@Test  //FileDownloading is not built into the mockIndicator.  Don't need to test this as it will write over previous downloaded data.
+	public void testDownloadRawDataFile() throws InterruptedException, ExecutionException, IOException {
+		log.debug("Starting: testRawFileDownload()");
+		
+	    connection = new SocketStreamConnection(IndicatorTest.INDICATOR_URI, true);
+		
+		BufferedReader reader = new BufferedReader(new InputStreamReader(connection
+				.openInputStream()));
+		
+		Writer writer = new BufferedWriter(new OutputStreamWriter(connection
+				.openOutputStream()));
+		
+		fileWriter = new BufferedWriter(
+				new FileWriter(this.downLoadedRawFile));
+		
+		
+				
+		//4. Optionally, select the page that is to be downloaded using {FGss} (defaults to File data).
+		// {FGLD} for 
+		String selectLifeDataPage = "{FGLD}\r";
+		
+		// 5. Optionally, change the file using {FFn} (defaults to the current file).
+		
+		// 6. Optionally, use {FD} to reset to the 1st record of the file (defaults to first record).
+		String resetRecordOne = "{FD}\r";
+		/*
+		 * 7. Optionally, use {FH} repeatedly to get field IDs, types and labels of the columns present in the screen.
+		 */
+		
+		
+		/*
+		 * 8. Optionally, use {FI} e.g. {FIF0,DW,C0} to specify which fields returned by {FH} are required in the download (defaults to downloading all fields except ‘calculated’ fields).
+		 */
+		
+		commandQueue.put(new String[]{TURN_ON_CRLF,
+				TURN_ON_ACK,
+				  TURN_ON_ERROR_CODES,
+				  selectLifeDataPage, 
+				  resetRecordOne});
+		/*
+		 * 9. Use {FN} to get each record. An empty response means there are no more records.
+		 */
+		
+		String nextRecord = "{FN}\r";
+		
+		
+		while(!Thread.currentThread().isInterrupted()){
+			TimeUnit.MILLISECONDS.sleep(100);
+			String[] commands = commandQueue.take();
+			for (String command : commands) {
+				log.debug("{}: Sending command={}", this,Utils.toAscii(command));
+				writer.write(command);
+				writer.flush();
+				log.debug(this+": sent: "+command);
+			}
+			try {
+				String response = reader.readLine();
+				log.debug("{}: Received response={}", this,Utils.toAscii(response));
+				if(response.startsWith("[]")){
+					log.debug(this+": No more data");
+					break;
+				}else if(response.startsWith("[")){
+					log.debug(this+": Record "+response);
+					fileWriter.write(response+"\r");//[7,900014000554939,444,0.01,1]
+					fileWriter.flush();
+				}
+				
+				commandQueue.add(new String[]{nextRecord});
+				
+			} catch (Exception e) {
+				log.debug(this+": timedout");
+			}
+		}
+		
+		
+	}
+	
+	
 	class CommandToggleSender implements Runnable{
 		final String[] commands;
 		final String[] altCommands;
