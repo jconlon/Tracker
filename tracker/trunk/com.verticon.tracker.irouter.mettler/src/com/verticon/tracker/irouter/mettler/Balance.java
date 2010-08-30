@@ -135,10 +135,6 @@ public class Balance implements ICallableFactory, IBalance {
 
 		ConnectorService cs = (ConnectorService) context.getBundleContext().getService(sr);
 
-		if (sr == null) {
-			throw new IOException("Failed to find a ConnectorService.");
-		}
-
 		return cs;
 	}
 

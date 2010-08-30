@@ -10,8 +10,6 @@
  *******************************************************************************/
 package com.verticon.tracker.irouter.mettler;
 
-import static com.verticon.tracker.irouter.mettler.FactoryComponent.bundleMarker;
-
 import java.util.Collection;
 import java.util.Dictionary;
 import java.util.HashMap;
@@ -112,7 +110,7 @@ public class FactoryComponent implements ManagedServiceFactory {
 	 * @see org.osgi.service.cm.ManagedServiceFactory#updated(java.lang.String,
 	 * java.util.Dictionary)
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void updated(String pid, Dictionary config)
 			throws ConfigurationException {
