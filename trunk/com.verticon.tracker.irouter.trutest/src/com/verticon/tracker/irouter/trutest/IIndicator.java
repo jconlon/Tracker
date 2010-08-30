@@ -14,7 +14,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ScheduledExecutorService;
 
 /**
@@ -26,6 +25,31 @@ import java.util.concurrent.ScheduledExecutorService;
  */
 public interface IIndicator {
 
+	/**
+	 * Register the service with the framework. Invoked by the connection task
+	 * once a connection is established.
+	 */
+	void registerMonitorable();
+
+	/**
+	 * Unregister the service with the framework. Invoked by the connection task
+	 * when a connection is terminated.
+	 */
+	void unregisterMonitorable();
+	
+	/**
+	 * Number of records uploaded to the indicator
+	 * @param upLoadedRecords
+	 */
+	void setUpLoadedRecords(int upLoadedRecords);
+	
+	/**
+	 * Number of records downloaded to the indicator
+	 * @param downLoadedRecords
+	 */
+	void setDownLoadedRecords(int downLoadedRecords);
+	
+	
 	/**
 	 * Register the service with the framework. Invoked by the connection task
 	 * once a connection is established.
@@ -102,27 +126,7 @@ public interface IIndicator {
 	 * @return scheduler for any background pollers.
 	 */
 	ScheduledExecutorService getScheduler();
-	
-//	/**
-//	 * 
-//	 * Producer and Consumer Callable objects MUST be preceeded
-//	 * with a separate initializing task.  Producer and Consumer
-//	 * tasks can wait for this gate to open signifying the initialization
-//	 * task is done.
-//	 * @return startGate
-//	 */
-//	CountDownLatch getStartGate();
-//	
-//	/**
-//	 * Producer and Consumer Callable objects MAY need to be followed
-//	 * with a separate cleanup task.  Producer and Consumer
-//	 * tasks can toggle this gate to signifying they are terminated 
-//	 * and the cleanup task can proceed.
-//	 * 
-//	 * @return endGate
-//	 */
-//	CountDownLatch getEndGate();
-//	
+
 	/**
 	 * 
 	 * @return file to up load to the indicator at startup
@@ -134,12 +138,6 @@ public interface IIndicator {
 	 * @return file to down load from the indicator at startup
 	 */
 	File getDownload();
-	
-//	/**
-//	 * 
-//	 * @return directory where file synchronization takes place.
-//	 */
-//	File getSynchronizationDirectory();
 	
 	/**
 	 * 

@@ -32,9 +32,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
+import org.osgi.service.monitor.Monitorable;
+import org.osgi.service.monitor.StatusVariable;
 import org.osgi.service.wireadmin.Envelope;
 import org.osgi.service.wireadmin.Producer;
 import org.osgi.service.wireadmin.Wire;
+import org.osgi.util.measurement.Measurement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,8 +49,12 @@ import com.verticon.tracker.irouter.common.IEnvelopeSender;
  * and a Record States coming from a TruTest indicator.
  * @author jconlon
  */
-public class EnvelopeProducer implements Producer, IEnvelopeSender {
+public class EnvelopeProducer implements Producer, IEnvelopeSender, Monitorable {
 
+	private static final String LAST_WEIGHT = "producer.Last_Weight_Sent";
+	private static final String LAST_EID = "producer.Last_EID_Sent";
+	private static final String WIRES_COUNT = "producer.Connected_Consumers";
+	
 	/**
 	 * slf4j Logger
 	 */
@@ -60,11 +67,8 @@ public class EnvelopeProducer implements Producer, IEnvelopeSender {
 	//Shared instances accessed by multiple threads protected with a concurrent collection
 	private final List<Wire> wires = new CopyOnWriteArrayList<Wire>();
 	private final Map<String, Envelope> lastEnvelope = new ConcurrentHashMap<String, Envelope>();
-	
-	
 	private ServiceRegistration wireAdminReg = null;
-	
-	
+
 	public EnvelopeProducer(IIndicator indicator) {
 		super();
 		this.indicator = indicator;;
@@ -158,18 +162,16 @@ public class EnvelopeProducer implements Producer, IEnvelopeSender {
 	 */
 	void unRegister(){
 		if(wireAdminReg != null){
-			 wireAdminReg.unregister();
-			 wireAdminReg=null;
-		 }
+			wireAdminReg.unregister();
+			wireAdminReg=null;
+		}
 	}
-	
-	
+
 	/**
 	 * Called by the balance to register this service.
 	 * @param bc
 	 */
-    void register(BundleContext bc){
-        
+	void register(BundleContext bc){
 		Hashtable<String, Object> regProps = new Hashtable<String, Object>();
 		regProps.put(SERVICE_PID, indicator.getPid());
 		regProps.put(WIREADMIN_PRODUCER_SCOPE, 
@@ -183,4 +185,73 @@ public class EnvelopeProducer implements Producer, IEnvelopeSender {
 				.getName(), this, regProps);
 	}
 
+    @Override
+	public String[] getStatusVariableNames() {
+		return new String[]{LAST_WEIGHT,LAST_EID,WIRES_COUNT };
+	}
+
+	@Override
+	public StatusVariable getStatusVariable(String name)
+	throws IllegalArgumentException {
+		if (LAST_WEIGHT.equals(name)){
+			Envelope ev = lastEnvelope.get(PRODUCER_SCOPE[ANIMAL_WEIGHT]);
+			Measurement m = ev!=null?(Measurement)ev.getValue():null;
+			return
+			new StatusVariable(name,
+					StatusVariable.CM_SI,
+					m!=null?new Float(m.getValue()):new Float(0)
+					);
+		}
+		if (LAST_EID.equals(name)){
+			Envelope ev = lastEnvelope.get(PRODUCER_SCOPE[EID]);
+			String lastEID = ev!=null?ev.getValue().toString():""; 
+			return
+			new StatusVariable(name,
+					StatusVariable.CM_SI,
+					lastEID
+					);
+		}
+		
+		if (WIRES_COUNT.equals(name)){
+			return
+			new StatusVariable(name,
+					StatusVariable.CM_GAUGE,
+					wires.size()
+					);
+		}else{
+			throw new IllegalArgumentException(
+					"Invalid Status Variable name " + name);
+		}
+	}
+	
+	@Override
+	public boolean notifiesOnChange(String id) throws IllegalArgumentException {
+		return false;
+	}
+
+	@Override
+	public boolean resetStatusVariable(String id)
+			throws IllegalArgumentException {
+		return false;
+	}
+
+	@Override
+	public String getDescription(String name) throws IllegalArgumentException {
+		if (LAST_WEIGHT.equals(name)){
+			return
+			"The last weight sent to the scalehead";
+		}
+		
+		if (LAST_EID.equals(name)){
+			return
+			"The last electronic tag number sent to the scalehead";
+		}
+		
+		if (WIRES_COUNT.equals(name)){
+			return
+			"The number of connected wires.";
+		}
+		
+		return null;
+	}
 }

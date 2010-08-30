@@ -42,6 +42,10 @@
     	default="^[0-9]{15,15},[0-9]{4,4},[1-2],\d.\d\d$" 
     	description="Pattern to use for uploading life data. Watch out for the slashes.  Use single slashes will produce a
 			 string with double slashes."/>
+			 
+	<AD name="Data Synchronization Directory" id="data.synchronization.directory" type="String"
+		default="" 
+    	description="Directory to use for uploading and downloading animal life data records."/>
   </OCD>
   
   <Designate pid="com.verticon.tracker.irouter.trutest.indicatorfactory" bundle="*">
