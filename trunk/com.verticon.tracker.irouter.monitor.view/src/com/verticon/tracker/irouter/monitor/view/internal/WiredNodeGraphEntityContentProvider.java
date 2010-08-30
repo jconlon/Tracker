@@ -45,6 +45,7 @@ public class WiredNodeGraphEntityContentProvider implements
 	private Set<WiredNode> model;
 	private StructuredViewer viewer;
 	private final MonitorMasterDetailsBlock masterDetail;
+	private Display display;
 
 	WiredNodeGraphEntityContentProvider( MonitorMasterDetailsBlock masterDetail) {
 		super();
@@ -60,6 +61,11 @@ public class WiredNodeGraphEntityContentProvider implements
 	@Override
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		this.viewer = (StructuredViewer) viewer;
+		try {
+			display=viewer.getControl().getDisplay();
+		} catch (Exception e) {
+			display= null;
+		}
 		if (model != null) {
 			((ObservableSet) model).removeSetChangeListener(this);
 		} else {
@@ -152,6 +158,9 @@ public class WiredNodeGraphEntityContentProvider implements
 
 	@Override
 	public void wireAdminEvent(WireAdminEvent event) {
+		if (display==null || display.isDisposed()) {
+			return;
+		}
 		switch (event.getType()) {
 		case WireAdminEvent.WIRE_CONNECTED:
 			logger.debug(bundleMarker, "Wire connected scope={}", event
@@ -172,7 +181,7 @@ public class WiredNodeGraphEntityContentProvider implements
 			}
 			logger.debug(bundleMarker, "Wire connected, refreshing  {}",
 					effectedProducer);
-			Display.getCurrent().syncExec(new Runnable() {
+			display.syncExec(new Runnable() {
 				public void run() {
 					viewer.refresh(effectedProducer, false);
 
@@ -190,7 +199,7 @@ public class WiredNodeGraphEntityContentProvider implements
 			final WiredNode effectedProducer2 = findProducer(event.getWire());
 			logger.debug(bundleMarker, "Wire deleted, refreshing {}",
 					effectedProducer2);
-			Display.getCurrent().syncExec(new Runnable() {
+			display.syncExec(new Runnable() {
 				public void run() {
 					viewer.refresh(effectedProducer2, false);
 					logger.debug(bundleMarker, "Wire deleted, refreshed  {}",
@@ -256,10 +265,10 @@ public class WiredNodeGraphEntityContentProvider implements
 	 * @param wiredNodes
 	 */
 	private void remove(final Set<WiredNode> wiredNodes) {
-		if (wiredNodes == null) {
+		if (wiredNodes == null|| display==null ||  display.isDisposed()) {
 			return;
 		}
-		Display.getCurrent().syncExec(new Runnable() {
+		display.syncExec(new Runnable() {
 			public void run() {
 				for (WiredNode wiredNode : wiredNodes) {
 					((GraphViewer) viewer).removeNode(wiredNode);
@@ -273,10 +282,11 @@ public class WiredNodeGraphEntityContentProvider implements
 	}
 
 	private void add(final Set<WiredNode> wiredNodes) {
-		if (wiredNodes == null) {
+		if (wiredNodes == null || display==null || display.isDisposed()) {
 			return;
 		}
-		Display.getCurrent().syncExec(new Runnable() {
+
+		display.syncExec(new Runnable() {
 			public void run() {
 				for (WiredNode wiredNode : wiredNodes) {
 					((GraphViewer) viewer).addNode(wiredNode);
