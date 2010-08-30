@@ -1,4 +1,4 @@
-package com.verticon.tracker.irouter.common.internal;
+package com.verticon.tracker.irouter.common;
 
 import java.util.HashMap;
 import java.util.List;
