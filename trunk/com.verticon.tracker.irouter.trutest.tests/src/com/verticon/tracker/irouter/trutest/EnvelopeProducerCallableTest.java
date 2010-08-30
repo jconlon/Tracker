@@ -185,6 +185,13 @@ public class EnvelopeProducerCallableTest{
 
 	}
 
+	
+	/**
+	 * A mock TruTest Composite EnvelopeProducer that caches a list of all sent Animal
+	 * Weight measurements, EID values, and Record State envelopes.
+	 * @author jconlon
+	 *
+	 */
 	class MockCompositeProducer extends EnvelopeProducer {
 		
 		/**
