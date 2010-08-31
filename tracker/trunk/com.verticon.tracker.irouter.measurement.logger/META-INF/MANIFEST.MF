@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tracker Measurement Logger
-Bundle-SymbolicName: com.verticon.tracker.irouter.measurement.logger.internal
+Bundle-SymbolicName: com.verticon.tracker.irouter.measurement.logger
 Bundle-Version: 0.2.0
 Bundle-Vendor: Verticon, Inc.
 Service-Component: OSGI-INF/*.xml
