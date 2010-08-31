@@ -5,6 +5,7 @@ import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRANSACTION_STATE_SCOPE;
 import static com.verticon.tracker.irouter.measurement.logger.internal.ComponentFactory.bundleMarker;
 import static com.verticon.tracker.irouter.measurement.logger.internal.Context.CONSUMER_SCOPE;
+import static com.verticon.tracker.irouter.measurement.logger.internal.Context.LAST_LOG_ENTRY;
 import static com.verticon.tracker.irouter.measurement.logger.internal.Context.WIRES_COUNT;
 
 import java.util.Arrays;
@@ -20,7 +21,6 @@ import org.slf4j.Marker;
 
 import com.verticon.tracker.irouter.common.AbstractConsumer;
 import com.verticon.tracker.irouter.common.IContext;
-import com.verticon.tracker.irouter.common.ITransactionHandler;
 
 /**
  * Consumers a set of measurement scopes contained within a transaction and normalizes the
@@ -40,16 +40,16 @@ public class MeasurementLoggingConsumer extends AbstractConsumer implements Moni
 	}
 	
 	private final String[] scope;
-	private final ITransactionHandler transactionHandler;
+	private final ILogger iLogger;
 
 	protected MeasurementLoggingConsumer(IContext context) {
 		super(context);
 		scope = buildScope();
 		if(context.getConfigurationInteger(Context.LOGGER_TYPE).equals(Context.LOGGER_TYPE_AGGREGATING)){
-			transactionHandler = new AggregatedTransactionLogger(
+			iLogger = new AggregatedTransactionLogger(
 					getLoggerType(AggregatedTransactionLogger.class));
 		}else{
-			transactionHandler = new NormalizedTransactionLogger(
+			iLogger = new NormalizedTransactionLogger(
 					context.getConfigurationString(TRACKER_WIRE_GROUP_NAME),
 					getLoggerType(NormalizedTransactionLogger.class));
 		}
@@ -67,7 +67,7 @@ public class MeasurementLoggingConsumer extends AbstractConsumer implements Moni
 	@Override
 	public String toString() {
 		return "MeasurementLoggingConsumer [scope=" + Arrays.toString(scope)
-				+ ", transactionHandler=" + transactionHandler + "]";
+				+ ", iLogger=" + iLogger + "]";
 	}
 
 
@@ -90,7 +90,7 @@ public class MeasurementLoggingConsumer extends AbstractConsumer implements Moni
 	public void updated(Wire wire, Object in) {
 		if (in instanceof Envelope) {
 			Envelope envelope = (Envelope) in;
-			transactionHandler.add(envelope);
+			iLogger.add(envelope);
 		} else {
 			logError(wire, in);
 		}
@@ -118,7 +118,7 @@ public class MeasurementLoggingConsumer extends AbstractConsumer implements Moni
 
 	@Override
 	public String[] getStatusVariableNames() {
-		return new String[]{WIRES_COUNT};
+		return new String[]{WIRES_COUNT, LAST_LOG_ENTRY};
 	}
 
 	@Override
@@ -130,7 +130,13 @@ public class MeasurementLoggingConsumer extends AbstractConsumer implements Moni
 			new StatusVariable(name,
 					StatusVariable.CM_GAUGE,
 					wiresConnected.get()
-					);
+		    );
+		}else if (LAST_LOG_ENTRY.equals(name)){
+				return
+				new StatusVariable(name,
+						StatusVariable.CM_DER,
+						iLogger.getLastLogEntry()
+				);
 		}else{
 			throw new IllegalArgumentException(
 					"Invalid Status Variable name " + name);
@@ -154,6 +160,8 @@ public class MeasurementLoggingConsumer extends AbstractConsumer implements Moni
 		if (WIRES_COUNT.equals(name)){
 			return
 			"The number of connected wires.";
+		}else if (LAST_LOG_ENTRY.equals(name)){
+			return iLogger.getLastLogEntryDescription();
 		}
 		return null;
 	}
