@@ -1,6 +1,7 @@
-package com.verticon.tracker.irouter.measurement.logger;
+package com.verticon.tracker.irouter.measurement.logger.internal;
 
-import static com.verticon.tracker.irouter.measurement.logger.ComponentFactory.bundleMarker;
+import static com.verticon.tracker.irouter.measurement.logger.internal.ComponentFactory.bundleMarker;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,13 +15,30 @@ import com.verticon.tracker.irouter.common.AbstractTransactionHandler;
 
 /**
  * 
+ * When triggered by the base class (on reception of a 'transaction.state') 
+ * the AggregatedTransactionLogger will log all collected measurements as 
+ * separate log entries in date time order, tagging each with the id element.
+ * 
+ * Output Format is comma delimited:
+ * type='measurement',dateTime='%1$tF %1$tT',id='%2$s',scope='%3$s',value='%4$.4f',error='%5$.4f',unit='%6$s'"
  * 
  * @author jconlon
  *
  */
 public class AggregatedTransactionLogger extends AbstractTransactionHandler {
 	
-	
+	/**
+	 * Multiple lines of measurement log entries, each looking like this.
+	 */
+	private static final String OUTPUT_FORMAT = 
+	"type='measurement'," +
+	"dateTime='%1$tF %1$tT'," +
+	"id='%2$s',scope='%3$s'," +
+	"value='%4$.4f'," +
+	"error='%5$.4f'," +
+	"unit='%6$s'";
+
+
 	@Override
 	protected Marker bundleMarker() {
 		return bundleMarker;
@@ -56,7 +74,7 @@ public class AggregatedTransactionLogger extends AbstractTransactionHandler {
 			//2009-12-14 12:32:34
 			log.info(bundleMarker,
 					String.format(
-							"type='measurement',dateTime='%1$tF %1$tT',id='%2$s',scope='%3$s',value='%4$.4f',error='%5$.4f',unit='%6$s'",
+							OUTPUT_FORMAT,
 							measurement.getTime(),
 							id,
 							wireAdminEnvelopeScope,
