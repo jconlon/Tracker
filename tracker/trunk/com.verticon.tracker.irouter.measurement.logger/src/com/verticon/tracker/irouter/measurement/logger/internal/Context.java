@@ -21,6 +21,7 @@ public class Context extends AbstractContext {
 	public static final String CONSUMER_SCOPE ="consumable.scope";//An array
 	public static final String LOGGER_NAME = "logger.name";
     static final String WIRES_COUNT = "consumer.Connected_Wires";
+    static final String LAST_LOG_ENTRY ="consumer.Last_Log_Entry";
 	
 	
 	private static Dictionary<String, Object> DEFAULTS;

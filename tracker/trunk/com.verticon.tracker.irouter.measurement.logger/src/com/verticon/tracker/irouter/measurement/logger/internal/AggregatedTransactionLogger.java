@@ -25,8 +25,9 @@ import com.verticon.tracker.irouter.common.AbstractTransactionHandler;
  * @author jconlon
  *
  */
-public class AggregatedTransactionLogger extends AbstractTransactionHandler {
+public class AggregatedTransactionLogger extends AbstractTransactionHandler implements ILogger{
 	
+	private String lastLogEntry = null;
 	/**
 	 * Multiple lines of measurement log entries, each looking like this.
 	 */
@@ -63,28 +64,44 @@ public class AggregatedTransactionLogger extends AbstractTransactionHandler {
 	protected void triggered() {
 		List<Measurement> m = new ArrayList<Measurement>(measurements.values());
 		Collections.sort(m, DATE_ORDER);
-	
+	    StringBuilder builder = new StringBuilder();
+	    String logEntry;
 		for (Measurement measurement : m) {
 			String wireAdminEnvelopeScope = null;
+			if(builder.length()>1){
+				builder.append(';');
+			}
+			//Find the scope associated with the entry
 			for (Map.Entry<String, Measurement> entry : measurements.entrySet()) {
 				if(measurement.equals(entry.getValue())){
 					wireAdminEnvelopeScope=entry.getKey();
 				}
 			}
-			//2009-12-14 12:32:34
-			log.info(bundleMarker,
-					String.format(
-							OUTPUT_FORMAT,
-							measurement.getTime(),
-							id,
-							wireAdminEnvelopeScope,
-							measurement.getValue(),
-							measurement.getError(),
-							measurement.getUnit()
-					)
+			logEntry = String.format(
+					OUTPUT_FORMAT,
+					measurement.getTime(),
+					id,
+					wireAdminEnvelopeScope,
+					measurement.getValue(),
+					measurement.getError(),
+					measurement.getUnit()
 			);
-			}
+			//2009-12-14 12:32:34
+			log.info(bundleMarker,logEntry);
+			builder.append(logEntry);
+		}
+		lastLogEntry=builder.toString();
+	}
+
+
+	@Override
+	public String getLastLogEntry() {
+		return lastLogEntry;
+	}
+
+	@Override
+	public String getLastLogEntryDescription() {
+		return "Concatination of last set of log entries. Entries separated with semicolons.";
 	}
 	
-
 }

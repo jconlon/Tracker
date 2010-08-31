@@ -25,9 +25,10 @@ import com.verticon.tracker.irouter.common.AbstractTransactionHandler;
  * @since 0.2.0 added ordering of measurement values
  *
  */
-public class NormalizedTransactionLogger extends AbstractTransactionHandler{
+public class NormalizedTransactionLogger extends AbstractTransactionHandler implements ILogger{
 
 	private final String groupName;
+	private String lastLogEntry;
 	
 	@Override
 	protected Marker bundleMarker() {
@@ -64,6 +65,16 @@ public class NormalizedTransactionLogger extends AbstractTransactionHandler{
 			builder.append(get(scope).getValue());
 		}
 		log.info(bundleMarker,builder.toString());
+		lastLogEntry=builder.toString();
 	}
 
+	@Override
+	public String getLastLogEntry() {
+		return lastLogEntry;
+	}
+
+	@Override
+	public String getLastLogEntryDescription() {
+		return "Last concatinated log entry. Measurements in ascending scope name order.";
+	}
 }
