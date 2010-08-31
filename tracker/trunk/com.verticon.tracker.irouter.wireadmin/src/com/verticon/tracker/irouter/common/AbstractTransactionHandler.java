@@ -21,42 +21,43 @@ public abstract class AbstractTransactionHandler implements ITransactionHandler 
 	 */
 	protected final Logger log;
 	protected final Map<String, Measurement> measurements = new HashMap<String, Measurement>();
-	private final String scopeOfTrigger = TRANSACTION_STATE_SCOPE;
-	private final String scopeOfId = ANIMAL_TAG_NUMBER_SCOPE;
 	protected Long id = null;
 
 	protected abstract Marker bundleMarker();
 	
 	protected AbstractTransactionHandler(Logger log) {
 		super();
+		if(log==null){
+			throw new IllegalArgumentException("Can not construct with a null log");
+		}
 		this.log = log;
 	}
 
 	public void add(Envelope envelope) {
-		 if(envelope.getScope().equals(scopeOfTrigger)){
+		 if(envelope.getScope().equals(TRANSACTION_STATE_SCOPE)){
 			 if(((State)envelope.getValue()).getValue()==1){
 				 triggered();
 				 measurements.clear();
 				 id=null;
 			 }
-		 }else if(envelope.getScope().equals(scopeOfId)){
+		 }else if(envelope.getScope().equals(ANIMAL_TAG_NUMBER_SCOPE)){
 			 if(envelope.getValue() instanceof Long){
 				 id = (Long)envelope.getValue();
-				 
-				 log.debug(bundleMarker(),"{}:Received {}={}",
-							new Object[]{this,scopeOfId,id});
-				 
+
+				 log.debug(bundleMarker(),"{} ID={}",
+						 this,id);
+
 			 }else{
-					log.error(bundleMarker(),"EID Envelope unknown value={}",envelope.getValue());
+				 log.error(bundleMarker(),"EID Envelope unknown value={}",envelope.getValue());
 			 }
 		 }else{
 			 if(envelope.getValue() instanceof Measurement){
 				 measurements.put(envelope.getScope(), (Measurement) envelope.getValue());
 			 }else{
-					log.error(bundleMarker(),"id='{}', type='{}' has unknown value of {}",
-							new Object[]{id,
-							envelope.getScope(),
-							envelope.getValue()});
+				 log.error(bundleMarker(),"id='{}', type='{}' has unknown value of {}",
+						 new Object[]{id,
+					 envelope.getScope(),
+					 envelope.getValue()});
 			 }
 		 }
 	}
