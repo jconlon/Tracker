@@ -1,10 +1,11 @@
-package com.verticon.tracker.irouter.measurement.logger;
+package com.verticon.tracker.irouter.measurement.logger.internal;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.ANIMAL_TAG_NUMBER_SCOPE;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRANSACTION_STATE_SCOPE;
-import static com.verticon.tracker.irouter.measurement.logger.ComponentFactory.bundleMarker;
-import static com.verticon.tracker.irouter.measurement.logger.Context.CONSUMER_SCOPE;
+import static com.verticon.tracker.irouter.measurement.logger.internal.ComponentFactory.bundleMarker;
+import static com.verticon.tracker.irouter.measurement.logger.internal.Context.CONSUMER_SCOPE;
+import static com.verticon.tracker.irouter.measurement.logger.internal.Context.WIRES_COUNT;
 
 import java.util.Arrays;
 import java.util.Vector;
@@ -37,7 +38,7 @@ public class MeasurementLoggingConsumer extends AbstractConsumer implements Moni
 	protected Marker bundleMarker() {
 		return bundleMarker;
 	}
-	private static final String WIRES_COUNT = "consumer.Connected_Wires";
+	
 	private final String[] scope;
 	private final ITransactionHandler transactionHandler;
 

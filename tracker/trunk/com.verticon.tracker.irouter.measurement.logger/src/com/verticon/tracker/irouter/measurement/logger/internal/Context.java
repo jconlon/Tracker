@@ -1,4 +1,4 @@
-package com.verticon.tracker.irouter.measurement.logger;
+package com.verticon.tracker.irouter.measurement.logger.internal;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME_DEFAULT;
@@ -20,6 +20,7 @@ public class Context extends AbstractContext {
 	
 	public static final String CONSUMER_SCOPE ="consumable.scope";//An array
 	public static final String LOGGER_NAME = "logger.name";
+    static final String WIRES_COUNT = "consumer.Connected_Wires";
 	
 	
 	private static Dictionary<String, Object> DEFAULTS;
