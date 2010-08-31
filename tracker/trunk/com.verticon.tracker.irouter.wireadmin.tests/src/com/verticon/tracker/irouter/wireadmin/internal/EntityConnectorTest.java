@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.verticon.tracker.irouter.wireadmin;
+package com.verticon.tracker.irouter.wireadmin.internal;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -18,10 +18,6 @@ import org.junit.Test;
 import org.osgi.framework.Constants;
 import org.osgi.service.wireadmin.WireAdminEvent;
 import org.osgi.service.wireadmin.WireConstants;
-
-import com.verticon.tracker.irouter.wireadmin.GroupConnector;
-import com.verticon.tracker.irouter.wireadmin.IWireCreator;
-import com.verticon.tracker.irouter.wireadmin.WireParameters;
 
 /**
  * @author jconlon
@@ -149,7 +145,7 @@ public class EntityConnectorTest {
 		
 	}
 	/**
-	 * Test method for {@link com.verticon.tracker.irouter.wireadmin.GroupConnector#scopeIntersection(java.lang.String[], java.lang.String[])}.
+	 * Test method for {@link com.verticon.tracker.irouter.wireadmin.internal.GroupConnector#scopeIntersection(java.lang.String[], java.lang.String[])}.
 	 */
 	@Test
 	public void testScopeIntersection() {
