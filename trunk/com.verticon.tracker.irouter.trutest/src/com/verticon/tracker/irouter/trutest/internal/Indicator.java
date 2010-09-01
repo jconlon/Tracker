@@ -8,7 +8,7 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.irouter.trutest;
+package com.verticon.tracker.irouter.trutest.internal;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI_DEFAULT;
@@ -20,25 +20,25 @@ import static com.verticon.tracker.irouter.common.TrackerConstants.STABLE_WEIGHT
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME_DEFAULT;
 import static com.verticon.tracker.irouter.common.TrackerConstants.UNSTABLE_WEIGHT_ERROR;
-import static com.verticon.tracker.irouter.trutest.Component.bundleMarker;
-import static com.verticon.tracker.irouter.trutest.Constants.CONSUME_COMMAND_DELAY;
-import static com.verticon.tracker.irouter.trutest.Constants.CONSUME_COMMAND_DELAY_DEFAULT;
-import static com.verticon.tracker.irouter.trutest.Constants.DATA_SYNC_DIRECTORY;
-import static com.verticon.tracker.irouter.trutest.Constants.DATA_SYNC_DIRECTORY_DEFAULT;
-import static com.verticon.tracker.irouter.trutest.Constants.DOWNLOAD_RECORD_PATTERN;
-import static com.verticon.tracker.irouter.trutest.Constants.DOWNLOAD_RECORD_PATTERN_DEFAULT;
-import static com.verticon.tracker.irouter.trutest.Constants.FILE_HEADER_COMMAND;
-import static com.verticon.tracker.irouter.trutest.Constants.FILE_HEADER_COMMAND_DEFAULT;
-import static com.verticon.tracker.irouter.trutest.Constants.POLL_DELAY_DEFAULT;
-import static com.verticon.tracker.irouter.trutest.Constants.REQUEST_COMMAND_DEFAULT;
-import static com.verticon.tracker.irouter.trutest.Constants.RESPONSE_PATTERN_DEFAULT;
-import static com.verticon.tracker.irouter.trutest.Constants.RETRY_CONNECTION_DELAY_DEFAULT;
-import static com.verticon.tracker.irouter.trutest.Constants.SEND_UNSTABLE_WEIGHTS;
-import static com.verticon.tracker.irouter.trutest.Constants.SEND_UNSTABLE_WEIGHTS_DEFAULT;
-import static com.verticon.tracker.irouter.trutest.Constants.STABLE_WEIGHT_ERROR_DEFAULT;
-import static com.verticon.tracker.irouter.trutest.Constants.UNSTABLE_WEIGHT_ERROR_DEFAULT;
-import static com.verticon.tracker.irouter.trutest.Constants.UPLOAD_RECORD_PATTERN;
-import static com.verticon.tracker.irouter.trutest.Constants.UPLOAD_RECORD_PATTERN_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Component.bundleMarker;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.CONSUME_COMMAND_DELAY;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.CONSUME_COMMAND_DELAY_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.DATA_SYNC_DIRECTORY;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.DATA_SYNC_DIRECTORY_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.DOWNLOAD_RECORD_PATTERN;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.DOWNLOAD_RECORD_PATTERN_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.FILE_HEADER_COMMAND;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.FILE_HEADER_COMMAND_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.POLL_DELAY_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.REQUEST_COMMAND_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.RESPONSE_PATTERN_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.RETRY_CONNECTION_DELAY_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.SEND_UNSTABLE_WEIGHTS;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.SEND_UNSTABLE_WEIGHTS_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.STABLE_WEIGHT_ERROR_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.UNSTABLE_WEIGHT_ERROR_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.UPLOAD_RECORD_PATTERN;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.UPLOAD_RECORD_PATTERN_DEFAULT;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -200,7 +200,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.verticon.tracker.irouter.trutest.IIndicator#getConfigurationString(java.lang
+	 * com.verticon.tracker.irouter.trutest.internal.IIndicator#getConfigurationString(java.lang
 	 * .String)
 	 */
 	@Override
@@ -212,7 +212,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.verticon.tracker.irouter.trutest.IContext#getConfigurationLong(java.lang.
+	 * com.verticon.tracker.irouter.trutest.internal.IContext#getConfigurationLong(java.lang.
 	 * String)
 	 */
 	@Override
@@ -226,7 +226,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 	
 	/*
 	 * (non-Javadoc)
-	 * @see com.verticon.tracker.irouter.trutest.IIndicator#getConfigurationInteger(java.lang.String)
+	 * @see com.verticon.tracker.irouter.trutest.internal.IIndicator#getConfigurationInteger(java.lang.String)
 	 */
 	@Override
 	public Integer getConfigurationInteger(String key) {
@@ -239,7 +239,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 	
 	/*
 	 * (non-Javadoc)
-	 * @see com.verticon.tracker.irouter.trutest.IIndicator#getConfigurationBoolean(java.lang.String)
+	 * @see com.verticon.tracker.irouter.trutest.internal.IIndicator#getConfigurationBoolean(java.lang.String)
 	 */
 	@Override
 	public Boolean getConfigurationBoolean(String key) {
@@ -252,7 +252,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.verticon.tracker.irouter.trutest.IIndicator#getConfigurationDouble(java.lang.String)
+	 * @see com.verticon.tracker.irouter.trutest.internal.IIndicator#getConfigurationDouble(java.lang.String)
 	 */
 	@Override
 	public Double getConfigurationDouble(String key) {
@@ -266,7 +266,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.verticon.tracker.irouter.trutest.IContext#getPid()
+	 * @see com.verticon.tracker.irouter.trutest.internal.IContext#getPid()
 	 */
 	@Override
 	public String getPid() {
@@ -276,7 +276,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.verticon.tracker.irouter.trutest.IContext#getReader()
+	 * @see com.verticon.tracker.irouter.trutest.internal.IContext#getReader()
 	 */
 	@Override
 	public synchronized BufferedReader getReader() throws IOException {
@@ -314,7 +314,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.verticon.tracker.irouter.trutest.IContext#getWriter()
+	 * @see com.verticon.tracker.irouter.trutest.internal.IContext#getWriter()
 	 */
 	@Override
 	public synchronized Writer getWriter() throws IOException {
@@ -349,7 +349,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.verticon.tracker.irouter.trutest.IIndicator#registerProducer()
+	 * @see com.verticon.tracker.irouter.trutest.internal.IIndicator#registerProducer()
 	 */
 	@Override
 	public void registerProducer() {
@@ -359,7 +359,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.verticon.tracker.irouter.trutest.IIndicator#unregisterProducer()
+	 * @see com.verticon.tracker.irouter.trutest.internal.IIndicator#unregisterProducer()
 	 */
 	@Override
 	public void unregisterProducer() {
@@ -421,7 +421,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.verticon.tracker.irouter.trutest.IIndicator#getScheduler()
+	 * @see com.verticon.tracker.irouter.trutest.internal.IIndicator#getScheduler()
 	 */
 	@Override
 	public ScheduledExecutorService getScheduler() {
@@ -566,7 +566,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 
 //	/*
 //	 * (non-Javadoc)
-//	 * @see com.verticon.tracker.irouter.trutest.IIndicator#getEndGate()
+//	 * @see com.verticon.tracker.irouter.trutest.internal.IIndicator#getEndGate()
 //	 */
 //	@Override
 //	public CountDownLatch getEndGate() {
@@ -575,7 +575,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 //
 //	/*
 //	 * (non-Javadoc)
-//	 * @see com.verticon.tracker.irouter.trutest.IIndicator#getStartGate()
+//	 * @see com.verticon.tracker.irouter.trutest.internal.IIndicator#getStartGate()
 //	 */
 //	@Override
 //	public CountDownLatch getStartGate() {

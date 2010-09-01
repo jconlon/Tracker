@@ -8,7 +8,7 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.irouter.trutest;
+package com.verticon.tracker.irouter.trutest.internal;
 
 import java.util.Collection;
 import java.util.Dictionary;
@@ -28,7 +28,7 @@ import org.slf4j.MarkerFactory;
 
 public class Component implements ManagedServiceFactory {
 
-	protected static String PLUGIN_ID = "com.verticon.tracker.irouter.trutest";
+	protected static String PLUGIN_ID = "com.verticon.tracker.irouter.trutest.internal";
 
 	/**
 	 * slf4j Marker to keep track of bundle

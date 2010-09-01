@@ -128,63 +128,63 @@
 08:59:13.806 [main] DEBUG c.v.t.irouter.trutest.IndicatorTest - ===============================================================================
 08:59:13.806 [main] INFO  c.v.t.irouter.trutest.IndicatorTest - MockConnectorService [] Opening connection name=socket://lantronix:3001 timeouts=true
 08:59:13.806 [main] DEBUG c.v.t.irouter.trutest.IndicatorTest - Starting: testGenericCallables()
-08:59:13.811 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 Called.
+08:59:13.811 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 Called.
 08:59:13.811 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.Indicator - IndicatorMockup: Opening connection socket://lantronix:3001.
 08:59:13.830 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.Indicator - IndicatorMockup Returning writer java.io.BufferedWriter@64883c for connection com.verticon.tracker.connector.socket.SocketStreamConnection@2c1e6b
-08:59:13.830 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 took commands.
-08:59:13.830 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {ZC1}
-08:59:13.830 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {ZA1}
-08:59:13.830 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {ZE1}
-08:59:13.830 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
-08:59:13.831 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 took commands.
+08:59:13.830 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 took commands.
+08:59:13.830 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {ZC1}
+08:59:13.830 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {ZA1}
+08:59:13.830 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {ZE1}
+08:59:13.830 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
+08:59:13.831 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 took commands.
 08:59:13.831 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.Indicator - IndicatorMockup Reusing connection com.verticon.tracker.connector.socket.SocketStreamConnection@2c1e6b
 08:59:13.831 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.Indicator - IndicatorMockup Returning reader java.io.BufferedReader@153f67e for connection com.verticon.tracker.connector.socket.SocketStreamConnection@2c1e6b
-08:59:13.910 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:13.950 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:13.950 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:13.951 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:14.820 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
-08:59:14.820 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 took commands.
-08:59:14.880 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:15.820 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
-08:59:15.821 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 took commands.
-08:59:15.880 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:16.821 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
-08:59:16.821 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 took commands.
-08:59:16.880 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:17.821 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
-08:59:17.821 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 took commands.
-08:59:17.880 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:18.821 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
-08:59:18.821 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 took commands.
-08:59:18.880 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:19.821 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
-08:59:19.822 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 took commands.
-08:59:19.880 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:20.822 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
-08:59:20.822 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 took commands.
-08:59:20.882 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:21.822 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
-08:59:21.822 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 took commands.
-08:59:21.880 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:22.822 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
-08:59:22.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 took commands.
-08:59:22.881 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:23.822 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
-08:59:23.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 took commands.
-08:59:23.882 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:24.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
-08:59:24.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 took commands.
-08:59:24.881 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:25.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
-08:59:25.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 took commands.
-08:59:25.881 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:26.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
-08:59:26.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 took commands.
-08:59:26.881 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
-08:59:27.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
-08:59:27.824 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockWritingCallable@1901437 took commands.
-08:59:27.881 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:13.910 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:13.950 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:13.950 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:13.951 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:14.820 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
+08:59:14.820 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 took commands.
+08:59:14.880 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:15.820 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
+08:59:15.821 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 took commands.
+08:59:15.880 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:16.821 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
+08:59:16.821 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 took commands.
+08:59:16.880 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:17.821 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
+08:59:17.821 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 took commands.
+08:59:17.880 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:18.821 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
+08:59:18.821 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 took commands.
+08:59:18.880 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:19.821 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
+08:59:19.822 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 took commands.
+08:59:19.880 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:20.822 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
+08:59:20.822 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 took commands.
+08:59:20.882 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:21.822 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
+08:59:21.822 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 took commands.
+08:59:21.880 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:22.822 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
+08:59:22.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 took commands.
+08:59:22.881 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:23.822 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
+08:59:23.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 took commands.
+08:59:23.882 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:24.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
+08:59:24.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 took commands.
+08:59:24.881 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:25.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
+08:59:25.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 took commands.
+08:59:25.881 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:26.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
+08:59:26.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 took commands.
+08:59:26.881 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
+08:59:27.823 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437: writing {SABP50}
+08:59:27.824 [pool-3-thread-1] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockWritingCallable@1901437 took commands.
+08:59:27.881 [pool-3-thread-2] DEBUG c.v.t.irouter.trutest.IndicatorTest - com.verticon.tracker.irouter.trutest.internal.internal.IndicatorTest$MockReadingCallable@15bdc50: processing response=^
 08:59:33.816 [main] DEBUG c.v.t.irouter.trutest.IndicatorTest - ===============================================================================
 08:59:33.816 [main] INFO  c.v.t.irouter.trutest.IndicatorTest - MockConnectorService [] Opening connection name=socket://lantronix:3001 timeouts=true
 08:59:33.816 [main] DEBUG c.v.t.irouter.trutest.IndicatorTest - Starting: testInitializerCallable_normalize()

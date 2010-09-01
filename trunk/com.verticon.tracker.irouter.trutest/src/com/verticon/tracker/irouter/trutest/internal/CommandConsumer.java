@@ -11,17 +11,17 @@
 /**
  * 
  */
-package com.verticon.tracker.irouter.trutest;
+package com.verticon.tracker.irouter.trutest.internal;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.POLL_DELAY;
 import static com.verticon.tracker.irouter.common.TrackerConstants.REQUEST_COMMAND;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
-import static com.verticon.tracker.irouter.trutest.Component.bundleMarker;
-import static com.verticon.tracker.irouter.trutest.Constants.CONSUMER_SCOPE;
-import static com.verticon.tracker.irouter.trutest.Constants.SET_RP_POLL_COMMAND_ID;
-import static com.verticon.tracker.irouter.trutest.Constants.TURN_OFF_ACK;
-import static com.verticon.tracker.irouter.trutest.Constants.TURN_ON_CRLF;
+import static com.verticon.tracker.irouter.trutest.internal.Component.bundleMarker;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.CONSUMER_SCOPE;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.SET_RP_POLL_COMMAND_ID;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.TURN_OFF_ACK;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.TURN_ON_CRLF;
 import static org.osgi.framework.Constants.SERVICE_PID;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_FLAVORS;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_SCOPE;

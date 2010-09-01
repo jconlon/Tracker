@@ -8,11 +8,11 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.irouter.trutest;
+package com.verticon.tracker.irouter.trutest.internal;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
-import static com.verticon.tracker.irouter.trutest.Component.bundleMarker;
-import static com.verticon.tracker.irouter.trutest.Constants.CONSUME_COMMAND_DELAY;
+import static com.verticon.tracker.irouter.trutest.internal.Component.bundleMarker;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.CONSUME_COMMAND_DELAY;
 
 import java.io.IOException;
 import java.io.Writer;

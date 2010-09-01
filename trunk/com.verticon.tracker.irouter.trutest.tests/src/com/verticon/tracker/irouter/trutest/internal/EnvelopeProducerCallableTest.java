@@ -8,11 +8,11 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.irouter.trutest;
+package com.verticon.tracker.irouter.trutest.internal;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.RESPONSE_PATTERN;
-import static com.verticon.tracker.irouter.trutest.Constants.*;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -37,11 +37,11 @@ import org.osgi.service.wireadmin.Envelope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.verticon.tracker.irouter.trutest.EnvelopeProducer;
-import com.verticon.tracker.irouter.trutest.EnvelopeProducerCallable;
-import com.verticon.tracker.irouter.trutest.IIndicator;
-import com.verticon.tracker.irouter.trutest.Indicator;
-import com.verticon.tracker.irouter.trutest.MockIndicator.MockConnectorService;
+import com.verticon.tracker.irouter.trutest.internal.MockIndicator.MockConnectorService;
+import com.verticon.tracker.irouter.trutest.internal.EnvelopeProducer;
+import com.verticon.tracker.irouter.trutest.internal.EnvelopeProducerCallable;
+import com.verticon.tracker.irouter.trutest.internal.IIndicator;
+import com.verticon.tracker.irouter.trutest.internal.Indicator;
 
 /**
  * Off-line test of the CompositeReaderCallable.

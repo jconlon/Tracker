@@ -8,14 +8,14 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.irouter.trutest;
+package com.verticon.tracker.irouter.trutest.internal;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
-import static com.verticon.tracker.irouter.trutest.Constants.BEEP_COMMAND;
-import static com.verticon.tracker.irouter.trutest.Constants.POLL_COMMAND;
-import static com.verticon.tracker.irouter.trutest.Constants.TURN_ON_ACK;
-import static com.verticon.tracker.irouter.trutest.Constants.TURN_ON_CRLF;
-import static com.verticon.tracker.irouter.trutest.Constants.TURN_ON_ERROR_CODES;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.BEEP_COMMAND;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.POLL_COMMAND;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.TURN_ON_ACK;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.TURN_ON_CRLF;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.TURN_ON_ERROR_CODES;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -50,6 +50,7 @@ import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.connector.socket.SocketStreamConnection;
 import com.verticon.tracker.irouter.common.Utils;
+import com.verticon.tracker.irouter.trutest.internal.IIndicator;
 
 /**
  * This is an on-line exercising test of the Indicator class. 
@@ -115,7 +116,7 @@ public class IndicatorTest{
 		//Clean out any downloads
 		mockIndicator.getDownload().delete();
 		
-		downLoadedRawFile = new File("/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.trutest.tests/testData/downloaded-raw.txt");
+		downLoadedRawFile = new File("/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.trutest.internal.internal.tests/testData/downloaded-raw.txt");
 		if(downLoadedRawFile.exists()){
 			downLoadedRawFile.delete();
 		}

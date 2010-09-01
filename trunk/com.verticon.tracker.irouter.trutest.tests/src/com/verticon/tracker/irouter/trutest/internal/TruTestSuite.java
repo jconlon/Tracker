@@ -1,4 +1,4 @@
-package com.verticon.tracker.irouter.trutest;
+package com.verticon.tracker.irouter.trutest.internal;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

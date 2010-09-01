@@ -8,15 +8,15 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.irouter.trutest;
+package com.verticon.tracker.irouter.trutest.internal;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
-import static com.verticon.tracker.irouter.trutest.Component.bundleMarker;
-import static com.verticon.tracker.irouter.trutest.Constants.ANIMAL_WEIGHT;
-import static com.verticon.tracker.irouter.trutest.Constants.EID;
-import static com.verticon.tracker.irouter.trutest.Constants.PRODUCER_SCOPE;
-import static com.verticon.tracker.irouter.trutest.Constants.RECORD_STATE;
+import static com.verticon.tracker.irouter.trutest.internal.Component.bundleMarker;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.ANIMAL_WEIGHT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.EID;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.RECORD_STATE;
 import static org.osgi.framework.Constants.SERVICE_PID;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_PID;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_PRODUCER_FLAVORS;
@@ -133,7 +133,7 @@ public class EnvelopeProducer implements Producer, IEnvelopeSender, Monitorable 
 
 	
 	/* (non-Javadoc)
-	 * @see com.verticon.tracker.irouter.trutest.IEnvelopeSender#send(org.osgi.service.wireadmin.Envelope)
+	 * @see com.verticon.tracker.irouter.trutest.internal.IEnvelopeSender#send(org.osgi.service.wireadmin.Envelope)
 	 */
 	public void send(Envelope envelope) {
 		lastEnvelope.put(envelope.getScope(), envelope);
