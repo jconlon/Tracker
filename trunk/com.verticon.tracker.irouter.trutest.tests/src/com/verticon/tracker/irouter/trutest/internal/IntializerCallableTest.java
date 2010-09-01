@@ -8,13 +8,8 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.irouter.trutest;
+package com.verticon.tracker.irouter.trutest.internal;
 
-import static com.verticon.tracker.irouter.trutest.Constants.DOWNLOAD_RECORD_PATTERN;
-import static com.verticon.tracker.irouter.trutest.Constants.DOWNLOAD_RECORD_PATTERN_DEFAULT;
-import static com.verticon.tracker.irouter.trutest.Constants.FILE_HEADER_COMMAND;
-import static com.verticon.tracker.irouter.trutest.Constants.FILE_HEADER_COMMAND_DEFAULT;
-import static com.verticon.tracker.irouter.trutest.Constants.UPLOAD_RECORD_PATTERN;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -36,7 +31,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.connector.socket.SocketStreamConnection;
-import static com.verticon.tracker.irouter.trutest.Constants.UPLOAD_RECORD_PATTERN_DEFAULT;
+import com.verticon.tracker.irouter.trutest.internal.Constants;
+import com.verticon.tracker.irouter.trutest.internal.IIndicator;
+import com.verticon.tracker.irouter.trutest.internal.InitializerCallable;
+
+import static com.verticon.tracker.irouter.trutest.internal.Constants.DOWNLOAD_RECORD_PATTERN;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.DOWNLOAD_RECORD_PATTERN_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.FILE_HEADER_COMMAND;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.FILE_HEADER_COMMAND_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.UPLOAD_RECORD_PATTERN;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.UPLOAD_RECORD_PATTERN_DEFAULT;
 
 /**
  * This is an online test of the IntializerCallable. It tests the downloading

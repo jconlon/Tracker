@@ -8,7 +8,7 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.irouter.trutest;
+package com.verticon.tracker.irouter.trutest.internal;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.ANIMAL_TAG_NUMBER_SCOPE;
 import static com.verticon.tracker.irouter.common.TrackerConstants.ANIMAL_WEIGHT_MEASUREMENT_SCOPE;

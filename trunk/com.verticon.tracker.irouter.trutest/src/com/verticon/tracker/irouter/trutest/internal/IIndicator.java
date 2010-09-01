@@ -8,7 +8,7 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.irouter.trutest;
+package com.verticon.tracker.irouter.trutest.internal;
 
 import java.io.BufferedReader;
 import java.io.File;

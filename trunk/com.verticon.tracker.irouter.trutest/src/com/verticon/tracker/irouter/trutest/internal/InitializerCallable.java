@@ -8,20 +8,20 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.irouter.trutest;
+package com.verticon.tracker.irouter.trutest.internal;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
-import static com.verticon.tracker.irouter.trutest.Component.bundleMarker;
-import static com.verticon.tracker.irouter.trutest.Constants.CLEAR_FILE;
-import static com.verticon.tracker.irouter.trutest.Constants.DOWNLOAD_RECORD_PATTERN;
-import static com.verticon.tracker.irouter.trutest.Constants.FILE_HEADER_COMMAND;
-import static com.verticon.tracker.irouter.trutest.Constants.GET_NEXT_RECORD;
-import static com.verticon.tracker.irouter.trutest.Constants.RESET_TO_FIRST_RECORD;
-import static com.verticon.tracker.irouter.trutest.Constants.SELECT_LIFE_DATA_PAGE;
-import static com.verticon.tracker.irouter.trutest.Constants.TURN_ON_ACK;
-import static com.verticon.tracker.irouter.trutest.Constants.TURN_ON_CRLF;
-import static com.verticon.tracker.irouter.trutest.Constants.UPLOAD_RECORD_PATTERN;
+import static com.verticon.tracker.irouter.trutest.internal.Component.bundleMarker;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.CLEAR_FILE;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.DOWNLOAD_RECORD_PATTERN;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.FILE_HEADER_COMMAND;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.GET_NEXT_RECORD;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.RESET_TO_FIRST_RECORD;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.SELECT_LIFE_DATA_PAGE;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.TURN_ON_ACK;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.TURN_ON_CRLF;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.UPLOAD_RECORD_PATTERN;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

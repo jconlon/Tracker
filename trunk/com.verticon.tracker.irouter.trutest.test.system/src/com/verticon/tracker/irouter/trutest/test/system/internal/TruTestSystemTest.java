@@ -157,6 +157,8 @@ public class TruTestSystemTest extends TestCase {
 		ServiceReference[] refs = context.getServiceReferences(
 				ManagedServiceFactory.class.getName(), "(service.pid="
 						+ pidValues + ")");
+		assertNotNull("No TruTest Indicator ManagedFactoryService",
+				refs);
 		assertTrue("No TruTest Indicator ManagedFactoryService",
 				refs.length == 1);
 

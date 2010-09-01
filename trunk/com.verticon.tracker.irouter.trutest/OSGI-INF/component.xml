@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.verticon.tracker.irouter.trutest">
-   <implementation class="com.verticon.tracker.irouter.trutest.Component"/>
+   <implementation class="com.verticon.tracker.irouter.trutest.internal.Component"/>
    <service>
       <provide interface="org.osgi.service.cm.ManagedServiceFactory"/>
    </service>

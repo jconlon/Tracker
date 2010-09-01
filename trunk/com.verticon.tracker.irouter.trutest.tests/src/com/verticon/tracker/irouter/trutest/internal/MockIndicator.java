@@ -11,12 +11,12 @@
 /**
  * 
  */
-package com.verticon.tracker.irouter.trutest;
+package com.verticon.tracker.irouter.trutest.internal;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
-import static com.verticon.tracker.irouter.trutest.Constants.CONSUME_COMMAND_DELAY;
-import static com.verticon.tracker.irouter.trutest.Constants.SEND_UNSTABLE_WEIGHTS;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.CONSUME_COMMAND_DELAY;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.SEND_UNSTABLE_WEIGHTS;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -46,6 +46,10 @@ import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.connector.socket.SocketStreamConnection;
 import com.verticon.tracker.irouter.common.IEnvelopeSender;
+import com.verticon.tracker.irouter.trutest.internal.CommandConsumerCallable;
+import com.verticon.tracker.irouter.trutest.internal.EnvelopeProducerCallable;
+import com.verticon.tracker.irouter.trutest.internal.Indicator;
+import com.verticon.tracker.irouter.trutest.internal.InitializerCallable;
 
 class MockIndicator extends
 			Indicator {
