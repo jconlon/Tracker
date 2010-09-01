@@ -4,8 +4,10 @@ import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_PID;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_PRODUCER_PID;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.osgi.framework.InvalidSyntaxException;
@@ -20,6 +22,19 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+/**
+ * iRouter Producers and Consumers contain certain properties that aid in the 
+ * creation of wires between them.  WireGroup, Consumer_Scope, and Producer_Scope.
+ * For the WireGroup must match and there must be a common name between the Consumer 
+ * Producer Scopes.
+ * 
+ * As Producers and Consumers are injected by DS, this Component will add 
+ * their properties to a map of GroupConnector objects. The GroupConnector
+ * will call back this Component for the creation of appropriate wires.
+ * 
+ * @author jconlon
+ *
+ */
 public class Component implements WireAdminListener, IWireCreator {
 
 	/**
@@ -47,6 +62,7 @@ public class Component implements WireAdminListener, IWireCreator {
 	 */
 	private WireAdmin wireAdmin;
 
+	private List<WireParameters> wiresToBeCreated = new ArrayList<WireParameters>();
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -56,20 +72,25 @@ public class Component implements WireAdminListener, IWireCreator {
 		return "Component [name=Wire Admin and Utils]";
 	}
 	
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Called by the GroupConnector to create the wire. If one already exists,
+	 * it will delete it first.
 	 * 
-	 * @see
-	 * com.verticon.tracker.irouter.wireadmin.internal.IWireCreator#createWire(com.verticon.tracker
-	 * .wireadmin.WireParameters)
+	 * @param wireParameters
+	 * @see com.verticon.tracker.irouter.wireadmin.internal.IWireCreator#createWire(com.verticon.tracker.irouter.wireadmin.internal.WireParameters)
 	 */
 	@Override
 	public boolean createWire(WireParameters wireParameters) {
-		if(wireAdmin==null){
-			logger.warn(bundleMarker,
-					"No wireAdmin Service found, so could not create wire with {}",
-					wireParameters);
-			return false;
+		synchronized(wiresToBeCreated){
+			if(wireAdmin==null){
+				logger.warn(bundleMarker,
+						"No wireAdmin Service found, so could not create wire with {}",
+						wireParameters);
+
+				wiresToBeCreated.add(wireParameters);
+
+				return false;
+			}
 		}
 		// "(&(" + Constants.OBJECTCLASS + "=Person)(|(sn=Jensen)(cn=Babs J*)))"
 		String filter = 
@@ -109,8 +130,8 @@ public class Component implements WireAdminListener, IWireCreator {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Just Logs wire events.
 	 * 
 	 * @see
 	 * org.osgi.service.wireadmin.WireAdminListener#wireAdminEvent(org.osgi.
@@ -208,9 +229,24 @@ public class Component implements WireAdminListener, IWireCreator {
 		groupConnectors.get(group).setConsumer(properties);
 	}
 
+	/**
+	 * DS Inject point for WireAdmin.  To avoid timing problems with wireAdmin
+	 * setting WireAdmin late, after Producers and Consumers may have already 
+	 * started setting wireAdmin will check to see if there are any wiresToBeCreated
+	 * which represents queued up wireCreationRequests.
+	 * 
+	 * @param wireAdmin
+	 * @since 0.2.0
+	 */
 	public void setWireAdmin(WireAdmin wireAdmin) {
-		logger.debug(bundleMarker, "wireAdmin set");
-		this.wireAdmin = wireAdmin;
+		synchronized(wiresToBeCreated){
+			logger.debug(bundleMarker, "wireAdmin set");
+			this.wireAdmin = wireAdmin;
+			for (WireParameters wireParameters : wiresToBeCreated) {
+				createWire( wireParameters);
+			}
+			wiresToBeCreated.clear();
+		}
 		
 	}
 
