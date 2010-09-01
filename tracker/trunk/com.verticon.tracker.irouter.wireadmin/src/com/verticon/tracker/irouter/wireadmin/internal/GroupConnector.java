@@ -51,7 +51,7 @@ public class GroupConnector {
 
 	@Override
 	public String toString() {
-		return "EntityConnector [entity=" + group + "]";
+		return "GroupConnector [group=" + group + "]";
 	}
 
 	/**

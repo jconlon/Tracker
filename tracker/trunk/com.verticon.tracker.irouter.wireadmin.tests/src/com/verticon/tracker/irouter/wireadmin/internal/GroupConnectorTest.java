@@ -3,10 +3,13 @@
  */
 package com.verticon.tracker.irouter.wireadmin.internal;
 
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,10 +23,17 @@ import org.osgi.service.wireadmin.WireAdminEvent;
 import org.osgi.service.wireadmin.WireConstants;
 
 /**
+ * 
+ * iRouter Producers and Consumers contain properties that aid in the 
+ * creation of wires between them.  WireGroup, Consumer_Scope, and Producer_Scope.
+ * When WireGroups match and there is a common name between the Consumer 
+ * Producer Scopes, then a connection is made.
+ * 
  * @author jconlon
  *
  */
-public class EntityConnectorTest {
+
+public class GroupConnectorTest {
 
 	private Map<String, Object> propertiesProducer1 = null;
 	private static final String[] SCOPE_PRODUCER_1 = {"b", "d","e","f"};
@@ -31,17 +41,18 @@ public class EntityConnectorTest {
 	private static final String[] SCOPE_CONSUMER_1 = {"a", "b", "c", "d"};
 	
 	private GroupConnector instance = null;
-	private String entity = "test";
+	private String wireGroupName = "test";
 	
 	
-	private MockWireCreator wireCreator  = null;
+	private IWireCreator wireCreator  = null;
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		wireCreator = new MockWireCreator();
-		instance = new GroupConnector(entity,wireCreator);
+		wireCreator = createMock(IWireCreator.class);//new MockWireCreator();
+
+		instance = new GroupConnector(wireGroupName,wireCreator);
 		propertiesProducer1 = new HashMap<String,Object>();
 		propertiesProducer1.put(Constants.SERVICE_PID, "producer.pid.1");
 		propertiesProducer1.put(WireConstants.WIREADMIN_PRODUCER_SCOPE, SCOPE_CONSUMER_1);
@@ -85,64 +96,65 @@ public class EntityConnectorTest {
 
 	}
 	
-	
+	/**
+	 * Adding a set of producer properties to the GroupConnector
+	 * without corresponding consumer properties
+	 * the WireCreator will not create any wireParameters
+	 */
 	@Test
 	public void testSetSingleProducer() {
+		replay(wireCreator);
 		instance.setProducer(propertiesProducer1);
-		assertNull(wireCreator.wireParameters);
 	}
 
-	
+	/**
+	 * Adding a consumer to the GroupConnector
+	 * by itself the WireCreator will not create
+	 * any wireParameters
+	 */
 	@Test
 	public void testSetSingleConsumer() {
+		replay(wireCreator);
 		instance.setConsumer(propertiesConsumer1);
-		assertNull(wireCreator.wireParameters);
 	}
 
 	
 	@Test
 	public void testSetProducer() {
+		expect(wireCreator.createWire(isA(WireParameters.class))).andReturn(true);
+		replay(wireCreator);
+
 		//First add a consumer
 		instance.setConsumer(propertiesConsumer1);
-		assertNull(wireCreator.wireParameters);
 		
 		//Now add a producer
 		instance.setProducer(propertiesProducer1);
-		assertNotNull(wireCreator.wireParameters);
 		
 		//Add the producer again
-		wireCreator.wireParameters = null;
 		instance.setProducer(propertiesProducer1);
-		assertNull(wireCreator.wireParameters);
 		
 		//Add the consumer again
-		wireCreator.wireParameters = null;
 		instance.setConsumer(propertiesConsumer1);
-		assertNull(wireCreator.wireParameters);
+		verify(wireCreator);
 	}
 	
 	
 	@Test
 	public void testSetConsumer() {
+		expect(wireCreator.createWire(isA(WireParameters.class))).andReturn(true);
+		replay(wireCreator);
 		//First add a producer
 		instance.setProducer(propertiesProducer1);
-		assertNull(wireCreator.wireParameters);
 		
 		//Now the consumer
 		instance.setConsumer(propertiesConsumer1);
-		assertNotNull(wireCreator.wireParameters);
 		
 		//Add the consumer again
-		wireCreator.wireParameters = null;
 		instance.setConsumer(propertiesConsumer1);
-		assertNull(wireCreator.wireParameters);
 		
 		//Add the producer again
-		wireCreator.wireParameters = null;
 		instance.setProducer(propertiesProducer1);
-		assertNull(wireCreator.wireParameters);
-		
-		
+		verify(wireCreator);
 	}
 	/**
 	 * Test method for {@link com.verticon.tracker.irouter.wireadmin.internal.GroupConnector#scopeIntersection(java.lang.String[], java.lang.String[])}.
@@ -160,13 +172,13 @@ public class EntityConnectorTest {
 	}
 
 	
-	static class MockWireCreator implements IWireCreator{
-		WireParameters wireParameters;
-		@Override
-		public boolean createWire(WireParameters wireParameters) {
-			this.wireParameters =wireParameters;
-			return true;
-		}
-		
-	}
+//	private static class MockWireCreator implements IWireCreator{
+//		WireParameters wireParameters;
+//		@Override
+//		public boolean createWire(WireParameters wireParameters) {
+//			this.wireParameters =wireParameters;
+//			return true;
+//		}
+//		
+//	}
 }
