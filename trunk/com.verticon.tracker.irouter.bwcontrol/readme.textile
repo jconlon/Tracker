@@ -22,6 +22,10 @@ h3. Component Diagram
 
 !{padding-left:3em}bwControlComponent.png!
 
-h3. Business Logic Wiring Diagram
+h3. System Diagram
+
+!bwControlSystem.png!
+
+h3. Business Logic Detailed Diagram
 
 !bwControlComponentLogic.png!
