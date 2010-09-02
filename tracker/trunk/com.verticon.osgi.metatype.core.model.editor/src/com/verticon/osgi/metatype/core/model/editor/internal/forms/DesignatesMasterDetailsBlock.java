@@ -351,9 +351,7 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 		return Utils.getMetaData(getEditingDomain());
 	}
 	
-	private void setInput(){
-		
-		
+	 void setInput(){
 		masterViewer.setInput(getMetaData());
 
 		IEMFListProperty prop = EMFProperties
@@ -419,7 +417,7 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 	}
 	
 	private ITreeContentProvider treeContentProvider = new ITreeContentProvider() {
-
+		MetaData model;
 		@Override
 		public Object[] getChildren(Object parentElement) {
 			if (parentElement instanceof Designate) {
@@ -455,10 +453,11 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 
 		@Override
 		public Object[] getElements(Object inputElement) {
-			if (inputElement instanceof MetaData) {
-				MetaData metaData = (MetaData) inputElement;
+//			if (inputElement instanceof MetaData) {
+//				MetaData metaData = (MetaData) inputElement;
+			if (model!=null){
 				List<Designate> designates = new ArrayList<Designate>();
-				for (Designate designate : metaData.getDesignate()) {
+				for (Designate designate : model.getDesignate()) {
 					if (isTemplate(designate)) {
 						designates.add(designate);
 					}
@@ -485,7 +484,15 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 
 		@Override
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-			// this.viewer = (TreeViewer)viewer;
+//			this.viewer = (TreeViewer)viewer;
+//			
+//			if(model !=null){
+//				
+//			}else{
+//				//first time initiating
+//			}
+			model = (MetaData) newInput;
+			
 			if (oldInput != null) {
 				logger.debug(bundleMarker, "Input Changed oldInput={}",
 						oldInput);
@@ -580,5 +587,9 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 				cell.setStyleRanges(styledString.getStyleRanges());
 			}
 		}
+	}
+	
+	void prepareToReload(){
+		masterViewer.collapseAll();
 	}
 }
