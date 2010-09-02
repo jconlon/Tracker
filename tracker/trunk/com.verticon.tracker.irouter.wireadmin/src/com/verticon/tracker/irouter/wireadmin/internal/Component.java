@@ -44,7 +44,7 @@ public class Component implements WireAdminListener, IWireCreator {
 	/**
 	 * Identify the plugin to the logger
 	 */
-	private final static String PLUGIN_ID = "com.verticon.tracker.irouter.wireadmin.internal";
+	private final static String PLUGIN_ID = "com.verticon.tracker.irouter.wireadmin";
 	/**
 	 * slf4j Marker to keep track of bundle
 	 */
