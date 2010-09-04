@@ -23,7 +23,7 @@ public abstract class AbstractTransactionHandler implements ITransactionHandler 
 	protected final Map<String, Measurement> measurements = new HashMap<String, Measurement>();
 	protected Long id = null;
 
-	protected abstract Marker bundleMarker();
+	
 	
 	protected AbstractTransactionHandler(Logger log) {
 		super();
@@ -33,14 +33,24 @@ public abstract class AbstractTransactionHandler implements ITransactionHandler 
 		this.log = log;
 	}
 
+	protected abstract Marker bundleMarker();
+	
+	protected String getTriggeringScopeName(){
+		return TRANSACTION_STATE_SCOPE;
+	}
+	
+	protected String getAnimalIDNumberScopeName(){
+		return ANIMAL_TAG_NUMBER_SCOPE;
+	}
+	
 	public void add(Envelope envelope) {
-		 if(envelope.getScope().equals(TRANSACTION_STATE_SCOPE)){
+		 if(envelope.getScope().equals(getTriggeringScopeName())){
 			 if(((State)envelope.getValue()).getValue()==1){
 				 triggered();
 				 measurements.clear();
 				 id=null;
 			 }
-		 }else if(envelope.getScope().equals(ANIMAL_TAG_NUMBER_SCOPE)){
+		 }else if(envelope.getScope().equals(getAnimalIDNumberScopeName())){
 			 if(envelope.getValue() instanceof Long){
 				 id = (Long)envelope.getValue();
 
