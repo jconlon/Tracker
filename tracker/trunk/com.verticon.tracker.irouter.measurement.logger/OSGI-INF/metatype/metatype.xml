@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
 
-  <OCD description="Configuration for the Tracker Measurement Logger Instance" name="Tracker Measurement Logger" id="com.verticon.tracker.irouter.measurement.loggerfactory">
+  <OCD description="Gateway for sending measurements as log entries." 
+       name="Measurement Log Gateway" 
+       id="com.verticon.tracker.irouter.measurement.loggerfactory">
     <AD name="Wiring group name"  id="tracker.wiring.group.name" type="String"
         description="Name of the group of components that will be wired together."/> 
  
@@ -9,6 +11,10 @@
 		cardinality="3" 
 		description="List of the names of the wire measurement products to log. Use only the prefix of the measurement product names, as each prefix entered in this list will have the .measurement suffix automatically appended." />
 	
+	<AD name="Monitor Node label"  id="tracker.monitor.label" type="String"
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="event"/>
+        
     <AD name="Type of logger" id="logger.type" type="Integer" 
     	description="Kind of transaction logger to create. Normalized - log entries are comma delimited and include all measurements. Aggregated - Separate log entries per measurement.">
     	<Option label="Normalized" value="0"/>
