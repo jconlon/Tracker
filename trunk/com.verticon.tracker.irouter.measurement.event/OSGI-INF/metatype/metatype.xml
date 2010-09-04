@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD description="Gateway for sending measurements to Tracker transaction editors." 
+  		name="Measurement Event Gateway" 
+  		id="com.verticon.tracker.irouter.measurement.event">
+    
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" type="String"
+        description="Name of the group of components that will be wired together."/> 
+        
+    <!--  
+    <AD name="Monitor Node label"  id="tracker.monitor.label" type="String"
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="event"/> 
+    -->
+ 
+ 	<AD name="Consumable scopes" id="wireadmin.consumer.scope" type="String"
+		cardinality="5" 
+		description="Comma delimited list of the measurements, animal tag id, and trigger state. (Use full scope names)" />
+ 
+    <AD name="Trigger scope" id="trigger.scope" type="String" 
+        default="transaction.state"
+		description="Name of the Trigger state from the previous consumbable scopes list." />
+		
+	 <AD name="Animal ID scope" id="animal.id.scope" type="String" 
+	    default="animal.tag.number"
+		description="Name of the Animal ID scope from the previous consumbable scopes list." />
+ 
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.measurement.event" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.measurement.event"/>
+  </Designate>
+  
+  
+</metatype:MetaData>
