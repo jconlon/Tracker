@@ -1,17 +1,17 @@
 package com.verticon.tracker.irouter.wireadmin.internal;
 
-import static com.verticon.tracker.irouter.wireadmin.internal.Component.bundleMarker;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
+import static com.verticon.tracker.irouter.wireadmin.internal.Component.bundleMarker;
 import static org.osgi.framework.Constants.SERVICE_PID;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_SCOPE;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_PRODUCER_SCOPE;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,8 +37,8 @@ public class GroupConnector {
 	/*
 	 * maps of producers and consumers indexed by PID
 	 */
-	private final Map<String,Map<String, ?>> producers = new HashMap<String, Map<String, ?>>();
-	private final Map<String,Map<String, ?>> consumers = new HashMap<String, Map<String, ?>>();
+	private final Map<String,Map<String, ?>> producers = new ConcurrentHashMap<String, Map<String, ?>>();
+	private final Map<String,Map<String, ?>> consumers = new ConcurrentHashMap<String, Map<String, ?>>();
 	
 	
 	public GroupConnector(String group,IWireCreator wireCreator) {
