@@ -82,7 +82,9 @@ public class DeviceService {
 
 	
 	public void shutdown(){
-		exec.shutdownNow();
+		if(exec!=null){
+		 exec.shutdownNow();
+		}
 		logger.debug(bundleMarker,"Shutdown");
 		exec = null;
 	}
