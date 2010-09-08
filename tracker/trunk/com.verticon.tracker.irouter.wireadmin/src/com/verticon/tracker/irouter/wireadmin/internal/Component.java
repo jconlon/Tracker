@@ -73,6 +73,15 @@ public class Component implements WireAdminListener, IWireCreator {
 	}
 	
 	/**
+	 * Declarative Services deactivation
+	 */
+	public void deactivate(){
+		groupConnectors.clear();
+		wiresToBeCreated.clear();
+	}
+	
+	
+	/**
 	 * Called by the GroupConnector to create the wire. If one already exists,
 	 * it will delete it first.
 	 * 
