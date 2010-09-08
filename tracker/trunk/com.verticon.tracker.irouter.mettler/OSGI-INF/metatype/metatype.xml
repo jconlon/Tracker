@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
 
-  <OCD description="Configuration for the Tracker Mettler Balance Instance" name="Tracker Mettler Balance" id="com.verticon.tracker.irouter.mettler.balancefactory">
+  <OCD description="Provides proxy connection and data transfer of measurements from Mettler laboratory weight balances." 
+     name="Mettler Proxy" id="com.verticon.tracker.irouter.mettler.balancefactory">
     <AD name="Connection uri"  id="connection.uri" type="String" default="" 
     		description="URI to connect to the balance. Example socket://192.168.0.116:2345"/> 
     
