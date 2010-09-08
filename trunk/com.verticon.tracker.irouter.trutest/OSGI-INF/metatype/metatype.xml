@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
 
-  <OCD description="Configuration for the Tracker Tru-Test Indicator Instance" name="Tracker Tru-Test Indicator" 
+  <OCD description="Provides proxy connection and data transfer to and from TruTest livestock scale head indicators." 
+       name="TruTest Proxy" 
   	id="com.verticon.tracker.irouter.trutest.indicatorfactory">
   	
     <AD name="Connection uri"  id="connection.uri" required="true" type="String" 
