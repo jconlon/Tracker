@@ -87,6 +87,16 @@ public class MeasurementEventConsumer  extends AbstractTransactionHandler implem
 		}
 		
 	}
+    
+    /**
+	 * Declaratives Services activation of instance.
+	 * 
+	 * @param config contains properties for this instance.
+	 */
+    void deactivate(){
+    	this.config.clear();
+		log.debug(bundleMarker,"deactivating...");
+	}
 
     /**
      * Declaratives Services service injection point
