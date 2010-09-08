@@ -47,7 +47,6 @@ public class Component implements ManagedServiceFactory {
 
 
 	private Map<String, Indicator> indicators = null;
-//	private Map<String, ServiceRegistration> registrations = null;
 	private ExecutorService exec;
 	private ScheduledExecutorService scheduler;
 	private BundleContext bc;
@@ -69,17 +68,10 @@ public class Component implements ManagedServiceFactory {
 		exec = Executors.newCachedThreadPool();
 		scheduler = Executors.newSingleThreadScheduledExecutor();
 		indicators = new HashMap<String, Indicator>();
-//		registrations = new HashMap<String, ServiceRegistration>();
 		log.debug(bundleMarker,"Started");
 	}
 
 	protected void deactivate(BundleContext context) throws Exception {
-//		for (ServiceRegistration registration : registrations.values()) {
-//			registration.unregister();
-//		}
-//		registrations.clear();
-//		registrations=null;
-		
 		Collection<Indicator> indicatorInstances = indicators.values();
 		for (Indicator indicator : indicatorInstances) {
 			indicator.unregisterMonitorable();
