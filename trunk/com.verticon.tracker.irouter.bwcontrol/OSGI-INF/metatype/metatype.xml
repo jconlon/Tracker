@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
 
-  <OCD description="Configuration for the Tracker Blood Weight Controller Instance" name="Tracker Blood Weight Controller" id="com.verticon.tracker.irouter.bwcontrol.controllerfactory">
+  <OCD description="Business logic controller for measuring animal blood weights as a percentage of total animal weight." 
+       name="Blood Weight Controller" id="com.verticon.tracker.irouter.bwcontrol.controllerfactory">
     <AD name="Wiring group name"  id="tracker.wiring.group.name" required="true" type="String" 
         default="" description="Name of the group of components that will be wired together."/> 
    	<AD name="Units for displaying blood weights" id="trutest.field.units" type="Integer" default="1"
