@@ -1,6 +1,6 @@
 package com.verticon.tracker.irouter.common;
 
-import static com.verticon.tracker.irouter.core.internal.bundle.BundleConstants.bundleMarker;
+import static com.verticon.tracker.irouter.common.internal.bundle.BundleConstants.bundleMarker;
 
 import java.net.ConnectException;
 import java.net.NoRouteToHostException;

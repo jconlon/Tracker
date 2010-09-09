@@ -2,7 +2,7 @@ package com.verticon.tracker.irouter.common;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
 import static org.osgi.framework.Constants.SERVICE_PID;
-import static com.verticon.tracker.irouter.core.internal.bundle.BundleConstants.bundleMarker;
+import static com.verticon.tracker.irouter.common.internal.bundle.BundleConstants.bundleMarker;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
