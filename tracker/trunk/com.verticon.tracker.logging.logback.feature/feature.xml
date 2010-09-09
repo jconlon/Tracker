@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.logging.logback"
       label="Logback Logging Service"
-      version="0.3.0.qualifier"
+      version="0.3.1.qualifier"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.logging.logback">
 
@@ -123,6 +123,13 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
    <plugin
          id="org.slf4j.log4j"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.logging.logback"
          download-size="0"
          install-size="0"
          version="0.0.0"
