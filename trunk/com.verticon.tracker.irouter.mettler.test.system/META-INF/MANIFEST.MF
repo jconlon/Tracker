@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tracker iRouter Mettler System Test
-Bundle-SymbolicName: com.verticon.tracker.irouter.mettler.test.system.internal
+Bundle-SymbolicName: com.verticon.tracker.irouter.mettler.test.system
 Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Verticon, Inc.
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

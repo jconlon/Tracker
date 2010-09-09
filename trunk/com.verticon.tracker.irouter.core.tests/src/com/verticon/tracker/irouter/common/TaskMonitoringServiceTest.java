@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.verticon.tracker.itrouter.common;
+package com.verticon.tracker.irouter.common;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,9 +19,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.verticon.tracker.irouter.common.ICallableFactory;
-import com.verticon.tracker.irouter.common.TaskMonitoringService;
 
 /**
  * @author jconlon
