@@ -17,12 +17,12 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.equinoxosgi.util.PropertyManager;
 import org.osgi.framework.FrameworkUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 
-import com.verticon.tracker.irouter.core.PropertyManager;
 import com.verticon.tracker.irouter.dev.Constants;
 import com.verticon.tracker.irouter.dev.Constants.Property;
 import com.verticon.tracker.irouter.dev.IDeviceListener;

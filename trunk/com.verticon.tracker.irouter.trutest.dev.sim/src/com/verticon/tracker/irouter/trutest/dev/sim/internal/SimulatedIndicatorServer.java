@@ -6,12 +6,12 @@ import java.io.OutputStream;
 
 import org.equinoxosgi.toast.devsim.IDeviceSimulator;
 import org.equinoxosgi.toast.devsim.IDeviceSimulatorListener;
+import org.equinoxosgi.util.PropertyManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-import com.verticon.tracker.irouter.core.PropertyManager;
 import com.verticon.tracker.irouter.dev.Constants.Property;
 import com.verticon.tracker.irouter.dev.IDeviceListener;
 import com.verticon.tracker.irouter.trutest.dev.AbstractIndicator;
