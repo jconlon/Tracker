@@ -10,7 +10,6 @@
  *******************************************************************************/
 package com.verticon.tracker.transaction.editor;
 
-import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMIN_TOPIC_EVENT;
 import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMIN_TOPIC_READER;
 
 import java.util.Dictionary;
@@ -39,8 +38,8 @@ public final class TransactionEditorPlugin extends EMFPlugin {
 	private static final String ID = "com.verticon.tracker.transaction.editor";
 	
 	//Register to listen to Readers and Events
-	private static final String[] topics = new String[]{EVENT_ADMIN_TOPIC_READER, 
-				 EVENT_ADMIN_TOPIC_EVENT};
+	private static final String[] topics = new String[]{EVENT_ADMIN_TOPIC_READER}; 
+//		EVENT_ADMIN_TOPIC.toProp()};
 
 	/**
 	 * Keep track of the singleton.

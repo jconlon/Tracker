@@ -198,14 +198,16 @@
             id="com.verticon.tracker.editor.commands.importText.asLifeData.command"
             name="Import Text File as Animal Life Data">
       </command>
-      <!-- Import log command Ticket#532 -->
+      <!-- Import log command Ticket#532 
+      Moved to com.verticon.tracker.irouter.premises.gateway
        <command
             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
-            defaultHandler="com.verticon.tracker.editor.handlers.ImportLogHandler"
+            defaultHandler="com.verticon.tracker.irouter.gateway.internal.ImportLogHandler"
             description="Imports log file as animal event data."
             id="com.verticon.tracker.editor.commands.importLog.asEventData.command"
             name="Import Log File as Animal Event Data">
       </command>
+      -->
       <!-- Pending Ticket#501
        <command
             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
@@ -354,7 +356,7 @@
                works with simple and transaction based editors;
                uses edit command redo and undo framework;
                needs a Premises in the Editor.
-               -->
+               
                <command
                       commandId="com.verticon.tracker.editor.commands.importLog.asEventData.command"
                       icon="icons/full/obj16/import_wiz.gif"
@@ -378,6 +380,9 @@
     			     </and>
 	            </visibleWhen>
                </command>
+               -->
+               
+               
                 <!-- Event Data Import from Text file commands 
                Import text file as standard event data;
                works on a *.txt File;
