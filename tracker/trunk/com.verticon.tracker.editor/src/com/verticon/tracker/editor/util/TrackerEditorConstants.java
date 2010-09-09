@@ -25,13 +25,12 @@ public class TrackerEditorConstants {
 	 * Topic for transaction readers
 	 */
 	public static final String EVENT_ADMIN_TOPIC_READER = "com/verticon/tracker/reader";
-	public static final String EVENT_ADMIN_TOPIC_EVENT = "com/verticon/tracker/event";
 	
 	//Properties for AnimalTemplate and Event transmission
 	public static final String EVENT_ADMIN_PROPERTY_ANIMAL_TEMPLATE = "com.verticon.tracker.animal";
 	public static final String EVENT_ADMIN_PROPERTY_READER_NAME = "com.verticon.tracker.reader.name";
 	public static final String EVENT_ADMIN_PROPERTY_ANIMAL_ID = "com.verticon.tracker.animal.id";
-	public static final String EVENT_ADMIN_PROPERTY_SOURCE = "com.verticon.tracker.source";
+//	public static final String EVENT_ADMIN_PROPERTY_SOURCE = "com.verticon.tracker.source";
 	
 	public static final String EVENT_ADMIN_PROPERTY_EVENT_TYPE = "com.verticon.tracker.event.type";
 	public static final String EVENT_ADMIN_PROPERTY_EVENT_COMMENTS = "com.verticon.tracker.event.comments";

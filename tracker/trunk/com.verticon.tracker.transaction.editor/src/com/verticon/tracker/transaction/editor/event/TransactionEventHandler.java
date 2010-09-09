@@ -9,19 +9,17 @@
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
 package com.verticon.tracker.transaction.editor.event;
+//import static com.verticon.tracker.common.EventAdminConstant.EVENT_ADMIN_TOPIC;
+//import static com.verticon.tracker.common.EventAdminConstant.IROUTER_PAYLOAD;
 import static com.verticon.tracker.editor.preferences.PreferenceConstants.P_SPREAD_INTERVAL;
-import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMIN_PROPERTY_ANIMAL_ID;
 import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMIN_PROPERTY_ANIMAL_TEMPLATE;
 import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMIN_PROPERTY_READER_NAME;
-import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMIN_PROPERTY_SOURCE;
-import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMIN_TOPIC_EVENT;
 import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMIN_TOPIC_READER;
 import static com.verticon.tracker.transaction.editor.TransactionEditorPlugin.bundleMarker;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Properties;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -66,25 +64,27 @@ public class TransactionEventHandler implements EventHandler {
 		}
 		if(EVENT_ADMIN_TOPIC_READER.equals(event.getTopic())){
 			handleReaderEvent(event,domain);
-		}else if(EVENT_ADMIN_TOPIC_EVENT.equals(event.getTopic())){
-			handleTrackerEvent(event,domain);
 		}
+//		else if(EVENT_ADMIN_TOPIC.toProp().equals(event.getTopic())){
+//			handleIRouterPayload(event,domain);
+//		}
 	}
 
-	private void handleTrackerEvent(org.osgi.service.event.Event event, TransactionalEditingDomain domain){
-		String source = (String)event.getProperty(EVENT_ADMIN_PROPERTY_SOURCE);
-		String id = (String)event.getProperty(EVENT_ADMIN_PROPERTY_ANIMAL_ID);
-		
-		Properties props = new Properties();
-		for (String name : event.getPropertyNames()) {
-			if(EVENT_ADMIN_PROPERTY_ANIMAL_ID.equals(name) || EVENT_ADMIN_PROPERTY_SOURCE.equals(name)){
-				continue;
-			}
-			props.put(name, event.getProperty(name));
-		}
-		
-		addEventToDomain( source,  domain,  props, id);
-	}
+//	private void handleIRouterPayload(org.osgi.service.event.Event event, TransactionalEditingDomain domain){
+//		String source = (String)event.getProperty(Constants.BUNDLE_SYMBOLICNAME);//EVENT_ADMIN_PROPERTY_SOURCE);
+//		Object payload = event.getProperty(IROUTER_PAYLOAD.toProp());
+//		if(payload==null){
+//			logger.error(bundleMarker,"No payload from iRouter component={}",source);
+//			return;
+//		}
+//		if(!(payload instanceof MeasurementTransaction)){
+//			logger.error(bundleMarker,"Unsupported payload from iRouter component={}",source);
+//			return;
+//		}
+//		MeasurementTransaction transaction = (MeasurementTransaction)payload;
+//		addTransactionToDomain(source, domain, transaction);
+//		
+//	}
 	
 	private void handleReaderEvent(org.osgi.service.event.Event event, TransactionalEditingDomain domain) {
 		
@@ -119,24 +119,24 @@ public class TransactionEventHandler implements EventHandler {
 		}
 	}
 	
-	/**
-	 * Handle an event
-	 * @param source
-	 * @param domain
-	 * @param event
-	 * @param id
-	 */
-	private void addEventToDomain(String source, TransactionalEditingDomain domain, Properties props, String id) {
-		ResourceSet rs = domain.getResourceSet();
-		EList<Resource> resources = rs.getResources();
-		for (Resource resource : resources) {
-			if (resources.size() > 1) {
-				logger.debug(bundleMarker,"Processing {}",resource.toString());
-			}
-			addEventToResource(source, domain, resource, props,  id);
-
-		}
-	}
+//	/**
+//	 * Handle an event
+//	 * @param source
+//	 * @param domain
+//	 * @param event
+//	 * @param id
+//	 */
+//	private void addTransactionToDomain(String source, TransactionalEditingDomain domain, MeasurementTransaction transaction) {
+//		ResourceSet rs = domain.getResourceSet();
+//		EList<Resource> resources = rs.getResources();
+//		for (Resource resource : resources) {
+//			if (resources.size() > 1) {
+//				logger.debug(bundleMarker,"Processing {}",resource.toString());
+//			}
+//			addTransactionToResource(source, domain, resource, transaction);
+//
+//		}
+//	}
 	
 	private void addAnimalTemplateToResource(final String readerName, final TransactionalEditingDomain domain, 
 			final Resource resource, final Animal templateAnimal) {
@@ -155,33 +155,43 @@ public class TransactionEventHandler implements EventHandler {
 
 	}
 	
-	private void addEventToResource(final String source, final TransactionalEditingDomain domain, 
-			final Resource resource, final Properties props,  final String id) {
-		domain.getCommandStack().execute(new RecordingCommand(domain) {
-			@Override
-			protected void doExecute() {
-				if (resource.getContents().get(0) instanceof Premises) {
-					Premises premises = (Premises) resource.getContents()
-							.get(0);
-					Animal animal =premises.findAnimal(id);
-					
-					if(animal==null){
-				    	logger.warn(bundleMarker,"The Premises in resource {} contained no animal with id = {}",
-				    			 resource.toString(), id);
-				    	return;
-				    }
-					Event trackerEvent = TrackerUtils.createEvent(props, animal.activeTag());
-					if(trackerEvent==null){
-				    	return;
-				    }
-					addEventToAnimal(props, trackerEvent, source, animal);
-				} else {
-					logger.warn(bundleMarker,"Resource {} contained no premises to process",resource.toString());
-				}
-			}
-		});
+//	private void addTransactionToResource(final String source, final TransactionalEditingDomain domain, 
+//			final Resource resource, final MeasurementTransaction transaction) {
+//		domain.getCommandStack().execute(new RecordingCommand(domain) {
+//			@Override
+//			protected void doExecute() {
+//				if (resource.getContents().get(0) instanceof Premises) {
+//					Premises premises = (Premises) resource.getContents()
+//							.get(0);
+//					Animal animal =premises.findAnimal(transaction.getId());
+//					
+//					if(animal==null){
+//				    	logger.warn(bundleMarker,"The Premises in resource {} contained no animal with id = {}",
+//				    			 resource.toString(), transaction.getId());
+//				    	return;
+//				    }
+//					
+//					Event trackerEvent = null;
+//					try {
+//						trackerEvent = MeasurementTransactionUtils.createEvent(animal.activeTag(), transaction);
+//					} catch (EventCreationException e) {
+//						logger.error(bundleMarker,"Failed to create event",e);
+//						return;
+//					}
+//					if(trackerEvent==null){
+//						logger.error(bundleMarker,"MeasurementTransactionUtils.createEvent returned a null event.");
+//				    	return;
+//				    }
+//					addEventToAnimal(trackerEvent, source, animal);
+//				} else {
+//					logger.warn(bundleMarker,"Resource {} contained no premises to process",resource.toString());
+//				}
+//			}
+//		});
+//
+//	}
+//	
 
-	}
 
 	/**
 	 * Find or create an animal in the premises and add only valid
@@ -219,21 +229,6 @@ public class TransactionEventHandler implements EventHandler {
 	}
 	
 	
-	
-	private void addEventToAnimal(Properties props,
-			 Event event,
-			 String source,
-			 Animal animal) {
-		
-		   
-		    animal.activeTag().getEvents().add(event);
-			
-		    logger.info(bundleMarker,"{} added {}, to animal {}, ", 
-					new Object[]{
-						source,
-						simpleName( event),  
-						animal.getId()});
-	}
 	
 	private static final String simpleName(Event event) {
 		String name = event.getClass().getSimpleName();
