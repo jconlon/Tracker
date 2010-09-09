@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import junit.framework.TestCase;
 
+import org.equinoxosgi.util.PropertyManager;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.cm.ManagedServiceFactory;
@@ -23,7 +24,6 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import com.verticon.tracker.irouter.common.TrackerConstants;
-import com.verticon.tracker.irouter.core.PropertyManager;
 import com.verticon.tracker.irouter.dev.IDeviceListener;
 import com.verticon.tracker.irouter.trutest.dev.ITruTestIndicator;
 
@@ -125,6 +125,7 @@ public class TruTestSystemTest extends TestCase {
 
 		String dataDirectory = PropertyManager.getProperty(
 				DATA_SYNCHRONIZATION_DIRECTORY, "/tmp");
+		
 		downloadedFile = new File(dataDirectory,
 				"animalLifeDataDownload-test.txt");
 		if (downloadedFile.exists()) {
