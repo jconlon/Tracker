@@ -5,7 +5,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.concurrent.TimeUnit;
 
-import com.verticon.tracker.irouter.core.PropertyManager;
+import org.equinoxosgi.util.PropertyManager;
+
 import com.verticon.tracker.irouter.dev.Constants;
 import com.verticon.tracker.irouter.dev.Constants.Property;
 import com.verticon.tracker.irouter.dev.IDeviceListener;
