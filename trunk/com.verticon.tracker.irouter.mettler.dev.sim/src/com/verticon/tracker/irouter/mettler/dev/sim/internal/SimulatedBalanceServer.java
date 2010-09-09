@@ -9,8 +9,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.equinoxosgi.toast.devsim.IDeviceSimulator;
 import org.equinoxosgi.toast.devsim.IDeviceSimulatorListener;
+import org.equinoxosgi.util.PropertyManager;
 
-import com.verticon.tracker.irouter.core.PropertyManager;
 import com.verticon.tracker.irouter.dev.Constants;
 import com.verticon.tracker.irouter.dev.Constants.Property;
 import com.verticon.tracker.irouter.dev.IDeviceListener;
