@@ -78,8 +78,8 @@
     <level value="INFO"/>
   </logger>
   
-  <logger name="com.verticon.tracker.irouter.trutest.dev.sim">
-    <level value="DEBUG"/>
+  <logger name="com.verticon.tracker.irouter.trutest.dev">
+    <level value="INFO"/>
   </logger>
   
   <root>
