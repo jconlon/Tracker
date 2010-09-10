@@ -108,8 +108,8 @@ public abstract class AbstractIndicator implements IDeviceListener,
 	public void connected(OutputStream out, InputStream in) throws IOException,
 			InterruptedException {
 		isConnected = true;
-		uploadedRecords = 0;
-		downloadedRecords = 0;
+		
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
 		log.info(bundleMarker, "Connected");
@@ -134,11 +134,16 @@ public abstract class AbstractIndicator implements IDeviceListener,
 
 		log.debug(bundleMarker, "Terminated...");
 		isConnected = false;
+		
 	}
 
 	private String process(String request) throws InterruptedException {
 		log.debug(bundleMarker, "Request {}", request);
-		if (request.startsWith("{FN}")) {
+		if (request.startsWith("{FD}")){//Resets download to first record
+			resetDownloadStatus();
+			return "\r\n";
+		}
+		if (request.startsWith("{FN}")) {//Get next download record
 			try {
 				return getDownloadData();
 			} catch (IOException e) {
@@ -146,7 +151,7 @@ public abstract class AbstractIndicator implements IDeviceListener,
 				return "[]" + "\r\n";
 			}
 		}
-		if (request.startsWith("{RP}")) {
+		if (request.startsWith("{RP}")) {//poll command
 			String response = commandQueue.poll(10, TimeUnit.MILLISECONDS);
 			if (response != null) {
 				return response;
@@ -180,6 +185,13 @@ public abstract class AbstractIndicator implements IDeviceListener,
 		}
 
 		return "\r\n";
+	}
+
+	private void resetDownloadStatus() {
+		downloadFinished = false;
+		uploadedRecords = 0;
+		downloadedRecords = 0;
+		fileReader = null;
 	}
 
 	protected void handleFields(String selectionControl2, String request) {
