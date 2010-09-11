@@ -37,7 +37,7 @@
 <stringAttribute key="selected_workspace_plugins" value="com.verticon.tracker.irouter.wireadmin@default:default,com.verticon.tracker.irouter.wireadmin.test.system@default:default,com.verticon.tracker.logging.logback.config@default:false,org.equinoxosgi.util@default:default,com.verticon.osgi.monitor@default:default,com.verticon.tracker.irouter.common@default:default"/>
 <booleanAttribute key="show_selected_only" value="false"/>
 <stringAttribute key="templateConfig" value="${target_home}/configuration/config.ini"/>
-<stringAttribute key="timestamp" value="1284245089068"/>
+<stringAttribute key="timestamp" value="1284245709236"/>
 <booleanAttribute key="tracing" value="false"/>
 <booleanAttribute key="useCustomFeatures" value="false"/>
 <booleanAttribute key="useDefaultConfig" value="true"/>
