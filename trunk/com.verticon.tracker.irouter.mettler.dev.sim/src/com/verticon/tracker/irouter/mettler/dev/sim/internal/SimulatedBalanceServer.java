@@ -1,41 +1,74 @@
 package com.verticon.tracker.irouter.mettler.dev.sim.internal;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.equinoxosgi.toast.devsim.IDeviceSimulator;
 import org.equinoxosgi.toast.devsim.IDeviceSimulatorListener;
 import org.equinoxosgi.util.PropertyManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import com.verticon.tracker.irouter.dev.Constants;
 import com.verticon.tracker.irouter.dev.Constants.Property;
 import com.verticon.tracker.irouter.dev.IDeviceListener;
 
 /**
- * Simulates a Mettler Balance Server. Type of Server is determined by the property 
+ * Simulates a Server connection to a Mettler Balance that continuously sends weights. 
+ * Type of Server is determined by the property 
  * mettler.sim.type, with the default a ServerSocket.  
  * 
  * Socket is determined by the property mettler.sim.socket with the default 2345.
  * 
  * Port is determined by the property mettler.sim.port and there is no default.
  * 
+ * Output timing is determined by the property mettler.sim.timer.secs and there is a default of
+ * 2 seconds.
+ * 
  * @author jconlon
  *
  */
 public class SimulatedBalanceServer implements IDeviceListener, IDeviceSimulatorListener {
+	
+	private static final String DEFAULT_TIME_SECONDS = "2";
+
+	/**
+	 * Identify the plugin to the logger
+	 */
+	private final static String PLUGIN_ID = "com.verticon.tracker.irouter.mettler.dev.sim";
+	
+	/**
+	 * slf4j Marker to keep track of bundle
+	 */
+	public static final Marker bundleMarker = MarkerFactory.getMarker(PLUGIN_ID);
+	static {
+		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
+	}
+	
+	/**
+	 * slf4j Logger
+	 */
+	protected Logger log = LoggerFactory.getLogger(SimulatedBalanceServer.class);
+	
     private BlockingQueue<Integer> queue = new LinkedBlockingQueue<Integer>();
 	private static final String MY_PREFIX = "mettler.sim.";
 	private static final String METTLER_BALANCE = "Mettler Balance";
 	private static final String CONNECTION = "Connection";
 	private static final String WEIGHT = "Weight";
 	private IDeviceSimulator simulator;
-	private int weight;
+	private Integer weight = 0;
 	private AtomicBoolean run = new AtomicBoolean(true);
 	private Thread connectedThread;
+	private int secondsBetweenOutput = 2;
 	
 	
 	/* (non-Javadoc)
@@ -56,6 +89,19 @@ public class SimulatedBalanceServer implements IDeviceListener, IDeviceSimulator
 	}
 	
 	public void startup() {
+		
+		String timing = PropertyManager.getProperty(MY_PREFIX
+				+ "timer.secs",
+				DEFAULT_TIME_SECONDS
+				);
+		try {
+			secondsBetweenOutput = Integer.parseInt(timing);
+		} catch (NumberFormatException e) {
+			log.warn(bundleMarker, "Failed to parse the {}{} setting default to 2 seconds.",MY_PREFIX,"timer.secs");
+		}
+		
+		
+		
 		simulator.registerDevice(METTLER_BALANCE, METTLER_BALANCE,this);
 		simulator.addBooleanActuator(METTLER_BALANCE, CONNECTION, CONNECTION);
 		simulator.addIntegerSensor(
@@ -69,6 +115,7 @@ public class SimulatedBalanceServer implements IDeviceListener, IDeviceSimulator
 				5,//largeInc, 
 				"grams");
 		run.set(true);
+		log.debug(bundleMarker, "Started");
 	}
 	
 	public void shutdown() {
@@ -128,8 +175,9 @@ public class SimulatedBalanceServer implements IDeviceListener, IDeviceSimulator
 	
 	
 	public void performAction(String parameterName, String actionName) {
-		if (WEIGHT.equals(parameterName) && WEIGHT.equals(actionName))
-			System.out.println("**************Perform action.********");
+		if (WEIGHT.equals(parameterName) && WEIGHT.equals(actionName)){
+			log.debug(bundleMarker, "performAction invoked actionName={}",actionName);
+		}
 	}
 	
 	public void valueChanged(String name, boolean newValue) {
@@ -153,15 +201,41 @@ public class SimulatedBalanceServer implements IDeviceListener, IDeviceSimulator
 	@Override
 	public void connected(OutputStream out, InputStream in) throws IOException,
 			InterruptedException {
-		simulator.setBooleanValue(METTLER_BALANCE, CONNECTION, true);
+	
 		connectedThread = Thread.currentThread();
-		while (run.get() && !connectedThread.isInterrupted()) {
-			Double grams = queue.take().doubleValue();
-			String message = String.format("S D %10.2f g\r\n", grams);
-			out.write(message.getBytes());
-			out.flush();
-		}
+		
+		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
+		log.info(bundleMarker, "Connected");
 		simulator.setBooleanValue(METTLER_BALANCE, CONNECTION, true);
+		IOException ex = null;
+		try {
+			while (!Thread.currentThread().isInterrupted()) {
+				String reply = process();
+				if (reply != null) {
+					writer.write(reply);
+					writer.flush();
+					log.debug(bundleMarker, "Replying {}", reply);
+				} 
+
+			}
+		} catch (IOException e) {
+			ex = e;
+		}finally{
+			log.info("Disconnected");
+			simulator.setBooleanValue(METTLER_BALANCE, CONNECTION, false);
+		}
+		if(ex!=null){
+			throw ex;
+		}
+		
+	}
+
+	private String process() throws InterruptedException {
+		Integer value =  queue.poll(secondsBetweenOutput, TimeUnit.SECONDS);
+		if(value!=null){
+			weight=value;
+		}
+		return String.format("S D %10.2f g\r\n", weight.doubleValue());
 	}
 
 	/*
@@ -198,8 +272,6 @@ public class SimulatedBalanceServer implements IDeviceListener, IDeviceSimulator
 
 	@Override
 	public void valueChanged(String name, long newValue) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

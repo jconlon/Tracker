@@ -22,6 +22,7 @@ import org.osgi.framework.FrameworkUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import com.verticon.tracker.irouter.dev.Constants;
 import com.verticon.tracker.irouter.dev.Constants.Property;
@@ -36,14 +37,25 @@ public abstract class AbstractIndicator implements IDeviceListener,
 		ITruTestIndicator {
 
 	protected static final String MY_PREFIX = "abstract.";
+	
+	/**
+	 * Identify the plugin to the logger
+	 */
+	protected static String PLUGIN_ID = "com.verticon.tracker.irouter.trutest.dev";
+	
 	/**
 	 * slf4j Marker to keep track of bundle
 	 */
-	protected static Marker bundleMarker;
+	public static Marker bundleMarker = MarkerFactory.getMarker(PLUGIN_ID);
+	static {
+		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
+	}
+	
 	/**
 	 * slf4j Logger
 	 */
 	protected Logger log = LoggerFactory.getLogger(AbstractIndicator.class);
+	
 	protected Double weight = new Double(0);
 	protected long eid;
 	private URL downloadURL = null;
@@ -109,15 +121,10 @@ public abstract class AbstractIndicator implements IDeviceListener,
 			InterruptedException {
 		isConnected = true;
 		
-		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
 		log.info(bundleMarker, "Connected");
-		String file = "test-downloaded-raw.txt";
-		downloadURL = FrameworkUtil.getBundle(this.getClass())
-				.getResource(file);
-		log.debug(bundleMarker, "URL of Download file = {}", downloadURL);
-
+		
 		String line = null;
 		while ((line = reader.readLine()) != null
 				&& !Thread.currentThread().isInterrupted()) {
@@ -132,7 +139,7 @@ public abstract class AbstractIndicator implements IDeviceListener,
 
 		}
 
-		log.debug(bundleMarker, "Terminated...");
+		log.info(bundleMarker, "Disconnected");
 		isConnected = false;
 		
 	}
@@ -188,6 +195,11 @@ public abstract class AbstractIndicator implements IDeviceListener,
 	}
 
 	private void resetDownloadStatus() {
+		String file = "test-downloaded-raw.txt";
+		downloadURL = FrameworkUtil.getBundle(this.getClass())
+				.getResource(file);
+		log.debug(bundleMarker, "URL of Download file = {}", downloadURL);
+
 		downloadFinished = false;
 		uploadedRecords = 0;
 		downloadedRecords = 0;
