@@ -23,18 +23,10 @@ import junit.framework.TestCase;
 
 import org.osgi.service.io.ConnectionFactory;
 import org.osgi.service.io.ConnectorService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ConnectionFactoryImplTest extends TestCase {
 
 	static final String TARGET_SERVER = "socket://localhost:2345";
-
-	/**
-	 * slf4j Logger
-	 */
-	private final Logger logger = LoggerFactory
-			.getLogger(ConnectionFactoryImplTest.class);
 
 	ConnectionFactory connectionFactory = null;
 	DataInputStream dis = null;
