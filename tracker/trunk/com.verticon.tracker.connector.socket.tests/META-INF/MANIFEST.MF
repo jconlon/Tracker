@@ -8,5 +8,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Fragment-Host: com.verticon.tracker.connector.socket
 Import-Package: javax.microedition.io,
  junit.framework;version="4.8.1",
- org.osgi.framework;version="1.3.0",
  org.osgi.service.io

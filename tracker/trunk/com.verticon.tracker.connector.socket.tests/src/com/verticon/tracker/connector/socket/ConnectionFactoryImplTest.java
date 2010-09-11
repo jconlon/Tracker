@@ -15,6 +15,12 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import javax.microedition.io.Connection;
 import javax.microedition.io.StreamConnection;
@@ -33,11 +39,19 @@ public class ConnectionFactoryImplTest extends TestCase {
 	DataOutputStream dos = null;
 	InputStream is = null;
 	OutputStream os = null;
+	ExecutorService exec = Executors.newSingleThreadExecutor();
+	
+
+	
+	public ConnectionFactoryImplTest() {
+		super();
+		exec.submit(new Server());
+	}
 
 	protected void setUp() throws Exception {
 		super.setUp();
 		connectionFactory = new ConnectionFactoryImpl();
-
+		
 	}
 
 	protected void tearDown() throws Exception {
@@ -54,6 +68,7 @@ public class ConnectionFactoryImplTest extends TestCase {
 			os.close();
 		}
 		connectionFactory = null;
+
 		super.tearDown();
 	}
 
@@ -105,6 +120,7 @@ public class ConnectionFactoryImplTest extends TestCase {
 	}
 
 	public void test_uri_parsing4() throws IOException {
+		
 		try {
 			connectionFactory.createConnection("socket:mudshark:3004",
 					ConnectorService.READ_WRITE, false);
@@ -117,7 +133,10 @@ public class ConnectionFactoryImplTest extends TestCase {
 
 	}
 
-	public void test_Streams() throws IOException {
+	public void test_Streams() throws IOException, InterruptedException {
+//		exec = Executors.newSingleThreadExecutor();
+//		exec.submit(new Server());
+		TimeUnit.MILLISECONDS.sleep(500);
 		Connection con = connectionFactory.createConnection(TARGET_SERVER,
 				ConnectorService.READ_WRITE, true);
 
@@ -126,15 +145,21 @@ public class ConnectionFactoryImplTest extends TestCase {
 		assertTrue(con instanceof SocketStreamConnection);
 
 		StreamConnection ssc = (StreamConnection) con;
+		
+		 
 
 		try {
 			is = ssc.openInputStream();
 		} catch (Exception e) {
 			fail("Make sure the server is running at " + TARGET_SERVER);
 		}
+//		TimeUnit.SECONDS.sleep(2);
 		assertNotNull(is);
 		os = ssc.openOutputStream();
 		assertNotNull(os);
+		ssc.close();
+
+		
 
 	}
 
@@ -157,5 +182,24 @@ public class ConnectionFactoryImplTest extends TestCase {
 		dos = ssc.openDataOutputStream();
 		assertNotNull(dos);
 
+	}
+	
+	class Server implements Callable<Void>{
+
+
+		@Override
+		public Void call() throws Exception {
+			ServerSocket ss = new ServerSocket(2345);
+		    ss.setSoTimeout(100);
+		    System.out.println("Waiting");
+		    Socket socket = ss.accept();
+		    System.out.println("Accepted");
+
+		    TimeUnit.SECONDS.sleep(2);
+		    socket.close();
+		    ss.close();
+			return null;
+		}
+		
 	}
 }
