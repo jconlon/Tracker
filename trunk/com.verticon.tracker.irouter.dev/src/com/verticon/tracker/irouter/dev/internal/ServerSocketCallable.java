@@ -57,7 +57,7 @@ public class ServerSocketCallable implements Callable<Void> {
 				Socket s = null;
 				try {
 					s = ss.accept();
-					s.setKeepAlive(true);
+					s.setKeepAlive(false);
 					Date connectDate = new Date();
 					long mills = connectDate.getTime() - startDate.getTime();
 					logger.info(
@@ -78,10 +78,10 @@ public class ServerSocketCallable implements Callable<Void> {
 				} catch (InterruptedException e) {
 					break;
 				} catch (IOException e) {
-					System.out.println(e);
+					logger.info(this+" exception terminated connection with message: {}",e.getMessage());
 				} finally {
 					if (s != null) {
-						logger.info(
+						logger.debug(
 								"{} Closing connection from {} : {}",
 								new Object[] { this, s.getInetAddress(),
 										s.getPort() });
