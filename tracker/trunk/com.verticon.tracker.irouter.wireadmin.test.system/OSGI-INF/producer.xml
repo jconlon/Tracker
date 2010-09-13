@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="com.verticon.tracker.irouter.wireadmin.test.system.internal.producer">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="com.verticon.tracker.irouter.wireadmin.test.system.producer">
    <implementation class="com.verticon.tracker.irouter.wireadmin.test.system.internal.MockProducer"/>
    <service>
       <provide interface="org.osgi.service.wireadmin.Producer"/>
