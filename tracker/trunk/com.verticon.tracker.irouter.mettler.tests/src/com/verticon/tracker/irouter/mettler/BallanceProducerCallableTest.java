@@ -61,11 +61,6 @@ public class BallanceProducerCallableTest{
 		return "BallanceCallableTest []";
 	}
 
-	/*
-	 * A mettlerEmulator must be accessible on this host socket.
-	 * @see com.verticon.tracker.embedded.sp/Scripts/mettlerEmulator.py
-	 */
-//	private static final String METTLER_EMULATOR = "socket://lantronix:3001";
 	private static final String METTLER_EMULATOR = "socket://localhost:2345";
 	MeasurementProducerCallable instance = null;
 	BalanceServicesProviderMockup balanceServicesProvider = null;
@@ -109,36 +104,7 @@ public class BallanceProducerCallableTest{
 		assertNotNull(instance);
 	}
 
-//	/**
-//	 * Start the instance and wait for 10 seconds.
-//	 * The emulator will be sending out continuous measurements at least 
-//	 * 20 measurements should be collected.  
-//	 * 
-//	 * Note that the Balance Producer wraps Measurements with Envelopes and
-//	 * sends these out to wires. 
-//	 * 
-//	 * This test must be called with an emulator running.
-//   * @deprecated use system test cases instead
-//	 */
-//	@Test
-//	public void testCall() {
-//		future = exec.submit(instance);
-//		try {
-//			future.get(10, TimeUnit.SECONDS);
-//		} catch (InterruptedException e) {
-//			fail("Call to future interrupted.");
-//		} catch (ExecutionException e) {
-//			e.printStackTrace();
-//			fail(e.getCause().toString());
-//		} catch (TimeoutException e) {
-//			//expected
-//		}
-//		
-//		assertTrue(
-//				"Should have received over 9 measurements but only got "+
-//				measurementSender.measurements.size(), 
-//				measurementSender.measurements.size()>9);
-//	}
+
 	@Test
 	public void testParseBalanceWeight() {
 		String one = "S S "+"     20.11"+" g\r\n";
@@ -215,44 +181,7 @@ public class BallanceProducerCallableTest{
 			return connectorService;
 		}
 
-//		/*
-//		 * (non-Javadoc)
-//		 * @see com.verticon.tracker.trutest.IContext#getConfigurationLong(java.lang.String)
-//		 */
-//		@Override
-//		public Long getConfigurationLong(String key) {
-//			Object conf = getConfiguration( key);
-//			if(conf instanceof String){
-//				return new Long((String)conf);
-//			}
-//			return (Long)conf;
-//		}
-//		
-//		@Override
-//		public String getConfigurationString(String key) {
-//			return (String) getConfiguration(key);
-//		}
-//		
-//		private Object getConfiguration(String key) {
-//			if(key.equals(CONNECTION_URI)){
-//				return uri;
-//			}else if(key.equals(RESPONSE_PATTERN)){
-//				return Balance.DEFAULTS.get(RESPONSE_PATTERN);
-//			}else if(key.equals(POLL_DELAY)){
-//				return new Long(300);//Balance.DEFAULTS.get(Balance.POLL_DELAY);
-//			}else if(key.equals(REQUEST_COMMAND)){
-//				return "";//"S\r\n";//Balance.DEFAULTS.get(Balance.POLL_DELAY);
-//			}
-//			
-//			return null;
-//		}
 
-		
-
-//		@Override
-//		public String getPid() {
-//			return "test";
-//		}
 
 		public Future<Void> getFuture() {
 			return null;
@@ -276,13 +205,10 @@ public class BallanceProducerCallableTest{
 			return context;
 		}
 
-//		@Override
-//		public Double getConfigurationDouble(String stableWeightError) {
-//			return null;
-//		}
+
 	}
 	
-	class ContextMockup implements IContext{
+	private class ContextMockup implements IContext{
 
 		final String uri;
 		
