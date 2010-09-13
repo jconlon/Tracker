@@ -32,14 +32,14 @@ import org.osgi.service.io.ConnectorService;
 
 public class ConnectionFactoryImplTest extends TestCase {
 
-	static final String TARGET_SERVER = "socket://localhost:2345";
+	private static final String TARGET_SERVER = "socket://localhost:2345";
 
-	ConnectionFactory connectionFactory = null;
-	DataInputStream dis = null;
-	DataOutputStream dos = null;
-	InputStream is = null;
-	OutputStream os = null;
-	ExecutorService exec = Executors.newSingleThreadExecutor();
+	private ConnectionFactory connectionFactory = null;
+	private DataInputStream dis = null;
+	private DataOutputStream dos = null;
+	private InputStream is = null;
+	private OutputStream os = null;
+	private ExecutorService exec = Executors.newSingleThreadExecutor();
 	
 
 	
@@ -185,8 +185,6 @@ public class ConnectionFactoryImplTest extends TestCase {
 	}
 	
 	class Server implements Callable<Void>{
-
-
 		@Override
 		public Void call() throws Exception {
 			ServerSocket ss = new ServerSocket(2345);
