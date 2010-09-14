@@ -1,0 +1,33 @@
+h1. Specifications
+
+h2. OSGi
+
+iRouter can run as a standalone *Server* _appliance_ or as a *Tracker Desktop* feature.  Each runs a different implementation of "OSGi":http://en.wikipedia.org/wiki/OSGi_Specification_Implementations :
+* Server based iRouter instances run the "Felix":http://felix.apache.org/  implementation,
+* Tracker Desktop hosted instances run the "Equinox":http://eclipse.org/equinox/  implementation.
+
+
+h2. Wire Admin Service
+
+Conformance to the OSGi *WireAdmin Service* is what makes the Tracker iRouter an _Information Router_.  Services can be configured into _wire_ groups and these groups can be combined into tasks to meet most any information _routing_ use-case.
+
+h2. Configuration Admin Service
+
+Tracker iRouter components are *Configuration Admin*  @ManagedServiceFactory@ components.  A @ManagedServiceFactory@ is a Factory for creating one or more end user managed services.  When a @ManagedServiceFactory@ component is deployed to the iRouter, iRouter configuration tools allow users to direct these @ManagedServiceFactory@ to create, configure and start, one or more services.
+
+h2. Metatype Service
+
+Tracker iRouter configuration tooling supports any ManagedServiceFactory components that include @metatype.xml@ resources. 
+
+h2. P2 Provisioning Service
+
+Like the Tracker Desktop, Tracker iRouter components are deployed and updated through the "Equinox P2":http://wiki.eclipse.org/Equinox/p2 provisioning infrastructure. 
+
+h2. Just in Time Functionality
+
+By adhering to the above set of standards and services, the Tracker iRouter provides:
+* component developers a context for the rapid development and deployment of custom functionality to end users.  
+* end users with an _Information Routing Platform_ that meet the widest variety of current and future use-case requirements.  
+
+
+

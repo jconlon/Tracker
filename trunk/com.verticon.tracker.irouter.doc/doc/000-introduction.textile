@@ -1,0 +1,27 @@
+h1. Overview
+
+h2. What is the Tracker iRouter?
+
+The Tracker iRouter is a user configurable _Information Router_. iRouter runs a configurable suite of acquisition, integration, and information transformation services.  End users orchestrate these services as producer-consumer integration solutions for retrieving data from third party network and subnetwork attached data acquisition devices and sensors.
+
+h2. How does it work?
+
+Services are component __(aka - plugin)__ based and can be easily created and deployed to the iRouter via internetwork software repositories.  iRouter components conform to the most widely recognized industry standard for services based components - "OSGi":http://en.wikipedia.org/wiki/OSGi_Specification_Implementations.  
+
+Each iRouter component conforms to the following OSGi services:
+
+* Wire Administration Service
+* Configuration Administration Service 
+* Metatype Service
+
+Any OSGi component offering the above standard services can be deployed to the iRouter and offer new functionality. 
+
+h3. iRouter is highly configurable
+
+Besides standards the iRouter is all about presenting the user with a context for administering the components running in the iRouter.
+
+Users can :
+* create and configure the iRouter to access network accessible data sources, sensors,  data acquisition devices, 
+* create and configure components to perform specific functional tasks related to information acquisition and transformation, 
+* create and configure __wired__ service groups to provide higher level functionality,
+* start or stop services. 
