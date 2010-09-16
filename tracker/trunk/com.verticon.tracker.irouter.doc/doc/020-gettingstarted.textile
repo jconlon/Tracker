@@ -1,0 +1,10 @@
+h1. Getting Started
+
+h2. Getting Started Overview
+
+This section will be filled in latter.  It will describe:
+
+# How to download the Tracker Desktop
+# How to provision the Tracker Desktop with the iRouter
+# How to add optional features to the iRouter
+ 

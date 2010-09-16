@@ -2,26 +2,81 @@ h1. Overview
 
 h2. What is the Tracker iRouter?
 
-The Tracker iRouter is a user configurable _Information Router_. iRouter runs a configurable suite of acquisition, integration, and information transformation services.  End users orchestrate these services as producer-consumer integration solutions for retrieving data from third party network and subnetwork attached data acquisition devices and sensors.
+The Tracker **iRouter** is a service oriented orchestration for information transformation and exchange between network connected sensors and actuators. 
+
+The Tracker iRouter can run as a headless/keyboardless network appliance or as a background service in an Eclipse based desktop.
+
+Acting as an user configurable, _Information Router_, the Tracker iRouter automates the arrangement, coordination, transformation, and management of information flows between information producers (example: physical sensors and user input devices) and information consumers (example: physical actuators, data loggers, user displays, and alarms).
+
+Once configured for a specific use case, the iRouter becomes an information service provider to the end user - interacting with the third party network attached data acquisition devices, actuators, and sensors.  
+
+*When you need to interact with multiple input devices, sensors and actuators - consider the iRouter.*
 
 h2. How does it work?
 
-Services are component __(aka - plugin)__ based and can be easily created and deployed to the iRouter via internetwork software repositories.  iRouter components conform to the most widely recognized industry standard for services based components - "OSGi":http://en.wikipedia.org/wiki/OSGi_Specification_Implementations.  
+The iRouter is all about creating a network of services that move (and/or transform) information between external devices. External measurement sensors, user input devices, and actuators are treated as producer or consumer services.  IRouter internal services provide the transformation and exchange functions.  
 
-Each iRouter component conforms to the following OSGi services:
+Services are component __(aka - plugin)__ based.  External devices are adapted to the iRouter with proxy components, that connect to the devices via standard communication interfaces and protocols. Several off-the shelf components are offered for transformation and exchange services.  Need to create custom proxy components for unique sensors or actuators?  New components can be easily created and deployed to iRouter users via internetwork software repositories.
 
-* Wire Administration Service
+Adaptability is essential so each use case for the iRouter is configured in the field by specifying the appropriate type of service or services necessary and specifying component parameters to perform the required function.  Multiple collaborating services are configured as intra-networked __wire groups__.  When the configurations are saved all components are activated.  Configurations are saved between reboots, so turning on the iRouter appliance or launching the Eclipse desktop will activate all configured collaborating __wire group__ services.  
+
+h3. Creating new components
+
+iRouter components conform to the most widely recognized industry standard for services based components - "Open System Gateway Initiative - OSGi":http://en.wikipedia.org/wiki/OSGi_Specification_Implementations.  
+
+Each iRouter component implements and/or interacts with the several of the standard OSGi services:
+
+* Wire Administration 
 * Configuration Administration Service 
 * Metatype Service
+* Monitorable Service
+* Declarative Services
 
-Any OSGi component offering the above standard services can be deployed to the iRouter and offer new functionality. 
+Any OSGi component offering the above standard services can be deployed to the iRouter and offer new functionality. See the following chapter on **Standards** for details.
 
-h3. iRouter is highly configurable
+h3. iRouter is easy to administer 
 
-Besides standards the iRouter is all about presenting the user with a context for administering the components running in the iRouter.
+Besides standards the iRouter is all about presenting all the tools an administrator  
+will need for managing the components running in the iRouter.  These include:
 
-Users can :
-* create and configure the iRouter to access network accessible data sources, sensors,  data acquisition devices, 
-* create and configure components to perform specific functional tasks related to information acquisition and transformation, 
-* create and configure __wired__ service groups to provide higher level functionality,
-* start or stop services. 
+* User interface tools for Configuration Management
+* User interface tools for Application Monitoring.
+
+h4. Configuration editor 
+
+Creating a running instance of the iRouter is simply a matter of creating a configuration.  This is done through the iRouter configuration editor. With the iRouter configuration editor the administrator can:
+ 
+* select the type of component instances to create from a list of the deployed component factories,[1]
+* configure component instances to perform specific functional tasks related to information acquisition and transformation, 
+* name the __wire groups__ of the component instances to constrain the behavior of the instance to a set of collaborating services,
+* add or delete component instances,
+* edit the configuration of running component instances,
+* import or export configuration data.
+
+fn1. Initial iRouter beta releases will deploy only a limited number of generic components to the software repositories for provisioning iRouter instances. Follow up releases will add more generic transformation components, so for most use cases custom business logic components will not be needed.
+
+h4. Application monitoring view 
+
+Once a iRouter configuration is created and saved it is activated as a background set of running services. Administrators may want to check that these services are indeed collaborating in the manner originally imaged.  With The iRouter monitor view administrators can:
+
+* graphically visualized the __wire groups__ of running components
+* resize or reposition nodes on the graph to clarify the visualization
+* print the output of the visualization as a visual record of the configuration
+* monitor status variables of individual service components.
+
+h3. Easiest to use
+
+But the best part is once the configuration is done the user can just ignore the above tasks - __because the iRouter is already configured and running in the background as a service or as a network appliance.__
+
+h3. Livestock processing use case example
+
+!images/dependencies.png!
+__Example of a iRouter system__
+
+The above diagram visualizes an iRouter configuration for data logging. It includes three proxy components, two custom proxy components for connecting to the external TruTest and Mettler weighing sensors and one internal general purpose one for the data logger.  A custom business logic component does the information transformation and exchange.
+
+Animal weight measurements, identification numbers and record state are sent from the TruTest producer on the TruTest proxy, animal fluid weight measurements are sent from the Mettler balance, the business logic component will do measurement transformation, measurement treshold detection and alarm signaling.  The Measurement Logger consumer service writes to the logging backend.[2] 
+
+fn2. iRouter uses the enterprise class logging framework "logback":http://logback.qos.ch/
+
+

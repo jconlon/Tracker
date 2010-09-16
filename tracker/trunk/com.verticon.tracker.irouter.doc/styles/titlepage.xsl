@@ -64,7 +64,7 @@
                     <fo:table-row>
                         <fo:table-cell text-align="center">
                             <fo:block>
-                                <fo:external-graphic src="file:images/logo/logo_on_green.png" content-width="8cm"/>
+                                <fo:external-graphic src="file:images/logo/logo_on_green2.png" content-width="8cm"/>
                                 <!-- <fo:external-graphic src="file:images/logo/Xtext-logo-dark.pdf" content-width="5cm"/>-->
                             </fo:block>
                         </fo:table-cell>

@@ -1,4 +1,7 @@
 000-introduction.textile
 010-standards.textile
+020-gettingstarted.textile
+030-configuration.textile
+040-monitoring.textile
 
 
