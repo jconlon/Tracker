@@ -2,15 +2,48 @@
 <topic href="help/Overview.html" label="1. Overview">
 <topic href="help/Overview.html#WhatistheTrackeriRouter" label="What is the Tracker iRouter?"></topic>
 <topic href="help/Howdoesitwork.html" label="How does it work?">
-<topic href="help/Howdoesitwork.html#iRouterishighlyconfigurable" label="iRouter is highly configurable"></topic>
+<topic href="help/Howdoesitwork.html#Creatingnewcomponents" label="Creating new components"></topic>
+<topic href="help/iRouteriseasytoadminister.html" label="iRouter is easy to administer">
+<topic href="help/iRouteriseasytoadminister.html#Configurationeditor" label="Configuration editor"></topic>
+<topic href="help/Applicationmonitoringview.html" label="Application monitoring view"></topic>
+</topic>
+<topic href="help/Easiesttouse.html" label="Easiest to use"></topic>
+<topic href="help/Livestockprocessingusecaseexample.html" label="Livestock processing use case example"></topic>
 </topic>
 </topic>
-<topic href="help/Specifications.html" label="2. Specifications">
-<topic href="help/Specifications.html#OSGi" label="OSGi"></topic>
+<topic href="help/Standards.html" label="2. Standards">
+<topic href="help/Standards.html#IntroductiontoiRouterStandards" label="Introduction to iRouter Standards"></topic>
+<topic href="help/OSGi.html" label="OSGi"></topic>
+<topic href="help/InformationEnvelopes.html" label="Information Envelopes"></topic>
 <topic href="help/WireAdminService.html" label="Wire Admin Service"></topic>
-<topic href="help/ConfigurationAdminService.html" label="Configuration Admin Service"></topic>
+<topic href="help/ConfigurationAdminService.html" label="Configuration Admin Service">
+<topic href="help/ConfigurationAdminService.html#DeclarativeServices" label="Declarative Services"></topic>
+<topic href="help/ManagedServiceFactories.html" label="ManagedServiceFactories"></topic>
 <topic href="help/MetatypeService.html" label="Metatype Service"></topic>
+</topic>
 <topic href="help/P2ProvisioningService.html" label="P2 Provisioning Service"></topic>
 <topic href="help/JustinTimeFunctionality.html" label="Just in Time Functionality"></topic>
 </topic>
+<topic href="help/GettingStarted.html" label="3. Getting Started">
+<topic href="help/GettingStarted.html#GettingStartedOverview" label="Getting Started Overview"></topic>
+</topic>
+<topic href="help/Configuration.html" label="4. Configuration">
+<topic href="help/Configuration.html#ConfigurationAdministrationOverview" label="Configuration Administration Overview"></topic>
+<topic href="help/ConfigurationEditor.html" label="Configuration Editor">
+<topic href="help/ConfigurationEditor.html#ConfigurationeditorFactoriesviewtab" label="Configuration editor Factories view tab">
+<topic href="help/ConfigurationEditor.html#Addingaserviceinstance" label="Adding a service instance"></topic>
+<topic href="help/ConfigurationEditor.html#Editingaserviceinstance" label="Editing a service instance"></topic>
+<topic href="help/ConfigurationEditor.html#Savingtheconfiguration" label="Saving the configuration"></topic>
+<topic href="help/ConfigurationEditor.html#Importingandexportingconfigurations" label="Importing and exporting configurations"></topic>
+</topic>
+</topic>
+</topic>
+<topic href="help/Monitoring.html" label="5. Monitoring">
+<topic href="help/Monitoring.html#ApplicationServiceMonitoring" label="Application Service Monitoring"></topic>
+<topic href="help/iRouterMonitorview.html" label="iRouter Monitor view">
+<topic href="help/iRouterMonitorview.html#WireGroupGraph" label="Wire Group Graph"></topic>
+<topic href="help/MonitoringStatusVariables.html" label="Monitoring Status Variables"></topic>
+</topic>
+</topic>
+<topic href="help/glossary.html" label="A. Glossary"></topic>
 </toc>

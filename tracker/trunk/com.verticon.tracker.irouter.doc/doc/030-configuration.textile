@@ -1,0 +1,40 @@
+h1. Configuration
+
+h2. Configuration Administration Overview
+
+iRouter problem solutions always begin by a rational examination of the problem, clarification of the use-case, and a theoretical design of a solution. The solution is then realized by adding the component instances representing the solution from a list of deployed component factories. Lastly the administrator configures the added instances and saves the configuration.
+
+iRouter configurations conform to the OSGi *Metatype* document schema, so one approach is to use an external _XML_ (or text) editor to create the configuration and import it into the iRouter to activate it.  A far easier approach is to use the Tracker iRouter _Configuration Editor_ for the editing process.
+
+h2. Configuration Editor
+
+!images/configuration.png!
+__Example of the Configuration editor__
+
+iRouter Configuration Editor is a full featured EMF(Eclipse Modeling Facility) editor with a special _Factories_ view that is optimized for dealing with iRouter Components _(components that have published _metatype_ resources)_.  The _Factories_ view will be described below.
+
+h3. Configuration editor Factories view tab
+
+Clicking on the _Factories_ tab of the editor will bring up a master-detail page form with the master page a tree with nodes of the tree all the iRouter _Component Factories_ that where deployed to the iRouter.  Any service instances *(these are the entities that will do the real work)* will be shown in the tree as children of the _Component Factory_ that created it. Clicking on a Factory parent or a Service instance child node in the master tree will show the details of the node in the details page. 
+
+*(Note: The orientation of the master-details pages can be reset to above and below. To change orientation use the orientation tools in the upper right of the view.)*
+
+h4. Adding a service instance
+
+Select the desired _Component Factory_ in the master tree from which you would like to create a service instance.  The description of the _Component Factory_ will show in the _Factory Properties_ panel in the details page.  Select the green plus key to create a service instance.
+
+h4. Editing a service instance
+
+Select the service instance in the master tree and edit the _Service Configuration_ panel in the details page.
+
+h4. Saving the configuration
+
+To save the a changed or new configuration select _File_ and _Save_.
+
+h4. Importing and exporting configurations
+
+To export the active configuration, select the _Configuration_ menu and _Export iRouter Configuration_ and choose a directory and file name for the exported configuration file. 
+
+Likewise to import a new configuration, select the _Configuration_ menu and _Import iRouter Configuration_ and choose a metatype file from the filesystem to import. 
+
+

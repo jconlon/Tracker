@@ -26,7 +26,7 @@
 	<property name="html-css.file" value="styles/book.css" />
 	
 	
-	<property name="download.dir" value="${java.io.tmpdir}${file.separator}downloads"/>
+	<property name="download.dir" value="${file.separator}opt${file.separator}publishing"/>
 	
 	<property name="thisproject" location="${ant.file}/.."/>
 	<property name="xalan.lib.dir" location="${thisproject}/../com.verticon.tracker.documentation/lib/xalan-j_2_7_0" />
