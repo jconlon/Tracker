@@ -26,7 +26,6 @@
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.eclipse.ocl.ecore"/>
-      <import plugin="com.verticon.osgi.metatype.core.model" version="0.1.0" match="compatible"/>
       <import plugin="org.eclipse.osgi.services"/>
       <import plugin="org.eclipse.osgi.util"/>
       <import plugin="org.eclipse.emf.edit"/>
@@ -59,6 +58,7 @@
       <import plugin="org.eclipse.core.runtime" version="3.2.0" match="compatible"/>
       <import plugin="org.eclipse.core.resources" version="3.2.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecore.xmi" version="2.2.0" match="compatible"/>
+      <import feature="com.verticon.osgi.metatype.core.model.editor" version="0.1.0.qualifier"/>
    </requires>
 
    <plugin
@@ -122,26 +122,5 @@
          download-size="0"
          install-size="0"
          version="0.0.0"/>
-
-   <plugin
-         id="com.verticon.osgi.metatype.core.model"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.verticon.osgi.metatype.core.model.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.verticon.osgi.metatype.core.model.editor"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
 </feature>

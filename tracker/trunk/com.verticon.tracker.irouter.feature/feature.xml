@@ -24,10 +24,8 @@
    </url>
 
    <requires>
-      <import plugin="com.verticon.osgi.metatype.core.model"/>
-      <import plugin="com.verticon.osgi.metatype.core.model.edit"/>
-      <import plugin="com.verticon.osgi.metatype.core.model.editor"/>
       <import feature="com.verticon.tracker.logging.logback" version="0.2.0.qualifier"/>
+      <import feature="com.verticon.osgi.metatype.core.model.editor" version="0.1.0.qualifier"/>
    </requires>
 
    <plugin
