@@ -1,5 +1,5 @@
 000-introduction.textile
-010-standards.textile
+005-theoryofop.textile
 020-gettingstarted.textile
 030-configuration.textile
 040-monitoring.textile

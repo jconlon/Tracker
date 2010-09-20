@@ -2,7 +2,7 @@ h1. Standards
 
 h2. Introduction to iRouter Standards
 
-iRouter is a suite of OSGi compatible service components operating in an OSGi runtime.   
+iRouter is a suite of "Open System Gateway Initiative - OSGi":http://en.wikipedia.org/wiki/OSGi_Specification_Implementations compatible service components operating in an OSGi runtime.   
 
 * Wire Administration 
 ** Producer 
