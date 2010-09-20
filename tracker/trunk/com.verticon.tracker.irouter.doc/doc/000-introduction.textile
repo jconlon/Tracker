@@ -1,82 +1,78 @@
 h1. Overview
 
+h2. Information Modeling and Processing
+
+Custom integration solutions for real time physical sensor and actuator data are complex, error prone and time consuming.  
+
+Can a generic solution be found for the acquisition, modeling, processing and exchange of physical measurement and state information? One that leverages industry standards and reflects current software engineering best practices? One that hides complexity from end user data acquisition operators? One that can run on a desktop or in a headless appliance?
+
+h3. Solution Requirements
+
+In order to provide a generic solution to problems dealing with the sensing and processing of physical measurements and physical states, a comprehensive solution will require technology for:
+# Modeling measurement and state data [1]
+# Creating services for:
+** Interface with external device for data acquisition from physical sensors
+** Data transformation and computation between services
+** Interface with external devices for the output of measurement and state data to physical actuators
+# Creating the interconnections between compatible services
+# Managing, persisting, importing and exporting the configuration data for service components and interconnections
+# Orchestrating the establishment of connections between compatible Producer and Consumer services
+# For operators running the tool:
+** Simplify the operation by hiding the complexity of all of the above
+# For administrators needing configuration validation and troubleshooting aids, provide monitoring and diagnostic tools to visualize:
+** Configuration
+** Internal operation of the services
+
+h3. Leveraging Industry Standards
+
+"The OSGi Alliance":http://www.osgi.org/About/HomePage offers a modular framework for software components and specifications that meet most of the technical requirements outlined above.   
+
+The following sections overview the pertinent technologies specified by the OSGi and their relationship to the requirements.[2]
+
+h4. OSGi Measurement and State
+
+The OSGi Measurement and State "specification":http://www.osgi.org/Specifications/HomePage offers a comprehensive[3] way to model physical measurement and state data.  
+
+_Meets requirement #1._
+
+h4. Wire Admin
+
+A second OSGi specification called the Wire Admin Service specifies how to:
+* Represent services which: 
+** Produce measurement and state information
+** Consumer measurement and state information
+* Represent wire connections that move measurement and state information between producer and consumer services
+
+_Meets requirements #2 and #3._
+ 
+h4. Configuration Admin and Metatype
+
+Lastly two more OSGi specifications provide the required solutions for configuration administration:
+* OSGi Metatype Service
+* OSGi Configuration Admin Service
+
+_Meets requirement #4._
+
 h2. What is the Tracker iRouter?
 
-The Tracker **iRouter** is a service oriented orchestration for information transformation and exchange between network connected sensors and actuators. 
+The Tracker _Information Router_, **iRouter** is a generic integration solution for acquiring, transforming and exchanging information between network connected sensors and actuators.  
+
+The Tracker iRouter complements OSGi standard services by adding:
+* An _orchestration_ framework that hides the complexity of establishing the connections between OSGi WireAdmin services
+* User interfaces for simplifying configuration management and application monitoring 
 
 The Tracker iRouter can run as a headless/keyboardless network appliance or as a background service in an Eclipse based desktop.
+  
+*iRouter - A Just-In-Time integration solution for multiple input devices, sensors and actuators.*
 
-Acting as an user configurable, _Information Router_, the Tracker iRouter automates the arrangement, coordination, transformation, and management of information flows between information producers (example: physical sensors and user input devices) and information consumers (example: physical actuators, data loggers, user displays, and alarms).
 
-Once configured for a specific use case, the iRouter becomes an information service provider to the end user - interacting with the third party network attached data acquisition devices, actuators, and sensors.  
+h2. Notes
 
-*When you need to interact with multiple input devices, sensors and actuators - consider the iRouter.*
+fn1. The majority of information moving between components in the iRouter will be Measurement and State data.
 
-h2. How does it work?
+fn2. Implementations of these specifications are available from several OSGi providers within the Open Source community.
 
-The iRouter is all about creating a network of services that move (and/or transform) information between external devices. External measurement sensors, user input devices, and actuators are treated as producer or consumer services.  IRouter internal services provide the transformation and exchange functions.  
+fn3. Because an OSGi Measurement can represent all "SI units":http://en.wikipedia.org/wiki/International_System_of_Units of measurement and record the precision of the measuring device, it can be used to  model the complete range of measurements and the accuracy of the measuring devices. 
 
-Services are component __(aka - plugin)__ based.  External devices are adapted to the iRouter with proxy components, that connect to the devices via standard communication interfaces and protocols. Several off-the shelf components are offered for transformation and exchange services.  Need to create custom proxy components for unique sensors or actuators?  New components can be easily created and deployed to iRouter users via internetwork software repositories.
-
-Adaptability is essential so each use case for the iRouter is configured in the field by specifying the appropriate type of service or services necessary and specifying component parameters to perform the required function.  Multiple collaborating services are configured as intra-networked __wire groups__.  When the configurations are saved all components are activated.  Configurations are saved between reboots, so turning on the iRouter appliance or launching the Eclipse desktop will activate all configured collaborating __wire group__ services.  
-
-h3. Creating new components
-
-iRouter components conform to the most widely recognized industry standard for services based components - "Open System Gateway Initiative - OSGi":http://en.wikipedia.org/wiki/OSGi_Specification_Implementations.  
-
-Each iRouter component implements and/or interacts with the several of the standard OSGi services:
-
-* Wire Administration 
-* Configuration Administration Service 
-* Metatype Service
-* Monitorable Service
-* Declarative Services
-
-Any OSGi component offering the above standard services can be deployed to the iRouter and offer new functionality. See the following chapter on **Standards** for details.
-
-h3. iRouter is easy to administer 
-
-Besides standards the iRouter is all about presenting all the tools an administrator  
-will need for managing the components running in the iRouter.  These include:
-
-* User interface tools for Configuration Management
-* User interface tools for Application Monitoring.
-
-h4. Configuration editor 
-
-Creating a running instance of the iRouter is simply a matter of creating a configuration.  This is done through the iRouter configuration editor. With the iRouter configuration editor the administrator can:
- 
-* select the type of component instances to create from a list of the deployed component factories,[1]
-* configure component instances to perform specific functional tasks related to information acquisition and transformation, 
-* name the __wire groups__ of the component instances to constrain the behavior of the instance to a set of collaborating services,
-* add or delete component instances,
-* edit the configuration of running component instances,
-* import or export configuration data.
-
-fn1. Initial iRouter beta releases will deploy only a limited number of generic components to the software repositories for provisioning iRouter instances. Follow up releases will add more generic transformation components, so for most use cases custom business logic components will not be needed.
-
-h4. Application monitoring view 
-
-Once a iRouter configuration is created and saved it is activated as a background set of running services. Administrators may want to check that these services are indeed collaborating in the manner originally imaged.  With The iRouter monitor view administrators can:
-
-* graphically visualized the __wire groups__ of running components
-* resize or reposition nodes on the graph to clarify the visualization
-* print the output of the visualization as a visual record of the configuration
-* monitor status variables of individual service components.
-
-h3. Easiest to use
-
-But the best part is once the configuration is done the user can just ignore the above tasks - __because the iRouter is already configured and running in the background as a service or as a network appliance.__
-
-h3. Livestock processing use case example
-
-!images/dependencies.png!
-__Example of a iRouter system__
-
-The above diagram visualizes an iRouter configuration for data logging. It includes three proxy components, two custom proxy components for connecting to the external TruTest and Mettler weighing sensors and one internal general purpose one for the data logger.  A custom business logic component does the information transformation and exchange.
-
-Animal weight measurements, identification numbers and record state are sent from the TruTest producer on the TruTest proxy, animal fluid weight measurements are sent from the Mettler balance, the business logic component will do measurement transformation, measurement treshold detection and alarm signaling.  The Measurement Logger consumer service writes to the logging backend.[2] 
-
-fn2. iRouter uses the enterprise class logging framework "logback":http://logback.qos.ch/
 
 
