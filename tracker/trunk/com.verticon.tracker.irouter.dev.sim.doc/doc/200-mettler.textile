@@ -1,0 +1,21 @@
+h1. Mettler Laboratory Weight Balance
+
+Simulator for a Mettler Balance with display fields and controls for actuating behavior of the balance.  Simulates a balance attached as a Server connection[8] that continuously sends[9] weight entered in the control to connected clients.
+ 
+h2. Mettler Simulator Page
+
+!images/mettler.png!
+
+h3. Display and Controls
+
+Connection state from the iRouter client components to the Server is shown as a display with a Y/N value. 
+
+The control simulates the weighing of items on the balance. These can be incremented by manual button press for each increment or weights can be automatically incremented by a single button press.
+ 
+ 
+h2. Notes
+
+fn8. The type of Server connection is determined by the property mettler.sim.type, with the default as SERVER_SOCKET to change to a com port set mettler.sim.type=SERVER_COMM_PORT. The server connection can be either a socket connection or com port and for Server socket it is specified by the property mettler.sim.socket with the default 2345. Server Comm Port is determined by the property mettler.sim.port and there is no default.
+
+fn9. Output timing is determined by the property mettler.sim.timer.secs and there is a default of 2 seconds.
+
