@@ -1,5 +1,10 @@
 h1. Overview
 
+h2. Document Status
+
+__This document is the first draft of an iRouter User Guide and is only intended as an overview to the technologies used in the Tracker iRouter. Future versions will fully serve the intended function of a comprehensive user guide for the installation and configuration of the iRouter.__
+
+
 h2. Information Modeling and Processing
 
 Custom integration solutions for real time physical sensor and actuator data are complex, error prone and time consuming.  
@@ -11,9 +16,9 @@ h3. Solution Requirements
 In order to provide a generic solution to problems dealing with the sensing and processing of physical measurements and physical states, a comprehensive solution will require technology for:
 # Modeling measurement and state data [1]
 # Creating services for:
-** Interface with external device for data acquisition from physical sensors
+** Interfacing with external devices for data acquisition from physical sensors
 ** Data transformation and computation between services
-** Interface with external devices for the output of measurement and state data to physical actuators
+** Interfacing with external devices for the output of measurement and state data to physical actuators
 # Creating the interconnections between compatible services
 # Managing, persisting, importing and exporting the configuration data for service components and interconnections
 # Orchestrating the establishment of connections between compatible Producer and Consumer services
@@ -25,13 +30,13 @@ In order to provide a generic solution to problems dealing with the sensing and 
 
 h3. Leveraging Industry Standards
 
-"The OSGi Alliance":http://www.osgi.org/About/HomePage offers a modular framework for software components and specifications that meet most of the technical requirements outlined above.   
+"The OSGi Alliance":http://www.osgi.org/About/HomePage offers "open specifications":http://www.osgi.org/Specifications/HomePage that enable the modular assembly of software built with Java technology.  These OSGi specification meet most of the solution requirements outlined above.   
 
-The following sections overview the pertinent technologies specified by the OSGi and their relationship to the requirements.[2]
+The following sections overview the pertinent technologies specified by the OSGi and their relationship to the above solution requirements.[2]
 
 h4. OSGi Measurement and State
 
-The OSGi Measurement and State "specification":http://www.osgi.org/Specifications/HomePage offers a comprehensive[3] way to model physical measurement and state data.  
+The OSGi Measurement and State specification offers a comprehensive[3] way to model physical measurement and state data.  
 
 _Meets requirement #1._
 
