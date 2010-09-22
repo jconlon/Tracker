@@ -1,11 +1,7 @@
 <!--
-    This documentation generating ant file, it is full blown docbook toolchain while  
-    the other ant file (build-doc.xml) is more simple.  
-    
-    But the simple one works better?
-    
-	
-	Some of the code below is
+    This is the current documentation ant file.  It is full blown docbook toolchain.
+  
+	Some of the code below was authored by
 	(c) Chris Aniszczyk <caniszczyk@gmail.com>
     (c) Lawrence Mandel <lmandel@ca.ibm.com>
     (c) Peter Friese <peter.friese@itemis.com>
@@ -20,17 +16,16 @@
 	<property name="document.name" value="irouter"/>
 	<property name="document.stylesheet" value="styles/html.xsl"/>
 	<property name="document.pdf.stylesheet" value="styles/xmpp.xsl"/>
-
 	<property name="document.eclipse.stylesheet" value="styles/eclipsehelp.xsl"/>
 	<property name="eclipsehelp-css.file" value="styles/book.css" />
 	<property name="html-css.file" value="styles/book.css" />
-	
-	
 	<property name="download.dir" value="${file.separator}opt${file.separator}publishing"/>
-	
 	<property name="thisproject" location="${ant.file}/.."/>
 	<property name="xalan.lib.dir" location="${thisproject}/../com.verticon.tracker.documentation/lib/xalan-j_2_7_0" />
-	
+	<property name="deploy.dir" location="${user.home}/Uploads/s3/Tracker/documentation"/>
+	<property name="document.pdf" location="manual${file.separator}${document.name}.pdf"/>
+    <property name="document.footer.name" value="${document.name}-0.1.0 draft"/>
+
 	<!-- Making xalan available -->
 		<path id="xalan.class.path">
 			<pathelement location="${xalan.lib.dir}/serializer.jar" />
@@ -285,6 +280,7 @@
 		<xslt in="${build.dir}${file.separator}${document.name}.xml" extension="xml" 
 			out="${build.dir}${file.separator}${document.name}.fo" 
 			style="${document.pdf.stylesheet}">
+			<param name="myDocName" expression="${document.footer.name}"/>
 	        <classpath refid="xalan.class.path"/>
 			
 			<!--factory name="org.apache.xalan.processor.TransformerFactoryImpl">
@@ -305,13 +301,25 @@
 
 		<docbook2pdf 
 			source="${build.dir}${file.separator}${document.name}.fo"
-			target="manual${file.separator}${document.name}.pdf"/>
+			target="${document.pdf}"/>
 		
 		<!-- Remove the resulting formatting object. This object isn't necessary in the
 		     result of this build. -->
 		<delete file="${build.dir}${file.separator}${document.name}.fo" />
 		<delete dir="${basedir}/images" />
 	</target>
+	
+	<!-- ================================= 
+          target: deploy-pdf          
+         ================================= -->
+    <target name="deploy-pdf"  description="description">
+    	<copy todir="${deploy.dir}">
+    				<fileset dir="manual/">
+    					<include name="*.pdf" />
+    				</fileset>
+    	</copy>
+    </target>
+
 	
 	<target name="wikitext2eclipsehelp" depends="assemble" description="Generate Eclipse Help from textile">
 		<wikitext-to-eclipse-help markupLanguage="org.eclipse.xtext.wikitext.XtextTextileDialect"

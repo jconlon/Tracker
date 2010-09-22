@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!--
 
 
-    This is the main documentation ant file, but it is still underdevelopment.  
-    The other ant file is a more full blown docbook toolchain, but I had problems
-    getting it to generate the desired formatted help files. 
+    This is the deprecated ant file.  
     
     The current textile to help seems to work pretty good. 
     

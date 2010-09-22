@@ -26,12 +26,16 @@
   <xsl:param name="headers.on.blank.pages">0</xsl:param>
   <xsl:param name="footers.on.blank.pages">0</xsl:param>
   
+  <!-- Document name and version in the footer -->
+  <xsl:param name="myDocName"/>
   <!--  Custom page footers -->
   <xsl:template name="footer.content">
       <xsl:param name="pageclass" select="''"/>
       <xsl:param name="sequence" select="''"/>
       <xsl:param name="position" select="''"/>
       <xsl:param name="gentext-key" select="''"/>
+      
+      
 
       <xsl:variable name="Version">
           <xsl:choose>
@@ -39,7 +43,7 @@
                       <xsl:text>iRouter </xsl:text><xsl:value-of select="//releaseinfo"/>
               </xsl:when>
               <xsl:otherwise>
-                  iRouter draft 0.1.0
+                  <xsl:text></xsl:text><xsl:value-of select="$myDocName"/>
               </xsl:otherwise>
           </xsl:choose>
       </xsl:variable>
