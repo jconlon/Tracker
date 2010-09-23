@@ -1,0 +1,27 @@
+h1. TruTest Feature
+
+The TruTest feature is an iRouter feature containing a proxy component factory that creates user configurable services instances[14] for interfacing with TruTest animal scale-heads[15].
+
+h2. Consumer Scopes
+
+TruTest Service Instances consume wireAdmin products that are produced by other iRouter service instances. TruTest Service Instances consumables are c and are identified with the following scope id:
+# trutest.command.string
+
+h2. Producer Scopes
+
+TruTest Service Instances produce wireAdmin products that are consumed by business logic and logging components. TruTest Service Instances products are weights, tag numbers, and transaction state. They are identified with the following scope ids:
+# transaction.state
+# animal.tag.number
+# animal.weight.measurement
+
+h2. Service Diagram
+
+!{padding-left:3em}images/trutestComponent.png!
+
+h2. Notes
+
+fn14. TruTest service instances are implemented as WireAdmin Producer and Consumer services.
+
+fn15. The Tracker Device Simulator product has implemented a simulator of the TruTest scale head. This simulator can be used for testing and validating iRouter configurations utilizing TruTest Service Instances. 
+
+
