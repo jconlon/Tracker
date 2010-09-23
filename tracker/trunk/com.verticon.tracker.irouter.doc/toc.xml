@@ -1,11 +1,12 @@
 <toc topic="help/index.html" label="Tracker iRouter User Guide">
 <topic href="help/Overview.html" label="1. Overview">
-<topic href="help/Overview.html#InformationModelingandProcessing" label="Information Modeling and Processing">
-<topic href="help/Overview.html#SolutionRequirements" label="Solution Requirements"></topic>
-<topic href="help/Overview.html#LeveragingIndustryStandards" label="Leveraging Industry Standards">
-<topic href="help/Overview.html#OSGiMeasurementandState" label="OSGi Measurement and State"></topic>
-<topic href="help/Overview.html#WireAdmin" label="Wire Admin"></topic>
-<topic href="help/Overview.html#ConfigurationAdminandMetatype" label="Configuration Admin and Metatype"></topic>
+<topic href="help/Overview.html#DocumentStatus" label="Document Status"></topic>
+<topic href="help/InformationModelingandProcessing.html" label="Information Modeling and Processing">
+<topic href="help/InformationModelingandProcessing.html#SolutionRequirements" label="Solution Requirements"></topic>
+<topic href="help/LeveragingIndustryStandards.html" label="Leveraging Industry Standards">
+<topic href="help/LeveragingIndustryStandards.html#OSGiMeasurementandState" label="OSGi Measurement and State"></topic>
+<topic href="help/WireAdmin.html" label="Wire Admin"></topic>
+<topic href="help/ConfigurationAdminandMetatype.html" label="Configuration Admin and Metatype"></topic>
 </topic>
 </topic>
 <topic href="help/WhatistheTrackeriRouter.html" label="What is the Tracker iRouter?"></topic>
@@ -54,6 +55,19 @@
 <topic href="help/iRouterMonitorview.html#WireGroupGraph" label="Wire Group Graph"></topic>
 <topic href="help/MonitoringStatusVariables.html" label="Monitoring Status Variables"></topic>
 </topic>
+<topic href="help/BusinessLogicComponentFactories.html" label="Business Logic Component Factories"></topic>
+<topic href="help/ProxyComponentFactories.html" label="Proxy Component Factories"></topic>
+</topic>
+<topic href="help/MettlerFeature.html" label="6. Mettler Feature">
+<topic href="help/MettlerFeature.html#ProducerScopes" label="Producer Scopes"></topic>
+<topic href="help/ServiceDiagram.html" label="Service Diagram"></topic>
+<topic href="help/Notes4.html" label="Notes"></topic>
+</topic>
+<topic href="help/TruTestFeature.html" label="7. TruTest Feature">
+<topic href="help/TruTestFeature.html#ConsumerScopes" label="Consumer Scopes"></topic>
+<topic href="help/ProducerScopes2.html" label="Producer Scopes"></topic>
+<topic href="help/ServiceDiagram2.html" label="Service Diagram"></topic>
+<topic href="help/Notes5.html" label="Notes"></topic>
 </topic>
 <topic href="help/glossary.html" label="A. Glossary"></topic>
 </toc>
