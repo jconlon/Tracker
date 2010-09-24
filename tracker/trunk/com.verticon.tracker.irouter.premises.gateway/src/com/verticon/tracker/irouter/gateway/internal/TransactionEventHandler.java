@@ -38,6 +38,10 @@ public class TransactionEventHandler implements EventHandler {
 	private final Logger logger = LoggerFactory
 			.getLogger(TransactionEventHandler.class);
 
+	public void activate() {
+		logger.debug(bundleMarker,"Started");
+	}
+	
 	/**
 	 * Get the animal from the event and publish it.
 	 */
@@ -86,6 +90,10 @@ public class TransactionEventHandler implements EventHandler {
 			MeasurementTransaction transaction) {
 		ResourceSet rs = domain.getResourceSet();
 		EList<Resource> resources = rs.getResources();
+		if(resources.isEmpty()){
+			logger.warn(bundleMarker,"Can not add {}, because no Premises resources are active.",transaction);
+			return;
+		}
 		for (Resource resource : resources) {
 			if (resources.size() > 1) {
 				logger.debug(bundleMarker, "Processing {}", resource.toString());
