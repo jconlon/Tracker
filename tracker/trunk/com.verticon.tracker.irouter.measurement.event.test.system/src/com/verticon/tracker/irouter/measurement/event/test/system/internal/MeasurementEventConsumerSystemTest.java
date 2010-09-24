@@ -10,6 +10,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
+import org.osgi.service.event.EventHandler;
 import org.osgi.service.monitor.Monitorable;
 import org.osgi.service.monitor.StatusVariable;
 import org.osgi.service.wireadmin.BasicEnvelope;
@@ -78,17 +79,23 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 	 * To synchronize the DS and JUnit initializations.
 	 */
 	private static final CountDownLatch startUpGate = new CountDownLatch(1);
-	private static MockProducer producer;
+	private static MockProducer mockProducer;
 	private static ConfigurationAdmin configAdmin;
+	private static MockEventHandler mockEventHandler;
 
 	public void setProducer(Producer value) {
 		logger.info(bundleMarker, "DS injecting the Mock Producer");
-		MeasurementEventConsumerSystemTest.producer = (MockProducer) value;
+		MeasurementEventConsumerSystemTest.mockProducer = (MockProducer) value;
 	}
 
 	public void setConfigAdmin(ConfigurationAdmin value) {
 		logger.info(bundleMarker, "DS injecting the ConfigAdmin");
 		MeasurementEventConsumerSystemTest.configAdmin = value;
+	}
+	
+	public void setEventHandler(EventHandler value) {
+		logger.info(bundleMarker, "DS injecting the ConfigAdmin");
+		MeasurementEventConsumerSystemTest.mockEventHandler = (MockEventHandler) value;
 	}
 
 	/**
@@ -159,30 +166,36 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 		// Send a animal.weight.measurement
 		Measurement m = new Measurement(100, Unit.kg);
 		Envelope value = new BasicEnvelope(m, "xx", ANIMAL_WEIGHT_MEASUREMENT);
-		producer.send(value);
+		mockProducer.send(value);
 		sv = monitorable.getStatusVariable(id);
 		assertEquals("Should be no measurements sent", 0, sv.getInteger());
 
 		// Send a animal.tag.number
 		Long l = 123456789012345L;
 		value = new BasicEnvelope(l, "xx", ANIMAL_TAG_NUMBER);
-		producer.send(value);
+		mockProducer.send(value);
 		sv = monitorable.getStatusVariable(id);
 		assertEquals("Should be no measurements sent", 0, sv.getInteger());
 
 		// Send a mettler.weight.measurement
 		m = new Measurement(100, Unit.kg);
 		value = new BasicEnvelope(m, "xy", METTLER_WEIGHT_MEASUREMENT);
-		producer.send(value);
+		mockProducer.send(value);
 		sv = monitorable.getStatusVariable(id);
 		assertEquals("Should be no measurements sent", 0, sv.getInteger());
 
+		//No events received at this time
+		assertTrue(mockEventHandler.events.isEmpty());
+		
 		// Send a transaction.state
 		State s = new State(1, TRANSACTION_STATE);
 		value = new BasicEnvelope(s, "xy", TRANSACTION_STATE);
-		producer.send(value);
+		mockProducer.send(value);
 		sv = monitorable.getStatusVariable(id);
 		assertEquals("Should be two measurements sent", 2, sv.getInteger());
+		//Test the event admin side to make sure an event was really 
+		//received by an EventHandler
+		assertEquals(2, mockEventHandler.events.size());
 
 	}
 }
