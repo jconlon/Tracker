@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.base.dep"
       label="%featureName"
-      version="0.4.0.qualifier"
+      version="0.4.1.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -63,6 +63,27 @@
 
    <plugin
          id="org.eclipse.equinox.metatype"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.equinox.wireadmin"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.osgilab.bundles.monitoradmin"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.osgi.monitor"
          download-size="0"
          install-size="0"
          version="0.0.0"
