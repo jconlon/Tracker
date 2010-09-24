@@ -26,6 +26,9 @@
    <requires>
       <import feature="com.verticon.tracker.logging.logback" version="0.2.0.qualifier"/>
       <import feature="com.verticon.osgi.metatype.core.model.editor" version="0.1.0.qualifier"/>
+      <import plugin="org.eclipse.equinox.wireadmin"/>
+      <import plugin="com.verticon.osgi.monitor"/>
+      <import plugin="org.osgilab.bundles.monitoradmin"/>
    </requires>
 
    <plugin
@@ -57,13 +60,6 @@
          unpack="false"/>
 
    <plugin
-         id="com.verticon.osgi.monitor"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="com.verticon.tracker.configuration.editor"
          download-size="0"
          install-size="0"
@@ -85,21 +81,14 @@
          unpack="false"/>
 
    <plugin
-         id="org.osgilab.bundles.monitoradmin"
+         id="com.verticon.tracker.irouter"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.equinox.wireadmin"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.verticon.tracker.irouter.measurement.event"
+         id="com.verticon.tracker.irouter.common"
          download-size="0"
          install-size="0"
          version="0.0.0"
