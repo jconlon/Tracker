@@ -65,7 +65,7 @@ The following State Converters are included:
 
 h4. Flow control
 
-Flow control components stop or stop the exchange of data based on some criteria. The following flow control components are included:
+Flow control components stop or start the exchange of data based on some criteria. The following flow control components are included:
 * Measurement Latch
 ** One or more measurements are buffered and sent out only on the reception of a state
 * Measurement Trigger
