@@ -33,3 +33,4 @@ h3. Monitoring Status Variables
 Selecting a service node in the master tree will display the details of the service in the Status Variables window.  
 
 Be aware that iRouter services created from different component factories will have different variables associated with their services.  Click on the __Refresh Status Variables__ button to see the most current status for the service.
+
