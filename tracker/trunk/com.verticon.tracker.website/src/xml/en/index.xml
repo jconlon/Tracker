@@ -50,6 +50,19 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
+				<term>Manage Physical Sensors and Actuators</term>
+				<listitem>
+					<para>
+						Tracker 
+						<ulink url="http://tracker-project.verticon.com/verticon_Tracker/wiki/InformationRouter">
+						<acronym>iRouter</acronym></ulink>
+						is a generic data integration framework to 
+						acquire, transform and exchange data between network connected sensors and 
+						actuators. 
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
 				<term>Analyze Trends</term>
 				<listitem>
 					<para>
@@ -98,5 +111,14 @@
 			url="http://silkpage.markupware.com/dev/"> Developers </ulink>
 			</para> </listitem> </itemizedlist>
 		-->
+	</section>
+	
+	<section id="whatsnew">
+		<title>What's New?</title>
+		<para>
+		See the latest status of the project at the
+			<ulink url="http://tracker-project.verticon.com/verticon_Tracker">
+				Tracker Project Management Website.</ulink>
+		</para>
 	</section>
 </webpage>
