@@ -17,13 +17,12 @@
 					<para>Q: What is the status of the Project?</para>
 				</question>
 				<answer>
-				    <para>A: The project is in alpha testing stage (milestone3) at this time. Beta testing
-					will begin with the milestone4 releases.</para>
+				    <para>A: The project is in beta testing stage (milestone 0.5.0) at this time.</para>
 				</answer>
 			</qandaentry>
 			<qandaentry>
 				<question>
-					<para>Q: Is the project accepting beta testers at this time?</para>
+					<para>Q: Is the project accepting new beta testers at this time?</para>
 				</question>
 				<answer>
 					<para>A: Yes.  Please send us an email  
@@ -38,10 +37,19 @@
 		
 			<qandaentry>
 				<question>
-					<para>Q: Do you have a Linux version of the software?</para>
+					<para>Q: What OS platforms are supported?</para>
 				</question>
 				<answer>
-					<para>A: Yes but it is not deployed to the download sites at this time.</para>
+					<para>A: Currently versions for Windows and Linux are supported.</para>
+				</answer>
+			</qandaentry>
+			
+			<qandaentry>
+				<question>
+					<para>Q: Is an Apple version of the software planned?</para>
+				</question>
+				<answer>
+					<para>A: Yes, but it is not deployed to the download sites at this time.</para>
 				</answer>
 			</qandaentry>
 	</qandadiv>
@@ -53,8 +61,8 @@
 				</question>
 				<answer>
 					<para>A: It is always best to read the documentation first. Did you already do this? 
-					If not start with the <ulink uri="http://help.eclipse.org/ganymede/nav/0">Eclipse Workbench User Guide</ulink> and
-					then read the . <olink targetdoc="docs" targetptr="userGuide">Tracker User Guide</olink></para>
+					If not start with the <ulink uri="http://help.eclipse.org/helios/nav/0">Eclipse Workbench User Guide</ulink> and
+					then read the <olink targetdoc="docs" targetptr="userGuide">Tracker User Guide</olink>.</para>
 					<para>Note that <emphasis>both of these documents are available from within the Tracker.</emphasis>
 					 Go to the <userinput> <command>Help</command> > <command>Help Contents</command> </userinput>
 					 to show the built in Help Documentation.</para> 
@@ -82,6 +90,23 @@
 		
 	</qandadiv>
 	
+	<qandadiv><title>iRouter</title>
+			<qandaentry>
+				<question>
+					<para>Q: What is the relationship between the Tracker BI Toolkit and the iRouter?</para>
+				</question>
+				
+				<answer>
+					<para>A: Tracker BI Toolkit is a container for tool features.  When it is first installed it is empty.
+					For the Tracker BI Toolkit to be useful the user must select and install the tool features they require. 
+					The iRouter is one of the many Tracker tool features that can be installed. The end user can select and 
+					install iRouter features by itself or with a combination of any of the other 
+					Tracker livestock information management tool features.
+					</para>
+				</answer>
+			</qandaentry>
+		
+	</qandadiv>
 	<qandadiv><title>Custom Use Cases</title>
 			<qandaentry>
 				<question>

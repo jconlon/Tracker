@@ -54,6 +54,18 @@ release.lin.size=50.2M
 				</tbody>
 			</tgroup>
 		</table>
+		<para>Tracker BI Toolkit is a extensible open desktop. Once installed, the end user can easily add:</para>
+		<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>Tracker Livestock Information Management Features</para>
+			</listitem>
+			<listitem >
+				<para>Tracker iRouter Sensor and Actuator Data Management Features</para>
+			</listitem>
+			<listitem>
+				<para>Generic Eclipse Features from Eclipse or Third Party Repositories.</para>
+			</listitem>
+		</itemizedlist>
 		<para>To install:</para>
 		<itemizedlist mark='opencircle'>
 			<listitem>
@@ -95,6 +107,61 @@ release.lin.size=50.2M
 				</tbody>
 			</tgroup>
 		</table>
+	</section>
+	
+	<section>
+		<title>Tracker Device Simulator</title>
+		<table xml:id="ex.calstable" frame='all'>
+			<title>Tool for simulating physical sensor and actuator devices</title>
+			<tgroup cols='3' align='left' colsep='1' rowsep='1'>
+				<colspec colname='c1' />
+				<colspec colname='c2' />
+				<colspec colname='c3' />
+				<thead>
+					<row>
+						<entry>Download File</entry>
+						<entry>Size</entry>
+						<entry>OS</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>
+							<ulink 
+								url="http://tracker.verticon.com/Tracker/downloads/Simulator.win32.win32.x86.zip">
+								Simulator.win32.win32.x86.zip
+							</ulink>
+						</entry>
+						<entry>3.0 MB</entry>
+						<entry>WIN</entry>
+					</row>
+					<row>
+						<entry>
+							<ulink
+								url="http://tracker.verticon.com/Tracker/downloads/Simulator.linux.gtk.x86.zip">
+								Simulator.linux.gtk.x86.zip
+							</ulink>
+						</entry>
+						<entry>3.4 MB</entry>
+						<entry>Linux</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+		<para>To install:</para>
+		<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>Down load and extract compressed file to a
+			desirable directory.</para>
+			</listitem>
+			<listitem >
+				<para>The top level directory is called simulator.</para>
+			</listitem>
+			<listitem>
+				<para>Invoke the simulator executive inside the top level tracker director.</para>
+			</listitem>
+		</itemizedlist>
+
 	</section>
 
 	<sidebar id="prerequisites">
