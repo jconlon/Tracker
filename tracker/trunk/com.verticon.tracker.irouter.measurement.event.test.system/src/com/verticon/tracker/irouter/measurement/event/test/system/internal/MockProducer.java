@@ -32,7 +32,7 @@ public class MockProducer implements Producer {
 	 */
 	@Override
 	public String toString() {
-		return "MockConsumer []";
+		return "MockProducer []";
 	}
 
 	@Override
