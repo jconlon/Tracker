@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Mock producer of Strings that are TruTest commands.
+ * Mock producer of Envelopes.
  * 
  * @author jconlon
  * 
@@ -47,6 +47,10 @@ public class MockProducer implements Producer {
 				Arrays.toString(wires));
 	}
 
+	/**
+	 * Access point for injecting test envelopes
+	 * @param value
+	 */
 	void send(Envelope value) {
 		if (wires == null) {
 			logger.error(bundleMarker, "Cant send value={}, No wires", value);
