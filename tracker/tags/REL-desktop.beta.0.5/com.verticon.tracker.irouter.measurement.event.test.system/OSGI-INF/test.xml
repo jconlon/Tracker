@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" activate="startup" name="com.verticon.tracker.irouter.measurement.event.test.system">
+   <implementation class="com.verticon.tracker.irouter.measurement.event.test.system.internal.MeasurementEventConsumerSystemTest"/>
+   <reference bind="setProducer" cardinality="1..1" interface="org.osgi.service.wireadmin.Producer" name="Producer" policy="static" target="(service.pid=measurement.event.mockProducer)"/>
+   <reference bind="setConfigAdmin" cardinality="1..1" interface="org.osgi.service.cm.ConfigurationAdmin" name="ConfigurationAdmin" policy="static"/>
+   <reference bind="setEventHandler" cardinality="1..1" interface="org.osgi.service.event.EventHandler" name="EventHandler" policy="static" target="(event.topics=com/verticon/tracker/event)"/>
+</scr:component>

@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tests
+Bundle-SymbolicName: com.verticon.tracker.irouter.mettler.tests
+Bundle-Version: 0.2.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Fragment-Host: com.verticon.tracker.irouter.mettler
+Import-Package: com.verticon.tracker.connector.socket,
+ org.osgi.framework;version="1.3.0",
+ org.slf4j;version="1.5.5"
+Service-Component: OSGI-INF/*.xml
+Require-Bundle: ch.qos.logback.core;bundle-version="0.9.18",
+ ch.qos.logback.classic;bundle-version="0.9.18"
+

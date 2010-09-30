@@ -1,0 +1,29 @@
+<webpage id="license">
+  <config param="rcsdate" value="$Date: 2009-03-17 18:59:39 -0500 (Tue, 17 Mar 2009) $"/>
+  <head>
+    <title>Licensing</title>
+    <summary>GNU Public License 2</summary>
+    <keywords>GNU, License, Open Source</keywords>
+  </head>
+ 
+  <section id="epl">
+    <title>Copyright</title>
+    <para>
+      Copyright &#169; 2010 Verticon, Inc.
+     </para>
+      <para>
+      Verticon, Inc. Tracker is licensed under 
+      <ulink url="http://www.eclipse.org/org/documents/epl-v10.html">
+        Eclipse Public License Version 1.0 
+      </ulink>.
+    </para>
+  </section>
+  
+  <sidebar id="eclipseLegal">
+    <title>Eclipse Foundation</title>
+    <ulink url="http://www.eclipse.org/org/foundation/">
+        Eclipse Foundation Resources 
+    </ulink>
+
+  </sidebar>
+</webpage>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.verticon.tracker.birt"
+      label="%featureName"
+      version="0.2.0.qualifier"
+      provider-name="%providerName">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %license
+   </license>
+
+   <url>
+      <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
+   </url>
+
+   <includes
+         id="org.eclipse.birt"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.birt.chart.cshelp"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.birt.cshelp"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.birt.doc"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.birt.example"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.birt.report.designer.editor.xml.wtp"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.oda.ecore"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.oda.ecore.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

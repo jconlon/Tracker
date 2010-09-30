@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracker TruTest Fake Device
+Bundle-SymbolicName: com.verticon.tracker.irouter.trutest.dev.fake
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: com.verticon.tracker.irouter.dev,
+ com.verticon.tracker.irouter.trutest.dev,
+ javax.sound.sampled,
+ org.osgi.framework;version="1.5.0",
+ org.slf4j;version="1.5.11"
+Service-Component: OSGI-INF/*.xml
+

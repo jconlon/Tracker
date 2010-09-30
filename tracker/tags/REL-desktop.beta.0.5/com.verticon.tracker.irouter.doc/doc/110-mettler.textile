@@ -1,0 +1,21 @@
+h1. Mettler Feature
+
+The Mettler feature is an iRouter feature containing a proxy component factory that creates user configurable services instances[11] for interfacing with Mettler weight balance sensors[12]. 
+
+h2. Producer Scopes
+
+Mettler Service Instances produce wireAdmin measurement products that are consumed by business logic consumer services within the iRouter. Mettler Service Instances measurement products are weights and are identified[13] with the following scope id:
+* <user configurable name>.weight.measurement
+
+h2. Service Diagram
+
+!{padding-left:3em}images/mettlerComponent.png!
+
+h2. Notes
+
+fn11. Mettler service instances are implemented as WireAdmin Producer services.
+
+fn12. The Tracker Device Simulator product has implemented a simulator of the Mettler balance. This simulator can be used for testing and validating iRouter configurations utilizing Mettler Service Instances. 
+
+fn13. Scope names identify the information sent by a Producer service to a Consumer service. The iRouter determines connections based on scopes and wire group names.
+

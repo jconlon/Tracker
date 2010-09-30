@@ -1,0 +1,73 @@
+<toc topic="help/index.html" label="Tracker iRouter User Guide">
+<topic href="help/Overview.html" label="1. Overview">
+<topic href="help/Overview.html#DocumentStatus" label="Document Status"></topic>
+<topic href="help/InformationModelingandProcessing.html" label="Information Modeling and Processing">
+<topic href="help/InformationModelingandProcessing.html#SolutionRequirements" label="Solution Requirements"></topic>
+<topic href="help/LeveragingIndustryStandards.html" label="Leveraging Industry Standards">
+<topic href="help/LeveragingIndustryStandards.html#OSGiMeasurementandState" label="OSGi Measurement and State"></topic>
+<topic href="help/WireAdmin.html" label="Wire Admin"></topic>
+<topic href="help/ConfigurationAdminandMetatype.html" label="Configuration Admin and Metatype"></topic>
+</topic>
+</topic>
+<topic href="help/WhatistheTrackeriRouter.html" label="What is the Tracker iRouter?"></topic>
+<topic href="help/Notes.html" label="Notes"></topic>
+</topic>
+<topic href="help/TheoryofOperations.html" label="2. Theory of Operations">
+<topic href="help/TheoryofOperations.html#Howdoesitwork" label="How does it work?">
+<topic href="help/TheoryofOperations.html#Customproxycomponentsforexternaldevices" label="Custom proxy components for external devices">
+<topic href="help/TheoryofOperations.html#Physicalcommunicationinterfaces" label="Physical communication interfaces"></topic>
+<topic href="help/TheoryofOperations.html#Datalinkcommunicationinterfaces" label="Datalink communication interfaces"></topic>
+<topic href="help/TheoryofOperations.html#Simplifiedinterfaces" label="Simplified interfaces"></topic>
+</topic>
+<topic href="help/TheoryofOperations.html#Generictransformationcomponents" label="Generic transformation components">
+<topic href="help/TheoryofOperations.html#MeasurementConverters" label="Measurement Converters"></topic>
+<topic href="help/TheoryofOperations.html#StateConverters" label="State Converters"></topic>
+<topic href="help/TheoryofOperations.html#Flowcontrol" label="Flow control"></topic>
+</topic>
+<topic href="help/TheoryofOperations.html#Collaboratingwiregroups" label="Collaborating wire groups"></topic>
+</topic>
+<topic href="help/AdministrationTools.html" label="Administration Tools">
+<topic href="help/AdministrationTools.html#Configurationediting" label="Configuration editing"></topic>
+<topic href="help/Applicationmonitoring.html" label="Application monitoring"></topic>
+<topic href="help/Simplifiedoperation.html" label="Simplified operation"></topic>
+</topic>
+<topic href="help/Livestockprocessingusecaseexample.html" label="Livestock processing use case example"></topic>
+<topic href="help/Notes2.html" label="Notes"></topic>
+</topic>
+<topic href="help/GettingStarted.html" label="3. Getting Started">
+<topic href="help/GettingStarted.html#GettingStartedOverview" label="Getting Started Overview"></topic>
+</topic>
+<topic href="help/Configuration.html" label="4. Configuration">
+<topic href="help/Configuration.html#ConfigurationAdministrationOverview" label="Configuration Administration Overview"></topic>
+<topic href="help/ConfigurationEditor.html" label="Configuration Editor">
+<topic href="help/ConfigurationEditor.html#ConfigurationeditorFactoriesviewtab" label="Configuration editor Factories view tab">
+<topic href="help/ConfigurationEditor.html#Creatingaserviceinstance" label="Creating a service instance"></topic>
+<topic href="help/ConfigurationEditor.html#Editingaserviceinstance" label="Editing a service instance"></topic>
+<topic href="help/ConfigurationEditor.html#Savingtheconfiguration" label="Saving the configuration"></topic>
+<topic href="help/ConfigurationEditor.html#Importingandexportingconfigurations" label="Importing and exporting configurations"></topic>
+</topic>
+</topic>
+<topic href="help/Notes3.html" label="Notes"></topic>
+</topic>
+<topic href="help/Monitoring.html" label="5. Monitoring">
+<topic href="help/Monitoring.html#ApplicationServiceMonitoring" label="Application Service Monitoring"></topic>
+<topic href="help/iRouterMonitorview.html" label="iRouter Monitor view">
+<topic href="help/iRouterMonitorview.html#WireGroupGraph" label="Wire Group Graph"></topic>
+<topic href="help/MonitoringStatusVariables.html" label="Monitoring Status Variables"></topic>
+</topic>
+<topic href="help/BusinessLogicComponentFactories.html" label="Business Logic Component Factories"></topic>
+<topic href="help/ProxyComponentFactories.html" label="Proxy Component Factories"></topic>
+</topic>
+<topic href="help/MettlerFeature.html" label="6. Mettler Feature">
+<topic href="help/MettlerFeature.html#ProducerScopes" label="Producer Scopes"></topic>
+<topic href="help/ServiceDiagram.html" label="Service Diagram"></topic>
+<topic href="help/Notes4.html" label="Notes"></topic>
+</topic>
+<topic href="help/TruTestFeature.html" label="7. TruTest Feature">
+<topic href="help/TruTestFeature.html#ConsumerScopes" label="Consumer Scopes"></topic>
+<topic href="help/ProducerScopes2.html" label="Producer Scopes"></topic>
+<topic href="help/ServiceDiagram2.html" label="Service Diagram"></topic>
+<topic href="help/Notes5.html" label="Notes"></topic>
+</topic>
+<topic href="help/glossary.html" label="A. Glossary"></topic>
+</toc>

@@ -1,0 +1,64 @@
+<webpage id="project">
+	<config param="rcsdate"
+		value="$Date: 2009-08-18 23:37:34 -0500 (Tue, 18 Aug 2009) $" />
+	<head>
+		<title>Project</title>
+		<summary>
+			Community, Developers and Issues Tracking
+    </summary>
+		<keywords>Open Source, Issues Tracking, Developers</keywords>
+	</head>
+
+	<para>
+		Tracker
+		<acronym>BI</acronym>
+		Toolkit and suite of
+		<acronym>BI</acronym>
+		Featured
+		solutions are
+		<ulink url="http://www.eclipse.org/">Eclipse</ulink> and
+		<ulink url="http://www.java.com/en/about/">Java</ulink>
+		based technologies. Tracker artifacts are developed
+		within a collaborative open source community. Issues tracking,
+		project management and code repositories tools are used to manage
+		community efforts and aid in development of Tracker software artifacts, 
+		components, features and network repositories.
+	</para>
+
+	<section id="wikiSite">
+		<title>Tracker Project Management Wiki</title>
+		<para>
+			The
+			<ulink url="http://tracker-project.verticon.com/verticon_Tracker">
+				Tracker Project Management Website</ulink>
+			is a
+			<ulink url="http://en.wikipedia.org/wiki/Wiki"> Wiki</ulink> for the
+		    Tracker user and developer community. The Tracker Project Wiki is used
+			for communicating project status and ideas between the development team 
+			and users of the Tracker technologies.
+		</para>
+		<para>
+			The Tracker Project Website is maintained by the Tracker Developers.
+    </para>
+	</section>
+
+	<section id="issues">
+		<title>Issues Tracking</title>
+		<para>
+			<ulink url="http://trac.edgewall.org/">Trac</ulink>
+			is the issues tracking tool used within the Tracker Wiki to track defects, 
+			enhancements and tasks for the Tracker Developer and User community.
+			<emphasis>Note: Other than a similarity of naming there is no
+				relationship to Tracker.</emphasis>
+		</para>
+	</section>
+
+    <section id="svn">
+		<title>Code Control</title>
+		<para>
+			<ulink url="http://subversion.tigris.org/">Subversion</ulink>
+			is the <ulink url="http://en.wikipedia.org/wiki/Version_Control">
+			version control system</ulink> used by Tracker Developers.
+		</para>
+	</section>
+</webpage>

@@ -1,0 +1,17 @@
+h1. Component Factories
+
+Component Factories are the creators of the services doing the work in the iRouter and the only type of component deployed to the iRouter.  These are two kinds of Component Factories:
+# Business Logic Component Factories
+# Proxy Component Factories
+
+h2. Business Logic Component Factories
+
+* BW Control
+* Measurement Logger
+
+h2. Proxy Component Factories
+
+Proxy Component Factories are packaged as optional iRouter features. 
+
+
+
