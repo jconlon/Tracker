@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.irouter"
       label="%featureName"
-      version="0.1.0.qualifier"
+      version="0.1.1.qualifier"
       provider-name="%providerName"
       plugin="com.verticon.tracker.irouter">
 
@@ -89,6 +89,13 @@
 
    <plugin
          id="com.verticon.tracker.irouter.common"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.irouter.measurement.converter"
          download-size="0"
          install-size="0"
          version="0.0.0"

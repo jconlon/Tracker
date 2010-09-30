@@ -47,9 +47,6 @@ The following Measurement Converters are included:
 * Simple Arithmetic Converter
 ** Consumes one measurement input
 ** Produces a measurement from the input and an arithmetic calculation
-* Composite Arithmetic Converter
-** Consumes two measurements
-** Produces a measurement type based on arithmetic relationship between the two measurements
 
 h4. State Converters
 
