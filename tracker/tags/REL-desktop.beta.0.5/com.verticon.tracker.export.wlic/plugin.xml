@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <category
+            id="com.verticon.tracker.export.category"
+            name="Tracker">
+      </category>
+      <wizard
+            category="com.verticon.tracker.export.category"
+            class="com.verticon.tracker.export.wlic.presentation.ExportWlicWizard"
+            icon="$nl$/icons/etool16/export_wiz.gif"
+            id="com.verticon.tracker.export.wlic.wizard1"
+            name="%_UI_ExportWlic_Wizard_label">
+         <description>
+            %_UI_ExportWlic_Wizard_description
+         </description>
+         <selection
+               class="org.eclipse.core.resources.IResource"
+               name="*.premises">
+         </selection>
+      </wizard>
+   </extension> 
+ 
+</plugin>

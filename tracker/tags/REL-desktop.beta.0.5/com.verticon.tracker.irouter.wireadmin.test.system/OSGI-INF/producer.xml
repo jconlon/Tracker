@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="com.verticon.tracker.irouter.wireadmin.test.system.producer">
+   <implementation class="com.verticon.tracker.irouter.wireadmin.test.system.internal.MockProducer"/>
+   <service>
+      <provide interface="org.osgi.service.wireadmin.Producer"/>
+   </service>
+   <property name="tracker.wiring.group.name" type="String" value="test"/>
+   <property name="wireadmin.producer.scope"> 
+   mock.string
+   </property>	
+   <property name="service.pid" type="String" value="trutest.mockProducer"/>
+</scr:component>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.pde.ui.JunitLaunchConfig">
+<booleanAttribute key="append.args" value="true"/>
+<stringAttribute key="application" value="org.eclipse.pde.junit.runtime.coretestapplication"/>
+<booleanAttribute key="askclear" value="false"/>
+<booleanAttribute key="automaticAdd" value="true"/>
+<booleanAttribute key="automaticValidate" value="false"/>
+<stringAttribute key="bootstrap" value=""/>
+<stringAttribute key="checked" value="[NONE]"/>
+<booleanAttribute key="clearConfig" value="true"/>
+<booleanAttribute key="clearws" value="true"/>
+<booleanAttribute key="clearwslog" value="false"/>
+<stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/pde-junit"/>
+<booleanAttribute key="default" value="false"/>
+<booleanAttribute key="default_auto_start" value="true"/>
+<stringAttribute key="deselected_workspace_plugins" value="com.verticon.tracker.irouter.trutest,org.equinoxosgi.util,com.verticon.tracker.logging.logback,com.verticon.tracker.connector.bluetooth.tests,com.verticon.tracker.reader.comm,org.equinoxosgi.core.autostart,com.verticon.tracker,com.verticon.tracker.fair.editor,com.verticon.tracker.reader,org.eclipse.ui.forms.examples,com.verticon.tracker.views,com.verticon.tracker.edit,com.verticon.tracker.tests*0.1.0,com.verticon.tracker.irouter.mettler.dev.sim,com.verticon.tracker.fair.views,com.verticon.tracker.product.desktop,com.verticon.tracker.configuration,com.verticon.tracker.irouter.common,com.verticon.tracker.irouter.bwcontrol,com.verticon.tracker.alltests,org.eclipse.datatools.enablement.oda.ecore,com.verticon.tracker.export.wlic.doc,com.verticon.tracker.transaction.editor,com.verticon.tracker.ocl.interpreter,org.eclipse.emf.ocl.examples.interpreter,com.verticon.tracker.reader.comm.tests,com.verticon.tracker.product.desktop.doc,com.verticon.tracker.fair.poi.documenation,com.verticon.tracker.fair.poi,com.verticon.tracker.reader.bluetooth,org.bluecove.gpl,org.equinoxosgi.toast.devsim,com.verticon.tracker.doc,com.verticon.tracker.irouter.dev,com.verticon.tracker.irouter.bwcontrol.test,com.verticon.tracker.irouter.mettler.test.system,com.verticon.tracker.irouter.measurement.event,com.verticon.tracker.fair.validation,com.verticon.tracker.irouter.wireadmin.test.system,com.verticon.tracker.connector.socket.tests,com.verticon.tracker.connector.bluetooth,com.verticon.tracker.fair.edit,com.verticon.logging.jultoslf4j,com.verticon.tracker.irouter.trutest.test.system,com.verticon.tracker.logging.logback.config,com.verticon.tracker.irouter.premises.gateway,com.verticon.tracker.ocl.query,com.verticon.tracker.configuration.editor,com.verticon.tracker.validation.core,org.eclipse.datatools.enablement.oda.ecore.ui,com.verticon.tracker.editor.tests,com.verticon.tracker.editor,com.verticon.tracker.fair,org.bluecove,com.verticon.tracker.irouter.trutest.dev,com.verticon.tracker.ocl.query.viewer.tests,com.verticon.tracker.irouter.monitor.view,com.verticon.tracker.irouter.doc,com.verticon.tracker.fair.editor.ocl.enablement,org.apache.poi.branding,com.verticon.tracker.irouter.deployment.logging,com.verticon.tracker.irouter.mettler,com.verticon.osgi.metatype.core.model.edit,com.verticon.tracker.irouter.mettler.dev.fake,org.eclipse.pde.visualization.dependency,com.verticon.osgi.metatype.core.model.editor,com.verticon.tracker.irouter.mettler.tests,com.verticon.tracker.irouter.wireadmin,com.verticon.tracker.ocl.query.doc,com.verticon.tracker.irouter.trutest.dev.sim,com.verticon.tracker.monitor.view.tests,com.verticon.osgi.metatype.core.model,com.verticon.tracker.irouter.trutest.dev.fake,com.verticon.tracker.editor.doc,com.verticon.tracker.irouter.measurement.event.test.system,com.verticon.osgi.metatype.core.model.tests,org.ekkescorner.logging.starter.runtime,com.verticon.tracker.fair.transaction.editor,com.verticon.tracker.irouter.measurement.logger.test,com.verticon.tracker.irouter.wireadmin.tests,com.verticon.tracker.irouter.measurement.logger,com.verticon.tracker.validation.adapter,com.verticon.osgi.monitor,com.verticon.tracker.fair.tests,com.verticon.tracker.irouter.trutest.tests,org.eclipse.swtbot.eclipse.finder.test,com.verticon.tracker.irouter.premises.gateway.tests,com.verticon.tracker.editor.ocl.enablement,org.eclipse.swtbot.addition,com.verticon.tracker.tests*0.1.0,com.verticon.tracker.reader.doc,com.verticon.tracker.irouter.deployment.agent,com.verticon.tracker.ocl.query.viewer,com.verticon.tracker.irouter.common.tests,com.verticon.tracker.export.wlic,com.verticon.tracker.common,com.verticon.tracker.irouter"/>
+<booleanAttribute key="includeOptional" value="true"/>
+<stringAttribute key="location" value="${workspace_loc}/../junit-workspace"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/com.verticon.tracker.connector.socket.test.system"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.junit.CONTAINER" value="=com.verticon.tracker.connector.socket.test.system"/>
+<booleanAttribute key="org.eclipse.jdt.junit.KEEPRUNNING_ATTR" value="false"/>
+<stringAttribute key="org.eclipse.jdt.junit.TESTNAME" value=""/>
+<stringAttribute key="org.eclipse.jdt.junit.TEST_KIND" value="org.eclipse.jdt.junit.loader.junit3"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value=""/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog -console"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="com.verticon.tracker.connector.socket.test.system"/>
+<stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
+<stringAttribute key="pde.version" value="3.3"/>
+<stringAttribute key="product" value="com.verticon.tracker.product.desktop.application"/>
+<booleanAttribute key="run_in_ui_thread" value="true"/>
+<stringAttribute key="selected_target_plugins" value="org.eclipse.equinox.util@default:default,org.eclipse.core.runtime.compatibility.registry@default:false,org.eclipse.equinox.registry@default:default,org.eclipse.core.contenttype@default:default,org.eclipse.core.runtime.compatibility.auth@default:default,org.eclipse.equinox.servletbridge.extensionbundle@default:false,org.eclipse.equinox.preferences@default:default,org.hamcrest.core@default:default,org.eclipse.core.jobs@default:default,org.eclipse.equinox.ds@default:true,org.eclipse.equinox.transforms.hook@default:false,org.junit4@default:default,org.eclipse.osgi@-1:true,org.junit*4.8.1.v4_8_1_v20100427-1100@default:default,org.eclipse.equinox.io@default:default,javax.mail.glassfish@default:default,org.eclipse.core.runtime@default:true,javax.servlet@default:default,org.eclipse.equinox.weaving.hook@default:false,org.eclipse.equinox.app@default:default,org.eclipse.osgi.services@default:default,org.eclipse.equinox.common@2:true"/>
+<stringAttribute key="selected_workspace_plugins" value="com.verticon.tracker.connector.socket.test.system@default:default,com.verticon.tracker.connector.socket@default:default"/>
+<booleanAttribute key="show_selected_only" value="false"/>
+<booleanAttribute key="tracing" value="false"/>
+<booleanAttribute key="useCustomFeatures" value="false"/>
+<booleanAttribute key="useDefaultConfig" value="true"/>
+<booleanAttribute key="useDefaultConfigArea" value="false"/>
+<booleanAttribute key="useProduct" value="false"/>
+</launchConfiguration>

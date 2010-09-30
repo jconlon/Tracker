@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Monitor Admin
+Bundle-SymbolicName: com.verticon.osgi.monitor
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Verticon, Inc
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.osgi.service.monitor;version="1.0.0"

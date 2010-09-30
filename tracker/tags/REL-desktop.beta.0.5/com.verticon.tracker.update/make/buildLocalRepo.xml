@@ -1,0 +1,29 @@
+<project name="provisioning build" default="deploy.p2.repositories">
+
+<!-- This will have to move for Ticket # 315 -->
+	<!-- ================================= 
+	          target: deploy.p2.repositories  
+				
+	     =================================   -->
+	<target name="deploy.p2.repositories" description="Copies all repos to a common folder for synchronization with a remote site">
+		<echoproperties></echoproperties>
+		
+		<property name="repo" location="${sp:action.output}"/>
+		
+		<copy todir="${repo}/features">
+					<fileset dir="${repo.features}"/>
+		</copy>
+		
+		<copy todir="${repo}/oda">
+				    <fileset dir="${repo.oda}"/>
+		</copy>
+		<!--
+		 <zip destfile="${repo}/all-in-one"
+		       basedir="${repo}"
+		  />
+		 -->
+	</target>
+
+
+
+</project>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+
+
+    This is the deprecated ant file.  
+    
+    The current textile to help seems to work pretty good. 
+    
+    If pdf output is desired, then may want to pull functionality from that ant file
+    (customBuild.xml) to build a pdf.
+    
+    Also note that the tracker documentation project and subprojects are using a 
+    similar docbook toolchain, but with xincludes to build one monolithic manual.
+    That set of projects also utilize a modular plugable architecture to create a
+    single online help document.
+    
+    
+    Copyright (c) 2010 Chris Aniszczyk and others.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+         Chris Aniszczyk <caniszczyk@gmail.com> - initial API and implementation
+         
+   
+    
+ -->
+
+<project name="irouter.doc - build-doc.xml,  the org.eclipse.mylyn.wikitext.example" default="all">
+    <description>
+            Generate Docbook and Eclipse help content from the textile files.
+    </description>
+
+	<property name="document.name" value="irouter"/>
+	<property name="build.dir" value="build" />
+	
+	<property name="help.doc.url.base" value="http://wiki.eclipse.org"/>
+	<property name="wiki.url.base" value="${help.doc.url.base}/EGit"/>
+	<property name="imageFolder" value="images"/>
+	<property name="textile.root.dir" location="doc"/>
+	<property name="docbook" location="docbook"/>
+	<property name="help" location="help"/>
+	<property name="title" value="Tracker iRouter User Guide"/>
+
+
+
+
+	<path id="wikitext.tasks.classpath">
+		<fileset dir="lib">
+			<include name="org.eclipse.mylyn.wikitext.*core*.jar"/>
+		</fileset>
+	</path>
+
+	<taskdef classpathref="wikitext.tasks.classpath" resource="org/eclipse/mylyn/internal/wikitext/mediawiki/core/tasks/tasks.properties"/>
+	<taskdef classpathref="wikitext.tasks.classpath" resource="org/eclipse/mylyn/wikitext/core/util/anttask/tasks.properties"/>
+
+	<target name="init">
+		<mkdir dir="tmp"/>
+		<mkdir dir="${docbook}"/>
+		<mkdir dir="${help}"/>
+	</target>
+
+	<target name="clean" depends="init">
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="tmp"/>
+			<fileset dir="build" includes="**/*"/>
+			<fileset dir="html" includes="**/*"/>
+			<fileset dir="docbook" includes="**/*"/>
+			<fileset dir="help" includes="**/*"/>
+		</delete>
+	</target>
+
+	<target name="all" depends="generate-textile-docbook, generate-textile-help, test"/>
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+	          target: assemble
+	                                
+	  - - - - - - - - - - - - - - - - - -->
+	<target name="assemble" description="Create a fileslist based on in the irouter-index.txt file">
+			<loadfile srcfile="doc/${document.name}-index.txt" property="inputfiles">
+			  <filterchain>
+				<tokenfilter>
+				    <replacestring from="\n" to=","/>
+				</tokenfilter>
+			  </filterchain>
+			</loadfile>
+			<concat destfile="${build.dir}${file.separator}${document.name}.textile" 
+				append="false" fixlastline="yes">
+				<filelist dir="doc" files="${inputfiles}"/>
+			</concat>
+		</target>
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: generate-textile-docbook                      
+     - - - - - - - - - - - - - - - - - -->
+    <target name="generate-textile-docbook" depends="init, assemble" 
+    	description="Generate docbook content from the assembled textile file and place it in the build directory">
+    	<copy file="${build.dir}${file.separator}${document.name}.textile" todir="${docbook}"/>
+
+    	
+    	<wikitext-to-docbook 
+    				booktitle="${title}"
+    				markupLanguage="Textile"
+    				validate="true">
+    					<fileset dir="${docbook}">
+    						 <include name="${document.name}.textile"/>
+    					</fileset>
+    	</wikitext-to-docbook>
+    	<delete file="${docbook}${file.separator}${document.name}.textile"/>
+    </target>
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+	      target: generate-textile-help                      
+	- - - - - - - - - - - - - - - - - -->
+	<target name="generate-textile-help" depends="init, assemble" 
+		description="Generate Eclipse help from textile source">
+		<copy file="${build.dir}${file.separator}${document.name}.textile" todir="${help}"/>
+			<wikitext-to-eclipse-help markupLanguage="Textile" 
+				multipleOutputFiles="true"
+				title="${title}"
+				navigationImages="true"
+				helpPrefix="help">
+					<fileset dir="${help}">
+				    	<include name="${document.name}.textile"/>
+					</fileset>
+				<stylesheet url="styles/help.css"/>
+				<stylesheet url="styles/main.css"/>
+			</wikitext-to-eclipse-help>
+		<move file="${help}${file.separator}${document.name}-toc.xml" todir="${basedir}"/>
+		<delete file="${help}${file.separator}${document.name}.textile"/>
+    </target>
+
+
+    <target name="generate-helpold" depends="init" 
+    	description="An example to generate Eclipse help content from the wiki">
+    	<mediawiki-to-eclipse-help
+    	    		wikiBaseUrl="${help.doc.url.base}"
+    				validate="true"
+    				failonvalidationerror="true"
+    				prependImagePrefix="${imageFolder}"
+    				formatoutput="true"
+    				defaultAbsoluteLinkTarget="doc_external"
+    	    		dest="${basedir}"
+    	    		title="Example"
+    	    		generateUnifiedToc="false">
+    	    		<path name="DocumentationGuidelines/CrowdSourcingExample" title="Crowdsourcing Example" generateToc="true"/>
+    	    		<pageAppendum>
+= Updating This Document =
+
+This document is maintained in a collaborative wiki.  If you wish to update or modify this document please visit 
+{url}
+    	  			</pageAppendum>
+    	</mediawiki-to-eclipse-help>
+    	
+    </target>
+
+	<target name="test" depends="init" description="verify that all of the HTML files are well-formed XML">
+		<echo level="info">
+Validating help content XML and HTML files: The Eclipse help system expects well-formed XML
+
+If validation fails it is because either:
+
+* the userguide source code is poorly formed, or
+* the WikiText MediaWiki parser has a bug
+
+Problems with userguide source are usually caused by improper use of HTML markup in the MediaWiki source,
+or inadvertently starting a line with a space character (in MediaWiki this starts a preformatted block)
+		</echo>
+
+		<!--
+		Don't bother with DTD validation: we only care if the files are well-formed.
+		We therefore provide an empty DTD 
+		-->
+		<echo file="tmp/__empty.dtd" message=""/>
+		<xmlvalidate lenient="true">
+			<fileset dir="${basedir}">
+				<include name="**/*.xml"/>
+				<include name="**/*.html"/>
+			</fileset>
+			<dtd publicid="-//W3C//DTD XHTML 1.0 Transitional//EN" location="${basedir}/tmp/__empty.dtd"/>
+		</xmlvalidate>
+	</target>
+</project>

@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracker Configuration Editor
+Bundle-SymbolicName: com.verticon.tracker.configuration.editor; singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Activator: com.verticon.tracker.configuration.editor.internal.Activator
+Bundle-Vendor: Verticon, Inc.
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: com.verticon.osgi.metatype,
+ com.verticon.osgi.metatype.presentation,
+ com.verticon.osgi.metatype.presentation.extended,
+ com.verticon.osgi.metatype.util,
+ com.verticon.tracker.configuration,
+ org.eclipse.core.resources,
+ org.eclipse.emf.common.command,
+ org.eclipse.emf.common.ui,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.resource.impl,
+ org.eclipse.emf.ecore.util,
+ org.eclipse.emf.edit.command,
+ org.eclipse.emf.edit.domain,
+ org.osgi.service.metatype;version="1.1.0",
+ org.slf4j;version="1.5.11"

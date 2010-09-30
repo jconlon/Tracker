@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rmap
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.eclipse.org/buckminster/RMap-1.0"
+	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0"
+	xmlns:mp="http://www.eclipse.org/buckminster/MavenProvider-1.0"
+	xmlns:pp="http://www.eclipse.org/buckminster/PDEMapProvider-1.0">
+	<!-- Place your RMAP content here -->
+	<searchPath name="default">
+    <provider
+     readerType="svn"
+     componentTypes="eclipse.feature,osgi.bundle,buckminster"
+     source="true">
+      <uri
+       format=" https://verticon.sourcerepo.com/verticon/Tracker/tracker/trunk/{0}">
+        <bc:propertyRef key="buckminster.component" />
+      </uri>
+    </provider>
+    
+    <!-- Many of the Verticon features follow a naming convention where the 
+    feature ID is different than the name of the component project name. This
+    convention uses the branding plugin as the ID.  The project name is then
+    the ID + '.feature' -->
+    <provider
+     readerType="svn"
+     componentTypes="eclipse.feature"
+     source="true">
+      <uri
+       format=" https://verticon.sourcerepo.com/verticon/Tracker/tracker/trunk/{0}.feature">
+        <bc:propertyRef key="buckminster.component" />
+      </uri>
+    </provider>
+   
+  </searchPath>
+  
+  <searchPath name="slf">
+		<!--
+			Let's try orbit first and then maven. The componentTypes will discriminate and
+			make it quick.
+		-->
+		<provider xsi:type="mp:MavenProvider" readerType="maven2" componentTypes="maven" mutable="false"
+			source="false">
+			<uri format="http://repo1.maven.org/maven2/org/slf4j" />
+		</provider>
+  </searchPath>
+	
+	
+ 
+  
+  <locator searchPathRef="default" pattern="^org\.eclipse\.emf\.ocl\.examples\.interpreter"/>
+  <locator searchPathRef="slf" pattern="^slf4j\..*" />
+  <locator searchPathRef="default" pattern="^com\.verticon\..*" />
+  <locator searchPathRef="default" pattern="^net\.sf\.bluecove" />
+  <locator searchPathRef="default" pattern="^org\.apache\.poi"/>
+  
+  <!--redirect href="http://www.eclipse.org/buckminster/samples/rmaps/dogfood2.rmap" pattern=".*"/-->
+  <redirect href="dogfood3.rmap?format=raw" pattern=".*"/>
+</rmap>
+

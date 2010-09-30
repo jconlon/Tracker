@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="%category.description.0"
+            id="com.verticon.tracker.fair.poi.category"
+            name="%category.name.0">
+      </category>
+      
+      <command
+             id="com.verticon.tracker.fair.poi.commands.fairData.import.command"
+             categoryId="com.verticon.tracker.fair.poi.category"
+             description="%command.description.0"
+             name="%command.name.0">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      
+       <menuContribution
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+               <command
+                     commandId="com.verticon.tracker.fair.poi.commands.fairData.import.command"
+                     icon="icons/etool16/import_wiz.gif"
+                     style="push">
+               <visibleWhen>
+                       
+		               <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+		                      <adapt type="org.eclipse.core.resources.IResource">
+		          					<test property="org.eclipse.core.resources.name" 
+		               				 value="*.xls"/>
+		      				 </adapt>
+		                  </iterate>
+		               </with>
+		               
+		               
+	            </visibleWhen>
+               </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.verticon.tracker.fair.poi.handlers.XlsFairImportHandler"
+            commandId="com.verticon.tracker.fair.poi.commands.fairData.import.command">
+         <activeWhen>
+            <with
+                  variable="activeEditor">
+               <instanceof
+                     value="com.verticon.tracker.fair.editor.presentation.FairEditor">
+               </instanceof>
+            </with>
+         </activeWhen>
+      </handler>
+   </extension>
+
+ <extension
+         point="org.eclipse.ui.exportWizards">
+      <category
+            id="com.verticon.tracker.export.category" name="%category.name.1"/>
+      
+       <wizard
+            category="com.verticon.tracker.export.category"
+            class="com.verticon.tracker.fair.poi.presentation.ExportXlsWizard:RAW"
+            icon="$nl$/icons/etool16/export_wiz.gif"
+            id="com.verticon.tracker.export.xls.wizard1"
+            name="%wizard.name.0">
+         <description>
+            %wizard.description.0
+         </description>
+         <selection class="org.eclipse.core.resources.IResource" name="*.fair"/>
+      </wizard>
+   </extension> 
+</plugin>
