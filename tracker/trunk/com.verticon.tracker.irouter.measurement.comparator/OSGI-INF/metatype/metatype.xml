@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0">
+
+  <OCD description="Compares two measurements. Produces a state with a negative integer, zero, or a positive integer if the first measurement is less than, equal to, or greater than the second measurement." 
+       name="Measurement Comparator" id="com.verticon.tracker.irouter.measurement.comparator">
+   
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" required="true" type="String" default=""
+        description="Name of the group of components that will be wired together."/>
+    
+    <AD name="Consumable scope" id="wireadmin.consumer.scope" type="String"
+		cardinality="2" 
+		description="The two input measurements to compare. (Use full scope names)" />
+ 
+    <AD name="Producer scope" id="wireadmin.producer.scope" type="String"
+		cardinality="1" 
+		description="The result product output state. (Use full scope name)" />
+ 
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.measurement.comparator" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.measurement.comparator"/>
+  </Designate>
+  
+  
+</metatype:MetaData>
