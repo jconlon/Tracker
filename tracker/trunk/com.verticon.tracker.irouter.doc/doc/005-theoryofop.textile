@@ -48,25 +48,13 @@ The following Measurement Converters are included:
 ** Consumes one measurement input
 ** Produces a measurement from the input and an arithmetic calculation
 
-h4. State Converters
+h4. State Detectors
 
-State converters convert one state to another based on an arithmetic calculation or some other relationship. 
-
-The following State Converters are included: 
-* Simple State Converter
-** Consumes one state input
-** Produces a state from the input based on arithmetic or time calculation
-* Composite State Converter
-** Consumes two states
-** Produces third state type based on relationship of the two inputs
-
-h4. Flow control
-
-Flow control components stop or start the exchange of data based on some criteria. The following flow control components are included:
-* Measurement Latch
-** One or more measurements are buffered and sent out only on the reception of a state
-* Measurement Trigger
-** State is produced based on the relationship of two measurements
+State detector components produce a state based on some criteria. The following state detectors components are included:
+* Measurement Comparator
+** State is produced based on the comparison of two measurements.
+*** Produces a state with a negative integer, zero, or a positive integer if the first measurement is less than, equal to, or greater than the second measurement.
+*** If the states are unequal or incompatible creates a state with an Integer.MIN value.
   
 h3. Collaborating wire groups
 
