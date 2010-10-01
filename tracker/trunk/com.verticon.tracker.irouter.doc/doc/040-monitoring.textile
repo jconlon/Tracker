@@ -16,7 +16,9 @@ h2. iRouter Monitor view
 
 __Example of the Application monitoring view__
 
-The monitor view is a master-detail view with the master page presenting a graph of iRouter service instances.  Selecting on a node in the graph will show details page of the service containing the sections:
+The monitor view is a master-detail view with the master page presenting a graph of iRouter service instances.  The graph displays the interconnected services as a simplified "Functional Flow Block Diagram.":http://en.wikipedia.org/wiki/Functional_flow_block_diagram  
+
+Selecting a node in the graph will show details page of the service containing the sections:
 * Service Property Details
 ** Showing the static details of the service
 * Status Variables
