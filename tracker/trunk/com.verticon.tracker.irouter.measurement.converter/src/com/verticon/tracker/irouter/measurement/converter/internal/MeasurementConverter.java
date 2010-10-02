@@ -48,8 +48,17 @@ public class MeasurementConverter implements Consumer, Producer, Monitorable {
 	private final AtomicInteger producersConnected = new AtomicInteger(0);
 	private final AtomicInteger totalMeasurements = new AtomicInteger(0);
 	private volatile Measurement lastMeasurement = null;
+
 	   
-	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "MeasurementConverter [pid=" + getPid() + "]";
+	}
 	
 	/**
 	 * Declaratives Services activation of instance.
@@ -58,10 +67,8 @@ public class MeasurementConverter implements Consumer, Producer, Monitorable {
 	 */
     void activate(Map<String,Object> config){
     	this.config=config;
-    	
-		for (Map.Entry<String, Object> entry : config.entrySet()) {
-			logger.debug(bundleMarker, "Property key={} value={}",entry.getKey(),entry.getValue());
-		}
+    	logger.debug(bundleMarker, "{} activating properties={}",
+				this, config);
 			logger.debug(bundleMarker,"Activating {}",this);		
 	}
     
@@ -89,7 +96,7 @@ public class MeasurementConverter implements Consumer, Producer, Monitorable {
 	 */
     void deactivate(){
     	this.config.clear();
-		logger.debug(bundleMarker,"deactivating {}",this);
+		logger.debug(bundleMarker,"{} deactivating",this);
 	}
 
 	
@@ -100,7 +107,7 @@ public class MeasurementConverter implements Consumer, Producer, Monitorable {
 
 	@Override
 	public void consumersConnected(Wire[] wires) {
-		logger.debug(bundleMarker,"Invoked consumersConnected with wires={}",
+		logger.debug(bundleMarker, "{} consumersConnected with wires={}", this,
 				Arrays.toString(wires));
 		this.wires = wires;
 	}
@@ -113,20 +120,24 @@ public class MeasurementConverter implements Consumer, Producer, Monitorable {
 			if(envelope.getValue() instanceof Measurement){
 				convert((Measurement)envelope.getValue());
 			}else{
-				logger.error(bundleMarker, 
-						"Unknown value={} was received from envelope outputScope={}",in, 
-						Arrays.toString(wire.getScope()));
+				logger.error(
+						bundleMarker,
+						"{} consumed unknown value={} from envelope outputScope={}",
+						new Object[] { this, in,
+								Arrays.toString(wire.getScope()) });
 			}
 		} else {
-			logger.error(bundleMarker, 
-			"Unknown object={} was received from wire outputScope={}",in, 
-			Arrays.toString(wire.getScope()));
+			logger.error(
+					bundleMarker,
+					"{} consumed unknown value={} from envelope outputScope={}",
+					new Object[] { this, in,
+							Arrays.toString(wire.getScope()) });
 		}
 	}
 
 	@Override
 	public void producersConnected(Wire[] wires) {
-		logger.debug(bundleMarker,"Invoked producersConnected with wires={}",
+		logger.debug(bundleMarker, "{} producersConnected with wires={}", this,
 				Arrays.toString(wires));
 		producersConnected.set(wires.length);
 	}
@@ -169,7 +180,7 @@ public class MeasurementConverter implements Consumer, Producer, Monitorable {
 	}
 	
 	private String getPid(){
-		return (String)config.get("service.pid");
+		return config!=null?(String)config.get("service.pid"):"null";
 	}
 
 	private String getOutputScope(){
