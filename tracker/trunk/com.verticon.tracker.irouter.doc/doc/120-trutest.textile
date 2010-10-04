@@ -1,22 +1,36 @@
 h1. TruTest Feature
 
-The TruTest feature is an iRouter feature containing a proxy component factory that creates user configurable services instances[14] for interfacing with TruTest animal scale-heads[15].
+The TruTest feature is an iRouter feature containing a proxy component factory and TruTest specific business logic component Factories that creates user configurable services instances[14] for interfacing with TruTest animal scale-heads[15].
 
-h2. Consumer Scopes
+h2. Proxy Component Factory
+
+h3. Consumer Scopes
 
 TruTest Service Instances consume wireAdmin products that are produced by other iRouter service instances. TruTest Service Instances consumables are c and are identified with the following scope id:
 # trutest.command.string
 
-h2. Producer Scopes
+h3. Producer Scopes
 
 TruTest Service Instances produce wireAdmin products that are consumed by business logic and logging components. TruTest Service Instances products are weights, tag numbers, and transaction state. They are identified with the following scope ids:
 # transaction.state
 # animal.tag.number
 # animal.weight.measurement
 
-h2. Service Diagram
+h3. Service Diagram
 
 !{padding-left:3em}images/trutestComponent.png!
+
+h2. Business Logic Component Factories
+
+h3. Measurement Adapter
+
+Measurement Adapter is a Measurement Consumer and a TruTest Command producer. It consumes Measurements and converts them into TruTest commands for displaying the Measurement values in fields on a TruTest Indicator.  
+
+h3. Alarm Adapter
+
+Alarm Adapter is a State Consumer and a TruTest Command producer. It consumes States and converts them into TruTest commands to turn on and off the alarm in a TruTest Indicator.  
+
+Reception of a distinct state sends commands to the TruTest Proxy service instances to turn on the alarm, while reception of any other state sends commands to the TruTest Proxy service instance to turn the alarm off.
 
 h2. Notes
 
