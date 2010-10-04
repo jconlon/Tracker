@@ -263,7 +263,7 @@ public class AlarmAdapter implements Consumer, Producer, Monitorable {
 		if (CONNECTED_CONSUMERS_COUNT.equals(name)) {
 			return "The number of connected consumer wires.";
 		} else if (CONNECTED_PRODUCERS_COUNT.equals(name)) {
-			return "The number of producers connected to this converter.";
+			return "The number of producers connected to this adapter.";
 		} else if (TIME_OF_LAST_ALARM.equals(name)) {
 			return "The last time the alarm was given.";
 		} else if (TOTAL_ALARMS_SENT.equals(name)) {
