@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.0.0">
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
 
-  <OCD description="Adapts input measurements for display on TruTest Indicatos." 
+  <OCD description="Adapts input measurements for display on TruTest Indicators." 
        name="TruTest Measurement Adapter" id="om.verticon.tracker.irouter.trutest.measurement.adapter">
    
     <AD name="Wiring group name"  id="tracker.wiring.group.name" required="true" type="String" default=""
