@@ -23,6 +23,17 @@ The measurement arriving on the first configured consumer scope is compared with
 * Zero if the first measurement is equal than the second
 * Positive integer if the first measurement is greater than the second measurement.
 * Integer.MIN if the states are unequal or incompatible.
+
+h3. Flow Terminator
+
+A generic business logic Component Factory that creates services that pass through or terminate the flow of information across the service. Flow control turned on or off based on a distinct State received on a secondary control scope.
+
+Two scopes are consumed:
+# Information scope that contains information flowing across the service
+# Control scope that contains control states that enable or disable (terminate) the flow of the information flowing.
+
+One scope is produced:
+# Pass through of the consumed Information scope.
   
 h3. BW Control
 
