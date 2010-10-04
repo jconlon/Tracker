@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="Flow Terminator" id="com.verticon.tracker.irouter.flow.terminator"
+       description="Information flow control service, that terminates flow of information based on state received on the control scope." 
+       >
+   
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" required="true" type="String" default=""
+        description="Name of the group of components that will be wired together."/>
+    
+    <AD name="Information and Control Consumable scope" id="wireadmin.consumer.scope" type="String"
+		cardinality="2" 
+		description="Names of the information scope and flow control scope consumed by this service. Only the information scope will be passed through when flow is unterminated. (Use full scope names)" />
+   
+    <AD name="Flow Control Trigger scope" id="trigger.scope" type="String" 
+        default="flow.control.scope"
+		description="Name of the flow control scope from the previous consumbable scopes list." />
+		
+    <AD name="Flow Terminator State Name"  
+        id="terminator.state.name" required="true" type="String" 
+    	description="The name of the state that terminates information flow."/>
+    	
+     <AD name="Flow Terminator State Value"  
+        id="terminator.state.value" required="true" type="Integer" 
+    	description="The value of the state that terminates information flow."/>
+    	
+	<AD name="Information Producer scope" id="wireadmin.producer.scope" type="String"
+		cardinality="1" 
+		description="The scope containing information flowing from the information consumbable scope . (Use full scope names)" />
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.flow.terminator" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.flow.terminator"/>
+  </Designate>
+  
+  
+</metatype:MetaData>
