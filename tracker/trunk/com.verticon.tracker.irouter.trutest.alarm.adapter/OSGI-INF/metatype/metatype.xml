@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD description="Adapts input states for turning on the alarm on TruTest Indicators." 
+       name="TruTest Alarm Adapter" id="com.verticon.tracker.irouter.trutest.alarm.adapter">
+   
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" required="true" type="String" default=""
+        description="Name of the group of components that will be wired together."/>
+    
+    <AD name="Consumable scope" id="wireadmin.consumer.scope" type="String"
+		cardinality="1" 
+		description="The input state scope to adapt. (Use full scope names)" />
+ 
+    <AD name="Producer scope" id="wireadmin.producer.scope" type="String"
+		cardinality="1" 
+		description="The adapted TruTest command product output. (Use full scope names)" />
+ 
+    <AD name="Alarm duration"  
+        id="alarm.duration" required="false" type="Integer" 
+    	default="500"
+    	description="The time duration of the audible tone in milliseconds."/>
+    
+    <AD name="Alarm interval in seconds"  
+        id="alarm.interval" required="false" type="Long" 
+        default="5"
+        description="Time in seconds between audible alarms."/>
+        
+    <AD name="Alarm State Name"  
+        id="alarm.state.name" required="true" type="String" 
+    	description="The name of the state that turns on an alarm."/>
+    	
+     <AD name="Alarm State Value"  
+        id="alarm.state.value" required="true" type="Integer" 
+    	description="The value of the state that turns on an alarm."/>
+    	
+	
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.trutest.alarm.adapter" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.trutest.alarm.adapter"/>
+  </Designate>
+  
+  
+</metatype:MetaData>
