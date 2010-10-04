@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+    activate="startup" name="com.verticon.tracker.irouter.trutest.alarm.adapter.test.system">
+   <implementation 
+    class="com.verticon.tracker.irouter.trutest.alarm.adapter.test.system.internal.AlarmAdapterSystemTest"/>
+   <reference bind="setProducer" cardinality="1..1" interface="org.osgi.service.wireadmin.Producer" 
+     name="Producer" policy="static" target="(service.pid=alarm.converter.mockProducer)"/>
+   <reference bind="setConfigAdmin" cardinality="1..1" interface="org.osgi.service.cm.ConfigurationAdmin" 
+      name="ConfigurationAdmin" policy="static"/>
+   <reference bind="setConsumer" cardinality="1..1" interface="org.osgi.service.wireadmin.Consumer" 
+      name="Consumer" policy="static" target="(service.pid=alarm.converter.mockConsumer)"/>
+</scr:component>
