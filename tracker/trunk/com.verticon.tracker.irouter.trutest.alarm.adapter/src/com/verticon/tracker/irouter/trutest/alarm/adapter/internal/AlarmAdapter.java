@@ -198,7 +198,7 @@ public class AlarmAdapter implements Consumer, Producer, Monitorable {
 	private void produce() {
 		if (wires != null) {
 
-			logger.debug("{}: Producing {} for {} wires", new Object[] { this,
+			logger.debug(bundleMarker, "{}: Producing {} for {} wires", new Object[] { this,
 					alarmCommand, wires.length });
 
 			for (Wire wire : wires) {
