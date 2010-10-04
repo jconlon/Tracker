@@ -33,7 +33,7 @@ import com.verticon.tracker.irouter.common.TrackerConstants;
  * MeasurementAdapter is a Measurement Consumer and a TruTest Command producer.
  * 
  * This system test is a JUnit Plugin test that uses a Mock Producer to generate
- * measurements, ahd a Mock Consumer to receive transformed measurements.
+ * measurements, and a Mock Consumer to receive adapted commands.
  * 
  * This system test uses both JUnit Plugin framework and a Declarative Services
  * specification to inject the MockProducer. Use of both of these frameworks
@@ -50,7 +50,7 @@ public class MeasurementAdapterSystemTest extends TestCase {
 
 	private static final String ADAPTED_COMMANDS = "adapted.commands";
 	private static final String INPUT_MEASUREMENT = "input.measurement";
-	static String PLUGIN_ID = "com.verticon.tracker.irouter.measurement.converter.test.system";
+	static String PLUGIN_ID = "com.verticon.tracker.irouter.trutest.measurement.adapter.test.system";
 
 	private static final String MIN_CHARACTERS = "minimuim.characters";
 	private static final String PRESENTATION_UNITS = "presentation.units";
@@ -163,8 +163,8 @@ public class MeasurementAdapterSystemTest extends TestCase {
 		ServiceReference refs[] = context.getServiceReferences(
 				Monitorable.class.getName(),
 				"(trutest.measurement.adapter.test=instance)");
-		assertNotNull("No MeasurementConverter Monitorable service found", refs);
-		assertTrue("No MeasurementConverter Monitorable service found",
+		assertNotNull("No MeasurementAdapter Monitorable service found", refs);
+		assertTrue("No MeasurementAdapter Monitorable service found",
 				refs.length == 1);
 		ServiceReference monRef = refs[0];
 		pid = (String) monRef.getProperty("service.pid");
