@@ -24,6 +24,18 @@ The measurement arriving on the first configured consumer scope is compared with
 * Positive integer if the first measurement is greater than the second measurement.
 * Integer.MIN if the states are unequal or incompatible.
 
+h3. Measurement Trigger
+
+A generic business logic Component Factory that creates services to inspect measurements for conditions and produce a state if specific conditions are met. Two inspection conditions are supported:
+# Rising Threshold condition will send a trigger state when a sequence of measurements pass through a range of values less than or equal to specified low value up to a value equal to or greater than a specified high value.
+# Falling Threshold condition will send a trigger state when a sequence of measurements pass through a range of values from greater than or equal to specified high value back to a value equal to or less than a specified low value.
+
+The Trigger State will have the following attributes:
+* Name
+** com.verticon.tracker.irouter.measurement.trigger
+* Value
+** 2
+
 h3. Flow Terminator
 
 A generic business logic Component Factory that creates services that pass through or terminate the flow of information across the service. Flow control turned on or off based on a distinct State received on a secondary control scope.
