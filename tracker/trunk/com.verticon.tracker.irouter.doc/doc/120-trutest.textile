@@ -26,6 +26,10 @@ h3. Measurement Adapter
 
 Measurement Adapter is a Measurement Consumer and a TruTest Command producer. It consumes Measurements and converts them into TruTest commands for displaying the Measurement values in fields on a TruTest Indicator.  
 
+h3. EID Adapter
+
+EID Adapter is a Animal ID(Identification) number Consumer and a TruTest Command producer. It consumes Animal IDs and converts them into TruTest commands for inputing EID(Electronic animal IDentification) values to a TruTest Indicator.  
+
 h3. Alarm Adapter
 
 Alarm Adapter is a State Consumer and a TruTest Command producer. It consumes States and converts them into TruTest commands to turn on and off the alarm in a TruTest Indicator.  
