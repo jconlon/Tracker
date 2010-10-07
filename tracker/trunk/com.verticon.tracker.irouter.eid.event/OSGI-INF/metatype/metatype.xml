@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
 
-  <OCD name="EID Reader Gateway" id="com.verticon.tracker.irouter.eid.event"
+  <OCD name="Premises EID Reader Gateway" id="com.verticon.tracker.irouter.eid.event"
        description="Gateway between Tracker Premises RFID readers and iRouter. Picks up tag id reads from configured readers and produces iRouter animal ids." 
        >
    
