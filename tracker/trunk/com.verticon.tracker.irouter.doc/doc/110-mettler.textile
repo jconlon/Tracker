@@ -1,4 +1,4 @@
-h1. Mettler Feature
+h1. Mettler Proxy Feature
 
 The Mettler feature is an iRouter feature containing a proxy component factory that creates user configurable services instances[11] for interfacing with Mettler weight balance sensors[12]. 
 
