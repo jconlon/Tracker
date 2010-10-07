@@ -24,11 +24,11 @@ import org.slf4j.MarkerFactory;
 /**
  * 
  * AlarmAdapter is a State Consumer and a TruTest Command producer. It consumes
- * States and adapts them to TruTest commands to turn on and off the alarm
- * in a TruTest Indicator.  
+ * States and adapts them to TruTest commands to turn on and off the alarm in a
+ * TruTest Indicator.
  * 
- * Reception of a distinct state turns on the alarm, while reception of any other
- * state turns the alarm off.
+ * Reception of a distinct state turns on the alarm, while reception of any
+ * other state turns the alarm off.
  * 
  * 
  * @author jconlon
@@ -63,15 +63,15 @@ public class AlarmAdapter implements Consumer, Producer, Monitorable {
 	private ScheduledExecutorService scheduler = null;
 	private ScheduledFuture<?> alarm = null;
 	private State onState = null;
-//	private String stateName = null;
-//	private Integer stateValue = null;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "AlarmAdapter [pid=" + getPid()+", state=" + onState + "]";
+		return "AlarmAdapter [pid=" + getPid() + ", state=" + onState + "]";
 	}
 
 	private String getPid() {
@@ -120,7 +120,7 @@ public class AlarmAdapter implements Consumer, Producer, Monitorable {
 
 	@Override
 	public synchronized Object polled(Wire wire) {
-		return lastAlarmTime;
+		return alarmCommand;
 	}
 
 	@Override
@@ -159,9 +159,8 @@ public class AlarmAdapter implements Consumer, Producer, Monitorable {
 	}
 
 	private void processState(State state) {
-		logger.debug(bundleMarker, "{} processing state={}", this,
-				state);
-		if (onState.equals(state)){
+		logger.debug(bundleMarker, "{} processing state={}", this, state);
+		if (onState.equals(state)) {
 			turnOnAlarm();
 		} else {
 			turnOffAlarm();
@@ -182,15 +181,15 @@ public class AlarmAdapter implements Consumer, Producer, Monitorable {
 		logger.debug(bundleMarker, "{} turning on alarm", this);
 		lastAlarmTime = System.currentTimeMillis();
 		totalCommands.incrementAndGet();
-		int interval = (Integer) config.get(ALARM_INTERVAL);
-		alarm = scheduler.scheduleAtFixedRate(new Alarm(), 0,
-				new Long(interval), TimeUnit.SECONDS);
+		Integer interval = (Integer) config.get(ALARM_INTERVAL);
+		alarm = scheduler.scheduleAtFixedRate(new Alarm(), 0, interval,
+				TimeUnit.SECONDS);
 	}
 
 	private void turnOffAlarm() {
 		if (alarm != null) {
 			alarm.cancel(true);
-		}else{
+		} else {
 			logger.debug(bundleMarker, "{} alarm is already off", this);
 		}
 	}
@@ -198,8 +197,8 @@ public class AlarmAdapter implements Consumer, Producer, Monitorable {
 	private void produce() {
 		if (wires != null) {
 
-			logger.debug(bundleMarker, "{}: Producing {} for {} wires", new Object[] { this,
-					alarmCommand, wires.length });
+			logger.debug(bundleMarker, "{}: Producing {} for {} wires",
+					new Object[] { this, alarmCommand, wires.length });
 
 			for (Wire wire : wires) {
 				wire.update(alarmCommand);
@@ -207,8 +206,8 @@ public class AlarmAdapter implements Consumer, Producer, Monitorable {
 
 		} else {
 			logger.warn(bundleMarker,
-					"{} defered sending {} because there are no wires",
-					new Object[] { this, alarmCommand, wires.length });
+					"{} defered sending {} because there are no wires", this,
+					alarmCommand);
 		}
 	}
 
