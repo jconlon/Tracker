@@ -166,7 +166,7 @@ public class EIDAdapter implements Consumer, Producer, Monitorable {
 		} else {
 			logger.warn(bundleMarker,
 					"{} defered sending {} because there are no wires",
-					new Object[] { this, commands, wires.length });
+					this, commands);
 		}
 
 	}
