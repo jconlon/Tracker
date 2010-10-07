@@ -20,10 +20,10 @@ import org.slf4j.MarkerFactory;
 
 /**
  * 
- * FlowTerminator is a Information flow control service, that terminates flow 
- * of information based on state received on the control scope.
+ * FlowTerminator is a Information flow control service, that terminates flow of
+ * information based on state received on the control scope.
  * 
- * Reception of a distinct state terminates flow between input and output, while 
+ * Reception of a distinct state terminates flow between input and output, while
  * reception of any other state resumes the flow.
  * 
  * 
@@ -35,7 +35,7 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 	private static final String CONNECTED_CONSUMERS_COUNT = "producer.Connected_Consumers";
 	private static final String TIME_OF_LAST_TERMINATION = "producer.Last_Termination";
 	private static final String TOTAL_TERMINATIONS = "producer.Total_Terminations";
-	
+
 	private static final String FLOW_CONTROL_SCOPE = "flow.control.scope";
 	private static final String TERMINATOR_STATE_NAME = "terminator.state.name";
 	private static final String TERMINATOR_STATE_VALUE = "terminator.state.value";
@@ -57,21 +57,22 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 	private final AtomicBoolean forwarding = new AtomicBoolean(true);
 	private volatile long lastTerminationTime = 0;
 
-	
 	private State terminatingState = null;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "FlowTerminator [pid=" + getPid()+", state=" + terminatingState +", forwarding=" + forwarding + "]";
+		return "FlowTerminator [pid=" + getPid() + ", state="
+				+ terminatingState + ", forwarding=" + forwarding + "]";
 	}
 
 	private String getPid() {
 		return config != null ? (String) config.get("service.pid") : "null";
 	}
-
 
 	/**
 	 * Declaratives Services activation of instance.
@@ -84,8 +85,6 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 		logger.debug(bundleMarker, "{} activating properties={}", this, config);
 		terminatingState = buildState();
 	}
-
-	
 
 	/**
 	 * Declaratives Services activation of instance.
@@ -115,7 +114,7 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 	public void updated(Wire wire, Object in) {
 		if (in instanceof Envelope) {
 			Envelope envelope = (Envelope) in;
-			if(envelope.getScope().equals((config.get(FLOW_CONTROL_SCOPE)))){
+			if (envelope.getScope().equals((config.get(FLOW_CONTROL_SCOPE)))) {
 				if (envelope.getValue() instanceof State) {
 					processState((State) envelope.getValue());
 				} else {
@@ -125,10 +124,10 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 							new Object[] { this, in,
 									Arrays.toString(wire.getScope()) });
 				}
-			}else{
+			} else {
 				forward(in);
 			}
-			
+
 		} else {
 			forward(in);
 		}
@@ -142,9 +141,8 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 	}
 
 	private void processState(State state) {
-		logger.debug(bundleMarker, "{} processing state={}", this,
-				state);
-		if (terminatingState.equals(state)){
+		logger.debug(bundleMarker, "{} processing state={}", this, state);
+		if (terminatingState.equals(state)) {
 			forwarding.set(false);
 			totalTerminations.incrementAndGet();
 			lastTerminationTime = System.currentTimeMillis();
@@ -159,15 +157,16 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 	}
 
 	private void forward(Object in) {
-		if(!forwarding.get()){
-			logger.debug(bundleMarker, "{}: flow ternminated. Will not forward {} to {} wires", new Object[] { this,
-					in, wires.length });
+		if (!forwarding.get()) {
+			logger.debug(bundleMarker,
+					"{}: flow ternminated. Will not forward {} to {} wires",
+					new Object[] { this, in, wires.length });
 			return;
 		}
 		if (wires != null) {
 
-			logger.debug(bundleMarker, "{}: forwarding {} to {} wires", new Object[] { this,
-					in, wires.length });
+			logger.debug(bundleMarker, "{}: forwarding {} to {} wires",
+					new Object[] { this, in, wires.length });
 
 			for (Wire wire : wires) {
 				wire.update(in);
@@ -175,8 +174,8 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 
 		} else {
 			logger.warn(bundleMarker,
-					"{} defered sending {} because there are no wires",
-					new Object[] { this, in, wires.length });
+					"{} defered sending {} because there are no wires", this,
+					in);
 		}
 	}
 
@@ -199,8 +198,8 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 					producersConnected.get());
 		} else if (TIME_OF_LAST_TERMINATION.equals(name)) {
 			return new StatusVariable(name, StatusVariable.CM_DER,
-					lastTerminationTime == 0 ? new Date(lastTerminationTime).toString()
-							: "");
+					lastTerminationTime == 0 ? new Date(lastTerminationTime)
+							.toString() : "");
 		} else if (TOTAL_TERMINATIONS.equals(name)) {
 			return new StatusVariable(name, StatusVariable.CM_CC,
 					totalTerminations.get());
@@ -240,5 +239,4 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 		return null;
 	}
 
-	
 }
