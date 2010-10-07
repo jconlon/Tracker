@@ -20,8 +20,7 @@ import org.slf4j.MarkerFactory;
 
 /**
  * 
- * MeasurementAdapter is a Measurement Consumer and a TruTest Command producer
- * .
+ * MeasurementAdapter is a Measurement Consumer and a TruTest Command producer .
  * It consumes Measurements and converts them into TruTest commands to display
  * the Measurement values in TruTest Indicator fields.
  * 
@@ -70,8 +69,8 @@ public class MeasurementAdapter implements Consumer, Producer, Monitorable {
 		return "MeasurementAdapter [pid=" + getPid() + "]";
 	}
 
-	private String getPid(){
-		return config!=null?(String)config.get("service.pid"):"null";
+	private String getPid() {
+		return config != null ? (String) config.get("service.pid") : "null";
 	}
 
 	/**
@@ -182,8 +181,8 @@ public class MeasurementAdapter implements Consumer, Producer, Monitorable {
 
 		} else {
 			logger.warn(bundleMarker,
-					"{} defered sending {} because there are no wires",
-					new Object[] { this, commands, wires.length });
+					"{} defered sending {} because there are no wires", this,
+					commands);
 		}
 
 	}
