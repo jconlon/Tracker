@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="EID Reader Gateway" id="com.verticon.tracker.irouter.eid.event"
+       description="Gateway between Tracker Premises RFID readers and iRouter. Picks up tag id reads from configured readers and produces iRouter animal ids." 
+       >
+   
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" required="true" type="String" default=""
+        description="Name of the group of components that will be wired together."/>
+    
+   	<AD name="Event Topics" id="event.topics" type="String" default="com/verticon/tracker/reader"
+   	    description="Default event topics. Do not change."/>
+   	
+    <AD name="Reader Filter"  
+        id="event.filter" required="true" type="String" default="(com.verticon.tracker.reader.name=*)"
+    	description="Event filter to restrict reception of reads from certain Tracker RFID readers. Example: (com.verticon.tracker.reader.name=*:My Reader Name)"/>
+    	
+	<AD name="Producer scope" id="wireadmin.producer.scope" type="String"
+		cardinality="1" 
+		description="The produced scope containing the animal EIDs. (Use full scope names)" />
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.eid.event" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.eid.event"/>
+  </Designate>
+  
+  
+</metatype:MetaData>
