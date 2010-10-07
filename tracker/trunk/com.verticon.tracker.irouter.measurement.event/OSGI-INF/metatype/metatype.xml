@@ -2,7 +2,7 @@
 <metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
 
   <OCD description="Gateway for sending measurements to Tracker transaction editors." 
-  		name="Measurement Event Gateway" 
+  		name="Premises Measurement Event Gateway" 
   		id="com.verticon.tracker.irouter.measurement.event">
     
     <AD name="Wiring group name"  id="tracker.wiring.group.name" type="String"
