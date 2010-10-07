@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: iRouter EID Reader Gateway System Test
+Bundle-SymbolicName: com.verticon.tracker.irouter.eid.event.test.system
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Service-Component: OSGI-INF/*.xml
+Import-Package: com.verticon.tracker.irouter.common,
+ junit.framework;version="4.8.1",
+ org.osgi.framework;version="1.5.0",
+ org.osgi.service.cm;version="1.2.1",
+ org.osgi.service.event;version="1.2.0",
+ org.osgi.service.monitor;version="1.0.0",
+ org.osgi.service.wireadmin;version="1.0.0",
+ org.osgi.util.measurement;version="1.0.1",
+ org.slf4j;version="1.5.11"
+Export-Package: com.verticon.tracker.irouter.eid.event.test.system
+
