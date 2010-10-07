@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: iRouter EID Reader Gateway
+Bundle-Name: Premises EID Reader Gateway
 Bundle-SymbolicName: com.verticon.tracker.irouter.eid.event
 Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Verticon, Inc.
