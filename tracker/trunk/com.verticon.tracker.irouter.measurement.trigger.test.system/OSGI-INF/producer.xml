@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
-   name="com.verticon.tracker.irouter.measurement.triggertest.system.mock.producer">
+   name="com.verticon.tracker.irouter.measurement.trigger.test.system.mock.producer">
    <implementation 
     class="com.verticon.tracker.irouter.measurement.trigger.test.system.internal.MockProducer"/>
    <property name="tracker.wiring.group.name" type="String" value="test"/>
