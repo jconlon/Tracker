@@ -22,25 +22,23 @@ import org.slf4j.MarkerFactory;
  * 
  * MeasurementTrigger is a generic business logic Component Factory that creates
  * services to inspect measurements for conditions and produce a state if
- * specific conditions are met. 
+ * specific conditions are met.
  * 
- * Two inspection conditions are supported: 
+ * Two inspection conditions are supported:
  * <ol>
  * <li>Rising Threshold condition will send a trigger state when a sequence of
  * measurements pass through a range of values less than or equal to specified
- * low value up to a value equal to or greater than a specified high value.
- * </li>
+ * low value up to a value equal to or greater than a specified high value.</li>
  * <li>Falling Threshold condition will send a trigger state when a sequence of
  * measurements pass through a range of values from greater than or equal to
  * specified high value back to a value equal to or less than a specified low
- * value.
- * </li>
+ * value.</li>
  * </ol>
  * 
- * The Trigger State will have the following attributes: 
+ * The Trigger State will have the following attributes:
  * <ol>
  * <li>Name = com.verticon.tracker.irouter.measurement.trigger</li>
- * <li> Value 2</li>
+ * <li>Value 2</li>
  * </ol>
  * 
  * @author jconlon
@@ -192,8 +190,7 @@ public class MeasurementTrigger implements Consumer, Producer, Monitorable {
 
 		} else {
 			logger.warn(bundleMarker,
-					"{} defered firing {} because there are no wires",
-					new Object[] { this, in, wires.length });
+					"{} defered firing {} because there are no wires", this, in);
 		}
 	}
 
