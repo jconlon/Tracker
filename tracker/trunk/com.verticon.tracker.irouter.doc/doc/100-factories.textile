@@ -57,11 +57,17 @@ _The BW Control is included as an example of a custom Component Factory._
 h3. Measurement Logger
 
 
-h2. Proxy Component Factories
+h2. Proxy and Gateway Component Factories
 
-Proxy Component Factories create services that gateway information between the internal services of an iRouter network to external physical input devices, sensors, displays and actuators. 
+Proxy Component Factories create services that interface with external physical:
+* Input devices, 
+* Sensors, 
+* Displays
+* Actuators. 
 
-Proxy Component Factories are packaged as optional iRouter features. 
+Gateway Component Factories create services that create information gateways between the services running in the iRouter and local services registered in the OSGi framework.
+
+Proxy and Gateway Component Factories are packaged as optional iRouter features. 
 
 
 

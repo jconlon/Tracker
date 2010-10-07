@@ -1,0 +1,17 @@
+h1. Premises Gateway Feature
+
+The Premises Gateway feature is an iRouter feature containing component factories for creating services that facilitate the movement of information between the _iRouter_ and the _Tracker Livestock Business Intelligence Tool_ features.
+
+h2. Measurement Event Gateway Component Factory
+
+Component Factory that creates services that consume iRouter measurements and adds them as __Events__ to Animal Information Documents offered by the "com.verticon.tracker.editor feature.":http://tracker-project.verticon.com/verticon_Tracker/admin/ticket/components/com.verticon.tracker.editor
+
+** Any "SI":http://en.wikipedia.org/wiki/SI measurements originating from iRouter network attached physical sensors or internal iRouter business logic services can be saved as an __Animal History Event__ in a Tracker Premises documents.
+
+h2. EID Reader Gateway Component Factory
+
+Component Factory that creates services that produce Animal EID numbers from RFID reader devices offered by the "com.verticon.tracker.reader feature.":http://tracker-project.verticon.com/verticon_Tracker/admin/ticket/components/com.verticon.tracker.reader
+
+* Any RFID Reader or Readers configured for the Tracker can be used to produce animal ID numbers for use by any iRouter services or any external physical actuators attached to the iRouter network.
+
+
