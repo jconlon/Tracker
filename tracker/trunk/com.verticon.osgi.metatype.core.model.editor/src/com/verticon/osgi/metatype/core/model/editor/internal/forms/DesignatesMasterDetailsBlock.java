@@ -58,6 +58,7 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
+import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -190,6 +191,28 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 		});
 		masterViewer.setContentProvider(treeContentProvider);
 		masterViewer.setLabelProvider(new TreeLabelProviderImpl());
+		masterViewer.setSorter(new ViewerSorter(){
+
+			/* (non-Javadoc)
+			 * @see org.eclipse.jface.viewers.ViewerComparator#compare(org.eclipse.jface.viewers.Viewer, java.lang.Object, java.lang.Object)
+			 */
+			@Override
+			public int compare(Viewer viewer, Object e1, Object e2) {
+				if((e1 instanceof Designate)&& (e2 instanceof Designate)){
+					Designate d1 = (Designate)e1;
+					Designate d2 = (Designate)e2;
+					if(Utils.isTemplate(d1)&& Utils.isTemplate(d2)){
+						try {
+							String n1 = getName(d1,getMetaData());
+							String n2 = getName(d2,getMetaData());
+							return n1.compareTo(n2);
+						} catch (ConfigurationException e) {
+							logger.warn(bundleMarker, "Failed compare",e);
+						}
+					}
+				}
+				return super.compare(viewer, e1, e2);
+			}});
 		
 		setInput();
 
