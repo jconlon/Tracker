@@ -10,7 +10,7 @@
  *******************************************************************************/
 package com.verticon.tracker.reader.eventadmin;
 import static com.verticon.tracker.reader.ReaderPlugin.bundleMarker;
-
+import static com.verticon.tracker.editor.util.TrackerEditorConstants.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +31,6 @@ import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Tag;
-import com.verticon.tracker.editor.util.TrackerEditorConstants;
 import com.verticon.tracker.reader.IReader;
 import com.verticon.tracker.reader.ReaderPlugin;
 
@@ -90,11 +89,12 @@ public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
 		}
 		Map<String, Object> table = new HashMap<String, Object>();
 		// FIXME Ticket 280 should not send a mutable object as a property
-		table.put(TrackerEditorConstants.EVENT_ADMIN_PROPERTY_ANIMAL_TEMPLATE,
+		table.put(EVENT_ADMIN_PROPERTY_ANIMAL_TEMPLATE,
 				templateAnimal);
 		table.put(Constants.BUNDLE_SYMBOLICNAME, ReaderPlugin.getDefault().getSymbolicName());
-		table.put(TrackerEditorConstants.EVENT_ADMIN_PROPERTY_READER_NAME, reader
+		table.put(EVENT_ADMIN_PROPERTY_READER_NAME, reader
 				.toString());
+		table.put(EVENT_ADMIN_PROPERTY_ANIMAL_ID, tagId);
 		
 		EventAdmin ea = ReaderPlugin.getDefault().getService();
 		
@@ -103,7 +103,7 @@ public class EventPublisher implements ITagIdPublisher, IResourceChangeListener{
 			// postEvent call
 			ea.sendEvent(
 					new Event(
-							TrackerEditorConstants.EVENT_ADMIN_TOPIC_READER, table));
+							EVENT_ADMIN_TOPIC_READER, table));
 		}else{
 			logger.warn(bundleMarker,"{} failed to find EventAdmin service",reader);
 		}

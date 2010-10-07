@@ -179,10 +179,6 @@ public class ConnectionReaderTask implements Callable<RefreshableReader> {
 		}
 
 		ConnectorService cs = (ConnectorService) bundleContext.getService(sr);
-		
-		if (sr == null) {
-			throw new IOException("Failed to find a ConnectorService.");
-		}
 
 		return cs;
 
