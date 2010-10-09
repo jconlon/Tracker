@@ -67,7 +67,9 @@ public class ConfigurationImportHandler extends AbstractHandler {
 			importConfiguration(selected);
 			MessageDialog.openConfirm(HandlerUtil.getActiveShell(event),
 					"Confirm", "Imported " + selected+" configuration");
-		} catch (IOException e) {
+		} catch (Exception e) {
+			MessageDialog.openError(HandlerUtil.getActiveShell(event),
+					"Error", "Failed to imported " + selected+" configuration because: "+e.getLocalizedMessage());
 			throw new ExecutionException("Failed to import configuration.", e);
 		}
 
