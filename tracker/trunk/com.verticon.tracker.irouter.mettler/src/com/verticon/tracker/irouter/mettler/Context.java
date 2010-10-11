@@ -35,7 +35,7 @@ public class Context extends AbstractContext implements
 		IContext {
 
 	static final String PRODUCER_WEIGHT_MEASUREMENT_NAME = "producer.weight.measurement.name";
-	static final String PRODUCER_WEIGHT_MEASUREMENT_NAME_DEFAULT = "mettler";
+	static final String PRODUCER_WEIGHT_MEASUREMENT_NAME_DEFAULT = "mettler.weight.measurement";
 //	static final String[] SCOPE = { "mettler.weight.measurement" };
 	static final Double UNSTABLE_WEIGHT_ERROR_DEFAULT = new Double(.01);
 	static final Double STABLE_WEIGHT_ERROR_DEFAULT = new Double(.002);
