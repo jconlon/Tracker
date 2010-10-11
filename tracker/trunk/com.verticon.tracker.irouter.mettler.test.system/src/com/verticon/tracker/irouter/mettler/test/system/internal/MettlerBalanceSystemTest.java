@@ -12,6 +12,7 @@ import org.osgi.service.cm.ManagedServiceFactory;
 import org.osgi.service.monitor.Monitorable;
 import org.osgi.service.monitor.StatusVariable;
 import org.osgi.service.wireadmin.Consumer;
+import org.osgi.service.wireadmin.WireConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -123,6 +124,13 @@ public class MettlerBalanceSystemTest extends TestCase {
 
 		assertTrue("No Balance Monitorable service found", refs.length == 1);
 		ServiceReference monRef = refs[0];
+		Object o = monRef.getProperty(WireConstants.WIREADMIN_PRODUCER_SCOPE);
+		assertNotNull(o);
+		assertTrue(o.getClass().isArray());
+		String[] scope = (String[]) o;
+		assertEquals(1, scope.length);
+		assertEquals("mettler.weight.measurement", scope[0]);
+		
 		Monitorable monitorable = (Monitorable) context.getService(monRef);
 		String id = "producer.Connected_Consumers";
 		StatusVariable sv = monitorable.getStatusVariable(id);
