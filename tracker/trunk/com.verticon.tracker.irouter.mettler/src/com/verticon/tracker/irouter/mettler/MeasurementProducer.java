@@ -12,7 +12,6 @@ package com.verticon.tracker.irouter.mettler;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
-import static com.verticon.tracker.irouter.common.TrackerConstants.WEIGHT_MEASUREMENT_SCOPE;
 import static com.verticon.tracker.irouter.mettler.Context.PRODUCER_WEIGHT_MEASUREMENT_NAME;
 import static com.verticon.tracker.irouter.mettler.FactoryComponent.bundleMarker;
 import static org.osgi.framework.Constants.SERVICE_PID;
@@ -72,8 +71,7 @@ public class MeasurementProducer implements Producer, IMeasurementSender, Monito
 		super();
 		this.context = context;
 		scopeName = 
-			context.getConfigurationString(PRODUCER_WEIGHT_MEASUREMENT_NAME)+
-			'.'+WEIGHT_MEASUREMENT_SCOPE;
+			context.getConfigurationString(PRODUCER_WEIGHT_MEASUREMENT_NAME);
 	}
 
 	/*
