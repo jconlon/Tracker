@@ -63,6 +63,8 @@ import com.verticon.osgi.metatype.OCD;
  */
 public class ConfigAdminResouceImpl extends XMLResourceImpl {
 
+	private static final String WIREADMIN_CONSUMER_SCOPE = "wireadmin.consumer.scope";
+	private static final String WIREADMIN_PRODUCER_SCOPE = "wireadmin.producer.scope";
 	/**
 	 * slf4j Logger
 	 */
@@ -208,13 +210,20 @@ public class ConfigAdminResouceImpl extends XMLResourceImpl {
 		for (Attribute attribute : designate.getObject().getAttribute()) {
 			if (!attribute.getValue().isEmpty()) {
 				Object value = null;
-				if (attribute.getValue().size() > 1) {
+				String name = attribute.getAdref();
+				//Ticket#626
+				if(WIREADMIN_PRODUCER_SCOPE.equals(name)){
+					value = attribute.getValue().toArray();
+				}else if(WIREADMIN_CONSUMER_SCOPE.equals(name)){
+					value = attribute.getValue().toArray();
+					
+				}else if (attribute.getValue().size() > 1) {
 					value = attribute.getValue().toArray();
 				} else {
 					value = attribute.getValue().get(0);
 				}
 
-				properties.put(attribute.getAdref(), value);
+				properties.put(name, value);
 			}
 
 		}
