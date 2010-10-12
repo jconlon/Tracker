@@ -144,4 +144,6 @@ public interface IIndicator {
 	 * Initialization was successful.
 	 */
 	void initialized();
+
+    String[] getConfigurationStringArray(String key);
 }

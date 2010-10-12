@@ -233,7 +233,7 @@ public class TruTestSystemTest extends TestCase {
 				1, consumer.longs.size());
 		assertEquals(EID, consumer.longs.get(0));
 		sv = monitorable.getStatusVariable(LAST_EID);
-		assertEquals("Should be EID just sent", EID.toString(), sv.getString());
+		assertEquals("Should be the EID just sent", EID.toString(), sv.getString());
 
 		logger.debug(bundleMarker, "Send WEIGHT from the indicator.");
 		indicator.setWeight(WEIGHT);

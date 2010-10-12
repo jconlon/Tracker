@@ -10,10 +10,7 @@
  *******************************************************************************/
 package com.verticon.tracker.irouter.trutest.internal;
 
-import static com.verticon.tracker.irouter.common.TrackerConstants.ANIMAL_TAG_NUMBER_SCOPE;
-import static com.verticon.tracker.irouter.common.TrackerConstants.ANIMAL_WEIGHT_MEASUREMENT_SCOPE;
 import static com.verticon.tracker.irouter.common.TrackerConstants.COMMAND_STRING_SCOPE;
-import static com.verticon.tracker.irouter.common.TrackerConstants.TRANSACTION_STATE_SCOPE;
 
 /**
  * Set of commands used by the TruTest component.
@@ -46,10 +43,11 @@ public class Constants {
 	static final int ANIMAL_WEIGHT = 0;
 	static final int RECORD_STATE = 1;
 	static final int EID = 2;
-	static final String[] PRODUCER_SCOPE = { ANIMAL_WEIGHT_MEASUREMENT_SCOPE,
-	   TRANSACTION_STATE_SCOPE, ANIMAL_TAG_NUMBER_SCOPE };
+//	static final String[] PRODUCER_SCOPE = { ANIMAL_WEIGHT_MEASUREMENT_SCOPE,
+//	   TRANSACTION_STATE_SCOPE, ANIMAL_TAG_NUMBER_SCOPE };
 	
-    static final String[] CONSUMER_SCOPE = { "trutest."+COMMAND_STRING_SCOPE };
+    static final String CONSUMER_SCOPE = "consumer.scope.commands";
+    static final String CONSUMER_SCOPE_DEFAULT =  "trutest."+COMMAND_STRING_SCOPE ;
 	static final Long RETRY_CONNECTION_DELAY_DEFAULT = new Long(5);
 	static final String RESPONSE_PATTERN_DEFAULT = "^\\[(.+)\\]$";
 	static final Double UNSTABLE_WEIGHT_ERROR_DEFAULT = new Double(.1);
@@ -71,4 +69,14 @@ public class Constants {
     static final String DATA_SYNC_DIRECTORY = "data.synchronization.directory";
     static final String DATA_SYNC_DIRECTORY_DEFAULT = "/mnt/USB";
     
+    static final String PRODUCER_SCOPE_ANIMAL_WEIGHT ="producer.scope.weight";
+    static final String PRODUCER_SCOPE_ANIMAL_WEIGHT_DEFAULT="animal.weight.measurement";
+    static final String PRODUCER_SCOPE_ANIMAL_EID ="producer.scope.eid";
+    static final String PRODUCER_SCOPE_ANIMAL_EID_DEFAULT="animal.tag.number"; 
+    static final String PRODUCER_SCOPE_ENTER_KEY="producer.scope.enter";
+    static final String PRODUCER_SCOPE_ENTER_KEY_DEFAULT="transaction.state";
+    
+    static final String PRODUCER_STATE_ENTER_KEY_NAME="producer.enter.press.state";
+    
+
 }

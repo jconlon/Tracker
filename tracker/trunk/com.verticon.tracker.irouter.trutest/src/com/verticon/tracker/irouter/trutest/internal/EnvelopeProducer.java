@@ -13,10 +13,9 @@ package com.verticon.tracker.irouter.trutest.internal;
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
 import static com.verticon.tracker.irouter.trutest.internal.Component.bundleMarker;
-import static com.verticon.tracker.irouter.trutest.internal.Constants.ANIMAL_WEIGHT;
-import static com.verticon.tracker.irouter.trutest.internal.Constants.EID;
-import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE;
-import static com.verticon.tracker.irouter.trutest.internal.Constants.RECORD_STATE;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_EID;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_WEIGHT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ENTER_KEY;
 import static org.osgi.framework.Constants.SERVICE_PID;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_PID;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_PRODUCER_FLAVORS;
@@ -117,18 +116,23 @@ public class EnvelopeProducer implements Producer, IEnvelopeSender, Monitorable 
 	@Override
 	public Object polled(Wire wire) {
 		String scopes[] = wire.getScope();
+        Object result = null;
 		for (String scope : scopes) {
-			if (scope.equals(PRODUCER_SCOPE[ANIMAL_WEIGHT])) {
-				return lastEnvelope.get(PRODUCER_SCOPE[ANIMAL_WEIGHT]);
+			result = lastEnvelope.get(scope);
+			if(result!=null){
+				break;
 			}
-			if (scope.equals(PRODUCER_SCOPE[EID])) {
-				return lastEnvelope.get(PRODUCER_SCOPE[EID]);
-			}
-			if (scope.equals(PRODUCER_SCOPE[RECORD_STATE])) {
-				return lastEnvelope.get(PRODUCER_SCOPE[RECORD_STATE]);
-			}
+//			if (scope.equals(PRODUCER_SCOPE_ANIMAL_WEIGHT)) {
+//				return lastEnvelope.get(PRODUCER_SCOPE_ANIMAL_WEIGHT);
+//			}
+//			if (scope.equals(PRODUCER_SCOPE_ANIMAL_EID)) {
+//				return lastEnvelope.get(PRODUCER_SCOPE_ANIMAL_EID);
+//			}
+//			if (scope.equals(PRODUCER_SCOPE_ENTER_KEY)) {
+//				return lastEnvelope.get(PRODUCER_SCOPE_ENTER_KEY);
+//			}
 		}
-		return null;
+		return result;
 	}			
 
 	
@@ -175,7 +179,7 @@ public class EnvelopeProducer implements Producer, IEnvelopeSender, Monitorable 
 		Hashtable<String, Object> regProps = new Hashtable<String, Object>();
 		regProps.put(SERVICE_PID, indicator.getPid());
 		regProps.put(WIREADMIN_PRODUCER_SCOPE, 
-				PRODUCER_SCOPE);
+				buildProducerScope());
 		regProps.put(WIREADMIN_PRODUCER_FLAVORS,
 				new Class[] { Envelope.class });
 		regProps.put(CONNECTION_URI, indicator.getConfigurationString(CONNECTION_URI));
@@ -183,6 +187,13 @@ public class EnvelopeProducer implements Producer, IEnvelopeSender, Monitorable 
 				indicator.getConfigurationString(TRACKER_WIRE_GROUP_NAME));
 		wireAdminReg = bc.registerService(Producer.class
 				.getName(), this, regProps);
+	}
+	
+	private String[] buildProducerScope(){
+		return new String[]{
+				indicator.getConfigurationString(PRODUCER_SCOPE_ANIMAL_WEIGHT),
+				indicator.getConfigurationString(PRODUCER_SCOPE_ENTER_KEY),
+				indicator.getConfigurationString(PRODUCER_SCOPE_ANIMAL_EID)};
 	}
 
     @Override
@@ -194,7 +205,7 @@ public class EnvelopeProducer implements Producer, IEnvelopeSender, Monitorable 
 	public StatusVariable getStatusVariable(String name)
 	throws IllegalArgumentException {
 		if (LAST_WEIGHT.equals(name)){
-			Envelope ev = lastEnvelope.get(PRODUCER_SCOPE[ANIMAL_WEIGHT]);
+			Envelope ev = lastEnvelope.get(indicator.getConfigurationString(PRODUCER_SCOPE_ANIMAL_WEIGHT));
 			Measurement m = ev!=null?(Measurement)ev.getValue():null;
 			return
 			new StatusVariable(name,
@@ -203,7 +214,7 @@ public class EnvelopeProducer implements Producer, IEnvelopeSender, Monitorable 
 					);
 		}
 		if (LAST_EID.equals(name)){
-			Envelope ev = lastEnvelope.get(PRODUCER_SCOPE[EID]);
+			Envelope ev = lastEnvelope.get(indicator.getConfigurationString(PRODUCER_SCOPE_ANIMAL_EID));
 			String lastEID = ev!=null?ev.getValue().toString():""; 
 			return
 			new StatusVariable(name,

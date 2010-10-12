@@ -110,18 +110,18 @@ public class EnvelopeProducerCallableTest{
 		//Simple ID
 		instance.process("[ID123456789012345]");
 		assertEquals(1,compositeProducer.envelopes.size());
-		assertEquals(PRODUCER_SCOPE[EID], 
+		assertEquals(PRODUCER_SCOPE_ANIMAL_EID_DEFAULT, 
 				compositeProducer.envelopes.get(0).getScope());
 		compositeProducer.envelopes.clear();
 		
 		//ID and WR
 		instance.process("[ID123456789012345,WR147,DR2]");
 		assertEquals(3,compositeProducer.envelopes.size());
-		assertEquals(PRODUCER_SCOPE[EID], 
+		assertEquals(PRODUCER_SCOPE_ANIMAL_EID_DEFAULT, 
 				compositeProducer.envelopes.get(0).getScope());
-		assertEquals(PRODUCER_SCOPE[ANIMAL_WEIGHT], 
+		assertEquals(PRODUCER_SCOPE_ANIMAL_WEIGHT_DEFAULT, 
 				compositeProducer.envelopes.get(1).getScope());
-		assertEquals(PRODUCER_SCOPE[RECORD_STATE], 
+		assertEquals(PRODUCER_SCOPE_ENTER_KEY_DEFAULT,
 				compositeProducer.envelopes.get(2).getScope());
 		compositeProducer.envelopes.clear();
 		
