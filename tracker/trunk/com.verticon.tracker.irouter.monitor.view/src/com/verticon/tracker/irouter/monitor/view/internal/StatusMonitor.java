@@ -205,7 +205,7 @@ public class StatusMonitor {
 		if(!isAppropriate( id)){
 			return null;
 		}
-		if(wiredNode.isProducer()){
+		if(wiredNode instanceof ProducerWiredNode){
 			return  id.substring("producer.".length()).replace('_', ' ');
 		}else {
 			return id.substring("consumer.".length()).replace('_', ' ');
@@ -214,7 +214,7 @@ public class StatusMonitor {
 	}
 
 	private boolean isAppropriate(String id){
-		if(wiredNode.isProducer()){
+		if(wiredNode instanceof ProducerWiredNode){
 			return id.toLowerCase().startsWith("producer.");
 		}else{
 			return id.toLowerCase().startsWith("consumer.");

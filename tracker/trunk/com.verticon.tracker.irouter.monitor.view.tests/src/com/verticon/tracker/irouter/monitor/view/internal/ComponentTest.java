@@ -67,8 +67,7 @@ public class ComponentTest {
 		observables.addSetChangeListener(counter);
 		
 		assertTrue(counter.countOfNodes==0);
-		WiredNode wiredNode = new WiredNode(
-				true,// isProducer, 
+		WiredNode wiredNode = new ProducerWiredNode(
 				"test",// group, 
 				"pid", 
 				"scope",
