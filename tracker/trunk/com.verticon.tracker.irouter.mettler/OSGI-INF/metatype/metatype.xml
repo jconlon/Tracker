@@ -28,7 +28,7 @@
     	type="Long" default="5"
     	description="Seconds to wait before retrying to establish a connection to the balance."/>
   
-    <AD name="Name of the weight.measurement produced" id="producer.weight.measurement.name" type="String"
+    <AD name="Producer Scope for the weight measurement" id="producer.weight.measurement.name" type="String"
 		required="false" default="mettler.weight.measurement" 
 		description="Name of the product created by this wire producer and sent to wire consumers."/>
   
