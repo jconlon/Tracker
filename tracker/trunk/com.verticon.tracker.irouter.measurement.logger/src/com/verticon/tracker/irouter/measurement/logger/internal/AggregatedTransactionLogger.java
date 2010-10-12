@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.Marker;
 
 import com.verticon.tracker.irouter.common.AbstractTransactionHandler;
+import com.verticon.tracker.irouter.common.IContext;
 
 /**
  * 
@@ -40,14 +41,19 @@ public class AggregatedTransactionLogger extends AbstractTransactionHandler impl
 	"unit='%6$s'";
 
 
+	private final String triggeringScopeName;
+	private final String animalIDNumberScopeName;
+	
 	@Override
 	protected Marker bundleMarker() {
 		return bundleMarker;
 	}
 
 
-	public AggregatedTransactionLogger(Logger log) {
+	public AggregatedTransactionLogger(Logger log, String triggeringScopeName,String animalIDNumberScopeName ) {
 		super(log);
+		this.animalIDNumberScopeName= animalIDNumberScopeName;
+		this.triggeringScopeName = triggeringScopeName;
 	}
 
 
@@ -102,6 +108,24 @@ public class AggregatedTransactionLogger extends AbstractTransactionHandler impl
 	@Override
 	public String getLastLogEntryDescription() {
 		return "Concatination of last set of log entries. Entries separated with semicolons.";
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.irouter.common.AbstractTransactionHandler#getTriggeringScopeName()
+	 */
+	@Override
+	protected String getTriggeringScopeName() {
+		return triggeringScopeName;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.irouter.common.AbstractTransactionHandler#getAnimalIDNumberScopeName()
+	 */
+	@Override
+	protected String getAnimalIDNumberScopeName() {
+		return animalIDNumberScopeName;
 	}
 	
 }

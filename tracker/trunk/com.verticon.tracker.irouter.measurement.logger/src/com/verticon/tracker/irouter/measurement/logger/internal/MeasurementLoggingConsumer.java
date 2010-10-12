@@ -1,10 +1,10 @@
 package com.verticon.tracker.irouter.measurement.logger.internal;
 
-import static com.verticon.tracker.irouter.common.TrackerConstants.ANIMAL_TAG_NUMBER_SCOPE;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
-import static com.verticon.tracker.irouter.common.TrackerConstants.TRANSACTION_STATE_SCOPE;
 import static com.verticon.tracker.irouter.measurement.logger.internal.ComponentFactory.bundleMarker;
-import static com.verticon.tracker.irouter.measurement.logger.internal.Context.CONSUMER_SCOPE;
+import static com.verticon.tracker.irouter.measurement.logger.internal.Context.CONSUMER_EID_SCOPE;
+import static com.verticon.tracker.irouter.measurement.logger.internal.Context.CONSUMER_MEASUREMENT_SCOPE;
+import static com.verticon.tracker.irouter.measurement.logger.internal.Context.CONSUMER_STATE_SCOPE;
 import static com.verticon.tracker.irouter.measurement.logger.internal.Context.LAST_LOG_ENTRY;
 import static com.verticon.tracker.irouter.measurement.logger.internal.Context.WIRES_COUNT;
 
@@ -47,10 +47,15 @@ public class MeasurementLoggingConsumer extends AbstractConsumer implements Moni
 		scope = buildScope();
 		if(context.getConfigurationInteger(Context.LOGGER_TYPE).equals(Context.LOGGER_TYPE_AGGREGATING)){
 			iLogger = new AggregatedTransactionLogger(
-					getLoggerType(AggregatedTransactionLogger.class));
+					getLoggerType(AggregatedTransactionLogger.class),
+					context.getConfigurationString(Context.CONSUMER_STATE_SCOPE),
+					context.getConfigurationString(Context.CONSUMER_EID_SCOPE)
+			);
 		}else{
 			iLogger = new NormalizedTransactionLogger(
 					context.getConfigurationString(TRACKER_WIRE_GROUP_NAME),
+					context.getConfigurationString(Context.CONSUMER_STATE_SCOPE),
+					context.getConfigurationString(Context.CONSUMER_EID_SCOPE),
 					getLoggerType(NormalizedTransactionLogger.class));
 		}
 	}
@@ -104,14 +109,14 @@ public class MeasurementLoggingConsumer extends AbstractConsumer implements Moni
 	 */
 	private String[] buildScope() {
 		Vector<String> v = new Vector<String>();
-		for (String scopeName : context.getConfigurationArray(CONSUMER_SCOPE)) {
+		for (String scopeName : context.getConfigurationArray(CONSUMER_MEASUREMENT_SCOPE)) {
 			if(scopeName==null || scopeName.trim().length()==0){
 				break;
 			}
-			v.add(scopeName+".measurement");
+			v.add(scopeName);
 		}
-		v.add(TRANSACTION_STATE_SCOPE);
-		v.add(ANIMAL_TAG_NUMBER_SCOPE);
+		v.add(context.getConfigurationString(CONSUMER_STATE_SCOPE));
+		v.add(context.getConfigurationString(CONSUMER_EID_SCOPE));
 		return v.toArray(new String[] {});
 
 	}

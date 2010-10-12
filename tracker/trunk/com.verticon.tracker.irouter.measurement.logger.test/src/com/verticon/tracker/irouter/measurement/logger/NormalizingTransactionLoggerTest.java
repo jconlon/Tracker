@@ -16,11 +16,13 @@ import com.verticon.tracker.irouter.measurement.logger.internal.NormalizedTransa
 public class NormalizingTransactionLoggerTest extends AbstractLoggerTest{
 
 	private static final String TEST_GROUP = "Test group";
-
+	private static final String CONSUMER_EID_SCOPE_DEFAULT = "animal.tag.number";
+	private static final String CONSUMER_STATE_SCOPE_DEFAULT = "transaction.state";
+	
 	
 	public void testAggregatingLoggerConstructor() {
 		try {
-			new NormalizedTransactionLogger(TEST_GROUP,null);
+			new NormalizedTransactionLogger(TEST_GROUP,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT,null);
 			fail("Should have thrown an IllegalArgument Exception");
 		} catch (IllegalArgumentException e) {
 			//expected
@@ -28,7 +30,7 @@ public class NormalizingTransactionLoggerTest extends AbstractLoggerTest{
 			fail("Should have thrown an IllegalArgument Exception "+e);
 		}
 		Logger logger = createMock(Logger.class);
-		instance = new NormalizedTransactionLogger(TEST_GROUP,logger);
+		instance = new NormalizedTransactionLogger(TEST_GROUP,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT,logger);
 		assertNotNull(instance);
 	}
 	
@@ -36,7 +38,7 @@ public class NormalizingTransactionLoggerTest extends AbstractLoggerTest{
 	@Test
 	public void testTriggerWeight() {
 		Logger logger = createMock(Logger.class);
-		instance = new NormalizedTransactionLogger(TEST_GROUP, logger);
+		instance = new NormalizedTransactionLogger(TEST_GROUP,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT, logger);
 		logger.debug(bundleMarker,"{} ID={}",
 				instance,idEnvelope.getValue());
 		logger.info(eq(bundleMarker),matches("123456789012345,Test group,100.3"));
@@ -50,7 +52,7 @@ public class NormalizingTransactionLoggerTest extends AbstractLoggerTest{
 	@Test
 	public void testTriggerWeightBlood() {
 		Logger logger = createMock(Logger.class);
-		instance = new NormalizedTransactionLogger(TEST_GROUP, logger);
+		instance = new NormalizedTransactionLogger(TEST_GROUP,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT, logger);
 		logger.debug(bundleMarker,"{} ID={}",
 				instance,idEnvelope.getValue());
 		logger.info(eq(bundleMarker),matches("123456789012345,Test group,100.3,1.999"));
@@ -65,7 +67,7 @@ public class NormalizingTransactionLoggerTest extends AbstractLoggerTest{
 	@Test
 	public void testTriggerWeightWithoutId() {
 		Logger logger = createMock(Logger.class);
-		instance = new NormalizedTransactionLogger(TEST_GROUP, logger);
+		instance = new NormalizedTransactionLogger(TEST_GROUP,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT, logger);
 		logger.info(eq(bundleMarker),matches("null,Test group,100.3"));
 		assertNotNull(instance);
 		replay(logger);
@@ -76,7 +78,7 @@ public class NormalizingTransactionLoggerTest extends AbstractLoggerTest{
 	@Test
 	public void testTriggerWeightBloodWithoutId() {
 		Logger logger = createMock(Logger.class);
-		instance = new NormalizedTransactionLogger(TEST_GROUP, logger);
+		instance = new NormalizedTransactionLogger(TEST_GROUP,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT, logger);
 		logger.info(eq(bundleMarker),matches("null,Test group,100.3,1.999"));
 		assertNotNull(instance);
 		replay(logger);

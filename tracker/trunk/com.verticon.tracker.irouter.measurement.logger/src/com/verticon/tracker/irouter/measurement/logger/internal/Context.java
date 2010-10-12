@@ -18,8 +18,15 @@ public class Context extends AbstractContext {
 	public static final Integer LOGGER_TYPE_NORMALIZING = 0;
 	public static final Integer LOGGER_TYPE_AGGREGATING = 1;
 	
-	public static final String CONSUMER_SCOPE ="consumable.scope";//An array
-	public static final String LOGGER_NAME = "logger.name";
+	public static final String CONSUMER_MEASUREMENT_SCOPE ="consumer.measurement.scopes";//An array
+	static final String CONSUMER_EID_SCOPE ="consumer.scope.eid";
+    static final String CONSUMER_EID_SCOPE_DEFAULT = "animal.tag.number";
+	static final String CONSUMER_STATE_SCOPE = "consumer.scope.control";
+	static final String CONSUMER_STATE_SCOPE_DEFAULT = "transaction.state";
+	static final String CONTROL_STATE_NAME ="consumer.transaction.state";
+	static final String CONTROL_STATE_NAME_DEFAULT ="transaction.state" ;
+	
+	static final String LOGGER_NAME = "logger.name";
     static final String WIRES_COUNT = "consumer.Connected_Wires";
     static final String LAST_LOG_ENTRY ="consumer.Last_Log_Entry";
 	
@@ -28,9 +35,13 @@ public class Context extends AbstractContext {
 	static {
 		DEFAULTS = new Hashtable<String, Object>();
 		DEFAULTS.put(TRACKER_WIRE_GROUP_NAME,TRACKER_WIRE_GROUP_NAME_DEFAULT);
-		DEFAULTS.put(CONSUMER_SCOPE,new String[]{});
+		DEFAULTS.put(CONSUMER_MEASUREMENT_SCOPE,new String[]{});
 		DEFAULTS.put(LOGGER_TYPE,LOGGER_TYPE_AGGREGATING);
 		DEFAULTS.put(LOGGER_NAME,"");
+		
+		DEFAULTS.put(CONSUMER_EID_SCOPE,CONSUMER_EID_SCOPE_DEFAULT);
+		DEFAULTS.put(CONSUMER_STATE_SCOPE,CONSUMER_STATE_SCOPE_DEFAULT);
+		DEFAULTS.put(CONTROL_STATE_NAME, CONTROL_STATE_NAME_DEFAULT) ;
 	}
 	
 	public Context(String pid, Dictionary<?, ?> configuration,

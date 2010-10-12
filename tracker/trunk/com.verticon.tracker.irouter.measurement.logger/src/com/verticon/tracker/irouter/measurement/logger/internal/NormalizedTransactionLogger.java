@@ -28,6 +28,8 @@ import com.verticon.tracker.irouter.common.AbstractTransactionHandler;
 public class NormalizedTransactionLogger extends AbstractTransactionHandler implements ILogger{
 
 	private final String groupName;
+	private final String triggeringScopeName;
+	private final String animalIDNumberScopeName;
 	private String lastLogEntry;
 	
 	@Override
@@ -35,9 +37,11 @@ public class NormalizedTransactionLogger extends AbstractTransactionHandler impl
 		return bundleMarker;
 	}
 	
-	public NormalizedTransactionLogger(String groupName, Logger log) {
+	public NormalizedTransactionLogger(String groupName,String triggeringScopeName, String animalIDNumberScopeName, Logger log) {
 		super(log);
 		this.groupName= groupName;
+		this.animalIDNumberScopeName=animalIDNumberScopeName;
+		this.triggeringScopeName=triggeringScopeName;
 	}
 	
 	@Override
@@ -76,5 +80,22 @@ public class NormalizedTransactionLogger extends AbstractTransactionHandler impl
 	@Override
 	public String getLastLogEntryDescription() {
 		return "Last concatinated log entry. Measurements in ascending scope name order.";
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.irouter.common.AbstractTransactionHandler#getTriggeringScopeName()
+	 */
+	@Override
+	protected String getTriggeringScopeName() {
+		return triggeringScopeName;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.irouter.common.AbstractTransactionHandler#getAnimalIDNumberScopeName()
+	 */
+	@Override
+	protected String getAnimalIDNumberScopeName() {
+		return animalIDNumberScopeName;
 	}
 }

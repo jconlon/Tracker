@@ -7,14 +7,22 @@
     <AD name="Wiring group name"  id="tracker.wiring.group.name" type="String"
         description="Name of the group of components that will be wired together."/> 
  
- 	<AD name="Consumable measurement name" id="consumable.scope" type="String"
+ 	<AD name="Consumer Scopes for Measurements" id="consumer.measurement.scopes" type="String"
 		cardinality="3" 
-		description="List of the names of the wire measurement products to log. Use only the prefix of the measurement product names, as each prefix entered in this list will have the .measurement suffix automatically appended." />
+		description="List of the scope names of the wire measurement products to log." />
 	
-	<AD name="Monitor Node label"  id="tracker.monitor.label" type="String"
-        description="Name to label node in the iRouter Monitor View graphics."
-        default="event"/>
-        
+	<AD name="Consumer Scope for Animal EID" id="consumer.scope.eid" type="String"
+		default="animal.tag.number" 
+    	description="Consumer scope for the Animal ID number."/>
+    	
+    <AD name="Consumer Scope for Control State" id="consumer.scope.control" type="String"
+		default="transaction.state" 
+    	description="Consumer scope for the state indicating the transaction should be logged."/>
+    	
+    <AD name="Name of the Control State" id="consumer.transaction.state" type="String"
+		default="transaction.state" 
+    	description="The name of the state indicating that transaction should be logged."/>
+    
     <AD name="Type of logger" id="logger.type" type="Integer" 
     	description="Kind of transaction logger to create. Normalized - log entries are comma delimited and include all measurements. Aggregated - Separate log entries per measurement.">
     	<Option label="Normalized" value="0"/>
