@@ -10,7 +10,6 @@
  *******************************************************************************/
 package com.verticon.tracker.irouter.monitor.view.internal;
 
-import java.util.Arrays;
 import java.util.Map;
 
 import org.osgi.framework.ServiceReference;
@@ -21,41 +20,49 @@ import org.osgi.service.wireadmin.Producer;
  * @author jconlon
  *
  */
-public class WiredNode {
+public abstract class WiredNode {
 
 	enum Type {PRODUCER, CONSUMER};
 	
 	private final Type type;
-	private final String group;
-	private final String pid;
-	private final String scope;
-	private final Long service_id;
+	protected final String group;
+	protected final String pid;
+	protected final String scope;
+	protected final Long service_id;
 	
 	
+//	/**
+//	 * @deprecated
+//	 * @param sr
+//	 */
+//	WiredNode(ServiceReference sr){
+//		this(
+//				isProducer(sr), 
+//				(String) sr.getProperty("tracker.wiring.group.name"), 
+//				(String) sr.getProperty("service.pid"), 
+//				isProducer(sr)?
+//					Arrays.toString((Object[])sr.getProperty("wireadmin.producer.scope")):
+//					Arrays.toString((Object[])sr.getProperty("wireadmin.consumer.scope")), 
+//				(Long) sr.getProperty("service.id"));
+//	}
 	
-	WiredNode(ServiceReference sr){
-		this(
-				isProducer(sr), 
-				(String) sr.getProperty("tracker.wiring.group.name"), 
-				(String) sr.getProperty("service.pid"), 
-				isProducer(sr)?
-					Arrays.toString((Object[])sr.getProperty("wireadmin.producer.scope")):
-					Arrays.toString((Object[])sr.getProperty("wireadmin.consumer.scope")), 
-				(Long) sr.getProperty("service.id"));
-	}
+//	/**
+//	 * 
+//	 * @deprecated
+//	 * @param map
+//	 */
+//	protected WiredNode(Map<String,Object> map){
+//		this(
+//				isProducer(map), 
+//				(String) map.get("tracker.wiring.group.name"), 
+//				(String) map.get("service.pid"), 
+//				isProducer(map)?
+//					Arrays.toString((Object[])map.get("wireadmin.producer.scope")):
+//					Arrays.toString((Object[])map.get("wireadmin.consumer.scope")), 
+//				(Long) map.get("service.id"));
+//	}
 	
-	WiredNode(Map<String,Object> sr){
-		this(
-				isProducer(sr), 
-				(String) sr.get("tracker.wiring.group.name"), 
-				(String) sr.get("service.pid"), 
-				isProducer(sr)?
-					Arrays.toString((Object[])sr.get("wireadmin.producer.scope")):
-					Arrays.toString((Object[])sr.get("wireadmin.consumer.scope")), 
-				(Long) sr.get("service.id"));
-	}
-	
-    WiredNode(boolean isProducer, String group, String pid, String scope,
+    protected WiredNode(boolean isProducer, String group, String pid, String scope,
 			long service_id) {
 		super();
 		this.type = isProducer?Type.PRODUCER:Type.CONSUMER;
@@ -97,18 +104,18 @@ public class WiredNode {
      	return name;
      }
      
-    boolean isProducer(){
-    	return type == Type.PRODUCER;
-    }
+//    boolean isProducer(){
+//    	return type == Type.PRODUCER;
+//    }
     
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "WiredNode [type=" + type + ", group=" + group + ", pid="
-				+ pid + ", scope=" + scope + ", service_id=" + service_id + "]";
-	}
+//	/* (non-Javadoc)
+//	 * @see java.lang.Object#toString()
+//	 */
+//	@Override
+//	public String toString() {
+//		return "WiredNode [type=" + type + ", group=" + group + ", pid="
+//				+ pid + ", scope=" + scope + ", service_id=" + service_id + "]";
+//	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()

@@ -141,7 +141,7 @@ public class Component implements WireAdminListener {
 
 	
 	public void setProducer(Producer producer, Map<String, Object> map) {
-		boolean added = model2.add(new WiredNode(map));
+		boolean added = model2.add(new ProducerWiredNode(map));
 		if(added){
 			logger.debug(bundleMarker, "Added producer {}",map.get("service.pid"));
 		}else{
@@ -150,7 +150,7 @@ public class Component implements WireAdminListener {
 	}
 
 	public  void unsetProducer(Producer producer, Map<String, Object> map){
-		boolean removed = model2.remove(new WiredNode(map));
+		boolean removed = model2.remove(new ProducerWiredNode(map));
 		if(removed){
 			logger.debug(bundleMarker, "Removed producer {}",map.get("service.pid"));
 		}else{
@@ -159,7 +159,7 @@ public class Component implements WireAdminListener {
 	}
 	
 	public  void setConsumer(Consumer consumer, Map<String, Object> map){
-		boolean added = model2.add(new WiredNode(map));
+		boolean added = model2.add(new ConsumerWiredNode(map));
 		if(added){
 			logger.debug(bundleMarker, "Added consumer {}",map.get("service.pid"));
 		}else{
@@ -168,7 +168,7 @@ public class Component implements WireAdminListener {
 	}
 	
 	public  void unsetConsumer(Consumer consumer, Map<String, Object> map){
-		boolean removed = model2.remove(new WiredNode(map));
+		boolean removed = model2.remove(new ConsumerWiredNode(map));
 		if(removed){
 			logger.debug(bundleMarker, "Removed consumer {}",map.get("service.pid"));
 		}else{

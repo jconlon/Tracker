@@ -92,7 +92,7 @@ public class WiredNodeGraphEntityContentProvider implements
 	public Object[] getConnectedTo(Object entity) {
 		if (entity instanceof WiredNode) {
 			WiredNode wiredNode = (WiredNode) entity;
-			if (wiredNode.isProducer()) {
+			if (wiredNode instanceof ProducerWiredNode) {
 				WiredNode[] consumers = getConsumers(wiredNode);
 				logger.debug(bundleMarker, "{} connectedTo {}", wiredNode,
 						Arrays.toString(consumers));
@@ -137,7 +137,7 @@ public class WiredNodeGraphEntityContentProvider implements
 		String wirePid = (String) wire.getProperties().get(
 				WIREADMIN_PRODUCER_PID);
 		for (WiredNode wiredNode : Component.INSTANCE.getModel()) {
-			if (wiredNode.isProducer() && wiredNode.getPid().equals(wirePid)) {
+			if (wiredNode instanceof ProducerWiredNode && wiredNode.getPid().equals(wirePid)) {
 				return wiredNode;
 			}
 
@@ -149,7 +149,7 @@ public class WiredNodeGraphEntityContentProvider implements
 	private WiredNode findConsumer(String pid) {
 		for (WiredNode wiredNode : model) {
 
-			if (!wiredNode.isProducer() && wiredNode.getPid().equals(pid)) {
+			if (!(wiredNode instanceof ProducerWiredNode) && wiredNode.getPid().equals(pid)) {
 				return wiredNode;
 			}
 		}

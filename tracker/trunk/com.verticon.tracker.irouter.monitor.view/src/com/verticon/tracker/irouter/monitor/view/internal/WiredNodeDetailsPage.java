@@ -95,7 +95,7 @@ public class WiredNodeDetailsPage implements IDetailsPage {
 		td.grabHorizontal = true;
 		section.setLayoutData(td);
 		section.setText("Service Property Details");
-		section.setDescription("Details of the selected "+(wiredNode.isProducer()?"Producer":"Consumer")+" service");
+		section.setDescription("Details of the selected "+(wiredNode instanceof ProducerWiredNode?"Producer":"Consumer")+" service");
 		Composite sectionClient = toolkit.createComposite(section);
 		sectionClient.setLayout(new GridLayout(3, false));
 		
@@ -109,7 +109,7 @@ public class WiredNodeDetailsPage implements IDetailsPage {
 		//Service Type
 		l=toolkit.createLabel(sectionClient, "Service Type:");
 		l.setToolTipText("Producer or Consumer of wired products");
-		Text tServiceType = toolkit.createText(sectionClient, wiredNode.isProducer()?"Producer":"Consumer", SWT.READ_ONLY);
+		Text tServiceType = toolkit.createText(sectionClient, wiredNode instanceof ProducerWiredNode?"Producer":"Consumer", SWT.READ_ONLY);
 		tServiceType.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false, 2,
 				1));
 		
@@ -147,7 +147,7 @@ public class WiredNodeDetailsPage implements IDetailsPage {
 		td.grabHorizontal = true;
 		section.setLayoutData(td);
 		section.setText("Status Variables");
-		section.setDescription("Status of the selected "+(wiredNode.isProducer()?"Producer":"Consumer")+" service");
+		section.setDescription("Status of the selected "+(wiredNode instanceof ProducerWiredNode?"Producer":"Consumer")+" service");
 		Composite sectionClient = toolkit.createComposite(section);
 		sectionClient.setLayout(new GridLayout(3, false));
 		
