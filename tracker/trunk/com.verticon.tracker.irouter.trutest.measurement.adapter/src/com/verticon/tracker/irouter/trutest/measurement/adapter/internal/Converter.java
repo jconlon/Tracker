@@ -4,7 +4,7 @@ import org.osgi.util.measurement.Measurement;
 import org.osgi.util.measurement.Unit;
 
 public enum Converter {
-	NONE(Double.NaN, null),
+	NATIVE(Double.NaN, null),
 	GRAMS(1000, Unit.kg),
 	OUNCES(35.27396195, Unit.kg),
 	POUNDS(2.2046, Unit.kg), 

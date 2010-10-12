@@ -13,13 +13,12 @@ package com.verticon.tracker.irouter.trutest.internal;
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.RESPONSE_PATTERN;
 import static com.verticon.tracker.irouter.common.TrackerConstants.STABLE_WEIGHT_ERROR;
-import static com.verticon.tracker.irouter.common.TrackerConstants.TRANSACTION_STATE_SCOPE;
 import static com.verticon.tracker.irouter.common.TrackerConstants.UNSTABLE_WEIGHT_ERROR;
 import static com.verticon.tracker.irouter.trutest.internal.Component.bundleMarker;
-import static com.verticon.tracker.irouter.trutest.internal.Constants.ANIMAL_WEIGHT;
-import static com.verticon.tracker.irouter.trutest.internal.Constants.EID;
-import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE;
-import static com.verticon.tracker.irouter.trutest.internal.Constants.RECORD_STATE;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_EID;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_WEIGHT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ENTER_KEY;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_STATE_ENTER_KEY_NAME;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.SEND_UNSTABLE_WEIGHTS;
 
 import java.io.BufferedReader;
@@ -259,7 +258,7 @@ public class EnvelopeProducerCallable implements Callable<Void> {
 			Long eid = Long.parseLong(rp);
 			Envelope envelope = new BasicEnvelope(eid,// value
 					indicator.getPid(),// identification
-					PRODUCER_SCOPE[EID]// scope
+					indicator.getConfigurationString(PRODUCER_SCOPE_ANIMAL_EID)// scope
 			);
 			log.debug(bundleMarker,"{}: Producing Animal EID={}", this, eid);
 			
@@ -298,7 +297,7 @@ public class EnvelopeProducerCallable implements Callable<Void> {
 				.currentTimeMillis());
 		Envelope envelope = new BasicEnvelope(weight,// value
 				indicator.getPid(),// identification
-				PRODUCER_SCOPE[ANIMAL_WEIGHT]// scope
+				indicator.getConfigurationString(PRODUCER_SCOPE_ANIMAL_WEIGHT)// scope
 		);
 		log.debug(bundleMarker,"{}: Producing Animal Weight={}", this,
 					result);
@@ -307,11 +306,12 @@ public class EnvelopeProducerCallable implements Callable<Void> {
 	}
 
 	private void sendRecord() {
-		State state = new State(1, TRANSACTION_STATE_SCOPE, System
-				.currentTimeMillis());
+		State state = new State(1, 
+				indicator.getConfigurationString(PRODUCER_STATE_ENTER_KEY_NAME), 
+				System.currentTimeMillis());
 		Envelope envelope = new BasicEnvelope(state,// value
 				indicator.getPid(),// identification
-				PRODUCER_SCOPE[RECORD_STATE]// scope
+				indicator.getConfigurationString(PRODUCER_SCOPE_ENTER_KEY)// scope
 		);
 		log.debug(bundleMarker,"{}: Producing Animal record state.", this);
 		

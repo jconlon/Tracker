@@ -161,7 +161,9 @@ class CommandConsumer implements Consumer, Monitorable {
 				.getConfigurationString(TRACKER_WIRE_GROUP_NAME));
 		regProps.put(CONNECTION_URI, indicator
 				.getConfigurationString(CONNECTION_URI));
-		regProps.put(WIREADMIN_CONSUMER_SCOPE, CONSUMER_SCOPE);
+		
+		regProps.put(WIREADMIN_CONSUMER_SCOPE, 
+				indicator.getConfigurationStringArray(CONSUMER_SCOPE));
 		serviceRegistration = bc.registerService(Consumer.class.getName(),
 				this, regProps);
 

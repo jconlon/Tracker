@@ -2,7 +2,7 @@
 <metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
 
   <OCD description="Adapts input measurements for display on TruTest Indicators." 
-       name="TruTest Measurement Adapter" id="om.verticon.tracker.irouter.trutest.measurement.adapter">
+       name="TruTest Measurement Adapter" id="com.verticon.tracker.irouter.trutest.measurement.adapter">
    
     <AD name="Wiring group name"  id="tracker.wiring.group.name" required="true" type="String" default=""
         description="Name of the group of components that will be wired together."/>
@@ -62,21 +62,21 @@
 	
 	<AD name="Presentation Units" id="presentation.units" type="String" default="none"
 	description="Convert native SI units to compatible non standard units for presentation.">
-	    <Option label="none" value="NOND"/>
-		<Option label="grams" value="GRAMS"/>
-		<Option label="ounces" value="OUNCES"/>
-		<Option label="pounds" value="POUNDS"/>
-		<Option label="inches" value="INCHES"/>
-		<Option label="millimeters" value="MILLIMETERS"/>
-		<Option label="feet" value="FEET"/>
-		<Option label="yards" value="YARDS"/>
+	    <Option label="native (no conversion)" value="NATIVE"/>
+		<Option label="convert weight to grams" value="GRAMS"/>
+		<Option label="convert weight to ounces" value="OUNCES"/>
+		<Option label="convert weight to pounds" value="POUNDS"/>
+		<Option label="convert length to inches" value="INCHES"/>
+		<Option label="convert length to millimeters" value="MILLIMETERS"/>
+		<Option label="convert length to feet" value="FEET"/>
+		<Option label="convert length to yards" value="YARDS"/>
 	</AD>
 	
 	
   </OCD>
   
-  <Designate pid="om.verticon.tracker.irouter.trutest.measurement.adapter" bundle="*">
-		<Object ocdref="om.verticon.tracker.irouter.trutest.measurement.adapter"/>
+  <Designate pid="com.verticon.tracker.irouter.trutest.measurement.adapter" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.trutest.measurement.adapter"/>
   </Designate>
   
   

@@ -47,6 +47,27 @@
 	<AD name="Data Synchronization Directory" id="data.synchronization.directory" type="String"
 		default="" 
     	description="Directory to use for uploading and downloading animal life data records."/>
+ 
+    <AD name="Consumer Scope for Commands" id="consumer.scope.commands" type="String"
+		default="trutest.command.string" 
+    	description="Consumer scope for TruTest commands."/>
+    	
+    <AD name="Producer Scope for Animal Weight" id="producer.scope.weight" type="String"
+		default="animal.weight.measurement" 
+    	description="Producer scope for send out the Animal Weight Measurement."/>
+    
+    <AD name="Producer Scope for Animal EID" id="producer.scope.eid" type="String"
+		default="animal.tag.number" 
+    	description="Producer scope for sending out the Animal ID number."/>
+    	
+    <AD name="Producer Scope for Enter Key" id="producer.scope.enter" type="String"
+		default="transaction.state" 
+    	description="Producer scope for sending out a state indicating that enter key was pressed."/>
+    	
+     <AD name="State Name for Enter Key Press" id="producer.enter.press.state" type="String"
+		default="transaction.state" 
+    	description="The name of the state indicating that enter key was pressed."/>
+    
   </OCD>
   
   <Designate pid="com.verticon.tracker.irouter.trutest.indicatorfactory" bundle="*">

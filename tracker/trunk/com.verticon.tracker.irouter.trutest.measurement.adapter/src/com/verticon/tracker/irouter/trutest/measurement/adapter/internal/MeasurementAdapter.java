@@ -195,9 +195,9 @@ public class MeasurementAdapter implements Consumer, Producer, Monitorable {
 	 */
 	private NumberFormat buildFormater() {
 		StringBuilder builder = new StringBuilder();
-		int decimalPlaces = (Integer) config.get(DECIMAL_PLACES);
+		int decimalPlaces = getConfigurationInteger(DECIMAL_PLACES);
 
-		int minDigits = (Integer) config.get(MIN_CHARACTERS);
+		int minDigits = getConfigurationInteger(MIN_CHARACTERS);
 
 		int decimal = minDigits - 1 - decimalPlaces;
 		int count = 0;
@@ -215,6 +215,16 @@ public class MeasurementAdapter implements Consumer, Producer, Monitorable {
 				new Object[] { this, minDigits, decimalPlaces,
 						builder.toString() });
 		return new DecimalFormat(builder.toString());
+	}
+
+	
+	
+	public Integer getConfigurationInteger(String key) {
+		Object conf = config.get(key);
+		if (conf instanceof String) {
+			return new Integer((String) conf);
+		}
+		return (Integer) conf;
 	}
 
 	@Override

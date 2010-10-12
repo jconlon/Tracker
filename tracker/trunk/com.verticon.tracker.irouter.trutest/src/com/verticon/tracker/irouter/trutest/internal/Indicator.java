@@ -19,8 +19,11 @@ import static com.verticon.tracker.irouter.common.TrackerConstants.RETRY_CONNECT
 import static com.verticon.tracker.irouter.common.TrackerConstants.STABLE_WEIGHT_ERROR;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME_DEFAULT;
+import static com.verticon.tracker.irouter.common.TrackerConstants.TRANSACTION_STATE_SCOPE;
 import static com.verticon.tracker.irouter.common.TrackerConstants.UNSTABLE_WEIGHT_ERROR;
 import static com.verticon.tracker.irouter.trutest.internal.Component.bundleMarker;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.CONSUMER_SCOPE;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.CONSUMER_SCOPE_DEFAULT;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.CONSUME_COMMAND_DELAY;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.CONSUME_COMMAND_DELAY_DEFAULT;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.DATA_SYNC_DIRECTORY;
@@ -30,6 +33,13 @@ import static com.verticon.tracker.irouter.trutest.internal.Constants.DOWNLOAD_R
 import static com.verticon.tracker.irouter.trutest.internal.Constants.FILE_HEADER_COMMAND;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.FILE_HEADER_COMMAND_DEFAULT;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.POLL_DELAY_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_EID;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_EID_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_WEIGHT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_WEIGHT_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ENTER_KEY;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ENTER_KEY_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_STATE_ENTER_KEY_NAME;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.REQUEST_COMMAND_DEFAULT;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.RESPONSE_PATTERN_DEFAULT;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.RETRY_CONNECTION_DELAY_DEFAULT;
@@ -144,6 +154,13 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 		DEFAULTS.put(FILE_HEADER_COMMAND, FILE_HEADER_COMMAND_DEFAULT);
 		DEFAULTS.put(DOWNLOAD_RECORD_PATTERN, DOWNLOAD_RECORD_PATTERN_DEFAULT);
 		DEFAULTS.put(UPLOAD_RECORD_PATTERN, UPLOAD_RECORD_PATTERN_DEFAULT);
+		DEFAULTS.put(CONSUMER_SCOPE, CONSUMER_SCOPE_DEFAULT);
+
+		DEFAULTS.put(PRODUCER_SCOPE_ANIMAL_WEIGHT, PRODUCER_SCOPE_ANIMAL_WEIGHT_DEFAULT);
+	    DEFAULTS.put(PRODUCER_SCOPE_ANIMAL_EID ,PRODUCER_SCOPE_ANIMAL_EID_DEFAULT);
+		DEFAULTS.put(PRODUCER_SCOPE_ENTER_KEY, PRODUCER_SCOPE_ENTER_KEY_DEFAULT);
+		
+		DEFAULTS.put(PRODUCER_STATE_ENTER_KEY_NAME, TRANSACTION_STATE_SCOPE);
 
 	}
 
@@ -513,6 +530,21 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 
 		return cs;
 	}
+	
+	/**
+	 * Used for scopes
+	 * @param key
+	 * @return an array
+	 */
+	 @Override
+	public String[] getConfigurationStringArray(String key) {
+		Object conf = getConfiguration(key);
+		if (conf instanceof String) {
+			return new String[]{(String) conf};
+		}
+		return (String[]) conf;
+	}
+
 
 	/**
 	 * Protected so a test mock can override

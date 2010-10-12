@@ -150,7 +150,7 @@ public class MeasurementAdapterSystemTest extends TestCase {
 		props.put(DESTINATIN_PORT, 1);
 		props.put(DESTINATION_FIELD, 8);
 		props.put(MIN_CHARACTERS, 6);
-		props.put(PRESENTATION_UNITS, "NONE");
+		props.put(PRESENTATION_UNITS, "NATIVE");
 		props.put(DECIMAL_PLACES, 4);
 
 		// Add a tag to find the service
@@ -207,7 +207,7 @@ public class MeasurementAdapterSystemTest extends TestCase {
 		initializeAndSendMeasurement(pid, 2,// port,
 				8,// field,
 				5,// minCharacters,
-				"NONE",// presentationUnits,
+				"NATIVE",// presentationUnits,
 				3,// decimalPlaces,
 				.01,// valueToSend,
 				Unit.kg// unitToSend
@@ -220,7 +220,7 @@ public class MeasurementAdapterSystemTest extends TestCase {
 		initializeAndSendMeasurement(pid, 2,// port,
 				8,// field,
 				5,// minCharacters,
-				"NONE",// presentationUnits,
+				"NATIVE",// presentationUnits,
 				2,// decimalPlaces,
 				.001,// valueToSend,
 				Unit.kg// unitToSend
@@ -233,7 +233,7 @@ public class MeasurementAdapterSystemTest extends TestCase {
 		initializeAndSendMeasurement(pid, 2,// port,
 				8,// field,
 				6,// minCharacters,
-				"NONE",// presentationUnits,
+				"NATIVE",// presentationUnits,
 				2,// decimalPlaces,
 				.001,// valueToSend,
 				Unit.kg// unitToSend
@@ -247,7 +247,7 @@ public class MeasurementAdapterSystemTest extends TestCase {
 		initializeAndSendMeasurement(pid, 2,// port,
 				8,// field,
 				3,// minCharacters,
-				"NONE",// presentationUnits,
+				"NATIVE",// presentationUnits,
 				2,// decimalPlaces,
 				.001,// valueToSend,
 				Unit.kg// unitToSend

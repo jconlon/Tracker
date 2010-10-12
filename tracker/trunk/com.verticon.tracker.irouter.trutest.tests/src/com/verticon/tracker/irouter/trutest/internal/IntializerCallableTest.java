@@ -321,5 +321,10 @@ public class IntializerCallableTest {
 			// TODO Auto-generated method stub
 
 		}
+
+		@Override
+		public String[] getConfigurationStringArray(String key) {
+			return null;
+		}
 	}
 }
