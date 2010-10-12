@@ -171,10 +171,19 @@ public class MeasurementTrigger implements Consumer, Producer, Monitorable {
 	private StateMachine buildState() {
 		return StateMachine
 				.getInstance((String) config.get(OPERATION_TYPE),
-						(Double) config.get(LOW_VALUE),
-						(Double) config.get(HIGH_VALUE));
+						getConfigurationDouble(LOW_VALUE),
+						getConfigurationDouble(HIGH_VALUE));
 	}
 
+	
+	private Double getConfigurationDouble(String key) {
+		Object conf = config.get( key);
+		if(conf instanceof String){
+			return new Double((String)conf);
+		}
+		return (Double)conf;
+	}
+	
 	private void fire(State in) {
 
 		if (wires != null) {
