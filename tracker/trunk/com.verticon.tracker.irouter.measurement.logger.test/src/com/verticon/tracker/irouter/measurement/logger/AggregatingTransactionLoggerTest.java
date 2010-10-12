@@ -52,12 +52,14 @@ public class AggregatingTransactionLoggerTest extends AbstractLoggerTest {
 	private static final String BLOODWEIGHT_MATCHER = 
 		"type='measurement',dateTime='.*',id='123456789012345',scope='bloodWeight',value='1.9990',error='0.0000',unit='kg'";
 	
-	
+	private static final String CONSUMER_EID_SCOPE_DEFAULT = "animal.tag.number";
+	private static final String CONSUMER_STATE_SCOPE_DEFAULT = "transaction.state";
+		
 	
 	@Test
 	public void testAggregatingLoggerConstructor() {
 		try {
-			new AggregatedTransactionLogger(null);
+			new AggregatedTransactionLogger(null,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT);
 			fail("Should have thrown an IllegalArgument Exception");
 		} catch (IllegalArgumentException e) {
 			//expected
@@ -65,7 +67,7 @@ public class AggregatingTransactionLoggerTest extends AbstractLoggerTest {
 			fail("Should have thrown an IllegalArgument Exception "+e);
 		}
 		Logger logger = createMock(Logger.class);
-		instance = new AggregatedTransactionLogger(logger);
+		instance = new AggregatedTransactionLogger(logger,null,null);
 		assertNotNull(instance);
 	}
 
@@ -78,7 +80,7 @@ public class AggregatingTransactionLoggerTest extends AbstractLoggerTest {
 	@Test
 	public void testAddWithNoTrigger() {
 		Logger logger = createMock(Logger.class);
-		instance = new AggregatedTransactionLogger(logger);
+		instance = new AggregatedTransactionLogger(logger,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT);
 		logger.debug(bundleMarker,"{} ID={}",
 				instance,idEnvelope.getValue());
 		assertNotNull(instance);
@@ -94,7 +96,7 @@ public class AggregatingTransactionLoggerTest extends AbstractLoggerTest {
 	@Test
 	public void testTriggerWeight() {
 		Logger logger = createMock(Logger.class);
-		instance = new AggregatedTransactionLogger(logger);
+		instance = new AggregatedTransactionLogger(logger,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT);
 		logger.debug(bundleMarker,"{} ID={}",
 				instance,idEnvelope.getValue());
 		logger.info(eq(bundleMarker),matches(ANIMALWEIGHT_MATCHER));
@@ -108,7 +110,7 @@ public class AggregatingTransactionLoggerTest extends AbstractLoggerTest {
 	@Test
 	public void testTriggerWeightBlood() {
 		Logger logger = createMock(Logger.class);
-		instance = new AggregatedTransactionLogger(logger);
+		instance = new AggregatedTransactionLogger(logger,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT);
 		logger.debug(bundleMarker,"{} ID={}",
 				instance,idEnvelope.getValue());
 		logger.info(eq(bundleMarker),matches(ANIMALWEIGHT_MATCHER));
@@ -124,7 +126,7 @@ public class AggregatingTransactionLoggerTest extends AbstractLoggerTest {
 	@Test
 	public void testTriggerWeightWithoutId() {
 		Logger logger = createMock(Logger.class);
-		instance = new AggregatedTransactionLogger(logger);
+		instance = new AggregatedTransactionLogger(logger,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT);
 		logger.info(eq(bundleMarker),matches(NULL_ID_ANIMALWEIGHT_MATCHER));
 		assertNotNull(instance);
 		replay(logger);
@@ -135,7 +137,7 @@ public class AggregatingTransactionLoggerTest extends AbstractLoggerTest {
 	@Test
 	public void testTriggerWeightBloodWithoutId() {
 		Logger logger = createMock(Logger.class);
-		instance = new AggregatedTransactionLogger(logger);
+		instance = new AggregatedTransactionLogger(logger,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT);
 		logger.info(eq(bundleMarker),matches(NULL_ID_ANIMALWEIGHT_MATCHER));
 		logger.info(eq(bundleMarker),matches(NULL_ID_BLOODWEIGHT_MATCHER));
 		assertNotNull(instance);
@@ -148,7 +150,7 @@ public class AggregatingTransactionLoggerTest extends AbstractLoggerTest {
 	@Test
 	public void testGet() {
 		Logger logger = createMock(Logger.class);
-		instance = new AggregatedTransactionLogger(logger);
+		instance = new AggregatedTransactionLogger(logger,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT);
 		assertNotNull(instance);
 		replay(logger);
 		instance.add(animalWeightEnvelope);
