@@ -152,9 +152,19 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 	}
 
 	private State buildState() {
-		return new State((Integer) config.get(TERMINATOR_STATE_VALUE),
+		return new State(
+				getConfigurationInteger(TERMINATOR_STATE_VALUE),
 				(String) config.get(TERMINATOR_STATE_NAME));
 	}
+	
+	private Integer getConfigurationInteger(String key) {
+		Object conf = config.get( key);
+		if(conf instanceof String){
+			return new Integer((String)conf);
+		}
+		return (Integer)conf;
+	}
+
 
 	private void forward(Object in) {
 		if (!forwarding.get()) {
