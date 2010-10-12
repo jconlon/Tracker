@@ -23,7 +23,7 @@
     <AD name="Operation on measurement" id="operation.type" type="String" 
         default="raising"
         description="Type of threashold that will fire the trigger.">
-    	<Option label="Trigger on raising threshold" value="raising"/>
+    	<Option label="Trigger on raising threshold" value="rising"/>
 		<Option label="Trigger on falling threshold" value="falling"/>
 	</AD>
     	
