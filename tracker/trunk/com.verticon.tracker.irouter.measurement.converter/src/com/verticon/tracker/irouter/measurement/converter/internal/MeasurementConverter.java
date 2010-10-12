@@ -86,8 +86,15 @@ public class MeasurementConverter implements Consumer, Producer, Monitorable {
     	if(op ==null){
 			throw new IllegalArgumentException( OPERAND+" parameter is not set.");
 		}
-    	return (Double)op;
+    	return getDouble(op);
     }
+    
+    private Double getDouble(Object value) {
+		if(value instanceof String){
+			return new Double((String)value);
+		}
+		return (Double)value;
+	}
     
     /**
 	 * Declaratives Services activation of instance.
