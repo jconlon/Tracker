@@ -206,7 +206,24 @@ public class ConfigAdminResouceImpl extends XMLResourceImpl {
 		}
 		logger.debug(bundleMarker, "Creating configuration for factoryPid={}",
 				designate.getFactoryPid());
+		Dictionary<String, Object> properties = getProperties(designate);
+
+		ConfigurationAdmin configAdmin = findConfigurationAdmin();
+		Configuration configuration = configAdmin
+				.createFactoryConfiguration(designate.getFactoryPid(), designate.getBundle());
+		configuration.update(properties);
+		logger.info(bundleMarker, "Created configuration for factoryPid={}",
+				designate.getFactoryPid());
+	}
+
+	/**
+	 * Get the designate attributes and save them as properties
+	 * @param designate
+	 * @return
+	 */
+	private Dictionary<String, Object> getProperties(Designate designate) {
 		Dictionary<String, Object> properties = new Hashtable<String, Object>();
+		
 		for (Attribute attribute : designate.getObject().getAttribute()) {
 			if (!attribute.getValue().isEmpty()) {
 				Object value = null;
@@ -227,13 +244,7 @@ public class ConfigAdminResouceImpl extends XMLResourceImpl {
 			}
 
 		}
-
-		ConfigurationAdmin configAdmin = findConfigurationAdmin();
-		Configuration configuration = configAdmin
-				.createFactoryConfiguration(designate.getFactoryPid(), designate.getBundle());
-		configuration.update(properties);
-		logger.info(bundleMarker, "Created configuration for factoryPid={}",
-				designate.getFactoryPid());
+		return properties;
 	}
 
 	
@@ -258,20 +269,8 @@ public class ConfigAdminResouceImpl extends XMLResourceImpl {
 		logger.debug(bundleMarker,
 				"Updating configuration for factory={} pid={}", designate
 						.getFactoryPid(), designate.getPid());
-		Dictionary<String, Object> properties = new Hashtable<String, Object>();
-		for (Attribute attribute : designate.getObject().getAttribute()) {
-			if (!attribute.getValue().isEmpty()) {
-				Object value = null;
-				if (attribute.getValue().size() > 1) {
-					value = attribute.getValue().toArray();
-				} else {
-					value = attribute.getValue().get(0);
-				}
 
-				properties.put(attribute.getAdref(), value);
-			}
-
-		}
+		Dictionary<String, Object> properties = getProperties(designate);
 		configuration.update(properties);
 		logger.info(bundleMarker,
 				"Updated configuration for factory={} pid={}", designate
