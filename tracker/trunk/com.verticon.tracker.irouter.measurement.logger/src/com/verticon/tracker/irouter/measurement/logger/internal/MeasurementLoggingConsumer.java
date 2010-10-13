@@ -5,6 +5,8 @@ import static com.verticon.tracker.irouter.measurement.logger.internal.Component
 import static com.verticon.tracker.irouter.measurement.logger.internal.Context.CONSUMER_EID_SCOPE;
 import static com.verticon.tracker.irouter.measurement.logger.internal.Context.CONSUMER_MEASUREMENT_SCOPE;
 import static com.verticon.tracker.irouter.measurement.logger.internal.Context.CONSUMER_STATE_SCOPE;
+import static com.verticon.tracker.irouter.measurement.logger.internal.Context.CONTROL_STATE_NAME;
+import static com.verticon.tracker.irouter.measurement.logger.internal.Context.CONTROL_STATE_VALUE;
 import static com.verticon.tracker.irouter.measurement.logger.internal.Context.LAST_LOG_ENTRY;
 import static com.verticon.tracker.irouter.measurement.logger.internal.Context.WIRES_COUNT;
 
@@ -15,6 +17,7 @@ import org.osgi.service.monitor.Monitorable;
 import org.osgi.service.monitor.StatusVariable;
 import org.osgi.service.wireadmin.Envelope;
 import org.osgi.service.wireadmin.Wire;
+import org.osgi.util.measurement.State;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -45,15 +48,20 @@ public class MeasurementLoggingConsumer extends AbstractConsumer implements Moni
 	protected MeasurementLoggingConsumer(IContext context) {
 		super(context);
 		scope = buildScope();
+		State state = new State(
+				context.getConfigurationInteger(CONTROL_STATE_VALUE),
+				context.getConfigurationString(CONTROL_STATE_NAME));
 		if(context.getConfigurationInteger(Context.LOGGER_TYPE).equals(Context.LOGGER_TYPE_AGGREGATING)){
 			iLogger = new AggregatedTransactionLogger(
 					getLoggerType(AggregatedTransactionLogger.class),
+					state,
 					context.getConfigurationString(Context.CONSUMER_STATE_SCOPE),
 					context.getConfigurationString(Context.CONSUMER_EID_SCOPE)
 			);
 		}else{
 			iLogger = new NormalizedTransactionLogger(
 					context.getConfigurationString(TRACKER_WIRE_GROUP_NAME),
+					state,
 					context.getConfigurationString(Context.CONSUMER_STATE_SCOPE),
 					context.getConfigurationString(Context.CONSUMER_EID_SCOPE),
 					getLoggerType(NormalizedTransactionLogger.class));

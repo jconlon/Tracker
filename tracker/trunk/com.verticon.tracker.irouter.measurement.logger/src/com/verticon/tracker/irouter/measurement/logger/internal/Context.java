@@ -25,6 +25,7 @@ public class Context extends AbstractContext {
 	static final String CONSUMER_STATE_SCOPE_DEFAULT = "transaction.state";
 	static final String CONTROL_STATE_NAME ="consumer.transaction.state";
 	static final String CONTROL_STATE_NAME_DEFAULT ="transaction.state" ;
+	static final String CONTROL_STATE_VALUE = "consumer.transaction.state.value";
 	
 	static final String LOGGER_NAME = "logger.name";
     static final String WIRES_COUNT = "consumer.Connected_Wires";
@@ -42,6 +43,7 @@ public class Context extends AbstractContext {
 		DEFAULTS.put(CONSUMER_EID_SCOPE,CONSUMER_EID_SCOPE_DEFAULT);
 		DEFAULTS.put(CONSUMER_STATE_SCOPE,CONSUMER_STATE_SCOPE_DEFAULT);
 		DEFAULTS.put(CONTROL_STATE_NAME, CONTROL_STATE_NAME_DEFAULT) ;
+		DEFAULTS.put(CONTROL_STATE_VALUE, 1);
 	}
 	
 	public Context(String pid, Dictionary<?, ?> configuration,

@@ -1,6 +1,6 @@
 package com.verticon.tracker.irouter.measurement.logger;
+
 import static com.verticon.tracker.irouter.measurement.logger.internal.ComponentFactory.bundleMarker;
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.matches;
 import static org.easymock.EasyMock.replay;
@@ -8,54 +8,63 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
-import org.slf4j.Logger;
+import org.osgi.util.measurement.State;
 
 import com.verticon.tracker.irouter.measurement.logger.internal.NormalizedTransactionLogger;
 
-
-public class NormalizingTransactionLoggerTest extends AbstractLoggerTest{
+public class NormalizingTransactionLoggerTest extends AbstractLoggerTest {
 
 	private static final String TEST_GROUP = "Test group";
 	private static final String CONSUMER_EID_SCOPE_DEFAULT = "animal.tag.number";
 	private static final String CONSUMER_STATE_SCOPE_DEFAULT = "transaction.state";
-	
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.verticon.tracker.irouter.measurement.logger.AbstractLoggerTest#setUp
+	 * ()
+	 */
+	@Override
+	public void setUp() throws Exception {
+		super.setUp();
+		instance = new NormalizedTransactionLogger(TEST_GROUP, new State(1,
+				DOCARE_STATE_NAME), CONSUMER_STATE_SCOPE_DEFAULT,
+				CONSUMER_EID_SCOPE_DEFAULT, logger);
+
+	}
+
 	public void testAggregatingLoggerConstructor() {
 		try {
-			new NormalizedTransactionLogger(TEST_GROUP,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT,null);
+			new NormalizedTransactionLogger(TEST_GROUP, new State(1, "x"),
+					CONSUMER_STATE_SCOPE_DEFAULT, CONSUMER_EID_SCOPE_DEFAULT,
+					null);
 			fail("Should have thrown an IllegalArgument Exception");
 		} catch (IllegalArgumentException e) {
-			//expected
-		} catch (Exception e){
-			fail("Should have thrown an IllegalArgument Exception "+e);
+			// expected
+		} catch (Exception e) {
+			fail("Should have thrown an IllegalArgument Exception " + e);
 		}
-		Logger logger = createMock(Logger.class);
-		instance = new NormalizedTransactionLogger(TEST_GROUP,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT,logger);
 		assertNotNull(instance);
 	}
-	
-	
+
 	@Test
 	public void testTriggerWeight() {
-		Logger logger = createMock(Logger.class);
-		instance = new NormalizedTransactionLogger(TEST_GROUP,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT, logger);
-		logger.debug(bundleMarker,"{} ID={}",
-				instance,idEnvelope.getValue());
-		logger.info(eq(bundleMarker),matches("123456789012345,Test group,100.3"));
+		logger.debug(bundleMarker, "{} ID={}", instance, idEnvelope.getValue());
+		logger.info(eq(bundleMarker),
+				matches("123456789012345,Test group,100.3"));
 		assertNotNull(instance);
 		replay(logger);
 		instance.add(animalWeightEnvelope);
 		instance.add(idEnvelope);
 		instance.add(transactionStateEnvelope);
 	}
-	
+
 	@Test
 	public void testTriggerWeightBlood() {
-		Logger logger = createMock(Logger.class);
-		instance = new NormalizedTransactionLogger(TEST_GROUP,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT, logger);
-		logger.debug(bundleMarker,"{} ID={}",
-				instance,idEnvelope.getValue());
-		logger.info(eq(bundleMarker),matches("123456789012345,Test group,100.3,1.999"));
+		logger.debug(bundleMarker, "{} ID={}", instance, idEnvelope.getValue());
+		logger.info(eq(bundleMarker),
+				matches("123456789012345,Test group,100.3,1.999"));
 		assertNotNull(instance);
 		replay(logger);
 		instance.add(animalWeightEnvelope);
@@ -63,23 +72,19 @@ public class NormalizingTransactionLoggerTest extends AbstractLoggerTest{
 		instance.add(mettlerWeightEnvelope);
 		instance.add(transactionStateEnvelope);
 	}
-	
+
 	@Test
 	public void testTriggerWeightWithoutId() {
-		Logger logger = createMock(Logger.class);
-		instance = new NormalizedTransactionLogger(TEST_GROUP,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT, logger);
-		logger.info(eq(bundleMarker),matches("null,Test group,100.3"));
+		logger.info(eq(bundleMarker), matches("null,Test group,100.3"));
 		assertNotNull(instance);
 		replay(logger);
 		instance.add(animalWeightEnvelope);
 		instance.add(transactionStateEnvelope);
 	}
-	
+
 	@Test
 	public void testTriggerWeightBloodWithoutId() {
-		Logger logger = createMock(Logger.class);
-		instance = new NormalizedTransactionLogger(TEST_GROUP,CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT, logger);
-		logger.info(eq(bundleMarker),matches("null,Test group,100.3,1.999"));
+		logger.info(eq(bundleMarker), matches("null,Test group,100.3,1.999"));
 		assertNotNull(instance);
 		replay(logger);
 		instance.add(animalWeightEnvelope);
@@ -87,5 +92,4 @@ public class NormalizingTransactionLoggerTest extends AbstractLoggerTest{
 		instance.add(transactionStateEnvelope);
 	}
 
-	
 }

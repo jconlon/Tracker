@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
 
-  <OCD description="Gateway for sending measurements to Tracker transaction editors." 
+  <OCD description="Gateway for sending measurements and animal ids to Tracker transaction editors as animal history events." 
   		name="Premises Measurement Event Gateway" 
   		id="com.verticon.tracker.irouter.measurement.event">
     
@@ -16,16 +16,24 @@
  
  	<AD name="Consumable scopes" id="wireadmin.consumer.scope" type="String"
 		cardinality="5" 
-		description="Comma delimited list of the measurements, animal tag id, and trigger state. (Use full scope names)" />
+		description="Comma delimited list of the scopes for measurement, animal tag id, and trigger state. (Use full scope names)" />
  
     <AD name="Trigger scope" id="trigger.scope" type="String" 
         default="transaction.state"
-		description="Name of the Trigger state from the previous consumbable scopes list." />
+		description="Name of the triggering state scope from the previous consumbable scopes list." />
 		
 	 <AD name="Animal ID scope" id="animal.id.scope" type="String" 
 	    default="animal.tag.number"
 		description="Name of the Animal ID scope from the previous consumbable scopes list." />
  
+     <AD name="Name of the Triggering State" id="consumer.transaction.state" type="String"
+		default="transaction.state" 
+    	description="The name of the state indicating that measurement and the animal id should be forwarded as an animal history event."/>
+    	
+    <AD name="Value of the Triggering State" id="consumer.transaction.state.value" type="Integer"
+		default="1" 
+    	description="The value of the state indicating that measurement and the animal id should be forwarded as an animal history event."/>
+    
   </OCD>
   
   <Designate pid="com.verticon.tracker.irouter.measurement.event" bundle="*">

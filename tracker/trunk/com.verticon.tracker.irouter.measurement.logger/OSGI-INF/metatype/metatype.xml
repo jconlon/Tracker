@@ -22,6 +22,10 @@
     <AD name="Name of the Control State" id="consumer.transaction.state" type="String"
 		default="transaction.state" 
     	description="The name of the state indicating that transaction should be logged."/>
+    	
+    <AD name="Value of the Control State" id="consumer.transaction.state.value" type="Integer"
+		default="1" 
+    	description="The value of the state indicating that transaction should be logged."/>
     
     <AD name="Type of logger" id="logger.type" type="Integer" 
     	description="Kind of transaction logger to create. Normalized - log entries are comma delimited and include all measurements. Aggregated - Separate log entries per measurement.">

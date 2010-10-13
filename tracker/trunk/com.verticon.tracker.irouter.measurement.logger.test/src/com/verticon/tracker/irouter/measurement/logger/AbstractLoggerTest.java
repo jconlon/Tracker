@@ -2,6 +2,7 @@ package com.verticon.tracker.irouter.measurement.logger;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.ANIMAL_TAG_NUMBER_SCOPE;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRANSACTION_STATE_SCOPE;
+import static org.easymock.EasyMock.createMock;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,11 +13,13 @@ import org.osgi.service.wireadmin.Envelope;
 import org.osgi.util.measurement.Measurement;
 import org.osgi.util.measurement.State;
 import org.osgi.util.measurement.Unit;
+import org.slf4j.Logger;
 
 import com.verticon.tracker.irouter.common.ITransactionHandler;
 
 public abstract class AbstractLoggerTest {
 
+    static final String DOCARE_STATE_NAME = "docare";
 	static final String BLOOD_WEIGHT = "bloodWeight";
 	static final String ANIMAL_WEIGHT = "animalWeight";
 	ITransactionHandler instance = null;
@@ -26,6 +29,7 @@ public abstract class AbstractLoggerTest {
 	Envelope transactionStateEnvelope = null;
 	Measurement animalMeasurement;
 	Measurement mettlerMeasurement;
+	Logger logger;
 	
 	
 	/**
@@ -37,6 +41,7 @@ public abstract class AbstractLoggerTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		logger = createMock(Logger.class);
 		//Balance Weight
 		mettlerMeasurement = new Measurement(
 				1.999, 
@@ -71,7 +76,7 @@ public abstract class AbstractLoggerTest {
 		
 		//TRANSACTION
 		transactionStateEnvelope = new BasicEnvelope(
-				new State(1,"doncare"),"idtrans", 
+				new State(1,DOCARE_STATE_NAME),"idtrans", 
 				TRANSACTION_STATE_SCOPE);
 		
 	}
@@ -82,6 +87,7 @@ public abstract class AbstractLoggerTest {
 	@After
 	public void tearDown() throws Exception {
 		instance = null;
+		logger=null;
 	}
 
 }
