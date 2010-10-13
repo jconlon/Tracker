@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.osgi.util.measurement.State;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 
@@ -37,8 +38,8 @@ public class NormalizedTransactionLogger extends AbstractTransactionHandler impl
 		return bundleMarker;
 	}
 	
-	public NormalizedTransactionLogger(String groupName,String triggeringScopeName, String animalIDNumberScopeName, Logger log) {
-		super(log);
+	public NormalizedTransactionLogger(String groupName,State state, String triggeringScopeName, String animalIDNumberScopeName, Logger log) {
+		super(log, state);
 		this.groupName= groupName;
 		this.animalIDNumberScopeName=animalIDNumberScopeName;
 		this.triggeringScopeName=triggeringScopeName;

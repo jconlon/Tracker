@@ -22,15 +22,17 @@ public abstract class AbstractTransactionHandler implements ITransactionHandler 
 	protected final Logger log;
 	protected final Map<String, Measurement> measurements = new HashMap<String, Measurement>();
 	protected Long id = null;
+	protected State state;
 
 	
 	
-	protected AbstractTransactionHandler(Logger log) {
+	protected AbstractTransactionHandler(Logger log, State state) {
 		super();
 		if(log==null){
 			throw new IllegalArgumentException("Can not construct with a null log");
 		}
 		this.log = log;
+		this.state = state;
 	}
 
 	protected abstract Marker bundleMarker();
@@ -45,7 +47,13 @@ public abstract class AbstractTransactionHandler implements ITransactionHandler 
 	
 	public void add(Envelope envelope) {
 		 if(envelope.getScope().equals(getTriggeringScopeName())){
-			 if(((State)envelope.getValue()).getValue()==1){
+			 if(state==null){
+				 if( ((State)envelope.getValue()).getValue()==1){
+					 triggered();
+					 measurements.clear();
+					 id=null;
+				 }
+			 }else if (state.equals(envelope.getValue())){
 				 triggered();
 				 measurements.clear();
 				 id=null;

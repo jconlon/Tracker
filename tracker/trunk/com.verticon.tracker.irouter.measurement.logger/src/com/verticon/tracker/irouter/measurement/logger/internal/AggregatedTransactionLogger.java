@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.osgi.util.measurement.Measurement;
+import org.osgi.util.measurement.State;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 
@@ -49,8 +50,8 @@ public class AggregatedTransactionLogger extends AbstractTransactionHandler impl
 	}
 
 
-	public AggregatedTransactionLogger(Logger log, String triggeringScopeName,String animalIDNumberScopeName ) {
-		super(log);
+	public AggregatedTransactionLogger(Logger log, State state, String triggeringScopeName,String animalIDNumberScopeName ) {
+		super(log, state);
 		this.animalIDNumberScopeName= animalIDNumberScopeName;
 		this.triggeringScopeName = triggeringScopeName;
 	}

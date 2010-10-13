@@ -24,6 +24,7 @@ import org.osgi.service.wireadmin.Consumer;
 import org.osgi.service.wireadmin.Envelope;
 import org.osgi.service.wireadmin.Wire;
 import org.osgi.util.measurement.Measurement;
+import org.osgi.util.measurement.State;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
@@ -44,13 +45,14 @@ public class MeasurementEventConsumer  extends AbstractTransactionHandler implem
 	private static final String WIRES_COUNT = "consumer.Connected_Wires";
     private static final String LAST_MEASUREMENT_SENT ="consumer.Last_Measurement_Sent";
     private static final String TOTAL_MEASUREMENTS_SENT ="consumer.Total_Measurements_Sent";
+    private static final String CONTROL_STATE_NAME ="consumer.transaction.state";
+	private static final String CONTROL_STATE_VALUE = "consumer.transaction.state.value";
+	
     private final AtomicInteger wiresConnected = new AtomicInteger(0);
     private final AtomicInteger totalMeasurements = new AtomicInteger(0);
     private MeasurementTransaction measurementTransaction = null;
-	private Map<String,String> config = null;
+	private Map<String,Object> config = null;
 	private EventAdmin eventAdmin = null;
-	
-	
 	private final static String PLUGIN_ID = "com.verticon.tracker.irouter.measurement.event";
 	public static final Marker bundleMarker = MarkerFactory.getMarker(PLUGIN_ID);
 	static { 
@@ -59,7 +61,7 @@ public class MeasurementEventConsumer  extends AbstractTransactionHandler implem
 
 	
 	public MeasurementEventConsumer() {
-		super(LoggerFactory.getLogger(MeasurementEventConsumer.class));
+		super(LoggerFactory.getLogger(MeasurementEventConsumer.class),null);
 	}
 	
 	
@@ -79,14 +81,25 @@ public class MeasurementEventConsumer  extends AbstractTransactionHandler implem
 	 * 
 	 * @param config contains properties for this instance.
 	 */
-    void activate(Map<String,String> config){
+    void activate(Map<String,Object> config){
     	this.config=config;
 		log.debug(bundleMarker,"Activating...");
-		for (Map.Entry<String, String> entry : config.entrySet()) {
+		for (Map.Entry<String, Object> entry : config.entrySet()) {
 			log.debug(bundleMarker, "Property key={} value={}",entry.getKey(),entry.getValue());
 		}
+		this.state = new State(
+				getConfigInteger(CONTROL_STATE_VALUE),
+				getConfigString(CONTROL_STATE_NAME));
 		
 	}
+    
+    private String getConfigString(String key){
+    	return (String)config.get(key);
+    }
+    
+    private Integer getConfigInteger(String key){
+    	return (Integer)config.get(key);
+    }
     
     /**
 	 * Declaratives Services activation of instance.
@@ -145,12 +158,12 @@ public class MeasurementEventConsumer  extends AbstractTransactionHandler implem
 
 	@Override
 	protected String getTriggeringScopeName(){
-		return config.get("trigger.scope");
+		return getConfigString("trigger.scope");
 	}
 	
 	@Override
 	protected String getAnimalIDNumberScopeName(){
-		return config.get("animal.id.scope");
+		return getConfigString("animal.id.scope");
 	}
 
 	@Override
