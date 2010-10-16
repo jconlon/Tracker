@@ -143,7 +143,7 @@ public class EIDAdapter implements Consumer, Producer, Monitorable {
 	public void producersConnected(Wire[] wires) {
 		logger.debug(bundleMarker, "{} producersConnected with wires={}", this,
 				Arrays.toString(wires));
-		producersConnected.set(wires.length);
+		producersConnected.set(wires!=null?wires.length:0);
 	}
 
 	private void produce(Long value) {

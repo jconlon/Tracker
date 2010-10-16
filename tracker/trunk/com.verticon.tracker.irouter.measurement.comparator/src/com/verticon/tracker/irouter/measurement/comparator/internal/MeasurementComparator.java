@@ -126,7 +126,7 @@ public class MeasurementComparator implements Consumer, Producer, Monitorable {
 	public void producersConnected(Wire[] wires) {
 		logger.debug(bundleMarker, "Invoked producersConnected with wires={}",
 				Arrays.toString(wires));
-		producersConnected.set(wires.length);
+		producersConnected.set(wires!=null?wires.length:0);
 	}
 
 	/**
