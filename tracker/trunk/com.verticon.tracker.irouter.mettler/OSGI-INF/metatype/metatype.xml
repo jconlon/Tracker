@@ -32,6 +32,10 @@
 		required="false" default="mettler.weight.measurement" 
 		description="Name of the product created by this wire producer and sent to wire consumers."/>
   
+    <AD name="Component container label"  id="tracker.monitor.label" type="String"
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="Mettler Proxy"/> 
+        
   </OCD>
   
   <Designate pid="com.verticon.tracker.irouter.mettler.balancefactory" bundle="*">
