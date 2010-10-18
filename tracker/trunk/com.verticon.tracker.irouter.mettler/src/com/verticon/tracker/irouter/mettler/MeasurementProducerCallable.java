@@ -229,7 +229,7 @@ public class MeasurementProducerCallable implements Callable<Void> {
 
 	private void process(String response) throws InterruptedException {
 		
-		log.debug("{}: handling response={}",this, Utils.toAscii(response));
+		log.debug("{}: handling response={}",this, response!=null?Utils.toAscii(response):"null");
 		
 		Measurement measurement = createWeight(response);
 		if (measurement != null) {
@@ -237,11 +237,14 @@ public class MeasurementProducerCallable implements Callable<Void> {
 			
 			measurementSender.send(measurement);
 		}else{
-			log.warn(bundleMarker,"{}: failed to create weight response={}",this, Utils.toAscii(response));
+			log.warn(bundleMarker,"{}: failed to create weight response={}",this, response!=null?Utils.toAscii(response):"null");
 		}
 	}
 
 	Measurement createWeight(String response) {
+		if(response==null){
+			return null;
+		}
 		Double polledWeight = parseBalanceWeight(response);
 		
 		if (polledWeight == null) {

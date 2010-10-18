@@ -36,9 +36,10 @@ public class Context extends AbstractContext implements
 
 	static final String PRODUCER_WEIGHT_MEASUREMENT_NAME = "producer.weight.measurement.name";
 	static final String PRODUCER_WEIGHT_MEASUREMENT_NAME_DEFAULT = "mettler.weight.measurement";
-//	static final String[] SCOPE = { "mettler.weight.measurement" };
 	static final Double UNSTABLE_WEIGHT_ERROR_DEFAULT = new Double(.01);
 	static final Double STABLE_WEIGHT_ERROR_DEFAULT = new Double(.002);
+	static final String NODE_LABEL = "tracker.monitor.label";
+	static final String NODE_LABEL_DEFAULT = "Mettler Proxy";
 
 	public static final Dictionary<String, Object> DEFAULTS;
 	static {
@@ -54,6 +55,7 @@ public class Context extends AbstractContext implements
 		DEFAULTS.put(RESPONSE_PATTERN, "^S (D|S)((\\s*)(.*))\\sg$");
 		DEFAULTS.put(TRACKER_WIRE_GROUP_NAME, TRACKER_WIRE_GROUP_NAME_DEFAULT);
 		DEFAULTS.put(RETRY_CONNECTION_DELAY, new Long(5));
+		DEFAULTS.put(NODE_LABEL, NODE_LABEL_DEFAULT);
 	}
 	
 	@Override
@@ -66,9 +68,5 @@ public class Context extends AbstractContext implements
 			throws ConfigurationException {
 		super(pid, configuration, exec, scheduler);
 	}
-
-	
-
-	
 
 }

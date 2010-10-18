@@ -12,6 +12,7 @@ package com.verticon.tracker.irouter.mettler;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
+import static com.verticon.tracker.irouter.mettler.Context.NODE_LABEL;
 import static com.verticon.tracker.irouter.mettler.Context.PRODUCER_WEIGHT_MEASUREMENT_NAME;
 import static com.verticon.tracker.irouter.mettler.FactoryComponent.bundleMarker;
 import static org.osgi.framework.Constants.SERVICE_PID;
@@ -176,6 +177,7 @@ public class MeasurementProducer implements Producer, IMeasurementSender, Monito
 		regProps.put(CONNECTION_URI, context.getConfigurationString(CONNECTION_URI));
 		regProps.put(TRACKER_WIRE_GROUP_NAME, 
 				context.getConfigurationString(TRACKER_WIRE_GROUP_NAME));
+		regProps.put(NODE_LABEL, context.getConfigurationString(NODE_LABEL));
 		wireAdminReg = bc.registerService(Producer.class
 				.getName(), this, regProps);
 		monitorableReg = bc.registerService(Monitorable.class.getName(), this, regProps);
