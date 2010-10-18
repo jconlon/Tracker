@@ -22,6 +22,11 @@
 		<Option label="divide" value="divide"/>
 	</AD>
     <AD name="Value to use for operation" id="operation.value" type="Double"/>
+    
+    <AD name="Component container label"  id="tracker.monitor.label" type="String"
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="Converter"/> 
+  
   </OCD>
   
   <Designate pid="com.verticon.tracker.irouter.measurement.converter" bundle="*">

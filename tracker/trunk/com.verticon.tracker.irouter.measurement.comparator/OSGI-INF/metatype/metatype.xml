@@ -15,6 +15,10 @@
 		cardinality="1" 
 		description="The result product output state. (Use full scope name)" />
  
+     <AD name="Component container label"  id="tracker.monitor.label" type="String"
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="Comparator"/> 
+    
   </OCD>
   
   <Designate pid="com.verticon.tracker.irouter.measurement.comparator" bundle="*">

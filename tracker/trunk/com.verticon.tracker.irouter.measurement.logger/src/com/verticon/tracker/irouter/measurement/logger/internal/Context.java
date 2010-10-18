@@ -14,6 +14,7 @@ import com.verticon.tracker.irouter.common.AbstractContext;
 
 public class Context extends AbstractContext {
 	
+	private static final String NODE_LABEL_DEFAULT = "Logger Gateway";
 	public static final String LOGGER_TYPE ="logger.type";//Integer
 	public static final Integer LOGGER_TYPE_NORMALIZING = 0;
 	public static final Integer LOGGER_TYPE_AGGREGATING = 1;
@@ -30,6 +31,7 @@ public class Context extends AbstractContext {
 	static final String LOGGER_NAME = "logger.name";
     static final String WIRES_COUNT = "consumer.Connected_Wires";
     static final String LAST_LOG_ENTRY ="consumer.Last_Log_Entry";
+    static final String NODE_LABEL = "tracker.monitor.label";
 	
 	
 	private static Dictionary<String, Object> DEFAULTS;
@@ -44,6 +46,7 @@ public class Context extends AbstractContext {
 		DEFAULTS.put(CONSUMER_STATE_SCOPE,CONSUMER_STATE_SCOPE_DEFAULT);
 		DEFAULTS.put(CONTROL_STATE_NAME, CONTROL_STATE_NAME_DEFAULT) ;
 		DEFAULTS.put(CONTROL_STATE_VALUE, 1);
+		DEFAULTS.put(NODE_LABEL, NODE_LABEL_DEFAULT);
 	}
 	
 	public Context(String pid, Dictionary<?, ?> configuration,

@@ -36,6 +36,10 @@
    <AD name="Logger name"  id="logger.name" type="String" required="false" 
    	  default="transaction"
    	  description="Name of the file to send logs."/> 
+   	  
+    <AD name="Component container label"  id="tracker.monitor.label" type="String"
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="Logger"/> 
  
   </OCD>
   
