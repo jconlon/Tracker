@@ -24,9 +24,14 @@
         id="terminator.state.value" required="true" type="Integer" 
     	description="The value of the state that terminates information flow."/>
     	
-	<AD name="Information Producer scope" id="wireadmin.producer.scope" type="String"
+	 <AD name="Information Producer scope" id="wireadmin.producer.scope" type="String"
 		cardinality="1" 
 		description="The scope containing information flowing from the information consumbable scope . (Use full scope names)" />
+  
+     <AD name="Component container label"  id="tracker.monitor.label" type="String"
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="Terminator"/> 
+  
   </OCD>
   
   <Designate pid="com.verticon.tracker.irouter.flow.terminator" bundle="*">
