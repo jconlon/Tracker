@@ -187,7 +187,7 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 
 		refresh = new Action() {
 			public void run() {
-				block.getViewer().refresh();
+				block.getViewer().refresh(true);
 			}
 		};
 		refresh.setText("Refresh");

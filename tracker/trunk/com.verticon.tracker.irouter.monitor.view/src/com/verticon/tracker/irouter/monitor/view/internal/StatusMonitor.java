@@ -40,13 +40,13 @@ import org.osgi.service.monitor.StatusVariable;
  */
 public class StatusMonitor {
 
-	private final WiredNode wiredNode;
+	private final Node wiredNode;
 	private Map<String,WritableValue> model = new HashMap<String, WritableValue>();	
 	private final BooleanToString booleanToString = new BooleanToString();
 	private final StringToBoolean stringToBoolean = new StringToBoolean();
 	
 	
-    StatusMonitor(WiredNode wiredNode) {
+    StatusMonitor(Node wiredNode) {
 		super();
 		this.wiredNode = wiredNode;
 		

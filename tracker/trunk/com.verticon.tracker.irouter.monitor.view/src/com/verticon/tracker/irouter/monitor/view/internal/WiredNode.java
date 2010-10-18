@@ -10,113 +10,37 @@
  *******************************************************************************/
 package com.verticon.tracker.irouter.monitor.view.internal;
 
-import java.util.Map;
-
-import org.osgi.framework.ServiceReference;
-import org.osgi.service.wireadmin.Producer;
-
 /**
  * Graphic Model of a WireAdmin Producer or Consumer.
+ * 
  * @author jconlon
- *
+ * 
  */
-public abstract class WiredNode {
+public abstract class WiredNode implements Node {
 
-	enum Type {PRODUCER, CONSUMER};
-	
-	private final Type type;
 	protected final String group;
 	protected final String pid;
 	protected final String scope;
 	protected final Long service_id;
-	
-	
-//	/**
-//	 * @deprecated
-//	 * @param sr
-//	 */
-//	WiredNode(ServiceReference sr){
-//		this(
-//				isProducer(sr), 
-//				(String) sr.getProperty("tracker.wiring.group.name"), 
-//				(String) sr.getProperty("service.pid"), 
-//				isProducer(sr)?
-//					Arrays.toString((Object[])sr.getProperty("wireadmin.producer.scope")):
-//					Arrays.toString((Object[])sr.getProperty("wireadmin.consumer.scope")), 
-//				(Long) sr.getProperty("service.id"));
-//	}
-	
-//	/**
-//	 * 
-//	 * @deprecated
-//	 * @param map
-//	 */
-//	protected WiredNode(Map<String,Object> map){
-//		this(
-//				isProducer(map), 
-//				(String) map.get("tracker.wiring.group.name"), 
-//				(String) map.get("service.pid"), 
-//				isProducer(map)?
-//					Arrays.toString((Object[])map.get("wireadmin.producer.scope")):
-//					Arrays.toString((Object[])map.get("wireadmin.consumer.scope")), 
-//				(Long) map.get("service.id"));
-//	}
-	
-    protected WiredNode(boolean isProducer, String group, String pid, String scope,
-			long service_id) {
-		super();
-		this.type = isProducer?Type.PRODUCER:Type.CONSUMER;
-		this.group = group;
-		this.pid = pid;
-		this.scope = scope;
-		this.service_id = service_id;
+	protected final String label;
+	protected final boolean isProducer;
+	protected ComponentServices parent;
+
+	/**
+	 * @return the parent
+	 */
+	public ComponentServices getParent() {
+		return parent;
 	}
 
-//     String nodeText(){
-//    	StringBuilder buf = new StringBuilder(
-//    			group);
-//    	buf.append('\n');
-//    	
-//    	String name = (String) pid;
-//    	String prefix = "com.verticon.tracker.irouter.";
-//    	int nameIndex2 = name.indexOf('.', prefix.length());
-//    	buf.append(name.substring(prefix.length(), nameIndex2));//.append('-');
-//    	return buf.toString();
-//    }
-     
-     /**
-      * Strip off the pid number from the end and if the name of the 
-      * WiredNode begins with the verticon prefix,
-      * strip this off, if not just include it.
-      */
-     String nodeText(){
-     	String name = (String) pid;
-     	String prefix = "com.verticon.tracker.irouter.";
-     	if(pid.contains(prefix)){
-     		int nameIndex2 = name.indexOf('.', prefix.length());
-     		name = name.substring(prefix.length(), nameIndex2);
-     	}else{
-     		int nameIndex = name.indexOf('-');
-     		if(nameIndex!=-1){
-     			name = name.substring(0, nameIndex);
-     		}
-     	}
-     	return name;
-     }
-     
-//    boolean isProducer(){
-//    	return type == Type.PRODUCER;
-//    }
-    
-//	/* (non-Javadoc)
-//	 * @see java.lang.Object#toString()
-//	 */
-//	@Override
-//	public String toString() {
-//		return "WiredNode [type=" + type + ", group=" + group + ", pid="
-//				+ pid + ", scope=" + scope + ", service_id=" + service_id + "]";
-//	}
+	/**
+	 * @param parent the parent to set
+	 */
+	public void setParent(ComponentServices parent) {
+		this.parent = parent;
+	}
 
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -125,10 +49,13 @@ public abstract class WiredNode {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((group == null) ? 0 : group.hashCode());
+		result = prime * result + (isProducer ? 1231 : 1237);
+		result = prime * result + ((label == null) ? 0 : label.hashCode());
+		result = prime * result + ((parent == null) ? 0 : 1239);
 		result = prime * result + ((pid == null) ? 0 : pid.hashCode());
 		result = prime * result + ((scope == null) ? 0 : scope.hashCode());
-		result = prime * result + service_id.hashCode();
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result
+				+ ((service_id == null) ? 0 : service_id.hashCode());
 		return result;
 	}
 
@@ -149,6 +76,18 @@ public abstract class WiredNode {
 				return false;
 		} else if (!group.equals(other.group))
 			return false;
+		if (isProducer != other.isProducer)
+			return false;
+		if (label == null) {
+			if (other.label != null)
+				return false;
+		} else if (!label.equals(other.label))
+			return false;
+		if (parent == null) {
+			if (other.parent != null)
+				return false;
+		} else if (!parent.equals(other.parent))
+			return false;
 		if (pid == null) {
 			if (other.pid != null)
 				return false;
@@ -164,22 +103,56 @@ public abstract class WiredNode {
 				return false;
 		} else if (!service_id.equals(other.service_id))
 			return false;
-		if (type != other.type)
-			return false;
 		return true;
 	}
+
+	protected WiredNode(boolean isProducer, String group, String pid,
+			String scope, long service_id, String label) {
+		super();
+		this.isProducer=isProducer;
+		this.group = group;
+		this.pid = pid;
+		this.scope = scope;
+		this.service_id = service_id;
+		this.label = label;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.irouter.monitor.view.internal.Node#nodeText()
+	 */
+	@Override
+	public String nodeText() {
+		String name = (String) pid;
+		String prefix = "com.verticon.tracker.irouter.";
+		if (pid.contains(prefix)) {
+			int nameIndex2 = name.indexOf('.', prefix.length());
+			name = name.substring(prefix.length(), nameIndex2);
+		} else {
+			int nameIndex = name.indexOf('-');
+			if (nameIndex != -1) {
+				name = name.substring(0, nameIndex);
+			}
+		}
+		return name;
+	}
+
+	
+
+	
 
 	/**
 	 * @return the group
 	 */
-	String getGroup() {
+	@Override
+	public String getGroup() {
 		return group;
 	}
 
 	/**
 	 * @return the pid
 	 */
-	String getPid() {
+	@Override
+	public String getPid() {
 		return pid;
 	}
 
@@ -196,16 +169,9 @@ public abstract class WiredNode {
 	Long getService_id() {
 		return service_id;
 	}
-	
-	static boolean isProducer(ServiceReference sr){
-	    	String[] objectClass = (String[]) sr.getProperty("objectClass");
-			return objectClass[0].equals(Producer.class.getName());
-	}
-	
-	static boolean isProducer(Map<String,Object> sr){
-    	String[] objectClass = (String[]) sr.get("objectClass");
-		return objectClass[0].equals(Producer.class.getName());
-}
-	
-}
 
+	public String getComponentLabel() {
+		return label;
+	}
+
+}

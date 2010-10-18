@@ -98,9 +98,9 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 		viewer.setContentProvider(new WiredNodeGraphEntityContentProvider(this));
 		viewer.setLabelProvider(new WiredNodeLabelProvider());
 		//viewer.setSorter(new NameSorter());
-		IObservableSet observables = (IObservableSet)Component.INSTANCE.getModel();
+//		IObservableSet observables = (IObservableSet)Component.INSTANCE.getModel();
 		//Model contains a set WiredNode objects
-		viewer.setInput(observables);
+		viewer.setInput(Component.INSTANCE.getModel());
 	    setTreeLayout(viewer);
 	}
 
@@ -216,7 +216,7 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 	 * Wired Node was removed from the model
 	 * @param wiredNode
 	 */
-	void removePage(WiredNode wiredNode){
+	void removePage(Node wiredNode){
 		IDetailsPage page = keyMap.get(wiredNode);
 		if(page!=null){
 			page.dispose();
