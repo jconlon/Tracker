@@ -12,6 +12,7 @@ package com.verticon.tracker.irouter.monitor.view.internal;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.databinding.observable.set.WritableSet;
@@ -34,14 +35,13 @@ public class Component implements WireAdminListener {
 	 * slf4j Logger
 	 */
 	private final Logger logger = LoggerFactory.getLogger(Component.class);
-    final static String PLUGIN_ID = "com.verticon.tracker.irouter.monitor.view";
+	final static String PLUGIN_ID = "com.verticon.tracker.irouter.monitor.view";
 	static Component INSTANCE;
-	private Set<WiredNode> model2 ;
+	private Set<Node> model;
 	private WireAdminListener listener;
 	private WireAdmin wireAdmin;
-	private MonitorAdmin monitorAdmin;//THis is failing to start
+	private MonitorAdmin monitorAdmin;// THis is failing to start
 
-	
 	/**
 	 * @return the monitorAdmin
 	 */
@@ -49,33 +49,28 @@ public class Component implements WireAdminListener {
 		return monitorAdmin;
 	}
 
-
-
 	public void setListener(WireAdminListener listener) {
 		this.listener = listener;
 	}
 
-	
-	
 	@SuppressWarnings("unchecked")
 	public Component() {
 		super();
-		if(Realm.getDefault() ==null){
-			model2= new WritableSet(new Realm(){
+		if (Realm.getDefault() == null) {
+			model = new WritableSet(new Realm() {
 
 				@Override
 				public boolean isCurrent() {
 					return true;
-				}});
-		}else{
-			model2= new WritableSet();
+				}
+			});
+		} else {
+			model = new WritableSet();
 		}
 	}
 
-
-
-	public  Set<WiredNode> getModel() {
-		return model2;
+	public Set<Node> getModel() {
+		return model;
 	}
 
 	/**
@@ -90,7 +85,7 @@ public class Component implements WireAdminListener {
 
 	public void activate() {
 		INSTANCE = this;
-		logger.debug(bundleMarker,"Started");
+		logger.debug(bundleMarker, "Started");
 	}
 
 	public void deactivate() {
@@ -100,81 +95,185 @@ public class Component implements WireAdminListener {
 
 	public void setWireAdmin(WireAdmin wireAdmin) {
 		logger.debug(bundleMarker, "wireAdmin set");
-		this.wireAdmin=wireAdmin;
+		this.wireAdmin = wireAdmin;
 	}
 
-	public void unsetWireAdmin(WireAdmin wireAdmin){
-		this.wireAdmin=null;
+	public void unsetWireAdmin(WireAdmin wireAdmin) {
+		this.wireAdmin = null;
 	}
-	
+
 	public void setMonitorAdmin(MonitorAdmin monitorAdmin) {
 		logger.debug(bundleMarker, "monitorAdmin set");
 		this.monitorAdmin = monitorAdmin;
 	}
-	
+
 	public void unsetMonitorAdmin(MonitorAdmin monitorAdmin) {
 		logger.debug(bundleMarker, "monitorAdmin unset");
 		this.monitorAdmin = null;
 	}
-	
+
 	public Wire[] getWires() {
 		try {
 			return wireAdmin.getWires(null);
 		} catch (InvalidSyntaxException e) {
-			return null;//wont happen
+			return null;// wont happen
 		}
-		
+
 	}
 
 	@Override
-	public  void wireAdminEvent(WireAdminEvent event) {
-		if(listener!=null){
+	public void wireAdminEvent(WireAdminEvent event) {
+		if (listener != null) {
 			listener.wireAdminEvent(event);
-		}else{
+		} else {
 			logger.warn(bundleMarker, "Listener is null");
 		}
 	}
 
-	String status(){
-		return wireAdmin==null?"WireAdmin is unset":"Wires="+getWires().length;
+	String status() {
+		return wireAdmin == null ? "WireAdmin is unset" : "Wires="
+				+ getWires().length;
 	}
 
-	
-	public void setProducer(Producer producer, Map<String, Object> map) {
-		boolean added = model2.add(new ProducerWiredNode(map));
-		if(added){
-			logger.debug(bundleMarker, "Added producer {}",map.get("service.pid"));
-		}else{
-			logger.error(bundleMarker, "Failed to add producer {}",map.get("service.pid"));
+	public synchronized void setProducer(Producer producer,
+			Map<String, Object> map) {
+		ProducerWiredNode child = new ProducerWiredNode(map);
+		addToModel(child);
+	}
+
+	public synchronized void unsetProducer(Producer producer,
+			Map<String, Object> map) {
+		ProducerWiredNode child = new ProducerWiredNode(map);
+		removeFromModel(child);
+	}
+
+	public synchronized void setConsumer(Consumer consumer,
+			Map<String, Object> map) {
+		ConsumerWiredNode child = new ConsumerWiredNode(map);
+		addToModel(child);
+	}
+
+	public synchronized void unsetConsumer(Consumer consumer,
+			Map<String, Object> map) {
+		ConsumerWiredNode child = new ConsumerWiredNode(map);
+		removeFromModel(child);
+	}
+
+	private void removeFromModel(WiredNode child) {
+		logger.debug(bundleMarker, "Removing... {}", child);
+		WiredNode existingWiredNode = findWireNode(child.getPid());
+		if (existingWiredNode != null) {
+			logger.debug(bundleMarker, "Removing simple {}", existingWiredNode);
+			boolean result = model.remove(existingWiredNode);
+			if (result) {
+				logger.debug(bundleMarker, "Removed {}", child);
+			} else {
+				logger.error(bundleMarker, "Failed to remove simple {}", child);
+			}
+			return;
+		}
+		logger.debug(bundleMarker,
+				"Removing ComponentServices containing... {}", child);
+		ComponentServices componentServices = findComponentServicesNode(child
+				.getPid());
+		if (componentServices == null) {
+			logger.error(bundleMarker,
+					"Failed to find ComponentServices for {}", child);
+			return;
+		}
+		// Remove this node but save and add all the other services back
+		Vector<WiredNode> nodesToKeep = new Vector<WiredNode>(5);
+		for (WiredNode wiredNode : componentServices.getChildren()) {
+			if (!wiredNode.getService_id().equals(child.getService_id())) {
+				nodesToKeep.add(wiredNode);
+			}
+		}
+		boolean result = model.remove(componentServices);
+		if (result) {
+			logger.debug(bundleMarker, "Removed {}", componentServices);
+		} else {
+			logger.error(bundleMarker, "Failed to remove {}", componentServices);
+			return;
+		}
+		logger.debug(bundleMarker, "Adding back... {}", nodesToKeep);
+		for (WiredNode wiredNode : nodesToKeep) {
+			wiredNode.setParent(null);
+		}
+		result = model.addAll(nodesToKeep);
+		if (result) {
+			logger.debug(bundleMarker, "Added back {}", nodesToKeep);
+		} else {
+			logger.error(bundleMarker, "Failed to add back {}", nodesToKeep);
+		}
+
+	}
+
+	private void addToModel(WiredNode child) {
+		logger.debug(bundleMarker, "Adding... {}", child);
+		WiredNode existingWiredNode = findWireNode(child.getPid());
+		boolean results = false;
+		if (existingWiredNode != null) {
+			logger.debug(bundleMarker,
+					"Creating Container with existing... {}", existingWiredNode);
+
+			results = model.remove(existingWiredNode);
+			if (results) {
+				logger.debug(bundleMarker, "Removing existing {}",
+						existingWiredNode);
+			} else {
+				logger.error(bundleMarker, "Failed to remove existing {} ",
+						existingWiredNode);
+			}
+			Node parent = new ComponentServices(child, existingWiredNode);
+			results = model.add(parent);
+			if (results) {
+				logger.debug(bundleMarker, "Added {} ", parent);
+			} else {
+				logger.error(bundleMarker, "Failed to add {} ", parent);
+			}
+		} else {
+			results = model.add(child);
+			if (results) {
+				logger.debug(bundleMarker, "Added {}", child);
+			} else {
+				logger.error(bundleMarker, "Failed to add {}", child);
+			}
 		}
 	}
 
-	public  void unsetProducer(Producer producer, Map<String, Object> map){
-		boolean removed = model2.remove(new ProducerWiredNode(map));
-		if(removed){
-			logger.debug(bundleMarker, "Removed producer {}",map.get("service.pid"));
-		}else{
-			logger.error(bundleMarker, "Failed to remove producer {}",map.get("service.pid"));
+	/**
+	 * Get the node from the model
+	 * 
+	 * @param pid
+	 * @return wiredNode
+	 */
+	private WiredNode findWireNode(String pid) {
+		for (Node node : model) {
+			if (node.getPid().equals(pid) && (node instanceof WiredNode)) {
+				return (WiredNode) node;
+			}
 		}
+		return null;
 	}
-	
-	public  void setConsumer(Consumer consumer, Map<String, Object> map){
-		boolean added = model2.add(new ConsumerWiredNode(map));
-		if(added){
-			logger.debug(bundleMarker, "Added consumer {}",map.get("service.pid"));
-		}else{
-			logger.error(bundleMarker, "Failed to add consumer {}",map.get("service.pid"));
+
+	/**
+	 * Get the node from the model
+	 * 
+	 * @param pid
+	 * @return wiredNode or componentServices
+	 */
+	private ComponentServices findComponentServicesNode(String pid) {
+		for (Node node : model) {
+			if (node instanceof ComponentServices) {
+				if (node.getPid().equals(pid)) {
+					logger.debug(bundleMarker, "Component Services found: {}",
+							node);
+					return (ComponentServices) node;
+				}
+			}
 		}
+		logger.warn(bundleMarker,
+				"Component Services was not found for pid={}", pid);
+		return null;
 	}
-	
-	public  void unsetConsumer(Consumer consumer, Map<String, Object> map){
-		boolean removed = model2.remove(new ConsumerWiredNode(map));
-		if(removed){
-			logger.debug(bundleMarker, "Removed consumer {}",map.get("service.pid"));
-		}else{
-			logger.error(bundleMarker, "Failed to remove consumer {}",map.get("service.pid"));
-		}
-	}
-	
-	
 }

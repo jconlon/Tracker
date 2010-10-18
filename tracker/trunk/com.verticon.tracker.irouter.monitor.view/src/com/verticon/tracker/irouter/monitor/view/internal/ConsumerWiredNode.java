@@ -12,7 +12,8 @@ public class ConsumerWiredNode extends WiredNode {
 				(String) sr.get("tracker.wiring.group.name"), 
 				(String) sr.get("service.pid"), 
 				Arrays.toString((Object[])sr.get("wireadmin.consumer.scope")), 
-				(Long) sr.get("service.id")
+				(Long) sr.get("service.id"),
+				sr.get("tracker.monitor.label")!=null?(String)sr.get("tracker.monitor.label"):(String) sr.get("service.pid")
 		);
 	}
     
@@ -21,8 +22,10 @@ public class ConsumerWiredNode extends WiredNode {
 	 */
 	@Override
 	public String toString() {
-		return "ConsumerWiredNode [group=" + group + ", pid="
+		return "Consumer [group=" + group + ", pid="
 				+ pid + ", scope=" + scope + ", service_id=" + service_id + "]";
 	}
+	
+	
 
 }

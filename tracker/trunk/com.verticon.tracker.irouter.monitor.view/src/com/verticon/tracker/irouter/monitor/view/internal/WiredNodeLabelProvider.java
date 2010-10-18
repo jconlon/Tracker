@@ -39,16 +39,30 @@ public class WiredNodeLabelProvider extends LabelProvider implements IEntityStyl
     
 	@Override
 	public String getText(Object element) {
+		if (element instanceof ProducerWiredNode){ 
+			WiredNode node = (WiredNode) element;
+			return node.getParent()!=null?"Producer":node.label+"(P)";	
+		}
+		
+		if (element instanceof ConsumerWiredNode){ 
+			WiredNode node = (WiredNode) element;
+			return node.getParent()!=null?"Consumer":node.label+"(C)";	
+		}
+		
 		if (element instanceof WiredNode){ 
-			return ((WiredNode) element).nodeText();	
+			return ((Node) element).nodeText();	
+		}
+		
+		if (element instanceof ComponentServices){
+			return ((ComponentServices)element).nodeText();
 		}
 		
 		if (element instanceof EntityConnectionData){
 			EntityConnectionData connection = (EntityConnectionData)element;
-			WiredNode source = (WiredNode)connection.source;
+			Node source = (Node)connection.source;
 			String producerPid = source.getPid();
 			
-			WiredNode dest = (WiredNode)connection.dest;
+			Node dest = (Node)connection.dest;
 			String consumerPid = dest.getPid();
 			
 			Wire[] wires = Component.INSTANCE.getWires();
@@ -126,7 +140,7 @@ public class WiredNodeLabelProvider extends LabelProvider implements IEntityStyl
 	@Override
 	public Color getBackgroundColour(Object entity) {
 		if(entity instanceof WiredNode){
-			WiredNode wiredNode = (WiredNode)entity;
+			Node wiredNode = (Node)entity;
 			String key = wiredNode.getGroup();
 			if(!nodeColors.containsKey(key)){
 				addColor(key);
@@ -155,7 +169,7 @@ public class WiredNodeLabelProvider extends LabelProvider implements IEntityStyl
 
 	@Override
 	public IFigure getTooltip(Object entity) {
-		if(entity instanceof WiredNode){
+		if(entity instanceof Node){
 			String[] tokens = entity.toString().split(",");
 			
 			StringBuilder builder = new StringBuilder();
@@ -165,6 +179,10 @@ public class WiredNodeLabelProvider extends LabelProvider implements IEntityStyl
 			}
 			return new Label(builder.toString());
 		}
+//		if(entity instanceof ComponentServices){
+//			StringBuilder builder = new StringBuilder();
+//			
+//		}
 		return null;
 	}
 

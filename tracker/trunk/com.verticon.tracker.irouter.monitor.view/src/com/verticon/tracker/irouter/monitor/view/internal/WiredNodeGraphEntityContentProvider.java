@@ -24,9 +24,11 @@ import org.eclipse.core.databinding.observable.set.SetChangeEvent;
 import org.eclipse.core.databinding.observable.set.SetDiff;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.swt.SWTException;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.zest.core.viewers.GraphViewer;
 import org.eclipse.zest.core.viewers.IGraphEntityContentProvider;
+import org.eclipse.zest.core.viewers.INestedContentProvider;
 import org.osgi.service.wireadmin.Wire;
 import org.osgi.service.wireadmin.WireAdminEvent;
 import org.osgi.service.wireadmin.WireAdminListener;
@@ -34,7 +36,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class WiredNodeGraphEntityContentProvider implements
-		IGraphEntityContentProvider, WireAdminListener, ISetChangeListener {
+		IGraphEntityContentProvider, WireAdminListener, ISetChangeListener,INestedContentProvider  {
 
 	/**
 	 * slf4j Logger
@@ -42,7 +44,7 @@ public class WiredNodeGraphEntityContentProvider implements
 	private final Logger logger = LoggerFactory
 			.getLogger(WiredNodeGraphEntityContentProvider.class);
 
-	private Set<WiredNode> model;
+	private Set<Node> model;
 	private StructuredViewer viewer;
 	private final MonitorMasterDetailsBlock masterDetail;
 	private Display display;
@@ -60,6 +62,7 @@ public class WiredNodeGraphEntityContentProvider implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+//		super.inputChanged(viewer, oldInput, newInput);
 		this.viewer = (StructuredViewer) viewer;
 		try {
 			display=viewer.getControl().getDisplay();
@@ -72,7 +75,7 @@ public class WiredNodeGraphEntityContentProvider implements
 			Component.INSTANCE.setListener(this);// Set this as a listener on
 													// the component only once
 		}
-		model = (Set<WiredNode>) newInput;
+		model = (Set<Node>) newInput;
 		if (model != null) {
 			((ObservableSet) model).addSetChangeListener(this);
 		}
@@ -81,8 +84,7 @@ public class WiredNodeGraphEntityContentProvider implements
 	@Override
 	public Object[] getElements(Object inputElement) {
 		if (model != null) {
-			WiredNode[] elements = new WiredNode[model.size()];
-			return model.toArray(elements);
+			return  (Object[]) model.toArray(new Object[0]);
 		}
 
 		return null;
@@ -90,55 +92,90 @@ public class WiredNodeGraphEntityContentProvider implements
 
 	@Override
 	public Object[] getConnectedTo(Object entity) {
-		if (entity instanceof WiredNode) {
-			WiredNode wiredNode = (WiredNode) entity;
-			if (wiredNode instanceof ProducerWiredNode) {
-				WiredNode[] consumers = getConsumers(wiredNode);
-				logger.debug(bundleMarker, "{} connectedTo {}", wiredNode,
+//		logger.debug(bundleMarker, "Getting connectedTo {}", entity);
+		
+		if (entity instanceof ProducerWiredNode) {
+			
+			ProducerWiredNode producerWireNode = (ProducerWiredNode) entity;
+			if(producerWireNode.getParent()==null){
+				logger.debug(bundleMarker, "Getting connections from standalone {}", entity);
+				Node[] consumers = getConsumers(producerWireNode.getPid());
+				logger.debug(bundleMarker, "{} connectedTo {}", producerWireNode,
 						Arrays.toString(consumers));
 				return consumers;
 			}
+			
 		}
-		return null;
+		if (entity instanceof ComponentServices){
+			logger.debug(bundleMarker, "Getting connections for {}", entity);
+			String pid = ((Node)entity).getPid();
+			Node[] consumers =  getConsumers(pid);
+			logger.debug(bundleMarker, "{} connectedTo {}", entity,
+					Arrays.toString(consumers));
+			return consumers;
+			
+		}
+		return new Object[]{};
+	
 	}
 
-	private WiredNode[] getConsumers(WiredNode producer) {
-		Set<WiredNode> consumers = new HashSet<WiredNode>();
-		String producerPid = producer.getPid();
+
+	
+	/**
+	 * 
+	 * @return ComponentServices containers and standalone consumers
+	 */
+	private Node[] getConsumers(String producerPid) {
+		if(producerPid==null){
+			return new Node[]{};
+		}
+		Set<Node> consumers = new HashSet<Node>();
 		Wire[] wires = Component.INSTANCE.getWires();
-		if(wires!=null){	
+		if(wires==null){	
+			logger.debug(bundleMarker,
+					"Could not find any wires");
+		}else{
 			for (Wire wire : wires) {
 				String wirePid = (String) wire.getProperties().get(
 						WIREADMIN_PRODUCER_PID);
 				if (producerPid.equals(wirePid)) {
 					String consumerPid = (String) wire.getProperties().get(
 							WIREADMIN_CONSUMER_PID);
-					WiredNode consumer = findConsumer(consumerPid);
+					Node consumer = findConsumer(consumerPid);
+					//Consumer may be standalone or in a container
 					if (consumer != null) {
-						consumers.add(consumer);
+						Node parent = consumer.getParent();
+						if(parent!=null){
+						  consumers.add(parent);
+						}else{
+						  consumers.add(consumer);
+						}
 					}
 				}
 			}
 		}
 		if (!consumers.isEmpty()) {
-			WiredNode[] results = new WiredNode[consumers.size()];
-			return consumers.toArray(results);
+			return (Node[]) consumers.toArray(new Node[0]);
 		}
-		return null;
+		return  new Node[]{};
 	}
 
 	/**
-	 * Find the producer associated with the wire
+	 * Find the producer or container associated with the wire
 	 * 
 	 * @param wire
 	 * @return producer
 	 */
-	private WiredNode findProducer(Wire wire) {
+	private Node findProducer(Wire wire) {
 		String wirePid = (String) wire.getProperties().get(
 				WIREADMIN_PRODUCER_PID);
-		for (WiredNode wiredNode : Component.INSTANCE.getModel()) {
-			if (wiredNode instanceof ProducerWiredNode && wiredNode.getPid().equals(wirePid)) {
-				return wiredNode;
+		for (Node node : model) {
+			if (node instanceof ProducerWiredNode && node.getPid().equals(wirePid)) {
+				return  node;
+			}
+			
+			if (node instanceof ComponentServices && node.getPid().equals(wirePid)) {
+				return  node;
 			}
 
 		}
@@ -146,11 +183,10 @@ public class WiredNodeGraphEntityContentProvider implements
 
 	}
 
-	private WiredNode findConsumer(String pid) {
-		for (WiredNode wiredNode : model) {
-
-			if (!(wiredNode instanceof ProducerWiredNode) && wiredNode.getPid().equals(pid)) {
-				return wiredNode;
+	private Node findConsumer(String pid) {
+		for (Node node : model) {
+			if ((node.getPid().equals(pid))) {
+				return node;
 			}
 		}
 		return null;
@@ -165,7 +201,7 @@ public class WiredNodeGraphEntityContentProvider implements
 		case WireAdminEvent.WIRE_CONNECTED:
 			logger.debug(bundleMarker, "Wire connected scope={}", event
 					.getWire().getScope());
-			final WiredNode effectedProducer = findProducer(event.getWire());
+			final Node effectedProducer = findProducer(event.getWire());
 			if (effectedProducer == null) {
 				logger.warn(bundleMarker,
 						"Could not find a producer for wire {}",
@@ -196,7 +232,7 @@ public class WiredNodeGraphEntityContentProvider implements
 					.getScope());
 			// Handle connection or deletion of connection on the viewer
 			// by finding and refreshing the appropriate producer
-			final WiredNode effectedProducer2 = findProducer(event.getWire());
+			final Node effectedProducer2 = findProducer(event.getWire());
 			logger.debug(bundleMarker, "Wire deleted, refreshing {}",
 					effectedProducer2);
 			display.syncExec(new Runnable() {
@@ -238,7 +274,7 @@ public class WiredNodeGraphEntityContentProvider implements
 			// Do nothing
 			break;
 		case WireAdminEvent.WIRE_DISCONNECTED:
-			logger.warn(bundleMarker, "Wire disconnected wire={} (ignoring)",
+			logger.debug(bundleMarker, "Wire disconnected wire={} (ignoring)",
 					event.getWire());
 			// Do nothing
 			break;
@@ -262,18 +298,25 @@ public class WiredNodeGraphEntityContentProvider implements
 
 	/**
 	 * This should also remove any pages
-	 * @param wiredNodes
+	 * @param nodes
 	 */
-	private void remove(final Set<WiredNode> wiredNodes) {
-		if (wiredNodes == null|| display==null ||  display.isDisposed()) {
+	private void remove(final Set<Node> nodes) {
+		if (nodes == null|| display==null ||  display.isDisposed()) {
 			return;
 		}
 		display.syncExec(new Runnable() {
 			public void run() {
-				for (WiredNode wiredNode : wiredNodes) {
-					((GraphViewer) viewer).removeNode(wiredNode);
-					masterDetail.removePage(wiredNode);
-					logger.debug(bundleMarker, "Removed {}", wiredNode);
+				for (Node node : nodes) {
+					try {
+						((GraphViewer) viewer).removeNode(node);
+						if(node instanceof WiredNode){
+							masterDetail.removePage((WiredNode)node);
+						}
+						logger.debug(bundleMarker, "Removed {}", node);
+					} catch (SWTException e) {
+						logger.error(bundleMarker,"Failed to remove "+node,e);
+						throw e;
+					}
 				}
 				((GraphViewer) viewer).applyLayout();
 			}
@@ -281,17 +324,23 @@ public class WiredNodeGraphEntityContentProvider implements
 
 	}
 
-	private void add(final Set<WiredNode> wiredNodes) {
-		if (wiredNodes == null || display==null || display.isDisposed()) {
+	private void add(final Set<Node> nodes) {
+		if (nodes == null || display==null || display.isDisposed()) {
 			return;
 		}
 
 		display.syncExec(new Runnable() {
 			public void run() {
-				for (WiredNode wiredNode : wiredNodes) {
-					((GraphViewer) viewer).addNode(wiredNode);
-					// viewer.refresh(wiredNode,false);
-					logger.debug(bundleMarker, "Added {}", wiredNode);
+				for (Node node : nodes) {
+					try {
+						((GraphViewer) viewer).addNode(node);
+						 viewer.refresh(node,false);
+						logger.debug(bundleMarker, "Added {}", node);
+					} catch (SWTException e) {
+						logger.error(bundleMarker,"Failed to add "+node,e);
+						throw e;
+					}
+					
 				}
 				((GraphViewer) viewer).applyLayout();
 			}
@@ -299,4 +348,19 @@ public class WiredNodeGraphEntityContentProvider implements
 
 	}
 
+	@Override
+	public boolean hasChildren(Object element) {
+		if(element instanceof ComponentServices){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Object[] getChildren(Object element) {
+		if(element instanceof ComponentServices){
+			return ((ComponentServices)element).getChildren();
+		}
+		return null;
+	}
 }
