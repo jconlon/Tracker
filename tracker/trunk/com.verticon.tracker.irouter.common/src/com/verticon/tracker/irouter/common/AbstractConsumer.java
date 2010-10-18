@@ -24,6 +24,8 @@ import org.slf4j.Marker;
 
 public abstract class AbstractConsumer implements Consumer, IService {
 
+	private static final String NODE_LABEL = "tracker.monitor.label";
+	
 	/**
 	 * slf4j Logger
 	 */
@@ -126,7 +128,8 @@ public abstract class AbstractConsumer implements Consumer, IService {
 				.put(WIREADMIN_CONSUMER_FLAVORS, new Class[] { Envelope.class });
 		regProps.put(TRACKER_WIRE_GROUP_NAME, this.context
 				.getConfigurationString(TRACKER_WIRE_GROUP_NAME));
-
+		
+		regProps.put(NODE_LABEL, context.getConfigurationString(NODE_LABEL));
 		serviceRegistration = bc.registerService(Consumer.class.getName(),
 				this, regProps);
 	}
