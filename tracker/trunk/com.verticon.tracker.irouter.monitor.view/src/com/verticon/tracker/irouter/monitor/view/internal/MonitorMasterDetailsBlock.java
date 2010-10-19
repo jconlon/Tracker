@@ -60,6 +60,7 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 	 */
 	private Map<WiredNode, IDetailsPage> keyMap = new HashMap<WiredNode, IDetailsPage>();
 	
+	private WiredNodeLabelProvider labelProvider;
 	
 	@Override
 	protected void createMasterPart(final IManagedForm managedForm, final Composite parent) {
@@ -95,7 +96,8 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 	
 	private void setUpViewer() {
 		viewer.setContentProvider(new WiredNodeGraphEntityContentProvider(this));
-		viewer.setLabelProvider(new WiredNodeLabelProvider());
+		labelProvider = new WiredNodeLabelProvider();
+		viewer.setLabelProvider(labelProvider);
 		//viewer.setSorter(new NameSorter());
 		viewer.setInput(Component.INSTANCE.getModel());
 	    setTreeLayout(viewer);
@@ -171,6 +173,7 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 		}
 		form.getToolBarManager().add(haction);
 		form.getToolBarManager().add(vaction);
+		
 		
 		Action screenshotAction = new Action() {
 			public void run() {
@@ -258,4 +261,8 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 		viewer.applyLayout();
 	}
 
+	void setShowWireLabels(boolean show){
+		labelProvider.setShowWireLabels(show);
+	}
+	
 }

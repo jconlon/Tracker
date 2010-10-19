@@ -44,7 +44,7 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 	 * @param showWireLables
 	 *            the showWireLables to set
 	 */
-	public void setShowWireLables(boolean showWireLables) {
+    void setShowWireLabels(boolean showWireLables) {
 		this.showWireLables = showWireLables;
 	}
 
