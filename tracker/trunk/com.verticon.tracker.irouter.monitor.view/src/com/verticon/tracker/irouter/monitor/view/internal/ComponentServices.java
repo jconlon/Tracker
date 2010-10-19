@@ -1,14 +1,34 @@
 package com.verticon.tracker.irouter.monitor.view.internal;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Vector;
 
 public class ComponentServices implements Node {
 
 	private final List<WiredNode> children = new ArrayList<WiredNode>();
-	private final static List<ComponentServices> instances = new ArrayList<ComponentServices>();
+	private final String pid;
+	private final String group;
+	private final String text;
 
 	ComponentServices(WiredNode... wiredNodes) {
+		if(wiredNodes.length>2){
+			throw new IllegalArgumentException("There must be two or more wiredNodes.");
+		}
+		this.pid = wiredNodes[0].getPid();
+		if(pid == null){
+			throw new IllegalArgumentException("WiredNode Pid cannot be null");
+		}
+		this.group = wiredNodes[0].getGroup();
+		if(pid == null){
+			throw new IllegalArgumentException("WiredNode Group cannot be null");
+		}
+		this.text = wiredNodes[0].getComponentLabel();
+		if(pid == null){
+			throw new IllegalArgumentException("WiredNode ComponentLabel cannot be null");
+		}
+		
 		for (WiredNode wiredNode : wiredNodes) {
 			children.add(wiredNode);
 			wiredNode.setParent(this);
@@ -22,93 +42,16 @@ public class ComponentServices implements Node {
 	 */
 	@Override
 	public String toString() {
-		return "ComponentServices [children=" + children.size() + ", Pid="
+		return "ComponentServices [name=" + text + ", children=" + children.size() + ", Pid="
 				+ getPid() + ", Group=" + getGroup() + "]";
 	}
 
-	/**
-	 * Get an existing instance or create a new instance.
-	 * 
-	 * @param child
-	 * @return
-	 */
-	static ComponentServices add(WiredNode child) {
-		for (ComponentServices container : instances) {
-			if (container.children.contains(child)) {
-				return container;
-			}
-			if (container.getPid().equals(child.getPid())) {
-				container.addChild(child);
-				child.setParent(container);
-				return container;
-			}
-		}
-		ComponentServices instance = new ComponentServices();
-		instance.addChild(child);
-		instances.add(instance);
-		return instance;
-	}
-
-	/**
-	 * Remove a child from an existing instance or return null if there was no
-	 * previous instance or the number of children is zero after the remove.
-	 * 
-	 * @param child
-	 * @return
-	 */
-	static ComponentServices remove(WiredNode child) {
-		for (ComponentServices container : instances) {
-			if (container.children.contains(child)) {
-				container.children.remove(child);
-				child.setParent(null);
-				if (container.children.isEmpty()) {
-					instances.remove(container);
-					return null;
-				}
-				return container;
-			}
-
-		}
-
-		return null;
-	}
-
-	/**
-	 * @return the containers
-	 */
-
-	static ComponentServices[] getInstances() {
-		ComponentServices[] containers = new ComponentServices[instances.size()];
-		return instances.toArray(containers);
-	}
-
-	static boolean containsInstance(String pid) {
-		for (ComponentServices instance : instances) {
-			if (instance.getPid().equals(pid)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	static ComponentServices findInstance(String pid) {
-		for (ComponentServices instance : instances) {
-			if (instance.getPid().equals(pid)) {
-				return instance;
-			}
-		}
-		return null;
-	}
-
-	// static void clear(){
-	// instances.clear();
-	// }
 
 	/**
 	 * @return the text
 	 */
 	public String nodeText() {
-		return children.get(0).getComponentLabel();
+		return text;
 	}
 
 	/**
@@ -121,16 +64,23 @@ public class ComponentServices implements Node {
 
 	@Override
 	public String getPid() {
-		return children.isEmpty() ? null : children.get(0).getPid();
+		return pid;
 	}
 
 	@Override
 	public String getGroup() {
-		return children.isEmpty() ? null : children.get(0).getGroup();
+		return group;
 	}
 
-	boolean addChild(WiredNode child) {
-		return children.add(child);
+
+	Collection<WiredNode> getSiblings(Long serviceId){
+		Vector<WiredNode> nodesToKeep = new Vector<WiredNode>(3);
+		for (WiredNode wiredNode : getChildren()) {
+			if (!wiredNode.getService_id().equals(serviceId)) {
+				nodesToKeep.add(wiredNode);
+			}
+		}
+		return nodesToKeep;
 	}
 
 	/**
