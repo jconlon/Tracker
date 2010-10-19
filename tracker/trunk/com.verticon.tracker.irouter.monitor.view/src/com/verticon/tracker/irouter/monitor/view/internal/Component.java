@@ -10,12 +10,13 @@
  *******************************************************************************/
 package com.verticon.tracker.irouter.monitor.view.internal;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
-import java.util.Vector;
 
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.databinding.observable.set.WritableSet;
+import org.eclipse.core.runtime.Assert;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.service.monitor.MonitorAdmin;
 import org.osgi.service.wireadmin.Consumer;
@@ -49,7 +50,7 @@ public class Component implements WireAdminListener {
 		return monitorAdmin;
 	}
 
-	public void setListener(WireAdminListener listener) {
+	void setListener(WireAdminListener listener) {
 		this.listener = listener;
 	}
 
@@ -181,13 +182,16 @@ public class Component implements WireAdminListener {
 					"Failed to find ComponentServices for {}", child);
 			return;
 		}
+		Assert.isTrue(componentServices.getChildren().length > 1,
+				"ComponentServices must have more than one child."); //$NON-NLS-1$
+		
 		// Remove this node but save and add all the other services back
-		Vector<WiredNode> nodesToKeep = new Vector<WiredNode>(5);
-		for (WiredNode wiredNode : componentServices.getChildren()) {
-			if (!wiredNode.getService_id().equals(child.getService_id())) {
-				nodesToKeep.add(wiredNode);
-			}
-		}
+		
+		Collection<WiredNode> nodesToKeep = componentServices.getSiblings(child.getService_id());
+
+		Assert.isTrue(componentServices.getChildren().length > 1,
+		"Nodes to keep must have more than one child."); //$NON-NLS-1$
+
 		boolean result = model.remove(componentServices);
 		if (result) {
 			logger.debug(bundleMarker, "Removed {}", componentServices);

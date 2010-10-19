@@ -15,7 +15,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.core.databinding.observable.set.IObservableSet;
 import org.eclipse.draw2d.SWTGraphics;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.jface.action.Action;
@@ -98,8 +97,6 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 		viewer.setContentProvider(new WiredNodeGraphEntityContentProvider(this));
 		viewer.setLabelProvider(new WiredNodeLabelProvider());
 		//viewer.setSorter(new NameSorter());
-//		IObservableSet observables = (IObservableSet)Component.INSTANCE.getModel();
-		//Model contains a set WiredNode objects
 		viewer.setInput(Component.INSTANCE.getModel());
 	    setTreeLayout(viewer);
 	}
