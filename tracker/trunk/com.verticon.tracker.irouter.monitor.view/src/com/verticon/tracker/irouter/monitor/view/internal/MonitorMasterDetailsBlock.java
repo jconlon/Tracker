@@ -42,6 +42,7 @@ import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.zest.core.viewers.GraphViewer;
 import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.ZestStyles;
+import org.eclipse.zest.layouts.Filter;
 import org.eclipse.zest.layouts.LayoutAlgorithm;
 import org.eclipse.zest.layouts.algorithms.GridLayoutAlgorithm;
 import org.eclipse.zest.layouts.algorithms.HorizontalTreeLayoutAlgorithm;
@@ -61,6 +62,8 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 	private Map<WiredNode, IDetailsPage> keyMap = new HashMap<WiredNode, IDetailsPage>();
 	
 	private WiredNodeLabelProvider labelProvider;
+	
+	private LayoutAlgorithm currentLayoutAlgorithm;
 	
 	@Override
 	protected void createMasterPart(final IManagedForm managedForm, final Composite parent) {
@@ -84,6 +87,7 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 		managedForm.addPart(spart);
 		
 		
+		
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
 				managedForm.fireSelectionChanged(spart, event.getSelection());
@@ -100,7 +104,7 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 		viewer.setLabelProvider(labelProvider);
 		//viewer.setSorter(new NameSorter());
 		viewer.setInput(Component.INSTANCE.getModel());
-	    setTreeLayout(viewer);
+	    setTreeLayout();
 	}
 
 	/**
@@ -224,45 +228,47 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 		}
 	}
 	
-	static void setTreeLayout(GraphViewer viewer) {
-		LayoutAlgorithm layout = new 
-		TreeLayoutAlgorithm();
+   
+
+	private void setLayout(LayoutAlgorithm layout) {
+		currentLayoutAlgorithm = layout;
 		viewer.setLayoutAlgorithm(layout, true);
 		viewer.applyLayout();
 	}
 	
-	static void setSpringLayout(GraphViewer viewer) {
-		LayoutAlgorithm layout = new
-		 SpringLayoutAlgorithm();
-		viewer.setLayoutAlgorithm(layout, true);
-		viewer.applyLayout();
+	void setTreeLayout() {
+		LayoutAlgorithm layout = new TreeLayoutAlgorithm();
+		setLayout(layout);
+	}
+	 
+    void setSpringLayout() {
+		setLayout(new
+				 SpringLayoutAlgorithm());
 	}
 
-	static void setGridLayout(GraphViewer viewer) {
-		LayoutAlgorithm layout = new
-		 GridLayoutAlgorithm();
-		viewer.setLayoutAlgorithm(layout, true);
-		viewer.applyLayout();
+	 void setGridLayout() {
+		setLayout( new
+				 GridLayoutAlgorithm());
 
 	}
 
-	static void setHorizontalLayout(GraphViewer viewer) {
-		LayoutAlgorithm layout = new
-		 HorizontalTreeLayoutAlgorithm();
-		viewer.setLayoutAlgorithm(layout, true);
-		viewer.applyLayout();
+	 void setHorizontalLayout() {
+		setLayout(new
+				 HorizontalTreeLayoutAlgorithm());
 	}
 
 
-	static void setRadialLayout(GraphViewer viewer) {
-		LayoutAlgorithm layout = new
-		 RadialLayoutAlgorithm();
-		viewer.setLayoutAlgorithm(layout, true);
-		viewer.applyLayout();
+	 void setRadialLayout() {
+		setLayout(new
+				 RadialLayoutAlgorithm());
 	}
 
 	void setShowWireLabels(boolean show){
 		labelProvider.setShowWireLabels(show);
 	}
 	
+	void setFilter(Filter filter){
+		currentLayoutAlgorithm.setFilter(filter);
+		viewer.applyLayout();
+	}
 }

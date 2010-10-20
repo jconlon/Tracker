@@ -11,19 +11,12 @@
 package com.verticon.tracker.irouter.monitor.view.internal;
 
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.ControlContribution;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.ISharedImages;
@@ -39,19 +32,18 @@ import org.eclipse.zest.core.viewers.ZoomContributionViewItem;
 
 public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 
-	enum Layout {
-		HORIZONTAL, SPRING, GRID, RADIAL, TREE
-	};
+	
 
 	private FormToolkit toolKit = null;
 	private ScrolledForm form = null;
 	private ManagedForm managedForm = null;
-	private final MonitorMasterDetailsBlock block;
+	final MonitorMasterDetailsBlock block;
 	private ZoomContributionViewItem contextZoomContributionViewItem;
 	private ZoomContributionViewItem toolbarZoomContributionViewItem;
 	private Action refresh;
 	private Action showConnectionLabels;
-	private LayoutCombo myCombo;
+	private LayoutControl layoutControl;
+	private FilterControl filterControl;
 
 	public MonitorView() {
 		super();
@@ -65,7 +57,8 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 		managedForm = new ManagedForm(this.toolKit, this.form);
 		form.setText("iRouter Monitor");
 		block.createContent(managedForm);
-		myCombo = new LayoutCombo("Layout");
+		layoutControl = new LayoutControl(block, "Layout");
+		filterControl = new FilterControl(block, "Filter");
 		toolbarZoomContributionViewItem = new ZoomContributionViewItem(this);
 		contextZoomContributionViewItem = new ZoomContributionViewItem(this);
 		makeActions();
@@ -77,6 +70,7 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 	public void setFocus() {
 
 	}
+	
 
 	/**
 	 * Creates the context menu for this view.
@@ -124,9 +118,8 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 	 */
 	private void fillLocalToolBar(IToolBarManager toolBarManager) {
 		toolBarManager.add(new Separator());
-
-		toolBarManager.add(myCombo);
-
+        toolBarManager.add(filterControl);
+		toolBarManager.add(layoutControl);
 		toolBarManager.add(new Separator());
 		toolBarManager.add(refresh);
 	}
@@ -138,7 +131,7 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 	 */
 	private void fillContextMenu(IMenuManager manager) {
 		manager.add(new Separator());
-		manager.add(myCombo);
+		manager.add(layoutControl);
 		manager.add(new Separator());
 		manager.add(refresh);
 		manager.add(new Separator());
@@ -169,67 +162,6 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 		};
 
 		showConnectionLabels.setToolTipText("Shows the connection labels");
-
-	}
-
-	class LayoutCombo extends ControlContribution {
-
-		protected LayoutCombo(String id) {
-			super(id);
-		}
-
-		@Override
-		protected Control createControl(Composite parent) {
-			final Combo combo = new Combo(parent, SWT.NULL);
-			combo.setToolTipText("Sets the type of layout to use for drawing the graph.");
-
-			for (Layout layout : Layout.values()) {
-				combo.add(layout.name());
-			}
-
-			combo.addSelectionListener(new SelectionListener() {
-				public void widgetSelected(SelectionEvent e) {
-
-					switch (Layout.valueOf(combo.getText())) {
-					case HORIZONTAL:
-						MonitorMasterDetailsBlock.setHorizontalLayout(block
-								.getViewer());
-						break;
-
-					case SPRING:
-						MonitorMasterDetailsBlock.setSpringLayout(block
-								.getViewer());
-						break;
-
-					case GRID:
-						MonitorMasterDetailsBlock.setGridLayout(block
-								.getViewer());
-						break;
-
-					case RADIAL:
-						MonitorMasterDetailsBlock.setRadialLayout(block
-								.getViewer());
-						break;
-
-					case TREE:
-						MonitorMasterDetailsBlock.setTreeLayout(block
-								.getViewer());
-						break;
-					}
-				}
-
-				public void widgetDefaultSelected(SelectionEvent e) {
-					MonitorMasterDetailsBlock.setHorizontalLayout(block
-							.getViewer());
-				}
-			});
-			GridData gridData = new GridData(SWT.FILL, SWT.TOP, false, false);
-			gridData.widthHint = 20;
-			gridData.heightHint = SWT.DEFAULT;
-			combo.setLayoutData(gridData);
-			combo.pack();
-			return combo;
-		}
 
 	}
 
