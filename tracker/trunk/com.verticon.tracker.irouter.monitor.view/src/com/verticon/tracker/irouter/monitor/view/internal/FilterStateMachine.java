@@ -269,8 +269,6 @@ public class FilterStateMachine {
 			String prefix = getFilterPrefix();
 
 			if (prefix.length() == 0) {
-				System.out.println("Node Passing: " + element
-						+ " starting with text: " + prefix);
 				return true;
 			}
 
@@ -284,9 +282,6 @@ public class FilterStateMachine {
 				return node.nodeText().startsWith(prefix);
 
 			}
-			System.out.println("Node Passing: " + element
-					+ " starting with text: " + prefix);
-
 			return true;
 		}
 
@@ -296,22 +291,14 @@ public class FilterStateMachine {
 
 		boolean canPass(String prefix, WiredNode wiredNode) {
 			String scope = wiredNode.getScope();
-			System.out.println("Scope Testing: " + wiredNode
-					+ " starting with text: " + prefix + ", scope=" + scope);
 			String[] scopes = scope.substring(1, scope.length() - 1).split(",");
 
 			for (String s : scopes) {
 				scope = s.trim();
-				System.out.println("Scope Testing token: <" + scope
-						+ "> starts with: <" + prefix + '>');
 				if (scope.startsWith(prefix)) {
-					System.out.println("Scope Passing: " + wiredNode
-							+ " starting with text: " + prefix);
 					return true;
 				}
 			}
-			System.out.println("Scope Filtering: " + wiredNode
-					+ " starting with text: " + prefix);
 			return false;
 		}
 
@@ -321,8 +308,6 @@ public class FilterStateMachine {
 			String prefix = getFilterPrefix();
 
 			if (prefix.length() == 0) {
-				System.out.println("Scope Passing: " + element
-						+ " starting with text: " + prefix);
 				return true;
 			}
 
@@ -349,20 +334,12 @@ public class FilterStateMachine {
 				String scope;
 				for (String s : scopes) {
 					scope = s.trim();
-					System.out.println("Scope Testing connection token: <"
-							+ scope + "> starts with: <" + prefix + '>');
 					if (scope.startsWith(prefix)) {
-						System.out.println("Scope Passing: " + element
-								+ " starting with text: " + prefix);
 						return true;
 					}
 				}
-				System.out.println("Scope Filtering: " + element
-						+ " starting with text: " + prefix);
 				return false;
 			}
-			System.out.println("Scope Passing: " + element
-					+ " starting with text: " + prefix);
 			return true;
 		}
 
@@ -377,8 +354,6 @@ public class FilterStateMachine {
 			String prefix = getFilterPrefix();
 
 			if (prefix.length() == 0) {
-				System.out.println("Group Passing: " + element
-						+ " starting with text: " + prefix);
 				return true;
 			}
 			if (element instanceof Node) {
