@@ -73,33 +73,37 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 				return null;
 			}
 			EntityConnectionData connection = (EntityConnectionData) element;
-			Node source = (Node) connection.source;
-			String producerPid = source.getPid();
-
-			Node dest = (Node) connection.dest;
-			String consumerPid = dest.getPid();
-
-			Wire[] wires = Component.INSTANCE.getWires();
-
-			for (Wire wire : wires) {
-				String wireProducerPid = (String) wire.getProperties().get(
-						WIREADMIN_PRODUCER_PID);
-				if (producerPid.equals(wireProducerPid)) {
-					String wireConsumerPid = (String) wire.getProperties().get(
-							WIREADMIN_CONSUMER_PID);
-
-					if (consumerPid.equals(wireConsumerPid)) {
-						String results = Arrays.toString(wire.getScope());
-						results = results.substring(1, results.length() - 1);
-						return results;
-					}
-				}
-			}
-			return "unknown connection";
+			return getConnectionLabel(connection);
 		}
 		throw new RuntimeException("Wrong type: "
 				+ element.getClass().toString());
 
+	}
+
+	static String getConnectionLabel(EntityConnectionData connection) {
+		Node source = (Node) connection.source;
+		String producerPid = source.getPid();
+
+		Node dest = (Node) connection.dest;
+		String consumerPid = dest.getPid();
+
+		Wire[] wires = Component.INSTANCE.getWires();
+		String results ="unknown connection";
+		for (Wire wire : wires) {
+			String wireProducerPid = (String) wire.getProperties().get(
+					WIREADMIN_PRODUCER_PID);
+			if (producerPid.equals(wireProducerPid)) {
+				String wireConsumerPid = (String) wire.getProperties().get(
+						WIREADMIN_CONSUMER_PID);
+
+				if (consumerPid.equals(wireConsumerPid)) {
+				    results = Arrays.toString(wire.getScope());
+					results = results.substring(1, results.length() - 1);
+					break;
+				}
+			}
+		}
+		return results;
 	}
 
 	@Override
