@@ -72,6 +72,9 @@
 		<Option label="convert length to yards" value="YARDS"/>
 	</AD>
 	
+	<AD name="Component container label"  id="tracker.monitor.label" type="String"
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="TruTest Measurement Adapter"/> 
 	
   </OCD>
   

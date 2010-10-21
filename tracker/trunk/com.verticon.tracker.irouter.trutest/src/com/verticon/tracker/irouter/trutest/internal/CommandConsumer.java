@@ -19,6 +19,7 @@ import static com.verticon.tracker.irouter.common.TrackerConstants.REQUEST_COMMA
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
 import static com.verticon.tracker.irouter.trutest.internal.Component.bundleMarker;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.CONSUMER_SCOPE;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.NODE_LABEL;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.SET_RP_POLL_COMMAND_ID;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.TURN_OFF_ACK;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.TURN_ON_CRLF;
@@ -161,7 +162,7 @@ class CommandConsumer implements Consumer, Monitorable {
 				.getConfigurationString(TRACKER_WIRE_GROUP_NAME));
 		regProps.put(CONNECTION_URI, indicator
 				.getConfigurationString(CONNECTION_URI));
-		
+		regProps.put(NODE_LABEL, indicator.getConfigurationString(NODE_LABEL));
 		regProps.put(WIREADMIN_CONSUMER_SCOPE, 
 				indicator.getConfigurationStringArray(CONSUMER_SCOPE));
 		serviceRegistration = bc.registerService(Consumer.class.getName(),

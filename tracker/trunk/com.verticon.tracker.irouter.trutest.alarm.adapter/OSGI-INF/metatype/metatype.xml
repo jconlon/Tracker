@@ -33,7 +33,10 @@
         id="alarm.state.value" required="true" type="Integer" 
     	description="The value of the state that turns on an alarm."/>
     	
-	
+	 <AD name="Component container label"  id="tracker.monitor.label" type="String"
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="TruTest Alarm Adapter"/> 
+        
   </OCD>
   
   <Designate pid="com.verticon.tracker.irouter.trutest.alarm.adapter" bundle="*">

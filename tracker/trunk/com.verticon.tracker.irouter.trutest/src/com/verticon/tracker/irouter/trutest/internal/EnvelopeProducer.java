@@ -13,6 +13,7 @@ package com.verticon.tracker.irouter.trutest.internal;
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
 import static com.verticon.tracker.irouter.trutest.internal.Component.bundleMarker;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.NODE_LABEL;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_EID;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_WEIGHT;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ENTER_KEY;
@@ -122,15 +123,7 @@ public class EnvelopeProducer implements Producer, IEnvelopeSender, Monitorable 
 			if(result!=null){
 				break;
 			}
-//			if (scope.equals(PRODUCER_SCOPE_ANIMAL_WEIGHT)) {
-//				return lastEnvelope.get(PRODUCER_SCOPE_ANIMAL_WEIGHT);
-//			}
-//			if (scope.equals(PRODUCER_SCOPE_ANIMAL_EID)) {
-//				return lastEnvelope.get(PRODUCER_SCOPE_ANIMAL_EID);
-//			}
-//			if (scope.equals(PRODUCER_SCOPE_ENTER_KEY)) {
-//				return lastEnvelope.get(PRODUCER_SCOPE_ENTER_KEY);
-//			}
+
 		}
 		return result;
 	}			
@@ -185,6 +178,7 @@ public class EnvelopeProducer implements Producer, IEnvelopeSender, Monitorable 
 		regProps.put(CONNECTION_URI, indicator.getConfigurationString(CONNECTION_URI));
 		regProps.put(TRACKER_WIRE_GROUP_NAME, 
 				indicator.getConfigurationString(TRACKER_WIRE_GROUP_NAME));
+		regProps.put(NODE_LABEL, indicator.getConfigurationString(NODE_LABEL));
 		wireAdminReg = bc.registerService(Producer.class
 				.getName(), this, regProps);
 	}

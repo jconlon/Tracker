@@ -33,6 +33,9 @@
 		<Option label="Con2" value="2"/>
 	</AD>
 	
+	<AD name="Component container label"  id="tracker.monitor.label" type="String"
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="TruTest EID Adapter"/> 
 	
   </OCD>
   

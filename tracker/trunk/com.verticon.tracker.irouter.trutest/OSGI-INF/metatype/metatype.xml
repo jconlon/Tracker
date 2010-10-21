@@ -68,6 +68,9 @@
 		default="transaction.state" 
     	description="The name of the state indicating that enter key was pressed."/>
     
+     <AD name="Component container label"  id="tracker.monitor.label" type="String"
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="TruTest Proxy"/> 
   </OCD>
   
   <Designate pid="com.verticon.tracker.irouter.trutest.indicatorfactory" bundle="*">
