@@ -98,8 +98,9 @@ public class ComponentServices implements Node {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((children == null) ? 0 : children.hashCode());
+		result = prime * result + ((group == null) ? 0 : group.hashCode());
+		result = prime * result + ((pid == null) ? 0 : pid.hashCode());
+		result = prime * result + ((text == null) ? 0 : text.hashCode());
 		return result;
 	}
 
@@ -115,12 +116,54 @@ public class ComponentServices implements Node {
 		if (getClass() != obj.getClass())
 			return false;
 		ComponentServices other = (ComponentServices) obj;
-		if (children == null) {
-			if (other.children != null)
+		if (group == null) {
+			if (other.group != null)
 				return false;
-		} else if (!children.equals(other.children))
+		} else if (!group.equals(other.group))
+			return false;
+		if (pid == null) {
+			if (other.pid != null)
+				return false;
+		} else if (!pid.equals(other.pid))
+			return false;
+		if (text == null) {
+			if (other.text != null)
+				return false;
+		} else if (!text.equals(other.text))
 			return false;
 		return true;
 	}
+
+//	/* (non-Javadoc)
+//	 * @see java.lang.Object#hashCode()
+//	 */
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result
+//				+ ((children == null) ? 0 : children.hashCode());
+//		return result;
+//	}
+//
+//	/* (non-Javadoc)
+//	 * @see java.lang.Object#equals(java.lang.Object)
+//	 */
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		ComponentServices other = (ComponentServices) obj;
+//		if (children == null) {
+//			if (other.children != null)
+//				return false;
+//		} else if (!children.equals(other.children))
+//			return false;
+//		return true;
+//	}
 
 }

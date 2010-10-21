@@ -50,29 +50,28 @@ import org.eclipse.zest.layouts.algorithms.RadialLayoutAlgorithm;
 import org.eclipse.zest.layouts.algorithms.SpringLayoutAlgorithm;
 import org.eclipse.zest.layouts.algorithms.TreeLayoutAlgorithm;
 
-
-public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
+public class MonitorMasterDetailsBlock extends MasterDetailsBlock {
 
 	private GraphViewer viewer;
 
 	/**
-	 * Map factory Pids as keys to IDetailsPage implementations. A template factory use a 
-	 * TEMPLATE constant .
+	 * Map factory Pids as keys to IDetailsPage implementations. A template
+	 * factory use a TEMPLATE constant .
 	 */
 	private Map<WiredNode, IDetailsPage> keyMap = new HashMap<WiredNode, IDetailsPage>();
-	
+
 	private WiredNodeLabelProvider labelProvider;
-	
+
 	private LayoutAlgorithm currentLayoutAlgorithm;
-	
+
 	@Override
-	protected void createMasterPart(final IManagedForm managedForm, final Composite parent) {
+	protected void createMasterPart(final IManagedForm managedForm,
+			final Composite parent) {
 		FormToolkit toolkit = managedForm.getToolkit();
 		Section section = toolkit.createSection(parent, Section.DESCRIPTION);
 		section.setText("iRouter Network Services and Wire Connections");
-		section.setDescription(
-				"Select node to display service property details and status variables");
-		
+		section.setDescription("Select node to display service property details and status variables");
+
 		section.marginWidth = 10;
 		section.marginHeight = 5;
 		Composite client = toolkit.createComposite(section, SWT.WRAP);
@@ -81,30 +80,27 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 		layout.marginWidth = 4;
 		client.setLayout(layout);
 		viewer = new GraphViewer(client, SWT.BORDER);
-		viewer.setConnectionStyle(ZestStyles.CONNECTIONS_DIRECTED); 
+		viewer.setConnectionStyle(ZestStyles.CONNECTIONS_DIRECTED);
 		section.setClient(client);
 		final SectionPart spart = new SectionPart(section);
 		managedForm.addPart(spart);
-		
-		
-		
+
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
 				managedForm.fireSelectionChanged(spart, event.getSelection());
 			}
 		});
-		
-		
+
 		setUpViewer();
 	}
-	
+
 	private void setUpViewer() {
 		viewer.setContentProvider(new WiredNodeGraphEntityContentProvider(this));
 		labelProvider = new WiredNodeLabelProvider();
 		viewer.setLabelProvider(labelProvider);
-		//viewer.setSorter(new NameSorter());
+		// viewer.setSorter(new NameSorter());
 		viewer.setInput(Component.INSTANCE.getModel());
-	    setTreeLayout();
+		setTreeLayout();
 	}
 
 	/**
@@ -113,11 +109,11 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 	GraphViewer getViewer() {
 		return viewer;
 	}
-	
+
 	@Override
 	protected void registerPages(DetailsPart detailsPart) {
-		
-		detailsPart.setPageProvider(new IDetailsPageProvider(){
+
+		detailsPart.setPageProvider(new IDetailsPageProvider() {
 
 			@Override
 			public IDetailsPage getPage(Object key) {
@@ -125,20 +121,20 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 			}
 
 			/**
-			 * Selections will be String PIDs for Wires, Producers and 
-			 * Consumers
+			 * Selections will be String PIDs for Wires, Producers and Consumers
 			 */
 			@Override
 			public Object getPageKey(Object object) {
-				
-				if(keyMap.containsKey(object)){
+
+				if (keyMap.containsKey(object)) {
 					return object;
 				}
 				WiredNode key = (WiredNode) object;
-				keyMap.put(key, new WiredNodeDetailsPage(key));//Just a holder for now
+				keyMap.put(key, new WiredNodeDetailsPage(key));// Just a holder
+																// for now
 				return key;
-				}
-			});
+			}
+		});
 
 	}
 
@@ -154,9 +150,10 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 		haction.setChecked(true);
 		haction.setToolTipText("Horizontal orientation");
 		try {
-			URL url = new URL("platform:/plugin/com.verticon.osgi.metatype.core.model.editor/icons/th_horizontal.gif");
-			
-			haction.setImageDescriptor( ImageDescriptor.createFromURL(url));
+			URL url = new URL(
+					"platform:/plugin/com.verticon.osgi.metatype.core.model.editor/icons/th_horizontal.gif");
+
+			haction.setImageDescriptor(ImageDescriptor.createFromURL(url));
 		} catch (MalformedURLException e) {
 
 		}
@@ -169,29 +166,32 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 		vaction.setChecked(false);
 		vaction.setToolTipText("Vertical orientation");
 		try {
-			URL url = new URL("platform:/plugin/com.verticon.osgi.metatype.core.model.editor/icons/th_vertical.gif");
-			
-			vaction.setImageDescriptor( ImageDescriptor.createFromURL(url));
+			URL url = new URL(
+					"platform:/plugin/com.verticon.osgi.metatype.core.model.editor/icons/th_vertical.gif");
+
+			vaction.setImageDescriptor(ImageDescriptor.createFromURL(url));
 		} catch (MalformedURLException e) {
 
 		}
 		form.getToolBarManager().add(haction);
 		form.getToolBarManager().add(vaction);
-		
-		
+
 		Action screenshotAction = new Action() {
 			public void run() {
 
 				Shell shell = Display.getCurrent().getActiveShell();
 				Graph g = (Graph) viewer.getControl();
 				Rectangle bounds = g.getContents().getBounds();
-				Point size = new Point(g.getContents().getSize().width, g.getContents().getSize().height);
-				org.eclipse.draw2d.geometry.Point viewLocation = g.getViewport().getViewLocation();
+				Point size = new Point(g.getContents().getSize().width, g
+						.getContents().getSize().height);
+				org.eclipse.draw2d.geometry.Point viewLocation = g
+						.getViewport().getViewLocation();
 				final Image image = new Image(null, size.x, size.y);
 				GC gc = new GC(image);
 				SWTGraphics swtGraphics = new SWTGraphics(gc);
 
-				swtGraphics.translate(-1 * bounds.x + viewLocation.x, -1 * bounds.y + viewLocation.y);
+				swtGraphics.translate(-1 * bounds.x + viewLocation.x, -1
+						* bounds.y + viewLocation.y);
 				g.getViewport().paint(swtGraphics);
 				gc.copyArea(image, 0, 0);
 				gc.dispose();
@@ -204,9 +204,11 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 
 		screenshotAction.setText("Take A Screenshot");
 		try {
-			URL url = new URL("platform:/plugin/com.verticon.tracker.irouter.monitor.view/icons/snapshot.gif");
-			
-			screenshotAction.setImageDescriptor( ImageDescriptor.createFromURL(url));
+			URL url = new URL(
+					"platform:/plugin/com.verticon.tracker.irouter.monitor.view/icons/snapshot.gif");
+
+			screenshotAction.setImageDescriptor(ImageDescriptor
+					.createFromURL(url));
 		} catch (MalformedURLException e) {
 
 		}
@@ -218,56 +220,50 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock{
 
 	/**
 	 * Wired Node was removed from the model
+	 * 
 	 * @param wiredNode
 	 */
-	void removePage(Node wiredNode){
+	void removePage(Node wiredNode) {
 		IDetailsPage page = keyMap.get(wiredNode);
-		if(page!=null){
+		if (page != null) {
 			page.dispose();
 			keyMap.remove(wiredNode);
 		}
 	}
-	
-   
 
 	private void setLayout(LayoutAlgorithm layout) {
 		currentLayoutAlgorithm = layout;
 		viewer.setLayoutAlgorithm(layout, true);
 		viewer.applyLayout();
 	}
-	
+
 	void setTreeLayout() {
 		LayoutAlgorithm layout = new TreeLayoutAlgorithm();
 		setLayout(layout);
 	}
-	 
-    void setSpringLayout() {
-		setLayout(new
-				 SpringLayoutAlgorithm());
+
+	void setSpringLayout() {
+		setLayout(new SpringLayoutAlgorithm());
 	}
 
-	 void setGridLayout() {
-		setLayout( new
-				 GridLayoutAlgorithm());
+	void setGridLayout() {
+		setLayout(new GridLayoutAlgorithm());
 
 	}
 
-	 void setHorizontalLayout() {
-		setLayout(new
-				 HorizontalTreeLayoutAlgorithm());
+	void setHorizontalLayout() {
+		setLayout(new HorizontalTreeLayoutAlgorithm());
 	}
 
-
-	 void setRadialLayout() {
-		setLayout(new
-				 RadialLayoutAlgorithm());
+	void setRadialLayout() {
+		setLayout(new RadialLayoutAlgorithm());
 	}
 
-	void setShowWireLabels(boolean show){
+	void setShowWireLabels(boolean show) {
 		labelProvider.setShowWireLabels(show);
 	}
-	
-	void setFilter(Filter filter){
+
+	void setFilter(Filter filter) {
 		currentLayoutAlgorithm.setFilter(filter);
 		viewer.applyLayout();
 	}

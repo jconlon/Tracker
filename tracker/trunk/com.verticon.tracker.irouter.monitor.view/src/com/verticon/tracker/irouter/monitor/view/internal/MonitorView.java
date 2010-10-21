@@ -32,8 +32,6 @@ import org.eclipse.zest.core.viewers.ZoomContributionViewItem;
 
 public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 
-	
-
 	private FormToolkit toolKit = null;
 	private ScrolledForm form = null;
 	private ManagedForm managedForm = null;
@@ -68,8 +66,18 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 
 	@Override
 	public void setFocus() {
-
+		managedForm.setFocus();
 	}
+	
+	/**
+	 * Disposes the toolkit
+	 */
+	@Override
+	public void dispose() {
+		toolKit.dispose();
+		super.dispose();
+	}
+
 	
 
 	/**

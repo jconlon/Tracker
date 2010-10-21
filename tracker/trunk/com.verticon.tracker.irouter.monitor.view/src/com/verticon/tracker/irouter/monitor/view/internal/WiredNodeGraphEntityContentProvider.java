@@ -16,6 +16,7 @@ import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_PRODUCER_PID;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.databinding.observable.set.ISetChangeListener;
@@ -29,6 +30,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.zest.core.viewers.GraphViewer;
 import org.eclipse.zest.core.viewers.IGraphEntityContentProvider;
 import org.eclipse.zest.core.viewers.INestedContentProvider;
+import org.eclipse.zest.core.widgets.GraphItem;
 import org.osgi.service.wireadmin.Wire;
 import org.osgi.service.wireadmin.WireAdminEvent;
 import org.osgi.service.wireadmin.WireAdminListener;
@@ -308,14 +310,27 @@ public class WiredNodeGraphEntityContentProvider implements
 			public void run() {
 				for (Node node : nodes) {
 					try {
-						((GraphViewer) viewer).removeNode(node);
+						
+						GraphItem n = ((GraphViewer) viewer).findGraphItem(node);
+						//Workaround for bug 314710 218148 - doesnt (always?) seem to work 
+						((GraphViewer) viewer).getGraphControl().setSelection(null);
+						n.dispose();
 						if(node instanceof WiredNode){
 							masterDetail.removePage((WiredNode)node);
 						}
 						logger.debug(bundleMarker, "Removed {}", node);
+						
+						//Commented code shows that connections are removed when the node is
+//						List c = ((GraphViewer) viewer).getGraphControl().getConnections();
+//						System.out.println("Removed "+node);
+//						for (Object connection : c) {
+//							System.out.println("\t "+connection);
+//						}
+						
 					} catch (SWTException e) {
 						logger.error(bundleMarker,"Failed to remove "+node,e);
-						throw e;
+//						throw e; dont throw this up the stack handle it 
+						asyncRefreshViewerWorkaround();
 					}
 				}
 				((GraphViewer) viewer).applyLayout();
@@ -324,6 +339,19 @@ public class WiredNodeGraphEntityContentProvider implements
 
 	}
 
+	/**
+	 * This is a workaround for bug 314710 218148. The element should be added to 
+	 * the model Set of objects, so just refresh the graph.
+	 */
+	private void asyncRefreshViewerWorkaround(){
+		display.asyncExec(new Runnable() {
+			public void run() {
+				((GraphViewer) viewer).refresh();
+			}
+		});
+	}
+	
+	
 	private void add(final Set<Node> nodes) {
 		if (nodes == null || display==null || display.isDisposed()) {
 			return;
@@ -331,14 +359,20 @@ public class WiredNodeGraphEntityContentProvider implements
 
 		display.syncExec(new Runnable() {
 			public void run() {
+				
 				for (Node node : nodes) {
 					try {
+						((GraphViewer) viewer).getGraphControl().setSelection(null);
 						((GraphViewer) viewer).addNode(node);
 						 viewer.refresh(node,false);
 						logger.debug(bundleMarker, "Added {}", node);
 					} catch (SWTException e) {
-						logger.error(bundleMarker,"Failed to add "+node,e);
-						throw e;
+						//FIXME Seeing exceptions thrown if nodes are removed and then added back
+						//if services come, go, and come back. 
+						//see bug 314710 218148
+						logger.warn(bundleMarker,"Failed to add "+node,e);
+//						throw e; dont throw this up the stack handle it 
+						asyncRefreshViewerWorkaround();
 					}
 					
 				}
