@@ -77,6 +77,7 @@ public class Constants {
     static final String PRODUCER_SCOPE_ENTER_KEY_DEFAULT="transaction.state";
     
     static final String PRODUCER_STATE_ENTER_KEY_NAME="producer.enter.press.state";
-    
+    static final String NODE_LABEL = "tracker.monitor.label";
+	static final String NODE_LABEL_DEFAULT = "TruTest Proxy";
 
 }

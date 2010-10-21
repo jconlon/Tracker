@@ -32,6 +32,8 @@ import static com.verticon.tracker.irouter.trutest.internal.Constants.DOWNLOAD_R
 import static com.verticon.tracker.irouter.trutest.internal.Constants.DOWNLOAD_RECORD_PATTERN_DEFAULT;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.FILE_HEADER_COMMAND;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.FILE_HEADER_COMMAND_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.NODE_LABEL;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.NODE_LABEL_DEFAULT;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.POLL_DELAY_DEFAULT;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_EID;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_EID_DEFAULT;
@@ -161,7 +163,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 		DEFAULTS.put(PRODUCER_SCOPE_ENTER_KEY, PRODUCER_SCOPE_ENTER_KEY_DEFAULT);
 		
 		DEFAULTS.put(PRODUCER_STATE_ENTER_KEY_NAME, TRANSACTION_STATE_SCOPE);
-
+		DEFAULTS.put(NODE_LABEL, NODE_LABEL_DEFAULT);
 	}
 
 	/**
