@@ -54,6 +54,7 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 		form = this.toolKit.createScrolledForm(parent);
 		managedForm = new ManagedForm(this.toolKit, this.form);
 		form.setText("iRouter Monitor");
+		toolKit.decorateFormHeading(form.getForm());
 		block.createContent(managedForm);
 		layoutControl = new LayoutControl(block, "Layout");
 		filterControl = new FilterControl(block, "Filter");
