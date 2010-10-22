@@ -44,7 +44,7 @@ public class MetatypeFormsEditor extends MetatypeEditor {
 	}
 
 	private void removeUnusedPages() {
-		String[] pagesToRemove = { "Table", "Tree with Columns" };
+		String[] pagesToRemove = { "Table", "Tree with Columns", "Parent", "List", "Tree" };
 
 		for (String pageToRemove : pagesToRemove) {
 			for (int i = 0; i < super.getPageCount(); i++) {
