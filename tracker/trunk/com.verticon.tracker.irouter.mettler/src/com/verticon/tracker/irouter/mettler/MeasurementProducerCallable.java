@@ -100,6 +100,12 @@ public class MeasurementProducerCallable implements Callable<Void> {
 				+ "]";
 	}
 
+	private void setConnectionStatusVariable(boolean connected){
+		if(measurementSender instanceof MeasurementProducer){
+			((MeasurementProducer)measurementSender).setConnectedStatusVariable(connected);
+		}
+	}
+	
 	@Override
 	public Void call() throws Exception {
 		StreamConnection connection = null;
@@ -110,13 +116,15 @@ public class MeasurementProducerCallable implements Callable<Void> {
 		// waiting on a read. (there is no traffic)
 		try {
 			try {
-				
+				setConnectionStatusVariable(false);
 				log.debug(bundleMarker,this + ": Opening connection");
 				ConnectorService cs = balance.getConnectorService();
 
 				connection = (StreamConnection) cs.open(uri,
 						ConnectorService.READ_WRITE, true);
-
+				
+				setConnectionStatusVariable(true);
+				
 				out = new BufferedWriter(new OutputStreamWriter(connection
 						.openOutputStream()));
 				in = new BufferedReader(new InputStreamReader(connection
@@ -204,6 +212,7 @@ public class MeasurementProducerCallable implements Callable<Void> {
 			 log.debug(bundleMarker,"{}:Interrupted.....",this);
 			 
 		} finally {
+			setConnectionStatusVariable(false);
 			log.debug(bundleMarker,this + ":Terminating.....");
 			balance.unregisterProducer();
 			if (Thread.currentThread().isInterrupted()) {
@@ -227,8 +236,10 @@ public class MeasurementProducerCallable implements Callable<Void> {
 		return null;
 	}
 
-	private void process(String response) throws InterruptedException {
-		
+	private void process(String response) throws InterruptedException, IOException {
+		if (response == null) {
+			throw new IOException("End of Stream");
+		}
 		log.debug("{}: handling response={}",this, response!=null?Utils.toAscii(response):"null");
 		
 		Measurement measurement = createWeight(response);
