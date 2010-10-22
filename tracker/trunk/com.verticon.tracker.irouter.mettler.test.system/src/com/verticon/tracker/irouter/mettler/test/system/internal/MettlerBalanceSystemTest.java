@@ -66,6 +66,15 @@ public class MettlerBalanceSystemTest extends TestCase {
 	private static final CountDownLatch startUpGate = new CountDownLatch(1);
 	private static MockConsumer consumer;
 
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "MettlerBalanceSystemTest []";
+	}
+
 	public void setListener(IDeviceListener value) {
 		logger.info(bundleMarker,"DS injecting the Fake Balance");
 		MettlerBalanceSystemTest.listener = value;
@@ -112,13 +121,21 @@ public class MettlerBalanceSystemTest extends TestCase {
 		assertTrue("No Fake Mettler Device service available", ref != null);
 
 		ServiceReference msfRef = refs[0];
-		ManagedServiceFactory msf = (ManagedServiceFactory) context
+		ManagedServiceFactory managedServiceFactory = (ManagedServiceFactory) context
 				.getService(msfRef);
 		Properties props = new Properties();
 		props.put(TrackerConstants.CONNECTION_URI, "socket://localhost:2345");
 		props.put(TrackerConstants.TRACKER_WIRE_GROUP_NAME, "test");
-		msf.updated("someNewPid", props);
-		TimeUnit.SECONDS.sleep(3);
+		consumer.setUpLatch(150);
+		managedServiceFactory.updated("someNewPid", props);
+		logger.info(bundleMarker,"{} updated.",this);
+		
+		
+		boolean gotFirstMeasurement = consumer.start.await(3,
+				TimeUnit.SECONDS);
+		assertTrue("Failed to connect after 3 seconds", 
+				gotFirstMeasurement);
+		
 		refs = context.getServiceReferences(Monitorable.class.getName(),
 				"(service.pid=someNewPid)");
 
@@ -132,18 +149,18 @@ public class MettlerBalanceSystemTest extends TestCase {
 		assertEquals("mettler.weight.measurement", scope[0]);
 		
 		Monitorable monitorable = (Monitorable) context.getService(monRef);
-		String id = "producer.Connected_Consumers";
-		StatusVariable sv = monitorable.getStatusVariable(id);
+		StatusVariable sv = monitorable.getStatusVariable("producer.Connected_Consumers");
 		assertEquals("Should only be one connected wire", 1, sv.getInteger());
 
-		logger.debug(bundleMarker,"Sleeping to wait for connection to the fake indicator...");
+		sv = monitorable.getStatusVariable("producer.Is_Connected");
+		assertTrue("Should be connected", sv.getBoolean());
 		
-		TimeUnit.SECONDS.sleep(30);
-		assertTrue("Did not consume any measurements.",
-				!consumer.measurements.isEmpty());
-		assertTrue(
-				"The MockConsumer should have received 164 or more measurements from the Producer",
-				consumer.measurements.size() > 163);
+		// wait at latch for 30 seconds
+		boolean receivedCommands = consumer.receivedMeasurements.await(30,
+				TimeUnit.SECONDS);
+		assertTrue("Consumer only received "+consumer.measurements.size()+" commands after 30 seconds", 
+				receivedCommands);
+		
 
 	}
 }

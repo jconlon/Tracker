@@ -25,6 +25,7 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -52,6 +53,7 @@ public class MeasurementProducer implements Producer, IMeasurementSender, Monito
 
 	private static final String COMMAND_LAST = "producer.Last_Weight_Sent";
 	private static final String WIRES_COUNT = "producer.Connected_Consumers";
+	private static final String CONNECTED = "producer.Is_Connected";
 	
 	private final IContext context;
 	
@@ -65,6 +67,7 @@ public class MeasurementProducer implements Producer, IMeasurementSender, Monito
 	private ServiceRegistration wireAdminReg = null;
 	private ServiceRegistration monitorableReg = null;
 	
+	private AtomicBoolean connected = new AtomicBoolean();
 	
 	private Float lastWeight = new Float(0);
 	
@@ -185,7 +188,7 @@ public class MeasurementProducer implements Producer, IMeasurementSender, Monito
 
     @Override
 	public String[] getStatusVariableNames() {
-		return new String[]{COMMAND_LAST,WIRES_COUNT};
+		return new String[]{COMMAND_LAST,WIRES_COUNT,CONNECTED};
 	}
 
 	@Override
@@ -199,7 +202,13 @@ public class MeasurementProducer implements Producer, IMeasurementSender, Monito
 					);
 		}
 		
-		
+		if (CONNECTED.equals(name)){
+			return
+			new StatusVariable(name,
+					StatusVariable.CM_DER,
+					connected!=null
+					);
+		}
 		
 		if (WIRES_COUNT.equals(name)){
 			return
@@ -232,11 +241,19 @@ public class MeasurementProducer implements Producer, IMeasurementSender, Monito
 			"The last command sent to the TruTest scalehead";
 		}
 		
+		if (CONNECTED.equals(name)){
+			return
+			"If there is a connected balance.";
+		}
 		
 		if (WIRES_COUNT.equals(name)){
 			return
 			"The number of connected wires.";
 		}
 		return null;
+	}
+	
+	void setConnectedStatusVariable(boolean connected){
+		this.connected.set(connected);
 	}
 }

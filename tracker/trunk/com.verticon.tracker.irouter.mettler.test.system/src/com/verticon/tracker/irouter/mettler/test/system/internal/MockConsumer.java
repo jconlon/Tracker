@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import org.osgi.service.wireadmin.Consumer;
 import org.osgi.service.wireadmin.Envelope;
@@ -20,18 +21,19 @@ public class MockConsumer implements Consumer {
 	 */
 	private final Logger logger = LoggerFactory.getLogger(MockConsumer.class);
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	
+	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "MockConsumer []";
+		return "MockConsumer [measurements=" + measurements.size() + "]";
 	}
 
 	public List<Measurement> measurements = new ArrayList<Measurement>();
-
+	CountDownLatch receivedMeasurements = null;
+	CountDownLatch start = new CountDownLatch(1);
+	
 	@Override
 	public void updated(Wire wire, Object value) {
 		if (value instanceof Envelope) {
@@ -39,6 +41,10 @@ public class MockConsumer implements Consumer {
 			if (result instanceof Measurement) {
 				Measurement m = (Measurement) result;
 				measurements.add(m);
+				start.countDown();
+				if(receivedMeasurements!=null){
+					receivedMeasurements.countDown();
+				}
 				logger.info(bundleMarker, "{} received measurement {}", this,
 						m.getValue());
 			}
@@ -53,4 +59,7 @@ public class MockConsumer implements Consumer {
 				Arrays.toString(wires));
 	}
 
+	void setUpLatch(int count){
+		receivedMeasurements = new CountDownLatch(count);
+	}
 }
