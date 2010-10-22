@@ -42,6 +42,7 @@ public class DesignatesFormPage extends FormPage implements IPropertyListener {
 	protected void createFormContent(final IManagedForm managedForm) {
 		final ScrolledForm form = managedForm.getForm();
 		form.setText("iRouter Factory Services Configuration");
+		managedForm.getToolkit().decorateFormHeading(form.getForm());
 		masterDetailsBlock.createContent(managedForm);
 	}
 	

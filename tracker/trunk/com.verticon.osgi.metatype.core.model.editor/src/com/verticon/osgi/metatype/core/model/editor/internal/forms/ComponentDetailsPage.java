@@ -545,8 +545,15 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 		private IStatus validateMultipleValues(Object value) {
 			String[] values = ((String) value).split(",");
 			String error = null;
-			if (values.length != cardinality) {
-				error = "Wrong number of values. Expected " + cardinality
+			int abs = Math.abs(cardinality);
+			if (abs == 0 && values.length!=1){
+				error = "Wrong number of values. Expected a single value.";
+				mmng.addMessage("validation", error, null,
+				IMessageProvider.ERROR, t);
+				return ValidationStatus.error(error);
+			}
+			if (values.length > abs) {
+				error = "Wrong number of values. Cannot have more than " + abs
 						+ " values.";
 				mmng.addMessage("validation", error, null,
 						IMessageProvider.ERROR, t);
