@@ -71,9 +71,9 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock {
 		Section section = toolkit.createSection(parent, Section.DESCRIPTION);
 		section.setText("iRouter Network Services and Wire Connections");
 		section.setDescription("Select node to display service property details and status variables");
-
 		section.marginWidth = 10;
 		section.marginHeight = 5;
+		toolkit.createCompositeSeparator(section);
 		Composite client = toolkit.createComposite(section, SWT.WRAP);
 		FillLayout layout = new FillLayout();
 		layout.marginHeight = 10;
