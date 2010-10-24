@@ -10,12 +10,16 @@
  *******************************************************************************/
 package com.verticon.tracker.irouter.monitor.view.internal;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
@@ -152,6 +156,8 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 	 * includes: - Change Layout...
 	 */
 	private void makeActions() {
+		
+
 		refresh = new Action() {
 			public void run() {
 				block.getViewer().refresh(true);
@@ -159,8 +165,12 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 		};
 		refresh.setText("Refresh");
 		refresh.setToolTipText("Refresh the graph.");
-		refresh.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages()
-				.getImageDescriptor(ISharedImages.IMG_ELCL_SYNCED));
+		try{
+			URL url = new URL("platform:/plugin/com.verticon.tracker.irouter.monitor.view/icons/refresh.gif");
+			refresh.setImageDescriptor(ImageDescriptor.createFromURL(url));
+		}catch (MalformedURLException e){
+			
+		}
 
 		showConnectionLabels = new Action("Hide Wire Names",
 				Action.AS_CHECK_BOX) {

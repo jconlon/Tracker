@@ -13,12 +13,15 @@ package com.verticon.tracker.irouter.monitor.view.internal;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_PID;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_PRODUCER_PID;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
@@ -39,6 +42,8 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 
 	private Map<String, Color> nodeColors = new HashMap<String, Color>();
 	private boolean showWireLables = true;
+	private Image producerImage = null;
+	private Image consumerImage = null;
 
 	/**
 	 * @param showWireLables
@@ -48,16 +53,29 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 		this.showWireLables = showWireLables;
 	}
 
+	WiredNodeLabelProvider() {
+		super();
+		try{
+			URL url = new URL("platform:/plugin/com.verticon.tracker.irouter.monitor.view/icons/producer.gif");
+			producerImage = ImageDescriptor.createFromURL(url).createImage();
+			
+		    url = new URL("platform:/plugin/com.verticon.tracker.irouter.monitor.view/icons/consumer.gif");
+			consumerImage = ImageDescriptor.createFromURL(url).createImage();
+		}catch (MalformedURLException e){
+			
+		}
+	}
+
 	@Override
 	public String getText(Object element) {
 		if (element instanceof ProducerWiredNode) {
 			WiredNode node = (WiredNode) element;
-			return node.getParent() != null ? "Producer" : node.label + "(P)";
+			return node.getParent() != null ? "Producer" : node.label;
 		}
 
 		if (element instanceof ConsumerWiredNode) {
 			WiredNode node = (WiredNode) element;
-			return node.getParent() != null ? "Consumer" : node.label + "(C)";
+			return node.getParent() != null ? "Consumer" : node.label;
 		}
 
 		if (element instanceof WiredNode) {
@@ -111,7 +129,27 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 		if (element.getClass() == EntityConnectionData.class) {
 			return null;
 		}
+		if (element instanceof ConsumerWiredNode) {
+			return consumerImage;
+		}
+		if (element instanceof ProducerWiredNode) {
+			return producerImage;
+		}
 		return super.getImage(element);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.viewers.BaseLabelProvider#dispose()
+	 */
+	@Override
+	public void dispose() {
+		if(producerImage !=null){
+			producerImage.dispose();
+		}
+		if(consumerImage !=null){
+			consumerImage.dispose();
+		}
+		super.dispose();
 	}
 
 	@Override
