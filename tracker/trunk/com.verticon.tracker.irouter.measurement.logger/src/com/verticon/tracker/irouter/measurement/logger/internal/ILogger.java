@@ -6,5 +6,11 @@ public interface ILogger extends ITransactionHandler {
 	
 	String getLastLogEntry();
 
-	public abstract String getLastLogEntryDescription();
+    String getLastLogEntryDescription();
+    
+    int transactionsLogged();
+    
+    Long getCurrentEID();
+    
+    int getMeasurementsSize();
 }
