@@ -156,15 +156,6 @@ public class MeasurementEventConsumer  extends AbstractTransactionHandler implem
 		return bundleMarker;
 	}
 
-	@Override
-	protected String getTriggeringScopeName(){
-		return getConfigString("trigger.scope");
-	}
-	
-	@Override
-	protected String getAnimalIDNumberScopeName(){
-		return getConfigString("animal.id.scope");
-	}
 
 	@Override
 	protected void triggered() {

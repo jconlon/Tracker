@@ -22,10 +22,20 @@ public abstract class AbstractTransactionHandler implements ITransactionHandler 
 	protected final Logger log;
 	protected final Map<String, Measurement> measurements = new HashMap<String, Measurement>();
 	protected Long id = null;
+	/**
+	 * The State that ends a transaction.  If null
+	 * any State with a value of one will end a 
+	 * transaction.
+	 */
 	protected State state;
 
 	
-	
+	/**
+	 * 
+	 * @param log to send logging events
+	 * @param state that ends a transaction, if null any state with a value of one 
+	 * ends the transaction.
+	 */
 	protected AbstractTransactionHandler(Logger log, State state) {
 		super();
 		if(log==null){
@@ -37,47 +47,85 @@ public abstract class AbstractTransactionHandler implements ITransactionHandler 
 
 	protected abstract Marker bundleMarker();
 	
+	/**
+	 * @deprecated
+	 * @return
+	 */
 	protected String getTriggeringScopeName(){
 		return TRANSACTION_STATE_SCOPE;
 	}
 	
+	/**
+	 * @deprecated
+	 * @return
+	 */
 	protected String getAnimalIDNumberScopeName(){
 		return ANIMAL_TAG_NUMBER_SCOPE;
 	}
 	
-	public void add(Envelope envelope) {
-		 if(envelope.getScope().equals(getTriggeringScopeName())){
-			 if(state==null){
-				 if( ((State)envelope.getValue()).getValue()==1){
+	
+//	public void add(Envelope envelope) {
+//		 if(envelope.getScope().equals(getTriggeringScopeName())){
+//			 if(state==null){
+//				 if( ((State)envelope.getValue()).getValue()==1){
+//					 triggered();
+//					 measurements.clear();
+//					 id=null;
+//				 }
+//			 }else if (state.equals(envelope.getValue())){
+//				 triggered();
+//				 measurements.clear();
+//				 id=null;
+//			 }
+//		 }else if(envelope.getScope().equals(getAnimalIDNumberScopeName())){
+//			 if(envelope.getValue() instanceof Long){
+//				 id = (Long)envelope.getValue();
+//
+//				 log.debug(bundleMarker(),"{} ID={}",
+//						 this,id);
+//
+//			 }else{
+//				 log.error(bundleMarker(),"EID Envelope unknown value={}",envelope.getValue());
+//			 }
+//		 }else{
+//			 if(envelope.getValue() instanceof Measurement){
+//				 measurements.put(envelope.getScope(), (Measurement) envelope.getValue());
+//			 }else{
+//				 log.error(bundleMarker(),"id='{}', type='{}' has unknown value of {}",
+//						 new Object[]{id,
+//					 envelope.getScope(),
+//					 envelope.getValue()});
+//			 }
+//		 }
+//	}
+	
+	public void add(Envelope envelope){
+		if(envelope.getValue() instanceof State){
+			if(state==null){
+				if( ((State)envelope.getValue()).getValue()==1){
 					 triggered();
 					 measurements.clear();
 					 id=null;
 				 }
-			 }else if (state.equals(envelope.getValue())){
-				 triggered();
+			}else if(state.equals(envelope.getValue())){
+				triggered();
 				 measurements.clear();
 				 id=null;
-			 }
-		 }else if(envelope.getScope().equals(getAnimalIDNumberScopeName())){
-			 if(envelope.getValue() instanceof Long){
-				 id = (Long)envelope.getValue();
+			}
+		}else if (envelope.getValue() instanceof Long){
+			 id = (Long)envelope.getValue();
 
-				 log.debug(bundleMarker(),"{} ID={}",
-						 this,id);
+			 log.debug(bundleMarker(),"{} ID={}",
+					 this,id);
 
-			 }else{
-				 log.error(bundleMarker(),"EID Envelope unknown value={}",envelope.getValue());
-			 }
-		 }else{
-			 if(envelope.getValue() instanceof Measurement){
-				 measurements.put(envelope.getScope(), (Measurement) envelope.getValue());
-			 }else{
-				 log.error(bundleMarker(),"id='{}', type='{}' has unknown value of {}",
-						 new Object[]{id,
-					 envelope.getScope(),
-					 envelope.getValue()});
-			 }
-		 }
+		}else if (envelope.getValue() instanceof Measurement){
+			measurements.put(envelope.getScope(), (Measurement) envelope.getValue());
+		}else{
+			 log.error(bundleMarker(),"id='{}', type='{}' has unknown value of {}",
+					 new Object[]{id,
+				 envelope.getScope(),
+				 envelope.getValue()});
+		}
 	}
 
 	public Measurement get(String scope) {

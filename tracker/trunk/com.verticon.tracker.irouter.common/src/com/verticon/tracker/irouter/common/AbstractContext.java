@@ -44,7 +44,7 @@ public abstract class AbstractContext implements IContext {
 	public Boolean getConfigurationBoolean(String key) {
 		Object conf = getConfiguration( key);
 		if(conf instanceof String){
-			return new Boolean((String)conf);
+			return Boolean.valueOf((String)conf);
 		}
 		return (Boolean)conf;
 	}
