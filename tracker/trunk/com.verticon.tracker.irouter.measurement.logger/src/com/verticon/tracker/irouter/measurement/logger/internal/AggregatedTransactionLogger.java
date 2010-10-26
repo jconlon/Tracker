@@ -1,11 +1,12 @@
 package com.verticon.tracker.irouter.measurement.logger.internal;
 
-import static com.verticon.tracker.irouter.measurement.logger.internal.ComponentFactory.bundleMarker;
+import static com.verticon.tracker.irouter.measurement.logger.internal.MeasurementLoggerConsumer.bundleMarker;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.osgi.util.measurement.Measurement;
 import org.osgi.util.measurement.State;
@@ -40,20 +41,18 @@ public class AggregatedTransactionLogger extends AbstractTransactionHandler impl
 	"error='%5$.4f'," +
 	"unit='%6$s'";
 
+	private final AtomicInteger transactionsLogged = new AtomicInteger(0);
 
-	private final String triggeringScopeName;
-	private final String animalIDNumberScopeName;
-	
+
 	@Override
 	protected Marker bundleMarker() {
 		return bundleMarker;
 	}
 
 
-	public AggregatedTransactionLogger(Logger log, State state, String triggeringScopeName,String animalIDNumberScopeName ) {
+	public AggregatedTransactionLogger(Logger log, State state) {
 		super(log, state);
-		this.animalIDNumberScopeName= animalIDNumberScopeName;
-		this.triggeringScopeName = triggeringScopeName;
+		
 	}
 
 
@@ -97,6 +96,7 @@ public class AggregatedTransactionLogger extends AbstractTransactionHandler impl
 			builder.append(logEntry);
 		}
 		lastLogEntry=builder.toString();
+		transactionsLogged.incrementAndGet();
 	}
 
 
@@ -109,23 +109,21 @@ public class AggregatedTransactionLogger extends AbstractTransactionHandler impl
 	public String getLastLogEntryDescription() {
 		return "Concatination of last set of log entries. Entries separated with semicolons.";
 	}
-
-
-	/* (non-Javadoc)
-	 * @see com.verticon.tracker.irouter.common.AbstractTransactionHandler#getTriggeringScopeName()
-	 */
-	@Override
-	protected String getTriggeringScopeName() {
-		return triggeringScopeName;
-	}
-
-
-	/* (non-Javadoc)
-	 * @see com.verticon.tracker.irouter.common.AbstractTransactionHandler#getAnimalIDNumberScopeName()
-	 */
-	@Override
-	protected String getAnimalIDNumberScopeName() {
-		return animalIDNumberScopeName;
-	}
 	
+	@Override
+	public int transactionsLogged() {
+		return transactionsLogged.get();
+	}
+
+
+	@Override
+	public Long getCurrentEID() {
+		return id!=null?id:0;
+	}
+
+
+	@Override
+	public int getMeasurementsSize() {
+		return measurements.size();
+	}
 }

@@ -3,7 +3,7 @@
  */
 package com.verticon.tracker.irouter.measurement.logger;
 
-import static com.verticon.tracker.irouter.measurement.logger.internal.ComponentFactory.bundleMarker;
+import static com.verticon.tracker.irouter.measurement.logger.internal.MeasurementLoggerConsumer.bundleMarker;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.matches;
@@ -53,8 +53,6 @@ public class AggregatingTransactionLoggerTest extends AbstractLoggerTest {
 	private static final String BLOODWEIGHT_MATCHER = 
 		"type='measurement',dateTime='.*',id='123456789012345',scope='bloodWeight',value='1.9990',error='0.0000',unit='kg'";
 	
-	private static final String CONSUMER_EID_SCOPE_DEFAULT = "animal.tag.number";
-	private static final String CONSUMER_STATE_SCOPE_DEFAULT = "transaction.state";
 		
 	
 	/* (non-Javadoc)
@@ -63,13 +61,13 @@ public class AggregatingTransactionLoggerTest extends AbstractLoggerTest {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		instance = new AggregatedTransactionLogger(logger, new State(1,DOCARE_STATE_NAME),CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT);
+		instance = new AggregatedTransactionLogger(logger, new State(1,DOCARE_STATE_NAME));
 	}
 
 	@Test
 	public void testAggregatingLoggerConstructor() {
 		try {
-			new AggregatedTransactionLogger(null,new State(1,"some.state"),CONSUMER_STATE_SCOPE_DEFAULT,CONSUMER_EID_SCOPE_DEFAULT);
+			new AggregatedTransactionLogger(null,new State(1,"some.state"));
 			fail("Should have thrown an IllegalArgument Exception");
 		} catch (IllegalArgumentException e) {
 			//expected
@@ -77,7 +75,7 @@ public class AggregatingTransactionLoggerTest extends AbstractLoggerTest {
 			fail("Should have thrown an IllegalArgument Exception "+e);
 		}
 		Logger logger = createMock(Logger.class);
-		instance = new AggregatedTransactionLogger(logger,new State(1,"some.state"),null,null);
+		instance = new AggregatedTransactionLogger(logger,new State(1,"some.state"));
 		assertNotNull(instance);
 	}
 

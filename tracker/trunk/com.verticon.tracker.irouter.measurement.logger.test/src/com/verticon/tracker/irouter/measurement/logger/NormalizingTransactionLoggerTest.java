@@ -1,6 +1,6 @@
 package com.verticon.tracker.irouter.measurement.logger;
 
-import static com.verticon.tracker.irouter.measurement.logger.internal.ComponentFactory.bundleMarker;
+import static com.verticon.tracker.irouter.measurement.logger.internal.MeasurementLoggerConsumer.bundleMarker;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.matches;
 import static org.easymock.EasyMock.replay;
@@ -15,8 +15,6 @@ import com.verticon.tracker.irouter.measurement.logger.internal.NormalizedTransa
 public class NormalizingTransactionLoggerTest extends AbstractLoggerTest {
 
 	private static final String TEST_GROUP = "Test group";
-	private static final String CONSUMER_EID_SCOPE_DEFAULT = "animal.tag.number";
-	private static final String CONSUMER_STATE_SCOPE_DEFAULT = "transaction.state";
 
 	/*
 	 * (non-Javadoc)
@@ -29,15 +27,13 @@ public class NormalizingTransactionLoggerTest extends AbstractLoggerTest {
 	public void setUp() throws Exception {
 		super.setUp();
 		instance = new NormalizedTransactionLogger(TEST_GROUP, new State(1,
-				DOCARE_STATE_NAME), CONSUMER_STATE_SCOPE_DEFAULT,
-				CONSUMER_EID_SCOPE_DEFAULT, logger);
+				DOCARE_STATE_NAME), logger);
 
 	}
 
 	public void testAggregatingLoggerConstructor() {
 		try {
 			new NormalizedTransactionLogger(TEST_GROUP, new State(1, "x"),
-					CONSUMER_STATE_SCOPE_DEFAULT, CONSUMER_EID_SCOPE_DEFAULT,
 					null);
 			fail("Should have thrown an IllegalArgument Exception");
 		} catch (IllegalArgumentException e) {
