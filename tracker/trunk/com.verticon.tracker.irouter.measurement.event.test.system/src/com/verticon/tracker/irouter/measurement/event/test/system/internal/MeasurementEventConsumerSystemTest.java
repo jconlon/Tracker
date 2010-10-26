@@ -135,8 +135,8 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 				ANIMAL_WEIGHT_MEASUREMENT, TRANSACTION_STATE, ANIMAL_TAG_NUMBER };
 
 		props.put(WireConstants.WIREADMIN_CONSUMER_SCOPE, scopes);
-		props.put("trigger.scope", TRANSACTION_STATE);
-		props.put("animal.id.scope", ANIMAL_TAG_NUMBER);
+//		props.put("trigger.scope", TRANSACTION_STATE);
+//		props.put("animal.id.scope", ANIMAL_TAG_NUMBER);
 		props.put("consumer.transaction.state", TRANSACTION_STATE);
 		props.put("consumer.transaction.state.value", 1);
 		props.put("measurement.event.test", "instance");
