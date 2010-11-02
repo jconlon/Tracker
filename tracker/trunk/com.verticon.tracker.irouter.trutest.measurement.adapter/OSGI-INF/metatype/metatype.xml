@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
 
-  <OCD description="Adapts input measurements for display on TruTest Indicators." 
-       name="TruTest Measurement Adapter" id="com.verticon.tracker.irouter.trutest.measurement.adapter">
+  <OCD name="TruTest Measurement Adapter" id="com.verticon.tracker.irouter.trutest.measurement.adapter"
+  	   description="Adapts input measurements for display on TruTest Indicators.">
    
-    <AD name="Wiring group name"  id="tracker.wiring.group.name" required="true" type="String" default=""
+    <AD name="Wiring group name" id="tracker.wiring.group.name" 
+    	required="true" 
+    	type="String" 
+    	default="one"
         description="Name of the group of components that will be wired together."/>
-    
-    <AD name="Consumable scope" id="wireadmin.consumer.scope" type="String"
+        	
+	<AD name="Consumable scope" id="wireadmin.consumer.scope" 
+    	required="true" 
+    	type="String"
+    	default="eid"
 		cardinality="1" 
-		description="The input measurement scope to adapt. (Use full scope names)" />
+		description="The consumable scope that carries the measurement to adapt. (Use full scope names)" />
  
-    <AD name="Producer scope" id="wireadmin.producer.scope" type="String"
-		cardinality="1" 
-		description="The adapted TruTest command product output. (Use full scope names)" />
+ 	<AD name="Producer scope" id="wireadmin.producer.scope" 
+    	type="String"
+		cardinality="1"
+		required="true"
+		default="trutest.commands"  
+		description="The producer scope to send the adapted TruTest commands. (Use full scope names)" />
  
-    <AD name="Destination Field" id="destination.field" type="Integer" default="8"
+    <AD name="Destination Field" id="destination.field" 
+    	type="Integer" 
+    	default="8"
         description="The destination field in the TruTest indicator." >
     	<Option label="File Data One" value="8"/>
 		<Option label="File Data Two" value="9"/>
@@ -29,7 +40,9 @@
 		<Option label="Life Data Eight" value="7"/>
 	</AD>
 	
-	<AD name="Minimuim Characters" id="minimuim.characters" type="Integer" default="6"
+	<AD name="Minimuim Characters" id="minimuim.characters" 
+		type="Integer" 
+		default="6"
 		description="Minimuim characters needed to display the measurement. Includes the decimal point.">
 		<Option label="One" value="0"/>
 		<Option label="Two" value="1"/>
@@ -41,14 +54,18 @@
 		<Option label="Eight" value="7"/>
 	</AD>
 	
-    <AD name="Destination Port" id="destination.port" type="Integer" default="1"
-       description="TruTest Serial port that connects it to the iRouter.">
+    <AD name="Destination Port" id="destination.port" 
+    	type="Integer" 
+    	default="1"
+        description="TruTest Serial port that connects it to the iRouter.">
     	<Option label="Con1" value="1"/>
 		<Option label="Con2" value="2"/>
 	</AD>
 	
-	<AD name="Decimal Places" id="decimal.places" type="Integer" default="4"
-	description="Number of decimal places to display.">
+	<AD name="Decimal Places" id="decimal.places" 
+		type="Integer" 
+		default="4"
+		description="Number of decimal places to display.">
 	    <Option label="None" value="0"/>
 		<Option label="One" value="1"/>
 		<Option label="Two" value="2"/>
@@ -60,8 +77,10 @@
 		<Option label="Eight" value="8"/>
 	</AD>
 	
-	<AD name="Presentation Units" id="presentation.units" type="String" default="none"
-	description="Convert native SI units to compatible non standard units for presentation.">
+	<AD name="Presentation Units" id="presentation.units" 
+		type="String" 
+		default="none"
+		description="Convert native SI units to compatible non standard units for presentation.">
 	    <Option label="native (no conversion)" value="NATIVE"/>
 		<Option label="convert weight to grams" value="GRAMS"/>
 		<Option label="convert weight to ounces" value="OUNCES"/>
@@ -72,7 +91,9 @@
 		<Option label="convert length to yards" value="YARDS"/>
 	</AD>
 	
-	<AD name="Component container label"  id="tracker.monitor.label" type="String"
+	<AD name="Component container label" id="tracker.monitor.label" 
+		type="String"
+		required="false" 
         description="Name to label node in the iRouter Monitor View graphics."
         default="TruTest Measurement Adapter"/> 
 	
@@ -81,6 +102,5 @@
   <Designate pid="com.verticon.tracker.irouter.trutest.measurement.adapter" bundle="*">
 		<Object ocdref="com.verticon.tracker.irouter.trutest.measurement.adapter"/>
   </Designate>
-  
   
 </metatype:MetaData>
