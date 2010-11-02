@@ -192,7 +192,7 @@ public class MeasurementComparator implements Consumer, Producer, Monitorable {
 
 		if (CONNECTED_CONSUMERS_COUNT.equals(name)) {
 			return new StatusVariable(name, StatusVariable.CM_GAUGE,
-					wires.length);
+					wires!=null?wires.length:0);
 		} else if (CONNECTED_PRODUCERS_COUNT.equals(name)) {
 			return new StatusVariable(name, StatusVariable.CM_GAUGE,
 					producersConnected.get());
