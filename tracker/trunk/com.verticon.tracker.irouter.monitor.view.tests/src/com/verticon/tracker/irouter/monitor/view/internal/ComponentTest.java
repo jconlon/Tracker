@@ -57,7 +57,7 @@ public class ComponentTest {
 	public final void testGetModel() {
 		
 		assertNotNull(instance);
-		Set <Node> wiredNodes = instance.getModel();
+		Set <INode> wiredNodes = instance.getModel();
 		assertNotNull(wiredNodes);
 		assertTrue(wiredNodes instanceof IObservableSet);
 		IObservableSet observables = (IObservableSet) wiredNodes;
