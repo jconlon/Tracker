@@ -34,21 +34,22 @@
     </triggeringPolicy>
   </appender>
   
- <appender name="STDOUT"
+  <appender name="STDOUT"
     class="ch.qos.logback.core.ConsoleAppender">
     <layout class="ch.qos.logback.classic.PatternLayout">
       <Pattern>%-4relative %-5level %logger{35} - %msg %n</Pattern>
     </layout>
   </appender>
   
-  <appender name="F2" class="ch.qos.logback.core.FileAppender">
+  <appender name="AGGREGATED" class="ch.qos.logback.core.FileAppender">
     <file>aggregated.log</file>
     <append>true</append>
     <encoder>
       <pattern>%m%n</pattern>
     </encoder>
   </appender>
-  <appender name="F" class="ch.qos.logback.core.FileAppender">
+  
+  <appender name="TRANSACTION" class="ch.qos.logback.core.FileAppender">
     <append>true</append>
     <file>transaction.log</file>
     <encoder>
@@ -56,11 +57,10 @@
     </encoder>
   </appender>
 
-
 <!--Custom socketAppender for Lilith, supercedes the Logback SocketAppender
 	RemoteHost can be set as ${host} refers per ex. to -Dhost=localhost
 	you can use more then one hosts: localhost, 10.42.42.42 -->
- <appender name="multiplex"
+  <appender name="multiplex"
 	class="de.huxhorn.lilith.logback.appender.ClassicMultiplexSocketAppender">
 	<Compressing>true</Compressing>
 	<!-- will automatically use correct default port -->
@@ -69,28 +69,25 @@
 	<RemoteHosts>localhost</RemoteHosts>
 	<ApplicationIdentifier>${logback.application}</ApplicationIdentifier>
 	<encoding>UTF-8</encoding>
- </appender>
-
+  </appender>
  
   <logger name="com.verticon.tracker">
     <level value="DEBUG"/>
   </logger>
   
-   <logger name="aggregated" level="INFO">
-    <appender-ref ref="F2"/>
+  <logger name="aggregated" level="INFO">
+    <appender-ref ref="AGGREGATED"/>
   </logger>
+  
   <logger name="transaction" level="INFO">
-    <appender-ref ref="F"/>
+    <appender-ref ref="TRANSACTION"/>
   </logger>
-
   
   <root>
     <level value="DEBUG"/>
     
     <appender-ref ref="multiplex"/>
     <!-- <appender-ref ref="STDOUT"/> -->
-    
   </root>
   
- 
 </configuration>
