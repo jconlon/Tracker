@@ -21,6 +21,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.cm.ManagedServiceFactory;
+import org.osgi.service.monitor.MonitorListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -29,28 +30,17 @@ import org.slf4j.MarkerFactory;
 public class Component implements ManagedServiceFactory {
 
 	protected static String PLUGIN_ID = "com.verticon.tracker.irouter.trutest.internal";
-
-	/**
-	 * slf4j Marker to keep track of bundle
-	 */
 	public static final Marker bundleMarker;
-
 	static {
 		bundleMarker = MarkerFactory.getMarker(PLUGIN_ID);
 		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
 	}
-	
-	/**
-	 * slf4j Logger
-	 */
 	private final Logger log = LoggerFactory.getLogger(Component.class);
-
-
 	private Map<String, Indicator> indicators = null;
 	private ExecutorService exec;
 	private ScheduledExecutorService scheduler;
 	private BundleContext bc;
-	
+	private static MonitorListener monitorListener;
 
 	/*
 	 * (non-Javadoc)
@@ -68,7 +58,7 @@ public class Component implements ManagedServiceFactory {
 		exec = Executors.newCachedThreadPool();
 		scheduler = Executors.newSingleThreadScheduledExecutor();
 		indicators = new HashMap<String, Indicator>();
-		log.debug(bundleMarker,"Started");
+		log.debug(bundleMarker, "Started");
 	}
 
 	protected void deactivate(BundleContext context) throws Exception {
@@ -86,8 +76,6 @@ public class Component implements ManagedServiceFactory {
 		scheduler = null;
 	}
 
-	
-
 	/**
 	 * (non-Javadoc)
 	 * 
@@ -98,11 +86,11 @@ public class Component implements ManagedServiceFactory {
 	@Override
 	public void updated(String pid, Dictionary config)
 			throws ConfigurationException {
-		log.info(bundleMarker,"Updating pid {}",pid);
+		log.info(bundleMarker, "Updating pid {}", pid);
 
 		Indicator indicator = (Indicator) indicators.get(pid);
 		if (indicator == null) {
-			indicator = new Indicator(pid,  exec, scheduler);
+			indicator = new Indicator(pid, exec, scheduler);
 			indicators.put(pid, indicator);
 			indicator.registerMonitorable();
 		}
@@ -116,7 +104,7 @@ public class Component implements ManagedServiceFactory {
 	 */
 	@Override
 	public void deleted(String pid) {
-		log.info(bundleMarker,"Deleting pid {}",pid);
+		log.info(bundleMarker, "Deleting pid {}", pid);
 		Indicator indicator = (Indicator) indicators.get(pid);
 		if (indicator != null) {
 			indicators.remove(pid);
@@ -126,6 +114,7 @@ public class Component implements ManagedServiceFactory {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.osgi.service.cm.ManagedServiceFactory#getName()
 	 */
 	@Override
@@ -133,4 +122,26 @@ public class Component implements ManagedServiceFactory {
 		return "Tru-Test Indicator Factory";
 	}
 
+	/**
+	 * @return the monitorListener
+	 */
+	public static MonitorListener getMonitorListener() {
+		return monitorListener;
+	}
+
+	/**
+	 * @param monitorListener
+	 *            the monitorListener to set
+	 */
+	public void setMonitorListener(MonitorListener monitorListener) {
+		Component.monitorListener = monitorListener;
+	}
+
+	/**
+	 * @param monitorListener
+	 *            the monitorListener to set
+	 */
+	public void unsetMonitorListener(MonitorListener monitorListener) {
+		Component.monitorListener = null;
+	}
 }

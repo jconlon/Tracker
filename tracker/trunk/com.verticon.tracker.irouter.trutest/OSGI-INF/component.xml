@@ -5,4 +5,5 @@
       <provide interface="org.osgi.service.cm.ManagedServiceFactory"/>
    </service>
    <property name="service.pid" type="String" value="com.verticon.tracker.irouter.trutest.indicatorfactory"/>
+   <reference bind="setMonitorListener" cardinality="0..1" interface="org.osgi.service.monitor.MonitorListener" name="MonitorListener" policy="dynamic" unbind="unsetMonitorListener"/>
 </scr:component>
