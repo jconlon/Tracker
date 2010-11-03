@@ -2,12 +2,14 @@ package com.verticon.tracker.irouter.flow.terminator.internal;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.osgi.service.monitor.Monitorable;
 import org.osgi.service.monitor.StatusVariable;
+import org.osgi.service.wireadmin.BasicEnvelope;
 import org.osgi.service.wireadmin.Consumer;
 import org.osgi.service.wireadmin.Envelope;
 import org.osgi.service.wireadmin.Producer;
@@ -21,10 +23,14 @@ import org.slf4j.MarkerFactory;
 /**
  * 
  * FlowTerminator is a Information flow control service, that terminates flow of
- * information based on state received on the control scope.
+ * information based on a specific State received.
  * 
- * Reception of a distinct state terminates flow between input and output, while
+ * Reception of the specific state terminates output flow between input and output, while
  * reception of any other state resumes the flow.
+ * 
+ * Two or more scopes can be consumed, but all will be output together.
+ * 
+ * Only Enveloped objects will be passed through this service.
  * 
  * 
  * @author jconlon
@@ -35,10 +41,10 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 	private static final String CONNECTED_CONSUMERS_COUNT = "producer.Connected_Consumers";
 	private static final String TIME_OF_LAST_TERMINATION = "producer.Last_Termination";
 	private static final String TOTAL_TERMINATIONS = "producer.Total_Terminations";
-
-	private static final String FLOW_CONTROL_SCOPE = "flow.control.scope";
+	
 	private static final String TERMINATOR_STATE_NAME = "terminator.state.name";
 	private static final String TERMINATOR_STATE_VALUE = "terminator.state.value";
+	private static final String TERMINATOR_SCOPE_MAP = "terminator.scope.map";
 
 	private final static String PLUGIN_ID = "com.verticon.tracker.irouter.flow.terminator";
 	public static final Marker bundleMarker = MarkerFactory
@@ -58,6 +64,7 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 	private volatile long lastTerminationTime = 0;
 
 	private State terminatingState = null;
+	private Map<String,String> scopeMap = new HashMap<String,String>();
 
 	/*
 	 * (non-Javadoc)
@@ -84,6 +91,7 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 		this.config = config;
 		logger.debug(bundleMarker, "{} activating properties={}", this, config);
 		terminatingState = buildState();
+		buildMap();
 	}
 
 	/**
@@ -110,26 +118,31 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 		this.wires = wires;
 	}
 
+	/**
+	 * Inspect all in objects for the triggering State object, forwarding
+	 * all objects if the State is not found.  Any received State
+	 * object that is not the triggering State will turn forwarding back on.
+	 */
 	@Override
 	public void updated(Wire wire, Object in) {
 		if (in instanceof Envelope) {
 			Envelope envelope = (Envelope) in;
-			if (envelope.getScope().equals((config.get(FLOW_CONTROL_SCOPE)))) {
-				if (envelope.getValue() instanceof State) {
+			if (envelope.getValue() instanceof State) {
 					processState((State) envelope.getValue());
-				} else {
-					logger.error(
-							bundleMarker,
-							"{} consumed unknown value={} from control scope={}",
-							new Object[] { this, in,
-									Arrays.toString(wire.getScope()) });
-				}
+
 			} else {
-				forward(in);
+				Envelope out = reWrap(envelope);
+				if(out!=null){
+					forward(out);
+				}
 			}
+		} else if (in instanceof State) {
+			processState((State) in);
 
 		} else {
-			forward(in);
+			logger.warn(bundleMarker,
+					"{} defered sending {} because it was not in an Envelope", this,
+					in);
 		}
 	}
 
@@ -157,6 +170,24 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 				(String) config.get(TERMINATOR_STATE_NAME));
 	}
 	
+	private void buildMap() {
+		scopeMap.clear();
+		Object o = config.get( TERMINATOR_SCOPE_MAP);
+		if(o == null || !o.getClass().isArray()){
+			throw new IllegalStateException("Scope map is not an array.");
+		}
+		String[] conf = (String[])o;
+		for (String entry : conf) {
+			String[] token = entry.split(":");
+			if(token == null || token.length!=2){
+				logger.debug(bundleMarker, "{} entry={} could not be parsed.", this,
+						entry);
+				continue;
+			}
+			scopeMap.put(token[0], token[1]);
+		}
+	}
+	
 	private Integer getConfigurationInteger(String key) {
 		Object conf = config.get( key);
 		if(conf instanceof String){
@@ -164,13 +195,36 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 		}
 		return (Integer)conf;
 	}
+	
+	private Envelope reWrap(Envelope envelope){
+		String outScope = findOutScope(envelope.getScope());
+		return outScope!=null?
+				new BasicEnvelope(envelope.getValue(),envelope.getIdentification(),outScope):null;
+	}
+	
+	private String findOutScope(String inScope){
+		String result = scopeMap.get(inScope);
+		if(result==null){
+			logger.warn(bundleMarker, "{} inScope={} could not be mapped.", this,
+					inScope);
+		}
+		return result;
+	}
 
-
-	private void forward(Object in) {
+	/**
+	 * Forwarding policy is to send 
+	 * <ol>
+	 * <li>raw (non Envelope) in objects to all wires if 
+	 * the forwarding flag is enabled.</li>
+	 * <li>Envelope objects</li>
+	 * </ol>
+	 * @param in
+	 */
+	private void forward(Envelope in) {
 		if (!forwarding.get()) {
 			logger.debug(bundleMarker,
 					"{}: flow ternminated. Will not forward {} to {} wires",
-					new Object[] { this, in, wires.length });
+					new Object[] { this, in, wires!=null?wires.length:0 });
 			return;
 		}
 		if (wires != null) {
@@ -179,7 +233,9 @@ public class FlowTerminator implements Consumer, Producer, Monitorable {
 					new Object[] { this, in, wires.length });
 
 			for (Wire wire : wires) {
-				wire.update(in);
+				if(Arrays.asList(wire.getScope()).contains(in.getScope())){
+					wire.update(in);
+				}
 			}
 
 		} else {

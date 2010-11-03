@@ -12,20 +12,31 @@
  
     <AD name="Consumed Information and Control scopes" id="wireadmin.consumer.scope" 
     	type="String"
-		cardinality="4" 
-		description="Names of the scopes containing information and triggering State objects to consume.  Only the information (non State traffic) will be passed through when flow is unterminated. (Use full scope names)" />
+		cardinality="5" 
+		description="Names of the consumed scopes containing information and triggering State objects.  Only the information (non State traffic) will be passed through when flow is unterminated. (Use full scope names)" />
    	
     <AD name="Flow Terminator State Name"  
-        id="terminator.state.name" required="true" type="String" 
+        id="terminator.state.name" 
+        required="true" 
+        type="String" 
     	description="The name of the state that terminates information flow."/>
     	
-     <AD name="Flow Terminator State Value"  
-        id="terminator.state.value" required="true" type="Integer" 
+    <AD name="Flow Terminator State Value"  
+        id="terminator.state.value" 
+        required="true" 
+        type="Integer" 
     	description="The value of the state that terminates information flow."/>
     	
-	 <AD name="Information Producer scope" id="wireadmin.producer.scope" type="String"
-		cardinality="1" 
-		description="The scope containing information flowing from the information consumbable scope . (Use full scope names)" />
+	<AD name="Information Producer scope" id="wireadmin.producer.scope" 
+		type="String"
+		required="true" 
+		cardinality="4" 
+		description="Name of the produced scopes containing information passed through from the information consumbable scopes. (Use full scope names)" />
+  
+   	<AD name="Scope Map" id="terminator.scope.map" 
+   		type="String"
+		cardinality="4" 
+		description="Consumer scope to producer scope map. Use full scope names with a colon as the delimiter between the scopes.  Example in.scope:out.scope" />
   
      <AD name="Component container label"  id="tracker.monitor.label" type="String"
         description="Name to label node in the iRouter Monitor View graphics."
