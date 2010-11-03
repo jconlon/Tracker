@@ -182,7 +182,11 @@ class CommandConsumer implements Consumer, Monitorable {
 			writerFuture = null;
 		}
 		if (serviceRegistration != null) {
-			serviceRegistration.unregister();
+			try {
+				serviceRegistration.unregister();
+			} catch (Exception e) {
+				//Ignore
+			}
 			serviceRegistration = null;
 		}
 		if(commandQueue.size()>1){
