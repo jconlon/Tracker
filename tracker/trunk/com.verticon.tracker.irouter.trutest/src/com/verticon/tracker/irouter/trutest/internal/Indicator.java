@@ -72,6 +72,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.microedition.io.StreamConnection;
 
@@ -81,6 +82,7 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.io.ConnectorService;
+import org.osgi.service.monitor.MonitorListener;
 import org.osgi.service.monitor.Monitorable;
 import org.osgi.service.monitor.StatusVariable;
 import org.slf4j.Logger;
@@ -102,42 +104,34 @@ import com.verticon.tracker.irouter.common.TaskMonitoringService;
  */
 public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 
+	public final static Dictionary<String, Object> DEFAULTS;
+	
+	protected volatile boolean initialized;
+	
 	private static final String DOWNLOAD_RECORDS_COUNT = "producer.Downloaded_Records";
 	private static final String UPLOAD_RECORDS_COUNT = "producer.Uploaded_Records";
 	private static final String CONNECTED = "producer.Is_Connected";
-
-	/**
-	 * slf4j Logger
-	 */
+	private static final String CONNECTION_URI_STATUS_VAR = "producer.Connection_URI";
 	private final Logger log = LoggerFactory.getLogger(Indicator.class);
-
-
-	public final static Dictionary<String, Object> DEFAULTS;
 	private final BlockingQueue<String[]> commandQueue;
 	private final String pid;
 	private final ExecutorService exec;
 	private final ScheduledExecutorService scheduler;
 	private final EnvelopeProducer envelopeProducer;
 	private final CommandConsumer commandConsumer;
-	
 	private volatile Future<Void> taskMonitorFuture;
 	private volatile TaskMonitoringService taskMonitoringService = null;
 	private volatile Dictionary<?, ?> config;
-	protected volatile boolean initialized;
-
 	private BundleContext bundleContext;
-	
 	private Writer out = null;
 	private BufferedReader in = null;
 	private volatile StreamConnection connection = null;
-	
 	private int upLoadedRecords;
 	private int downLoadedRecords;
-
 	private final Monitorable monitorableDelegate;
-
-
 	private ServiceRegistration monitorableRegistration;
+	private AtomicBoolean connected = new AtomicBoolean();
+	private AtomicBoolean monitorRegistered = new AtomicBoolean();
 	
 	static {
 		DEFAULTS = new Hashtable<String, Object>();//socket://lantronix2:10001
@@ -323,6 +317,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 			}
 			in = new BufferedReader(new InputStreamReader(connection
 					.openInputStream()));
+			setConnectedStatusVariable(true);
 		}
 		log.debug(bundleMarker,"{} Returning reader {} for connection {}",
 					new Object[]{this, in, connection});
@@ -473,20 +468,6 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 
 	}
 
-//	/**
-//	 * Called by Component to stop this instance.
-//	 */
-//	void stop() {
-//		if (taskMonitorFuture != null) {
-//			taskMonitorFuture.cancel(true);
-//			taskMonitorFuture = null;
-//		}
-//		if (taskMonitoringService != null) {
-//			taskMonitoringService.cancelAndRestartTasks(true);
-//			taskMonitoringService = null;
-//		}
-//
-//	}
 	
 	/**
 	 * Called by Component to stop this balance.
@@ -639,7 +620,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 
 	@Override
 	public String[] getStatusVariableNames() {
-		return new String[]{DOWNLOAD_RECORDS_COUNT,UPLOAD_RECORDS_COUNT,CONNECTED };
+		return new String[]{DOWNLOAD_RECORDS_COUNT,UPLOAD_RECORDS_COUNT,CONNECTED,CONNECTION_URI_STATUS_VAR };
 	}
 
 	@Override
@@ -665,16 +646,26 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 			new StatusVariable(name,
 					StatusVariable.CM_DER,
 					in!=null
-					);
-		
-		}else{
-			throw new IllegalArgumentException(
-					"Invalid Status Variable name " + name);
+			);
 		}
+	    if (CONNECTION_URI_STATUS_VAR.equals(name)){
+			return
+				new StatusVariable(name,
+						StatusVariable.CM_DER,
+						getConfigurationString(CONNECTION_URI)
+				);
+		
+		}
+		throw new IllegalArgumentException(
+					"Invalid Status Variable name " + name);
+		
 	}
 
 	@Override
 	public boolean notifiesOnChange(String id) throws IllegalArgumentException {
+		if (CONNECTED.equals(id)){
+			return true;
+		}
 		return false;
 	}
 
@@ -685,18 +676,21 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 	}
 
 	@Override
-	public String getDescription(String name) throws IllegalArgumentException {
-		if (DOWNLOAD_RECORDS_COUNT.equals(name)){
+	public String getDescription(String id) throws IllegalArgumentException {
+		if (DOWNLOAD_RECORDS_COUNT.equals(id)){
 			return
 			"The number of records downloaded to the scalehead.";
 		}
-		if (UPLOAD_RECORDS_COUNT.equals(name)){
+		if (UPLOAD_RECORDS_COUNT.equals(id)){
 			return
 			"The number of records uploaded to the scalehead.";
 		}
-		if (CONNECTED.equals(name)){
+		if (CONNECTED.equals(id)){
 			return
 			"If there is a connected scalehead.";
+		}
+		if (CONNECTION_URI_STATUS_VAR.equals(id)){
+			return "The URI of the connected indicator.";
 		}
 		return null;
 	}
@@ -713,7 +707,14 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 		this.downLoadedRecords = downLoadedRecords;
 	}
 	
-	
+	void setConnectedStatusVariable(boolean connected){
+		this.connected.set(connected);
+		MonitorListener l = Component.getMonitorListener();
+		if(l!=null && monitorRegistered.get()){
+			l.updated(pid, 
+					getStatusVariable(CONNECTED));
+		}
+	}
 
 	@Override
 	public void registerMonitorable() {
@@ -722,12 +723,13 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 		monitorableRegistration = FrameworkUtil.getBundle(this.getClass()).getBundleContext()
 			.registerService(
 				Monitorable.class.getName(), monitorableDelegate, props);
-		
+		monitorRegistered.set(true);
 	}
 
 	@Override
 	public void unregisterMonitorable() {
 		monitorableRegistration.unregister();
+		monitorRegistered.set(false);
 	}
 
 }

@@ -45,18 +45,9 @@ import com.verticon.tracker.irouter.common.IEnvelopeSender;
 public class EnvelopeProducerCallable implements Callable<Void> {
 
 	private static final String INDICATOR_ACK = "^";
-
-
 	private static final String BLANK_RESPONSE = "[]";
-
-
-	/**
-	 * slf4j Logger
-	 */
 	private final Logger log = LoggerFactory
 		.getLogger(EnvelopeProducerCallable.class);
-
-
 	private final IIndicator indicator;
 	private final IEnvelopeSender envelopeSender;
 	private final Matcher matcher;
@@ -66,6 +57,7 @@ public class EnvelopeProducerCallable implements Callable<Void> {
 	private final String pid;
 	private final String uri;
 	private final CountDownLatch startGate;
+	private Long lastEID = Long.valueOf(0);
 
 	/**
 	 * Constructs an envelopeProducer for the indicator.  The startGate is a latch
@@ -110,6 +102,7 @@ public class EnvelopeProducerCallable implements Callable<Void> {
 	 */
 	@Override
 	public Void call() throws Exception {
+		setConnectionStatusVariable(false);
 		log.debug(bundleMarker,"{}: Waiting for initialization task to complete.", this);
 		
 		BufferedReader in = null;
@@ -123,6 +116,7 @@ public class EnvelopeProducerCallable implements Callable<Void> {
 				uri = indicator
 						.getConfigurationString(CONNECTION_URI);
 				in = indicator.getReader();
+				setConnectionStatusVariable(true);
 				startGate.countDown();
 			} catch (NoRouteToHostException e){
 				log.warn(bundleMarker,"{} :No Route to Host {} ", this, uri);
@@ -176,6 +170,7 @@ public class EnvelopeProducerCallable implements Callable<Void> {
 			}
 		
 		} finally {
+			setConnectionStatusVariable(false);
 			log.debug(bundleMarker,"{}: Terminating.", this);
 			indicator.unregisterProducer();
 			if (Thread.currentThread().isInterrupted()) {
@@ -194,6 +189,12 @@ public class EnvelopeProducerCallable implements Callable<Void> {
 		}
 
 		return null;
+	}
+	
+	private void setConnectionStatusVariable(boolean connected){
+		if(envelopeSender instanceof Indicator){
+			((Indicator)envelopeSender).setConnectedStatusVariable(connected);
+		}
 	}
 
 	/**
@@ -253,14 +254,18 @@ public class EnvelopeProducerCallable implements Callable<Void> {
 
 	}
 
+	/**
+	 * Send an EID as a Long in an Envelope.
+	 * @param rp
+	 */
 	private void sendID(String rp) {
 		try {
-			Long eid = Long.parseLong(rp);
-			Envelope envelope = new BasicEnvelope(eid,// value
-					indicator.getPid(),// identification
+			lastEID = Long.parseLong(rp);
+			Envelope envelope = new BasicEnvelope(lastEID,// value
+					lastEID,// identification
 					indicator.getConfigurationString(PRODUCER_SCOPE_ANIMAL_EID)// scope
 			);
-			log.debug(bundleMarker,"{}: Producing Animal EID={}", this, eid);
+			log.debug(bundleMarker,"{}: Producing Animal EID={}", this, lastEID);
 			
 			envelopeSender.send(envelope);
 		} catch (NumberFormatException e) {
@@ -292,11 +297,16 @@ public class EnvelopeProducerCallable implements Callable<Void> {
 		}
 	}
 
+	/**
+	 * Sends animal weight as an Envelope identified with the eid
+	 * @param error
+	 * @param result
+	 */
 	private void sendWeight(double error, double result) {
 		Measurement weight = new Measurement(result, error, Unit.kg, System
 				.currentTimeMillis());
 		Envelope envelope = new BasicEnvelope(weight,// value
-				indicator.getPid(),// identification
+				lastEID,// identification Ticket#641
 				indicator.getConfigurationString(PRODUCER_SCOPE_ANIMAL_WEIGHT)// scope
 		);
 		log.debug(bundleMarker,"{}: Producing Animal Weight={}", this,
@@ -305,17 +315,22 @@ public class EnvelopeProducerCallable implements Callable<Void> {
 		envelopeSender.send(envelope);
 	}
 
+	/**
+	 * Send a State in an Envelope identified with the EID indicating an Enter
+	 * key press.
+	 */
 	private void sendRecord() {
 		State state = new State(1, 
 				indicator.getConfigurationString(PRODUCER_STATE_ENTER_KEY_NAME), 
 				System.currentTimeMillis());
 		Envelope envelope = new BasicEnvelope(state,// value
-				indicator.getPid(),// identification
+				lastEID,// identification 
 				indicator.getConfigurationString(PRODUCER_SCOPE_ENTER_KEY)// scope
 		);
 		log.debug(bundleMarker,"{}: Producing Animal record state.", this);
 		
 		envelopeSender.send(envelope);
+		lastEID = Long.valueOf(0);
 	}
 
 }
