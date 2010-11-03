@@ -2,20 +2,19 @@
 <metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
 
   <OCD name="Flow Terminator" id="com.verticon.tracker.irouter.flow.terminator"
-       description="Information flow control service, that terminates flow of information based on state received on the control scope." 
-       >
+       description="Controls passing or blocking of objects based on the detection of a specific State. Only non-State objects are passed.">
    
-    <AD name="Wiring group name"  id="tracker.wiring.group.name" required="true" type="String" default=""
-        description="Name of the group of components that will be wired together."/>
-    
-    <AD name="Information and Control Consumable scope" id="wireadmin.consumer.scope" type="String"
-		cardinality="2" 
-		description="Names of the information scope and flow control scope consumed by this service. Only the information scope will be passed through when flow is unterminated. (Use full scope names)" />
-   
-    <AD name="Flow Control Trigger scope" id="trigger.scope" type="String" 
-        default="flow.control.scope"
-		description="Name of the flow control scope from the previous consumbable scopes list." />
-		
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" 
+    	type="String"
+    	required="true" 
+    	default="one" 
+        description="Name of the group of components that will be wired together."/> 
+ 
+    <AD name="Consumed Information and Control scopes" id="wireadmin.consumer.scope" 
+    	type="String"
+		cardinality="4" 
+		description="Names of the scopes containing information and triggering State objects to consume.  Only the information (non State traffic) will be passed through when flow is unterminated. (Use full scope names)" />
+   	
     <AD name="Flow Terminator State Name"  
         id="terminator.state.name" required="true" type="String" 
     	description="The name of the state that terminates information flow."/>
