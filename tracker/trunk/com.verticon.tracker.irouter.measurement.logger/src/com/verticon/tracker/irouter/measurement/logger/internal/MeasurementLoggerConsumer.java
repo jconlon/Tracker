@@ -3,6 +3,7 @@
  */
 package com.verticon.tracker.irouter.measurement.logger.internal;
 
+import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
 
 import java.util.Arrays;
@@ -60,6 +61,7 @@ public class MeasurementLoggerConsumer implements Consumer, Monitorable {
 	private static final String LOG_ENTRY_SENT_COUNT = "consumer.Log_Entries_Sent";
 	private static final String MEASUREMENT_QUEUE_DEPTH = "consumer.Measurements_In_Queue";
 	private static final String CURRENT_EID = "consumer.Current_EID";
+	private static final String CONNECTION_URI_STATUS_VAR = "consumer.Connection_URI";
 	
 	//Misc
 	private final AtomicInteger producersConnected = new AtomicInteger(0);
@@ -124,9 +126,13 @@ public class MeasurementLoggerConsumer implements Consumer, Monitorable {
 	private String getConfigString(String key) {
 		return (String) config.get(key);
 	}
-
-	private Integer getConfigInteger(String key) {
-		return (Integer) config.get(key);
+	
+	public Integer getConfigInteger(String key) {
+		Object conf = config.get( key);
+		if(conf instanceof String){
+			return new Integer((String)conf);
+		}
+		return (Integer)conf;
 	}
 
 	/**
@@ -163,7 +169,13 @@ public class MeasurementLoggerConsumer implements Consumer, Monitorable {
 	
 	@Override
 	public String[] getStatusVariableNames() {
-		return new String[] { CONNECTED_PRODUCERS_COUNT, LAST_LOG_ENTRY, LOG_ENTRY_SENT_COUNT,MEASUREMENT_QUEUE_DEPTH,CURRENT_EID };
+		return new String[] { 
+				CONNECTED_PRODUCERS_COUNT, 
+				LAST_LOG_ENTRY, 
+				LOG_ENTRY_SENT_COUNT,
+				MEASUREMENT_QUEUE_DEPTH, 
+				CURRENT_EID, 
+				CONNECTION_URI_STATUS_VAR };
 	}
 
 	@Override
@@ -185,6 +197,13 @@ public class MeasurementLoggerConsumer implements Consumer, Monitorable {
 		} else if (CURRENT_EID.equals(name)){
 			return new StatusVariable(name, StatusVariable.CM_DER,
 					((ILogger) delegate).getCurrentEID());
+		} else if (CONNECTION_URI_STATUS_VAR.equals(name)){
+				return
+				new StatusVariable(name,
+						StatusVariable.CM_DER,
+						getConfigString(CONNECTION_URI)
+						);
+			
 		} else {
 			throw new IllegalArgumentException("Invalid Status Variable name "
 					+ name);
@@ -204,17 +223,19 @@ public class MeasurementLoggerConsumer implements Consumer, Monitorable {
 	}
 	
 	@Override
-	public String getDescription(String name) throws IllegalArgumentException {
-		if (CONNECTED_PRODUCERS_COUNT.equals(name)) {
+	public String getDescription(String id) throws IllegalArgumentException {
+		if (CONNECTED_PRODUCERS_COUNT.equals(id)) {
 			return "The number of connected wires.";
-		} else if (LAST_LOG_ENTRY.equals(name)) {
+		} else if (LAST_LOG_ENTRY.equals(id)) {
 			return ((ILogger) delegate).getLastLogEntryDescription();
-		} else if (LOG_ENTRY_SENT_COUNT.equals(name)){
+		} else if (LOG_ENTRY_SENT_COUNT.equals(id)){
 			return "The number of log entries sent to the log service.";
-		} else if (MEASUREMENT_QUEUE_DEPTH.equals(name)) {
+		} else if (MEASUREMENT_QUEUE_DEPTH.equals(id)) {
 			return "The number of measurements in the queued to be sent to the log service on the next trigger state.";
-		} else if (CURRENT_EID.equals(name)){
+		} else if (CURRENT_EID.equals(id)){
 			return "The EID number to be associated with the measurements in queued to be sent to the log service.";
+		} else if (CONNECTION_URI_STATUS_VAR.equals(id)){
+			return "The URI of the connected balance.";
 		}
 		return null;
 	}
