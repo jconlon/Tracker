@@ -20,6 +20,7 @@ import java.util.concurrent.Executors;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.cm.ManagedServiceFactory;
+import org.osgi.service.monitor.MonitorListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -28,26 +29,16 @@ import org.slf4j.MarkerFactory;
 public class FactoryComponent implements ManagedServiceFactory {
 
 	protected static String PLUGIN_ID = "com.verticon.tracker.irouter.mettler";
-
-	/**
-	 * slf4j Marker to keep track of bundle
-	 */
 	public static final Marker bundleMarker;
-
 	static {
 		bundleMarker = MarkerFactory.getMarker(PLUGIN_ID);
 		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
 	}
-	
-	/**
-	 * slf4j Logger
-	 */
 	private final Logger log = LoggerFactory.getLogger(FactoryComponent.class);
-
-
 	private Map<String, Balance> balances = null;
 	private ExecutorService exec;
 	private BundleContext bc;
+	private static MonitorListener monitorListener;
 
 	/*
 	 * (non-Javadoc)
@@ -122,6 +113,28 @@ public class FactoryComponent implements ManagedServiceFactory {
 			balances.put(pid, balance);
 		}
 		balance.updated(bc, config);
+	}
+
+	/**
+	 * @return the monitorListener
+	 */
+	public static MonitorListener getMonitorListener() {
+		return monitorListener;
+	}
+
+	
+	/**
+	 * @param monitorListener the monitorListener to set
+	 */
+	public void setMonitorListener(MonitorListener monitorListener) {
+		FactoryComponent.monitorListener = monitorListener;
+	}
+	
+	/**
+	 * @param monitorListener the monitorListener to set
+	 */
+	public void unsetMonitorListener(MonitorListener monitorListener) {
+		FactoryComponent.monitorListener = null;
 	}
 
 }

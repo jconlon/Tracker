@@ -29,6 +29,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
+import org.osgi.service.monitor.MonitorListener;
 import org.osgi.service.monitor.Monitorable;
 import org.osgi.service.monitor.StatusVariable;
 import org.osgi.service.wireadmin.BasicEnvelope;
@@ -45,30 +46,21 @@ import com.verticon.tracker.irouter.common.IMeasurementSender;
 
 public class MeasurementProducer implements Producer, IMeasurementSender, Monitorable{
 
-	/**
-	 * slf4j Logger
-	 */
-	private final Logger log = LoggerFactory
-			.getLogger(MeasurementProducer.class);
-
+	private final Logger log = LoggerFactory.getLogger(MeasurementProducer.class);
 	private static final String COMMAND_LAST = "producer.Last_Weight_Sent";
 	private static final String WIRES_COUNT = "producer.Connected_Consumers";
 	private static final String CONNECTED = "producer.Is_Connected";
-	
+	private static final String CONNECTION_URI_STATUS_VAR = "producer.Connection_URI";
 	private final IContext context;
-	
 	//Shared wires protected with concurrent collection
 	private List<Wire> wires = new CopyOnWriteArrayList<Wire>();
 	//Shared envelope protected with volatile
 	private volatile Envelope envelope = null;
-	
 	private final String scopeName;
-	
 	private ServiceRegistration wireAdminReg = null;
 	private ServiceRegistration monitorableReg = null;
-	
 	private AtomicBoolean connected = new AtomicBoolean();
-	
+	private AtomicBoolean registered = new AtomicBoolean();
 	private Float lastWeight = new Float(0);
 	
 	public MeasurementProducer(IContext context) {
@@ -153,6 +145,7 @@ public class MeasurementProducer implements Producer, IMeasurementSender, Monito
 	 * Called by the Balance to unregister the service.
 	 */
 	void unRegister(){
+		registered.set(false);
 		if(wireAdminReg != null){
 			log.debug(bundleMarker,this + ":Unregistering.....");
 			 wireAdminReg.unregister();
@@ -184,11 +177,12 @@ public class MeasurementProducer implements Producer, IMeasurementSender, Monito
 		wireAdminReg = bc.registerService(Producer.class
 				.getName(), this, regProps);
 		monitorableReg = bc.registerService(Monitorable.class.getName(), this, regProps);
+		registered.set(true);
 	}
 
     @Override
 	public String[] getStatusVariableNames() {
-		return new String[]{COMMAND_LAST,WIRES_COUNT,CONNECTED};
+		return new String[]{COMMAND_LAST,WIRES_COUNT,CONNECTED, CONNECTION_URI_STATUS_VAR};
 	}
 
 	@Override
@@ -216,14 +210,27 @@ public class MeasurementProducer implements Producer, IMeasurementSender, Monito
 					StatusVariable.CM_GAUGE,
 					wires.size()
 					);
-		}else{
-			throw new IllegalArgumentException(
-					"Invalid Status Variable name " + name);
 		}
+			
+		if (CONNECTION_URI_STATUS_VAR.equals(name)){
+			return
+			new StatusVariable(name,
+					StatusVariable.CM_DER,
+					context.getConfigurationString(CONNECTION_URI)
+					);
+		}
+		
+		
+		throw new IllegalArgumentException(
+					"Invalid Status Variable name " + name);
+		
 	}
 	
 	@Override
 	public boolean notifiesOnChange(String id) throws IllegalArgumentException {
+		if (CONNECTED.equals(id)){
+			return true;
+		}
 		return false;
 	}
 
@@ -235,25 +242,35 @@ public class MeasurementProducer implements Producer, IMeasurementSender, Monito
 	}
 
 	@Override
-	public String getDescription(String name) throws IllegalArgumentException {
-		if (COMMAND_LAST.equals(name)){
+	public String getDescription(String id) throws IllegalArgumentException {
+		if (COMMAND_LAST.equals(id)){
 			return
 			"The last command sent to the TruTest scalehead";
 		}
 		
-		if (CONNECTED.equals(name)){
+		if (CONNECTED.equals(id)){
 			return
 			"If there is a connected balance.";
 		}
 		
-		if (WIRES_COUNT.equals(name)){
+		if (WIRES_COUNT.equals(id)){
 			return
 			"The number of connected wires.";
+		}
+		
+		if (CONNECTION_URI_STATUS_VAR.equals(id)){
+			return "The URI of the connected balance.";
 		}
 		return null;
 	}
 	
+	
 	void setConnectedStatusVariable(boolean connected){
 		this.connected.set(connected);
+		MonitorListener l = FactoryComponent.getMonitorListener();
+		if(l!=null && registered.get()){
+			l.updated(context.getPid(), 
+					getStatusVariable(CONNECTED));
+		}
 	}
 }
