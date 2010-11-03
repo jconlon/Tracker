@@ -57,12 +57,7 @@ public class FlowTerminatorSystemTest extends TestCase {
 	private static final String INPUT_INFORMATION = "input.information";
 	static String PLUGIN_ID = "com.verticon.tracker.irouter.trutest.alarm.adapter.test.system";
 
-	// private static final String ALARM_DURATION = "alarm.duration";
-	// private static final String ALARM_INTERVAL = "alarm.interval";
-	// private static final String ALARM_STATE_NAME = "alarm.state.name";
-	// private static final String ALARM_STATE_VALUE = "alarm.state.value";
-
-	private static final String FLOW_CONTROL_SCOPE = "flow.control.scope";
+	private static final String TERMINATOR_SCOPE_MAP = "terminator.scope.map";
 	private static final String TERMINATOR_STATE_NAME = "terminator.state.name";
 	private static final String TERMINATOR_STATE_VALUE = "terminator.state.value";
 
@@ -160,7 +155,8 @@ public class FlowTerminatorSystemTest extends TestCase {
 				new String[] { OUTPUT_INFORMATION });
 
 		props.put(TERMINATOR_STATE_VALUE, 1);
-		props.put(FLOW_CONTROL_SCOPE, INPUT_CONTROL_STATE);
+		props.put(TERMINATOR_SCOPE_MAP, 
+				new String[] {INPUT_INFORMATION+':'+OUTPUT_INFORMATION});
 		props.put(TERMINATOR_STATE_NAME, MY_TERMINATOR_STATE_NAME);
 
 		// Add a tag to find the service
@@ -211,6 +207,13 @@ public class FlowTerminatorSystemTest extends TestCase {
 		// command
 		mockConsumer.setUpLatch(1);
 		mockProducer.send("Hi can you hear me now?");
+		// wait at it for 2 seconds
+		consumerReceivedObjects = mockConsumer.latch.await(2, TimeUnit.SECONDS);
+		assertFalse("Should not forward non Envelope objects to consumer",
+				consumerReceivedObjects);
+		
+		
+		mockProducer.send(new BasicEnvelope("Hi can you hear me now?","id",INPUT_INFORMATION ));
 		// wait at it for 2 seconds
 		consumerReceivedObjects = mockConsumer.latch.await(2, TimeUnit.SECONDS);
 		assertTrue("Failed to forward objects to consumer",
