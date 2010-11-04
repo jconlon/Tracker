@@ -13,6 +13,8 @@
  */
 package com.verticon.tracker.irouter.monitor.view.internal;
 
+import static com.verticon.tracker.irouter.monitor.view.internal.Component.bundleMarker;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,12 +29,15 @@ import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.osgi.service.monitor.MonitorAdmin;
 import org.osgi.service.monitor.StatusVariable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author jconlon
@@ -40,55 +45,85 @@ import org.osgi.service.monitor.StatusVariable;
  */
 public class StatusMonitor {
 
-	private final Node wiredNode;
+	private final Logger logger = LoggerFactory.getLogger(StatusMonitor.class);
+	private final INode node;
 	private Map<String,WritableValue> model = new HashMap<String, WritableValue>();	
 	private final BooleanToString booleanToString = new BooleanToString();
 	private final StringToBoolean stringToBoolean = new StringToBoolean();
 	
 	
-    StatusMonitor(Node wiredNode) {
+    StatusMonitor(INode wiredNode) {
 		super();
-		this.wiredNode = wiredNode;
+		this.node = wiredNode;
 		
 	}
 	
-	void initialize(Composite sectionClient, FormToolkit toolkit, IManagedForm mform){
-		DataBindingContext dbc = new DataBindingContext();
-		model.put("updateCount", new WritableValue(new Integer(0),Integer.class));
-		Label l = toolkit.createLabel(sectionClient, "Update Counter:");
-		l.setToolTipText("An example of a status variable");
-		Text text = toolkit.createText(sectionClient, "", SWT.BORDER);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false, 2,
-				1));
-		dbc.bindValue(
-				SWTObservables.observeText(text, SWT.Modify), 
-				model.get("updateCount"), 
-				//UI To model
-				new UpdateValueStrategy().setConverter(StringToNumberConverter.toInteger(false)), 
-				//Model to UI
-				new UpdateValueStrategy().setConverter(NumberToStringConverter.fromInteger(false)));
+    
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "StatusMonitor [node=" + node + "]";
+	}
 
+
+	void initialize(Composite sectionClient, FormToolkit toolkit, IManagedForm mform, Control controlToTagWithMessages){
+		
+		DataBindingContext dbc = new DataBindingContext();
+		Text text;
+		Label l;
+		if(controlToTagWithMessages!=null){
+			model.put("updateCount", new WritableValue(Integer.valueOf(0),Integer.class));
+			l = toolkit.createLabel(sectionClient, "Update Counter:");
+			l.setToolTipText("Number of times the Status Variables have been updated.");
+			text = toolkit.createText(sectionClient, "", SWT.BORDER);
+			text.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false, 2,
+					1));
+			dbc.bindValue(
+					SWTObservables.observeText(text, SWT.Modify), 
+					model.get("updateCount"), 
+					//UI To model
+					new UpdateValueStrategy().setConverter(StringToNumberConverter.toInteger(false)), 
+					//Model to UI
+					new UpdateValueStrategy().setConverter(NumberToStringConverter.fromInteger(false)));
+
+		}else{
+			controlToTagWithMessages=sectionClient;
+		}
 		
 		MonitorAdmin monitorAdmin = Component.INSTANCE.getMonitorAdmin();
 		if(monitorAdmin==null){
+			logger.warn(bundleMarker, "{} failed to find the MonitorAdmin Service.",this);
 			mform.getMessageManager().addMessage(
 					"status", //key
 					"Failed to find the MonitorAdmin Service", //message
 					null,//data
 					IMessageProvider.ERROR, //int
-					text);//Control
+					controlToTagWithMessages);//Control
 			return;
 		}else{
 			StatusVariable[] variables = null;
 			try {
-				variables = monitorAdmin.getStatusVariables(wiredNode.getPid());
-			} catch (IllegalArgumentException e) {
+				variables = monitorAdmin.getStatusVariables(node.getPid());
+				if(variables == null || variables.length==0){
+				    logger.warn(bundleMarker, "{} failed to find any Monitorable Services.",this);
+					mform.getMessageManager().addMessage(
+							"status", //key
+							"Failed to find any statusVariables for "+node, //message
+							null,//data
+							IMessageProvider.WARNING, //int
+							controlToTagWithMessages);//Control
+					return;
+				}
+			} catch (Exception e) {
+				logger.error(bundleMarker, this+" failed to load Monitorable Services.",e);
 				mform.getMessageManager().addMessage(
 						"status", //key
-						wiredNode.getPid()+" has no Monitorable Services", //message
+						node.getPid()+" failed to load Monitorable Services, see log for details.", //message
 						null,//data
-						IMessageProvider.WARNING, //int
-						text);//Control
+						IMessageProvider.ERROR, //int
+						controlToTagWithMessages);//Control
 				return;
 			}
 			
@@ -101,7 +136,7 @@ public class StatusMonitor {
 					continue;
 				}
 				l = toolkit.createLabel(sectionClient, name+":");
-				l.setToolTipText(monitorAdmin.getDescription(wiredNode.getPid()+'/'+id));
+				l.setToolTipText(monitorAdmin.getDescription(node.getPid()+'/'+id));
 				text = toolkit.createText(sectionClient, "", SWT.BORDER);
 				text.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false, 2,
 						1));
@@ -173,7 +208,7 @@ public class StatusMonitor {
 		
 		MonitorAdmin monitorAdmin = Component.INSTANCE.getMonitorAdmin();
 		if(monitorAdmin!=null){
-			for (StatusVariable statusVariable : monitorAdmin.getStatusVariables(wiredNode.getPid())) {
+			for (StatusVariable statusVariable : monitorAdmin.getStatusVariables(node.getPid())) {
 				String id = statusVariable.getID();
 				if(!isAppropriate( id)){
 					continue;
@@ -205,24 +240,34 @@ public class StatusMonitor {
 		if(!isAppropriate( id)){
 			return null;
 		}
-		if(wiredNode instanceof ProducerWiredNode){
+		if(node instanceof ProducerWiredNode){
 			return  id.substring("producer.".length()).replace('_', ' ');
-		}else {
+		}
+		
+		if(node instanceof ConsumerWiredNode) {
 			return id.substring("consumer.".length()).replace('_', ' ');
 		}
+		
+		return id.substring("external.".length()).replace('_', ' ');
 		
 	}
 
 	private boolean isAppropriate(String id){
-		if(wiredNode instanceof ProducerWiredNode){
+		if(node instanceof ProducerWiredNode){
 			return id.toLowerCase().startsWith("producer.");
-		}else{
-			return id.toLowerCase().startsWith("consumer.");
 		}
 		
+		if(node instanceof ConsumerWiredNode){
+			return id.toLowerCase().startsWith("consumer.");
+		}
+	
+		if(node instanceof IExternalNode){
+			return id.toLowerCase().startsWith("external.");
+		}
+		return false;
 	}
 	
-	private class BooleanToString extends Converter{
+	private static class BooleanToString extends Converter{
 
 		public BooleanToString() {
 			super(Boolean.class, String.class);
@@ -236,7 +281,7 @@ public class StatusMonitor {
 		
 	}
 	
-	private class StringToBoolean extends Converter{
+	private static class StringToBoolean extends Converter{
 
 		public StringToBoolean() {
 			super(String.class, Boolean.class);

@@ -58,7 +58,7 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock {
 	 * Map factory Pids as keys to IDetailsPage implementations. A template
 	 * factory use a TEMPLATE constant .
 	 */
-	private Map<WiredNode, IDetailsPage> keyMap = new HashMap<WiredNode, IDetailsPage>();
+	private Map<INode, IDetailsPage> keyMap = new HashMap<INode, IDetailsPage>();
 
 	private WiredNodeLabelProvider labelProvider;
 
@@ -126,13 +126,18 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock {
 			@Override
 			public Object getPageKey(Object object) {
 
-				if (keyMap.containsKey(object)) {
-					return object;
+				if (!keyMap.containsKey(object)) {
+					if(object instanceof WiredNode){
+						WiredNode key = (WiredNode) object;
+						keyMap.put(key, new WiredNodeDetailsPage(key));
+					}else if(object instanceof IExternalNode){
+						IExternalNode key = (IExternalNode)object;
+						keyMap.put(key, new ExternalNodeDetailsPage(key));
+					}
 				}
-				WiredNode key = (WiredNode) object;
-				keyMap.put(key, new WiredNodeDetailsPage(key));// Just a holder
-																// for now
-				return key;
+				
+				
+				return object;
 			}
 		});
 
@@ -223,7 +228,7 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock {
 	 * 
 	 * @param wiredNode
 	 */
-	void removePage(Node wiredNode) {
+	void removePage(INode wiredNode) {
 		IDetailsPage page = keyMap.get(wiredNode);
 		if (page != null) {
 			page.dispose();

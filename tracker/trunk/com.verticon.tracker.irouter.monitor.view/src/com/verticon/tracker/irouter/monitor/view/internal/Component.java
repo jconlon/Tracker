@@ -13,12 +13,16 @@ package com.verticon.tracker.irouter.monitor.view.internal;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.databinding.observable.set.WritableSet;
 import org.eclipse.core.runtime.Assert;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.service.monitor.MonitorAdmin;
+import org.osgi.service.monitor.Monitorable;
 import org.osgi.service.wireadmin.Consumer;
 import org.osgi.service.wireadmin.Producer;
 import org.osgi.service.wireadmin.Wire;
@@ -30,6 +34,12 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+/**
+ * Uses a singlethreaded executor to manage the monitor view, services and the 
+ * data model.
+ * @author jconlon
+ *
+ */
 public class Component implements WireAdminListener {
 
 	/**
@@ -38,10 +48,13 @@ public class Component implements WireAdminListener {
 	private final Logger logger = LoggerFactory.getLogger(Component.class);
 	final static String PLUGIN_ID = "com.verticon.tracker.irouter.monitor.view";
 	static Component INSTANCE;
-	private Set<Node> model;
+	
+	private Set<INode> model;
 	private WireAdminListener listener;
 	private WireAdmin wireAdmin;
 	private MonitorAdmin monitorAdmin;// THis is failing to start
+	
+	private ExecutorService exec = Executors.newSingleThreadExecutor();
 
 	/**
 	 * @return the monitorAdmin
@@ -70,7 +83,7 @@ public class Component implements WireAdminListener {
 		}
 	}
 
-	public Set<Node> getModel() {
+	public Set<INode> getModel() {
 		return model;
 	}
 
@@ -94,72 +107,208 @@ public class Component implements WireAdminListener {
 		INSTANCE = null;
 	}
 
-	public void setWireAdmin(WireAdmin wireAdmin) {
-		logger.debug(bundleMarker, "wireAdmin set");
-		this.wireAdmin = wireAdmin;
+	public void setWireAdmin(final WireAdmin wireAdminIn) {
+		exec.submit(
+				new Callable<Void>(){
+
+					@Override
+					public Void call() throws Exception {
+						logger.debug(bundleMarker, "wireAdmin set");
+						wireAdmin = wireAdminIn;
+						return null;
+					}});
+		
+		
 	}
 
-	public void unsetWireAdmin(WireAdmin wireAdmin) {
-		this.wireAdmin = null;
+	public void unsetWireAdmin(WireAdmin wireAdminIn) {
+		exec.submit(
+				new Callable<Void>(){
+
+					@Override
+					public Void call() throws Exception {
+						wireAdmin = null;
+						return null;
+					}});
+		
 	}
 
-	public void setMonitorAdmin(MonitorAdmin monitorAdmin) {
-		logger.debug(bundleMarker, "monitorAdmin set");
-		this.monitorAdmin = monitorAdmin;
+	public void setMonitorAdmin(final MonitorAdmin monitorAdminIn) {
+		exec.submit(
+				new Callable<Void>(){
+
+					@Override
+					public Void call() throws Exception {
+						logger.debug(bundleMarker, "monitorAdmin set");
+						monitorAdmin = monitorAdminIn;
+						return null;
+					}});
+		
 	}
 
-	public void unsetMonitorAdmin(MonitorAdmin monitorAdmin) {
-		logger.debug(bundleMarker, "monitorAdmin unset");
-		this.monitorAdmin = null;
+	public void unsetMonitorAdmin(MonitorAdmin monitorAdminIn) {
+		exec.submit(
+				new Callable<Void>(){
+
+					@Override
+					public Void call() throws Exception {
+						logger.debug(bundleMarker, "monitorAdmin unset");
+						monitorAdmin = null;
+						return null;
+					}});
 	}
-
-	public Wire[] getWires() {
-		try {
-			return wireAdmin.getWires(null);
-		} catch (InvalidSyntaxException e) {
-			return null;// wont happen
-		}
-
-	}
-
+	
 	@Override
-	public void wireAdminEvent(WireAdminEvent event) {
-		if (listener != null) {
-			listener.wireAdminEvent(event);
-		} else {
-			logger.warn(bundleMarker, "Listener is null");
-		}
+	public void wireAdminEvent(final WireAdminEvent event) {
+		exec.submit(
+				new Callable<Void>(){
+
+
+					@Override
+					public Void call() throws Exception {
+						if (listener != null) {
+							listener.wireAdminEvent(event);
+						} else {
+							logger.warn(bundleMarker, "Listener is null");
+						}
+						return null;
+					}
+
+				});
 	}
+
+	public void setMonitorable(Monitorable monitorable,
+			final Map<String, Object> map) {
+		
+		exec.submit(
+				new Callable<Void>(){
+
+					@Override
+					public Void call() throws Exception {
+						IExternalNode child = ExternalNodeUtils.getInstance(map);
+						addToModel(child);
+						return null;
+					}
+					
+				}
+		);
+		
+	}
+
+	public void unsetMonitorable(Monitorable monitorable,
+			final Map<String, Object> map) {
+		exec.submit(
+				new Callable<Void>(){
+
+					@Override
+					public Void call() throws Exception {
+						IExternalNode child = ExternalNodeUtils.getInstance(map);
+						removeFromModel(child);
+						return null;
+					}
+				}
+		);
+		
+	}
+	
+	public void setProducer(Producer producer,
+			final Map<String, Object> map) {
+		exec.submit(
+				new Callable<Void>(){
+
+					@Override
+					public Void call() throws Exception {
+						ProducerWiredNode child = new ProducerWiredNode(map);
+						addToModel(child);
+						return null;
+					}
+					
+				}
+		);
+		
+	}
+
+	public void unsetProducer(Producer producer,
+			final Map<String, Object> map) {
+		exec.submit(
+				new Callable<Void>(){
+
+					@Override
+					public Void call() throws Exception {
+						ProducerWiredNode child = new ProducerWiredNode(map);
+						removeFromModel(child);
+						return null;
+					}
+					
+				}
+		);
+		
+	}
+
+	public void setConsumer(Consumer consumer,
+			final Map<String, Object> map) {
+		exec.submit(
+				new Callable<Void>(){
+
+					@Override
+					public Void call() throws Exception {
+						ConsumerWiredNode child = new ConsumerWiredNode(map);
+						addToModel(child);
+						return null;
+					}
+					
+				}
+		);
+		
+	}
+
+	public void unsetConsumer(Consumer consumer,
+			final Map<String, Object> map) {
+		exec.submit(
+				new Callable<Void>(){
+
+					@Override
+					public Void call() throws Exception {
+						ConsumerWiredNode child = new ConsumerWiredNode(map);
+						removeFromModel(child);
+						return null;
+					}
+
+				}
+		);
+
+	}
+
+	Wire[] getWires() {
+		if(wireAdmin!=null){
+			try {
+
+				return wireAdmin.getWires(null);
+			} catch (InvalidSyntaxException e) {
+
+			}
+		}
+		return new Wire[] {};
+	}
+
+
 
 	String status() {
 		return wireAdmin == null ? "WireAdmin is unset" : "Wires="
-				+ getWires().length;
+			+ getWires().length;
 	}
-
-	public synchronized void setProducer(Producer producer,
-			Map<String, Object> map) {
-		ProducerWiredNode child = new ProducerWiredNode(map);
-		addToModel(child);
+	
+	private void removeFromModel(IExternalNode child) {
+		logger.debug(bundleMarker, "Removing... {}", child);
+		boolean result = model.remove(child);
+		if (result) {
+			logger.debug(bundleMarker, "Removed {}", child);
+		} else {
+			logger.error(bundleMarker, "Failed to remove simple {}", child);
+		}
+		return;
 	}
-
-	public synchronized void unsetProducer(Producer producer,
-			Map<String, Object> map) {
-		ProducerWiredNode child = new ProducerWiredNode(map);
-		removeFromModel(child);
-	}
-
-	public synchronized void setConsumer(Consumer consumer,
-			Map<String, Object> map) {
-		ConsumerWiredNode child = new ConsumerWiredNode(map);
-		addToModel(child);
-	}
-
-	public synchronized void unsetConsumer(Consumer consumer,
-			Map<String, Object> map) {
-		ConsumerWiredNode child = new ConsumerWiredNode(map);
-		removeFromModel(child);
-	}
-
+	
 	private void removeFromModel(WiredNode child) {
 		logger.debug(bundleMarker, "Removing... {}", child);
 		WiredNode existingWiredNode = findWireNode(child.getPid());
@@ -212,6 +361,16 @@ public class Component implements WireAdminListener {
 
 	}
 
+	private void addToModel(IExternalNode child) {
+		logger.debug(bundleMarker, "Adding... {}", child);
+		boolean results = model.add(child);
+		if (results) {
+			logger.debug(bundleMarker, "Added {}", child);
+		} else {
+			logger.error(bundleMarker, "Failed to add {}", child);
+		}
+
+	}
 	private void addToModel(WiredNode child) {
 		logger.debug(bundleMarker, "Adding... {}", child);
 		WiredNode existingWiredNode = findWireNode(child.getPid());
@@ -222,13 +381,13 @@ public class Component implements WireAdminListener {
 
 			results = model.remove(existingWiredNode);
 			if (results) {
-				logger.debug(bundleMarker, "Removing existing {}",
+				logger.debug(bundleMarker, "Removed existing {}",
 						existingWiredNode);
 			} else {
 				logger.error(bundleMarker, "Failed to remove existing {} ",
 						existingWiredNode);
 			}
-			Node parent = new ComponentServices(child, existingWiredNode);
+			INode parent = new ComponentServices(child, existingWiredNode);
 			results = model.add(parent);
 			if (results) {
 				logger.debug(bundleMarker, "Added {} ", parent);
@@ -252,7 +411,7 @@ public class Component implements WireAdminListener {
 	 * @return wiredNode
 	 */
 	private WiredNode findWireNode(String pid) {
-		for (Node node : model) {
+		for (INode node : model) {
 			if (node.getPid().equals(pid) && (node instanceof WiredNode)) {
 				return (WiredNode) node;
 			}
@@ -267,7 +426,7 @@ public class Component implements WireAdminListener {
 	 * @return wiredNode or componentServices
 	 */
 	private ComponentServices findComponentServicesNode(String pid) {
-		for (Node node : model) {
+		for (INode node : model) {
 			if (node instanceof ComponentServices) {
 				if (node.getPid().equals(pid)) {
 					logger.debug(bundleMarker, "Component Services found: {}",

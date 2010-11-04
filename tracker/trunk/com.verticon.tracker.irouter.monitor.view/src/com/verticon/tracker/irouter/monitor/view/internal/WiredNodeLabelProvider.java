@@ -39,12 +39,39 @@ import org.osgi.service.wireadmin.Wire;
  */
 public class WiredNodeLabelProvider extends LabelProvider implements
 		IEntityStyleProvider {
+    private static final String ROOT = "platform:/plugin/com.verticon.tracker.irouter.monitor.view/icons/";
+    
+    enum NODE{
+    	PRODUCER("producer.gif"), 
+    	CONSUMER("consumer.gif"),
+    	GATEWAY("gateway.gif"), 
+    	SENSOR("sensor.gif"), 
+    	ACTUATOR("actuator.gif");
+    	final String imagePath;
 
-	private Map<String, Color> nodeColors = new HashMap<String, Color>();
+    	NODE(String imagePath){
+    		this.imagePath=ROOT+imagePath;
+    	}
+    	
+    	Image getImage(){
+    		if(!images.containsKey(this)){
+    			URL url;
+				try {
+					url = new URL(imagePath);
+					Image image= ImageDescriptor.createFromURL(url).createImage();
+					images.put(this, image);
+				} catch (MalformedURLException e) {
+					
+				}
+    		}
+    		return images.get(this);
+    	}
+    }
+    private Map<String, Color> nodeColors = new HashMap<String, Color>();
 	private boolean showWireLables = true;
-	private Image producerImage = null;
-	private Image consumerImage = null;
-
+	private static Map<NODE, Image> images = new HashMap<NODE, Image>();
+	
+	
 	/**
 	 * @param showWireLables
 	 *            the showWireLables to set
@@ -53,37 +80,22 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 		this.showWireLables = showWireLables;
 	}
 
-	WiredNodeLabelProvider() {
-		super();
-		try{
-			URL url = new URL("platform:/plugin/com.verticon.tracker.irouter.monitor.view/icons/producer.gif");
-			producerImage = ImageDescriptor.createFromURL(url).createImage();
-			
-		    url = new URL("platform:/plugin/com.verticon.tracker.irouter.monitor.view/icons/consumer.gif");
-			consumerImage = ImageDescriptor.createFromURL(url).createImage();
-		}catch (MalformedURLException e){
-			
-		}
-	}
-
+	
 	@Override
 	public String getText(Object element) {
+		
 		if (element instanceof ProducerWiredNode) {
-			WiredNode node = (WiredNode) element;
+			AbstractNode node = (AbstractNode) element;
 			return node.getParent() != null ? "Producer" : node.label;
 		}
 
 		if (element instanceof ConsumerWiredNode) {
-			WiredNode node = (WiredNode) element;
+			AbstractNode node = (AbstractNode) element;
 			return node.getParent() != null ? "Consumer" : node.label;
 		}
 
-		if (element instanceof WiredNode) {
-			return ((Node) element).nodeText();
-		}
-
-		if (element instanceof ComponentServices) {
-			return ((ComponentServices) element).nodeText();
+		if (element instanceof AbstractNode) {
+			return ((AbstractNode) element).label;
 		}
 
 		if (element instanceof EntityConnectionData) {
@@ -93,31 +105,40 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 			EntityConnectionData connection = (EntityConnectionData) element;
 			return getConnectionLabel(connection);
 		}
-		throw new RuntimeException("Wrong type: "
-				+ element.getClass().toString());
+		
+		if (element instanceof ComponentServices) {
+			return ((ComponentServices) element).getText();
+		}
+		
+		return super.getText(element);
 
 	}
 
 	static String getConnectionLabel(EntityConnectionData connection) {
-		Node source = (Node) connection.source;
+		INode source = (INode) connection.source;
 		String producerPid = source.getPid();
 
-		Node dest = (Node) connection.dest;
+		INode dest = (INode) connection.dest;
+		if(dest instanceof IExternalNode){
+			return ((IExternalNode)dest).getConnectionURI();
+		}
 		String consumerPid = dest.getPid();
 
 		Wire[] wires = Component.INSTANCE.getWires();
 		String results ="unknown connection";
-		for (Wire wire : wires) {
-			String wireProducerPid = (String) wire.getProperties().get(
-					WIREADMIN_PRODUCER_PID);
-			if (producerPid.equals(wireProducerPid)) {
-				String wireConsumerPid = (String) wire.getProperties().get(
-						WIREADMIN_CONSUMER_PID);
+		if(wires!=null){
+			for (Wire wire : wires) {
+				String wireProducerPid = (String) wire.getProperties().get(
+						WIREADMIN_PRODUCER_PID);
+				if (producerPid.equals(wireProducerPid)) {
+					String wireConsumerPid = (String) wire.getProperties().get(
+							WIREADMIN_CONSUMER_PID);
 
-				if (consumerPid.equals(wireConsumerPid)) {
-				    results = Arrays.toString(wire.getScope());
-					results = results.substring(1, results.length() - 1);
-					break;
+					if (consumerPid.equals(wireConsumerPid)) {
+						results = Arrays.toString(wire.getScope());
+						results = results.substring(1, results.length() - 1);
+						break;
+					}
 				}
 			}
 		}
@@ -130,10 +151,22 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 			return null;
 		}
 		if (element instanceof ConsumerWiredNode) {
-			return consumerImage;
+			return NODE.CONSUMER.getImage();
 		}
 		if (element instanceof ProducerWiredNode) {
-			return producerImage;
+			return NODE.PRODUCER.getImage();
+		}
+		
+		if (element instanceof SensorNode) {
+			return NODE.SENSOR.getImage();
+		}
+		
+		if (element instanceof ActuatorNode) {
+			return NODE.ACTUATOR.getImage();
+		}
+		
+		if (element instanceof GatewayNode) {
+			return NODE.GATEWAY.getImage();
 		}
 		return super.getImage(element);
 	}
@@ -143,12 +176,10 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 	 */
 	@Override
 	public void dispose() {
-		if(producerImage !=null){
-			producerImage.dispose();
+		for (Image image : images.values()) {
+			image.dispose();
 		}
-		if(consumerImage !=null){
-			consumerImage.dispose();
-		}
+		
 		super.dispose();
 	}
 
@@ -169,13 +200,13 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 
 	@Override
 	public int getBorderWidth(Object entity) {
-		return 0;
+		return 10;
 	}
 
 	@Override
 	public Color getBackgroundColour(Object entity) {
 		if (entity instanceof WiredNode) {
-			Node wiredNode = (Node) entity;
+			INode wiredNode = (INode) entity;
 			String key = wiredNode.getGroup();
 			if (!nodeColors.containsKey(key)) {
 				addColor(key);
@@ -183,6 +214,16 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 			return nodeColors.get(key);
 
 		}
+		if (entity instanceof IExternalNode) {
+			INode wiredNode = (INode) entity;
+			String key = wiredNode.getGroup();
+			if (!nodeColors.containsKey(key)) {
+				addColor(key);
+			}
+			return nodeColors.get(key);
+
+		}
+
 		return null;
 	}
 
@@ -191,12 +232,19 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 		if (entity instanceof WiredNode) {
 			return Display.getDefault().getSystemColor(SWT.COLOR_WHITE);
 		}
+		if (entity instanceof IExternalNode) {
+			return Display.getDefault().getSystemColor(SWT.COLOR_WHITE);
+		}
 		return null;
 	}
 
+	
 	@Override
 	public IFigure getTooltip(Object entity) {
-		if (entity instanceof Node) {
+		if (entity instanceof IExternalNode) {
+			return new Label(((IExternalNode)entity).getDescription());
+		}
+		if (entity instanceof INode) {
 			String[] tokens = entity.toString().split(",");
 
 			StringBuilder builder = new StringBuilder();
@@ -206,16 +254,16 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 			}
 			return new Label(builder.toString());
 		}
-		// if(entity instanceof ComponentServices){
-		// StringBuilder builder = new StringBuilder();
-		//
-		// }
+		
 		return null;
 	}
 
 	@Override
 	public boolean fisheyeNode(Object entity) {
 		if (entity instanceof WiredNode) {
+			return true;
+		}
+		if (entity instanceof IExternalNode) {
 			return true;
 		}
 		return false;
