@@ -235,7 +235,7 @@ public class MeasurementLoggerConsumer implements Consumer, Monitorable {
 		} else if (CURRENT_EID.equals(id)){
 			return "The EID number to be associated with the measurements in queued to be sent to the log service.";
 		} else if (CONNECTION_URI_STATUS_VAR.equals(id)){
-			return "The URI of the connected balance.";
+			return "The URI of the connected logger.";
 		}
 		return null;
 	}
