@@ -16,23 +16,12 @@ package com.verticon.tracker.irouter.monitor.view.internal;
  * @author jconlon
  * 
  */
-public abstract class WiredNode implements Node {
+public abstract class WiredNode extends AbstractNode implements INode {
 
-	protected final String group;
-	protected final String pid;
 	protected final String scope;
-	protected final Long service_id;
-	protected final String label;
 	protected final boolean isProducer;
 	protected ComponentServices parent;
-
-	/**
-	 * @return the parent
-	 */
-	public ComponentServices getParent() {
-		return parent;
-	}
-
+	
 	/**
 	 * @param parent the parent to set
 	 */
@@ -108,52 +97,9 @@ public abstract class WiredNode implements Node {
 
 	protected WiredNode(boolean isProducer, String group, String pid,
 			String scope, long service_id, String label) {
-		super();
+		super(group,pid,service_id,label);
 		this.isProducer=isProducer;
-		this.group = group;
-		this.pid = pid;
 		this.scope = scope;
-		this.service_id = service_id;
-		this.label = label;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.verticon.tracker.irouter.monitor.view.internal.Node#nodeText()
-	 */
-	@Override
-	public String nodeText() {
-		String name = (String) pid;
-		String prefix = "com.verticon.tracker.irouter.";
-		if (pid.contains(prefix)) {
-			int nameIndex2 = name.indexOf('.', prefix.length());
-			name = name.substring(prefix.length(), nameIndex2);
-		} else {
-			int nameIndex = name.indexOf('-');
-			if (nameIndex != -1) {
-				name = name.substring(0, nameIndex);
-			}
-		}
-		return name;
-	}
-
-	
-
-	
-
-	/**
-	 * @return the group
-	 */
-	@Override
-	public String getGroup() {
-		return group;
-	}
-
-	/**
-	 * @return the pid
-	 */
-	@Override
-	public String getPid() {
-		return pid;
 	}
 
 	/**
@@ -163,15 +109,13 @@ public abstract class WiredNode implements Node {
 		return scope;
 	}
 
-	/**
-	 * @return the service_id
-	 */
-	Long getService_id() {
-		return service_id;
-	}
-
 	public String getComponentLabel() {
 		return label;
+	}
+
+	@Override
+	public ComponentServices getParent() {
+		return parent;
 	}
 
 }

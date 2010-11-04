@@ -1,8 +1,8 @@
 package com.verticon.tracker.irouter.monitor.view.internal;
 
-public interface Node {
+public interface INode {
 
-    String nodeText();
+    String getText();
 
     String getPid();
 

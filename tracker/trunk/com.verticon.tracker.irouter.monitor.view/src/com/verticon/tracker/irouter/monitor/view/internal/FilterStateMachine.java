@@ -227,7 +227,7 @@ public class FilterStateMachine {
 			switch (state) {
 			case INITIAL:
 				filterText.setText("");
-				
+				//Fall through to next case is intentional.
 			case RUNNING:
 				switch (FilterType.valueOf(combo.getText())) {
 				case SCOPE:
@@ -250,9 +250,6 @@ public class FilterStateMachine {
 
 
 		}
-
-		
-
 	}
 
 	/**
@@ -279,7 +276,7 @@ public class FilterStateMachine {
 			}
 			if (element instanceof ComponentServices) {
 				ComponentServices node = (ComponentServices) element;
-				return node.nodeText().startsWith(prefix);
+				return node.getText().startsWith(prefix);
 
 			}
 			return true;
@@ -356,8 +353,8 @@ public class FilterStateMachine {
 			if (prefix.length() == 0) {
 				return true;
 			}
-			if (element instanceof Node) {
-				Node node = (Node) element;
+			if (element instanceof INode) {
+				INode node = (INode) element;
 				return node.getGroup().startsWith(prefix);
 
 			}

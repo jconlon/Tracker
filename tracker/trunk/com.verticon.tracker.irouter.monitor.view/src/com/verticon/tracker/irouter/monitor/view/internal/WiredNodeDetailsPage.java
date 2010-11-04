@@ -42,7 +42,6 @@ public class WiredNodeDetailsPage implements IDetailsPage {
 	private IManagedForm mform;
 	private final WiredNode wiredNode;
 	private final StatusMonitor statusMonitor;
-	private Button[] choices;
 	private Section propertiesSection;
 	private Section variablesSection;
 	
@@ -157,7 +156,7 @@ public class WiredNodeDetailsPage implements IDetailsPage {
 		b.setLayoutData(new GridData(SWT.LEFT, SWT.DEFAULT, true, false, 3,
 				1));
 
-		statusMonitor.initialize(sectionClient, toolkit, mform);
+		statusMonitor.initialize(sectionClient, toolkit, mform, b);
 		
 		b.addSelectionListener(new SelectionListener(){
 
@@ -171,7 +170,9 @@ public class WiredNodeDetailsPage implements IDetailsPage {
 				            "MonitorAdmin Error Message", null);
 
 			        ErrorDialog.openError(Display.getCurrent().getActiveShell(),
-			            "Failed to obtain response for a Monitorable service. Is the service still active?", e1.getMessage(), status);
+			        	e1.getMessage(),
+			            "Failed to obtain response from the Monitorable service. Is the service still active?",  
+			            status);
 			      
 				}
 				
@@ -203,7 +204,7 @@ public class WiredNodeDetailsPage implements IDetailsPage {
 	 * @see org.eclipse.ui.forms.IDetailsPage#setFocus()
 	 */
 	public void setFocus() {
-		choices[0].setFocus();
+		variablesSection.setFocus();
 	}
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.forms.IDetailsPage#dispose()
