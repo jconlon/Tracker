@@ -50,28 +50,27 @@ public class EIDEventProducer implements Producer, Monitorable, EventHandler {
 	private static final String TIME_OF_LAST_EID = "producer.Last_EID";
 	private static final String TOTAL_EID = "producer.Total_EIDs";
 	private static final String LAST_EID = "producer.Last_EID";
+	private static final String CONNECTION_URI_STATUS_VAR = "producer.Connection_URI";
+	
 	private static final String FILTER = "event.filter";
 	private static final String PLUGIN_ID = "com.verticon.tracker.irouter.eid.event";
 	private static final String EVENT_ADMIN_PROPERTY_ANIMAL_ID = "com.verticon.tracker.animal.id";
 	private static final String EVENT_ADMIN_PROPERTY_READER_NAME = "com.verticon.tracker.reader.name";
-
+	
+	private static final String CONNECTION_URI = "connection.uri";
 	public static final Marker bundleMarker = MarkerFactory
 			.getMarker(PLUGIN_ID);
 	static {
 		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
 	}
-	/**
-	 * slf4j Logger
-	 */
 	private final Logger logger = LoggerFactory
 			.getLogger(EIDEventProducer.class);
 	private Wire[] wires = new Wire[] {};
 	private Map<String, Object> config = null;
-	// private final AtomicInteger producersConnected = new AtomicInteger(0);
 	private final AtomicInteger totalEIDs = new AtomicInteger(0);
 	private volatile long lastEIDTime = 0;
 	private String filter;
-	private Long lastEID = null;
+	private Long lastEID = Long.valueOf(0);
 
 	/*
 	 * (non-Javadoc)
@@ -149,8 +148,11 @@ public class EIDEventProducer implements Producer, Monitorable, EventHandler {
 
 	@Override
 	public String[] getStatusVariableNames() {
-		return new String[] { CONNECTED_CONSUMERS_COUNT, TIME_OF_LAST_EID,
-				TOTAL_EID, LAST_EID };
+		return new String[] {
+				CONNECTED_CONSUMERS_COUNT, 
+				TIME_OF_LAST_EID,
+				TOTAL_EID, LAST_EID,
+				CONNECTION_URI_STATUS_VAR};
 	}
 
 	@Override
@@ -168,6 +170,14 @@ public class EIDEventProducer implements Producer, Monitorable, EventHandler {
 		} else if (TOTAL_EID.equals(name)) {
 			return new StatusVariable(name, StatusVariable.CM_CC,
 					totalEIDs.get());
+		} else if (CONNECTION_URI_STATUS_VAR.equals(name)){
+			String uri = (String) config.get(CONNECTION_URI);
+			return
+			new StatusVariable(name,
+					StatusVariable.CM_DER,
+					uri
+					);
+			
 		} else {
 			throw new IllegalArgumentException("Invalid Status Variable name "
 					+ name);
@@ -191,16 +201,19 @@ public class EIDEventProducer implements Producer, Monitorable, EventHandler {
 	}
 
 	@Override
-	public String getDescription(String name) throws IllegalArgumentException {
-		if (CONNECTED_CONSUMERS_COUNT.equals(name)) {
+	public String getDescription(String id) throws IllegalArgumentException {
+		if (CONNECTED_CONSUMERS_COUNT.equals(id)) {
 			return "The number of connected consumer wires.";
-		} else if (LAST_EID.equals(name)) {
+		} else if (LAST_EID.equals(id)) {
 			return "The last EID sent to consumers.";
-		} else if (TIME_OF_LAST_EID.equals(name)) {
+		} else if (TIME_OF_LAST_EID.equals(id)) {
 			return "The last time an EID was sent to consumers.";
-		} else if (TOTAL_EID.equals(name)) {
+		} else if (TOTAL_EID.equals(id)) {
 			return "The total number of EIDs sent to consumers.";
+		} else if (CONNECTION_URI_STATUS_VAR.equals(id)){
+			return "The URI of the connected gateway.";
 		}
+		
 		return null;
 	}
 

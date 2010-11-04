@@ -42,11 +42,13 @@ import com.verticon.tracker.irouter.eid.event.test.system.Publisher;
  * 
  */
 public class EIDEventProducerSystemTest extends TestCase {
+	private static final String EVENT_COM_VERTICON_TRACKER_READER = "event://com/verticon/tracker/reader";
+
 	public static final String EVENT_ADMIN_TOPIC_READER = "com/verticon/tracker/reader";
 
 	private static final String SERVICE_TAG_VALUE = "instance";
 	private static final String SERVICE_TAG = "eid.event.test";
-	private static final int WAIT_TIME_MILI = 200;
+	private static final int WAIT_TIME_MILI = 1000;
 	private static final String OUTPUT_INFORMATION = "animal.id.number";
 	private static final String TOTAL_EID = "producer.Total_EIDs";
 
@@ -142,6 +144,7 @@ public class EIDEventProducerSystemTest extends TestCase {
 		props.put(EventConstants.EVENT_FILTER,
 				"(com.verticon.tracker.reader.name=*)");
 		props.put(EventConstants.EVENT_TOPIC, EVENT_ADMIN_TOPIC_READER);
+		props.put("connection.uri", EVENT_COM_VERTICON_TRACKER_READER);
 
 		// Add a tag to find the service
 		props.put(SERVICE_TAG, SERVICE_TAG_VALUE);
@@ -172,13 +175,15 @@ public class EIDEventProducerSystemTest extends TestCase {
 
 	private void testInitialization(Monitorable monitorable) {
 		// Test for number of consumers connected
-		String id = "producer.Connected_Consumers";
-		StatusVariable sv = monitorable.getStatusVariable(id);
+		
+		StatusVariable sv = monitorable.getStatusVariable("producer.Connected_Consumers");
 		assertEquals("Should one connected mockconsumer", 1, sv.getInteger());
 
+		sv = monitorable.getStatusVariable("producer.Connection_URI");
+		assertEquals(EVENT_COM_VERTICON_TRACKER_READER, sv.getString());
+		
 		// Just starting so there should be no measurements sent
-		id = TOTAL_EID;
-		sv = monitorable.getStatusVariable(id);
+		sv = monitorable.getStatusVariable(TOTAL_EID);
 		assertEquals("Should be no alarms sent", 0, sv.getInteger());
 
 	}
