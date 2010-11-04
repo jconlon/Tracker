@@ -85,24 +85,24 @@
     <AD name="Producer Scope for Animal Weight" id="producer.scope.weight" 
     	type="String"
     	required="true"
-		default="trutest.weight" 
+		default="animal.weight" 
     	description="Producer scope for send out the Animal Weight Measurement."/>
     
     <AD name="Producer Scope for Animal EID" id="producer.scope.eid" 
     	type="String"
     	required="true" 
-		default="trutest.eid" 
+		default="animal.eid" 
     	description="Producer scope for sending out the Animal ID number."/>
     	
     <AD name="Producer Scope for Enter Key" id="producer.scope.enter" type="String"
-		default="trutest.enter.key"
+		default="transaction.state"
 		required="true"  
     	description="Producer scope for sending out a state indicating that enter key was pressed."/>
     	
      <AD name="State Name for Enter Key Press" id="producer.enter.press.state" 
      	type="String"
      	required="true" 
-		default="trutest.enter.key" 
+		default="transaction.state" 
     	description="The name of the state indicating that enter key was pressed."/>
     
      <AD name="Component container label"  id="tracker.monitor.label" 
