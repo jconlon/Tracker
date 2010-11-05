@@ -90,7 +90,7 @@
     
     <AD name="Producer Scope for Animal EID" id="producer.scope.eid" 
     	type="String"
-    	required="true" 
+    	required="false" 
 		default="animal.eid" 
     	description="Producer scope for sending out the Animal ID number."/>
     	

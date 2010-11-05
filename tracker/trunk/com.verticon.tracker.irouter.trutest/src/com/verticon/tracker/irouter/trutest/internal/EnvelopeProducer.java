@@ -133,7 +133,8 @@ public class EnvelopeProducer implements Producer, IEnvelopeSender, Monitorable 
 	 * @see com.verticon.tracker.irouter.trutest.internal.IEnvelopeSender#send(org.osgi.service.wireadmin.Envelope)
 	 */
 	public void send(Envelope envelope) {
-		lastEnvelope.put(envelope.getScope(), envelope);
+		boolean sent = false;
+		
 		log.debug(bundleMarker,"{}: Sending {} with scope={} to {} wires.",
 					new Object[]{this, envelope.getValue(), envelope.getScope(), wires.size()}
 		);
@@ -146,10 +147,15 @@ public class EnvelopeProducer implements Producer, IEnvelopeSender, Monitorable 
 			}
 			for (String wireScope : wireScopes) {
 				if (wireScope.equals(envelope.getScope())) {
-
 					wire.update(envelope);
+					sent=true;
+					break;
 				}
 			}  
+		}
+		
+		if(sent){
+			lastEnvelope.put(envelope.getScope(), envelope);
 		}
 		
 	}
@@ -184,6 +190,11 @@ public class EnvelopeProducer implements Producer, IEnvelopeSender, Monitorable 
 	}
 	
 	private String[] buildProducerScope(){
+		if(indicator.getConfigurationString(PRODUCER_SCOPE_ANIMAL_EID)==null){
+			return new String[]{
+					indicator.getConfigurationString(PRODUCER_SCOPE_ANIMAL_WEIGHT),
+					indicator.getConfigurationString(PRODUCER_SCOPE_ENTER_KEY)};
+		}
 		return new String[]{
 				indicator.getConfigurationString(PRODUCER_SCOPE_ANIMAL_WEIGHT),
 				indicator.getConfigurationString(PRODUCER_SCOPE_ENTER_KEY),
@@ -208,6 +219,13 @@ public class EnvelopeProducer implements Producer, IEnvelopeSender, Monitorable 
 					);
 		}
 		if (LAST_EID.equals(name)){
+			if(indicator.getConfigurationString(PRODUCER_SCOPE_ANIMAL_EID)==null){
+				return
+				new StatusVariable(name,
+						StatusVariable.CM_SI,
+						""
+						);	
+			}
 			Envelope ev = lastEnvelope.get(indicator.getConfigurationString(PRODUCER_SCOPE_ANIMAL_EID));
 			String lastEID = ev!=null?ev.getValue().toString():""; 
 			return
