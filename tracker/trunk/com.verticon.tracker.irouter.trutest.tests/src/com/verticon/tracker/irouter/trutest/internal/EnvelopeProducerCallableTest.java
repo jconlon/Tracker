@@ -12,7 +12,8 @@ package com.verticon.tracker.irouter.trutest.internal;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.RESPONSE_PATTERN;
-import static com.verticon.tracker.irouter.trutest.internal.Constants.*;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_WEIGHT_DEFAULT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ENTER_KEY_DEFAULT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -20,7 +21,9 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
@@ -38,10 +41,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.irouter.trutest.internal.MockIndicator.MockConnectorService;
-import com.verticon.tracker.irouter.trutest.internal.EnvelopeProducer;
-import com.verticon.tracker.irouter.trutest.internal.EnvelopeProducerCallable;
-import com.verticon.tracker.irouter.trutest.internal.IIndicator;
-import com.verticon.tracker.irouter.trutest.internal.Indicator;
 
 /**
  * Off-line test of the CompositeReaderCallable.
@@ -50,7 +49,7 @@ import com.verticon.tracker.irouter.trutest.internal.Indicator;
  *
  */
 public class EnvelopeProducerCallableTest{
-
+	static final String PRODUCER_SCOPE_ANIMAL_EID_DEFAULT="animal.tag.number"; 
 	EnvelopeProducerCallable instance = null;
 	IIndicator context = null;
 	MockCompositeProducer compositeProducer = null;
@@ -128,7 +127,8 @@ public class EnvelopeProducerCallableTest{
 	}
 
 	class MockIndicator extends Indicator {
-
+		static final String PRODUCER_SCOPE_ANIMAL_EID ="producer.scope.eid";
+		Map<String, Object> mockConfig = new HashMap<String,Object>(); 
 		@Override
 		public String toString() {
 			return "IndicatorServicesProviderMockup";
@@ -142,19 +142,22 @@ public class EnvelopeProducerCallableTest{
 				throws ConfigurationException {
 			super("test", exec, scheduler);
 			this.uri = uri;
+			mockConfig.put(PRODUCER_SCOPE_ANIMAL_EID ,
+					PRODUCER_SCOPE_ANIMAL_EID_DEFAULT);
+			mockConfig.put(CONNECTION_URI ,
+					uri);
 		}
 
+		
+		
 		@Override
 		protected ConnectorService getConnectorService() throws IOException {
 			return connectorService;
 		}
 
 		protected Object getConfiguration(String key) {
-			if (key.equals(CONNECTION_URI)) {
-				return uri;
-			} else {
-				return DEFAULTS.get(key);
-			}
+			Object result = mockConfig.get(key);
+			return result!=null?result:DEFAULTS.get(key);
 		}
 //
 //		@Override

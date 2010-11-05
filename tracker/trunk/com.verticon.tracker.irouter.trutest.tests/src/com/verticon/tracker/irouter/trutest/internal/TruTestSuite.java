@@ -7,6 +7,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
   EnvelopeProducerCallableTest.class,
   IntializerCallableTest.class,
+  IndicatorTest.class,
 })
 public class TruTestSuite {
     // the class remains completely empty, 

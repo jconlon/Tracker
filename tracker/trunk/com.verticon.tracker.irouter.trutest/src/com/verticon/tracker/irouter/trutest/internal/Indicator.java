@@ -35,8 +35,6 @@ import static com.verticon.tracker.irouter.trutest.internal.Constants.FILE_HEADE
 import static com.verticon.tracker.irouter.trutest.internal.Constants.NODE_LABEL;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.NODE_LABEL_DEFAULT;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.POLL_DELAY_DEFAULT;
-import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_EID;
-import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_EID_DEFAULT;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_WEIGHT;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ANIMAL_WEIGHT_DEFAULT;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.PRODUCER_SCOPE_ENTER_KEY;
@@ -153,7 +151,6 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 		DEFAULTS.put(CONSUMER_SCOPE, CONSUMER_SCOPE_DEFAULT);
 
 		DEFAULTS.put(PRODUCER_SCOPE_ANIMAL_WEIGHT, PRODUCER_SCOPE_ANIMAL_WEIGHT_DEFAULT);
-	    DEFAULTS.put(PRODUCER_SCOPE_ANIMAL_EID ,PRODUCER_SCOPE_ANIMAL_EID_DEFAULT);
 		DEFAULTS.put(PRODUCER_SCOPE_ENTER_KEY, PRODUCER_SCOPE_ENTER_KEY_DEFAULT);
 		
 		DEFAULTS.put(PRODUCER_STATE_ENTER_KEY_NAME, TRANSACTION_STATE_SCOPE);

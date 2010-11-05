@@ -259,6 +259,9 @@ public class EnvelopeProducerCallable implements Callable<Void> {
 	 * @param rp
 	 */
 	private void sendID(String rp) {
+		if(indicator.getConfigurationString(PRODUCER_SCOPE_ANIMAL_EID)==null){
+			return;
+		}
 		try {
 			lastEID = Long.parseLong(rp);
 			Envelope envelope = new BasicEnvelope(lastEID,// value

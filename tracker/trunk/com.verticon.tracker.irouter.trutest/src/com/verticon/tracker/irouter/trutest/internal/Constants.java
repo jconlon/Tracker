@@ -72,7 +72,6 @@ public class Constants {
     static final String PRODUCER_SCOPE_ANIMAL_WEIGHT ="producer.scope.weight";
     static final String PRODUCER_SCOPE_ANIMAL_WEIGHT_DEFAULT="animal.weight.measurement";
     static final String PRODUCER_SCOPE_ANIMAL_EID ="producer.scope.eid";
-    static final String PRODUCER_SCOPE_ANIMAL_EID_DEFAULT="animal.tag.number"; 
     static final String PRODUCER_SCOPE_ENTER_KEY="producer.scope.enter";
     static final String PRODUCER_SCOPE_ENTER_KEY_DEFAULT="transaction.state";
     
