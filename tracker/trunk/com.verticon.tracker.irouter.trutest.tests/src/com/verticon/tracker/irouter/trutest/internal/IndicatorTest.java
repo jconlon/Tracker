@@ -18,6 +18,7 @@ import static com.verticon.tracker.irouter.trutest.internal.Constants.TURN_ON_CR
 import static com.verticon.tracker.irouter.trutest.internal.Constants.TURN_ON_ERROR_CODES;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -50,7 +51,6 @@ import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.connector.socket.SocketStreamConnection;
 import com.verticon.tracker.irouter.common.Utils;
-import com.verticon.tracker.irouter.trutest.internal.IIndicator;
 
 /**
  * This is an on-line exercising test of the Indicator class. 
@@ -58,12 +58,12 @@ import com.verticon.tracker.irouter.trutest.internal.IIndicator;
  * A truTest mockIndicator or emulator must be running at the INDICATOR_URI
  * for it to test the Indicator class.
  * 
- * @deprecated use system tests instead
+ * Most, but not all tests have been deprecated and use system tests instead
  * @author jconlon
  *
  */
 public class IndicatorTest{
-	
+	static final String PRODUCER_SCOPE_ANIMAL_EID ="producer.scope.eid";
 	
 	private static final double ZERO = 0;
 	private static final String ZERO_COMMAND = String.format("%.4f\r",ZERO);
@@ -178,8 +178,9 @@ public class IndicatorTest{
 	 * see that 120 responses came back. Checks for errors.
 	 * @throws IOException
 	 * @throws InterruptedException
+	 * @deprecated no longer an active test replaced by system tests
 	 */
-	@Test
+	//Removed test annotation
 	public void testRawReaderAndWriterConnection() throws IOException, InterruptedException{
 		log.debug("Starting: testReaderAndWriterConnection()");
 		
@@ -217,8 +218,9 @@ public class IndicatorTest{
 	 * every second for 15 seconds. Make sure at least 14 came back.
 	 * @throws IOException
 	 * @throws InterruptedException
+	 * @deprecated no longer an active test replaced by system tests
 	 */
-	@Test
+	//Removed test annotation
 	public void testGenericCallables() throws IOException, InterruptedException{
 		log.debug("Starting: testGenericCallables()");
 		
@@ -265,8 +267,9 @@ public class IndicatorTest{
 	 * @throws ExecutionException 
 	 * @throws InterruptedException 
 	 * @throws IOException 
+	 * @deprecated no longer an active test replaced by system tests
 	 */
-	@Test
+	//Removed test annotation
 	public void testEnvelopeProduction() throws InterruptedException, ExecutionException, IOException {
 		log.debug("Starting: testEnvelopeProduction()");
 		
@@ -321,6 +324,15 @@ public class IndicatorTest{
 		
 	}
 
+	/**
+	 * Test the configuation
+	 */
+	@Test
+	public void testConfiguration() {
+		String someValue = mockIndicator.getConfigurationString(PRODUCER_SCOPE_ANIMAL_EID);
+		assertNull("Should be null, but was "+someValue, someValue);
+		
+	}
 	
 	/**
 	 * Update two display fields on the mockIndicator to test the workaround for 
@@ -355,7 +367,7 @@ public class IndicatorTest{
 	 * @throws ExecutionException
 	 * @throws IOException
 	 */
-	@Test
+	//Test
 	public void testDisplayingFields() throws InterruptedException, ExecutionException, IOException {
 		log.debug("Starting: testDisplayingFields()");
 		
@@ -409,8 +421,9 @@ public class IndicatorTest{
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 * @throws IOException
+	  * @deprecated no longer an active test replaced by system tests
 	 */
-	@Test //commented out.  If raw test needed uncomment
+	//Removed test annotation
 	public void testRawDisplayingFields() throws InterruptedException, ExecutionException, IOException {
 		log.debug("Starting: testRawDisplayingFields()");
 		
@@ -476,8 +489,15 @@ public class IndicatorTest{
 		
 		
 	}
-
-	@Test  //FileUploading is not built into the mockIndicator.  Don't need to test this as it will write over previous uploaded data.
+	
+	/**
+	 * FileUploading is not built into the mockIndicator.  Don't need to test this as it will write over previous uploaded data.
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 * @throws IOException
+	 * @deprecated no longer an active test replaced by system tests
+	 */
+	//Removed test annotation
 	public void testUploadRawData() throws InterruptedException, ExecutionException, IOException {
 		log.debug("Starting: testRawFileUpload()");
 		
@@ -603,7 +623,14 @@ public class IndicatorTest{
 		TimeUnit.SECONDS.sleep(2);
 	}
 	
-	@Test  //FileDownloading is not built into the mockIndicator.  Don't need to test this as it will write over previous downloaded data.
+	/**
+	 * FileDownloading is not built into the mockIndicator.  Don't need to test this as it will write over previous downloaded data.
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 * @throws IOException
+	 * @deprecated no longer an active test replaced by system tests
+	 */
+	//Removed test annotation
 	public void testDownloadRawDataFile() throws InterruptedException, ExecutionException, IOException {
 		log.debug("Starting: testRawFileDownload()");
 		
