@@ -8,7 +8,8 @@ import org.osgi.util.measurement.Unit;
  * measurement.
  * 
  * @author jconlon
- *
+ * @deprecated by Ticket#634
+ * 
  */
 public class MeasurementTransaction extends Measurement {
 

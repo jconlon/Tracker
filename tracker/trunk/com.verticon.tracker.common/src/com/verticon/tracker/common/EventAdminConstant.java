@@ -1,5 +1,11 @@
 package com.verticon.tracker.common;
 
+/**
+ * @deprecated by Ticket#634
+ * 
+ * @author jconlon
+ *
+ */
 public enum EventAdminConstant {
 	/**
 	 * EventAdmin topic jointly used by iRouter and Tracker
