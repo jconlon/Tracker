@@ -123,7 +123,7 @@ public class MeasurementProducer implements Producer, IMeasurementSender, Monito
 	@Override
 	public void send(Measurement measurement) {
 		lastWeight = new Float(measurement.getValue());
-		this.envelope = new BasicEnvelope(measurement,context.getPid(),scopeName);
+		this.envelope = new BasicEnvelope(measurement,"0",scopeName);
 		if(!wires.isEmpty()){
 			log.debug(bundleMarker,"{}: sending measuement={}, to {} wires",
 					new Object[]{this,wires.size(), measurement}
