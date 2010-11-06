@@ -3,10 +3,10 @@
    <implementation class="com.verticon.tracker.irouter.measurement.event.test.system.internal.MockProducer"/>
    <property name="tracker.wiring.group.name" type="String" value="test"/>
    <property name="wireadmin.producer.scope"> 
-   	mettler.weight.measurement
-   	animal.weight.measurement
+   	mettler.weight
+   	animal.weight
    	transaction.state
-   	animal.tag.number
+   	animal.eid
    </property>
    <property name="service.pid" type="String" value="measurement.event.mockProducer"/>
    <service>

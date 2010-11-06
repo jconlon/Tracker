@@ -20,7 +20,7 @@ public abstract class AbstractTransactionHandler implements ITransactionHandler 
 	 * slf4j Logger
 	 */
 	protected final Logger log;
-	protected final Map<String, Measurement> measurements = new HashMap<String, Measurement>();
+	protected final Map<String, Envelope> envelopes = new HashMap<String, Envelope>();
 	protected Long id = null;
 	/**
 	 * The State that ends a transaction.  If null
@@ -64,52 +64,19 @@ public abstract class AbstractTransactionHandler implements ITransactionHandler 
 	}
 	
 	
-//	public void add(Envelope envelope) {
-//		 if(envelope.getScope().equals(getTriggeringScopeName())){
-//			 if(state==null){
-//				 if( ((State)envelope.getValue()).getValue()==1){
-//					 triggered();
-//					 measurements.clear();
-//					 id=null;
-//				 }
-//			 }else if (state.equals(envelope.getValue())){
-//				 triggered();
-//				 measurements.clear();
-//				 id=null;
-//			 }
-//		 }else if(envelope.getScope().equals(getAnimalIDNumberScopeName())){
-//			 if(envelope.getValue() instanceof Long){
-//				 id = (Long)envelope.getValue();
-//
-//				 log.debug(bundleMarker(),"{} ID={}",
-//						 this,id);
-//
-//			 }else{
-//				 log.error(bundleMarker(),"EID Envelope unknown value={}",envelope.getValue());
-//			 }
-//		 }else{
-//			 if(envelope.getValue() instanceof Measurement){
-//				 measurements.put(envelope.getScope(), (Measurement) envelope.getValue());
-//			 }else{
-//				 log.error(bundleMarker(),"id='{}', type='{}' has unknown value of {}",
-//						 new Object[]{id,
-//					 envelope.getScope(),
-//					 envelope.getValue()});
-//			 }
-//		 }
-//	}
+
 	
 	public void add(Envelope envelope){
 		if(envelope.getValue() instanceof State){
 			if(state==null){
 				if( ((State)envelope.getValue()).getValue()==1){
 					 triggered();
-					 measurements.clear();
+					 envelopes.clear();
 					 id=null;
 				 }
 			}else if(state.equals(envelope.getValue())){
 				triggered();
-				 measurements.clear();
+				 envelopes.clear();
 				 id=null;
 			}
 		}else if (envelope.getValue() instanceof Long){
@@ -119,7 +86,7 @@ public abstract class AbstractTransactionHandler implements ITransactionHandler 
 					 this,id);
 
 		}else if (envelope.getValue() instanceof Measurement){
-			measurements.put(envelope.getScope(), (Measurement) envelope.getValue());
+			envelopes.put(envelope.getScope(), envelope);
 		}else{
 			 log.error(bundleMarker(),"id='{}', type='{}' has unknown value of {}",
 					 new Object[]{id,
@@ -129,7 +96,12 @@ public abstract class AbstractTransactionHandler implements ITransactionHandler 
 	}
 
 	public Measurement get(String scope) {
-		return measurements.get(scope);
+		Measurement measurement = null;
+		Envelope envelope = envelopes.get(scope);
+		if(envelope!=null && envelope.getValue() instanceof Measurement){
+			measurement = (Measurement) envelope.getValue();
+		}
+		return measurement;
 	}
 
 	protected abstract void triggered();
@@ -145,6 +117,18 @@ public abstract class AbstractTransactionHandler implements ITransactionHandler 
 			}
    };
 
+   protected static final Comparator<Envelope> ENVELOPE_DATE_ORDER = new Comparator<Envelope>() {
+		public int compare(Envelope e1, Envelope e2) { 
+			Measurement m1 =(Measurement)e1.getValue();
+			Measurement m2 =(Measurement)e2.getValue();
+			if(m1.getTime() < m2.getTime()){
+				return -1;//returning a negative integer, first argument is less than second
+			}else if(m1.getTime() == m2.getTime()){
+				return 0;//0, equal to, or 
+			}
+			return 1; //a positive integer depending on whether the ,  greater than the second.
+		}
+};
 	
 
 }

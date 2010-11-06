@@ -29,6 +29,7 @@ import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.swt.widgets.Display;
+import org.osgi.service.wireadmin.Envelope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +38,6 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.common.MeasurementTransaction;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
 
 public class ImportLogAsEventDataJob extends Job {
@@ -163,10 +163,9 @@ public class ImportLogAsEventDataJob extends Job {
 	private void processLine(String line, int lineNumber, IProgressMonitor monitor)
 			throws IOException, ParseException, EventCreationException {
 		
-		MeasurementTransaction measurement = newInstance(line);
+		Envelope measurement = newInstance(line);
 		// Only add an entry if the animal all ready exists
-		
-		Animal animal = premises.findAnimal(measurement.getId());
+		Animal animal = premises.findAnimal((String)measurement.getIdentification());
 		
 		String message = null;
 		if(animal==null){
@@ -192,7 +191,7 @@ public class ImportLogAsEventDataJob extends Job {
 	}
 
 	private void addEvent(int lineNumber, IProgressMonitor monitor,
-			MeasurementTransaction measurement, Tag tag, Event event) {
+			Envelope measurement, Tag tag, Event event) {
 		compoundCommand.append(AddCommand.create(editingDomain, tag,
 				TrackerPackage.Literals.TAG__EVENTS, event));
 		String message = "Appended command to add "+event+" , from "+measurement+" #"+lineNumber+" of "+compoundCommand.getCommandList().size();
