@@ -33,10 +33,9 @@ import java.util.regex.Matcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.osgi.service.wireadmin.Envelope;
 import org.osgi.util.measurement.Measurement;
 import org.osgi.util.measurement.Unit;
-
-import com.verticon.tracker.common.MeasurementTransaction;
 
 public class MeasurementTransactionUtilsTest {
 	static final String GOOD_LOG1 = "2010-03-12 12:07:42,type='measurement',dateTime='2010-03-12 12:07:42',id='123456789012345',scope='animal.weight.measurement',value='133.0000',error='0.0100',unit='kg'";
@@ -56,11 +55,7 @@ public class MeasurementTransactionUtilsTest {
 	public void tearDown() throws Exception {
 	}
 	
-	@Test
-	public final void testDouble(){
-		double d = Double.parseDouble("2.9E-4");
-		assertEquals(new Double(2.9E-4), d, 0);
-	}
+	
 	@Test 
 	public final void testParser(){
 		
@@ -110,15 +105,17 @@ public class MeasurementTransactionUtilsTest {
 	public final void testNewInstance() {
 		
 		try {
-			MeasurementTransaction m = newInstance(GOOD_LOG2);
+			Envelope envelope = newInstance(GOOD_LOG2);
+			assertNotNull(envelope);
+			Measurement m = (Measurement)envelope.getValue();
 			assertNotNull(m);
 			assertEquals(133.0000, m.getValue(),0);
 			assertEquals(0.0100, m.getError(),0);
 			assertEquals(Unit.kg, m.getUnit());
 			assertEquals("2010-03-12 12:07:42", String.format(
 					"%1$tF %1$tT",m.getTime()));
-			assertEquals("123456789012345", m.getId());
-			assertEquals("animal.weight.measurement", m.getScope());
+			assertEquals("123456789012345", envelope.getIdentification());
+			assertEquals("animal.weight.measurement", envelope.getScope());
 			
 		} catch (ParseException e) {
 			fail(e.toString());

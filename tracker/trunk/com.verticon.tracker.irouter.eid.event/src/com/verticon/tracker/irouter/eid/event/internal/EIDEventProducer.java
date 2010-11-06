@@ -47,7 +47,7 @@ import org.slf4j.MarkerFactory;
 public class EIDEventProducer implements Producer, Monitorable, EventHandler {
 
 	private static final String CONNECTED_CONSUMERS_COUNT = "producer.Connected_Consumers";
-	private static final String TIME_OF_LAST_EID = "producer.Last_EID";
+	private static final String TIME_OF_LAST_EID = "producer.Last_EID_Send_Time";
 	private static final String TOTAL_EID = "producer.Total_EIDs";
 	private static final String LAST_EID = "producer.Last_EID";
 	private static final String CONNECTION_URI_STATUS_VAR = "producer.Connection_URI";

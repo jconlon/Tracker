@@ -10,11 +10,18 @@
  *******************************************************************************/
 package com.verticon.tracker.irouter.gateway.internal;
 
+import static com.verticon.tracker.util.TrackerConstants.DATE_FORMAT_PATTERN;
+
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.osgi.service.wireadmin.BasicEnvelope;
+import org.osgi.service.wireadmin.Envelope;
+import org.osgi.util.measurement.Measurement;
 import org.osgi.util.measurement.Unit;
 
 import com.verticon.osgi.metatype.AD;
@@ -26,8 +33,6 @@ import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.WeightMeasurementUnit;
-import com.verticon.tracker.common.MeasurementTransaction;
-import com.verticon.tracker.util.TrackerConstants;
 
 /**
  * An OSGi Measurement with a scope and an id.
@@ -43,7 +48,7 @@ public class MeasurementTransactionUtils {
     static final int ID = 3;
     static final int DATE_TIME = 2;
     static final int TYPE = 1;
-    static final String WEIGHIN_EVENT_SCOPE = "animal.weight.measurement";
+    static final String WEIGHIN_EVENT_SCOPE = "animal.weight";
 	private final static String REGEX=".*type='(.*)',dateTime='(.*)',id='(\\S*)',scope='(.*)',value='(.*)',error='(.*)',unit='(kg|pound)'";
     final static Pattern PATTERN = Pattern.compile(REGEX);
 	
@@ -55,7 +60,7 @@ public class MeasurementTransactionUtils {
 	 * @return MeasurementTransaction
 	 * @throws ParseException 
 	 */
-	public static MeasurementTransaction newInstance(String log) throws ParseException{
+	public static Envelope newInstance(String log) throws ParseException{
 		Matcher matcher = PATTERN.matcher(log);
 		if (!matcher.matches()){
 			throw new ParseException(log+" failed to parse.", 0);
@@ -63,7 +68,8 @@ public class MeasurementTransactionUtils {
 
 		Date date;
 		try {
-			date = (Date)TrackerConstants.DATE_FORMAT.parse(matcher.group(DATE_TIME));
+			DateFormat df =  new SimpleDateFormat(DATE_FORMAT_PATTERN);
+			date = (Date)df.parse(matcher.group(DATE_TIME));
 		} catch (ParseException e) {
 			throw new ParseException(log+" failed to parse dateTime.", DATE_TIME);
 		}
@@ -94,8 +100,8 @@ public class MeasurementTransactionUtils {
 			throw new ParseException(log+" failed to parse error.", ERROR);
 		}
 		
-		
-		return new MeasurementTransaction(value, error, Unit.kg, time, scope, tag);
+		Measurement measurement = new Measurement(value, error, Unit.kg,time);
+		return new BasicEnvelope(measurement,tag,scope);
 	}
 
 	/**
@@ -106,7 +112,7 @@ public class MeasurementTransactionUtils {
 	 * @param transaction
 	 * @return determination
 	 */
-    public static boolean canBeIn(Tag tag, MeasurementTransaction transaction){
+    public static boolean canBeIn(Tag tag, Envelope transaction){
 		if(WEIGHIN_EVENT_SCOPE.equals(transaction.getScope())){
 			return tag.canContain(EventType.WEIGH_IN, null);
 		}
@@ -122,7 +128,7 @@ public class MeasurementTransactionUtils {
 	 * @return Event
 	 * @throws EventCreationException
 	 */
-	public static Event createEvent(Tag tag, MeasurementTransaction transaction) throws EventCreationException{
+	public static Event createEvent(Tag tag, Envelope transaction) throws EventCreationException{
 		if(WEIGHIN_EVENT_SCOPE.equals(transaction.getScope())){
 			
 			return createWeighInEvent(transaction);
@@ -132,30 +138,31 @@ public class MeasurementTransactionUtils {
 
 
 	/**
-	 * Create a GenericEvent from the transaction
+	 * Create a GenericEvent
 	 * 
 	 * @param tag
-	 * @param transaction
+	 * @param envelope
 	 * @return GenericEvent
 	 * @throws EventCreationException
 	 */
-	private static GenericEvent createGenericEvent(Tag tag, MeasurementTransaction transaction) throws EventCreationException{
-		if(!canBeIn( tag,transaction)){
-			throw new IllegalStateException("Can not create the GenericEvent with "+transaction+" because there is a policy preventing event inclusion on OcdId: "+transaction.getScope());
+	private static GenericEvent createGenericEvent(Tag tag, Envelope envelope) throws EventCreationException{
+		if(!canBeIn( tag,envelope)){
+			throw new IllegalStateException("Can not create the GenericEvent with "+envelope+" because there is a policy preventing event inclusion on OcdId: "+envelope.getScope());
 		}
 		GenericEvent geEvent = TrackerFactory.eINSTANCE.createGenericEvent();
-		geEvent.setDateTime(new Date(transaction.getTime()));
+		Measurement measurement = (Measurement)envelope.getValue();
+		geEvent.setDateTime(new Date(measurement.getTime()));
 		//Must have an OCD for this ocdId
-		OCD ocd = tag.findOCD(transaction.getScope());
+		OCD ocd = tag.findOCD(envelope.getScope());
 		if(ocd == null){
-			throw new IllegalStateException("Failed to import "+transaction+" because could not find the OcdId: "+transaction.getScope());
+			throw new IllegalStateException("Failed to import "+envelope+" because could not find the OcdId: "+envelope.getScope());
 		}
 		if(ocd.getAD().size()< 3){
-			throw new IllegalStateException("Failed to import "+transaction+" because ocd contains only "+ocd.getAD().size()+" attributes" );
+			throw new IllegalStateException("Failed to import "+envelope+" because ocd contains only "+ocd.getAD().size()+" attributes" );
 		}
 		geEvent.setOcd(ocd);
 		if(geEvent.getEventAttributes().size()< 3){
-			throw new EventCreationException("Failed to import "+transaction+" because genericEvent contains only "+geEvent.getEventAttributes().size()+" attributes" );
+			throw new EventCreationException("Failed to import "+envelope+" because genericEvent contains only "+geEvent.getEventAttributes().size()+" attributes" );
 		}
 		
 		
@@ -167,12 +174,12 @@ public class MeasurementTransactionUtils {
 				valueFound = true;
 				geEvent.getEventAttributes().put(
 						attributeDefinition.getName(),
-						Double.toString(transaction.getValue()));
+						Double.toString(measurement.getValue()));
 			}else if(attributeDefinition.getID().equals("error")){
 				errorFound = true;
 				geEvent.getEventAttributes().put(
 						attributeDefinition.getName(),
-						Double.toString(transaction.getError()));
+						Double.toString(measurement.getError()));
 			}else if(attributeDefinition.getID().equals("unit")){
 				unitFound = true;
 				geEvent.getEventAttributes().put(
@@ -191,15 +198,16 @@ public class MeasurementTransactionUtils {
 
 
 	/**
-	 * Create a WeighInEvent from the Transaction
-	 * @param transaction
-	 * @return
+	 * Create a WeighInEvent
+	 * @param envelope
+	 * @return WeighInEvent
 	 */
-	private static WeighIn createWeighInEvent(MeasurementTransaction transaction) {
+	private static WeighIn createWeighInEvent(Envelope envelope) {
+		Measurement measurement = (Measurement)envelope.getValue();
 		WeighIn weighIn = TrackerFactory.eINSTANCE.createWeighIn();
-		weighIn.setUnit(WeightMeasurementUnit.KILOGRAM);
-		weighIn.setWeight(transaction.getValue());
-		weighIn.setDateTime(new Date(transaction.getTime()));
+		weighIn.setUnit(measurement.getUnit()==Unit.kg?WeightMeasurementUnit.KILOGRAM:WeightMeasurementUnit.POUND);
+		weighIn.setWeight(measurement.getValue());
+		weighIn.setDateTime(new Date(measurement.getTime()));
 		return weighIn;
 	}
 }

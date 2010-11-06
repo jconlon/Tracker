@@ -1,5 +1,6 @@
 package com.verticon.tracker.irouter.measurement.event.test.system.internal;
 
+
 import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -10,6 +11,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
+import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 import org.osgi.service.monitor.Monitorable;
 import org.osgi.service.monitor.StatusVariable;
@@ -48,13 +50,13 @@ import com.verticon.tracker.irouter.common.TrackerConstants;
  * 
  */
 public class MeasurementEventConsumerSystemTest extends TestCase {
-	private static final String METTLER_WEIGHT_MEASUREMENT = "mettler.weight.measurement";
-
-	private static final String ANIMAL_TAG_NUMBER = "animal.tag.number";
-
+	private static final String IROUTER_PAYLOAD = "com.verticon.tracker.irouter.payload";
+	
+	private static final String METTLER_WEIGHT_MEASUREMENT = "mettler.weight";
+	private static final String ANIMAL_TAG_NUMBER = "animal.eid";
 	private static final String TRANSACTION_STATE = "transaction.state";
-
-	private static final String ANIMAL_WEIGHT_MEASUREMENT = "animal.weight.measurement";
+	private static final String ANIMAL_WEIGHT_MEASUREMENT = "animal.weight";
+	private static final String EVENT_COM_VERTICON_TRACKER_READER = "event://com/verticon/tracker/reader";
 
 	protected static String PLUGIN_ID = "com.verticon.tracker.irouter.measurement.event.test.system";
 
@@ -123,7 +125,7 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 
 	}
 
-	public void testBalanceComponent() throws Exception {
+	public void testMeasurementEventComponent() throws Exception {
 		// Configure the instance
 		String pid = "com.verticon.tracker.irouter.measurement.event";
 		Configuration config = configAdmin.getConfiguration(pid);
@@ -135,8 +137,8 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 				ANIMAL_WEIGHT_MEASUREMENT, TRANSACTION_STATE, ANIMAL_TAG_NUMBER };
 
 		props.put(WireConstants.WIREADMIN_CONSUMER_SCOPE, scopes);
-//		props.put("trigger.scope", TRANSACTION_STATE);
-//		props.put("animal.id.scope", ANIMAL_TAG_NUMBER);
+		props.put("connection.uri", EVENT_COM_VERTICON_TRACKER_READER);
+
 		props.put("consumer.transaction.state", TRANSACTION_STATE);
 		props.put("consumer.transaction.state.value", 1);
 		props.put("measurement.event.test", "instance");
@@ -157,6 +159,10 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 		String id = "consumer.Connected_Wires";
 		StatusVariable sv = monitorable.getStatusVariable(id);
 		assertEquals("Should only be one connected wire", 1, sv.getInteger());
+		
+		sv = monitorable.getStatusVariable("consumer.Connection_URI");
+		assertEquals(EVENT_COM_VERTICON_TRACKER_READER, sv.getString());
+		
 
 		logger.debug(bundleMarker,
 				"Sleeping to wait for connection to the fake indicator...");
@@ -166,22 +172,24 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 		assertEquals("Should be no measurements sent", 0, sv.getInteger());
 
 		// Send a animal.weight.measurement
-		Measurement m = new Measurement(100, Unit.kg);
-		Envelope value = new BasicEnvelope(m, "xx", ANIMAL_WEIGHT_MEASUREMENT);
+		Measurement animalWeight = new Measurement(
+				100, .01, Unit.kg, System.currentTimeMillis());
+		Envelope value = new BasicEnvelope(animalWeight, "", ANIMAL_WEIGHT_MEASUREMENT);
 		mockProducer.send(value);
 		sv = monitorable.getStatusVariable(id);
 		assertEquals("Should be no measurements sent", 0, sv.getInteger());
 
 		// Send a animal.tag.number
-		Long l = 123456789012345L;
-		value = new BasicEnvelope(l, "xx", ANIMAL_TAG_NUMBER);
+		Long tagNumber = 123456789012345L;
+		value = new BasicEnvelope(tagNumber, "xx", ANIMAL_TAG_NUMBER);
 		mockProducer.send(value);
 		sv = monitorable.getStatusVariable(id);
 		assertEquals("Should be no measurements sent", 0, sv.getInteger());
 
 		// Send a mettler.weight.measurement
-		m = new Measurement(100, Unit.kg);
-		value = new BasicEnvelope(m, "xy", METTLER_WEIGHT_MEASUREMENT);
+		Measurement mettlerWeight = new Measurement(
+				.3, .0001, Unit.kg, System.currentTimeMillis());
+		value = new BasicEnvelope(mettlerWeight, tagNumber.toString(), METTLER_WEIGHT_MEASUREMENT);
 		mockProducer.send(value);
 		sv = monitorable.getStatusVariable(id);
 		assertEquals("Should be no measurements sent", 0, sv.getInteger());
@@ -193,11 +201,35 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 		State s = new State(1, TRANSACTION_STATE);
 		value = new BasicEnvelope(s, "xy", TRANSACTION_STATE);
 		mockProducer.send(value);
+		TimeUnit.MILLISECONDS.sleep(100);
 		sv = monitorable.getStatusVariable(id);
 		assertEquals("Should be two measurements sent", 2, sv.getInteger());
 		//Test the event admin side to make sure an event was really 
 		//received by an EventHandler
 		assertEquals(2, mockEventHandler.events.size());
-
+		
+		//Validate the events
+		
+		//First Event
+		Event firstEvent = mockEventHandler.events.get(0);
+		//table.put(IROUTER_PAYLOAD.toProp(),envelope);
+		Object payload = firstEvent.getProperty(IROUTER_PAYLOAD);
+		assertNotNull("The first event payload is null", payload);
+		assertTrue("The first event payload is not an Envelope", payload instanceof Envelope);
+		Envelope envelopeReceived = (Envelope)payload;
+		assertEquals("The first event scope bad",ANIMAL_WEIGHT_MEASUREMENT, envelopeReceived.getScope());
+		assertEquals("The first event id bad",tagNumber.toString(), envelopeReceived.getIdentification());
+		assertEquals("The first event value bad",animalWeight, envelopeReceived.getValue());
+		
+	
+		//Second Event
+		firstEvent = mockEventHandler.events.get(1);
+		payload = firstEvent.getProperty(IROUTER_PAYLOAD);
+		assertNotNull("The second event payload is null", payload);
+		assertTrue("The second event payload is not an Envelope", payload instanceof Envelope);
+		envelopeReceived = (Envelope)payload;
+		assertEquals("The second event scope bad",METTLER_WEIGHT_MEASUREMENT, envelopeReceived.getScope());
+		assertEquals("The second event id bad",tagNumber.toString(), envelopeReceived.getIdentification());
+		assertEquals("The second event value bad",mettlerWeight, envelopeReceived.getValue());
 	}
 }
