@@ -5,9 +5,9 @@ import static com.verticon.tracker.irouter.measurement.logger.internal.Measureme
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.osgi.service.wireadmin.Envelope;
 import org.osgi.util.measurement.Measurement;
 import org.osgi.util.measurement.State;
 import org.slf4j.Logger;
@@ -67,26 +67,22 @@ public class AggregatedTransactionLogger extends AbstractTransactionHandler impl
 	 * can override.
 	 */
 	protected void triggered() {
-		List<Measurement> m = new ArrayList<Measurement>(measurements.values());
-		Collections.sort(m, DATE_ORDER);
+		List<Envelope> results = new ArrayList<Envelope>(envelopes.values());
+		Collections.sort(results, ENVELOPE_DATE_ORDER);
 	    StringBuilder builder = new StringBuilder();
 	    String logEntry;
-		for (Measurement measurement : m) {
-			String wireAdminEnvelopeScope = null;
+		for (Envelope envelope : results) {
+			
 			if(builder.length()>1){
 				builder.append(';');
 			}
-			//Find the scope associated with the entry
-			for (Map.Entry<String, Measurement> entry : measurements.entrySet()) {
-				if(measurement.equals(entry.getValue())){
-					wireAdminEnvelopeScope=entry.getKey();
-				}
-			}
+
+			Measurement measurement = (Measurement)envelope.getValue();
 			logEntry = String.format(
 					OUTPUT_FORMAT,
 					measurement.getTime(),
 					id,
-					wireAdminEnvelopeScope,
+					envelope.getScope(),
 					measurement.getValue(),
 					measurement.getError(),
 					measurement.getUnit()
@@ -124,6 +120,6 @@ public class AggregatedTransactionLogger extends AbstractTransactionHandler impl
 
 	@Override
 	public int getMeasurementsSize() {
-		return measurements.size();
+		return envelopes.size();
 	}
 }
