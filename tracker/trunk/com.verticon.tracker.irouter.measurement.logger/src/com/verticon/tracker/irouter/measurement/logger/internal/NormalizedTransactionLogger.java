@@ -63,7 +63,7 @@ public class NormalizedTransactionLogger extends AbstractTransactionHandler
 	 */
 	@Override
 	protected void triggered() {
-		List<String> scopes = new ArrayList<String>(measurements.keySet());
+		List<String> scopes = new ArrayList<String>(envelopes.keySet());
 		Collections.sort(scopes);//
 
 		StringBuilder builder = new StringBuilder();
@@ -102,7 +102,7 @@ public class NormalizedTransactionLogger extends AbstractTransactionHandler
 
 	@Override
 	public int getMeasurementsSize() {
-		return measurements.size();
+		return envelopes.size();
 	}
 
 //	/*
