@@ -56,7 +56,7 @@ public class MeasurementProducer implements Producer, IMeasurementSender, Monito
 	private List<Wire> wires = new CopyOnWriteArrayList<Wire>();
 	//Shared envelope protected with volatile
 	private volatile Envelope envelope = null;
-	private final String scopeName;
+	
 	private ServiceRegistration wireAdminReg = null;
 	private ServiceRegistration monitorableReg = null;
 	private AtomicBoolean connected = new AtomicBoolean();
@@ -66,8 +66,10 @@ public class MeasurementProducer implements Producer, IMeasurementSender, Monito
 	public MeasurementProducer(IContext context) {
 		super();
 		this.context = context;
-		scopeName = 
-			context.getConfigurationString(PRODUCER_WEIGHT_MEASUREMENT_NAME);
+	}
+
+	private String getScope() {
+		return context.getConfigurationString(PRODUCER_WEIGHT_MEASUREMENT_NAME);
 	}
 
 	/*
@@ -123,7 +125,7 @@ public class MeasurementProducer implements Producer, IMeasurementSender, Monito
 	@Override
 	public void send(Measurement measurement) {
 		lastWeight = new Float(measurement.getValue());
-		this.envelope = new BasicEnvelope(measurement,"0",scopeName);
+		this.envelope = new BasicEnvelope(measurement,"0",getScope());
 		if(!wires.isEmpty()){
 			log.debug(bundleMarker,"{}: sending measuement={}, to {} wires",
 					new Object[]{this,wires.size(), measurement}
@@ -167,7 +169,7 @@ public class MeasurementProducer implements Producer, IMeasurementSender, Monito
 		Hashtable<String, Object> regProps = new Hashtable<String, Object>();
 		regProps.put(SERVICE_PID, context.getPid());
 		regProps.put(WIREADMIN_PRODUCER_SCOPE, 
-				new String[]{scopeName});
+				new String[]{getScope()});
 		regProps.put(WIREADMIN_PRODUCER_FLAVORS,
 				new Class[] { Envelope.class });
 		regProps.put(CONNECTION_URI, context.getConfigurationString(CONNECTION_URI));
