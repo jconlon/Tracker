@@ -121,7 +121,7 @@ public class TaskMonitoringService implements Callable<Void> {
 				log.warn(bundleMarker,"{}: Task was canceled.", this);
 			}else {
 				completedFuture.get();
-				log.error(bundleMarker,(String.format("%s: Task completed prematurely without throwing an error.", this)));
+				log.info(bundleMarker,(String.format("%s: Task completed prematurely without throwing an error.", this)));
 			}
 		/*
 		 * log as debug
