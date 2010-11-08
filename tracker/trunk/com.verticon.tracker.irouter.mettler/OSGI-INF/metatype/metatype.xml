@@ -43,7 +43,7 @@
     <AD name="Response pattern" id="response.pattern" 
     	required="true" 
     	type="String" 
-    	default="^S (D|S)((\\s*)(.*))\\sg$"
+    	default="^S (D|S)((\s*)(.*))\sg$"
     	description="Regular Expression to use to parse return response from the balance."/>
     	
     <AD name="Connection retry interval seconds" id="connection.retry.seconds"

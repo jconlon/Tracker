@@ -43,7 +43,7 @@
     <AD name="Response pattern" id="response.pattern" 
     	required="true" 
     	type="String" 
-    	default="^\\[(.+)\\]$" 
+    	default="^\[(.+)\]$" 
     	description="Regex pattern for parsing information responses from the scale."/>
     	
     <AD name="Connection retry interval seconds" id="connection.retry.seconds" 
