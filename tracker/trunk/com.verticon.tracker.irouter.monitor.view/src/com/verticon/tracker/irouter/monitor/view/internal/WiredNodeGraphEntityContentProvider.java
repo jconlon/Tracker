@@ -264,7 +264,7 @@ public class WiredNodeGraphEntityContentProvider implements
 			}
 			if (event.getWire().getScope() == null
 					|| event.getWire().getScope().length == 0) {
-				logger.error(bundleMarker,
+				logger.warn(bundleMarker,
 						"Could not find a wireScope for wire {}",
 						event.getWire());
 				return;

@@ -137,10 +137,10 @@ public class WireAdminSystemTest extends TestCase {
 		assertEquals("HI", consumer.strings.get(0));
 	}
 	
+	
 	@SuppressWarnings("unchecked")
 	public void testCreatingSecondProducer()throws InterruptedException{
-		
-		
+
 		@SuppressWarnings("rawtypes")
 		Dictionary properties = new Properties();
 		properties.put("tracker.wiring.group.name", "test");
@@ -175,6 +175,25 @@ public class WireAdminSystemTest extends TestCase {
 		assertEquals("HI", consumer.strings.get(0));
 		assertEquals("HI From Me Too", consumer.strings.get(1));
 		
+		//Unregister the second producer, change the scope and register it.
+		sr.unregister();
+		TimeUnit.SECONDS.sleep(1);
+		assertEquals("After unregister, consumer should be connected to only 1 producer",1,consumer.wires.length);
+		
+		//Reregister with a different producer scope. 
+		properties.put("wireadmin.producer.scope", new String[]{"mock.string.somethingelse"});
+	    sr = context.registerService(
+				Producer.class.getName(), 
+				secondMockProducer, 
+				properties);
+		assertNotNull(sr);
+		
+		TimeUnit.SECONDS.sleep(1);
+		//FIXME Ticket#646
+		//There should NOT be a second wire connected. 
+		//Because the newly re-registered Producer no longer has a scope that matches the consumer. 
+		assertEquals("Should be connected to only 1 producer",1,consumer.wires.length);
+
 	}
 	
 	

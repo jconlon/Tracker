@@ -1,6 +1,7 @@
 package com.verticon.tracker.irouter.wireadmin.internal;
 
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
+import static org.osgi.framework.Constants.SERVICE_PID;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_PID;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_PRODUCER_PID;
 
@@ -101,6 +102,12 @@ public class Component implements WireAdminListener, IWireCreator {
 				return false;
 			}
 		}
+		
+		if(wireParameters.getConsumerPid()==null){
+		    deleteAllProducerWires(wireParameters);
+			return false;
+		}
+		
 		// "(&(" + Constants.OBJECTCLASS + "=Person)(|(sn=Jensen)(cn=Babs J*)))"
 		String filter = 
 			"(&(" + WIREADMIN_PRODUCER_PID + "="+wireParameters.getProducerPid()+")("+
@@ -122,22 +129,48 @@ public class Component implements WireAdminListener, IWireCreator {
 			wireAdmin.createWire(wireParameters.getProducerPid(), wireParameters
 					.getConsumerPid(), wireParameters.getProperties());
 			return true;
-//		}else if(wires.length ==1){
-//			log.debug((String.format(
-//					"{}: A wire already exists. Defered creating a new one.",this)));
+
 		}else{
 			logger.debug(bundleMarker,
 					"{} wires already exist. Deleting all existing wires, before creating one.",
 					wires.length);
-			for (Wire wire : wires) {
-				wireAdmin.deleteWire(wire);
-			}
+			deleteWires(wires, wireAdmin);
 			wireAdmin.createWire(wireParameters.getProducerPid(), wireParameters
 					.getConsumerPid(), wireParameters.getProperties());		
 		}
 		
 		return true;
 	}
+
+	private void deleteAllProducerWires(WireParameters wireParameters) {
+		// "(&(" + Constants.OBJECTCLASS + "=Person)(|(sn=Jensen)(cn=Babs J*)))"
+		String filter = 
+			"(" + WIREADMIN_PRODUCER_PID + "="+wireParameters.getProducerPid()+")";
+		Wire[] wires = null;
+		try {
+			wires = wireAdmin.getWires(filter);
+			
+		} catch (InvalidSyntaxException e) {
+			logger.error(bundleMarker,
+					"Programing error, bad filter={}",filter);
+			return ;
+		}
+		if(wires == null || wires.length==0){
+			return;
+		}
+		
+		deleteWires(wires, wireAdmin);
+	}
+
+	private static void deleteWires(Wire[] wires, WireAdmin wireAdmin) {
+		for (Wire wire : wires) {
+			wireAdmin.deleteWire(wire);
+		}
+	}
+	
+	
+	
+	
 
 	/**
 	 * Just Logs wire events.
@@ -221,6 +254,7 @@ public class Component implements WireAdminListener, IWireCreator {
 	// Component services binding methods
 
 	public void setProducer(Producer producer, Map<String, Object> properties) {
+		deleteAllWires((String)properties.get(SERVICE_PID));
 		String group = (String) properties
 				.get(TRACKER_WIRE_GROUP_NAME);
 		if (!groupConnectors.containsKey(group)) {
@@ -261,6 +295,11 @@ public class Component implements WireAdminListener, IWireCreator {
 
 	public void unsetWireAdmin(WireAdmin wireAdmin) {
 		this.wireAdmin = wireAdmin;
+	}
+
+
+	private void deleteAllWires(String producerPid) {
+		createWire(new WireParameters(producerPid, null, null));
 	}
 
 }
