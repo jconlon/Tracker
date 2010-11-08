@@ -315,14 +315,17 @@
 	if(getDefault()==null){
 			return null;
 	}
-	String[] defaults = getDefault().split(","); 
+	 
 	int numberOfDefaultsToReturn = getCardinality();
-	if(numberOfDefaultsToReturn==0){
-			if(validate(defaults[0]).equals("")){
-				return new String[]{defaults[0]};
+	if(numberOfDefaultsToReturn==0 || numberOfDefaultsToReturn==1){
+			if(validate(getDefault()).equals("")){
+				return new String[]{getDefault()};
 			}
-			numberOfDefaultsToReturn ++;//Add one 
-	}else if(numberOfDefaultsToReturn &lt; 0){
+			return null;
+			
+	}
+	String[] defaults = getDefault().split(",");
+	if(numberOfDefaultsToReturn &lt; 0){
 			numberOfDefaultsToReturn = numberOfDefaultsToReturn * -1;
 	}	
 	&lt;%java.util.List%&gt;&lt;String&gt; results = new &lt;%java.util.ArrayList%&gt;&lt;String&gt;();
