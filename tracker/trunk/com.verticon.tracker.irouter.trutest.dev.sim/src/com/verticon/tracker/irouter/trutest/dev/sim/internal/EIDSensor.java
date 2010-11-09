@@ -18,19 +18,26 @@ import java.util.List;
 
 import org.equinoxosgi.toast.devsim.IDeviceSimulatorListener;
 import org.equinoxosgi.toast.devsim.fw.HtmlGenerator;
-import org.equinoxosgi.toast.devsim.fw.SimulatedParameter;
+import org.equinoxosgi.toast.devsim.fw.LongActuator;
 
-public class EIDSensor extends SimulatedParameter {
+/**
+ * Pull down list of long numbers, where the selected value can set from the simulator.
+ * 
+ * @author jconlon
+ *
+ */
+public class EIDSensor extends LongActuator {
 	protected long value;
 	private final IDeviceSimulatorListener listener;
 	private final List<Long> eids;
 
 	public EIDSensor(String name, String label, IDeviceSimulatorListener listener,List<Long> eids) {
-		super(name, label);
+		super(name, label,"");
 		this.listener=listener;
 		this.eids=eids;
 	}
 
+	@Override
 	public void generate(HtmlGenerator gen) {
 		gen.replace("sensorName", name);
 		gen.replace("sensorLabel", label);
@@ -42,7 +49,8 @@ public class EIDSensor extends SimulatedParameter {
 		
 		gen.write("EIDSensorBottom.template", getClass());
 	}
-
+	
+	@Override
 	public boolean generateRefreshValue(PrintWriter writer, String prefix) {
 		writer.print(prefix);
 		writer.print('"');
@@ -53,10 +61,12 @@ public class EIDSensor extends SimulatedParameter {
 		return true;
 	}
 
+	@Override
 	protected String getPrintable() {
 		return Long.toString(value);
 	}
 
+	@Override
 	public void performAction(String action) {
 		if(action.trim().length()<1){
 			return;
@@ -64,6 +74,7 @@ public class EIDSensor extends SimulatedParameter {
 		setValue(Long.parseLong(action));
 	}
 
+	@Override
 	public void setValue(long value) {
 		this.value = value;
 		if (listener != null)
