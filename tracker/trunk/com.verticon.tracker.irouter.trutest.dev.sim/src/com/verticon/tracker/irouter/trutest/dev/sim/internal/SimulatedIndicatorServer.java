@@ -189,13 +189,24 @@ public class SimulatedIndicatorServer extends AbstractIndicator implements ITruT
 		simulator.setIntegerValue(TRUTEST_SCALEHEAD, UPLOADED,
 				uploadedRecords);
 	}
+	
 	@Override
 	protected void handleFields(String control, String value) {
 		log.debug(bundleMarker, "Handling control={} value={}", control, value);
+		System.out.println(this+"Handling control="+control+" value="+value);
 		if (control.endsWith("8")) {
 			simulator.setStringValue(TRUTEST_SCALEHEAD, FIELD + 8, value);
 		} else if (control.endsWith("9")) {
 			simulator.setStringValue(TRUTEST_SCALEHEAD, FIELD + 9, value);
+		}else{
+			//Consider all other values sent in as EID if parsed as long
+			try {
+				Long l = Long.parseLong(value);
+				simulator.setLongValue(TRUTEST_SCALEHEAD, EID,l);
+			} catch (NumberFormatException e) {
+				log.error(bundleMarker, "Failed to handle control="+control+" value="+value,e);
+			}
+			
 		}
 	}
 
@@ -275,9 +286,11 @@ public class SimulatedIndicatorServer extends AbstractIndicator implements ITruT
 	 * Some fake data if there was no uploads.
 	 */
 	private void addDefaultEIDS() {
-		eids.add(840456789012345l);
-		eids.add(840456789012346l);
-		eids.add(840456789012347l);
-		eids.add(840456789012348l);
+		eids.add(840003002956502l);
+		eids.add(840003002956449l);
+		eids.add(985152001175459l);
+		eids.add(985152001175711l);
+		eids.add(985152001389613l);
+		eids.add(985120025869547l);
 	}
 }
