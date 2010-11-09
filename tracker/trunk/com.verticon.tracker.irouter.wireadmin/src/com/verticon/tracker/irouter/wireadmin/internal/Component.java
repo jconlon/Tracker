@@ -254,11 +254,14 @@ public class Component implements WireAdminListener, IWireCreator {
 	// Component services binding methods
 
 	public void setProducer(Producer producer, Map<String, Object> properties) {
-		deleteAllWires((String)properties.get(SERVICE_PID));
 		String group = (String) properties
 				.get(TRACKER_WIRE_GROUP_NAME);
 		if (!groupConnectors.containsKey(group)) {
 			groupConnectors.put(group, new GroupConnector(group, this));
+		}
+		String producerPid = (String)properties.get(SERVICE_PID);
+		if(! groupConnectors.get(group).hasProducer(producerPid)){
+			deleteAllWires(producerPid);
 		}
 		groupConnectors.get(group).setProducer(properties);
 	}
