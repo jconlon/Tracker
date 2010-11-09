@@ -67,7 +67,7 @@
     <AD name="Animal Life Data upload record pattern" id="upload.record.pattern" 
     	type="String" 
     	required="true"
-    	default="^[0-9]{15,15},[0-9]{4,4},[1-2],\d.\d\d$" 
+    	default="^[0-9]{15,15},[0-9]{4,4},[0-2]{1,1}.\d\d,\d$" 
     	description="Pattern to use for uploading life data. Watch out for the slashes!"/>
 			 
 	<AD name="Data Synchronization Directory" id="data.synchronization.directory" 

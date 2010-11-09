@@ -348,8 +348,8 @@ public class InitializerCallable implements Callable<Void> {
 				fileRecordNumber++;
 				String indicatorRecordCommand = createIndicatorRecordCommand(fileRecord,fileRecordNumber);
 				if(indicatorRecordCommand != null && indicatorRecordCommand.equals("BAD")){
-					log.warn("{} upload record <{}> from file at line number {} failed to match pattern.",
-							new Object[]{this, fileRecord, fileRecordNumber});  
+					log.warn("{} upload record <{}> from file at line number {} failed to match pattern {}",
+							new Object[]{this, fileRecord, fileRecordNumber, uploadRegEx});  
 				}else if (indicatorRecordCommand != null) {
 					log.debug(bundleMarker, "{} upload record number {} as command {}",
 							new Object[] {this, fileRecordNumber, indicatorRecordCommand});
