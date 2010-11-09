@@ -53,6 +53,8 @@ public class GroupConnector {
 	public String toString() {
 		return "GroupConnector [group=" + group + "]";
 	}
+	
+	
 
 	/**
 	 * A producer may have an array of WireConstants.WIREADMIN_PRODUCER_SCOPE which
@@ -73,7 +75,7 @@ public class GroupConnector {
 	 */
 	 void setProducer(Map<String, ?> properties){
 		String producerPid = (String)properties.get(SERVICE_PID);
-    	if(!producers.containsKey(producerPid)){
+    	if(!hasProducer(producerPid)){
     		producers.put(producerPid, properties);
     		logger.debug(bundleMarker,"{}: Added producer producerPid={}", 
 								this, producerPid);
@@ -108,6 +110,12 @@ public class GroupConnector {
     			wireParametersSet.add(wireParameters);
     		}
     	}
+	}
+
+
+
+	boolean hasProducer(String producerPid) {
+		return producers.containsKey(producerPid);
 	}
 	
     
