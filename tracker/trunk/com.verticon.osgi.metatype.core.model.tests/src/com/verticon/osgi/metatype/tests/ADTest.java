@@ -6,6 +6,16 @@
  */
 package com.verticon.osgi.metatype.tests;
 
+import static org.osgi.service.metatype.AttributeDefinition.BOOLEAN;
+import static org.osgi.service.metatype.AttributeDefinition.BYTE;
+import static org.osgi.service.metatype.AttributeDefinition.CHARACTER;
+import static org.osgi.service.metatype.AttributeDefinition.DOUBLE;
+import static org.osgi.service.metatype.AttributeDefinition.FLOAT;
+import static org.osgi.service.metatype.AttributeDefinition.INTEGER;
+import static org.osgi.service.metatype.AttributeDefinition.LONG;
+import static org.osgi.service.metatype.AttributeDefinition.SHORT;
+import static org.osgi.service.metatype.AttributeDefinition.STRING;
+
 import java.util.Arrays;
 
 import junit.framework.TestCase;
@@ -13,11 +23,8 @@ import junit.textui.TestRunner;
 
 import com.verticon.osgi.metatype.AD;
 import com.verticon.osgi.metatype.MetatypeFactory;
-import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.osgi.metatype.Option;
 import com.verticon.osgi.metatype.Scalar;
-
-import static org.osgi.service.metatype.AttributeDefinition.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -414,7 +421,7 @@ public class ADTest extends TestCase {
 		//Cardinality is still set to 0
 		fixture.setDefault("Value1,Value2");
 		assertEquals(1,fixture.getDefaultValue().length);
-		assertEquals(Arrays.toString(new String[]{"Value1"}), 
+		assertEquals(Arrays.toString(new String[]{"Value1,Value2"}), 
 				Arrays.toString(fixture.getDefaultValue()));
 	
 		//Cardinality is 2

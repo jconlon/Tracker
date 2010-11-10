@@ -9,7 +9,6 @@ package com.verticon.osgi.metatype.tests;
 import junit.framework.TestCase;
 
 import org.osgi.service.metatype.AttributeDefinition;
-import org.osgi.service.metatype.ObjectClassDefinition;
 
 /**
  * <!-- begin-user-doc -->
