@@ -21,11 +21,24 @@ import java.text.SimpleDateFormat;
  */
 public class TrackerConstants {
 
-	public final static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	public final static DateFormat DAY_FORMAT = new SimpleDateFormat("MMMM d, yyyy");
+	
+	
 	private TrackerConstants() {
 	} // Prevents Instantiation
 
+	
+	public static final String DAY_FORMAT_PATTERN = "MMMM d, yyyy";
+	public static final String DATE_FORMAT_PATTERN = "yyyy-MM-dd HH:mm:ss";
+	/**
+	 * @deprecated not thread safe
+	 */
+	public final static DateFormat DATE_FORMAT = new SimpleDateFormat(DATE_FORMAT_PATTERN);
+	
+	/**
+	 * @deprecated not thread safe
+	 */
+	public final static DateFormat DAY_FORMAT = new SimpleDateFormat(DAY_FORMAT_PATTERN);
+	
 	//Properties and Event creation
 	public static final String EVENT_ADMIN_PROPERTY_EVENT_TYPE = "com.verticon.tracker.event.type";
 	public static final String EVENT_ADMIN_PROPERTY_EVENT_COMMENTS = "com.verticon.tracker.event.comments";
