@@ -125,14 +125,14 @@ public class OCDTest extends TestCase {
 		icon.setResource("http://www.verticon.com/a_LLSunset.jpg");
 		
 		fixture.setIcon(icon);
-		Exception ex;
+		
 		InputStream is = null;
 		try {
 			is = fixture.getIcon(5);
 			assertNotNull(is);
 		
 		} catch (IOException e) {
-			ex=e;
+			
 		}finally{
 			if(is!=null){
 				is.close();
