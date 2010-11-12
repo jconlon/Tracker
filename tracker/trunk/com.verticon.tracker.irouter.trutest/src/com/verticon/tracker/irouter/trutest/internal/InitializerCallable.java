@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.verticon.tracker.irouter.trutest.internal;
 
+import static com.google.common.collect.Lists.newLinkedList;
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
 import static com.verticon.tracker.irouter.trutest.internal.Component.bundleMarker;
@@ -26,14 +27,11 @@ import static com.verticon.tracker.irouter.trutest.internal.Constants.UPLOAD_REC
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.ConnectException;
 import java.net.NoRouteToHostException;
 import java.net.UnknownHostException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
@@ -43,6 +41,8 @@ import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 import com.verticon.tracker.irouter.common.Utils;
 
 public class InitializerCallable implements Callable<Void> {
@@ -111,10 +111,10 @@ public class InitializerCallable implements Callable<Void> {
 
 		// Do any downloads before the uploads. 
 		// All exceptions encountered in the download are caught and logged.
-		download();
+		download(fileToDownload);
 
 		// Do any uploads last
-		upload();
+		upload(fileToUpload);
 		
 		//Initialized completed.  Set gate on the indicator informing other components to start,
 		//and this will not run again. 
@@ -127,136 +127,27 @@ public class InitializerCallable implements Callable<Void> {
 		return null;
 	}
 
-   void upload(){
-	    indicator.setUpLoadedRecords(0);
-		if (!fileToUpload.exists()) {
+
+	/**
+	 * Uploads the records of a file to the indicator.
+	 * @param from
+	 * @throws IOException
+	 * @throws InterruptedException
+	 */
+	private void upload(File from) throws IOException, InterruptedException{
+		indicator.setUpLoadedRecords(0);
+		if (!from.exists()) {
 			log.info(bundleMarker,"{} deferred uploading. File: {} does not exist.", this,
-					fileToUpload);
-		} else {
-			log.info(bundleMarker,"{} uploading: {} with pattern {}", new Object[]{this, fileToUpload, this.uploadRegEx});
-			BufferedReader fileReader = null;
-			try {
-				fileReader = new BufferedReader(new FileReader(
-						fileToUpload));
-				int records = uploadFile(fileReader);
-				indicator.setUpLoadedRecords(records);
-				log.info(bundleMarker,"{} uploaded: {} records to {}", new Object[]{this, records, fileToUpload});
-			} catch (Exception e) {
-				log.error(bundleMarker,this + " failed to upload: " + fileToUpload, e);
-			} finally {
-				try {
-					fileReader.close();
-				} catch (IOException e) {
-					log.error(bundleMarker,this + " failed to close the filReader for file: " + fileToUpload, e);
-				}
-			}
-		}
-	}
-
-	private void download() {
-		indicator.setDownLoadedRecords(0);
-		BufferedWriter fileWriter = null;
-		try {
-		    fileWriter = new BufferedWriter(new FileWriter(
-					fileToDownload));
-			log.info(bundleMarker,"{} downloading: {} with pattern {}", new Object[]{this, fileToDownload, downloadPattern});
-			int records = downloadFile(fileWriter);
-			indicator.setDownLoadedRecords(records);
-			log.info(bundleMarker,"{} downloaded: {} records to {}", new Object[]{this, records, fileToDownload});
-		} catch (Exception e) {
-			log.error(bundleMarker,this + " failed to download: " + fileToDownload, e);
-		} finally {
-			try {
-				if(fileWriter!=null){
-					fileWriter.close();
-				}
-			} catch (IOException e) {
-				log.error(this + " failed to close the fileWriter for file: " + fileToDownload, e);
-			}
-		}
-	}
-
-	/**
-	 * Down load the indicator records to the file.
-	 * 
-	 * @return number of down loaded records
-	 * @throws Exception
-	 */
-	private int downloadFile(BufferedWriter fileWriter) throws Exception {
-		int downloadedRecords = 0;
+					from);
+			return;
+		} 
 		
-		/*
-		 * Get each record. An empty response means there are no
-		 * more records.
-		 */
-		List<String> commandsQueue = new LinkedList<String>();
-		commandsQueue.add(TURN_ON_CRLF);
-		commandsQueue.add(TURN_ON_ACK);
-//		commandsQueue.add(TURN_ON_ERROR_CODES);
-		commandsQueue.add(SELECT_LIFE_DATA_PAGE);
-		commandsQueue.add(RESET_TO_FIRST_RECORD);
+		List<String> records =  Files.readLines(from, Charsets.UTF_8);
+		log.info(bundleMarker,"{} uploading {} records from {} with pattern {}", 
+				new Object[]{this, records.size(), from, this.uploadRegEx});
 
-		Matcher matcher = downloadPattern.matcher("");
-		while (!Thread.currentThread().isInterrupted()) {
-			TimeUnit.MILLISECONDS.sleep(100);
-			String command = null;
-			if(!commandsQueue.isEmpty()){
-				command = commandsQueue.remove(0);
-				indicatorWriter.write(command);
-				indicatorWriter.flush();
-				log.debug(bundleMarker,"{} download request {} ", this, command);
-			}
-
-			String indicatorRecord = indicatorReader.readLine();
-			if (indicatorRecord.startsWith("[]")) {
-				log.debug(bundleMarker,"{} no more download data",this);
-				break;
-			} else if (indicatorRecord.startsWith("[")) {
-				log.debug(bundleMarker,"{} download record {}",this, indicatorRecord);
-				String fileRecord = normalize(matcher, indicatorRecord);
-				if (fileRecord != null) {
-					fileWriter.write(fileRecord + "\r\n");
-					fileWriter.flush();
-					downloadedRecords++;
-				} else {
-					log.error(bundleMarker,
-							"{} download record <{}> failed to match the download pattern.", this, indicatorRecord);
-				}
-			} else {
-				log.debug(bundleMarker,"{} download response <{}>",this, indicatorRecord);
-			}
-
-			if(commandsQueue.isEmpty()){
-				commandsQueue.add(GET_NEXT_RECORD);
-			}
-
-		}
-		return downloadedRecords;
-	}
-
-	/**
-	 * Remove brackets, and record index from indicatorRecord
-	 * @param indicatorRecord in the form of: [7,900014000554939,444,0.01,1]
-	 * @return cleanup record
-	 */
-	public static String normalize(Matcher matcher, String indicatorRecord) {
-		matcher.reset(indicatorRecord.trim());
-		if (matcher.matches()) {
-			return matcher.group(1);
-		}
-		return null;
-	}
-
-	/**
-	 * Up load the file to the indicator.
-	 * @param fileReader
-	 * @return number of uploaded records
-	 * @throws Exception
-	 */
-	private int uploadFile(BufferedReader fileReader) throws Exception {
-
-	    int uploadedRecords=0;
-	    int fileRecordNumber=0;
+		int uploadedRecords=0;
+		int fileRecordNumber=0;
 		/*
 		 * 
 		 * 1. Optionally, turn acknowledgements on with {ZA1}. 2. Optionally,
@@ -287,7 +178,7 @@ public class InitializerCallable implements Callable<Void> {
 		/*
 		 * 6. Optionally, use {FC} to clear the file if necessary.
 		 */
-	
+
 
 		/*
 		 * 
@@ -303,11 +194,11 @@ public class InitializerCallable implements Callable<Void> {
 		 * 9. Use {FI...} to specify which fields are to be uploaded. {FH}
 		 * [F1AEID] {FH} [F2ATAG] {FH} [F3NBW Mult] {FH} [F4OSPECIES] {FH} []
 		 */
-	    
-		List<String> commandsQueue = new LinkedList<String>();
+
+		List<String> commandsQueue = newLinkedList();
 		commandsQueue.add(TURN_ON_CRLF);
 		commandsQueue.add(TURN_ON_ACK);
-//		commandsQueue.add(TURN_ON_ERROR_CODES);
+		//			commandsQueue.add(TURN_ON_ERROR_CODES);
 		commandsQueue.add(SELECT_LIFE_DATA_PAGE);
 		commandsQueue.add(CLEAR_FILE);
 		commandsQueue.add(fileHeaderList);
@@ -326,14 +217,10 @@ public class InitializerCallable implements Callable<Void> {
 		//		
 		// commandQueue.put(records);
 
-		/*
-		 * 9. Use {FN} to get each record. An empty response means there are no
-		 * more records.
-		 */
-		while (!Thread.currentThread().isInterrupted()) {
+		for (String record : records) {
 			TimeUnit.MILLISECONDS.sleep(100);
 			String command = null;
-			if(!commandsQueue.isEmpty()){
+			while(!commandsQueue.isEmpty()){
 				command = commandsQueue.remove(0);
 				indicatorWriter.write(command);
 				indicatorWriter.flush();
@@ -342,27 +229,97 @@ public class InitializerCallable implements Callable<Void> {
 				log.debug(bundleMarker,"{} upload response {}",this, response);
 
 			}
-			
-			if(commandsQueue.isEmpty()){
-				String fileRecord = fileReader.readLine();
-				fileRecordNumber++;
-				String indicatorRecordCommand = createIndicatorRecordCommand(fileRecord,fileRecordNumber);
-				if(indicatorRecordCommand != null && indicatorRecordCommand.equals("BAD")){
-					log.warn("{} upload record <{}> from file at line number {} failed to match pattern {}",
-							new Object[]{this, fileRecord, fileRecordNumber, uploadRegEx});  
-				}else if (indicatorRecordCommand != null) {
-					log.debug(bundleMarker, "{} upload record number {} as command {}",
-							new Object[] {this, fileRecordNumber, indicatorRecordCommand});
-					commandsQueue.add(indicatorRecordCommand);
-					uploadedRecords++;
-				} else {
-					break;
-				}
-			}
+
+			fileRecordNumber++;
+			String indicatorRecordCommand = createIndicatorRecordCommand(record,fileRecordNumber);
+			if(indicatorRecordCommand != null && indicatorRecordCommand.equals("BAD")){
+				log.warn("{} upload record <{}> from file at line number {} failed to match pattern {}",
+						new Object[]{this, record, fileRecordNumber, uploadRegEx});  
+			}else if (indicatorRecordCommand != null) {
+				log.debug(bundleMarker, "{} upload record number {} as command {}",
+						new Object[] {this, fileRecordNumber, indicatorRecordCommand});
+				commandsQueue.add(indicatorRecordCommand);
+				uploadedRecords++;
+			} 
 		}
 
-		return uploadedRecords;
+		indicator.setUpLoadedRecords(uploadedRecords);
+		log.info(bundleMarker,"{} uploaded: {} records to {}", new Object[]{this, uploadedRecords, fileToUpload});
 	}
+	
+	private void download(File to) throws IOException, InterruptedException {
+		indicator.setDownLoadedRecords(0);
+		int downloadedRecords = 0;
+		/*
+		 * Get each record. An empty response means there are no
+		 * more records.
+		 */
+		List<String> commandsQueue = newLinkedList();
+		commandsQueue.add(TURN_ON_CRLF);
+		commandsQueue.add(TURN_ON_ACK);
+//		commandsQueue.add(TURN_ON_ERROR_CODES);
+		commandsQueue.add(SELECT_LIFE_DATA_PAGE);
+		commandsQueue.add(RESET_TO_FIRST_RECORD);
+
+		Matcher matcher = downloadPattern.matcher("");
+		while (!Thread.currentThread().isInterrupted()) {
+			TimeUnit.MILLISECONDS.sleep(100);
+			String command = null;
+			if(!commandsQueue.isEmpty()){
+				command = commandsQueue.remove(0);
+				indicatorWriter.write(command);
+				indicatorWriter.flush();
+				log.debug(bundleMarker,"{} download request {} ", this, command);
+			}
+
+			String indicatorRecord = indicatorReader.readLine();
+			if (indicatorRecord.startsWith("[]")) {
+				log.debug(bundleMarker,"{} no more download data",this);
+				break;
+			} else if (indicatorRecord.startsWith("[")) {
+				log.debug(bundleMarker,"{} download record {}",this, indicatorRecord);
+				String fileRecord = normalize(matcher, indicatorRecord);
+				if (fileRecord != null) {
+					if(downloadedRecords==0){
+						Files.write(fileRecord + "\r\n", to, Charsets.UTF_8);
+					}else{
+						Files.append(fileRecord + "\r\n", to, Charsets.UTF_8);
+					}
+					downloadedRecords++;
+				} else {
+					log.error(bundleMarker,
+							"{} download record <{}> failed to match the download pattern.", this, indicatorRecord);
+				}
+			} else {
+				log.debug(bundleMarker,"{} download response <{}>",this, indicatorRecord);
+			}
+
+			if(commandsQueue.isEmpty()){
+				commandsQueue.add(GET_NEXT_RECORD);
+			}
+
+		}
+		indicator.setDownLoadedRecords(downloadedRecords);
+		log.info(bundleMarker,"{} downloaded: {} records to {}", new Object[]{this, downloadedRecords, to});
+		
+	}
+
+	
+
+	/**
+	 * Remove brackets, and record index from indicatorRecord
+	 * @param indicatorRecord in the form of: [7,900014000554939,444,0.01,1]
+	 * @return cleanup record
+	 */
+	public static String normalize(Matcher matcher, String indicatorRecord) {
+		matcher.reset(indicatorRecord.trim());
+		if (matcher.matches()) {
+			return matcher.group(1);
+		}
+		return null;
+	}
+
+	
 
 	/**
 	 * 
