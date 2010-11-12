@@ -169,6 +169,7 @@ public class TruTestSystemTest extends TestCase {
 		Properties props = new Properties();
 		props.put(TrackerConstants.CONNECTION_URI, "socket://localhost:2344");
 		props.put(TrackerConstants.TRACKER_WIRE_GROUP_NAME, "test");
+		props.put("producer.scope.eid", "animal.tag.number");
 		String dataDirectory = PropertyManager.getProperty(
 				DATA_SYNCHRONIZATION_DIRECTORY, "/tmp");
 		props.put(DATA_SYNCHRONIZATION_DIRECTORY, dataDirectory);
