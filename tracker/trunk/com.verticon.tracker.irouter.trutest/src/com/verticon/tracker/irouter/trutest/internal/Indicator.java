@@ -538,9 +538,6 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 		if (o == null) {
 			o = DEFAULTS.get(key);
 		}
-		if (o == null) {
-			throw new IllegalArgumentException("Unknown key=" + key);
-		}
 		return o;
 	}
 
