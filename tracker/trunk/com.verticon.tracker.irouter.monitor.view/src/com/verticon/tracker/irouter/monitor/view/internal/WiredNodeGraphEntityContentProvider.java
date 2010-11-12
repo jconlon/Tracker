@@ -10,15 +10,20 @@
  *******************************************************************************/
 package com.verticon.tracker.irouter.monitor.view.internal;
 
+import static com.google.common.base.Objects.equal;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Predicates.instanceOf;
+import static com.google.common.collect.Collections2.filter;
+import static com.google.common.collect.Collections2.transform;
 import static com.verticon.tracker.irouter.monitor.view.internal.Component.bundleMarker;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_PID;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_PRODUCER_PID;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.databinding.observable.set.ISetChangeListener;
@@ -40,6 +45,11 @@ import org.osgi.service.wireadmin.WireAdminEvent;
 import org.osgi.service.wireadmin.WireAdminListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Sets;
 
 public class WiredNodeGraphEntityContentProvider implements
 		IGraphEntityContentProvider, WireAdminListener, ISetChangeListener,INestedContentProvider  {
@@ -86,7 +96,7 @@ public class WiredNodeGraphEntityContentProvider implements
 	@Override
 	public Object[] getElements(Object inputElement) {
 		if (model != null) {
-			return  (Object[]) model.toArray(new Object[0]);
+			return  model.toArray(new Object[0]);
 		}
 
 		return null;
@@ -112,9 +122,9 @@ public class WiredNodeGraphEntityContentProvider implements
 		if(entity instanceof ConsumerWiredNode){
 			//Consumers can only connect to external nodes
 			String consumerPid = ((ConsumerWiredNode) entity).getPid();
-			List<IExternalNode> connectedNodes = getConnectedExternalNodes( consumerPid);
+			Collection<IExternalNode> connectedNodes = getConnectedExternalNodes( consumerPid);
 			if (!connectedNodes.isEmpty()) {
-				return (INode[]) connectedNodes.toArray(new INode[0]);
+				return connectedNodes.toArray(new INode[0]);
 			}
 		}
 		if (entity instanceof ComponentServices){
@@ -141,7 +151,7 @@ public class WiredNodeGraphEntityContentProvider implements
 		if(producerPid==null){
 			return new INode[]{};
 		}
-		Set<INode> connectedNodes = new HashSet<INode>();
+		Set<INode> connectedNodes = Sets.newHashSet();
 		Wire[] wires = Component.INSTANCE.getWires();
 		if(wires==null || wires.length==0){	
 			logger.debug(bundleMarker,
@@ -168,7 +178,7 @@ public class WiredNodeGraphEntityContentProvider implements
 		}
 		connectedNodes.addAll(getConnectedExternalNodes( producerPid));
 		if (!connectedNodes.isEmpty()) {
-			return (INode[]) connectedNodes.toArray(new INode[0]);
+			return connectedNodes.toArray(new INode[0]);
 		}
 		return  new INode[]{};
 	}
@@ -197,6 +207,8 @@ public class WiredNodeGraphEntityContentProvider implements
 	}
 
 	private INode findConsumer(String pid) {
+		checkArgument(pid!=null,"must not be null");
+		checkState(model!=null, "model cannot be null");
 		for (INode node : model) {
 			if ((node.getPid().equals(pid))) {
 				return node;
@@ -207,7 +219,7 @@ public class WiredNodeGraphEntityContentProvider implements
 	
 	
 	
-	private List<IExternalNode> getConnectedExternalNodes(String connectedFromPid){
+	private Collection<IExternalNode> getConnectedExternalNodes(String connectedFromPid){
 		MonitorAdmin monitorAdmin = Component.INSTANCE.getMonitorAdmin();
 		if(connectedFromPid==null || monitorAdmin==null ){
 			return Collections.emptyList();
@@ -231,20 +243,47 @@ public class WiredNodeGraphEntityContentProvider implements
 		return findExternalNodes(connectionURI);
 	}
 	
-	private List<IExternalNode> findExternalNodes(String connectionURI){
-		List<IExternalNode> externalNodes = new ArrayList<IExternalNode>();
-		for (INode node : model) {
-			
-			if (node instanceof IExternalNode) {
-				IExternalNode externalNode = (IExternalNode) node;
-				if(externalNode.getConnectionURI()!=null && externalNode.getConnectionURI().equals(connectionURI)){
-					externalNodes.add(externalNode);
-				}
-			}
-		}
-		return externalNodes;
-		
+	/**
+	 * Uses google collections, predicates, and functions
+	 * @param connectionURI
+	 * @return
+	 */
+	private Collection<IExternalNode> findExternalNodes(String connectionURI){
+		//Get all the IExternalNodes from the model of INodes
+		Collection<IExternalNode> iexternalNodes = transform(
+				filter(model, instanceOf(IExternalNode.class)),//collection of IExternalNodes 
+				castToExternaNodeFunction//Transform the iNodes with a cast
+		);
+		//Get the ones matching the connectionURI
+		return Collections2.filter(
+				iexternalNodes, 
+				new ConnectionURIPredicate(connectionURI));
 	}
+	
+	/**
+	 * Google function to do a cast from INode to IExternalNode
+	 */
+	private static final Function<INode, IExternalNode> castToExternaNodeFunction = new Function<INode, IExternalNode>(){
+		@Override
+		public IExternalNode apply(INode from) {
+			return (IExternalNode) from;
+		}};
+	
+	/**
+	 * Predicate to find the connectionURI
+	 * @author jconlon
+	 *
+	 */
+	private static class ConnectionURIPredicate implements Predicate<IExternalNode> {
+        private final String connectionURI;
+        
+        private ConnectionURIPredicate(final String connectionURI) {
+        	this.connectionURI = checkNotNull(connectionURI);
+        }
+        public boolean apply(final IExternalNode s) {
+            return equal(connectionURI, s.getConnectionURI());//Use a google equal which will handle nulls
+        }
+    }
 
 	@Override
 	public void wireAdminEvent(WireAdminEvent event) {
