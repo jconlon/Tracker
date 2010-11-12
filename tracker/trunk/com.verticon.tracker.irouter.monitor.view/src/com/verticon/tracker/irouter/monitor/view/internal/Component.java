@@ -52,7 +52,7 @@ public class Component implements WireAdminListener {
 	private Set<INode> model;
 	private WireAdminListener listener;
 	private WireAdmin wireAdmin;
-	private MonitorAdmin monitorAdmin;// THis is failing to start
+	private MonitorAdmin monitorAdmin;
 	
 	private ExecutorService exec = Executors.newSingleThreadExecutor();
 
