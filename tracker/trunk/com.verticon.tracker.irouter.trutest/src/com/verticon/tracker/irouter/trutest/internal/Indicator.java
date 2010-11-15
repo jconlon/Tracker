@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.verticon.tracker.irouter.trutest.internal;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI_DEFAULT;
 import static com.verticon.tracker.irouter.common.TrackerConstants.POLL_DELAY;
@@ -101,6 +102,8 @@ import com.verticon.tracker.irouter.common.TaskMonitoringService;
  *
  */
 public class Indicator implements ICallableFactory, IIndicator, Monitorable{
+
+	private static final String NAME_OF_ANIMAL_LIFE_DATA_UP_LOAD_FILE = "animalLifeDataUpLoad.txt";
 
 	public final static Dictionary<String, Object> DEFAULTS;
 	
@@ -412,7 +415,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 			list.add(new EnvelopeProducerCallable(this, envelopeProducer, startGate));
 			list.add(new CommandConsumerCallable(this, commandQueue, startGate));
 		}else{
-			list.add(new InitializerCallable(this));
+			list.add(new InitializerCallable(this, bundleContext));
 		}
 		
 		return list;
@@ -573,23 +576,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 		}
 	}
 
-//	/*
-//	 * (non-Javadoc)
-//	 * @see com.verticon.tracker.irouter.trutest.internal.IIndicator#getEndGate()
-//	 */
-//	@Override
-//	public CountDownLatch getEndGate() {
-//		return endGate;
-//	}
-//
-//	/*
-//	 * (non-Javadoc)
-//	 * @see com.verticon.tracker.irouter.trutest.internal.IIndicator#getStartGate()
-//	 */
-//	@Override
-//	public CountDownLatch getStartGate() {
-//		return startGate;
-//	}
+
 
 	@Override
 	public File getDownload() {
@@ -599,13 +586,27 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 
 	@Override
 	public File getUpload() {
-		return new File(getSynchronizationDirectory(), "animalLifeDataUpLoad.txt");
+		return new File(getSynchronizationDirectory(), NAME_OF_ANIMAL_LIFE_DATA_UP_LOAD_FILE);
 	}
 
 
+	/**
+	 * 
+	 * @return a valid directory specified in the configuration or the user home directory. 
+	 */
     File getSynchronizationDirectory(){
-		String syncDir = getConfigurationString(DATA_SYNC_DIRECTORY);
-		return new File(syncDir);
+    	String syncDir = getConfigurationString(DATA_SYNC_DIRECTORY);
+    	File dir = null;
+    	if(isNullOrEmpty(syncDir)){
+    		dir = new File(System.getProperty("user.home"));
+    	}else{
+    		dir =  new File(syncDir);
+    		if(!dir.exists() || dir.isFile()){
+    			log.warn(bundleMarker,"{}: Invalid data sync directory {}, using your home directory instead.", new Object[] {this,dir});
+    			dir = new File(System.getProperty("user.home"));
+    		}
+    	}
+		return dir;
 	}
 	
 	public synchronized void  initialized() {
