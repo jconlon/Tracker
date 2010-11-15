@@ -1,7 +1,7 @@
 package com.verticon.tracker.irouter.wireadmin.test.system.internal;
 
 import java.util.Dictionary;
-import java.util.Properties;
+import java.util.Hashtable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -138,11 +138,8 @@ public class WireAdminSystemTest extends TestCase {
 	}
 	
 	
-	@SuppressWarnings("unchecked")
 	public void testCreatingSecondProducer()throws InterruptedException{
-
-		@SuppressWarnings("rawtypes")
-		Dictionary properties = new Properties();
+		Dictionary<String, Object> properties = new Hashtable<String, Object>();
 		properties.put("tracker.wiring.group.name", "test");
 		properties.put("wireadmin.producer.scope", new String[]{"mock.string"});
 		properties.put("service.pid", "wireadmin.mockProducer");
@@ -189,13 +186,76 @@ public class WireAdminSystemTest extends TestCase {
 		assertNotNull(sr);
 		
 		TimeUnit.SECONDS.sleep(1);
-		//FIXME Ticket#646
+		
 		//There should NOT be a second wire connected. 
 		//Because the newly re-registered Producer no longer has a scope that matches the consumer. 
 		assertEquals("Should be connected to only 1 producer",1,consumer.wires.length);
 
 	}
 	
+	/**
+	 * When a Consumer service that has a connected Producer is stopped and restarted with a 
+	 * different scope, the previous Producer with an incompatible scope is incorrectly connected.
+	 * 
+	 * See Ticket#651
+	 * @throws InterruptedException 
+	 */
+	public void testReconnectingConsumer() throws InterruptedException{
+		
+		//Create a Consumer
+		Dictionary<String, Object> consumerProperties = new Hashtable<String, Object>();
+		consumerProperties.put("tracker.wiring.group.name", "test2");
+		consumerProperties.put("wireadmin.consumer.scope", new String[]{"scope1"});
+		consumerProperties.put("service.pid", "wireadmin.mockConsumer1");
+		MockConsumer consumer = new MockConsumer();
+		ServiceRegistration consumerServiceReg = context.registerService(
+				Consumer.class.getName(), 
+				consumer, 
+				consumerProperties);
+		assertNotNull(consumerServiceReg);
+		consumer.setUpConnectionLatch(1);
+		
+		
+		//Create a Producer
+		Dictionary<String, Object>  properties = new Hashtable<String, Object>();
+		properties.put("tracker.wiring.group.name", "test2");
+		properties.put("wireadmin.producer.scope", new String[]{"scope1"});
+		properties.put("service.pid", "wireadmin.mockProducer1");
+		MockProducer producer = new MockProducer();
+		ServiceRegistration sr = context.registerService(
+				Producer.class.getName(), 
+				producer, 
+				properties);
+		assertNotNull(sr);
+		
+		//Wait at latch
+		boolean connected = consumer.connectionLatch.await(2, TimeUnit.SECONDS);
+		assertTrue(connected);
+		
+		//Shutdown the Consumer
+		producer.setUpDisconnectionLatch(1);
+		consumerServiceReg.unregister();
+		//Wait at latch
+		boolean disconnected = producer.disconnectionLatch.await(2, TimeUnit.SECONDS);
+		assertTrue("Should have disconnected", disconnected);
+		
+		//Change the scope and re-register the consumer
+		consumer.setUpConnectionLatch(1);
+		consumerProperties.put("wireadmin.consumer.scope", new String[]{"scopeXXX"});
+		consumerServiceReg = context.registerService(
+				Consumer.class.getName(), 
+				consumer, 
+				consumerProperties);
+		assertNotNull(consumerServiceReg);
+		
+		//Wait at latch
+		//But the scopes are not compatible so there should be no connection and this should time out
+	    connected = consumer.connectionLatch.await(2, TimeUnit.SECONDS);
+		assertFalse(connected);
+		
+		//The consumer should have no wires connected
+		assertNull(consumer.wires);
+		
+	}
 	
-
 }

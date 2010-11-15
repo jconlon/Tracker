@@ -5,10 +5,12 @@ import static com.verticon.tracker.irouter.wireadmin.test.system.internal.WireAd
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import org.osgi.service.wireadmin.Consumer;
 import org.osgi.service.wireadmin.Envelope;
 import org.osgi.service.wireadmin.Wire;
+import org.osgi.service.wireadmin.WireConstants;
 import org.osgi.util.measurement.Measurement;
 import org.osgi.util.measurement.State;
 import org.slf4j.Logger;
@@ -34,6 +36,17 @@ public class MockConsumer implements Consumer {
 	List<String> strings = new ArrayList<String>();
 	
     Wire[] wires = null;
+
+    CountDownLatch connectionLatch = null;
+   
+    
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "MockConsumer [wires=" + Arrays.toString(wires) + "]";
+	}
 
 	@Override
 	public void updated(Wire wire, Object value) {
@@ -67,9 +80,26 @@ public class MockConsumer implements Consumer {
 
 	@Override
 	public void producersConnected(Wire[] wires) {
-		logger.info(bundleMarker, "{} producers connected", 
-				Arrays.toString(wires));
 		this.wires=wires;
+		if(this.wires==null){
+			logger.info(bundleMarker, "{} disconnected",
+					this);
+			return;
+		}else{
+			if(connectionLatch!=null){
+				connectionLatch.countDown();
+			}
+		}
+		for (Wire wire : wires) {
+			logger.info(bundleMarker, "{} connected to {}",
+					this, wire.getProperties().get(WireConstants.WIREADMIN_PRODUCER_PID));
+		}
+
+		
 	}
 
+	void setUpConnectionLatch(int count){
+		connectionLatch = new CountDownLatch(count);
+	}
+	
 }
