@@ -17,4 +17,6 @@ Import-Package: com.verticon.tracker.irouter.common,
  org.osgi.service.wireadmin;version="1.0.0",
  org.osgi.util.measurement;version="1.0.1",
  org.slf4j;version="1.5.11"
-Service-Component: OSGI-INF/test.xml,OSGI-INF/consumer.xml,OSGI-INF/producer.xml
+Service-Component: OSGI-INF/*.xml
+Require-Bundle: org.eclipse.osgi,
+ org.junit

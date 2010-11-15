@@ -3,12 +3,12 @@ package com.verticon.tracker.irouter.trutest.test.system.internal;
 import static com.verticon.tracker.irouter.trutest.test.system.internal.TruTestSystemTest.bundleMarker;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.osgi.service.wireadmin.Consumer;
 import org.osgi.service.wireadmin.Envelope;
 import org.osgi.service.wireadmin.Wire;
+import org.osgi.service.wireadmin.WireConstants;
 import org.osgi.util.measurement.Measurement;
 import org.osgi.util.measurement.State;
 import org.slf4j.Logger;
@@ -76,9 +76,15 @@ public class MockConsumer implements Consumer {
 
 	@Override
 	public void producersConnected(Wire[] wires) {
-		logger.info(bundleMarker, "{} {} producers connected", this,
-				Arrays.toString(wires));
 		this.wires=wires;
+		if(wires==null || wires.length==0){
+			logger.info(bundleMarker, "{} disconnected from all producers",this);
+			return;
+		}
+		for (Wire wire : wires) {
+			logger.info(bundleMarker, "{} connected to producer={}",
+					this,wire.getProperties().get(WireConstants.WIREADMIN_PRODUCER_PID));
+		}
 	}
 
 }

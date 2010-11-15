@@ -10,6 +10,9 @@
  *******************************************************************************/
 package com.verticon.tracker.irouter.trutest.internal;
 
+import static com.google.common.base.Predicates.instanceOf;
+import static com.google.common.collect.Collections2.filter;
+import static com.google.common.collect.Collections2.transform;
 import static com.google.common.collect.Lists.newLinkedList;
 import static com.verticon.tracker.irouter.common.TrackerConstants.CONNECTION_URI;
 import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
@@ -18,11 +21,17 @@ import static com.verticon.tracker.irouter.trutest.internal.Constants.CLEAR_FILE
 import static com.verticon.tracker.irouter.trutest.internal.Constants.DOWNLOAD_RECORD_PATTERN;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.FILE_HEADER_COMMAND;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.GET_NEXT_RECORD;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.INITIALIZATION_CONSUMER_SCOPE;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.INITIALIZATION_CONSUMER_TIMEOUT;
+import static com.verticon.tracker.irouter.trutest.internal.Constants.NODE_LABEL;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.RESET_TO_FIRST_RECORD;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.SELECT_LIFE_DATA_PAGE;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.TURN_ON_ACK;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.TURN_ON_CRLF;
 import static com.verticon.tracker.irouter.trutest.internal.Constants.UPLOAD_RECORD_PATTERN;
+import static org.osgi.framework.Constants.SERVICE_PID;
+import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_FLAVORS;
+import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_SCOPE;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -32,20 +41,37 @@ import java.io.Writer;
 import java.net.ConnectException;
 import java.net.NoRouteToHostException;
 import java.net.UnknownHostException;
+import java.util.Collection;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
+import org.osgi.service.wireadmin.Consumer;
+import org.osgi.service.wireadmin.Wire;
+import org.osgi.service.wireadmin.WireConstants;
+import org.osgi.util.measurement.State;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 import com.google.common.io.Files;
 import com.verticon.tracker.irouter.common.Utils;
 
-public class InitializerCallable implements Callable<Void> {
+/**
+ * Initializes the TruTest Proxy by downloading animal life data
+ * to the a specified data 
+ * @author jconlon
+ *
+ */
+public class InitializerCallable implements Callable<Void>, Consumer{
 
 
 	/**
@@ -71,14 +97,18 @@ public class InitializerCallable implements Callable<Void> {
 	private String uri = null;
 	private final String pid;
 	private final String wiregroup;
-	
+	private final BundleContext bundleContext;
+	private ServiceRegistration serviceRegistration = null;
+	private CountDownLatch importUploadIsReady = new CountDownLatch(1);
+	private ImmutableList<String> importedRecordsForUpload = null;
+	private String recordImportedFromPid = null;
 	
 
 	/**
 	 * 
 	 * @param indicator
 	 */
-	public InitializerCallable(IIndicator indicator) {
+	public InitializerCallable(IIndicator indicator, BundleContext bundleContext) {
 		super();
 		this.fileToUpload = indicator.getUpload();
 		this.fileToDownload = indicator.getDownload();
@@ -90,6 +120,7 @@ public class InitializerCallable implements Callable<Void> {
 		pid=indicator.getPid();
 		wiregroup=indicator.getConfigurationString(TRACKER_WIRE_GROUP_NAME);
 		uri = indicator.getConfigurationString(CONNECTION_URI);
+		this.bundleContext=bundleContext;
 	}
 
 	/**
@@ -108,21 +139,58 @@ public class InitializerCallable implements Callable<Void> {
 		initializeConnection();
 //		log.debug("{} : starting with download pattern = {} uploadpattern = {}", new Object[]{this, indicator.getConfigurationString(DOWNLOAD_RECORD_PATTERN), indicator.getConfigurationString(UPLOAD_RECORD_PATTERN)});
 		
+		if(bundleContext !=null && indicator.getConfigurationString(INITIALIZATION_CONSUMER_SCOPE) !=null){
+		  register(bundleContext, new String[]{indicator.getConfigurationString(INITIALIZATION_CONSUMER_SCOPE)});
+		  log.info(bundleMarker, "{} register Consumer service",
+					this);
+		}else{
+			//Configured as standalone, open the latch so there is no waiting
+			importUploadIsReady.countDown();
+		}
+		
 
-		// Do any downloads before the uploads. 
+		// Do download before the uploads. 
 		// All exceptions encountered in the download are caught and logged.
-		download(fileToDownload);
+		try {
+			download(fileToDownload);
+		} catch (Exception e) {
+			log.error(bundleMarker,this+" failed download.", e);
+		}
+		
+		
+		//wait for an import file to be ready
+		boolean importUploadWasReady = importUploadIsReady.await(
+				indicator.getConfigurationInteger(INITIALIZATION_CONSUMER_TIMEOUT)!=null?
+						indicator.getConfigurationInteger(INITIALIZATION_CONSUMER_TIMEOUT):5, 
+				TimeUnit.SECONDS);
+		
+		if(importUploadWasReady){
+			log.info(bundleMarker, "{} import to upload was ready",
+					this);
+		}else{
+			log.warn(bundleMarker, "{} import to upload was NOT ready",
+					this);
+		}
+		//unregister consumer
+		if(serviceRegistration !=null){
+			serviceRegistration.unregister();
+			log.debug(bundleMarker, "{} unregister Consumer service",
+					this);
+		}
 
-		// Do any uploads last
-		upload(fileToUpload);
+		//Producer could either have sent a notification as a State indicating that the 
+		if(importedRecordsForUpload!=null){
+			//list of commands were sent. upload these
+			upload(importedRecordsForUpload, recordImportedFromPid);
+		}else{
+			//upload the file, if it exists from the data sync directory
+			upload(fileToUpload);
+		}
 		
 		//Initialized completed.  Set gate on the indicator informing other components to start,
 		//and this will not run again. 
 		indicator.initialized();
-		
-//		indicator.getStartGate().countDown();
-//		log.debug("{} : Waiting to terminate.", this);
-//		indicator.getEndGate().await();
+
 		log.debug(bundleMarker,"{} terminated.", this);
 		return null;
 	}
@@ -143,6 +211,11 @@ public class InitializerCallable implements Callable<Void> {
 		} 
 		
 		List<String> records =  Files.readLines(from, Charsets.UTF_8);
+		upload(records, from.toString());
+	}
+
+	private void upload(List<String> records, String from) throws InterruptedException,
+			IOException {
 		log.info(bundleMarker,"{} uploading {} records from {} with pattern {}", 
 				new Object[]{this, records.size(), from, this.uploadRegEx});
 
@@ -233,8 +306,8 @@ public class InitializerCallable implements Callable<Void> {
 			fileRecordNumber++;
 			String indicatorRecordCommand = createIndicatorRecordCommand(record,fileRecordNumber);
 			if(indicatorRecordCommand != null && indicatorRecordCommand.equals("BAD")){
-				log.warn("{} upload record <{}> from file at line number {} failed to match pattern {}",
-						new Object[]{this, record, fileRecordNumber, uploadRegEx});  
+				log.warn("{} upload record <{}> from {} at line number {} failed to match pattern {}",
+						new Object[]{this, record, from, fileRecordNumber, uploadRegEx});  
 			}else if (indicatorRecordCommand != null) {
 				log.debug(bundleMarker, "{} upload record number {} as command {}",
 						new Object[] {this, fileRecordNumber, indicatorRecordCommand});
@@ -244,7 +317,7 @@ public class InitializerCallable implements Callable<Void> {
 		}
 
 		indicator.setUpLoadedRecords(uploadedRecords);
-		log.info(bundleMarker,"{} uploaded: {} records to {}", new Object[]{this, uploadedRecords, fileToUpload});
+		log.info(bundleMarker,"{} uploaded: {} records from {}", new Object[]{this, uploadedRecords, from});
 	}
 	
 	private void download(File to) throws IOException, InterruptedException {
@@ -365,6 +438,71 @@ public class InitializerCallable implements Callable<Void> {
 					new Object[] { this, uri, e.getMessage() });
 			throw e;
 		}
+	}
+	
+	
+	/**
+	 * Register as an OSGi consumer service to listen for a Producer send an 
+	 * State indicating a file is ready or a Producer sending a list of commands
+	 * to upload.
+	 * @param bc
+	 * @throws InterruptedException
+	 */
+	private void register(BundleContext bc, String[] scope) throws InterruptedException {
+		Hashtable<String, Object> regProps = new Hashtable<String, Object>();
+		regProps.put(SERVICE_PID, indicator.getPid());
+		regProps.put(WIREADMIN_CONSUMER_FLAVORS,
+				new Class[] { State.class, List.class });
+		regProps.put(TRACKER_WIRE_GROUP_NAME, indicator
+				.getConfigurationString(TRACKER_WIRE_GROUP_NAME));
+		regProps.put(CONNECTION_URI, indicator
+				.getConfigurationString(CONNECTION_URI));
+		regProps.put(NODE_LABEL, "TruTest Initializer");
+		
+		regProps.put(WIREADMIN_CONSUMER_SCOPE,scope);
+		serviceRegistration = bc.registerService(Consumer.class.getName(),
+				this, regProps);
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void updated(Wire wire, Object value) {
+		if(value instanceof State){
+			log.info(bundleMarker, "{} received value={}, upload in datasync directory ",
+					this,value);
+		}else if(value instanceof List){
+			log.info(bundleMarker, "{} received list of records to upload",
+					this);	
+			Collection<String> records = transform(
+					filter((List<Object>)value, instanceOf(String.class)),//collection of IExternalNodes 
+					new Function<Object, String>(){
+						@Override
+						public String apply(Object input) {
+							return (String) input;
+						}}
+			);
+			recordImportedFromPid = (String)wire.getProperties().get(WireConstants.WIREADMIN_PRODUCER_PID);
+			
+			importedRecordsForUpload=ImmutableList.copyOf(records);
+		}
+		
+		importUploadIsReady.countDown();
+	}
+	
+	
+
+	@Override
+	public void producersConnected(Wire[] wires) {
+		if(wires==null || wires.length==0){
+			log.info(bundleMarker, "{} disconnected from all producers",this);
+			return;
+		}
+		for (Wire wire : wires) {
+			log.info(bundleMarker, "{} connected to producer={}",
+					this,wire.getProperties().get(WireConstants.WIREADMIN_PRODUCER_PID));
+		}
+		
 	}
 
 }

@@ -126,7 +126,7 @@ public class EnvelopeProducerCallableTest{
 		
 	}
 
-	class MockIndicator extends Indicator {
+	static class MockIndicator extends Indicator {
 		static final String PRODUCER_SCOPE_ANIMAL_EID ="producer.scope.eid";
 		Map<String, Object> mockConfig = new HashMap<String,Object>(); 
 		@Override
@@ -135,7 +135,6 @@ public class EnvelopeProducerCallableTest{
 		}
 
 		final String uri;
-		MockConnectorService connectorService = null;// new MockConnectorService();
 
 		public MockIndicator(String uri, ExecutorService exec,
 				ScheduledExecutorService scheduler)
@@ -152,27 +151,14 @@ public class EnvelopeProducerCallableTest{
 		
 		@Override
 		protected ConnectorService getConnectorService() throws IOException {
-			return connectorService;
+			return null;
 		}
 
 		protected Object getConfiguration(String key) {
 			Object result = mockConfig.get(key);
 			return result!=null?result:DEFAULTS.get(key);
 		}
-//
-//		@Override
-//		public BufferedReader getReader() throws IOException {
-//			String uri = (String) getConfiguration(CONNECTION_URI);
-//			log.debug(this + ": Opening connection");
-//			ConnectorService cs = getConnectorService();
-//
-//			StreamConnection connection = (StreamConnection) cs.open(uri,
-//					ConnectorService.READ_WRITE, true);
-//
-//			return new BufferedReader(new InputStreamReader(connection
-//					.openInputStream()));
-//
-//		}
+
 
 		public void setBundleContext(BundleContext bundleContext) {
 		}
