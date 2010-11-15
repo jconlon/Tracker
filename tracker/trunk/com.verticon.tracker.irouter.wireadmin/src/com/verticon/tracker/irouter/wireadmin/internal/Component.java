@@ -63,7 +63,7 @@ public class Component implements WireAdminListener, IWireCreator {
 	 */
 	private WireAdmin wireAdmin;
 
-	private List<WireParameters> wiresToBeCreated = new ArrayList<WireParameters>();
+	private List<WireParameters> wireParametersToBeHandled = new ArrayList<WireParameters>();
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -78,7 +78,7 @@ public class Component implements WireAdminListener, IWireCreator {
 	 */
 	public void deactivate(){
 		groupConnectors.clear();
-		wiresToBeCreated.clear();
+		wireParametersToBeHandled.clear();
 	}
 	
 	
@@ -87,17 +87,17 @@ public class Component implements WireAdminListener, IWireCreator {
 	 * it will delete it first.
 	 * 
 	 * @param wireParameters
-	 * @see com.verticon.tracker.irouter.wireadmin.internal.IWireCreator#createWire(com.verticon.tracker.irouter.wireadmin.internal.WireParameters)
+	 * @see com.verticon.tracker.irouter.wireadmin.internal.IWireCreator#handleWire(com.verticon.tracker.irouter.wireadmin.internal.WireParameters)
 	 */
 	@Override
-	public boolean createWire(WireParameters wireParameters) {
-		synchronized(wiresToBeCreated){
+	public boolean handleWire(WireParameters wireParameters) {
+		synchronized(wireParametersToBeHandled){
 			if(wireAdmin==null){
 				logger.warn(bundleMarker,
 						"No wireAdmin Service found, so could not create wire with {}",
 						wireParameters);
 
-				wiresToBeCreated.add(wireParameters);
+				wireParametersToBeHandled.add(wireParameters);
 
 				return false;
 			}
@@ -123,20 +123,31 @@ public class Component implements WireAdminListener, IWireCreator {
 			return false;
 		}
 		if(wires == null || wires.length==0){
-			logger.debug(bundleMarker,
-					"Create a new wire for {}",wireParameters);
-					
-			wireAdmin.createWire(wireParameters.getProducerPid(), wireParameters
+			if(wireParameters.isDelete()){
+				return false;
+			}else{
+				logger.debug(bundleMarker,
+						"Create a new wire for {}",wireParameters);
+				wireAdmin.createWire(wireParameters.getProducerPid(), wireParameters
 					.getConsumerPid(), wireParameters.getProperties());
-			return true;
+				return true;
+			}
 
 		}else{
-			logger.debug(bundleMarker,
-					"{} wires already exist. Deleting all existing wires, before creating one.",
-					wires.length);
+			
 			deleteWires(wires, wireAdmin);
-			wireAdmin.createWire(wireParameters.getProducerPid(), wireParameters
-					.getConsumerPid(), wireParameters.getProperties());		
+			if(wireParameters.isDelete()){
+				logger.debug(bundleMarker,
+						"Deleting {} existing wires.",
+						wires.length);
+				return false;
+			}else{
+				logger.debug(bundleMarker,
+						"Deleted {} existing wires, before creating a new one.",
+						wires.length);
+				 wireAdmin.createWire(wireParameters.getProducerPid(), wireParameters
+							.getConsumerPid(), wireParameters.getProperties());	
+			}
 		}
 		
 		return true;
@@ -167,10 +178,6 @@ public class Component implements WireAdminListener, IWireCreator {
 			wireAdmin.deleteWire(wire);
 		}
 	}
-	
-	
-	
-	
 
 	/**
 	 * Just Logs wire events.
@@ -260,7 +267,7 @@ public class Component implements WireAdminListener, IWireCreator {
 			groupConnectors.put(group, new GroupConnector(group, this));
 		}
 		String producerPid = (String)properties.get(SERVICE_PID);
-		if(! groupConnectors.get(group).hasProducer(producerPid)){
+		if(! groupConnectors.get(group).isProducerRegistered(producerPid)){
 			deleteAllWires(producerPid);
 		}
 		groupConnectors.get(group).setProducer(properties);
@@ -285,13 +292,13 @@ public class Component implements WireAdminListener, IWireCreator {
 	 * @since 0.2.0
 	 */
 	public void setWireAdmin(WireAdmin wireAdmin) {
-		synchronized(wiresToBeCreated){
+		synchronized(wireParametersToBeHandled){
 			logger.debug(bundleMarker, "wireAdmin set");
 			this.wireAdmin = wireAdmin;
-			for (WireParameters wireParameters : wiresToBeCreated) {
-				createWire( wireParameters);
+			for (WireParameters wireParameters : wireParametersToBeHandled) {
+				handleWire( wireParameters);
 			}
-			wiresToBeCreated.clear();
+			wireParametersToBeHandled.clear();
 		}
 		
 	}
@@ -302,7 +309,7 @@ public class Component implements WireAdminListener, IWireCreator {
 
 
 	private void deleteAllWires(String producerPid) {
-		createWire(new WireParameters(producerPid, null, null));
+		handleWire(new WireParameters(producerPid, null, null));
 	}
 
 }

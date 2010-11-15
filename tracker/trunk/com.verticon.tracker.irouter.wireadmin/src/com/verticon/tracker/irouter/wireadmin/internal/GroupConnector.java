@@ -33,7 +33,7 @@ public class GroupConnector {
 	private final String group;
 	private final IWireCreator wireCreator;
 	
-	private final Set<WireParameters> wireParametersSet = new HashSet<WireParameters>();
+	private final Set<WireParameters> registeredWireParameters = new HashSet<WireParameters>();
 	/*
 	 * maps of producers and consumers indexed by PID
 	 */
@@ -75,7 +75,7 @@ public class GroupConnector {
 	 */
 	 void setProducer(Map<String, ?> properties){
 		String producerPid = (String)properties.get(SERVICE_PID);
-    	if(!hasProducer(producerPid)){
+    	if(!isProducerRegistered(producerPid)){
     		producers.put(producerPid, properties);
     		logger.debug(bundleMarker,"{}: Added producer producerPid={}", 
 								this, producerPid);
@@ -87,47 +87,39 @@ public class GroupConnector {
     		//Does a wire already connect to this consumer
     		String consumerPid = 
     			(String) consumerEntry.getValue().get(SERVICE_PID);
-    		if(wireParametersExist(producerPid, consumerPid)){
-    			continue; //check other producers
-    		}
+    		
     		String[] wireScope = scopeIntersection(producerScope, 
     				(String[]) consumerEntry.getValue().get(WIREADMIN_CONSUMER_SCOPE));
+    		
+    		WireParameters wireParameters = new WireParameters(producerPid, consumerPid, group);
     		if(wireScope.length==0){
-    			continue;
+    			if(registeredWireParameters.contains(wireParameters)){
+    				wireParameters.setDelete(true);
+        		}else{
+        			continue;
+        		}
     		}
-    		Hashtable<String, Object> regProps = new Hashtable<String, Object>();
-    		regProps.put(TRACKER_WIRE_GROUP_NAME,group);
     		logger.debug(bundleMarker,
-    			"{}: Creating wireParameters for Producer producerPid={}, consumerPid={}, calculatedScope={}", 
+    			"{}: Handling wireParameters for Producer producerPid={}, consumerPid={}, calculatedScope={}", 
 								new Object[]{this, 
 								producerPid,
 								consumerPid, 
 								Arrays.toString(wireScope)});
     		
-    		WireParameters wireParameters = new WireParameters(producerPid, consumerPid, regProps);
     		
-    		if(wireCreator.createWire(wireParameters)){
-    			wireParametersSet.add(wireParameters);
+    		
+    		if(wireCreator.handleWire(wireParameters)){
+    			registeredWireParameters.add(wireParameters);
     		}
     	}
 	}
 
 
 
-	boolean hasProducer(String producerPid) {
+	boolean isProducerRegistered(String producerPid) {
 		return producers.containsKey(producerPid);
 	}
 	
-    
-	private boolean wireParametersExist(String producerPid, String consumerPid){
-		for (WireParameters wire : wireParametersSet) {
-			if(wire.getProducerPid().equals(producerPid)&&
-			   wire.getConsumerPid().equals(consumerPid)){
-				return true;
-			}
-		}
-		return false;
-	}
 
 	/**
 	 * A consumer may have an array of WireConstants.WIREADMIN_CONSUMER_SCOPE which
@@ -154,26 +146,30 @@ public class GroupConnector {
     		//Does a wire already connect to this producer
     		String producerPid = 
     			(String) producerEntry.getValue().get(SERVICE_PID);
-    		if(wireParametersExist(producerPid, consumerPid)){
-    			continue; //check other producers
-    		}
+    		WireParameters wireParameters = new WireParameters(producerPid, consumerPid, group);
+    		
+    		
     		String[] wireScope = scopeIntersection(consumerScope, 
     				(String[]) producerEntry.getValue().get(WIREADMIN_PRODUCER_SCOPE));
+    		
     		if(wireScope.length==0){
-    			continue;
+    			if(registeredWireParameters.contains(wireParameters)){
+    				wireParameters.setDelete(true);
+        		}else{
+        			continue;
+        		}
     		}
-    		Hashtable<String, Object> regProps = new Hashtable<String, Object>();
-    		regProps.put(TRACKER_WIRE_GROUP_NAME,group);
-    		logger.debug(bundleMarker,"{}: Creating wireParameters for Consumer producerPid={}, consumerPid={}, calculatedScope={}", 
+    		
+    		logger.debug(bundleMarker,"{}: Handling wireParameters for Consumer producerPid={}, consumerPid={}, calculatedScope={}", 
 								new Object[]{this, 
 								producerPid,
 								consumerPid, 
 								Arrays.toString(wireScope)});
     		
-    		WireParameters wireParameters = new WireParameters(producerPid, consumerPid, regProps);
     		
-    		if(wireCreator.createWire(wireParameters)){
-    			wireParametersSet.add(wireParameters);
+    		
+    		if(wireCreator.handleWire(wireParameters)){
+    			registeredWireParameters.add(wireParameters);
     		}
     		
     	}
