@@ -4,4 +4,5 @@
    <reference bind="setListener" cardinality="1..1" interface="com.verticon.tracker.irouter.dev.IDeviceListener" name="IListener" policy="static" target="(service.pid=trutest.dev.fake)"/>
    <reference bind="setConsumer" cardinality="1..1" interface="org.osgi.service.wireadmin.Consumer" name="Consumer" policy="static" target="(service.pid=trutest.mockConsumer)"/>
    <reference bind="setProducer" cardinality="1..1" interface="org.osgi.service.wireadmin.Producer" name="Producer" policy="static" target="(service.pid=trutest.mockProducer)"/>
+   <reference bind="setDataSyncProducer" cardinality="1..1" interface="org.osgi.service.wireadmin.Producer" name="DataSyncProducer" policy="static" target="(service.pid=trutest.mockDataSyncProducer)"/>
 </scr:component>

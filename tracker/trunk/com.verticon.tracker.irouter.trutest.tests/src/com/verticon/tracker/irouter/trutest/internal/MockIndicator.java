@@ -61,7 +61,6 @@ class MockIndicator extends
 		/**
 		 * 
 		 */
-//		private final IndicatorTest indicatorTest;
 		final String uri;
 		final MockConnectorService connectorService = new MockConnectorService();
 		final StreamConnection sharedConnection ;
@@ -79,8 +78,6 @@ class MockIndicator extends
 				BlockingQueue<String[]> commandQueue ) throws ConfigurationException, IOException {
 			super("test", exec, scheduler,commandQueue);
 			this.envelopeSender = new EnvelopeSender();
-//			this.indicatorTest = indicatorTest;
-//			this.connectorService = connectorService;
 			this.uri = uri;
 			this.sharedConnection = (StreamConnection) connectorService.open(uri,
 					ConnectorService.READ_WRITE, true);
@@ -129,7 +126,7 @@ class MockIndicator extends
 				list.add(new EnvelopeProducerCallable(this, envelopeSender, startGate));
 				list.add(new CommandConsumerCallable(this, commandQueue, startGate));
 			}else{
-				list.add(new InitializerCallable(this));
+				list.add(new InitializerCallable(this, null));
 			}
 			
 			
@@ -186,7 +183,7 @@ class MockIndicator extends
 			return new File(syncDir);
 		}
 		
-		class EnvelopeSender implements IEnvelopeSender{
+		static class EnvelopeSender implements IEnvelopeSender{
 			List<Envelope> envelopes = new ArrayList<Envelope>();
 			
 			@Override

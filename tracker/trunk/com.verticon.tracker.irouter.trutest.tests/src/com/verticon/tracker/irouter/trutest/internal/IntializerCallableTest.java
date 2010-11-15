@@ -67,7 +67,7 @@ public class IntializerCallableTest {
 	@Before
 	public void setUp() throws Exception {
 		indicator = new MockIndicator();
-		initializerCallable = new InitializerCallable(indicator);
+		initializerCallable = new InitializerCallable(indicator, null);
 		commandQueue = new LinkedBlockingQueue<String[]>();
 
 	}
@@ -164,7 +164,7 @@ public class IntializerCallableTest {
 		assertTrue(record.matches(matcher));
 
 		indicator.regex = matcher;
-		initializerCallable = new InitializerCallable(indicator);
+		initializerCallable = new InitializerCallable(indicator, null);
 		//
 		// Pattern pattern= Pattern.compile(alternate);
 		// Matcher matcher = pattern.matcher("");
@@ -190,13 +190,12 @@ public class IntializerCallableTest {
 
 	}
 
-	class MockIndicator implements IIndicator {
+	static class MockIndicator implements IIndicator {
 
 		String regex = Constants.UPLOAD_RECORD_PATTERN_DEFAULT;
 
 		@Override
 		public Boolean getConfigurationBoolean(String key) {
-
 			return null;
 		}
 
@@ -232,11 +231,6 @@ public class IntializerCallableTest {
 			return null;
 		}
 
-		// @Override
-		// public CountDownLatch getEndGate() {
-		// return null;
-		// }
-
 		@Override
 		public String getPid() {
 			return null;
@@ -251,16 +245,6 @@ public class IntializerCallableTest {
 		public ScheduledExecutorService getScheduler() {
 			return null;
 		}
-
-		// @Override
-		// public CountDownLatch getStartGate() {
-		// return null;
-		// }
-
-		// @Override
-		// public File getSynchronizationDirectory() {
-		// return null;
-		// }
 
 		@Override
 		public File getUpload() {
@@ -294,32 +278,27 @@ public class IntializerCallableTest {
 
 		@Override
 		public void initialized() {
-			// TODO Auto-generated method stub
-
+			
 		}
 
 		@Override
 		public void registerMonitorable() {
-			// TODO Auto-generated method stub
-
+			
 		}
 
 		@Override
 		public void unregisterMonitorable() {
-			// TODO Auto-generated method stub
-
+			
 		}
 
 		@Override
 		public void setUpLoadedRecords(int upLoadedRecords) {
-			// TODO Auto-generated method stub
-
+			
 		}
 
 		@Override
 		public void setDownLoadedRecords(int downLoadedRecords) {
-			// TODO Auto-generated method stub
-
+			
 		}
 
 		@Override

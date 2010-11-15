@@ -78,5 +78,8 @@ public class Constants {
     static final String PRODUCER_STATE_ENTER_KEY_NAME="producer.enter.press.state";
     static final String NODE_LABEL = "tracker.monitor.label";
 	static final String NODE_LABEL_DEFAULT = "TruTest Proxy";
+	
+	static final String INITIALIZATION_CONSUMER_TIMEOUT = "data.synchronization.timeout.seconds";
+	static final String INITIALIZATION_CONSUMER_SCOPE = "data.synchronization.scope";
 
 }

@@ -17,6 +17,7 @@ import org.osgi.service.monitor.StatusVariable;
 import org.osgi.service.wireadmin.Consumer;
 import org.osgi.service.wireadmin.Producer;
 import org.osgi.util.measurement.Measurement;
+import org.osgi.util.measurement.State;
 import org.osgi.util.measurement.Unit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,6 +66,8 @@ public class TruTestSystemTest extends TestCase {
 	private static final String PRODUCERS_CONNECTED_TO_CONSUMER = "consumer.Connected_Producers";
 
 	private static final String DATA_SYNCHRONIZATION_DIRECTORY = "data.synchronization.directory";
+	private static final String INITIALIZATION_CONSUMER_TIMEOUT = "data.synchronization.timeout.seconds";
+	private static final String INITIALIZATION_CONSUMER_SCOPE = "data.synchronization.scope";
 
 	protected static String PLUGIN_ID = "com.verticon.tracker.irouter.trutest.test.system";
 
@@ -94,6 +97,7 @@ public class TruTestSystemTest extends TestCase {
 	private static final CountDownLatch startUpGate = new CountDownLatch(1);
 	private static MockConsumer consumer;
 	private static MockProducer producer;
+	private static MockProducer dataSyncProducer;
 
 	public void setListener(IDeviceListener value) {
 		logger.debug(bundleMarker, "DS injecting the Fake Indicator");
@@ -108,6 +112,11 @@ public class TruTestSystemTest extends TestCase {
 	public void setProducer(Producer value) {
 		logger.debug(bundleMarker, "DS injecting the MockProducer");
 		TruTestSystemTest.producer = (MockProducer) value;
+	}
+				
+	public void setDataSyncProducer(Producer value){
+		logger.debug(bundleMarker, "DS injecting the MockProducer");
+		TruTestSystemTest.dataSyncProducer = (MockProducer) value;
 	}
 
 	/**
@@ -170,6 +179,10 @@ public class TruTestSystemTest extends TestCase {
 		props.put(TrackerConstants.CONNECTION_URI, "socket://localhost:2344");
 		props.put(TrackerConstants.TRACKER_WIRE_GROUP_NAME, "test");
 		props.put("producer.scope.eid", "animal.tag.number");
+		props.put(INITIALIZATION_CONSUMER_TIMEOUT, "5");
+		props.put(INITIALIZATION_CONSUMER_SCOPE, "trutest.upload.ready");
+		
+		
 		String dataDirectory = PropertyManager.getProperty(
 				DATA_SYNCHRONIZATION_DIRECTORY, "/tmp");
 		props.put(DATA_SYNCHRONIZATION_DIRECTORY, dataDirectory);
@@ -180,12 +193,14 @@ public class TruTestSystemTest extends TestCase {
 		// Updated should create an instance and connect it to the fake
 		// indicator
 		TimeUnit.SECONDS.sleep(2);
+		assertNotNull(dataSyncProducer.wires);
+		dataSyncProducer.send(new State(1,"FIRE"));
 
 		// Get the monitorable service
 		refs = context.getServiceReferences(Monitorable.class.getName(),
 				"(service.pid=someNewPid)");
 		assertNotNull("No Indicator Monitorable service found", refs);
-		assertEquals("Too many Monitorable services found", 1, refs.length);
+		assertEquals("Should only be one Monitorable service found", 1, refs.length);
 		ServiceReference monRef = refs[0];
 		Monitorable monitorable = (Monitorable) context.getService(monRef);
 
@@ -215,7 +230,7 @@ public class TruTestSystemTest extends TestCase {
 
 		// Check the number of connected producers
 		sv = monitorable.getStatusVariable(PRODUCERS_CONNECTED_TO_CONSUMER);
-		assertEquals("Should be one producer connected to the indicator", 1,
+		assertEquals("Should be only one producer connected to the indicator", 1,
 				sv.getInteger());
 
 		assertTrue(listener instanceof ITruTestIndicator);
@@ -244,7 +259,7 @@ public class TruTestSystemTest extends TestCase {
 		assertEquals(
 				"The MockConsumer should have received 1 Messurements from the Producer",
 				1, consumer.measurements.size());
-		assertEquals(new Measurement(WEIGHT, new Double(0.01), Unit.kg),
+		assertEquals(new Measurement(WEIGHT, 0.01d, Unit.kg),
 				consumer.measurements.get(0));
 		sv = monitorable.getStatusVariable(LAST_WEIGHT);
 		assertEquals("Should be Weight just sent", new Float(WEIGHT),

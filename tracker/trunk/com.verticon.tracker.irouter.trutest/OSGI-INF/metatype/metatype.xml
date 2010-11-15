@@ -75,6 +75,18 @@
 		required="false"
 		default="" 
     	description="Directory to use for uploading and downloading animal life data records."/>
+    	
+    <AD name="Data Synchronization timeout" id="data.synchronization.timeout.seconds" 
+		type="Integer"
+		required="false"
+		default="5" 
+    	description="Time to wait for an animal life data file to be created by an other component so it can be uploaded."/>
+ 
+    <AD name="Initial Consumer Scope for Data Synchronization" id="data.synchronization.scope" 
+		type="String"
+		required="false"
+		default="trutest.upload.ready"
+    	description="Consumer scope used in intialization for indication that a data file is ready for uploading."/>
  
     <AD name="Consumer Scope for Commands" id="consumer.scope.commands" 
     	type="String"
