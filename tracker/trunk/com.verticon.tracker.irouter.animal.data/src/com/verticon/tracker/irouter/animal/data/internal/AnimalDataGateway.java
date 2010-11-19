@@ -70,11 +70,11 @@ public class AnimalDataGateway implements Producer, Monitorable,
 		Callable<ImmutableList<String>> {
 
 	// Configuration
-	static final String MAPPER = "animal.life.data.mapping";
-	static final String CONNECTION_URI = "connection.uri";
-	static final String SERVICE_PID = "service.pid";
-	static final String REFRESH_SECONDS = "refresh.seconds";
-	static final String FIELDS = "animal.life.data.fields";
+	static final String MAPPER = "animal.life.data.mapping"; //Optional
+	static final String CONNECTION_URI = "connection.uri"; //Required
+	static final String SERVICE_PID = "service.pid"; //Required
+	static final String REFRESH_SECONDS = "refresh.seconds"; //Optional
+	static final String FIELDS = "animal.life.data.fields"; //Optional
 
 	// Status Variables
     static final String CONNECTED_CONSUMERS_COUNT = "producer.Connected_Consumers";
@@ -250,7 +250,7 @@ public class AnimalDataGateway implements Producer, Monitorable,
 			logger.error(bundleMarker, this+ "failed extraction.",e);
 			throw e;
 		}
-		lastUpdateTime = System.currentTimeMillis();
+		
 		return result;
 	}
 
@@ -270,7 +270,7 @@ public class AnimalDataGateway implements Producer, Monitorable,
 			return new StatusVariable(name, StatusVariable.CM_DER, uri);
 		} else if (TIME_OF_LAST_UPDATE.equals(name)) {
 			return new StatusVariable(name, StatusVariable.CM_DER,
-					lastUpdateTime == 0 ? new Date(lastUpdateTime).toString()
+					lastUpdateTime != 0 ? new Date(lastUpdateTime).toString()
 							: "");
 		} else if (TOTAL_RECORDS_SENT.equals(name)) {
 			return new StatusVariable(name, StatusVariable.CM_CC,
@@ -343,6 +343,7 @@ public class AnimalDataGateway implements Producer, Monitorable,
 			for (Wire wire : wires) {
 				wire.update(value);
 			}
+			lastUpdateTime = System.currentTimeMillis();
 		}
 	}
 	private ImmutableList<String> getRecordsSent() {
