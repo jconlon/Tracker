@@ -6,7 +6,7 @@ The iRouter is a running network of OSGi services that move and transform inform
 
 h3. Custom proxy components for external devices
 
-External measurement sensors, user input devices, and actuators are interfaced to the iRouter system with a custom component called a proxy and implemented as a WireAdmin Producer or Consumer service.
+External measurement sensors, user input devices, and actuators are interfaced to the iRouter system with a custom component called a proxy and implemented as a WireAdmin Producer or Consumer service. 
 
 Interfacing to the external device requires that the proxy component:
 # Provide a physical communication interface
