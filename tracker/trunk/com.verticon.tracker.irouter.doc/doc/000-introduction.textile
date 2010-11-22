@@ -2,7 +2,7 @@ h1. Overview
 
 h2. Document Status
 
-__This document is the first draft of an iRouter User Guide and is only intended as an overview to the technologies used in the Tracker iRouter. Future versions will fully serve the intended function of a comprehensive user guide for the installation and configuration of the iRouter.__
+__This document is the second draft of an iRouter User Guide and is only intended as an overview to the technologies used in the Tracker iRouter. Future versions will fully serve the intended function of a comprehensive user guide for the installation and configuration of the iRouter.__
 
 
 h2. Information Modeling and Processing
