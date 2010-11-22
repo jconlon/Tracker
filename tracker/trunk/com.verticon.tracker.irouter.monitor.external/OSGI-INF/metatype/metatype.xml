@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="External Service" id="com.verticon.tracker.irouter.monitor.external"
+       description="An external device or service.">
+   
+    <AD name="Name"  id="external.name" 
+    	required="true" 
+    	type="String" 
+    	default="Unknown Service"
+        description="Name of the external service or physical device."/>
+    
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" 
+    	required="true" 
+    	type="String" 
+    	default="one"
+        description="Name of the group of components that will be wired together."/>
+    
+    <AD name="Location" id="external.location" 
+    	required="true" 
+    	type="String" 
+    	default="Unknown Location"
+		description="Location of the external service or physical device." />
+   	
+    <AD name="Description" id="external.description" 
+    	required="true" 
+    	type="String" 
+    	default="Description of device or service."
+    	description="Description of the external service or physical device."/>
+    	
+    <AD name="Connection URI" id="external.connection.uri" 
+    	required="true" 
+    	type="String" 
+    	default="file:///~/transaction.log"
+    	description="Universal Resouce Identifier for connecting to the physical device or service."/>
+    	
+    <AD name="Type" id="external.service.type" 
+    	type="String" 
+        default="actuator"
+        description="The type of external device or service.">
+    	<Option label="Physical Sensor Device" value="sensor"/>
+		<Option label="Physical Actuator Device" value="actuator"/>
+		<Option label="Gateway Service" value="gateway"/>
+	</AD>
+    	
+  	 <AD name="Component container label"  id="tracker.monitor.label" 
+  	 	 type="String"
+         description="Name to label node in the iRouter Monitor View graphics."
+         default="Log File"/> 
+        
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.monitor.external" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.monitor.external"/>
+  </Designate>
+  
+  
+</metatype:MetaData>
