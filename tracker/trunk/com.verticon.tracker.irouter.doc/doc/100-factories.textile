@@ -1,8 +1,9 @@
 h1. Component Factories
 
-Component Factories are the creators of the service instances that do the actual work within the iRouter and the only types of component deployed to the iRouter.  There are two types of Component Factories:
-# Business Logic Component Factories
-# Proxy Component Factories
+Component Factories are the creators of the service instances that do the actual work within the iRouter and the only types of component deployed to the iRouter.  There are three types of Component Factories:
+# Business Logic 
+# Proxy
+# External
 
 h2. Business Logic Component Factories
 
@@ -62,12 +63,27 @@ h2. Proxy and Gateway Component Factories
 Proxy Component Factories create services that interface with external physical:
 * Input devices, 
 * Sensors, 
-* Displays
+* Displays,
 * Actuators. 
 
 Gateway Component Factories create services that create information gateways between the services running in the iRouter and local services registered in the OSGi framework.
 
 Proxy and Gateway Component Factories are packaged as optional iRouter features. 
+
+h2. External Component Factories
+
+External Component Factories create services that are used to document external physical devices:
+* Input devices, 
+* Sensors, 
+* Displays,
+* Actuators,
+* Gateways 
+
+External Component Factories create services that create annotated nodes in the iRouter monitor view. These nodes document the kind, description and location of the external devices that are connected to Proxies and Gateway services.  
+
+__Note: External Component Factories and the services that are created by them are entirely optional. They serve no functional purpose other than documentation.__
+
+
 
 
 
