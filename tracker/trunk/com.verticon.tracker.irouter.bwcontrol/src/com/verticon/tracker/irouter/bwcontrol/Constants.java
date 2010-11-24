@@ -10,7 +10,6 @@
  *******************************************************************************/
 package com.verticon.tracker.irouter.bwcontrol;
 
-import static com.verticon.tracker.irouter.common.TrackerConstants.*;
 
 public class Constants {
 
@@ -37,12 +36,12 @@ public class Constants {
 	 * Hard coded to listen to Mettler weight measurement producers
 	 */
 	final static String[] CONSUMER_SCOPE = { 
-			TRANSACTION_STATE_SCOPE,
-			"mettler."+WEIGHT_MEASUREMENT_SCOPE, 
-			ANIMAL_WEIGHT_MEASUREMENT_SCOPE };
+			"transaction.state",
+			"mettler.weight", 
+			"animal.weight" };
 	/**
 	 * Hard coded to produce trutest command strings.
 	 */
-    final static String[] PRODUCER_SCOPE = {"trutest."+COMMAND_STRING_SCOPE};
+    final static String[] PRODUCER_SCOPE = {"trutest.commands"};
 
 }
