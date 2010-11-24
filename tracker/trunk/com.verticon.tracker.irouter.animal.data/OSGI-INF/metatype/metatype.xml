@@ -5,8 +5,12 @@
        description="Gateway for producing a list of animal life data records extracted from a specified Premises model. Fields within each record can be ordered, values can be transformed, and static values can be added." 
        >
    
-    <AD name="Wiring group name"  id="tracker.wiring.group.name" required="true" type="String" default=""
+      <AD name="Wiring group name"  id="tracker.wiring.group.name" 
+    	required="true" 
+    	type="String" 
+    	default="one"
         description="Name of the group of components that will be wired together."/>
+    
     
     <AD name="Connection uri" id="connection.uri" 
      	type="String" 

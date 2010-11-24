@@ -326,7 +326,20 @@ public class AnimalDataGateway implements Producer, Monitorable,
 	}
 
 	private int refreshSeconds() {
-		return config != null ? (Integer) config.get(REFRESH_SECONDS) : 60;
+		Object o = config.get(REFRESH_SECONDS);
+		int result = 60;
+		if(o!=null){
+			try {
+				result = Integer.parseInt((String)o);
+			} catch (NumberFormatException e) {
+				logger.warn(bundleMarker,
+						"{} failed to parse refresh seconds value={} to integer. Using default of 60 seconds.", this);
+			}
+		}
+		
+		return result;
+		
+		
 	}
 
 	private boolean shouldRefresh() {
