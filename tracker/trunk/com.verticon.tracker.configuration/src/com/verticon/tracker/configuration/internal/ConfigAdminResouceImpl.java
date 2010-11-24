@@ -10,19 +10,24 @@
  *******************************************************************************/
 package com.verticon.tracker.configuration.internal;
 
+import static com.google.common.collect.Sets.newHashSet;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -45,6 +50,10 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import com.google.common.io.Closeables;
 import com.verticon.osgi.metatype.AD;
 import com.verticon.osgi.metatype.Attribute;
 import com.verticon.osgi.metatype.Designate;
@@ -498,116 +507,83 @@ public class ConfigAdminResouceImpl extends XMLResourceImpl {
 	 * Build metaData model from all the metatype.xml resources found in bundles
 	 * in the framework.
 	 * 
+	 * This uses the google collections and io libraries
+	 * 
 	 * @param options
 	 * @return metaData EObject
 	 * @throws IOException
 	 */
-	@SuppressWarnings("unchecked")
 	private MetaData loadMetaData(Map<?, ?> options) throws IOException {
 		MetaData metaData = MetatypeFactory.eINSTANCE.createMetaData();
-		Bundle bundle = FrameworkUtil.getBundle(ConfigAdminResouceImpl.class);
-		BundleContext bctx = bundle.getBundleContext();
+		BundleContext bctx = FrameworkUtil.getBundle(ConfigAdminResouceImpl.class).getBundleContext();
+		Set<URL> loaded = newHashSet();
 		Copier copier = new Copier();
-		final Bundle[] bundles = bctx.getBundles();
-		for (int i = 0; i < bundles.length; i++) {
-			Enumeration<URL> en;
-			try {
-				en = bundles[i]
-						.getResources("OSGI-INF/metatype/metatype.xml");
-			} catch (Exception e2) {
-				logger.error(bundleMarker, "Failed to load metadata from {}", bundles[i].getSymbolicName());
+		//Get all bundles with metatype resources
+		Collection<Bundle> allBundlesWithMetaData = 
+			Collections2.filter(Arrays.asList(bctx.getBundles()), containsMetatypePredicate);
+		
+		for (Bundle bundle : allBundlesWithMetaData) {
+			URL url = metatypeURLFunction.apply(bundle);
+			if(loaded.contains(url)){
+				logger.debug(bundleMarker, "Previously loaded {} defered loading from {}",
+						url, bundle.getSymbolicName() );
 				continue;
 			}
-			if (en != null) {
+			InputStream is = null;
+			boolean threw = true;
+			try {
+				is = url.openStream();
+				logger.debug(bundleMarker, "Loading {} from {}",
+						url, bundle.getSymbolicName() );
 
-				while (en.hasMoreElements()) {
-					java.net.URI metatypeFileURI;
-					try {
-						metatypeFileURI = en.nextElement().toURI();
-					} catch (URISyntaxException e1) {
-						continue;
-					}
-					assert (contents.isEmpty());
-					InputStream is = null;
-					try {
-						is = metatypeFileURI.toURL().openStream();
-//						logger.debug(bundleMarker, "Loading {} from {}",
-//								bundles[i].getSymbolicName(), metatypeFileURI);
+				super.load(is, options);
 
-						super.load(is, options);
+				if (!contents.isEmpty()
+						&& (contents.get(0) instanceof DocumentRoot)) {
 
-						if (!contents.isEmpty()
-								&& (contents.get(0) instanceof DocumentRoot)) {
-
-//							logger.debug(bundleMarker,
-//									"Loaded metadata from {}", bundles[i]
-//											.getSymbolicName());
-						} else {
-							logger
-									.warn(bundleMarker,
-											"Failed to Load {} content={}",
-											bundles[i].getSymbolicName(),
-											contents.size());
-						}
-
-						DocumentRoot documentRoot = (DocumentRoot) contents
-								.get(0);
-						MetaData md = documentRoot.getMetaData();
-						EList<OCD> ocds = md.getOCD();
-						for (OCD ocd : ocds) {
-							OCD copiedOCD = (OCD) copier.copy(ocd);
-							metaData.getOCD().add(copiedOCD);
-						}
-						EList<Designate> designates = md.getDesignate();
-						for (Designate designate : designates) {
-							Designate copiedDesignate = (Designate) copier
-									.copy(designate);
-							copiedDesignate.setBundle('['+bundles[i].getLocation()+']');
-							metaData.getDesignate().add(copiedDesignate);
-						}
-						copier.copyReferences();
-
-						logger.debug(bundleMarker,
-								"Loaded metadata from {} at location {}", bundles[i], bundles[i].getLocation());
-						
-
-					} catch (Resource.IOWrappedException e) {
-						logger.warn(bundleMarker, "While loading {}",
-								bundles[i].getSymbolicName(), e.getCause());
-					} catch (FileNotFoundException e) {
-						logger.warn(bundleMarker,
-								"No metatype.xml found for {}", bundles[i]
-										.getSymbolicName(), e);
-					} catch (IOException e) {
-						logger.error(bundleMarker, "While Loading {}",
-								bundles[i].getSymbolicName(), e);
-						Notification notification = setLoaded(true);
-						isLoading = true;
-						if (errors != null) {
-							errors.clear();
-						}
-						if (warnings != null) {
-							warnings.clear();
-						}
-						isLoading = false;
-						if (notification != null) {
-							eNotify(notification);
-						}
-						setModified(false);
-
-						throw e;
-					} finally {
-						if (is != null) {
-							is.close();
-						}
-						unload();
-						assert (contents.isEmpty());
-					}
+					//						logger.debug(bundleMarker,
+					//								"Loaded metadata from {}", bundles[i]
+					//										.getSymbolicName());
+				} else {
+					logger
+					.warn(bundleMarker,
+							"Failed to Load {} content={}",
+							bundle.getSymbolicName(),
+							contents.size());
 				}
+
+				DocumentRoot documentRoot = (DocumentRoot) contents
+				.get(0);
+				MetaData md = documentRoot.getMetaData();
+				EList<OCD> ocds = md.getOCD();
+				for (OCD ocd : ocds) {
+					OCD copiedOCD = (OCD) copier.copy(ocd);
+					metaData.getOCD().add(copiedOCD);
+				}
+				EList<Designate> designates = md.getDesignate();
+				for (Designate designate : designates) {
+					Designate copiedDesignate = (Designate) copier
+					.copy(designate);
+					copiedDesignate.setBundle('['+bundle.getLocation()+']');
+					metaData.getDesignate().add(copiedDesignate);
+				}
+				copier.copyReferences();
+
+				logger.debug(bundleMarker,
+						"Loaded metadata from {} at location {}", bundle, bundle.getLocation());
+				loaded.add(url);
+
+				threw = false;
+			} finally {
+				unload();
+				Closeables.close(is, threw);
 			}
 		}
+
+		loaded.clear();
 		return metaData;
 	}
+	
 
     static ConfigurationAdmin findConfigurationAdmin() {
 		ServiceReference reference = getBundleContext().getServiceReference(
@@ -635,4 +611,36 @@ public class ConfigAdminResouceImpl extends XMLResourceImpl {
 		return modelDesignate.getPid() == null
 				|| modelDesignate.getPid().trim().length() < 1;
 	}
+	
+	private  final Predicate<Bundle> containsMetatypePredicate = new Predicate<Bundle>() {
+		@Override
+		public boolean apply(final Bundle bundle) {
+			logger.debug(bundleMarker, "Processing {}",
+					 bundle.getSymbolicName() );
+			boolean result = false;
+			try {
+				result = bundle.getResources("OSGI-INF/metatype/metatype.xml").hasMoreElements();
+
+			} catch (Exception e2) {
+				//ignore
+			}
+			return result;
+		}
+	};
+	
+	private static final Function <Bundle, URL> metatypeURLFunction = new Function<Bundle, URL>(){
+		@Override
+		public URL apply(Bundle bundle) {
+			try {
+				Object o = bundle.getResources("OSGI-INF/metatype/metatype.xml").nextElement();
+				if(o instanceof URL){
+					return ((URL)o);
+				}
+			} catch (Exception e2) {
+				
+			}
+			return null;
+		}
+		
+	};
 }

@@ -5,7 +5,10 @@ Bundle-SymbolicName: com.verticon.tracker.configuration
 Bundle-Version: 0.1.1.qualifier
 Bundle-Vendor: Verticon, Inc.
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: com.verticon.osgi.metatype,
+Import-Package: com.google.common.base,
+ com.google.common.collect,
+ com.google.common.io,
+ com.verticon.osgi.metatype,
  com.verticon.osgi.metatype.impl,
  org.eclipse.emf.common.notify,
  org.eclipse.emf.common.util,
