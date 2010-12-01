@@ -15,7 +15,7 @@ h3. Monitor View
 !images/integrated-usecase.png!
 __iRouter monitor view of an integrated Premises Desktop__
 
-The above is the iRouter monitor view of a configuration that integrates TruTest scale heads and RFID readers with a Tracker Desktop transaction processing environment.  
+The above is the iRouter monitor view of a TruTest scale head integrated with user managed RFID readers within a Tracker Desktop transaction processing environment.  
 
 h3. Configuration
 
@@ -40,16 +40,16 @@ h3. Intention
 # __Send TruTest alarms to the operator when target blood weight is approached.__
 # __Use a headless appliance.__
 
-h3. Annotated Monitor View
+h3. Monitor View
 
-!images/dependencies.png!
-__iRouter annotated monitor view of an integrated multi sensor data logger__
+!images/businessLogic-usecase.png!
+__iRouter monitor view of an integrated multi-sensor data logger__
 
-The above is the annotated view of a configuration of an integrated sensor data logger. 
+The above is the iRouter monitor view of a TruTest scale head integrated with a Mettler laboratory scale and a data logger. 
 
 h3. Configuration
 
-Instead of using multiple generic components for business logic, which is possible even with complex business logic scenarios such as this, this configuration instead uses a single custom business logic component for controlling and transforming the complex information network flows.  
+While it is possible to use multiple generic components for business logic, complex business logic can instead can be encapsulated in a single custom business logic component. This use case depicts using a single business logic component for integrating, controlling and transforming complex information network flows between multiple sensors and a data logger.
 
 The configuration includes:
 
@@ -61,7 +61,7 @@ The configuration includes:
 
 h3. Scenario
 
-Animal weight measurements, identification numbers and record state are sent from the TruTest producer on the TruTest proxy, animal fluid weight measurements are sent from the Mettler balance, the business logic component will do measurement transformation, measurement treshold detection and alarm signaling.  The Measurement Logger consumer service writes to the logging backend.[5] 
+Animal weight measurements, identification numbers and record state are sent from the TruTest producer on the TruTest proxy, animal fluid weight measurements are sent from the Mettler balance, the business logic component will do measurement transformation, measurement threshold detection and alarm signaling.  The Measurement Logger consumer service writes to the logging backend.[5] 
 
 
 h2. Notes
