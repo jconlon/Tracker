@@ -18,11 +18,6 @@ public class TrackerConstants {
 	public static final String RETRY_CONNECTION_DELAY = "connection.retry.seconds";
 	public static final String CONNECTION_URI_DEFAULT = "";
 	
-	//measurement scopes
-	public static final String HEIGHT_MEASUREMENT_SCOPE = "height.measurement";
-	public static final String WEIGHT_MEASUREMENT_SCOPE = "weight.measurement";
-	public static final String ANIMAL_WEIGHT_MEASUREMENT_SCOPE = "animal."+WEIGHT_MEASUREMENT_SCOPE;
-	
 	//State scopes
 	public static final String STATE_SCOPE = "state";
 	public static final String TRANSACTION_STATE_SCOPE = "transaction."+STATE_SCOPE;
