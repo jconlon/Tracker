@@ -13,37 +13,25 @@
  */
 package com.verticon.tracker.irouter.bwcontrol;
 
-import static com.verticon.tracker.irouter.bwcontrol.ComponentFactory.bundleMarker;
-import static com.verticon.tracker.irouter.bwcontrol.Constants.ACT_BW_ID;
-import static com.verticon.tracker.irouter.bwcontrol.Constants.ANIMAL_WEIGHT_MEASUREMENT;
-import static com.verticon.tracker.irouter.bwcontrol.Constants.BEEP_COMMAND;
-import static com.verticon.tracker.irouter.bwcontrol.Constants.BW_ALARM_SECONDS;
-import static com.verticon.tracker.irouter.bwcontrol.Constants.BW_ALARM_TRIGGER;
-import static com.verticon.tracker.irouter.bwcontrol.Constants.BW_MULT;
-import static com.verticon.tracker.irouter.bwcontrol.Constants.CALCULATION_THRESHOLD;
-import static com.verticon.tracker.irouter.bwcontrol.Constants.CAL_BW_ID;
-import static com.verticon.tracker.irouter.bwcontrol.Constants.CONSUMER_SCOPE;
-import static com.verticon.tracker.irouter.bwcontrol.Constants.DISABLE_PRODUCTION_AFTER_RECORD;
-import static com.verticon.tracker.irouter.bwcontrol.Constants.DISPLAY_UNITS;
-import static com.verticon.tracker.irouter.bwcontrol.Constants.DISPLAY_UNITS_GRAMS;
-import static com.verticon.tracker.irouter.bwcontrol.Constants.METTLER_WEIGHT_MEASUREMENT;
-import static com.verticon.tracker.irouter.bwcontrol.Constants.TRANSACTION_STATE;
+import static com.verticon.tracker.irouter.bwcontrol.Component.bundleMarker;
+import static org.osgi.service.wireadmin.WireConstants.*;
 
-import java.util.Arrays;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.osgi.service.monitor.Monitorable;
 import org.osgi.service.monitor.StatusVariable;
+import org.osgi.service.wireadmin.Consumer;
 import org.osgi.service.wireadmin.Envelope;
 import org.osgi.service.wireadmin.Wire;
 import org.osgi.util.measurement.Measurement;
+import org.osgi.util.measurement.State;
 import org.osgi.util.measurement.Unit;
-import org.slf4j.Marker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.verticon.tracker.irouter.common.AbstractConsumer;
-import com.verticon.tracker.irouter.common.IContext;
 import com.verticon.tracker.irouter.common.Utils;
 
 /**
@@ -54,16 +42,39 @@ import com.verticon.tracker.irouter.common.Utils;
  * @author jconlon
  *
  */
-class CompositeConsumer extends AbstractConsumer implements Monitorable{
+class BWConsumer implements Consumer, Monitorable{
 	
-	@Override
-	protected Marker bundleMarker() {
-		return bundleMarker;
-	}
+	private static final String BEEP_COMMAND = "trutest.beepCommand";
+	private static final String BW_MULT = "abbott.bwmult";
+	private static final String BW_ALARM_TRIGGER = "abbott.bwalarm.trigger";
+	private static final String BW_ALARM_SECONDS = "abbott.bwalarm.period";
+	private static final String ACT_BW_ID = "trutest.actbw.field";
+	private static final String CAL_BW_ID = "trutest.calbw.field";
+	private static final String DISPLAY_UNITS = "trutest.field.units";
+	private static final String DISABLE_PRODUCTION_AFTER_RECORD ="abbott.stop.production.after.record";
+	private static final Integer DISPLAY_UNITS_GRAMS = 0;
+	private static final String CALCULATION_THRESHOLD = "abbott.calbw.threashold";
+	
 
+	private static final String ANIMAL_WEIGHT_SCOPE = "animal.weight";
+	private static final String BLOOD_WEIGHT_SCOPE = "blood.weight";
+	
+	
+	
 	private static final String WIRES_COUNT = "consumer.Connected_Producers";
 	private static final String LAST_BLOOD_WEIGHT = "consumer.Last_Blood_Weight";
 	private static final String LAST_ANIMAL_WEIGHT = "consumer.Last_Animal_Weight";
+	
+	
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger log = LoggerFactory
+			.getLogger(BWConsumer.class);
+
+
+	
+	protected final AtomicInteger wiresConnected = new AtomicInteger(0);
 	
 	private final SendBeepCommand pollingTask = new SendBeepCommand();
 	private final String calBWID;
@@ -79,6 +90,8 @@ class CompositeConsumer extends AbstractConsumer implements Monitorable{
 	private Float lastAnimalWeight = new Float(0);
 	private Float lastBloodWeight = new Float(0);
 	
+	private final Component component;
+	
 	private volatile boolean enableProduction = true;
 	
 	private volatile ScheduledFuture<?> beeping = null;
@@ -90,32 +103,33 @@ class CompositeConsumer extends AbstractConsumer implements Monitorable{
 	/**
 	 * @param context
 	 */
-	CompositeConsumer(IContext context, BlockingQueue<String> commandQueue) {
-		super(context);
-		this.commandQueue=commandQueue;
-		calBWID = Utils.fromAscii(context.getConfigurationString(CAL_BW_ID));
-		actBWID = Utils.fromAscii(context.getConfigurationString(ACT_BW_ID));
-		beepCommand = Utils.fromAscii(context.getConfigurationString(BEEP_COMMAND));
-		alarmSeconds = context.getConfigurationLong(BW_ALARM_SECONDS);
-		alarmTrigger = context.getConfigurationDouble(BW_ALARM_TRIGGER);
-		bwMult = context.getConfigurationDouble(BW_MULT).doubleValue();
-		if(context.getConfigurationInteger(DISPLAY_UNITS).equals(DISPLAY_UNITS_GRAMS)){
+	BWConsumer(Component component) {
+		this.component = component;
+		this.commandQueue=component.getCommandQueue();
+		calBWID = Utils.fromAscii(component.getConfigurationString(CAL_BW_ID));
+		actBWID = Utils.fromAscii(component.getConfigurationString(ACT_BW_ID));
+		beepCommand = Utils.fromAscii(component.getConfigurationString(BEEP_COMMAND));
+		alarmSeconds = component.getConfigurationLong(BW_ALARM_SECONDS);
+		alarmTrigger = component.getConfigurationDouble(BW_ALARM_TRIGGER);
+		bwMult = component.getConfigurationDouble(BW_MULT).doubleValue();
+		if(component.getConfigurationInteger(DISPLAY_UNITS).equals(DISPLAY_UNITS_GRAMS)){
 			displayGrams = true;
 		}else{
 			displayGrams = false;
 		}
 		
-		calculationThreashold = context.getConfigurationLong(CALCULATION_THRESHOLD);
-		disableProductionAfterRecord = context.getConfigurationBoolean(DISABLE_PRODUCTION_AFTER_RECORD);
+		calculationThreashold = component.getConfigurationLong(CALCULATION_THRESHOLD);
+		disableProductionAfterRecord = component.getConfigurationBoolean(
+				DISABLE_PRODUCTION_AFTER_RECORD);
 
 	}
 	
 	
 	
+	
 	@Override
 	public String toString() {
-		return "CompositeConsumer [pid=" + context.getPid()+", scope=" + Arrays.toString(getScope())
-				+ "]";
+		return "BWConsumer [pid="+component.getPid() +"]";
 	}
 
 
@@ -125,49 +139,37 @@ class CompositeConsumer extends AbstractConsumer implements Monitorable{
 	 */
 	@Override
 	public void updated(Wire wire, Object in) {
+		
 		if ( in instanceof Envelope ){
 			Envelope envelope = (Envelope) in ;
 			String scope = envelope.getScope();
-			if(scope.equals(CONSUMER_SCOPE[ANIMAL_WEIGHT_MEASUREMENT])){
+			log.debug(bundleMarker,"Handling envelope={} scope={} ",envelope,scope);
+			if(scope.equals(component.getConfigurationString(ANIMAL_WEIGHT_SCOPE))){
 				displayCalcBW(envelope);
-			}else if(scope.equals(CONSUMER_SCOPE[METTLER_WEIGHT_MEASUREMENT])){
-				Measurement bloodWeight = (Measurement)envelope.getValue();
-				lastBloodWeight = new Float(bloodWeight.getValue());
-				if(enableProduction){
-					saveAndDisplayMettlerWeightMeasurement(envelope);
+			}else if(scope.equals(component.getConfigurationString(BLOOD_WEIGHT_SCOPE))){
+				if(envelope.getValue() instanceof Measurement){
+					Measurement bloodWeight = (Measurement)envelope.getValue();
+					lastBloodWeight = new Float(bloodWeight.getValue());
+					if(enableProduction){
+						saveAndDisplayMettlerWeightMeasurement(envelope);
+					}
+				}else{
+					log.error(bundleMarker,"BW envelope value={} scope={}",envelope,scope);
 				}
-			}else if(scope.equals(CONSUMER_SCOPE[TRANSACTION_STATE])){
+			}else if(envelope.getValue() instanceof State){
+				//All other scopes are considered transaction state changes.
+				log.debug(bundleMarker,"Transaction state object={} scope={} as transaction",envelope.getValue(),scope);
 				actBW = null;
 				stopBeeping();
 				if(disableProductionAfterRecord){
 					enableProduction=false;
 				}
-			}else{
-				logUnknownScopeError( wire, envelope );
 			}
 		}else{
-			logError( wire, in );
+			log.error(bundleMarker,"Unsupported object={}",in);
 		}
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see com.verticon.tracker.irouter.bwcontrol.AbstractConsumer#stop()
-	 */
-	@Override
-	public void stop() {
-		stopBeeping();
-		super.stop();
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see com.verticon.tracker.irouter.common.AbstractConsumer#getScope()
-	 */
-	@Override
-	public String[] getScope() {
-		return CONSUMER_SCOPE;
-	}
 	
 	void saveAndDisplayMettlerWeightMeasurement(Envelope envelope){
 		if(envelope.getValue() instanceof Measurement){
@@ -210,7 +212,7 @@ class CompositeConsumer extends AbstractConsumer implements Monitorable{
 	
 	void displayCalcBW(Envelope envelope){
 		if(!(envelope.getValue()instanceof Measurement)){
-			log.error(String.format("%s: Unknown object=%s in envelop",
+			log.error(bundleMarker,String.format("%s: Unknown object=%s in envelop",
 					this,envelope.getValue()));
 			return;
 		}
@@ -219,12 +221,12 @@ class CompositeConsumer extends AbstractConsumer implements Monitorable{
 		
 		if(animalWeight.getValue() < calculationThreashold){
 			calcBW = animalWeight.sub(animalWeight.getValue());
-			log.debug("{}: Zeroed CalBW={}, and Sending Animal Weight={} and bwMult={}",
+			log.debug(bundleMarker,"{}: Zeroed CalBW={}, and Sending Animal Weight={} and bwMult={}",
 					new Object[]{this,calcBW, animalWeight, bwMult});
 			enableProduction=true;
 		}else{
 			calcBW = animalWeight.mul( bwMult);
-				log.debug("{}: Sending CalcBW ={} displayAsGrams={}",
+			log.debug(bundleMarker,"{}: Sending CalcBW ={} displayAsGrams={}",
 						new Object[]{this,calcBW,displayGrams});
 			
 		}
@@ -260,7 +262,7 @@ class CompositeConsumer extends AbstractConsumer implements Monitorable{
 	
 	void stopBeeping() {
 		if(beeping !=null) {
-			log.debug("{}: Stop beeper",this);
+			log.debug(bundleMarker,"{}: Stop beeper",this);
 			beeping.cancel(true);
 			beeping = null;
 		}
@@ -270,8 +272,8 @@ class CompositeConsumer extends AbstractConsumer implements Monitorable{
 		if(beeping !=null){
 			return;
 		}
-		log.debug("{}: Starting beeper", this);
-		beeping = context.getScheduler().scheduleWithFixedDelay(
+		log.debug(bundleMarker,"{}: Starting beeper", this);
+		beeping = component.getScheduler().scheduleWithFixedDelay(
 				pollingTask, 1, alarmSeconds, TimeUnit.SECONDS);
 	}
 	
@@ -347,6 +349,27 @@ class CompositeConsumer extends AbstractConsumer implements Monitorable{
 			return "Last blood weight received from the balance";
 		}
 		return null;
+	}
+
+
+
+	@Override
+	public void producersConnected(Wire[] wires) {
+		wiresConnected.set(wires!=null?wires.length:0);
+		if(wires == null || wires.length==0){
+			log.debug(bundleMarker,"{}: Not connected to any wires.",
+					this
+			);
+		}else{
+			
+			for (Wire wire : wires) {
+				log.debug(bundleMarker,"{}: Connected to {}",
+						this, wire.getProperties().get(WIREADMIN_PRODUCER_PID));
+			
+			}
+			
+			
+		}
 	}
 
 	
