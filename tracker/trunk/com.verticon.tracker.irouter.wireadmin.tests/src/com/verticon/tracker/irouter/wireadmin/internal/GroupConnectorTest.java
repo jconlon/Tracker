@@ -121,7 +121,7 @@ public class GroupConnectorTest {
 	
 	@Test
 	public void testSetProducer() {
-		expect(wireCreator.createWire(isA(WireParameters.class))).andReturn(true);
+		expect(wireCreator.handleWire(isA(WireParameters.class))).andReturn(true);
 		replay(wireCreator);
 
 		//First add a consumer
@@ -141,7 +141,7 @@ public class GroupConnectorTest {
 	
 	@Test
 	public void testSetConsumer() {
-		expect(wireCreator.createWire(isA(WireParameters.class))).andReturn(true);
+		expect(wireCreator.handleWire(isA(WireParameters.class))).andReturn(true);
 		replay(wireCreator);
 		//First add a producer
 		instance.setProducer(propertiesProducer1);
