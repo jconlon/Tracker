@@ -10,34 +10,23 @@
  *******************************************************************************/
 package com.verticon.tracker.irouter.bwcontrol;
 
-import static com.verticon.tracker.irouter.bwcontrol.Constants.PRODUCER_SCOPE;
-import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
-import static org.osgi.framework.Constants.SERVICE_PID;
+
+import static com.verticon.tracker.irouter.bwcontrol.Component.bundleMarker;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_PID;
-import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_PRODUCER_FLAVORS;
-import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_PRODUCER_SCOPE;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.monitor.Monitorable;
 import org.osgi.service.monitor.StatusVariable;
 import org.osgi.service.wireadmin.Producer;
 import org.osgi.service.wireadmin.Wire;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.verticon.tracker.irouter.common.IContext;
-import com.verticon.tracker.irouter.common.IService;
 
 /**
  * 
@@ -56,35 +45,32 @@ import com.verticon.tracker.irouter.common.IService;
  * @author jconlon
  *
  */
-class CommandProducer implements Producer, Monitorable, IService{
+class BWProducer implements Producer, Monitorable, Callable<Void>{
 	
+	
+
 	private static final String COMMAND_LAST = "producer.Last_Command_Sent";
 	private static final String WIRES_COUNT = "producer.Connected_Consumers";
 	private static final String COMMAND_COUNT = "producer.Total_Commands_Sent";
-
+	
 	/**
 	 * slf4j Logger
 	 */
 	private final Logger log = LoggerFactory
-			.getLogger(CommandProducer.class);
+			.getLogger(BWProducer.class);
 	
-	private final IContext context;
-	private final BlockingQueue<String> commandQueue;
 	//Shared wires protected with concurrent collection
 	private final List<Wire> wires = new CopyOnWriteArrayList<Wire>();
 	//Shared String protected with volatile
 	private volatile String lastCommand = null;
-	private volatile int commandCount;
-	private Future<Void> future;
-	private ServiceRegistration producerServiceRegistration = null;
+	private AtomicInteger commandCount = new AtomicInteger();
+	private final Component component;
 	
-
 	/**
 	 * @param context
 	 */
-	CommandProducer(IContext context, BlockingQueue<String> commandQueue) {
-		this.context = context;
-		this.commandQueue=commandQueue;
+	BWProducer(Component component) {
+		this.component = component;
 	}
 
 	/*
@@ -93,8 +79,7 @@ class CommandProducer implements Producer, Monitorable, IService{
 	 */
 	@Override
 	public String toString() {
-		return "CommandProducer [pid=" + context.getPid() +", scope=" + Arrays.toString(PRODUCER_SCOPE)+
-		"]";
+		return "BWProducer [pid="+component.getPid() +"]";
 	}
 	
 	/*
@@ -108,18 +93,18 @@ class CommandProducer implements Producer, Monitorable, IService{
 			this.wires.addAll(Arrays.asList(wires));
 		}
 		if(this.wires.isEmpty()){
-			log.debug("{}: Not connected to any wires.",
+			log.debug(bundleMarker,"{}: Not connected to any wires.",
 					this
 			);
 		}else{
 			HashSet<String> consumers = new HashSet<String>();
 			for (Wire wire : wires) {
 				consumers.add((String)wire.getProperties().get(WIREADMIN_CONSUMER_PID));
+					log.debug(bundleMarker,"{}: Connected to {}",
+							this, wire.getProperties().get(WIREADMIN_CONSUMER_PID));
+				
+				
 			}
-			
-			log.debug("{}: Connected to {} wires, and {} consumers={}",
-					new Object[]{this, wires.length, consumers.size() ,consumers}
-			);
 			
 		}
 	}
@@ -132,75 +117,27 @@ class CommandProducer implements Producer, Monitorable, IService{
 	public Object polled(Wire wire) {
 					return lastCommand;
 	}
+
+   
 	
-
-	
-    /* (non-Javadoc)
-	 * @see com.verticon.tracker.irouter.bwcontrol.IService#start(org.osgi.framework.BundleContext)
-	 */
-    public void start(BundleContext bc) throws InterruptedException, ExecutionException{
-		future = context.getExecutor().submit(
-				new Runner(commandQueue));
-		register(bc);
-	}
-
-
-	protected void register(BundleContext bc) {
-		Hashtable<String, Object> regProps = new Hashtable<String, Object>();
-		regProps.put(SERVICE_PID, this.context.getPid());
-		
-		regProps.put(WIREADMIN_PRODUCER_FLAVORS,
-				new Class[] { String.class });
-		regProps.put(TRACKER_WIRE_GROUP_NAME, 
-				this.context.getConfigurationString(TRACKER_WIRE_GROUP_NAME));
-		regProps.put(WIREADMIN_PRODUCER_SCOPE, 
-				PRODUCER_SCOPE);
-		producerServiceRegistration =  bc.registerService(Producer.class.getName(), this,
-				regProps);
-		
-	}
-	
-	/* (non-Javadoc)
-	 * @see com.verticon.tracker.irouter.bwcontrol.IService#stop()
-	 */
-	public void stop() {
-		if(producerServiceRegistration !=null) {
-			producerServiceRegistration.unregister();
-			producerServiceRegistration = null;
-		}
-
-		if(future!=null){
-			future.cancel(true);
-			future=null;
-		}
-		lastCommand=null;
-	}
-	
-	private class Runner implements Callable<Void>{
-		 private final BlockingQueue<String> queue;
-		 Runner(BlockingQueue<String> q) { queue = q; }
-
-		 @Override
-		 public Void call() throws ExecutionException, InterruptedException {
-			 while(true) { 
-				 String command = queue.take();
-				 if(wires.isEmpty()){
-					 log.warn("{}: No wires found. Aborted sending command= {}",
-							 this, command
-					 );
-				 }else{
-					 log.debug("{}: Sending {} to {} wires",
-							 new Object[]{this, command, wires.size()});
-					 
-					 for (Wire wire : wires) {
-						 wire.update(command);
-					 }
-				 }
-				 lastCommand = command;
-				 commandCount ++;
-			 }	    
-		 }
-	}
+//    /* (non-Javadoc)
+//	 * @see com.google.common.util.concurrent.AbstractExecutionThreadService#triggerShutdown()
+//	 */
+//	@Override
+//	protected void triggerShutdown() {
+//		log.debug(bundleMarker,"{}: trigger shutdown",this);
+////		Thread.currentThread().interrupt();
+//		super.triggerShutdown();
+//	}
+//	
+//	/* (non-Javadoc)
+//	 * @see com.google.common.util.concurrent.AbstractExecutionThreadService#shutDown()
+//	 */
+//	@Override
+//	protected void shutDown() throws Exception {
+//		log.debug(bundleMarker,"{}: shutdown",this);
+//		super.shutDown();
+//	}
 
 	@Override
 	public String[] getStatusVariableNames() {
@@ -222,7 +159,7 @@ class CommandProducer implements Producer, Monitorable, IService{
 			return
 			new StatusVariable(name,
 					StatusVariable.CM_CC,
-					commandCount
+					commandCount.get()
 					);
 		}
 		
@@ -247,7 +184,7 @@ class CommandProducer implements Producer, Monitorable, IService{
 	public boolean resetStatusVariable(String id)
 			throws IllegalArgumentException {
 		if (COMMAND_COUNT.equals(id)){
-			commandCount=0;
+			commandCount.set(0);
 			return true;
 		}
 		return false;
@@ -271,4 +208,28 @@ class CommandProducer implements Producer, Monitorable, IService{
 		}
 		return null;
 	}
+
+	@Override
+	public Void call() throws Exception {
+		while(!Thread.currentThread().isInterrupted()) { 
+			 String command = component.getCommandQueue().take();
+			 if(wires.isEmpty()){
+				 log.warn(bundleMarker,"{}: No wires found. Aborted sending command= {}",
+						 this, command
+				 );
+			 }else{
+				 log.debug(bundleMarker,"{}: Sending {} to {} wires",
+						 new Object[]{this, command, wires.size()});
+				 
+				 for (Wire wire : wires) {
+					 wire.update(command);
+				 }
+			 }
+			 lastCommand = command;
+			 commandCount.incrementAndGet();
+		 }	    
+		return null;
+	}
+
+	
 }

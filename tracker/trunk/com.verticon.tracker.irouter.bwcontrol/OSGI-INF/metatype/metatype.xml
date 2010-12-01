@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
 
-  <OCD  name="Blood Weight Controller" id="com.verticon.tracker.irouter.bwcontrol.controllerfactory"
+  <OCD  name="Blood Weight Controller" id="com.verticon.tracker.irouter.bwcontrol"
   		description="Business logic controller for integrating TruTest scales and Mettler balances for measuring animal blood weights as a percentage of total animal weight.">
     
     <AD name="Wiring group name"  id="tracker.wiring.group.name" 
@@ -74,10 +74,42 @@
         default="true"
         description="If true a record key press will stop the production of ActBW and CalcBW.  Calculation will resume at zeroing of animal weight."/>
   
+    <AD name="Consumable scope" id="wireadmin.consumer.scope" 
+    	required="true" 
+    	type="String"
+    	default="animal.weight,mettler.weight,transaction.state"
+		cardinality="3" 
+		description="The consumable scopes carrying the animal weight, blood weight, and transaction state. (Use full scope names)" />
+ 
+     <AD name="Animal Weight scope" id="animal.weight" 
+    	required="true" 
+    	type="String"
+    	default="animal.weight"
+		description="The consumable scopes (from the list of consumable scopes) carrying the animal weight. (Use full scope names)" />
+ 
+     <AD name="Blood Weight scope" id="blood.weight" 
+    	required="true" 
+    	type="String"
+    	default="mettler.weight"
+		description="The consumable scope (from the list of consumable scopes) carrying the blood weight. (Use full scope names)" />
+ 
+ 	 <AD name="Producer scope" id="wireadmin.producer.scope" 
+    	type="String"
+		cardinality="1"
+		required="true"
+		default="trutest.commands"  
+		description="The producer scope to send the adapted TruTest commands. (Use full scope names)" />
+		
+	 <AD name="Monitor node label"  id="tracker.monitor.label" 
+    	type="String"
+    	required="false" 
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="BWControl"/> 
+ 
   </OCD>
   
-  <Designate pid="com.verticon.tracker.irouter.bwcontrol.controllerfactory" bundle="*">
-		<Object ocdref="com.verticon.tracker.irouter.bwcontrol.controllerfactory"/>
+  <Designate pid="com.verticon.tracker.irouter.bwcontrol" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.bwcontrol"/>
   </Designate>
   
   
