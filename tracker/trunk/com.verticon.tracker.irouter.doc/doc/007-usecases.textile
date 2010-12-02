@@ -13,7 +13,8 @@ h3. Intention
 h3. Monitor View
 
 !images/integrated-usecase.png!
-__iRouter monitor view of an integrated Premises Desktop__
+
+__iRouter monitor view image capture of an integrated Premises Desktop__
 
 The above is the iRouter monitor view of a TruTest scale head integrated with user managed RFID readers within a Tracker Desktop transaction processing environment.  
 
@@ -43,7 +44,8 @@ h3. Intention
 h3. Monitor View
 
 !images/businessLogic-usecase.png!
-__iRouter monitor view of an integrated multi-sensor data logger__
+
+__iRouter monitor view image capture of an integrated multi-sensor data logger__
 
 The above is the iRouter monitor view of a TruTest scale head integrated with a Mettler laboratory scale and a data logger. 
 
