@@ -119,7 +119,6 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 	 * TEMPLATE constant .
 	 */
 	private Map<Object, IDetailsPage> keyMap = new HashMap<Object, IDetailsPage>();
-	
 	private final static Image factoryImage;
 	private final static Image componentImage;
 
@@ -142,6 +141,40 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 	
 	public DesignatesMasterDetailsBlock(DesignatesFormPage page) {
 		this.page = page;
+	}
+	
+	
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "DesignatesMasterDetailsBlock []";
+	}
+
+
+
+	public void dispose() {
+		logger.debug(bundleMarker,"Disposing {}",this);
+		if(metaDataDesignatesObs!=null){
+			metaDataDesignatesObs.dispose();
+		}
+		
+		if(treeObs!=null){
+			treeObs.dispose();
+		}
+//		for (IDetailsPage page : keyMap.values()) {
+//			page.dispose();
+//		}
+//		if(componentImage!=null){
+//			componentImage.dispose();
+//		}
+//		if(factoryImage!=null){
+//			factoryImage.dispose();
+//		}
+		
+		
 	}
 	
 	@Override
@@ -379,7 +412,9 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 
 		IEMFListProperty prop = EMFProperties
 				.list(MetatypePackage.Literals.META_DATA__DESIGNATE);
-
+		if(metaDataDesignatesObs!=null){
+			metaDataDesignatesObs.dispose();
+		}
 		metaDataDesignatesObs = prop.observe(getMetaData());
 
 		metaDataDesignatesObs.addListChangeListener(new IListChangeListener() {
@@ -392,6 +427,9 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 			}
 		});
 
+		if(treeObs!=null){
+			treeObs.dispose();
+		}
 		treeObs = ViewerProperties.singleSelection().observe(masterViewer);
 
 		// Because there are different kinds of Designates,
@@ -401,15 +439,15 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 		treeObs.addValueChangeListener(new IValueChangeListener() {
 
 			public void handleValueChange(ValueChangeEvent event) {
-				logger.debug(bundleMarker,"handleValueChanged invoked");
+//				logger.debug(bundleMarker,"handleValueChanged invoked event={}",event);
 
 				if (event.diff.getNewValue() instanceof Designate) {
 					
 					Designate designate = (Designate) event.diff.getNewValue();
-
-					masterDesignate.setValue(designate);
-					
 					try {
+					    masterDesignate.setValue(designate);
+					
+					
 						masterOCD.setValue(Utils.getOCD(designate, getMetaData()));
 						if (Utils.isTemplate(designate)) {
 							addAction.setEnabled(true);
@@ -421,10 +459,11 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 							addAction.setToolTipText(null);
 							deleteAction.setEnabled(true);
 							deleteAction.setToolTipText("Delete " + getName(designate,getMetaData()));
-							logger.debug(bundleMarker, "Selected "
-									+ designate.getPid());
+//							logger.debug(bundleMarker, "Selected designate pid={} factoryPid={}"
+//									, designate.getPid(),designate.getPid());
 						}
 					} catch (ConfigurationException e) {
+						logger.error(bundleMarker,"Failed to add Designate with pid ",e);
 						addAction.setEnabled(false);
 						deleteAction.setEnabled(true);
 						Status status = new Status(IStatus.ERROR, Utils.PLUGIN_ID, 0,
@@ -507,13 +546,7 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 
 		@Override
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-//			this.viewer = (TreeViewer)viewer;
-//			
-//			if(model !=null){
-//				
-//			}else{
-//				//first time initiating
-//			}
+
 			model = (MetaData) newInput;
 			
 			if (oldInput != null) {
@@ -615,4 +648,6 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 	void prepareToReload(){
 		masterViewer.collapseAll();
 	}
+
+	
 }
