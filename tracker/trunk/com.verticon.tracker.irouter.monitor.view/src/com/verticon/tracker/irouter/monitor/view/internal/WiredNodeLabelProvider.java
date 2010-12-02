@@ -190,6 +190,10 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 
 	@Override
 	public Color getBorderColor(Object entity) {
+		if (entity instanceof IExternalNode) {
+			return Display.getDefault().getSystemColor(SWT.COLOR_WHITE);
+		}
+
 		return null;
 	}
 
@@ -200,6 +204,9 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 
 	@Override
 	public int getBorderWidth(Object entity) {
+		if (entity instanceof IExternalNode) {
+			return 0;
+		}
 		return 10;
 	}
 
@@ -215,13 +222,7 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 
 		}
 		if (entity instanceof IExternalNode) {
-			INode wiredNode = (INode) entity;
-			String key = wiredNode.getGroup();
-			if (!nodeColors.containsKey(key)) {
-				addColor(key);
-			}
-			return nodeColors.get(key);
-
+			return Display.getDefault().getSystemColor(SWT.COLOR_WHITE);
 		}
 
 		return null;
@@ -233,7 +234,7 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 			return Display.getDefault().getSystemColor(SWT.COLOR_WHITE);
 		}
 		if (entity instanceof IExternalNode) {
-			return Display.getDefault().getSystemColor(SWT.COLOR_WHITE);
+			return Display.getDefault().getSystemColor(SWT.COLOR_BLACK);
 		}
 		return null;
 	}
