@@ -10,6 +10,8 @@
  *******************************************************************************/
 package com.verticon.osgi.metatype.core.model.editor.internal.forms;
 
+import static com.verticon.osgi.metatype.core.model.editor.internal.forms.Utils.bundleMarker;
+
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
@@ -32,12 +34,20 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.forms.widgets.TableWrapData;
 import org.eclipse.ui.forms.widgets.TableWrapLayout;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.verticon.osgi.metatype.Designate;
 import com.verticon.osgi.metatype.MetatypePackage;
 
 
 public class DesignateDetailsPage implements IDetailsPage {
+
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(DesignateDetailsPage.class);
 
 	private static final String DEFAULT_DESCRIPTION = "Properties of the selected Factory.";
 	protected IManagedForm mform;
@@ -60,9 +70,30 @@ public class DesignateDetailsPage implements IDetailsPage {
 	}
 
 	
+
 	@Override
 	public void initialize(IManagedForm form) {
 		this.mform = form;
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "DesignateDetailsPage []";
+	}
+	
+	@Override
+	public void dispose() {
+		logger.debug(bundleMarker,"Disposing designate details {}",this);
+		ctx.dispose();
+		if(masterDesignate != null){
+			masterDesignate.dispose();
+		}
+		if(masterOCD !=null){
+			masterOCD.dispose();
+		}
 	}
 
 	@Override
@@ -175,32 +206,19 @@ public class DesignateDetailsPage implements IDetailsPage {
 				.observeDetail(masterDesignate));
 		return sectionClient;
 	}
-
-	
-	
-	
-
 	
 	@Override
 	public void commit(boolean onSave) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void dispose() {
-		ctx.dispose();
+		
 	}
 
 	@Override
 	public boolean isDirty() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean isStale() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -211,8 +229,7 @@ public class DesignateDetailsPage implements IDetailsPage {
 
 	@Override
 	public void setFocus() {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override

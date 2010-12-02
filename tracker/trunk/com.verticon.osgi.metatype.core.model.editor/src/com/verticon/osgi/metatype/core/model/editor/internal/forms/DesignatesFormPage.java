@@ -9,6 +9,8 @@
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
 package com.verticon.osgi.metatype.core.model.editor.internal.forms;
+import static com.verticon.osgi.metatype.core.model.editor.internal.forms.Utils.bundleMarker;
+
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorPart;
@@ -18,6 +20,8 @@ import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.ManagedForm;
 import org.eclipse.ui.forms.editor.FormPage;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -27,6 +31,13 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
  * Preferences - Java - Code Generation - Code and Comments
  */
 public class DesignatesFormPage extends FormPage implements IPropertyListener {
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory
+			.getLogger(DesignatesFormPage.class);
+
+
 	private DesignatesMasterDetailsBlock masterDetailsBlock;
 	private  ManagedForm managedForm;
 	private final IEditorPart editorPart;
@@ -35,14 +46,36 @@ public class DesignatesFormPage extends FormPage implements IPropertyListener {
 		super("iRouterFactoryServices", "iRouter Factory Services Configuration");
 		this.editorPart = editorPart;
 		editorPart.addPropertyListener(this);
-		masterDetailsBlock = new DesignatesMasterDetailsBlock(this);
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "DesignatesFormPage []";
+	}
+
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.forms.editor.FormPage#dispose()
+	 */
+	@Override
+	public void dispose() {
+		logger.debug(bundleMarker,"Disposing {}",this);
+		managedForm.getToolkit().dispose();
+		managedForm.dispose();
+		masterDetailsBlock.dispose();
+		super.dispose();
+	}
+
+
 	protected void createFormContent(final IManagedForm managedForm) {
 		final ScrolledForm form = managedForm.getForm();
 		form.setText("iRouter Factory Services Configuration");
 		managedForm.getToolkit().decorateFormHeading(form.getForm());
+		masterDetailsBlock = new DesignatesMasterDetailsBlock(this);
 		masterDetailsBlock.createContent(managedForm);
 	}
 	

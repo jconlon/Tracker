@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.eclipse.core.databinding.ObservablesManager;
 import org.eclipse.core.databinding.conversion.Converter;
 import org.eclipse.core.databinding.observable.IChangeListener;
 import org.eclipse.core.databinding.observable.IDisposeListener;
@@ -69,7 +70,13 @@ import com.verticon.osgi.metatype.Designate;
 import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.osgi.metatype.OCD;
 
+/**
+ * @author jconlon
+ *
+ */
 public class ComponentDetailsPage extends DesignateDetailsPage {
+
+	private static final String FACTORY_PARENT = "Factory Parent";
 
 	/**
 	 * slf4j Logger
@@ -79,6 +86,7 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 
 	private final ObjectClassDefinition ocd;
 	private static final int DEFAULT_KEY_ENTRY_DELAY = 400;
+	private final ObservablesManager observablesManager = new ObservablesManager();
 
 	// Force factory creation
 	private ComponentDetailsPage(ObjectClassDefinition ocd,
@@ -86,6 +94,8 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 			EditingDomain editingDomain) {
 		super(masterDesignate, masterOCD, editingDomain);
 		this.ocd = ocd;
+		
+
 	}
 
 	/**
@@ -105,6 +115,21 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 		return new ComponentDetailsPage(ocd, masterDesignate, masterOCD,
 				editingDomain);
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ComponentDetailsPage [ocd=" + ocd.getID() + "]";
+	}
+	
+	@Override
+	public void dispose() {
+		logger.debug(bundleMarker, "Disposing component details {}",this);
+		observablesManager.dispose();
+		super.dispose();
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -115,7 +140,7 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 	 */
 	@Override
 	protected String getNameOfForm() {
-		return "Factory Parent";
+		return FACTORY_PARENT;
 	}
 
 	/*
@@ -215,7 +240,10 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 	private void addControl(FormToolkit toolkit, Composite parent,
 			final AttributeDefinition attributeDefinition,
 			IWidgetValueProperty prop, IMessageManager mmng) {
-
+		
+		logger.debug(bundleMarker, "Adding conrol ocd={} att={}",
+				new Object[] {ocd.getID(), attributeDefinition.getID()});
+		
 		Label l = toolkit.createLabel(parent,
 				attributeDefinition.getName() + ':');
 		l.setToolTipText(attributeDefinition.getDescription());
@@ -224,18 +252,19 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 		toolkit.paintBordersFor(parent);
 		Control control = createControl(toolkit, parent, attributeDefinition);
 
+		//manage disposal
 		IObservableValue obsValue = MasterDetailObservables.detailValue(
 				masterDesignate, // master
 				new AttributeFactory(attributeDefinition),// detailFactory
 				null);// Type
-
-		obsValue.addValueChangeListener(new IValueChangeListener() {
-
-			public void handleValueChange(ValueChangeEvent event) {
-				logger.debug(bundleMarker, "{} obsValue valueChangeEvent = {}",
-						attributeDefinition.getID(), event.diff.getNewValue());
-			}
-		});
+		observablesManager.addObservable(obsValue);
+//		obsValue.addValueChangeListener(new IValueChangeListener() {
+//
+//			public void handleValueChange(ValueChangeEvent event) {
+//				logger.debug(bundleMarker, "Value Changed ocd={} att={} valueChangeEvent={}",
+//						new Object[] {ocd.getID(), attributeDefinition.getID(), event.diff.getNewValue()});
+//			}
+//		});
 
 		EMFUpdateValueStrategy modelToTarget = new EMFUpdateValueStrategy();
 		EMFUpdateValueStrategy targetToModel = new EMFUpdateValueStrategy();
@@ -316,7 +345,7 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 		return control;
 	}
 
-	final class CComboTargetToModelConverter extends Converter {
+	static final class CComboTargetToModelConverter extends Converter {
 		private final String[] labels;
 		private final String[] values;
 
@@ -343,7 +372,7 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 		}
 	}
 
-	final class CComboModelToTargetConverter extends Converter {
+	static final class CComboModelToTargetConverter extends Converter {
 
 		private final String[] labels;
 		private final String[] values;
@@ -394,7 +423,6 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 	};
 
 	// TargetToModel for multiple values
-
 	// TargetToModel convert from comma delimited string to a list
 	private Converter multivalueTargetToModelConverter = new Converter(
 			String.class, List.class) {
@@ -429,14 +457,7 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 		}
 	};
 
-	@Override
-	public void dispose() {
-		// for (IObservable obs : obsMap.values()) {
-		// obs.dispose();
-		// }
-		// obsMap.clear();
-		super.dispose();
-	}
+	
 
 	/**
 	 * ObservableFactory for creating Observables on the Attributes of
@@ -454,15 +475,28 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 			this.attDef = attDef;
 		}
 
+		private boolean validDesignate(Designate designate ){
+			if(designate.getObject() != null){
+				if(designate.getFactoryPid()!=null){
+					return designate.getFactoryPid().equals(ocd.getID());
+				}
+			}
+			return false;
+		}
+		/**
+		 * Creates observable objects that need to be managed for disposal
+		 */
 		@Override
 		public IObservable createObservable(Object target) {
 			Designate designate = (Designate) target;
-			if (designate.getObject() != null) {
+			//Only create an observable if the designate has an object and the factoryPid is the same as the ocd
+			IObservable observable = null;
+			if (validDesignate( designate )) {
 				for (final Attribute attribute : designate.getObject()
 						.getAttribute()) {
 					if (attribute.getAdref().equals(attDef.getID())) {
-						logger.debug(bundleMarker, "{} createObservable",
-								attDef.getID());
+						logger.debug(bundleMarker, "Create Observable att={} pid={}",
+								attDef.getID(),designate.getPid());
 						// Creating observable
 						IEMFEditValueProperty prop = EMFEditProperties.value(
 								editingDomain,
@@ -478,15 +512,17 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 						ExtendedObservable eo = new ExtendedObservable(lov, ov,
 								attDef.getID());
 						eo.init();
-						return eo;
+						observable= eo;
 					}
 				}
 
 			}
-			logger.debug(bundleMarker, "{} Returning empty observable", attDef
-					.getID());
-			return new WritableValue();
-
+			if(observable==null){
+				logger.debug(bundleMarker, "Create Empty Observable att={} pid={}", attDef.getID(),designate.getPid());
+				observable= new WritableValue();
+			}
+			observablesManager.addObservable(observable);
+			return observable;
 		}
 	}
 
@@ -500,68 +536,107 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 	final class AttributeDefinitionValidator implements IValidator {
 
 		private final AttributeDefinition attributeDefinition;
-		private final Control t;
+		private final Control control;
 		private final IMessageManager mmng;
 		private final int cardinality;
+		private final String messageHeader;
+		private final boolean isRequired;
 
 		AttributeDefinitionValidator(
 				AttributeDefinition attributeItemPropertyDescriptor, Control t,
 				IMessageManager mmng) {
 			super();
 			this.attributeDefinition = attributeItemPropertyDescriptor;
-			this.t = t;
+			this.control = t;
 			this.mmng = mmng;
 			this.cardinality = attributeDefinition.getCardinality() == 0 ? 0
 					: attributeDefinition.getCardinality() > 0 ? attributeDefinition
 							.getCardinality()
 							: attributeDefinition.getCardinality() * -1;
+			this.messageHeader="("+ocd.getName()+") ";
+			boolean isReqAtt = false;
+			for (AttributeDefinition reqAtt : ocd.getAttributeDefinitions(OCD.REQUIRED)) {
+				if(reqAtt.equals(attributeDefinition)){
+					isReqAtt=true;
+				}
+			}
+				isRequired=isReqAtt;
+			
 		}
 
 		@Override
 		public IStatus validate(Object value) {
+//			mmng.removeMessages(control);
+			String key = ocd.getID()+"|"+this.attributeDefinition.getID();
 			if (cardinality == 0) {
-				return validateSingleValue(value);
+				return validateSingleValue(value,key);
 			} else {
-				return validateMultipleValues(value);
+				return validateMultipleValues(value,key);
 			}
 		}
 
-		private IStatus validateSingleValue(Object value) {
-			String error = attributeDefinition.validate((String) value);
+		private boolean isNullOrEmptyString(Object value){
+			if(value==null){
+				return true;
+			}
+			if(value instanceof String){
+				return ((String)value).trim().length()==0;
+			}
+			return false;
+		}
+		
+		private IStatus validateSingleValue(Object value, String key) {
+//			logger.debug(bundleMarker, "Validating Single ocd={} att={} key={} value={}",
+//					new Object[] {ocd.getID(), attributeDefinition.getID(), key, value});
+			String error;
+			if (isRequired && isNullOrEmptyString(value)) {
+				error = "Value is required. It can not be null.";
+			}else{
+				error = attributeDefinition.validate((String) value);
+			}
 			if (error == null || error.trim().length() == 0) {
-				mmng.removeMessage("validation", t);
+				mmng.removeMessage(key, control);
 				return ValidationStatus.ok();
 			} else {
 				mmng.addMessage(
-						"validation", //key
-						error, //message
+						key, //key
+						messageHeader+error, //message
 						null,//data
 						IMessageProvider.ERROR, //int
-						t);//Control
+						control);//Control
+//				logger.warn(bundleMarker, "Validation error={} ocd={} att={} key={} value={}",
+//						new Object[] {error, ocd.getID(), attributeDefinition.getID(), key, value});
 				return ValidationStatus.error(error);
 			}
 		}
 
-		private IStatus validateMultipleValues(Object value) {
+		private IStatus validateMultipleValues(Object value, String key) {
+//			logger.debug(bundleMarker, "Validating Multiple ocd={} att={} key={} value={}",
+//					new Object[] {ocd.getID(), attributeDefinition.getID(), key,value});
+			mmng.removeMessage(key, control);
 			String[] values = ((String) value).split(",");
 			String error = null;
 			int abs = Math.abs(cardinality);
 			if (abs == 0 && values.length!=1){
 				error = "Wrong number of values. Expected a single value.";
-				mmng.addMessage("validation", error, null,
-				IMessageProvider.ERROR, t);
+				mmng.addMessage(key, error, null,
+				IMessageProvider.ERROR, control);
+//				logger.warn(bundleMarker, "Validation error={} ocd={} att={} key={} value={}",
+//						new Object[] {error, ocd.getID(), attributeDefinition.getID(), key, value});
 				return ValidationStatus.error(error);
 			}
 			if (values.length > abs) {
-				error = "Wrong number of values. Cannot have more than " + abs
+				error = messageHeader+": Wrong number of values. Cannot have more than " + abs
 						+ " values.";
-				mmng.addMessage("validation", error, null,
-						IMessageProvider.ERROR, t);
+				mmng.addMessage(key, error, null,
+						IMessageProvider.ERROR, control);
+//				logger.warn(bundleMarker, "Validation error={} ocd={} att={} key={} value={}",
+//						new Object[] {error, ocd.getID(), attributeDefinition.getID(), key, value});
 				return ValidationStatus.error(error);
 			}
 
-			for (String valueInList : values) {
-				IStatus status = validateSingleValue(valueInList);
+			for (int i = 0; i < values.length; i++) {
+				IStatus status = validateSingleValue(values[i], key+i);
 				if (status != ValidationStatus.ok()) {
 					return status;
 				}
@@ -603,8 +678,19 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 			lov.addListChangeListener(this);
 		}
 
+		
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString() {
+			return "ExtendedObservable [ocd=" + ocd.getID() + ", name=" + name + "]";
+		}
+
 		@Override
 		public synchronized void dispose() {
+			logger.debug(bundleMarker,
+					"Disposing {}",this);
 			valueListeners.clear();
 			lov.removeListChangeListener(this);
 			lov.dispose();
@@ -614,10 +700,9 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 		@Override
 		public void handleListChange(ListChangeEvent event) {
 			logger.debug(bundleMarker,
-					"{} listChangeEvent invoked value={} SOURCE="
-							+ event.getSource(), name, event.diff
-							.getDifferences());
-
+					"{} handleListChange event.source={} diff={}", new Object[] {this, event.getSource(), event.diff
+							.getDifferences()});
+			
 			for (IValueChangeListener l : valueListeners) {
 				l.handleValueChange(new ValueChangeEvent(this, new ValueDiff() {
 
@@ -654,6 +739,7 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 		@Override
 		public void removeValueChangeListener(IValueChangeListener listener) {
 			ov.removeValueChangeListener(listener);
+			valueListeners.remove(listener);
 		}
 
 		@Override
@@ -664,7 +750,7 @@ public class ComponentDetailsPage extends DesignateDetailsPage {
 		@Override
 		public void addChangeListener(IChangeListener listener) {
 			ov.removeChangeListener(listener);
-			valueListeners.remove(listener);
+			
 		}
 
 		@Override
