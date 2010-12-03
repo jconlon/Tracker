@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: iRouter Premises Gateway
 Bundle-SymbolicName: com.verticon.tracker.irouter.premises.gateway;singleton:=true
 Bundle-Version: 0.1.1.qualifier
-Bundle-Vendor: %providerName
+Bundle-Vendor: Verticon, Inc.
 Service-Component: OSGI-INF/*.xml
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: com.verticon.osgi.metatype,
