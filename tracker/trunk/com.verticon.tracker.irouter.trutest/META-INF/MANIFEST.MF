@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tracker TruTest Scalehead Indicator
+Bundle-Name: iRouter TruTest Proxy
 Bundle-SymbolicName: com.verticon.tracker.irouter.trutest
 Bundle-Version: 0.2.1.qualifier
 Bundle-Vendor: Verticon, Inc.
