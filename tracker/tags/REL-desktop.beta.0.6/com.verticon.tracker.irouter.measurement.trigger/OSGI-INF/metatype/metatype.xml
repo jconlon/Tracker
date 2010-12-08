@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="Measurement Trigger" id="com.verticon.tracker.irouter.measurement.trigger"
+       description="Inspect measurements for conditions and produce a state with a value of 2, if the conditions are met.">
+   
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" 
+    	type="String"
+    	required="true" 
+    	default="one" 
+        description="Name of the group of components that will be wired together."/> 
+ 
+    <AD name="Consumable scope" id="wireadmin.consumer.scope" 
+    	type="String"
+    	required="true"
+		cardinality="1" 
+		description="Names of the measurement scope to inspect. (Use full scope names)" />
+   	
+    <AD name="Low Measurement Threshold" id="value.low" 
+    	required="true" 
+    	type="Double" 
+    	description="Value of the low measurement threashold."/>
+    	
+    <AD name="High Measurement Threshold" id="value.high" 
+    	required="true" 
+    	type="Double" 
+    	description="Value of the high measurement threshold."/>
+    	
+    <AD name="Operation on measurement" id="operation.type" 
+    	type="String" 
+        default="raising"
+        description="Type of threashold that will fire the trigger.">
+    	<Option label="Trigger on raising threshold" value="rising"/>
+		<Option label="Trigger on falling threshold" value="falling"/>
+	</AD>
+    	
+	<AD name="Producer scope" id="wireadmin.producer.scope" 
+		type="String"
+		required="true"
+		cardinality="1" 
+		description="The scope containing triggered states. (Use full scope names)" />
+  
+  	 <AD name="Component container label"  id="tracker.monitor.label" type="String"
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="Measurement Trigger"/> 
+        
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.measurement.trigger" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.measurement.trigger"/>
+  </Designate>
+  
+  
+</metatype:MetaData>

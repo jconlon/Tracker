@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="TruTest EID Adapter" id="com.verticon.tracker.irouter.trutest.eid.adapter"
+  	   description="Adapts animal ids for input as electronic ids on TruTest Indicators.">
+   
+    <AD name="Wiring group name" id="tracker.wiring.group.name" 
+    	required="true" 
+    	type="String" 
+    	default="one"
+        description="Name of the group of components that will be wired together."/>
+        	
+	<AD name="Consumable scope" id="wireadmin.consumer.scope" 
+    	required="true" 
+    	type="String"
+    	default="eid"
+		cardinality="1" 
+		description="The consumable scope that carries the animal id to adapt. (Use full scope names)" />
+ 
+    <AD name="Producer scope" id="wireadmin.producer.scope" 
+    	type="String"
+		cardinality="1"
+		required="true"
+		default="trutest.commands"  
+		description="The producer scope to send the adapted TruTest commands. (Use full scope names)" />
+ 
+    <AD name="Destination Field" id="destination.field" 
+    	type="Integer" 
+    	default="8"
+        description="The destination field in the TruTest indicator." >
+		<Option label="Life Data One" value="0"/>
+		<Option label="Life Data Two" value="1"/>
+		<Option label="Life Data Three" value="2"/>
+		<Option label="Life Data Four" value="3"/>
+		<Option label="Life Data Five" value="4"/>
+		<Option label="Life Data Six" value="5"/>
+		<Option label="Life Data Seven" value="6"/>
+		<Option label="Life Data Eight" value="7"/>
+	</AD>
+	
+    <AD name="Destination Port" id="destination.port" 
+    	type="Integer" 
+    	default="1"
+       	description="TruTest Serial port that connects it to the iRouter.">
+    	<Option label="Con1" value="1"/>
+		<Option label="Con2" value="2"/>
+	</AD>
+	
+	<AD name="Component container label"  id="tracker.monitor.label" 
+		type="String"
+		required="false"
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="TruTest EID Adapter"/> 
+	
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.trutest.eid.adapter" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.trutest.eid.adapter"/>
+  </Designate>
+  
+</metatype:MetaData>

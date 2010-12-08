@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="Flow Terminator" id="com.verticon.tracker.irouter.flow.terminator"
+       description="Controls passing or blocking of objects based on the detection of a specific State. Only non-State objects are passed.">
+   
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" 
+    	type="String"
+    	required="true" 
+    	default="one" 
+        description="Name of the group of components that will be wired together."/> 
+ 
+    <AD name="Consumed Information and Control scopes" id="wireadmin.consumer.scope" 
+    	type="String"
+		cardinality="5" 
+		description="Names of the consumed scopes containing information and triggering State objects.  Only the information (non State traffic) will be passed through when flow is unterminated. (Use full scope names)" />
+   	
+    <AD name="Flow Terminator State Name"  
+        id="terminator.state.name" 
+        required="true" 
+        type="String" 
+    	description="The name of the state that terminates information flow."/>
+    	
+    <AD name="Flow Terminator State Value"  
+        id="terminator.state.value" 
+        required="true" 
+        type="Integer" 
+    	description="The value of the state that terminates information flow."/>
+    	
+	<AD name="Information Producer scope" id="wireadmin.producer.scope" 
+		type="String"
+		required="true" 
+		cardinality="4" 
+		description="Name of the produced scopes containing information passed through from the information consumbable scopes. (Use full scope names)" />
+  
+   	<AD name="Scope Map" id="terminator.scope.map" 
+   		type="String"
+		cardinality="4" 
+		description="Consumer scope to producer scope map. Use full scope names with a colon as the delimiter between the scopes.  Example in.scope:out.scope" />
+  
+     <AD name="Component container label"  id="tracker.monitor.label" type="String"
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="Terminator"/> 
+  
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.flow.terminator" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.flow.terminator"/>
+  </Designate>
+  
+  
+</metatype:MetaData>

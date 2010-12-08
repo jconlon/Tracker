@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracker Query Viewer
+Bundle-SymbolicName: com.verticon.tracker.ocl.query.viewer;singleton:=true
+Bundle-Version: 0.2.0.qualifier
+Bundle-Activator: com.verticon.tracker.ocl.query.viewer.OclQueryViewerPlugin
+Bundle-Vendor: Verticon, Inc.
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.emf.query.ocl,
+ org.eclipse.ocl.ecore
+Bundle-ActivationPolicy: lazy
+Import-Package: com.verticon.tracker.editor.util;version="0.2.8",
+ com.verticon.tracker.ocl.query.actions;version="[0.1.0,1.0.0)",
+ org.slf4j;version="[1.5.5,1.6.0)"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: com.verticon.tracker.ocl.query.viewer
+Service-Component: OSGI-INF/oclViewerFilters.xml

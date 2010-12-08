@@ -1,0 +1,11 @@
+a#comverticontrackerproductdesktop img { background-image : url(graphics/sample.gif); }
+a#comverticontrackerproductdesktop:hover img { background-image : url(graphics/tracker_desktop_72.gif); }
+
+a#comverticontrackerproductdesktop-overview img { background-image : url(graphics/sample.gif); }
+a#comverticontrackerproductdesktop-overview:hover img { background-image : url(graphics/tracker_desktop_72.gif); }
+
+#updatelink img { background-image : url(graphics/wn_updates48.gif); }
+#updatelink:hover img { background-image : url(graphics/wn_updates48_hov.gif); }
+
+#mynotes1 {color: #0000ff; position:relative; left:25px; position:relative; top:10px}
+#comverticontrackertechpreview-group2 {position:relative; left:25px}

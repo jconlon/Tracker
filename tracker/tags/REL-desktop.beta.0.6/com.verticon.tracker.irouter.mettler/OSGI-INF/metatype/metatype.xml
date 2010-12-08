@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="Mettler Proxy" id="com.verticon.tracker.irouter.mettler.balancefactory"
+  	   description="Provides proxy connection and data transfer of measurements from Mettler laboratory weight balances.">
+    
+    <AD name="Connection uri" id="connection.uri" 
+    	type="String"
+    	required="true" 
+    	default="socket://localhost:2345" 
+    	description="URI to connect to the balance. Example socket://192.168.0.116:2345"/> 
+    
+    <AD name="Wiring group name" id="tracker.wiring.group.name" 
+    	type="String"
+    	required="true" 
+    	default="one" 
+    	description="Name of the group of components that will be wired together."/>  
+    
+    <AD name="Stable weight measurement error" id="stable.weight.error" 
+    	required="true" 
+    	type="Double" 
+    	default=".002"
+    	description="Value of mesurement error to use for weights reported by the balance as stable"/>
+    
+    <AD name="Unstable weight measurement error" id="unstable.weight.error" 
+    	required="true" 
+    	type="Double" 
+    	default=".01"
+    	description="Value of mesurement error to use for weights reported by the balance as unstable."/>
+    
+    <AD name="Poll interval milliseconds" id="poll.milliseconds.delay"
+		required="true" 
+		type="Long" 
+    	default="100"
+    	description="Number of milliseconds between queries of the balance for new data."/>
+    
+    <AD name="Request command" id="request.command" 
+    	required="false" 
+    	type="String" 
+    	default=""
+    	description="Command to request information from the balance. If empty then there will be no queries of the balance. The balance will have to be setup to automatically send data. Example SI%13%%10%"/>
+    	
+    <AD name="Response pattern" id="response.pattern" 
+    	required="true" 
+    	type="String" 
+    	default="^S (D|S)((\s*)(.*))\sg$"
+    	description="Regular Expression to use to parse return response from the balance."/>
+    	
+    <AD name="Connection retry interval seconds" id="connection.retry.seconds"
+    	required="true" 
+    	type="Long" 
+    	default="5"
+    	description="Seconds to wait before retrying to establish a connection to the balance."/>
+  
+    <AD name="Producer Scope for the weight measurement" id="producer.weight.measurement.name" 
+    	type="String"
+		required="true" 
+		default="mettler.weight" 
+		description="Name of the product created by this wire producer and sent to wire consumers."/>
+  
+    <AD name="Component container label"  id="tracker.monitor.label" 
+    	type="String"
+    	required="false" 
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="Mettler Proxy"/> 
+        
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.mettler.balancefactory" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.mettler.balancefactory"/>
+  </Designate>
+  
+  
+</metatype:MetaData>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="Measurement Comparator" id="com.verticon.tracker.irouter.measurement.comparator"
+  		description="Compares two measurements. Produces a state with a negative one, zero, or a positive one if the first measurement is less than, equal to, or greater than the second measurement.">
+   
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" 
+    	type="String"
+    	required="true" 
+    	default="one" 
+        description="Name of the group of components that will be wired together."/> 
+ 
+    <AD name="Consumable scopes" id="wireadmin.consumer.scope" 
+    	type="String" 
+    	required="true"
+		cardinality="2" 
+		description="The two input measurements to compare. (Use full scope names)" />
+ 
+    <AD name="Producer scope" id="wireadmin.producer.scope" 
+    	type="String" 
+    	required="true"
+		cardinality="1" 
+		description="The result product output state. (Use full scope name)" />
+ 
+     <AD name="Component container label"  id="tracker.monitor.label" 
+     	type="String"
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="Comparator"/> 
+    
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.measurement.comparator" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.measurement.comparator"/>
+  </Designate>
+  
+  
+</metatype:MetaData>

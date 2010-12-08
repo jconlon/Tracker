@@ -1,0 +1,89 @@
+h1. Component Factories
+
+Component Factories are the creators of the service instances that do the actual work within the iRouter and the only types of component deployed to the iRouter.  There are three types of Component Factories:
+# Business Logic 
+# Proxy
+# External
+
+h2. Business Logic Component Factories
+
+Business logic Component Factories create the service instances for transforming, controlling and routing information within the iRouter.
+
+h3. Arithmetic Measurement Converter
+
+A generic business logic Component Factory that creates services to convert one measurement to another based on an arithmetic calculation. 
+* Consumes one measurement input
+* Produces a measurement from the input and an arithmetic calculation
+ 
+h3. Measurement Comparator
+
+A generic business logic Component Factory that creates services to compare measurements, producing a state containing the results of the comparison. 
+
+The measurement arriving on the first configured consumer scope is compared with the measurement arriving on the second configured consumer scope.  Produces a state with a:
+* Negative integer value if the first measurement is less than the second
+* Zero if the first measurement is equal than the second
+* Positive integer if the first measurement is greater than the second measurement.
+* Integer.MIN if the states are unequal or incompatible.
+
+h3. Measurement Trigger
+
+A generic business logic Component Factory that creates services to inspect measurements for conditions and produce a state if specific conditions are met. Two inspection conditions are supported:
+# Rising Threshold condition will send a trigger state when a sequence of measurements pass through a range of values less than or equal to specified low value up to a value equal to or greater than a specified high value.
+# Falling Threshold condition will send a trigger state when a sequence of measurements pass through a range of values from greater than or equal to specified high value back to a value equal to or less than a specified low value.
+
+The Trigger State will have the following attributes:
+* Name
+** com.verticon.tracker.irouter.measurement.trigger
+* Value
+** 2
+
+h3. Flow Terminator
+
+A generic business logic Component Factory that creates services that pass through or terminate the flow of information across the service. Flow control turned on or off based on a distinct State received on a secondary control scope.
+
+Two scopes are consumed:
+# Information scope that contains information flowing across the service
+# Control scope that contains control states that enable or disable (terminate) the flow of the information flowing.
+
+One scope is produced:
+# Pass through of the consumed Information scope.
+  
+h3. BW Control
+
+BW Control is an _use case_ specific custom business logic Component Factory that creates services for controlling livestock animal weight sensing with a TruTest Scalehead indicator and extracted animal fluid weight sensing with a Mettler Balance.  
+
+_The BW Control is included as an example of a custom Component Factory._
+
+
+h3. Measurement Logger
+
+
+h2. Proxy and Gateway Component Factories
+
+Proxy Component Factories create services that interface with external physical:
+* Input devices, 
+* Sensors, 
+* Displays,
+* Actuators. 
+
+Gateway Component Factories create services that create information gateways between the services running in the iRouter and local services registered in the OSGi framework.
+
+Proxy and Gateway Component Factories are packaged as optional iRouter features. 
+
+h2. External Component Factories
+
+External Component Factories create services that are used to document external physical devices:
+* Input devices, 
+* Sensors, 
+* Displays,
+* Actuators,
+* Gateways 
+
+External Component Factories create services that create annotated nodes in the iRouter monitor view. These nodes document the kind, description and location of the external devices that are connected to Proxies and Gateway services.  
+
+__Note: External Component Factories and the services that are created by them are entirely optional. They serve no functional purpose other than documentation.__
+
+
+
+
+

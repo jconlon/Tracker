@@ -1,0 +1,6 @@
+<div class="box tall %%%evenOdd%%%">
+<form id="aform">
+%%%sensorLabel%%%: <span class="data"><span id="%%%sensorName%%%">%%%sensorValue%%%</span><BR>
+<select onChange="$.get('./devices?device=%%%deviceName%%%&parameter=%%%sensorName%%%&action='+this.options[this.selectedIndex].value);this.selectedIndex = 0;return false;">
+    <option value="" selected>Select A Tag</option>
+

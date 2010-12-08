@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	/*
+	* $Revision: 5655 $
+	* 
+	* Copyright (c) OSGi Alliance (2005, 2008). All Rights Reserved.
+	* 
+	* Licensed under the Apache License, Version 2.0 (the "License");
+	* you may not use this file except in compliance with the License.
+	* You may obtain a copy of the License at
+	*
+	*      http://www.apache.org/licenses/LICENSE-2.0
+	*
+	* Unless required by applicable law or agreed to in writing, software
+	* distributed under the License is distributed on an "AS IS" BASIS,
+	* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	* See the License for the specific language governing permissions and
+	* limitations under the License.
+	*/
+-->
+<schema 
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+	targetNamespace="http://www.osgi.org/xmlns/metatype/v1.1.0"
+	version="1.1.0"
+	ecore:package="com.verticon.osgi.metatype" ecore:nsPrefix="metatype">
+
+	<element name="MetaData" type="metatype:Tmetadata" />
+    <!-- ============================= MetaData ============================================== -->
+	<complexType name="Tmetadata"
+				ecore:name="MetaData" ecore:implements="metatype:MetaTypeProvider">
+	   <annotation>
+   	<xs:appinfo xmlns="" ecore:key="operations"
+					source="http://www.eclipse.org/emf/2002/Ecore">
+   		
+  	<!-- public String[] getLocales() -->
+    <operation name="getLocales" type="metatype:StringArray">
+	<body>
+	return null;
+    </body>
+    </operation>
+ 
+	<!-- public String[] getLocales() -->
+    <operation name="getObjectClassDefinition" type="metatype:ObjectClassDefinition">
+	<parameter name="id" type="xs:string"/>
+	<parameter name="locale" type="xs:string"/>
+	<body>
+	for (OCD ocd : this.getOCD()) {
+		if(ocd.getID().equals(id)){
+			return ocd;
+		}
+	}
+	return null;    
+    </body>
+    </operation>  	
+    	
+		    </xs:appinfo>
+		</annotation>
+		<sequence>
+			<element name="OCD" type="metatype:Tocd" minOccurs="0"
+				maxOccurs="unbounded" />
+			<element name="Designate" type="metatype:Tdesignate"
+				minOccurs="0" maxOccurs="unbounded" />
+			<!-- It is non-deterministic, per W3C XML Schema 1.0: http://www.w3.org/TR/xmlschema-1/#cos-nonambig
+				to use namespace="##any" below. -->
+			<any namespace="##other" processContents="lax" minOccurs="0"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="localization" type="string" use="optional" />
+		<anyAttribute />
+	</complexType>
+
+	<!-- ============================= OCD ============================================== -->
+	<complexType name="Tocd"
+				ecore:name="OCD" ecore:implements="metatype:ObjectClassDefinition">
+		
+   <annotation>
+   	<xs:appinfo xmlns="" ecore:key="operations"
+					source="http://www.eclipse.org/emf/2002/Ecore">
+  		<operation name="getIcon" type="metatype:InputStream"
+					exceptions="metatype:IOException">
+    		<parameter name="size" type="xs:int"/>
+	<body>
+		InputStream result = null;
+		String resource = getIcon()!=null?getIcon().getResource():null;
+		if(resource !=null){
+			&lt;%java.net.URL%&gt; url = new URL(resource);
+			result = url.openStream();
+		}
+		return result;                                       
+    </body>
+    	</operation>
+  
+   		 <!-- public AttributeDefinition[] getAttributeDefinitions(int filter) -->
+    	<operation name="getAttributeDefinitions" type="metatype:AttributeDefinitionArray">
+    	<parameter name="filter" type="xs:int"/>
+	<body>
+	&lt;%java.util.List%&gt;&lt;AttributeDefinition&gt; results = new  &lt;%java.util.ArrayList%&gt;&lt;AttributeDefinition&gt;();
+	for (AD attributeDefinition : getAD()) {
+		switch (filter) {
+		case ALL:
+			results.add(attributeDefinition);
+			break;
+
+		case OPTIONAL:
+			if(! attributeDefinition.isRequired()){
+				results.add(attributeDefinition);
+			}
+			break;
+
+		case REQUIRED:
+			if(attributeDefinition.isRequired()){
+				results.add(attributeDefinition);
+			}
+			break;
+		}
+	}
+	return results.isEmpty()?null:(AttributeDefinition[])results.toArray(new AttributeDefinition[results.size()]);                                     
+    </body>
+    
+    		</operation>
+		    </xs:appinfo>
+		</annotation>
+		
+		<sequence>
+			<element name="AD" type="metatype:Tad" minOccurs="1"
+				maxOccurs="unbounded" />
+			<element name="Icon" type="metatype:Ticon" minOccurs="0"
+				maxOccurs="1" />
+			<!-- It is non-deterministic, per W3C XML Schema 1.0: http://www.w3.org/TR/xmlschema-1/#cos-nonambig
+				to use namespace="##any" below. -->
+			<any namespace="##other" processContents="lax" minOccurs="0"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="name" type="string" use="required" />
+		<attribute name="description" type="string" use="optional" />
+		<!-- id attribute changed from type="string" See Ticket#530 -->
+		<attribute name="id" type="ID" use="required" ecore:name="iD"/>
+		<anyAttribute />
+		
+	</complexType>
+
+
+
+    <!-- ============================= AD ============================================== -->
+	<complexType name="Tad" ecore:name="AD" ecore:implements="metatype:AttributeDefinition">
+
+	   <annotation>
+   	<xs:appinfo xmlns="" ecore:key="operations"
+					source="http://www.eclipse.org/emf/2002/Ecore">
+						
+   	<!-- int getType(); -->
+  	<operation name="getType" type="xs:int">
+	<body>
+	return dataType.getValue();                    
+    </body>
+    </operation>
+    	
+    <!-- String validate(String value) -->
+    <operation name="validate" type="xs:string">
+    <parameter name="value" type="xs:string"/>
+	<body>
+	switch (getType()) {
+		case BOOLEAN:
+			if(value.toLowerCase().equals("true") || 
+					value.toLowerCase().equals("false")
+			){}
+			else{
+				return value+" is not a Boolean";
+			}
+			break;
+		
+		case BYTE:
+			try {
+				Byte.parseByte(value);
+			} catch (NumberFormatException e) {
+				return "Byte invalid. "+ e.getLocalizedMessage();
+			}
+			break;
+		
+		case LONG:
+			try {
+				Long l = Long.parseLong(value);
+				if(min !=null &amp;&amp; min.trim().length() &gt; 0){
+					Long lmin = Long.parseLong(min);
+					if(l.compareTo(lmin)&lt;0){
+						return "Value is less than permitted minimum value.";
+					}
+				}
+				if(max !=null &amp;&amp; max.trim().length() &gt; 0){
+					Long lmax = Long.parseLong(max);
+					if(l.compareTo(lmax)&gt;0){
+						return "Value is greater than permitted maximum value.";
+					}
+				}
+			} catch (NumberFormatException e) {
+				return "Long invalid. "+e.getLocalizedMessage();
+			}
+			break;
+		
+		case DOUBLE:
+			try {
+				Double d = Double.parseDouble(value);
+				if(min !=null &amp;&amp; min.trim().length() &gt; 0){
+					Double dmin = Double.parseDouble(min);
+					if(d.compareTo(dmin)&lt;0){
+						return "Value is less than permitted minimum value.";
+					}
+				}
+				if(max !=null &amp;&amp; max.trim().length() &gt; 0){
+					Double dmax = Double.parseDouble(max);
+					if(d.compareTo(dmax)&gt;0){
+						return "Value is greater than permitted maximum value.";
+					}
+				}
+			} catch (NumberFormatException e) {
+				return "Double invalid. "+e.getLocalizedMessage();
+			}
+			break;
+		case FLOAT:
+			try {
+				Float f = Float.parseFloat(value);
+				if(min !=null &amp;&amp; min.trim().length() &gt; 0){
+					Float fmin = Float.parseFloat(min);
+					if(f.compareTo(fmin)&lt;0){
+						return "Value is less than permitted minimum value.";
+					}
+				}
+				if(max !=null &amp;&amp; max.trim().length() &gt; 0){
+					Float fmax = Float.parseFloat(max);
+					if(f.compareTo(fmax)&gt;0){
+						return "Value is greater than permitted maximum value.";
+					}
+				}
+			} catch (NumberFormatException e) {
+				return "Float invalid. "+e.getLocalizedMessage();
+			}
+			break;
+		
+		case INTEGER:
+			try {
+				Integer i = Integer.parseInt(value);
+				if(min !=null &amp;&amp; min.trim().length() &gt; 0){
+					Integer imin = Integer.parseInt(min);
+					if(i.compareTo(imin)&lt;0){
+						return "Value is less than permitted minimum value.";
+					}
+				}
+				if(max !=null &amp;&amp; max.trim().length() &gt; 0){
+					Integer imax = Integer.parseInt(max);
+					if(i.compareTo(imax)&gt;0){
+						return "Value is greater than permitted maximum value.";
+					}
+				}
+			} catch (NumberFormatException e) {
+				return "Integer invalid. "+e.getLocalizedMessage();
+			}
+			break;
+		
+		case CHARACTER:
+			if(value.length()!=1){
+				return "Character invalid. "+value+ " is a value that has more than one character";
+			}
+		
+			break;
+					
+		case STRING:
+				break;
+		
+		 default:
+			return null;
+		}
+		
+	return ""; 
+    </body>
+    </operation>
+  
+   	<!-- public String[] getOptionValues() -->
+    <operation name="getOptionValues" type="metatype:StringArray">
+	<body>
+	if(getOption().isEmpty()){
+		return null;
+	}
+	&lt;%java.util.List%&gt;&lt;String&gt; results = new &lt;%java.util.ArrayList%&gt;&lt;String&gt;();
+	for (Option option : getOption()) {
+		if(validate(option.getValue()).equals("")){
+			results.add(option.getValue());
+		}
+	}
+	return results.isEmpty()?null:(String[])results.toArray(new String[results.size()]);                                     
+    </body>
+    </operation>
+    
+    <!-- public String[] getOptionLabels() -->
+    <operation name="getOptionLabels" type="metatype:StringArray">
+	<body>
+	if(getOption().isEmpty()){
+		return null;
+	}
+	&lt;%java.util.List%&gt;&lt;String&gt; results = new &lt;%java.util.ArrayList%&gt;&lt;String&gt;();
+	for (Option option : getOption()) {
+		if(validate(option.getValue()).equals("")){
+			results.add(option.getLabel());
+		}
+	}
+	return results.isEmpty()?null:(String[])results.toArray(new String[results.size()]);                                     
+	</body>
+    </operation>
+    
+    <!-- public String[] getDefaultValue() -->
+    <operation name="getDefaultValue" type="metatype:StringArray">
+	<body>
+	if(getDefault()==null){
+			return null;
+	}
+	 
+	int numberOfDefaultsToReturn = getCardinality();
+	if(numberOfDefaultsToReturn==0 || numberOfDefaultsToReturn==1){
+			if(validate(getDefault()).equals("")){
+				return new String[]{getDefault()};
+			}
+			return null;
+			
+	}
+	String[] defaults = getDefault().split(",");
+	if(numberOfDefaultsToReturn &lt; 0){
+			numberOfDefaultsToReturn = numberOfDefaultsToReturn * -1;
+	}	
+	&lt;%java.util.List%&gt;&lt;String&gt; results = new &lt;%java.util.ArrayList%&gt;&lt;String&gt;();
+	
+	for (int i = 0; i &lt; defaults.length &amp;&amp; results.size() &lt; numberOfDefaultsToReturn; i++) {
+			if(validate(defaults[i]).equals("")){
+				results.add(defaults[i]);
+			}
+	}	
+    return results.isEmpty()?null:(String[])results.toArray(new String[results.size()]);            
+    </body>
+    </operation>
+    
+		    </xs:appinfo>
+		</annotation>
+		
+		<sequence>
+			<element name="Option" type="metatype:Toption" minOccurs="0"
+				maxOccurs="unbounded" />
+			<!-- It is non-deterministic, per W3C XML Schema 1.0: http://www.w3.org/TR/xmlschema-1/#cos-nonambig
+				to use namespace="##any" below. -->
+			<any namespace="##other" processContents="lax" minOccurs="0"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="name" type="string" use="optional" />
+		<attribute name="description" type="string" use="optional" />
+		<attribute name="id" type="string" use="required" ecore:name="iD" />
+		
+		<attribute name="type" type="metatype:Tscalar" use="required" 
+			 ecore:name="dataType" ecore:unsettable="false"/>
+		
+		<attribute name="cardinality" type="int" use="optional"
+			default="0" />
+		<attribute name="min" type="string" use="optional" />
+		<attribute name="max" type="string" use="optional" />
+		<attribute name="default" type="string" use="optional" />
+		<attribute name="required" type="boolean" use="optional"
+			default="true" />
+		<anyAttribute />
+	</complexType>
+
+	<complexType name="Tobject"
+				ecore:name="Object">
+		<annotation>
+		    <appinfo source="http://www.eclipse.org/emf/2002/Ecore" ecore:key="operations">
+				<operation name="foobar"/>
+		    </appinfo>
+		</annotation>
+		<sequence>
+			<element name="Attribute" type="metatype:Tattribute"
+				minOccurs="0" maxOccurs="unbounded" />
+			<!-- It is non-deterministic, per W3C XML Schema 1.0: http://www.w3.org/TR/xmlschema-1/#cos-nonambig
+				to use namespace="##any" below. -->
+			<any namespace="##other" processContents="lax" minOccurs="0"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="ocdref" type="string" use="required" />
+		<anyAttribute />
+	</complexType>
+
+	<complexType name="Tattribute"
+				ecore:name="Attribute">
+		<sequence>
+			<element name="Value" type="string" minOccurs="0"
+				maxOccurs="unbounded" />
+			<!-- It is non-deterministic, per W3C XML Schema 1.0: http://www.w3.org/TR/xmlschema-1/#cos-nonambig
+				to use namespace="##any" below. -->
+			<any namespace="##other" processContents="lax" minOccurs="0"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="adref" type="string" use="required" />
+		<attribute name="content" type="string" use="optional" />
+		<anyAttribute />
+	</complexType>
+
+	<complexType name="Tdesignate"
+				ecore:name="Designate">
+		<sequence>
+			<element name="Object" type="metatype:Tobject" minOccurs="1"
+				maxOccurs="1" />
+			<any namespace="##any" processContents="lax" minOccurs="0"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="pid" type="string" use="required" />
+		<attribute name="factoryPid" type="string" use="optional" />
+		<attribute name="bundle" type="string" use="optional" />
+		<attribute name="optional" type="boolean" default="false"
+			use="optional" />
+		<attribute name="merge" type="boolean" default="false"
+			use="optional" />
+		<anyAttribute />
+	</complexType>
+
+	<simpleType name="Tscalar"
+				ecore:name="Scalar">
+		<restriction base="string">
+			<enumeration value="String" ecore:value="1"/>
+			<enumeration value="Long" ecore:value="2" />
+			<enumeration value="Integer" ecore:value="3" />
+			<enumeration value="Short" ecore:value="4" />
+			<enumeration value="Char" ecore:value="5" />
+			<enumeration value="Byte" ecore:value="6" />
+			<enumeration value="Double" ecore:value="7" />
+			<enumeration value="Float" ecore:value="8" />
+			<enumeration value="Boolean" ecore:value="11" />
+			
+			
+		</restriction>
+	</simpleType>
+
+	<complexType name="Toption"
+				ecore:name="Option">
+		<sequence>
+			<any namespace="##any" processContents="lax" minOccurs="0"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="label" type="string" use="required" />
+		<attribute name="value" type="string" use="required" />
+		<anyAttribute />
+	</complexType>
+
+	<complexType name="Ticon"
+				ecore:name="Icon">
+		<sequence>
+			<any namespace="##any" processContents="lax" minOccurs="0"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="resource" type="string" use="required" />
+		<attribute name="size" type="positiveInteger" use="required" />
+		<anyAttribute />
+	</complexType>
+
+	<attribute name="must-understand" type="boolean" ecore:ignore="true">
+		<annotation>
+			<documentation xml:lang="en">
+				This attribute should be used by extensions to documents
+				to require that the document consumer understand the
+				extension.
+			</documentation>
+		</annotation>
+	</attribute>
+	
+	<complexType name="MetaTypeProvider"  abstract="true"
+				ecore:serializaable="false"
+	            ecore:interface="true"
+				ecore:instanceClass="org.osgi.service.metatype.MetaTypeProvider"/>
+				
+	<complexType name="AttributeDefinition"  abstract="true"
+				ecore:serializaable="false"
+	            ecore:interface="true"
+				ecore:instanceClass="org.osgi.service.metatype.AttributeDefinition"/>
+	 
+	<complexType name="ObjectClassDefinition" abstract="true"
+	            ecore:serializaable="false"
+			    ecore:interface="true" 
+				ecore:instanceClass="org.osgi.service.metatype.ObjectClassDefinition"/>
+	
+	<!-- This is very important!  You're defined methods cannot throw an exception unless you define this XSD type! -->  
+  	<simpleType name="IOException"
+    	ecore:serializaable="false" ecore:instanceClass="java.io.IOException">
+      <restriction base="string"/>
+  	</simpleType>
+  	
+  	<simpleType name="InputStream"
+    	ecore:serializaable="false" ecore:instanceClass="java.io.InputStream">
+      <restriction base="string"/>
+  	</simpleType>
+  	
+    <simpleType name="StringArray"
+    	ecore:serializaable="false" ecore:instanceClass="java.lang.String[]">
+      <restriction base="string"/>
+  	</simpleType>
+  	
+  	 <simpleType name="AttributeDefinitionArray"
+    	ecore:serializaable="false" ecore:instanceClass="org.osgi.service.metatype.AttributeDefinition[]">
+      <restriction base="string"/>
+  	</simpleType>
+	
+</schema>
