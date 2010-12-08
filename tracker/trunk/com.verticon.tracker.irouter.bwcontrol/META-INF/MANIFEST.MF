@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tracker Blood Weight Controller
+Bundle-Name: iRouter Blood Weight Controller
 Bundle-SymbolicName: com.verticon.tracker.irouter.bwcontrol
 Bundle-Version: 0.2.0
 Bundle-Vendor: Verticon, Inc.

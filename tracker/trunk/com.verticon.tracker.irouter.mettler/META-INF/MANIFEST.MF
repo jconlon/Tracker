@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tracker Mettler Weight Producer
+Bundle-Name: iRouter Mettler Proxy
 Bundle-SymbolicName: com.verticon.tracker.irouter.mettler
 Bundle-Version: 0.2.1.qualifier
 Bundle-Vendor: Verticon, Inc.
