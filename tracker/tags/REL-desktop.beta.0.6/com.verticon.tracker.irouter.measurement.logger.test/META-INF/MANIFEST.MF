@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracker Measurement Logger Test
+Bundle-SymbolicName: com.verticon.tracker.irouter.measurement.logger.test
+Bundle-Version: 0.1.1
+Bundle-Vendor: Verticon, Inc.
+Fragment-Host: com.verticon.tracker.irouter.measurement.logger;bundle-version="0.2.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.easymock;version="2.4.0",
+ org.junit;version="4.8.1",
+ org.junit.runner;version="4.8.1",
+ org.junit.runners;version="4.8.1",
+ org.slf4j;version="1.5.11"

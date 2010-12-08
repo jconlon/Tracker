@@ -1,0 +1,1 @@
+This project was deprecated by ticket #399 and replaced with com.verticon.tracker.updatesite

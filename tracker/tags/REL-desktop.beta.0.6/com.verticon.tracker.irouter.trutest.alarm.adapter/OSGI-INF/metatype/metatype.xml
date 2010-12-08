@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="TruTest Alarm Adapter" id="com.verticon.tracker.irouter.trutest.alarm.adapter"
+       description="Adapts input states into the commands necessary to trigger the alarm on TruTest Indicators.">
+   
+    <AD name="Wiring group name" id="tracker.wiring.group.name" 
+    	required="true" 
+    	type="String" 
+    	default="one"
+        description="Name of the group of components that will be wired together."/>
+        
+    <AD name="Consumable scope" id="wireadmin.consumer.scope" 
+    	required="true" 
+    	type="String"
+    	default="alarm"
+		cardinality="1" 
+		description="The consumable scope that carries the state to adapt. (Use full scope names)" />
+ 
+    <AD name="Producer scope" id="wireadmin.producer.scope" 
+    	type="String"
+		cardinality="1"
+		required="true"
+		default="trutest.commands"  
+		description="The producer scope to send the adapted TruTest commands. (Use full scope names)" />
+ 
+    <AD name="Alarm duration" id="alarm.duration" 
+        required="true" 
+        type="Integer" 
+    	default="500"
+    	description="The time duration of the audible tone. In milliseconds."/>
+    
+    <AD name="Alarm interval in seconds" id="alarm.interval" 
+    	required="true" 
+    	type="Long" 
+        default="5"
+        description="Time in seconds between audible alarms."/>
+        
+    <AD name="Alarm State Name" id="alarm.state.name" 
+    	required="true"
+    	default="alarm"
+    	type="String" 
+    	description="The name of the state that turns on the alarm."/>
+    	
+     <AD name="Alarm State Value"  
+        id="alarm.state.value" 
+        required="true" 
+        default="1"
+        type="Integer" 
+    	description="The value of the state that turns on an alarm."/>
+    	
+	 <AD name="Component container label"  id="tracker.monitor.label" 
+	 	type="String"
+	 	required="false" 
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="TruTest Alarm Adapter"/> 
+        
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.trutest.alarm.adapter" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.trutest.alarm.adapter"/>
+  </Designate>
+  
+</metatype:MetaData>

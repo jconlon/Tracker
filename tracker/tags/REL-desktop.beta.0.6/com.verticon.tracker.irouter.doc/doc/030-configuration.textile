@@ -1,0 +1,62 @@
+h1. Configuration
+
+h2. Configuration Administration Overview
+
+iRouter problem solutions always begin by a rational examination of the problem, clarification of the use-case, and a theoretical design of a solution. The solution is then realized by adding the component instances representing the solution from a list of deployed component factories. Lastly the administrator configures the added instances and saves the configuration.
+
+iRouter configurations conform to the OSGi *Metatype* document schema. One approach for editing configuration documents is to use an external _XML_ (or text) editor to create the configuration and import it into the iRouter to activate it.  While that may work for the more technical administrator, a far easier approach is to use the Tracker iRouter _Configuration Editor_ for the editing process.
+
+h2. Configuration Editor
+
+!images/configuration.png!
+__Example of the Configuration editor__
+
+iRouter Configuration Editor is a full featured EMF(Eclipse Modeling Facility) editor with a special 
+_Factories_ view[6] that is optimized for dealing with iRouter 
+Components components that have published metatype resources.  The Factories view will be described below.
+
+h3. Configuration editor Factories view tab
+
+Clicking on the _Factories_ tab of the editor will bring up a master-detail page form. The master page will be a tree and the nodes of the tree will be all the iRouter Component 
+Factories[7] that where deployed[8] to the iRouter.  
+
+Component Factory nodes in the tree will have children nodes called Service Instances[9].
+
+Clicking on a Factory parent or a Service Instance child node in the master tree will show the details of the node in the details page[9]. 
+
+h4. Creating a service instance
+
+Select the desired _Component Factory_ in the master tree, from which you would like to create a service instance.  The description of the _Component Factory_ will show in the _Factory Properties_ panel in the details page.  
+
+Select the green plus key in the upper right of the __Factories__ editing window to instruct the factory to create a Service Instance. It will show up as an unconfigured and unregistered child of the Component Factory.
+
+h4. Editing a service instance
+
+To edit the configuration of the Service Instance, select it in the master tree and edit the 
+_Service Configuration_ panel in the details page.
+
+h4. Saving the configuration
+
+To save the new or a changed configuration select _File_ and _Save_.
+
+h4. Importing and exporting configurations
+
+To export the active configuration, select the _Configuration_ menu and _Export 
+iRouter Configuration_ and choose a directory and file name for the exported configuration file. 
+
+Likewise to import a new configuration, select the _Configuration_ menu and _Import iRouter 
+Configuration_ and choose a metatype file from the filesystem to import. 
+
+h2. Notes
+
+fn6. Future iRouter releases will include a more graphic editing facility.
+
+fn7. Component factory is a __Factory for creating one or more service instances.__ 
+
+fn8. All iRouter components are Component Factories.  Like the Tracker Desktop, Tracker iRouter components are deployed and updated through the "Equinox P2":http://wiki.eclipse.org/Equinox/p2 provisioning infrastructure. 
+
+fn9. Service instance are the services that do the real work of moving and transforming data.
+
+fn10. The orientation of the master-details pages can be reset to above and below. To change orientation use the orientation tools in the upper right of the view.
+
+

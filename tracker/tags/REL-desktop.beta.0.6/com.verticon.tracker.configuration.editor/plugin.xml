@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Edit Component Configurations"
+            extensions="xml"
+            icon="icons/gears.gif"
+            contributorClass="com.verticon.osgi.metatype.presentation.MetatypeActionBarContributor"
+            class="com.verticon.tracker.configuration.editor.internal.ConfigurationAdminEditor"
+            id="com.verticon.tracker.configuration.editor.internal.ConfigurationAdminEditor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="Commands for Configuring infrastructure components."
+            id="com.verticon.tracker.configuration.editor.commands.category"
+            name="Configuration Admininstration">
+      </category>
+      <command
+            categoryId="com.verticon.tracker.configuration.editor.commands.category"
+            description="Create and configure the iRouter components."
+            id="com.verticon.tracker.configuration.editor.commands.editConfiguration"
+            name="Edit iRouter Configuration">
+      </command>
+       <command
+            categoryId="com.verticon.tracker.configuration.editor.commands.category"
+            description="Save iRouter configuration to a file."
+            id="com.verticon.tracker.configuration.editor.commands.exportConfiguration"
+            name="Export iRouter Configuration">
+      </command>
+       <command
+            categoryId="com.verticon.tracker.configuration.editor.commands.category"
+            description="Load iRouter configuration from a file."
+            id="com.verticon.tracker.configuration.editor.commands.importConfiguration"
+            name="Import iRouter Configuration">
+      </command>
+      
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.verticon.tracker.configuration.editor.internal.handlers.ConfigurationAdminHandler"
+            commandId="com.verticon.tracker.configuration.editor.commands.editConfiguration">
+      </handler>
+      <handler
+            class="com.verticon.tracker.configuration.editor.internal.handlers.ConfigurationExportHandler"
+            commandId="com.verticon.tracker.configuration.editor.commands.exportConfiguration">
+      </handler>
+       <handler
+            class="com.verticon.tracker.configuration.editor.internal.handlers.ConfigurationImportHandler"
+            commandId="com.verticon.tracker.configuration.editor.commands.importConfiguration">
+      </handler>
+     
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               id="com.verticon.tracker.configuration.editor.menus.configMenu"
+               label="Configuration"
+               mnemonic="o">
+            <command
+                  commandId="com.verticon.tracker.configuration.editor.commands.editConfiguration"
+                  id="com.verticon.tracker.configuration.editor.menus.editCommand"
+                  mnemonic="C">
+            </command>
+             <command
+                  commandId="com.verticon.tracker.configuration.editor.commands.exportConfiguration"
+                  id="com.verticon.tracker.configuration.editor.menus.exportCommand"
+                  mnemonic="x">
+            </command>
+             <command
+                  commandId="com.verticon.tracker.configuration.editor.commands.importConfiguration"
+                  id="com.verticon.tracker.configuration.editor.menus.importCommand"
+                  mnemonic="i">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="com.verticon.tracker.configuration.editor.toolbars.configToolbar">
+            <command
+                  commandId="com.verticon.tracker.configuration.editor.commands.editConfiguration"
+                  icon="icons/gears.gif"
+                  id="com.verticon.tracker.configuration.editor.toolbars.editCommand"
+                  tooltip="Edit iRouter Configuration">
+            </command>
+         </toolbar>
+      </menuContribution>
+      
+      
+   </extension>
+
+</plugin>

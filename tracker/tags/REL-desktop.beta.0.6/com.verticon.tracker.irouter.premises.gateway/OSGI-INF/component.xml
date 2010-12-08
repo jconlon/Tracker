@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="activate" immediate="true" name="com.verticon.tracker.irouter.premises.gateway">
+   <implementation class="com.verticon.tracker.irouter.gateway.internal.EnvelopeEventHandler"/>
+   <property name="event.topics" type="String" value="com/verticon/tracker/event"/>
+   <service>
+      <provide interface="org.osgi.service.event.EventHandler"/>
+   </service>
+</scr:component>

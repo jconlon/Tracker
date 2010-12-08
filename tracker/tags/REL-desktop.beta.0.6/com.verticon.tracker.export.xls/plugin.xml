@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <category
+            id="com.verticon.tracker.export.category" name="Tracker"/>
+      
+       <wizard
+            category="com.verticon.tracker.export.category"
+            class="com.verticon.tracker.export.xls.presentation.ExportXlsWizard:RAW"
+            icon="$nl$/icons/etool16/export_wiz.gif"
+            id="com.verticon.tracker.export.xls.wizard1"
+            name="%_UI_ExportFairRegistration_Wizard_label">
+         <description>
+            Export fair registration data to Excel Spreadsheet
+         </description>
+         <selection class="org.eclipse.core.resources.IResource" name="*.fair"/>
+      </wizard>
+   </extension> 
+ </plugin>

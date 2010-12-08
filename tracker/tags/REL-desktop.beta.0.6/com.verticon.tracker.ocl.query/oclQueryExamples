@@ -1,0 +1,128 @@
+--Example from ocl spec--
+context Person def:
+attr statistics : 
+	Set(
+		TupleType(
+			company: Company, 
+			numEmployees: Integer, 
+			wellpaidEmployees: Set(Person), 
+			totalSalary: Integer
+		)
+	) =
+		managedCompanies->collect(
+			c : Company | Tuple {
+				company: Company = c,
+				numEmployees: Integer = c.employee->size(),
+				wellpaidEmployees: Set(Person) = c.job->select(salary>10000).employee->asSet(),
+				totalSalary: Integer = c.job.salary->sum()
+				}
+		)
+		
+		
+--Bag of tuples containing animal and number of events --
+context Premises
+		animals.animal -> collect(
+			a: Animal | Tuple {
+				animal: Animal = a,
+				numEvents: Integer = Event.allInstances()->select(ain=a.ain) ->size()
+				}
+		)
+		
+--Bag of tuples containing animalid and set of events --
+context Premises
+		animals.animal -> collect(
+			a: Animal | Tuple {
+				ain: AnimalId = a.ain,
+				events: Set(Event) = Event.allInstances()->select(ain=a.ain)
+				}
+		)
+--Bag of tuples containing animalid and set of WieghIn --
+context Premises
+		animals.animal -> collect(
+			a: Animal | Tuple {
+				ain: AnimalId = a.ain,
+				weighIns: Set(WeighIn) = WeighIn.allInstances()->select(ain=a.ain)
+				}
+		)
+		
+--Bag of tuples containing animalId and a set of weights -->
+animals.animal -> collect(
+			a: Animal | Tuple {
+				ain: AnimalId = a.ain,
+				weighIns: Set(Integer) = WeighIn.allInstances()->select(ain=a.ain)->collect(wi:WeighIn | wi.weight) ->asSet()
+				}
+		)
+		
+--Bag of tuples with the animal id and the species--
+animals.animal -> collect(
+			a: Animal | Tuple {
+				ain: String = a.ain.idNumber,
+				species: String = a.species
+				
+			}
+		)
+
+
+		
+--Bag of tuples containing animalid and set of WieghIn dates and wieghts 
+Parses with error 
+Property (ain) not found in tuple type: (Tuple{ain : AnimalId = a.ain, weighIns : Bag(Tuple(date: DateTime, weight: EIntegerObject)) = tracker::WeighIn.allInstances()->select(temp27 : WeighIn | temp27.ain.=(a.ain))->collect(wi : WeighIn | Tuple{date : DateTime = wi.dateTime, weight : Integer = wi.weight})})
+--
+context Premises
+		animals.animal -> collect(
+			a: Animal | Tuple {
+				ain: AnimalId = a.ain,
+				weighIns: Bag(
+					Tuple(date:DateTime, weight:Integer)
+				)= 
+				WeighIn.allInstances()->select(ain=a.ain)->collect(
+					wi: WeighIn | Tuple{
+						date:DateTime = wi.dateTime,
+						weight:Integer = wi.weight
+					}
+				)
+				
+			}
+		)
+		
+--Bag of tuples with the animal id and the species--
+animals.animal -> collect(
+			a: Animal | Tuple {
+				ain: String = a.ain.idNumber,
+				species: String = a.species,
+				let moins:Bag(MovedIn)=MovedIn.allInstances()->select(ain=a.ain) in
+				if moins.isEmpty() then
+					sourceId = 'unknown'
+				else
+					sourceId = 'known'
+				endif
+				premiseId: String = ->asOrderedSet()->last().sourcePin
+				)
+				
+			}
+		)
+--Does an animal unidentified Pins
+context Animal
+self.allEvents() -> 
+	select(e : Event | 
+		(e.oclIsTypeOf(MovedIn) and e.oclAsType(MovedIn).sourcePin.oclIsUndefined()) 
+		or  
+		(e.oclIsTypeOf(MovedOut) and e.oclAsType(MovedOut).destinationPin.oclIsUndefined())
+	) ->
+		size() > 0
+	
+--People with animals that have unidentified Pins
+context Person
+Exhibit.allInstances() -> 
+	select(e : Exhibit | 
+		e.exhibitor = self 
+		and 
+		self.pin.oclIsUndefined() = false 
+		and e.animal.allEvents() -> 
+			select(e : Event | 
+				(e.oclIsTypeOf(MovedIn) and e.oclAsType(MovedIn).sourcePin.oclIsUndefined()) 
+				or  
+				(e.oclIsTypeOf(MovedOut) and e.oclAsType(MovedOut).destinationPin.oclIsUndefined())
+				) ->
+					size() > 0
+	) ->size() 

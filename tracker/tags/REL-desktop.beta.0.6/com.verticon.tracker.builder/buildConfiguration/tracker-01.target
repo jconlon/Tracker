@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.5"?>
+
+<target name="Restored Tracker Ganymede Target">
+<locations>
+<location path="/opt/Eclipse/tracker-eclipse_target_platform-200905071512/eclipse" type="Directory"/>
+</locations>
+<environment>
+<os>linux</os>
+<ws>gtk</ws>
+<arch>x86</arch>
+<nl>en_US</nl>
+</environment>
+</target>

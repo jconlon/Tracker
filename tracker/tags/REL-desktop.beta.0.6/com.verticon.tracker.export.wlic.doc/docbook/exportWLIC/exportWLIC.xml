@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" 
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter>
+     <?dbhtml filename="wlicExport/wlicExport.html" ?>
+	<title>WLIC Export</title>
+	<section>
+	<?dbhtml filename="overview/wlicExport.html" ?>
+	<title>Overview</title>
+	<section>
+		<title>What is WLIC Exporting?</title>
+		<para>
+			The Wisconsin Livestock Identification Consortium
+			<acronym>WLIC</acronym> is the State of Wisconsin's Premises and
+			The <acronym>WLIC</acronym> is registering premises as the authorized agent of 
+			the Wisconsin Department of Agriculture, 
+			the Trade and Consumer Protection <acronym>DATCP</acronym>. WLIC is a multi-species 
+			effort led by Wisconsin’s livestock and industry organizations. 
+			Contact WLIC at 1-888-808-1910.
+   		</para>
+		<para>
+			The Wisconsin Livestock Premises Registration Act requires anyone
+		    who keeps, houses, or co-mingles livestock to register their premises.
+		</para>
+		<para>
+			Premises Document Export Functionality is provided by utilities
+			that are called from the main Tracker Editor menu.
+		</para>
+	</section>
+
+	<section>
+		<?dbhtml filename="overview/wlicExport_howTo.html" ?>
+		<title>
+			How to Export WLIC Information from Tracker Premises Documents?
+		</title>
+
+		<para>
+			Animal records submitted to the Wisconsin Livestock
+			Identification Consortium
+			<acronym>WLIC</acronym>
+			utilize a specific file format.
+		</para>
+		
+		<para>
+			The menu item
+			<emphasis>WLIC file...</emphasis>
+			will export the Tracker Premises Document in a WLIC file
+			format.
+		</para>
+	</section>
+	</section>
+</chapter>

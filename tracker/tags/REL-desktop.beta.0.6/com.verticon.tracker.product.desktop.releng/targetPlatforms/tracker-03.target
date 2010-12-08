@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.5"?>
+
+<target name="Tracker Composite Install">
+<locations>
+<location path="/opt/Eclipse/swtbot/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/apache/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/tracker-eclipse_target_platform-200906290814/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/birt-report-framework-2.5.1/eclipse" type="Directory"/>
+<location path="/opt/slf4j-1.5.11/eclipse-target" type="Directory"/>
+<location path="/opt/logback-0.9.18/eclipse-target" type="Directory"/>
+<location path="/opt/ekkesCornerLogging/eclipse-target" type="Directory"/>
+<location path="/opt/Eclipse/dtp-incubator-sdk-1.8.0M7-201001260500-target_platform/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/dtp-sdk-1.8.0M6-201003171157-target_platform/eclipse" type="Directory"/>
+</locations>
+<implicitDependencies>
+<plugin id="org.junit4"/>
+</implicitDependencies>
+</target>

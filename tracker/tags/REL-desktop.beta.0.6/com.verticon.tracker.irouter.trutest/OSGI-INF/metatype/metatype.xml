@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="TruTest Proxy" id="com.verticon.tracker.irouter.trutest.indicatorfactory"
+  		description="Provides proxy connection and data transfer to and from TruTest livestock scale head indicators.">
+  	
+    <AD name="Connection uri" id="connection.uri" 
+    	required="true" 
+    	type="String" 
+    	default="socket://localhost:2344"
+    	description="URI to connect to the TruTest Indicator. Example socket://192.168.0.118:3001"/> 
+    	
+    <AD name="Wiring group name" id="tracker.wiring.group.name" 
+    	required="true" 
+    	type="String" 
+    	default="one"
+        description="Name of the group of components that will be wired together."/>
+        
+    <AD name="Stable weight measurement error" id="stable.weight.error" 
+    	required="true" 
+    	type="Double" 
+    	default=".01" 
+    	description="Value of mesurement error to use for weights reported by the indicator as stable."/>
+    	
+    <AD name="Unstable weight measurement error" id="unstable.weight.error" 
+    	required="true" 
+    	type="Double" 
+    	default=".1" 
+    	description="Value of mesurement error to use for weights reported by the indicator as unstable."/>
+    	
+    <AD name="Poll interval milliseconds" id="poll.milliseconds.delay" 
+    	required="true" 
+    	type="Long" 
+    	default="200" 
+    	description="Number of milliseconds between queries of the indicator for new data."/>
+    	
+    <AD name="Request command" id="request.command" 
+    	required="true" 
+    	type="String" 
+    	default="{RP}%13%" 
+    	description="Command to use to request information from the scale."/>
+    	
+    <AD name="Response pattern" id="response.pattern" 
+    	required="true" 
+    	type="String" 
+    	default="^\[(.+)\]$" 
+    	description="Regex pattern for parsing information responses from the scale."/>
+    	
+    <AD name="Connection retry interval seconds" id="connection.retry.seconds" 
+    	required="true" 
+    	type="Long" 
+    	default="5" 
+    	description="Seconds to wait between reconnection attempts."/>
+    	
+  	<AD name="Command consumption delay milliseconds" id="consumer.command.delay" 
+  		required="true" 
+  		type="Integer" 
+  		default="100" 
+  		description="MilliSeconds to wait between attempts to consume commands sent on wires from other components."/>
+  		
+    <AD name="Send unstable weights" id="send.unstable.weights" 
+    	required="true" 
+    	type="Boolean" 
+    	default="true"
+    	description="Should unstable weights be sent to components?"/>
+    	
+    <AD name="Animal Life Data upload record pattern" id="upload.record.pattern" 
+    	type="String" 
+    	required="true"
+    	default="^[0-9]{15,15},[0-9]{4,4},[0-3]{1,1},\d.\d\d$" 
+    	description="Pattern to use for uploading life data. Watch out for the slashes!"/>
+			 
+	<AD name="Data Synchronization Directory" id="data.synchronization.directory" 
+		type="String"
+		required="false"
+		default="" 
+    	description="Directory to use for uploading and downloading animal life data records."/>
+    	
+    <AD name="Data Synchronization timeout" id="data.synchronization.timeout.seconds" 
+		type="Integer"
+		required="false"
+		default="5" 
+    	description="Time to wait for an animal life data file to be created by an other component so it can be uploaded."/>
+ 
+    <AD name="Initial Consumer Scope for Data Synchronization" id="data.synchronization.scope" 
+		type="String"
+		required="false"
+		default="trutest.upload.ready"
+    	description="Consumer scope used in intialization for indication that a data file is ready for uploading."/>
+ 
+    <AD name="Consumer Scope for Commands" id="consumer.scope.commands" 
+    	type="String"
+    	required="true"
+		default="trutest.commands" 
+    	description="Consumer scope for TruTest commands."/>
+    	
+    <AD name="Producer Scope for Animal Weight" id="producer.scope.weight" 
+    	type="String"
+    	required="true"
+		default="animal.weight" 
+    	description="Producer scope for send out the Animal Weight Measurement."/>
+    
+    <AD name="Producer Scope for Animal EID" id="producer.scope.eid" 
+    	type="String"
+    	required="false" 
+		default="animal.eid" 
+    	description="Producer scope for sending out the Animal ID number."/>
+    	
+    <AD name="Producer Scope for Enter Key" id="producer.scope.enter" type="String"
+		default="transaction.state"
+		required="true"  
+    	description="Producer scope for sending out a state indicating that enter key was pressed."/>
+    	
+     <AD name="State Name for Enter Key Press" id="producer.enter.press.state" 
+     	type="String"
+     	required="true" 
+		default="transaction.state" 
+    	description="The name of the state indicating that enter key was pressed."/>
+    
+     <AD name="Component container label"  id="tracker.monitor.label" 
+     	type="String"
+     	required="false"
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="TruTest Proxy"/> 
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.trutest.indicatorfactory" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.trutest.indicatorfactory"/>
+  </Designate>
+  
+</metatype:MetaData>

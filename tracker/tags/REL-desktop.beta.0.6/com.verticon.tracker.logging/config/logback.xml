@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+  <appender name="R" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <File>logBack.log</File>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <pattern>[%d{ISO8601}]%5p%6.6r[%t]%x - %C.%M(%F:%L) - %m%n</pattern>
+    </layout>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <maxIndex>1</maxIndex>
+    </rollingPolicy>
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <MaxFileSize>100KB</MaxFileSize>
+    </triggeringPolicy>
+  </appender>
+  
+  
+  <logger name="com.verticon.tracker.reader">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker">
+    <level value="DEBUG"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.export">
+    <level value="INFO"/>
+  </logger>
+  <logger name="com.verticon.tracker.editor.presentation.SelectionViewerFilter">
+    <level value="DEBUG"/>
+  </logger>
+  
+  <root>
+    <level value="DEBUG"/>
+    <appender-ref ref="R"/>
+  </root>
+  
+  <conversionRule conversionWord="bundle"
+  	converterClass="com.verticon.tracker.logging.logback.classic.BundleConverter"/>
+  	
+  <consolePlugin />
+</configuration>

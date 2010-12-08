@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+   name="com.verticon.tracker.irouter.eid.event.test.system.mock.generator">
+   <implementation 
+    class="com.verticon.tracker.irouter.eid.event.test.system.internal.MockEventGenerator"/>
+   <property name="service.pid" type="String" value="eid.event.mockEventGenerator"/>
+   <reference bind="setEventAdmin" cardinality="1..1" interface="org.osgi.service.event.EventAdmin" name="EventAdmin" policy="static"/>
+   <service>
+      <provide interface="com.verticon.tracker.irouter.eid.event.test.system.Publisher"/>
+   </service>
+</scr:component>

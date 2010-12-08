@@ -1,0 +1,51 @@
+h1. TruTest Proxy Feature
+
+The TruTest feature is an iRouter feature containing a proxy component factory and TruTest specific business logic component Factories that creates user configurable services instances[14] for interfacing with TruTest animal scale-heads[15]. 
+
+
+h2. Proxy Component Factory
+
+The TruTest Proxy Component Factory creates services for:
+* Synchronizing Animal Life Data on startup
+** Exporting of animal life data to a file in a specified directory on the filesystem
+** Importing of animal life data
+*** Received as a list of records sent from an active iRouter data synchronization producer service
+*** From a specified directory on the file system
+* Producing weight and key state information
+* Consuming raw TruTest protocol commands
+
+h3. Consumer Scopes
+
+TruTest Service Instances consume TruTest protocol commands that are produced by other TruTest and iRouter service instances. 
+
+h3. Producer Scopes
+
+TruTest Service Instances produce wireAdmin products that are consumed by business logic and logging components. TruTest Service Instances produce weight measurements, animal tag numbers, and transaction state. 
+
+h3. Service Diagram
+
+!{padding-left:3em}images/trutestComponent.png!
+
+h2. Business Logic Component Factories
+
+h3. Measurement Adapter
+
+Measurement Adapter is a Measurement Consumer and a TruTest Command producer. It consumes Measurements and converts them into TruTest commands for displaying the Measurement values in fields on a TruTest Indicator.  
+
+h3. EID Adapter
+
+EID Adapter is a Animal ID(Identification) number Consumer and a TruTest Command producer. It consumes Animal IDs and converts them into TruTest commands for inputing EID(Electronic animal IDentification) values to a TruTest Indicator.  
+
+h3. Alarm Adapter
+
+Alarm Adapter is a State Consumer and a TruTest Command producer. It consumes States and converts them into TruTest commands to turn on and off the alarm in a TruTest Indicator.  
+
+Reception of a distinct state sends commands to the TruTest Proxy service instances to turn on the alarm, while reception of any other state sends commands to the TruTest Proxy service instance to turn the alarm off.
+
+h2. Notes
+
+fn14. TruTest service instances are implemented as WireAdmin Producer and Consumer services.
+
+fn15. The Tracker Device Simulator product has implemented a simulator of the TruTest scale head. This simulator can be used for testing and validating iRouter configurations utilizing TruTest Service Instances. 
+
+
