@@ -86,4 +86,17 @@ public class MovedInTest extends EventTest {
 		assertNotNull(getFixture());
 		assertEquals(MovedIn.EVENT_CODE, getFixture().getEventCode());
 	}
+	
+	/**
+	 * Tests the '{@link com.verticon.tracker.MovedIn#setUri(String) <em>setURI</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.MovedIn#setUri(String)
+	 * @see com.verticon.tracker.MovedIn#getUri()
+	 * @generated NOT
+	 */
+	public void testSetGetURI(){
+		getFixture().setUri("test");
+		assertEquals("test", getFixture().getUri());
+	}
 } //MovedInTest

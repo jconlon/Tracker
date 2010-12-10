@@ -1246,6 +1246,10 @@
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//MovedIn/sourcePin"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PDdxsVmCEd2tRZ2K3aMUww"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_O4HXcAPUEeCMr-HeGYJKMg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//MovedIn/uri"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_O4HXcQPUEeCMr-HeGYJKMg"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PDcjklmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PDcjk1mCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_PDcjlFmCEd2tRZ2K3aMUww"/>
@@ -1265,6 +1269,10 @@
       <children xmi:type="notation:Node" xmi:id="_PDe_0FmCEd2tRZ2K3aMUww" type="2001">
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//MovedOut/destinationPin"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PDe_0VmCEd2tRZ2K3aMUww"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_5KTAIQPTEeCMr-HeGYJKMg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//MovedOut/uri"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_5KTAIgPTEeCMr-HeGYJKMg"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PDeYwlmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PDeYw1mCEd2tRZ2K3aMUww"/>

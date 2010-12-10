@@ -28,7 +28,12 @@ import com.verticon.tracker.TrackerFactory;
  * <p>
  * The following operations are tested:
  * <ul>
- *   <li>{@link GenericEvent#findAttributeDefinition(java.util.Map.Entry)} <em>Find AttributeDefinition</em>}</li>
+ *   <li>{@link com.verticon.tracker.GenericEvent#findAttributeDefinition(org.eclipse.emf.common.util.EMap) <em>Find Attribute Definition</em>}</li>
+ *   <li>{@link com.verticon.tracker.GenericEvent#findName() <em>Find Name</em>}</li>
+ *   <li>{@link com.verticon.tracker.GenericEvent#value(java.lang.String) <em>Value</em>}</li>
+ *   <li>{@link com.verticon.tracker.GenericEvent#hasRequiredAttributes(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Has Required Attributes</em>}</li>
+ *   <li>{@link com.verticon.tracker.GenericEvent#hasValidAttributes(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Has Valid Attributes</em>}</li>
+ *   <li>{@link com.verticon.tracker.GenericEvent#hasAllAttributes(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Has All Attributes</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -95,6 +100,84 @@ public class GenericEventTest extends EventTest {
 	}
 	
 	
+	/**
+	 * Tests the '{@link com.verticon.tracker.GenericEvent#findAttributeDefinition(org.eclipse.emf.common.util.EMap) <em>Find Attribute Definition</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.GenericEvent#findAttributeDefinition(org.eclipse.emf.common.util.EMap)
+	 * @generated
+	 */
+	public void testFindAttributeDefinition__EMap() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.GenericEvent#findName() <em>Find Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.GenericEvent#findName()
+	 * @generated
+	 */
+	public void testFindName() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.GenericEvent#value(java.lang.String) <em>Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.GenericEvent#value(java.lang.String)
+	 * @generated
+	 */
+	public void testValue__String() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.GenericEvent#hasRequiredAttributes(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Has Required Attributes</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.GenericEvent#hasRequiredAttributes(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	public void testHasRequiredAttributes__DiagnosticChain_Map() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.GenericEvent#hasValidAttributes(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Has Valid Attributes</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.GenericEvent#hasValidAttributes(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	public void testHasValidAttributes__DiagnosticChain_Map() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.GenericEvent#hasAllAttributes(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Has All Attributes</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.GenericEvent#hasAllAttributes(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	public void testHasAllAttributes__DiagnosticChain_Map() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
 	@SuppressWarnings("unchecked")
 	public void testfindAttributeDefinition__AttributeDefinition() {
 		

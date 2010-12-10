@@ -25,6 +25,7 @@ import com.verticon.tracker.TrackerPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.verticon.tracker.impl.MovedOutImpl#getDestinationPin <em>Destination Pin</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.MovedOutImpl#getUri <em>Uri</em>}</li>
  * </ul>
  * </p>
  *
@@ -59,6 +60,26 @@ public class MovedOutImpl extends EventImpl implements MovedOut {
 	 * @ordered
 	 */
 	protected String destinationPin = DESTINATION_PIN_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getUri() <em>Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String URI_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getUri() <em>Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected String uri = URI_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -114,11 +135,34 @@ public class MovedOutImpl extends EventImpl implements MovedOut {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getUri() {
+		return uri;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUri(String newUri) {
+		String oldUri = uri;
+		uri = newUri;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.MOVED_OUT__URI, oldUri, uri));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.MOVED_OUT__DESTINATION_PIN:
 				return getDestinationPin();
+			case TrackerPackage.MOVED_OUT__URI:
+				return getUri();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -133,6 +177,9 @@ public class MovedOutImpl extends EventImpl implements MovedOut {
 		switch (featureID) {
 			case TrackerPackage.MOVED_OUT__DESTINATION_PIN:
 				setDestinationPin((String)newValue);
+				return;
+			case TrackerPackage.MOVED_OUT__URI:
+				setUri((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -149,6 +196,9 @@ public class MovedOutImpl extends EventImpl implements MovedOut {
 			case TrackerPackage.MOVED_OUT__DESTINATION_PIN:
 				setDestinationPin(DESTINATION_PIN_EDEFAULT);
 				return;
+			case TrackerPackage.MOVED_OUT__URI:
+				setUri(URI_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -163,6 +213,8 @@ public class MovedOutImpl extends EventImpl implements MovedOut {
 		switch (featureID) {
 			case TrackerPackage.MOVED_OUT__DESTINATION_PIN:
 				return DESTINATION_PIN_EDEFAULT == null ? destinationPin != null : !DESTINATION_PIN_EDEFAULT.equals(destinationPin);
+			case TrackerPackage.MOVED_OUT__URI:
+				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -179,6 +231,8 @@ public class MovedOutImpl extends EventImpl implements MovedOut {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (destinationPin: ");
 		result.append(destinationPin);
+		result.append(", uri: ");
+		result.append(uri);
 		result.append(')');
 		return result.toString();
 	}

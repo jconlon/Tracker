@@ -86,5 +86,17 @@ public class MovedOutTest extends EventTest {
 		assertNotNull(getFixture());
 		assertEquals(MovedOut.EVENT_CODE, getFixture().getEventCode());
 	}
+	
+	/**
+	 * Tests the '{@link com.verticon.tracker.MovedOut#setUri(String) <em>setURI</em>}' operation.
+	 * Anything not value 
+	 * @see com.verticon.tracker.MovedOut#setUri(String)
+	 * @see com.verticon.tracker.MovedOut#getUri()
+	 * @generated NOT
+	 */
+	public void testSetGetURI(){
+		getFixture().setUri("test");
+		assertEquals("test", getFixture().getUri());
+	}
 
 } //MovedOutTest

@@ -32,6 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.EventType;
 import com.verticon.tracker.Sex;
@@ -70,6 +71,8 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#eventHistory() <em>Event History</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#lastWeighIn() <em>Last Weigh In</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getAge() <em>Get Age</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#canContain(com.verticon.tracker.EventType, java.lang.String) <em>Can Contain</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#lastEvent(com.verticon.tracker.EventType, java.lang.String) <em>Last Event</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -194,6 +197,36 @@ public abstract class AnimalTest extends TestCase {
 		assertEquals("Y03", getFixture().getAge().toRoundedString());
 	}
 	
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Animal#canContain(com.verticon.tracker.EventType, java.lang.String) <em>Can Contain</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#canContain(com.verticon.tracker.EventType, java.lang.String)
+	 * @generated NOT
+	 */
+	public void testCanContain__EventType_String() {
+		assertNotNull(getFixture());
+		assertTrue(getFixture().canContain(EventType.ANIMAL_MISSING, null));
+	}
+
+		/**
+	 * Tests the '{@link com.verticon.tracker.Animal#lastEvent(com.verticon.tracker.EventType, java.lang.String) <em>Last Event</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#lastEvent(com.verticon.tracker.EventType, java.lang.String)
+	 * @generated NOT
+	 */
+	public void testLastEvent__EventType_String() {
+		assertNotNull(getFixture());
+		
+		Event event1 = TrackerFactory.eINSTANCE.createTagApplied();
+		Date date = new Date();
+		event1.setDateTime(date);
+		getFixture().activeTag().getEvents().add(event1);
+		assertNotNull(getFixture().lastEvent(EventType.TAG_APPLIED, null));
+		assertEquals(event1,getFixture().lastEvent(EventType.TAG_APPLIED, null));
+	}
 
 	/**
 	 * Tests the '{@link com.verticon.tracker.Animal#getSexCode() <em>Sex Code</em>}' feature getter.

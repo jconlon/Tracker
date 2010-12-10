@@ -1817,13 +1817,22 @@ public interface TrackerPackage extends EPackage {
 	int MOVED_IN__SOURCE_PIN = EVENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVED_IN__URI = EVENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Moved In</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MOVED_IN_FEATURE_COUNT = EVENT_FEATURE_COUNT + 1;
+	int MOVED_IN_FEATURE_COUNT = EVENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.MovedOutImpl <em>Moved Out</em>}' class.
@@ -1926,13 +1935,22 @@ public interface TrackerPackage extends EPackage {
 	int MOVED_OUT__DESTINATION_PIN = EVENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVED_OUT__URI = EVENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Moved Out</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MOVED_OUT_FEATURE_COUNT = EVENT_FEATURE_COUNT + 1;
+	int MOVED_OUT_FEATURE_COUNT = EVENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.LostTagImpl <em>Lost Tag</em>}' class.
@@ -7000,6 +7018,17 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getMovedIn_SourcePin();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.MovedIn#getUri <em>Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uri</em>'.
+	 * @see com.verticon.tracker.MovedIn#getUri()
+	 * @see #getMovedIn()
+	 * @generated
+	 */
+	EAttribute getMovedIn_Uri();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.MovedOut <em>Moved Out</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7019,6 +7048,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getMovedOut_DestinationPin();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.MovedOut#getUri <em>Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uri</em>'.
+	 * @see com.verticon.tracker.MovedOut#getUri()
+	 * @see #getMovedOut()
+	 * @generated
+	 */
+	EAttribute getMovedOut_Uri();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.LostTag <em>Lost Tag</em>}'.
@@ -8531,6 +8571,14 @@ public interface TrackerPackage extends EPackage {
 		EAttribute MOVED_IN__SOURCE_PIN = eINSTANCE.getMovedIn_SourcePin();
 
 		/**
+		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MOVED_IN__URI = eINSTANCE.getMovedIn_Uri();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.MovedOutImpl <em>Moved Out</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8547,6 +8595,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MOVED_OUT__DESTINATION_PIN = eINSTANCE.getMovedOut_DestinationPin();
+
+		/**
+		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MOVED_OUT__URI = eINSTANCE.getMovedOut_Uri();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.LostTagImpl <em>Lost Tag</em>}' class.

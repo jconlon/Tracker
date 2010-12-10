@@ -604,10 +604,14 @@
     <genClasses ecoreClass="tracker.ecore#//MovedIn">
       <genFeatures createChild="false" propertyCategory="Transported From" propertyDescription="Premises ID that the animal came from"
           ecoreFeature="ecore:EAttribute tracker.ecore#//MovedIn/sourcePin"/>
+      <genFeatures createChild="false" propertyCategory="Transported From" propertyDescription="Premises URI that the animal came from"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//MovedIn/uri"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//MovedOut">
       <genFeatures createChild="false" propertyCategory="Transported To" propertyDescription="Destination Premises ID to transport animal"
           ecoreFeature="ecore:EAttribute tracker.ecore#//MovedOut/destinationPin"/>
+      <genFeatures createChild="false" propertyCategory="Transported To" propertyDescription="Destination Premises URI to transport animal"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//MovedOut/uri"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//LostTag"/>
     <genClasses ecoreClass="tracker.ecore#//ReplacedTag">

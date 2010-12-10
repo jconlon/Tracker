@@ -1862,6 +1862,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMovedIn_Uri() {
+		return (EAttribute)movedInEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMovedOut() {
 		return movedOutEClass;
 	}
@@ -1873,6 +1882,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 */
 	public EAttribute getMovedOut_DestinationPin() {
 		return (EAttribute)movedOutEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMovedOut_Uri() {
+		return (EAttribute)movedOutEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2280,9 +2298,11 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		movedInEClass = createEClass(MOVED_IN);
 		createEAttribute(movedInEClass, MOVED_IN__SOURCE_PIN);
+		createEAttribute(movedInEClass, MOVED_IN__URI);
 
 		movedOutEClass = createEClass(MOVED_OUT);
 		createEAttribute(movedOutEClass, MOVED_OUT__DESTINATION_PIN);
+		createEAttribute(movedOutEClass, MOVED_OUT__URI);
 
 		lostTagEClass = createEClass(LOST_TAG);
 
@@ -2627,9 +2647,11 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		initEClass(movedInEClass, MovedIn.class, "MovedIn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMovedIn_SourcePin(), this.getPremisesIdNumber(), "sourcePin", null, 1, 1, MovedIn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMovedIn_Uri(), this.getURI(), "uri", null, 0, 1, MovedIn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(movedOutEClass, MovedOut.class, "MovedOut", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMovedOut_DestinationPin(), this.getPremisesIdNumber(), "destinationPin", null, 1, 1, MovedOut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMovedOut_Uri(), this.getURI(), "uri", null, 0, 1, MovedOut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(lostTagEClass, LostTag.class, "LostTag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

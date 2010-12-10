@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.verticon.tracker.impl;
 
+import com.verticon.tracker.*;
 import static com.verticon.tracker.TrackerPlugin.bundleMarker;
 
 import java.net.URI;
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

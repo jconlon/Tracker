@@ -268,13 +268,14 @@ public class TagImpl extends EObjectImpl implements Tag {
 				return Boolean.FALSE;
 			}
 		};
-		
-		for(TreeIterator<?> iter = EcoreUtil.getAllContents(eResource().getResourceSet(), true); iter.hasNext();){
-			Object o =  iter.next();
-			if(o instanceof EObject){
-				EObject eObject = (EObject)o;
-				if(ocdVisitor.doSwitch(eObject) == Boolean.FALSE){
-					iter.prune();
+		if(eResource()!=null && eResource().getResourceSet()!=null ){
+			for(TreeIterator<?> iter = EcoreUtil.getAllContents(eResource().getResourceSet(), true); iter.hasNext();){
+				Object o =  iter.next();
+				if(o instanceof EObject){
+					EObject eObject = (EObject)o;
+					if(ocdVisitor.doSwitch(eObject) == Boolean.FALSE){
+						iter.prune();
+					}
 				}
 			}
 		}

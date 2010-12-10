@@ -72,6 +72,7 @@ public class MovedInItemProvider
 			super.getPropertyDescriptors(object);
 
 			addSourcePinPropertyDescriptor(object);
+			addUriPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -90,6 +91,28 @@ public class MovedInItemProvider
 				 getString("_UI_MovedIn_sourcePin_feature"),
 				 getString("_UI_MovedIn_sourcePin_description"),
 				 TrackerPackage.Literals.MOVED_IN__SOURCE_PIN,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 getString("_UI_TransportedFromPropertyCategory"),
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Uri feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addUriPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_MovedIn_uri_feature"),
+				 getString("_UI_MovedIn_uri_description"),
+				 TrackerPackage.Literals.MOVED_IN__URI,
 				 true,
 				 false,
 				 false,
@@ -134,6 +157,7 @@ public class MovedInItemProvider
 
 		switch (notification.getFeatureID(MovedIn.class)) {
 			case TrackerPackage.MOVED_IN__SOURCE_PIN:
+			case TrackerPackage.MOVED_IN__URI:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
