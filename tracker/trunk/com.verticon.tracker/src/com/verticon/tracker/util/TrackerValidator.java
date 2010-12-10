@@ -530,9 +530,11 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateGenericEvent(GenericEvent genericEvent, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = validate_EveryMultiplicityConforms(genericEvent, diagnostics, context);
+		boolean result = validate_NoCircularContainment(genericEvent, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(genericEvent, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(genericEvent, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(genericEvent, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(genericEvent, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryProxyResolves(genericEvent, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_UniqueID(genericEvent, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(genericEvent, diagnostics, context);

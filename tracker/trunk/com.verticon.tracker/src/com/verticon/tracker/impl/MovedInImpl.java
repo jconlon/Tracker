@@ -25,6 +25,7 @@ import com.verticon.tracker.TrackerPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.verticon.tracker.impl.MovedInImpl#getSourcePin <em>Source Pin</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.MovedInImpl#getUri <em>Uri</em>}</li>
  * </ul>
  * </p>
  *
@@ -59,6 +60,26 @@ public class MovedInImpl extends EventImpl implements MovedIn {
 	 * @ordered
 	 */
 	protected String sourcePin = SOURCE_PIN_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getUri() <em>Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String URI_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getUri() <em>Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected String uri = URI_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -114,11 +135,34 @@ public class MovedInImpl extends EventImpl implements MovedIn {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getUri() {
+		return uri;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUri(String newUri) {
+		String oldUri = uri;
+		uri = newUri;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.MOVED_IN__URI, oldUri, uri));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.MOVED_IN__SOURCE_PIN:
 				return getSourcePin();
+			case TrackerPackage.MOVED_IN__URI:
+				return getUri();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -133,6 +177,9 @@ public class MovedInImpl extends EventImpl implements MovedIn {
 		switch (featureID) {
 			case TrackerPackage.MOVED_IN__SOURCE_PIN:
 				setSourcePin((String)newValue);
+				return;
+			case TrackerPackage.MOVED_IN__URI:
+				setUri((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -149,6 +196,9 @@ public class MovedInImpl extends EventImpl implements MovedIn {
 			case TrackerPackage.MOVED_IN__SOURCE_PIN:
 				setSourcePin(SOURCE_PIN_EDEFAULT);
 				return;
+			case TrackerPackage.MOVED_IN__URI:
+				setUri(URI_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -163,6 +213,8 @@ public class MovedInImpl extends EventImpl implements MovedIn {
 		switch (featureID) {
 			case TrackerPackage.MOVED_IN__SOURCE_PIN:
 				return SOURCE_PIN_EDEFAULT == null ? sourcePin != null : !SOURCE_PIN_EDEFAULT.equals(sourcePin);
+			case TrackerPackage.MOVED_IN__URI:
+				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -179,6 +231,8 @@ public class MovedInImpl extends EventImpl implements MovedIn {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (sourcePin: ");
 		result.append(sourcePin);
+		result.append(", uri: ");
+		result.append(uri);
 		result.append(')');
 		return result.toString();
 	}

@@ -34,6 +34,15 @@ import com.verticon.tracker.util.TrackerConstants;
  * <ul>
  *   <li>{@link com.verticon.tracker.Event#getEventCode() <em>Event Code</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getId() <em>Id</em>}</li>
+ *   <li>{@link com.verticon.tracker.Event#getDate() <em>Date</em>}</li>
+ *   <li>{@link com.verticon.tracker.Event#getDateKey() <em>Date Key</em>}</li>
+ * </ul>
+ * </p>
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link com.verticon.tracker.Event#dateEvent(com.verticon.tracker.EventType, java.lang.String) <em>Date Event</em>}</li>
+ *   <li>{@link com.verticon.tracker.Event#dateEvents() <em>Date Events</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -121,6 +130,60 @@ public abstract class EventTest extends TestCase {
 		assertEquals("123456789012345", getFixture().getId());
 	}
 
+	/**
+	 * Tests the '{@link com.verticon.tracker.Event#getDate() <em>Date</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Event#getDate()
+	 * @generated NOT
+	 */
+	@SuppressWarnings("deprecation")
+	public void testGetDate() {
+		assertNotNull(getFixture().getDate());
+		Date date = null;
+		try {
+			 date = TrackerConstants.DAY_FORMAT.parse(JANUARY_6_1972);
+			
+		} catch (ParseException e) {
+			fail(e.toString());
+		}
+		
+		getFixture().setDateTime(date);
+		assertEquals(JANUARY_6_1972, getFixture().getDate());
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Event#getDateKey() <em>Date Key</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Event#getDateKey()
+	 * @generated NOT
+	 */
+	public void testGetDateKey() {
+		testGetDate();
+		assertEquals(JANUARY_6_1972+'|', getFixture().getDateKey());
+		String value = "12345";
+		Tag t = TrackerFactory.eINSTANCE.createTag();
+		t.setId(value);
+		t.getEvents().add(getFixture());
+		assertEquals(JANUARY_6_1972+'|'+value, getFixture().getDateKey());	
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Event#dateEvent(com.verticon.tracker.EventType, java.lang.String) <em>Date Event</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * Finds the most recent event that matches a type (and a name if it is a genericEvent)
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Event#dateEvent(com.verticon.tracker.EventType, java.lang.String)
+	 * @generated NOT
+	 */
+	public void testDateEvent__EventType_String() {
+		testDateEvents();
+		EventType type = EventType.getByName(getFixture().eClass().getName());
+		assertNotNull(getFixture().eClass().getName(),type);
+		assertNotNull(fixture.dateEvent(type, null));
+	}
+
 	public void testGetComments(){
 		assertNotNull(getFixture());
 		getFixture().setComments("Hi World");
@@ -149,32 +212,32 @@ public abstract class EventTest extends TestCase {
 		
 	}
 	
-	public void testDate(){
-		
-		assertNotNull(getFixture().getDate());
-		Date date = null;
-		try {
-			 date = TrackerConstants.DAY_FORMAT.parse(JANUARY_6_1972);
-			
-		} catch (ParseException e) {
-			fail(e.toString());
-		}
-		
-		getFixture().setDateTime(date);
-		assertEquals(JANUARY_6_1972, getFixture().getDate());
-		
-	}
+//	public void testDate(){
+//		
+//		assertNotNull(getFixture().getDate());
+//		Date date = null;
+//		try {
+//			 date = TrackerConstants.DAY_FORMAT.parse(JANUARY_6_1972);
+//			
+//		} catch (ParseException e) {
+//			fail(e.toString());
+//		}
+//		
+//		getFixture().setDateTime(date);
+//		assertEquals(JANUARY_6_1972, getFixture().getDate());
+//		
+//	}
 	
-	public void testDateKey(){
-		testDate();
-		assertEquals(JANUARY_6_1972+'|', getFixture().getDateKey());
-		String value = "12345";
-		Tag t = TrackerFactory.eINSTANCE.createTag();
-		t.setId(value);
-		t.getEvents().add(getFixture());
-		assertEquals(JANUARY_6_1972+'|'+value, getFixture().getDateKey());
-		
-	}
+//	public void testDateKey(){
+//		testDate();
+//		assertEquals(JANUARY_6_1972+'|', getFixture().getDateKey());
+//		String value = "12345";
+//		Tag t = TrackerFactory.eINSTANCE.createTag();
+//		t.setId(value);
+//		t.getEvents().add(getFixture());
+//		assertEquals(JANUARY_6_1972+'|'+value, getFixture().getDateKey());
+//		
+//	}
 	
 	public void testDateEvents(){
 		String value = "12345";

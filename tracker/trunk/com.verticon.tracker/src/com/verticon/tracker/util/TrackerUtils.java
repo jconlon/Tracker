@@ -187,6 +187,12 @@ public class TrackerUtils {
 		};
 	}
 	
+	/**
+	 * 
+	 * @param type of Event
+	 * @param name of Generic Event
+	 * @return  a FilterCriteria that passes events
+	 */
 	public static FilterCriteria<Event> createFilterCriteria(
 			final EventType type, final String name){
 		

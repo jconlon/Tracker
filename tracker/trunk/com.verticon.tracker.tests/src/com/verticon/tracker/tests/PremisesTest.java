@@ -24,7 +24,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Event;
+import com.verticon.tracker.EventType;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
@@ -40,6 +42,7 @@ import com.verticon.tracker.TrackerPackage;
  *   <li>{@link com.verticon.tracker.Premises#eventHistory() <em>Event History</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#findAnimal(java.lang.String) <em>Find Animal</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#addTemplate(org.eclipse.emf.common.util.EList, com.verticon.tracker.Animal) <em>Add Template</em>}</li>
+ *   <li>{@link com.verticon.tracker.Premises#canContain(com.verticon.tracker.EventType, java.lang.String, com.verticon.tracker.AnimalType) <em>Can Contain</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -270,6 +273,19 @@ public class PremisesTest extends TestCase {
 		getFixture().addTemplate(ains, animal1);
 		assertEquals(4, getFixture().getAnimals().size());
 		assertEquals(4, getFixture().eventHistory().size());
+		
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Premises#canContain(com.verticon.tracker.EventType, java.lang.String, com.verticon.tracker.AnimalType) <em>Can Contain</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Premises#canContain(com.verticon.tracker.EventType, java.lang.String, com.verticon.tracker.AnimalType)
+	 * @generated NOT
+	 */
+	public void testCanContain__EventType_String_AnimalType() {
+		assertNotNull(getFixture());
+		assertTrue(getFixture().canContain(EventType.ANIMAL_MISSING, null, AnimalType.BOVINE_BEEF));
 		
 	}
 

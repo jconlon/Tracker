@@ -72,6 +72,7 @@ public class MovedOutItemProvider
 			super.getPropertyDescriptors(object);
 
 			addDestinationPinPropertyDescriptor(object);
+			addUriPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -90,6 +91,28 @@ public class MovedOutItemProvider
 				 getString("_UI_MovedOut_destinationPin_feature"),
 				 getString("_UI_MovedOut_destinationPin_description"),
 				 TrackerPackage.Literals.MOVED_OUT__DESTINATION_PIN,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 getString("_UI_TransportedToPropertyCategory"),
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Uri feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addUriPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_MovedOut_uri_feature"),
+				 getString("_UI_MovedOut_uri_description"),
+				 TrackerPackage.Literals.MOVED_OUT__URI,
 				 true,
 				 false,
 				 false,
@@ -134,6 +157,7 @@ public class MovedOutItemProvider
 
 		switch (notification.getFeatureID(MovedOut.class)) {
 			case TrackerPackage.MOVED_OUT__DESTINATION_PIN:
+			case TrackerPackage.MOVED_OUT__URI:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

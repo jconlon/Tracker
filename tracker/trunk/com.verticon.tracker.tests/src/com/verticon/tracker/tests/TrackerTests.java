@@ -80,6 +80,7 @@ public class TrackerTests extends TestSuite {
 		suite.addTestSuite(USBeefGradingTest.class);
 		suite.addTestSuite(USOvineGradingTest.class);
 		suite.addTestSuite(USSwineGradingTest.class);
+		suite.addTestSuite(PolicyTest.class);
 		return suite;
 	}
 

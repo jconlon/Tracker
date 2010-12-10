@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.verticon.tracker.tests;
 
+import com.verticon.tracker.EventType;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 
@@ -25,6 +26,14 @@ import junit.textui.TestRunner;
  * The following features are tested:
  * <ul>
  *   <li>{@link com.verticon.tracker.Tag#isUsainNumberUsed() <em>Usain Number Used</em>}</li>
+ * </ul>
+ * </p>
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link com.verticon.tracker.Tag#canContain(com.verticon.tracker.EventType, java.lang.String) <em>Can Contain</em>}</li>
+ *   <li>{@link com.verticon.tracker.Tag#findOCD(java.lang.String) <em>Find OCD</em>}</li>
+ *   <li>{@link com.verticon.tracker.Tag#findOCDs() <em>Find OC Ds</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -130,6 +139,40 @@ public class TagTest extends TestCase {
 		tag.setId("840003001374300");
 		assertTrue(tag.isUsainNumberUsed());
 		
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Tag#canContain(com.verticon.tracker.EventType, java.lang.String) <em>Can Contain</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Tag#canContain(com.verticon.tracker.EventType, java.lang.String)
+	 * @generated NOT
+	 */
+	public void testCanContain__EventType_String() {
+		assertTrue(getFixture().canContain(EventType.ANIMAL_MISSING, null));
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Tag#findOCD(java.lang.String) <em>Find OCD</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Tag#findOCD(java.lang.String)
+	 * @generated NOT
+	 */
+	public void testFindOCD__String() {
+		assertNull(getFixture().findOCD("nothing"));
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Tag#findOCDs() <em>Find OCDs</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Tag#findOCDs()
+	 * @generated NOT
+	 */
+	public void testFindOCDs() {
+		assertNotNull(getFixture().findOCDs());
+		assertTrue(getFixture().findOCDs().isEmpty());
 	}
 
 	/**

@@ -20,6 +20,7 @@ package com.verticon.tracker;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.verticon.tracker.MovedOut#getDestinationPin <em>Destination Pin</em>}</li>
+ *   <li>{@link com.verticon.tracker.MovedOut#getUri <em>Uri</em>}</li>
  * </ul>
  * </p>
  *
@@ -65,5 +66,31 @@ public interface MovedOut extends Event {
 	 * @generated
 	 */
 	void setDestinationPin(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Uri</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Uri</em>' attribute.
+	 * @see #setUri(String)
+	 * @see com.verticon.tracker.TrackerPackage#getMovedOut_Uri()
+	 * @model dataType="com.verticon.tracker.URI"
+	 * @generated
+	 */
+	String getUri();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.MovedOut#getUri <em>Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Uri</em>' attribute.
+	 * @see #getUri()
+	 * @generated
+	 */
+	void setUri(String value);
 
 } // MovedOut

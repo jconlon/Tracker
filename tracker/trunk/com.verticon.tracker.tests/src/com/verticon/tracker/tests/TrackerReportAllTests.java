@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.verticon.tracker.tests;
 
+import com.verticon.osgi.metatype.tests.MetatypeTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
