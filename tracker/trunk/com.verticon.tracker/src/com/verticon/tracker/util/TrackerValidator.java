@@ -273,6 +273,8 @@ public class TrackerValidator extends EObjectValidator {
 				return validateEventInclusion((EventInclusion)value, diagnostics, context);
 			case TrackerPackage.GENERIC_EVENT_INCLUSION:
 				return validateGenericEventInclusion((GenericEventInclusion)value, diagnostics, context);
+			case TrackerPackage.POSITION:
+				return validatePosition((Position)value, diagnostics, context);
 			case TrackerPackage.SEX:
 				return validateSex((Sex)value, diagnostics, context);
 			case TrackerPackage.BISON_BREED:
@@ -636,6 +638,15 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validateGenericEventInclusion(GenericEventInclusion genericEventInclusion, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(genericEventInclusion, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePosition(Position position, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(position, diagnostics, context);
 	}
 
 	/**

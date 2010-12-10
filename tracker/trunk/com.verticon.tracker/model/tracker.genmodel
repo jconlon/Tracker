@@ -795,6 +795,28 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//GenericEventInclusion/species"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//GenericEventInclusion/ocd"/>
     </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Position">
+      <genFeatures createChild="false" propertyCategory="Position" propertyDescription="Longitude measurement in radians"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Position/longitudeInRadians">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Position"
+          propertyDescription="Longitude measurement in degrees" ecoreFeature="ecore:EAttribute tracker.ecore#//Position/longitude"/>
+      <genFeatures createChild="false" propertyCategory="Position" propertyDescription="Measurement error for longitude in radians"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Position/longitudeError">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" propertyCategory="Position" propertyDescription="Latitude measurement in radians"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Position/latitudeInRadians">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Position"
+          propertyDescription="Latitude measurement in degrees" ecoreFeature="ecore:EAttribute tracker.ecore#//Position/latitude"/>
+      <genFeatures createChild="false" propertyCategory="Position" propertyDescription="Measurement error for latitude in radians"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Position/latitudeError">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+    </genClasses>
   </genPackages>
   <genPackages prefix="Metatype" basePackage="com.verticon.osgi" ecorePackage="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar">

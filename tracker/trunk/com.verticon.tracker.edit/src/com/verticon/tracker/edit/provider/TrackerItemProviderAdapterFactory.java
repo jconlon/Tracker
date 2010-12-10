@@ -709,6 +709,29 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Position} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PositionItemProvider positionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.Position}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPositionAdapter() {
+		if (positionItemProvider == null) {
+			positionItemProvider = new PositionItemProvider(this);
+		}
+
+		return positionItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Premises} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1170,6 +1193,7 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (policyItemProvider != null) policyItemProvider.dispose();
 		if (eventInclusionItemProvider != null) eventInclusionItemProvider.dispose();
 		if (genericEventInclusionItemProvider != null) genericEventInclusionItemProvider.dispose();
+		if (positionItemProvider != null) positionItemProvider.dispose();
 	}
 
 }
