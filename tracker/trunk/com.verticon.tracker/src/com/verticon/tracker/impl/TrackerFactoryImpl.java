@@ -194,6 +194,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.POLICY: return createPolicy();
 			case TrackerPackage.EVENT_INCLUSION: return createEventInclusion();
 			case TrackerPackage.GENERIC_EVENT_INCLUSION: return createGenericEventInclusion();
+			case TrackerPackage.POSITION: return createPosition();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -589,6 +590,16 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public GenericEventInclusion createGenericEventInclusion() {
 		GenericEventInclusionImpl genericEventInclusion = new GenericEventInclusionImpl();
 		return genericEventInclusion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Position createPosition() {
+		PositionImpl position = new PositionImpl();
+		return position;
 	}
 
 	/**

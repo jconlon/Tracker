@@ -65,6 +65,7 @@ import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.OneToTen;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.Policy;
+import com.verticon.tracker.Position;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.Sex;
@@ -315,6 +316,13 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EClass genericEventInclusionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass positionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1700,6 +1708,69 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPosition() {
+		return positionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPosition_LongitudeInRadians() {
+		return (EAttribute)positionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPosition_Longitude() {
+		return (EAttribute)positionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPosition_LongitudeError() {
+		return (EAttribute)positionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPosition_LatitudeInRadians() {
+		return (EAttribute)positionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPosition_Latitude() {
+		return (EAttribute)positionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPosition_LatitudeError() {
+		return (EAttribute)positionEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPremises() {
 		return premisesEClass;
 	}
@@ -2478,6 +2549,14 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(genericEventInclusionEClass, GENERIC_EVENT_INCLUSION__SPECIES);
 		createEReference(genericEventInclusionEClass, GENERIC_EVENT_INCLUSION__OCD);
 
+		positionEClass = createEClass(POSITION);
+		createEAttribute(positionEClass, POSITION__LONGITUDE_IN_RADIANS);
+		createEAttribute(positionEClass, POSITION__LONGITUDE);
+		createEAttribute(positionEClass, POSITION__LONGITUDE_ERROR);
+		createEAttribute(positionEClass, POSITION__LATITUDE_IN_RADIANS);
+		createEAttribute(positionEClass, POSITION__LATITUDE);
+		createEAttribute(positionEClass, POSITION__LATITUDE_ERROR);
+
 		// Create enums
 		sexEEnum = createEEnum(SEX);
 		bisonBreedEEnum = createEEnum(BISON_BREED);
@@ -2574,6 +2653,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		usBeefGradingEClass.getESuperTypes().add(this.getEvent());
 		usOvineGradingEClass.getESuperTypes().add(this.getEvent());
 		usSwineGradingEClass.getESuperTypes().add(this.getEvent());
+		positionEClass.getESuperTypes().add(this.getEvent());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2859,6 +2939,14 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(genericEventInclusionEClass, GenericEventInclusion.class, "GenericEventInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGenericEventInclusion_Species(), this.getAnimalType(), "species", null, 1, -1, GenericEventInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGenericEventInclusion_Ocd(), theMetatypePackage.getOCD(), null, "ocd", null, 1, 1, GenericEventInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(positionEClass, Position.class, "Position", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPosition_LongitudeInRadians(), ecorePackage.getEDouble(), "longitudeInRadians", null, 0, 1, Position.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPosition_Longitude(), ecorePackage.getEDouble(), "longitude", null, 0, 1, Position.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPosition_LongitudeError(), ecorePackage.getEDouble(), "longitudeError", null, 0, 1, Position.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPosition_LatitudeInRadians(), ecorePackage.getEDouble(), "latitudeInRadians", null, 0, 1, Position.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPosition_Latitude(), ecorePackage.getEDouble(), "latitude", null, 0, 1, Position.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPosition_LatitudeError(), ecorePackage.getEDouble(), "latitudeError", null, 0, 1, Position.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");
@@ -3269,6 +3357,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEEnumLiteral(eventTypeEEnum, EventType.CALVING);
 		addEEnumLiteral(eventTypeEEnum, EventType.US_BEEF_GRADING);
 		addEEnumLiteral(eventTypeEEnum, EventType.US_SWINE_GRADING);
+		addEEnumLiteral(eventTypeEEnum, EventType.POSITION);
 
 		// Initialize data types
 		initEDataType(premisesIdNumberEDataType, String.class, "PremisesIdNumber", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

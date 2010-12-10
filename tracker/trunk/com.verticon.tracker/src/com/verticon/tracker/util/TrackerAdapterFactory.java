@@ -303,6 +303,10 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 				return createGenericEventInclusionAdapter();
 			}
 			@Override
+			public Adapter casePosition(Position object) {
+				return createPositionAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -739,6 +743,20 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGenericEventInclusionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.Position <em>Position</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.Position
+	 * @generated
+	 */
+	public Adapter createPositionAdapter() {
 		return null;
 	}
 

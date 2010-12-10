@@ -266,7 +266,15 @@ public enum EventType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	US_SWINE_GRADING(26, "USSwineGrading", "USSwineGrading");
+	US_SWINE_GRADING(26, "USSwineGrading", "USSwineGrading"), /**
+	 * The '<em><b>Position</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #POSITION_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	POSITION(27, "Position", "Position");
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -681,6 +689,21 @@ public enum EventType implements Enumerator {
 	public static final int US_SWINE_GRADING_VALUE = 26;
 
 	/**
+	 * The '<em><b>Position</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Position</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #POSITION
+	 * @model name="Position"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int POSITION_VALUE = 27;
+
+	/**
 	 * An array of all the '<em><b>Event Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -715,6 +738,7 @@ public enum EventType implements Enumerator {
 			CALVING,
 			US_BEEF_GRADING,
 			US_SWINE_GRADING,
+			POSITION,
 		};
 
 	/**
@@ -792,6 +816,7 @@ public enum EventType implements Enumerator {
 			case CALVING_VALUE: return CALVING;
 			case US_BEEF_GRADING_VALUE: return US_BEEF_GRADING;
 			case US_SWINE_GRADING_VALUE: return US_SWINE_GRADING;
+			case POSITION_VALUE: return POSITION;
 		}
 		return null;
 	}

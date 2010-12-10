@@ -5400,6 +5400,160 @@ public interface TrackerPackage extends EPackage {
 	int GENERIC_EVENT_INCLUSION_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.PositionImpl <em>Position</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.PositionImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPosition()
+	 * @generated
+	 */
+	int POSITION = 44;
+
+	/**
+	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__DATE_TIME = EVENT__DATE_TIME;
+
+	/**
+	 * The feature id for the '<em><b>Event Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__EVENT_CODE = EVENT__EVENT_CODE;
+
+	/**
+	 * The feature id for the '<em><b>Electronically Read</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__ELECTRONICALLY_READ = EVENT__ELECTRONICALLY_READ;
+
+	/**
+	 * The feature id for the '<em><b>Correction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__CORRECTION = EVENT__CORRECTION;
+
+	/**
+	 * The feature id for the '<em><b>Comments</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__COMMENTS = EVENT__COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__TAG = EVENT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__ID = EVENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Date</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__DATE = EVENT__DATE;
+
+	/**
+	 * The feature id for the '<em><b>Date Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__DATE_KEY = EVENT__DATE_KEY;
+
+	/**
+	 * The feature id for the '<em><b>Longitude In Radians</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__LONGITUDE_IN_RADIANS = EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Longitude</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__LONGITUDE = EVENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Longitude Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__LONGITUDE_ERROR = EVENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Latitude In Radians</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__LATITUDE_IN_RADIANS = EVENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Latitude</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__LATITUDE = EVENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Latitude Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__LATITUDE_ERROR = EVENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of structural features of the '<em>Position</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION_FEATURE_COUNT = EVENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Sex <em>Sex</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5407,7 +5561,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 44;
+	int SEX = 45;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BisonBreed <em>Bison Breed</em>}' enum.
@@ -5417,7 +5571,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBisonBreed()
 	 * @generated
 	 */
-	int BISON_BREED = 45;
+	int BISON_BREED = 46;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SheepBreed <em>Sheep Breed</em>}' enum.
@@ -5427,7 +5581,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSheepBreed()
 	 * @generated
 	 */
-	int SHEEP_BREED = 46;
+	int SHEEP_BREED = 47;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BeefBreed <em>Beef Breed</em>}' enum.
@@ -5437,7 +5591,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBeefBreed()
 	 * @generated
 	 */
-	int BEEF_BREED = 47;
+	int BEEF_BREED = 48;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.DairyBreed <em>Dairy Breed</em>}' enum.
@@ -5447,7 +5601,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDairyBreed()
 	 * @generated
 	 */
-	int DAIRY_BREED = 48;
+	int DAIRY_BREED = 49;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SwineBreed <em>Swine Breed</em>}' enum.
@@ -5457,7 +5611,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSwineBreed()
 	 * @generated
 	 */
-	int SWINE_BREED = 49;
+	int SWINE_BREED = 50;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.HorseBreed <em>Horse Breed</em>}' enum.
@@ -5467,7 +5621,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getHorseBreed()
 	 * @generated
 	 */
-	int HORSE_BREED = 50;
+	int HORSE_BREED = 51;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.GoatBreed <em>Goat Breed</em>}' enum.
@@ -5477,7 +5631,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getGoatBreed()
 	 * @generated
 	 */
-	int GOAT_BREED = 51;
+	int GOAT_BREED = 52;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Treatment <em>Treatment</em>}' enum.
@@ -5487,7 +5641,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatment()
 	 * @generated
 	 */
-	int TREATMENT = 52;
+	int TREATMENT = 53;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.TreatmentMethod <em>Treatment Method</em>}' enum.
@@ -5497,7 +5651,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatmentMethod()
 	 * @generated
 	 */
-	int TREATMENT_METHOD = 53;
+	int TREATMENT_METHOD = 54;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.OneToTen <em>One To Ten</em>}' enum.
@@ -5507,7 +5661,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getOneToTen()
 	 * @generated
 	 */
-	int ONE_TO_TEN = 54;
+	int ONE_TO_TEN = 55;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.AnimalType <em>Animal Type</em>}' enum.
@@ -5517,7 +5671,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAnimalType()
 	 * @generated
 	 */
-	int ANIMAL_TYPE = 55;
+	int ANIMAL_TYPE = 56;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.EventDataType <em>Event Data Type</em>}' enum.
@@ -5527,7 +5681,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventDataType()
 	 * @generated
 	 */
-	int EVENT_DATA_TYPE = 56;
+	int EVENT_DATA_TYPE = 57;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.USQualityGrade <em>US Quality Grade</em>}' enum.
@@ -5537,7 +5691,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSQualityGrade()
 	 * @generated
 	 */
-	int US_QUALITY_GRADE = 57;
+	int US_QUALITY_GRADE = 58;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.USBeefYieldGrade <em>US Beef Yield Grade</em>}' enum.
@@ -5547,7 +5701,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSBeefYieldGrade()
 	 * @generated
 	 */
-	int US_BEEF_YIELD_GRADE = 58;
+	int US_BEEF_YIELD_GRADE = 59;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Level <em>Level</em>}' enum.
@@ -5557,7 +5711,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getLevel()
 	 * @generated
 	 */
-	int LEVEL = 59;
+	int LEVEL = 60;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.USSwineQualityGrade <em>US Swine Quality Grade</em>}' enum.
@@ -5567,7 +5721,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSSwineQualityGrade()
 	 * @generated
 	 */
-	int US_SWINE_QUALITY_GRADE = 60;
+	int US_SWINE_QUALITY_GRADE = 61;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.WeightMeasurementUnit <em>Weight Measurement Unit</em>}' enum.
@@ -5577,7 +5731,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getWeightMeasurementUnit()
 	 * @generated
 	 */
-	int WEIGHT_MEASUREMENT_UNIT = 61;
+	int WEIGHT_MEASUREMENT_UNIT = 62;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.EventType <em>Event Type</em>}' enum.
@@ -5587,7 +5741,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventType()
 	 * @generated
 	 */
-	int EVENT_TYPE = 62;
+	int EVENT_TYPE = 63;
 
 	/**
 	 * The meta object id for the '<em>Premises Id Number</em>' data type.
@@ -5597,7 +5751,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPremisesIdNumber()
 	 * @generated
 	 */
-	int PREMISES_ID_NUMBER = 63;
+	int PREMISES_ID_NUMBER = 64;
 
 	/**
 	 * The meta object id for the '<em>Email</em>' data type.
@@ -5607,7 +5761,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 64;
+	int EMAIL = 65;
 
 
 	/**
@@ -5618,7 +5772,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAge()
 	 * @generated
 	 */
-	int AGE = 65;
+	int AGE = 66;
 
 
 	/**
@@ -5629,7 +5783,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSPhoneNumber()
 	 * @generated
 	 */
-	int US_PHONE_NUMBER = 66;
+	int US_PHONE_NUMBER = 67;
 
 
 	/**
@@ -5640,7 +5794,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 67;
+	int URI = 68;
 
 
 	/**
@@ -6879,6 +7033,82 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getGenericEventInclusion_Ocd();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.Position <em>Position</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Position</em>'.
+	 * @see com.verticon.tracker.Position
+	 * @generated
+	 */
+	EClass getPosition();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Position#getLongitudeInRadians <em>Longitude In Radians</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Longitude In Radians</em>'.
+	 * @see com.verticon.tracker.Position#getLongitudeInRadians()
+	 * @see #getPosition()
+	 * @generated
+	 */
+	EAttribute getPosition_LongitudeInRadians();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Position#getLongitude <em>Longitude</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Longitude</em>'.
+	 * @see com.verticon.tracker.Position#getLongitude()
+	 * @see #getPosition()
+	 * @generated
+	 */
+	EAttribute getPosition_Longitude();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Position#getLongitudeError <em>Longitude Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Longitude Error</em>'.
+	 * @see com.verticon.tracker.Position#getLongitudeError()
+	 * @see #getPosition()
+	 * @generated
+	 */
+	EAttribute getPosition_LongitudeError();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Position#getLatitudeInRadians <em>Latitude In Radians</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Latitude In Radians</em>'.
+	 * @see com.verticon.tracker.Position#getLatitudeInRadians()
+	 * @see #getPosition()
+	 * @generated
+	 */
+	EAttribute getPosition_LatitudeInRadians();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Position#getLatitude <em>Latitude</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Latitude</em>'.
+	 * @see com.verticon.tracker.Position#getLatitude()
+	 * @see #getPosition()
+	 * @generated
+	 */
+	EAttribute getPosition_Latitude();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Position#getLatitudeError <em>Latitude Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Latitude Error</em>'.
+	 * @see com.verticon.tracker.Position#getLatitudeError()
+	 * @see #getPosition()
+	 * @generated
+	 */
+	EAttribute getPosition_LatitudeError();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Premises <em>Premises</em>}'.
@@ -8531,6 +8761,64 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference GENERIC_EVENT_INCLUSION__OCD = eINSTANCE.getGenericEventInclusion_Ocd();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.PositionImpl <em>Position</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.PositionImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPosition()
+		 * @generated
+		 */
+		EClass POSITION = eINSTANCE.getPosition();
+
+		/**
+		 * The meta object literal for the '<em><b>Longitude In Radians</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSITION__LONGITUDE_IN_RADIANS = eINSTANCE.getPosition_LongitudeInRadians();
+
+		/**
+		 * The meta object literal for the '<em><b>Longitude</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSITION__LONGITUDE = eINSTANCE.getPosition_Longitude();
+
+		/**
+		 * The meta object literal for the '<em><b>Longitude Error</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSITION__LONGITUDE_ERROR = eINSTANCE.getPosition_LongitudeError();
+
+		/**
+		 * The meta object literal for the '<em><b>Latitude In Radians</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSITION__LATITUDE_IN_RADIANS = eINSTANCE.getPosition_LatitudeInRadians();
+
+		/**
+		 * The meta object literal for the '<em><b>Latitude</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSITION__LATITUDE = eINSTANCE.getPosition_Latitude();
+
+		/**
+		 * The meta object literal for the '<em><b>Latitude Error</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSITION__LATITUDE_ERROR = eINSTANCE.getPosition_LatitudeError();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.PremisesImpl <em>Premises</em>}' class.
