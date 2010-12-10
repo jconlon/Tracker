@@ -26,6 +26,12 @@ import com.verticon.tracker.TrackerPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.verticon.tracker.impl.LocationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.LocationImpl#getLatitudeInRadians <em>Latitude In Radians</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.LocationImpl#getLatitudeError <em>Latitude Error</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.LocationImpl#getLongitudeError <em>Longitude Error</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.LocationImpl#getLongitudeInRadians <em>Longitude In Radians</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.LocationImpl#getLongitude <em>Longitude</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.LocationImpl#getLatitude <em>Latitude</em>}</li>
  * </ul>
  * </p>
  *
@@ -58,6 +64,106 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLatitudeInRadians() <em>Latitude In Radians</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLatitudeInRadians()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double LATITUDE_IN_RADIANS_EDEFAULT = 0.0;
+
+	/**
+	 * The cached value of the '{@link #getLatitudeInRadians() <em>Latitude In Radians</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLatitudeInRadians()
+	 * @generated
+	 * @ordered
+	 */
+	protected double latitudeInRadians = LATITUDE_IN_RADIANS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLatitudeError() <em>Latitude Error</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLatitudeError()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double LATITUDE_ERROR_EDEFAULT = 0.0;
+
+	/**
+	 * The cached value of the '{@link #getLatitudeError() <em>Latitude Error</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLatitudeError()
+	 * @generated
+	 * @ordered
+	 */
+	protected double latitudeError = LATITUDE_ERROR_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLongitudeError() <em>Longitude Error</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLongitudeError()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double LONGITUDE_ERROR_EDEFAULT = 0.0;
+
+	/**
+	 * The cached value of the '{@link #getLongitudeError() <em>Longitude Error</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLongitudeError()
+	 * @generated
+	 * @ordered
+	 */
+	protected double longitudeError = LONGITUDE_ERROR_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLongitudeInRadians() <em>Longitude In Radians</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLongitudeInRadians()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double LONGITUDE_IN_RADIANS_EDEFAULT = 0.0;
+
+	/**
+	 * The cached value of the '{@link #getLongitudeInRadians() <em>Longitude In Radians</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLongitudeInRadians()
+	 * @generated
+	 * @ordered
+	 */
+	protected double longitudeInRadians = LONGITUDE_IN_RADIANS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLongitude() <em>Longitude</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLongitude()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double LONGITUDE_EDEFAULT = 0.0;
+
+	/**
+	 * The default value of the '{@link #getLatitude() <em>Latitude</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLatitude()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double LATITUDE_EDEFAULT = 0.0;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -104,11 +210,140 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public double getLatitudeInRadians() {
+		return latitudeInRadians;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLatitudeInRadians(double newLatitudeInRadians) {
+		double oldLatitudeInRadians = latitudeInRadians;
+		latitudeInRadians = newLatitudeInRadians;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.LOCATION__LATITUDE_IN_RADIANS, oldLatitudeInRadians, latitudeInRadians));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public double getLatitudeError() {
+		return latitudeError;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLatitudeError(double newLatitudeError) {
+		double oldLatitudeError = latitudeError;
+		latitudeError = newLatitudeError;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.LOCATION__LATITUDE_ERROR, oldLatitudeError, latitudeError));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public double getLongitudeError() {
+		return longitudeError;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLongitudeError(double newLongitudeError) {
+		double oldLongitudeError = longitudeError;
+		longitudeError = newLongitudeError;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.LOCATION__LONGITUDE_ERROR, oldLongitudeError, longitudeError));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public double getLongitudeInRadians() {
+		return longitudeInRadians;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLongitudeInRadians(double newLongitudeInRadians) {
+		double oldLongitudeInRadians = longitudeInRadians;
+		longitudeInRadians = newLongitudeInRadians;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.LOCATION__LONGITUDE_IN_RADIANS, oldLongitudeInRadians, longitudeInRadians));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public double getLongitude() {
+		double result = LONGITUDE_IN_RADIANS_EDEFAULT;
+		if(getLongitudeInRadians()!=LONGITUDE_IN_RADIANS_EDEFAULT){
+			result = degrees(getLongitudeInRadians());
+		}
+		
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public double getLatitude() {
+		double result = LATITUDE_IN_RADIANS_EDEFAULT;
+		if(getLatitudeInRadians()!=LATITUDE_IN_RADIANS_EDEFAULT){
+			result = degrees(getLatitudeInRadians());
+		}
+		
+		return result;
+	}
+
+	private static final double degrees(double radians) {
+		return radians * 360 / (2*Math.PI);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TrackerPackage.LOCATION__NAME:
 				return getName();
+			case TrackerPackage.LOCATION__LATITUDE_IN_RADIANS:
+				return getLatitudeInRadians();
+			case TrackerPackage.LOCATION__LATITUDE_ERROR:
+				return getLatitudeError();
+			case TrackerPackage.LOCATION__LONGITUDE_ERROR:
+				return getLongitudeError();
+			case TrackerPackage.LOCATION__LONGITUDE_IN_RADIANS:
+				return getLongitudeInRadians();
+			case TrackerPackage.LOCATION__LONGITUDE:
+				return getLongitude();
+			case TrackerPackage.LOCATION__LATITUDE:
+				return getLatitude();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -123,6 +358,18 @@ public class LocationImpl extends EObjectImpl implements Location {
 		switch (featureID) {
 			case TrackerPackage.LOCATION__NAME:
 				setName((String)newValue);
+				return;
+			case TrackerPackage.LOCATION__LATITUDE_IN_RADIANS:
+				setLatitudeInRadians((Double)newValue);
+				return;
+			case TrackerPackage.LOCATION__LATITUDE_ERROR:
+				setLatitudeError((Double)newValue);
+				return;
+			case TrackerPackage.LOCATION__LONGITUDE_ERROR:
+				setLongitudeError((Double)newValue);
+				return;
+			case TrackerPackage.LOCATION__LONGITUDE_IN_RADIANS:
+				setLongitudeInRadians((Double)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -139,6 +386,18 @@ public class LocationImpl extends EObjectImpl implements Location {
 			case TrackerPackage.LOCATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case TrackerPackage.LOCATION__LATITUDE_IN_RADIANS:
+				setLatitudeInRadians(LATITUDE_IN_RADIANS_EDEFAULT);
+				return;
+			case TrackerPackage.LOCATION__LATITUDE_ERROR:
+				setLatitudeError(LATITUDE_ERROR_EDEFAULT);
+				return;
+			case TrackerPackage.LOCATION__LONGITUDE_ERROR:
+				setLongitudeError(LONGITUDE_ERROR_EDEFAULT);
+				return;
+			case TrackerPackage.LOCATION__LONGITUDE_IN_RADIANS:
+				setLongitudeInRadians(LONGITUDE_IN_RADIANS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -153,6 +412,18 @@ public class LocationImpl extends EObjectImpl implements Location {
 		switch (featureID) {
 			case TrackerPackage.LOCATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case TrackerPackage.LOCATION__LATITUDE_IN_RADIANS:
+				return latitudeInRadians != LATITUDE_IN_RADIANS_EDEFAULT;
+			case TrackerPackage.LOCATION__LATITUDE_ERROR:
+				return latitudeError != LATITUDE_ERROR_EDEFAULT;
+			case TrackerPackage.LOCATION__LONGITUDE_ERROR:
+				return longitudeError != LONGITUDE_ERROR_EDEFAULT;
+			case TrackerPackage.LOCATION__LONGITUDE_IN_RADIANS:
+				return longitudeInRadians != LONGITUDE_IN_RADIANS_EDEFAULT;
+			case TrackerPackage.LOCATION__LONGITUDE:
+				return getLongitude() != LONGITUDE_EDEFAULT;
+			case TrackerPackage.LOCATION__LATITUDE:
+				return getLatitude() != LATITUDE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -169,6 +440,14 @@ public class LocationImpl extends EObjectImpl implements Location {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", latitudeInRadians: ");
+		result.append(latitudeInRadians);
+		result.append(", latitudeError: ");
+		result.append(latitudeError);
+		result.append(", longitudeError: ");
+		result.append(longitudeError);
+		result.append(", longitudeInRadians: ");
+		result.append(longitudeInRadians);
 		result.append(')');
 		return result.toString();
 	}

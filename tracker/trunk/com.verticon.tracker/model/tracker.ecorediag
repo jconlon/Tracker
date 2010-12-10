@@ -1995,6 +1995,30 @@
   <children xmi:type="notation:Node" xmi:id="_PENYklmCEd2tRZ2K3aMUww" type="1001">
     <children xmi:type="notation:Node" xmi:id="_PEN_oFmCEd2tRZ2K3aMUww" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_PEN_oVmCEd2tRZ2K3aMUww" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_A7iXgASHEeC5yOs0w41ecw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Location/longitudeInRadians"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_A7iXgQSHEeC5yOs0w41ecw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_jC3CIASHEeC5yOs0w41ecw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Location/longitude"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_jC3CIQSHEeC5yOs0w41ecw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_2pXkIASGEeC5yOs0w41ecw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Location/longitudeError"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_2pXkIQSGEeC5yOs0w41ecw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_JYmN8ASIEeC5yOs0w41ecw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Location/latitude"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_JYmN8QSIEeC5yOs0w41ecw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_iuJy4ASGEeC5yOs0w41ecw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Location/latitudeInRadians"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_iuJy4QSGEeC5yOs0w41ecw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uYhvUASGEeC5yOs0w41ecw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Location/latitudeError"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uYhvUQSGEeC5yOs0w41ecw"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_PEOmsFmCEd2tRZ2K3aMUww" type="2001">
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Location/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PEOmsVmCEd2tRZ2K3aMUww"/>
