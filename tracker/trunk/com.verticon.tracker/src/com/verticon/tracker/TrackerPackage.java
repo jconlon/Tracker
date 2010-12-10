@@ -3683,13 +3683,67 @@ public interface TrackerPackage extends EPackage {
 	int LOCATION__NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Latitude In Radians</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION__LATITUDE_IN_RADIANS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Latitude Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION__LATITUDE_ERROR = 2;
+
+	/**
+	 * The feature id for the '<em><b>Longitude Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION__LONGITUDE_ERROR = 3;
+
+	/**
+	 * The feature id for the '<em><b>Longitude In Radians</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION__LONGITUDE_IN_RADIANS = 4;
+
+	/**
+	 * The feature id for the '<em><b>Longitude</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION__LONGITUDE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Latitude</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCATION__LATITUDE = 6;
+
+	/**
 	 * The number of structural features of the '<em>Location</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOCATION_FEATURE_COUNT = 1;
+	int LOCATION_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.MedicalConditionImpl <em>Medical Condition</em>}' class.
@@ -6170,6 +6224,72 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getLocation_Name();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Location#getLatitudeInRadians <em>Latitude In Radians</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Latitude In Radians</em>'.
+	 * @see com.verticon.tracker.Location#getLatitudeInRadians()
+	 * @see #getLocation()
+	 * @generated
+	 */
+	EAttribute getLocation_LatitudeInRadians();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Location#getLatitudeError <em>Latitude Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Latitude Error</em>'.
+	 * @see com.verticon.tracker.Location#getLatitudeError()
+	 * @see #getLocation()
+	 * @generated
+	 */
+	EAttribute getLocation_LatitudeError();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Location#getLongitudeError <em>Longitude Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Longitude Error</em>'.
+	 * @see com.verticon.tracker.Location#getLongitudeError()
+	 * @see #getLocation()
+	 * @generated
+	 */
+	EAttribute getLocation_LongitudeError();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Location#getLongitudeInRadians <em>Longitude In Radians</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Longitude In Radians</em>'.
+	 * @see com.verticon.tracker.Location#getLongitudeInRadians()
+	 * @see #getLocation()
+	 * @generated
+	 */
+	EAttribute getLocation_LongitudeInRadians();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Location#getLongitude <em>Longitude</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Longitude</em>'.
+	 * @see com.verticon.tracker.Location#getLongitude()
+	 * @see #getLocation()
+	 * @generated
+	 */
+	EAttribute getLocation_Longitude();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Location#getLatitude <em>Latitude</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Latitude</em>'.
+	 * @see com.verticon.tracker.Location#getLatitude()
+	 * @see #getLocation()
+	 * @generated
+	 */
+	EAttribute getLocation_Latitude();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.MedicalCondition <em>Medical Condition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7891,6 +8011,54 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute LOCATION__NAME = eINSTANCE.getLocation_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Latitude In Radians</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LOCATION__LATITUDE_IN_RADIANS = eINSTANCE.getLocation_LatitudeInRadians();
+
+		/**
+		 * The meta object literal for the '<em><b>Latitude Error</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LOCATION__LATITUDE_ERROR = eINSTANCE.getLocation_LatitudeError();
+
+		/**
+		 * The meta object literal for the '<em><b>Longitude Error</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LOCATION__LONGITUDE_ERROR = eINSTANCE.getLocation_LongitudeError();
+
+		/**
+		 * The meta object literal for the '<em><b>Longitude In Radians</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LOCATION__LONGITUDE_IN_RADIANS = eINSTANCE.getLocation_LongitudeInRadians();
+
+		/**
+		 * The meta object literal for the '<em><b>Longitude</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LOCATION__LONGITUDE = eINSTANCE.getLocation_Longitude();
+
+		/**
+		 * The meta object literal for the '<em><b>Latitude</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LOCATION__LATITUDE = eINSTANCE.getLocation_Latitude();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.MedicalConditionImpl <em>Medical Condition</em>}' class.

@@ -74,6 +74,12 @@ public class LocationItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addLatitudeInRadiansPropertyDescriptor(object);
+			addLatitudeErrorPropertyDescriptor(object);
+			addLongitudeErrorPropertyDescriptor(object);
+			addLongitudeInRadiansPropertyDescriptor(object);
+			addLongitudePropertyDescriptor(object);
+			addLatitudePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -97,6 +103,146 @@ public class LocationItemProvider
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Latitude In Radians feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLatitudeInRadiansPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Location_latitudeInRadians_feature"),
+				 getString("_UI_Location_latitudeInRadians_description"),
+				 TrackerPackage.Literals.LOCATION__LATITUDE_IN_RADIANS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
+				 getString("_UI_PositionPropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
+	}
+
+	/**
+	 * This adds a property descriptor for the Latitude Error feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLatitudeErrorPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Location_latitudeError_feature"),
+				 getString("_UI_Location_latitudeError_description"),
+				 TrackerPackage.Literals.LOCATION__LATITUDE_ERROR,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
+				 getString("_UI_PositionPropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
+	}
+
+	/**
+	 * This adds a property descriptor for the Longitude Error feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLongitudeErrorPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Location_longitudeError_feature"),
+				 getString("_UI_Location_longitudeError_description"),
+				 TrackerPackage.Literals.LOCATION__LONGITUDE_ERROR,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
+				 getString("_UI_PositionPropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
+	}
+
+	/**
+	 * This adds a property descriptor for the Longitude In Radians feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLongitudeInRadiansPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Location_longitudeInRadians_feature"),
+				 getString("_UI_Location_longitudeInRadians_description"),
+				 TrackerPackage.Literals.LOCATION__LONGITUDE_IN_RADIANS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
+				 getString("_UI_PositionPropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.properties.expert"
+				 }));
+	}
+
+	/**
+	 * This adds a property descriptor for the Longitude feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLongitudePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Location_longitude_feature"),
+				 getString("_UI_Location_longitude_description"),
+				 TrackerPackage.Literals.LOCATION__LONGITUDE,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
+				 getString("_UI_PositionPropertyCategory"),
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Latitude feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLatitudePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Location_latitude_feature"),
+				 getString("_UI_Location_latitude_description"),
+				 TrackerPackage.Literals.LOCATION__LATITUDE,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
+				 getString("_UI_PositionPropertyCategory"),
 				 null));
 	}
 
@@ -138,6 +284,12 @@ public class LocationItemProvider
 
 		switch (notification.getFeatureID(Location.class)) {
 			case TrackerPackage.LOCATION__NAME:
+			case TrackerPackage.LOCATION__LATITUDE_IN_RADIANS:
+			case TrackerPackage.LOCATION__LATITUDE_ERROR:
+			case TrackerPackage.LOCATION__LONGITUDE_ERROR:
+			case TrackerPackage.LOCATION__LONGITUDE_IN_RADIANS:
+			case TrackerPackage.LOCATION__LONGITUDE:
+			case TrackerPackage.LOCATION__LATITUDE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

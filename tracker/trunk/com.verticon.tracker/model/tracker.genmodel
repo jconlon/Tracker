@@ -662,6 +662,26 @@
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Location">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Location/name"/>
+      <genFeatures createChild="false" propertyCategory="Position" propertyDescription="Latitude measurement in radians"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Location/latitudeInRadians">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" propertyCategory="Position" propertyDescription="Measurement error for latitude in radians"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Location/latitudeError">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" propertyCategory="Position" propertyDescription="Measurement error for longitude in radians"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Location/longitudeError">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" propertyCategory="Position" propertyDescription="Longitude measurement in radians"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Location/longitudeInRadians">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Position"
+          propertyDescription="Longitude measurement in degrees" ecoreFeature="ecore:EAttribute tracker.ecore#//Location/longitude"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Position"
+          propertyDescription="Latitude measurement in degrees" ecoreFeature="ecore:EAttribute tracker.ecore#//Location/latitude"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//MedicalCondition"/>
     <genClasses ecoreClass="tracker.ecore#//MedicalTreatment">
