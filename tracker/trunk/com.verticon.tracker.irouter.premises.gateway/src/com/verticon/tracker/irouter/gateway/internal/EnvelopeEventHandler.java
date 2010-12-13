@@ -24,6 +24,7 @@ import org.osgi.service.event.EventHandler;
 import org.osgi.service.wireadmin.Envelope;
 import org.osgi.util.measurement.Measurement;
 import org.osgi.util.measurement.Unit;
+import org.osgi.util.position.Position;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +41,7 @@ import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.WeightMeasurementUnit;
 
 public class EnvelopeEventHandler implements EventHandler {
+	private static final String ANIMAL_POSITION_SCOPE = "animal.position";
 	private static final String IROUTER_PAYLOAD ="com.verticon.tracker.irouter.payload";
 	private static final String WEIGHIN_EVENT_SCOPE = "animal.weight";
 	private static final String TRACKER_EDITING_DOMAIN = 
@@ -79,7 +81,7 @@ public class EnvelopeEventHandler implements EventHandler {
 					source);
 			return;
 		}
-		if (!(payload instanceof Envelope)) {
+		if (!(payload instanceof Envelope)||!(payload instanceof Position)) {
 			logger.error(bundleMarker,
 					"Unsupported payload from iRouter component={}", source);
 			return;
@@ -176,10 +178,22 @@ public class EnvelopeEventHandler implements EventHandler {
 	
 	public static Event createEvent(Tag tag, Envelope envelope) throws EventCreationException{
 		if(WEIGHIN_EVENT_SCOPE.equals(envelope.getScope())){
-			
 			return createWeighInEvent(envelope);
+		}else if(ANIMAL_POSITION_SCOPE.equals(envelope.getScope())){
+			return createPositionEvent(envelope);
 		}
 		return createGenericEvent(tag,envelope);
+	}
+
+	private static com.verticon.tracker.Position createPositionEvent(Envelope envelope) {
+		Position position = (Position)envelope.getValue();
+		com.verticon.tracker.Position positionEvent = TrackerFactory.eINSTANCE.createPosition();
+		positionEvent.setLatitudeError(position.getLatitude().getError());
+		positionEvent.setLatitudeInRadians(position.getLatitude().getValue());
+		positionEvent.setLongitudeError(position.getLongitude().getError());
+		positionEvent.setLongitudeInRadians(position.getLongitude().getValue());
+		positionEvent.setDateTime(new Date(position.getLatitude().getTime()));
+		return positionEvent;
 	}
 
 	/**
