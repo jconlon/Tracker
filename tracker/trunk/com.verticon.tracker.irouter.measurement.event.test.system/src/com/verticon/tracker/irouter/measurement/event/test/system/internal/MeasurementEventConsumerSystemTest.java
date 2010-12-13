@@ -22,6 +22,7 @@ import org.osgi.service.wireadmin.WireConstants;
 import org.osgi.util.measurement.Measurement;
 import org.osgi.util.measurement.State;
 import org.osgi.util.measurement.Unit;
+import org.osgi.util.position.Position;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -57,6 +58,7 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 	private static final String TRANSACTION_STATE = "transaction.state";
 	private static final String ANIMAL_WEIGHT_MEASUREMENT = "animal.weight";
 	private static final String EVENT_COM_VERTICON_TRACKER_READER = "event://com/verticon/tracker/reader";
+	private static final Long EID = 123456789012345l;
 
 	protected static String PLUGIN_ID = "com.verticon.tracker.irouter.measurement.event.test.system";
 
@@ -156,8 +158,8 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 		ServiceReference monRef = refs[0];
 		Monitorable monitorable = (Monitorable) context.getService(monRef);
 
-		String id = "consumer.Connected_Wires";
-		StatusVariable sv = monitorable.getStatusVariable(id);
+		
+		StatusVariable sv = monitorable.getStatusVariable("consumer.Connected_Wires");
 		assertEquals("Should only be one connected wire", 1, sv.getInteger());
 		
 		sv = monitorable.getStatusVariable("consumer.Connection_URI");
@@ -167,8 +169,8 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 		logger.debug(bundleMarker,
 				"Sleeping to wait for connection to the fake indicator...");
 
-		id = "consumer.Total_Measurements_Sent";
-		sv = monitorable.getStatusVariable(id);
+		
+		sv = monitorable.getStatusVariable("consumer.Total_Measurements_Sent");
 		assertEquals("Should be no measurements sent", 0, sv.getInteger());
 
 		// Send a animal.weight.measurement
@@ -176,22 +178,21 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 				100, .01, Unit.kg, System.currentTimeMillis());
 		Envelope value = new BasicEnvelope(animalWeight, "", ANIMAL_WEIGHT_MEASUREMENT);
 		mockProducer.send(value);
-		sv = monitorable.getStatusVariable(id);
+		sv = monitorable.getStatusVariable("consumer.Total_Measurements_Sent");
 		assertEquals("Should be no measurements sent", 0, sv.getInteger());
 
 		// Send a animal.tag.number
-		Long tagNumber = 123456789012345L;
-		value = new BasicEnvelope(tagNumber, "xx", ANIMAL_TAG_NUMBER);
+		value = new BasicEnvelope(EID, "xx", ANIMAL_TAG_NUMBER);
 		mockProducer.send(value);
-		sv = monitorable.getStatusVariable(id);
+		sv = monitorable.getStatusVariable("consumer.Total_Measurements_Sent");
 		assertEquals("Should be no measurements sent", 0, sv.getInteger());
 
 		// Send a mettler.weight.measurement
 		Measurement mettlerWeight = new Measurement(
 				.3, .0001, Unit.kg, System.currentTimeMillis());
-		value = new BasicEnvelope(mettlerWeight, tagNumber.toString(), METTLER_WEIGHT_MEASUREMENT);
+		value = new BasicEnvelope(mettlerWeight, EID.toString(), METTLER_WEIGHT_MEASUREMENT);
 		mockProducer.send(value);
-		sv = monitorable.getStatusVariable(id);
+		sv = monitorable.getStatusVariable("consumer.Total_Measurements_Sent");
 		assertEquals("Should be no measurements sent", 0, sv.getInteger());
 
 		//No events received at this time
@@ -202,7 +203,7 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 		value = new BasicEnvelope(s, "xy", TRANSACTION_STATE);
 		mockProducer.send(value);
 		TimeUnit.MILLISECONDS.sleep(100);
-		sv = monitorable.getStatusVariable(id);
+		sv = monitorable.getStatusVariable("consumer.Total_Measurements_Sent");
 		assertEquals("Should be two measurements sent", 2, sv.getInteger());
 		//Test the event admin side to make sure an event was really 
 		//received by an EventHandler
@@ -218,7 +219,7 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 		assertTrue("The first event payload is not an Envelope", payload instanceof Envelope);
 		Envelope envelopeReceived = (Envelope)payload;
 		assertEquals("The first event scope bad",ANIMAL_WEIGHT_MEASUREMENT, envelopeReceived.getScope());
-		assertEquals("The first event id bad",tagNumber.toString(), envelopeReceived.getIdentification());
+		assertEquals("The first event id bad",EID.toString(), envelopeReceived.getIdentification());
 		assertEquals("The first event value bad",animalWeight, envelopeReceived.getValue());
 		
 	
@@ -229,7 +230,88 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 		assertTrue("The second event payload is not an Envelope", payload instanceof Envelope);
 		envelopeReceived = (Envelope)payload;
 		assertEquals("The second event scope bad",METTLER_WEIGHT_MEASUREMENT, envelopeReceived.getScope());
-		assertEquals("The second event id bad",tagNumber.toString(), envelopeReceived.getIdentification());
+		assertEquals("The second event id bad",EID.toString(), envelopeReceived.getIdentification());
 		assertEquals("The second event value bad",mettlerWeight, envelopeReceived.getValue());
+		
+		//Reconfigure and test with id forwarding
+		mockEventHandler.events.clear();
+		props.put("triggeron.eid", Boolean.TRUE);
+		props.put("measurement.event.test", "instance2");
+		config.update(props);
+		TimeUnit.SECONDS.sleep(1);
+
+		// Get the configured service
+	    refs = context.getServiceReferences(
+				Monitorable.class.getName(),
+				"(measurement.event.test=instance2)");
+	    
+	    assertNotNull("No MeasurementEvent Monitorable service found", refs);
+		assertTrue("No MeasurementEvent Monitorable service found",
+				refs.length == 1);
+		 monRef = refs[0];
+		 monitorable = (Monitorable) context.getService(monRef);
+
+		
+	    sv = monitorable.getStatusVariable("consumer.Connected_Wires");
+		assertEquals("Should only be one connected wire", 1, sv.getInteger());
+		
+		sv = monitorable.getStatusVariable("consumer.Connection_URI");
+		assertEquals(EVENT_COM_VERTICON_TRACKER_READER, sv.getString());
+		
+
+		logger.debug(bundleMarker,
+				"Sleeping to wait for connection to the fake indicator...");
+
+		sv = monitorable.getStatusVariable("consumer.Total_Measurements_Sent");
+		assertEquals("Should be no measurements sent", 0, sv.getInteger());
+
+		// Send a animal.weight.measurement
+	    animalWeight = new Measurement(
+				100, .01, Unit.kg, System.currentTimeMillis());
+		value = new BasicEnvelope(animalWeight, "", ANIMAL_WEIGHT_MEASUREMENT);
+		mockProducer.send(value);
+		sv = monitorable.getStatusVariable("consumer.Total_Measurements_Sent");
+		assertEquals("Should be no measurements sent", 0, sv.getInteger());
+
+		//No events received at this time
+		assertTrue(mockEventHandler.events.isEmpty());
+		
+		// Send a Position
+		Position position = new Position(
+				new Measurement(100, .01, Unit.rad, System.currentTimeMillis()),//lat
+				new Measurement(200, .01, Unit.rad, System.currentTimeMillis()),//lon
+				null,//alt
+				null,//speed
+				null);//track);
+		
+//				.3, .0001, Unit.kg, System.currentTimeMillis());
+		value = new BasicEnvelope(position, EID.toString(), METTLER_WEIGHT_MEASUREMENT);
+		mockProducer.send(value);
+		sv = monitorable.getStatusVariable("consumer.Total_Measurements_Sent");
+		assertEquals("Should be no measurements sent", 0, sv.getInteger());
+		
+		// Send a transaction.state
+	    s = new State(1, TRANSACTION_STATE);
+		value = new BasicEnvelope(s, "xy", TRANSACTION_STATE);
+		mockProducer.send(value);
+		TimeUnit.MILLISECONDS.sleep(100);
+		sv = monitorable.getStatusVariable("consumer.Total_Measurements_Sent");
+		assertEquals("Should be zero measurements sent. (States are ignored when triggeron.eid is set)", 0, sv.getInteger());
+		//Test the event admin side to make sure an event was not
+		//received by an EventHandler
+		assertEquals(0, mockEventHandler.events.size());
+		
+		//Send an ID
+		// Send a animal.tag.number
+		value = new BasicEnvelope(EID, EID.toString(), ANIMAL_TAG_NUMBER);
+		mockProducer.send(value);
+
+		//Test it
+		TimeUnit.MILLISECONDS.sleep(100);
+		sv = monitorable.getStatusVariable("consumer.Total_Measurements_Sent");
+		assertEquals("Should be two measurements sent. (States are ignored when triggeron.eid is set)", 2, sv.getInteger());
+		//Test the event admin side to make sure an event was not
+		//received by an EventHandler
+		assertEquals(2, mockEventHandler.events.size());
 	}
 }

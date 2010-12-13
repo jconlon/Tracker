@@ -7,6 +7,7 @@ package com.verticon.tracker.irouter.measurement.event.internal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import org.osgi.service.wireadmin.Envelope;
 import org.osgi.service.wireadmin.Wire;
 import org.osgi.util.measurement.Measurement;
 import org.osgi.util.measurement.State;
+import org.osgi.util.position.Position;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -49,11 +51,16 @@ public class MeasurementEventConsumer  extends AbstractTransactionHandler implem
     private static final String LAST_VALUE_SENT ="consumer.Last_Measurement";
     private static final String TOTAL_VALUES_SENT ="consumer.Total_Measurements_Sent";
     private static final String CONNECTION_URI_STATUS_VAR = "consumer.Connection_URI";
+    
+    //configs
+    private static final String TRIGGER_ON_ID_NAME ="triggeron.eid";
     private static final String CONTROL_STATE_NAME ="consumer.transaction.state";
 	private static final String CONTROL_STATE_VALUE = "consumer.transaction.state.value";
 	private static final String CONNECTION_URI = "connection.uri";
+	
     private final AtomicInteger wiresConnected = new AtomicInteger(0);
     private final AtomicInteger totalMeasurements = new AtomicInteger(0);
+    private boolean triggerOnID = false;
     private Map<String,Object> config = null;
 	private EventAdmin eventAdmin = null;
 	private Envelope lastEnvelope = null;
@@ -97,6 +104,12 @@ public class MeasurementEventConsumer  extends AbstractTransactionHandler implem
 		log.debug(bundleMarker,"Activating...");
 		for (Map.Entry<String, Object> entry : config.entrySet()) {
 			log.debug(bundleMarker, "Property key={} value={}",entry.getKey(),entry.getValue());
+		}
+		Object o = config.get(TRIGGER_ON_ID_NAME);
+		if(o!=null){
+			this.triggerOnID=(Boolean)o;
+		}else{
+			this.triggerOnID=false;
 		}
 		this.state = new State(
 				getConfigInteger(CONTROL_STATE_VALUE),
@@ -186,7 +199,7 @@ public class MeasurementEventConsumer  extends AbstractTransactionHandler implem
 		List<Envelope> results = new ArrayList<Envelope>();
 		
 		for (Envelope envelope : envelopes.values()) {
-			if(envelope.getValue() instanceof Measurement){
+			if((envelope.getValue() instanceof Measurement)||(envelope.getValue() instanceof Position)){
 				if(envelope.getIdentification() instanceof String && ((String)envelope.getIdentification()).trim().length()>1){
 					results.add(envelope);
 				}else if(id!=null){
@@ -196,9 +209,29 @@ public class MeasurementEventConsumer  extends AbstractTransactionHandler implem
 				}
 			}
 		}
-		Collections.sort(results, ENVELOPE_DATE_ORDER);
+		Collections.sort(results, ENVELOPE_DATE_ORDER2);
 		return results;
 	}
+	 protected static final Comparator<Envelope> ENVELOPE_DATE_ORDER2 = new Comparator<Envelope>() {
+			public int compare(Envelope e1, Envelope e2) { 
+				if(getTime(e1) < getTime(e2)){
+					return -1;//returning a negative integer, first argument is less than second
+				}else if(getTime(e1) == getTime(e2)){
+					return 0;//0, equal to, or 
+				}
+				return 1; //a positive integer depending on whether the ,  greater than the second.
+			}
+			
+			long getTime(Envelope e){
+				long result = 0;
+				if(e.getValue() instanceof Position &&  ((Position)e.getValue()).getLatitude()!=null ){	
+					result = ((Position)e.getValue()).getLatitude().getTime();
+				}else if (e.getValue() instanceof Measurement){
+					result = ((Measurement)e.getValue()).getTime();
+				}
+				return result;
+			}
+	};
 	
 	private static Envelope addId(Envelope envelope, Long id){
 		return new BasicEnvelope(envelope.getValue(),id.toString(),envelope.getScope());
@@ -324,5 +357,51 @@ public class MeasurementEventConsumer  extends AbstractTransactionHandler implem
 		}
 		return null;
 	}
+
+
+
+	/**
+	 * Overrides the superclass to add all non-state types of envelopes and to allow for triggering on
+	 * eids.
+	 * 
+	 * @see com.verticon.tracker.irouter.common.AbstractTransactionHandler#add(org.osgi.service.wireadmin.Envelope)
+	 */
+	@Override
+	public void add(Envelope envelope){
+		if((envelope.getValue() instanceof State)&&(!triggerOnID)){
+			if(state==null){
+				if( ((State)envelope.getValue()).getValue()==1){
+					 forwardConditionMet();
+				 }
+			}else if(state.equals(envelope.getValue())){
+				 forwardConditionMet();
+			}
+		}else if (envelope.getValue() instanceof Long){
+			 id = (Long)envelope.getValue();
+
+			 log.debug(bundleMarker(),"{} ID={}",
+					 this,id);
+			 if(triggerOnID){
+				 forwardConditionMet();
+			 }
+
+		}else{
+			 log.error(bundleMarker(),"id='{}', type='{}' has unknown value of {}",
+					 new Object[]{id,
+				 envelope.getScope(),
+				 envelope.getValue()});
+			 envelopes.put(envelope.getScope(), envelope);
+		}
+	}
+
+
+
+	private void forwardConditionMet() {
+		triggered();
+		envelopes.clear();
+		id=null;
+	}
+	
+	
 	
 }
