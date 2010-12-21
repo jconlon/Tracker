@@ -165,6 +165,9 @@ public class LocationImpl extends EObjectImpl implements Location {
 	 */
 	protected static final double LATITUDE_EDEFAULT = 0.0;
 
+	 /** Degrees/Radians conversion constant. */
+	private static final double PiOver180 = Math.PI / 180.0;
+	   
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -319,7 +322,7 @@ public class LocationImpl extends EObjectImpl implements Location {
 	}
 
 	private static final double degrees(double radians) {
-		return radians * 360 / (2*Math.PI);
+		return radians / PiOver180;
 	}
 
 	/**
