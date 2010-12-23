@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="false" name="com.verticon.tracker.irouter.gps.dev.fake">
+   <implementation class="com.verticon.tracker.irouter.gps.dev.fake.internal.FakeGPSServer"/>
+   <service>
+      <provide interface="com.verticon.tracker.irouter.dev.IDeviceListener"/>
+   </service>
+   <property name="service.pid" type="String" value="gps.fake.dev"/>
+</scr:component>
