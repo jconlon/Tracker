@@ -1,9 +1,21 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Verticon, Inc. and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Verticon, Inc. - initial API and implementation
+ *******************************************************************************/
 package com.verticon.tracker.irouter.gps.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -14,6 +26,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
+import org.gavaghan.geodesy.Angle;
 import org.gavaghan.geodesy.IGeodesicCalculator;
 import org.osgi.service.io.ConnectorService;
 import org.osgi.service.monitor.MonitorListener;
@@ -55,6 +68,11 @@ public class GPSProducer implements Producer, Monitorable {
 	static {
 		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
 	}
+	
+	//Misc
+	private static final DecimalFormat DECIMAL_FORMATER = new DecimalFormat("##.#####");
+	
+
 
 	// Proxy futures
 	private static ExecutorService exec = Executors.newCachedThreadPool();
@@ -152,14 +170,34 @@ public class GPSProducer implements Producer, Monitorable {
 		if (CONNECTED_CONSUMERS.equals(name)) {
 			return new StatusVariable(name, StatusVariable.CM_GAUGE,
 					consumersConnected.get());
+			
 		} else if (LAST_POSITION.equals(name)) {
-
+			Envelope env = lastEnvelopeUpdater.get(this);
+			if(env ==null){
+				return new StatusVariable(name, StatusVariable.CM_DER,"never sent an position");
+			}
+			Position pos = (Position)env.getValue();
+			StringBuilder buf = new StringBuilder("lat=");
+			buf.append(DECIMAL_FORMATER.format(Angle.toDegrees(pos.getLatitude().getValue())));
+			buf.append(" degrees, lon=");
+			buf.append(DECIMAL_FORMATER.format(Angle.toDegrees(Angle.toDegrees(pos.getLongitude().getValue()))));
+			buf.append(" degrees, alt=");
+			buf.append(pos.getAltitude().getValue());
+			buf.append(" meters");
 			return new StatusVariable(name, StatusVariable.CM_DER,
-					lEnvelope != null ? lEnvelope.getValue().toString() : "");
+					buf.toString());
+			
 		} else if (LAST_POSITION_TIME.equals(name)) {
+			Envelope env = lastEnvelopeUpdater.get(this);
+			if(env ==null){
+				return new StatusVariable(name, StatusVariable.CM_DER,"never sent an position");
+			}
+			Position pos = (Position)env.getValue();
+			long time = pos.getLatitude().getTime();
+			Date date = new Date(time);
+			
 			return new StatusVariable(name, StatusVariable.CM_DER,
-					lEnvelope != null ? lEnvelope.getIdentification()
-							.toString() : "");
+					date.toString());
 
 		} else if (TOTAL_POSITION_SENT.equals(name)) {
 			return new StatusVariable(name, StatusVariable.CM_CC,
