@@ -39,6 +39,6 @@ HowTo?
 1. In SVN Repository View select the tracker/trunk in the context menu 
 refactor>copyTo 
 
-2. Select the tags branch.
+2. A CopyTo dialog will show. Select the tags branch in the tree.
 
-3. A dialog will ask what name to use. Use REL-desktop.beta.0.4
+3. In the lower part of the CopyTo dialog it will ask what name to use. Use REL-desktop.beta.0.7
