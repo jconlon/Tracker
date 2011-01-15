@@ -29,6 +29,6 @@ fn1. Sensors and actuators typically have RS232 interfaces.  A common scenario i
 
 fn2. The iRouter is an example of this kind of application. 
 
-fn3. Running the simulator with a click on the executable can also work, but If you want to see logging output and have access to the internal command line interface run the simulator in a console.
+fn3. Running the simulator with a click on the executable can also work, but if you want to see logging output and have access to the internal command line interface run the simulator in a console.
 
 
