@@ -1717,7 +1717,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPosition_LongitudeInRadians() {
+	public EAttribute getPosition_Longitude() {
 		return (EAttribute)positionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1726,7 +1726,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPosition_Longitude() {
+	public EAttribute getPosition_Latitude() {
 		return (EAttribute)positionEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1735,35 +1735,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPosition_LongitudeError() {
+	public EAttribute getPosition_Coordinates() {
 		return (EAttribute)positionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPosition_LatitudeInRadians() {
-		return (EAttribute)positionEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPosition_Latitude() {
-		return (EAttribute)positionEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPosition_LatitudeError() {
-		return (EAttribute)positionEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -2550,12 +2523,9 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEReference(genericEventInclusionEClass, GENERIC_EVENT_INCLUSION__OCD);
 
 		positionEClass = createEClass(POSITION);
-		createEAttribute(positionEClass, POSITION__LONGITUDE_IN_RADIANS);
 		createEAttribute(positionEClass, POSITION__LONGITUDE);
-		createEAttribute(positionEClass, POSITION__LONGITUDE_ERROR);
-		createEAttribute(positionEClass, POSITION__LATITUDE_IN_RADIANS);
 		createEAttribute(positionEClass, POSITION__LATITUDE);
-		createEAttribute(positionEClass, POSITION__LATITUDE_ERROR);
+		createEAttribute(positionEClass, POSITION__COORDINATES);
 
 		// Create enums
 		sexEEnum = createEEnum(SEX);
@@ -2941,12 +2911,9 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEReference(getGenericEventInclusion_Ocd(), theMetatypePackage.getOCD(), null, "ocd", null, 1, 1, GenericEventInclusion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(positionEClass, Position.class, "Position", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPosition_LongitudeInRadians(), ecorePackage.getEDouble(), "longitudeInRadians", null, 0, 1, Position.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPosition_Longitude(), ecorePackage.getEDouble(), "longitude", null, 0, 1, Position.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPosition_LongitudeError(), ecorePackage.getEDouble(), "longitudeError", null, 0, 1, Position.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPosition_LatitudeInRadians(), ecorePackage.getEDouble(), "latitudeInRadians", null, 0, 1, Position.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPosition_Latitude(), ecorePackage.getEDouble(), "latitude", null, 0, 1, Position.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPosition_LatitudeError(), ecorePackage.getEDouble(), "latitudeError", null, 0, 1, Position.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPosition_Longitude(), ecorePackage.getEDouble(), "longitude", null, 1, 1, Position.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPosition_Latitude(), ecorePackage.getEDouble(), "latitude", null, 1, 1, Position.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPosition_Coordinates(), ecorePackage.getEString(), "coordinates", null, 0, 1, Position.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");

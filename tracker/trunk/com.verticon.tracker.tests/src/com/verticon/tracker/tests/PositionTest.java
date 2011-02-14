@@ -15,21 +15,18 @@ import junit.textui.TestRunner;
  * <p>
  * The following features are tested:
  * <ul>
- *   <li>{@link com.verticon.tracker.Position#getLongitude() <em>Longitude</em>}</li>
- *   <li>{@link com.verticon.tracker.Position#getLatitude() <em>Latitude</em>}</li>
+ *   <li>{@link com.verticon.tracker.Position#getCoordinates() <em>Coordinates</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
 public class PositionTest extends EventTest {
 	
-	private static final double LONG_RAD = -1.586305516;
+	private static final double LONG = -122.084583;
 
-	private static final double LAT_RAD = 0.760212093;
+	private static final double LAT = 37.42227;
 
-	private static final double LONG_ERROR = .002;
-
-	private static final double LAT_ERROR = .001;
+	private static final String COORDINATES = "-122.084583,37.42227,0";
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -90,6 +87,20 @@ public class PositionTest extends EventTest {
 		setFixture(null);
 	}
 
+	/**
+	 * Tests the '{@link com.verticon.tracker.Position#getCoordinates() <em>Coordinates</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Position#getCoordinates()
+	 * @generated NOT
+	 */
+	public void testGetCoordinates() {
+		getFixture().setLongitude(LONG);
+		getFixture().setLatitude(LAT);
+		String result = getFixture().getCoordinates();
+		assertEquals(result,COORDINATES,result);
+	}
+
 	@Override
 	public void testGetEventCode() {
 		assertNotNull(getFixture());
@@ -105,9 +116,8 @@ public class PositionTest extends EventTest {
 	 * @generated NOT
 	 */
 	public void testGetLongitude() {
-		getFixture().setLongitudeError(LONG_ERROR);
-		getFixture().setLongitudeInRadians(LONG_RAD);
-		assertEquals(-90.88861108512228,getFixture().getLongitude());
+		getFixture().setLongitude(LONG);
+		assertEquals(LONG,getFixture().getLongitude());
 	}
 
 	/**
@@ -118,9 +128,8 @@ public class PositionTest extends EventTest {
 	 * @generated NOT
 	 */
 	public void testGetLatitude() {
-		getFixture().setLatitudeError(LAT_ERROR);
-		getFixture().setLatitudeInRadians(LAT_RAD);
-		assertEquals(43.556944463706834,getFixture().getLatitude());
+		getFixture().setLatitude(LAT);
+		assertEquals(LAT,getFixture().getLatitude());
 	}
 
 } //PositionTest

@@ -188,12 +188,14 @@ public class EnvelopeEventHandler implements EventHandler {
 	private static com.verticon.tracker.Position createPositionEvent(Envelope envelope) {
 		Position position = (Position)envelope.getValue();
 		com.verticon.tracker.Position positionEvent = TrackerFactory.eINSTANCE.createPosition();
-		positionEvent.setLatitudeError(position.getLatitude().getError());
-		positionEvent.setLatitudeInRadians(position.getLatitude().getValue());
-		positionEvent.setLongitudeError(position.getLongitude().getError());
-		positionEvent.setLongitudeInRadians(position.getLongitude().getValue());
+		positionEvent.setLatitude(degrees(position.getLatitude().getValue()));
+		positionEvent.setLongitude(degrees(position.getLongitude().getValue()));
 		positionEvent.setDateTime(new Date(position.getLatitude().getTime()));
 		return positionEvent;
+	}
+	
+	private static final double degrees(double radians) {
+		return radians * 360 / (2*Math.PI);
 	}
 
 	/**
