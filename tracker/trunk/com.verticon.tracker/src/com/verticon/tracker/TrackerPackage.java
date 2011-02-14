@@ -5491,40 +5491,13 @@ public interface TrackerPackage extends EPackage {
 	int POSITION__DATE_KEY = EVENT__DATE_KEY;
 
 	/**
-	 * The feature id for the '<em><b>Longitude In Radians</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POSITION__LONGITUDE_IN_RADIANS = EVENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Longitude</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POSITION__LONGITUDE = EVENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Longitude Error</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POSITION__LONGITUDE_ERROR = EVENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Latitude In Radians</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POSITION__LATITUDE_IN_RADIANS = EVENT_FEATURE_COUNT + 3;
+	int POSITION__LONGITUDE = EVENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Latitude</b></em>' attribute.
@@ -5533,16 +5506,16 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POSITION__LATITUDE = EVENT_FEATURE_COUNT + 4;
+	int POSITION__LATITUDE = EVENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Latitude Error</b></em>' attribute.
+	 * The feature id for the '<em><b>Coordinates</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POSITION__LATITUDE_ERROR = EVENT_FEATURE_COUNT + 5;
+	int POSITION__COORDINATES = EVENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Position</em>' class.
@@ -5551,7 +5524,7 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POSITION_FEATURE_COUNT = EVENT_FEATURE_COUNT + 6;
+	int POSITION_FEATURE_COUNT = EVENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Sex <em>Sex</em>}' enum.
@@ -7045,17 +7018,6 @@ public interface TrackerPackage extends EPackage {
 	EClass getPosition();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Position#getLongitudeInRadians <em>Longitude In Radians</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Longitude In Radians</em>'.
-	 * @see com.verticon.tracker.Position#getLongitudeInRadians()
-	 * @see #getPosition()
-	 * @generated
-	 */
-	EAttribute getPosition_LongitudeInRadians();
-
-	/**
 	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Position#getLongitude <em>Longitude</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7065,28 +7027,6 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPosition_Longitude();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Position#getLongitudeError <em>Longitude Error</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Longitude Error</em>'.
-	 * @see com.verticon.tracker.Position#getLongitudeError()
-	 * @see #getPosition()
-	 * @generated
-	 */
-	EAttribute getPosition_LongitudeError();
-
-	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Position#getLatitudeInRadians <em>Latitude In Radians</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Latitude In Radians</em>'.
-	 * @see com.verticon.tracker.Position#getLatitudeInRadians()
-	 * @see #getPosition()
-	 * @generated
-	 */
-	EAttribute getPosition_LatitudeInRadians();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Position#getLatitude <em>Latitude</em>}'.
@@ -7100,15 +7040,15 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getPosition_Latitude();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Position#getLatitudeError <em>Latitude Error</em>}'.
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Position#getCoordinates <em>Coordinates</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Latitude Error</em>'.
-	 * @see com.verticon.tracker.Position#getLatitudeError()
+	 * @return the meta object for the attribute '<em>Coordinates</em>'.
+	 * @see com.verticon.tracker.Position#getCoordinates()
 	 * @see #getPosition()
 	 * @generated
 	 */
-	EAttribute getPosition_LatitudeError();
+	EAttribute getPosition_Coordinates();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Premises <em>Premises</em>}'.
@@ -8773,36 +8713,12 @@ public interface TrackerPackage extends EPackage {
 		EClass POSITION = eINSTANCE.getPosition();
 
 		/**
-		 * The meta object literal for the '<em><b>Longitude In Radians</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POSITION__LONGITUDE_IN_RADIANS = eINSTANCE.getPosition_LongitudeInRadians();
-
-		/**
 		 * The meta object literal for the '<em><b>Longitude</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute POSITION__LONGITUDE = eINSTANCE.getPosition_Longitude();
-
-		/**
-		 * The meta object literal for the '<em><b>Longitude Error</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POSITION__LONGITUDE_ERROR = eINSTANCE.getPosition_LongitudeError();
-
-		/**
-		 * The meta object literal for the '<em><b>Latitude In Radians</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute POSITION__LATITUDE_IN_RADIANS = eINSTANCE.getPosition_LatitudeInRadians();
 
 		/**
 		 * The meta object literal for the '<em><b>Latitude</b></em>' attribute feature.
@@ -8813,12 +8729,12 @@ public interface TrackerPackage extends EPackage {
 		EAttribute POSITION__LATITUDE = eINSTANCE.getPosition_Latitude();
 
 		/**
-		 * The meta object literal for the '<em><b>Latitude Error</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Coordinates</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute POSITION__LATITUDE_ERROR = eINSTANCE.getPosition_LatitudeError();
+		EAttribute POSITION__COORDINATES = eINSTANCE.getPosition_Coordinates();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.PremisesImpl <em>Premises</em>}' class.

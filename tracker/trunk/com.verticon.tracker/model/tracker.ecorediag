@@ -2965,29 +2965,17 @@
   <children xmi:type="notation:Node" xmi:id="_Y316cASZEeC5yOs0w41ecw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_Y33IkASZEeC5yOs0w41ecw" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_Y33voASZEeC5yOs0w41ecw" type="5001">
-      <children xmi:type="notation:Node" xmi:id="_FRVYcASaEeC5yOs0w41ecw" type="2001">
-        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Position/longitudeInRadians"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_FRVYcQSaEeC5yOs0w41ecw"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_IZUdEASaEeC5yOs0w41ecw" type="2001">
-        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Position/longitude"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_IZUdEQSaEeC5yOs0w41ecw"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_LnXGYASaEeC5yOs0w41ecw" type="2001">
-        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Position/longitudeError"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_LnXGYQSaEeC5yOs0w41ecw"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_NugZEASaEeC5yOs0w41ecw" type="2001">
-        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Position/latitudeInRadians"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_NugZEQSaEeC5yOs0w41ecw"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_RVXLAASaEeC5yOs0w41ecw" type="2001">
+      <children xmi:type="notation:Node" xmi:id="_Ho7hgDhZEeCA0thgnic5bg" type="2001">
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Position/latitude"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_RVXLAQSaEeC5yOs0w41ecw"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Ho7hgThZEeCA0thgnic5bg"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_TQok4ASaEeC5yOs0w41ecw" type="2001">
-        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Position/latitudeError"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_TQok4QSaEeC5yOs0w41ecw"/>
+      <children xmi:type="notation:Node" xmi:id="_Nje0YDhZEeCA0thgnic5bg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Position/coordinates"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Nje0YThZEeCA0thgnic5bg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_9iOXQDhYEeCA0thgnic5bg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Position/longitude"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_9iOXQThYEeCA0thgnic5bg"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Y33voQSZEeC5yOs0w41ecw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_Y33vogSZEeC5yOs0w41ecw"/>
