@@ -569,6 +569,19 @@
             type="java.lang.Object">
       </propertyTester>
    </extension>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <file-association
+            content-type="org.eclipse.emf.compare.ui.contenttype.ModelContentType"
+            file-extensions="premises"
+            file-names="*">
+      </file-association>
+      <file-association
+            content-type="org.eclipse.emf.compare.ui.contenttype.ModelContentType"
+            file-extensions="metatype"
+            file-names="*">
+      </file-association>
+   </extension>
    
    
 </plugin>
