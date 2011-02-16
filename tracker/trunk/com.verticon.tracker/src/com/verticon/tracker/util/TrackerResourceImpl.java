@@ -31,12 +31,14 @@ public class TrackerResourceImpl extends XMLResourceImpl {
 	/**
 	 * Creates an instance of the resource.
 	 * <!-- begin-user-doc -->
+	 * added encoding
 	 * <!-- end-user-doc -->
 	 * @param uri the URI of the new resource.
-	 * @generated
+	 * @generated NOT
 	 */
 	public TrackerResourceImpl(URI uri) {
 		super(uri);
+		setEncoding("UTF-8");
 	}
 
 } //TrackerResourceImpl
