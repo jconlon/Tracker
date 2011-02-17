@@ -2,24 +2,35 @@
 <?eclipse version="3.0"?>
 
 <!--
- Copyright 2007 Verticon, Inc. All Rights Reserved.
-
- $Id$
+ Copyright 2007, 2008 Verticon, Inc. All Rights Reserved.
 -->
 
 <plugin>
 
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.verticon.com/ns/tracker/fair/0.1.0" 
-       class = "com.verticon.tracker.fair.FairPackage"
-       genModel = "model/fair.genmodel" /> 
-  </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.verticon.com/ns/tracker/fair/0.1.0"
+            class="com.verticon.tracker.fair.FairPackage"
+            genModel="model/fair.genmodel"/>
+   </extension>
 
-  <extension point="org.eclipse.emf.ecore.extension_parser">
-    <parser 
-       type="fair" 
-       class="com.verticon.tracker.fair.util.FairResourceFactoryImpl" />
-  </extension>
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <parser
+            contentTypeIdentifier="com.verticon.tracker.fair"
+            class="com.verticon.tracker.fair.util.FairResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            base-type="org.eclipse.core.runtime.xml"
+            file-extensions="fair,xml"
+            id="com.verticon.tracker.fair"
+            name="%_UI_Fair_content_type"
+            priority="normal">
+         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+            <parameter name="namespace" value="http://www.verticon.com/ns/tracker/fair/0.1.0"/>
+         </describer>
+      </content-type>
+   </extension>
 
 </plugin>

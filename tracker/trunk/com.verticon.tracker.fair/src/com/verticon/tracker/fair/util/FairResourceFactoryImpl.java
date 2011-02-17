@@ -43,6 +43,7 @@ public class FairResourceFactoryImpl extends ResourceFactoryImpl {
 	/**
 	 * Creates an instance of the resource.
 	 * <!-- begin-user-doc -->
+	 * See comments in line
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -53,6 +54,8 @@ public class FairResourceFactoryImpl extends ResourceFactoryImpl {
 		result.getDefaultLoadOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
 
 		result.getDefaultSaveOptions().put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+		
+		result.getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING, "UTF_8");//Added
 
 		//Removed from generated options in order to load legacy classes.  Ticket#533
 //		result.getDefaultLoadOptions().put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);

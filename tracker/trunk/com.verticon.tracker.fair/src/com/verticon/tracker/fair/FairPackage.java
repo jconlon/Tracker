@@ -65,6 +65,14 @@ public interface FairPackage extends EPackage {
 	String eNS_PREFIX = "com.verticon.tracker.fair";
 
 	/**
+	 * The package content type ID.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eCONTENT_TYPE = "com.verticon.tracker.fair";
+
+	/**
 	 * The singleton instance of the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
