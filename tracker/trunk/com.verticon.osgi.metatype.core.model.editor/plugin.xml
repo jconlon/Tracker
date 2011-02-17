@@ -30,9 +30,11 @@
             id="com.verticon.osgi.metatype.presentation.MetatypeEditorID"
             name="%_UI_MetatypeEditor_label"
             icon="icons/full/obj16/MetatypeModelFile.gif"
-            extensions="metatype"
             class="com.verticon.osgi.metatype.presentation.extended.MetatypeFormsEditor"
             contributorClass="com.verticon.osgi.metatype.presentation.MetatypeActionBarContributor">
+         <contentTypeBinding
+               contentTypeId="com.verticon.osgi.metatype">
+         </contentTypeBinding>
       </editor>
    </extension>
    <extension
