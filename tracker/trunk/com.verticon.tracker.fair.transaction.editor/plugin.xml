@@ -16,9 +16,11 @@
         id = "com.verticon.tracker.fair.transaction.editor.presentation.FairEditorID"
         name = "%_UI_FairEditor_label"
         icon = "icons/full/obj16/FairModelFile.gif"
-        extensions = "fair"
         class = "com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditor" 
         contributorClass="com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionActionBarContributor" >
+       <contentTypeBinding
+             contentTypeId="com.verticon.tracker.fair">
+       </contentTypeBinding>
     </editor>
   </extension>
 

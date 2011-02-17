@@ -55,7 +55,7 @@ public class FairResourceFactoryImpl extends ResourceFactoryImpl {
 
 		result.getDefaultSaveOptions().put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
 		
-		result.getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING, "UTF_8");//Added
+		result.getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");//Added
 
 		//Removed from generated options in order to load legacy classes.  Ticket#533
 //		result.getDefaultLoadOptions().put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);

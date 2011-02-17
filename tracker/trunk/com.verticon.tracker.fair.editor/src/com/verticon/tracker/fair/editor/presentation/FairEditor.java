@@ -48,6 +48,7 @@ import org.eclipse.emf.common.ui.editor.ProblemEditorPart;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
@@ -82,7 +83,6 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -91,7 +91,6 @@ import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
-import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -102,13 +101,9 @@ import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Tree;
-import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorActionBarContributor;
 import org.eclipse.ui.IEditorInput;
@@ -131,6 +126,7 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.verticon.osgi.metatype.provider.MetatypeItemProviderAdapterFactory;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
@@ -142,7 +138,8 @@ import com.verticon.tracker.editor.presentation.SelectionViewerFilter;
 import com.verticon.tracker.editor.util.ITrackerViewRegister;
 import com.verticon.tracker.fair.Fair;
 import com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory;
-import com.verticon.osgi.metatype.provider.MetatypeItemProviderAdapterFactory;
+import com.verticon.tracker.fair.util.FairSwitch;
+import com.verticon.tracker.util.TrackerSwitch;
 
 /**
  * This is an example of a Fair model editor.
@@ -1242,13 +1239,21 @@ public class FairEditor
 						return getFair().getPremises();
 					}
 
+					
+					
 					public Fair getFair() {
 						ResourceSet resourceSet = FairEditor.this.getEditingDomain().getResourceSet();
+						TreeIterator<Object> it = EcoreUtil.getAllProperContents(resourceSet, false);
 						Fair fair = null;
-						for (Resource resource : resourceSet.getResources()) {
-							if(resource.getURI().fileExtension().endsWith("fair")){
-							  fair = (Fair)	resource.getEObject("/");
-							  break;
+						while (it.hasNext()) {
+							Object o = it.next();
+							System.out.println("Resource Object: "+o);
+							if(o instanceof Premises){
+								it.prune();
+							}
+							if(o instanceof Fair){
+								fair = (Fair)o;
+								break;
 							}
 						}
 						Assert.isNotNull(fair, "Fair can't be null. "+this);
@@ -1828,4 +1833,5 @@ public class FairEditor
 
 		svf.removeViewer(tableViewer);
 	}
+	
 }
