@@ -51,7 +51,7 @@ public class FairFactoryImpl extends EFactoryImpl implements FairFactory {
 	 */
 	public static FairFactory init() {
 		try {
-			FairFactory theFairFactory = (FairFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.verticon.com/ns/tracker/fair/0.1.0"); 
+			FairFactory theFairFactory = (FairFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.verticon.com/tracker.fair/0.2.1/fair"); 
 			if (theFairFactory != null) {
 				return theFairFactory;
 			}

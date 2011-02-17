@@ -54,7 +54,7 @@ public interface FairPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.verticon.com/ns/tracker/fair/0.1.0";
+	String eNS_URI = "http://www.verticon.com/tracker.fair/0.2.1/fair";
 
 	/**
 	 * The package namespace name.
@@ -62,7 +62,7 @@ public interface FairPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "com.verticon.tracker.fair";
+	String eNS_PREFIX = "fair";
 
 	/**
 	 * The package content type ID.
