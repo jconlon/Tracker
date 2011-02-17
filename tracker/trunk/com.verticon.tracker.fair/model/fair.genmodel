@@ -7,12 +7,12 @@
     modelPluginClass="com.verticon.tracker.fair.FairPlugin" editPluginClass="com.verticon.tracker.fair.edit.provider.FairEditPlugin"
     editorPluginClass="com.verticon.tracker.fair.editor.presentation.FairEditorPlugin"
     testSuiteClass="com.verticon.tracker.fair.tests.FairAllTests" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="5.0" providerRootExtendsClass="" usedGenPackages="../../com.verticon.tracker/model/tracker.genmodel#//tracker">
+    complianceLevel="5.0" providerRootExtendsClass="" usedGenPackages="../../com.verticon.tracker/model/tracker.genmodel#//tracker ../../com.verticon.tracker/model/tracker.genmodel#//metatype">
   <foreignModel>fair.ecore</foreignModel>
   <modelPluginVariables>OCL_ECORE=org.eclipse.ocl.ecore</modelPluginVariables>
   <genPackages prefix="Fair" basePackage="com.verticon.tracker" resource="XML" disposableProviderFactory="true"
       providerPackageSuffix="edit.provider" presentationPackageSuffix="editor.presentation"
-      ecorePackage="fair.ecore#/">
+      contentTypeIdentifier="com.verticon.tracker.fair" ecorePackage="fair.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="fair.ecore#//Award">
       <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/Unspecified"/>
       <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/GrandChampion"/>

@@ -33,10 +33,11 @@ public class FairResourceImpl extends XMLResourceImpl {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param uri the URI of the new resource.
-	 * @generated
+	 * @generated NOT
 	 */
 	public FairResourceImpl(URI uri) {
 		super(uri);
+		setEncoding("UTF-8");
 	}
 
 } //FairResourceImpl
