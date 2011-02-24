@@ -13,6 +13,7 @@ package com.verticon.tracker.fair.util;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 
 /**
@@ -55,11 +56,13 @@ public class FairResourceFactoryImpl extends ResourceFactoryImpl {
 
 		result.getDefaultSaveOptions().put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
 		
-		result.getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");//Added
-
+		result.getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");//Added Ticket#690
+		result.getDefaultSaveOptions().put(XMIResource.OPTION_USE_XMI_TYPE, Boolean.TRUE); //Added Ticket#690
 		//Removed from generated options in order to load legacy classes.  Ticket#533
 //		result.getDefaultLoadOptions().put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 //		result.getDefaultSaveOptions().put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
+		
+		result.getDefaultLoadOptions().put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, Boolean.TRUE);//Added Ticket#690
 
 		result.getDefaultLoadOptions().put(XMLResource.OPTION_USE_LEXICAL_HANDLER, Boolean.TRUE);
 		return result;

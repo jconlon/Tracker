@@ -68,7 +68,10 @@ public class FairExample {
 		resourceSet.getPackageRegistry().put
 			(FairPackage.eNS_URI, 
 			 FairPackage.eINSTANCE);
-        
+		
+		//Register the old package
+		resourceSet.getPackageRegistry().put("http://www.verticon.com/ns/tracker/fair/0.1.0", 
+		 FairPackage.eINSTANCE);
 		// If there are no arguments, emit an appropriate usage message.
 		//
 		if (args.length == 0) {

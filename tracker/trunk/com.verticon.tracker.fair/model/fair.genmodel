@@ -10,9 +10,9 @@
     complianceLevel="5.0" providerRootExtendsClass="" usedGenPackages="../../com.verticon.tracker/model/tracker.genmodel#//tracker ../../com.verticon.tracker/model/tracker.genmodel#//metatype">
   <foreignModel>fair.ecore</foreignModel>
   <modelPluginVariables>OCL_ECORE=org.eclipse.ocl.ecore</modelPluginVariables>
-  <genPackages prefix="Fair" basePackage="com.verticon.tracker" resource="XML" disposableProviderFactory="true"
+  <genPackages prefix="Fair" basePackage="com.verticon.tracker" resource="XMI" disposableProviderFactory="true"
       providerPackageSuffix="edit.provider" presentationPackageSuffix="editor.presentation"
-      contentTypeIdentifier="com.verticon.tracker.fair" ecorePackage="fair.ecore#/">
+      contentTypeIdentifier="" ecorePackage="fair.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="fair.ecore#//Award">
       <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/Unspecified"/>
       <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/GrandChampion"/>
