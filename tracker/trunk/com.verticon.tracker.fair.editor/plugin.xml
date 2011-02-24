@@ -26,14 +26,12 @@
 
   <extension point = "org.eclipse.ui.editors">
     <editor
-        id = "com.verticon.tracker.fair.editor.presentation.FairEditorID"
-        name = "%_UI_FairEditor_label"
-        icon = "icons/full/obj16/FairModelFile.gif"
-        class = "com.verticon.tracker.fair.editor.presentation.FairEditor" 
-        contributorClass="com.verticon.tracker.fair.editor.presentation.FairActionBarContributor" >
-       <contentTypeBinding
-             contentTypeId="com.verticon.tracker.fair">
-       </contentTypeBinding>
+          class="com.verticon.tracker.fair.editor.presentation.FairEditor"
+          contributorClass="com.verticon.tracker.fair.editor.presentation.FairActionBarContributor"
+          extensions="fair"
+          icon="icons/full/obj16/FairModelFile.gif"
+          id="com.verticon.tracker.fair.editor.presentation.FairEditorID"
+          name="%_UI_FairEditor_label">
     </editor>
   </extension>    
   

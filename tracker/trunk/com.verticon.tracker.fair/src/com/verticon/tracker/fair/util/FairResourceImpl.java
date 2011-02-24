@@ -11,6 +11,7 @@
 package com.verticon.tracker.fair.util;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 
 /**
@@ -20,7 +21,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
  * @see com.verticon.tracker.fair.util.FairResourceFactoryImpl
  * @generated
  */
-public class FairResourceImpl extends XMLResourceImpl {
+public class FairResourceImpl extends XMIResourceImpl {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -38,6 +39,7 @@ public class FairResourceImpl extends XMLResourceImpl {
 	public FairResourceImpl(URI uri) {
 		super(uri);
 		setEncoding("UTF-8");
+		setXMIVersion("2.1");
 	}
 
 } //FairResourceImpl
