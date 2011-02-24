@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
@@ -39,7 +40,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  *
  * @generated
  */
-public class EventInclusionImpl extends EObjectImpl implements EventInclusion {
+public class EventInclusionImpl extends MinimalEObjectImpl.Container implements EventInclusion {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

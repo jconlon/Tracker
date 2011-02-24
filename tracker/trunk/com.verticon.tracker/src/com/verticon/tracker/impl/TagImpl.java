@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -54,7 +55,7 @@ import com.verticon.tracker.util.TrackerUtils;
  *
  * @generated
  */
-public class TagImpl extends EObjectImpl implements Tag {
+public class TagImpl extends MinimalEObjectImpl.Container implements Tag {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
