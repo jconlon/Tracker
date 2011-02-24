@@ -93,7 +93,7 @@ public class TagItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright 2010 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2007 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
