@@ -1,8 +1,6 @@
 Changed
 
 genmodel:
-	ContentTypes
-		com.verticon.osgi.metatype
 	Model Class Defaults Category Root Extends Class
 		org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container
 	
@@ -14,5 +12,8 @@ MetatypeResourceFactoryImpl
 	
 plugin.xml
 	 <extension point="org.eclipse.core.contenttype.contentTypes">
-		file-extensions="metatype,xml"
+		file-extensions="metatype"
 	
+MetatypeModelWizard 
+	(Did not generate the editor, so I had to add the following. But it should be generated when the editor is generated)
+	Resource resource = resourceSet.createResource(fileURI, MetatypePackage.eCONTENT_TYPE);
