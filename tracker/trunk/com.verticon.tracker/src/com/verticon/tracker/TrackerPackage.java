@@ -54,7 +54,7 @@ public interface TrackerPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.verticon.com/ns/tracker/0.1.0";
+	String eNS_URI = "http://www.verticon.com/tracker/0.4.2/premises";
 
 	/**
 	 * The package namespace name.
@@ -62,7 +62,7 @@ public interface TrackerPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "com.verticon.tracker";
+	String eNS_PREFIX = "premises";
 
 	/**
 	 * The singleton instance of the package.

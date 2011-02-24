@@ -11,6 +11,7 @@
 package com.verticon.tracker.util;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 
 /**
@@ -20,7 +21,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
  * @see com.verticon.tracker.util.TrackerResourceFactoryImpl
  * @generated
  */
-public class TrackerResourceImpl extends XMLResourceImpl {
+public class TrackerResourceImpl extends XMIResourceImpl {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -39,6 +40,7 @@ public class TrackerResourceImpl extends XMLResourceImpl {
 	public TrackerResourceImpl(URI uri) {
 		super(uri);
 		setEncoding("UTF-8");
+		setXMIVersion("2.1");
 	}
 
 } //TrackerResourceImpl

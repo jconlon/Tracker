@@ -38,6 +38,8 @@ public class TrackerMainModelWizard extends TrackerModelWizard {
 		public String getEncoding() {
 			return "UTF-8";
 		}
+		
+		
 
 		protected MyPage(String pageId) {
 			super(pageId);

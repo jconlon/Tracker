@@ -10,7 +10,7 @@
     complianceLevel="5.0">
   <foreignModel>tracker.ecore</foreignModel>
   <modelPluginVariables>OCL_ECORE=org.eclipse.ocl.ecore</modelPluginVariables>
-  <genPackages prefix="Tracker" basePackage="com.verticon" resource="XML" disposableProviderFactory="true"
+  <genPackages prefix="Tracker" basePackage="com.verticon" resource="XMI" disposableProviderFactory="true"
       providerPackageSuffix="edit.provider" presentationPackageSuffix="editor.presentation"
       ecorePackage="tracker.ecore#/">
     <genEnums ecoreEnum="tracker.ecore#//Sex">
