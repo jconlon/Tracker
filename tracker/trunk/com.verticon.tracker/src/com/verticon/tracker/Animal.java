@@ -43,6 +43,7 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getVisualID <em>Visual ID</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getAgeInDays <em>Age In Days</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getAlternativeID <em>Alternative ID</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getLocation <em>Location</em>}</li>
  * </ul>
  * </p>
  *
@@ -441,6 +442,21 @@ public interface Animal extends EObject {
 	 * @generated
 	 */
 	String getAlternativeID();
+
+	/**
+	 * Returns the value of the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Location</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Location</em>' attribute.
+	 * @see com.verticon.tracker.TrackerPackage#getAnimal_Location()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	String getLocation();
 
 	/**
 	 * <!-- begin-user-doc -->
