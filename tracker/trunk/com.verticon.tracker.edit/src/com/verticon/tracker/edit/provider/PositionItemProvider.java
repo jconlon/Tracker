@@ -84,13 +84,13 @@ public class PositionItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Position_longitude_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Position_longitude_feature", "_UI_Position_type"),
+				 getString("_UI_Position_longitude_description"),
 				 TrackerPackage.Literals.POSITION__LONGITUDE,
-				 true,
+				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
-				 null,
+				 getString("_UI_PositionPropertyCategory"),
 				 null));
 	}
 
@@ -106,13 +106,13 @@ public class PositionItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Position_latitude_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Position_latitude_feature", "_UI_Position_type"),
+				 getString("_UI_Position_latitude_description"),
 				 TrackerPackage.Literals.POSITION__LATITUDE,
-				 true,
+				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
-				 null,
+				 getString("_UI_PositionPropertyCategory"),
 				 null));
 	}
 
