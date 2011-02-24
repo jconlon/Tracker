@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
@@ -44,7 +45,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  *
  * @generated
  */
-public class GenericEventInclusionImpl extends EObjectImpl implements GenericEventInclusion {
+public class GenericEventInclusionImpl extends MinimalEObjectImpl.Container implements GenericEventInclusion {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

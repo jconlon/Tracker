@@ -13,6 +13,7 @@ package com.verticon.tracker.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import com.verticon.tracker.Location;
@@ -37,7 +38,7 @@ import com.verticon.tracker.TrackerPackage;
  *
  * @generated
  */
-public class LocationImpl extends EObjectImpl implements Location {
+public class LocationImpl extends MinimalEObjectImpl.Container implements Location {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
