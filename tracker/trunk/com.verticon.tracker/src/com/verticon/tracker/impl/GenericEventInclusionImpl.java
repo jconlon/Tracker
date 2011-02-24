@@ -10,26 +10,20 @@
  *******************************************************************************/
 package com.verticon.tracker.impl;
 
-import com.verticon.osgi.metatype.OCD;
-
-import com.verticon.tracker.AnimalType;
-import com.verticon.tracker.GenericEventInclusion;
-import com.verticon.tracker.TrackerPackage;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+
+import com.verticon.osgi.metatype.OCD;
+import com.verticon.tracker.AnimalType;
+import com.verticon.tracker.GenericEventInclusion;
+import com.verticon.tracker.TrackerPackage;
 
 /**
  * <!-- begin-user-doc -->
