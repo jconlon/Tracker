@@ -32,6 +32,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.Premises#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getDescription <em>Description</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getPhoneNumber <em>Phone Number</em>}</li>
+ *   <li>{@link com.verticon.tracker.Premises#getAddress <em>Address</em>}</li>
+ *   <li>{@link com.verticon.tracker.Premises#getCoordinates <em>Coordinates</em>}</li>
  * </ul>
  * </p>
  *
@@ -159,7 +161,7 @@ public interface Premises extends EObject {
 	 * @return the value of the '<em>Uri</em>' attribute.
 	 * @see #setUri(String)
 	 * @see com.verticon.tracker.TrackerPackage#getPremises_Uri()
-	 * @model dataType="com.verticon.tracker.URI"
+	 * @model id="true" dataType="com.verticon.tracker.URI" required="true"
 	 * @generated
 	 */
 	String getUri();
@@ -251,6 +253,37 @@ public interface Premises extends EObject {
 	 * @generated
 	 */
 	void setPhoneNumber(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Address</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Address</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Address</em>' attribute.
+	 * @see com.verticon.tracker.TrackerPackage#getPremises_Address()
+	 * @model default="" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	String getAddress();
+
+	/**
+	 * Returns the value of the '<em><b>Coordinates</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Coordinates</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Coordinates</em>' attribute.
+	 * @see com.verticon.tracker.TrackerPackage#getPremises_Coordinates()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	String getCoordinates();
 
 	/**
 	 * Returns the value of the '<em><b>Policy</b></em>' containment reference.

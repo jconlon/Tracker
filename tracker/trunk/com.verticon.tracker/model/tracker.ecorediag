@@ -274,6 +274,14 @@
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Premises/administrator"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_zQYZEnQNEd-3i6V7pV4XUw"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_hPXr0T-OEeC1Y8papeg5jQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Premises/address"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_hPYS4D-OEeC1Y8papeg5jQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_d7NhQUAvEeCKg7DhiVnK-Q" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Premises/coordinates"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_d7OIUEAvEeCKg7DhiVnK-Q"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_PCSF8FmCEd2tRZ2K3aMUww" type="2001">
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Premises/uri"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PCSF8VmCEd2tRZ2K3aMUww"/>
