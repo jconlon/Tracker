@@ -10,10 +10,11 @@
  *******************************************************************************/
 package com.verticon.tracker.impl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-
 import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
@@ -23,7 +24,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.verticon.tracker.Event;
@@ -31,10 +31,9 @@ import com.verticon.tracker.EventType;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.util.CollectionFilter;
-import com.verticon.tracker.util.TrackerUtils;
-import java.util.ArrayList;
 import com.verticon.tracker.util.FilterCriteria;
 import com.verticon.tracker.util.TrackerConstants;
+import com.verticon.tracker.util.TrackerUtils;
 
 /**
  * <!-- begin-user-doc -->
