@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -44,7 +44,7 @@ import com.verticon.tracker.fair.Lot;
  *
  * @generated
  */
-public class LotImpl extends EObjectImpl implements Lot {
+public class LotImpl extends MinimalEObjectImpl.Container implements Lot {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

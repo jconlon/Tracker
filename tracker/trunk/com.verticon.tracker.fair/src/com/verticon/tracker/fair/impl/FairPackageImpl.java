@@ -10,7 +10,8 @@
  *******************************************************************************/
 package com.verticon.tracker.fair.impl;
 
-import com.verticon.osgi.metatype.MetatypePackage;
+import static com.verticon.tracker.fair.FairPackage.CLASS;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.fair.Award;
 import com.verticon.tracker.fair.Department;

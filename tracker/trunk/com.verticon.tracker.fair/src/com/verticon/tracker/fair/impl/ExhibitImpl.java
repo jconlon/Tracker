@@ -15,7 +15,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.verticon.tracker.Animal;
@@ -46,7 +46,7 @@ import com.verticon.tracker.fair.Person;
  *
  * @generated
  */
-public class ExhibitImpl extends EObjectImpl implements Exhibit {
+public class ExhibitImpl extends MinimalEObjectImpl.Container implements Exhibit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -6,8 +6,9 @@
     templateDirectory="com.verticon.tracker/templates" dynamicTemplates="true" modelName="Fair"
     modelPluginClass="com.verticon.tracker.fair.FairPlugin" editPluginClass="com.verticon.tracker.fair.edit.provider.FairEditPlugin"
     editorPluginClass="com.verticon.tracker.fair.editor.presentation.FairEditorPlugin"
-    testSuiteClass="com.verticon.tracker.fair.tests.FairAllTests" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="5.0" providerRootExtendsClass="" usedGenPackages="../../com.verticon.tracker/model/tracker.genmodel#//tracker ../../com.verticon.tracker/model/tracker.genmodel#//metatype">
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testSuiteClass="com.verticon.tracker.fair.tests.FairAllTests"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" providerRootExtendsClass=""
+    usedGenPackages="../../com.verticon.tracker/model/tracker.genmodel#//tracker ../../com.verticon.tracker/model/tracker.genmodel#//metatype">
   <foreignModel>fair.ecore</foreignModel>
   <modelPluginVariables>OCL_ECORE=org.eclipse.ocl.ecore</modelPluginVariables>
   <genPackages prefix="Fair" basePackage="com.verticon.tracker" resource="XMI" disposableProviderFactory="true"
