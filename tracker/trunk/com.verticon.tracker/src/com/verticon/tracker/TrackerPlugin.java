@@ -14,17 +14,21 @@
 package com.verticon.tracker;
 
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.emf.ecore.EObject;
 import org.osgi.framework.BundleContext;
+import org.osgi.util.tracker.ServiceTracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+import com.verticon.tracker.location.LocationService;
+
 /**
  * @author jconlon
  * 
  */
-public class TrackerPlugin extends Plugin {
+public class TrackerPlugin extends Plugin implements LocationService{
 
 	// The identifier for this plugin
 	public static final String ID = "com.verticon.tracker";
@@ -48,6 +52,8 @@ public class TrackerPlugin extends Plugin {
 		return bundleMarker;
 	}
 
+	 private static ServiceTracker locationServiceTracker = null;   
+
 	/**
 	 * The constructor.
 	 */
@@ -61,6 +67,8 @@ public class TrackerPlugin extends Plugin {
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+		locationServiceTracker = new ServiceTracker(context, LocationService.class.getName(),null);
+
 		logger.debug(bundleMarker, "Started Bundle");
 	}
 
@@ -69,8 +77,9 @@ public class TrackerPlugin extends Plugin {
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
+		locationServiceTracker.close();
 		super.stop(context);
-
+		locationServiceTracker = null;
 		plugin = null;
 		logger.debug(bundleMarker, "Stopped Bundle");
 	}
@@ -80,6 +89,33 @@ public class TrackerPlugin extends Plugin {
 	 */
 	public static TrackerPlugin getDefault() {
 		return plugin;
+	}
+
+	@Override
+	public String location(EObject eObject) {
+		String result = null;
+		if(locationServiceTracker!=null && locationServiceTracker.getService()!=null){
+			result = ((LocationService)locationServiceTracker.getService()).location(eObject);
+		}
+		return result;
+	}
+
+	@Override
+	public String coordinates(EObject eObject) {
+		String result = null;
+		if(locationServiceTracker!=null && locationServiceTracker.getService()!=null){
+			result = ((LocationService)locationServiceTracker.getService()).coordinates(eObject);
+		}
+		return result;
+	}
+
+	@Override
+	public String address(EObject eObject) {
+		String result = null;
+		if(locationServiceTracker!=null && locationServiceTracker.getService()!=null){
+			result = ((LocationService)locationServiceTracker.getService()).address(eObject);
+		}
+		return result;
 	}
 
 }

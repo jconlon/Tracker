@@ -20,8 +20,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalType;
@@ -33,6 +33,7 @@ import com.verticon.tracker.Policy;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.TrackerPlugin;
 import com.verticon.tracker.util.EventHistoryAdapterFactory;
 
 /**
@@ -53,6 +54,8 @@ import com.verticon.tracker.util.EventHistoryAdapterFactory;
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getPhoneNumber <em>Phone Number</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getAddress <em>Address</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getCoordinates <em>Coordinates</em>}</li>
  * </ul>
  * </p>
  *
@@ -259,6 +262,26 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 	protected String phoneNumber = PHONE_NUMBER_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getAddress() <em>Address</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAddress()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ADDRESS_EDEFAULT = "";
+
+	/**
+	 * The default value of the '{@link #getCoordinates() <em>Coordinates</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCoordinates()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COORDINATES_EDEFAULT = null;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -437,6 +460,24 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 		phoneNumber = newPhoneNumber;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__PHONE_NUMBER, oldPhoneNumber, phoneNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getAddress() {
+		return TrackerPlugin.getDefault().address(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getCoordinates() {
+		return TrackerPlugin.getDefault().coordinates(this);
 	}
 
 	/**
@@ -676,6 +717,10 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return getDescription();
 			case TrackerPackage.PREMISES__PHONE_NUMBER:
 				return getPhoneNumber();
+			case TrackerPackage.PREMISES__ADDRESS:
+				return getAddress();
+			case TrackerPackage.PREMISES__COORDINATES:
+				return getCoordinates();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -804,6 +849,10 @@ public class PremisesImpl extends EObjectImpl implements Premises {
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case TrackerPackage.PREMISES__PHONE_NUMBER:
 				return PHONE_NUMBER_EDEFAULT == null ? phoneNumber != null : !PHONE_NUMBER_EDEFAULT.equals(phoneNumber);
+			case TrackerPackage.PREMISES__ADDRESS:
+				return ADDRESS_EDEFAULT == null ? getAddress() != null : !ADDRESS_EDEFAULT.equals(getAddress());
+			case TrackerPackage.PREMISES__COORDINATES:
+				return COORDINATES_EDEFAULT == null ? getCoordinates() != null : !COORDINATES_EDEFAULT.equals(getCoordinates());
 		}
 		return super.eIsSet(featureID);
 	}

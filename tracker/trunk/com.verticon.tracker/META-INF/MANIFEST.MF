@@ -16,6 +16,7 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: com.verticon.tracker.TrackerPlugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: org.osgi.service.metatype;version="1.1.0",
+Import-Package: com.verticon.tracker.location,
+ org.osgi.service.metatype;version="1.1.0",
  org.osgi.util.measurement;version="1.0.1",
  org.slf4j;version="1.5.11"
