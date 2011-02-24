@@ -16,11 +16,22 @@
        class = "com.verticon.tracker.TrackerPackage"
        genModel = "model/tracker.genmodel" /> 
   </extension>
+  
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.verticon.com/tracker/0.4.2/premises" 
+       class = "com.verticon.tracker.TrackerPackage"
+       genModel = "model/tracker.genmodel" /> 
+  </extension>
 
   <extension point="org.eclipse.emf.ecore.extension_parser">
     <parser 
-       type="tracker" 
+       type="premises" 
        class="com.verticon.tracker.util.TrackerResourceFactoryImpl" />
+    <parser
+          class="com.verticon.tracker.util.TrackerResourceFactoryImpl"
+          type="animal">
+    </parser>
   </extension>
 
 </plugin>
