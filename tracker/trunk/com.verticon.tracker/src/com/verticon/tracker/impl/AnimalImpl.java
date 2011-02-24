@@ -26,21 +26,20 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.EventType;
 import com.verticon.tracker.EventHistory;
+import com.verticon.tracker.EventType;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.TrackerPlugin;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.CollectionFilter;
@@ -73,6 +72,7 @@ import com.verticon.tracker.util.TrackerUtils;
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getVisualID <em>Visual ID</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getAgeInDays <em>Age In Days</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getAlternativeID <em>Alternative ID</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.AnimalImpl#getLocation <em>Location</em>}</li>
  * </ul>
  * </p>
  *
@@ -331,6 +331,17 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 	 * @ordered
 	 */
 	protected static final String ALTERNATIVE_ID_EDEFAULT = null;
+
+
+	/**
+	 * The default value of the '{@link #getLocation() <em>Location</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LOCATION_EDEFAULT = null;
 
 
 	/**
@@ -909,6 +920,15 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getLocation() {
+		return TrackerPlugin.getDefault().location(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
 	 * Implemented for speed (versus OCL??)
 	 * Originally generated with the following OCL:
 	 * if (tags -> notEmpty()) and ( tags.events -> notEmpty())
@@ -1069,6 +1089,8 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 				return getAgeInDays();
 			case TrackerPackage.ANIMAL__ALTERNATIVE_ID:
 				return getAlternativeID();
+			case TrackerPackage.ANIMAL__LOCATION:
+				return getLocation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1191,6 +1213,8 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 				return getAgeInDays() != AGE_IN_DAYS_EDEFAULT;
 			case TrackerPackage.ANIMAL__ALTERNATIVE_ID:
 				return ALTERNATIVE_ID_EDEFAULT == null ? getAlternativeID() != null : !ALTERNATIVE_ID_EDEFAULT.equals(getAlternativeID());
+			case TrackerPackage.ANIMAL__LOCATION:
+				return LOCATION_EDEFAULT == null ? getLocation() != null : !LOCATION_EDEFAULT.equals(getLocation());
 		}
 		return super.eIsSet(featureID);
 	}

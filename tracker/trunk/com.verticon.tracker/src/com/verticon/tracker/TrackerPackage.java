@@ -245,13 +245,22 @@ public interface TrackerPackage extends EPackage {
 	int ANIMAL__ALTERNATIVE_ID = 17;
 
 	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANIMAL__LOCATION = 18;
+
+	/**
 	 * The number of structural features of the '<em>Animal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANIMAL_FEATURE_COUNT = 18;
+	int ANIMAL_FEATURE_COUNT = 19;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.TagImpl <em>Tag</em>}' class.
@@ -479,6 +488,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOVINE__ALTERNATIVE_ID = ANIMAL__ALTERNATIVE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE__LOCATION = ANIMAL__LOCATION;
 
 	/**
 	 * The number of structural features of the '<em>Bovine</em>' class.
@@ -1038,6 +1056,15 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE_BEEF__ALTERNATIVE_ID = BOVINE__ALTERNATIVE_ID;
 
 	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_BEEF__LOCATION = BOVINE__LOCATION;
+
+	/**
 	 * The feature id for the '<em><b>Beef Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1226,6 +1253,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int OVINE__ALTERNATIVE_ID = ANIMAL__ALTERNATIVE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OVINE__LOCATION = ANIMAL__LOCATION;
 
 	/**
 	 * The feature id for the '<em><b>Sheep Breed</b></em>' attribute.
@@ -1427,6 +1463,15 @@ public interface TrackerPackage extends EPackage {
 	int BOVINE_BISON__ALTERNATIVE_ID = BOVINE__ALTERNATIVE_ID;
 
 	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_BISON__LOCATION = BOVINE__LOCATION;
+
+	/**
 	 * The feature id for the '<em><b>Buffalo Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1615,6 +1660,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOVINE_DAIRY__ALTERNATIVE_ID = BOVINE__ALTERNATIVE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOVINE_DAIRY__LOCATION = BOVINE__LOCATION;
 
 	/**
 	 * The feature id for the '<em><b>Dairy Breed</b></em>' attribute.
@@ -3266,6 +3320,15 @@ public interface TrackerPackage extends EPackage {
 	int SWINE__ALTERNATIVE_ID = ANIMAL__ALTERNATIVE_ID;
 
 	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWINE__LOCATION = ANIMAL__LOCATION;
+
+	/**
 	 * The feature id for the '<em><b>Swine Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3474,6 +3537,15 @@ public interface TrackerPackage extends EPackage {
 	int EQUINE__ALTERNATIVE_ID = ANIMAL__ALTERNATIVE_ID;
 
 	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUINE__LOCATION = ANIMAL__LOCATION;
+
+	/**
 	 * The feature id for the '<em><b>Horse Breed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3662,6 +3734,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int CAPRINE__ALTERNATIVE_ID = ANIMAL__ALTERNATIVE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAPRINE__LOCATION = ANIMAL__LOCATION;
 
 	/**
 	 * The feature id for the '<em><b>Goat Breed</b></em>' attribute.
@@ -5997,6 +6078,17 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getAnimal_AlternativeID();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Animal#getLocation <em>Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Location</em>'.
+	 * @see com.verticon.tracker.Animal#getLocation()
+	 * @see #getAnimal()
+	 * @generated
+	 */
+	EAttribute getAnimal_Location();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Tag <em>Tag</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7915,6 +8007,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ANIMAL__ALTERNATIVE_ID = eINSTANCE.getAnimal_AlternativeID();
+
+		/**
+		 * The meta object literal for the '<em><b>Location</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ANIMAL__LOCATION = eINSTANCE.getAnimal_Location();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.TagImpl <em>Tag</em>}' class.

@@ -31,6 +31,10 @@
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Animal/id"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PBteM1mCEd2tRZ2K3aMUww"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_h3lzQEBbEeCKg7DhiVnK-Q" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Animal/location"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_h3lzQUBbEeCKg7DhiVnK-Q"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_PBuFQFmCEd2tRZ2K3aMUww" type="2001">
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Animal/comments"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PBuFQVmCEd2tRZ2K3aMUww"/>
