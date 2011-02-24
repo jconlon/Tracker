@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -42,7 +42,7 @@ import com.verticon.tracker.fair.FairPackage;
  *
  * @generated
  */
-public class DivisionImpl extends EObjectImpl implements Division {
+public class DivisionImpl extends MinimalEObjectImpl.Container implements Division {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

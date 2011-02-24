@@ -16,7 +16,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import com.verticon.tracker.fair.FairPackage;
@@ -38,7 +38,7 @@ import com.verticon.tracker.fair.YouthClub;
  *
  * @generated
  */
-public class YouthClubImpl extends EObjectImpl implements YouthClub {
+public class YouthClubImpl extends MinimalEObjectImpl.Container implements YouthClub {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

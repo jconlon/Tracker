@@ -13,7 +13,7 @@ package com.verticon.tracker.fair.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import com.verticon.tracker.fair.FairPackage;
 import com.verticon.tracker.fair.Person;
@@ -43,7 +43,7 @@ import com.verticon.tracker.fair.Person;
  *
  * @generated
  */
-public class PersonImpl extends EObjectImpl implements Person {
+public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
