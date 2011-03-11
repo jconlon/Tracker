@@ -1,0 +1,55 @@
+h1. Overview
+
+h2. Document Status
+
+__This document is the first draft of an Tracker Location User Guide and is only intended as an overview to the technologies used for the Tracker Location Services. Future versions will fully serve the intended function of a comprehensive user guide for the installation and configuration of the Tracker Location Services.__
+
+
+h2. Agriculture Location Services
+
+Tracker Location Service integrates state of the art GIS(Geographic Information System) technologies with livestock premises based animal histories and premises to premises animal movements to offer livestock professionals a comprehensive and open desktop solution[1] for the managing and visualizing of geographic livestock distributions, animal locations, and animal movements within and between premises locations. 
+
+
+h3. Solution Requirements
+
+In order to provide an open, accessible and industry standard solution the Location Service will provide solutions for:
+# Location of animals within a local premises
+# Location of animals moved between premises
+# Simple end user visualization of premises geographies through integration with industry standard geo browsers.[2]
+# Integration with off the self GPS devices for data positioning
+# Desktop editors, views, and utilities for associations, auditors, and processors to geographically 
+** manage internal, inter and intra association information flows
+** market regional and _local_ based farm products 
+
+h3. Technical Requirements
+
+# Document editor for authoring KML documents 
+# Document editor for declaring and managing Agriculture associations 
+** for geographical based livestock premises locations 
+# Utility for end user declaration of Agriculture projects 
+** These projects contain agriculture association documents (doc.agri)
+** Automatic building of desktop location service 
+*** Indexes based on project doc.agri documents
+*** Index is Premises.uri to KML Containers
+*** Index spans all workspace projects
+*** The more Tracker agriculture projects in a user workspace the richer the location index
+# Export of Tracker Projects as KML KMZ archives for
+** Sharing of information with non-technical end users
+** Suitable for marketing & website deployment
+** BIRT report generation and report deployment in HTML within the archives 
+# GPS device support in Tracker iRouter for the creation of Position history events in real-time
+# Manual creation of Position history events with drag and drop of animals to kml locations.
+# Dynamic query integration of geo-browsers to show graphical result information
+** using kml network links to a localhost kml server
+** localhost server interacting with the local agriculture documents 
+
+
+h2. Notes
+
+fn1. While the geo browser technology chosen by the user for visualizing kml files may depend on external network based location services, premises livestock information is not sent to the network.  Thus end users can freely exchange agriculture location files with their associates (via alternate channels) without concern for breaches of data privacy.
+
+fn2. See "KML":http://en.wikipedia.org/wiki/KML and "Virtual Globes":http://en.wikipedia.org/wiki/Virtual_Globe
+
+
+
+
