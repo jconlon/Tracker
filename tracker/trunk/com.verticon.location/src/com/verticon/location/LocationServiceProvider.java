@@ -8,31 +8,19 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.location;
+package com.verticon.location;
 
-import org.eclipse.emf.ecore.EObject;
-
-public interface LocationService {
+/**
+ * 
+ * @author jconlon
+ *
+ */
+public interface LocationServiceProvider extends LocationService{
 	
 	/**
 	 * 
-	 * @param eObject 
-	 * @return location name of eObject or null if unknown
+	 * @param target
+	 * @return true if a locationService is provided for the target
 	 */
-	String location(EObject eObject);
-	
-	/**
-	 * 
-	 * @param eObject 
-	 * @return coordinates of eObject or null if unknown
-	 */
-	String coordinates(EObject eObject);
-	
-	/**
-	 * 
-	 * @param eObject 
-	 * @return address of eObject or null if unknown
-	 */
-	String address(EObject eObject);
-
+	boolean canHandle(Object target);
 }
