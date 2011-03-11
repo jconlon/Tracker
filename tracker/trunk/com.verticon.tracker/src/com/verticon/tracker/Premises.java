@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.Premises#getDescription <em>Description</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getPhoneNumber <em>Phone Number</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getAddress <em>Address</em>}</li>
- *   <li>{@link com.verticon.tracker.Premises#getCoordinates <em>Coordinates</em>}</li>
  * </ul>
  * </p>
  *
@@ -269,21 +268,6 @@ public interface Premises extends EObject {
 	 * @generated
 	 */
 	String getAddress();
-
-	/**
-	 * Returns the value of the '<em><b>Coordinates</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Coordinates</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Coordinates</em>' attribute.
-	 * @see com.verticon.tracker.TrackerPackage#getPremises_Coordinates()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 * @generated
-	 */
-	String getCoordinates();
 
 	/**
 	 * Returns the value of the '<em><b>Policy</b></em>' containment reference.

@@ -866,22 +866,13 @@ public interface TrackerPackage extends EPackage {
 	int PREMISES__ADDRESS = 11;
 
 	/**
-	 * The feature id for the '<em><b>Coordinates</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PREMISES__COORDINATES = 12;
-
-	/**
 	 * The number of structural features of the '<em>Premises</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREMISES_FEATURE_COUNT = 13;
+	int PREMISES_FEATURE_COUNT = 12;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.BovineBeefImpl <em>Bovine Beef</em>}' class.
@@ -7281,17 +7272,6 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getPremises_Address();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Premises#getCoordinates <em>Coordinates</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Coordinates</em>'.
-	 * @see com.verticon.tracker.Premises#getCoordinates()
-	 * @see #getPremises()
-	 * @generated
-	 */
-	EAttribute getPremises_Coordinates();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link com.verticon.tracker.Premises#getPolicy <em>Policy</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8965,14 +8945,6 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PREMISES__ADDRESS = eINSTANCE.getPremises_Address();
-
-		/**
-		 * The meta object literal for the '<em><b>Coordinates</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PREMISES__COORDINATES = eINSTANCE.getPremises_Coordinates();
 
 		/**
 		 * The meta object literal for the '<em><b>Policy</b></em>' containment reference feature.

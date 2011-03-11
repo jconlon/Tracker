@@ -1852,15 +1852,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPremises_Coordinates() {
-		return (EAttribute)premisesEClass.getEStructuralFeatures().get(12);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getPremises_Policy() {
 		return (EReference)premisesEClass.getEStructuralFeatures().get(6);
 	}
@@ -2407,7 +2398,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(premisesEClass, PREMISES__DESCRIPTION);
 		createEAttribute(premisesEClass, PREMISES__PHONE_NUMBER);
 		createEAttribute(premisesEClass, PREMISES__ADDRESS);
-		createEAttribute(premisesEClass, PREMISES__COORDINATES);
 
 		bovineBeefEClass = createEClass(BOVINE_BEEF);
 		createEAttribute(bovineBeefEClass, BOVINE_BEEF__BEEF_BREED);
@@ -2754,7 +2744,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getPremises_Description(), ecorePackage.getEString(), "description", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPremises_PhoneNumber(), this.getUSPhoneNumber(), "phoneNumber", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPremises_Address(), ecorePackage.getEString(), "address", "", 0, 1, Premises.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPremises_Coordinates(), ecorePackage.getEString(), "coordinates", null, 0, 1, Premises.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		addEOperation(premisesEClass, this.getEvent(), "eventHistory", 0, -1, IS_UNIQUE, IS_ORDERED);
 
