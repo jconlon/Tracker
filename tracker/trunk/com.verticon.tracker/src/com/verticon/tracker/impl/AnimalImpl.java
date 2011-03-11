@@ -35,6 +35,8 @@ import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.EventType;
+import com.verticon.tracker.MovedOut;
+import com.verticon.tracker.Position;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.Tag;
@@ -45,6 +47,7 @@ import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.CollectionFilter;
 import com.verticon.tracker.util.EventHistoryAdapterFactory;
 import com.verticon.tracker.util.Species;
+import com.verticon.tracker.util.TrackerSwitch;
 import com.verticon.tracker.util.TrackerUtils;
 
 /**
@@ -924,7 +927,23 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 	 * @generated NOT
 	 */
 	public String getLocation() {
-		return TrackerPlugin.getDefault().location(this);
+		String result = null;
+		animalLocator.location(this);
+		switch (animalLocator.getTypeOfPosition()) {
+		case HASCOORDINATES:
+			String coordinates = animalLocator.getLocation();
+			if(eContainer()!=null ){
+				result = TrackerPlugin.getDefault().positionIn(eContainer(), coordinates);
+			}
+			
+			break;
+		case MOVED_TO_PREMISES:
+			result = TrackerPlugin.getDefault().name(Premises.class.getName(), animalLocator.getLocation());
+		default:
+			break;
+		}
+		return result;
+		
 	}
 
 	/**
@@ -1240,8 +1259,100 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 		result.append(')');
 		return result.toString();
 	}
+	/**
+	 * 
+	 * Three types of locations for the animal based on the 
+	 * event history.
+	 *
+	 */
+	private enum Locate{
+		HASCOORDINATES,//Position event in the eventHistory, getLocate returns a coordinates.
+		MOVED_TO_PREMISES,//Animal is no longer in the premises and was moved out, getLocate returns the premises id.
+		NONE //no information on the animal, assume it is in the premises or waiting to be tagged getLocation is null
+	}
 	
+	private AnimalLocator animalLocator = new AnimalLocator();
 	
+	class AnimalLocator {
+
+		private Event lastEvent = null; 
+		private String location = null;
+		private Locate locate = Locate.NONE;
+		
+		String getLocation(){
+			return location;
+		}
+		
+		Locate getTypeOfPosition(){
+			return locate;
+		}
+		
+		void location(Animal animal){
+			List<Event> events = new ArrayList<Event>(animal.eventHistory());
+			if(events.isEmpty()){
+				return;
+			}
+			
+			locate = Locate.NONE;
+			lastEvent = null;
+			location = null;
+			Collections.sort(events, TrackerUtils.DATE_COMPARATOR);//Newest events are first
+			
+			for (Event event : events) {
+				if(!(Boolean)animalSwitch.doSwitch(event)){
+					break;
+				}
+			}
+		}
+		
+		private TrackerSwitch<?> animalSwitch = new TrackerSwitch<Object>(){
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * com.verticon.tracker.util.TrackerSwitch#casePosition(com.verticon
+			 * .tracker.Position)
+			 */
+			@Override
+			public Object casePosition(Position event) {
+				location = event.getCoordinates();
+				locate = Locate.HASCOORDINATES;
+				return Boolean.FALSE;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * com.verticon.tracker.util.TrackerSwitch#caseMovedOut(com.verticon
+			 * .tracker.MovedOut)
+			 */
+			@Override
+			public Object caseMovedOut(MovedOut event) {
+				if(lastEvent == null){
+					//The last event was a MovedOut send a false to abort the processing
+					location = event.getDestinationPin();
+					locate = Locate.MOVED_TO_PREMISES;
+					return Boolean.FALSE;
+				}
+				
+				return Boolean.TRUE;
+			}
+
+			/* (non-Javadoc)
+			 * @see com.verticon.tracker.util.TrackerSwitch#caseEvent(com.verticon.tracker.Event)
+			 */
+			@Override
+			public Object caseEvent(Event event) {
+				if(lastEvent == null){
+					lastEvent = event;
+				}
+				return Boolean.TRUE;
+			}
+		};
+		
+		
+	}
 	
 
 } //AnimalImpl

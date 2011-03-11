@@ -14,7 +14,6 @@
 package com.verticon.tracker;
 
 import org.eclipse.core.runtime.Plugin;
-import org.eclipse.emf.ecore.EObject;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 import org.slf4j.Logger;
@@ -22,7 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-import com.verticon.tracker.location.LocationService;
+import com.verticon.location.LocationService;
 
 /**
  * @author jconlon
@@ -52,7 +51,7 @@ public class TrackerPlugin extends Plugin implements LocationService{
 		return bundleMarker;
 	}
 
-	 private static ServiceTracker locationServiceTracker = null;   
+	 private ServiceTracker locationServiceTracker = null;   
 
 	/**
 	 * The constructor.
@@ -68,7 +67,7 @@ public class TrackerPlugin extends Plugin implements LocationService{
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		locationServiceTracker = new ServiceTracker(context, LocationService.class.getName(),null);
-
+		locationServiceTracker.open();
 		logger.debug(bundleMarker, "Started Bundle");
 	}
 
@@ -91,31 +90,74 @@ public class TrackerPlugin extends Plugin implements LocationService{
 		return plugin;
 	}
 
-	@Override
-	public String location(EObject eObject) {
-		String result = null;
+	private LocationService getLocationService(){
+		LocationService locationService = null;
 		if(locationServiceTracker!=null && locationServiceTracker.getService()!=null){
-			result = ((LocationService)locationServiceTracker.getService()).location(eObject);
+			locationService = (LocationService)locationServiceTracker.getService();
+		}else{
+			logger.warn(bundleMarker, "Failed to find a location service.");
 		}
-		return result;
+		return locationService;
+		
+	}
+
+	/**
+	 * Not used at this time.
+	 */
+	@Override
+	public String name(Object target) {
+		String result = null;
+		LocationService locationService = getLocationService();
+		if(locationService != null){
+			result = locationService.name(target);
+		}
+		return result!=null?result:"";
+	}
+
+	/**
+	 * Called by animals to find out the location within the premises.
+	 */
+	@Override
+	public String positionIn(Object target, String coordinates) {
+		String result = null;
+		LocationService locationService = getLocationService();
+		if(locationService != null){
+			result = locationService.positionIn(target, coordinates);
+		}
+		return result!=null?result:"InPremises:"+coordinates;
+	}
+
+	/**
+	 * Called by Premises to find out its address
+	 */
+	@Override
+	public String address(Object target) {
+		String result = null;
+		LocationService locationService = getLocationService();
+		if(locationService != null){
+			result = locationService.address(target);
+		}
+		return result!=null?result:"unknown address";
+		
+	}
+
+	/**
+	 * Finds a remote premises location name or just returns the premise id 
+	 * for the moved out premises.
+	 */
+	@Override
+	public String name(String clazzName, String id) {
+		String result = null;
+		LocationService locationService = getLocationService();
+		if(locationService != null){
+			result = locationService.name(clazzName,id);
+		}
+		return result!=null?result:id;
 	}
 
 	@Override
-	public String coordinates(EObject eObject) {
-		String result = null;
-		if(locationServiceTracker!=null && locationServiceTracker.getService()!=null){
-			result = ((LocationService)locationServiceTracker.getService()).coordinates(eObject);
-		}
-		return result;
+	public String address(String target, String id) {
+		//Not used
+		return "";
 	}
-
-	@Override
-	public String address(EObject eObject) {
-		String result = null;
-		if(locationServiceTracker!=null && locationServiceTracker.getService()!=null){
-			result = ((LocationService)locationServiceTracker.getService()).address(eObject);
-		}
-		return result;
-	}
-
 }

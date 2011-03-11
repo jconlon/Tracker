@@ -55,7 +55,6 @@ import com.verticon.tracker.util.EventHistoryAdapterFactory;
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getPhoneNumber <em>Phone Number</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getAddress <em>Address</em>}</li>
- *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getCoordinates <em>Coordinates</em>}</li>
  * </ul>
  * </p>
  *
@@ -272,16 +271,6 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 	protected static final String ADDRESS_EDEFAULT = "";
 
 	/**
-	 * The default value of the '{@link #getCoordinates() <em>Coordinates</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCoordinates()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String COORDINATES_EDEFAULT = null;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -471,14 +460,6 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 		return TrackerPlugin.getDefault().address(this);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String getCoordinates() {
-		return TrackerPlugin.getDefault().coordinates(this);
-	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -719,8 +700,6 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 				return getPhoneNumber();
 			case TrackerPackage.PREMISES__ADDRESS:
 				return getAddress();
-			case TrackerPackage.PREMISES__COORDINATES:
-				return getCoordinates();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -851,8 +830,6 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 				return PHONE_NUMBER_EDEFAULT == null ? phoneNumber != null : !PHONE_NUMBER_EDEFAULT.equals(phoneNumber);
 			case TrackerPackage.PREMISES__ADDRESS:
 				return ADDRESS_EDEFAULT == null ? getAddress() != null : !ADDRESS_EDEFAULT.equals(getAddress());
-			case TrackerPackage.PREMISES__COORDINATES:
-				return COORDINATES_EDEFAULT == null ? getCoordinates() != null : !COORDINATES_EDEFAULT.equals(getCoordinates());
 		}
 		return super.eIsSet(featureID);
 	}
