@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml:kml xmlns:kml="http://www.opengis.net/kml/2.2">
+  <kml:Document>
+    <kml:description>Second level</kml:description>
+    <kml:Placemark/>
+  </kml:Document>
+</kml:kml>
