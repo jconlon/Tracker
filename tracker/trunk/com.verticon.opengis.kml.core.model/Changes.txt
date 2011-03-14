@@ -1,0 +1,15 @@
+Changed
+
+genmodel:
+	Model Class Defaults Category Root Extends Class
+		org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container
+	
+KmlResourceImpl(URI uri) 
+		setEncoding("UTF-8");
+	
+KMLResourceFactoryImpl.createResource(URI uri)
+	result.getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING, "UTF-8");//Added
+	result.getDefaultSaveOptions().put(XMLResource.OPTION_ELEMENT_HANDLER, new ElementHandlerImpl(false));//Added
+	result.getDefaultLoadOptions().put(XMLResource.OPTION_SUPPRESS_DOCUMENT_ROOT, Boolean.TRUE);//Added
+	
+
