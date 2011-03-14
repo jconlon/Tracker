@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+            class="com.verticon.oasis.xal.XalPackage"
+            genModel="model/xAL.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <parser
+            contentTypeIdentifier="com.verticon.oasis.xal"
+            class="com.verticon.oasis.xal.util.XalResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            base-type="org.eclipse.core.runtime.xml"
+            file-extensions="xal"
+            id="com.verticon.oasis.xal"
+            name="%_UI_Xal_content_type"
+            priority="normal">
+         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+            <parameter name="namespace" value="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"/>
+         </describer>
+      </content-type>
+   </extension>
+
+</plugin>
