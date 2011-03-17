@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 Verticon, Inc. and others.
+ * Copyright (c) 2011 Verticon, Inc. and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,6 +12,7 @@ package com.verticon.tracker.irouter.gps.internal;
 
 import static com.google.common.base.Preconditions.checkState;
 import static com.verticon.tracker.irouter.gps.internal.GPSProducer.bundleMarker;
+import static com.verticon.tracker.irouter.gps.internal.GPSProducer.toRadians;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -23,7 +24,6 @@ import java.util.concurrent.TimeUnit;
 import javax.microedition.io.Connection;
 import javax.microedition.io.InputConnection;
 
-import org.gavaghan.geodesy.Angle;
 import org.osgi.service.io.ConnectorService;
 import org.osgi.util.measurement.Measurement;
 import org.osgi.util.measurement.Unit;
@@ -186,24 +186,21 @@ public class GPSProxy implements Callable<Void> {
 			logger.error(bundleMarker, "{} could not parse longitude={}", new Object[]{this, s[4]},e1);
 		}
 
-		double positonError = producer.getLatitudeError(lat_val, lon_val);
-		Measurement lattitude = 
+		Measurement latitude = 
 			new Measurement(
-				Angle.toRadians( lat_val), 
-				positonError,
+				toRadians( lat_val), 
+				producer.getLatitudeError(),
 				Unit.rad, 
 				timeStamp
 				);
 
 		logger.debug(bundleMarker, "{} latitude degrees={}, measurement={}", 
-				new Object[] {this, lat_val, lattitude});
-
-		positonError = producer.getLongitudeError(lat_val, lon_val);
+				new Object[] {this, lat_val, latitude});
 		
 		Measurement longitude = 
 			new Measurement(
-				Angle.toRadians( lon_val), 
-				positonError,
+				toRadians( lon_val), 
+				producer.getLongitudeError(),
 				Unit.rad, 
 				timeStamp
 				);
@@ -238,7 +235,7 @@ public class GPSProxy implements Callable<Void> {
 		logger.debug(bundleMarker, "{} Height of geoid={}", this, s[11]);
 		
 		producer.send(
-				new Position(lattitude, longitude, altitude, null, null)
+				new Position(latitude, longitude, altitude, null, null)
 		);
 		lastTimeStamp=timeStamp;
 	}
