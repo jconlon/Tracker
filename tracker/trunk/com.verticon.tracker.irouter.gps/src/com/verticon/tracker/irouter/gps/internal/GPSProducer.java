@@ -26,8 +26,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
-import org.gavaghan.geodesy.Angle;
-import org.gavaghan.geodesy.IGeodesicCalculator;
 import org.osgi.service.io.ConnectorService;
 import org.osgi.service.monitor.MonitorListener;
 import org.osgi.service.monitor.Monitorable;
@@ -71,7 +69,8 @@ public class GPSProducer implements Producer, Monitorable {
 	
 	//Misc
 	private static final DecimalFormat DECIMAL_FORMATER = new DecimalFormat("##.#####");
-	
+	//Degrees & Radians conversion
+	private static final double PiOver180 = Math.PI / 180.0;
 
 
 	// Proxy futures
@@ -86,9 +85,10 @@ public class GPSProducer implements Producer, Monitorable {
 	private static final String CONNECTION_RETRY_DELAY = "connection.retry.seconds";
 	private static final String PRODUCT_OUTPUT_RATE = "product.output.rate";
 	private static final String CONNECTION_URI = "connection.uri";
-	private static final String LAT_ERROR = "latitude.error";
-	private static final String LON_ERROR = "longitude.error";
 	private static final String ALT_ERROR = "altitude.error";
+	private static final String LONG_ERROR = "longitude.error";
+	private static final String LAT_ERROR = "latitude.error";
+	
 	private Map<String, Object> config = null;
 
 	// stats
@@ -113,7 +113,6 @@ public class GPSProducer implements Producer, Monitorable {
 	// Injected service
 	private ConnectorService connectorService = null;
 	private MonitorListener monitorListener;
-	private IGeodesicCalculator geodesicCalculator = null;
 
 	private Wire[] wires = null;
 	private String uri = null;
@@ -166,7 +165,6 @@ public class GPSProducer implements Producer, Monitorable {
 	@Override
 	public StatusVariable getStatusVariable(String name)
 			throws IllegalArgumentException {
-		Envelope lEnvelope = lastEnvelopeUpdater.get(this);
 		if (CONNECTED_CONSUMERS.equals(name)) {
 			return new StatusVariable(name, StatusVariable.CM_GAUGE,
 					consumersConnected.get());
@@ -178,9 +176,9 @@ public class GPSProducer implements Producer, Monitorable {
 			}
 			Position pos = (Position)env.getValue();
 			StringBuilder buf = new StringBuilder("lat=");
-			buf.append(DECIMAL_FORMATER.format(Angle.toDegrees(pos.getLatitude().getValue())));
+			buf.append(DECIMAL_FORMATER.format(toDegrees(pos.getLatitude().getValue())));
 			buf.append(" degrees, lon=");
-			buf.append(DECIMAL_FORMATER.format(Angle.toDegrees(Angle.toDegrees(pos.getLongitude().getValue()))));
+			buf.append(DECIMAL_FORMATER.format(toDegrees(toDegrees(pos.getLongitude().getValue()))));
 			buf.append(" degrees, alt=");
 			buf.append(pos.getAltitude().getValue());
 			buf.append(" meters");
@@ -357,15 +355,6 @@ public class GPSProducer implements Producer, Monitorable {
 	void unsetMonitorListener(MonitorListener monitorListener) {
 		this.monitorListener = null;
 	}
-	
-    void setGeodesicCalculator(IGeodesicCalculator geodesicCalculator) {
-		this.geodesicCalculator = geodesicCalculator;
-	}
-    
-    void unsetGeodesicCalculator(IGeodesicCalculator geodesicCalculator) {
-		this.geodesicCalculator = null;
-	}
-    
 
 	void setConnectedStatusVariable(boolean connected) {
 		logger.debug(bundleMarker, "{} connected status set to {}", this,
@@ -431,41 +420,35 @@ public class GPSProducer implements Producer, Monitorable {
 		}
 		return result;
 	}
-
+	
 	/**
 	 * 
-	 * @return latitude error
+	 * @return altitude error
 	 */
-	double getLatitudeError(double latitude, double longitude) {
-		double result = 0;
-		Object o = config.get(LAT_ERROR);
+	double getLongitudeError() {
+		double result = Double.NaN;
+		Object o = config.get(LONG_ERROR);
 		if (o != null) {
 			if(o instanceof String){
 				return new Double((String)o);
 			}
 			result = (Double) o;
-		}
-		if(geodesicCalculator!=null && result!=0){
-			result = geodesicCalculator.calculateLatitudeError(latitude, longitude, result);
 		}
 		return result;
 	}
 
 	/**
 	 * 
-	 * @return longitude error
+	 * @return altitude error
 	 */
-	double getLongitudeError(double latitude, double longitude) {
-		double result = 0;
-		Object o = config.get(LON_ERROR);
+	double getLatitudeError() {
+		double result = Double.NaN;
+		Object o = config.get(LAT_ERROR);
 		if (o != null) {
 			if(o instanceof String){
 				return new Double((String)o);
 			}
 			result = (Double) o;
-		}
-		if(geodesicCalculator!=null && result!=0){
-			result = geodesicCalculator.calculateLongitudeError(latitude, longitude, result);
 		}
 		return result;
 	}
@@ -588,5 +571,23 @@ public class GPSProducer implements Producer, Monitorable {
 		return result;
 	}
 
-	
+	/**
+	    * Convert degrees to radians.
+	    * @param degrees
+	    * @return radians
+	    */
+	   static double toRadians( double degrees )
+	   {
+	      return degrees * PiOver180;
+	   }
+	   
+	   /**
+	    * Convert radians to degrees.
+	    * @param radians
+	    * @return degrees
+	    */
+	   static double toDegrees( double radians )
+	   {
+	      return radians / PiOver180;
+	   }
 }

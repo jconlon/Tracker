@@ -44,6 +44,9 @@ import com.verticon.tracker.irouter.dev.IDeviceListener;
  * <li>MonitorListener</li>
  * </ol>
  *  
+ * Depends on a GPS device running on the TARGET_SERVER.  This can be a real gps
+ * or the GPS web simulator: com.verticon.tracker.irouter.gps.dev.sim running
+ * within the simulator product.
  * 
  * This system test is a JUnit Plugin test that uses a real or a Mock device connect to
  * and a Mock Consumer to receive Position products.

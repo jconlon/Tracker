@@ -29,17 +29,17 @@
     	default="1"
     	description="Seconds to wait between Position productions."/>
     	
-    <AD name="Latitude measurement error meters" id="latitude.error"
+    <AD name="Latitude measurement error radians" id="latitude.error"
     	required="true" 
     	type="Double" 
     	default="3"
-    	description="Latitude accuracy in meters. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. "/>
+    	description="Latitude accuracy in radians. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. "/>
 
-	<AD name="Longitude measurement error meters" id="longitude.error"
+	<AD name="Longitude measurement error radians" id="longitude.error"
     	required="true" 
     	type="Double" 
     	default="3"
-    	description="Longitude accuracy in meters. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. "/>
+    	description="Longitude accuracy in radians. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. "/>
 	
 	<AD name="Altitude measurement error meters" id="altitude.error"
     	required="true" 
