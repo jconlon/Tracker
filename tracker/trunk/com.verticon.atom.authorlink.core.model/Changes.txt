@@ -1,10 +1,7 @@
 Changed
 
 genmodel:
-	ContentTypes
-		com.verticon.atom.authorlink
-	Model Class Defaults Category Root Extends Class
-		org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container
+	Root extends org.eclipse.emf.edore.impl.MinimalEObjectImpl$Container
 	
 AuthorlinkResourceImpl
 	save to UTF-8
