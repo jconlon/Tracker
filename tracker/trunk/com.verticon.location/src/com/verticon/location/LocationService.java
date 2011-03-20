@@ -45,20 +45,4 @@ public interface LocationService {
 	 */
 	String positionIn(Object container, String coordinates);
 
-	/**
-	 * 
-	 * @param clazzName
-	 * @param id
-	 * @return geoFeature containing the identified target
-	 */
-	String name(String clazzName, String id);
-
-	/**
-	 * 
-	 * @param clazzName
-	 * @param id
-	 * @return address of the geoFeature containing the identified target
-	 */
-	String address(String clazzName, String id);
-
 }
