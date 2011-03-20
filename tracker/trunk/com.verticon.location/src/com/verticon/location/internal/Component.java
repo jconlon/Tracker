@@ -98,35 +98,35 @@ public class Component implements LocationService {
 		return result;
 	}
 	
-	@Override
-	public String name(String clazzName, String id) {
-		String result = null;
-		if (!serviceProviders.isEmpty()) {
-			for (LocationServiceProvider locationServiceProvider : serviceProviders) {
-				if (locationServiceProvider.canHandle(clazzName)) {
-					result = locationServiceProvider.name(clazzName,id);
-					if (result != null)
-						break;
-				}
-			}
-		}
-		return result;
-	}
+//	@Override
+//	public String name(String clazzName, String id) {
+//		String result = null;
+//		if (!serviceProviders.isEmpty()) {
+//			for (LocationServiceProvider locationServiceProvider : serviceProviders) {
+//				if (locationServiceProvider.canHandle(clazzName)) {
+//					result = locationServiceProvider.name(clazzName,id);
+//					if (result != null)
+//						break;
+//				}
+//			}
+//		}
+//		return result;
+//	}
 
-	@Override
-	public String address(String clazzName, String id) {
-		String result = null;
-		if (!serviceProviders.isEmpty()) {
-			for (LocationServiceProvider locationServiceProvider : serviceProviders) {
-				if (locationServiceProvider.canHandle(clazzName)) {
-					result = locationServiceProvider.address(clazzName,id);
-					if (result != null)
-						break;
-				}
-			}
-		}
-		return result;
-	}
+//	@Override
+//	public String address(String clazzName, String id) {
+//		String result = null;
+//		if (!serviceProviders.isEmpty()) {
+//			for (LocationServiceProvider locationServiceProvider : serviceProviders) {
+//				if (locationServiceProvider.canHandle(clazzName)) {
+//					result = locationServiceProvider.address(clazzName,id);
+//					if (result != null)
+//						break;
+//				}
+//			}
+//		}
+//		return result;
+//	}
 
 	public void setLocationServiceProvider(
 			LocationServiceProvider locationServiceProvider) {
