@@ -117,7 +117,7 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	 */
 	public static TrackerFactory init() {
 		try {
-			TrackerFactory theTrackerFactory = (TrackerFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.verticon.com/ns/tracker/0.1.0"); 
+			TrackerFactory theTrackerFactory = (TrackerFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.verticon.com/tracker/0.4.2/premises"); 
 			if (theTrackerFactory != null) {
 				return theTrackerFactory;
 			}
