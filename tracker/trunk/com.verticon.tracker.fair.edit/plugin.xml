@@ -11,7 +11,7 @@
     
   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
     <factory 
-       uri = "http://www.verticon.com/ns/tracker/fair/0.1.0" 
+       uri = "http://www.verticon.com/tracker.fair/0.2.1/fair" 
        class = "com.verticon.tracker.fair.edit.provider.FairItemProviderAdapterFactory" 
        supportedTypes = 
          "org.eclipse.emf.edit.provider.IEditingDomainItemProvider

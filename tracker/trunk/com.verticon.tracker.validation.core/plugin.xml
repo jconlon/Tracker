@@ -13,7 +13,7 @@
       </category>
       <constraintProvider
             cache="true">
-         <package namespaceUri="http://www.verticon.com/ns/tracker/0.1.0"/>
+         <package namespaceUri="http://www.verticon.com/tracker/0.4.2/premises"/>
          <description>
             Core Tracker Constraints
          </description>
@@ -385,7 +385,7 @@
                <instanceof value="org.eclipse.emf.ecore.EObject"/>
                <test
                   property="com.verticon.tracker.validation.adapter.ePackage"
-                  value="http://www.verticon.com/ns/tracker/0.1.0"/>
+                  value="http://www.verticon.com/tracker/0.4.2/premises"/>
             </and>
          </enablement>
       </clientContext>
