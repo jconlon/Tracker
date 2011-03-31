@@ -10,12 +10,13 @@
  *******************************************************************************/
 package com.verticon.tracker;
 
-import com.verticon.osgi.metatype.OCD;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EMap;
 import org.osgi.service.metatype.AttributeDefinition;
+
+import com.verticon.osgi.metatype.OCD;
 
 /**
  * <!-- begin-user-doc -->

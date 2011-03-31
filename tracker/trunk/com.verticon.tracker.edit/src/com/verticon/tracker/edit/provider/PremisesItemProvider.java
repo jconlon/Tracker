@@ -280,7 +280,6 @@ public class PremisesItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TrackerPackage.Literals.PREMISES__ANIMALS);
 			childrenFeatures.add(TrackerPackage.Literals.PREMISES__UN_APPLIED_TAGS);
-			childrenFeatures.add(TrackerPackage.Literals.PREMISES__LOCATIONS);
 			childrenFeatures.add(TrackerPackage.Literals.PREMISES__POLICY);
 		}
 		return childrenFeatures;
@@ -348,7 +347,6 @@ public class PremisesItemProvider
 				return;
 			case TrackerPackage.PREMISES__ANIMALS:
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
-			case TrackerPackage.PREMISES__LOCATIONS:
 			case TrackerPackage.PREMISES__POLICY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -420,11 +418,6 @@ public class PremisesItemProvider
 			(createChildParameter
 				(TrackerPackage.Literals.PREMISES__UN_APPLIED_TAGS,
 				 TrackerFactory.eINSTANCE.createTag()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TrackerPackage.Literals.PREMISES__LOCATIONS,
-				 TrackerFactory.eINSTANCE.createLocation()));
 
 		newChildDescriptors.add
 			(createChildParameter

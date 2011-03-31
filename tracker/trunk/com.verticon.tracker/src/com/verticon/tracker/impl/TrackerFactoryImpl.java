@@ -55,7 +55,6 @@ import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
 import com.verticon.tracker.Level;
-import com.verticon.tracker.Location;
 import com.verticon.tracker.LostTag;
 import com.verticon.tracker.Mastitis;
 import com.verticon.tracker.MedicalCondition;
@@ -178,7 +177,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.SWINE: return createSwine();
 			case TrackerPackage.EQUINE: return createEquine();
 			case TrackerPackage.CAPRINE: return createCaprine();
-			case TrackerPackage.LOCATION: return createLocation();
 			case TrackerPackage.MEDICAL_CONDITION: return createMedicalCondition();
 			case TrackerPackage.MEDICAL_TREATMENT: return createMedicalTreatment();
 			case TrackerPackage.BIRTHING: return createBirthing();
@@ -421,16 +419,6 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public Caprine createCaprine() {
 		CaprineImpl caprine = new CaprineImpl();
 		return caprine;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Location createLocation() {
-		LocationImpl location = new LocationImpl();
-		return location;
 	}
 
 	/**

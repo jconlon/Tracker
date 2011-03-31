@@ -10,11 +10,10 @@
  *******************************************************************************/
 package com.verticon.tracker;
 
-import com.verticon.osgi.metatype.OCD;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.FeatureMap;
+
+import com.verticon.osgi.metatype.OCD;
 
 /**
  * <!-- begin-user-doc -->

@@ -28,7 +28,6 @@ import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.EventType;
-import com.verticon.tracker.Location;
 import com.verticon.tracker.Policy;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
@@ -47,7 +46,6 @@ import com.verticon.tracker.util.EventHistoryAdapterFactory;
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getEmailContact <em>Email Contact</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getAnimals <em>Animals</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getUnAppliedTags <em>Un Applied Tags</em>}</li>
- *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getLocations <em>Locations</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getUri <em>Uri</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getPolicy <em>Policy</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getAdministrator <em>Administrator</em>}</li>
@@ -139,16 +137,6 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 	 * @ordered
 	 */
 	protected EList<Tag> unAppliedTags;
-
-	/**
-	 * The cached value of the '{@link #getLocations() <em>Locations</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLocations()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Location> locations;
 
 	/**
 	 * The default value of the '{@link #getUri() <em>Uri</em>}' attribute.
@@ -353,18 +341,6 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 			unAppliedTags = new EObjectContainmentEList<Tag>(Tag.class, this, TrackerPackage.PREMISES__UN_APPLIED_TAGS);
 		}
 		return unAppliedTags;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Location> getLocations() {
-		if (locations == null) {
-			locations = new EObjectContainmentEList<Location>(Location.class, this, TrackerPackage.PREMISES__LOCATIONS);
-		}
-		return locations;
 	}
 
 	/**
@@ -660,8 +636,6 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 				return ((InternalEList<?>)getAnimals()).basicRemove(otherEnd, msgs);
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
 				return ((InternalEList<?>)getUnAppliedTags()).basicRemove(otherEnd, msgs);
-			case TrackerPackage.PREMISES__LOCATIONS:
-				return ((InternalEList<?>)getLocations()).basicRemove(otherEnd, msgs);
 			case TrackerPackage.PREMISES__POLICY:
 				return basicSetPolicy(null, msgs);
 		}
@@ -684,8 +658,6 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 				return getAnimals();
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
 				return getUnAppliedTags();
-			case TrackerPackage.PREMISES__LOCATIONS:
-				return getLocations();
 			case TrackerPackage.PREMISES__URI:
 				return getUri();
 			case TrackerPackage.PREMISES__POLICY:
@@ -726,10 +698,6 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
 				getUnAppliedTags().clear();
 				getUnAppliedTags().addAll((Collection<? extends Tag>)newValue);
-				return;
-			case TrackerPackage.PREMISES__LOCATIONS:
-				getLocations().clear();
-				getLocations().addAll((Collection<? extends Location>)newValue);
 				return;
 			case TrackerPackage.PREMISES__URI:
 				setUri((String)newValue);
@@ -773,9 +741,6 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
 				getUnAppliedTags().clear();
 				return;
-			case TrackerPackage.PREMISES__LOCATIONS:
-				getLocations().clear();
-				return;
 			case TrackerPackage.PREMISES__URI:
 				setUri(URI_EDEFAULT);
 				return;
@@ -814,8 +779,6 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 				return animals != null && !animals.isEmpty();
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
 				return unAppliedTags != null && !unAppliedTags.isEmpty();
-			case TrackerPackage.PREMISES__LOCATIONS:
-				return locations != null && !locations.isEmpty();
 			case TrackerPackage.PREMISES__URI:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
 			case TrackerPackage.PREMISES__POLICY:

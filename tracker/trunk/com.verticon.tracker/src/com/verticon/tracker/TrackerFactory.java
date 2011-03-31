@@ -127,15 +127,6 @@ public interface TrackerFactory extends EFactory {
 	Caprine createCaprine();
 
 	/**
-	 * Returns a new object of class '<em>Location</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Location</em>'.
-	 * @generated
-	 */
-	Location createLocation();
-
-	/**
 	 * Returns a new object of class '<em>Medical Condition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

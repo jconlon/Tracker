@@ -183,8 +183,6 @@
         eType="#//Animal" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="unAppliedTags" upperBound="-1"
         eType="#//Tag" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="locations" upperBound="-1"
-        eType="#//Location" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" lowerBound="1" eType="#//URI"
         iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="policy" eType="#//Policy"
@@ -446,9 +444,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Imported" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="Exported" eSuperTypes="#//Event"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Sighting" eSuperTypes="#//Event">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="location" eType="#//Location"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sighting" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="Slaughtered" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="Died" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="TagRetired" eSuperTypes="#//Event"/>
@@ -584,17 +580,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="Caprine" eSuperTypes="#//Animal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="goatBreed" eType="#//GoatBreed"
         defaultValueLiteral="Unspecified"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Location">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="latitudeInRadians" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="latitudeError" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="longitudeError" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="longitudeInRadians" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="longitude" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
-        changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="latitude" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
-        changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="URI" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EClass" name="MedicalCondition" eSuperTypes="#//Event"/>
