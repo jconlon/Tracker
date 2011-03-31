@@ -1247,7 +1247,6 @@ public class FairEditor
 						Fair fair = null;
 						while (it.hasNext()) {
 							Object o = it.next();
-							System.out.println("Resource Object: "+o);
 							if(o instanceof Premises){
 								it.prune();
 							}
