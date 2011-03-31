@@ -938,7 +938,7 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 			
 			break;
 		case MOVED_TO_PREMISES:
-			result = TrackerPlugin.getDefault().name(Premises.class.getName(), animalLocator.getLocation());
+			result = TrackerPlugin.getDefault().name(animalLocator.getLocation());
 		default:
 			break;
 		}

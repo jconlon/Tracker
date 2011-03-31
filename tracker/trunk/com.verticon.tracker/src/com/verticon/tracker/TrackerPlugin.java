@@ -141,23 +141,5 @@ public class TrackerPlugin extends Plugin implements LocationService{
 		
 	}
 
-	/**
-	 * Finds a remote premises location name or just returns the premise id 
-	 * for the moved out premises.
-	 */
-	@Override
-	public String name(String clazzName, String id) {
-		String result = null;
-		LocationService locationService = getLocationService();
-		if(locationService != null){
-			result = locationService.name(clazzName,id);
-		}
-		return result!=null?result:id;
-	}
 
-	@Override
-	public String address(String target, String id) {
-		//Not used
-		return "";
-	}
 }

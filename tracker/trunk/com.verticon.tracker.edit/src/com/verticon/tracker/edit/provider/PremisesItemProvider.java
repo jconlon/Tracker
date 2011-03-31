@@ -84,7 +84,6 @@ public class PremisesItemProvider
 			addDescriptionPropertyDescriptor(object);
 			addPhoneNumberPropertyDescriptor(object);
 			addAddressPropertyDescriptor(object);
-			addCoordinatesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -268,30 +267,6 @@ public class PremisesItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Coordinates feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addCoordinatesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Premises_coordinates_feature"),
-				 getString("_UI_Premises_coordinates_description"),
-				 TrackerPackage.Literals.PREMISES__COORDINATES,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 getString("_UI_LocationPropertyCategory"),
-				 new String[] {
-					"org.eclipse.ui.views.properties.expert"
-				 }));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -369,7 +344,6 @@ public class PremisesItemProvider
 			case TrackerPackage.PREMISES__DESCRIPTION:
 			case TrackerPackage.PREMISES__PHONE_NUMBER:
 			case TrackerPackage.PREMISES__ADDRESS:
-			case TrackerPackage.PREMISES__COORDINATES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TrackerPackage.PREMISES__ANIMALS:
