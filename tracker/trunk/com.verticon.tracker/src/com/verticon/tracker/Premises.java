@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.Premises#getEmailContact <em>Email Contact</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getAnimals <em>Animals</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getUnAppliedTags <em>Un Applied Tags</em>}</li>
- *   <li>{@link com.verticon.tracker.Premises#getLocations <em>Locations</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getUri <em>Uri</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getPolicy <em>Policy</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getAdministrator <em>Administrator</em>}</li>
@@ -132,22 +131,6 @@ public interface Premises extends EObject {
 	 * @generated
 	 */
 	EList<Tag> getUnAppliedTags();
-
-	/**
-	 * Returns the value of the '<em><b>Locations</b></em>' containment reference list.
-	 * The list contents are of type {@link com.verticon.tracker.Location}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Locations</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Locations</em>' containment reference list.
-	 * @see com.verticon.tracker.TrackerPackage#getPremises_Locations()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Location> getLocations();
 
 	/**
 	 * Returns the value of the '<em><b>Uri</b></em>' attribute.

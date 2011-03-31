@@ -38,7 +38,6 @@ import com.verticon.tracker.GenericEventInclusion;
 import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
-import com.verticon.tracker.Location;
 import com.verticon.tracker.LostTag;
 import com.verticon.tracker.Mastitis;
 import com.verticon.tracker.MedicalCondition;
@@ -48,6 +47,7 @@ import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.Policy;
+import com.verticon.tracker.Position;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.Sighting;
@@ -233,10 +233,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCaprine(Caprine object) {
 				return createCaprineAdapter();
-			}
-			@Override
-			public Adapter caseLocation(Location object) {
-				return createLocationAdapter();
 			}
 			@Override
 			public Adapter caseMedicalCondition(MedicalCondition object) {
@@ -505,20 +501,6 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCaprineAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.Location <em>Location</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see com.verticon.tracker.Location
-	 * @generated
-	 */
-	public Adapter createLocationAdapter() {
 		return null;
 	}
 

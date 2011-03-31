@@ -54,7 +54,6 @@ import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.Imported;
 import com.verticon.tracker.Level;
-import com.verticon.tracker.Location;
 import com.verticon.tracker.LostTag;
 import com.verticon.tracker.Mastitis;
 import com.verticon.tracker.MedicalCondition;
@@ -197,13 +196,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EClass caprineEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass locationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1150,78 +1142,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getLocation() {
-		return locationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getLocation_Name() {
-		return (EAttribute)locationEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getLocation_LatitudeInRadians() {
-		return (EAttribute)locationEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getLocation_LatitudeError() {
-		return (EAttribute)locationEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getLocation_LongitudeError() {
-		return (EAttribute)locationEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getLocation_LongitudeInRadians() {
-		return (EAttribute)locationEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getLocation_Longitude() {
-		return (EAttribute)locationEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getLocation_Latitude() {
-		return (EAttribute)locationEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getMedicalCondition() {
 		return medicalConditionEClass;
 	}
@@ -1798,17 +1718,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPremises_Locations() {
-		return (EReference)premisesEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getPremises_Uri() {
-		return (EAttribute)premisesEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)premisesEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1817,7 +1728,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	public EAttribute getPremises_Name() {
-		return (EAttribute)premisesEClass.getEStructuralFeatures().get(8);
+		return (EAttribute)premisesEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1826,7 +1737,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	public EAttribute getPremises_Description() {
-		return (EAttribute)premisesEClass.getEStructuralFeatures().get(9);
+		return (EAttribute)premisesEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1835,7 +1746,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	public EAttribute getPremises_PhoneNumber() {
-		return (EAttribute)premisesEClass.getEStructuralFeatures().get(10);
+		return (EAttribute)premisesEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -1844,7 +1755,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	public EAttribute getPremises_Address() {
-		return (EAttribute)premisesEClass.getEStructuralFeatures().get(11);
+		return (EAttribute)premisesEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -1853,7 +1764,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	public EReference getPremises_Policy() {
-		return (EReference)premisesEClass.getEStructuralFeatures().get(6);
+		return (EReference)premisesEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1862,7 +1773,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	public EAttribute getPremises_Administrator() {
-		return (EAttribute)premisesEClass.getEStructuralFeatures().get(7);
+		return (EAttribute)premisesEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -2079,15 +1990,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 */
 	public EClass getSighting() {
 		return sightingEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSighting_Location() {
-		return (EReference)sightingEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2390,7 +2292,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(premisesEClass, PREMISES__EMAIL_CONTACT);
 		createEReference(premisesEClass, PREMISES__ANIMALS);
 		createEReference(premisesEClass, PREMISES__UN_APPLIED_TAGS);
-		createEReference(premisesEClass, PREMISES__LOCATIONS);
 		createEAttribute(premisesEClass, PREMISES__URI);
 		createEReference(premisesEClass, PREMISES__POLICY);
 		createEAttribute(premisesEClass, PREMISES__ADMINISTRATOR);
@@ -2434,7 +2335,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		exportedEClass = createEClass(EXPORTED);
 
 		sightingEClass = createEClass(SIGHTING);
-		createEReference(sightingEClass, SIGHTING__LOCATION);
 
 		slaughteredEClass = createEClass(SLAUGHTERED);
 
@@ -2461,15 +2361,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		caprineEClass = createEClass(CAPRINE);
 		createEAttribute(caprineEClass, CAPRINE__GOAT_BREED);
-
-		locationEClass = createEClass(LOCATION);
-		createEAttribute(locationEClass, LOCATION__NAME);
-		createEAttribute(locationEClass, LOCATION__LATITUDE_IN_RADIANS);
-		createEAttribute(locationEClass, LOCATION__LATITUDE_ERROR);
-		createEAttribute(locationEClass, LOCATION__LONGITUDE_ERROR);
-		createEAttribute(locationEClass, LOCATION__LONGITUDE_IN_RADIANS);
-		createEAttribute(locationEClass, LOCATION__LONGITUDE);
-		createEAttribute(locationEClass, LOCATION__LATITUDE);
 
 		medicalConditionEClass = createEClass(MEDICAL_CONDITION);
 
@@ -2736,7 +2627,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getPremises_EmailContact(), this.getEmail(), "emailContact", "", 1, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPremises_Animals(), this.getAnimal(), null, "animals", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPremises_UnAppliedTags(), this.getTag(), null, "unAppliedTags", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPremises_Locations(), this.getLocation(), null, "locations", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPremises_Uri(), this.getURI(), "uri", null, 1, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPremises_Policy(), this.getPolicy(), null, "policy", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPremises_Administrator(), ecorePackage.getEString(), "administrator", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2797,7 +2687,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(exportedEClass, Exported.class, "Exported", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(sightingEClass, Sighting.class, "Sighting", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSighting_Location(), this.getLocation(), null, "location", null, 0, 1, Sighting.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(slaughteredEClass, Slaughtered.class, "Slaughtered", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2826,15 +2715,6 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		initEClass(caprineEClass, Caprine.class, "Caprine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCaprine_GoatBreed(), this.getGoatBreed(), "goatBreed", "Unspecified", 0, 1, Caprine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(locationEClass, Location.class, "Location", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getLocation_Name(), ecorePackage.getEString(), "name", null, 1, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLocation_LatitudeInRadians(), ecorePackage.getEDouble(), "latitudeInRadians", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLocation_LatitudeError(), ecorePackage.getEDouble(), "latitudeError", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLocation_LongitudeError(), ecorePackage.getEDouble(), "longitudeError", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLocation_LongitudeInRadians(), ecorePackage.getEDouble(), "longitudeInRadians", null, 0, 1, Location.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLocation_Longitude(), ecorePackage.getEDouble(), "longitude", null, 0, 1, Location.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLocation_Latitude(), ecorePackage.getEDouble(), "latitude", null, 0, 1, Location.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(medicalConditionEClass, MedicalCondition.class, "MedicalCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -47,7 +47,6 @@ import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
 import com.verticon.tracker.Level;
-import com.verticon.tracker.Location;
 import com.verticon.tracker.LostTag;
 import com.verticon.tracker.Mastitis;
 import com.verticon.tracker.MedicalCondition;
@@ -58,6 +57,7 @@ import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.OneToTen;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.Policy;
+import com.verticon.tracker.Position;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.Sex;
@@ -239,8 +239,6 @@ public class TrackerValidator extends EObjectValidator {
 				return validateEquine((Equine)value, diagnostics, context);
 			case TrackerPackage.CAPRINE:
 				return validateCaprine((Caprine)value, diagnostics, context);
-			case TrackerPackage.LOCATION:
-				return validateLocation((Location)value, diagnostics, context);
 			case TrackerPackage.MEDICAL_CONDITION:
 				return validateMedicalCondition((MedicalCondition)value, diagnostics, context);
 			case TrackerPackage.MEDICAL_TREATMENT:
@@ -443,15 +441,6 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validateCaprine(Caprine caprine, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(caprine, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateLocation(Location location, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(location, diagnostics, context);
 	}
 
 	/**

@@ -29,8 +29,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Properties;
 import java.util.Map.Entry;
+import java.util.Properties;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.BasicEList;

@@ -37,7 +37,6 @@ import com.verticon.tracker.GenericEventInclusion;
 import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.ICVI;
 import com.verticon.tracker.Imported;
-import com.verticon.tracker.Location;
 import com.verticon.tracker.LostTag;
 import com.verticon.tracker.Mastitis;
 import com.verticon.tracker.MedicalCondition;
@@ -47,6 +46,7 @@ import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.Policy;
+import com.verticon.tracker.Position;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.Sighting;
@@ -328,12 +328,6 @@ public class TrackerSwitch<T> {
 				Caprine caprine = (Caprine)theEObject;
 				T result = caseCaprine(caprine);
 				if (result == null) result = caseAnimal(caprine);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TrackerPackage.LOCATION: {
-				Location location = (Location)theEObject;
-				T result = caseLocation(location);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -650,21 +644,6 @@ public class TrackerSwitch<T> {
 	 * @generated
 	 */
 	public T caseCaprine(Caprine object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Location</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Location</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLocation(Location object) {
 		return null;
 	}
 
