@@ -61,7 +61,6 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.BeefBreed;
 import com.verticon.tracker.BovineBeef;
 import com.verticon.tracker.Event;
-import com.verticon.tracker.Location;
 import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Sex;
@@ -413,18 +412,6 @@ public class SampleTrackerProjectWizard extends BasicNewResourceWizard {
 		beef5.getTags().add(tag5);
 		premises.getAnimals().add(beef5);
 		
-		//Create Locations
-		Location location1 = trackerFactory.createLocation();
-		location1.setName("West Forty");
-		premises.getLocations().add(location1);
-		
-		Location location2 = trackerFactory.createLocation();
-		location2.setName("East Forty");
-		premises.getLocations().add(location2);
-		
-		Location location3 = trackerFactory.createLocation();
-		location3.setName("North Forty");
-		premises.getLocations().add(location3);
 		
 		//Add some event to the animals
 		createTestEvents( premises,  trackerFactory);
@@ -483,7 +470,6 @@ public class SampleTrackerProjectWizard extends BasicNewResourceWizard {
 			events.add(event2);
 			
 			Sighting event3 = trackerFactory.createSighting();
-			event3.setLocation(premises.getLocations().get(1));
 			events.add(event3);
 			
 			WeighIn event4 = trackerFactory.createWeighIn();

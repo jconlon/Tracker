@@ -38,9 +38,7 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.EventType;
 import com.verticon.tracker.GenericEvent;
-import com.verticon.tracker.Location;
 import com.verticon.tracker.Premises;
-import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin;
@@ -149,7 +147,6 @@ import com.verticon.tracker.util.TrackerUtils;
 			}
 			setAppropriateDateOnEvents(events, defaultEventDate);
 			if(premises!=null){
-				setLocationOnCopiedSightingEvents(events,  premises);
 				//Go through the genericEvents setting the OCDs 
 				setOCDReferences(premises,  animalInTemplate.eventHistory(), events);
 			}
@@ -208,9 +205,7 @@ import com.verticon.tracker.util.TrackerUtils;
 				throw new PremisesPolicyException("Policy violation. Can't add "+animalInTemplate.getType());
 			}
 		Animal targetAnimal = (Animal)copier.copy(animalInTemplate);
-		if(premises!=null){
-			setLocationOnCopiedSightingEvents(targetAnimal.eventHistory(),  premises);
-		}
+		
 		if(targetAnimal.activeTag()!=null){
 			targetAnimal.activeTag().setId(tag);
 			setAppropriateDateOnEvents(targetAnimal.eventHistory(), defaultEventDate);
@@ -343,64 +338,6 @@ import com.verticon.tracker.util.TrackerUtils;
 	private static boolean isFirstEvent(Calendar cal) {
 		return cal == null;
 	}
-	
-	/**
-	 * Need to reference a valid location in the Premises on the copied SightEvents
-	 * @param copiedAnimal
-	 */
-	private void setLocationOnCopiedSightingEvents(Collection<Event> events, Premises premises){
-		int position = 0;
-		for (Event event : events) {
-			if(event instanceof Sighting){
-				position++;
-				Sighting sighting = (Sighting)event;
-				Location location = getLocationFromPrimalAnimal(position, premises);
-				sighting.setLocation(location);
-			}
-		}
-	}
-
-	/**
-	 * 
-	 * @param position of the SightingEvent in the eventHistory of the primal
-	 * @param premises
-	 * @return
-	 */
-	private Location getLocationFromPrimalAnimal(int position, Premises premises){
-		int myposition = 0;
-		for (Event event : animalInTemplate.eventHistory()) {
-			if(event instanceof Sighting){
-				myposition++;
-				if(myposition == position){
-					Sighting sighting = (Sighting)event;
-					if(sighting ==null || sighting.getLocation()==null){
-						return null;
-					}
-					
-					return getLocation( premises,  sighting.getLocation().getName());
-				}
-			}
-		}
-		return null;
-	}
-	
-	/**
-	 * Returns a location from the premises base on a name
-	 * @param premises
-	 * @param name
-	 * @return
-	 */
-	private Location getLocation(Premises premises, String name){
-		for (Location location : premises.getLocations()) {
-			if(location.getName().equals(name)){
-				return location;
-			}
-		}
-		return null;
-	}
-	
-
-	
 	
 	
     private static final void setEventDateIfTemplateDateBeforeReference(Event event, Date defaultDate){
