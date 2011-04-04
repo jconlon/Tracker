@@ -562,13 +562,13 @@ public class AnimalItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Animal_location_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Animal_location_feature", "_UI_Animal_type"),
+				 getString("_UI_Animal_location_description"),
 				 TrackerPackage.Literals.ANIMAL__LOCATION,
 				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_LocationPropertyCategory"),
 				 null));
 	}
 

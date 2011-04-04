@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,6 +40,7 @@ import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.Position;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Sex;
+import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.TrackerPlugin;
@@ -923,6 +925,16 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Location is set to a value based on the most recently significant event in the history.
+	 * If the most recent event is a:
+	 * <ol>
+	 * <li>Position event, then the location will be resolved by the 
+	 * LocationService positionIn with the coordinates from the Position event;</li>
+	 * <li>Sighting event, then the location is resolved locally based on the name of the 
+	 * location in the sighting event;</li>
+	 * <li>MoveOut event then the location will be resolved by the 
+	 * LocationService name with the id being the name of the new premises;</li>
+	 * 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -935,15 +947,18 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 			if(eContainer()!=null ){
 				result = TrackerPlugin.getDefault().positionIn(eContainer(), coordinates);
 			}
-			
 			break;
 		case MOVED_TO_PREMISES:
 			result = TrackerPlugin.getDefault().name(animalLocator.getLocation());
+			break;
+		case SIGHTING:
+			result = animalLocator.location;
+			break;
 		default:
 			break;
 		}
 		return result;
-		
+
 	}
 
 	/**
@@ -1268,6 +1283,7 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 	private enum Locate{
 		HASCOORDINATES,//Position event in the eventHistory, getLocate returns a coordinates.
 		MOVED_TO_PREMISES,//Animal is no longer in the premises and was moved out, getLocate returns the premises id.
+		SIGHTING,//Sighting event in the eventHistory with the location attribute set
 		NONE //no information on the animal, assume it is in the premises or waiting to be tagged getLocation is null
 	}
 	
@@ -1296,14 +1312,26 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 			locate = Locate.NONE;
 			lastEvent = null;
 			location = null;
-			Collections.sort(events, TrackerUtils.DATE_COMPARATOR);//Newest events are first
+			Collections.sort(events, mostRecentDateFirst);//Newest events are first
 			
-			for (Event event : events) {
-				if(!(Boolean)animalSwitch.doSwitch(event)){
-					break;
-				}
+
+			Boolean getOlderEvents = true;
+			Iterator<Event> it = events.iterator();
+			while (getOlderEvents && it.hasNext()) {
+				Event event = it.next();
+				getOlderEvents = (Boolean)animalSwitch.doSwitch(event);
 			}
 		}
+		
+		
+		private final Comparator<Event> mostRecentDateFirst = new Comparator<Event>() {
+				public int compare(Event a, Event b) {
+					Date d1 = a.getDateTime();
+					Date d2 = b.getDateTime();
+					return d2.compareTo(d1);
+				}
+		};
+		
 		
 		private TrackerSwitch<?> animalSwitch = new TrackerSwitch<Object>(){
 			/*
@@ -1337,6 +1365,17 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 				}
 				
 				return Boolean.TRUE;
+			}
+			
+
+			/* (non-Javadoc)
+			 * @see com.verticon.tracker.util.TrackerSwitch#caseSighting(com.verticon.tracker.Sighting)
+			 */
+			@Override
+			public Object caseSighting(Sighting event) {
+				location = event.getLocation();
+				locate = Locate.SIGHTING;
+				return Boolean.FALSE;
 			}
 
 			/* (non-Javadoc)
