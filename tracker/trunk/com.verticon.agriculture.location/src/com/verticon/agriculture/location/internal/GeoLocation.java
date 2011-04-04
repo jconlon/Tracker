@@ -10,6 +10,10 @@
  *******************************************************************************/
 package com.verticon.agriculture.location.internal;
 
+import static com.google.common.collect.Sets.newHashSet;
+
+import java.util.Set;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.vividsolutions.jts.geom.Point;
@@ -92,6 +96,18 @@ public class GeoLocation {
 			}
 		}
 
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @return the names of all the polygons
+	 */
+	Set<String> polygonNames(){
+		Set<String> result = newHashSet();
+		for (BoundedLocation polygon : boundedLocations) {
+			result.add(polygon.getName());
+		}
 		return result;
 	}
 

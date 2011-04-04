@@ -10,6 +10,8 @@
  *******************************************************************************/
 package com.verticon.location;
 
+import java.util.Set;
+
 /**
  * LocationService for finding the names and addresses of target objects using:
  * <ol>
@@ -44,5 +46,12 @@ public interface LocationService {
 	 * @return location within the container referenced by the coordinates
 	 */
 	String positionIn(Object container, String coordinates);
+	
+	/**
+	 * 
+	 * @param container
+	 * @return names of locations within the container
+	 */
+	Set<String> locationsIn(Object container);
 
 }

@@ -2525,13 +2525,22 @@ public interface TrackerPackage extends EPackage {
 	int SIGHTING__DATE_KEY = EVENT__DATE_KEY;
 
 	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIGHTING__LOCATION = EVENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Sighting</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIGHTING_FEATURE_COUNT = EVENT_FEATURE_COUNT + 0;
+	int SIGHTING_FEATURE_COUNT = EVENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.SlaughteredImpl <em>Slaughtered</em>}' class.
@@ -7348,6 +7357,17 @@ public interface TrackerPackage extends EPackage {
 	EClass getSighting();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Sighting#getLocation <em>Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Location</em>'.
+	 * @see com.verticon.tracker.Sighting#getLocation()
+	 * @see #getSighting()
+	 * @generated
+	 */
+	EAttribute getSighting_Location();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Slaughtered <em>Slaughtered</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8894,6 +8914,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SIGHTING = eINSTANCE.getSighting();
+
+		/**
+		 * The meta object literal for the '<em><b>Location</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SIGHTING__LOCATION = eINSTANCE.getSighting_Location();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.SlaughteredImpl <em>Slaughtered</em>}' class.

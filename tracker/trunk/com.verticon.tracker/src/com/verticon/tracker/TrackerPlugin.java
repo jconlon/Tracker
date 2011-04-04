@@ -13,6 +13,9 @@
  */
 package com.verticon.tracker;
 
+import java.util.Collections;
+import java.util.Set;
+
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
@@ -139,6 +142,20 @@ public class TrackerPlugin extends Plugin implements LocationService{
 		}
 		return result!=null?result:"unknown address";
 		
+	}
+
+	
+	@Override
+	public Set<String> locationsIn(Object container) {
+		Set<String> result = null;
+		LocationService locationService = getLocationService();
+		if(locationService != null){
+			result = locationService.locationsIn(container);
+		}
+		if(result == null){
+			result = Collections.emptySet();
+		}
+		return result;
 	}
 
 

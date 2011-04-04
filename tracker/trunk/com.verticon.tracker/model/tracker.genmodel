@@ -483,6 +483,8 @@
           propertyDescription="Alternative Official Identification" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/alternativeID">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Location"
+          propertyDescription="Last known location" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/location"/>
       <genOperations ecoreOperation="tracker.ecore#//Animal/allEvents"/>
       <genOperations ecoreOperation="tracker.ecore#//Animal/addTemplate">
         <genParameters ecoreParameter="tracker.ecore#//Animal/addTemplate/eventTemplate"/>
@@ -552,7 +554,6 @@
           ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/emailContact"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/animals"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/unAppliedTags"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/locations"/>
       <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Premises identifier as a Universal Resource Identifier (URI)"
           ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/uri">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
@@ -566,11 +567,6 @@
       <genFeatures createChild="false" propertyCategory="Contacts" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/phoneNumber"/>
       <genFeatures property="Readonly" createChild="false" propertyCategory="Location"
           propertyDescription="Street address of the premises." ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/address"/>
-      <genFeatures property="Readonly" createChild="false" propertyCategory="Location"
-          propertyDescription="Values for longitude, latitude, and altitude (in that order). Longitude and latitude values are in degrees and altitude values (optional) are in meters above sea level."
-          ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/coordinates">
-        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
-      </genFeatures>
       <genOperations ecoreOperation="tracker.ecore#//Premises/eventHistory"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/findAnimal">
         <genParameters ecoreParameter="tracker.ecore#//Premises/findAnimal/id"/>
@@ -632,8 +628,8 @@
     <genClasses ecoreClass="tracker.ecore#//Imported"/>
     <genClasses ecoreClass="tracker.ecore#//Exported"/>
     <genClasses ecoreClass="tracker.ecore#//Sighting">
-      <genFeatures createChild="false" propertyCategory="Location of Animal" propertyDescription=""
-          ecoreFeature="ecore:EReference tracker.ecore#//Sighting/location"/>
+      <genFeatures createChild="false" propertyCategory="Location" propertyDescription="Visually sighted location of the animal"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Sighting/location"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Slaughtered"/>
     <genClasses ecoreClass="tracker.ecore#//Died"/>
@@ -667,29 +663,6 @@
       <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//Caprine/goatBreed">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
-    </genClasses>
-    <genClasses ecoreClass="tracker.ecore#//Location">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Location/name"/>
-      <genFeatures createChild="false" propertyCategory="Position" propertyDescription="Latitude measurement in radians"
-          ecoreFeature="ecore:EAttribute tracker.ecore#//Location/latitudeInRadians">
-        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
-      </genFeatures>
-      <genFeatures createChild="false" propertyCategory="Position" propertyDescription="Measurement error for latitude in radians"
-          ecoreFeature="ecore:EAttribute tracker.ecore#//Location/latitudeError">
-        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
-      </genFeatures>
-      <genFeatures createChild="false" propertyCategory="Position" propertyDescription="Measurement error for longitude in radians"
-          ecoreFeature="ecore:EAttribute tracker.ecore#//Location/longitudeError">
-        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
-      </genFeatures>
-      <genFeatures createChild="false" propertyCategory="Position" propertyDescription="Longitude measurement in radians"
-          ecoreFeature="ecore:EAttribute tracker.ecore#//Location/longitudeInRadians">
-        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
-      </genFeatures>
-      <genFeatures property="Readonly" createChild="false" propertyCategory="Position"
-          propertyDescription="Longitude measurement in degrees" ecoreFeature="ecore:EAttribute tracker.ecore#//Location/longitude"/>
-      <genFeatures property="Readonly" createChild="false" propertyCategory="Position"
-          propertyDescription="Latitude measurement in degrees" ecoreFeature="ecore:EAttribute tracker.ecore#//Location/latitude"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//MedicalCondition"/>
     <genClasses ecoreClass="tracker.ecore#//MedicalTreatment">
@@ -808,7 +781,8 @@
           propertyDescription="Longitude measurement in degrees" ecoreFeature="ecore:EAttribute tracker.ecore#//Position/longitude"/>
       <genFeatures property="Readonly" createChild="false" propertyCategory="Position"
           propertyDescription="Latitude measurement in degrees" ecoreFeature="ecore:EAttribute tracker.ecore#//Position/latitude"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Position/coordinates"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Position"
+          propertyDescription="Coordinates of the position" ecoreFeature="ecore:EAttribute tracker.ecore#//Position/coordinates"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="Metatype" basePackage="com.verticon.osgi" ecorePackage="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#/">
