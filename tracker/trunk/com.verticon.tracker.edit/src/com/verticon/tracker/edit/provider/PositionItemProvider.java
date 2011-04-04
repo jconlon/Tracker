@@ -127,13 +127,13 @@ public class PositionItemProvider
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
 				 getString("_UI_Position_coordinates_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Position_coordinates_feature", "_UI_Position_type"),
+				 getString("_UI_Position_coordinates_description"),
 				 TrackerPackage.Literals.POSITION__COORDINATES,
 				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
+				 getString("_UI_PositionPropertyCategory"),
 				 null));
 	}
 
