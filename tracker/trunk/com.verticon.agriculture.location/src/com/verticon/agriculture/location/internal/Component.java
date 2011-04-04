@@ -10,6 +10,8 @@
  *******************************************************************************/
 package com.verticon.agriculture.location.internal;
 
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -78,6 +80,16 @@ public class Component implements LocationServiceProvider {
 	public String name(Object target) {
 		return delegate.name(target);
 
+	}
+
+	/**
+	 * 
+	 * @param container that has sublocations
+	 * @return names of all the sublocations for the container
+	 */
+	@Override
+	public Set<String> locationsIn(Object container) {
+		return delegate.locationsIn(container);
 	}
 
 }

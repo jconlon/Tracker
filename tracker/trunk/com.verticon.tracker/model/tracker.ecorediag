@@ -1374,6 +1374,10 @@
   <children xmi:type="notation:Node" xmi:id="_PDlGeFmCEd2tRZ2K3aMUww" type="1001">
     <children xmi:type="notation:Node" xmi:id="_PDltgFmCEd2tRZ2K3aMUww" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_PDltgVmCEd2tRZ2K3aMUww" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_OF5c0V7YEeCUrZcEvrCroQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Sighting/location"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_OF5c0l7YEeCUrZcEvrCroQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PDltglmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PDltg1mCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_PDlthFmCEd2tRZ2K3aMUww"/>

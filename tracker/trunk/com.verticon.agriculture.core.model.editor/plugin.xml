@@ -44,5 +44,45 @@
             file-names="*">
       </file-association>
    </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            defaultHandler="com.verticon.agriculture.presentation.internal.LocationChoices"
+            description="Show and select a location in the premises"
+            id="com.verticon.agriculture.core.model.editor.command.location.selection"
+            name="Select &amp;Location in premises">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+         <command
+               commandId="com.verticon.agriculture.core.model.editor.command.location.selection"
+               style="push">
+            <visibleWhen>
+               	     <and>
+                         <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+      						 <instanceof value="com.verticon.tracker.Sighting"/>
+    					  </iterate>
+    					 </with>
+    					 
+    					 <!-- 
+    			        	Restricted to show only if the active Editors isPremisesEditor.
+    			        	Ticket#403
+              			 -->
+              			 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+    			     </and>
+	            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
 
 </plugin>

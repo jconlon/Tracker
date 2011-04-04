@@ -11,6 +11,7 @@
 package com.verticon.location.internal;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.slf4j.Logger;
@@ -88,6 +89,26 @@ public class Component implements LocationService {
 			for (LocationServiceProvider locationServiceProvider : serviceProviders) {
 				if (locationServiceProvider.canHandle(target)) {
 					result = locationServiceProvider.address(target);
+					if (result != null)
+						break;
+				}
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param container that has sublocations
+	 * @return names of all the sublocations for the container
+	 */
+	@Override
+	public Set<String> locationsIn(Object container) {
+		Set<String> result = null;
+		if (!serviceProviders.isEmpty()) {
+			for (LocationServiceProvider locationServiceProvider : serviceProviders) {
+				if (locationServiceProvider.canHandle(container)) {
+					result = locationServiceProvider.locationsIn(container);
 					if (result != null)
 						break;
 				}

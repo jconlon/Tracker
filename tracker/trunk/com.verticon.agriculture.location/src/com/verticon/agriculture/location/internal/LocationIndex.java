@@ -12,11 +12,13 @@ package com.verticon.agriculture.location.internal;
 
 import static com.google.common.collect.Maps.filterValues;
 import static com.google.common.collect.Maps.newHashMap;
+import static com.google.common.collect.Sets.newHashSet;
 import static com.verticon.agriculture.location.internal.Component.bundleMarker;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -98,6 +100,24 @@ public final class LocationIndex implements LocationServiceProvider {
 		}
 		return result;
 	}
+	
+	/**
+	 * 
+	 * @param container
+	 * @return names of the sub locations for a container
+	 */
+	@Override
+	public Set<String> locationsIn(Object container) {
+		String id = getID(container);
+		Set<String> result = newHashSet();
+		
+		synchronized (lock) {
+			if(index.containsKey(id)){
+				result = index.get(id).polygonNames();
+			}
+		}
+		return result;
+	}
 
 	/**
 	 * On first access build all agriculture projects in the workspace.
@@ -116,6 +136,7 @@ public final class LocationIndex implements LocationServiceProvider {
 		return false;
 	}
 	
+	
 	/**
 	 * 
 	 * @param uri
@@ -123,6 +144,9 @@ public final class LocationIndex implements LocationServiceProvider {
 	 */
 	static boolean isAssociatedResource(String uri){
 		boolean result = false;
+		if(index==null){
+			buildAllAgricultureProjects();
+		}
 		if(uri.endsWith(".kml")|| uri.endsWith(".premises")){
 			synchronized (lock) {
 				for (GeoLocation location : index.values()) {
@@ -240,6 +264,8 @@ public final class LocationIndex implements LocationServiceProvider {
 		}
 
 	}
+
+	
 
 
 }
