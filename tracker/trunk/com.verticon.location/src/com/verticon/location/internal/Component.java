@@ -36,9 +36,8 @@ public class Component implements LocationService {
 
 	private List<LocationServiceProvider> serviceProviders = new CopyOnWriteArrayList<LocationServiceProvider>();
 
-	
 	public void activate() {
-		logger.debug(bundleMarker, "{} activated", this);
+		logger.debug(bundleMarker, "Activated");
 	}
 
 	/*
@@ -48,12 +47,11 @@ public class Component implements LocationService {
 	 */
 	@Override
 	public String toString() {
-		return "LocationService Component []";
+		return "Component []";
 	}
 
 	@Override
-	public String positionIn(Object container,
-			String coordinates) {
+	public String positionIn(Object container, String coordinates) {
 		String result = null;
 		if (!serviceProviders.isEmpty()) {
 			for (LocationServiceProvider locationServiceProvider : serviceProviders) {
@@ -67,7 +65,7 @@ public class Component implements LocationService {
 		}
 		return result;
 	}
-	
+
 	@Override
 	public String name(Object target) {
 		String result = null;
@@ -97,56 +95,24 @@ public class Component implements LocationService {
 		}
 		return result;
 	}
-	
-//	@Override
-//	public String name(String clazzName, String id) {
-//		String result = null;
-//		if (!serviceProviders.isEmpty()) {
-//			for (LocationServiceProvider locationServiceProvider : serviceProviders) {
-//				if (locationServiceProvider.canHandle(clazzName)) {
-//					result = locationServiceProvider.name(clazzName,id);
-//					if (result != null)
-//						break;
-//				}
-//			}
-//		}
-//		return result;
-//	}
-
-//	@Override
-//	public String address(String clazzName, String id) {
-//		String result = null;
-//		if (!serviceProviders.isEmpty()) {
-//			for (LocationServiceProvider locationServiceProvider : serviceProviders) {
-//				if (locationServiceProvider.canHandle(clazzName)) {
-//					result = locationServiceProvider.address(clazzName,id);
-//					if (result != null)
-//						break;
-//				}
-//			}
-//		}
-//		return result;
-//	}
 
 	public void setLocationServiceProvider(
 			LocationServiceProvider locationServiceProvider) {
 		serviceProviders.add(locationServiceProvider);
-		logger.debug(bundleMarker, "{} added serviceProvider {}", this,
+		logger.debug(bundleMarker, "Added locationServiceProvider {}",
 				locationServiceProvider.getClass().getName());
 	}
 
 	public void unsetLocationServiceProvider(
 			LocationServiceProvider locationServiceProvider) {
 		serviceProviders.remove(locationServiceProvider);
-		logger.debug(bundleMarker, "{} removed serviceProvider {}", this,
-				locationServiceProvider.getClass().getName());
+		logger.debug(bundleMarker, "Removed locationServiceProvider {}",
+				 locationServiceProvider.getClass().getName());
 	}
 
 	public void deactivate() {
 		serviceProviders.clear();
-		logger.debug(bundleMarker, "{} deactivated", this);
+		logger.debug(bundleMarker, "Deactivated");
 	}
-
-	
 
 }
