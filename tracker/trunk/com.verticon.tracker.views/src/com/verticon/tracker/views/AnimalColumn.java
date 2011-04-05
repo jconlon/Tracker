@@ -146,8 +146,21 @@ enum AnimalColumn {
 		}
 	}),
 	
+
+	LOCATION(AnimalsView.getString("_UI_LocationColumn_label"), new ColumnWeightData(2, 80, true),
+			TrackerPackage.Literals.ANIMAL__LOCATION, "{9}", 
+			new Comparator<Animal>() {
+		public int compare(Animal animal1, Animal animal2) {
+			String loc1 = animal1.getLocation() == null ? "" : animal1
+					.getLocation();
+			String loc2 = animal2.getLocation() == null ? "" : animal2
+					.getLocation();
+			return loc1.compareTo(loc2);
+		}
+	}),
+	
 	AID(AnimalsView.getString("_UI_AlternativeIDColumn_label"), new ColumnWeightData(2, 120, true),
-			TrackerPackage.Literals.ANIMAL__ALTERNATIVE_ID, "{9}", 
+			TrackerPackage.Literals.ANIMAL__ALTERNATIVE_ID, "{10}", 
 			new Comparator<Animal>() {
 		public int compare(Animal animal1, Animal animal2) {
 			String id1 =animal1.getAlternativeID() == null ? "" : animal1
@@ -159,7 +172,7 @@ enum AnimalColumn {
 	}),
 	
 	COMMENTS(AnimalsView.getString("_UI_CommentsColumn_label"), new ColumnWeightData(2, 200, true),
-			TrackerPackage.Literals.ANIMAL__COMMENTS, "{10}", 
+			TrackerPackage.Literals.ANIMAL__COMMENTS, "{11}", 
 			new Comparator<Animal>() {
 		public int compare(Animal animal1, Animal animal2) {
 			String comments1 = animal1.getComments() == null ? "" : animal1
