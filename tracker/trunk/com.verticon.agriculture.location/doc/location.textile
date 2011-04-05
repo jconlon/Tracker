@@ -12,14 +12,19 @@ Tracker Agriculture Editor and Location Service integrates state of the art GIS(
 
 h3. Solution Requirements
 
-In order to provide an open, accessible and industry standard solution the Location Service will provide solutions for:
-# Location of animals within a local premises
-# Location of animals moved between premises
-# Simple end user visualization of premises geographies through integration with industry standard geo browsers.[2]
+In order to provide an open, accessible and industry standard solution the Agriculture Editor and Location Service will provide solutions for:
+# Simple end user visualization of premises geographies through integration with industry standard geo browsers. [2]
 # Integration with off the self GPS devices for data positioning
-# Desktop editors, views, and utilities for associations, auditors, and processors to geographically 
-** manage internal, inter and intra association information flows
-** market regional and _local_ based farm products 
+# Desktop editors, views, and utilities for modeling agriculture associations allowing livestock producers auditors, and processors to geographically 
+** manage internal, inter and intra association animal movements and information flows
+** create marketing and/or auditing reports for regional and _local_ based farm products 
+# Show location of animals within the local premises
+** Creation of an animal Position event from GPS devices associated with RFID readers
+** Position coordinates determine the location names based on best fit of list of geographically specified locations
+** Visual sighting of animals with assignment of location names selected from list of geographically specified locations
+** Most current Sighting event or Position event will determine location
+# Show the location of animals moved between premises
+
 
 h3. Technical Requirements
 
