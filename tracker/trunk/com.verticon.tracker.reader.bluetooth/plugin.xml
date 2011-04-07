@@ -13,5 +13,16 @@
          </description>
       </wizard>
    </extension>
+   <extension
+         point="com.verticon.tracker.irouter.gps.ui.gpsWizards">
+      <wizard
+            class="com.verticon.tracker.reader.event.bluetooth.BluetoothURIWizard"
+            id="com.verticon.tracker.reader.bluetooth.wizard2"
+            name="Bluetooth GPS">
+         <description>
+            creates a bluetooth gps device.
+         </description>
+      </wizard>
+   </extension>
 
 </plugin>

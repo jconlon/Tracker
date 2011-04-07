@@ -19,17 +19,16 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IWorkbench;
 
-import com.verticon.tracker.reader.IReader;
-import com.verticon.tracker.reader.IReaderWizard;
+import com.verticon.tracker.irouter.gps.ui.IURIWizard;
 
-public class BluetoothReaderWizard extends Wizard implements IReaderWizard, IDeviceSelector {
+public class BluetoothURIWizard extends Wizard implements IURIWizard, IDeviceSelector{
 
-	private static final String WIZARD_TITLE = "Add a Bluetooth Receiver Publisher";
+	private static final String WIZARD_TITLE = "Add a Bluetooth Device";
 
 	/**
 	 * Finished product of this Wizard
 	 */
-	private IReader reader;
+	private URI target;
 
 	/**
 	 * Pages to select a RemoteDevice service URI.
@@ -69,34 +68,30 @@ public class BluetoothReaderWizard extends Wizard implements IReaderWizard, IDev
 	 */
 	@Override
 	public boolean performFinish() {
-		URI target = null;
+	    target = null;
 		try {
 			target = getSelectedTarget();
 		} catch (URISyntaxException e) {
 			secondPage.setErrorMessage(e.getMessage());
 			return false;
 		}
-		reader = new BluetoothReader();
-		reader.setTarget(target);
+		
 		return true;
 
 	}
 
 	/**
-	 * Return the finished publisher
+	 * Return the finished target
 	 */
-	public IReader getReader() {
-		return reader;
+	@Override
+	public URI getURI() {
+		return target;
 	}
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		// this.workbench = workbench;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.verticon.tracker.reader.event.bluetooth.IDeviceSelector#getSelectedDevice()
-	 */
-	@Override
 	public RemoteDevice getSelectedDevice() {
 		return firstPage.getSelectedDevice();
 	}

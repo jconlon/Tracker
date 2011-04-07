@@ -40,6 +40,21 @@ import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.WeightMeasurementUnit;
 
+/**
+ * EventAdmin EventHandler for processes Events coming from the iRouter.
+ * iRouter sends information to EventAdmin as Envelopes carried within
+ * the pay-load property.  
+ * 
+ * Envelopes have an identification associated with them
+ * which is mapped to the Animal ID and the Envelopes identify 
+ * the scope or type of value they carry.
+ * 
+ * Currently two event scopes are supported:
+ *  <ol>
+ *  <li>animal.position</li>
+ *  <li>animal.weight</li>
+ *  </ol>
+ */
 public class EnvelopeEventHandler implements EventHandler {
 	private static final String ANIMAL_POSITION_SCOPE = "animal.position";
 	private static final String IROUTER_PAYLOAD ="com.verticon.tracker.irouter.payload";
@@ -71,6 +86,11 @@ public class EnvelopeEventHandler implements EventHandler {
 
 	}
 
+	/**
+	 * Processes incoming iRouter payload events
+	 * @param event with the payload an OSGi Envelope
+	 * @param domain
+	 */
 	private void handleIRouterPayload(org.osgi.service.event.Event event,
 			TransactionalEditingDomain domain) {
 		String source = (String) event
@@ -81,11 +101,12 @@ public class EnvelopeEventHandler implements EventHandler {
 					source);
 			return;
 		}
-		if (!(payload instanceof Envelope)||!(payload instanceof Position)) {
+		if (!(payload instanceof Envelope)) {
 			logger.error(bundleMarker,
-					"Unsupported payload from iRouter component={}", source);
+					"Unsupported payload from iRouter component={} payload={}", source,payload);
 			return;
 		}
+		
 		Envelope envelope = (Envelope) payload;
 		addEnvelopeToDomain(source, domain, envelope);
 
@@ -191,6 +212,7 @@ public class EnvelopeEventHandler implements EventHandler {
 		positionEvent.setLatitude(degrees(position.getLatitude().getValue()));
 		positionEvent.setLongitude(degrees(position.getLongitude().getValue()));
 		positionEvent.setDateTime(new Date(position.getLatitude().getTime()));
+		positionEvent.setElectronicallyRead(true);
 		return positionEvent;
 	}
 	
