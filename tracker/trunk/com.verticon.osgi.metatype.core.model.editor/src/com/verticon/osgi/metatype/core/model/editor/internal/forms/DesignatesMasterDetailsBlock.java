@@ -94,8 +94,22 @@ import com.verticon.osgi.metatype.core.model.editor.internal.handlers.CreateDesi
 import com.verticon.osgi.metatype.presentation.MetatypeEditorPlugin;
 
 
-
+/**
+ * A Master-Details Forms based UI created within the Factories Tab of the iRouter Component 
+ * Configuration Metatype Editor.
+ * 
+ * Master is presented as a Tree of Configuration Factories and thier child instances. The Detail 
+ * is a Form for displaying and editing of the attributes of the element selected in the Master Tree.
+ * 
+ * A LocationURI defined on the MasterTree is:
+ *  com.verticon.tracker.configuration.form.master
+ * 
+ * @author jconlon
+ *
+ */
 public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
+
+	private static final String URI_LOCATION_REGISTRATION = "com.verticon.tracker.configuration.form.master";
 
 	private static final String MASTER_SECTION_DESCRIPTION = "The tree contains iRouter factories and services.  Service configuration details are editable on the right";
 
@@ -264,7 +278,7 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 		); // needed for later contributions
 		masterViewer.getTree().setMenu(mgr.createContextMenu(masterViewer.getTree()));
 		//Registering the MenuManager for contributions using ExtensionPoints
-		site.registerContextMenu("com.verticon.tracker.configuration.form.master",mgr,masterViewer);
+		site.registerContextMenu(URI_LOCATION_REGISTRATION,mgr,masterViewer);
 	}
 
 	@Override
