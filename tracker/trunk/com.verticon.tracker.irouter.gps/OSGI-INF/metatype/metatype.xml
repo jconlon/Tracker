@@ -8,8 +8,8 @@
     <AD name="Connection uri" id="connection.uri" 
     	type="String"
     	required="true" 
-    	default="btspp://001C881333D6:1;authenticate=false;encrypt=false;master=false" 
-    	description="URI to connect to the gps device. Example socket://192.168.0.116:2345"/> 
+    	default="" 
+    	description="URI to connect to the gps device. Examples socket://192.168.0.116:2345 or btspp://001C881333D6:1;authenticate=false;encrypt=false;master=false"/> 
     
     <AD name="Wiring group name" id="tracker.wiring.group.name" 
     	type="String"
