@@ -234,14 +234,18 @@ public class WireAdminSystemTest extends TestCase {
 		
 		//Shutdown the Consumer
 		producer.setUpDisconnectionLatch(1);
+		logger.debug(bundleMarker, "Unregistering the consumer");
 		consumerServiceReg.unregister();
 		//Wait at latch
 		boolean disconnected = producer.disconnectionLatch.await(2, TimeUnit.SECONDS);
 		assertTrue("Should have disconnected", disconnected);
 		
 		//Change the scope and re-register the consumer
-		consumer.setUpConnectionLatch(1);
+		//Wires are persisted and the race to delete a wire before it makes a connection
+		//may cause the consumer to connect and then to disconnect
+//		consumer.setUpConnectionLatch(1);//because of the above a simple connection latch does not work
 		consumerProperties.put("wireadmin.consumer.scope", new String[]{"scopeXXX"});
+		logger.debug(bundleMarker, "Re - registering the consumer");
 		consumerServiceReg = context.registerService(
 				Consumer.class.getName(), 
 				consumer, 
@@ -250,9 +254,11 @@ public class WireAdminSystemTest extends TestCase {
 		
 		//Wait at latch
 		//But the scopes are not compatible so there should be no connection and this should time out
-	    connected = consumer.connectionLatch.await(2, TimeUnit.SECONDS);
-		assertFalse(connected);
+		//  not necessarily see note above
+//	    connected = consumer.connectionLatch.await(2, TimeUnit.SECONDS);
+//		assertFalse(connected);
 		
+		TimeUnit.SECONDS.sleep(1);
 		//The consumer should have no wires connected
 		assertNull(consumer.wires);
 		
