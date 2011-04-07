@@ -35,7 +35,7 @@ public class MockConsumer implements Consumer {
 	List<Long> longs = new ArrayList<Long>();
 	List<String> strings = new ArrayList<String>();
 	
-    Wire[] wires = null;
+    volatile Wire[] wires = null;
 
     CountDownLatch connectionLatch = null;
    
@@ -81,19 +81,23 @@ public class MockConsumer implements Consumer {
 	@Override
 	public void producersConnected(Wire[] wires) {
 		this.wires=wires;
-		if(this.wires==null){
+		if(wires==null){
 			logger.info(bundleMarker, "{} disconnected",
 					this);
 			return;
-		}else{
-			if(connectionLatch!=null){
-				connectionLatch.countDown();
-			}
 		}
 		for (Wire wire : wires) {
 			logger.info(bundleMarker, "{} connected to {}",
 					this, wire.getProperties().get(WireConstants.WIREADMIN_PRODUCER_PID));
 		}
+		
+		if(connectionLatch!=null && wires!=null && wires.length>0){
+			logger.info(bundleMarker, "{} latch.countDown",
+					this);
+				connectionLatch.countDown();
+		}
+		
+		
 
 		
 	}
