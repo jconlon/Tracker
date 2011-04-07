@@ -60,7 +60,7 @@ public class SelectDeviceWizardPage extends WizardPage implements
 
 	// blocking one
 
-	SelectDeviceWizardPage(String pageName) {
+	public SelectDeviceWizardPage(String pageName) {
 		super(pageName);
 		setTitle("Select a Bluetooth Device");
 		setDescription("Specify the Bluetooth Device for the BluetoothReader.");
@@ -216,6 +216,7 @@ public class SelectDeviceWizardPage extends WizardPage implements
 	 * list view.
 	 */
 	private void discoverRemoteDevices() {
+		logger.debug(bundleMarker, "{} starting device discovery",this);
 		setPageComplete(false);
 		setErrorMessage(null);
 		remoteDevices.clear();
@@ -272,7 +273,7 @@ public class SelectDeviceWizardPage extends WizardPage implements
 			setErrorMessage("Please select Bluetooth device.");
 			return;
 		}
-
+		logger.debug(bundleMarker, "{} Selected device={}",this,selectedDevice);
 		setPageComplete(true);
 
 		setErrorMessage(null);

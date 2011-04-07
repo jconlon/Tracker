@@ -158,7 +158,7 @@ public class SelectServiceWizardPage extends WizardPage implements
 		return "SelectServiceWizardPage []";
 	}
 
-	SelectServiceWizardPage(String pageName) {
+	public SelectServiceWizardPage(String pageName) {
 		super(pageName);
 		setTitle("Select a Bluetooth Service");
 		setDescription(
@@ -207,6 +207,7 @@ public class SelectServiceWizardPage extends WizardPage implements
 
 	@Override
 	public void setVisible(boolean visible) {
+		logger.debug(bundleMarker, "{} visible={}",this,visible);
 		if (visible) {
 			super.setVisible(visible);
 			discoverRemoteDeviceServices();
@@ -466,8 +467,9 @@ public class SelectServiceWizardPage extends WizardPage implements
 	 * services, refresh the list view.
 	 */
 	private void discoverRemoteDeviceServices() {
+		logger.debug(bundleMarker, "{} starting service discovery",this);
 		setPageComplete(false);
-		final RemoteDevice device = ((BluetoothReaderWizard) getWizard())
+		final RemoteDevice device = ((IDeviceSelector) getWizard())
 				.getSelectedDevice();
 		if (device == null) {
 			setErrorMessage("Unanticipate Result. The first page completed but passed a null Remote Device.");
