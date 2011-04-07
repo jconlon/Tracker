@@ -32,12 +32,13 @@ public class MetatypeFormsEditor extends MetatypeEditor {
 		super.createPages();
 
 		removeUnusedPages();
-		EditorPart fp = new DesignatesFormPage(this);
+		DesignatesFormPage fp = new DesignatesFormPage(this);
 		fp.createPartControl(getContainer());
 
 		try {
 			int index = addPage(fp, getEditorInput());
 			setPageText(index, "Factories");
+			fp.initializeMenus();
 		} catch (PartInitException e) {
 			logger.error(Utils.bundleMarker, "Failed to create forms page.", e);
 		}

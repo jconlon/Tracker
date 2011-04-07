@@ -511,9 +511,7 @@
                	<visibleWhen>
                	     <and>
                          <with variable="selection">
-		                  <iterate
-                          ifEmpty="false"
-                          operator="or">
+		                  <iterate ifEmpty="false" operator="or">
       						 <instanceof value="com.verticon.tracker.Event"/>
     					  </iterate>
     					 </with>

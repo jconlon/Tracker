@@ -77,6 +77,7 @@ public class DesignatesFormPage extends FormPage implements IPropertyListener {
 		managedForm.getToolkit().decorateFormHeading(form.getForm());
 		masterDetailsBlock = new DesignatesMasterDetailsBlock(this);
 		masterDetailsBlock.createContent(managedForm);
+		
 	}
 	
 	@Override
@@ -107,4 +108,9 @@ public class DesignatesFormPage extends FormPage implements IPropertyListener {
 			masterDetailsBlock.prepareToReload();
 		}
 	}
+	
+	public void initializeMenus(){
+		masterDetailsBlock.registerContextMenu(this.getEditorSite());
+	}
+
 }

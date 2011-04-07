@@ -46,6 +46,8 @@ import org.eclipse.emf.edit.command.DeleteCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.GroupMarker;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.databinding.viewers.ViewerProperties;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -66,8 +68,10 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.DetailsPart;
 import org.eclipse.ui.forms.IDetailsPage;
@@ -249,7 +253,18 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 		
 		setInput();
 
+		
+	}
 
+	void registerContextMenu(IEditorSite site) {
+		//Setting up a Context Menu is done with a MenuManager
+		MenuManager mgr = new MenuManager();
+		mgr.add(
+		    new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS)
+		); // needed for later contributions
+		masterViewer.getTree().setMenu(mgr.createContextMenu(masterViewer.getTree()));
+		//Registering the MenuManager for contributions using ExtensionPoints
+		site.registerContextMenu("com.verticon.tracker.configuration.form.master",mgr,masterViewer);
 	}
 
 	@Override
@@ -347,6 +362,13 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 		
 		form.getToolBarManager().add(haction);
 		form.getToolBarManager().add(vaction);
+		//Experiment
+//		ToolBarManager manager = (ToolBarManager) form.getToolBarManager();
+//		IMenuService menuService = (IMenuService) workbench.getActiveWorkbenchWindow().getService(
+//				IMenuService.class);
+//		menuService.populateContributionManager(manager, "popup:formsToolBar");
+//		manager.update(true);
+
 	}
 	
 
@@ -649,5 +671,6 @@ public class DesignatesMasterDetailsBlock extends MasterDetailsBlock {
 		masterViewer.collapseAll();
 	}
 
+	
 	
 }
