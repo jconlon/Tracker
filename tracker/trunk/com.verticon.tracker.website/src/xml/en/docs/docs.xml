@@ -65,7 +65,7 @@
     <section>
 		<title>Other Documentation</title>
 		<table xml:id="tracker.docs.models.table" frame='all'>
-			<title>Tracker MetaModel Diagrams</title>
+			<title>Tracker MetaModel Diagrams and References</title>
 			<tgroup cols='3' align='left' colsep='1' rowsep='1'>
 				<colspec colname='c1' />
 				<colspec colname='c2' />
@@ -78,6 +78,16 @@
 					</row>
 				</thead>
 				<tbody>
+				    <row>
+						<entry>
+							<ulink
+								url="http://tracker.verticon.com/Tracker/documentation/agriculture-MetaModel.pdf">
+								agriculture-MetaModel.pdf
+							</ulink>
+						</entry>
+						<entry>Agriculture Editor</entry>
+						<entry>http://www.verticon.com/agriculture/1.0/ag</entry>
+					</row>
 					<row>
 						<entry>
 							<ulink
@@ -86,7 +96,7 @@
 							</ulink>
 						</entry>
 						<entry>Premises Editor</entry>
-						<entry>http://www.verticon.com/ns/tracker/0.1.0</entry>
+						<entry>http://www.verticon.com/tracker/0.4.2/premises</entry>
 					</row>
 					<row>
 						<entry>
@@ -96,7 +106,27 @@
 							</ulink>
 						</entry>
 						<entry>Fair Editor</entry>
-						<entry>http://www.verticon.com/ns/tracker/fair/0.1.0</entry>
+						<entry>http://www.verticon.com/tracker.fair/0.2.1/fair</entry>
+					</row>
+					<row>
+						<entry>
+							<ulink
+								url="http://code.google.com/apis/kml/documentation/kmlreference.html">
+								KML Reference
+							</ulink>
+						</entry>
+						<entry>Geography Editor</entry>
+						<entry>http://www.google.com/kml/ext/2.2</entry>
+					</row>
+					<row>
+						<entry>
+							<ulink
+								url="http://www.osgi.org/xmlns/metatype/v1.1.0/metatype.xsd">
+								metatype.xsd
+							</ulink>
+						</entry>
+						<entry>Metatype Editor</entry>
+						<entry>http://www.osgi.org/xmlns/metatype/v1.1.0</entry>
 					</row>
 				</tbody>
 			</tgroup>
