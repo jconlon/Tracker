@@ -72,6 +72,9 @@ public class ConnectionFactoryServiceTest extends TestCase {
 
 	}
 
+	/**
+	 * Called by the component to start the service;
+	 */
 	public void startup() {
 		exec.submit(new Server());
 		startUpGate.countDown();
@@ -94,12 +97,9 @@ public class ConnectionFactoryServiceTest extends TestCase {
 		super.tearDown();
 	}
 
-	public void test_ConnectionFactory_service() {
-		assertNotNull(connectorService);
-	}
-
 	public void test_Connection() throws IOException {
-
+		assertNotNull(connectorService);
+		
 		Connection con = connectorService.open(TARGET_SERVER);
 
 		assertNotNull(con);
@@ -111,7 +111,7 @@ public class ConnectionFactoryServiceTest extends TestCase {
 		try {
 			is = ssc.openInputStream();
 		} catch (Exception e) {
-			fail("Make sure the server is running at " + TARGET_SERVER);
+			fail(e.getLocalizedMessage()+" Make sure the server is running at " + TARGET_SERVER);
 		}
 		assertNotNull(is);
 		os = ssc.openOutputStream();
