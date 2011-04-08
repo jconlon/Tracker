@@ -3,6 +3,7 @@
  */
 package com.verticon.tracker.irouter.wireadmin.internal;
 
+import static com.google.common.collect.Maps.newHashMap;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
@@ -22,6 +23,8 @@ import org.osgi.framework.Constants;
 import org.osgi.service.wireadmin.WireAdminEvent;
 import org.osgi.service.wireadmin.WireConstants;
 
+import com.google.common.collect.ImmutableMap;
+
 /**
  * 
  * iRouter Producers and Consumers contain properties that aid in the 
@@ -36,28 +39,29 @@ import org.osgi.service.wireadmin.WireConstants;
 public class GroupConnectorTest {
 
 	private Map<String, Object> propertiesProducer1 = null;
-	private static final String[] SCOPE_PRODUCER_1 = {"b", "d","e","f"};
+	private static final String[] SCOPE_PRODUCER_1 = {"b", "d", "e", "f"};
 	private Map<String, Object> propertiesConsumer1 = null;
-	private static final String[] SCOPE_CONSUMER_1 = {"a", "b", "c", "d"};
+	private static final String[] SCOPE_CONSUMER_1 = {"a", "b", "c", "d"};//intersection of b and d
 	
 	private GroupConnector instance = null;
 	private String wireGroupName = "test";
 	
 	
-	private IWireCreator wireCreator  = null;
+	private IWireCreator mockWireCreator  = null;
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		wireCreator = createMock(IWireCreator.class);//new MockWireCreator();
+		mockWireCreator = createMock(IWireCreator.class);//new MockWireCreator();
 
-		instance = new GroupConnector(wireGroupName,wireCreator);
-		propertiesProducer1 = new HashMap<String,Object>();
+		instance = new GroupConnector(wireGroupName,mockWireCreator);
+		
+		propertiesProducer1 = newHashMap();
 		propertiesProducer1.put(Constants.SERVICE_PID, "producer.pid.1");
 		propertiesProducer1.put(WireConstants.WIREADMIN_PRODUCER_SCOPE, SCOPE_CONSUMER_1);
 		
-		propertiesConsumer1 = new HashMap<String,Object>();
+		propertiesConsumer1 = newHashMap();
 		propertiesConsumer1.put(Constants.SERVICE_PID, "consumer.pid.1");
 		propertiesConsumer1.put(WireConstants.WIREADMIN_CONSUMER_SCOPE, SCOPE_PRODUCER_1);
 	}
@@ -68,7 +72,7 @@ public class GroupConnectorTest {
 	@After
 	public void tearDown() throws Exception {
 		instance = null;
-		wireCreator = null;
+		mockWireCreator = null;
 	}
 
 	@Test
@@ -103,7 +107,7 @@ public class GroupConnectorTest {
 	 */
 	@Test
 	public void testSetSingleProducer() {
-		replay(wireCreator);
+		replay(mockWireCreator);
 		instance.setProducer(propertiesProducer1);
 	}
 
@@ -114,15 +118,14 @@ public class GroupConnectorTest {
 	 */
 	@Test
 	public void testSetSingleConsumer() {
-		replay(wireCreator);
+		replay(mockWireCreator);
 		instance.setConsumer(propertiesConsumer1);
 	}
 
 	
 	@Test
 	public void testSetProducer() {
-		expect(wireCreator.handleWire(isA(WireParameters.class))).andReturn(true);
-		replay(wireCreator);
+		setUpMockWireCreator();
 
 		//First add a consumer
 		instance.setConsumer(propertiesConsumer1);
@@ -135,14 +138,13 @@ public class GroupConnectorTest {
 		
 		//Add the consumer again
 		instance.setConsumer(propertiesConsumer1);
-		verify(wireCreator);
+		verify(mockWireCreator);
 	}
 	
 	
 	@Test
 	public void testSetConsumer() {
-		expect(wireCreator.handleWire(isA(WireParameters.class))).andReturn(true);
-		replay(wireCreator);
+		setUpMockWireCreator();
 		//First add a producer
 		instance.setProducer(propertiesProducer1);
 		
@@ -154,7 +156,7 @@ public class GroupConnectorTest {
 		
 		//Add the producer again
 		instance.setProducer(propertiesProducer1);
-		verify(wireCreator);
+		verify(mockWireCreator);
 	}
 	/**
 	 * Test method for {@link com.verticon.tracker.irouter.wireadmin.internal.GroupConnector#scopeIntersection(java.lang.String[], java.lang.String[])}.
@@ -172,13 +174,10 @@ public class GroupConnectorTest {
 	}
 
 	
-//	private static class MockWireCreator implements IWireCreator{
-//		WireParameters wireParameters;
-//		@Override
-//		public boolean createWire(WireParameters wireParameters) {
-//			this.wireParameters =wireParameters;
-//			return true;
-//		}
-//		
-//	}
+	private void setUpMockWireCreator() {
+		expect(mockWireCreator.handleWire(isA(WireParameters.class))).andReturn(true);
+		expect(mockWireCreator.handleWire(isA(WireParameters.class))).andReturn(false);
+		expect(mockWireCreator.handleWire(isA(WireParameters.class))).andReturn(false);
+		replay(mockWireCreator);
+	}
 }
