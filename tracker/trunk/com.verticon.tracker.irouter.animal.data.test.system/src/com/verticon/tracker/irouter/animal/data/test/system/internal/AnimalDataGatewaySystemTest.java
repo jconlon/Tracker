@@ -42,8 +42,12 @@ import com.verticon.tracker.irouter.common.TrackerConstants;
  * services that produce a list of animal life data records extracted from a
  * specified Premises model file.
  * 
- * This system test is a JUnit Plugin test that uses a Mock Producer to generate
- * states, and a Mock Consumer to receive adapted receivedObject.
+ * This system test is a JUnit Plugin test called by a DS component. It creates a 
+ * AnimalDataGateway configuration and submits it to the configuration admin service
+ * for the creation of an iRouter Animal Data Gateway factory instance.
+ * 
+ * The component references the ConfigAdmin and Consumer Services.  The Consumer Service is
+ * a simple MockConsumer that is used to save consumed objects.
  * 
  * This system test uses both JUnit Plugin framework and a Declarative Services
  * specification to inject the MockConsumer. Use of both of these frameworks
@@ -168,6 +172,7 @@ public class AnimalDataGatewaySystemTest extends TestCase {
 		// Consumer has a latch, set it to go off after receiving 1 object
 		mockConsumer.setUpLatch(1);
 
+		//Create the instance
 		config.update((Dictionary) conf);
 
 		boolean receivedRecords = mockConsumer.latch
