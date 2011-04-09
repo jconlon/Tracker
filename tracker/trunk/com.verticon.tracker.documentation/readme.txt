@@ -16,9 +16,12 @@ See also the book Pragmatic Version Control page 143 on use of externals.
 Build Instructions
 
 For releases:
-1. Buckminster: deploy.documentation.to.local.s3.staging - Moves all artifacts 
+
+1. Change publish date. Just update the file: /home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.doc/docbook/bookinfo/bookinfo.xml
+
+2. Buckminster: deploy.documentation.to.local.s3.staging - Moves all artifacts 
    over to ~/Uploads/s3.  
    
    
-2. Note: This does not mirror these to S3. Go to com.verticon.tracker.product.desktop.releng 
+3. Note: This does not mirror these to S3. Go to com.verticon.tracker.product.desktop.releng 
 and run `Sync S3.launch`
