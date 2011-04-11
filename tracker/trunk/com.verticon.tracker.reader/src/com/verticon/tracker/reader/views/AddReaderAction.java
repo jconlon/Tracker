@@ -45,7 +45,7 @@ class AddReaderAction extends Action {
 				WizardDialog dialog = new WizardDialog(window.getShell(),addWizard);
 				dialog.open();
 			} catch (PartInitException e) {
-				ErrorDialog.openError(window.getShell(), "Add Reader Problems", //$NON-NLS-1$
+				ErrorDialog.openError(window.getShell(), "Can not add a Reader", //$NON-NLS-1$
 						null, // no special message
 						((PartInitException) e).getStatus());
 			}
