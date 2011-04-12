@@ -15,16 +15,10 @@ package com.verticon.tracker.reader.wizards;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceVisitor;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.wizard.IWizardNode;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 
 import com.verticon.tracker.editor.presentation.SelectAnimalDocumentWizardPage;
@@ -89,47 +83,14 @@ public class AddEventReaderWizard extends Wizard {
 	}
 
 	public void init(IWorkbench workbench) throws PartInitException {
-		projectWithTemplate = hasTemplates( workbench);
+		projectWithTemplate = TrackerEditorUtils.hasTemplates( workbench);
 		if(projectWithTemplate==null){
 			throw new PartInitException("Could not find any animal templates in the active editor's project."+APPEND_INSTRUCTION);
 		}
 		this.workbench = workbench;
 	}
 	
-	private IProject hasTemplates(IWorkbench iworkbench)throws PartInitException {
-		IProject result = null;
-		//Project
-		if (iworkbench != null){
-			IWorkbenchWindow iworkbenchwindow = iworkbench.getActiveWorkbenchWindow();
-				if (iworkbenchwindow != null){
-						IWorkbenchPage iworkbenchpage = iworkbenchwindow.getActivePage();
-							if (iworkbenchpage != null){
-								IEditorPart editor = iworkbenchpage.getActiveEditor();
-								if(editor ==null){
-									throw new PartInitException("Could not find an active editor."+APPEND_INSTRUCTION);
-								}else{
-									IResource resource = TrackerEditorUtils.extractResource(editor);
-									if(resource == null){
-										throw new PartInitException("Could not find any resources in the active editor."+APPEND_INSTRUCTION);
-									}else{
-										IProject project = resource.getProject();
-										TemplateVisitor visitor = new TemplateVisitor();
-										try {
-											project.accept(visitor);
-											result = visitor.foundTemplate?project:null;
-										} catch (CoreException e) {
-											throw new PartInitException(e.getLocalizedMessage());
-										}
-									}
 
-								}
-
-							}
-				}
-		}
-
-		return result;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -166,16 +127,4 @@ public class AddEventReaderWizard extends Wizard {
 		addPage(publisherWizardSelection);
 	}
 	
-	private class TemplateVisitor implements IResourceVisitor{
-		boolean foundTemplate = false;
-		@Override
-		public boolean visit(IResource resource) throws CoreException {
-			if(resource.getFileExtension()!=null && resource.getFileExtension().equals("animal")){
-				foundTemplate = true;
-			}
-			return !foundTemplate;
-		}
-		
-	}
-
 }
