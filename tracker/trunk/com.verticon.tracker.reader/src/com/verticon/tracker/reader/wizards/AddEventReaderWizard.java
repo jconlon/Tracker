@@ -43,9 +43,6 @@ import com.verticon.tracker.reader.views.ReaderViewModel;
 public class AddEventReaderWizard extends Wizard {
 
 	private static final String WIZARD_TITLE = "Add an Event Reader";
-	private static final String APPEND_INSTRUCTION = 
-		"\n\nThe Add Reader Wizard looks for animal template files inside the project associated with the active editor."+
-		" To add a Reader, make sure that the active editor has opened a file from a project that contains at least one animal template file.";
 	private static final String WIZARD_DIALOG_TAG = "AddReaderWizard";
 
 	private final ReaderViewModel readerViewModel;
@@ -84,9 +81,9 @@ public class AddEventReaderWizard extends Wizard {
 
 	public void init(IWorkbench workbench) throws PartInitException {
 		projectWithTemplate = TrackerEditorUtils.hasTemplates( workbench);
-		if(projectWithTemplate==null){
-			throw new PartInitException("Could not find any animal templates in the active editor's project."+APPEND_INSTRUCTION);
-		}
+//		if(projectWithTemplate==null){
+//			throw new PartInitException("Could not find any animal templates in the active editor's project."+APPEND_INSTRUCTION);
+//		}
 		this.workbench = workbench;
 	}
 	
@@ -117,7 +114,12 @@ public class AddEventReaderWizard extends Wizard {
 	@Override
 	public void addPages() {
 		setWindowTitle(WIZARD_TITLE);
-		selectAnimalDocumentWizardPage = new SelectAnimalDocumentWizardPage();
+		if(projectWithTemplate==null){
+			selectAnimalDocumentWizardPage = new SelectAnimalDocumentWizardPage(true);
+			
+		}else{
+			selectAnimalDocumentWizardPage = new SelectAnimalDocumentWizardPage(false);
+		}
 		selectAnimalDocumentWizardPage.setTitle("Select an Animal Document to use as a template for the Event Publisher");
 		addPage(selectAnimalDocumentWizardPage);
 		selectAnimalDocumentWizardPage.init(projectWithTemplate);

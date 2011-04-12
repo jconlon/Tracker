@@ -13,6 +13,7 @@
  */
 package com.verticon.tracker.editor.presentation;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,8 +21,14 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.dialogs.IMessageProvider;
+import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -47,11 +54,14 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 	private TreeViewer treeViewer;
 	private IProject project;
 	private IFile selectedFile;
+	private final boolean needsFileDialog ;
+	private FileFieldEditor fileFieldEditor = null;
 	
-	public SelectAnimalDocumentWizardPage() {
+	public SelectAnimalDocumentWizardPage(boolean needsFileDialog) {
 		super("selectAnimalDocument");
 		setTitle("Select Animal Document");
 		setDescription("Select the Animal Document to use as an Event Template");
+		this.needsFileDialog =needsFileDialog;
 	}
 
 	/* (non-Javadoc)
@@ -59,22 +69,42 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 	 */
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
-		final GridLayout gridLayout = new GridLayout();
-		gridLayout.numColumns = 3;
-		container.setLayout(gridLayout);
-		
-		
-		treeViewer=createViewer( container);
-		GridData data = new GridData(GridData.FILL_BOTH);
-		data.grabExcessHorizontalSpace=true;
-		data.grabExcessVerticalSpace=true;
-		data.heightHint = 400;
-		data.widthHint = 300;
-		treeViewer.getControl().setLayoutData(data);
-        treeViewer.addSelectionChangedListener(this);
+		if(!needsFileDialog){
+			final GridLayout gridLayout = new GridLayout();
+			gridLayout.numColumns = 3;
+			container.setLayout(gridLayout);
+			treeViewer=createViewer( container);
+			GridData data = new GridData(GridData.FILL_BOTH);
+			data.grabExcessHorizontalSpace=true;
+			data.grabExcessVerticalSpace=true;
+			data.heightHint = 400;
+			data.widthHint = 300;
+			treeViewer.getControl().setLayoutData(data);
+			treeViewer.addSelectionChangedListener(this);
+		}else{
+			fileFieldEditor = new FileFieldEditor("templateFile", "Animal Template File", container){
+
+				/* (non-Javadoc)
+				 * @see org.eclipse.jface.preference.FileFieldEditor#checkState()
+				 */
+				@Override
+				protected boolean checkState() {
+					boolean state =  super.checkState();
+					if(state && !getStringValue().isEmpty()){
+						selectedFile = convert(getStringValue());
+						updatePageComplete();
+					}
+					return state;
+				}};
+				fileFieldEditor.setFileExtensions(new String[]{"*.animal"});
+				IWorkspace workspace = ResourcesPlugin.getWorkspace();
+				IWorkspaceRoot workspaceRoot = workspace.getRoot();
+				fileFieldEditor.setFilterPath(workspaceRoot.getRawLocation().toFile());
+			
+		}
 		setControl(container);
 	}
-	
+	   
 	private TreeViewer createViewer(Composite parent) {
 		TreeViewer viewer =
 			new TreeViewer(parent, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
@@ -90,7 +120,7 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 	 */
 	@Override
 	public void setVisible(boolean visible) {
-		if (visible) {
+		if (visible && !needsFileDialog) {
 			treeViewer.setInput(project);
 			treeViewer.refresh();
 		}
@@ -98,28 +128,31 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 	}
 
 	public AnimalTemplateBean getTemplateBean() {
-		if(selectedFile==null){
-			return null;
+		AnimalTemplateBean result = null;
+		if(selectedFile!=null){
+			result = getTemplateAnimalBean(selectedFile);;
 		}
 		
-		return getTemplateAnimalBean(selectedFile);
+		return result;
 	}
-
+	
 	/**
 	 * @param resource
 	 * @return
 	 */
 	private AnimalTemplateBean getTemplateAnimalBean(IFile animalTemplateFile) {
-		AnimalTemplateBean templateBean = AnimalTemplateBean.instance(animalTemplateFile);
-		return templateBean;
+		AnimalTemplateBean result = null;
+		if(animalTemplateFile.isAccessible()){
+			result = AnimalTemplateBean.instance(animalTemplateFile);
+		}
+		return result;
 	}
 	
 	public void init(IProject project){
 		this.project =project;
 	}
 
-	
-	
+
 	public void selectionChanged(SelectionChangedEvent event) {
 		ISelection selection = event.getSelection();
 		List<IResource> selectedResources = new ArrayList<IResource>();
@@ -157,13 +190,13 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 	   private void updatePageComplete() {
 	      setPageComplete(false);
 
-	      if (selectedFile == null ) {
+	      if (selectedFile == null) {
 	         setMessage(null);
 	         setErrorMessage("Please select an existing Animal Document file");
 	         return;
 	      }
 
-	      AnimalTemplateBean templateAnimalBean =  getTemplateAnimalBean(selectedFile);
+	      AnimalTemplateBean templateAnimalBean =  getTemplateBean();
 	      if (templateAnimalBean == null || templateAnimalBean.numberOfEvents()==0) {
 		         setMessage(null);
 		         setErrorMessage(
@@ -181,10 +214,21 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 	         return;
 	      
 	   }
+	boolean fileFieldIsValid() {
+		return fileFieldEditor!=null;
+	}
 
 	public IFile getSelectedFile() {
 		return selectedFile;
 	}
 	
-	
+	private static IFile convert(String fileName) {
+		   File file = new File(fileName);
+		   return convert(file);
+	}
+	private static IFile convert(File file) {
+		IWorkspace workspace= ResourcesPlugin.getWorkspace();
+		   IPath location= Path.fromOSString(file.getAbsolutePath());
+		   return workspace.getRoot().getFileForLocation(location);
+	}
 }
