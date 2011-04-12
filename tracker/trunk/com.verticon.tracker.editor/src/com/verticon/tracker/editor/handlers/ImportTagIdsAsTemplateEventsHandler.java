@@ -13,10 +13,12 @@ package com.verticon.tracker.editor.handlers;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.verticon.tracker.editor.presentation.AddTagIdsAndTemplateWizard;
@@ -55,19 +57,24 @@ public class ImportTagIdsAsTemplateEventsHandler extends AbstractHandler {
 		}
 		IEditorPart editorPart = HandlerUtil.getActiveEditorChecked(event);
 
-		IPremisesProvider premisesProvider = (IPremisesProvider) editorPart
-				.getAdapter(IPremisesProvider.class);
+		try{
+			IPremisesProvider premisesProvider = (IPremisesProvider) editorPart
+			.getAdapter(IPremisesProvider.class);
 
-		AddTagIdsAndTemplateWizard wizard = new AddTagIdsAndTemplateWizard();
-		wizard.init(
-				editorPart, 
-				selectionOfTagIdResources, 
-				premisesProvider.getPremises());
-		Shell shell = HandlerUtil.getActiveShellChecked(event);
-		WizardDialog dialog = new WizardDialog(
-				shell, wizard);
-		dialog.open();
-		
+			AddTagIdsAndTemplateWizard wizard = new AddTagIdsAndTemplateWizard();
+			wizard.init(
+					editorPart, 
+					selectionOfTagIdResources, 
+					premisesProvider.getPremises());
+			Shell shell = HandlerUtil.getActiveShellChecked(event);
+			WizardDialog dialog = new WizardDialog(
+					shell, wizard);
+			dialog.open();
+		} catch (PartInitException e) {
+			ErrorDialog.openError(HandlerUtil.getActiveShell(event), "Add Import TagIds As Template Problem", //$NON-NLS-1$
+					null, // no special message
+					((PartInitException) e).getStatus());
+		}
 		
 		return null;
 	}

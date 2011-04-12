@@ -15,15 +15,17 @@ package com.verticon.tracker.editor.presentation;
 
 import java.io.FileNotFoundException;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.PartInitException;
 
 import com.verticon.tracker.Premises;
-import com.verticon.tracker.editor.util.TrackerEditorUtils;
 import com.verticon.tracker.editor.util.AnimalTemplateBean;
 import com.verticon.tracker.editor.util.TagsBean;
+import com.verticon.tracker.editor.util.TrackerEditorUtils;
 
 /**
  * Wizard for adding a template animal document to a Premises
@@ -37,20 +39,30 @@ import com.verticon.tracker.editor.util.TagsBean;
 public class AddTagIdsAndTemplateWizard extends Wizard {
 
 	private static final String MODIFY_WIZARD_TITLE = "Add Template To Premises";
+	private static final String APPEND_INSTRUCTION = 
+		"\n\nThe Add Tag Ids and Template Wizard looks for animal template files inside the project associated with the active editor."+
+		" To use, make sure that the active editor has opened a file from a project that contains at least one animal template file.";
+	
 	private ISelection selectionOfTagIdResources;
 	private IEditorPart editor;
 	private Premises premises;
+	private IProject projectWithTemplate;
 
 	private SelectAnimalDocumentWizardPage selectAnimalDocumentWizardPage;
 
 	public void init(IEditorPart editor,
-			ISelection selection, Premises premises) {
+			ISelection selection, Premises premises) throws PartInitException {
 		if(selection.isEmpty()){
 			throw new IllegalStateException("Selected tagId resources cannot be empty.");
 		}
 		this.selectionOfTagIdResources = selection;
+		
 		this.editor = editor;
 		this.premises = premises;
+		this.projectWithTemplate = TrackerEditorUtils.getProject(editor);
+		if(projectWithTemplate==null){
+			throw new PartInitException("Could not find any animal templates in the active editor's project."+APPEND_INSTRUCTION);
+		}
 	}
 
 	@Override
@@ -68,7 +80,7 @@ public class AddTagIdsAndTemplateWizard extends Wizard {
 		setWindowTitle(MODIFY_WIZARD_TITLE);
 		selectAnimalDocumentWizardPage = new SelectAnimalDocumentWizardPage();
 		addPage(selectAnimalDocumentWizardPage);
-		selectAnimalDocumentWizardPage.init(editor);
+		selectAnimalDocumentWizardPage.init(projectWithTemplate);
 	}
 	
 

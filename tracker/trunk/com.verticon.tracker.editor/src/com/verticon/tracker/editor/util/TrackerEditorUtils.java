@@ -32,7 +32,10 @@ import java.util.Scanner;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceVisitor;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.CommonPlugin;
@@ -55,6 +58,10 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -512,6 +519,62 @@ public class TrackerEditorUtils {
 		}
 	};
 
+	private static final String APPEND_INSTRUCTION = 
+		"\n\nThis looks for animal template files inside the project associated with the active editor."+
+		" To use, make sure that the active editor has opened a file from a project that contains at least one animal template file.";
 	
+	public static IProject hasTemplates(IWorkbench iworkbench)throws PartInitException {
+		IProject result = null;
+		//Project
+		if (iworkbench != null){
+			IWorkbenchWindow iworkbenchwindow = iworkbench.getActiveWorkbenchWindow();
+				if (iworkbenchwindow != null){
+						IWorkbenchPage iworkbenchpage = iworkbenchwindow.getActivePage();
+							if (iworkbenchpage != null){
+								IEditorPart editor = iworkbenchpage.getActiveEditor();
+								result = getProject(editor);
 
+							}
+				}
+		}
+
+		return result;
+	}
+
+	public static IProject getProject(IEditorPart editor) throws PartInitException {
+		IProject result = null;
+		if(editor ==null){
+			throw new PartInitException("Could not find an active editor."+APPEND_INSTRUCTION);
+		}else{
+			IResource resource = TrackerEditorUtils.extractResource(editor);
+			if(resource == null){
+				throw new PartInitException("Could not find any resources in the active editor."+APPEND_INSTRUCTION);
+			}else{
+				IProject project = resource.getProject();
+				TemplateVisitor visitor = new TemplateVisitor();
+				try {
+					project.accept(visitor);
+					result = visitor.foundTemplate?project:null;
+				} catch (CoreException e) {
+					throw new PartInitException(e.getLocalizedMessage());
+				}
+			}
+
+		}
+		return result;
+	}
+
+	
+}
+
+class TemplateVisitor implements IResourceVisitor{
+	boolean foundTemplate = false;
+	@Override
+	public boolean visit(IResource resource) throws CoreException {
+		if(resource.getFileExtension()!=null && resource.getFileExtension().equals("animal")){
+			foundTemplate = true;
+		}
+		return !foundTemplate;
+	}
+	
 }

@@ -32,12 +32,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
 import com.verticon.tracker.editor.dialogs.TemplateViewerFilter;
-import com.verticon.tracker.editor.util.TrackerEditorUtils;
 import com.verticon.tracker.editor.util.AnimalTemplateBean;
 
 /**
@@ -116,15 +114,8 @@ public class SelectAnimalDocumentWizardPage extends WizardPage implements ISelec
 		return templateBean;
 	}
 	
-	public void init(IEditorPart editor){
-		if(editor==null){
-			throw new IllegalArgumentException("The editor argument can not be null");
-		}
-		IResource resource = TrackerEditorUtils.extractResource(editor);
-		if(resource == null){
-			throw new IllegalStateException("Could not find the editor resource.");
-		}
-		project = resource.getProject();
+	public void init(IProject project){
+		this.project =project;
 	}
 
 	

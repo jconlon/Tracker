@@ -17,9 +17,11 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.verticon.tracker.editor.presentation.AddTemplateToAnimalsWizard;
@@ -42,10 +44,17 @@ public class AnimalsAddTemplateEventHandler extends AbstractHandler implements
 		ISelection selection = HandlerUtil.getActiveMenuSelectionChecked(event);	
 		IEditorPart editorPart = HandlerUtil.getActiveEditorChecked(event);
 		
-		AddTemplateToAnimalsWizard wizard = new AddTemplateToAnimalsWizard();
-		wizard.init(editorPart, selection);
-		WizardDialog dialog = new WizardDialog(HandlerUtil.getActiveShellChecked(event), wizard);
-		dialog.open();
+		try {
+			AddTemplateToAnimalsWizard wizard = new AddTemplateToAnimalsWizard();
+			wizard.init(editorPart, selection);
+			WizardDialog dialog = new WizardDialog(HandlerUtil.getActiveShellChecked(event), wizard);
+			dialog.open();
+		} catch (PartInitException e) {
+			ErrorDialog.openError(HandlerUtil.getActiveShell(event), "Add Template Problem", //$NON-NLS-1$
+					null, // no special message
+					((PartInitException) e).getStatus());
+		}
+		
 		return null;
 	}
 
