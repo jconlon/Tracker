@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.progress.IProgressService;
@@ -230,42 +231,43 @@ public final class LocationIndex implements LocationServiceProvider {
 		IWorkspace root = ResourcesPlugin.getWorkspace();
 		final IProject[] projects = root.getRoot().getProjects();
 		IWorkbench wb = PlatformUI.getWorkbench();
-		IProgressService ps = wb.getProgressService();
-		try {
-			ps.busyCursorWhile(new IRunnableWithProgress() {
-				public void run(IProgressMonitor pm) {
-					boolean foundAgricultureNatures = false;
-					for (IProject iProject : projects) {
+		final IProgressService ps = wb.getProgressService();
+		Display.getDefault().syncExec( 
+				new Runnable() {  
+					public void run() { 
 						try {
-							if (iProject.hasNature(AgricultureNature.NATURE_ID)) {
-								foundAgricultureNatures = true;
-								iProject.build(
-										IncrementalProjectBuilder.FULL_BUILD,
-										pm);
-								logger.debug(bundleMarker,
-										"Built project {}", iProject.getName());
-							}
-						} catch (CoreException e) {
-							logger.error(bundleMarker,
-									this + " failed to build project "
-											+ iProject.getName(), e);
+							ps.busyCursorWhile(new IRunnableWithProgress() {
+								public void run(IProgressMonitor pm) {
+									boolean foundAgricultureNatures = false;
+									for (IProject iProject : projects) {
+										try {
+											if (iProject.hasNature(AgricultureNature.NATURE_ID)) {
+												foundAgricultureNatures = true;
+												iProject.build(
+														IncrementalProjectBuilder.FULL_BUILD,
+														pm);
+												logger.debug(bundleMarker,
+														"Built project {}", iProject.getName());
+											}
+										} catch (CoreException e) {
+											logger.error(bundleMarker,
+													this + " failed to build project "
+													+ iProject.getName(), e);
+										}
+									}
+									if(!foundAgricultureNatures){
+										logger.debug(bundleMarker,
+										"Did not find any projects with an agriculture nature.");
+									}
+								}
+							});
+						} catch (InvocationTargetException e) {
+							logger.error(bundleMarker, "Failed to build projects", e);
+						} catch (InterruptedException e) {
+							logger.error(bundleMarker, "Failed to build projects", e);
 						}
 					}
-					if(!foundAgricultureNatures){
-						logger.debug(bundleMarker,
-								"Did not find any projects with an agriculture nature.");
-					}
-				}
-			});
-		} catch (InvocationTargetException e) {
-			logger.error(bundleMarker, "Failed to build projects", e);
-		} catch (InterruptedException e) {
-			logger.error(bundleMarker, "Failed to build projects", e);
-		}
-
+				});
+				
 	}
-
-	
-
-
 }
