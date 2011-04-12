@@ -39,9 +39,6 @@ import com.verticon.tracker.editor.util.TrackerEditorUtils;
 public class AddTagIdsAndTemplateWizard extends Wizard {
 
 	private static final String MODIFY_WIZARD_TITLE = "Add Template To Premises";
-	private static final String APPEND_INSTRUCTION = 
-		"\n\nThe Add Tag Ids and Template Wizard looks for animal template files inside the project associated with the active editor."+
-		" To use, make sure that the active editor has opened a file from a project that contains at least one animal template file.";
 	
 	private ISelection selectionOfTagIdResources;
 	private IEditorPart editor;
@@ -60,9 +57,6 @@ public class AddTagIdsAndTemplateWizard extends Wizard {
 		this.editor = editor;
 		this.premises = premises;
 		this.projectWithTemplate = TrackerEditorUtils.getProject(editor);
-		if(projectWithTemplate==null){
-			throw new PartInitException("Could not find any animal templates in the active editor's project."+APPEND_INSTRUCTION);
-		}
 	}
 
 	@Override
@@ -78,7 +72,13 @@ public class AddTagIdsAndTemplateWizard extends Wizard {
 	@Override
 	public void addPages() {
 		setWindowTitle(MODIFY_WIZARD_TITLE);
-		selectAnimalDocumentWizardPage = new SelectAnimalDocumentWizardPage();
+//		selectAnimalDocumentWizardPage = new SelectAnimalDocumentWizardPage();
+		if(projectWithTemplate==null){
+			selectAnimalDocumentWizardPage = new SelectAnimalDocumentWizardPage(true);
+			
+		}else{
+			selectAnimalDocumentWizardPage = new SelectAnimalDocumentWizardPage(false);
+		}
 		addPage(selectAnimalDocumentWizardPage);
 		selectAnimalDocumentWizardPage.init(projectWithTemplate);
 	}
