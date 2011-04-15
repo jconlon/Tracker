@@ -32,11 +32,11 @@
     </wizard>
     
     <wizard
-      id = "com.verticon.tracker.editor.presentation.TrackerTemplateWizardID"
-      name = "%_UI_AnimalTemplateWizard_label"
-      class = "com.verticon.tracker.editor.presentation.TrackerAnimalModelWizard"
-      category = "com.verticon.tracker.editor.Wizard.category.ID"
-      icon = "icons/full/obj16/AnimalModelFile.gif">
+          category="com.verticon.tracker.editor.Wizard.category.ID"
+          class="com.verticon.tracker.editor.presentation.TrackerAnimalModelWizard"
+          icon="icons/full/obj16/AnimalModelFile.gif"
+          id="com.verticon.tracker.editor.presentation.TrackerTemplateWizardID"
+          name="%_UI_AnimalTemplateWizard_label">
       <description>%_UI_AnimalTemplateWizard_description</description>
       <selection class = "org.eclipse.core.resources.IResource" />
     </wizard>
