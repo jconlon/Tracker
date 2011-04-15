@@ -19,7 +19,7 @@
             name="%_UI_MetatypeModelWizard_label"
             class="com.verticon.osgi.metatype.presentation.MetatypeModelWizard"
             category="com.verticon.tracker.editor.Wizard.category.ID"
-            icon="icons/full/obj16/MetatypeModelFile.gif">
+            icon="icons/full/obj16/gears.gif">
          <description>%_UI_MetatypeModelWizard_description</description>
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
