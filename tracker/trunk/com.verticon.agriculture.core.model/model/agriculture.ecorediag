@@ -50,7 +50,7 @@
     <styles xmi:type="notation:TextStyle" xmi:id="_gJOdUWIjEeCy_ZHdCa9Nzg"/>
     <styles xmi:type="notation:LineTypeStyle" xmi:id="_gJOdUmIjEeCy_ZHdCa9Nzg"/>
     <element xsi:nil="true"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gJOdU2IjEeCy_ZHdCa9Nzg" x="24" y="384"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gJOdU2IjEeCy_ZHdCa9Nzg" x="144" y="396"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_mtxvcGIjEeCy_ZHdCa9Nzg" type="Note" fontName="Sans" description="geography EReference to KML Container" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
     <children xmi:type="notation:BasicDecorationNode" xmi:id="_mtyWgGIjEeCy_ZHdCa9Nzg" type="DiagramName">
@@ -62,7 +62,7 @@
     <styles xmi:type="notation:TextStyle" xmi:id="_mtxvcWIjEeCy_ZHdCa9Nzg"/>
     <styles xmi:type="notation:LineTypeStyle" xmi:id="_mtxvcmIjEeCy_ZHdCa9Nzg"/>
     <element xsi:nil="true"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mtxvc2IjEeCy_ZHdCa9Nzg" x="588" y="384"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mtxvc2IjEeCy_ZHdCa9Nzg" x="420" y="396"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_OO9asGIkEeCy_ZHdCa9Nzg" type="Note" fontName="Sans" description="geography EReference to KML Container" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
     <children xmi:type="notation:BasicDecorationNode" xmi:id="_OO_28GIkEeCy_ZHdCa9Nzg" type="DiagramName">
@@ -74,7 +74,7 @@
     <styles xmi:type="notation:TextStyle" xmi:id="_OO9asWIkEeCy_ZHdCa9Nzg"/>
     <styles xmi:type="notation:LineTypeStyle" xmi:id="_OO9asmIkEeCy_ZHdCa9Nzg"/>
     <element xsi:nil="true"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OO9as2IkEeCy_ZHdCa9Nzg" x="672" y="128"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OO9as2IkEeCy_ZHdCa9Nzg" x="564" y="132"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_VgypkGIkEeCy_ZHdCa9Nzg" type="Text" fontName="Sans" fontHeight="36" bold="true" description="Agriculture MetaModel">
     <children xmi:type="notation:BasicDecorationNode" xmi:id="_Vg2T8GIkEeCy_ZHdCa9Nzg" type="DiagramName">
