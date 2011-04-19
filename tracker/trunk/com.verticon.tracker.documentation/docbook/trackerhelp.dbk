@@ -9,14 +9,20 @@
 	<xi:include href="../../com.verticon.tracker.doc/docbook/colophon/colophon.xml"/>
 	<xi:include href="../../com.verticon.tracker.doc/docbook/overview/overview.xml"/>
 	<xi:include href="../../com.verticon.tracker.doc/docbook/overview/usecases.xml"/>
+	<!-- Products -->
 	<xi:include href="../../com.verticon.tracker.doc/docbook/product/product.xml"/>
 	<!-- Add products -->
 	<xi:include href="../../com.verticon.tracker.product.desktop.doc/docbook/desktopProduct/desktopProduct.xml"/>
+	<!-- End products -->
 	
+	<!-- Editors -->
 	<xi:include href="../../com.verticon.tracker.doc/docbook/editors/editors.xml"/>
 	<!-- Add editors -->
 	<xi:include href="../../com.verticon.tracker.editor.doc/docbook/premisesEditor/premisesEditor.xml"/>
+	<xi:include href="../../com.verticon.tracker.agriculture.doc/docbook/agricultureEditor/agricultureEditor.xml"/>
+	<!-- End editors -->
 	
+	<!-- Features -->
 	<xi:include href="../../com.verticon.tracker.doc/docbook/features/features.xml"/>
 	<!-- Add features -->
 	<xi:include href="../../com.verticon.tracker.export.wlic.doc/docbook/exportWLIC/exportWLIC.xml"/>
