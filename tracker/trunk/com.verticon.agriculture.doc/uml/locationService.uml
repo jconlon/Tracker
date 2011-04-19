@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="__rOJoGbzEeCt5apRznBq0w" name="model">
+  <packagedElement xmi:type="uml:Actor" xmi:id="_l9ApkGb0EeCt5apRznBq0w" name="Operator"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_3izpUGb5EeCt5apRznBq0w" name="Location Service Overview"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_7Qol8Gb5EeCt5apRznBq0w" name="Location Service" useCase="_-gkFoGb5EeCt5apRznBq0w _IGoA8Gb6EeCt5apRznBq0w _OW6TQGb6EeCt5apRznBq0w _1nkZwGb7EeCt5apRznBq0w _6zRpoGb7EeCt5apRznBq0w _8NQUUGb7EeCt5apRznBq0w _3gLrwGb8EeCt5apRznBq0w _-kSAoGb8EeCt5apRznBq0w">
+    <ownedUseCase xmi:id="_-gkFoGb5EeCt5apRznBq0w" name="View Premises" subject="_7Qol8Gb5EeCt5apRznBq0w">
+      <include xmi:id="_QD7HUGb9EeCt5apRznBq0w" addition="_IGoA8Gb6EeCt5apRznBq0w"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_IGoA8Gb6EeCt5apRznBq0w" name="Resolves Animal Locations" subject="_7Qol8Gb5EeCt5apRznBq0w">
+      <include xmi:id="_acD_0Gb9EeCt5apRznBq0w" addition="_-kSAoGb8EeCt5apRznBq0w"/>
+      <include xmi:id="_cNZakGb9EeCt5apRznBq0w" addition="_3gLrwGb8EeCt5apRznBq0w"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_OW6TQGb6EeCt5apRznBq0w" name="Presented Choice for Names of Locations within Local Premises" subject="_7Qol8Gb5EeCt5apRznBq0w"/>
+    <ownedUseCase xmi:id="_1nkZwGb7EeCt5apRznBq0w" name="Create Premises Document" subject="_7Qol8Gb5EeCt5apRznBq0w">
+      <include xmi:id="_VLfeEGb9EeCt5apRznBq0w" addition="_6zRpoGb7EeCt5apRznBq0w"/>
+      <include xmi:id="_WCdiUGb9EeCt5apRznBq0w" addition="_8NQUUGb7EeCt5apRznBq0w"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_6zRpoGb7EeCt5apRznBq0w" name="Electronically Read GPS Position Coordinates" subject="_7Qol8Gb5EeCt5apRznBq0w"/>
+    <ownedUseCase xmi:id="_8NQUUGb7EeCt5apRznBq0w" name="Manually Set Visual Sighting" subject="_7Qol8Gb5EeCt5apRznBq0w">
+      <include xmi:id="_YFSVsGb9EeCt5apRznBq0w" addition="_OW6TQGb6EeCt5apRznBq0w"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_3gLrwGb8EeCt5apRznBq0w" name="In Premises Sub Locations" subject="_7Qol8Gb5EeCt5apRznBq0w"/>
+    <ownedUseCase xmi:id="_-kSAoGb8EeCt5apRznBq0w" name="In Business Associate Premises" subject="_7Qol8Gb5EeCt5apRznBq0w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_Kfa88Gb9EeCt5apRznBq0w" name="An operator creates premises documents" memberEnd="_Kfa88Wb9EeCt5apRznBq0w _Kfa89Gb9EeCt5apRznBq0w">
+    <ownedEnd xmi:id="_Kfa88Wb9EeCt5apRznBq0w" name="operator" type="_l9ApkGb0EeCt5apRznBq0w" association="_Kfa88Gb9EeCt5apRznBq0w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Kfa88mb9EeCt5apRznBq0w" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Kfa882b9EeCt5apRznBq0w" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_Kfa89Gb9EeCt5apRznBq0w" name="edit premises" type="_1nkZwGb7EeCt5apRznBq0w" association="_Kfa88Gb9EeCt5apRznBq0w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Kfa89Wb9EeCt5apRznBq0w" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Kfa89mb9EeCt5apRznBq0w" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_LdMMwGb9EeCt5apRznBq0w" name="An operator views premises information" memberEnd="_LdMMwWb9EeCt5apRznBq0w _LdMMxGb9EeCt5apRznBq0w">
+    <ownedEnd xmi:id="_LdMMwWb9EeCt5apRznBq0w" name="operator" type="_l9ApkGb0EeCt5apRznBq0w" association="_LdMMwGb9EeCt5apRznBq0w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LdMMwmb9EeCt5apRznBq0w" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LdMMw2b9EeCt5apRznBq0w" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_LdMMxGb9EeCt5apRznBq0w" name="view premises" type="_-gkFoGb5EeCt5apRznBq0w" association="_LdMMwGb9EeCt5apRznBq0w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LdMMxWb9EeCt5apRznBq0w" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LdMMxmb9EeCt5apRznBq0w" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>
