@@ -20,6 +20,7 @@
 	<!-- Add editors -->
 	<xi:include href="../../com.verticon.tracker.editor.doc/docbook/premisesEditor/premisesEditor.xml"/>
 	<xi:include href="../../com.verticon.tracker.agriculture.doc/docbook/agricultureEditor/agricultureEditor.xml"/>
+	<xi:include href="../../com.verticon.geography.editor.doc/docbook/geographyEditor/geographyEditor.xml"/>
 	<!-- End editors -->
 	
 	<!-- Features -->
