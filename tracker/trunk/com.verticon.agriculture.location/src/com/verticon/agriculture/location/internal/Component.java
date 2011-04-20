@@ -39,7 +39,7 @@ public class Component implements LocationServiceProvider {
 		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
 	}
 
-	private final LocationIndex delegate = new LocationIndex();
+	private final LocationIndex delegate =  LocationIndex.getInstance();
 
 	public void activate() {
 		logger.debug(bundleMarker, "Activated", this);
