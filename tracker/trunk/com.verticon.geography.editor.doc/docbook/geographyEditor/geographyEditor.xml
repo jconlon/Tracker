@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter>
+  <?dbhtml filename="geographyEditor/geographyEditor.html" ?>
+  <title>Geography Editor</title>
+  <section id="overviewGeographyEditor">
+    <title>Overview</title>
+    <section id="overviewGeographyEditorWhatis">
+      <title>What is the Geography Editor?</title>
+      <para>The Geography Editor is an open source desktop solution for authoring, managing and integrating
+      state of the art Geographic Information System <acronym>GIS</acronym> technologies based on the 
+      <ulink url="http://www.opengeospatial.org/"> <citetitle>OpenGIS</citetitle></ulink> 
+      Key Hole Markup Language <acronym>KML</acronym>.</para>
+    </section>
+    <section id="overviewGeographyEditorGoals">
+      <title>Project Goals</title>
+      <para>The <acronym>KML</acronym> is an industry standard <acronym>GIS</acronym> markup language for creating documents for
+      presenting geography information in 2 dimensional maps and 3 dimensional 
+      <ulink url="http://en.wikipedia.org/wiki/Digital_Earth#Geobrowsers"><citetitle>Geobrowsers</citetitle></ulink>.  The Eclipse Modeling Framework
+      <ulink url="http://www.eclipse.org/modeling/emf/"> <citetitle><acronym>EMF</acronym></citetitle></ulink> 
+      is an Eclipse-based modeling framework and code generation facility for building tools and other applications based on a structured data model.</para>
+      <para>
+      The primary goal of the Geography Editor project is to build an <acronym>EMF</acronym> data model and editor for
+      <acronym>KML</acronym> to provide the foundation for easily integrating location information into <acronym>EMF</acronym> 
+      tools, applications, and other <acronym>EMF</acronym> based data models.</para>
+    </section>
+    <section id="overviewGeographyFunctional">
+      <title>Functional Overview</title>
+      <para>KML documents can be created from any of the free or commercially available <acronym>XML</acronym> based editors or from
+      utilities associated with many of the KML based Geobrowswer applications. While the Geography Editor Feature provides an 
+      alternative Editor for authoring <acronym>KML</acronym> documents, the Geography Editor Feature's primary function is to enable
+      the integration of all <acronym>KML</acronym> documents, no matter how they were originally created, with 
+      the <acronym>EMF</acronym> application framework in order to leverage existing and future <acronym>EMF</acronym> based tools, 
+      utilities and data models. 
+      </para>
+      <note>
+        <para>While the Geographic Editor Feature does provide a <acronym>KML</acronym> editor, it's fundamental purpose is to act as
+        a base technology by offering a <acronym>KML/EMF</acronym> data model, that can be easily extended by other features 
+        that require <acronym>GIS</acronym> data integration.</para> 
+      </note>
+    </section>
+  </section>
+  <section id="GeographyEditor_useCase">
+  <?dbhtml filename="usecase/GeographyEditor_useCase.html" ?>
+    <title>Geography Editor Use Cases</title>
+    <para>The following figure presents a
+    <emphasis>Use-Case</emphasis> diagram showing how the Geography Editor can be used by operators and how
+    it can be extended by developers to create new functionality. 
+    <xref linkend="fig_GeographyEditorUseCases"/> shows core usage 
+    requirements for the Geography Editor.</para>
+    <figure id="fig_GeographyEditorUseCases">
+      <title>Geography Editor Use Cases</title>
+      <mediaobject><imageobject><imagedata align="center"
+       fileref="../images/useCases/editor.png"/></imageobject></mediaobject>
+    </figure>
+  </section>
+  
+  <section id="GeographyDocuments">
+   <?dbhtml filename="model/GeographyEditorModel_GeographyDocuments.html" ?>
+    <title>Geography Documents</title>
+    <para>The Geography Editor enables users to create, transform and 
+    edit <acronym>KML</acronym> documents.  See <ulink url="http://code.google.com/apis/kml/documentation/"> 
+    <citetitle>KML Introduction</citetitle></ulink> for basic information about creating and editing KML documents. </para>
+    <note>
+   <para>Geography document files utilize a <code>.kml</code> file extension to 
+    distinguish them from other types of files.</para>
+    </note>
+  </section>
+  
+  <section id="GeographyDataModel">
+    <?dbhtml filename="model/GeographyEditorModel_GeographyDataModel.html" ?>
+    <title>Geography Data Model</title>
+    <para>All operator activity centers around the creation, 
+    manipulation and visualization of <emphasis>Geography Documents</emphasis>. 
+    To understand the structure (called the <glossterm>data 
+    model</glossterm>) see the <ulink url="http://code.google.com/apis/kml/documentation/kmlreference.html"> 
+    <citetitle>KML Reference</citetitle></ulink> for more information.</para>
+    
+    <note><para>The Geography Data Model conforms to <ulink url="http://code.google.com/apis/kml/documentation/kmlreference.html#kmlextensions"> 
+    <citetitle>Google's Extensions to KML.</citetitle></ulink>  </para>
+    </note>
+    
+  </section>
+
+  <section id="editingGeographyDocuments">
+    	<?dbhtml filename="editingGeographyDocuments/editingGeographyDocuments.html" ?>
+		<title>Editing Geography Documents</title>
+		<section id="creatingGeographyDocuments">
+			<title>Creating a new Document</title>
+			<para>
+			To create a new Geography document. Go to the File menu and launch a 
+			<emphasis>New Wizard</emphasis> by selecting the menu items:<code>File|New|Other</code>.
+			<xref linkend="fig_createNewGeographyDocument" />.
+			</para>
+
+		<figure id="fig_createNewGeographyDocument">
+			<title>New Wizard for Creating a New Geography Document</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/editing/createNewDocument.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+
+		<para>Follow the instructions to choose a project, folder and a name for the document.
+		Select one of the KML elements in the list for the root of the document and press <code>Finish</code> to create the document. 
+			
+		</para>
+       <figure id="fig_selectGeographyModelObject">
+			<title>New Geography Document Wizard Prompt</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/editing/selectModelObject.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		</section>
+	</section>
+</chapter>
