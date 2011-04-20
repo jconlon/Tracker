@@ -47,15 +47,33 @@ public final class LocationIndex implements LocationServiceProvider {
 	/**
 	 * slf4j Logger
 	 */
-	private final static Logger logger = LoggerFactory
+	private final  Logger logger = LoggerFactory
 			.getLogger(LocationIndex.class);
+
+	private static LocationIndex instance = null;
 
 	/**
 	 * GeoLocations by location id
 	 * Protected by lock
 	 */
-	private static volatile Map<String, GeoLocation> index = null;
-	private static volatile Object lock = new Object();
+	private volatile Map<String, GeoLocation> index = newHashMap();
+	private volatile Object lock = new Object();
+	private volatile boolean initialized = false;
+
+	
+	private LocationIndex() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	public static LocationIndex getInstance() {
+		if(instance == null) {
+			instance = new LocationIndex();
+		}
+		return instance;
+	}
+
 
 	/**
 	 * Find location for a Premises. Used for remote locations.
@@ -125,8 +143,7 @@ public final class LocationIndex implements LocationServiceProvider {
 	 */
 	@Override
 	public boolean canHandle(Object target) {
-		if (index == null) {
-			index = newHashMap();
+		if (!initialized) {
 			buildAllAgricultureProjects();
 		}
 		if (target instanceof Premises) {
@@ -143,7 +160,7 @@ public final class LocationIndex implements LocationServiceProvider {
 	 * @param uri
 	 * @return true if uri is associated with the index
 	 */
-	static boolean isAssociatedResource(String uri){
+	 boolean isAssociatedResource(String uri){
 		boolean result = false;
 		if(index==null){
 			buildAllAgricultureProjects();
@@ -162,7 +179,7 @@ public final class LocationIndex implements LocationServiceProvider {
 	}
 	
 	
-	 static void remove(String id) {
+	  void remove(String id) {
 		synchronized (lock) {
 			index = newHashMap(filterValues(index, new NotResourceUriPredicate(id)));
 		}
@@ -173,7 +190,7 @@ public final class LocationIndex implements LocationServiceProvider {
 	 * @param resource
 	 * @throws Exception if building fails
 	 */
-	static void add(Resource resource) throws CoreException {
+	 void add(Resource resource) throws CoreException {
 		synchronized (lock) {
 
 			ResoureIndexBuilder builder = new ResoureIndexBuilder(resource.getURI().toString(), index);
@@ -199,7 +216,7 @@ public final class LocationIndex implements LocationServiceProvider {
 		}
 	}
 
-	private static void addToIndex(List<GeoLocation> locations) {
+	private  void addToIndex(List<GeoLocation> locations) {
 		Map<String, GeoLocation> newLocationsMap = newHashMap();
 		for (GeoLocation geoLocationToAdd : locations) {
 			newLocationsMap.put(geoLocationToAdd.getID(), geoLocationToAdd);
@@ -215,7 +232,7 @@ public final class LocationIndex implements LocationServiceProvider {
 	 * @param target
 	 * @return resolved id
 	 */
-	private static final String getID(Object target) {
+	private  final String getID(Object target) {
 		String id = null;
 		if (target instanceof Premises) {
 			id = ((Premises) target).getUri();
@@ -225,8 +242,13 @@ public final class LocationIndex implements LocationServiceProvider {
 		return id;
 	}
 
-	private static void buildAllAgricultureProjects() {
+	
+	private void buildAllAgricultureProjects() {
+		if(initialized){
+			return;
+		}
 		logger.info(bundleMarker, "Initializing");
+		initialized = true;
 		// Find all the natures and build them.
 		IWorkspace root = ResourcesPlugin.getWorkspace();
 		final IProject[] projects = root.getRoot().getProjects();
@@ -243,6 +265,8 @@ public final class LocationIndex implements LocationServiceProvider {
 										try {
 											if (iProject.hasNature(AgricultureNature.NATURE_ID)) {
 												foundAgricultureNatures = true;
+												logger.debug(bundleMarker,
+														"Building project {}", iProject.getName());
 												iProject.build(
 														IncrementalProjectBuilder.FULL_BUILD,
 														pm);

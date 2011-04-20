@@ -70,6 +70,7 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 	public static final String BUILDER_ID = Component.PLUGIN_ID
 			+ ".locationBuilderService";
 	
+	private LocationIndex locationIndex = LocationIndex.getInstance();
 	
 //
 //	/**
@@ -138,7 +139,7 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 		if (checkCancel(monitor)) {
 			return;
 		}
-		LocationIndex.remove(uri.toString());
+		locationIndex.remove(uri.toString());
 		monitor.worked(1);
 
 		monitor.done();
@@ -161,7 +162,7 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 		if (checkCancel(monitor)) {
 			return;
 		}
-		LocationIndex.add(resource);
+		locationIndex.add(resource);
 		monitor.worked(1);
 
 		monitor.done();
@@ -218,7 +219,7 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 			}else {
 				URI uri = URI.createPlatformResourceURI(child.getFullPath().toString(), true);
 				// build if an associated kml or premises is changed.
-				if(LocationIndex.isAssociatedResource(uri.toString())){
+				if(locationIndex.isAssociatedResource(uri.toString())){
 					logger.debug(bundleMarker, "Affected resource: {}", uri);
 					return true;
 				}
