@@ -1028,7 +1028,7 @@ public class TrackerEditor
 	/**
 	 * This is the method used by the framework to install your own controls.
 	 * <!-- begin-user-doc -->
-	 * Modified to eliminate the Resource as a root.
+	 * Refactored to multiple methods.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -1172,10 +1172,16 @@ public class TrackerEditor
 		);
            
 		selectionViewer.setLabelProvider(new WorkaroundAdapterFactoryLabelProvider(adapterFactory, selectionViewer));
-		ResourceSet resourceSet = editingDomain.getResourceSet();
-		Resource resource = resourceSet.getResources().get(0);
-		selectionViewer.setInput(resource);
-		viewerPane.setTitle(resource);
+		
+//		//Initial changes to suppress the Root Object
+//		ResourceSet resourceSet = editingDomain.getResourceSet();
+//		Resource resource = resourceSet.getResources().get(0);
+//		selectionViewer.setInput(resource);
+//		viewerPane.setTitle(resource);
+		
+		//Functionality added back to show the Root Object See Ticket#728
+		selectionViewer.setInput(editingDomain.getResourceSet());
+		viewerPane.setTitle(editingDomain.getResourceSet());
 
 		new AdapterFactoryTreeEditor(selectionViewer.getTree(), adapterFactory);
 
