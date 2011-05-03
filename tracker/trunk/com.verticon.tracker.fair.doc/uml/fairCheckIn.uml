@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_QzsnYHTzEeCrsMYh7O-_Ow" name="model">
+  <packagedElement xmi:type="uml:Actor" xmi:id="_T53HEHTzEeCrsMYh7O-_Ow" name="Operator"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_VFjeIHTzEeCrsMYh7O-_Ow" name="Fair Check-In"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_XrciUHTzEeCrsMYh7O-_Ow" name="Fair Editor" useCase="_dtIX8HTzEeCrsMYh7O-_Ow _f5PDIHTzEeCrsMYh7O-_Ow _kY8IoHTzEeCrsMYh7O-_Ow _qPJHAHTzEeCrsMYh7O-_Ow __bV_AHTzEeCrsMYh7O-_Ow _H7IOwHT0EeCrsMYh7O-_Ow _Sv9RAHT5EeCrsMYh7O-_Ow _W-VV8HT5EeCrsMYh7O-_Ow">
+    <ownedComment xmi:id="_0-JAUHTzEeCrsMYh7O-_Ow">
+      <body>Truckloads of exhibitor animals arrive</body>
+    </ownedComment>
+    <ownedUseCase xmi:id="_dtIX8HTzEeCrsMYh7O-_Ow" name="Assign or reassign Person to a new animal Exhibit" subject="_XrciUHTzEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_f5PDIHTzEeCrsMYh7O-_Ow" name="Scan Animal" subject="_XrciUHTzEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_kY8IoHTzEeCrsMYh7O-_Ow" name="Record Weight" subject="_XrciUHTzEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_qPJHAHTzEeCrsMYh7O-_Ow" name="Move exhibit to appropriate Lot" subject="_XrciUHTzEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="__bV_AHTzEeCrsMYh7O-_Ow" name="Veterinarians Check" subject="_XrciUHTzEeCrsMYh7O-_Ow">
+      <include xmi:id="_QPobkHT0EeCrsMYh7O-_Ow" addition="_f5PDIHTzEeCrsMYh7O-_Ow"/>
+      <include xmi:id="_Z8cs4HT5EeCrsMYh7O-_Ow" addition="_Sv9RAHT5EeCrsMYh7O-_Ow"/>
+      <include xmi:id="_amGG0HT5EeCrsMYh7O-_Ow" addition="_W-VV8HT5EeCrsMYh7O-_Ow"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_H7IOwHT0EeCrsMYh7O-_Ow" name="Check-in animal" subject="_XrciUHTzEeCrsMYh7O-_Ow">
+      <include xmi:id="_MeV7QHT0EeCrsMYh7O-_Ow" addition="_kY8IoHTzEeCrsMYh7O-_Ow"/>
+      <include xmi:id="_NF8GwHT0EeCrsMYh7O-_Ow" addition="_dtIX8HTzEeCrsMYh7O-_Ow"/>
+      <include xmi:id="_NqhagHT0EeCrsMYh7O-_Ow" addition="_qPJHAHTzEeCrsMYh7O-_Ow"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_Sv9RAHT5EeCrsMYh7O-_Ow" name="Validate paperwork" subject="_XrciUHTzEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_W-VV8HT5EeCrsMYh7O-_Ow" name="Inspect animal" subject="_XrciUHTzEeCrsMYh7O-_Ow"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_UB6aYHT0EeCrsMYh7O-_Ow" name="An operator manages vet check" memberEnd="_UB6aYXT0EeCrsMYh7O-_Ow _UB6aZHT0EeCrsMYh7O-_Ow">
+    <ownedEnd xmi:id="_UB6aYXT0EeCrsMYh7O-_Ow" name="operator" type="_T53HEHTzEeCrsMYh7O-_Ow" association="_UB6aYHT0EeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_UB6aYnT0EeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_UB6aY3T0EeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_UB6aZHT0EeCrsMYh7O-_Ow" name="vet check" type="__bV_AHTzEeCrsMYh7O-_Ow" association="_UB6aYHT0EeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_UB6aZXT0EeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_UB6aZnT0EeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_Vkkf8HT0EeCrsMYh7O-_Ow" name="An operator checks-in animal" memberEnd="_Vkkf8XT0EeCrsMYh7O-_Ow _Vkkf9HT0EeCrsMYh7O-_Ow">
+    <ownedEnd xmi:id="_Vkkf8XT0EeCrsMYh7O-_Ow" name="operator" type="_T53HEHTzEeCrsMYh7O-_Ow" association="_Vkkf8HT0EeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Vkkf8nT0EeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Vkkf83T0EeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_Vkkf9HT0EeCrsMYh7O-_Ow" name="check-in animal" type="_H7IOwHT0EeCrsMYh7O-_Ow" association="_Vkkf8HT0EeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Vkkf9XT0EeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Vkkf9nT0EeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>
