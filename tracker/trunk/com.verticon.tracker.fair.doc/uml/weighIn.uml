@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_nNf3wHTvEeCrsMYh7O-_Ow" name="model">
+  <packagedElement xmi:type="uml:Package" xmi:id="_pERzMHTvEeCrsMYh7O-_Ow" name="Fair Weigh-In"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_spyhUHTvEeCrsMYh7O-_Ow" name="Fair Editor" useCase="_0buzoHTvEeCrsMYh7O-_Ow _1R7b0HTvEeCrsMYh7O-_Ow _7Ko7oHTvEeCrsMYh7O-_Ow _-_iJkHTvEeCrsMYh7O-_Ow _lJ2IgHTwEeCrsMYh7O-_Ow _qQ_ogHTwEeCrsMYh7O-_Ow _8J91MHTwEeCrsMYh7O-_Ow _G9heYHTxEeCrsMYh7O-_Ow _S1tNUHTxEeCrsMYh7O-_Ow _7wgW4HTxEeCrsMYh7O-_Ow _P8yqAHTyEeCrsMYh7O-_Ow _gjEfwHTyEeCrsMYh7O-_Ow">
+    <ownedComment xmi:id="_GQZvIHTwEeCrsMYh7O-_Ow">
+      <body>Truckloads of exhibitor animals arrive. </body>
+    </ownedComment>
+    <ownedComment xmi:id="_CR-xwHTwEeCrsMYh7O-_Ow">
+      <body>Family of Exhibitors departs with animals</body>
+    </ownedComment>
+    <ownedUseCase xmi:id="_0buzoHTvEeCrsMYh7O-_Ow" name="Record Exhibitor Information " subject="_spyhUHTvEeCrsMYh7O-_Ow">
+      <include xmi:id="_vkNZIHTxEeCrsMYh7O-_Ow" addition="_lJ2IgHTwEeCrsMYh7O-_Ow"/>
+      <include xmi:id="_wQ-YgHTxEeCrsMYh7O-_Ow" addition="_qQ_ogHTwEeCrsMYh7O-_Ow"/>
+      <include xmi:id="_xcqvkHTxEeCrsMYh7O-_Ow" addition="_8J91MHTwEeCrsMYh7O-_Ow"/>
+      <include xmi:id="_2jL9cHTxEeCrsMYh7O-_Ow" addition="_G9heYHTxEeCrsMYh7O-_Ow"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_1R7b0HTvEeCrsMYh7O-_Ow" name="Record Information for each Animal" subject="_spyhUHTvEeCrsMYh7O-_Ow">
+      <include xmi:id="_1cKrAHTxEeCrsMYh7O-_Ow" addition="_S1tNUHTxEeCrsMYh7O-_Ow"/>
+      <include xmi:id="_D6hyAHTyEeCrsMYh7O-_Ow" addition="_7wgW4HTxEeCrsMYh7O-_Ow"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_7Ko7oHTvEeCrsMYh7O-_Ow" name="Register Exhibitor for each animal " subject="_spyhUHTvEeCrsMYh7O-_Ow">
+      <include xmi:id="_YppFYHTyEeCrsMYh7O-_Ow" addition="_P8yqAHTyEeCrsMYh7O-_Ow"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_-_iJkHTvEeCrsMYh7O-_Ow" name="Print Exhibitor Premises summary report" clientDependency="_uF5LkHTyEeCrsMYh7O-_Ow" subject="_spyhUHTvEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_lJ2IgHTwEeCrsMYh7O-_Ow" name="Identify exhibitor family or premises id " subject="_spyhUHTvEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_qQ_ogHTwEeCrsMYh7O-_Ow" name="Filter the People View by family name or premises id" subject="_spyhUHTvEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_8J91MHTwEeCrsMYh7O-_Ow" name="People View confirm or change details of family information " subject="_spyhUHTvEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_G9heYHTxEeCrsMYh7O-_Ow" name="For new exhibitors record a new entry. For speed use the quick copy command. " subject="_spyhUHTvEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_S1tNUHTxEeCrsMYh7O-_Ow" name="Read tag with wand associating it with events template. " subject="_spyhUHTvEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_7wgW4HTxEeCrsMYh7O-_Ow" name="Record Weight" subject="_spyhUHTvEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_P8yqAHTyEeCrsMYh7O-_Ow" name="Pull down on weighIn event to invoke registration wizard to associate animal with Person. " subject="_spyhUHTvEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_gjEfwHTyEeCrsMYh7O-_Ow" name="Report detailing registration of all exhibitors, animal ids, animal weights and time of registration. " subject="_spyhUHTvEeCrsMYh7O-_Ow"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_uRzA8HTvEeCrsMYh7O-_Ow" name="Operator"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_BOaxEHTyEeCrsMYh7O-_Ow" name="A_record information for each animal_record weight" memberEnd="_BOaxEXTyEeCrsMYh7O-_Ow _BOaxFHTyEeCrsMYh7O-_Ow">
+    <ownedEnd xmi:id="_BOaxEXTyEeCrsMYh7O-_Ow" name="record information for each animal" type="_1R7b0HTvEeCrsMYh7O-_Ow" association="_BOaxEHTyEeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BOaxEnTyEeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BOaxE3TyEeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_BOaxFHTyEeCrsMYh7O-_Ow" name="record weight" type="_7wgW4HTxEeCrsMYh7O-_Ow" association="_BOaxEHTyEeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BOaxFXTyEeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BOaxFnTyEeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_uF5LkHTyEeCrsMYh7O-_Ow" name="" supplier="_gjEfwHTyEeCrsMYh7O-_Ow" client="_-_iJkHTvEeCrsMYh7O-_Ow"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_2vCysHTyEeCrsMYh7O-_Ow" name="A_operator_record exhibitor information " memberEnd="_2vCysXTyEeCrsMYh7O-_Ow _2vCytHTyEeCrsMYh7O-_Ow">
+    <ownedEnd xmi:id="_2vCysXTyEeCrsMYh7O-_Ow" name="operator" type="_uRzA8HTvEeCrsMYh7O-_Ow" association="_2vCysHTyEeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2vCysnTyEeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2vCys3TyEeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_2vCytHTyEeCrsMYh7O-_Ow" name="record exhibitor information " type="_0buzoHTvEeCrsMYh7O-_Ow" association="_2vCysHTyEeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2vCytXTyEeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2vCytnTyEeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_4KgEEHTyEeCrsMYh7O-_Ow" name="A_operator_record information for each animal" memberEnd="_4KgEEXTyEeCrsMYh7O-_Ow _4KgEFHTyEeCrsMYh7O-_Ow">
+    <ownedEnd xmi:id="_4KgEEXTyEeCrsMYh7O-_Ow" name="operator" type="_uRzA8HTvEeCrsMYh7O-_Ow" association="_4KgEEHTyEeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4KgEEnTyEeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4KgEE3TyEeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_4KgEFHTyEeCrsMYh7O-_Ow" name="record information for each animal" type="_1R7b0HTvEeCrsMYh7O-_Ow" association="_4KgEEHTyEeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4KgEFXTyEeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4KgEFnTyEeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_5IFtsHTyEeCrsMYh7O-_Ow" name="A_operator_register exhibitor for each animal " memberEnd="_5IFtsXTyEeCrsMYh7O-_Ow _5IGUwnTyEeCrsMYh7O-_Ow">
+    <ownedEnd xmi:id="_5IFtsXTyEeCrsMYh7O-_Ow" name="operator" type="_uRzA8HTvEeCrsMYh7O-_Ow" association="_5IFtsHTyEeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5IGUwHTyEeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5IGUwXTyEeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_5IGUwnTyEeCrsMYh7O-_Ow" name="register exhibitor for each animal " type="_7Ko7oHTvEeCrsMYh7O-_Ow" association="_5IFtsHTyEeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5IGUw3TyEeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5IGUxHTyEeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_6nDmEHTyEeCrsMYh7O-_Ow" name="A_operator_print exhibitor premises summary report" memberEnd="_6nDmEXTyEeCrsMYh7O-_Ow _6nDmFHTyEeCrsMYh7O-_Ow">
+    <ownedEnd xmi:id="_6nDmEXTyEeCrsMYh7O-_Ow" name="operator" type="_uRzA8HTvEeCrsMYh7O-_Ow" association="_6nDmEHTyEeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6nDmEnTyEeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6nDmE3TyEeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_6nDmFHTyEeCrsMYh7O-_Ow" name="print exhibitor premises summary report" type="_-_iJkHTvEeCrsMYh7O-_Ow" association="_6nDmEHTyEeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6nDmFXTyEeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6nDmFnTyEeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>
