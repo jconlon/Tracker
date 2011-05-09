@@ -371,7 +371,7 @@
 			To load a Premises document as a resource place the mouse cursor on the root element in the Fair document, 
 			right click, and from the pull down menu choose <code>Load Resorce...</code>
 			</para>
-			<figure float="0" id="fig_loadAgricultureResource">
+			<figure float="0" id="fig_loadFairResource">
 			<title>Load Resource Dialog</title>
 			<mediaobject>
 				<imageobject>
