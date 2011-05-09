@@ -354,7 +354,7 @@
 	    by all <code>Container Features</code> elements from all the loaded KML resources. 
 	   </para>
 	   <figure id="fig_agricultureGeographyPicks">
-			<title>Agriculture Project with Loaded Resources</title>
+			<title>Picklist of KML Containers</title>
 			<mediaobject>
 				<imageobject>
 					<imagedata align="center"
@@ -365,10 +365,8 @@
 	   <para>Likewise, when premises documents are loaded as resources into Agriculture documents, the editor choice 
 	    boxes associated with the <code>livestock</code> attribute of the <code>Location</code> element will be 
 	    populated by all <code>Premises</code> elements from all the loaded Premises resources.</para>
-	   <para>Once resources are loaded; a name and region can be assigned to the Agriculture association 
-	    and one or more Locations created.</para>
 	    <figure id="fig_completedAgricultureDocument">
-			<title>Completed Agriculture Document</title>
+			<title>Picklist of Premises</title>
 			<mediaobject>
 				<imageobject>
 					<imagedata align="center"
@@ -414,8 +412,8 @@
 	<para>To configure a project with an Agriculture Nature place the mouse cursor on the Project in the 
 	<code>Project Explorer</code> right click, and from the pull down menu choose <code>Add/Remove Agriculture Nature</code>.
 	</para>
-	<figure id="fig_configureAgricultureNature">
-			<title>Load Resource Dialog</title>
+	<figure id="fig_configureAgricultureNature"><!-- 9.10 -->
+			<title>Configuring Project with an Agriculture Nature</title>
 			<mediaobject>
 				<imageobject>
 					<imagedata align="center"
