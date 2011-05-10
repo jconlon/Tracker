@@ -139,7 +139,7 @@
          - - - - - - - - - - - - - - - - - -->
     <target name="setup.fop.task">
     	<echo>Setting up fop task</echo>
-    	<property name="fop.home" value="lib/fop-0.93" />
+    	<property name="fop.home" value="lib/fop-1.0" />
 		<taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop">
 			<classpath>
 				<fileset dir="${fop.home}/lib">
@@ -182,10 +182,13 @@
 	     =================================   -->
 	<target name="deploy.documentation.to.local.s3.staging" if="buckminster.home"
 		description="Copies all repos to a common folder for synchronization with a remote site">
+		<!--
 		<echoproperties></echoproperties>
+		-->
 		<copy todir="${dist.dir}">
 		    <fileset dir="${src.dir}">
 		      <include name="**/*.pdf"/>
+		      <exclude name="**/Abbott.pdf"/>
 		    </fileset>
 		  </copy>
 		

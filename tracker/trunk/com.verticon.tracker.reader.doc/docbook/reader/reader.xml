@@ -35,16 +35,16 @@
 			Currently there are four types of connections to Readers supported by the Tracker.
 			<orderedlist numeration="loweralpha">
         		<listitem>
-        		Bluetooth Reader - connects to Bluetooth RFID tag readers;
+        		<para>Bluetooth Reader - connects to Bluetooth RFID tag readers;</para>
         		</listitem>
        			 <listitem>
-        		Serial Port Reader - connects to Serial Port RFID tag readers;
+        		<para>Serial Port Reader - connects to Serial Port RFID tag readers;</para>
         		</listitem>
         		<listitem>
-        		Generating Reader - generates random test tags from a file. (For testing only);
+        		<para>Generating Reader - generates random test tags from a file. (For testing only);</para>
         		</listitem>
        			 <listitem>
-        		File Reader - reads Tag/@idNumbers as they are appended to a capture file.
+        		<para>File Reader - reads Tag/@idNumbers as they are appended to a capture file.</para>
         		</listitem>
             </orderedlist>
 		</para>
@@ -131,12 +131,15 @@
 						</para>
 					</listitem>
 				</orderedlist>
-				Configuring requires setting the preferences for: 
-						<para>
-							The <code>Capture File Read Interval</code> is the time interval
-							to wait before rereading the file for new messages.
-						</para>
 			</para>
+			<para>
+				Configuring requires setting the preferences for: 
+			</para>
+			<para>
+				The <code>Capture File Read Interval</code> is the time interval
+				to wait before rereading the file for new messages.
+			</para>
+			
 		</section>
 	</section>
 	</section>

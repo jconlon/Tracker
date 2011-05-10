@@ -10,11 +10,9 @@
 
 	<section id="overviewWhatIs">
 		<title>What is the Premises Editor?</title>
-		<para>Premises Editor is an <emphasis>Open Source</emphasis>, 
-		    <emphasis>Eclipse Modeling Facility <acronym>EMF</acronym> based</emphasis> editor
-			<emphasis>Software Application Framework</emphasis> for the development of 
-			<emphasis>Multi-platform</emphasis> <emphasis>Livestock Information Solutions</emphasis>.
-		</para>
+		<para>
+		The Premises Editor is a comprehensive open desktop solution for documenting and managing 
+        livestock premises, animal life data, and animal event history information.</para>
 	</section>
 
     <section id="overviewGoals">
@@ -82,6 +80,11 @@
 
 			</orderedlist>
 		</para>
+		<note><para>The Premises Editor comes with a set of predefined event types 
+		that are suitable for documenting most livestock histories. For recording unique premises specific 
+		events, the Premises Editor also provides a facility to define custom event types. Once defined, these
+		custom event types can be used along with the predefined event types to record animal histories. 
+		</para></note>
 		</section>
 	</section>
  
@@ -163,9 +166,6 @@
 			</mediaobject>
 		</figure>
     </section>
-    
-    
-    
     
 	<section id="premisesDocuments">
 		<?dbhtml filename="model/premisesEditorModel_premisesDocuments.html" ?>
@@ -300,21 +300,206 @@
 	<?dbhtml filename="model/premisesEditorModel_dataModel_events.html" ?>
 	<title>Data Model Event Elements</title>
 	<para>The Premises Data Model supports multiple Event types as shown in 
-		<xref linkend="fig_coreDataModelEvents" />
-				
-	   </para>
-	   <figure id="fig_coreDataModelEvents">
-		<title>Premises Data Model Event Elements</title>
+	 <xref linkend="fig_coreDataModelEvents1" /> and <xref linkend="fig_coreDataModelEvents2" />.	
+	</para>
+	 <figure id="fig_coreDataModelEvents1">
+		<title>Premises Data Model Event Elements (part 1)</title>
 		<mediaobject>
 			<imageobject>
-				<imagedata align="center" fileref="../images/model/dataModelEvents.png" />
+				<imagedata align="center" fileref="../images/model/dataModelEvents1.png" />
 			</imageobject>
 		</mediaobject>
 	</figure>
+	
+	 <figure id="fig_coreDataModelEvents2">
+		<title>Premises Data Model Event Elements (part 2)</title>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="../images/model/dataModelEvents2.png" />
+			</imageobject>
+		</mediaobject>
+	 </figure>
 	</section>
 	
 	</section>
 	
+	<section id="genericEvents">
+	<?dbhtml filename="genericEvents/genericEvents.html" ?>
+		<title>Custom Events</title>
+		<para>The Premises Editor ships with predefined event types that are suitable for documenting most livestock histories. 
+		If the predifined event types are not sufficient, the Premises Editor utilizes the <emphasis>Metatype Editor Feature</emphasis>
+		and the Metatype documents it creates to define custom event types.
+		</para>
+		
+		
+	<section id="genericEvents_creatingCustomEvents"> 
+	<?dbhtml filename="genericEvents/genericEvents_creatingCustomEvents.html" ?>
+		<title>Creating Custom Events</title>
+		
+		<para>To define one or more custom events: 
+		<itemizedlist>
+		<listitem><para>
+		Create a Metatype document using the <code>New Metatype Document Wizard</code>
+		</para></listitem>
+		<listitem><para>
+		For every custom event define an <emphasis>Object Class Definition</emphasis>, <code>OCD</code>  element; 
+		and in the <emphasis>Properties view</emphasis> specify it's properties as:
+			<itemizedlist>
+				<listitem><para>
+					<code>Description</code> - an optional description of the custom event
+				</para></listitem>
+				<listitem><para>
+					<code>ID</code> - a unique string identifying the event within the document 
+				</para></listitem>
+				<listitem><para>
+					<code>Name</code> - a user recognizable name for the event
+				</para></listitem>
+				
+			</itemizedlist>
+		</para></listitem>
+		<listitem><para>
+		Within each <code>OCD</code> create one or more child <emphasis>Attribute Definition</emphasis>, <code>AD</code> 
+		elements to define the attributes of the custom event. These attributes will be displayed in the editor as properties 
+		of the event.
+		</para></listitem>
+		<listitem><para>
+		Within each <code>AD</code> child element specify the properties:
+			<itemizedlist>
+				<listitem><para>
+					<code>Cardinality</code>, an optional property that specifies the number of values contained in this attribute.
+					 The default is <code>0</code>.
+				</para></listitem>
+				<listitem>
+				    <para>
+					<code>Data Type</code>, a required property that specifies what type of property value is valid for
+					the attribute.  A pull down list will show the options: <code>String</code>, <code>Long</code>,
+					<code>Integer</code>, <code>Short</code>, <code>Char</code>, 
+					<code>Byte</code>, <code>Double</code>, <code>Float</code> and <code>Boolean</code>
+				    </para>
+				    <para>When working with custom events in premises documents only values appropriate to the specified data type
+				    will be considered valid.  For example a custom event with a data type of <code>Boolean</code> will 
+				    only accept <emphasis>true</emphasis> and <emphasis>false</emphasis> as valid values.</para>
+				</listitem>
+				<listitem><para>
+					<code>Default</code>, is the default value for this attribute. This default value(s) must be appropriate for  
+					the cardinality and data type defined above.
+				</para></listitem>
+				<listitem><para>
+					<code>Description</code>, an optional description of the attribute.  This will be shown in the message panel when
+					the user interface is focused on this attribute. 
+				</para></listitem>
+				<listitem><para>
+					<code>ID</code>, document wide identification string for this attribute.
+				</para></listitem>
+				<listitem><para>
+					<code>Max</code>, maximuim value for this attribute.
+				</para></listitem>
+				<listitem><para>
+					<code>Min</code>, minimum value for this attribute.
+				</para></listitem>
+				<listitem><para>
+					<code>Name</code>, user recognizable name for this attribute.
+				</para></listitem>
+				<listitem><para>
+					<code>Required</code>, whether this attribute must be given a value by the user for the event to be considered valid.
+				</para></listitem>
+				
+				</itemizedlist>
+			</para>
+		</listitem>
+		<listitem><para>
+		Within each <code>OCD</code> optionally create a child <code>Icon</code> 
+		element to associate an image with the event.
+		</para></listitem>
+		</itemizedlist>
+		</para>
+		
+		<para>See <xref linkend="fig_genericEvents_create"/> for an screen shot showing a Metatype document that 
+		defines two custom events.</para>
+		
+		<figure id="fig_genericEvents_create">
+			<title>Defining Custom Events</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/genericEvents/definingCustomEvents.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+	</section>
+		
+	<section id="usingCustomEvents">
+	<?dbhtml filename="genericEvents/genericEvents_usingCustomEvents.html" ?>
+		<title>Using Custom Events in Premises Documents</title>
+		<para>
+		To use custom events in Premises documents, the Metatype document that defines the custom events must first be loaded 
+		as a resource.  To load a resource into a Premises document place the mouse cursor on the root element in the Premises document, right click, 
+		and from the pull down menu choose <code>Load Resorce...</code>
+		</para>
+		
+		<figure id="fig_loadMetatypeCustomEventsResource">
+			<title>Load Resource Dialog</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/genericEvents/loadResource.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+		<para>From the <xref linkend="fig_loadMetatypeCustomEventsResource"/> choose the Metatype document that defines the 
+		custom events and press <code>OK</code>.</para>
+		
+		<para>See <xref linkend="fig_loadedMetatypeCustomEventsResource"/>.</para>
+		
+		<figure id="fig_loadedMetatypeCustomEventsResource">
+			<title>Premises Document Loaded with a Metatype Resource</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/genericEvents/loadedResources.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+		<para>When a Premises document is loaded with a Metatype resource, all the custom events from the Metatype document 
+		are available for adding to the animal histories of the Premises Document. The Premises Editor user interfaces will also treat
+	    the Metatype documents custom events just like predifined events.</para>
+	    <para>See <xref linkend="fig_customEventsPickList"/>,
+	    <xref linkend="fig_customEventsWizard"/>, and <xref linkend="fig_customEventsView"/>.</para>
+		
+		<figure id="fig_customEventsPickList">
+			<title>Adding an Event in the Premises Editor</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/genericEvents/pickList.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+			
+		<figure id="fig_customEventsWizard">
+			<title>Adding and Event in the Event View</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/genericEvents/addingAnEventWizard.png" />
+				</imageobject>
+			</mediaobject>
+	   </figure>
+	   
+	   <figure id="fig_customEventsView">
+			<title>Modifying Attributes in the Events View</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/genericEvents/eventsView.png" />
+				</imageobject>
+			</mediaobject>
+	   </figure>
+		
+	</section>
+	</section>
 	<section id="editingPremisesDocuments">
     	<?dbhtml filename="editingPremisesDocuments/editingPremisesDocuments.html" ?>
 		<title>Editing Premises Documents</title>
@@ -322,14 +507,8 @@
 			<title>Two Types of Editor</title>
 			<para>
 			Two types of editors are used to manipulate Premises and Animal
-			Documents, Premises Editor and Premises Transaction
-			Editor as shown in
+			Documents, Premises Editor and Premises Transaction Editor as shown in
 			<xref linkend="fig_choosePremisesEditor" />.
-				<note><title>Upcoming Changes</title>
-					<para>Future versions of this feature may consolidate all 
-					functionality into one editor. 
-					</para>
-				</note>
 			</para>
 
 		<figure id="fig_choosePremisesEditor">
@@ -351,7 +530,7 @@
 				</listitem>
 				<listitem>
 					<para>The Premises Transaction Editor can be used in a similar way to 
-					the Premises Editor, but it has additional functionality to support
+					the Premises Editor, but it has additional functionality to support 
 				    the Readers Feature.
 					<note><title>Reader Feature</title>
 					<para>The Readers Feature is an optional Feature that may be installed 
@@ -591,6 +770,8 @@
 		</section>
 	</section>
 		
+	
+	
 	<section id="chBulkEventProcessing">
 	 <?dbhtml filename="bulkProcessing/premisesBulkEventProcessing.html" ?>
 	<title>Bulk Event Processing</title>

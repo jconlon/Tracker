@@ -27,21 +27,31 @@
 				  </para>
 				</listitem>
 				<listitem>
+					 <para>The Geography Editor is an open source desktop solution for authoring, managing and integrating
+      					state of the art Geographic Information System <acronym>GIS</acronym> technologies based on the 
+      					<ulink url="http://www.opengeospatial.org/"> <citetitle>OpenGIS</citetitle></ulink> 
+      					Key Hole Markup Language <acronym>KML</acronym>;</para>
+				</listitem>
+				<listitem>
 					<para>Fair Editor, extends the Premises Editor to model and document people and animals at a 
 						Livestock Exhibition. The Premises Editor and the Fair Editor are the initial Tracker editors.
 					</para>
 				</listitem>
 				<listitem>
-					<para>Abattoir Premises Editor;</para>
+					<para>Metatype Model Editor, is a used to create configuration documents that extend the 
+					functionality of core Tracker Features;</para>
 				</listitem>
 				<listitem>
-					<para>Auction Premises Editor;</para>
+					<para>Agriculture Editor is a solution for documenting, managing and visualizing geographic livestock herd distributions, individual 
+      				animal locations, and animal movements within and between premises locations.</para>
+      				<para>The Agriculture Editor and Location Service is a suite of tools that integrates state of 
+      				the art Geographic Information System <acronym>GIS</acronym> technologies based on the 
+      				<ulink url="http://www.opengeospatial.org/"> <citetitle>OpenGIS</citetitle></ulink> Key Hole Markup 
+     				 Language<acronym>KML</acronym> with Tracker Premises livestock management information;</para>
 				</listitem>
 				<listitem>
-					<para>Livestock Transportation Editor;</para>
-				</listitem>
-				<listitem>
-					<para>Custom Editors, are based on a individual operational use case analysis and resulting data model.</para>
+					<para>Custom Editors, are editors used to create customer specific data model documents that
+					meet unique customer use-case requirements.</para>
 				</listitem>
 			</itemizedlist>
  		</para>
