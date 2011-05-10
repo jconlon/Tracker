@@ -15,10 +15,11 @@
 		<edition>
 			Tracker Business Intelligence Toolkit User Guide version 0.2.1
 		</edition>
-		<pubdate>August 19, 2009</pubdate>
+		<pubdate>May 9, 2011</pubdate>
 		<copyright>
-			<year>2008</year>
-			<year>2009</year>
+		    <year>2009</year>
+			<year>2010</year>
+			<year>2011</year>
 			<holder>Verticon, Inc.</holder>
 		</copyright>
 
@@ -43,24 +44,23 @@
 					Tracker Business Intelligence Toolkit is 
 				    free software: you can redistribute it
 					and/or modify it under the terms of the
-					<acronym>GNU</acronym>
-					General Public License as published by the Free
-					Software Foundation, either version 3 of the
-					License, or (at your option) any later version.
-
+					<acronym>EPL</acronym>
+					Eclipse Public License as published by the Eclipse
+				    Foundation, version 1.0.</para>
+				    <para>
 					This program is distributed in the hope that it will
 					be useful, but WITHOUT ANY WARRANTY; without even
 					the implied warranty of MERCHANTABILITY or FITNESS
 					FOR A PARTICULAR PURPOSE. See the
-					<acronym>GNU</acronym>
-					General Public License for more details.
+					Eclipse Foundation Software User Agreement for more details.
 				</para>
 				<para>
-					A copy of the license is included in the section
-					entitled
-					<acronym>GNU</acronym>
-					General Public License version 3.
-				</para>
+				    A copy of the Eclipse Foundation Software User Agreement is included in the Section entitled 
+					&ldquo;Eclipse Foundation Software User Agreement&rdquo; and  
+					an online version of the <acronym>EPL</acronym>
+					Eclipse Public License version 1.0 can be found at
+			    <ulink url="http://www.eclipse.org/org/documents/epl-v10.php"><citetitle>http://www.eclipse.org/org/documents/epl-v10.php</citetitle></ulink>
+			    </para>
 			</blockquote>
 		</legalnotice>
 

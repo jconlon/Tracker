@@ -19,10 +19,12 @@
 	<xi:include href="../../com.verticon.tracker.doc/docbook/editors/editors.xml"/>
 	<!-- Add editors -->
 	<xi:include href="../../com.verticon.tracker.editor.doc/docbook/premisesEditor/premisesEditor.xml"/>
-	<xi:include href="../../com.verticon.tracker.fair.doc/docbook/fairEditor/fairEditor.xml"/>
-	<xi:include href="../../com.verticon.tracker.agriculture.doc/docbook/agricultureEditor/agricultureEditor.xml"/>
-	<xi:include href="../../com.verticon.geography.editor.doc/docbook/geographyEditor/geographyEditor.xml"/>
 	<xi:include href="../../com.verticon.osgi.metatype.doc/docbook/metatypeEditor/metatypeEditor.xml"/>
+	<xi:include href="../../com.verticon.geography.editor.doc/docbook/geographyEditor/geographyEditor.xml"/>
+	<xi:include href="../../com.verticon.agriculture.doc/docbook/agricultureEditor/agricultureEditor.xml"/>
+	<xi:include href="../../com.verticon.tracker.fair.doc/docbook/fairEditor/fairEditor.xml"/>
+	
+	
 	<!-- End editors -->
 	
 	<!-- Features -->
@@ -34,7 +36,8 @@
 	<xi:include href="../../com.verticon.tracker.reader.doc/docbook/reader/reader.xml"/>
 	
 	<xi:include href="../../com.verticon.tracker.doc/docbook/appendix/fdl.xml"/>
-	<xi:include href="../../com.verticon.tracker.doc/docbook/appendix/gpl.xml"/>
+	<xi:include href="../../com.verticon.tracker.doc/docbook/appendix/eclipseUserAgreement.xml"/>
+	<!--  <xi:include href="../../com.verticon.tracker.doc/docbook/appendix/gpl.xml"/>-->
 	
 	
 </book>

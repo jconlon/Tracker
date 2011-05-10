@@ -28,6 +28,14 @@
 					</para>
 				</listitem>
 				<listitem>
+					<para>Utilities for interfacing with network attached sensors;
+					</para>
+				</listitem>
+				<listitem>
+					<para>Utilities for interfacing with industry standard Geography Information Systems <acronym>GIS</acronym> and geobrowsers;
+					</para>
+				</listitem>
+				<listitem>
 					<para>Eclipse Business Intelligence Reporting Tools <acronym>BIRT</acronym>.
 					</para>
 				</listitem>

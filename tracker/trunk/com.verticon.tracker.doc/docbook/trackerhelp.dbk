@@ -14,9 +14,12 @@
 	<xi:include href="editors/editors.xml"/>
 	
 	<xi:include href="features/features.xml"/>
-	
 	<xi:include href="appendix/fdl.xml"/>
+	<xi:include href="appendix/eclipseUserAgreement.xml"/>
+	<!--
+	
 	<xi:include href="appendix/gpl.xml"/>
+	-->
 	
 	<!-- TODO Add a chapter on the different kinds of products 
 	
