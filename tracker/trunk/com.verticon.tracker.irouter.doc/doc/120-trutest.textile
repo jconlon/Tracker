@@ -1,26 +1,33 @@
 h1. TruTest Proxy Feature
 
-The TruTest feature is an iRouter feature containing a proxy component factory and TruTest specific business logic component Factories that creates user configurable services instances[14] for interfacing with TruTest animal scale-heads[15]. 
+The TruTest Proxy feature is an iRouter _Proxy Component Factory_ and a _Business Logic Component Factory_ for creating 
+services[14] for interfacing with "TruTest":http://www.tru-test.com animal scale-heads. 
 
 
 h2. Proxy Component Factory
 
-The TruTest Proxy Component Factory creates services for:
-* Synchronizing Animal Life Data on startup
-** Exporting of animal life data to a file in a specified directory on the filesystem
-** Importing of animal life data
-*** Received as a list of records sent from an active iRouter data synchronization producer service
-*** From a specified directory on the file system
-* Producing weight and key state information
-* Consuming raw TruTest protocol commands
+The TruTest[15] Proxy Component Factory creates service instances that:
+* Synchronize TruTest scalehead animal life data;
+** Animal life data from the TruTest scalehead is sent to a file in a specified user directory 
+** Animal life data from the computer is sent to TruTest scalehead as a list of records either from:
+*** An iRouter Animal Life Data Component service (For details see the Premises Gateway Feature documentation)
+*** A file named animalLifeDataUpLoad.txt in a specified directory on the system file system
+* Detect and send animal weights and _Enter_ key  states
+** TruTest Proxy instances will detect scalehead animal weights and operator keypress information producing:
+**_Measurement_ products that contain the weights read by the scalehead 
+** _State_ information indicating that an operator pressed the _Enter_ key  
+* Provide a modular and simple framework for custom TruTest scalehead integration 
+** TruTest Proxy instances consume raw TruTest protocol commands produced by other iRouter components for:
+*** custom control of the scalehead 
+*** display of values on the scalehead fields 
 
 h3. Consumer Scopes
 
-TruTest Service Instances consume TruTest protocol commands that are produced by other TruTest and iRouter service instances. 
+TruTest Proxy Service Instances consume @wireAdmin@ products containing TruTest protocol commands which are produced by TruTest Business Logic instances. __See below.__
 
 h3. Producer Scopes
 
-TruTest Service Instances produce wireAdmin products that are consumed by business logic and logging components. TruTest Service Instances produce weight measurements, animal tag numbers, and transaction state. 
+TruTest Service Instances produce @wireAdmin@ products that are consumed by iRouter business logic and logging components. TruTest Service Instances produce weight _Measurement_ products, animal tag _Numbers_, and key press _State_ products. 
 
 h3. Service Diagram
 
@@ -30,17 +37,17 @@ h2. Business Logic Component Factories
 
 h3. Measurement Adapter
 
-Measurement Adapter is a Measurement Consumer and a TruTest Command producer. It consumes Measurements and converts them into TruTest commands for displaying the Measurement values in fields on a TruTest Indicator.  
+Measurement Adapter is a _Measurement_ Consumer and a TruTest Command producer. It consumes _Measurement_ products from generic iRouter component instances and converts these to produce TruTest command products that can be sent to a TruTest Proxy instance for displaying Measurement values in fields on a TruTest Indicator.  
 
 h3. EID Adapter
 
-EID Adapter is a Animal ID(Identification) number Consumer and a TruTest Command producer. It consumes Animal IDs and converts them into TruTest commands for inputing EID(Electronic animal IDentification) values to a TruTest Indicator.  
+EID Adapter is a Animal ID(Identification) number Consumer and a TruTest Command producer. It consumes generic Animal IDs and converts them into TruTest commands for inputing EID(Electronic animal IDentification) values to a TruTest Indicator.  
 
 h3. Alarm Adapter
 
-Alarm Adapter is a State Consumer and a TruTest Command producer. It consumes States and converts them into TruTest commands to turn on and off the alarm in a TruTest Indicator.  
+Alarm Adapter consumes _State_ products and produces TruTest Command products. It consumes States and converts them into TruTest commands in order to turn on and off the alarm in a TruTest Indicator.  
 
-Reception of a distinct state sends commands to the TruTest Proxy service instances to turn on the alarm, while reception of any other state sends commands to the TruTest Proxy service instance to turn the alarm off.
+Reception of a distinct _State_ sends command products to the TruTest Proxy service instances to turn on the alarm, while reception of any other _State_ sends command products to the TruTest Proxy service instance to turn the alarm off.
 
 h2. Notes
 
