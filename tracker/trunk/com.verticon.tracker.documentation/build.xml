@@ -159,6 +159,10 @@
     <target name="style.for.buckminster" if="buckminster.home">
     	<xslt style="${fo.stylesheet}" extension=".fo" 
     		        basedir="${gen.dir}" destdir="${fo.dir}">
+    		      <!-- these parameters make bookmarks work in the generated PDF -->
+    		       <param name="fop.extensions" expression="0"/>
+    		       <param name="fop1.extensions" expression="1"/>
+
     				<!--classpath refid="xalan.classpath" /-->
     				<include name="${merged.doc.name}" />
     	</xslt>
@@ -171,6 +175,10 @@
     	<xslt style="${fo.stylesheet}" extension=".fo" 
     		        basedir="${gen.dir}" destdir="${fo.dir}">
     				<classpath refid="xalan.classpath" />
+    		<!-- these parameters make bookmarks work in the generated PDF -->
+    		      <param name="fop.extensions" expression="0"/>
+    		      <param name="fop1.extensions" expression="1"/>
+
     				<include name="${merged.doc.name}" />
     	</xslt>
     </target>
