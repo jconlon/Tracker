@@ -7,6 +7,7 @@
 100-factories.textile
 110-mettler.textile
 120-trutest.textile
+125-gps.textile
 200-premises.textile
 
 

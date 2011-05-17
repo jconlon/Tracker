@@ -51,7 +51,7 @@ The above is the iRouter monitor view of a TruTest scale head integrated with a 
 
 h3. Configuration
 
-While it is possible to use multiple generic components for business logic, complex business logic can instead can be encapsulated in a single custom business logic component. This use case depicts using a single business logic component for integrating, controlling and transforming complex information network flows between multiple sensors and a data logger.
+While it is possible to use multiple generic components for business logic, complex business logic can instead be encapsulated in a single custom business logic component. This use case depicts using a single business logic component for integrating, controlling and transforming complex information network flows between multiple sensors and a data logger.
 
 The configuration includes:
 

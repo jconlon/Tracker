@@ -99,10 +99,11 @@
 </topic>
 <topic href="help/Notes6.html" label="Notes"></topic>
 </topic>
-<topic href="help/PremisesGatewayFeature.html" label="10. Premises Gateway Feature">
-<topic href="help/PremisesGatewayFeature.html#MeasurementEventGatewayComponentFactory" label="Measurement Event Gateway Component Factory"></topic>
-<topic href="help/EIDReaderGatewayComponentFactory.html" label="EID Reader Gateway Component Factory"></topic>
-<topic href="help/AnimalLifeDataGatewayComponentFactory.html" label="Animal Life Data Gateway Component Factory"></topic>
+<topic href="help/GPSProxyFeature.html" label="10. GPS Proxy Feature">
+<topic href="help/GPSProxyFeature.html#ProducerScopes3" label="Producer Scopes"></topic>
+<topic href="help/ServiceDiagram3.html" label="Service Diagram"></topic>
+<topic href="help/Notes7.html" label="Notes"></topic>
 </topic>
+<topic href="help/PremisesGatewayFeature.html" label="11. Premises Gateway Feature"></topic>
 <topic href="help/glossary.html" label="A. Glossary"></topic>
 </toc>
