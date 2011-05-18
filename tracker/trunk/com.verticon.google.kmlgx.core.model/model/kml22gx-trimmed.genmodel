@@ -7,7 +7,7 @@
     complianceLevel="6.0" copyrightFields="false" usedGenPackages="../../com.verticon.atom.authorlink.core.model/model/atom-author-link.genmodel#//authorlink ../../com.verticon.opengis.kml.core.model/model/ogckml22-trimmed.genmodel#//kml ../../com.verticon.oasis.xal.core.model/model/xAL.genmodel#//xal">
   <foreignModel>../../com.verticon.google.kmlgx.core.schema/kml22gx-trimmed.xsd</foreignModel>
   <genPackages prefix="Kmlgx" basePackage="com.verticon.google" resource="XML" disposableProviderFactory="true"
-      fileExtensions="kml" ecorePackage="kmlgx.ecore#/">
+      childCreationExtenders="true" fileExtensions="kml" ecorePackage="kmlgx.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="kmlgx.ecore#//AltitudeModeEnumType">
       <genEnumLiterals ecoreEnumLiteral="kmlgx.ecore#//AltitudeModeEnumType/clampToSeaFloor"/>
       <genEnumLiterals ecoreEnumLiteral="kmlgx.ecore#//AltitudeModeEnumType/relativeToSeaFloor"/>
