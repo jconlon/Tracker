@@ -57,10 +57,12 @@ public class MeasurementEventConsumer  extends AbstractTransactionHandler implem
     private static final String CONTROL_STATE_NAME ="consumer.transaction.state";
 	private static final String CONTROL_STATE_VALUE = "consumer.transaction.state.value";
 	private static final String CONNECTION_URI = "connection.uri";
+	private static final String ONLY_SEND_LAST_ENVELOPE = "onlysend.last.envelope";
 	
     private final AtomicInteger wiresConnected = new AtomicInteger(0);
     private final AtomicInteger totalMeasurements = new AtomicInteger(0);
     private boolean triggerOnID = false;
+    private boolean onlySendLastEnvelope = false;
     private Map<String,Object> config = null;
 	private EventAdmin eventAdmin = null;
 	private Envelope lastEnvelope = null;
@@ -105,12 +107,9 @@ public class MeasurementEventConsumer  extends AbstractTransactionHandler implem
 		for (Map.Entry<String, Object> entry : config.entrySet()) {
 			log.debug(bundleMarker, "Property key={} value={}",entry.getKey(),entry.getValue());
 		}
-		Object o = config.get(TRIGGER_ON_ID_NAME);
-		if(o!=null){
-			this.triggerOnID=(Boolean)o;
-		}else{
-			this.triggerOnID=false;
-		}
+		this.triggerOnID=getConfigBoolean(TRIGGER_ON_ID_NAME);
+		this.onlySendLastEnvelope=getConfigBoolean(ONLY_SEND_LAST_ENVELOPE);
+		
 		this.state = new State(
 				getConfigInteger(CONTROL_STATE_VALUE),
 				getConfigString(CONTROL_STATE_NAME));
@@ -128,6 +127,17 @@ public class MeasurementEventConsumer  extends AbstractTransactionHandler implem
 		}
 		return (Integer)conf;
 	}
+    
+    private Boolean getConfigBoolean(String key) {
+		Object conf = config.get(key);
+		if(conf==null){
+			return false;
+		}else if(conf instanceof String){
+			return new Boolean((String)conf);
+		}
+		return (Boolean)conf;
+	}
+
     
     /**
 	 * Declaratives Services activation of instance.
@@ -361,7 +371,7 @@ public class MeasurementEventConsumer  extends AbstractTransactionHandler implem
 
 
 	/**
-	 * Overrides the superclass to add all non-state types of envelopes and to allow for triggering on
+	 * Overrides the superclass to add all Position and Measurement types of envelopes and to allow for triggering on
 	 * eids.
 	 * 
 	 * @see com.verticon.tracker.irouter.common.AbstractTransactionHandler#add(org.osgi.service.wireadmin.Envelope)
@@ -384,13 +394,27 @@ public class MeasurementEventConsumer  extends AbstractTransactionHandler implem
 			 if(triggerOnID){
 				 forwardConditionMet();
 			 }
-
+		}else if ((envelope.getValue() instanceof Measurement) || (envelope.getValue() instanceof Position)){
+			
+				 if(onlySendLastEnvelope){
+					 envelopes.clear();
+					 log.debug(bundleMarker(),"Adding last envelope -  id={}, scope={} value={}",
+							 new Object[]{id,
+						 envelope.getScope(),
+						 envelope.getValue()});
+				 }else{
+					 log.debug(bundleMarker(),"Adding to cached envelopes -  id={}, scope={}, value={}, cache size={}",
+							 new Object[]{id,
+						 envelope.getScope(),
+						 envelope.getValue(),
+						 envelopes.size()});
+				 }
+				 envelopes.put(envelope.getScope(), envelope);
 		}else{
-			 log.error(bundleMarker(),"id='{}', type='{}' has unknown value of {}",
+			 log.warn(bundleMarker(),"id={}, scope={} has unsupported value of {}",
 					 new Object[]{id,
 				 envelope.getScope(),
 				 envelope.getValue()});
-			 envelopes.put(envelope.getScope(), envelope);
 		}
 	}
 

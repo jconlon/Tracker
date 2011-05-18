@@ -49,17 +49,18 @@ public class MockProducer implements Producer {
 
 	/**
 	 * Access point for injecting test envelopes
-	 * @param value
+	 * @param envelope
 	 */
-	void send(Envelope value) {
+	void send(Envelope envelope) {
 		if (wires == null) {
-			logger.error(bundleMarker, "Cant send value={}, No wires", value);
+			logger.error(bundleMarker, "Cant send value={}, No wires", envelope);
 			return;
 		}
 		for (Wire wire : wires) {
-			wire.update(value);
-			logger.info(bundleMarker, "Sending {} to wirescope={}", value,
+			logger.info(bundleMarker, "Sending {} to wirescope={}", envelope.getValue(),
 					wire.getScope());
+			wire.update(envelope);
+			
 		}
 	}
 

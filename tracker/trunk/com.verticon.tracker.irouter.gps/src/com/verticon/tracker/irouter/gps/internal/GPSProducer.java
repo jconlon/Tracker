@@ -460,7 +460,7 @@ public class GPSProducer implements Producer, Monitorable {
 	 */
 	void send(Position position) {
 		if (wires != null && wires.length > 0) {
-			Envelope envelope = new BasicEnvelope(position, uri, producerScope);
+			Envelope envelope = new BasicEnvelope(position, null, producerScope);
 			logger.debug(bundleMarker,
 					"{}: sending position={}, to {} consumers", new Object[] {
 							this, position, wires.length });
