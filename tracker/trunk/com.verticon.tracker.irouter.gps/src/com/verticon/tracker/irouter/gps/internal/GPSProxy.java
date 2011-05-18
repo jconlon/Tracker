@@ -71,7 +71,8 @@ public class GPSProxy implements Callable<Void> {
 			producer.setConnectedStatusVariable(false);
 			productionDelay= TimeUnit.MILLISECONDS.convert(producer.getOutputRate(),TimeUnit.SECONDS);
 			String uri = producer.getUri();
-			logger.debug(bundleMarker, "{} Attempting to connect to {}", this, uri);
+			logger.debug(bundleMarker, "{} Starting uri={} with productionDelay={}", 
+					new Object[]{this, uri,productionDelay} );
 			BufferedReader in = null;
 			boolean swallowExcetionsDuringClose = true;
 			Connection con = producer.getConnectorService().open(uri,
@@ -125,10 +126,12 @@ public class GPSProxy implements Callable<Void> {
 			return;
 		}
 		long timeStamp = System.currentTimeMillis();
-		long timeSinceLastProduction = lastTimeStamp-timeStamp;
+		long timeSinceLastProduction = timeStamp-lastTimeStamp;
+		logger.debug(bundleMarker, "{} testing timeSinceLastProduction={}, productionDelay={}", 
+				new Object[]{this, timeSinceLastProduction,productionDelay});
 		if(lastTimeStamp!=0){
-			if(timeSinceLastProduction > productionDelay){
-				logger.debug(bundleMarker, "{} defering timeSinceLastProduction={} is greater than productionDelay={}", 
+			if(timeSinceLastProduction < productionDelay){
+				logger.debug(bundleMarker, "{} defering timeSinceLastProduction={} < productionDelay={}", 
 						new Object[]{this, timeSinceLastProduction,productionDelay});
 				return;
 			}
