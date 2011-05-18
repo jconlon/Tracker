@@ -7,8 +7,8 @@
     complianceLevel="6.0" copyrightFields="false" usedGenPackages="../../com.verticon.atom.authorlink.core.model/model/atom-author-link.genmodel#//authorlink ../../com.verticon.oasis.xal.core.model/model/xAL.genmodel#//xal">
   <foreignModel>../../com.verticon.opengis.kml.core.schema/ogckml22-trimmed.xsd</foreignModel>
   <genPackages prefix="Kml" basePackage="com.verticon.opengis" resource="XML" disposableProviderFactory="true"
-      loadInitialization="true" literalsInterface="false" fileExtensions="ogckml"
-      ecorePackage="kml.ecore#/">
+      loadInitialization="true" literalsInterface="false" extensibleProviderFactory="true"
+      fileExtensions="ogckml" ecorePackage="kml.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="kml.ecore#//AltitudeModeEnumType">
       <genEnumLiterals ecoreEnumLiteral="kml.ecore#//AltitudeModeEnumType/clampToGround"/>
       <genEnumLiterals ecoreEnumLiteral="kml.ecore#//AltitudeModeEnumType/relativeToGround"/>
