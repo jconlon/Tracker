@@ -193,7 +193,7 @@ public class GPSSystemTest extends TestCase {
 		props.put(LON_ERROR, 100d);
 		props.put(ALT_ERROR, 50d);
 		props.put(CONNECTION_RETRY_DELAY, 7l);
-		props.put(PRODUCT_OUTPUT_RATE, 5l);
+		props.put(PRODUCT_OUTPUT_RATE, 1l);
 		
 		
 		
