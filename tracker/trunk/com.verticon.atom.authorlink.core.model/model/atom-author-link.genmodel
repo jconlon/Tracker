@@ -7,7 +7,7 @@
     complianceLevel="6.0" copyrightFields="false">
   <foreignModel>../../com.verticon.atom.authorlink.core.schema/atom-author-link.xsd</foreignModel>
   <genPackages prefix="Authorlink" basePackage="com.verticon.atom" resource="XML"
-      disposableProviderFactory="true" contentTypeIdentifier="com.verticon.atom.authorlink"
+      disposableProviderFactory="true" extensibleProviderFactory="true" contentTypeIdentifier="com.verticon.atom.authorlink"
       ecorePackage="authorlink.ecore#/">
     <genDataTypes ecoreDataType="authorlink.ecore#//AtomEmailAddress"/>
     <genDataTypes ecoreDataType="authorlink.ecore#//AtomLanguageTag"/>

@@ -17,81 +17,57 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.StringTokenizer;
 
-import org.eclipse.emf.common.CommonPlugin;
-
-import org.eclipse.emf.common.util.URI;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.emf.ecore.xmi.XMLResource;
-
-import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
-
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
-
 import org.eclipse.core.runtime.IProgressMonitor;
-
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.CommonPlugin;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.ExtendedMetaData;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
 import org.eclipse.jface.dialogs.MessageDialog;
-
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
-
 import org.eclipse.swt.SWT;
-
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.ModifyEvent;
-
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
-
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
-
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ISetSelectionTarget;
 
 import com.verticon.google.kmlgx.KmlgxFactory;
 import com.verticon.google.kmlgx.KmlgxPackage;
 import com.verticon.google.kmlgx.provider.Kml22gxtrimmedEditPlugin;
-
-
-import org.eclipse.core.runtime.Path;
-
-import org.eclipse.emf.ecore.EStructuralFeature;
-
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.ExtendedMetaData;
-
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.StructuredSelection;
-
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PartInitException;
+import com.verticon.opengis.kml.KmlFactory;
+import com.verticon.opengis.kml.KmlPackage;
 
 
 /**
@@ -126,6 +102,11 @@ public class KmlgxModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	protected KmlgxPackage kmlgxPackage = KmlgxPackage.eINSTANCE;
+	
+	/**
+	 * Added
+	 */
+	protected KmlPackage kmlPackage = KmlPackage.eINSTANCE;
 
 	/**
 	 * This caches an instance of the model factory.
@@ -134,6 +115,8 @@ public class KmlgxModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	protected KmlgxFactory kmlgxFactory = kmlgxPackage.getKmlgxFactory();
+	
+	protected KmlFactory kmlFactory = kmlPackage.getKmlFactory();
 
 	/**
 	 * This is the file creation page.
@@ -191,13 +174,14 @@ public class KmlgxModelWizard extends Wizard implements INewWizard {
 	/**
 	 * Returns the names of the features representing global elements.
 	 * <!-- begin-user-doc -->
+	 * Using the kml package until problem with 'Creating Children You Didn't Know Existed' is solved
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected Collection<String> getInitialObjectNames() {
 		if (initialObjectNames == null) {
 			initialObjectNames = new ArrayList<String>();
-			for (EStructuralFeature eStructuralFeature : ExtendedMetaData.INSTANCE.getAllElements(ExtendedMetaData.INSTANCE.getDocumentRoot(kmlgxPackage))) {
+			for (EStructuralFeature eStructuralFeature : ExtendedMetaData.INSTANCE.getAllElements(ExtendedMetaData.INSTANCE.getDocumentRoot(kmlPackage))) {
 				if (eStructuralFeature.isChangeable()) {
 					EClassifier eClassifier = eStructuralFeature.getEType();
 					if (eClassifier instanceof EClass) {
@@ -216,13 +200,14 @@ public class KmlgxModelWizard extends Wizard implements INewWizard {
 	/**
 	 * Create a new model.
 	 * <!-- begin-user-doc -->
+	 * Using the kml package until problem with 'Creating Children You Didn't Know Existed' is solved
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected EObject createInitialModel() {
-		EClass eClass = ExtendedMetaData.INSTANCE.getDocumentRoot(kmlgxPackage);
+		EClass eClass = ExtendedMetaData.INSTANCE.getDocumentRoot(kmlPackage);
 		EStructuralFeature eStructuralFeature = eClass.getEStructuralFeature(initialObjectCreationPage.getInitialObjectName());
-		EObject rootObject = kmlgxFactory.create(eClass);
+		EObject rootObject = kmlFactory.create(eClass);
 		rootObject.eSet(eStructuralFeature, EcoreUtil.create((EClass)eStructuralFeature.getEType()));
 		return rootObject;
 	}
