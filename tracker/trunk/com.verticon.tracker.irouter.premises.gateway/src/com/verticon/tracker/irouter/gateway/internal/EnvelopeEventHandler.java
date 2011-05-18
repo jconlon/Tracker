@@ -56,7 +56,6 @@ import com.verticon.tracker.WeightMeasurementUnit;
  *  </ol>
  */
 public class EnvelopeEventHandler implements EventHandler {
-	private static final String ANIMAL_POSITION_SCOPE = "animal.position";
 	private static final String IROUTER_PAYLOAD ="com.verticon.tracker.irouter.payload";
 	private static final String WEIGHIN_EVENT_SCOPE = "animal.weight";
 	private static final String TRACKER_EDITING_DOMAIN = 
@@ -126,7 +125,7 @@ public class EnvelopeEventHandler implements EventHandler {
 		ResourceSet rs = domain.getResourceSet();
 		EList<Resource> resources = rs.getResources();
 		if(resources.isEmpty()){
-			logger.warn(bundleMarker,"Can not add {}, because no Premises resources are active.",envelope);
+			logger.warn(bundleMarker,"Can not add {}, because no resources are active.",envelope);
 			return;
 		}
 		for (Resource resource : resources) {
@@ -187,9 +186,9 @@ public class EnvelopeEventHandler implements EventHandler {
 	}
 
 	private void addEventToAnimal(Event event, String source, Animal animal) {
-		animal.activeTag().getEvents().add(event);
-		logger.info(bundleMarker, "{} added {}, to animal {}, ", new Object[] {
+		logger.info(bundleMarker, "{} adding {}, to animal {}, ", new Object[] {
 				source, simpleName(event), animal.getId() });
+		animal.activeTag().getEvents().add(event);
 	}
 
 	private static final String simpleName(Event event) {
@@ -197,17 +196,17 @@ public class EnvelopeEventHandler implements EventHandler {
 		return name.substring(0, name.indexOf("Impl"));
 	}
 	
-	public static Event createEvent(Tag tag, Envelope envelope) throws EventCreationException{
+	
+	private static Event createEvent(Tag tag, Envelope envelope) throws EventCreationException{
 		if(WEIGHIN_EVENT_SCOPE.equals(envelope.getScope())){
 			return createWeighInEvent(envelope);
-		}else if(ANIMAL_POSITION_SCOPE.equals(envelope.getScope())){
-			return createPositionEvent(envelope);
+		}else if(envelope.getValue() instanceof Position){
+			return createPositionEvent((Position)envelope.getValue());
 		}
 		return createGenericEvent(tag,envelope);
 	}
 
-	private static com.verticon.tracker.Position createPositionEvent(Envelope envelope) {
-		Position position = (Position)envelope.getValue();
+	private static com.verticon.tracker.Position createPositionEvent(Position position) {
 		com.verticon.tracker.Position positionEvent = TrackerFactory.eINSTANCE.createPosition();
 		positionEvent.setLatitude(degrees(position.getLatitude().getValue()));
 		positionEvent.setLongitude(degrees(position.getLongitude().getValue()));
@@ -224,8 +223,12 @@ public class EnvelopeEventHandler implements EventHandler {
 	 * Create a WeighInEvent from the Transaction
 	 * @param envelope
 	 * @return
+	 * @throws EventCreationException 
 	 */
-	private static WeighIn createWeighInEvent(Envelope envelope) {
+	private static WeighIn createWeighInEvent(Envelope envelope) throws EventCreationException {
+		if(!(envelope.getValue() instanceof Measurement)){
+			throw new EventCreationException("Envelope contained a "+envelope.getValue()+" but it must contain a Measurement");
+		}
 		Measurement measurement = (Measurement)envelope.getValue();
 		WeighIn weighIn = TrackerFactory.eINSTANCE.createWeighIn();
 		
@@ -245,6 +248,9 @@ public class EnvelopeEventHandler implements EventHandler {
 	 * @throws EventCreationException
 	 */
 	private static GenericEvent createGenericEvent(Tag tag, Envelope envelope) throws EventCreationException{
+		if(!(envelope.getValue() instanceof Measurement)){
+			throw new EventCreationException("Envelope contained a "+envelope.getValue()+" but it must contain a Measurement");
+		}
 		Measurement measurement = (Measurement)envelope.getValue();
 		if(!canBeIn( tag,envelope)){
 			throw new IllegalStateException("Can not create the GenericEvent with "+envelope+" because there is a policy preventing event inclusion on OcdId: "+envelope.getScope());
