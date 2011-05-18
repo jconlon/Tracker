@@ -6,8 +6,8 @@
     importerID="org.eclipse.xsd.ecore.importer" complianceLevel="6.0" copyrightFields="false">
   <foreignModel>../../com.verticon.oasis.xal.core.schema/xAL.xsd</foreignModel>
   <genPackages prefix="Xal" basePackage="com.verticon.oasis" resource="XML" disposableProviderFactory="true"
-      loadInitialization="true" literalsInterface="false" contentTypeIdentifier="com.verticon.oasis.xal"
-      ecorePackage="xal.ecore#/">
+      loadInitialization="true" literalsInterface="false" extensibleProviderFactory="true"
+      contentTypeIdentifier="com.verticon.oasis.xal" ecorePackage="xal.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//DependentThoroughfaresType">
       <genEnumLiterals ecoreEnumLiteral="xal.ecore#//DependentThoroughfaresType/Yes"/>
       <genEnumLiterals ecoreEnumLiteral="xal.ecore#//DependentThoroughfaresType/No"/>
