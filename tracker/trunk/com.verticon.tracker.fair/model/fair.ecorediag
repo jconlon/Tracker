@@ -430,9 +430,9 @@
     <children xmi:type="notation:Node" xmi:id="_N7SuARPlEd6OX4ZnaZCE8A" type="Description">
       <element xsi:nil="true"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_N7SG8RPlEd6OX4ZnaZCE8A" fontName="Sans" fontHeight="26" description="Package URI http://www.verticon.com/tracker.fair/0.2.1/fair"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_N7SG8RPlEd6OX4ZnaZCE8A" fontName="Sans" fontHeight="26" description="Package URI http://www.verticon.com/tracker.fair/0.2.1/fair  "/>
     <element xsi:nil="true"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_N7SG8hPlEd6OX4ZnaZCE8A" x="24" y="12"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_N7SG8hPlEd6OX4ZnaZCE8A" x="24" y="12" width="1081"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_JuqDQWMREd2cfb89hdQDkA"/>
   <element xmi:type="ecore:EPackage" href="fair.ecore#/"/>
