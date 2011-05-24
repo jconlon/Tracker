@@ -79,7 +79,15 @@ release.lin.size=50.2M
 				<para>Invoke the tracker executive inside the top level tracker director.</para>
 			</listitem>
 		</itemizedlist>
-
+		<para>To Provision the Toolkit with Tools:</para>
+		<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>From the Welcome Screen, which is the first screen presented to the user on a new install, select <emphasis>First Steps</emphasis></para>
+			</listitem>
+			<listitem >
+				<para>From the First Steps Screen, select <emphasis>Learn How to Provision Tracker BI Toolkit</emphasis> and follow the guided cheat sheet.</para>
+			</listitem>
+		</itemizedlist>
 	</section>
 
 	<section>

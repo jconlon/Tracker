@@ -6,7 +6,7 @@
 		<summary>FAQ, User Guide and Data Models
 		</summary>
 		<keywords>livestock, open source, NAIS, XML, Eclipse, RFID,
-			herd management
+			herd management, KML, GeoLocation
 		</keywords>
 	</head>
 
@@ -14,7 +14,7 @@
 	<section id="userGuide">
     <title>User Guides and Reference Documents</title>
     <table xml:id="tracker.docs.guides.table" frame='all'>
-			<title>Tracker Editor MetaModels</title>
+			<title>For end-users, administrators, and analysts</title>
 			<tgroup cols='3' align='left' colsep='1' rowsep='1'>
 				<colspec colname='c1' />
 				<colspec colname='c2' />
@@ -35,7 +35,7 @@
 							</ulink>
 						</entry>
 						<entry>Tracker BI Toolkit User Guide</entry>
-						<entry>Comprehensive early draft but does not show latest features</entry>
+						<entry>Early draft, but does not show latest features</entry>
 					</row>
 					<row>
 						<entry>
@@ -45,7 +45,7 @@
 							</ulink>
 						</entry>
 						<entry>Tracker iRouter User Guide</entry>
-						<entry>First draft, more of a technology overview</entry>
+						<entry>Second draft. Technology overview of all iRouter features</entry>
 					</row>
 					<row>
 						<entry>
