@@ -3,12 +3,13 @@
  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <chapter>
   	<?dbhtml filename="product/product.html" ?>
-	<title>Product Family</title>
-	<para>The Tracker Business Intelligence Toolkit and Features
-	consists of the following products:
+
+	<title>Tracker Product Suite</title>
+	<para>The Tracker Product Suite is a comprehensive suite of livestock information products. 
+	The Tracker product suite consists of the following products:
 	<itemizedlist mark='bullet'>
 				<listitem>
-					<para>Tracker BI Toolkit Desktop, is the initial product offering;</para>
+					<para>Tracker BI Toolkit Desktop;</para>
 				</listitem>
 				<listitem>
 					<para>Tracker Information Exchange Cloud Service;</para>
@@ -24,6 +25,6 @@
 				</listitem>
 			</itemizedlist>
  		</para>
-
+     
 </chapter>
 	
