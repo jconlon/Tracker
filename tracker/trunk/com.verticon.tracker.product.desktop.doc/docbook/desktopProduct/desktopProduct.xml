@@ -4,16 +4,16 @@
 
 <chapter id="DesktopProduct">
     <?dbhtml filename="desktopProduct/desktopProduct.html" ?>
-	<title>Tracker Desktop Toolkit</title>
+	<title>Tracker Desktop BI Toolkit</title>
 	
     <section id="Overview">
 	<title>Overview</title>
 	
 	<section>
-	<title>What is the Tracker Desktop Toolkit?</title>
+	<title>What is the Tracker Desktop BI Toolkit?</title>
 
 	<para>
-		The Tracker Desktop Toolkit is a desktop based Business Intelligence 
+		The Tracker Desktop BI Toolkit is a desktop based Business Intelligence 
 		(<acronym>BI</acronym>) solutions toolkit for animal agriculture professionals. 
 		The Tracker Desktop Toolkit is a <emphasis>network aware rich client platform</emphasis>
 		that can be installed with one or more user selected <acronym>BI</acronym> features.
@@ -22,7 +22,42 @@
 		Tracker Desktop Toolkit is based on the Eclipse Rich Client Platform (RCP), the Eclipse
 		Modeling Framework (EMF) and Open System Gateway Initiative (OSGi) technologies.
 	</para>
-</section>  
+     </section>
+     
+     <section><title>Getting Started</title>
+     <para>Go to the Tracker website <ulink url="http://tracker.verticon.com/downloads/index.html">
+						<citetitle>Tracker Website</citetitle></ulink>
+						and follow the installation instructions. </para>
+     <para>Once the Tracker BI Toolkit product is installed users can easily add tools 
+	to meet their unique information management requirements.  Tracker BI Toolkit can be extended with one or more optional features:
+	<itemizedlist mark='bullet'>
+				<listitem>
+					<para>features that contain editors for creating and managing business specific information;</para>
+				</listitem>
+				<listitem>
+					<para>features that contain task specific utilities and tools for complimenting information;</para>
+				</listitem>
+				<listitem>
+					<para>features that contain business intelligence reporting tools for presenting and analyzing information;</para>
+				</listitem>
+				
+			</itemizedlist>
+ 		</para>
+ 		
+ 		<para>To add tools, go to the <emphasis>Help</emphasis> menu and select <emphasis>Install New Software</emphasis>, 
+ 		From the Install Wizard, in the <emphasis>Work with</emphasis> selection box, select the entry 
+ 		<emphasis>Tracker Release - http://tracker.verticon.com/Tracker/updates</emphasis>.
+ 		
+ 		</para>
+ 		<figure id="fig_ProductFeatures">
+      		<title>Tracker BI Toolkit Product Features</title>
+      		<mediaobject>
+      			<imageobject><imagedata align="center" fileref="../images/gettingStarted/AvailableSoftware.png"/></imageobject>
+      		</mediaobject>
+    	</figure>
+     <note><para>You can also use a cheat sheet to assist with adding features. Go to the <emphasis>Help</emphasis> menu
+ 		and selecting Cheat Sheets.  From the <emphasis>Tracker</emphasis> entry select <emphasis>Adding Tracker Features to the Tracker Desktop Toolki6t</emphasis>. </para></note>
+     </section>
   
 	<section id="desktopDefinitions">
 	<?dbhtml filename="overview/desktopOverview_definitions.html" ?>
