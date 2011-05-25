@@ -1,0 +1,898 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright 2007 Verticon, Inc. All Rights Reserved."
+    modelDirectory="/com.verticon.tracker/src" editDirectory="/com.verticon.tracker.edit/src"
+    editorDirectory="/com.verticon.tracker.editor/src" modelPluginID="com.verticon.tracker"
+    templateDirectory="com.verticon.tracker/templates" dynamicTemplates="true" modelName="TrackerReport"
+    editorPluginClass="com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/com.verticon.tracker.tests/src"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0">
+  <foreignModel>tracker.ecore</foreignModel>
+  <modelPluginVariables>OCL_ECORE=org.eclipse.ocl.ecore</modelPluginVariables>
+  <genPackages prefix="Tracker" basePackage="com.verticon" resource="XMI" disposableProviderFactory="true"
+      providerPackageSuffix="edit.provider" presentationPackageSuffix="editor.presentation"
+      ecorePackage="tracker.ecore#/">
+    <genEnums ecoreEnum="tracker.ecore#//Sex">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Sex/Unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Sex/F"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Sex/M"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Sex/C"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Sex/S"/>
+    </genEnums>
+    <genEnums ecoreEnum="tracker.ecore#//BisonBreed">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BisonBreed/WO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BisonBreed/PB"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BisonBreed/Unspecified"/>
+    </genEnums>
+    <genEnums ecoreEnum="tracker.ecore#//SheepBreed">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/CD"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/OU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/RI"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/LY"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/FB"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/BW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/BF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/BO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/BC"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/CO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/CF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/CL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/CP"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/CR"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/DH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/DP"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/DL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/ER"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/FN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/HS"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/HY"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/IL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/KK"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/KA"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/KH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/BL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/LE"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/HL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/LI"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/MM"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/MP"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/MT"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/NL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/NC"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/OX"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/PE"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/PO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/RG"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/RV"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/RM"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/RY"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/SX"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/SC"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/SL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/SR"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/ST"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/SU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/TA"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/TX"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/TU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/XL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/XM"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/ZS"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SheepBreed/Unspecified"/>
+    </genEnums>
+    <genEnums ecoreEnum="tracker.ecore#//BeefBreed">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/AN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/AB"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/AF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/AL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/AE"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/AM"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/AK"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/AW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/AU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/BA"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/BF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/BE"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/BM"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/BB"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/BG"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/BD"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/NS"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/BO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/BR"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/BH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/BI"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/BL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/BN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/BU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/BW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/SB"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/BQ"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/CP"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/CN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/CB"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/CH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/CG"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/CM"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/CA"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/XX"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/XT"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/CU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/DB"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/DJ"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/RW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/DE"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/DR"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/DL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/FP"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/ER"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/FA"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/FL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/FC"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/FR"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/FB"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/DF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/GA"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/GS"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/GE"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/GV"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/GI"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/GR"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/GZ"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/GY"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/HC"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/HB"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/HH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/HP"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/SH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/HY"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/IB"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/KY"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/KB"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/LM"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/LR"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/LO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/LU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/MA"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/MH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/ML"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/MR"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/ME"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/MI"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/MC"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/MO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/MU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/MG"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/NE"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/NM"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/NR"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/PA"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/PR"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/PI"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/PZ"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/RA"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/AR"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/RR"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/RB"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/RD"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/RP"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/RN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/RS"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/RO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/DN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/SW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/SA"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/SG"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/SL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/SE"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/SV"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/SS"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/IS"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/SP"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/SI"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/SM"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/DS"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/SX"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/TP"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/TA"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/TG"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/TN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/TL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/TI"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/WB"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/WF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/WP"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/YA"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//BeefBreed/Unspecified"/>
+    </genEnums>
+    <genEnums ecoreEnum="tracker.ecore#//DairyBreed">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//DairyBreed/LD"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//DairyBreed/AY"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//DairyBreed/BS"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//DairyBreed/GD"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//DairyBreed/GU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//DairyBreed/HO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//DairyBreed/JE"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//DairyBreed/WW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//DairyBreed/FM"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//DairyBreed/MS"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//DairyBreed/Unspecified"/>
+    </genEnums>
+    <genEnums ecoreEnum="tracker.ecore#//SwineBreed">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/BK"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/CW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/DU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/HA"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/LC"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/LA"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/LB"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/LW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/PE"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/PC"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/RW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/SO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/TM"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/WS"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/YO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//SwineBreed/Unspecified"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//HorseBreed">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/AC"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/AS"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/AA"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/AO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/NO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/AP"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/AD"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/BW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/BY"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/BU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/CI"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/FC"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/CV"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/CY"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/CM"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/DT"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/DW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/EX"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/FE"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/FJ"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/FH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/FR"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/GL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/WG"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/HN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/HK"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/HF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/HV"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/HG"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/HT"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/HW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/HU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/IC"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/LZ"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/MU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/MF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/MN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/NF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/NK"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/OB"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/PT"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/PL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/PF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/PH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/PV"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/PN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/PW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/OL"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/QH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/RH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/RU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/SE"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/SY"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/SN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/SF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/WW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/WI"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/TP"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/TW"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/TH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/TR"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/TF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/VK"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/WE"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/WF"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/WU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//HorseBreed/Unspecified"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//GoatBreed">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/AI"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/AG"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/BZ"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/CS"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/LN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/ND"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/NU"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/OH"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/PY"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/EN"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/TO"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//GoatBreed/Unspecified"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//Treatment">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Treatment/Unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Treatment/Vaccination"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Treatment/Vitamin"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Treatment/Hormone"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Treatment/Prevention"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//TreatmentMethod">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//TreatmentMethod/Unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//TreatmentMethod/Intramuscular"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//TreatmentMethod/Nasal"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//TreatmentMethod/Salve"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//OneToTen">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//OneToTen/Unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//OneToTen/One"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//OneToTen/Two"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//OneToTen/Three"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//OneToTen/Four"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//OneToTen/Five"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//OneToTen/Six"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//OneToTen/Seven"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//OneToTen/Eight"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//OneToTen/Nine"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//OneToTen/Ten"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//AnimalType">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/Unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/Swine"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/Equine"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/Caprine"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/Ovine"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/BovineBeef"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/BovineDairy"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//AnimalType/BovineBison"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//EventDataType">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventDataType/String"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventDataType/Integer"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventDataType/Boolean"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//USQualityGrade">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USQualityGrade/Unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USQualityGrade/Standard"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USQualityGrade/Select"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USQualityGrade/Choice"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USQualityGrade/Prime"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//USBeefYieldGrade">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USBeefYieldGrade/Unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USBeefYieldGrade/One"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USBeefYieldGrade/Two"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USBeefYieldGrade/Three"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USBeefYieldGrade/Four"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USBeefYieldGrade/Five"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//Level">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Level/Unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Level/Low"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Level/Average"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//Level/High"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//USSwineQualityGrade">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USSwineQualityGrade/Unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USSwineQualityGrade/One"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USSwineQualityGrade/Two"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USSwineQualityGrade/Three"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//USSwineQualityGrade/Four"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//WeightMeasurementUnit">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//WeightMeasurementUnit/pound"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//WeightMeasurementUnit/kilogram"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tracker.ecore#//EventType">
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/TagAllocated"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/TagApplied"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/MovedIn"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/MovedOut"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/Exported"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/ICVI"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/Died"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/AnimalMissing"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/Slaughtered"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/Sighting"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/TagRetired"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/WeighIn"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/GenericEvent"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/LostTag"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/ReplacedTag"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/Imported"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/MedicalCondition"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/MedicalTreatment"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/BirthDefect"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/Mastitis"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/HerdTest"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/Birthing"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/MilkTest"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/USOvineGrading"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/Calving"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/USBeefGrading"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/USSwineGrading"/>
+      <genEnumLiterals ecoreEnumLiteral="tracker.ecore#//EventType/Position"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="tracker.ecore#//PremisesIdNumber"/>
+    <genDataTypes ecoreDataType="tracker.ecore#//Email"/>
+    <genDataTypes ecoreDataType="tracker.ecore#//Age"/>
+    <genDataTypes ecoreDataType="tracker.ecore#//USPhoneNumber"/>
+    <genDataTypes ecoreDataType="tracker.ecore#//URI"/>
+    <genClasses provider="Stateful" ecoreClass="tracker.ecore#//Animal" labelFeature="#//tracker/Animal/species">
+      <genFeatures createChild="false" propertyCategory="Age" propertyDescription="Birth date of the animal"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/birthDate">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" propertyCategory="Gender" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/sex"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Animal/tags"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Genealogy"
+          propertyDescription="The species of the animal" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/species">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Codes"
+          propertyDescription="Code assigned to the breed of the animal" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/breed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Codes"
+          propertyDescription="Code assigned to the sex of the animal" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/sexCode">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Codes"
+          propertyDescription="Code assigned to the species of the animal" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/speciesCode">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Identification"
+          propertyDescription="Current tag applied to the animal" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/comments"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Event Statistics"
+          propertyDescription="Date of last event" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/lastEventDateTime">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertyCategory="Genealogy"
+          propertyDescription="" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//Animal/dam">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures notify="false" createChild="false" propertyCategory="Genealogy"
+          propertyDescription="" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//Animal/sire">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Weight"
+          propertyDescription="Weight of the animal in pounds" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/weight"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Weight"
+          propertyDescription="Weight gain per day in pounds" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/weightGainPerDay"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/type"/>
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Alternative Visual Identification"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/visualID">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Age"
+          propertyDescription="Age of animal in days since birth" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/ageInDays">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Identification"
+          propertyDescription="Alternative Official Identification" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/alternativeID">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Location"
+          propertyDescription="Last known location" ecoreFeature="ecore:EAttribute tracker.ecore#//Animal/location"/>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/allEvents"/>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/addTemplate">
+        <genParameters ecoreParameter="tracker.ecore#//Animal/addTemplate/eventTemplate"/>
+      </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/activeTag"/>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/eventHistory"/>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/lastWeighIn"/>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/getAge"/>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/canContain">
+        <genParameters ecoreParameter="tracker.ecore#//Animal/canContain/eventType"/>
+        <genParameters ecoreParameter="tracker.ecore#//Animal/canContain/ocdId"/>
+      </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/lastEvent">
+        <genParameters ecoreParameter="tracker.ecore#//Animal/lastEvent/type"/>
+        <genParameters ecoreParameter="tracker.ecore#//Animal/lastEvent/name"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Tag">
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Details"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/usainNumberUsed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Tag/events"/>
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/id"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tracker.ecore#//Tag/Animal"/>
+      <genOperations ecoreOperation="tracker.ecore#//Tag/canContain">
+        <genParameters ecoreParameter="tracker.ecore#//Tag/canContain/eventType"/>
+        <genParameters ecoreParameter="tracker.ecore#//Tag/canContain/ocdId"/>
+      </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//Tag/findOCD">
+        <genParameters ecoreParameter="tracker.ecore#//Tag/findOCD/ocdId"/>
+      </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//Tag/findOCDs"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tracker.ecore#//Bovine"/>
+    <genClasses image="false" ecoreClass="tracker.ecore#//Event">
+      <genFeatures createChild="false" propertyCategory="Time of Event" propertyDescription=""
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Event/dateTime"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Codes"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Event/eventCode">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/electronicallyRead">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" propertyCategory="Details" propertyDescription="true if this event is a correction of a previous event."
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Event/correction">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/comments"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tracker.ecore#//Event/tag"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Identification"
+          propertyDescription="" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/id"/>
+      <genFeatures property="None" createChild="false" propertyDescription="" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/date"/>
+      <genFeatures property="None" createChild="false" propertyDescription="" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/dateKey"/>
+      <genOperations ecoreOperation="tracker.ecore#//Event/dateEvent">
+        <genParameters ecoreParameter="tracker.ecore#//Event/dateEvent/type"/>
+        <genParameters ecoreParameter="tracker.ecore#//Event/dateEvent/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//Event/dateEvents"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//TagAllocated"/>
+    <genClasses ecoreClass="tracker.ecore#//Premises">
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="USDA assigned Premises Identification Number (USDA PIN)"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/premisesId"/>
+      <genFeatures createChild="false" propertyCategory="Contacts" propertyDescription=""
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/emailContact"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/animals"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/unAppliedTags"/>
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Premises identifier as a Universal Resource Identifier (URI)"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/uri">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/policy"/>
+      <genFeatures createChild="false" propertyCategory="Contacts" propertyDescription=""
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/administrator"/>
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/name"/>
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription=""
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/description"/>
+      <genFeatures createChild="false" propertyCategory="Contacts" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/phoneNumber"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Location"
+          propertyDescription="Street address of the premises." ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/address"/>
+      <genOperations ecoreOperation="tracker.ecore#//Premises/eventHistory"/>
+      <genOperations ecoreOperation="tracker.ecore#//Premises/findAnimal">
+        <genParameters ecoreParameter="tracker.ecore#//Premises/findAnimal/id"/>
+      </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//Premises/addTemplate">
+        <genParameters ecoreParameter="tracker.ecore#//Premises/addTemplate/ains"/>
+        <genParameters ecoreParameter="tracker.ecore#//Premises/addTemplate/animalTemplate"/>
+      </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//Premises/canContain">
+        <genParameters ecoreParameter="tracker.ecore#//Premises/canContain/eventType"/>
+        <genParameters ecoreParameter="tracker.ecore#//Premises/canContain/ocdId"/>
+        <genParameters ecoreParameter="tracker.ecore#//Premises/canContain/animalType"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//BovineBeef">
+      <genFeatures createChild="false" propertyCategory="Genealogy" propertyDescription="Breed of beef"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//BovineBeef/beefBreed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Ovine">
+      <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//Ovine/sheepBreed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Scrapie Program ID"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Ovine/scrapieTag"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//BovineBison">
+      <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//BovineBison/buffaloBreed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//BovineDairy">
+      <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//BovineDairy/dairyBreed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//TagApplied"/>
+    <genClasses ecoreClass="tracker.ecore#//MovedIn">
+      <genFeatures createChild="false" propertyCategory="Transported From" propertyDescription="Premises ID that the animal came from"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//MovedIn/sourcePin"/>
+      <genFeatures createChild="false" propertyCategory="Transported From" propertyDescription="Premises URI that the animal came from"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//MovedIn/uri"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//MovedOut">
+      <genFeatures createChild="false" propertyCategory="Transported To" propertyDescription="Destination Premises ID to transport animal"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//MovedOut/destinationPin"/>
+      <genFeatures createChild="false" propertyCategory="Transported To" propertyDescription="Destination Premises URI to transport animal"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//MovedOut/uri"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//LostTag"/>
+    <genClasses ecoreClass="tracker.ecore#//ReplacedTag">
+      <genFeatures createChild="false" propertyCategory="Old Tag" ecoreFeature="ecore:EAttribute tracker.ecore#//ReplacedTag/oldId"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Old Tag"
+          propertyDescription="A USAIN number was assigned to old tag" ecoreFeature="ecore:EAttribute tracker.ecore#//ReplacedTag/usainNumberUsedForOldId"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Old Tag" propertySortChoices="true"
+          ecoreFeature="ecore:EReference tracker.ecore#//ReplacedTag/oldTag"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Imported"/>
+    <genClasses ecoreClass="tracker.ecore#//Exported"/>
+    <genClasses ecoreClass="tracker.ecore#//Sighting">
+      <genFeatures createChild="false" propertyCategory="Location" propertyDescription="Visually sighted location of the animal"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Sighting/location"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Slaughtered"/>
+    <genClasses ecoreClass="tracker.ecore#//Died"/>
+    <genClasses ecoreClass="tracker.ecore#//TagRetired"/>
+    <genClasses ecoreClass="tracker.ecore#//AnimalMissing"/>
+    <genClasses ecoreClass="tracker.ecore#//ICVI"/>
+    <genClasses ecoreClass="tracker.ecore#//WeighIn">
+      <genFeatures createChild="false" propertyCategory="Weight" propertyDescription="Weight of animal in units of measurement"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//WeighIn/weight"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Weight"
+          propertyDescription="Weight gain per day in units of measurement" ecoreFeature="ecore:EAttribute tracker.ecore#//WeighIn/weightGainPerDay"/>
+      <genFeatures createChild="false" propertyCategory="Weight" propertyDescription="Units used for weight measurement"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//WeighIn/unit"/>
+      <genOperations ecoreOperation="tracker.ecore#//WeighIn/previousWeighIn"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Swine">
+      <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//Swine/swineBreed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Permenant Identification of Swine"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Swine/rightEarNotching"/>
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Permenant Identification of Swine"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Swine/leftEarNotching"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Equine">
+      <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//Equine/horseBreed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Caprine">
+      <genFeatures createChild="false" propertyCategory="Genealogy" ecoreFeature="ecore:EAttribute tracker.ecore#//Caprine/goatBreed">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//MedicalCondition"/>
+    <genClasses ecoreClass="tracker.ecore#//MedicalTreatment">
+      <genFeatures createChild="false" propertyCategory="Medicine" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/name"/>
+      <genFeatures createChild="false" propertyCategory="Medicine" propertyDescription=""
+          ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/product"/>
+      <genFeatures createChild="false" propertyCategory="Medicine" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/manufacturer"/>
+      <genFeatures createChild="false" propertyCategory="Medicine" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/lot"/>
+      <genFeatures createChild="false" propertyCategory="Medicine" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/quantity"/>
+      <genFeatures createChild="false" propertyCategory="Treatment" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/treatment"/>
+      <genFeatures createChild="false" propertyCategory="Medicine" ecoreFeature="ecore:EAttribute tracker.ecore#//MedicalTreatment/method"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Birthing">
+      <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute tracker.ecore#//Birthing/viability"/>
+      <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute tracker.ecore#//Birthing/assisted"/>
+      <genFeatures createChild="false" propertyCategory="Details" propertyDescription=""
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Birthing/difficulty"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Calving"/>
+    <genClasses ecoreClass="tracker.ecore#//BirthDefect">
+      <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute tracker.ecore#//BirthDefect/freemartin"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Mastitis">
+      <genFeatures createChild="false" propertyCategory="Details" ecoreFeature="ecore:EAttribute tracker.ecore#//Mastitis/location"/>
+      <genFeatures createChild="false" propertyCategory="Details" propertyDescription=""
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Mastitis/origin"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//MilkTest">
+      <genFeatures createChild="false" propertyCategory="Quantity" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/poundsProduced"/>
+      <genFeatures createChild="false" propertyCategory="Quality" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/percentButterFat"/>
+      <genFeatures createChild="false" propertyCategory="Quality" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/percentProtein"/>
+      <genFeatures createChild="false" propertyCategory="Quality" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/somaticCellCounts"/>
+      <genFeatures createChild="false" propertyCategory="Quality" ecoreFeature="ecore:EAttribute tracker.ecore#//MilkTest/otherSolids"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//HerdTest">
+      <genFeatures createChild="false" propertyCategory="Pregnancy" ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/pregnant"/>
+      <genFeatures createChild="false" propertyCategory="Bred Date" ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/daysSinceBredEstimate"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Bred Date"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//HerdTest/bredDateEstimate"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//GenericEvent">
+      <genFeatures property="Readonly" children="true" createChild="false" propertyDescription="Custom Attributes"
+          propertyMultiLine="true" ecoreFeature="ecore:EReference tracker.ecore#//GenericEvent/eventAttributes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//GenericEvent/ocd"/>
+      <genOperations ecoreOperation="tracker.ecore#//GenericEvent/findAttributeDefinition">
+        <genParameters ecoreParameter="tracker.ecore#//GenericEvent/findAttributeDefinition/eventAttribute"/>
+      </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//GenericEvent/findName"/>
+      <genOperations ecoreOperation="tracker.ecore#//GenericEvent/value">
+        <genParameters ecoreParameter="tracker.ecore#//GenericEvent/value/key"/>
+      </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//GenericEvent/hasRequiredAttributes">
+        <genParameters ecoreParameter="tracker.ecore#//GenericEvent/hasRequiredAttributes/diagnostics"/>
+        <genParameters ecoreParameter="tracker.ecore#//GenericEvent/hasRequiredAttributes/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//GenericEvent/hasValidAttributes">
+        <genParameters ecoreParameter="tracker.ecore#//GenericEvent/hasValidAttributes/diagnostics"/>
+        <genParameters ecoreParameter="tracker.ecore#//GenericEvent/hasValidAttributes/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//GenericEvent/hasAllAttributes">
+        <genParameters ecoreParameter="tracker.ecore#//GenericEvent/hasAllAttributes/diagnostics"/>
+        <genParameters ecoreParameter="tracker.ecore#//GenericEvent/hasAllAttributes/context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//StringToStringMap">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//StringToStringMap/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//StringToStringMap/value"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//USBeefGrading">
+      <genFeatures createChild="false" propertyCategory="Marbling, color, and maturity"
+          propertyDescription="" ecoreFeature="ecore:EAttribute tracker.ecore#//USBeefGrading/qualityGrade"/>
+      <genFeatures createChild="false" propertyCategory="Marbling, color, and maturity"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//USBeefGrading/qualityGradeLevel">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" propertyDescription="Usable lean meat on carcass"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//USBeefGrading/yieldGrade"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//USOvineGrading">
+      <genFeatures createChild="false" propertyCategory="Marbling, color, and maturity"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//USOvineGrading/qualityGrade"/>
+      <genFeatures createChild="false" propertyCategory="Marbling, color, and maturity"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//USOvineGrading/qualityGradeLevel">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//USSwineGrading">
+      <genFeatures createChild="false" propertyDescription="Carcass Quality" ecoreFeature="ecore:EAttribute tracker.ecore#//USSwineGrading/qualityGrade"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Policy">
+      <genFeatures createChild="false" propertyCategory="Inclusion Policy" propertyDescription="List of the animal species that are included in the premises."
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Policy/includedSpecies"/>
+      <genFeatures property="None" children="true" createChild="true" propertyCategory="Inclusion Policy"
+          propertyDescription="Standard events associated with animal species that are included in the premises."
+          ecoreFeature="ecore:EReference tracker.ecore#//Policy/includedEvents"/>
+      <genFeatures property="None" children="true" createChild="true" propertyCategory="Inclusion Policy"
+          propertyDescription="Generic events associated with animal species that are included in the premises."
+          ecoreFeature="ecore:EReference tracker.ecore#//Policy/includedGenericEvents"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Policy/excludeUnspecifiedEvents"/>
+      <genOperations ecoreOperation="tracker.ecore#//Policy/canContain">
+        <genParameters ecoreParameter="tracker.ecore#//Policy/canContain/eventType"/>
+        <genParameters ecoreParameter="tracker.ecore#//Policy/canContain/ocdId"/>
+        <genParameters ecoreParameter="tracker.ecore#//Policy/canContain/animalType"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//EventInclusion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//EventInclusion/species"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//EventInclusion/event"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//GenericEventInclusion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//GenericEventInclusion/species"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracker.ecore#//GenericEventInclusion/ocd"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Position">
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Position"
+          propertyDescription="Longitude measurement in degrees" ecoreFeature="ecore:EAttribute tracker.ecore#//Position/longitude"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Position"
+          propertyDescription="Latitude measurement in degrees" ecoreFeature="ecore:EAttribute tracker.ecore#//Position/latitude"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Position"
+          propertyDescription="Coordinates of the position" ecoreFeature="ecore:EAttribute tracker.ecore#//Position/coordinates"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Metatype" basePackage="com.verticon.osgi" ecorePackage="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar">
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/String"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/Long"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/Integer"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/Short"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/Char"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/Byte"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/Double"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/Float"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar/Boolean"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AttributeDefinitionArray"/>
+    <genDataTypes ecoreDataType="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//InputStream"/>
+    <genDataTypes ecoreDataType="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//IOException"/>
+    <genDataTypes ecoreDataType="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//ScalarObject"/>
+    <genDataTypes ecoreDataType="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//StringArray"/>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/option"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/cardinality"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/default"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/iD"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/max"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/min"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/required"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/dataType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/anyAttribute"/>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/getType"/>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/validate">
+        <genParameters ecoreParameter="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/validate/value"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/getOptionValues"/>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/getOptionLabels"/>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AD/getDefaultValue"/>
+    </genClasses>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Attribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Attribute/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Attribute/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Attribute/adref"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Attribute/content"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Attribute/anyAttribute"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//AttributeDefinition"/>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate/object"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate/bundle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate/factoryPid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate/merge"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate/optional"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate/pid"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Designate/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//DocumentRoot/metaData"/>
+    </genClasses>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Icon">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Icon/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Icon/resource"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Icon/size"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Icon/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/oCD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/designate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/localization"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/anyAttribute"/>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/getLocales"/>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/getObjectClassDefinition">
+        <genParameters ecoreParameter="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/getObjectClassDefinition/id"/>
+        <genParameters ecoreParameter="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaData/getObjectClassDefinition/locale"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//MetaTypeProvider"/>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Object">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Object/attribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Object/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Object/ocdref"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Object/anyAttribute"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//ObjectClassDefinition"/>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/aD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/icon"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/iD"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/anyAttribute"/>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/getIcon">
+        <genParameters ecoreParameter="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/getIcon/size"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/getAttributeDefinitions">
+        <genParameters ecoreParameter="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//OCD/getAttributeDefinitions/filter"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Option">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Option/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Option/label"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Option/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Option/anyAttribute"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

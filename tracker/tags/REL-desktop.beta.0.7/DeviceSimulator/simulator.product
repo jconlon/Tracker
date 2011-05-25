@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="Tracker iRouter Device Simulator" uid="com.verticon.tracker.irouter.simulator" version="0.2.0.qualifier" useFeatures="false" includeLaunchers="true">
+
+   <configIni use="default">
+   </configIni>
+
+   <launcherArgs>
+      <programArgs>-console -consolelog</programArgs>
+      <vmArgs>-Declipse.ignoreApp=true
+-Dosgi.noShutdown=true
+-Dtoast.core.util.logLevel=DEBUG
+-Dtoast.backend.host=localhost
+-Dtoast.backend.port=8080
+-Dorg.osgi.service.http.port=8081
+-Dequinox.ds.print=true
+-Dlogback.application=&quot;iRouter Simulator&quot;</vmArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+   </launcherArgs>
+
+   <windowImages/>
+
+   <launcher name="simulator">
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
+
+   <plugins>
+      <plugin id="ch.qos.logback.classic"/>
+      <plugin id="ch.qos.logback.core"/>
+      <plugin id="ch.qos.logback.slf4j" fragment="true"/>
+      <plugin id="com.verticon.tracker.irouter.dev"/>
+      <plugin id="com.verticon.tracker.irouter.gps.dev.sim"/>
+      <plugin id="com.verticon.tracker.irouter.mettler.dev.sim"/>
+      <plugin id="com.verticon.tracker.irouter.trutest.dev"/>
+      <plugin id="com.verticon.tracker.irouter.trutest.dev.sim"/>
+      <plugin id="com.verticon.tracker.logging.logback.config" fragment="true"/>
+      <plugin id="gnu.io.rxtx"/>
+      <plugin id="gnu.io.rxtx.linux.x86" fragment="true"/>
+      <plugin id="javax.servlet"/>
+      <plugin id="org.eclipse.core.jobs"/>
+      <plugin id="org.eclipse.equinox.common"/>
+      <plugin id="org.eclipse.equinox.ds"/>
+      <plugin id="org.eclipse.equinox.http"/>
+      <plugin id="org.eclipse.equinox.log"/>
+      <plugin id="org.eclipse.equinox.servletbridge.extensionbundle" fragment="true"/>
+      <plugin id="org.eclipse.equinox.transforms.hook" fragment="true"/>
+      <plugin id="org.eclipse.equinox.util"/>
+      <plugin id="org.eclipse.equinox.weaving.hook" fragment="true"/>
+      <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.osgi.services"/>
+      <plugin id="org.ekkescorner.logging.core"/>
+      <plugin id="org.ekkescorner.logging.lilith.multiplexer.fragment" fragment="true"/>
+      <plugin id="org.ekkescorner.logging.logback.util.fragment" fragment="true"/>
+      <plugin id="org.ekkescorner.logging.starter.runtime"/>
+      <plugin id="org.equinoxosgi.core.autostart"/>
+      <plugin id="org.equinoxosgi.toast.devsim"/>
+      <plugin id="org.equinoxosgi.util"/>
+      <plugin id="org.slf4j.api"/>
+      <plugin id="org.slf4j.jul"/>
+   </plugins>
+
+   <configurations>
+      <plugin id="org.equinoxosgi.core.autostart" autoStart="true" startLevel="1" />
+   </configurations>
+
+</product>

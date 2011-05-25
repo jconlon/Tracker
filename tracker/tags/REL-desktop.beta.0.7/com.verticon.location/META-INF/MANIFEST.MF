@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %Bundle-Name
+Bundle-SymbolicName: com.verticon.location
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: %Bundle-Vendor
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Service-Component: OSGI-INF/*.xml
+Export-Package: com.verticon.location
+Bundle-ActivationPolicy: lazy
+Import-Package: org.eclipse.emf.ecore,
+ org.slf4j;version="1.5.11"

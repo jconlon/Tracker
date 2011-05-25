@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SWTBot Tests
+Bundle-SymbolicName: com.verticon.tracker.swtbot.tests
+Bundle-Version: 0.1.0.qualifier
+Bundle-Activator: com.verticon.tracker.swtbot.tests.Activator
+Bundle-Vendor: Verticon, Inc.
+Require-Bundle: org.eclipse.jdt.junit4.runtime;bundle-version="1.1.0",
+ org.eclipse.jdt.junit.runtime;bundle-version="3.4.100",
+ org.junit4;bundle-version="4.5.0",
+ org.eclipse.ui;bundle-version="3.5.0",
+ org.eclipse.core.runtime,
+ org.eclipse.swtbot.junit4_x;bundle-version="2.0.0",
+ org.eclipse.swtbot.swt.finder;bundle-version="2.0.0",
+ org.eclipse.swtbot.eclipse.finder;bundle-version="2.0.0",
+ org.hamcrest;bundle-version="1.1.0",
+ org.eclipse.swtbot.addition;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: org.apache.log4j
+Export-Package: com.verticon.tracker.swtbot.addition

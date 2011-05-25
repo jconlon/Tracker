@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE colophon PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" 
+ "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<colophon>
+	<?dbhtml filename="colophon/colophon.html" ?>
+	<para>
+		Production versions of this documentation were produced with
+		the <ulink url="http://www.docbook.org/">
+		<citetitle>Docbook</citetitle></ulink> 
+		<ulink url="http://en.wikipedia.org/wiki/Document_Style_Semantics_and_Specification_Language">
+			<citetitle><acronym>DSSSL</acronym></citetitle> style sheets,
+		</ulink> called by the
+		<ulink url="http://ant.apache.org/"><citetitle>Apache Ant build tool</citetitle></ulink>,
+		  from within an <ulink url="http://www.eclipse.org/"><citetitle>Eclipse IDE</citetitle></ulink>.
+	</para>
+		
+</colophon>
+

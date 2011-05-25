@@ -1,0 +1,60 @@
+<project name="provisioning build" default="build.p2.oda.site">
+
+
+	<!-- ================================= 
+	          target: generate.site.repo  
+				Generating metadata for a traditional Eclipse update site (-updateSite argument)
+		 		-updateSite <path> 
+		    		the path of a traditional update site to generate p2 metadata for 
+				
+				-site <path> 
+		    		the URL of a site.xml file used to generator categories 
+	     =================================   -->
+	<target name="build.p2.oda.site" description="Generates P2 Metadata repository for a site">
+		<property name="updatesite" value="${sp:action.output}" />
+		<property name="source.dir" location="${buckminster.temp}/unzipped"/>
+		<property name="source" location="${source.dir}/eclipse"/>
+		<mkdir dir="${source.dir}"/>
+	
+		<echoproperties></echoproperties>
+		<!--
+				Unzip the contents of ${oda.downloads.dir}/somezip
+				Set the source to the eclipse directory of the unziped file
+				source = /home/jconlon/eclipse-target-platforms/dtp-incubator-1.7/eclipse
+		-->
+		<unzip dest="${source.dir}">
+			<fileset dir="${oda.downloads.dir}">
+							<include name="**/*.zip" />
+			</fileset>
+		</unzip>
+		
+		<exec executable="${eclipse.exec}" failonerror="false" timeout="900000">
+			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
+			<arg line="-source ${source}" />
+			<arg line="-publishArtifacts" />
+			<arg line="-publishArtifactRepository" />
+			<arg line="-compress" />
+			<arg line="-metadataRepository file:${updatesite}" />
+			<arg line="-artifactRepository file:${updatesite}" />
+			<arg line="-metadataRepositoryName &quot;${p2.metadata.repo.name}&quot;" />
+			<arg line="-artifactRepositoryName &quot;${p2.artifact.repo.name}&quot;" />
+			<arg line="-noDefaultIUs" />
+			<arg line="-consoleLog" />
+			<arg line="-nosplash" />
+			<arg line="--launcher.suppressErrors" />
+			<!--
+			arg line="-rootVersion ${p2.generator.root.version}" />
+	    				<arg line="-source ${p2.generator.source}" />
+	    				<arg line="-root ${p2.generator.root}" 
+	    				<arg line="-publishArtifacts" />
+	    				<arg line="-append" />
+	    				/-->
+			<arg line="-flavor ${p2.flavor}" />
+			<arg line="-vmargs -Zmx256m " />
+		</exec>
+		<echo>Created repo at ${updatesite} </echo>
+	</target>
+
+
+
+</project>

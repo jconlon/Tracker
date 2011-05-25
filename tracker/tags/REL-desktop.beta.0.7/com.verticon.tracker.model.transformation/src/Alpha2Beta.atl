@@ -1,0 +1,290 @@
+module Alpha2Beta; -- Transforms from alpha 1.0.0 tracker to 0.1.0 beta
+create OUT: TrackerBeta    from  IN: Tracker ;
+
+-- Note models were modified to facilitate working with dates and other non standard dataTypes
+
+--  ============================= helpers =====================================
+helper context Tracker!Premises def : getAllAnimals () : OrderedSet(Tracker!Animal) =
+	self.animals.animal ->iterate( child ; elements : OrderedSet(Tracker!Animal) = 
+		OrderedSet{} | 
+				elements.append(child) 
+		)
+	;
+
+helper context Tracker!Animal def : getAllEvents () : Sequence(Tracker!Event) =
+	Tracker!Event.allInstances() ->
+						select(e | e.ain.idNumber = self.ain.idNumber);
+
+
+-- =============================== Called Rules for Events ====================================
+
+rule tagAppliedEvent (btag: TrackerBeta!Tag, event : Tracker!Event){
+	
+	to
+		b: TrackerBeta!TagApplied(
+			dateTime <- event.dateTime,
+			electronicallyRead <- event.electronicallyRead,
+			comments <- event.comments,
+			correction <- event.correction
+		)
+	do {
+		'Added '.concat(b.oclType().toString().concat(' ')).concat(event.ain.idNumber.toString()).println();
+		btag.events <- Set{b};
+	}	
+}
+
+rule weighInEvent (btag: TrackerBeta!Tag, event : Tracker!Event){
+	
+	to
+		b: TrackerBeta!WeighIn(
+			dateTime <- event.dateTime,
+			electronicallyRead <- event.electronicallyRead,
+			comments <- event.comments,
+			correction <- event.correction,
+			weight <- event.weight
+		)
+	do {
+		'Added '.concat(b.oclType().toString().concat(' ')).concat(event.ain.idNumber.toString()).println();
+		btag.events <- Set{b};
+	}	
+}
+
+rule movedOutEvent (btag: TrackerBeta!Tag, event : Tracker!Event){
+	
+	to
+		b: TrackerBeta!MovedOut(
+			dateTime <- event.dateTime,
+			electronicallyRead <- event.electronicallyRead,
+			comments <- event.comments,
+			correction <- event.correction,
+			destinationPin <- event.destinationPin
+		)
+	do {
+		'Added '.concat(b.oclType().toString().concat(' ')).concat(event.ain.idNumber.toString()).println();
+		btag.events <- Set{b};
+	}	
+}
+
+rule movedInEvent (btag: TrackerBeta!Tag, event : Tracker!Event){
+	
+	to
+		b: TrackerBeta!MovedIn(
+			dateTime <- event.dateTime,
+			electronicallyRead <- event.electronicallyRead,
+			comments <- event.comments,
+			correction <- event.correction,
+			sourcePin <- event.sourcePin
+		)
+	do {
+		'Added '.concat(b.oclType().toString().concat(' ')).concat(event.ain.idNumber.toString()).println();
+		btag.events <- Set{b};
+	}	
+}
+
+rule fairRegistrationEvent (btag: TrackerBeta!Tag, event : Tracker!Event){
+	
+	to
+		b: TrackerBeta!FairRegistration(
+			dateTime <- event.dateTime,
+			electronicallyRead <- event.electronicallyRead,
+			comments <- event.comments,
+			correction <- event.correction,
+			
+			participant <- event.participant,
+			parent <- event.parent,
+			address <- event.address,
+			phone <- event.phone,
+			club <- event.club
+		)
+	do {
+		'Added '.concat(b.oclType().toString().concat(' ')).concat(event.ain.idNumber.toString()).println();
+		btag.events <- Set{b};
+	}	
+}
+
+
+--  ================================ Called Rules for Animals ==============================
+--BovineDairy
+--BovineBison
+
+rule beef (bPrem : TrackerBeta!Premises, animal : Tracker!BovineBeef){
+	using {
+		events : Sequence(Tracker!Event)= animal.getAllEvents();
+	}
+	to
+		b: TrackerBeta!BovineBeef(
+			sex <- animal.sex,
+			birthDate <- animal.birthDate,
+			beefBreed <- animal.beefBreed
+		),
+		btag: TrackerBeta!Tag(
+			idNumber <- animal.ain.idNumber
+		)
+	do {
+		b.tags <- Set{btag};
+		--iterate on events
+		for( event in events){
+			if(event.oclIsTypeOf(Tracker!MovedIn))
+				thisModule.movedInEvent(btag, event);
+			else
+				if(event.oclIsTypeOf(Tracker!FairRegistration))
+					thisModule.fairRegistrationEvent(btag, event);
+				else
+					if(event.oclIsTypeOf(Tracker!MovedOut))
+						thisModule.movedOutEvent(btag, event);
+					else
+						if(event.oclIsTypeOf(Tracker!WeighIn))
+							thisModule.weighInEvent(btag, event);
+						else
+							if(event.oclIsTypeOf(Tracker!TagApplied))
+								thisModule.tagAppliedEvent(btag, event);
+					
+				
+		}
+		bPrem.animals <- Set{b};
+		'Added '.concat(animal.oclType().toString().concat(' ')).concat(animal.ain.idNumber.toString()).println();
+	}	
+}
+
+
+rule ovine (bPrem : TrackerBeta!Premises, animal : Tracker!Ovine){
+	using {
+		events : Sequence(Tracker!Event)= animal.getAllEvents();
+	}
+	to
+		b: TrackerBeta!Ovine(
+			sex <- animal.sex,
+			birthDate <- animal.birthDate,
+			sheepBreed <- animal.sheepBreed
+		),
+		btag: TrackerBeta!Tag(
+			idNumber <- animal.ain.idNumber
+		)
+	do {
+		b.tags <- Set{btag};
+		--iterate on events
+		for( event in events){
+			if(event.oclIsTypeOf(Tracker!MovedIn))
+				thisModule.movedInEvent(btag, event);
+			else
+				if(event.oclIsTypeOf(Tracker!FairRegistration))
+					thisModule.fairRegistrationEvent(btag, event);
+				else
+					if(event.oclIsTypeOf(Tracker!MovedOut))
+						thisModule.movedOutEvent(btag, event);
+					else
+						if(event.oclIsTypeOf(Tracker!WeighIn))
+							thisModule.weighInEvent(btag, event);
+						else
+							if(event.oclIsTypeOf(Tracker!TagApplied))
+								thisModule.tagAppliedEvent(btag, event);
+					
+				
+		}
+		bPrem.animals <- Set{b};
+		'Added '.concat(animal.oclType().toString().concat(' ')).concat(animal.ain.idNumber.toString()).println();
+	}	
+}
+
+rule swine (bPrem : TrackerBeta!Premises, animal : Tracker!Swine){
+	using {
+		events : Sequence(Tracker!Event)= animal.getAllEvents();
+	}
+	to
+		b: TrackerBeta!Swine(
+			sex <- animal.sex,
+			birthDate <- animal.birthDate,
+			swineBreed <- animal.swineBreed
+		),
+		btag: TrackerBeta!Tag(
+			idNumber <- animal.ain.idNumber
+		)
+	do {
+		b.tags <- Set{btag};
+		--iterate on events
+		for( event in events){
+			if(event.oclIsTypeOf(Tracker!MovedIn))
+				thisModule.movedInEvent(btag, event);
+			else
+				if(event.oclIsTypeOf(Tracker!FairRegistration))
+					thisModule.fairRegistrationEvent(btag, event);
+				else
+					if(event.oclIsTypeOf(Tracker!MovedOut))
+						thisModule.movedOutEvent(btag, event);
+					else
+						if(event.oclIsTypeOf(Tracker!WeighIn))
+							thisModule.weighInEvent(btag, event);
+						else
+							if(event.oclIsTypeOf(Tracker!TagApplied))
+								thisModule.tagAppliedEvent(btag, event);
+					
+				
+		}
+		bPrem.animals <- Set{b};
+		'Added '.concat(animal.oclType().toString().concat(' ')).concat(animal.ain.idNumber.toString()).println();
+	}	
+}
+
+-- ========================== Main Matched Rule ===================================
+rule Premises {
+	from
+			aPrem : Tracker!Premises
+	using {
+		premAnimals : OrderedSet(Tracker!Animal)= aPrem.getAllAnimals();
+		
+		
+	}
+	to
+		bPrem : TrackerBeta!Premises (
+			premisesId <- aPrem.premisesId,
+			emailContact <- aPrem.emailContact
+			--Set the animals reference with all the animals
+			--animals <- animalLst
+		)
+		
+--		,
+--		
+--		animalLst : distinct TrackerBeta!BovineBeef foreach(
+--						animal  in premAnimals)(
+--							sex <- animal.sex,
+--							birthDate <- animal.birthDate,
+--							beefBreed <- animal.beefBreed,
+--							--each animal has a set of tags 
+--							tags <- tagLst
+--		),
+--		
+--		tagLst :  distinct TrackerBeta!Tag foreach( 
+--					    animal in premAnimals)(								
+--  						idNumber <- animal.ain.idNumber,
+--						--each tag has a set of events
+--						events <- eventLst
+--		),
+--		
+--		eventLst : distinct TrackerBeta!TagApplied foreach(
+--						event in seqEventSets) ( 
+--						dateTime <- event.at(1).dateTime,
+--						comments <- event.at(1).comments
+--		)
+--		
+		
+		
+	do {
+		bPrem.oclType().toString().println();
+		--iterate on premAnimals
+		for( pa in premAnimals){
+			if(pa.oclIsTypeOf(Tracker!BovineBeef))
+				thisModule.beef(bPrem, pa);
+			else
+				if(pa.oclIsTypeOf(Tracker!Swine))
+					thisModule.swine(bPrem, pa);
+				else
+					if(pa.oclIsTypeOf(Tracker!Ovine))
+						thisModule.ovine(bPrem, pa);
+		}
+		
+	}
+		
+}
+
+
+

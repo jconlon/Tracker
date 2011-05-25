@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracker Configuration
+Bundle-SymbolicName: com.verticon.tracker.configuration
+Bundle-Version: 0.1.1.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: com.google.common.base,
+ com.google.common.collect,
+ com.google.common.io,
+ com.verticon.osgi.metatype,
+ com.verticon.osgi.metatype.impl,
+ org.eclipse.emf.common.notify,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.resource.impl,
+ org.eclipse.emf.ecore.util,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.emf.ecore.xmi.impl,
+ org.osgi.framework;version="1.5.0",
+ org.osgi.service.cm;version="1.2.1",
+ org.slf4j;version="1.5.11"
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.5.0"
+Export-Package: com.verticon.tracker.configuration

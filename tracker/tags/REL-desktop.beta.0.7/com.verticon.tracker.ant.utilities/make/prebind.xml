@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<project name="project">
+	<target name="buckminster.prebind">
+    	<mkdir dir="${sp:output}"/>
+		<copy file="${sp:ant.jar}" tofile="${sp:output}/ant.jar"/>
+	</target>
+</project>

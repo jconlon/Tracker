@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+         <category
+            name="Tracker"
+            id="com.verticon.tracker.views">
+      </category>
+      <view
+            name="People"
+            icon="icons/Person.gif"
+            category="com.verticon.tracker.views"
+            class="com.verticon.tracker.fair.views.PeopleView"
+            id="com.verticon.tracker.fair.views.PeopleView">
+      </view>
+      <view
+            name="Exhibits"
+            icon="icons/Exhibit.gif"
+            category="com.verticon.tracker.views"
+            class="com.verticon.tracker.fair.views.ExhibitsView"
+            id="com.verticon.tracker.fair.views.ExhibitsView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="com.verticon.tracker.product.desktop.perspective">
+         <view
+               visible="true"
+               relative="org.eclipse.ui.views.PropertySheet"
+               relationship="stack"
+               id="com.verticon.tracker.fair.views.PeopleView">
+         </view>
+         <viewShortcut id="com.verticon.tracker.fair.views.PeopleView"/>
+         
+         <view
+               visible="true"
+               relative="org.eclipse.ui.views.PropertySheet"
+               relationship="stack"
+               id="com.verticon.tracker.fair.views.ExhibitsView">
+         </view>
+         <viewShortcut id="com.verticon.tracker.fair.views.ExhibitsView"/>
+         <newWizardShortcut
+               id="com.verticon.tracker.fair.editor.presentation.FairModelWizardID">
+         </newWizardShortcut>
+      </perspectiveExtension>
+   </extension>
+
+
+</plugin>

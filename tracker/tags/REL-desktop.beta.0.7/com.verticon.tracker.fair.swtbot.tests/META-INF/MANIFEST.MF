@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Fair SWTBot Unit Tests
+Bundle-SymbolicName: com.verticon.tracker.fair.swtbot.tests
+Bundle-Version: 0.1.0.qualifier
+Bundle-Activator: com.verticon.tracker.fair.swtbot.tests.Activator
+Bundle-Vendor: Verticon, Inc.
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.jdt.junit4.runtime;bundle-version="1.1.0",
+ org.eclipse.swtbot.junit4_x;bundle-version="2.0.0",
+ org.junit4;bundle-version="4.5.0",
+ org.eclipse.swtbot.addition;bundle-version="1.0.0",
+ org.eclipse.ui;bundle-version="3.5.0",
+ org.eclipse.swtbot.eclipse.core;bundle-version="2.0.0",
+ org.eclipse.swtbot.eclipse.finder;bundle-version="2.0.0",
+ org.eclipse.swtbot.eclipse.ui;bundle-version="2.0.0",
+ org.eclipse.swtbot.swt.finder;bundle-version="2.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: com.verticon.tracker.swtbot.addition,
+ org.apache.log4j,
+ org.hamcrest;version="1.1.0"

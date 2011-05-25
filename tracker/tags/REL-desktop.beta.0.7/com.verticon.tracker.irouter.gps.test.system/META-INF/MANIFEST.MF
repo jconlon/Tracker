@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Premises Measurement Event Gateway System Test
+Bundle-SymbolicName: com.verticon.tracker.irouter.gps.test.system
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Service-Component: OSGI-INF/*.xml
+Import-Package: com.verticon.tracker.irouter.dev,
+ junit.framework;version="4.8.1",
+ org.osgi.framework;version="1.5.0",
+ org.osgi.service.cm;version="1.2.1",
+ org.osgi.service.monitor;version="1.0.0",
+ org.osgi.service.wireadmin;version="1.0.0",
+ org.osgi.util.position;version="1.0.1",
+ org.slf4j;version="1.5.11"
+

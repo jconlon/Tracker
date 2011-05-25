@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.verticon.oasis.xal.core.model/src"
+    modelPluginID="com.verticon.oasis.xal.core.model" modelName="XAL" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.xsd.ecore.importer" complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>../../com.verticon.oasis.xal.core.schema/xAL.xsd</foreignModel>
+  <genPackages prefix="Xal" basePackage="com.verticon.oasis" resource="XML" disposableProviderFactory="true"
+      loadInitialization="true" literalsInterface="false" extensibleProviderFactory="true"
+      contentTypeIdentifier="com.verticon.oasis.xal" ecorePackage="xal.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//DependentThoroughfaresType">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//DependentThoroughfaresType/Yes"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//DependentThoroughfaresType/No"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//IndicatorOccurence">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//IndicatorOccurence/Before"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//IndicatorOccurence/After"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//IndicatorOccurrence">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//IndicatorOccurrence/Before"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//IndicatorOccurrence/After"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//IndicatorOccurrence1">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//IndicatorOccurrence1/Before"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//IndicatorOccurrence1/After"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//IndicatorOccurrence2">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//IndicatorOccurrence2/Before"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//IndicatorOccurrence2/After"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//IndicatorOccurrence3">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//IndicatorOccurrence3/Before"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//IndicatorOccurrence3/After"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//IndicatorOccurrence4">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//IndicatorOccurrence4/Before"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//IndicatorOccurrence4/After"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//NameNumberOccurrence">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NameNumberOccurrence/Before"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NameNumberOccurrence/After"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//NumberOccurrence">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberOccurrence/BeforeName"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberOccurrence/AfterName"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberOccurrence/BeforeType"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberOccurrence/AfterType"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//NumberRangeOccurence">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberRangeOccurence/BeforeName"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberRangeOccurence/AfterName"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberRangeOccurence/BeforeType"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberRangeOccurence/AfterType"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//NumberRangeOccurrence">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberRangeOccurrence/BeforeName"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberRangeOccurrence/AfterName"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberRangeOccurrence/BeforeType"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberRangeOccurrence/AfterType"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//NumberTypeOccurrence">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberTypeOccurrence/Before"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberTypeOccurrence/After"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//NumberTypeOccurrence1">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberTypeOccurrence1/Before"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberTypeOccurrence1/After"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//NumberTypeType">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberTypeType/Single"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberTypeType/Range"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//NumberTypeType1">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberTypeType1/Single"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//NumberTypeType1/Range"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//RangeTypeType">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//RangeTypeType/Odd"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//RangeTypeType/Even"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//TypeOccurrence">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//TypeOccurrence/Before"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//TypeOccurrence/After"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//TypeOccurrence1">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//TypeOccurrence1/Before"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//TypeOccurrence1/After"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="xal.ecore#//TypeOccurrence2">
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//TypeOccurrence2/Before"/>
+      <genEnumLiterals ecoreEnumLiteral="xal.ecore#//TypeOccurrence2/After"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="xal.ecore#//DependentThoroughfaresTypeObject"/>
+    <genDataTypes ecoreDataType="xal.ecore#//IndicatorOccurenceObject"/>
+    <genDataTypes ecoreDataType="xal.ecore#//IndicatorOccurrenceObject"/>
+    <genDataTypes ecoreDataType="xal.ecore#//IndicatorOccurrenceObject1"/>
+    <genDataTypes ecoreDataType="xal.ecore#//IndicatorOccurrenceObject2"/>
+    <genDataTypes ecoreDataType="xal.ecore#//IndicatorOccurrenceObject3"/>
+    <genDataTypes ecoreDataType="xal.ecore#//IndicatorOccurrenceObject4"/>
+    <genDataTypes ecoreDataType="xal.ecore#//NameNumberOccurrenceObject"/>
+    <genDataTypes ecoreDataType="xal.ecore#//NumberOccurrenceObject"/>
+    <genDataTypes ecoreDataType="xal.ecore#//NumberRangeOccurenceObject"/>
+    <genDataTypes ecoreDataType="xal.ecore#//NumberRangeOccurrenceObject"/>
+    <genDataTypes ecoreDataType="xal.ecore#//NumberTypeOccurrenceObject"/>
+    <genDataTypes ecoreDataType="xal.ecore#//NumberTypeOccurrenceObject1"/>
+    <genDataTypes ecoreDataType="xal.ecore#//NumberTypeTypeObject"/>
+    <genDataTypes ecoreDataType="xal.ecore#//NumberTypeTypeObject1"/>
+    <genDataTypes ecoreDataType="xal.ecore#//RangeTypeTypeObject"/>
+    <genDataTypes ecoreDataType="xal.ecore#//TypeOccurrenceObject"/>
+    <genDataTypes ecoreDataType="xal.ecore#//TypeOccurrenceObject1"/>
+    <genDataTypes ecoreDataType="xal.ecore#//TypeOccurrenceObject2"/>
+    <genClasses ecoreClass="xal.ecore#//Address">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Address/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Address/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Address/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Address/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//AddressDetails">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//AddressDetails/postalServiceElements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//AddressDetails/address"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//AddressDetails/addressLines"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//AddressDetails/country"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//AddressDetails/administrativeArea"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//AddressDetails/locality"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//AddressDetails/thoroughfare"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AddressDetails/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressDetails/addressDetailsKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressDetails/addressType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressDetails/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressDetails/currentStatus"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressDetails/usage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressDetails/validFromDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressDetails/validToDate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AddressDetails/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//AddressIdentifier">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AddressIdentifier/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressIdentifier/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressIdentifier/identifierType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressIdentifier/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AddressIdentifier/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//AddressLatitude">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLatitude/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLatitude/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLatitude/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLatitude/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//AddressLatitudeDirection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLatitudeDirection/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLatitudeDirection/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLatitudeDirection/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLatitudeDirection/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//AddressLine">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLine/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLine/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLine/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLine/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//AddressLines">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//AddressLines/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLines/any"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLines/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//AddressLongitude">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLongitude/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLongitude/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLongitude/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLongitude/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//AddressLongitudeDirection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLongitudeDirection/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLongitudeDirection/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLongitudeDirection/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AddressLongitudeDirection/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//AdministrativeArea">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//AdministrativeArea/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//AdministrativeArea/administrativeAreaName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//AdministrativeArea/subAdministrativeArea"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//AdministrativeArea/locality"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//AdministrativeArea/postOffice"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//AdministrativeArea/postalCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AdministrativeArea/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AdministrativeArea/indicator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AdministrativeArea/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AdministrativeArea/usageType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AdministrativeArea/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//AdministrativeAreaName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AdministrativeAreaName/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AdministrativeAreaName/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//AdministrativeAreaName/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//AdministrativeAreaName/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//Barcode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Barcode/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Barcode/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Barcode/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Barcode/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//BuildingName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//BuildingName/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//BuildingName/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//BuildingName/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//BuildingName/typeOccurrence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//BuildingName/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//Country">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Country/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Country/countryNameCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Country/countryName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Country/administrativeArea"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Country/locality"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Country/thoroughfare"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Country/any"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Country/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//CountryName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//CountryName/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//CountryName/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//CountryName/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//CountryName/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//CountryNameCode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//CountryNameCode/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//CountryNameCode/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//CountryNameCode/scheme"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//CountryNameCode/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//Department">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Department/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Department/departmentName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Department/mailStop"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Department/postalCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Department/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Department/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Department/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//DepartmentName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//DepartmentName/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//DepartmentName/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//DepartmentName/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//DepartmentName/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//DependentLocality">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentLocality/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentLocality/dependentLocalityName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentLocality/dependentLocalityNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentLocality/postBox"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentLocality/largeMailUser"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentLocality/postOffice"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentLocality/postalRoute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentLocality/thoroughfare"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentLocality/premise"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentLocality/dependentLocality"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentLocality/postalCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//DependentLocality/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//DependentLocality/connector"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//DependentLocality/indicator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//DependentLocality/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//DependentLocality/usageType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//DependentLocality/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//DependentLocalityName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//DependentLocalityName/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//DependentLocalityName/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//DependentLocalityName/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//DependentLocalityName/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//DependentLocalityNumber">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//DependentLocalityNumber/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//DependentLocalityNumber/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//DependentLocalityNumber/nameNumberOccurrence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//DependentLocalityNumber/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//DependentThoroughfare">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentThoroughfare/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentThoroughfare/thoroughfarePreDirection"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentThoroughfare/thoroughfareLeadingType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentThoroughfare/thoroughfareName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentThoroughfare/thoroughfareTrailingType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DependentThoroughfare/thoroughfarePostDirection"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//DependentThoroughfare/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//DependentThoroughfare/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//DependentThoroughfare/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/addressDetails"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/administrativeArea"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/countryName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/department"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/locality"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/postalCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/postBox"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/postOffice"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/premise"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/premiseNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/premiseNumberPrefix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/premiseNumberSuffix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/thoroughfare"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/thoroughfareNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/thoroughfareNumberPrefix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/thoroughfareNumberSuffix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//DocumentRoot/xAL"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//EndorsementLineCode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//EndorsementLineCode/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//EndorsementLineCode/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//EndorsementLineCode/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//EndorsementLineCode/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//Firm">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Firm/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Firm/firmName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Firm/department"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Firm/mailStop"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Firm/postalCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Firm/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Firm/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Firm/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//FirmName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//FirmName/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//FirmName/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//FirmName/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//FirmName/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//KeyLineCode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//KeyLineCode/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//KeyLineCode/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//KeyLineCode/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//KeyLineCode/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//LargeMailUser">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//LargeMailUser/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//LargeMailUser/largeMailUserName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//LargeMailUser/largeMailUserIdentifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//LargeMailUser/buildingName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//LargeMailUser/department"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//LargeMailUser/postBox"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//LargeMailUser/thoroughfare"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//LargeMailUser/postalCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//LargeMailUser/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//LargeMailUser/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//LargeMailUser/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//LargeMailUserIdentifier">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//LargeMailUserIdentifier/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//LargeMailUserIdentifier/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//LargeMailUserIdentifier/indicator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//LargeMailUserIdentifier/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//LargeMailUserIdentifier/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//LargeMailUserName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//LargeMailUserName/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//LargeMailUserName/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//LargeMailUserName/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//LargeMailUserName/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//Locality">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Locality/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Locality/localityName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Locality/postBox"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Locality/largeMailUser"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Locality/postOffice"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Locality/postalRoute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Locality/thoroughfare"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Locality/premise"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Locality/dependentLocality"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Locality/postalCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Locality/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Locality/indicator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Locality/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Locality/usageType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Locality/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//LocalityName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//LocalityName/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//LocalityName/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//LocalityName/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//LocalityName/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//MailStop">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//MailStop/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//MailStop/mailStopName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//MailStop/mailStopNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//MailStop/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//MailStop/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//MailStop/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//MailStopName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//MailStopName/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//MailStopName/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//MailStopName/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//MailStopName/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//MailStopNumber">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//MailStopNumber/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//MailStopNumber/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//MailStopNumber/nameNumberSeparator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//MailStopNumber/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostalCode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalCode/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalCode/postalCodeNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalCode/postalCodeNumberExtension"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalCode/postTown"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostalCode/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostalCode/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostalCode/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostalCodeNumber">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostalCodeNumber/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostalCodeNumber/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostalCodeNumber/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostalCodeNumber/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostalCodeNumberExtension">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostalCodeNumberExtension/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostalCodeNumberExtension/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostalCodeNumberExtension/numberExtensionSeparator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostalCodeNumberExtension/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostalCodeNumberExtension/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostalRoute">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalRoute/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalRoute/postalRouteName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalRoute/postalRouteNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalRoute/postBox"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostalRoute/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostalRoute/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostalRoute/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostalRouteName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostalRouteName/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostalRouteName/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostalRouteName/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostalRouteName/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostalRouteNumber">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostalRouteNumber/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostalRouteNumber/code"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostalRouteNumber/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostalServiceElements">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalServiceElements/addressIdentifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalServiceElements/endorsementLineCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalServiceElements/keyLineCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalServiceElements/barcode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalServiceElements/sortingCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalServiceElements/addressLatitude"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalServiceElements/addressLatitudeDirection"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalServiceElements/addressLongitude"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalServiceElements/addressLongitudeDirection"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostalServiceElements/supplementaryPostalServiceData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostalServiceElements/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostalServiceElements/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostalServiceElements/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostBox">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostBox/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostBox/postBoxNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostBox/postBoxNumberPrefix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostBox/postBoxNumberSuffix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostBox/postBoxNumberExtension"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostBox/firm"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostBox/postalCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostBox/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostBox/indicator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostBox/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostBox/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostBoxNumber">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostBoxNumber/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostBoxNumber/code"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostBoxNumber/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostBoxNumberExtension">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostBoxNumberExtension/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostBoxNumberExtension/numberExtensionSeparator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostBoxNumberExtension/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostBoxNumberPrefix">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostBoxNumberPrefix/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostBoxNumberPrefix/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostBoxNumberPrefix/numberPrefixSeparator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostBoxNumberPrefix/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostBoxNumberSuffix">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostBoxNumberSuffix/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostBoxNumberSuffix/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostBoxNumberSuffix/numberSuffixSeparator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostBoxNumberSuffix/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostOffice">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostOffice/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostOffice/postOfficeName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostOffice/postOfficeNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostOffice/postalRoute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostOffice/postBox"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostOffice/postalCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostOffice/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostOffice/indicator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostOffice/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostOffice/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostOfficeName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostOfficeName/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostOfficeName/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostOfficeName/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostOfficeName/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostOfficeNumber">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostOfficeNumber/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostOfficeNumber/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostOfficeNumber/indicator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostOfficeNumber/indicatorOccurrence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostOfficeNumber/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostTown">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostTown/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostTown/postTownName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PostTown/postTownSuffix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostTown/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostTown/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostTownName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostTownName/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostTownName/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostTownName/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostTownName/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PostTownSuffix">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostTownSuffix/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PostTownSuffix/code"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PostTownSuffix/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//Premise">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Premise/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Premise/premiseName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Premise/premiseLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Premise/premiseNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Premise/premiseNumberRange"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Premise/premiseNumberPrefix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Premise/premiseNumberSuffix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Premise/buildingName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Premise/subPremise"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Premise/firm"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Premise/mailStop"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Premise/postalCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Premise/premise"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Premise/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Premise/premiseDependency"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Premise/premiseDependencyType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Premise/premiseThoroughfareConnector"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Premise/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Premise/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PremiseLocation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseLocation/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseLocation/code"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseLocation/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PremiseName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseName/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseName/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseName/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseName/typeOccurrence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseName/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PremiseNumber">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumber/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumber/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumber/indicator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumber/indicatorOccurrence"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumber/numberType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumber/numberTypeOccurrence"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumber/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumber/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PremiseNumberPrefix">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumberPrefix/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumberPrefix/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumberPrefix/numberPrefixSeparator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumberPrefix/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumberPrefix/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PremiseNumberRange">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PremiseNumberRange/premiseNumberRangeFrom"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PremiseNumberRange/premiseNumberRangeTo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumberRange/indicator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumberRange/indicatorOccurence"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumberRange/numberRangeOccurence"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumberRange/rangeType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumberRange/separator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumberRange/type"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PremiseNumberRangeFrom">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PremiseNumberRangeFrom/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PremiseNumberRangeFrom/premiseNumberPrefix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PremiseNumberRangeFrom/premiseNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PremiseNumberRangeFrom/premiseNumberSuffix"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PremiseNumberRangeTo">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PremiseNumberRangeTo/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PremiseNumberRangeTo/premiseNumberPrefix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PremiseNumberRangeTo/premiseNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//PremiseNumberRangeTo/premiseNumberSuffix"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//PremiseNumberSuffix">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumberSuffix/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumberSuffix/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumberSuffix/numberSuffixSeparator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumberSuffix/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//PremiseNumberSuffix/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//SortingCode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SortingCode/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SortingCode/type"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//SubAdministrativeArea">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//SubAdministrativeArea/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//SubAdministrativeArea/subAdministrativeAreaName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//SubAdministrativeArea/locality"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//SubAdministrativeArea/postOffice"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//SubAdministrativeArea/postalCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SubAdministrativeArea/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubAdministrativeArea/indicator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubAdministrativeArea/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubAdministrativeArea/usageType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SubAdministrativeArea/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//SubAdministrativeAreaName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SubAdministrativeAreaName/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubAdministrativeAreaName/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubAdministrativeAreaName/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SubAdministrativeAreaName/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//SubPremise">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//SubPremise/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//SubPremise/subPremiseName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//SubPremise/subPremiseLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//SubPremise/subPremiseNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//SubPremise/subPremiseNumberPrefix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//SubPremise/subPremiseNumberSuffix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//SubPremise/buildingName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//SubPremise/firm"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//SubPremise/mailStop"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//SubPremise/postalCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//SubPremise/subPremise"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremise/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremise/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremise/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//SubPremiseLocation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseLocation/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseLocation/code"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//SubPremiseName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseName/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseName/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseName/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseName/typeOccurrence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseName/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//SubPremiseNumber">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumber/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumber/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumber/indicator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumber/indicatorOccurrence"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumber/numberTypeOccurrence"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumber/premiseNumberSeparator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumber/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumber/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//SubPremiseNumberPrefix">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumberPrefix/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumberPrefix/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumberPrefix/numberPrefixSeparator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumberPrefix/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumberPrefix/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//SubPremiseNumberSuffix">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumberSuffix/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumberSuffix/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumberSuffix/numberSuffixSeparator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumberSuffix/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SubPremiseNumberSuffix/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//SupplementaryPostalServiceData">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SupplementaryPostalServiceData/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SupplementaryPostalServiceData/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//SupplementaryPostalServiceData/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//SupplementaryPostalServiceData/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//Thoroughfare">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Thoroughfare/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Thoroughfare/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xal.ecore#//Thoroughfare/thoroughfareNumber"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xal.ecore#//Thoroughfare/thoroughfareNumberRange"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Thoroughfare/thoroughfareNumberPrefix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Thoroughfare/thoroughfareNumberSuffix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Thoroughfare/thoroughfarePreDirection"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Thoroughfare/thoroughfareLeadingType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Thoroughfare/thoroughfareName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Thoroughfare/thoroughfareTrailingType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Thoroughfare/thoroughfarePostDirection"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Thoroughfare/dependentThoroughfare"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Thoroughfare/dependentLocality"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Thoroughfare/premise"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Thoroughfare/firm"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Thoroughfare/postalCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Thoroughfare/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Thoroughfare/dependentThoroughfares"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Thoroughfare/dependentThoroughfaresConnector"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Thoroughfare/dependentThoroughfaresIndicator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Thoroughfare/dependentThoroughfaresType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Thoroughfare/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Thoroughfare/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//ThoroughfareLeadingType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareLeadingType/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareLeadingType/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareLeadingType/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareLeadingType/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//ThoroughfareName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareName/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareName/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareName/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareName/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//ThoroughfareNumber">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumber/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumber/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumber/indicator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumber/indicatorOccurrence"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumber/numberOccurrence"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumber/numberType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumber/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumber/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//ThoroughfareNumberFrom">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberFrom/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xal.ecore#//ThoroughfareNumberFrom/addressLine"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xal.ecore#//ThoroughfareNumberFrom/thoroughfareNumberPrefix"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xal.ecore#//ThoroughfareNumberFrom/thoroughfareNumber"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xal.ecore#//ThoroughfareNumberFrom/thoroughfareNumberSuffix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberFrom/code"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberFrom/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//ThoroughfareNumberPrefix">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberPrefix/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberPrefix/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberPrefix/numberPrefixSeparator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberPrefix/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberPrefix/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//ThoroughfareNumberRange">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//ThoroughfareNumberRange/addressLine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//ThoroughfareNumberRange/thoroughfareNumberFrom"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//ThoroughfareNumberRange/thoroughfareNumberTo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberRange/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberRange/indicator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberRange/indicatorOccurrence"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberRange/numberRangeOccurrence"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberRange/rangeType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberRange/separator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberRange/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberRange/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//ThoroughfareNumberSuffix">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberSuffix/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberSuffix/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberSuffix/numberSuffixSeparator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberSuffix/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberSuffix/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//ThoroughfareNumberTo">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberTo/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xal.ecore#//ThoroughfareNumberTo/addressLine"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xal.ecore#//ThoroughfareNumberTo/thoroughfareNumberPrefix"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xal.ecore#//ThoroughfareNumberTo/thoroughfareNumber"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xal.ecore#//ThoroughfareNumberTo/thoroughfareNumberSuffix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberTo/code"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareNumberTo/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//ThoroughfarePostDirection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfarePostDirection/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfarePostDirection/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfarePostDirection/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfarePostDirection/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//ThoroughfarePreDirection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfarePreDirection/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfarePreDirection/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfarePreDirection/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfarePreDirection/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//ThoroughfareTrailingType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareTrailingType/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareTrailingType/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareTrailingType/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//ThoroughfareTrailingType/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="xal.ecore#//Xal">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xal.ecore#//Xal/addressDetails"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Xal/any"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xal.ecore#//Xal/version"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute xal.ecore#//Xal/anyAttribute"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
