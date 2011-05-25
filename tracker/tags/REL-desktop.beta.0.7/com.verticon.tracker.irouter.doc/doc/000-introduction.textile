@@ -1,0 +1,83 @@
+h1. Overview
+
+h2. Document Status
+
+__This document is the second draft of an iRouter User Guide and is only intended as an overview to the technologies used in the Tracker iRouter. Future versions will fully serve the intended function of a comprehensive user guide for the installation and configuration of the iRouter.__
+
+
+h2. Information Modeling and Processing
+
+Custom integration solutions for real time physical sensor and actuator data are complex, error prone and time consuming.  
+
+Can a generic solution be found for the acquisition, modeling, processing and exchange of physical measurement and state information? One that leverages industry standards and reflects current software engineering best practices? One that hides complexity from end user data acquisition operators? One that can run on a desktop or in a headless appliance?
+
+h3. Solution Requirements
+
+In order to provide a generic solution to problems dealing with the sensing and processing of physical measurements and physical states, a comprehensive solution will require technology for:
+# Modeling measurement and state data [1]
+# Creating services for:
+** Interfacing with external devices for data acquisition from physical sensors
+** Data transformation and computation between services
+** Interfacing with external devices for the output of measurement and state data to physical actuators
+# Creating the interconnections between compatible services
+# Managing, persisting, importing and exporting the configuration data for service components and interconnections
+# Orchestrating the establishment of connections between compatible Producer and Consumer services
+# For operators running the tool:
+** Simplify the operation by hiding the complexity of all of the above
+# For administrators needing configuration validation and troubleshooting aids, provide monitoring and diagnostic tools to visualize:
+** Configuration
+** Internal operation of the services
+
+h3. Leveraging Industry Standards
+
+"The OSGi Alliance":http://www.osgi.org/About/HomePage offers "open specifications":http://www.osgi.org/Specifications/HomePage that enable the modular assembly of software built with Java technology.  These OSGi specification meet most of the solution requirements outlined above.   
+
+The following sections overview the pertinent technologies specified by the OSGi and their relationship to the above solution requirements.[2]
+
+h4. OSGi Measurement and State
+
+The OSGi Measurement and State specification offers a comprehensive[3] way to model physical measurement and state data.  
+
+_Meets requirement #1._
+
+h4. Wire Admin
+
+A second OSGi specification called the Wire Admin Service specifies how to:
+* Represent services which: 
+** Produce measurement and state information
+** Consumer measurement and state information
+* Represent wire connections that move measurement and state information between producer and consumer services
+
+_Meets requirements #2 and #3._
+ 
+h4. Configuration Admin and Metatype
+
+Lastly two more OSGi specifications provide the required solutions for configuration administration:
+* OSGi Metatype Service
+* OSGi Configuration Admin Service
+
+_Meets requirement #4._
+
+h2. What is the Tracker iRouter?
+
+The Tracker _Information Router_, **iRouter** is a generic integration solution for acquiring, transforming and exchanging information between network connected sensors and actuators.  
+
+The Tracker iRouter complements OSGi standard services by adding:
+* An _orchestration_ framework that hides the complexity of establishing the connections between OSGi WireAdmin services
+* User interfaces for simplifying configuration management and application monitoring 
+
+The Tracker iRouter can run as a headless/keyboardless network appliance or as a background service in an Eclipse based desktop.
+  
+*iRouter - A Just-In-Time integration solution for multiple input devices, sensors and actuators.*
+
+
+h2. Notes
+
+fn1. The majority of information moving between components in the iRouter will be Measurement and State data.
+
+fn2. Implementations of these specifications are available from several OSGi providers within the Open Source community.
+
+fn3. Because an OSGi Measurement can represent all "SI units":http://en.wikipedia.org/wiki/International_System_of_Units of measurement and record the precision of the measuring device, it can be used to  model the complete range of measurements and the accuracy of the measuring devices. 
+
+
+

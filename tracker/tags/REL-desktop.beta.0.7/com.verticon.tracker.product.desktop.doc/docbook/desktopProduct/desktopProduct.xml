@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" 
+			"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<chapter id="DesktopProduct">
+    <?dbhtml filename="desktopProduct/desktopProduct.html" ?>
+	<title>Tracker Desktop BI Toolkit</title>
+	
+    <section id="Overview">
+	<title>Overview</title>
+	
+	<section>
+	<title>What is the Tracker Desktop BI Toolkit?</title>
+
+	<para>
+		The Tracker Desktop BI Toolkit is a desktop based Business Intelligence 
+		(<acronym>BI</acronym>) solutions toolkit for animal agriculture professionals. 
+		The Tracker Desktop Toolkit is a <emphasis>network aware rich client platform</emphasis>
+		that can be installed with one or more user selected <acronym>BI</acronym> features.
+	</para>
+	<para>
+		Tracker Desktop Toolkit is based on the Eclipse Rich Client Platform (RCP), the Eclipse
+		Modeling Framework (EMF) and Open System Gateway Initiative (OSGi) technologies.
+	</para>
+     </section>
+     
+     <section><title>Getting Started</title>
+     <para>Go to the Tracker website <ulink url="http://tracker.verticon.com/downloads/index.html">
+						<citetitle>Tracker Website</citetitle></ulink>
+						and follow the installation instructions. </para>
+     <para>Once the Tracker BI Toolkit product is installed users can easily add tools 
+	to meet their unique information management requirements.  Tracker BI Toolkit can be extended with one or more optional features:
+	<itemizedlist mark='bullet'>
+				<listitem>
+					<para>features that contain editors for creating and managing business specific information;</para>
+				</listitem>
+				<listitem>
+					<para>features that contain task specific utilities and tools for complimenting information;</para>
+				</listitem>
+				<listitem>
+					<para>features that contain business intelligence reporting tools for presenting and analyzing information;</para>
+				</listitem>
+				
+			</itemizedlist>
+ 		</para>
+ 		
+ 		<para>To add tools, go to the <emphasis>Help</emphasis> menu and select <emphasis>Install New Software</emphasis>, 
+ 		From the Install Wizard, in the <emphasis>Work with</emphasis> selection box, select the entry 
+ 		<emphasis>Tracker Release - http://tracker.verticon.com/Tracker/updates</emphasis>.
+ 		
+ 		</para>
+ 		<figure id="fig_ProductFeatures">
+      		<title>Tracker BI Toolkit Product Features</title>
+      		<mediaobject>
+      			<imageobject><imagedata align="center" fileref="../images/gettingStarted/AvailableSoftware.png"/></imageobject>
+      		</mediaobject>
+    	</figure>
+     <note><para>You can also use a cheat sheet to assist with adding features. Go to the <emphasis>Help</emphasis> menu
+ 		and selecting Cheat Sheets.  From the <emphasis>Tracker</emphasis> entry select <emphasis>Adding Tracker Features to the Tracker Desktop Toolki6t</emphasis>. </para></note>
+     </section>
+  
+	<section id="desktopDefinitions">
+	<?dbhtml filename="overview/desktopOverview_definitions.html" ?>
+	<title>Workbench Instances, Workspaces, and Projects</title>
+		<para>The main focus of activity in the Tracker Application is the editing of Animal Premises Documents.  In order to discuss the mechanics of editing Tracker Animal Premises Documents, some definitions are in order:
+		<itemizedlist mark='bullet'>
+			    <listitem>
+					<para>A Tracker Desktop Toolkit <emphasis>installation</emphasis>  is a location on your disk 
+					that contains a distribution of the Tracker. When you unpack a Tracker distribution 
+					to a location on your disk, you effectively create a local platform installation at 
+					that location. The installation contains a set of tools that were packaged together 
+					by the organization that created the distribution. Each of the tools in the platform 
+					installation contributes some functionality to the Tracker. You may have several 
+					platform installations on your machine, each of which may contain a different set of 
+					tools. </para>
+				</listitem>
+				<listitem>
+					<para>A Tracker<emphasis>workbench instance</emphasis> is a runtime instance of the 
+					Tracker. Every time you launch the Tracker, a workbench instance is created, making 
+					the tools in the platform installation from which the instance was loaded available 
+					for use.  
+					</para>
+					<para> For more information, see the Workbook User Guide concept definition for
+						<ulink url="PLUGINS_ROOT/org.eclipse.platform.doc.user/concepts/concepts-2.htm"><citetitle>Workbench</citetitle></ulink>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>A Tracker <emphasis>workspace</emphasis> is a location on your disk that is 
+					associated with a running workbench instance. It contains the resources (Tracker 
+					Documents, files, folders, etc.) that comprise the <emphasis>projects</emphasis> you 
+					work on. The tools contained in the platform installation from which the workbench 
+					instance was launched can be used to work with the projects in the workspace. Each 
+					workbench instance has exclusive access to its associated workspace: concurrently 
+					running workbench instances can not share the same workspace. </para>
+				</listitem>
+				
+			</itemizedlist>
+		</para>
+		
+	</section>
+	<section id="Perspective">
+	    <?dbhtml filename="overview/desktopOverview_perspective.html" ?>
+		<title>Perspective, Editors and Views</title>
+		
+		<para>Within the Tracker Workbench, Documents are edited, manipulated, and examined with 
+		data model specific Document Editors and Views.  To assist you as you work with Documents, 
+		a Tracker <emphasis>Perspective</emphasis> visualizes and positions these Tracker specific 
+		Editors and Views within the Workbench as shown in <xref 
+		linkend="fig_fullScreenShot"/>.
+       </para>
+       <figure id="fig_fullScreenShot">
+                <title>Tracker Perspective
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/overview/fullScreenShot.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+		<para> For more information, see the Workbook User Guide concept definitions for
+						<ulink url="PLUGINS_ROOT/org.eclipse.platform.doc.user/concepts/concepts-6.htm">
+						<citetitle>Editor</citetitle></ulink>, <ulink url="PLUGINS_ROOT/org.eclipse.platform.doc.user/concepts/concepts-5.htm">
+						<citetitle>View</citetitle></ulink>, and <ulink url="PLUGINS_ROOT/org.eclipse.platform.doc.user/concepts/concepts-4.htm">
+						<citetitle>Perspective</citetitle></ulink>.
+					</para>
+		<para>The Tracker Perspective organizes the workbench into four areas, outlined in colors in
+		the above figure. </para>
+		<para>
+			<orderedlist numeration="loweralpha">
+				<listitem>
+					<para>The resource navigation area, highlighted in yellow, provides is the 
+					standard Resource Navigator view which presents the tree of Projects, Folders, 
+					Files and other resources in the workspace.</para>
+				</listitem>
+				<listitem>
+					<para>An area for visualizing editors, highlighted in red, where Tracker 
+					Document Editors and other Resource Editors display.
+					<note><title>Optional Editors</title>
+					<para>Displayed is the optional Premises Editor that may be installed 
+					(called <glossterm>provisioned</glossterm>) by the user.</para>
+					</note>
+				   </para>
+				</listitem>
+				<listitem>
+					<para>The <ulink url="PLUGINS_ROOT/org.eclipse.platform.doc.user/reference/ref-30.htm">
+						<citetitle>Outline View</citetitle></ulink>
+						, highlighted in green, displays an outline of a structured 
+					file that is currently open in the editor area, and lists structural elements.</para>
+				</listitem>
+				<listitem>
+					<para>The support views area, highlighted in blue, displays the Properties, 
+					Console, Problems, Tasks, Queries, Readers, Animals, and Events views.
+					<note><title>Optional Views</title>
+					<para>The Queries, Readers, Animals, and Events views are optional views that 
+					may be provisioned by the user.</para>
+					</note>
+					</para>
+					<para>The <ulink url="PLUGINS_ROOT/org.eclipse.platform.doc.user/reference/ref-29.htm">
+						<citetitle>Properties View</citetitle></ulink> displays read-only information, such as the 
+					properties of a file resource and information that can be edited, 
+					such as the properties of an Entry in a Document.</para>
+					<para>The Console View displays program output information, such as error or 
+					warning messages.</para>
+					<para>The Problems View displays problems related to workbench or resources.</para>
+					<para>The Tasks View displays user reminders of things to do. </para>
+					<para>The Ocl Queries View displays a list of quick selection mechanisms for 
+					selecting and find information in Tracker Documents.</para>
+					<para>The Readers View displays a list of configured Tag ID Readers.</para>
+				</listitem>
+			</orderedlist>
+		</para>
+		
+	</section>
+	</section>
+</chapter>

@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" 
+ "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter>
+  	<?dbhtml filename="overview/frameworkUseCases.html" ?>
+	<title>Use Cases</title>
+	
+	<section>
+	<?dbhtml filename="overview/frameworkOverview_useCaseDiagrams.html" ?>
+		<title>Tracker Solution Use-Cases</title>
+		<para>
+		This section utilizes <emphasis>use-case diagrams</emphasis> to describe 
+		Tracker functionality from the users<footnote>
+		<para>Users of Tracker are typically Livestock <emphasis>Producers</emphasis> 
+		operating the Tracker Desktop applications, but they may also be auditors, infrastructure providers or
+		Livestock Information Analysts.  The section will use the terminology <emphasis>Operator</emphasis>
+		and <emphasis>Information Technology Analyst</emphasis> to distinguish between field operators and information
+		analysts.</para>
+		</footnote> point of view. Tracker user functionality can be organized 
+		into the following six categories:
+		<orderedlist numeration="arabic">
+				<listitem>
+					<para>
+						Data Collection;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Documentation;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Management;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Analysis;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Reporting;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						and Collaboration.
+					</para>
+				</listitem>
+			</orderedlist>
+			<note>
+			 <para>
+				To accommodate the largest number of users, in the most open way possible,
+				Tracker applications support multiple Operating Systems.  Tracker application 
+				runtime binaries are available for the following leading Operating System 
+				platforms:
+				<itemizedlist mark='arabic'>
+				<listitem>
+					<para>Microsoft <trademark>Windows</trademark>;</para>
+				</listitem>
+				<listitem>
+					<para>Linux;</para>
+				</listitem>
+				<listitem>
+					<para>and Apple <trademark>MacOS</trademark>.</para>
+				</listitem>
+				</itemizedlist>
+				</para>
+			</note>
+		</para>
+		
+		
+		<section>
+		    <?dbhtml filename="overview/frameworkOverview_useCaseDiagrams_dataCollection.html" ?>
+			<title>Data Collection</title>
+			<para>
+				Offering a value added suite of information solutions to livestock professionals initially
+				requires the collection of a diverse data set prior to processing and reporting. 
+			</para>
+			<para>
+				Tracker provides three ways to collect livestock data:
+				<itemizedlist mark='arabic'>
+				<listitem>
+					<para>manual data entry by the Tracker operator;</para>
+				</listitem>
+				<listitem>
+					<para>importation of bulk data from external files;</para>
+				</listitem>
+				<listitem>
+					<para>and input of real-time electronic transactions from sensors and readers.</para>
+				</listitem>
+			</itemizedlist>
+			Data Collection functionality is shown in the <xref linkend="fig_DataCollectionUseCases" />
+			<footnote>
+			<para>
+				More detailed use-case diagrams are documented in the latter chapters on 
+				Provisioned Editors and Features. 
+			</para>
+			</footnote>. 
+		
+			<figure id="fig_DataCollectionUseCases">
+				<title>Data Collection Use-Case Diagram</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="../images/useCases/dataCollection.png" />
+					</imageobject>
+				</mediaobject>
+			</figure>
+	
+			</para>
+		</section>
+		
+		<section>
+		    <?dbhtml filename="overview/frameworkOverview_useCaseDiagrams_documentation.html" ?>
+			<title>Documentation</title>
+			<para>
+				After data is collected, the collected data itself needs to be structured, consolidated and 
+				persisted.   Next users need to confirm that the results of this process is a 
+				<emphasis>valid model</emphasis> of the real world process they are trying to 
+				capture.   
+			</para>
+			<para>
+				Tracker applications consolidate, structure and persist data to light weight
+				<ulink url="http://en.wikipedia.org/wiki/XMI">industry standard</ulink> document files. Using 
+				standard based document formats for data storage provides Tracker users significant 
+				benefits over storing data in heavy weight relational databases or proprietary document 
+				formats<footnote> 
+				<para>
+					Industry standard text based data documents offer greater mobility than database data storage 
+					and greater processing, tooling, analysis, reporting and collaborating
+				    options than proprietary document formats.  Open standard document formats are the key
+				    to many of the subsequent use-case scenarios presented in this section.
+				</para>
+				<para>
+					This documentation uses the term <emphasis>Tracker Data Documents</emphasis> as a 
+					shorthand for the more technically precise term 
+					<emphasis><ulink url="http://www.eclipse.org/modeling/emf/">EMF Ecore</ulink> 
+					Model Instance</emphasis> document.  
+				</para>
+				</footnote>.
+			</para>  
+			<para>
+				Structuring and consolidating data to documents is the first step of the process, but 
+				users need tools to confirm that documents are <emphasis>valid</emphasis> models of real world 
+				processes.  For the document to be considered valid for a real world 
+				process, rules for judging validity must be controlled by the user.<footnote>
+				<para>Document validation basically insures that data contained in documents 
+				meet user requirements. Since user requirements may change based on a specific project or 
+				livestock scenario, the user must be able to modify and change these rules. </para>
+				</footnote>	
+			</para>
+			<para>
+			Documentation functionality is shown in the <xref linkend="fig_DocumentationUseCases" />	
+				<figure id="fig_DocumentationUseCases">
+				<title>Documentation Use-Case Diagram</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="../images/useCases/documentation.png" />
+						</imageobject>
+					</mediaobject>
+				</figure>
+			</para>
+		</section>
+		
+		<section>
+		    <?dbhtml filename="overview/frameworkOverview_useCaseDiagrams_management.html" ?>
+			<title>Management</title>
+			<para>
+				Tracker data documents are created and used within a specific livestock 
+				business context. Within this context Tracker documents are often associated 
+				with other files and folders of files. 
+				<footnote>
+				<para>
+				For example: Tracker data documents may be associated with the raw data files that 
+				were initially imported into the Tracker documents; Tracker data documents are 
+				often accompanied by report design files used for running reports; and there 
+				may even be multiple Tracker document files associated with different data
+				viewpoints of a particular work activity.  
+				</para>
+				</footnote>
+			</para>
+			<para>
+				To address the requirement for grouping files into work contexts
+				Tracker supports the concept of a <emphasis>Project</emphasis>.
+				<footnote>
+				<para>
+					Eclipse also supports a higher or parent level of container above that of a project 
+					container. This higher level container is called an Eclipse <emphasis>workspace</emphasis>
+					and it exists to hold user settings and contain multiple projects. 
+					A Tracker user can work with Multiple Workspaces each containing multiple Projects. 
+					For the typical Tracker user, they can elect to only use the default
+					workspace and afterwards ignore the concept of workspaces.  
+				</para>
+				</footnote>
+			</para>
+			  
+			<para>
+				A Tracker project is a conceptual container for managing <emphasis>related</emphasis> files, folders, 
+				documents, reports and images. Files in Tracker projects can be created, organized in folders, 
+				removed, deleted and edited. Files in Tracker Projects can also be compared to each other and 
+				the editing histories of files can also be viewed and changes compared. Projects (and all the contained
+				files) can be archived, exported, and imported into the Tracker.<footnote>
+				<para>Tracker also supports simple project management tools for managing ToDo tasks and network
+				backup of projects. Tools 
+				for more sophisticated project management and file revision control are available as Eclipse
+				features that can also be added to the Tracker.</para>
+				</footnote>
+			</para>
+			<para>
+			Management functionality is shown in the <xref linkend="fig_ManagementUseCases" />	
+				<figure id="fig_ManagementUseCases">
+				<title>Management Use-Case Diagram</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="../images/useCases/management.png" />
+						</imageobject>
+					</mediaobject>
+				</figure>
+			</para>
+		</section>
+		
+		<section>
+		    <?dbhtml filename="overview/frameworkOverview_useCaseDiagrams_analysis.html" ?>
+			<title>Analysis and Reporting</title>
+			<para>
+				To create information useful to end users, Tracker data documents can be used as data 
+				sources to 
+				<ulink url="http://www.eclipse.org/birt/phoenix/intro/">Eclipse Business Intelligence Reporting Tool</ulink>
+				<acronym>(BIRT)</acronym> reports. 
+			</para>
+			
+			<para>
+				BIRT reports are created by Livestock Information Technology Analysts.
+				<footnote>
+				<para>Also called Business Analysts or Report Designers.</para>
+				</footnote>
+			    After analyzing specific livestock information problems these analysts 
+				utilize the BIRT Report Designer tool to specify how to extract and create information from 
+				Tracker data documents.  These specifications result in a set of BIRT report 
+				design documents and report libraries.  Report design documents and libraries  
+				are distributed to Tracker End Users who use them to run reports against one or more 
+				data documents in order to visualize and export information. <footnote>
+				<para>Tracker end users would be able to run reports but would not have access
+				to the Report Designer tool.  
+				</para>
+				</footnote> 
+			</para>
+			
+			<para>
+				In addition to enabling Tracker users to run reports against Tracker data documents, Information
+				Technology Analysts can further enable Tracker End Users by crafting report based solutions
+				that integrate data from Tracker data documents and any other source of BIRT data.  
+				Besides Tracker data documents BIRT reports can access and visualize data from:
+			    <orderedlist numeration="arabic">
+					<listitem><para>SQL Relational Databased through any JDBC driver;</para></listitem>
+					<listitem><para>Eclipse Modeling Framework EMF Ecore data models;</para></listitem>
+					<listitem><para>Non-standard data models through custom code;</para></listitem>
+					<listitem><para>Flat file data using standard delimiters;</para></listitem>
+					<listitem><para>XML files or streams using XPath syntax to specify columns. </para></listitem>
+				</orderedlist>
+			</para>
+			<para>
+			Analysis and Reporting functionality is shown in the <xref linkend="fig_AnalysisReportingUseCases" />	
+				<figure id="fig_AnalysisReportingUseCases">
+				<title>Analysis and Reporting Use-Case Diagram</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="../images/useCases/analysisReporting.png" />
+						</imageobject>
+					</mediaobject>
+				</figure>
+			</para>
+		</section>
+		
+		<section>
+		    <?dbhtml filename="overview/frameworkOverview_useCaseDiagrams_collaboration.html" ?>
+			<title>Collaboration</title>
+			<para>
+				Because Tracker data documents are small industry standard data containers they are ideal 
+				for exchanging and sharing <emphasis>validated</emphasis> livestock information. Tracker 
+				documents are easily shared between individual users, groups of users, business collaborators 
+				and central auditing authorities.
+				<footnote>
+				<para>BIRT reports can also easily be created and shared with other users and collaborators.</para>
+				</footnote>
+			</para>
+			
+			<para>Collaboration technology options range from manual file over media transfers,
+				<footnote>
+				<para>
+					For example documents or document fragments can be exchanged on usb flash drives or flash memory 
+					cards.
+				</para>
+				</footnote>
+			to common Internet file transfer utilities,
+			<footnote>
+			<para>Email, FTP, and Web Server uploading and downloading.</para>
+			</footnote> 
+			to a mediated collaboration service that offers publish and request services to Tracker clients.
+			<footnote>
+			 <para>
+			 One or more Collaboration Service Providers could be utilized by Tracker clients. Example administrators
+			 of these service providers could be industry associations or government auditing authorities.
+			 </para>
+			 </footnote>.
+			</para>
+ 
+			<para>
+			Collaboration functionality is shown in the <xref linkend="fig_CollaborationUseCases" />	
+				<figure id="fig_CollaborationUseCases">
+				<title>Collaboration Use-Case Diagram</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="../images/useCases/collaboration.png" />
+						</imageobject>
+					</mediaobject>
+				</figure>
+			</para>
+		</section>
+	</section>
+</chapter>
+	

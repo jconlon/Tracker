@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.verticon.tracker.birt"
+      label="%featureName"
+      version="0.3.0.qualifier"
+      provider-name="%providerName">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %license
+   </license>
+
+   <url>
+      <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
+   </url>
+
+   <requires>
+      <import feature="org.eclipse.birt" version="2.6.1.v20100709a-9iF7A8FGLY4z0pxX3ORrsdrp6JXb"/>
+      <import feature="org.eclipse.birt.chart" version="2.6.1.v20100709-7f9T7DFQCnv8nz0gRMa6NG1"/>
+      <import feature="org.eclipse.birt.chart.cshelp" version="2.6.1.v20100618-3507w31211924"/>
+      <import feature="org.eclipse.birt.cshelp" version="2.6.1.v20100618-3507w31211924"/>
+      <import feature="org.eclipse.birt.doc" version="2.6.1.v20100618-3507w31211924"/>
+      <import feature="org.eclipse.birt.example" version="2.6.1.v20100618-7F7e6DZRDKDE9Gi"/>
+      <import feature="org.eclipse.birt.report.designer.editor.xml.wtp" version="2.6.1.v20100709-7m9f7NFT0z0-Im5IWab4F6"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.oda.ecore"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.datatools.enablement.oda.ecore.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

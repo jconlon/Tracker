@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     Feb 9, 2009 2:37:54 PM                                                        
+
+     qualifyFeatureBranding    
+     qualifies the version and build values in the about.mapping files of the feature plugin
+                   
+     jconlon                                                                
+     ====================================================================== -->
+<project name="qualifyFeatureBranding" default="qualified.about">
+    <description>
+            qualifies the version and build values in the about.mapping files of the feature plugin
+    </description>
+
+    <!-- ================================= 
+          target: qualified.about              
+         ================================= -->
+    <target name="qualified.about" depends="depends" description="qualifies the version and build values in the about.mapping files of the ">
+        <echo>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</echo>
+    	<echo>Manifest is ${sp:action.input}</echo>
+    	
+    	<xmlproperty file="${sp:action.input}"/>
+    	
+    	<echo>Feature version is ${feature(version)}</echo>
+    	
+    	<echo>Feature branding plugin is ${feature(plugin)}</echo>
+    	
+    	<!--echoproperties></echoproperties-->
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: depends                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="depends">
+    </target>
+
+</project>

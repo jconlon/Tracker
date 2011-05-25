@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ Copyright 2007 Verticon, Inc. All Rights Reserved.
+
+ $Id$
+-->
+
+<plugin>
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+          id="com.verticon.tracker.editor.Wizard.category.ID"
+          name="Tracker"/>
+    <wizard
+      id = "com.verticon.tracker.fair.editor.presentation.FairModelWizardID"
+      name = "%_UI_FairModelWizard_label"
+      class = "com.verticon.tracker.fair.editor.presentation.FairModelWizard"
+      category = "com.verticon.tracker.editor.Wizard.category.ID"
+      icon = "icons/full/obj16/FairModelFile.gif">
+      <description>%_UI_FairModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+          class="com.verticon.tracker.fair.editor.presentation.FairEditor"
+          contributorClass="com.verticon.tracker.fair.editor.presentation.FairActionBarContributor"
+          extensions="fair"
+          icon="icons/full/obj16/FairModelFile.gif"
+          id="com.verticon.tracker.fair.editor.presentation.FairEditorID"
+          name="%_UI_FairEditor_label">
+    </editor>
+  </extension>    
+  
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <!--Use the Basic category-->
+      <wizard
+            category="org.eclipse.ui.Basic"
+            class="com.verticon.tracker.fair.editor.actions.ImportSpreadSheetWizard"
+            icon="icons/full/elcl16/defaults_ps.gif"
+            id="com.verticon.tracker.fair.editor.ImportPeopleWizard"
+            name="Copy a Spreadsheet into a Project Folder">
+         <description>
+            Copy a spreadsheet file from the local file system into the selected project.
+         </description>
+      </wizard>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="%_UI_commands_fair_category_description"
+            id="com.verticon.tracker.fair.editor.commands.Fair.category"
+            name="%_UI_commands_fair_category_name">
+      </category>
+      
+       <!-- 
+         	Many of these commands have defaultHandler classes that have workarounds to 
+         	activate on what could be an adapt condition on the 
+         	activeEditor. All these classes can be simplified when the
+         	
+              https://bugs.eclipse.org/bugs/show_bug.cgi?id=201743
+              Cannot get adapt working on an IAdaptable, fix is available 
+              Eclipse in 3.5
+              
+              Here is an example handler of how it could work in 3.5.
+              
+             <handler
+            	class="com.verticon.tracker.editor.commands.ImportTagIdsAsTemplateEventsHandler"
+            	commandId="com.verticon.tracker.editor.commands.importTagIds.asTemplate.command">
+             	<activeWhen>
+    				<with variable="activeEditor">
+         				<adapt type="com.verticon.tracker.editor.presentation.IPremisesProvider"/>
+         	 	</activeWhen>
+         	 </handler>
+         	see handler class for workaround
+         	-->
+
+      <!-- Person Commands -->
+      <command
+            id="com.verticon.tracker.fair.editor.commands.person.changeMovedEventPins.command"
+            categoryId="com.verticon.tracker.fair.editor.commands.Fair.category"
+            defaultHandler="com.verticon.tracker.fair.editor.handlers.PeopleChangeMoveEventPinsHandler"
+            description="%_UI_commands_person_changeMovedEventPins_descriptions"
+            name="%_UI_commands_person_changeMovedEventPins_name">
+      </command>
+      <command
+             categoryId="com.verticon.tracker.fair.editor.commands.Fair.category"
+             defaultHandler="com.verticon.tracker.fair.editor.handlers.CopyPersonHandler"
+             description="Create another Person with the attributes of this Person."
+             id="com.verticon.tracker.fair.editor.commands.copyPerson"
+             name="Copy Person">
+       </command>
+      <!-- 
+		Animals
+	   -->
+       <command
+             id="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
+             defaultHandler="com.verticon.tracker.fair.editor.handlers.AnimalFairRegistrationHandler"
+             categoryId="com.verticon.tracker.fair.editor.commands.Fair.category"
+             description="%_UI_commands_animal_fairRegistration_description"
+             name="%_UI_commands_animal_fairRegistration_name">
+      </command>
+       
+      
+      </extension>
+      
+      
+      
+      <extension
+         point="org.eclipse.ui.menus">
+
+      <menuContribution
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+            
+            	<!-- 
+               	Register an Exhibit from a FairRegistrationSelection.
+               	Works on a Animal Elements, Event Elements, a single Person, and a single Lot;
+               	works with simple and transaction based editors, if it is a set of animals alone 
+               	it requires that the active editor is a FairEditor so as not to show when there
+               	is an active PremisesEditor.
+               -->
+               <command
+                    commandId="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
+               		icon="icons/full/obj16/Exhibit.gif"
+               		style="push">
+	               	<visibleWhen>
+			    			     <test
+		                   			forcePluginActivation="true"
+		                   			property="com.verticon.tracker.fair.editor.isFairRegistionSelection">
+		              		 	</test>
+		            </visibleWhen>
+               </command>
+               
+               <!-- 
+               	Register an Exhibit visible from an Animals Selection in the Animals View.
+               	Works on a Animal Elements when there is not an active FairRegistrationSelection. This
+               	command will show in the Animals View, but will not show (alongside the same command made visible
+               	from the above declaration) in a FairEditor.
+               -->
+                <command
+                    commandId="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
+               		icon="icons/full/obj16/Exhibit.gif"
+               		style="push">
+	               	<visibleWhen>
+
+	               	    	 <and>
+			               	    <with variable="selection">
+				                  <iterate
+                            ifEmpty="false"
+                            operator="or">
+		      						 <instanceof value="com.verticon.tracker.Animal"/>
+		    					  </iterate>
+		    			     	</with>
+		    			     	<test
+                   					forcePluginActivation="true"
+                   					property="com.verticon.tracker.fair.editor.isFairEditor">
+              		 			</test>
+              		 			<test
+		                   			forcePluginActivation="true"
+		                   			property="com.verticon.tracker.fair.editor.notFairRegistionSelection">
+		              		 	</test>
+		    			     </and>	
+		            </visibleWhen>
+               </command>
+               
+               
+               <!-- 
+               	Register an Exhibit visible from an Events Selection in the Events View.
+               	Works on a Events Elements when there is not an active FairRegistrationSelection. This
+               	command will show in the Events View, but will not show (alongside the same command made visible
+               	from the above declaration) in a FairEditor.
+               -->
+                <command
+                    commandId="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
+               		icon="icons/full/obj16/Exhibit.gif"
+               		style="push">
+	               	<visibleWhen>
+
+	               	    	 <and>
+			               	    <with variable="selection">
+				                  <iterate
+                            ifEmpty="false"
+                            operator="or">
+		      						 <instanceof value="com.verticon.tracker.Event"/>
+		    					  </iterate>
+		    			     	</with>
+		    			     	<test
+                   					forcePluginActivation="true"
+                   					property="com.verticon.tracker.fair.editor.isFairEditor">
+              		 			</test>
+              		 			<test
+		                   			forcePluginActivation="true"
+		                   			property="com.verticon.tracker.fair.editor.notFairRegistionSelection">
+		              		 	</test>
+		    			     </and>	
+		            </visibleWhen>
+               </command>
+               
+               
+               <!-- 
+               	Update Pins on all Exhibited Animal Move Events visible from Person selections.
+               	Works on a collection of Person Elements;
+               	works with simple and transaction based editors ;
+			   	needs a Person to be Registed, so it No longer is visible from just any Person	
+               -->
+               <command
+                    commandId="com.verticon.tracker.fair.editor.commands.person.changeMovedEventPins.command"
+               		icon="icons/full/obj16/MovedInOut.gif"
+               		style="push">
+               		<visibleWhen>
+               		    <and>
+               			<with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+      						 <instanceof value="com.verticon.tracker.fair.Person"/>
+    					  </iterate>
+    			     	</with>
+    			     	<test
+                   			forcePluginActivation="true"
+                   			property="com.verticon.tracker.fair.editor.isPersonRegistered">
+              		 	</test>
+	    			     </and>
+	            	</visibleWhen>
+               	</command>
+               <command
+                     commandId="com.verticon.tracker.fair.editor.commands.copyPerson"
+                     label="Copy this person"
+                     icon="icons/full/obj16/Person.gif"
+               		 style="push"
+                     tooltip="Copies attributes of this person to a new person.">
+                  <visibleWhen>
+                     <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+      						 <instanceof value="com.verticon.tracker.fair.Person"/>
+    					  </iterate>
+    			     	</with>
+                  </visibleWhen>
+               </command>
+      </menuContribution>
+      
+      
+   </extension>
+      <extension
+            point="org.eclipse.ui.cheatsheets.cheatSheetContent">
+         <category
+               id="com.verticon.tracker.category.cheatSheets"
+               name="Tracker">
+         </category>
+         <cheatsheet
+               category="com.verticon.tracker.category.cheatSheets"
+               composite="false"
+               contentFile="$nl$/cheatsheets/FairDocumentCheatSheet.xml"
+               id="com.verticon.tracker.fair.editor.cheatsheet1972313380"
+               name="Create a Fair Document">
+            <description>
+               This cheat sheet will show you how to create a Fair Document for documenting information about the People, Exhibits, and Livestock at an Animal Exposition.
+            </description>
+         </cheatsheet>
+      </extension>
+      
+      
+      <extension
+            point="org.eclipse.core.expressions.propertyTesters">
+            
+         <!--
+         Test if the active editor is a Fair Editor
+         -->
+         <propertyTester
+               class="com.verticon.tracker.fair.editor.handlers.FairEditorTester"
+               id="com.verticon.tracker.fair.editor.propertyTester.FairEditorPropertyTester"
+               namespace="com.verticon.tracker.fair.editor"
+               properties="isFairEditor, isSimpleFairEditor"
+               type="java.lang.Object">
+         </propertyTester>
+         
+         <!-- 
+         Test if the selected objects are a collection of Person objects with Exhibits in a Fair.  Must be used 
+         with an iterate on a Person. 
+         -->
+         <propertyTester
+               class="com.verticon.tracker.fair.editor.handlers.PersonRegisteredTester"
+               id="com.verticon.tracker.fair.editor.propertyTester.PersonRegisteredPropertyTester"
+               namespace="com.verticon.tracker.fair.editor"
+               properties="isPersonRegistered"
+               type="java.lang.Object">
+         </propertyTester>
+         
+         <!--
+         Test if the selected objects are suitable for FairRegistration.  Selected objects can be
+         a set of animals, animal events, a single lot or a single Person.
+         -->
+         <propertyTester
+               class="com.verticon.tracker.fair.editor.handlers.FairRegistrationTester"
+               id="com.verticon.tracker.fair.editor.propertyTester.FairRegistrationPropertyTester"
+               namespace="com.verticon.tracker.fair.editor"
+               properties="isFairRegistionSelection, notFairRegistionSelection"
+               type="java.lang.Object">
+         </propertyTester>
+         
+     	 <propertyTester
+            class="com.verticon.tracker.fair.editor.handlers.PersonPinAndEmailPropertyTester"
+            id="com.verticon.tracker.fair.propertyTester.PersonPinAndEmail"
+            namespace="com.verticon.tracker.fair.editor"
+            properties="hasPin, hasEmail"
+            type="java.lang.Object">
+      	</propertyTester>
+   
+      </extension>
+      <extension
+            point="org.eclipse.core.contenttype.contentTypes">
+         <file-association
+               content-type="org.eclipse.emf.compare.ui.contenttype.ModelContentType"
+               file-extensions="fair"
+               file-names="*">
+         </file-association>
+      </extension>
+
+
+</plugin>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.verticon.google.kmlgx.core.model/src"
+    modelPluginID="com.verticon.google.kmlgx.core.model" modelName="Kml22gx-trimmed"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.xsd.ecore.importer"
+    complianceLevel="6.0" copyrightFields="false" usedGenPackages="../../com.verticon.atom.authorlink.core.model/model/atom-author-link.genmodel#//authorlink ../../com.verticon.opengis.kml.core.model/model/ogckml22-trimmed.genmodel#//kml ../../com.verticon.oasis.xal.core.model/model/xAL.genmodel#//xal">
+  <foreignModel>../../com.verticon.google.kmlgx.core.schema/kml22gx-trimmed.xsd</foreignModel>
+  <genPackages prefix="Kmlgx" basePackage="com.verticon.google" resource="XML" disposableProviderFactory="true"
+      childCreationExtenders="true" fileExtensions="kml" ecorePackage="kmlgx.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="kmlgx.ecore#//AltitudeModeEnumType">
+      <genEnumLiterals ecoreEnumLiteral="kmlgx.ecore#//AltitudeModeEnumType/clampToSeaFloor"/>
+      <genEnumLiterals ecoreEnumLiteral="kmlgx.ecore#//AltitudeModeEnumType/relativeToSeaFloor"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="kmlgx.ecore#//FlyToModeEnumType">
+      <genEnumLiterals ecoreEnumLiteral="kmlgx.ecore#//FlyToModeEnumType/bounce"/>
+      <genEnumLiterals ecoreEnumLiteral="kmlgx.ecore#//FlyToModeEnumType/smooth"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="kmlgx.ecore#//PlayModeEnumType">
+      <genEnumLiterals ecoreEnumLiteral="kmlgx.ecore#//PlayModeEnumType/pause"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="kmlgx.ecore#//AltitudeModeEnumTypeObject"/>
+    <genDataTypes ecoreDataType="kmlgx.ecore#//FlyToModeEnumTypeObject"/>
+    <genDataTypes ecoreDataType="kmlgx.ecore#//OuterWidthType"/>
+    <genDataTypes ecoreDataType="kmlgx.ecore#//OuterWidthTypeObject"/>
+    <genDataTypes ecoreDataType="kmlgx.ecore#//PlayModeEnumTypeObject"/>
+    <genClasses ecoreClass="kmlgx.ecore#//AnimatedUpdate">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//AnimatedUpdate/duration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//AnimatedUpdate/update"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//AnimatedUpdate/delayedStart"/>
+    </genClasses>
+    <genClasses ecoreClass="kmlgx.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/abstractTourPrimitive"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/abstractTourPrimitiveGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/abstractTrackSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/altitudeMode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/altitudeOffset"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/angles"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/animatedUpdate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/balloonVisibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/coord"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/delayedStart"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/drawOrder"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/duration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/flyTo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/flyToMode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/h"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/interpolate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/latLonQuad"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/multiTrack"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/option"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/outerColor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/outerWidth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/physicalWidth"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/playlist"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/playMode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/rank"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/simpleArrayData"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/simpleArrayDataExtension"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/simpleArrayField"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/simpleArrayFieldExtension"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/soundCue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/timeSpan"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/timeStamp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/tour"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/tourControl"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/track"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/viewerOptions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/w"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//DocumentRoot/wait"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//DocumentRoot/y"/>
+    </genClasses>
+    <genClasses ecoreClass="kmlgx.ecore#//FlyTo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//FlyTo/duration"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//FlyTo/flyToMode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kmlgx.ecore#//FlyTo/abstractViewGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kmlgx.ecore#//FlyTo/abstractViewGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kmlgx.ecore#//LatLonQuad">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//LatLonQuad/coordinates"/>
+    </genClasses>
+    <genClasses ecoreClass="kmlgx.ecore#//MultiTrack">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kmlgx.ecore#//MultiTrack/altitudeModeGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kmlgx.ecore#//MultiTrack/altitudeModeGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//MultiTrack/interpolate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//MultiTrack/track"/>
+    </genClasses>
+    <genClasses ecoreClass="kmlgx.ecore#//Option">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//Option/enabled"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//Option/name"/>
+    </genClasses>
+    <genClasses ecoreClass="kmlgx.ecore#//Playlist">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kmlgx.ecore#//Playlist/abstractTourPrimitiveGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kmlgx.ecore#//Playlist/abstractTourPrimitiveGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kmlgx.ecore#//SimpleArrayData">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//SimpleArrayData/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kmlgx.ecore#//SimpleArrayData/simpleArrayDataExtensionGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kmlgx.ecore#//SimpleArrayData/simpleArrayDataExtension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//SimpleArrayData/name"/>
+    </genClasses>
+    <genClasses ecoreClass="kmlgx.ecore#//SimpleArrayField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//SimpleArrayField/displayName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kmlgx.ecore#//SimpleArrayField/simpleArrayFieldExtensionGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kmlgx.ecore#//SimpleArrayField/simpleArrayFieldExtension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//SimpleArrayField/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//SimpleArrayField/type"/>
+    </genClasses>
+    <genClasses ecoreClass="kmlgx.ecore#//SoundCue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//SoundCue/href"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//SoundCue/delayedStart"/>
+    </genClasses>
+    <genClasses ecoreClass="kmlgx.ecore#//Tour">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//Tour/playlist"/>
+    </genClasses>
+    <genClasses ecoreClass="kmlgx.ecore#//TourControl">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//TourControl/playMode"/>
+    </genClasses>
+    <genClasses ecoreClass="kmlgx.ecore#//TourPrimitive"/>
+    <genClasses ecoreClass="kmlgx.ecore#//Track">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//Track/extrude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//Track/tessellate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kmlgx.ecore#//Track/altitudeModeGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kmlgx.ecore#//Track/altitudeModeGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//Track/when"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//Track/coord"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//Track/angles"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//Track/model"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//Track/extendedData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kmlgx.ecore#//Track/abstractTrackSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//Track/abstractTrackSimpleExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kmlgx.ecore#//ViewerOptions">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kmlgx.ecore#//ViewerOptions/option"/>
+    </genClasses>
+    <genClasses ecoreClass="kmlgx.ecore#//Wait">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kmlgx.ecore#//Wait/duration"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

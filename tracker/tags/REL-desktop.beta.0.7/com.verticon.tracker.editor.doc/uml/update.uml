@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_Lg094B2BEd6cgcWknUDsMw" name="Updating Documents">
+  <elementImport xmi:id="_Lh3fsB2BEd6cgcWknUDsMw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_Lh3fsR2BEd6cgcWknUDsMw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_Lh3fsh2BEd6cgcWknUDsMw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_Lh3fsx2BEd6cgcWknUDsMw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_KIVEcB2CEd6cgcWknUDsMw" name="Operator"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_LLET0B2CEd6cgcWknUDsMw" name="Tracker Desktop Premises Editor" useCase="_TnDosB2CEd6cgcWknUDsMw _ahfEMB2CEd6cgcWknUDsMw _JQm80B2DEd6cgcWknUDsMw _K3n98B2DEd6cgcWknUDsMw _Pm7lsB2DEd6cgcWknUDsMw _cxFS0B2DEd6cgcWknUDsMw">
+    <ownedUseCase xmi:id="_TnDosB2CEd6cgcWknUDsMw" name="Update Entity Attributes" subject="_LLET0B2CEd6cgcWknUDsMw"/>
+    <ownedUseCase xmi:id="_ahfEMB2CEd6cgcWknUDsMw" name="Change Animal Type" subject="_LLET0B2CEd6cgcWknUDsMw"/>
+    <ownedUseCase xmi:id="_JQm80B2DEd6cgcWknUDsMw" name="Premises" subject="_LLET0B2CEd6cgcWknUDsMw">
+      <extend xmi:id="_TL2d8B2DEd6cgcWknUDsMw" extendedCase="_TnDosB2CEd6cgcWknUDsMw"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_K3n98B2DEd6cgcWknUDsMw" name="Animal" subject="_LLET0B2CEd6cgcWknUDsMw">
+      <extend xmi:id="_WlEcgB2DEd6cgcWknUDsMw" extendedCase="_TnDosB2CEd6cgcWknUDsMw"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_Pm7lsB2DEd6cgcWknUDsMw" name="Event" subject="_LLET0B2CEd6cgcWknUDsMw">
+      <extend xmi:id="_XnIWcB2DEd6cgcWknUDsMw" extendedCase="_TnDosB2CEd6cgcWknUDsMw"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_cxFS0B2DEd6cgcWknUDsMw" name="Bulk Change" subject="_LLET0B2CEd6cgcWknUDsMw">
+      <extend xmi:id="_fOr9sB2DEd6cgcWknUDsMw" extendedCase="_Pm7lsB2DEd6cgcWknUDsMw"/>
+    </ownedUseCase>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_iNvv0B2DEd6cgcWknUDsMw" memberEnd="_iNwW4B2DEd6cgcWknUDsMw _iNw98B2DEd6cgcWknUDsMw" navigableOwnedEnd="_iNwW4B2DEd6cgcWknUDsMw _iNw98B2DEd6cgcWknUDsMw">
+    <ownedEnd xmi:id="_iNwW4B2DEd6cgcWknUDsMw" name="src" type="_KIVEcB2CEd6cgcWknUDsMw" association="_iNvv0B2DEd6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_iNwW4h2DEd6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iNwW4R2DEd6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_iNw98B2DEd6cgcWknUDsMw" name="dst" type="_TnDosB2CEd6cgcWknUDsMw" association="_iNvv0B2DEd6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_iNw98h2DEd6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iNw98R2DEd6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jrIT0B2DEd6cgcWknUDsMw" memberEnd="_jrI64B2DEd6cgcWknUDsMw _jrJh8B2DEd6cgcWknUDsMw" navigableOwnedEnd="_jrI64B2DEd6cgcWknUDsMw _jrJh8B2DEd6cgcWknUDsMw">
+    <ownedEnd xmi:id="_jrI64B2DEd6cgcWknUDsMw" name="src" type="_KIVEcB2CEd6cgcWknUDsMw" association="_jrIT0B2DEd6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jrI64h2DEd6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jrI64R2DEd6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_jrJh8B2DEd6cgcWknUDsMw" name="dst" type="_ahfEMB2CEd6cgcWknUDsMw" association="_jrIT0B2DEd6cgcWknUDsMw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jrJh8h2DEd6cgcWknUDsMw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jrJh8R2DEd6cgcWknUDsMw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Package>

@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Bluecove Plug-in
+Bundle-SymbolicName: net.sf.bluecove
+Bundle-Version: 2.0.3.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: Verticon, Inc.
+Export-Package: com.intel.bluetooth,
+ javax.bluetooth;uses:="com.intel.bluetooth,javax.microedition.io",
+ javax.obex;uses:="javax.microedition.io"
+Bundle-NativeCode: bluecove.dll;intelbth.dll;osname=WindowsXP;osname=Windows2000;osname=WindowsNT;processor=x86,
+ bluecove_ce.dll;intelbth_ce.dll;osname=WindowsCE;processor=ARM,libbluecove.co;osname=Linux, *
+Import-Package: org.apache.log4j
+Require-Bundle: org.eclipse.equinox.io;bundle-version="1.0.100"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

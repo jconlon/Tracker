@@ -1,0 +1,14 @@
+Changed
+
+genmodel:
+	ContentTypes
+		com.verticon.oasis.xal
+	Model Class Defaults Category Root Extends Class
+		org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container
+	
+AuthorlinkResourceImpl
+	save to UTF-8
+	
+AuthorlinkResourceFactoryImpl
+	UTF-8 encoding
+	

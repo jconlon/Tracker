@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cspecExtension
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0"
+	xmlns="http://www.eclipse.org/buckminster/CSpec-1.0">
+	<dependencies>
+		<!-- Add Dependencies here 
+		<dependency name="com.verticon.tracker.documentation"/>
+		-->
+	</dependencies>
+	<generators>
+		<!-- Place your Generators here -->
+	</generators>
+	<artifacts>
+		<!-- Added Artifacts here -->
+		 <public name="docbook" path="docbook/"/>
+	</artifacts>
+	<actions>
+		<!-- Added Actions here --> 
+		<private name="create-doc" actor="ant">
+	            <actorProperties>
+	                <property key="buildFile" value="${buckminster.home}../com.verticon.tracker.documentation/make/build.xml"/>
+	            </actorProperties>
+	            <properties>
+	                <property key="topic.link_to" value="../com.verticon.tracker.doc/toc.xml#tracker_product"/>
+	             	<property key="topic.label" value="Product Family"/>
+	            </properties>
+	            <prerequisites>
+     				<attribute name="docbook" 
+     						   alias="docbooksource"/>
+  				</prerequisites>
+	            <products alias="action.output" 
+	            		  base="${buckminster.home}html/" 
+	            		  fileCount="1" upToDatePolicy="COUNT"/>
+	   </private>
+	   
+	   <private name="html.clean" actor="ant">
+	            <actorProperties>
+	                <property key="buildFile" 
+	                		  value="${buckminster.home}../com.verticon.tracker.documentation/make/build.xml"/>
+	            </actorProperties>
+	            <products alias="action.output" 
+	            		   base="${buckminster.home}html/" />
+	   </private>
+	</actions>
+	<groups>
+		<!-- Place your Groups here -->
+	</groups>
+	<alterDependencies>
+		<!-- Place your Dependency alterations here -->
+	</alterDependencies>
+	<alterArtifacts>
+		<!-- Place your Artifact alterations here -->
+	</alterArtifacts>
+	<alterActions>
+		<!-- Add Action alterations here -->
+		<public name="bundle.jar" actor="ant">
+            <prerequisites>
+               <attribute name="create-doc"/>
+            </prerequisites>
+            </public>
+	</alterActions>
+	<alterGroups>
+		<!-- Added Group alterations here -->
+		<public name="buckminster.clean">
+            <attribute name="html.clean"/>
+        </public>
+	</alterGroups>
+</cspecExtension>

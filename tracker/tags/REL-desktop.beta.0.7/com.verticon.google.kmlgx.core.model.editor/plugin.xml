@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="com.verticon.tracker.editor.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="com.verticon.google.kmlgx.presentation.KmlgxModelWizardID"
+            name="%_UI_KmlgxModelWizard_label"
+            class="com.verticon.google.kmlgx.presentation.KmlgxModelWizard"
+            category="com.verticon.tracker.editor.Wizard.category.ID"
+            icon="icons/full/obj16/KmlgxModelFile.gif">
+         <description>%_UI_KmlgxModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="com.verticon.google.kmlgx.presentation.KmlgxEditorID"
+            name="%_UI_KmlgxEditor_label"
+            icon="icons/full/obj16/KmlgxModelFile.gif"
+            extensions="kml"
+            class="com.verticon.google.kmlgx.presentation.KmlgxEditor"
+            contributorClass="com.verticon.google.kmlgx.presentation.KmlgxActionBarContributor">
+      </editor>
+   </extension>
+
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <file-association
+            content-type="org.eclipse.emf.compare.ui.contenttype.ModelContentType"
+            file-extensions="kml"
+            file-names="*">
+      </file-association>
+   </extension>
+</plugin>

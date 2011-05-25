@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+    name="com.verticon.tracker.irouter.animal.data.test.system.mock.consumer">
+   <implementation 
+    class="com.verticon.tracker.irouter.animal.data.test.system.internal.MockConsumer"/>
+   <property name="tracker.wiring.group.name" type="String" value="test"/>
+   <property name="wireadmin.consumer.scope">
+    animal.data
+   </property>
+   <property name="service.pid" type="String" value="animal.data.mockConsumer"/>
+   <service>
+      <provide interface="org.osgi.service.wireadmin.Consumer"/>
+   </service>
+</scr:component>

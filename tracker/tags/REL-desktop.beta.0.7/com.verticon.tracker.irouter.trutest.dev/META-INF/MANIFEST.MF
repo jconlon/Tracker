@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracker iRouter TruTest Device
+Bundle-SymbolicName: com.verticon.tracker.irouter.trutest.dev
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: com.verticon.tracker.irouter.dev,
+ javax.sound.sampled,
+ org.equinoxosgi.util,
+ org.osgi.framework;version="1.5.0",
+ org.slf4j;version="1.5.11"
+Export-Package: com.verticon.tracker.irouter.trutest.dev

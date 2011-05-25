@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="com.verticon.tracker.website" componentType="buckminster" version="1.0.0" versionType="OSGi">
+    <cs:artifacts>
+        <cs:public name="docbook" path="src/"/>
+    </cs:artifacts>
+    <cs:actions>
+        <cs:public name="deploy.to.local.repo.dir" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="build.xml"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="default.temp.dir" value="${buckminster.home}html"/>
+                <cs:property key="local.dir.to.sync" value="${user.home}/Uploads/s3"/>
+                <cs:property key="user.dir" value="${buckminster.home}"/>
+            </cs:properties>
+        </cs:public>
+        <cs:public name="preview" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="build.xml"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="default.temp.dir" value="${buckminster.home}html"/>
+                <cs:property key="user.dir" value="${buckminster.home}"/>
+            </cs:properties>
+            <cs:prerequisites>
+                <cs:attribute name="docbook" alias="docbooksource"/>
+            </cs:prerequisites>
+            <cs:products alias="action.output" base="html/" fileCount="1" upToDatePolicy="COUNT"/>
+        </cs:public>
+        <cs:private name="publish" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="build.xml"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="default.temp.dir" value="${buckminster.home}html"/>
+                <cs:property key="user.dir" value="${buckminster.home}"/>
+            </cs:properties>
+            <cs:prerequisites>
+                <cs:attribute name="docbook" alias="dockbooksource"/>
+            </cs:prerequisites>
+        </cs:private>
+    </cs:actions>
+</cs:cspec>

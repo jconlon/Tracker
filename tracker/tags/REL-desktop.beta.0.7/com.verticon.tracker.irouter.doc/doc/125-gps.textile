@@ -1,0 +1,49 @@
+h1. GPS Proxy Feature
+
+The GPS(Global Positioning System) Proxy feature is an iRouter _Proxy Component Factory_ that creates user configurable components that interface with "GPS":http://en.wikipedia.org/wiki/GPS devices. 
+
+
+h2. Producer Scopes
+
+GPS Proxy services are implemented as WireAdmin Producer services.[16] A GPS Proxy service connects to a GPS device[17] at a user configurable connection URI(Uniform Resource Identifier), parses and validates GPS Fix Data based on the "NMEA 0183":http://en.wikipedia.org/wiki/NMEA_0183 "$GPGGA sentence":http://www.codepedia.com/1/The+GPGGA+Sentence and produces an "OSGi Position":http://www.osgi.org/javadoc/r4v42/org/osgi/util/position/Position.html product containing Longitude, Latitude, and Altitude measurements. Position products are consumed by other iRouter _Business Logic Component_ instances. 
+
+
+h2. Service Diagram
+
+!{padding-left:3em}images/gpsComponent.png!
+
+h2. Creating GPS Components
+
+Like other iRouter components, the Configuration Editor is used to configure and create GPS Proxy component configurations. What makes the GPS component configurations different are the long and archaic looking Connection URI(Universal Resource Identifier) attributes that identify the address of a Bluetooth GPS device. 
+
+To simplify configuration of Bluetooth GPS device URIs, a __Wizard__ for  GPS discovery and selection is provided. To use the wizard, first create a new GPS Proxy, select it and right click on it.  A pop up menu will be displayed. 
+
+!images/gpsPopupMenu.png!
+__Example of the GPS Component PopUp Menu__
+
+In the pop up menu, select the @Set connection to local GPS device@ item to invoke the Wizard.
+
+!images/gpsWizardPage1.png!
+__Add a GPS Producer Wizard __
+
+To discover all local _Bluetooth_ GPS devices, press the @Next@ button of the wizard's dialog. As the wizard pauses as it discovers devices, the progress bar will show activity.
+
+!images/gpsWizardPage2.png!
+__Discovering GPS Devices__
+
+!images/gpsWizardPage3.png!
+__Discovered GPS Devices__
+
+Select a device from the wizard page's pick list and press the @Next@ button. On the next screen, select a service and press finish. 
+
+The GPS Connection URI attribute of the GPS Proxy component will be configured with the URI of the device service that was selected. 
+
+!images/gpsFilledInSettings.png!
+__Completed GPS Configuration__
+
+h2. Notes
+
+fn16. Scope names identify the information sent by a Producer service to a Consumer service. The iRouter determines connections based on scopes and wire group names.
+
+fn17. The Tracker Device Simulator product has implemented a simulator of the GPS Proxy. The simulator can be used for testing and validating iRouter configurations utilizing GPS Service Instances. 
+
