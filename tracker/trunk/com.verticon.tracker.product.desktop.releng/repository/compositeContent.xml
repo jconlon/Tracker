@@ -13,6 +13,7 @@
     <child location='features-desktop.beta.04'/>
     <child location='features-desktop.beta.05'/>
     <child location='features-desktop.beta.06'/>
+    <child location='features-desktop.beta.07'/>
     <child location='product-desktop.beta.04'/>
     <child location='product-desktop.beta.05'/>
     <child location='categories'/>
