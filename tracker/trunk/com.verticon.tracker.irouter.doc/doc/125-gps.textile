@@ -10,7 +10,7 @@ GPS Proxy services are implemented as WireAdmin Producer services.[16] A GPS Pro
 
 h2. Service Diagram
 
-!{padding-left:3em}images/mettlerComponent.png!
+!{padding-left:3em}images/gpsComponent.png!
 
 h2. Creating GPS Components
 
