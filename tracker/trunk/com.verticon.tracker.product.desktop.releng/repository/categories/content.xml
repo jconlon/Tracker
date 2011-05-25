@@ -8,7 +8,7 @@
 
 
 
-  <units size='11'>
+  <units size='15'>
      <unit id='com.verticon.tracker.editor.categoryIU' version='0.0.0'>
       <properties size='3'>
         <property name='org.eclipse.equinox.p2.name' value='Premises Editor'/>
@@ -173,6 +173,66 @@
       </provides>
       <requires size='1'>
         <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.trutest.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    <!-- New in 0.7.0 -->
+     <unit id='com.verticon.tracker.irouter.gps.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='iRouter'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Data integration framework for physical sensors and actuators.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.gps.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.gps.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+     <unit id='com.verticon.tracker.irouter.gps.ui.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='iRouter'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Data integration framework for physical sensors and actuators.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.gps.ui.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.gps.ui.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+     <unit id='com.verticon.geography.editor.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Geography Editor'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Geography and mapping editor, utilities and tools.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.geography.editor.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.geography.editor.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+     <unit id='com.verticon.agriculture.editor.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Agriculture Editor'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Geography to Livestock mapping editor, utilities and tools.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.agriculture.editor.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.agriculture.editor.feature.group' range='0.0.0'/>
       </requires>
       <touchpoint id='null' version='0.0.0'/>
     </unit>
