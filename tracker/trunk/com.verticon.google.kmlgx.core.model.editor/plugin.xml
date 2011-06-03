@@ -44,4 +44,14 @@
             file-names="*">
       </file-association>
    </extension>
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <wizard
+            category="org.eclipse.ui.Basic"
+            class="com.verticon.google.kmlgx.internal.KmzFileExportWizard"
+            icon="icons/full/obj16/KmlgxModelFile.gif"
+            id="com.verticon.google.kmlgx.core.model.editor.export.KmzFile"
+            name="KMZ File">
+      </wizard>
+   </extension>
 </plugin>
