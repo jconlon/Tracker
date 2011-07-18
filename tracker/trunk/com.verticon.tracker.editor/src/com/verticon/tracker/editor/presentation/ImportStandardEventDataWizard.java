@@ -11,22 +11,17 @@
 package com.verticon.tracker.editor.presentation;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IEditorPart;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.editor.presentation.ImportStandardEventColumnMappingWizardPage.ColumnMapper;
@@ -63,8 +58,8 @@ public class ImportStandardEventDataWizard extends Wizard {
 	/**
 	 * slf4j Logger
 	 */
-	private final Logger logger = LoggerFactory
-			.getLogger(ImportStandardEventDataWizard.class);
+//	private final Logger logger = LoggerFactory
+//			.getLogger(ImportStandardEventDataWizard.class);
 
 
 	@Override
@@ -73,49 +68,49 @@ public class ImportStandardEventDataWizard extends Wizard {
 	}
 
 	private static final String MODIFY_WIZARD_TITLE = "Add Animal Events Data To Premises";
-	private IEditorPart editor;
+//	private IEditorPart editor;
 	private Premises premises;
 	private File file;
 	
-	private int importedAnimals = 0;
-	private EditingDomain editingDomain;
+//	private int importedAnimals = 0;
+//	private EditingDomain editingDomain;
 	private SelectStandardEventFeaturesWizardPage selectEventsWizardPage;
 	private ImportStandardEventColumnMappingWizardPage importStandardEventColumnMappingWizardPage;
 //	private ImportSpeciesColumnMappingWizardPage importSpeciesColumnMappingWizardPage;
 
-	//FIXME use something like ImportAnimalLifeData 
-	private IRunnableWithProgress getRunnable(final ImportAnimalLifeData p) {
-		return new IRunnableWithProgress() {
-
-			public void run(IProgressMonitor monitor)
-					throws InvocationTargetException, InterruptedException {
-//				importedAnimals=0;
-//				int fileSize = importSpeciesColumnMappingWizardPage.getCsvFileLineNumber()-1;
-//				importedAnimals = 0;
-//				monitor.beginTask("Importing file...", fileSize + fileSize);
-//				CompoundCommand command;
-//				try {
-//					command = p.createCommand(monitor);
-//				} catch (IOException e) {
-//					throw new InvocationTargetException(e);
-//				}
-//				
-//				editingDomain.getCommandStack().execute(command);
+//	//FIXME use something like ImportAnimalLifeData 
+//	private IRunnableWithProgress getRunnable(final ImportAnimalLifeData p) {
+//		return new IRunnableWithProgress() {
 //
-//				importedAnimals=command.getCommandList().size();
-
-			}
-		};
-	}
+//			public void run(IProgressMonitor monitor)
+//					throws InvocationTargetException, InterruptedException {
+////				importedAnimals=0;
+////				int fileSize = importSpeciesColumnMappingWizardPage.getCsvFileLineNumber()-1;
+////				importedAnimals = 0;
+////				monitor.beginTask("Importing file...", fileSize + fileSize);
+////				CompoundCommand command;
+////				try {
+////					command = p.createCommand(monitor);
+////				} catch (IOException e) {
+////					throw new InvocationTargetException(e);
+////				}
+////				
+////				editingDomain.getCommandStack().execute(command);
+////
+////				importedAnimals=command.getCommandList().size();
+//
+//			}
+//		};
+//	}
 
 	
 
 	public void init(IEditorPart editor, EditingDomain editingDomain,
 			Premises premises, ISelection activeMenuSelection) {
-		this.editor = editor;
+//		this.editor = editor;
 		this.premises = premises;
 		this.file = getSelectedResource(activeMenuSelection);
-		this.editingDomain = editingDomain;
+//		this.editingDomain = editingDomain;
 		setNeedsProgressMonitor(true);
 	}
 

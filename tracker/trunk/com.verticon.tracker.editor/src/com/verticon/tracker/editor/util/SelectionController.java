@@ -121,7 +121,7 @@ public class SelectionController implements ISelectionController {
 	 * @see #selectionChangedHandlerService(BundleContext)
 	 * @see #dispose()
 	 */
-	private ServiceRegistration selectionChangedHandlerService;
+	private ServiceRegistration<?> selectionChangedHandlerService;
 	
 	private final AtomicBoolean handlingWorkbenchPartOrEventAdminIgnoreSelection = new AtomicBoolean(
 			false);
@@ -324,7 +324,7 @@ public class SelectionController implements ISelectionController {
 	 *            an instance of BundleContext to use to register the
 	 *            EventListener.
 	 */
-	private ServiceRegistration startSelectionChangedHandlerService(BundleContext context, String topic, String eventAdminSourceName) {
+	private ServiceRegistration<?> startSelectionChangedHandlerService(BundleContext context, String topic, String eventAdminSourceName) {
 		/*
 		 * Create the event handler. This is the object that will be notified
 		 * when a matching event is delivered to the event service.

@@ -15,8 +15,6 @@ package com.verticon.tracker.editor.presentation;
 
 import java.io.FileNotFoundException;
 
-import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -25,9 +23,9 @@ import org.eclipse.ui.IEditorPart;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
-import com.verticon.tracker.editor.util.TrackerEditorUtils;
 import com.verticon.tracker.editor.util.AnimalTemplateBean;
 import com.verticon.tracker.editor.util.TagsBean;
+import com.verticon.tracker.editor.util.TrackerEditorUtils;
 
 /**
  * Wizard for adding an animal and event to a Premises
