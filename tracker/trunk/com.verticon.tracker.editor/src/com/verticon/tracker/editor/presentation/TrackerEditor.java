@@ -41,6 +41,7 @@ import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
 import org.eclipse.emf.common.command.CommandStackListener;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.ui.MarkerHelper;
@@ -49,6 +50,7 @@ import org.eclipse.emf.common.ui.editor.ProblemEditorPart;
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
@@ -979,10 +981,9 @@ public class TrackerEditor
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private boolean resourceHasAdapter(Resource r) {
-		Collection adapters = r.eAdapters();
-		for (Iterator j = adapters.iterator(); j.hasNext();) {
+		EList<Adapter> adapters = r.eAdapters();
+		for (Iterator<Adapter> j = adapters.iterator(); j.hasNext();) {
 			Object o = j.next();
 			if (o instanceof LiveValidationContentAdapter) {
 				return true;
@@ -1276,9 +1277,8 @@ public class TrackerEditor
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unchecked")
-		@Override
-	public Object getAdapter(Class key) {
+	@Override
+	public Object getAdapter(@SuppressWarnings("rawtypes") Class key) {
 		if (key.equals(IContentOutlinePage.class)) {
 			return showOutlineView() ? getContentOutlinePage() : null;
 		}

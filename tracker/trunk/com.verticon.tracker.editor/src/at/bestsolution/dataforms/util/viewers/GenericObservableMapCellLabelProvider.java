@@ -42,9 +42,8 @@ public class GenericObservableMapCellLabelProvider extends ColumnLabelProvider {
 	 * Change listener to track changes
 	 */
 	private final IMapChangeListener mapChangeListener = new IMapChangeListener() {
-		@SuppressWarnings("unchecked")
 		public void handleMapChange(MapChangeEvent event) {
-			Set affectedElements = event.diff.getChangedKeys();
+			Set<?> affectedElements = event.diff.getChangedKeys();
 			LabelProviderChangedEvent newEvent = new LabelProviderChangedEvent(
 					GenericObservableMapCellLabelProvider.this, affectedElements.toArray());
 			fireLabelProviderChanged(newEvent);

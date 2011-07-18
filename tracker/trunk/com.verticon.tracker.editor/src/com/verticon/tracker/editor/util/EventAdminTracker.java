@@ -19,7 +19,7 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EventAdminTracker extends ServiceTracker implements EventAdmin {
+public class EventAdminTracker extends ServiceTracker<EventAdmin, EventAdmin> implements EventAdmin {
 	/**
 	 * slf4j Logger
 	 */
@@ -31,7 +31,7 @@ public class EventAdminTracker extends ServiceTracker implements EventAdmin {
 	}
 
 	public void postEvent(Event event) {
-		EventAdmin ea = (EventAdmin) getService();
+		EventAdmin ea = getService();
 		if (ea != null) {
 			ea.postEvent(event);
 		} else {
@@ -41,7 +41,7 @@ public class EventAdminTracker extends ServiceTracker implements EventAdmin {
 	}
 
 	public void sendEvent(Event event) {
-		EventAdmin ea = (EventAdmin) getService();
+		EventAdmin ea = getService();
 		if (ea != null) {
 			ea.sendEvent(event);
 		} else {
