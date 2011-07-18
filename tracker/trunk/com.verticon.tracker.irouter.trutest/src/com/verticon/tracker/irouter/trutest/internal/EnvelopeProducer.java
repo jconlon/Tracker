@@ -67,7 +67,7 @@ public class EnvelopeProducer implements Producer, IEnvelopeSender, Monitorable 
 	//Shared instances accessed by multiple threads protected with a concurrent collection
 	private final List<Wire> wires = new CopyOnWriteArrayList<Wire>();
 	private final Map<String, Envelope> lastEnvelope = new ConcurrentHashMap<String, Envelope>();
-	private ServiceRegistration wireAdminReg = null;
+	private ServiceRegistration<?> wireAdminReg = null;
 
 	public EnvelopeProducer(IIndicator indicator) {
 		super();
