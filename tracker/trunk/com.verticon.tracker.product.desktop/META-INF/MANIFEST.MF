@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tracker Desktop Toolkit
 Bundle-SymbolicName: com.verticon.tracker.product.desktop;singleton:=true
-Bundle-Version: 0.4.1.qualifier
+Bundle-Version: 0.6.0.qualifier
 Bundle-Vendor: Verticon, Inc
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.ui.intro;bundle-version="3.2.201",
