@@ -15,9 +15,10 @@ import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMI
 import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMIN_PROPERTY_SELECTION_SOURCE;
 import static com.verticon.tracker.editor.util.TrackerEditorConstants.EVENT_ADMIN_TOPIC_VIEW_SELECTION;
 
+import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
-import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.emf.ecore.EObject;
@@ -353,7 +354,7 @@ public class SelectionController implements ISelectionController {
 
 		//Create a handler to listen to the Animal View topic, for any traffic not generated
 		//by this source
-		Properties properties = new Properties();
+		Dictionary<String, String> properties = new Hashtable<String,String>();
 		properties.put(EventConstants.EVENT_TOPIC,
 				topic);
 		// Ignore events sent by this viewer
