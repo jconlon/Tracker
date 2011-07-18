@@ -3,7 +3,7 @@ This project is a releng builder for the com.verticon.tracker.product.desktop pr
 =======================================
 Notes
 
-1) This build requires 3.5 or later
+1) This build requires 3.7 or later
 
 2) This build requires the deltapack.  By default it looks beside the eclipse install for "deltapack/eclipse/*".  
    If your deltapack is located elsewhere, set the "deltapack" property or edit the buildProduct.xml file.  The
