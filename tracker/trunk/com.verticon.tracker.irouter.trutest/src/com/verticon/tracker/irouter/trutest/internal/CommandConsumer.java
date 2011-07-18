@@ -74,7 +74,7 @@ class CommandConsumer implements Consumer, Monitorable {
 	private final IIndicator indicator;
 	private final BlockingQueue<String[]> commandQueue;
 	
-	private ServiceRegistration serviceRegistration = null;
+	private ServiceRegistration<?> serviceRegistration = null;
 	private ScheduledFuture<?> pollingTask = null;
 	private ScheduledFuture<?> writerFuture = null;
 	

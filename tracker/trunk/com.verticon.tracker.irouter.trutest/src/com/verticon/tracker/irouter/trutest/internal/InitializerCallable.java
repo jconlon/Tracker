@@ -98,7 +98,7 @@ public class InitializerCallable implements Callable<Void>, Consumer{
 	private final String pid;
 	private final String wiregroup;
 	private final BundleContext bundleContext;
-	private ServiceRegistration serviceRegistration = null;
+	private ServiceRegistration<?> serviceRegistration = null;
 	private CountDownLatch importUploadIsReady = new CountDownLatch(1);
 	private ImmutableList<String> importedRecordsForUpload = null;
 	private String recordImportedFromPid = null;

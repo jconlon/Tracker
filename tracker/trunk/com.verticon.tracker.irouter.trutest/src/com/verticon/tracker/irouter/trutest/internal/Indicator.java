@@ -63,7 +63,6 @@ import java.util.Collection;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Properties;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
@@ -130,7 +129,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 	private int upLoadedRecords;
 	private int downLoadedRecords;
 	private final Monitorable monitorableDelegate;
-	private ServiceRegistration monitorableRegistration;
+	private ServiceRegistration<?> monitorableRegistration;
 	private AtomicBoolean connected = new AtomicBoolean();
 	private AtomicBoolean monitorRegistered = new AtomicBoolean();
 	
@@ -501,7 +500,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 	 * @throws IOException
 	 */
 	protected ConnectorService getConnectorService() throws IOException {
-		ServiceReference sr = bundleContext
+		ServiceReference<?> sr = bundleContext
 				.getServiceReference(ConnectorService.class.getName());
 
 		if (sr == null) {
@@ -713,7 +712,7 @@ public class Indicator implements ICallableFactory, IIndicator, Monitorable{
 
 	@Override
 	public void registerMonitorable() {
-		Properties props = new Properties();
+		Dictionary<String, String> props = new Hashtable<String,String>();
 		props.put("service.pid", pid);
 		monitorableRegistration = FrameworkUtil.getBundle(this.getClass()).getBundleContext()
 			.registerService(
