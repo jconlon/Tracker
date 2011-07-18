@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.product.desktop"
       label="%featureName"
-      version="0.5.2.qualifier"
+      version="0.6.0.qualifier"
       provider-name="%providerName"
       plugin="com.verticon.tracker.product.desktop">
 
