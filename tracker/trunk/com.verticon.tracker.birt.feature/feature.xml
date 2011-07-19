@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.birt"
       label="%featureName"
-      version="0.3.0.qualifier"
+      version="0.4.0.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -22,27 +22,15 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.birt" version="2.6.1.v20100709a-9iF7A8FGLY4z0pxX3ORrsdrp6JXb"/>
-      <import feature="org.eclipse.birt.chart" version="2.6.1.v20100709-7f9T7DFQCnv8nz0gRMa6NG1"/>
-      <import feature="org.eclipse.birt.chart.cshelp" version="2.6.1.v20100618-3507w31211924"/>
-      <import feature="org.eclipse.birt.cshelp" version="2.6.1.v20100618-3507w31211924"/>
-      <import feature="org.eclipse.birt.doc" version="2.6.1.v20100618-3507w31211924"/>
-      <import feature="org.eclipse.birt.example" version="2.6.1.v20100618-7F7e6DZRDKDE9Gi"/>
-      <import feature="org.eclipse.birt.report.designer.editor.xml.wtp" version="2.6.1.v20100709-7m9f7NFT0z0-Im5IWab4F6"/>
+      <import feature="org.eclipse.emf.oda.ecore" version="1.0.0.v20110606-0949"/>
+      <import feature="org.eclipse.emf.oda.ecore.ui" version="1.0.0.v20110606-0949"/>
+      <import feature="org.eclipse.birt" version="3.7.0.v20110603-BDF9E7AGTzuHfngz-8A08WvWDv8v"/>
+      <import feature="org.eclipse.birt.chart" version="3.7.0.v20110603-7r9e1FQCnvKN67BslXE5"/>
+      <import feature="org.eclipse.birt.chart.cshelp" version="3.7.0.v20110603-46-7w31221641"/>
+      <import feature="org.eclipse.birt.cshelp" version="3.7.0.v20110603-46-7w31221641"/>
+      <import feature="org.eclipse.birt.doc" version="3.7.0.v20110603-46-7w31221714"/>
+      <import feature="org.eclipse.birt.report.designer.editor.xml.wtp" version="3.7.0.v20110603-809u78FT0z0-TVCu7ujN7w"/>
+      <import feature="org.eclipse.birt.example" version="3.7.0.v20110603-7M7l-DZRDKKDnDc"/>
    </requires>
-
-   <plugin
-         id="org.eclipse.datatools.enablement.oda.ecore"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.datatools.enablement.oda.ecore.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
 </feature>
