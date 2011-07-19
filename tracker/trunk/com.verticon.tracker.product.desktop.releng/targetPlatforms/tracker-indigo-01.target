@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target name="Tracker Indigo 1" sequenceNumber="12">
+<target name="Tracker Indigo 1" sequenceNumber="13">
 <locations>
 <location path="/opt/ekkesCornerLogging/eclipse-target" type="Directory"/>
 <location path="/opt/Eclipse/monitoradmin" type="Directory"/>
@@ -21,5 +21,6 @@
 <location path="/opt/Eclipse/eclipse-3.7.delta-pack/eclipse" type="Directory"/>
 <location path="/opt/Eclipse/eclipse-modeling-indigo-target_platform/eclipse" type="Directory"/>
 <location path="/opt/Eclipse/apache/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/google" type="Directory"/>
 </locations>
 </target>
