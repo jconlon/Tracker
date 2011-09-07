@@ -68,7 +68,6 @@ public class TrackerTests extends TestSuite {
 		suite.addTestSuite(SwineTest.class);
 		suite.addTestSuite(EquineTest.class);
 		suite.addTestSuite(CaprineTest.class);
-		suite.addTestSuite(LocationTest.class);
 		suite.addTestSuite(MedicalConditionTest.class);
 		suite.addTestSuite(MedicalTreatmentTest.class);
 		suite.addTestSuite(BirthingTest.class);

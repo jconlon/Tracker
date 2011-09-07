@@ -12,7 +12,6 @@ package com.verticon.tracker.tests;
 
 import junit.textui.TestRunner;
 
-import com.verticon.tracker.Location;
 import com.verticon.tracker.Sighting;
 import com.verticon.tracker.TrackerFactory;
 
@@ -88,14 +87,5 @@ public class SightingTest extends EventTest {
 		assertEquals(Sighting.EVENT_CODE, getFixture().getEventCode());
 	}
 	
-	
-	public void testGetLocation(){
-		assertNotNull(getFixture());
-		assertNull(getFixture().getLocation());
-		Location location = TrackerFactory.eINSTANCE.createLocation();
-		location.setName("FishHouse");
-		getFixture().setLocation(location);
-		assertEquals("FishHouse",getFixture().getLocation().getName());
-	}
 
 } //SightingTest
