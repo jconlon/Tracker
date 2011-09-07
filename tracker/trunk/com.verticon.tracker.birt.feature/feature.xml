@@ -22,8 +22,6 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.emf.oda.ecore" version="1.0.0.v20110606-0949"/>
-      <import feature="org.eclipse.emf.oda.ecore.ui" version="1.0.0.v20110606-0949"/>
       <import feature="org.eclipse.birt" version="3.7.0.v20110603-BDF9E7AGTzuHfngz-8A08WvWDv8v"/>
       <import feature="org.eclipse.birt.chart" version="3.7.0.v20110603-7r9e1FQCnvKN67BslXE5"/>
       <import feature="org.eclipse.birt.chart.cshelp" version="3.7.0.v20110603-46-7w31221641"/>
@@ -31,6 +29,9 @@
       <import feature="org.eclipse.birt.doc" version="3.7.0.v20110603-46-7w31221714"/>
       <import feature="org.eclipse.birt.report.designer.editor.xml.wtp" version="3.7.0.v20110603-809u78FT0z0-TVCu7ujN7w"/>
       <import feature="org.eclipse.birt.example" version="3.7.0.v20110603-7M7l-DZRDKKDnDc"/>
+      <import feature="org.eclipse.ocl.all" version="3.1.1.v20110830-1428" match="compatible"/>
+      <import feature="org.eclipse.emf.oda" version="1.1.0.qualifier"/>
+      <import feature="org.eclipse.emf.oda.ecore.ui" version="1.0.0.qualifier"/>
    </requires>
 
 </feature>

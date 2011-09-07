@@ -10,11 +10,12 @@
 Version: {0}
 Build id: {1}
 
-(c) Copyright Verticon, Inc. 2008.  All rights reserved. 
+(c) Copyright Verticon, Inc. 2011.  All rights reserved. 
 
 Visit http://tracker.verticon.com/index.html
 
-Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and used with other Eclipse (3.6.0) based offerings.
+Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and
+used with other Eclipse (3.7.0) based offerings.
       </text>
    </aboutInfo>
 
@@ -63,7 +64,7 @@ Tracker is powered by Eclipse technology and includes Eclipse plugins that can b
 
    <features>
       <feature id="com.verticon.tracker.product.desktop" version="0.6.0.qualifier"/>
-      <feature id="com.verticon.tracker.base.dep" version="0.4.1.qualifier"/>
+      <feature id="com.verticon.tracker.base.dep" version="0.5.0.qualifier"/>
       <feature id="org.eclipse.equinox.p2.user.ui" version="2.1.1.v20110526-6-Bg9JXOePwKUTU7X0teV1RtDu-e"/>
       <feature id="org.eclipse.platform" version="3.7.0.v20110530-9gF7UHNFFt4cwE-pkZDJ7oz-mj4OSEIlu9SEv0f"/>
    </features>
