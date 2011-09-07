@@ -34,6 +34,22 @@
     </triggeringPolicy>
   </appender>
   
+   <appender name="AGGREGATED" class="ch.qos.logback.core.FileAppender">
+    <file>${user.home}/aggregated.log</file>
+    <append>true</append>
+    <encoder>
+      <pattern>%m%n</pattern>
+    </encoder>
+  </appender>
+  
+  <appender name="TRANSACTION" class="ch.qos.logback.core.FileAppender">
+    <append>true</append>
+    <file>${user.home}/transaction.log</file>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss},%m%n</pattern>
+    </encoder>
+  </appender>
+  
  <appender name="STDOUT"
     class="ch.qos.logback.core.ConsoleAppender">
     <layout class="ch.qos.logback.classic.PatternLayout">
@@ -67,7 +83,20 @@
 
  
   <logger name="com.verticon.tracker">
-    <level value="DEBUG"/>
+    <level value="WARN"/>
+  </logger>
+             
+                 
+   <logger name="com.verticon.tracker.location.internal">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.location.internal.Component">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.agriculture">
+    <level value="WARN"/>
   </logger>
   
    <logger name="com.verticon.osgi">
@@ -109,30 +138,80 @@
     <level value="INFO"/>
   </logger>
   
+   <logger name="com.verticon.tracker.configuration.internal">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.bwcontrol">
+    <level value="WARN"/>
+  </logger>
+  
+   <logger name="com.verticon.tracker.irouter.gps">
+    <level value="WARN"/>
+    <!--  
+    <appender-ref ref="STDOUT"/>
+    -->
+  </logger>
+  
+  <logger name="com.verticon.tracker.reader.bluetooth">
+    <level value="WARN"/>
+  </logger>
+  
   <logger name="com.verticon.tracker.irouter.dev">
-    <level value="DEBUG"/>
-    <appender-ref ref="STDOUT"/>
+    <level value="WARN"/>
   </logger>
   
-  <logger name="com.verticon.tracker.irouter.trutest.test">
-    <level value="DEBUG"/>
-    <appender-ref ref="STDOUT"/>
+  <logger name="com.verticon.tracker.irouter.mettler">
+    <level value="INFO"/>
   </logger>
   
-  <logger name="com.verticon.tracker.irouter.trutest.IntializerCallableTest">
-    <level value="DEBUG"/>
-    <appender-ref ref="STDOUT"/>
+  <logger name="com.verticon.tracker.irouter.trutest">
+    <level value="INFO"/>
   </logger>
   
-  <logger name="com.verticon.tracker.irouter.trutest.dev">
+  <logger name="com.verticon.osgi.metatype.core.model.editor.internal.forms">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.transaction.editor.event">
     <level value="DEBUG"/>
-    <appender-ref ref="STDOUT"/>
+  </logger>
+  
+   <logger name="com.verticon.tracker.irouter">
+    <level value="ERROR"/>
   </logger>
   
  <logger name="com.verticon.tracker.itrouter.common.TaskMonitoringServiceTest">
-    <level value="DEBUG"/>
-    <appender-ref ref="STDOUT"/>
+    <level value="ERROR"/>
  </logger>
+
+  <logger name="com.verticon.tracker.irouter.animal.data">
+    <level value="DEBUG"/>
+  </logger>
+ 
+  <logger name="com.verticon.tracker.irouter.measurement">
+    <level value="DEBUG"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.wireadmin">
+    <level value="WARN"/>
+    <appender-ref ref="STDOUT"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.gateway">
+    <level value="DEBUG"/>
+  </logger>
+  
+   <logger name="aggregated" level="INFO">
+    <appender-ref ref="AGGREGATED"/>
+   
+  </logger>
+  
+  <logger name="transaction" level="INFO">
+    <appender-ref ref="TRANSACTION"/>
+  
+  </logger>
+  
   <root>
     <level value="WARN"/>
     
