@@ -10,7 +10,6 @@
  *******************************************************************************/
 package com.verticon.tracker.tests;
 
-import com.verticon.osgi.metatype.tests.MetatypeTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
@@ -56,7 +55,6 @@ public class TrackerReportAllTests extends TestSuite {
 		suite.addTestSuite(EventAttributeTest.class);
 		suite.addTestSuite(EventHistoryAdapterFactoryTest.class);
 		
-		suite.addTestSuite(LocationTest.class);
 		
 		suite.addTestSuite(TrackerFactoryTest.class);
 		
