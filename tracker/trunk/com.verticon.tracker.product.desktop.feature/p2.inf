@@ -11,7 +11,13 @@ instructions.configure = \
     addRepository(location:http${#58}//www.rxtx.org/eclipse,type:1,name:RXTX Deprecated,enabled:false);\
     addRepository(location:http${#58}//download.eclipse.org/datatools/updates,type:0,name:Eclipse Datatools,enabled:true);\
     addRepository(location:http${#58}//download.eclipse.org/datatools/updates,type:1,name:Eclipse Datatools,enabled:true);\
-    addRepository(location:http${#58}//download.eclipse.org/releases/helios,type:0,name:Eclipse Helios Release,enabled:true);\
-    addRepository(location:http${#58}//download.eclipse.org/releases/helios,type:1,name:Eclipse Helios Release,enabled:true);
+    addRepository(location:http${#58}//download.eclipse.org/releases/indigo,type:0,name:Eclipse Indigo Release,enabled:true);\
+    addRepository(location:http${#58}//download.eclipse.org/releases/indigo,type:1,name:Eclipse Indigo Release,enabled:true);\
+    addRepository(location:http${#58}//download.eclipse.org/birt/update-site/3.7,type:0,name:Eclipse BIRT 3.7 Release,enabled:true);\
+	addRepository(location:http${#58}//download.eclipse.org/birt/update-site/3.7,type:1,name:Eclipse BIRT 3.7 Release,enabled:true);\
+	addRepository(location:http${#58}//download.eclipse.org/releases/maintenance,type:0,name:Eclipse Maintenance,enabled:true);\
+	addRepository(location:http${#58}//download.eclipse.org/releases/maintenance,type:1,name:Eclipse Maintenance,enabled:true);\
+	addRepository(location:http${#58}//download.eclipse.org/modeling/emf/emf/updates/2.7.x,type:0,name:Modeling Maintenance,enabled:true);\
+	addRepository(location:http${#58}//download.eclipse.org/modeling/emf/emf/updates/2.7.x,type:1,name:Modeling Maintenance,enabled:true);
 instructions.configure.import=\
 	org.eclipse.equinox.p2.touchpoint.eclipse.addRepository;
