@@ -32,10 +32,10 @@
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="com.google.guava"/>
-      <import feature="com.verticon.tracker.editor" version="0.5.2.qualifier"/>
-      <import feature="com.verticon.location" version="0.1.0.qualifier"/>
-      <import feature="com.verticon.geography.editor" version="0.1.0.qualifier"/>
-      <import feature="com.verticon.osgi.metatype.core.model.editor" version="0.1.1.qualifier"/>
+      <import feature="com.verticon.tracker.editor" version="0.5.2"/>
+      <import feature="com.verticon.location" version="0.1.0"/>
+      <import feature="com.verticon.geography.editor" version="0.1.0"/>
+      <import feature="com.verticon.osgi.metatype.core.model.editor" version="0.1.1"/>
    </requires>
 
    <plugin
