@@ -7,5 +7,5 @@ Bundle-Vendor: Verticon, Inc.
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Fragment-Host: com.verticon.tracker.connector.socket
 Import-Package: javax.microedition.io,
- junit.framework;version="4.8.1",
+ junit.framework,
  org.osgi.service.io
