@@ -3,7 +3,7 @@ This project is a releng builder for the com.verticon.tracker.product.desktop pr
 =======================================
 Notes
 
-1) This build requires 3.7 or later
+1) This build requires Indigo 3.7 or later
 
 2) This build requires the deltapack.  By default it looks beside the eclipse install for "deltapack/eclipse/*".  
    If your deltapack is located elsewhere, set the "deltapack" property or edit the buildProduct.xml file.  The
@@ -25,11 +25,17 @@ Build Instructions
 For releases:
 1. Old repos can be removed or left in place.  If left in place artifacts of the same 
 version overwrite the preexisting ones. 
-2. Run Tracker.launch - to build product and product p2 metadata
-3. From any feature, Export all features to the repository -  Deploys p2 metadata to repository. (updatesite/catalog.xml specs the categories)
-4. Run Sync S3.launch - Moves all artifacts over to ~/Uploads/s3 and mirrors these to S3.
-5. Sync any changed documentation to S3 - see documentation
-6. Change downloads page on website and sync it. - see website
+2. Product build: 
+	a. Edit the compositeArtifacts.xml and compositeContent.xml to add a new directory for the product.
+	b. Run Tracker.launch - to build product and product p2 metadata
+3. Feature build:
+    a. Edit the compositeArtifacts.xml and compositeContent.xml to add a new directory for the features.
+    b. From any feature, export all new features to the repository.
+       This will deploys p2 metadata to repository. (updatesite/catalog.xml specs the categories)
+4. Test latest product with new features in dev workspace. (Add a local repository pointing to the relang repo.)
+5. Run Sync S3.launch - Moves all artifacts over to ~/Uploads/s3 and mirrors these to S3.
+6. Sync any changed documentation to S3 - see documentation
+7. Change downloads page on website and sync it. - see website
 
 =======================================
 Tagging a release
