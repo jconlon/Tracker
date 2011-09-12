@@ -1,0 +1,93 @@
+h1. Component Factories
+
+Component Factories are the creators of the services that do the actual work within the iRouter.  There are three types of Component Factories:
+# Business Logic 
+# Proxy
+# External
+
+h2. Business Logic Component Factories
+
+Business logic Component Factories create components for transforming, controlling and routing information within the iRouter.
+
+h3. Arithmetic Measurement Converter
+
+Arithmetic Measurement Converter is a generic business logic Component Factory that creates components that convert one measurement to another based on an arithmetic calculation. Arithmetic Measurement Converter: 
+* Consumes one _Measurement_ input
+* Produces a _Measurement_ product from the consumed _Measurement_ and an user configured Arithmetic calculation
+ 
+h3. Measurement Comparator
+
+Measurement Comparator is a generic business logic Component Factory that creates components that compare two consumed _Measurement_ products. Measurement Comparator instances produce a _State_ product containing the results of the comparison. 
+
+The _Measurement_ arriving on the first input is compared with the _Measurement_ arriving on the second input.  Inputs are configured as _Consumer Scope_ parameters. A Measurement Comparator service produces a _State_ with a:
+* Negative integer value if the first measurement is less than the second
+* Zero if the first measurement is equal than the second
+* Positive integer if the first measurement is greater than the second measurement.
+* Integer.MIN if the states are unequal or incompatible.
+
+h3. Measurement Trigger
+
+Measurement Trigger is a generic business logic Component Factory that creates components that inspect consumed _Measurement_ products for conditions.  Measurement Trigger instances produce a _State_ when specific configured conditions are met. Two types of inspection conditions are supported:
+# Rising Threshold condition will send a trigger _State_ when a sequence of consumed _Measurement_ products pass through a range of values less than or equal to specified low value up to a value equal to or greater than a specified high value.
+# Falling Threshold condition will send a trigger _State_ when a sequence of consumed _Measurement_ products pass through a range of values from greater than or equal to specified high value back to a value equal to or less than a specified low value.
+
+The Trigger State will have the following attributes:
+* Name
+** com.verticon.tracker.irouter.measurement.trigger
+* Value
+** 2
+
+h3. Flow Terminator
+
+Flow Terminator is a generic business logic Component Factory that creates components for controlling the flow of consumed information products passing through the service instance.  A Flow Terminator service either passes through or blocks the information passing from the input to the output. Flow control is turned on or off based on a distinct _State_ product consumed on a control input.
+
+Flow Terminator has two inputs configured as consumer scopes:
+# Information scope contains information that either is passed through or terminated 
+# Control scope that contains control _State_ that enable or disable (terminate) the flow of the information.
+
+When pass through is enable the Flow Terminator instance passes through (produces) one product:
+# Identical to the product consumed on its Information scope.
+  
+h3. BW Control
+
+BW Control is an livestock _problem domain_ and _device_ specific custom business logic Component Factory that creates components for controlling animal weight and animal blood weight sensing.  BW Control interfaces with a TruTest Scalehead indicator and a Mettler Balance.  
+
+_The BW Control is included as an example of a custom Component Factory._
+
+
+h3. Measurement Logger
+
+Measurement logger is a generic business logic Component Factory that creates components for logging Measurements produced by iRouter producer components to the "Logback":http://logback.qos.ch/ enterprise class logging framework.  
+ 
+
+
+h2. Proxy and Gateway Component Factories
+
+Proxy Component Factories create components that interface with external physical:
+* Input devices, 
+* Sensors, 
+* Displays,
+* Actuators. 
+
+Gateway Component Factories create services that create information gateways between services running in the iRouter and local services registered in the OSGi framework.
+
+__Proxy and Gateway Component Factories are packaged as optional iRouter features and are documented in the following
+sections.__ 
+
+h2. External Component Factories
+
+External Component Factories create instances that are used for documenting external physical devices:
+* Input devices, 
+* Sensors, 
+* Displays,
+* Actuators,
+* Gateways 
+
+External Component Factories create annotated nodes in the iRouter monitor view. These nodes document the kind, description and location of the external devices that are connected to Proxies and Gateway services.  
+
+__Note: External Component Factories and the annotated nodes that are created by them are entirely optional. They serve no functional purpose other than documentation.__
+
+
+
+
+

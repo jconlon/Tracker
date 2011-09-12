@@ -1,0 +1,106 @@
+h1. Theory of Operations
+
+h2. How does it work?
+
+The iRouter is a running network of OSGi services that move and transform information between external sensors and actuators.  An iRouter service network consists of Custom Proxy components that interface with external devices and internal components that execute business logic.
+
+h3. Custom proxy components for external devices
+
+External measurement sensors, user input devices, and actuators are interfaced to the iRouter system with a custom component called a proxy and implemented as a WireAdmin Producer or Consumer service.  
+
+Interfacing to the external device requires that the proxy component:
+# Provide a physical communication interface
+# Provide a data link communication interface
+
+For the end user or business analyst interfacing devices supported by available proxy components nothing more needs to be done other than configuration. But when there are requirements for integrating new external devices, new proxy components will have to be created by a qualified programmer.
+
+h4. Physical communication interfaces
+
+Physical interfaces for all standard communication interfaces are already part of the existing iRouter functionality and do not have to be a concern to a programmer when creating a proxy. Physical interfaces are simply specified as connection URI(Universal Resource Identifier)s in the configuration. 
+
+The current iRouter support the following connections:
+* Serial communication port connections
+* Internet TCP socket connections
+* Bluetooth wireless connections
+
+h4. Datalink communication interfaces
+
+To the programmer authoring a proxy, the lower level physical connection is taken care of and all connections are presented as input and output streams.  Only the processing of these streams at the higher level of the data link protocol is necessary.  Therefore the complexity of a proxy component is directly related to the complexity of the data link protocol offered by the external device and the number of input or output measurements and states produced or consumed by the external device. 
+
+h4. Simplified interfaces
+
+While programing a proxy is still a custom _integration_ effort, it is an order of magnitude easier typical custom programming efforts because:
+* No low level connection programming is necessary
+** iRouter already has this covered
+* No business logic needs to be coded
+** Business logic is handled by configuring transformer services - see next section 
+* Implementing a Proxy Producer or Consumer for an external device is only done once
+** All use cases that require the device reuse the same proxy
+
+h3. Generic transformation components
+
+iRouter transformation components listed below provide the services for transforming measurements and states flowing within the iRouter.[4] In other words they provide the business logic for each use-case. 
+
+h4. Measurement Converters
+
+Measurement converters convert one measurements to another based on an arithmetic calculation or some other relationship. 
+
+The following Measurement Converters are included:
+* Simple Arithmetic Converter
+** Consumes one measurement input
+** Produces a measurement from the input and an arithmetic calculation
+
+h4. State Detectors
+
+State detector components produce a state based on some criteria. The following state detectors components are included:
+* Measurement Comparator
+** State is produced based on the comparison of two measurements.
+*** Produces a state with a negative integer, zero, or a positive integer if the first measurement is less than, equal to, or greater than the second measurement.
+*** If the states are unequal or incompatible creates a state with an Integer.MIN value.
+  
+h3. Collaborating wire groups
+
+Sensor-actuator use cases are actualized by a group of WireAdmin services interconnected with WireAdmin wires.  These are called iRouter _wire groups_.  Because the iRouter can support one or more sensor-actuator use cases or _wire groups_ running at the same time, during configuration time each service must specify a name for the _wire group_ it collaborates with. 
+
+__All component services must be identified with a wire group name so that the iRouter can wire the correct groups of services together.__
+
+
+h2. Administration Tools
+
+Tools needed for managing the components running in the iRouter include:
+
+* User interface tools for Configuration editing
+* User interface tools for Application Monitoring
+
+h3. Configuration editing 
+
+Creating a running instance of the iRouter is simply a matter of creating, editing and saving a configuration.  This is done through the iRouter configuration editor. With the iRouter configuration editor the administrator can:
+ 
+* Select the type of component instances to create from a list of the deployed component factories,
+* Configure component instances to perform specific functional tasks related to information acquisition and transformation
+* Name the __wire groups__ of the component instances to constrain the behavior of the instance to a set of collaborating services
+* Add or delete component instances
+* Edit the configuration of running component instances
+* Import or export configuration data
+
+When a configuration is saved all components are activated.  Configurations are persisted across reboots, so turning on the iRouter appliance or re-launching the Eclipse desktop will activate all configured collaborating __wire group__ services previously configured.  
+
+h3. Application monitoring
+
+Once a iRouter configuration is created and saved it is activated as a background set of running services. Administrators may want to check that these services are indeed collaborating in the manner originally imaged.  With The iRouter monitor view administrators can:
+* Graphically visualized the __wire groups__ of running components
+* Resize or reposition nodes on the graph to clarify the visualization
+* Print the output of the visualization as a visual record of the configuration
+* Monitor status variables of individual service components.
+
+h3. Simplified operation
+
+Once the configuration is edited and saved by an administrator, the user no longer need perform any additional tasks - __because the iRouter is configured and running as a background service.__
+
+
+h2. Notes
+
+fn4. Initial iRouter beta releases will deploy only a limited number of generic components to the software repositories for provisioning iRouter instances. Follow up releases will add more generic transformation components, so for most use cases custom business logic components will not be needed.
+
+
+

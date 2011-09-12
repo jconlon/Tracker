@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="com.verticon.tracker.editor.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="com.verticon.agriculture.presentation.AgricultureModelWizardID"
+            name="%_UI_AgricultureModelWizard_label"
+            class="com.verticon.agriculture.presentation.AgricultureModelWizard"
+            category="com.verticon.tracker.editor.Wizard.category.ID"
+            icon="icons/full/obj16/AgricultureModelFile.gif">
+         <description>%_UI_AgricultureModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="com.verticon.agriculture.presentation.AgricultureEditorID"
+            name="%_UI_AgricultureEditor_label"
+            icon="icons/full/obj16/AgricultureModelFile.gif"
+            extensions="agri"
+            class="com.verticon.agriculture.presentation.AgricultureEditor"
+            contributorClass="com.verticon.agriculture.presentation.AgricultureActionBarContributor">
+      </editor>
+   </extension>
+   
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <file-association
+            content-type="org.eclipse.emf.compare.ui.contenttype.ModelContentType"
+            file-extensions="agri"
+            file-names="*">
+      </file-association>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            defaultHandler="com.verticon.agriculture.presentation.internal.LocationChoices"
+            description="Show and select a location in the premises"
+            id="com.verticon.agriculture.core.model.editor.command.location.selection"
+            name="Select &amp;Location in premises">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+         <command
+               commandId="com.verticon.agriculture.core.model.editor.command.location.selection"
+               style="push">
+            <visibleWhen>
+               	     <and>
+                         <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+      						 <instanceof value="com.verticon.tracker.Sighting"/>
+    					  </iterate>
+    					 </with>
+    					 
+    					 <!-- 
+    			        	Restricted to show only if the active Editors isPremisesEditor.
+    			        	Ticket#403
+              			 -->
+              			 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+    			     </and>
+	            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+
+</plugin>

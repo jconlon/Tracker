@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %Plugin.name
+Bundle-SymbolicName: com.verticon.tracker.validation.vernoncounty;singleton:=true
+Bundle-Version: 0.1.0
+Bundle-Vendor: %Plugin.providerName
+Bundle-Localization: plugin

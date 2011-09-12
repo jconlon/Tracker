@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   
+   <extension
+         id="application"
+           point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.ui.ide.workbench"
+            description="Contains all prerequisite Eclipse dependencies for Tracker Applications."
+            name="Tracker Livestock Business Intelligence Toolkit">
+         <property
+               name="windowImages"
+               value="icons/cow_16.png,icons/cow_32.png,icons/cow_48.png">
+         </property>
+          <property
+                name="aboutText"
+                value="Tracker Livestock Business Intelligence Toolkit&#x0A;Version: {0}&#x0A;Build id: {1}&#x0A;&#x0A;(c) Copyright Verticon, Inc. 2011.  All rights reserved. &#x0A;&#x0A;Visit http://tracker.verticon.com/index.html&#x0A;&#x0A;Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed&#x0A;and used with other Eclipse (3.7.0) based offerings."/>
+        
+         <property
+               name="aboutImage"
+              value="icons/cattle_lg.gif">
+         </property>
+         <property
+               name="startupForegroundColor"
+               value="ADD8E6">
+         </property>
+         <property
+               name="startupProgressRect"
+               value="62,400,515,15">
+         </property>
+         <property
+               name="startupMessageRect"
+               value="7,225,441,20">
+         </property>
+         
+         <property
+              name="preferenceCustomization"
+              value="plugin_customization.ini">
+        </property>
+        <property
+              name="introTitle"
+              value="Welcome to the Tracker Livestock Business Intelligence Toolkit">
+        </property>
+        <property
+              name="introBrandingImageText"
+              value="Tracker by Verticon, Inc.">
+        </property>
+        <property
+              name="introDescription-overview"
+              value="Overview of the Tracker Livestock Business Intelligence Toolkit">
+        </property>
+        <property
+              name="introDescription-firststeps"
+              value="First steps to take after installing the Tracker Livestock Business Intelligence Toolkit">
+        </property>
+        <property
+              name="introDescription-whatsnew"
+              value="What's new in this release of the Tracker Livestock Business Intelligence Toolkit">
+        </property>
+        <property
+              name="appName"
+              value="Tracker Livestock Business Intelligence Toolkit">
+        </property>
+        <property
+              name="introBrandingImage"
+              value="product:icons/cow_32.png">
+        </property>
+      </product>
+   </extension>
+   
+
+<extension
+         point="org.eclipse.ui.intro">
+      <intro
+            class="org.eclipse.ui.intro.config.CustomizableIntroPart"
+            icon="icons/cow_16.png"
+            id="com.verticon.tracker.product.desktop.intro">
+      </intro>
+      <introProductBinding
+            introId="org.eclipse.ui.intro.universal"
+            productId="com.verticon.tracker.product.desktop.application">
+      </introProductBinding>
+   </extension>
+   
+
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="com.verticon.tracker.product.desktop.PerspectiveFactory"
+            icon="icons/cow_16.png"
+            id="com.verticon.tracker.product.desktop.perspective"
+            name="Tracker">
+      </perspective>
+   </extension>
+  
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.eclipse.ui.preferencePages.Workbench"
+            class="org.eclipse.ui.intro.universal.ExtensionFactory:welcomeCustomization"
+            id="com.verticon.tracker.product.desktop.introCustomization"
+            name="Intro Customization">
+      </page>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.intro.configExtension">
+      <configExtension
+            configId="org.eclipse.ui.intro.universalConfig"
+            content="intro/overviewExtensionContent.xml">
+      </configExtension>
+      
+      <configExtension
+            configId="org.eclipse.ui.intro.universalConfig"
+            content="intro/firststepsExtensionContent.xml">
+      </configExtension>
+      
+      <configExtension
+            configId="org.eclipse.ui.intro.universalConfig"
+            content="intro/whatsnewExtensionContent.xml">
+      </configExtension>
+      
+      <configExtension
+            configId="org.eclipse.ui.intro.universalConfig"
+            content="intro/whatsnewExtensionContent1.xml">
+      </configExtension>
+    
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="*">
+         <perspectiveShortcut
+               id="com.verticon.tracker.product.desktop.perspective">
+         </perspectiveShortcut>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.cheatsheets.cheatSheetContent">
+      <category
+            id="com.verticon.tracker.category.cheatSheets"
+            name="Tracker">
+      </category>
+      <cheatsheet
+            category="com.verticon.tracker.category.cheatSheets"
+            composite="false"
+            contentFile="$nl$/cheetsheets/UpdateFeaturesCheatsheet.xml"
+            id="com.verticon.tracker.product.desktop.cheatsheet.provision"
+            name="Adding Tracker Features to the Tracker Desktop Toolkit">
+         <description>
+            This cheat sheet will show you how to add Tracker features to the Tracker Desktop Toolkit.
+         </description>
+      </cheatsheet>
+      
+   </extension>
+ 
+
+</plugin>

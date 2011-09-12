@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="com.verticon.tracker.reader" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="com.verticon.tracker.reader" id="readerWizards" name="Reader Wizards"/>
+      </appinfo>
+      <documentation>
+         This extension point is used to register Tracker Event Reader Wizard extensions. Event reader wizards appear as choices within the &quot;Readers View Add Action&quot; and are used to create Event Readers that will show up as rows in the Readers Table View.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="wizard"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  a fully qualified identifier of the target extension point
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  an optional identifier of the extension instance
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  an optional name of the extension instance
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="wizard">
+      <annotation>
+         <documentation>
+            an element that will be used to create IPublisherWizard
+         </documentation>
+      </annotation>
+      <complexType>
+         <sequence>
+            <element ref="description"/>
+         </sequence>
+         <attribute name="id" type="string" use="required">
+            <annotation>
+               <documentation>
+                  a unique name that will be used to identify this wizard
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string" use="required">
+            <annotation>
+               <documentation>
+                  a translatable name that will be used in the dialog box to represent this wizard
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  a fully qualified name of the class that implements &lt;samp&gt;com.verticon.tracker.reader.IPublisherWizard&lt;/samp&gt; interface
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":com.verticon.tracker.reader.IPublisherWizard"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="icon" type="string">
+            <annotation>
+               <documentation>
+                  a relative name of the icon that will be used alongside the wizard name in the Add action of the EventPublisher View.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="resource"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="factory" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":com.verticon.tracker.reader.IReaderFactory"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="description" type="string">
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         This Extension Point first appears in the Tracker 0.2.6 release.
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         The following is an example of the EventPublisher extension point usage:
+&lt;p&gt;
+ &lt;pre&gt;
+ &lt;extension point=&quot;com.verticon.tracker.reader.readerWizards&quot;&gt;
+  &lt;wizard id= &quot;com.xyz.eventReaderWizard1&quot;
+   name=&quot;XYZ Web Scraper&quot;
+   class= &quot;com.xyz.event.reader.EventReaderWizard1&quot;
+   icon=&quot;./icons/import1.gif&quot;&gt;
+    &lt;description&gt;
+             A simple event reader that publishes events from a ticker tape. 
+          &lt;/description&gt;
+  &lt;/wizard&gt;
+ &lt;/extension&gt;
+ &lt;/pre&gt;
+&lt;/p&gt;
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="apiInfo"/>
+      </appinfo>
+      <documentation>
+         Plug-ins that want to extend this extension point must implement the &lt;samp&gt;com.verticon.tracker.reader.IReaderWizard&lt;/samp&gt; and generate objects that implement the &lt;samp&gt;com.verticon.tracker.reader.IReader&lt;/samp&gt; interface.
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="implementation"/>
+      </appinfo>
+      <documentation>
+         [Enter information about supplied implementation of this extension point.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="copyright"/>
+      </appinfo>
+      <documentation>
+         Copyright Verticon, Inc. 2008 All rights reserved.
+      </documentation>
+   </annotation>
+
+</schema>

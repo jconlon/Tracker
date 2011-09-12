@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><toc topic="html//index.html" label="Editors" link_to="../com.verticon.tracker.doc/toc.xml#tracker_editor">
+<topic href="html//premisesEditor/premisesEditor.html" label="Metatype Model Editor">
+<topic href="html//premisesEditor/premisesEditor.html#overviewMetatypeEditor" label="Overview">
+<topic href="html//premisesEditor/premisesEditor.html#overviewMetatypeEditorWhatis" label="What is the Metatype Model Editor?"/>
+<topic href="html//premisesEditor/premisesEditor.html#overviewMetatypeEditorGoals" label="Project Goals"/>
+<topic href="html//premisesEditor/premisesEditor.html#overviewMetatypeFunctinal" label="Functional Overview"/>
+</topic>
+<topic href="html//usecase/metatypeEditor_useCase.html" label="Metatype Data Model and Model Editor Use Cases"/>
+<topic href="html//model/metatypeEditorModel_metatypeDocuments.html" label="Metatype Documents"/>
+<topic href="html//model/metatypeEditorModel_metatypeDataModel.html" label="Metatype Data Model">
+<topic href="html//model/metatypeEditorModel_metatypeDataModel.html#metatypeDataModel_coreElements" label="Data Model Core Elements"/>
+</topic>
+<topic href="html//editingMetatypeDocuments/editingMetatypeDocuments.html" label="Editing Metatype Documents">
+<topic href="html//editingMetatypeDocuments/editingMetatypeDocuments.html#creatingMetatypeDocuments" label="Creating a new Document"/>
+</topic>
+</topic>
+</toc>

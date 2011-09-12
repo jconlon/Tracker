@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" configuration-policy="require" immediate="true" name="com.verticon.tracker.irouter.trutest.alarm.adapter">
+   <implementation class="com.verticon.tracker.irouter.trutest.alarm.adapter.internal.AlarmAdapter"/>
+   <service>
+      <provide interface="org.osgi.service.monitor.Monitorable"/>
+      <provide interface="org.osgi.service.wireadmin.Consumer"/>
+      <provide interface="org.osgi.service.wireadmin.Producer"/>
+   </service>
+</scr:component>

@@ -1,0 +1,48 @@
+"book.xml" 
+all plugins have a similar file called trackerhelp.dbk, the root
+com.verticon.tracker.doc has a more comprehensive one. 
+  
+"introduction.xml"
+Was chapter 1 is now
+   split up between 
+com.verticon.tracker.doc, 
+com.verticon.tracker.product.desktop.doc,
+com.verticon.tracker.editor.doc (Functional Description)
+    
+
+"overview.xml"
+Was chapter 2 is now in
+com.verticon.tracker.product.desktop.doc
+
+
+"model.xml"
+Was chapter 3 is now in
+com.verticon.tracker.editor.doc
+
+
+"navigation.xml"
+Was chapter 4 is now in 
+com.verticon.tracker.editor.doc
+
+"bulkEventProcessing.xml"
+Was chapter 5 is now in
+com.verticon.tracker.editor.doc
+
+"transactionEventProcessing.xml"
+Was chapter 6 is now readerOverview.xml in
+com.verticon.tracker.readers.doc
+
+"ocl.xml"
+Was chapter 7 is now in
+com.verticon.tracker.ocl.query.doc
+
+"exporting.xml"
+Was chapter 8 is now in split between 
+com.verticon.tracker.export.wlic.doc
+and 
+
+
+com.verticon.tracker.fair.poi.doc
+
+"fdl.xml"/>
+"gpl.xml"/>

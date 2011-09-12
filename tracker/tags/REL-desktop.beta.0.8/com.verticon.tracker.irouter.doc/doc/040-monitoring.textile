@@ -1,0 +1,38 @@
+h1. Monitoring
+
+h2. Application Service Monitoring
+
+__"To monitor something, one must first see it."__ 
+
+This is especially true when dealing networks of complex iRouter services collaborating within one or multiple __wire groups__. So the main emphasis of the monitoring service is to present:
+* A visual representation of the _wire groups_ 
+* Services within each wire group
+** Operation status of a service
+* Wire connections between producer and consumer services.
+
+h2. iRouter Monitor view
+
+!images/monitor.png!
+
+__Example of the Application monitoring view__
+
+The monitor view is a master-detail view with the master page presenting a graph of iRouter service instances.  The graph displays the interconnected services as a simplified "Functional Flow Block Diagram.":http://en.wikipedia.org/wiki/Functional_flow_block_diagram  
+
+Selecting a node in the graph will show details page of the service containing the sections:
+* Service Property Details
+** Showing the static details of the service
+* Status Variables
+** Showing the operational status of the service
+
+h3. Wire Group Graph
+
+As configurations are saved or activated _Producer_ services are automatically wired to all compatible _Consumer_ services.  The graphic window of the Monitoring View will dynamically visualize this process with services shown as squares and wires as arrows.  To distinguish the type of service Wire arrows are shown pointing from _Producers_ to _Consumers_. The visualization is dynamic with services and wires appearing (and disappearing) as they activate and deactivate.
+
+With your mouse you can drag and reposition nodes on the graphic. You can use the view menu to change the sizing of the graphic, the labeled buttons to change the layout style, and the tools in the tool bar to change the orientation of the window. To  print the graphic select the camera icon in the toolbar.
+
+h3. Monitoring Status Variables 
+
+Selecting a service node in the master tree will display the details of the service in the Status Variables window.  
+
+Be aware that iRouter services created from different component factories will have different variables associated with their services.  Click on the __Refresh Status Variables__ button to see the most current status for the service.
+

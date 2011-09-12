@@ -1,0 +1,16 @@
+<toc topic="help/index.html" label="Tracker iRouter User Guide">
+<topic href="help/Overview.html" label="Overview">
+<topic href="help/Overview.html#WhatistheTrackeriRouter" label="What is the Tracker iRouter?"></topic>
+<topic href="help/Howdoesitwork.html" label="How does it work?">
+<topic href="help/Howdoesitwork.html#iRouterishighlyconfigurable" label="iRouter is highly configurable"></topic>
+</topic>
+</topic>
+<topic href="help/Specifications.html" label="Specifications">
+<topic href="help/Specifications.html#OSGi" label="OSGi"></topic>
+<topic href="help/WireAdminService.html" label="Wire Admin Service"></topic>
+<topic href="help/ConfigurationAdminService.html" label="Configuration Admin Service"></topic>
+<topic href="help/MetatypeService.html" label="Metatype Service"></topic>
+<topic href="help/P2ProvisioningService.html" label="P2 Provisioning Service"></topic>
+<topic href="help/JustinTimeFunctionality.html" label="Just in Time Functionality"></topic>
+</topic>
+</toc>

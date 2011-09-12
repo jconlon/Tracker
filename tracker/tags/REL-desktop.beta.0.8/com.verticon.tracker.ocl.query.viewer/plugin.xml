@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="packages" name="OCL Packages" schema="schema/packages.exsd"/>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Tracker"
+            id="com.verticon.tracker.views">
+      </category>
+      <view
+            name="Queries"
+            icon="icons/search_src.gif"
+            category="com.verticon.tracker.views"
+            class="com.verticon.tracker.ocl.query.viewer.views.OclQueryViewPart"
+            id="com.verticon.tracker.ocl.query.view">
+      </view>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.ui.resourcePerspective">
+         <view
+               ratio="0.5"
+               relative="org.eclipse.ui.views.TaskList"
+               relationship="right"
+               id="com.verticon.tracker.ocl.query.view">
+         </view>
+         <viewShortcut id="com.verticon.tracker.ocl.query.view"/>
+      </perspectiveExtension>
+   </extension>
+
+	<extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="com.verticon.tracker.product.desktop.perspective">
+         <view
+               visible="true"
+               relative="org.eclipse.ui.views.PropertySheet"
+               relationship="stack"
+               id="com.verticon.tracker.ocl.query.view">
+         </view>
+         <viewShortcut id="com.verticon.tracker.ocl.query.view"/>
+      </perspectiveExtension>
+   </extension>
+ <extension
+       point="org.eclipse.ui.menus">
+    <menuContribution
+          locationURI="menu:com.verticon.tracker.ocl.query.view?after=additions">
+       <separator
+             name="com.verticon.tracker.ocl.query.viewer.separator1">
+       </separator>
+       <command
+               commandId="com.verticon.tracker.ocl.query.viewer.commands.addDefaultPremisesQueries"
+               icon="icons/search_src.gif"
+               label="Add Default Premises Queries"
+               mnemonic="A"
+               style="pulldown">
+       </command>
+       <command
+               commandId="com.verticon.tracker.ocl.query.viewer.commands.addDefaultFairQueries"
+               icon="icons/search_src.gif"
+               label="Add Default Fair Queries"
+               mnemonic="F"
+               style="pulldown">
+        </command>
+    </menuContribution>
+ </extension>
+ 
+ <extension
+       point="org.eclipse.ui.commands">
+    <category
+          id="com.verticon.tracker.ocl.query.viewer.commands.category"
+          name="Default Queries">
+    </category>
+    <command
+          categoryId="com.verticon.tracker.ocl.query.viewer.commands.category"
+          id="com.verticon.tracker.ocl.query.viewer.commands.addDefaultPremisesQueries"
+          name="Add Default Premises Queries">
+    </command>
+    <command
+          categoryId="com.verticon.tracker.ocl.query.viewer.commands.category"
+          id="com.verticon.tracker.ocl.query.viewer.commands.addDefaultFairQueries"
+          name="Add Default Fair Queries">
+    </command>
+ </extension>
+ 
+ 
+ 
+ <extension
+       point="org.eclipse.ui.handlers">
+    <handler
+          class="com.verticon.tracker.ocl.query.viewer.handlers.DefaultPremisesQueriesHandler"
+          commandId="com.verticon.tracker.ocl.query.viewer.commands.addDefaultPremisesQueries">
+    </handler>
+     <handler
+          class="com.verticon.tracker.ocl.query.viewer.handlers.DefaultFairQueriesHandler"
+          commandId="com.verticon.tracker.ocl.query.viewer.commands.addDefaultFairQueries">
+    </handler>
+ </extension>
+ <extension
+       point="org.eclipse.ui.bindings">
+    <key
+          commandId="com.verticon.tracker.ocl.query.viewer.commands.addDefaultPremisesQueries"
+          contextId="org.eclipse.ui.contexts.window"
+          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+          sequence="M1+7">
+    </key>
+    <key
+          commandId="com.verticon.tracker.ocl.query.viewer.commands.addDefaultFairQueries"
+          contextId="org.eclipse.ui.contexts.window"
+          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+          sequence="M1+8">
+    </key>
+ </extension>
+
+ 
+</plugin>

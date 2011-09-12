@@ -1,0 +1,25 @@
+<project name="repository deployment build" >
+
+<!-- ================================= 
+          target: name              
+         ================================= -->
+    <target name="name" depends="init" description="description">
+    	<echo message="creating directory ${FTP.Development.Address}${FTP.Development.RemoteLocation} " />
+    	<ftp server="ftp.sixfive.co.uk"
+    	   userid="Anonymous"
+    	   password="myemail@email.com"
+    	   remotedir="/incoming/anonymous/">
+    	   <fileset dir="c:/temp/" />
+    	</ftp>
+    </target>
+
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: init                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="init">
+            
+    </target>
+
+
+</project>
