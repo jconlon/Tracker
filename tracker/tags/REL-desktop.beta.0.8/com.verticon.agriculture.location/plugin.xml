@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+ <extension
+         id="locationBuilderService"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="true">
+         <run
+               class="com.verticon.agriculture.location.internal.AgricultureProjectBuilder">
+         </run></builder>
+   </extension>
+ <extension
+       id="agricultureServiceNature"
+       name="Agriculture Service"
+       point="org.eclipse.core.resources.natures">
+    <builder
+          id="com.verticon.agriculture.location.locationBuilderService">
+    </builder>
+    <runtime>
+       <run
+             class="com.verticon.agriculture.location.internal.AgricultureNature">
+       </run>
+    </runtime>
+ </extension>
+ <extension
+       point="org.eclipse.ui.popupMenus">
+    <objectContribution
+          adaptable="false"
+          id="com.verticon.agriculture.location.addRemoveNatureAction"
+          nameFilter="*"
+          objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="com.verticon.agriculture.location.internal.popup.actions.AddRemoveNatureAction"
+               id="com.verticon.agriculture.location.addRemoveNatureAction"
+               label="Add/Remove Agriculture Nature"
+               menubarPath="org.eclipse.ui.projectConfigure/additions">
+		</action>
+		<visibility>
+	            <objectClass name="org.eclipse.core.resources.IProject"/>         
+		</visibility>
+      </objectContribution>
+ </extension>
+ <extension
+       point="org.eclipse.ui.ide.projectNatureImages">
+    <image
+          icon="icons/agriNature.gif"
+          id="com.verticon.agriculture.location.agricultureServiceImage"
+          natureId="com.verticon.agriculture.location.agricultureServiceNature">
+    </image>
+ </extension>
+
+</plugin>

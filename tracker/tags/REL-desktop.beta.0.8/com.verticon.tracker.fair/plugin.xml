@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ Copyright 2011 Verticon, Inc. All Rights Reserved.
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+  	<package
+    	 uri = "http://www.verticon.com/ns/tracker/fair/0.1.0"
+    	 class = "com.verticon.tracker.fair.FairPackage"/>
+   </extension>
+   
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.verticon.com/tracker.fair/0.2.1/fair"
+            class="com.verticon.tracker.fair.FairPackage"
+            genModel="model/fair.genmodel"/>
+   </extension>
+
+   <extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="com.verticon.tracker.fair.util.FairResourceFactoryImpl"
+            type="fair">
+      </parser>
+   </extension>
+
+</plugin>

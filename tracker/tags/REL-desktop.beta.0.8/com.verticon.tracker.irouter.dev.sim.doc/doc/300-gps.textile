@@ -1,0 +1,26 @@
+h1. Global Position System (GPS)
+
+Simulator for a GPS device with display fields and controls for actuating behavior of the GPS.  Simulates a GPS attached as a Server connection[10] that continuously sends[11] positioning information to connected clients based on values entered in the simulator web based user interface.
+ 
+h2. GPS Simulator Page
+
+!images/gps.png!
+
+h3. Display and Controls
+
+Connection state from the client components to the Server is shown as a display with a Y/N value. 
+
+The control simulates the position of the gps device in latitude, longitude, heading, speed and altitude.  These values can be changed via the web based user interface.
+ 
+h3. NEMA Sentences sent by the Simulator
+
+* GGA - essential fix data which provide 3D location and accuracy data.
+* RMC - NMEA version of essential gps pvt (position, velocity, time) data.
+
+
+h2. Notes
+
+fn10. The type of Server connection is determined by the property gps.sim.type, with the default as SERVER_SOCKET to change to a com port set gps.sim.type=SERVER_COMM_PORT. The server connection can be either a socket connection or com port and for Server socket it is specified by the property mettler.sim.socket with the default 2343. Server Comm Port is determined by the property gps.sim.port and there is no default.
+
+fn11. Output timing is determined by the property gps.sim.timer.secs and there is a default of 2 seconds.
+

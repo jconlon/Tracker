@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+      <extension
+         point="org.eclipse.emf.validation.constraintProviders">
+      <category
+            name="%category.name"
+            id="com.verticon.tracker.validation.catagory.ocl">
+         <category
+               id="com.verticon.tracker.fair.fair.validation"
+               name="%fair.fair.category.name">
+         </category>
+        
+         <category
+               id="com.verticon.tracker.fair.premises.validation"
+               name="%fair.premises.category.name">
+         </category>
+         
+      </category>
+
+	  <constraintProvider
+         cache="true">
+         <package namespaceUri="http://www.verticon.com/tracker.fair/0.2.1/fair"/>
+         <description>Constraints for the Fair resource</description>
+         <constraints categories="com.verticon.tracker.validation.catagory.ocl/com.verticon.tracker.fair.fair.validation">
+             <!-- This constraint applies to Person names-->
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.fair.validation.constraints.NoSpaceInNameConstraint"
+                  severity="ERROR"
+                  mode="Live"
+                  name="No Space in Person Last Name Constraint (Live Mode)"
+                  id="noSpaceInLastName"
+                  statusCode="100">
+               	<description>The name of the Person is used to reference other elements in the model, neither the first name nor the last name can have spaces.</description>
+      			<message>"Fair Constraint: {0}" Neither the first name nor the last name of a Person can have spaces. Use a hyphen instead. </message>
+      			<target class="Person">
+         			<event name="Set">
+            			<feature name="lastName"/>
+            			<feature name="firstName"/>
+       				</event>
+       				<event name="Unset">
+            			<feature name="lastName"/>
+            			<feature name="firstName"/>
+       				</event>
+      			</target>	
+            </constraint>   
+            
+            <!-- Duplicate Exhibit Animal Constraint (Batch Mode) -->
+               <constraint
+                  lang="OCL"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="Duplication Animal in Exhibite OCL Constraints"
+                  id="duplicateAnimalExhibit"
+                  statusCode="101">
+                  	<description>%animalExhibit.desc</description>
+               		<message>%animalExhibit.msg</message>
+               		<target class="Exhibit"/>
+               <![CDATA[
+               	 Exhibit.allInstances() ->select(e : Exhibit | e <> self and e.animal = self.animal) ->isEmpty()
+              	]]>
+               </constraint>
+            
+           
+           <!-- Duplicate Exhibit inAuction by same owner-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Live"
+         		name="Duplicate Exhibit in Auction Constraint (Live Mode)"
+         		id="duplicateExhibitInAuction"
+         		statusCode="102">
+      		<description>An exhibitor is constrained to selling no more than one exhibited animal in the auction.</description>
+      		<message>"Fair Constraint: {0}" An exhibitor can auction only one Animal. </message>
+      		<target class="Exhibit">
+         		<event name="Set">
+            		<feature name="inAuction"/>
+       			</event>
+       			<event name="Unset">
+            		<feature name="inAuction"/>
+       			</event>
+      		</target>
+      		   <![CDATA[
+               	 (self.inAuction = false) or Exhibit.allInstances() ->select(e : Exhibit | e <> self and e.exhibitor = self.exhibitor and e.inAuction) ->isEmpty()
+              	]]>
+   			</constraint>
+            
+            <!-- No More than two swine Exhibits by same owner-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Live"
+         		name="Too Many Swine Exhibits Constraint (Live Mode)"
+         		id="tooManySwineExhibits"
+         		statusCode="102">
+      		<description>An exhibitor is constrained from exhibiting more than two Swine.</description>
+      		<message>"Fair Constraint: {0}" An exhibitor can exhibit only two Swine. </message>
+      		<target class="Exhibit">
+         		<event name="Set">
+            		<feature name="animal"/>
+       			</event>
+       			<event name="Unset">
+            		<feature name="animal"/>
+       			</event>
+      		</target>
+      		   <![CDATA[
+               	 (self.animal.speciesCode <> 'POR') or (Exhibit.allInstances() ->select(e : Exhibit |  e.exhibitor = self.exhibitor and e.animal.speciesCode='POR' ) -> size() < 3 )
+              	]]>
+   			</constraint>
+   			
+   			  <!-- No More than two beef Exhibits by same owner-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Live"
+         		name="Too Many Beef Exhibits Constraint (Live Mode)"
+         		id="tooManyBeeefExhibits"
+         		statusCode="102">
+      		<description>An exhibitor is constrained from exhibiting more than two Beef Steers.</description>
+      		<message>"Fair Constraint: {0}" An exhibitor can exhibit only two Beef Steers. </message>
+      		<target class="Exhibit">
+         		<event name="Set">
+            		<feature name="animal"/>
+       			</event>
+       			<event name="Unset">
+            		<feature name="animal"/>
+       			</event>
+      		</target>
+      		   <![CDATA[
+               	 (self.animal.speciesCode <> 'BOV') or (Exhibit.allInstances() ->select(e : Exhibit |  e.exhibitor = self.exhibitor and e.animal.speciesCode='BOV' ) -> size() < 3 )
+              	]]>
+   			</constraint>
+   			
+   			 <!-- No More than three sheep Exhibits by same owner-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Live"
+         		name="Too Many Sheep Exhibits Constraint (Live Mode)"
+         		id="tooManySheepExhibits"
+         		statusCode="102">
+      		<description>An exhibitor is constrained from exhibiting more than three Sheep..</description>
+      		<message>"Fair Constraint: {0}" An exhibitor can exhibit only three Sheep. </message>
+      		<target class="Exhibit">
+         		<event name="Set">
+            		<feature name="animal"/>
+       			</event>
+       			<event name="Unset">
+            		<feature name="animal"/>
+       			</event>
+      		</target>
+      		   <![CDATA[
+               	 (self.animal.speciesCode <> 'OVI') or (Exhibit.allInstances() ->select(e : Exhibit |  e.exhibitor = self.exhibitor and e.animal.speciesCode='OVI' ) -> size() < 4 )
+              	]]>
+   			</constraint>
+   			
+            <!-- This constraint applies to Exhibit award-->
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.fair.validation.constraints.OnlyOneChampionConstraint"
+                  severity="ERROR"
+                  mode="Live"
+                  name="Only One Champion in Class Constraint (Live Mode)"
+                  id="singleChampionInClass"
+                  statusCode="100">
+               	<description>Only a single Grand Champion and a single Reserve Champion can be in a Class.</description>
+      			<message>"Fair Constraint: {0}" There can be only one Grand and one Reserve Champion in a Class. Remove duplicates if necessary. </message>
+      			<target class="Exhibit">
+         			<event name="Set">
+            			<feature name="award"/>
+       				</event>
+       				<event name="Unset">
+            			<feature name="award"/>
+       				</event>
+      			</target>	
+            </constraint>   
+             
+         </constraints>
+      </constraintProvider>
+      <constraintProvider
+            cache="true"
+            mode="Batch">
+         <package namespaceUri="http://www.verticon.com/tracker/0.4.2/premises"/>
+         <description>Constraints for Fair Premises resource</description>
+         <constraints categories="com.verticon.tracker.validation.catagory.ocl/com.verticon.tracker.fair.premises.validation">
+            
+            <!-- Specific VCF: An animal must have one and only one FairRegistration Event 
+            <constraint
+                  lang="OCL"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="%fairRegistrationAnimal.name"
+                  id="fairRegistrationAnimal"
+                  statusCode="101">
+               <description>%fairRegistrationAnimal.desc</description>
+               	<message>%fairRegistrationAnimal.msg</message>
+               	<target class="Animal"/>
+               <![CDATA[
+                 Event.allInstances()->select(e : Event | e.oclIsTypeOf(FairRegistration) and e.id=self.id)->size()=1
+               ]]>
+            </constraint>
+            
+            <constraint
+                  lang="OCL"
+                  severity="WARNING"
+                  mode="Batch"
+                  name="%fairRegistrationEvent.name"
+                  id="fairRegistrationEvent"
+                  statusCode="101">
+               <description>%fairRegistrationEvent.desc</description>
+               	<message>%fairRegistrationEvent.msg</message>
+               	<target class="FairRegistration"/>
+               <![CDATA[
+                 Event.allInstances() ->select(e : Event | e <> self and e.eventCode = self.eventCode and e.id = self.id) ->isEmpty()
+               ]]>
+            </constraint>
+            -->
+            
+            <!-- Specific VCF: An animal must have at least one moveIn event -->
+            <constraint
+                  lang="OCL"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="%moveInAnimal.name"
+                  id="moveInAnimal"
+                  statusCode="101">
+               <description>%moveInAnimal.desc</description>
+               	<message>%moveInAnimal.msg</message>
+               	<target class="Animal"/>
+               <![CDATA[
+                 Event.allInstances()->select(e : Event | e.oclIsTypeOf(MovedIn) and e.id=self.id)->size()>0
+               ]]>
+            </constraint>
+            
+            <!-- Specific VCF: An animal must have at least one weighIn event -->
+            <!-- This constraint applies to Animal -->
+            <constraint
+                  lang="OCL"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="%weighInAnimal.name"
+                  id="weighInAnimal"
+                  statusCode="101">
+               <description>%weighInAnimal.desc</description>
+               	<message>%weighInAnimal.msg</message>
+               	<target class="Animal"/>
+               <![CDATA[
+                 Event.allInstances()->select(e : Event | e.oclIsTypeOf(WeighIn) and e.id=self.id)->size()>0
+               ]]>
+            </constraint>
+            
+            
+            <!-- Specific VCF: An animal should have at least one moveOut event
+            TODO Change to: An animal should have a moveOut for every moveIn event -->
+            <!-- This constraint applies to Animal -->
+            <constraint
+                  lang="OCL"
+                  severity="WARNING"
+                  mode="Batch"
+                  name="%moveOutAnimal.name"
+                  id="moveOutAnimal"
+                  statusCode="101">
+               <description>%moveOutAnimal.desc</description>
+               	<message>%moveOutAnimal.msg</message>
+               	<target class="Animal"/>
+               <![CDATA[
+                 Event.allInstances()->select(e : Event | e.oclIsTypeOf(MovedOut) and e.id=self.id)->size()>0
+               ]]>
+            </constraint>
+            
+            
+            <!-- This constraint applies to Registered Animals-->
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.fair.validation.constraints.AllAnimalsRegisteredConstraint"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="Animals must be registered in the Fair"
+                  id="animalNotRegistered"
+                  statusCode="102">
+               	<description>Animals in a Fair Premises must be registered in at least one exhibit at the Fair.</description>
+      			<message>"Fair Constraint: {0}" Animal must be registered in the Fair. </message>
+      			<target class="Animal"/>
+            </constraint> 
+            
+            <!-- This constraint applies to Registered Animal MoveIn Events to People with Pins-->
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.fair.validation.constraints.AnimalsRegisteredWithPinsConstraint"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="Animals must have the same moveIn and moveOut pins as Exhibitor"
+                  id="animalMovePinsNotSet"
+                  statusCode="103">
+               	<description>Animals in a Fair and registered to a Person with a PIN, must have at least one movedIn event and at least one movedOut event with pin attributes set to that PIN.</description>
+      			<message>"Fair Constraint: {0}" Animal must have at least one MovedIn sourcePin and at least one MovedOut destinationPin set to premisesIdNumber {1}. </message>
+      			<target class="Animal"/>
+            </constraint> 
+            
+         </constraints>
+         
+      </constraintProvider>
+   </extension>
+   
+   
+   <extension point="org.eclipse.emf.validation.constraintBindings">
+      <!-- Specify the context using the PropertyTester registered by
+       the com.verticon.tracker.validation.adapter plugin -->
+      <clientContext id="com.verticon.tracker.fair.fair.validation.context">
+         <enablement>
+            <and>
+               <instanceof value="org.eclipse.emf.ecore.EObject"/>
+               <test
+                  property="com.verticon.tracker.validation.adapter.ePackage"
+                  value="http://www.verticon.com/tracker.fair/0.2.1/fair"/>
+            </and>
+         </enablement>
+      </clientContext>
+      <clientContext id="com.verticon.tracker.fair.premises.validation.context">
+         <enablement>
+            <and>
+               <instanceof value="org.eclipse.emf.ecore.EObject"/>
+               <test
+                  property="com.verticon.tracker.validation.adapter.ePackage"
+                  value="http://www.verticon.com/tracker/0.4.2/premises"/>
+            </and>
+         </enablement>
+      </clientContext>
+       <!-- Bind the above context with the contraints catagory -->
+      <binding
+         context="com.verticon.tracker.fair.fair.validation.context"
+         category="com.verticon.tracker.validation.catagory.ocl/com.verticon.tracker.fair.fair.validation"/>
+      <binding
+         context="com.verticon.tracker.fair.premises.validation.context"
+         category="com.verticon.tracker.validation.catagory.ocl/com.verticon.tracker.fair.premises.validation"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="com.verticon.tracker.fair.validation.Startup"></startup>
+   </extension>
+</plugin>

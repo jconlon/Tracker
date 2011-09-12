@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_isw0ICrWEd6vB9uew6t-sA" name="Collaboration">
+  <elementImport xmi:id="_ityu4CrWEd6vB9uew6t-sA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_ityu4SrWEd6vB9uew6t-sA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_ityu4irWEd6vB9uew6t-sA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_ityu4yrWEd6vB9uew6t-sA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_-8J2gCrgEd6vB9uew6t-sA" name="Operator"/>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_AvpNYCrhEd6vB9uew6t-sA" name="Operator"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_IHlEQCrhEd6vB9uew6t-sA" name="Tracker Desktop" useCase="_9ZBk8CriEd6vB9uew6t-sA _IYnfACrjEd6vB9uew6t-sA _R1jTgCrjEd6vB9uew6t-sA">
+    <ownedUseCase xmi:id="_9ZBk8CriEd6vB9uew6t-sA" name="MovedIn Animal" subject="_IHlEQCrhEd6vB9uew6t-sA">
+      <include xmi:id="_1Eq3MCrkEd6vB9uew6t-sA" addition="_AheZECriEd6vB9uew6t-sA"/>
+      <extend xmi:id="_swf3ACrjEd6vB9uew6t-sA" extendedCase="_R1jTgCrjEd6vB9uew6t-sA"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_IYnfACrjEd6vB9uew6t-sA" name="MovedOut Event" subject="_IHlEQCrhEd6vB9uew6t-sA">
+      <include xmi:id="_znRFECrkEd6vB9uew6t-sA" addition="_k8ahkCrhEd6vB9uew6t-sA"/>
+      <extend xmi:id="_fxWgACrjEd6vB9uew6t-sA" extendedCase="_R1jTgCrjEd6vB9uew6t-sA"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_R1jTgCrjEd6vB9uew6t-sA" name="Record Move Event" subject="_IHlEQCrhEd6vB9uew6t-sA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_PNO4UCrhEd6vB9uew6t-sA" name="Tracker Collaboration Service Provider" useCase="_k8ahkCrhEd6vB9uew6t-sA _3kEZMCrhEd6vB9uew6t-sA _AheZECriEd6vB9uew6t-sA">
+    <ownedUseCase xmi:id="_k8ahkCrhEd6vB9uew6t-sA" name="Publish" subject="_PNO4UCrhEd6vB9uew6t-sA">
+      <include xmi:id="_pdbR0CrlEd6vB9uew6t-sA" addition="_3kEZMCrhEd6vB9uew6t-sA"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_3kEZMCrhEd6vB9uew6t-sA" name="Authorize" subject="_PNO4UCrhEd6vB9uew6t-sA"/>
+    <ownedUseCase xmi:id="_AheZECriEd6vB9uew6t-sA" name="Request" subject="_PNO4UCrhEd6vB9uew6t-sA">
+      <include xmi:id="_sPYcECrlEd6vB9uew6t-sA" addition="_3kEZMCrhEd6vB9uew6t-sA"/>
+    </ownedUseCase>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_YKoRICrhEd6vB9uew6t-sA" name="Internet File Transfer Technologies" useCase="_TlQMACriEd6vB9uew6t-sA">
+    <ownedUseCase xmi:id="_TlQMACriEd6vB9uew6t-sA" name="Transfer Document" subject="_YKoRICrhEd6vB9uew6t-sA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_8oBJUCrjEd6vB9uew6t-sA" name="Tracker Desktop" useCase="_8oBJUSrjEd6vB9uew6t-sA _8oBJUyrjEd6vB9uew6t-sA _8oBJVSrjEd6vB9uew6t-sA">
+    <ownedUseCase xmi:id="_8oBJUSrjEd6vB9uew6t-sA" name="MovedIn Animal" subject="_8oBJUCrjEd6vB9uew6t-sA">
+      <include xmi:id="_5DSB0CrkEd6vB9uew6t-sA" addition="_AheZECriEd6vB9uew6t-sA"/>
+      <extend xmi:id="_8oBJUirjEd6vB9uew6t-sA" extendedCase="_8oBJVSrjEd6vB9uew6t-sA"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_8oBJUyrjEd6vB9uew6t-sA" name="MovedOut Event" subject="_8oBJUCrjEd6vB9uew6t-sA">
+      <include xmi:id="_xt2FUCrkEd6vB9uew6t-sA" addition="_k8ahkCrhEd6vB9uew6t-sA"/>
+      <extend xmi:id="_8oBJVCrjEd6vB9uew6t-sA" extendedCase="_8oBJVSrjEd6vB9uew6t-sA"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_8oBJVSrjEd6vB9uew6t-sA" name="Record Move Event" subject="_8oBJUCrjEd6vB9uew6t-sA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_lBKXUCrkEd6vB9uew6t-sA" memberEnd="_lBK-YCrkEd6vB9uew6t-sA _lBLlcCrkEd6vB9uew6t-sA" navigableOwnedEnd="_lBK-YCrkEd6vB9uew6t-sA _lBLlcCrkEd6vB9uew6t-sA">
+    <ownedEnd xmi:id="_lBK-YCrkEd6vB9uew6t-sA" name="src" type="_-8J2gCrgEd6vB9uew6t-sA" association="_lBKXUCrkEd6vB9uew6t-sA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lBK-YirkEd6vB9uew6t-sA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lBK-YSrkEd6vB9uew6t-sA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_lBLlcCrkEd6vB9uew6t-sA" name="dst" type="_TlQMACriEd6vB9uew6t-sA" association="_lBKXUCrkEd6vB9uew6t-sA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lBLlcirkEd6vB9uew6t-sA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lBLlcSrkEd6vB9uew6t-sA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_mJ12oCrkEd6vB9uew6t-sA" memberEnd="_mJ12oSrkEd6vB9uew6t-sA _mJ2dsirkEd6vB9uew6t-sA" navigableOwnedEnd="_mJ12oSrkEd6vB9uew6t-sA _mJ2dsirkEd6vB9uew6t-sA">
+    <ownedEnd xmi:id="_mJ12oSrkEd6vB9uew6t-sA" name="src" type="_AvpNYCrhEd6vB9uew6t-sA" association="_mJ12oCrkEd6vB9uew6t-sA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_mJ2dsSrkEd6vB9uew6t-sA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mJ2dsCrkEd6vB9uew6t-sA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_mJ2dsirkEd6vB9uew6t-sA" name="dst" type="_TlQMACriEd6vB9uew6t-sA" association="_mJ12oCrkEd6vB9uew6t-sA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_mJ3EwSrkEd6vB9uew6t-sA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mJ3EwCrkEd6vB9uew6t-sA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_n_kCICrkEd6vB9uew6t-sA" memberEnd="_n_kpMCrkEd6vB9uew6t-sA _n_lQQCrkEd6vB9uew6t-sA" navigableOwnedEnd="_n_kpMCrkEd6vB9uew6t-sA _n_lQQCrkEd6vB9uew6t-sA">
+    <ownedEnd xmi:id="_n_kpMCrkEd6vB9uew6t-sA" name="src" type="_AvpNYCrhEd6vB9uew6t-sA" association="_n_kCICrkEd6vB9uew6t-sA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_n_kpMirkEd6vB9uew6t-sA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_n_kpMSrkEd6vB9uew6t-sA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_n_lQQCrkEd6vB9uew6t-sA" name="dst" type="_R1jTgCrjEd6vB9uew6t-sA" association="_n_kCICrkEd6vB9uew6t-sA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_n_lQQirkEd6vB9uew6t-sA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_n_lQQSrkEd6vB9uew6t-sA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_qjf-gCrkEd6vB9uew6t-sA" memberEnd="_qjglkCrkEd6vB9uew6t-sA _qjhMoSrkEd6vB9uew6t-sA" navigableOwnedEnd="_qjglkCrkEd6vB9uew6t-sA _qjhMoSrkEd6vB9uew6t-sA">
+    <ownedEnd xmi:id="_qjglkCrkEd6vB9uew6t-sA" name="src" type="_-8J2gCrgEd6vB9uew6t-sA" association="_qjf-gCrkEd6vB9uew6t-sA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qjhMoCrkEd6vB9uew6t-sA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qjglkSrkEd6vB9uew6t-sA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_qjhMoSrkEd6vB9uew6t-sA" name="dst" type="_8oBJVSrjEd6vB9uew6t-sA" association="_qjf-gCrkEd6vB9uew6t-sA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qjhMoyrkEd6vB9uew6t-sA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qjhMoirkEd6vB9uew6t-sA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Package>

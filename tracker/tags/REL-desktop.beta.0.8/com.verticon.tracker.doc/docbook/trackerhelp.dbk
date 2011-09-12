@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" 
+ "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book id="Tracker" vendor="Verticon, Inc." label="Tracker BI Toolkit and Features User Guide"
+	status="Draft" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+	<xi:include href="bookinfo/bookinfo.xml"/>
+	<xi:include href="preface/preface.xml"/>
+	<xi:include href="colophon/colophon.xml"/>
+	<xi:include href="overview/overview.xml"/>
+	<xi:include href="overview/usecases.xml"/>
+	<xi:include href="product/product.xml"/>
+	
+	<xi:include href="editors/editors.xml"/>
+	
+	<xi:include href="features/features.xml"/>
+	<xi:include href="appendix/fdl.xml"/>
+	<xi:include href="appendix/eclipseUserAgreement.xml"/>
+	<!--
+	
+	<xi:include href="appendix/gpl.xml"/>
+	-->
+	
+	<!-- TODO Add a chapter on the different kinds of products 
+	
+	-->
+</book>

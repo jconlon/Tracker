@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?><book xmlns:xi="http://www.w3.org/2001/XInclude" id="AgricultureEditorFeature" label="Fair User Guide" status="Draft" vendor="Verticon, Inc.">
+
+	<chapter xml:base="fairEditor/fairEditor.xml">
+  <?dbhtml filename="fairEditor/fairEditor.html" ?>
+  <title>Fair Editor</title>
+  <section id="overviewFairEditor">
+    <title>Overview</title>
+    <section id="overviewFairEditorWhatis">
+      <title>What is the Fair Editor?</title>
+      <para>The Fair Editor is a comprehensive open desktop solution for documenting, managing, reporting and
+      exchanging information associated with livestock animal fairs and expositions.  The Fair Editor is used for
+      creating and editing documents that conform to the Fair information (data) model. Fair documents extend
+      and compliment livestock animal history information held in Premises documents with 
+      fair exhibits, exhibitors, youth clubs, awards, and exhibitor parents information.</para>
+    </section>
+    <section id="overviewFairEditorGoals">
+      <title>Project Goals</title>
+      <para>Livestock fairs and animal expositions are special kinds of livestock premises where the 
+      information associated with people, clubs, animals, exhibits, contest activities, and awards are recorded and 
+      managed.  The goal of the Tracker Fair Editor is to create a comprehensive desktop based software application 
+      for Livestock fairs and expositions. An application that:
+      <itemizedlist>
+      <listitem><para>
+      imports external data from diverse sources</para>
+      </listitem>
+      <listitem><para>
+      adds interactive editors and views to record and visualize people and exhibit information
+      </para></listitem>
+      <listitem><para>
+      acts as a data source to leverage powerful reporting tools for creating easy to understand reports
+      </para></listitem>
+      </itemizedlist>
+      
+      </para>
+       <para>Extending the Tracker Premises livestock suite of tools to address animal livestock 
+       fairs and expositions is the primary goal of the Fair Editor project.</para>
+      <para>
+        The Fair Editor provide models, editors, utilities, views and services for the 
+        creation and management of documents that:
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>Offer bulk data input of exhibitor names, contacts, clubs and parents information</para>
+          </listitem>
+          <listitem>
+            <para>Leverage full capabilities of the Tracker Premises Editor for managing animal life data and event histories
+            for all animals that move in and out of the fair</para>
+          </listitem>
+          <listitem>
+            <para>Model and visualize contact information for people associated with the fair, including 
+            exhibitors, supervisors, judges and parents of the exhibitors</para>
+          </listitem>
+          <listitem>
+            <para>Model and visualize animal exhibits as the principle relationship between livestock animal life data, animal history, people contact information,
+            contests and awards</para>
+          </listitem>
+          <listitem>
+            <para>Record check-in of livestock animals from source livestock premises for early weigh in and at fair time</para>
+          </listitem>
+          <listitem>
+            <para>Record weight and full livestock animal <emphasis>life data</emphasis></para>
+          </listitem>
+          <listitem>
+            <para>Offer comprehensive electronic interfacing of weight scales and RFID readers for efficient 
+            keyboard free inputing of data</para>
+          </listitem>
+          <listitem>
+            <para>Dynamically calculate average daily gains of animal weights based on previous check-in weights</para>
+          </listitem>
+          <listitem>
+            <para>Locate Animals that have moved to exhibits within sub-locations of a fair premises</para>
+          </listitem>
+          <listitem>
+            <para>Resolve Animal locations that have moved to another premises after check-in or at the end of the fair.
+            </para>
+          </listitem>
+          <listitem>
+            <para>Assign animal exhibit positions based on visual sighting records or data inputs from industry standard GPS 
+            devices</para>
+          </listitem>
+          <listitem>
+            <para>Act as a data source for a full featured Business Intelligence Reporting Tool <acronym>BIRT</acronym> 
+            for batch and ad-hoc report generation 
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+    </section>
+    <section id="overviewFairFunctional">
+      <title>Functional Overview</title>
+      <para>The Fair Editor is used to create documents that manage information for livestock fairs and expositions.</para>
+      <note>
+        <para>The Fair Editor requires installation of the Premises Editor Feature.</para>
+        <para>If location visualization and location resolution services are desired, the Agriculture and Geography 
+        Features may be installed.</para> 
+      </note>
+       <para>
+      The Fair Editor extends the Tracker Premises Editor by integrating a new fair specific data model, 
+      views for managing people and exhibits, editors for creating documents, and utilities for importing 
+      people, youth club and exhibit information.</para>
+      <para>The Tracker Editor offers:
+        <itemizedlist mark="bullet">
+         <listitem>
+            <para>
+              Support for pre-fair preparation:
+              <itemizedlist>
+               <listitem>
+            		<para>Utilities for importing tag numbers from external files</para>
+          		</listitem>
+          		<listitem>
+           			 <para>Utilities for importing people contact information from external files</para>
+          		</listitem>
+              </itemizedlist>
+            </para>
+          </listitem>
+          
+          <listitem>
+            <para>
+              Support for pre-fair weigh-in:
+              <itemizedlist>
+                <listitem>
+                  <para>Recording exhibitor information</para>
+                </listitem>
+                <listitem>
+                  <para>Recording life data and the source premises of animals</para>
+                </listitem>
+                 <listitem>
+                  <para>Manual or electronic recording animal weights</para>
+                </listitem>
+                 <listitem>
+                  <para>Registering exhibitors for each animal</para>
+                </listitem>
+                <listitem>
+                  <para>Printing registration summary reports for exhibitors</para>
+                </listitem>
+              </itemizedlist>
+            </para>
+          </listitem>
+           <listitem>
+            <para>
+              Support for check in fair use-cases:
+              <itemizedlist>
+                <listitem>
+                  <para>Simple tag scan to check-in animal</para>
+                </listitem>
+                <listitem>
+                  <para>Manual or electronic recording animal fair registration weights</para>
+                </listitem>
+                 <listitem>
+                  <para>Automatic calculation of average daily weight gain based on pre-fair weigh-in</para>
+                </listitem>
+                <listitem>
+                  <para>Assignment or reassignment exhibits to appropriate lots and/or classes</para>
+                </listitem>
+              </itemizedlist>
+            </para>
+          </listitem>
+           <listitem>
+                  <para>Support for fair judging and awards</para>
+           </listitem>
+           <listitem>
+                  <para>Support for fair check out</para>
+           </listitem>
+        </itemizedlist>
+      </para>
+    </section>
+  </section>
+  
+  <section id="fairEditor_useCase">
+  <?dbhtml filename="usecase/fairEditor_useCase.html" ?>
+    <title>Fair Editor Overview of Use Cases</title>
+    <para>To best depict what the Fair Editor can do for Tracker users, the following figure presents a overview of
+    the <emphasis>Use-Cases</emphasis> that can be performed. </para>
+    <para>
+    <xref linkend="fig_FairEditorUseCases"/> shows an overview of the usage 
+    requirements for the Fair Editor.</para>
+    <figure float="0" id="fig_FairEditorUseCases">
+      <title>Fair Editor Overview</title>
+      <mediaobject><imageobject><imagedata align="center" fileref="../images/useCases/editor.png"/></imageobject></mediaobject>
+    </figure>
+    <note><para>Typically one Fair document and a referenced Premises document are the only two documents necessary for 
+    recording all uses-cases given for a fair.  Youth club and person contacts can easily be copied and pasted from one 
+    year to the next.</para></note>
+  </section>
+  
+  <section id="preFair_useCase">
+  <?dbhtml filename="usecase/preFair_useCase.html" ?>
+    <title>Prefair Use Cases</title>
+    <para>Preparing for the fair is a simple matter of pre-allocating groups of tags to certain animal types,
+    importing any people contact information that may already exist and setting up the types of 
+    contests that will make up the fair.</para>
+    <para>
+    <xref linkend="fig_PreFairUseCases"/> shows pre-fair usage 
+    requirements for the Fair Editor.</para>
+    <figure float="0" id="fig_PreFairUseCases">
+      <title>Preparing for the fair</title>
+      <mediaobject><imageobject><imagedata align="center" fileref="../images/useCases/preFairUseCases.png"/></imageobject></mediaobject>
+    </figure>
+  </section>
+  
+   <section id="weighIn_useCase">
+  <?dbhtml filename="usecase/weighIn_useCase.html" ?>
+    <title>WeighIn Use Cases</title>
+    <para>Many Fairs hold a early season weigh-in of animals in order to show an average daily weight gain.</para>
+    <para> 
+    <xref linkend="fig_WeighInUseCases"/> shows early weigh-in usage 
+    requirements for the Fair Editor.</para>
+    <figure float="0" id="fig_WeighInUseCases">
+      <title>Animal Weigh-In</title>
+      <mediaobject><imageobject><imagedata align="center" fileref="../images/useCases/weighIn.png"/></imageobject></mediaobject>
+    </figure>
+  </section>
+  
+   <section id="fairCheckIn_useCase">
+  <?dbhtml filename="usecase/fairCheckIn_useCase.html" ?>
+    <title>Check-In Use Cases</title>
+    <para>Checking in animals to the fair is often a two-fold process.  First there is the veterinarian check to 
+    insure that the animal is healthy and has all required papers. Next the animal is checked in.</para>
+    <para>
+    <xref linkend="fig_FairCheckInUseCases"/> shows early check-in usage 
+    requirements for the Fair Editor.</para>
+    <figure float="0" id="fig_FairCheckInUseCases">
+      <title>Animal Check-In</title>
+      <mediaobject><imageobject><imagedata align="center" fileref="../images/useCases/fairCheckIn.png"/></imageobject></mediaobject>
+    </figure>
+  </section>
+  
+  <section id="fairDocuments">
+   <?dbhtml filename="model/fairEditorModel_FairDocuments.html" ?>
+    <title>Fair Documents</title>
+    <para>The Fair Editor enables users to create, transform and 
+    edit documents referencing animals, exhibts and people within a Premises.</para>
+     <para>Fair document files utilize a <code>.fair</code> file extension to 
+    distinguish them from other types of files.</para>
+  </section>
+  <section id="fairDataModel">
+    <?dbhtml filename="model/fairEditorModel_agricultureDataModel.html" ?>
+    <title>Fair Data Model</title>
+    <para>Because all user activity centers around the creation and 
+    manipulation of <emphasis>Fair Documents</emphasis>, 
+    understanding the structure (called the <glossterm>data 
+    model</glossterm>) of Fair documents is the easiest way to 
+    learn to use the information management facilities of the Fair 
+    Editor.</para>
+    <section id="fairDataModel_coreElements">
+      <title>Fair Data Model Core Elements</title>
+      <para>All Fair documents conform to a very simple structure called the
+      <emphasis>Fair Data Model</emphasis>. In the Fair Data 
+      Model, a single Fair element is given a name and a reference to a Tracker Premises file.
+	  Within this Fair element Youth Clubs, People, and Divisions of Exhibits are created by the operator.</para>
+      <para>Core elements of the Fair Data Model are shown in 
+      <xref linkend="fig_FairCoreDataModel"/>.</para>
+      <figure float="0" id="fig_FairCoreDataModel">
+        <title>Fair Core Data Model Elements</title>
+        <mediaobject><imageobject><imagedata align="center" fileref="../images/model/fairCore.png"/></imageobject></mediaobject>
+      </figure>
+      <para>
+        <orderedlist continuation="restarts" inheritnum="ignore" numeration="loweralpha">
+          <listitem>
+            <para>The core elements of the Core Model are depicted 
+            as rectangles in the figure.</para>
+          </listitem>
+          <listitem>
+            <para>The notation within the elements are the attributes 
+            of the element.</para>
+          </listitem>
+          <listitem>
+            <para>The notation between the elements are the 
+            relationships of the elements.</para>
+          </listitem>
+        </orderedlist>
+      </para>
+      <para>
+        The following table offers a text explanation of the Element 
+        Relationships.
+        <table frame="all">
+          <title>Core Elements of the Premises Model</title>
+          <tgroup align="left" cols="2" colsep="1" rowsep="1">
+            <colspec colname="c1"/>
+            <colspec colname="c2"/>
+            <thead>
+              <row>
+                <entry>Element Name</entry>
+                <entry>Relationship to other Elements</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>Fair</entry>
+                <entry>There is one Fair element. It acts as the first or root element of the document</entry>
+              </row>
+              <row>
+                <entry>name attribute</entry>
+                <entry>A Fair has a name that is assigned by the operator</entry>
+              </row>
+              <row>
+                <entry>premises attribute</entry>
+                <entry>A Fair has a premises attribute to reference the Premises document that will contain all the animal information</entry>
+              </row>
+               <row>
+                <entry>Person Elements</entry>
+                <entry>Fair has one or more person elements that are used to document people contact information. A fair document can specify 
+                people as exhibitors, parents, supervisors and judges. 
+                </entry>
+              </row>
+              <row>
+                <entry>Youth Club Elements</entry>
+                <entry>Exhibitors can be assigned to groups called Youth Clubs. </entry>
+              </row>
+              <row>
+                <entry>Exhibits</entry>
+                <entry>Exhibits are assigned within a hierarchy of Divisions, Departments, Classes and Lot containers. See the   
+      				<xref linkend="fig_ExhibitHierarchy"/> for the diagram showing how the hierarchy contains multiple child elements.</entry>
+              </row>
+              
+            </tbody>
+          </tgroup>
+        </table>
+      </para>
+      
+      
+      <figure float="0" id="fig_ExhibitHierarchy">
+			<title>Hierarchy of Exhibits</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/model/exhibitHierarchy.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+      
+      
+    </section>
+  </section>
+  <section id="editingFairDocuments">
+    	<?dbhtml filename="editingFairDocuments/editingFairDocuments.html" ?>
+		<title>Editing Fair Documents</title>
+		<section id="creatingFairDocuments">
+			<title>Creating a new Fair Document</title>
+			<para>
+			To create a new Fair document. Go to the File menu and launch a 
+			<emphasis>New Fair Document Wizard</emphasis> by selecting the menu items:<code>File|New|Fair Document</code>.
+			</para>
+
+		<para>Follow the instructions to choose a project, folder and a name for the document.
+		Select <code>Fair</code> as the model object and press <code>Finish</code> to create the document. 
+			
+		</para>
+       <figure float="0" id="fig_selectFairModelObject">
+			<title>New Fair Document Wizard Model Object Prompt</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/editing/selectModelObject.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		</section>
+		
+		<section id="loadingPremisesDocumentResources">
+		<?dbhtml filename="editingFairDocuments/loadingFairDocuments.html" ?>
+		<title>Loading Additional Resources into the Document</title>
+		 <note>
+			<para>
+				Since the Fair document references the Premises element of a Tracker Premises document, 
+				a Premises document resources must already exist in the workspace.  If it does not, create
+				a empty Premises document first. <emphasis>You can always add data to the referenced 
+				Premises document at the same time you edit the Fair document.</emphasis>
+			</para>
+		 </note>
+			<para>
+			To reference a <code>Premises</code> element from a Fair document, a Premises document must first be loaded 
+			into the Fair document as a resource. 
+			To load a Premises document as a resource place the mouse cursor on the root element in the Fair document, 
+			right click, and from the pull down menu choose <code>Load Resorce...</code>
+			</para>
+			<figure float="0" id="fig_loadFairResource">
+			<title>Load Resource Dialog</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/editing/loadResource.png"/>
+				</imageobject>
+			</mediaobject>
+			</figure>
+			<para>From the dialog choose the Premises document that you wish to load.</para>
+			<figure float="0" id="fig_loadedFairResource">
+			<title>Fair Project with Loaded Resources</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/editing/loadedResources.png"/>
+				</imageobject>
+			</mediaobject>
+			</figure>
+	    <para>When Premises documents are loaded as a resource in a Fair document, the editor choice boxes 
+	    associated with the <code>Premises</code> attribute of the <code>Fair</code> element will be shown
+	    as a choice for user selection. 
+	   </para>
+	 </section>
+
+     <section id="openingFairDocument">
+	    <?dbhtml filename="editingFairDocuments/openingFairDocuments.html" ?>
+	    <title>Opening a Fair Document</title>
+	    <para>For high throughput during fair weigh-ins and check-ins the Fair Transaction Editor can be used to
+	    edit fair documents.  The Fair Transaction Editor supports the Tracker 
+	    <emphasis>Transaction</emphasis> processing facility for electronic input of data originating from
+	    network connected sensors and RFID readers.
+	   </para>
+	   <para>To open a Fair document with the Fair Transaction Editor, right click on the Fair document and 
+	   select the pull down menu item <code>Open With</code>.</para>
+	   <figure float="0" id="fig_openingFairDocuments">
+			<title>Opening a Fair Transaction Editor</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/editing/fairTransactionEditor.png"/>
+				</imageobject>
+			</mediaobject>
+	   </figure>
+	   <note><para>When not working with RFID readers or sensors, it is best to use the basic Fair 
+	   Editor.</para></note>
+	    </section>
+
+	</section>
+	
+  
+</chapter>
+	</book>

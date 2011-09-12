@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: iRouter Core Utilities Tests
+Bundle-SymbolicName: com.verticon.tracker.irouter.common.tests
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Fragment-Host: com.verticon.tracker.irouter.common;bundle-version="0.1.0.qualifier"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.junit,
+ org.slf4j;version="1.5.11"

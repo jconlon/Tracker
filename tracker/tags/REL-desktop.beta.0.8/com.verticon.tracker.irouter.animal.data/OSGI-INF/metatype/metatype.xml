@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="Animal Life Data Gateway" id="com.verticon.tracker.irouter.animal.data"
+       description="Gateway for producing a list of animal life data records extracted from a specified Premises model. Fields within each record can be ordered, values can be transformed, and static values can be added." 
+       >
+   
+      <AD name="Wiring group name"  id="tracker.wiring.group.name" 
+    	required="true" 
+    	type="String" 
+    	default="one"
+        description="Name of the group of components that will be wired together."/>
+    
+    
+    <AD name="Connection uri" id="connection.uri" 
+     	type="String" 
+     	required="true" 
+        default="event://com/verticon/tracker/reader" 
+        description="Identifier to associate this service with a premises data model."/> 
+        
+    <AD name="Animal life data fields" id="animal.life.data.fields" type="String" 
+        cardinality="15" 
+        required="false" 
+        description="Selected attributes of the animal premises model to include as record fields. If none are configured, all attributes will be extraced.">
+        <!--  
+		birthDate: Fri May 16 17:00:01 CDT 2008
+		sex: Male
+		species: Bovine (Bison and Cattle)
+		breed: DJ
+		sexCode: M
+		speciesCode: BOV
+		id: 840456789012341
+		comments: Old Bully
+		lastEventDateTime: Fri Jul 16 17:42:01 CDT 2010
+		weight: 574.0
+		weightGainPerDay: 3.791208791208791
+		type: BovineBeef
+		visualID: null
+		ageInDays: 915
+		alternativeID: null
+		-->
+    	<Option label="Electronic ID tag" value="id"/>
+		<Option label="Sex" value="sex"/>
+		<Option label="Sex Code" value="sexCode"/>
+		<Option label="Species" value="species"/>
+		<Option label="Species Code" value="speciesCode"/>
+		<Option label="Visual ID tag" value="visualID"/>
+		<Option label="Type of animal" value="type"/>
+		<Option label="Alternate ID" value="alternativeID"/>
+		<Option label="Breed" value="breed"/>
+		<Option label="Last recorded weight" value="weight"/>
+		<Option label="Last calculated weight gain" value="weightGainPerDay"/>
+		<Option label="Time of last recorded event" value="lastEventDateTime"/>
+		<Option label="Date of Birth" value="birthDate"/>
+		<Option label="Current age in days" value="ageInDays"/>
+		<Option label="Comments" value="comments"/>
+	</AD>
+	
+	<AD name="Data value transformer" id="animal.life.data.mapping" type="String" 
+        cardinality="100" 
+        required="false" 
+        description=
+        "Optional transformer of animal attribute values to output field valus. Each entry contains an attribute name, a value to map, and an output value each separated by a | character. To add static values to each record use the attribute name STATIC, a integer position, and the static value. For example STATIC|3|HelloWorld will add the text HelloWorld to position 3 in the record. "
+     />
+    	
+	<AD name="Producer scope" id="wireadmin.producer.scope" type="String"
+		cardinality="1" 
+		description="The scope to send the extracted animal life data records. (Use full scope names)" />
+		
+	<AD name="Refresh timer" id="refresh.seconds" 
+    	type="Integer"
+    	required="false" 
+        description="Time to wait in seconds before retrieving new data from the premises model."
+        default="60"/> 
+        
+        
+	<AD name="Monitor node label" id="tracker.monitor.label" 
+    	type="String"
+    	required="false" 
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="Animal Data Gateway"/> 
+        
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.animal.data" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.animal.data"/>
+  </Designate>
+  
+  
+</metatype:MetaData>

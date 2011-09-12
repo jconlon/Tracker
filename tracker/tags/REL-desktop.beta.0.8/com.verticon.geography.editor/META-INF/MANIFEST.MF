@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Geography
+Bundle-SymbolicName: com.verticon.geography.editor
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

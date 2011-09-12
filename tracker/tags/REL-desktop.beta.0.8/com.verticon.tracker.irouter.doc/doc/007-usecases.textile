@@ -1,0 +1,73 @@
+h1. Use Cases
+
+The following are some example use cases. These are only examples are in no way the only use cases possible, as the iRouter components can be mixed and matched to create many other custom configurations.  Also note that the iRouter can run multiple wiring groups. This means that single or multiple instances of these use cases can be combined in one configuration and  all run at the same time.
+
+h2. Premises Desktop Integration with Sensors 
+
+h3. Intention
+
+# __Record animal weight measurement events from a TruTest scale.__
+# __Record measurement events sent to an operator running a Tracker Desktop transaction editing session.__
+# __Use one or more RFID readers to identify the animal EID tags.__
+
+h3. Monitor View
+
+!images/integrated-usecase.png!
+
+__iRouter monitor view image capture of an integrated Premises Desktop__
+
+The above is the iRouter monitor view of a TruTest scale head integrated with user managed RFID readers within a Tracker Desktop transaction processing environment.  
+
+h3. Configuration
+
+The configuration includes:
+
+* A TruTest proxy component for connecting to an external TruTest sensor/actuator _(A livestock weighing scale head with life data synchronization, eid display, and key entry)_
+* A Life Data gateway component for synchronizing data from a specified Tracker Desktop Premises document to the TruTest scalehead.
+* A EID gateway component for receiving Electronic Identification (EID) numbers from Tracker Desktop user managed RFID readers.
+* A TruTest EID adapter that converts EID numbers to TruTest protocol commands.
+* A Measurement gateway component for sending completed TruTest Livestock weight measurement transactions to the active Tracker Desktop transaction editor session.
+
+h3. Scenario
+
+As the configuration services activate, the current animal life data will be extracted from the specified Animal Premises document and loaded into the TruTest scale head.   Operators will use one or more RFID readers to read animal EID tags as the animal enter the weight stations. As a result the EID numbers will show up on the TruTest indicator.  Animals will be weighed with the operator terminating the weight transaction with a press of the enter key.  The final result of this transaction will be sent to active transaction session on the Tracker Desktop as a weight measurement event.  This event along with any other events assigned to the Tag ID reader will be added to the document and  will be seen by the Desktop operator as a new time stamped weight measurement event arriving in the Event View.
+
+h2. Headless Recording of Animal and Blood Weights to a Log File
+
+h3. Intention
+
+# __Log aggregated animal weight and blood weight measurement events from a TruTest scale and a Mettler laboratory balance.__
+# __Show blood weight target and dynamic readings on the TruTest scale indicator.__
+# __Send TruTest alarms to the operator when target blood weight is approached.__
+# __Use a headless appliance.__
+
+h3. Monitor View
+
+!images/businessLogic-usecase.png!
+
+__iRouter monitor view image capture of an integrated multi-sensor data logger__
+
+The above is the iRouter monitor view of a TruTest scale head integrated with a Mettler laboratory scale and a data logger. 
+
+h3. Configuration
+
+While it is possible to use multiple generic components for business logic, complex business logic can instead be encapsulated in a single custom business logic component. This use case depicts using a single business logic component for integrating, controlling and transforming complex information network flows between multiple sensors and a data logger.
+
+The configuration includes:
+
+* Two custom proxy components for connecting to:
+** An external TruTest sensor/actuator _(with display, alarming, and key entry)_
+** An external Mettler balance weighing sensor
+* One general purpose gateway for logging
+* A custom business logic component for the information transformation and exchange
+
+h3. Scenario
+
+Animal weight measurements, identification numbers and record state are sent from the TruTest producer on the TruTest proxy, animal fluid weight measurements are sent from the Mettler balance, the business logic component will do measurement transformation, measurement threshold detection and alarm signaling.  The Measurement Logger consumer service writes to the logging backend.[5] 
+
+
+h2. Notes
+
+fn5. iRouter uses the enterprise class logging framework "logback":http://logback.qos.ch/
+
+

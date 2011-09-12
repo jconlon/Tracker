@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: iRouter Gateway Tests
+Bundle-SymbolicName: com.verticon.tracker.irouter.premises.gateway.tests
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Fragment-Host: com.verticon.tracker.irouter.premises.gateway;bundle-version="0.1.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.junit;version="4.8.1",
+ org.osgi.service.wireadmin,
+ org.osgi.util.measurement;version="1.0.1"

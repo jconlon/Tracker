@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracker iRouter GPS Simulator
+Bundle-SymbolicName: com.verticon.tracker.irouter.gps.dev.sim
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Verticon, inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Service-Component: OSGI-INF/component.xml
+Import-Package: com.verticon.tracker.irouter.dev,
+ org.equinoxosgi.toast.devsim;version="1.0.0",
+ org.equinoxosgi.toast.devsim.fw;version="1.0.0",
+ org.equinoxosgi.util,
+ org.slf4j;version="1.5.11"
