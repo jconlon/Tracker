@@ -1,0 +1,33 @@
+{toc}
+
+h1=. <Name> Report Plan
+
+This template is inspired from the book _BIRT a Field Guide_, chapter 4 _Planning Your Report_
+
+h2. Purpose
+
+__What is the purpose of the report?__
+
+h2. Target
+
+__Who is going to read the report?__
+
+h2. Data
+
+__What data should appear in the report?__
+
+h2. Source
+
+__Where is the data coming from?__
+
+h2. Calculated Data
+
+__Does any data need to be calculated?__
+
+h2. Calculation Methods
+
+__How will the data be calculated?__
+
+h2. Interaction
+
+__Do you want to enable the report user to specify what data to display?__

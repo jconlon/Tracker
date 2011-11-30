@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.1.v20110905 Build &lt;3.7.1.v20110905-1820></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/first_report.gif</property>
+    <property name="cheatSheet">org.eclipse.birt.report.designer.ui.cheatsheet.firstreport</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">premises.rptlibrary</property>
+            <property name="namespace">premises</property>
+        </structure>
+    </list-property>
+    <list-property name="cssStyleSheets">
+        <structure>
+            <property name="fileName">corporate.css</property>
+        </structure>
+        <structure>
+            <property name="fileName">tracker.css</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="rp_premises_doc" id="863" extends="premises.rp_premises_doc"/>
+    </parameters>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.emf.oda.ecore.dataSet" name="Premises" id="830"
+ extends="premises.Premises"/>
+        <oda-data-set extensionID="org.eclipse.emf.oda.ecore.dataSet" name="Animals" id="831"
+ extends="premises.Animals"/>
+    </data-sets>
+    <styles>
+        <style name="report" id="110">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="246">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="247">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="table_header_row" id="324">
+            <property name="backgroundColor">#FFFF80</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="685">
+            <property name="height">4.28125in</property>
+            <column id="686"/>
+            <row id="689">
+                <property name="height">1.8020833333333333in</property>
+                <cell id="690">
+                    <grid name="Banner and Label" id="844" extends="premises.Banner and Label">
+                        <overridden-values>
+                            <ref-entry baseId="784" id="784"/>
+                            <ref-entry baseId="785" id="785"/>
+                            <ref-entry baseId="787" id="787"/>
+                            <ref-entry baseId="788" id="788"/>
+                            <ref-entry baseId="789" id="789"/>
+                            <ref-entry baseId="833" name="NewData" id="833"/>
+                            <ref-entry baseId="791" id="791"/>
+                            <ref-entry baseId="793" id="793"/>
+                            <ref-entry baseId="834" name="NewData1" id="834"/>
+                            <ref-entry baseId="795" id="795"/>
+                            <ref-entry baseId="797" id="797"/>
+                            <ref-entry baseId="835" name="NewGrid" id="835"/>
+                            <ref-entry baseId="836" id="836"/>
+                            <ref-entry baseId="837" id="837"/>
+                            <ref-entry baseId="838" id="838"/>
+                            <ref-entry baseId="839" id="839"/>
+                            <ref-entry baseId="840" name="NewLabel" id="845"/>
+                            <ref-entry baseId="841" id="846"/>
+                            <ref-entry baseId="842" name="NewData2" id="847"/>
+                            <ref-entry baseId="843" id="848"/>
+                            <ref-entry baseId="844" id="849"/>
+                            <ref-entry baseId="845" name="NewLabel1" id="850"/>
+                            <ref-entry baseId="846" id="851"/>
+                            <ref-entry baseId="847" name="NewData3" id="852"/>
+                            <ref-entry baseId="848" id="853"/>
+                            <ref-entry baseId="849" id="854"/>
+                            <ref-entry baseId="850" name="NewLabel2" id="855"/>
+                            <ref-entry baseId="851" id="856"/>
+                            <ref-entry baseId="852" name="NewData4" id="857"/>
+                            <ref-entry baseId="853" id="858"/>
+                            <ref-entry baseId="854" id="859"/>
+                            <ref-entry baseId="855" name="NewLabel3" id="860"/>
+                            <ref-entry baseId="856" id="861"/>
+                            <ref-entry baseId="857" name="NewData5" id="862"/>
+                        </overridden-values>
+                    </grid>
+                </cell>
+            </row>
+            <row id="840">
+                <property name="height">0.5729166666666666in</property>
+                <cell id="841">
+                    <label id="88">
+                        <property name="style">Title</property>
+                        <property name="paddingTop">10pt</property>
+                        <property name="paddingBottom">5pt</property>
+                        <text-property name="text">Animal Premises Location Listing</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="842">
+                <property name="height">0.28125in</property>
+                <cell id="843"/>
+            </row>
+            <row id="691">
+                <cell id="692">
+                    <table id="694">
+                        <property name="width">7.947916666666667in</property>
+                        <property name="dataSet">Animals</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">@self</property>
+                                <text-property name="displayName">@self</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["@self"]</expression>
+                                <property name="dataType">javaObject</property>
+                            </structure>
+                            <structure>
+                                <property name="name">birthDate</property>
+                                <text-property name="displayName">Birth Date</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["birthDate"]</expression>
+                                <property name="dataType">date</property>
+                            </structure>
+                            <structure>
+                                <property name="name">sex</property>
+                                <text-property name="displayName">Sex</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["sex"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">tags</property>
+                                <text-property name="displayName">Tags</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["tags"]</expression>
+                                <property name="dataType">javaObject</property>
+                            </structure>
+                            <structure>
+                                <property name="name">species</property>
+                                <text-property name="displayName">Species</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["species"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">breed</property>
+                                <text-property name="displayName">Breed</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["breed"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">sexCode</property>
+                                <text-property name="displayName">Sex Code</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["sexCode"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">speciesCode</property>
+                                <text-property name="displayName">Species Code</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["speciesCode"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">id</property>
+                                <text-property name="displayName">Id</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">comments</property>
+                                <text-property name="displayName">Comments</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["comments"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">lastEventDateTime</property>
+                                <text-property name="displayName">Last Event Date Time</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["lastEventDateTime"]</expression>
+                                <property name="dataType">date</property>
+                            </structure>
+                            <structure>
+                                <property name="name">dam</property>
+                                <text-property name="displayName">Dam</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["dam"]</expression>
+                                <property name="dataType">javaObject</property>
+                            </structure>
+                            <structure>
+                                <property name="name">sire</property>
+                                <text-property name="displayName">Sire</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["sire"]</expression>
+                                <property name="dataType">javaObject</property>
+                            </structure>
+                            <structure>
+                                <property name="name">weight</property>
+                                <text-property name="displayName">Weight</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["weight"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                            <structure>
+                                <property name="name">weightGainPerDay</property>
+                                <text-property name="displayName">Weight Gain Per Day</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["weightGainPerDay"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                            <structure>
+                                <property name="name">type</property>
+                                <text-property name="displayName">Type</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["type"]</expression>
+                                <property name="dataType">javaObject</property>
+                            </structure>
+                            <structure>
+                                <property name="name">visualID</property>
+                                <text-property name="displayName">Visual ID</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["visualID"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">ageInDays</property>
+                                <text-property name="displayName">Age In Days</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ageInDays"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">alternativeID</property>
+                                <text-property name="displayName">Alternative ID</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["alternativeID"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">location</property>
+                                <text-property name="displayName">Location</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["location"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Aggregation</property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">COUNT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                    </structure>
+                                </list-property>
+                            </structure>
+                        </list-property>
+                        <column id="750">
+                            <property name="width">1.3333333333333333in</property>
+                            <property name="repeat">1</property>
+                        </column>
+                        <column id="751">
+                            <property name="width">0.53125in</property>
+                            <property name="repeat">1</property>
+                        </column>
+                        <column id="752">
+                            <property name="width">0.625in</property>
+                            <property name="repeat">1</property>
+                        </column>
+                        <column id="753">
+                            <property name="width">0.71875in</property>
+                        </column>
+                        <column id="754">
+                            <property name="width">0.4270833333333333in</property>
+                        </column>
+                        <column id="755">
+                            <property name="width">0.5729166666666666in</property>
+                        </column>
+                        <column id="756">
+                            <property name="width">0.7291666666666666in</property>
+                        </column>
+                        <column id="757">
+                            <property name="width">0.5729166666666666in</property>
+                            <property name="repeat">1</property>
+                        </column>
+                        <column id="758">
+                            <property name="width">1.25in</property>
+                            <property name="repeat">1</property>
+                        </column>
+                        <column id="759">
+                            <property name="width">1.0208333333333333in</property>
+                        </column>
+                        <header>
+                            <row id="695">
+                                <property name="backgroundColor">#FFFF80</property>
+                                <cell id="696">
+                                    <label id="697">
+                                        <text-property name="text">Id</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="698">
+                                    <label id="699">
+                                        <text-property name="text">VId</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="700">
+                                    <label id="701">
+                                        <text-property name="text">Species</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="702">
+                                    <label id="703">
+                                        <text-property name="text">Breed</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="704">
+                                    <label id="705">
+                                        <text-property name="text">Sex </text-property>
+                                    </label>
+                                </cell>
+                                <cell id="706">
+                                    <label id="707">
+                                        <text-property name="text">Weight</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="708">
+                                    <label id="709">
+                                        <property name="paddingRight">1pt</property>
+                                        <property name="textAlign">right</property>
+                                        <text-property name="text">ADG</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="710">
+                                    <label id="711">
+                                        <property name="paddingLeft">3pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Age (days)</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="712">
+                                    <label id="713">
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Last Sighting</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="714">
+                                    <label id="715">
+                                        <text-property name="text">Location</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <detail>
+                            <row id="716">
+                                <list-property name="highlightRules">
+                                    <structure>
+                                        <property name="operator">eq</property>
+                                        <property name="backgroundColor">#E6E6FA</property>
+                                        <expression name="testExpr" type="javascript">row.__rownum % 2</expression>
+                                        <simple-property-list name="value1">
+                                            <value type="javascript">0</value>
+                                        </simple-property-list>
+                                    </structure>
+                                </list-property>
+                                <cell id="717">
+                                    <data id="718">
+                                        <property name="resultSetColumn">id</property>
+                                    </data>
+                                </cell>
+                                <cell id="719">
+                                    <data id="720">
+                                        <property name="resultSetColumn">visualID</property>
+                                    </data>
+                                </cell>
+                                <cell id="721">
+                                    <data id="722">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">speciesCode</property>
+                                    </data>
+                                </cell>
+                                <cell id="723">
+                                    <data id="724">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">breed</property>
+                                    </data>
+                                </cell>
+                                <cell id="725">
+                                    <data id="726">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">sexCode</property>
+                                    </data>
+                                </cell>
+                                <cell id="727">
+                                    <data id="728">
+                                        <property name="paddingRight">3pt</property>
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">weight</property>
+                                    </data>
+                                </cell>
+                                <cell id="729">
+                                    <data id="730">
+                                        <property name="paddingRight">10pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Fixed</property>
+                                            <property name="pattern">###0.0{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <list-property name="highlightRules">
+                                            <structure>
+                                                <property name="operator">is-true</property>
+                                                <property name="color">#FF0000</property>
+                                                <expression name="testExpr" type="javascript">row["weightGainPerDay"] &lt; 3</expression>
+                                            </structure>
+                                        </list-property>
+                                        <property name="resultSetColumn">weightGainPerDay</property>
+                                    </data>
+                                </cell>
+                                <cell id="731">
+                                    <data id="732">
+                                        <property name="paddingRight">10pt</property>
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">ageInDays</property>
+                                    </data>
+                                </cell>
+                                <cell id="733">
+                                    <data id="734">
+                                        <structure name="dateTimeFormat">
+                                            <property name="category">Custom</property>
+                                            <property name="pattern">M/d/yy HH:mm</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">lastEventDateTime</property>
+                                    </data>
+                                </cell>
+                                <cell id="735">
+                                    <data id="736">
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">location</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="737">
+                                <cell id="738">
+                                    <label id="739">
+                                        <property name="fontFamily">"Verdana"</property>
+                                        <property name="fontSize">x-small</property>
+                                        <property name="color">navy</property>
+                                        <property name="textAlign">right</property>
+                                        <text-property name="text">Number of Animals:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="740">
+                                    <data id="741">
+                                        <property name="fontSize">x-small</property>
+                                        <property name="color">navy</property>
+                                        <property name="paddingLeft">3pt</property>
+                                        <property name="textAlign">left</property>
+                                        <property name="resultSetColumn">Aggregation</property>
+                                    </data>
+                                </cell>
+                                <cell id="742"/>
+                                <cell id="743"/>
+                                <cell id="744"/>
+                                <cell id="745"/>
+                                <cell id="746"/>
+                                <cell id="747"/>
+                                <cell id="748"/>
+                                <cell id="749"/>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>
