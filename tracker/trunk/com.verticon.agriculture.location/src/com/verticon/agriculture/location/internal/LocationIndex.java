@@ -63,7 +63,6 @@ public final class LocationIndex implements LocationServiceProvider {
 	
 	private LocationIndex() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	
@@ -262,6 +261,9 @@ public final class LocationIndex implements LocationServiceProvider {
 								public void run(IProgressMonitor pm) {
 									boolean foundAgricultureNatures = false;
 									for (IProject iProject : projects) {
+										if(!iProject.isAccessible()){
+											continue;
+										}
 										try {
 											if (iProject.hasNature(AgricultureNature.NATURE_ID)) {
 												foundAgricultureNatures = true;
