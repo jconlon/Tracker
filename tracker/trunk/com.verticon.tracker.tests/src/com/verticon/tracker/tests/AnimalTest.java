@@ -32,7 +32,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.EventType;
 import com.verticon.tracker.Sex;
@@ -60,6 +59,7 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getType() <em>Type</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getAgeInDays() <em>Age In Days</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#getAlternativeID() <em>Alternative ID</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#getLocation() <em>Location</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -124,6 +124,7 @@ public abstract class AnimalTest extends TestCase {
 	protected void setFixture(Animal fixture) {
 		this.fixture = fixture;
 		if(fixture !=null){
+			assertNull(fixture.getBirthDate());
 			fixture.setSex(Sex.M_LITERAL);
 			Tag tag = TrackerFactory.eINSTANCE.createTag();
 			tag.setId(AIN_1);
@@ -142,6 +143,7 @@ public abstract class AnimalTest extends TestCase {
 	protected Animal getFixture() {
 		return fixture;
 	}
+	
 
 	/**
 	 * Tests the '{@link com.verticon.tracker.Animal#getSpecies() <em>Species</em>}' feature getter.
@@ -551,6 +553,19 @@ public abstract class AnimalTest extends TestCase {
 	 */
 	public void testGetAlternativeID() {
 		assertNull(getFixture().getAlternativeID());
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Animal#getLocation() <em>Location</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#getLocation()
+	 * @generated
+	 */
+	public void testGetLocation() {
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+//		fail();
 	}
 
 	/**
