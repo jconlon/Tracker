@@ -12,12 +12,15 @@ package com.verticon.tracker.tests;
 
 import junit.textui.TestRunner;
 
+import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.BasicEMap;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.osgi.service.metatype.ObjectClassDefinition;
 
 import com.verticon.osgi.metatype.AD;
 import com.verticon.osgi.metatype.MetatypeFactory;
 import com.verticon.osgi.metatype.OCD;
+import com.verticon.osgi.metatype.Scalar;
 import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.TrackerFactory;
 
@@ -105,12 +108,35 @@ public class GenericEventTest extends EventTest {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.GenericEvent#findAttributeDefinition(org.eclipse.emf.common.util.EMap)
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testFindAttributeDefinition__EMap() {
-		// TODO: implement this operation test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		//Setup the ObjectClassDefinition
+		OCD ocd = MetatypeFactory.eINSTANCE.createOCD();
+		ocd.setName("someName");
+		//Add an attribute
+		AD ad = MetatypeFactory.eINSTANCE.createAD();
+		ad.setName("testMe");
+		//Add the 
+		ocd.getAD().add(ad);
+
+		//For the following to create the map entries that represent attributes the following
+		//MUST NOT return NULL
+		assertNotNull(ocd.getAttributeDefinitions(ObjectClassDefinition.ALL));
+
+
+		//Set the schema - EventAttributes are now added
+		GenericEvent genericEvent = getFixture();
+		genericEvent.setOcd(ocd);
+
+		//Test to see if the eventAttribute is added
+		Object o = genericEvent.getEventAttributes().get(0);
+		assertNotNull(o);
+		assertTrue(o instanceof BasicEMap.Entry<?,?>);
+		BasicEMap.Entry<String, String> eventAttribute = (BasicEMap.Entry<String, String>) o;
+
+		//Find the associated schema and see if it is the same
+		assertEquals(ad, genericEvent.findAttributeDefinition(eventAttribute));
 	}
 
 	/**
@@ -118,12 +144,27 @@ public class GenericEventTest extends EventTest {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.GenericEvent#findName()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testFindName() {
-		// TODO: implement this operation test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		//Setup the ObjectClassDefinition
+		OCD ocd = MetatypeFactory.eINSTANCE.createOCD();
+		ocd.setName("someName");
+		//Add an attribute
+		AD ad = MetatypeFactory.eINSTANCE.createAD();
+		ad.setName("testMe");
+		//Add the 
+		ocd.getAD().add(ad);
+
+		//For the following to create the map entries that represent attributes the following
+		//MUST NOT return NULL
+		assertNotNull(ocd.getAttributeDefinitions(ObjectClassDefinition.ALL));
+
+
+		//Set the schema - EventAttributes are now added
+		GenericEvent genericEvent = getFixture();
+		genericEvent.setOcd(ocd);
+		assertEquals("someName", genericEvent.findName());
 	}
 
 	/**
@@ -131,12 +172,41 @@ public class GenericEventTest extends EventTest {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.GenericEvent#value(java.lang.String)
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testValue__String() {
-		// TODO: implement this operation test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		//Setup the ObjectClassDefinition
+		OCD ocd = MetatypeFactory.eINSTANCE.createOCD();
+		ocd.setName("someName");
+		//Add an attribute
+		AD ad = MetatypeFactory.eINSTANCE.createAD();
+		ad.setName("testMe");
+		//Add the 
+		ocd.getAD().add(ad);
+
+
+		//For the following to create the map entries that represent attributes the following
+		//MUST NOT return NULL
+		assertNotNull(ocd.getAttributeDefinitions(ObjectClassDefinition.ALL));
+
+
+		//Set the schema - EventAttributes are now added
+		GenericEvent genericEvent = getFixture();
+		genericEvent.setOcd(ocd);
+
+		//Test to see if the eventAttribute is added
+		Object o = genericEvent.getEventAttributes().get(0);
+		assertNotNull(o);
+		assertTrue(o instanceof BasicEMap.Entry<?,?>);
+		BasicEMap.Entry<String, String> eventAttribute = (BasicEMap.Entry<String, String>) o;
+
+		//Find the value
+		assertNull(genericEvent.value("testMe"));
+		
+		genericEvent.getEventAttributes().put("testMe", "haha");
+		assertEquals("haha",genericEvent.value("testMe"));
+		
+		
 	}
 
 	/**
@@ -144,12 +214,38 @@ public class GenericEventTest extends EventTest {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.GenericEvent#hasRequiredAttributes(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testHasRequiredAttributes__DiagnosticChain_Map() {
-		// TODO: implement this operation test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		//Setup the ObjectClassDefinition
+		OCD ocd = MetatypeFactory.eINSTANCE.createOCD();
+		ocd.setName("someName");
+	
+		//Add an attribute
+		AD ad = MetatypeFactory.eINSTANCE.createAD();
+		ad.setName("testMe");
+		ad.setDataType(Scalar.STRING);
+		ad.setRequired(true);
+		//Add the 
+		ocd.getAD().add(ad);
+
+		//Set the schema - EventAttributes are now added
+		GenericEvent genericEvent = getFixture();
+		genericEvent.setOcd(ocd);
+
+		//Test to see if the eventAttribute is added
+		Object o = genericEvent.getEventAttributes().get(0);
+		assertNotNull(o);
+		assertTrue(o instanceof BasicEMap.Entry<?,?>);
+		BasicEMap.Entry<String, String> eventAttribute = (BasicEMap.Entry<String, String>) o;
+
+		//Find the value
+		assertNull(genericEvent.value("testMe"));
+
+		genericEvent.getEventAttributes().put("testMe", "haha");
+		assertEquals("haha",genericEvent.value("testMe"));
+		DiagnosticChain dc = new BasicDiagnostic();
+		assertTrue(dc.toString(), genericEvent.hasRequiredAttributes(dc, null));
 	}
 
 	/**
@@ -157,12 +253,38 @@ public class GenericEventTest extends EventTest {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.GenericEvent#hasValidAttributes(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testHasValidAttributes__DiagnosticChain_Map() {
-		// TODO: implement this operation test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		//Setup the ObjectClassDefinition
+		OCD ocd = MetatypeFactory.eINSTANCE.createOCD();
+		ocd.setName("someName");
+		//Add an attribute
+		AD ad = MetatypeFactory.eINSTANCE.createAD();
+		ad.setName("testMe");
+		//Add the 
+		ocd.getAD().add(ad);
+
+
+		//For the following to create the map entries that represent attributes the following
+		//MUST NOT return NULL
+		assertNotNull(ocd.getAttributeDefinitions(ObjectClassDefinition.ALL));
+
+
+		//Set the schema - EventAttributes are now added
+		GenericEvent genericEvent = getFixture();
+		genericEvent.setOcd(ocd);
+
+		//Test to see if the eventAttribute is added
+		Object o = genericEvent.getEventAttributes().get(0);
+		assertNotNull(o);
+		assertTrue(o instanceof BasicEMap.Entry<?,?>);
+		BasicEMap.Entry<String, String> eventAttribute = (BasicEMap.Entry<String, String>) o;
+
+		//Find the value
+		assertNull(genericEvent.value("testMe"));
+
+		assertTrue(genericEvent.hasValidAttributes(new BasicDiagnostic(), null));
 	}
 
 	/**
@@ -170,51 +292,88 @@ public class GenericEventTest extends EventTest {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.tracker.GenericEvent#hasAllAttributes(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testHasAllAttributes__DiagnosticChain_Map() {
-		// TODO: implement this operation test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
-	}
-
-	@SuppressWarnings("unchecked")
-	public void testfindAttributeDefinition__AttributeDefinition() {
-		
 		//Setup the ObjectClassDefinition
 		OCD ocd = MetatypeFactory.eINSTANCE.createOCD();
 		ocd.setName("someName");
 		//Add an attribute
 		AD ad = MetatypeFactory.eINSTANCE.createAD();
 		ad.setName("testMe");
-        //Add the 
+		//Add the 
 		ocd.getAD().add(ad);
-		
+
+
 		//For the following to create the map entries that represent attributes the following
 		//MUST NOT return NULL
 		assertNotNull(ocd.getAttributeDefinitions(ObjectClassDefinition.ALL));
-		
-		
+
+
 		//Set the schema - EventAttributes are now added
 		GenericEvent genericEvent = getFixture();
 		genericEvent.setOcd(ocd);
-		
+
 		//Test to see if the eventAttribute is added
 		Object o = genericEvent.getEventAttributes().get(0);
 		assertNotNull(o);
 		assertTrue(o instanceof BasicEMap.Entry<?,?>);
 		BasicEMap.Entry<String, String> eventAttribute = (BasicEMap.Entry<String, String>) o;
-		
-		//Find the associated schema and see if it is the same
-		assertEquals(ad, genericEvent.findAttributeDefinition(eventAttribute));
+
+		//Find the value
+		assertNull(genericEvent.value("testMe"));
+
+		assertTrue(genericEvent.hasAllAttributes(new BasicDiagnostic(), null));
+				
 	}
-	
 
 
 	@Override
 	public void testGetEventCode() {
 		assertNotNull(getFixture());
 		assertEquals(GenericEvent.EVENT_CODE, getFixture().getEventCode());
+	}
+	
+	@Override
+	public void testValues() {
+		//Setup the ObjectClassDefinition
+		OCD ocd = MetatypeFactory.eINSTANCE.createOCD();
+		ocd.setName("someName");
+
+		//Add an attribute
+		AD ad = MetatypeFactory.eINSTANCE.createAD();
+		ad.setName("testMe");
+		ad.setDataType(Scalar.STRING);
+		ad.setRequired(true);
+		//Add the 
+		ocd.getAD().add(ad);
+		
+		//Add an attribute
+				 ad = MetatypeFactory.eINSTANCE.createAD();
+				ad.setName("testMeTwo");
+				ad.setDataType(Scalar.BOOLEAN);
+				ad.setRequired(true);
+				ad.setDefault("false");
+				//Add the 
+				ocd.getAD().add(ad);
+
+		//Set the schema - EventAttributes are now added
+		GenericEvent genericEvent = getFixture();
+		genericEvent.setOcd(ocd);
+
+		//Test to see if the eventAttribute is added
+		Object o = genericEvent.getEventAttributes().get(0);
+		assertNotNull(o);
+		assertTrue(o instanceof BasicEMap.Entry<?,?>);
+		BasicEMap.Entry<String, String> eventAttribute = (BasicEMap.Entry<String, String>) o;
+
+		//Find the value
+		assertNull(genericEvent.value("testMe"));
+
+		genericEvent.getEventAttributes().put("testMe", "haha");
+		genericEvent.getEventAttributes().put("testMeTwo", "false");
+		assertEquals("haha",genericEvent.value("testMe"));
+		assertEquals("testMeTwo: false, testMe: haha", genericEvent.values());
 	}
 
 
