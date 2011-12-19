@@ -81,5 +81,14 @@ public class MastitisTest extends MedicalConditionTest {
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.tests.EventTest#testValues()
+	 */
+	@Override
+	public void testValues() {
+		assertEquals("location: null, origin: null", getFixture().values());
+	}
+
 
 } //MastitisTest

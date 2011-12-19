@@ -239,6 +239,10 @@
         <element xmi:type="ecore:EOperation" href="tracker.ecore#//Event/dateEvents"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_U0V5gFJEEd-Uqegvp1lu1g"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_IRgGUCptEeGk3uyKclPFhA" type="2002">
+        <element xmi:type="ecore:EOperation" href="tracker.ecore#//Event/values"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_IRgGUSptEeGk3uyKclPFhA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PCDcdlmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PCDcd1mCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_PCDceFmCEd2tRZ2K3aMUww"/>

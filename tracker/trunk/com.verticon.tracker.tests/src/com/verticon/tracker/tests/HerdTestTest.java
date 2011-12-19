@@ -124,5 +124,14 @@ public class HerdTestTest extends EventTest {
 		assertNotNull(getFixture());
 		assertEquals(HerdTest.EVENT_CODE, getFixture().getEventCode());
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.tests.EventTest#testValues()
+	 */
+	@Override
+	public void testValues() {
+		assertEquals("pregnant: false, daysSinceBredEstimate: 0", getFixture().values());
+	}
+
 
 } //HerdTestTest

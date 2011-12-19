@@ -135,6 +135,7 @@
         <details key="body" value="//Get all the days events&#xA;if(getTag()!=null &amp;&amp; getDate()!=null){&#xA;&lt;%com.verticon.tracker.util.CollectionFilter%>&lt;Event> eventsProducer = new CollectionFilter&lt;Event>();&#xA;&#x9;eventsProducer.addFilter(&#xA;&#x9;&#x9;&#x9;new FilterCriteria&lt;Event>(){&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;@Override&#xA;&#x9;&#x9;&#x9;&#x9;public boolean passes(Event event) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return event.getDate().equals(EventImpl.this.getDate());&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;);&#xA;&#x9;BasicEList&lt;Event> events = new BasicEList&lt;Event>(eventsProducer.filterCopy(getTag().getEvents()));&#xA;&#x9;return events;&#xA;&#xA;}&#xA;EList&lt;Event> result = ECollections.emptyEList();&#xA;return result;"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="values" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateTime" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="eventCode" lowerBound="1"

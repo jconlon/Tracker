@@ -97,5 +97,13 @@ public class USOvineGradingTest extends EventTest {
 		getFixture().setQualityGradeLevel(Level.HIGH);
 		assertEquals(Level.HIGH, getFixture().getQualityGradeLevel());
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.tests.EventTest#testValues()
+	 */
+	@Override
+	public void testValues() {
+		assertEquals("qualityGrade: , qualityGradeLevel: ", getFixture().values());
+	}
 
 } //USOvineGradingTest

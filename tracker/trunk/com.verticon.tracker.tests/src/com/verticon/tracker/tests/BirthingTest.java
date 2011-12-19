@@ -88,4 +88,13 @@ public class BirthingTest extends EventTest {
 		assertNotNull(getFixture());
 		assertEquals(Birthing.EVENT_CODE, getFixture().getEventCode());
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.tests.EventTest#testValues()
+	 */
+	@Override
+	public void testValues() {
+		assertEquals("viability: false, assisted: false, difficulty: ", getFixture().values());
+	}
+
 } //BirthingTest

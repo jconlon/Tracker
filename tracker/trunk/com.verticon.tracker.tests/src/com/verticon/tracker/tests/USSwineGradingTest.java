@@ -96,5 +96,12 @@ public class USSwineGradingTest extends EventTest {
 		assertEquals(USSwineQualityGrade.FOUR, getFixture().getQualityGrade());
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.tests.EventTest#testValues()
+	 */
+	@Override
+	public void testValues() {
+		assertEquals("qualityGrade: ", getFixture().values());
+	}
 
 } //USSwineGradingTest

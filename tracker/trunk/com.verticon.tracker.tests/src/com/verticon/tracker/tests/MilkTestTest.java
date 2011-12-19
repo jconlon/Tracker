@@ -88,5 +88,14 @@ public class MilkTestTest extends EventTest {
 		assertNotNull(getFixture());
 		assertEquals(MilkTest.EVENT_CODE, getFixture().getEventCode());
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.tests.EventTest#testValues()
+	 */
+	@Override
+	public void testValues() {
+		assertEquals("poundsProduced: 0.0, percentButterFat: 0.0, percentProtein: 0.0, somaticCellCounts: 0, otherSolids: 0.0", getFixture().values());
+	}
+
 
 } //MilkTestTest

@@ -259,4 +259,12 @@ public interface Event extends EObject {
 	 */
 	EList<Event> dateEvents();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model required="true"
+	 * @generated
+	 */
+	String values();
+
 } // Event

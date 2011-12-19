@@ -285,5 +285,25 @@ public class WeighInTest extends EventTest {
 		assertNotNull(getFixture());
 		assertEquals(WeighIn.EVENT_CODE, getFixture().getEventCode());
 	}
+	
+	@Override
+	public void testValues() {
+		String value = "12345";
+		Tag t = TrackerFactory.eINSTANCE.createTag();
+		t.setId(value);
+		
+		//First weighIn 10 days ago and 100 lbs
+		WeighIn we = getFixture();
+		we.setComments("First");
+		Calendar firstWeighInDate = Calendar.getInstance();
+		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
+		we.setDateTime(
+				firstWeighInDate.getTime());
+		we.setWeight(100d);
+		t.getEvents().add(we);
+		
+		assertEquals("weight: 100.0, " +
+				"unit: pound", we.values());
+	}
 
 } //WeighInTest

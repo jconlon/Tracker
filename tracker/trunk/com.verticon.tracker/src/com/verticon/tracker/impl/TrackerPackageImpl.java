@@ -2630,6 +2630,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		addEOperation(eventEClass, this.getEvent(), "dateEvents", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(eventEClass, ecorePackage.getEString(), "values", 1, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(tagAllocatedEClass, TagAllocated.class, "TagAllocated", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(premisesEClass, Premises.class, "Premises", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

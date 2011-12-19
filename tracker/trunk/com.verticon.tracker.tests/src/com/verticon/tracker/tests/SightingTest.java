@@ -88,4 +88,12 @@ public class SightingTest extends EventTest {
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.tests.EventTest#testValues()
+	 */
+	@Override
+	public void testValues() {
+		assertEquals("location: null", getFixture().values());
+	}
+
 } //SightingTest
