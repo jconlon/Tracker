@@ -88,5 +88,14 @@ public class BirthDefectTest extends EventTest {
 		assertNotNull(getFixture());
 		assertEquals(BirthDefect.EVENT_CODE, getFixture().getEventCode());
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.tests.EventTest#testValues()
+	 */
+	@Override
+	public void testValues() {
+		assertEquals("freemartin: false", getFixture().values());
+	}
+
 
 } //BirthDefectTest

@@ -98,5 +98,14 @@ public class MovedOutTest extends EventTest {
 		getFixture().setUri("test");
 		assertEquals("test", getFixture().getUri());
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.tests.EventTest#testValues()
+	 */
+	@Override
+	public void testValues() {
+		assertEquals("destinationPin: null, uri: null", getFixture().values());
+	}
+
 
 } //MovedOutTest

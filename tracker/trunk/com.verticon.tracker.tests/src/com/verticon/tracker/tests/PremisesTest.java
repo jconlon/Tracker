@@ -37,6 +37,12 @@ import com.verticon.tracker.TrackerPackage;
  * A test case for the model object '<em><b>Premises</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * The following features are tested:
+ * <ul>
+ *   <li>{@link com.verticon.tracker.Premises#getAddress() <em>Address</em>}</li>
+ * </ul>
+ * </p>
+ * <p>
  * The following operations are tested:
  * <ul>
  *   <li>{@link com.verticon.tracker.Premises#eventHistory() <em>Event History</em>}</li>
@@ -134,6 +140,19 @@ public class PremisesTest extends TestCase {
 		setFixture(null);
 	}
 	
+	/**
+	 * Tests the '{@link com.verticon.tracker.Premises#getAddress() <em>Address</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Premises#getAddress()
+	 * @generated
+	 */
+	public void testGetAddress() {
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+//		fail();
+	}
+
 	/**
 	 * Tests the '{@link com.verticon.tracker.Premises#eventHistory() <em>Event History</em>}' operation.
 	 * <!-- begin-user-doc -->

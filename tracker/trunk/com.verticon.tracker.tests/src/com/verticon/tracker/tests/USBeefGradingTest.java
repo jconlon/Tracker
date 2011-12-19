@@ -13,6 +13,7 @@ package com.verticon.tracker.tests;
 import com.verticon.tracker.Level;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.USBeefGrading;
+import com.verticon.tracker.USBeefYieldGrade;
 import com.verticon.tracker.USQualityGrade;
 
 import junit.textui.TestRunner;
@@ -97,5 +98,20 @@ public class USBeefGradingTest extends EventTest {
 		getFixture().setQualityGradeLevel(Level.HIGH);
 		assertEquals(Level.HIGH, getFixture().getQualityGradeLevel());
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.tests.EventTest#testValues()
+	 */
+	@Override
+	public void testValues() {
+		USBeefGrading e = getFixture();
+		assertEquals("qualityGrade: , qualityGradeLevel: , yieldGrade: ", e.values());
+		e.setQualityGrade(USQualityGrade.CHOICE);
+		e.setQualityGradeLevel(Level.HIGH);
+		e.setYieldGrade(USBeefYieldGrade.FIVE);
+		assertEquals("qualityGrade: Choice, qualityGradeLevel: High, yieldGrade: 5", e.values());
+		
+	}
+
 
 } //USBeefGradingTest

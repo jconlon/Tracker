@@ -99,4 +99,14 @@ public class MovedInTest extends EventTest {
 		getFixture().setUri("test");
 		assertEquals("test", getFixture().getUri());
 	}
+
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.tests.EventTest#testValues()
+	 */
+	@Override
+	public void testValues() {
+		assertEquals("sourcePin: null, uri: null", getFixture().values());
+	}
+	
+	
 } //MovedInTest

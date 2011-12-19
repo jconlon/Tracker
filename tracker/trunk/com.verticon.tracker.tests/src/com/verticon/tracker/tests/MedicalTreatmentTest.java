@@ -88,4 +88,14 @@ public class MedicalTreatmentTest extends EventTest {
 		assertNotNull(getFixture());
 		assertEquals(MedicalTreatment.EVENT_CODE, getFixture().getEventCode());
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.tests.EventTest#testValues()
+	 */
+	@Override
+	public void testValues() {
+		System.out.println(getFixture().toString());
+		assertEquals("name: null, product: null, manufacturer: null, lot: null, quantity: null, treatment: , method: ", getFixture().values());
+	}
+
 } //MedicalTreatmentTest

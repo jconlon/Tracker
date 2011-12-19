@@ -131,5 +131,13 @@ public class PositionTest extends EventTest {
 		getFixture().setLatitude(LAT);
 		assertEquals(LAT,getFixture().getLatitude());
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.tests.EventTest#testValues()
+	 */
+	@Override
+	public void testValues() {
+		assertEquals("longitude: 0.0, latitude: 0.0", getFixture().values());
+	}
 
 } //PositionTest

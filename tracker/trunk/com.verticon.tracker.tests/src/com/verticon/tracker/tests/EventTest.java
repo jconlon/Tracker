@@ -43,6 +43,7 @@ import com.verticon.tracker.util.TrackerConstants;
  * <ul>
  *   <li>{@link com.verticon.tracker.Event#dateEvent(com.verticon.tracker.EventType, java.lang.String) <em>Date Event</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#dateEvents() <em>Date Events</em>}</li>
+ *   <li>{@link com.verticon.tracker.Event#values() <em>Values</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -276,6 +277,19 @@ public abstract class EventTest extends TestCase {
 		
 	}
 	
+	/**
+	 * Tests the '{@link com.verticon.tracker.Event#values() <em>Values</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * This will pass for all events that do not have values. 
+	 * Override subclass tests for all events that require values
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Event#values()
+	 * @generated NOT
+	 */
+	public void testValues() {
+		assertNull( getFixture().values());
+	}
+
 	public void testDateType(){
 		String value = "12345";
 		Tag t = TrackerFactory.eINSTANCE.createTag();
@@ -310,6 +324,31 @@ public abstract class EventTest extends TestCase {
 		
 		
 		assertEquals(s, we.dateEvent(EventType.SIGHTING, null));
+		
+	}
+	
+	public void testToString(){
+		String value = "12345";
+		Tag t = TrackerFactory.eINSTANCE.createTag();
+		t.setId(value);
+		t.getEvents().add(getFixture());
+		//First weighIn 10 days ago and 100 lbs
+		WeighIn we = TrackerFactory.eINSTANCE.createWeighIn();
+		we.setComments("First");
+		Calendar firstWeighInDate = Calendar.getInstance();
+		firstWeighInDate.add(Calendar.DAY_OF_MONTH, -10);
+		we.setDateTime(
+				firstWeighInDate.getTime());
+		we.setWeight(100d);
+		t.getEvents().add(we);
+		//Need a RegExpression to just get the values
+		//com.verticon.tracker.impl.WeighInImpl@1a7ddcf (dateTime: Sun Dec 04 15:47:32 CST 2011, electronicallyRead: false, correction: false, comments: First) (weight: 100.0, unit: pound)
+		//
+		int last = we.toString().indexOf('(', we.toString().indexOf('(')+1);
+		String eventValue = we.toString().substring(
+					last+1,we.toString().lastIndexOf(')'));
+		assertEquals("weight: 100.0, " +
+				"unit: pound", eventValue);
 		
 	}
 
