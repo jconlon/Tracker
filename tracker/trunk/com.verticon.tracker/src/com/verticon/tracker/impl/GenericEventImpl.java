@@ -488,4 +488,22 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 		return EVENT_CODE;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.impl.EventImpl#values()
+	 */
+	@Override
+	public String values() {
+		StringBuffer buf = new StringBuffer();
+		for (Map.Entry<String, String> eventAttribute : getEventAttributes().entrySet()) {
+			buf.append(eventAttribute.getKey());
+			buf.append(": ");
+			buf.append(eventAttribute.getValue());
+			buf.append(", ");
+		}
+		String out =  buf.toString();
+		return out.contains(",")?out.substring(0,out.length()-2):out;
+	}
+	
+	
+
 } //GenericEventImpl

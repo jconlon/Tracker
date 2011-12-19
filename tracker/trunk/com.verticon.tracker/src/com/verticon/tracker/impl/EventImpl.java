@@ -419,6 +419,17 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String values() {
+		int last = toString().indexOf('(', toString().indexOf('(')+1);
+		return last!=-1?
+				toString().substring(last+1,toString().lastIndexOf(')')):null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
