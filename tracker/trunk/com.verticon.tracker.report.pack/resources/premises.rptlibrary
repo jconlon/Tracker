@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 3.7.1.v20110905 Build &lt;3.7.1.v20110905-1820></property>
-    <list-property name="propertyBindings">
-        <structure>
-            <property name="name">resource</property>
-            <property name="id">326</property>
-        </structure>
-        <structure>
-            <property name="name">OdaConnProfileName</property>
-            <property name="id">326</property>
-        </structure>
-        <structure>
-            <property name="name">OdaConnProfileStorePath</property>
-            <property name="id">326</property>
-        </structure>
-    </list-property>
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
     <property name="units">in</property>
     <property name="theme">defaultTheme</property>
     <parameters>
@@ -125,6 +111,11 @@ resourceName = row["@self"].getObject().getOcd().getName()
                 <structure>
                     <property name="name">animalVisualID</property>
                     <expression name="expression">row["@self"].getObject().getTag().getAnimal().getVisualID()</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">values</property>
+                    <expression name="expression">row["@self"].getObject().values()</expression>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
@@ -289,6 +280,11 @@ resourceName = row["@self"].getObject().getOcd().getName()
                     <structure>
                         <property name="position">16</property>
                         <property name="name">animalVisualID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">values</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
