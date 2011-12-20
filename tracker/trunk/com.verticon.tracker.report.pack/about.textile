@@ -57,10 +57,30 @@ h4(. DataSources
 h4(. DataSets
 
 * @Animals@
+** Standard Animal attributes as columns
 * @Events@
+** Standard Event attributes as columns 
+** Computed Columns
+*** animalSpecies 
+**** _Follow the hierarchy upward to the animal species code_ @row["@self"].getObject().getTag().getAnimal().getSpeciesCode().toString()@
+*** animalSex 
+**** _Similar to the above follow the hierarchy upward to the animal_ 
+*** animalWeight 
+**** _Similar to the above follow the hierarchy upward to the animal_
+*** animalAdg 
+**** _Similar to the above follow the hierarchy upward to the animal_
+*** animalVisualId
+**** _Similar to the above follow the hierarchy upward to the animal_
+*** eventName 
+**** _If its a GenericEvent get the name of the user created for it in the Object Class Definition_ @simpleName = row["@self"].getObject().getClass().getSimpleName(); resourceName = simpleName.substring(0,simpleName.indexOf("Impl"));if(resourceName == "GenericEvent"){resourceName = row["@self"].getObject().getOcd().getName()}@
+*** values 
+**** _Get the values for the event_ @row["@self"].getObject().values()@
 * @MovedOut@
+** MovedOut Event attributes as columns
 * @SingleWeighIn@
+** WeighIn Event attributes as columns
 * @Premises@
+** Standard Premises attributes as columns
 * Grids
 ** @Banner and Label@
 
@@ -69,14 +89,14 @@ h3(. Style Sheets
 * @corporate.css@
 * @tracker.css@
  
-h2=. Animal Events Report Plan
+h2. Animal Events Report Plan
 
 
 h3. Purpose
 
 __What is the purpose of the report?__
 
-p(. The purpose of this report is to show the events of all animals. Animal identification, types and a list of events will be shown. 
+p(. The purpose of this report is to show the animals; the animal identification, weight, and ADG; and which each animal a list of the events associated with that animal. 
 
 h3. Target
 
@@ -88,27 +108,36 @@ h3. Data
 
 __What data should appear in the report?__
 
+* Premises information in the report header
+# Name of the Premises
+# Address
+# Administrator
+# Phone
+# URI
+
+* Animal information in the grouping
 # ID
 # Visual ID
 # Species
 # Sex
 # ADG
-# Age
-# Event List
-## Date of Event
-## Event Type
-## Comments
+
+* For each animal group a list of associated events
+# Date of Event
+# Name of the Event
+# Values for the event
 
 
 h3. Source
 
 __Where is the data coming from?__
 
-p(. Premises document, via the EMF DataSource.
+p(. Premises document, via the EMF DataSource using the @premises.rptlibrary@ and the @Events@ and @Premises@ datasets.
 
 h3. Calculated Data
 
-__Does any data need to be calculated?__
+Events are grouped by animal so, will need the following information on the animal
+
 
 p(. None
 
@@ -125,7 +154,7 @@ __Do you want to enable the report user to specify what data to display?__
 p(. Not at this time, but it in the future we may want to reuse this report, sharing it across projects.
 
 
-h2=. Animal Locations Report Plan
+h2. Animal Locations Report Plan
 
 
 h3. Purpose
@@ -144,6 +173,14 @@ h3. Data
 
 __What data should appear in the report?__
 
+* Premises information in the report header
+# Name of the Premises
+# Address
+# Administrator
+# Phone
+# URI
+
+* An animal in each row in the table with the columns
 # ID
 # Visual ID
 # Species
@@ -160,7 +197,7 @@ h3. Source
 
 __Where is the data coming from?__
 
-p(. Premises document, via the EMF DataSource.
+p(. Premises document, via the EMF DataSource using the @premises.rptlibrary@ and the @Animals@ and @Premises@ datasets.
 
 h3. Calculated Data
 
