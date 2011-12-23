@@ -29,9 +29,9 @@
       <import feature="org.eclipse.birt.example" version="3.7.0.v20110603-7M7l-DZRDKKDnDc" match="greaterOrEqual"/>
       <import feature="org.eclipse.ocl.all" version="3.1.1.v20110830-1428" match="greaterOrEqual"/>
       <import feature="org.eclipse.emf.oda.ecore.ui" version="1.0.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.emf.oda.ecore" version="1.2.0.qualifier" match="greaterOrEqual"/>
       <import feature="org.eclipse.birt.chart" version="3.7.0.v20110603-7r9e1FQCnvKN67BslXE5" match="greaterOrEqual"/>
       <import feature="org.eclipse.birt" version="3.7.0.v20110603-BDF9E7AGTzuHfngz-8A08WvWDv8v" match="greaterOrEqual"/>
+      <import feature="org.eclipse.emf.oda.ecore" version="1.1.0.201112201754"/>
    </requires>
 
 </feature>
