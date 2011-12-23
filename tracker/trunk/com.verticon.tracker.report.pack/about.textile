@@ -15,7 +15,7 @@ On installation, Tracker Report Packs will be detected and its reports and resou
 h2(. Datasources
 
 Tracker Report Pack reports utilize property files or hidden report parameters to set up the datasource documents.  If the report is run with the Report Parameters embedded in the url 
-@&rp_premises_doc=platform%3A%2Fresource%2FExample_Fair%2Fexample.premises@ then the report will use the @example.premises@ document from the @Example_Fair@ project as the datasource.  If the report parameters are not passed during launch then the report will load the local @report.properties@ file and the value of the @rp_premises_doc@ parameter.
+@&rp_premises_doc=platform%3A%2Fresource%2Fcom.verticon.tracker.fair.example%2Fexample.premises@ then the report will use the @example.premises@ document from the @com.verticon.tracker.fair.example@ project as the datasource.  If the report parameters are not passed during launch then the report will load the local @report.properties@ file and the value of the @rp_premises_doc@ parameter.
 
 
 h3(. Navigator Popup Menus
