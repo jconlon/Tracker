@@ -14,7 +14,7 @@ On installation, Tracker Report Packs will be detected and its reports and resou
 h2(. Datasources
 
 Tracker Fair Report Pack reports utilize property files or hidden report parameters to set up the datasource documents.  If the report is run with the Report Parameters embedded in the url 
-@&rp_premises_doc=platform%3A%2Fresource%2FExample_Fair%2Fexample.premises&rp_fair_doc=platform%3A%2Fresource%2FExample_Fair%2Fexample.fair@ then the report will use the @example.premises@ and the @example.fair@ documents from the @Example_Fair@ project as the datasources.  If the report parameters are not passed during launch then the report will load the local @report.properties@ file and the value of the @rp_premises_doc@ and @rp_fair_doc@ parameters.
+@&rp_premises_doc=platform%3A%2Fresource%2Fcom.verticon.tracker.fair.example%2Fexample.premises&rp_fair_doc=platform%3A%2Fresource%2Fcom.verticon.tracker.fair.example%2Fexample.fair@ then the report will use the @example.premises@ and the @example.fair@ documents from the @com.verticon.tracker.fair.example@ project as the datasources.  If the report parameters are not passed during launch then the report will load the local @report.properties@ file and the value of the @rp_premises_doc@ and @rp_fair_doc@ parameters.
 
 h2(. Shared Resources
 
@@ -54,7 +54,7 @@ h4(. DataSources
 
 h4(. DataSets
 
-All datasets are tested against the @platform:/resource/Example_Fair/example.fair@ and the @platform:/resource/Example_Fair/example.premises@ datasources
+All datasets are tested against the @platform:/resource/com.verticon.tracker.fair.example/example.fair@ and the @platform:/resource/com.verticon.tracker.fair.example/example.premises@ datasources
 
 * @Exhibits@
 ** @self.exhibits() -> select(e:Exhibit | e.animal.weightGainPerDay.oclIsUndefined() = false and e.exhibitor.name.oclIsUndefined() = false)@
