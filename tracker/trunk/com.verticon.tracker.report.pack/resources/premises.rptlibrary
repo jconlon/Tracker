@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.1.v20110905 Build &lt;3.7.1.v20110913-1734></property>
     <property name="units">in</property>
     <property name="theme">defaultTheme</property>
     <parameters>
@@ -73,7 +73,7 @@ if(premisesDoc!=null){
 }
 printWriter.println("	Premises resource="+this.getExtensionProperty("resource"));]]></method>
             <method name="afterClose"><![CDATA[printWriter.close();]]></method>
-            <property name="resource">platform:/resource/Example_Fair/example.premises</property>
+            <property name="resource">platform:/resource/com.verticon.tracker.fair.example/example.premises</property>
         </oda-data-source>
     </data-sources>
     <data-sets>
