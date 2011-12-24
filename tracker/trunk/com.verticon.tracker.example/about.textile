@@ -1,5 +1,7 @@
 h1=. Example Farm
 
+com.verticon.tracker.example Version 0.1.0
+
 **Contents**
 
 {toc:style=disc|minLevel=2|maxLevel=3}
@@ -15,12 +17,12 @@ This example uses:
 # The Tracker Location Service @com.verticon.locaton@ 
 # The Tracker Agriculture Model Editor @com.verticon.agriculture.editor@ 
 # Eclipse BIRT @org.eclipse.birt@
-# Tracker Premises Reports infrastructure, @com.verticon.tracker.premises.reports@ that has been deployed to a shared BIRT resource library;
+# Tracker Premises Report Pack, @com.verticon.tracker.report.pack@ 
 
 h2. Installation
 
-# Download the Tracker Premises Reports infrastructure @com.verticon.tracker.premises.reports@ and import it into your workspace
-# Open the Reports.html file and follow installation directions
+# Install the Tracker Premises Report Pack @com.verticon.tracker.report.pack@ [2]
+# Import and copy this project into the workspace.[3]
 
 h2. Reports 
 
@@ -38,7 +40,7 @@ h3(. Run Premises Reports from the Workspace
 
 h3(. Accessing Reports from a Browser
 
-Reports can also be launched from a browser with a parameterized URL that specifies running BIRT Web Server, the report file path and which premises document to use as a datasource. [2]
+Reports can also be launched from a browser with a parameterized URL that specifies running BIRT Web Server, the report file path and which premises document to use as a datasource. [4]
 
 h4(. Tracker Report Pack Reports
 
@@ -50,7 +52,7 @@ Reports from Tracker report packs are preloaded in the BIRT Web Server and can b
 |"Animal Events":http://localhost:8080/viewer/frameset?__report=report%2Fanimal_events.rptdesign&__format=html&__svg=false&__locale=en_US&__timezone=US%2FIndiana-Starke&__masterpage=true&__rtl=false&__cubememsize=10&__dpi=96&-1662317431&rp_premises_doc=platform%3A%2Fresource%2Fcom.verticon.tracker.example%2Fexample.premises|Shows the events of all animals. Animal identification, types and a list of events. |
 |"Animal Locations":http://localhost:8080/viewer/frameset?__report=report%2Fanimal_locations.rptdesign&__format=html&__svg=false&__locale=en_US&__timezone=US%2FIndiana-Starke&__masterpage=true&__rtl=false&__cubememsize=10&__dpi=96&-1662317431&rp_premises_doc=platform%3A%2Fresource%2Fcom.verticon.tracker.example%2Fexample.premises|Shows the last known location of all animals. Animal identification, types, weights, and locations. |
 
-h4(. Reports in the Workspace[3]
+h4(. Reports in the Workspace[5]
 
 To access browser based reports that are in the workspace or the file system, you will have to use absolute paths to the rptdesign file. 
 * The parameter @__report@ is a absolute path to the report deployed in the file system.  
@@ -62,6 +64,10 @@ To access browser based reports that are in the workspace or the file system, yo
 
 fn1. This document was created with the Wikitext textile editor.
 
-fn2. The links in the table will need prior configuration that is specific to your system in order to work on your local host. First, you must set the user preferences: @Report Design | Preview@ enable use external browser and @Report Design | Preview | Preview Server@ and set the port. Next, change the port in the links to reference the port you set.  Finally, you must edit the links to reference the absolute paths to the reports. For reports to work you may need to initial the ReportViewer Servlet by launching a report from the popup menu first.
+fn2. To install the software go to the menu @Help | Install New Software | Tracker Release | BIRT | Tracker Premises Report Pack@
 
-fn3. These are only examples as the URL to the report is system specific.
+fn3. Imported projects are not required to be copied into the workspace default locations.  Use caution when working with imported but not copied projects, least they affect other user workspaces.
+
+fn4. The links in the table will need prior configuration that is specific to your system in order to work on your local host. First, you must set the user preferences: @Report Design | Preview@ enable use external browser and @Report Design | Preview | Preview Server@ and set the port. Next, change the port in the links to reference the port you set.  Finally, you must edit the links to reference the absolute paths to the reports. For reports to work you may need to initial the ReportViewer Servlet by launching a report from the popup menu first.
+
+fn5. These are only examples as the URL to the report is system specific.
