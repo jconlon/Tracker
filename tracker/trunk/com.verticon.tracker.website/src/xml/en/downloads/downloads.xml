@@ -118,6 +118,50 @@ release.lin.size=50.2M
 	</section>
 	
 	<section>
+		<title>Tracker Example Projects</title>
+		<table xml:id="ex.calstable" frame='all'>
+			<title>Example Tracker Projects</title>
+			<tgroup cols='3' align='left' colsep='1' rowsep='1'>
+				<colspec colname='c1' />
+				<colspec colname='c2' />
+				<thead>
+					<row>
+						<entry>Download File</entry>
+						<entry>Size</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>
+							<ulink 
+								url="http://tracker.verticon.com/Tracker/downloads/Premises-Example.zip">
+								Premises-Example.zip
+							</ulink>
+						</entry>
+						<entry>10.7 KB</entry>
+						
+					</row>
+					
+				</tbody>
+			</tgroup>
+		</table>
+		<para>To install:</para>
+		<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>Down load file to a
+			desirable directory.</para>
+			</listitem>
+			<listitem >
+				<para>From the File menu select Import...</para>
+			</listitem>
+			<listitem>
+				<para>Then select General | Existing Projects into Workspace.</para>
+			</listitem>
+		</itemizedlist>
+
+	</section>
+
+	<section>
 		<title>Tracker Device Simulator</title>
 		<table xml:id="ex.calstable" frame='all'>
 			<title>Tool for simulating physical sensor and actuator devices</title>
@@ -171,7 +215,6 @@ release.lin.size=50.2M
 		</itemizedlist>
 
 	</section>
-
 	<sidebar id="prerequisites">
 		<variablelist>
 			<title>Prerequisites</title>
