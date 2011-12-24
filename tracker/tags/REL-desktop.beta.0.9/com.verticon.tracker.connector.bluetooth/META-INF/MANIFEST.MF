@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracker Bluetooth Connector
+Bundle-SymbolicName: com.verticon.tracker.connector.bluetooth
+Bundle-Version: 0.2.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Service-Component: OSGI-INF/*.xml
+Import-Package: com.intel.bluetooth,
+ javax.microedition.io,
+ org.osgi.framework;version="1.5.0",
+ org.osgi.service.io;version="1.0.0"
+Bundle-ActivationPolicy: lazy

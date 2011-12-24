@@ -1,0 +1,64 @@
+h1. Overview Agriculture Location Service Provider
+
+h2. Document Status
+
+__This document is the a draft. Future versions will fully serve the intended function of a comprehensive user guide for the installation and configuration of the Tracker Agriculture Location Service Provider.__
+
+
+h2. Agriculture Editor and Location Services
+
+Tracker Agriculture Editor and Location Service integrates state of the art GIS(Geographic Information System) technologies based on OpenGIS KML(Key Hole Markup Language) with livestock premises based animal histories and premises to premises animal movements. Tracker Agriculture Location Service offers livestock professionals a comprehensive and open desktop solution[1] for the managing and visualizing of geographic livestock herd distributions, individual animal locations, and animal movements within and between premises locations. 
+
+
+h3. Solution Requirements
+
+In order to provide an open, accessible and industry standard solution the Agriculture Editor and Location Service will provide solutions for:
+# Simple end user visualization of premises geographies through integration with industry standard geo browsers. [2]
+# Integration with off the self GPS devices for data positioning
+# Desktop editors, views, and utilities for modeling agriculture associations allowing livestock producers auditors, and processors to geographically 
+** manage internal, inter and intra association animal movements and information flows
+** create marketing and/or auditing reports for regional and _local_ based farm products 
+# Show location of animals within the local premises
+** Creation of an animal Position event from GPS devices associated with RFID readers
+** Position coordinates determine the location names based on best fit of list of geographically specified locations
+** Visual sighting of animals with assignment of location names selected from list of geographically specified locations
+** Most current Sighting event or Position event will determine location
+# Show the location of animals moved between premises
+
+
+h3. Technical Requirements
+
+# Document editor for authoring KML documents 
+# Document editor for declaring and managing Agriculture associations 
+** for geographical based livestock premises locations 
+# Utility for end user declaration of Agriculture projects 
+** These projects contain agriculture association documents (doc.agri)
+** Automatic building of desktop location service 
+*** Indexes based on project doc.agri documents
+*** Index is Premises.uri to KML Containers
+*** Index spans all workspace projects
+*** The more Tracker agriculture projects in a user workspace the richer the location index
+# Export of Tracker Projects as KML KMZ archives for
+** Sharing of information with non-technical end users
+** Suitable for marketing & website deployment
+** BIRT report generation and report deployment in HTML within the archives 
+# GPS device support in Tracker iRouter for the creation of Position history events in real-time
+# Manual creation of Position history events with drag and drop of animals to kml locations.
+# Dynamic query integration of geo-browsers to show graphical result information
+** using kml network links to a localhost kml server
+** localhost server interacting with the local agriculture documents 
+
+h3. Operational Notes
+
+Tracker Agriculture Location Service is based on the notion of configuring a Tracker project containing an agriculture document with the name doc.agri as an Agriculture Nature Project. When an project containing a doc.agri in the root directory is configured as an Agriculture Nature the locations specified in the document are made available as a global Location Service to all premises document in the workspace.  Changing any resources associated with the default doc.agri document will update the index in the location service.  
+
+
+h2. Notes
+
+fn1. While the geo browser technology chosen by the user for visualizing kml files may depend on external network based location services, premises livestock information is not sent to the network.  Thus end users can freely exchange agriculture location files with their associates (via alternate channels) without concern for breaches of data privacy.
+
+fn2. See "KML":http://en.wikipedia.org/wiki/KML and "Virtual Globes":http://en.wikipedia.org/wiki/Virtual_Globe
+
+
+
+

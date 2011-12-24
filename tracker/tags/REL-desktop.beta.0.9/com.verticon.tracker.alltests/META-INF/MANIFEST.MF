@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Addtests
+Bundle-SymbolicName: com.verticon.tracker.alltests
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.verticon.tracker.alltests.Activator
+Bundle-Vendor: Verticon, Inc.
+Require-Bundle: org.eclipse.core.runtime,
+ com.verticon.tracker.editor.tests;bundle-version="0.1.0",
+ com.verticon.tracker.fair.tests;bundle-version="1.0.0",
+ com.verticon.tracker.ocl.query.viewer.tests;bundle-version="0.1.0",
+ com.verticon.tracker.reader.comm.tests;bundle-version="1.0.0",
+ com.verticon.tracker.tests;bundle-version="0.1.0",
+ org.junit4;bundle-version="4.5.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

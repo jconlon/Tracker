@@ -1,0 +1,13 @@
+h1. Premises Gateway Feature
+
+The Premises Gateway feature is an iRouter feature that facilitates the bidirectional movement of information between _iRouter_ services and the _Tracker Premises Documents_.  
+
+The Premises Gateway feature contains three iRouter Component Factories and an Gateway EventHandler.
+* EID Reader Gateway Component Factory a factory for creating component gateways that transform EID(Electronic ID) numbers read from RFID(Radio Frequency ID) Tag Readers into iRouter _EID number_ products. 
+* Measurement Event Gateway Component Factory a factory for creating component gateways that transform iRouter _Measurement_ and _Position_ products into EventAdmin Measurement and Position Events. 
+* Gateway EventHandler a gateway service that transforms Measurement and Position events coming from the iRouter into Premises animal history events.
+* Animal Life Data Gateway Component Factory for synchronizing animal life data to external devices.
+
+See the "Tracker Business Intelligence Toolkit User Guide":http://tracker.verticon.com/Tracker/documentation/trackerUserGuide.pdf for details about the Premises Gateway Feature.
+
+ 

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" 
+ "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter>
+  	<?dbhtml filename="overview/frameworkOverview.html" ?>
+	<title>Overview</title>
+
+  	 <section>
+  	 <?dbhtml filename="overview/frameworkOverview_biwhatIsTracker.html" ?>
+	<title>What is the Tracker Toolkit?</title>
+	<para>
+	Tracker is a Business Intelligence Toolkit (BI) and suite of Business
+	Intelligence featured solutions for animal agriculture professionals.
+	The Tracker BI Toolkit is an Eclipse based
+	<emphasis>network aware rich client platform</emphasis>
+	that can be provisioned with one or more <acronym>BI</acronym>
+	Features.
+    </para>
+  	</section>
+  	
+  	<section>
+  	<?dbhtml filename="overview/frameworkOverview_bifeatures.html" ?>
+    <title>Tracker Business Intelligence Features</title>
+    <para>
+    Tracker Business Intelligence Features provide historical, current, and predictive views of animal agriculture business operations.
+  	Tracker <acronym>BI</acronym> Features are used by <emphasis>Animal Agriculture producers</emphasis>, 
+  	<emphasis>infrastructure providers</emphasis> and <emphasis>process control auditors</emphasis> to 
+ 	<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>Document;</para>
+			</listitem>
+			<listitem >
+				<para>Manage;</para>
+			</listitem>
+			<listitem>
+				<para>Analyze;</para>
+			</listitem>
+			<listitem>
+				<para>Report;</para>
+			</listitem>
+			<listitem>
+				<para>and Inter-exchange business information.</para>
+			</listitem>
+	</itemizedlist>
+    </para>
+    </section>
+  	
+  	<section>
+  	<?dbhtml filename="overview/frameworkOverview_bisolutions.html" ?>
+    <title>Tracker Business Intelligence Solutions</title>
+	<para>
+	Tracker <acronym>BI</acronym> Features are cost effective solutions for;
+	<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>recording animal event histories;</para>
+			</listitem>
+			<listitem >
+				<para>maintaining production efficiency;</para>
+			</listitem>
+			<listitem>
+				<para>improving herd quality;</para>
+			</listitem>
+			<listitem>
+				<para>documenting process controls;</para>
+			</listitem>
+			<listitem>
+				<para>recording animal movements;</para>
+			</listitem>
+			<listitem>
+				<para>and sharing animal history information.</para>
+			</listitem>
+	</itemizedlist>
+	</para>
+	</section>
+	
+
+    <section>
+        <?dbhtml filename="overview/frameworkOverview_goals.html" ?>
+		<title>Project Goals</title>
+		<para>
+			The Tracker project was undertaken to provide;
+			<orderedlist numeration="loweralpha">
+				<listitem>
+					<para>
+						a common platform container for a suite of Business Intelligence solutions useful for Livestock
+					    producers and infrastructure providers;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						free Open Source technologies to encourage widespread vendor
+						integration and user deployment of generic Livestock Business 
+						Intelligence solutions;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						lower costing custom solutions for Livestock producers, 
+						infrastructure providers and 
+						process auditors;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						create ubiquitous livestock event history inter-exchange solutions
+						via associations and marketplaces.
+					</para>
+				</listitem>
+
+			</orderedlist>
+		</para>
+	</section>
+	
+	</chapter>
+	

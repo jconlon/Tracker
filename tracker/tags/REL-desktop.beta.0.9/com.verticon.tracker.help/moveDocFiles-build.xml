@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<project name="MyHelpPlugin" default="prepare">
+	<description>
+        Prepares the Help plug-in project by copying the HTML help files
+        from the DocBook XML project into this one.
+    </description>
+
+	<property name="src.dir" value="src" />
+	<!--
+	<property name="docbook.project.dir" value="../../com.verticon.tracker.documentation" />
+	<property name="docbook.antfile" value="${docbook.project.dir}/build.xml" />
+	<property name="doc.src.dir" value="${docbook.project.dir}/doc" />
+	<property name="doc.src.toc" value="${doc.src.dir}/toc.xml" />
+	-->
+	<property name="doc.dest.toc" value="toc.xml" />
+
+	<property name="root.dir" value="root" />
+	<property name="xml.stylesheet" value="${src.dir}/addRootDir.xslt" />
+
+	<!--
+	      - target:  clean
+	-->
+	<target name="clean" description="Cleans up copied files.">
+		<delete dir="${root.dir}" />
+	</target>
+
+	<!--
+	      - target:  depends
+	      The source of the xdocs are in the com.verticon.tracker.documentation project
+	      this project may be in the same parent as this plugin project or if it was 
+	      materialized with buckminster it may be in a parent directory.  Use the 
+	      available task to determine the root before setting the properties and the filesets.
+	 -->
+	<target name="depends" depends="clean">
+		<mkdir dir="${root.dir}" />
+		<available file="../com.verticon.tracker.documentation" property="docbook.project.dir" value="../com.verticon.tracker.documentation" />
+		<available file="../../com.verticon.tracker.documentation" property="docbook.project.dir" value="../../com.verticon.tracker.documentation" />
+		<property name="doc.src.dir" value="${docbook.project.dir}/doc" />
+		<property name="doc.src.toc" value="${doc.src.dir}/toc.xml" />
+		<property name="docbook.antfile" value="${docbook.project.dir}/build.xml" />
+		<available file="${doc.src.toc}" property="toc.exists" value="true" />
+
+
+		<fileset id="doc-files" dir="${doc.src.dir}">
+			<exclude name="**/plugin.xml" />
+			<exclude name="**/mergedDoc.html" />
+			<exclude name="**/toc.xml" />
+		</fileset>
+	</target>
+
+	<target name="prepare" depends="build-xml">
+		<copy todir="${root.dir}">
+			<fileset refid="doc-files" />
+		</copy>
+	</target>
+
+	<!--
+      - target:  build-xml
+      - description:  create a xsl style that ads the ${root.dir}" to the toc.xml
+	  -  topic attribute of the root toc element
+	  -  		toc topic="root/index.html" 
+	  -	  and all href attributes of topic elements
+	  -  		<topic href="root/pr01.html"
+      -->
+	<target name="build-xml" depends="depends,createTocIfNotExists" description="Adds the root directory prefix to href attributes">
+		<xslt style="${xml.stylesheet}" in="${doc.src.toc}" out="${doc.dest.toc}">
+
+		</xslt>
+	</target>
+
+	<target name="createToc" unless="toc.exists">
+		<echo message="Create the xdocs in the documentation project first" />
+		<ant antfile="${docbook.antfile}">
+		  <property name="basedir" value="${docbook.project.dir}"/>
+		</ant>
+
+	</target>
+
+	<target name="createTocIfNotExists" depends="createToc" if="toc.exists">
+		<echo message="xdocs exists" />
+
+	</target>
+
+
+
+
+</project>

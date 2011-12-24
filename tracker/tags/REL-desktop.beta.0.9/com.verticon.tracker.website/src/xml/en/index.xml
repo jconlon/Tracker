@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!-- 
+<!DOCTYPE webpage PUBLIC "-//SF DocBook//DTD Website V2.0//EN"
+          SYSTEM "http://www.sf.net/docbook/release/website/2.0/website.dtd>
+ -->
+
+<webpage id="home">
+	<config param="rcsdate" value="$Date$" />
+	<head>
+		<title>Tracker</title>
+		<summary>Business Intelligence for Animal Agriculture Professionals</summary>
+		<keywords>Livestock, Open Source, NAIS, XML, Eclipse, RFID,
+			Herd management
+		</keywords>
+	</head>
+	<para>
+			Tracker is an <ulink url="http://www.eclipse.org/">Eclipse</ulink>
+			based <olink targetdoc="about">Business Intelligence Toolkit and suite of 
+			Business Intelligence
+            solutions </olink> for animal agriculture professionals.
+			<olink targetdoc="docs">Learn More</olink>
+	</para>
+	<section id="keyfeatures">
+		<title>Key Benefits</title>
+		<para>
+		Tracker provides the tools needed by Professional Livestock Producers, Processors, and
+		Process Auditors who wish to:
+		</para>
+
+		<variablelist>
+			<varlistentry>
+				<term>Document Livestock Herds and Premises</term>
+				<listitem>
+					<para>
+					    Tracker provides the easiest way to document all the Livestock herds within a 
+					    Premises. By turning manual and/or electronic input of Livestock event data 
+					    into small, portable documents based on an Open Industry standards
+					    based format.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Manage Online and Offline Data</term>
+				<listitem>
+					<para>
+						Tracker provides utilities for on-line operations and off-line 
+						(back room) data navigation, movement, and transformation of Livestock 
+						Event and related data.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Manage Physical Sensors and Actuators</term>
+				<listitem>
+					<para>
+						Tracker 
+						<ulink url="http://tracker-project.verticon.com/verticon_Tracker/wiki/InformationRouter">
+						<acronym>iRouter</acronym></ulink>
+						is a generic data integration framework to 
+						acquire, transform and exchange data between network connected sensors and 
+						actuators. 
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Analyze Trends</term>
+				<listitem>
+					<para>
+						Tracker data models are based on  
+						<ulink url="http://en.wikipedia.org/wiki/Eclipse_Modeling_Framework">
+						<acronym>EMF</acronym></ulink>
+						the industry standard Eclipse Modeling Framework
+						, <ulink url="http://www.osgi.org/About/Technology?section=2">
+						<acronym>OSGi</acronym></ulink>
+						the Open Systems Gateway Initiative
+						plug-in component extension framework, to allow for easy interfacing
+					    with existing Eclipse Analytical Features, as well as custom, and third party
+					    business analysis tools. 
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Create Reports</term>
+				<listitem>
+					<para>
+						Tracker Reporting utilizes the
+						<ulink url="http://www.eclipse.org/birt/intro/"><acronym>BIRT</acronym></ulink>
+						open source reporting system for the design and display of compelling Livestock
+						Information Reports.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Collaborate with Associates</term>
+				<listitem>
+					<para>
+						 Tracker creates small portable documents based on an Open
+						<acronym>XML</acronym> standards based format. The size and format of these
+					     documents make them perfect for sharing via email, removable media, and web based
+					     data inter-exchanges.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<!--
+			<itemizedlist> <listitem> <para> <ulink
+			url="http://silkpage.markupware.com/docs/user-guide/"> User
+			Guide</ulink> </para> </listitem> <listitem> <para> <ulink
+			url="http://silkpage.markupware.com/downloads/"> Latest Downloads
+			</ulink> </para> </listitem> <listitem> <para> <ulink
+			url="http://silkpage.markupware.com/dev/"> Developers </ulink>
+			</para> </listitem> </itemizedlist>
+		-->
+	</section>
+	
+	<section id="whatsnew">
+		<title>What's New?</title>
+		<para>
+		See the latest status of the project at the
+			<ulink url="http://tracker-project.verticon.com/verticon_Tracker">
+				Tracker Project Management Website.</ulink>
+		</para>
+	</section>
+</webpage>

@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Geography Editor Documentation
+Bundle-SymbolicName: com.verticon.geography.editor.doc;singleton:=true
+Bundle-Version: 0.1.1.qualifier
+Bundle-Vendor: Verticon, Inc.

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<project name="MyHelpPlugin" default="prepare">
+	<description>
+        Prepares the Help plug-in project by copying the HTML help files
+        from the DocBook XML project into this one.
+    </description>
+
+    <property name="src.dir" value="src" />
+	<property name="docbook.project.dir" value="../com.verticon.tracker.documentation" />
+	<property name="root.dir" value="root" />
+	<property name="doc.src.dir" value="${docbook.project.dir}/doc" />
+	<property name="doc.src.toc" value="${doc.src.dir}/toc.xml" />
+	<property name="doc.dest.toc" value="toc.xml" />
+    <property name="xml.stylesheet" value="${src.dir}/addRootDir.xslt" />
+
+	<!--
+	      - target:  clean
+	-->
+	<target name="clean" description="Cleans up copied files.">
+		<delete dir="${root.dir}" />
+	</target>
+
+	<!--
+	      - target:  depends
+	 -->
+	<target name="depends" depends="clean">
+		<mkdir dir="${root.dir}" />
+	</target>
+
+	<fileset id="doc-files" dir="${doc.src.dir}"> 
+		<exclude name="**/plugin.xml" />
+		<exclude name="**/mergedDoc.html" />
+		<exclude name="**/toc.xml" />
+	</fileset>
+	
+	
+	<target name="prepare" depends="build-xml">
+		<copy todir="${root.dir}">
+			<fileset refid="doc-files" />
+		</copy>
+	</target>
+	
+	<!--
+      - target:  build-xml
+      - description:  create a xsl style that ads the ${root.dir}" to the toc.xml
+	  -  topic attribute of the root toc element
+	  -  		toc topic="root/index.html" 
+	  -	  and all href attributes of topic elements
+	  -  		<topic href="root/pr01.html"
+      -->
+	<target name="build-xml" depends="depends" 
+	        description="Adds the root directory prefix to href attributes">
+		<xslt style="${xml.stylesheet}"  
+	            in="${doc.src.toc}" out="${doc.dest.toc}">
+			
+		</xslt>
+	</target>	
+</project>

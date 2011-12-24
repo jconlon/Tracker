@@ -1,0 +1,71 @@
+h1. Standards
+
+h2. Introduction to iRouter Standards
+
+iRouter is a suite of "Open System Gateway Initiative - OSGi":http://en.wikipedia.org/wiki/OSGi_Specification_Implementations compatible service components operating in an OSGi runtime.   
+
+* Wire Administration 
+** Producer 
+** Consumer Service
+* Configuration Administration Service 
+** Component implementing a ManagedServiceFactory 
+** Declarative Service component with configuration enabled
+* Metatype Service
+** Components offer a metatype document describing configuration
+* Monitorable Service
+* Declarative Services
+
+Any OSGi component offering the following standard services can be deployed to the iRouter and offer new functionality. 
+
+
+h2. OSGi
+
+iRouter can run as a standalone *Server* _appliance_,  within an *Tracker Desktop* or within a generic *Eclipse Desktop*.  The Server and Desktops run different implementations of "OSGi Runtime":http://en.wikipedia.org/wiki/OSGi_Specification_Implementations :
+* Server based iRouter instances run the "Felix":http://felix.apache.org/  implementation,
+* Tracker and Eclipse Desktop hosted instances run the "Equinox":http://eclipse.org/equinox/  implementation.
+
+h2. Information Envelopes
+
+iRouter component services interexchange compatible _envelopes_ of information. OSGi _Envelope_ objects encapsulate a single immutable OSGi _Measurement_, _Position_ or _State_. Each _Envelope_ specifies the _scope_ of information it encapsulates.  Envelopes of information are compatible when the encapsulated content and _scope_ names are the same.
+
+
+h2. Wire Admin Service
+
+Conformance to the OSGi *WireAdmin Service* is what makes the Tracker iRouter an _Information Router_.  Proxy and internal components must implement a _Producer_ or a _Consumer_ service or both to be an iRouter compatible component. Additionly all iRouter components must specify a _wire group_ name property during service registration. 
+
+When a configuration is saved (activated) the iRouter infrastructure automatically creates the collaborative _wire groups_ by wiring together all _Producer_ and _Consumer_ services offering compatible information envelopes and having the same wiregroup name.  
+
+*Multiple independent _Wire groups_ can be transforming and exchanging information at the same time.*
+
+
+h2. Configuration Admin Service
+
+iRouter components are configured with the OSGi *Configuration Admin Service*, which provides the component with it's configuration data.  iRouter components must be:
+# Configuration aware
+# Declare the types of configuration data they will accept.
+
+
+h3. Declarative Services
+
+The simplest and preferred approach to create an iRouter component that is configuration aware is to specify the component as an OSGi *Declarative Services* component that requires a configuration.
+
+h3. ManagedServiceFactories
+
+Alternately for more complex composite (Producer and Consumer) components, Tracker iRouter components can be implemented as *Configuration Admin*  @ManagedServiceFactory@ components.  
+
+h3. Metatype Service
+
+iRouter components declare the types of configuration data they will accept as a @metatype.xml@ resource that is bundled in the component. The presence of this resource is sufficient for the iRouter configuration editors to build a compatible form for configuring the component. 
+
+h2. P2 Provisioning Service
+
+Like the Tracker Desktop, Tracker iRouter components are deployed and updated through the "Equinox P2":http://wiki.eclipse.org/Equinox/p2 provisioning infrastructure. 
+
+h2. Just in Time Functionality
+
+By adhering to the above set of standards and services, the Tracker iRouter provides:
+* component developers a context for the rapid development and deployment of custom functionality to end users.  
+* end users with an _Information Routing Platform_ that meet the widest variety of current and future network sensor and actuator use-case requirements.  
+
+
+

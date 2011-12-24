@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="plugin_export" name="build">
+
+	<target name="plugin_export">
+		<property name="projectName" value="trackerProduct" />
+		<property name="version" value="1.0.0"/>
+
+
+
+		<!-- Define build directories -->
+		<property name="build.root" location="build/${projectName}" />
+		<property name="build.temp" location="${build.root}/temp" />
+		<property name="build.out" location="${build.root}/product" />
+
+		<!-- Create build directories -->
+		<delete dir="${build.temp}" />
+		<delete dir="${build.out}" />
+	    <mkdir dir="${build.temp}" />
+		<mkdir dir="${build.out}" />
+
+
+		<!-- Assemble the files -->
+		<zip destfile="${build.temp}/temp.zip" >
+			<zipgroupfileset dir="../com.verticon.tracker" includes="**/*.zip"  />
+		    <zipgroupfileset dir="../com.verticon.tracker.edit" includes="**/*.zip" />
+		    <zipgroupfileset dir="../com.verticon.tracker.editor" includes="**/*.zip" />
+		    <zipgroupfileset dir="../com.verticon.tracker.event.handler" includes="**/*.zip"/>
+			<zipgroupfileset dir="../com.verticon.tracker.event.publisher" includes="**/*.zip" />			
+		</zip>
+		
+		<zip destfile="${build.out}/${projectName}_v_${version}.zip">
+		  <zipfileset src="${build.temp}/temp.zip" excludes="com/**, META-INF/**"/>  
+		</zip>
+	</target>
+</project>

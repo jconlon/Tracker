@@ -1,0 +1,90 @@
+h1=. Vernon County Fair
+
+**Contents** [1]
+
+{toc:style=disc|minLevel=2|maxLevel=3}
+
+h2. Introduction
+
+Creating large KML files can not easily be done by hand. Large Kml files are often created from data base or Spreadsheet data. BIRT can create report from many different types of data sources.
+
+h2. Requirements
+
+Create a BIRT Emitter to generate KML from BIRT reports. 
+
+# Generate the KML elements from a BIRT Table Report Item
+# Must be able to create custom Placemark Balloons in the generated KML that can contain links to launch BIRT reports specific to the Placemark item
+# Use external styles and images
+# Output to KMZ
+
+h2. BIRT Table Format
+
+* Use a BIRT Table report item to map the following table column names to KML elements  
+** Folder - this will typically be set up as a grouping of the report data to contain the placemarks
+*** Description - set on the grouping row as the Folder
+**** Supports dynamic html in Folder description elements
+*** StyleURL - set on the grouping row as the Folder.  Used to point to external styling files typically placed in the @kml_artifacts@ folder
+** Placemark - the detail rows of the table
+*** Description 
+**** Support dynamic html in Placemark description elements (KML Balloons)
+**** Support launching of BIRT Report Viewer from links in description.  Can send parameterized URLs to preload report parameters.
+*** PlacemarkID 
+**** To support: @<a href="#<VALUE-OF>row["Next Placemark ID"]</VALUE-OF>;balloonFlyto">@
+*** Latitude
+*** Longitude
+*** StyleURL
+**** To support KML external styling files  
+* Export BIRT Report to KML archives
+** If the @kml_artifacts@ folder exists in same directory of report include all of its sub folders and resources in the archive.
+ 
+
+h2. BIRT Report Viewer References
+
+* "BIRT 3.7 Migration Guide":http://wiki.eclipse.org/Birt_3.7_Migration_Guide
+* "Using BIRT Report Viewer":http://www.eclipse.org/birt/phoenix/deploy/viewerUsageMain.php
+* "Deploying BIRT Report Viewer":http://www.eclipse.org/birt/phoenix/deploy/viewerSetup.php
+* "Deploying BIRT (BIRT Report Viewer)":http://onjava.com/pub/a/onjava/2006/07/26/deploying-birt.html?page=1
+* "Writing a bundle-based server application":http://www.eclipse.org/equinox/server/http_writing_application.php
+* "Embedding an HTTP server in Equinox":http://www.eclipse.org/equinox/server/http_in_equinox.php
+
+
+
+h2. Launching BIRT Report Viewer from KML in Google Earth
+
+* Placemark Balloons can contain links to view a report in the BIRT Report Viewer Servlet that will be displayed in the Browser page of Google Earth
+* When BIRT is installed in Eclipse there is a HTTP service running on the localhost so URLs can created to launch reports
+* Need to set the @Report Design | Preview@ server to a fixed port.  The default is set to 8080.  
+* Current approach is to create:
+** Report parameters for declaring environment specific URL for launching the report
+*** rp_baseUrl
+**** http://localhost:8080/viewer/frameset
+*** rp_reportsDirectory
+**** /home/jconlon/workspace/VSN-Kickapoo-Reports-01/reports/
+*** rp_resourceFolder
+**** /opt/Verticon/birt_resources/
+**  A GenericLink computed fields for creating a generic link for all reports based on the report parameters
+*** Two table bindings for each report
+**** Link
+**** Label
+***** Label can be blank under certain circumstances (this causes the link to disappear)
+
+h2. TODO
+
+# Add error checking
+# Create Tracker Example File - See VSN betas for examples: /home/jconlon/workspace/VSN-Kickapoo-Reports-01/reports/KmlReports
+# Create and document use-case scenario
+
+h2. Future Directions
+
+Tracker projects can be archived as KMZ files thru the functionality provided by the @com.verticon.google.kmlgx.core.model.editor@ project.
+
+# How can these archives be most effectively created for 
+** viewing in google earth, 
+** interogated and analyzed with the BIRT Reporting Engine and Report Viewer Servlets
+*** with external reports
+*** with internal reports
+*** running on well known internet servers
+*** running on the localhost 
+
+fn1. This document was created with the Wikitext textile editor.
+

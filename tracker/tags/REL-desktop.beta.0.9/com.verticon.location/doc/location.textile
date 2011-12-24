@@ -1,0 +1,16 @@
+h1. Location Service Overview
+
+h2. Document Status
+
+__This document is the first draft of an Geography Location API Guide and is only intended as an overview to the API used for the Geographic Location Services. Other documents will fully serve the intended function of a comprehensive user guide for the installation and configuration of the specific Location Service Providers.__
+
+h2. Solution Requirements
+
+In order to provide an open, accessible and industry standard solution the Location Service will provide solutions for:
+# Name of sub location of objects within larger geographic premises
+# Name of location of objects moved between premises
+# Address of a location
+
+
+
+

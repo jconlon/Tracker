@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?metadataRepository class='org.eclipse.equinox.internal.p2.metadata.repository.LocalMetadataRepository' version='1.0.0'?>
+<repository name='The Eclipse Project Updates' type='org.eclipse.equinox.internal.p2.metadata.repository.LocalMetadataRepository' version='1.0.0'>
+  <properties size='2'>
+    <property name='p2.compressed' value='true'/>
+    <property name='p2.timestamp' value='1235426489722'/>
+  </properties>
+
+
+
+  <units size='19'>
+     <unit id='com.verticon.tracker.editor.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Premises Editor'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Livestock information management editors, utilities and tools.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.editor.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.editor.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+    
+    <unit id='com.verticon.tracker.export.wlic.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Optional Features'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Optional livestock information management tools and utilities.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.export.wlic.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.export.wlic.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+    <unit id='com.verticon.tracker.reader.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Optional Features'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Optional livestock information management tools and utilities.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.reader.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.reader.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+
+   <unit id='com.verticon.tracker.fair.editor.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Fair Editor'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Livestock exhibition information management tools and utilities.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.fair.editor.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.fair.editor.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+
+    <unit id='com.verticon.tracker.fair.poi.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Fair Editor'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Livestock exhibition information management tools and utilities.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.fair.poi.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.fair.poi.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    <!-- BIRT -->
+     <unit id='com.verticon.tracker.birt.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Business Intelligence Reporting Tool (BIRT)'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Information reporting tools for design, generation and printing.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.birt.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.birt.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+    <unit id='com.verticon.birt.report.loader.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Business Intelligence Reporting Tool (BIRT)'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Information reporting tools for design, generation and printing.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.birt.report.loader.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.birt.report.loader.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+    <unit id='com.verticon.birt.report.engine.emmitter.kml.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Business Intelligence Reporting Tool (BIRT)'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Information reporting tools for design, generation and printing.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.birt.report.engine.emmitter.kml.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.birt.report.engine.emmitter.kml.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+    <unit id='com.verticon.tracker.report.pack.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Business Intelligence Reporting Tool (BIRT)'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Information reporting tools for design, generation and printing.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.report.pack.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.report.pack.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+    <unit id='com.verticon.tracker.fair.report.pack.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Business Intelligence Reporting Tool (BIRT)'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Information reporting tools for design, generation and printing.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.fair.report.pack.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.fair.report.pack.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+    <!-- Added iRouter categories -->
+    
+    <unit id='com.verticon.tracker.irouter.bwcontrol.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='iRouter'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Data integration framework for physical sensors and actuators.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.bwcontrol.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.bwcontrol.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+     <unit id='com.verticon.tracker.irouter.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='iRouter'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Data integration framework for physical sensors and actuators.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+     <unit id='com.verticon.tracker.irouter.mettler.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='iRouter'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Data integration framework for physical sensors and actuators.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.mettler.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.mettler.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+    <unit id='com.verticon.tracker.irouter.premises.gateway.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='iRouter'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Data integration framework for physical sensors and actuators.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.premises.gateway.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.premises.gateway.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit> 
+    
+    <unit id='com.verticon.tracker.irouter.trutest.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='iRouter'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Data integration framework for physical sensors and actuators.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.trutest.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.trutest.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    <!-- New in 0.7.0 -->
+     <unit id='com.verticon.tracker.irouter.gps.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='iRouter'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Data integration framework for physical sensors and actuators.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.gps.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.gps.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+     <unit id='com.verticon.tracker.irouter.gps.ui.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='iRouter'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Data integration framework for physical sensors and actuators.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.gps.ui.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.irouter.gps.ui.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+     <unit id='com.verticon.geography.editor.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Geography Editor'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Geography and mapping editor, utilities and tools.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.geography.editor.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.geography.editor.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+     <unit id='com.verticon.agriculture.editor.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Agriculture Editor'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Geography to Livestock mapping editor, utilities and tools.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.agriculture.editor.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.agriculture.editor.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+  </units>
+</repository>

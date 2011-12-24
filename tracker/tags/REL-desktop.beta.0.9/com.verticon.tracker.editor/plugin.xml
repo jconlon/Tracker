@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    
+    <category
+          id="com.verticon.tracker.editor.Wizard.category.examples"
+          name="%category.name.0"
+          parentCategory="org.eclipse.ui.Examples"/> 
+    
+    <category
+          id="com.verticon.tracker.editor.Wizard.category.ID"
+          name="%category.name.0"/>
+     
+    <wizard
+      id = "com.verticon.tracker.editor.presentation.TrackerModelWizardID"
+      name = "%_UI_TrackerModelWizard_label"
+      class = "com.verticon.tracker.editor.presentation.TrackerMainModelWizard"
+      category = "com.verticon.tracker.editor.Wizard.category.ID"
+      icon = "icons/full/obj16/TrackerModelFile.gif">
+      <description>%_UI_TrackerModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+    
+    <wizard
+          category="com.verticon.tracker.editor.Wizard.category.ID"
+          class="com.verticon.tracker.editor.presentation.TrackerAnimalModelWizard"
+          icon="icons/full/obj16/AnimalModelFile.gif"
+          id="com.verticon.tracker.editor.presentation.TrackerTemplateWizardID"
+          name="%_UI_AnimalTemplateWizard_label">
+      <description>%_UI_AnimalTemplateWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+    
+    <wizard
+            name="%wizard.name.0"
+            icon="icons/full/obj16/TrackerModelFile.gif"
+            category="org.eclipse.ui.Examples/com.verticon.tracker.editor.Wizard.category.examples"
+            class="com.verticon.tracker.editor.presentation.SampleTrackerProjectWizard"
+            project="true"
+            id="com.verticon.tracker.editor.wizards.NewTrackerProjectWizard">
+         <description>
+            %wizard.description.0
+         </description>
+      </wizard>
+  </extension>
+
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "com.verticon.tracker.editor.presentation.TrackerEditorID"
+        name = "%_UI_TrackerEditor_label"
+        icon = "icons/full/obj16/TrackerModelFile.gif"
+        extensions = "premises"
+        class = "com.verticon.tracker.editor.presentation.TrackerEditor" 
+        contributorClass="com.verticon.tracker.editor.presentation.TrackerActionBarContributor" >
+    </editor>
+  </extension>
+  
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "com.verticon.tracker.editor.presentation.AnimalEditorID"
+        name = "%editor.name.0"
+        icon = "icons/full/obj16/AnimalModelFile.gif"
+        extensions = "animal"
+        class = "com.verticon.tracker.editor.presentation.TrackerEditor" 
+        contributorClass="com.verticon.tracker.editor.presentation.TrackerActionBarContributor" >
+    </editor>
+  </extension> 
+  
+  <extension
+        point="org.eclipse.ui.decorators">
+     <decorator
+           adaptable="true"
+           class="com.verticon.tracker.editor.decorators.TrackerTemplateDecorator"
+           id="com.verticon.tracker.editor.decorator"
+           label="%decorator.label.0"
+           lightweight="true"
+           state="true">
+        <enablement>
+           <and>
+              <objectClass name="org.eclipse.core.resources.IResource"/>
+              <objectState
+                    name="name"
+                    value="*.tracker"/>
+              <objectState
+                    name="persistentProperty"
+                    value="com.vertion.tracker.fileType=template"/>
+           </and>
+        </enablement>
+     </decorator>
+  </extension>
+  <extension
+        point="org.eclipse.ui.preferencePages">
+     <page
+           class="com.verticon.tracker.editor.preferences.internal.TrackerEditorPreferencePage"
+           id="com.verticon.tracker.prefs.view"
+           name="%page.name.0">
+     </page>
+  </extension>
+  
+  <extension
+        point="org.eclipse.core.runtime.preferences">
+     <initializer
+           class="com.verticon.tracker.editor.preferences.internal.PreferenceInitializer">
+     </initializer>
+  </extension>
+
+  <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      
+      <perspectiveExtension targetID="com.verticon.tracker.product.desktop.perspective">
+         <perspectiveShortcut id="org.eclipse.ui.resourcePerspective"/>
+         <newWizardShortcut
+               id="com.verticon.tracker.editor.presentation.TrackerModelWizardID">
+         </newWizardShortcut>
+         <newWizardShortcut
+               id="com.verticon.tracker.editor.presentation.TrackerTemplateWizardID">
+         </newWizardShortcut>
+      </perspectiveExtension>
+      
+      <perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+         <perspectiveShortcut id="com.verticon.tracker.product.desktop.perspective"/>
+      </perspectiveExtension>
+      
+  </extension>
+   
+   
+   <extension point="org.eclipse.ui.intro"> 
+    <introProductBinding
+        introId="org.eclipse.ui.intro.universal"
+        productId="com.verticon.tracker.product.desktop.application">
+    </introProductBinding>
+    <intro
+          class="org.eclipse.ui.intro.config.CustomizableIntroPart"
+          id="com.verticon.tracker.editor.intro">
+    </intro>
+    <introProductBinding
+          introId="com.verticon.tracker.editor.intro"
+          productId="com.verticon.tracker.product.desktop.application">
+    </introProductBinding>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="%_UI_commands_Tracker_category_description"
+            id="com.verticon.tracker.editor.commands.Tracker.category"
+            name="%category.name.2">
+      </category>
+      
+      <!-- Place Holder in Popups Command -->
+      <command
+             id="com.verticon.tracker.editor.menus.popupany"
+             
+             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+             description="%_UI_commands_generic_select_description"
+             name="%_UI_commands_generic_select_name">
+      </command>
+      
+      <!-- Select Command -->
+       <command
+             id="com.verticon.tracker.fair.editor.commands.generic.select.command"
+             defaultHandler="com.verticon.tracker.editor.handlers.GenericSelectInOutlineHandler"
+             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+             description="%_UI_commands_generic_select_description"
+             name="%_UI_commands_generic_select_name">
+      </command>
+      
+      <!-- TagIds Commands -->
+      <command
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            defaultHandler="com.verticon.tracker.editor.handlers.ImportTagIdsAsTemplateEventsHandler"
+            description="%_UI_commands_importTagIds_asTemplate_description"
+            id="com.verticon.tracker.editor.commands.importTagIds.asTemplate.command"
+            name="%_UI_commands_importTagIds_asTemplate_name">
+      </command>
+      <command
+            id="com.verticon.tracker.editor.commands.importTagIds.asSelected.command"
+            defaultHandler="com.verticon.tracker.editor.handlers.ImportTagIdsAsSelectedEventsHandler"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            description="%_UI_commands_importTagIds_asSelected_description"
+            name="%_UI_commands_importTagIds_asSelected_name">
+      </command>
+      <!-- Text file commands -->
+      <command
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            defaultHandler="com.verticon.tracker.editor.handlers.ImportTextAsLifeDataEventsHandler"
+            description="Imports text file as animals with life data."
+            id="com.verticon.tracker.editor.commands.importText.asLifeData.command"
+            name="Import Text File as Animal Life Data">
+      </command>
+      <!-- Import log command Ticket#532 
+      Moved to com.verticon.tracker.irouter.premises.gateway
+       <command
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            defaultHandler="com.verticon.tracker.irouter.gateway.internal.ImportLogHandler"
+            description="Imports log file as animal event data."
+            id="com.verticon.tracker.editor.commands.importLog.asEventData.command"
+            name="Import Log File as Animal Event Data">
+      </command>
+      -->
+      <!-- Pending Ticket#501
+       <command
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            defaultHandler="com.verticon.tracker.editor.handlers.ImportStandardEventHandler"
+            description="Imports text file as a standard animal event."
+            id="com.verticon.tracker.editor.commands.importText.asEventData.command"
+            name="Import Log File as Standard Event Data">
+      </command>
+      -->
+      <!-- Animal Commands    
+      -->
+      <command
+            id="com.verticon.tracker.editor.commands.animal.changeType.command"
+            defaultHandler="com.verticon.tracker.editor.handlers.AnimalsChangeTypeOfHandler"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            description="%_UI_commands_animal_changeType_description"
+            name="%_UI_commands_animal_changeType_name">
+      </command>
+      <command
+            id="com.verticon.tracker.editor.commands.animal.addTemplateEvent.command"
+            defaultHandler="com.verticon.tracker.editor.handlers.AnimalsAddTemplateEventHandler"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            description="%_UI_commands_animal_addTemplateEvent_description"
+            name="%_UI_commands_animal_addTemplateEvent_name">
+      </command>
+      
+      
+      <!-- Event Commands -->
+       <command
+             id="com.verticon.tracker.editor.commands.event.modify.command"
+             defaultHandler="com.verticon.tracker.editor.handlers.EventsModifyHandler"
+             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+             description="%_UI_commands_event_modify_description"
+             name="%_UI_commands_event_modify_name">
+      </command>
+      
+      
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               commandId="com.verticon.tracker.editor.menus.popupany"
+               label="%menu.label.0">
+         </menu>
+      </menuContribution>  
+      <menuContribution
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+                  		
+               <!-- Select the EObject elements in the Outline View -->
+               <command
+                     commandId="com.verticon.tracker.fair.editor.commands.generic.select.command"
+                     icon="icons/full/obj16/selected_mode.gif"
+                     style="push">
+                  <visibleWhen>
+                     <and>
+                     <iterate
+                           ifEmpty="false"
+                           operator="or">
+                        <instanceof
+                              value="org.eclipse.emf.ecore.EObject">
+                        </instanceof>
+                     </iterate>
+                	 <!-- 
+			        	Restricted to show only if the active Editor is a ContentOutlinePage
+			        	provider Ticket#403
+			        	And only when the OutlinePage is showing Ticket#452
+          			 -->
+          			 <test
+               			 property="com.verticon.tracker.editor.isContentOutlinePage">
+          			</test>
+         			</and>
+                  </visibleWhen>
+               </command>
+               
+               <!-- 
+               Import tagIds as Template Events;
+               works on a *.tags File;
+               works with simple and transaction based editors;
+			   needs a Premises in the Editor so it No longer is visible from Animal Templates
+               -->
+                <command
+                      commandId="com.verticon.tracker.editor.commands.importTagIds.asTemplate.command"
+                      icon="icons/full/obj16/import_wiz.gif"
+                      style="push">
+                  <visibleWhen>
+                       <and>
+		               <with variable="activeMenuSelection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+		                      <adapt type="org.eclipse.core.resources.IResource">
+		          					<test property="org.eclipse.core.resources.name" 
+		               				 value="*.tags"/>
+		      				 </adapt>
+		                  </iterate>
+		               </with>
+		               <!-- 
+    			        	Restricted to show only if the active Editors isPremisesEditor.
+    			        	This will No longer shows command for Animal templates
+    			        	Ticket#366
+              			 -->
+              			 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+    			     </and>
+	            </visibleWhen>
+               </command>
+               
+               <!-- Animal Life Data Import from Text file commands 
+               Import text file as animal life data;
+               works on a *.txt File;
+               works with simple and transaction based editors;
+               uses edit command redo and undo framework;
+               needs a Premises in the Editor.
+               -->
+               <command
+                      commandId="com.verticon.tracker.editor.commands.importText.asLifeData.command"
+                      icon="icons/full/obj16/import_wiz.gif"
+                      style="push">
+                  <visibleWhen>
+                       <and>
+		               <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+		                      <adapt type="org.eclipse.core.resources.IResource">
+		          					<test property="org.eclipse.core.resources.name" 
+		               				 value="*.txt"/>
+		      				 </adapt>
+		                  </iterate>
+		               </with>
+		               <!-- 
+    			        	Restricted to show only if the active Editors isPremisesEditor.
+              			-->
+              			 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+    			     </and>
+	            </visibleWhen>
+               </command>
+               <!-- Import log command Ticket#532 
+               Import log file as standard event data;
+               works on a *.log File;
+               works with simple and transaction based editors;
+               uses edit command redo and undo framework;
+               needs a Premises in the Editor.
+               
+               <command
+                      commandId="com.verticon.tracker.editor.commands.importLog.asEventData.command"
+                      icon="icons/full/obj16/import_wiz.gif"
+                      style="push">
+                  <visibleWhen>
+                       <and>
+		               <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+		                      <adapt type="org.eclipse.core.resources.IResource">
+		          					<test property="org.eclipse.core.resources.name" 
+		               				 value="*.log"/>
+		      				 </adapt>
+		                  </iterate>
+		               </with>
+		               
+              			 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+    			     </and>
+	            </visibleWhen>
+               </command>
+               -->
+               
+               
+                <!-- Event Data Import from Text file commands 
+               Import text file as standard event data;
+               works on a *.txt File;
+               works with simple and transaction based editors;
+               uses edit command redo and undo framework;
+               needs a Premises in the Editor.
+               Pending completion of Ticket#501
+               
+               <command
+                      commandId="com.verticon.tracker.editor.commands.importText.asEventData.command"
+                      icon="icons/full/obj16/import_wiz.gif"
+                      style="push">
+                  <visibleWhen>
+                       <and>
+		               <with variable="activeMenuSelection">
+		                  <iterate>
+		                      <adapt type="org.eclipse.core.resources.IResource">
+		          					<test property="org.eclipse.core.resources.name" 
+		               				 value="*.txt"/>
+		      				 </adapt>
+		                  </iterate>
+		               </with>
+		               
+              			 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+    			     </and>
+	            </visibleWhen>
+               </command>
+               -->
+               <!-- 
+               Import TagIds Specifying Animal and Event Types;
+               works on a *.tags File;
+               works with simple and transaction based editors;
+			   needs a Premises in the Editor so it No longer is visible from Animal Templates
+               -->
+               <command
+                     commandId="com.verticon.tracker.editor.commands.importTagIds.asSelected.command"
+                     icon="icons/full/obj16/import_wiz.gif"
+                     style="push">
+                     <visibleWhen>
+                       <and>
+		               <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+		                      <adapt type="org.eclipse.core.resources.IResource">
+		          					<test property="org.eclipse.core.resources.name" 
+		               				 value="*.tags"/>
+		      				 </adapt>
+		                  </iterate>
+		               </with>
+		               <!-- 
+    			        	Restricted to show only if the active Editors isPremisesEditor.
+    			        	This will No longer shows command for Animal templates
+    			        	Ticket#366
+              			 -->
+              			 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+    			     </and>
+	            </visibleWhen>
+               </command>
+               
+               <!-- Animals -->
+               
+               <!-- 
+               Change Animal(s) Type;
+               works on a Animal Element;
+               works with simple and transaction based editors (after fix in Ticket #373);
+			   needs a Premises in the Editor so it No longer is visible from Animal Templates
+			   -->
+                <command
+                      commandId="com.verticon.tracker.editor.commands.animal.changeType.command"
+                      icon="icons/full/obj16/AnimalModelFile.gif"
+                      style="push">
+               	<visibleWhen>
+               	    <and>
+               			<with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+      						 <instanceof value="com.verticon.tracker.Animal"/>
+    					  </iterate>
+    			     	</with>
+    			        
+              			 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+    			     </and>
+	            </visibleWhen>
+               	</command>
+               	
+               	<!-- 
+               	Add template event to selected anmimal(s) 
+               	works on a Animal Element;
+               	works with simple and transaction based editors (after fix in Ticket #373);
+			   	needs a Premises in the Editor so it No longer is visible from Animal Templates			 
+               	-->
+               	<command
+                      commandId="com.verticon.tracker.editor.commands.animal.addTemplateEvent.command"
+                      icon="icons/full/obj16/AnimalModelFile.gif"
+                      style="push">
+               	<visibleWhen>
+               	    <and>
+               		<with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+      						 <instanceof value="com.verticon.tracker.Animal"/>
+    					  </iterate>
+    			     </with>
+    			     <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              		 </test>
+    			     </and>
+	            </visibleWhen>
+               </command>
+               
+               <!-- Modify Selected Events 
+               works with simple and transaction based editors-->
+                <command
+                      commandId="com.verticon.tracker.editor.commands.event.modify.command"
+                      icon="icons/full/obj16/waiting.gif"
+                      style="push">
+               	<visibleWhen>
+               	     <and>
+                         <with variable="selection">
+		                  <iterate ifEmpty="false" operator="or">
+      						 <instanceof value="com.verticon.tracker.Event"/>
+    					  </iterate>
+    					 </with>
+    					 
+    					 <!-- 
+    			        	Restricted to show only if the active Editors isPremisesEditor.
+    			        	Ticket#403
+              			 -->
+              			 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+    			     </and>
+	            </visibleWhen>
+               	</command>
+                
+      </menuContribution>
+     
+      
+   </extension>
+   <extension
+         point="org.eclipse.ui.cheatsheets.cheatSheetContent">
+       <category
+            id="com.verticon.tracker.category.cheatSheets"
+            name="Tracker">
+      </category>
+      <cheatsheet
+            category="com.verticon.tracker.category.cheatSheets"
+            composite="false"
+            contentFile="$nl$/cheatsheets/PremisesDocumentCheatSheet.xml"
+            id="com.verticon.tracker.editor.cheatsheet1737513866"
+            name="Create a Premises Document">
+         <description>
+            This cheat sheet will show you how to create a Premises Document for documenting information about the Livestock at your Premises.
+         </description>
+      </cheatsheet>
+   </extension>
+   
+   <!-- Added for Ticket #366-->
+   <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="com.verticon.tracker.editor.propertyTester.PremisesEditorTester"
+            id="com.verticon.tracker.editor.propertyTester.PremisesEditorTester"
+            namespace="com.verticon.tracker.editor"
+            properties="isPremisesEditor, isSimplePremisesEditor"
+            type="java.lang.Object">
+      </propertyTester>
+      <propertyTester
+            class="com.verticon.tracker.editor.propertyTester.ContentOutlinePageTester"
+            id="com.verticon.tracker.editor.propertyTester.ContentOutlinePageTester"
+            namespace="com.verticon.tracker.editor"
+            properties="isContentOutlinePage"
+            type="java.lang.Object">
+      </propertyTester>
+   </extension>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <file-association
+            content-type="org.eclipse.emf.compare.ui.contenttype.ModelContentType"
+            file-extensions="premises"
+            file-names="*">
+      </file-association>
+   </extension>
+   
+   
+</plugin>

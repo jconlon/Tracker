@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+      <extension
+         point="org.eclipse.emf.validation.constraintProviders">
+      <category
+            name="%category.name"
+            id="com.verticon.tracker.validation.catagory.ocl">
+         <category
+               id="VernonCountyFair"
+               name="%mycategory.name">
+         </category>
+      </category>
+
+      <constraintProvider
+            cache="true"
+            mode="Batch">
+         <package namespaceUri="http://www.verticon.com/ns/tracker/0.1.0"/>
+         
+         <constraints categories="com.verticon.tracker.validation.catagory.ocl/VernonCountyFair">
+            
+            <!-- Specific VCF: An animal must have one and only one FairRegistration Event -->
+            <!-- This constraint applies to Animal -->
+            <constraint
+                  lang="OCL"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="%fairRegistrationAnimal.name"
+                  id="fairRegistrationAnimal"
+                  statusCode="101">
+               <description>%fairRegistrationAnimal.desc</description>
+               	<message>%fairRegistrationAnimal.msg</message>
+               	<target class="Animal"/>
+               <![CDATA[
+                 Event.allInstances()->select(e : Event | e.oclIsTypeOf(FairRegistration) and e.id=self.id)->size()=1
+               ]]>
+            </constraint>
+            <!-- This constraint applies to FairRegistration -->
+            <constraint
+                  lang="OCL"
+                  severity="WARNING"
+                  mode="Batch"
+                  name="%fairRegistrationEvent.name"
+                  id="fairRegistrationEvent"
+                  statusCode="101">
+               <description>%fairRegistrationEvent.desc</description>
+               	<message>%fairRegistrationEvent.msg</message>
+               	<target class="FairRegistration"/>
+               <![CDATA[
+                 Event.allInstances() ->select(e : Event | e <> self and e.eventCode = self.eventCode and e.id = self.id) ->isEmpty()
+               ]]>
+            </constraint>
+            
+            <!-- Specific VCF: An animal must have at least one moveIn event -->
+            <!-- This constraint applies to Animal -->
+            <constraint
+                  lang="OCL"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="%moveInAnimal.name"
+                  id="moveInAnimal"
+                  statusCode="101">
+               <description>%moveInAnimal.desc</description>
+               	<message>%moveInAnimal.msg</message>
+               	<target class="Animal"/>
+               <![CDATA[
+                 Event.allInstances()->select(e : Event | e.oclIsTypeOf(MovedIn) and e.id=self.id)->size()>0
+               ]]>
+            </constraint>
+            
+            <!-- Specific VCF: An animal must have at least one weighIn event -->
+            <!-- This constraint applies to Animal -->
+            <constraint
+                  lang="OCL"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="%weighInAnimal.name"
+                  id="weighInAnimal"
+                  statusCode="101">
+               <description>%weighInAnimal.desc</description>
+               	<message>%weighInAnimal.msg</message>
+               	<target class="Animal"/>
+               <![CDATA[
+                 Event.allInstances()->select(e : Event | e.oclIsTypeOf(WeighIn) and e.id=self.id)->size()>0
+               ]]>
+            </constraint>
+            
+            
+            <!-- Specific VCF: An animal should have at least one moveOut event
+            TODO Change to: An animal should have a moveOut for every moveIn event -->
+            <!-- This constraint applies to Animal -->
+            <constraint
+                  lang="OCL"
+                  severity="WARNING"
+                  mode="Batch"
+                  name="%moveOutAnimal.name"
+                  id="moveOutAnimal"
+                  statusCode="101">
+               <description>%moveOutAnimal.desc</description>
+               	<message>%moveOutAnimal.msg</message>
+               	<target class="Animal"/>
+               <![CDATA[
+                 Event.allInstances()->select(e : Event | e.oclIsTypeOf(MovedOut) and e.id=self.id)->size()>0
+               ]]>
+            </constraint>
+            
+         </constraints>
+         <description>
+            Don't know where this belongs
+         </description>
+      </constraintProvider>
+   </extension>
+   
+    <extension point="org.eclipse.emf.validation.constraintBindings">
+      <!-- Specify the context using the PropertyTester registered by
+       the com.verticon.tracker.validation.adapter plugin -->
+      <clientContext id="com.verticon.tracker.validation.vernoncounty">
+         <enablement>
+            <and>
+               <instanceof value="org.eclipse.emf.ecore.EObject"/>
+               <test
+                  property="com.verticon.tracker.validation.adapter.ePackage"
+                  value="http://www.verticon.com/ns/tracker/0.1.0"/>
+            </and>
+         </enablement>
+      </clientContext>
+      <!-- Bind the above context with the contraints catagory -->
+      <binding
+         context="com.verticon.tracker.validation.vernoncounty"
+         category="com.verticon.tracker.validation.catagory.ocl/VernonCountyFair"/>
+   </extension>
+
+</plugin>
