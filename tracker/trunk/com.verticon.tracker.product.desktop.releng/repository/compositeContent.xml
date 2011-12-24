@@ -18,6 +18,7 @@
     <child location='product-desktop.beta.05'/>
     <child location='product-desktop.beta.08'/>
     <child location='features-desktop.beta.08'/>
+    <child location='features-desktop.beta.09'/>
     <child location='categories'/>
   </children>
 </repository>
