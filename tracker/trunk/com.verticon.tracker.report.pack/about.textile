@@ -1,6 +1,6 @@
 h1=. Tracker Premises Report Pack 
 
-com.verticon.tracker.premises.reports Version 0.1.0
+com.verticon.tracker.report.pack Version 0.1.0
 
 {toc:style=disc|minLevel=2|maxLevel=3}
 

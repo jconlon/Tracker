@@ -8,7 +8,7 @@
       <Option label="lb" value="pound"/>
     </AD>
     <AD default="" description="% of Packed Cell Volume" id="pcv" max="100" min="1" name="Percent PCV" required="true" type="Integer"/>
-    <Icon resource="platform:/resource/Example_Farm/blood.gif" size="16"/>
+    <Icon resource="platform:/resource/com.verticon.tracker.example/blood.gif" size="16"/>
   </OCD>
   <OCD description="Deworming drug and dosage" id="abbott.deworming" name="Deworming">
     <AD default="" description="Deworming drug" id="abbott.deworming.drug" name="Drug">

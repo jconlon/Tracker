@@ -17,8 +17,14 @@ h2(. Requirements
 Package BIRT Reports and Resources within plugins called Report Packs.
 
 On startup:
- # find all Report Packs and load reports and resources into the default working directory of the ReportViewer servlet. 
- # set the User Preference for the Report Design Resource Folder to the value of the @birt.viewer.root.path@ property
+# finds all report pack bundles and extracts and loads
+## all BIRT reports to @${birt.viewer.root.path}/report@ directory 
+## BIRT Libraries and Styles to @${birt.viewer.root.path}/resource@ directory. 
+# Sets the workspace user preference @Report Design | Resource folder@
+# As workaround for __Ticket#746__ locates the @org.eclipse.emf.oda.ecore@ driver bundle and all @EMF@ models and copies them into the @${birt.viewer.root.path}/scriptlib@ directory
+# Starts the web server if the system property @start.webserver=true@
+
+This plugin will have to be assigned a start level of 3, so it will load prior to the `org.eclipse.birt.report.viewer` 
 
 h2(. Implementation
  
