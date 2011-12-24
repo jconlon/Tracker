@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD  name="Blood Weight Controller" id="com.verticon.tracker.irouter.bwcontrol"
+  		description="Business logic controller for integrating TruTest scales and Mettler balances for measuring animal blood weights as a percentage of total animal weight.">
+    
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" 
+    	type="String"
+    	required="true" 
+    	default="one" 
+        description="Name of the group of components that will be wired together."/> 
+   	
+   	<AD name="Units for displaying blood weights" id="trutest.field.units" 
+   		type="Integer" 
+   		default="1"
+   		description="Unit of measurement for blood weights.">
+    	<Option label="grams" value="0"/>
+		<Option label="kilograms" value="1"/>
+	</AD>
+   
+    <AD name="Alarm command"  id="trutest.beepCommand" 
+    	required="false" 
+    	type="String" 
+    	default="{SABP500}%13%"
+    	description="TruTest command to use for turn on the audible alarm. The integer in the command determines the time duration of the audible."/>
+    
+    <AD name="Alarm interval in seconds"  id="abbott.bwalarm.period" 
+    	required="false" 
+    	type="Long" 
+        default="5"
+        description="Time in seconds between audible alarms."/>
+    
+    <AD name="BW multiplier"  id="abbott.bwmult" 
+      	required="false" 
+      	type="Double" 
+      	default=".01"
+      	description="Ratio of actual animal weight to calculated blood weight."
+      	/>
+    
+	<AD name="Animal to BW percent trigger for alarm"  id="abbott.bwalarm.trigger" 
+		required="false" 
+	  	type="Double" 
+	  	default=".75"
+	  	description="Ratio of actual blood weight to calculated blood weight that triggers alarming."/>
+    
+    <AD name="Animal weight calculation threashold"  id="abbott.calbw.threashold" 
+    	required="false" 
+    	type="Long" 
+    	default="5" 
+   	    description="The weight of animal in kilograms that will trigger the calculating of blood weights.
+	 	This value prevents negative scale weights from display erroneous values."/>
+   
+    <!-- 
+    To write actual and calculated data to the display, the ports fields, and the 
+    minimum number of characters must be specified. Change the defaults if the indicator 
+    is reconfigured changing field locations.
+    SXD1 is Com Port 1, 8 is the first data field, 9 the second.
+    SXC1 is Com Port 1 and 6 is the number of characters.-->
+    <AD name="Actual BW field"  id="trutest.actbw.field" 
+    	required="false" 
+    	type="String" 
+    	default="{SXD19}%13%%10%{SXC16}%13%"
+    	description="TruTest command that identifies the field for displaying Actual BW"/>
+    
+    <AD name="Calc BW field"  id="trutest.calbw.field" 
+    	required="false" 
+    	type="String" 
+    	default="{SXD18}%13%%10%{SXC16}%13%"
+    	description="TruTest command that identifies the field for displaying Calc BW"/>
+  
+    <AD name="Stop production after Record" id="abbott.stop.production.after.record" 
+        required="false" 
+        type="Boolean" 
+        default="true"
+        description="If true a record key press will stop the production of ActBW and CalcBW.  Calculation will resume at zeroing of animal weight."/>
+  
+    <AD name="Consumable scope" id="wireadmin.consumer.scope" 
+    	required="true" 
+    	type="String"
+    	default="animal.weight,mettler.weight,transaction.state"
+		cardinality="3" 
+		description="The consumable scopes carrying the animal weight, blood weight, and transaction state. (Use full scope names)" />
+ 
+     <AD name="Animal Weight scope" id="animal.weight" 
+    	required="true" 
+    	type="String"
+    	default="animal.weight"
+		description="The consumable scopes (from the list of consumable scopes) carrying the animal weight. (Use full scope names)" />
+ 
+     <AD name="Blood Weight scope" id="blood.weight" 
+    	required="true" 
+    	type="String"
+    	default="mettler.weight"
+		description="The consumable scope (from the list of consumable scopes) carrying the blood weight. (Use full scope names)" />
+ 
+ 	 <AD name="Producer scope" id="wireadmin.producer.scope" 
+    	type="String"
+		cardinality="1"
+		required="true"
+		default="trutest.commands"  
+		description="The producer scope to send the adapted TruTest commands. (Use full scope names)" />
+		
+	 <AD name="Monitor node label"  id="tracker.monitor.label" 
+    	type="String"
+    	required="false" 
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="BWControl"/> 
+ 
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.bwcontrol" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.bwcontrol"/>
+  </Designate>
+  
+  
+</metatype:MetaData>

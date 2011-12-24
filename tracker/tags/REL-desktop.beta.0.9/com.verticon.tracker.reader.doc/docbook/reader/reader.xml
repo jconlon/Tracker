@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" 
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" >
+<chapter id="chReader">
+     <?dbhtml filename="reader/reader.html" ?>
+	<title>Tag ID Reader</title>
+     <section>
+	<?dbhtml filename="overview/readerOverview.html" ?>
+	<title>Tag ID Reader Overview</title>
+	<section>
+		<title>Adding Event Transactions to Documents</title>
+		<para>
+			Tracker provides two types of editors for working with Premises documents. For 
+			electronic input of data via connections to Tag Readers a Transaction editor is used.
+			The Premises Transaction editor can connect to one or more <acronym>RFID</acronym> 
+			Tag Readers.  As animal tags are read by connected Tag readers the tag ids will be added by
+			Transaction editors to the document as aniaml history events for the animal identified by the 
+			tag ID.
+			<note>
+				<para>
+					Tracker does not require the use of <acronym>RFID</acronym> Tag Readers or special tag ID
+					types to create and or manage animal history events. History events can easily be added 
+					manually or imported from other files.  If no electronic reading of tags is required just 
+					use the non-transaction based Premises Editor. 
+				</para>
+			</note>
+		</para>
+		<para>
+			Similar to Tracker Bulk Event Processing, Tracker Readers use Animal Document Templates to
+			<emphasis>associate</emphasis> event histories with specific <acronym>RFID</acronym> reader 
+			tag IDs. As <acronym>RFID</acronym> reader tag IDs are received they are published as one
+			or more history events of the Animal corresponding to the Tag/@idNumber.
+		</para>
+		<para>
+			Currently there are four types of connections to Readers supported by the Tracker.
+			<orderedlist numeration="loweralpha">
+        		<listitem>
+        		<para>Bluetooth Reader - connects to Bluetooth RFID tag readers;</para>
+        		</listitem>
+       			 <listitem>
+        		<para>Serial Port Reader - connects to Serial Port RFID tag readers;</para>
+        		</listitem>
+        		<listitem>
+        		<para>Generating Reader - generates random test tags from a file. (For testing only);</para>
+        		</listitem>
+       			 <listitem>
+        		<para>File Reader - reads Tag/@idNumbers as they are appended to a capture file.</para>
+        		</listitem>
+            </orderedlist>
+		</para>
+
+	</section>
+
+	<section>
+		<?dbhtml filename="overview/readerOverview_fileTailing.html" ?>
+		<title>File Reader</title>
+		<para>
+			In most cases Readers will use Bluetooth or Serial Port connections. But in cases where non-standard
+			reader connections or audit records are required a File Reader can be used.
+		</para>
+		<para>
+			Tag readers transmit the numbers representing the animal id as an <acronym>ASCII</acronym> 
+			text message. A generic way to handle connections to RFID devices is to use a terminal emulator
+			program to connect the Tag reader and capture output from the connection to a file. As tags are 
+			read by the reader the tag IDs will be appended to the end of the file.
+		</para>
+		<para>
+			Tracker's File Reader can be configured to periodically read tag IDs added to the tail end of a
+			specified text file.
+		</para>
+	</section>
+	<section>
+		<title>Usage and operations</title>
+		<section>
+			<?dbhtml filename="overview/readerOverview_usageAndOperations.html" ?>
+			<title>Tracker Reader View</title>
+			<para>
+				To show the Readers View. From the Workbench <code>Window</code> menu
+				<orderedlist numeration="loweralpha">
+					<listitem>
+						<para>
+							Select <code>Show View</code>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Select <code>Other</code>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Select <code>Tracker</code>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Select <code>Readers</code>
+						</para>
+					</listitem>
+				</orderedlist>
+			</para>
+			<para>
+				Typical premises projects contain a premises document and one or more animal template documents. 
+				To begin, make sure your project contains one or more animal template documents. Next open the premises
+				document with the Premises Transaction editor.  This document and Transaction Editor are now set
+				as the active editor and active document. In the Readers view invoke the <emphasis>Add Readers Wizard</emphasis>
+				by selecting the plus symbol in the view toolbar.  A list of all the animal templates in your active project
+				will be shown.  Pick one and continue to follow the prompts in the wizard to add the kind of reader you require.
+			</para>
+		</section>
+		<section>
+			<?dbhtml filename="overview/readerOverview_configuringFileTailing.html" ?>
+			<title>Global Configuration of File Reader Timers</title>
+			<para>
+				To change the timing of parameters of all the configured File Readers. 
+				From the Workbench <code>Window</code> menu: 
+				<orderedlist numeration="loweralpha">
+					<listitem>
+						<para>
+							Select <code>Preferences...</code>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Select <code>Tracker</code>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Select <code>FileReader</code>
+						</para>
+					</listitem>
+				</orderedlist>
+			</para>
+			<para>
+				Configuring requires setting the preferences for: 
+			</para>
+			<para>
+				The <code>Capture File Read Interval</code> is the time interval
+				to wait before rereading the file for new messages.
+			</para>
+			
+		</section>
+	</section>
+	</section>
+</chapter>

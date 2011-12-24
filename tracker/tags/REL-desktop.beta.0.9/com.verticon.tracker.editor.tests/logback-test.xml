@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# HOW TO Change LOGBack configuration at program launch,
+#
+# in linux:
+# ./tracker -vmargs -Dlogback.configurationFile=file:/home/jconlon/Desktop/tracker/logback-test.xml 
+# or in windows with:
+# "C:\Program Files\tracker\tracker.exe" -vmargs "-Dlogback.configurationFile=file:C:/Downloads/tracker/logback-test.xml"
+
+-->
+<configuration>
+
+  <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <File>${user.home}/tracker.log</File>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <pattern>%d{HH:mm:ss.SSS} %-10level [%marker] [%thread] [%logger{25}] -  %message %nopex %n</pattern>
+    </layout>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <FileNamePattern>tracker.%i.log</FileNamePattern>
+      <minIndex>1</minIndex>
+      <maxIndex>2</maxIndex>
+    </rollingPolicy>
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <MaxFileSize>100KB</MaxFileSize>
+    </triggeringPolicy>
+  </appender>
+ 
+ <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+    </layout>
+  </appender>
+ 
+  
+  <logger name="com.verticon.tracker.reader">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker">
+    <level value="WARN"/>
+  </logger>
+  
+  <root>
+    <level value="WARN"/>
+    <!-- 
+     <appender-ref ref="STDOUT" />
+     <appender-ref ref="RollingFile"/> 
+    -->
+  </root>
+  	
+  <consolePlugin />
+</configuration>

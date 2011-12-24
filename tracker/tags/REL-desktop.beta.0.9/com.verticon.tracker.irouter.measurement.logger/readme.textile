@@ -1,0 +1,18 @@
+h1. Measurement Logger iRouter Component
+
+h2. Functionality
+
+The Measurement Logger iRouter component is a user configurable log writer. It acts as a wireAdmin to logging gateway.
+
+h2. Consumer Scopes
+
+# transaction.state
+# animal.tag.number
+# @<configurable>@.measurement
+** User configurable prefix
+** Can configure multiple instances
+
+h3. Component Diagram
+
+!{padding-left:3em}logComponent.png!
+         

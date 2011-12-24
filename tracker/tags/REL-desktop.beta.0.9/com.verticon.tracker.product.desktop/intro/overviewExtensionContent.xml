@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<introContent>
+  <extensionContent 
+  	id="com.verticon.tracker.product.desktop.overview" 
+  	name="Tracker Overview" 
+  	alt-style="css/swt.properties" 
+  	style="css/sample.css" 
+  	path="overview/@">
+  		  <group 	style-id="content-group" 
+  		  			id="comverticontrackerproductdesktop-introLink-group">
+  		  		<link 	label="Tracker Livestock Business Intelligence Toolkit" 
+  		     		  	url="http://org.eclipse.ui.intro/showPage?id=trackerOverview" 
+    					id="comverticontrackerproductdesktop-overview" 
+    					style-id="content-link">
+          			<text>Find out about the Tracker Livestock Business Intelligence Toolkit</text>
+          		</link>
+          		
+          </group>
+  </extensionContent>
+     
+       <page id="trackerOverview" style="$theme$/html/overview.css, css/sample.css" style-id="page">
+          <title style-id="intro-header">$introTitle$</title>
+          <group id="extra-group1" filteredFrom="swt"/>
+          <include path="overview/navigation-links"/>
+          <group id="trackerOverview-page-content">
+                <group 	id="content-header" 
+                		label="Tracker Business Intelligence Toolkit" 
+                		filteredFrom="swt">
+                </group>
+                <text 	style-id="page-title" id="page-title" 
+                		filteredFrom="html">Tracker Technologies</text>
+                <!--  text 	style-id="page-description" 
+                		id="page-description">About the Tracker BI Toolkit Preview</text>
+                		-->
+          </group>
+          <group 	style-id="content-group" style="$theme$/html/shared.css"
+  		  			id="comverticontrackertechpreview-group"> 		
+<text id="mynotes1">
+&lt;br/&gt;
+When previewing the Tracker BI Toolkit please keep the following in mind:
+&lt;ul&gt;
+&lt;li&gt;This is a Beta release of the Tracker BI Toolkit.&lt;/li&gt;
+&lt;li&gt;The Tracker BI Toolkit beta releases are consider pre-production releases.&lt;/li&gt;
+&lt;li&gt;The Beta releases of Tracker BI Toolkit are intended for demonstration and testing for beta customer and project sponsors only.&lt;/li&gt;
+&lt;/ul&gt;
+</text>
+          </group>
+          
+          <group 	style-id="content-group" style="$theme$/html/shared.css, css/sample.css"
+  		  			id="comverticontrackertechpreview-group2"> 		
+<text id="mynotes2">
+&lt;br/&gt;
+The Tracker BI Toolkit is a provisioning enabled Eclipse Rich Client Platform Product:
+&lt;ul&gt;
+&lt;li&gt;The Tracker BI Toolkit utilizes inter-network based component repositories to install and update software.&lt;/li&gt;
+&lt;li&gt;When the Tracker archive is initially downloaded and installed, the Tracker Desktop Toolkit contains no Tracker tool features.&lt;/li&gt;
+&lt;li&gt;To utilize Tracker BI tool solutions, these tool features will have to be provisioned by the user from network based component repositories.&lt;/li&gt;
+&lt;/ul&gt;
+</text>
+
+          </group>
+          <anchor id="additions"/>
+       </page>
+      
+</introContent>

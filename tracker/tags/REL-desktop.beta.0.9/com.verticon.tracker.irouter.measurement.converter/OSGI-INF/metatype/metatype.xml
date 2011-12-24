@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="Measurement Converter" id="com.verticon.tracker.irouter.measurement.converter"
+  		description="Converts input measurements based on a mathmatical operation.">
+   
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" 
+    	type="String"
+    	required="true" 
+    	default="one" 
+        description="Name of the group of components that will be wired together."/> 
+ 
+    <AD name="Consumable scope" id="wireadmin.consumer.scope" 
+    	type="String"
+    	required="true" 
+		cardinality="1" 
+		description="The input measurement scope to transform. (Use full scope names)" />
+ 
+    <AD name="Producer scope" id="wireadmin.producer.scope" 
+    	type="String"
+    	required="true" 
+		cardinality="1" 
+		description="The transformed product output measurement scope. (Use full scope names)" />
+ 
+    <AD name="Operation on measurement" id="operation.type" 
+    	type="String" 
+    	default="add">
+    	<Option label="add" value="add"/>
+		<Option label="subtract" value="subtract"/>
+		<Option label="multiply" value="multiply"/>
+		<Option label="divide" value="divide"/>
+	</AD>
+   
+    <AD name="Value to use for operation" id="operation.value" 
+    	required="true" 
+    	type="Double"/>
+    
+    <AD name="Component container label"  id="tracker.monitor.label" 
+    	type="String"
+    	required="false" 
+    	default="Converter"
+        description="Name to label node in the iRouter Monitor View graphics."/> 
+        
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.measurement.converter" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.measurement.converter"/>
+  </Designate>
+  
+  
+</metatype:MetaData>

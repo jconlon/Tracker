@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Tracker"
+            id="com.verticon.tracker.views">
+      </category>
+      <view
+            name="iRouter Monitor"
+            icon="icons/focus.gif"
+            category="com.verticon.tracker.views"
+            class="com.verticon.tracker.irouter.monitor.view.internal.MonitorView"
+            id="com.verticon.tracker.irouter.monitor.view">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="com.verticon.tracker.product.desktop.perspective">
+         <view
+               ratio="0.5"
+               relative="com.verticon.tracker.reader.view"
+               relationship="right"
+               id="com.verticon.tracker.irouter.monitor.view">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+
+</plugin>

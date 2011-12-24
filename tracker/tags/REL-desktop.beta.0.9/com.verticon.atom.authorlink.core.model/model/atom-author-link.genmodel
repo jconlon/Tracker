@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.verticon.atom.authorlink.core.model/src"
+    modelPluginID="com.verticon.atom.authorlink.core.model" modelName="Atom-author-link"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.xsd.ecore.importer"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>../../com.verticon.atom.authorlink.core.schema/atom-author-link.xsd</foreignModel>
+  <genPackages prefix="Authorlink" basePackage="com.verticon.atom" resource="XML"
+      disposableProviderFactory="true" extensibleProviderFactory="true" contentTypeIdentifier="com.verticon.atom.authorlink"
+      ecorePackage="authorlink.ecore#/">
+    <genDataTypes ecoreDataType="authorlink.ecore#//AtomEmailAddress"/>
+    <genDataTypes ecoreDataType="authorlink.ecore#//AtomLanguageTag"/>
+    <genDataTypes ecoreDataType="authorlink.ecore#//AtomMediaType"/>
+    <genClasses ecoreClass="authorlink.ecore#//AtomRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute authorlink.ecore#//AtomRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference authorlink.ecore#//AtomRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference authorlink.ecore#//AtomRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference authorlink.ecore#//AtomRoot/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute authorlink.ecore#//AtomRoot/email"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference authorlink.ecore#//AtomRoot/link"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute authorlink.ecore#//AtomRoot/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute authorlink.ecore#//AtomRoot/uri"/>
+    </genClasses>
+    <genClasses ecoreClass="authorlink.ecore#//Author">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute authorlink.ecore#//Author/group"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute authorlink.ecore#//Author/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute authorlink.ecore#//Author/uri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute authorlink.ecore#//Author/email"/>
+    </genClasses>
+    <genClasses ecoreClass="authorlink.ecore#//Link">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute authorlink.ecore#//Link/href"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute authorlink.ecore#//Link/hreflang"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute authorlink.ecore#//Link/length"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute authorlink.ecore#//Link/rel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute authorlink.ecore#//Link/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute authorlink.ecore#//Link/type"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

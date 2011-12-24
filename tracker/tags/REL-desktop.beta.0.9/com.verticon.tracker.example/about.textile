@@ -1,0 +1,73 @@
+h1=. Example Farm
+
+com.verticon.tracker.example Version 0.1.0
+
+**Contents**
+
+{toc:style=disc|minLevel=2|maxLevel=3}
+
+h2. Introduction [1]
+
+An example of a Tracker Farm Premises.  
+
+h2. Dependencies
+
+This example uses:
+# The Tracker Premises Model Editor feature @com.verticon.tracker.editor@
+# The Tracker Location Service @com.verticon.locaton@ 
+# The Tracker Agriculture Model Editor @com.verticon.agriculture.editor@ 
+# Eclipse BIRT @org.eclipse.birt@
+# Tracker Premises Report Pack, @com.verticon.tracker.report.pack@ 
+
+h2. Installation
+
+# Install the Tracker Premises Report Pack @com.verticon.tracker.report.pack@ [2]
+# Import and copy this project into the workspace.[3]
+
+h2. Reports 
+
+Tracker Premises Reports can be copied into projects and with a @report.properties@ file report on the premises documents referenced in the properties file.  
+
+h3(. Run Premises Reports from the Workspace 
+
+# Create a @reports@ directory in this project.
+# Copy the @report.properties@ file from the @com.verticon.tracker.premises.reports@ project folder to this directory
+# Open the file and edit the line to @rp_premises_doc = platform:/resource/com.verticon.tracker.example/example.premises@
+# Copy reports from the @com.verticon.tracker.premises.reports@ to the @reports@ directory
+# Optionally modify the one or more of the reports for new functionality. __To keep the location independent functionality use the datasets or the data sources from the @premises.rptlibrary@ deployted to the BIRT resources directory__.
+# From the __Navigator View__ select the rptdesign file you wish to run, right click to get the popup menu and select the __Report and Run Report__ menu item.
+
+
+h3(. Accessing Reports from a Browser
+
+Reports can also be launched from a browser with a parameterized URL that specifies running BIRT Web Server, the report file path and which premises document to use as a datasource. [4]
+
+h4(. Tracker Report Pack Reports
+
+Reports from Tracker report packs are preloaded in the BIRT Web Server and can be launched with simple location independent paths to the reports. 
+* The parameter @__report@ is a relative path to the report deployed in the BIRT Web Server.  
+* The parameter @rp_premises_doc@ is a platform based url referencing the premises document in the workspace.
+
+|_. Report|_.   Description|
+|"Animal Events":http://localhost:8080/viewer/frameset?__report=report%2Fanimal_events.rptdesign&__format=html&__svg=false&__locale=en_US&__timezone=US%2FIndiana-Starke&__masterpage=true&__rtl=false&__cubememsize=10&__dpi=96&-1662317431&rp_premises_doc=platform%3A%2Fresource%2Fcom.verticon.tracker.example%2Fexample.premises|Shows the events of all animals. Animal identification, types and a list of events. |
+|"Animal Locations":http://localhost:8080/viewer/frameset?__report=report%2Fanimal_locations.rptdesign&__format=html&__svg=false&__locale=en_US&__timezone=US%2FIndiana-Starke&__masterpage=true&__rtl=false&__cubememsize=10&__dpi=96&-1662317431&rp_premises_doc=platform%3A%2Fresource%2Fcom.verticon.tracker.example%2Fexample.premises|Shows the last known location of all animals. Animal identification, types, weights, and locations. |
+
+h4(. Reports in the Workspace[5]
+
+To access browser based reports that are in the workspace or the file system, you will have to use absolute paths to the rptdesign file. 
+* The parameter @__report@ is a absolute path to the report deployed in the file system.  
+* The parameter @rp_premises_doc@ is a platform based url referencing the premises document in the workspace.
+
+|_. Report|_.   Description|
+|"Animal Events":http://localhost:8080/viewer/frameset?__report=%2Fhome%2Fjconlon%2FWorkspaces%2Fruntime-Tracker%2Fcom.verticon.tracker.example%2Freports%2Fanimal_events.rptdesign&__format=html&__svg=false&__locale=en_US&__timezone=US%2FIndiana-Starke&__masterpage=true&__rtl=false&__cubememsize=10&__resourceFolder=%2Fopt%2FVerticon%2Fbirt_resources%2F&__dpi=96&-1662317431&rp_premises_doc=platform%3A%2Fresource%2Fcom.verticon.tracker.example%2Fexample.premises|Shows the events of all animals. Animal identification, types and a list of events. |
+|"Animal Locations":http://localhost:8080/viewer/frameset?__report=%2Fhome%2Fjconlon%2FWorkspaces%2Fruntime-Tracker%2Fcom.verticon.tracker.example%2Freports%2Fanimal_locations.rptdesign&__format=html&__svg=false&__locale=en_US&__timezone=US%2FIndiana-Starke&__masterpage=true&__rtl=false&__cubememsize=10&__resourceFolder=%2Fopt%2FVerticon%2Fbirt_resources%2F&__dpi=96&-1662317431&rp_premises_doc=platform%3A%2Fresource%2Fcom.verticon.tracker.example%2Fexample.premises|Shows the last known location of all animals. Animal identification, types, weights, and locations. |
+
+fn1. This document was created with the Wikitext textile editor.
+
+fn2. To install the software go to the menu @Help | Install New Software | Tracker Release | BIRT | Tracker Premises Report Pack@
+
+fn3. Imported projects are not required to be copied into the workspace default locations.  Use caution when working with imported but not copied projects, least they affect other user workspaces.
+
+fn4. The links in the table will need prior configuration that is specific to your system in order to work on your local host. First, you must set the user preferences: @Report Design | Preview@ enable use external browser and @Report Design | Preview | Preview Server@ and set the port. Next, change the port in the links to reference the port you set.  Finally, you must edit the links to reference the absolute paths to the reports. For reports to work you may need to initial the ReportViewer Servlet by launching a report from the popup menu first.
+
+fn5. These are only examples as the URL to the report is system specific.

@@ -1,0 +1,3256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.1.v20110905 Build &lt;3.7.1.v20110913-1734></property>
+    <property name="units">in</property>
+    <property name="theme">defaultTheme</property>
+    <parameters>
+        <scalar-parameter name="rp_premises_doc" id="859">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.emf.oda.ecore.dataSource" name="Premises" id="326">
+            <method name="beforeOpen"><![CDATA[//Set up a logger
+importPackage( Packages.java.io );
+importPackage( Packages.java.util );
+var tmpDirName = java.lang.System.getProperty('java.io.tmpdir');
+var tmpDir = new java.io.File(tmpDirName);
+var logFile = new java.io.File(tmpDir, "trackerReportlog.txt");
+fos = new java.io.FileOutputStream(logFile);
+printWriter = new java.io.PrintWriter( fos);
+printWriter.println( "Premises ReportDesign.beforeOpen");
+var reportFolderAndReportName = null;
+premisesDoc = null;
+//Get the reportName and the report parameter for the document path if it exists
+try{
+	reportFolderAndReportName = reportContext.getReportRunnable().getReportName();
+	premisesDoc = reportContext.getParameterValue("rp_premises_doc");
+}catch (err){
+	printWriter.println("	Premises initializing error ="+err);  
+}
+if(premisesDoc!=null){
+	//There is a report parameter use it to set the resource URI
+	printWriter.println("	Premises rp_premises_doc="+premisesDoc);
+	try{
+		premisesDoc =  decodeURIComponent(premisesDoc);
+		printWriter.println("	Premises setting premises resource="+premisesDoc);
+		this.setExtensionProperty("resource", premisesDoc);
+	}catch (err) {
+		printWriter.println("	Premises decoding URL error ="+err); 
+	}
+}else{
+	printWriter.println("	Premises reportFolderAndReportName="+reportFolderAndReportName);
+	if(reportFolderAndReportName!=null){
+		var index = reportFolderAndReportName.lastIndexOf("/");
+		var reportFolder = reportFolderAndReportName.slice(5,index);
+		printWriter.println("	reportFolder="+reportFolder);
+		defaultProps = new Properties();
+		try{
+		    propsFile = new File(reportFolder, "report.properties");
+		    printWriter.println("	Premises properties file ="+propsFile);
+			fis = new FileInputStream(propsFile);
+        	defaultProps.load(fis);
+        	fis.close();
+        	premisesDoc = defaultProps.getProperty("rp_premises_doc");
+        	printWriter.println("	Premises property rp_premises_doc="+premisesDoc);
+        	if(premisesDoc!=null){
+        		this.setExtensionProperty("resource", premisesDoc);
+        	}
+		}catch (err){
+            printWriter.println("	Premises properties file loading error ="+err);  
+		}
+	}
+}
+printWriter.println("	Premises resource="+this.getExtensionProperty("resource"));]]></method>
+            <method name="afterClose"><![CDATA[printWriter.close();]]></method>
+            <property name="resource">platform:/resource/com.verticon.tracker.fair.example/example.premises</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.emf.oda.ecore.dataSet" name="Events" id="327">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">animalSpecies</property>
+                    <expression name="expression">row["@self"].getObject().getTag().getAnimal().getSpeciesCode().toString()</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">animalSex</property>
+                    <expression name="expression">row["@self"].getObject().getTag().getAnimal().getSexCode().toString()</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">animalAdg</property>
+                    <expression name="expression">row["@self"].getObject().getTag().getAnimal().getWeightGainPerDay()</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">animalWeight</property>
+                    <expression name="expression">row["@self"].getObject().getTag().getAnimal().getWeight()</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">eventName</property>
+                    <expression name="expression">simpleName = row["@self"].getObject().getClass().getSimpleName();
+resourceName = simpleName.substring(0,simpleName.indexOf("Impl"));
+if(resourceName == "GenericEvent"){
+resourceName = row["@self"].getObject().getOcd().getName()
+}</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">animalVisualID</property>
+                    <expression name="expression">row["@self"].getObject().getTag().getAnimal().getVisualID()</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">values</property>
+                    <expression name="expression">row["@self"].getObject().values()</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">@self</property>
+                    <text-property name="displayName">@self</text-property>
+                    <text-property name="heading">@self</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dateTime</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Date Time</text-property>
+                    <text-property name="heading">Date Time</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">eventCode</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Event Code</text-property>
+                    <text-property name="heading">Event Code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">electronicallyRead</property>
+                    <text-property name="displayName">Electronically Read</text-property>
+                    <text-property name="heading">Electronically Read</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">correction</property>
+                    <text-property name="displayName">Correction</text-property>
+                    <text-property name="heading">Correction</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">comments</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">Comments</text-property>
+                    <text-property name="heading">Comments</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tag</property>
+                    <text-property name="displayName">Tag</text-property>
+                    <text-property name="heading">Tag</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Id</text-property>
+                    <text-property name="heading">Id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">date</property>
+                    <text-property name="displayName">Date</text-property>
+                    <text-property name="heading">Date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dateKey</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Date Key</text-property>
+                    <text-property name="heading">Date Key</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">@target</property>
+                    <property name="nativeName">@target</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="constant">&lt;unset></expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">p</property>
+                    <property name="nativeName">p</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue" type="constant">&lt;unset></expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">@self</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">dateTime</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">eventCode</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">electronicallyRead</property>
+                        <property name="dataType">boolean</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">correction</property>
+                        <property name="dataType">boolean</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">comments</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">tag</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">date</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">dateKey</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">animalSpecies</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">animalSex</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">animalAdg</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">animalWeight</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">eventName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">animalVisualID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">values</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Premises</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">@self</property>
+                    <property name="nativeName">@self</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">dateTime</property>
+                    <property name="nativeName">dateTime</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">29</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">eventCode</property>
+                    <property name="nativeName">eventCode</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">39</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">electronicallyRead</property>
+                    <property name="nativeName">electronicallyRead</property>
+                    <property name="dataType">boolean</property>
+                    <property name="nativeDataType">22</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">correction</property>
+                    <property name="nativeName">correction</property>
+                    <property name="dataType">boolean</property>
+                    <property name="nativeDataType">22</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">comments</property>
+                    <property name="nativeName">comments</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">tag</property>
+                    <property name="nativeName">tag</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">date</property>
+                    <property name="nativeName">date</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">dateKey</property>
+                    <property name="nativeName">dateKey</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[p.eventHistory()]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>@target</design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:defaultValues>
+              <design:values>&amp;lt;unset></design:values>
+            </design:defaultValues>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>p</design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:defaultValues>
+              <design:values>&amp;lt;unset></design:values>
+            </design:defaultValues>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>@self</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>@self</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>@self</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>dateTime</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>29</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Date Time</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Date Time</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>eventCode</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>39</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Event Code</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Event Code</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>electronicallyRead</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>22</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Electronically Read</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Electronically Read</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>correction</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>22</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Correction</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Correction</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>comments</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Comments</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Comments</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tag</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Tag</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Tag</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>date</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>Date</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Date</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>dateKey</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>Date Key</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Date Key</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+            <property name="delegate">http://www.eclipse.org/emf/2002/Ecore/OCL</property>
+            <property name="context">http://www.verticon.com/tracker/0.4.2/premises#//Premises</property>
+            <property name="variables">p http://www.verticon.com/tracker/0.4.2/premises#//Premises</property>
+            <property name="type">http://www.verticon.com/tracker/0.4.2/premises#//Event</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.emf.oda.ecore.dataSet" name="Premises" id="858">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">@self</property>
+                    <text-property name="displayName">@self</text-property>
+                    <text-property name="heading">@self</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">premisesId</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Premises Id</text-property>
+                    <text-property name="heading">Premises Id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">emailContact</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">Email Contact</text-property>
+                    <text-property name="heading">Email Contact</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">animals</property>
+                    <text-property name="displayName">Animals</text-property>
+                    <text-property name="heading">Animals</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">unAppliedTags</property>
+                    <text-property name="displayName">Un Applied Tags</text-property>
+                    <text-property name="heading">Un Applied Tags</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">uri</property>
+                    <text-property name="displayName">Uri</text-property>
+                    <text-property name="heading">Uri</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">policy</property>
+                    <text-property name="displayName">Policy</text-property>
+                    <text-property name="heading">Policy</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">administrator</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">Administrator</text-property>
+                    <text-property name="heading">Administrator</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">Name</text-property>
+                    <text-property name="heading">Name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">description</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">Description</text-property>
+                    <text-property name="heading">Description</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">phoneNumber</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">Phone Number</text-property>
+                    <text-property name="heading">Phone Number</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">address</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">Address</text-property>
+                    <text-property name="heading">Address</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">@target</property>
+                    <property name="nativeName">@target</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="constant">&lt;unset></expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">@self</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">premisesId</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">emailContact</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">animals</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">unAppliedTags</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">uri</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">policy</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">administrator</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">description</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">phoneNumber</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">address</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Premises</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">@self</property>
+                    <property name="nativeName">@self</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">premisesId</property>
+                    <property name="nativeName">premisesId</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">emailContact</property>
+                    <property name="nativeName">emailContact</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">animals</property>
+                    <property name="nativeName">animals</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">unAppliedTags</property>
+                    <property name="nativeName">unAppliedTags</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">uri</property>
+                    <property name="nativeName">uri</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">policy</property>
+                    <property name="nativeName">policy</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">administrator</property>
+                    <property name="nativeName">administrator</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">description</property>
+                    <property name="nativeName">description</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">phoneNumber</property>
+                    <property name="nativeName">phoneNumber</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">address</property>
+                    <property name="nativeName">address</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[self]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>@target</design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:defaultValues>
+              <design:values>&amp;lt;unset></design:values>
+            </design:defaultValues>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>@self</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>@self</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>@self</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>premisesId</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>Premises Id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Premises Id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>emailContact</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>Email Contact</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Email Contact</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>animals</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Animals</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Animals</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>unAppliedTags</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Un Applied Tags</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Un Applied Tags</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>uri</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>Uri</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Uri</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>policy</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Policy</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Policy</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>administrator</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Administrator</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Administrator</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>name</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Name</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>description</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Description</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Description</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>phoneNumber</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>Phone Number</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Phone Number</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>address</design:name>
+              <design:position>12</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Address</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Address</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+            <property name="delegate">http://www.eclipse.org/emf/2002/Ecore/OCL</property>
+            <property name="context">http://www.verticon.com/tracker/0.4.2/premises#//Premises</property>
+            <property name="type">http://www.verticon.com/tracker/0.4.2/premises#//Premises</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.emf.oda.ecore.dataSet" name="Animals" id="336">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">@self</property>
+                    <text-property name="displayName">@self</text-property>
+                    <text-property name="heading">@self</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">birthDate</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Birth Date</text-property>
+                    <text-property name="heading">Birth Date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sex</property>
+                    <text-property name="displayName">Sex</text-property>
+                    <text-property name="heading">Sex</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tags</property>
+                    <text-property name="displayName">Tags</text-property>
+                    <text-property name="heading">Tags</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">species</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">Species</text-property>
+                    <text-property name="heading">Species</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">breed</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">Breed</text-property>
+                    <text-property name="heading">Breed</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sexCode</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">Sex Code</text-property>
+                    <text-property name="heading">Sex Code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">speciesCode</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">Species Code</text-property>
+                    <text-property name="heading">Species Code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Id</text-property>
+                    <text-property name="heading">Id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">comments</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">Comments</text-property>
+                    <text-property name="heading">Comments</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">lastEventDateTime</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Last Event Date Time</text-property>
+                    <text-property name="heading">Last Event Date Time</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dam</property>
+                    <text-property name="displayName">Dam</text-property>
+                    <text-property name="heading">Dam</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sire</property>
+                    <text-property name="displayName">Sire</text-property>
+                    <text-property name="heading">Sire</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">weight</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Weight</text-property>
+                    <text-property name="heading">Weight</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">weightGainPerDay</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Weight Gain Per Day</text-property>
+                    <text-property name="heading">Weight Gain Per Day</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">type</property>
+                    <text-property name="displayName">Type</text-property>
+                    <text-property name="heading">Type</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">visualID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Visual ID</text-property>
+                    <text-property name="heading">Visual ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ageInDays</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Age In Days</text-property>
+                    <text-property name="heading">Age In Days</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">alternativeID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Alternative ID</text-property>
+                    <text-property name="heading">Alternative ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">location</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">Location</text-property>
+                    <text-property name="heading">Location</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">@target</property>
+                    <property name="nativeName">@target</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="constant">&lt;unset></expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">@self</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">birthDate</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">sex</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">tags</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">species</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">breed</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">sexCode</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">speciesCode</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">comments</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">lastEventDateTime</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">dam</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">sire</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">weight</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">weightGainPerDay</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">type</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">visualID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">ageInDays</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">alternativeID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">location</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Premises</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">@self</property>
+                    <property name="nativeName">@self</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">birthDate</property>
+                    <property name="nativeName">birthDate</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">29</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">sex</property>
+                    <property name="nativeName">sex</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">34</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">tags</property>
+                    <property name="nativeName">tags</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">species</property>
+                    <property name="nativeName">species</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">breed</property>
+                    <property name="nativeName">breed</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">sexCode</property>
+                    <property name="nativeName">sexCode</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">speciesCode</property>
+                    <property name="nativeName">speciesCode</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">comments</property>
+                    <property name="nativeName">comments</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">lastEventDateTime</property>
+                    <property name="nativeName">lastEventDateTime</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">29</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">dam</property>
+                    <property name="nativeName">dam</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">sire</property>
+                    <property name="nativeName">sire</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">weight</property>
+                    <property name="nativeName">weight</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">32</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">weightGainPerDay</property>
+                    <property name="nativeName">weightGainPerDay</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">32</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">type</property>
+                    <property name="nativeName">type</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">34</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">visualID</property>
+                    <property name="nativeName">visualID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">ageInDays</property>
+                    <property name="nativeName">ageInDays</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">39</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">alternativeID</property>
+                    <property name="nativeName">alternativeID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">location</property>
+                    <property name="nativeName">location</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[animals]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>@target</design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:defaultValues>
+              <design:values>&amp;lt;unset></design:values>
+            </design:defaultValues>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>@self</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>@self</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>@self</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>birthDate</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>29</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Birth Date</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Birth Date</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>sex</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>34</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Sex</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Sex</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tags</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Tags</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Tags</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>species</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Species</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Species</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>breed</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Breed</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Breed</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>sexCode</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Sex Code</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Sex Code</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>speciesCode</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Species Code</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Species Code</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>comments</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Comments</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Comments</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>lastEventDateTime</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>29</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Last Event Date Time</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Last Event Date Time</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>dam</design:name>
+              <design:position>12</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Dam</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Dam</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>sire</design:name>
+              <design:position>13</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Sire</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Sire</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>weight</design:name>
+              <design:position>14</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>32</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Weight</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Weight</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>weightGainPerDay</design:name>
+              <design:position>15</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>32</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Weight Gain Per Day</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Weight Gain Per Day</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>type</design:name>
+              <design:position>16</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>34</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Type</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Type</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>visualID</design:name>
+              <design:position>17</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Visual ID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Visual ID</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ageInDays</design:name>
+              <design:position>18</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>39</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Age In Days</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Age In Days</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>alternativeID</design:name>
+              <design:position>19</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Alternative ID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Alternative ID</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>location</design:name>
+              <design:position>20</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Location</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Location</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+            <property name="delegate">http://www.eclipse.org/emf/2002/Ecore/OCL</property>
+            <property name="context">http://www.verticon.com/tracker/0.4.2/premises#//Premises</property>
+            <property name="type">http://www.verticon.com/tracker/0.4.2/premises#//Animal</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.emf.oda.ecore.dataSet" name="MovedOut" id="32">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">@self</property>
+                    <text-property name="displayName">@self</text-property>
+                    <text-property name="heading">@self</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dateTime</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Date Time</text-property>
+                    <text-property name="heading">Date Time</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">eventCode</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Event Code</text-property>
+                    <text-property name="heading">Event Code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">electronicallyRead</property>
+                    <text-property name="displayName">Electronically Read</text-property>
+                    <text-property name="heading">Electronically Read</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">correction</property>
+                    <text-property name="displayName">Correction</text-property>
+                    <text-property name="heading">Correction</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">comments</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">Comments</text-property>
+                    <text-property name="heading">Comments</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tag</property>
+                    <text-property name="displayName">Tag</text-property>
+                    <text-property name="heading">Tag</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Id</text-property>
+                    <text-property name="heading">Id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">date</property>
+                    <text-property name="displayName">Date</text-property>
+                    <text-property name="heading">Date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dateKey</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Date Key</text-property>
+                    <text-property name="heading">Date Key</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">destinationPin</property>
+                    <text-property name="displayName">Destination Pin</text-property>
+                    <text-property name="heading">Destination Pin</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">uri</property>
+                    <text-property name="displayName">Uri</text-property>
+                    <text-property name="heading">Uri</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">@target</property>
+                    <property name="nativeName">@target</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="constant">&lt;unset></expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">@self</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">dateTime</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">eventCode</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">electronicallyRead</property>
+                        <property name="dataType">boolean</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">correction</property>
+                        <property name="dataType">boolean</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">comments</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">tag</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">date</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">dateKey</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">destinationPin</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">uri</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Premises</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">@self</property>
+                    <property name="nativeName">@self</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">dateTime</property>
+                    <property name="nativeName">dateTime</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">29</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">eventCode</property>
+                    <property name="nativeName">eventCode</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">39</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">electronicallyRead</property>
+                    <property name="nativeName">electronicallyRead</property>
+                    <property name="dataType">boolean</property>
+                    <property name="nativeDataType">22</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">correction</property>
+                    <property name="nativeName">correction</property>
+                    <property name="dataType">boolean</property>
+                    <property name="nativeDataType">22</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">comments</property>
+                    <property name="nativeName">comments</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">tag</property>
+                    <property name="nativeName">tag</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">date</property>
+                    <property name="nativeName">date</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">dateKey</property>
+                    <property name="nativeName">dateKey</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">destinationPin</property>
+                    <property name="nativeName">destinationPin</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">uri</property>
+                    <property name="nativeName">uri</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[self]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>@target</design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:defaultValues>
+              <design:values>&amp;lt;unset></design:values>
+            </design:defaultValues>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>@self</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>@self</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>@self</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>dateTime</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>29</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Date Time</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Date Time</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>eventCode</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>39</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Event Code</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Event Code</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>electronicallyRead</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>22</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Electronically Read</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Electronically Read</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>correction</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>22</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Correction</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Correction</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>comments</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Comments</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Comments</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tag</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Tag</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Tag</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>date</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>Date</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Date</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>dateKey</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>Date Key</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Date Key</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>destinationPin</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>Destination Pin</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Destination Pin</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>uri</design:name>
+              <design:position>12</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>Uri</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Uri</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+            <property name="delegate">http://www.eclipse.org/emf/2002/Ecore/OCL</property>
+            <property name="context">http://www.verticon.com/tracker/0.4.2/premises#//MovedOut</property>
+            <property name="type">http://www.verticon.com/tracker/0.4.2/premises#//MovedOut</property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.emf.oda.ecore.dataSet" name="SingleWeighIn" id="35">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">@self</property>
+                    <text-property name="displayName">@self</text-property>
+                    <text-property name="heading">@self</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dateTime</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Date Time</text-property>
+                    <text-property name="heading">Date Time</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">eventCode</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Event Code</text-property>
+                    <text-property name="heading">Event Code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">electronicallyRead</property>
+                    <text-property name="displayName">Electronically Read</text-property>
+                    <text-property name="heading">Electronically Read</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">correction</property>
+                    <text-property name="displayName">Correction</text-property>
+                    <text-property name="heading">Correction</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">comments</property>
+                    <property name="analysis">attribute</property>
+                    <text-property name="displayName">Comments</text-property>
+                    <text-property name="heading">Comments</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tag</property>
+                    <text-property name="displayName">Tag</text-property>
+                    <text-property name="heading">Tag</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Id</text-property>
+                    <text-property name="heading">Id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">date</property>
+                    <text-property name="displayName">Date</text-property>
+                    <text-property name="heading">Date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dateKey</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Date Key</text-property>
+                    <text-property name="heading">Date Key</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">weight</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Weight</text-property>
+                    <text-property name="heading">Weight</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">weightGainPerDay</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Weight Gain Per Day</text-property>
+                    <text-property name="heading">Weight Gain Per Day</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">unit</property>
+                    <text-property name="displayName">Unit</text-property>
+                    <text-property name="heading">Unit</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">@target</property>
+                    <property name="nativeName">@target</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="constant">&lt;unset></expression>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">@self</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">dateTime</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">eventCode</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">electronicallyRead</property>
+                        <property name="dataType">boolean</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">correction</property>
+                        <property name="dataType">boolean</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">comments</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">tag</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">date</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">dateKey</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">weight</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">weightGainPerDay</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">unit</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Premises</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">@self</property>
+                    <property name="nativeName">@self</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">dateTime</property>
+                    <property name="nativeName">dateTime</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">29</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">eventCode</property>
+                    <property name="nativeName">eventCode</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">39</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">electronicallyRead</property>
+                    <property name="nativeName">electronicallyRead</property>
+                    <property name="dataType">boolean</property>
+                    <property name="nativeDataType">22</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">correction</property>
+                    <property name="nativeName">correction</property>
+                    <property name="dataType">boolean</property>
+                    <property name="nativeDataType">22</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">comments</property>
+                    <property name="nativeName">comments</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">tag</property>
+                    <property name="nativeName">tag</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">date</property>
+                    <property name="nativeName">date</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">dateKey</property>
+                    <property name="nativeName">dateKey</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">weight</property>
+                    <property name="nativeName">weight</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">32</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">weightGainPerDay</property>
+                    <property name="nativeName">weightGainPerDay</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">32</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">unit</property>
+                    <property name="nativeName">unit</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">34</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[self.eventHistory() -> select(e:Event | e.oclIsTypeOf(WeighIn) and  
+e.oclAsType(WeighIn).weightGainPerDay.oclIsUndefined())]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name>@target</design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+          <design:precision>-1</design:precision>
+          <design:scale>-1</design:scale>
+          <design:nullability>Nullable</design:nullability>
+        </design:attributes>
+        <design:inputAttributes>
+          <design:elementAttributes>
+            <design:defaultValues>
+              <design:values>&amp;lt;unset></design:values>
+            </design:defaultValues>
+            <design:optional>true</design:optional>
+          </design:elementAttributes>
+        </design:inputAttributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>@self</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>@self</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>@self</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>dateTime</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>29</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Date Time</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Date Time</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>eventCode</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>39</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Event Code</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Event Code</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>electronicallyRead</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>22</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Electronically Read</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Electronically Read</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>correction</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>22</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Correction</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Correction</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>comments</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Comments</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Comments</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tag</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Tag</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Tag</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>50</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>date</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>Date</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Date</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>dateKey</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>42</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>Date Key</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Date Key</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>weight</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>32</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Weight</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Weight</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>weightGainPerDay</design:name>
+              <design:position>12</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>32</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Weight Gain Per Day</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Weight Gain Per Day</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>unit</design:name>
+              <design:position>13</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>34</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Unit</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Unit</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+            <property name="delegate">http://www.eclipse.org/emf/2002/Ecore/OCL</property>
+            <property name="context">http://www.verticon.com/tracker/0.4.2/premises#//Premises</property>
+            <property name="type">http://www.verticon.com/tracker/0.4.2/premises#//WeighIn</property>
+        </oda-data-set>
+    </data-sets>
+    <themes>
+        <theme name="defaultTheme" id="4"/>
+    </themes>
+    <components>
+        <grid name="Banner and Label" id="783">
+            <property name="height">2.0625in</property>
+            <property name="width">7.875in</property>
+            <column id="784">
+                <property name="width">3.1666666666666665in</property>
+            </column>
+            <column id="785">
+                <property name="width">4.708333333333333in</property>
+            </column>
+            <row id="787">
+                <property name="height">0.5625in</property>
+                <cell id="788">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">3</property>
+                </cell>
+                <cell id="789">
+                    <data name="NewData" id="833">
+                        <property name="fontSize">24pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="color">#0C0CA5</property>
+                        <property name="textAlign">center</property>
+                        <property name="dataSet">Premises</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">name</property>
+                                <text-property name="displayName">Name</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">name</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="791">
+                <property name="height">0.28125in</property>
+                <cell id="793">
+                    <data name="NewData1" id="834">
+                        <property name="dataSet">Premises</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">address</property>
+                                <text-property name="displayName">Address</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["address"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">address</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="795">
+                <property name="height">1.21875in</property>
+                <cell id="797">
+                    <grid name="NewGrid" id="835">
+                        <property name="width">4.0625in</property>
+                        <column id="836">
+                            <property name="width">1.28125in</property>
+                        </column>
+                        <column id="837">
+                            <property name="width">2.78125in</property>
+                        </column>
+                        <row id="838">
+                            <cell id="839">
+                                <label name="NewLabel" id="840">
+                                    <text-property name="text">Administer:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="841">
+                                <data name="NewData2" id="842">
+                                    <property name="dataSet">Premises</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">administrator</property>
+                                            <text-property name="displayName">Administrator</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["administrator"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">administrator</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="843">
+                            <cell id="844">
+                                <label name="NewLabel1" id="845">
+                                    <text-property name="text">Phone:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="846">
+                                <data name="NewData3" id="847">
+                                    <property name="dataSet">Premises</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">phoneNumber</property>
+                                            <text-property name="displayName">Phone Number</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["phoneNumber"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">phoneNumber</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="848">
+                            <cell id="849">
+                                <label name="NewLabel2" id="850">
+                                    <text-property name="text">Email:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="851">
+                                <data name="NewData4" id="852">
+                                    <property name="dataSet">Premises</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">emailContact</property>
+                                            <text-property name="displayName">Email Contact</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["emailContact"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">emailContact</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="853">
+                            <cell id="854">
+                                <label name="NewLabel3" id="855">
+                                    <text-property name="text">URI:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="856">
+                                <data name="NewData5" id="857">
+                                    <property name="dataSet">Premises</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">uri</property>
+                                            <text-property name="displayName">Uri</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["uri"]</expression>
+                                            <property name="dataType">javaObject</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">uri</property>
+                                </data>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+    </components>
+    <page-setup>
+        <simple-master-page name="NewSimpleMasterPage" id="3"/>
+    </page-setup>
+</library>

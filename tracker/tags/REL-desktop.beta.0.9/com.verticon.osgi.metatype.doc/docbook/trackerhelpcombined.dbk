@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><book xmlns:xi="http://www.w3.org/2001/XInclude" id="AgricultureEditorFeature" label="Metatype Editor User Guide" status="Draft" vendor="Verticon, Inc.">
+
+	<chapter xml:base="metatypeEditor/metatypeEditor.xml">
+  <?dbhtml filename="premisesEditor/premisesEditor.html" ?>
+  <title>Metatype Model Editor</title>
+  <section id="overviewMetatypeEditor">
+    <title>Overview</title>
+    <section id="overviewMetatypeEditorWhatis">
+      <title>What is the Metatype Model Editor?</title>
+      <para>The Metatype Model Editor is a comprehensive open desktop solution for creating custom information
+      <ulink url="http://en.wikipedia.org/wiki/Metadata">
+      <citetitle>metadata</citetitle></ulink> types.  
+      Metatypes formally specify the classes (ways) to describe an object. They are useful for providing
+      a means to customize a structured process like a computer program.
+     </para>
+     <note>
+      <para>The Metatype Model Editor creates  
+      <ulink url="http://www.osgi.org/xmlns/metatype/v1.1.0/metatype.xsd">Metatype schema</ulink> compliant
+      documents that can be used as input to 
+      <ulink url="http://en.wikipedia.org/wiki/OSGi_Specification_Implementations#105:_Metatype_Service">
+      <citetitle>OSGi Metatype Service</citetitle></ulink> and 
+      <ulink url="http://en.wikipedia.org/wiki/OSGi_Specification_Implementations#104:_Configuration_Admin_Service">Configuration Administration Service</ulink>.
+      </para>
+      </note>
+    </section>
+    <section id="overviewMetatypeEditorGoals">
+      <title>Project Goals</title>
+      <para>More often than not, new requirements are discovered by users after a program is deployed and operational.
+      Providing the means to allow administrators and users to customize applications on site without waiting for a costly 
+      and time consuming new development cycle is the goal of the Metatype Model Editor project.</para>
+      <para>
+        The Metatype Editor provide models, editors and utilities for the creation and management of documents that:
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>Define object classes that specify one or more attributes of data</para>
+          </listitem>
+          <listitem>
+            <para>Serve as the foundation for building new features that can be easily customized by users</para>
+          </listitem>
+           <listitem>
+            <para>Conform to the OSGi Metatype schema</para>
+          </listitem>
+           <listitem>
+            <para>Can be used as input to the OSGi Configuration Administration Service</para>
+          </listitem>
+        </itemizedlist>
+      </para>
+    </section>
+    <section id="overviewMetatypeFunctinal">
+      <title>Functional Overview</title>
+      <para>The Metatype Model Editor Feature is an implementation of the <acronym>OSGi</acronym> Metatype 
+      data model and an editor to create metatype model document resources. Metatype document resources can be 
+      utilized by other features enabling feature specific customization by end users.</para>
+      <para>The <acronym>OSGi</acronym> Metatype is based on the idea of a user created model document that specifies 
+      how data in an target application is named, entered and structured.
+      In other words, Metatype model documents provide a means to classify sets of user defined attribute definitions
+      that can act as input definitions to customize the behavior of applications and/or application features.  
+      </para>
+    </section>
+  </section>
+  <section id="metatypeEditor_useCase">
+  <?dbhtml filename="usecase/metatypeEditor_useCase.html" ?>
+    <title>Metatype Data Model and Model Editor Use Cases</title>
+    <para>The following figure presents a
+    <emphasis>Use-Case</emphasis> diagram showing how the Metatype Data Model can be be extended by developers to create 
+    features with customizable functionality
+    and how the Metatype Model Editor is used by users to author documents that define application or feature specific 
+    customizations. 
+    <xref linkend="fig_MetatypeEditorUseCases"/> shows core use cases for the Metatype Data Model and Model Editor.</para>
+    <figure float="0" id="fig_MetatypeEditorUseCases">
+      <title>Metatype Data Model and Metatype Editor Use Cases</title>
+      <mediaobject><imageobject><imagedata align="center" fileref="../images/useCases/editor.png"/></imageobject></mediaobject>
+    </figure>
+  </section>
+ 
+  <section id="metatypeDocuments">
+   <?dbhtml filename="model/metatypeEditorModel_metatypeDocuments.html" ?>
+    <title>Metatype Documents</title>
+    <para>The Metatype Editor enables users to create, transform and 
+    edit metatype documents to define new functionality.</para>
+    <note>
+    <para>Metatype Documents are only needed when they are used by features to customize functionality.</para>
+    </note>
+     <para>Metatype document files utilize a <code>.metatype</code> file extension to 
+    distinguish them from other types of files.</para>
+  </section>
+  <section id="metatypeDataModel">
+    <?dbhtml filename="model/metatypeEditorModel_metatypeDataModel.html" ?>
+    <title>Metatype Data Model</title>
+    <para>Because all user activity centers around the creation and 
+    manipulation of <emphasis>Metatype Documents</emphasis>, understanding the structure (called the <glossterm>data 
+    model</glossterm>) of Metatype documents is the easiest way to learn to author Metatype 
+    model documents.</para>
+    <section id="metatypeDataModel_coreElements">
+      <title>Data Model Core Elements</title>
+      <para>All Metatype documents conform to a simple structure called the
+      <emphasis>Metatype Data Model</emphasis>. This structure is based on the idea of groupings of one
+      or more data attribute definitions. 
+       </para>
+      <para>In the Metatype Data Model, a single root element 
+      called <code>Metadata</code> acts as a container for one or more Object Class Definitions called
+      <code>OCD</code> elements that are data type containers or parents for Attribute Definitions called <code>AD</code> elements. 
+      These <code>AD</code> elements are the fundamental building blocks for defining the names and types
+      of data associated with a <emphasis>customization</emphasis>.</para>
+      <para>For example, in the problem domain for managing information that is associated with livestock, an 
+      application may require that users add custom functionality like a user interface, for recording actions done to 
+      treat livestock illeness. The   
+      <xref linkend="fig_MetatypeDataModel1"/> screenshot shows the editing of two <code>OCD</code> elements in a Metatype
+      model document.  When this document is used as configuration input for the application, the user could be presented 
+      with two new user interfaces that are added a data input screen. The first for recording a <emphasis>Blood Extraction</emphasis> 
+      treatment and a second for recording a <emphasis>Deworming</emphasis> treatment.
+      </para>
+      <figure float="0" id="fig_MetatypeDataModel1">
+        <title>Metatype Model Document</title>
+        <mediaobject><imageobject><imagedata align="center" fileref="../images/editing/completedDocument.png"/></imageobject></mediaobject>
+      </figure>
+     
+      <para>
+        The following table explans the Element Relationships of the Metatype Model.
+        <table frame="all">
+          <title>Core Elements of the Metatype Model</title>
+          <tgroup align="left" cols="2" colsep="1" rowsep="1">
+            <colspec colname="c1"/>
+            <colspec colname="c2"/>
+            <thead>
+              <row>
+                <entry>Element Name</entry>
+                <entry>Relationship to other Elements</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>Meta Data</entry>
+                <entry>There is one Meta Data element and acts as the root element in a document</entry>
+              </row>
+              <row>
+                <entry>OCD - Object class definitions</entry>
+                <entry>Meta Data can have one or many OCD elements</entry>
+              </row>
+              <row>
+                <entry>id, description, name</entry>
+                <entry>OCD element has an id, description and name attributes</entry>
+              </row>
+              <row>
+                <entry>AD</entry>
+                <entry>OCD can have one or many AD element</entry>
+              </row>
+               <row>
+                <entry>AD attributes</entry>
+                <entry>The properties view of the <xref linkend="fig_MetatypeDataModel1"/> screenshot shows the attributes of an AD element</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </para>
+    </section>
+  </section>
+  <section id="editingMetatypeDocuments">
+    	<?dbhtml filename="editingMetatypeDocuments/editingMetatypeDocuments.html" ?>
+		<title>Editing Metatype Documents</title>
+		<section id="creatingMetatypeDocuments">
+			<title>Creating a new Document</title>
+			<para>
+			To create a new metatype document. Go to the File menu and launch a 
+			<emphasis>New Wizard</emphasis> by selecting the menu items:<code>File|New|Other</code>.
+			<xref linkend="fig_createNewMetatypeDocument"/>.
+			</para>
+
+		<figure float="0" id="fig_createNewMetatypeDocument">
+			<title>New Wizard for Creating a New Metatype Document</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/editing/createNewDocument.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+
+		<para>Follow the instructions to choose a project, folder and a name for the document
+		 and press <code>Finish</code> to create the document. 	
+		</para>
+		
+		<note><para>For more details about authoring Metatype Model documents refer to the user guide
+		of the feature using Metatype documents for customization.</para></note>
+
+		</section>
+		
+	  </section>
+  
+</chapter>
+	</book>

@@ -1,0 +1,30 @@
+h1. TruTest Livestock Scale Head
+
+Simulator for a TruTest XR3000 Indicator with display fields and controls for actuating behavior of the indicator.  Simulates an Indicator attached as a Server connection[5].
+
+h2. TruTest Simulator Page
+
+!images/trutest.png!
+
+h3. Display and Controls
+
+Connection state from the iRouter client components to the Server is shown as a display with a Y/N value. 
+
+On connection the iRouter components will download current Indicator records, and upload new indicator records. The number of records up/downloaded are shown on the simulator as Download and Upload fields.
+
+Two Display fields simulate the two TruTest custom File Data Fields.[6]
+
+An EID selector presents a drop down list of EID values created from the list of EID numbers uploaded to the server.[7]
+
+The last controls simulate the weighing of animals. These can be incremented by manual button press for each increment or weights can be automatically incremented by a single button press.
+ 
+Lastly a record control is used to record the transaction.
+ 
+h2. Notes
+
+fn5. The type of Server connection is determined by the property trutest.sim.type, with the default as SERVER_SOCKET to change to a com port set trutest.sim.type=SERVER_COMM_PORT. The server connection can be either a socket connection or com port and for Server socket it is specified by the property trutest.sim.socket with the default 2344. Server Comm Port is determined by the property trutest.sim.port and there is no default.
+
+fn6. The labels and units assigned to these display fields are specified by the properties: trutest.sim.field8.label trutest.sim.field8.units trutest.sim.field9.label trutest.sim.field9.units
+
+fn7. There is a set of default numbers if no data was uploaded.
+

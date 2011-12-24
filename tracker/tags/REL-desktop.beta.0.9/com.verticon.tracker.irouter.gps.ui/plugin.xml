@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="gpsWizards" name="GPSProducerWizards" schema="schema/gpsWizards.exsd"/>
+  
+ 
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            defaultHandler="com.verticon.tracker.irouter.gps.ui.internal.SetGPSURIHandler"
+            description="Shows Wizard that finds GPS Devices to assist the user in setting the Uri property on a GPS factory instance."
+            id="com.verticon.tracker.irouter.gps.ui.command"
+            name="Set connection to local GPS device">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:com.verticon.tracker.configuration.form.master?after=additions">
+         <command
+               commandId="com.verticon.tracker.irouter.gps.ui.command"
+               style="push">
+            <visibleWhen checkEnabled="false">
+            <and>
+          			 <with variable="selection">
+          			   <iterate ifEmpty="false"
+                           operator="or">
+                        <instanceof
+                              value="com.verticon.osgi.metatype.Designate">
+                        </instanceof>
+                        </iterate>
+                     </with>
+                     
+                	 <!-- 
+			        	Restricted to show only GPS children
+          			 -->
+          			 <test
+                    	forcePluginActivation="true"
+                    	property="com.verticon.tracker.irouter.gps.isGPSChild">
+          			</test>
+              
+          			
+         			</and>
+         			
+         		
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="com.verticon.tracker.irouter.gps.ui.internal.DesignatePropertyTester"
+            id="com.verticon.tracker.irouter.gps.ui.propertyTester"
+            namespace="com.verticon.tracker.irouter.gps"
+            properties="isGPSChild"
+            type="java.lang.Object">
+      </propertyTester>
+   </extension>
+
+</plugin>

@@ -1,0 +1,21 @@
+h1. TruTest iRouter Component
+
+h2. Functionality
+
+The TruTest iRouter component is a user configurable Sensor and I/O controller. It acts as a wireAdmin proxy for TruTest animal scale-heads.
+
+h2. Consumer Scopes
+
+It consumes the following wireAdmin products from business domain components.
+# trutest.command.string
+
+h2. Producer Scopes
+
+It produces the following wireAdmin products that are consumed by business domain and logging components. 
+# transaction.state
+# animal.tag.number
+# animal.weight.measurement
+
+h3. Component Diagram
+
+!{padding-left:3em}trutestComponent.png!

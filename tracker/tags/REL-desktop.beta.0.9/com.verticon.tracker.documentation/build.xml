@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<project name="docbook-src" default="build-pdf">
+
+	<description>
+            This Ant build.xml file is used to transform DocBook XML to PDF
+    </description>
+
+	<property name="thisproject" location="${ant.file}/.."/>
+	<property name="docbook.xsl.dir" location="${thisproject}/docbook-xsl-1.72.0" />
+	<property name="src.dir" location="${thisproject}/src" />
+	<property name="dist.dir" location="${thisproject}/dist" />
+	<property name="gen.dir" location="${thisproject}/generated-xml" />
+	<property name="fo.dir" location="${thisproject}/fo" />
+	<property name="docbooksource" location="${thisproject}/docbook/"/>
+	<property name="xinclude.path.dir" location="${thisproject}/../com.verticon.tracker.ant.utilities/bin/jars"/>
+	<property name="xalan.lib.dir" location="${thisproject}/lib/xalan-j_2_7_0" />
+	
+	<property name="xincludeclassname" value="com.verticon.ant.utilities.xsl.XIncludeTask"/>
+	
+	<property name="merged.doc.name" value="mergedDoc.xml" />
+	<property name="merged.doc" location="${gen.dir}/${merged.doc.name}" />
+	
+	<property name="fo.stylesheet" location="${docbook.xsl.dir}/fo/docbook.xsl" />
+	
+	<property name="pdf.document.name" value="trackerUserGuide.pdf"/>
+	
+	<property name="local.output" location="${dist.dir}/${pdf.document.name}"/>
+
+	
+	
+	
+	<!--
+      - Sets up the classpath for the Xalan and Xerces implementations
+      - that are to be used in this script, since the versions that ship
+      - with Ant may be out of date.
+      -->
+	<path id="xalan.classpath">
+		<fileset dir="${xalan.lib.dir}" id="xalan.fileset">
+			<include name="xalan.jar" />
+			<include name="xercesImpl.jar" />
+		</fileset>
+	</path>
+
+	<!--
+      - target:  clean
+      -->
+	<target name="clean" description="Cleans up generated files.">
+		<echo message="Cleaning directories." />
+		<delete dir="${doc.dir}" />
+		<delete dir="${gen.dir}" />
+		<delete dir="${dist.dir}" />
+		<delete dir="${fo.dir}" />
+	</target>
+
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: depends                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="depends" depends="clean">
+		<mkdir dir="${gen.dir}" />
+		<mkdir dir="${dist.dir}"/>
+		<mkdir dir="${fo.dir}"/>
+	</target>
+
+	<!-- ================================= 
+	          target: mergeDoc            
+	         ================================= -->
+	<target name="mergeDoc"  depends="depends, setup.xsl.include.task" 
+		description="Generates one XML DocBook XML">
+       <echo>Starting include from ${docbooksource}/trackerhelp.dbk to ${gen.dir}/mergedDoc.xml</echo>
+		
+		<xsl.include in="${docbooksource}/trackerhelp.dbk" 
+	    			 out="${gen.dir}/mergedDoc.xml" />
+		
+		<!-- 
+		
+		    1. add attribute scale="65" all imagedata elements
+		    
+			2. Replace all ulinks pointing to Eclipse plugins with the form of 
+			<ulink url="PLUGINS_ROOT/org.eclipse.platform.doc.user/concepts/concepts-6.htm">
+			with ulinks like
+			<ulink url="http://help.eclipse.org/ganymede/index.jsp?topic=/org.eclipse.platform.doc.user/concepts/concepts-6.htm">
+			
+			author's note: Should do this in one style
+		-->
+		<property name="scale.images" location="${thisproject}/misc-xsl/scaleImages.xsl"/>
+
+		<xslt in="${gen.dir}/mergedDoc.xml" out="${gen.dir}/mergedDocTemp.xml"
+		      style="${scale.images}"/>
+		
+		<move file="${gen.dir}/mergedDocTemp.xml" tofile="${gen.dir}/mergedDoc.xml"/>
+		
+		<replace file="${gen.dir}/mergedDoc.xml">
+		  <replacetoken><![CDATA[PLUGINS_ROOT]]></replacetoken>
+		  <replacevalue><![CDATA[http://help.eclipse.org/ganymede/index.jsp?topic=]]></replacevalue>
+		</replace>
+	</target>
+
+	
+
+	
+	<!-- ================================= 
+          target: build-pdf   
+          description: Iterates through a directory and transforms
+	       .xml files into .fo files which can then be turned into PDF
+         ================================= -->
+	<target name="build-pdf" depends="mergeDoc, setup.fop.task" 
+	   description="Generates PDF files from DocBook XML">
+		<echo>Styling the mergedDoc to fo</echo>
+		<antcall target="style.for.buckminster"></antcall>
+		<antcall target="style.for.plain.ant"></antcall>
+
+		<!--  
+		Fop must be able to find the images referenced in the mergedDoc.fo which are relative to 
+		a base directory.  Set the basedir attribute to point to a directory below the root for 
+		this to work.
+		 -->
+		<echo>foping the fo to pdf</echo>
+		<fop format="application/pdf" 
+			fofile="${fo.dir}/mergedDoc.fo"
+			basedir="./src/"
+	        outfile="${local.output}" />
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: setup.xsl.include.task                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="setup.xsl.include.task">
+		<echo>Setting up xsl.incude. task</echo>
+		<path id="xinclude.path">
+			<fileset dir="${xinclude.path.dir}" includes="*.jar" />
+		</path>
+
+		<typedef name="xsl.include" classname="${xincludeclassname}" classpathref="xinclude.path" />
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: setup.fop.task                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="setup.fop.task">
+    	<echo>Setting up fop task</echo>
+    	<property name="fop.home" value="lib/fop-1.0" />
+		<taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop">
+			<classpath>
+				<fileset dir="${fop.home}/lib">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="${fop.home}/build">
+					<include name="fop.jar" />
+					<include name="fop-hyph.jar" />
+				</fileset>
+			</classpath>
+		</taskdef>
+    </target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: style.for.buckminster                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="style.for.buckminster" if="buckminster.home">
+    	<xslt style="${fo.stylesheet}" extension=".fo" 
+    		        basedir="${gen.dir}" destdir="${fo.dir}">
+    		      <!-- these parameters make bookmarks work in the generated PDF -->
+    		       <param name="fop.extensions" expression="0"/>
+    		       <param name="fop1.extensions" expression="1"/>
+
+    				<!--classpath refid="xalan.classpath" /-->
+    				<include name="${merged.doc.name}" />
+    	</xslt>
+    </target>
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: style.for.buckminster                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="style.for.plain.ant" unless="buckminster.home">
+    	<xslt style="${fo.stylesheet}" extension=".fo" 
+    		        basedir="${gen.dir}" destdir="${fo.dir}">
+    				<classpath refid="xalan.classpath" />
+    		<!-- these parameters make bookmarks work in the generated PDF -->
+    		      <param name="fop.extensions" expression="0"/>
+    		      <param name="fop1.extensions" expression="1"/>
+
+    				<include name="${merged.doc.name}" />
+    	</xslt>
+    </target>
+
+
+	<!-- ================================= 
+	          target: deploy.documentation.to.local.s3.staging 
+			 
+	     =================================   -->
+	<target name="deploy.documentation.to.local.s3.staging" if="buckminster.home"
+		description="Copies all repos to a common folder for synchronization with a remote site">
+		<!--
+		<echoproperties></echoproperties>
+		-->
+		<copy todir="${dist.dir}">
+		    <fileset dir="${src.dir}">
+		      <include name="**/*.pdf"/>
+		      <exclude name="**/Abbott.pdf"/>
+		    </fileset>
+		  </copy>
+		
+		<copy todir="${sp:action.output}">
+		    <fileset dir="${dist.dir}"/>
+		  </copy>
+	</target>
+	
+	
+
+</project>

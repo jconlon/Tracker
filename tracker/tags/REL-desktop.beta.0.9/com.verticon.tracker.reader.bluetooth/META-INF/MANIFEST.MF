@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Bluetooth Plug-in
+Bundle-SymbolicName: com.verticon.tracker.reader.bluetooth;singleton:=true
+Bundle-Version: 0.2.1.qualifier
+Bundle-Vendor: Verticon, Inc.
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.bluecove;bundle-version="2.1.1"
+Bundle-ActivationPolicy: lazy
+Import-Package: com.verticon.tracker.irouter.gps.ui,
+ com.verticon.tracker.reader;version="0.1.0",
+ org.osgi.service.io;version="1.0.0",
+ org.slf4j
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
