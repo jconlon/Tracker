@@ -8,7 +8,7 @@
 
 
 
-  <units size='15'>
+  <units size='19'>
      <unit id='com.verticon.tracker.editor.categoryIU' version='0.0.0'>
       <properties size='3'>
         <property name='org.eclipse.equinox.p2.name' value='Premises Editor'/>
@@ -84,7 +84,7 @@
       </requires>
       <touchpoint id='null' version='0.0.0'/>
     </unit>
-
+    <!-- BIRT -->
      <unit id='com.verticon.tracker.birt.categoryIU' version='0.0.0'>
       <properties size='3'>
         <property name='org.eclipse.equinox.p2.name' value='Business Intelligence Reporting Tool (BIRT)'/>
@@ -92,10 +92,70 @@
         <property name='org.eclipse.equinox.p2.description' value='Information reporting tools for design, generation and printing.'/>
       </properties>
       <provides size='1'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.fair.poi.categoryIU' version='0.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.birt.categoryIU' version='0.0.0'/>
       </provides>
       <requires size='1'>
         <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.birt.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+    <unit id='com.verticon.birt.report.loader.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Business Intelligence Reporting Tool (BIRT)'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Information reporting tools for design, generation and printing.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.birt.report.loader.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.birt.report.loader.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+    <unit id='com.verticon.birt.report.engine.emmitter.kml.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Business Intelligence Reporting Tool (BIRT)'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Information reporting tools for design, generation and printing.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.birt.report.engine.emmitter.kml.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.birt.report.engine.emmitter.kml.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+    <unit id='com.verticon.tracker.report.pack.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Business Intelligence Reporting Tool (BIRT)'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Information reporting tools for design, generation and printing.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.report.pack.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.report.pack.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+    <unit id='com.verticon.tracker.fair.report.pack.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Business Intelligence Reporting Tool (BIRT)'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Information reporting tools for design, generation and printing.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.fair.report.pack.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.fair.report.pack.feature.group' range='0.0.0'/>
       </requires>
       <touchpoint id='null' version='0.0.0'/>
     </unit>
