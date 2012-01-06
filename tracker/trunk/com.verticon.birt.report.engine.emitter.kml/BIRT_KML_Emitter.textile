@@ -1,4 +1,4 @@
-h1=. Vernon County Fair
+h1=. BIRT KML Emitter
 
 **Contents** [1]
 
@@ -6,7 +6,9 @@ h1=. Vernon County Fair
 
 h2. Introduction
 
-Creating large KML files can not easily be done by hand. Large Kml files are often created from data base or Spreadsheet data. BIRT can create report from many different types of data sources.
+Creating large KML files is not easily be done by hand. Instead large Kml files are often created from data contained in XLM documents, relational databases or spreadsheets. 
+
+Because Eclipse BIRT can integrate and transform data and create reports from many different types of data sources, BIRT offers an excellent infrastructure and tool chain for the creation of KML files.
 
 h2. Requirements
 
@@ -15,7 +17,7 @@ Create a BIRT Emitter to generate KML from BIRT reports.
 # Generate the KML elements from a BIRT Table Report Item
 # Must be able to create custom Placemark Balloons in the generated KML that can contain links to launch BIRT reports specific to the Placemark item
 # Use external styles and images
-# Output to KMZ
+# Output KML and all resources to KMZ (KML Archive) files
 
 h2. BIRT Table Format
 
@@ -48,20 +50,22 @@ h2. BIRT Report Viewer References
 * "Embedding an HTTP server in Equinox":http://www.eclipse.org/equinox/server/http_in_equinox.php
 
 
-
 h2. Launching BIRT Report Viewer from KML in Google Earth
 
-* Placemark Balloons can contain links to view a report in the BIRT Report Viewer Servlet that will be displayed in the Browser page of Google Earth
-* When BIRT is installed in Eclipse there is a HTTP service running on the localhost so URLs can created to launch reports
+* Placemark Balloons are small HTML pages that are displayed in the Google Earth main user interface.  These small pages are created from HTML markup embedded within the KML document.  This markup can contain HTML links and other HTML tags so that user can hyper link to other HTML pages deployed on http servers. Linked HTML content will be displayed in the Browser page of Google Earth.
+* When BIRT Designer is installed in Eclipse, a BIRT ReportViewer HTTP service can be launched on the localhost. Properly constructed URLS directed to the ReportViewer can launch specific BIRT report within the ReportViewer.
+
+h3. Notes on configuration
+
 * Need to set the @Report Design | Preview@ server to a fixed port.  The default is set to 8080.  
 * Current approach is to create:
 ** Report parameters for declaring environment specific URL for launching the report
 *** rp_baseUrl
-**** http://localhost:8080/viewer/frameset
+**** Example: __http://localhost:8080/viewer/frameset__
 *** rp_reportsDirectory
-**** /home/jconlon/workspace/VSN-Kickapoo-Reports-01/reports/
+**** Example: __/home/jconlon/workspace/VSN-Kickapoo-Reports-01/reports/__
 *** rp_resourceFolder
-**** /opt/Verticon/birt_resources/
+**** Example: __/opt/Verticon/birt_resources/__
 **  A GenericLink computed fields for creating a generic link for all reports based on the report parameters
 *** Two table bindings for each report
 **** Link
@@ -76,11 +80,11 @@ h2. TODO
 
 h2. Future Directions
 
-Tracker projects can be archived as KMZ files thru the functionality provided by the @com.verticon.google.kmlgx.core.model.editor@ project.
+Tracker Livestock Premises and Agriculture projects can be archived as KMZ files thru the functionality provided by the @com.verticon.google.kmlgx.core.model.editor@ project.
 
-# How can these archives be most effectively created for 
+* How can these archives be most effectively created for 
 ** viewing in google earth, 
-** interogated and analyzed with the BIRT Reporting Engine and Report Viewer Servlets
+** interrogated and analyzed with the BIRT Reporting Engine and Report Viewer Servlets
 *** with external reports
 *** with internal reports
 *** running on well known internet servers
