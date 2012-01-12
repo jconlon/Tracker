@@ -48,7 +48,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sex" eType="#//Sex" defaultValueLiteral="Unspecified"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tags" lowerBound="1" upperBound="-1"
-        eType="#//Tag" containment="true" eOpposite="#//Tag/Animal"/>
+        eType="#//Tag" containment="true" eOpposite="#//Tag/animal"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="species" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="breed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -118,7 +118,7 @@
         upperBound="-1" eType="#//Event" containment="true" eOpposite="#//Event/tag"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="Animal" eType="#//Animal"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="animal" eType="#//Animal"
         eOpposite="#//Animal/tags"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Bovine" abstract="true" eSuperTypes="#//Animal"/>
