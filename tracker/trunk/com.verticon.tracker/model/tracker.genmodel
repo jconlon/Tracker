@@ -7,7 +7,7 @@
     templateDirectory="com.verticon.tracker/templates" dynamicTemplates="true" modelName="TrackerReport"
     editorPluginClass="com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/com.verticon.tracker.tests/src"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0">
+    importerID="org.eclipse.emf.importer.ecore" containmentProxies="true" complianceLevel="5.0">
   <foreignModel>tracker.ecore</foreignModel>
   <modelPluginVariables>OCL_ECORE=org.eclipse.ocl.ecore</modelPluginVariables>
   <genPackages prefix="Tracker" basePackage="com.verticon" resource="XMI" disposableProviderFactory="true"
@@ -545,6 +545,7 @@
         <genParameters ecoreParameter="tracker.ecore#//Event/dateEvent/name"/>
       </genOperations>
       <genOperations ecoreOperation="tracker.ecore#//Event/dateEvents"/>
+      <genOperations ecoreOperation="tracker.ecore#//Event/values"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//TagAllocated"/>
     <genClasses ecoreClass="tracker.ecore#//Premises">

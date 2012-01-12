@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.verticon.tracker;singleton:=true
-Bundle-Version: 0.4.3.qualifier
+Bundle-Version: 0.4.4.qualifier
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: com.verticon.tracker;version="0.1.0",
@@ -12,7 +12,7 @@ Export-Package: com.verticon.tracker;version="0.1.0",
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.ocl.ecore,
- com.verticon.osgi.metatype.core.model;bundle-version="0.0.1"
+ com.verticon.osgi.metatype.core.model
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: com.verticon.tracker.TrackerPlugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

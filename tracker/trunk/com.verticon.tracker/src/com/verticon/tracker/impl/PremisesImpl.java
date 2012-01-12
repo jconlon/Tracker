@@ -326,7 +326,7 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 	 */
 	public EList<Animal> getAnimals() {
 		if (animals == null) {
-			animals = new EObjectContainmentEList<Animal>(Animal.class, this, TrackerPackage.PREMISES__ANIMALS);
+			animals = new EObjectContainmentEList.Resolving<Animal>(Animal.class, this, TrackerPackage.PREMISES__ANIMALS);
 		}
 		return animals;
 	}
@@ -338,7 +338,7 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 	 */
 	public EList<Tag> getUnAppliedTags() {
 		if (unAppliedTags == null) {
-			unAppliedTags = new EObjectContainmentEList<Tag>(Tag.class, this, TrackerPackage.PREMISES__UN_APPLIED_TAGS);
+			unAppliedTags = new EObjectContainmentEList.Resolving<Tag>(Tag.class, this, TrackerPackage.PREMISES__UN_APPLIED_TAGS);
 		}
 		return unAppliedTags;
 	}
@@ -443,6 +443,29 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 	 * @generated
 	 */
 	public Policy getPolicy() {
+		if (policy != null && policy.eIsProxy()) {
+			InternalEObject oldPolicy = (InternalEObject)policy;
+			policy = (Policy)eResolveProxy(oldPolicy);
+			if (policy != oldPolicy) {
+				InternalEObject newPolicy = (InternalEObject)policy;
+				NotificationChain msgs = oldPolicy.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__POLICY, null, null);
+				if (newPolicy.eInternalContainer() == null) {
+					msgs = newPolicy.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__POLICY, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackerPackage.PREMISES__POLICY, oldPolicy, policy));
+			}
+		}
+		return policy;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Policy basicGetPolicy() {
 		return policy;
 	}
 
@@ -661,7 +684,8 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 			case TrackerPackage.PREMISES__URI:
 				return getUri();
 			case TrackerPackage.PREMISES__POLICY:
-				return getPolicy();
+				if (resolve) return getPolicy();
+				return basicGetPolicy();
 			case TrackerPackage.PREMISES__ADMINISTRATOR:
 				return getAdministrator();
 			case TrackerPackage.PREMISES__NAME:

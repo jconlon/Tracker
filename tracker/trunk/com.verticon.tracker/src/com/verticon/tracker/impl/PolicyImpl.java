@@ -142,7 +142,7 @@ public class PolicyImpl extends MinimalEObjectImpl.Container implements Policy {
 	 */
 	public EList<EventInclusion> getIncludedEvents() {
 		if (includedEvents == null) {
-			includedEvents = new EObjectContainmentEList<EventInclusion>(EventInclusion.class, this, TrackerPackage.POLICY__INCLUDED_EVENTS);
+			includedEvents = new EObjectContainmentEList.Resolving<EventInclusion>(EventInclusion.class, this, TrackerPackage.POLICY__INCLUDED_EVENTS);
 		}
 		return includedEvents;
 	}
@@ -154,7 +154,7 @@ public class PolicyImpl extends MinimalEObjectImpl.Container implements Policy {
 	 */
 	public EList<GenericEventInclusion> getIncludedGenericEvents() {
 		if (includedGenericEvents == null) {
-			includedGenericEvents = new EObjectContainmentEList<GenericEventInclusion>(GenericEventInclusion.class, this, TrackerPackage.POLICY__INCLUDED_GENERIC_EVENTS);
+			includedGenericEvents = new EObjectContainmentEList.Resolving<GenericEventInclusion>(GenericEventInclusion.class, this, TrackerPackage.POLICY__INCLUDED_GENERIC_EVENTS);
 		}
 		return includedGenericEvents;
 	}

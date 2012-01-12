@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.verticon.tracker.util;
 
+import com.verticon.tracker.*;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Adapter;

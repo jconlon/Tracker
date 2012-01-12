@@ -111,7 +111,7 @@ public interface Premises extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Animals</em>' containment reference list.
 	 * @see com.verticon.tracker.TrackerPackage#getPremises_Animals()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList<Animal> getAnimals();
@@ -127,7 +127,7 @@ public interface Premises extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Un Applied Tags</em>' containment reference list.
 	 * @see com.verticon.tracker.TrackerPackage#getPremises_UnAppliedTags()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList<Tag> getUnAppliedTags();
@@ -263,7 +263,7 @@ public interface Premises extends EObject {
 	 * @return the value of the '<em>Policy</em>' containment reference.
 	 * @see #setPolicy(Policy)
 	 * @see com.verticon.tracker.TrackerPackage#getPremises_Policy()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	Policy getPolicy();
