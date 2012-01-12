@@ -3417,7 +3417,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_dJxnsUiyEd-yj4JjYfOJCw" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_dJxnskiyEd-yj4JjYfOJCw" fontColor="4210752" fontName="Sans" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="tracker.ecore#//Tag/Animal"/>
+    <element xmi:type="ecore:EReference" href="tracker.ecore#//Tag/animal"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_dJxns0iyEd-yj4JjYfOJCw" points="[-4, 2, 522, -96]$[-244, 91, 282, -7]$[-507, 98, 19, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnJ30GIfEeCy_ZHdCa9Nzg" id="(0.0176678445229682,0.05454545454545454)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RnJ30WIfEeCy_ZHdCa9Nzg" id="(0.932806324110672,0.03664921465968586)"/>
