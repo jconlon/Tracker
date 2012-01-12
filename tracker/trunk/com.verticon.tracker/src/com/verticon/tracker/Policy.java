@@ -69,7 +69,7 @@ public interface Policy extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Included Events</em>' containment reference list.
 	 * @see com.verticon.tracker.TrackerPackage#getPolicy_IncludedEvents()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList<EventInclusion> getIncludedEvents();
@@ -85,7 +85,7 @@ public interface Policy extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Included Generic Events</em>' containment reference list.
 	 * @see com.verticon.tracker.TrackerPackage#getPolicy_IncludedGenericEvents()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList<GenericEventInclusion> getIncludedGenericEvents();

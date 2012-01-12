@@ -442,7 +442,7 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 	 */
 	public EList<Tag> getTags() {
 		if (tags == null) {
-			tags = new EObjectContainmentWithInverseEList<Tag>(Tag.class, this, TrackerPackage.ANIMAL__TAGS, TrackerPackage.TAG__ANIMAL);
+			tags = new EObjectContainmentWithInverseEList.Resolving<Tag>(Tag.class, this, TrackerPackage.ANIMAL__TAGS, TrackerPackage.TAG__ANIMAL);
 		}
 		return tags;
 	}

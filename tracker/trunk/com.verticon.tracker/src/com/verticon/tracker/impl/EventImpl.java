@@ -312,6 +312,16 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Tag basicGetTag() {
+		if (eContainerFeatureID() != TrackerPackage.EVENT__TAG) return null;
+		return (Tag)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public NotificationChain basicSetTag(Tag newTag, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newTag, TrackerPackage.EVENT__TAG, msgs);
 		return msgs;
@@ -490,7 +500,8 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 			case TrackerPackage.EVENT__COMMENTS:
 				return getComments();
 			case TrackerPackage.EVENT__TAG:
-				return getTag();
+				if (resolve) return getTag();
+				return basicGetTag();
 			case TrackerPackage.EVENT__ID:
 				return getId();
 			case TrackerPackage.EVENT__DATE:
@@ -574,7 +585,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 			case TrackerPackage.EVENT__COMMENTS:
 				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
 			case TrackerPackage.EVENT__TAG:
-				return getTag() != null;
+				return basicGetTag() != null;
 			case TrackerPackage.EVENT__ID:
 				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
 			case TrackerPackage.EVENT__DATE:

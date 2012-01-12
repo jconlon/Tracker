@@ -137,7 +137,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag {
 	 */
 	public EList<Event> getEvents() {
 		if (events == null) {
-			events = new EObjectContainmentWithInverseEList<Event>(Event.class, this, TrackerPackage.TAG__EVENTS, TrackerPackage.EVENT__TAG);
+			events = new EObjectContainmentWithInverseEList.Resolving<Event>(Event.class, this, TrackerPackage.TAG__EVENTS, TrackerPackage.EVENT__TAG);
 		}
 		return events;
 	}
@@ -175,6 +175,16 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag {
 	public Animal getAnimal() {
 		if (eContainerFeatureID() != TrackerPackage.TAG__ANIMAL) return null;
 		return (Animal)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Animal basicGetAnimal() {
+		if (eContainerFeatureID() != TrackerPackage.TAG__ANIMAL) return null;
+		return (Animal)eInternalContainer();
 	}
 
 	/**
@@ -346,7 +356,8 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag {
 			case TrackerPackage.TAG__ID:
 				return getId();
 			case TrackerPackage.TAG__ANIMAL:
-				return getAnimal();
+				if (resolve) return getAnimal();
+				return basicGetAnimal();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -410,7 +421,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag {
 			case TrackerPackage.TAG__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case TrackerPackage.TAG__ANIMAL:
-				return getAnimal() != null;
+				return basicGetAnimal() != null;
 		}
 		return super.eIsSet(featureID);
 	}

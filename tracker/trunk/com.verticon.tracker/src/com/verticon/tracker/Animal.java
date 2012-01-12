@@ -128,7 +128,7 @@ public interface Animal extends EObject {
 	 * @return the value of the '<em>Tags</em>' containment reference list.
 	 * @see com.verticon.tracker.TrackerPackage#getAnimal_Tags()
 	 * @see com.verticon.tracker.Tag#getAnimal
-	 * @model opposite="Animal" containment="true" required="true"
+	 * @model opposite="Animal" containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
 	EList<Tag> getTags();

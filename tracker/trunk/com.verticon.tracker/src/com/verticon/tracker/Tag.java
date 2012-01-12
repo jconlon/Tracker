@@ -70,7 +70,7 @@ public interface Tag extends EObject {
 	 * @return the value of the '<em>Events</em>' containment reference list.
 	 * @see com.verticon.tracker.TrackerPackage#getTag_Events()
 	 * @see com.verticon.tracker.Event#getTag
-	 * @model opposite="tag" containment="true" required="true"
+	 * @model opposite="tag" containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
 	EList<Event> getEvents();
