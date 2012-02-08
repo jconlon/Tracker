@@ -1,6 +1,6 @@
 h1=. Example Farm
 
-com.verticon.tracker.example Version 0.1.0
+com.verticon.tracker.example Version 0.1.1
 
 **Contents**
 
@@ -19,9 +19,9 @@ This example uses:
 # Eclipse BIRT @org.eclipse.birt@
 # Tracker Premises Report Pack, @com.verticon.tracker.report.pack@ 
 
-h2. Installation
+h2. Installation[2]
 
-# Install the Tracker Premises Report Pack @com.verticon.tracker.report.pack@ [2]
+# Install the Tracker Premises Report Pack @com.verticon.tracker.report.pack@ 
 # Import and copy this project into the workspace.[3]
 
 h2. Reports 
