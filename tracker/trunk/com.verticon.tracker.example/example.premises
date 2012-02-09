@@ -4,7 +4,7 @@
     <tags id="840456789012341">
       <events xmi:type="premises:TagApplied" dateTime="2010-05-10T10:51:30.881-0500" comments="kkkkk"/>
       <events xmi:type="premises:MovedIn" dateTime="2010-05-10T10:53:30.881-0500" sourcePin="HA92348" uri=""/>
-      <events xmi:type="premises:MovedOut" dateTime="2010-12-10T10:51:41.760-0600"/>
+      <events xmi:type="premises:MovedOut" dateTime="2010-12-10T10:51:41.760-0600" destinationPin="00FXCTK"/>
       <events xmi:type="premises:Sighting" dateTime="2010-05-10T10:55:30.881-0500" location="Bull Pen"/>
       <events xmi:type="premises:WeighIn" dateTime="2010-05-10T10:57:30.881-0500" weight="249.0"/>
       <events xmi:type="premises:WeighIn" dateTime="2010-08-10T11:31:30.881-0500" weight="515.0"/>
