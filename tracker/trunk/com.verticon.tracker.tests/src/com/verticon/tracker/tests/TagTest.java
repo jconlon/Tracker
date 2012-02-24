@@ -194,8 +194,8 @@ public class TagTest extends TestCase {
 	}
 	
 	public void testIdentity() {
-		assertNotNull("Tag must have an identitiy attribute", getFixture().eClass().getEIDAttribute());
-		assertTrue("Tag id must be an identitiy attribute", getFixture().eClass().getEIDAttribute().getName().equals("id"));
+		assertNull("Tag must have NO identitiy attribute", getFixture().eClass().getEIDAttribute());
+		
 	}
 
 } //TagTest
