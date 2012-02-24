@@ -87,7 +87,7 @@ public interface Tag extends EObject {
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
 	 * @see com.verticon.tracker.TrackerPackage#getTag_Id()
-	 * @model default="" id="true" required="true"
+	 * @model default="" required="true"
 	 * @generated
 	 */
 	String getId();
