@@ -955,8 +955,8 @@ public abstract class AnimalTest extends TestCase {
 	}
 	
 	public void testIdentity() {
-		assertNotNull("Animal must have no identitiy attribute", getFixture().eClass().getEIDAttribute());
-		assertTrue("Animal uri must be an identitiy attribute", getFixture().eClass().getEIDAttribute().getName().equals("id"));
+		assertNotNull("Animal must have an identitiy attribute", getFixture().eClass().getEIDAttribute());
+		assertTrue("Animal id must be an identitiy attribute", getFixture().eClass().getEIDAttribute().getName().equals("id"));
 	}
 	
 	private String serialiaze(EObject root) throws Exception {
