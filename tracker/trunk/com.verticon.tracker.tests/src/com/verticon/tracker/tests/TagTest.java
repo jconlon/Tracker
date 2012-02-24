@@ -192,5 +192,10 @@ public class TagTest extends TestCase {
 		tag.setId("840456789012345");
 		assertEquals("Test with no tag", "840456789012345", tag.getId());
 	}
+	
+	public void testIdentity() {
+		assertNotNull("Tag must have an identitiy attribute", getFixture().eClass().getEIDAttribute());
+		assertTrue("Tag id must be an identitiy attribute", getFixture().eClass().getEIDAttribute().getName().equals("id"));
+	}
 
 } //TagTest

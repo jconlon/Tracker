@@ -308,10 +308,9 @@ public class PremisesTest extends TestCase {
 		
 	}
 
-	public void testGetPremises() {
-		assertNotNull(getFixture());
-		assertTrue( getFixture().getAnimals().isEmpty());
-		
+	public void testIdentity() {
+		assertNotNull("Premises must have an identitiy attribute", getFixture().eClass().getEIDAttribute());
+		assertTrue("Premises uri must be an identitiy attribute", getFixture().eClass().getEIDAttribute().getName().equals("uri"));
 	}
 	
 
