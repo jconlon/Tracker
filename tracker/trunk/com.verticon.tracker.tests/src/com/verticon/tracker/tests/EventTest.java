@@ -351,5 +351,10 @@ public abstract class EventTest extends TestCase {
 				"unit: pound", eventValue);
 		
 	}
+	
+	public void testIdentity() {
+		assertNull("Must have no identitiy attribute", getFixture().eClass().getEIDAttribute());
+//		assertTrue("Premises uri must be an identitiy attribute", getFixture().eClass().getEIDAttribute().getName().equals("uri"));
+	}
 
 } //EventTest
