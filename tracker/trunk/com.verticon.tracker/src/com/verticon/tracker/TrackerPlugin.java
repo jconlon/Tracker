@@ -54,7 +54,7 @@ public class TrackerPlugin extends Plugin implements LocationService{
 		return bundleMarker;
 	}
 
-	 private ServiceTracker locationServiceTracker = null;   
+	 private ServiceTracker<LocationService, LocationService> locationServiceTracker = null;   
 
 	/**
 	 * The constructor.
@@ -69,7 +69,7 @@ public class TrackerPlugin extends Plugin implements LocationService{
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		locationServiceTracker = new ServiceTracker(context, LocationService.class.getName(),null);
+		locationServiceTracker = new ServiceTracker<LocationService, LocationService>(context, LocationService.class.getName(),null);
 		locationServiceTracker.open();
 		logger.debug(bundleMarker, "Started Bundle");
 	}
@@ -96,7 +96,7 @@ public class TrackerPlugin extends Plugin implements LocationService{
 	private LocationService getLocationService(){
 		LocationService locationService = null;
 		if(locationServiceTracker!=null && locationServiceTracker.getService()!=null){
-			locationService = (LocationService)locationServiceTracker.getService();
+			locationService = locationServiceTracker.getService();
 		}else{
 			logger.warn(bundleMarker, "Failed to find a location service.");
 		}
