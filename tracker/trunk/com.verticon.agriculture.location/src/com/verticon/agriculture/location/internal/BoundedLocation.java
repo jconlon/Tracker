@@ -15,28 +15,23 @@ import com.vividsolutions.jts.geom.Polygon;
 
 /**
  * Immutable data envelope for a Location with a boundary and a name.
+ * 
  * @author jconlon
- *
+ * 
  */
 public class BoundedLocation {
 
 	private final String name;
 	private final Polygon boundary;
-	
 
 	public BoundedLocation(Polygon boundary, String name) {
 		this.boundary = boundary;
-		this.name=name;
-	}
-	
-	String getName(){
-		return name;
+		this.name = name;
 	}
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6116358305710976838L;
+	String getName() {
+		return name;
+	}
 
 	public boolean contains(Point point) {
 		return boundary.contains(point);
@@ -44,6 +39,55 @@ public class BoundedLocation {
 
 	public double getArea() {
 		return boundary.getArea();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((boundary == null) ? 0 : boundary.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof BoundedLocation)) {
+			return false;
+		}
+		BoundedLocation other = (BoundedLocation) obj;
+		if (boundary == null) {
+			if (other.boundary != null) {
+				return false;
+			}
+		} else if (!boundary.equals(other.boundary)) {
+			return false;
+		}
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		} else if (!name.equals(other.name)) {
+			return false;
+		}
+		return true;
 	}
 
 }

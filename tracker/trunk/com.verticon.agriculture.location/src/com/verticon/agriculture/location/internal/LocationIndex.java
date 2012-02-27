@@ -10,7 +10,10 @@
  *******************************************************************************/
 package com.verticon.agriculture.location.internal;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Maps.filterValues;
+import static com.google.common.collect.Maps.newConcurrentMap;
 import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Sets.newHashSet;
 import static com.verticon.agriculture.location.internal.Component.bundleMarker;
@@ -19,6 +22,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -27,6 +32,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -38,66 +44,67 @@ import org.eclipse.ui.progress.IProgressService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Strings;
 import com.verticon.location.LocationServiceProvider;
 import com.verticon.tracker.Premises;
 import com.vividsolutions.jts.geom.Point;
 
+/**
+ * A LocationService and LocationServiceProvider that maintains a mapping of
+ * String IDs to GeoLocation data envelopes. Ids are String names of things or
+ * Premises ids.
+ * 
+ * @author jconlon
+ * 
+ */
 public final class LocationIndex implements LocationServiceProvider {
 
 	/**
 	 * slf4j Logger
 	 */
-	private final  Logger logger = LoggerFactory
-			.getLogger(LocationIndex.class);
+	private final Logger logger = LoggerFactory.getLogger(LocationIndex.class);
 
 	private static LocationIndex instance = null;
 
 	/**
-	 * GeoLocations by location id
+	 * GeoLocations by location id (an id is a string name or the uri of the
 	 * Protected by lock
 	 */
-	private volatile Map<String, GeoLocation> index = newHashMap();
-	private volatile Object lock = new Object();
-	private volatile boolean initialized = false;
+	private ConcurrentMap<String, GeoLocation> index = newConcurrentMap();
+	private AtomicBoolean initialized = new AtomicBoolean();
 
-	
 	private LocationIndex() {
 		super();
 	}
-	
-	
+
 	public static LocationIndex getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new LocationIndex();
 		}
 		return instance;
 	}
-
 
 	/**
 	 * Find location for a Premises. Used for remote locations.
 	 */
 	@Override
 	public String name(Object target) {
+		checkNotNull("The target attribute must not be null.", target);
 		String id = getID(target);
 		String result = null;
 		if (id != null) {
-			synchronized (lock) {
-				result = index.containsKey(id) ? index.get(id).getName() : null;
-			}
+			result = index.containsKey(id) ? index.get(id).getName() : null;
 		}
 		return result;
 	}
 
 	@Override
 	public String address(Object target) {
+		checkNotNull("The target attribute must not be null.", target);
 		String id = getID(target);
 		String result = null;
 		if (id != null) {
-			synchronized (lock) {
-				result = index.containsKey(id) ? index.get(id).getAddress()
-						: null;
-			}
+			result = index.containsKey(id) ? index.get(id).getAddress() : null;
 		}
 		return result;
 	}
@@ -107,18 +114,18 @@ public final class LocationIndex implements LocationServiceProvider {
 	 */
 	@Override
 	public String positionIn(Object target, String coordinates) {
+		checkNotNull("The target attribute must not be null.", target);
+		checkNotNull("The coordinates attribute must not be null.", coordinates);
 		String id = getID(target);
 		String result = null;
 		if (id != null) {
 			Point point = GeoLocationFactory.createPoint(coordinates);
-			synchronized (lock) {
-				result = index.containsKey(id) ? index.get(id).locate(point)
-						: null;
-			}
+
+			result = index.containsKey(id) ? index.get(id).locate(point) : null;
 		}
 		return result;
 	}
-	
+
 	/**
 	 * 
 	 * @param container
@@ -126,14 +133,13 @@ public final class LocationIndex implements LocationServiceProvider {
 	 */
 	@Override
 	public Set<String> locationsIn(Object container) {
+		checkNotNull("The container attribute must not be null.", container);
 		String id = getID(container);
 		Set<String> result = newHashSet();
-		
-		synchronized (lock) {
-			if(index.containsKey(id)){
-				result = index.get(id).polygonNames();
-			}
+		if (index.containsKey(id)) {
+			result = index.get(id).polygonNames();
 		}
+
 		return result;
 	}
 
@@ -142,8 +148,13 @@ public final class LocationIndex implements LocationServiceProvider {
 	 */
 	@Override
 	public boolean canHandle(Object target) {
-		if (!initialized) {
+		checkNotNull("The target attribute must not be null.", target);
+
+		if (!initialized.get()) {
+			logger.info(bundleMarker, "Building");
 			buildAllAgricultureProjects();
+			// logger.info(bundleMarker, "Built");
+			// building.set(false);
 		}
 		if (target instanceof Premises) {
 			return true;
@@ -152,148 +163,173 @@ public final class LocationIndex implements LocationServiceProvider {
 		}
 		return false;
 	}
-	
-	
+
+	void clean() {
+		index.clear();
+		initialized.set(false);
+	}
+
 	/**
 	 * 
 	 * @param uri
 	 * @return true if uri is associated with the index
 	 */
-	 boolean isAssociatedResource(String uri){
+	boolean isAssociatedResource(String uri) {
+		checkNotNull("The uri attribute must not be null.", uri);
 		boolean result = false;
-		if(index==null){
+		if (index.isEmpty() && !initialized.get()) {
 			buildAllAgricultureProjects();
 		}
-		if(uri.endsWith(".kml")|| uri.endsWith(".premises")){
-			synchronized (lock) {
-				for (GeoLocation location : index.values()) {
-					if(location.hasUri(uri)){
-						result = true;
-						break;
-					}
+		if (uri.endsWith(".kml") || uri.endsWith(".premises")) {
+			for (GeoLocation location : index.values()) {
+				if (location.hasUri(uri)) {
+					result = true;
+					break;
 				}
 			}
 		}
 		return result;
 	}
-	
-	
-	  void remove(String id) {
-		synchronized (lock) {
-			index = newHashMap(filterValues(index, new NotResourceUriPredicate(id)));
+
+	/**
+	 * Remove entries associated with the resourceUri from the map.
+	 * 
+	 * @param resourceUri
+	 */
+	void removeMapEntriesFromAgriDocument(URI resourceUri) {
+		checkNotNull("The resourceUri attribute must not be null.", resourceUri);
+		logger.debug(bundleMarker, "Removing all entries made with {}",
+				resourceUri);
+		Set<String> keysToRemove = filterValues(index,
+				new NotResourceUriPredicate(resourceUri)).keySet();
+		for (String key : keysToRemove) {
+			index.remove(key);
 		}
 	}
 
 	/**
 	 * 
 	 * @param resource
-	 * @throws Exception if building fails
+	 * @throws Exception
+	 *             if building fails
 	 */
-	 void add(Resource resource) throws CoreException {
-		synchronized (lock) {
-
-			ResoureIndexBuilder builder = new ResoureIndexBuilder(resource.getURI().toString(), index);
-			TreeIterator<Object> it = EcoreUtil.getAllContents(resource, true);
-			while (it.hasNext()) {
-				EObject eobject = (EObject) it.next();
-				// Visit all objects in the container
-				Object drillDeeper = builder.doSwitch(eobject);
-				if (drillDeeper != null) {
-					if (drillDeeper instanceof Boolean) {
-						if (!(Boolean) drillDeeper) {
-							it.prune();
-						}
-					} else if (drillDeeper instanceof CoreException) {
-						throw (CoreException) drillDeeper;
+	void addAgriDocument(Resource resource) throws CoreException {
+		checkNotNull("The agriculture resource attribute must not be null.",
+				resource);
+		checkArgument(resource.getURI() != null,
+				"Agriculture document resource uri attribute must not be null.");
+		ResourceIndexBuilder builder = new ResourceIndexBuilder(
+				resource.getURI(), index);
+		TreeIterator<Object> it = EcoreUtil.getAllContents(resource, true);
+		while (it.hasNext()) {
+			EObject eobject = (EObject) it.next();
+			// Visit all objects in the container
+			Object drillDeeper = builder.doSwitch(eobject);
+			if (drillDeeper != null) {
+				if (drillDeeper instanceof Boolean) {
+					if (!(Boolean) drillDeeper) {
+						it.prune();
 					}
+				} else if (drillDeeper instanceof CoreException) {
+					throw (CoreException) drillDeeper;
 				}
 			}
-			remove(resource.getURI().toString());
-			if (builder.isFoundAgriculture()) {
-				addToIndex(builder.geoLocations);
-			}
 		}
+		// Remove all the old entries
+		removeMapEntriesFromAgriDocument(resource.getURI());
+
+		// Add the new ones
+		if (builder.isFoundAgriculture()) {
+			addGeoLocationsToMap(builder.geoLocations);
+		}
+
 	}
 
-	private  void addToIndex(List<GeoLocation> locations) {
+	private final void addGeoLocationsToMap(List<GeoLocation> locations) {
 		Map<String, GeoLocation> newLocationsMap = newHashMap();
 		for (GeoLocation geoLocationToAdd : locations) {
 			newLocationsMap.put(geoLocationToAdd.getID(), geoLocationToAdd);
-			logger.debug(bundleMarker, "Added index {}",
+			logger.debug(bundleMarker, "Adding GeoLocation map key {}",
 					geoLocationToAdd.getID());
 		}
 		index.putAll(newLocationsMap);
 	}
 
 	/**
-	 * Resolve a Premise or a String
+	 * Resolve a Premise or a String name
 	 * 
 	 * @param target
 	 * @return resolved id
 	 */
-	private  final String getID(Object target) {
+	private static final String getID(Object target) {
 		String id = null;
 		if (target instanceof Premises) {
 			id = ((Premises) target).getUri();
+			checkNotNull("Premises uri attribute must not be null.", id);
 		} else if (target instanceof String) {
 			id = (String) target;
+			checkNotNull("The target must not be an empty String.",
+					Strings.emptyToNull(id));
 		}
 		return id;
 	}
 
-	
 	private void buildAllAgricultureProjects() {
-		if(initialized){
+		if (initialized.get()) {
 			return;
 		}
-		logger.info(bundleMarker, "Initializing");
-		initialized = true;
+		logger.info(bundleMarker, "Initializing project location indexing");
+		initialized.set(true);
 		// Find all the natures and build them.
 		IWorkspace root = ResourcesPlugin.getWorkspace();
 		final IProject[] projects = root.getRoot().getProjects();
 		IWorkbench wb = PlatformUI.getWorkbench();
 		final IProgressService ps = wb.getProgressService();
-		Display.getDefault().syncExec( 
-				new Runnable() {  
-					public void run() { 
-						try {
-							ps.busyCursorWhile(new IRunnableWithProgress() {
-								public void run(IProgressMonitor pm) {
-									boolean foundAgricultureNatures = false;
-									for (IProject iProject : projects) {
-										if(!iProject.isAccessible()){
-											continue;
-										}
-										try {
-											if (iProject.hasNature(AgricultureNature.NATURE_ID)) {
-												foundAgricultureNatures = true;
-												logger.debug(bundleMarker,
-														"Building project {}", iProject.getName());
-												iProject.build(
-														IncrementalProjectBuilder.FULL_BUILD,
-														pm);
-												logger.debug(bundleMarker,
-														"Built project {}", iProject.getName());
-											}
-										} catch (CoreException e) {
-											logger.error(bundleMarker,
-													this + " failed to build project "
-													+ iProject.getName(), e);
-										}
-									}
-									if(!foundAgricultureNatures){
-										logger.debug(bundleMarker,
-										"Did not find any projects with an agriculture nature.");
-									}
+		Display.getDefault().asyncExec(new Runnable() {
+			public void run() {
+				try {
+					ps.busyCursorWhile(new IRunnableWithProgress() {
+						public void run(IProgressMonitor pm) {
+							boolean foundAgricultureNatures = false;
+							for (IProject iProject : projects) {
+								if (!iProject.isAccessible()) {
+									continue;
 								}
-							});
-						} catch (InvocationTargetException e) {
-							logger.error(bundleMarker, "Failed to build projects", e);
-						} catch (InterruptedException e) {
-							logger.error(bundleMarker, "Failed to build projects", e);
+								try {
+									if (iProject
+											.hasNature(AgricultureNature.NATURE_ID)) {
+										foundAgricultureNatures = true;
+										logger.info(
+												bundleMarker,
+												"Building agriculture project {}",
+												iProject.getName());
+										iProject.build(
+												IncrementalProjectBuilder.FULL_BUILD,
+												pm);
+										logger.debug(bundleMarker,
+												"Built agriculture project {}",
+												iProject.getName());
+									}
+								} catch (CoreException e) {
+									logger.error(bundleMarker,
+											"Failed to build project "
+													+ iProject.getName()
+													+ ".  " + e.getStatus(), e);
+								}
+							}
+							if (!foundAgricultureNatures) {
+								logger.debug(bundleMarker,
+										"Did not find any projects with an agriculture nature.");
+							}
 						}
-					}
-				});
-				
+					});
+				} catch (InvocationTargetException e) {
+					logger.error(bundleMarker, "Failed to build projects", e);
+				} catch (InterruptedException e) {
+					logger.error(bundleMarker, "Failed to build projects", e);
+				}
+			}
+		});
+
 	}
 }

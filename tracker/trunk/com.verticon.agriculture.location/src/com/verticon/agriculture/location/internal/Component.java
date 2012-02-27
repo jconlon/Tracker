@@ -39,13 +39,14 @@ public class Component implements LocationServiceProvider {
 		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
 	}
 
-	private final LocationIndex delegate =  LocationIndex.getInstance();
+	private final LocationIndex delegate = LocationIndex.getInstance();
 
 	public void activate() {
 		logger.debug(bundleMarker, "Activated", this);
 	}
 
 	public void deactivate() {
+		LocationIndex.getInstance().clean();
 		logger.debug(bundleMarker, "Deactivated", this);
 	}
 
@@ -84,7 +85,8 @@ public class Component implements LocationServiceProvider {
 
 	/**
 	 * 
-	 * @param container that has sublocations
+	 * @param container
+	 *            that has sublocations
 	 * @return names of all the sublocations for the container
 	 */
 	@Override
