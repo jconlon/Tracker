@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
@@ -33,108 +34,117 @@ import com.vividsolutions.jts.geom.Point;
 
 /**
  * Factory for creating GeoLocation objects.
+ * 
  * @author jconlon
- *
+ * 
  */
-public class GeoLocationFactory extends KmlSwitch<Object>{
+public class GeoLocationFactory extends KmlSwitch<Object> {
 	private static final GeometryFactory geometryFactory = new GeometryFactory();
 	private List<BoundedLocation> boundedLocations = newArrayList();
-	private  String address ;
+	private String address;
 	private String placeMarkName = null;
-	
-	
+
 	/**
 	 * Build a GeoLocation from the container.
 	 * 
 	 * @param container
 	 * @param id
 	 * @param resourceUri
-	 * @return GeoLocation 
+	 * @return GeoLocation
 	 * @throws Exception
 	 */
-	GeoLocation build(Container container, String id, String resourceUri, ImmutableSet<String> associatedUris) {
+	GeoLocation build(Container container, String id, URI resourceUri,
+			ImmutableSet<String> associatedUris) {
 		this.address = container.getAddress();
 		placeMarkName = null;
 		boundedLocations.clear();
-		
-		
+
 		TreeIterator<Object> it = EcoreUtil.getAllContents(container, true);
 		while (it.hasNext()) {
 			EObject eobject = (EObject) it.next();
-			//Visit all objects in the container
+			// Visit all objects in the container
 			Object drillDeeper = doSwitch(eobject);
-			if(drillDeeper!=null){
-				if(drillDeeper instanceof Boolean){
-					if(!(Boolean)drillDeeper){
+			if (drillDeeper != null) {
+				if (drillDeeper instanceof Boolean) {
+					if (!(Boolean) drillDeeper) {
 						it.prune();
 					}
 				}
-				
+
 			}
 		}
-		return new GeoLocation(id, resourceUri, address, 
-				ImmutableList.copyOf(boundedLocations), 
-				container.getName(),
+		return new GeoLocation(id, resourceUri, address,
+				ImmutableList.copyOf(boundedLocations), container.getName(),
 				ImmutableSet.copyOf(associatedUris));
 	}
 
-	/* (non-Javadoc)
-	 * @see com.verticon.opengis.kml.util.KmlSwitch#casePlacemark(com.verticon.opengis.kml.Placemark)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.verticon.opengis.kml.util.KmlSwitch#casePlacemark(com.verticon.opengis
+	 * .kml.Placemark)
 	 */
 	@Override
 	public Object casePlacemark(Placemark placeMark) {
 		placeMarkName = placeMark.getName();
 		return Boolean.TRUE;
 	}
-	
-	
-	/* (non-Javadoc)
-	 * @see com.verticon.opengis.kml.util.KmlSwitch#casePolygon(com.verticon.opengis.kml.Polygon)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.verticon.opengis.kml.util.KmlSwitch#casePolygon(com.verticon.opengis
+	 * .kml.Polygon)
 	 */
 	@Override
 	public Object casePolygon(Polygon object) {
-		BoundedLocation namedPolygon = new BoundedLocation(openGisToJTS(object), placeMarkName);
+		BoundedLocation namedPolygon = new BoundedLocation(
+				openGisToJTS(object), placeMarkName);
 		boundedLocations.add(namedPolygon);
 		return Boolean.FALSE;
 	}
-	
-	
-	static com.vividsolutions.jts.geom.Polygon openGisToJTS( Polygon polygon){
+
+	static com.vividsolutions.jts.geom.Polygon openGisToJTS(Polygon polygon) {
 		Boundary boundry = polygon.getOuterBoundaryIs();
 		LinearRing lr = boundry.getLinearRing();
 		com.vividsolutions.jts.geom.LinearRing jts_lr = openGisToJTS(lr);
 		return geometryFactory.createPolygon(jts_lr, null);
 	}
-    
-    private static com.vividsolutions.jts.geom.LinearRing openGisToJTS(LinearRing lr) {
+
+	private static com.vividsolutions.jts.geom.LinearRing openGisToJTS(
+			LinearRing lr) {
 		List<String> s = lr.getCoordinates();
-		com.vividsolutions.jts.geom.LinearRing jts_lr = geometryFactory.createLinearRing(createCoordinates(s));
+		com.vividsolutions.jts.geom.LinearRing jts_lr = geometryFactory
+				.createLinearRing(createCoordinates(s));
 		return jts_lr;
 	}
-    
-    private static Coordinate[] createCoordinates(List<String> points){
+
+	private static Coordinate[] createCoordinates(List<String> points) {
 		for (Iterator<String> iterator = points.iterator(); iterator.hasNext();) {
-			String string =  iterator.next();
-			if(string.length()==0){
+			String string = iterator.next();
+			if (string.length() == 0) {
 				iterator.remove();
 			}
-			
+
 		}
 		Coordinate[] results = new Coordinate[points.size()];
 		for (int i = 0; i < points.size(); i++) {
-			results[i]=createCoordinate(points.get(i));
+			results[i] = createCoordinate(points.get(i));
 		}
 		return results;
 	}
-    
-    static Coordinate createCoordinate(String point) {
-		String [] results = point.split( ",\\s*" ); // split on commas
-		return new Coordinate(Double.parseDouble(results[0]), Double.parseDouble(results[1]));
+
+	static Coordinate createCoordinate(String point) {
+		String[] results = point.split(",\\s*"); // split on commas
+		return new Coordinate(Double.parseDouble(results[0]),
+				Double.parseDouble(results[1]));
 	}
-    
-    static Point createPoint(String point){
-    	return geometryFactory.createPoint(
-			GeoLocationFactory.createCoordinate(point));
-    }
+
+	static Point createPoint(String point) {
+		return geometryFactory.createPoint(GeoLocationFactory
+				.createCoordinate(point));
+	}
 
 }

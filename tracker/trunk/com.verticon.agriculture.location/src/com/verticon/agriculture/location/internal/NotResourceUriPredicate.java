@@ -10,26 +10,33 @@
  *******************************************************************************/
 package com.verticon.agriculture.location.internal;
 
-import com.google.common.base.Predicate;
+import org.eclipse.emf.common.util.URI;
 
+import com.google.common.base.Predicate;
 
 /**
  * 
- * Predicate for a resoureUri specific GeoLocation
+ * Predicate for passing all GeoLocations that are not in a resoureUri.
+ * 
+ * Filters out all GeoLocations that are in the resourceUri.
+ * 
  * @author jconlon
- *
+ * 
  */
 class NotResourceUriPredicate implements Predicate<GeoLocation> {
-	private final String resourceUri;
+	private final URI resourceUri;
 
-	NotResourceUriPredicate(String uri) {
+	NotResourceUriPredicate(URI resourceUri) {
 		super();
-		this.resourceUri = uri;
+		this.resourceUri = resourceUri;
 	}
 
+	/**
+	 * returns true for all GeoLocations that are not in the resource
+	 */
 	@Override
 	public boolean apply(GeoLocation specific) {
-		return !specific.getResourceUri().equals(resourceUri);
+		return !specific.getAgriDocResourceUri().equals(resourceUri);
 	}
 
 }

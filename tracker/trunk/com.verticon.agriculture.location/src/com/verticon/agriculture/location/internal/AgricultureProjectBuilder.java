@@ -26,20 +26,27 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.emf.common.ui.MarkerHelper;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.verticon.agriculture.Agriculture;
 import com.verticon.agriculture.AgriculturePackage;
+import com.verticon.agriculture.Location;
 import com.verticon.agriculture.util.AgricultureResourceFactoryImpl;
 
 /**
- * Project Builder associated with Agriculture projects that
- * builds an index a map of Premises uri keys to GeoLocations
- * for resolving Location Service lookups.
+ * Project Builder associated with Agriculture projects that builds an index a
+ * map of Premises uri keys to GeoLocations for resolving Location Service
+ * lookups.
  * 
  * @see GeoLocation
  * @see AgricultureNature
@@ -47,55 +54,42 @@ import com.verticon.agriculture.util.AgricultureResourceFactoryImpl;
  * 
  */
 public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
-	
+
 	/**
 	 * slf4j Logger
 	 */
 	private static final Logger logger = LoggerFactory
 			.getLogger(AgricultureProjectBuilder.class);
-	
+
 	/**
-	 * Name of the marker that will be written to the doc.agri document if there are problems
+	 * Name of the marker that will be written to the doc.agri document if there
+	 * are problems
 	 */
 	private static final String ORG_ECLIPSE_CORE_RESOURCES_PROBLEMMARKER = "org.eclipse.core.resources.problemmarker";
 
 	/**
-	 * Name of the default document in the root directory of the agriculture project
+	 * Name of the default document in the root directory of the agriculture
+	 * project
 	 */
 	private static final String DEFAULT_AGRICULTURE_DOCUMENT = "doc.agri";
-	
+
 	/**
 	 * Unique identifier for this builder
 	 */
 	public static final String BUILDER_ID = Component.PLUGIN_ID
 			+ ".locationBuilderService";
-	
-	private LocationIndex locationIndex = LocationIndex.getInstance();
-	
-//
-//	/**
-//	 * Global map of GeoLocations by id
-//	 */
-//	private static volatile ImmutableMap<String, GeoLocation> index = ImmutableMap.of();
-	
-	/**
-	 * Support utility to do the indexing
-	 */
-//	private LocationIndexer indexer = new LocationIndexer();
-	
-//	/**
-//	 * Flag to indicate if the index was built at startup. The first request
-//	 * to get the index will build all the projects tagged with an agriculture
-//	 * nature and set this flag to true.
-//	 */
-//	private static boolean activated = false;
 
-	/* (non-Javadoc)
+	private LocationIndex locationIndex = LocationIndex.getInstance();
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "AgricultureProjectBuilder [project name=" + getProject().getName() + "]";
+		return "AgricultureProjectBuilder [project name="
+				+ getProject().getName() + "]";
 	}
 
 	/**
@@ -105,67 +99,110 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 	protected IProject[] build(int kind,
 			@SuppressWarnings("rawtypes") Map args, IProgressMonitor monitor)
 			throws CoreException {
-		
+
 		if (shouldBuild(kind)) {
 			logger.debug(bundleMarker, "{} building {}", this, getProject()
 					.getName());
 			build(monitor);
 		} else {
-			logger.debug(bundleMarker, "{} defered building {} build kind={}", new Object[]{this,
-					getProject().getName(),kind});
+			logger.debug(bundleMarker, "{} defered building {} build kind={}",
+					new Object[] { this, getProject().getName(), kind });
 		}
 		return null;
 	}
-	
-	
-	
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.core.resources.IncrementalProjectBuilder#clean(org.eclipse.core.runtime.IProgressMonitor)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.core.resources.IncrementalProjectBuilder#clean(org.eclipse
+	 * .core.runtime.IProgressMonitor)
 	 */
 	@Override
 	protected void clean(IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask("Cleaning index on agriculture location service", 2);
+
 		if (checkCancel(monitor)) {
 			return;
 		}
-
+		// 1.
 		URI uri = URI.createPlatformResourceURI(getProject().getName(), true);
 		uri = uri.appendSegment(DEFAULT_AGRICULTURE_DOCUMENT);
-		logger.debug(bundleMarker, "{} clean {}", this, uri);
+		logger.debug(bundleMarker, "Cleaning project {}", uri);
 		monitor.worked(1);
-
-		// 2. build and validate the changes to the index
 		if (checkCancel(monitor)) {
 			return;
 		}
-		locationIndex.remove(uri.toString());
-		monitor.worked(1);
 
+		// 2. build and validate the changes to the index
+		locationIndex.removeMapEntriesFromAgriDocument(uri);
+		monitor.worked(1);
 		monitor.done();
 		super.clean(monitor);
 	}
 
 	private void build(IProgressMonitor monitor) throws CoreException {
-		monitor.beginTask("Building index on agriculture location service", 2);
+		monitor.beginTask("Building index on agriculture location service", 4);
 		// 1. load doc.agri file
 		if (checkCancel(monitor)) {
 			return;
 		}
 
 		Resource resource = load();
-		logger.debug(bundleMarker, "{} loaded {}", this, resource.getURI());
-		// System.out.println("Loaded " + resource.getURI());
+		logger.debug(bundleMarker, "Building project {}", resource.getURI());
 		monitor.worked(1);
-
-		// 2. build and validate the changes to the index
 		if (checkCancel(monitor)) {
 			return;
 		}
-		locationIndex.add(resource);
+
+		// 2. validate the agriculture
+		Agriculture agriculture = (Agriculture) resource.getContents().get(0);
+		validateObject(agriculture);
+		monitor.worked(1);
+		if (checkCancel(monitor)) {
+			return;
+		}
+
+		// 3. validate locations
+		for (Location location : agriculture.getLocation()) {
+			validateObject(location);
+			validateObject(location.getLivestock());
+			validateObject(location.getGeography());
+		}
+
+		monitor.worked(1);
+		if (checkCancel(monitor)) {
+			return;
+		}
+		// 4. add the resource to the index
+		locationIndex.addAgriDocument(resource);
 		monitor.worked(1);
 
 		monitor.done();
+
+	}
+
+	private static void validateObject(EObject eObject) throws CoreException {
+		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject);
+		if (diagnostic.getSeverity() == Diagnostic.ERROR
+				|| diagnostic.getSeverity() == Diagnostic.WARNING) {
+			MarkerHelper mh = new MarkerHelper();
+			try {
+				mh.createMarkers(diagnostic);
+			} catch (CoreException e) {
+			}
+			BasicDiagnostic parent = new BasicDiagnostic(Diagnostic.ERROR,// severity
+					Component.PLUGIN_ID,// source
+					0,// code
+					"Agricuture project builder faild to validate "
+							+ eObject.eClass().getName() + " in resource "
+							+ eObject.eResource().getURI(),// message
+					new Object[] {});// data);
+			parent.merge(diagnostic);
+			// throw new CoreException(BasicDiagnostic.toIStatus(diagnostic));
+			throw new CoreException(BasicDiagnostic.toIStatus(parent));
+
+		}
 
 	}
 
@@ -190,14 +227,15 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 		return resourceSet.getResource(uri, true);
 
 	}
-	
-	static URI createURI(IProject project){
-		 URI uri = URI.createPlatformResourceURI(project.getName(), true);
-			return  uri.appendSegment(DEFAULT_AGRICULTURE_DOCUMENT);
+
+	static URI createURI(IProject project) {
+		URI uri = URI.createPlatformResourceURI(project.getName(), true);
+		return uri.appendSegment(DEFAULT_AGRICULTURE_DOCUMENT);
 	}
 
 	/**
 	 * Build for a Full Build, if the default doc or any associated uris change
+	 * 
 	 * @param kind
 	 * @return
 	 */
@@ -213,13 +251,14 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 		IResourceDelta[] children = delta.getAffectedChildren();
 		for (IResourceDelta child : children) {
 			String fileName = child.getProjectRelativePath().lastSegment();
-			//Build if the default agri,
+			// Build if the default agri,
 			if (fileName.equals(DEFAULT_AGRICULTURE_DOCUMENT)) {
 				return true;
-			}else {
-				URI uri = URI.createPlatformResourceURI(child.getFullPath().toString(), true);
+			} else {
+				URI uri = URI.createPlatformResourceURI(child.getFullPath()
+						.toString(), true);
 				// build if an associated kml or premises is changed.
-				if(locationIndex.isAssociatedResource(uri.toString())){
+				if (locationIndex.isAssociatedResource(uri.toString())) {
 					logger.debug(bundleMarker, "Affected resource: {}", uri);
 					return true;
 				}
@@ -227,84 +266,87 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 		}
 		return false;
 	}
-	
-	
-//	private void resourceChanged(IResourceDelta[] children) {
-//		final Set<String> itemsToRemove = newHashSet();
-//		final Set<String> itemsToAdd = newHashSet();
-//		for (IResourceDelta child : children) {
-//		try {
-//			child.accept(new IResourceDeltaVisitor() {
-//				public boolean visit(IResourceDelta delta) throws CoreException {
-//					switch (delta.getKind()) {
-//					case IResourceDelta.REMOVED:
-//						IResource resource = delta.getResource();
-//						logger.debug(bundleMarker, "Removed: {}", resource);
-//						String item = resolve(resource);
-//						if (item != null)
-//							itemsToRemove.add(item);
-//							logger.debug(bundleMarker, "Removed resolved: {}", item);
-//						break;
-//					case IResourceDelta.CHANGED:
-//						resource = delta.getResource();
-//						logger.debug(bundleMarker, "Changed: {}", resource);
-//					    item = resolve(resource);
-//						if (item != null)
-//							itemsToAdd.add(item);
-//							logger.debug(bundleMarker, "Changed resolved: {}", item);
-//						break;
-//					case IResourceDelta.MOVED_FROM:
-//						resource = delta.getResource();
-//						logger.debug(bundleMarker, "Moved From: {}", resource);
-//					    item = resolve(resource);
-//						if (item != null)
-//							itemsToRemove.add(item);
-//							logger.debug(bundleMarker, "Moved From resolved: {}", item);
-//						break;	
-//					case IResourceDelta.MOVED_TO:
-//						resource = delta.getResource();
-//						logger.debug(bundleMarker, "Moved To: {}", resource);
-//					    item = resolve(resource);
-//						if (item != null)
-//							itemsToAdd.add(item);
-//							logger.debug(bundleMarker, "Moved To resolved: {}", item);
-//						break;	
-//					default:
-//						break;
-//					}
-//
-//					return true;
-//				}
-//			});
-//		} catch (CoreException ex) {
-//			logger.error(bundleMarker, "Failed to handle resource change", ex);
-//		}
-//		}
-////		LocationIndex.update( itemsToRemove, itemsToAdd);
-//	}
-	
-//	/**
-//	 * Resolves kml, agri, and premises documents.
-//	 * 
-//	 * @param input
-//	 * @return uri or null
-//	 * @throws CoreException
-//	 */
-//	private static String resolve(IResource input) throws CoreException {
-//		String result = null;
-//		
-//		if(input.getProjectRelativePath().lastSegment().equals(DEFAULT_AGRICULTURE_DOCUMENT) &&  input.getProject().hasNature(AgricultureNature.NATURE_ID)){
-//			String inputParent = input.getParent().getName();
-//			String projectName = input.getProject().getName();
-//			if(inputParent.equals(projectName)){
-//				result = URI.createPlatformResourceURI(input.getFullPath().toString(), true).toString();
-//			}
-//			
-//		} else if (input.getFileExtension().equals("kml") || input.getFileExtension().equals("premises")){
-//			result = URI.createPlatformResourceURI(input.getFullPath().toString(), true).toString();
-//		}	
-//		return result;
-//	}
+
+	// private void resourceChanged(IResourceDelta[] children) {
+	// final Set<String> itemsToRemove = newHashSet();
+	// final Set<String> itemsToAdd = newHashSet();
+	// for (IResourceDelta child : children) {
+	// try {
+	// child.accept(new IResourceDeltaVisitor() {
+	// public boolean visit(IResourceDelta delta) throws CoreException {
+	// switch (delta.getKind()) {
+	// case IResourceDelta.REMOVED:
+	// IResource resource = delta.getResource();
+	// logger.debug(bundleMarker, "Removed: {}", resource);
+	// String item = resolve(resource);
+	// if (item != null)
+	// itemsToRemove.add(item);
+	// logger.debug(bundleMarker, "Removed resolved: {}", item);
+	// break;
+	// case IResourceDelta.CHANGED:
+	// resource = delta.getResource();
+	// logger.debug(bundleMarker, "Changed: {}", resource);
+	// item = resolve(resource);
+	// if (item != null)
+	// itemsToAdd.add(item);
+	// logger.debug(bundleMarker, "Changed resolved: {}", item);
+	// break;
+	// case IResourceDelta.MOVED_FROM:
+	// resource = delta.getResource();
+	// logger.debug(bundleMarker, "Moved From: {}", resource);
+	// item = resolve(resource);
+	// if (item != null)
+	// itemsToRemove.add(item);
+	// logger.debug(bundleMarker, "Moved From resolved: {}", item);
+	// break;
+	// case IResourceDelta.MOVED_TO:
+	// resource = delta.getResource();
+	// logger.debug(bundleMarker, "Moved To: {}", resource);
+	// item = resolve(resource);
+	// if (item != null)
+	// itemsToAdd.add(item);
+	// logger.debug(bundleMarker, "Moved To resolved: {}", item);
+	// break;
+	// default:
+	// break;
+	// }
+	//
+	// return true;
+	// }
+	// });
+	// } catch (CoreException ex) {
+	// logger.error(bundleMarker, "Failed to handle resource change", ex);
+	// }
+	// }
+	// // LocationIndex.update( itemsToRemove, itemsToAdd);
+	// }
+
+	// /**
+	// * Resolves kml, agri, and premises documents.
+	// *
+	// * @param input
+	// * @return uri or null
+	// * @throws CoreException
+	// */
+	// private static String resolve(IResource input) throws CoreException {
+	// String result = null;
+	//
+	// if(input.getProjectRelativePath().lastSegment().equals(DEFAULT_AGRICULTURE_DOCUMENT)
+	// && input.getProject().hasNature(AgricultureNature.NATURE_ID)){
+	// String inputParent = input.getParent().getName();
+	// String projectName = input.getProject().getName();
+	// if(inputParent.equals(projectName)){
+	// result = URI.createPlatformResourceURI(input.getFullPath().toString(),
+	// true).toString();
+	// }
+	//
+	// } else if (input.getFileExtension().equals("kml") ||
+	// input.getFileExtension().equals("premises")){
+	// result = URI.createPlatformResourceURI(input.getFullPath().toString(),
+	// true).toString();
+	// }
+	// return result;
+	// }
 
 	private boolean checkCancel(IProgressMonitor monitor) {
 		if (monitor.isCanceled()) {
@@ -318,7 +360,6 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 
 		return false;
 	}
-
 
 	// //////////////////////////////////////////////////////////////////////////
 	//
