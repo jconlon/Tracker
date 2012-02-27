@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see com.verticon.tracker.TrackerPackage#getPremises()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='URIIsValidURISegment'"
  * @generated
  */
 public interface Premises extends EObject {

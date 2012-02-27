@@ -13,9 +13,13 @@ package com.verticon.tracker.util;
 import com.verticon.tracker.*;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 
 import com.verticon.tracker.Animal;
@@ -341,7 +345,40 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTag(Tag tag, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(tag, diagnostics, context);
+		boolean result = validate_NoCircularContainment(tag, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(tag, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(tag, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(tag, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(tag, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(tag, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(tag, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(tag, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(tag, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTag_IDIsValidURISegment(tag, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the IDIsValidURISegment constraint of '<em>Tag</em>'.
+	 * <!-- begin-user-doc -->
+	 * Insure that the tag has a id value that can be used as a segment in a URI
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateTag_IDIsValidURISegment(Tag tag, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!URI.validSegment(tag.getId())) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "Tag id attribute: '"+tag.getId()+"' is not a valid URI segment. Remove the following characters: / ? #",
+						 new Object[] { tag }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -644,7 +681,40 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validatePremises(Premises premises, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(premises, diagnostics, context);
+		boolean result = validate_NoCircularContainment(premises, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(premises, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(premises, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(premises, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(premises, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(premises, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(premises, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(premises, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(premises, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePremises_URIIsValidURISegment(premises, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the URIIsValidURISegment constraint of '<em>Premises</em>'.
+	 * <!-- begin-user-doc -->
+	 * Insure that the Premises has a uri value that can be used as a segment in a URI
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validatePremises_URIIsValidURISegment(Premises premises, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!URI.validSegment(premises.getUri())) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "Premises uri attribute: '"+premises.getUri()+"' is not a valid URI segment. Remove the following characters: / ? #",
+						 new Object[] { premises }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
