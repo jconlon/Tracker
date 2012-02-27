@@ -31,7 +31,7 @@ import com.verticon.osgi.metatype.OCD;
  * </p>
  *
  * @see com.verticon.tracker.TrackerPackage#getTag()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='IDIsValidURISegment'"
  * @generated
  */
 public interface Tag extends EObject {
