@@ -7,7 +7,7 @@ __This document is the a draft. Future versions will fully serve the intended fu
 
 h2. Agriculture Editor and Location Services
 
-Tracker Agriculture Editor and Location Service integrates state of the art GIS(Geographic Information System) technologies based on OpenGIS KML(Key Hole Markup Language) with livestock premises based animal histories and premises to premises animal movements. Tracker Agriculture Location Service offers livestock professionals a comprehensive and open desktop solution[1] for the managing and visualizing of geographic livestock herd distributions, individual animal locations, and animal movements within and between premises locations. 
+Tracker Agriculture Editor and Location Service integrate state of the art GIS(Geographic Information System) technologies based on OpenGIS KML(Key Hole Markup Language) with livestock premises based animal histories and premises to premises animal movements. Tracker Agriculture Location Service offers livestock professionals a comprehensive and open desktop solution[1] for the managing and visualizing of geographic livestock herd distributions, individual animal locations, and animal movements within and between premises locations. 
 
 
 h3. Solution Requirements
