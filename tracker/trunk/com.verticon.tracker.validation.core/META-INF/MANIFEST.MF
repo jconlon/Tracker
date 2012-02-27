@@ -2,13 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Plugin.name
 Bundle-SymbolicName: com.verticon.tracker.validation.core;singleton:=true
-Bundle-Version: 0.2.0.qualifier
+Bundle-Version: 0.2.1.qualifier
 Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.emf.validation,
- org.eclipse.emf.validation.ui,
  org.eclipse.ocl.ecore,
  com.verticon.tracker,
  org.eclipse.core.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: org.osgi.service.metatype;version="1.1.0"
+Import-Package: com.verticon.osgi.metatype,
+ org.osgi.service.metatype;version="1.1.0"

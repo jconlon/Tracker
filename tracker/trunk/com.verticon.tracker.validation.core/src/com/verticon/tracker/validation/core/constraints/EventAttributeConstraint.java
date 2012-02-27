@@ -17,6 +17,7 @@ import org.eclipse.emf.validation.AbstractModelConstraint;
 import org.eclipse.emf.validation.EMFEventType;
 import org.eclipse.emf.validation.IValidationContext;
 import org.osgi.service.metatype.AttributeDefinition;
+import org.osgi.service.metatype.ObjectClassDefinition;
 
 import com.verticon.tracker.GenericEvent;
 
@@ -45,7 +46,24 @@ public class EventAttributeConstraint extends AbstractModelConstraint {
 			return ctx.createSuccessStatus();
 		}
 		BasicEMap.Entry<String, String> eventAttribute = (BasicEMap.Entry<String, String>) eObj;
+		
 		GenericEvent ge = (GenericEvent) eObj.eContainer();
+		if (ge.getOcd() == null ) {
+			return ctx
+					.createFailureStatus(new Object[] {
+							eObj.eClass().getName(), 
+							"of an unknown type",
+							eventAttribute.getKey(),
+							"Failed to find the referenced OCD for the event. Try reloading the document. If the error persists delete this event, validate the metatype specification, and recreate the event." });
+		}
+		if (ge.getOcd().getAttributeDefinitions(ObjectClassDefinition.ALL) == null ) {
+			return ctx
+					.createFailureStatus(new Object[] {
+							eObj.eClass().getName(), 
+							"of an unknown type",
+							eventAttribute.getKey(),
+							"Failed to find Attribute Definitions for the event. Try reloading the document. If the error persists delete this event,  delete this event, validate the metatype specification, and recreate the event." });
+		}
 		//Generic Event must find an AttributeDefinition associated with this map entry
 		if (ge.findAttributeDefinition(eventAttribute) == null) {
 			return ctx
@@ -53,7 +71,7 @@ public class EventAttributeConstraint extends AbstractModelConstraint {
 							eObj.eClass().getName(), 
 							"of an unknown type",
 							eventAttribute.getKey(),
-							"Please delete this event, validate the metatype specification, and recreate the event." });
+							"Failed to find Attribute Definition "+eventAttribute+" for the event. Try reloading the document. If the error persists delete this event, validate the metatype specification, and recreate the event." });
 		}
 
 		AttributeDefinition attributeDefinition = ge.findAttributeDefinition(eventAttribute);

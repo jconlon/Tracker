@@ -40,7 +40,7 @@
       			</target>
             </constraint>
             
-           <!-- This constraint applies to Tag Id value-->
+           <!-- These constraints applies to Tag Id value-->
             <constraint
          		lang="OCL"
          		severity="ERROR"
@@ -59,8 +59,7 @@
        			</event>
       		</target>self.usainNumberUsed
       		</constraint>
-         
-           <!-- This constraint applies to Tag Id value-->
+   
             <constraint
                   lang="Java"
                   class="com.verticon.tracker.validation.core.constraints.NonNumberIdConstraint"
@@ -77,6 +76,47 @@
        				</event>
        				<event name="Unset">
             			<feature name="id"/>
+       				</event>
+      			</target>
+            </constraint>
+            
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.validation.core.constraints.IDValidSegmentConstraint"
+                  severity="ERROR"
+                  mode="Live"
+                  name="Tag ID Valid URI Segment Constraint (Live Mode)"
+                  id="tagIDValidSegmentOnly"
+                  statusCode="100">
+               <description>Tag id must be a value that can be added to an URI segment.</description>
+      		   <message>"Core Constraint: {0}" ID value must be a value that can be appended to a URI segment. Remove the following characters: / ? #</message>
+      		   <target class="Tag">
+         			<event name="Set">
+            			<feature name="uri"/>
+       				</event>
+       				<event name="Unset">
+            			<feature name="uri"/>
+       				</event>
+      			</target>
+            </constraint>
+            
+            <!-- This constraint applies to Premises URI value-->
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.validation.core.constraints.IDValidSegmentConstraint"
+                  severity="ERROR"
+                  mode="Live"
+                  name="Premises URI Valid URI Segment Constraint (Live Mode)"
+                  id="premisesURIValidSegmentOnly"
+                  statusCode="100">
+               <description>The Premises URI must be a value that can be added to a URI segment.</description>
+      		   <message>"Core Constraint: {0}" URI value must be a value that can be appended to a URI segment. Remove the following characters: / ? # </message>
+      		   <target class="Premises">
+         			<event name="Set">
+            			<feature name="uri"/>
+       				</event>
+       				<event name="Unset">
+            			<feature name="uri"/>
        				</event>
       			</target>
             </constraint>
