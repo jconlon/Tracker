@@ -11,12 +11,14 @@ import static com.verticon.agriculture.tests.Utils.getResoureSet;
 import static com.verticon.agriculture.tests.Utils.isValidObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.verticon.agriculture.AgricultureFactory;
 import com.verticon.agriculture.Location;
@@ -161,7 +163,17 @@ public class LocationTest extends TestCase {
 		document.setDescription("Doc level");
 		getFixture().setGeography(document);
 		assertTrue(isValidObject(getFixture()));
+		
+		//Change the id of the location
+		getFixture().setId("ggg://###");
+		assertFalse(isValidObject(getFixture()));//Bad id
+		//Fix it
+		getFixture().setId("ggg:");
+		assertTrue(isValidObject(getFixture()));
+		
 	}
+	
+	
 	
 	 
 	
