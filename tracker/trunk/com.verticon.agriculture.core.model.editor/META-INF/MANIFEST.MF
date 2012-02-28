@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.verticon.agriculture.core.model.editor;singleton:=true
-Bundle-Version: 0.1.1
+Bundle-Version: 0.1.2
 Bundle-ClassPath: .
 Bundle-Activator: com.verticon.agriculture.presentation.AgricultureEditorPlugin$Implementation
 Bundle-Vendor: %providerName
@@ -28,5 +28,7 @@ Import-Package: com.google.common.collect,
  org.eclipse.core.databinding,
  org.eclipse.core.databinding.observable.list,
  org.eclipse.core.databinding.observable.value,
+ org.eclipse.emf.validation.model,
+ org.eclipse.emf.validation.service,
  org.eclipse.jface.databinding.viewers,
  org.eclipse.jface.databinding.wizard
