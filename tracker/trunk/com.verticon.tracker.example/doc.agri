@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ag:Agriculture xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ag="http://www.verticon.com/agriculture/1.0/ag" xmlns:kml="http://www.opengis.net/kml/2.2" geography="kml:DocumentType doc.kml#Horn" association="Hornby Cattlemen Association">
-  <location geography="kml:FolderType doc.kml#Dan" livestock="example.premises#pin://H89234Xjec" id="pin://H89234Xjec"/>
+  <location geography="kml:FolderType doc.kml#Dan" livestock="example.premises#urn:pin:H89234X" id="urn:pin:H89234X"/>
 </ag:Agriculture>
