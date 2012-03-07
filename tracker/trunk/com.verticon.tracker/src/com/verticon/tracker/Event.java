@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.Event#getId <em>Id</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getDate <em>Date</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getDateKey <em>Date Key</em>}</li>
+ *   <li>{@link com.verticon.tracker.Event#getPid <em>Pid</em>}</li>
  * </ul>
  * </p>
  *
@@ -241,6 +242,32 @@ public interface Event extends EObject {
 	 * @generated
 	 */
 	String getDateKey();
+
+	/**
+	 * Returns the value of the '<em><b>Pid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Pid</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Pid</em>' attribute.
+	 * @see #setPid(String)
+	 * @see com.verticon.tracker.TrackerPackage#getEvent_Pid()
+	 * @model
+	 * @generated
+	 */
+	String getPid();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.Event#getPid <em>Pid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Pid</em>' attribute.
+	 * @see #getPid()
+	 * @generated
+	 */
+	void setPid(String value);
 
 	/**
 	 * <!-- begin-user-doc -->
