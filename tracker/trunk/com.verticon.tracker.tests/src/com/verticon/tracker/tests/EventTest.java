@@ -354,7 +354,12 @@ public abstract class EventTest extends TestCase {
 	
 	public void testIdentity() {
 		assertNull("Must have no identitiy attribute", getFixture().eClass().getEIDAttribute());
-//		assertTrue("Premises uri must be an identitiy attribute", getFixture().eClass().getEIDAttribute().getName().equals("uri"));
+	}
+	
+	public void testPid(){
+		assertNull("Must have a null pid attribute before being set", getFixture().getPid());
+		getFixture().setPid("fish");
+		assertEquals("Must have be fish", "fish", getFixture().getPid());
 	}
 
 } //EventTest
