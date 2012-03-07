@@ -509,7 +509,7 @@
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Tag/events"/>
       <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute tracker.ecore#//Tag/id"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tracker.ecore#//Tag/Animal"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tracker.ecore#//Tag/animal"/>
       <genOperations ecoreOperation="tracker.ecore#//Tag/canContain">
         <genParameters ecoreParameter="tracker.ecore#//Tag/canContain/eventType"/>
         <genParameters ecoreParameter="tracker.ecore#//Tag/canContain/ocdId"/>
@@ -540,6 +540,10 @@
           propertyDescription="" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/id"/>
       <genFeatures property="None" createChild="false" propertyDescription="" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/date"/>
       <genFeatures property="None" createChild="false" propertyDescription="" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/dateKey"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Identification"
+          propertyDescription="Publisher of the Event" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/pid">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
       <genOperations ecoreOperation="tracker.ecore#//Event/dateEvent">
         <genParameters ecoreParameter="tracker.ecore#//Event/dateEvent/type"/>
         <genParameters ecoreParameter="tracker.ecore#//Event/dateEvent/name"/>

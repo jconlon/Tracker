@@ -226,6 +226,10 @@
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Event/id"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PCF4s1mCEd2tRZ2K3aMUww"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_GDqzkWh4EeGqBoi2YVIQhA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Event/pid"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_GDqzkmh4EeGqBoi2YVIQhA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PCDcclmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PCDcc1mCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_PCDcdFmCEd2tRZ2K3aMUww"/>

@@ -51,6 +51,7 @@ import com.verticon.tracker.util.TrackerUtils;
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getId <em>Id</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getDate <em>Date</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getDateKey <em>Date Key</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.EventImpl#getPid <em>Pid</em>}</li>
  * </ul>
  * </p>
  *
@@ -183,6 +184,26 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * @ordered
 	 */
 	protected static final String DATE_KEY_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getPid() <em>Pid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPid()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPid() <em>Pid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPid()
+	 * @generated
+	 * @ordered
+	 */
+	protected String pid = PID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -384,6 +405,27 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getPid() {
+		return pid;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPid(String newPid) {
+		String oldPid = pid;
+		pid = newPid;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.EVENT__PID, oldPid, pid));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Event dateEvent(EventType type, String name) {
 		Event result = null;
 				if(!dateEvents().isEmpty() && type!=null){
@@ -508,6 +550,8 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 				return getDate();
 			case TrackerPackage.EVENT__DATE_KEY:
 				return getDateKey();
+			case TrackerPackage.EVENT__PID:
+				return getPid();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -535,6 +579,9 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 			case TrackerPackage.EVENT__TAG:
 				setTag((Tag)newValue);
 				return;
+			case TrackerPackage.EVENT__PID:
+				setPid((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -561,6 +608,9 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 				return;
 			case TrackerPackage.EVENT__TAG:
 				setTag((Tag)null);
+				return;
+			case TrackerPackage.EVENT__PID:
+				setPid(PID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -592,6 +642,8 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 				return DATE_EDEFAULT == null ? getDate() != null : !DATE_EDEFAULT.equals(getDate());
 			case TrackerPackage.EVENT__DATE_KEY:
 				return DATE_KEY_EDEFAULT == null ? getDateKey() != null : !DATE_KEY_EDEFAULT.equals(getDateKey());
+			case TrackerPackage.EVENT__PID:
+				return PID_EDEFAULT == null ? pid != null : !PID_EDEFAULT.equals(pid);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -614,6 +666,8 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 		result.append(correction);
 		result.append(", comments: ");
 		result.append(comments);
+		result.append(", pid: ");
+		result.append(pid);
 		result.append(')');
 		return result.toString();
 	}
