@@ -33,7 +33,6 @@ import com.verticon.tracker.TrackerPackage;
  *   <li>{@link com.verticon.agriculture.impl.LocationImpl#getGeography <em>Geography</em>}</li>
  *   <li>{@link com.verticon.agriculture.impl.LocationImpl#getLivestock <em>Livestock</em>}</li>
  *   <li>{@link com.verticon.agriculture.impl.LocationImpl#getUri <em>Uri</em>}</li>
- *   <li>{@link com.verticon.agriculture.impl.LocationImpl#getId <em>Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,26 +68,6 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 	 * @ordered
 	 */
 	protected static final String URI_EDEFAULT = null;
-
-	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String ID_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
-	protected String id = ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -202,27 +181,6 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setId(String newId) {
-		String oldId = id;
-		id = newId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AgriculturePackage.LOCATION__ID, oldId, id));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -234,8 +192,6 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 				return basicGetLivestock();
 			case AgriculturePackage.LOCATION__URI:
 				return getUri();
-			case AgriculturePackage.LOCATION__ID:
-				return getId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -253,9 +209,6 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 				return;
 			case AgriculturePackage.LOCATION__LIVESTOCK:
 				setLivestock((Premises)newValue);
-				return;
-			case AgriculturePackage.LOCATION__ID:
-				setId((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -275,9 +228,6 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 			case AgriculturePackage.LOCATION__LIVESTOCK:
 				setLivestock((Premises)null);
 				return;
-			case AgriculturePackage.LOCATION__ID:
-				setId(ID_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -296,28 +246,10 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 				return livestock != null;
 			case AgriculturePackage.LOCATION__URI:
 				return URI_EDEFAULT == null ? getUri() != null : !URI_EDEFAULT.equals(getUri());
-			case AgriculturePackage.LOCATION__ID:
-				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 		}
 		return super.eIsSet(featureID);
 	}
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (id: ");
-		result.append(id);
-		result.append(')');
-		return result.toString();
-	}
-
 	/**
 	 * Added to manage notifications for the derived attribute uri.
 	 */

@@ -27,10 +27,6 @@
         <element xmi:type="ecore:EAttribute" href="agriculture.ecore#//Location/uri"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PYaqgUOCEeCHcKrYB_mDkw"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_Eeip0VJ0EeGW-Ye_9ETU4Q" type="2001">
-        <element xmi:type="ecore:EAttribute" href="agriculture.ecore#//Location/id"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_Eeip0lJ0EeGW-Ye_9ETU4Q"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_4Si_IUNVEeCHcKrYB_mDkw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_4Si_IkNVEeCHcKrYB_mDkw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_4Si_I0NVEeCHcKrYB_mDkw"/>
