@@ -120,7 +120,48 @@
        				</event>
       			</target>
             </constraint>
+            
+            <!-- This constraint applies to MovedOut URI value-->
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.validation.core.constraints.IDValidSegmentConstraint"
+                  severity="ERROR"
+                  mode="Live"
+                  name="MovedOut URI Valid URI Segment Constraint (Live Mode)"
+                  id="movedOutURIValidSegmentOnly"
+                  statusCode="100">
+               <description>The MovedOut URI must be a value that can be added to a URI segment.</description>
+      		   <message>"Core Constraint: {0}" URI value must be a value that can be appended to a URI segment. Remove the following characters: / ? # </message>
+      		   <target class="MovedOut">
+         			<event name="Set">
+            			<feature name="uri"/>
+       				</event>
+       				<event name="Unset">
+            			<feature name="uri"/>
+       				</event>
+      			</target>
+            </constraint>
          
+           <!-- This constraint applies to MovedIn URI value-->
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.validation.core.constraints.IDValidSegmentConstraint"
+                  severity="ERROR"
+                  mode="Live"
+                  name="MovedIn URI Valid URI Segment Constraint (Live Mode)"
+                  id="movedInURIValidSegmentOnly"
+                  statusCode="100">
+               <description>The MovedIn URI must be a value that can be added to a URI segment.</description>
+      		   <message>"Core Constraint: {0}" URI value must be a value that can be appended to a URI segment. Remove the following characters: / ? # </message>
+      		   <target class="MovedIn">
+         			<event name="Set">
+            			<feature name="uri"/>
+       				</event>
+       				<event name="Unset">
+            			<feature name="uri"/>
+       				</event>
+      			</target>
+            </constraint>
            
          
             <!-- Animal can not be Slaughtered Twice Constraint (Batch Mode) -->
@@ -152,6 +193,70 @@
       		<target class="Premises"/>
       		<![CDATA[
          		self.premisesId.oclIsUndefined() = false 
+         	]]>
+      		</constraint>
+      		
+      		 <!-- This constraint applies to MovedIn sourcePin value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Batch"
+         		name="%movedInSourcePin.name"
+         		id="movedInSourcePin"
+         		statusCode="102">
+      		<description>%movedInSourcePin.desc</description>
+      		<message>%movedInSourcePin.msg</message>
+      		<target class="MovedIn"/>
+      		<![CDATA[
+         		self.sourcePin.oclIsUndefined() = false 
+         	]]>
+      		</constraint>
+      		
+      		 <!-- This constraint applies to MovedIn uri value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Batch"
+         		name="%movedInUri.name"
+         		id="movedInUri"
+         		statusCode="102">
+      		<description>%movedInUri.desc</description>
+      		<message>%movedInUri.msg</message>
+      		<target class="MovedIn"/>
+      		<![CDATA[
+         		self.uri.oclIsUndefined() = false 
+         	]]>
+      		</constraint>
+      		
+      		 <!-- This constraint applies to MovedOut destinationPin value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Batch"
+         		name="%movedOutDestinationPin.name"
+         		id="movedOutDestinationPin"
+         		statusCode="102">
+      		<description>%movedOutDestinationPin.desc</description>
+      		<message>%movedmovedOutDestinationPin.msg</message>
+      		<target class="MovedOut"/>
+      		<![CDATA[
+         		self.destinationPin.oclIsUndefined() = false 
+         	]]>
+      		</constraint>
+      		
+      		 <!-- This constraint applies to MovedOut uri value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Batch"
+         		name="%movedOutUri.name"
+         		id="movedOutUri"
+         		statusCode="102">
+      		<description>%movedOutUri.desc</description>
+      		<message>%movedOutUri.msg</message>
+      		<target class="MovedOut"/>
+      		<![CDATA[
+         		self.uri.oclIsUndefined() = false 
          	]]>
       		</constraint>
       		

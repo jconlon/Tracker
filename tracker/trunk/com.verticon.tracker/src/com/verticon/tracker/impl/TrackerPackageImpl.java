@@ -2691,11 +2691,11 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(tagAppliedEClass, TagApplied.class, "TagApplied", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(movedInEClass, MovedIn.class, "MovedIn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMovedIn_SourcePin(), this.getPremisesIdNumber(), "sourcePin", null, 1, 1, MovedIn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMovedIn_SourcePin(), this.getPremisesIdNumber(), "sourcePin", null, 0, 1, MovedIn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMovedIn_Uri(), this.getURI(), "uri", null, 0, 1, MovedIn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(movedOutEClass, MovedOut.class, "MovedOut", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMovedOut_DestinationPin(), this.getPremisesIdNumber(), "destinationPin", null, 1, 1, MovedOut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMovedOut_DestinationPin(), this.getPremisesIdNumber(), "destinationPin", null, 0, 1, MovedOut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMovedOut_Uri(), this.getURI(), "uri", null, 0, 1, MovedOut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(lostTagEClass, LostTag.class, "LostTag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3288,7 +3288,19 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		   source, 
 		   new String[] {
 			 "constraints", "URIIsValidURISegment"
-		   });										
+		   });				
+		addAnnotation
+		  (movedInEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "URIIsValidURISegment"
+		   });		
+		addAnnotation
+		  (movedOutEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "URIIsValidURISegment"
+		   });								
 	}
 
 	/**
@@ -3307,7 +3319,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 			 "maxLength", "7",
 			 "length", "7",
 			 "maxExclusive", "adcdefg"
-		   });								
+		   });										
 	}
 
 } //TrackerPackageImpl

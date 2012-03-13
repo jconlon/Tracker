@@ -25,7 +25,7 @@ package com.verticon.tracker;
  * </p>
  *
  * @see com.verticon.tracker.TrackerPackage#getMovedOut()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='URIIsValidURISegment'"
  * @generated
  */
 public interface MovedOut extends Event {
@@ -52,7 +52,7 @@ public interface MovedOut extends Event {
 	 * @return the value of the '<em>Destination Pin</em>' attribute.
 	 * @see #setDestinationPin(String)
 	 * @see com.verticon.tracker.TrackerPackage#getMovedOut_DestinationPin()
-	 * @model dataType="com.verticon.tracker.PremisesIdNumber" required="true"
+	 * @model dataType="com.verticon.tracker.PremisesIdNumber"
 	 * @generated
 	 */
 	String getDestinationPin();

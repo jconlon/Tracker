@@ -702,7 +702,7 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated NOT
 	 */
 	public boolean validatePremises_URIIsValidURISegment(Premises premises, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!URI.validSegment(premises.getUri())) {
+		if (premises.getUri()!=null &&  !URI.validSegment(premises.getUri())) {
 			if (diagnostics != null) {
 				diagnostics.add
 					(new BasicDiagnostic
@@ -768,16 +768,80 @@ public class TrackerValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateMovedIn(MovedIn movedIn, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(movedIn, diagnostics, context);
+		boolean result = validate_NoCircularContainment(movedIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(movedIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(movedIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(movedIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(movedIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(movedIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(movedIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(movedIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(movedIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validateMovedIn_URIIsValidURISegment(movedIn, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the URIIsValidURISegment constraint of '<em>Moved In</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateMovedIn_URIIsValidURISegment(MovedIn movedIn, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (movedIn.getUri()!=null &&  !URI.validSegment(movedIn.getUri())) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "MovedOut uri attribute: '"+movedIn.getUri()+"' is not a valid URI segment. Remove the following characters: / ? #",
+						 new Object[] { movedIn }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean validateMovedOut(MovedOut movedOut, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(movedOut, diagnostics, context);
+		boolean result = validate_NoCircularContainment(movedOut, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMultiplicityConforms(movedOut, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(movedOut, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(movedOut, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(movedOut, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(movedOut, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(movedOut, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(movedOut, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(movedOut, diagnostics, context);
+		if (result || diagnostics != null) result &= validateMovedOut_URIIsValidURISegment(movedOut, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the URIIsValidURISegment constraint of '<em>Moved Out</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateMovedOut_URIIsValidURISegment(MovedOut movedOut, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (movedOut.getUri()!=null &&  !URI.validSegment(movedOut.getUri())) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "MovedOut uri attribute: '"+movedOut.getUri()+"' is not a valid URI segment. Remove the following characters: / ? #",
+						 new Object[] { movedOut }));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**
