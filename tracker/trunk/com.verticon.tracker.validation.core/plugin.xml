@@ -237,7 +237,7 @@
          		id="movedOutDestinationPin"
          		statusCode="102">
       		<description>%movedOutDestinationPin.desc</description>
-      		<message>%movedmovedOutDestinationPin.msg</message>
+      		<message>%movedOutDestinationPin.msg</message>
       		<target class="MovedOut"/>
       		<![CDATA[
          		self.destinationPin.oclIsUndefined() = false 
