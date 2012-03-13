@@ -430,13 +430,17 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TagApplied" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="MovedIn" eSuperTypes="#//Event">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourcePin" lowerBound="1"
-        eType="#//PremisesIdNumber"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="URIIsValidURISegment"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourcePin" eType="#//PremisesIdNumber"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="#//URI"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MovedOut" eSuperTypes="#//Event">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="destinationPin" lowerBound="1"
-        eType="#//PremisesIdNumber"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="URIIsValidURISegment"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="destinationPin" eType="#//PremisesIdNumber"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="#//URI"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LostTag" eSuperTypes="#//Event"/>

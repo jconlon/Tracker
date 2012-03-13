@@ -25,7 +25,7 @@ package com.verticon.tracker;
  * </p>
  *
  * @see com.verticon.tracker.TrackerPackage#getMovedIn()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='URIIsValidURISegment'"
  * @generated
  */
 public interface MovedIn extends Event {
@@ -52,7 +52,7 @@ public interface MovedIn extends Event {
 	 * @return the value of the '<em>Source Pin</em>' attribute.
 	 * @see #setSourcePin(String)
 	 * @see com.verticon.tracker.TrackerPackage#getMovedIn_SourcePin()
-	 * @model dataType="com.verticon.tracker.PremisesIdNumber" required="true"
+	 * @model dataType="com.verticon.tracker.PremisesIdNumber"
 	 * @generated
 	 */
 	String getSourcePin();
