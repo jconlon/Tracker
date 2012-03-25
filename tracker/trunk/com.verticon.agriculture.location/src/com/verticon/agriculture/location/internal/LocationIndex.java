@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
@@ -31,6 +31,9 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -71,7 +74,12 @@ public final class LocationIndex implements LocationServiceProvider {
 	 * Protected by lock
 	 */
 	private ConcurrentMap<String, GeoLocation> index = newConcurrentMap();
-	private AtomicBoolean initialized = new AtomicBoolean();
+	private enum State{
+		UNINITIALIZED,INITIALIZED,SCHEDULED
+	}
+	private AtomicReference<State> state = new AtomicReference<State>(State.UNINITIALIZED);
+	
+	
 
 	private LocationIndex() {
 		super();
@@ -150,11 +158,8 @@ public final class LocationIndex implements LocationServiceProvider {
 	public boolean canHandle(Object target) {
 		checkNotNull("The target attribute must not be null.", target);
 
-		if (!initialized.get()) {
-			logger.info(bundleMarker, "Building");
-			buildAllAgricultureProjects();
-			// logger.info(bundleMarker, "Built");
-			// building.set(false);
+		if (state.get().equals(State.UNINITIALIZED)) {
+			initialize();
 		}
 		if (target instanceof Premises) {
 			return true;
@@ -164,9 +169,26 @@ public final class LocationIndex implements LocationServiceProvider {
 		return false;
 	}
 
+	private void initialize() {
+		state.set(State.SCHEDULED);
+		Job job = new Job("Building Location Index") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				logger.info(bundleMarker, "Building");
+				buildAllAgricultureProjects();
+				state.set(State.INITIALIZED);
+				return Status.OK_STATUS;
+			}
+		};
+
+		// Start the Job
+		job.schedule();
+		
+	}
+
 	void clean() {
 		index.clear();
-		initialized.set(false);
+		state.set(State.UNINITIALIZED);
 	}
 
 	/**
@@ -177,8 +199,8 @@ public final class LocationIndex implements LocationServiceProvider {
 	boolean isAssociatedResource(String uri) {
 		checkNotNull("The uri attribute must not be null.", uri);
 		boolean result = false;
-		if (index.isEmpty() && !initialized.get()) {
-			buildAllAgricultureProjects();
+		if (index.isEmpty() && state.get().equals(State.UNINITIALIZED)) {
+			initialize();
 		}
 		if (uri.endsWith(".kml") || uri.endsWith(".premises")) {
 			for (GeoLocation location : index.values()) {
@@ -275,11 +297,11 @@ public final class LocationIndex implements LocationServiceProvider {
 	}
 
 	private void buildAllAgricultureProjects() {
-		if (initialized.get()) {
+		if (state.get()==State.INITIALIZED) {
 			return;
 		}
 		logger.info(bundleMarker, "Initializing project location indexing");
-		initialized.set(true);
+//		initialized.set(true);
 		// Find all the natures and build them.
 		IWorkspace root = ResourcesPlugin.getWorkspace();
 		final IProject[] projects = root.getRoot().getProjects();
