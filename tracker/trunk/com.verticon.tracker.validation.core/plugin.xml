@@ -303,10 +303,16 @@
                   statusCode="101">
                 <description>%tagAppliedEvent.desc</description>
                	<message>%tagAppliedEvent.msg</message>
+               		<target class="TagApplied"/>
+               <![CDATA[
+                 tag.events ->select(e : Event | e.oclIsTypeOf(TagApplied)) ->size()<2
+               ]]>
+               	<!--
                	<target class="TagApplied"/>
                <![CDATA[
                  Event.allInstances() ->select(e : Event | e <> self and e.eventCode = self.eventCode and e.id = self.id) ->isEmpty()
                ]]>
+               -->
             </constraint>   
             
             <!-- Tag applied to an Animal must have at least one Event (Batch Mode)  -->
@@ -338,8 +344,8 @@
                   name="Tag Exclusive Events Constraint (Batch Mode)"
                   severity="ERROR"
                   statusCode="101">
-               	<description>Tags must not have both a TagApplied and a ReplacedTag event.</description>
-               	<message>Core Constraint: "{0}" must not have both a TagApplied and a ReplacedTag event.</message>
+               	<description>Tags can only be Applied or Replaced.</description>
+               	<message>Core Constraint: "{0}" must only have a single TagApplied event or a single ReplacedTag event.</message>
                	<target class="Tag"/>
                <![CDATA[
 					events -> select(e: Event | e.oclIsTypeOf(TagApplied) or e.oclIsTypeOf(ReplacedTag) ) ->size() <2
