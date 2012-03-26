@@ -18,9 +18,7 @@ import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -42,8 +40,9 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import com.google.common.util.concurrent.AbstractCheckedFuture;
-import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 
 /**
  * 
@@ -74,7 +73,8 @@ public class GPSProducer implements Producer, Monitorable {
 
 
 	// Proxy futures
-	private static ExecutorService exec = Executors.newCachedThreadPool();
+//	private static ExecutorService exec = Executors.newCachedThreadPool();
+	private static ListeningExecutorService exec = MoreExecutors.listeningDecorator(Executors.newCachedThreadPool());
 	// private volatile Future<Void> taskMonitorFuture;
 	private volatile AbstractCheckedFuture<Void, IOException> lfuture = null;
 	private volatile GPSProxy proxy = null;
@@ -297,8 +297,7 @@ public class GPSProducer implements Producer, Monitorable {
 		proxy = new GPSProxy(this);
 		// submit();
 		logger.debug(bundleMarker, "{}: Submitting proxy.", this);
-		Future<Void> future = exec.submit(proxy);
-		lfuture = new IOFuture(Futures.makeListenable(future));
+		lfuture = new IOFuture(exec.submit(proxy));
 		lfuture.addListener(monitoringListener, exec);
 	}
 
@@ -509,8 +508,7 @@ public class GPSProducer implements Producer, Monitorable {
 			return;
 		}
 		logger.debug(bundleMarker, "{}: resubmitting proxy.", this);
-		Future<Void> future = exec.submit(proxy);
-		lfuture = new IOFuture(Futures.makeListenable(future));
+		lfuture = new IOFuture(exec.submit(proxy));
 		lfuture.addListener(monitoringListener, exec);
 	}
 
