@@ -1,0 +1,11 @@
+h1=. MongoDB Drivers
+
+
+h2. Introduction
+
+"MongoDB":http://www.mongodb.org/ (from "humongous") is a scalable, high-performance, open source NoSQL database. The MongoDB Java Drivers provide programmatic access to the MongoDB data store. 
+
+
+h2. License
+
+MongoDB is available for free under the GNU Affero General Public License. The Java language drivers are available under an "Apache License":http://en.wikipedia.org/wiki/Apache_License. In addition, 10gen offers commercial licenses for MongoDB.
