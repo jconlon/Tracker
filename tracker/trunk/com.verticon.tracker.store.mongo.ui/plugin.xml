@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="com.verticon.tracker.store.mongo.ui.CanPublishAnimalsPropertyTester"
+            id="com.verticon.tracker.store.mongo.ui.propertyTester.hasPublisher"
+            namespace="com.verticon.tracker.store.mongo.ui"
+            properties="hasPublisherService"
+            type="java.lang.Object">
+      </propertyTester>
+      <propertyTester
+            class="com.verticon.tracker.store.mongo.ui.CanLoadAdminPropertyTester"
+            id="com.verticon.tracker.store.mongo.ui.propertyTester.hasLoader"
+            namespace="com.verticon.tracker.store.mongo.ui"
+            properties="hasLoaderService"
+            type="java.lang.Object">
+      </propertyTester>
+      <propertyTester
+            class="com.verticon.tracker.store.mongo.ui.CanRegisterLocationsPropertyTester"
+            id="com.verticon.tracker.store.mongo.ui.propertyTester.hasRegister"
+            namespace="com.verticon.tracker.store.mongo.ui"
+            properties="hasRegisterService"
+            type="java.lang.Object">
+      </propertyTester>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      
+      <command
+            name="Load Admin access control to MongoDB"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            id="com.verticon.tracker.store.mongo.ui.commands.loadAdminCommand">
+      </command>
+      <command
+            name="Register Location to MongoDB"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            id="com.verticon.tracker.store.mongo.ui.commands.registerLocationCommand">
+      </command>
+      <command
+            name="Record Animal History to MongoDB"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            id="com.verticon.tracker.store.mongo.ui.commands.recordAnimalsCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="com.verticon.tracker.store.mongo.ui.commands.loadAdminCommand"
+            class="com.verticon.tracker.store.mongo.ui.handlers.LoadAdminHandler">
+      </handler>
+      <handler
+            commandId="com.verticon.tracker.store.mongo.ui.commands.recordAnimalsCommand"
+            class="com.verticon.tracker.store.mongo.ui.handlers.RecordAnimalsHandler">
+      </handler>
+      <handler
+            commandId="com.verticon.tracker.store.mongo.ui.commands.registerLocationCommand"
+            class="com.verticon.tracker.store.mongo.ui.handlers.RegisterLocationHandler">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="com.verticon.tracker.store.mongo.ui.commands.recordAnimalsCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+6"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+       <key
+            commandId="com.verticon.tracker.store.mongo.ui.commands.registerLocationCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+5"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+       <key
+            commandId="com.verticon.tracker.store.mongo.ui.commands.loadAdminCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+4"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+     
+      <menuContribution
+             allPopups="false"
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+            <command
+                  commandId="com.verticon.tracker.store.mongo.ui.commands.recordAnimalsCommand"
+                   style="push">
+                 
+               <visibleWhen>
+                    <and>
+                         <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+      						 <instanceof value="com.verticon.tracker.Premises"/>
+    					  </iterate>
+    					 </with>
+    					 
+    					 
+    					 <!-- 
+    			        	TODO Fix to Restrict to show only if the MongoDB for this premises uri is 
+    			        	component factory instance.
+              			-->
+    					 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+              			 
+    					
+    					 <!-- 
+    			        	Restricted to show only if there is a Publisher Service.
+              			 -->
+              			 <test
+                        forcePluginActivation="true"
+                        property="com.verticon.tracker.store.mongo.ui.hasPublisherService">
+              			</test>
+    			     </and>
+               </visibleWhen>
+            </command>
+        
+      </menuContribution>
+      
+      <menuContribution
+             allPopups="false"
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+            <command
+                  commandId="com.verticon.tracker.store.mongo.ui.commands.registerLocationCommand"
+                   style="push">
+                 
+               <visibleWhen>
+                    <and>
+                         <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+      						 <instanceof value="com.verticon.agriculture.Location"/>
+    					  </iterate>
+    					 </with>
+    					 <!-- 
+    			        	Restrict to show only if the MongoDB for this location has a register service
+              			 -->
+    					  <test
+                           forcePluginActivation="true"
+                           property="com.verticon.tracker.store.mongo.ui.hasRegisterService">
+              			 </test>
+    					 
+    					
+    			     </and>
+               </visibleWhen>
+            </command>
+        
+      </menuContribution>
+      
+      <menuContribution
+             allPopups="false"
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+            <command
+                  commandId="com.verticon.tracker.store.mongo.ui.commands.loadAdminCommand"
+                   style="push">
+                 
+               <visibleWhen>
+                    <and>
+                         <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+      						 <instanceof value="com.verticon.tracker.store.admin.Admin"/>
+    					  </iterate>
+    					 </with>
+    					 
+    					 
+    					 <!-- 
+    			        	Restrict to show only if the MongoDB for this admin has a loader service.
+              			 -->
+              			  <test
+                        forcePluginActivation="true"
+                        property="com.verticon.tracker.store.mongo.ui.hasLoaderService">
+              			</test>
+    					
+    			     </and>
+               </visibleWhen>
+            </command>
+        
+      </menuContribution>
+   </extension>
+   
+
+</plugin>

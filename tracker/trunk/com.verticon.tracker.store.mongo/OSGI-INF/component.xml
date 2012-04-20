@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" configuration-policy="require" enabled="true" immediate="true" name="com.verticon.tracker.store.mongo">
+   <implementation class="com.verticon.tracker.store.mongo.internal.Component"/>
+   <service>
+      <provide interface="com.verticon.tracker.store.ITrackerStore"/>
+      <provide interface="org.osgi.service.monitor.Monitorable"/>
+      <provide interface="org.osgi.service.wireadmin.Consumer"/>
+      <provide interface="com.verticon.tracker.store.admin.api.ITrackerStoreAdmin"/>
+   </service>
+   <reference bind="setMonitorListener" cardinality="0..1" interface="org.osgi.service.monitor.MonitorListener" name="MonitorListener" policy="dynamic" unbind="unsetMonitorListener"/>
+   <reference bind="setMongoDB" cardinality="1..1" interface="org.eclipselabs.mongo.IMongoDB" name="IMongoDB" policy="static" unbind="unsetMongoDB"/>
+   <reference bind="setQueryEngine" cardinality="1..1" interface="org.eclipselabs.mongo.emf.IQueryEngine" name="IQueryEngine" policy="static" unbind="unsetQueryEngine"/>
+</scr:component>

@@ -1,0 +1,75 @@
+h1=. Mongo-EMF Query
+
+{toc:style=disc|minLevel=2|maxLevel=3}
+
+
+h2. Introduction
+
+MongoEMF uses a EMF based query model for parsing URI queries in order to build a DBObject to query a MongoDB. 
+
+h2. Query Model
+
+MongoEMF utilizes a EMF Query model with the ns: 
+_http://www.eclipselabs.org/emf/2010/query_
+In the project *org.eclipselabs.emf.query*
+
+
+
+h2. Query Model
+
+IQueryEngine is the interface of the OSGi service used to create the DBObject
+
+bc.. 
+package org.eclipselabs.mongo.emf;
+
+import org.eclipse.emf.common.util.URI;
+
+import com.mongodb.DBObject;
+
+/**
+ * @author bhunt
+ * 
+ */
+public interface IQueryEngine
+{
+	/**
+	 * This function builds a DBObject to be used as a query to MongoDB from the EMF query
+	 * 
+	 * @param uri the incoming URI containing the query
+	 * @return the DBObject representation of the query
+	 */
+	DBObject buildDBObjectQuery(URI uri);
+}
+
+h2. Current implementation
+ 
+That is currently implemented by org.eclipselabs.mongo.emf.query.QueryEngine which builds the DBObject using
+org.eclipselabs.emf.query.util.ExpressionBuilder to parse the uri.query() to build the model instance.
+
+
+h3. Example query strings
+
+The following examples of uri.query() (String)s parsed by org.eclipselabs.emf.query.util.ExpressionBuilder
+
+bc.. 
+##condition == true
+##publicationDate > 1999 || publicationDate > 1999L
+##publicationDate > 2011-05-15
+##name == 'Stephen%20King'
+##w + x + y + z
+##w + (x + y) + z
+##w + x + (y + z)
+##x == y || (z == '10') || y == z
+##x == y || (z == '10' || y == z)
+##x == y || (z == '10')
+##x == y || (z == '10') || y == z
+##x == y
+##x == y
+##x == 'foo'
+##a.b
+##a.b
+##'foo'
+
+h2. Addigional References
+
+"See Bryan Hunt Summer of Code proposal":http://bryanhunt.wordpress.com/2012/01/29/google-summer-of-code-2012-with-xtext-emf-and-mongodb/

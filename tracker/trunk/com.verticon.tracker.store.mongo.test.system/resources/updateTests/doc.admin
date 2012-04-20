@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mo:Admin xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:mo="http://www.verticon.com/admin/1.0/ad" admin="jconlon@mudshark">
+  <member name="jconlon@mudshark"/>
+  <resource uri="urn:pin:H89234X" publisher="jconlon@mudshark"/>
+  <resource uri="urn:pin:003ALKM" publisher="jconlon@mudshark"/>
+</mo:Admin>

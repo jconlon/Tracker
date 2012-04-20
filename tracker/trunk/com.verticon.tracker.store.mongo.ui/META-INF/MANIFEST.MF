@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Mongo User Interface
+Bundle-SymbolicName: com.verticon.tracker.store.mongo.ui;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Activator: com.verticon.tracker.store.mongo.ui.Activator
+Bundle-Vendor: VERTICON
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.expressions
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: com.google.common.base;version="11.0.1",
+ com.verticon.agriculture,
+ com.verticon.tracker;version="0.1.0",
+ com.verticon.tracker.store,
+ com.verticon.tracker.store.admin,
+ com.verticon.tracker.store.admin.api,
+ org.slf4j;version="1.5.11"
+Export-Package: com.verticon.tracker.store.mongo.ui
