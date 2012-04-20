@@ -1,0 +1,119 @@
+h1=. Tracker Mongo Store
+
+com.verticon.tracker.store.mongo Version 0.1.0
+
+{toc:style=disc|minLevel=2|maxLevel=3}
+
+
+h2. Introduction
+
+Tracker Mongo Store is a multi-user enterprise class solution for storage and retrieval of Livestock Business Intelligence documents. 
+
+
+
+h2. Users of Tracker Desktop
+
+Authorized users of the Tracker Desktop can archive Premises animal life data and event histories to a MongoDB data store. Authorized users can also retrieve information about  
+* a single animal and its
+** event history 
+** route between premises locations
+* all the animals in a premises within a specified time frame
+** event histories of all animals
+
+!images/Premises_Desktop.png!
+
+
+h3. Desktop Support Requirements
+
+# Administration 
+## User designated as an Administrator
+## Manages access rules for all other users
+### Access rules are document based and are loaded by the administrator into MongoDB
+### Users are identified by the user name and the machine name they are logged into
+### Users are authorized to publish animal event histories from one or more premises
+### Users must be authorized by the administrator to read animal event histories from other premises than their own
+# Tracker Desktop archival of Agriculture GeoLocations, Premises and Animals
+## Archival support for one or multiple Premises
+# Tracker Desktop retrieval 
+## All animals in a Premises
+### Given a date range and premises uri a retrieval request will generate Tracker premises documents containing animals that were resident during the given date range
+## Single animal
+### Given an animal id, creates KML documents for individual animals showing Geo location routing between Premises locations
+# Eclipse BIRT will support the reporting of geo locations, animal histories and movements 
+
+h2. iRouter Support
+
+iRouter sensor and actuator networks can now use MongoDB for real time transaction recording of any Tracker Premises events.  
+
+!images/Premises_iRouter.png!
+
+h3. iRouter Component Requirements
+
+# Animal Tag recording to MongoDB
+## Tags can contain one or more events
+## Runs in iRouter appliances for headless applications for automatic recording of tag events from one or more fixed sensors
+## Runs in Tracker Desktop BI Toolkit for hands free saving of animals, tags and events originating in iRouter sensor networks
+## Multiple components instances can be configured to connect to one or more MongoDB stores
+## Supports event updates to existing animals and the runtime creation of new animals
+## iRouter Consumer component that leverages the power of the iRouter infrastructure for creating complex sensor and actuator based solutions.
+## Configurable instances can support one or more tag readers or virtual tag producers
+
+h2. Implementation
+ 
+An OSGi Declarative Services Factory component which implements an iRouter (Tag) Consumer and a com.verticon.tracker.store.ITrackerStore.
+ 
+ 
+h2. iRouter Example
+
+Goal: Demonstrate an iRouter component configuration that highlights the functionality of the Tracker Mongo Store
+# Components used
+## TruTest Proxy 
+*** This will serve at the top of the event production chain to produce events associated with a TruTest scale head indicator
+**** The scale will produce events as the weights of the animals are changed, these weight measurements will be sent in the _raw.animal.weight_ scope
+**** When an animal EID is detected on the scale head that eid will be produced in the _animal.eid_ scope
+**** When the operator presses the Enter Button that event will be produced in the _transaction.state_ scope  
+## Premises Event Producer
+*** This component will consume all products sent by the TruTest Proxy and on the detection of a _transaction.state_ indicating that the operator pressed the Enter Button, this component will produce the last measurement received and identify it with the animal eid.
+## Premises Animal Producer
+*** This component also sits towards the top of the event production chain, but consumes Animal EIDs on the _animal.eid_ scope and Enter Button presses on the _transaction.state_ scope that have originated on the TruTest Proxy.  Associated with this component is a _URI_ referencing an Tracker Premises Animal template in an external document. Production cycle of this component starts when a Enter Button press is detected. Then the Animal Template is copied, given the EID from the TruTest, and sent to consumers.
+## Tracker Mongo Store consumes products from the Premises Event Producer and the Premises Animal Producer and creates these on the MongoDB. 
+# Startup and Configuration
+## MongoDB must be installed and running on the local host
+## Startup Tracker
+## From the _Configuration_ menu, invoke _Import iRouter Configuration_
+## Import that configuration _autotype.metatype_ document in this project
+# TruTest simulator
+## Download and install the Tracker simulator product 
+## In the installation directory run the simulator executable
+## In a web browser go to "Simulated Devices":http://localhost:8081/client/devices and start the TruTest simulator
+## Select a TruTest simulator 
+## When the TruTest simulator comes up the _Connection_ should be Y
+## Change the EID, the weight and press the record button to simulate a transaction
+
+h4. iRouter Monitor View of the Demonstration
+
+In the iRouter Monitor View you should see the components displayed something like:
+
+!images/irouterMonitor.png!
+
+
+
+h2. Powered by Eclipse Technology
+
+Verticon's Mongo Store offering is powered by Eclipse technology and includes Eclipse plug-ins that
+can be installed and used with other Eclipse-based offerings.
+	
+h2. License
+
+Verticon, Inc. makes available all content in this plug-in (&quot;Content&quot;).  Unless otherwise 
+indicated below, the Content is provided to you under the terms and conditions of the
+Eclipse Public License version 1.0 (&quot;EPL 1&quot;).  A copy of the EPL 1 is available 
+at <a href="http://www.eclipse.org/legal/epl-v10.html">http://www.eclipse.org/legal/epl-v10.html</a>.
+For purposes of the EPL, &quot;Program&quot; will mean the Content.
+
+If you did not receive this Content directly from the Verticon,Inc., the Content is 
+being redistributed by another party (&quot;Redistributor&quot;) and different terms and conditions may
+apply to your use of any object code in the Content.  Check the Redistributor's license that was 
+provided with the Content.  If no such license exists, contact the Redistributor.  Unless otherwise
+indicated below, the terms and conditions of the EPL 1 still apply to any source code in the Content
+and such source code may be obtained at <a href="http://tracker.verticon.com/index.html">http://tracker.verticon.com/index.html</a>.</p>
