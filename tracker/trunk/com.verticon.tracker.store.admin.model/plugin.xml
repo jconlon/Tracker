@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ Copyright 2012 Verticon, Inc. All rights reserved.
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.verticon.com/admin/1.0/ad"
+            class="com.verticon.tracker.store.admin.AdminPackage"
+            genModel="model/admin.genmodel"/>
+   </extension>
+
+</plugin>
