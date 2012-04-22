@@ -79,23 +79,10 @@ h2. iRouter Support
 
 iRouter sensor and actuator networks can now use MongoDB for real time transaction recording of any Tracker Premises events.  
 
+The following is a system configuration where the iRouter Premises Common Producers are producing products that are archived to an enterprise data store.
+
 !images/Premises_iRouter.png!
 
-h3. iRouter Component Requirements
-
-# Animal Tag recording to MongoDB
-## Tags can contain one or more events
-## Runs in iRouter appliances for headless applications for automatic recording of tag events from one or more fixed sensors
-## Runs in Tracker Desktop BI Toolkit for hands free saving of animals, tags and events originating in iRouter sensor networks
-## Multiple components instances can be configured to connect to one or more MongoDB stores
-## Supports event updates to existing animals and the runtime creation of new animals
-## iRouter Consumer component that leverages the power of the iRouter infrastructure for creating complex sensor and actuator based solutions.
-## Configurable instances can support one or more tag readers or virtual tag producers
-
-h2. Implementation
- 
-An OSGi Declarative Services Factory component which implements an iRouter (Tag) Consumer and a com.verticon.tracker.store.ITrackerStore.
- 
  
 h2. iRouter Example
 
