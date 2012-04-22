@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Premises Animal Producer
+Bundle-SymbolicName: com.verticon.tracker.irouter.premises.animal;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Service-Component: OSGI-INF/*.xml
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: com.google.common.base;version="11.0.1",
+ com.verticon.tracker;version="0.1.0",
+ com.verticon.tracker.irouter.common,
+ com.verticon.tracker.irouter.premises.common.api,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.util,
+ org.osgi.service.monitor;version="1.0.0",
+ org.osgi.service.wireadmin;version="1.0.0",
+ org.osgi.util.measurement;version="1.0.1",
+ org.slf4j;version="1.5.11"
