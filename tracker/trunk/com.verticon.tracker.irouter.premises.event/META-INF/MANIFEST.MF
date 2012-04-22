@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Premises Event Producer
+Bundle-SymbolicName: com.verticon.tracker.irouter.premises.event;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Service-Component: OSGI-INF/*.xml
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: com.verticon.tracker.irouter.common,
+ com.verticon.tracker.irouter.premises.common.api,
+ org.osgi.service.monitor;version="1.0.0",
+ org.osgi.service.wireadmin;version="1.0.0",
+ org.osgi.util.measurement;version="1.0.1",
+ org.osgi.util.position;version="1.0.1",
+ org.slf4j;version="1.5.11"

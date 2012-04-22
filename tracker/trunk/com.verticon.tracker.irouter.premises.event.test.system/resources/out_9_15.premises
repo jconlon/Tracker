@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<premises:Premises xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:premises="http://www.verticon.com/tracker/0.4.2/premises" premisesId="003ALKM" emailContact="jcondor@verticon.com" uri="urn:pin:003ALKM" administrator="Jack Condor" name="Test Premises" description="Test Data from " phoneNumber="404-971-8926">
+  <animals xmi:type="premises:BovineBeef" id="840003002956007">
+    <tags id="840003002956007">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T15:54:58.078-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T15:54:59.078-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="003CZKO"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T15:55:00.078-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="794.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T15:55:01.078-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="003CZKO"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T13:55:21.859-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="003CZKO"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T13:55:22.859-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1242.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T09:01:01.000-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956014">
+    <tags id="840003002956014">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:20:06.437-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:20:07.437-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005KGH6"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:20:08.437-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="954.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:20:09.437-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="005KGH6"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T08:19:50.625-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005KGH6"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T08:19:51.625-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1366.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T05:30:01.000-0500" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956018">
+    <tags id="840003002956018">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:22:40.796-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:22:41.796-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005KGH6"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:22:42.796-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="968.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:22:43.796-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="005KGH6"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T08:13:52.750-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005KGH6"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T08:13:53.750-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1302.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T09:01:01.000-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956019">
+    <tags id="840003002956019">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:26:44.781-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:26:45.781-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:26:46.781-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="756.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:26:47.781-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T08:09:03.296-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T08:09:04.296-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1182.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T05:30:01.000-0500" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956026">
+    <tags id="840003002956026">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:44:40.531-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:44:41.531-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:44:42.531-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="954.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:44:43.531-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T12:41:44.171-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T12:41:45.171-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1446.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T09:01:01.000-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956027">
+    <tags id="840003002956027">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:47:03.906-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:47:04.906-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:47:05.906-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="870.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:47:06.906-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T10:08:52.234-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T10:08:53.234-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1154.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T09:01:01.000-0500" electronicallyRead="true" comments="Accelerated Genetics" pid="urn:pin:003ALKM"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956031">
+    <tags id="840003002956030">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:58:44.234-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+    </tags>
+    <tags id="840003002956031">
+      <events xmi:type="premises:ReplacedTag" dateTime="2008-04-11T16:59:07.328-0500" electronicallyRead="true" pid="urn:pin:003ALKM" oldTag="#//@animals.6/@tags.0"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:00:16.109-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:00:17.109-0500" electronicallyRead="true" comments="Chase Nottistad" pid="urn:pin:003ALKM" weight="690.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:00:18.109-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T10:57:05.234-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T10:57:06.234-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1122.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T08:59:38.937-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956035">
+    <tags id="840003002956035">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:11:47.328-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:11:48.328-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005J60E"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:11:49.328-0500" electronicallyRead="true" comments="Madaline Wiltrout" pid="urn:pin:003ALKM" weight="904.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:11:50.328-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="005J60E"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T12:51:10.718-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005J60E"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T12:51:11.718-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1330.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T05:30:01.000-0500" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956036">
+    <tags id="840003002956036">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:24:51.859-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:24:52.859-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005GK83"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:24:53.859-0500" electronicallyRead="true" comments="Laneguard" pid="urn:pin:003ALKM" weight="830.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:24:54.859-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="005GK83"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T09:05:43.390-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005GK83"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T09:05:44.390-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1284.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T09:01:01.000-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956037">
+    <tags id="840003002956037">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:25:04.546-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:25:05.546-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005GK83"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:25:06.546-0500" electronicallyRead="true" comments="Laneguard" pid="urn:pin:003ALKM" weight="758.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:25:07.546-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="005GK83"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T13:29:57.890-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005GK83"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T13:29:58.890-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1352.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T08:59:42.000-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956060">
+    <tags id="840003002956060">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:20:11.062-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:20:12.062-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="006K206"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:20:13.062-0500" electronicallyRead="true" comments="Kruizenga" pid="urn:pin:003ALKM" weight="866.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:20:14.062-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="006K206"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T09:59:54.406-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="006K206"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T09:59:55.406-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1204.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T05:30:01.000-0500" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956070">
+    <tags id="840003002956070">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T19:20:22.484-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T19:20:23.484-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="006TUMV"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T19:20:24.484-0500" electronicallyRead="true" comments="Cole Johnson" pid="urn:pin:003ALKM" weight="1178.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T19:20:25.484-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="006TUMV"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T14:29:47.562-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="006TUMV"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T14:29:48.562-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1536.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T05:30:01.000-0500" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956071">
+    <tags id="840003002956071">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T19:20:29.375-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T19:20:30.375-0500" electronicallyRead="true" comments="Walleser" pid="urn:pin:003ALKM" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T19:20:31.375-0500" electronicallyRead="true" comments="Walleser" pid="urn:pin:003ALKM" weight="1078.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T19:20:32.375-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="003BVJB"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T15:00:34.906-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T15:00:35.906-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1384.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T05:30:01.000-0500" comments="Vern - scanned this animal on 2008-09-15T05:30:01.000-0500 but it did not go home, instead it went to Verns." pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956073">
+    <tags id="840003002956073">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T19:45:07.171-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T19:45:08.171-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T19:45:09.171-0500" electronicallyRead="true" comments="Walleser" pid="urn:pin:003ALKM" weight="940.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T19:45:10.171-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="003BVJB"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T17:34:05.015-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T17:34:06.015-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1320.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T05:30:01.000-0500" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956089">
+    <tags id="840003002956089">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T09:21:24.484-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T09:21:25.484-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T09:21:26.484-0500" electronicallyRead="true" comments="Ben Hoff" pid="urn:pin:003ALKM" weight="750.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T09:21:27.484-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T15:45:10.562-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T15:45:11.562-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1300.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T09:01:01.000-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956098">
+    <tags id="840003002956098">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:36:46.375-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:36:47.375-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="00BDTLB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:36:48.375-0500" electronicallyRead="true" comments="Casey Bean" pid="urn:pin:003ALKM" weight="734.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:36:49.375-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="00BDTLB"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T08:11:00.375-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="00BDTLB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T08:11:01.375-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1202.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T05:30:01.000-0500" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956102">
+    <tags id="840003002956102">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:49:12.921-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:49:13.921-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:49:14.921-0500" electronicallyRead="true" comments="Jacob Helgson" pid="urn:pin:003ALKM" weight="666.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:49:15.921-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T16:11:30.140-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T16:11:31.140-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1170.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T05:30:01.000-0500" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956108">
+    <tags id="840003002956108">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T11:14:31.000-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T11:14:32.000-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005D3RG"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T11:14:33.000-0500" electronicallyRead="true" comments="Mellisa Dach" pid="urn:pin:003ALKM" weight="890.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T11:14:34.000-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="005D3RG"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T13:32:51.156-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005D3RG"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T13:32:52.156-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1328.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T05:30:01.000-0500" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956110">
+    <tags id="840003002956109">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T11:14:32.937-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+    </tags>
+    <tags id="840003002956110">
+      <events xmi:type="premises:ReplacedTag" dateTime="2008-04-12T11:14:34.906-0500" electronicallyRead="true" pid="urn:pin:003ALKM" oldTag="#//@animals.18/@tags.0"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T11:14:35.906-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005D3RG"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T11:14:36.906-0500" electronicallyRead="true" comments="Melisa Dach" pid="urn:pin:003ALKM" weight="954.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T11:14:37.906-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="005D3RG"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T13:23:06.000-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005D3RG"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T13:23:07.000-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1274.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T08:59:30.765-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956111">
+    <tags id="840003002956111">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T11:19:54.765-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T11:19:55.765-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005D3RG"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T11:19:56.765-0500" electronicallyRead="true" comments="Melisa Dach" pid="urn:pin:003ALKM" weight="840.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T11:19:57.765-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="005D3RG"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T13:33:48.875-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005D3RG"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T13:33:49.875-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1212.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T09:01:01.000-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956113">
+    <tags id="840003002956113">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T11:36:31.281-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T11:36:32.281-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T11:36:33.281-0500" electronicallyRead="true" comments="Seth Lucey" pid="urn:pin:003ALKM" weight="800.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T11:36:34.281-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T13:53:21.859-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T13:53:22.859-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1284.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T09:01:01.000-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956114">
+    <tags id="840003002956114">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T11:36:34.359-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T11:36:35.359-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T11:36:36.359-0500" electronicallyRead="true" comments="Allisa Lucey" pid="urn:pin:003ALKM" weight="884.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T11:36:37.359-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T13:50:46.062-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T13:50:47.062-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1268.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T09:01:01.000-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956122" scrapieTag="wi195-1243">
+    <tags id="840003002956122">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:23:29.968-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:23:30.968-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:23:31.968-0500" electronicallyRead="true" comments="Malin - Sheep" pid="urn:pin:003ALKM" weight="68.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:23:32.968-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T13:18:55.906-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T13:18:56.906-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="126.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T10:11:27.484-0500" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956123" scrapieTag="wi195-1253">
+    <tags id="840003002956123">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:24:12.734-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:24:13.734-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:24:14.734-0500" electronicallyRead="true" comments="Malin Sheep" pid="urn:pin:003ALKM" weight="68.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:24:15.734-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T13:19:54.125-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T13:19:55.125-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="128.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T10:11:11.828-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956128" scrapieTag="WI2531-36">
+    <tags id="840003002956128">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:20:28.750-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:20:29.750-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="006P50S"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:20:30.750-0500" electronicallyRead="true" comments="Tallitha Sasha Reese Sheep" pid="urn:pin:003ALKM" weight="66.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:20:31.750-0500" electronicallyRead="true" comments="" pid="urn:pin:003ALKM" destinationPin="006P50S"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T15:07:20.406-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="006P50S"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T15:07:21.406-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="152.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T10:11:23.484-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956129" scrapieTag="WI2531-38">
+    <tags id="840003002956129">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:21:54.093-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:21:55.093-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="006P50S"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:21:56.093-0500" electronicallyRead="true" comments="Sasha Reese Sheep" pid="urn:pin:003ALKM" weight="62.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:21:57.093-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="006P50S"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T15:07:00.390-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="006P50S"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T15:07:01.390-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="146.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T10:08:45.234-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956142" scrapieTag="WI706-22">
+    <tags id="840003002956142">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:17:46.640-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:17:47.640-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:17:48.640-0500" electronicallyRead="true" comments="Cade Sheep" pid="urn:pin:003ALKM" weight="46.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:17:49.640-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T16:30:36.531-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T16:30:37.531-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="120.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T10:07:36.046-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956143" scrapieTag="WI706-21">
+    <tags id="840003002956143">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:18:26.343-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:18:27.343-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:18:28.343-0500" electronicallyRead="true" comments="Cade Sheep" pid="urn:pin:003ALKM" weight="42.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:18:29.343-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T16:30:09.187-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T16:30:10.187-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="112.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T10:10:11.312-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956154" scrapieTag="WI3265-613">
+    <tags id="840003002956154">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:53:54.359-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:53:55.359-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="003CZKO"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:53:56.359-0500" electronicallyRead="true" comments="Seellow" pid="urn:pin:003ALKM" weight="50.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:53:57.359-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="003CZKO"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T14:36:00.000-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="003CZKO"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T14:36:01.000-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="112.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T10:07:00.453-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956156" scrapieTag="wi3257-18">
+    <tags id="840003002956156">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-17T08:01:18.609-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-17T08:01:19.609-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-17T08:01:20.609-0500" electronicallyRead="true" comments="Fauske Sheep" pid="urn:pin:003ALKM" weight="56.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-17T08:01:21.609-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T16:13:56.546-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T16:13:57.546-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="122.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T10:10:32.781-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956165" scrapieTag="WI1355-95">
+    <tags id="840003002956165">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-17T09:48:34.343-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-17T09:48:35.343-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-17T09:48:36.343-0500" electronicallyRead="true" comments="Alysa Umberger" pid="urn:pin:003ALKM" weight="62.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-17T09:48:37.343-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T15:11:47.984-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T15:11:48.984-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="122.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T10:09:24.390-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956169" scrapieTag="WI80-1150">
+    <tags id="840003002956169">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-17T10:21:19.937-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-17T10:21:20.937-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-17T10:21:21.937-0500" electronicallyRead="true" comments="Roger Lucey 1150" pid="urn:pin:003ALKM" weight="60.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-17T10:21:22.937-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T13:49:15.859-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T13:49:16.859-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="120.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T10:11:25.484-0500" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956179" scrapieTag="WI506-596">
+    <tags id="840003002956179">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-17T11:39:40.062-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-17T11:39:41.062-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-17T11:39:42.062-0500" electronicallyRead="true" comments="Asp 596" pid="urn:pin:003ALKM" weight="60.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-17T11:39:43.062-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T10:09:02.187-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956347" scrapieTag="Wi1635-35">
+    <tags id="840003002956152">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:51:37.937-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:51:38.937-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="003CZKO"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:51:39.937-0500" electronicallyRead="true" comments="Seellow" pid="urn:pin:003ALKM" weight="64.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:51:40.937-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="003CZKO"/>
+    </tags>
+    <tags id="840003002956347">
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T14:38:00.437-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="003CZKO"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T14:38:01.437-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="152.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T10:08:15.750-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956423">
+    <tags id="840003002956096">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:03:08.156-0500" electronicallyRead="true" pid="urn:pin:003ALKM"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:03:09.156-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005POCE"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:03:10.156-0500" electronicallyRead="true" comments="Thomas Olson" pid="urn:pin:003ALKM" weight="714.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:03:11.156-0500" electronicallyRead="true" pid="urn:pin:003ALKM" destinationPin="005POCE"/>
+    </tags>
+    <tags id="840003002956423">
+      <events xmi:type="premises:MovedIn" dateTime="2008-09-10T15:19:51.406-0500" electronicallyRead="true" pid="urn:pin:003ALKM" sourcePin="005POCE"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-09-10T15:19:52.406-0500" electronicallyRead="true" pid="urn:pin:003ALKM" weight="1208.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-09-15T08:59:33.140-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+</premises:Premises>

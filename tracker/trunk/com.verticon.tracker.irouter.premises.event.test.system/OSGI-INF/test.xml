@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+    activate="startup" name="com.verticon.tracker.irouter.premises.event.test.system">
+   <implementation 
+    class="com.verticon.tracker.irouter.premises.event.test.system.internal.Test_PremisesEventProducer"/>
+  <reference bind="setMonitorable" cardinality="1..1" interface="org.osgi.service.monitor.Monitorable" name="Monitorable" policy="static" target="(com.verticon.tracker.irouter.premises.event.test=testOne)"/>
+  <reference bind="setController" cardinality="1..1" interface="com.verticon.tracker.irouter.premises.event.test.system.internal.IController" name="IController" policy="static" target="(com.verticon.tracker.irouter.premises.event.test=testOne)"/>
+  <reference bind="setCatcher" cardinality="1..1" interface="com.verticon.tracker.irouter.premises.event.test.system.internal.ICatcher" name="ICatcher" policy="static"/>
+</scr:component>
