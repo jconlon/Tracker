@@ -151,13 +151,13 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 		TimeUnit.SECONDS.sleep(1);
 
 		// Get the configured service
-		ServiceReference refs[] = context.getServiceReferences(
+		ServiceReference<?> refs[] = context.getServiceReferences(
 				Monitorable.class.getName(),
 				"(measurement.event.test=instance)");
 		assertNotNull("No MeasurementEvent Monitorable service found", refs);
 		assertTrue("No MeasurementEvent Monitorable service found",
 				refs.length == 1);
-		ServiceReference monRef = refs[0];
+		ServiceReference<?> monRef = refs[0];
 		Monitorable monitorable = (Monitorable) context.getService(monRef);
 
 		
@@ -241,8 +241,9 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 
 	void testTriggerOnEid(Configuration config, Properties props) throws IOException,
 			InterruptedException, InvalidSyntaxException {
+		@SuppressWarnings("rawtypes")
 		ServiceReference[] refs;
-		ServiceReference monRef;
+		ServiceReference<?> monRef;
 		Monitorable monitorable;
 		StatusVariable sv;
 		Measurement animalWeight;
@@ -332,8 +333,9 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 	
 	void testOnlySendLastEnvelope(Configuration config, Properties props) throws IOException,
 	InterruptedException, InvalidSyntaxException {
+		@SuppressWarnings("rawtypes")
 		ServiceReference[] refs;
-		ServiceReference monRef;
+		ServiceReference<?> monRef;
 		Monitorable monitorable;
 		StatusVariable sv;
 		Measurement animalWeight;
