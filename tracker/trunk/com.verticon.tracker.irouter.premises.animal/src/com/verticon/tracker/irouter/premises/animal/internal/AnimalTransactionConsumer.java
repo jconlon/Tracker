@@ -120,8 +120,10 @@ public class AnimalTransactionConsumer extends AbstractTransactionHandler
 	 *            contains properties for this instance.
 	 */
 	void deactivate() {
-		this.config.clear();
 		animalTemplate = null;
+		scope=null;
+		triggerOnID=false;
+		state = null;
 		log.debug(bundleMarker, "deactivating...");
 	}
 
