@@ -103,6 +103,19 @@ public class EventTransactionConsumer extends AbstractTransactionHandler
 				getConfigString(CONTROL_STATE_NAME));
 
 	}
+	
+	/**
+	 * Declaratives Services activation of instance.
+	 * 
+	 * @param config
+	 *            contains properties for this instance.
+	 */
+	void deactivate() {
+		triggerOnID=false;
+		onlySendLastEnvelope=false;
+		state = null;
+		log.debug(bundleMarker, "deactivating...");
+	}
 
 	private String getConfigString(String key) {
 		return (String) config.get(key);
@@ -126,16 +139,7 @@ public class EventTransactionConsumer extends AbstractTransactionHandler
 		return (Boolean) conf;
 	}
 
-	/**
-	 * Declaratives Services activation of instance.
-	 * 
-	 * @param config
-	 *            contains properties for this instance.
-	 */
-	void deactivate() {
-		this.config.clear();
-		log.debug(bundleMarker, "deactivating...");
-	}
+	
 
 	@Override
 	public void updated(Wire wire, Object in) {
