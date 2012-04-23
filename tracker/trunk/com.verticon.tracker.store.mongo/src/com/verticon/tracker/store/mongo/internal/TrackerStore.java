@@ -406,31 +406,10 @@ public class TrackerStore implements ITrackerStore {
 	 */
 	private boolean recordChanges(Container copiedContainer,
 			Container persistedContainer) throws IOException {
-
-		// Element.CONTAINER.registerResource(copiedContainer, getHostName(),
-		// getPort(), resourceSet);
 		resourceFactory.add(copiedContainer, CONTAINER);
 		if (persistedContainer != null) {
 			copiedContainer.eResource().setURI(
 					persistedContainer.eResource().getURI());
-			try {
-				DiffModel diff = getDiff(copiedContainer, persistedContainer);
-				final List<DiffElement> differences = new ArrayList<DiffElement>(
-						diff.getDifferences());
-				if (differences.isEmpty()) {
-					return false;// nothing has changed
-				} else {
-					mergeListener.setException(null);
-					MergeService.merge(differences, true);// Merge leftToRight
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new IOException(e.getMessage());
-			}
-			if (mergeListener.getException() != null) {
-				throw mergeListener.getException();
-			}
 
 		}
 		assert (copiedContainer.eResource().getURI().toString()
