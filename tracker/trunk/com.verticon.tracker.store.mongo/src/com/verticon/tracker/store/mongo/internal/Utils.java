@@ -381,7 +381,11 @@ public class Utils {
 	
 	}
 	
-	
+	 static void ensureGeoLocationIndex(DB db){
+		DBCollection coll = db.getCollection(TrackerPackage.Literals.TAG.getName());
+		DBObject dbObject = new BasicDBObject("events.loc", "2d");
+		coll.ensureIndex(dbObject, null, true);
+	}
 
 	
 	

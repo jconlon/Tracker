@@ -47,6 +47,7 @@ public enum Element {
 	private final String key;
 	private final String colName;
 	final EClass eClass;
+	private static final boolean IS_NATIVE_JSON = true;
 
 	Element(String index, EClass eClass) {
 		this.key = index;
@@ -67,9 +68,17 @@ public enum Element {
 			ensureIndex(db);
 		}
 	}
-
+	//FIXME for alternate query languages
 	String getQuery(String id) {
-		return key==null?null:key + "=='" + id + "'";
+		String query;
+		if(IS_NATIVE_JSON){
+			query= key==null?null:"{'"+key + "' : '" + id + "'}";
+		}else{
+			//Simple query
+			query= key==null?null:key + "=='" + id + "'";
+		}
+		return query;
+		
 	}
 
 	private boolean hasIndexedIDAttribute(DB db) {
