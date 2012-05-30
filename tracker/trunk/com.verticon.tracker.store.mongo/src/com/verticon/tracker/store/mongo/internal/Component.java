@@ -16,6 +16,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.verticon.tracker.store.mongo.internal.StatusAndConfigVariables.MONGO_URI;
 import static com.verticon.tracker.store.mongo.internal.StatusAndConfigVariables.PREMISES_URI;
 import static com.verticon.tracker.store.mongo.internal.Utils.bundleMarker;
+import static com.verticon.tracker.store.mongo.internal.Utils.ensureGeoLocationIndex;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -383,6 +384,7 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 		for (Element e : Element.values()) {
 			e.ensureIndexForIDAttribute(db);
 		}
+		ensureGeoLocationIndex(db);
 		return db;
 	}
 
