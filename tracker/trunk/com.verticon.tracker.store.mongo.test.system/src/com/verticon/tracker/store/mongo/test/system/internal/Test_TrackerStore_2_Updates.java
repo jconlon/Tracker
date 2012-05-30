@@ -16,6 +16,7 @@ import static com.verticon.tracker.store.mongo.test.system.internal.TestUtils.ge
 import static com.verticon.tracker.store.mongo.test.system.internal.TestUtils.removeLastModificationTimesOnAllResources;
 import static com.verticon.tracker.store.mongo.test.system.internal.Test_TrackerStore_1_Basic.DOC_AGRI_VALID;
 import static com.verticon.tracker.store.mongo.test.system.internal.Test_TrackerStore_1_Basic.PLUGIN_ID;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.startsWith;
@@ -28,13 +29,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.junit.Test;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.monitor.Monitorable;
 import org.slf4j.Logger;
@@ -54,6 +58,7 @@ import com.verticon.agriculture.Location;
 import com.verticon.opengis.kml.Container;
 import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.store.ITrackerStore;
 
@@ -974,6 +979,38 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 		Premises premises = store.retrievePremises(Member.THREE.uri, DATE_9_15,
 				DATE_9_16);
 		TestUtils.saveXMIResource("out_9_15.premises", premises);
+	}
+	
+	/**
+	 * "{'events.loc' :[45, 45]}"
+	 */
+	@Test
+	public void testGeoLocations_Specific(){
+		String query = "{'events.loc' :[45, 45]}";
+		List<EObject> eo = store.query(TrackerPackage.Literals.TAG, query);
+		assertThat("Result must not be null.", eo, is(notNullValue()));
+		assertThat("Result must not be empty.",eo.isEmpty(), is(false));
+		assertThat("Result must be one tag", eo.size(), is(1));
+		assertThat("Result must be a Tag",eo.get(0), is(instanceOf(Tag.class)));
+	}
+	
+	/**
+	 *  
+	 *   -90" (W) long
+	 *    43"  (N) lat
+	 *    
+	 *    Will need special index
+	 *    db.Tag.ensureIndex( { 'events.loc' : "2d" } )
+	 *    
+	 *    Watch out the lat long needs to have decimal points
+	 */
+	public void testGeoLocation_Near(){
+		String query = "{'events.loc' : {$near : [-90.0, 43.0]}}";
+		List<EObject> eo = store.query(TrackerPackage.Literals.TAG, query);
+		assertThat("Result must not be null.", eo, is(notNullValue()));
+		assertThat("Result must not be empty.",eo.isEmpty(), is(false));
+		assertThat("Result must be one tag", eo.size(), is(2));
+		assertThat("Result must be a Tag",eo.get(0), is(instanceOf(Tag.class)));
 	}
 	
 	private void countEvents(int count) throws UnknownHostException {
