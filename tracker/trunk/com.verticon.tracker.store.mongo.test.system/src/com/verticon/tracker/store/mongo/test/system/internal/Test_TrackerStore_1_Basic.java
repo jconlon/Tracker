@@ -38,6 +38,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.json.MongoQueryStandaloneSetupGenerated;
 import org.junit.Test;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.monitor.Monitorable;
@@ -123,6 +124,9 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	private static final String EVENTS_DATE_TIME = "events.dateTime";
 	private static final String FROMDATE = "2010-03-01";
 	private static final String TODATE = "2011-05-01";
+	
+	private static final String FROMDATE_JSON = "new Date(2010, 02, 01)";//"2010-03-01";
+	private static final String TODATE_JSON = "new Date(2011, 04, 01)"; //"2011-05-01";
 	
 
 	static String PLUGIN_ID = "com.verticon.tracker.store.mongo.test.system";
@@ -232,6 +236,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		// "waiting for declarative services activation startup method to finish");
 		startUpGate.await();// wait for startUp to finish
 		// System.out.println(this + ": startup and setUp finished.");
+		new MongoQueryStandaloneSetupGenerated().createInjectorAndDoEMFRegistration();
 	}
 
 	/*
@@ -305,9 +310,13 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 				db.collectionExists(TrackerPackage.Literals.TAG.getName()),
 				is(true));
 		assertThat(
-				"Has index for TAG",
+				"Must have index for TAG",
 				TestUtils.hasIndexedIDAttribute(
 						TrackerPackage.Literals.TAG.getName(), db, "id_1"),
+				is(true));
+		assertThat(
+				"Must have index for geolocation",
+				TestUtils.hasIndexedIDAttribute(TrackerPackage.Literals.TAG.getName(), db, "events.loc_"),
 				is(true));
 		assertThat("No docs", coll.find().count(), is(0));
 
@@ -1024,7 +1033,9 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	 */
 	@Test
 	public void testQuery_Tag_Id(){
-		String query = "id=='"+FIRST_ANIMAL_ID+"'";
+		@SuppressWarnings("unused")
+		String simple_query = "id=='"+FIRST_ANIMAL_ID+"'";
+		String query="{'id' : '"+FIRST_ANIMAL_ID+"'}";
 		List<EObject> eo = store.query(TrackerPackage.Literals.TAG, query);
 		assertThat("Result must not be null.", eo, is(notNullValue()));
 		assertThat("Result must not be empty.",eo.isEmpty(), is(false));
@@ -1033,34 +1044,53 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		
 	}
 	
+	/**
+	 * Works 
+	 * QUERY {'events.dateTime' : {$gt : new Date(2010, 02, 01)}} 
+	 */
 	@Test
 	public void testQuery_Tag_FromDate(){
-		String query =EVENTS_DATE_TIME+" > "+FROMDATE;
+//		String simpleQuery =EVENTS_DATE_TIME+" > "+FROMDATE;
+		String query ="{'"+EVENTS_DATE_TIME+"' : {$gt : "+FROMDATE_JSON+"}}";
 		List<EObject> eo = store.query(TrackerPackage.Literals.TAG, query);
 		assertThat("Result must not be null.", eo, is(notNullValue()));
 		assertThat("Result must not be empty.",eo.isEmpty(), is(false));
 		assertThat("Result must be seven tags", eo.size(), is(7));
 		assertThat("Result must be a Tag",eo.get(0), is(instanceOf(Tag.class)));
 	}
+	
+	/**
+	 * 
+	 * {'events.dateTime' : {$lt : new Date(2011, 04, 01)}} 
+	 * expects 5 tags 
+	 */
 	@Test
 	public void testQuery_Tag_ToDate(){
-		String query =EVENTS_DATE_TIME+" < "+TODATE;		
+//		String simplequery =EVENTS_DATE_TIME+" < "+TODATE;
+		String query = "{'"+EVENTS_DATE_TIME+"' : {$lt : "+TODATE_JSON+"}}";
 		List<EObject> eo = store.query(TrackerPackage.Literals.TAG, query);
 		assertThat("Result must not be null.", eo, is(notNullValue()));
 		assertThat("Result must not be empty.",eo.isEmpty(), is(false));
 		assertThat("Result must be five tags", eo.size(), is(5));
 		assertThat("Result must be a Tag",eo.get(0), is(instanceOf(Tag.class)));
 	}
-	//String query ="(events.dateTime > 2010-03-01) && (events.dateTime < 2011-05-01)";
+	
+
+	/**
+	 * 
+	 * {'events.dateTime' : {$gte :new Date(2010, 02, 01), $lt : new Date(2011, 04, 01)}} 
+	 */
 	@Test
 	public void testQuery_Tag_BetweenDates(){
-		String query = '('+EVENTS_DATE_TIME+" > "+FROMDATE +") && ("+EVENTS_DATE_TIME+" < "+TODATE+')';
+//		String query = '('+EVENTS_DATE_TIME+" > "+FROMDATE +") && ("+EVENTS_DATE_TIME+" < "+TODATE+')';
+		String query = "{'"+EVENTS_DATE_TIME+"' : {$gte :"+FROMDATE_JSON +", $lt : "+TODATE_JSON+"}}";
 		List<EObject> eo = store.query(TrackerPackage.Literals.TAG, query);
 		assertThat("Result must not be null.", eo, is(notNullValue()));
 		assertThat("Result must not be empty.",eo.isEmpty(), is(false));
 		assertThat("Result must be one tag", eo.size(), is(5));
 		assertThat("Result must be a Tag",eo.get(0), is(instanceOf(Tag.class)));
 	}
+	
 	
 
 }
