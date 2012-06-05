@@ -37,7 +37,7 @@ import com.verticon.tracker.TrackerPackage;
  */
 public class Configuator {
 	private static final String FACTORY_PID = "com.verticon.tracker.store.mongo";
-	static final String MONGO_LOCALHOST = "mongo://localhost";
+	static final String MONGO_LOCALHOST = "mongodb://localhost";
     
 	static final String ANIMAL_SCOPE = "premises.animald";
 	static final String TAG_SCOPE = "premises.tag";
@@ -63,7 +63,10 @@ public class Configuator {
 
 	private static Dictionary<Object, Object> configure1() {
 		Dictionary<Object, Object> props = new Properties();
+		//MongoConnection related variables
 		props.put(Variables.MONGO_URI.configID, MONGO_LOCALHOST);
+		
+		//Provided 
 		props.put("com.verticon.tracker.mongo.test","testOne");
 		props.put(Variables.DEFAULT_ANIMAL.configID, TrackerPackage.BOVINE_BISON);
 		props.put("tracker.wiring.group.name", "test");

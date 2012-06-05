@@ -51,7 +51,7 @@ public class MongoConsumer implements Consumer {
 	private final MongoStatusMonitor statusMonitor;
 
 	private Integer DEFAULT_ANIMAL_KEY;
-	private MongoResourceFactory resourceFactory;
+	private ResourceSetFactoryContext resourceFactory;
 	private DB db;
 
 	MongoConsumer(MongoStatusMonitor statusMonitor) {
@@ -122,7 +122,7 @@ public class MongoConsumer implements Consumer {
 	}
 
 	void activate(Integer dEFAULT_ANIMAL_KEY,
-			MongoResourceFactory resourceFactory, DB db) {
+			ResourceSetFactoryContext resourceFactory, DB db) {
 		logger.debug(bundleMarker, "Activating");
 		DEFAULT_ANIMAL_KEY = dEFAULT_ANIMAL_KEY;
 		this.resourceFactory = resourceFactory;

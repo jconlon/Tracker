@@ -885,7 +885,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		assertThat("Animal must have id: "+FIRST_ANIMAL_ID,animal.getId(),is(FIRST_ANIMAL_ID));
 		assertThat("Animal must be a Beef",animal, is(instanceOf(BovineBeef.class)));
 		assertThat("Not in mongo", animal.eResource().getURI().toString(),
-				startsWith("mongo://"));
+				startsWith("mongodb://"));
 //		assertThat(
 //				"Animal should be a proxy and not a subdocument in Premises",
 //				animal.eResource(), is(not(premises.eResource())));
@@ -898,7 +898,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		// Tag
 		Tag tag = animal.activeTag();
 		assertThat("Not in mongo", tag.eResource().getURI().toString(),
-				startsWith("mongo://"));
+				startsWith("mongodb://"));
 		assertThat("Tag should be a proxy to Animal", tag.eResource(),
 				is(not(animal.eResource())));
 
@@ -913,7 +913,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		OCD ocd = ge.getOcd();
 		assertThat("OCD is not null", ocd, is(notNullValue()));
 		assertThat("Not in mongo", ocd.eResource().getURI().toString(),
-				startsWith("mongo://"));
+				startsWith("mongodb://"));
 		assertThat("OCD should be a proxy to Tag", ocd.eResource(),
 				is(not(tag.eResource())));
 	}
