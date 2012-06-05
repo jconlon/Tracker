@@ -22,27 +22,23 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipselabs.emf.query.Result;
-import org.eclipselabs.mongo.IMongoDB;
-import org.eclipselabs.mongo.emf.IQueryEngine;
 import org.eclipselabs.mongo.emf.MongoURIHandlerImpl;
 
-import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.mongodb.WriteConcern;
 import com.verticon.agriculture.Location;
+import com.verticon.mongo.emf.api.IResourceSetFactory;
+import com.verticon.mongo.emf.api.SingleMongoLocator;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Tag;
 
-public class MongoResourceFactory {
+public class ResourceSetFactoryContext {
 
-	private final IMongoDB iMongoDB;
-	private final IQueryEngine iQueryEngine;
 	private static final String ADMIN_ID = "1";
-	private final Integer port;
-	private final String hostname;
-	private final String uri;
+	private final String premisesUri;
+	private final IResourceSetFactory resourceSetFactoryDelegate;
+	private final SingleMongoLocator mongoLocator;
 
 	private static final ImmutableMap<String, ?> PRIMVARY_KEY_SAVE_OPTIONS = of(
 			MongoURIHandlerImpl.OPTION_WRITE_CONCERN, WriteConcern.SAFE);
@@ -50,18 +46,16 @@ public class MongoResourceFactory {
 	private static final ImmutableMap<String, ?> ONLY_SAFE_SAVE_OPTIONS = of(
 			MongoURIHandlerImpl.OPTION_WRITE_CONCERN, WriteConcern.SAFE);
 
-	private MongoResourceFactory(IMongoDB iMongoDB, IQueryEngine iQueryEngine, String hostname, String port, String uri) {
+	private ResourceSetFactoryContext(IResourceSetFactory resourceSetFactory, SingleMongoLocator mongoLocator,  String premisesUri) {
 		super();
-		this.port = Strings.isNullOrEmpty(port) ? null : Integer.parseInt(port);
-		this.hostname = hostname;
-		this.uri = uri;
-		this.iMongoDB = iMongoDB;
-		this.iQueryEngine = iQueryEngine;
+		this.premisesUri = premisesUri;
+		this.resourceSetFactoryDelegate = resourceSetFactory;
+		this.mongoLocator = mongoLocator;
 	}
 
-	static MongoResourceFactory instance(IMongoDB iMongoDB, IQueryEngine iQueryEngine,String hostname, String port,
-			String uri) {
-		return new MongoResourceFactory( iMongoDB, iQueryEngine,hostname, port, uri);
+	static ResourceSetFactoryContext instance(IResourceSetFactory resourceSetFactory, SingleMongoLocator mongoLocator,
+			String premisesUri) {
+		return new ResourceSetFactoryContext( resourceSetFactory,  mongoLocator, premisesUri);
 	}
 
 	void add(EObject eObject, Element element) {
@@ -72,7 +66,7 @@ public class MongoResourceFactory {
 	EObject query(Element element, String id) {
 		checkNotNull(element);
 		checkNotNull(id);
-		checkNotNull(hostname);
+
 		List<EObject> result = internalQuery(element, id).getValues();
 		checkArgument(result.size() < 2,
 				"Query must return a single value or null.");
@@ -82,7 +76,7 @@ public class MongoResourceFactory {
 	Result query(EClass eclass, String query) {
 		checkNotNull(eclass);
 		checkNotNull(query);
-		checkNotNull(hostname);
+
 		URI uri = createQueryURI(eclass, query);
 		Resource resource = getResourcSet().getResource(uri, true);
 		return (Result) resource.getContents().get(0);
@@ -92,14 +86,14 @@ public class MongoResourceFactory {
 	 * @return the uri
 	 */
 	String getPremisesUri() {
-		return uri;
+		return premisesUri;
 	}
 
 	/**
 	 * 
 	 * @param eClass
 	 * @param query
-	 * @param uri
+	 * @param premisesUri
 	 *            example mongo://localhost:8989:/tracker/"
 	 * @return uri pointing to the correct collection in the database
 	 */
@@ -113,7 +107,7 @@ public class MongoResourceFactory {
 	}
 
 	String getMongoBaseURI() {
-		return "mongodb://" + hostname + (port != null ? ":" + port : "");
+		return mongoLocator.getRawUri();
 	}
 
 	void save(EObject eobject, Element element) throws IOException {
@@ -127,7 +121,7 @@ public class MongoResourceFactory {
 			Tag tag = (Tag) eobject;
 			for (Event event : tag.getEvents()) {
 				if (event.getPid() == null) {
-					event.setPid(uri);
+					event.setPid(premisesUri);
 				}
 			}
 			eobject.eResource().save(ONLY_SAFE_SAVE_OPTIONS);
@@ -139,7 +133,7 @@ public class MongoResourceFactory {
 	}
 
 	private ResourceSet getResourcSet() {
-		return new MongoResourceSet( iMongoDB,  iQueryEngine);
+		return resourceSetFactoryDelegate.createResourceSet(mongoLocator);
 	}
 
 	private Result internalQuery(Element element, String id) {
@@ -162,7 +156,7 @@ public class MongoResourceFactory {
 	 * 
 	 * @param element
 	 * @param query
-	 * @param uri
+	 * @param premisesUri
 	 *            example mongo://localhost:8989:/tracker/"
 	 * @return uri pointing to the correct collection in the database
 	 */
@@ -211,7 +205,7 @@ public class MongoResourceFactory {
 			result = result.appendSegment(ADMIN_ID);
 			break;
 		case CONTAINER:
-			result = result.appendSegment(uri);
+			result = result.appendSegment(premisesUri);
 			break;
 		case LOCATION:
 			Location location = (Location) eobject;
@@ -230,21 +224,8 @@ public class MongoResourceFactory {
 	}
 
 	private String getMongoEMFBaseURI() {
-		return "mongo://" + hostname + (port != null ? ":" + port : "")
-				+ "/tracker/";
+		return getMongoBaseURI()+"/tracker/";
 	}
 
-	private static class MongoResourceSet extends ResourceSetImpl {
 
-		MongoResourceSet(IMongoDB iMongoDB, IQueryEngine iQueryEngine) {
-			super();
-
-			MongoURIHandlerImpl handler = new MongoURIHandlerImpl( iMongoDB,  iQueryEngine);
-			BuilderFactory builderFactory = new BuilderFactory();
-			handler.setDBObjectBuilderFactory(builderFactory);
-			handler.setEObjectBuilderFactory(builderFactory);
-			getURIConverter().getURIHandlers().add(0, handler);
-		}
-
-	}
 }

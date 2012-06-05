@@ -269,7 +269,7 @@ public class Test_TrackerStore_1_Consumer extends TestCase {
 				store.retrieveAnimal(AIN_1), is(nullValue()));
 
 		assertThat("Not in mongo", animal.eResource().getURI().toString(),
-				startsWith("mongo://"));
+				startsWith("mongodb://"));
 
 		assertThat("Animal should NOT have a container", animal.eContainer(),
 				is(nullValue()));
@@ -283,7 +283,7 @@ public class Test_TrackerStore_1_Consumer extends TestCase {
 		assertThat("Old animal must not be persisted.",
 				store.retrieveAnimal(AIN_1), is(nullValue()));
 		assertThat("Not in mongo", animal.eResource().getURI().toString(),
-				startsWith("mongo://"));
+				startsWith("mongodb://"));
 		assertThat("Animal should NOT have a container", animal.eContainer(),
 				is(nullValue()));
 

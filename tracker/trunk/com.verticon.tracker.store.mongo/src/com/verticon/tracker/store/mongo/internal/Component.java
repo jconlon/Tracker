@@ -19,6 +19,7 @@ import static com.verticon.tracker.store.mongo.internal.Utils.bundleMarker;
 import static com.verticon.tracker.store.mongo.internal.Utils.ensureGeoLocationIndex;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.util.Date;
@@ -29,8 +30,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipselabs.mongo.IMongoDB;
-import org.eclipselabs.mongo.emf.IQueryEngine;
 import org.osgi.service.monitor.MonitorListener;
 import org.osgi.service.monitor.Monitorable;
 import org.osgi.service.monitor.StatusVariable;
@@ -42,9 +41,12 @@ import org.slf4j.LoggerFactory;
 import com.google.common.base.Strings;
 import com.mongodb.DB;
 import com.mongodb.Mongo;
+import com.mongodb.MongoException;
 import com.mongodb.MongoURI;
 import com.verticon.agriculture.Agriculture;
 import com.verticon.agriculture.Location;
+import com.verticon.mongo.emf.api.IResourceSetFactory;
+import com.verticon.mongo.emf.api.SingleMongoLocator;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.store.ITrackerStore;
@@ -67,20 +69,25 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 	 */
 	private final Logger logger = LoggerFactory.getLogger(Component.class);
 
+	//Provided services
 	private final MongoStatusMonitor statusMonitor = new MongoStatusMonitor();
 	private final MongoConsumer tagConsumer;
 	private final TrackerStore trackerStore;
 	private final TrackerStoreAdmin trackerStoreAdmin;
 
-	// DS Injected
-	private IMongoDB iMongoDB;
-	private IQueryEngine iQueryEngine;
+	// DS Injected dependencies
+	private IResourceSetFactory resourceSetFactory;
+	
+	// Created from configuration
+	private SingleMongoLocator mongoLocator;
+
 
 	public Component() {
 		super();
 		this.tagConsumer = new MongoConsumer(statusMonitor);
 		this.trackerStore = new TrackerStore(statusMonitor, tagConsumer);
 		this.trackerStoreAdmin = new TrackerStoreAdmin(statusMonitor);
+		this.mongoLocator = new SingleMongoLocator();
 	}
 
 	/*
@@ -254,45 +261,6 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 		return trackerStoreAdmin.isCurrentUserAdmin();
 	}
 
-	/**
-	 * Declaratives Services service injection
-	 * 
-	 * @param iMongoDB
-	 *            the IMongoDB service from the mongo-emf framework
-	 */
-	void setMongoDB(IMongoDB iMongoDB) {
-		this.iMongoDB = iMongoDB;
-		logger.debug(bundleMarker, "MongoDB set");
-	}
-
-	/**
-	 * Declaratives Services service injection
-	 * 
-	 * @param iMongoDB
-	 */
-	void unsetMongoDB(IMongoDB iMongoDB) {
-		this.iMongoDB = null;
-	}
-
-	/**
-	 * Declaratives Services service injection
-	 * 
-	 * @param iQueryEngine
-	 *            the IQueryEngine service from the mongo-emf framework
-	 */
-	void setQueryEngine(IQueryEngine iQueryEngine) {
-		this.iQueryEngine = iQueryEngine;
-		logger.debug(bundleMarker, "MongoDB set");
-	}
-
-	/**
-	 * Declaratives Services service injection
-	 * 
-	 * @param iQueryEngine
-	 */
-	void unsetQueryEngine(IQueryEngine iQueryEngine) {
-		this.iQueryEngine = null;
-	}
 
 	/**
 	 * Declaratives Services service injection
@@ -303,15 +271,35 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 	void setMonitorListener(MonitorListener monitorListener) {
 		statusMonitor.setMonitorListener(monitorListener);
 	}
+	
+	/**
+	 * Declaratives Services service injection
+	 * 
+	 * @param resourceSetFactory
+	 *            the resourceSetFactory to set
+	 */
+	void setResourceSetFactory(IResourceSetFactory resourceSetFactory) {
+		this.resourceSetFactory = resourceSetFactory;
+	}
 
 	/**
 	 * Declaratives Services service injection
 	 * 
 	 * @param monitorListener
-	 *            the monitorListener to set
+	 *            the monitorListener to unset
 	 */
 	void unsetMonitorListener(MonitorListener monitorListener) {
 		statusMonitor.setMonitorListener(monitorListener);
+	}
+	
+	/**
+	 * Declaratives Services service injection
+	 * 
+	 * @param resourceSetFactory
+	 *            the resourceSetFactory to unset
+	 */
+	void unsetResourceSetFactory(IResourceSetFactory resourceSetFactory) {
+		this.resourceSetFactory = null;
 	}
 
 	/**
@@ -321,29 +309,39 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 	void activate(Map<String, Object> config) throws IOException {
 		logger.debug(bundleMarker, "activating with config={}", config);
 		statusMonitor.activate(config);
-		URI mongoURI = URI.createURI((String) config.get(MONGO_URI.configID));
+		try {
+			mongoLocator.configure(config);
+		} catch (MongoException e1) {
+			throw e1;
+		} catch (URISyntaxException e1) {
+			throw new IOException(e1);
+		}
+		
+//		URI mongoURI = URI.createURI((String) config.get(MONGO_URI.configID));
+//
+//		checkNotNull(mongoURI, "Mongo Connection URI must not be null");
+//		URI mongouri = mongoURI;
+//		checkArgument(!Strings.isNullOrEmpty(mongouri.scheme()),
+//				"%s must start with mongo://", mongoURI);
+//		checkArgument(mongouri.scheme().equals("mongo"),
+//				"%s must start with mongo://", mongoURI);
+//		checkNotNull(mongoURI, "The hostname in the  URI must not be null");
+//
+//		checkArgument(!Strings.isNullOrEmpty(getPremisesURI(config)),
+//				"Premises URI must not be null.");
 
-		checkNotNull(mongoURI, "Mongo Connection URI must not be null");
-		URI mongouri = mongoURI;
-		checkArgument(!Strings.isNullOrEmpty(mongouri.scheme()),
-				"%s must start with mongo://", mongoURI);
-		checkArgument(mongouri.scheme().equals("mongo"),
-				"%s must start with mongo://", mongoURI);
-		checkNotNull(mongoURI, "The hostname in the  URI must not be null");
-
-		checkArgument(!Strings.isNullOrEmpty(getPremisesURI(config)),
-				"Premises URI must not be null.");
-
-		MongoResourceFactory resourceFactory = MongoResourceFactory.instance(iMongoDB,iQueryEngine,
-				mongoURI.host(), 
-				mongoURI.port(), 
-				getPremisesURI(config)
-		);
+		
 
 		Integer defaultAnimalKey = Utils.getConfigurationInteger(config
 				.get(StatusAndConfigVariables.DEFAULT_ANIMAL.configID));
+		
+		ResourceSetFactoryContext resourceFactory = ResourceSetFactoryContext.instance(resourceSetFactory,mongoLocator,
+				getPremisesURI(config)
+		);
 		try {
-			DB db = connect(resourceFactory);
+//			DB db = connect(resourceFactory);
+			DB db = mongoLocator.getTrackerDatabase();
+			ensureIndexes(db);
 			trackerStoreAdmin.activate(resourceFactory);
 			tagConsumer.activate(defaultAnimalKey, resourceFactory, db);
 			trackerStore.activate(resourceFactory, getPremisesURI(config), db,
@@ -372,25 +370,21 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 		trackerStore.deactivate();
 	}
 
-	private DB connect(MongoResourceFactory resourceFactory)
+	private void ensureIndexes(DB db)
 			throws UnknownHostException, StoreLogonException {
-		String base = resourceFactory.getMongoBaseURI();
-		logger.debug(bundleMarker, "Connected to iMongoDB at:{}", base);
-		MongoURI mongoUri = new MongoURI(base);
-		Mongo mongo = iMongoDB.getMongo(mongoUri);
-		DB db = mongo.getDB("tracker");
-
+		
 		// Ensure indexes on the collections
 		for (Element e : Element.values()) {
 			e.ensureIndexForIDAttribute(db);
 		}
 		ensureGeoLocationIndex(db);
-		return db;
+		
 	}
 
 	private static String getPremisesURI(Map<String, Object> config) {
 		return (String) config.get(PREMISES_URI.configID);
 	}
+
 
 	
 

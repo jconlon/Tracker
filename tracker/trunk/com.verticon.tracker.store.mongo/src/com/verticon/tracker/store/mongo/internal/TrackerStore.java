@@ -87,7 +87,7 @@ public class TrackerStore implements ITrackerStore {
 	private final MongoStatusMonitor statusMonitor;
 	private final DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd");
 
-	private MongoResourceFactory resourceFactory;
+	private ResourceSetFactoryContext resourceFactory;
 	private String premisesURI;
 	private DB db;
 	private MergeListener mergeListener;
@@ -196,7 +196,7 @@ public class TrackerStore implements ITrackerStore {
 	 * @return animals 
 	 */
 	private static List<Animal> getAnimals(DB db,
-			MongoResourceFactory resourceFactory, String uri, Date fromDate,
+			ResourceSetFactoryContext resourceFactory, String uri, Date fromDate,
 			Date toDate, Predicate<Event> canRead) {
 		List<Animal> result = new ArrayList<Animal>();
 
@@ -372,7 +372,7 @@ public class TrackerStore implements ITrackerStore {
 		return finish - start;
 	}
 
-	void activate(MongoResourceFactory resourceFactory, String premisesURI,
+	void activate(ResourceSetFactoryContext resourceFactory, String premisesURI,
 			DB db, TrackerStoreAdmin trackerStoreAdmin) {
 		logger.debug(bundleMarker, "Activating");
 		this.resourceFactory = resourceFactory;

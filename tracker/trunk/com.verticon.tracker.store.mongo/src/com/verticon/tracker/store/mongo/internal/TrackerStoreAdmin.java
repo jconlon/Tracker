@@ -40,7 +40,7 @@ public class TrackerStoreAdmin implements ITrackerStoreAdmin, Predicate<Event>,
 	 * slf4j Logger
 	 */
 	private final Logger logger = LoggerFactory.getLogger(TrackerStoreAdmin.class);
-	private MongoResourceFactory resourceFactory;
+	private ResourceSetFactoryContext resourceFactory;
 	private volatile Resource persistedResource;
 	private AtomicReference<Admin> persistedAdmin2 = new AtomicReference<Admin>();
 	private final MongoStatusMonitor statusMonitor;
@@ -166,7 +166,7 @@ public class TrackerStoreAdmin implements ITrackerStoreAdmin, Predicate<Event>,
 		return result;
 	}
 
-	synchronized void activate(MongoResourceFactory resourceFactory) {
+	synchronized void activate(ResourceSetFactoryContext resourceFactory) {
 		this.resourceFactory = resourceFactory;
 		loadAdminFromMongo();
 		if (isAdminLoaded()) {
