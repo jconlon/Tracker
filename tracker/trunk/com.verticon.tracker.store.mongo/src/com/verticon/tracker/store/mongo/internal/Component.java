@@ -11,9 +11,6 @@
 
 package com.verticon.tracker.store.mongo.internal;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
-import static com.verticon.tracker.store.mongo.internal.StatusAndConfigVariables.MONGO_URI;
 import static com.verticon.tracker.store.mongo.internal.StatusAndConfigVariables.PREMISES_URI;
 import static com.verticon.tracker.store.mongo.internal.Utils.bundleMarker;
 import static com.verticon.tracker.store.mongo.internal.Utils.ensureGeoLocationIndex;
@@ -27,7 +24,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.osgi.service.monitor.MonitorListener;
@@ -38,11 +34,8 @@ import org.osgi.service.wireadmin.Wire;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.base.Strings;
 import com.mongodb.DB;
-import com.mongodb.Mongo;
 import com.mongodb.MongoException;
-import com.mongodb.MongoURI;
 import com.verticon.agriculture.Agriculture;
 import com.verticon.agriculture.Location;
 import com.verticon.mongo.emf.api.IResourceSetFactory;
