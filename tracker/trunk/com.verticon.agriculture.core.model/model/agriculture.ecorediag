@@ -96,6 +96,18 @@
     <element xsi:nil="true"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_u8gO8WIkEeCy_ZHdCa9Nzg" y="36"/>
   </children>
+  <children xmi:type="notation:Shape" xmi:id="_2vfFcLNCEeG0scloyyUQZg" type="Note" fontName="Sans" description="place EReference to KML Placemark" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_2vhhsLNCEeG0scloyyUQZg" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_2vhhsbNCEeG0scloyyUQZg" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:TextStyle" xmi:id="_2vfFcbNCEeG0scloyyUQZg"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_2vfFcrNCEeG0scloyyUQZg"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2vfFc7NCEeG0scloyyUQZg" x="564" y="312" width="161"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_vyvhQUNVEeCHcKrYB_mDkw"/>
   <element xmi:type="ecore:EPackage" href="agriculture.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_Dd3BAENWEeCHcKrYB_mDkw" type="3002" source="_2cdAMENVEeCHcKrYB_mDkw" target="_4SiYEENVEeCHcKrYB_mDkw">
@@ -128,5 +140,13 @@
     <styles xmi:type="notation:LineTypeStyle" xmi:id="_OPC6QmIkEeCy_ZHdCa9Nzg"/>
     <element xsi:nil="true"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_OPC6Q2IkEeCy_ZHdCa9Nzg" points="[0, 0, -415, -156]$[350, 132, -65, -24]"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_8SO8ULNCEeG0scloyyUQZg" type="NoteAttachment" source="_4SiYEENVEeCHcKrYB_mDkw" target="_2vfFcLNCEeG0scloyyUQZg" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_8SO8UbNCEeG0scloyyUQZg"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_8SO8UrNCEeG0scloyyUQZg"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_8SO8U7NCEeG0scloyyUQZg" points="[2, -18, -104, -19]$[106, 1, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_8SR_oLNCEeG0scloyyUQZg" id="(0.9523809523809523,0.37254901960784315)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_8SR_obNCEeG0scloyyUQZg" id="(0.0,0.125)"/>
   </edges>
 </notation:Diagram>

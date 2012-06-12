@@ -11,19 +11,25 @@ import static com.verticon.agriculture.tests.Utils.getResoureSet;
 import static com.verticon.agriculture.tests.Utils.isValidObject;
 
 import java.io.IOException;
-import java.util.List;
 
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.util.FeatureMap.Entry.Internal;
 
 import com.verticon.agriculture.AgricultureFactory;
 import com.verticon.agriculture.Location;
 import com.verticon.opengis.kml.Document;
+import com.verticon.opengis.kml.Folder;
 import com.verticon.opengis.kml.KmlFactory;
+import com.verticon.opengis.kml.KmlPackage;
+import com.verticon.opengis.kml.Placemark;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerFactory;
 
@@ -34,7 +40,7 @@ import com.verticon.tracker.TrackerFactory;
  * <p>
  * The following features are tested:
  * <ul>
- *   <li>{@link com.verticon.agriculture.Location#getName() <em>Name</em>}</li>
+ *   <li>{@link com.verticon.agriculture.Location#getUri() <em>Uri</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -98,7 +104,6 @@ public class LocationTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		setFixture(AgricultureFactory.eINSTANCE.createLocation());
-		
 	}
 
 	/**
@@ -120,6 +125,7 @@ public class LocationTest extends TestCase {
 	 * @generated NOT
 	 */
 	public void testGetUri() {
+		
 		Premises premises = TrackerFactory.eINSTANCE.createPremises();
 		premises.setUri(MYURI);
 		getFixture().setLivestock(premises);
@@ -136,7 +142,7 @@ public class LocationTest extends TestCase {
 		Premises premises = TrackerFactory.eINSTANCE.createPremises();
 		premises.setUri(MYURI);
 		getFixture().setLivestock(premises);
-		getFixture().setId("test");
+//		getFixture().setId("test");
 		
 		Resource resource = createXMIResource("test.premises",resourceSet);
 		resource.getContents().add(premises);
@@ -155,21 +161,40 @@ public class LocationTest extends TestCase {
 		getFixture().setLivestock(premises);
 		assertFalse(isValidObject(getFixture()));
 		premises.setUri("test");
-		getFixture().setId("test");
+//		getFixture().setId("test");
 		assertFalse(isValidObject(getFixture()));//Still needs geography
 		
-		//Create a Document
+		//Create a KML Document
 		Document document = KmlFactory.eINSTANCE.createDocument();
 		document.setDescription("Doc level");
 		getFixture().setGeography(document);
-		assertTrue(isValidObject(getFixture()));
+		assertFalse(isValidObject(getFixture()));//Still needs placemark
 		
-		//Change the id of the location
-		getFixture().setId("ggg://###");
-		assertFalse(isValidObject(getFixture()));//Bad id
-		//Fix it
-		getFixture().setId("ggg:");
-		assertTrue(isValidObject(getFixture()));
+		
+		//Add a Folder to the Document
+		Folder folder = KmlFactory.eINSTANCE.createFolder();
+		folder.setName("MyFolder");
+		folder.setDescription("The first folder");
+		EStructuralFeature f = KmlPackage.eINSTANCE.getDocumentRoot_Folder();
+	    document.getAbstractFeatureGroupGroup().add(f,folder);
+				
+		//Add a Placemark to the folder
+		Placemark placemark =  KmlFactory.eINSTANCE.createPlacemark();
+		placemark.setName("MyPlacemark");
+		placemark.setId("12345");
+		f = KmlPackage.eINSTANCE.getDocumentRoot_Placemark();
+		folder.getAbstractFeatureGroupGroup().add(f,placemark);
+		
+		
+		getFixture().setPlace(placemark);
+		assertTrue(isValidObject(getFixture()));//Still needs placemark
+		
+//		//Change the id of the location
+//		getFixture().setId("ggg://###");
+//		assertFalse(isValidObject(getFixture()));//Bad id
+//		//Fix it
+//		getFixture().setId("ggg:");
+//		assertTrue(isValidObject(getFixture()));
 		
 	}
 	

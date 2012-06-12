@@ -24,12 +24,6 @@ import com.verticon.agriculture.Location;
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>Agriculture</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following features are tested:
- * <ul>
- *   <li>{@link com.verticon.agriculture.Agriculture#getName() <em>Name</em>}</li>
- * </ul>
- * </p>
  * @generated
  */
 public class AgricultureTest extends TestCase {
@@ -129,7 +123,7 @@ public class AgricultureTest extends TestCase {
 		assertNotNull(location.getLivestock());
 		assertNotNull(location.getGeography());
 		assertFalse(isValidObject(agri));
-		location.setId("test");
+//		location.setId("test");
 		assertTrue(isValidObject(agri));
 		
 	}
