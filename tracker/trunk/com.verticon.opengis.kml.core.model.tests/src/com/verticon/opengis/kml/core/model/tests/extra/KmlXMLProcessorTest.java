@@ -22,6 +22,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.verticon.opengis.kml.Document;
+import com.verticon.opengis.kml.Folder;
 import com.verticon.opengis.kml.Kml;
 import com.verticon.opengis.kml.KmlFactory;
 import com.verticon.opengis.kml.KmlPackage;
@@ -35,7 +36,9 @@ public class KmlXMLProcessorTest {
 		"/home/jconlon/Workspaces/tracker_dev-01/com.verticon.opengis.kml.core.model.tests/data/My1.kml";
 	private static final String MY2_KML = 
 		"/home/jconlon/Workspaces/tracker_dev-01/com.verticon.opengis.kml.core.model.tests/data/My3.kml";
-	
+	private static final String HELLO = 
+			"/home/jconlon/Workspaces/tracker_dev-01/com.verticon.opengis.kml.core.model.tests/data/HelloEarth.kml";
+		
 
 	KmlXMLProcessor processor = new KmlXMLProcessor();
 	DiagnosticVisitor visitor = new DiagnosticVisitor();
@@ -137,6 +140,24 @@ public class KmlXMLProcessorTest {
 		}
 	}
 
+	@Test
+	public final void testLoad3() throws IOException {
+		System.out.println("************************** testLoad()");
+		FileInputStream file = new FileInputStream(HELLO);
+		try {
+			Resource resource = processor.load(file , null);
+			Iterator<Object> it = EcoreUtil.getAllProperContents(resource, false);
+			while (it.hasNext()) {
+				EObject eobject = (EObject) it.next();
+				visitor.doSwitch(eobject);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
+			file.close();
+		}
+	}
+	
 	private Resource buildResource() {
 		// Create a resource set to hold the resources.
 		//
@@ -154,7 +175,7 @@ public class KmlXMLProcessorTest {
 			(KmlPackage.eNS_URI, 
 			 KmlPackage.eINSTANCE);
         
-		Resource resource = resourceSet.getResource(URI.createFileURI(MY1_KML), true);
+		Resource resource = resourceSet.createResource(URI.createFileURI(MY1_KML));
 		
 		//Create the root
 //		DocumentRoot documentRoot = KmlFactory.eINSTANCE.createDocumentRoot();
@@ -162,19 +183,25 @@ public class KmlXMLProcessorTest {
 		
 		//Create a Document
 		Document document = KmlFactory.eINSTANCE.createDocument();
-		document.setDescription("Second level");
+		document.setDescription("Doc level");
 		
-		//Add a Placemark to the Document
+		//Add a Folder to the Document
+		Folder folder = KmlFactory.eINSTANCE.createFolder();
+		folder.setName("MyFolder");
+		folder.setDescription("The first folder");
+		EStructuralFeature f = KmlPackage.eINSTANCE.getDocumentRoot_Folder();
+		document.getAbstractFeatureGroupGroup().add(f,folder);
+		
+		//Add a Placemark to the folder
 		Placemark placemark =  KmlFactory.eINSTANCE.createPlacemark();
-		EStructuralFeature f = KmlPackage.eINSTANCE.getDocumentRoot_Placemark();
-		document.getAbstractFeatureGroupGroup().add(f,placemark);
-//		document.getFeature().add(placemark);
+		placemark.setName("MyPlacemark");
+		placemark.setId("12345");
+		f = KmlPackage.eINSTANCE.getDocumentRoot_Placemark();
+		folder.getAbstractFeatureGroupGroup().add(f,placemark);
 		
 		//Add the document to the kml root
 		kml.getAbstractFeatureGroupGroup().add(KmlPackage.eINSTANCE.getDocumentRoot_Document(), document);
-//	    kml.setFeature(document);
-		
-//		documentRoot.setKml(kml);
+
 		resource.getContents().add(kml);
 		return resource;
 	}

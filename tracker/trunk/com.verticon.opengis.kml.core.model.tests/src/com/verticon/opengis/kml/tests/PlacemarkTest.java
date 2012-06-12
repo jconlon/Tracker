@@ -6,10 +6,19 @@
  */
 package com.verticon.opengis.kml.tests;
 
-import com.verticon.opengis.kml.KmlFactory;
-import com.verticon.opengis.kml.Placemark;
+import java.util.ArrayList;
+import java.util.List;
 
 import junit.textui.TestRunner;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.util.FeatureMapUtil;
+
+import com.verticon.opengis.kml.KmlFactory;
+import com.verticon.opengis.kml.KmlPackage;
+import com.verticon.opengis.kml.Placemark;
+import com.verticon.opengis.kml.Point;
 
 /**
  * <!-- begin-user-doc -->
@@ -82,16 +91,43 @@ public class PlacemarkTest extends FeatureTest {
 	/**
 	 * Tests the '{@link com.verticon.opengis.kml.Placemark#getAbstractGeometryGroup() <em>Abstract Geometry Group</em>}' feature getter.
 	 * <!-- begin-user-doc -->
+	 * Shows how to add a placemark and the effects
 	 * <!-- end-user-doc -->
 	 * @see com.verticon.opengis.kml.Placemark#getAbstractGeometryGroup()
-	 * @generated
+	 * @generated NOT
 	 */
 	public void testGetAbstractGeometryGroup() {
-		// TODO: implement this feature getter test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
+		assertNull(getFixture().getAbstractGeometryGroup());
+		
+		Placemark placemark = getFixture();
+		Object o = placemark.eGet(placemark.eClass().getEStructuralFeature(
+				KmlPackage.PLACEMARK__ABSTRACT_GEOMETRY_GROUP_GROUP), true);
+		
+		//System.out.println("FeatureMap = "+o.toString());
+		assertNotNull("There shoula always be a featureMap", o);
+		assertTrue(o instanceof FeatureMap);
+		FeatureMap fm = (FeatureMap)o;
+		
+		assertEquals("It will be empty, unless something is added", 0,fm.size());
+		EStructuralFeature f = KmlPackage.eINSTANCE
+		.getPlacemark_AbstractGeometryGroupGroup();
+		//Add a point
+		EStructuralFeature documentRootPointFeature = KmlPackage.eINSTANCE.getDocumentRoot_Point();
+		Point point = KmlFactory.eINSTANCE.createPoint();
+		String coord = "-90.779724, 43.394554";
+		List<String> coordinates = new ArrayList<String>();
+		coordinates.add(coord);
+		point.setCoordinates(coordinates);
+		fm.add(f, FeatureMapUtil.createEntry(documentRootPointFeature, point));
+		
+		//Now the AbstractGeometryGroup 
+		Object geo = getFixture().getAbstractGeometryGroup();
+		assertNotNull(geo);
+		assertEquals(point, geo);
+		
 	}
 
+	
 	/**
 	 * Tests the '{@link com.verticon.opengis.kml.Placemark#getPlacemarkSimpleExtensionGroup() <em>Placemark Simple Extension Group</em>}' feature getter.
 	 * <!-- begin-user-doc -->

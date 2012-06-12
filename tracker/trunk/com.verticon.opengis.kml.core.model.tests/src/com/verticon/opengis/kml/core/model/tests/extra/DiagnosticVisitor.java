@@ -1,5 +1,7 @@
 package com.verticon.opengis.kml.core.model.tests.extra;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMap.Entry;
@@ -73,8 +75,20 @@ public class DiagnosticVisitor extends KmlSwitch<Object>{
 	 * @see com.verticon.opengis.kml.util.KmlSwitch#casePlacemark(com.verticon.opengis.kml.Placemark)
 	 */
 	@Override
-	public Object casePlacemark(Placemark object) {
-		System.out.println("Visited placemark: " + object);
+	public Object casePlacemark(Placemark placemark) {
+		System.out.println("Visited placemark: " + placemark);
+		Geometry geometry = placemark.getAbstractGeometryGroup();
+		System.out.println("\t geometry is "+geometry);
+		FeatureMap fm = placemark.getAbstractGeometryGroupGroup();
+		for (Iterator iter = fm.iterator(); iter.hasNext();) {
+			FeatureMap.Entry entry = (FeatureMap.Entry) iter.next();
+			EStructuralFeature f = entry.getEStructuralFeature();
+			
+			System.out.println("\t\t feature id is "+f.getFeatureID()+" and value is "+entry.getValue());
+//			if(handleUnknownFeature(owner, f, entry.getValue())) {
+//				iter.remove();
+//			}
+		}
 		return Boolean.TRUE;
 	}
 
