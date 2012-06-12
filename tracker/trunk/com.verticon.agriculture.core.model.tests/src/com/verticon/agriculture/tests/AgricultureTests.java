@@ -35,7 +35,6 @@ public class AgricultureTests extends TestSuite {
 	 */
 	public static Test suite() {
 		TestSuite suite = new AgricultureTests("agriculture Tests");
-		suite.addTestSuite(AgricultureTest.class);
 		suite.addTestSuite(LocationTest.class);
 		return suite;
 	}

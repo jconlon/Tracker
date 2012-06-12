@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import com.verticon.agriculture.AgriculturePackage;
 import com.verticon.agriculture.Location;
+import com.verticon.opengis.kml.Placemark;
 import com.verticon.opengis.kml.Feature;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
@@ -33,6 +34,7 @@ import com.verticon.tracker.TrackerPackage;
  *   <li>{@link com.verticon.agriculture.impl.LocationImpl#getGeography <em>Geography</em>}</li>
  *   <li>{@link com.verticon.agriculture.impl.LocationImpl#getLivestock <em>Livestock</em>}</li>
  *   <li>{@link com.verticon.agriculture.impl.LocationImpl#getUri <em>Uri</em>}</li>
+ *   <li>{@link com.verticon.agriculture.impl.LocationImpl#getPlace <em>Place</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,6 +70,16 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 	 * @ordered
 	 */
 	protected static final String URI_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPlace() <em>Place</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPlace()
+	 * @generated
+	 * @ordered
+	 */
+	protected Placemark place;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -181,6 +193,44 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Placemark getPlace() {
+		if (place != null && place.eIsProxy()) {
+			InternalEObject oldPlace = (InternalEObject)place;
+			place = (Placemark)eResolveProxy(oldPlace);
+			if (place != oldPlace) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AgriculturePackage.LOCATION__PLACE, oldPlace, place));
+			}
+		}
+		return place;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Placemark basicGetPlace() {
+		return place;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPlace(Placemark newPlace) {
+		Placemark oldPlace = place;
+		place = newPlace;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AgriculturePackage.LOCATION__PLACE, oldPlace, place));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -192,6 +242,9 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 				return basicGetLivestock();
 			case AgriculturePackage.LOCATION__URI:
 				return getUri();
+			case AgriculturePackage.LOCATION__PLACE:
+				if (resolve) return getPlace();
+				return basicGetPlace();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -209,6 +262,9 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 				return;
 			case AgriculturePackage.LOCATION__LIVESTOCK:
 				setLivestock((Premises)newValue);
+				return;
+			case AgriculturePackage.LOCATION__PLACE:
+				setPlace((Placemark)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -228,6 +284,9 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 			case AgriculturePackage.LOCATION__LIVESTOCK:
 				setLivestock((Premises)null);
 				return;
+			case AgriculturePackage.LOCATION__PLACE:
+				setPlace((Placemark)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -246,6 +305,8 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 				return livestock != null;
 			case AgriculturePackage.LOCATION__URI:
 				return URI_EDEFAULT == null ? getUri() != null : !URI_EDEFAULT.equals(getUri());
+			case AgriculturePackage.LOCATION__PLACE:
+				return place != null;
 		}
 		return super.eIsSet(featureID);
 	}

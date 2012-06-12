@@ -86,7 +86,6 @@ public class Utils {
 
 	 static URI createURI(String fileName) {
 		URI uri = URI.createFileURI(new File("resources/"+fileName).getAbsolutePath());
-		System.out.println(uri);
 		return uri;
 	}
 }

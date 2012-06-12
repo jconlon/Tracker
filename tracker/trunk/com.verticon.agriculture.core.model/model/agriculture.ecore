@@ -16,5 +16,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="livestock" eType="ecore:EClass ../../com.verticon.tracker/model/tracker.ecore#//Premises"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="place" lowerBound="1" eType="ecore:EClass ../../com.verticon.opengis.kml.core.model/model/kml.ecore#//Placemark"/>
   </eClassifiers>
 </ecore:EPackage>
