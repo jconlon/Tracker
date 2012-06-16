@@ -32,6 +32,10 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_4Si_I0NVEeCHcKrYB_mDkw"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_4Si_JENVEeCHcKrYB_mDkw" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_LE97EbcYEeG5m768_l1-HQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="agriculture.ecore#//Location/getLongitude"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LE-iILcYEeG5m768_l1-HQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_4Si_JUNVEeCHcKrYB_mDkw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_4Si_JkNVEeCHcKrYB_mDkw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_4Si_J0NVEeCHcKrYB_mDkw"/>
