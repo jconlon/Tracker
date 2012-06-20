@@ -13,7 +13,6 @@ package com.verticon.tracker.store.mongo.internal;
 
 import static com.verticon.tracker.store.mongo.internal.StatusAndConfigVariables.PREMISES_URI;
 import static com.verticon.tracker.store.mongo.internal.Utils.bundleMarker;
-import static com.verticon.tracker.store.mongo.internal.Utils.ensureGeoLocationIndex;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -365,12 +364,10 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 
 	private void ensureIndexes(DB db)
 			throws UnknownHostException, StoreLogonException {
-		
 		// Ensure indexes on the collections
 		for (Element e : Element.values()) {
-			e.ensureIndexForIDAttribute(db);
+			e.ensureIndex(db);
 		}
-		ensureGeoLocationIndex(db);
 		
 	}
 
