@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.verticon.mongo.emf.oda"
+      label="Mongo EMF ODA Driver"
+      version="0.1.0.qualifier"
+      provider-name="Verticon, Inc."
+      plugin="com.verticon.mongo.emf.oda">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %license
+   </license>
+
+   <url>
+      <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
+   </url>
+
+   <requires>
+      <import feature="com.verticon.mongo.emf.json.query" version="0.1.0.qualifier"/>
+      <import feature="com.google.guava.runtime.feature" version="11.0.1"/>
+      <import feature="com.mongodb" version="2.7.2.qualifier"/>
+      <import feature="org.eclipse.emf.ecore" version="2.7.1.v20110912-0920"/>
+      <import feature="org.eclipse.emf.common" version="2.7.0.v20110912-0920"/>
+      <import feature="org.eclipselabs.mongo.emf.core.feature" version="0.7.0.201206161437"/>
+      <import feature="org.eclipselabs.mongo.emf.streams.feature" version="0.7.0.201206161437"/>
+   </requires>
+
+   <plugin
+         id="com.verticon.mongo.emf.oda"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
