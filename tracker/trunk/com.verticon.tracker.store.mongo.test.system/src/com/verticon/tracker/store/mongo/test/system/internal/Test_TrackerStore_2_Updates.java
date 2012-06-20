@@ -54,6 +54,7 @@ import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
 import com.verticon.agriculture.Agriculture;
+import com.verticon.agriculture.AgriculturePackage;
 import com.verticon.agriculture.Location;
 import com.verticon.opengis.kml.Container;
 import com.verticon.osgi.metatype.MetatypePackage;
@@ -295,6 +296,15 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 						MetatypePackage.Literals.OCD.getName(), db, "iD_1"),
 				is(true));
 		assertThat("Must have only 1 OCD", coll.find().count(), is(1));
+		
+		
+		// Location
+	    coll = db.getCollection(AgriculturePackage.Literals.LOCATION.getName());
+		assertThat("Location collection should exist.",
+						db.collectionExists(AgriculturePackage.Literals.LOCATION.getName()),
+						is(true));
+		
+		assertThat("Must have 2 locations", coll.find().count(), is(1));
 
 	}
 
@@ -337,7 +347,13 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 	public void testRegister() throws IOException, ParseException {
 		logger.debug(bundleMarker, "starting testUpdateLocation");
 		Resource resource = getXMIResource(DOC_AGRI_VALID, "updateTests");
-		Location location = (Location) resource.getContents().get(0);
+		
+		
+		Agriculture agriculture = (Agriculture) resource.getContents().get(0);
+		assertThat("Not a valid agriculture", TestUtils.isValidObject(agriculture),
+				is(true));
+		
+		Location location = agriculture.getLocation().get(0);
 		assertThat("Not a valid location", TestUtils.isValidObject(location),
 				is(true));
 		Premises premises = location.getLivestock();
@@ -985,7 +1001,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 	 * "{'events.loc' :[45, 45]}"
 	 */
 	@Test
-	public void testGeoLocations_Specific(){
+	public void testGeoLocations_Tag_Specific(){
 		String query = "{'events.loc' :[45, 45]}";
 		List<EObject> eo = store.query(TrackerPackage.Literals.TAG, query);
 		assertThat("Result must not be null.", eo, is(notNullValue()));
@@ -1004,13 +1020,47 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 	 *    
 	 *    Watch out the lat long needs to have decimal points
 	 */
-	public void testGeoLocation_Near(){
+	public void testGeoLocation_Tag_Near(){
 		String query = "{'events.loc' : {$near : [-90.0, 43.0]}}";
 		List<EObject> eo = store.query(TrackerPackage.Literals.TAG, query);
 		assertThat("Result must not be null.", eo, is(notNullValue()));
 		assertThat("Result must not be empty.",eo.isEmpty(), is(false));
-		assertThat("Result must be one tag", eo.size(), is(2));
+		assertThat("Result must be two tags", eo.size(), is(2));
 		assertThat("Result must be a Tag",eo.get(0), is(instanceOf(Tag.class)));
+	}
+	
+	
+	
+	/**
+	 * "{'loc' :[45, 45]}"
+	 */
+	@Test
+	public void testGeoLocations_Location_Specific(){
+		String query = "{'loc' :[-90.95674265545253, 43.47493314332049]}";
+		List<EObject> eo = store.query(AgriculturePackage.Literals.LOCATION, query);
+		assertThat("Result must not be null.", eo, is(notNullValue()));
+		assertThat("Result must not be empty.",eo.isEmpty(), is(false));
+		assertThat("Result must be one tag", eo.size(), is(1));
+		assertThat("Result must be a Tag",eo.get(0), is(instanceOf(Location.class)));
+	}
+	
+	/**
+	 *  
+	 *   -90" (W) long
+	 *    43"  (N) lat
+	 *    
+	 *    Will need special index
+	 *    db.Tag.ensureIndex( { 'events.loc' : "2d" } )
+	 *    
+	 *    Watch out the lat long needs to have decimal points
+	 */
+	public void testGeoLocation_Location_Near(){
+		String query = "{'loc' : {$near : [-90.0, 43.0]}}";
+		List<EObject> eo = store.query(AgriculturePackage.Literals.LOCATION, query);
+		assertThat("Result must not be null.", eo, is(notNullValue()));
+		assertThat("Result must not be empty.",eo.isEmpty(), is(false));
+		assertThat("Result must be one tag", eo.size(), is(2));
+		assertThat("Result must be a Tag",eo.get(0), is(instanceOf(Location.class)));
 	}
 	
 	private void countEvents(int count) throws UnknownHostException {

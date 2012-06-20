@@ -55,10 +55,12 @@ import com.mongodb.Mongo;
 import com.mongodb.MongoException;
 import com.verticon.agriculture.Agriculture;
 import com.verticon.agriculture.AgricultureFactory;
+import com.verticon.agriculture.AgriculturePackage;
 import com.verticon.agriculture.Location;
 import com.verticon.opengis.kml.Container;
 import com.verticon.opengis.kml.Folder;
 import com.verticon.opengis.kml.KmlFactory;
+import com.verticon.opengis.kml.KmlPackage;
 import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.osgi.metatype.OCD;
 import com.verticon.tracker.Animal;
@@ -231,11 +233,10 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
-		// logger.debug(
-		// bundleMarker,
-		// "waiting for declarative services activation startup method to finish");
 		startUpGate.await();// wait for startUp to finish
 		// System.out.println(this + ": startup and setUp finished.");
+		
+		//Setup the Mongo JSON query environment
 		new MongoQueryStandaloneSetupGenerated().createInjectorAndDoEMFRegistration();
 	}
 
@@ -315,8 +316,8 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 						TrackerPackage.Literals.TAG.getName(), db, "id_1"),
 				is(true));
 		assertThat(
-				"Must have index for geolocation",
-				TestUtils.hasIndexedIDAttribute(TrackerPackage.Literals.TAG.getName(), db, "events.loc_"),
+				"Must have index on Tag for geolocation",
+				TestUtils.hasIndexedIDAttribute(TrackerPackage.Literals.TAG.getName(), db, "events.loc_2d"),
 				is(true));
 		assertThat("No docs", coll.find().count(), is(0));
 
@@ -348,12 +349,33 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		assertThat("Admin collection must exist.",
 				db.collectionExists(AdminPackage.Literals.ADMIN.getName()),
 				is(true));
-//		assertThat(
-//				"Has index for Admin",
-//				TestUtils.hasIndexedIDAttribute(
-//						AdminPackage.Literals.ADMIN.getName(), db, "iD_1"),
-//				is(true));
 		assertThat("No docs", coll.find().count(), is(0));
+		
+		// Location
+		assertThat("Location collection must exist.",
+				db.collectionExists(AgriculturePackage.Literals.LOCATION.getName()),
+				is(true));
+		assertThat(
+				"Must have loc as an index in Location for geolocation",
+				TestUtils.hasIndexedIDAttribute(AgriculturePackage.Literals.LOCATION.getName(), db, "loc_2d"),
+				is(true));
+		coll = db.getCollection(AgriculturePackage.Literals.LOCATION.getName());
+		assertThat("No docs", coll.find().count(), is(0));
+				
+		
+		//Container
+		coll = db.getCollection(KmlPackage.eINSTANCE.getContainer().getName());
+		assertThat("Admin collection must exist.",
+				db.collectionExists(KmlPackage.eINSTANCE.getContainer().getName()),
+				is(true));
+		assertThat("No docs", coll.find().count(), is(0));
+		
+		//Placemark is now deprecated
+		assertThat("Placemark collection must NOT exist.",
+				db.collectionExists(KmlPackage.eINSTANCE.getPlacemark().getName()),
+				is(false));
+		
+		
 
 	}
 	
@@ -487,11 +509,31 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	public void testRegister_WithForiegnPremisesUri() {
 		Location location = AgricultureFactory.eINSTANCE.createLocation();
 		Folder folder = KmlFactory.eINSTANCE.createFolder();
+//		Placemark placemark = KmlFactory.eINSTANCE.createPlacemark();
+//		placemark.setId(Member.TWO.uri.replace(':', '.'));
+//		placemark.setName("name");
+//		placemark.setAddress("E6055 Cina Rd.");
+//		Point point = createPoint(placemark);
+//		List<String> coordinates = new ArrayList<String>();
+//		coordinates.add("-90.95674265545253,43.47493314332049,338.8866674272697");
+//		point.setCoordinates(coordinates);
 		Premises premises = TrackerFactory.eINSTANCE.createPremises();
 		premises.setUri(Member.TWO.uri);// Should be
 										// premises.setPremisesId(Member.ONE.pin);
 		location.setLivestock(premises);
 		location.setGeography(folder);
+		location.setName("test");
+		location.setDescription("test");
+		location.setStreet("test");
+		location.setCity("test");
+		location.setState("test");
+		location.setPostalCode("test");
+		location.setLongitude(111);
+		location.setLatitude(-111);
+		location.setAltitude(999);
+		location.setPhoneNumber("test");
+
+		
 		try {
 			store.register(location);
 			fail("Should throw an StoreAccessException.");
@@ -506,33 +548,47 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		}
 		
 	}
+	
+//	private Point createPoint(Placemark placemark) {
+//		EStructuralFeature documentRootPointFeature = KmlPackage.eINSTANCE
+//				.getDocumentRoot_Point();
+//		Point point = KmlFactory.eINSTANCE.createPoint();
+//
+//		EStructuralFeature f = KmlPackage.eINSTANCE
+//				.getPlacemark_AbstractGeometryGroupGroup();
+//
+//		placemark.getAbstractGeometryGroupGroup().add(f,
+//				FeatureMapUtil.createEntry(documentRootPointFeature, point));
+//		return point;
+//
+//	}
 
-	@Test
-	public void testRegister_WithNullGeography() {
-		Location location = AgricultureFactory.eINSTANCE.createLocation();
-		Premises premises = TrackerFactory.eINSTANCE.createPremises();
-		premises.setUri(Member.ONE.uri);
-		location.setLivestock(premises);
-		try {
-			store.register(location);
-			fail("Should throw an validation exception.");
-		} catch (ValidationException e) {
-			assertThat(
-					"should have a error for geography, but got: "
-							+ e.getMessage(),
-					e.getMessage()
-							.contains(
-									"The required feature 'geography' of 'com.verticon.agriculture.impl.LocationImpl"),
-					is(true));
-			assertThat("should have a error for geography", e.getMessage()
-					.contains("must be set"), is(true));
-		} catch (IOException e) {
-			logger.error(bundleMarker, this + ": failed test", e);
-			fail("Should throw an validation exception, but was: "
-					+ e.getMessage());
-		}
-
-	}
+//	@Test
+//	public void testRegister_WithNullPlace() {
+//		Location location = AgricultureFactory.eINSTANCE.createLocation();
+//		Premises premises = TrackerFactory.eINSTANCE.createPremises();
+//		premises.setUri(Member.ONE.uri);
+//		location.setLivestock(premises);
+//		try {
+//			store.register(location);
+//			fail("Should throw an validation exception.");
+//		} catch (ValidationException e) {
+//			assertThat(
+//					"should have a error for geography, but got: "
+//							+ e.getMessage(),
+//					e.getMessage()
+//							.contains(
+//									"Location is not valid. The required feature 'place' of 'com.verticon.agriculture.impl.LocationImpl"),
+//					is(true));
+//			assertThat("should have a error for geography", e.getMessage()
+//					.contains("must be set"), is(true));
+//		} catch (IOException e) {
+//			logger.error(bundleMarker, this + ": failed test", e);
+//			fail("Should throw an validation exception, but was: "
+//					+ e.getMessage());
+//		}
+//
+//	}
 	@Test
 	public void testValidation_Uri() throws InterruptedException{
 		Premises premises = TrackerFactory.eINSTANCE.createPremises();
@@ -623,11 +679,23 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		Container container = location.getGeography();
 		assertThat("Container cannot be null.", container, is(notNullValue()));
 		
+
+		assertThat("Logitude is -90.95674265545253,43.47493314332049,338.8866674272697",location.getLongitude(),
+				is(-90.95674265545253));
+		
+		assertThat("Latitude is 43.47493314332049",location.getLatitude(),
+				is(43.47493314332049));
+		
+		assertThat("Altitude is 338.8866674272697",location.getAltitude(),
+				is(338.8866674272697));
+		
+
 		logger.debug(bundleMarker, "First event Date={}; DateKey={}; DateTime={}",new String[]{premises.eventHistory().get(0).getDate(),
 				premises.eventHistory().get(0).getDateKey(),premises.eventHistory().get(0).getDateTime().toString()});
 		URI locationURI = location.eResource().getURI();
 		URI premisesURI = premises.eResource().getURI();
 		URI containerURI = location.getGeography().eResource().getURI();
+//		URI placemarkURI = location.getPlace().eResource().getURI();
 		URI firstAnimalURI = premises.getAnimals().get(0).eResource().getURI();
 		
 		store.register(location);
@@ -635,6 +703,8 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		assertThat("Must not have changed the uri of the premises",premises.eResource().getURI(), is(premisesURI) );
 		assertThat("Must not have changed the uri of the container",location.getGeography().eResource().getURI(), 
 				is(containerURI) );
+//		assertThat("Must not have changed the uri of the placemark",location.getPlace().eResource().getURI(), 
+//				is(placemarkURI) );
 		assertThat("Must not have changed the uri of the first animal",premises.getAnimals().get(0).eResource().getURI(), 
 				is(firstAnimalURI) );
 		assertThat(
@@ -646,7 +716,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		assertThat("Premises must have 7 animalsl",
 				premises.getAnimals().size(), is(7));
 	}
-	
+
 	@Test
 	public void testRecordAnimals() throws IOException {
 		
@@ -795,7 +865,17 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 				startsWith(MONGO_LOCALHOST+"/tracker/Location"));
 		assertThat("Not a valid location", TestUtils.isValidObject(location),
 				is(true));
+		
+		assertThat("Logitude is -90.95674265545253,43.47493314332049,338.8866674272697",location.getLongitude(),
+				is(-90.95674265545253));
+		
+		assertThat("Latitude is 43.47493314332049",location.getLatitude(),
+				is(43.47493314332049));
+		
+		assertThat("Altitude is 338.8866674272697",location.getAltitude(),
+				is(338.8866674272697));
 
+		//Livestock
 		Premises premises = location.getLivestock();
 		assertThat("Not in mongo localhost tracker Premises collection", premises.eResource().getURI().toString(),
 				startsWith(MONGO_LOCALHOST+"/tracker/Premises"));
@@ -809,6 +889,8 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 				is(notNullValue()));
 		assertThat("Premises should have no animalsl",
 				premises.getAnimals().size(), is(0));
+		
+		//Geography
 		Container container = location.getGeography();
 		assertThat("Could not retrieve the container", container,
 				is(notNullValue()));
@@ -820,6 +902,24 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 				is(notNullValue()));
 		assertThat("Premises URI is null - " + premises, premises.getUri(),
 				is(notNullValue()));
+		
+		
+//		//Placemark
+//		Placemark placemark = location.getPlace();
+//		assertThat("Could not retrieve the placemark", placemark,
+//				is(notNullValue()));
+//		assertThat("Not in mongo localhost tracker placemark ", placemark.eResource().getURI().toString(),
+//				startsWith(MONGO_LOCALHOST+"/tracker/Placemark"));
+//		assertThat("Not a valid placemark", TestUtils.isValidObject(placemark),
+//				is(true));
+//		assertThat("Geometry must not be null",placemark.getAbstractGeometryGroup(), is(notNullValue()));
+//		assertThat("Geometry must be a Point",placemark.getAbstractGeometryGroup(), is(instanceOf(Point.class)));
+//		Point point = (Point)placemark.getAbstractGeometryGroup();
+//
+//		String coordinates = getCoordinates(point);
+//		assertThat("Coordinates are -90.95674265545253,43.47493314332049,338.8866674272697",coordinates,
+//				is("-90.95674265545253,43.47493314332049,338.8866674272697"));
+		
 	}
 
 	/**
@@ -838,6 +938,14 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 						.eResource())));
 		assertThat("Not in mongo localhost tracker Container collection", location.getGeography().eResource().getURI().toString(),
 				startsWith(MONGO_LOCALHOST+"/tracker/Container"));
+		
+//		// Placemark
+//		assertThat("Placemark should be a proxy to Location",
+//						location.eResource(), is(not(location.getPlace()
+//								.eResource())));
+//				assertThat("Not in mongo localhost tracker Placemark collection", 
+//						location.getPlace().eResource().getURI().toString(),
+//						startsWith(MONGO_LOCALHOST+"/tracker/Placemark"));
 
 		// Premises
 		Premises premises = location.getLivestock();

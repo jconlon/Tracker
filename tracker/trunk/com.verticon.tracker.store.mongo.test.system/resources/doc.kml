@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml:kml xmlns:atom="http://www.w3.org/2005/Atom" xmlns:kml="http://www.opengis.net/kml/2.2">
+<kml:kml xmlns:atom="http://www.w3.org/2005/Atom" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
   <kml:Document id="Horn">
     <kml:name>Hornby Hollow Region</kml:name>
     <atom:author>
@@ -177,23 +177,33 @@
           </kml:outerBoundaryIs>
         </kml:Polygon>
       </kml:Placemark>
-      <kml:Placemark>
+      <kml:Placemark id="urn.pin.H89234X">
         <kml:name>Diehl's Farm</kml:name>
+        <kml:address>E6055 Cina Rd. Viroqua, WI 54665</kml:address>
+        <xal:AddressDetails>
+          <xal:Country>
+            <xal:CountryName>United States</xal:CountryName>
+          </xal:Country>
+          <xal:Locality>
+            <xal:LocalityName>Wisconsin</xal:LocalityName>
+            <xal:DependentLocality>
+              <xal:DependentLocalityName>Viroqua</xal:DependentLocalityName>
+            </xal:DependentLocality>
+            <xal:PostalCode>
+              <xal:PostalCodeNumber>54665</xal:PostalCodeNumber>
+            </xal:PostalCode>
+          </xal:Locality>
+          <xal:Thoroughfare>
+            <xal:ThoroughfareName>E6055 Cina Rd.</xal:ThoroughfareName>
+          </xal:Thoroughfare>
+        </xal:AddressDetails>
+        <kml:phoneNumber>606-1292</kml:phoneNumber>
         <kml:description>This is a place for the description of the placemark.</kml:description>
         <kml:styleUrl>#highlight_the_state</kml:styleUrl>
-        <kml:MultiGeometry>
-          <kml:Polygon>
-            <kml:outerBoundaryIs>
-              <kml:LinearRing>
-                <kml:coordinates>         -90.96293191127666,43.48105460142975,0 -90.96289591656407,43.46684639974686,0 -90.95304397778821,43.46678039274798,0 -90.95295947135202,43.47405613654796,0 -90.94808183437202,43.47413338110822,0 -90.94826145846801,43.481225767439,0 -90.94895640352394,43.48122368362838,0 -90.96293191127666,43.48105460142975,0</kml:coordinates>
-              </kml:LinearRing>
-            </kml:outerBoundaryIs>
-          </kml:Polygon>
-          <kml:Point>
-            <kml:altitudeMode>absolute</kml:altitudeMode>
-            <kml:coordinates>-90.95674265545253,43.47493314332049,338.8866674272697</kml:coordinates>
-          </kml:Point>
-        </kml:MultiGeometry>
+        <kml:Point>
+          <kml:altitudeMode>absolute</kml:altitudeMode>
+          <kml:coordinates>           -90.95674265545253,43.47493314332049,338.8866674272697</kml:coordinates>
+        </kml:Point>
       </kml:Placemark>
       <kml:Placemark>
         <kml:name>Bull Pen</kml:name>
