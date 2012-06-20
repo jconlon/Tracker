@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MongoEMF ODA Tests
+Bundle-SymbolicName: com.verticon.mongo.emf.oda.tests
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.junit
+Import-Package: com.google.common.collect;version="11.0.1",
+ com.verticon.mongo.emf.oda.impl,
+ org.eclipse.datatools.connectivity.oda,
+ org.eclipse.datatools.connectivity.oda.spec,
+ org.eclipse.datatools.connectivity.oda.spec.util,
+ org.eclipse.emf.oda.ecore,
+ org.eclipse.emf.oda.ecore.impl,
+ org.json,
+ org.osgi.framework;version="1.6.0"
