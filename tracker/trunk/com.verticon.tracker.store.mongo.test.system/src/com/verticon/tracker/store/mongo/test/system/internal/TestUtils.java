@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
 
 import com.google.common.base.Strings;
@@ -42,6 +43,7 @@ import com.mongodb.DBObject;
 import com.verticon.agriculture.AgriculturePackage;
 import com.verticon.agriculture.util.AgricultureResourceFactoryImpl;
 import com.verticon.opengis.kml.KmlPackage;
+import com.verticon.opengis.kml.Point;
 import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
@@ -51,6 +53,7 @@ import com.verticon.tracker.util.TrackerResourceFactoryImpl;
 public class TestUtils {
 
 	static boolean isValidObject(EObject eObject) {
+		EcoreUtil.resolveAll(eObject);
 		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject);
 		if (diagnostic.getSeverity() == Diagnostic.ERROR
 				|| diagnostic.getSeverity() == Diagnostic.WARNING) {
@@ -261,7 +264,17 @@ public class TestUtils {
 				.remove(new BasicDBObject());
 		db.getCollection(KmlPackage.eINSTANCE.getContainer().getName()).remove(
 				new BasicDBObject());
-	
+		db.getCollection(KmlPackage.eINSTANCE.getPlacemark().getName()).remove(
+				new BasicDBObject());
 		removeLastModificationTimesOnAllResources(db);
+	}
+
+	static String getCoordinates(Point point) {
+		StringBuffer buff = new StringBuffer();
+		for (String s : point.getCoordinates()) {
+		   buff.append(s.trim());
+		}
+		String coordinates = buff.toString();
+		return coordinates;
 	}
 }

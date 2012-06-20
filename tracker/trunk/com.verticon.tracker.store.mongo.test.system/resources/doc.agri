@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ag:Agriculture xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ag="http://www.verticon.com/agriculture/1.0/ag" xmlns:kml="http://www.opengis.net/kml/2.2" geography="kml:DocumentType doc.kml#Horn" association="Hornby Cattlemen Association">
-  <location geography="kml:FolderType doc.kml#Dan" livestock="example.premises#urn:pin:H89234X" />
+  <location geography="kml:FolderType doc.kml#Dan" livestock="example.premises#urn:pin:H89234X" name="TestLocation" description="A location for testing" phoneNumber="608-667-8926" street="E6055 Cina Rd." city="Viroqua" state="WI" postalCode="54665" longitude="-90.95674265545253" latitude="43.47493314332049" altitude="338.8866674272697"/>
 </ag:Agriculture>
