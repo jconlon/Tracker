@@ -48,7 +48,7 @@ import com.verticon.agriculture.util.AgricultureResourceFactoryImpl;
  * map of Premises uri keys to GeoLocations for resolving Location Service
  * lookups.
  * 
- * @see GeoLocation
+ * @see IGeoLocation
  * @see AgricultureNature
  * @author jconlon
  * 
