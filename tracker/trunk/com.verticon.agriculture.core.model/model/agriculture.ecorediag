@@ -18,7 +18,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_2cdAMUNVEeCHcKrYB_mDkw" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="agriculture.ecore#//Agriculture"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2cdAMkNVEeCHcKrYB_mDkw" x="336" y="132"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2cdAMkNVEeCHcKrYB_mDkw" x="252" y="108"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_4SiYEENVEeCHcKrYB_mDkw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_4SiYE0NVEeCHcKrYB_mDkw" type="4001"/>
@@ -27,14 +27,62 @@
         <element xmi:type="ecore:EAttribute" href="agriculture.ecore#//Location/uri"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_PYaqgUOCEeCHcKrYB_mDkw"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_tXOR4bleEeG6xOA8B_ygZw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="agriculture.ecore#//Location/name"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_tXO48LleEeG6xOA8B_ygZw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VDLDoLoYEeGMH4lPKuEWkg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="agriculture.ecore#//Location/description"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VDLDoboYEeGMH4lPKuEWkg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VDMRwLoYEeGMH4lPKuEWkg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="agriculture.ecore#//Location/phoneNumber"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VDMRwboYEeGMH4lPKuEWkg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VDMRwroYEeGMH4lPKuEWkg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="agriculture.ecore#//Location/street"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VDMRw7oYEeGMH4lPKuEWkg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VDM40LoYEeGMH4lPKuEWkg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="agriculture.ecore#//Location/city"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VDM40boYEeGMH4lPKuEWkg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VDM40roYEeGMH4lPKuEWkg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="agriculture.ecore#//Location/state"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VDM407oYEeGMH4lPKuEWkg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VDNf4LoYEeGMH4lPKuEWkg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="agriculture.ecore#//Location/postalCode"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VDNf4boYEeGMH4lPKuEWkg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VDNf4roYEeGMH4lPKuEWkg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="agriculture.ecore#//Location/country"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VDNf47oYEeGMH4lPKuEWkg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VDNf5LoYEeGMH4lPKuEWkg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="agriculture.ecore#//Location/longitude"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VDNf5boYEeGMH4lPKuEWkg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VDOG8LoYEeGMH4lPKuEWkg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="agriculture.ecore#//Location/latitude"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VDOG8boYEeGMH4lPKuEWkg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VDOG8roYEeGMH4lPKuEWkg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="agriculture.ecore#//Location/altitude"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VDOG87oYEeGMH4lPKuEWkg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VDOuALoYEeGMH4lPKuEWkg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="agriculture.ecore#//Location/altitudeMode"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VDOuAboYEeGMH4lPKuEWkg"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_4Si_IUNVEeCHcKrYB_mDkw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_4Si_IkNVEeCHcKrYB_mDkw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_4Si_I0NVEeCHcKrYB_mDkw"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_4Si_JENVEeCHcKrYB_mDkw" type="5002">
-      <children xmi:type="notation:Node" xmi:id="_LE97EbcYEeG5m768_l1-HQ" type="2002">
-        <element xmi:type="ecore:EOperation" href="agriculture.ecore#//Location/getLongitude"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_LE-iILcYEeG5m768_l1-HQ"/>
+      <children xmi:type="notation:Node" xmi:id="_1U0mMbsBEeGzj55ox13POw" type="2002">
+        <element xmi:type="ecore:EOperation" href="agriculture.ecore#//Location/getAddress"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1U0mMrsBEeGzj55ox13POw"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_4Si_JUNVEeCHcKrYB_mDkw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_4Si_JkNVEeCHcKrYB_mDkw"/>
@@ -42,7 +90,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_4SiYEUNVEeCHcKrYB_mDkw" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="agriculture.ecore#//Location"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4SiYEkNVEeCHcKrYB_mDkw" x="360" y="300"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4SiYEkNVEeCHcKrYB_mDkw" x="228" y="216" height="123"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_gJOdUGIjEeCy_ZHdCa9Nzg" type="Note" fontName="Sans" description="livestock EReference to Premises" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
     <children xmi:type="notation:BasicDecorationNode" xmi:id="_gJPEYGIjEeCy_ZHdCa9Nzg" type="DiagramName">
@@ -111,6 +159,29 @@
     <styles xmi:type="notation:LineTypeStyle" xmi:id="_2vfFcrNCEeG0scloyyUQZg"/>
     <element xsi:nil="true"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2vfFc7NCEeG0scloyyUQZg" x="564" y="312" width="161"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_ZdHNcLoaEeGMH4lPKuEWkg" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_ZdKQwLoaEeGMH4lPKuEWkg" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_ZdK30LoaEeGMH4lPKuEWkg" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_eEdMALoaEeGMH4lPKuEWkg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="agriculture.ecore#//AltitudeMode/absolute"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_eEdMAboaEeGMH4lPKuEWkg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_kpDhcLoaEeGMH4lPKuEWkg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="agriculture.ecore#//AltitudeMode/clampToGround"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_kpDhcboaEeGMH4lPKuEWkg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ovAqMLoaEeGMH4lPKuEWkg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="agriculture.ecore#//AltitudeMode/relativeToGround"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ovAqMboaEeGMH4lPKuEWkg"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_ZdK30boaEeGMH4lPKuEWkg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ZdK30roaEeGMH4lPKuEWkg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ZdK307oaEeGMH4lPKuEWkg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_ZdHNcboaEeGMH4lPKuEWkg" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="agriculture.ecore#//AltitudeMode"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZdHNcroaEeGMH4lPKuEWkg" x="60" y="155"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_vyvhQUNVEeCHcKrYB_mDkw"/>
   <element xmi:type="ecore:EPackage" href="agriculture.ecore#/"/>

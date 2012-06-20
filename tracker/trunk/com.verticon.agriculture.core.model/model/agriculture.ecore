@@ -11,11 +11,37 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Location">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="geography" lowerBound="1"
-        eType="ecore:EClass ../../com.verticon.opengis.kml.core.model/model/kml.ecore#//Container"/>
+    <eOperations name="getAddress" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getCoordinates" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="geography" eType="ecore:EClass ../../com.verticon.opengis.kml.core.model/model/kml.ecore#//Container"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="livestock" eType="ecore:EClass ../../com.verticon.tracker/model/tracker.ecore#//Premises"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="place" lowerBound="1" eType="ecore:EClass ../../com.verticon.opengis.kml.core.model/model/kml.ecore#//Placemark"/>
+        changeable="false" volatile="true" transient="true" derived="true" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="phoneNumber" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="street" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="city" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="postalCode" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="country" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="United States"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="longitude" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="latitude" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="altitude" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="altitudeMode" lowerBound="1"
+        eType="#//AltitudeMode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AltitudeMode">
+    <eLiterals name="absolute"/>
+    <eLiterals name="clampToGround" value="1"/>
+    <eLiterals name="relativeToGround" value="2"/>
   </eClassifiers>
 </ecore:EPackage>
