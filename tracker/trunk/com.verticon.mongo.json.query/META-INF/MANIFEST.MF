@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Mongo JSON Query Language
+Bundle-Vendor: Verticon, Inc.
+Bundle-Version: 1.0.0
+Bundle-SymbolicName: com.verticon.mongo.json.query; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
+ org.eclipse.xtext.generator;resolution:=optional,
+ org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.eclipse.emf.mwe.utils;resolution:=optional,
+ org.eclipse.emf.mwe2.launch;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types,
+ org.slf4j.log4j;bundle-version="1.5.11",
+ org.slf4j.api;bundle-version="1.5.11"
+Import-Package: org.apache.commons.logging,
+ org.eclipse.xtend2.lib,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.xtend2.lib,
+ org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.json,
+ org.json.services,
+ org.json.mongoQuery,
+ org.json.mongoQuery.impl,
+ org.json.mongoQuery.util,
+ org.json.serializer,
+ org.json.parser.antlr,
+ org.json.parser.antlr.internal,
+ org.json.validation,
+ org.json.scoping,
+ org.json.generator,
+ org.json.formatting

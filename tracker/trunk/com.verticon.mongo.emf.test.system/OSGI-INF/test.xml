@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+    activate="startup" name="com.verticon.mongo.emf.test.system.test">
+   <implementation 
+    class="com.verticon.mongo.emf.test.system.Test_MongoEMF_Minimum_Services"/>
+   <reference bind="setQueryEngine" cardinality="1..1" interface="org.eclipselabs.mongo.emf.IQueryEngine" name="IQueryEngine" policy="static" target="(type=json)"/>
+   <reference bind="setDBObjectBuilderFactory" cardinality="1..1" interface="org.eclipselabs.mongo.emf.IDBObjectBuilderFactory" name="IDBObjectBuilderFactory" policy="static"/>
+   <reference bind="setEObjectBuilderFactory" cardinality="1..1" interface="org.eclipselabs.mongo.emf.IEObjectBuilderFactory" name="IEObjectBuilderFactory" policy="static"/>
+   <reference bind="setInputStreamFactory" cardinality="1..1" interface="org.eclipselabs.mongo.emf.IInputStreamFactory" name="IInputStreamFactory" policy="static"/>
+   <reference bind="setOutputStreamFactory" cardinality="1..1" interface="org.eclipselabs.mongo.emf.IOutputStreamFactory" name="IOutputStreamFactory" policy="static"/>
+   <reference bind="setResourceSetFactory" cardinality="1..1" interface="com.verticon.mongo.emf.api.IResourceSetFactory" name="IResourceSetFactory" policy="static"/>
+</scr:component>

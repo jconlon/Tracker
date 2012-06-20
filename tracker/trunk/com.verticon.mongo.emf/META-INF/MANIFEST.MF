@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Mongon Emf Supplemental
+Bundle-SymbolicName: com.verticon.mongo.emf
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Service-Component: OSGI-INF/*.xml
+Export-Package: com.verticon.mongo.emf.api;
+  uses:="org.eclipse.emf.ecore.resource,
+   org.eclipse.emf.common.util,
+   com.mongodb,
+   org.eclipselabs.mongo"
+Import-Package: com.google.common.base;version="11.0.1",
+ com.google.common.collect;version="11.0.1",
+ com.mongodb,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.resource.impl,
+ org.eclipse.emf.ecore.util,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipselabs.mongo,
+ org.eclipselabs.mongo.emf,
+ org.eclipselabs.mongo.emf.ext
+Bundle-ActivationPolicy: lazy
