@@ -24,88 +24,96 @@ import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.store.admin.AdminPackage;
 
 /**
+ * 
  * @author jconlon
  * 
  */
 public enum Element {
 
-	LOCATION(null, AgriculturePackage.Literals.LOCATION),
+	LOCATION(null, AgriculturePackage.Literals.LOCATION,"loc"),
 	//
-	CONTAINER("id", KmlPackage.eINSTANCE.getContainer()),
+	CONTAINER("id", KmlPackage.eINSTANCE.getContainer(), null),
 	//
-	PREMISES("uri", TrackerPackage.Literals.PREMISES),
+//	PLACEMARK("id", KmlPackage.eINSTANCE.getPlacemark(), null),
 	//
-	ANIMAL("id", TrackerPackage.Literals.ANIMAL),
+	PREMISES("uri", TrackerPackage.Literals.PREMISES, null),
 	//
-	TAG("id", TrackerPackage.Literals.TAG),
+	ANIMAL("id", TrackerPackage.Literals.ANIMAL, null),
 	//
-	OCD("iD", MetatypePackage.Literals.OCD),
+	TAG("id", TrackerPackage.Literals.TAG, "events.loc"),
 	//
-	ADMIN(null, AdminPackage.Literals.ADMIN);
+	OCD("iD", MetatypePackage.Literals.OCD, null),
+	//
+	ADMIN(null, AdminPackage.Literals.ADMIN, null);
 
 	// private final String indexName;
-	private final String key;
+	private final String indexKey;
 	private final String colName;
+	private final String geoIndexKey;
 	final EClass eClass;
 	private static final boolean IS_NATIVE_JSON = true;
 
-	Element(String index, EClass eClass) {
-		this.key = index;
+	Element(String index, EClass eClass, String geoIndex) {
+		this.indexKey = index;
 		this.eClass = eClass;
 		this.colName = eClass.getName();
+		this.geoIndexKey=geoIndex;
 	}
 
 	String getIndexKey() {
-		return key;
+		return indexKey;
 	}
 
 	String getCollectionName() {
 		return colName;
 	}
 
-	void ensureIndexForIDAttribute(DB db) {
-		if (!hasIndexedIDAttribute(db)) {
-			ensureIndex(db);
-		}
-	}
+//	void ensureIndexForIDAttribute(DB db) {
+////		if (!hasIndexedIDAttribute(db)) {
+//			ensureIndex(db);
+////		}
+//	}
 	//FIXME for alternate query languages
 	String getQuery(String id) {
 		String query;
 		if(IS_NATIVE_JSON){
-			query= key==null?null:"{'"+key + "' : '" + id + "'}";
+			query= indexKey==null?null:"{'"+indexKey + "' : '" + id + "'}";
 		}else{
 			//Simple query
-			query= key==null?null:key + "=='" + id + "'";
+			query= indexKey==null?null:indexKey + "=='" + id + "'";
 		}
 		return query;
 		
 	}
 
-	private boolean hasIndexedIDAttribute(DB db) {
-		if(key==null){
-			return false;
-		}
+//	private boolean hasIndexedIDAttribute(DB db) {
+//		if(indexKey==null){
+//			return false;
+//		}
+//
+//		for (DBObject dbObject : db.getCollection(getCollectionName())
+//				.getIndexInfo()) {
+//			if (dbObject.containsField("name")
+//					&& dbObject.get("name").equals(indexKey + "_1")) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 
-		for (DBObject dbObject : db.getCollection(getCollectionName())
-				.getIndexInfo()) {
-			if (dbObject.containsField("name")
-					&& dbObject.get("name").equals(key + "_1")) {
-				return true;
-			}
+	 void ensureIndex(DB db) {
+		if(indexKey!=null){
+			DBCollection coll = db.getCollection(colName);
+			// create index on "id",ascending
+			DBObject dbObject = new BasicDBObject(indexKey, 1);
+			// unique,true
+			coll.ensureIndex(dbObject, null, true);
 		}
-		return false;
-	}
-
-	private void ensureIndex(DB db) {
-		if(key==null){
-			return;
+		if(geoIndexKey !=null){
+			DBCollection coll = db.getCollection(colName);
+			DBObject dbObject = new BasicDBObject(geoIndexKey, "2d");
+			coll.ensureIndex(dbObject, null, true);
 		}
-		DBCollection coll = db.getCollection(getCollectionName());
-		// create index on "id",ascending
-		DBObject dbObject = new BasicDBObject(key, 1);
-		// unique,true
-		coll.ensureIndex(dbObject, null, true);
-		return;
 	}
 
 }

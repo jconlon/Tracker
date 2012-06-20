@@ -381,11 +381,15 @@ public class Utils {
 	
 	}
 	
-	 static void ensureGeoLocationIndex(DB db){
-		DBCollection coll = db.getCollection(TrackerPackage.Literals.TAG.getName());
-		DBObject dbObject = new BasicDBObject("events.loc", "2d");
-		coll.ensureIndex(dbObject, null, true);
-	}
+//	 static void ensureGeoLocationIndex(DB db){
+//		DBCollection coll = db.getCollection(Element.TAG.getCollectionName());
+//		DBObject dbObject = new BasicDBObject("events.loc", "2d");
+//		coll.ensureIndex(dbObject, null, true);
+//		
+//		coll = db.getCollection(Element.LOCATION.getCollectionName());
+//	    dbObject = new BasicDBObject("loc", "2d");
+//		coll.ensureIndex(dbObject, null, true);
+//	}
 
 	
 	
