@@ -46,7 +46,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipselabs.emf.query.Result;
+import org.eclipselabs.mongo.emf.ext.ECollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -268,7 +268,7 @@ public class TrackerStore implements ITrackerStore {
 
 	@Override
 	public EList<EObject> query(EClass eClass, String query) {
-		Result result = resourceFactory.query(eClass, query);
+		ECollection result = resourceFactory.query(eClass, query);
 		return result.getValues();
 	}
 
@@ -317,7 +317,7 @@ public class TrackerStore implements ITrackerStore {
 		Location targetLocation = EcoreUtil.copy(sourceLocation);
 		resourceFactory.add(targetLocation, Element.LOCATION);
 
-		// KML
+		// KML Container
 		Container targetGeography = EcoreUtil.copy(sourceLocation
 				.getGeography());
 		targetLocation.setGeography(targetGeography);
@@ -327,6 +327,18 @@ public class TrackerStore implements ITrackerStore {
 		recordChanges(targetGeography,
 				persistedLocation != null ? persistedLocation.getGeography()
 						: null);
+		
+//		// KML Placemark
+//		Placemark targetPlacemark = EcoreUtil.copy(sourceLocation
+//				.getPlace());
+//		targetLocation.setPlace(targetPlacemark);
+//		resourceFactory.add(targetPlacemark, Element.PLACEMARK);
+//		assert (targetPlacemark.eResource().getURI().toString()
+//				.startsWith("mongo://"));
+//		recordChanges(targetPlacemark,
+//				persistedLocation != null ? persistedLocation.getPlace()
+//						: null);
+//				
 		// Premises
 		Premises targetPremises = EcoreUtil.copy(sourceLocation.getLivestock());
 		targetLocation.setLivestock(targetPremises);
@@ -417,6 +429,20 @@ public class TrackerStore implements ITrackerStore {
 		resourceFactory.save(copiedContainer, CONTAINER);
 		return true;
 	}
+	
+//	private boolean recordChanges(Placemark copiedPlacemark,
+//			Placemark persistedPlacemark) throws IOException {
+//		resourceFactory.add(copiedPlacemark, PLACEMARK);
+//		if (persistedPlacemark != null) {
+//			copiedPlacemark.eResource().setURI(
+//					persistedPlacemark.eResource().getURI());
+//
+//		}
+//		assert (copiedPlacemark.eResource().getURI().toString()
+//				.startsWith("mongo://"));
+//		resourceFactory.save(copiedPlacemark, PLACEMARK);
+//		return true;
+//	}
 
 	/**
 	 * Animals need to be saved to the Animal collection

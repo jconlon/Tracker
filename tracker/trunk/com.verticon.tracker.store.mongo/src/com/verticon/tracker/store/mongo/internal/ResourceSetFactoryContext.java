@@ -22,9 +22,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipselabs.emf.query.Result;
 import org.eclipselabs.mongo.emf.MongoURIHandlerImpl;
-
+import org.eclipselabs.mongo.emf.ext.ECollection;
 import com.google.common.collect.ImmutableMap;
 import com.mongodb.WriteConcern;
 import com.verticon.agriculture.Location;
@@ -73,13 +72,13 @@ public class ResourceSetFactoryContext {
 		return result.isEmpty() ? null : result.get(0);
 	}
 
-	Result query(EClass eclass, String query) {
+	ECollection query(EClass eclass, String query) {
 		checkNotNull(eclass);
 		checkNotNull(query);
 
 		URI uri = createQueryURI(eclass, query);
 		Resource resource = getResourcSet().getResource(uri, true);
-		return (Result) resource.getContents().get(0);
+		return (ECollection) resource.getContents().get(0);
 	}
 
 	/**
@@ -136,10 +135,10 @@ public class ResourceSetFactoryContext {
 		return resourceSetFactoryDelegate.createResourceSet(mongoLocator);
 	}
 
-	private Result internalQuery(Element element, String id) {
+	private ECollection internalQuery(Element element, String id) {
 		URI uri = createQueryURI(element, element.getQuery(id));
 		Resource resource = getResourcSet().getResource(uri, true);
-		return (Result) resource.getContents().get(0);
+		return (ECollection) resource.getContents().get(0);
 	}
 
 	private Resource createResource(EObject eObject, Element element) {
