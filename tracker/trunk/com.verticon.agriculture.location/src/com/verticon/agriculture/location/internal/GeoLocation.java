@@ -27,14 +27,14 @@ import com.vividsolutions.jts.geom.Point;
  * @author jconlon
  * 
  */
-public class GeoLocation {
+public class GeoLocation implements IGeoLocation {
 
 	private final String id;
 	private final URI agriDocResourceUri;
 	private final String address;
 	private final String name;
 	private final ImmutableList<BoundedLocation> boundedLocations;
-	private final ImmutableSet<String> associatedUris;
+	private final ImmutableSet<String> associatedResouceUris;
 
 	/**
 	 * 
@@ -48,46 +48,51 @@ public class GeoLocation {
 	 *            inside this GeoLocation
 	 * @param name
 	 *            of location
+	 *            
+	 * @param associatedResouceUris
+	 * 			  set of URIS of the Premises and KML Container resources
 	 */
 	GeoLocation(String id, URI agriDocResourceUri, String address,
 			ImmutableList<BoundedLocation> subLocations, String name,
-			ImmutableSet<String> associatedUris) {
+			ImmutableSet<String> associatedResourceUris) {
 		super();
 		this.id = id;
 		this.agriDocResourceUri = agriDocResourceUri;
 		this.address = address;
 		this.boundedLocations = subLocations;
 		this.name = name;
-		this.associatedUris = associatedUris;
+		this.associatedResouceUris = associatedResourceUris;
 	}
 
-	/**
-	 * @return the id
+	/* (non-Javadoc)
+	 * @see com.verticon.agriculture.location.internal.IGeoLocation#getID()
 	 */
-	String getID() {
+	@Override
+	public String getID() {
 		return id;
 	}
 
-	/**
-	 * @return the resourceUri
+	/* (non-Javadoc)
+	 * @see com.verticon.agriculture.location.internal.IGeoLocation#getAgriDocResourceUri()
 	 */
-	URI getAgriDocResourceUri() {
+	@Override
+	public URI getAgriDocResourceUri() {
 		return agriDocResourceUri;
 	}
 
-	/**
-	 * @return the address
+	/* (non-Javadoc)
+	 * @see com.verticon.agriculture.location.internal.IGeoLocation#getAddress()
 	 */
-	String getAddress() {
+	@Override
+	public String getAddress() {
 		return address;
 	}
 
-	/**
-	 * 
-	 * @param point
-	 * @return name of the smallest polygon containing the point
+	/* (non-Javadoc)
+	 * @see com.verticon.agriculture.location.internal.IGeoLocation#locate(com.vividsolutions.jts.geom.Point)
 	 */
-	String locate(Point point) {
+	@Override
+	public String locate(Point point) {
 		String result = null;
 		BoundedLocation currentPolygon = null;
 		for (BoundedLocation polygon : boundedLocations) {
@@ -105,11 +110,11 @@ public class GeoLocation {
 		return result;
 	}
 
-	/**
-	 * 
-	 * @return the names of all the polygons
+	/* (non-Javadoc)
+	 * @see com.verticon.agriculture.location.internal.IGeoLocation#polygonNames()
 	 */
-	Set<String> polygonNames() {
+	@Override
+	public Set<String> polygonNames() {
 		Set<String> result = newHashSet();
 		for (BoundedLocation polygon : boundedLocations) {
 			result.add(polygon.getName());
@@ -117,12 +122,20 @@ public class GeoLocation {
 		return result;
 	}
 
-	String getName() {
+	/* (non-Javadoc)
+	 * @see com.verticon.agriculture.location.internal.IGeoLocation#getName()
+	 */
+	@Override
+	public String getName() {
 		return name;
 	}
 
-	boolean hasUri(String uri) {
-		return associatedUris.contains(uri);
+	/* (non-Javadoc)
+	 * @see com.verticon.agriculture.location.internal.IGeoLocation#hasUri(java.lang.String)
+	 */
+	@Override
+	public boolean hasUri(String uri) {
+		return associatedResouceUris.contains(uri);
 	}
 
 	/*
@@ -136,7 +149,7 @@ public class GeoLocation {
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result
-				+ ((associatedUris == null) ? 0 : associatedUris.hashCode());
+				+ ((associatedResouceUris == null) ? 0 : associatedResouceUris.hashCode());
 		result = prime
 				* result
 				+ ((boundedLocations == null) ? 0 : boundedLocations.hashCode());
@@ -168,10 +181,10 @@ public class GeoLocation {
 				return false;
 		} else if (!address.equals(other.address))
 			return false;
-		if (associatedUris == null) {
-			if (other.associatedUris != null)
+		if (associatedResouceUris == null) {
+			if (other.associatedResouceUris != null)
 				return false;
-		} else if (!associatedUris.equals(other.associatedUris))
+		} else if (!associatedResouceUris.equals(other.associatedResouceUris))
 			return false;
 		if (boundedLocations == null) {
 			if (other.boundedLocations != null)

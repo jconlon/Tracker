@@ -11,9 +11,11 @@
 package com.verticon.agriculture.location.internal;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newHashSet;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -22,6 +24,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.verticon.agriculture.Location;
 import com.verticon.opengis.kml.Boundary;
 import com.verticon.opengis.kml.Container;
 import com.verticon.opengis.kml.LinearRing;
@@ -53,7 +56,7 @@ public class GeoLocationFactory extends KmlSwitch<Object> {
 	 * @return GeoLocation
 	 * @throws Exception
 	 */
-	GeoLocation build(Container container, String id, URI resourceUri,
+	IGeoLocation build(Container container, String id, URI resourceUri,
 			ImmutableSet<String> associatedUris) {
 		this.address = container.getAddress();
 		placeMarkName = null;
@@ -76,6 +79,47 @@ public class GeoLocationFactory extends KmlSwitch<Object> {
 		return new GeoLocation(id, resourceUri, address,
 				ImmutableList.copyOf(boundedLocations), container.getName(),
 				ImmutableSet.copyOf(associatedUris));
+	}
+	
+	IGeoLocation build(Location location,  URI resourceUri) {
+		this.address = location.getAddress();
+		placeMarkName = null;
+		boundedLocations.clear();
+		if(location.getGeography()!=null){
+			TreeIterator<Object> it = EcoreUtil.getAllContents(location.getGeography(), true);
+			while (it.hasNext()) {
+				EObject eobject = (EObject) it.next();
+				// Visit all objects in the container
+				Object drillDeeper = doSwitch(eobject);
+				if (drillDeeper != null) {
+					if (drillDeeper instanceof Boolean) {
+						if (!(Boolean) drillDeeper) {
+							it.prune();
+						}
+					}
+				}
+			}
+			
+		}
+		return  new GeoLocation(location.getUri(), resourceUri, address,
+				ImmutableList.copyOf(boundedLocations), location.getName(),
+				getAssociatedResourceUris(location));
+	}
+	
+	/**
+	 * Create a set of URIS for the Premises and KML Container resources
+	 * @param location
+	 * @return
+	 */
+	private ImmutableSet<String> getAssociatedResourceUris(Location location) {
+		Set<String> associatedUris = newHashSet();
+		if(location.getGeography()!=null){
+			associatedUris.add(location.getGeography().eResource().getURI()
+					.toString());
+		}
+		associatedUris.add(location.getLivestock().eResource().getURI()
+				.toString());
+		return ImmutableSet.copyOf(associatedUris);
 	}
 
 	/*

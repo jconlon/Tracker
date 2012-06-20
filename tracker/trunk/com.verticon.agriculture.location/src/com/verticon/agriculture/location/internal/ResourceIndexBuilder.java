@@ -11,11 +11,9 @@
 package com.verticon.agriculture.location.internal;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Sets.newHashSet;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
@@ -27,22 +25,39 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.Diagnostician;
 
 import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableSet;
 import com.verticon.agriculture.Agriculture;
 import com.verticon.agriculture.Location;
 import com.verticon.agriculture.util.AgricultureSwitch;
-import com.verticon.opengis.kml.Container;
 
+/**
+ * Builds a List of GeoLocations that are contained in an 
+ * Agriculture document.
+ * 
+ * @author jconlon
+ *
+ */
 class ResourceIndexBuilder extends AgricultureSwitch<Object> {
 	/**
-	 * GeoLocations for the resourceUri
+	 * GeoLocations discovered in the Agriculture resourceUri
 	 */
-	List<GeoLocation> geoLocations = newArrayList();
+	private List<IGeoLocation> geoLocations = newArrayList();
+	
+	/**
+	 * resourceUri of the Agriculture document to identify problems to the user
+	 */
 	private final URI resourceUri;
 	private boolean foundAgriculture = false;
-	private final Map<String, GeoLocation> index;
+	/**
+	 * Existing index
+	 */
+	private final Map<String, IGeoLocation> index;
 
-	ResourceIndexBuilder(URI resourceUri, Map<String, GeoLocation> index) {
+	/**
+	 * 
+	 * @param resourceUri 
+	 * @param index
+	 */
+	ResourceIndexBuilder(URI resourceUri, Map<String, IGeoLocation> index) {
 		super();
 		this.resourceUri = resourceUri;
 		this.index = index;
@@ -59,7 +74,7 @@ class ResourceIndexBuilder extends AgricultureSwitch<Object> {
 	}
 
 	/**
-	 * Validate that an Agriculture.Location uri is mapped only once.
+	 * Build a new geoLocation from the Location and add it to the list of geoLocations. 
 	 * 
 	 * @return a Boolean.False or a CoreException indicating a mapping conflict
 	 * @see com.verticon.agriculture.util.AgricultureSwitch#caseLocation(com.verticon.agriculture.Location)
@@ -85,10 +100,6 @@ class ResourceIndexBuilder extends AgricultureSwitch<Object> {
 		}
 
 		Object result = Boolean.FALSE;
-
-		Container container = location.getGeography();
-		GeoLocation geoLocation;
-
 		if (index.containsKey(locationURI)) {
 			URI existingAgriDocResourceUriValue = index.get(locationURI)
 					.getAgriDocResourceUri();
@@ -112,28 +123,27 @@ class ResourceIndexBuilder extends AgricultureSwitch<Object> {
 				} catch (CoreException e) {
 				}
 			}
+		}else{
+			IGeoLocation geoLocation = new GeoLocationFactory().build(location,
+					resourceUri);
+			geoLocations.add(geoLocation);
 		}
-
-		geoLocation = new GeoLocationFactory().build(container, locationURI,
-				resourceUri, getAssociatedUris(location));
-		geoLocations.add(geoLocation);
 
 		return result;
 	}
 
-	private ImmutableSet<String> getAssociatedUris(Location location) {
-		Set<String> associatedUris = newHashSet();
-		associatedUris.add(location.getGeography().eResource().getURI()
-				.toString());
-		associatedUris.add(location.getLivestock().eResource().getURI()
-				.toString());
-		return ImmutableSet.copyOf(associatedUris);
+	/**
+	 * @return the geoLocations
+	 */
+    List<IGeoLocation> getGeoLocations() {
+		return geoLocations;
 	}
-
+    
 	/**
 	 * @return the foundAgriculture
 	 */
 	boolean isFoundAgriculture() {
 		return foundAgriculture;
 	}
+	
 }

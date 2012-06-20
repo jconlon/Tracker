@@ -23,7 +23,7 @@ import com.google.common.base.Predicate;
  * @author jconlon
  * 
  */
-class NotResourceUriPredicate implements Predicate<GeoLocation> {
+class NotResourceUriPredicate implements Predicate<IGeoLocation> {
 	private final URI resourceUri;
 
 	NotResourceUriPredicate(URI resourceUri) {
@@ -35,7 +35,7 @@ class NotResourceUriPredicate implements Predicate<GeoLocation> {
 	 * returns true for all GeoLocations that are not in the resource
 	 */
 	@Override
-	public boolean apply(GeoLocation specific) {
+	public boolean apply(IGeoLocation specific) {
 		return !specific.getAgriDocResourceUri().equals(resourceUri);
 	}
 

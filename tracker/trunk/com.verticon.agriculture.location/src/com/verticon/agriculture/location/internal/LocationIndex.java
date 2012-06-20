@@ -70,10 +70,9 @@ public final class LocationIndex implements LocationServiceProvider {
 	private static LocationIndex instance = null;
 
 	/**
-	 * GeoLocations by location id (an id is a string name or the uri of the
-	 * Protected by lock
+	 * GeoLocations by location id (an id is a string name or the uri of the location)
 	 */
-	private ConcurrentMap<String, GeoLocation> index = newConcurrentMap();
+	private ConcurrentMap<String, IGeoLocation> index = newConcurrentMap();
 	private enum State{
 		UNINITIALIZED,INITIALIZED,SCHEDULED
 	}
@@ -203,7 +202,7 @@ public final class LocationIndex implements LocationServiceProvider {
 			initialize();
 		}
 		if (uri.endsWith(".kml") || uri.endsWith(".premises")) {
-			for (GeoLocation location : index.values()) {
+			for (IGeoLocation location : index.values()) {
 				if (location.hasUri(uri)) {
 					result = true;
 					break;
@@ -230,7 +229,8 @@ public final class LocationIndex implements LocationServiceProvider {
 	}
 
 	/**
-	 * 
+	 * This is the main entry point where the projectBuilder
+	 * adds an Agriculture Document resource.
 	 * @param resource
 	 * @throws Exception
 	 *             if building fails
@@ -262,14 +262,14 @@ public final class LocationIndex implements LocationServiceProvider {
 
 		// Add the new ones
 		if (builder.isFoundAgriculture()) {
-			addGeoLocationsToMap(builder.geoLocations);
+			addGeoLocationsToMap(builder.getGeoLocations());
 		}
 
 	}
 
-	private final void addGeoLocationsToMap(List<GeoLocation> locations) {
-		Map<String, GeoLocation> newLocationsMap = newHashMap();
-		for (GeoLocation geoLocationToAdd : locations) {
+	private final void addGeoLocationsToMap(List<IGeoLocation> locations) {
+		Map<String, IGeoLocation> newLocationsMap = newHashMap();
+		for (IGeoLocation geoLocationToAdd : locations) {
 			newLocationsMap.put(geoLocationToAdd.getID(), geoLocationToAdd);
 			logger.debug(bundleMarker, "Adding GeoLocation map key {}",
 					geoLocationToAdd.getID());
