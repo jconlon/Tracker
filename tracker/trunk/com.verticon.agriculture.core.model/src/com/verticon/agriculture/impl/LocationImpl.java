@@ -790,7 +790,7 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 	 */
 	public String getAddress() {
 		StringBuffer buff = new StringBuffer();
-		buff.append(getStreet()).append(" ").append(getCity()).append(',').append(getState()).append(' ').append(getPostalCode());
+		buff.append(getStreet()).append(" ").append(getCity()).append(", ").append(getState()).append(' ').append(getPostalCode());
 		return buff.toString();
 	}
 
@@ -801,7 +801,7 @@ public class LocationImpl extends MinimalEObjectImpl.Container implements Locati
 	 */
 	public String getCoordinates() {
 		StringBuffer buff = new StringBuffer();
-		buff.append(getLongitude()).append(", ").append(getLatitude()).append(", ").append(getAltitude());
+		buff.append(getLongitude()).append(',').append(getLatitude()).append(',').append(getAltitude());
 		return buff.toString();
 	}
 
