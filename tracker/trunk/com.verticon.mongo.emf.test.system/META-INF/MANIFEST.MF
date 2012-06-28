@@ -17,5 +17,6 @@ Import-Package: com.mongodb,
  org.eclipselabs.emf.query,
  org.eclipselabs.mongo,
  org.eclipselabs.mongo.emf,
+ org.eclipselabs.mongo.emf.ext,
  org.json,
  org.slf4j;version="1.5.11"

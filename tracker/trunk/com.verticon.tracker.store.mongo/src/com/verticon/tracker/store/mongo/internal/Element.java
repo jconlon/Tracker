@@ -17,8 +17,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
-import com.verticon.agriculture.AgriculturePackage;
-import com.verticon.opengis.kml.KmlPackage;
 import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.store.admin.AdminPackage;
@@ -30,13 +28,14 @@ import com.verticon.tracker.store.admin.AdminPackage;
  */
 public enum Element {
 
-	LOCATION(null, AgriculturePackage.Literals.LOCATION,"loc"),
+//	LOCATION(null, AgriculturePackage.Literals.LOCATION,"loc"),
 	//
-	CONTAINER("id", KmlPackage.eINSTANCE.getContainer(), null),
+//	CONTAINER("id", KmlPackage.eINSTANCE.getContainer(), null),
+//	ASSOCIATION("name", AgriculturePackage.Literals.ASSOCIATION, null),
 	//
 //	PLACEMARK("id", KmlPackage.eINSTANCE.getPlacemark(), null),
 	//
-	PREMISES("uri", TrackerPackage.Literals.PREMISES, null),
+	PREMISES("uri", TrackerPackage.Literals.PREMISES, "location.loc"),
 	//
 	ANIMAL("id", TrackerPackage.Literals.ANIMAL, null),
 	//

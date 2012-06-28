@@ -17,7 +17,6 @@ import static com.verticon.tracker.store.mongo.internal.Utils.bundleMarker;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
@@ -35,8 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import com.mongodb.DB;
 import com.mongodb.MongoException;
-import com.verticon.agriculture.Agriculture;
-import com.verticon.agriculture.Location;
+import com.verticon.agriculture.Association;
 import com.verticon.mongo.emf.api.IResourceSetFactory;
 import com.verticon.mongo.emf.api.SingleMongoLocator;
 import com.verticon.tracker.Animal;
@@ -164,17 +162,7 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 		return statusMonitor.getDescription(id);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.verticon.tracker.store.ITrackerStore#update(com.verticon.agriculture
-	 * .Location)
-	 */
-	@Override
-	public void register(Location location) throws IOException {
-		trackerStore.register(location);
-	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -200,29 +188,41 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 		return trackerStore.retrieveAnimal(ain);
 
 	}
+	
+	/*
+//	 * (non-Javadoc)
+//	 * @see com.verticon.tracker.store.ITrackerStore#register(com.verticon.agriculture.Association)
+//	 */
+//	@Override
+//	public void register(Association association) throws IOException {
+//		trackerStore.register(association);
+//	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.verticon.tracker.store.ITrackerStore#retrieveLocation(java.lang.String
-	 * )
+	 * @see com.verticon.tracker.store.ITrackerStore#register(com.verticon.tracker.Premises)
 	 */
 	@Override
-	public Location retrieveLocation(String id) {
-		return trackerStore.retrieveLocation(id);
+	public void register(Premises premises) throws IOException {
+		 trackerStore.register(premises);
 	}
 
+//	/*
+//	 * (non-Javadoc)
+//	 * @see com.verticon.tracker.store.ITrackerStore#retrieveAssociation(java.lang.String)
+//	 */
+//	@Override
+//	public Association retrieveAssociation(String name) {
+//		return trackerStore.retrieveAssociation(name);
+//	}
+	
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.verticon.tracker.store.ITrackerStore#retrievePremises(java.lang.String
-	 * )
+	 * @see com.verticon.tracker.store.ITrackerStore#retrieveAssociation(java.util.Set)
 	 */
 	@Override
-	public Agriculture retrieveLocations(Set<String> uris) {
-		return trackerStore.retrieveLocations(uris);
+	public Association retrieveAssociation(Set<String> uris) throws IOException{
+		return trackerStore.retrieveAssociation(uris);
 	}
 
 	/*
@@ -234,7 +234,7 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 	 */
 	@Override
 	public Premises retrievePremises(String uri, String fromDate, String toDate)
-			throws ParseException {
+			throws IOException {
 		return trackerStore.retrievePremises(uri, fromDate, toDate);
 	}
 
@@ -375,7 +375,7 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 		return (String) config.get(PREMISES_URI.configID);
 	}
 
-
+	
 	
 
 }

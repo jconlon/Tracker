@@ -582,4 +582,5 @@
   <unAppliedTags id="840003002956438">
     <events xmi:type="premises:TagRetired" dateTime="2008-05-17T08:40:03.750-0500" electronicallyRead="true" comments="Broke Tag while applying"/>
   </unAppliedTags>
+  <location name="CountryFair" description="Fair grounds" phoneNumber="" street="Fairgrounds Road" city="Viroqua" state="WI" postalCode="54665" longitude="-90.887591" latitude="43.565265" altitude="0.1"/>
 </premises:Premises>

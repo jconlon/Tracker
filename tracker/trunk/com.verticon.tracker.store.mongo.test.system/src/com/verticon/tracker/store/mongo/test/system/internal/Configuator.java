@@ -49,7 +49,7 @@ public class Configuator {
 
 	public void setConfigurationAdmin(ConfigurationAdmin configAdmin)
 			throws IOException {
-		addMembersCollection();
+//		addMembersCollection();
 		// Configure the first instance
 		Configuration config = configAdmin.createFactoryConfiguration(FACTORY_PID);
 		Dictionary<Object, Object> props = configure1();
@@ -92,19 +92,19 @@ public class Configuator {
 		return props;
 	}
 
-	private static void addMembersCollection() throws UnknownHostException,
-			MongoException {
-		Mongo mongo = new Mongo();
-		DB db = mongo.getDB("tracker");
-		if (!db.collectionExists("Members")) {
-			// db.getCollection(TrackerPackage.Literals.ANIMAL.getName()).drop();
-			DBCollection collection = db.getCollection("Members");
-			for (Member m : Member.values()) {
-				DBObject member = new BasicDBObject("id", m.uri);
-				member.put("pw", m.password);
-				collection.insert(member);
-			}
-
-		}
-	}
+//	private static void addMembersCollection() throws UnknownHostException,
+//			MongoException {
+//		Mongo mongo = new Mongo();
+//		DB db = mongo.getDB("tracker");
+//		if (!db.collectionExists("Members")) {
+//			// db.getCollection(TrackerPackage.Literals.ANIMAL.getName()).drop();
+//			DBCollection collection = db.getCollection("Members");
+//			for (Member m : Member.values()) {
+//				DBObject member = new BasicDBObject("id", m.uri);
+////				member.put("pw", m.password);
+//				collection.insert(member);
+//			}
+//
+//		}
+//	}
 }

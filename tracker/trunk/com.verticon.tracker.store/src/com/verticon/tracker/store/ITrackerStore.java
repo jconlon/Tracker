@@ -18,8 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import com.verticon.agriculture.Agriculture;
-import com.verticon.agriculture.Location;
+import com.verticon.agriculture.Association;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Premises;
 
@@ -29,18 +28,32 @@ import com.verticon.tracker.Premises;
  */
 public interface ITrackerStore {
 
+//	/**
+//	 * Saves any changes to Association and creates Premises if they do not
+//	 * already exist. All contained
+//	 * Animals, Tags, and Events are NOT saved.
+//	 * 
+//	 * If the Admin access is loaded, only a user that is the designated admin 
+//	 * can register an Association.  All attempts to save
+//	 * an Association by a non -admin will throw a StoreAccessException.
+//	 * 
+//	 * @param location
+//	 * @throws IOException
+//	 */
+//	void register(Association association) throws IOException;
+	
 	/**
-	 * Saves any changes to Location, KML Container, and Premises. All contained
+	 * Saves any changes to Premises. All contained
 	 * Animals, Tags, and Events are NOT saved.
 	 * 
 	 * If the Admin access is loaded, only a user that is the designated admin 
-	 * can save locations all attempts to save
-	 * a location by a non -admin will throw a StoreAccessException.
+	 * can register a premises.  All attempts to register
+	 * a premises by a non -admin will throw a StoreAccessException.
 	 * 
 	 * @param location
 	 * @throws IOException
 	 */
-	void register(Location location) throws IOException;
+	void register(Premises premises) throws IOException;
 
 	/**
 	 * Saves any changes to Premises contained
@@ -77,7 +90,7 @@ public interface ITrackerStore {
 	 * @return Premises animals that were in the premises during the span of
 	 *         dates
 	 */
-	Premises retrievePremises(String uri, String in, String out) throws ParseException;
+	Premises retrievePremises(String uri, String in, String out) throws IOException;
 	
 	/**
 	 * 
@@ -87,26 +100,23 @@ public interface ITrackerStore {
 	 */
 	Animal retrieveAnimal(String ain);
 	
+//	/**
+//	 * 
+//	 * @param name of the Association
+//	 * 
+//	 * @return Association document containing Premises
+//	 * 
+//	 */
+//	Association retrieveAssociation(String name);
+	
 	/**
 	 * 
-	 * @param uris of the locations
+	 * @param uris of the Premises
 	 * 
-	 * @return Agriculture document containing Locations
+	 * @return Association with the premises
 	 * 
 	 */
-	Agriculture retrieveLocations(Set<String> uris);
-
-	
-	//The following are not surfaced as end user functions at this time
-	/**
-	 * 
-	 * @param id
-	 *          
-	 * @return Location
-	 */
-	Location retrieveLocation(String id);
-	
-	
+    Association retrieveAssociation(Set<String> uris) throws IOException;
 	
 	/**
 	 * Generic query.  

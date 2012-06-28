@@ -42,8 +42,6 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.verticon.agriculture.AgriculturePackage;
 import com.verticon.agriculture.util.AgricultureResourceFactoryImpl;
-import com.verticon.opengis.kml.KmlPackage;
-import com.verticon.opengis.kml.Point;
 import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
@@ -260,21 +258,21 @@ public class TestUtils {
 				new BasicDBObject());
 		db.getCollection(TrackerPackage.Literals.PREMISES.getName()).remove(
 				new BasicDBObject());
-		db.getCollection(AgriculturePackage.Literals.LOCATION.getName())
-				.remove(new BasicDBObject());
-		db.getCollection(KmlPackage.eINSTANCE.getContainer().getName()).remove(
-				new BasicDBObject());
-		db.getCollection(KmlPackage.eINSTANCE.getPlacemark().getName()).remove(
-				new BasicDBObject());
+//		db.getCollection(AgriculturePackage.Literals.LOCATION.getName())
+//				.remove(new BasicDBObject());
+//		db.getCollection(KmlPackage.eINSTANCE.getContainer().getName()).remove(
+//				new BasicDBObject());
+//		db.getCollection(KmlPackage.eINSTANCE.getPlacemark().getName()).remove(
+//				new BasicDBObject());
 		removeLastModificationTimesOnAllResources(db);
 	}
 
-	static String getCoordinates(Point point) {
-		StringBuffer buff = new StringBuffer();
-		for (String s : point.getCoordinates()) {
-		   buff.append(s.trim());
-		}
-		String coordinates = buff.toString();
-		return coordinates;
-	}
+//	static String getCoordinates(Point point) {
+//		StringBuffer buff = new StringBuffer();
+//		for (String s : point.getCoordinates()) {
+//		   buff.append(s.trim());
+//		}
+//		String coordinates = buff.toString();
+//		return coordinates;
+//	}
 }

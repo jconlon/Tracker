@@ -26,7 +26,6 @@ import org.eclipselabs.mongo.emf.MongoURIHandlerImpl;
 import org.eclipselabs.mongo.emf.ext.ECollection;
 import com.google.common.collect.ImmutableMap;
 import com.mongodb.WriteConcern;
-import com.verticon.agriculture.Location;
 import com.verticon.mongo.emf.api.IResourceSetFactory;
 import com.verticon.mongo.emf.api.SingleMongoLocator;
 import com.verticon.tracker.Event;
@@ -111,7 +110,7 @@ public class ResourceSetFactoryContext {
 
 	void save(EObject eobject, Element element) throws IOException {
 		switch (element) {
-		case LOCATION:
+//		case LOCATION:
 		case PREMISES:
 		case OCD:
 			eobject.eResource().save(PRIMVARY_KEY_SAVE_OPTIONS);
@@ -180,8 +179,8 @@ public class ResourceSetFactoryContext {
 			result = result.appendSegment(ADMIN_ID);
 			break;
 
-		case CONTAINER:
-		case LOCATION:
+//		case CONTAINER:
+//		case LOCATION:
 		case ANIMAL:
 		case TAG:
 			result = result.appendSegment(id);
@@ -203,13 +202,13 @@ public class ResourceSetFactoryContext {
 		case ADMIN:
 			result = result.appendSegment(ADMIN_ID);
 			break;
-		case CONTAINER:
-			result = result.appendSegment(premisesUri);
-			break;
-		case LOCATION:
-			Location location = (Location) eobject;
-			result = result.appendSegment(location.getUri());
-			break;
+//		case CONTAINER:
+//			result = result.appendSegment(premisesUri);
+//			break;
+//		case LOCATION:
+//			Location location = (Location) eobject;
+//			result = result.appendSegment(location.getUri());
+//			break;
 		case TAG:
 			Tag tag = (Tag) eobject;
 			result = result.appendSegment(tag.getId());

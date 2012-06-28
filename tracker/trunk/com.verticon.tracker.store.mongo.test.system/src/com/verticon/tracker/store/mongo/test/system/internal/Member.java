@@ -21,7 +21,7 @@ enum Member {
 	// in kilograms
 	final String uri;
 	// in meters
-	final String password;
+	private final String password;
 
 	Member(String uri, String password) {
 		this.uri = uri;
