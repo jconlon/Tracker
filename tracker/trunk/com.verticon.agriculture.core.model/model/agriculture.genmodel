@@ -6,52 +6,15 @@
     modelPluginID="com.verticon.agriculture.core.model" modelName="Agriculture" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
     editPluginID="com.verticon.agriculture.core.model.edit" editorPluginID="com.verticon.agriculture.core.model.editor"
-    usedGenPackages="../../com.verticon.atom.authorlink.core.model/model/atom-author-link.genmodel#//authorlink ../../com.verticon.opengis.kml.core.model/model/ogckml22-trimmed.genmodel#//kml ../../com.verticon.tracker/model/tracker.genmodel#//tracker ../../com.verticon.tracker/model/tracker.genmodel#//metatype ../../com.verticon.oasis.xal.core.model/model/xAL.genmodel#//xal">
+    usedGenPackages="../../com.verticon.tracker/model/tracker.genmodel#//tracker ../../com.verticon.tracker/model/tracker.genmodel#//metatype ../../com.verticon.tracker/model/tracker.genmodel#//location">
   <foreignModel>agriculture.ecore</foreignModel>
   <genPackages prefix="Agriculture" basePackage="com.verticon" resource="XMI" disposableProviderFactory="true"
       fileExtensions="agri" ecorePackage="agriculture.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="agriculture.ecore#//AltitudeMode">
-      <genEnumLiterals ecoreEnumLiteral="agriculture.ecore#//AltitudeMode/absolute"/>
-      <genEnumLiterals ecoreEnumLiteral="agriculture.ecore#//AltitudeMode/clampToGround"/>
-      <genEnumLiterals ecoreEnumLiteral="agriculture.ecore#//AltitudeMode/relativeToGround"/>
-    </genEnums>
-    <genClasses ecoreClass="agriculture.ecore#//Agriculture">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference agriculture.ecore#//Agriculture/location"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference agriculture.ecore#//Agriculture/geography"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute agriculture.ecore#//Agriculture/association"/>
-    </genClasses>
-    <genClasses ecoreClass="agriculture.ecore#//Location">
-      <genFeatures notify="false" createChild="false" propertyCategory="References"
-          propertySortChoices="true" ecoreFeature="ecore:EReference agriculture.ecore#//Location/geography"/>
-      <genFeatures notify="false" createChild="false" propertyCategory="References"
-          propertySortChoices="true" ecoreFeature="ecore:EReference agriculture.ecore#//Location/livestock"/>
-      <genFeatures property="Readonly" createChild="false" propertyCategory="Identiffication"
-          propertyDescription="URI of the referenced Premises" ecoreFeature="ecore:EAttribute agriculture.ecore#//Location/uri"/>
-      <genFeatures notify="false" createChild="false" propertyCategory="References"
-          propertySortChoices="true" ecoreFeature="ecore:EReference agriculture.ecore#//Location/place"/>
-      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Name of the referenced place"
-          ecoreFeature="ecore:EAttribute agriculture.ecore#//Location/name"/>
-      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Description of the referenced place"
-          ecoreFeature="ecore:EAttribute agriculture.ecore#//Location/description"/>
-      <genFeatures createChild="false" propertyDescription="Phone number of the referenced place"
-          ecoreFeature="ecore:EAttribute agriculture.ecore#//Location/phoneNumber"/>
-      <genFeatures createChild="false" propertyCategory="Address" ecoreFeature="ecore:EAttribute agriculture.ecore#//Location/street"/>
-      <genFeatures createChild="false" propertyCategory="Address" propertyDescription="City of the referenced place"
-          ecoreFeature="ecore:EAttribute agriculture.ecore#//Location/city"/>
-      <genFeatures createChild="false" propertyCategory="Address" propertyDescription="State or province of the referenced place"
-          ecoreFeature="ecore:EAttribute agriculture.ecore#//Location/state"/>
-      <genFeatures createChild="false" propertyCategory="Address" propertyDescription="Postal Code of the referenced place"
-          ecoreFeature="ecore:EAttribute agriculture.ecore#//Location/postalCode"/>
-      <genFeatures createChild="false" propertyCategory="Address" propertyDescription="Country of the refenced place"
-          ecoreFeature="ecore:EAttribute agriculture.ecore#//Location/country"/>
-      <genFeatures createChild="false" propertyCategory="Coordinates" propertyDescription="Longitude projection with WGS84"
-          ecoreFeature="ecore:EAttribute agriculture.ecore#//Location/longitude"/>
-      <genFeatures createChild="false" propertyCategory="Coordinates" propertyDescription="Latitude projection with WGS84"
-          ecoreFeature="ecore:EAttribute agriculture.ecore#//Location/latitude"/>
-      <genFeatures createChild="false" propertyCategory="Coordinates" propertyDescription="Altitude of the place"
-          ecoreFeature="ecore:EAttribute agriculture.ecore#//Location/altitude"/>
-      <genFeatures createChild="false" propertyCategory="Coordinates" propertyDescription="How the altitude of the place is interpreted"
-          ecoreFeature="ecore:EAttribute agriculture.ecore#//Location/altitudeMode"/>
+    <genClasses ecoreClass="agriculture.ecore#//Association">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute agriculture.ecore#//Association/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute agriculture.ecore#//Association/description"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference agriculture.ecore#//Association/livestock"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute agriculture.ecore#//Association/comments"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

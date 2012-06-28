@@ -6,26 +6,21 @@
  */
 package com.verticon.agriculture.tests;
 
-import com.verticon.agriculture.Agriculture;
-import com.verticon.agriculture.AgricultureFactory;
-import com.verticon.agriculture.AgriculturePackage;
-
-import com.verticon.agriculture.util.AgricultureResourceFactoryImpl;
-
 import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-
 import org.eclipse.emf.ecore.util.Diagnostician;
+
+import com.verticon.agriculture.AgricultureFactory;
+import com.verticon.agriculture.AgriculturePackage;
+import com.verticon.agriculture.Association;
+import com.verticon.agriculture.util.AgricultureResourceFactoryImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -64,7 +59,7 @@ public class AgricultureExample {
 			System.out.println("Enter a list of file paths or URIs that have content like this:");
 			try {
 				Resource resource = resourceSet.createResource(URI.createURI("http:///My.agri"));
-				Agriculture root = AgricultureFactory.eINSTANCE.createAgriculture();
+				Association root = AgricultureFactory.eINSTANCE.createAssociation();
 				resource.getContents().add(root);
 				resource.save(System.out, null);
 			}

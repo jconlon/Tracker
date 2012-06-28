@@ -125,9 +125,7 @@ import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
 import com.verticon.agriculture.provider.AgricultureItemProviderAdapterFactory;
-import com.verticon.atom.authorlink.provider.AuthorlinkItemProviderAdapterFactory;
-import com.verticon.oasis.xal.provider.XalItemProviderAdapterFactory;
-import com.verticon.opengis.kml.provider.KmlItemProviderAdapterFactory;
+import com.verticon.location.provider.LocationItemProviderAdapterFactory;
 import com.verticon.osgi.metatype.provider.MetatypeItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
 
@@ -667,11 +665,9 @@ public class AgricultureEditor
 
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new AgricultureItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new AuthorlinkItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new KmlItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new TrackerItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new MetatypeItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new XalItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new LocationItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 
 		// Create the command stack that will notify this editor as commands are executed.
