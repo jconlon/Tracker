@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-import com.verticon.location.LocationServiceProvider;
+import com.verticon.location.service.LocationServiceProvider;
 
 /**
  * LocationServiceProvider for Animals and Premises created from all projects
@@ -62,7 +62,7 @@ public class Component implements LocationServiceProvider {
 	 * Find address for a premises.
 	 */
 	@Override
-	public String address(Object target) {
+	public String address(String target) {
 		return delegate.address(target);
 	}
 
@@ -70,7 +70,7 @@ public class Component implements LocationServiceProvider {
 	 * Find location for an animal or a inside a Premises
 	 */
 	@Override
-	public String positionIn(Object target, String coordinates) {
+	public String positionIn(String target, String coordinates) {
 		return delegate.positionIn(target, coordinates);
 	}
 
@@ -78,7 +78,7 @@ public class Component implements LocationServiceProvider {
 	 * Find location for a Premises. Used for remote locations.
 	 */
 	@Override
-	public String name(Object target) {
+	public String name(String target) {
 		return delegate.name(target);
 
 	}
@@ -90,7 +90,7 @@ public class Component implements LocationServiceProvider {
 	 * @return names of all the sublocations for the container
 	 */
 	@Override
-	public Set<String> locationsIn(Object container) {
+	public Set<String> locationsIn(String container) {
 		return delegate.locationsIn(container);
 	}
 
