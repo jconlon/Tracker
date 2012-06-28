@@ -3,45 +3,12 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="agriculture"
     nsURI="http://www.verticon.com/agriculture/1.0/ag" nsPrefix="ag">
-  <eClassifiers xsi:type="ecore:EClass" name="Agriculture">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="location" upperBound="-1"
-        eType="#//Location" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="geography" eType="ecore:EClass ../../com.verticon.opengis.kml.core.model/model/kml.ecore#//Container"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="association" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Location">
-    <eOperations name="getAddress" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eOperations name="getCoordinates" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="geography" eType="ecore:EClass ../../com.verticon.opengis.kml.core.model/model/kml.ecore#//Container"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="livestock" eType="ecore:EClass ../../com.verticon.tracker/model/tracker.ecore#//Premises"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        changeable="false" volatile="true" transient="true" derived="true" iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="phoneNumber" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="street" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="city" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="postalCode" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="country" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="United States"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="longitude" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" unsettable="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="latitude" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" unsettable="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="altitude" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" unsettable="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="altitudeMode" lowerBound="1"
-        eType="#//AltitudeMode"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="AltitudeMode">
-    <eLiterals name="absolute"/>
-    <eLiterals name="clampToGround" value="1"/>
-    <eLiterals name="relativeToGround" value="2"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Association">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="livestock" upperBound="-1"
+        eType="ecore:EClass ../../com.verticon.tracker/model/tracker.ecore#//Premises"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

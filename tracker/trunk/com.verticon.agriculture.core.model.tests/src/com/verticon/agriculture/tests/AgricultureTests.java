@@ -8,7 +8,6 @@ package com.verticon.agriculture.tests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-
 import junit.textui.TestRunner;
 
 /**
@@ -35,7 +34,7 @@ public class AgricultureTests extends TestSuite {
 	 */
 	public static Test suite() {
 		TestSuite suite = new AgricultureTests("agriculture Tests");
-		suite.addTestSuite(LocationTest.class);
+		suite.addTestSuite(AssociationTest.class);
 		return suite;
 	}
 

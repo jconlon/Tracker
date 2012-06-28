@@ -1,6 +1,5 @@
 package com.verticon.agriculture.presentation;
 
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.validation.model.EvaluationMode;

@@ -10,10 +10,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: com.verticon.agriculture.tests
 Require-Bundle: org.eclipse.core.runtime,
  com.verticon.agriculture.core.model;visibility:=reexport,
- com.verticon.atom.authorlink.core.model;visibility:=reexport,
- com.verticon.opengis.kml.core.model;visibility:=reexport,
  com.verticon.tracker;visibility:=reexport,
- com.verticon.oasis.xal.core.model;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.junit;visibility:=reexport
 Bundle-ActivationPolicy: lazy
