@@ -393,4 +393,5 @@
       <events xmi:type="premises:MovedOut" dateTime="2008-09-15T08:59:33.140-0500" electronicallyRead="true" comments="Vern" pid="urn:pin:003ALKM" destinationPin="005F59W"/>
     </tags>
   </animals>
+  <location name="CountryFair" description="Fair grounds" phoneNumber="" street="Fairgrounds Road" city="Viroqua" state="WI" postalCode="54665" longitude="-90.887591" latitude="43.565265" altitude="0.1"/>
 </premises:Premises>

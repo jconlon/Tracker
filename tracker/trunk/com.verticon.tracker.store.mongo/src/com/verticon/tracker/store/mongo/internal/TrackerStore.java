@@ -13,11 +13,10 @@ package com.verticon.tracker.store.mongo.internal;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Lists.newArrayList;
 import static com.verticon.tracker.store.mongo.internal.Element.ANIMAL;
-import static com.verticon.tracker.store.mongo.internal.Element.CONTAINER;
-import static com.verticon.tracker.store.mongo.internal.Element.LOCATION;
 import static com.verticon.tracker.store.mongo.internal.Element.PREMISES;
 import static com.verticon.tracker.store.mongo.internal.Element.TAG;
 import static com.verticon.tracker.store.mongo.internal.Utils.bundleMarker;
+import static com.verticon.tracker.store.mongo.internal.Utils.getLastUpdate;
 import static com.verticon.tracker.store.mongo.internal.Utils.getTag;
 import static com.verticon.tracker.store.mongo.internal.Utils.intersection;
 import static com.verticon.tracker.store.mongo.internal.Utils.validateObject;
@@ -58,10 +57,9 @@ import com.mongodb.DB;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.QueryOperators;
-import com.verticon.agriculture.Agriculture;
 import com.verticon.agriculture.AgricultureFactory;
-import com.verticon.agriculture.Location;
-import com.verticon.opengis.kml.Container;
+import com.verticon.agriculture.Association;
+import com.verticon.location.Location;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
@@ -73,7 +71,10 @@ import com.verticon.tracker.store.StoreAccessException;
  * TrackerStrore for saves and queries Agriculture Location and Animal event
  * histories to and from a MongoDB database.
  * 
- * TODO Saving premises is only done at registration time and for updates.  Don't bother with incremental changes just save the whole thing.
+ * Saving premises is only done at registration time and for updates.  
+ * Don't bother with incremental changes just save the whole thing.
+ * 
+ * 
  * @author jconlon
  * 
  */
@@ -114,21 +115,7 @@ public class TrackerStore implements ITrackerStore {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.verticon.tracker.store.ITrackerStore#retrieveLocation(java.lang.String
-	 * )
-	 */
-	@Override
-	public Location retrieveLocation(String id) {
-		//Dont need a query here just get the uri
-		Resource resource = resourceFactory.getResource(Element.LOCATION, id);
-
-		return resource.getContents().isEmpty() ? null : (Location) resource
-				.getContents().get(0);
-	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -139,14 +126,19 @@ public class TrackerStore implements ITrackerStore {
 	 */
 	@Override
 	public Premises retrievePremises(String uri, String fromDate, String toDate)
-			throws ParseException {
+			throws IOException {
 		Premises result = (Premises) resourceFactory.query(PREMISES, uri);
 		if (Strings.isNullOrEmpty(fromDate) || Strings.isNullOrEmpty(toDate)) {
 			// Do nothing to the result
 		} else {
 			// Add animals to the result
-			List<Animal> animals = getAnimals(db, resourceFactory, uri,
-					dfm.parse(fromDate), dfm.parse(toDate),trackerStoreAdmin);
+			List<Animal> animals;
+			try {
+				animals = getAnimals(db, resourceFactory, uri,
+						dfm.parse(fromDate), dfm.parse(toDate),trackerStoreAdmin);
+			} catch (ParseException e) {
+				throw new IOException(e);
+			}
 			logger.debug(bundleMarker,
 					"Found {} animals in premises from {} to {}", new Object[] {
 							animals.size(), fromDate, toDate });
@@ -249,109 +241,64 @@ public class TrackerStore implements ITrackerStore {
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.verticon.tracker.store.ITrackerStore#retrieveLocations(java.util.Set)
-	 */
-	@Override
-	public Agriculture retrieveLocations(Set<String> uris) {
-		Agriculture result = AgricultureFactory.eINSTANCE.createAgriculture();
-		Location location = null;
-		for (String uri : uris) {
-			location = retrieveLocation(uri);
-			if(location!=null){
-				result.getLocation().add(location);
-			}
-		}
-		return result;
-	}
+	
 
 	@Override
 	public EList<EObject> query(EClass eClass, String query) {
 		ECollection result = resourceFactory.query(eClass, query);
 		return result.getValues();
 	}
-
+	
+	
+	@Override
+	public Association retrieveAssociation(Set<String> uris) throws IOException {
+		Association result = AgricultureFactory.eINSTANCE.createAssociation();
+		Premises location = null;
+		for (String uri : uris) {
+			location = retrievePremises(uri, null, null);
+			if(location!=null){
+				result.getLivestock().add(location);
+			}
+		}
+		return result;
+	}
+	
 	/**
-	 * Primary entry method for Tracker Desktop clients. Saves Location and its
-	 * referenced Premises and Container elements. Does NOT save animals,
+	 * Primary entry method for Tracker Desktop clients.  Does NOT save animals,
 	 * events, and tags.
-	 * 
-	 * Saves hierarchy in a normalized scheme with the collections being
-	 * Location, Premises, and Container.
 	 * 
 	 * Premises are saved in the Premises collection but they do not contain
 	 * proxies to the animals, but events are tagged with an _pid to indicate
 	 * which Premises uri saved them to the store.
 	 * 
-	 * Animals are saved containing Tag proxies and Tags contain actual events.
+	 * Animals are saved with Tag proxies and Tags contain actual events.
 	 * Events do not have their own Collection.
-	 * 
-	 * @see com.verticon.tracker.store.ITrackerStore#register(com.verticon.agriculture
-	 *      .Location)
 	 */
 	@Override
-	public void register(Location sourceLocation) throws IOException {
-		checkNotNull(sourceLocation, "Location must not be null.");
-		validateObject(sourceLocation);
+	public void register(Premises premises) throws IOException {
+		checkNotNull(premises, "Premises must not be null.");
+		Location location = premises.getLocation();
+		checkNotNull(location, "Premises location must not be null.");
+		validateObject(premises);
 		
 		if (!trackerStoreAdmin.isCurrentUserAdmin()) {
 		throw new StoreAccessException(
-				"Attempt to save location with out administration privelages.");
+				"Attempt to save premises with out administration privelages.");
 	    }
 		
-		if (!trackerStoreAdmin.isValidUri(sourceLocation.getUri())) {
+		if (!trackerStoreAdmin.isValidUri(premises.getUri())) {
 		throw new StoreAccessException(
-				"Attempt to save location with a foriegn uri on the Premises that is not set up in the Administration access control.");
+				"Attempt to save premises with a foriegn uri on the Premises that is not set up in the Administration access control.");
 	    }
 		
 		
-//		if (!sourceLocation.getUri().equals(premisesURI)) {
-//			throw new StoreAccessException(
-//					"Attempt to save location with a foriegn uri on the Premises.");
-//		}
-
-		// validateObject(sourceLocation.getLivestock());
-
-		Location persistedLocation = retrieveLocation(sourceLocation.getUri());
-		Location targetLocation = EcoreUtil.copy(sourceLocation);
-		resourceFactory.add(targetLocation, Element.LOCATION);
-
-		// KML Container
-		Container targetGeography = EcoreUtil.copy(sourceLocation
-				.getGeography());
-		targetLocation.setGeography(targetGeography);
-		resourceFactory.add(targetGeography, Element.CONTAINER);
-		assert (targetGeography.eResource().getURI().toString()
-				.startsWith("mongo://"));
-		recordChanges(targetGeography,
-				persistedLocation != null ? persistedLocation.getGeography()
-						: null);
-		
-//		// KML Placemark
-//		Placemark targetPlacemark = EcoreUtil.copy(sourceLocation
-//				.getPlace());
-//		targetLocation.setPlace(targetPlacemark);
-//		resourceFactory.add(targetPlacemark, Element.PLACEMARK);
-//		assert (targetPlacemark.eResource().getURI().toString()
-//				.startsWith("mongo://"));
-//		recordChanges(targetPlacemark,
-//				persistedLocation != null ? persistedLocation.getPlace()
-//						: null);
-//				
 		// Premises
-		Premises targetPremises = EcoreUtil.copy(sourceLocation.getLivestock());
-		targetLocation.setLivestock(targetPremises);
+		Premises targetPremises = EcoreUtil.copy(premises);
+		Premises persistedPremises = retrievePremises(premises.getUri(),null,null);
 		resourceFactory.add(targetPremises, Element.PREMISES);
-		recordChangesAndNoAnimals(targetPremises,
-				persistedLocation != null ? persistedLocation.getLivestock()
-						: null);
+		recordChangesAndNoAnimals(targetPremises,persistedPremises);
 		assert (targetPremises.eResource().getURI().toString()
 				.startsWith("mongo://"));
-
-		// Save the location
-		resourceFactory.save(targetLocation, LOCATION);
-
 	}
 
 	@Override
@@ -369,7 +316,7 @@ public class TrackerStore implements ITrackerStore {
 				.getAnimals().size());
 		List<Animal> animalsToProcess = Utils.filterAnimalsToRecord(
 				premises.getAnimals(),
-				Utils.getLastUpdate(premisesURI, db));
+				getLastUpdate(premisesURI, db));
 	
 		for (Animal animal : animalsToProcess) {
 			recordAnimal(animal);
@@ -407,28 +354,28 @@ public class TrackerStore implements ITrackerStore {
 		logger.debug(bundleMarker, "Deactivated");
 	}
 
-	/**
-	 * 
-	 * @param copiedContainer
-	 * @param persistedContainer
-	 *            may be null
-	 * @param resourceSet
-	 * @return
-	 * @throws IOException
-	 */
-	private boolean recordChanges(Container copiedContainer,
-			Container persistedContainer) throws IOException {
-		resourceFactory.add(copiedContainer, CONTAINER);
-		if (persistedContainer != null) {
-			copiedContainer.eResource().setURI(
-					persistedContainer.eResource().getURI());
-
-		}
-		assert (copiedContainer.eResource().getURI().toString()
-				.startsWith("mongo://"));
-		resourceFactory.save(copiedContainer, CONTAINER);
-		return true;
-	}
+//	/**
+//	 * 
+//	 * @param copiedContainer
+//	 * @param persistedContainer
+//	 *            may be null
+//	 * @param resourceSet
+//	 * @return
+//	 * @throws IOException
+//	 */
+//	private boolean recordChanges(Container copiedContainer,
+//			Container persistedContainer) throws IOException {
+//		resourceFactory.add(copiedContainer, CONTAINER);
+//		if (persistedContainer != null) {
+//			copiedContainer.eResource().setURI(
+//					persistedContainer.eResource().getURI());
+//
+//		}
+//		assert (copiedContainer.eResource().getURI().toString()
+//				.startsWith("mongo://"));
+//		resourceFactory.save(copiedContainer, CONTAINER);
+//		return true;
+//	}
 	
 //	private boolean recordChanges(Placemark copiedPlacemark,
 //			Placemark persistedPlacemark) throws IOException {
@@ -667,5 +614,22 @@ public class TrackerStore implements ITrackerStore {
 
 		return result;
 	}
+
+
+
+	
+
+
+
+//	/*
+//	 * (non-Javadoc)
+//	 * @see com.verticon.tracker.store.ITrackerStore#retrieveAssociation(java.lang.String)
+//	 */
+//	@Override
+//	public Association retrieveAssociation(String name) {
+//		Resource resource = resourceFactory.getResource(Element.ASSOCIATION, name);
+//		return resource.getContents().isEmpty() ? null : (Association) resource
+//				.getContents().get(0);
+//	}
 
 }

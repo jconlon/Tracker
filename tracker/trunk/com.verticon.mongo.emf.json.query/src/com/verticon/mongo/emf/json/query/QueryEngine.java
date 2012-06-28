@@ -54,9 +54,8 @@ public class QueryEngine implements IQueryEngine {
 	 */
 	@Override
 	public MongoQuery buildDBObjectQuery(URI uri) {
-		logger.debug(bundleMarker, "** BUILDING " + uri);
 		String query = URI.decode(uri.query());
-		logger.debug(bundleMarker, "QUERY " + query);
+		logger.debug(bundleMarker, "raw={}, decoded query={}",uri, query);
 		Injector injector = new MongoQueryStandaloneSetupGenerated()
 				.createInjector();
 		XtextResourceSet resourceSet = injector
@@ -113,7 +112,7 @@ public class QueryEngine implements IQueryEngine {
 		}
 
 		MongoQuery result = visitor.build();
-		logger.info(bundleMarker, "Created {}", result);
+		logger.info(bundleMarker, "Created objectFilter={}, fieldFilter={}", result.getObjectFilter(),result.getFieldFilter());
 		return result;
 	}
 

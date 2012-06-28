@@ -76,8 +76,8 @@ public class DBObjectQueryBuilder extends MongoQuerySwitch<Object> {
 	public Object caseSelector(Selector object) {
 		boolean hasQuery = object.getQuery() != null;
 		boolean hasSelection = object.getSelection() != null;
-		logger.debug(bundleMarker,"* Selector " + "has a Query " + hasQuery
-				+ " has a Selection " + hasSelection);
+//		logger.debug(bundleMarker,"* Selector " + "has a Query " + hasQuery
+//				+ " has a Selection " + hasSelection);
 		return Boolean.TRUE;
 	}
 
@@ -93,12 +93,12 @@ public class DBObjectQueryBuilder extends MongoQuerySwitch<Object> {
 		int size = object.getMembers().size();
 
 		if (queryCollector == null) {
-			logger.debug(bundleMarker,"* QueryObject adding root QueryCollector with "
-					+ size + " members");
+//			logger.debug(bundleMarker,"* QueryObject adding root QueryCollector with "
+//					+ size + " members");
 			queryCollector = new QueryCollector(size, "root");
 		} else {
-			logger.debug(bundleMarker,"* QueryObject adding child QueryCollector with "
-							+ size + " members");
+//			logger.debug(bundleMarker,"* QueryObject adding child QueryCollector with "
+//							+ size + " members");
 			childCounter++;
 			queryCollector.addChild(new QueryCollector(size, "child"+childCounter));
 		}
@@ -115,8 +115,8 @@ public class DBObjectQueryBuilder extends MongoQuerySwitch<Object> {
 	 */
 	@Override
 	public Object caseSelection(Selection object) {
-		logger.debug(bundleMarker,"* Selection has " + object.getFields().size()
-				+ " SelectionFields");
+//		logger.debug(bundleMarker,"* Selection has " + object.getFields().size()
+//				+ " SelectionFields");
 		return Boolean.TRUE;
 	}
 
@@ -129,8 +129,8 @@ public class DBObjectQueryBuilder extends MongoQuerySwitch<Object> {
 	 */
 	@Override
 	public Object caseFieldSelection(FieldSelection object) {
-		logger.debug(bundleMarker,"* FieldSelection with Key=" + object.getKey()
-				+ " Enabled=" + object.getEnabled());
+//		logger.debug(bundleMarker,"* FieldSelection with Key=" + object.getKey()
+//				+ " Enabled=" + object.getEnabled());
 		fieldFilterMap.put(object.getKey(), object.getEnabled());
 		return Boolean.TRUE;
 	}
@@ -146,28 +146,28 @@ public class DBObjectQueryBuilder extends MongoQuerySwitch<Object> {
 	public Object caseQuery(Query query) {
 		if (query.getKey() != null) {
 
-			logger.debug(bundleMarker,"* Query with Key=" + query.getKey());
+//			logger.debug(bundleMarker,"* Query with Key=" + query.getKey());
 			queryCollector.addKey(clean(query.getKey()));
 
 		} else if (query.getStringValue() != null) {
-			logger.debug(bundleMarker,"* Query with String=" + query.getStringValue());
+//			logger.debug(bundleMarker,"* Query with String=" + query.getStringValue());
 			queryCollector.addValue(clean(query.getStringValue()));
 
 		} else if (query.getObjectValue() != null) {
-			logger.debug(bundleMarker,"* Query with Object");
+//			logger.debug(bundleMarker,"* Query with Object");
 		} else if (query.getArrayValue() != null) {
-			logger.debug(bundleMarker,"* Query with Array=" + query.getArrayValue());
+//			logger.debug(bundleMarker,"* Query with Array=" + query.getArrayValue());
 		} else if (query.getNumberValue() != Double.NaN && query.getNumberValue()!=0) {
-			logger.debug(bundleMarker,"* Query with Number=" + query.getNumberValue());
+//			logger.debug(bundleMarker,"* Query with Number=" + query.getNumberValue());
 			queryCollector.addValue(query.getNumberValue());
 		} else if (query.getDateValue() !=null){
-			logger.debug(bundleMarker,"* Query with Date=" + query.getDateValue());
+//			logger.debug(bundleMarker,"* Query with Date=" + query.getDateValue());
 			queryCollector.addValue(createDate(query.getDateValue()));
 		} else if (query.getValue() != null) {
-			logger.debug(bundleMarker,"* Query with Value=" + query.getValue());
+//			logger.debug(bundleMarker,"* Query with Value=" + query.getValue());
 		} else {
-			logger.debug(bundleMarker,"* Query with Integer="
-					+ query.getIntegerValue());
+//			logger.debug(bundleMarker,"* Query with Integer="
+//					+ query.getIntegerValue());
 			queryCollector.addValue(query.getIntegerValue());
 		}
 		return Boolean.TRUE;
@@ -182,8 +182,8 @@ public class DBObjectQueryBuilder extends MongoQuerySwitch<Object> {
 	 */
 	@Override
 	public Object caseArray(Array object) {
-		logger.debug(bundleMarker,"* Array with " + object.getValues().size()
-				+ " members");
+//		logger.debug(bundleMarker,"* Array with " + object.getValues().size()
+//				+ " members");
 		queryCollector.addArray(object.getValues().size());
 		return Boolean.TRUE;
 	}
@@ -197,7 +197,7 @@ public class DBObjectQueryBuilder extends MongoQuerySwitch<Object> {
 	 */
 	@Override
 	public Object defaultCase(EObject object) {
-		logger.debug(bundleMarker,"* Unknown object:" + object);
+//		logger.warn(bundleMarker,"Unknown object={}", object);
 		return Boolean.TRUE;
 	}
 	
@@ -232,14 +232,14 @@ public class DBObjectQueryBuilder extends MongoQuerySwitch<Object> {
 			if (child != null && child.memberIsComplete()) {
 				child.addKey(key);
 			} else {
-				logger.debug(bundleMarker,"{} adding key {}",this,key);
+//				logger.debug(bundleMarker,"{} adding key {}",this,key);
 				keyStack.push(key);
 			}
 		}
 
 		void addChild(QueryCollector child) {
 			assert (this.child == null);
-			logger.debug(bundleMarker,"{} adding child {}",this, child);
+//			logger.debug(bundleMarker,"{} adding child {}",this, child);
 			this.child = child;
 		}
 
@@ -249,14 +249,14 @@ public class DBObjectQueryBuilder extends MongoQuerySwitch<Object> {
 			} else {
 				if (collection != null) {
 					// There is a pending collection add to it
-					logger.debug(bundleMarker,"{} adding {} to collection ",this,value);
+//					logger.debug(bundleMarker,"{} adding {} to collection ",this,value);
 					collection.add(value);
 					if (collection.isFull()) {
 						String key = keyStack.pop();
 						memberCount--;
 						map.put(key, collection);
 						collection = null;
-						logger.debug(bundleMarker,"{} collection is complete",this);
+//						logger.debug(bundleMarker,"{} collection is complete",this);
 					}
 
 				} else {
@@ -264,16 +264,16 @@ public class DBObjectQueryBuilder extends MongoQuerySwitch<Object> {
 					String key = keyStack.pop();
 					memberCount--;
 					map.put(key, value);
-					logger.debug(bundleMarker,"{} adding to map key={} value={}",
-							new Object[]{this,key,value});
+//					logger.debug(bundleMarker,"{} adding to map key={} value={}",
+//							new Object[]{this,key,value});
 				}
 			}
 			if (child != null && child.memberIsComplete() && child.allMembersAreProcessed()) {
 				String key = keyStack.pop();
 				DBObject dbObject = child.buildObjectFilter();
 				map.put(key, dbObject);
-				logger.debug(bundleMarker, "{} adding to map key={} child {} built as dbObject {}",
-						new Object[]{this, key, child, dbObject});
+//				logger.debug(bundleMarker, "{} adding to map key={} child {} built as dbObject {}",
+//						new Object[]{this, key, child, dbObject});
 				child = null;
 			}
 		}
@@ -283,7 +283,7 @@ public class DBObjectQueryBuilder extends MongoQuerySwitch<Object> {
 				child.addArray(size);
 			} else {
 				collection = new FixedSizeList(size);
-				logger.debug(bundleMarker,"{} adding a collection size={}",this, size);
+//				logger.debug(bundleMarker,"{} adding a collection size={}",this, size);
 			}
 		}
 		
@@ -322,7 +322,7 @@ public class DBObjectQueryBuilder extends MongoQuerySwitch<Object> {
 	
 	@SuppressWarnings("deprecation")
 	public Date createDate(JsonDate date) {
-        logger.debug(bundleMarker, "Creating Java date from "+date);
+//        logger.debug(bundleMarker, "Creating Java date from "+date);
 		Date result = null;
 		if (date.getDateString()!=null) {
 			try {
@@ -341,7 +341,7 @@ public class DBObjectQueryBuilder extends MongoQuerySwitch<Object> {
 			result = new Date();
 
 		}
-		logger.debug(bundleMarker, "Created Java date "+result);
+//		logger.debug(bundleMarker, "Created Java date "+result);
 		return result;
 	}
 

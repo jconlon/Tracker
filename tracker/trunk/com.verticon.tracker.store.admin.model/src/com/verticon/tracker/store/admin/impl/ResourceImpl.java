@@ -4,7 +4,6 @@
 package com.verticon.tracker.store.admin.impl;
 
 import java.util.Collection;
-import java.util.Date;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
@@ -14,7 +13,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
-import com.verticon.tracker.store.admin.Access;
 import com.verticon.tracker.store.admin.Admin;
 import com.verticon.tracker.store.admin.AdminPackage;
 import com.verticon.tracker.store.admin.Association;
@@ -29,10 +27,9 @@ import com.verticon.tracker.store.admin.Resource;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.verticon.tracker.store.admin.impl.ResourceImpl#getUri <em>Uri</em>}</li>
- *   <li>{@link com.verticon.tracker.store.admin.impl.ResourceImpl#getPublic <em>Public</em>}</li>
  *   <li>{@link com.verticon.tracker.store.admin.impl.ResourceImpl#getPublisher <em>Publisher</em>}</li>
  *   <li>{@link com.verticon.tracker.store.admin.impl.ResourceImpl#getAssociation <em>Association</em>}</li>
- *   <li>{@link com.verticon.tracker.store.admin.impl.ResourceImpl#getLastMod <em>Last Mod</em>}</li>
+ *   <li>{@link com.verticon.tracker.store.admin.impl.ResourceImpl#isPublic <em>Public</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,26 +64,6 @@ public class ResourceImpl extends EObjectImpl implements Resource {
 	protected String uri = URI_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getPublic() <em>Public</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPublic()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Access PUBLIC_EDEFAULT = Access.OPEN;
-
-	/**
-	 * The cached value of the '{@link #getPublic() <em>Public</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPublic()
-	 * @generated
-	 * @ordered
-	 */
-	protected Access public_ = PUBLIC_EDEFAULT;
-
-	/**
 	 * The cached value of the '{@link #getPublisher() <em>Publisher</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -107,24 +84,24 @@ public class ResourceImpl extends EObjectImpl implements Resource {
 	protected EList<Association> association;
 
 	/**
-	 * The default value of the '{@link #getLastMod() <em>Last Mod</em>}' attribute.
+	 * The default value of the '{@link #isPublic() <em>Public</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLastMod()
+	 * @see #isPublic()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Date LAST_MOD_EDEFAULT = null;
+	protected static final boolean PUBLIC_EDEFAULT = true;
 
 	/**
-	 * The cached value of the '{@link #getLastMod() <em>Last Mod</em>}' attribute.
+	 * The cached value of the '{@link #isPublic() <em>Public</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLastMod()
+	 * @see #isPublic()
 	 * @generated
 	 * @ordered
 	 */
-	protected Date lastMod = LAST_MOD_EDEFAULT;
+	protected boolean public_ = PUBLIC_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -164,27 +141,6 @@ public class ResourceImpl extends EObjectImpl implements Resource {
 		uri = newUri;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AdminPackage.RESOURCE__URI, oldUri, uri));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Access getPublic() {
-		return public_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setPublic(Access newPublic) {
-		Access oldPublic = public_;
-		public_ = newPublic == null ? PUBLIC_EDEFAULT : newPublic;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AdminPackage.RESOURCE__PUBLIC, oldPublic, public_));
 	}
 
 	/**
@@ -242,8 +198,8 @@ public class ResourceImpl extends EObjectImpl implements Resource {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Date getLastMod() {
-		return lastMod;
+	public boolean isPublic() {
+		return public_;
 	}
 
 	/**
@@ -251,11 +207,11 @@ public class ResourceImpl extends EObjectImpl implements Resource {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLastMod(Date newLastMod) {
-		Date oldLastMod = lastMod;
-		lastMod = newLastMod;
+	public void setPublic(boolean newPublic) {
+		boolean oldPublic = public_;
+		public_ = newPublic;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AdminPackage.RESOURCE__LAST_MOD, oldLastMod, lastMod));
+			eNotify(new ENotificationImpl(this, Notification.SET, AdminPackage.RESOURCE__PUBLIC, oldPublic, public_));
 	}
 
 	/**
@@ -264,7 +220,7 @@ public class ResourceImpl extends EObjectImpl implements Resource {
 	 * @generated NOT
 	 */
 	public boolean canAccess(String targetUri) {
-		if(getPublic().equals(Access.OPEN)){
+		if(isPublic()){
 			return true;
 		}
 		for (Resource resource : ((Admin)eContainer).getResource()) {
@@ -293,15 +249,13 @@ public class ResourceImpl extends EObjectImpl implements Resource {
 		switch (featureID) {
 			case AdminPackage.RESOURCE__URI:
 				return getUri();
-			case AdminPackage.RESOURCE__PUBLIC:
-				return getPublic();
 			case AdminPackage.RESOURCE__PUBLISHER:
 				if (resolve) return getPublisher();
 				return basicGetPublisher();
 			case AdminPackage.RESOURCE__ASSOCIATION:
 				return getAssociation();
-			case AdminPackage.RESOURCE__LAST_MOD:
-				return getLastMod();
+			case AdminPackage.RESOURCE__PUBLIC:
+				return isPublic();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -318,9 +272,6 @@ public class ResourceImpl extends EObjectImpl implements Resource {
 			case AdminPackage.RESOURCE__URI:
 				setUri((String)newValue);
 				return;
-			case AdminPackage.RESOURCE__PUBLIC:
-				setPublic((Access)newValue);
-				return;
 			case AdminPackage.RESOURCE__PUBLISHER:
 				setPublisher((Member)newValue);
 				return;
@@ -328,8 +279,8 @@ public class ResourceImpl extends EObjectImpl implements Resource {
 				getAssociation().clear();
 				getAssociation().addAll((Collection<? extends Association>)newValue);
 				return;
-			case AdminPackage.RESOURCE__LAST_MOD:
-				setLastMod((Date)newValue);
+			case AdminPackage.RESOURCE__PUBLIC:
+				setPublic((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -346,17 +297,14 @@ public class ResourceImpl extends EObjectImpl implements Resource {
 			case AdminPackage.RESOURCE__URI:
 				setUri(URI_EDEFAULT);
 				return;
-			case AdminPackage.RESOURCE__PUBLIC:
-				setPublic(PUBLIC_EDEFAULT);
-				return;
 			case AdminPackage.RESOURCE__PUBLISHER:
 				setPublisher((Member)null);
 				return;
 			case AdminPackage.RESOURCE__ASSOCIATION:
 				getAssociation().clear();
 				return;
-			case AdminPackage.RESOURCE__LAST_MOD:
-				setLastMod(LAST_MOD_EDEFAULT);
+			case AdminPackage.RESOURCE__PUBLIC:
+				setPublic(PUBLIC_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -372,14 +320,12 @@ public class ResourceImpl extends EObjectImpl implements Resource {
 		switch (featureID) {
 			case AdminPackage.RESOURCE__URI:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
-			case AdminPackage.RESOURCE__PUBLIC:
-				return public_ != PUBLIC_EDEFAULT;
 			case AdminPackage.RESOURCE__PUBLISHER:
 				return publisher != null;
 			case AdminPackage.RESOURCE__ASSOCIATION:
 				return association != null && !association.isEmpty();
-			case AdminPackage.RESOURCE__LAST_MOD:
-				return LAST_MOD_EDEFAULT == null ? lastMod != null : !LAST_MOD_EDEFAULT.equals(lastMod);
+			case AdminPackage.RESOURCE__PUBLIC:
+				return public_ != PUBLIC_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -398,8 +344,6 @@ public class ResourceImpl extends EObjectImpl implements Resource {
 		result.append(uri);
 		result.append(", public: ");
 		result.append(public_);
-		result.append(", lastMod: ");
-		result.append(lastMod);
 		result.append(')');
 		return result.toString();
 	}

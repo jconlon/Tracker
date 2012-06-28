@@ -16,6 +16,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 
+import com.google.common.base.Strings;
 import com.verticon.tracker.store.ITrackerStore;
 import com.verticon.tracker.store.admin.api.ITrackerStoreAdmin;
 
@@ -94,9 +95,11 @@ public class Activator extends AbstractUIPlugin {
 	 * @throws InvalidSyntaxException
 	 */
 	public ITrackerStore getStore(String uri) throws InvalidSyntaxException {
-		String filter = new StringBuilder().append("(tracker.premises.uri=")
+		String filter = null;
+		if(!Strings.isNullOrEmpty(uri)){
+			filter = new StringBuilder().append("(tracker.premises.uri=")
 				.append(uri).append(')').toString();
-
+		}
 		// Register directly with the service
 		ServiceReference<?>[] references = context.getServiceReferences(
 				ITrackerStore.class.getName(), filter);

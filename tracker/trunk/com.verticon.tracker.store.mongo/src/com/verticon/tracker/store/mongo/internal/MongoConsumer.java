@@ -24,6 +24,7 @@ import java.util.Collection;
 import org.osgi.service.wireadmin.Consumer;
 import org.osgi.service.wireadmin.Envelope;
 import org.osgi.service.wireadmin.Wire;
+import org.osgi.service.wireadmin.WireConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,8 +65,8 @@ public class MongoConsumer implements Consumer {
 		if (in instanceof Envelope) {
 			statusMonitor.incrementTotalProductsConsumed();
 			Envelope envelope = (Envelope) in;
-			logger.debug(bundleMarker, "Consuming value={}",
-					envelope.getValue());
+			logger.debug(bundleMarker, "Wire scope={} pid={} updated with object id={}, value={}",
+					new Object[]{Arrays.toString(wire.getScope()),wire.getProperties().get(WireConstants.WIREADMIN_PID),envelope.getIdentification(), envelope.getValue()});
 			if (envelope.getValue() != null) {
 				if (envelope.getValue() instanceof Tag) {
 					handle((Tag) envelope.getValue(), null);
@@ -92,9 +93,18 @@ public class MongoConsumer implements Consumer {
 	 * @throws EventCreationException
 	 */
 	private void handle(final Envelope envelope) {
-		logger.debug(bundleMarker, "Handling value={}", envelope.getValue());
+		logger.debug(bundleMarker, "Handling id={}, value={}",
+				envelope.getIdentification(), envelope.getValue());
 		Tag tag = TrackerFactory.eINSTANCE.createTag();
-		String id = (String) envelope.getIdentification();
+		String id = null;
+		if(envelope.getIdentification() instanceof Long){
+			id = ((Long) envelope.getIdentification()).toString();
+		}else if(envelope.getIdentification() instanceof String){
+			id = (String) envelope.getIdentification();
+		}
+		
+		checkArgument(id!=null,"Failed to handle a message identification. It is neither a Long or a String. Identification="+envelope.getIdentification());
+		
 		tag.setId(id);
 		try {
 			Event event = PremisesIRouterUtils.createEvent(new IOCDFinder() {
@@ -222,13 +232,19 @@ public class MongoConsumer implements Consumer {
 					"Animal must have only one tag.");
 		}
 		// get a persisted tag
-		logger.debug(bundleMarker, "Handling tag {} with {} events, animal={}", 
-				new Object[] {tag!=null?tag.getId():"null", tag!=null?tag.getEvents().size():"null", animal});
+	    if(logger.isDebugEnabled()){
+	    	logger.debug(bundleMarker, "Handling tag {} with {} events, animal={}", 
+				new Object[] {tag!=null?tag.getId():"null", tag!=null?tag.getEvents().size():"null", animal!=null?animal.eClass().getName():null});
+			for (Event event : tag.getEvents()) {
+				logger.debug(bundleMarker,"Handling event={}",event.eClass().getName());
+			}
+	    }
 		Tag persistedTag = (Tag) resourceFactory.query(TAG, tag.getId());
 		if(persistedTag!=null){
 			Collection<Event> newerEventsToAdd = NewerEvents.getNewerEvents(tag, persistedTag);
 			if (newerEventsToAdd.isEmpty()) {
-				return;// Tag is already persisted with all the events
+				logger.debug(bundleMarker,"Tag is already persisted with all the events");
+				return;
 			}
 			try {
 				update(persistedTag, newerEventsToAdd);

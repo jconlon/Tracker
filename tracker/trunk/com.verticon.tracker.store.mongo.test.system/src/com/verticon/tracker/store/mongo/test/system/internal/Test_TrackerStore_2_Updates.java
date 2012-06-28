@@ -11,10 +11,8 @@
 
 package com.verticon.tracker.store.mongo.test.system.internal;
 
-import static com.google.common.collect.Sets.newHashSet;
 import static com.verticon.tracker.store.mongo.test.system.internal.TestUtils.getXMIResource;
 import static com.verticon.tracker.store.mongo.test.system.internal.TestUtils.removeLastModificationTimesOnAllResources;
-import static com.verticon.tracker.store.mongo.test.system.internal.Test_TrackerStore_1_Basic.DOC_AGRI_VALID;
 import static com.verticon.tracker.store.mongo.test.system.internal.Test_TrackerStore_1_Basic.PLUGIN_ID;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -53,10 +51,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
-import com.verticon.agriculture.Agriculture;
-import com.verticon.agriculture.AgriculturePackage;
-import com.verticon.agriculture.Location;
-import com.verticon.opengis.kml.Container;
+import com.verticon.location.Location;
 import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
@@ -139,7 +134,6 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 	 */
 	static final String AIN_1 = "tag1";
 	static final String AIN_2 = "tag2";
-	static final String PIN = "urn:pin:H89234X";
 	private static final String DOC_PREMISES_4_11 = "4-11-2008-test.data.premises";
 	private static final String DOC_PREMISES_4_12 = "4-12-2008-test.data.premises";
 	private static final String DOC_PREMISES_5_16 = "5-16-2008-test.data.premises";
@@ -297,14 +291,6 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 				is(true));
 		assertThat("Must have only 1 OCD", coll.find().count(), is(1));
 		
-		
-		// Location
-	    coll = db.getCollection(AgriculturePackage.Literals.LOCATION.getName());
-		assertThat("Location collection should exist.",
-						db.collectionExists(AgriculturePackage.Literals.LOCATION.getName()),
-						is(true));
-		
-		assertThat("Must have 2 locations", coll.find().count(), is(1));
 
 	}
 
@@ -344,66 +330,33 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 				.resetStatusVariable(Variables.TOTAL_ANIMALS_PROCESSED.statusVarID);
 	}
 
-	public void testRegister() throws IOException, ParseException {
-		logger.debug(bundleMarker, "starting testUpdateLocation");
-		Resource resource = getXMIResource(DOC_AGRI_VALID, "updateTests");
+	public void testRegister() throws IOException {
+		logger.debug(bundleMarker, "starting testRegister");
+		Resource resource = getXMIResource(DOC_PREMISES_4_11, "updateTests");
+		Premises premises  = (Premises) resource.getContents().get(0);
 		
+		assertThat("URI must be urn:pin:003ALKM", premises.getUri(), is(Member.THREE.uri));
 		
-		Agriculture agriculture = (Agriculture) resource.getContents().get(0);
-		assertThat("Not a valid agriculture", TestUtils.isValidObject(agriculture),
-				is(true));
-		
-		Location location = agriculture.getLocation().get(0);
-		assertThat("Not a valid location", TestUtils.isValidObject(location),
-				is(true));
-		Premises premises = location.getLivestock();
 		assertThat("Premises must have 72 animalsl", premises.getAnimals()
 				.size(), is(72));
 		assertThat("Premises not enough events",
 				premises.eventHistory().size(), is(289));
+		
+		Location location = premises.getLocation();
 
-		Container container = location.getGeography();
-		assertThat("Container cannot be null.", container, is(notNullValue()));
+		assertThat("Logitude is -90.887591",location.getLongitude(),
+				is(-90.887591));
+		
+		assertThat("Latitude is 43.565265",location.getLatitude(),
+				is(43.565265));
+		
+		assertThat("Altitude is 0.1",location.getAltitude(),
+				is(0.1));
+	
+		
+		store.register(premises);
 
-		logger.debug(
-				bundleMarker,
-				"First event Date={}; DateKey={}; DateTime={}",
-				new String[] { premises.eventHistory().get(0).getDate(),
-						premises.eventHistory().get(0).getDateKey(),
-						premises.eventHistory().get(0).getDateTime().toString() });
-		URI locationURI = location.eResource().getURI();
-		URI premisesURI = premises.eResource().getURI();
-		URI containerURI = location.getGeography().eResource().getURI();
-		URI firstAnimalURI = premises.getAnimals().get(0).eResource().getURI();
-
-		store.register(location);
-		assertThat("Must not have changed the uri of the location", location
-				.eResource().getURI(), is(locationURI));
-		assertThat("Must not have changed the uri of the premises", premises
-				.eResource().getURI(), is(premisesURI));
-		assertThat("Must not have changed the uri of the container", location
-				.getGeography().eResource().getURI(), is(containerURI));
-		assertThat("Must not have changed the uri of the first animal",
-				premises.getAnimals().get(0).eResource().getURI(),
-				is(firstAnimalURI));
-		assertThat(
-				"Must have processed 0 animals.",
-				monitorable.getStatusVariable(
-						Variables.TOTAL_ANIMALS_PROCESSED.statusVarID)
-						.getInteger(), is(0));
-
-		assertThat("Premises must still have 72 animalsl", premises
-				.getAnimals().size(), is(72));
-
-		Location retrievedLocation = store.retrieveLocation(location.getUri());
-		assertThat("Retrieved Location must not be null.", retrievedLocation,
-				is(notNullValue()));
-		assertThat("Retrieved Premises must not be null.",
-				retrievedLocation.getLivestock(), is(notNullValue()));
-		assertThat("Retrieved Geography must not be null.",
-				retrievedLocation.getGeography(), is(notNullValue()));
-
-		Premises retrievedPremises = store.retrievePremises(location.getUri(),
+		Premises retrievedPremises = store.retrievePremises(Member.THREE.uri,
 				null, null);
 		assertThat("Retrieved Premises must not be null.", retrievedPremises,
 				is(notNullValue()));
@@ -715,7 +668,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 
 	}
 
-	public void testRetrievePremises_4_11() throws ParseException {
+	public void testRetrievePremises_4_11() throws IOException {
 		logger.debug(bundleMarker,
 				"starting testRetrievePremisesFromUpdateLocation");
 		Premises premises = store.retrievePremises(Member.THREE.uri, DATE_4_11,
@@ -733,7 +686,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 
 	}
 
-	public void testQuery_DB_driver_4_11() throws ParseException,
+	public void testQuery_DB_driver_4_11() throws Exception,
 			UnknownHostException, MongoException {
 		Mongo m = new Mongo();
 		DB db = m.getDB("tracker");
@@ -778,7 +731,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 		assertThat("Result must be 72 animals", animals.size(), is(72));
 	}
 
-	public void testRetrievePremises_4_12() throws ParseException {
+	public void testRetrievePremises_4_12() throws IOException {
 		logger.debug(bundleMarker,
 				"starting testRetrievePremisesFromUpdateLocation");
 		Premises premises = store.retrievePremises(Member.THREE.uri, DATE_4_12,
@@ -816,7 +769,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 		// premises
 	}
 
-	public void testQuery_DB_driver_4_12() throws ParseException,
+	public void testQuery_DB_driver_4_12() throws Exception,
 			UnknownHostException, MongoException {
 		Mongo m = new Mongo();
 		DB db = m.getDB("tracker");
@@ -854,7 +807,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 		assertThat("Result must be 37 animals", animals.size(), is(37));
 	}
 
-	public void testRetrievePremises_5_16() throws ParseException {
+	public void testRetrievePremises_5_16() throws Exception {
 		logger.debug(bundleMarker,
 				"starting testRetrievePremisesFromUpdateLocation");
 		Premises premises = store.retrievePremises(Member.THREE.uri, DATE_5_16,
@@ -870,7 +823,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 
 	}
 
-	public void testQuery_DB_driver_5_16() throws ParseException,
+	public void testQuery_DB_driver_5_16() throws Exception,
 			UnknownHostException, MongoException {
 		Mongo m = new Mongo();
 		DB db = m.getDB("tracker");
@@ -908,7 +861,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 		assertThat("Result must be 94 animals", animals.size(), is(94));
 	}
 
-	public void testRetrievePremises_5_17() throws ParseException {
+	public void testRetrievePremises_5_17() throws Exception {
 		logger.debug(bundleMarker,
 				"starting testRetrievePremisesFromUpdateLocation");
 		Premises premises = store.retrievePremises(Member.THREE.uri, DATE_5_17,
@@ -924,7 +877,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 
 	}
 
-	public void testRetrievePremises_9_10() throws ParseException {
+	public void testRetrievePremises_9_10() throws Exception {
 		logger.debug(bundleMarker,
 				"starting testRetrievePremisesFromUpdateLocation");
 		Premises premises = store.retrievePremises(Member.THREE.uri, DATE_9_10,
@@ -945,7 +898,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 		TestUtils.saveXMIResource("out_9_10.premises", premises);
 	}
 
-	public void testRetrievePremises_9_14() throws ParseException {
+	public void testRetrievePremises_9_14() throws Exception {
 		logger.debug(bundleMarker,
 				"starting testRetrievePremisesFromUpdateLocation");
 		Premises premises = store.retrievePremises(Member.THREE.uri, DATE_9_14,
@@ -961,13 +914,13 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 
 	}
 
-	public void testSavePremises_9_14() throws ParseException, IOException {
+	public void testSavePremises_9_14() throws Exception, IOException {
 		Premises premises = store.retrievePremises(Member.THREE.uri, DATE_9_14,
 				DATE_9_15);
 		TestUtils.saveXMIResource("out_9_14.premises", premises);
 	}
 
-	public void testRetrievePremises_9_15() throws ParseException {
+	public void testRetrievePremises_9_15() throws Exception {
 		logger.debug(bundleMarker,
 				"starting testRetrievePremisesFromUpdateLocation");
 		Premises premises = store.retrievePremises(Member.THREE.uri, DATE_9_15,
@@ -982,16 +935,8 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 				.size(), is(35));
 
 	}
-	
-	public void testRetrieveLocations(){
-		Set<String> uris = newHashSet();
-		uris.add(Member.ONE.uri);
-		uris.add(Member.THREE.uri);
-		Agriculture ag = store.retrieveLocations(uris);
-		assertThat("Must have two locations.", ag.getLocation().size(), is(2));
-	}
 
-	public void testSavePremises_9_15() throws ParseException, IOException {
+	public void testSavePremises_9_15() throws Exception, IOException {
 		Premises premises = store.retrievePremises(Member.THREE.uri, DATE_9_15,
 				DATE_9_16);
 		TestUtils.saveXMIResource("out_9_15.premises", premises);
@@ -1035,13 +980,13 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 	 * "{'loc' :[45, 45]}"
 	 */
 	@Test
-	public void testGeoLocations_Location_Specific(){
-		String query = "{'loc' :[-90.95674265545253, 43.47493314332049]}";
-		List<EObject> eo = store.query(AgriculturePackage.Literals.LOCATION, query);
+	public void testGeoLocations_Premises_Specific(){
+		String query = "{'location.loc' :[-90.95674265545253, 43.47493314332049]}";
+		List<EObject> eo = store.query(TrackerPackage.Literals.PREMISES, query);
 		assertThat("Result must not be null.", eo, is(notNullValue()));
 		assertThat("Result must not be empty.",eo.isEmpty(), is(false));
-		assertThat("Result must be one tag", eo.size(), is(1));
-		assertThat("Result must be a Tag",eo.get(0), is(instanceOf(Location.class)));
+		assertThat("Result must be one premises", eo.size(), is(1));
+		assertThat("Result must be a Premises",eo.get(0), is(instanceOf(Premises.class)));
 	}
 	
 	/**
@@ -1054,13 +999,13 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 	 *    
 	 *    Watch out the lat long needs to have decimal points
 	 */
-	public void testGeoLocation_Location_Near(){
-		String query = "{'loc' : {$near : [-90.0, 43.0]}}";
-		List<EObject> eo = store.query(AgriculturePackage.Literals.LOCATION, query);
+	public void testGeoLocation_Premises_Near(){
+		String query = "{'location.loc' : {$near : [-90.0, 43.0]}}";
+		List<EObject> eo = store.query(TrackerPackage.Literals.PREMISES, query);
 		assertThat("Result must not be null.", eo, is(notNullValue()));
 		assertThat("Result must not be empty.",eo.isEmpty(), is(false));
-		assertThat("Result must be one tag", eo.size(), is(2));
-		assertThat("Result must be a Tag",eo.get(0), is(instanceOf(Location.class)));
+		assertThat("Result must be two premises", eo.size(), is(2));
+		assertThat("Result must be a Premises",eo.get(0), is(instanceOf(Premises.class)));
 	}
 	
 	private void countEvents(int count) throws UnknownHostException {

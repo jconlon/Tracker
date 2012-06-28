@@ -176,10 +176,31 @@ public class MongoUtils {
 			throw new IllegalStateException(target + " is not an EClass");
 		}
 
-		for (EAttribute attribute : targetClass.getEAllAttributes()) {
-			attributes.add(attribute.getName());
+		addAttributeNames(null, attributes, targetClass);
+		for (EReference reference : targetClass.getEAllReferences()) {
+			String referenceName = reference.getName()+'.';
+			targetClass = reference.getEReferenceType();
+			addAttributeNames(referenceName, attributes, targetClass);
 		}
 		Collections.sort(attributes);
+	}
+
+	private static void addAttributeNames(String prefix, List<String> attributes,
+			EClass targetClass) {
+		boolean addMongoLonLat = false;
+		for (EAttribute attribute : targetClass.getEAllAttributes()) {
+			if(
+					attribute.getName().equals("longitude")||
+					attribute.getName().equals("latitude")
+			){
+				addMongoLonLat = true;
+				continue;
+			}
+				attributes.add(prefix!=null?prefix+attribute.getName():attribute.getName());			
+		}
+		if(addMongoLonLat){
+			attributes.add(prefix!=null?prefix+"loc":"loc");
+		}
 	}
 
 	private static URI createEMFCollectionURI(URI base, String collectionName) {
