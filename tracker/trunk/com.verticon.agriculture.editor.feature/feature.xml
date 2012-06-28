@@ -33,9 +33,9 @@
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="com.google.guava"/>
       <import feature="com.verticon.tracker.editor" version="0.5.2"/>
-      <import feature="com.verticon.location" version="0.1.0"/>
-      <import feature="com.verticon.geography.editor" version="0.1.0"/>
+      <import feature="com.verticon.location.service" version="0.1.0"/>
       <import feature="com.verticon.osgi.metatype.core.model.editor" version="0.1.1"/>
+      <import feature="com.verticon.location.core.model" version="0.1.0.qualifier"/>
    </requires>
 
    <plugin
@@ -54,13 +54,6 @@
 
    <plugin
          id="com.verticon.agriculture.core.model.editor"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.vividsolutions.jts"
          download-size="0"
          install-size="0"
          version="0.0.0"

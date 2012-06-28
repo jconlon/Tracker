@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.verticon.agriculture.location.internal;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.verticon.agriculture.location.internal.Component.bundleMarker;
 
 import java.util.ArrayList;
@@ -25,7 +26,9 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.ui.MarkerHelper;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -38,9 +41,8 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.verticon.agriculture.Agriculture;
 import com.verticon.agriculture.AgriculturePackage;
-import com.verticon.agriculture.Location;
+import com.verticon.agriculture.Association;
 import com.verticon.agriculture.util.AgricultureResourceFactoryImpl;
 
 /**
@@ -48,7 +50,6 @@ import com.verticon.agriculture.util.AgricultureResourceFactoryImpl;
  * map of Premises uri keys to GeoLocations for resolving Location Service
  * lookups.
  * 
- * @see IGeoLocation
  * @see AgricultureNature
  * @author jconlon
  * 
@@ -142,40 +143,43 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 	}
 
 	private void build(IProgressMonitor monitor) throws CoreException {
-		monitor.beginTask("Building index on agriculture location service", 4);
+		monitor.beginTask("Building index on agriculture location service", 3);
 		// 1. load doc.agri file
 		if (checkCancel(monitor)) {
 			return;
 		}
 
-		Resource resource = load();
+		Resource resource;
+		try {
+			resource = load();
+		} catch (Exception e) {
+			logger.error(bundleMarker, "Failed to load "+DEFAULT_AGRICULTURE_DOCUMENT, e);
+			throw new CoreException(new Status(IStatus.ERROR, Component.PLUGIN_ID,
+					"Failed to build project. Make sure "+DEFAULT_AGRICULTURE_DOCUMENT+" exists.", e));
+		}
 		logger.debug(bundleMarker, "Building project {}", resource.getURI());
 		monitor.worked(1);
 		if (checkCancel(monitor)) {
 			return;
 		}
-
-		// 2. validate the agriculture
-		Agriculture agriculture = (Agriculture) resource.getContents().get(0);
-		validateObject(agriculture);
+		// 2. validate association
+		Object o = resource.getContents().get(0);
+		checkArgument(o instanceof Association,
+				"Agriculture document root must be an association element.");
+		
+		Association association = (Association) o;
+		validateObject(association);
 		monitor.worked(1);
 		if (checkCancel(monitor)) {
 			return;
 		}
 
-		// 3. validate locations
-		for (Location location : agriculture.getLocation()) {
-			validateObject(location);
-			validateObject(location.getLivestock());
-			validateObject(location.getGeography());
-		}
-
 		monitor.worked(1);
 		if (checkCancel(monitor)) {
 			return;
 		}
-		// 4. add the resource to the index
-		locationIndex.addAgriDocument(resource);
+		// 3. add the resource to the index
+		locationIndex.addAssociationResource(association,resource.getURI());
 		monitor.worked(1);
 
 		monitor.done();
@@ -258,7 +262,7 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 				URI uri = URI.createPlatformResourceURI(child.getFullPath()
 						.toString(), true);
 				// build if an associated kml or premises is changed.
-				if (locationIndex.isAssociatedResource(uri.toString())) {
+				if (locationIndex.isAssociatedResource(uri)) {
 					logger.debug(bundleMarker, "Affected resource: {}", uri);
 					return true;
 				}
@@ -266,87 +270,6 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 		}
 		return false;
 	}
-
-	// private void resourceChanged(IResourceDelta[] children) {
-	// final Set<String> itemsToRemove = newHashSet();
-	// final Set<String> itemsToAdd = newHashSet();
-	// for (IResourceDelta child : children) {
-	// try {
-	// child.accept(new IResourceDeltaVisitor() {
-	// public boolean visit(IResourceDelta delta) throws CoreException {
-	// switch (delta.getKind()) {
-	// case IResourceDelta.REMOVED:
-	// IResource resource = delta.getResource();
-	// logger.debug(bundleMarker, "Removed: {}", resource);
-	// String item = resolve(resource);
-	// if (item != null)
-	// itemsToRemove.add(item);
-	// logger.debug(bundleMarker, "Removed resolved: {}", item);
-	// break;
-	// case IResourceDelta.CHANGED:
-	// resource = delta.getResource();
-	// logger.debug(bundleMarker, "Changed: {}", resource);
-	// item = resolve(resource);
-	// if (item != null)
-	// itemsToAdd.add(item);
-	// logger.debug(bundleMarker, "Changed resolved: {}", item);
-	// break;
-	// case IResourceDelta.MOVED_FROM:
-	// resource = delta.getResource();
-	// logger.debug(bundleMarker, "Moved From: {}", resource);
-	// item = resolve(resource);
-	// if (item != null)
-	// itemsToRemove.add(item);
-	// logger.debug(bundleMarker, "Moved From resolved: {}", item);
-	// break;
-	// case IResourceDelta.MOVED_TO:
-	// resource = delta.getResource();
-	// logger.debug(bundleMarker, "Moved To: {}", resource);
-	// item = resolve(resource);
-	// if (item != null)
-	// itemsToAdd.add(item);
-	// logger.debug(bundleMarker, "Moved To resolved: {}", item);
-	// break;
-	// default:
-	// break;
-	// }
-	//
-	// return true;
-	// }
-	// });
-	// } catch (CoreException ex) {
-	// logger.error(bundleMarker, "Failed to handle resource change", ex);
-	// }
-	// }
-	// // LocationIndex.update( itemsToRemove, itemsToAdd);
-	// }
-
-	// /**
-	// * Resolves kml, agri, and premises documents.
-	// *
-	// * @param input
-	// * @return uri or null
-	// * @throws CoreException
-	// */
-	// private static String resolve(IResource input) throws CoreException {
-	// String result = null;
-	//
-	// if(input.getProjectRelativePath().lastSegment().equals(DEFAULT_AGRICULTURE_DOCUMENT)
-	// && input.getProject().hasNature(AgricultureNature.NATURE_ID)){
-	// String inputParent = input.getParent().getName();
-	// String projectName = input.getProject().getName();
-	// if(inputParent.equals(projectName)){
-	// result = URI.createPlatformResourceURI(input.getFullPath().toString(),
-	// true).toString();
-	// }
-	//
-	// } else if (input.getFileExtension().equals("kml") ||
-	// input.getFileExtension().equals("premises")){
-	// result = URI.createPlatformResourceURI(input.getFullPath().toString(),
-	// true).toString();
-	// }
-	// return result;
-	// }
 
 	private boolean checkCancel(IProgressMonitor monitor) {
 		if (monitor.isCanceled()) {

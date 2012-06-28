@@ -2,6 +2,6 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="com.verticon.agriculture.location">
    <implementation class="com.verticon.agriculture.location.internal.Component"/>
    <service>
-      <provide interface="com.verticon.location.LocationServiceProvider"/>
+      <provide interface="com.verticon.location.service.LocationServiceProvider"/>
    </service>
 </scr:component>
