@@ -28,8 +28,7 @@
       <import feature="com.mongodb" version="2.7.2.qualifier"/>
       <import feature="org.eclipse.emf.ecore" version="2.7.1.v20110912-0920"/>
       <import feature="org.eclipse.emf.common" version="2.7.0.v20110912-0920"/>
-      <import feature="org.eclipselabs.mongo.emf.core.feature" version="0.7.0.201206161437"/>
-      <import feature="org.eclipselabs.mongo.emf.streams.feature" version="0.7.0.201206161437"/>
+      <import feature="com.verticon.mongo.emf.runtime" version="0.1.0.qualifier"/>
    </requires>
 
    <plugin
