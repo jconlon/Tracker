@@ -25,8 +25,8 @@
 
    <requires>
       <import feature="com.mongodb" version="2.7.2.qualifier" match="greaterOrEqual"/>
-      <import feature="org.eclipselabs.mongo.emf.feature" version="0.6.0.201203280725" match="greaterOrEqual"/>
       <import feature="com.verticon.mongo.emf.json.query" version="0.1.0.qualifier"/>
+      <import feature="com.verticon.mongo.emf.runtime" version="0.1.0.qualifier"/>
    </requires>
 
    <plugin
