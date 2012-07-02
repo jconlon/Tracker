@@ -11,7 +11,8 @@ Export-Package: com.verticon.tracker.edit.provider;version="0.1.0"
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.edit;visibility:=reexport
 Bundle-ActivationPolicy: lazy
-Import-Package: com.verticon.osgi.metatype,
+Import-Package: com.verticon.location,
+ com.verticon.osgi.metatype,
  com.verticon.osgi.metatype.util,
  com.verticon.tracker;version="[0.1.0,1.0.0)",
  com.verticon.tracker.util;version="[0.1.0,1.0.0)",

@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.verticon.tracker;
 
+import com.verticon.location.Location;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -32,6 +33,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.Premises#getDescription <em>Description</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getPhoneNumber <em>Phone Number</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getAddress <em>Address</em>}</li>
+ *   <li>{@link com.verticon.tracker.Premises#getLocation <em>Location</em>}</li>
  * </ul>
  * </p>
  *
@@ -251,6 +253,32 @@ public interface Premises extends EObject {
 	 * @generated
 	 */
 	String getAddress();
+
+	/**
+	 * Returns the value of the '<em><b>Location</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Location</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Location</em>' containment reference.
+	 * @see #setLocation(Location)
+	 * @see com.verticon.tracker.TrackerPackage#getPremises_Location()
+	 * @model containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	Location getLocation();
+
+	/**
+	 * Sets the value of the '{@link com.verticon.tracker.Premises#getLocation <em>Location</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Location</em>' containment reference.
+	 * @see #getLocation()
+	 * @generated
+	 */
+	void setLocation(Location value);
 
 	/**
 	 * Returns the value of the '<em><b>Policy</b></em>' containment reference.

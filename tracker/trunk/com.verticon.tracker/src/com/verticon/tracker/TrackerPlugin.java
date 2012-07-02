@@ -24,13 +24,13 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-import com.verticon.location.LocationService;
+import com.verticon.location.service.LocationService;
 
 /**
  * @author jconlon
  * 
  */
-public class TrackerPlugin extends Plugin implements LocationService{
+public class TrackerPlugin extends Plugin{
 
 	// The identifier for this plugin
 	public static final String ID = "com.verticon.tracker";
@@ -93,6 +93,10 @@ public class TrackerPlugin extends Plugin implements LocationService{
 		return plugin;
 	}
 
+	/**
+	 * 
+	 * @return LocationService
+	 */
 	private LocationService getLocationService(){
 		LocationService locationService = null;
 		if(locationServiceTracker!=null && locationServiceTracker.getService()!=null){
@@ -105,58 +109,62 @@ public class TrackerPlugin extends Plugin implements LocationService{
 	}
 
 	/**
-	 * Not used at this time.
+	 * Used by Animals to find names for foreign premises.
 	 */
-	@Override
-	public String name(Object target) {
+	 public String name(String uri) {
 		String result = null;
 		LocationService locationService = getLocationService();
 		if(locationService != null){
-			result = locationService.name(target);
+			result = locationService.name(uri);
 		}
 		return result!=null?result:"";
 	}
 
-	/**
-	 * Called by animals to find out the location within the premises.
-	 */
-	@Override
-	public String positionIn(Object target, String coordinates) {
-		String result = null;
-		LocationService locationService = getLocationService();
-		if(locationService != null){
-			result = locationService.positionIn(target, coordinates);
-		}
-		return result!=null?result:"InPremises:"+coordinates;
-	}
+//	/**
+//	 * Called by animals to find out the location within the premises.
+//	 * @deprecated use embedded Location object
+//	 */
+//	@Override
+//	public String positionIn(Object target, String coordinates) {
+//		String result = null;
+//		LocationService locationService = getLocationService();
+//		if(locationService != null){
+//			result = locationService.positionIn(target, coordinates);
+//		}
+//		return result!=null?result:"InPremises:"+coordinates;
+//	}
 
-	/**
-	 * Called by Premises to find out its address
-	 */
-	@Override
-	public String address(Object target) {
-		String result = null;
-		LocationService locationService = getLocationService();
-		if(locationService != null){
-			result = locationService.address(target);
-		}
-		return result!=null?result:"unknown address";
-		
-	}
+//	/**
+//	 * Called by Premises to find out its address
+//	 * @deprecated use embedded Location object
+//	 */
+//	@Override
+//	public String address(Object target) {
+//		String result = null;
+//		LocationService locationService = getLocationService();
+//		if(locationService != null){
+//			result = locationService.address(target);
+//		}
+//		return result!=null?result:"unknown address";
+//		
+//	}
 
 	
-	@Override
-	public Set<String> locationsIn(Object container) {
-		Set<String> result = null;
-		LocationService locationService = getLocationService();
-		if(locationService != null){
-			result = locationService.locationsIn(container);
-		}
-		if(result == null){
-			result = Collections.emptySet();
-		}
-		return result;
-	}
+//	/**
+//	 * @deprecated use embedded Location object
+//	 */
+//	@Override
+//	public Set<String> locationsIn(Object container) {
+//		Set<String> result = null;
+//		LocationService locationService = getLocationService();
+//		if(locationService != null){
+//			result = locationService.locationsIn(container);
+//		}
+//		if(result == null){
+//			result = Collections.emptySet();
+//		}
+//		return result;
+//	}
 
 
 }

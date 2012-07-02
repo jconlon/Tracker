@@ -10,7 +10,6 @@
  *******************************************************************************/
 package com.verticon.tracker.validation;
 
-import com.verticon.tracker.Location;
 
 
 /**
@@ -22,7 +21,6 @@ import com.verticon.tracker.Location;
 public interface SightingValidator {
 	boolean validate();
 
-	boolean validateLocation(Location value);
 
 	boolean validateLocation(String value);
 

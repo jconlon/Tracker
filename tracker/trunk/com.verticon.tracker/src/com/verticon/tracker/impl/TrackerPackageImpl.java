@@ -10,6 +10,8 @@
  *******************************************************************************/
 package com.verticon.tracker.impl;
 
+import com.verticon.location.LocationPackage;
+import com.verticon.location.impl.LocationPackageImpl;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -633,14 +635,17 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 
 		// Obtain or create and register interdependencies
 		MetatypePackageImpl theMetatypePackage = (MetatypePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(MetatypePackage.eNS_URI) instanceof MetatypePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(MetatypePackage.eNS_URI) : MetatypePackage.eINSTANCE);
+		LocationPackageImpl theLocationPackage = (LocationPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(LocationPackage.eNS_URI) instanceof LocationPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(LocationPackage.eNS_URI) : LocationPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theTrackerPackage.createPackageContents();
 		theMetatypePackage.createPackageContents();
+		theLocationPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theTrackerPackage.initializePackageContents();
 		theMetatypePackage.initializePackageContents();
+		theLocationPackage.initializePackageContents();
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
@@ -1772,6 +1777,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getPremises_Location() {
+		return (EReference)premisesEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getPremises_Policy() {
 		return (EReference)premisesEClass.getEStructuralFeatures().get(5);
 	}
@@ -2318,6 +2332,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(premisesEClass, PREMISES__DESCRIPTION);
 		createEAttribute(premisesEClass, PREMISES__PHONE_NUMBER);
 		createEAttribute(premisesEClass, PREMISES__ADDRESS);
+		createEReference(premisesEClass, PREMISES__LOCATION);
 
 		bovineBeefEClass = createEClass(BOVINE_BEEF);
 		createEAttribute(bovineBeefEClass, BOVINE_BEEF__BEEF_BREED);
@@ -2513,6 +2528,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		// Obtain other dependent packages
 		XMLTypePackage theXMLTypePackage = (XMLTypePackage)EPackage.Registry.INSTANCE.getEPackage(XMLTypePackage.eNS_URI);
 		MetatypePackage theMetatypePackage = (MetatypePackage)EPackage.Registry.INSTANCE.getEPackage(MetatypePackage.eNS_URI);
+		LocationPackage theLocationPackage = (LocationPackage)EPackage.Registry.INSTANCE.getEPackage(LocationPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -2657,6 +2673,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getPremises_Description(), ecorePackage.getEString(), "description", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPremises_PhoneNumber(), this.getUSPhoneNumber(), "phoneNumber", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPremises_Address(), ecorePackage.getEString(), "address", "", 0, 1, Premises.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getPremises_Location(), theLocationPackage.getLocation(), null, "location", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(premisesEClass, this.getEvent(), "eventHistory", 0, -1, IS_UNIQUE, IS_ORDERED);
 
