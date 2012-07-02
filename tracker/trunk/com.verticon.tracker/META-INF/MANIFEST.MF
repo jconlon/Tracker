@@ -12,11 +12,12 @@ Export-Package: com.verticon.tracker;version="0.1.0",
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.ocl.ecore,
- com.verticon.osgi.metatype.core.model
+ com.verticon.osgi.metatype.core.model,
+ com.verticon.location.core.model;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: com.verticon.tracker.TrackerPlugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: com.verticon.location,
+Import-Package: com.verticon.location.service,
  org.osgi.service.metatype;version="1.1.0",
  org.osgi.util.measurement;version="1.0.1",
  org.slf4j;version="1.5.11"

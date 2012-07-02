@@ -928,8 +928,8 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 	 * Location is set to a value based on the most recently significant event in the history.
 	 * If the most recent event is a:
 	 * <ol>
-	 * <li>Position event, then the location will be resolved by the 
-	 * LocationService positionIn with the coordinates from the Position event;</li>
+	 * <li>Position event, then the location will be resolved by the Location embedded
+	 * in the Premises with the coordinates from the Position event;</li>
 	 * <li>Sighting event, then the location is resolved locally based on the name of the 
 	 * location in the sighting event;</li>
 	 * <li>MoveOut event then the location will be resolved by the 
@@ -943,9 +943,9 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 		animalLocator.location(this);
 		switch (animalLocator.getTypeOfPosition()) {
 		case HASCOORDINATES:
-			String coordinates = animalLocator.getLocation();
+			String point = animalLocator.getLocation();
 			if(eContainer()!=null ){
-				result = TrackerPlugin.getDefault().positionIn(eContainer(), coordinates);
+				result = ((Premises)eContainer()).getLocation().locate(point);
 			}
 			break;
 		case MOVED_TO_PREMISES:

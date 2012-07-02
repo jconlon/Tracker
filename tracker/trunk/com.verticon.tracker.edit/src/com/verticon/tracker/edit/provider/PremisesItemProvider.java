@@ -11,6 +11,7 @@
 package com.verticon.tracker.edit.provider;
 
 
+import com.verticon.location.LocationFactory;
 import java.util.Collection;
 import java.util.List;
 
@@ -281,6 +282,7 @@ public class PremisesItemProvider
 			childrenFeatures.add(TrackerPackage.Literals.PREMISES__ANIMALS);
 			childrenFeatures.add(TrackerPackage.Literals.PREMISES__UN_APPLIED_TAGS);
 			childrenFeatures.add(TrackerPackage.Literals.PREMISES__POLICY);
+			childrenFeatures.add(TrackerPackage.Literals.PREMISES__LOCATION);
 		}
 		return childrenFeatures;
 	}
@@ -348,6 +350,7 @@ public class PremisesItemProvider
 			case TrackerPackage.PREMISES__ANIMALS:
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
 			case TrackerPackage.PREMISES__POLICY:
+			case TrackerPackage.PREMISES__LOCATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -423,6 +426,11 @@ public class PremisesItemProvider
 			(createChildParameter
 				(TrackerPackage.Literals.PREMISES__POLICY,
 				 TrackerFactory.eINSTANCE.createPolicy()));
+				 
+		newChildDescriptors.add
+		(createChildParameter
+			(TrackerPackage.Literals.PREMISES__LOCATION,
+				LocationFactory.eINSTANCE.createLocation()));
 	}
 
 	/**

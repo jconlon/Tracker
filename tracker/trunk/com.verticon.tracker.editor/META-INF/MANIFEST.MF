@@ -27,7 +27,9 @@ Require-Bundle: org.eclipse.core.databinding,
  org.eclipse.core.databinding.beans,
  org.eclipse.ui.cheatsheets
 Bundle-ActivationPolicy: lazy
-Import-Package: com.verticon.osgi.metatype,
+Import-Package: com.verticon.location.provider,
+ com.verticon.location.util,
+ com.verticon.osgi.metatype,
  com.verticon.osgi.metatype.provider,
  com.verticon.osgi.metatype.util,
  com.verticon.tracker;version="[0.1.0,1.0.0)",

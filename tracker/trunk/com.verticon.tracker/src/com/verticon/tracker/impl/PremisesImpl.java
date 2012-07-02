@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.verticon.tracker.impl;
 
+import com.verticon.location.Location;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -32,7 +33,6 @@ import com.verticon.tracker.Policy;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.TrackerPlugin;
 import com.verticon.tracker.util.EventHistoryAdapterFactory;
 
 /**
@@ -53,6 +53,7 @@ import com.verticon.tracker.util.EventHistoryAdapterFactory;
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getPhoneNumber <em>Phone Number</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getAddress <em>Address</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getLocation <em>Location</em>}</li>
  * </ul>
  * </p>
  *
@@ -259,6 +260,16 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 	protected static final String ADDRESS_EDEFAULT = "";
 
 	/**
+	 * The cached value of the '{@link #getLocation() <em>Location</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocation()
+	 * @generated
+	 * @ordered
+	 */
+	protected Location location;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -429,13 +440,80 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Address is derived from the Location
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public String getAddress() {
-		return TrackerPlugin.getDefault().address(this);
+		return getLocation()!=null?getLocation().getAddress():null;
 	}
 
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Location getLocation() {
+		if (location != null && location.eIsProxy()) {
+			InternalEObject oldLocation = (InternalEObject)location;
+			location = (Location)eResolveProxy(oldLocation);
+			if (location != oldLocation) {
+				InternalEObject newLocation = (InternalEObject)location;
+				NotificationChain msgs = oldLocation.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__LOCATION, null, null);
+				if (newLocation.eInternalContainer() == null) {
+					msgs = newLocation.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__LOCATION, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TrackerPackage.PREMISES__LOCATION, oldLocation, location));
+			}
+		}
+		return location;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Location basicGetLocation() {
+		return location;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetLocation(Location newLocation, NotificationChain msgs) {
+		Location oldLocation = location;
+		location = newLocation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__LOCATION, oldLocation, newLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocation(Location newLocation) {
+		if (newLocation != location) {
+			NotificationChain msgs = null;
+			if (location != null)
+				msgs = ((InternalEObject)location).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__LOCATION, null, msgs);
+			if (newLocation != null)
+				msgs = ((InternalEObject)newLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TrackerPackage.PREMISES__LOCATION, null, msgs);
+			msgs = basicSetLocation(newLocation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.PREMISES__LOCATION, newLocation, newLocation));
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -661,6 +739,8 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 				return ((InternalEList<?>)getUnAppliedTags()).basicRemove(otherEnd, msgs);
 			case TrackerPackage.PREMISES__POLICY:
 				return basicSetPolicy(null, msgs);
+			case TrackerPackage.PREMISES__LOCATION:
+				return basicSetLocation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -696,6 +776,9 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 				return getPhoneNumber();
 			case TrackerPackage.PREMISES__ADDRESS:
 				return getAddress();
+			case TrackerPackage.PREMISES__LOCATION:
+				if (resolve) return getLocation();
+				return basicGetLocation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -741,6 +824,9 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 			case TrackerPackage.PREMISES__PHONE_NUMBER:
 				setPhoneNumber((String)newValue);
 				return;
+			case TrackerPackage.PREMISES__LOCATION:
+				setLocation((Location)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -783,6 +869,9 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 			case TrackerPackage.PREMISES__PHONE_NUMBER:
 				setPhoneNumber(PHONE_NUMBER_EDEFAULT);
 				return;
+			case TrackerPackage.PREMISES__LOCATION:
+				setLocation((Location)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -817,6 +906,8 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 				return PHONE_NUMBER_EDEFAULT == null ? phoneNumber != null : !PHONE_NUMBER_EDEFAULT.equals(phoneNumber);
 			case TrackerPackage.PREMISES__ADDRESS:
 				return ADDRESS_EDEFAULT == null ? getAddress() != null : !ADDRESS_EDEFAULT.equals(getAddress());
+			case TrackerPackage.PREMISES__LOCATION:
+				return location != null;
 		}
 		return super.eIsSet(featureID);
 	}

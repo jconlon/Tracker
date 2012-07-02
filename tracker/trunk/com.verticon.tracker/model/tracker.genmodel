@@ -572,6 +572,8 @@
       <genFeatures createChild="false" propertyCategory="Contacts" ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/phoneNumber"/>
       <genFeatures property="Readonly" createChild="false" propertyCategory="Location"
           propertyDescription="Street address of the premises." ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/address"/>
+      <genFeatures property="None" children="true" createChild="true" propertyCategory=""
+          propertyDescription="" ecoreFeature="ecore:EReference tracker.ecore#//Premises/location"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/eventHistory"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/findAnimal">
         <genParameters ecoreParameter="tracker.ecore#//Premises/findAnimal/id"/>
@@ -898,6 +900,47 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Option/label"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Option/value"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Option/anyAttribute"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Location" basePackage="com.verticon" ecorePackage="../../com.verticon.location.core.model/model/location.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="../../com.verticon.location.core.model/model/location.ecore#//AltitudeMode">
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.location.core.model/model/location.ecore#//AltitudeMode/absolute"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.location.core.model/model/location.ecore#//AltitudeMode/clampToGround"/>
+      <genEnumLiterals ecoreEnumLiteral="../../com.verticon.location.core.model/model/location.ecore#//AltitudeMode/relativeToGround"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="../../com.verticon.location.core.model/model/location.ecore#//PointFormatException"/>
+    <genClasses ecoreClass="../../com.verticon.location.core.model/model/location.ecore#//Location">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Location/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Location/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Location/phoneNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Location/street"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Location/city"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Location/state"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Location/postalCode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Location/country"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Location/longitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Location/latitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Location/altitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Location/altitudeMode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Location/comments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../com.verticon.location.core.model/model/location.ecore#//Location/areas"/>
+      <genOperations ecoreOperation="../../com.verticon.location.core.model/model/location.ecore#//Location/getCoordinates"/>
+      <genOperations ecoreOperation="../../com.verticon.location.core.model/model/location.ecore#//Location/getAddress"/>
+      <genOperations ecoreOperation="../../com.verticon.location.core.model/model/location.ecore#//Location/containsPoint">
+        <genParameters ecoreParameter="../../com.verticon.location.core.model/model/location.ecore#//Location/containsPoint/point"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../com.verticon.location.core.model/model/location.ecore#//Location/locate">
+        <genParameters ecoreParameter="../../com.verticon.location.core.model/model/location.ecore#//Location/locate/point"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="../../com.verticon.location.core.model/model/location.ecore#//Area">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Area/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Area/boundry"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Area/comments"/>
+      <genOperations ecoreOperation="../../com.verticon.location.core.model/model/location.ecore#//Area/getAreaMeasurement"/>
+      <genOperations ecoreOperation="../../com.verticon.location.core.model/model/location.ecore#//Area/containsPoint">
+        <genParameters ecoreParameter="../../com.verticon.location.core.model/model/location.ecore#//Area/containsPoint/point"/>
+      </genOperations>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

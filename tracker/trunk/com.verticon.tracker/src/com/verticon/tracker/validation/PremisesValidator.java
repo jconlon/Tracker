@@ -13,7 +13,7 @@ package com.verticon.tracker.validation;
 import org.eclipse.emf.common.util.EList;
 
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.Location;
+
 import com.verticon.tracker.Tag;
 
 /**
@@ -30,8 +30,7 @@ public interface PremisesValidator {
 	boolean validateAnimals(EList<Animal> value);
 	boolean validateUnAppliedTags(EList<Tag> value);
 
-	boolean validateLocations(EList<Location> value);
-
+	
 	boolean validateUri(String value);
 
 	
