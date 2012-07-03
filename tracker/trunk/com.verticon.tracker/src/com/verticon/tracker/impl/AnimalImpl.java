@@ -944,14 +944,21 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 		switch (animalLocator.getTypeOfPosition()) {
 		case HASCOORDINATES:
 			String point = animalLocator.getLocation();
-			if(eContainer()!=null ){
+			//First try the local Premises
+			if(eContainer()!=null && ((Premises)eContainer()).getLocation()!=null){
 				result = ((Premises)eContainer()).getLocation().locate(point);
+			}
+			//If it was not in the local premises try the locationService
+			if(result==null){
+				result = TrackerPlugin.getDefault().locate(point);
 			}
 			break;
 		case MOVED_TO_PREMISES:
+			//Try the locationServices
 			result = TrackerPlugin.getDefault().name(animalLocator.getLocation());
 			break;
 		case SIGHTING:
+			
 			result = animalLocator.location;
 			break;
 		default:
