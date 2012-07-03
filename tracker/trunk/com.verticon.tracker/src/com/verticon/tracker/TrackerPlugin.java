@@ -13,9 +13,6 @@
  */
 package com.verticon.tracker;
 
-import java.util.Collections;
-import java.util.Set;
-
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
@@ -120,19 +117,19 @@ public class TrackerPlugin extends Plugin{
 		return result!=null?result:"";
 	}
 
-//	/**
-//	 * Called by animals to find out the location within the premises.
-//	 * @deprecated use embedded Location object
-//	 */
-//	@Override
-//	public String positionIn(Object target, String coordinates) {
-//		String result = null;
-//		LocationService locationService = getLocationService();
-//		if(locationService != null){
-//			result = locationService.positionIn(target, coordinates);
-//		}
-//		return result!=null?result:"InPremises:"+coordinates;
-//	}
+	/**
+	 * Called by animals to find out the location outside the premises.
+	 * @param point coordinates
+	 * @return name of Premises location
+	 */
+	public String locate(String point) {
+		String result = null;
+		LocationService locationService = getLocationService();
+		if(locationService != null){
+			result = locationService.locate(point);
+		}
+		return result!=null?result:"InPremises:"+point;
+	}
 
 //	/**
 //	 * Called by Premises to find out its address
