@@ -365,7 +365,6 @@ public abstract class AnimalTest extends TestCase {
 	    		new DebugAdapter(){
 					@Override
 					public void notifyChanged(Notification notification) {
-						//System.out.println("********"+notification.getFeature());
 						switch (notification.getFeatureID(Event.class)) {
 						case TrackerPackage.ANIMAL__LAST_EVENT_DATE_TIME:
 							break;

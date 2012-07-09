@@ -85,13 +85,28 @@
   <logger name="com.verticon.tracker">
     <level value="WARN"/>
   </logger>
-             
-                 
-   <logger name="com.verticon.tracker.location.internal">
+  
+  <logger name="com.verticon.birt">
     <level value="WARN"/>
   </logger>
   
-  <logger name="com.verticon.location.internal.Component">
+   <logger name="com.verticon.tracker.store">
+    <level value="DEBUG"/>
+  </logger>     
+  
+   <logger name="com.verticon.tracker.irouter.premises.event">
+    <level value="WARN"/>
+  </logger> 
+  
+   <logger name="com.verticon.tracker.irouter.premises.animal">
+    <level value="WARN"/>
+  </logger> 
+                 
+   <logger name="com.verticon.agriculture.location.internal">
+    <level value="DEBUG"/>
+  </logger>
+  
+  <logger name="com.verticon.location.service.internal.Component">
     <level value="WARN"/>
   </logger>
   
@@ -139,7 +154,7 @@
   </logger>
   
    <logger name="com.verticon.tracker.configuration.internal">
-    <level value="WARN"/>
+    <level value="INFO"/>
   </logger>
   
   <logger name="com.verticon.tracker.irouter.bwcontrol">
@@ -165,8 +180,8 @@
     <level value="INFO"/>
   </logger>
   
-  <logger name="com.verticon.tracker.irouter.trutest">
-    <level value="INFO"/>
+  <logger name="com.verticon.tracker.irouter.monitor">
+    <level value="WARN"/>
   </logger>
   
   <logger name="com.verticon.osgi.metatype.core.model.editor.internal.forms">
@@ -174,7 +189,7 @@
   </logger>
   
   <logger name="com.verticon.tracker.transaction.editor.event">
-    <level value="DEBUG"/>
+    <level value="WARN"/>
   </logger>
   
    <logger name="com.verticon.tracker.irouter">
@@ -186,11 +201,11 @@
  </logger>
 
   <logger name="com.verticon.tracker.irouter.animal.data">
-    <level value="DEBUG"/>
+    <level value="WARN"/>
   </logger>
  
   <logger name="com.verticon.tracker.irouter.measurement">
-    <level value="DEBUG"/>
+    <level value="WARN"/>
   </logger>
   
   <logger name="com.verticon.tracker.irouter.wireadmin">
@@ -199,7 +214,15 @@
   </logger>
   
   <logger name="com.verticon.tracker.irouter.gateway">
+    <level value="WARN"/>
+  </logger>
+   
+  <logger name="com.verticon.mongo">
     <level value="DEBUG"/>
+  </logger>
+  
+  <logger name="com.verticon.mongo.emf.json.query">
+    <level value="INFO"/>
   </logger>
   
    <logger name="aggregated" level="INFO">
@@ -212,13 +235,18 @@
   
   </logger>
   
+  <logger name="org.eclipse.xtext">
+    <level value="WARN"/>
+    <appender-ref ref="STDOUT"/>
+  </logger>
+  
   <root>
     <level value="WARN"/>
     
     <appender-ref ref="multiplex"/>
-   
+   <appender-ref ref="STDOUT"/>
     <!--  
-     <appender-ref ref="STDOUT"/>
+     
      <appender-ref ref="RollingFile"/>
     -->
   </root>

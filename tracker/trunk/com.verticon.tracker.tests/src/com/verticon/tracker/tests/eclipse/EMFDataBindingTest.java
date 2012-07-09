@@ -213,7 +213,7 @@ public class EMFDataBindingTest extends TestCase {
 		
 		assertNotNull(firstObject);
 		assertNull(firstObject.eGet(shipToAttribute));
-		System.out.println("Getting null");
+	
 		value1.setValue("My address");
 		assertEquals( ROLL_BACK_VALUE, firstObject.eGet(shipToAttribute));
 		assertEquals(OUT_OF_SYNC_ERROR, 
