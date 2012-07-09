@@ -189,7 +189,6 @@ public class MongoEMFDataSetWizardPage extends DataSetWizardPage {
 	 */
 	@Override
 	protected void cleanup() {
-		collectionMap.clear();
 		variables.clear();
 		super.cleanup();
 	}

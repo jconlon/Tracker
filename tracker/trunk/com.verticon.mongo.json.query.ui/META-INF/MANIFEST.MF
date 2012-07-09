@@ -16,9 +16,9 @@ Require-Bundle: com.verticon.mongo.json.query;visibility:=reexport,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.compare
-Import-Package: org.apache.commons.logging,
- org.apache.log4j,
- org.eclipse.nebula.widgets.cdatetime
+Import-Package: com.verticon.ui.dialogs,
+ org.apache.commons.logging,
+ org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.json.ui.contentassist,
  org.json.ui.contentassist.antlr,
