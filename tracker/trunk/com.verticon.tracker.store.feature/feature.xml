@@ -27,6 +27,8 @@
       <import feature="com.mongodb" version="2.7.2.qualifier" match="greaterOrEqual"/>
       <import feature="com.verticon.mongo.emf.json.query" version="0.1.0.qualifier"/>
       <import feature="com.verticon.mongo.emf.runtime" version="0.1.0.qualifier"/>
+      <import feature="com.verticon.location.service" version="0.2.0.qualifier"/>
+      <import feature="com.verticon.ui" version="1.0.0.qualifier"/>
    </requires>
 
    <plugin
@@ -65,7 +67,21 @@
          unpack="false"/>
 
    <plugin
-         id="com.verticon.tracker.store.mongo.ui"
+         id="com.verticon.tracker.store.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.store.location"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.store.utils"
          download-size="0"
          install-size="0"
          version="0.0.0"

@@ -57,13 +57,12 @@ import com.mongodb.DB;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.QueryOperators;
-import com.verticon.agriculture.AgricultureFactory;
-import com.verticon.agriculture.Association;
 import com.verticon.location.Location;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
+import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.store.ITrackerStore;
 import com.verticon.tracker.store.StoreAccessException;
 
@@ -71,8 +70,8 @@ import com.verticon.tracker.store.StoreAccessException;
  * TrackerStrore for saves and queries Agriculture Location and Animal event
  * histories to and from a MongoDB database.
  * 
- * Saving premises is only done at registration time and for updates.  
- * Don't bother with incremental changes just save the whole thing.
+ * Saving premises is only done at registration time and for updates. Don't
+ * bother with incremental changes just save the whole thing.
  * 
  * 
  * @author jconlon
@@ -86,7 +85,7 @@ public class TrackerStore implements ITrackerStore {
 	private final Logger logger = LoggerFactory.getLogger(TrackerStore.class);
 	private final MongoConsumer tagConsumer;
 	private final MongoStatusMonitor statusMonitor;
-	private final DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd");
+	private final DateFormat dfm = new SimpleDateFormat(DATE_PATTERN);
 
 	private ResourceSetFactoryContext resourceFactory;
 	private String premisesURI;
@@ -98,10 +97,8 @@ public class TrackerStore implements ITrackerStore {
 		super();
 		this.statusMonitor = monitor;
 		this.tagConsumer = tagConsumer;
-		
+
 	}
-	
-	
 
 	/*
 	 * (non-Javadoc)
@@ -115,8 +112,6 @@ public class TrackerStore implements ITrackerStore {
 
 	}
 
-	
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -128,34 +123,43 @@ public class TrackerStore implements ITrackerStore {
 	public Premises retrievePremises(String uri, String fromDate, String toDate)
 			throws IOException {
 		Premises result = (Premises) resourceFactory.query(PREMISES, uri);
+		addAnimals(result, fromDate, toDate);
+		return result;
+	}
+
+	private void addAnimals(Premises premises, String fromDate, String toDate)
+			throws IOException {
 		if (Strings.isNullOrEmpty(fromDate) || Strings.isNullOrEmpty(toDate)) {
 			// Do nothing to the result
 		} else {
 			// Add animals to the result
 			List<Animal> animals;
 			try {
-				animals = getAnimals(db, resourceFactory, uri,
-						dfm.parse(fromDate), dfm.parse(toDate),trackerStoreAdmin);
+				animals = getAnimals(db, resourceFactory, premises.getUri(),
+						dfm.parse(fromDate), dfm.parse(toDate),
+						trackerStoreAdmin);
 			} catch (ParseException e) {
 				throw new IOException(e);
 			}
 			logger.debug(bundleMarker,
 					"Found {} animals in premises from {} to {}", new Object[] {
 							animals.size(), fromDate, toDate });
-			Collections.sort(animals, new Comparator<Animal>(){
+			Collections.sort(animals, new Comparator<Animal>() {
 
-				/* (non-Javadoc)
-				 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+				/*
+				 * (non-Javadoc)
+				 * 
+				 * @see java.util.Comparator#compare(java.lang.Object,
+				 * java.lang.Object)
 				 */
 				@Override
 				public int compare(Animal a1, Animal a2) {
 					return a1.getId().compareTo(a2.getId());
-				}});
-			result.getAnimals().addAll(animals);
+				}
+			});
+			premises.getAnimals().addAll(animals);
 			// TODO must deal with OCDs
 		}
-
-		return result;
 	}
 
 /**
@@ -188,8 +192,8 @@ public class TrackerStore implements ITrackerStore {
 	 * @return animals 
 	 */
 	private static List<Animal> getAnimals(DB db,
-			ResourceSetFactoryContext resourceFactory, String uri, Date fromDate,
-			Date toDate, Predicate<Event> canRead) {
+			ResourceSetFactoryContext resourceFactory, String uri,
+			Date fromDate, Date toDate, Predicate<Event> canRead) {
 		List<Animal> result = new ArrayList<Animal>();
 
 		BasicDBObject dateMatch = new BasicDBObject();
@@ -221,58 +225,56 @@ public class TrackerStore implements ITrackerStore {
 		for (String mongoID : mongoIDs) {
 			Resource resource = resourceFactory.getResource(ANIMAL, mongoID);
 			if (resource != null && resource.getAllContents().hasNext()) {
-				
+
 				result.add((Animal) resource.getContents().get(0));
 			}
 		}
-		if(!result.isEmpty()){
+		if (!result.isEmpty()) {
 			result = (List<Animal>) EcoreUtil.copyAll(result);
-			
-			//remove all events that are not authorized to be read by this premises
+
+			// remove all events that are not authorized to be read by this
+			// premises
 			for (Animal animal : result) {
 				for (Tag tag : animal.getTags()) {
-					Collection<Event> accessibleEvents = Collections2.filter(tag.getEvents(), canRead);
+					Collection<Event> accessibleEvents = Collections2.filter(
+							tag.getEvents(), canRead);
 					tag.getEvents().retainAll(accessibleEvents);
 				}
 			}
 
-			
 		}
 		return result;
 	}
-
-	
 
 	@Override
 	public EList<EObject> query(EClass eClass, String query) {
 		ECollection result = resourceFactory.query(eClass, query);
 		return result.getValues();
 	}
-	
-	
-	@Override
-	public Association retrieveAssociation(Set<String> uris) throws IOException {
-		Association result = AgricultureFactory.eINSTANCE.createAssociation();
-		Premises location = null;
-		for (String uri : uris) {
-			location = retrievePremises(uri, null, null);
-			if(location!=null){
-				result.getLivestock().add(location);
-			}
-		}
-		return result;
-	}
-	
+
+//	@Override
+//	public Association retrieveAssociation(Set<String> uris) throws IOException {
+//		Association result = AgricultureFactory.eINSTANCE.createAssociation();
+//		Premises location = null;
+//		for (String uri : uris) {
+//			location = retrievePremises(uri, null, null);
+//			if (location != null) {
+//				result.getLivestock().add(location);
+//			}
+//		}
+//		return result;
+//	}
+
 	/**
-	 * Primary entry method for Tracker Desktop clients.  Does NOT save animals,
+	 * Primary entry method for Tracker Desktop clients. Does NOT save animals,
 	 * events, and tags.
 	 * 
 	 * Premises are saved in the Premises collection but they do not contain
 	 * proxies to the animals, but events are tagged with an _pid to indicate
 	 * which Premises uri saved them to the store.
 	 * 
-	 * Animals are saved with Tag proxies and Tags contain actual events.
-	 * Events do not have their own Collection.
+	 * Animals are saved with Tag proxies and Tags contain actual events. Events
+	 * do not have their own Collection.
 	 */
 	@Override
 	public void register(Premises premises) throws IOException {
@@ -280,23 +282,23 @@ public class TrackerStore implements ITrackerStore {
 		Location location = premises.getLocation();
 		checkNotNull(location, "Premises location must not be null.");
 		validateObject(premises);
-		
+
 		if (!trackerStoreAdmin.isCurrentUserAdmin()) {
-		throw new StoreAccessException(
-				"Attempt to save premises with out administration privelages.");
-	    }
-		
-		if (!trackerStoreAdmin.isValidUri(premises.getUri())) {
-		throw new StoreAccessException(
-				"Attempt to save premises with a foriegn uri on the Premises that is not set up in the Administration access control.");
-	    }
-		
-		
+			throw new StoreAccessException(
+					"Attempt to save premises with out administration privelages.");
+		}
+
+		// if (!trackerStoreAdmin.isValidUri(premises.getUri())) {
+		// throw new StoreAccessException(
+		// "Attempt to save premises with a foriegn uri on the Premises that is not set up in the Administration access control.");
+		// }
+
 		// Premises
 		Premises targetPremises = EcoreUtil.copy(premises);
-		Premises persistedPremises = retrievePremises(premises.getUri(),null,null);
+		Premises persistedPremises = retrievePremises(premises.getUri(), null,
+				null);
 		resourceFactory.add(targetPremises, Element.PREMISES);
-		recordChangesAndNoAnimals(targetPremises,persistedPremises);
+		recordChangesAndNoAnimals(targetPremises, persistedPremises);
 		assert (targetPremises.eResource().getURI().toString()
 				.startsWith("mongo://"));
 	}
@@ -304,35 +306,80 @@ public class TrackerStore implements ITrackerStore {
 	@Override
 	public int recordAnimals(Premises premises) throws IOException {
 		checkNotNull(premises, "Premises must not be null.");
-	    validateObject(premises);
+		validateObject(premises);
 		if (!premises.getUri().equals(premisesURI)) {
 			throw new StoreAccessException(
 					"Attempt to save animals from a premises with a foriegn uri.");
 		}
-		
-		int start = statusMonitor.getStatusVariable(StatusAndConfigVariables.TOTAL_ANIMALS_PROCESSED.statusVarID).getInteger();
+
+		int start = statusMonitor.getStatusVariable(
+				StatusAndConfigVariables.TOTAL_ANIMALS_PROCESSED.statusVarID)
+				.getInteger();
 
 		logger.debug(bundleMarker, "Recording {} animals", premises
 				.getAnimals().size());
 		List<Animal> animalsToProcess = Utils.filterAnimalsToRecord(
-				premises.getAnimals(),
-				getLastUpdate(premisesURI, db));
-	
+				premises.getAnimals(), getLastUpdate(premisesURI, db));
+
 		for (Animal animal : animalsToProcess) {
 			recordAnimal(animal);
 		}
 		if (!animalsToProcess.isEmpty()) {
 			Date mostCurrentEvent = Utils.findMostCurrentEvent(premises
 					.eventHistory());
-			Utils.setLastUpdate(db, mostCurrentEvent, statusMonitor,premisesURI);
+			Utils.setLastUpdate(db, mostCurrentEvent, statusMonitor,
+					premisesURI);
 			statusMonitor.addTotalAnimalsProcessed(animalsToProcess.size());
 		}
-		int finish = statusMonitor.getStatusVariable(StatusAndConfigVariables.TOTAL_ANIMALS_PROCESSED.statusVarID).getInteger();
+		int finish = statusMonitor.getStatusVariable(
+				StatusAndConfigVariables.TOTAL_ANIMALS_PROCESSED.statusVarID)
+				.getInteger();
 		return finish - start;
 	}
 
-	void activate(ResourceSetFactoryContext resourceFactory, String premisesURI,
-			DB db, TrackerStoreAdmin trackerStoreAdmin) {
+	@Override
+	public Premises retrievePremises(String uri) throws IOException {
+		return retrievePremises(uri, null, null);
+	}
+
+	@Override
+	public Premises retrievePremises(LongLatPoint point) throws IOException {
+		return retrievePremises(point, null, null);
+	}
+
+	@Override
+	public Premises retrievePremises(LongLatPoint point, String fromDate,
+			String toDate) throws IOException {
+		Premises result = null;
+		String query = "{'location.loc' : {$near : [" + point.getLongLat()
+				+ "]}}";
+		List<EObject> eo = query(TrackerPackage.Literals.PREMISES, query);
+
+		for (EObject eObject : eo) {
+			if (eObject instanceof Premises) {
+				Premises premises = (Premises) eObject;
+				if (premises.getLocation() != null
+						&& premises.getLocation().containsPoint(
+								point.toString())) {
+					result = premises;
+					break;
+				}
+			}
+		}
+
+		this.addAnimals(result, fromDate, toDate);
+		return result;
+
+	}
+	
+	@Override
+	public String uri() {
+		return resourceFactory != null ? resourceFactory.getMongoBaseURI()
+				: null;
+	}
+
+	void activate(ResourceSetFactoryContext resourceFactory,
+			String premisesURI, DB db, TrackerStoreAdmin trackerStoreAdmin) {
 		logger.debug(bundleMarker, "Activating");
 		this.resourceFactory = resourceFactory;
 		this.premisesURI = premisesURI;
@@ -354,42 +401,42 @@ public class TrackerStore implements ITrackerStore {
 		logger.debug(bundleMarker, "Deactivated");
 	}
 
-//	/**
-//	 * 
-//	 * @param copiedContainer
-//	 * @param persistedContainer
-//	 *            may be null
-//	 * @param resourceSet
-//	 * @return
-//	 * @throws IOException
-//	 */
-//	private boolean recordChanges(Container copiedContainer,
-//			Container persistedContainer) throws IOException {
-//		resourceFactory.add(copiedContainer, CONTAINER);
-//		if (persistedContainer != null) {
-//			copiedContainer.eResource().setURI(
-//					persistedContainer.eResource().getURI());
-//
-//		}
-//		assert (copiedContainer.eResource().getURI().toString()
-//				.startsWith("mongo://"));
-//		resourceFactory.save(copiedContainer, CONTAINER);
-//		return true;
-//	}
-	
-//	private boolean recordChanges(Placemark copiedPlacemark,
-//			Placemark persistedPlacemark) throws IOException {
-//		resourceFactory.add(copiedPlacemark, PLACEMARK);
-//		if (persistedPlacemark != null) {
-//			copiedPlacemark.eResource().setURI(
-//					persistedPlacemark.eResource().getURI());
-//
-//		}
-//		assert (copiedPlacemark.eResource().getURI().toString()
-//				.startsWith("mongo://"));
-//		resourceFactory.save(copiedPlacemark, PLACEMARK);
-//		return true;
-//	}
+	// /**
+	// *
+	// * @param copiedContainer
+	// * @param persistedContainer
+	// * may be null
+	// * @param resourceSet
+	// * @return
+	// * @throws IOException
+	// */
+	// private boolean recordChanges(Container copiedContainer,
+	// Container persistedContainer) throws IOException {
+	// resourceFactory.add(copiedContainer, CONTAINER);
+	// if (persistedContainer != null) {
+	// copiedContainer.eResource().setURI(
+	// persistedContainer.eResource().getURI());
+	//
+	// }
+	// assert (copiedContainer.eResource().getURI().toString()
+	// .startsWith("mongo://"));
+	// resourceFactory.save(copiedContainer, CONTAINER);
+	// return true;
+	// }
+
+	// private boolean recordChanges(Placemark copiedPlacemark,
+	// Placemark persistedPlacemark) throws IOException {
+	// resourceFactory.add(copiedPlacemark, PLACEMARK);
+	// if (persistedPlacemark != null) {
+	// copiedPlacemark.eResource().setURI(
+	// persistedPlacemark.eResource().getURI());
+	//
+	// }
+	// assert (copiedPlacemark.eResource().getURI().toString()
+	// .startsWith("mongo://"));
+	// resourceFactory.save(copiedPlacemark, PLACEMARK);
+	// return true;
+	// }
 
 	/**
 	 * Animals need to be saved to the Animal collection
@@ -509,20 +556,19 @@ public class TrackerStore implements ITrackerStore {
 		for (String id : intersection) {
 			// Same tag on persisted and target
 			Tag persistedTag = Utils.getTag(persistedAnimalWithOldTag, id);
-			
-			
+
 			Tag tag = Utils.getTag(sourceAnimal, id);
-			if(persistedTag!=null){
-				Collection<Event> newerEventsToAdd = NewerEvents.getNewerEvents(tag, persistedTag);
-			
-				
-//			Optional<NewerEvents> newerEvents = NewerEvents
-//					.isNewer(persistedTag);
-//			if (newerEvents.isPresent()) {
-//				// There are newer events on the target
-//				// add them to the persisted tag
-//				Collection<Event> newerEventsToAdd = Collections2.filter(
-//						tag.getEvents(), newerEvents.get());
+			if (persistedTag != null) {
+				Collection<Event> newerEventsToAdd = NewerEvents
+						.getNewerEvents(tag, persistedTag);
+
+				// Optional<NewerEvents> newerEvents = NewerEvents
+				// .isNewer(persistedTag);
+				// if (newerEvents.isPresent()) {
+				// // There are newer events on the target
+				// // add them to the persisted tag
+				// Collection<Event> newerEventsToAdd = Collections2.filter(
+				// tag.getEvents(), newerEvents.get());
 				if (!newerEventsToAdd.isEmpty()) {
 					tagConsumer.addNewOCDs(newerEventsToAdd);
 					persistedTag.getEvents().addAll(
@@ -564,14 +610,16 @@ public class TrackerStore implements ITrackerStore {
 	private void saveEventsToPersistedAnimal(Animal sourceAnimal,
 			Animal presistedAnimal) throws IOException {
 		// The latest tag is the active one
-//		Optional<NewerEvents> newerEvents = NewerEvents.isNewer(presistedAnimal
-//				.activeTag());
-//		if (newerEvents.isPresent()) {
-//			Collection<Event> newerEventsToAdd = Collections2.filter(
-//					sourceAnimal.activeTag().getEvents(), newerEvents.get());
-		if(presistedAnimal.activeTag()!=null){
-			Collection<Event> newerEventsToAdd = NewerEvents.getNewerEvents(sourceAnimal.activeTag(), presistedAnimal.activeTag());
-		
+		// Optional<NewerEvents> newerEvents =
+		// NewerEvents.isNewer(presistedAnimal
+		// .activeTag());
+		// if (newerEvents.isPresent()) {
+		// Collection<Event> newerEventsToAdd = Collections2.filter(
+		// sourceAnimal.activeTag().getEvents(), newerEvents.get());
+		if (presistedAnimal.activeTag() != null) {
+			Collection<Event> newerEventsToAdd = NewerEvents.getNewerEvents(
+					sourceAnimal.activeTag(), presistedAnimal.activeTag());
+
 			if (newerEventsToAdd.isEmpty()) {
 				// Tag is already persisted with all the events
 			} else {
@@ -615,21 +663,7 @@ public class TrackerStore implements ITrackerStore {
 		return result;
 	}
 
-
-
 	
 
-
-
-//	/*
-//	 * (non-Javadoc)
-//	 * @see com.verticon.tracker.store.ITrackerStore#retrieveAssociation(java.lang.String)
-//	 */
-//	@Override
-//	public Association retrieveAssociation(String name) {
-//		Resource resource = resourceFactory.getResource(Element.ASSOCIATION, name);
-//		return resource.getContents().isEmpty() ? null : (Association) resource
-//				.getContents().get(0);
-//	}
 
 }

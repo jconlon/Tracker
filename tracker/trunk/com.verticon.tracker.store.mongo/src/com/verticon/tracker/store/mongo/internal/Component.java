@@ -19,7 +19,6 @@ import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -34,7 +33,6 @@ import org.slf4j.LoggerFactory;
 
 import com.mongodb.DB;
 import com.mongodb.MongoException;
-import com.verticon.agriculture.Association;
 import com.verticon.mongo.emf.api.IResourceSetFactory;
 import com.verticon.mongo.emf.api.SingleMongoLocator;
 import com.verticon.tracker.Animal;
@@ -59,7 +57,7 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 	 */
 	private final Logger logger = LoggerFactory.getLogger(Component.class);
 
-	//Provided services
+	// Provided services
 	private final MongoStatusMonitor statusMonitor = new MongoStatusMonitor();
 	private final MongoConsumer tagConsumer;
 	private final TrackerStore trackerStore;
@@ -67,10 +65,9 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 
 	// DS Injected dependencies
 	private IResourceSetFactory resourceSetFactory;
-	
+
 	// Created from configuration
 	private SingleMongoLocator mongoLocator;
-
 
 	public Component() {
 		super();
@@ -162,8 +159,6 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 		return statusMonitor.getDescription(id);
 	}
 
-	
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -188,41 +183,17 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 		return trackerStore.retrieveAnimal(ain);
 
 	}
-	
-	/*
-//	 * (non-Javadoc)
-//	 * @see com.verticon.tracker.store.ITrackerStore#register(com.verticon.agriculture.Association)
-//	 */
-//	@Override
-//	public void register(Association association) throws IOException {
-//		trackerStore.register(association);
-//	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.verticon.tracker.store.ITrackerStore#register(com.verticon.tracker.Premises)
+	 * 
+	 * @see
+	 * com.verticon.tracker.store.ITrackerStore#register(com.verticon.tracker
+	 * .Premises)
 	 */
 	@Override
 	public void register(Premises premises) throws IOException {
-		 trackerStore.register(premises);
-	}
-
-//	/*
-//	 * (non-Javadoc)
-//	 * @see com.verticon.tracker.store.ITrackerStore#retrieveAssociation(java.lang.String)
-//	 */
-//	@Override
-//	public Association retrieveAssociation(String name) {
-//		return trackerStore.retrieveAssociation(name);
-//	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see com.verticon.tracker.store.ITrackerStore#retrieveAssociation(java.util.Set)
-	 */
-	@Override
-	public Association retrieveAssociation(Set<String> uris) throws IOException{
-		return trackerStore.retrieveAssociation(uris);
+		trackerStore.register(premises);
 	}
 
 	/*
@@ -247,12 +218,11 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 	public boolean load(Admin admin) throws IOException {
 		return trackerStoreAdmin.load(admin);
 	}
-	
+
 	@Override
 	public boolean isCurrentUserAdmin() {
 		return trackerStoreAdmin.isCurrentUserAdmin();
 	}
-
 
 	/**
 	 * Declaratives Services service injection
@@ -263,7 +233,7 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 	void setMonitorListener(MonitorListener monitorListener) {
 		statusMonitor.setMonitorListener(monitorListener);
 	}
-	
+
 	/**
 	 * Declaratives Services service injection
 	 * 
@@ -283,7 +253,7 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 	void unsetMonitorListener(MonitorListener monitorListener) {
 		statusMonitor.setMonitorListener(monitorListener);
 	}
-	
+
 	/**
 	 * Declaratives Services service injection
 	 * 
@@ -308,30 +278,14 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 		} catch (URISyntaxException e1) {
 			throw new IOException(e1);
 		}
-		
-//		URI mongoURI = URI.createURI((String) config.get(MONGO_URI.configID));
-//
-//		checkNotNull(mongoURI, "Mongo Connection URI must not be null");
-//		URI mongouri = mongoURI;
-//		checkArgument(!Strings.isNullOrEmpty(mongouri.scheme()),
-//				"%s must start with mongo://", mongoURI);
-//		checkArgument(mongouri.scheme().equals("mongo"),
-//				"%s must start with mongo://", mongoURI);
-//		checkNotNull(mongoURI, "The hostname in the  URI must not be null");
-//
-//		checkArgument(!Strings.isNullOrEmpty(getPremisesURI(config)),
-//				"Premises URI must not be null.");
-
-		
 
 		Integer defaultAnimalKey = Utils.getConfigurationInteger(config
 				.get(StatusAndConfigVariables.DEFAULT_ANIMAL.configID));
-		
-		ResourceSetFactoryContext resourceFactory = ResourceSetFactoryContext.instance(resourceSetFactory,mongoLocator,
-				getPremisesURI(config)
-		);
+
+		ResourceSetFactoryContext resourceFactory = ResourceSetFactoryContext
+				.instance(resourceSetFactory, mongoLocator,
+						getPremisesURI(config));
 		try {
-//			DB db = connect(resourceFactory);
 			DB db = mongoLocator.getTrackerDatabase();
 			ensureIndexes(db);
 			trackerStoreAdmin.activate(resourceFactory);
@@ -362,20 +316,38 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 		trackerStore.deactivate();
 	}
 
-	private void ensureIndexes(DB db)
-			throws UnknownHostException, StoreLogonException {
+	private void ensureIndexes(DB db) throws UnknownHostException,
+			StoreLogonException {
 		// Ensure indexes on the collections
 		for (Element e : Element.values()) {
 			e.ensureIndex(db);
 		}
-		
+
 	}
 
 	private static String getPremisesURI(Map<String, Object> config) {
 		return (String) config.get(PREMISES_URI.configID);
 	}
 
-	
-	
+	@Override
+	public Premises retrievePremises(String uri) throws IOException {
+		return trackerStore.retrievePremises(uri);
+	}
+
+	@Override
+	public Premises retrievePremises(LongLatPoint point) throws IOException {
+		return trackerStore.retrievePremises(point);
+	}
+
+	@Override
+	public Premises retrievePremises(LongLatPoint point, String in, String out)
+			throws IOException {
+		return trackerStore.retrievePremises(point, in, out);
+	}
+
+	@Override
+	public String uri() {
+		return trackerStore.uri();
+	}
 
 }

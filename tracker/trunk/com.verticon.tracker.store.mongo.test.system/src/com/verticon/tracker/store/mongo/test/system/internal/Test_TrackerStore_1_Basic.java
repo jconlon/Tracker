@@ -11,7 +11,7 @@
 
 package com.verticon.tracker.store.mongo.test.system.internal;
 
-import static com.verticon.tracker.store.mongo.test.system.internal.TestUtils.getXMIResource;
+import static com.verticon.tracker.store.mongo.test.system.TestUtils.*;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -69,6 +69,9 @@ import com.verticon.tracker.store.ValidationException;
 import com.verticon.tracker.store.admin.Admin;
 import com.verticon.tracker.store.admin.AdminPackage;
 import com.verticon.tracker.store.admin.api.ITrackerStoreAdmin;
+import com.verticon.tracker.store.mongo.test.system.Member;
+import com.verticon.tracker.store.mongo.test.system.TestUtils;
+import com.verticon.tracker.store.mongo.test.system.Variables;
 import com.verticon.tracker.util.TrackerValidator;
 
 /**
@@ -265,16 +268,16 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 				is(true));
 		assertThat("Loader must be setup", trackerStoreAdmin, is(notNullValue()));
 
-		Mongo m = new Mongo();
-		DB db = m.getDB("tracker");
-		assertNotNull(db);
-		TestUtils.clearDB(db);
+		
+		TestUtils.clearLocalTrackerDB();
 		monitorable
 				.resetStatusVariable(Variables.MONGO_ADMIN_LOADED.statusVarID);
 
 		TimeUnit.SECONDS.sleep(2);
 
 	}
+	
+	
 
 	/**
 	 * @throws MongoException
@@ -435,6 +438,18 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		assertThat("Must have not updated animals.", monitorable
 				.getStatusVariable(Variables.UPDATED_ANIMALS.statusVarID)
 				.getInteger(), is(0));
+	}
+	
+	@Test 
+	public void testTrackerStore_URI(){
+		assertThat("ITrackerStore must have a uri.", store.uri(),
+				is("mongodb://localhost"));
+	}
+	
+	@Test 
+	public void testTrackerStoreAdmin_URI(){
+		assertThat("ITrackerStoreAdmin must have a uri.", trackerStoreAdmin.uri(),
+				is("mongodb://localhost"));
 	}
 
 	/**

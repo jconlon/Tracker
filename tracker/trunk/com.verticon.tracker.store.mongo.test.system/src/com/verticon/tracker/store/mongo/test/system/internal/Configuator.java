@@ -11,11 +11,10 @@
 
 package com.verticon.tracker.store.mongo.test.system.internal;
 
-import static com.verticon.tracker.store.mongo.test.system.internal.Member.ONE;
-import static com.verticon.tracker.store.mongo.test.system.internal.Variables.PREMISES_URI;
+import static com.verticon.tracker.store.mongo.test.system.Member.ONE;
+import static com.verticon.tracker.store.mongo.test.system.Variables.PREMISES_URI;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.util.Dictionary;
 import java.util.Properties;
 
@@ -23,13 +22,9 @@ import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.wireadmin.WireConstants;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
-import com.mongodb.Mongo;
-import com.mongodb.MongoException;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.store.mongo.test.system.Member;
+import com.verticon.tracker.store.mongo.test.system.Variables;
 
 /**
  * @author jconlon

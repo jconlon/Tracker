@@ -9,9 +9,9 @@
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
 
-package com.verticon.tracker.store.mongo.test.system.internal;
+package com.verticon.tracker.store.mongo.test.system;
 
-enum Member {
+public enum Member {
 	ONE("urn:pin:H89234X", "docPassword"),
 	//
 	TWO("two", "pwtwo"), 
@@ -19,8 +19,9 @@ enum Member {
 	THREE("urn:pin:003ALKM", "mudshark");
 
 	// in kilograms
-	final String uri;
+	public final String uri;
 	// in meters
+	@SuppressWarnings("unused")
 	private final String password;
 
 	Member(String uri, String password) {
