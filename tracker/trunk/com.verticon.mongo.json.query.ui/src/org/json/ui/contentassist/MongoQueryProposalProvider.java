@@ -25,6 +25,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
 import org.json.mongoQuery.FieldSelection;
 import org.json.mongoQuery.Selection;
 import org.json.services.MongoQueryGrammarAccess;
+import org.json.validation.MongoQueryJavaValidator;
 
 import com.google.inject.Inject;
 
@@ -68,21 +69,10 @@ public class MongoQueryProposalProvider extends
 						ConfigurableCompletionProposal proposal) {
 					Display display = context.getViewer().getTextWidget()
 							.getDisplay();
-					DateDialog dateDialog = new DateDialog(display
-							.getActiveShell());
-//					listDialog
-//							.setContentProvider(new ArrayContentProvider());
-//					dateDialog.setTitle("Date");
-//					dateDialog.setMessage("Choose the date");
-//					listDialog.setLabelProvider(new LabelProvider());
-//					listDialog.setInput(fieldProvider);
-					if (dateDialog.open() == Window.OK) {
-//						Object[] result = listDialog.getFirstName();
-//
-//						StringBuffer sb = new StringBuffer();
-//						sb.append("'").append((String) result[0])
-//								.append("'");
-						return dateDialog.getDateTime();
+					JsonDateDialog jsonDateDialog = new JsonDateDialog(display
+							.getActiveShell(),MongoQueryJavaValidator.DATE_PATTERN);
+					if (jsonDateDialog.open() == Window.OK) {
+						return jsonDateDialog.getDateTime();
 
 					}
 					return null;
