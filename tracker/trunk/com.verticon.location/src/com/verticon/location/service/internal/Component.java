@@ -19,10 +19,10 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-import com.verticon.location.service.LocationService;
-import com.verticon.location.service.LocationServiceProvider;
+import com.verticon.location.service.ILocationService;
+import com.verticon.location.service.ILocationServiceProvider;
 
-public class Component implements LocationService {
+public class Component implements ILocationService {
 
 	private final static String PLUGIN_ID = "com.verticon.location";
 	public static final Marker bundleMarker = MarkerFactory
@@ -35,7 +35,7 @@ public class Component implements LocationService {
 	 */
 	private final Logger logger = LoggerFactory.getLogger(Component.class);
 
-	private List<LocationServiceProvider> serviceProviders = new CopyOnWriteArrayList<LocationServiceProvider>();
+	private List<ILocationServiceProvider> serviceProviders = new CopyOnWriteArrayList<ILocationServiceProvider>();
 
 	public void activate() {
 		logger.debug(bundleMarker, "Activated");
@@ -52,13 +52,16 @@ public class Component implements LocationService {
 	}
 
 	@Override
-	public String positionIn(String container, String coordinates) {
+	public String locate(String point) {
+		if(point==null){
+			throw new IllegalArgumentException("point argument can not be null.");
+		}
 		String result = null;
 		if (!serviceProviders.isEmpty()) {
-			for (LocationServiceProvider locationServiceProvider : serviceProviders) {
-				if (locationServiceProvider.canHandle(container)) {
-					result = locationServiceProvider.positionIn(container,
-							coordinates);
+			for (ILocationServiceProvider iLocationServiceProvider : serviceProviders) {
+				if(iLocationServiceProvider.canHandle(point)){
+					result = iLocationServiceProvider.locate(
+							point);
 					if (result != null)
 						break;
 				}
@@ -71,9 +74,9 @@ public class Component implements LocationService {
 	public String name(String target) {
 		String result = null;
 		if (!serviceProviders.isEmpty()) {
-			for (LocationServiceProvider locationServiceProvider : serviceProviders) {
-				if (locationServiceProvider.canHandle(target)) {
-					result = locationServiceProvider.name(target);
+			for (ILocationServiceProvider iLocationServiceProvider : serviceProviders) {
+				if (iLocationServiceProvider.canHandle(target)) {
+					result = iLocationServiceProvider.name(target);
 					if (result != null)
 						break;
 				}
@@ -86,9 +89,9 @@ public class Component implements LocationService {
 	public String address(String target) {
 		String result = null;
 		if (!serviceProviders.isEmpty()) {
-			for (LocationServiceProvider locationServiceProvider : serviceProviders) {
-				if (locationServiceProvider.canHandle(target)) {
-					result = locationServiceProvider.address(target);
+			for (ILocationServiceProvider iLocationServiceProvider : serviceProviders) {
+				if (iLocationServiceProvider.canHandle(target)) {
+					result = iLocationServiceProvider.address(target);
 					if (result != null)
 						break;
 				}
@@ -106,9 +109,9 @@ public class Component implements LocationService {
 	public Set<String> locationsIn(String container) {
 		Set<String> result = null;
 		if (!serviceProviders.isEmpty()) {
-			for (LocationServiceProvider locationServiceProvider : serviceProviders) {
-				if (locationServiceProvider.canHandle(container)) {
-					result = locationServiceProvider.locationsIn(container);
+			for (ILocationServiceProvider iLocationServiceProvider : serviceProviders) {
+				if (iLocationServiceProvider.canHandle(container)) {
+					result = iLocationServiceProvider.locationsIn(container);
 					if (result != null)
 						break;
 				}
@@ -118,17 +121,17 @@ public class Component implements LocationService {
 	}
 
 	public void setLocationServiceProvider(
-			LocationServiceProvider locationServiceProvider) {
-		serviceProviders.add(locationServiceProvider);
+			ILocationServiceProvider iLocationServiceProvider) {
+		serviceProviders.add(iLocationServiceProvider);
 		logger.debug(bundleMarker, "Added locationServiceProvider {}",
-				locationServiceProvider.getClass().getName());
+				iLocationServiceProvider.getClass().getName());
 	}
 
 	public void unsetLocationServiceProvider(
-			LocationServiceProvider locationServiceProvider) {
-		serviceProviders.remove(locationServiceProvider);
+			ILocationServiceProvider iLocationServiceProvider) {
+		serviceProviders.remove(iLocationServiceProvider);
 		logger.debug(bundleMarker, "Removed locationServiceProvider {}",
-				 locationServiceProvider.getClass().getName());
+				 iLocationServiceProvider.getClass().getName());
 	}
 
 	public void deactivate() {

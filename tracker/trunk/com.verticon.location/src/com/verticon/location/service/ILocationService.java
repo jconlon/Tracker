@@ -13,7 +13,7 @@ package com.verticon.location.service;
 import java.util.Set;
 
 /**
- * LocationService for finding the names and addresses of target objects using:
+ * ILocationService for finding the names and addresses of target objects using:
  * <ol>
  * <li>references to the objects themselves,</li>
  * <li>object identifiers,</li>
@@ -22,36 +22,35 @@ import java.util.Set;
  * @author jconlon
  * 
  */
-public interface LocationService {
+public interface ILocationService {
 
 	/**
 	 * 
 	 * 
-	 * @param targetUri
-	 * @return geoFeature containing the target object
+	 * @param targetId
+	 * @return geoFeature containing the target id
 	 */
-	String name(String targetUri);
+	String name(String targetId);
 
 	/**
 	 * 
-	 * @param target
-	 * @return address of the geoFeature containing the target object
+	 * @param targetId 
+	 * @return address of the geoFeature containing the target id
 	 */
-	String address(String targetUri);
-
-	/**
-	 * 
-	 * @param container
-	 * @param coordinates
-	 * @return location within the container referenced by the coordinates
-	 */
-	String positionIn(String targetUri, String coordinates);
+	String address(String targetId);
 	
 	/**
 	 * 
-	 * @param container
-	 * @return names of locations within the uri
+	 * @param point in Longitude,Latitude,and Altitude format
+	 * @return name of location containing the point
 	 */
-	Set<String> locationsIn(String targetUri);
+	String locate(String point);
+	
+	/**
+	 * 
+	 * @param targetId
+	 * @return names of locations within the target
+	 */
+	Set<String> locationsIn(String targetId);
 
 }
