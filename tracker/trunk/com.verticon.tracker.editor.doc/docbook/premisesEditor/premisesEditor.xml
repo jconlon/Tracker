@@ -218,8 +218,7 @@
 		<para>
 			<orderedlist numeration="loweralpha">
 				<listitem>
-					<para>The core elements of the Premises Model are depicted as the 
-					blue rectangles in the figure.</para>
+					<para>The core elements of the Premises Model are depicted as rectangles in the figure.</para>
 				</listitem>
 				<listitem>
 					<para>The notation within the elements are the attributes of the element.</para>
@@ -229,7 +228,7 @@
 				</listitem>
 			</orderedlist>
 		</para>
-		<para>The following table offers a text explanation of the Element Relationships.<table frame='all'>
+		<para>The following table offers a text explanation of the primary element relationships.<table frame='all'>
 				<title>Core Elements of the Premises Model</title>
 				<tgroup cols='2' align='left' colsep='1' rowsep='1'>
 					<colspec colname='c1' />
@@ -246,30 +245,48 @@
 						<row>
 							<entry>Premises</entry>
 							<entry>
-								There is one premises in a document
+								There is one premises element in a Tracker document.
 							</entry>
 
 						</row>
 						<row>
+							<entry>Location</entry>
+							<entry>
+								A premises can have zero or one location to specify address and geolocation details.
+							</entry>
+						</row>
+						<row>
+							<entry>Area</entry>
+							<entry>
+								A locaton can have zero or more areas to specify sublocation boundries.
+							</entry>
+						</row>
+						<row>
 							<entry>Animal</entry>
 							<entry>
-								A premises can have zero or many animals
+								A premises can have zero or many animals.
 							</entry>
 						</row>
 						<row>
-							<entry>Tag</entry>
+							<entry>Tag (assigned)</entry>
 							<entry>
-								An Animal can have one or many tags
+								An Animal can have one or many tags.
 							</entry>
 						</row>
 						<row>
-							<entry></entry>
-							<entry>A Premises can have zero or many tags that are unassigned</entry>
+							<entry>Tag (unassigned)</entry>
+							<entry>A Premises can have zero or many tags that are unassigned.</entry>
 						</row>
 						<row>
 							<entry>Event</entry>
 							<entry>
-								A Tag can have one or many events
+								A Tag can have one or many events.
+							</entry>
+						</row>
+						<row>
+							<entry>Policy (not shown)</entry>
+							<entry>
+								A Premises can have zero or one Policy for restricting the premises to specific animal species and event types. 
 							</entry>
 						</row>
 					</tbody>
