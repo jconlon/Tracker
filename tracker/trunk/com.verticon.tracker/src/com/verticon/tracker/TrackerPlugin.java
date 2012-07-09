@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-import com.verticon.location.service.LocationService;
+import com.verticon.location.service.ILocationService;
 
 /**
  * @author jconlon
@@ -51,7 +51,7 @@ public class TrackerPlugin extends Plugin{
 		return bundleMarker;
 	}
 
-	 private ServiceTracker<LocationService, LocationService> locationServiceTracker = null;   
+	 private ServiceTracker<ILocationService, ILocationService> locationServiceTracker = null;   
 
 	/**
 	 * The constructor.
@@ -66,7 +66,7 @@ public class TrackerPlugin extends Plugin{
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		locationServiceTracker = new ServiceTracker<LocationService, LocationService>(context, LocationService.class.getName(),null);
+		locationServiceTracker = new ServiceTracker<ILocationService, ILocationService>(context, ILocationService.class.getName(),null);
 		locationServiceTracker.open();
 		logger.debug(bundleMarker, "Started Bundle");
 	}
@@ -92,16 +92,16 @@ public class TrackerPlugin extends Plugin{
 
 	/**
 	 * 
-	 * @return LocationService
+	 * @return ILocationService
 	 */
-	private LocationService getLocationService(){
-		LocationService locationService = null;
+	private ILocationService getLocationService(){
+		ILocationService iLocationService = null;
 		if(locationServiceTracker!=null && locationServiceTracker.getService()!=null){
-			locationService = locationServiceTracker.getService();
+			iLocationService = locationServiceTracker.getService();
 		}else{
 			logger.warn(bundleMarker, "Failed to find a location service.");
 		}
-		return locationService;
+		return iLocationService;
 		
 	}
 
@@ -110,11 +110,11 @@ public class TrackerPlugin extends Plugin{
 	 */
 	 public String name(String uri) {
 		String result = null;
-		LocationService locationService = getLocationService();
-		if(locationService != null){
-			result = locationService.name(uri);
+		ILocationService iLocationService = getLocationService();
+		if(iLocationService != null){
+			result = iLocationService.name(uri);
 		}
-		return result!=null?result:"";
+		return result!=null?result:null;
 	}
 
 	/**
@@ -123,45 +123,17 @@ public class TrackerPlugin extends Plugin{
 	 * @return name of Premises location
 	 */
 	public String locate(String point) {
+		if(point==null){
+			throw new IllegalArgumentException("point argument can not be null.");
+		}
 		String result = null;
-		LocationService locationService = getLocationService();
-		if(locationService != null){
-			result = locationService.locate(point);
+		ILocationService iLocationService = getLocationService();
+		if(iLocationService != null){
+			result = iLocationService.locate(point);
 		}
 		return result!=null?result:"InPremises:"+point;
 	}
 
-//	/**
-//	 * Called by Premises to find out its address
-//	 * @deprecated use embedded Location object
-//	 */
-//	@Override
-//	public String address(Object target) {
-//		String result = null;
-//		LocationService locationService = getLocationService();
-//		if(locationService != null){
-//			result = locationService.address(target);
-//		}
-//		return result!=null?result:"unknown address";
-//		
-//	}
-
-	
-//	/**
-//	 * @deprecated use embedded Location object
-//	 */
-//	@Override
-//	public Set<String> locationsIn(Object container) {
-//		Set<String> result = null;
-//		LocationService locationService = getLocationService();
-//		if(locationService != null){
-//			result = locationService.locationsIn(container);
-//		}
-//		if(result == null){
-//			result = Collections.emptySet();
-//		}
-//		return result;
-//	}
 
 
 }

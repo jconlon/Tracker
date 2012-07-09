@@ -100,6 +100,14 @@
         <element xmi:type="ecore:EOperation" href="tracker.ecore#//Animal/getAge"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_KBfUkprIEd2YGsjuwiafLw"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_z-ONAMbxEeGlRp6528EBOQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="tracker.ecore#//Animal/canContain"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_z-ONAcbxEeGlRp6528EBOQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_cZ0coMbzEeGlRp6528EBOQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="tracker.ecore#//Animal/findLocationName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_cZ0cocbzEeGlRp6528EBOQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PBIPYVmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PBIPYlmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_PBIPY1mCEd2tRZ2K3aMUww"/>
@@ -230,6 +238,10 @@
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Event/pid"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_GDqzkmh4EeGqBoi2YVIQhA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_qMObMca0EeGlRp6528EBOQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Event/publisherName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_qMObMsa0EeGlRp6528EBOQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PCDcclmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PCDcc1mCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_PCDcdFmCEd2tRZ2K3aMUww"/>
@@ -246,6 +258,10 @@
       <children xmi:type="notation:Node" xmi:id="_IRgGUCptEeGk3uyKclPFhA" type="2002">
         <element xmi:type="ecore:EOperation" href="tracker.ecore#//Event/values"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_IRgGUSptEeGk3uyKclPFhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__Io3AMbxEeGlRp6528EBOQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="tracker.ecore#//Event/findPublisherName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__Io3AcbxEeGlRp6528EBOQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PCDcdlmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PCDcd1mCEd2tRZ2K3aMUww"/>
@@ -1266,18 +1282,26 @@
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//MovedIn/uri"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_O4HXcQPUEeCMr-HeGYJKMg"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_7TAPsMeVEeGJhpWy2DnaPQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//MovedIn/sourceName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_7TAPsceVEeGJhpWy2DnaPQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PDcjklmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PDcjk1mCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_PDcjlFmCEd2tRZ2K3aMUww"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_PDdKoFmCEd2tRZ2K3aMUww" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_la0_kMbyEeGlRp6528EBOQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="tracker.ecore#//MovedIn/findSourceName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_la0_kcbyEeGlRp6528EBOQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PDdKoVmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PDdKolmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_PDdKo1mCEd2tRZ2K3aMUww"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_PDb8gVmCEd2tRZ2K3aMUww" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
     <element xmi:type="ecore:EClass" href="tracker.ecore#//MovedIn"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PDb8glmCEd2tRZ2K3aMUww" x="2472" y="648"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PDb8glmCEd2tRZ2K3aMUww" x="2472" y="648" height="98"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_PDdxslmCEd2tRZ2K3aMUww" type="1001">
     <children xmi:type="notation:Node" xmi:id="_PDeYwFmCEd2tRZ2K3aMUww" type="4001"/>
@@ -1290,18 +1314,26 @@
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//MovedOut/uri"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_5KTAIgPTEeCMr-HeGYJKMg"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_ZX4_oMeWEeGJhpWy2DnaPQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//MovedOut/destinationName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ZX4_oceWEeGJhpWy2DnaPQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PDeYwlmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PDeYw1mCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_PDeYxFmCEd2tRZ2K3aMUww"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_PDeYxVmCEd2tRZ2K3aMUww" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_QbT4sMbyEeGlRp6528EBOQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="tracker.ecore#//MovedOut/findDestinationName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_QbT4scbyEeGlRp6528EBOQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PDeYxlmCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PDeYx1mCEd2tRZ2K3aMUww"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_PDeYyFmCEd2tRZ2K3aMUww"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_PDdxs1mCEd2tRZ2K3aMUww" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
     <element xmi:type="ecore:EClass" href="tracker.ecore#//MovedOut"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PDdxtFmCEd2tRZ2K3aMUww" x="1716" y="1224" width="255"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PDdxtFmCEd2tRZ2K3aMUww" x="1716" y="1188" width="255" height="104"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_PDe_0lmCEd2tRZ2K3aMUww" type="1001">
     <children xmi:type="notation:Node" xmi:id="_PDfm4FmCEd2tRZ2K3aMUww" type="4001"/>
@@ -2953,11 +2985,19 @@
         <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Position/longitude"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_9iOXQThYEeCA0thgnic5bg"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_SQVxkMb7EeGlRp6528EBOQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="tracker.ecore#//Position/locationName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_SQVxkcb7EeGlRp6528EBOQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Y33voQSZEeC5yOs0w41ecw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_Y33vogSZEeC5yOs0w41ecw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Y33vowSZEeC5yOs0w41ecw"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_Y34WsASZEeC5yOs0w41ecw" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_dY8z0MbyEeGlRp6528EBOQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="tracker.ecore#//Position/findLocationName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_dY8z0cbyEeGlRp6528EBOQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Y34WsQSZEeC5yOs0w41ecw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_Y34WsgSZEeC5yOs0w41ecw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Y34WswSZEeC5yOs0w41ecw"/>

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.TrackerPlugin;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,6 +27,7 @@ import com.verticon.tracker.TrackerPackage;
  * <ul>
  *   <li>{@link com.verticon.tracker.impl.MovedOutImpl#getDestinationPin <em>Destination Pin</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.MovedOutImpl#getUri <em>Uri</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.MovedOutImpl#getDestinationName <em>Destination Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -80,6 +82,16 @@ public class MovedOutImpl extends EventImpl implements MovedOut {
 	 * @ordered
 	 */
 	protected String uri = URI_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDestinationName() <em>Destination Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDestinationName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DESTINATION_NAME_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -151,6 +163,50 @@ public class MovedOutImpl extends EventImpl implements MovedOut {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.MOVED_OUT__URI, oldUri, uri));
 	}
 
+
+	private String resolvedDestinationName = null;
+	
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getDestinationName() {
+		return resolvedDestinationName;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.impl.EventImpl#findPublisherName()
+	 */
+	@Override
+	public String findPublisherName() {
+		findDestinationName();
+		return super.findPublisherName();
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * Finds the name of the Destination Premises with the LocationService
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String findDestinationName() {
+		String oldDestinationName = resolvedDestinationName;
+		if(getUri()!=null && getUri().trim().length()>0){
+			resolvedDestinationName=TrackerPlugin.getDefault().name(getUri());
+		} else if(getDestinationPin()!=null){
+			StringBuffer buf = new StringBuffer("urn:pin:");
+			buf.append( getDestinationPin());
+			resolvedDestinationName = TrackerPlugin.getDefault().name(buf.toString());
+		}
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(
+					this, Notification.SET, TrackerPackage.MOVED_OUT__DESTINATION_NAME, oldDestinationName, resolvedDestinationName));
+		return resolvedDestinationName;
+	}
+	
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -163,6 +219,8 @@ public class MovedOutImpl extends EventImpl implements MovedOut {
 				return getDestinationPin();
 			case TrackerPackage.MOVED_OUT__URI:
 				return getUri();
+			case TrackerPackage.MOVED_OUT__DESTINATION_NAME:
+				return getDestinationName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -215,6 +273,8 @@ public class MovedOutImpl extends EventImpl implements MovedOut {
 				return DESTINATION_PIN_EDEFAULT == null ? destinationPin != null : !DESTINATION_PIN_EDEFAULT.equals(destinationPin);
 			case TrackerPackage.MOVED_OUT__URI:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
+			case TrackerPackage.MOVED_OUT__DESTINATION_NAME:
+				return DESTINATION_NAME_EDEFAULT == null ? getDestinationName() != null : !DESTINATION_NAME_EDEFAULT.equals(getDestinationName());
 		}
 		return super.eIsSet(featureID);
 	}

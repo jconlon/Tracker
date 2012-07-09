@@ -21,6 +21,7 @@ package com.verticon.tracker;
  * <ul>
  *   <li>{@link com.verticon.tracker.MovedIn#getSourcePin <em>Source Pin</em>}</li>
  *   <li>{@link com.verticon.tracker.MovedIn#getUri <em>Uri</em>}</li>
+ *   <li>{@link com.verticon.tracker.MovedIn#getSourceName <em>Source Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -92,5 +93,28 @@ public interface MovedIn extends Event {
 	 * @generated
 	 */
 	void setUri(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Source Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Source Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Source Name</em>' attribute.
+	 * @see com.verticon.tracker.TrackerPackage#getMovedIn_SourceName()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	String getSourceName();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String findSourceName();
 
 } // MovedIn

@@ -21,6 +21,7 @@ package com.verticon.tracker;
  * <ul>
  *   <li>{@link com.verticon.tracker.MovedOut#getDestinationPin <em>Destination Pin</em>}</li>
  *   <li>{@link com.verticon.tracker.MovedOut#getUri <em>Uri</em>}</li>
+ *   <li>{@link com.verticon.tracker.MovedOut#getDestinationName <em>Destination Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -92,5 +93,28 @@ public interface MovedOut extends Event {
 	 * @generated
 	 */
 	void setUri(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Destination Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Destination Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Destination Name</em>' attribute.
+	 * @see com.verticon.tracker.TrackerPackage#getMovedOut_DestinationName()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	String getDestinationName();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String findDestinationName();
 
 } // MovedOut

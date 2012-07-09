@@ -28,8 +28,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.verticon.tracker.Event;
 import com.verticon.tracker.EventType;
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.TrackerPlugin;
 import com.verticon.tracker.util.CollectionFilter;
 import com.verticon.tracker.util.FilterCriteria;
 import com.verticon.tracker.util.TrackerConstants;
@@ -52,6 +54,7 @@ import com.verticon.tracker.util.TrackerUtils;
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getDate <em>Date</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getDateKey <em>Date Key</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.EventImpl#getPid <em>Pid</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.EventImpl#getPublisherName <em>Publisher Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -204,6 +207,16 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * @ordered
 	 */
 	protected String pid = PID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPublisherName() <em>Publisher Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPublisherName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PUBLISHER_NAME_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -383,6 +396,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@SuppressWarnings("deprecation")
 	public String getDate() {
 		if(dateTime==null){
 			return null;
@@ -419,6 +433,38 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 		pid = newPid;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.EVENT__PID, oldPid, pid));
+	}
+
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Name of the premises that published the event to a ITrackerStore. 
+	 * If there is no pid than it is the name of the enclosing premises.
+	 * Will not resolve foreign publishers.  Use the findPublisherName() operation
+	 * for that.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getPublisherName() {
+		if(resolvedPublisherName!=null){
+			return resolvedPublisherName;
+		}
+		String result = null;
+		if(eContainer()!=null){
+			//Has a tag parent
+			if(eContainer().eContainer()!=null){
+				//Has an animal grandParent
+				if(eContainer().eContainer().eContainer()!=null){
+					//Has an premises great-grandParent
+					Premises premises = (Premises)eContainer().eContainer().eContainer();
+					if(pid==null || pid.equals(premises.getUri())){
+						result = premises.getName();
+					}
+				}
+			}
+		}
+		
+		return result;
 	}
 
 	/**
@@ -477,6 +523,31 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 		int last = toString().indexOf('(', toString().indexOf('(')+1);
 		return last!=-1?
 				toString().substring(last+1,toString().lastIndexOf(')')):null;
+	}
+
+	private String resolvedPublisherName = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * Finds the local or foreign event publishers name. Uses the location service
+	 * to find foreign publishers.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String findPublisherName() {
+		String oldPublisherName = getPublisherName();
+		resolvedPublisherName=null;
+		String publisherName = getPublisherName();
+		
+		if(publisherName==null && pid!=null){
+			resolvedPublisherName = TrackerPlugin.getDefault().name(pid);
+		}
+		
+		String newPublisher = getPublisherName();
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(
+					this, Notification.SET, TrackerPackage.EVENT__PUBLISHER_NAME, oldPublisherName, newPublisher));
+		
+		return newPublisher;		
 	}
 
 	/**
@@ -552,6 +623,8 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 				return getDateKey();
 			case TrackerPackage.EVENT__PID:
 				return getPid();
+			case TrackerPackage.EVENT__PUBLISHER_NAME:
+				return getPublisherName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -644,6 +717,8 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 				return DATE_KEY_EDEFAULT == null ? getDateKey() != null : !DATE_KEY_EDEFAULT.equals(getDateKey());
 			case TrackerPackage.EVENT__PID:
 				return PID_EDEFAULT == null ? pid != null : !PID_EDEFAULT.equals(pid);
+			case TrackerPackage.EVENT__PUBLISHER_NAME:
+				return PUBLISHER_NAME_EDEFAULT == null ? getPublisherName() != null : !PUBLISHER_NAME_EDEFAULT.equals(getPublisherName());
 		}
 		return super.eIsSet(featureID);
 	}

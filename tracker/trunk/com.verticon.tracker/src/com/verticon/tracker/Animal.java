@@ -536,4 +536,12 @@ public interface Animal extends EObject {
 	 */
 	Event lastEvent(EventType type, String name);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String findLocationName();
+
 } // Animal

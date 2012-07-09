@@ -84,6 +84,7 @@ public class EventItemProvider
 			addCommentsPropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
 			addPidPropertyDescriptor(object);
+			addPublisherNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -253,6 +254,30 @@ public class EventItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Publisher Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPublisherNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Event_publisherName_feature"),
+				 getString("_UI_Event_publisherName_description"),
+				 TrackerPackage.Literals.EVENT__PUBLISHER_NAME,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 getString("_UI_IdentificationPropertyCategory"),
+				 new String[] {
+					"org.eclipse.ui.views.property.expert"
+				 }));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * This will use the name of the subclass to find a local specific label.
@@ -311,6 +336,7 @@ public class EventItemProvider
 			case TrackerPackage.EVENT__DATE:
 			case TrackerPackage.EVENT__DATE_KEY:
 			case TrackerPackage.EVENT__PID:
+			case TrackerPackage.EVENT__PUBLISHER_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
