@@ -17,16 +17,16 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-import com.verticon.location.service.LocationServiceProvider;
+import com.verticon.location.service.ILocationServiceProvider;
 
 /**
- * LocationServiceProvider for Animals and Premises created from all projects
+ * ILocationServiceProvider for Animals and Premises created from all projects
  * having an AgriculutureNature and a doc.agri in the root folder.
  * 
  * @author jconlon
  * 
  */
-public class Component implements LocationServiceProvider {
+public class Component implements ILocationServiceProvider {
 
 	/**
 	 * slf4j Logger
@@ -51,7 +51,7 @@ public class Component implements LocationServiceProvider {
 	}
 
 	/**
-	 * Can handle premises and String IDs
+	 * Can handle all String target ID
 	 */
 	@Override
 	public boolean canHandle(Object target) {
@@ -59,7 +59,7 @@ public class Component implements LocationServiceProvider {
 	}
 
 	/**
-	 * Find address for a premises.
+	 * Find address for a target identifier.
 	 */
 	@Override
 	public String address(String target) {
@@ -67,11 +67,11 @@ public class Component implements LocationServiceProvider {
 	}
 
 	/**
-	 * Find location for an animal or a inside a Premises
+	 * Find location for a 
 	 */
 	@Override
-	public String positionIn(String target, String coordinates) {
-		return delegate.positionIn(target, coordinates);
+	public String locate(String coordinates) {
+		return delegate.locate(coordinates);
 	}
 
 	/**
