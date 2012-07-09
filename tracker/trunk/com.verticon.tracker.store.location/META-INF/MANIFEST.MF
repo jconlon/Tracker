@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Location
+Bundle-SymbolicName: com.verticon.tracker.store.location;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Service-Component: OSGI-INF/*.xml
+Import-Package: com.verticon.location,
+ com.verticon.location.service,
+ com.verticon.tracker;version="0.1.0",
+ com.verticon.tracker.store,
+ org.eclipse.emf.common.util,
+ org.slf4j;version="1.5.11"
