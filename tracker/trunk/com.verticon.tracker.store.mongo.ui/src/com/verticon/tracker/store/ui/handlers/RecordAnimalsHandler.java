@@ -8,7 +8,9 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.store.mongo.ui.handlers;
+package com.verticon.tracker.store.ui.handlers;
+
+import static com.verticon.tracker.store.ui.Activator.bundleMarker;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -16,14 +18,17 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.window.Window;
+import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static com.verticon.tracker.store.mongo.ui.handlers.Utils.*;
 
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.store.ITrackerStore;
-import com.verticon.tracker.store.mongo.ui.Activator;
+import com.verticon.tracker.store.StoreAccessException;
+import com.verticon.tracker.store.ui.Activator;
 
 /**
  * Uses the ITrackerStore to save Animal information to MongoDB.
@@ -46,14 +51,47 @@ public class RecordAnimalsHandler extends AbstractHandler {
 			Premises premises = (Premises) ((IStructuredSelection) selection)
 					.getFirstElement();
 			String uri = premises.getUri();
+			LabelProvider lp = new LabelProvider(){
+
+				/* (non-Javadoc)
+				 * @see org.eclipse.jface.viewers.LabelProvider#getText(java.lang.Object)
+				 */
+				@Override
+				public String getText(Object element) {
+					ITrackerStore trackerStore = (ITrackerStore)element;
+					return trackerStore.uri();
+				}
+				
+			};
+			ITrackerStore store =null;
 			try {
-				ITrackerStore store = Activator.getDefault().getStore(uri);
+				ITrackerStore[] stores = Activator.getDefault().getTrackerStoreServices(uri);
+				if(stores==null || stores.length==0){
+					throw new StoreAccessException(
+							"Can't find the service to record anaimal life data and event histories for a premises. Make sure a TrackerStore is configured and your administrator has you as the publisher.");
+				}
+
+				ElementListSelectionDialog dialog = 
+						new ElementListSelectionDialog(HandlerUtil.getActiveShell(event), lp);
+				dialog.setElements(stores);
+				dialog.setAllowDuplicates(false);
+				dialog.setMultipleSelection(false);
+				dialog.setMessage("Choose the TrackerStore URI");
+				dialog.setTitle("Register Premises");
+				// User pressed cancel
+				if (dialog.open() != Window.OK) {
+					return false;
+				}
+				Object[] result = dialog.getResult(); 
+			    store = (ITrackerStore) result[0];
+			    
+//				ITrackerStore store = Activator.getDefault().getStore(uri);
 				if(store==null){
 					throw new Exception("Unable to find ITrackerStore service. Make sure you created a MongoTracker Store factory configuration with "+uri+" as the Premises uri.");
 				}
 				int processedAnimals = store.recordAnimals(premises);
 				MessageDialog.openConfirm(HandlerUtil.getActiveShell(event),
-						"Confirm", "Saved events from "+processedAnimals+" animals contained in premises: " + uri
+						"Animal LifeData and EventHistory Loader", "Saved events from "+processedAnimals+" animals contained in premises: " + uri
 								+ " to MongoDB.");
 			} catch (Exception e) {
 				MessageDialog.openError(HandlerUtil.getActiveShell(event),

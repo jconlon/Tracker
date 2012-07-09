@@ -8,13 +8,20 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.store.mongo.ui;
+package com.verticon.tracker.store.ui;
+
+import static com.google.common.collect.Lists.newArrayList;
+
+import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import com.google.common.base.Strings;
 import com.verticon.tracker.store.ITrackerStore;
@@ -26,7 +33,16 @@ import com.verticon.tracker.store.admin.api.ITrackerStoreAdmin;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.verticon.tracker.store.mongo.ui2"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "com.verticon.tracker.store.ui"; //$NON-NLS-1$
+	/**
+	 * slf4j Marker to keep track of bundle
+	 */
+    public static final Marker bundleMarker = MarkerFactory
+			.getMarker(PLUGIN_ID);
+
+	static {
+		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
+	}
 
 	// The shared instance
 	private static Activator plugin;
@@ -87,15 +103,28 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	/**
-	 * services
-	 * "(&(objectclass=com.verticon.tracker.store.ITrackerStore)(tracker.premises.uri=urn:pin:H89234X))"
 	 * 
-	 * @param uri
-	 * @return ITrackerStore
+	 * @return true if there is at least one service available to the user
+	 */
+	public boolean hasTrackerStoreService(String uri){
+		boolean result = false;
+		try {
+			result = getTrackerStoreServices(uri).length!=0;
+		} catch (InvalidSyntaxException e) {
+			
+		}
+		return result;
+	}
+
+	/**
+	 * 
+	 * @param uri value for created filter property tracker.premises.uri
+	 * @return ITrackerStore services 
 	 * @throws InvalidSyntaxException
 	 */
-	public ITrackerStore getStore(String uri) throws InvalidSyntaxException {
+	public ITrackerStore[] getTrackerStoreServices(String uri) throws InvalidSyntaxException {
 		String filter = null;
+		List<ITrackerStore> result = null;
 		if(!Strings.isNullOrEmpty(uri)){
 			filter = new StringBuilder().append("(tracker.premises.uri=")
 				.append(uri).append(')').toString();
@@ -104,29 +133,62 @@ public class Activator extends AbstractUIPlugin {
 		ServiceReference<?>[] references = context.getServiceReferences(
 				ITrackerStore.class.getName(), filter);
 
-		return references != null ? (ITrackerStore) context
-				.getService(references[0]) : null;
-
+		if (references != null){
+			result = newArrayList();
+			for (ServiceReference<?> serviceReference : references) {
+				
+				result.add((ITrackerStore) context.getService(serviceReference));
+			}
+		}else{
+			result = Collections.emptyList();
+		}
+		return (ITrackerStore[])result.toArray(new ITrackerStore[result.size()]);
 	}
 	
+
 	/**
-	 *
-	 * @return ITrackerStore
+	 * 
+	 * @return true if there is at least one service available to the admin user
 	 */
-	public ITrackerStore getRegister() {
-		// Register directly with the service
-		ServiceReference<ITrackerStore> reference = context.getServiceReference(
-				ITrackerStore.class);
-		
-		return reference!=null?context.getService(reference):null;
-
+	public boolean hasTrackerStoreAdminService(){
+		boolean result = false;
+		try {
+			result = getTrackerStoreAdminServices().length!=0;
+		} catch (InvalidSyntaxException e) {
+			
+		}
+		return result;
 	}
-
+	
+	
+	/**
+	 * @deprecated use
+	 * @return ITrackerStoreAdmin
+	 */
 	public ITrackerStoreAdmin getLoader() {
 		// Register directly with the service
 		ServiceReference<ITrackerStoreAdmin> reference = context
 				.getServiceReference(ITrackerStoreAdmin.class);
 		
 		return reference!=null?context.getService(reference):null;
+	}
+	
+	public ITrackerStoreAdmin[] getTrackerStoreAdminServices() throws InvalidSyntaxException {
+		List<ITrackerStoreAdmin> result = null;
+		ServiceReference<?>[] references = context.getServiceReferences(
+				ITrackerStoreAdmin.class.getName(), null);
+		if (references != null){
+			result = newArrayList();
+			ITrackerStoreAdmin trackerStoreAdmin = null;
+			for (ServiceReference<?> serviceReference : references) {
+				trackerStoreAdmin = (ITrackerStoreAdmin) context.getService(serviceReference);
+				if(trackerStoreAdmin.isCurrentUserAdmin()){
+					result.add(trackerStoreAdmin);
+				}
+			}
+		}else{
+			result = Collections.emptyList();
+		}
+		return (ITrackerStoreAdmin[])result.toArray(new ITrackerStoreAdmin[result.size()]);
 	}
 }

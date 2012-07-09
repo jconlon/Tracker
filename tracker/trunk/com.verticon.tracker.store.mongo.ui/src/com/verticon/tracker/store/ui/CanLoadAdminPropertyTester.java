@@ -8,7 +8,7 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.store.mongo.ui;
+package com.verticon.tracker.store.ui;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -17,11 +17,11 @@ import java.util.List;
 import org.eclipse.core.expressions.PropertyTester;
 
 import com.verticon.tracker.store.admin.Admin;
-import com.verticon.tracker.store.admin.api.ITrackerStoreAdmin;
 
 /**
  * Tests an Admin document to get the name of the admin to see if it is the same
- * as the current user and tests if the activator can find a loader service.
+ * as the current user and tests if the activator can find a TrackerStoreAdmin 
+ * that can be used by the user.
  * 
  * @author jconlon
  * 
@@ -80,9 +80,7 @@ public class CanLoadAdminPropertyTester extends PropertyTester {
 		// Current user must be the same as in the Admin admin name
 		if (USER.equals(admin.getAdmin().getName())) {
 			// Check with the service to see if the current user is an admin
-			ITrackerStoreAdmin adminService = Activator.getDefault().getLoader();
-			result = adminService!=null && Activator.getDefault().getLoader().isCurrentUserAdmin();
-
+			result = Activator.getDefault().hasTrackerStoreAdminService();
 		}
 
 		return result;

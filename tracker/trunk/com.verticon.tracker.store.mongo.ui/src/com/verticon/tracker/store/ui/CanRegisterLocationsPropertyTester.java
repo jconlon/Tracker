@@ -8,22 +8,16 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.store.mongo.ui;
-
-import java.util.List;
+package com.verticon.tracker.store.ui;
 
 import org.eclipse.core.expressions.PropertyTester;
-import org.osgi.framework.InvalidSyntaxException;
 
-import com.google.common.base.Strings;
-import com.verticon.tracker.Premises;
+public class CanRegisterLocationsPropertyTester extends PropertyTester {
 
-public class CanPublishAnimalsPropertyTester extends PropertyTester {
-
-
+	
 	/**
 	 * 
-	 * Tests a Premises to see if there is a ITrackerLoader service available for it.
+	 * Tests to see if there is a ITrackerStore and a ITrackerStoreAdmin available to the user.
 	 * 
 	 * Executes the property test determined by the parameter <code>property</code>.
 	 * 
@@ -41,24 +35,7 @@ public class CanPublishAnimalsPropertyTester extends PropertyTester {
 	@Override
 	public boolean test(Object receiver, String property, Object[] args,
 			Object expectedValue) {
-		boolean result = false;
-		Premises premises =null;
-		if(receiver instanceof List){
-			 premises = (Premises)((List<?>)receiver).get(0);
-		}else{
-			 premises = (Premises) receiver;
-		}
-		
-		String uri = premises.getUri();
-		if(!Strings.isNullOrEmpty(uri)){
-			try {
-				result = Activator.getDefault().getStore(uri)!=null;
-			} catch (InvalidSyntaxException e) {
-				
-			}
-		}
-				
-		return result;
+		return Activator.getDefault().hasTrackerStoreAdminService() && Activator.getDefault().hasTrackerStoreService(null);
 	}
 
 }
