@@ -15,7 +15,7 @@ package com.verticon.location.service;
  * @author jconlon
  *
  */
-public interface LocationServiceProvider extends LocationService{
+public interface ILocationServiceProvider extends ILocationService{
 	
 	/**
 	 * 
