@@ -5,24 +5,31 @@
    <extension
          point="org.eclipse.core.expressions.propertyTesters">
       <propertyTester
-            class="com.verticon.tracker.store.mongo.ui.CanPublishAnimalsPropertyTester"
-            id="com.verticon.tracker.store.mongo.ui.propertyTester.hasPublisher"
-            namespace="com.verticon.tracker.store.mongo.ui"
+            class="com.verticon.tracker.store.ui.CanPublishAnimalsPropertyTester"
+            id="com.verticon.tracker.store.ui.propertyTester.hasPublisher"
+            namespace="com.verticon.tracker.store.ui"
             properties="hasPublisherService"
             type="java.lang.Object">
       </propertyTester>
       <propertyTester
-            class="com.verticon.tracker.store.mongo.ui.CanLoadAdminPropertyTester"
-            id="com.verticon.tracker.store.mongo.ui.propertyTester.hasLoader"
-            namespace="com.verticon.tracker.store.mongo.ui"
+            class="com.verticon.tracker.store.ui.CanLoadAdminPropertyTester"
+            id="com.verticon.tracker.store.ui.propertyTester.hasLoader"
+            namespace="com.verticon.tracker.store.ui"
             properties="hasLoaderService"
             type="java.lang.Object">
       </propertyTester>
       <propertyTester
-            class="com.verticon.tracker.store.mongo.ui.CanRegisterLocationsPropertyTester"
-            id="com.verticon.tracker.store.mongo.ui.propertyTester.hasRegister"
-            namespace="com.verticon.tracker.store.mongo.ui"
+            class="com.verticon.tracker.store.ui.CanRegisterLocationsPropertyTester"
+            id="com.verticon.tracker.store.ui.propertyTester.hasRegister"
+            namespace="com.verticon.tracker.store.ui"
             properties="hasRegisterService"
+            type="java.lang.Object">
+      </propertyTester>
+      <propertyTester
+            class="com.verticon.tracker.store.ui.HasTrackerStoreServicePropertyTester"
+            id="com.verticon.tracker.store.ui.propertyTester.hasTrackerStore"
+            namespace="com.verticon.tracker.store.ui"
+            properties="hasTrackerStoreService"
             type="java.lang.Object">
       </propertyTester>
    </extension>
@@ -32,52 +39,114 @@
       <command
             name="Load Admin access control to MongoDB"
             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
-            id="com.verticon.tracker.store.mongo.ui.commands.loadAdminCommand">
+            id="com.verticon.tracker.store.ui.commands.loadAdminCommand">
       </command>
       <command
             name="Register Premises to MongoDB"
             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
-            id="com.verticon.tracker.store.mongo.ui.commands.registerPremisesCommand">
+            id="com.verticon.tracker.store.ui.commands.registerPremisesCommand">
       </command>
       <command
             name="Record Animal History to MongoDB"
             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
-            id="com.verticon.tracker.store.mongo.ui.commands.recordAnimalsCommand">
+            id="com.verticon.tracker.store.ui.commands.recordAnimalsCommand">
+      </command>
+       <command
+            name="Resolve All GeoLocation Names"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            id="com.verticon.tracker.store.ui.commands.resolveNamesOnAnimalCommand">
+      </command>
+      <command
+            name="Register Premises"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            id="com.verticon.tracker.store.ui.commands.register.premises.csv.command">
+      </command>
+      <command
+            name="Import Animal from TrackerStore"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            id="com.verticon.tracker.store.ui.commands.import.animal.command">
+      </command>
+      <command
+            name="Import Premises from TrackerStore"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            id="com.verticon.tracker.store.ui.commands.import.premises.command">
       </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            commandId="com.verticon.tracker.store.mongo.ui.commands.loadAdminCommand"
-            class="com.verticon.tracker.store.mongo.ui.handlers.LoadAdminHandler">
+            commandId="com.verticon.tracker.store.ui.commands.loadAdminCommand"
+            class="com.verticon.tracker.store.ui.handlers.LoadAdminHandler">
       </handler>
       <handler
-            commandId="com.verticon.tracker.store.mongo.ui.commands.recordAnimalsCommand"
-            class="com.verticon.tracker.store.mongo.ui.handlers.RecordAnimalsHandler">
+            commandId="com.verticon.tracker.store.ui.commands.recordAnimalsCommand"
+            class="com.verticon.tracker.store.ui.handlers.RecordAnimalsHandler">
       </handler>
       <handler
-            commandId="com.verticon.tracker.store.mongo.ui.commands.registerPremisesCommand"
-            class="com.verticon.tracker.store.mongo.ui.handlers.RegisterPremisesHandler">
+            commandId="com.verticon.tracker.store.ui.commands.registerPremisesCommand"
+            class="com.verticon.tracker.store.ui.handlers.RegisterPremisesHandler">
       </handler>
+      <handler
+            commandId="com.verticon.tracker.store.ui.commands.resolveNamesOnAnimalCommand"
+            class="com.verticon.tracker.store.ui.handlers.ResolveGeoLocationNamesHandler">
+      </handler>
+       <handler
+            commandId="com.verticon.tracker.store.ui.commands.register.premises.csv.command"
+            class="com.verticon.tracker.store.ui.handlers.RegisterPremisesFromCSVHandler">
+      </handler>
+      
+      <handler
+            commandId="com.verticon.tracker.store.ui.commands.import.animal.command"
+            class="com.verticon.tracker.store.ui.handlers.ImportAnimalHandler">
+      </handler>
+      <handler
+            commandId="com.verticon.tracker.store.ui.commands.import.premises.command"
+            class="com.verticon.tracker.store.ui.handlers.ImportPremisesHandler">
+      </handler>
+      
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
       <key
-            commandId="com.verticon.tracker.store.mongo.ui.commands.recordAnimalsCommand"
+            commandId="com.verticon.tracker.store.ui.commands.recordAnimalsCommand"
             contextId="org.eclipse.ui.contexts.window"
             sequence="M1+6"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
       </key>
        <key
-            commandId="com.verticon.tracker.store.mongo.ui.commands.registerPremisesCommand"
+            commandId="com.verticon.tracker.store.ui.commands.registerPremisesCommand"
             contextId="org.eclipse.ui.contexts.window"
             sequence="M1+5"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
       </key>
        <key
-            commandId="com.verticon.tracker.store.mongo.ui.commands.loadAdminCommand"
+            commandId="com.verticon.tracker.store.ui.commands.loadAdminCommand"
             contextId="org.eclipse.ui.contexts.window"
             sequence="M1+4"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+       <key
+            commandId="com.verticon.tracker.store.ui.commands.resolveNamesOnAnimalCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+3"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+       <key
+            commandId="com.verticon.tracker.store.ui.commands.register.premises.csv.command"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+2"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+       <key
+            commandId="com.verticon.tracker.store.ui.commands.import.animal.command"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+1"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+      <key
+            commandId="com.verticon.tracker.store.ui.commands.import.premises.command"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+0"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
       </key>
    </extension>
@@ -88,7 +157,7 @@
              allPopups="false"
             locationURI="popup:com.verticon.tracker.editor.menus.popupany">
             <command
-                  commandId="com.verticon.tracker.store.mongo.ui.commands.recordAnimalsCommand"
+                  commandId="com.verticon.tracker.store.ui.commands.recordAnimalsCommand"
                    style="push">
                  
                <visibleWhen>
@@ -116,7 +185,7 @@
               			 -->
               			 <test
                         forcePluginActivation="true"
-                        property="com.verticon.tracker.store.mongo.ui.hasPublisherService">
+                        property="com.verticon.tracker.store.ui.hasPublisherService">
               			</test>
     			     </and>
                </visibleWhen>
@@ -128,7 +197,7 @@
              allPopups="false"
             locationURI="popup:com.verticon.tracker.editor.menus.popupany">
             <command
-                  commandId="com.verticon.tracker.store.mongo.ui.commands.registerPremisesCommand"
+                  commandId="com.verticon.tracker.store.ui.commands.registerPremisesCommand"
                    style="push">
                  
                <visibleWhen>
@@ -145,7 +214,7 @@
               			 -->
     					  <test
                            forcePluginActivation="true"
-                           property="com.verticon.tracker.store.mongo.ui.hasRegisterService">
+                           property="com.verticon.tracker.store.ui.hasRegisterService">
               			 </test>
     					 
     					
@@ -159,7 +228,7 @@
              allPopups="false"
             locationURI="popup:com.verticon.tracker.editor.menus.popupany">
             <command
-                  commandId="com.verticon.tracker.store.mongo.ui.commands.loadAdminCommand"
+                  commandId="com.verticon.tracker.store.ui.commands.loadAdminCommand"
                    style="push">
                  
                <visibleWhen>
@@ -178,7 +247,7 @@
               			 -->
               			  <test
                         forcePluginActivation="true"
-                        property="com.verticon.tracker.store.mongo.ui.hasLoaderService">
+                        property="com.verticon.tracker.store.ui.hasLoaderService">
               			</test>
     					
     			     </and>
@@ -186,6 +255,187 @@
             </command>
         
       </menuContribution>
+      
+      
+      <menuContribution
+             allPopups="false"
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+            <command
+                  commandId="com.verticon.tracker.store.ui.commands.resolveNamesOnAnimalCommand"
+                   style="push">
+                 
+               <visibleWhen>
+                    <and>
+                         <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+      						 <instanceof value="com.verticon.tracker.Animal"/>
+    					  </iterate>
+    					 </with>
+    					 
+    					 
+    					 <!-- 
+    			        	Restrict to show only if the MongoDB for this premises uri is 
+    			        	component factory instance.
+              			-->
+    					 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+              			 
+    					
+    					 <!-- 
+    			        	Restricted to show only if there is a Publisher Service.
+              			 -->
+              			 <test
+                        forcePluginActivation="true"
+                        property="com.verticon.tracker.store.ui.hasTrackerStoreService">
+              			</test>
+    			     </and>
+               </visibleWhen>
+            </command>
+        
+      </menuContribution>
+      
+       <menuContribution
+             allPopups="false"
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+            <command
+                  commandId="com.verticon.tracker.store.ui.commands.resolveNamesOnAnimalCommand"
+                   style="push">
+                 
+               <visibleWhen>
+                    <and>
+                         <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+      						 <instanceof value="com.verticon.tracker.Premises"/>
+    					  </iterate>
+    					 </with>
+    					 
+    					 
+    					 <!-- 
+    			        	Restrict to show only if the MongoDB for this premises uri is 
+    			        	component factory instance.
+              			-->
+    					 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+              			 
+    					
+    					 <!-- 
+    			        	Restricted to show only if there is a TrackerStore Service.
+              			 -->
+              			 <test
+                        forcePluginActivation="true"
+                        property="com.verticon.tracker.store.ui.hasTrackerStoreService">
+              			</test>
+    			     </and>
+               </visibleWhen>
+            </command>
+        
+      </menuContribution>
+       <menuContribution
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+               <command
+                     commandId="com.verticon.tracker.store.ui.commands.register.premises.csv.command"
+                     icon="icons/etool16/import_wiz.gif"
+                     style="push">
+               <visibleWhen>
+                       <and>
+		               	<with variable="selection">
+		                 	 <iterate
+                         	 ifEmpty="false"
+                          	operator="or">
+		                      <adapt type="org.eclipse.core.resources.IResource">
+		          					<test property="org.eclipse.core.resources.name" 
+		               				 value="*.csv"/>
+		      					 </adapt>
+		                 	 </iterate>
+		               	</with>
+		               	<!-- 
+    			        	Restricted to show only if there is a TrackerStore Service.
+              			 -->
+              			 <test
+                        	forcePluginActivation="true"
+                        	property="com.verticon.tracker.store.ui.hasTrackerStoreService">
+              			</test>
+		               </and>
+	            </visibleWhen>
+               </command>
+      </menuContribution>
+      <menuContribution
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+               <command
+                     commandId="com.verticon.tracker.store.ui.commands.import.animal.command"
+                     icon="icons/etool16/import_wiz.gif"
+                     style="push">
+               <visibleWhen>
+               <and>
+               		<with variable="selection">
+                       <iterate>
+      					 <adapt type="org.eclipse.core.resources.IFolder">
+      					 </adapt>
+   						 </iterate>
+					</with>
+              		<test
+                        	forcePluginActivation="true"
+                        	property="com.verticon.tracker.store.ui.hasTrackerStoreService">
+              		</test>
+		        </and>    
+	            </visibleWhen>
+               </command>
+      </menuContribution>
+      <menuContribution
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+               <command
+                     commandId="com.verticon.tracker.store.ui.commands.import.premises.command"
+                     icon="icons/etool16/import_wiz.gif"
+                     style="push">
+               <visibleWhen>
+               <and>
+               		<with variable="selection">
+                       <iterate>
+      					 <adapt type="org.eclipse.core.resources.IFolder">
+      					 </adapt>
+   						 </iterate>
+					</with>
+              		<test
+                        	forcePluginActivation="true"
+                        	property="com.verticon.tracker.store.ui.hasTrackerStoreService">
+              		</test>
+		        </and>    
+	            </visibleWhen>
+               </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <category
+            id="com.verticon.tracker.store.ui.importWizards.sampleCategory"
+            name="Tracker">
+      </category>
+      <wizard
+            category="com.verticon.tracker.store.ui.importWizards.sampleCategory"
+            class="com.verticon.tracker.store.ui.wizards.ImportAnimalWizard"
+            icon="icons/sample.gif"
+            id="com.verticon.tracker.store.ui.importWizards.ImportAnimalWizard"
+            name="Import Animal from TrackerStore">
+         <description>
+            Import an Animal from the TrackerStore into the workspace.
+         </description>
+      </wizard>
+      <wizard
+            category="com.verticon.tracker.store.ui.importWizards.sampleCategory"
+            class="com.verticon.tracker.store.ui.wizards.ImportPremisesWizard"
+            icon="icons/sample.gif"
+            id="com.verticon.tracker.store.ui.importWizards.ImportPremisesWizard"
+            name="Import Premises from TrackerStore">
+         <description>
+            Import a Premises from the TrackerStore into the workspace.
+         </description>
+      </wizard>
    </extension>
    
 

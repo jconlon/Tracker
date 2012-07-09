@@ -8,9 +8,9 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.store.mongo.ui.handlers;
+package com.verticon.tracker.store.ui.handlers;
 
-import static com.verticon.tracker.store.mongo.ui.handlers.Utils.bundleMarker;
+import static com.verticon.tracker.store.ui.Activator.bundleMarker;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -18,6 +18,9 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.window.Window;
+import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +28,7 @@ import org.slf4j.LoggerFactory;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.store.ITrackerStore;
 import com.verticon.tracker.store.StoreAccessException;
-import com.verticon.tracker.store.mongo.ui.Activator;
+import com.verticon.tracker.store.ui.Activator;
 
 /**
  * Uses the ITrackerStore to register premises information to MongoDB.
@@ -48,28 +51,52 @@ public class RegisterPremisesHandler extends AbstractHandler {
 			Premises premises = (Premises) ((IStructuredSelection) selection)
 					.getFirstElement();
 			String uri = premises.getUri();
-			try {
-				//This is a registration and not a publish, so the uri filter
-				//is null so that any of that any ITrackerStore service will do
-				
-				ITrackerStore store = Activator.getDefault().getStore(null);
-				if(store==null){
-					throw new StoreAccessException(
-						"Can't find the service to register a premises. Make sure a TrackerStore is configured and you are the administrator.");
+			LabelProvider lp = new LabelProvider(){
+
+				/* (non-Javadoc)
+				 * @see org.eclipse.jface.viewers.LabelProvider#getText(java.lang.Object)
+				 */
+				@Override
+				public String getText(Object element) {
+					ITrackerStore trackerStoreAdmin = (ITrackerStore)element;
+					return trackerStoreAdmin.uri();
 				}
+				
+			};
+			ITrackerStore store =null;
+			try {
+				ITrackerStore[] stores = Activator.getDefault().getTrackerStoreServices(null);
+				if(stores==null || stores.length==0){
+					throw new StoreAccessException(
+							"Can't find the service to register a premises. Make sure a TrackerStore is configured and you are the administrator.");
+				}
+
+				ElementListSelectionDialog dialog = 
+						new ElementListSelectionDialog(HandlerUtil.getActiveShell(event), lp);
+				dialog.setElements(stores);
+				dialog.setAllowDuplicates(false);
+				dialog.setMultipleSelection(false);
+				dialog.setMessage("Choose the TrackerStore URI");
+				dialog.setTitle("Register Premises");
+				// User pressed cancel
+				if (dialog.open() != Window.OK) {
+					return false;
+				}
+				Object[] result = dialog.getResult(); 
+			    store = (ITrackerStore) result[0];
 				store.register(premises);
 				
 				MessageDialog.openConfirm(HandlerUtil.getActiveShell(event),
 						"Confirm", "Registered premises " + uri
-								+ " to MongoDB.");
+								+ " on "+store.uri());
 			} catch (Exception e) {
 				MessageDialog.openError(HandlerUtil.getActiveShell(event),
 						"Failed to register premises: " + uri
-								+ " to MongoDB.", e.getMessage());
+								+ " on "+store.uri(), e.getMessage());
 				logger.error(bundleMarker, "Failed to register premises: " + uri
-						+ " to MongoDB.",e);
+						+ " on "+store.uri(),e);
 				throw new ExecutionException("Failed to register premises: " + uri
-						+ " to MongoDB.",e);
+						+ " on "+store.uri(),e);
 			}
 
 		}

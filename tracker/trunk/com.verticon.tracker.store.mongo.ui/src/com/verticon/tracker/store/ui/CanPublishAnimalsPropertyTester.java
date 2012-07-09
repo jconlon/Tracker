@@ -8,20 +8,21 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.store.mongo.ui;
+package com.verticon.tracker.store.ui;
+
+import java.util.List;
 
 import org.eclipse.core.expressions.PropertyTester;
 
-import com.verticon.tracker.store.ITrackerStore;
-import com.verticon.tracker.store.admin.api.ITrackerStoreAdmin;
+import com.google.common.base.Strings;
+import com.verticon.tracker.Premises;
 
-public class CanRegisterLocationsPropertyTester extends PropertyTester {
+public class CanPublishAnimalsPropertyTester extends PropertyTester {
 
-	
+
 	/**
 	 * 
-	 * Tests to see if there is a ITrackerStore with administration privileges 
-	 * that can register a location.
+	 * Tests a Premises to see if there is a ITrackerLoader service available for it.
 	 * 
 	 * Executes the property test determined by the parameter <code>property</code>.
 	 * 
@@ -39,10 +40,20 @@ public class CanRegisterLocationsPropertyTester extends PropertyTester {
 	@Override
 	public boolean test(Object receiver, String property, Object[] args,
 			Object expectedValue) {
-		ITrackerStore storeService = Activator.getDefault().getRegister();
-		ITrackerStoreAdmin adminService = Activator.getDefault().getLoader();
-		return adminService!=null && storeService !=null && Activator.getDefault().getLoader().isCurrentUserAdmin();
+		boolean result = false;
+		Premises premises =null;
+		if(receiver instanceof List){
+			 premises = (Premises)((List<?>)receiver).get(0);
+		}else{
+			 premises = (Premises) receiver;
+		}
 		
+		String uri = premises.getUri();
+		if(!Strings.isNullOrEmpty(uri)){
+				result = Activator.getDefault().hasTrackerStoreService(uri);
+		}
+				
+		return result;
 	}
 
 }
