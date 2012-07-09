@@ -112,7 +112,7 @@ public class QueryEngine implements IQueryEngine {
 		}
 
 		MongoQuery result = visitor.build();
-		logger.info(bundleMarker, "Created objectFilter={}, fieldFilter={}", result.getObjectFilter(),result.getFieldFilter());
+		logger.debug(bundleMarker, "Created objectFilter={}, fieldFilter={}", result.getObjectFilter(),result.getFieldFilter());
 		return result;
 	}
 
