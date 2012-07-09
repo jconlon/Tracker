@@ -11,8 +11,8 @@
 
 package com.verticon.tracker.store.mongo.test.system.internal;
 
-import static com.verticon.tracker.store.mongo.test.system.internal.TestUtils.getXMIResource;
-import static com.verticon.tracker.store.mongo.test.system.internal.TestUtils.removeLastModificationTimesOnAllResources;
+import static com.verticon.tracker.store.mongo.test.system.TestUtils.getXMIResource;
+import static com.verticon.tracker.store.mongo.test.system.TestUtils.removeLastModificationTimesOnAllResources;
 import static com.verticon.tracker.store.mongo.test.system.internal.Test_TrackerStore_1_Basic.PLUGIN_ID;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -57,6 +57,9 @@ import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.store.ITrackerStore;
+import com.verticon.tracker.store.mongo.test.system.Member;
+import com.verticon.tracker.store.mongo.test.system.TestUtils;
+import com.verticon.tracker.store.mongo.test.system.Variables;
 
 /**
  * Advanced testing of periodic updating and retrieval functionality of the the 
@@ -1006,6 +1009,30 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 		assertThat("Result must not be empty.",eo.isEmpty(), is(false));
 		assertThat("Result must be two premises", eo.size(), is(2));
 		assertThat("Result must be a Premises",eo.get(0), is(instanceOf(Premises.class)));
+	}
+	
+	public void testRetrieve_Premise_containing_Point() throws IOException{
+		logger.debug(bundleMarker,
+				"starting testRetrieve_Premise_containing_Point");
+		
+//		assertThat("Longitude value is wrong",
+//				(Double) position.getLongitude(), is(-90.95048182270057));
+//		assertThat("Latitude value is wrong", (Double) position.getLatitude(),
+//				is(43.47622307339506));
+//		
+		
+		Premises premises = store.retrievePremises(
+				new ITrackerStore.LongLatPoint("-90.95048182270057,43.47622307339506,0"));
+		assertThat("Could not retrieve the premises", premises,
+				is(notNullValue()));
+		// assertThat("Not a valid premises", TestUtils.isValidObject(premises),
+		// is(true));
+		assertThat("Must be Premises with uri " + Member.ONE.uri, premises.getUri(),
+				is(Member.ONE.uri));
+		assertThat("Premises must have 0 animalsl", premises.getAnimals()
+				.size(), is(0));
+		
+		
 	}
 	
 	private void countEvents(int count) throws UnknownHostException {

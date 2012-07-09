@@ -8,7 +8,7 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.store.mongo.test.system.internal;
+package com.verticon.tracker.store.mongo.test.system;
 
 
 /**
@@ -55,10 +55,10 @@ public enum Variables {
 	IS_ADMINISTRATOR(null, "consumer.Is_Administrator", 
 			true, "Authorized to load administration configuration documents.");
 
-	final String configID;
-	final String statusVarID;
-	final boolean notifiesOnChange;
-	final String description;
+	public final String configID;
+	public final String statusVarID;
+	public final boolean notifiesOnChange;
+	public final String description;
 
 	Variables(String configKey, String statusVarID, boolean notifiesOnChange, String description) {
 		this.configID = configKey;

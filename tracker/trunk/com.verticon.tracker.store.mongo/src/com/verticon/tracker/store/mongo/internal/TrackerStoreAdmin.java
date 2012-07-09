@@ -107,6 +107,12 @@ public class TrackerStoreAdmin implements ITrackerStoreAdmin, Predicate<Event>,
 	private boolean isAdminLoaded(){
 		return persistedAdmin2.get()!=null;
 	}
+	
+	@Override
+	public String uri() {
+		return resourceFactory != null ? resourceFactory.getMongoBaseURI()
+				: null;
+	}
 
 	@Override
 	public synchronized StatusVariable getStatusVariable(String id) {

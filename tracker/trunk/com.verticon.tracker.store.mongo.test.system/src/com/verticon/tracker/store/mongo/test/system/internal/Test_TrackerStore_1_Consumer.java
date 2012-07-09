@@ -51,6 +51,7 @@ import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.store.ITrackerStore;
+import com.verticon.tracker.store.mongo.test.system.Variables;
 
 /**
  * iRouter testing of the com.verticon.tracker.store.mongo component and its primary
