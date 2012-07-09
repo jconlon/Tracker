@@ -67,6 +67,7 @@ public class PositionItemProvider
 			addLongitudePropertyDescriptor(object);
 			addLatitudePropertyDescriptor(object);
 			addCoordinatesPropertyDescriptor(object);
+			addLocationNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -138,6 +139,28 @@ public class PositionItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Location Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLocationNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Position_locationName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Position_locationName_feature", "_UI_Position_type"),
+				 TrackerPackage.Literals.POSITION__LOCATION_NAME,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 getString("_UI_PositionPropertyCategory"),
+				 null));
+	}
+
+	/**
 	 * This returns Position.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -176,6 +199,7 @@ public class PositionItemProvider
 			case TrackerPackage.POSITION__LONGITUDE:
 			case TrackerPackage.POSITION__LATITUDE:
 			case TrackerPackage.POSITION__COORDINATES:
+			case TrackerPackage.POSITION__LOCATION_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

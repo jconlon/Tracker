@@ -30,7 +30,9 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.xmi.impl.StringSegment;
 
+import com.verticon.location.util.LocationValidator;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Event;
@@ -517,6 +519,39 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 		return result;
 	}
 
+	private String resolvedLocation = null;
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * Operation finds the name of the location of the animal.  If the getLocation() is
+	 * a urn or a point then it calls the LocationService for resolution.  If it finds
+	 * a value it will set the resolvedLocation variable.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String findLocationName() {
+		String oldLocation = getLocation();
+		String newLocation= null;
+		if(oldLocation!=null){
+			resolvedLocation=null;
+			String location = getLocation();
+
+			if(location.startsWith("urn:")){
+				resolvedLocation = TrackerPlugin.getDefault().name(location);
+			}else if(location.matches(LocationValidator.COORDINATE_REGEX)){
+				resolvedLocation = TrackerPlugin.getDefault().locate(location);
+			}
+		    newLocation = getLocation();
+			if (eNotificationRequired())
+				eNotify(new ENotificationImpl(
+						this, Notification.SET, TrackerPackage.ANIMAL__LOCATION, oldLocation, newLocation));
+		}
+		for (Event event : eventHistory()) {
+			event.findPublisherName();
+		}
+		return newLocation;		
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -922,49 +957,54 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 	public String getAlternativeID() {
 		return ALTERNATIVE_ID_EDEFAULT;
 	}
-
+	
+	
 	/**
 	 * <!-- begin-user-doc -->
-	 * Location is set to a value based on the most recently significant event in the history.
+	 * Location is set to a value based on the resolvedLocation variable if it is 
+	 * not null or the most recently significant event in the history. 
 	 * If the most recent event is a:
 	 * <ol>
 	 * <li>Position event, then the location will be resolved by the Location embedded
 	 * in the Premises with the coordinates from the Position event;</li>
 	 * <li>Sighting event, then the location is resolved locally based on the name of the 
 	 * location in the sighting event;</li>
-	 * <li>MoveOut event then the location will be resolved by the 
-	 * LocationService name with the id being the name of the new premises;</li>
+	 * <li>MoveOut event then the location will be the uri of the MoveOut premises;</li>
+	 * </ol>
 	 * 
+	 * Note this derived attribute does not resolve Locations with the LocationService, 
+	 * but will use the resolvedLocation if it set by the LocationService.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public String getLocation() {
-		String result = null;
+		if(resolvedLocation!=null){
+			return resolvedLocation;
+		}
+		String location = null;
 		animalLocator.location(this);
 		switch (animalLocator.getTypeOfPosition()) {
 		case HASCOORDINATES:
 			String point = animalLocator.getLocation();
 			//First try the local Premises
 			if(eContainer()!=null && ((Premises)eContainer()).getLocation()!=null){
-				result = ((Premises)eContainer()).getLocation().locate(point);
+				location = ((Premises)eContainer()).getLocation().locate(point);
 			}
 			//If it was not in the local premises try the locationService
-			if(result==null){
-				result = TrackerPlugin.getDefault().locate(point);
+			if(location==null){
+				location = point;
 			}
 			break;
 		case MOVED_TO_PREMISES:
-			//Try the locationServices
-			result = TrackerPlugin.getDefault().name(animalLocator.getLocation());
+			location = animalLocator.getLocation();
 			break;
 		case SIGHTING:
-			
-			result = animalLocator.location;
+			location = animalLocator.location;
 			break;
 		default:
 			break;
 		}
-		return result;
+		return location;
 
 	}
 
@@ -1301,6 +1341,7 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 		private Event lastEvent = null; 
 		private String location = null;
 		private Locate locate = Locate.NONE;
+	    private int lastNumberOfEvents = 0;
 		
 		String getLocation(){
 			return location;
@@ -1312,10 +1353,10 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 		
 		void location(Animal animal){
 			List<Event> events = new ArrayList<Event>(animal.eventHistory());
-			if(events.isEmpty()){
+			if(events.isEmpty() || events.size()==lastNumberOfEvents){
 				return;
 			}
-			
+			lastNumberOfEvents=events.size();
 			locate = Locate.NONE;
 			lastEvent = null;
 			location = null;
@@ -1328,6 +1369,7 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 				Event event = it.next();
 				getOlderEvents = (Boolean)animalSwitch.doSwitch(event);
 			}
+			
 		}
 		
 		
@@ -1366,7 +1408,12 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 			public Object caseMovedOut(MovedOut event) {
 				if(lastEvent == null){
 					//The last event was a MovedOut send a false to abort the processing
-					location = event.getDestinationPin();
+					location = event.getUri();
+					if(location==null && event.getDestinationPin()!=null){
+						StringBuffer buf = new StringBuffer("urn:pin:");
+						buf.append( event.getDestinationPin());
+						location=buf.toString();
+					}
 					locate = Locate.MOVED_TO_PREMISES;
 					return Boolean.FALSE;
 				}

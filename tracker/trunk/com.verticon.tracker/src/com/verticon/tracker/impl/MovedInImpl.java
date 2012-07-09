@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.TrackerPlugin;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,6 +27,7 @@ import com.verticon.tracker.TrackerPackage;
  * <ul>
  *   <li>{@link com.verticon.tracker.impl.MovedInImpl#getSourcePin <em>Source Pin</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.MovedInImpl#getUri <em>Uri</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.MovedInImpl#getSourceName <em>Source Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -80,6 +82,16 @@ public class MovedInImpl extends EventImpl implements MovedIn {
 	 * @ordered
 	 */
 	protected String uri = URI_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSourceName() <em>Source Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SOURCE_NAME_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -151,6 +163,47 @@ public class MovedInImpl extends EventImpl implements MovedIn {
 			eNotify(new ENotificationImpl(this, Notification.SET, TrackerPackage.MOVED_IN__URI, oldUri, uri));
 	}
 
+	private String resolvedSourceName = null;
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getSourceName() {
+		return resolvedSourceName;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.impl.EventImpl#findPublisherName()
+	 */
+	@Override
+	public String findPublisherName() {
+		findSourceName();
+		return super.findPublisherName();
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * Finds the name of the Source Premises with the LocationService
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String findSourceName() {
+		String oldSourceName = resolvedSourceName;
+		if(getUri()!=null && getUri().trim().length()>0){
+			resolvedSourceName=TrackerPlugin.getDefault().name(getUri());
+		} else if(getSourcePin()!=null){
+			StringBuffer buf = new StringBuffer("urn:pin:");
+			buf.append( getSourcePin());
+			resolvedSourceName = TrackerPlugin.getDefault().name(buf.toString());
+		}
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(
+					this, Notification.SET, TrackerPackage.MOVED_IN__SOURCE_NAME, oldSourceName, resolvedSourceName));
+		return resolvedSourceName;
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -163,6 +216,8 @@ public class MovedInImpl extends EventImpl implements MovedIn {
 				return getSourcePin();
 			case TrackerPackage.MOVED_IN__URI:
 				return getUri();
+			case TrackerPackage.MOVED_IN__SOURCE_NAME:
+				return getSourceName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -215,6 +270,8 @@ public class MovedInImpl extends EventImpl implements MovedIn {
 				return SOURCE_PIN_EDEFAULT == null ? sourcePin != null : !SOURCE_PIN_EDEFAULT.equals(sourcePin);
 			case TrackerPackage.MOVED_IN__URI:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
+			case TrackerPackage.MOVED_IN__SOURCE_NAME:
+				return SOURCE_NAME_EDEFAULT == null ? getSourceName() != null : !SOURCE_NAME_EDEFAULT.equals(getSourceName());
 		}
 		return super.eIsSet(featureID);
 	}

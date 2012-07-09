@@ -73,6 +73,7 @@ public class MovedInItemProvider
 
 			addSourcePinPropertyDescriptor(object);
 			addUriPropertyDescriptor(object);
+			addSourceNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -122,6 +123,28 @@ public class MovedInItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Source Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSourceNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_MovedIn_sourceName_feature"),
+				 getString("_UI_MovedIn_sourceName_description"),
+				 TrackerPackage.Literals.MOVED_IN__SOURCE_NAME,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 getString("_UI_TransportedFromPropertyCategory"),
+				 null));
+	}
+
+	/**
 	 * This returns MovedIn.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -158,6 +181,7 @@ public class MovedInItemProvider
 		switch (notification.getFeatureID(MovedIn.class)) {
 			case TrackerPackage.MOVED_IN__SOURCE_PIN:
 			case TrackerPackage.MOVED_IN__URI:
+			case TrackerPackage.MOVED_IN__SOURCE_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

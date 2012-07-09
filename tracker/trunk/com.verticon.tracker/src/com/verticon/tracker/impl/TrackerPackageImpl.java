@@ -1003,6 +1003,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getEvent_PublisherName() {
+		return (EAttribute)eventEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTagAllocated() {
 		return tagAllocatedEClass;
 	}
@@ -1687,6 +1696,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPosition_LocationName() {
+		return (EAttribute)positionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPremises() {
 		return premisesEClass;
 	}
@@ -1921,6 +1939,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMovedIn_SourceName() {
+		return (EAttribute)movedInEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMovedOut() {
 		return movedOutEClass;
 	}
@@ -1941,6 +1968,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 */
 	public EAttribute getMovedOut_Uri() {
 		return (EAttribute)movedOutEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMovedOut_DestinationName() {
+		return (EAttribute)movedOutEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2317,6 +2353,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(eventEClass, EVENT__DATE);
 		createEAttribute(eventEClass, EVENT__DATE_KEY);
 		createEAttribute(eventEClass, EVENT__PID);
+		createEAttribute(eventEClass, EVENT__PUBLISHER_NAME);
 
 		tagAllocatedEClass = createEClass(TAG_ALLOCATED);
 
@@ -2352,10 +2389,12 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		movedInEClass = createEClass(MOVED_IN);
 		createEAttribute(movedInEClass, MOVED_IN__SOURCE_PIN);
 		createEAttribute(movedInEClass, MOVED_IN__URI);
+		createEAttribute(movedInEClass, MOVED_IN__SOURCE_NAME);
 
 		movedOutEClass = createEClass(MOVED_OUT);
 		createEAttribute(movedOutEClass, MOVED_OUT__DESTINATION_PIN);
 		createEAttribute(movedOutEClass, MOVED_OUT__URI);
+		createEAttribute(movedOutEClass, MOVED_OUT__DESTINATION_NAME);
 
 		lostTagEClass = createEClass(LOST_TAG);
 
@@ -2472,6 +2511,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(positionEClass, POSITION__LONGITUDE);
 		createEAttribute(positionEClass, POSITION__LATITUDE);
 		createEAttribute(positionEClass, POSITION__COORDINATES);
+		createEAttribute(positionEClass, POSITION__LOCATION_NAME);
 
 		// Create enums
 		sexEEnum = createEEnum(SEX);
@@ -2618,6 +2658,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEParameter(op, this.getEventType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theXMLTypePackage.getString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(animalEClass, ecorePackage.getEString(), "findLocationName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(tagEClass, Tag.class, "Tag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTag_UsainNumberUsed(), ecorePackage.getEBoolean(), "usainNumberUsed", null, 1, 1, Tag.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getTag_Events(), this.getEvent(), this.getEvent_Tag(), "events", null, 1, -1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2650,6 +2692,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getEvent_Date(), theXMLTypePackage.getString(), "date", null, 0, 1, Event.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_DateKey(), theXMLTypePackage.getString(), "dateKey", null, 0, 1, Event.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_Pid(), ecorePackage.getEString(), "pid", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEvent_PublisherName(), ecorePackage.getEString(), "publisherName", null, 0, 1, Event.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(eventEClass, this.getEvent(), "dateEvent", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getEventType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2658,6 +2701,8 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		addEOperation(eventEClass, this.getEvent(), "dateEvents", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(eventEClass, ecorePackage.getEString(), "values", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(eventEClass, ecorePackage.getEString(), "findPublisherName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(tagAllocatedEClass, TagAllocated.class, "TagAllocated", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2710,10 +2755,16 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEClass(movedInEClass, MovedIn.class, "MovedIn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMovedIn_SourcePin(), this.getPremisesIdNumber(), "sourcePin", null, 0, 1, MovedIn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMovedIn_Uri(), this.getURI(), "uri", null, 0, 1, MovedIn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMovedIn_SourceName(), ecorePackage.getEString(), "sourceName", null, 0, 1, MovedIn.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		addEOperation(movedInEClass, ecorePackage.getEString(), "findSourceName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(movedOutEClass, MovedOut.class, "MovedOut", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMovedOut_DestinationPin(), this.getPremisesIdNumber(), "destinationPin", null, 0, 1, MovedOut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMovedOut_Uri(), this.getURI(), "uri", null, 0, 1, MovedOut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMovedOut_DestinationName(), ecorePackage.getEString(), "destinationName", null, 0, 1, MovedOut.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		addEOperation(movedOutEClass, ecorePackage.getEString(), "findDestinationName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(lostTagEClass, LostTag.class, "LostTag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2857,6 +2908,9 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getPosition_Longitude(), ecorePackage.getEDouble(), "longitude", null, 1, 1, Position.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPosition_Latitude(), ecorePackage.getEDouble(), "latitude", null, 1, 1, Position.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPosition_Coordinates(), ecorePackage.getEString(), "coordinates", null, 0, 1, Position.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPosition_LocationName(), ecorePackage.getEString(), "locationName", "", 0, 1, Position.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		addEOperation(positionEClass, ecorePackage.getEString(), "findLocationName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");

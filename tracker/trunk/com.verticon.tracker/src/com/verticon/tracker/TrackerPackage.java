@@ -608,13 +608,22 @@ public interface TrackerPackage extends EPackage {
 	int EVENT__PID = 9;
 
 	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT__PUBLISHER_NAME = 10;
+
+	/**
 	 * The number of structural features of the '<em>Event</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_FEATURE_COUNT = 10;
+	int EVENT_FEATURE_COUNT = 11;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.TagAllocatedImpl <em>Tag Allocated</em>}' class.
@@ -715,6 +724,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int TAG_ALLOCATED__PID = EVENT__PID;
+
+	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG_ALLOCATED__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
 
 	/**
 	 * The number of structural features of the '<em>Tag Allocated</em>' class.
@@ -1798,6 +1816,15 @@ public interface TrackerPackage extends EPackage {
 	int TAG_APPLIED__PID = EVENT__PID;
 
 	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG_APPLIED__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
+
+	/**
 	 * The number of structural features of the '<em>Tag Applied</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1907,6 +1934,15 @@ public interface TrackerPackage extends EPackage {
 	int MOVED_IN__PID = EVENT__PID;
 
 	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVED_IN__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
+
+	/**
 	 * The feature id for the '<em><b>Source Pin</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1925,13 +1961,22 @@ public interface TrackerPackage extends EPackage {
 	int MOVED_IN__URI = EVENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Source Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVED_IN__SOURCE_NAME = EVENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Moved In</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MOVED_IN_FEATURE_COUNT = EVENT_FEATURE_COUNT + 2;
+	int MOVED_IN_FEATURE_COUNT = EVENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.MovedOutImpl <em>Moved Out</em>}' class.
@@ -2034,6 +2079,15 @@ public interface TrackerPackage extends EPackage {
 	int MOVED_OUT__PID = EVENT__PID;
 
 	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVED_OUT__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
+
+	/**
 	 * The feature id for the '<em><b>Destination Pin</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2052,13 +2106,22 @@ public interface TrackerPackage extends EPackage {
 	int MOVED_OUT__URI = EVENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Destination Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MOVED_OUT__DESTINATION_NAME = EVENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Moved Out</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MOVED_OUT_FEATURE_COUNT = EVENT_FEATURE_COUNT + 2;
+	int MOVED_OUT_FEATURE_COUNT = EVENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.LostTagImpl <em>Lost Tag</em>}' class.
@@ -2159,6 +2222,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int LOST_TAG__PID = EVENT__PID;
+
+	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOST_TAG__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
 
 	/**
 	 * The number of structural features of the '<em>Lost Tag</em>' class.
@@ -2268,6 +2340,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int REPLACED_TAG__PID = EVENT__PID;
+
+	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPLACED_TAG__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Old Id</b></em>' attribute.
@@ -2406,6 +2487,15 @@ public interface TrackerPackage extends EPackage {
 	int IMPORTED__PID = EVENT__PID;
 
 	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORTED__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
+
+	/**
 	 * The number of structural features of the '<em>Imported</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2515,6 +2605,15 @@ public interface TrackerPackage extends EPackage {
 	int EXPORTED__PID = EVENT__PID;
 
 	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPORTED__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
+
+	/**
 	 * The number of structural features of the '<em>Exported</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2622,6 +2721,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int SIGHTING__PID = EVENT__PID;
+
+	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIGHTING__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' attribute.
@@ -2742,6 +2850,15 @@ public interface TrackerPackage extends EPackage {
 	int SLAUGHTERED__PID = EVENT__PID;
 
 	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAUGHTERED__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
+
+	/**
 	 * The number of structural features of the '<em>Slaughtered</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2839,6 +2956,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int DIED__PID = EVENT__PID;
+
+	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIED__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
 
 	/**
 	 * The number of structural features of the '<em>Died</em>' class.
@@ -2940,6 +3066,15 @@ public interface TrackerPackage extends EPackage {
 	int TAG_RETIRED__PID = EVENT__PID;
 
 	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG_RETIRED__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
+
+	/**
 	 * The number of structural features of the '<em>Tag Retired</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3039,6 +3174,15 @@ public interface TrackerPackage extends EPackage {
 	int ANIMAL_MISSING__PID = EVENT__PID;
 
 	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANIMAL_MISSING__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
+
+	/**
 	 * The number of structural features of the '<em>Animal Missing</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3136,6 +3280,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int ICVI__PID = EVENT__PID;
+
+	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ICVI__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
 
 	/**
 	 * The number of structural features of the '<em>ICVI</em>' class.
@@ -3245,6 +3398,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int WEIGH_IN__PID = EVENT__PID;
+
+	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEIGH_IN__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Weight</b></em>' attribute.
@@ -3998,6 +4160,15 @@ public interface TrackerPackage extends EPackage {
 	int MEDICAL_CONDITION__PID = EVENT__PID;
 
 	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_CONDITION__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
+
+	/**
 	 * The number of structural features of the '<em>Medical Condition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4105,6 +4276,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int MEDICAL_TREATMENT__PID = EVENT__PID;
+
+	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEDICAL_TREATMENT__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4279,6 +4459,15 @@ public interface TrackerPackage extends EPackage {
 	int BIRTHING__PID = EVENT__PID;
 
 	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BIRTHING__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
+
+	/**
 	 * The feature id for the '<em><b>Viability</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4413,6 +4602,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALVING__PID = BIRTHING__PID;
+
+	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALVING__PUBLISHER_NAME = BIRTHING__PUBLISHER_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Viability</b></em>' attribute.
@@ -4551,6 +4749,15 @@ public interface TrackerPackage extends EPackage {
 	int BIRTH_DEFECT__PID = EVENT__PID;
 
 	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BIRTH_DEFECT__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
+
+	/**
 	 * The feature id for the '<em><b>Freemartin</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4667,6 +4874,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int MASTITIS__PID = MEDICAL_CONDITION__PID;
+
+	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MASTITIS__PUBLISHER_NAME = MEDICAL_CONDITION__PUBLISHER_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' attribute.
@@ -4794,6 +5010,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int MILK_TEST__PID = EVENT__PID;
+
+	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MILK_TEST__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Pounds Produced</b></em>' attribute.
@@ -4950,6 +5175,15 @@ public interface TrackerPackage extends EPackage {
 	int HERD_TEST__PID = EVENT__PID;
 
 	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HERD_TEST__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
+
+	/**
 	 * The feature id for the '<em><b>Pregnant</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5084,6 +5318,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int GENERIC_EVENT__PID = EVENT__PID;
+
+	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_EVENT__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Event Attributes</b></em>' map.
@@ -5250,6 +5493,15 @@ public interface TrackerPackage extends EPackage {
 	int US_BEEF_GRADING__PID = EVENT__PID;
 
 	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_BEEF_GRADING__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
+
+	/**
 	 * The feature id for the '<em><b>Quality Grade</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5386,6 +5638,15 @@ public interface TrackerPackage extends EPackage {
 	int US_OVINE_GRADING__PID = EVENT__PID;
 
 	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_OVINE_GRADING__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
+
+	/**
 	 * The feature id for the '<em><b>Quality Grade</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5511,6 +5772,15 @@ public interface TrackerPackage extends EPackage {
 	 * @ordered
 	 */
 	int US_SWINE_GRADING__PID = EVENT__PID;
+
+	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int US_SWINE_GRADING__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Quality Grade</b></em>' attribute.
@@ -5760,6 +6030,15 @@ public interface TrackerPackage extends EPackage {
 	int POSITION__PID = EVENT__PID;
 
 	/**
+	 * The feature id for the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__PUBLISHER_NAME = EVENT__PUBLISHER_NAME;
+
+	/**
 	 * The feature id for the '<em><b>Longitude</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5787,13 +6066,22 @@ public interface TrackerPackage extends EPackage {
 	int POSITION__COORDINATES = EVENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Location Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSITION__LOCATION_NAME = EVENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Position</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POSITION_FEATURE_COUNT = EVENT_FEATURE_COUNT + 3;
+	int POSITION_FEATURE_COUNT = EVENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Sex <em>Sex</em>}' enum.
@@ -6441,6 +6729,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEvent_Pid();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Event#getPublisherName <em>Publisher Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Publisher Name</em>'.
+	 * @see com.verticon.tracker.Event#getPublisherName()
+	 * @see #getEvent()
+	 * @generated
+	 */
+	EAttribute getEvent_PublisherName();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.TagAllocated <em>Tag Allocated</em>}'.
@@ -7255,6 +7554,17 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getPosition_Coordinates();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Position#getLocationName <em>Location Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Location Name</em>'.
+	 * @see com.verticon.tracker.Position#getLocationName()
+	 * @see #getPosition()
+	 * @generated
+	 */
+	EAttribute getPosition_LocationName();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Premises <em>Premises</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7534,6 +7844,17 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getMovedIn_Uri();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.MovedIn#getSourceName <em>Source Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Source Name</em>'.
+	 * @see com.verticon.tracker.MovedIn#getSourceName()
+	 * @see #getMovedIn()
+	 * @generated
+	 */
+	EAttribute getMovedIn_SourceName();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.MovedOut <em>Moved Out</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7564,6 +7885,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getMovedOut_Uri();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.MovedOut#getDestinationName <em>Destination Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Destination Name</em>'.
+	 * @see com.verticon.tracker.MovedOut#getDestinationName()
+	 * @see #getMovedOut()
+	 * @generated
+	 */
+	EAttribute getMovedOut_DestinationName();
 
 	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.LostTag <em>Lost Tag</em>}'.
@@ -8242,6 +8574,14 @@ public interface TrackerPackage extends EPackage {
 		EAttribute EVENT__PID = eINSTANCE.getEvent_Pid();
 
 		/**
+		 * The meta object literal for the '<em><b>Publisher Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EVENT__PUBLISHER_NAME = eINSTANCE.getEvent_PublisherName();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.TagAllocatedImpl <em>Tag Allocated</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8902,6 +9242,14 @@ public interface TrackerPackage extends EPackage {
 		EAttribute POSITION__COORDINATES = eINSTANCE.getPosition_Coordinates();
 
 		/**
+		 * The meta object literal for the '<em><b>Location Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSITION__LOCATION_NAME = eINSTANCE.getPosition_LocationName();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.PremisesImpl <em>Premises</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9124,6 +9472,14 @@ public interface TrackerPackage extends EPackage {
 		EAttribute MOVED_IN__URI = eINSTANCE.getMovedIn_Uri();
 
 		/**
+		 * The meta object literal for the '<em><b>Source Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MOVED_IN__SOURCE_NAME = eINSTANCE.getMovedIn_SourceName();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.MovedOutImpl <em>Moved Out</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9148,6 +9504,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MOVED_OUT__URI = eINSTANCE.getMovedOut_Uri();
+
+		/**
+		 * The meta object literal for the '<em><b>Destination Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MOVED_OUT__DESTINATION_NAME = eINSTANCE.getMovedOut_DestinationName();
 
 		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.LostTagImpl <em>Lost Tag</em>}' class.

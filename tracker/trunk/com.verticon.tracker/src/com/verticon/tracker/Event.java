@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.Event#getDate <em>Date</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getDateKey <em>Date Key</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getPid <em>Pid</em>}</li>
+ *   <li>{@link com.verticon.tracker.Event#getPublisherName <em>Publisher Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -270,6 +271,21 @@ public interface Event extends EObject {
 	void setPid(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Publisher Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Publisher Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Publisher Name</em>' attribute.
+	 * @see com.verticon.tracker.TrackerPackage#getEvent_PublisherName()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	String getPublisherName();
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model nameDataType="org.eclipse.emf.ecore.xml.type.String"
@@ -293,5 +309,13 @@ public interface Event extends EObject {
 	 * @generated
 	 */
 	String values();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String findPublisherName();
 
 } // Event

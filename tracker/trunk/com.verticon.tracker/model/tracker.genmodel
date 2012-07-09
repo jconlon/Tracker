@@ -501,6 +501,7 @@
         <genParameters ecoreParameter="tracker.ecore#//Animal/lastEvent/type"/>
         <genParameters ecoreParameter="tracker.ecore#//Animal/lastEvent/name"/>
       </genOperations>
+      <genOperations ecoreOperation="tracker.ecore#//Animal/findLocationName"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//Tag">
       <genFeatures property="Readonly" createChild="false" propertyCategory="Details"
@@ -544,12 +545,17 @@
           propertyDescription="Publisher of the Event" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/pid">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Identification"
+          propertyDescription="Name of the Publisher of the Event" ecoreFeature="ecore:EAttribute tracker.ecore#//Event/publisherName">
+        <propertyFilterFlags>org.eclipse.ui.views.property.expert</propertyFilterFlags>
+      </genFeatures>
       <genOperations ecoreOperation="tracker.ecore#//Event/dateEvent">
         <genParameters ecoreParameter="tracker.ecore#//Event/dateEvent/type"/>
         <genParameters ecoreParameter="tracker.ecore#//Event/dateEvent/name"/>
       </genOperations>
       <genOperations ecoreOperation="tracker.ecore#//Event/dateEvents"/>
       <genOperations ecoreOperation="tracker.ecore#//Event/values"/>
+      <genOperations ecoreOperation="tracker.ecore#//Event/findPublisherName"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//TagAllocated"/>
     <genClasses ecoreClass="tracker.ecore#//Premises">
@@ -617,12 +623,18 @@
           ecoreFeature="ecore:EAttribute tracker.ecore#//MovedIn/sourcePin"/>
       <genFeatures createChild="false" propertyCategory="Transported From" propertyDescription="Premises URI that the animal came from"
           ecoreFeature="ecore:EAttribute tracker.ecore#//MovedIn/uri"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Transported From"
+          propertyDescription="Premises name that the animal came from" ecoreFeature="ecore:EAttribute tracker.ecore#//MovedIn/sourceName"/>
+      <genOperations ecoreOperation="tracker.ecore#//MovedIn/findSourceName"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//MovedOut">
       <genFeatures createChild="false" propertyCategory="Transported To" propertyDescription="Destination Premises ID to transport animal"
           ecoreFeature="ecore:EAttribute tracker.ecore#//MovedOut/destinationPin"/>
-      <genFeatures createChild="false" propertyCategory="Transported To" propertyDescription="Destination Premises URI to transport animal"
+      <genFeatures createChild="false" propertyCategory="Transported To" propertyDescription="Premises URI that the animal went to"
           ecoreFeature="ecore:EAttribute tracker.ecore#//MovedOut/uri"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Transported To"
+          propertyDescription="Premises name that the animal went to" ecoreFeature="ecore:EAttribute tracker.ecore#//MovedOut/destinationName"/>
+      <genOperations ecoreOperation="tracker.ecore#//MovedOut/findDestinationName"/>
     </genClasses>
     <genClasses ecoreClass="tracker.ecore#//LostTag"/>
     <genClasses ecoreClass="tracker.ecore#//ReplacedTag">
@@ -790,6 +802,9 @@
           propertyDescription="Latitude measurement in degrees" ecoreFeature="ecore:EAttribute tracker.ecore#//Position/latitude"/>
       <genFeatures property="Readonly" createChild="false" propertyCategory="Position"
           propertyDescription="Coordinates of the position" ecoreFeature="ecore:EAttribute tracker.ecore#//Position/coordinates"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Position"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Position/locationName"/>
+      <genOperations ecoreOperation="tracker.ecore#//Position/findLocationName"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="Metatype" basePackage="com.verticon.osgi" ecorePackage="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#/">

@@ -15,6 +15,7 @@ package com.verticon.tracker;
  *   <li>{@link com.verticon.tracker.Position#getLongitude <em>Longitude</em>}</li>
  *   <li>{@link com.verticon.tracker.Position#getLatitude <em>Latitude</em>}</li>
  *   <li>{@link com.verticon.tracker.Position#getCoordinates <em>Coordinates</em>}</li>
+ *   <li>{@link com.verticon.tracker.Position#getLocationName <em>Location Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -96,5 +97,29 @@ public interface Position extends Event {
 	 * @generated
 	 */
 	String getCoordinates();
+
+	/**
+	 * Returns the value of the '<em><b>Location Name</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Location Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Location Name</em>' attribute.
+	 * @see com.verticon.tracker.TrackerPackage#getPosition_LocationName()
+	 * @model default="" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	String getLocationName();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String findLocationName();
 
 } // Position

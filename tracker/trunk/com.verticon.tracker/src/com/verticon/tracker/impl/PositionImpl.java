@@ -8,7 +8,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import com.verticon.tracker.Position;
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.TrackerPlugin;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,6 +22,7 @@ import com.verticon.tracker.TrackerPackage;
  *   <li>{@link com.verticon.tracker.impl.PositionImpl#getLongitude <em>Longitude</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PositionImpl#getLatitude <em>Latitude</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PositionImpl#getCoordinates <em>Coordinates</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.PositionImpl#getLocationName <em>Location Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -85,6 +88,16 @@ public class PositionImpl extends EventImpl implements Position {
 	 * @ordered
 	 */
 	protected static final String COORDINATES_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getLocationName() <em>Location Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocationName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LOCATION_NAME_EDEFAULT = "";
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -195,6 +208,66 @@ public class PositionImpl extends EventImpl implements Position {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @return local Location Name for the position coordinates
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getLocationName() {
+		if(resolvedLocation!=null){
+			return resolvedLocation;
+		}
+		String result = null;
+		if(eContainer()!=null && getCoordinates()!=null){
+			//Has a tag parent
+			if(eContainer().eContainer()!=null){
+				//Has an animal grandParent
+				if(eContainer().eContainer().eContainer()!=null){
+					//Has an premises great-grandParent
+					Premises premises = (Premises)eContainer().eContainer().eContainer();
+					if(premises.getLocation()!=null){
+						result = premises.getLocation().locate(getCoordinates());
+					}
+				}
+			}
+		}
+		return result;
+	}
+	
+	private String resolvedLocation = null;
+
+	
+	/* (non-Javadoc)
+	 * @see com.verticon.tracker.impl.EventImpl#findPublisherName()
+	 */
+	@Override
+	public String findPublisherName() {
+		findLocationName();
+		return super.findPublisherName();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * @return the local or from the LocationService the foreign location Name
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String findLocationName() {
+		String oldLocation = getLocationName();
+		resolvedLocation=null;
+		String location = getLocationName();
+		if(location==null && getCoordinates()!=null){
+			resolvedLocation = TrackerPlugin.getDefault().locate(getCoordinates());
+		}
+		String newLocation = getLocationName();
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(
+					this, Notification.SET, TrackerPackage.POSITION__LOCATION_NAME, oldLocation, newLocation));
+		
+		return newLocation;		
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -207,6 +280,8 @@ public class PositionImpl extends EventImpl implements Position {
 				return getLatitude();
 			case TrackerPackage.POSITION__COORDINATES:
 				return getCoordinates();
+			case TrackerPackage.POSITION__LOCATION_NAME:
+				return getLocationName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -261,6 +336,8 @@ public class PositionImpl extends EventImpl implements Position {
 				return latitude != LATITUDE_EDEFAULT;
 			case TrackerPackage.POSITION__COORDINATES:
 				return COORDINATES_EDEFAULT == null ? getCoordinates() != null : !COORDINATES_EDEFAULT.equals(getCoordinates());
+			case TrackerPackage.POSITION__LOCATION_NAME:
+				return LOCATION_NAME_EDEFAULT == null ? getLocationName() != null : !LOCATION_NAME_EDEFAULT.equals(getLocationName());
 		}
 		return super.eIsSet(featureID);
 	}
