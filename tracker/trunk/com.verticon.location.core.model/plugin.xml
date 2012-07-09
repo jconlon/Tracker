@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ Copyright 2012 Verticon, Inc. All rights reserved.
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.verticon.com/location/1.0/loc"
+            class="com.verticon.location.LocationPackage"
+            genModel="model/location.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            type="location"
+            class="com.verticon.location.util.LocationResourceFactoryImpl"/>
+   </extension>
+
+</plugin>

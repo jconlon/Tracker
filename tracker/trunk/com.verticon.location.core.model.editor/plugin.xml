@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ Copyright 2012 Verticon, Inc. All rights reserved.
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="com.verticon.tracker.editor.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="com.verticon.location.presentation.LocationModelWizardID"
+            name="%_UI_LocationModelWizard_label"
+            class="com.verticon.location.presentation.LocationModelWizard"
+            category="com.verticon.tracker.editor.Wizard.category.ID"
+            icon="icons/full/obj16/LocationModelFile.gif">
+         <description>%_UI_LocationModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="com.verticon.location.presentation.LocationEditorID"
+            name="%_UI_LocationEditor_label"
+            icon="icons/full/obj16/LocationModelFile.gif"
+            extensions="location"
+            class="com.verticon.location.presentation.LocationEditor"
+            contributorClass="com.verticon.location.presentation.LocationActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
