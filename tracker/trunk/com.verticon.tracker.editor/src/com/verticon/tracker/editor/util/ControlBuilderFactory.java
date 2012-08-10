@@ -49,16 +49,16 @@ class ControlBuilderFactory {
 			//multiple values
 			if (eReference.isMany()) {
 				logger.debug(bundleMarker,
-						"Creating MultiValueEReferencControlBuilder for object={} with itemPropertyDescriptor={}",
-						object.getClass().getSimpleName(), itemPropertyDescriptor);
+						"Creating MultiValueEReferencControlBuilder for object={} feature={}",
+						object.getClass().getSimpleName(), itemPropertyDescriptor.getFeature(object));
 				return new MultiValueEReferencControlBuilder();
 				
 			//Create a ComboViewer for a single value EReference Builder
 			} else {
 				
 				logger.debug(bundleMarker,
-						"Creating SingleValueEReferenceControlBuilder for object={} with itemPropertyDescriptor={}",
-						object.getClass().getSimpleName(), itemPropertyDescriptor);
+						"Creating SingleValueEReferenceControlBuilder for object={} feature={}",
+						object.getClass().getSimpleName(), itemPropertyDescriptor.getFeature(object));
 				
 				return new SingleValueEReferenceControlBuilder();
 			}
@@ -67,38 +67,45 @@ class ControlBuilderFactory {
 		} else if (isSingleValueEAttributeEBoolean(object,
 				itemPropertyDescriptor)) {
 			logger.debug(bundleMarker,
-					"Creating SingleValueEAttributeEBooleanControlBuilder for object={} with itemPropertyDescriptor={}",
-					object.getClass().getSimpleName(), itemPropertyDescriptor);
+					"Creating SingleValueEAttributeEBooleanControlBuilder for object={} feature={}",
+					object.getClass().getSimpleName(), itemPropertyDescriptor.getFeature(object));
 			return new SingleValueEAttributeEBooleanControlBuilder();
 		
 		//ENum
 		} else if (isSingleValueEAttributeEENum(object, itemPropertyDescriptor)) {
 			logger.debug(bundleMarker,
-					"Creating SingleValueEAttributeENumControlBuilder for object={} with itemPropertyDescriptor={}",
-					object.getClass().getSimpleName(), itemPropertyDescriptor);
+					"Creating SingleValueEAttributeENumControlBuilder for object={} feature={}",
+					object.getClass().getSimpleName(), itemPropertyDescriptor.getFeature(object));
 			return new SingleValueEAttributeENumControlBuilder();
 		
+		//Date
+		} else if (isSingleValueEAttributeEDate(object, itemPropertyDescriptor)) {
+			logger.debug(bundleMarker,
+					"Creating SingleValueEAttributeEDateControlBuilder for object={} feature={}",
+					object.getClass().getSimpleName(), itemPropertyDescriptor.getFeature(object));
+			return new SingleValueEAttributeEDateControlBuilder();
+					
 		
 		//Create a text widget for attributes that may or may not use AttributeItemPropertyDescriptor 
 		} else if (isSingleValueEAttribute(object, itemPropertyDescriptor)&& itemPropertyDescriptor.getChoiceOfValues(object)==null) {
 			logger.debug(bundleMarker,
-					"Creating SingleValueEAttributeControlBuilder for object={} with itemPropertyDescriptor={}",
-					object.getClass().getSimpleName(), itemPropertyDescriptor);
+					"Creating SingleValueEAttributeControlBuilder for object={} feature={}",
+					object.getClass().getSimpleName(), itemPropertyDescriptor.getFeature(object));
 			return new SingleValueEAttributeControlBuilder();
 		 
 		//Create a combo widget for attributes that may or may not use AttributeItemPropertyDescriptor 
 		} else if(isSingleValueEAttribute(object, itemPropertyDescriptor) && itemPropertyDescriptor.getChoiceOfValues(object)!=null){
 				logger.debug(bundleMarker,
-						"Creating SingleValueEAttributeChoiceControlBuilder for object={} with itemPropertyDescriptor={}",
-						object.getClass().getSimpleName(), itemPropertyDescriptor);
+						"Creating SingleValueEAttributeChoiceControlBuilder for object={} feature={}",
+						object.getClass().getSimpleName(), itemPropertyDescriptor.getFeature(object));
 				return new SingleValueEAttributeChoiceControlBuilder();
 				
 		} 
 		
 		//Default
 		logger.debug(bundleMarker,
-				"Creating DefaultControlBuilder for object={} with itemPropertyDescriptor={}",
-				object.getClass().getSimpleName(), itemPropertyDescriptor);
+				"Creating DefaultControlBuilder for object={} feature={}",
+				object.getClass().getSimpleName(), itemPropertyDescriptor.getFeature(object));
 		return new DefaultControlBuilder();
 	}
 
@@ -123,7 +130,7 @@ class ControlBuilderFactory {
 	 * @param itemPropertyDescriptor
 	 * @return
 	 */
-    static boolean isSingleValueEAttribute(Object object,
+   private static boolean isSingleValueEAttribute(Object object,
 			IItemPropertyDescriptor itemPropertyDescriptor) {
 		
 		Object genericFeature = itemPropertyDescriptor.getFeature(object);
@@ -135,13 +142,13 @@ class ControlBuilderFactory {
 	}
 
 	/**
-	 * Object is settable EAttribute with a single value?
+	 * Object is settable EAttribute with a single boolean?
 	 * 
 	 * @param object
 	 * @param itemPropertyDescriptor
 	 * @return
 	 */
-	 static boolean isSingleValueEAttributeEBoolean(Object object,
+	private static boolean isSingleValueEAttributeEBoolean(Object object,
 			IItemPropertyDescriptor itemPropertyDescriptor) {
 
 		if (!isSingleValueEAttribute(object, itemPropertyDescriptor)) {
@@ -179,5 +186,32 @@ class ControlBuilderFactory {
 
 		return (eAttribute.getEAttributeType() instanceof EEnum);
 
+	}
+	
+	/**
+	 * Object is settable EAttribute with a single Date
+	 * 
+	 * @param object
+	 * @param itemPropertyDescriptor
+	 * @return
+	 */
+	 private static boolean isSingleValueEAttributeEDate(Object object,
+			IItemPropertyDescriptor itemPropertyDescriptor) {
+
+		if (!isSingleValueEAttribute(object, itemPropertyDescriptor)) {
+			return false;
+		}
+		EAttribute eAttribute = (EAttribute) itemPropertyDescriptor
+				.getFeature(object);
+		
+		if(itemPropertyDescriptor instanceof AttributeItemPropertyDescriptor){
+			AttributeItemPropertyDescriptor attributeItemPropertyDescriptor = 
+				((AttributeItemPropertyDescriptor)itemPropertyDescriptor);
+			if(attributeItemPropertyDescriptor.isBoolean()){
+				return true;
+			}
+		}
+		return eAttribute.getEAttributeType() == EcorePackage.Literals.EDATE;
+		
 	}
 }

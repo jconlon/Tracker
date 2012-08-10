@@ -26,7 +26,9 @@ public class TrackerConstants {
 	private TrackerConstants() {
 	} // Prevents Instantiation
 
-	
+	//2008-06-10T10:49:30.871-0500
+	public static final String DATE_FORMAT_PATTERN_VERBOSE = "yyyy-MM-dd'T'HH:mm:ss";
+		
 	public static final String DAY_FORMAT_PATTERN = "MMMM d, yyyy";
 	public static final String DATE_FORMAT_PATTERN = "yyyy-MM-dd HH:mm:ss";
 	/**

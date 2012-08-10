@@ -24,47 +24,54 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.jface.databinding.swt.SWTObservables;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.edit.provider.AttributeItemPropertyDescriptor;
+import com.verticon.tracker.util.TrackerConstants;
+import com.verticon.ui.dialogs.DateDialog;
 
 /**
- * Creates a Text Widget for an attribute. This ControlBuilder supports creating
- * widgets for StringToStringMap entries that are associated with an AttributeItemPropertyDescriptor.
+ * Creates a Button Widget for a Date attribute. 
+ * This ControlBuilder supports creating widgets for StringToStringMap 
+ * entries that are associated with an AttributeItemPropertyDescriptor.
  * 
  * This will dispose of IObservableValue when the Widget is disposed.
  * 
  * @author jconlon
  *
  */
-class SingleValueEAttributeControlBuilder implements ControlBuilder {
+class SingleValueEAttributeEDateControlBuilder implements
+		ControlBuilder {
 
 	/**
 	 * slf4j Logger
 	 */
 	private final Logger logger = LoggerFactory
-			.getLogger(SingleValueEAttributeControlBuilder.class);
+			.getLogger(SingleValueEAttributeEDateControlBuilder.class);
 
 	//Needs disposing
 	private IObservableValue model;
 	
-
 	/*
 	 * (non-Javadoc)
 	 * @see com.verticon.tracker.editor.util.ControlBuilder#createControl(java.lang.Object, org.eclipse.swt.widgets.Composite, org.eclipse.emf.edit.provider.IItemPropertyDescriptor, org.eclipse.emf.common.notify.AdapterFactory, org.eclipse.core.databinding.DataBindingContext)
 	 */
-	public void createControl(Object object, Composite parent,
+	public void createControl(Object object, final Composite parent,
 			IItemPropertyDescriptor itemPropertyDescriptor,
 			AdapterFactory adapterFactory, DataBindingContext dataBindingContext) {
 		logger.debug(bundleMarker,"{} object={}, attribute={}", new Object[]{this,object,itemPropertyDescriptor.getFeature(object)});
-		Text text = createControl(object, parent, itemPropertyDescriptor,
+		final Text text = createControl(object, parent, itemPropertyDescriptor,
 				adapterFactory);
 		text.addDisposeListener(new DisposeListener(){
 			
@@ -78,6 +85,40 @@ class SingleValueEAttributeControlBuilder implements ControlBuilder {
 				}
 			}
 		});
+		
+		text.addMouseListener(new MouseListener() {
+		      public void mouseDown(MouseEvent e) {
+//		          Label l = new Label(s, SWT.FLAT);
+//		          l.setText("Mouse Button Down at:" + e.x + " " + e.y);
+//		          l.setBounds(e.x, e.y, 150, 15);
+
+		        }
+
+		        public void mouseUp(MouseEvent e) {
+//		          Label l = new Label(s, SWT.FLAT);
+//		          l.setText("Mouse Button up at:" + e.x + " " + e.y);
+//		          l.setBounds(e.x, e.y, 150, 15);
+		        }
+
+		        public void mouseDoubleClick(MouseEvent e) {
+		        	callDateDialog(text,parent.getShell());
+		        }
+		      });
+		
+//		 Button button = new Button(parent, SWT.PUSH);
+//		    button.setText("set");
+//		    button.addSelectionListener(new SelectionListener() {
+//
+//		        public void widgetSelected(SelectionEvent event) {
+//		        	callDateDialog(text,parent.getShell());
+//		        }
+//
+//		        public void widgetDefaultSelected(SelectionEvent event) {
+//		        	callDateDialog(text,parent.getShell());
+//		        }
+//
+//				
+//		      });
 		
 		bind(object, dataBindingContext, itemPropertyDescriptor, text);
 	}
@@ -154,5 +195,13 @@ class SingleValueEAttributeControlBuilder implements ControlBuilder {
 		}
 	}
 	
+	
+	private void callDateDialog(Text text, Shell shell) {
+		DateDialog dateDialog = new DateDialog(shell,TrackerConstants.DATE_FORMAT_PATTERN_VERBOSE);
+		if (dateDialog.open() == Window.OK) {
+			text.setText(dateDialog.getDateTime());
+
+		}
+	}
 
 }
