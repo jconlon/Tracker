@@ -411,10 +411,14 @@ public class EventItemProvider
 		case 3: //Tag ID Number
 			return event.getTag()!=null?event.getTag().getId():"";
 
-		case 4: //Comments
+		case 4: //Pid
+			return event.getPid();
+		case 5: //Publisher Name
+			return event.getPublisherName();
+		case 6: //Comments
 			return event.getComments();
 		default :
-			StringBuilder sb2 = new StringBuilder("unknown ");
+			StringBuilder sb2 = new StringBuilder("unknown column index ");
 			sb2.append(columnIndex);
 			return sb2.toString();
 		}

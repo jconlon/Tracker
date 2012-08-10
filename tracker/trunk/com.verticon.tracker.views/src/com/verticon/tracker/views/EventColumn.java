@@ -39,7 +39,7 @@ import com.verticon.tracker.util.TrackerUtils;
 
 enum EventColumn {
 	DATE(EventsView.getString("_UI_DateTimeColumn_label"), new ColumnWeightData(2, 170, true),
-			TrackerPackage.Literals.EVENT__DATE_TIME, "{0}", 
+			TrackerPackage.Literals.EVENT__DATE_TIME, 
 			new Comparator<Event>() {
 		public int compare(Event event1, Event event2) {
 				Date date1 = event1.getDateTime() == null ? TrackerUtils.DATE_REFERENCE
@@ -54,7 +54,7 @@ enum EventColumn {
 	),
 
 	EVENT_NAME(EventsView.getString("_UI_EventNameColumn_label"), new ColumnWeightData(2, 60, true),
-			TrackerPackage.Literals.EVENT__EVENT_CODE, "{1}", //FIXME Wrong Literal
+			TrackerPackage.Literals.EVENT__EVENT_CODE, 
 			new Comparator<Event>() {
 		public int compare(Event event1, Event event2) {
 			return event1.getClass().getSimpleName().compareTo(
@@ -63,7 +63,7 @@ enum EventColumn {
 	}),
 
 	ANIMAL(AnimalsView.getString("_UI_AnimalParentColumn_label"), new ColumnWeightData(3, 230, true),
-			TrackerPackage.Literals.EVENT__ID, "{2}", 
+			TrackerPackage.Literals.EVENT__ID, 
 			new Comparator<Event>() {
 		public int compare(Event event1, Event event2) {
 			Animal animal1 = (Animal) event1.getTag().eContainer();
@@ -73,7 +73,7 @@ enum EventColumn {
 	}),
 	
 	TAG(AnimalsView.getString("_UI_TagColumn_label"), new ColumnWeightData(2, 150, true),
-			TrackerPackage.Literals.EVENT__TAG, "{3}", 
+			TrackerPackage.Literals.EVENT__TAG, 
 			new Comparator<Event>() {
 		public int compare(Event event1, Event event2) {
 			return event1.getId().compareTo(event2.getId());
@@ -82,8 +82,32 @@ enum EventColumn {
 	
 	
 	
+	PID(AnimalsView.getString("_UI_PIDColumn_label"), new ColumnWeightData(3, 180, true),
+			TrackerPackage.Literals.EVENT__PID, 
+			new Comparator<Event>() {
+		public int compare(Event event1, Event event2) {
+			String pid1 = event1.getPid() == null ? "" : event1
+					.getPid();
+			String pid2 = event2.getPid() == null ? "" : event2
+					.getPid();
+			return pid1.compareTo(pid2);
+		}
+	}),
+	
+	PUBLISHER_NAME(AnimalsView.getString("_UI_PublisherNameColumn_label"), new ColumnWeightData(3, 180, true),
+			TrackerPackage.Literals.EVENT__PUBLISHER_NAME, 
+			new Comparator<Event>() {
+		public int compare(Event event1, Event event2) {
+			String pName1 = event1.getPublisherName() == null ? "" : event1
+					.getPublisherName();
+			String pName2 = event2.getPublisherName() == null ? "" : event2
+					.getPublisherName();
+			return pName1.compareTo(pName2);
+		}
+	}),
+	
 	COMMENTS(AnimalsView.getString("_UI_CommentsColumn_label"), new ColumnWeightData(3, 180, true),
-			TrackerPackage.Literals.EVENT__COMMENTS, "{4}", 
+			TrackerPackage.Literals.EVENT__COMMENTS, 
 			new Comparator<Event>() {
 		public int compare(Event event1, Event event2) {
 			String comments1 = event1.getComments() == null ? "" : event1
@@ -96,36 +120,33 @@ enum EventColumn {
 	
 	
 	
-	final ColumnWeightData layoutData;
-	final String text;
+	private final ColumnWeightData layoutData;
+	private final String text;
 	/**
 	 * The feature field is not used by this class, because content and 
 	 * label providers are not added to the individual columns at this time.  
 	 * It is included as a place holder to show how it is used in the other 
 	 * column enums.
 	 */
-	final EStructuralFeature feature;
-	final String pattern;
-	final Comparator<Event> comparator;
+	private final EStructuralFeature feature;
+	private final Comparator<Event> comparator;
 	
-	static List<String> columnNames;
-	static String[] colNames;
-	static EStructuralFeature[] features;
+	private static List<String> columnNames;
+	private static String[] colNames;
+	private static EStructuralFeature[] features;
 
 	/**
 	 * 
 	 * @param text of columnName
 	 * @param layoutData of column
 	 * @param feature to map
-	 * @param pattern of MessageFormat outputing of the value of the data
 	 * @param comparator for sorting of the column
 	 */
 	EventColumn(String text, ColumnWeightData layoutData,
-			EStructuralFeature feature, String pattern, Comparator<Event> comparator) {
+			EStructuralFeature feature, Comparator<Event> comparator) {
 		this.text = text;
 		this.layoutData = layoutData;
 		this.feature = feature;
-		this.pattern = pattern;
 		this.comparator=comparator;
 	}
 
@@ -147,11 +168,7 @@ enum EventColumn {
 	@SuppressWarnings("unchecked")
 	static GenericViewSorter setup(TableViewer tableViewer, IMemento memento, 
 			final AdapterFactory adapterFactory,  List<Action> actions){// Menu parent){
-		
-//		ObservableListContentProvider cp = new ObservableListContentProvider();
-//		IObservableMap[] maps = EMFObservables.observeMaps(cp
-//				.getKnownElements(), features);
-		
+				
 		final Table table = tableViewer.getTable();
 		TableLayout layout = new TableLayout();
 		table.setLayout(layout);
@@ -177,24 +194,6 @@ enum EventColumn {
 			}else{
 				layout.addColumnData(col.layoutData);
 			}
-			//Label Providers are created for the whole table in the Events View
-//			if (col == EVENT_NAME) {
-//				viewerColumn
-//						.setLabelProvider(new GenericObservableMapCellLabelProvider(
-//								maps, col.pattern) {
-//							private final ITableLabelProvider lp = new AdapterFactoryLabelProvider(
-//									adapterFactory);
-//
-//							@Override
-//							public Image getImage(Object element) {
-//								return lp.getColumnImage(element, 0);
-//							}
-//						});
-//			} else {
-//			viewerColumn
-//					.setLabelProvider(new GenericObservableMapCellLabelProvider(
-//							maps, col.pattern));
-//			}
 
 			if(actions!=null){
 				ColumnUtils.createMenuItem( actions, nameColumn, col.layoutData.minimumWidth, 
@@ -203,7 +202,7 @@ enum EventColumn {
 		}
 		
 		TableColumn[] tableCols = new TableColumn[tableColumns.size()];
-        Comparator[] compares = new Comparator[comparators.size()];
+        Comparator<Object>[] compares = new Comparator[comparators.size()];
         
         GenericViewSorter sorter = new GenericViewSorter(
 				tableViewer,  
@@ -216,7 +215,6 @@ enum EventColumn {
 		
 		tableViewer.setSorter(sorter);
 		tableViewer.setColumnProperties(colNames);
-//		tableViewer.setContentProvider(cp);
 	
 		return sorter;
 	}
