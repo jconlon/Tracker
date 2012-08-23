@@ -143,7 +143,7 @@ public class LocationTest extends TestCase {
         assertThat("SouthFairgrounds must not be in the NW area",getFixture().containsPoint(AreaTest.SOUTH_FAIRGROUNDS_POINT),
         		is(false));
 		Area area = LocationFactory.eINSTANCE.createArea();
-		area.setBoundry(AreaTest.GOOD_S_POLYGON_COORDS);
+		area.setBoundary(AreaTest.GOOD_S_POLYGON_COORDS);
 		area.setName("testArea");
 		getFixture().getAreas().add(area);
 		assertThat("SouthFairgrounds must not be in the South area",
@@ -165,7 +165,7 @@ public class LocationTest extends TestCase {
 				getFixture().locate(AreaTest.SOUTH_FAIRGROUNDS_POINT),
         		is(nullValue()));
 		Area area = LocationFactory.eINSTANCE.createArea();
-		area.setBoundry(AreaTest.GOOD_S_POLYGON_COORDS);
+		area.setBoundary(AreaTest.GOOD_S_POLYGON_COORDS);
 		area.setName("testArea");
 		getFixture().getAreas().add(area);
 		assertThat("SouthFairgrounds must not be in the South area",

@@ -114,11 +114,11 @@ public class AreaTest extends TestCase {
 	 * @generated NOT
 	 */
 	public void testGetAreaMeasurement() {
-		getFixture().setBoundry(GOOD_NW_POLYGON_COORDS);
+		getFixture().setBoundary(GOOD_NW_POLYGON_COORDS);
 		getFixture().setName("test");
 		double area = getFixture().getAreaMeasurement();
 		assertThat("Area measurement must be . ", area, is(1.022779236470317E-4));
-		getFixture().setBoundry(GOOD_S_POLYGON_COORDS);
+		getFixture().setBoundary(GOOD_S_POLYGON_COORDS);
 		double area2 = getFixture().getAreaMeasurement();
 		assertThat("Area measurement must be . ", area2, is(6.447663527888239E-4));
 		
@@ -128,11 +128,11 @@ public class AreaTest extends TestCase {
 		getFixture().setName("test");
 		String coor1 = "-90.90982670995385,-43.57098775766727,0";
 	
-		getFixture().setBoundry(GOOD_NW_POLYGON_COORDS);
+		getFixture().setBoundary(GOOD_NW_POLYGON_COORDS);
 		String validationResults = validateObject(getFixture());
 		assertThat("Area must be valid. "+validationResults, validationResults, is(nullValue()));
 		
-		getFixture().setBoundry(coor1);
+		getFixture().setBoundary(coor1);
 	    validationResults = validateObject(getFixture());
 		assertThat("Area must be INvalid. "+validationResults, validationResults, is(notNullValue()));
 		
@@ -145,12 +145,12 @@ public class AreaTest extends TestCase {
 	 * @generated NOT
 	 */
 	public void testContainsPoint__String() {
-		getFixture().setBoundry(GOOD_NW_POLYGON_COORDS);
+		getFixture().setBoundary(GOOD_NW_POLYGON_COORDS);
 		getFixture().setName("test");
 		
 		assertThat("SouthFairgrounds must not be in the NW area",getFixture().containsPoint(SOUTH_FAIRGROUNDS_POINT),is(false));
 		
-		getFixture().setBoundry(GOOD_S_POLYGON_COORDS);
+		getFixture().setBoundary(GOOD_S_POLYGON_COORDS);
 		assertThat("SouthFairgrounds must not be in the South area",getFixture().containsPoint(SOUTH_FAIRGROUNDS_POINT),is(false));
 		
 		assertThat("Baseball field must be in the South area",getFixture().containsPoint(BASEBALL_FIELD_POINT),is(true));
