@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.verticon.location.Area#getName <em>Name</em>}</li>
- *   <li>{@link com.verticon.location.Area#getBoundry <em>Boundry</em>}</li>
+ *   <li>{@link com.verticon.location.Area#getBoundary <em>Boundary</em>}</li>
  *   <li>{@link com.verticon.location.Area#getComments <em>Comments</em>}</li>
  * </ul>
  * </p>
@@ -51,30 +51,30 @@ public interface Area extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Boundry</b></em>' attribute.
+	 * Returns the value of the '<em><b>Boundary</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Boundry</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Boundary</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Boundry</em>' attribute.
-	 * @see #setBoundry(String)
-	 * @see com.verticon.location.LocationPackage#getArea_Boundry()
-	 * @model required="true"
+	 * @return the value of the '<em>Boundary</em>' attribute.
+	 * @see #setBoundary(String)
+	 * @see com.verticon.location.LocationPackage#getArea_Boundary()
+	 * @model dataType="com.verticon.location.Polygon" required="true"
 	 * @generated
 	 */
-	String getBoundry();
+	String getBoundary();
 
 	/**
-	 * Sets the value of the '{@link com.verticon.location.Area#getBoundry <em>Boundry</em>}' attribute.
+	 * Sets the value of the '{@link com.verticon.location.Area#getBoundary <em>Boundary</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Boundry</em>' attribute.
-	 * @see #getBoundry()
+	 * @param value the new value of the '<em>Boundary</em>' attribute.
+	 * @see #getBoundary()
 	 * @generated
 	 */
-	void setBoundry(String value);
+	void setBoundary(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Comments</b></em>' attribute.

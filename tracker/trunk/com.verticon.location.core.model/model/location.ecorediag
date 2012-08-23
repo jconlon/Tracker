@@ -115,7 +115,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_V4515cSZEeGKZMulm04rlA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_V4515sSZEeGKZMulm04rlA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="location.ecore#//Area/boundry"/>
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Area/boundary"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_V45158SZEeGKZMulm04rlA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_V46c8MSZEeGKZMulm04rlA" type="2001">
@@ -169,6 +169,13 @@
     </children>
     <element xsi:nil="true"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dSkyJ8SZEeGKZMulm04rlA" x="20" y="56"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_pT93ke1CEeGiZ5SB6-9z2g" type="1004">
+    <children xmi:type="notation:Node" xmi:id="_pUAT0O1CEeGiZ5SB6-9z2g" type="4008"/>
+    <children xmi:type="notation:Node" xmi:id="_pUA64O1CEeGiZ5SB6-9z2g" type="4009"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_pT93ku1CEeGiZ5SB6-9z2g" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EDataType" href="location.ecore#//Polygon"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_pT93k-1CEeGiZ5SB6-9z2g" x="715" y="419"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_V4V1McSZEeGKZMulm04rlA"/>
   <element xmi:type="ecore:EPackage" href="location.ecore#/"/>

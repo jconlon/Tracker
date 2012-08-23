@@ -57,6 +57,13 @@ public class LocationPackageImpl extends EPackageImpl implements LocationPackage
 	private EDataType pointFormatExceptionEDataType = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType polygonEDataType = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -284,7 +291,7 @@ public class LocationPackageImpl extends EPackageImpl implements LocationPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArea_Boundry() {
+	public EAttribute getArea_Boundary() {
 		return (EAttribute)areaEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -313,6 +320,15 @@ public class LocationPackageImpl extends EPackageImpl implements LocationPackage
 	 */
 	public EDataType getPointFormatException() {
 		return pointFormatExceptionEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getPolygon() {
+		return polygonEDataType;
 	}
 
 	/**
@@ -361,7 +377,7 @@ public class LocationPackageImpl extends EPackageImpl implements LocationPackage
 
 		areaEClass = createEClass(AREA);
 		createEAttribute(areaEClass, AREA__NAME);
-		createEAttribute(areaEClass, AREA__BOUNDRY);
+		createEAttribute(areaEClass, AREA__BOUNDARY);
 		createEAttribute(areaEClass, AREA__COMMENTS);
 
 		// Create enums
@@ -369,6 +385,7 @@ public class LocationPackageImpl extends EPackageImpl implements LocationPackage
 
 		// Create data types
 		pointFormatExceptionEDataType = createEDataType(POINT_FORMAT_EXCEPTION);
+		polygonEDataType = createEDataType(POLYGON);
 	}
 
 	/**
@@ -431,7 +448,7 @@ public class LocationPackageImpl extends EPackageImpl implements LocationPackage
 
 		initEClass(areaEClass, Area.class, "Area", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getArea_Name(), ecorePackage.getEString(), "name", null, 1, 1, Area.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getArea_Boundry(), ecorePackage.getEString(), "boundry", null, 1, 1, Area.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArea_Boundary(), this.getPolygon(), "boundary", null, 1, 1, Area.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getArea_Comments(), ecorePackage.getEString(), "comments", null, 0, 1, Area.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(areaEClass, ecorePackage.getEDouble(), "getAreaMeasurement", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -448,6 +465,7 @@ public class LocationPackageImpl extends EPackageImpl implements LocationPackage
 
 		// Initialize data types
 		initEDataType(pointFormatExceptionEDataType, IllegalArgumentException.class, "PointFormatException", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(polygonEDataType, String.class, "Polygon", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

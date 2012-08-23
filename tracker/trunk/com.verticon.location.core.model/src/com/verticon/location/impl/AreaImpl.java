@@ -21,7 +21,7 @@ import com.vividsolutions.jts.geom.Polygon;
  * The following features are implemented:
  * <ul>
  *   <li>{@link com.verticon.location.impl.AreaImpl#getName <em>Name</em>}</li>
- *   <li>{@link com.verticon.location.impl.AreaImpl#getBoundry <em>Boundry</em>}</li>
+ *   <li>{@link com.verticon.location.impl.AreaImpl#getBoundary <em>Boundary</em>}</li>
  *   <li>{@link com.verticon.location.impl.AreaImpl#getComments <em>Comments</em>}</li>
  * </ul>
  * </p>
@@ -53,24 +53,24 @@ public class AreaImpl extends MinimalEObjectImpl.Container implements Area {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getBoundry() <em>Boundry</em>}' attribute.
+	 * The default value of the '{@link #getBoundary() <em>Boundary</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getBoundry()
+	 * @see #getBoundary()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String BOUNDRY_EDEFAULT = null;
+	protected static final String BOUNDARY_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getBoundry() <em>Boundry</em>}' attribute.
+	 * The cached value of the '{@link #getBoundary() <em>Boundary</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getBoundry()
+	 * @see #getBoundary()
 	 * @generated
 	 * @ordered
 	 */
-	protected String boundry = BOUNDRY_EDEFAULT;
+	protected String boundary = BOUNDARY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getComments() <em>Comments</em>}' attribute.
@@ -137,8 +137,8 @@ public class AreaImpl extends MinimalEObjectImpl.Container implements Area {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getBoundry() {
-		return boundry;
+	public String getBoundary() {
+		return boundary;
 	}
 
 	/**
@@ -146,11 +146,11 @@ public class AreaImpl extends MinimalEObjectImpl.Container implements Area {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setBoundryGen(String newBoundry) {
-		String oldBoundry = boundry;
-		boundry = newBoundry;
+	public void setBoundaryGen(String newBoundary) {
+		String oldBoundary = boundary;
+		boundary = newBoundary;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, LocationPackage.AREA__BOUNDRY, oldBoundry, boundry));
+			eNotify(new ENotificationImpl(this, Notification.SET, LocationPackage.AREA__BOUNDARY, oldBoundary, boundary));
 	}
 
 	/**
@@ -159,8 +159,8 @@ public class AreaImpl extends MinimalEObjectImpl.Container implements Area {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void setBoundry(String boundry) {
-		setBoundryGen(boundry);
+	public void setBoundary(String boundary) {
+		setBoundaryGen(boundary);
 		polygon=null;
 	}
 	
@@ -210,7 +210,7 @@ public class AreaImpl extends MinimalEObjectImpl.Container implements Area {
 	
 	private Polygon getPolygon(){
 		if(polygon==null){
-			polygon = GeometryUtils.createPolygon(boundry);
+			polygon = GeometryUtils.createPolygon(boundary);
 		}
 		return polygon;
 	}
@@ -228,8 +228,8 @@ public class AreaImpl extends MinimalEObjectImpl.Container implements Area {
 		switch (featureID) {
 			case LocationPackage.AREA__NAME:
 				return getName();
-			case LocationPackage.AREA__BOUNDRY:
-				return getBoundry();
+			case LocationPackage.AREA__BOUNDARY:
+				return getBoundary();
 			case LocationPackage.AREA__COMMENTS:
 				return getComments();
 		}
@@ -247,8 +247,8 @@ public class AreaImpl extends MinimalEObjectImpl.Container implements Area {
 			case LocationPackage.AREA__NAME:
 				setName((String)newValue);
 				return;
-			case LocationPackage.AREA__BOUNDRY:
-				setBoundry((String)newValue);
+			case LocationPackage.AREA__BOUNDARY:
+				setBoundary((String)newValue);
 				return;
 			case LocationPackage.AREA__COMMENTS:
 				setComments((String)newValue);
@@ -268,8 +268,8 @@ public class AreaImpl extends MinimalEObjectImpl.Container implements Area {
 			case LocationPackage.AREA__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case LocationPackage.AREA__BOUNDRY:
-				setBoundry(BOUNDRY_EDEFAULT);
+			case LocationPackage.AREA__BOUNDARY:
+				setBoundary(BOUNDARY_EDEFAULT);
 				return;
 			case LocationPackage.AREA__COMMENTS:
 				setComments(COMMENTS_EDEFAULT);
@@ -288,8 +288,8 @@ public class AreaImpl extends MinimalEObjectImpl.Container implements Area {
 		switch (featureID) {
 			case LocationPackage.AREA__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case LocationPackage.AREA__BOUNDRY:
-				return BOUNDRY_EDEFAULT == null ? boundry != null : !BOUNDRY_EDEFAULT.equals(boundry);
+			case LocationPackage.AREA__BOUNDARY:
+				return BOUNDARY_EDEFAULT == null ? boundary != null : !BOUNDARY_EDEFAULT.equals(boundary);
 			case LocationPackage.AREA__COMMENTS:
 				return COMMENTS_EDEFAULT == null ? comments != null : !COMMENTS_EDEFAULT.equals(comments);
 		}
@@ -308,8 +308,8 @@ public class AreaImpl extends MinimalEObjectImpl.Container implements Area {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
-		result.append(", boundry: ");
-		result.append(boundry);
+		result.append(", boundary: ");
+		result.append(boundary);
 		result.append(", comments: ");
 		result.append(comments);
 		result.append(')');

@@ -16,9 +16,8 @@
       <genEnumLiterals ecoreEnumLiteral="location.ecore#//AltitudeMode/relativeToGround"/>
     </genEnums>
     <genDataTypes ecoreDataType="location.ecore#//PointFormatException"/>
+    <genDataTypes ecoreDataType="location.ecore#//Polygon"/>
     <genClasses ecoreClass="location.ecore#//Location">
-      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Universal Resouce Identifier of the Location"
-          ecoreFeature="ecore:EAttribute location.ecore#//Location/uri"/>
       <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Name of the location.  An area with the same name is considered this locations boundry."
           ecoreFeature="ecore:EAttribute location.ecore#//Location/name"/>
       <genFeatures createChild="false" propertyCategory="Identification" propertyDescription=""
@@ -46,8 +45,8 @@
     </genClasses>
     <genClasses ecoreClass="location.ecore#//Area">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute location.ecore#//Area/name"/>
-      <genFeatures createChild="false" propertyDescription="List of 3 or more coordinates that specify the linear ring bounding the area.  Coordinate values are comma seperated, order is long,lat,alt with a space seperating the each set of coordinate values."
-          ecoreFeature="ecore:EAttribute location.ecore#//Area/boundry"/>
+      <genFeatures createChild="false" propertyDescription="List of 3 or more coordinates that specify a polygon bounding the area.  Values for each coordinate are comma seperated and the order is long,lat,alt with a space seperating each set of coordinate values."
+          ecoreFeature="ecore:EAttribute location.ecore#//Area/boundary"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute location.ecore#//Area/comments"/>
       <genOperations ecoreOperation="location.ecore#//Area/getAreaMeasurement"/>
       <genOperations ecoreOperation="location.ecore#//Area/containsPoint">
