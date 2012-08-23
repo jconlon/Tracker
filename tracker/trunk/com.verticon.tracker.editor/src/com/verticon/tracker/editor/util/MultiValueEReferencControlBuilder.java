@@ -57,7 +57,7 @@ import org.slf4j.LoggerFactory;
  * @author jconlon
  *
  */
-class MultiValueEReferencControlBuilder implements ControlBuilder {
+public class MultiValueEReferencControlBuilder implements ControlBuilder {
 
 	/**
 	 * slf4j Logger
@@ -148,9 +148,6 @@ class MultiValueEReferencControlBuilder implements ControlBuilder {
 				} else {
 					handleResults(results, eObject, eStructuralFeature);
 				}
-				
-				
-
 			}
 			
 			
@@ -225,6 +222,17 @@ class MultiValueEReferencControlBuilder implements ControlBuilder {
 		
 	}
 	
+	 /**
+	  * @deprecated
+	  * @param eObject
+	  * @param itemPropertyDescriptor
+	  * @param shell
+	  * @param choiceOfValues
+	  * @param feature
+	  * @param labelProvider
+	  * @param multiline
+	  * @return
+	  */
 	static EList<?> createDialog(EObject eObject,
 			IItemPropertyDescriptor itemPropertyDescriptor, Shell shell,
 			List<?> choiceOfValues, EStructuralFeature feature,
@@ -247,7 +255,7 @@ class MultiValueEReferencControlBuilder implements ControlBuilder {
 		return dialog.getResult();
 	}
 	
-	 protected static ILabelProvider getLabelProvider(
+	 public static ILabelProvider getLabelProvider(
 			IItemPropertyDescriptor itemPropertyDescriptor, Object object) {
 		final IItemLabelProvider itemLabelProvider = itemPropertyDescriptor
 				.getLabelProvider(object);
