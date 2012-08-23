@@ -85,7 +85,6 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -94,7 +93,6 @@ import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
-import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -108,8 +106,6 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.IActionBars;
@@ -135,14 +131,18 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.verticon.location.provider.LocationItemProviderAdapterFactory;
 import com.verticon.osgi.metatype.provider.MetatypeItemProviderAdapterFactory;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory;
-import com.verticon.location.provider.LocationItemProviderAdapterFactory;
 import com.verticon.tracker.edit.provider.TrackerReportEditPlugin;
+import com.verticon.tracker.editor.internal.presentation.AreasFormPage;
+import com.verticon.tracker.editor.internal.presentation.LocationFormPage;
+import com.verticon.tracker.editor.internal.presentation.PolicyFormPage;
 import com.verticon.tracker.editor.internal.presentation.PremisesFormPage;
+import com.verticon.tracker.editor.internal.presentation.CreateLocationSelectionListener;
 import com.verticon.tracker.editor.util.ITrackerViewRegister;
 import com.verticon.tracker.editor.validation.LiveValidationContentAdapter;
 import com.verticon.tracker.emf.edit.ui.provider.WorkaroundAdapterFactoryLabelProvider;
@@ -1050,10 +1050,13 @@ public class TrackerEditor
 
 			createSelectionTreeViewer(getString("_UI_SelectionPage_label"));
 			createPremisesFormPage(getString("_UI_PremisesPage_label"));
+			createPolicyFormPage(getString("_UI_PolicyPage_label"));
+			CreateLocationSelectionListener createLocationSelectionListener = 
+					new CreateLocationSelectionListener((IPremisesProvider)getAdapter(IPremisesProvider.class)); 
+			createLocationFormPage(getString("_UI_LocationPage_label"),createLocationSelectionListener);
+			createAreasFormPage(getString("_UI_AreasPage_label"),createLocationSelectionListener);
 			// createParentTreeViewer(getString("_UI_ParentPage_label"));
-			//
 			// createListViewer(getString("_UI_ListPage_label"));
-			//
 			// createTreeViewer(getString("_UI_TreePage_label"));
 
 			
@@ -1096,7 +1099,46 @@ public class TrackerEditor
 			int index = addPage(ep, getEditorInput());
 			setPageText(index, label);
 		} catch (PartInitException e) {
-			logger.error(bundleMarker, "Could not create the forms page.",e);
+			logger.error(bundleMarker, "Could not create the Premises forms page.",e);
+		}
+	}
+	
+	private void createLocationFormPage(String label, CreateLocationSelectionListener createLocationSelectionListener) {
+		EditorPart ep = new LocationFormPage(
+				(IPremisesProvider)getAdapter(IPremisesProvider.class),createLocationSelectionListener);
+		ep.createPartControl(getContainer());
+
+		try {
+			int index = addPage(ep, getEditorInput());
+			setPageText(index, label);
+		} catch (PartInitException e) {
+			logger.error(bundleMarker, "Could not create the Location forms page.",e);
+		}
+	}
+	
+	private void createPolicyFormPage(String label) {
+		EditorPart ep = new PolicyFormPage(
+				(IPremisesProvider)getAdapter(IPremisesProvider.class));
+		ep.createPartControl(getContainer());
+
+		try {
+			int index = addPage(ep, getEditorInput());
+			setPageText(index, label);
+		} catch (PartInitException e) {
+			logger.error(bundleMarker, "Could not create the Policy forms page.",e);
+		}
+	}
+	
+	private void createAreasFormPage(String label, CreateLocationSelectionListener createLocationSelectionListener) {
+		EditorPart ep = new AreasFormPage(
+				(IPremisesProvider)getAdapter(IPremisesProvider.class), createLocationSelectionListener);
+		ep.createPartControl(getContainer());
+
+		try {
+			int index = addPage(ep, getEditorInput());
+			setPageText(index, label);
+		} catch (PartInitException e) {
+			logger.error(bundleMarker, "Could not create the Areas forms page.",e);
 		}
 	}
 

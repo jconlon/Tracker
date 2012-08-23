@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.databinding.IEMFValueProperty;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.databinding.swt.IWidgetValueProperty;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
@@ -54,11 +55,13 @@ import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.editor.presentation.IPremisesProvider;
 
 /**
+ * Premises element details as a form page on the Premises editor tab.
+ * 
  * @author jconlon
  * 
  */
 @SuppressWarnings("restriction")
-public class PremisesFormPage extends FormPage implements IValueChangeListener{
+public class PremisesFormPage extends FormPage implements IValueChangeListener {
 	private static final String FORM_TITLE = "Premises";
 	private ManagedForm managedForm;
 	private final IPremisesProvider premisesProvider;
@@ -86,17 +89,16 @@ public class PremisesFormPage extends FormPage implements IValueChangeListener{
 	protected void createFormContent(IManagedForm managedForm) {
 		final ScrolledForm form = managedForm.getForm();
 		form.setText(FORM_TITLE);
-		form.setToolTipText(
-				"Premises is the root parent of the Premises document.");
+		form.setToolTipText("Premises is the fundemental element of the Premises document.");
 
 		// Add a reference to control forward timing of other fields
-		IWidgetValueProperty prop = WidgetProperties.text(SWT.Modify);
+		final IWidgetValueProperty prop = WidgetProperties.text(SWT.Modify);
 
 		final FormToolkit toolkit = managedForm.getToolkit();
 		addHeadingGradient(toolkit, form, true);
 
 		toolkit.decorateFormHeading(form.getForm());
-		form.getForm().addMessageHyperlinkListener(new HyperlinkAdapter()); 
+		form.getForm().addMessageHyperlinkListener(new HyperlinkAdapter());
 
 		componentImage = AbstractUIPlugin.imageDescriptorFromPlugin(
 				"com.verticon.tracker.edit", "/icons/full/obj16/Premises.gif")
@@ -111,10 +113,23 @@ public class PremisesFormPage extends FormPage implements IValueChangeListener{
 		form.getBody().setLayout(layout);
 
 		ctx = new EMFDataBindingContext();
-		IMessageManager immng = managedForm.getMessageManager();
+		final IMessageManager immng = managedForm.getMessageManager();
+
 		addStatusSupport(observablesManager, ctx);
-		createIdSection(form, prop, toolkit, immng);
-		createContactsSection(form, prop, toolkit, immng);
+		observablesManager.runAndCollect(new Runnable() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see java.lang.Runnable#run()
+			 */
+			@Override
+			public void run() {
+				createIdSection(form, prop, toolkit, immng);
+				createContactsSection(form, prop, toolkit, immng);
+			}
+		});
+
 	}
 
 	private void createIdSection(final ScrolledForm form,
@@ -161,8 +176,8 @@ public class PremisesFormPage extends FormPage implements IValueChangeListener{
 		l.setToolTipText("The name of the premises.");
 		Text t = toolkit.createText(sectionClient, "");
 		t.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false, 1, 1));
-		ctx.bindValue(prop.observeDelayed(400, t), nameProp
-				.observe(premisesProvider.getPremises()));
+		ctx.bindValue(prop.observeDelayed(400, t),
+				nameProp.observe(premisesProvider.getPremises()));
 
 		// Description
 		final IEMFValueProperty descriptionProp = EMFEditProperties.value(ed,
@@ -172,30 +187,28 @@ public class PremisesFormPage extends FormPage implements IValueChangeListener{
 		l.setToolTipText("The description of the premises.");
 		t = toolkit.createText(sectionClient, "");
 		t.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false, 1, 1));
-		ctx.bindValue(prop.observeDelayed(400, t), descriptionProp
-				.observe(premisesProvider.getPremises()));
+		ctx.bindValue(prop.observeDelayed(400, t),
+				descriptionProp.observe(premisesProvider.getPremises()));
 
 		// PIN
 		final IEMFValueProperty idProp = EMFEditProperties.value(ed,
 				TrackerPackage.Literals.PREMISES__PREMISES_ID);
 		l = toolkit.createLabel(sectionClient, "&USDA Premises ID");
-		l.setToolTipText(
-				"The USDA assigned Premises Identification Number (PIN)");
+		l.setToolTipText("The USDA assigned Premises Identification Number (PIN)");
 		t = toolkit.createText(sectionClient, "");
 		t.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false, 1, 1));
-		ctx.bindValue(prop.observeDelayed(400, t), idProp
-				.observe(premisesProvider.getPremises()));
+		ctx.bindValue(prop.observeDelayed(400, t),
+				idProp.observe(premisesProvider.getPremises()));
 
 		// URI
 		final IEMFValueProperty uriProp = EMFEditProperties.value(ed,
 				TrackerPackage.Literals.PREMISES__URI);
 		l = toolkit.createLabel(sectionClient, "&Premises URI");
-		l.setToolTipText(
-				"The End user assigned Universal Resource Identifier (URI) for the Premises.");
+		l.setToolTipText("The End user assigned Universal Resource Identifier (URI) for the Premises.");
 		t = toolkit.createText(sectionClient, "");
 		t.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false, 1, 1));
-		ctx.bindValue(prop.observeDelayed(400, t), uriProp
-				.observe(premisesProvider.getPremises()));
+		ctx.bindValue(prop.observeDelayed(400, t),
+				uriProp.observe(premisesProvider.getPremises()));
 
 	}
 
@@ -212,8 +225,7 @@ public class PremisesFormPage extends FormPage implements IValueChangeListener{
 		toolkit.paintBordersFor(parent);
 		section.setClient(parent);
 		section.setText("Contacts");
-		section.setDescription(
-				"Contacts to obtain more information about the Premises.");
+		section.setDescription("Contacts to obtain more information about the Premises.");
 		section.marginWidth = 10;
 		section.marginHeight = 5;
 		toolkit.createCompositeSeparator(section);
@@ -234,7 +246,8 @@ public class PremisesFormPage extends FormPage implements IValueChangeListener{
 		section.setClient(sectionClient);
 		toolkit.paintBordersFor(sectionClient);
 
-		final EditingDomain ed = premisesProvider.getEditingDomain();
+		final EditingDomain ed = (AdapterFactoryEditingDomain) premisesProvider
+				.getEditingDomain();
 
 		// Administrator
 		final IEMFValueProperty adminProp = EMFEditProperties.value(ed,
@@ -243,8 +256,8 @@ public class PremisesFormPage extends FormPage implements IValueChangeListener{
 		l.setToolTipText("Administrator contact for premises");
 		Text t = toolkit.createText(sectionClient, "");
 		t.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false, 1, 1));
-		ctx.bindValue(prop.observeDelayed(400, t), adminProp
-				.observe(premisesProvider.getPremises()));
+		ctx.bindValue(prop.observeDelayed(400, t),
+				adminProp.observe(premisesProvider.getPremises()));
 
 		// Phone
 		final IEMFValueProperty teleProp = EMFEditProperties.value(ed,
@@ -253,8 +266,8 @@ public class PremisesFormPage extends FormPage implements IValueChangeListener{
 		l.setToolTipText("Telephone contact for premises");
 		t = toolkit.createText(sectionClient, "");
 		t.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false, 1, 1));
-		ctx.bindValue(prop.observeDelayed(400, t), teleProp
-				.observe(premisesProvider.getPremises()));
+		ctx.bindValue(prop.observeDelayed(400, t),
+				teleProp.observe(premisesProvider.getPremises()));
 
 		// EMail
 		final IEMFValueProperty emailProp = EMFEditProperties.value(ed,
@@ -263,14 +276,14 @@ public class PremisesFormPage extends FormPage implements IValueChangeListener{
 		l.setToolTipText("Email contact for premises");
 		t = toolkit.createText(sectionClient, "");
 		t.setLayoutData(new GridData(SWT.FILL, SWT.DEFAULT, true, false, 1, 1));
-		ctx.bindValue(prop.observeDelayed(400, t), emailProp
-				.observe(premisesProvider.getPremises()));
+		ctx.bindValue(prop.observeDelayed(400, t),
+				emailProp.observe(premisesProvider.getPremises()));
 
 	}
 
 	/**
-	 * Note: this is not immediately called when the application exits.  This causes
-	 * issues with handling events. See Ticket#579
+	 * Note: this is not immediately called when the application exits. This
+	 * causes issues with handling events. See Ticket#579
 	 */
 	@Override
 	public void dispose() {
@@ -323,15 +336,16 @@ public class PremisesFormPage extends FormPage implements IValueChangeListener{
 
 		aggregateStatus.addValueChangeListener(this);
 	}
-	
+
 	@Override
 	public void handleValueChange(ValueChangeEvent event) {
-		IStatus currentStatus =(IStatus) event.diff.getNewValue();
+		IStatus currentStatus = (IStatus) event.diff.getNewValue();
 		try {
 			managedForm.getMessageManager().removeAllMessages();
-			if (currentStatus != null && currentStatus.getSeverity() != IStatus.OK) {
-				for (Iterator<?> it = ctx.getValidationStatusProviders().iterator(); it
-						.hasNext();) {
+			if (currentStatus != null
+					&& currentStatus.getSeverity() != IStatus.OK) {
+				for (Iterator<?> it = ctx.getValidationStatusProviders()
+						.iterator(); it.hasNext();) {
 					final ValidationStatusProvider validationStatusProvider = (ValidationStatusProvider) it
 							.next();
 					final IStatus status = (IStatus) validationStatusProvider
@@ -339,29 +353,33 @@ public class PremisesFormPage extends FormPage implements IValueChangeListener{
 					SWTObservableValueDecorator dec = (SWTObservableValueDecorator) validationStatusProvider
 							.getTargets().get(0);
 					Control control = (Control) dec.getWidget();
-					if(control.isDisposed()){
+					if (control.isDisposed()) {
 						return;
 					}
 					if (!status.isOK()) {
-						managedForm.getMessageManager().addMessage("validation", // key
+						managedForm.getMessageManager().addMessage(
+								"validation", // key
 								status.getMessage(), // message
 								null,// data
 								IMessageProvider.ERROR, // int
 								control);// Control
 					} else {
-						managedForm.getMessageManager().removeMessage("validation", control);
+						managedForm.getMessageManager().removeMessage(
+								"validation", control);
 					}
 				}
 
 			}
 		} catch (SWTException e) {
-			//Ignore SWTException as these are caused by closing the application which nulls the 
-			//display before the dispose is called.  This throws a SWT Disposed even when the 
-			//Widget is not responding to isDisposed. This makes it hard to find out if the controls
-			//are disposed.  Punt and ignore SWT exceptions!
-			//See Ticket#579
-		} 
+			// Ignore SWTException as these are caused by closing the
+			// application which nulls the
+			// display before the dispose is called. This throws a SWT Disposed
+			// even when the
+			// Widget is not responding to isDisposed. This makes it hard to
+			// find out if the controls
+			// are disposed. Punt and ignore SWT exceptions!
+			// See Ticket#579
+		}
 	}
 
-	
 }
