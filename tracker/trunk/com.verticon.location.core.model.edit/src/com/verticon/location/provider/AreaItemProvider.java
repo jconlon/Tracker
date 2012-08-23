@@ -62,7 +62,7 @@ public class AreaItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
-			addBoundryPropertyDescriptor(object);
+			addBoundaryPropertyDescriptor(object);
 			addCommentsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -91,19 +91,19 @@ public class AreaItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Boundry feature.
+	 * This adds a property descriptor for the Boundary feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addBoundryPropertyDescriptor(Object object) {
+	protected void addBoundaryPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Area_boundry_feature"),
-				 getString("_UI_Area_boundry_description"),
-				 LocationPackage.Literals.AREA__BOUNDRY,
+				 getString("_UI_Area_boundary_feature"),
+				 getString("_UI_Area_boundary_description"),
+				 LocationPackage.Literals.AREA__BOUNDARY,
 				 true,
 				 false,
 				 false,
@@ -172,7 +172,7 @@ public class AreaItemProvider
 
 		switch (notification.getFeatureID(Area.class)) {
 			case LocationPackage.AREA__NAME:
-			case LocationPackage.AREA__BOUNDRY:
+			case LocationPackage.AREA__BOUNDARY:
 			case LocationPackage.AREA__COMMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

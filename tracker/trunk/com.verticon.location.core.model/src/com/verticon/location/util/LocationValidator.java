@@ -3,17 +3,19 @@
  */
 package com.verticon.location.util;
 
-import com.verticon.location.*;
-
 import java.util.Map;
 
+import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.EObjectValidator;
+
+import com.verticon.location.AltitudeMode;
+import com.verticon.location.Area;
+import com.verticon.location.Location;
+import com.verticon.location.LocationPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -97,6 +99,8 @@ public class LocationValidator extends EObjectValidator {
 				return validateAltitudeMode((AltitudeMode)value, diagnostics, context);
 			case LocationPackage.POINT_FORMAT_EXCEPTION:
 				return validatePointFormatException((IllegalArgumentException)value, diagnostics, context);
+			case LocationPackage.POLYGON:
+				return validatePolygon((String)value, diagnostics, context);
 			default:
 				return true;
 		}
@@ -131,49 +135,80 @@ public class LocationValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the ValidCoordinatesFormat constraint of '<em>Area</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Validates the ValidCoordinatesFormat constraint of '<em>Area</em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
-	public boolean validateArea_ValidCoordinatesFormat(Area area, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		String coordinates = area.getBoundry().trim();
-		String[] coords = coordinates.split(" ");
-		//There must be 3 or more coordinates
-		boolean isValid = coords.length>2;
-		if(isValid){
-			//All must be valid coordinates
-			for (String string : coords) {
-				if(!string.matches(COORDINATE_REGEX)){
-					isValid=false;
-					break;
-				}
-			}
-			if(isValid){
-				//The first and the last must be the same coordinates
-				String first = coords[0];
-				String last = coords[coords.length-1];
-				isValid = first.equals(last);
-			}
-		}
-		
-		
+	public boolean validateArea_ValidCoordinatesFormat(Area area,
+			DiagnosticChain diagnostics, Map<Object, Object> context) {
+		String polygon = area.getBoundary();
+		boolean isValid = validateCoordinatesLength(polygon);
 		if (!isValid) {
 			if (diagnostics != null) {
-				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "ValidCoordinatesFormat", getObjectLabel(area, context) },
-						 new Object[] { area },
-						 context));
+				diagnostics
+						.add(new BasicDiagnostic(
+								Diagnostic.ERROR,
+								DIAGNOSTIC_SOURCE,
+								0,
+								"Area coordinates are invalid for '"
+										+ getObjectLabel(area, context)
+										+ "': Number of text segments seperated by a space must be greater than 3.",
+								new Object[] { area }));
 			}
 			return false;
 		}
+
+		String errorMessage = validateCoordinateFormat(polygon);
+		if (errorMessage != null) {
+			if (diagnostics != null) {
+				diagnostics.add(
+						new BasicDiagnostic(
+								Diagnostic.ERROR,
+								DIAGNOSTIC_SOURCE,
+								0,
+								"Area coordinates are invalid for '"
+										+ getObjectLabel(area, context)
+										+ "': "+errorMessage,
+								new Object[] { area }));
+//						createDiagnostic(Diagnostic.ERROR,
+//						DIAGNOSTIC_SOURCE, 0,
+//						"_UI_GenericConstraint_diagnostic",
+//						new Object[] { "ValidCoordinatesFormat",
+//								getObjectLabel(area, context) },
+//						new Object[] { area }, context));
+			}
+			return false;
+		}
+
 		return true;
 	}
+	
+	public static boolean validateCoordinatesLength(String polygon){
+		String[] coords = polygon.split(" ");
+		
+		return coords.length>2;
+	}
+	
+	public static String validateCoordinateFormat(String polygon){
+		String[] coords = polygon.split(" ");
+
+		//All must be valid coordinates
+		for (String string : coords) {
+			if(!string.matches(COORDINATE_REGEX)){
+				return string+" is not a valid coordinate.";
+			}
+		}
+
+		//The first and the last must be the same coordinates
+		String first = coords[0];
+		String last = coords[coords.length-1];
+		if(!first.equals(last)){
+			return "the first and last coordinates are not equal.";
+		}
+		return null;
+	}
+	
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -190,6 +225,15 @@ public class LocationValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validatePointFormatException(IllegalArgumentException pointFormatException, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePolygon(String polygon, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

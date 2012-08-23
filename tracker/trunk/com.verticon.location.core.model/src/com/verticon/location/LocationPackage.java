@@ -223,13 +223,13 @@ public interface LocationPackage extends EPackage {
 	int AREA__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Boundry</b></em>' attribute.
+	 * The feature id for the '<em><b>Boundary</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AREA__BOUNDRY = 1;
+	int AREA__BOUNDARY = 1;
 
 	/**
 	 * The feature id for the '<em><b>Comments</b></em>' attribute.
@@ -268,6 +268,17 @@ public interface LocationPackage extends EPackage {
 	 * @generated
 	 */
 	int POINT_FORMAT_EXCEPTION = 3;
+
+
+	/**
+	 * The meta object id for the '<em>Polygon</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.String
+	 * @see com.verticon.location.impl.LocationPackageImpl#getPolygon()
+	 * @generated
+	 */
+	int POLYGON = 4;
 
 
 	/**
@@ -456,15 +467,15 @@ public interface LocationPackage extends EPackage {
 	EAttribute getArea_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.verticon.location.Area#getBoundry <em>Boundry</em>}'.
+	 * Returns the meta object for the attribute '{@link com.verticon.location.Area#getBoundary <em>Boundary</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Boundry</em>'.
-	 * @see com.verticon.location.Area#getBoundry()
+	 * @return the meta object for the attribute '<em>Boundary</em>'.
+	 * @see com.verticon.location.Area#getBoundary()
 	 * @see #getArea()
 	 * @generated
 	 */
-	EAttribute getArea_Boundry();
+	EAttribute getArea_Boundary();
 
 	/**
 	 * Returns the meta object for the attribute '{@link com.verticon.location.Area#getComments <em>Comments</em>}'.
@@ -497,6 +508,17 @@ public interface LocationPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getPointFormatException();
+
+	/**
+	 * Returns the meta object for data type '{@link java.lang.String <em>Polygon</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Polygon</em>'.
+	 * @see java.lang.String
+	 * @model instanceClass="java.lang.String"
+	 * @generated
+	 */
+	EDataType getPolygon();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -661,12 +683,12 @@ public interface LocationPackage extends EPackage {
 		EAttribute AREA__NAME = eINSTANCE.getArea_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Boundry</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Boundary</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute AREA__BOUNDRY = eINSTANCE.getArea_Boundry();
+		EAttribute AREA__BOUNDARY = eINSTANCE.getArea_Boundary();
 
 		/**
 		 * The meta object literal for the '<em><b>Comments</b></em>' attribute feature.
@@ -695,6 +717,16 @@ public interface LocationPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType POINT_FORMAT_EXCEPTION = eINSTANCE.getPointFormatException();
+
+		/**
+		 * The meta object literal for the '<em>Polygon</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.String
+		 * @see com.verticon.location.impl.LocationPackageImpl#getPolygon()
+		 * @generated
+		 */
+		EDataType POLYGON = eINSTANCE.getPolygon();
 
 	}
 

@@ -3,16 +3,19 @@
  */
 package com.verticon.location.impl;
 
-import com.verticon.location.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import com.verticon.location.AltitudeMode;
+import com.verticon.location.Area;
+import com.verticon.location.Location;
+import com.verticon.location.LocationFactory;
+import com.verticon.location.LocationPackage;
+import com.verticon.location.util.LocationValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -77,6 +80,8 @@ public class LocationFactoryImpl extends EFactoryImpl implements LocationFactory
 				return createAltitudeModeFromString(eDataType, initialValue);
 			case LocationPackage.POINT_FORMAT_EXCEPTION:
 				return createPointFormatExceptionFromString(eDataType, initialValue);
+			case LocationPackage.POLYGON:
+				return createPolygonFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -94,6 +99,8 @@ public class LocationFactoryImpl extends EFactoryImpl implements LocationFactory
 				return convertAltitudeModeToString(eDataType, instanceValue);
 			case LocationPackage.POINT_FORMAT_EXCEPTION:
 				return convertPointFormatExceptionToString(eDataType, instanceValue);
+			case LocationPackage.POLYGON:
+				return convertPolygonToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -154,6 +161,39 @@ public class LocationFactoryImpl extends EFactoryImpl implements LocationFactory
 	 * @generated
 	 */
 	public String convertPointFormatExceptionToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String createPolygonFromString(EDataType eDataType, String initialValue) {
+		if(initialValue == null) {
+			return null;
+		}
+		String polygon = initialValue.trim();
+		if(polygon.isEmpty()){
+			return null;
+		}
+		if(!LocationValidator.validateCoordinatesLength(polygon)){
+			throw new IllegalArgumentException("Number of text segments seperated by a space must be greater than 3: "+polygon);
+		}
+
+		String errorMessage = LocationValidator.validateCoordinateFormat(polygon);
+		if (errorMessage != null) {
+			throw new IllegalArgumentException(errorMessage);
+		}
+		return polygon;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertPolygonToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
