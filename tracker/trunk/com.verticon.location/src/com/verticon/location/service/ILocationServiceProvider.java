@@ -11,6 +11,8 @@
 package com.verticon.location.service;
 
 /**
+ * ILocationServiceProvider extends the ILocationService to allow
+ * the testing to determine if an object is supported by the ILocationService.
  * 
  * @author jconlon
  *

@@ -32,11 +32,10 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.progress.IProgressService;
+import org.eclipse.swt.widgets.Shell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -136,13 +135,23 @@ public final class LocationIndex implements ILocationServiceProvider {
 	@Override
 	public Set<String> locationsIn(String id) {
 		checkNotNull("The id attribute must not be null.", id);
+		logger.debug(bundleMarker,"Searching for locations in {}",id);
 		Set<String> result = newHashSet();
-		if (index.containsKey(id)) {
-			Location location = index.get(id);
-			result.add(location.getName());
-			for (Area area : location.getAreas()) {
-				result.add(area.getName());
+		
+		for (Entry<PremisesResource, Location> entry : index.entrySet()) {
+			if(entry.getKey().premisesUri.equals(id)){
+				Location location = entry.getValue();
+				result.add(location.getName());
+				for (Area area : location.getAreas()) {
+					result.add(area.getName());
+				}
+				logger.debug(bundleMarker,"Found {} location in {}",result.size(),id);
+				break;
 			}
+		}
+
+		if(result.isEmpty()){
+			logger.debug(bundleMarker,"Found no locations in {}",id);
 		}
 
 		return result;
@@ -166,21 +175,96 @@ public final class LocationIndex implements ILocationServiceProvider {
 		return false;
 	}
 
-	private void initialize() {
+	/**
+	 * This index is initialized by a user interface thread (for example the menu pull down on the SightingEvent 
+	 * 'Select Location in Premises') or by a non-ui background thread (for example as the result of a change to 
+	 * a resource in a AgricultureNature tagged project.
+	 * 
+	 * Determine the type of thread and call the appropriate initialization procedure.
+	 */
+	private void initialize(){
+		if(Display.getCurrent()!=null){
+			initializeInUIThread(Display.getCurrent().getActiveShell());
+		}else{
+			initializeInBackground();
+		}
+	}
+	
+	private void initializeInUIThread(Shell shell){
+	    try {
+	    	ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
+	    	dialog.run(true, true, new IRunnableWithProgress(){
+	    	    public void run(IProgressMonitor monitor) {
+	    	        monitor.beginTask("Initializing the GeoLocation cache", 100);
+	    	        // execute the task ..
+	    	        logger.info(bundleMarker, "Building");
+					buildAllAgricultureProjects(monitor);
+					state.set(State.INITIALIZED);
+	    	        monitor.done();
+	    	    }
+	    	});
+	     } catch (InvocationTargetException e) {
+	        // handle exception
+	     } catch (InterruptedException e) {
+	        // handle cancelation
+	     }
+	}
+	
+	private void initializeInBackground() {
+		logger.debug(bundleMarker, "Scheduling Job");
 		state.set(State.SCHEDULED);
 		Job job = new Job("Building Location Index") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				logger.info(bundleMarker, "Building");
-				buildAllAgricultureProjects();
+				buildAllAgricultureProjects(monitor);
 				state.set(State.INITIALIZED);
 				return Status.OK_STATUS;
 			}
 		};
-
 		// Start the Job
 		job.schedule();
-		
+	}
+	
+	private void buildAllAgricultureProjects(IProgressMonitor monitor) {
+		if (state.get()==State.INITIALIZED) {
+			return;
+		}
+		logger.info(bundleMarker, "Initializing project location indexing");
+		// Find all the natures and build them.
+		IWorkspace root = ResourcesPlugin.getWorkspace();
+		final IProject[] projects = root.getRoot().getProjects();
+		boolean foundAgricultureNatures = false;
+		for (IProject iProject : projects) {
+			if (!iProject.isAccessible()) {
+				continue;
+			}
+			try {
+				if (iProject
+						.hasNature(AgricultureNature.NATURE_ID)) {
+					foundAgricultureNatures = true;
+					logger.info(
+							bundleMarker,
+							"Building agriculture project {}",
+							iProject.getName());
+					iProject.build(
+							IncrementalProjectBuilder.FULL_BUILD,
+							monitor);
+					logger.debug(bundleMarker,
+							"Built agriculture project {}",
+							iProject.getName());
+				}
+			} catch (CoreException e) {
+				logger.error(bundleMarker,
+						"Failed to build project "
+								+ iProject.getName()
+								+ ".  " + e.getStatus(), e);
+			}
+		}
+		if (!foundAgricultureNatures) {
+			logger.debug(bundleMarker,
+					"Did not find any projects with an agriculture nature.");
+		}
 	}
 
 	void clean() {
@@ -240,6 +324,9 @@ public final class LocationIndex implements ILocationServiceProvider {
 			premisesResourceURI = premises.eResource().getURI();
 			premisesResource = new PremisesResource(agriResourceURI, premisesResourceURI, premises.getUri());
 			index.put(premisesResource, location);
+			logger.debug(bundleMarker,"Added premisesResource={}, premisesURI={}, location={}",
+					new Object[]{premisesResourceURI,premises.getUri(),location.getName()});
+			
 		}
 		
 		if(logger.isDebugEnabled()){
@@ -248,66 +335,6 @@ public final class LocationIndex implements ILocationServiceProvider {
 				logger.debug(bundleMarker,"Index Key={}, Location name={}",entry.getKey(), entry.getValue().getName());
 			}
 		}
-	}
-	
-
-
-	private void buildAllAgricultureProjects() {
-		if (state.get()==State.INITIALIZED) {
-			return;
-		}
-		logger.info(bundleMarker, "Initializing project location indexing");
-		// Find all the natures and build them.
-		IWorkspace root = ResourcesPlugin.getWorkspace();
-		final IProject[] projects = root.getRoot().getProjects();
-		IWorkbench wb = PlatformUI.getWorkbench();
-		final IProgressService ps = wb.getProgressService();
-		Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
-				try {
-					ps.busyCursorWhile(new IRunnableWithProgress() {
-						public void run(IProgressMonitor pm) {
-							boolean foundAgricultureNatures = false;
-							for (IProject iProject : projects) {
-								if (!iProject.isAccessible()) {
-									continue;
-								}
-								try {
-									if (iProject
-											.hasNature(AgricultureNature.NATURE_ID)) {
-										foundAgricultureNatures = true;
-										logger.info(
-												bundleMarker,
-												"Building agriculture project {}",
-												iProject.getName());
-										iProject.build(
-												IncrementalProjectBuilder.FULL_BUILD,
-												pm);
-										logger.debug(bundleMarker,
-												"Built agriculture project {}",
-												iProject.getName());
-									}
-								} catch (CoreException e) {
-									logger.error(bundleMarker,
-											"Failed to build project "
-													+ iProject.getName()
-													+ ".  " + e.getStatus(), e);
-								}
-							}
-							if (!foundAgricultureNatures) {
-								logger.debug(bundleMarker,
-										"Did not find any projects with an agriculture nature.");
-							}
-						}
-					});
-				} catch (InvocationTargetException e) {
-					logger.error(bundleMarker, "Failed to build projects", e);
-				} catch (InterruptedException e) {
-					logger.error(bundleMarker, "Failed to build projects", e);
-				}
-			}
-		});
-
 	}
 }
 
@@ -339,6 +366,61 @@ class PremisesResource {
 		this.agriResource = agriResource;
 		this.premisesResouce = premisesResouce;
 		this.premisesUri = premisesUri;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((agriResource == null) ? 0 : agriResource.hashCode());
+		result = prime * result
+				+ ((premisesResouce == null) ? 0 : premisesResouce.hashCode());
+		result = prime * result
+				+ ((premisesUri == null) ? 0 : premisesUri.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof PremisesResource)) {
+			return false;
+		}
+		PremisesResource other = (PremisesResource) obj;
+		if (agriResource == null) {
+			if (other.agriResource != null) {
+				return false;
+			}
+		} else if (!agriResource.equals(other.agriResource)) {
+			return false;
+		}
+		if (premisesResouce == null) {
+			if (other.premisesResouce != null) {
+				return false;
+			}
+		} else if (!premisesResouce.equals(other.premisesResouce)) {
+			return false;
+		}
+		if (premisesUri == null) {
+			if (other.premisesUri != null) {
+				return false;
+			}
+		} else if (!premisesUri.equals(other.premisesUri)) {
+			return false;
+		}
+		return true;
 	}
 	
 	

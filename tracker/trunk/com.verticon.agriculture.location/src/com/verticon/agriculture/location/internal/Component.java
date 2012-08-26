@@ -20,9 +20,14 @@ import org.slf4j.MarkerFactory;
 import com.verticon.location.service.ILocationServiceProvider;
 
 /**
- * ILocationServiceProvider for Animals and Premises created from all projects
- * having an AgriculutureNature and a doc.agri in the root folder.
+ * ILocationServiceProvider for the agriculture objects Animals and Premises.
+ * LocationService is based on Premises and Location information residing in Agriculture projects.
+ * (Agriculture projects have an AgriculutureNature and a doc.agri in the root folder)
  * 
+ * At the first request for service all Agriculture projects in the workspace are interrogated and 
+ * index of Premises and Location information is cached.
+ * 
+ * @see LocationIndex
  * @author jconlon
  * 
  */

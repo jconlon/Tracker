@@ -13,10 +13,10 @@ package com.verticon.location.service;
 import java.util.Set;
 
 /**
- * ILocationService for finding the names and addresses of target objects using:
+ * ILocationService is a Geolocation service for finding location names 
+ * and addresses of objects using:
  * <ol>
- * <li>references to the objects themselves,</li>
- * <li>object identifiers,</li>
+ * <li>object id references (typically URIs),</li>
  * <li>and object coordinates.</li>
  * 
  * @author jconlon
