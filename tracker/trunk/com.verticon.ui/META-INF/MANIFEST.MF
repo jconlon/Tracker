@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: User Interfaces Utils
+Bundle-Name: Common User Interfaces
 Bundle-SymbolicName: com.verticon.ui
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.verticon.ui.Activator
-Bundle-Vendor: Verticon
+Bundle-Vendor: Verticon, Inc.
 Require-Bundle: org.eclipse.core.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

@@ -1,19 +1,20 @@
-h1=. User Interface Tools
+h1=. Common User Interfaces
 
-com.verticon.location.core.model Version 0.1.0
+com.verticon.ui Version 0.1.0
 
 {toc:style=disc|minLevel=2|maxLevel=3}
 
 
 h2. Introduction
 
-User interface tools and utilities. 
+Common User Interfaces are common user interface (GUI) classes, tools and utilities used
+throughout the Tracker project. 
 
 
 
 h2. Powered by Eclipse Technology
 
-Verticon's Mongo Store offering is powered by Eclipse technology and includes Eclipse plug-ins that
+Verticon's Common User Interfaces offering is powered by Eclipse technology and includes Eclipse plug-ins that
 can be installed and used with other Eclipse-based offerings.
 	
 h2. License
