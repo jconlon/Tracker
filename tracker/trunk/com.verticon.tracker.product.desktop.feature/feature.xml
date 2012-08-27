@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.tracker.product.desktop"
-      label="%featureName"
-      version="0.6.0.qualifier"
-      provider-name="%providerName"
+      label="Tracker Desktop Toolkit"
+      version="0.6.1.qualifier"
+      provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.product.desktop">
 
    <description>

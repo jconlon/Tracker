@@ -14,11 +14,11 @@
 		<edition>
 			Tracker Business Intelligence Toolkit User Guide version 0.2.1
 		</edition>
-		<pubdate>May 9, 2011</pubdate>
+		<pubdate>September 7, 2012</pubdate>
 		<copyright>
-		    <year>2009</year>
-			<year>2010</year>
+		    <year>2010</year>
 			<year>2011</year>
+			<year>2012</year>
 			<holder>Verticon, Inc.</holder>
 		</copyright>
 
@@ -365,10 +365,14 @@
 			</para>
 			<para>
 				Tracker applications consolidate, structure and persist data to light weight
-				<ulink url="http://en.wikipedia.org/wiki/XMI">industry standard</ulink> document files. Using 
-				standard based document formats for data storage provides Tracker users significant 
+				<ulink url="http://en.wikipedia.org/wiki/XMI">industry standard</ulink> document files. 
+				Since files can be attached and sent via email or other file sharing technologies using 
+				standard based document files for data storage provides Tracker users significant 
 				benefits over storing data in heavy weight relational databases or proprietary document 
-				formats<footnote> 
+				formats.  If business requirements dictate the need for multi-user data storage or the storage of
+			    large volumes of premises data, the optional Tracker Store feature offers an easy to deploy,
+			    robust and highly scalable data storage solution. 
+				<footnote> 
 				<para>
 					Industry standard text based data documents offer greater mobility than database data storage 
 					and greater processing, tooling, analysis, reporting and collaborating
@@ -470,7 +474,8 @@
 				To create information useful to end users, Tracker data documents can be used as data 
 				sources to 
 				<ulink url="http://www.eclipse.org/birt/phoenix/intro/">Eclipse Business Intelligence Reporting Tool</ulink>
-				<acronym>(BIRT)</acronym> reports. 
+				<acronym>(BIRT)</acronym> reports.
+				<footnote><para>TrackerStore can also be used as a data source for BIRT reports.</para> </footnote>
 			</para>
 			
 			<para>
@@ -543,7 +548,7 @@
 			to a mediated collaboration service that offers publish and request services to Tracker clients.
 			<footnote>
 			 <para>
-			 One or more Collaboration Service Providers could be utilized by Tracker clients. Example administrators
+			 The TrackerStore is an example of such a service. One or more TrackerStore Collaboration Service Providers could be utilized by Tracker clients. Example administrators
 			 of these service providers could be industry associations or government auditing authorities.
 			 </para>
 			 </footnote>.
