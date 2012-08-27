@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.tracker.irouter.premises.common"
-      label="%featureName"
+      label="iRouter Premises Common Producers"
       version="0.1.0.qualifier"
-      provider-name="%providerName"
+      provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.irouter.premises.common">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+  <description>
+      %description
    </description>
 
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+   <copyright>
+      %copyright
    </copyright>
 
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %license
    </license>
 
    <url>
       <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
+      <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
 
    <plugin
