@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.location.service"
-      label="%featureName"
+      label="Geolocation Service"
       version="0.2.0.qualifier"
-      provider-name="%providerName"
+      provider-name="Verticon, Inc."
       plugin="com.verticon.location.service">
 
    <description>
@@ -19,6 +19,7 @@
    </license>
 
    <url>
+      <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
 
