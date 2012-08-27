@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.ui"
-      label="User Interface Tools and Utilities"
+      label="Common User Interfaces"
       version="0.1.0.qualifier"
       provider-name="Verticon, Inc."
       plugin="com.verticon.ui">
