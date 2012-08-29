@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.osgi.metatype.core.model.editor"
       label="%featureName"
-      version="0.2.2.qualifier"
+      version="0.2.3.qualifier"
       provider-name="%providerName"
       plugin="com.verticon.osgi.metatype.core.model.editor">
 

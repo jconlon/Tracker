@@ -2,5 +2,5 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Premises Gateway Documentation
 Bundle-SymbolicName: com.verticon.tracker.irouter.premises.gateway.doc;singleton:=true
-Bundle-Version: 0.1.2.qualifier
+Bundle-Version: 0.1.3.qualifier
 Bundle-Vendor: Verticon, Inc.

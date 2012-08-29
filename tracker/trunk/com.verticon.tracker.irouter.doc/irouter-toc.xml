@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8' ?>
-<toc topic="help/irouter.html" label="Tracker iRouter User Guide">
+<toc label="Tracker iRouter User Guide" link_to="../com.verticon.tracker.doc/toc.xml#tracker_irouter" topic="help/irouter.html">
 	<topic href="help/irouter.html" label="Overview">
 		<topic href="help/irouter.html#WhatistheTrackeriRouter" label="What is the Tracker iRouter?"></topic>
 		<topic href="help/irouter.html#Howdoesitwork" label="How does it work?">

@@ -5,4 +5,6 @@
 	status="Draft" xmlns:xi="http://www.w3.org/2001/XInclude">
 
 	<xi:include href="desktopProduct/desktopProduct.xml"/>
+    <xi:include href="editors/editors.xml"/>
+	<xi:include href="features/features.xml"/>
 </book>
