@@ -1,4 +1,5 @@
-<toc topic="help/index.html" label="Tracker iRouter User Guide">
+<toc label="Product Family" link_to="../com.verticon.tracker.doc/toc.xml#tracker_irouter" topic="help/index.html">
+<topic href="help/index.html" label="Tracker iRouter">
 <topic href="help/Overview.html" label="1. Overview">
 <topic href="help/Overview.html#DocumentStatus" label="Document Status"></topic>
 <topic href="help/InformationModelingandProcessing.html" label="Information Modeling and Processing">
@@ -107,4 +108,5 @@
 </topic>
 <topic href="help/PremisesGatewayFeature.html" label="11. Premises Gateway Feature"></topic>
 <topic href="help/glossary.html" label="A. Glossary"></topic>
+</topic>
 </toc>

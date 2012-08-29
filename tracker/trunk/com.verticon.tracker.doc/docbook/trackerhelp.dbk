@@ -11,9 +11,7 @@
 	<xi:include href="overview/usecases.xml"/>
 	<xi:include href="product/product.xml"/>
 	
-	<xi:include href="editors/editors.xml"/>
 	
-	<xi:include href="features/features.xml"/>
 	<xi:include href="appendix/fdl.xml"/>
 	<xi:include href="appendix/eclipseUserAgreement.xml"/>
 	<!--

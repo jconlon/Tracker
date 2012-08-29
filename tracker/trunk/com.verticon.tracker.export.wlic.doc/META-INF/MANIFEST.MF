@@ -2,5 +2,5 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tracker WLIC Export Documentation
 Bundle-SymbolicName: com.verticon.tracker.export.wlic.doc;singleton:=true
-Bundle-Version: 0.1.0
+Bundle-Version: 0.1.1.qualifier
 Bundle-Vendor: Verticon, Inc.
