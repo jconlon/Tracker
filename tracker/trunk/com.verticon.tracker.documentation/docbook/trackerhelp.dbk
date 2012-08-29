@@ -16,7 +16,7 @@
 	<!-- End products -->
 	
 	<!-- Editors -->
-	<xi:include href="../../com.verticon.tracker.doc/docbook/editors/editors.xml"/>
+	<xi:include href="../../com.verticon.tracker.product.desktop.doc/docbook/editors/editors.xml"/>
 	<!-- Add editors -->
 	<xi:include href="../../com.verticon.tracker.editor.doc/docbook/premisesEditor/premisesEditor.xml"/>
 	<xi:include href="../../com.verticon.osgi.metatype.doc/docbook/metatypeEditor/metatypeEditor.xml"/>
@@ -28,7 +28,7 @@
 	<!-- End editors -->
 	
 	<!-- Features -->
-	<xi:include href="../../com.verticon.tracker.doc/docbook/features/features.xml"/>
+	<xi:include href="../../com.verticon.tracker.product.desktop.doc/docbook/features/features.xml"/>
 	<!-- Add features -->
 	<xi:include href="../../com.verticon.tracker.export.wlic.doc/docbook/exportWLIC/exportWLIC.xml"/>
 	<xi:include href="../../com.verticon.tracker.fair.poi.documenation/docbook/fairPOI/fairPOI.xml"/>
