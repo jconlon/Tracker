@@ -15,10 +15,7 @@
       premises locations.</para>
       <para>The Agriculture Editor and Location Service is a suite of 
       tools that integrates state of the art Geographic Information 
-      System <acronym>GIS</acronym> technologies based on the 
-      <ulink url="http://www.opengeospatial.org/">
-      <citetitle>OpenGIS</citetitle></ulink> Key Hole Markup 
-      Language<acronym>KML</acronym> with Tracker Premises livestock 
+      System <acronym>GIS</acronym> technologies with Tracker Premises livestock 
       management information.</para>
     </section>
     <section id="overviewAgricultureEditorGoals">
