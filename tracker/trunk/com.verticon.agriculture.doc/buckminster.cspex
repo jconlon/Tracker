@@ -20,7 +20,7 @@
 	                <property key="buildFile" value="${buckminster.home}../com.verticon.tracker.documentation/make/build.xml"/>
 	            </actorProperties>
 	            <properties>
-	                <property key="topic.link_to" value="../com.verticon.tracker.doc/toc.xml#tracker_editor"/>
+	                <property key="topic.link_to" value="../com.verticon.tracker.product.desktop.doc/toc.xml#tracker_editor_agriculture"/>
 	             	<property key="topic.label" value="Editors"/>
 	            </properties>
 	            <prerequisites>
