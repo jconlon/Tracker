@@ -1049,12 +1049,17 @@ public class TrackerEditor
 				!(getEditingDomain().getResourceSet().getResources().get(0)).getContents().isEmpty()) {
 
 			createSelectionTreeViewer(getString("_UI_SelectionPage_label"));
-			createPremisesFormPage(getString("_UI_PremisesPage_label"));
-			createPolicyFormPage(getString("_UI_PolicyPage_label"));
-			CreateLocationSelectionListener createLocationSelectionListener = 
-					new CreateLocationSelectionListener((IPremisesProvider)getAdapter(IPremisesProvider.class)); 
-			createLocationFormPage(getString("_UI_LocationPage_label"),createLocationSelectionListener);
-			createAreasFormPage(getString("_UI_AreasPage_label"),createLocationSelectionListener);
+			
+			IPremisesProvider pp = (IPremisesProvider)getAdapter(IPremisesProvider.class);
+			if(pp!=null && pp.getPremises()!=null){
+
+				createPremisesFormPage(getString("_UI_PremisesPage_label"));
+				createPolicyFormPage(getString("_UI_PolicyPage_label"));
+				CreateLocationSelectionListener createLocationSelectionListener = 
+						new CreateLocationSelectionListener((IPremisesProvider)getAdapter(IPremisesProvider.class)); 
+				createLocationFormPage(getString("_UI_LocationPage_label"),createLocationSelectionListener);
+				createAreasFormPage(getString("_UI_AreasPage_label"),createLocationSelectionListener);
+			}
 			// createParentTreeViewer(getString("_UI_ParentPage_label"));
 			// createListViewer(getString("_UI_ListPage_label"));
 			// createTreeViewer(getString("_UI_TreePage_label"));
