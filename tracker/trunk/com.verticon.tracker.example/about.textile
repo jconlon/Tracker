@@ -1,6 +1,6 @@
 h1=. Example Farm
 
-com.verticon.tracker.example Version 0.1.2
+com.verticon.tracker.example Version 0.1.3
 
 **Contents**
 
@@ -8,7 +8,60 @@ com.verticon.tracker.example Version 0.1.2
 
 h2. Introduction [1]
 
-An example of a Tracker Farm Premises.  
+This project is an example of a typical Tracker Livestock project that uses Tracker model documents to record and manage animal identification, animal life data, animal event history, farm locations and contact information. 
+
+h2. Project Contents
+ 
+This project contains the following documents and files:
+
+
+h3. about.html
+
+This about file, in html format.
+
+
+h3. about.textile
+
+This about file in texttile format.
+
+h3. autotype.metatype
+
+An example of an iRouter configuration _metatype_ document. _Metatype_ documents are used in several places within the Tracker Toolkit.  This _metatype_ document is an example of an iRouter configuration that specifies the embedded *iRouter* infrastructure services to integrate premises data with external weighing devices and Tracker Store data storage facilities. Those just starting out or not using the iRouter product can ignore this file. For details on the iRouter, see the _iRouter User Guide Document_.
+
+h3. blood.gif
+
+An image file referenced by the **My.metatype** file to represent a custom event with an icon.
+
+h3. capture.tags
+
+A simple text file with a list of example animal id numbers used as input to the Tracker import TagId Utilities. Right menu click on the file to see the Import TagId actions. Tracker Import TagId utilities make it easy to import lists of TagIds into the _.premises_ documents.
+
+h3. doc.admin
+
+An example *Tracker Store* _Admin_ document for specifying users access and permissions. Those just starting out or not using the Tracker Store feature for archival or collaborative storage of premises data can ignore this file. For details on the Tracker Store, see the _Tracker Store feature in the Tracker Desktop BI Toolkit Documentation_.
+
+h3. doc.agri
+
+An example _Agriculture_ document used for identifying one or more _.premises_ documents as part of an _association_.  _.premises_ documents referenced in an _Agriculture Association_ can be used as input to the Tracker *Geolocatoin service* for identify animal locations for all _.premises_ documents throughout the workspace.  See the _Location Service_ documentation for more details.
+
+h3. doc.kml
+
+An example _Geography_ document used in GIS(Geographic Information Systems) and industry standard GeoBrowswers like Google Earth.  
+
+h3. example.premises
+
+An example _Premises_ document that contains example animals, animal life data, animal histories, premises details, location details, location areas and two custom events via a reference to the **My.metatype** document.  
+
+h3. My.metatype
+
+An example _Metatype_ document that specifies to custom events.  This document is referenced by the **example.premises** document to enable users to add these two custom events to animals included in the **example.premsies** document. 
+
+h3. Template.animal
+
+An example _Animal_ document used by Tracker import utilities and RFID reader services to add new Animals and events to a _.premises_ document.
+
+
+ 
 
 h2. Dependencies
 
@@ -62,7 +115,8 @@ To access browser based reports that are in the workspace or the file system, yo
 |"Animal Events":http://localhost:8080/viewer/frameset?__report=%2Fhome%2Fjconlon%2FWorkspaces%2Fruntime-Tracker%2Fcom.verticon.tracker.example%2Freports%2Fanimal_events.rptdesign&__format=html&__svg=false&__locale=en_US&__timezone=US%2FIndiana-Starke&__masterpage=true&__rtl=false&__cubememsize=10&__resourceFolder=%2Fopt%2FVerticon%2Fbirt_resources%2F&__dpi=96&-1662317431&rp_premises_doc=platform%3A%2Fresource%2Fcom.verticon.tracker.example%2Fexample.premises|Shows the events of all animals. Animal identification, types and a list of events. |
 |"Animal Locations":http://localhost:8080/viewer/frameset?__report=%2Fhome%2Fjconlon%2FWorkspaces%2Fruntime-Tracker%2Fcom.verticon.tracker.example%2Freports%2Fanimal_locations.rptdesign&__format=html&__svg=false&__locale=en_US&__timezone=US%2FIndiana-Starke&__masterpage=true&__rtl=false&__cubememsize=10&__resourceFolder=%2Fopt%2FVerticon%2Fbirt_resources%2F&__dpi=96&-1662317431&rp_premises_doc=platform%3A%2Fresource%2Fcom.verticon.tracker.example%2Fexample.premises|Shows the last known location of all animals. Animal identification, types, weights, and locations. |
 
-fn1. This document was created with the Wikitext textile editor.
+fn1. This document was created with the Wikitext textile editor. If you would like to edit this document or create documents
+with WikiText, see "Getting Started with WikiText":http://eclipse.dzone.com/articles/getting-started-wikitext
 
 fn2. To install the software go to the menu @Help | Install New Software | Tracker Release | BIRT | Tracker Premises Report Pack@
 
