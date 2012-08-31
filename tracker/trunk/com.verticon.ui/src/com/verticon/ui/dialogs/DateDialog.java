@@ -50,7 +50,7 @@ public class DateDialog extends TitleAreaDialog {
 		// Set the title
 		setTitle("Date and Time Picker");
 		// Set the message
-		setMessage("Please choose a date and and optional time",
+		setMessage("Please choose a date and an optional time",
 				IMessageProvider.INFORMATION);
 
 	}
