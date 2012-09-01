@@ -4,6 +4,7 @@
 <chapter>
 	<?dbhtml filename="premisesEditor/premisesEditor.html" ?>
 	<title>Premises Editor</title>
+	
     <section id="overview">
   	<?dbhtml filename="overview/premisesEditorOverview.html" ?>
 	<title>Overview</title>
@@ -23,20 +24,20 @@
 			<orderedlist numeration="loweralpha">
 				<listitem>
 					<para>
-						A useful documentation tool for livestock producers and
-						infrastructure providers;
+						A simple to use editor for creating premises, animal and event history 
+						documentation for livestock producers and infrastructure providers;
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						A low cost documentation solution for deployment to both large and
+						A low cost, yet extensible documentation solution to meet the needs of both large and
 						small scale livestock operations;
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						An industry standard format for livestock event history
-						inter-exchange.
+						An industry standard document format for livestock premises information,
+						animal life data and animal event history inter-exchange.
 					</para>
 				</listitem>
 
@@ -48,32 +49,31 @@
 	     <?dbhtml filename="overview/premisesEditorOverview_functionalDescription.html" ?>
 		<title>Functional Overview</title>
 		<para>
-			The Premises Editor is used to document animal event histories for farm animal
-			producers and/or livestock infrastructure providers. Premises details, 
-			animals and event histories are created, edited, manipulated, and persisted 
-			as Premises documents.
+			The Premises Editor is a tool to create and edit Tracker Premises document. Premises documents
+			specify Premises details, animal life data and animal event histories.
 		</para>
 		
 		<para>
-			Animals and Events are added to Tracker Premises Documents;
+			Premises details are manually added to premises documents by the user, but Animal life data
+			 and Event histories can be added to Tracker Premises Documents;
 			<orderedlist numeration="loweralpha">
 				<listitem>
 					<para>
-						Individually by the user via the Premise Document Editor, Premises Views, and the
-						Properties Viewer;
+						As individual animals by the user of the Premise Editor, using either the form based
+						Premises Views or with the generic Properties Viewer;
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						In bulk, by the user, through Tracker's Bulk Event Processing Utilities;
+						In bulk, by importing lists of animals, through Tracker's Bulk Event Processing Utilities;
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						In real time, from tag ID readers, through the Tracker Readers Feature
+						In real time, from tag ID readers, through the Tracker Readers Feature.
 					</para>
 					<para>
-					    See <link linkend="editingPremisesDocuments">Editing Premises Documents</link> for details on
+					    See the following section <link linkend="editingPremisesDocuments">Editing Premises Documents</link> for details on
 					    Tracker Readers Feature and Premises document editing.
 					</para>
 				</listitem>
@@ -87,436 +87,87 @@
 		</para></note>
 		</section>
 	</section>
- 
-    <section id="useCase">
-      <?dbhtml filename="usecase/premisesEditorModel_useCase.html" ?>
-		<title>Premises Editor Use Cases</title>
-		<para>
-		To best depict what the Premises Editor can do for Tracker users the following 
-		section presents a series of <emphasis>Use-Case</emphasis> diagrams.  
-		<xref linkend="fig_CoreUseCases" /> shows core usage requirements for the Premises 
-		Editor. 
-		</para>
-		<figure id="fig_CoreUseCases">
-			<title>Premises Editor Overview</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata align="center" fileref="../images/useCases/core.png" />
-				</imageobject>
-			</mediaobject>
-		</figure>
-	
-	    <para>
-		  Once the Tracker <acronym>BI</acronym> Toolkit and the Premises Editor Feature are installed setup takes less than a minute.
-		  Administration use-cases are shown in
-		<xref linkend="fig_setUpUseCases" />. 
-		</para>
-	    
-	    <figure id="fig_setUpUseCases">
-			<title>Setting Up the Premises Editor</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata align="center" fileref="../images/useCases/setup.png" />
-				</imageobject>
-			</mediaobject>
-		</figure>
-		
-		<para>
-		  Updating document use-cases are shown in
-		<xref linkend="fig_updateUseCases" />. 
-		</para>
-		<figure id="fig_updateUseCases">
-			<title>Updating Documents</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata align="center" fileref="../images/useCases/update.png" />
-				</imageobject>
-			</mediaobject>
-		</figure>
-		
-		<para>
-		  Tracker Operators may need to work with large Premises documents. Providing Tracker Operators
-		  with the tools to navigate around these large documents has been a major design goal of the 
-		  Premises Editor. Navigation use-cases are shown in
-		<xref linkend="fig_navigateUseCases" />. 
-		</para>
-		<figure id="fig_navigateUseCases">
-			<title>Navigating in the Editor</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata align="center" fileref="../images/useCases/navigate.png" />
-				</imageobject>
-			</mediaobject>
-		</figure>
-		
-		
-		<para>
-		  As shown in previous use-cases Premises Documents can be created and updated by human operators
-		  Premises Editor.  To improve efficiency new animals and events can also be added to Premises 
-		  Documents by using external tag ID readers connected to the Tracker via data 
-		  communications channels.  This is shown in
-		<xref linkend="fig_connectedReadersUseCases" />. 
-		</para>
-		<figure id="fig_connectedReadersUseCases">
-			<title>Working with Connected Readers</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata align="center" fileref="../images/useCases/readers.png" />
-				</imageobject>
-			</mediaobject>
-		</figure>
-    </section>
-    
-	<section id="premisesDocuments">
-		<?dbhtml filename="model/premisesEditorModel_premisesDocuments.html" ?>
-		<title>Premises Documents</title>
-		<para>Whether it is word processing documents, spreadsheet documents, or presentation 
-			documents, today's computer users are most familiar with software applications that 
-			create and manipulate documents that describe specific instances of information.</para>
-		<para>The Premises Editor enables users to create, transform and edit Livestock 
-			Premises documents that represent Animal Premises. The attributes of the premises, 
-			the animals in the premises and the events associated with these animals are specified in 
-			Premises documents.</para>
-		<para>Premises document files utilize a .premises file extension to distinguish them 
-		from other types of files.</para>
-	</section>
-	
-	<section id="premisesDataModel">
-	<?dbhtml filename="model/premisesEditorModel_dataModel.html" ?>
-	<title>Premises Data Model</title>
-	<para>
-		Because all user activity centers around the creation and manipulation
-		of
-		<emphasis>Premises Documents</emphasis>, understanding the structure 
-		(called the <glossterm>data model</glossterm>) 
-		of Premises documents is the easiest way to learn to use the information management facilities of
-		the Premises Editor.
-	</para>
-	<section id="premisesDataModel_corePremisesElements">
-	    <?dbhtml filename="model/premisesEditorModel_dataModel_core.html" ?>
-		<title>Data Model Core Elements</title>
-	<para>
-		All Premises documents structurally conform to the
-		<emphasis>Premises Data Model</emphasis>. In the Premises Data Model,
-		a single Premises contains zero or more animals. Each Animal must have at 
-		least one but may have more than one (identification) tag. Each Tag must 
-		have at least one but may have more than one associated event.
-	</para>
-	<para>
-		Core elements of the Premises Data Model are shown in
-		<xref linkend="fig_coreDataModel1" />.
-	</para>
-	<figure id="fig_coreDataModel1">
-		<title>Premises Data Model Core Elements</title>
-		<mediaobject>
-			<imageobject>
-				<imagedata align="center" fileref="../images/model/coreDataModel3.png" />
-			</imageobject>
-		</mediaobject>
-	</figure>
-		
-		<para>
-			<orderedlist numeration="loweralpha">
-				<listitem>
-					<para>The core elements of the Premises Model are depicted as rectangles in the figure.</para>
-				</listitem>
-				<listitem>
-					<para>The notation within the elements are the attributes of the element.</para>
-				</listitem>
-				<listitem>
-					<para>The notation between the elements are the relationships of the elements.</para>
-				</listitem>
-			</orderedlist>
-		</para>
-		<para>The following table offers a text explanation of the primary element relationships.<table frame='all'>
-				<title>Core Elements of the Premises Model</title>
-				<tgroup cols='2' align='left' colsep='1' rowsep='1'>
-					<colspec colname='c1' />
-					<colspec colname='c2' />
-					<thead>
-						<row>
-							<entry>Element Name</entry>
-							<entry>
-								Relationship to other Elements
-							</entry>
-						</row>
-					</thead>
-					<tbody>
-						<row>
-							<entry>Premises</entry>
-							<entry>
-								There is one premises element in a Tracker document.
-							</entry>
 
-						</row>
-						<row>
-							<entry>Location</entry>
-							<entry>
-								A premises can have zero or one location to specify address and geolocation details.
-							</entry>
-						</row>
-						<row>
-							<entry>Area</entry>
-							<entry>
-								A locaton can have zero or more areas to specify sublocation boundries.
-							</entry>
-						</row>
-						<row>
-							<entry>Animal</entry>
-							<entry>
-								A premises can have zero or many animals.
-							</entry>
-						</row>
-						<row>
-							<entry>Tag (assigned)</entry>
-							<entry>
-								An Animal can have one or many tags.
-							</entry>
-						</row>
-						<row>
-							<entry>Tag (unassigned)</entry>
-							<entry>A Premises can have zero or many tags that are unassigned.</entry>
-						</row>
-						<row>
-							<entry>Event</entry>
-							<entry>
-								A Tag can have one or many events.
-							</entry>
-						</row>
-						<row>
-							<entry>Policy (not shown)</entry>
-							<entry>
-								A Premises can have zero or one Policy for restricting the premises to specific animal species and event types. 
-							</entry>
-						</row>
-					</tbody>
-				</tgroup>
-			</table>
-
-		</para>
-	</section>
-	
-	<section id="premisesDataModel_corePremisesAnimals">
-	<?dbhtml filename="model/premisesEditorModel_dataModel_animals.html" ?>
-	<title>Data Model Animal Elements</title>
-	<para>The Premises Data Model supports multiple Animal types as shown in 
-		<xref linkend="fig_coreDataModelAnimals" />
-				
-	   </para>
-	   <figure id="fig_coreDataModelAnimals">
-		<title>Premises Data Model Animal Elements</title>
-		<mediaobject>
-			<imageobject>
-				<imagedata align="center" fileref="../images/model/dataModelAnimals.png" />
-			</imageobject>
-		</mediaobject>
-	</figure>
-	</section>
-	
-	<section id="premisesDataModel_corePremisesEvents">
-	<?dbhtml filename="model/premisesEditorModel_dataModel_events.html" ?>
-	<title>Data Model Event Elements</title>
-	<para>The Premises Data Model supports multiple Event types as shown in 
-	 <xref linkend="fig_coreDataModelEvents1" /> and <xref linkend="fig_coreDataModelEvents2" />.	
-	</para>
-	 <figure id="fig_coreDataModelEvents1">
-		<title>Premises Data Model Event Elements (part 1)</title>
-		<mediaobject>
-			<imageobject>
-				<imagedata align="center" fileref="../images/model/dataModelEvents1.png" />
-			</imageobject>
-		</mediaobject>
-	</figure>
-	
-	 <figure id="fig_coreDataModelEvents2">
-		<title>Premises Data Model Event Elements (part 2)</title>
-		<mediaobject>
-			<imageobject>
-				<imagedata align="center" fileref="../images/model/dataModelEvents2.png" />
-			</imageobject>
-		</mediaobject>
-	 </figure>
-	</section>
-	
-	</section>
-	
-	<section id="genericEvents">
-	<?dbhtml filename="genericEvents/genericEvents.html" ?>
-		<title>Custom Events</title>
-		<para>The Premises Editor ships with predefined event types that are suitable for documenting most livestock histories. 
-		If the predifined event types are not sufficient, the Premises Editor utilizes the <emphasis>Metatype Editor Feature</emphasis>
-		and the Metatype documents it creates to define custom event types.
-		</para>
-		
-		
-	<section id="genericEvents_creatingCustomEvents"> 
-	<?dbhtml filename="genericEvents/genericEvents_creatingCustomEvents.html" ?>
-		<title>Creating Custom Events</title>
-		
-		<para>To define one or more custom events: 
-		<itemizedlist>
-		<listitem><para>
-		Create a Metatype document using the <code>New Metatype Document Wizard</code>
-		</para></listitem>
-		<listitem><para>
-		For every custom event define an <emphasis>Object Class Definition</emphasis>, <code>OCD</code>  element; 
-		and in the <emphasis>Properties view</emphasis> specify it's properties as:
-			<itemizedlist>
-				<listitem><para>
-					<code>Description</code> - an optional description of the custom event
-				</para></listitem>
-				<listitem><para>
-					<code>ID</code> - a unique string identifying the event within the document 
-				</para></listitem>
-				<listitem><para>
-					<code>Name</code> - a user recognizable name for the event
-				</para></listitem>
-				
-			</itemizedlist>
-		</para></listitem>
-		<listitem><para>
-		Within each <code>OCD</code> create one or more child <emphasis>Attribute Definition</emphasis>, <code>AD</code> 
-		elements to define the attributes of the custom event. These attributes will be displayed in the editor as properties 
-		of the event.
-		</para></listitem>
-		<listitem><para>
-		Within each <code>AD</code> child element specify the properties:
-			<itemizedlist>
-				<listitem><para>
-					<code>Cardinality</code>, an optional property that specifies the number of values contained in this attribute.
-					 The default is <code>0</code>.
-				</para></listitem>
-				<listitem>
-				    <para>
-					<code>Data Type</code>, a required property that specifies what type of property value is valid for
-					the attribute.  A pull down list will show the options: <code>String</code>, <code>Long</code>,
-					<code>Integer</code>, <code>Short</code>, <code>Char</code>, 
-					<code>Byte</code>, <code>Double</code>, <code>Float</code> and <code>Boolean</code>
-				    </para>
-				    <para>When working with custom events in premises documents only values appropriate to the specified data type
-				    will be considered valid.  For example a custom event with a data type of <code>Boolean</code> will 
-				    only accept <emphasis>true</emphasis> and <emphasis>false</emphasis> as valid values.</para>
-				</listitem>
-				<listitem><para>
-					<code>Default</code>, is the default value for this attribute. This default value(s) must be appropriate for  
-					the cardinality and data type defined above.
-				</para></listitem>
-				<listitem><para>
-					<code>Description</code>, an optional description of the attribute.  This will be shown in the message panel when
-					the user interface is focused on this attribute. 
-				</para></listitem>
-				<listitem><para>
-					<code>ID</code>, document wide identification string for this attribute.
-				</para></listitem>
-				<listitem><para>
-					<code>Max</code>, maximuim value for this attribute.
-				</para></listitem>
-				<listitem><para>
-					<code>Min</code>, minimum value for this attribute.
-				</para></listitem>
-				<listitem><para>
-					<code>Name</code>, user recognizable name for this attribute.
-				</para></listitem>
-				<listitem><para>
-					<code>Required</code>, whether this attribute must be given a value by the user for the event to be considered valid.
-				</para></listitem>
-				
-				</itemizedlist>
-			</para>
-		</listitem>
-		<listitem><para>
-		Within each <code>OCD</code> optionally create a child <code>Icon</code> 
-		element to associate an image with the event.
-		</para></listitem>
-		</itemizedlist>
-		</para>
-		
-		<para>See <xref linkend="fig_genericEvents_create"/> for an screen shot showing a Metatype document that 
-		defines two custom events.</para>
-		
-		<figure id="fig_genericEvents_create">
-			<title>Defining Custom Events</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata align="center" fileref="../images/genericEvents/definingCustomEvents.png" />
-				</imageobject>
-			</mediaobject>
-		</figure>
-		
-	</section>
-		
-	<section id="usingCustomEvents">
-	<?dbhtml filename="genericEvents/genericEvents_usingCustomEvents.html" ?>
-		<title>Using Custom Events in Premises Documents</title>
+   <section id="creatingPremisesDocuments">
+    	<?dbhtml filename="creatingPremisesDocuments/creatingPremisesDocuments.html" ?>
+		<title>Creating Premises Documents</title>
 		<para>
-		To use custom events in Premises documents, the Metatype document that defines the custom events must first be loaded 
-		as a resource.  To load a resource into a Premises document place the mouse cursor on the root element in the Premises document, right click, 
-		and from the pull down menu choose <code>Load Resorce...</code>
+			This section will walk you through a few simple steps for the creation of an example Premises document. 
+		</para>
+		<para>
+			If you haven't done so, create a project first. From the 'File' menu select 'New'
+			and 'Project' and give it the name 'test'.
+		</para>
+
+			<figure id="fig_newProject">
+				<title>Create a new Project</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../images/gettingStarted/chooseProject.png" />
+						</imageobject>
+						</mediaobject>
+			</figure>
+
+		<para>
+			Creation of new project artifacts like files and documents follow the same pattern as the creation of 
+			the project. From the 'File' menu select 'New' then select 'Premises Document'.  Take the default 
+			name for the document and place it under the project folder named 'test'.
+			<xref linkend="fig_newPremisesDocument" /> shows the screens for creating a Premises document.
+		</para>
+
+		<figure id="fig_newPremisesDocument">
+				<title>Create a new Premises Document</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../images/gettingStarted/createPremises.png" />
+						</imageobject>
+						</mediaobject>
+		</figure>
+		<para>
+			Your workspace should now look something like 
+			<xref linkend="fig_createdPremisesDocument" />.  If you don't see the Properties View in lower
+			part of the desktop, select the Premises element, right click, and from the popup menu select
+			the last entry 'Show Properties View'.
+		</para>
+
+		<figure id="fig_createdPremisesDocument">
+				<title>A new Premises Document</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../images/gettingStarted/createdPremises.png" />
+						</imageobject>
+						</mediaobject>
+		</figure>
+		
+		<para>
+			The 'Properties View' is a generic editor for all document elements<footnote><para>
+			Any Tracker document element once selected, can be edited with the 'Properties View'.</para></footnote>.  
+			You can use it to add, delete or replace element attributes.  To edit an elements properties in 
+			the 'Properties View', select it first in an editors 'Selection' window.
 		</para>
 		
-		<figure id="fig_loadMetatypeCustomEventsResource">
-			<title>Load Resource Dialog</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata align="center"
-						fileref="../images/genericEvents/loadResource.png" />
-				</imageobject>
-			</mediaobject>
+		<para>
+			In addition to the main 'Selection' editor, the Premises editor offers three form editors
+		    to edit Premises, Policy, Location, and Area elements and their attributes. 
+		    <xref linkend="fig_GettingStartedEditingPremisesElement" /> shows the 'Premises' form editor in 
+		    contrast with the generic 'Properties View'<footnote><para>Either the form editors or the 'Properties View'
+		    may be used for editing.</para></footnote>.
+		</para>
+		<figure id="fig_GettingStartedEditingPremisesElement">
+				<title>Premises Form Editor</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../images/gettingStarted/editingPremises.png" />
+						</imageobject>
+						</mediaobject>
 		</figure>
-		
-		<para>From the <xref linkend="fig_loadMetatypeCustomEventsResource"/> choose the Metatype document that defines the 
-		custom events and press <code>OK</code>.</para>
-		
-		<para>See <xref linkend="fig_loadedMetatypeCustomEventsResource"/>.</para>
-		
-		<figure id="fig_loadedMetatypeCustomEventsResource">
-			<title>Premises Document Loaded with a Metatype Resource</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata align="center"
-						fileref="../images/genericEvents/loadedResources.png" />
-				</imageobject>
-			</mediaobject>
-		</figure>
-		
-		<para>When a Premises document is loaded with a Metatype resource, all the custom events from the Metatype document 
-		are available for adding to the animal histories of the Premises Document. The Premises Editor user interfaces will also treat
-	    the Metatype documents custom events just like predifined events.</para>
-	    <para>See <xref linkend="fig_customEventsPickList"/>,
-	    <xref linkend="fig_customEventsWizard"/>, and <xref linkend="fig_customEventsView"/>.</para>
-		
-		<figure id="fig_customEventsPickList">
-			<title>Adding an Event in the Premises Editor</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata align="center"
-						fileref="../images/genericEvents/pickList.png" />
-				</imageobject>
-			</mediaobject>
-		</figure>
-			
-		<figure id="fig_customEventsWizard">
-			<title>Adding and Event in the Event View</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata align="center"
-						fileref="../images/genericEvents/addingAnEventWizard.png" />
-				</imageobject>
-			</mediaobject>
-	   </figure>
 	   
-	   <figure id="fig_customEventsView">
-			<title>Modifying Attributes in the Events View</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata align="center"
-						fileref="../images/genericEvents/eventsView.png" />
-				</imageobject>
-			</mediaobject>
-	   </figure>
-		
 	</section>
-	</section>
+	
 	<section id="editingPremisesDocuments">
     	<?dbhtml filename="editingPremisesDocuments/editingPremisesDocuments.html" ?>
 		<title>Editing Premises Documents</title>
@@ -524,8 +175,10 @@
 			<title>Two Types of Editor</title>
 			<para>
 			Two types of editors are used to manipulate Premises and Animal
-			Documents, Premises Editor and Premises Transaction Editor as shown in
-			<xref linkend="fig_choosePremisesEditor" />.
+			Documents<footnote><para>Premises and Animal documents
+			created or edited in one editor type can later be opened and edited with 
+			the other.</para></footnote>, Premises Editor and Premises Transaction Editor as shown in
+			<xref linkend="fig_choosePremisesEditor" />.   
 			</para>
 
 		<figure id="fig_choosePremisesEditor">
@@ -537,18 +190,26 @@
 				</imageobject>
 			</mediaobject>
 		</figure>
-
+		
 		<para>
 			<orderedlist numeration="loweralpha">
 				<listitem>
-					<para>The Premises Editor is used for creating,
-						manipulating, navigating and interpreting Premises and Animal
-						Documents.</para>
+					<para>The Premises Editor is the default editor.  It is the editor
+						that is opened when a document is created.  The Premises Editor
+						is used for creating, manipulating, navigating and interpreting 
+						Premises and Animal Documents when there is no requirement for 
+						interfacing with external devices.<footnote>
+						<para>The Premises Editor also provides user friendly forms based 
+						editors for editing Premises, Policy, Location,
+						and Area elements and attributes.  These form based editors are not
+						supported in the Premises Transaction Editor. So with the Premises 
+						Transaction Editor the Properties View will have to be used to edit these
+						elements and their attributes.</para></footnote></para>
 				</listitem>
 				<listitem>
 					<para>The Premises Transaction Editor can be used in a similar way to 
 					the Premises Editor, but it has additional functionality to support 
-				    the Readers Feature.
+				    the interfacing with external devices like RFID tag readers.
 					<note><title>Reader Feature</title>
 					<para>The Readers Feature is an optional Feature that may be installed 
 					(called <glossterm>provisioned</glossterm>) by the user. The Readers Feature
@@ -560,7 +221,6 @@
 				</listitem>
 			</orderedlist>
 		</para>
-
 
 		<note>
 			<para>
@@ -622,6 +282,24 @@
 		<section id="editingPremisesDocuments_enteringDateTime">
 			<?dbhtml filename="editingPremisesDocuments/editingPremisesDocuments_enteringDateTime.html" ?>
 			<title>Entering Date and Time</title>
+			
+			<para>
+			When using the forms based editors to change date times, clicking on the text entry field of an attribute
+			that is a DateTime should bring up a 'Date Time Picker' dialog.  <xref linkend="fig_dateTimePickerDialog" /> 
+			shows the Date Picker Dialog that was visualized after the user clicked on the Animal Birth Date text 
+			field in the details pane<footnote><para>The next section discusses Master Details Views.</para></footnote> 
+			of the Animals View.
+		</para>
+
+		<figure id="fig_dateTimePickerDialog">
+				<title>Date and Time Picker Dialog</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../images/masterDetail/animalBirthDate.png" />
+					</imageobject>
+				</mediaobject>
+		</figure>
 			<para>When manually entering Dates<footnote >
 				<para>The Animal BirthDate value is the only Date value that can be set to null by entering the text <userinput>0-0-0</userinput> 
 				in the Properties view or the Animals view. </para>
@@ -711,8 +389,9 @@
                 </mediaobject>
         </figure>
 		
-		<para>Elements displayed in the master table can be filtered as shown in <xref 
-		linkend="fig_animalsView-filtered"/>. 
+		<para>Elements displayed in the master table can be filtered by entering characters in the text 
+		field and the attribute selection control.  <xref linkend="fig_animalsView-filtered"/> shows the 
+		list of Animals filtered to display only Male animals. 
 	    </para>
 	    
 	    <figure id="fig_animalsView-filtered">
@@ -726,9 +405,9 @@
                 </mediaobject>
         </figure>
         
-		<para>Attributes displayed in the detailed form can be filtered to show only basic
-		attributes as shown in <xref 
-		linkend="fig_animalsView-basicProperties"/>. 
+		<para>Using the fourth button in the view menu, attributes displayed in the detailed form can be 
+		filtered to show only basic attributes. <xref linkend="fig_animalsView-basicProperties"/> shows the
+		effect of deselecting the 'Show Advanced Properties' button. 
 	    </para>
 	    
 	    <figure id="fig_animalsView-basicProperties">
@@ -786,9 +465,7 @@
         </figure>
 		</section>
 	</section>
-		
-	
-	
+			
 	<section id="chBulkEventProcessing">
 	 <?dbhtml filename="bulkProcessing/premisesBulkEventProcessing.html" ?>
 	<title>Bulk Event Processing</title>
@@ -1048,6 +725,448 @@
 		</section>
 	</section>
 	</section>
+    
+	<section id="premisesDocuments">
+		<?dbhtml filename="model/premisesEditorModel_premisesDocuments.html" ?>
+		<title>Premises Documents</title>
+		<para>Whether it is word processing documents, spreadsheet documents, or presentation 
+			documents, today's computer users are most familiar with software applications that 
+			create and manipulate documents that describe specific instances of information.</para>
+		<para>The Premises Editor enables users to create, transform and edit Livestock 
+			Premises documents that represent Animal Premises. The attributes of the premises, 
+			the animals in the premises and the events associated with these animals are specified in 
+			Premises documents.</para>
+		<para>Premises document files utilize a .premises file extension to distinguish them 
+		from other types of files.</para>
+	</section>
+	
+	<section id="premisesDataModel">
+	<?dbhtml filename="model/premisesEditorModel_dataModel.html" ?>
+	<title>Premises Data Model</title>
+	<para>
+		Because all user activity centers around the creation and manipulation
+		of
+		<emphasis>Premises Documents</emphasis>, understanding the structure 
+		(called the <glossterm>data model</glossterm>) 
+		of Premises documents is the easiest way to learn to use the information management facilities of
+		the Premises Editor.
+	</para>
+	<section id="premisesDataModel_corePremisesElements">
+	    <?dbhtml filename="model/premisesEditorModel_dataModel_core.html" ?>
+		<title>Data Model Core Elements</title>
+	<para>
+		All Premises documents structurally conform to the
+		<emphasis>Premises Data Model</emphasis>. In the Premises Data Model,
+		a single Premises contains zero or more animals. Each Animal must have at 
+		least one but may have more than one (identification) tag. Each Tag must 
+		have at least one but may have more than one associated event.
+	</para>
+	<para>
+		Core elements of the Premises Data Model are shown in
+		<xref linkend="fig_coreDataModel1" />.
+	</para>
+	<figure id="fig_coreDataModel1">
+		<title>Premises Data Model Core Elements</title>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="../images/model/coreDataModel3.png" />
+			</imageobject>
+		</mediaobject>
+	</figure>
+		
+		<para>
+			<orderedlist numeration="loweralpha">
+				<listitem>
+					<para>The core elements of the Premises Model are depicted as rectangles in the figure.</para>
+				</listitem>
+				<listitem>
+					<para>The notation within the elements are the attributes of the element.</para>
+				</listitem>
+				<listitem>
+					<para>The notation between the elements are the relationships of the elements.</para>
+				</listitem>
+			</orderedlist>
+		</para>
+		<para>The following table offers a text explanation of the primary element relationships.<table frame='all'>
+				<title>Core Elements of the Premises Model</title>
+				<tgroup cols='2' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<thead>
+						<row>
+							<entry>Element Name</entry>
+							<entry>
+								Relationship to other Elements
+							</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>Premises</entry>
+							<entry>
+								There is one premises element in a Tracker document. It is consider the root of the 
+								Premises document.  All other elements are children elements of the Premises element.
+								The Premises Editor tab 'Premises' provides a form for editing the attributes of the 
+								Premise element.
+							</entry>
+						</row>
+						<row>
+							<entry>Location</entry>
+							<entry>
+								A premises can have an optional Location element to specify address and geolocation details. 
+								The Premises Editor tab 'Location' provides a form for editing the attributes of the 'Location'
+								element.
+							</entry>
+						</row>
+						<row>
+							<entry>Area</entry>
+							<entry>
+								A 'Locaton' element can have zero or more optional 'Area' elements to specify sublocation boundries.
+								Areas specify locations within the Premises. Specifying areas in a premises allow animals with
+								'Sighting' and 'Position' events to be located and traced as they move within the premises. 
+								The Premises Editor tab 'Areas' provides a form for creating and editing the attributes of 
+								one or more 'Area' elements.
+							</entry>
+						</row>
+						<row>
+							<entry>Animal</entry>
+							<entry>
+								A premises can have zero or many animals.
+							</entry>
+						</row>
+						<row>
+							<entry>Tag (assigned)</entry>
+							<entry>
+								An Animal can have one or many tags.
+							</entry>
+						</row>
+						<row>
+							<entry>Tag (unassigned)</entry>
+							<entry>A Premises can have zero or many tags that are unassigned.</entry>
+						</row>
+						<row>
+							<entry>Event</entry>
+							<entry>
+								A Tag can have one or many events.
+							</entry>
+						</row>
+						<row>
+							<entry>Policy (not shown)</entry>
+							<entry>
+								A Premises can have zero or one Policy for restricting the premises to specific animal
+								species and event types. The Premises Editor tab 'Policy' provides a form for creating
+							    and editing the attributes of the 'Policy' element. 
+							</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table>
+
+		</para>
+	</section>
+	
+	<section id="premisesDataModel_corePremisesAnimals">
+	<?dbhtml filename="model/premisesEditorModel_dataModel_animals.html" ?>
+	<title>Data Model Animal Elements</title>
+	<para>The Premises Data Model supports multiple Animal types as shown in 
+		<xref linkend="fig_coreDataModelAnimals" />
+				
+	   </para>
+	   <figure id="fig_coreDataModelAnimals">
+		<title>Premises Data Model Animal Elements</title>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="../images/model/dataModelAnimals.png" />
+			</imageobject>
+		</mediaobject>
+	</figure>
+	</section>
+	
+	<section id="premisesDataModel_corePremisesEvents">
+	<?dbhtml filename="model/premisesEditorModel_dataModel_events.html" ?>
+	<title>Data Model Event Elements</title>
+	<para>The Premises Data Model supports multiple Event types as shown in 
+	 <xref linkend="fig_coreDataModelEvents1" /> and <xref linkend="fig_coreDataModelEvents2" />.	
+	</para>
+	 <figure id="fig_coreDataModelEvents1">
+		<title>Premises Data Model Event Elements (part 1)</title>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="../images/model/dataModelEvents1.png" />
+			</imageobject>
+		</mediaobject>
+	</figure>
+	
+	 <figure id="fig_coreDataModelEvents2">
+		<title>Premises Data Model Event Elements (part 2)</title>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="../images/model/dataModelEvents2.png" />
+			</imageobject>
+		</mediaobject>
+	 </figure>
+	</section>
+	
+	</section>
+	
+	<section id="genericEvents">
+	<?dbhtml filename="genericEvents/genericEvents.html" ?>
+		<title>Custom Events</title>
+		<para>The Premises Editor ships with predefined event types that are suitable for documenting most livestock histories. 
+		If the predifined event types are not sufficient, the Premises Editor utilizes the <emphasis>Metatype Editor Feature</emphasis>
+		and the Metatype documents it creates to define custom event types.
+		</para>
+		
+		
+	<section id="genericEvents_creatingCustomEvents"> 
+	<?dbhtml filename="genericEvents/genericEvents_creatingCustomEvents.html" ?>
+		<title>Creating Custom Events</title>
+		
+		<para>To define one or more custom events: 
+		<itemizedlist>
+		<listitem><para>
+		Create a Metatype document using the <code>New Metatype Document Wizard</code>
+		</para></listitem>
+		<listitem><para>
+		For every custom event define an <emphasis>Object Class Definition</emphasis>, <code>OCD</code>  element; 
+		and in the <emphasis>Properties view</emphasis> specify it's properties as:
+			<itemizedlist>
+				<listitem><para>
+					<code>Description</code> - an optional description of the custom event
+				</para></listitem>
+				<listitem><para>
+					<code>ID</code> - a unique string identifying the event within the document 
+				</para></listitem>
+				<listitem><para>
+					<code>Name</code> - a user recognizable name for the event
+				</para></listitem>
+				
+			</itemizedlist>
+		</para></listitem>
+		<listitem><para>
+		Within each <code>OCD</code> create one or more child <emphasis>Attribute Definition</emphasis>, <code>AD</code> 
+		elements to define the attributes of the custom event. These attributes will be displayed in the editor as properties 
+		of the event.
+		</para></listitem>
+		<listitem><para>
+		Within each <code>AD</code> child element specify the properties:
+			<itemizedlist>
+				<listitem><para>
+					<code>Cardinality</code>, an optional property that specifies the number of values contained in this attribute.
+					 The default is <code>0</code>.
+				</para></listitem>
+				<listitem>
+				    <para>
+					<code>Data Type</code>, a required property that specifies what type of property value is valid for
+					the attribute.  A pull down list will show the options: <code>String</code>, <code>Long</code>,
+					<code>Integer</code>, <code>Short</code>, <code>Char</code>, 
+					<code>Byte</code>, <code>Double</code>, <code>Float</code> and <code>Boolean</code>
+				    </para>
+				    <para>When working with custom events in premises documents only values appropriate to the specified data type
+				    will be considered valid.  For example a custom event with a data type of <code>Boolean</code> will 
+				    only accept <emphasis>true</emphasis> and <emphasis>false</emphasis> as valid values.</para>
+				</listitem>
+				<listitem><para>
+					<code>Default</code>, is the default value for this attribute. This default value(s) must be appropriate for  
+					the cardinality and data type defined above.
+				</para></listitem>
+				<listitem><para>
+					<code>Description</code>, an optional description of the attribute.  This will be shown in the message panel when
+					the user interface is focused on this attribute. 
+				</para></listitem>
+				<listitem><para>
+					<code>ID</code>, document wide identification string for this attribute.
+				</para></listitem>
+				<listitem><para>
+					<code>Max</code>, maximuim value for this attribute.
+				</para></listitem>
+				<listitem><para>
+					<code>Min</code>, minimum value for this attribute.
+				</para></listitem>
+				<listitem><para>
+					<code>Name</code>, user recognizable name for this attribute.
+				</para></listitem>
+				<listitem><para>
+					<code>Required</code>, whether this attribute must be given a value by the user for the event to be considered valid.
+				</para></listitem>
+				
+				</itemizedlist>
+			</para>
+		</listitem>
+		<listitem><para>
+		Within each <code>OCD</code> optionally create a child <code>Icon</code> 
+		element to associate an image with the event.
+		</para></listitem>
+		</itemizedlist>
+		</para>
+		
+		<para>See <xref linkend="fig_genericEvents_create"/> for an screen shot showing a Metatype document that 
+		defines two custom events.</para>
+		
+		<figure id="fig_genericEvents_create">
+			<title>Defining Custom Events</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/genericEvents/definingCustomEvents.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+	</section>
+		
+	<section id="usingCustomEvents">
+	<?dbhtml filename="genericEvents/genericEvents_usingCustomEvents.html" ?>
+		<title>Using Custom Events in Premises Documents</title>
+		<para>
+		To use custom events in Premises documents, the Metatype document that defines the custom events must first be loaded 
+		as a resource. <footnote><para>This only needs to be done once.  When the premises document is saved and opened again, the Metatype 
+		document with the custom event specifications will automatically be associated with the Premises document.</para></footnote>
+		To load a resource into a Premises document place the mouse cursor on the root element in the Premises document, right click, 
+		and from the pull down menu choose <code>Load Resorce...</code>
+		</para>
+		
+		<figure id="fig_loadMetatypeCustomEventsResource">
+			<title>Load Resource Dialog</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/genericEvents/loadResource.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+		<para>From the <xref linkend="fig_loadMetatypeCustomEventsResource"/> choose the Metatype document that defines the 
+		custom events and press <code>OK</code>.</para>
+		
+		<para>See <xref linkend="fig_loadedMetatypeCustomEventsResource"/>.</para>
+		
+		<figure id="fig_loadedMetatypeCustomEventsResource">
+			<title>Premises Document Loaded with a Metatype Resource</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/genericEvents/loadedResources.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+		<para>When a Premises document is loaded with a Metatype resource, all the custom events from the Metatype document 
+		are available for adding to the animal histories of the Premises Document. The Premises Editor user interfaces will also treat
+	    the Metatype documents custom events just like predifined events.</para>
+	    <para>See <xref linkend="fig_customEventsPickList"/>,
+	    <xref linkend="fig_customEventsWizard"/>, and <xref linkend="fig_customEventsView"/>.</para>
+		
+		<figure id="fig_customEventsPickList">
+			<title>Adding an Event in the Premises Editor</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/genericEvents/pickList.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+			
+		<figure id="fig_customEventsWizard">
+			<title>Adding and Event in the Event View</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/genericEvents/addingAnEventWizard.png" />
+				</imageobject>
+			</mediaobject>
+	   </figure>
+	   
+	   <figure id="fig_customEventsView">
+			<title>Modifying Attributes in the Events View</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/genericEvents/eventsView.png" />
+				</imageobject>
+			</mediaobject>
+	   </figure>
+		
+	</section>
+	</section>
+
+	<section id="useCase">
+      <?dbhtml filename="usecase/premisesEditorModel_useCase.html" ?>
+		<title>Premises Editor Use Cases</title>
+		<para>
+		To best depict what the Premises Editor can do for Tracker users the following 
+		section presents a series of <emphasis>Use-Case</emphasis> diagrams.  
+		<xref linkend="fig_CoreUseCases" /> shows core usage requirements for the Premises 
+		Editor. 
+		</para>
+		<figure id="fig_CoreUseCases">
+			<title>Premises Editor Overview</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/useCases/core.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+	
+	    <para>
+		  Once the Tracker <acronym>BI</acronym> Toolkit and the Premises Editor Feature are installed setup takes less than a minute.
+		  Administration use-cases are shown in
+		<xref linkend="fig_setUpUseCases" />. 
+		</para>
+	    
+	    <figure id="fig_setUpUseCases">
+			<title>Setting Up the Premises Editor</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/useCases/setup.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+		<para>
+		  Updating document use-cases are shown in
+		<xref linkend="fig_updateUseCases" />. 
+		</para>
+		<figure id="fig_updateUseCases">
+			<title>Updating Documents</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/useCases/update.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+		<para>
+		  Tracker Operators may need to work with large Premises documents. Providing Tracker Operators
+		  with the tools to navigate around these large documents has been a major design goal of the 
+		  Premises Editor. Navigation use-cases are shown in
+		<xref linkend="fig_navigateUseCases" />. 
+		</para>
+		<figure id="fig_navigateUseCases">
+			<title>Navigating in the Editor</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/useCases/navigate.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+		
+		<para>
+		  As shown in previous use-cases Premises Documents can be created and updated by human operators
+		  Premises Editor.  To improve efficiency new animals and events can also be added to Premises 
+		  Documents by using external tag ID readers connected to the Tracker via data 
+		  communications channels.  This is shown in
+		<xref linkend="fig_connectedReadersUseCases" />. 
+		</para>
+		<figure id="fig_connectedReadersUseCases">
+			<title>Working with Connected Readers</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/useCases/readers.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+    </section>
 
 </chapter>
 
