@@ -169,7 +169,7 @@
       
       <!-- Select Command -->
        <command
-             id="com.verticon.tracker.fair.editor.commands.generic.select.command"
+             id="com.verticon.tracker.editor.commands.generic.select.command"
              defaultHandler="com.verticon.tracker.editor.handlers.GenericSelectInOutlineHandler"
              categoryId="com.verticon.tracker.editor.commands.Tracker.category"
              description="%_UI_commands_generic_select_description"
@@ -257,10 +257,13 @@
             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
             id="com.verticon.tracker.editor.commands.resolveNamesOnAnimalCommand">
       </command>
-      
    </extension>
+   
+   
    <extension
          point="org.eclipse.ui.menus">
+         
+      <!--Tracker Actions main menu-->
       <menuContribution
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
          <menu
@@ -268,11 +271,15 @@
                label="%menu.label.0">
          </menu>
       </menuContribution>  
+      
+      <!--All the actions in the popups showing up under Tracker Actions-->
       <menuContribution
             locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+               
+               <!-- All EObjects -->
                <!-- Select the EObject elements in the Outline View -->
                <command
-                     commandId="com.verticon.tracker.fair.editor.commands.generic.select.command"
+                     commandId="com.verticon.tracker.editor.commands.generic.select.command"
                      icon="icons/full/obj16/selected_mode.gif"
                      style="push">
                   <visibleWhen>
@@ -296,6 +303,7 @@
                   </visibleWhen>
                </command>
                
+               <!-- Resources -->
                <!-- 
                Import tagIds as Template Events;
                works on a *.tags File;
@@ -459,6 +467,9 @@
 	            </visibleWhen>
                </command>
                
+               
+               
+               
                <!-- Animals -->
                
                <!-- 
@@ -514,6 +525,38 @@
 	            </visibleWhen>
                </command>
                
+               <!-- Resolve Location names on Animal -->
+            <command
+                  commandId="com.verticon.tracker.editor.commands.resolveNamesOnAnimalCommand"
+                   style="push">
+                 
+               <visibleWhen>
+                    <and>
+                         <with variable="selection">
+		                  <iterate ifEmpty="false" operator="or">
+      						 <instanceof value="com.verticon.tracker.Animal"/>
+    					  </iterate>
+    					 </with>
+    					 
+    					 <!-- 
+    			        	Restrict to show only if there is a Premises Editor
+              			-->
+    					 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+              			 
+    					 <!-- 
+    			        	Restricted to show only if there is a Location Service.
+              			 -->
+              			 <test
+                        forcePluginActivation="true"
+                        property="com.verticon.tracker.editor.hasLocationService">
+              			</test>
+    			     </and>
+               </visibleWhen>
+            </command>
+               
+               <!-- Events -->
                <!-- Modify Selected Events 
                works with simple and transaction based editors-->
                 <command
@@ -537,60 +580,28 @@
               			</test>
     			     </and>
 	            </visibleWhen>
-               	</command>
+           	</command>
                 
-      </menuContribution>
-      
-      <!-- Set URI on MovedIn or MovedOut events-->
-      <menuContribution
-             allPopups="false"
-            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+      		<!-- Set URI on MovedIn or MovedOut events-->
             <command
                   commandId="com.verticon.tracker.editor.commands.setForeignPremisesURICommand"
                    style="push">
            
                <visibleWhen>
                     <and>
+                         <or>
                          <with variable="selection">
 		                   <iterate ifEmpty="false" operator="or">
       						 <instanceof value="com.verticon.tracker.MovedIn"/>
     					   </iterate>
     					 </with>
     					 
-    					 <!-- 
-    			        	Show only if there is a PremisesEditor
-              			-->
-    					 <test
-                   			 property="com.verticon.tracker.editor.isPremisesEditor">
-              			</test>
-              			 
-    					 <!-- 
-    			        	Restricted to show only if there is a Location Service.
-              			 -->
-              			 <test
-                        forcePluginActivation="true"
-                        property="com.verticon.tracker.editor.hasLocationService">
-              			</test>
-    			     </and>
-               </visibleWhen>
-            </command>
-        
-      </menuContribution>
-      <menuContribution
-             allPopups="false"
-            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
-            <command
-                  commandId="com.verticon.tracker.editor.commands.setForeignPremisesURICommand"
-                   style="push">
-           
-               <visibleWhen>
-                    <and>
-                         <with variable="selection">
+    					 <with variable="selection">
 		                   <iterate ifEmpty="false" operator="or">
       						 <instanceof value="com.verticon.tracker.MovedOut"/>
     					   </iterate>
     					 </with>
-    					 
+    					 </or>
     					 <!-- 
     			        	Show only if there is a PremisesEditor
               			-->
@@ -608,49 +619,9 @@
     			     </and>
                </visibleWhen>
             </command>
-      </menuContribution>
-     
-     <!-- Resolve Location names on Animal -->
-      <menuContribution
-             allPopups="false"
-            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
-            <command
-                  commandId="com.verticon.tracker.editor.commands.resolveNamesOnAnimalCommand"
-                   style="push">
-                 
-               <visibleWhen>
-                    <and>
-                         <with variable="selection">
-		                  <iterate
-                          ifEmpty="false"
-                          operator="or">
-      						 <instanceof value="com.verticon.tracker.Animal"/>
-    					  </iterate>
-    					 </with>
-    					 
-    					 <!-- 
-    			        	Restrict to show only if there is a Premises Editor
-              			-->
-    					 <test
-                   			 property="com.verticon.tracker.editor.isPremisesEditor">
-              			</test>
-              			 
-    					 <!-- 
-    			        	Restricted to show only if there is a Location Service.
-              			 -->
-              			 <test
-                        forcePluginActivation="true"
-                        property="com.verticon.tracker.editor.hasLocationService">
-              			</test>
-    			     </and>
-               </visibleWhen>
-            </command>
-      </menuContribution>
       
-      <!--Resolve location names on all animals-->
-      <menuContribution
-             allPopups="false"
-            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+      		<!--Premises-->
+      		<!--Resolve location names on Premises -->
             <command
                   commandId="com.verticon.tracker.editor.commands.resolveNamesOnAnimalCommand"
                    style="push">
@@ -684,6 +655,8 @@
             </command>
       </menuContribution>
    </extension>
+   
+   
    <extension
          point="org.eclipse.ui.cheatsheets.cheatSheetContent">
        <category
