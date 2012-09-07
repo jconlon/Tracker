@@ -3,6 +3,7 @@ package com.verticon.tracker.store.location.internal;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -151,9 +152,21 @@ public class Component implements ILocationServiceProvider {
 		return result;
 	}
 
+	/**
+	 * This service provider does not support this operation at this time.
+	 */
+	@Override
+	public Map<String, String> getAssociates(String id) {
+		throw new UnsupportedOperationException();
+	}
+	
+	
 	@Override
 	public boolean canHandle(Object target) {
-		return !trackerStores.isEmpty();
+		if(target instanceof String){
+			return !trackerStores.isEmpty();
+		}
+		return false;
 	}
 	
 	private Premises retrievePremises(String targetUri) throws IOException{
@@ -179,5 +192,7 @@ public class Component implements ILocationServiceProvider {
 		
 		return result;
 	}
+
+	
 
 }

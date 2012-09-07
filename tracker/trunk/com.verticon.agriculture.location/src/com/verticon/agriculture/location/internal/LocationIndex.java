@@ -13,10 +13,12 @@ package com.verticon.agriculture.location.internal;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Maps.filterKeys;
 import static com.google.common.collect.Maps.newConcurrentMap;
+import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Sets.newHashSet;
 import static com.verticon.agriculture.location.internal.Component.bundleMarker;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
@@ -89,6 +91,7 @@ public final class LocationIndex implements ILocationServiceProvider {
 
 	/**
 	 * Find location for a Premises. Used for remote locations.
+	 * @param id
 	 */
 	@Override
 	public String name(String id) {
@@ -96,7 +99,13 @@ public final class LocationIndex implements ILocationServiceProvider {
 		String result = null;
 		//If there is a key for the target (uri) then
 		if (id != null) {
-			result = index.containsKey(id) ? index.get(id).getName() : null;
+			for (Entry<PremisesResource, Location> entry : index.entrySet()) {
+				if(entry.getKey().premisesUri.equals(id)){
+					result = entry.getValue().getName();
+					break;
+				}
+			}
+			
 		}
 		return result;
 	}
@@ -106,7 +115,12 @@ public final class LocationIndex implements ILocationServiceProvider {
 		checkNotNull("The target attribute must not be null.", id);
 		String result = null;
 		if (id != null) {
-			result = index.containsKey(id) ? index.get(id).getAddress() : null;
+			for (Entry<PremisesResource, Location> entry : index.entrySet()) {
+				if(entry.getKey().premisesUri.equals(id)){
+					result = entry.getValue().getAddress();
+					break;
+				}
+			}
 		}
 		return result;
 	}
@@ -156,7 +170,27 @@ public final class LocationIndex implements ILocationServiceProvider {
 
 		return result;
 	}
-
+	
+	/**
+	 * Find all the foreign premises and the id and name as a map 
+	 * 
+	 */
+	@Override
+	public Map<String, String> getAssociates(String id) {
+		checkNotNull("The id attribute must not be null.", id);
+		logger.debug(bundleMarker,"Searching for locations in {}",id);
+		Map<String,String> result = newHashMap();
+		for (Entry<PremisesResource, Location> entry : index.entrySet()) {
+			//Find all the foreign premises 
+			if(!entry.getKey().premisesUri.equals(id)){
+				Location location = entry.getValue();
+				result.put(entry.getKey().premisesUri,location.getName());
+				logger.debug(bundleMarker,"Found {} location in {}",result.size(),id);
+			}
+		}
+		return result;
+	}
+	
 	/**
 	 * On first access build all agriculture projects in the workspace.
 	 */
@@ -167,7 +201,7 @@ public final class LocationIndex implements ILocationServiceProvider {
 		if (state.get().equals(State.UNINITIALIZED)) {
 			initialize();
 		}
-		if (target instanceof Premises) {
+		if (Map.class.equals(target)) {
 			return true;
 		} else if (target instanceof String) {
 			return true;
@@ -291,7 +325,7 @@ public final class LocationIndex implements ILocationServiceProvider {
 	 * 
 	 * @param agricultureResourceUri of the agriculture document
 	 */
-	void removeMapEntriesFromAgriDocument(URI agricultureResourceUri) {
+	void removeAssociation(URI agricultureResourceUri) {
 		checkNotNull("The resourceUri attribute must not be null.", agricultureResourceUri);
 		logger.debug(bundleMarker, "Removing all entries made with {}",
 				agricultureResourceUri);
@@ -312,7 +346,7 @@ public final class LocationIndex implements ILocationServiceProvider {
 	 * This builds the mapping from premises.uri to Location for each association
 	 * @param association
 	 */
-	void addAssociationResource(Association association, URI agriResourceURI){
+	void add(Association association){
 		URI premisesResourceURI ;
 		PremisesResource premisesResource;
 		Location location;
@@ -322,7 +356,7 @@ public final class LocationIndex implements ILocationServiceProvider {
 				continue;
 			}
 			premisesResourceURI = premises.eResource().getURI();
-			premisesResource = new PremisesResource(agriResourceURI, premisesResourceURI, premises.getUri());
+			premisesResource = new PremisesResource(association.eResource().getURI(), premisesResourceURI, premises.getUri());
 			index.put(premisesResource, location);
 			logger.debug(bundleMarker,"Added premisesResource={}, premisesURI={}, location={}",
 					new Object[]{premisesResourceURI,premises.getUri(),location.getName()});
@@ -330,12 +364,14 @@ public final class LocationIndex implements ILocationServiceProvider {
 		}
 		
 		if(logger.isDebugEnabled()){
-			logger.debug(bundleMarker,"After adding {}, index.isEmpty={}",agriResourceURI,index.isEmpty());
+			logger.debug(bundleMarker,"After adding {}, index.isEmpty={}",association.eResource().getURI(),index.isEmpty());
 			for (Entry<PremisesResource,Location> entry : index.entrySet()) {
 				logger.debug(bundleMarker,"Index Key={}, Location name={}",entry.getKey(), entry.getValue().getName());
 			}
 		}
 	}
+
+	
 }
 
 /**
@@ -360,6 +396,8 @@ class PremisesResource {
 				+ premisesUri + "]";
 	}
 
+	/**
+	 */
 	PremisesResource(URI agriResource, URI premisesResouce,
 			String premisesUri) {
 		super();

@@ -11,6 +11,7 @@
 package com.verticon.location.service.internal;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -119,6 +120,21 @@ public class Component implements ILocationService {
 		}
 		return result;
 	}
+	
+	@Override
+	public Map<String, String> getAssociates(String id) {
+		Map<String,String> result = null;
+		if (!serviceProviders.isEmpty()) {
+			for (ILocationServiceProvider iLocationServiceProvider : serviceProviders) {
+				if (iLocationServiceProvider.canHandle(Map.class)) {
+					result = iLocationServiceProvider.getAssociates(id);
+					if (result != null)
+						break;
+				}
+			}
+		}
+		return result;
+	}
 
 	public void setLocationServiceProvider(
 			ILocationServiceProvider iLocationServiceProvider) {
@@ -138,5 +154,7 @@ public class Component implements ILocationService {
 		serviceProviders.clear();
 		logger.debug(bundleMarker, "Deactivated");
 	}
+
+	
 
 }
