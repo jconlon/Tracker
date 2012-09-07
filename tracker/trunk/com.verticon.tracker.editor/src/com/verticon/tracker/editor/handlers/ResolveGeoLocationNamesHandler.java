@@ -8,9 +8,9 @@
  * Contributors:
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
-package com.verticon.tracker.store.ui.handlers;
+package com.verticon.tracker.editor.handlers;
 
-import static com.verticon.tracker.store.ui.Activator.bundleMarker;
+import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -26,7 +26,13 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.Premises;
 
 /**
- * Uses the ITrackerStore to save Animal information to MongoDB.
+ * Resolution of Location names can be an expensive operation.
+ * Instead of dynamically resolving names, allow the user to run it
+ * as batch operation, from pull down menus on the Animal and Premises.
+ * 
+ * If pulled down on the Animal than it will resolve names for the 
+ * animal and its events only.  If pulled down on the Premises then 
+ * resolution will be for all animals and events in the premises.
  * 
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler

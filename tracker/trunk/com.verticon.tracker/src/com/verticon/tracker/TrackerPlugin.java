@@ -13,6 +13,8 @@
  */
 package com.verticon.tracker;
 
+import java.util.Map;
+
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
@@ -106,7 +108,7 @@ public class TrackerPlugin extends Plugin{
 	}
 
 	/**
-	 * Used by Animals to find names for foreign premises.
+	 * Used by Animals to find names for a foreign premises.
 	 */
 	 public String name(String uri) {
 		String result = null;
@@ -116,6 +118,18 @@ public class TrackerPlugin extends Plugin{
 		}
 		return result!=null?result:null;
 	}
+
+	 /**
+	  * Used by Animals to find names for all foreign premises.
+	  */
+	 public Map<String,String> getAssociates(String uri) {
+		 Map<String,String> result = null;
+		 ILocationService iLocationService = getLocationService();
+		 if(iLocationService != null){
+			 result = iLocationService.getAssociates(uri);
+		 }
+		 return result;
+	 }
 
 	/**
 	 * Called by animals to find out the location outside the premises.
@@ -134,6 +148,8 @@ public class TrackerPlugin extends Plugin{
 		return result!=null?result:"InPremises:"+point;
 	}
 
-
+   public boolean hasLocationService(){
+	  return getLocationService()!=null;
+   }
 
 }

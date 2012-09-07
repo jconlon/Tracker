@@ -149,6 +149,7 @@
           productId="com.verticon.tracker.product.desktop.application">
     </introProductBinding>
    </extension>
+ 
    <extension
          point="org.eclipse.ui.commands">
       <category
@@ -244,6 +245,18 @@
              name="%_UI_commands_event_modify_name">
       </command>
       
+      <command
+            name="Set Foreign Premises URI"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            id="com.verticon.tracker.editor.commands.setForeignPremisesURICommand">
+      </command>
+      
+      <!-- Resolve All GeoLocation Names -->
+      <command
+            name="%_UI_commands_event_resolve_names"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            id="com.verticon.tracker.editor.commands.resolveNamesOnAnimalCommand">
+      </command>
       
    </extension>
    <extension
@@ -257,7 +270,6 @@
       </menuContribution>  
       <menuContribution
             locationURI="popup:com.verticon.tracker.editor.menus.popupany">
-                  		
                <!-- Select the EObject elements in the Outline View -->
                <command
                      commandId="com.verticon.tracker.fair.editor.commands.generic.select.command"
@@ -528,8 +540,149 @@
                	</command>
                 
       </menuContribution>
-     
       
+      <!-- Set URI on MovedIn or MovedOut events-->
+      <menuContribution
+             allPopups="false"
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+            <command
+                  commandId="com.verticon.tracker.editor.commands.setForeignPremisesURICommand"
+                   style="push">
+           
+               <visibleWhen>
+                    <and>
+                         <with variable="selection">
+		                   <iterate ifEmpty="false" operator="or">
+      						 <instanceof value="com.verticon.tracker.MovedIn"/>
+    					   </iterate>
+    					 </with>
+    					 
+    					 <!-- 
+    			        	Show only if there is a PremisesEditor
+              			-->
+    					 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+              			 
+    					 <!-- 
+    			        	Restricted to show only if there is a Location Service.
+              			 -->
+              			 <test
+                        forcePluginActivation="true"
+                        property="com.verticon.tracker.editor.hasLocationService">
+              			</test>
+    			     </and>
+               </visibleWhen>
+            </command>
+        
+      </menuContribution>
+      <menuContribution
+             allPopups="false"
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+            <command
+                  commandId="com.verticon.tracker.editor.commands.setForeignPremisesURICommand"
+                   style="push">
+           
+               <visibleWhen>
+                    <and>
+                         <with variable="selection">
+		                   <iterate ifEmpty="false" operator="or">
+      						 <instanceof value="com.verticon.tracker.MovedOut"/>
+    					   </iterate>
+    					 </with>
+    					 
+    					 <!-- 
+    			        	Show only if there is a PremisesEditor
+              			-->
+    					 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+              			 
+    					 <!-- 
+    			        	Restricted to show only if there is a Location Service.
+              			 -->
+              			 <test
+                        forcePluginActivation="true"
+                        property="com.verticon.tracker.editor.hasLocationService">
+              			</test>
+    			     </and>
+               </visibleWhen>
+            </command>
+      </menuContribution>
+     
+     <!-- Resolve Location names on Animal -->
+      <menuContribution
+             allPopups="false"
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+            <command
+                  commandId="com.verticon.tracker.editor.commands.resolveNamesOnAnimalCommand"
+                   style="push">
+                 
+               <visibleWhen>
+                    <and>
+                         <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+      						 <instanceof value="com.verticon.tracker.Animal"/>
+    					  </iterate>
+    					 </with>
+    					 
+    					 <!-- 
+    			        	Restrict to show only if there is a Premises Editor
+              			-->
+    					 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+              			 
+    					 <!-- 
+    			        	Restricted to show only if there is a Location Service.
+              			 -->
+              			 <test
+                        forcePluginActivation="true"
+                        property="com.verticon.tracker.editor.hasLocationService">
+              			</test>
+    			     </and>
+               </visibleWhen>
+            </command>
+      </menuContribution>
+      
+      <!--Resolve location names on all animals-->
+      <menuContribution
+             allPopups="false"
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+            <command
+                  commandId="com.verticon.tracker.editor.commands.resolveNamesOnAnimalCommand"
+                   style="push">
+                 
+               <visibleWhen>
+                    <and>
+                         <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+      						 <instanceof value="com.verticon.tracker.Premises"/>
+    					  </iterate>
+    					 </with>
+    					 
+    					 <!-- 
+    			        	Show only if there is a PremisesEditor
+              			-->
+    					 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+              			 
+    					 <!-- 
+    			        	Restricted to show only if there is a Location Service.
+              			 -->
+              			 <test
+                        forcePluginActivation="true"
+                        property="com.verticon.tracker.editor.hasLocationService">
+              			</test>
+    			     </and>
+               </visibleWhen>
+            </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.cheatsheets.cheatSheetContent">
@@ -566,6 +719,15 @@
             properties="isContentOutlinePage"
             type="java.lang.Object">
       </propertyTester>
+      
+       <propertyTester
+            class="com.verticon.tracker.editor.propertyTester.HasLocatiionServiceTester"
+            id="com.verticon.tracker.store.ui.propertyTester.hasTrackerStore"
+            namespace="com.verticon.tracker.editor"
+            properties="hasLocationService"
+            type="java.lang.Object">
+      </propertyTester>
+      
    </extension>
    <extension
          point="org.eclipse.core.contenttype.contentTypes">
@@ -574,6 +736,30 @@
             file-extensions="premises"
             file-names="*">
       </file-association>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="com.verticon.tracker.editor.commands.resolveNamesOnAnimalCommand"
+            class="com.verticon.tracker.editor.handlers.ResolveGeoLocationNamesHandler">
+      </handler>
+       <handler
+            commandId="com.verticon.tracker.editor.commands.setForeignPremisesURICommand"
+            class="com.verticon.tracker.editor.handlers.GetAssociateNamesHandler">
+      </handler>
+   </extension>
+   
+   
+   <extension
+         point="org.eclipse.ui.bindings">
+         
+        
+         <key
+            commandId="com.verticon.tracker.editor.commands.resolveNamesOnAnimalCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+3"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      	</key>
    </extension>
    
    

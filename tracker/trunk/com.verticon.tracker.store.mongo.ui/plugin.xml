@@ -33,6 +33,7 @@
             type="java.lang.Object">
       </propertyTester>
    </extension>
+   
    <extension
          point="org.eclipse.ui.commands">
       
@@ -50,11 +51,6 @@
             name="Record Animal History to MongoDB"
             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
             id="com.verticon.tracker.store.ui.commands.recordAnimalsCommand">
-      </command>
-       <command
-            name="Resolve All GeoLocation Names"
-            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
-            id="com.verticon.tracker.store.ui.commands.resolveNamesOnAnimalCommand">
       </command>
       <command
             name="Register Premises"
@@ -86,10 +82,7 @@
             commandId="com.verticon.tracker.store.ui.commands.registerPremisesCommand"
             class="com.verticon.tracker.store.ui.handlers.RegisterPremisesHandler">
       </handler>
-      <handler
-            commandId="com.verticon.tracker.store.ui.commands.resolveNamesOnAnimalCommand"
-            class="com.verticon.tracker.store.ui.handlers.ResolveGeoLocationNamesHandler">
-      </handler>
+     
        <handler
             commandId="com.verticon.tracker.store.ui.commands.register.premises.csv.command"
             class="com.verticon.tracker.store.ui.handlers.RegisterPremisesFromCSVHandler">
@@ -125,12 +118,7 @@
             sequence="M1+4"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
       </key>
-       <key
-            commandId="com.verticon.tracker.store.ui.commands.resolveNamesOnAnimalCommand"
-            contextId="org.eclipse.ui.contexts.window"
-            sequence="M1+3"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
-      </key>
+     
        <key
             commandId="com.verticon.tracker.store.ui.commands.register.premises.csv.command"
             contextId="org.eclipse.ui.contexts.window"
@@ -169,7 +157,6 @@
       						 <instanceof value="com.verticon.tracker.Premises"/>
     					  </iterate>
     					 </with>
-    					 
     					 
     					 <!-- 
     			        	TODO Fix to Restrict to show only if the MongoDB for this premises uri is 
@@ -241,7 +228,6 @@
     					  </iterate>
     					 </with>
     					 
-    					 
     					 <!-- 
     			        	Restrict to show only if the MongoDB for this admin has a loader service.
               			 -->
@@ -255,87 +241,7 @@
             </command>
         
       </menuContribution>
-      
-      
-      <menuContribution
-             allPopups="false"
-            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
-            <command
-                  commandId="com.verticon.tracker.store.ui.commands.resolveNamesOnAnimalCommand"
-                   style="push">
-                 
-               <visibleWhen>
-                    <and>
-                         <with variable="selection">
-		                  <iterate
-                          ifEmpty="false"
-                          operator="or">
-      						 <instanceof value="com.verticon.tracker.Animal"/>
-    					  </iterate>
-    					 </with>
-    					 
-    					 
-    					 <!-- 
-    			        	Restrict to show only if the MongoDB for this premises uri is 
-    			        	component factory instance.
-              			-->
-    					 <test
-                   			 property="com.verticon.tracker.editor.isPremisesEditor">
-              			</test>
-              			 
-    					
-    					 <!-- 
-    			        	Restricted to show only if there is a Publisher Service.
-              			 -->
-              			 <test
-                        forcePluginActivation="true"
-                        property="com.verticon.tracker.store.ui.hasTrackerStoreService">
-              			</test>
-    			     </and>
-               </visibleWhen>
-            </command>
-        
-      </menuContribution>
-      
-       <menuContribution
-             allPopups="false"
-            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
-            <command
-                  commandId="com.verticon.tracker.store.ui.commands.resolveNamesOnAnimalCommand"
-                   style="push">
-                 
-               <visibleWhen>
-                    <and>
-                         <with variable="selection">
-		                  <iterate
-                          ifEmpty="false"
-                          operator="or">
-      						 <instanceof value="com.verticon.tracker.Premises"/>
-    					  </iterate>
-    					 </with>
-    					 
-    					 
-    					 <!-- 
-    			        	Restrict to show only if the MongoDB for this premises uri is 
-    			        	component factory instance.
-              			-->
-    					 <test
-                   			 property="com.verticon.tracker.editor.isPremisesEditor">
-              			</test>
-              			 
-    					
-    					 <!-- 
-    			        	Restricted to show only if there is a TrackerStore Service.
-              			 -->
-              			 <test
-                        forcePluginActivation="true"
-                        property="com.verticon.tracker.store.ui.hasTrackerStoreService">
-              			</test>
-    			     </and>
-               </visibleWhen>
-            </command>
-        
-      </menuContribution>
+   
        <menuContribution
             locationURI="popup:com.verticon.tracker.editor.menus.popupany">
                <command

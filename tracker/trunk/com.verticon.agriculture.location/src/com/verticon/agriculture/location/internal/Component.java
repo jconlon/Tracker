@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.verticon.agriculture.location.internal;
 
+import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -97,6 +98,11 @@ public class Component implements ILocationServiceProvider {
 	@Override
 	public Set<String> locationsIn(String container) {
 		return delegate.locationsIn(container);
+	}
+
+	@Override
+	public Map<String, String> getAssociates(String id) {
+		return delegate.getAssociates(id);
 	}
 
 }

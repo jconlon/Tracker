@@ -136,7 +136,7 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 		}
 
 		// 2. build and validate the changes to the index
-		locationIndex.removeMapEntriesFromAgriDocument(uri);
+		locationIndex.removeAssociation(uri);
 		monitor.worked(1);
 		monitor.done();
 		super.clean(monitor);
@@ -179,7 +179,7 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 			return;
 		}
 		// 3. add the resource to the index
-		locationIndex.addAssociationResource(association,resource.getURI());
+		locationIndex.add(association);
 		monitor.worked(1);
 
 		monitor.done();

@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.verticon.location.service;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -52,5 +53,11 @@ public interface ILocationService {
 	 * @return names of locations within the target
 	 */
 	Set<String> locationsIn(String targetId);
+	
+	/**
+	 * @param the object id
+	 * @return id to name map of all the associates of the object
+	 */
+	Map<String,String> getAssociates(String id);
 
 }
