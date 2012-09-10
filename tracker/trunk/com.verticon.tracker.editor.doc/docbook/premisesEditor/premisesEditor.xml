@@ -88,7 +88,21 @@
 		</section>
 	</section>
 
-   <section id="creatingPremisesDocuments">
+	<section id="premisesDocuments">
+		<?dbhtml filename="model/premisesEditorModel_premisesDocuments.html" ?>
+		<title>Premises Documents</title>
+		<para>Whether it is word processing documents, spreadsheet documents, or presentation 
+			documents, today's computer users are most familiar with software applications that 
+			create and manipulate documents that describe specific instances of information.</para>
+		<para>The Premises Editor enables users to create, transform and edit Livestock 
+			Premises documents that represent Animal Premises. The attributes of the premises, 
+			the animals in the premises and the events associated with these animals are specified in 
+			Premises documents.</para>
+		<para>Premises document files utilize a .premises file extension to distinguish them 
+		from other types of files.</para>
+	</section>
+	
+    <section id="creatingPremisesDocuments">
     	<?dbhtml filename="creatingPremisesDocuments/creatingPremisesDocuments.html" ?>
 		<title>Creating Premises Documents</title>
 		<para>
@@ -466,6 +480,84 @@
 		</section>
 	</section>
 			
+	<section id="premisesEditorLocationServices">
+      <?dbhtml filename="locationServices/locationServices.html" ?>
+		<title>Geolocation Services</title>
+			<para>
+      	 	There are four Animal event types that are used for recording Animal geolocation information. 
+      	 	<itemizedlist mark="bullet">
+      	 		<listitem><para>MovedIn Animal events record the date, time and URI of the foreign Premises Animals have 
+      	 		come from before arriving on Premises.</para></listitem>
+				<listitem><para>MovedOut Animal events record the date, time, and URI of the foreign Premises Animals have been shipped to 
+				from the current Premises.</para></listitem>
+      	 		<listitem><para>Position Animal events record the date, time and Geographic coordinates of an Animal.</para></listitem>
+      	  		<listitem><para>Sighting events record the date, time and the name of a location within the current Premises.</para></listitem>
+      	 	</itemizedlist>
+      	 	In addition to these event types, all events contain a 'pid' attribute for documenting the URI of the Premises that recorded
+      	 	the event.  This 'pid' attribute is essential when combining Events from an Animal that was recorded by another premises.  
+      	 	</para>
+      		<para>The Tracker Location Service is a global Tracker geolocation service for resolving the real-world
+			 geographic locations for Premises and Animals.</para>
+			
+			<para> 
+			Together Premises Editor and the Tracker Location Service
+				<footnote>
+				<para>A Premises document must contain all the Animals Geolocation Events and the Tracker Location service must 
+				be able to resolve all Premises URIs to Premises names.  To meet these two requirements when multiple users
+				share information on Animals traversing multiple Premises a Tracker Store solution can be provided. For 
+				more details see the Tracker Store documentation.
+				</para>
+				</footnote> provide:
+      	 <itemizedlist mark="bullet">
+      		 <listitem><para>Animal traceback for identifying the foriegn Premises for animals that have moved into the Premises.;</para></listitem>
+      	 	<listitem><para>Animal traceforward for identifying the foriegn Premises for animals that have moved out of the Premises;</para></listitem>
+      	 	<listitem><para>Animal resident locator for identifying the location of animals within the current Premises;</para></listitem>
+      	 	<listitem><para>Dynamic listing of location names within the current Premises;</para></listitem>
+      	 </itemizedlist>
+      	 </para>
+      	 <para>The Animal Location attribute is the last known location of the animal.  It is derived from the last (most recent) geolocation 
+      	 	event recorded for the Animal.
+      	 The Premises Editor provides pulldown menus on an Animal or Premises
+      	 		<footnote><para>See section on Premises Editor Actions for details.</para>
+      	 		</footnote> for invoking the resolution of Geolocation names by the Location Service. The following names are resolved:
+      	  <itemizedlist mark="bullet">
+      		 <listitem><para>Source Name on all MovedIn events;</para></listitem>
+      	 	<listitem><para>Destination Name on all MovedOut events;</para></listitem>
+      	 	<listitem><para>Location<footnote>
+      	 			<para>This is the current location of the animal.</para>
+      	 		</footnote> on Animal;</para></listitem>
+      	 	<listitem><para>Location Name on all Position events
+      	 		<footnote>
+      	 			<para>Position Events with coordinates residing in the local premise
+      	 	 			have the Location attribute resolved directly by the Premises Editor.</para>
+      	 		</footnote>;
+      	 		</para></listitem>
+      	 </itemizedlist>
+      	 <figure id="fig_premiseslocation_before">
+                <title>Animals View before Geolocation Resolution
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/location/before.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        
+        <figure id="fig_premiseslocation_after">
+                <title>Animals View after Geolocation Resolution
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/location/after.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+      	 </para>
+	 	 
+	</section>
+	
 	<section id="chBulkEventProcessing">
 	 <?dbhtml filename="bulkProcessing/premisesBulkEventProcessing.html" ?>
 	<title>Bulk Event Processing</title>
@@ -725,21 +817,238 @@
 		</section>
 	</section>
 	</section>
-    
-	<section id="premisesDocuments">
-		<?dbhtml filename="model/premisesEditorModel_premisesDocuments.html" ?>
-		<title>Premises Documents</title>
-		<para>Whether it is word processing documents, spreadsheet documents, or presentation 
-			documents, today's computer users are most familiar with software applications that 
-			create and manipulate documents that describe specific instances of information.</para>
-		<para>The Premises Editor enables users to create, transform and edit Livestock 
-			Premises documents that represent Animal Premises. The attributes of the premises, 
-			the animals in the premises and the events associated with these animals are specified in 
-			Premises documents.</para>
-		<para>Premises document files utilize a .premises file extension to distinguish them 
-		from other types of files.</para>
+  
+    <section id="premisesActions">
+		<?dbhtml filename="premisesActions/premisesActions.html" ?>
+		<title>Premises Action Commands</title>
+		<para>For key workspace resources and elements within the Premises document, the Premises Editor provides 
+		action commands that the user can invoke to effect changes on the resource or document element.
+		</para>
+		
+		<para>The following table shows the Tracker Actions that can be invoked on workspace resources. 
+		<footnote><para>These actions are accessible when viewing resources with the Project Explorer View.  In the 
+		Project Explorer View right click on the resource and the popup main menu will be shown. From there the sub menu 
+		'Tracker Actions' will contain the appropriate acton command.
+		</para></footnote>
+			<table frame='all'>
+				<title>Premises Editor Resource Action Commands</title>
+				<tgroup cols='4' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<colspec colname='c3' />
+					<colspec colname='c4' />
+					<thead>
+						<row>
+							<entry>Resource</entry>
+							<entry>Type and Format</entry>
+							<entry>Command Name</entry>
+							<entry>Description</entry>
+							<entry>Comment</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>*.tags</entry>
+							<entry>
+								Text files with extenstion 'tags', that contain a list of tag ID numbers. 
+								<footnote><para>
+								Each number is on its own line and lines are terminated with a carriage return. These text
+								files can be simply created in a text editor by hand or exported from other applications 
+								and data sources. Most data management applications have text file export utilities.
+								</para></footnote>
+							</entry>
+							<entry>Import TagIds as Template Events</entry>
+							<entry>User will first be prompted for an Animal template then each tagId number will be mapped to the Animal
+							and the Events in the template. The Events in the template will be given the current time and added to 
+							the Animal in the document that corresponds with the TagId.  If there is no Animal in the document with
+							the tagId, a new Animal will be created of the type and with the attributes of the template Animal.</entry>
+							<entry>Good for adding multiple events to multiple existing animals or for adding new animals with a 
+							common life data.</entry>
+						</row>
+						<row>
+							<entry>*.tags</entry>
+							<entry>
+								Text files with extenstion 'tags', that contain a list of tag ID numbers.
+							</entry>
+							<entry>Import TagIds Specifying Animal and Event Types</entry>
+							<entry>User will first be prompted for an Animal type and then an event type. 
+							The Event will be given the current time and added to the Animal in the document that corresponds with the TagId.  
+							If there is no Animal in the document with the tagId, a new Animal will be created.</entry>
+							<entry>Good for adding single events to multiple existing animals or for adding new animals with a 
+							common but limited life data.</entry>
+						</row>
+						<row>
+							<entry>*.txt</entry>
+							<entry>Comma separated value<acronym>CSV</acronym> text files with extenstion 'txt',  contain Animal 
+							life data for a set of animals. 
+								<footnote><para>
+								Each value is separated with a comma and each row is on its own line and lines are terminated with 
+								a carriage return. These text files can be created in a text editor by hand or from a spreadsheet 
+								application and then exported as as csv file. Most data management applications have csv file export utilities.
+								</para></footnote></entry>
+							<entry>Import Text File as Animal Life Data</entry>
+							<entry>User will first be prompted to map the column values to Animal feature names. Two essential Animal feature
+							names must be mapped for the import to continue, Animal.id and Animal.species. The next page will map the values
+							in the selected species columns to Premises Animal species names.</entry>
+							<entry>Good for importing new animals with unique life data.</entry>
+						</row>
+						
+					</tbody>
+				</tgroup>
+			</table>
+		</para>
+		
+		<para>The following table shows the Tracker Actions that can be invoked on Premises document elements. 
+		<footnote><para>These actions may be accessed as popup menus on the document elements when viewing documents 
+		from the Selection page of the Premises Editor, document tree in the Outline View tree, the master table in the Animals View
+	    or the master table in the Events View.  
+		Right click on the
+		element and the popup main menu will be shown. From there the sub menu 'Tracker Actions' will contain the 
+		appropriate acton command.
+		</para></footnote>
+			<table frame='all'>
+				<title>Premises Editor Document Element Action Commands</title>
+				<tgroup cols='7' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<colspec colname='c3' />
+					<colspec colname='c4' />
+					<colspec colname='c5' />
+					<colspec colname='c6' />
+					<colspec colname='c7' />
+					<thead>
+						<row>
+							<entry>Element</entry>
+							<entry>Command Name</entry>
+							<entry>From Selection Page<footnote><para>The Outline View like the Selection Page of the Premises Editor
+							shows the document as a tree.  All actions that can be accessed as popup menus in the Selection Page 
+							are also available from the Outline View.</para></footnote></entry>
+							<entry>From Animals View</entry>
+							<entry>From Events View</entry>
+							<entry>Description</entry>
+							<entry>Comment</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>All elements</entry>
+							<entry>Select Element(s) in Outline View</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							
+							<entry>
+								Selects the same element or elements in the tree of the Outline View. 
+							</entry>
+							
+							<entry>This is most handy when one is inspecting elements in the Animals View or Events View and 
+							 you want to see another perspective of the element in the context of a tree view. It is also good to 
+							 use this to syncrhonize the editor and the other views of the document with the Animals or Events view.</entry>
+						</row>
+						
+						<row>
+							<entry>Animal(s)</entry>
+							<entry>Change Animal(s) type</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Prompts the user to select a new animal type. 
+							</entry>
+							
+							<entry>This is most handy when one is importing animals and not all of them are the same type. First import
+							them as the same type then select the ones to change and invoke this command.</entry>
+						</row>
+						
+						<row>
+							<entry>Animal(s)</entry>
+							<entry>Add Template Events to Selected Animals</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Prompts the user to select a template event. 
+							</entry>
+							
+							<entry>Use this to add events from an Animal template to existing Animals.</entry>
+						</row>
+						
+						<row>
+							<entry>Animal(s)</entry>
+							<entry>Resolve Geolocation Names</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Resolves all geolocation names on the Animal(s) and the events of the Animal(s). 
+							</entry>
+							
+							<entry>Use this for traceback and traceforward of Animals. Resolves the urns on Moved events 
+							to real names, geo coordinates on Position events to real names and for resolving the current 
+							location of the Animal(s) as a location name.</entry>
+						</row>
+					
+					    <row>
+							<entry>Event(s)</entry>
+							<entry>Modify Selected Events</entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>Yes</entry>
+							
+							<entry>
+								Modifies one or more of the common attributes of the selected Event(s). 
+							</entry>
+							
+							<entry>Use this for setting the comments, the correction and the electronicallyRead flags for 
+							more than one event.</entry>
+						</row>
+						
+						<row>
+							<entry>MovedIn or MovedOut Event</entry>
+							<entry>Set Foreign Premises URI</entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>Yes</entry>
+							
+							<entry>
+								Use the Location Service to assist in setting MovedIn and MovedOut event URI and pin attributes. 
+							</entry>
+							
+							<entry>Remembering ids are hard.  First configure the Location Service with business partners. 
+							Next when setting attributes on Moved events invoke this command to set the URI of the foreign Premises.
+							This command will present the user with a dialog containing the names and the URIs of all the partners 
+							from the Location Service.  Choose one to set the URI of the Moved event.  If the choosen partner has an
+							URI that is a USDA Premises ID number, the MovedIn or MovedOut pin attribute will be set as well.
+							</entry>
+						</row>
+					
+					    <row>
+							<entry>Premises</entry>
+							<entry>Resolve Geolocation Names</entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Resolves all geolocation names on all the Animals and the events of the Animals in the Premises. 
+							</entry>
+							
+							<entry>Use this for traceback and traceforward of all Animals. Resolves the urns on Moved events 
+							to real names, geo coordinates on Position events to real names and for resolving the current 
+							location of the Animal(s) as a location name.</entry>
+						</row>
+					
+					
+					</tbody>
+				</tgroup>
+			</table>
+
+		</para>
 	</section>
-	
+	 
 	<section id="premisesDataModel">
 	<?dbhtml filename="model/premisesEditorModel_dataModel.html" ?>
 	<title>Premises Data Model</title>
