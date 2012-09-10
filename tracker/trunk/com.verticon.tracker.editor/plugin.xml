@@ -276,33 +276,6 @@
       <menuContribution
             locationURI="popup:com.verticon.tracker.editor.menus.popupany">
                
-               <!-- All EObjects -->
-               <!-- Select the EObject elements in the Outline View -->
-               <command
-                     commandId="com.verticon.tracker.editor.commands.generic.select.command"
-                     icon="icons/full/obj16/selected_mode.gif"
-                     style="push">
-                  <visibleWhen>
-                     <and>
-                     <iterate
-                           ifEmpty="false"
-                           operator="or">
-                        <instanceof
-                              value="org.eclipse.emf.ecore.EObject">
-                        </instanceof>
-                     </iterate>
-                	 <!-- 
-			        	Restricted to show only if the active Editor is a ContentOutlinePage
-			        	provider Ticket#403
-			        	And only when the OutlinePage is showing Ticket#452
-          			 -->
-          			 <test
-               			 property="com.verticon.tracker.editor.isContentOutlinePage">
-          			</test>
-         			</and>
-                  </visibleWhen>
-               </command>
-               
                <!-- Resources -->
                <!-- 
                Import tagIds as Template Events;
@@ -468,7 +441,32 @@
                </command>
                
                
-               
+                <!-- All EObjects -->
+               <!-- Select the EObject elements in the Outline View -->
+               <command
+                     commandId="com.verticon.tracker.editor.commands.generic.select.command"
+                     icon="icons/full/obj16/selected_mode.gif"
+                     style="push">
+                  <visibleWhen>
+                     <and>
+                     <iterate
+                           ifEmpty="false"
+                           operator="or">
+                        <instanceof
+                              value="org.eclipse.emf.ecore.EObject">
+                        </instanceof>
+                     </iterate>
+                	 <!-- 
+			        	Restricted to show only if the active Editor is a ContentOutlinePage
+			        	provider Ticket#403
+			        	And only when the OutlinePage is showing Ticket#452
+          			 -->
+          			 <test
+               			 property="com.verticon.tracker.editor.isContentOutlinePage">
+          			</test>
+         			</and>
+                  </visibleWhen>
+               </command>
                
                <!-- Animals -->
                
