@@ -12,6 +12,8 @@ package com.verticon.tracker.editor.handlers;
 
 import static com.verticon.tracker.editor.presentation.TrackerReportEditorPlugin.bundleMarker;
 
+import java.util.Iterator;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -50,8 +52,16 @@ public class ResolveGeoLocationNamesHandler extends AbstractHandler {
 		ISelection selection = HandlerUtil.getActiveMenuSelection(event);
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection sselection = (IStructuredSelection) selection;
+				
 			if(sselection.getFirstElement() instanceof Animal){
-				handle(event, (Animal)sselection.getFirstElement());
+				Iterator<?> it = sselection.iterator();
+				while (it.hasNext()) {
+					Object o = it.next();
+					if(o instanceof Animal){
+						handle(event, (Animal)o);
+					}
+				}
+				
 			} else if(sselection.getFirstElement() instanceof Premises){
 				handle(event, (Premises)sselection.getFirstElement());
 			}
