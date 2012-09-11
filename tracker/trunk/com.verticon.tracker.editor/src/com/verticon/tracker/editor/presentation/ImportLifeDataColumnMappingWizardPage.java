@@ -309,7 +309,7 @@ class ImportLifeDataColumnMappingWizardPage extends WizardPage {
 		try {
 			if (!flags.validMapping()) {
 				setMessage(null);
-				setErrorMessage("You must select only one mapping for Animal:datatime and Animal:Id."
+				setErrorMessage("You must select one and only one mapping for Animal:id and Animal:species."
 						);
 				return;
 			}
