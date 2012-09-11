@@ -860,7 +860,6 @@
         
 	</section>
 	
-	
     <section id="premisesActions">
 		<?dbhtml filename="premisesActions/premisesActions.html" ?>
 		<title>Premises Action Commands</title>
