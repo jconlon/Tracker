@@ -17,12 +17,17 @@ This project contains the following documents and files:
 
 h3. about.html
 
-This about file, in html format.
+This about file, in HTML format.
 
 
 h3. about.textile
 
-This about file in texttile format.
+This about file in textile format.
+
+h3. animalLifeDataUpLoad.txt
+
+This is data file that contains animal life data information.  It was exported from a spreadsheet as a comma separated values text file. The 
+data values in the file are animal:id, animal:visualId, animal:species, and animal:comments.  The species is either a 1 for beef or 2 for swine. 
 
 h3. autotype.metatype
 
@@ -42,11 +47,15 @@ An example *Tracker Store* _Admin_ document for specifying users access and perm
 
 h3. doc.agri
 
-An example _Agriculture_ document used for identifying one or more _.premises_ documents as part of an _association_.  _.premises_ documents referenced in an _Agriculture Association_ can be used as input to the Tracker *Geolocatoin service* for identify animal locations for all _.premises_ documents throughout the workspace.  See the _Location Service_ documentation for more details.
+An example _Agriculture_ document used for identifying one or more _.premises_ documents as part of an _association_.  _.premises_ documents referenced in an _Agriculture Association_ can be used as input to the Tracker *Location service* for identify animal locations for all _.premises_ documents throughout the workspace.  See the _Location Service_ documentation for more details.
 
 h3. doc.kml
 
 An example _Geography_ document used in GIS(Geographic Information Systems) and industry standard GeoBrowswers like Google Earth.  
+
+h3. HighWaterProcessing.premises
+
+An example business associate premises, with premises and location information but without any animals.  It is referenced in the doc.agri association element and will serve as a location in the location service.
 
 h3. example.premises
 
@@ -55,6 +64,18 @@ An example _Premises_ document that contains example animals, animal life data, 
 h3. My.metatype
 
 An example _Metatype_ document that specifies to custom events.  This document is referenced by the **example.premises** document to enable users to add these two custom events to animals included in the **example.premsies** document. 
+
+h3. NationalBeefPacking.premises
+
+An example business associate premises, with premises and location information but without any animals.  It is referenced in the doc.agri association element and will serve as a location in the location service.
+
+h3. PokyFeeders.premises
+
+An example business associate premises, with premises and location information but without any animals.  It is referenced in the doc.agri association element and will serve as a location in the location service.
+
+h3. RidgeButchering.premises
+
+An example business associate premises, with premises and location information but without any animals.  It is referenced in the doc.agri association element and will serve as a location in the location service.
 
 h3. Template.animal
 
