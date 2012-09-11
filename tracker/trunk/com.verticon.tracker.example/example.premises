@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <premises:Premises xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:premises="http://www.verticon.com/tracker/0.4.2/premises" premisesId="H89234X" emailContact="jack_condor@bogus.net" uri="urn:pin:H89234X" administrator="Jack Sprat" name="East Farm" description="An example farm" phoneNumber="404-971-8926">
-  <animals xmi:type="premises:BovineBeef" birthDate="2008-06-10T10:49:30.871-0500" sex="Male" id="840456789012341" comments="Old Bully" visualID="41" beefBreed="DANISH JERSEY">
+  <animals xmi:type="premises:BovineBeef" birthDate="2009-03-06T14:24:35.000-0600" sex="Male" id="840456789012341" comments="Old Bully" visualID="41" beefBreed="DANISH JERSEY">
     <tags id="840456789012341">
       <events xmi:type="premises:TagApplied" dateTime="2010-05-10T10:51:30.881-0500" comments="kkkkk"/>
       <events xmi:type="premises:MovedIn" dateTime="2010-05-10T10:53:30.881-0500" sourcePin="HA92348" uri=""/>
@@ -232,7 +232,7 @@
       <events xmi:type="premises:TagApplied" dateTime="2009-05-15T16:16:33.828-0500" electronicallyRead="true"/>
       <events xmi:type="premises:MovedIn" dateTime="2009-05-15T16:16:34.828-0500" electronicallyRead="true" sourcePin="005FZ5T"/>
       <events xmi:type="premises:WeighIn" dateTime="2009-05-15T16:16:35.828-0500" electronicallyRead="true" weight="44.0"/>
-      <events xmi:type="premises:MovedOut" dateTime="2009-05-15T16:16:36.828-0500" electronicallyRead="true" destinationPin="005FZ5T"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-05-15T16:16:36.828-0500" electronicallyRead="true" destinationPin="003BVJB" uri="urn:pin:003BVJB"/>
     </tags>
   </animals>
   <animals xmi:type="premises:Swine" id="840003005565485" rightEarNotching="1" leftEarNotching="3">
@@ -261,6 +261,29 @@
       <events xmi:type="premises:WeighIn" dateTime="2009-05-15T16:18:47.656-0500" electronicallyRead="true" weight="60.0"/>
       <events xmi:type="premises:WeighIn" dateTime="2009-09-14T18:01:26.484-0500" weight="308.0"/>
       <events xmi:type="premises:MovedOut" dateTime="2009-09-21T11:38:29.921-0500" electronicallyRead="true" comments="Animal implicitly moved out to an unknown destination." destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" birthDate="2011-03-03T14:28:31.000-0600" sex="Neutered/castrated male" id="8400003005565534" visualID="534">
+    <tags id="8400003005565534">
+      <events xmi:type="premises:MovedIn" dateTime="2011-03-04T11:35:00.084-0600" comments="Bought as a " sourcePin="005FZ5T" uri="urn:pin:005FZ5T"/>
+      <events xmi:type="premises:TagApplied" dateTime="2011-03-04T14:30:17.000-0600" electronicallyRead="true"/>
+      <events xmi:type="premises:Sighting" dateTime="2011-03-04T14:30:17.000-0600" electronicallyRead="true" location="Pasture One"/>
+      <events xmi:type="premises:Sighting" dateTime="2011-04-06T14:38:09.000-0500" electronicallyRead="true" comments="Castrated and Branded" location="Pasture One"/>
+      <events xmi:type="premises:GenericEvent" dateTime="2011-04-06T14:38:09.000-0500" electronicallyRead="true" ocd="My.metatype#bull.calf.castration">
+        <eventAttributes key="Difficulty" value="easy"/>
+      </events>
+      <events xmi:type="premises:GenericEvent" dateTime="2011-04-06T14:38:09.000-0500" ocd="My.metatype#calf.branding">
+        <eventAttributes key="TypeOfBrand" value="BB Brand"/>
+      </events>
+      <events xmi:type="premises:Sighting" dateTime="2011-10-03T14:37:41.704-0500" comments="Weaned" location="Feedlot pens"/>
+      <events xmi:type="premises:GenericEvent" dateTime="2011-10-03T14:37:41.704-0500" ocd="My.metatype#calf.weaning">
+        <eventAttributes key="Difficulty" value="easy"/>
+      </events>
+      <events xmi:type="premises:MovedOut" dateTime="2012-04-03T14:48:45.426-0500" comments="xxxx" uri="urn:dn:com:cattlefeeding"/>
+      <events xmi:type="premises:MovedIn" dateTime="2012-04-04T15:43:05.000-0500" sourcePin="H89234X" uri="urn:pin:H89234X"/>
+      <events xmi:type="premises:MovedOut" dateTime="2012-09-10T09:37:06.186-0500" uri="urn:dn:com:nationalbeef"/>
+      <events xmi:type="premises:MovedIn" dateTime="2012-09-10T14:37:53.834-0500"/>
+      <events xmi:type="premises:Slaughtered" dateTime="2012-09-10T15:37:37.122-0500"/>
     </tags>
   </animals>
   <unAppliedTags id="840456789012346">
