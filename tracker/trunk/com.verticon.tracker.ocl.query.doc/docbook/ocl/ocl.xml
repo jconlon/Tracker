@@ -6,9 +6,10 @@
 	<title>OCL Query</title>
 	
 	<section id="oclQuery_overview">
+		<?dbhtml filename="ocl_overview/oclOverview.html" ?>
 		<title>Overview </title>
 		<para>
-			Even though the structure of the Tracker Editor specific data models may be
+			Even though the structure of the Tracker Editor data models may be
 			simple, some documents like Premises documents, can hold large amounts of animal
 			and event history data. Obtaining information about or selecting specific animals 
 			or events in these large Premises documents require the use of advanced
@@ -19,18 +20,18 @@
 			<acronym>OCL</acronym> is a simple but powerful declarative language 
 			used within Tracker's advanced query and selection tools to interpret 
 			Tracker Editor specific documents for information or to query documents in order to
-			select specific elements for further manipulation.
-		</para>
-
-		<para>
+			select specific elements for further manipulation. 
+			<tip><para>
 			When using the <acronym>OCL</acronym> Interpreter, Queries Viewer, 
 			or Query tools to interrogate Premises documents refer to the Editor specific data model
 			when composing <acronym>OCL</acronym> query statements.
-		</para>
+			</para></tip>
+		</para>	
 
 	</section>
 	
 	<section id="oclQuery_interpreter">
+	<?dbhtml filename="oclInterpreter/oclInterpreter.html" ?>
 	<title>OCL Interpreter</title>
 	<para>
 		The OCL Interpreter is a parser/interpreter<footnote >
@@ -43,24 +44,42 @@
 		Tracker document. 
 	</para>
 	
-	
-    <section id="oclQuery_interpreter_invokingOCLInterpreter">
-		<?dbhtml filename="overview/oclOverview_query.html" ?>
-		<title>Invoking the OCL Interpreter</title>
-		<para>
-		To bring up the OCL Interpreter, from the Tracker Editor menu in the Workbench,
-		select the OCL Interpreter Menu and select 'Show Console'.
-	    menu. The OCL Interpreter console will show below the Tracker Editor.
-		</para>
+	<para>
+		To bring up the OCL Interpreter, from the Tracker Editor menu in the Workbench:
 		
-	</section>
-	
-	<section id="oclQuery_interpreter_OCLInterpreterExamples">
-		<?dbhtml filename="overview/oclOverview_query_interpreterExamples.html" ?>
-		<title>OCL Interpreter Examples</title>
+		<orderedlist numeration="loweralpha">
+				<listitem><para>From the main menu select the <emphasis>Query</emphasis> menu. 
+					See <xref linkend="fig_ocl_query" />.</para></listitem>
+				<listitem><para>Press the <emphasis>Show Console</emphasis> menu item.</para>
+				<para>The OCL Interpreter console will show below the Tracker Editor.  See 
+				<xref linkend="fig_ocl_query_console" />.</para></listitem>
+				
+		</orderedlist>
 		
+		<figure id="fig_ocl_query">
+                <title>Invoking OCL Console 
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/ocl/invoking_console.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        
+        <figure id="fig_ocl_query_console">
+                <title>OCL Query Console 
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/ocl/console.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+	</para>
 		
-		<para>
+	<para>
 			The following are example
 			<acronym>OCL</acronym>
 			Interpreter rules that can be used for the querying Premises
@@ -131,27 +150,35 @@ animals -> collect(
   			
   	
   	</para>
-   </section>
   
   </section>
   
-  <section id="oclQuery_QueriesViewer">
+    <section id="oclQuery_QueriesViewer">
 		<?dbhtml filename="overview/oclOverview_query_viewer.html" ?>
-		<title>Queries Viewer</title>
+		<title>Queries View</title>
 		
 		<para>
-		The Queries Viewer is a convenient way to invoke frequently used OCL queries 
-		to select specific elements within Tracker premises documents.  In order to use 
-		the Queries Viewer you will have to configure the viewer by adding 
-		individual queries.  The viewer will persist all queries between
+		The Queries View is a convenient way to invoke frequently used OCL queries 
+		to select specific elements within Premises documents.  
+		
+		<figure id="fig_ocl_query">
+                <title>Queries View 
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/ocl/queryViewer.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        
+		In order to use the Queries View you will have to configure the viewer by adding 
+		individual queries.  The view will persist all queries between
 		boots of the Tracker application, so you can over time create a suite of personalized
 	    custom queries associated with how you wish to select elements. Once the queries are
-	    added to the viewer using them is as simple as selecting them and pressing the 
-	    Execute button.
+	    added to the view using them is as simple as selecting them and pressing the <emphasis>Execute</emphasis> button.
 	    </para>
 	    
-	    <section id="oclQuery_QueriesViewer_using">  
-	      <title>Using the Queries Viewer</title>
 	    <para>
 		To add a custom query to the Queries Viewer, select the Queries Viewer tab 
 		and press the Add button.  A new row representing a OCL query will be added to the 
@@ -178,10 +205,6 @@ animals -> collect(
 			</orderedlist>
 		</para>
 		
-		</section>	
-		
-		<section  id="oclQuery_QueriesViewer_examples">
-		<title>Example Queries</title>
 		<para>
 			The following are a few example
 			<code>Query</code> strings that can be used for adding custom
@@ -219,7 +242,7 @@ Event.allInstances()->
   				</programlisting>
   			</example>
   	</para>
-  	</section>
+  	
  </section>
  
 </chapter>
