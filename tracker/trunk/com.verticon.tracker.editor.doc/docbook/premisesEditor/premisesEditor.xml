@@ -818,6 +818,49 @@
 	</section>
 	</section>
   
+    <section id="premisesSelectionTargeting">
+		<?dbhtml filename="premisesSelection/premisesSelection.html" ?>
+		<title>Selecting and Targeting Elements</title>
+		<para>When working with Premises documents that contain large numbers of animals and events it is often necessary
+		to focus on a subset of the Animals and Events contained within the Premises.</para>
+		
+		<para>The Target Selection Tool can be used 
+		to restrict the contents of the Premises Editor Selection tree, the Animals View, and the Events View and show only
+	    Animals and Events that are of interest. 
+
+		<orderedlist numeration="loweralpha">
+				<listitem><para>Select one or more animals or events. See <xref linkend="fig_premises_selection_selection" />.</para></listitem>
+				<listitem><para>Press the <emphasis>Target Selection</emphasis> button to restrict 
+				the views and editor to the selected animals and events. See <xref linkend="fig_premises_selection_target" />. </para></listitem>
+				<listitem><para>Press the <emphasis>Target Selection</emphasis> to return to an 
+				unrestricted viewing of all the animals and events.</para></listitem>
+		  </orderedlist>
+		</para>
+		<figure id="fig_premises_selection_selection">
+                <title>Selecting Animal Events 
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/selection/selection.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        
+        <figure id="fig_premises_selection_target">
+                <title>After Invoking Target Selection 
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/selection/targeted.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        
+	</section>
+	
+	
     <section id="premisesActions">
 		<?dbhtml filename="premisesActions/premisesActions.html" ?>
 		<title>Premises Action Commands</title>
@@ -825,11 +868,24 @@
 		action commands that the user can invoke to effect changes on the resource or document element.
 		</para>
 		
-		<para>The following table shows the Tracker Actions that can be invoked on workspace resources. 
-		<footnote><para>These actions are accessible when viewing resources with the Project Explorer View.  In the 
+		<para>Tracker Actions can be invoked on specific types of workspace resources. 
+		These actions are accessible when viewing resources with the Project Explorer View. <footnote><para>In the 
 		Project Explorer View right click on the resource and the popup main menu will be shown. From there the sub menu 
 		'Tracker Actions' will contain the appropriate acton command.
-		</para></footnote>
+		</para></footnote>  
+		
+		
+		<figure id="fig_premises_actions_resources">
+                <title>Invoking Resource Actions from Project Explorer 
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/actions/resources.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+       
 			<table frame='all'>
 				<title>Premises Editor Resource Action Commands</title>
 				<tgroup cols='4' align='left' colsep='1' rowsep='1'>
@@ -898,14 +954,37 @@
 			</table>
 		</para>
 		
-		<para>The following table shows the Tracker Actions that can be invoked on Premises document elements. 
-		<footnote><para>These actions may be accessed as popup menus on the document elements when viewing documents 
+		<para>Tracker Actions can be invoked on Premises document elements. These actions may be accessed as popup menus on the document elements when viewing documents 
 		from the Selection page of the Premises Editor, document tree in the Outline View tree, the master table in the Animals View
-	    or the master table in the Events View.  
+	    or the master table in the Events View. 
+	    	<footnote><para> 
 		Right click on the
 		element and the popup main menu will be shown. From there the sub menu 'Tracker Actions' will contain the 
 		appropriate acton command.
-		</para></footnote>
+			</para></footnote>
+		
+			<figure id="fig_premises_actions_selection">
+                <title>Invoking Element Actions from Premises Editor Selection Page
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/actions/selection.png"/>
+                    </imageobject>
+                </mediaobject>
+        	</figure>
+        	
+        	<figure id="fig_premises_actions_animals">
+                <title>Invoking Element Actions from Animals View Master Table
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/actions/animals.png"/>
+                    </imageobject>
+                </mediaobject>
+        	</figure>
+		
 			<table frame='all'>
 				<title>Premises Editor Document Element Action Commands</title>
 				<tgroup cols='7' align='left' colsep='1' rowsep='1'>
@@ -941,9 +1020,41 @@
 								Selects the same element or elements in the tree of the Outline View. 
 							</entry>
 							
-							<entry>This is most handy when one is inspecting elements in the Animals View or Events View and 
+							<entry>This is handy when one is inspecting elements in the Animals View or Events View and 
 							 you want to see another perspective of the element in the context of a tree view. It is also good to 
 							 use this to syncrhonize the editor and the other views of the document with the Animals or Events view.</entry>
+						</row>
+						
+						<row>
+							<entry>All elements</entry>
+							<entry>Context Free Query<footnote><para>Only availible when the OCL feature is provisioned.</para></footnote></entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Presents the user with a dialog for manual entry of a query to select sub (child) elements 
+								within the selection.
+							</entry>
+							
+							<entry>Typically used on the Premises to perform an ad hoc query for selecting animals or events. 
+							See the OCL Query documentation for more details.</entry>
+						</row>
+						
+						<row>
+							<entry>All elements</entry>
+							<entry>Query with Context<footnote><para>Only availible when the OCL feature is provisioned.</para></footnote></entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Presents the user with a dialog for manual entry of a query to select the sub (child)
+							    elements within the selected element. A combo box allows the selection of the query context.
+							</entry>
+							
+							<entry>Typically used on the Premises to perform an ad hoc query for selecting animals or events. 
+							See the OCL Query documentation for more details.</entry>
 						</row>
 						
 						<row>
@@ -957,8 +1068,9 @@
 								Prompts the user to select a new animal type. 
 							</entry>
 							
-							<entry>This is most handy when one is importing animals and not all of them are the same type. First import
-							them as the same type then select the ones to change and invoke this command.</entry>
+							<entry>Use this when importing animals and not all of them are the same type. First import
+							them as the same type with one of the Import actions, then select the ones to change and 
+							invoke this command.</entry>
 						</row>
 						
 						<row>
@@ -1040,7 +1152,6 @@
 							to real names, geo coordinates on Position events to real names and for resolving the current 
 							location of the Animal(s) as a location name.</entry>
 						</row>
-					
 					
 					</tbody>
 				</tgroup>
