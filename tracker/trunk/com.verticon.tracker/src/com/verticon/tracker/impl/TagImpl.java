@@ -279,6 +279,8 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag {
 			}
 		};
 		if(eResource()!=null && eResource().getResourceSet()!=null ){
+			//Resolve all the proxies so the OCDs can be found
+			EcoreUtil.resolveAll(eResource().getResourceSet());
 			for(TreeIterator<?> iter = EcoreUtil.getAllContents(eResource().getResourceSet(), true); iter.hasNext();){
 				Object o =  iter.next();
 				if(o instanceof EObject){
