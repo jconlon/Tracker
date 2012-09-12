@@ -934,7 +934,7 @@
 						</row>
 						<row>
 							<entry>*.txt</entry>
-							<entry>Comma separated value<acronym>CSV</acronym> text files with extenstion 'txt',  contain Animal 
+							<entry>Comma separated value <acronym>CSV</acronym> text files with extenstion 'txt',  contain Animal 
 							life data for a set of animals. 
 								<footnote><para>
 								Each value is separated with a comma and each row is on its own line and lines are terminated with 
@@ -946,6 +946,20 @@
 							names must be mapped for the import to continue, Animal.id and Animal.species. The next page will map the values
 							in the selected species columns to Premises Animal species names.</entry>
 							<entry>Good for importing new animals with unique life data.</entry>
+						</row>
+						
+						<row>
+							<entry>*.log</entry>
+							<entry>Comma separated value <acronym>CSV</acronym> text files with extenstion 'log',  contain Animal 
+							event data for a set of animals in <emphasis>Name Value</emphasis> pairs.
+								<footnote><para>
+								Namve value pairs are separated with a comma and each row is on its own line and lines are terminated with 
+								a carriage return.  Example:
+								<code>type='measurement',dateTime='2010-02-22 10:23:46',id='900014000554891',scope='animal.weight',value='81.0',error='0.0100',unit='kg'</code>
+								</para></footnote></entry>
+							<entry>Import Log File as Animal Event Data<footnote><para>Only availible when the iRouter Premises Gateway feature is provisioned.</para></footnote></entry>
+							<entry>This is one of the formats for logging output by the iRouter logger feature.</entry>
+							<entry>These log files are in a more human readable format. While these files are useful for adding event data, other programs may not be able to easily output such a format. </entry>
 						</row>
 						
 					</tbody>
