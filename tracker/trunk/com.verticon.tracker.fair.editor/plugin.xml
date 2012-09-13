@@ -98,6 +98,10 @@
       <!-- 
 		Animals
 	   -->
+	   <!-- Regsitration requires an animal, person, and lot.  
+	   The selection must have an Animal, but the selection can have an optinal person and an optional lot. If 
+	   the selection, does not have any of the optinal elements the wizard will prompt for them.  If all three 
+	   are selected there will be a confirmation dialog for the registration. -->
        <command
              id="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
              defaultHandler="com.verticon.tracker.fair.editor.handlers.AnimalFairRegistrationHandler"
@@ -117,12 +121,12 @@
       <menuContribution
             locationURI="popup:com.verticon.tracker.editor.menus.popupany">
             
-            	<!-- 
-               	Register an Exhibit from a FairRegistrationSelection.
-               	Works on a Animal Elements, Event Elements, a single Person, and a single Lot;
-               	works with simple and transaction based editors, if it is a set of animals alone 
-               	it requires that the active editor is a FairEditor so as not to show when there
-               	is an active PremisesEditor.
+            	<!-- 1
+               	 Regsitration requires an animal, person, and lot.  There must be a Fair editor active as well.
+	  			 The selection must have an Animal, but the selection can have an optinal person and an optional lot. 
+	  			 Command will prompt for the optionals if they are not selected.
+	  			 
+	  			 Also availible on Animal Event, and People Views
                -->
                <command
                     commandId="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
@@ -136,7 +140,7 @@
 		            </visibleWhen>
                </command>
                
-               <!-- 
+               <!-- 2
                	Register an Exhibit visible from an Animals Selection in the Animals View.
                	Works on a Animal Elements when there is not an active FairRegistrationSelection. This
                	command will show in the Animals View, but will not show (alongside the same command made visible
@@ -169,7 +173,7 @@
                </command>
                
                
-               <!-- 
+               <!-- 3
                	Register an Exhibit visible from an Events Selection in the Events View.
                	Works on a Events Elements when there is not an active FairRegistrationSelection. This
                	command will show in the Events View, but will not show (alongside the same command made visible
@@ -202,11 +206,13 @@
                </command>
                
                
-               <!-- 
+               <!-- 4
                	Update Pins on all Exhibited Animal Move Events visible from Person selections.
                	Works on a collection of Person Elements;
                	works with simple and transaction based editors ;
 			   	needs a Person to be Registed, so it No longer is visible from just any Person	
+			   	
+			   	Also availible on People Views
                -->
                <command
                     commandId="com.verticon.tracker.fair.editor.commands.person.changeMovedEventPins.command"
@@ -228,6 +234,12 @@
 	    			     </and>
 	            	</visibleWhen>
                	</command>
+               	
+               	
+               <!-- 5 
+               Creates a new person based on the selected Person
+               Also availible on People Views
+               -->
                <command
                      commandId="com.verticon.tracker.fair.editor.commands.copyPerson"
                      label="Copy this person"
@@ -245,10 +257,9 @@
                   </visibleWhen>
                </command>
       </menuContribution>
-      
-      
    </extension>
-      <extension
+   
+   <extension
             point="org.eclipse.ui.cheatsheets.cheatSheetContent">
          <category
                id="com.verticon.tracker.category.cheatSheets"
@@ -264,7 +275,7 @@
                This cheat sheet will show you how to create a Fair Document for documenting information about the People, Exhibits, and Livestock at an Animal Exposition.
             </description>
          </cheatsheet>
-      </extension>
+    </extension>
       
       
       <extension
