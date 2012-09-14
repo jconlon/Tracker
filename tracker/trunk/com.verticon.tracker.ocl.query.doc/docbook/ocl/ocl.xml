@@ -161,7 +161,7 @@ animals -> collect(
 		The Queries View is a convenient way to invoke frequently used OCL queries 
 		to select specific elements within Premises documents.  
 		
-		<figure id="fig_ocl_query">
+		<figure id="fig_ocl_queryView">
                 <title>Queries View 
                 </title>
                 <mediaobject>
