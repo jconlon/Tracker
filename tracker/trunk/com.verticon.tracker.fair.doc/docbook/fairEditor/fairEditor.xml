@@ -3,6 +3,7 @@
 <chapter>
   <?dbhtml filename="fairEditor/fairEditor.html" ?>
   <title>Fair Editor</title>
+
   <section id="overviewFairEditor">
     <title>Overview</title>
     <section id="overviewFairEditorWhatis">
@@ -165,69 +166,6 @@
     </section>
   </section>
   
-  <section id="fairEditor_useCase">
-  <?dbhtml filename="usecase/fairEditor_useCase.html" ?>
-    <title>Fair Editor Overview of Use Cases</title>
-    <para>To best depict what the Fair Editor can do for Tracker users, the following figure presents a overview of
-    the <emphasis>Use-Cases</emphasis> that can be performed. </para>
-    <para>
-    <xref linkend="fig_FairEditorUseCases"/> shows an overview of the usage 
-    requirements for the Fair Editor.</para>
-    <figure id="fig_FairEditorUseCases">
-      <title>Fair Editor Overview</title>
-      <mediaobject><imageobject><imagedata align="center"
-       fileref="../images/useCases/editor.png"/></imageobject></mediaobject>
-    </figure>
-    <note><para>Typically one Fair document and a referenced Premises document are the only two documents necessary for 
-    recording all uses-cases given for a fair.  Youth club and person contacts can easily be copied and pasted from one 
-    year to the next.</para></note>
-  </section>
-  
-  <section id="preFair_useCase">
-  <?dbhtml filename="usecase/preFair_useCase.html" ?>
-    <title>Prefair Use Cases</title>
-    <para>Preparing for the fair is a simple matter of pre-allocating groups of tags to certain animal types,
-    importing any people contact information that may already exist and setting up the types of 
-    contests that will make up the fair.</para>
-    <para>
-    <xref linkend="fig_PreFairUseCases"/> shows pre-fair usage 
-    requirements for the Fair Editor.</para>
-    <figure id="fig_PreFairUseCases">
-      <title>Preparing for the fair</title>
-      <mediaobject><imageobject><imagedata align="center"
-       fileref="../images/useCases/preFairUseCases.png"/></imageobject></mediaobject>
-    </figure>
-  </section>
-  
-   <section id="weighIn_useCase">
-  <?dbhtml filename="usecase/weighIn_useCase.html" ?>
-    <title>WeighIn Use Cases</title>
-    <para>Many Fairs hold a early season weigh-in of animals in order to show an average daily weight gain.</para>
-    <para> 
-    <xref linkend="fig_WeighInUseCases"/> shows early weigh-in usage 
-    requirements for the Fair Editor.</para>
-    <figure id="fig_WeighInUseCases">
-      <title>Animal Weigh-In</title>
-      <mediaobject><imageobject><imagedata align="center"
-       fileref="../images/useCases/weighIn.png"/></imageobject></mediaobject>
-    </figure>
-  </section>
-  
-   <section id="fairCheckIn_useCase">
-  <?dbhtml filename="usecase/fairCheckIn_useCase.html" ?>
-    <title>Check-In Use Cases</title>
-    <para>Checking in animals to the fair is often a two-fold process.  First there is the veterinarian check to 
-    insure that the animal is healthy and has all required papers. Next the animal is checked in.</para>
-    <para>
-    <xref linkend="fig_FairCheckInUseCases"/> shows early check-in usage 
-    requirements for the Fair Editor.</para>
-    <figure id="fig_FairCheckInUseCases">
-      <title>Animal Check-In</title>
-      <mediaobject><imageobject><imagedata align="center"
-       fileref="../images/useCases/fairCheckIn.png"/></imageobject></mediaobject>
-    </figure>
-  </section>
-  
   <section id="fairDocuments">
    <?dbhtml filename="model/fairEditorModel_FairDocuments.html" ?>
     <title>Fair Documents</title>
@@ -236,6 +174,287 @@
      <para>Fair document files utilize a <code>.fair</code> file extension to 
     distinguish them from other types of files.</para>
   </section>
+ 
+  <section id="editingFairDocuments">
+    	<?dbhtml filename="editingFairDocuments/editingFairDocuments.html" ?>
+		<title>Editing Fair Documents</title>
+		<section id="creatingFairDocuments">
+			<title>Creating a new Fair Document</title>
+			<para>
+			To create a new Fair document. Go to the File menu and launch a 
+			<emphasis>New Fair Document Wizard</emphasis> by selecting the menu items:<code>File|New|Fair Document</code>.
+			</para>
+
+		<para>Follow the instructions to choose a project, folder and a name for the document.
+		Select <code>Fair</code> as the model object and press <code>Finish</code> to create the document. 
+			
+		</para>
+       <figure id="fig_selectFairModelObject">
+			<title>New Fair Document Wizard Model Object Prompt</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/editing/selectModelObject.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		</section>
+		
+		<section id="loadingPremisesDocumentResources">
+		<?dbhtml filename="editingFairDocuments/loadingFairDocuments.html" ?>
+		<title>Loading Additional Resources into the Document</title>
+		 <note>
+			<para>
+				Since the Fair document references the Premises element of a Tracker Premises document, 
+				a Premises document resources must already exist in the workspace.  If it does not, create
+				a empty Premises document first. <emphasis>You can always add data to the referenced 
+				Premises document at the same time you edit the Fair document.</emphasis>
+			</para>
+		 </note>
+			<para>
+			To reference a <code>Premises</code> element from a Fair document, a Premises document must first be loaded 
+			into the Fair document as a resource. 
+			To load a Premises document as a resource place the mouse cursor on the root element in the Fair document, 
+			right click, and from the pull down menu choose <code>Load Resorce...</code>
+			</para>
+			<figure id="fig_loadFairResource">
+			<title>Load Resource Dialog</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/editing/loadResource.png" />
+				</imageobject>
+			</mediaobject>
+			</figure>
+			<para>From the dialog choose the Premises document that you wish to load.</para>
+			<figure id="fig_loadedFairResource">
+			<title>Fair Project with Loaded Resources</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/editing/loadedResources.png" />
+				</imageobject>
+			</mediaobject>
+			</figure>
+	    <para>When Premises documents are loaded as a resource in a Fair document, the editor choice boxes 
+	    associated with the <code>Premises</code> attribute of the <code>Fair</code> element will be shown
+	    as a choice for user selection. 
+	   </para>
+	 </section>
+
+     <section id="openingFairDocument">
+	    <?dbhtml filename="editingFairDocuments/openingFairDocuments.html" ?>
+	    <title>Opening a Fair Document</title>
+	    <para>For high throughput during fair weigh-ins and check-ins the Fair Transaction Editor can be used to
+	    edit fair documents.  The Fair Transaction Editor supports the Tracker 
+	    <emphasis>Transaction</emphasis> processing facility for electronic input of data originating from
+	    network connected sensors and RFID readers.
+	   </para>
+	   <para>To open a Fair document with the Fair Transaction Editor, right click on the Fair document and 
+	   select the pull down menu item <code>Open With</code>.</para>
+	   <figure id="fig_openingFairDocuments">
+			<title>Opening a Fair Transaction Editor</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/editing/fairTransactionEditor.png" />
+				</imageobject>
+			</mediaobject>
+	   </figure>
+	   <note><para>When not working with RFID readers or sensors, it is best to use the basic Fair 
+	   Editor.</para></note>
+	    </section>
+
+	</section>
+	
+  <section id="fairActions">
+		<?dbhtml filename="fairActions/fairActions.html" ?>
+		<title>Fair Action Commands</title>
+		<para>For key elements within the Fair document, and the associated Premises document the Fair Editor provides 
+		action commands that the user can invoke to effect changes on the content of the information held in these documents.
+		</para>
+		
+		<para>Fair Actions can be invoked on Fair document elements and for elements in the associated Premises document
+		<footnote><para>In addition to the actions that the Fair Editor adds to Premises elements the user will also see
+		the actions that the Premises Editor and other provisioned features have added to the Premises elements. 
+		</para></footnote>. 
+		These actions may be accessed as popup menus on the Fair and Premises document elements when viewing documents in 
+		the Fair Editor, document tree in the Outline View tree, the master table of the Exhibit View, the master table 
+		of the People View, the master table in the Animals View or the master table of the Events View. 
+	    <footnote><para> 
+		Right click on the element and the popup main menu will be shown. From there the sub menu 'Tracker Actions' will 
+		contain the appropriate action command.
+			</para></footnote>
+		
+			<figure id="fig_fair_actions_selection">
+                <title>Invoking Element Actions from Fair Editor
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/actions/editor.png"/>
+                    </imageobject>
+                </mediaobject>
+        	</figure>
+        	
+        	<figure id="fig_fair_actions_animals">
+                <title>Invoking Element Actions from People View Master Table
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/actions/people.png"/>
+                    </imageobject>
+                </mediaobject>
+        	</figure>
+		
+			<table frame='all'>
+				<title>Fair Editor Document Element Action Commands</title>
+				<tgroup cols='7' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' /><!-- Target -->
+					<colspec colname='c2' />
+					<colspec colname='c3' />
+					<colspec colname='c4' />
+					<colspec colname='c5' />
+					<colspec colname='c6' />
+					<colspec colname='c7' />
+					<thead>
+						<row>
+							<entry>Element</entry>
+							<entry>Command Name</entry>
+							<entry>Fair Editor<footnote><para>The Outline View like the Selection Page of the Premises Editor
+							shows the document as a tree.  All actions that can be accessed as popup menus in the Selection Page 
+							are also available from the Outline View.</para></footnote></entry>
+							<entry>From People View</entry>
+							<entry>From Exhibits View</entry>
+							<entry>From Animals View</entry>
+							<entry>From Events View</entry>
+							<entry>Description</entry>
+							<entry>Comment</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>All elements</entry>
+							<entry>Select Element(s) in Outline View</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							
+							<entry>
+								Selects the same element or elements in the tree of the Outline View. 
+							</entry>
+							
+							<entry>This is handy when one is inspecting elements in of the Views and 
+							 you want to see another perspective of the element in the context of a tree view. It is also good to 
+							 use this to syncrhonize the editor and the other views of the document.</entry>
+						</row>
+						
+						<row>
+							<entry>All elements</entry>
+							<entry>Context Free Query<footnote><para>Only availible when the OCL feature is provisioned.</para></footnote></entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Presents the user with a dialog for manual entry of a query to select sub (child) elements 
+								within the selection.
+							</entry>
+							
+							<entry>Typically used on the Fair or Premises element of the document to perform an ad hoc query for 
+							selecting exhibits, people, animals or events. 
+							See the OCL Query documentation for more details.</entry>
+						</row>
+						
+						<row>
+							<entry>All elements</entry>
+							<entry>Query with Context<footnote><para>Only availible when the OCL feature is provisioned.</para></footnote></entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Presents the user with a dialog for manual entry of a query to select the sub (child)
+							    elements within the selected element. A combo box allows the selection of the query context.
+							</entry>
+							
+							<entry>Typically used on the Fair or Premises elements to perform an ad hoc query for selecting 
+							people, exhibits, animals or events. 
+							See the OCL Query documentation for more details.</entry>
+						</row>
+						
+						<!-- Change Move Event Pins -->
+						<row>
+							<entry>Person(s)</entry>
+							<entry>Update Pins on all Exhibited Animal Events</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Takes the pin from the person and for the Animals that this person is exhibiting 
+								update all the moved events with this pin. 
+							</entry>
+							
+							<entry>Use this when you want to update moved events for the person or persons exhibited animals 
+							with the correct pin, but you only get the pin after the movement events took place.</entry>
+						</row>
+						
+						<!-- Copy Person -->
+						<row>
+							<entry>Person(s)</entry>
+							<entry>Copy Person</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Takes the information from one person element and duplicate it for a new person element.
+							</entry>
+							
+							<entry>Use this when a family is registering and you want to copy all addressing and parent information to a sibling.</entry>
+						</row>
+						<!-- Register Exhibit -->
+						
+						<!-- Copy Person -->
+						<row>
+							<entry>Animal(s) with optional selections for Person and Lot</entry>
+							<entry>Register in Exhibit</entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							
+							<entry>
+								Registers one or more animals in exhibits for a person.
+							</entry>
+							
+							<entry>Once a person and their animals are added to the system, 
+							select the group of animals, the person, the lot to register them in,
+							an invoke this command. It will create the exhibit.  One or more animals are required 
+							for the selection. If the person or the lot is not included in the selection
+							a wizard dialog will prompt the user for the missing information, either the 
+							person, the lot or both.</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table>
+
+		</para>
+	</section>
+
   <section id="fairDataModel">
     <?dbhtml filename="model/fairEditorModel_agricultureDataModel.html" ?>
     <title>Fair Data Model</title>
@@ -336,97 +555,69 @@
       
     </section>
   </section>
-  <section id="editingFairDocuments">
-    	<?dbhtml filename="editingFairDocuments/editingFairDocuments.html" ?>
-		<title>Editing Fair Documents</title>
-		<section id="creatingFairDocuments">
-			<title>Creating a new Fair Document</title>
-			<para>
-			To create a new Fair document. Go to the File menu and launch a 
-			<emphasis>New Fair Document Wizard</emphasis> by selecting the menu items:<code>File|New|Fair Document</code>.
-			</para>
-
-		<para>Follow the instructions to choose a project, folder and a name for the document.
-		Select <code>Fair</code> as the model object and press <code>Finish</code> to create the document. 
-			
-		</para>
-       <figure id="fig_selectFairModelObject">
-			<title>New Fair Document Wizard Model Object Prompt</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata align="center"
-						fileref="../images/editing/selectModelObject.png" />
-				</imageobject>
-			</mediaobject>
-		</figure>
-		</section>
-		
-		<section id="loadingPremisesDocumentResources">
-		<?dbhtml filename="editingFairDocuments/loadingFairDocuments.html" ?>
-		<title>Loading Additional Resources into the Document</title>
-		 <note>
-			<para>
-				Since the Fair document references the Premises element of a Tracker Premises document, 
-				a Premises document resources must already exist in the workspace.  If it does not, create
-				a empty Premises document first. <emphasis>You can always add data to the referenced 
-				Premises document at the same time you edit the Fair document.</emphasis>
-			</para>
-		 </note>
-			<para>
-			To reference a <code>Premises</code> element from a Fair document, a Premises document must first be loaded 
-			into the Fair document as a resource. 
-			To load a Premises document as a resource place the mouse cursor on the root element in the Fair document, 
-			right click, and from the pull down menu choose <code>Load Resorce...</code>
-			</para>
-			<figure id="fig_loadFairResource">
-			<title>Load Resource Dialog</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata align="center"
-						fileref="../images/editing/loadResource.png" />
-				</imageobject>
-			</mediaobject>
-			</figure>
-			<para>From the dialog choose the Premises document that you wish to load.</para>
-			<figure id="fig_loadedFairResource">
-			<title>Fair Project with Loaded Resources</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata align="center"
-						fileref="../images/editing/loadedResources.png" />
-				</imageobject>
-			</mediaobject>
-			</figure>
-	    <para>When Premises documents are loaded as a resource in a Fair document, the editor choice boxes 
-	    associated with the <code>Premises</code> attribute of the <code>Fair</code> element will be shown
-	    as a choice for user selection. 
-	   </para>
-	 </section>
-
-     <section id="openingFairDocument">
-	    <?dbhtml filename="editingFairDocuments/openingFairDocuments.html" ?>
-	    <title>Opening a Fair Document</title>
-	    <para>For high throughput during fair weigh-ins and check-ins the Fair Transaction Editor can be used to
-	    edit fair documents.  The Fair Transaction Editor supports the Tracker 
-	    <emphasis>Transaction</emphasis> processing facility for electronic input of data originating from
-	    network connected sensors and RFID readers.
-	   </para>
-	   <para>To open a Fair document with the Fair Transaction Editor, right click on the Fair document and 
-	   select the pull down menu item <code>Open With</code>.</para>
-	   <figure id="fig_openingFairDocuments">
-			<title>Opening a Fair Transaction Editor</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata align="center"
-						fileref="../images/editing/fairTransactionEditor.png" />
-				</imageobject>
-			</mediaobject>
-	   </figure>
-	   <note><para>When not working with RFID readers or sensors, it is best to use the basic Fair 
-	   Editor.</para></note>
-	    </section>
-
-	</section>
-	
+  
+  <section id="fairEditor_useCase">
+  <?dbhtml filename="usecase/fairEditor_useCase.html" ?>
+    <title>Fair Editor Use Cases</title>
+    <para>To best depict what the Fair Editor can do for Tracker users, the following figure presents a overview of
+    the <emphasis>Use-Cases</emphasis> that can be performed. </para>
+    <para>
+    <xref linkend="fig_FairEditorUseCases"/> shows an overview of the usage 
+    requirements for the Fair Editor.</para>
+    <figure id="fig_FairEditorUseCases">
+      <title>Fair Editor Overview</title>
+      <mediaobject><imageobject><imagedata align="center"
+       fileref="../images/useCases/editor.png"/></imageobject></mediaobject>
+    </figure>
+    <note><para>Typically one Fair document and a referenced Premises document are the only two documents necessary for 
+    recording all uses-cases given for a fair.  Youth club and person contacts can easily be copied and pasted from one 
+    year to the next.</para></note>
+  
+  <section id="preFair_useCase">
+  <?dbhtml filename="usecase/preFair_useCase.html" ?>
+    <title>Prefair Use Cases</title>
+    <para>Preparing for the fair is a simple matter of pre-allocating groups of tags to certain animal types,
+    importing any people contact information that may already exist and setting up the types of 
+    contests that will make up the fair.</para>
+    <para>
+    <xref linkend="fig_PreFairUseCases"/> shows pre-fair usage 
+    requirements for the Fair Editor.</para>
+    <figure id="fig_PreFairUseCases">
+      <title>Preparing for the fair</title>
+      <mediaobject><imageobject><imagedata align="center"
+       fileref="../images/useCases/preFairUseCases.png"/></imageobject></mediaobject>
+    </figure>
+  </section>
+  
+  <section id="weighIn_useCase">
+  <?dbhtml filename="usecase/weighIn_useCase.html" ?>
+    <title>WeighIn Use Cases</title>
+    <para>Many Fairs hold a early season weigh-in of animals in order to show an average daily weight gain.</para>
+    <para> 
+    <xref linkend="fig_WeighInUseCases"/> shows early weigh-in usage 
+    requirements for the Fair Editor.</para>
+    <figure id="fig_WeighInUseCases">
+      <title>Animal Weigh-In</title>
+      <mediaobject><imageobject><imagedata align="center"
+       fileref="../images/useCases/weighIn.png"/></imageobject></mediaobject>
+    </figure>
+  </section>
+  
+   <section id="fairCheckIn_useCase">
+  <?dbhtml filename="usecase/fairCheckIn_useCase.html" ?>
+    <title>Check-In Use Cases</title>
+    <para>Checking in animals to the fair is often a two-fold process.  First there is the veterinarian check to 
+    insure that the animal is healthy and has all required papers. Next the animal is checked in.</para>
+    <para>
+    <xref linkend="fig_FairCheckInUseCases"/> shows early check-in usage 
+    requirements for the Fair Editor.</para>
+    <figure id="fig_FairCheckInUseCases">
+      <title>Animal Check-In</title>
+      <mediaobject><imageobject><imagedata align="center"
+       fileref="../images/useCases/fairCheckIn.png"/></imageobject></mediaobject>
+    </figure>
+  </section>
+  
+  </section>
   
 </chapter>

@@ -5,18 +5,20 @@
 <topic href="html//fairEditor/fairEditor.html#overviewFairEditorGoals" label="Project Goals"/>
 <topic href="html//fairEditor/fairEditor.html#overviewFairFunctional" label="Functional Overview"/>
 </topic>
-<topic href="html//usecase/fairEditor_useCase.html" label="Fair Editor Overview of Use Cases"/>
-<topic href="html//usecase/preFair_useCase.html" label="Prefair Use Cases"/>
-<topic href="html//usecase/weighIn_useCase.html" label="WeighIn Use Cases"/>
-<topic href="html//usecase/fairCheckIn_useCase.html" label="Check-In Use Cases"/>
 <topic href="html//model/fairEditorModel_FairDocuments.html" label="Fair Documents"/>
-<topic href="html//model/fairEditorModel_agricultureDataModel.html" label="Fair Data Model">
-<topic href="html//model/fairEditorModel_agricultureDataModel.html#fairDataModel_coreElements" label="Fair Data Model Core Elements"/>
-</topic>
 <topic href="html//editingFairDocuments/editingFairDocuments.html" label="Editing Fair Documents">
 <topic href="html//editingFairDocuments/editingFairDocuments.html#creatingFairDocuments" label="Creating a new Fair Document"/>
 <topic href="html//editingFairDocuments/loadingFairDocuments.html" label="Loading Additional Resources into the Document"/>
 <topic href="html//editingFairDocuments/openingFairDocuments.html" label="Opening a Fair Document"/>
+</topic>
+<topic href="html//fairActions/fairActions.html" label="Fair Action Commands"/>
+<topic href="html//model/fairEditorModel_agricultureDataModel.html" label="Fair Data Model">
+<topic href="html//model/fairEditorModel_agricultureDataModel.html#fairDataModel_coreElements" label="Fair Data Model Core Elements"/>
+</topic>
+<topic href="html//usecase/fairEditor_useCase.html" label="Fair Editor Use Cases">
+<topic href="html//usecase/fairEditor_useCase.html#preFair_useCase" label="Prefair Use Cases"/>
+<topic href="html//usecase/weighIn_useCase.html" label="WeighIn Use Cases"/>
+<topic href="html//usecase/fairCheckIn_useCase.html" label="Check-In Use Cases"/>
 </topic>
 </topic>
 </toc>
