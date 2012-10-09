@@ -1,4 +1,4 @@
-h1=. Tracker Store
+h1=. Tracker Store DEPRECATED functionality moved to com.verticon.tracker plugin
 
 com.verticon.tracker.store Version 0.1.0
 

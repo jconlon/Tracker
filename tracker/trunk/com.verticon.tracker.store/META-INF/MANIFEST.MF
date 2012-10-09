@@ -1,13 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tracker information store
+Bundle-Name: TrackerStore
 Bundle-SymbolicName: com.verticon.tracker.store
 Bundle-Version: 0.1.0.qualifier
-Bundle-Vendor: Verticon, Incl
+Bundle-Vendor: Verticon, Inc
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.verticon.tracker.store;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util,com.verticon.tracker"
-Import-Package: com.verticon.location.util,
- com.verticon.tracker;version="0.1.0",
- org.eclipse.emf.common.util,
- org.eclipse.emf.ecore
 
