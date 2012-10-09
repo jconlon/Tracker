@@ -2,7 +2,7 @@ package com.verticon.tracker.store.location.test.system.internal;
 
 import static com.verticon.tracker.store.mongo.test.system.TestUtils.clearLocalTrackerDB;
 import static com.verticon.tracker.store.mongo.test.system.TestUtils.getXMIResource;
-import static com.verticon.tracker.store.utils.TrackerStoreUtils.registerPremises;
+import static com.verticon.tracker.store.TrackerStoreUtils.registerPremises;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
