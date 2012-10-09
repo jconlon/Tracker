@@ -21,6 +21,7 @@ import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EV
 import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_WEIGHIN_UNIT;
 import static com.verticon.tracker.util.TrackerConstants.EVENT_ADMIN_PROPERTY_EVENT_WEIGHIN_WEIGHT;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -61,6 +62,7 @@ import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.WeightMeasurementUnit;
+import com.verticon.tracker.store.TrackerStoreUtils;
 
 
 /**
@@ -113,6 +115,15 @@ public class TrackerUtils {
 			return null;
 		}
 		Animal result = activePremises.findAnimal(tagNumber);
+		if(result==null){
+			//Try and find the animal in the TrackerStore
+			try {
+				result = TrackerStoreUtils.dynamicallyImportAnimal(tagNumber, activePremises);
+			} catch (IOException e) {
+				logger.error(bundleMarker,"Failde to import animal", e);
+			}
+			
+		}
 		if(result==null ){
 			Tag tag =TrackerFactory.eINSTANCE.createTag();
 			tag.setId(tagNumber);

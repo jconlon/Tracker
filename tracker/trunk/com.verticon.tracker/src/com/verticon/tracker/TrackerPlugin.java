@@ -13,6 +13,10 @@
  */
 package com.verticon.tracker;
 
+import static com.google.common.collect.Lists.newArrayList;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Plugin;
@@ -24,19 +28,20 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import com.verticon.location.service.ILocationService;
+import com.verticon.tracker.store.ITrackerStore;
 
 /**
  * @author jconlon
  * 
  */
-public class TrackerPlugin extends Plugin{
+public class TrackerPlugin extends Plugin {
 
 	// The identifier for this plugin
 	public static final String ID = "com.verticon.tracker";
-	
+
 	// The shared instance.
 	private static TrackerPlugin plugin;
-	
+
 	/**
 	 * slf4j Logger
 	 */
@@ -53,7 +58,8 @@ public class TrackerPlugin extends Plugin{
 		return bundleMarker;
 	}
 
-	 private ServiceTracker<ILocationService, ILocationService> locationServiceTracker = null;   
+	private ServiceTracker<ILocationService, ILocationService> locationServiceTracker = null;
+	private ServiceTracker<ITrackerStore, ITrackerStore> trackerStoreServiceTracker = null;
 
 	/**
 	 * The constructor.
@@ -68,8 +74,12 @@ public class TrackerPlugin extends Plugin{
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		locationServiceTracker = new ServiceTracker<ILocationService, ILocationService>(context, ILocationService.class.getName(),null);
+		locationServiceTracker = new ServiceTracker<ILocationService, ILocationService>(
+				context, ILocationService.class.getName(), null);
 		locationServiceTracker.open();
+		trackerStoreServiceTracker = new ServiceTracker<ITrackerStore, ITrackerStore>(
+				context, ITrackerStore.class.getName(), null);
+		trackerStoreServiceTracker.open();
 		logger.debug(bundleMarker, "Started Bundle");
 	}
 
@@ -79,8 +89,10 @@ public class TrackerPlugin extends Plugin{
 	@Override
 	public void stop(BundleContext context) throws Exception {
 		locationServiceTracker.close();
+		trackerStoreServiceTracker.close();
 		super.stop(context);
 		locationServiceTracker = null;
+		trackerStoreServiceTracker = null;
 		plugin = null;
 		logger.debug(bundleMarker, "Stopped Bundle");
 	}
@@ -92,64 +104,132 @@ public class TrackerPlugin extends Plugin{
 		return plugin;
 	}
 
+	public boolean hasLocationService() {
+		return locationServiceTracker != null
+				&& locationServiceTracker.getService() != null;
+	}
+
+	public boolean hasTrackerStoreService() {
+		return trackerStoreServiceTracker != null
+				&& trackerStoreServiceTracker.getService() != null;
+	}
+
 	/**
+	 * Try to get an animal from any of the TrackerStores
 	 * 
-	 * @return ILocationService
+	 * @param uri
+	 * @return Animal
 	 */
-	private ILocationService getLocationService(){
-		ILocationService iLocationService = null;
-		if(locationServiceTracker!=null && locationServiceTracker.getService()!=null){
-			iLocationService = locationServiceTracker.getService();
-		}else{
-			logger.warn(bundleMarker, "Failed to find a location service.");
+	public Animal getAnimal(String uri) {
+		Animal result = null;
+		List<ITrackerStore> trackerStores = getTrackerStores();
+		if (trackerStores != null) {
+			for (ITrackerStore iTrackerStore : trackerStores) {
+				result = iTrackerStore.retrieveAnimal(uri);
+				if (result != null) {
+					break;
+				}
+			}
+
 		}
-		return iLocationService;
-		
+		return result != null ? result : null;
 	}
 
 	/**
 	 * Used by Animals to find names for a foreign premises.
 	 */
-	 public String name(String uri) {
+	public String name(String uri) {
 		String result = null;
-		ILocationService iLocationService = getLocationService();
-		if(iLocationService != null){
-			result = iLocationService.name(uri);
+		List<ILocationService> iLocationServices = getLocationServices();
+		if (iLocationServices != null) {
+			for (ILocationService iLocationService : iLocationServices) {
+				result = iLocationService.name(uri);
+				if (result != null) {
+					break;
+				}
+			}
+
 		}
-		return result!=null?result:null;
+		return result != null ? result : null;
 	}
 
-	 /**
-	  * Used by Animals to find names for all foreign premises.
-	  */
-	 public Map<String,String> getAssociates(String uri) {
-		 Map<String,String> result = null;
-		 ILocationService iLocationService = getLocationService();
-		 if(iLocationService != null){
-			 result = iLocationService.getAssociates(uri);
-		 }
-		 return result;
-	 }
+	/**
+	 * Used by Animals to find names for all foreign premises.
+	 */
+	public Map<String, String> getAssociates(String uri) {
+		Map<String, String> result = null;
+		List<ILocationService> iLocationServices = getLocationServices();
+		if (iLocationServices != null) {
+			for (ILocationService iLocationService : iLocationServices) {
+				result = iLocationService.getAssociates(uri);
+				if (result != null) {
+					break;
+				}
+			}
+
+		}
+		return result;
+	}
 
 	/**
 	 * Called by animals to find out the location outside the premises.
-	 * @param point coordinates
+	 * 
+	 * @param point
+	 *            coordinates
 	 * @return name of Premises location
 	 */
 	public String locate(String point) {
-		if(point==null){
-			throw new IllegalArgumentException("point argument can not be null.");
+		if (point == null) {
+			throw new IllegalArgumentException(
+					"point argument can not be null.");
 		}
 		String result = null;
-		ILocationService iLocationService = getLocationService();
-		if(iLocationService != null){
-			result = iLocationService.locate(point);
+		List<ILocationService> iLocationServices = getLocationServices();
+		if (iLocationServices != null) {
+			for (ILocationService iLocationService : iLocationServices) {
+				result = iLocationService.locate(point);
+				if (result != null) {
+					break;
+				}
+			}
+
 		}
-		return result!=null?result:"InPremises:"+point;
+		return result != null ? result : "InPremises:" + point;
 	}
 
-   public boolean hasLocationService(){
-	  return getLocationService()!=null;
-   }
+	/**
+	 * 
+	 * @return ILocationService
+	 */
+	private List<ILocationService> getLocationServices() {
+		List<ILocationService> iLocationServices = null;
+		if (hasLocationService()) {
+			iLocationServices = newArrayList();
+			for (Object o : locationServiceTracker.getServices()) {
+				iLocationServices.add((ILocationService) o);
+			}
+		} else {
+			logger.warn(bundleMarker, "Failed to find a location service.");
+		}
+		return iLocationServices;
 
+	}
+
+	/**
+	 * 
+	 * @return ITrackerStore
+	 */
+	private List<ITrackerStore> getTrackerStores() {
+		List<ITrackerStore> trackerStores = null;
+		if (hasTrackerStoreService()) {
+			trackerStores = newArrayList();
+			for (Object o : trackerStoreServiceTracker.getServices()) {
+				trackerStores.add((ITrackerStore) o);
+			}
+
+		} else {
+			logger.warn(bundleMarker, "Failed to find a TrackerStore service.");
+		}
+		return trackerStores;
+	}
 }
