@@ -286,6 +286,22 @@
       <events xmi:type="premises:Slaughtered" dateTime="2012-09-10T15:37:37.122-0500"/>
     </tags>
   </animals>
+  <animals xmi:type="premises:BovineBison" id="985152001389613">
+    <tags id="985152001389613">
+      <events xmi:type="premises:Sighting" dateTime="2011-05-12T16:48:22.118-0500" pid="urn:pin:H89234X"/>
+      <events xmi:type="premises:TagApplied" dateTime="2012-10-08T17:34:49.436-0500"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBison" id="985152001175459">
+    <tags id="985152001175459">
+      <events xmi:type="premises:Sighting" dateTime="2011-05-12T16:46:46.087-0500" pid="urn:pin:H89234X"/>
+      <events xmi:type="premises:TagApplied" dateTime="2012-10-08T17:35:39.569-0500"/>
+      <events xmi:type="premises:GenericEvent" dateTime="2012-10-08T17:36:39.046-0500" ocd="My.metatype#abbott.deworming">
+        <eventAttributes key="Drug" value="Eperinex"/>
+        <eventAttributes key="Dosage" value="50"/>
+      </events>
+    </tags>
+  </animals>
   <unAppliedTags id="840456789012346">
     <events xmi:type="premises:TagAllocated" dateTime="2010-12-10T10:49:30.886-0600"/>
   </unAppliedTags>
