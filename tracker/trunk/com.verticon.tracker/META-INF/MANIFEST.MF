@@ -7,6 +7,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: com.verticon.tracker;version="0.1.0",
  com.verticon.tracker.impl;version="0.1.0",
+ com.verticon.tracker.store,
  com.verticon.tracker.util;version="0.1.0",
  net.sourceforge.calendardate
 Require-Bundle: org.eclipse.core.runtime,
@@ -17,7 +18,10 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: com.verticon.tracker.TrackerPlugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: com.verticon.location.service,
+Import-Package: com.google.common.base;version="11.0.1",
+ com.google.common.collect;version="11.0.1",
+ com.google.common.io;version="11.0.1",
+ com.verticon.location.service,
  org.osgi.service.metatype;version="1.1.0",
  org.osgi.util.measurement;version="1.0.1",
  org.slf4j;version="1.5.11"
