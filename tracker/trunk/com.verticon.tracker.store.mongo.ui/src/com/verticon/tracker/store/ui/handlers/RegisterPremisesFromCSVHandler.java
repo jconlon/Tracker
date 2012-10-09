@@ -11,7 +11,7 @@
 package com.verticon.tracker.store.ui.handlers;
 
 import static com.verticon.tracker.store.ui.Activator.bundleMarker;
-import static com.verticon.tracker.store.utils.TrackerStoreUtils.registerPremises;
+import static com.verticon.tracker.store.TrackerStoreUtils.registerPremises;
 
 import java.io.File;
 
@@ -34,7 +34,9 @@ import com.verticon.tracker.store.StoreAccessException;
 import com.verticon.tracker.store.ui.Activator;
 
 /**
- * Uses the ITrackerStore to register premises information to MongoDB.
+ * Uses the ITrackerStore to register premises information from a csv file
+ * to MongoDB. Column values used for mapping:
+ * "Pin","Name","Phone","Email","Street","City","State","zipCode","latitude","longitude"
  * 
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler

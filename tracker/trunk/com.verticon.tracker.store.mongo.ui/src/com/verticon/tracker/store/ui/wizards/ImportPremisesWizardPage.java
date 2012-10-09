@@ -33,7 +33,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 
 import com.verticon.tracker.store.ITrackerStore;
-import com.verticon.tracker.store.utils.TrackerStoreUtils;
+import com.verticon.tracker.store.TrackerStoreUtils;
 import com.verticon.ui.dialogs.DateDialog;
 
 

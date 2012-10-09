@@ -38,17 +38,17 @@
          point="org.eclipse.ui.commands">
       
       <command
-            name="Load Admin access control to MongoDB"
+            name="Load Admin access control to TrackerStore"
             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
             id="com.verticon.tracker.store.ui.commands.loadAdminCommand">
       </command>
       <command
-            name="Register Premises to MongoDB"
+            name="Register Premises to TrackerStore"
             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
             id="com.verticon.tracker.store.ui.commands.registerPremisesCommand">
       </command>
       <command
-            name="Record Animal History to MongoDB"
+            name="Record Animal History to TrackerStore"
             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
             id="com.verticon.tracker.store.ui.commands.recordAnimalsCommand">
       </command>
@@ -98,6 +98,7 @@
       </handler>
       
    </extension>
+   <!--
    <extension
          point="org.eclipse.ui.bindings">
       <key
@@ -138,13 +139,105 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
       </key>
    </extension>
+   -->
    <extension
          point="org.eclipse.ui.menus">
      
       <menuContribution
              allPopups="false"
             locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+            <!-- Resources -->
+               <!-- 
+                 Register premises information to MongoDB. 
+                 Works on a from a csv file.
+                 Column values used for mapping:
+ 				 "Pin","Name","Phone","Email","Street","City","State","zipCode","latitude","longitude"
+               -->
+             <command
+                     commandId="com.verticon.tracker.store.ui.commands.register.premises.csv.command"
+                     icon="icons/etool16/import_wiz.gif"
+                     style="push">
+               <visibleWhen>
+                       <and>
+		               	<with variable="selection">
+		                 	 <iterate
+                         	 ifEmpty="false"
+                          	operator="or">
+		                      <adapt type="org.eclipse.core.resources.IResource">
+		          					<test property="org.eclipse.core.resources.name" 
+		               				 value="*.csv"/>
+		      					 </adapt>
+		                 	 </iterate>
+		               	</with>
+		               	<!-- 
+    			        	Restricted to show only if there is a TrackerStore Service.
+              			 -->
+              			 <test
+                        	forcePluginActivation="true"
+                        	property="com.verticon.tracker.store.ui.hasTrackerStoreService">
+              			</test>
+		               </and>
+	            </visibleWhen>
+            </command>  
+            
+            <!-- 
+                 Import a premises document with a single animal from MongoDB. 
+                 Works on a from a file folder.
+                 Prompts for an Animal ID.
+                 Will import into the folder a premises document containing the animal and any 
+                 metatypes associated with the animal.
+               -->
             <command
+                     commandId="com.verticon.tracker.store.ui.commands.import.animal.command"
+                     icon="icons/etool16/import_wiz.gif"
+                     style="push">
+               <visibleWhen>
+               <and>
+               		<with variable="selection">
+                       <iterate>
+      					 <adapt type="org.eclipse.core.resources.IFolder">
+      					 </adapt>
+   						 </iterate>
+					</with>
+              		<test
+                        	forcePluginActivation="true"
+                        	property="com.verticon.tracker.store.ui.hasTrackerStoreService">
+              		</test>
+		        </and>    
+	            </visibleWhen>
+           </command>
+      
+ 			<!-- 
+                 Import premises with zero or more animals from MongoDB. 
+                 Works on a from a file folder.
+                 Prompts for an Premises ID and a range of dates.
+                 Will import into the folder a premises document containing the animals and any 
+                 metatypes associated with the animals.
+               -->
+           <command
+                     commandId="com.verticon.tracker.store.ui.commands.import.premises.command"
+                     icon="icons/etool16/import_wiz.gif"
+                     style="push">
+               <visibleWhen>
+               <and>
+               		<with variable="selection">
+                       <iterate>
+      					 <adapt type="org.eclipse.core.resources.IFolder">
+      					 </adapt>
+   						 </iterate>
+					</with>
+              		<test
+                        	forcePluginActivation="true"
+                        	property="com.verticon.tracker.store.ui.hasTrackerStoreService">
+              		</test>
+		        </and>    
+	            </visibleWhen>
+           </command>
+              
+           <!-- Premises --> 
+           
+           <!-- Record Animal life data and event histories -->
+           <command
                   commandId="com.verticon.tracker.store.ui.commands.recordAnimalsCommand"
                    style="push">
                  
@@ -176,14 +269,10 @@
               			</test>
     			     </and>
                </visibleWhen>
-            </command>
+           </command>
         
-      </menuContribution>
-      
-      <menuContribution
-             allPopups="false"
-            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
-            <command
+           <!-- Register Premises  -->
+           <command
                   commandId="com.verticon.tracker.store.ui.commands.registerPremisesCommand"
                    style="push">
                  
@@ -204,17 +293,12 @@
                            property="com.verticon.tracker.store.ui.hasRegisterService">
               			 </test>
     					 
-    					
     			     </and>
                </visibleWhen>
-            </command>
+           </command>
         
-      </menuContribution>
-      
-      <menuContribution
-             allPopups="false"
-            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
-            <command
+     	   <!-- Load Admin contraints -->
+           <command
                   commandId="com.verticon.tracker.store.ui.commands.loadAdminCommand"
                    style="push">
                  
@@ -238,84 +322,10 @@
     					
     			     </and>
                </visibleWhen>
-            </command>
-        
-      </menuContribution>
-   
-       <menuContribution
-            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
-               <command
-                     commandId="com.verticon.tracker.store.ui.commands.register.premises.csv.command"
-                     icon="icons/etool16/import_wiz.gif"
-                     style="push">
-               <visibleWhen>
-                       <and>
-		               	<with variable="selection">
-		                 	 <iterate
-                         	 ifEmpty="false"
-                          	operator="or">
-		                      <adapt type="org.eclipse.core.resources.IResource">
-		          					<test property="org.eclipse.core.resources.name" 
-		               				 value="*.csv"/>
-		      					 </adapt>
-		                 	 </iterate>
-		               	</with>
-		               	<!-- 
-    			        	Restricted to show only if there is a TrackerStore Service.
-              			 -->
-              			 <test
-                        	forcePluginActivation="true"
-                        	property="com.verticon.tracker.store.ui.hasTrackerStoreService">
-              			</test>
-		               </and>
-	            </visibleWhen>
-               </command>
-      </menuContribution>
-      <menuContribution
-            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
-               <command
-                     commandId="com.verticon.tracker.store.ui.commands.import.animal.command"
-                     icon="icons/etool16/import_wiz.gif"
-                     style="push">
-               <visibleWhen>
-               <and>
-               		<with variable="selection">
-                       <iterate>
-      					 <adapt type="org.eclipse.core.resources.IFolder">
-      					 </adapt>
-   						 </iterate>
-					</with>
-              		<test
-                        	forcePluginActivation="true"
-                        	property="com.verticon.tracker.store.ui.hasTrackerStoreService">
-              		</test>
-		        </and>    
-	            </visibleWhen>
-               </command>
-      </menuContribution>
-      <menuContribution
-            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
-               <command
-                     commandId="com.verticon.tracker.store.ui.commands.import.premises.command"
-                     icon="icons/etool16/import_wiz.gif"
-                     style="push">
-               <visibleWhen>
-               <and>
-               		<with variable="selection">
-                       <iterate>
-      					 <adapt type="org.eclipse.core.resources.IFolder">
-      					 </adapt>
-   						 </iterate>
-					</with>
-              		<test
-                        	forcePluginActivation="true"
-                        	property="com.verticon.tracker.store.ui.hasTrackerStoreService">
-              		</test>
-		        </and>    
-	            </visibleWhen>
-               </command>
+            </command> 
       </menuContribution>
    </extension>
+   
    <extension
          point="org.eclipse.ui.importWizards">
       <category
