@@ -24,7 +24,7 @@
 	<property name="xalan.lib.dir" location="${thisproject}/../com.verticon.tracker.documentation/lib/xalan-j_2_7_0" />
 	<property name="deploy.dir" location="${user.home}/Uploads/s3/Tracker/documentation"/>
 	<property name="document.pdf" location="manual${file.separator}${document.name}.pdf"/>
-    <property name="document.footer.name" value="${document.name}-0.2.0 draft"/>
+    <property name="document.footer.name" value="${document.name}-0.2.1 draft"/>
 
 	<!-- Making xalan available -->
 		<path id="xalan.class.path">
