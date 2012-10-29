@@ -480,37 +480,46 @@
 		</section>
 	</section>
 			
-	<section id="premisesEditorLocationServices">
-      <?dbhtml filename="locationServices/locationServices.html" ?>
-		<title>Geolocation Services</title>
+	<section id="premisesEditorServices">
+      <?dbhtml filename="services/services.html" ?>
+		<title>Services</title>
 			<para>
-      	 	There are four Animal event types that are used for recording Animal geolocation information. 
-      	 	<itemizedlist mark="bullet">
-      	 		<listitem><para>MovedIn Animal events record the date, time and URI of the foreign Premises Animals have 
-      	 		come from before arriving on Premises.</para></listitem>
-				<listitem><para>MovedOut Animal events record the date, time, and URI of the foreign Premises Animals have been shipped to 
-				from the current Premises.</para></listitem>
-      	 		<listitem><para>Position Animal events record the date, time and Geographic coordinates of an Animal.</para></listitem>
-      	  		<listitem><para>Sighting events record the date, time and the name of a location within the current Premises.</para></listitem>
-      	 	</itemizedlist>
-      	 	In addition to these event types, all events contain a 'pid' attribute for documenting the URI of the Premises that recorded
-      	 	the event.  This 'pid' attribute is essential when combining Events from an Animal that was recorded by another premises.  
+      	 	Tracker Premises Editor utilizes a Service Oriented 
+      	 	Architecture <acronym>SOA</acronym> to provide the operator with set of dynamic services 
+      	 	to help manage, analyize, store and retrieve Premises information. 
+      	 	
       	 	</para>
+      	 	<para>Currently the Tracker Premises Editor provides the user with the following two types of dynamic services:
+      	 		<itemizedlist>
+      	 			<listitem><para>Location Services - a suite of geolocation services for resolving locations;</para></listitem>
+      	 			<listitem><para>TrackerStore Services - a suite of storage services for storing and retrieving premises information.</para></listitem>
+      	 		</itemizedlist>
+      	 		
+      	 	Each type of service delivers a specfic functionality, but that functionality may be provided by one or more dynamically 
+      	 	provisioned and/or configured service implementations. For example there may be two types of Location services provisioned 
+      	 	and configured that resolve a specific object location in one way and another object in an alternative way<footnote><para>
+      	 	When multiple location services are present the algorithm for resolving geolocations will request resolution from each location
+      	 	service implementation until the location is resolved.
+      	 	</para></footnote>. 
+      	 	</para>
+	
+		<section id="premisesEditorLocationServices">
+      	<?dbhtml filename="services/locationServices.html" ?>
+		<title>Location Services</title>
       		<para>The Tracker Location Service is a global Tracker geolocation service for resolving the real-world
 			 geographic locations for Premises and Animals.</para>
 			
 			<para> 
-			Together Premises Editor and the Tracker Location Service
-				<footnote>
-				<para>A Premises document must contain all the Animals Geolocation Events and the Tracker Location service must 
-				be able to resolve all Premises URIs to Premises names.  To meet these two requirements when multiple users
-				share information on Animals traversing multiple Premises a Tracker Store solution can be provided. For 
-				more details see the Tracker Store documentation.
-				</para>
-				</footnote> provide:
+			Together Premises Editor and the Tracker Location Service provide:
       	 <itemizedlist mark="bullet">
-      		 <listitem><para>Animal traceback for identifying the foriegn Premises for animals that have moved into the Premises.;</para></listitem>
-      	 	<listitem><para>Animal traceforward for identifying the foriegn Premises for animals that have moved out of the Premises;</para></listitem>
+      		<listitem><para>Animal traceback for naming the foriegn Premises where animals have resided before being moved into the current 
+      		Premises<footnote>
+      				<para>Fundementally Location Services is a geolocation name resolution service. Animal traceback and traceforward 
+      				requires an animal to contain a complete event history so that location identifiers can be resolved as names.  To 
+      				insure that animals moved into a premises retain a complete event history see the <link linkend='trackerStore'> TrackerStore 
+      				Services.</link> </para></footnote>;</para></listitem>
+      	 	<listitem><para>Animal traceforward for naming the foriegn Premises where animals have been moved to after they were movedOut of 
+      	 	the Premises;</para></listitem>
       	 	<listitem><para>Animal resident locator for identifying the location of animals within the current Premises;</para></listitem>
       	 	<listitem><para>Dynamic listing of location names within the current Premises;</para></listitem>
       	 </itemizedlist>
@@ -555,7 +564,68 @@
                 </mediaobject>
         </figure>
       	 </para>
-	 	 
+      	 <para>
+      	 	There are four Animal event types that record Animal (geo)location information. 
+      	 	<itemizedlist mark="bullet">
+      	 		<listitem><para>MovedIn Animal events record the date, time and URI of the foreign Premises Animals have 
+      	 		come from before arriving on Premises.</para></listitem>
+				<listitem><para>MovedOut Animal events record the date, time, and URI of the foreign Premises Animals have been shipped to 
+				from the current Premises.</para></listitem>
+      	 		<listitem><para>Position Animal events record the date, time and Geographic coordinates of an Animal.</para></listitem>
+      	  		<listitem><para>Sighting events record the date, time and the name of a location within the current Premises.</para></listitem>
+      	 	</itemizedlist>
+      	 	In addition to these event types, all events contain a 'pid' attribute for documenting the URI of the Premises that recorded
+      	 	the event.  This 'pid' attribute is essential when combining Events from an Animal that was recorded by another premises.  
+      	 	</para>
+		</section>
+		
+		<section id="trackerStore">
+		<?dbhtml filename="services/trackerStore.html" ?>
+		<title>TrackerStore Services</title>
+		<para>TrackerStore service is a storage and query solution for livestock market exchanges, livestock producers, livestock infrastructure providers 
+		and government animal health regulators who need to:
+		<itemizedlist mark="bullet">
+          <listitem><para>record animal life and history event information;</para></listitem>
+          <listitem><para>register Livestock Premises geolocation details;</para></listitem>
+          <listitem><para>retrieve complete animal movement histories to trace-back and trace-forward animal movements within and between livestock premises;</para></listitem>
+          <listitem><para>access premises and animal information with state of the art business intelligence analysis and reporting tools;</para></listitem>
+          <listitem><para>share information between collaborating business partners;</para></listitem>
+          <listitem><para>view animal life data and event histories as animals are <code>moved in</code> to a Premises.</para></listitem>
+        </itemizedlist>
+	      </para>
+	      <para>The user interacts with TrackerStore Services through Premises Action Commands<footnote>
+	      	<para>Tracker Store Premises Action Commands will only be presented to a user when a TrackerStore Service is configured and 
+	      	accessible by the user.</para></footnote>
+	      that are presented as pulldown menues on the Premises Element of Premises documents and on resource folders in a workspace project.
+	      The Action commands:
+	      <itemizedlist>
+	      	<listitem><para>on the Premises element is a single action command that will record all the Animal Histories in the Premises document to the Tracker
+	      	Store<footnote><para>See 
+	      	<link linkend='record_animal_history_to_trackerstore'>Record Animal History to TrackerStore</link> Premises Action Command.
+	      	</para></footnote></para></listitem>
+	      	<listitem><para>on resource folders there are two action commands, the first for importing documents containing a single animal<footnote>
+	      		<para>To retrieve a single animal the action prompts for an animal id, then creates a document with the animal and all its 
+	      		recorded event histories. The premises in the document will be the last recorded premises that animal 
+	      		resided in.</para>
+									</footnote>
+	      	the second for importing the group of animals that were resident in the premises within a date range<footnote>
+	      		<para>To retrieve a group of animals, the action prompts for a date range and premises uri. The retrieval request will 
+	      		then import from the TrackerStore a premises document containing animals that were resident during the given date range. 
+	      		If no date range is given, just the premises information will be created in the document.</para>
+					</footnote> 
+			from the TrackerStore into in the selected folder<footnote>
+	      		<para>See <link linkend='import_animal_from_trackerstore'>Import Animal from TrackerStore</link> and
+	      		<link linkend='import_premises_from_trackerstore'>Import Premises from TrackerStore</link> Premises Action Commands.
+	      		</para>
+	      		</footnote>
+	      	.</para></listitem>
+	      	</itemizedlist>      
+	      </para>
+	      <para>TrackerStore Service also provides functionality for dynamically importing a new Animal with its lifedata and 
+	      event history from a TrackerStore into an active premises document when its RFID tag is read by a Reader.<footnote>
+	      <para>This requires that the document is being edited in a <emphasis>Premises Transaction Editor</emphasis> and that
+	      the Animal does not already exist in the document.</para></footnote>  </para>
+	      </section>
 	</section>
 	
 	<section id="chBulkEventProcessing">
@@ -885,13 +955,14 @@
                 </mediaobject>
         </figure>
        
-			<table frame='all'>
-				<title>Premises Editor Resource Action Commands</title>
-				<tgroup cols='4' align='left' colsep='1' rowsep='1'>
+			<table id='PremisesEditorFileResourceActionCommands' frame='all'>
+				<title>File Resource Action Commands</title>
+				<tgroup cols='5' align='left' colsep='1' rowsep='1'>
 					<colspec colname='c1' />
 					<colspec colname='c2' />
 					<colspec colname='c3' />
 					<colspec colname='c4' />
+					<colspec colname='c5' />
 					<thead>
 						<row>
 							<entry>Resource</entry>
@@ -913,12 +984,12 @@
 								</para></footnote>
 							</entry>
 							<entry>Import TagIds as Template Events</entry>
-							<entry>User will first be prompted for an Animal template then each tagId number will be mapped to the Animal
-							and the Events in the template. The Events in the template will be given the current time and added to 
-							the Animal in the document that corresponds with the TagId.  If there is no Animal in the document with
-							the tagId, a new Animal will be created of the type and with the attributes of the template Animal.</entry>
-							<entry>Good for adding multiple events to multiple existing animals or for adding new animals with a 
-							common life data.</entry>
+							<entry>Adds events from the template to animals.<footnote><para>Prompts for an Animal template. 
+							Each tagId number is mapped to the Animal and the Events in the template. The Events in the template 
+							will be given the current time and added to the Animal that corresponds with the TagId.  If no Animal 
+							exists with the tagId, a new Animal will be created with the type and attributes of the template Animal.</para></footnote></entry>
+							
+							<entry>Adds multiple events to existing animals or adds new animals with a common life data.</entry>
 						</row>
 						<row>
 							<entry>*.tags</entry>
@@ -926,42 +997,110 @@
 								Text files with extenstion 'tags', that contain a list of tag ID numbers.
 							</entry>
 							<entry>Import TagIds Specifying Animal and Event Types</entry>
-							<entry>User will first be prompted for an Animal type and then an event type. 
-							The Event will be given the current time and added to the Animal in the document that corresponds with the TagId.  
-							If there is no Animal in the document with the tagId, a new Animal will be created.</entry>
-							<entry>Good for adding single events to multiple existing animals or for adding new animals with a 
-							common but limited life data.</entry>
+							<entry>Adds the selected event to animals in the document.<footnote><para>Prompts for Animal and Event types. 
+							Event will be given the current time and added to the Animal that corresponds with the TagId.  
+							If no Animal with the tagId exists, a new Animal will be created.</para></footnote></entry>
+							<entry>Adds single events to multiple existing animals or adds new animals with a common life data.</entry>
 						</row>
 						<row>
 							<entry>*.txt</entry>
 							<entry>Comma separated value <acronym>CSV</acronym> text files with extenstion 'txt',  contain Animal 
 							life data for a set of animals. 
 								<footnote><para>
-								Each value is separated with a comma and each row is on its own line and lines are terminated with 
-								a carriage return. These text files can be created in a text editor by hand or from a spreadsheet 
-								application and then exported as as csv file. Most data management applications have csv file export utilities.
+								Values are separated with commas and rows are on lines terminated with 
+								a carriage return. These files can be created in text editors or spreadsheet 
+								application and exported as as csv file.
 								</para></footnote></entry>
 							<entry>Import Text File as Animal Life Data</entry>
-							<entry>User will first be prompted to map the column values to Animal feature names. Two essential Animal feature
-							names must be mapped for the import to continue, Animal.id and Animal.species. The next page will map the values
-							in the selected species columns to Premises Animal species names.</entry>
-							<entry>Good for importing new animals with unique life data.</entry>
+							<entry>Adds animals with life data to the document.<footnote><para>Prompts to map column values to Animal feature names. Two essential Animal feature
+						    must be mapped, Animal.id and Animal.species. Next page will map the values
+							in the selected species columns to Premises Animal species names.</para></footnote></entry>
+							<entry>Use to import new animals with unique life data.</entry>
 						</row>
-						
 						<row>
 							<entry>*.log</entry>
 							<entry>Comma separated value <acronym>CSV</acronym> text files with extenstion 'log',  contain Animal 
 							event data for a set of animals in <emphasis>Name Value</emphasis> pairs.
 								<footnote><para>
-								Namve value pairs are separated with a comma and each row is on its own line and lines are terminated with 
+								Name value pairs are separated with a comma and each row is on lines terminated with 
 								a carriage return.  Example:
 								<code>type='measurement',dateTime='2010-02-22 10:23:46',id='900014000554891',scope='animal.weight',value='81.0',error='0.0100',unit='kg'</code>
 								</para></footnote></entry>
 							<entry>Import Log File as Animal Event Data<footnote><para>Only availible when the iRouter Premises Gateway feature is provisioned.</para></footnote></entry>
 							<entry>This is one of the formats for logging output by the iRouter logger feature.</entry>
-							<entry>These log files are in a more human readable format. While these files are useful for adding event data, other programs may not be able to easily output such a format. </entry>
+							<entry>Log files use an easy to read format.<footnote>
+							<para>While these files are useful for adding event data, other programs may not be able to easily output such a format.</para></footnote> </entry>
+						</row>
+						<row>
+							<entry>*.csv</entry>
+							<entry>
+								 Register premises information from a csv file to TrackerStore.
+								<footnote><para>
+								Each value is quote enclosed and seperated with a comma. Each line is terminated with a carriage return. These text
+								files can be simply created in a text editor by hand or exported from other applications 
+								and data sources. Most data management applications have text file export utilities.
+								</para>
+								<para>This command will not be visible if there are no TrackerStore Services configured.</para>
+								</footnote>
+							</entry>
+							<entry>Register Premises</entry>
+							<entry>Required columns<footnote><para>Column values used for mapping:
+ 				 				<code>Pin, Name, Phone, Email, Street, City, State, zipCode, latitude, longitude</code></para></footnote></entry>
+							<entry>Use to register multiple premises when data can be exported from an existing datasource.</entry>
 						</row>
 						
+					</tbody>
+				</tgroup>
+			</table>
+			
+			<table id='PremisesEditorFolderActionCommands' frame='all'>
+				<title>Folder Resource Action Commands</title>
+				<tgroup cols='5' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<colspec colname='c3' />
+					<colspec colname='c4' />
+					<colspec colname='c5' />
+					<thead>
+						<row>
+							<entry>Resource</entry>
+							<entry>Type and Format</entry>
+							<entry>Command Name</entry>
+							<entry>Description</entry>
+							<entry>Comment</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row id="import_animal_from_trackerstore">
+							<entry>folder</entry>
+							<entry>
+								A file directory<footnote><para>Also known as a file folder</para></footnote>
+							</entry>
+							<entry>Import Animal from Tracker Store<footnote>
+								<para>This command is also available as an Import Wizard: <emphasis>Import an Animal from the TrackerStore into the workspace</emphasis>.</para>
+								<para>This command will not be visible if there are no TrackerStore Services configured.</para>
+								</footnote>
+							</entry>
+							<entry>User will first be prompted to select which Tracker Store Server to use to retrieve
+							the Animal, then for an Animal id.  </entry>
+                 			<entry>Imports into the selected directory a premises document containing the animal and any 
+                 			metatypes associated with the animal.</entry>
+						</row>
+						<row id="import_premises_from_trackerstore">
+							<entry>folder</entry>
+							<entry>
+								A file directory<footnote><para>Also known as a file folder</para></footnote>
+							</entry>
+							<entry>Import Premises from Tracker Store<footnote>
+								<para>This command is also available as an Import Wizard: <emphasis>Import Premises from the TrackerStore into the workspace</emphasis>.</para>
+								<para>This command will not be visible if there are no TrackerStore Services configured.</para>
+								</footnote></entry>
+							<entry>User will first be prompted to select which Tracker Store Server to use to retrieve
+							the Premises, then for a Premises id and for a range of dates.</entry>
+                 			<entry>Imports into the selected directory a premises document containing all the animals that resided 
+                 			in the premises within the date range and any metatypes associated with the animals. If no dates are
+                 			given than the premises without any animals is imported.</entry>
+						</row>
 					</tbody>
 				</tgroup>
 			</table>
@@ -998,8 +1137,8 @@
                 </mediaobject>
         	</figure>
 		
-			<table frame='all'>
-				<title>Premises Editor Document Element Action Commands</title>
+			<table id='PremisesEditorAllElementActionCommands' frame='all'>
+				<title>Action Commands on all Elements</title>
 				<tgroup cols='7' align='left' colsep='1' rowsep='1'>
 					<colspec colname='c1' />
 					<colspec colname='c2' />
@@ -1033,11 +1172,8 @@
 								Selects the same element or elements in the tree of the Outline View. 
 							</entry>
 							
-							<entry>This is handy when one is inspecting elements in the Animals View or Events View and 
-							 you want to see another perspective of the element in the context of a tree view. It is also good to 
-							 use this to syncrhonize the editor and the other views of the document with the Animals or Events view.</entry>
+							<entry>Helpful to sync from Views to the context of a tree view.</entry>
 						</row>
-						
 						<row>
 							<entry>All elements</entry>
 							<entry>Context Free Query<footnote><para>Only availible when the OCL feature is provisioned.</para></footnote></entry>
@@ -1046,14 +1182,12 @@
 							<entry>No</entry>
 							
 							<entry>
-								Presents the user with a dialog for manual entry of a query to select sub (child) elements 
-								within the selection.
+								Shows a dialog for entry of a query to select sub (child) elements of the selection.
 							</entry>
 							
-							<entry>Typically used on the Premises to perform an ad hoc query for selecting animals or events. 
-							See the OCL Query documentation for more details.</entry>
+							<entry>From a Premises element enter a query to find animals or events.  
+							<footnote><para>See the OCL Query documentation for more details.</para></footnote></entry>
 						</row>
-						
 						<row>
 							<entry>All elements</entry>
 							<entry>Query with Context<footnote><para>Only availible when the OCL feature is provisioned.</para></footnote></entry>
@@ -1062,14 +1196,42 @@
 							<entry>No</entry>
 							
 							<entry>
-								Presents the user with a dialog for manual entry of a query to select the sub (child)
-							    elements within the selected element. A combo box allows the selection of the query context.
+								Shows a dialog for entry of a query to select sub (child) elements of the selection. A 
+								combo box for selection of the query context.
 							</entry>
 							
-							<entry>Typically used on the Premises to perform an ad hoc query for selecting animals or events. 
-							See the OCL Query documentation for more details.</entry>
+							<entry>Select the Premises and query for animals or events.</entry>
 						</row>
 						
+					
+					</tbody>
+				</tgroup>
+			</table>
+			
+			<table id='PremisesEditorAnimalElementActionCommands' frame='all'>
+				<title>Action Commands on Animal Elements</title>
+				<tgroup cols='7' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<colspec colname='c3' />
+					<colspec colname='c4' />
+					<colspec colname='c5' />
+					<colspec colname='c6' />
+					<colspec colname='c7' />
+					<thead>
+						<row>
+							<entry>Element</entry>
+							<entry>Command Name</entry>
+							<entry>From Selection Page<footnote><para>The Outline View like the Selection Page of the Premises Editor
+							shows the document as a tree.  All actions that can be accessed as popup menus in the Selection Page 
+							are also available from the Outline View.</para></footnote></entry>
+							<entry>From Animals View</entry>
+							<entry>From Events View</entry>
+							<entry>Description</entry>
+							<entry>Comment</entry>
+						</row>
+					</thead>
+					<tbody>
 						<row>
 							<entry>Animal(s)</entry>
 							<entry>Change Animal(s) type</entry>
@@ -1078,14 +1240,13 @@
 							<entry>No</entry>
 							
 							<entry>
-								Prompts the user to select a new animal type. 
+								Prompts to select a new animal type. 
 							</entry>
 							
-							<entry>Use this when importing animals and not all of them are the same type. First import
+							<entry>Use this when importing animals and not all of them are the same type.<footnote><para>First import
 							them as the same type with one of the Import actions, then select the ones to change and 
-							invoke this command.</entry>
+							invoke this command.</para></footnote></entry>
 						</row>
-						
 						<row>
 							<entry>Animal(s)</entry>
 							<entry>Add Template Events to Selected Animals</entry>
@@ -1099,7 +1260,6 @@
 							
 							<entry>Use this to add events from an Animal template to existing Animals.</entry>
 						</row>
-						
 						<row>
 							<entry>Animal(s)</entry>
 							<entry>Resolve Geolocation Names</entry>
@@ -1111,11 +1271,41 @@
 								Resolves all geolocation names on the Animal(s) and the events of the Animal(s). 
 							</entry>
 							
-							<entry>Use this for traceback and traceforward of Animals. Resolves the urns on Moved events 
+							<entry>Use this for traceback and traceforward of Animals.<footnote><para>Resolves the urns on Moved events 
 							to real names, geo coordinates on Position events to real names and for resolving the current 
-							location of the Animal(s) as a location name.</entry>
+							location of the Animal(s) as a location name.</para></footnote></entry>
 						</row>
+					    
 					
+					</tbody>
+				</tgroup>
+			</table>
+
+			<table id='PremisesEditorEventElementActionCommands' frame='all'>
+				<title>Action Commands on Event Elements</title>
+				<tgroup cols='7' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<colspec colname='c3' />
+					<colspec colname='c4' />
+					<colspec colname='c5' />
+					<colspec colname='c6' />
+					<colspec colname='c7' />
+					<thead>
+						<row>
+							<entry>Element</entry>
+							<entry>Command Name</entry>
+							<entry>From Selection Page<footnote><para>The Outline View like the Selection Page of the Premises Editor
+							shows the document as a tree.  All actions that can be accessed as popup menus in the Selection Page 
+							are also available from the Outline View.</para></footnote></entry>
+							<entry>From Animals View</entry>
+							<entry>From Events View</entry>
+							<entry>Description</entry>
+							<entry>Comment</entry>
+						</row>
+					</thead>
+					<tbody>
+						
 					    <row>
 							<entry>Event(s)</entry>
 							<entry>Modify Selected Events</entry>
@@ -1127,13 +1317,13 @@
 								Modifies one or more of the common attributes of the selected Event(s). 
 							</entry>
 							
-							<entry>Use this for setting the comments, the correction and the electronicallyRead flags for 
+							<entry>Sets the comments, the correction and the electronically read flags for 
 							more than one event.</entry>
 						</row>
-						
 						<row>
 							<entry>MovedIn or MovedOut Event</entry>
-							<entry>Set Foreign Premises URI</entry>
+							<entry>Set Foreign Premises URI
+								<footnote><para>This command will not be visible when Location Services are not configured.</para></footnote></entry>
 							<entry>Yes</entry>
 							<entry>No</entry>
 							<entry>Yes</entry>
@@ -1142,34 +1332,118 @@
 								Use the Location Service to assist in setting MovedIn and MovedOut event URI and pin attributes. 
 							</entry>
 							
-							<entry>Remembering ids are hard.  First configure the Location Service with business partners. 
+							<entry>Work with names instead of numbers when setting MovedIn and MovedOut uri and pin attributes.<footnote>
+								<para>First configure the Location Service with business partners. 
 							Next when setting attributes on Moved events invoke this command to set the URI of the foreign Premises.
 							This command will present the user with a dialog containing the names and the URIs of all the partners 
 							from the Location Service.  Choose one to set the URI of the Moved event.  If the choosen partner has an
-							URI that is a USDA Premises ID number, the MovedIn or MovedOut pin attribute will be set as well.
+							URI that is a USDA Premises ID number, the MovedIn or MovedOut pin attribute will be set as well.</para></footnote>
 							</entry>
 						</row>
+					   
 					
+					</tbody>
+				</tgroup>
+			</table>
+			
+			<table id='PremisesEditorPremisesElementActionCommands' frame='all'>
+				<title>Action Commands on Premises Elements</title>
+				<tgroup cols='7' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<colspec colname='c3' />
+					<colspec colname='c4' />
+					<colspec colname='c5' />
+					<colspec colname='c6' />
+					<colspec colname='c7' />
+					<thead>
+						<row>
+							<entry>Element</entry>
+							<entry>Command Name</entry>
+							<entry>From Selection Page<footnote><para>The Outline View like the Selection Page of the Premises Editor
+							shows the document as a tree.  All actions that can be accessed as popup menus in the Selection Page 
+							are also available from the Outline View.</para></footnote></entry>
+							<entry>From Animals View</entry>
+							<entry>From Events View</entry>
+							<entry>Description</entry>
+							<entry>Comment</entry>
+						</row>
+					</thead>
+					<tbody>
+						
 					    <row>
 							<entry>Premises</entry>
-							<entry>Resolve Geolocation Names</entry>
+							<entry>Resolve Geolocation Names
+								<footnote><para>Command will not be visible if there are no Location Services configured.</para></footnote></entry>
 							<entry>Yes</entry>
 							<entry>No</entry>
 							<entry>No</entry>
 							
 							<entry>
-								Resolves all geolocation names on all the Animals and the events of the Animals in the Premises. 
+								Resolves all geolocation names on all Animals and Events in the Premises. 
 							</entry>
 							
-							<entry>Use this for traceback and traceforward of all Animals. Resolves the urns on Moved events 
+							<entry>Use for traceback and traceforward of all Animals.<footnote><para>Resolves the urns on Moved events 
 							to real names, geo coordinates on Position events to real names and for resolving the current 
-							location of the Animal(s) as a location name.</entry>
+							location of the Animal(s) as a location name.</para></footnote></entry>
+						</row>
+						
+						<row>
+							<entry>Premises</entry>
+							<entry>Register Premises to TrackerStore<footnote><para>This command will not be visible if there are no TrackerStore Services configured
+								and the user is not a Server Administrator.</para></footnote></entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Registers (stores) the Premises to TrackerStore 
+							</entry>
+							
+							<entry>Adminstrator command to register a premises. </entry>
+						</row>
+						
+						<row id="record_animal_history_to_trackerstore">
+							<entry>Premises</entry>
+							<entry>Record Animal History to TrackerStore<footnote><para>This command will not be visible if there are no TrackerStore Services configured
+								and the user is not a Premises Publisher.</para></footnote></entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Publishes (stores) Animal Life Data and Event Histories to TrackerStore 
+							</entry>
+							
+							<entry>The user designated as the publisher of the Premises will use this command to record 
+							Animal Life Data and Event Histories<footnote><para>When ahimal event histories are recorded,
+							the system will record a time stamp.  This time stamp is used to insure that only the latest 
+							animal history events are recorded and changes made to old events are not.</para></footnote>. 
+							</entry>
+						</row>
+					
+					    <row>
+							<entry>Premises</entry>
+							<entry>Record Animal History to TrackerStore<footnote><para>This command will not be visible if there are no TrackerStore Services configured
+								and the user is not a Premises Publisher.</para></footnote></entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Publishes (stores) Animal Life Data and Event Histories to MongoDB 
+							</entry>
+							
+							<entry>The user designated as the publisher of the Premises will use this command to record 
+							Animal Life Data and Event Histories<footnote><para>When ahimal event histories are recorded,
+							the system will record a time stamp.  This time stamp is used to insure that only the latest 
+							animal history events are recorded and changes made to old events are not.</para></footnote>. 
+							</entry>
 						</row>
 					
 					</tbody>
 				</tgroup>
 			</table>
-
 		</para>
 	</section>
 	 
