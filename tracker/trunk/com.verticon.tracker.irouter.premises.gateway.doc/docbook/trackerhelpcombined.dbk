@@ -2,7 +2,7 @@
 
 	<chapter id="PremisesGatewayFeature" xml:base="premisesGateway/premisesGateway.xml">
 	    <?dbhtml filename="premisesGateway/premisesGateway.html" ?>
-		<title>Premises Gateway Feature</title>
+		<title>iRouter Premises Gateway</title>
 		<para>Many animal premises managers require the integration of sensors, actuators, weigh scales, and RFID readers.
 		Traditional solutions are often custom software and network integration solutions that require business 
 		analysts, programmers and installers to undertake a costly and time consuming development, integration
@@ -17,32 +17,98 @@
 		<note><para>See the <ulink url="http://tracker.verticon.com/Tracker/documentation/iRouter.pdf"> iRouter User Guide</ulink>
 		for details about the iRouter.
 		</para></note>
-		<para>The Premises Gateway feature contains three iRouter Component Factories and an Gateway EventHandler.</para>
-		<section id="EIDReaderGatewayComponentFactory">
-			<title>EID Reader Gateway Component Factory</title>
-			<para>Many problem solutions require the integration of one or more RFID Tag Readers with network attached
-			  sensors and actuators.</para>
-			<para>The EID Reader Gateway Component Factory is a factory for creating component gateways that transform 
+		<para>The Premises Gateway feature contains three iRouter Component Factories and an Gateway EventHandler.
+		
+		<table frame="all"><title>Premises Gateway Component Factories</title>
+			<tgroup align="left" cols="7" colsep="1" rowsep="1">
+				<colspec colname="c1"/>
+				<colspec colname="c2"/>
+				<colspec colname="c3"/>
+				<colspec colname="c4"/>
+				<colspec colname="c5"/>
+				<colspec colname="c6"/>
+				<thead>
+					<row>
+  						<entry>Component Factory Name</entry>
+  						<entry>Description</entry>
+  						<entry>Consumes</entry>
+  						<entry>Interface input</entry>
+  						<entry>Produces</entry>
+  						<entry>Interface output</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+  						<entry><link linkend="PremisesEIDReaderGateway">Premises EID Reader Gateway</link></entry>
+						<entry>Gateway from EID Tag Readers to the iRouter network.</entry>
+  						<entry/>
+  						<entry>Subscribes to EventAdmin RFID Tag Read Events</entry>
+  						<entry>EID Number Products</entry>
+  						<entry/>
+					</row>
+
+					<row>
+  						<entry><link linkend="PremisesMeasurementEventGateway">Premises Measurement Event Gateway</link></entry>
+						<entry>Gateway from the iRouter that creates Measurement and Position Events in Premises documents.
+							<footnote><para>This function is performed by the 
+							<link linkend="GatewayEventHandler">Gateway EventHandler</link>.
+						</para></footnote></entry>
+  						<entry>Consumes Measurement, Position and optional State Products</entry>
+  						<entry/>
+  						<entry/>
+  						<entry>Publishes EventAdmin Measurement and Position Events</entry>
+					</row>
+					
+					<row>
+  						<entry><link linkend="AnimalLifeDataGateway">Animal Life Data Gateway</link></entry>
+						<entry>Gateway from Premises document Animal elements to the iRouter network.</entry>
+  						<entry/>
+  						<entry>The Animal elements in a Premises document</entry>
+  						<entry>List of Strings as a Product, where each string represents the life data for an animal.</entry>
+  						<entry/>
+					</row>
+					
+					
+				</tbody>
+			</tgroup>
+		</table>
+		
+		</para>
+		
+		<section id="PremisesEIDReaderGateway">
+			<title>Premises EID Reader Gateway</title>
+			<para><emphasis>com.verticon.tracker.irouter.eid.event</emphasis></para>
+			<para>Many livestock information management solutions require the integration of one or more RFID Tag Readers 
+			with network attached sensors and actuators. The EID Reader Gateway Factory is a component factory for creating 
+			services that interface with RFID Tag Readers integrating their Tag reads with iRouter network services. </para>
+			<para>The EID Reader Gateway Factory services transform 
 				<glossterm>EID</glossterm> numbers read from 
-				<glossterm>RFID</glossterm> Tag Readers into iRouter 
-				<emphasis>EID number</emphasis> products, that are distributed to network attached iRouter 
-				  connected sensors and actuators.  
+				<glossterm>RFID</glossterm> Tag Readers and produce iRouter 
+				<emphasis>EID number</emphasis> products for consumption by iRouter Consumer services..  
 			</para>
+			
 			<section id="EIDNumbersfromTagReaders">
-				<title>EID Numbers from Tag Readers</title>
-				<para>The Tracker Reader Feature and the Tracker Premises transaction editor provide the functionality for configuration, management, dynamic editing and interfacing of 
-					<glossterm>RFID</glossterm> 
-					<glossterm>EID</glossterm> tag readers and Premises documents.  
+				<title>RFID/EID Reader Background</title>
+				<para>The Tracker Reader Feature and the Tracker Premises transaction editor provide the functionality for 
+				configuration, management, dynamic editing and interfacing of <glossterm>RFID</glossterm>  tag readers 
+				and Premises documents.  
 				</para>
-				<para>Opening a Premises document with the Premises Transaction Editor will enable input connectivity with all the connected Tag Readers in the Readers view. During this transaction editing session when tags are read by a Tag reader, the EID numbers transmitted by the Tag Reader will be converted to one or more Animal history events, and added to the Premises document. The operator will see this as a dynamic change to the document.  </para>
+				<para>Opening a Premises document with the Premises Transaction Editor will enable input connectivity with 
+				all the connected Tag Readers in the Readers view. During this transaction editing session when tags are 
+				read by a Tag reader, the EID numbers transmitted by the Tag Reader will be converted to one or more Animal 
+				history events, and added to the Premises document. The operator will see this as a dynamic change to the 
+				document.  </para>
 				<para>See the 
 					<ulink url="http://tracker-project.verticon.com/verticon_Tracker/admin/ticket/components/com.verticon.tracker.reader">com.verticon.tracker.reader feature</ulink> and the Tracker Business Intelligence Toolkit documentation for more details.
 				</para>
 			</section>
+			
 			<section id="EIDNumberEventstoiRouterEIDProducts">
 				<title>EID Number Events to iRouter EID Products</title>
-				<para>To aid integration, Readers view connected Tag Readers will also publish EID numbers as events on the internal inter-process communication facility the EventAdmin Service. </para>
-				<para>The EID Reader Gateway Components are gateways that subscribe to EID number Events that were published on the EventAdmin Service and re-produce them as 
+				<para>Readers view connected Tag Readers publish EID numbers on the EventAdmin Service the internal inter-process 
+				communication facility. </para>
+				<para>The EID Reader Gateway Components are gateways that subscribe to EID numbers published on the EventAdmin 
+					Service and re-produce them as 
 					<emphasis>EID number</emphasis> products on the iRouter WireAdmin service.
 				</para>
 				<para>To provide the gateway functionality, an EID Component implements 
@@ -61,12 +127,15 @@
 				</itemizedlist>
 			</section>
 		</section>
-		<section id="MeasurementEventGatewayComponentFactory">
+
+		<section id="PremisesMeasurementEventGateway">
 			<?dbhtml filename="premisesGateway/measurementEventGateway.html" ?>
-			<title>Measurement Event Gateway Component Factory</title>
-			<para>The Measurement Event Gateway Component Factory is a factory for creating component gateways that transform iRouter 
+			<title>Premises Measurement Event Gateway</title>
+			<para><emphasis>com.verticon.tracker.irouter.measurement.event</emphasis></para>
+			<para>The Measurement Event Gateway Factory is a factory for creating gateway services that consume 
+				iRouter 
 				<emphasis>Measurement</emphasis> and 
-				<emphasis>Position</emphasis> products into EventAdmin Measurement and Position Events. 
+				<emphasis>Position</emphasis> products and transform them into EventAdmin Measurement and Position Events. 
 			</para>
 			<section id="iRouterMeasurementandPositionProductstoEventAdminEvents">
 				<title>iRouter Measurement and Position Products to EventAdmin Events</title>
@@ -122,11 +191,12 @@
 				</orderedlist>
 			</section>
 		</section>
+
 		<section id="GatewayEventHandler">
 			<?dbhtml filename="premisesGateway/gatewayEventHandler.html" ?>
 			<title>Gateway EventHandler</title>
-			<para>The Gateway EventHandler is a gateway service that transforms Measurement and Position events coming from the iRouter into 
-				Premises animal history events.</para>
+			<para>The Gateway EventHandler is a gateway service that transforms Measurement and Position events 
+				coming from the iRouter into Premises animal history events.</para>
 			<section id="AnimalHistoryEvents">
 				<title>Animal History Events</title>
 				<para>Tracker Editor Feature provides a Tracker Transaction Editor for creating animal event history events from 
@@ -166,10 +236,15 @@
 				</itemizedlist>
 			</section>
 		</section>
-		<section id="AnimalLifeDataGatewayComponentFactory">
+
+		<section id="AnimalLifeDataGateway">
 			<?dbhtml filename="premisesGateway/animalLifeDataGateway.html" ?>
-			<title>Animal Life Data Gateway Component Factory</title>
-			<para>Premises documents contain both animal history and animal life data.  For external devices that require synchronization of animal life data, the Animal Life Data Gateway Component Factory creates services that produce a list of animal life data records extracted from a specified Premises document. These animal life data record products can be consumed by iRouter services to export animal life data to external devices. </para>
+			<title>Animal Life Data Gateway</title>
+			<para><emphasis>com.verticon.tracker.irouter.animal.data</emphasis></para>
+			<para>Premises documents contain both animal history and animal life data.  For external devices that require 
+			synchronization of animal life data, the Animal Life Data Gateway Factory creates services that produce a list
+			of animal life data records extracted from a specified Premises document. These animal life data record products 
+			can be consumed by iRouter services to export animal life data to external devices. </para>
 			<itemizedlist>
 				<listitem>
 					<para>Extraction process is triggered when a consumer connects to this service</para>
@@ -205,7 +280,7 @@
 				</listitem>
 			</itemizedlist>
 		</section>
-		
+
 		<section id="PremisesExamples">
       <?dbhtml filename="premisesGateway/premisesGatewayExample.html" ?>
 		<title>Premises Gateway Examples</title>

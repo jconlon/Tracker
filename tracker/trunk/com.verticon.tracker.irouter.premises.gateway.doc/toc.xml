@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?><toc topic="html//index.html" label="Features" link_to="../com.verticon.tracker.product.desktop.doc/toc.xml#tracker_feature">
-<topic href="html//premisesGateway/premisesGateway.html" label="Premises Gateway Feature">
-<topic href="html//premisesGateway/premisesGateway.html#EIDReaderGatewayComponentFactory" label="EID Reader Gateway Component Factory">
-<topic href="html//premisesGateway/premisesGateway.html#EIDNumbersfromTagReaders" label="EID Numbers from Tag Readers"/>
+<topic href="html//premisesGateway/premisesGateway.html" label="iRouter Premises Gateway">
+<topic href="html//premisesGateway/premisesGateway.html#PremisesEIDReaderGateway" label="Premises EID Reader Gateway">
+<topic href="html//premisesGateway/premisesGateway.html#EIDNumbersfromTagReaders" label="RFID/EID Reader Background"/>
 <topic href="html//premisesGateway/premisesGateway.html#EIDNumberEventstoiRouterEIDProducts" label="EID Number Events to iRouter EID Products"/>
 </topic>
-<topic href="html//premisesGateway/measurementEventGateway.html" label="Measurement Event Gateway Component Factory">
+<topic href="html//premisesGateway/measurementEventGateway.html" label="Premises Measurement Event Gateway">
 <topic href="html//premisesGateway/measurementEventGateway.html#iRouterMeasurementandPositionProductstoEventAdminEvents" label="iRouter Measurement and Position Products to EventAdmin Events"/>
 </topic>
 <topic href="html//premisesGateway/gatewayEventHandler.html" label="Gateway EventHandler">
 <topic href="html//premisesGateway/gatewayEventHandler.html#AnimalHistoryEvents" label="Animal History Events"/>
 <topic href="html//premisesGateway/eventAdminEventsToAnimalHistor.html" label="EventAdmin Events to Animal History Events "/>
 </topic>
-<topic href="html//premisesGateway/animalLifeDataGateway.html" label="Animal Life Data Gateway Component Factory"/>
+<topic href="html//premisesGateway/animalLifeDataGateway.html" label="Animal Life Data Gateway"/>
 <topic href="html//premisesGateway/premisesGatewayExample.html" label="Premises Gateway Examples">
-<topic href="html//premisesGateway/premisesGatewayExample.html#N1012B" label="Recording Animal Location Example"/>
+<topic href="html//premisesGateway/premisesGatewayExample.html#N10184" label="Recording Animal Location Example"/>
 <topic href="html//premisesGateway/premisesGatewayWeighInExample.html" label="Recording Animal Weight Example"/>
 </topic>
 </topic>
