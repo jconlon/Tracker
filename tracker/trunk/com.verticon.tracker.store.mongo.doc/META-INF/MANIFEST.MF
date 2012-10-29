@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tracker Store Documentation
-Bundle-SymbolicName: com.verticon.tracker.store.mongo.doc
+Bundle-SymbolicName: com.verticon.tracker.store.mongo.doc;singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Verticon, Inc.

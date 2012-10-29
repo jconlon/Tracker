@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+ "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="mongoStore">
+	<?dbhtml filename="overview/oclOverview.html" ?>
+	<title>MongoDB Tracker Store and Location Service</title>
+	
+	<section id="mongo_overview">
+		<?dbhtml filename="mongo_overview/oclOverview.html" ?>
+		<title>Overview </title>
+		
+		<para>MongoDB<footnote>
+			<para>
+		<ulink url="http://www.mongodb.org/"><citetitle>MongoDB</citetitle></ulink> (from "humongous") is a scalable, high-performance, open source NoSQL 
+			database.
+			</para>
+		</footnote> TrackerStore and Location Service<footnote><para>MongoDB TrackerStore and Location Service is an implementation of two
+		Premises Editor services: <itemizedlist>
+			<listitem><para><emphasis>TrackerStore</emphasis></para></listitem>
+			<listitem><para><emphasis>Location</emphasis>.</para></listitem>
+			</itemizedlist>See the Services section of the Premises Editor documentation for a detailed description of
+		the TrackerStore and Location Service functionality. </para></footnote> is a new generation <emphasis>Big Data</emphasis> storage solution for 
+		livestock market exchanges, livestock producers, livestock infrastructure providers 
+		and government animal health regulators who require:
+		<itemizedlist mark="bullet">
+          <listitem><para>a highly scalable, reliable and easy to maintain information repository for recording high volumes of animal 
+		life and history event information<footnote>
+		  	<para>MongoDB has the ability to scale data storage to 100s of TERA BYTES and the capabilities for creating high degrees of redundancy.</para></footnote>;</para></listitem>
+          <listitem><para>a facility to register and record Livestock Premises geolocation details;</para></listitem>
+          <listitem><para>the functionality for tracing animal movements within and between livestock premises;</para></listitem>
+          <listitem><para>stored information accessible by state of the art business intelligence analysis and reporting tools;</para></listitem>
+          <listitem><para>multi-user access controls to segregate information;</para></listitem>
+          <listitem><para>support for iRouter client background services and appliances;</para></listitem>
+          <listitem><para>an information exchange facility for sharing information between collaborating business 
+          partners.</para></listitem>
+        </itemizedlist>
+	      </para>
+	      
+	 </section>     
+		 
+	<section id="mongo_provisioned_features">
+		<?dbhtml filename="mongo_features/oclOverviewFeatures.html" ?>
+		<title>Provisioned Features</title>	
+        <para>
+        To add MongoDB Tracker Store and Location Service to the Tracker provision the following features:
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>MongoDB Connection Drivers <emphasis>com.mongodb</emphasis> feature. 
+            	</para>
+            	<para>MongoDB Connection Drivers <emphasis>com.mongodb</emphasis> feature. 
+            	These are low level client drivers for connecting to one or more, local or remote MongoDB servers. See 
+            	<ulink url="http://www.mongodb.org/display/DOCS/Java+Language+Center"><citetitle>MongoDB Java Language Center</citetitle></ulink> 
+            	for more details.</para>
+          </listitem>
+          <listitem>
+            <para>MongoEMF Runtime <emphasis>com.verticon.mongo.emf.runtime</emphasis> feature.</para>
+            <para>
+            	   MongoEMF sits one level up from the client drivers.  MongoEMF is a persistence framework 
+            	   that allows information from Premises documents to be saved to MongoDB.<footnote><para>Both the client drivers and the 
+            	   MongoEMF framework are invisible to end users.</para>
+            	   <para>See <ulink url="https://github.com/BryanHunt/mongo-emf/wiki">
+            	   <citetitle>MongoEMF Project Wiki</citetitle></ulink> for more details.</para></footnote></para>
+          </listitem>
+          <listitem>
+            <para>Tracker MongoDB Store <emphasis>com.verticon.tracker.store.mongo</emphasis> feature.</para>
+            	<para>
+            	   Tracker MongoDB Store provides the core user functionality by implementing the Tracker Store 
+            	   and Location Services.<footnote>
+            	   		<para>See the Services section in the Premises Editor documentation.</para>
+            	   		</footnote>
+            	   As well as providing :
+	 	   		<itemizedlist>
+	 	   			<listitem><para>Administration facility for controlling user access to information when creating information exchanges with multiple users recording and retrieving information from multiple premises.</para></listitem>
+	 	   			<listitem><para>Administration facility for registering Livestock Premises;</para></listitem>
+	 	   			<listitem><para>User recording and retrieval of Livestock Premises, Animal and Animal Event information;</para></listitem>
+	 	   			<listitem><para>Desktop client support for connecting to one or multiple remote or local MongoDB servers;</para></listitem>
+	 	   			<listitem><para>Traceability services for locating animals and analyzing movements within and between premises.</para></listitem>
+            		<listitem><para>iRouter client support</para></listitem>
+	 	    	</itemizedlist>
+         		</para>
+          </listitem>
+          <listitem>
+            <para>Mongo EMF ODA Driver <emphasis>com.verticon.mongo.emf.oda</emphasis> feature.</para>
+            	<para>
+            	Mongo EMF ODA Driver provides Eclipse Business Intelligence Reporting Tool <acronym>BIRT</acronym> access to EMF 
+            	documents<footnote><para>In the case of TrackerStore the EMF documents would be Premises and Admin documents.</para></footnote> 
+            	stored in MongoDB.
+            	</para>
+          </listitem>
+          <listitem>
+            <para>Mongo EMF ODA User Interface <emphasis>com.verticon.mongo.emf.oda</emphasis> feature.</para>
+            	<para>
+            Mongo EMF ODA provides the graphical user interfaces which allow business analysts using 
+            Eclipse Business Intelligence Reporting Tool <acronym>BIRT</acronym> designer tools the graphical support
+            to build report <ulink url="http://wiki.eclipse.org/BIRT/FAQ/Data_Access#Q:_What_is_a_.22data_source.22_and_a_.22data_set.22.3F">
+            <citetitle>datasources and datasets</citetitle></ulink> that access EMF documents stored in MongoDB.</para>
+          </listitem>
+          <listitem>
+            <para>Mongo EMF JSON Query <emphasis>com.verticon.mongo.emf.json.query</emphasis> feature. 
+                  This feature provides a familiar query language for use by <acronym>BIRT</acronym> MongoEMF report
+                  designers that is similar to the query command<footnote>
+                  	<para>See <ulink url="http://www.mongodb.org/display/DOCS/Querying">
+                  	<citetitle>MongoDB Querying</citetitle></ulink> for more details.</para>
+                  	</footnote>
+                  	syntax used in the MongoDB command line shell.</para>
+          </listitem>
+         
+        </itemizedlist>
+      </para>
+      </section>
+   
+ 	<section id="mongo_installationAndAdministration">
+	<?dbhtml filename="mongo/installationAndAdministration.html" ?>
+	  <title>Server Installation and Administration</title>
+	  <para>MongoDB TrackerStore is a client server technlogy where a host server running MongoDB<footnote><para>For instructions on
+	  installing MongoDB on a host server see the <ulink url="http://www.mongodb.org/display/DOCS/Quickstart">
+				<citetitle>MongoDB documentation</citetitle>
+			</ulink>.</para></footnote> and configured with a TrackerStore <emphasis>Admin</emphasis> configuration can be 
+	  connected to by one or more Tracker Desktop users.<footnote>
+	  	<para>Client side Tracker Desktops must be <link linkend='mongo_provisioned_features'>provisioned with 
+	  	MongoDB TrackerStore features.</link></para></footnote>  
+	  
+	 </para>
+	  
+	  <section id="mongo_admin">
+		<?dbhtml filename="installationAndAdmin/admin.html" ?>
+	  	<title>Administration Tasks</title>
+	  	
+	  	<para>Once MongoDB is installed on the server, the server will have to be loaded with an 
+	  	<emphasis>Admin</emphasis> configuration document. This admin configuration specifies a user<footnote>
+	  	<para>A computuer user is refered to as a Member in the Admin document.</para></footnote> that will act as an
+	  	<emphasis>Administrator</emphasis>, which users are able to publish premises resources<footnote>
+	  	<para>A Premises is called a Resource in the Admin document.  A Resource is referenced to a premises by an 
+	  	<acronym>URI</acronym> (Universal Resource Identifier). </para></footnote> and what resources 
+	  	users can publish and retrieve from the MonboDB.</para>
+	  
+		<para>The Administrator 
+			<orderedlist>
+				<listitem><para>creates an <emphasis>Admin</emphasis> configuration document which specifies:<orderedlist>
+									
+									<listitem>
+										<para>members, by the user name and the computer name they will access TrackerStore from;</para>
+									</listitem>
+									<listitem>
+										<para>resources, by the uri of the Premises;</para>
+									</listitem>
+									<listitem>
+										<para>which resources members can publish;</para>
+									</listitem>
+									<listitem>
+										<para>which resources members can retrieve;</para>
+									</listitem>
+									<listitem>
+										<para>the member that is the administrator</para>
+									</listitem>
+								</orderedlist></para>
+				</listitem>
+			    <listitem><para>loads a <emphasis>Admin</emphasis> configuration document into TrackerStore;<footnote>
+			    	<para>When the server is first installed and 
+										no configuration is loaded, any user can load an Admin document to configure the access rules.</para>
+										</footnote></para>
+				</listitem>
+			    <listitem><para>register premises.<footnote>
+			    	<para>See the Premises Editor documentation, <emphasis>Premises Action Commands</emphasis> section for details on how an 
+			    	Administrator registers premises.</para>
+					</footnote></para>
+				</listitem>
+			</orderedlist>
+		</para>
+		
+	  
+	<section id="adminsDataModel">
+	    <?dbhtml filename="model/premisesEditorModel_dataModel_core.html" ?>
+		<title>Admin Configuration Document</title>
+	<para>
+		All Admin configuration documents structurally conform to the <emphasis>Admin Data Model</emphasis>. In the Admin Data Model,
+		a single <emphasis>Admin</emphasis> element contains one or more <emphasis>Member</emphasis> elements, one or more 
+		<emphasis>Resource</emphasis> elements and zero or more <emphasis>Association</emphasis> elements.  
+		The <emphasis>Admin</emphasis> element specifies a <emphasis>Member</emphasis> as an Administator. The <emphasis>Resource</emphasis>
+		 element specifies 
+		<orderedlist>
+			<listitem><para>a <emphasis>Member</emphasis> as the publisher of the resource</para></listitem>
+			<listitem><para>an <emphasis>Association</emphasis> if the <emphasis>Resource</emphasis> is associated with resources from other premises. </para></listitem>
+		</orderedlist>
+		
+	</para>
+	
+	<para>
+		Elements of the Admin Data Model are shown in
+		<xref linkend="fig_adminDataModel1" />.
+	</para>
+	<figure id="fig_adminDataModel1">
+		<title>Admin Data Model Elements</title>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="../images/model/admin.png" />
+			</imageobject>
+		</mediaobject>
+	</figure>
+		
+		<para>
+			<orderedlist numeration="loweralpha">
+				<listitem>
+					<para>The elements of the Admin Data Model are depicted as rectangles in the figure.</para>
+				</listitem>
+				<listitem>
+					<para>The notation within the elements are the attributes of the element.</para>
+				</listitem>
+				<listitem>
+					<para>The notation between the elements are the relationships of the elements.</para>
+				</listitem>
+			</orderedlist>
+		</para>
+		<para>The following table offers a text explanation of the primary element relationships.<table frame='all'>
+				<title>Elements of the Admin Model</title>
+				<tgroup cols='2' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<thead>
+						<row>
+							<entry>Element Name</entry>
+							<entry>
+								Relationship to other Elements
+							</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>Admin</entry>
+							<entry>
+								There is one Admin element in an Admin document. The Admin element is the root element of the 
+								 document.  All other elements are children elements of the Admin element. An Admin element
+								 contains one or more Members, one or more Resources and zero or more Associations. The Admin element 
+								 references one Member as an Admin (administrator).
+								 The Admin Editor and the Properties View are used for creating and editing Admin documents.
+							</entry>
+						</row>
+						<row>
+							<entry>Member</entry>
+							<entry>
+								The Member element represents a user on a computer.  The Admin element must have one or more Member elements. 
+							    Each Member has a name attribute to designate the user name and the name of the computer the user will use to access MongoDB. The name attribute
+							    takes the form <emphasis>userName@hostName</emphasis>.
+							</entry>
+						</row>
+						
+						<row>
+							<entry>Association</entry>
+							<entry>
+								The Association element provides an option for creating named sets of two or more resources. The Admin element 
+								may contain zero or more Associations. The Association element has a required name attribute.  
+								
+							</entry>
+						</row>
+						<row>
+							<entry>Resource</entry>
+							<entry>
+								The Resource element represents information that can be published<footnote>
+								<para>Initially only premises documents and contained animal information can be published.</para></footnote> 
+								on the MongoDB TrackerStore. 
+								A Resource must reference a Member to identify the publisher and may reference an Association to indicate it 
+								is part of an association.  The Resource has an uri attribute for identification and may be designated as 
+								public.  When a resource is public, it can be retrieved by any TrackerStore user.  For a non-public resource 
+								that is included in an association the publishers of any of the resources in the association can retrieve
+								it.  For resources that do not reference an association only the member bublisher can retrieve it.
+							</entry>
+						</row>
+						
+					</tbody>
+				</tgroup>
+			</table>
+
+		</para>
+	</section>
+	  
+	<section id="mongoLoadAdminAction">
+		<?dbhtml filename="mongoActions/mongoActions.html" ?>
+		<title>Loading Admin Configuration</title>
+		<para>On the Admin element of the Admin document, the Admin Editor presents an action command to load the Admin document into
+		TrackerStore.<footnote>
+			<para>This command is added to the base set of actions commands on the Admin element only 
+			when one or more MongoDB Tracker Store connections are <link linkend='mongo_endUserConfiguration'>configured.</link>
+			</para></footnote> 
+		This action may be accessed as popup menus from the Selection page of the Admin Editor or the document tree in the Outline View tree. 
+	    	<footnote><para> 
+		Right click on the element and the popup main menu will be shown. From there the sub menu 'Tracker Actions' will contain the 
+		appropriate action command.
+			</para></footnote>
+			
+			<figure id="fig_admin_actions_selection">
+                <title>Loading an Admin document from Admin Editor Selection Page
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/actions/load.png"/>
+                    </imageobject>
+                </mediaobject>
+        	</figure>
+        	
+		
+			<table frame='all'>
+				<title>Admin Editor Document Element Action Commands</title>
+				<tgroup cols='5' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<colspec colname='c3' />
+					<colspec colname='c4' />
+					<colspec colname='c5' />
+					<thead>
+						<row>
+							<entry>Element</entry>
+							<entry>Command Name</entry>
+							<entry>Permission Level</entry>
+							<entry>Description</entry>
+							<entry>Comment</entry>
+						</row>
+					</thead>
+					<tbody>
+						
+					    <row>
+							<entry>Admin</entry>
+							<entry>Load Admin access control to MongoDB</entry>
+							<entry>Server Administrator<footnote><para>Access controls do not exist when an Admin access
+							control document is not loaded in MongoDB.</para></footnote></entry>
+							
+							
+							<entry>
+								Loads (stores) the Admin access controls to MongoDB 
+							</entry>
+							
+							<entry>When a MongoDB server is <link linkend='mongo_installationAndAdministration'>installed</link> the first user to
+							load an Admin document will determine the access controls for the server.</entry>
+						</row>
+						
+						
+					</tbody>
+				</tgroup>
+			</table>
+
+		</para>
+	</section>
+	
+	<section id="mongoRegisterPremisesAction">
+		<?dbhtml filename="mongoActions/mongoActions.html" ?>
+		<title>Registering a Premises</title>
+		<para>On the Premises element of the Premises document, the Premises Editor presents an action command to register the Premises to
+		TrackerStore.<footnote>
+			<para>This command is added to the base set of actions commands on the Premises element only 
+			when one or more Tracker Store connections are <link linkend='mongo_endUserConfiguration'>configured</link> and when the user
+			is the <emphasis>Administrator</emphasis> for the TrackerStore.  Registration of Premises is assigned to the administrator
+			so that the premises details can be validated prior to registration.
+			</para></footnote> 
+		This action may be accessed as popup menus from the Selection page of the Premises Editor or the document tree in the Outline View tree. 
+	    	<footnote><para> 
+		Right click on the element and the popup main menu will be shown. From there the sub menu 'Tracker Actions' will contain the 
+		appropriate action command.
+			</para></footnote>
+			<!-- TODO -->
+			<figure id="fig_register_actions_selection">
+                <title>Register a Premises from the Premises Editor Selection Page
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/actions/register.png"/>
+                    </imageobject>
+                </mediaobject>
+        	</figure>
+
+		</para>
+	</section>
+   </section>
+</section>
+   
+    <section id="mongo_endUserConfiguration">
+	<?dbhtml filename="mongo/configuration.html" ?>
+	  <title>Configuring MongoDB iRouter Services</title>
+	 	<para>After provisioning the Tracker Desktop with the MongoDB features, the user must create and configure a 
+	 	MongoDB service to communicate with a MongoDB host server.<footnote><para>There can be multiple services configured to connect to multiple MongoDB servers.</para></footnote></para>
+	 	<para>To create a MongoDB TrackerStore service, from
+	 	the menu bar select <emphasis>Configuration</emphasis> and <emphasis>Edit iRouter Configuration</emphasis>.</para>
+
+		<figure id="fig_editIRouter">
+                <title>Edit an iRouter Configuration
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/configureIRouter/edit.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        
+        <para>The iRouter Configuration Editor will be displayed.  It will have two tabs at the bottom of the editor window 
+        <emphasis>Selection</emphasis> and 
+        <emphasis>Factories</emphasis>.  Select the <emphasis>Factories</emphasis> tab.
+        <figure id="fig_editorIRouter">
+                <title>iRouter Editor Factories
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/configureIRouter/editor.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        </para>
+        
+        <para>The list box in the Factories tab of the iRouter editor will contain iRouter Factories and Services.
+        	<note><para>They are called factories because they are used to create a service instance.<footnote>
+        		<para>Service instances are also called a Factory designate instances.</para></footnote> The Mongo Tracker Store factory 
+        	will create Mongo Tracker Store services.</para></note> Select the <emphasis>Mongo Tracker Store</emphasis> factory, right click
+        	to bring up the popup menu and select the <emphasis>Create new Factory (Designate) Instance</emphasis>.
+        	<figure id="fig_editorIRouterTrackerStoreFactory">
+                <title>Creating a New Mongo TrackerStore Service
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/configureIRouter/trackerStoreFactory.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        </para>
+       <para>The factory will now show that the number of service instance was incremented and the new service will appear
+        underneath the factory in the list.  Select the new service and the configuration form editor will appear in the 
+        right part of the editor window.
+        	<figure id="fig_editorIRouterTrackerStoreService">
+                <title>Configuring a TrackerStore Service 
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/configureIRouter/trackerStoreService.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        
+        A Mongo TrackerStore service has several configurable attributes because it is not only
+        one service it is a composite of services:
+        <orderedlist>
+        	<listitem><para>TrackerStore Service</para></listitem>
+        	<listitem><para>Location Service</para></listitem>
+        	<listitem><para>iRouter Consumer Service<footnote>
+        	<para>See <link linkend='iRouterConsumerSupport'>iRouter Consumer Service Section</link>
+        	for details on configuring a Mongo TrackerStore instance as an iRouter consumer service.
+        	</para></footnote></para></listitem>
+        </orderedlist>
+        Configuration may look complicated, but to get a basic services for TrackerStore and Location 
+        only requires setting the following three attributes: 
+        <orderedlist>
+        	<listitem><para><emphasis>MongoDB Connection URI</emphasis></para>
+        		<para>The connection URI takes the form: 
+        			<code>mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database]]</code>. The default
+        			<code>mongodb://localhost</code> connects to a mongodb server running on the local host.</para>
+        	</listitem>
+        	<listitem><para><emphasis>Description</emphasis></para><para>Use any language here to describe the connection.</para></listitem>
+        	<listitem><para><emphasis>Premises URI</emphasis></para>
+        		      <para>This is the URI of the premises. It has to match the premises the user will be publishing. Example:<code>urn:pin:H89234X</code></para>
+        		  </listitem>
+        </orderedlist>
+        <warning>
+			<para>Leave all other attributes as default settings, unless you know what your doing!</para>
+		</warning>
+        Once these three attributes are set the configuration can be saved to start the service.<footnote><para>Stopping and restarting
+        the Tracker Desktop will automatically restart the service.  To delete the service, edit the configuration and delete the service instance
+        and save the configuration.</para></footnote>
+        <figure id="fig_editorIRouterTrackerStoreServiceConfigured">
+                <title>TrackerStore Service Running and Shown in the iRouter Monitor View
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/configureIRouter/trackerStoreServiceConfigured.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        
+        
+        </para> 
+        
+    </section>
+   
+    <section id="iRouterConsumerSupport">
+    		<?dbhtml filename="mongo/iRouterSupport.html" ?>
+			<title>iRouter Consumer Service</title>
+			<para>The Mongo TrackerStore is also an iRouter Consumer<footnote>
+				<para>Technically a <emphasis>org.osgi.service.wireadmin.Consumer</emphasis> service.</para></footnote> 
+			that can be configured within a iRouter network to consume products from iRouter Producers. 
+			The Mongo TrackerStore iRouter Consumer can be used by iRouter managed sensor and measurement networks 
+			for real-time recording of Tracker Premises transactions.  
+			</para>
+			
+			<para>Mongo TrackerStore Consumer Service:
+						<orderedlist>
+							<listitem>
+								<para>can be configured and run in Tracker Desktop BI Toolkit for hands free saving of animals, tags and events that originate 
+								from iRouter networks of sensor and </para>
+							</listitem>
+							<listitem>
+								<para>can be configured and run in iRouter headless appliances for automatic recording of tag events from one or more fixed sensors</para>
+							</listitem>
+							<listitem>
+								<para>can be configured and run as multiple services instances to connect to more than one MongoDB stores</para>
+							</listitem>
+							<listitem>
+								<para>supports event updates to existing animals and the runtime creation of new animals</para>
+							</listitem>
+							<listitem>
+								<para>leverages the power of the iRouter infrastructure for creating complex sensor and actuator based solutions.</para>
+							</listitem>
+							<listitem>
+								<para>can support recording of events from one or more tag readers or virtual tag producers.</para>
+							</listitem>
+						</orderedlist>
+					
+			The Mongo TrackerStore consumes:
+			<orderedlist>
+				<listitem><para>Tags
+	 				<orderedlist>
+	 					<listitem>
+								<para>Tags can contain one or more events;</para>
+						</listitem>
+	 					<listitem><para>Saving the tag in a new animal created from the default animal type<footnote>
+	 						<para>The default Animal type is set in the <emphasis>Type</emphasis> 
+	 						attribute of the <link linkend='fig_editorIRouterTrackerStoreService'>Mongo TrackerStore Service Configuration</link>.</para></footnote> if it is a new tag id;</para></listitem>
+	 					<listitem><para>Saving the latest events if the tag is already persisted;</para></listitem>
+	 					<listitem><para>Saving the tag in an existing animal if this tag contains a replacedTag event.</para></listitem>
+	 				</orderedlist>
+	 				</para>
+	 			</listitem>
+				<listitem><para>Animals<footnote>
+        	<para>In the <link linkend='iRouterExample'>iRouter Example Section</link>
+        	the <emphasis>Premises Animal Producer</emphasis> is an example of a Producer service that produces Animal products.
+        	</para></footnote></para>
+					<para>Saving the first tag in the animal as described above in saving tags.</para></listitem>
+				<listitem><para>Envelopes containing GenericEvents<footnote>
+        	<para>In the <link linkend='iRouterExample'>iRouter Example Section</link>
+        	the <emphasis>Premises Event Producer</emphasis> is an example of a Producer service that produces Envelope Measurement products.
+        	(Premises Event Producer can produce Positions as well, but in the example it is configured to produce only Measurements).
+        	</para></footnote> where the envelope:
+					<orderedlist>
+						<listitem><para>id must be a Long or String object as that will be used for the Tag id,</para></listitem>
+						<listitem><para>envelope scope is the OCD,</para></listitem>
+						<listitem><para>envelope contents are used to create the event.</para></listitem>
+					</orderedlist>
+				</para>
+				</listitem>
+				
+			</orderedlist>
+			
+			<table frame='all'><title>Mongo Tracker Store iRouter Consumer</title>
+			<tgroup cols='6' align='left' colsep='1' rowsep='1'>
+				<colspec colname='c1'/>
+				<colspec colname='c2'/>
+				<colspec colname='c3'/>
+				<colspec colname='c4'/>
+				<colspec colname='c5'/>
+				<colspec colname='c6'/>
+				
+				<thead>
+					<row>
+  						<entry>Component Factory Name</entry>
+  						<entry>Description</entry>
+  						<entry>Consumes</entry>
+  						<entry>Interface input</entry>
+  						<entry>Produces</entry>
+  						<entry>Interface output</entry>
+  						
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>Mongo Tracker Store</entry>
+  						<entry>Stores standard and generic animal events to the TrackerStore</entry>
+  						<entry>Consumes Product Envelopes that are Animal, Tag, Measurement and Position</entry>
+  						<entry></entry>
+  						<entry></entry>
+  						<entry>Stores products to the TrackerStore</entry>
+  						
+					</row>
+
+					
+				</tbody>
+			</tgroup>
+		</table>
+			
+	</para>
+	
+	
+			
+	<section id="iRouterExample">
+		<?dbhtml filename="mongo/example.html" ?>
+			<title>iRouter Example</title>
+			<para>Goal: Demonstrate an iRouter component configuration that highlights the functionality of the Tracker Mongo Store.
+			
+			<figure id="fig_iRouterTrackerStoreFlows">
+                <title>TrackerStore Service iRouter Network Product Flows
+                </title>
+                <mediaobject>
+					<imageobject>
+						<imagedata fileref="../images/store/Premises_iRouter.png"/>
+					</imageobject>
+				</mediaobject>
+       		</figure>
+			
+			</para>
+			<orderedlist>
+				<listitem>
+					<para>Components used</para>
+					<orderedlist>
+						<listitem>
+							<para>TruTest Proxy </para>
+							<itemizedlist>
+								<listitem>
+									<para>This will serve at the top of the event production chain to produce events associated with a TruTest scale head indicator</para>
+									<itemizedlist>
+										<listitem>
+											<para>The scale will produce events as the weights of the animals are changed, these weight measurements will be sent in the 
+												<emphasis>raw.animal.weight</emphasis> scope
+											</para>
+										</listitem>
+										<listitem>
+											<para>When an animal EID is detected on the scale head that eid will be produced in the 
+												<emphasis>animal.eid</emphasis> scope
+											</para>
+										</listitem>
+										<listitem>
+											<para>When the operator presses the Enter Button that event will be produced in the 
+												<emphasis>transaction.state</emphasis> scope  
+											</para>
+										</listitem>
+									</itemizedlist>
+								</listitem>
+							</itemizedlist>
+						</listitem>
+						<listitem>
+							<para>Premises Event Producer</para>
+							<itemizedlist>
+								<listitem>
+									<para>This component will consume all products sent by the TruTest Proxy and on the detection of a 
+										<emphasis>transaction.state</emphasis> indicating that the operator pressed the Enter Button, 
+										this component will produce the last measurement received and identify it with the animal eid.
+									</para>
+								</listitem>
+							</itemizedlist>
+						</listitem>
+						<listitem>
+							<para>Premises Animal Producer</para>
+							<itemizedlist>
+								<listitem>
+									<para>This component also sits towards the top of the event production chain, but consumes Animal EIDs on the 
+										<emphasis>animal.eid</emphasis> scope and Enter Button presses on the 
+										<emphasis>transaction.state</emphasis> scope that have originated on the TruTest Proxy.  Associated with this component is a 
+										<emphasis>URI</emphasis> referencing an Tracker Premises Animal template in an external document. Production cycle of this component starts when a Enter Button press is detected. Then the Animal Template is copied, given the EID from the TruTest, and sent to consumers.
+									</para>
+								</listitem>
+							</itemizedlist>
+						</listitem>
+						<listitem>
+							<para>Tracker Mongo Store consumes products from the Premises Event Producer and the Premises Animal Producer and creates these on the MongoDB. </para>
+						</listitem>
+					</orderedlist>
+				</listitem>
+				<listitem>
+					<para>Startup and Configuration</para>
+					<orderedlist>
+						<listitem>
+							<para>MongoDB must be installed and running on the local host</para>
+						</listitem>
+						<listitem>
+							<para>Startup Tracker</para>
+						</listitem>
+						<listitem>
+							<para>From the 
+								<emphasis>Configuration</emphasis> menu, invoke 
+								<emphasis>Import iRouter Configuration</emphasis>
+							</para>
+						</listitem>
+						<listitem>
+							<para>Import that configuration 
+								<emphasis>autotype.metatype</emphasis> document in this project
+							</para>
+						</listitem>
+					</orderedlist>
+				</listitem>
+				<listitem>
+					<para>TruTest simulator</para>
+					<orderedlist>
+						<listitem>
+							<para>Download and install the Tracker simulator product </para>
+						</listitem>
+						<listitem>
+							<para>In the installation directory run the simulator executable</para>
+						</listitem>
+						<listitem>
+							<para>In a web browser go to 
+								<ulink url="http://localhost:8081/client/devices">Simulated Devices</ulink> and start the TruTest simulator
+							</para>
+						</listitem>
+						<listitem>
+							<para>Select a TruTest simulator </para>
+						</listitem>
+						<listitem>
+							<para>When the TruTest simulator comes up the 
+								<emphasis>Connection</emphasis> should be Y
+							</para>
+						</listitem>
+						<listitem>
+							<para>Change the EID, the weight and press the record button to simulate a transaction</para>
+						</listitem>
+					</orderedlist>
+				</listitem>
+			</orderedlist>
+			<section id="iRouterMonitorViewoftheDemonstration">
+				<?dbhtml filename="mongo/example_graphic.html" ?>
+					<title>iRouter Monitor View of the Demonstration</title>
+					<para>In the iRouter Monitor View you should see the components displayed something like:</para>
+					<para>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="../images/store/irouterMonitor.png"/>
+							</imageobject>
+						</mediaobject>
+					</para>
+				
+			</section>
+		</section>
+	</section>	
+</chapter>
