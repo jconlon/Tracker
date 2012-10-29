@@ -35,6 +35,8 @@
 	<xi:include href="../../com.verticon.tracker.ocl.query.doc/docbook/ocl/ocl.xml"/>
 	<xi:include href="../../com.verticon.tracker.reader.doc/docbook/reader/reader.xml"/>
 	<xi:include href="../../com.verticon.tracker.irouter.premises.gateway.doc/docbook/premisesGateway/premisesGateway.xml"/>
+	<xi:include href="../../com.verticon.tracker.irouter.premises.common.doc/docbook/iRouterPremisesCommon/iRouterPremisesCommon.xml"/>
+	<xi:include href="../../com.verticon.tracker.store.mongo.doc/docbook/store/store.xml"/>
 	
 	
 	<xi:include href="../../com.verticon.tracker.doc/docbook/appendix/fdl.xml"/>
