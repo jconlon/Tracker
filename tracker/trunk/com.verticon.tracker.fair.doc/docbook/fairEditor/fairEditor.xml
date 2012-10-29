@@ -308,9 +308,9 @@
                 </mediaobject>
         	</figure>
 		
-			<table frame='all'>
-				<title>Fair Editor Document Element Action Commands</title>
-				<tgroup cols='7' align='left' colsep='1' rowsep='1'>
+			<table id = 'allElementsActions' frame='all'>
+				<title>Action Commands on all Elements</title>
+				<tgroup cols='9' align='left' colsep='1' rowsep='1'>
 					<colspec colname='c1' /><!-- Target -->
 					<colspec colname='c2' />
 					<colspec colname='c3' />
@@ -318,6 +318,9 @@
 					<colspec colname='c5' />
 					<colspec colname='c6' />
 					<colspec colname='c7' />
+					<colspec colname='c8' />
+					<colspec colname='c9' />
+					
 					<thead>
 						<row>
 							<entry>Element</entry>
@@ -347,9 +350,7 @@
 								Selects the same element or elements in the tree of the Outline View. 
 							</entry>
 							
-							<entry>This is handy when one is inspecting elements in of the Views and 
-							 you want to see another perspective of the element in the context of a tree view. It is also good to 
-							 use this to syncrhonize the editor and the other views of the document.</entry>
+							<entry>Helpful to sync from Views to the context of a tree view.</entry>
 						</row>
 						
 						<row>
@@ -362,13 +363,11 @@
 							<entry>No</entry>
 							
 							<entry>
-								Presents the user with a dialog for manual entry of a query to select sub (child) elements 
-								within the selection.
+								Shows a dialog for entry of a query to select sub (child) elements of the selection.
 							</entry>
 							
-							<entry>Typically used on the Fair or Premises element of the document to perform an ad hoc query for 
-							selecting exhibits, people, animals or events. 
-							See the OCL Query documentation for more details.</entry>
+							<entry>From a Fair or Premises element enter a query to find exhibits, people, animals or events. 
+							<footnote><para>See the OCL Query documentation for more details.</para></footnote></entry>
 						</row>
 						
 						<row>
@@ -381,15 +380,48 @@
 							<entry>No</entry>
 							
 							<entry>
-								Presents the user with a dialog for manual entry of a query to select the sub (child)
-							    elements within the selected element. A combo box allows the selection of the query context.
+								Shows a dialog for entry of a query to select sub (child) elements of the selection. A 
+								combo box for selection of the query context.
 							</entry>
 							
-							<entry>Typically used on the Fair or Premises elements to perform an ad hoc query for selecting 
-							people, exhibits, animals or events. 
-							See the OCL Query documentation for more details.</entry>
+							<entry>Select the Fair or Premises and query to find exhibits, people, animals or events.</entry>
 						</row>
 						
+						
+					</tbody>
+				</tgroup>
+			</table>
+
+
+			<table id='peopleAnimalsAndLotActions' frame='all'>
+				<title>Action Commands on Person, Animals, and Lots</title>
+				<tgroup cols='9' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' /><!-- Target -->
+					<colspec colname='c2' />
+					<colspec colname='c3' />
+					<colspec colname='c4' />
+					<colspec colname='c5' />
+					<colspec colname='c6' />
+					<colspec colname='c7' />
+					<colspec colname='c8' />
+					<colspec colname='c9' />
+					
+					<thead>
+						<row>
+							<entry>Element</entry>
+							<entry>Command Name</entry>
+							<entry>Fair Editor<footnote><para>The Outline View like the Selection Page of the Premises Editor
+							shows the document as a tree.  All actions that can be accessed as popup menus in the Selection Page 
+							are also available from the Outline View.</para></footnote></entry>
+							<entry>From People View</entry>
+							<entry>From Exhibits View</entry>
+							<entry>From Animals View</entry>
+							<entry>From Events View</entry>
+							<entry>Description</entry>
+							<entry>Comment</entry>
+						</row>
+					</thead>
+					<tbody>
 						<!-- Change Move Event Pins -->
 						<row>
 							<entry>Person(s)</entry>
@@ -401,12 +433,10 @@
 							<entry>No</entry>
 							
 							<entry>
-								Takes the pin from the person and for the Animals that this person is exhibiting 
-								update all the moved events with this pin. 
+								Persons pin value is set on all the moved events of his exhibited Animals 
 							</entry>
 							
-							<entry>Use this when you want to update moved events for the person or persons exhibited animals 
-							with the correct pin, but you only get the pin after the movement events took place.</entry>
+							<entry>Helpful when the pin value is only known after the events take place.</entry>
 						</row>
 						
 						<!-- Copy Person -->
@@ -423,7 +453,7 @@
 								Takes the information from one person element and duplicate it for a new person element.
 							</entry>
 							
-							<entry>Use this when a family is registering and you want to copy all addressing and parent information to a sibling.</entry>
+							<entry>Helpful when a family is registering to copy all addressing and parent information to a sibling.</entry>
 						</row>
 						<!-- Register Exhibit -->
 						
@@ -441,17 +471,16 @@
 								Registers one or more animals in exhibits for a person.
 							</entry>
 							
-							<entry>Once a person and their animals are added to the system, 
+							<entry>Helpful during registration of exhibits.<footnote><para>Once a person and their animals are added to the system, 
 							select the group of animals, the person, the lot to register them in,
 							an invoke this command. It will create the exhibit.  One or more animals are required 
 							for the selection. If the person or the lot is not included in the selection
 							a wizard dialog will prompt the user for the missing information, either the 
-							person, the lot or both.</entry>
+							person, the lot or both.</para></footnote></entry>
 						</row>
 					</tbody>
 				</tgroup>
 			</table>
-
 		</para>
 	</section>
 
