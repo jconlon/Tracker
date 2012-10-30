@@ -55,6 +55,11 @@ public class MongoConsumer implements Consumer {
 	private ResourceSetFactoryContext resourceFactory;
 	private DB db;
 
+	/**
+	 * MongoConsumer will consume Tag, Animal, and Envelopes containing
+	 * GenericEvents. 
+	 * @param statusMonitor
+	 */
 	MongoConsumer(MongoStatusMonitor statusMonitor) {
 		super();
 		this.statusMonitor = statusMonitor;
@@ -87,6 +92,9 @@ public class MongoConsumer implements Consumer {
 	}
 
 	/**
+	 * The envelope id must be a Long or String object as that will be used for
+	 * the Tag id, the envelope scope is the OCD and the envelope contents
+	 * is used to create the event.
 	 * 
 	 * @param envelope
 	 * @throws IOException
@@ -212,11 +220,10 @@ public class MongoConsumer implements Consumer {
 	}
 
 	/**
-	 * Primary entry point for saving a tag. Saves the tag as in the default
-	 * animal if it is a new tag id. Saves the latest events if the tag is
-	 * already persisted. Saves the tag in an existing animal if this tag
-	 * contains a replacedTag event.
-	 * 
+	 * Primary entry point for saving a tag. 
+	 * Saves the tag in the default animal if it is a new tag id. 
+	 * Saves the latest events if the tag is already persisted. 
+	 * Saves the tag in an existing animal if this tag contains a replacedTag event.
 	 * 
 	 * @param tag
 	 *            must not be null
