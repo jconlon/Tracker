@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.mongo.emf.oda.ui"
-      label="Mongo EMF ODA User Interface"
+      label="%featureName"
       version="0.1.0.qualifier"
-      provider-name="Verticon, Inc."
+      provider-name="%providerName"
       plugin="com.verticon.mongo.emf.oda.ui">
 
    <description>
@@ -20,6 +20,7 @@
 
    <url>
       <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
+      <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
 
    <requires>

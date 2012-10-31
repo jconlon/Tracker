@@ -18,7 +18,8 @@
       %license
    </license>
 
-   <url>
+    <url>
+      <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
 
@@ -31,11 +32,11 @@
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="com.google.guava"/>
       <import feature="com.verticon.tracker.editor" version="0.5.2"/>
       <import feature="com.verticon.location.service" version="0.1.0"/>
       <import feature="com.verticon.osgi.metatype.core.model.editor" version="0.1.1"/>
       <import feature="com.verticon.location.core.model" version="0.1.0.qualifier"/>
+      <import feature="com.google.guava.runtime" version="11.0.1"/>
    </requires>
 
    <plugin
