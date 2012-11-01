@@ -18,7 +18,7 @@
       %license
    </license>
 
-    <url>
+   <url>
       <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
@@ -36,7 +36,7 @@
       <import feature="com.verticon.location.service" version="0.1.0"/>
       <import feature="com.verticon.osgi.metatype.core.model.editor" version="0.1.1"/>
       <import feature="com.verticon.location.core.model" version="0.1.0.qualifier"/>
-      <import feature="com.google.guava.runtime" version="11.0.1"/>
+      <import feature="com.google.guava.runtime" version="11.0.1.qualifier"/>
    </requires>
 
    <plugin
