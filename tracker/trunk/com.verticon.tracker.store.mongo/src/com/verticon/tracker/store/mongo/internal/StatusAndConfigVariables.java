@@ -140,6 +140,8 @@ public enum StatusAndConfigVariables {
 		case PRODUCTS_CONSUMED:
 			return new StatusVariable(id, StatusVariable.CM_CC,
 					totalProductsConsumed.get());
+		default:
+			break;
 		}
 		
 		throw new IllegalArgumentException("Invalid Status Variable name " + id);
