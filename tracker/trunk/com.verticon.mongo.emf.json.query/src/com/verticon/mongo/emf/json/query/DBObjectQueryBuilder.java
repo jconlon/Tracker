@@ -49,7 +49,7 @@ public class DBObjectQueryBuilder extends MongoQuerySwitch<Object> {
 	private QueryCollector queryCollector = null;
 	private int childCounter=0;
 
-	private Map<String,Integer> fieldFilterMap = new HashMap<String, Integer>();
+	private final Map<String,Integer> fieldFilterMap = new HashMap<String, Integer>();
 
 	MongoQuery  build() {
     	assert(queryCollector!=null);
@@ -74,8 +74,8 @@ public class DBObjectQueryBuilder extends MongoQuerySwitch<Object> {
 	 */
 	@Override
 	public Object caseSelector(Selector object) {
-		boolean hasQuery = object.getQuery() != null;
-		boolean hasSelection = object.getSelection() != null;
+		// boolean hasQuery = object.getQuery() != null;
+		// boolean hasSelection = object.getSelection() != null;
 //		logger.debug(bundleMarker,"* Selector " + "has a Query " + hasQuery
 //				+ " has a Selection " + hasSelection);
 		return Boolean.TRUE;
@@ -205,8 +205,8 @@ public class DBObjectQueryBuilder extends MongoQuerySwitch<Object> {
 
 	class QueryCollector {
 	    int memberCount;
-		private Stack<String> keyStack = new Stack<String>();
-		private Map<String, Object> map = new HashMap<String, Object>();
+		private final Stack<String> keyStack = new Stack<String>();
+		private final Map<String, Object> map = new HashMap<String, Object>();
 		private FixedSizeList collection = null;
 		private QueryCollector child = null;
 		private final String name;
