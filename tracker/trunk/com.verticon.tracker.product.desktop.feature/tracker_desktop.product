@@ -63,10 +63,10 @@ used with other Eclipse (3.7.0) based offerings.
    </plugins>
 
    <features>
-      <feature id="com.verticon.tracker.product.desktop" version="0.6.0.qualifier"/>
+      <feature id="com.verticon.tracker.product.desktop" version="0.6.1.qualifier"/>
       <feature id="com.verticon.tracker.base.dep" version="0.5.0.qualifier"/>
-      <feature id="org.eclipse.equinox.p2.user.ui" version="2.1.1.v20110526-6-Bg9JXOePwKUTU7X0teV1RtDu-e"/>
-      <feature id="org.eclipse.platform" version="3.7.0.v20110530-9gF7UHNFFt4cwE-pkZDJ7oz-mj4OSEIlu9SEv0f"/>
+      <feature id="org.eclipse.equinox.p2.user.ui" version="2.1.2.R37x_v20110815-1155-6-Bj9JXOeQxOURYC-l9BL7rDEQO7"/>
+      <feature id="org.eclipse.platform" version="3.7.1.r37x_v20110729-9gF7UHOxFtniV7mI3T556iZN9AU8bEZ1lHMcVK"/>
    </features>
 
 
