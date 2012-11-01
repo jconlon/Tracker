@@ -42,7 +42,7 @@ public class TrackerStoreAdmin implements ITrackerStoreAdmin, Predicate<Event>,
 	private final Logger logger = LoggerFactory.getLogger(TrackerStoreAdmin.class);
 	private ResourceSetFactoryContext resourceFactory;
 	private volatile Resource persistedResource;
-	private AtomicReference<Admin> persistedAdmin2 = new AtomicReference<Admin>();
+	private final AtomicReference<Admin> persistedAdmin2 = new AtomicReference<Admin>();
 	private final MongoStatusMonitor statusMonitor;
 	private static final String USER;
 	static {
@@ -129,6 +129,8 @@ public class TrackerStoreAdmin implements ITrackerStoreAdmin, Predicate<Event>,
 		case IS_PUBLISHER:
 			return new StatusVariable(id, StatusVariable.TYPE_BOOLEAN,
 					canPublishAnimals());
+		default:
+			break;
 
 		}
 		return null;
@@ -146,6 +148,8 @@ public class TrackerStoreAdmin implements ITrackerStoreAdmin, Predicate<Event>,
 		case IS_ADMINISTRATOR:
 		case IS_PUBLISHER:
 			return true;
+		default:
+			break;
 		}
 		return false;
 	}
