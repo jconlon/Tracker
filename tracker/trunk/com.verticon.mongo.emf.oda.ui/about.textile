@@ -7,7 +7,7 @@ com.verticon.mongo.emf.oda.ui Version 0.1.0
 
 h2. Introduction
 
-Mongo EMF ODA User Interfaces is an Eclipse Business Intelligence Tool (BIRT) is an user interface to access EMF documents stored in MongoDB.
+Mongo EMF ODA User Interfaces provides the graphical user interfaces enabling Eclipse Business Intelligence Reporting Tool (BIRT) access to EMF documents stored in MongoDB.
 
 
 
