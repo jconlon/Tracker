@@ -2,7 +2,8 @@ package com.verticon.tracker.irouter.measurement.event.test.system.internal;
 
 
 import java.io.IOException;
-import java.util.Properties;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -111,6 +112,7 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		logger.info(bundleMarker,
@@ -134,7 +136,7 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 		String pid = "com.verticon.tracker.irouter.measurement.event";
 		Configuration config = configAdmin.getConfiguration(pid);
 
-		Properties props = new Properties();
+		Dictionary<String, Object> props = new Hashtable<String, Object>();
 
 		props.put(TrackerConstants.TRACKER_WIRE_GROUP_NAME, "test");
 		String scopes[] = { METTLER_WEIGHT_MEASUREMENT,
@@ -239,7 +241,8 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 		testOnlySendLastEnvelope(config, props);
 	}
 
-	void testTriggerOnEid(Configuration config, Properties props) throws IOException,
+	void testTriggerOnEid(Configuration config, Dictionary<String, Object> props)
+			throws IOException,
 			InterruptedException, InvalidSyntaxException {
 		@SuppressWarnings("rawtypes")
 		ServiceReference[] refs;
@@ -331,7 +334,8 @@ public class MeasurementEventConsumerSystemTest extends TestCase {
 		assertEquals(2, mockEventHandler.events.size());
 	}
 	
-	void testOnlySendLastEnvelope(Configuration config, Properties props) throws IOException,
+	void testOnlySendLastEnvelope(Configuration config,
+			Dictionary<String, Object> props) throws IOException,
 	InterruptedException, InvalidSyntaxException {
 		@SuppressWarnings("rawtypes")
 		ServiceReference[] refs;

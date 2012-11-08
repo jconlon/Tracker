@@ -1,6 +1,7 @@
 package com.verticon.tracker.irouter.mettler.test.system.internal;
 
-import java.util.Properties;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -92,6 +93,7 @@ public class MettlerBalanceSystemTest extends TestCase {
 	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		logger.info(bundleMarker,"Waiting for declarative services activation startup method to finish");
@@ -123,7 +125,7 @@ public class MettlerBalanceSystemTest extends TestCase {
 		ServiceReference msfRef = refs[0];
 		ManagedServiceFactory managedServiceFactory = (ManagedServiceFactory) context
 				.getService(msfRef);
-		Properties props = new Properties();
+		Dictionary<String, Object> props = new Hashtable<String, Object>();
 		props.put(TrackerConstants.CONNECTION_URI, "socket://localhost:2345");
 		props.put(TrackerConstants.TRACKER_WIRE_GROUP_NAME, "test");
 		consumer.setUpLatch(150);
