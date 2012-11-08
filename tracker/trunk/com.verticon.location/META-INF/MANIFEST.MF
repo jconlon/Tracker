@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %Bundle-Name
+Bundle-Name: Location Service
 Bundle-SymbolicName: com.verticon.location.service
 Bundle-Version: 0.2.0.qualifier
-Bundle-Vendor: %Bundle-Vendor
+Bundle-Vendor: Verticon, Inc.
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Service-Component: OSGI-INF/*.xml
 Export-Package: com.verticon.location.service

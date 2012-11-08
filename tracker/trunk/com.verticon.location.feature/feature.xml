@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.location.service"
-      label="Geolocation Service"
+      label="%featureName"
       version="0.2.0.qualifier"
-      provider-name="Verticon, Inc."
+      provider-name="%providerName"
       plugin="com.verticon.location.service">
 
    <description>
