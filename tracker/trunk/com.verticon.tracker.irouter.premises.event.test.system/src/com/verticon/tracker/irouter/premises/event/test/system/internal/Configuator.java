@@ -13,7 +13,7 @@ package com.verticon.tracker.irouter.premises.event.test.system.internal;
 
 import java.io.IOException;
 import java.util.Dictionary;
-import java.util.Properties;
+import java.util.Hashtable;
 
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
@@ -47,7 +47,7 @@ public class Configuator {
 		// Configure the first instance
 		Configuration config = configAdmin
 				.createFactoryConfiguration(FACTORY_PID);
-		Dictionary<Object, Object> props = configure1();
+		Dictionary<String, Object> props = configure1();
 		config.update(props);
 	}
 
@@ -56,8 +56,8 @@ public class Configuator {
 	 * 
 	 * @return
 	 */
-	private static Dictionary<Object, Object> configure1() {
-		Dictionary<Object, Object> props = new Properties();
+	private static Dictionary<String, Object> configure1() {
+		Dictionary<String, Object> props = new Hashtable<String, Object>();
 		props.put("com.verticon.tracker.irouter.premises.event.test", "testOne");
 		props.put("tracker.wiring.group.name", "test");
 

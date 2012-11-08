@@ -16,7 +16,7 @@ import static com.verticon.tracker.store.mongo.test.system.Variables.PREMISES_UR
 
 import java.io.IOException;
 import java.util.Dictionary;
-import java.util.Properties;
+import java.util.Hashtable;
 
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
@@ -47,7 +47,7 @@ public class Configuator {
 //		addMembersCollection();
 		// Configure the first instance
 		Configuration config = configAdmin.createFactoryConfiguration(FACTORY_PID);
-		Dictionary<Object, Object> props = configure1();
+		Dictionary<String, Object> props = configure1();
 		config.update(props);
 		
 		//The second
@@ -56,8 +56,8 @@ public class Configuator {
 		config.update(props);
 	}
 
-	private static Dictionary<Object, Object> configure1() {
-		Dictionary<Object, Object> props = new Properties();
+	private static Dictionary<String, Object> configure1() {
+		Dictionary<String, Object> props = new Hashtable<String, Object>();
 		//MongoConnection related variables
 		props.put(Variables.MONGO_URI.configID, MONGO_LOCALHOST);
 		
@@ -76,8 +76,8 @@ public class Configuator {
 		return props;
 	}
 	
-	private static Dictionary<Object, Object> configure2() {
-		Dictionary<Object, Object> props = new Properties();
+	private static Dictionary<String, Object> configure2() {
+		Dictionary<String, Object> props = new Hashtable<String, Object>();
 		props.put(Variables.MONGO_URI.configID, MONGO_LOCALHOST);
 		props.put("com.verticon.tracker.mongo.test","testTwo");
 		props.put(Variables.DEFAULT_ANIMAL.configID, TrackerPackage.SWINE);
