@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.geography.editor"
       label="%featureName"
-      version="0.1.4.qualifier"
+      version="0.1.5.qualifier"
       provider-name="%providerName"
       plugin="com.verticon.geography.editor">
 
@@ -18,7 +18,7 @@
       %license
    </license>
 
-    <url>
+   <url>
       <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
