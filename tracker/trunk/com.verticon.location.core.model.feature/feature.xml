@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.location.core.model"
-      label="Geo Location Editor"
+      label="%featureName"
       version="0.1.0.qualifier"
-      provider-name="Verticon, Inc."
-      plugin="com.verticon.location.core.model">
+      provider-name="%providerName"
+      plugin="com.verticon.location.core.model.editor">
 
    <description>
       %description
