@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.verticon.tracker.irouter.premises.common"
-      label="iRouter Premises Common Producers"
+      label="%featureName"
       version="0.1.0.qualifier"
-      provider-name="Verticon, Inc."
+      provider-name="%providerName"
       plugin="com.verticon.tracker.irouter.premises.common">
 
    <description>
