@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: TrackerStore
+Bundle-Name: Tracker Store
 Bundle-SymbolicName: com.verticon.tracker.store
 Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Verticon, Inc
