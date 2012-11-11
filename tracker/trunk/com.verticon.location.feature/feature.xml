@@ -23,13 +23,6 @@
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
 
-   <requires>
-      <import plugin="org.slf4j.api"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.osgi"/>
-      <import plugin="org.eclipse.osgi.services"/>
-   </requires>
-
    <plugin
          id="com.verticon.location.service"
          download-size="0"

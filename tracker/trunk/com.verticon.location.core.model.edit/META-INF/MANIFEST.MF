@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.verticon.location.core.model.edit;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.1.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: com.verticon.location.provider.LocationEditPlugin$Implementation
 Bundle-Vendor: %providerName
@@ -16,13 +16,6 @@ Export-Package: com.verticon.location.provider;
    org.eclipse.emf.common.notify,
    com.verticon.location.util"
 Bundle-ActivationPolicy: lazy
-Import-Package: com.verticon.location,
- com.verticon.location.provider,
- com.verticon.location.util,
- org.eclipse.core.runtime;version="3.4.0",
- org.eclipse.emf.common,
- org.eclipse.emf.common.notify,
- org.eclipse.emf.common.util,
- org.eclipse.emf.ecore,
- org.eclipse.emf.edit.command,
- org.eclipse.emf.edit.provider
+Require-Bundle: org.eclipse.emf.edit;bundle-version="2.8.0",
+ com.verticon.location.core.model;bundle-version="1.0.1",
+ org.eclipse.core.runtime;bundle-version="3.8.0"
