@@ -22,12 +22,6 @@
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
 
-   <requires>
-      <import plugin="org.eclipse.birt.report.designer.ui"/>
-      <import plugin="org.eclipse.birt.report.viewer"/>
-      <import plugin="org.slf4j.api"/>
-   </requires>
-
    <plugin
          id="com.verticon.birt.report.loader"
          download-size="0"
