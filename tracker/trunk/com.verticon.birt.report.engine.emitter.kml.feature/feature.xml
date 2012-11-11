@@ -18,15 +18,10 @@
       %license
    </license>
 
-    <url>
+   <url>
       <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
-
-   <requires>
-      <import plugin="org.eclipse.birt.report.engine"/>
-      <import plugin="com.verticon.opengis.kml.core.model"/>
-   </requires>
 
    <plugin
          id="com.verticon.birt.report.engine.emitter.kml"
