@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: com.verticon.google.kmlgx.core.model;singleton:=true
-Bundle-Version: 1.0.1
+Bundle-Version: 1.0.2
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -10,10 +10,10 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: com.verticon.google.kmlgx,
  com.verticon.google.kmlgx.impl,
  com.verticon.google.kmlgx.util
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.emf.ecore.xmi;visibility:=reexport,
- com.verticon.atom.authorlink.core.model;visibility:=reexport,
- com.verticon.opengis.kml.core.model;visibility:=reexport,
- com.verticon.oasis.xal.core.model;visibility:=reexport
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.8.0",
+ org.eclipse.emf.ecore;bundle-version="2.8.1";visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;bundle-version="2.8.0";visibility:=reexport,
+ com.verticon.atom.authorlink.core.model;bundle-version="1.0.2";visibility:=reexport,
+ com.verticon.opengis.kml.core.model;bundle-version="1.0.2";visibility:=reexport,
+ com.verticon.oasis.xal.core.model;bundle-version="2.0.2";visibility:=reexport
 Bundle-ActivationPolicy: lazy
