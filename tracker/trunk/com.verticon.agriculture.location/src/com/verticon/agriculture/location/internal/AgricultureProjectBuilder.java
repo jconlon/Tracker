@@ -80,7 +80,7 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 	public static final String BUILDER_ID = Component.PLUGIN_ID
 			+ ".locationBuilderService";
 
-	private LocationIndex locationIndex = LocationIndex.getInstance();
+	private final LocationIndex locationIndex = LocationIndex.getInstance();
 
 	/*
 	 * (non-Javadoc)
@@ -324,7 +324,7 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 		List<ICommand> newCmds = new ArrayList<ICommand>();
 		newCmds.addAll(Arrays.asList(cmds));
 		newCmds.add(newCmd);
-		description.setBuildSpec((ICommand[]) newCmds
+		description.setBuildSpec(newCmds
 				.toArray(new ICommand[newCmds.size()]));
 		try {
 			project.setDescription(description, null);
@@ -403,7 +403,7 @@ public class AgricultureProjectBuilder extends IncrementalProjectBuilder {
 		List<ICommand> newCmds = new ArrayList<ICommand>();
 		newCmds.addAll(Arrays.asList(cmds));
 		newCmds.remove(index);
-		description.setBuildSpec((ICommand[]) newCmds
+		description.setBuildSpec(newCmds
 				.toArray(new ICommand[newCmds.size()]));
 		try {
 			project.setDescription(description, null);
