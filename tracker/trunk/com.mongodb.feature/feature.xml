@@ -18,14 +18,10 @@
       %license
    </license>
 
-    <url>
+   <url>
       <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
-
-   <requires>
-      <import feature="com.verticon.tracker.irouter.premises.common" version="0.1.0.qualifier"/>
-   </requires>
 
    <plugin
          id="com.mongodb"
