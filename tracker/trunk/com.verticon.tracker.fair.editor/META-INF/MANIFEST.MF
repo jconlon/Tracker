@@ -8,14 +8,14 @@ Bundle-Activator: com.verticon.tracker.fair.editor.presentation.FairEditorPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.verticon.tracker.fair.editor.presentation,
- com.verticon.tracker.fair.editor.util
-Require-Bundle: org.eclipse.core.runtime,
- com.verticon.tracker.fair.edit;visibility:=reexport,
- com.verticon.tracker.editor,
- org.eclipse.ui.cheatsheets,
- org.eclipse.core.expressions
+Export-Package: com.verticon.tracker.fair.editor.presentation;version="1.0.0",
+ com.verticon.tracker.fair.editor.util;version="1.0.0"
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.8.0",
+ com.verticon.tracker.fair.edit;bundle-version="0.3.0";visibility:=reexport,
+ com.verticon.tracker.editor;bundle-version="0.5.0",
+ org.eclipse.ui.cheatsheets;bundle-version="3.4.0",
+ org.eclipse.core.expressions;bundle-version="3.4.0"
 Bundle-ActivationPolicy: lazy
-Import-Package: com.verticon.osgi.metatype.provider,
- com.verticon.osgi.metatype.util,
+Import-Package: com.verticon.osgi.metatype.provider;version="[1.0.0,2.0.0)",
+ com.verticon.osgi.metatype.util;version="[1.0.0,2.0.0)",
  org.slf4j;version="[1.5.5,1.6.0)"

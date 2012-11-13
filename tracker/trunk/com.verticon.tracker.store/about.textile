@@ -1,4 +1,4 @@
-h1=. Tracker Store DEPRECATED functionality moved to com.verticon.tracker plugin
+h1=. Tracker Store Utilities and Location Service Provider
 
 com.verticon.tracker.store Version 0.1.0
 
@@ -7,8 +7,7 @@ com.verticon.tracker.store Version 0.1.0
 
 h2. Introduction
 
-Tracker Store is a multi-user enterprise class solution for storage and retrieval of Livestock Business Intelligence documents. 
-
+Tracker Store Utilities and Location Service Provider is a set of data access models and utilities that support implementations of the Tracker Store specification for document storage services and a provider of a Location Service that works on top of all Tracker Store implementations to resolve universal identifiers and geographic coordinates to location names. 
 
 
 h2. Powered by Eclipse Technology

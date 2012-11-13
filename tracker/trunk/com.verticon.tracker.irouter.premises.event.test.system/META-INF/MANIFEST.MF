@@ -6,7 +6,7 @@ Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Verticon, Inc.
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Service-Component: OSGI-INF/*.xml
-Import-Package: com.google.common.base;version="11.0.1",
+Import-Package: com.google.common.base;version="10.0.1",
  junit.framework;version="4.8.2",
  junit.textui;version="4.8.2",
  org.hamcrest;version="1.3.0",

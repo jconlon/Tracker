@@ -7,14 +7,14 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.emf.ecore.xmi;visibility:=reexport,
- com.verticon.tracker;visibility:=reexport,
- org.eclipse.ocl.ecore
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.8.0",
+ org.eclipse.emf.ecore;bundle-version="2.8.1";visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;bundle-version="2.8.0";visibility:=reexport,
+ com.verticon.tracker;bundle-version="0.4.4";visibility:=reexport,
+ org.eclipse.ocl.ecore;bundle-version="3.2.0"
 Bundle-ActivationPolicy: lazy
-Export-Package: com.verticon.tracker.fair,
- com.verticon.tracker.fair.impl,
- com.verticon.tracker.fair.util
-Import-Package: com.verticon.osgi.metatype,
+Export-Package: com.verticon.tracker.fair;version="1.0.0",
+ com.verticon.tracker.fair.impl;version="1.0.0",
+ com.verticon.tracker.fair.util;version="1.0.0"
+Import-Package: com.verticon.osgi.metatype;version="[1.0.0,2.0.0)",
  org.slf4j;version="[1.5.5,1.6.0)"
