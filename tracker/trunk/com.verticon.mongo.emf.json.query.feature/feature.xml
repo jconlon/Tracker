@@ -15,23 +15,13 @@
    </copyright>
 
    <license url="http://www.eclipse.org/legal/epl-v10.html">
-       %license
+      %license
    </license>
 
-    <url>
+   <url>
       <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
-
-   <requires>
-      <import feature="com.mongodb" version="2.7.2.qualifier"/>
-      <import plugin="org.slf4j.api"/>
-      <import feature="org.eclipse.xtext.runtime" version="2.2.1.v201112130541"/>
-      <import feature="org.eclipse.emf.common" version="2.7.0.v20110912-0920"/>
-      <import feature="org.eclipse.emf.ecore" version="2.7.1.v20110912-0920"/>
-      <import feature="com.verticon.mongo.emf.runtime" version="0.1.0.qualifier"/>
-      <import feature="com.google.guava.runtime" version="11.0.1"/>
-   </requires>
 
    <plugin
          id="com.verticon.mongo.emf.json.query"

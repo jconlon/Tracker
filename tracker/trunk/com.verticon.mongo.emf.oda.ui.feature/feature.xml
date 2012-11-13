@@ -23,12 +23,6 @@
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
 
-   <requires>
-      <import feature="com.verticon.mongo.emf.json.query" version="0.1.0.qualifier"/>
-      <import feature="com.verticon.mongo.emf.oda" version="0.1.0.qualifier"/>
-      <import feature="com.verticon.ui" version="0.1.0.qualifier"/>
-   </requires>
-
    <plugin
          id="com.verticon.mongo.emf.oda.ui"
          download-size="0"

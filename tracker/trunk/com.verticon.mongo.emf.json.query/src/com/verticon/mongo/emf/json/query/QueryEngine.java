@@ -98,7 +98,8 @@ public class QueryEngine implements IQueryEngine {
 			}
 
 		} catch (IOException e) {
-			logger.error(bundleMarker, "Could not load query.", e);
+			logger.error(bundleMarker, "Could not load query: raw=" + uri
+					+ ", decoded query=" + query, e);
 			throw new IllegalArgumentException(e);
 		}
 		// Create a visitor that can build the DBObject
