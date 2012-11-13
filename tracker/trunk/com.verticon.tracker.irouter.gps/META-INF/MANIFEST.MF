@@ -2,13 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: iRouter GPS Proxy
 Bundle-SymbolicName: com.verticon.tracker.irouter.gps
-Bundle-Version: 0.1.0.qualifier
+Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Verticon, Inc.
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Service-Component: OSGI-INF/*.xml
-Import-Package: com.google.common.base,
- com.google.common.io,
- com.google.common.util.concurrent,
+Import-Package: com.google.common.base;version="10.0.1",
+ com.google.common.io;version="10.0.1",
+ com.google.common.util.concurrent;version="10.0.1",
  javax.microedition.io,
  org.osgi.service.io;version="1.0.0",
  org.osgi.service.monitor;version="1.0.0",
