@@ -23,51 +23,6 @@
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
 
-   <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.ocl.ecore"/>
-      <import plugin="org.eclipse.osgi.services"/>
-      <import plugin="org.eclipse.osgi.util"/>
-      <import plugin="org.slf4j.api"/>
-      <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="org.eclipse.core.databinding"/>
-      <import plugin="org.eclipse.core.resources" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.ui.console"/>
-      <import plugin="org.eclipse.ui.intro"/>
-      <import plugin="org.eclipse.emf.validation"/>
-      <import plugin="org.eclipse.jface.databinding"/>
-      <import plugin="org.eclipse.core.databinding.beans"/>
-      <import plugin="org.eclipse.ui.cheatsheets"/>
-      <import plugin="org.eclipse.core.databinding.property"/>
-      <import plugin="org.eclipse.core.expressions"/>
-      <import plugin="org.eclipse.emf.databinding"/>
-      <import plugin="org.eclipse.emf.databinding.edit"/>
-      <import plugin="org.eclipse.ui.forms"/>
-      <import plugin="org.eclipse.core.databinding.observable"/>
-      <import plugin="org.eclipse.osgi"/>
-      <import plugin="org.eclipse.emf.edit.ui" version="2.2.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.transaction.ui" version="1.0.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.workspace"/>
-      <import plugin="org.eclipse.emf.workspace.ui"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.emf.validation.ui"/>
-      <import feature="com.verticon.location.service" version="0.1.0" match="compatible"/>
-      <import feature="com.verticon.tracker.logging.logback" version="0.3.0" match="compatible"/>
-      <import feature="com.verticon.osgi.metatype.core.model.editor" version="0.2.0"/>
-      <import feature="com.verticon.tracker.ocl.query" version="0.4.0" match="compatible"/>
-      <import plugin="org.eclipse.core.runtime" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.emf.ecore.xmi" version="2.2.0" match="compatible"/>
-      <import plugin="org.eclipse.ui.ide" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.ui.console" version="3.1.100" match="compatible"/>
-      <import feature="org.eclipse.emf.compare" version="1.2.1.v20110913-0926"/>
-      <import feature="org.eclipse.emf.compare.doc" version="1.2.1.v20110913-0926"/>
-      <import feature="com.verticon.location.core.model" version="0.1.0.qualifier"/>
-   </requires>
-
    <plugin
          id="com.verticon.tracker"
          download-size="0"
