@@ -8,8 +8,8 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: com.verticon.location.tests
-Require-Bundle: org.eclipse.core.runtime,
- com.verticon.location.core.model;visibility:=reexport,
- org.eclipse.emf.ecore.xmi;visibility:=reexport,
- org.junit;visibility:=reexport
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.8.0",
+ com.verticon.location.core.model;bundle-version="[1.0.1,2.0.0)";visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;bundle-version="2.8.0";visibility:=reexport,
+ org.junit;bundle-version="3.8.2";visibility:=reexport
 Bundle-ActivationPolicy: lazy

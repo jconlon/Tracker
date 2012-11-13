@@ -7,15 +7,9 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.verticon.location;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util",
- com.verticon.location.impl;
-  uses:="org.eclipse.emf.ecore,
-   com.verticon.location,
-   org.eclipse.emf.common.util,
-   com.vividsolutions.jts.geom,
-   org.eclipse.emf.common.notify,
-   org.eclipse.emf.ecore.impl",
- com.verticon.location.util;
+Export-Package: com.verticon.location;version="1.0.0";uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util",
+ com.verticon.location.impl;version="1.0.0",
+ com.verticon.location.util;version="1.0.0";
   uses:="org.eclipse.emf.ecore.resource,
    org.eclipse.emf.ecore.xmi.impl,
    org.eclipse.emf.ecore.util,
