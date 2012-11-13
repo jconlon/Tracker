@@ -5,23 +5,23 @@ Bundle-SymbolicName: com.verticon.tracker;singleton:=true
 Bundle-Version: 0.4.4.qualifier
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: com.verticon.tracker;version="0.1.0",
- com.verticon.tracker.impl;version="0.1.0",
- com.verticon.tracker.store,
- com.verticon.tracker.util;version="0.1.0",
- net.sourceforge.calendardate
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore.xmi;visibility:=reexport,
- org.eclipse.ocl.ecore,
- com.verticon.osgi.metatype.core.model,
- com.verticon.location.core.model;bundle-version="1.0.0"
+Export-Package: com.verticon.tracker;version="1.0.0",
+ com.verticon.tracker.impl;version="1.0.0",
+ com.verticon.tracker.store;version="1.0.0",
+ com.verticon.tracker.util;version="1.0.0",
+ net.sourceforge.calendardate;version="1.0.0"
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.8.0",
+ org.eclipse.emf.ecore.xmi;bundle-version="2.8.0";visibility:=reexport,
+ org.eclipse.ocl.ecore;bundle-version="3.2.0",
+ com.verticon.osgi.metatype.core.model;bundle-version="[0.1.2,2.0.0)",
+ com.verticon.location.core.model;bundle-version="[1.0.0,2.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: com.verticon.tracker.TrackerPlugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: com.google.common.base;version="11.0.1",
- com.google.common.collect;version="11.0.1",
- com.google.common.io;version="11.0.1",
- com.verticon.location.service,
+Import-Package: com.google.common.base;version="10.0.1",
+ com.google.common.collect;version="10.0.1",
+ com.google.common.io;version="10.0.1",
+ com.verticon.location.service;version="[1.0.0,2.0.0)",
  org.osgi.service.metatype;version="1.1.0",
  org.osgi.util.measurement;version="1.0.1",
  org.slf4j;version="1.5.11"

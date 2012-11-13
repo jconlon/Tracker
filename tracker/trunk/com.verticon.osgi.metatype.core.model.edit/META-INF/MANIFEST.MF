@@ -8,8 +8,8 @@ Bundle-Activator: com.verticon.osgi.metatype.provider.MetatypeEditPlugin$Impleme
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.verticon.osgi.metatype.provider
-Require-Bundle: org.eclipse.core.runtime,
- com.verticon.osgi.metatype.core.model;visibility:=reexport,
- org.eclipse.emf.edit;visibility:=reexport
+Export-Package: com.verticon.osgi.metatype.provider;version="1.0.0"
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.8.0",
+ com.verticon.osgi.metatype.core.model;bundle-version="0.1.2";visibility:=reexport,
+ org.eclipse.emf.edit;bundle-version="2.8.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy

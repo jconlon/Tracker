@@ -23,10 +23,6 @@
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
 
-   <requires>
-      <import plugin="org.eclipse.equinox.metatype"/>
-   </requires>
-
    <plugin
          id="com.verticon.osgi.metatype.core.model"
          download-size="0"
