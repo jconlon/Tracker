@@ -2,11 +2,11 @@
 <feature
       id="com.verticon.tracker.irouter.gps.ui"
       label="%featureName"
-      version="0.1.0.qualifier"
+      version="1.0.0.qualifier"
       provider-name="%providerName"
       plugin="com.verticon.tracker.irouter.gps.ui">
 
-  <description>
+   <description>
       %description
    </description>
 
