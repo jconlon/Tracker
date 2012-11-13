@@ -24,9 +24,6 @@
    </url>
 
    <requires>
-      <import feature="com.verticon.tracker.store" version="0.1.0.qualifier"/>
-      <import feature="com.mongodb" version="2.7.2.qualifier"/>
-      <import feature="com.verticon.mongo.emf.runtime" version="0.1.0.qualifier"/>
       <import feature="com.verticon.mongo.emf.json.query" version="0.1.0.qualifier"/>
    </requires>
 

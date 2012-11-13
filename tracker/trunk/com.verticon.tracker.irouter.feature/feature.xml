@@ -29,7 +29,6 @@
       <import plugin="org.eclipse.equinox.wireadmin"/>
       <import plugin="com.verticon.osgi.monitor"/>
       <import plugin="org.osgilab.bundles.monitoradmin"/>
-      <import feature="com.google.guava.runtime" version="11.0.1.qualifier"/>
    </requires>
 
    <plugin

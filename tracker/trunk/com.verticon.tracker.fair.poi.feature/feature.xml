@@ -21,12 +21,6 @@
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates"/>
    </url>
 
-   <requires>
-      <import feature="org.apache.poi" version="2.5.1" match="greaterOrEqual"/>
-      <import feature="com.verticon.tracker.editor" version="0.4.2" match="compatible"/>
-      <import feature="com.verticon.tracker.fair.editor" version="0.3.0" match="compatible"/>
-   </requires>
-
    <plugin
          id="com.verticon.tracker.fair.poi"
          download-size="0"

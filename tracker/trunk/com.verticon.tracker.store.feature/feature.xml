@@ -23,11 +23,6 @@
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
 
-   <requires>
-      <import feature="com.verticon.location.service" version="0.2.0.qualifier"/>
-      <import feature="com.verticon.tracker.editor" version="0.5.5.qualifier"/>
-   </requires>
-
    <plugin
          id="com.verticon.tracker.store.admin.model"
          download-size="0"
