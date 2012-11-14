@@ -19,6 +19,7 @@
     <child location='product-desktop.beta.08'/>
     <child location='features-desktop.beta.08'/>
     <child location='features-desktop.beta.09'/>
+    <child location='features-desktop.beta.10'/>
     <child location='categories'/>
   </children>
 </repository>
