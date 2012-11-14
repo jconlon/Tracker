@@ -7,8 +7,8 @@ Bundle-Vendor: Verticon, Inc.
 Service-Component: OSGI-INF/*.xml
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Import-Package: com.verticon.tracker.irouter.common,
- com.verticon.tracker.irouter.premises.common.api,
+Import-Package: com.verticon.tracker.irouter.common;version="[1.0.0,2.0.0)",
+ com.verticon.tracker.irouter.premises.common.api;version="[1.0.0,2.0.0)",
  org.osgi.service.monitor;version="1.0.0",
  org.osgi.service.wireadmin;version="1.0.0",
  org.osgi.util.measurement;version="1.0.1",

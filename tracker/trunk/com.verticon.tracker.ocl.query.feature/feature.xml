@@ -18,26 +18,14 @@
       %license
    </license>
 
-    <url>
+   <url>
       <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
 
    <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.ui.console"/>
-      <import plugin="org.eclipse.ocl.ecore"/>
-      <import plugin="org.eclipse.emf.query.ocl"/>
-      <import plugin="org.eclipse.emf.common.ui"/>
-      <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="org.slf4j.api"/>
-      <import plugin="org.eclipse.jface.text"/>
-      <import plugin="org.eclipse.emf.ecore.edit"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
-      <import feature="com.verticon.tracker.logging.logback" version="0.3.0" match="compatible"/>
-      <import feature="org.eclipse.ocl.examples" version="3.1.1" match="compatible"/>
+      <import feature="org.eclipse.ocl.examples" version="3.2.1" match="compatible"/>
+      <import feature="com.verticon.tracker.logging.logback" version="0.3.1" match="compatible"/>
    </requires>
 
    <plugin

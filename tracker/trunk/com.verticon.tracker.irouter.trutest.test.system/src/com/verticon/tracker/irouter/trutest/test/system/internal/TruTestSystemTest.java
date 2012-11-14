@@ -1,8 +1,9 @@
 package com.verticon.tracker.irouter.trutest.test.system.internal;
 
 import java.io.File;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.Map;
-import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -126,6 +127,7 @@ public class TruTestSystemTest extends TestCase {
 	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		logger.debug(bundleMarker, "Waiting at startUpGate");
@@ -146,6 +148,7 @@ public class TruTestSystemTest extends TestCase {
 
 	}
 
+	@Override
 	protected void tearDown() {
 		// if(upLoadFile.exists()){
 		// upLoadFile.delete();
@@ -175,7 +178,7 @@ public class TruTestSystemTest extends TestCase {
 		ServiceReference msfRef = refs[0];
 		ManagedServiceFactory msf = (ManagedServiceFactory) context
 				.getService(msfRef);
-		Properties props = new Properties();
+		Dictionary<String, Object> props = new Hashtable<String, Object>();
 		props.put(TrackerConstants.CONNECTION_URI, "socket://localhost:2344");
 		props.put(TrackerConstants.TRACKER_WIRE_GROUP_NAME, "test");
 		props.put("producer.scope.eid", "animal.tag.number");
