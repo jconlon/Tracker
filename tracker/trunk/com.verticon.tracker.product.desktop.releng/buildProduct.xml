@@ -3,8 +3,8 @@
 	<loadproperties srcFile="buildProduct.properties"/>
 
 	<property name="repo" location="${basedir}/repository"/>
-	<property name="base" location="${repo}/product-desktop.beta.04"/>
-	<property name="child" location="${repo}/features-desktop.beta.04"/>
+	<property name="base" location="${repo}/product-desktop.beta.10"/>
+	<property name="child" location="${repo}/features-desktop.beta.10"/>
 	<property name="categories" location="${repo}/categories"/>
 	
 	<target name="main">
@@ -13,7 +13,7 @@
 		<property name="baseLocation" location="${base}/eclipse"/>
 		<available property="haveBase" file="${baseLocation}"/>
 		<fail unless="haveBase" message="The base of the target platform is required to build this product.  Please edit buildProduct.xml or set the &quot;base&quot; property or check ${base}" />
-
+		<echoproperties/>
 		<!-- Check for deltapack co-located with eclipse -->
 		<available property="haveDeltaPack" file="${deltapack}"/>
 		<fail unless="haveDeltaPack" message="The deltapack is required to build this product.  Please edit buildProduct.xml or set the &quot;deltapack&quot; property." />

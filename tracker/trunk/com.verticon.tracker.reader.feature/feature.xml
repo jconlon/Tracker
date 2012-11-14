@@ -27,16 +27,8 @@
          version="0.0.0"/>
 
    <requires>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.emf.transaction"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.osgi.services"/>
-      <import plugin="org.eclipse.core.runtime"/>
       <import plugin="gnu.io.rxtx"/>
       <import plugin="org.eclipse.ui.cheatsheets"/>
-      <import plugin="org.eclipse.osgi"/>
-      <import plugin="org.bluecove"/>
-      <import feature="com.verticon.tracker.editor" version="0.4.2.qualifier"/>
    </requires>
 
    <plugin

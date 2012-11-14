@@ -3,7 +3,7 @@ This project is a releng builder for the com.verticon.tracker.product.desktop pr
 =======================================
 Notes
 
-1) This build requires Indigo 3.7 or later
+1) Most recent build used Indigo 3.8.1 
 
 2) This build requires the deltapack.  By default it looks beside the eclipse install for "deltapack/eclipse/*".  
    If your deltapack is located elsewhere, set the "deltapack" property or edit the buildProduct.xml file.  The
@@ -27,7 +27,11 @@ For releases:
 version overwrite the preexisting ones. 
 2. Product build: 
 	a. Edit the compositeArtifacts.xml and compositeContent.xml to add a new directory for the product.
-	b. Run Tracker.launch - to build product and product p2 metadata
+	b. Add delta pack for release
+	c. Create or update the target platform  and export it to a directory
+	c. Edit the buildProduct.properties to reference the new delta pack and the exported target as well as the 
+	 release names 
+	d. Run "Build Tracker.launch" - to build product and product p2 metadata
 3. Feature build:
     a. Edit the compositeArtifacts.xml and compositeContent.xml to add a new directory for the features.
     b. From any feature, export all new features to the repository.

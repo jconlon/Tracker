@@ -57,8 +57,8 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.celleditor.AdapterFactoryTreeEditor;
@@ -330,6 +330,7 @@ public class TrackerTransactionEditor
 	 */
 	protected IPartListener partListener =
 		new IPartListener() {
+			@Override
 			public void partActivated(IWorkbenchPart p) {
 				if (p instanceof ContentOutline) {
 					if (((ContentOutline)p).getCurrentPage() == contentOutlinePage) {
@@ -348,12 +349,16 @@ public class TrackerTransactionEditor
 					handleActivate();
 				}
 			}
+			@Override
 			public void partBroughtToTop(IWorkbenchPart p) {
 			}
+			@Override
 			public void partClosed(IWorkbenchPart p) {
 			}
+			@Override
 			public void partDeactivated(IWorkbenchPart p) {
 			}
+			@Override
 			public void partOpened(IWorkbenchPart p) {
 			}
 		};
@@ -408,6 +413,7 @@ public class TrackerTransactionEditor
 	//         its resource.  Also sets selection to viewer on execution of
 	//         operations that wrap EMF Commands.
 	private final IOperationHistoryListener historyListener = new IOperationHistoryListener() {
+		@Override
 		public void historyNotification(final OperationHistoryEvent event) {
 			Set<?> affectedResources = ResourceUndoContext.getAffectedResources(
 					event.getOperation());
@@ -426,6 +432,7 @@ public class TrackerTransactionEditor
 					operation.addContext(getUndoContext());
 
 					getSite().getShell().getDisplay().asyncExec(new Runnable() {
+						@Override
 						public void run() {
 							firePropertyChange(IEditorPart.PROP_DIRTY);
 
@@ -453,6 +460,7 @@ public class TrackerTransactionEditor
 					final IUndoableOperation operation = event.getOperation();
 
 					getSite().getShell().getDisplay().asyncExec(new Runnable() {
+						@Override
 						public void run() {
 							firePropertyChange(IEditorPart.PROP_DIRTY);
 
@@ -600,12 +608,14 @@ public class TrackerTransactionEditor
 	//.CUSTOM: Replaces EMF-generated IResourceChangeListener implementation
 	private WorkspaceSynchronizer.Delegate createSynchronizationDelegate() {
 		return new WorkspaceSynchronizer.Delegate() {
+			@Override
 			public boolean handleResourceDeleted(Resource resource) {
 				if ((resource == getResource()) && !isDirty()) {
 					// just close now without prompt
 					getSite().getShell().getDisplay().asyncExec
 						(new Runnable() {
-							 public void run() {
+							 @Override
+							public void run() {
 								 getSite().getPage().closeEditor(TrackerTransactionEditor.this, false);
 								 TrackerTransactionEditor.this.dispose();
 							 }
@@ -617,6 +627,7 @@ public class TrackerTransactionEditor
 				return true;
 			}
 			
+			@Override
 			public boolean handleResourceChanged(Resource resource) {
 				 // is this a resource that we just saved?  If so, then this is
                 //   notification of that save, so forget it
@@ -628,11 +639,13 @@ public class TrackerTransactionEditor
 				return true;
 			}
 			
+			@Override
 			public boolean handleResourceMoved(Resource resource, URI newURI) {
 				movedResources.put(resource, newURI);
 				return true;
 			}
 			
+			@Override
 			public void dispose() {
 				removedResources.clear();
 				changedResources.clear();
@@ -799,6 +812,7 @@ public class TrackerTransactionEditor
 			//
 			Runnable runnable =
 				new Runnable() {
+					@Override
 					public void run() {
 						// Try to select the items in the current content viewer of the editor.
 						//
@@ -819,6 +833,7 @@ public class TrackerTransactionEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EditingDomain getEditingDomain() {
 		return editingDomain;
 	}
@@ -901,6 +916,7 @@ public class TrackerTransactionEditor
 					new ISelectionChangedListener() {
 						// This just notifies those things that are affected by the section.
 						//
+						@Override
 						public void selectionChanged(SelectionChangedEvent selectionChangedEvent) {
 							setSelection(selectionChangedEvent.getSelection());
 						}
@@ -935,6 +951,7 @@ public class TrackerTransactionEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Viewer getViewer() {
 		return currentViewer;
 	}
@@ -1050,7 +1067,8 @@ public class TrackerTransactionEditor
 							if (updateProblemIndication) {
 								getSite().getShell().getDisplay().asyncExec
 									(new Runnable() {
-										 public void run() {
+										 @Override
+										public void run() {
 											 updateProblemIndication();
 										 }
 									 });
@@ -1237,7 +1255,6 @@ public class TrackerTransactionEditor
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public Object getAdapter(Class key) {
 		if (key.equals(IContentOutlinePage.class)) {
@@ -1259,10 +1276,12 @@ public class TrackerTransactionEditor
 			if (selectionViewerProvider==null){
 				selectionViewerProvider = new ISelectionViewerProvider(){
 
+					@Override
 					public ISelection getSelectionViewerSelection() {
 						return TrackerTransactionEditor.this.getSelectionViewerSelection();
 					}
 
+					@Override
 					public void setSelectionViewerSelection(ISelection selection) {
 						TrackerTransactionEditor.this.setSelectionViewerSelection(selection);
 						
@@ -1278,14 +1297,17 @@ public class TrackerTransactionEditor
 			if (premisesProvider==null){
 				premisesProvider = new IPremisesProvider(){
 
+					@Override
 					public EditingDomain getEditingDomain() {
 						return TrackerTransactionEditor.this.getEditingDomain();
 					}
 
+					@Override
 					public void setSelectionToViewer(Collection<?> collection) {
 						TrackerTransactionEditor.this.setSelectionToViewer(collection);
 					}
 					
+					@Override
 					public Premises getPremises() {
 						Premises premises = null;
 						if(resource.getURI().fileExtension().endsWith("premises")){
@@ -1369,7 +1391,8 @@ public class TrackerTransactionEditor
 				(new ISelectionChangedListener() {
 					 // This ensures that we handle selections correctly.
 					 //
-					 public void selectionChanged(SelectionChangedEvent event) {
+					 @Override
+					public void selectionChanged(SelectionChangedEvent event) {
 						 handleContentOutlineSelection(event.getSelection());
 					 }
 				 });
@@ -1487,6 +1510,7 @@ public class TrackerTransactionEditor
 					try {
 						//.CUSTOM: Save in a read-only transaction
 						((TransactionalEditingDomain) getEditingDomain()).runExclusive(new Runnable() {
+							@Override
 							public void run() {
 								try {
 									// Save the resource to the file system.
@@ -1566,6 +1590,7 @@ public class TrackerTransactionEditor
 		//    (read) access
 		try {
 			((TransactionalEditingDomain) getEditingDomain()).runExclusive(new Runnable() {
+				@Override
 				public void run() {
 					getResource().setURI(uri);
 					setInputWithNotify(editorInput);
@@ -1591,6 +1616,7 @@ public class TrackerTransactionEditor
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public void gotoMarker(IMarker marker) {
 		try {
 			if (marker.getType().equals(EValidator.MARKER)) {
@@ -1600,6 +1626,7 @@ public class TrackerTransactionEditor
 					//         when navigating to an object
 					try {
 						((TransactionalEditingDomain) getEditingDomain()).runExclusive(new Runnable() {
+							@Override
 							public void run() {
 								URI uri = URI.createURI(uriAttribute);
 								EObject eObject = editingDomain.getResourceSet().getEObject(uri, true);
@@ -1652,6 +1679,7 @@ public class TrackerTransactionEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
 		selectionChangedListeners.add(listener);
 	}
@@ -1662,6 +1690,7 @@ public class TrackerTransactionEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void removeSelectionChangedListener(ISelectionChangedListener listener) {
 		selectionChangedListeners.remove(listener);
 	}
@@ -1672,6 +1701,7 @@ public class TrackerTransactionEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ISelection getSelection() {
 		return editorSelection;
 	}
@@ -1683,6 +1713,7 @@ public class TrackerTransactionEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSelection(ISelection selection) {
 		editorSelection = selection;
 
@@ -1753,6 +1784,7 @@ public class TrackerTransactionEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void menuAboutToShow(IMenuManager menuManager) {
 		((IMenuListener)getEditorSite().getActionBarContributor()).menuAboutToShow(menuManager);
 	}
@@ -1938,6 +1970,7 @@ public class TrackerTransactionEditor
 		
 	}
 	
+	@Override
 	public void addViewer(TableViewer tableViewer) {
 		TrackerActionBarContributor trackerActionBarContributor = (TrackerActionBarContributor) getActionBarContributor();
 		SelectionViewerFilter svf = trackerActionBarContributor
@@ -1947,6 +1980,7 @@ public class TrackerTransactionEditor
 
 	}
 
+	@Override
 	public void removeViewer(TableViewer tableViewer) {
 		TrackerActionBarContributor trackerActionBarContributor = (TrackerActionBarContributor) getActionBarContributor();
 		SelectionViewerFilter svf = trackerActionBarContributor

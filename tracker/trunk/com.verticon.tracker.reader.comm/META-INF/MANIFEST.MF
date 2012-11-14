@@ -5,15 +5,15 @@ Bundle-SymbolicName: com.verticon.tracker.reader.comm;singleton:=true
 Bundle-Version: 0.2.0.qualifier
 Bundle-Activator: com.verticon.tracker.connector.comm.CommReaderPlugin
 Bundle-Vendor: Verticon, Inc.
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- org.eclipse.equinox.io
+Require-Bundle: org.eclipse.ui;bundle-version="3.8.0",
+ org.eclipse.core.runtime;bundle-version="3.8.0",
+ org.eclipse.equinox.io;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
-Import-Package: com.verticon.tracker.reader;version="0.1.0",
+Import-Package: com.verticon.tracker.reader;version="[1.0.0,2.0.0)",
  gnu.io,
  org.eclipse.core.resources,
  org.osgi.service.io;version="1.0.0",
  org.slf4j;version="[1.5.5,1.6.0)"
-Export-Package: com.verticon.tracker.connector.comm,
- com.verticon.tracker.reader.event.comm
+Export-Package: com.verticon.tracker.connector.comm;version="1.0.0",
+ com.verticon.tracker.reader.event.comm;version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
