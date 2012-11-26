@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Tracker Livestock Business Intelligence Toolkit" uid="tracker_desktop.product" id="com.verticon.tracker.product.desktop.application" application="org.eclipse.ui.ide.workbench" version="0.6.0.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="Tracker Livestock Business Intelligence Toolkit" uid="tracker_desktop.product" id="com.verticon.tracker.product.desktop.application" application="org.eclipse.ui.ide.workbench" version="0.7.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/com.verticon.tracker.product.desktop/icons/cattle_lg.gif"/>
@@ -10,12 +10,12 @@
 Version: {0}
 Build id: {1}
 
-(c) Copyright Verticon, Inc. 2011.  All rights reserved. 
+(c) Copyright Verticon, Inc. 2012.  All rights reserved. 
 
 Visit http://tracker.verticon.com/index.html
 
 Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and
-used with other Eclipse (3.7.0) based offerings.
+used with other Eclipse (3.8.1) based offerings.
       </text>
    </aboutInfo>
 
@@ -63,10 +63,16 @@ used with other Eclipse (3.7.0) based offerings.
    </plugins>
 
    <features>
-      <feature id="com.verticon.tracker.product.desktop" version="0.6.1.qualifier"/>
-      <feature id="com.verticon.tracker.base.dep" version="0.5.0.qualifier"/>
-      <feature id="org.eclipse.equinox.p2.user.ui" version="2.1.2.R37x_v20110815-1155-6-Bj9JXOeQxOURYC-l9BL7rDEQO7"/>
-      <feature id="org.eclipse.platform" version="3.7.1.r37x_v20110729-9gF7UHOxFtniV7mI3T556iZN9AU8bEZ1lHMcVK"/>
+      <feature id="com.verticon.tracker.product.desktop"/>
+      <feature id="com.verticon.tracker.base.dep"/>
+      <feature id="com.verticon.tracker.product.desktop.doc"/>
+      <feature id="org.eclipse.platform"/>
+      <feature id="org.eclipse.equinox.p2.user.ui"/>
+      <feature id="org.eclipse.help"/>
+      <feature id="org.eclipse.equinox.p2.core.feature"/>
+      <feature id="org.eclipse.equinox.p2.rcp.feature"/>
+      <feature id="org.eclipse.rcp"/>
+      <feature id="org.eclipse.equinox.p2.extras.feature"/>
    </features>
 
 

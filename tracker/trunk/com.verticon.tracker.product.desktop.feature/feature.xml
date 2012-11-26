@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.product.desktop"
       label="Tracker Desktop Toolkit"
-      version="0.6.1.qualifier"
+      version="0.7.0.qualifier"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.product.desktop">
 
@@ -18,16 +18,15 @@
       %license
    </license>
 
-    <url>
+   <url>
       <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
 
    <requires>
       <import plugin="org.eclipse.ui.intro" version="3.2.201" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui" version="3.4.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.intro.universal" version="3.2.200" match="greaterOrEqual"/>
+      <import feature="com.verticon.tracker.product.desktop.doc" version="0.1.0.qualifier"/>
    </requires>
 
    <plugin
@@ -36,17 +35,5 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-   <plugin
-         id="com.verticon.tracker.doc"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="com.verticon.tracker.product.desktop.doc"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
 
 </feature>
