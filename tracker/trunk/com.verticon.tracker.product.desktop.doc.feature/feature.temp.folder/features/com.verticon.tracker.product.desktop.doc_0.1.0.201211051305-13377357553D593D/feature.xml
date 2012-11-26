@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.verticon.tracker.product.desktop.doc"
+      label="%featureName"
+      version="0.1.0.201211051305-13377357553D593D"
+      provider-name="%providerName"
+      plugin="com.verticon.tracker.product.desktop.doc">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %license
+   </license>
+
+   <url>
+      <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
+      <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
+   </url>
+
+   <plugin
+         id="com.verticon.tracker.product.desktop.doc"
+         download-size="0"
+         install-size="0"
+         version="0.1.4.201211051305"/>
+
+   <plugin
+         id="com.verticon.tracker.doc"
+         download-size="0"
+         install-size="0"
+         version="0.3.0.201211051305"/>
+
+</feature>
