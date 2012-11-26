@@ -24,11 +24,11 @@
    </url>
 
    <requires>
-      <import feature="com.verticon.tracker.logging.logback" version="0.2.0.qualifier"/>
-      <import feature="com.verticon.osgi.metatype.core.model.editor" version="0.1.0.qualifier"/>
+      <import feature="com.verticon.osgi.metatype.core.model.editor" version="0.1.0" match="compatible"/>
       <import plugin="org.eclipse.equinox.wireadmin"/>
       <import plugin="com.verticon.osgi.monitor"/>
       <import plugin="org.osgilab.bundles.monitoradmin"/>
+      <import feature="com.verticon.tracker.logging.logback" version="0.3.1" match="compatible"/>
    </requires>
 
    <plugin

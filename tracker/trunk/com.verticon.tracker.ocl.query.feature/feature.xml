@@ -23,11 +23,6 @@
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
 
-   <requires>
-      <import feature="org.eclipse.ocl.examples" version="3.2.1" match="compatible"/>
-      <import feature="com.verticon.tracker.logging.logback" version="0.3.1" match="compatible"/>
-   </requires>
-
    <plugin
          id="com.verticon.tracker.ocl.interpreter"
          download-size="0"
@@ -54,5 +49,12 @@
          download-size="0"
          install-size="0"
          version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.emf.ocl.examples.interpreter"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>
