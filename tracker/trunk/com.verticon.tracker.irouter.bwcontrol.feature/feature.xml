@@ -24,9 +24,9 @@
    </url>
 
    <requires>
-      <import feature="com.verticon.tracker.irouter" version="0.1.0.qualifier"/>
-      <import feature="com.verticon.tracker.irouter.trutest" version="0.1.0.qualifier"/>
-      <import feature="com.verticon.tracker.irouter.mettler" version="0.1.0.qualifier"/>
+      <import feature="com.verticon.tracker.irouter" version="0.1.0" match="compatible"/>
+      <import feature="com.verticon.tracker.irouter.mettler" version="0.1.0" match="compatible"/>
+      <import feature="com.verticon.tracker.irouter.trutest" version="1.0.0" match="compatible"/>
    </requires>
 
    <plugin

@@ -23,7 +23,7 @@
    </url>
 
    <requires>
-      <import feature="com.verticon.birt.report.loader" version="0.1.0.qualifier"/>
+      <import feature="com.verticon.birt.report.loader" version="0.1.1" match="greaterOrEqual"/>
    </requires>
 
    <plugin

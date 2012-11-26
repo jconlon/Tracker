@@ -34,11 +34,4 @@
       <import feature="org.eclipse.birt.example" version="3.7.2" match="compatible"/>
    </requires>
 
-   <plugin
-         id="javax.wsdl"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
 </feature>
