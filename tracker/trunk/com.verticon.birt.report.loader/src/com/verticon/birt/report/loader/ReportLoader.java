@@ -61,19 +61,21 @@ public class ReportLoader implements BundleListener {
 	@SuppressWarnings("static-access")
 	private static final String VIEWER_PLUGIN_ID = ViewerPlugin.getDefault().PLUGIN_ID;
 	private static final String REPORT_UI_PLUGIN_ID = "org.eclipse.birt.report.designer.ui"; //$NON-NLS-1$
-	private Set<String> startedBundles = new ConcurrentSkipListSet<String>();
+	private final Set<String> startedBundles = new ConcurrentSkipListSet<String>();
 	private final BundleContext context;
 
 	final static List<String> TARGET_LIST;
 
 	static {
 		String[] targets = { "org.eclipse.emf.oda.ecore",
-				"com.verticon.tracker", "com.verticon.agriculture.core.model",
+				"com.verticon.tracker", 
+				"com.verticon.location.core.model",
 				"com.verticon.agriculture.core.model",
 				"com.verticon.google.kmlgx.core.model",
 				"com.verticon.oasis.xal.core.model",
 				"com.verticon.osgi.metatype.core.model",
-				"com.verticon.tracker.fair" };
+				"com.verticon.tracker.fair",
+				"com.verticon.tracker.store.admin.model", };
 		TARGET_LIST = Arrays.asList(targets);
 	}
 
@@ -316,7 +318,7 @@ public class ReportLoader implements BundleListener {
 			return;
 		}
 		while (urls.hasMoreElements()) {
-			URL url = (URL) urls.nextElement();
+			URL url = urls.nextElement();
 			if (url.toString().endsWith("/")) {
 				continue;// Dont copy directories
 			}

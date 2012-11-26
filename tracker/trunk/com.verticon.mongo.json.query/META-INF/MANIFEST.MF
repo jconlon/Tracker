@@ -18,10 +18,8 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
  org.slf4j.log4j;bundle-version="1.5.11",
  org.slf4j.api;bundle-version="1.5.11"
 Import-Package: org.apache.commons.logging,
- org.eclipse.xtend2.lib,
- org.eclipse.xtext.xbase.lib,
- org.eclipse.xtext.xtend2.lib,
- org.apache.log4j
+ org.apache.log4j,
+ org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.json;version="1.0.0",
  org.json.formatting;version="1.0.0",
