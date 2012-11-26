@@ -61,6 +61,20 @@ h3. example.premises
 
 An example _Premises_ document that contains example animals, animal life data, animal histories, premises details, location details, location areas and two custom events via a reference to the **My.metatype** document.  
 
+h3. logback-test.xml
+
+An example _logging_ configuration file.  Use this under the direction of Verticon technical support.
+
+h4. Logging Configuration
+
+# Modify the @tracker.ini@ in the installed directory of the tracker to add the lines
+@-Dlogback.configurationFile=file:${workspace_loc}/com.verticon.tracker.example/logback-test.xml@
+@-Dlogback.application=TrackerProduct@
+after the @-vmargs@ line.
+
+Where @${workspace_loc}@ is the installed directory of the tracker.
+
+
 h3. My.metatype
 
 An example _Metatype_ document that specifies to custom events.  This document is referenced by the **example.premises** document to enable users to add these two custom events to animals included in the **example.premsies** document. 
@@ -93,28 +107,58 @@ This example uses:
 # Eclipse BIRT @org.eclipse.birt@
 # Tracker Premises Report Pack, @com.verticon.tracker.report.pack@ 
 
-h2. Installation[2]
 
-# Install the Tracker Premises Report Pack @com.verticon.tracker.report.pack@ 
-# Import and copy this project into the workspace.[3]
+h2. Reporting Installation and Configuration 
+
+h3. Introduction
+
+Tracker utilizes BIRT report design documents, BIRT shared resources for creating reports based on information in Tracker premises documents.  With Tracker BIRT reports can be created that can be reused to report on information from different data model instances in projects. 
+
+Tracker also support the notion of report packs.  These report packs are predefined sets of reports that can be installed and copied to projects or referenced in place to report on data in premises documents. When Tracker detects a report pack at startup it loads all the reports and styles into the BIRT resource library. 
+
+To get started you will need to install the Premises report pack, make some changes to the configuration, and copy the report or reference the report in place through html page. 
+
+
+h3. Installation[2]
+
+# Provision and install the Tracker Premises Report Pack @com.verticon.tracker.report.pack@ 
+# If you haven't already done so, import and copy this project into the workspace.[3]
+
+h3. Configuration
+
+When tracker starts up, it loads all drivers and installed report packs to the BIRT resource directory. Then it starts a web server and sends it a test report.
+
+# Change user preferences _General_ | _WebServer_ to select an internal or external web server
+# Change user preferences _Report Design_ | _Preview_ | _Preview Server_ to select the port number for the preview server. _The reports in the reports pack use 8080 as the server port to prevent conflict with any other web servers running on the computer._
+# Modify the @tracker.ini@ in the installed directory to add the line @-Dstart.webserver=true@ after the @-vmargs@ line. This will start the web server when the _Report Design_ perspective is opened in the workspace.  You must open the open the _Report Design_ perspective in order to run a Tracker report pack report.
+
+
+
 
 h2. Reports 
 
-Tracker Premises Reports can be copied into projects and with a @report.properties@ file report on the premises documents referenced in the properties file.  
+Tracker reports are intended to be reused with different data model instances in projects.  These model documents are referenced by the report design documents as variables placed inside a @reports/report.properties@ file.     
 
-h3(. Run Premises Reports from the Workspace 
+h3(. Run Premises Reports from a project in the Workspace 
 
 # Create a @reports@ directory in this project.
-# Copy the @report.properties@ file from the @com.verticon.tracker.premises.reports@ project folder to this directory
-# Open the file and edit the line to @rp_premises_doc = platform:/resource/com.verticon.tracker.example/example.premises@
-# Copy reports from the @com.verticon.tracker.premises.reports@ to the @reports@ directory
-# Optionally modify the one or more of the reports for new functionality. __To keep the location independent functionality use the datasets or the data sources from the @premises.rptlibrary@ deployted to the BIRT resources directory__.
+# Copy the @report.properties@ file from the @reports/report.properties@ in this example project to this directory
+# Open the file and edit the line to @rp_premises_doc = platform:/resource/com.verticon.tracker.example/example.premises@ 
+# Open the _Report Design_ perspective.  This will start the web server and send a test report to it. 
+# Make sure the _Resource Explorer_ view is showing. If not show it:  _Windows_ } _Show View_ | _Report Design_ | _Resource Explorer_.
+# Make sure that the @report.properties@ file is opened in an editor.  This will open the insure that the Shared Resources are showing in the _Resource Explorer_.
+# Copy the reports you want from the @reports@ directory in the _Resource Explorer_ to the @reports@ directory of you project.
+# Optionally modify one or more of the reports for new functionality. __To keep the location independent functionality use the datasets or the data sources from the @premises.rptlibrary@ deployted to the BIRT resources directory__.
 # From the __Navigator View__ select the rptdesign file you wish to run, right click to get the popup menu and select the __Report and Run Report__ menu item.
 
 
 h3(. Accessing Reports from a Browser
 
-Reports can also be launched from a browser with a parameterized URL that specifies running BIRT Web Server, the report file path and which premises document to use as a datasource. [4]
+Reports can also be launched from a browser with a parameterized URL that specifies the hostname of the running BIRT Web Server, the report file path and the premises document to use as a datasource.  This is a convienent way to use reports loaded from report packs.
+
+The easiest way to run these reports is to create a HTML document that embeds these parameterized URLs. The following section is an example of how to do this. [4]
+
+
 
 h4(. Tracker Report Pack Reports
 
