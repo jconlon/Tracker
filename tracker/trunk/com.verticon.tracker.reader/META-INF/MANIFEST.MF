@@ -15,3 +15,6 @@ Import-Package: com.verticon.tracker;version="[0.1.0,2.0.0)",
 Export-Package: com.verticon.tracker.reader;version="1.0.0",
  com.verticon.tracker.reader.views;version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.equinox.io;bundle-version="1.0.0",
+ org.eclipse.emf.transaction;bundle-version="1.4.0",
+ org.eclipse.ui;bundle-version="3.8.0"
