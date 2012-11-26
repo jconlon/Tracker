@@ -3,5 +3,5 @@
 # java.io.Properties file (ISO 8859-1 with "\" escapes)
 # This file does not need to be translated. 
 # This mapping the product release
-0=0.6.0
+0=0.7.0
 1=qualifier
