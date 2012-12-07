@@ -33,8 +33,9 @@ version overwrite the preexisting ones.
 	 release names 
 	d. Run "Build Tracker.launch" - to build product and product p2 metadata
 3. Feature build:
-    a. Edit the compositeArtifacts.xml and compositeContent.xml to add a new directory for the features.
-    b. From any feature, export all new features to the repository.
+    a. Edit the compositeArtifacts.xml and compositeContent.xml to add a new directory containing the features.
+    b. Categorize new feature in the categories/content.xml file.
+    c. From any feature, export all new features to the repository.
        This will deploys p2 metadata to repository. (updatesite/catalog.xml specs the categories)
 4. Test latest product with new features in dev workspace. (Add a local repository pointing to the relang repo.)
 5. Run Sync S3.launch - Moves all artifacts over to ~/Uploads/s3 and mirrors these to S3.
