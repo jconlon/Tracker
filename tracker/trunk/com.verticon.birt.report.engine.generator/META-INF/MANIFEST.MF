@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: BIRT Report Engine Generator
+Bundle-SymbolicName: com.verticon.birt.report.engine.generator
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.birt.report.engine;bundle-version="3.7.2",
+ org.eclipse.core.resources,
+ com.google.guava,
+ org.eclipse.birt.data
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: com.verticon.birt.report.engine.generator
