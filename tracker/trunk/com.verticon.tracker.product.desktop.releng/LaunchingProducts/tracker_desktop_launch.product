@@ -82,6 +82,7 @@ used with other Eclipse (3.8.1) based offerings.
       <feature id="org.eclipse.equinox.p2.extras.feature"/>
       <feature id="com.verticon.agriculture.editor" version="1.0.0.qualifier"/>
       <feature id="com.verticon.birt.report.engine.emitter.kml" version="0.1.1.qualifier"/>
+      <feature id="com.verticon.birt.report.engine.generator" version="1.0.0.qualifier"/>
       <feature id="com.verticon.birt.report.loader" version="0.1.1.qualifier"/>
       <feature id="com.verticon.geography.editor" version="0.1.5.qualifier"/>
       <feature id="com.verticon.location.core.model" version="0.1.0.qualifier"/>
