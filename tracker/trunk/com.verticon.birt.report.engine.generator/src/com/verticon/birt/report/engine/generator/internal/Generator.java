@@ -146,8 +146,8 @@ public class Generator implements IGenerator {
 			throws EngineException {
 
 		if (!report.isFile()) {
-			throw new IllegalStateException(
-					"Input parameter report is not a file.");
+			throw new IllegalStateException("Input parameter report " + report
+					+ " is not a file.");
 		}
 		insureEngineIsStarted();
 		IReportRunnable design = engine.openReportDesign(report
